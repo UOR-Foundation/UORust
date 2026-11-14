@@ -555,6 +555,13 @@ fn intrinsic_name(path: &str) -> String {
         .to_string()
 }
 
+/// The intrinsics whose effect is the platform's, outside the abstract
+/// machine: `breakpoint`'s trap is a debugger's, and `va_arg` reads the
+/// C ABI's variadic arguments, which the target's calling convention
+/// lays out. Each is a call the program leaves to its dictionary, as a
+/// foreign function is.
+const PLATFORM_EFFECTS: &[&str] = &["breakpoint", "va_arg"];
+
 /// The float intrinsics whose result the platform gives: each intrinsic
 /// core declares without a body (`library/core/src/intrinsics/mod.rs`)
 /// whose documentation names a stabilized version (`f32::cos`) that its
@@ -4435,7 +4442,8 @@ fn embed_census(
         &link, krate, callee, args, dest,
     ) {
         Callee::Intrinsic(p)
-            if platform.contains(&intrinsic_name(&p))
+            if (platform.contains(&intrinsic_name(&p))
+                || PLATFORM_EFFECTS.contains(&intrinsic_name(&p).as_str()))
                 && !defined_intrinsics().contains(&intrinsic_name(&p)) =>
         {
             Callee::Bound(intrinsic_name(&p))
