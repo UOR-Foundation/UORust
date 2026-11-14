@@ -2,13 +2,14 @@
 """Publish a patched PrismPM SDK image without rebuilding the SDK.
 
 The image is the pinned SDK candidate's own layers plus two appended layers:
-  1. the patched `prismpm` binary and the SDK inventory that names its digest;
+  1. the patched binaries (each `usr/local/bin/<name>`, e.g. `prismpm` and
+     `lexlean`) and the SDK inventory that names their digests;
   2. the terminal metadata layer (inventory.json, standards.lock) in exactly
      the form `prismpm lock update` reads (strict ustar, root, 0755/0444).
 Every base layer is mounted or copied by digest from the source repository,
 so nothing else in the SDK changes. Usage:
 
-  assemble.py layer <arch> <binary> <base-ref> <out-dir>      # per architecture
+  assemble.py layer <arch> <base-ref> <out-dir> <name>=<binary>...  # per architecture
   assemble.py index <target> <base-ref> <out-dir>...          # after both arches
 
 The token for the target registry comes from GHCR_TOKEN (user GHCR_USER).
@@ -113,7 +114,7 @@ def gz(data):
     return out.getvalue()
 
 
-def layer(arch, binary_path, base_ref, out):
+def layer(arch, base_ref, out, *binaries):
     source_name, digest = base_ref.split("@")
     source = Repo(source_name.split("/", 1)[1], "pull")
     index = json.loads(source.get(f"manifests/{digest}", OCI_INDEX))
@@ -131,23 +132,28 @@ def layer(arch, binary_path, base_ref, out):
         at += 512 + size + ((-size) % 512)
     file_template = next(h for h, n, _ in entries if n == INVENTORY)
     files = {n: d for _, n, d in entries}
-    binary = open(binary_path, "rb").read()
     inventory = json.loads(files[INVENTORY])
-    binary_digest = sha(binary)
-    hits = 0
-    for artifact in inventory["artifacts"]:
-        if artifact["id"] == "prismpm":
-            artifact["digest"] = "sha256:" + binary_digest
-            hits += 1
-    for command in inventory["commands"]:
-        if command["command"] == "prismpm":
-            command["sha256"] = binary_digest
-            hits += 1
-    assert hits == 2, hits
+    patched = {}
+    for spec in binaries:
+        name, path = spec.split("=", 1)
+        data = open(path, "rb").read()
+        patched[name] = (data, sha(data))
+        # Each binary is named once as an SDK artifact and once as a command.
+        hits = 0
+        for artifact in inventory["artifacts"]:
+            if artifact["id"] == name:
+                artifact["digest"] = "sha256:" + patched[name][1]
+                hits += 1
+        for command in inventory["commands"]:
+            if command["command"] == name and command["executable"] == f"/usr/local/bin/{name}":
+                command["sha256"] = patched[name][1]
+                hits += 1
+        assert hits == 2, (name, hits)
     inventory_bytes = canonical(inventory)
     inventory_sha = f"{sha(inventory_bytes)}  /{INVENTORY}\n".encode()
     # Layer 1: the binary and the installed inventory beside it.
-    tar1 = finish(entry(file_template, "usr/local/bin/prismpm", 0o755, binary)
+    tar1 = finish(b"".join(entry(file_template, f"usr/local/bin/{name}", 0o755, data)
+                           for name, (data, _) in sorted(patched.items()))
                   + entry(file_template, INVENTORY, 0o444, inventory_bytes)
                   + entry(file_template, "opt/prismpm/share/inventory.sha256", 0o444, inventory_sha))
     # Layer 2: the terminal metadata layer, the base one with the new inventory.
@@ -166,7 +172,7 @@ def layer(arch, binary_path, base_ref, out):
         layers.append({"tar": tar, "blob": blob, "diff_id": "sha256:" + sha(tar), "digest": "sha256:" + sha(blob)})
     config["rootfs"]["diff_ids"] += [l["diff_id"] for l in layers]
     config["history"] += [
-        {"created": "1970-01-01T00:00:00Z", "created_by": "prismpm patched binary and inventory", "comment": "uorust sdk-patch"},
+        {"created": "1970-01-01T00:00:00Z", "created_by": "patched " + ", ".join(sorted(patched)) + " and inventory", "comment": "uorust sdk-patch"},
         {"created": "1970-01-01T00:00:00Z", "created_by": "terminal SDK metadata", "comment": "uorust sdk-patch"},
     ]
     config_bytes = json.dumps(config, separators=(",", ":")).encode()
@@ -178,8 +184,9 @@ def layer(arch, binary_path, base_ref, out):
         open(os.path.join(out, l["digest"].split(":")[1]), "wb").write(l["blob"])
     open(os.path.join(out, "config.json"), "wb").write(config_bytes)
     open(os.path.join(out, "manifest.json"), "wb").write(json.dumps(manifest, separators=(",", ":")).encode())
-    json.dump({"arch": arch, "binary": binary_digest, "inventory": sha(inventory_bytes)}, open(os.path.join(out, "summary.json"), "w"))
-    print(json.dumps({"arch": arch, "binary": binary_digest}))
+    digests = {name: digest for name, (_, digest) in sorted(patched.items())}
+    json.dump({"arch": arch, "binaries": digests, "inventory": sha(inventory_bytes)}, open(os.path.join(out, "summary.json"), "w"))
+    print(json.dumps({"arch": arch, "binaries": digests}))
 
 
 def publish(target, base_ref, outs):
@@ -212,6 +219,6 @@ def publish(target, base_ref, outs):
 
 if __name__ == "__main__":
     if sys.argv[1] == "layer":
-        layer(*sys.argv[2:6])
+        layer(*sys.argv[2:])
     else:
         publish(sys.argv[2], sys.argv[3], sys.argv[4:])
