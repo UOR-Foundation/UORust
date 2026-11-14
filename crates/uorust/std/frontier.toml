@@ -177,16 +177,92 @@ residue = 49
 
 [embedding]
 embedded = 4199
-evaluable = 4178
-blocked = 21
+evaluable = 4193
+blocked = 6
 
 [[construct]]
 construct = "Operand::Constant of a constant the embedding does not read"
-bodies = 18
+bodies = 6
 
-[[construct]]
-construct = "CastKind::Transmute"
+[bridge]
+bridged = 11
+pending = 64
+
+[[pending]]
+shape = "signature: List"
+bodies = 12
+
+[[pending]]
+shape = "definition"
+bodies = 9
+
+[[pending]]
+shape = "proof: straight"
+bodies = 7
+
+[[pending]]
+shape = "closure: a callee not embedded"
+bodies = 6
+
+[[pending]]
+shape = "proof: binary eq"
+bodies = 5
+
+[[pending]]
+shape = "signature: Unit"
+bodies = 5
+
+[[pending]]
+shape = "signature: Nat"
+bodies = 4
+
+[[pending]]
+shape = "signature: TupleNatNat"
 bodies = 3
+
+[[pending]]
+shape = "signature: CoreIoUtilSink"
+bodies = 2
+
+[[pending]]
+shape = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormattingOptionsNatListFnCoreFmtFormattingOptionsStringToTupleResultUnitCoreFmtErrorString"
+bodies = 2
+
+[[pending]]
+shape = "proof: call"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreIoBorrowedBufBorrowedCursor"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreTimeDuration"
+bodies = 1
+
+[[pending]]
+shape = "signature: String"
+bodies = 1
+
+[[pending]]
+shape = "signature: TupleNatOptionNat"
+bodies = 1
+
+[[pending]]
+shape = "timeout: binary div"
+bodies = 1
+
+[[pending]]
+shape = "timeout: binary eq"
+bodies = 1
+
+[[pending]]
+shape = "timeout: straight"
+bodies = 1
+
+[[pending]]
+shape = "timeout: switch"
+bodies = 1
 
 [[cause]]
 cause = "mir::Ty: io::error::Error"
