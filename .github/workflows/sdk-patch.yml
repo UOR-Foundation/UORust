@@ -48,10 +48,12 @@ jobs:
         run: |
           set -euo pipefail
           [[ $REVISION =~ ^[0-9a-f]{40}$ ]]
-          git init -q prismpm
-          git -C prismpm fetch -q --depth 1 https://github.com/UOR-Foundation/PrismPM.git "$REVISION"
-          git -C prismpm checkout -q FETCH_HEAD
-          cd prismpm
+          # Outside this checkout, so cargo never takes UORust's workspace for
+          # the vendored LexLean's.
+          git init -q ../prismpm
+          git -C ../prismpm fetch -q --depth 1 https://github.com/UOR-Foundation/PrismPM.git "$REVISION"
+          git -C ../prismpm checkout -q FETCH_HEAD
+          cd ../prismpm
           cargo build --locked --release --package prismpm
           cargo build --locked --release --manifest-path vendor/lexlean/Cargo.toml --bin lexlean --target-dir target/lexlean
       - name: Assemble the patched layers
@@ -61,8 +63,8 @@ jobs:
         shell: bash
         run: >-
           python3 sdk-patch/assemble.py layer "$ARCH" "$BASE" "out-$ARCH"
-          prismpm=prismpm/target/release/prismpm
-          lexlean=prismpm/target/lexlean/release/lexlean
+          prismpm=../prismpm/target/release/prismpm
+          lexlean=../prismpm/target/lexlean/release/lexlean
       - name: Keep the layers for the publish job
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
