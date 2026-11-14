@@ -237,7 +237,11 @@ jobs:
       matrix:
         module: ${{{{ fromJSON(needs.{first}.outputs.modules) }}}}
     steps:
-{checkout()}      - name: Fetch the built uorust
+{checkout()}      # When the job must end, which the bridge's step finishes within.
+      - name: Note the job's deadline
+        shell: bash
+        run: echo "DEADLINE=$(( $(date +%s) + {stage(krate, shard)['budget']} * 60 ))" >>"$GITHUB_ENV"
+      - name: Fetch the built uorust
         uses: {USES['actions/download-artifact']}
         with:
           name: uorust-${{{{ env.CRATE }}}}
@@ -303,11 +307,13 @@ jobs:
       # verifies the project; each theorem it refutes is set aside as
       # pending, with the shape that stopped it, and the rest verify again.
       # Each translated row of the module's register file is stamped
-      # `bridged` or `pending`, which the merge counts.
+      # `bridged` or `pending`, which the merge counts. Its Lean processes
+      # share the runner's memory, and what it could not finish before the
+      # job's deadline is pending, so the bridge cannot stop the shard.
       - name: Bridge the module's translations to the evaluator through the locked SDK
         shell: bash
         run: |
-          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard" | tee -a "$GITHUB_STEP_SUMMARY"
+          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard --until $DEADLINE" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Keep the module's register file
         uses: {USES['actions/upload-artifact']}
         with:

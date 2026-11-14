@@ -254,6 +254,10 @@ struct BridgeArgs {
     /// A register's module files to stamp each translated row's bridge on.
     #[arg(long)]
     register: Option<PathBuf>,
+    /// When the bridge must be done, in seconds since the Unix epoch: work
+    /// that could not finish by then is pending, not started.
+    #[arg(long)]
+    until: Option<u64>,
 }
 
 #[derive(clap::Args)]
@@ -463,7 +467,12 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Bridge(args) => {
-            let b = uorust::bridge::verify(&args.project, args.register.as_deref())?;
+            let b = uorust::bridge::verify(
+                &args.project,
+                args.register.as_deref(),
+                args.until
+                    .map(|t| std::time::UNIX_EPOCH + std::time::Duration::from_secs(t)),
+            )?;
             println!(
                 "bridge: {} of {} translated bodies bridged, {} pending",
                 b.bridged,

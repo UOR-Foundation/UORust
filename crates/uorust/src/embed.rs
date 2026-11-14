@@ -3860,8 +3860,8 @@ const CHILD_TIMEOUT_MS: usize = 300_000;
 /// 495 theorems, the largest of its parts to verify within the timeout,
 /// on the locked SDK's Lean v4.32.1; its parts of 1,124,627 fuel and more
 /// did not).
-const MEASURED_FUEL: usize = 664_506;
-const MEASURED_MS: usize = 300_000;
+pub(crate) const MEASURED_FUEL: usize = 664_506;
+pub(crate) const MEASURED_MS: usize = 300_000;
 
 /// The fuel one module of the differential check holds at most: Lean
 /// decides each theorem by evaluation, at a cost the theorem's fuel
