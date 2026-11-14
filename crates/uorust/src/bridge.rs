@@ -620,13 +620,14 @@ fn block(
     needed.push((
         format!("p{name}"),
         format!(
-            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := false, contractChecks := false, overflowChecks := false, pointerWidth := {}, bigEndian := {}}})\n}}",
+            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := false, contractChecks := false, overflowChecks := false, pointerWidth := {}, bigEndian := {}, globals := {}}})\n}}",
             mir_name("Program"),
             mir_name("Program"),
             term_list(&bodies, &mir_name("Body")),
             mir_name("Binding"),
             program.width,
-            program.big_endian
+            program.big_endian,
+            program.globals
         ),
     ));
     needed.extend(encoders);

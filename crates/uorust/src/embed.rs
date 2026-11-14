@@ -128,6 +128,8 @@ pub(crate) struct Cx<'a> {
     /// static: m::environ)`), by path: the platform's, which the program
     /// leaves to its dictionary.
     pub(crate) externs: &'a BTreeSet<String>,
+    /// The `static mut`s, in the order of the program's globals.
+    pub(crate) mutables: &'a [String],
     /// Every dump's allocations, by name ([`allocation_cells`]).
     pub(crate) every_cell: &'a BTreeMap<String, Vec<Cell>>,
     /// The text each constant item the body reads is printed by.
@@ -158,7 +160,8 @@ pub(crate) fn item_type(link: &crate::mir::link::CoreLink, key: &str) -> Option<
 /// The initializer of the static a dump holds, as a constant's body by the
 /// static's path: rustc dumps a static's initializer as `static NAME: T =
 /// {..}`, which a constant item's body is but for its keyword. A `static
-/// mut` is not read: its value is not its initializer's once written.
+/// mut`'s is its initial value: the program holds it as a global (see
+/// [`static_mut`]).
 pub(crate) fn static_body(text: &str) -> Option<IrBody> {
     let path = text
         .lines()
@@ -167,10 +170,11 @@ pub(crate) fn static_body(text: &str) -> Option<IrBody> {
         .split_once('`')?
         .0;
     let head = text.lines().find_map(|l| l.strip_prefix("static "))?;
-    if head.starts_with("mut ") {
-        return None;
-    }
-    let constant = text.replacen(&format!("static {head}"), &format!("const {head}"), 1);
+    let constant = text.replacen(
+        &format!("static {head}"),
+        &format!("const {}", head.strip_prefix("mut ").unwrap_or(head)),
+        1,
+    );
     let mut body = crate::mir::parse::bodies(&constant).into_iter().next()?;
     body.path = path.to_string();
     Some(body)
@@ -228,6 +232,27 @@ fn dumped_path(text: &str) -> Option<&str> {
         .strip_prefix("// MIR for `")?
         .split_once('`')
         .map(|(p, _)| p)
+}
+
+/// Whether a static's dump is a `static mut`'s.
+fn static_mut(text: &str) -> bool {
+    text.lines()
+        .find_map(|l| l.strip_prefix("static "))
+        .is_some_and(|h| h.starts_with("mut "))
+}
+
+/// The paths of the `static mut`s whose initializers `link`'s dumps hold,
+/// in order: each is one global of the program, at its index here. The
+/// evaluator runs one thread, so a `static mut` is exactly one mutable
+/// allocation every body reads and writes alike.
+pub(crate) fn mutable_statics(link: &crate::mir::link::CoreLink) -> Vec<String> {
+    link.bodies
+        .iter()
+        .filter(|(_, texts)| {
+            matches!(texts.as_slice(), [t] if static_body(t).is_some() && static_mut(t))
+        })
+        .map(|(p, _)| p.clone())
+        .collect()
 }
 
 /// The paths of the statics whose initializers `link`'s dumps hold.
@@ -1851,7 +1876,7 @@ impl Cx<'_> {
             .strip_prefix('{')
             .and_then(|t| t.split_once(": *"))
             .and_then(|(a, _)| self.static_allocs.get(a))
-            .filter(|p| self.externs.contains(*p))
+            .filter(|p| self.externs.contains(*p) || self.mutables.contains(*p))
         {
             return Some(path.clone());
         }
@@ -2979,6 +3004,7 @@ impl Cx<'_> {
             if slots > 1 {
                 // A static is read through a reference to it, an extern
                 // static through a pointer.
+                let global = self.mutables.iter().position(|m| m == key);
                 let address = if self.externs.contains(key) {
                     mir_ctor("Rvalue.rawPtr", &[place(value)])
                 } else {
@@ -2990,7 +3016,16 @@ impl Cx<'_> {
                         ],
                     )
                 };
-                let borrow = mir_ctor("Statement.assign", &[place(value + 1), address]);
+                // A `static mut` is the program's global: its initial
+                // value is written there once, and the body reads it
+                // through a pointer to that global.
+                let borrow = match global {
+                    Some(index) => mir_ctor(
+                        "Statement.global",
+                        &[index.to_string(), place(value), place(value + 1)],
+                    ),
+                    None => mir_ctor("Statement.assign", &[place(value + 1), address]),
+                };
                 blocks.push(format!(
                     "(record {} {{statements := {}, terminator := {}}})",
                     mir_name("Block"),
@@ -3698,6 +3733,8 @@ pub(crate) struct Program {
     /// MIR prints them, the return place's first, by κ: what the bridge
     /// (`crate::bridge`) reads a body's signature from.
     pub(crate) signatures: BTreeMap<String, (String, Vec<String>)>,
+    /// How many globals the program holds: its `static mut`s.
+    pub(crate) globals: usize,
     /// The types of the instances the calls reach whose layouts are not
     /// read: the layouts the dump step asks rustc for.
     unread: BTreeSet<String>,
@@ -3939,13 +3976,14 @@ fn differential(
         // Contracts are checked only under `-Zcontract-checks`, which no
         // build of core here passes.
         decls.push(format!(
-            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := {debug}, contractChecks := false, overflowChecks := {overflow}, pointerWidth := {}, bigEndian := {}}})\n}}",
+            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := {debug}, contractChecks := false, overflowChecks := {overflow}, pointerWidth := {}, bigEndian := {}, globals := {}}})\n}}",
             mir_name("Program"),
             mir_name("Program"),
             term_list(&bodies, &mir_name("Body")),
             mir_name("Binding"),
             program.width,
-            program.big_endian
+            program.big_endian,
+            program.globals
         ));
         decls.extend(theorems);
     }
@@ -4427,6 +4465,7 @@ fn embed_census(
     let mut signatures = BTreeMap::new();
     let src = library_root(root).join(krate).join("src");
     let statics = statics(&link);
+    let mutables = mutable_statics(&link);
     let static_allocs: BTreeMap<String, String> = read
         .iter()
         .flat_map(|(_, texts)| texts.iter())
@@ -4492,6 +4531,7 @@ fn embed_census(
                 every_cell: &every_cell,
                 static_allocs: &static_allocs,
                 externs: &externs,
+                mutables: &mutables,
                 slots: Default::default(),
                 sites: Default::default(),
                 item_texts: Default::default(),
@@ -4562,6 +4602,7 @@ fn embed_census(
             every_cell: &every_cell,
             static_allocs: &static_allocs,
             externs: &externs,
+            mutables: &mutables,
             slots: Default::default(),
             sites: Default::default(),
             item_texts: Default::default(),
@@ -4614,6 +4655,7 @@ fn embed_census(
         big_endian: big_endian.unwrap_or_default(),
         unread,
         signatures,
+        globals: mutables.len(),
     };
     Ok((modules, census, program))
 }
@@ -4826,6 +4868,7 @@ mod tests {
             every_cell: &BTreeMap::new(),
             static_allocs: &BTreeMap::new(),
             externs: &BTreeSet::new(),
+            mutables: &[],
             slots: Default::default(),
             sites: Default::default(),
             item_texts: Default::default(),
@@ -4870,7 +4913,13 @@ mod tests {
         let body = static_body(text).expect("the initializer");
         assert_eq!(body.path, "a::b::MAP");
         assert_eq!(body.arity, 0);
-        assert!(static_body(&text.replace("static MAP", "static mut MAP")).is_none());
+        // A `static mut`'s initializer is its global's initial value.
+        let mutable = text.replace("static MAP", "static mut MAP");
+        assert_eq!(
+            static_body(&mutable).map(|b| b.path),
+            Some("a::b::MAP".to_string())
+        );
+        assert!(static_mut(&mutable) && !static_mut(text));
         assert_eq!(
             static_path("<static(DefId(0:54115 ~ core[6af5]::a::b::MAP))>"),
             Some("a::b::MAP")
@@ -4886,6 +4935,7 @@ mod tests {
             big_endian: false,
             unread: BTreeSet::new(),
             signatures: BTreeMap::new(),
+            globals: 0,
         };
         let file = Path::new("observed.txt");
         assert!(matches!(
