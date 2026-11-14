@@ -957,6 +957,9 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
         dumps,
     )?);
     let mut next: Vec<(Ask, Vec<String>, String)> = wanted.iter().map(|t| ask_type(t)).collect();
+    // For a field asked of a type core declares, its declaration's module
+    // file in the copy of core.
+    let mut declared_in: BTreeMap<Ask, PathBuf> = BTreeMap::new();
     while !next.is_empty() {
         // A text that is no type's (a parse error stops the whole check)
         // is asked nothing.
@@ -975,6 +978,11 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             let mut modules = named_modules(&t);
             modules.sort_by_key(|m| std::cmp::Reverse(m.len()));
             let mut others: Vec<PathBuf> = Vec::new();
+            // A field's own declaration's module in core, whose names its
+            // type is written by (`CStr`'s `[c_char]`).
+            if let Some(f) = declared_in.get(&a).filter(|f| **f != file) {
+                others.push(f.clone());
+            }
             for module in modules {
                 let refs: Vec<&str> = module.iter().map(String::as_str).collect();
                 let f = module_file(&src, &refs);
@@ -1131,9 +1139,17 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             if let Some(l) = kept.layouts.get_mut(&p) {
                 l.fields = variants.iter().map(|fs| vec![None; fs.len()]).collect();
             }
+            let segments = crate::mir::parse::split_path(&decl.path);
+            let own = module_file(
+                &copy.join("core").join("src"),
+                &segments[..segments.len().saturating_sub(1)],
+            );
             for (v, fs) in variants.iter().enumerate() {
                 for (f, t) in fs.iter().enumerate() {
                     let text = field_text(t, &bound, &assoc);
+                    if decl.params.is_empty() {
+                        declared_in.insert(Ask::Field(p.clone(), v, f), own.clone());
+                    }
                     next.push((Ask::Field(p.clone(), v, f), home.clone(), text));
                 }
             }

@@ -261,6 +261,7 @@ inductive{
     {name: assign, fields: [Place, Rvalue]},
     {name: marker, fields: [String]},
     {name: assume, fields: [Operand]},
+    {name: global, fields: [Nat, Place, Place]},
     {name: other, fields: [String, String]}
   ]
 }
@@ -374,7 +375,8 @@ structure{
     {name: contractChecks, type: Bool},
     {name: overflowChecks, type: Bool},
     {name: pointerWidth, type: Nat},
-    {name: bigEndian, type: Bool}
+    {name: bigEndian, type: Bool},
+    {name: globals, type: Nat}
   ]
 }
 
@@ -3136,7 +3138,7 @@ definition{
       | Evaluated.stop outcome => outcome
       | Evaluated.found result => (match rest
         | List.nil => (ctor Outcome.returned result)
-        | List.cons caller below => (match (project top target)
+        | List.cons caller below => (if (prim equal (project (project caller body) path) "" : Bool) then (ctor Outcome.returned result) else (match (project top target)
           | Option.none => (ctor Outcome.ub "a return from a call that does not return")
           | Option.some block => (match (placeOf rest (project top destination))
             | Located.stop outcome => outcome
@@ -3144,7 +3146,7 @@ definition{
               | Option.none => (ctor Outcome.ub "a return into a place that holds no value")
               | Option.some written => (match written
                 | List.nil => (ctor Outcome.ub "a return with no frame")
-                | List.cons back others => (ctor Outcome.running (cons (moveTo back block) others))))))))))
+                | List.cons back others => (ctor Outcome.running (cons (moveTo back block) others)))))))))))
 }
 
 definition{
@@ -3208,6 +3210,37 @@ definition{
 }
 
 definition{
+  name: isUninit,
+  parameters: [value : Value],
+  result: Bool,
+  body: (match value
+    | Value.int p q r => false
+    | Value.boolean p => false
+    | Value.character p => false
+    | Value.unit => false
+    | Value.tuple p => false
+    | Value.adt p q r => false
+    | Value.pointer p q r => false
+    | Value.reference p => false
+    | Value.function p => false
+    | Value.text p => false
+    | Value.uninit => true)
+}
+
+definition{
+  name: evalGlobal,
+  parameters: [frames : (List Frame), index : Nat, value : Place, address : Place],
+  result: Outcome,
+  body: (match (readPlace frames value)
+    | Evaluated.stop outcome => outcome
+    | Evaluated.found initial => (match (frameAt frames 0)
+      | Option.none => (ctor Outcome.ub "a static with no frame of globals")
+      | Option.some bottom => (match (nthValue (project bottom locals) index)
+        | Option.none => (ctor Outcome.ub "a static the frame of globals holds no place for")
+        | Option.some held => (assignValue (if (isUninit held) then (setFrame frames 0 index initial) else frames) address (ctor Value.pointer 0 index (nil Nat))))))
+}
+
+definition{
   name: evalStatement,
   parameters: [fuel : Nat, program : Program, frames : (List Frame), frame : Frame, statement : Statement],
   result: Outcome,
@@ -3215,6 +3248,7 @@ definition{
     | Statement.assign target value => (evalAssign fuel program frames target value)
     | Statement.marker kind => (ctor Outcome.running (replaceTop frames (advanceFrame frame)))
     | Statement.assume condition => (ctor Outcome.running (replaceTop frames (advanceFrame frame)))
+    | Statement.global index value address => (evalGlobal frames index value address)
     | Statement.other kind text => (ctor Outcome.undefined kind))
 }
 
@@ -3250,12 +3284,19 @@ definition{
 }
 
 definition{
+  name: globalsFrame,
+  parameters: [count : Nat],
+  result: Frame,
+  body: (record Frame {body := (record Body {path := "", arity := 0, locals := (nil Ty), blocks := (nil Block), entry := 0}), block := 0, statement := 0, locals := (uninits count), destination := (record Place {base := 0, projection := (nil Proj)}), target := (ctor Option.none [Nat]), pinned := false, generics := (nil Generic), exposed := (nil Value)})
+}
+
+definition{
   name: evaluate,
   parameters: [fuel : Nat, program : Program, path : String, args : (List Value)],
   result: Outcome,
   body: (match (findBody (project program bodies) path)
     | Option.none => (ctor Outcome.unlinked path)
-    | Option.some callee => (runFrames fuel program (cons (enterFrame callee args (record Place {base := 0, projection := (nil Proj)}) (ctor Option.none [Nat]) false (nil Generic)) (nil Frame))))
+    | Option.some callee => (runFrames fuel program (cons (enterFrame callee args (record Place {base := 0, projection := (nil Proj)}) (ctor Option.none [Nat]) false (nil Generic)) (cons (globalsFrame (project program globals)) (nil Frame)))))
 }
 \end{semanticmodule}
 \end{lexlean}

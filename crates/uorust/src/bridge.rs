@@ -130,19 +130,19 @@ pub fn write_shallow(dir: &Path, shards: &[CoreShard]) -> Result<(), UorustError
 /// A value the bridge encodes: a scalar, or an enum of core's prelude over
 /// encoded values, as both MIR's type and the shallow type name it.
 #[derive(Clone, Debug, PartialEq, Eq)]
-enum Shape {
+enum BridgeShape {
     Bool,
     Int(u32, bool),
     Char,
     Unit,
     /// A shared reference, which the shallow function takes as its
     /// referent.
-    Ref(Box<Shape>),
-    Option(Box<Shape>),
-    Result(Box<Shape>, Box<Shape>),
+    Ref(Box<BridgeShape>),
+    Option(Box<BridgeShape>),
+    Result(Box<BridgeShape>, Box<BridgeShape>),
 }
 
-impl Shape {
+impl BridgeShape {
     /// The shape of a type as MIR prints it, at a pointer width of `width`.
     fn parse(printed: &str, width: u32) -> Option<Self> {
         let printed = printed.trim();
@@ -283,7 +283,7 @@ fn top_level(text: &str, sep: char) -> Vec<String> {
 
 /// A printed type with the row's bindings (`T=u32, U=u32`) substituted for
 /// its parameters' bare names.
-fn substitute(printed: &str, bindings: &BTreeMap<String, String>) -> String {
+fn bound_type(printed: &str, bindings: &BTreeMap<String, String>) -> String {
     let mut out = String::new();
     let mut word = String::new();
     let flush = |word: &mut String, out: &mut String| {
@@ -309,18 +309,18 @@ fn substitute(printed: &str, bindings: &BTreeMap<String, String>) -> String {
 /// The keys of the bodies `key` reaches, itself first, where each is
 /// embedded and the evaluator defines its every construct; else the first
 /// reason one is not.
-fn reach(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Bridgeable<Vec<String>> {
+fn reach(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> BridgeOutcome<Vec<String>> {
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
         let Some((_, e)) = every.get(&k) else {
-            return Bridgeable::Pending("closure: a callee not embedded".into());
+            return BridgeOutcome::Pending("closure: a callee not embedded".into());
         };
         if let Some(b) = e.blocked.iter().next() {
-            return Bridgeable::Pending(format!("closure: {b}"));
+            return BridgeOutcome::Pending(format!("closure: {b}"));
         }
         if !e.bound.is_empty() {
-            return Bridgeable::Pending("closure: a callee left to a dictionary".into());
+            return BridgeOutcome::Pending("closure: a callee left to a dictionary".into());
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
@@ -328,7 +328,7 @@ fn reach(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Bridgeable<
                 && e.term
                     .contains(&mir_ctor("Generic.slot", &[]).replace(')', "")))
         {
-            return Bridgeable::Pending("closure: a generic no binding fixes".into());
+            return BridgeOutcome::Pending("closure: a generic no binding fixes".into());
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -337,12 +337,12 @@ fn reach(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Bridgeable<
         }
         at += 1;
     }
-    Bridgeable::Ready(seen)
+    BridgeOutcome::Ready(seen)
 }
 
 /// What the bridge makes of a body: what its theorem needs, or the shape
 /// that leaves it pending.
-enum Bridgeable<T> {
+enum BridgeOutcome<T> {
     Ready(T),
     Pending(String),
 }
@@ -350,7 +350,7 @@ enum Bridgeable<T> {
 /// One translated body's place in the bridge: the declarations it adds to
 /// its part, and its theorem.
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
-struct Block {
+struct BridgeBlock {
     kappa: String,
     theorem: String,
     /// The declarations it needs, each `(name, text)`, which its part
@@ -366,17 +366,17 @@ struct Block {
 
 /// A part of the bridge: one module's blocks.
 #[derive(Clone, Debug, Default, serde::Serialize, serde::Deserialize)]
-struct Part {
+struct BridgePartOf {
     /// Its number, which names its module and never changes.
     id: usize,
-    blocks: Vec<Block>,
+    blocks: Vec<BridgeBlock>,
 }
 
 /// The bridge's state, which `uorust bridge` reads and prunes: its parts,
 /// and each translated κ set aside, with the shape that stopped it.
 #[derive(Clone, Debug, Default, serde::Serialize, serde::Deserialize)]
-struct State {
-    parts: Vec<Part>,
+struct BridgeState {
+    parts: Vec<BridgePartOf>,
     pending: BTreeMap<String, String>,
 }
 
@@ -401,10 +401,10 @@ pub(crate) fn project(
     shallow: &Path,
     out: &Path,
 ) -> Result<(), UorustError> {
-    let mut state = State::default();
+    let mut state = BridgeState::default();
     // The parts being filled, each with the declarations it defines and its
     // size.
-    let mut open: Vec<(Part, BTreeMap<String, String>, usize)> = Vec::new();
+    let mut open: Vec<(BridgePartOf, BTreeMap<String, String>, usize)> = Vec::new();
     let budget = crate::project::MAX_FILE_BYTES / 2;
     for (module, _) in modules {
         let file = shallow.join(format!("{module}.toml"));
@@ -471,28 +471,29 @@ pub(crate) fn project(
                 decls,
             };
             match block(program, &kappa, &field("at"), &shallow) {
-                Bridgeable::Pending(reason) => {
+                BridgeOutcome::Pending(reason) => {
                     state.pending.insert(kappa, reason);
                 }
-                Bridgeable::Ready((theorem, statement, needed)) => {
+                BridgeOutcome::Ready((theorem, statement, needed)) => {
                     // The first part with room that defines none of its
                     // names otherwise (a macro's impls share a name), else
                     // a new one.
                     let size: usize =
                         needed.iter().map(|(_, t)| t.len()).sum::<usize>() + statement.len();
-                    let fits = |(p, defined, used): &(Part, BTreeMap<String, String>, usize)| {
-                        p.blocks.len() < PART_THEOREMS
-                            && used + size <= budget
-                            && !needed
-                                .iter()
-                                .any(|(n, t)| defined.get(n).is_some_and(|d| d != t))
-                    };
+                    let fits =
+                        |(p, defined, used): &(BridgePartOf, BTreeMap<String, String>, usize)| {
+                            p.blocks.len() < PART_THEOREMS
+                                && used + size <= budget
+                                && !needed
+                                    .iter()
+                                    .any(|(n, t)| defined.get(n).is_some_and(|d| d != t))
+                        };
                     let at = match open.iter().position(fits) {
                         Some(at) => at,
                         None => {
                             let id = open.len();
                             open.push((
-                                Part {
+                                BridgePartOf {
                                     id,
                                     blocks: Vec::new(),
                                 },
@@ -511,7 +512,7 @@ pub(crate) fn project(
                     }
                     *part_size += statement.len();
                     let shape = shape(program, &kappa);
-                    part.blocks.push(Block {
+                    part.blocks.push(BridgeBlock {
                         kappa,
                         theorem,
                         decls: needed,
@@ -538,13 +539,18 @@ pub(crate) fn project(
 
 /// A theorem's name, its text, and the declarations it needs, each
 /// `(name, text)`.
-type Theorem = (String, String, Vec<(String, String)>);
+type BridgeTheorem = (String, String, Vec<(String, String)>);
 
 /// A translated body's theorem, its statement's text and the declarations
 /// it needs, each `(name, text)`; else why it has none.
-fn block(program: &Program, kappa: &str, at: &str, shallow: &Shallow) -> Bridgeable<Theorem> {
+fn block(
+    program: &Program,
+    kappa: &str,
+    at: &str,
+    shallow: &Shallow,
+) -> BridgeOutcome<BridgeTheorem> {
     let Some((key, locals)) = program.signatures.get(kappa) else {
-        return Bridgeable::Pending("unembedded".into());
+        return BridgeOutcome::Pending("unembedded".into());
     };
     let bindings: BTreeMap<String, String> = top_level(at, ',')
         .into_iter()
@@ -553,26 +559,26 @@ fn block(program: &Program, kappa: &str, at: &str, shallow: &Shallow) -> Bridgea
             Some((p.trim().to_string(), t.trim().to_string()))
         })
         .collect();
-    let shape = |printed: &str, declared: &str| -> Option<Shape> {
-        Shape::parse(&substitute(printed, &bindings), program.width)
+    let shape = |printed: &str, declared: &str| -> Option<BridgeShape> {
+        BridgeShape::parse(&bound_type(printed, &bindings), program.width)
             .filter(|s| s.shallow() == declared)
     };
     if shallow.parameters.len() + 1 != locals.len() {
-        return Bridgeable::Pending("signature: an arity the body does not have".into());
+        return BridgeOutcome::Pending("signature: an arity the body does not have".into());
     }
     let Some(result) = shape(&locals[0], &shallow.result) else {
-        return Bridgeable::Pending(format!("signature: {}", head(&shallow.result)));
+        return BridgeOutcome::Pending(format!("signature: {}", head(&shallow.result)));
     };
-    let mut params: Vec<Shape> = Vec::new();
+    let mut params: Vec<BridgeShape> = Vec::new();
     for ((_, ty), printed) in shallow.parameters.iter().zip(&locals[1..]) {
         match shape(printed, ty) {
             Some(s) => params.push(s),
-            None => return Bridgeable::Pending(format!("signature: {}", head(ty))),
+            None => return BridgeOutcome::Pending(format!("signature: {}", head(ty))),
         }
     }
     let closure = match reach(&program.every, key) {
-        Bridgeable::Ready(c) => c,
-        Bridgeable::Pending(why) => return Bridgeable::Pending(why),
+        BridgeOutcome::Ready(c) => c,
+        BridgeOutcome::Pending(why) => return BridgeOutcome::Pending(why),
     };
     let mut encoders = BTreeMap::new();
     let args: Vec<String> = shallow
@@ -614,20 +620,21 @@ fn block(program: &Program, kappa: &str, at: &str, shallow: &Shallow) -> Bridgea
     needed.push((
         format!("p{name}"),
         format!(
-            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := false, contractChecks := false, overflowChecks := false, pointerWidth := {}, bigEndian := {}}})\n}}",
+            "definition{{\n  name: p{name},\n  parameters: [],\n  result: {},\n  body: (record {} {{bodies := {}, dictionary := (nil {}), ubChecks := false, contractChecks := false, overflowChecks := false, pointerWidth := {}, bigEndian := {}, globals := {}}})\n}}",
             mir_name("Program"),
             mir_name("Program"),
             term_list(&bodies, &mir_name("Body")),
             mir_name("Binding"),
             program.width,
-            program.big_endian
+            program.big_endian,
+            program.globals
         ),
     ));
     needed.extend(encoders);
     let bits = params
         .iter()
         .map(|s| match s {
-            Shape::Int(b, _) => *b as usize,
+            BridgeShape::Int(b, _) => *b as usize,
             _ => 1,
         })
         .max()
@@ -643,7 +650,7 @@ fn block(program: &Program, kappa: &str, at: &str, shallow: &Shallow) -> Bridgea
         .parameters
         .iter()
         .zip(&params)
-        .filter(|(_, s)| **s == Shape::Bool)
+        .filter(|(_, s)| **s == BridgeShape::Bool)
         .map(|((n, _), _)| n.as_str())
         .collect();
     let statement = format!(
@@ -653,9 +660,9 @@ fn block(program: &Program, kappa: &str, at: &str, shallow: &Shallow) -> Bridgea
         mir_string(key),
         term_list(&args, &mir_name("Value")),
         mir_ctor("Outcome.returned", &[expected]),
-        by_cases(&booleans, "reflexivity{}")
+        boolean_cases(&booleans, "reflexivity{}")
     );
-    Bridgeable::Ready((theorem, statement, needed))
+    BridgeOutcome::Ready((theorem, statement, needed))
 }
 
 /// The operators of MIR a proof by the evaluator's reduction is likeliest
@@ -673,8 +680,8 @@ fn shape(program: &Program, kappa: &str) -> String {
         return "unembedded".into();
     };
     let keys = match reach(&program.every, key) {
-        Bridgeable::Ready(keys) => keys,
-        Bridgeable::Pending(_) => Vec::new(),
+        BridgeOutcome::Ready(keys) => keys,
+        BridgeOutcome::Pending(_) => Vec::new(),
     };
     let terms: Vec<&str> = keys
         .iter()
@@ -713,11 +720,11 @@ fn head(ty: &str) -> String {
 }
 
 /// `leaf` under case analysis on each of the Boolean locals `vars`.
-fn by_cases(vars: &[&str], leaf: &str) -> String {
+fn boolean_cases(vars: &[&str], leaf: &str) -> String {
     match vars.split_first() {
         None => leaf.to_string(),
         Some((v, rest)) => {
-            let inner = by_cases(rest, leaf);
+            let inner = boolean_cases(rest, leaf);
             format!(
                 "cases{{branches: [{{proof: {inner}, binders: [], constructor: \"false\"}}, {{proof: {inner}, binders: [], constructor: \"true\"}}], scrutinee: {v}}}"
             )
@@ -733,7 +740,7 @@ fn part_module(k: usize) -> String {
 
 /// Each nonempty part's module, by its source path, and for each the line
 /// each block's declarations and its theorem begin at.
-fn render_parts(state: &State) -> BTreeMap<String, Vec<u8>> {
+fn render_parts(state: &BridgeState) -> BTreeMap<String, Vec<u8>> {
     let mut files = BTreeMap::new();
     for p in &state.parts {
         if p.blocks.is_empty() {
@@ -750,7 +757,7 @@ fn render_parts(state: &State) -> BTreeMap<String, Vec<u8>> {
 
 /// The lines a part's module gives each declaration and each theorem.
 #[derive(Default)]
-struct Spans {
+struct BridgeSpans {
     /// Each declaration's name and its lines `[start, end)`.
     decls: Vec<(String, usize, usize)>,
     /// Each block's theorem's lines `[start, end)`.
@@ -759,7 +766,7 @@ struct Spans {
 
 /// A part's module, each declaration rendered where a block first needs
 /// it, and the lines each declaration and each theorem span.
-fn render_part(p: &Part) -> (String, Spans) {
+fn render_part(p: &BridgePartOf) -> (String, BridgeSpans) {
     let mut text = format!(
         "\\begin{{lexlean}}{{{}}}\n\\useglossary{{lexlean.std.bool@1.2.0}}\n\
          \\useglossary{{lexlean.std.nat@1.2.0}}\n\\useglossary{{uorust.mir@1.0.0}}\n\
@@ -767,7 +774,7 @@ fn render_part(p: &Part) -> (String, Spans) {
         part_module(p.id)
     );
     let line = |t: &str| t.matches('\n').count() + 1;
-    let mut spans = Spans::default();
+    let mut spans = BridgeSpans::default();
     let mut emitted: BTreeSet<&str> = BTreeSet::new();
     for b in &p.blocks {
         for (n, d) in &b.decls {
@@ -813,12 +820,10 @@ const LINK: &str = "LLT4001";
 /// under `register` is stamped `bridged` or `pending`.
 pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustError> {
     let state_file = dir.join(STATE);
-    let mut state: State =
-        serde_json::from_str(&crate::embed::read_text(&state_file)?).map_err(|e| {
-            UorustError::Malformed {
-                path: state_file.clone(),
-                reason: e.to_string(),
-            }
+    let mut state: BridgeState = serde_json::from_str(&crate::embed::read_text(&state_file)?)
+        .map_err(|e| UorustError::Malformed {
+            path: state_file.clone(),
+            reason: e.to_string(),
         })?;
     let run = |args: &[&str]| {
         std::process::Command::new("lexlean")
@@ -967,7 +972,7 @@ pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustErro
 }
 
 /// Write the parts and the entrypoints that name them.
-fn write_parts(dir: &Path, state: &State) -> Result<(), UorustError> {
+fn write_parts(dir: &Path, state: &BridgeState) -> Result<(), UorustError> {
     let src = dir.join("src");
     for file in crate::embed::dir_paths(&src)? {
         let stem = file
@@ -1049,7 +1054,7 @@ const SCREEN_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(120);
 /// Elaborate every part with Lean directly, against the imports LexLean
 /// verifies, each theorem bounded by [`SCREEN_HEARTBEATS`]: what each part
 /// refutes, by its Lean's error lines; a link failure, by LexLean's.
-fn screen(dir: &Path, state: &State) -> Result<Refuted, UorustError> {
+fn screen(dir: &Path, state: &BridgeState) -> Result<BridgeRefuted, UorustError> {
     let dir = &std::path::absolute(dir).map_err(|e| crate::error::io(dir, e))?;
     let lexlean = |args: &[&str]| -> Result<serde_json::Value, UorustError> {
         let out = std::process::Command::new("lexlean")
@@ -1244,9 +1249,9 @@ fn screen(dir: &Path, state: &State) -> Result<Refuted, UorustError> {
             });
         }
     });
-    let mut refuted = Refuted {
+    let mut refuted = BridgeRefuted {
         screened: true,
-        ..Refuted::default()
+        ..BridgeRefuted::default()
     };
     for (k, text, outcome) in results.into_inner().unwrap_or_default() {
         let Some(errors) = outcome? else {
@@ -1345,7 +1350,7 @@ fn elaborate(dir: &Path, oleans: &Path, file: &Path) -> Result<Option<Vec<usize>
 }
 
 /// The parts a failed verification names.
-fn failing(state: &State, result: &serde_json::Value) -> Vec<usize> {
+fn failing(state: &BridgeState, result: &serde_json::Value) -> Vec<usize> {
     let text = result.to_string();
     state
         .parts
@@ -1362,7 +1367,7 @@ fn failing(state: &State, result: &serde_json::Value) -> Vec<usize> {
 /// lacking refutes every block that names it; a part Lean stops without a
 /// line (its child's timeout) is split into a part per block, and a block
 /// alone in such a part is pending at `timeout`.
-fn prune(state: &mut State, result: &serde_json::Value) -> usize {
+fn prune(state: &mut BridgeState, result: &serde_json::Value) -> usize {
     let refuted = refuted_by(state, result);
     apply(state, &refuted)
 }
@@ -1371,7 +1376,7 @@ fn prune(state: &mut State, result: &serde_json::Value) -> usize {
 /// part's position and their own, the parts it stopped as a whole, and the
 /// names the link phase lacks.
 #[derive(Default)]
-struct Refuted {
+struct BridgeRefuted {
     /// Whether the screen refuted it, where a part stopped as a whole is
     /// pending, not split: its Lean outran the screen's bound.
     screened: bool,
@@ -1382,13 +1387,13 @@ struct Refuted {
 }
 
 /// What LexLean's diagnostics refute.
-fn refuted_by(state: &State, result: &serde_json::Value) -> Refuted {
+fn refuted_by(state: &BridgeState, result: &serde_json::Value) -> BridgeRefuted {
     let diagnostics = result
         .get("diagnostics")
         .and_then(serde_json::Value::as_array)
         .cloned()
         .unwrap_or_default();
-    let rendered: Vec<Spans> = state.parts.iter().map(|p| render_part(p).1).collect();
+    let rendered: Vec<BridgeSpans> = state.parts.iter().map(|p| render_part(p).1).collect();
     // The declarations refuted, by name; each part's theorems refuted; the
     // parts stopped as a whole.
     let mut lost: BTreeSet<String> = BTreeSet::new();
@@ -1454,7 +1459,7 @@ fn refuted_by(state: &State, result: &serde_json::Value) -> Refuted {
             whole.insert(k);
         }
     }
-    Refuted {
+    BridgeRefuted {
         screened: false,
         lost,
         theorems: refuted,
@@ -1464,8 +1469,8 @@ fn refuted_by(state: &State, result: &serde_json::Value) -> Refuted {
 }
 
 /// Set aside what `r` refutes; returns how many blocks.
-fn apply(state: &mut State, r: &Refuted) -> usize {
-    let Refuted {
+fn apply(state: &mut BridgeState, r: &BridgeRefuted) -> usize {
+    let BridgeRefuted {
         lost,
         theorems: refuted,
         whole,
@@ -1480,7 +1485,7 @@ fn apply(state: &mut State, r: &Refuted) -> usize {
         if whole.contains(&k) && blocks.len() > 1 && !r.screened {
             count += blocks.len();
             for b in blocks {
-                split.push(Part {
+                split.push(BridgePartOf {
                     id: next,
                     blocks: vec![b],
                 });
@@ -1512,7 +1517,7 @@ fn apply(state: &mut State, r: &Refuted) -> usize {
     count
 }
 
-impl Block {
+impl BridgeBlock {
     /// Whether its declarations or theorem name one of `names`.
     fn names(&self, names: &BTreeSet<String>) -> bool {
         !names.is_empty()
@@ -1571,12 +1576,12 @@ mod tests {
     #[test]
     fn a_signature_reads_as_the_shallow_types_ue_19() {
         let at: BTreeMap<String, String> = [("T".to_string(), "u32".to_string())].into();
-        let parse = |p: &str| Shape::parse(&substitute(p, &at), 64);
+        let parse = |p: &str| BridgeShape::parse(&bound_type(p, &at), 64);
         assert_eq!(
             parse("&i16"),
-            Some(Shape::Ref(Box::new(Shape::Int(16, true))))
+            Some(BridgeShape::Ref(Box::new(BridgeShape::Int(16, true))))
         );
-        assert_eq!(parse("usize"), Some(Shape::Int(64, false)));
+        assert_eq!(parse("usize"), Some(BridgeShape::Int(64, false)));
         assert_eq!(
             parse("option::Option<T>").map(|s| s.shallow()),
             Some("(Option Nat)".to_string())
@@ -1610,8 +1615,8 @@ mod tests {
     /// evaluator's reduction closes each case (UE-19).
     #[test]
     fn each_boolean_input_is_a_case_ue_19() {
-        assert_eq!(by_cases(&[], "reflexivity{}"), "reflexivity{}");
-        let one = by_cases(&["b"], "reflexivity{}");
+        assert_eq!(boolean_cases(&[], "reflexivity{}"), "reflexivity{}");
+        let one = boolean_cases(&["b"], "reflexivity{}");
         assert!(one.starts_with(
             "cases{branches: [{proof: reflexivity{}, binders: [], constructor: \"false\"}"
         ));

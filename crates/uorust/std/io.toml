@@ -18,6 +18,8 @@ kappa = "ac0550602a144c34096bfbc3d137c5e4c0cbc6ace819df1f8c2e669bcc61738a"
 at = "Self=u32"
 embedded = "995d5141ca105302bd6c0b294ec9b4f9bff15e5dfad105d8cd1140bf77ffcf1a"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatOptionNat"
 digest = "9426fc0d02c992e27b1d3864fe107919419ab300a302415f4648a11826f1ec76"
 
 [[fn]]
@@ -25,6 +27,8 @@ path = "std::_assert_error_is_sync_send"
 kappa = "38aea9b95f92d5e69ad4ccee77cab098ad5251f32170c0a38a171bf0ffcec87f"
 embedded = "c01f5923f2efc856bc839f53bf290c266068e416ff7dab48b289844565b812fd"
 status = "translated"
+bridged = "pending"
+pending = "closure: a callee not embedded"
 digest = "69cdbd062985483b6ebc9cdae402132c71e4e5bcc7e4c5e08297c7785e446bbd"
 
 [[fn]]
@@ -32,6 +36,8 @@ path = "std::_eprint"
 kappa = "a3213bb7f98fd903a5c2099f71086aa7a1710e5a3b0377a10890e838ca8604ab"
 embedded = "ee497bf0da629df384fb2e462fa5c27be3072354e65642383f69b2169c5f4109"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormattingOptionsNatListFnCoreFmtFormattingOptionsStringToTupleResultUnitCoreFmtErrorString"
 digest = "10f119901bd7576a5cb2d3ae6ec016bcff49502833590badc04e8b4140181a07"
 
 [[fn]]
@@ -39,6 +45,8 @@ path = "std::_is_sync_send"
 kappa = "c18a0900832c4125db7214232d053684cc1209c4d0174dbdcefb339bf2533b18"
 embedded = "ddfccbd0f877375a10326b13beb0bd69d27e3c2c3e7bc188d634d6b3c5406604"
 status = "translated"
+bridged = "pending"
+pending = "proof: straight"
 digest = "817f10f55b92a9f65248542015d62788a24fc03e7322f0036ae82a3469958d1c"
 
 [[fn]]
@@ -46,6 +54,8 @@ path = "std::_print"
 kappa = "dfa09a1a75575259bf79aa234a5d5f24c5b494ffada33dfba7e7e434b54eef41"
 embedded = "ba74b11df2d6a161a96f5b464e8c04b9befe50537201726fb91895e53dfc72f0"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormattingOptionsNatListFnCoreFmtFormattingOptionsStringToTupleResultUnitCoreFmtErrorString"
 digest = "963e04acd40e6ff0a2ac14e5af9659ad474372a1eb35160806e96c3a391d10d3"
 
 [[fn]]
@@ -729,8 +739,7 @@ cause = "mir::Ty: BufReader<u32>"
 path = "std::copy::BufReader::copy_to"
 kappa = "0e5cf40be9c9db073ec36a7a2c8621d92c102aa148cdd5a9f6eddacb828c6e40"
 at = "I=u32, Sized=u32"
-embedded = "6873fc697fe2d6ddf57d12de389bf780cbb6e68a02ebefb75838a2aa0cb5785c"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "d6e33235374c0c8231e9a266da6ad4779ec7e9472f81110b9c31688d9ac0a419"
 status = "residue"
 cause = "mir::Ty: io::error::Error"
 
@@ -1360,6 +1369,8 @@ path = "std::impls::<impl at library/std/src/io/impls.rs:299:1: 299:20>::is_read
 kappa = "6dd39a4feba439215d0add311328f9d10a917dd3c0f5155c47a4ae26c471657c"
 embedded = "a6bbb6b28bb1c893ffc79b585542c8f1f54f0ca7ae10b9e0253116444f533a1d"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "6fafd0b87e91696cd618ede45bba393fdc61818f79dbd4c2c68f2ca842cb91f8"
 
 [[fn]]
@@ -1437,6 +1448,8 @@ path = "std::impls::<impl at library/std/src/io/impls.rs:429:1: 429:25>::is_writ
 kappa = "d8003e6c40e3bc75d85b0d6a6c3f7f205e7caed81ddb98f2a55d7fbc2b48c972"
 embedded = "893cbd0978e11d91b4acda6b7f0b1787ac98bb31e9c40b2058530ac3cee170f8"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "135928e5e7335bcde20e2573cce746856339f288d804296a62c072d42a2cec06"
 
 [[fn]]
@@ -1735,6 +1748,8 @@ path = "std::impls::BorrowedCursor::is_write_vectored"
 kappa = "13cb982d0146b68f40072a030d6d91f0942b6176503154726f6c385eaf0c660b"
 embedded = "862a29b5988bff13d678f9f5701c45dbb8e45a5e5191bacbd164205374e8e253"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreIoBorrowedBufBorrowedCursor"
 digest = "625ac45d777866db2a90d7389a699ec0209e2b85c161ecb043fe097cde9fa1f0"
 
 [[fn]]
@@ -2186,6 +2201,8 @@ kappa = "f3462d5188041cf60fdbf08d33a106bf807d7021ceaaa63325a31becbe4230bd"
 at = "T=u32"
 embedded = "2f0feb7f6bb2512d46b983c26477096dad516fa3b9d8c1c6bf30ae5de2b9e05e"
 status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
 digest = "ceb1282aee665e411f6cd6f062701d803faedcdba29fe4350d38c7011683f548"
 
 [[fn]]
@@ -2194,6 +2211,8 @@ kappa = "06ac4e9c5a647e61c9687a8b944a140cfb1f1325444eb1f77365f026813ed0e2"
 at = "T=u32"
 embedded = "928a1bf07285dcd0c71b25baed1339bf63ce853d76efff549a58027bc2f53512"
 status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
 digest = "06a52dd86cb2d2410d930936066cf35baede71e6658272523ad06573a8ef5988"
 
 [[fn]]
@@ -2201,6 +2220,8 @@ path = "std::io::<impl at library/std/src/io/mod.rs:3080:1: 3080:24>::lower_boun
 kappa = "466bde31f51d39324b6460f742155827beb80e4b748c0c0b89927e49c77e6cad"
 embedded = "e1a0893667f54e1b1614c9c04fd3a4102eafab6fc36e80584e5375f8e69ebc81"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "974ac40416711072c1c212993cdc996a5deca95bb3546dda6ef26a546f4fee44"
 
 [[fn]]
@@ -2208,6 +2229,8 @@ path = "std::io::<impl at library/std/src/io/mod.rs:3080:1: 3080:24>::upper_boun
 kappa = "288e6d6bd00f462e83dafdaf218f963602a0cba0d25db3e3e2a23e29b8d3efca"
 embedded = "91b58191dd97aae4d3f84d9dc9d1b5e5f8807ee8c8789be0dba2c9e3af66e80c"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "c739df2750224bd8b8f2206336e4e3de2acd4ba08da3bf2936def22c66873002"
 
 [[fn]]
@@ -2232,6 +2255,8 @@ kappa = "13f7fea167835521e6b390c9fc75214a9f0629d416c0fc44957f836675c405b2"
 at = "T=u32"
 embedded = "fee2f6313d3573f5ae7ff0378522c05752abbe2d3456b03ae3216076d9425a58"
 status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
 digest = "a8e64f76c23f14699f42df4a2f5426393308b8828121bc6ecd15611776b6b1ac"
 
 [[fn]]
@@ -2240,6 +2265,8 @@ kappa = "293c03faafe5e368aad248eae39edf4a0297e4650c7d6b77351f289536adb576"
 at = "T=u32"
 embedded = "670f187a18c536e049f0faa410bb4d58b9ba6ce7f3dc78b124c8549e440aa655"
 status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
 digest = "7bcdfafe6724571d43d990424a940cde728258bf934580e7af8993ce83cb9fc4"
 
 [[fn]]
@@ -2391,6 +2418,8 @@ path = "std::io::DEFAULT_BUF_SIZE"
 kappa = "d3fccf87550bc20ce30f648028c7799a51c1576bf64a461f9c4bc44683e7430e"
 embedded = "2079e43e242719cbb6cce6ab5d6333f2d2b03cd1dc3830ae998fd55d2adebdb5"
 status = "translated"
+bridged = "pending"
+pending = "definition"
 digest = "f031d458a72e87b902399406c50374ab408ec20c33b7f6d2b685c7a79bf36a51"
 
 [[fn]]
@@ -2513,6 +2542,8 @@ kappa = "9d96e40af684a0017fab7a1a6f9d264e4612de8861e60ef985381f3404b1ed28"
 at = "Self=u32"
 embedded = "5ec3b961612c7f3384eb92dd8e474d6f407522ad80a77defd279913acb348528"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatNat"
 digest = "713c9d6f6d101f6c4aab73a114a02ca1b624462f64839488bbd6bacbccddd806"
 
 [[fn]]
@@ -2741,6 +2772,8 @@ kappa = "29baa993647f08c38305a53115f948efc9f8067e758c68d3917e8282485bd7da"
 at = "Self=u32"
 embedded = "6180adbb47414f530cabaa74cfbd1142a21550648065d35b7930f5a0fff31f08"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatNat"
 digest = "d7acecf1571e3ac6c47d7a25f50265d819a783f287fc727ec0371385d1f85460"
 
 [[fn]]
@@ -2863,8 +2896,7 @@ cause = "mir::Ty: dyn core::error::Error"
 path = "std::io::error::Error::downcast"
 kappa = "f58f438c9abb9c79e62b825cc715064629b651d96bc694941ff2475c94d6b4d6"
 at = "E=u32"
-embedded = "445136d62135fdf98e781da7147971ba1f3e28260f09f8e2410120b4aa73ed4c"
-blocked = ["CastKind::Transmute"]
+embedded = "d71cfd50b568aa91a459965f549c1d36932821b63c103947b77e8c1bf4600a04"
 status = "residue"
 cause = "mir::Ty: io::error::Error"
 
@@ -2934,8 +2966,7 @@ cause = "mir::Ty: dyn core::error::Error + core::marker::Send + core::marker::Sy
 [[fn]]
 path = "std::io::error::Error::into_inner"
 kappa = "673057689fb691bc60381934631faa51740973b6836b5ecffff717bd3938ad9c"
-embedded = "3de5c1765d0106cc10ae5ea9426eeefcc4d34c7a3054f3cb11419882989c34c6"
-blocked = ["CastKind::Transmute"]
+embedded = "9b71535307649983da31510be59168444a61c70ef3a294e58686fb3fb7917646"
 status = "residue"
 cause = "mir::Ty: dyn core::error::Error + core::marker::Send + core::marker::Sync"
 
@@ -4218,7 +4249,6 @@ cause = "mir::Ty: io::error::Custom"
 path = "std::repr_bitpacked::Repr::new_custom"
 kappa = "388edfc5c9b092e82c2c51129412eadba6c4169dcbfba6e372f1cb01efb55ffd"
 embedded = "c4c07169e8cd8c04c32055fa77047e981927579ea31b4147b8c81af20f485093"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: io::error::repr_bitpacked::Repr"
 
@@ -4248,6 +4278,8 @@ path = "std::repr_bitpacked::_"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4255,6 +4287,8 @@ path = "std::repr_bitpacked::_#10"
 kappa = "14578402b498c580a2e7b09957b25988f9d95eac2e3d89bbacf07031160f64a4"
 embedded = "937bff6fab3d73bb3ce06428f3be2f3bdaab8081021795997dbbc6125aade379"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "6afe0c54fa7d01b7876caecd9ca5d56538f1493130c1a52ca7ca6201d7113e95"
 
 [[fn]]
@@ -4262,6 +4296,8 @@ path = "std::repr_bitpacked::_#11"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4269,6 +4305,8 @@ path = "std::repr_bitpacked::_#12"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4297,6 +4335,8 @@ path = "std::repr_bitpacked::_#16"
 kappa = "d960d58e68a9d2a3a5ea46b01e50567476ab9b2ff4b205c9639a0fa083561973"
 embedded = "2d818944f677c98607a8340b1dd80ad2010371d5211d27c30d1adef5d490a06f"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "df88f5219f5b1044c67b75d4f130f448c0eb27053fa21eebb66aa21c887633d2"
 
 [[fn]]
@@ -4304,6 +4344,8 @@ path = "std::repr_bitpacked::_#17"
 kappa = "e90ce78024b93fb122aaee8f8a9be004001b39a501ed154982cb82b062652071"
 embedded = "b04b7098e0cf3627d4aa85101f0f60aec45a66b2e70795f0c71a7b2a0a978ded"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "66b0930cc78ed96a4ef96899cfedcfb330279c5a08b45bba1dd5583e00a39854"
 
 [[fn]]
@@ -4311,6 +4353,8 @@ path = "std::repr_bitpacked::_#18"
 kappa = "d8447faf73dafc606283b0c65faf4d25c9f9804e575335f1c8bc554c6d25a0d8"
 embedded = "d244b6e901f6f396982ccec6e8a1a0e41e2ba7b55094468f305266abbde1ca1e"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d8aaa4054a0360b58be87367a6070f54b53228be42659f58b5ecaf82b665b73d"
 
 [[fn]]
@@ -4318,6 +4362,8 @@ path = "std::repr_bitpacked::_#19"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4325,6 +4371,8 @@ path = "std::repr_bitpacked::_#2"
 kappa = "5e63aefe2ebca8901da2042b12d5a16af2334b0f65a877b8f2af8d52e08fd02a"
 embedded = "c953a8d6604a9836c5c502c9b9c49ffd415bc74cfdac2344c48f7676d151607c"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "64131df71e03b9318e7b6999fb04d2edef8673cc2c12f9ff382a3196bd1c8c05"
 
 [[fn]]
@@ -4353,6 +4401,8 @@ path = "std::repr_bitpacked::_#6"
 kappa = "d960d58e68a9d2a3a5ea46b01e50567476ab9b2ff4b205c9639a0fa083561973"
 embedded = "2d818944f677c98607a8340b1dd80ad2010371d5211d27c30d1adef5d490a06f"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "df88f5219f5b1044c67b75d4f130f448c0eb27053fa21eebb66aa21c887633d2"
 
 [[fn]]
@@ -4360,6 +4410,8 @@ path = "std::repr_bitpacked::_#7"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4367,6 +4419,8 @@ path = "std::repr_bitpacked::_#8"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4374,6 +4428,8 @@ path = "std::repr_bitpacked::_#9"
 kappa = "2b60196b00f6845dd2643656c4eb9b0b6780214db125fb03494f06532267d404"
 embedded = "85a56884abe084865311a9e34499f9f679dfe9befb1d1100edac558c89dde37a"
 status = "translated"
+bridged = "pending"
+pending = "signature: List"
 digest = "d2a7def6abaa71e1d8241ed4c58da1c15caa0345b6513e98f243bbbb3aede2c2"
 
 [[fn]]
@@ -4569,6 +4625,8 @@ path = "std::util::<impl at library/std/src/io/util.rs:295:1: 295:21>::is_write_
 kappa = "be2ad083f136adefc779e75447a58e0eadea29f3c60198545b2233637f815c7e"
 embedded = "a461720fedb86e79eaea590a95c8bab09c0c3718552306083a7b013b2045622d"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreIoUtilSink"
 digest = "3936fa71daadc66a5494e32f3005036151dc5ab9b515f4137117462f73f83d5a"
 
 [[fn]]
@@ -4863,6 +4921,8 @@ path = "std::util::Sink::is_write_vectored"
 kappa = "6e045e82e189c9afe28098b66e72e366a3c4ed8d6fc3cc0f60bccdeb3e212548"
 embedded = "8a87fe41d40a4b9b141bad56ff999f99746adf29e2a22295ad103d245ac86159"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreIoUtilSink"
 digest = "87a3ce86eedb6dc70ca8c4c7a7d72f4dd7284e92fcc339c9391c7633cfaa9e61"
 
 [[fn]]
