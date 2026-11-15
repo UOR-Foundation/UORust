@@ -2,7 +2,7 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 294 of 1272 functions of product code are lifted; 667
+# Honesty report: 295 of 1273 functions of product code are lifted; 667
 # are residue, 49 foreign and 262 effect rows.
 # Residue by cause:
 #   arithmetic: 1
@@ -716,7 +716,7 @@ reason = "mir"
 detail = "mir::Ty: std::ops::RangeFrom<usize>"
 
 [[residue]]
-kappa = "9807498a4edaf4e211a4386f5082b73b7bf75911a4720355c9ec481b2b07260a"
+kappa = "f00b2de43cda873b5fe1d4f4cfc7696f79e1f358b79467e19cb0862ad9ed5d6f"
 function = "uorust::certify::plan"
 reason = "mir"
 detail = "mir::AggregateKind::Closure: certify::plan::{closure#0}: mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index"
@@ -884,7 +884,7 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "dafc2a064c22d3f552822c5846d8e3c703fe9060f4c47148ebe9ac5d6ac34991"
+kappa = "bfddeca94c2e248ebcc394bebee6ac8fc4702039f77a9a0e68a9cbacde8bba2f"
 function = "uorust::embed::Cx<'_>::layout"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -1010,7 +1010,7 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "2a4be11b20218939f1cdafcd1c3f6bdd7b3484de49e59a405f4986d8845bbb1d"
+kappa = "0b1c7661d0319f619e56d0f26ec43089cf042c7746030b6677ecca1ffc53614b"
 function = "uorust::embed::Cx<'_>::sized"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -1274,7 +1274,7 @@ reason = "mir"
 detail = "mir::Ty: embed::InlineAsm"
 
 [[residue]]
-kappa = "d19ccc68a48327efdc52be7085e927b8c5bb89292773dca4db011f287f2475f1"
+kappa = "73410f59ced19143621a1fcb465498e00f34d5b6df45e677b2e7afeeae446188"
 function = "uorust::embed::instances"
 reason = "mir"
 detail = "mir::Ty: embed::Cx<'_>"
@@ -4727,7 +4727,7 @@ function = "uorust::certify::agree"
 effect = "Fs effect: std::fs::read_dir"
 
 [[effect]]
-kappa = "e7972b1b0de4ae24542728246accde791e7d36a850f002be1bb4732a653a699a"
+kappa = "4ace4bca89edfc69e0cfa8a8098495c68f11daf65f1c6a02bcae8700966056f4"
 function = "uorust::certify::build_batch"
 effect = "Fs effect: Path::exists"
 
@@ -4877,7 +4877,7 @@ function = "uorust::embed::embed_census"
 effect = "calls uorust::embed::embed_linked, which performs a Fs effect: Path::is_dir"
 
 [[effect]]
-kappa = "723edff269cb21e2f6271aa7d1f62c59649d8c5a440328bf8303232ec203a3f8"
+kappa = "89e874d55673628ef05899478ae7b4402de76ece109b7b729e1ecd19bd64b3ed"
 function = "uorust::embed::embed_linked"
 effect = "Fs effect: Path::is_dir"
 
@@ -6135,6 +6135,11 @@ definition = "Behavior::dumpStem"
 kappa = "8fc53fa5a9b5c34c9382d2de44e75a73ea81f7523cb3ed43101484a51857127c"
 function = "uorust::embed::dumped_path"
 definition = "Behavior::dumpedPath"
+
+[[lifted]]
+kappa = "bb60019ef9957a15f686df32fb8e5cbc7005d7f8c252d4ab11ff58271fa56775"
+function = "uorust::embed::fn_pointer"
+definition = "Behavior::fnPointer"
 
 [[lifted]]
 kappa = "23708d1cc74ea30fa97037efca9bc6ae687b60b4a67a58095f2ea43f881f84e2"
