@@ -238,6 +238,10 @@ fn descriptor(targets: &str) -> Result<String, UorustError> {
         .ok_or_else(|| bad(format!("no {TARGET} descriptor")))
 }
 
+/// The file of `kept` that records the κ each root's package was exported
+/// at, by package.
+pub const KAPPAS: &str = "kappas.toml";
+
 /// The cause of a root no build reached before the export's deadline.
 const UNBUILT: &str = "not built before the export's deadline";
 
@@ -323,6 +327,14 @@ pub fn production_build(
         }
         std::fs::create_dir_all(dir).map_err(|e| io(dir, e))?;
     }
+    // The κ each package is exported at, so that a sync on a newer commit
+    // takes a package only while its function is the one exported.
+    let measured: String = all
+        .iter()
+        .map(|r| format!("{} = \"{}\"\n", r.package(), r.kappa))
+        .collect();
+    let path = kept.join(KAPPAS);
+    std::fs::write(&path, measured).map_err(|e| io(&path, e))?;
     // Every root the request may name: the higher-order ones are refused by
     // `production` itself.
     let probe = out.join("probe");
@@ -1102,6 +1114,11 @@ pub(crate) fn sync(
             format!("no {REFUSALS} beside a bundle's result.json: not kept by certify production"),
         ));
     }
+    let kappas = kept.join(KAPPAS);
+    let measured: Option<toml::Table> = match std::fs::read_to_string(&kappas) {
+        Ok(text) => Some(text.parse().map_err(|e| bad(&kappas, format!("{e}")))?),
+        Err(_) => None,
+    };
     let mut results = Vec::new();
     for bundle in bundles(kept)? {
         let path = bundle.join("result.json");
@@ -1145,8 +1162,17 @@ pub(crate) fn sync(
                 let directory = field(package, &["directory"]);
                 let name = directory.rsplit('/').next().unwrap_or_default().to_string();
                 let Some(own) = by_package.get(&name) else {
+                    if measured.is_some() {
+                        continue;
+                    }
                     return Err(bad(path, format!("{name} is no root of the register")));
                 };
+                // A function changed since the export is a new question.
+                if measured.as_ref().is_some_and(|m| {
+                    m.get(&name).and_then(toml::Value::as_str) != Some(own.kappa.as_str())
+                }) {
+                    continue;
+                }
                 let lib = format!("{directory}/src/lib.rs");
                 let recorded = package
                     .get("files")

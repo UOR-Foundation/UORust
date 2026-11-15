@@ -48,8 +48,14 @@ jobs:
       # the SDK pull, the self MIR and projection before it and the sync,
       # adapter tests and push after it. The roots unbuilt by then are refused
       # for this export, so it always ends with a manifest inside the timeout.
-      EXPORT_MINUTES: 90
+      EXPORT_MINUTES: 85
+      # The minutes after the job's start by which the last sync on a newer
+      # main must have pushed: the job's 120 less one sync's margin.
+      LAND_BY_MINUTES: 112
     steps:
+      - name: Note the job's start
+        shell: bash
+        run: echo "STARTED=$(date +%s)" >>"$GITHUB_ENV"
       - name: Check out the exact event revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -100,7 +106,13 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: scripts/ci/push.sh "Rebuild the certified translator" "crates/certified crates/uorust/src/certified.rs" certified.yml generate.yml
+          # A newer commit under what the sync reads refuses the push; the
+          # sync is then taken again on main's head (land-certified.sh), each
+          # package kept only while its κ is the one exported, so the export
+          # lands while other commits keep moving main.
+          REBASE: '1'
+          INPUTS: 'crates/uorust/src/** crates/uorust/assets/** crates/uorust/Cargo.toml frontier.toml lift-verdicts.toml Cargo.lock rust-toolchain.toml prismpm.lock Justfile .github/workflows/certified.yml'
+        run: scripts/ci/land-certified.sh "$((STARTED + LAND_BY_MINUTES * 60))"
 
   gate:
     name: ratchet, differential and fixpoint / ${{ matrix.runner }} / run ${{ matrix.run }}

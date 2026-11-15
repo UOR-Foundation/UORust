@@ -194,6 +194,16 @@ certified within="":
     cargo run -q --locked -p uorust -- project . --out target/uorust-self --name uorust --last-modified 2026-11-11T00:00:00Z --register frontier.toml {{mir}}
     lexlean production targets --diagnostic-format json >crates/certified/targets.json
     cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` {{ if within == "" { "" } else { "--within " + within } }}
+    just certified-sync
+
+# Take the bundles `certified` kept (target/uorust-certified) into
+# crates/certified on this tree, as it stands: the self MIR dumped again, each
+# package taken only while its function's κ is the one it was exported at
+# (kept/kappas.toml), and the adapters written for this tree's call sites.
+# scripts/ci/land-certified.sh runs it on main's newer head when main moved
+# under the export.
+certified-sync:
+    cargo run -q --locked -p uorust -- mir . --out target/mir
     cargo run -q --locked -p uorust -- certify sync --kept target/uorust-certified --register frontier.toml --mir target/mir --workspace . --dir crates/certified --adapters crates/uorust/src/certified.rs
     rustfmt --edition 2021 crates/uorust/src/certified.rs
     # The adapters compile, and the switch selects, before export pushes them.
