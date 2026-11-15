@@ -387,6 +387,18 @@ struct Laid {
     assumed: Option<String>,
 }
 
+/// Whether a type as MIR prints it is a function pointer: `fn(u8) -> u8`,
+/// `unsafe fn(..)`, `extern "C" fn(..)`, each a pointer to code (memchr
+/// transmutes its cached `*mut ()` to an `unsafe fn`).
+fn fn_pointer(ty: &str) -> bool {
+    let ty = ty.strip_prefix("unsafe ").unwrap_or(ty);
+    let ty = match ty.strip_prefix("extern \"") {
+        Some(rest) => rest.split_once("\" ").map_or(rest, |(_, after)| after),
+        None => ty,
+    };
+    ty.starts_with("fn(")
+}
+
 /// A type as MIR or the source prints it, its generic arguments split off:
 /// `NonNull<T>` is `NonNull` and `[T]`.
 pub(crate) fn generic_parts(ty: &str) -> (&str, Vec<String>) {
@@ -1391,7 +1403,7 @@ impl Cx<'_> {
             || matches!(ty, "bool" | "char" | "()")
             || is_array(ty)
             || pointee(ty).is_some()
-            || ty.starts_with("fn(")
+            || fn_pointer(ty)
             || ty.starts_with('(')
         {
             return Some(true);
@@ -1586,7 +1598,7 @@ impl Cx<'_> {
             return pointee(inner).and_then(|_| self.layout(inner, depth));
         }
         let thin = bytes(self.width);
-        if pointee(ty).is_some() || ty.starts_with("fn(") {
+        if pointee(ty).is_some() || fn_pointer(ty) {
             let (size, assumed) =
                 match pointee(ty).map(|t| (t, self.sized(t, layout_depth(self.structs)))) {
                     None | Some((_, Some(true))) => (thin, None),
@@ -6266,6 +6278,20 @@ mod tests {
     }
 
     use super::*;
+
+    /// A function pointer is one however its ABI and safety print.
+    #[test]
+    fn a_function_pointer_is_one_however_it_prints() {
+        for ty in [
+            "fn(u8) -> u8",
+            "unsafe fn(u8, *const u8) -> Option<*const u8>",
+            "extern \"C\" fn()",
+            "unsafe extern \"C\" fn(i32)",
+        ] {
+            assert!(fn_pointer(ty), "{ty}");
+        }
+        assert!(!fn_pointer("unsafe_cell::UnsafeCell<u8>"));
+    }
 
     /// A transmute's work is read from its layouts' terms: a `[u8; 4]`
     /// to a `u32` encodes the array and its four bytes, and decodes one
