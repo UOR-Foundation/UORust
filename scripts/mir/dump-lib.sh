@@ -76,7 +76,10 @@ width=$(rustc +"$channel" --print cfg --target "$host" | sed -n 's/^target_point
 layout=$(RUSTC_BOOTSTRAP=1 rustc +"$channel" -Zunstable-options --print target-spec-json --target "$host" |
   python3 -I -c 'import json, sys; print(json.load(sys.stdin)["data-layout"])')
 printf 'triple = "%s"\npointer_width = %s\ndata_layout = "%s"\n' "$host" "$width" "$layout" >"$out/target.toml"
-work=$(mktemp -d)
+# The build of CRATE with its spanned MIR outgrows the SDK container's /tmp
+# tmpfs, so it runs on the checkout's disk, beside the rust-src cache.
+mkdir -p "$root/target"
+work=$(mktemp -d -p "$root/target")
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/probe/src"
 printf '[package]\nname = "probe"\nversion = "0.0.0"\nedition = "2021"\n\n[workspace]\n' >"$work/probe/Cargo.toml"

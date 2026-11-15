@@ -1346,16 +1346,27 @@ pub(crate) struct Helper {
     pub(crate) termination: Option<(String, Vec<Decl>)>,
 }
 
-/// The first of `base1`, `base2`, .. that `taken` does not hold. Each
-/// taken name rules out at most one of the first `taken.len() + 1`
-/// numbers, so one of them is free.
+/// A name `base<k>` that `taken` does not hold: one past the largest `k`
+/// any taken `base<k>` spells, so a single pass over `taken` decides it
+/// (searching `base1`, `base2`, .. against every taken name cost the
+/// square of a function's helpers). Only a taken name of `usize::MAX` leaves
+/// no successor, and then the first free of `base1`, `base2`, .. is taken:
+/// each taken name rules out at most one of the first `taken.len() + 1`.
 fn first_free(base: &str, taken: &[String]) -> String {
     #[cfg(not(uorust_lift))]
     crate::certified::certified!(lift_first_free, base, taken);
-    (1..taken.len() + 2)
-        .map(|k| format!("{base}{k}"))
-        .find(|name| !taken.contains(name))
-        .unwrap_or_default()
+    let top = taken
+        .iter()
+        .filter_map(|name| name.strip_prefix(base))
+        .filter_map(|rest| rest.parse::<usize>().ok())
+        .fold(0, |most, k| most.max(k));
+    match top.checked_add(1) {
+        Some(next) => format!("{base}{next}"),
+        None => (1..taken.len() + 2)
+            .map(|k| format!("{base}{k}"))
+            .find(|name| !taken.contains(name))
+            .unwrap_or_default(),
+    }
 }
 
 impl Ctx {
