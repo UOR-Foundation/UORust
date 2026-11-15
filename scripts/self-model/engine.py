@@ -237,7 +237,11 @@ jobs:
       matrix:
         module: ${{{{ fromJSON(needs.{first}.outputs.modules) }}}}
     steps:
-{checkout()}      - name: Fetch the built uorust
+{checkout()}      # When the job must end, which the bridge's step finishes within.
+      - name: Note the job's deadline
+        shell: bash
+        run: echo "DEADLINE=$(( $(date +%s) + {stage(krate, shard)['budget']} * 60 ))" >>"$GITHUB_ENV"
+      - name: Fetch the built uorust
         uses: {USES['actions/download-artifact']}
         with:
           name: uorust-${{{{ env.CRATE }}}}
@@ -303,11 +307,13 @@ jobs:
       # verifies the project; each theorem it refutes is set aside as
       # pending, with the shape that stopped it, and the rest verify again.
       # Each translated row of the module's register file is stamped
-      # `bridged` or `pending`, which the merge counts.
+      # `bridged` or `pending`, which the merge counts. Its Lean processes
+      # share the runner's memory, and what it could not finish before the
+      # job's deadline is pending, so the bridge cannot stop the shard.
       - name: Bridge the module's translations to the evaluator through the locked SDK
         shell: bash
         run: |
-          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard" | tee -a "$GITHUB_STEP_SUMMARY"
+          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard --until $DEADLINE" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Keep the module's register file
         uses: {USES['actions/upload-artifact']}
         with:
@@ -377,28 +383,38 @@ jobs:
 def crates(w):
     wid = w["id"]
     first, shard, merge = stage_ids(wid)
+    budget = stage(wid, shard)["budget"]
     return HEADER + f"""# Keeps a register for each of crates.io's most-downloaded crates, so the MIR
 # path grows against the code Rust developers depend on, as it does against
 # core and std. The first stage reads the ranking from crates.io's own API
 # (scripts/mir/top-crates.py, `sort=downloads`), each crate at its newest
-# stable version; how many crates is the `count` input, and when it is not
-# given (the daily run), one more than crates/uorust/crates holds registers
-# for, so each run takes on the next crate of the ranking and none is chosen
-# here. The attempt ledger keeps only the crates whose (crate@version,
-# translator κ, toolchain κ) it has not seen. Each shard runs `uorust crate
-# <name>@<version>`: it fetches the crate, checks it against crates.io's
-# checksum, dumps its library's MIR on the pinned toolchain, translates every
-# body and refuses a body the register records as translated that is now
-# residue. The writing stage copies each crate's register into
-# crates/uorust/crates/<name>, records the attempts, pushes and dispatches
-# the generate workflow. A crate that does not build here (one that needs a
-# system library, say) is reported in the summary and retried next tick.
+# stable version, and plans the run (scripts/mir/ledger.py plan-crates): the
+# held crates whose (crate@version, translator κ, toolchain κ) the attempt
+# ledger has not seen first, then, on a tick, the ranking's crates it has not
+# attempted, in rank order, as many as the expected seconds of them all fit
+# the run's budget, one shard stage's ({budget} minutes) of runner time. A
+# crate's expected seconds are its own last measured attempt, else the mean
+# of the attempts the ledger measured, as the differential check's modules
+# are split by their measured cost per fuel. A push (a new translator or
+# evaluator) takes no new crate. Each crate is a shard, which runs `uorust
+# crate <name>@<version> --library`: it fetches the crate, checks it against
+# crates.io's checksum, dumps its library's MIR on the pinned toolchain,
+# translates every body, refuses a body the register records as translated
+# that is now residue, and embeds every body in LexLean beside the pinned
+# rust-src's core, alloc and std, as core's and std's shards do, stamping each
+# row with its embedding and the register with its `[embedding]` totals and
+# blocked constructs; it measures the seconds that took. The writing stage
+# copies each crate's register into crates/uorust/crates/<name>, records each
+# attempt with its seconds, pushes and dispatches the generate workflow. A
+# crate that does not build here (one that needs a system library, say) is
+# reported in the summary, recorded as attempted and made again when its κ
+# moves.
 name: {wid}
 
 {triggers(w)}  workflow_dispatch:
     inputs:
       count:
-        description: How many of crates.io's most-downloaded crates; empty for one more than the registers held
+        description: How many of crates.io's most-downloaded crates to plan from; empty for as many as the budget could hold
         required: false
         default: ''
 
@@ -409,22 +425,32 @@ concurrency:
   group: {w['group']}
   cancel-in-progress: {'true' if w['cancel'] else 'false'}
 
+env:
+  # The run's budget, in seconds: one shard stage of runner time.
+  BUDGET: '{budget * 60}'
+
 jobs:
   {first}:
-    name: build uorust and rank the crates
+    name: build uorust and plan the crates
     runs-on: {RUNNER}
     timeout-minutes: {stage(wid, first)['budget']}
     outputs:
       crates: ${{{{ steps.crates.outputs.crates }}}}
     steps:
-{checkout()}      - name: Rank the crates by downloads and keep those the ledger has not attempted
+{checkout()}      - name: Rank the crates by downloads and plan those that fit the budget
         id: crates
         shell: bash
         env:
           COUNT: ${{{{ inputs.count }}}}
+          EVENT: ${{{{ github.event_name }}}}
         run: |
-          python3 -I scripts/mir/top-crates.py crates/uorust/crates "$COUNT" >"$RUNNER_TEMP/ranked.json"
-          crates=$(python3 -I scripts/mir/ledger.py stale-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json")
+          if [ "$EVENT" = push ]; then
+            echo '[]' >"$RUNNER_TEMP/ranked.json"
+          else
+            count=${{COUNT:-$(python3 -I scripts/mir/ledger.py rank-count crates/uorust/crates "$BUDGET")}}
+            python3 -I scripts/mir/top-crates.py crates/uorust/crates "$count" >"$RUNNER_TEMP/ranked.json"
+          fi
+          crates=$(python3 -I scripts/mir/ledger.py plan-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json" "$EVENT" "$BUDGET")
           echo "crates=$crates" >>"$GITHUB_OUTPUT"
           echo "crates: $crates" >>"$GITHUB_STEP_SUMMARY"
       - name: Build uorust through the locked SDK
@@ -442,7 +468,7 @@ jobs:
     needs: {first}
     if: ${{{{ needs.{first}.outputs.crates != '[]' }}}}
     runs-on: {RUNNER}
-    timeout-minutes: {stage(wid, shard)['budget']}
+    timeout-minutes: {budget}
     strategy:
       fail-fast: false
       matrix:
@@ -453,18 +479,34 @@ jobs:
         with:
           name: uorust-crates
           path: target/bin
-      - name: Fetch, dump and translate the crate through the locked SDK
+      # The library the crate is embedded beside: dump-lib.sh fetches the
+      # pinned rust-src (hash-checked) before it lists core's modules.
+      - name: Fetch the pinned rust-src through the locked SDK
+        shell: bash
+        run: scripts/ci/sdk.sh "scripts/mir/dump-lib.sh core --modules >/dev/null"
+      - name: Fetch, dump, translate and embed the crate through the locked SDK
         shell: bash
         env:
           SPEC: ${{{{ matrix.crate.name }}}}@${{{{ matrix.crate.version }}}}
           NAME: ${{{{ matrix.crate.name }}}}
         run: |
           chmod +x target/bin/uorust
-          mkdir -p target/tmp
-          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC'"
+          mkdir -p target/tmp target/times
+          channel=$(sed -n 's/^channel = "\\(.*\\)"/\\1/p' rust-toolchain.toml)
+          start=$(date +%s)
+          status=0
+          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+          # The attempt's seconds, which plan the next run, whether or not
+          # the crate built.
+          echo $(( $(date +%s) - start )) >"target/times/$SPEC"
           mkdir -p "target/register/$NAME"
-          cp -r "crates/uorust/crates/$NAME/." "target/register/$NAME/"
-      - name: Keep the crate's register
+          if [ "$status" -eq 0 ]; then
+            cp -r "crates/uorust/crates/$NAME/." "target/register/$NAME/"
+          fi
+          cp "target/times/$SPEC" target/register/
+          exit "$status"
+      - name: Keep the crate's register and its seconds
+        if: always()
         uses: {USES['actions/upload-artifact']}
         with:
           name: crate-register-${{{{ matrix.crate.name }}}}
@@ -499,12 +541,12 @@ jobs:
             if [ -f "target/registers/$name/frontier.toml" ]; then
               rm -rf "crates/uorust/crates/$name"
               cp -r "target/registers/$name" "crates/uorust/crates/$name"
-              echo "- $name: $(sed -n 's/^translated = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n 's/^bodies = //p' "crates/uorust/crates/$name/frontier.toml") bodies translated" >>"$GITHUB_STEP_SUMMARY"
+              echo "- $name: $(sed -n 's/^translated = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n 's/^bodies = //p' "crates/uorust/crates/$name/frontier.toml") bodies translated, $(sed -n '/^\\[embedding\\]/,/^$/s/^evaluable = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n '/^\\[embedding\\]/,/^$/s/^embedded = //p' "crates/uorust/crates/$name/frontier.toml") embedded bodies evaluable" >>"$GITHUB_STEP_SUMMARY"
             else
               echo "- $name: not lifted in this run (see its shard)" >>"$GITHUB_STEP_SUMMARY"
             fi
           done
-          python3 -I scripts/mir/ledger.py record-crates crates/uorust/crates "$CRATES"
+          python3 -I scripts/mir/ledger.py record-crates crates/uorust/crates target/registers
       - name: Push the registers and regenerate the model from them
         shell: bash
         env:

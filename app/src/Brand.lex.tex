@@ -40,9 +40,19 @@ definition{
   body: (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 17, background := 11, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 18968, requiredMilli := 4500, source := 30}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 17, background := 12, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 17948, requiredMilli := 4500, source := 31}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 11, background := 17, backgroundAlphaMilli := 850, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 13621, requiredMilli := 4500, source := 32}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 11, background := 13, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 18968, requiredMilli := 4500, source := 33}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 14, background := 11, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 6949, requiredMilli := 4500, source := 34}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 14, background := 13, backgroundAlphaMilli := 40, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 6045, requiredMilli := 4500, source := 35}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 14, background := 12, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 6575, requiredMilli := 4500, source := 36}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 13, background := 11, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.nonText), observedMilli := 18968, requiredMilli := 3000, source := 37}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 13, background := 11, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 18968, requiredMilli := 4500, source := 38}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 13, background := 15, backgroundAlphaMilli := 400, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 15791, requiredMilli := 4500, source := 39}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 13, background := 12, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.nonText), observedMilli := 17948, requiredMilli := 3000, source := 40}) (cons (record Foundation.Experience.V1.Model::ContrastPair {foreground := 13, background := 12, backgroundAlphaMilli := 1000, criterion := (ctor Foundation.Experience.V1.Model::ContrastCriterion.text), observedMilli := 17948, requiredMilli := 4500, source := 41}) (nil Foundation.Experience.V1.Model::ContrastPair)))))))))))))
 }
 
-definition{name: requiredTextMilli, parameters: [], result: Nat, body: 4500}
+definition{
+  name: requiredTextMilli,
+  parameters: [],
+  result: Nat,
+  body: 4500
+}
 
-definition{name: requiredNonTextMilli, parameters: [], result: Nat, body: 3000}
+definition{
+  name: requiredNonTextMilli,
+  parameters: [],
+  result: Nat,
+  body: 3000
+}
 
 theorem{
   name: everyElementIsSourced,
@@ -71,5 +81,6 @@ theorem{
   statement: ((Foundation.Experience.V1.Model::contrastsMet (contrasts)) = true),
   proof: decide{}
 }
+
 \end{semanticmodule}
 \end{lexlean}

@@ -40,7 +40,8 @@ path = "std::MASK"
 kappa = "15242151aeffd035d8a1701ad5dda6318c9a261f0c05e96df27a42cb1c8e4899"
 embedded = "eec3a6847638e5b59f4a643bb6f4ac0ee855023d8f0181133b7428fff3cc30f7"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: binary shl"
 digest = "203c456545f43f26a4734055ae4fb4c99d5f89121e17597d75bc8da61be49dc9"
 
 [[fn]]
@@ -57,7 +58,8 @@ path = "std::MIN_ALIGN"
 kappa = "f00b31eafd8a3ffcdba9fb87d4c1896a8691e253555e71a86d8c47732ce36697"
 embedded = "e0b13c946de4f1bf81ab8f2c07a0d8efb324728ff2c712d031b43aa253a8dcf8"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: call"
 digest = "61ef327be6022acd9f85164109fe4fac1f0a88fee9edc73af44e8eb44a2ec6ee"
 
 [[fn]]
@@ -86,7 +88,8 @@ path = "std::READERS_WAITING"
 kappa = "27b42fd807b5f240cb332b00568606aeefde1ad4c896037a5d5b83ae9d74d8d2"
 embedded = "40ce241e3372d45467f27cbacba62c9eba9f0b02161c10c452f2be54329d9b23"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: binary shl"
 digest = "0812de5f7aea9a9f5966f099d3f2ca57f269d7cd79345907ef99fcae57a16f61"
 
 [[fn]]
@@ -117,7 +120,8 @@ path = "std::WRITERS_WAITING"
 kappa = "d100f04c9faf76740ccb05563cefbf04f236aa0d3f692c29ff5198846fdbe67e"
 embedded = "a8bfd1224f1db0ad86e95593425112e7cb64584768126e3de01ead79e468efb9"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: binary shl"
 digest = "a6ca1c110904eca4a5dd2d992fb96426f64f4fdb8f706b4c657fb28c88f1b076"
 
 [[fn]]
@@ -1634,7 +1638,7 @@ kappa = "2935fae48e0e6bd46d92c0363b3f15fba8280a745885606d17369904897e0f92"
 embedded = "46b6a6fb943a2f302035201f10db3f792ae9e4d5fbfccd31f314db5ccf6f7cba"
 status = "translated"
 bridged = "pending"
-pending = "proof: straight"
+pending = "timeout: straight"
 digest = "509102c6c34a7c493bfedc2a62c9c65db394580d8f8b9c70ae81eccd8678849b"
 
 [[fn]]
@@ -1782,8 +1786,7 @@ cause = "mir::Ty: core::fmt::DebugStruct<'_, '_>"
 [[fn]]
 path = "std::delete_current_info"
 kappa = "1af52be8f3856c1124d9b32d37b52bf3095391eae77cf7e451fe44bc2781bb51"
-embedded = "8dac596769df216b8b92d26720ef69d531fdd7721cfbc47c23c7d72d0e08729c"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "984fb9bad34233a90dd61ad5bccd8c5d034b8a8eb970fe9a9f0abd405d536f9e"
 status = "residue"
 cause = "mir::TerminatorKind::Call: sys::io::error::unix::errno_location"
 
@@ -3074,7 +3077,7 @@ cause = "mir::Ty: io::error::Error"
 [[fn]]
 path = "std::pal::unix::init"
 kappa = "25f7d2f239dfdf99d666db11f2c0e6f5fcc16e4421e082d3416916d551fb95e9"
-embedded = "1786c8ef1451c3a1a35101a1622c0bcf4927a6ac8f307a56e57a4c4aa0d0cf39"
+embedded = "2f069b5307b65944d8701ecb3092ed1db560b1d6162dcceb2cdd03a5379e2753"
 status = "residue"
 cause = "mir::TerminatorKind::Call: sys::pal::unix::init::sanitize_standard_fds: std's MIR stops at mir::AggregateKind::Closure: sanitize_standard_fds::{closure#0}: mir::TerminatorKind::Call: dup"
 
@@ -3622,8 +3625,7 @@ cause = "mir::Ty: sys::io::kernel_copy::linux::CopyResult"
 [[fn]]
 path = "std::set_current_info"
 kappa = "fb3cf9c8ba4b7f46724c818b5ea2f7a67ab63a6d0ace0f312ce398e3ccfe1071"
-embedded = "1d250384e7629e710af815c5c735b67cd84e481a46a7c883c98478fe2c209beb"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "f37afd567e24172ec5338f89c81a1c5507f76690d52ba66b14eb297c736ec102"
 status = "residue"
 cause = "mir::Ty: core::ops::Range<usize>"
 
@@ -4590,8 +4592,7 @@ cause = "mir::Ty: sys::fs::unix::File"
 [[fn]]
 path = "std::sys::fs::unix::File::file_attr"
 kappa = "1118c3dd63ee5aad183ffea02792cc3ae3b5e00e8d77e8ded45880ef8a92e4bc"
-embedded = "087bd5722cd46bfbdf2e39609b98e64c6c7e7525e4e3ef6173f9e930f333a6f4"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "36bd8069a2c881488f57bfef4b136b0b35b991988042efeecdbe6ba256c8d9e7"
 status = "residue"
 cause = "mir::Ty: sys::fs::unix::FileAttr"
 
@@ -5306,7 +5307,7 @@ kappa = "37421520431312f449de007b864dcc5679381e365a8e99af02cc974aa4d75c25"
 embedded = "0cdde423ce269ea776f58eb22815bce4de74b0b9f5fb639e40bf1c0ef4ff2740"
 status = "translated"
 bridged = "pending"
-pending = "proof: binary eq"
+pending = "timeout: binary eq"
 digest = "68db3d79b04ec428e71ce1173cc2ba2168184f08ba6059f2bfba0c705e6afe51"
 
 [[fn]]
@@ -5315,7 +5316,7 @@ kappa = "d7798a575cf8c533a07d9bffe069cbb5170298a04de3895a145d52b647e275a8"
 embedded = "c2bee9e629e133f9830cb2d50af3cc290c1797c0f8d4893f290949637fe98069"
 status = "translated"
 bridged = "pending"
-pending = "proof: call"
+pending = "timeout: call"
 digest = "d480c411d34fd900801aa1bb827b896d34945b8c973d5bbf0bf5eec147849f1b"
 
 [[fn]]
@@ -6672,7 +6673,8 @@ path = "std::sys::thread::unix::DEFAULT_MIN_STACK_SIZE"
 kappa = "6aa816127e99e607b74e0839583372675c44b677fd4b6ee4750410074b46cae2"
 embedded = "69c5dbd7a630fae986c965323a029c7a39072511f84a4865aca9012bed197200"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: straight"
 digest = "4ff99334f8285625250e220d880e571ff9b78bb7060a23b1c677a377f23c5d44"
 
 [[fn]]
@@ -7025,7 +7027,8 @@ path = "std::to_ipv6mr_interface"
 kappa = "34ba1df75a9ac95ffd432f06ac8fe3c6b467f85a0510e592275e5d725f002f87"
 embedded = "18a52bc73238c919ed8d6eba93b285e89dcadcca022a650cbb412b008aac91b4"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: straight"
 digest = "eac4fbaace7262a0b23aa1cd3617027865b4b05db3f6855937b03ee9ac9be36d"
 
 [[fn]]
@@ -7063,7 +7066,8 @@ path = "std::unsupported::DEFAULT_MIN_STACK_SIZE"
 kappa = "659a95f8d54d9aff06273bbe4f7fc03a28477abd7e5abefd5585edc1978b982e"
 embedded = "bce932fee263f92e8987c58eb832c9e3a872e16186c093d69f4815738bea76a9"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: straight"
 digest = "1c7d17c5d17cb3b47d0894d741fc88e135b4391bb742adf91663483bd35fad8c"
 
 [[fn]]
@@ -7092,7 +7096,8 @@ path = "std::unsupported::current_os_id"
 kappa = "aae29e2e0788556d0ce8b5372f4791bf2454fb5ffd2578793885dc79a650be89"
 embedded = "a5557042d6bd82656ed8d2f4ba346a212d52d10362aa7450c931aa73961389a8"
 status = "translated"
-bridged = "proved"
+bridged = "pending"
+pending = "timeout: straight"
 digest = "885e3da1019b0a2c8925c6d0712bd6fa731b421d570229d922c1902c98a387c5"
 
 [[fn]]
@@ -7117,7 +7122,7 @@ kappa = "18de12588ce4a26e477dd9d6aa683e4c94801fe8c3c11a401d7ff2bc2cddb201"
 embedded = "1a6fff2a0aed1e9d5d1e1e96dd7aac0e38d5505d667f662925cd0443c3f5ae9e"
 status = "translated"
 bridged = "pending"
-pending = "proof: straight"
+pending = "timeout: straight"
 digest = "bb895b34e11a43a4d92e93d1206d6f00b9f37c9d6ea551f57f0ca843c7ebac4e"
 
 [[fn]]
@@ -7140,8 +7145,7 @@ cause = "mir::Ty: sys::pal::unix::weak::weak_linkage::ExternWeak<u32>"
 path = "std::with_current_info"
 kappa = "ee46cad89606255d1946f428f0c0835b44ab52f35d24561104f8f6dd007803ed"
 at = "R=u32, ThreadInfo=u32"
-embedded = "dd878f34924cd155bbe973e9ea28ad72df5fadf21062aab854d890380f51f095"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "b3cb81d6828bfc48b278be96bc9475475c20b72983f0c5602853d04454b54652"
 status = "residue"
 cause = "mir::TerminatorKind::Call: sys::io::error::unix::errno_location"
 

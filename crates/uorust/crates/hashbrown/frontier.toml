@@ -65,6 +65,11 @@ bodies = 4
 translated = 4
 residue = 0
 
+[embedding]
+embedded = 705
+evaluable = 705
+blocked = 0
+
 [[cause]]
 cause = "mir::Ty: core::fmt::Error"
 bodies = 51
@@ -74,28 +79,24 @@ cause = "mir::Ty: HashSet<u32"
 bodies = 32
 
 [[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 30
+
+[[cause]]
 cause = "mir::Ty: RawTableInner"
-bodies = 25
+bodies = 26
 
 [[cause]]
 cause = "mir::Ty: S"
-bodies = 24
-
-[[cause]]
-cause = "mir::Ty: HashMap<u32"
-bodies = 20
+bodies = 25
 
 [[cause]]
 cause = "mir::Ty: HashTable<u32"
-bodies = 20
+bodies = 24
 
 [[cause]]
 cause = "mir::Ty: RawTable<u32"
-bodies = 20
-
-[[cause]]
-cause = "mir::Instantiation: a const parameter"
-bodies = 18
+bodies = 23
 
 [[cause]]
 cause = "mir::Ty: raw::Bucket<u32>"
@@ -138,6 +139,10 @@ cause = "mir::Ty: control::tag::Tag"
 bodies = 10
 
 [[cause]]
+cause = "mir::Ty: A"
+bodies = 9
+
+[[cause]]
 cause = "mir::Ty: map::Entry<'_"
 bodies = 9
 
@@ -158,16 +163,12 @@ cause = "mir::Ty: table::OccupiedEntry<'_"
 bodies = 9
 
 [[cause]]
-cause = "mir::Ty: A"
+cause = "mir::Ty: Bucket<u32>"
 bodies = 8
 
 [[cause]]
 cause = "mir::Ty: table::HashTable<u32"
 bodies = 8
-
-[[cause]]
-cause = "mir::Ty: Bucket<u32>"
-bodies = 7
 
 [[cause]]
 cause = "mir::Ty: map::IterMut<'_"
@@ -270,11 +271,11 @@ cause = "mir::Ty: RawEntryBuilder<'_"
 bodies = 4
 
 [[cause]]
-cause = "mir::Ty: control::group::sse2::Group"
+cause = "mir::Ty: UnsafeIter<'_"
 bodies = 4
 
 [[cause]]
-cause = "mir::Ty: core::ptr::NonNull<u32>"
+cause = "mir::Ty: control::group::sse2::Group"
 bodies = 4
 
 [[cause]]
@@ -310,11 +311,11 @@ cause = "mir::Ty: TableLayout"
 bodies = 3
 
 [[cause]]
-cause = "mir::Ty: UnsafeIter<'_"
+cause = "mir::Ty: VacantEntryRef<'_"
 bodies = 3
 
 [[cause]]
-cause = "mir::Ty: VacantEntryRef<'_"
+cause = "mir::Ty: core::alloc::Layout"
 bodies = 3
 
 [[cause]]
@@ -362,6 +363,10 @@ cause = "mir::Ty: K"
 bodies = 2
 
 [[cause]]
+cause = "mir::Ty: Q"
+bodies = 2
+
+[[cause]]
 cause = "mir::Ty: RawEntryMut<'_"
 bodies = 2
 
@@ -383,10 +388,6 @@ bodies = 2
 
 [[cause]]
 cause = "mir::Ty: control::bitmask::BitMaskIter"
-bodies = 2
-
-[[cause]]
-cause = "mir::Ty: core::ptr::NonNull<u8>"
 bodies = 2
 
 [[cause]]
@@ -450,15 +451,19 @@ cause = "mir::Ty: table::UnsafeIter<'_"
 bodies = 2
 
 [[cause]]
-cause = "mir::Operand::Constant: the constant item control::tag::Tag::EMPTY"
+cause = "mir::Instantiation: u32 for a parameter bounded by BuildHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: control::tag::Tag::EMPTY: type outside the lift: control::tag::Tag"
 bodies = 1
 
 [[cause]]
 cause = "mir::Rvalue::Discriminant: of Nat"
-bodies = 1
-
-[[cause]]
-cause = "mir::TerminatorKind::Call: <u32 as BuildHasher>::hash_one"
 bodies = 1
 
 [[cause]]
@@ -479,6 +484,10 @@ bodies = 1
 
 [[cause]]
 cause = "mir::Ty: Group"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Layout"
 bodies = 1
 
 [[cause]]
@@ -511,14 +520,6 @@ bodies = 1
 
 [[cause]]
 cause = "mir::Ty: control::group::sse2::Group::static_empty::AlignedTags"
-bodies = 1
-
-[[cause]]
-cause = "mir::Ty: core::alloc::Layout"
-bodies = 1
-
-[[cause]]
-cause = "mir::Ty: core::ptr::NonNull<[u8]>"
 bodies = 1
 
 [[cause]]
@@ -571,16 +572,4 @@ bodies = 1
 
 [[cause]]
 cause = "mir::Ty: table::VacantEntry<'_"
-bodies = 1
-
-[[cause]]
-cause = "mir::Ty: {closure@src/map.rs:211:5: 211:15}"
-bodies = 1
-
-[[cause]]
-cause = "mir::Ty: {closure@src/map.rs:221:5: 221:13}"
-bodies = 1
-
-[[cause]]
-cause = "mir::Ty: {closure@src/map.rs:232:5: 232:13}"
 bodies = 1

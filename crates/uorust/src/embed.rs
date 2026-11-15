@@ -128,8 +128,8 @@ pub(crate) struct Cx<'a> {
     /// static: m::environ)`), by path: the platform's, which the program
     /// leaves to its dictionary.
     pub(crate) externs: &'a BTreeSet<String>,
-    /// The `static mut`s, in the order of the program's globals.
-    pub(crate) mutables: &'a [String],
+    /// The statics the program holds as its globals, in their order.
+    pub(crate) globals: &'a [String],
     /// Every dump's allocations, by name ([`allocation_cells`]).
     pub(crate) every_cell: &'a BTreeMap<String, Vec<Cell>>,
     /// The text each constant item the body reads is printed by.
@@ -159,9 +159,8 @@ pub(crate) fn item_type(link: &crate::mir::link::CoreLink, key: &str) -> Option<
 
 /// The initializer of the static a dump holds, as a constant's body by the
 /// static's path: rustc dumps a static's initializer as `static NAME: T =
-/// {..}`, which a constant item's body is but for its keyword. A `static
-/// mut`'s is its initial value: the program holds it as a global (see
-/// [`static_mut`]).
+/// {..}`, which a constant item's body is but for its keyword: its initial
+/// value, which the program holds as a global (see [`global_statics`]).
 pub(crate) fn static_body(text: &str) -> Option<IrBody> {
     let path = text
         .lines()
@@ -234,25 +233,12 @@ fn dumped_path(text: &str) -> Option<&str> {
         .map(|(p, _)| p)
 }
 
-/// Whether a static's dump is a `static mut`'s.
-fn static_mut(text: &str) -> bool {
-    text.lines()
-        .find_map(|l| l.strip_prefix("static "))
-        .is_some_and(|h| h.starts_with("mut "))
-}
-
-/// The paths of the `static mut`s whose initializers `link`'s dumps hold,
-/// in order: each is one global of the program, at its index here. The
-/// evaluator runs one thread, so a `static mut` is exactly one mutable
-/// allocation every body reads and writes alike.
-pub(crate) fn mutable_statics(link: &crate::mir::link::CoreLink) -> Vec<String> {
-    link.bodies
-        .iter()
-        .filter(|(_, texts)| {
-            matches!(texts.as_slice(), [t] if static_body(t).is_some() && static_mut(t))
-        })
-        .map(|(p, _)| p.clone())
-        .collect()
+/// The statics whose initializers `link`'s dumps hold, in order: each is
+/// one global of the program, at its index here. The evaluator runs one
+/// thread, so a static, `mut` or of interior mutability (`Atomic`,
+/// `Cell`), is exactly one allocation every body reads and writes alike.
+pub(crate) fn global_statics(link: &crate::mir::link::CoreLink) -> Vec<String> {
+    statics(link).into_iter().collect()
 }
 
 /// The paths of the statics whose initializers `link`'s dumps hold.
@@ -554,6 +540,13 @@ fn intrinsic_name(path: &str) -> String {
         .unwrap_or(path)
         .to_string()
 }
+
+/// The intrinsics whose effect is the platform's, outside the abstract
+/// machine: `breakpoint`'s trap is a debugger's, and `va_arg` reads the
+/// C ABI's variadic arguments, which the target's calling convention
+/// lays out. Each is a call the program leaves to its dictionary, as a
+/// foreign function is.
+const PLATFORM_EFFECTS: &[&str] = &["breakpoint", "va_arg"];
 
 /// The float intrinsics whose result the platform gives: each intrinsic
 /// core declares without a body (`library/core/src/intrinsics/mod.rs`)
@@ -1876,7 +1869,7 @@ impl Cx<'_> {
             .strip_prefix('{')
             .and_then(|t| t.split_once(": *"))
             .and_then(|(a, _)| self.static_allocs.get(a))
-            .filter(|p| self.externs.contains(*p) || self.mutables.contains(*p))
+            .filter(|p| self.externs.contains(*p) || self.globals.contains(*p))
         {
             return Some(path.clone());
         }
@@ -2805,6 +2798,21 @@ impl Cx<'_> {
                                 ],
                             )
                         }
+                        // `raw_eq::<T>`: its two values' bytes at `T`'s
+                        // layout, read from the type argument the call
+                        // prints.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "raw_eq"
+                                && type_argument(callee)
+                                    .and_then(|t| self.generic_layout(&t))
+                                    .is_some() =>
+                        {
+                            let t = type_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.rawEq",
+                                &[self.generic_layout(&t).unwrap_or_default()],
+                            )
+                        }
                         Callee::Intrinsic(p)
                             if intrinsic_name(&p) == "write_bytes"
                                 && self.written_element(body, args).is_some() =>
@@ -3002,29 +3010,19 @@ impl Cx<'_> {
                 )
             ));
             if slots > 1 {
-                // A static is read through a reference to it, an extern
-                // static through a pointer.
-                let global = self.mutables.iter().position(|m| m == key);
-                let address = if self.externs.contains(key) {
-                    mir_ctor("Rvalue.rawPtr", &[place(value)])
-                } else {
-                    mir_ctor(
-                        "Rvalue.borrow",
-                        &[
-                            mir_ctor(&kind_ctor(spec::MirBorrowKind::Shared.path()), &[]),
-                            place(value),
-                        ],
-                    )
-                };
-                // A `static mut` is the program's global: its initial
-                // value is written there once, and the body reads it
-                // through a pointer to that global.
-                let borrow = match global {
+                // A static is the program's global: its initial value is
+                // written there once, and the body reads it through a
+                // pointer to that global. An extern static is read through
+                // a pointer to the platform's value.
+                let borrow = match self.globals.iter().position(|g| g == key) {
                     Some(index) => mir_ctor(
                         "Statement.global",
                         &[index.to_string(), place(value), place(value + 1)],
                     ),
-                    None => mir_ctor("Statement.assign", &[place(value + 1), address]),
+                    None => mir_ctor(
+                        "Statement.assign",
+                        &[place(value + 1), mir_ctor("Rvalue.rawPtr", &[place(value)])],
+                    ),
                 };
                 blocks.push(format!(
                     "(record {} {{statements := {}, terminator := {}}})",
@@ -3853,8 +3851,8 @@ const CHILD_TIMEOUT_MS: usize = 300_000;
 /// 495 theorems, the largest of its parts to verify within the timeout,
 /// on the locked SDK's Lean v4.32.1; its parts of 1,124,627 fuel and more
 /// did not).
-const MEASURED_FUEL: usize = 664_506;
-const MEASURED_MS: usize = 300_000;
+pub(crate) const MEASURED_FUEL: usize = 664_506;
+pub(crate) const MEASURED_MS: usize = 300_000;
 
 /// The fuel one module of the differential check holds at most: Lean
 /// decides each theorem by evaluation, at a cost the theorem's fuel
@@ -4435,7 +4433,8 @@ fn embed_census(
         &link, krate, callee, args, dest,
     ) {
         Callee::Intrinsic(p)
-            if platform.contains(&intrinsic_name(&p))
+            if (platform.contains(&intrinsic_name(&p))
+                || PLATFORM_EFFECTS.contains(&intrinsic_name(&p).as_str()))
                 && !defined_intrinsics().contains(&intrinsic_name(&p)) =>
         {
             Callee::Bound(intrinsic_name(&p))
@@ -4465,7 +4464,7 @@ fn embed_census(
     let mut signatures = BTreeMap::new();
     let src = library_root(root).join(krate).join("src");
     let statics = statics(&link);
-    let mutables = mutable_statics(&link);
+    let globals = global_statics(&link);
     let static_allocs: BTreeMap<String, String> = read
         .iter()
         .flat_map(|(_, texts)| texts.iter())
@@ -4531,7 +4530,7 @@ fn embed_census(
                 every_cell: &every_cell,
                 static_allocs: &static_allocs,
                 externs: &externs,
-                mutables: &mutables,
+                globals: &globals,
                 slots: Default::default(),
                 sites: Default::default(),
                 item_texts: Default::default(),
@@ -4602,7 +4601,7 @@ fn embed_census(
             every_cell: &every_cell,
             static_allocs: &static_allocs,
             externs: &externs,
-            mutables: &mutables,
+            globals: &globals,
             slots: Default::default(),
             sites: Default::default(),
             item_texts: Default::default(),
@@ -4655,7 +4654,7 @@ fn embed_census(
         big_endian: big_endian.unwrap_or_default(),
         unread,
         signatures,
-        globals: mutables.len(),
+        globals: globals.len(),
     };
     Ok((modules, census, program))
 }
@@ -4868,7 +4867,7 @@ mod tests {
             every_cell: &BTreeMap::new(),
             static_allocs: &BTreeMap::new(),
             externs: &BTreeSet::new(),
-            mutables: &[],
+            globals: &[],
             slots: Default::default(),
             sites: Default::default(),
             item_texts: Default::default(),
@@ -4919,7 +4918,6 @@ mod tests {
             static_body(&mutable).map(|b| b.path),
             Some("a::b::MAP".to_string())
         );
-        assert!(static_mut(&mutable) && !static_mut(text));
         assert_eq!(
             static_path("<static(DefId(0:54115 ~ core[6af5]::a::b::MAP))>"),
             Some("a::b::MAP")

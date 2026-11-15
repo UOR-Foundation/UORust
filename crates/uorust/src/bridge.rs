@@ -140,6 +140,8 @@ enum BridgeShape {
     Ref(Box<BridgeShape>),
     Option(Box<BridgeShape>),
     Result(Box<BridgeShape>, Box<BridgeShape>),
+    /// `core::cmp::Ordering`, which the evaluator's comparisons return.
+    Ordering,
 }
 
 impl BridgeShape {
@@ -161,6 +163,9 @@ impl BridgeShape {
         if let Some((bits, signed)) = crate::embed::int_ty(printed, width) {
             return Some(Self::Int(bits, signed));
         }
+        if printed.ends_with("cmp::Ordering") {
+            return Some(Self::Ordering);
+        }
         let (head, args) = printed.strip_suffix('>')?.split_once('<')?;
         let args = top_level(args, ',');
         match (head.rsplit("::").next()?, &args[..]) {
@@ -173,9 +178,22 @@ impl BridgeShape {
         }
     }
 
+    /// The constructors of a parameter a proof takes as cases, each as the
+    /// shallow type names it: a Boolean's, an `Ordering`'s, or those of
+    /// the referent of a reference to one.
+    fn constructors(&self) -> Option<&'static [&'static str]> {
+        match self {
+            Self::Bool => Some(&["\"false\"", "\"true\""]),
+            Self::Ordering => Some(&["Less", "Equal", "Greater"]),
+            Self::Ref(a) => a.constructors(),
+            _ => None,
+        }
+    }
+
     /// The shallow type the MIR path lowers this shape to.
     fn shallow(&self) -> String {
         match self {
+            Self::Ordering => "CmpOrdering".into(),
             Self::Bool => "Bool".into(),
             Self::Int(..) | Self::Char => "Nat".into(),
             Self::Unit => "Unit".into(),
@@ -195,6 +213,7 @@ impl BridgeShape {
             Self::Ref(a) => format!("Ref{}", a.mangle()),
             Self::Option(a) => format!("Option{}", a.mangle()),
             Self::Result(a, e) => format!("Result{}{}", a.mangle(), e.mangle()),
+            Self::Ordering => "Ordering".into(),
         }
     }
 
@@ -210,7 +229,7 @@ impl BridgeShape {
             Self::Char => mir_ctor("Value.character", &[t.to_string()]),
             Self::Unit => mir_ctor("Value.tuple", &[format!("(nil {})", mir_name("Value"))]),
             Self::Ref(a) => mir_ctor("Value.reference", &[a.encode(t, encoders)]),
-            Self::Option(_) | Self::Result(..) => {
+            Self::Option(_) | Self::Result(..) | Self::Ordering => {
                 let name = format!("bridgeEnc{}", self.mangle());
                 if !encoders.contains_key(&name) {
                     let def = self.encoder(&name, encoders);
@@ -224,7 +243,7 @@ impl BridgeShape {
     /// The definition of an enum shape's encoder, `name`: each variant the
     /// evaluator's value of it, by its discriminant.
     fn encoder(&self, name: &str, encoders: &mut BTreeMap<String, String>) -> String {
-        let variant = |v: &str, d: u32, field: Option<String>| {
+        let variant = |v: &str, d: i32, field: Option<String>| {
             let fields = match field {
                 Some(f) => format!("(cons {f} (nil {}))", mir_name("Value")),
                 None => format!("(nil {})", mir_name("Value")),
@@ -234,8 +253,10 @@ impl BridgeShape {
                 &[
                     format!("\"{v}\""),
                     format!(
-                        "(record {} {{negative := false, magnitude := {d}}})",
-                        mir_name("Signed")
+                        "(record {} {{negative := {}, magnitude := {}}})",
+                        mir_name("Signed"),
+                        d < 0,
+                        d.unsigned_abs()
                     ),
                     fields,
                 ],
@@ -251,6 +272,13 @@ impl BridgeShape {
                 "    | Result.ok x => {}\n    | Result.error x => {}",
                 variant("Ok", 0, Some(a.encode("x", encoders))),
                 variant("Err", 1, Some(e.encode("x", encoders)))
+            ),
+            // The discriminants `orderingOf` gives: Less is -1.
+            Self::Ordering => format!(
+                "    | CmpOrdering.Less => {}\n    | CmpOrdering.Equal => {}\n    | CmpOrdering.Greater => {}",
+                variant("Less", -1, None),
+                variant("Equal", 0, None),
+                variant("Greater", 1, None)
             ),
             _ => String::new(),
         };
@@ -380,9 +408,17 @@ struct BridgeState {
     pending: BTreeMap<String, String>,
 }
 
-/// The most theorems one part holds: a part is one Lean process, which
-/// `lexlean verify` stops at the project's `child_timeout_ms`.
-const PART_THEOREMS: usize = 8;
+/// The fuel one part holds at most: a part is one Lean process, which
+/// `lexlean verify` stops at [`PART_TIMEOUT_MS`], and Lean decides each
+/// theorem by reducing the evaluator, at a cost its fuel, times its cases,
+/// bounds; so a part's budget is what that timeout reduces at the
+/// differential check's measured cost per unit of fuel.
+fn part_budget() -> usize {
+    usize::try_from(PART_TIMEOUT_MS)
+        .unwrap_or(usize::MAX)
+        .saturating_mul(crate::embed::MEASURED_FUEL)
+        / crate::embed::MEASURED_MS
+}
 
 /// How long one part's Lean process may run: a reduction the evaluator
 /// cannot finish on symbolic inputs is set aside, not waited on.
@@ -405,6 +441,7 @@ pub(crate) fn project(
     // The parts being filled, each with the declarations it defines and its
     // size.
     let mut open: Vec<(BridgePartOf, BTreeMap<String, String>, usize)> = Vec::new();
+    let mut spent: Vec<usize> = Vec::new();
     let budget = crate::project::MAX_FILE_BYTES / 2;
     for (module, _) in modules {
         let file = shallow.join(format!("{module}.toml"));
@@ -474,21 +511,24 @@ pub(crate) fn project(
                 BridgeOutcome::Pending(reason) => {
                     state.pending.insert(kappa, reason);
                 }
-                BridgeOutcome::Ready((theorem, statement, needed)) => {
+                BridgeOutcome::Ready((theorem, statement, needed, cost)) => {
                     // The first part with room that defines none of its
                     // names otherwise (a macro's impls share a name), else
                     // a new one.
                     let size: usize =
                         needed.iter().map(|(_, t)| t.len()).sum::<usize>() + statement.len();
-                    let fits =
-                        |(p, defined, used): &(BridgePartOf, BTreeMap<String, String>, usize)| {
-                            p.blocks.len() < PART_THEOREMS
-                                && used + size <= budget
-                                && !needed
-                                    .iter()
-                                    .any(|(n, t)| defined.get(n).is_some_and(|d| d != t))
-                        };
-                    let at = match open.iter().position(fits) {
+                    // A theorem past the budget has a part to itself.
+                    let fits = |(k, (p, defined, used)): &(
+                        usize,
+                        &(BridgePartOf, BTreeMap<String, String>, usize),
+                    )| {
+                        (p.blocks.is_empty() || spent[*k].saturating_add(cost) <= part_budget())
+                            && used + size <= budget
+                            && !needed
+                                .iter()
+                                .any(|(n, t)| defined.get(n).is_some_and(|d| d != t))
+                    };
+                    let at = match open.iter().enumerate().position(|e| fits(&e)) {
                         Some(at) => at,
                         None => {
                             let id = open.len();
@@ -500,6 +540,7 @@ pub(crate) fn project(
                                 BTreeMap::new(),
                                 0,
                             ));
+                            spent.push(0);
                             open.len() - 1
                         }
                     };
@@ -511,6 +552,7 @@ pub(crate) fn project(
                         }
                     }
                     *part_size += statement.len();
+                    spent[at] = spent[at].saturating_add(cost);
                     let shape = shape(program, &kappa);
                     part.blocks.push(BridgeBlock {
                         kappa,
@@ -537,9 +579,10 @@ pub(crate) fn project(
     crate::embed::replace_dir(out, Some(&files))
 }
 
-/// A theorem's name, its text, and the declarations it needs, each
+/// A theorem's name, its text, its cost (fuel times cases), and the
+/// declarations it needs, each
 /// `(name, text)`.
-type BridgeTheorem = (String, String, Vec<(String, String)>);
+type BridgeTheorem = (String, String, Vec<(String, String)>, usize);
 
 /// A translated body's theorem, its statement's text and the declarations
 /// it needs, each `(name, text)`; else why it has none.
@@ -646,12 +689,11 @@ fn block(
         .iter()
         .map(|(n, t)| format!("{n} : {t}"))
         .collect();
-    let booleans: Vec<&str> = shallow
+    let split: Vec<(&str, &[&str])> = shallow
         .parameters
         .iter()
         .zip(&params)
-        .filter(|(_, s)| **s == BridgeShape::Bool)
-        .map(|((n, _), _)| n.as_str())
+        .filter_map(|((n, _), s)| Some((n.as_str(), s.constructors()?)))
         .collect();
     let statement = format!(
         "theorem{{\n  name: {theorem},\n  parameters: [{}],\n  statement: (({} {fuel} (p{name}) {} {}) = {}),\n  proof: {}\n}}",
@@ -660,9 +702,13 @@ fn block(
         mir_string(key),
         term_list(&args, &mir_name("Value")),
         mir_ctor("Outcome.returned", &[expected]),
-        boolean_cases(&booleans, "reflexivity{}")
+        constructor_cases(&split, "reflexivity{}")
     );
-    BridgeOutcome::Ready((theorem, statement, needed))
+    // Each parameter split multiplies the cases the proof reduces.
+    let cost = split
+        .iter()
+        .fold(fuel, |c, (_, ks)| c.saturating_mul(ks.len()));
+    BridgeOutcome::Ready((theorem, statement, needed, cost))
 }
 
 /// The operators of MIR a proof by the evaluator's reduction is likeliest
@@ -719,14 +765,20 @@ fn head(ty: &str) -> String {
         .to_string()
 }
 
-/// `leaf` under case analysis on each of the Boolean locals `vars`.
-fn boolean_cases(vars: &[&str], leaf: &str) -> String {
+/// The proof `leaf` under a case split of each of `vars` into its
+/// constructors, outermost first.
+fn constructor_cases(vars: &[(&str, &[&str])], leaf: &str) -> String {
     match vars.split_first() {
         None => leaf.to_string(),
-        Some((v, rest)) => {
-            let inner = boolean_cases(rest, leaf);
+        Some(((v, ks), rest)) => {
+            let inner = constructor_cases(rest, leaf);
+            let branches: Vec<String> = ks
+                .iter()
+                .map(|k| format!("{{proof: {inner}, binders: [], constructor: {k}}}"))
+                .collect();
             format!(
-                "cases{{branches: [{{proof: {inner}, binders: [], constructor: \"false\"}}, {{proof: {inner}, binders: [], constructor: \"true\"}}], scrutinee: {v}}}"
+                "cases{{branches: [{}], scrutinee: {v}}}",
+                branches.join(", ")
             )
         }
     }
@@ -818,7 +870,14 @@ const LINK: &str = "LLT4001";
 /// verified again, until it verifies. Then `bridge.toml` indexes each
 /// theorem and pending κ, and each translated row of the module files
 /// under `register` is stamped `bridged` or `pending`.
-pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustError> {
+pub fn verify(
+    dir: &Path,
+    register: Option<&Path>,
+    until: Option<std::time::SystemTime>,
+) -> Result<Bridged, UorustError> {
+    // Work that could not finish by `until` is not started: what it would
+    // have decided is pending, with the stage that ran out of time.
+    let late = || until.is_some_and(|u| std::time::SystemTime::now() + 2 * LONGEST_STEP > u);
     let state_file = dir.join(STATE);
     let mut state: BridgeState = serde_json::from_str(&crate::embed::read_text(&state_file)?)
         .map_err(|e| UorustError::Malformed {
@@ -835,9 +894,14 @@ pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustErro
     // The screen: every part elaborated at once, each theorem's reduction
     // bounded, so that what Lean refutes is set aside in one pass, before
     // LexLean's own verification, which stops at a module's first failure.
+    let work = dir.join(".lexlean").join("screen");
+    crate::embed::replace_dir(&work, Some(&BTreeMap::new()))?;
     for pass in 0.. {
+        if late() {
+            break;
+        }
         write_parts(dir, &state)?;
-        let refuted = screen(dir, &state)?;
+        let refuted = screen(dir, &state, &late)?;
         let n = apply(&mut state, &refuted);
         eprintln!("bridge: screen {pass}: {n} theorems set aside");
         std::fs::write(
@@ -853,8 +917,26 @@ pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustErro
     // modules in order and stops at the first that fails, every one before
     // it verified; that one is pruned. When every part is confirmed, the
     // whole project is verified once more, which is the bridge's check.
+    crate::embed::replace_dir(&work, None)?;
     let mut confirmed: BTreeSet<usize> = BTreeSet::new();
     for round in 0.. {
+        if late() {
+            // What verified stays; the rest is pending.
+            let open: Vec<BridgePartOf> = state
+                .parts
+                .iter()
+                .filter(|p| !confirmed.contains(&p.id))
+                .cloned()
+                .collect();
+            let mut rest = BridgeState {
+                parts: open,
+                pending: BTreeMap::new(),
+            };
+            unfinished(&mut rest, "unverified");
+            state.parts.retain(|p| confirmed.contains(&p.id));
+            state.pending.extend(rest.pending);
+            break;
+        }
         write_parts(dir, &state)?;
         let lock = run(&["lock"])?;
         if !lock.status.success() {
@@ -971,6 +1053,22 @@ pub fn verify(dir: &Path, register: Option<&Path>) -> Result<Bridged, UorustErro
     })
 }
 
+/// The longest one step of the bridge runs: a screen's Lean process or a
+/// verification's child, each stopped at its timeout.
+const LONGEST_STEP: std::time::Duration = std::time::Duration::from_millis(PART_TIMEOUT_MS);
+
+/// Set every block of `state`'s parts aside as pending at `stage`, with
+/// its shape.
+fn unfinished(state: &mut BridgeState, stage: &str) {
+    for part in std::mem::take(&mut state.parts) {
+        for b in part.blocks {
+            state
+                .pending
+                .insert(b.kappa, format!("{stage}: {}", b.shape));
+        }
+    }
+}
+
 /// Write the parts and the entrypoints that name them.
 fn write_parts(dir: &Path, state: &BridgeState) -> Result<(), UorustError> {
     let src = dir.join("src");
@@ -1054,7 +1152,11 @@ const SCREEN_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(120);
 /// Elaborate every part with Lean directly, against the imports LexLean
 /// verifies, each theorem bounded by [`SCREEN_HEARTBEATS`]: what each part
 /// refutes, by its Lean's error lines; a link failure, by LexLean's.
-fn screen(dir: &Path, state: &BridgeState) -> Result<BridgeRefuted, UorustError> {
+fn screen(
+    dir: &Path,
+    state: &BridgeState,
+    late: &(dyn Fn() -> bool + Sync),
+) -> Result<BridgeRefuted, UorustError> {
     let dir = &std::path::absolute(dir).map_err(|e| crate::error::io(dir, e))?;
     let lexlean = |args: &[&str]| -> Result<serde_json::Value, UorustError> {
         let out = std::process::Command::new("lexlean")
@@ -1106,11 +1208,115 @@ fn screen(dir: &Path, state: &BridgeState) -> Result<BridgeRefuted, UorustError>
     let modules = artifact(&built)
         .ok_or_else(|| tool("lexlean build", &built))?
         .join("modules");
-    // The imports, compiled here: LexLean's runtime, as its own project
-    // builds it, then the project's modules but the parts, in the order
-    // their imports give.
+    // The imports do not change between passes, only the parts: they are
+    // compiled on the first pass, in the work dir `verify` empties.
     let work = dir.join(".lexlean").join("screen");
-    crate::embed::replace_dir(&work, Some(&BTreeMap::new()))?;
+    let oleans = work.join("oleans");
+    if !oleans.exists() {
+        compile_imports(dir, &work, &modules)?;
+    }
+    let mut jobs = Vec::new();
+    for (k, p) in state.parts.iter().enumerate() {
+        let module = part_module(p.id);
+        let lean = modules.join("UorustEmbed").join(format!("{module}.lean"));
+        let text = crate::embed::read_text(&lean)?;
+        let bounded: String = text
+            .lines()
+            .map(|l| {
+                if l.starts_with("set_option maxHeartbeats ") {
+                    format!("set_option maxHeartbeats {SCREEN_HEARTBEATS}\n")
+                } else {
+                    format!("{l}\n")
+                }
+            })
+            .collect();
+        let file = work.join(format!("{module}.lean"));
+        std::fs::write(&file, &bounded).map_err(|e| crate::error::io(&file, e))?;
+        jobs.push((k, file, bounded));
+    }
+    // One single-threaded Lean per processor, each held to an equal share
+    // of the memory available, one share left for the rest of the runner:
+    // a reduction past its share stops its own process, not the runner.
+    let width = std::thread::available_parallelism().map_or(1, std::num::NonZero::get);
+    let share = available_megabytes().map(|m| m / (width as u64 + 1));
+    let queue = std::sync::Mutex::new(jobs.into_iter());
+    let results = std::sync::Mutex::new(Vec::new());
+    let unscreened = std::sync::Mutex::new(BTreeSet::new());
+    std::thread::scope(|scope| {
+        for _ in 0..width {
+            scope.spawn(|| loop {
+                let job = queue.lock().ok().and_then(|mut q| q.next());
+                let Some((k, file, text)) = job else { break };
+                if late() {
+                    if let Ok(mut u) = unscreened.lock() {
+                        u.insert(k);
+                    }
+                    continue;
+                }
+                let outcome = elaborate(dir, &oleans, &file, share);
+                let _ = std::fs::remove_file(&file);
+                if let Ok(mut r) = results.lock() {
+                    r.push((k, text, outcome));
+                }
+            });
+        }
+    });
+    let mut refuted = BridgeRefuted {
+        screened: true,
+        unscreened: unscreened.into_inner().unwrap_or_default(),
+        ..BridgeRefuted::default()
+    };
+    for (k, text, outcome) in results.into_inner().unwrap_or_default() {
+        let Some(errors) = outcome? else {
+            refuted.whole.insert(k);
+            continue;
+        };
+        // Each error at the declaration its line falls in.
+        let starts: Vec<(usize, bool, String)> = text
+            .lines()
+            .enumerate()
+            .filter_map(|(i, l)| {
+                let mut words = l.split_whitespace().skip_while(|w| {
+                    w.starts_with('@') || *w == "public" || *w == "private" || *w == "noncomputable"
+                });
+                let kind = words.next()?;
+                let name = words.next()?;
+                matches!(
+                    kind,
+                    "def" | "theorem" | "structure" | "inductive" | "abbrev"
+                )
+                .then(|| (i + 1, kind == "theorem", name.to_string()))
+            })
+            .collect();
+        let blocks = &state.parts[k].blocks;
+        for line in errors {
+            let Some((_, theorem, name)) = starts.iter().rev().find(|(l, _, _)| *l <= line) else {
+                refuted.whole.insert(k);
+                continue;
+            };
+            match blocks.iter().position(|b| *theorem && &b.theorem == name) {
+                Some(i) => {
+                    refuted.theorems.insert((k, i));
+                }
+                None if *theorem => {
+                    refuted.whole.insert(k);
+                }
+                None => {
+                    refuted.lost.insert(name.clone());
+                }
+            }
+        }
+    }
+    Ok(refuted)
+}
+
+/// Compile, in `work`, the imports a part's Lean needs: LexLean's runtime,
+/// as its own project builds it, then the project's `modules` but the
+/// parts, in the order their imports give.
+fn compile_imports(dir: &Path, work: &Path, modules: &Path) -> Result<(), UorustError> {
+    let tool = |what: &str, r: &serde_json::Value| UorustError::Tool(format!("{what}: {r}"));
+    let src = work.join("src");
+    let oleans = work.join("oleans.partial");
     let runtime = work.join("runtime");
     copy_tree(Path::new(RUNTIME), &runtime)?;
     let run_in = |at: &Path, args: &[&str]| -> Result<serde_json::Value, UorustError> {
@@ -1130,10 +1336,8 @@ fn screen(dir: &Path, state: &BridgeState) -> Result<BridgeRefuted, UorustError>
         .and_then(serde_json::Value::as_str)
         .map(|a| runtime.join(a).join("modules"))
         .ok_or_else(|| tool("lexlean build (runtime)", &rt))?;
-    let src = work.join("src");
-    let oleans = work.join("oleans");
     let mut imports: BTreeMap<String, (std::path::PathBuf, Vec<String>)> = BTreeMap::new();
-    for root in [&rt_modules, &modules] {
+    for root in [&rt_modules, &modules.to_path_buf()] {
         for package in crate::embed::dir_paths(root)? {
             let Some(prefix) = package
                 .file_name()
@@ -1215,92 +1419,36 @@ fn screen(dir: &Path, state: &BridgeState) -> Result<BridgeRefuted, UorustError>
             done.insert(m);
         }
     }
-    let mut jobs = Vec::new();
-    for (k, p) in state.parts.iter().enumerate() {
-        let module = part_module(p.id);
-        let lean = modules.join("UorustEmbed").join(format!("{module}.lean"));
-        let text = crate::embed::read_text(&lean)?;
-        let bounded: String = text
-            .lines()
-            .map(|l| {
-                if l.starts_with("set_option maxHeartbeats ") {
-                    format!("set_option maxHeartbeats {SCREEN_HEARTBEATS}\n")
-                } else {
-                    format!("{l}\n")
-                }
-            })
-            .collect();
-        let file = work.join(format!("{module}.lean"));
-        std::fs::write(&file, &bounded).map_err(|e| crate::error::io(&file, e))?;
-        jobs.push((k, file, bounded));
-    }
-    let width = std::thread::available_parallelism().map_or(1, std::num::NonZero::get);
-    let queue = std::sync::Mutex::new(jobs.into_iter());
-    let results = std::sync::Mutex::new(Vec::new());
-    std::thread::scope(|scope| {
-        for _ in 0..width {
-            scope.spawn(|| loop {
-                let job = queue.lock().ok().and_then(|mut q| q.next());
-                let Some((k, file, text)) = job else { break };
-                let outcome = elaborate(dir, &oleans, &file);
-                if let Ok(mut r) = results.lock() {
-                    r.push((k, text, outcome));
-                }
-            });
-        }
-    });
-    let mut refuted = BridgeRefuted {
-        screened: true,
-        ..BridgeRefuted::default()
-    };
-    for (k, text, outcome) in results.into_inner().unwrap_or_default() {
-        let Some(errors) = outcome? else {
-            refuted.whole.insert(k);
-            continue;
-        };
-        // Each error at the declaration its line falls in.
-        let starts: Vec<(usize, bool, String)> = text
-            .lines()
-            .enumerate()
-            .filter_map(|(i, l)| {
-                let mut words = l.split_whitespace().skip_while(|w| {
-                    w.starts_with('@') || *w == "public" || *w == "private" || *w == "noncomputable"
-                });
-                let kind = words.next()?;
-                let name = words.next()?;
-                matches!(
-                    kind,
-                    "def" | "theorem" | "structure" | "inductive" | "abbrev"
-                )
-                .then(|| (i + 1, kind == "theorem", name.to_string()))
-            })
-            .collect();
-        let blocks = &state.parts[k].blocks;
-        for line in errors {
-            let Some((_, theorem, name)) = starts.iter().rev().find(|(l, _, _)| *l <= line) else {
-                refuted.whole.insert(k);
-                continue;
-            };
-            match blocks.iter().position(|b| *theorem && &b.theorem == name) {
-                Some(i) => {
-                    refuted.theorems.insert((k, i));
-                }
-                None if *theorem => {
-                    refuted.whole.insert(k);
-                }
-                None => {
-                    refuted.lost.insert(name.clone());
-                }
-            }
-        }
-    }
-    Ok(refuted)
+    // The runtime's copy is not needed once compiled.
+    std::fs::remove_dir_all(&runtime).map_err(|e| crate::error::io(&runtime, e))?;
+    let done = work.join("oleans");
+    std::fs::rename(&oleans, &done).map_err(|e| crate::error::io(&done, e))
+}
+
+/// The memory available to new processes, in megabytes, as Linux reports
+/// it; `None` where it does not.
+fn available_megabytes() -> Option<u64> {
+    let info = std::fs::read_to_string("/proc/meminfo").ok()?;
+    let line = info.lines().find(|l| l.starts_with("MemAvailable:"))?;
+    let kilobytes: u64 = line.split_whitespace().nth(1)?.parse().ok()?;
+    Some(kilobytes / 1024)
 }
 
 /// Run Lean on `file` against `oleans`: the lines of its errors, or `None`
-/// where it outran [`SCREEN_TIMEOUT`] or stopped without one.
-fn elaborate(dir: &Path, oleans: &Path, file: &Path) -> Result<Option<Vec<usize>>, UorustError> {
-    let mut child = std::process::Command::new("lean")
+/// where it outran [`SCREEN_TIMEOUT`] or `megabytes`, or stopped without
+/// one.
+fn elaborate(
+    dir: &Path,
+    oleans: &Path,
+    file: &Path,
+    megabytes: Option<u64>,
+) -> Result<Option<Vec<usize>>, UorustError> {
+    let mut lean = std::process::Command::new("lean");
+    lean.arg("--threads=1");
+    if let Some(m) = megabytes {
+        lean.arg(format!("--memory={m}"));
+    }
+    let mut child = lean
         .arg(file)
         .current_dir(dir)
         .env("LEAN_PATH", oleans)
@@ -1384,6 +1532,8 @@ struct BridgeRefuted {
     theorems: BTreeSet<(usize, usize)>,
     whole: BTreeSet<usize>,
     unavailable: BTreeSet<String>,
+    /// The parts the screen did not start, its time spent.
+    unscreened: BTreeSet<usize>,
 }
 
 /// What LexLean's diagnostics refute.
@@ -1465,6 +1615,7 @@ fn refuted_by(state: &BridgeState, result: &serde_json::Value) -> BridgeRefuted 
         theorems: refuted,
         whole,
         unavailable,
+        unscreened: BTreeSet::new(),
     }
 }
 
@@ -1494,7 +1645,9 @@ fn apply(state: &mut BridgeState, r: &BridgeRefuted) -> usize {
             continue;
         }
         for (i, b) in blocks.into_iter().enumerate() {
-            let why = if whole.contains(&k) {
+            let why = if r.unscreened.contains(&k) {
+                Some(format!("unscreened: {}", b.shape))
+            } else if whole.contains(&k) {
                 Some(format!("timeout: {}", b.shape))
             } else if b.decls.iter().any(|(n, _)| lost.contains(n)) || b.names(unavailable) {
                 Some("definition".to_string())
@@ -1615,8 +1768,9 @@ mod tests {
     /// evaluator's reduction closes each case (UE-19).
     #[test]
     fn each_boolean_input_is_a_case_ue_19() {
-        assert_eq!(boolean_cases(&[], "reflexivity{}"), "reflexivity{}");
-        let one = boolean_cases(&["b"], "reflexivity{}");
+        assert_eq!(constructor_cases(&[], "reflexivity{}"), "reflexivity{}");
+        let booleans = BridgeShape::Bool.constructors().unwrap_or_default();
+        let one = constructor_cases(&[("b", booleans)], "reflexivity{}");
         assert!(one.starts_with(
             "cases{branches: [{proof: reflexivity{}, binders: [], constructor: \"false\"}"
         ));

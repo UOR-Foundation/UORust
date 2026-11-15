@@ -50,33 +50,21 @@ inductive{
   name: EnvironmentKind,
   type_parameters: [],
   parameters: [],
-  constructors: [
-    {name: technical, fields: []},
-    {name: physical, fields: []},
-    {name: social, fields: []}
-  ]
+  constructors: [{name: technical, fields: []}, {name: physical, fields: []}, {name: social, fields: []}]
 }
 
 inductive{
   name: UsabilityOutcome,
   type_parameters: [],
   parameters: [],
-  constructors: [
-    {name: effectiveness, fields: []},
-    {name: efficiency, fields: []},
-    {name: satisfaction, fields: []}
-  ]
+  constructors: [{name: effectiveness, fields: []}, {name: efficiency, fields: []}, {name: satisfaction, fields: []}]
 }
 
 structure{
   name: Authority,
   type_parameters: [],
   parameters: [],
-  fields: [
-    {name: framework, type: String},
-    {name: repository, type: String},
-    {name: commit, type: String}
-  ]
+  fields: [{name: framework, type: String}, {name: repository, type: String}, {name: commit, type: String}]
 }
 
 structure{
@@ -96,11 +84,7 @@ structure{
   name: BrandElement,
   type_parameters: [],
   parameters: [],
-  fields: [
-    {name: kind, type: BrandElementKind},
-    {name: text, type: String},
-    {name: source, type: Nat}
-  ]
+  fields: [{name: kind, type: BrandElementKind}, {name: text, type: String}, {name: source, type: Nat}]
 }
 
 structure{
@@ -135,32 +119,21 @@ structure{
   name: UserGroup,
   type_parameters: [],
   parameters: [],
-  fields: [
-    {name: stakeholder, type: Foundation.Arch::Stakeholder},
-    {name: characteristics, type: String}
-  ]
+  fields: [{name: stakeholder, type: Foundation.Arch::Stakeholder}, {name: characteristics, type: String}]
 }
 
 structure{
   name: Goal,
   type_parameters: [],
   parameters: [],
-  fields: [
-    {name: user, type: Nat},
-    {name: journey, type: Foundation.Arch::Journey},
-    {name: outcome, type: String}
-  ]
+  fields: [{name: user, type: Nat}, {name: journey, type: Foundation.Arch::Journey}, {name: outcome, type: String}]
 }
 
 structure{
   name: Task,
   type_parameters: [],
   parameters: [],
-  fields: [
-    {name: goal, type: Nat},
-    {name: order, type: Nat},
-    {name: feature, type: Foundation.Arch::Feature}
-  ]
+  fields: [{name: goal, type: Nat}, {name: order, type: Nat}, {name: feature, type: Foundation.Arch::Feature}]
 }
 
 structure{
@@ -277,7 +250,9 @@ definition{
   name: named,
   parameters: [items : (List String)],
   result: Bool,
-  body: (match items | List.nil => false | List.cons head rest => true)
+  body: (match items
+    | List.nil => false
+    | List.cons head rest => true)
 }
 
 definition{
@@ -299,5 +274,6 @@ definition{
     | List.cons head rest => (((project head goal) <? goals) && (measuresOfGoals rest goals))),
   recursive_argument: items
 }
+
 \end{semanticmodule}
 \end{lexlean}

@@ -91,8 +91,9 @@ jobs:
             echo
             echo '```'
             sed -n '/^\[share\]/,/^$/p' crates/certified/manifest.toml
-            grep -c '^\[\[root\]\]' crates/certified/manifest.toml | sed 's/^/certified roots: /'
-            grep -c '^\[\[refused\]\]' crates/certified/manifest.toml | sed 's/^/refused roots: /' || true
+            # grep -c prints 0 and exits 1 when nothing matches.
+            echo "certified roots: $(grep -c '^\[\[root\]\]' crates/certified/manifest.toml || true)"
+            echo "refused roots: $(grep -c '^\[\[refused\]\]' crates/certified/manifest.toml || true)"
             echo '```'
           } >>"$GITHUB_STEP_SUMMARY"
       - name: Push the certified translator and dispatch the gate and the model

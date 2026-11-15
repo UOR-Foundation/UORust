@@ -4,10 +4,11 @@ over: [{"name": ..., "version": ...}, ...].
 
     python3 -I scripts/mir/top-crates.py REGISTERS [COUNT]
 
-COUNT is how many crates; when it is empty, one more than REGISTERS (the
-directory of the crates' registers) holds, so that each run takes the next
-crate of the ranking. The ranking is crates.io's own (`sort=downloads`), read
-page by page as the API links them, at its own page size.
+COUNT is how many crates (the workflow gives scripts/mir/ledger.py
+rank-count's, as many as its budget could hold); when it is empty, one more
+than REGISTERS (the directory of the crates' registers) holds. The ranking is
+crates.io's own (`sort=downloads`), read page by page as the API links them,
+at the largest page the API serves.
 """
 import json, os, sys, urllib.request
 
@@ -21,7 +22,8 @@ API = "https://crates.io/api/v1/crates"
 HEADERS = {"User-Agent": "uorust-register", "Accept": "application/json"}
 
 out = []
-query = "?sort=downloads"
+# crates.io's largest page (its API's `per_page` limit).
+query = "?sort=downloads&per_page=100"
 while query and len(out) < count:
     with urllib.request.urlopen(urllib.request.Request(API + query, headers=HEADERS)) as r:
         page = json.load(r)

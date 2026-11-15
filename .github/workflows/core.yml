@@ -106,6 +106,10 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      # When the job must end, which the bridge's step finishes within.
+      - name: Note the job's deadline
+        shell: bash
+        run: echo "DEADLINE=$(( $(date +%s) + 90 * 60 ))" >>"$GITHUB_ENV"
       - name: Fetch the built uorust
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -172,11 +176,13 @@ jobs:
       # verifies the project; each theorem it refutes is set aside as
       # pending, with the shape that stopped it, and the rest verify again.
       # Each translated row of the module's register file is stamped
-      # `bridged` or `pending`, which the merge counts.
+      # `bridged` or `pending`, which the merge counts. Its Lean processes
+      # share the runner's memory, and what it could not finish before the
+      # job's deadline is pending, so the bridge cannot stop the shard.
       - name: Bridge the module's translations to the evaluator through the locked SDK
         shell: bash
         run: |
-          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard" | tee -a "$GITHUB_STEP_SUMMARY"
+          scripts/ci/sdk.sh "target/bin/uorust bridge --project target/bridge --register target/shard --until $DEADLINE" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Keep the module's register file
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:

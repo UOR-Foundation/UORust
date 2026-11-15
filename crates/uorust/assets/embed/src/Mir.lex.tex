@@ -306,6 +306,7 @@ inductive{
     {name: constant, fields: [String, (List Generic)]},
     {name: transmute, fields: [Generic, Generic]},
     {name: writeBytes, fields: [Generic]},
+    {name: rawEq, fields: [Generic]},
     {name: instance, fields: [String, (List Generic)]},
     {name: sizeOf, fields: [Generic]},
     {name: convert, fields: [Ty, Ty]},
@@ -502,7 +503,14 @@ definition{
   name: signedEqual,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (((project a magnitude) =? (project b magnitude)) && ((sameBool (project a negative) (project b negative)) || ((project a magnitude) =? 0)))
+  body: (((sameBool (project a negative) (project b negative)) || ((project a magnitude) =? 0)) && ((project a magnitude) =? (project b magnitude)))
+}
+
+definition{
+  name: signedAtMost,
+  parameters: [a : Signed, b : Signed],
+  result: Bool,
+  body: (if (project a negative) then (if (project b negative) then ((project b magnitude) <=? (project a magnitude)) else true) else (if (project b negative) then (((project a magnitude) =? 0) && ((project b magnitude) =? 0)) else ((project a magnitude) <=? (project b magnitude))))
 }
 
 definition{
@@ -634,9 +642,9 @@ definition{
     | BinOp.shrUnchecked => (ctor Evaluated.stop (ctor Outcome.ub "an arithmetic operator on values that are not integers"))
     | BinOp.eq => (boolValue (signedEqual a b))
     | BinOp.lt => (boolValue (signedLess a b))
-    | BinOp.le => (boolValue (not (signedLess b a)))
+    | BinOp.le => (boolValue (signedAtMost a b))
     | BinOp.ne => (boolValue (not (signedEqual a b)))
-    | BinOp.ge => (boolValue (not (signedLess a b)))
+    | BinOp.ge => (boolValue (signedAtMost b a))
     | BinOp.gt => (boolValue (signedLess b a))
     | BinOp.cmp => (ctor Evaluated.found (orderingOf a b))
     | BinOp.offset => (ctor Evaluated.stop (ctor Outcome.undefined "BinOp::Offset")))
@@ -742,7 +750,7 @@ definition{
   result: Evaluated,
   body: (match a
     | Value.int bits signed x => (match b
-      | Value.int bitsB signedB y => (evalArithmetic op bits signed x (wrapBits bits y) (signedOf bitsB signedB y))
+      | Value.int bitsB signedB y => (evalArithmetic op bits signed x (if (bits =? bitsB) then y else (wrapBits bits y)) (signedOf bitsB signedB y))
       | Value.boolean q => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
       | Value.character q => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
       | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
@@ -2317,16 +2325,72 @@ definition{
 }
 
 definition{
+  name: compareRuns,
+  parameters: [left : (List Value), right : (List Value)],
+  result: (Option Signed),
+  body: (match left
+    | List.nil => (ctor Option.some [Signed] (record Signed {negative := false, magnitude := 0}))
+    | List.cons x xs => (match right
+      | List.nil => (ctor Option.some [Signed] (record Signed {negative := false, magnitude := 0}))
+      | List.cons y ys => (match (scalarOf x)
+        | Option.none => (ctor Option.none [Signed])
+        | Option.some a => (match (scalarOf y)
+          | Option.none => (ctor Option.none [Signed])
+          | Option.some b => (if ((project a magnitude) <? (project b magnitude)) then (ctor Option.some [Signed] (record Signed {negative := true, magnitude := 1})) else (if ((project b magnitude) <? (project a magnitude)) then (ctor Option.some [Signed] (record Signed {negative := false, magnitude := 1})) else (compareRuns xs ys))))))),
+  recursive_argument: left
+}
+
+definition{
+  name: compareBytes,
+  parameters: [frames : (List Frame), values : (List Value), destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "a compare_bytes of no pointer")
+    | List.cons left rest => (match rest
+      | List.nil => (ctor Outcome.ub "a compare_bytes of one pointer")
+      | List.cons right more => (match more
+        | List.nil => (ctor Outcome.ub "a compare_bytes of no count")
+        | List.cons count others => (match (scalarOf count)
+          | Option.none => (ctor Outcome.ub "a compare_bytes of a count that is not an integer")
+          | Option.some n => (if ((project n magnitude) =? 0) then (finishCall frames destination target (ctor Value.int 32 true 0)) else (match (placeOfPointer left)
+            | Option.none => (ctor Outcome.ub "a compare_bytes of a value that is not a pointer to a place")
+            | Option.some a => (match (placeOfPointer right)
+              | Option.none => (ctor Outcome.ub "a compare_bytes of a value that is not a pointer to a place")
+              | Option.some b => (match (readRun frames a (project n magnitude))
+                | Option.none => (ctor Outcome.ub "a compare_bytes past the bytes its pointer reaches")
+                | Option.some xs => (match (readRun frames b (project n magnitude))
+                  | Option.none => (ctor Outcome.ub "a compare_bytes past the bytes its pointer reaches")
+                  | Option.some ys => (match (compareRuns xs ys)
+                    | Option.none => (ctor Outcome.ub "a compare_bytes of bytes that are not initialized integers")
+                    | Option.some order => (finishCall frames destination target (ctor Value.int 32 true (reprOf 32 order)))))))))))))
+}
+
+definition{
+  name: pointerOffset,
+  parameters: [program : Program, frames : (List Frame), values : (List Value), unsigned : Bool, destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "a ptr_offset_from of no pointer")
+    | List.cons later rest => (match rest
+      | List.nil => (ctor Outcome.ub "a ptr_offset_from of no base")
+      | List.cons earlier more => (match (placeOfPointer later)
+        | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
+        | Option.some a => (match (placeOfPointer earlier)
+          | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
+          | Option.some b => (if (((project a frame) =? (project b frame)) && (((project a base) =? (project b base)) && (sameSteps (leadingSteps (project a steps)) (leadingSteps (project b steps))))) then (let distance : Signed := (if ((finalStep (project b steps)) <=? (finalStep (project a steps))) then (record Signed {negative := false, magnitude := (prim subtract (finalStep (project a steps)) (finalStep (project b steps)) : Nat)}) else (record Signed {negative := true, magnitude := (prim subtract (finalStep (project b steps)) (finalStep (project a steps)) : Nat)})); (if (unsigned && (project distance negative)) then (ctor Outcome.ub "a ptr_offset_from_unsigned of a pointer before its base") else (finishCall frames destination target (ctor Value.int (project program pointerWidth) (not unsigned) (reprOf (project program pointerWidth) distance))))) else (ctor Outcome.undefined "a ptr_offset_from of pointers the evaluator does not place in one array"))))))
+}
+
+definition{
   name: evalIntrinsic,
   parameters: [program : Program, frames : (List Frame), name : String, args : (List Operand), destination : Place, target : (Option Nat)],
   result: Outcome,
   body: (if (prim equal name "unreachable" : Bool) then (ctor Outcome.ub "an unreachable intrinsic reached") else (if (prim equal name "abort" : Bool) then (ctor Outcome.aborted) else (match (evalOperands program frames args)
     | EvaluatedList.stop outcome => outcome
-    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
+    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "compare_bytes" : Bool) then (compareBytes frames values destination target) else (if (prim equal name "ptr_offset_from" : Bool) then (pointerOffset program frames values false destination target) else (if (prim equal name "ptr_offset_from_unsigned" : Bool) then (pointerOffset program frames values true destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
       | Option.none => (ctor Outcome.unlinked name)
       | Option.some result => (match result
         | Evaluated.stop outcome => outcome
-        | Evaluated.found value => (finishCall frames destination target value)))))))))))
+        | Evaluated.found value => (finishCall frames destination target value))))))))))))))
 }
 
 definition{
@@ -2956,6 +3020,54 @@ definition{
 }
 
 definition{
+  name: sameBytes,
+  parameters: [left : (List Byte), right : (List Byte)],
+  result: (Option Bool),
+  body: (match left
+    | List.nil => (match right | List.nil => (ctor Option.some [Bool] true) | List.cons y ys => (ctor Option.some [Bool] false))
+    | List.cons x xs => (match right
+      | List.nil => (ctor Option.some [Bool] false)
+      | List.cons y ys => (match x
+        | Byte.init a => (match y
+          | Byte.init b => (match (sameBytes xs ys)
+            | Option.none => (ctor Option.none [Bool])
+            | Option.some rest => (ctor Option.some [Bool] ((a =? b) && rest)))
+          | Byte.fragment v i => (ctor Option.none [Bool])
+          | Byte.uninit => (ctor Option.none [Bool]))
+        | Byte.fragment v i => (ctor Option.none [Bool])
+        | Byte.uninit => (ctor Option.none [Bool])))),
+  recursive_argument: left
+}
+
+definition{
+  name: encodeValue,
+  parameters: [fuel : Nat, big : Bool, layout : Layout, value : Value],
+  result: Encoded,
+  body: (encodeWork fuel big (cons (record Piece {offset := 0, layout := layout, value := value}) (nil Piece)) (uninitBytes (layoutSize layout)))
+}
+
+definition{
+  name: rawEqual,
+  parameters: [fuel : Nat, big : Bool, frames : (List Frame), layout : Layout, values : (List Value), destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "a raw_eq of no reference")
+    | List.cons left rest => (match rest
+      | List.nil => (ctor Outcome.ub "a raw_eq of one reference")
+      | List.cons right more => (match (pointeeOf frames left)
+        | Option.none => (ctor Outcome.ub "a raw_eq of a value that is not a reference to a value")
+        | Option.some a => (match (pointeeOf frames right)
+          | Option.none => (ctor Outcome.ub "a raw_eq of a value that is not a reference to a value")
+          | Option.some b => (match (encodeValue fuel big layout a)
+            | Encoded.stop outcome => outcome
+            | Encoded.found xs => (match (encodeValue fuel big layout b)
+              | Encoded.stop outcome => outcome
+              | Encoded.found ys => (match (sameBytes xs ys)
+                | Option.none => (ctor Outcome.ub "a raw_eq of bytes that are uninitialized or a pointer's")
+                | Option.some same => (finishCall frames destination target (ctor Value.boolean same)))))))))
+}
+
+definition{
   name: writeRun,
   parameters: [frames : (List Frame), loc : Location, value : Value, count : Nat],
   result: (Option (List Frame)),
@@ -3108,6 +3220,11 @@ definition{
         | List.cons value others => (match (evalUnchecked source target2 value)
           | Evaluated.stop outcome => outcome
           | Evaluated.found result => (finishCall frames destination target result))))
+    | Callee.rawEq generic => (match (genericLayout frames generic)
+      | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
+      | Option.some layout => (match (evalOperands program frames args)
+        | EvaluatedList.stop outcome => outcome
+        | EvaluatedList.found values => (rawEqual fuel (project program bigEndian) frames layout values destination target)))
     | Callee.writeBytes generic => (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
       | Option.some element => (match (evalOperands program frames args)

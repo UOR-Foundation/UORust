@@ -957,8 +957,8 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
         dumps,
     )?);
     let mut next: Vec<(Ask, Vec<String>, String)> = wanted.iter().map(|t| ask_type(t)).collect();
-    // For a field asked of a type core declares, its declaration's module
-    // file in the copy of core.
+    // For a field asked of a type of another crate, the module of this one
+    // of the same path.
     let mut declared_in: BTreeMap<Ask, PathBuf> = BTreeMap::new();
     while !next.is_empty() {
         // A text that is no type's (a parse error stops the whole check)
@@ -978,8 +978,8 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             let mut modules = named_modules(&t);
             modules.sort_by_key(|m| std::cmp::Reverse(m.len()));
             let mut others: Vec<PathBuf> = Vec::new();
-            // A field's own declaration's module in core, whose names its
-            // type is written by (`CStr`'s `[c_char]`).
+            // A field of a type of another crate: the module of this one
+            // that re-exports its own (`CStr`'s `[c_char]` in `std::ffi`).
             if let Some(f) = declared_in.get(&a).filter(|f| **f != file) {
                 others.push(f.clone());
             }
@@ -1020,9 +1020,15 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
                 }
                 std::fs::write(f, body).map_err(|e| io(f, e))?;
             }
+            // The check builds in the directory it names: a build or target
+            // directory the caller's environment sets (the hooks' shared
+            // ones) would have cargo reuse a build and print nothing.
             let output = std::process::Command::new("sh")
                 .arg("-c")
                 .arg(check)
+                .env_remove("CARGO_BUILD_BUILD_DIR")
+                .env_remove("CARGO_BUILD_TARGET_DIR")
+                .env_remove("CARGO_TARGET_DIR")
                 .output()
                 .map_err(|e| io(Path::new(check), e))?;
             let stderr = String::from_utf8_lossy(&output.stderr);
@@ -1139,16 +1145,24 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             if let Some(l) = kept.layouts.get_mut(&p) {
                 l.fields = variants.iter().map(|fs| vec![None; fs.len()]).collect();
             }
-            let segments = crate::mir::parse::split_path(&decl.path);
-            let own = module_file(
-                &copy.join("core").join("src"),
-                &segments[..segments.len().saturating_sub(1)],
-            );
+            // A type of a crate the dumps' crate builds on, printed by its
+            // path there (`core::ffi::CStr`), is homed at the crate's root,
+            // where the names its fields are written by are not in scope:
+            // the module of the dumps' crate of that path, which re-exports
+            // the other crate's (`std::ffi` of `core::ffi`), is asked next.
+            let (head, _) = crate::embed::generic_parts(&p);
+            let segments = crate::mir::parse::split_path(head);
+            let mirror = match segments.as_slice() {
+                [first, module @ .., _] if EXTERN.contains(first) && !module.is_empty() => {
+                    Some(module_file(&src, module))
+                }
+                _ => None,
+            };
             for (v, fs) in variants.iter().enumerate() {
                 for (f, t) in fs.iter().enumerate() {
                     let text = field_text(t, &bound, &assoc);
-                    if decl.params.is_empty() {
-                        declared_in.insert(Ask::Field(p.clone(), v, f), own.clone());
+                    if let Some(m) = &mirror {
+                        declared_in.insert(Ask::Field(p.clone(), v, f), m.clone());
                     }
                     next.push((Ask::Field(p.clone(), v, f), home.clone(), text));
                 }
