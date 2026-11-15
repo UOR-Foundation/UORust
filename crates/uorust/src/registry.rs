@@ -475,7 +475,7 @@ fn run_harness(
     copy_tree(dir, &copy)?;
     let copy = std::fs::canonicalize(&copy).map_err(|e| tool("harness", e))?;
     let home = std::fs::canonicalize(harness).map_err(|e| tool("harness", e))?;
-    let src = copy.join("src");
+    let lib = copy.join(crate::layouts::library_file(dir)?);
     let target = harness.join("target");
     let mut pristine: BTreeMap<PathBuf, String> = BTreeMap::new();
     let mut live: BTreeSet<usize> = wrappers.iter().map(|w| w.sample).collect();
@@ -504,7 +504,7 @@ fn run_harness(
             let module: Vec<&str> = w.module.iter().map(String::as_str).collect();
             let home = match &w.file {
                 Some(f) => copy.join(f),
-                None => crate::layouts::module_file(&src, &module),
+                None => crate::layouts::module_file(&lib, &module),
             };
             by_file.entry(home).or_default().push(w);
         }

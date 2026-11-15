@@ -636,9 +636,93 @@ fn source(ty: &str, krate: &str) -> String {
     out
 }
 
-/// The file of the module `module` (a path of `src`'s modules), or of the
-/// nearest module above it that has one.
-pub(crate) fn module_file(src: &Path, module: &[&str]) -> PathBuf {
+/// The root file of the library of the package at `package`, from the
+/// package: its lib target's `src_path`, as `cargo metadata` reads the
+/// manifest (which may name it, fnv's `lib.rs`). A directory of no
+/// manifest is no package, and its root is cargo's default, `src/lib.rs`.
+pub(crate) fn library_file(package: &Path) -> Result<PathBuf, UorustError> {
+    static READ: std::sync::Mutex<BTreeMap<PathBuf, PathBuf>> =
+        std::sync::Mutex::new(BTreeMap::new());
+    let manifest = package.join("Cargo.toml");
+    if !manifest.is_file() {
+        return Ok(PathBuf::from("src").join("lib.rs"));
+    }
+    let tool = |reason: String| {
+        UorustError::Tool(format!(
+            "cargo metadata of {}: {reason}",
+            manifest.display()
+        ))
+    };
+    let at = std::fs::canonicalize(&manifest).map_err(|e| tool(e.to_string()))?;
+    if let Some(found) = READ.lock().ok().and_then(|r| r.get(&at).cloned()) {
+        return Ok(found);
+    }
+    let out = std::process::Command::new("cargo")
+        .args([
+            "metadata",
+            "-q",
+            "--no-deps",
+            "--offline",
+            "--format-version",
+            "1",
+        ])
+        .arg("--manifest-path")
+        .arg(&at)
+        .current_dir(package)
+        // The standard library's workspace sets nightly features.
+        .env("RUSTC_BOOTSTRAP", "1")
+        .output()
+        .map_err(|e| tool(e.to_string()))?;
+    if !out.status.success() {
+        return Err(tool(
+            String::from_utf8_lossy(&out.stderr).trim().to_string(),
+        ));
+    }
+    let meta: serde_json::Value =
+        serde_json::from_slice(&out.stdout).map_err(|e| tool(e.to_string()))?;
+    let library = ["lib", "rlib", "dylib", "proc-macro"];
+    let src = meta
+        .get("packages")
+        .and_then(|p| p.as_array())
+        .into_iter()
+        .flatten()
+        .filter(|p| {
+            p.get("manifest_path")
+                .and_then(|m| m.as_str())
+                .and_then(|m| std::fs::canonicalize(m).ok())
+                .is_some_and(|m| m == at)
+        })
+        .flat_map(|p| {
+            p.get("targets")
+                .and_then(|t| t.as_array())
+                .into_iter()
+                .flatten()
+        })
+        .find(|t| {
+            t.get("kind").and_then(|k| k.as_array()).is_some_and(|k| {
+                k.iter()
+                    .any(|k| k.as_str().is_some_and(|k| library.contains(&k)))
+            })
+        })
+        .and_then(|t| t.get("src_path")?.as_str().map(PathBuf::from))
+        .ok_or_else(|| tool("no library target".into()))?;
+    let root = at.parent().unwrap_or(&at).to_path_buf();
+    let src = std::fs::canonicalize(&src).unwrap_or(src);
+    let found = src
+        .strip_prefix(&root)
+        .map(Path::to_path_buf)
+        .map_err(|_| tool(format!("a library outside the package, {}", src.display())))?;
+    if let Ok(mut r) = READ.lock() {
+        r.insert(at, found.clone());
+    }
+    Ok(found)
+}
+
+/// The file of the module `module` (a path of the modules of the crate
+/// whose root file is `lib`), or of the nearest module above it that has
+/// one: a crate's root holds its modules beside it, as a `mod.rs` does.
+pub(crate) fn module_file(lib: &Path, module: &[&str]) -> PathBuf {
+    let src = lib.parent().unwrap_or(lib);
     for n in (1..=module.len()).rev() {
         let dir: PathBuf = module[..n].iter().collect();
         for f in [
@@ -650,7 +734,7 @@ pub(crate) fn module_file(src: &Path, module: &[&str]) -> PathBuf {
             }
         }
     }
-    src.join("lib.rs")
+    lib.to_path_buf()
 }
 
 /// The types of the dumps' aggregates: every local's, every constant's
@@ -960,7 +1044,8 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
     let copy = &std::fs::canonicalize(copy).map_err(|e| io(copy, e))?;
     let decls = crate::mir::core::core_decls(copy.parent().unwrap_or(copy));
     let structs = crate::embed::structs(&decls);
-    let src = copy.join(krate).join("src");
+    let lib = copy.join(krate).join(library_file(&copy.join(krate))?);
+    let src = lib.parent().unwrap_or(&lib).to_path_buf();
     let assoc = associated(&src);
     // A trimmed path (a constant's type prints so) resolves to the one
     // declaration of that name.
@@ -1023,7 +1108,7 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
                 continue;
             }
             let refs: Vec<&str> = home.iter().map(String::as_str).collect();
-            let file = module_file(&src, &refs);
+            let file = module_file(&lib, &refs);
             let mut modules = named_modules(&t);
             modules.sort_by_key(|m| std::cmp::Reverse(m.len()));
             let mut others: Vec<PathBuf> = Vec::new();
@@ -1034,7 +1119,7 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             }
             for module in modules {
                 let refs: Vec<&str> = module.iter().map(String::as_str).collect();
-                let f = module_file(&src, &refs);
+                let f = module_file(&lib, &refs);
                 if f != file && !others.contains(&f) {
                     others.push(f);
                 }
@@ -1203,7 +1288,7 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
             let segments = crate::mir::parse::split_path(head);
             let mirror = match segments.as_slice() {
                 [first, module @ .., _] if EXTERN.contains(first) && !module.is_empty() => {
-                    Some(module_file(&src, module))
+                    Some(module_file(&lib, module))
                 }
                 _ => None,
             };
@@ -1241,6 +1326,28 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A manifest that names its library's root at `lib.rs`, as fnv's
+    /// does, is read so, and a module beside it is found there.
+    #[test]
+    fn a_librarys_root_is_the_one_its_manifest_names() {
+        let dir = std::env::temp_dir().join(format!("uorust-lib-path-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"rooted\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"lib.rs\"\n\n[workspace]\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("lib.rs"), "mod inner;\n").unwrap();
+        std::fs::write(dir.join("inner.rs"), "").unwrap();
+        let lib = library_file(&dir).unwrap();
+        assert_eq!(lib, PathBuf::from("lib.rs"));
+        let root = dir.join(&lib);
+        assert_eq!(module_file(&root, &["inner"]), dir.join("inner.rs"));
+        assert_eq!(module_file(&root, &["elsewhere"]), root);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     #[test]
     fn a_field_of_another_crate_is_read_in_its_printed_module() {
