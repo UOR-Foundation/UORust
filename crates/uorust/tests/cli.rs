@@ -337,9 +337,16 @@ fn the_cli_refuses_a_bundle_it_cannot_export_or_take_in() {
         out.as_str(),
         "--kept",
         kept.as_str(),
+        // No export before this one: a manifest that does not exist reads
+        // as empty.
+        "--prior",
+        path("no-prior-manifest.toml").as_str(),
     ]);
     assert!(!refused.status.success());
-    assert!(String::from_utf8_lossy(&refused.stderr).contains("no rust-std descriptor"));
+    assert!(
+        String::from_utf8_lossy(&refused.stderr).contains("no rust-std descriptor"),
+        "{refused:?}"
+    );
     assert!(!tmp.join("production").exists());
 
     std::fs::create_dir_all(&kept).expect("kept");
@@ -387,4 +394,85 @@ fn the_cli_refuses_an_embedding_without_a_target_ue_19() {
             || String::from_utf8_lossy(&run.stderr).contains("target.toml")
     );
     let _ = std::fs::remove_dir_all(&out);
+}
+
+/// `bridge` refuses a project `embed --bridge` did not write, and `carry`
+/// keeps a row's bridge stamps on a census taken again only while the row
+/// is the one they were measured on (UE-19).
+#[test]
+fn the_bridge_refuses_an_unwritten_project_and_carries_only_its_own_rows_ue_19() {
+    let tmp = std::env::temp_dir().join(format!("uorust-cli-bridge-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    let (project, from, to) = (tmp.join("project"), tmp.join("from"), tmp.join("to"));
+    for d in [&project, &from, &to] {
+        std::fs::create_dir_all(d).expect("dir");
+    }
+    let refused = uorust(&["bridge", "--project", project.to_str().expect("utf-8")]);
+    assert!(!refused.status.success(), "a project without bridge.json");
+    assert!(uorust::bridge::verify(&project, None, None).is_err());
+    let row = |k: &str, term: &str, stamp: &str| {
+        format!("[[fn]]\npath = \"core::{k}\"\nkappa = \"{k}\"\nembedded = \"{term}\"\nstatus = \"translated\"\n{stamp}digest = \"d\"\n\n")
+    };
+    let proved = "bridged = \"proved\"\n";
+    std::fs::write(
+        from.join("m.toml"),
+        row("a", "t", proved) + &row("b", "t", proved),
+    )
+    .expect("measured");
+    std::fs::write(to.join("m.toml"), row("a", "t", "") + &row("b", "u", "")).expect("census");
+    let carried = uorust(&[
+        "carry",
+        "--from",
+        from.to_str().expect("utf-8"),
+        "--register",
+        to.to_str().expect("utf-8"),
+        "--measured",
+        "c0",
+    ]);
+    assert!(carried.status.success(), "{carried:?}");
+    assert!(String::from_utf8_lossy(&carried.stdout)
+        .contains("1 bridge stamps carried from c0, 1 rows"));
+    let text = std::fs::read_to_string(to.join("m.toml")).expect("carried");
+    assert!(text.contains("bridged = \"proved\"\nmeasured = \"c0\""));
+    assert!(text.contains("pending = \"remeasure\""));
+    assert_eq!(
+        uorust::bridge::carry(&from, &to, "c1").expect("again"),
+        (1, 1)
+    );
+    let _ = std::fs::remove_dir_all(&tmp);
+}
+
+/// `layouts` over dumps that print no aggregate asks rustc for nothing and
+/// writes an empty layout file (UE-19).
+#[test]
+fn layouts_of_no_aggregate_ask_for_nothing_ue_19() {
+    let tmp = std::env::temp_dir().join(format!("uorust-cli-layouts-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    let (mir, copy) = (tmp.join("mir"), tmp.join("library"));
+    std::fs::create_dir_all(&mir).expect("dumps");
+    std::fs::write(
+        mir.join("target.toml"),
+        "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+    )
+    .expect("target");
+    std::fs::create_dir_all(copy.join("core/src")).expect("copy");
+    std::fs::write(copy.join("core/src/lib.rs"), "").expect("lib");
+    let out = uorust(&[
+        "layouts",
+        "--crate",
+        "core",
+        "--mir",
+        mir.to_str().expect("utf-8"),
+        "--copy",
+        copy.to_str().expect("utf-8"),
+        "--check",
+        "true",
+    ]);
+    assert!(out.status.success(), "{out:?}");
+    assert!(String::from_utf8_lossy(&out.stderr).contains("layouts: 0 types laid out"));
+    assert_eq!(
+        uorust::layouts::run("core", &mir, &copy, "true").expect("again"),
+        0
+    );
+    let _ = std::fs::remove_dir_all(&tmp);
 }

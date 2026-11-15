@@ -1424,7 +1424,15 @@ fn library_shards_read_their_sources_and_merge_only_whole() {
             .expect("refusal");
         assert!(merge[refuse..].contains("needs.shard.result != 'success'"));
         assert!(refuse < merge.find("uorust merge").expect("merge step"));
-        assert!(refuse < merge.find("scripts/ci/push.sh").expect("push step"));
+        // The register lands through land-register.sh, which pushes it
+        // with push.sh: both after the refusal.
+        let land = merge
+            .find("scripts/ci/land-register.sh")
+            .expect("landing step");
+        assert!(refuse < land);
+        let script = std::fs::read_to_string(root.join("scripts/ci/land-register.sh"))
+            .expect("land-register.sh");
+        assert!(script.contains("scripts/ci/push.sh"));
     }
 }
 
