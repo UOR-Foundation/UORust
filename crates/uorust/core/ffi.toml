@@ -1,342 +1,420 @@
 [[fn]]
 path = "core::c"
 kappa = "c12b829c9b84e7fe2c2f4d8163b720c1f1444a645bb0073a2ceed5315fca1347"
+embedded = "a36a3acf0cf0a8c928ca4fe2d5a7d3864a0e5afab08f6b5ec060468b68ae6e6f"
 status = "residue"
 cause = "mir::Ty: va_list::_::Type"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:125:10: 125:15>::clone"
 kappa = "5b481c239b6f917a3cc321f92591b156844aa4fe9b901062be648a5c4a88e523"
+embedded = "d50c3d7c779ee25614db38b0b25a6986ca34e9301f3c75518aa60d19a6a9fa22"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreFfiCStrFromBytesWithNulError"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "b932c886dae08db31911c0654dbef6a355815112472c92be30a611b1b353dd04"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:125:23: 125:32>::eq"
 kappa = "27ba4ed0a6f65c2fa3dbd70df5d1202ccda9c3a0d1ed2b8c2a9a3a5ae9e39ddc"
+embedded = "01d976c0cb2712814e70a3a2b29953aa146e7b4cc0021b1609c65eb0bd2e4b6e"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:125:34: 125:36>::assert_fields_are_eq"
 kappa = "10611873b4e48aedebd4b66879f3a7f98b48c58d2b3f656533ea1e11d525dd81"
+embedded = "a62b968cf2ee2ff4a09b0b44bb6c8a1669e47206fdf196dacfd94e5dc290184d"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreFfiCStrFromBytesWithNulError"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "cfefd0b9dcc9b2ea215b6396789ece46e8f00e73c64aec390d3a3b3761138d49"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:125:38: 125:43>::fmt"
 kappa = "01c51a2012396b4cdfe2ed4447a1d8ff92dd40e5b7d18b53fd02f7dc47ad3443"
+embedded = "a9685650043bdfd63fab4cddd12ce669c2989c8803ac3f41d0d6a5d6c91ab203"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&usize as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:158:10: 158:15>::clone"
 kappa = "2cc408bc18fb433e5144c53979fd7a322327dcb11d2890e4a66d714c4e9bb843"
+embedded = "4a3a96ed141b30572396943169d70cdffe2ecacdaf1787c69dce00238133e05c"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreFfiCStrFromBytesUntilNulError"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0b19865d0269d404bcf188090da3c1517d155ae3681c85a67060f42873bec285"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:158:23: 158:32>::eq"
 kappa = "262007f11b5aff582d6168d1818a5db06ffec90e32b982ddd052bd7bbe68c726"
+embedded = "c7d9f313262fd1f81e16dbed0ab4421a94336a5e6c786c89c1287cf2c9030980"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreFfiCStrFromBytesUntilNulError"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "c870a1e902b5a36d239205adcb41f6c4861d47dcfc7f9b41ba3038ba53a07ede"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:158:34: 158:36>::assert_fields_are_eq"
 kappa = "c52e4b3477c3e470979612a5f16efe985f4fbb37a5799fa41fe83c4eea4b5405"
+embedded = "85c2f19d7fbcbbdd057543a828a3efe17999bc4716bb54806ca8659a9fcf70f1"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreFfiCStrFromBytesUntilNulError"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "414936e3c380470448e087fa314dc5aa0b042946118e308099510766b17fc788"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:158:38: 158:43>::fmt"
 kappa = "f12bfc07b0cb55b98068c72703f434297f14f5cd4864c0290ffdacbf16f30ce6"
+embedded = "9d864d91f15c9ffd5d541404db85071dad8a3a10ea4f2863e581afff5a16c890"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&() as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:180:1: 180:29>::default"
 kappa = "7775594d8e926447acbafa2a4c743ba350747d5e2c6ba1e40b0bc7c2ef66e962"
+embedded = "78391575a9618466aa7ac0b4640086fae24763242f09914f2008f3265a308dcb"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:780:10: 780:15>::clone"
 kappa = "e1777c42aba66a15e3a912661e8557ededc4723344f451984967e402e77409e3"
+embedded = "e29e5803cc94b8b87cc6ece71b21b29f264b2931f35ca0b8ecaf9010d7c929e2"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:780:17: 780:22>::fmt"
 kappa = "91a4c9b6632abfa1c09e3fac19849aee119cd53caac70029b697a69f992a3665"
+embedded = "79cf6d8ae3c8622295f18d2a520b41438c74dcf7b7866f05a590b4cebf0ef5c2"
 status = "residue"
 cause = "mir::Ty: c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:91:10: 91:19>::eq"
 kappa = "f2145afaff9a6325b8432003672a46ebdf2bea772d843f67a1bbbd346cf1ca65"
+embedded = "75fdaf86357f3ddc5626dd94ef6670f339074a2d0645b2c678ebc5057f7813bb"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:91:21: 91:23>::assert_fields_are_eq"
 kappa = "f6c1cc85310bc425aa1e07d7e558a3a9abc2559ea3dc9c227def0953380ce91e"
+embedded = "9a99e66f9e20d0a15a8102430993f6642898b3357d38ac3223902a4d6c888375"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::<impl at library/core/src/ffi/c_str.rs:91:25: 91:29>::hash"
 kappa = "cbe6ce72d4c17094eae9dd9c3ee72b467861902b6caac5ea25e1cfa22d6b1977"
+embedded = "dc1f681b2620d76b7021466481c080a51061438370e4dfe97dabe67ef5a4b781"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::Bytes::count"
 kappa = "e408289d24a6b12d97dcc3450d7ba18ceb390a87f09c0a47b7983ef4dcc06d73"
+embedded = "033836681e9f2d18ea8eb656f5cc333c7cc29d6a504bda60f85130759522e4fa"
 status = "residue"
 cause = "mir::Ty: c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::Bytes::is_empty"
 kappa = "bcf6b56c25569b525678d0ae19a268585fdbe47c2e97ff73b251f310d8802605"
+embedded = "8bf3549d6490d8515641ee7d5f4f1e8e00d6feeb6018cbe33fb72b79fba279c8"
 status = "residue"
 cause = "mir::Ty: c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::Bytes::new"
 kappa = "c679febccce7183e99f95c3e431a729b7ae8e4ee4b08d5ca963b1ee2a9bc88f0"
+embedded = "49cd8f5326434959fcdc14142312b9e8fa6be2efa019c9859cc7195822dc5742"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::Bytes::next"
 kappa = "2a8c6f7379fb08e4fd9ef814cca290024cea5c23ead5c4ee70e60cf53706c799"
+embedded = "5deb1db848f89b3cca1c5605a134cec21a8958f487dd3029646bcddf558a40a2"
 status = "residue"
 cause = "mir::Ty: c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::Bytes::size_hint"
 kappa = "92bc997cb89ab7e28bc3f46345bb6e34cd66998eb37581f12eb5bca82ed55fb7"
+embedded = "9d57e6413866e844f463fe8b7c218cdf3649af74b04003ed14af32520ab76862"
 status = "residue"
 cause = "mir::Ty: c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::CStr::as_c_str"
 kappa = "75e082481b57a410be4c13f8d17b4cabfc679f30fd7507daef2c25f18887bee5"
+embedded = "e28497644774cacc9ef1e69de478d1f45725877ae328aa0db374837abe1eb7a8"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::as_non_null_ptr"
 kappa = "6b18bca57476dc405bd897965214fde4a5891568d98c7266b6b29026d923b3e6"
+embedded = "801039ea7684b216b4a17f8eb1dc7bdb23b30175afabac4d8935ac22b0e5dcaa"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::as_ptr"
 kappa = "a08df3fb552b7fc352ad156dc5e4a19ec79bda6d887056cee2de27fc4a0eb09f"
+embedded = "03466929301c48d57d3b3c79d39558ad6fafd3787956e793baa8f77ba0771562"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::as_ref"
 kappa = "28061d459a47481518324136a88e27900579382ff717d22c4fef89a9e68f58a4"
+embedded = "de0fa758a2c01f754e8379af1659e4be7e559fa2cf4ddf139b03eb8c0e670eb3"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::bytes"
 kappa = "48949a81662bc2c45b394c75f473aedae294a40cf44e783b0cea2b1eeec443e8"
+embedded = "1c0b298bad73d76236d8f2d2f4984dde70b5e674c56a3476402292334bb90417"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::Bytes<'_>"
 
 [[fn]]
 path = "core::c_str::CStr::cmp"
 kappa = "1f347adc6bfb301cb2e87723e874f9c4a0f7d55326d3a213aa7899ddee753fd0"
+embedded = "23653da2103f3a11f8adf344108f3588f9382883e95ed5fe977188064605ccee"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::count_bytes"
 kappa = "1d2972c5653bd1610c228faac0ea33687c5dbf9f14b714a68828dc7c1f7e95b9"
+embedded = "6b859f060d6ce1a23f4ac4d778e1619d88a081be12efafadff4f699f751ee30f"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::display"
 kappa = "dc760d2d7f9d3464c7a82ac619c94af7245c50342ad127ef1c29c9986202827d"
+embedded = "b04543502cb020d27344afcea9fbce383765f7c3617adce27761849ced8fabd1"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::eq"
 kappa = "40253e7ba9306cc4a9a01434b1e7c723f77b563166dacb183d6b731786cba562"
+embedded = "75312710a18c82040ff1e080e10765408360a633e65a062b287863333eee2672"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::fmt"
 kappa = "ccdcb8345f57497282318599289356e879a16edb84f8d2ebacd13529c7ebe9cc"
+embedded = "41a9ff4e675e3f3aa1dcda3cc89b36fb877ad543ee40b512bd1adf120f78278a"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_bytes_until_nul"
 kappa = "745d5b586c0bafd48338104d01d60f79bad101d86d87ced6bd6fd788710b8612"
+embedded = "4f194490f7d4dcbbef832ff3a73036d555c5a582f8ffa741c554440ad775e3a3"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_bytes_with_nul"
 kappa = "d0ce2b4d2fc36004fba20d165cc6b915cc6002fb182dec884e08993bcf99687f"
+embedded = "b5a1c442e76ee161b00aa016eca5eb29cedfdeec84f303142f0f1db95ccdc035"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_bytes_with_nul_unchecked"
 kappa = "45bfb69e87d0bc53029c1673514e0f30be6f121ab7978ceef3fdb62ec1b08ea7"
+embedded = "12e420909609f5b248138684fdd2b1d58dc575bb4ff791c0550a46ea240baf0d"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_bytes_with_nul_unchecked::compiletime"
 kappa = "0cf8bc27a09fc824580845990acd1236f2c3561f102d8c97bdaf4583948b612f"
+embedded = "c497cf5bcdcf7d4827afb2080530b1ebb868609ae7702caf80610633aa74bc78"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_bytes_with_nul_unchecked::runtime"
 kappa = "dc729faaea8ac0a64eb5ab63b06f1f52f0aba92c7a307d41c7f0325556643d30"
+embedded = "5eaf5680d56c1440da03c4b80cf6b52398d8a11d0d5e2cb356d9a63831226d60"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::from_ptr"
 kappa = "8b15159d94a6e0895e0f4b49042651f8d6202919e28407e0259ad273283d489d"
+embedded = "39ce9e90d9dafb28025820c1c328a09b84c6c02ff707f960fa71bb66a4fa5f23"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::index"
 kappa = "de02b5e1ef148dcad1b9e4727a0dd0c8bcca4bcca052704d0ce3a63cb02fcfa3"
+embedded = "a98588eb54b7e666700e8b151e1e9d9d15a2fccc8115100b2669342a76479f85"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::index#2"
 kappa = "ff2093d2ab929b36c00b9e873851b3e360267290d816504f3473e605ef98927f"
+embedded = "3e3281159afb8e5ad5d44da34081bc36d0ceeea2cb37c9448f3dd9dc6fadbab2"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::c_str::CStr::is_empty"
 kappa = "525b7dd3882f096bdbdc8299f3944d4f4701219f9ba0d64322cd8bc19c188d7a"
+embedded = "d67e55691230a5787d46d485fba14a5bad3cee7dfdf02c295b7506a894590b40"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::ne"
 kappa = "27e074f6ac42d69b723c61a8a3ffb720879fea0cb3c44e714ee7e01443917c40"
+embedded = "8f34a7d49572ca603e172c705cd36d5b8c759c349abeaa96016fd75b0d92d53b"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::partial_cmp"
 kappa = "4d956290d0c7e131ff7920d2934fa53e365de59d1cab94a992b14c0fd86a8990"
+embedded = "be0115d1e10cd1fd45208d2558199016ef71e61437d4ce68d5b680a223bd8df8"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::to_bytes"
 kappa = "e25de0edce53c85cb373ad45129d19bd752427c438f0b5cf9ef92bfacaa828fb"
+embedded = "bb696fb19f2aa10a0fc565dabc4b09b0f84dacc5f49e7192d9c09a266e6f83e7"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::to_bytes_with_nul"
 kappa = "fe79afd72a3b61137205e4bb04b5e211f54b8197b4584f107522177c40d7a320"
+embedded = "f8cff9026ef5cd54b06f2885537e7e2e9e16015f63b0e5fda4089c4d301c28cc"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::CStr::to_str"
 kappa = "c7d824bee168bbb102df113bf89d46c639de357395e181e48994ceb7d17926f3"
+embedded = "6369eb0e1571507db545dc0b992823252144a0f48573b9cf03430ed507142a86"
 status = "residue"
 cause = "mir::Ty: CStr"
 
 [[fn]]
 path = "core::c_str::FromBytesUntilNulError::fmt"
 kappa = "e249819e129f36fcaed2d877b65cfbdb36b00af49811bbc40bf27d8741c952bc"
+embedded = "1e7f357340d146205c3d43be2f6735d8b7b7194716c9a130699598f610e102c8"
 status = "translated"
-digest = "7aac3b2f23da9d81d5c9bf2e640c1b55ffbf739312c729e4919b0d6dbed06840"
+bridged = "pending"
+pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "b6551ad1ab0a10bbc3d5417d3b2ce4908a2c889e42295903b05bb6133b13cb5b"
 
 [[fn]]
 path = "core::c_str::FromBytesWithNulError::fmt"
 kappa = "ca95d34ab307950a4050dc4a4d80097233412c1e2afb44af49c6d3af2393ebde"
+embedded = "910d8923bfb98cc838a45c9d0e8ed6f7395d69ec80444d788a61aa4b75f56510"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&usize as fmt::Display>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::ffi::c_void::fmt"
 kappa = "56a3862697e302a089ebd8d4ac49c6cda8b44ed3a5235a915cbaf06a7d193313"
+embedded = "2d1d44fd601efa77000c9c31f315016eacd195ce02e2e33e0d6a5ae84c7d891f"
 status = "residue"
 cause = "mir::TerminatorKind::Call: fmt::builders::DebugStruct::finish: core's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
 
 [[fn]]
 path = "core::strlen"
 kappa = "c6592680373c27b8e6b9d654d633d0f854d775b23ab2ebb71e224489612c8fc6"
+embedded = "6439584a8bdf69ae0d0a541faf6ee5230606b87a5d81c6154cfca555d340f058"
 status = "residue"
 cause = "mir::TerminatorKind::Call: ffi::c_str::strlen::runtime: core's MIR stops at mir::TerminatorKind::Call: strlen::runtime::strlen"
 
 [[fn]]
 path = "core::strlen::compiletime"
 kappa = "7cdd9ce9ffa6b67e1a7b2f396dd863b56c66bad9cc6a8595bed17d4781d20ccf"
+embedded = "864cd05204b1a456a44623c8e45afcb0ba580c0320cde23349bc34db3475efd0"
 status = "residue"
-cause = "mir::TerminatorKind::Call: ptr::const_ptr::<impl at library/core/src/ptr/const_ptr.rs:7:1: 7:31>::add: core's MIR stops at mir::Memory: a value of Nat, which the memory holds no cells of"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
 
 [[fn]]
 path = "core::strlen::runtime"
 kappa = "6b44850964836bbd408347e15f5058e8de9ef56122ab27321873a2e5e308a7ea"
+embedded = "477f703feae1ce1da367cc082fbb74b91f133b730d5bba7ec00110882b127dac"
 status = "residue"
 cause = "mir::TerminatorKind::Call: strlen::runtime::strlen"
 
 [[fn]]
 path = "core::va_arg_safe_check"
 kappa = "ded976be1cf2b0506497b4d8dd07eced5f156e3003c6e1a20be9ac8eac91f653"
+embedded = "c0f45a6c89312b47635ad5edc48c9264fea65cf167565a4dc88ffa65b0a7ebc9"
 status = "translated"
+bridged = "pending"
+pending = "proof: straight"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "20c254da57beefe2b705380c0c407a621cb273b77d890939d5437fd9f3a2b847"
 
 [[fn]]
 path = "core::va_list::<impl at library/core/src/ffi/va_list.rs:123:18: 123:23>::fmt"
 kappa = "d1a47c7c68fe5464acef05ce1e42571b4ffd2a98f8ea5cd71c97645b0569ea42"
+embedded = "56f47bb9b82f245861ad6b24da54c593b40e6f5e82127a19f11f93eb48a2189f"
 status = "residue"
 cause = "mir::Ty: VaListInner"
 
 [[fn]]
 path = "core::va_list::<impl at library/core/src/ffi/va_list.rs:123:25: 123:30>::clone"
 kappa = "acc2aa16ca666a15ab02f245cd53262661689050292b232e3ec5a57f425e1901"
+embedded = "3f6a887be1eb0bf16e7ba349f5fab655d6938feeb9608cc4ca6fde26e2a3e4a2"
 status = "residue"
 cause = "mir::Ty: ffi::va_list::VaListInner"
 
 [[fn]]
 path = "core::va_list::VaList::clone"
 kappa = "cf9fd0e164384b499d315f59aef2e41209c9d6d8ec6a35768e3fd10c3f84c9c7"
+embedded = "f0f85b51a05d6a74d993bb159618db16b0b98cc96f143142b6cc51985d0c3a2b"
 status = "residue"
 cause = "mir::Ty: ffi::va_list::VaList<'_>"
 
 [[fn]]
 path = "core::va_list::VaList::drop"
 kappa = "4caa3c44aed8c94c6dc65209fe4eeb25b9ff2042e2288113d83fa054a7c27074"
+embedded = "2f65d5b06c180e0dd520a4b0ce202664c1c5d8ade5302b903c0b21de125604d2"
 status = "residue"
 cause = "mir::Ty: VaList<'_>"
 
 [[fn]]
 path = "core::va_list::VaList::duplicate"
 kappa = "4629c187a6cbbdfd73bac097040a9f23b52a2c3b862791df2ed5ba98040f8650"
+embedded = "620d7677dedb57692745b807014addbfdd598a962279e63340bd60e33f5afd50"
 status = "residue"
 cause = "mir::Ty: ffi::va_list::VaList<'_>"
 
 [[fn]]
 path = "core::va_list::VaList::fmt"
 kappa = "e37ea90d376d7b1fc583cc5c9e81425278889900bee4e289d1f588211c202a43"
+embedded = "46d98033816c26f28924f584bdb4a60ef08f4435e40b06bc24d618b7df3f5f8c"
 status = "residue"
 cause = "mir::Ty: VaList<'_>"
 
@@ -344,18 +422,24 @@ cause = "mir::Ty: VaList<'_>"
 path = "core::va_list::VaList::next_arg"
 kappa = "64dcfc3ed15cef34fb660f0317e1d673705d4db79e85cdfb78009f58cd232bf7"
 at = "T=u32"
+embedded = "791e178641ca6cb7a1dea59ad5f68cb5802a8f454255eb2a9f011527ef3743ed"
 status = "residue"
 cause = "mir::Ty: VaList<'_>"
 
 [[fn]]
 path = "core::va_list::_"
 kappa = "ebfe449f0de9fe149951ec82cdbf16745b037f09bd617e30b876a1086e1eb097"
+embedded = "d2f43f4c0cea9047acfca21811d499b5564e7a2e1aa21cf7d9d20a685c55b6eb"
 status = "residue"
 cause = "mir::Ty: ffi::va_list::_::Type"
 
 [[fn]]
 path = "core::va_list::_#2"
 kappa = "7f87cbddc7d21b7989649b1f8cd53ac53b3b7d949f7d57e999a53fd817530289"
+embedded = "7edf0b29ef98aab51ad113c537577fb40d552c19302865f9524d657eacce9d0a"
 status = "translated"
+bridged = "pending"
+pending = "closure: a callee not embedded"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "e6cd1e8c351f5c6940bf6d6618a52b13311867458828ddf4bcd5aecc04fb48e5"
 

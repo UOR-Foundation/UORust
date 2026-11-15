@@ -2,13 +2,17 @@
 path = "core::bool::bool::ok_or"
 kappa = "21e6bdfad85904a19225d50993597f35cea88c68771f609f6b271a80d883da05"
 at = "E=u32"
+embedded = "86a197afa30963f368cd18b6340c809efc13d4a3cde2a710345b7c23789f0059"
 status = "translated"
+bridged = "proved"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0ad9477a921c5dc15eb1af643f6e53d25424a33791503aabef955c04a7ef254c"
 
 [[fn]]
 path = "core::bool::bool::ok_or_else"
 kappa = "e20341a5a4099d3a455849bc675641fe262d67db1aa5ef425fe186f8d49cafa4"
 at = "E=u32, F=u32"
+embedded = "513eacfbb4691dc90515852e356c5a2f1927c6969fd7d69bbb9d764d3efa75f5"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
 
@@ -16,6 +20,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 do
 path = "core::bool::bool::then"
 kappa = "e425c1f7a6dc71e9a0b4e0c088e83df9486f85842f215c89c8f52f33e35b9196"
 at = "F=u32, T=u32"
+embedded = "d9372cc38af73a6fe21343ba7c6234a5efe2c5ccf009ad56230a24ad9f6ab561"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
 
@@ -23,6 +28,9 @@ cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 do
 path = "core::bool::bool::then_some"
 kappa = "8ffa9a2400205d5dd8879bd2a3e54da763447e4c8d02781f3422ac7b004401d4"
 at = "T=u32"
+embedded = "d6d2e5ecaf93c30eff4de685ad62d5382c77621adee59b8481d0a123c4751ad0"
 status = "translated"
+bridged = "proved"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "1e4faa4743d7d4cd526145864c4bd0d61e1e2e899262e93ed6fc506bf743e085"
 
