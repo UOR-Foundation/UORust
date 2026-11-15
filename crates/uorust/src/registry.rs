@@ -162,6 +162,10 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
             .arg("-Zdump-mir=ElaborateBoxDerefs")
             .arg(format!("-Zdump-mir-dir={}", mir.display()))
             .args(["-Coverflow-checks=on", "-Cdebug-assertions=off"])
+            // A lint the crate denies is a newer toolchain's opinion, not
+            // its build: cargo caps a registry crate's lints so when it is
+            // a dependency (try-lock's `#![deny(warnings)]`).
+            .arg("--cap-lints=allow")
             .current_dir(dir)
             // An inherited build directory would hold the crate built
             // already, and cargo would not run rustc to dump it again.
@@ -892,7 +896,7 @@ fn layouts(
     let quote = |p: &Path| format!("'{}'", p.display());
     let check = format!(
         "cd {} && RUSTC_BOOTSTRAP=1 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR={} \
-         RUSTFLAGS='-Ztrim-diagnostic-paths=no -Zcrate-attr=feature(rustc_attrs) -Coverflow-checks=on -Cdebug-assertions=off' \
+         RUSTFLAGS='-Ztrim-diagnostic-paths=no -Zcrate-attr=feature(rustc_attrs) -Coverflow-checks=on -Cdebug-assertions=off --cap-lints=allow' \
          cargo {toolchain} check -q --lib",
         quote(&own),
         quote(&target),
