@@ -1020,9 +1020,15 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
                 }
                 std::fs::write(f, body).map_err(|e| io(f, e))?;
             }
+            // The check builds in the directory it names: a build or target
+            // directory the caller's environment sets (the hooks' shared
+            // ones) would have cargo reuse a build and print nothing.
             let output = std::process::Command::new("sh")
                 .arg("-c")
                 .arg(check)
+                .env_remove("CARGO_BUILD_BUILD_DIR")
+                .env_remove("CARGO_BUILD_TARGET_DIR")
+                .env_remove("CARGO_TARGET_DIR")
                 .output()
                 .map_err(|e| io(Path::new(check), e))?;
             let stderr = String::from_utf8_lossy(&output.stderr);
