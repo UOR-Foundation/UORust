@@ -528,7 +528,7 @@ fn build_batch(
     }
 }
 
-/// The LexLean compiler's version, as a bundle's result records it.
+/// The LexLean compiler's version, as `lexlean --version` states it.
 fn compiler_version() -> Result<String, UorustError> {
     let run = std::process::Command::new("lexlean")
         .arg("--version")
@@ -1203,10 +1203,9 @@ pub(crate) fn sync(
             .map(|(_, _, r)| field(r, &["result_id"]))
             .collect::<Vec<_>>()
             .join(" "),
-        compiler: results
-            .first()
-            .map(|(_, _, r)| field(r, &["compiler", "version"]))
-            .unwrap_or_default(),
+        // As `lexlean --version` states it, which the next export compares
+        // its own against: a manifest of no bundle has it too.
+        compiler: compiler_version()?,
         roots: certified,
         share: share(register, &kappas, dumps),
     };
