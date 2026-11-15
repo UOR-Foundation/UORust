@@ -662,17 +662,16 @@ fn build_batch(
         return Ok((named, Some(Outcome::Late)));
     };
     if result.get("success").and_then(serde_json::Value::as_bool) == Some(true) {
-        let bundle = result
+        // The artifact's path is the project's, relative to `dir`, where
+        // lexlean runs.
+        let artifact = result
             .get("artifacts")
             .and_then(|a| a.as_array())
             .and_then(|a| a.first())
             .and_then(|a| a.as_str())
-            .map(|a| dir.join(a))
             .ok_or_else(|| UorustError::Tool("lexlean production build: no bundle".into()))?;
-        let replay = lexlean(
-            dir,
-            &["production", "verify-artifact", &bundle.to_string_lossy()],
-        )?;
+        let bundle = dir.join(artifact);
+        let replay = lexlean(dir, &["production", "verify-artifact", artifact])?;
         if replay.get("success").and_then(serde_json::Value::as_bool) != Some(true) {
             return Err(UorustError::Tool(format!(
                 "lexlean production verify-artifact: {}",

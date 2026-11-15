@@ -13,6 +13,14 @@ on:
         description: PrismPM commit to build prismpm from (the pinned SDK commit plus the fix).
         required: true
         default: 29b4c8b7d6467e3b9a98cce5c5fa88ddcc56bc1c
+      lexlean-repository:
+        description: The LexLean repository to build lexlean from, when lexlean-revision is given.
+        required: false
+        default: UOR-Foundation/LexLean
+      lexlean-revision:
+        description: LexLean commit to build lexlean from (the pinned lexlean plus a fix); empty keeps the SDK's own.
+        required: false
+        default: ''
       base-image:
         description: SDK candidate index the patched image extends.
         required: true
@@ -51,12 +59,31 @@ jobs:
           git -C prismpm checkout -q FETCH_HEAD
           cd prismpm
           cargo build --locked --release --package prismpm
+      - name: Build lexlean at the exact revision
+        if: inputs.lexlean-revision != ''
+        env:
+          REPOSITORY: ${{ inputs.lexlean-repository }}
+          REVISION: ${{ inputs.lexlean-revision }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ $REVISION =~ ^[0-9a-f]{40}$ && $REPOSITORY =~ ^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$ ]]
+          git init -q lexlean
+          git -C lexlean fetch -q --depth 1 "https://github.com/$REPOSITORY.git" "$REVISION"
+          git -C lexlean checkout -q FETCH_HEAD
+          cd lexlean
+          cargo build --locked --release --package lexlean
       - name: Assemble the patched layers
         env:
           BASE: ${{ inputs.base-image }}
           ARCH: ${{ matrix.arch }}
+          LEXLEAN: ${{ inputs.lexlean-revision }}
         shell: bash
-        run: python3 sdk-patch/assemble.py layer "$ARCH" prismpm/target/release/prismpm "$BASE" "out-$ARCH"
+        run: |
+          set -euo pipefail
+          binaries=prismpm=prismpm/target/release/prismpm
+          if [[ -n $LEXLEAN ]]; then binaries+=,lexlean=lexlean/target/release/lexlean; fi
+          python3 sdk-patch/assemble.py layer "$ARCH" "$binaries" "$BASE" "out-$ARCH"
       - name: Keep the layers for the publish job
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

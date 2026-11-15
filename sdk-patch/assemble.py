@@ -2,7 +2,8 @@
 """Publish a patched PrismPM SDK image without rebuilding the SDK.
 
 The image is the pinned SDK candidate's own layers plus two appended layers:
-  1. the patched `prismpm` binary and the SDK inventory that names its digest;
+  1. the patched `prismpm` binary (and, when given, a patched `lexlean`) and
+     the SDK inventory that names their digests;
   2. the terminal metadata layer (inventory.json, standards.lock) in exactly
      the form `prismpm lock update` reads (strict ustar, root, 0755/0444).
 Every base layer is mounted or copied by digest from the source repository,
@@ -131,23 +132,28 @@ def layer(arch, binary_path, base_ref, out):
         at += 512 + size + ((-size) % 512)
     file_template = next(h for h, n, _ in entries if n == INVENTORY)
     files = {n: d for _, n, d in entries}
-    binary = open(binary_path, "rb").read()
+    # `prismpm=PATH,lexlean=PATH`, or a bare PATH for prismpm alone.
+    binaries = [b.split("=", 1) if "=" in b else ["prismpm", b] for b in binary_path.split(",")]
     inventory = json.loads(files[INVENTORY])
-    binary_digest = sha(binary)
-    hits = 0
-    for artifact in inventory["artifacts"]:
-        if artifact["id"] == "prismpm":
-            artifact["digest"] = "sha256:" + binary_digest
-            hits += 1
-    for command in inventory["commands"]:
-        if command["command"] == "prismpm":
-            command["sha256"] = binary_digest
-            hits += 1
-    assert hits == 2, hits
+    installed = b""
+    for name, path in binaries:
+        binary = open(path, "rb").read()
+        binary_digest = sha(binary)
+        hits = 0
+        for artifact in inventory["artifacts"]:
+            if artifact["id"] == name:
+                artifact["digest"] = "sha256:" + binary_digest
+                hits += 1
+        for command in inventory["commands"]:
+            if command["command"] == name:
+                command["sha256"] = binary_digest
+                hits += 1
+        assert hits == 2, (name, hits)
+        installed += entry(file_template, f"usr/local/bin/{name}", 0o755, binary)
     inventory_bytes = canonical(inventory)
     inventory_sha = f"{sha(inventory_bytes)}  /{INVENTORY}\n".encode()
     # Layer 1: the binary and the installed inventory beside it.
-    tar1 = finish(entry(file_template, "usr/local/bin/prismpm", 0o755, binary)
+    tar1 = finish(installed
                   + entry(file_template, INVENTORY, 0o444, inventory_bytes)
                   + entry(file_template, "opt/prismpm/share/inventory.sha256", 0o444, inventory_sha))
     # Layer 2: the terminal metadata layer, the base one with the new inventory.
