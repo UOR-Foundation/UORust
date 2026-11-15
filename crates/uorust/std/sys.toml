@@ -3077,7 +3077,7 @@ cause = "mir::Ty: io::error::Error"
 [[fn]]
 path = "std::pal::unix::init"
 kappa = "25f7d2f239dfdf99d666db11f2c0e6f5fcc16e4421e082d3416916d551fb95e9"
-embedded = "1786c8ef1451c3a1a35101a1622c0bcf4927a6ac8f307a56e57a4c4aa0d0cf39"
+embedded = "2f069b5307b65944d8701ecb3092ed1db560b1d6162dcceb2cdd03a5379e2753"
 status = "residue"
 cause = "mir::TerminatorKind::Call: sys::pal::unix::init::sanitize_standard_fds: std's MIR stops at mir::AggregateKind::Closure: sanitize_standard_fds::{closure#0}: mir::TerminatorKind::Call: dup"
 
@@ -4592,8 +4592,7 @@ cause = "mir::Ty: sys::fs::unix::File"
 [[fn]]
 path = "std::sys::fs::unix::File::file_attr"
 kappa = "1118c3dd63ee5aad183ffea02792cc3ae3b5e00e8d77e8ded45880ef8a92e4bc"
-embedded = "087bd5722cd46bfbdf2e39609b98e64c6c7e7525e4e3ef6173f9e930f333a6f4"
-blocked = ["Operand::Constant of a constant the embedding does not read"]
+embedded = "36bd8069a2c881488f57bfef4b136b0b35b991988042efeecdbe6ba256c8d9e7"
 status = "residue"
 cause = "mir::Ty: sys::fs::unix::FileAttr"
 
