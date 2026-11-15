@@ -2064,7 +2064,7 @@ definition{
   body: (match mask
     | Value.int width signed bits => (match pointer
       | Value.int p q address => (ctor Evaluated.found (ctor Value.int p q (bitsAnd p address bits)))
-      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask that clears an address bit of a pointer the memory model places by its place")))
+      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "intrinsic ptr_mask: an address bit of a pointer the memory model places by its place")))
       | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
       | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
       | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
@@ -2463,7 +2463,7 @@ definition{
         | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
         | Option.some a => (match (placeOfPointer earlier)
           | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
-          | Option.some b => (if (((project a frame) =? (project b frame)) && (((project a base) =? (project b base)) && (sameSteps (leadingSteps (project a steps)) (leadingSteps (project b steps))))) then (let distance : Signed := (if ((finalStep (project b steps)) <=? (finalStep (project a steps))) then (record Signed {negative := false, magnitude := (prim subtract (finalStep (project a steps)) (finalStep (project b steps)) : Nat)}) else (record Signed {negative := true, magnitude := (prim subtract (finalStep (project b steps)) (finalStep (project a steps)) : Nat)})); (if (unsigned && (project distance negative)) then (ctor Outcome.ub "a ptr_offset_from_unsigned of a pointer before its base") else (finishCall frames destination target (ctor Value.int (project program pointerWidth) (not unsigned) (reprOf (project program pointerWidth) distance))))) else (ctor Outcome.undefined "a ptr_offset_from of pointers the evaluator does not place in one array"))))))
+          | Option.some b => (if (((project a frame) =? (project b frame)) && (((project a base) =? (project b base)) && (sameSteps (leadingSteps (project a steps)) (leadingSteps (project b steps))))) then (let distance : Signed := (if ((finalStep (project b steps)) <=? (finalStep (project a steps))) then (record Signed {negative := false, magnitude := (prim subtract (finalStep (project a steps)) (finalStep (project b steps)) : Nat)}) else (record Signed {negative := true, magnitude := (prim subtract (finalStep (project b steps)) (finalStep (project a steps)) : Nat)})); (if (unsigned && (project distance negative)) then (ctor Outcome.ub "a ptr_offset_from_unsigned of a pointer before its base") else (finishCall frames destination target (ctor Value.int (project program pointerWidth) (not unsigned) (reprOf (project program pointerWidth) distance))))) else (ctor Outcome.undefined "intrinsic ptr_offset_from, ptr_offset_from_unsigned: pointers the memory model does not place in one array"))))))
 }
 
 definition{
@@ -2471,21 +2471,21 @@ definition{
   parameters: [frames : (List Frame), data : Value, length : Nat, destination : Place, target : (Option Nat)],
   result: Outcome,
   body: (match (placeOfPointer data)
-    | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+    | Option.none => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
     | Option.some loc => (match (readAt frames loc)
-      | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+      | Option.none => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
       | Option.some pointee => (match pointee
-        | Value.int p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.unit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.tuple items => (if ((countValues items) =? length) then (finishCall frames destination target data) else (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")))))
+        | Value.int p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.boolean p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.unit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.tuple items => (if ((countValues items) =? length) then (finishCall frames destination target data) else (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")))))
 }
 
 definition{
@@ -2499,15 +2499,15 @@ definition{
       | List.cons metadata more => (match metadata
         | Value.unit => (finishCall frames destination target data)
         | Value.int bits signed length => (wholeArrayPointer frames data length destination target)
-        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.tuple p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place"))))
+        | Value.boolean p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.tuple p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place"))))
 }
 
 definition{
@@ -2517,20 +2517,20 @@ definition{
   body: (match values
     | List.nil => (ctor Outcome.ub "a vtable read of no pointer")
     | List.cons pointer rest => (match (placeOfPointer pointer)
-      | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+      | Option.none => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
       | Option.some loc => (match (readAt frames loc)
-        | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+        | Option.none => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
         | Option.some vtable => (match vtable
-          | Value.int p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.boolean p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.character p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.unit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.adt p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.pointer p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.reference p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.function p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.text p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.uninit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.int p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.boolean p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.character p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.unit => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.adt p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.pointer p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.reference p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.function p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.text p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.uninit => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
           | Value.tuple entries => (match (nthValue entries entry)
             | Option.none => (ctor Outcome.ub "a vtable read past the vtable's entries")
             | Option.some value => (finishCall frames destination target value))))))

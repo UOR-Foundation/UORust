@@ -654,6 +654,21 @@ fn read_undefined() -> BTreeSet<String> {
         .collect()
 }
 
+/// The causes the evaluator answers a valid call of intrinsic `name` with
+/// `Outcome.undefined` by, where its model does not yet place the case:
+/// each `intrinsic a, b: why` it names `name` in.
+fn intrinsic_gaps(name: &str) -> Vec<String> {
+    undefined_constructs()
+        .iter()
+        .filter(|u| {
+            u.strip_prefix("intrinsic ")
+                .and_then(|r| r.split_once(": "))
+                .is_some_and(|(names, _)| names.split(", ").any(|n| n == name))
+        })
+        .cloned()
+        .collect()
+}
+
 /// A LexLean name of the datatype, qualified by the semantics module.
 pub(crate) fn mir_name(name: &str) -> String {
     format!("{MIR}::{name}")
@@ -3233,6 +3248,11 @@ impl Cx<'_> {
                             if !defined_intrinsics().contains(&p) {
                                 e.intrinsics.insert(p.clone());
                                 e.blocked.insert(format!("intrinsic {p}"));
+                            }
+                            // A case of a valid call the memory model does
+                            // not yet place blocks the call, by its cause.
+                            for gap in intrinsic_gaps(&p) {
+                                e.blocked.insert(gap);
                             }
                             typed = Some(p.clone());
                             mir_ctor("Callee.intrinsic", &[mir_string(&p)])
@@ -6027,6 +6047,11 @@ mod tests {
         assert_eq!(metadata("[u8]").as_deref(), Some("usize"));
         assert_eq!(metadata("str").as_deref(), Some("usize"));
         assert_eq!(cx.pointee_metadata("<[u8] as Other>::Metadata"), None);
+        assert!(intrinsic_gaps("aggregate_raw_ptr")
+            .iter()
+            .any(|g| g.contains("subrange")));
+        assert_eq!(intrinsic_gaps("vtable_align").len(), 1);
+        assert!(intrinsic_gaps("copy").is_empty());
     }
 
     #[test]
