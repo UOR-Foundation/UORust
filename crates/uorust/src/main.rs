@@ -107,6 +107,11 @@ enum Certify {
         /// unchanged κ and compiler are refused again without a build.
         #[arg(long)]
         prior: PathBuf,
+        /// The certified crate (its manifest and `roots/`): each root it
+        /// certifies at an unchanged κ, closure κ and compiler is carried,
+        /// not built again. Without it every root is built.
+        #[arg(long)]
+        carry: Option<PathBuf>,
         /// Seconds the export may build for: the builds still running then
         /// are stopped, and the roots not built are refused for this export.
         #[arg(long)]
@@ -673,6 +678,7 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             out,
             kept,
             prior,
+            carry,
             within,
             shard,
             shards,
@@ -689,6 +695,7 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 &kept,
                 &certify::Manifest::read(&prior)?,
                 certify::Scope {
+                    carry: carry.as_deref(),
                     within: within.map(std::time::Duration::from_secs),
                     shard: shard.zip(shards),
                 },

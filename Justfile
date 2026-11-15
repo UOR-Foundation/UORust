@@ -205,7 +205,7 @@ certified-project:
 # from the Ith), kept in target/uorust-certified for `certified-sync`.
 certified-export shard="" within="":
     rm -rf target/uorust-certify target/uorust-certified
-    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
+    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --carry crates/certified {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
 
 # The shards a sharded export builds within `budget` seconds each, and the
 # roots to diagnose, as JSON (certified.yml's plan job).

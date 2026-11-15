@@ -363,13 +363,27 @@ fn kept_roots(kept: &Path) -> Result<Vec<PathBuf>, UorustError> {
 /// at, by package.
 pub const KAPPAS: &str = "kappas.toml";
 
+/// The file of `kept` that records each root's closure κ
+/// ([`closure_kappas`]), by package.
+pub const CLOSURES: &str = "closures.toml";
+
+/// The manifest of `kept` that lists the roots carried from the last export
+/// (their closure κ unchanged), whose sources lie in `kept/carried`.
+pub const CARRIED: &str = "carried";
+
+/// The domain tag of a root's closure κ.
+pub const CLOSURE: &str = "uorust/certified-closure/1";
+
 /// What part of the export one run builds, and for how long.
 #[derive(Clone, Copy, Debug, Default)]
-pub struct Scope {
+pub struct Scope<'a> {
     /// The time it may build for; the roots unbuilt then are refused.
     pub within: Option<std::time::Duration>,
     /// Shard I of N: every Nth eligible root, from the Ith.
     pub shard: Option<(usize, usize)>,
+    /// The certified crate whose roots are carried when unchanged
+    /// ([`carry_roots`]); none carries nothing.
+    pub carry: Option<&'a Path>,
 }
 
 /// The code of the kernel's rejection of a certificate B. Run 43700278692's
@@ -433,7 +447,8 @@ enum Outcome {
 /// once. Each pass is printed to stderr. When `within` passes, the builds
 /// still running are stopped and the roots not yet built are refused as
 /// [`UNBUILT`], so the export ends with what it published. The project and
-/// the build may live on a scratch volume.
+/// the build may live on a scratch volume. The roots `scope.carry`
+/// certifies unchanged are carried ([`carry_roots`]), not built.
 pub fn production_build(
     projection: &Path,
     out: &Path,
@@ -441,9 +456,13 @@ pub fn production_build(
     targets: &str,
     kept: &Path,
     prior: &Manifest,
-    scope: Scope,
+    scope: Scope<'_>,
 ) -> Result<(), UorustError> {
-    let Scope { within, shard } = scope;
+    let Scope {
+        within,
+        shard,
+        carry,
+    } = scope;
     if let Some((k, n)) = shard.filter(|(k, n)| k >= n) {
         return Err(UorustError::Tool(format!(
             "shard {k} of {n}: a shard is below the count"
@@ -455,7 +474,8 @@ pub fn production_build(
     // Refused before anything is written: no descriptor to export to.
     descriptor(targets)?;
     let mut compiler: BTreeMap<String, String> = BTreeMap::new();
-    if !prior.compiler.is_empty() && prior.compiler == compiler_version()? {
+    let version = compiler_version()?;
+    if !prior.compiler.is_empty() && prior.compiler == version {
         let by_kappa: BTreeMap<&str, &str> = all
             .iter()
             .map(|r| (r.kappa.as_str(), r.definition.as_str()))
@@ -484,11 +504,13 @@ pub fn production_build(
         .collect();
     let path = kept.join(KAPPAS);
     std::fs::write(&path, measured).map_err(|e| io(&path, e))?;
+    let skip = carry_roots(projection, targets, &all, carry, kept, &version)?;
     // Every root the request may name: the higher-order ones are refused by
     // `production` itself.
     let probe = out.join("probe");
     let eligible: Vec<String> = production(projection, &probe, register, targets, &compiler, None)?
         .into_iter()
+        .filter(|r| !skip.contains(r))
         .enumerate()
         .filter(|(i, _)| shard.is_none_or(|(k, n)| i % n == k))
         .map(|(_, r)| r)
@@ -503,9 +525,10 @@ pub fn production_build(
     }
     batches.reverse();
     eprintln!(
-        "certify production: {} batches on {workers} workers, {} roots refused before any build",
+        "certify production: {} batches on {workers} workers, {} roots refused before any build, {} carried",
         batches.len(),
-        compiler.len()
+        compiler.len(),
+        skip.len()
     );
     let state = std::sync::Mutex::new(Export {
         batches,
@@ -646,6 +669,80 @@ pub fn production_build(
         s.compiler.len()
     );
     Ok(())
+}
+
+/// Write each root's closure κ ([`closure_kappas`]) to `kept`, and carry
+/// into `kept/carried` every root the certified crate at `carry` (its
+/// manifest and `roots/`) certifies by the same compiler, at the same κ and
+/// closure κ, with its source as the manifest records it: the package such a
+/// root would build to is the one already held. Returns the carried roots'
+/// definitions, which the export does not build.
+fn carry_roots(
+    projection: &Path,
+    targets: &str,
+    all: &[Root],
+    carry: Option<&Path>,
+    kept: &Path,
+    version: &str,
+) -> Result<BTreeSet<String>, UorustError> {
+    let mut modules = BTreeMap::new();
+    for module in [BEHAVIOR, "Prelude"] {
+        let path = projection.join("src").join(format!("{module}.lex.tex"));
+        let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
+        modules.insert(module.to_string(), text);
+    }
+    let stamp = format!("{version}\n{}", descriptor(targets)?);
+    let definitions: Vec<&str> = all.iter().map(|r| r.definition.as_str()).collect();
+    let keys = closure_kappas(&modules, &definitions, &stamp);
+    let by_package: BTreeMap<String, (&Root, &String)> = all
+        .iter()
+        .filter_map(|r| keys.get(&r.definition).map(|k| (r.package(), (r, k))))
+        .collect();
+    let text: String = by_package
+        .iter()
+        .map(|(package, (_, key))| format!("{package} = \"{key}\"\n"))
+        .collect();
+    let path = kept.join(CLOSURES);
+    std::fs::write(&path, text).map_err(|e| io(&path, e))?;
+    let held = match carry {
+        Some(dir) => Manifest::read(&dir.join("manifest.toml"))?,
+        None => Manifest::default(),
+    };
+    let to = kept.join(CARRIED);
+    std::fs::create_dir_all(&to).map_err(|e| io(&to, e))?;
+    let mut carried = Vec::new();
+    if held.compiler == version {
+        for row in held.roots {
+            let Some((root, key)) = by_package.get(&row.package) else {
+                continue;
+            };
+            if row.closure.is_empty() || row.closure != **key || row.kappa != root.kappa {
+                continue;
+            }
+            let Some(dir) = carry else {
+                continue;
+            };
+            let from = dir.join("roots").join(format!("{}.rs", row.package));
+            let Ok(bytes) = std::fs::read(&from) else {
+                continue;
+            };
+            if crate::project::sha(&bytes) != row.source {
+                continue;
+            }
+            let target = to.join(format!("{}.rs", row.package));
+            std::fs::write(&target, &bytes).map_err(|e| io(&target, e))?;
+            carried.push(row);
+        }
+    }
+    let skip = carried.iter().map(|r| r.definition.clone()).collect();
+    let manifest = Manifest {
+        compiler: version.to_string(),
+        roots: carried,
+        ..Manifest::default()
+    };
+    let path = to.join("manifest.toml");
+    std::fs::write(&path, manifest.to_text()).map_err(|e| io(&path, e))?;
+    Ok(skip)
 }
 
 /// What every build of an export reads: the projection, the register, the
@@ -923,6 +1020,71 @@ fn chunks(source: &str) -> Vec<Chunk> {
     out
 }
 
+/// Every definition of `defs` (by `Module::name`, with its text) that
+/// `start` reaches by name, `start` among them.
+fn reach(defs: &BTreeMap<String, &str>, start: &str) -> BTreeSet<String> {
+    let mut reached: BTreeSet<String> = BTreeSet::new();
+    let mut work = vec![start.to_string()];
+    while let Some(def) = work.pop() {
+        let Some(text) = defs.get(&def) else {
+            continue;
+        };
+        if !reached.insert(def.clone()) {
+            continue;
+        }
+        let module = def.split("::").next().unwrap_or_default();
+        for token in text.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':')) {
+            let key = if token.contains("::") {
+                token.to_string()
+            } else {
+                format!("{module}::{token}")
+            };
+            if defs.contains_key(&key) && !reached.contains(&key) {
+                work.push(key);
+            }
+        }
+    }
+    reached
+}
+
+/// The κ of what each root's package is compiled from, by definition: SHA-256
+/// over `stamp` (the compiler and the target descriptors), every declaration
+/// of `modules` that is no definition (the header, the types, the theorems),
+/// and each definition the root reaches, by name. A root whose κ the last
+/// export certified compiles to the same package, so it is carried, not
+/// built again.
+pub(crate) fn closure_kappas(
+    modules: &BTreeMap<String, String>,
+    roots: &[&str],
+    stamp: &str,
+) -> BTreeMap<String, String> {
+    let cut: BTreeMap<&String, Vec<Chunk>> =
+        modules.iter().map(|(m, text)| (m, chunks(text))).collect();
+    let mut shared = format!("{CLOSURE}\n{stamp}\n");
+    let mut defs: BTreeMap<String, &str> = BTreeMap::new();
+    for (module, chunks) in &cut {
+        shared.push_str(&format!("module {module}\n"));
+        for c in chunks {
+            match &c.name {
+                Some(name) => {
+                    defs.insert(format!("{module}::{name}"), &c.text);
+                }
+                None => shared.push_str(&c.text),
+            }
+        }
+    }
+    roots
+        .iter()
+        .map(|root| {
+            let mut text = shared.clone();
+            for def in reach(&defs, &format!("{BEHAVIOR}::{root}")) {
+                text.push_str(&format!("def {def}\n{}", defs[&def]));
+            }
+            ((*root).to_string(), crate::project::sha(text.as_bytes()))
+        })
+        .collect()
+}
+
 /// The modules' texts, by module name, with every root (a definition of
 /// `Behavior`) a production root and every definition a root reaches
 /// executable, the roots found, and the roots refused with their causes.
@@ -945,53 +1107,10 @@ pub(crate) fn mark(
             }
         }
     }
-    // Each root's closure: the definitions its body reaches.
-    let refs = |def: &str| -> Vec<String> {
-        let Some(text) = defs.get(def) else {
-            return Vec::new();
-        };
-        let module = def.split("::").next().unwrap_or_default();
-        text.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
-            .map(|token| {
-                if token.contains("::") {
-                    token.to_string()
-                } else {
-                    format!("{module}::{token}")
-                }
-            })
-            .filter(|key| key != def && defs.contains_key(key))
-            .collect()
-    };
-    let closure = |start: &str| {
-        let mut reached: BTreeSet<String> = BTreeSet::new();
-        let mut work = refs(start);
-        work.push(start.to_string());
-        while let Some(def) = work.pop() {
-            let Some(text) = defs.get(&def) else {
-                continue;
-            };
-            if !reached.insert(def.clone()) {
-                continue;
-            }
-            let module = def.split("::").next().unwrap_or_default();
-            for token in text.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
-            {
-                let key = if token.contains("::") {
-                    token.to_string()
-                } else {
-                    format!("{module}::{token}")
-                };
-                if defs.contains_key(&key) && !reached.contains(&key) {
-                    work.push(key);
-                }
-            }
-        }
-        reached
-    };
     let mut reached: BTreeSet<String> = BTreeSet::new();
     let mut refused: BTreeMap<String, String> = BTreeMap::new();
     for root in roots {
-        let own = closure(&format!("{BEHAVIOR}::{root}"));
+        let own = reach(&defs, &format!("{BEHAVIOR}::{root}"));
         // SPEC §17.13: an executable definition takes no function.
         if let Some(hof) = own
             .iter()
@@ -1108,6 +1227,9 @@ pub struct Certified {
     pub source: String,
     /// The kernel's status of its certificates.
     pub certification: String,
+    /// The κ of what its package was compiled from ([`closure_kappas`]);
+    /// empty when the export did not record it, and then it is never carried.
+    pub closure: String,
 }
 
 /// The certified translator: the bundle it came from, its roots, and the
@@ -1196,6 +1318,7 @@ impl Manifest {
                 package: text_of(row, "package")?,
                 source: text_of(row, "source")?,
                 certification: text_of(row, "certification")?,
+                closure: text_of(row, "closure").unwrap_or_default(),
             });
         }
         let mut refused = BTreeMap::new();
@@ -1262,6 +1385,9 @@ impl Manifest {
             out.push_str(&format!("package = \"{}\"\n", r.package));
             out.push_str(&format!("source = \"{}\"\n", r.source));
             out.push_str(&format!("certification = \"{}\"\n", r.certification));
+            if !r.closure.is_empty() {
+                out.push_str(&format!("closure = \"{}\"\n", r.closure));
+            }
         }
         for (kappa, cause) in &self.refused {
             out.push_str("\n[[refused]]\n");
@@ -1404,8 +1530,64 @@ pub(crate) fn sync(
                     package: name,
                     source: digest,
                     certification: field(output, &["certification", "status"]),
+                    closure: String::new(),
                 });
             }
+        }
+    }
+    // The roots the export carried, each source as the certified crate held
+    // it, while its function's κ is still the one it was carried at; and
+    // every root's closure κ, which the next export carries it by.
+    let mut closures: BTreeMap<String, String> = BTreeMap::new();
+    for k in &outputs {
+        let path = k.join(CLOSURES);
+        if let Ok(text) = std::fs::read_to_string(&path) {
+            let table: toml::Table = text.parse().map_err(|e| bad(&path, format!("{e}")))?;
+            closures.extend(
+                table
+                    .into_iter()
+                    .filter_map(|(p, v)| Some((p, v.as_str()?.to_string()))),
+            );
+        }
+        let held = k.join(CARRIED);
+        let path = held.join("manifest.toml");
+        if !path.is_file() {
+            continue;
+        }
+        for row in Manifest::read(&path)?.roots {
+            if certified.iter().any(|c| c.package == row.package) {
+                continue;
+            }
+            let Some(own) = by_package.get(&row.package) else {
+                continue;
+            };
+            if own.kappa != row.kappa {
+                continue;
+            }
+            let source = held.join(format!("{}.rs", row.package));
+            let bytes = std::fs::read(&source).map_err(|e| io(&source, e))?;
+            let digest = crate::project::sha(&bytes);
+            if digest != row.source {
+                return Err(bad(
+                    &source,
+                    format!(
+                        "SHA-256 {digest}, the carried manifest records {}",
+                        row.source
+                    ),
+                ));
+            }
+            let target = roots_dir.join(format!("{}.rs", row.package));
+            std::fs::write(&target, &bytes).map_err(|e| io(&target, e))?;
+            certified.push(Certified {
+                function: own.function.clone(),
+                definition: own.definition.clone(),
+                ..row
+            });
+        }
+    }
+    for c in &mut certified {
+        if let Some(k) = closures.get(&c.package) {
+            c.closure.clone_from(k);
         }
     }
     certified.sort_by(|a, b| a.package.cmp(&b.package));
@@ -2171,6 +2353,39 @@ mod tests {
     }
 
     #[test]
+    fn a_closure_kappa_changes_exactly_with_what_its_root_reaches() {
+        let modules = |c_body: &str, type_body: &str| -> BTreeMap<String, String> {
+            [
+                (
+                    BEHAVIOR.to_string(),
+                    format!(
+                        "inductive{{\n  name: T,\n  constructors: [{type_body}]\n}}\n\ndefinition{{\n  name: a,\n  body: (b 1)\n}}\n\ndefinition{{\n  name: b,\n  body: (Prelude::p 1)\n}}\n\ndefinition{{name: c, parameters: [], body: {c_body}}}\n"
+                    ),
+                ),
+                (
+                    "Prelude".to_string(),
+                    "definition{\n  name: p,\n  body: 1\n}\n".to_string(),
+                ),
+            ]
+            .into_iter()
+            .collect()
+        };
+        let roots = ["a", "b", "c"];
+        let base = closure_kappas(&modules("1", "x"), &roots, "lexlean 1");
+        let c_changed = closure_kappas(&modules("2", "x"), &roots, "lexlean 1");
+        assert_eq!(base["a"], c_changed["a"]);
+        assert_eq!(base["b"], c_changed["b"]);
+        assert_ne!(base["c"], c_changed["c"]);
+        // A type, the compiler or the descriptors change every package.
+        let typed = closure_kappas(&modules("1", "y"), &roots, "lexlean 1");
+        let compiled = closure_kappas(&modules("1", "x"), &roots, "lexlean 2");
+        for r in roots {
+            assert_ne!(base[r], typed[r]);
+            assert_ne!(base[r], compiled[r]);
+        }
+    }
+
+    #[test]
     fn marking_makes_the_roots_production_and_their_callees_executable() {
         let behavior = "\\begin{lexlean}{Behavior}\ndefinition{\n  name: a,\n  body: x\n}\n\ndefinition{\n  name: b,\n  body: (c (Prelude::p 1)),\n  axioms: []\n}\ndefinition{name: c, parameters: [], body: 1}\n";
         let prelude = "definition{\n  name: p,\n  body: (q 1)\n}\ndefinition{\n  name: q,\n  body: 1\n}\ndefinition{\n  name: r,\n  body: 1\n}\n";
@@ -2205,6 +2420,7 @@ mod tests {
             package: "uorust_certified_implication".into(),
             source: "s".into(),
             certification: "kernel-checked".into(),
+            closure: String::new(),
         };
         let body = IrBody {
             arity: 2,
@@ -2316,6 +2532,7 @@ mod tests {
                 package: "uorust_certified_a".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
+                closure: String::new(),
             }],
             ..Manifest::default()
         };
@@ -2393,6 +2610,7 @@ mod tests {
                 package: "uorust_certified_binop".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
+                closure: "c1".into(),
             }],
             share: Share {
                 translator: 3,
