@@ -23,7 +23,7 @@ cause = "mir::Ty: std::fmt::Error"
 [[fn]]
 path = "once_cell::imp::Guard::drop"
 kappa = "98d54e49badfed1d7a5f7fc5b9f00666ba271632a1e1b8dad252a7e3f6afb877"
-embedded = "d59307733280b23785bc3c4838d2128ab4ba8b65fa54da206a67d8cfa7a50c68"
+embedded = "feec99d1b6f128f03a92b3e1eef769b2a58d679a37dc99f9687319d94092f422"
 status = "residue"
 cause = "mir::Ty: Guard<'_>"
 
@@ -77,7 +77,7 @@ cause = "mir::Ty: imp::OnceCell<u32>"
 [[fn]]
 path = "once_cell::imp::OnceCell::wait"
 kappa = "77a8186569d35bf9dedec9c3b848c4ec995b8790fe1b1e1bef700d89f444331f"
-embedded = "e65af52fd2cc55122b2a705e98776ba1ba599ccd353ea77f8713b2ba5f62ab66"
+embedded = "716c25f85b418c1410f4d90d7c07d086c5775a1d6fba11d4539c6fb88411b508"
 status = "residue"
 cause = "mir::Ty: T"
 
@@ -92,7 +92,7 @@ cause = "mir::Ty: imp::OnceCell<u32>"
 [[fn]]
 path = "once_cell::initialize_or_wait"
 kappa = "698c2c55c175bdbfbf93e80335dc1ecc138ad3edfb341e91197a6178efe4c34a"
-embedded = "cf241ec123673be9fcaf9ae7073593b7a4b8843c1e0cb33a63992e9327a5fd97"
+embedded = "30bed70d88a31c963c3675595ae2dadafdc402aafaa1418a9116b72c40da6b90"
 status = "residue"
 cause = "mir::Ty: Atomic<*mut Waiter>"
 
@@ -100,7 +100,7 @@ cause = "mir::Ty: Atomic<*mut Waiter>"
 path = "once_cell::map_addr"
 kappa = "30c9d6a5f65e829ffbf3eff1ef6bba04fe5f77a0205af5afdc368967fdab00dd"
 at = "T=u32"
-embedded = "aa9831d68dec6f0c88d9e00309e7067a8bb2cd0b33a51d38f0f6c05328e03c17"
+embedded = "0518a1806a53f5b64cdb64f28b83cec0228534ba374667f43ce567f1da3d7a3d"
 status = "residue"
 cause = "mir::TerminatorKind::Call: imp::strict::with_addr: once_cell's MIR stops at mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_sub"
 
@@ -116,14 +116,14 @@ digest = "445d77de5a509beb89c9041c97a23ddc33c851911a20fddca387aa1357c10ab5"
 path = "once_cell::strict::with_addr"
 kappa = "4ccf4a4ffa043638099cca5f819b4db5ffb8e128a7cc3c53dc32cf90f34e533a"
 at = "T=u32"
-embedded = "40d69eceb61a13388348690ef6b933613bb5f4fb34ba2a0bf4a62902b6531550"
+embedded = "8a55b32c1c8409d31964a2e75030d1f85697b5034f8fd9f519b586332463a012"
 status = "residue"
 cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_sub"
 
 [[fn]]
 path = "once_cell::wait"
 kappa = "fec9b0f23a04e01ef853b9226caa71cae7f807e08f6bc45c6aa011d2ccb6edc4"
-embedded = "86b326f3d99da4ccd3f8a17e7a72e64dc39be5407fbeb2dc0bcaea37f6d5b277"
+embedded = "46765cd9b8b66753452fe1b1700e914051c0f4ed6a701bcbda33cb63f502b634"
 status = "residue"
 cause = "mir::Ty: Atomic<*mut Waiter>"
 

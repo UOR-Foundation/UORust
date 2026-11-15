@@ -178,14 +178,14 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "proc-macro2::fallback::Ident::new_checked"
 kappa = "7bcc93281e997a3e95b76cb368377d92b1840f28e7f23f53837e47ca7847a531"
-embedded = "801ec2fc9efd857eb19feae8cead3af18a000b138f977b4b34fea59a1cfdd225"
+embedded = "841f631ae5d346317f5b3e523b7efa6e08046196ddb6eed7fa2dada842e81557"
 status = "residue"
 cause = "mir::Ty: fallback::Ident"
 
 [[fn]]
 path = "proc-macro2::fallback::Ident::new_raw_checked"
 kappa = "04f12f08561dbe7fbe2064d2924abaac8f322996b01ae859aebda4b6fb0f3219"
-embedded = "c097af8d1c1f321cba143aa63d7c0d01d3767c11cbc467ac524c770847ab11b2"
+embedded = "e233b18f55b95870bf068898a0f1497cd51619b0b6b7a123dc9753ece3ed209e"
 status = "residue"
 cause = "mir::Ty: fallback::Ident"
 
@@ -262,7 +262,7 @@ cause = "mir::Ty: fallback::Literal"
 [[fn]]
 path = "proc-macro2::fallback::Literal::c_string"
 kappa = "152ca4852702caeaee157bcda05f83718e5d589783d2977b57fcbd3b9048af5f"
-embedded = "8753e5277007cb80a314e47292d2bfc165b7f49abb39a018c599f67b3832b916"
+embedded = "f7b5fc44099a2fdae289b93f165a838828ba49a69a5487f087cbfedbc5fe5767"
 status = "residue"
 cause = "mir::Ty: fallback::Literal"
 
@@ -318,7 +318,7 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "proc-macro2::fallback::Literal::from_str_checked"
 kappa = "6d646975aa380bbb8cfab84f7dca75ce5bb615cd03e0daf6e12120367c344742"
-embedded = "8d6c2f67fbc2dc754138c7eb485c09bab6acbd81aa33d0432462089938a2c8c6"
+embedded = "4da126ef784e04d79103d1a5caa4b93c7f603797d0be08044e82c0353ec27943"
 status = "residue"
 cause = "mir::Ty: fallback::Literal"
 
@@ -430,7 +430,7 @@ cause = "mir::Ty: fallback::Span"
 [[fn]]
 path = "proc-macro2::fallback::Literal::string"
 kappa = "8884f556ab7360ae08c5f8cb351bb9a5c8e8be9e362fa48ad652e1385f7c8fa1"
-embedded = "1e085cee418039657b7510e4a1fc69fa60261eabfc21e5ebd61165591412ca2e"
+embedded = "2d3ded71b4ef86893653083631972dea5c735eafcca7b2d179fecc5bb014f9a4"
 status = "residue"
 cause = "mir::Ty: fallback::Literal"
 
@@ -652,7 +652,7 @@ cause = "mir::Ty: proc_macro::TokenStream"
 path = "proc-macro2::fallback::TokenStream::from#3"
 kappa = "ba59eb5b6a06f254c9e8e28d31b592005bb72280ab6c5e8698ea847a59df35b1"
 at = "TokenTree=u32"
-embedded = "b6927012d474ed8bcbb517bfe7dbe962e22034ac40797709079cd8fd7ca3a5a5"
+embedded = "17c7638ca012005d8e82ea1120b17c99045b3c1c0f6f2e5305abffe869127cbe"
 status = "residue"
 cause = "mir::Ty: fallback::TokenStream"
 
@@ -675,7 +675,7 @@ cause = "mir::Ty: fallback::TokenStream"
 [[fn]]
 path = "proc-macro2::fallback::TokenStream::from_str_checked"
 kappa = "842583c2e257003185190f9c3dcf4ae58d7060171b055b376771083dee2f14e6"
-embedded = "c0cd5bd0bb3358aa2ab34ad677987cdee191ca399625dc2501ac6305d21096b5"
+embedded = "d923792c79431f26f251f410721312ef03d53217beebc810960cd468a8cd3303"
 status = "residue"
 cause = "mir::Ty: fallback::TokenStream"
 
@@ -767,7 +767,7 @@ cause = "mir::Ty: DebugStruct<'_, '_>"
 [[fn]]
 path = "proc-macro2::force"
 kappa = "ed1b1a64794954a5ab61a071f0b0b6fef0fb95fb952a4b78761c47782025315f"
-embedded = "eccf88ba3063296f7e01242f3cd86f26c9e73f12f2d9e4b986c703d3a1f1a1f5"
+embedded = "dbdd5e945986309a8e8ba407d7bca5c961728dbe1a33143089a268f59c345bc1"
 status = "residue"
 cause = "mir::TerminatorKind::Call: detection::force_fallback: proc-macro2's MIR stops at mir::Operand::Constant: {alloc7: &Atomic<usize>}"
 
@@ -781,7 +781,7 @@ cause = "mir::Ty: parse::Cursor<'_>"
 [[fn]]
 path = "proc-macro2::ident_ok"
 kappa = "1aa03f0bcc3c1487fd237bb20ecdf822ec1d618e39651028a3b5d9f71c89e6ba"
-embedded = "5f41bef2746a587d19d7b1a34f939a94246f6af5d6c2992ad62016c6644376f1"
+embedded = "db8d7215d7c1197b1e63ade0552fc66a3299d2be884c6c55172f8101ac6bc8b4"
 status = "residue"
 cause = "mir::Ty: core::str::Chars<'_>"
 
@@ -811,28 +811,28 @@ cause = "mir::Ty: RcVecMut<'_, u32>"
 path = "proc-macro2::push_token_from_proc_macro"
 kappa = "72c94143372aae53eecc4de9bbd1f7237d320c79b0b7c8aeb49bcf642984c0fe"
 at = "TokenTree=u32"
-embedded = "af5f8b6469251d00873aa4234d5a18add54b292031a61e59298e23aa6517b9a6"
+embedded = "6aeae3da899b0e9f31686f64bb8d7d659b27c474951044086653c0462a764b8c"
 status = "residue"
 cause = "mir::Ty: RcVecMut<'_, u32>"
 
 [[fn]]
 path = "proc-macro2::unforce"
 kappa = "f6fc892e6778f1c01c021c77a7529f692d39e47640e601b83d5a46aa8ad3a4a9"
-embedded = "90ba3ace5a85fce8319a348f28c45918ca357f82828f2e13d64fe592cdae6795"
+embedded = "3e8cb392b5d3a01fa87a77a7ea4c875231573a07c0f9024116501222e98073c1"
 status = "residue"
 cause = "mir::TerminatorKind::Call: detection::unforce_fallback: proc-macro2's MIR stops at mir::TerminatorKind::Call: detection::initialize: proc-macro2's MIR stops at mir::TerminatorKind::Call: is_available"
 
 [[fn]]
 path = "proc-macro2::validate_ident"
 kappa = "eb1355641542753c30fe54534070cbca303cccb85942b1626055c53c9f751a7f"
-embedded = "ea6eeddede206a8f95af3b19b00281839f0b7e2f28c9a9a4b3630106f39a6132"
+embedded = "e53e4f16412c54612c96aa69039c75893758004e05da7d9ca2cc9d5477a0bf12"
 status = "residue"
 cause = "mir::Ty: core::fmt::Arguments<'_>"
 
 [[fn]]
 path = "proc-macro2::validate_ident_raw"
 kappa = "e4876028e6e2939bbebfd1e2828afd543c8dba303d56754e970703028079ac12"
-embedded = "b6fc648a98d98586a49700eb0c9292a23182421ea5526dc4d908875ec63d1916"
+embedded = "184a1433d839f787d4b6647cd3f9f05f12124793e85fcae65e3072bf47a24e96"
 status = "residue"
 cause = "mir::TerminatorKind::Call: fallback::validate_ident: proc-macro2's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
 

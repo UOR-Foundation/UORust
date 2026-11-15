@@ -82,7 +82,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by IndexedRandom, which
 path = "rand::IndexedRandom::sample"
 kappa = "22a7c2980b0e0e18d8f0460d381bf507c320168380ee96e284f8ba941df17e71"
 at = "R=u32, Self=u32"
-embedded = "467d8ab7620de850efa25fe339f86b23dbc3b8d4a354e4e34c1531202c565b7e"
+embedded = "21ee2040665447b149c52cdee238e5b7164a6fb0ab0811541eaf76fb94fbb13d"
 status = "residue"
 cause = "mir::Ty: seq::slice::IndexedSamples<'_, u32, u32>"
 
@@ -90,7 +90,7 @@ cause = "mir::Ty: seq::slice::IndexedSamples<'_, u32, u32>"
 path = "rand::IndexedRandom::sample_array"
 kappa = "e9a125af9ab4ed51cf4928af52259db63bef4a41460a20121cafacbf692ed01f"
 at = "N=#_N, R=u32, Self=u32"
-embedded = "a8226b8fde322a4e66639dfa46cc9065cd0e6defa6b10f215f894b11e7190230"
+embedded = "5b3127ff42fbcf6a73c3b8a108a360727d16ee17c1dbd211f5ce5e480854f4e8"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by IndexedRandom, which u32 does not implement in core"
 
@@ -98,7 +98,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by IndexedRandom, which
 path = "rand::IndexedRandom::sample_weighted"
 kappa = "8aefac08db239a40f2773301c8d920efd2d6bfe8ebb0c1541a8d8235db1a4e31"
 at = "F=u32, R=u32, Self=u32"
-embedded = "b0a610fb6537d77f913c5e09e546c2a8b112aa9d17233dcf7724e637852974de"
+embedded = "73fadf3f63f916a46d4d78039e793b44e3baf84095c1a0c49854b299a35e9530"
 status = "residue"
 cause = "mir::Ty: seq::slice::IndexedSamples<'_, u32, u32>"
 
@@ -153,14 +153,14 @@ cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 
 [[fn]]
 path = "rand::RESULT2"
 kappa = "e091d5f4803e12e177ec5f6921337b33903b539137e4a625a6eb5b3474021e91"
-embedded = "1a14bc07deddc431939eaa91233a421c355cb61b50a440456987700430de3df5"
+embedded = "925ebe5f52bee33de0dd1c91a4863c64b8a8d878bb4f3fddaf52238ab0cc934f"
 status = "residue"
 cause = "mir::TerminatorKind::Call: seq::increasing_uniform::calculate_bound_u32::inner: rand's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::checked_mul"
 
 [[fn]]
 path = "rand::calculate_bound_u32"
 kappa = "0c3ff7c323c65dfb56b0fe49e9fd1aa73aba5a29bd6a82b68f4b902c051b0eb0"
-embedded = "2550172fad75e863a234bf1ec5fec370cf0a9ed21fafbaa4627ffb4de0a76d1b"
+embedded = "31cf7d185eb5f47b6d47ee8af32d355454c0a5d55bdb081f86b740d5709a15a0"
 status = "residue"
 cause = "mir::Operand::Constant: seq::increasing_uniform::calculate_bound_u32::RESULT2: mir::TerminatorKind::Call: seq::increasing_uniform::calculate_bound_u32::inner: rand's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::checked_mul"
 
@@ -342,21 +342,21 @@ cause = "mir::Ty: IndexVecIter<'_>"
 path = "rand::index_::sample"
 kappa = "a9de57dd30866eb39b0dd0c1f3e33ca0c26aad2b593df0174a1c66ee7651d30b"
 at = "R=u32"
-embedded = "2f20df977e83c60664527bc632d0266bb2d0f07cb09160350744aa68be98934b"
+embedded = "269ec5bb33b0a4835495267f6353c9bd9ee7ecfc53a00aa91b05056f30dea5a1"
 status = "residue"
 cause = "mir::Ty: seq::index_::IndexVec"
 
 [[fn]]
 path = "rand::index_::sample::C"
 kappa = "42baeef4871931f0165a894f9e3b6dfb0137cfec95c866364be7db6ce5a7a20a"
-embedded = "db38f13c430147dc138e26a43e1f6ece57f67ae9bb3a14e2c32b1618460e3130"
+embedded = "3c0e4e6f5c84f889f6fb7018137619ca0c80bacfd69f0e7b4fc8f632f4c88516"
 status = "residue"
 cause = "mir::Ty: f32"
 
 [[fn]]
 path = "rand::index_::sample::C#2"
 kappa = "0e12567fd36ecfb24530164351af655aebd86e3ee8b686c08a410123b758c463"
-embedded = "e738b25caa6cdb624b1378b8bd1b68792704310e67fa2a1e98bd63f3710f8eb0"
+embedded = "2b7936d437231a1a27a5f5a448487d144e7bc20565c06b3297e05afaa2147288"
 status = "residue"
 cause = "mir::Ty: f32"
 
@@ -364,7 +364,7 @@ cause = "mir::Ty: f32"
 path = "rand::index_::sample_weighted"
 kappa = "6af98e8073d90bc456f7e72328dd739777a86ff1d460dc5341a44fecbd5f946a"
 at = "F=u32, R=u32"
-embedded = "40cb520cb60c4589473b96a17542d78142cf8fd10314c73c499bfb2ffb7ce2a5"
+embedded = "aa57c2a1a425f99826c3c0c6f2d0107366d02c414f4f5014aa859ed897d1c0ec"
 status = "residue"
 cause = "mir::Ty: seq::index_::IndexVec"
 
