@@ -9,7 +9,10 @@
 //! path. A certified root that overflows its target's width stops with a
 //! panic, which the differential sees as a disagreement.
 
-#![allow(dead_code)]
+// The adapters are written from the certified packages' signatures: an
+// adapter is named after its root's Rust path and wraps its arguments as the
+// package's `run` takes them.
+#![allow(dead_code, non_snake_case, unused_parens)]
 
 use std::sync::atomic::{AtomicBool, Ordering};
 

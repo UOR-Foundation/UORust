@@ -227,7 +227,9 @@ certified-sync:
     cargo run -q --locked -p uorust -- mir . --out target/mir
     cargo run -q --locked -p uorust -- certify sync --kept target/uorust-certified --register frontier.toml --mir target/mir --workspace . --dir crates/certified --adapters crates/uorust/src/certified.rs
     rustfmt --edition 2021 crates/uorust/src/certified.rs
-    # The adapters compile, and the switch selects, before export pushes them.
+    # The adapters compile, pass the lint main's hooks and bootstrap hold every
+    # push to, and the switch selects, before export pushes them.
+    cargo clippy -q --locked -p uorust --lib -- -D warnings
     cargo test -q --locked -p uorust --lib certif
 
 # The ratchet (loop step 3): the hand-written translator may only shrink.
