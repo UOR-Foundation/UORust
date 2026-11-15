@@ -110,6 +110,27 @@ pub fn roots(register: &Register) -> Vec<Root> {
     out
 }
 
+/// The digest of the `rust-std` descriptor in `targets` (the output of
+/// `lexlean production targets`).
+fn target_digest(targets: &str) -> Result<String, UorustError> {
+    let bad = |reason: String| UorustError::Malformed {
+        path: Path::new("targets.json").to_path_buf(),
+        reason,
+    };
+    let descriptors: serde_json::Value =
+        serde_json::from_str(targets).map_err(|e| bad(e.to_string()))?;
+    Ok(descriptors
+        .get("targets")
+        .and_then(|t| t.as_array())
+        .into_iter()
+        .flatten()
+        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
+        .and_then(|t| t.get("digest"))
+        .and_then(|d| d.as_str())
+        .ok_or_else(|| bad(format!("no {TARGET} descriptor")))?
+        .to_string())
+}
+
 /// Write the production project: the projection at `projection` with every
 /// root's definition marked as a production root, and `request.json`, the
 /// `lexlean/production-request/1` document naming one package per root at
@@ -128,18 +149,7 @@ pub fn production(
         path: path.to_path_buf(),
         reason,
     };
-    let descriptors: serde_json::Value =
-        serde_json::from_str(targets).map_err(|e| bad(Path::new("targets.json"), e.to_string()))?;
-    let digest = descriptors
-        .get("targets")
-        .and_then(|t| t.as_array())
-        .into_iter()
-        .flatten()
-        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
-        .and_then(|t| t.get("digest"))
-        .and_then(|d| d.as_str())
-        .ok_or_else(|| bad(Path::new("targets.json"), format!("no {TARGET} descriptor")))?
-        .to_string();
+    let digest = target_digest(targets)?;
     let prefix = module_prefix(projection)?;
     copy_tree(projection, out)?;
     let roots = roots(register);
@@ -289,6 +299,8 @@ pub fn production_build(
     prior: &Manifest,
     within: Option<std::time::Duration>,
 ) -> Result<(), UorustError> {
+    // Refuse targets with no descriptor before anything is written or run.
+    target_digest(targets)?;
     let deadline = within.map(|w| std::time::Instant::now() + w);
     let prefix = format!("{}.{BEHAVIOR}.", module_prefix(projection)?);
     let all = roots(register);
@@ -1082,8 +1094,20 @@ pub(crate) fn sync(
         path: path.to_path_buf(),
         reason,
     };
+    // `certify production` always keeps the refusals beside its bundles, so a
+    // directory without them is refused before anything is written.
+    let kept_bundles = bundles(kept)?;
+    if !production.join(REFUSALS).is_file() {
+        return Err(bad(
+            kept,
+            format!(
+                "holds {} bundle result.json and no {REFUSALS}: it is not what `certify production` keeps",
+                kept_bundles.len()
+            ),
+        ));
+    }
     let mut results = Vec::new();
-    for bundle in bundles(kept)? {
+    for bundle in kept_bundles {
         let path = bundle.join("result.json");
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
         let result: serde_json::Value =

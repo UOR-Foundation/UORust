@@ -2,18 +2,19 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 291 of 1189 functions of product code are lifted; 729
+# Honesty report: 291 of 1191 functions of product code are lifted; 731
 # are residue, 49 foreign and 120 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   form: 2
-#   mir::AggregateKind::Closure: 46
+#   mir::AggregateKind::Closure: 47
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
 #     1 bridge::<impl at crates/uorust/src/bridge.rs:145:1: 145:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
+#     1 certify::target_digest::{closure#0}: type outside the lift: std::path::Path
 #     1 embed::nearest::{closure#0}: type outside the lift: std::str::Split<'_, &str>
 #     1 embed::stamp_rows::{closure#0}: mir::TerminatorKind::Call: std::option::Option::and_then
 #     1 layouts::same_type::{closure#0}: type outside the lift: std::str::SplitWhitespace<'_>
@@ -55,7 +56,7 @@
 #     1 order::operator::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 order::tests::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit
 #     1 project::enum_equality::{closure#0}: mir::AggregateKind::Closure: project::enum_equality::{closure#0}::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
-#   mir::Operand::Constant: 31
+#   mir::Operand::Constant: 32
 #     1 a string LexLean source cannot write
 #     1 certify::Manifest::to_text::promoted[1]
 #     1 embed::Sampled::of::promoted[0]
@@ -75,6 +76,7 @@
 #     1 the constant item mir::spec::MirStatementKind::ALL
 #     1 the constant item order::ORDERING
 #     1 the constant item order::PROOF_COLUMN
+#     1 the constant item project::compiler_semantics::SELF_LOCK
 #     1 the constant item std::string::String::as_str
 #     1 the constant item wf::Node::word
 #     1 {alloc1004: &std::sync::OnceLock<mir::stdlib::StdTable>}
@@ -219,7 +221,7 @@
 #     1 std::fmt::Formatter<'_>
 #     1 std::iter::Copied<std::slice::Iter<'_, &str>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
-#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4804:17: 4804:20}>
+#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4818:17: 4818:20}>
 #     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3831:21: 3831:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
@@ -729,6 +731,12 @@ kappa = "ad9077ce5a8434330a2ea065059f086c858f5ed27821e65e781508934b2b3ac6"
 function = "uorust::certify::split_top_level"
 reason = "mir"
 detail = "mir::TerminatorKind::Call: std::boxed::Box::new_uninit"
+
+[[residue]]
+kappa = "5012ade9afeae7cfac9da5849a3d4d26f8344559e77110a22dfab6a42cfcf973"
+function = "uorust::certify::target_digest"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: certify::target_digest::{closure#0}: type outside the lift: std::path::Path"
 
 [[residue]]
 kappa = "e3c8fb193c0cbb149866de6374527e1cb5f87e548a400f64ae963dba8cf63614"
@@ -4439,6 +4447,12 @@ reason = "mir"
 detail = "mir::Ty: std::str::Split<'_, &str>"
 
 [[residue]]
+kappa = "e1e7f993a8237789b897327ae2b42798d69394213d30b9fa240996dd0e57a150"
+function = "uorust::project::compiler_semantics"
+reason = "mir"
+detail = "mir::Operand::Constant: the constant item project::compiler_semantics::SELF_LOCK"
+
+[[residue]]
 kappa = "0aad2e8a91a4a0ab47424a2d95f3d80d7d1254fc39f84ee2a9e3fbdf707535e0"
 function = "uorust::project::components"
 reason = "mir"
@@ -4472,7 +4486,7 @@ detail = "mir::Ty: std::collections::BTreeSet<lift::Ty>"
 kappa = "dfc0d7cab9d26456c3716f11b6f77193223b923bb050d34e875d8a1b9e8c9a22"
 function = "uorust::project::foreign_crate"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4804:17: 4804:20}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4818:17: 4818:20}>"
 
 [[residue]]
 kappa = "f18e0862c610f26f1c5e6a5eb382b9dd84675d1ca1d08413e3086b69f8449b6d"
@@ -4523,7 +4537,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index"
 
 [[residue]]
-kappa = "c337a8637d5219d1980a860a10831596f0c69ee7ce26b67c10ce75b94390d140"
+kappa = "2b6015c7f80804b0e955f2cda6461a14c1ca98024fbeaad75f33dee86952cacc"
 function = "uorust::project::project"
 reason = "mir"
 detail = "mir::Ty: project::Options"
@@ -5144,24 +5158,24 @@ function = "uorust::certify::module_prefix"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "91798903b7c91063ae521139464881d61686dfcd659e5fb3232711c82184cd25"
+kappa = "0ec89fbfec864c3074474150f634a25eea94ac31877d9651772baec4c30deee6"
 function = "uorust::certify::production"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "3f3e110b32fb9b53b172c1e736f6850782cfd73b4364fdb6d65d79a46df3188f"
+kappa = "859b922103c6af4cbd97069e4242ab74ce662a002c3f3f719af773a981c6bc66"
 function = "uorust::certify::production_build"
 effect = "Fs effect: Path::exists"
 
 [[effect]]
-kappa = "f58e73dd34d5776af1109cda2e2bc48218fc55b602f4613b48970b613524c8af"
+kappa = "8a14f090104c20113f3040e6ebef6202fae6dc65a3e6081788e935a84c2a7c9d"
 function = "uorust::certify::sync"
-effect = "Fs effect: std::fs::read_to_string"
+effect = "Fs effect: Path::is_file"
 
 [[effect]]
 kappa = "61d3b598929f1f04938e4afa4c5c82bce2b778948af4795e26ee6207f36190eb"
 function = "uorust::certify::sync_paths"
-effect = "calls uorust::certify::sync, which performs a Fs effect: std::fs::read_to_string"
+effect = "calls uorust::certify::sync, which performs a Fs effect: Path::is_file"
 
 [[effect]]
 kappa = "35a254042df260f28da92e3f1c7b069f0068ab38bfcb8e36a4ee9a418a9ca046"

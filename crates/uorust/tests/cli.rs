@@ -337,6 +337,8 @@ fn the_cli_refuses_a_bundle_it_cannot_export_or_take_in() {
         out.as_str(),
         "--kept",
         kept.as_str(),
+        "--prior",
+        path("prior.toml").as_str(),
     ]);
     assert!(!refused.status.success());
     assert!(String::from_utf8_lossy(&refused.stderr).contains("no rust-std descriptor"));
