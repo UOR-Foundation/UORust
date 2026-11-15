@@ -306,6 +306,7 @@ inductive{
     {name: constant, fields: [String, (List Generic)]},
     {name: transmute, fields: [Generic, Generic]},
     {name: writeBytes, fields: [Generic]},
+    {name: rawEq, fields: [Generic]},
     {name: instance, fields: [String, (List Generic)]},
     {name: sizeOf, fields: [Generic]},
     {name: convert, fields: [Ty, Ty]},
@@ -2997,6 +2998,54 @@ definition{
 }
 
 definition{
+  name: sameBytes,
+  parameters: [left : (List Byte), right : (List Byte)],
+  result: (Option Bool),
+  body: (match left
+    | List.nil => (match right | List.nil => (ctor Option.some [Bool] true) | List.cons y ys => (ctor Option.some [Bool] false))
+    | List.cons x xs => (match right
+      | List.nil => (ctor Option.some [Bool] false)
+      | List.cons y ys => (match x
+        | Byte.init a => (match y
+          | Byte.init b => (match (sameBytes xs ys)
+            | Option.none => (ctor Option.none [Bool])
+            | Option.some rest => (ctor Option.some [Bool] ((a =? b) && rest)))
+          | Byte.fragment v i => (ctor Option.none [Bool])
+          | Byte.uninit => (ctor Option.none [Bool]))
+        | Byte.fragment v i => (ctor Option.none [Bool])
+        | Byte.uninit => (ctor Option.none [Bool])))),
+  recursive_argument: left
+}
+
+definition{
+  name: encodeValue,
+  parameters: [fuel : Nat, big : Bool, layout : Layout, value : Value],
+  result: Encoded,
+  body: (encodeWork fuel big (cons (record Piece {offset := 0, layout := layout, value := value}) (nil Piece)) (uninitBytes (layoutSize layout)))
+}
+
+definition{
+  name: rawEqual,
+  parameters: [fuel : Nat, big : Bool, frames : (List Frame), layout : Layout, values : (List Value), destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "a raw_eq of no reference")
+    | List.cons left rest => (match rest
+      | List.nil => (ctor Outcome.ub "a raw_eq of one reference")
+      | List.cons right more => (match (pointeeOf frames left)
+        | Option.none => (ctor Outcome.ub "a raw_eq of a value that is not a reference to a value")
+        | Option.some a => (match (pointeeOf frames right)
+          | Option.none => (ctor Outcome.ub "a raw_eq of a value that is not a reference to a value")
+          | Option.some b => (match (encodeValue fuel big layout a)
+            | Encoded.stop outcome => outcome
+            | Encoded.found xs => (match (encodeValue fuel big layout b)
+              | Encoded.stop outcome => outcome
+              | Encoded.found ys => (match (sameBytes xs ys)
+                | Option.none => (ctor Outcome.ub "a raw_eq of bytes that are uninitialized or a pointer's")
+                | Option.some same => (finishCall frames destination target (ctor Value.boolean same)))))))))
+}
+
+definition{
   name: writeRun,
   parameters: [frames : (List Frame), loc : Location, value : Value, count : Nat],
   result: (Option (List Frame)),
@@ -3149,6 +3198,11 @@ definition{
         | List.cons value others => (match (evalUnchecked source target2 value)
           | Evaluated.stop outcome => outcome
           | Evaluated.found result => (finishCall frames destination target result))))
+    | Callee.rawEq generic => (match (genericLayout frames generic)
+      | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
+      | Option.some layout => (match (evalOperands program frames args)
+        | EvaluatedList.stop outcome => outcome
+        | EvaluatedList.found values => (rawEqual fuel (project program bigEndian) frames layout values destination target)))
     | Callee.writeBytes generic => (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
       | Option.some element => (match (evalOperands program frames args)

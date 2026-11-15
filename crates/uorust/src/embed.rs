@@ -2812,6 +2812,21 @@ impl Cx<'_> {
                                 ],
                             )
                         }
+                        // `raw_eq::<T>`: its two values' bytes at `T`'s
+                        // layout, read from the type argument the call
+                        // prints.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "raw_eq"
+                                && type_argument(callee)
+                                    .and_then(|t| self.generic_layout(&t))
+                                    .is_some() =>
+                        {
+                            let t = type_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.rawEq",
+                                &[self.generic_layout(&t).unwrap_or_default()],
+                            )
+                        }
                         Callee::Intrinsic(p)
                             if intrinsic_name(&p) == "write_bytes"
                                 && self.written_element(body, args).is_some() =>
