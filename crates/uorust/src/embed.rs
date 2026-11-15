@@ -1125,8 +1125,9 @@ impl Cx<'_> {
         // The enum of exactly the printed path (a crate prints its own
         // items by their paths from its root), else each whose path the
         // printed one ends alike with, else, for a path through a module
-        // no source declares (one a build script writes), the one enum of
-        // that name its crate declares.
+        // no source declares (one a build script writes), the enums of
+        // that name its crate declares; each where they give the variant's
+        // discriminant alike.
         let exact: Vec<_> = candidates
             .iter()
             .filter(|(path, vs)| *path == erased && has(vs))
@@ -1145,12 +1146,16 @@ impl Cx<'_> {
                 crate::mir::parse::split_path(path).first().copied() == Some(first) && has(vs)
             })
             .collect();
+        // Else every enum of the name that has the variant.
+        let only: Vec<_> = candidates.iter().filter(|(_, vs)| has(vs)).collect();
         let chosen = if !exact.is_empty() {
             exact
         } else if !alike.is_empty() {
             alike
-        } else if owned.len() == 1 {
+        } else if !owned.is_empty() {
             owned
+        } else if !only.is_empty() {
+            only
         } else {
             return None;
         };
@@ -4711,22 +4716,46 @@ fn embed_census(
     // The enums of the crates it builds on are theirs by their crate's
     // name (`hashbrown::TryReserveError`), as its bodies print them, and
     // not by a path of its own.
+    // So are core's and alloc's (`core::io::ErrorKind`, not serde_json's
+    // own `io::core::ErrorKind`), for such a crate.
     let mut enums = if builds_on.is_empty() {
         enums(&link.decls)
     } else {
-        enums(&crate::mir::core::library_decls(
-            root,
-            &["core", "alloc", krate],
-        ))
+        enums(&crate::mir::core::library_decls(root, &[krate]))
     };
-    for dep in builds_on {
+    let library = ["core", "alloc"].map(String::from);
+    let theirs: &[String] = if builds_on.is_empty() { &[] } else { &library };
+    for dep in theirs.iter().chain(builds_on) {
         let decls = crate::mir::core::library_decls(root, &[dep.as_str()]);
-        for (last, found) in self::enums(&decls) {
-            enums.entry(last).or_default().extend(
-                found
-                    .into_iter()
-                    .map(|(path, variants)| (format!("{dep}::{path}"), variants)),
-            );
+        let mut by_path: BTreeMap<String, Vec<(String, i128)>> =
+            self::enums(&decls).into_values().flatten().collect();
+        // An enum by each path a `use` re-exports it at too
+        // (`aho_corasick::MatchKind` of `util::search::MatchKind`), a
+        // re-export of a re-export as well.
+        // Each round adds a path no round had, of finitely many uses.
+        loop {
+            let more: Vec<(String, Vec<(String, i128)>)> = decls
+                .uses()
+                .filter_map(|(module, name, target)| {
+                    let at = if module.is_empty() {
+                        name.to_string()
+                    } else {
+                        format!("{module}::{name}")
+                    };
+                    let variants = by_path.get(target)?;
+                    (!by_path.contains_key(&at)).then(|| (at, variants.clone()))
+                })
+                .collect();
+            if more.is_empty() {
+                break;
+            }
+            by_path.extend(more);
+        }
+        for (path, variants) in by_path {
+            enums
+                .entry(last_segment(&path))
+                .or_default()
+                .push((format!("{dep}::{path}"), variants));
         }
     }
     // The enums of a crate the crate's source mounts as a module of its own

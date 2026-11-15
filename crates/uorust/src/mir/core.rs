@@ -714,6 +714,14 @@ pub(crate) struct CoreDecls {
 }
 
 impl CoreDecls {
+    /// Each name a `use` brings into a module, by (module, name), with the
+    /// path from the crate's root it names.
+    pub(crate) fn uses(&self) -> impl Iterator<Item = (&str, &str, &str)> {
+        self.uses
+            .iter()
+            .map(|((m, n), t)| (m.as_str(), n.as_str(), t.as_str()))
+    }
+
     /// The type core's source gives the const parameter `name` in scope in
     /// the function at `path`: its own, its impl's or its type's.
     pub(crate) fn const_type(&self, path: &str, name: &str) -> Option<String> {
