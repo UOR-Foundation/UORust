@@ -128,18 +128,7 @@ pub fn production(
         path: path.to_path_buf(),
         reason,
     };
-    let descriptors: serde_json::Value =
-        serde_json::from_str(targets).map_err(|e| bad(Path::new("targets.json"), e.to_string()))?;
-    let digest = descriptors
-        .get("targets")
-        .and_then(|t| t.as_array())
-        .into_iter()
-        .flatten()
-        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
-        .and_then(|t| t.get("digest"))
-        .and_then(|d| d.as_str())
-        .ok_or_else(|| bad(Path::new("targets.json"), format!("no {TARGET} descriptor")))?
-        .to_string();
+    let digest = descriptor(targets)?;
     let prefix = module_prefix(projection)?;
     copy_tree(projection, out)?;
     let roots = roots(register);
@@ -228,6 +217,27 @@ pub fn production(
 /// over budget as a whole, not refused for any one root.
 const TOTAL_BUDGET: &str = "max_total_source_bytes";
 
+/// The digest of the [`TARGET`] descriptor in `targets` (the output of
+/// `lexlean production targets`).
+fn descriptor(targets: &str) -> Result<String, UorustError> {
+    let bad = |reason: String| UorustError::Malformed {
+        path: PathBuf::from("targets.json"),
+        reason,
+    };
+    let descriptors: serde_json::Value =
+        serde_json::from_str(targets).map_err(|e| bad(e.to_string()))?;
+    descriptors
+        .get("targets")
+        .and_then(|t| t.as_array())
+        .into_iter()
+        .flatten()
+        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
+        .and_then(|t| t.get("digest"))
+        .and_then(|d| d.as_str())
+        .map(str::to_string)
+        .ok_or_else(|| bad(format!("no {TARGET} descriptor")))
+}
+
 /// The cause of a root no build reached before the export's deadline.
 const UNBUILT: &str = "not built before the export's deadline";
 
@@ -292,8 +302,10 @@ pub fn production_build(
     let deadline = within.map(|w| std::time::Instant::now() + w);
     let prefix = format!("{}.{BEHAVIOR}.", module_prefix(projection)?);
     let all = roots(register);
+    // Refused before anything is written: no descriptor to export to.
+    descriptor(targets)?;
     let mut compiler: BTreeMap<String, String> = BTreeMap::new();
-    if prior.compiler == compiler_version()? {
+    if !prior.compiler.is_empty() && prior.compiler == compiler_version()? {
         let by_kappa: BTreeMap<&str, &str> = all
             .iter()
             .map(|r| (r.kappa.as_str(), r.definition.as_str()))
@@ -1082,6 +1094,14 @@ pub(crate) fn sync(
         path: path.to_path_buf(),
         reason,
     };
+    // Refused before anything is written: not what `certify production`
+    // keeps, which always holds the refusals and each bundle's result.json.
+    if !production.join(REFUSALS).is_file() {
+        return Err(bad(
+            kept,
+            format!("no {REFUSALS} beside a bundle's result.json: not kept by certify production"),
+        ));
+    }
     let mut results = Vec::new();
     for bundle in bundles(kept)? {
         let path = bundle.join("result.json");
