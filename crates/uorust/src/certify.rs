@@ -237,7 +237,7 @@ const MAX_SHARDS: usize = 64;
 /// The plan of a sharded export: how many shards build the roots `prior`
 /// did not refuse, each sized so that [`BUILDS_PER_SHARD`] builds of it fit
 /// in `budget` seconds at the prior export's seconds per root, and the roots
-/// whose refusal is the compiler's own (`LLV7015`, `LLB6005`), whose full
+/// whose refusal is the compiler's own (`LLB6005`, or `LLV7015` built alone), whose full
 /// diagnostics the diagnose job keeps.
 pub fn plan(register: &Register, prior: &Manifest, budget: u64) -> (usize, Vec<String>) {
     let all = roots(register);
@@ -259,7 +259,7 @@ pub fn plan(register: &Register, prior: &Manifest, budget: u64) -> (usize, Vec<S
             prior
                 .refused
                 .get(&r.kappa)
-                .is_some_and(|c| c.starts_with("LLV7015") || c.starts_with("LLB6005"))
+                .is_some_and(|c| c.starts_with(ALONE) || c.starts_with("LLB6005"))
         })
         .map(|r| r.definition.clone())
         .collect();
@@ -720,12 +720,19 @@ fn build_batch(
     if !refused.is_empty() {
         return Ok((named, Some(Outcome::Refused(refused))));
     }
-    match messages.iter().find(|m| m.contains(TOTAL_BUDGET)) {
+    // A refusal that names no root (the total budget, or a limit of the
+    // build's own, as run 43706236017's LLI9001 on a deep package manifest)
+    // is the batch's: it is split until the refusal names its root or one
+    // root holds it.
+    match messages
+        .iter()
+        .find(|m| m.contains(TOTAL_BUDGET))
+        .or(messages.first())
+    {
         Some(m) => Ok((named, Some(Outcome::Over(m.clone())))),
-        None => Err(UorustError::Tool(format!(
-            "lexlean production build: {}",
-            messages.join("; ")
-        ))),
+        None => Err(UorustError::Tool(
+            "lexlean production build: refused without a diagnostic".into(),
+        )),
     }
 }
 
@@ -2421,7 +2428,7 @@ mod tests {
         let mut prior = Manifest::default();
         prior
             .refused
-            .insert("k0".into(), "LLV7015 certificate B: x".into());
+            .insert("k0".into(), "built alone: LLV7015 certificate B: x".into());
         prior.refused.insert("k1".into(), UNBUILT.into());
         // Nineteen to build, at most eight a shard however long the budget.
         let (shards, diagnose) = plan(&reg, &prior, u64::MAX / 2);
