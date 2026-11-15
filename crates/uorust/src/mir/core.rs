@@ -186,7 +186,7 @@ pub fn census(
                 .and_then(|n| n.to_str())
                 .unwrap_or_default()
                 .to_string();
-            dumps.push((name, crate::embed::read_text(file)?));
+            dumps.push((name, crate::embed::read_plain_dump(file)?));
         }
         read.push((module, dumps));
     }

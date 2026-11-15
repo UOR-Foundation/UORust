@@ -144,7 +144,16 @@ pub(crate) struct Cx<'a> {
     pub(crate) item_texts: std::cell::RefCell<BTreeMap<String, String>>,
     /// The key of the body being embedded, which its calls' tokens hold.
     pub(crate) key: std::cell::RefCell<String>,
+    /// The library's sources, which say whether a body tracks its caller
+    /// and where its calls are ([`crate::mir::site`]).
+    pub(crate) sources: &'a crate::mir::site::Sources,
+    /// What the source declares of the body being embedded.
+    pub(crate) declared: std::cell::RefCell<crate::mir::site::Declared>,
 }
+
+/// The fields of `core::panic::Location` as its declaration names them,
+/// which `caller_location`'s value sets: the file, the line and the column.
+const LOCATION_FIELDS: [&str; 3] = ["filename", "line", "col"];
 
 /// The type of the constant item `key` names in `link`: its return
 /// place's, as each of its dumps prints it, where they agree.
@@ -701,6 +710,23 @@ fn intrinsic_gaps(name: &str) -> Vec<String> {
         })
         .cloned()
         .collect()
+}
+
+/// `Option.none` of a call site: one whose location is not read.
+fn no_span() -> String {
+    format!("(ctor Option.none [{}])", mir_name("Span"))
+}
+
+/// `Option.some` of a call site: its file, line and column.
+fn span_term(span: &crate::mir::ir::IrSpan) -> String {
+    format!(
+        "(ctor Option.some [{}] (record {} {{file := {}, line := {}, column := {}}}))",
+        mir_name("Span"),
+        mir_name("Span"),
+        mir_string(&span.file),
+        span.line,
+        span.column
+    )
 }
 
 /// A LexLean name of the datatype, qualified by the semantics module.
@@ -1753,6 +1779,13 @@ impl Cx<'_> {
                     assumed: None,
                 }
             }
+            // A pointer that is not null and has no scalar of its own (a
+            // wide one, `(*const str) is !null`, as `NonNull<str>` lays out
+            // its field): laid out as the pointer, as `pattern_type!(*const
+            // T is !null)` is ([`Self::layout`]).
+            (Some(b), None) if pointee(b).is_some() && t.trim().ends_with(") is !null") => {
+                self.layout(b, depth)?
+            }
             _ => self.layout(t, depth)?,
         };
         laid.assumed.is_none().then_some(laid)
@@ -2041,6 +2074,39 @@ impl Cx<'_> {
     /// The `Generic` of the layout of `ty`: its layout, where it is read
     /// and assumes no pointer's size, or, where `ty` names a generic
     /// parameter, the slot its instance's fills.
+    /// `Callee.callerLocation` of a call of `caller_location` whose
+    /// destination is of type `dest` (`&Location<'_>`): `Location`'s layout
+    /// as rustc lays it out, and the indices of the fields
+    /// [`LOCATION_FIELDS`] names in its declaration.
+    fn caller_location(&self, dest: &str) -> Option<String> {
+        let ty = dest.trim().strip_prefix('&')?.trim();
+        let ty = ty
+            .strip_prefix("'static ")
+            .or_else(|| ty.strip_prefix("'_ "))
+            .unwrap_or(ty);
+        let laid = self.layout(ty, layout_depth(self.structs))?;
+        laid.assumed.is_none().then_some(())?;
+        let (name, _) = generic_parts(ty);
+        let last = crate::mir::parse::split_path(name)
+            .last()
+            .copied()
+            .unwrap_or(name);
+        let [decl] = self.structs.get(last)?.as_slice() else {
+            return None;
+        };
+        let at = |field: &str| {
+            decl.fields
+                .iter()
+                .position(|(n, _)| n.as_deref() == Some(field))
+                .map(|i| i.to_string())
+        };
+        let mut args = vec![laid.term];
+        for field in LOCATION_FIELDS {
+            args.push(at(field)?);
+        }
+        Some(mir_ctor("Callee.callerLocation", &args))
+    }
+
     fn generic_layout(&self, ty: &str) -> Option<String> {
         if let Some(g) = self.fixed_layout(ty) {
             return Some(g);
@@ -3060,7 +3126,13 @@ impl Cx<'_> {
         term
     }
 
-    fn terminator(&self, t: &IrTerminator, body: &IrBody, e: &mut Embedded) -> String {
+    fn terminator(
+        &self,
+        t: &IrTerminator,
+        span: Option<&crate::mir::ir::IrSpan>,
+        body: &IrBody,
+        e: &mut Embedded,
+    ) -> String {
         use spec::MirTerminatorKind as T;
         let (kind, term) = match t {
             IrTerminator::Goto(b) => (T::Goto, mir_ctor("Terminator.jump", &[b.to_string()])),
@@ -3126,6 +3198,20 @@ impl Cx<'_> {
                                 block: Some(self.block.get()),
                             });
                             token
+                        }
+                        // `caller_location`: a reference to the `Location` of
+                        // the call the frame's caller passes, laid out as
+                        // rustc lays out `Location`, its fields found by
+                        // their declared names.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "caller_location"
+                                && place_type(body, destination)
+                                    .and_then(|t| self.caller_location(&t))
+                                    .is_some() =>
+                        {
+                            place_type(body, destination)
+                                .and_then(|t| self.caller_location(&t))
+                                .unwrap_or_default()
                         }
                         // `float_to_int_unchecked`, from its argument's float
                         // type to its destination's integer type.
@@ -3315,9 +3401,15 @@ impl Cx<'_> {
                 };
                 let destination = self.place(destination, e);
                 let args = self.operands(&args, e);
+                let site = span
+                    .filter(|s| self.declared.borrow().reads(s))
+                    .map_or_else(no_span, span_term);
                 (
                     T::Call,
-                    mir_ctor("Terminator.call", &[destination, callee, args, target]),
+                    mir_ctor(
+                        "Terminator.call",
+                        &[destination, callee, args, target, site],
+                    ),
                 )
             }
             IrTerminator::Assert {
@@ -3369,6 +3461,7 @@ impl Cx<'_> {
                                 mir_ctor("Callee.bound", &[mir_string(&asm.name)]),
                                 args,
                                 target,
+                                no_span(),
                             ],
                         ),
                     )
@@ -3485,6 +3578,7 @@ impl Cx<'_> {
         self.sites.borrow_mut().clear();
         self.key.replace(path.to_string());
         self.owner.replace(b.path.clone());
+        self.declared.replace(self.sources.declared(b));
         self.locals.replace(b.locals.clone());
         self.base.set(b.locals.len());
         let mut locals: Vec<String> = b.locals.iter().map(|t| self.ty(t)).collect();
@@ -3551,7 +3645,7 @@ impl Cx<'_> {
                     "(record {} {{statements := {}, terminator := {}}})",
                     mir_name("Block"),
                     term_list(&statements, &mir_name("Statement")),
-                    self.terminator(&block.terminator, b, e)
+                    self.terminator(&block.terminator, block.span.as_ref(), b, e)
                 )
             })
             .collect();
@@ -3598,6 +3692,7 @@ impl Cx<'_> {
                         },
                         term_list(&[], &mir_name("Operand")),
                         format!("(ctor Option.some [Nat] {after})"),
+                        no_span(),
                     ],
                 )
             ));
@@ -3629,12 +3724,16 @@ impl Cx<'_> {
         e.sites = self.sites.take();
         e.cost = self.cost(b, &reached, &items, &e.sites, &blocks);
         e.term = format!(
-            "(record {} {{path := {}, arity := {}, locals := {}, blocks := {}, entry := {entry}}})",
+            "(record {} {{path := {}, arity := {}, locals := {}, blocks := {}, entry := {entry}, tracked := {}}})",
             mir_name("Body"),
             mir_string(path),
             b.arity,
             term_list(&locals, &mir_name("Ty")),
-            term_list(&blocks, &mir_name("Block"))
+            term_list(&blocks, &mir_name("Block")),
+            match self.declared.borrow().tracked {
+                Some(t) => format!("(ctor Option.some [Bool] {t})"),
+                None => "(ctor Option.none [Bool])".to_string(),
+            }
         );
         e
     }
@@ -4068,6 +4167,17 @@ pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> St
 /// A file's text.
 pub(crate) fn read_text(path: &Path) -> Result<String, UorustError> {
     std::fs::read_to_string(path).map_err(|e| crate::error::io(path, e))
+}
+
+/// A dump's text, with the spans it prints ([`crate::mir::parse::dumped`]).
+pub(crate) fn read_dump(path: &Path) -> Result<String, UorustError> {
+    Ok(crate::mir::parse::dumped(&read_text(path)?))
+}
+
+/// A dump's text as rustc prints it without spans
+/// ([`crate::mir::parse::unspanned`]).
+pub(crate) fn read_plain_dump(path: &Path) -> Result<String, UorustError> {
+    Ok(crate::mir::parse::unspanned(&read_dump(path)?))
 }
 
 /// The paths a directory holds, sorted.
@@ -5158,13 +5268,14 @@ fn differential(
     Ok((modules, index))
 }
 
-/// A body's κ, as the core register keys it: its crate path and its text,
-/// with the build's allocation numbers renumbered.
+/// A body's κ, as the core register keys it: its crate path and its text
+/// as rustc prints it without spans, with the build's allocation numbers
+/// renumbered.
 pub(crate) fn body_kappa(krate: &str, path: &str, text: &str) -> String {
     crate::project::sha(
         format!(
             "{krate}::{path}\n{}",
-            crate::mir::core::numbered_allocations(text)
+            crate::mir::core::numbered_allocations(&crate::mir::parse::unspanned(text))
         )
         .as_bytes(),
     )
@@ -5695,7 +5806,7 @@ fn embed_linked(
                 .and_then(|n| n.to_str())
                 .unwrap_or_default()
                 .to_string();
-            texts.push((name, read_text(file)?));
+            texts.push((name, read_dump(file)?));
         }
         read.push((module, texts));
     }
@@ -5833,6 +5944,7 @@ fn embed_linked(
     let mut signatures = BTreeMap::new();
     let package = library_root(root).join(krate);
     let lib = package.join(crate::layouts::library_file(&package)?);
+    let sources = crate::mir::site::Sources::new(root);
     // Core's, alloc's and std's samples are their primitives' methods; a
     // crate of crates.io's are its own functions over scalars.
     let of_library = ["core", "alloc", "std"].contains(&krate);
@@ -5914,6 +6026,8 @@ fn embed_linked(
                 item_texts: Default::default(),
                 key: Default::default(),
                 block: Default::default(),
+                sources: &sources,
+                declared: Default::default(),
             };
             // A static's initializer is a body of the program, read where a
             // body reads the static, and no row of the census.
@@ -6000,6 +6114,8 @@ fn embed_linked(
             item_texts: Default::default(),
             key: Default::default(),
             block: Default::default(),
+            sources: &sources,
+            declared: Default::default(),
         };
         // The constant items the bodies read that no dump holds: each a
         // body of the program, as its declaration gives it.
@@ -6384,6 +6500,7 @@ mod tests {
             crate::mir::float::Format { exp: 8, frac: 23 },
         )]);
         let resolve = |_: &str, _: &[Option<String>], _: &str| Callee::Bound(String::new());
+        let sources = crate::mir::site::Sources::new(Path::new(""));
         let cx = Cx {
             width: 64,
             enums: &enums,
@@ -6412,6 +6529,8 @@ mod tests {
             item_texts: Default::default(),
             key: Default::default(),
             block: Default::default(),
+            sources: &sources,
+            declared: Default::default(),
         };
         assert_eq!(cx.ty("f32"), "(ctor Mir::Ty.float 8 23)");
         assert_eq!(

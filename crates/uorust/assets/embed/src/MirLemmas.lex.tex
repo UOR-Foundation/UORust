@@ -62,5 +62,26 @@ theorem{
   },
   axioms: [Classical.choice, Quot.sound, propext]
 }
+
+definition{
+  name: callerProgram,
+  parameters: [tracked : Bool],
+  result: Mir::Program,
+  body: (record Mir::Program {bodies := (cons (record Mir::Body {path := "g", arity := 0, locals := (cons (ctor Mir::Ty.other "location") (nil Mir::Ty)), blocks := (cons (record Mir::Block {statements := (nil Mir::Statement), terminator := (ctor Mir::Terminator.call (record Mir::Place {base := 0, projection := (nil Mir::Proj)}) (ctor Mir::Callee.body "f") (nil Mir::Operand) (ctor Option.some [Nat] 1) (ctor Option.some [Mir::Span] (record Mir::Span {file := "x.rs", line := 4, column := 29})))}) (cons (record Mir::Block {statements := (nil Mir::Statement), terminator := (ctor Mir::Terminator.exit)}) (nil Mir::Block))), entry := 0, tracked := (ctor Option.some [Bool] false)}) (cons (record Mir::Body {path := "f", arity := 0, locals := (cons (ctor Mir::Ty.other "location") (nil Mir::Ty)), blocks := (cons (record Mir::Block {statements := (nil Mir::Statement), terminator := (ctor Mir::Terminator.call (record Mir::Place {base := 0, projection := (nil Mir::Proj)}) (ctor Mir::Callee.callerLocation (ctor Mir::Layout.record 24 true (cons 0 (cons 16 (cons 20 (cons 24 (nil Nat))))) (cons (ctor Mir::Layout.record 16 true (cons 0 (nil Nat)) (cons (ctor Mir::Layout.pointer 16) (nil Mir::Layout))) (cons (ctor Mir::Layout.int 4 false) (cons (ctor Mir::Layout.int 4 false) (cons (ctor Mir::Layout.record 0 true (nil Nat) (nil Mir::Layout)) (nil Mir::Layout)))))) 0 1 2) (nil Mir::Operand) (ctor Option.some [Nat] 1) (ctor Option.some [Mir::Span] (record Mir::Span {file := "x.rs", line := 3, column := 57})))}) (cons (record Mir::Block {statements := (nil Mir::Statement), terminator := (ctor Mir::Terminator.exit)}) (nil Mir::Block))), entry := 0, tracked := (ctor Option.some [Bool] tracked)}) (nil Mir::Body))), dictionary := (nil Mir::Binding), ubChecks := false, contractChecks := false, overflowChecks := false, pointerWidth := 64, bigEndian := false, globals := 0})
+}
+
+theorem{
+  name: callerLocationIsTheTrackedCallersCallSite,
+  parameters: [],
+  statement: ((Mir::evaluate 8 (callerProgram true) "g" (nil Mir::Value)) = (ctor Mir::Outcome.returned (ctor Mir::Value.reference (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (cons (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (cons (ctor Mir::Value.text "x.rs") (nil Mir::Value))) (cons (ctor Mir::Value.int 32 false 4) (cons (ctor Mir::Value.int 32 false 29) (cons (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (nil Mir::Value)) (nil Mir::Value))))))))),
+  proof: reflexivity{}
+}
+
+theorem{
+  name: callerLocationIsItsOwnCallSite,
+  parameters: [],
+  statement: ((Mir::evaluate 8 (callerProgram false) "g" (nil Mir::Value)) = (ctor Mir::Outcome.returned (ctor Mir::Value.reference (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (cons (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (cons (ctor Mir::Value.text "x.rs") (nil Mir::Value))) (cons (ctor Mir::Value.int 32 false 3) (cons (ctor Mir::Value.int 32 false 57) (cons (ctor Mir::Value.adt "" (record Mir::Signed {negative := false, magnitude := 0}) (nil Mir::Value)) (nil Mir::Value))))))))),
+  proof: reflexivity{}
+}
 \end{semanticmodule}
 \end{lexlean}
