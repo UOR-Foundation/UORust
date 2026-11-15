@@ -12,6 +12,12 @@
 #[path = "../roots/uorust_certified_acc_all_axioms.rs"]
 pub mod acc_all_axioms;
 
+/// `uorust::lift::Acc::apart`, certified as `Behavior::accApart`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_acc_apart.rs"]
+pub mod acc_apart;
+
 /// `uorust::lift::Acc::axiom`, certified as `Behavior::accAxiom`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -83,6 +89,12 @@ pub mod assert;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_assert_kind.rs"]
 pub mod assert_kind;
+
+/// `uorust::mir::coverage::binop`, certified as `Behavior::binop`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_binop.rs"]
+pub mod binop;
 
 /// `uorust::mir::coverage::borrow`, certified as `Behavior::borrow`.
 #[rustfmt::skip]
@@ -162,6 +174,12 @@ pub mod ctx_helper_name;
 #[path = "../roots/uorust_certified_ctx_names_from.rs"]
 pub mod ctx_names_from;
 
+/// `uorust::lift::Ctx::taken`, certified as `Behavior::ctxTaken`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_ctx_taken.rs"]
+pub mod ctx_taken;
+
 /// `uorust::lift::data_variant`, certified as `Behavior::dataVariant`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -233,6 +251,12 @@ pub mod first_free;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_fixed.rs"]
 pub mod fixed;
+
+/// `uorust::lift::flat_lift`, certified as `Behavior::flatLift`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_flat_lift.rs"]
+pub mod flat_lift;
 
 /// `uorust::lift::flat_some`, certified as `Behavior::flatSome`.
 #[rustfmt::skip]
@@ -378,6 +402,12 @@ pub mod mentions_word;
 #[path = "../roots/uorust_certified_method_char_any.rs"]
 pub mod method_char_any;
 
+/// `uorust::lift::method_int_checked_neg`, certified as `Behavior::methodIntCheckedNeg`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_method_int_checked_neg.rs"]
+pub mod method_int_checked_neg;
+
 /// `uorust::lift::method_list_is_empty`, certified as `Behavior::methodListIsEmpty`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -455,6 +485,12 @@ pub mod mir_cast_kind_path;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_mir_coverage_cast.rs"]
 pub mod mir_coverage_cast;
+
+/// `uorust::mir::coverage::intrinsic`, certified as `Behavior::mirCoverageIntrinsic`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_mir_coverage_intrinsic.rs"]
+pub mod mir_coverage_intrinsic;
 
 /// `uorust::mir::coverage::operand`, certified as `Behavior::mirCoverageOperand`.
 #[rustfmt::skip]
@@ -534,6 +570,12 @@ pub mod mir_terminator_kind_path;
 #[path = "../roots/uorust_certified_mir_un_op_path.rs"]
 pub mod mir_un_op_path;
 
+/// `uorust::lex::Module::path`, certified as `Behavior::modulePath`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_module_path.rs"]
+pub mod module_path;
+
 /// `uorust::mir::lower::mut_target`, certified as `Behavior::mutTarget`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -611,6 +653,12 @@ pub mod pointer_value;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_pointer_width.rs"]
 pub mod pointer_width;
+
+/// `uorust::lift::pointer_widths`, certified as `Behavior::pointerWidths`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_pointer_widths.rs"]
+pub mod pointer_widths;
 
 /// `uorust::mir::coverage::projection`, certified as `Behavior::projection`.
 #[rustfmt::skip]
@@ -755,6 +803,12 @@ pub mod ty_tag;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_types_accessor.rs"]
 pub mod types_accessor;
+
+/// `uorust::lift::Types::boxed`, certified as `Behavior::typesBoxed`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_types_boxed.rs"]
+pub mod types_boxed;
 
 /// `uorust::lift::Types::family_of`, certified as `Behavior::typesFamilyOf`.
 #[rustfmt::skip]
