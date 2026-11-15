@@ -372,6 +372,14 @@ pub struct Scope {
     pub shard: Option<(usize, usize)>,
 }
 
+/// The code of the kernel's rejection of a certificate B. Run 43700278692's
+/// diagnose job built roots alone that a batch had refused with it, and the
+/// kernel accepted them.
+const KERNEL: &str = "LLV7015";
+
+/// What a refusal's cause starts with when the root was built alone.
+const ALONE: &str = "built alone: ";
+
 /// The cause of a root no build reached before the export's deadline.
 const UNBUILT: &str = "not built before the export's deadline";
 
@@ -456,6 +464,9 @@ pub fn production_build(
             by_kappa
                 .get(kappa.as_str())
                 .filter(|_| cause.contains(&format!("`{prefix}")))
+                // A kernel rejection is carried only when the root was built
+                // alone: in a batch it can be the batch's, not the root's.
+                .filter(|_| !cause.starts_with(KERNEL))
                 .map(|d| ((*d).to_string(), cause.clone()))
         }));
     }
@@ -550,14 +561,33 @@ pub fn production_build(
                         }
                     }
                     Ok((named, Some(Outcome::Refused(refused)))) => {
-                        for (root, cause) in &refused {
+                        let mut rest = named.clone();
+                        for (root, cause) in refused {
+                            // The kernel rejects some roots' certificates in a
+                            // batch that it accepts alone: such a root is
+                            // built alone before it is refused.
+                            if cause.starts_with(KERNEL) && named.len() > 1 {
+                                eprintln!(
+                                    "certify production: pass {pass} (worker {worker}): {root} rejected in a batch after {seconds}s; built alone next"
+                                );
+                                rest.retain(|r| *r != root);
+                                s.batches.push(vec![root]);
+                                continue;
+                            }
                             eprintln!(
                                 "certify production: pass {pass} (worker {worker}): {root} refused after {seconds}s: {}",
                                 cause.lines().next().unwrap_or_default()
                             );
+                            let cause = if cause.starts_with(KERNEL) {
+                                format!("{ALONE}{cause}")
+                            } else {
+                                cause
+                            };
+                            s.compiler.insert(root, cause);
                         }
-                        s.compiler.extend(refused);
-                        s.batches.push(named);
+                        if !rest.is_empty() {
+                            s.batches.push(rest);
+                        }
                     }
                     Ok((named, Some(Outcome::Over(cause)))) => {
                         eprintln!(
