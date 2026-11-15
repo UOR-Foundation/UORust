@@ -2,8 +2,8 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 292 of 1204 functions of product code are lifted; 737
-# are residue, 49 foreign and 126 effect rows.
+# Honesty report: 292 of 1206 functions of product code are lifted; 737
+# are residue, 49 foreign and 128 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
@@ -224,7 +224,7 @@
 #     1 std::iter::Copied<std::slice::Iter<'_, &str>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4818:17: 4818:20}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3856:21: 3856:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3881:21: 3881:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
@@ -974,7 +974,7 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "b7e9b00ebee94fbaa6aed5e496beb000b091c3d7e6155646d3b43535e4e829d7"
+kappa = "263556aaec93dd46ceca2af4e888bcea35f1ba3c11c4fe45f5f54825ea7e3145"
 function = "uorust::embed::Cx<'_>::sized"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -1211,7 +1211,7 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "6f9b966cddbd69d0a18d522f2b4de201242a350ac756d601a7ccf1414a1fe090"
 function = "uorust::embed::fuel"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3856:21: 3856:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3881:21: 3881:24}>"
 
 [[residue]]
 kappa = "9b06d1e71770a7c515754932ed1fa95b9b3c4fe0c9bf896ecf35b38885e93c62"
@@ -5270,17 +5270,22 @@ function = "uorust::embed::dump_target"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "b7df9e40a65bb7be7b56ef43270f899ab24c8511ca2920459544d1ea6a9881c8"
+kappa = "3dcd7eb2578c74521e18eaa05c198c73c7c0360a9d0ab8134df0a19471e6d393"
 function = "uorust::embed::embed"
-effect = "Fs effect: Path::exists"
+effect = "calls uorust::embed::embed_with, which performs a Fs effect: Path::exists"
 
 [[effect]]
-kappa = "65aa58e29a83bb8c56c4067f319054a1944b23d8768f2a3a2a70ff7587fd8c4b"
+kappa = "746957235f4b585594279e4396a9a73281ddc05fbc4cf96c2ee56214fec238e1"
 function = "uorust::embed::embed_census"
 effect = "Fs effect: Path::is_dir"
 
 [[effect]]
-kappa = "51729b5c371e3b1754d2ba9e64e373d6b865da20007bd5b25ade95081611e1e1"
+kappa = "ab4f2a5ba2e8c41e24564a556e0ca9c0684dbe06b8014364b447303f9e2a69c1"
+function = "uorust::embed::embed_with"
+effect = "Fs effect: Path::exists"
+
+[[effect]]
+kappa = "557f9401e54cbfae30810ef953c877f44c8dbb58c1f70f3a45cecb91b7ae0bc4"
 function = "uorust::embed::instance_types"
 effect = "calls uorust::embed::embed_census, which performs a Fs effect: Path::is_dir"
 
@@ -5575,12 +5580,17 @@ function = "uorust::registry::copy_tree"
 effect = "Fs effect: std::fs::create_dir_all"
 
 [[effect]]
+kappa = "06b0a10bc3eae34598714b85130544dabafee6ec8c7ca21aece6accbeb22dae8"
+function = "uorust::registry::dependencies"
+effect = "Process effect: Command::new"
+
+[[effect]]
 kappa = "71aef88ef8d674e30c7b72b8df584279def04ba51d95202557e6332d7d2148a0"
 function = "uorust::registry::dump"
 effect = "Fs effect: std::fs::create_dir_all"
 
 [[effect]]
-kappa = "8a8e6b7f07d36492605bbf216e8545a2073aaf6896d35da1693284dd4f9c3635"
+kappa = "ef51cabc41a19d824e80ca23d697adbebdd132b568695a872a904be6986b18b7"
 function = "uorust::registry::embed_crate"
 effect = "Process effect: Command::new"
 
