@@ -2,14 +2,14 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 292 of 1234 functions of product code are lifted; 638
+# Honesty report: 292 of 1235 functions of product code are lifted; 639
 # are residue, 49 foreign and 255 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   collision: 1
 #   form: 2
-#   mir::AggregateKind::Closure: 44
+#   mir::AggregateKind::Closure: 45
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
@@ -19,6 +19,7 @@
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
 #     1 certify::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::plan::{closure#0}: mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index
+#     1 embed::intrinsic_gaps::{closure#0}: mir::AggregateKind::Closure: embed::intrinsic_gaps::{closure#0}::{closure#0}: mir::TerminatorKind::Call: core::str::<impl str>::split_once
 #     1 embed::nearest::{closure#0}: type outside the lift: std::str::Split<'_, &str>
 #     1 embed::stamp_rows::{closure#0}: mir::TerminatorKind::Call: std::option::Option::and_then
 #     1 layouts::same_type::{closure#0}: type outside the lift: std::str::SplitWhitespace<'_>
@@ -203,7 +204,7 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, (std::string::String, std::string::String)>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4804:17: 4804:20}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4590:21: 4590:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4610:21: 4610:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
@@ -1020,7 +1021,7 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "387d6517c1d61cf409452ac5ce2b611545c8de83f75ca886cf93b81cb946911d"
+kappa = "8d7bbbcb9985857b917f7bacecd65ca5cd7e883b6b0fef3692900870839c0d69"
 function = "uorust::embed::Cx<'_>::terminator"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -1227,7 +1228,7 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "6f9b966cddbd69d0a18d522f2b4de201242a350ac756d601a7ccf1414a1fe090"
 function = "uorust::embed::fuel"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4590:21: 4590:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4610:21: 4610:24}>"
 
 [[residue]]
 kappa = "9b06d1e71770a7c515754932ed1fa95b9b3c4fe0c9bf896ecf35b38885e93c62"
@@ -1270,6 +1271,12 @@ kappa = "21f9f9fed21aa2a68e1bfc95ea8312be110df1088bb13b8f9e1996482b5691ee"
 function = "uorust::embed::int_ty"
 reason = "mir"
 detail = "mir::Ty: std::str::Chars<'_>"
+
+[[residue]]
+kappa = "f3d5df15b87609818d0327d6e2cff5dd5172874091a147ad02f0e694623a84f5"
+function = "uorust::embed::intrinsic_gaps"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: embed::intrinsic_gaps::{closure#0}: mir::AggregateKind::Closure: embed::intrinsic_gaps::{closure#0}::{closure#0}: mir::TerminatorKind::Call: core::str::<impl str>::split_once"
 
 [[residue]]
 kappa = "c12ec3742ca01e74e77a086a85b3fedee6b576170a46deb652d618c48dd9d4ca"
