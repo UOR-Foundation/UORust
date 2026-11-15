@@ -66,6 +66,9 @@ pub(crate) struct Package {
     pub(crate) name: String,
     pub(crate) version: String,
     pub(crate) description: String,
+    /// Cargo's `repository` and `homepage` URLs, empty when undeclared.
+    pub(crate) repository: String,
+    pub(crate) homepage: String,
     pub(crate) license: String,
     pub(crate) rust_version: Option<String>,
     pub(crate) authors: Vec<String>,

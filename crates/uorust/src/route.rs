@@ -119,6 +119,12 @@ pub const ROUTES: &[Route] = &[
         "design",
     ),
     route("UR-R28", "module", "Foundation.Arch::OpmThing", "design"),
+    route(
+        "UR-R29",
+        "lib-package",
+        "Foundation.Library.V1.Model::NativeLibrary",
+        "release",
+    ),
 ];
 
 /// The longest request the router reads, in bytes. It is derived from the

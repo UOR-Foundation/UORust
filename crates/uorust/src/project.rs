@@ -300,6 +300,7 @@ pub(crate) fn project(
     let mir = dumps.zip(options.mir.as_ref());
     let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
     let supply = supply(&ctx);
+    let library = library(ws, &prefix, &behavior, &mut notes);
     modules.push(arch);
     modules.push(iface.module);
     modules.push(design);
@@ -307,6 +308,7 @@ pub(crate) fn project(
     modules.push(quality);
     modules.push(behavior);
     modules.push(supply);
+    modules.extend(library);
     // LexLean refuses a semantic module with no declaration (LLT4001), and a
     // workspace with nothing to lift (a fresh `cargo new`) leaves Behavior so.
     modules.retain(|m| !m.decls.is_empty());
@@ -430,6 +432,164 @@ fn compiler_semantics() -> &'static str {
         .and_then(|rest| rest.strip_suffix('"'))
         .expect("app/lexlean.lock names its compiler semantics")
 }
+
+/// The native-library profile's bound on each root list (SPEC 12.6: 1..1024
+/// roots), which PrismPM's projection enforces.
+const LIBRARY_ROOTS: usize = 1024;
+
+/// The crate's profile when it is a library (SPEC 12.6): the one
+/// `Foundation.Library.V1.Model::NativeLibrary` value of the project, its
+/// metadata from Cargo, its exports every lifted definition and its
+/// acceptance roots the closed Boolean claims its tests make (UR-R29).
+///
+/// A slot Cargo leaves empty is inferred where Cargo itself defines the
+/// default: the homepage is the repository when only that is declared
+/// (Cargo's manifest reference: a homepage distinct from the source
+/// repository), and the description is the crate doc's summary line, the
+/// text rustdoc and crates.io show for the crate. A slot no rule defines is
+/// an undefined slot in the register, and no profile is written.
+fn library(ws: &Workspace, prefix: &str, behavior: &Module, notes: &mut Notes) -> Option<Module> {
+    let libraries: Vec<&Package> = ws
+        .packages
+        .iter()
+        .filter(|p| p.targets.iter().any(|t| t.kind == TargetKind::Lib))
+        .collect();
+    let [package] = libraries.as_slice() else {
+        if libraries.len() > 1 {
+            for package in libraries {
+                notes.refusals.insert(Refusal::UndefinedSlot {
+                    package: package.name.clone(),
+                    slot: "library",
+                    reason: "a project holds one NativeLibrary value and the workspace has \
+                             more than one library package"
+                        .to_string(),
+                });
+            }
+        }
+        return None;
+    };
+    let crate_doc = package
+        .targets
+        .iter()
+        .find(|t| t.kind == TargetKind::Lib)
+        .and_then(|t| package.files.iter().find(|f| f.rel == t.src))
+        .map(|f| summary(&f.doc))
+        .unwrap_or_default();
+    let description = if package.description.trim().is_empty() {
+        crate_doc
+    } else {
+        package.description.clone()
+    };
+    let homepage = if package.homepage.is_empty() {
+        package.repository.clone()
+    } else {
+        package.homepage.clone()
+    };
+    let qualified = |name: &str| format!("{prefix}.{BEHAVIOR}.{name}");
+    let mut exports: Vec<String> = Vec::new();
+    let mut acceptance: Vec<String> = Vec::new();
+    // An acceptance root is a closed Boolean definition the module proves
+    // true: the theorem `(({root}) = true)` is what makes it one.
+    let proved: BTreeSet<&str> = behavior
+        .decls
+        .iter()
+        .filter_map(|decl| match decl {
+            Decl::Theorem {
+                statement,
+                parameters,
+                ..
+            } if parameters.is_empty() => statement
+                .strip_prefix("((")
+                .and_then(|s| s.strip_suffix(") = true)")),
+            _ => None,
+        })
+        .collect();
+    for decl in &behavior.decls {
+        if let Decl::Definition {
+            name,
+            parameters,
+            result,
+            ..
+        } = decl
+        {
+            exports.push(qualified(name));
+            if parameters.is_empty() && result == "Bool" && proved.contains(name.as_str()) {
+                acceptance.push(qualified(name));
+            }
+        }
+    }
+    exports.sort();
+    acceptance.sort();
+    let mut undefined = Vec::new();
+    for (slot, value) in [
+        ("description", &description),
+        ("repository", &package.repository),
+        ("homepage", &homepage),
+    ] {
+        if value.trim().is_empty() {
+            undefined.push((
+                slot,
+                format!("Cargo declares no {slot} and no rule infers one"),
+            ));
+        }
+    }
+    for (slot, roots) in [("exportRoots", &exports), ("acceptanceRoots", &acceptance)] {
+        if roots.is_empty() {
+            undefined.push((slot, format!("the crate yields no {slot}")));
+        } else if roots.len() > LIBRARY_ROOTS {
+            undefined.push((
+                slot,
+                format!(
+                    "the crate yields {} {slot}, past the profile's {LIBRARY_ROOTS}",
+                    roots.len()
+                ),
+            ));
+        }
+    }
+    if !undefined.is_empty() {
+        for (slot, reason) in undefined {
+            notes.refusals.insert(Refusal::UndefinedSlot {
+                package: package.name.clone(),
+                slot,
+                reason,
+            });
+        }
+        return None;
+    }
+    let list = |roots: &[String]| {
+        crate::embed::term_list(
+            &roots.iter().map(|r| string(r)).collect::<Vec<_>>(),
+            "String",
+        )
+    };
+    let body = format!(
+        "(record {LIBRARY_MODEL}::NativeLibrary {{profile := \"prismpm/native-library/1\", \
+         name := {}, cargoName := {}, cargoVersion := {}, cargoDescription := {}, \
+         cargoRepository := {}, cargoHomepage := {}, exportRoots := {}, acceptanceRoots := {}}})",
+        string(&package.name),
+        string(&package.name),
+        string(&package.version),
+        string(&description),
+        string(&package.repository),
+        string(&homepage),
+        list(&exports),
+        list(&acceptance),
+    );
+    Some(Module {
+        name: "Library".into(),
+        glossaries: vec![BOOL, NAT],
+        imports: vec![LIBRARY_MODEL.into()],
+        title: "Boolean",
+        decls: vec![Decl::value(
+            "library",
+            format!("{LIBRARY_MODEL}::NativeLibrary"),
+            body,
+        )],
+    })
+}
+
+/// The SDK module that declares the native-library profile's type.
+const LIBRARY_MODEL: &str = "Foundation.Library.V1.Model";
 
 pub(crate) fn sha(bytes: &[u8]) -> String {
     Sha256::digest(bytes)

@@ -39,6 +39,13 @@ pub(crate) enum Refusal {
         package: String,
         version: String,
     },
+    /// A slot of the crate's profile that neither Cargo nor any inference
+    /// rule defines: an entry of the undefined-slot register.
+    UndefinedSlot {
+        package: String,
+        slot: &'static str,
+        reason: String,
+    },
 }
 
 impl Refusal {
@@ -54,6 +61,7 @@ impl Refusal {
             Self::AmbiguousFact { .. } => "ambiguous-fact",
             Self::AdvisoriesUnconsulted => "advisories-unconsulted",
             Self::UnansweredAdvisory { .. } => "unanswered-advisory",
+            Self::UndefinedSlot { .. } => "undefined-slot",
         }
     }
 
@@ -67,6 +75,7 @@ impl Refusal {
             Self::NoInitialState { .. } | Self::AmbiguousFact { .. } => "UR-R26",
             Self::NoMsrv { .. } => "UR-R24",
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => "UR-R21",
+            Self::UndefinedSlot { .. } => "UR-R29",
         }
     }
 
@@ -78,7 +87,9 @@ impl Refusal {
             | Self::Collision { span, .. }
             | Self::NoInitialState { span, .. }
             | Self::AmbiguousFact { span, .. } => span.render(),
-            Self::ExternalPath { package, .. } | Self::NoMsrv { package } => {
+            Self::ExternalPath { package, .. }
+            | Self::NoMsrv { package }
+            | Self::UndefinedSlot { package, .. } => {
                 format!("{package}/Cargo.toml")
             }
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => {
@@ -127,6 +138,9 @@ impl Refusal {
                 "{id} affects {package} {version}, and the workspace has no advisory gate \
                  (deny.toml) and no recorded acceptance of it"
             ),
+            Self::UndefinedSlot { slot, reason, .. } => {
+                format!("the library profile's {slot} is undefined: {reason}")
+            }
         }
     }
 }

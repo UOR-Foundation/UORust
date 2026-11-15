@@ -437,6 +437,8 @@ fn package(
         name: text(meta, "name"),
         version: text(meta, "version"),
         description: text(meta, "description"),
+        repository: text(meta, "repository"),
+        homepage: text(meta, "homepage"),
         license: text(meta, "license"),
         rust_version: meta
             .get("rust_version")

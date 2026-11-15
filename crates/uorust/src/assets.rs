@@ -1,6 +1,7 @@
 //! The fixed files of every projection, byte copies of the PrismPM reference
 //! project the SDK checks (`tests/fixtures/features/fj-01-lexlean-mcp` and the
-//! `Production.ThreatModel` module of `threat-model/tm-01-prism-code`).
+//! `Production.ThreatModel` module of `threat-model/tm-01-prism-code`, and the
+//! `Foundation.Library.V1.Model` module of `library/native-library`).
 //!
 //! Their digests are part of `lexlean.lock`, so they are embedded, not written
 //! by hand: the facet language packages, the Foundation facet modules, the
@@ -244,6 +245,10 @@ pub(crate) const FIXED: &[(&str, &str)] = &[
     (
         "src/Foundation/Arch.lex.tex",
         include_str!("../assets/project/src/Foundation/Arch.lex.tex"),
+    ),
+    (
+        "src/Foundation/Library/V1/Model.lex.tex",
+        include_str!("../assets/project/src/Foundation/Library/V1/Model.lex.tex"),
     ),
     (
         "src/Foundation/Qual.lex.tex",
