@@ -4557,8 +4557,14 @@ fn differential(
             continue;
         }
         // A sample's theorems stay in one module, which a sample whose
-        // fuel is past the budget has to itself.
-        let cost = theorems.len().saturating_mul(fuel(program, s));
+        // fuel is past the budget has to itself. A call finds its callee
+        // by comparing paths along the program's bodies, so a step costs
+        // up to the closure's size: the measurement was of samples of one
+        // body.
+        let cost = theorems
+            .len()
+            .saturating_mul(fuel(program, s))
+            .saturating_mul(s.closure.len().max(1));
         if parts
             .last()
             .is_some_and(|(_, _, n)| *n > 0 && n.saturating_add(cost) > differential_budget())
