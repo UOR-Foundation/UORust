@@ -498,6 +498,20 @@ jobs:
           name: uorust-crates
           path: target/bin/uorust
           retention-days: {KEEP['uorust']}
+      # Core's and alloc's MIR, which each crate's program links, so a
+      # crate's call into core is evaluated through core's body: dumped
+      # once, as core's own workflow dumps it, for every shard.
+      - name: Dump core's and alloc's MIR through the locked SDK
+        if: ${{{{ steps.crates.outputs.crates != '[]' }}}}
+        shell: bash
+        run: scripts/ci/sdk.sh "scripts/mir/dump-lib.sh core target/library-mir/core && scripts/mir/dump-lib.sh alloc target/library-mir/alloc"
+      - name: Keep core's and alloc's MIR for the shards
+        if: ${{{{ steps.crates.outputs.crates != '[]' }}}}
+        uses: {USES['actions/upload-artifact']}
+        with:
+          name: library-mir-crates
+          path: target/library-mir
+          retention-days: {KEEP['uorust']}
 
   {shard}:
     name: lift ${{{{ matrix.crate.name }}}}@${{{{ matrix.crate.version }}}}
@@ -521,6 +535,11 @@ jobs:
         with:
           name: uorust-crates
           path: target/bin
+      - name: Fetch core's and alloc's MIR
+        uses: {USES['actions/download-artifact']}
+        with:
+          name: library-mir-crates
+          path: target/library-mir
       # The library the crate is embedded beside: dump-lib.sh fetches the
       # pinned rust-src (hash-checked) before it lists core's modules.
       - name: Fetch the pinned rust-src through the locked SDK
@@ -536,7 +555,7 @@ jobs:
           mkdir -p target/tmp target/times
           channel=$(sed -n 's/^channel = "\\(.*\\)"/\\1/p' rust-toolchain.toml)
           status=0
-          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library --differential" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library --differential --link core=target/library-mir/core --link alloc=target/library-mir/alloc" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           # The attempt's seconds, which plan the next run, whether or not
           # the crate built.
           echo $(( $(date +%s) - STARTED )) >"target/times/$SPEC"

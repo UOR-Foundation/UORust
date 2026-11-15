@@ -335,6 +335,12 @@ struct CrateArgs {
     /// verify` decides; each sampled row is stamped with its theorems.
     #[arg(long, requires = "library")]
     differential: bool,
+    /// A library crate to link into the crate's program, `<crate>=<dumps>`
+    /// (`core=target/core-mir`, as `scripts/mir/dump-lib.sh` writes them):
+    /// a call into it names its body, so a body that calls core is
+    /// evaluated through core's.
+    #[arg(long = "link", requires = "library")]
+    link: Vec<String>,
 }
 
 #[derive(clap::Args)]
@@ -496,6 +502,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     register: args.register.as_deref(),
                     bridge: args.shallow.as_deref().zip(args.bridge.as_deref()),
                     differential: None,
+                    link: &[],
                 },
             )?;
             println!(
@@ -516,6 +523,19 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 &register,
                 args.library.as_deref(),
                 args.differential,
+                &args
+                    .link
+                    .iter()
+                    .map(|l| {
+                        l.split_once('=')
+                            .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
+                            .ok_or_else(|| {
+                                uorust::UorustError::Tool(format!(
+                                    "--link {l}: not <crate>=<dumps>"
+                                ))
+                            })
+                    })
+                    .collect::<Result<Vec<_>, _>>()?,
             )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",

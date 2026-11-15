@@ -3785,9 +3785,20 @@ pub fn embed_with(
         register,
         bridge,
         differential: alone,
+        link,
     } = *outputs;
     let root = library.parent().unwrap_or(library);
-    let (modules, census, program) = embed_census(krate, builds_on, root, dumps, only)?;
+    // Each library linked with those before it: alloc with core.
+    let mut linked: Vec<Linked> = Vec::new();
+    // A library that does not link is named and left out: the crate's
+    // calls into it stay its dictionary's, as they are unlinked.
+    for (lib, dir) in link {
+        match link_library(lib, root, dir, &linked) {
+            Ok(l) => linked.push(l),
+            Err(e) => eprintln!("embed: {lib} is not linked: {e}"),
+        }
+    }
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &linked)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
@@ -3852,6 +3863,9 @@ pub struct Outputs<'a> {
     /// Where the differential check's modules are written as a project of
     /// their own, beside the evaluator, with their index.
     pub differential: Option<&'a Path>,
+    /// Library crates (core, alloc) to link into the program, each with
+    /// its dumps: a call into one names its body ([`link_library`]).
+    pub link: &'a [(&'a str, &'a Path)],
 }
 
 /// A register's module file with each row's embedding stamped on it by
@@ -4072,6 +4086,9 @@ pub(crate) struct Sample {
     /// in: a harness outside the crate calls it through a wrapper there
     /// ([`harness_crate`]), where its private items are seen.
     home: Option<Vec<String>>,
+    /// For a method of an impl, the file the impl is written in, from the
+    /// crate's root, its wrapper's home in place of a module's file.
+    file: Option<String>,
 }
 
 impl Sample {
@@ -4127,6 +4144,7 @@ fn sample(
         result,
         closure: Vec::new(),
         home: None,
+        file: None,
     })
 }
 
@@ -4148,6 +4166,9 @@ fn crate_sample(
     floats: &BTreeMap<String, crate::mir::float::Format>,
 ) -> Option<Sample> {
     let segments: Vec<&str> = stem.split_once('.')?.1.split('-').collect();
+    if let Some(method) = method_sample(src, b, key, kappa, width, floats) {
+        return Some(method);
+    }
     let ident = |s: &&str| {
         s.chars()
             .next()
@@ -4186,7 +4207,102 @@ fn crate_sample(
         result,
         closure: Vec::new(),
         home: Some(above.iter().map(|s| s.to_string()).collect()),
+        file: None,
     })
+}
+
+/// The scalars of `b`'s signature, its parameters' and its result's, where
+/// each is one and it takes one at least.
+fn scalar_signature(
+    b: &IrBody,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<(Vec<(String, Sampled)>, (String, Sampled))> {
+    let scalar = |i: usize| {
+        let t = b.locals.get(i)?;
+        Some((t.clone(), Sampled::of(t, width, floats)?))
+    };
+    let params: Vec<(String, Sampled)> = (1..=b.arity).map(scalar).collect::<Option<_>>()?;
+    let result = scalar(0)?;
+    (!params.is_empty()).then_some((params, result))
+}
+
+/// A method of one of the crate's impls as a sample (`{impl#k}` in its
+/// dump's name), where the impl's header, which MIR names by its span
+/// (`<impl at src/lib.rs:40:1: 40:9>::f`), is no generic one: `impl T`
+/// calls it `T::f`, `impl Tr for T` calls it `<T as Tr>::f`, written in the
+/// impl's own file, where the names its header writes are seen. A
+/// derive's span (its trait's name alone) is no header.
+fn method_sample(
+    src: &Path,
+    b: &IrBody,
+    key: &str,
+    kappa: &str,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<Sample> {
+    let at = b.path.find("<impl at ")?;
+    let rest = &b.path[at + "<impl at ".len()..];
+    let (span, name) = rest.split_once(">::")?;
+    if name.contains("::") || name.contains('<') || name.contains('{') {
+        return None;
+    }
+    let (params, result) = scalar_signature(b, width, floats)?;
+    let root = src.parent()?;
+    let (file, header) = span_text(root, span)?;
+    let header = header.split_whitespace().collect::<Vec<_>>().join(" ");
+    let body = header.strip_prefix("impl ")?;
+    if body.starts_with('<') || body.starts_with('!') || body.contains(" where ") {
+        return None;
+    }
+    let callee = match body.split_once(" for ") {
+        Some((tr, ty)) => format!("<{ty} as {tr}>::{name}"),
+        None => format!("{body}::{name}"),
+    };
+    let text = read_text(&root.join(&file)).ok()?;
+    if !text.contains(&format!("fn {name}(")) || text.contains(&format!("unsafe fn {name}(")) {
+        return None;
+    }
+    Some(Sample {
+        key: key.to_string(),
+        kappa: kappa.to_string(),
+        function: callee,
+        params,
+        result,
+        closure: Vec::new(),
+        home: Some(Vec::new()),
+        file: Some(file),
+    })
+}
+
+/// The file a span (`src/lib.rs:40:1: 41:9`, lines and columns from one)
+/// names, from `root`, and the text it spans.
+fn span_text(root: &Path, span: &str) -> Option<(String, String)> {
+    let (file, range) = span.split_once(':')?;
+    let (from, to) = range.split_once(": ")?;
+    let (l1, c1) = from.split_once(':')?;
+    let (l2, c2) = to.split_once(':')?;
+    let (l1, c1, l2, c2): (usize, usize, usize, usize) = (
+        l1.parse().ok()?,
+        c1.parse().ok()?,
+        l2.parse().ok()?,
+        c2.parse().ok()?,
+    );
+    let source = read_text(&root.join(file)).ok()?;
+    let lines: Vec<&str> = source.lines().collect();
+    let mut text = String::new();
+    for l in l1..=l2 {
+        let chars: Vec<char> = lines.get(l.checked_sub(1)?)?.chars().collect();
+        let from = if l == l1 { c1.saturating_sub(1) } else { 0 };
+        let to = if l == l2 {
+            c2.saturating_sub(1).min(chars.len())
+        } else {
+            chars.len()
+        };
+        text.extend(chars.get(from..to)?);
+        text.push(' ');
+    }
+    Some((file.to_string(), text))
 }
 
 /// The source files of a top-level module: its directory's, or, for one
@@ -4282,25 +4398,48 @@ pub(crate) struct Program {
 }
 
 /// The keys of the bodies `key` reaches, itself first, where the evaluator
-/// defines each: `None` where one is not embedded, is blocked, calls an
-/// intrinsic, leaves a callee to a dictionary, or reaches an instance whose
-/// generics no binding fixes (`Generic.unknown`, and the root's own slots,
-/// which a sample's call supplies none of).
-fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Option<Vec<String>> {
+/// defines each: else why not, by the first body that stops it, which is
+/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
+/// dictionary, or reaches an instance whose generics no binding fixes
+/// (`Generic.unknown`, and the root's own slots, which a sample's call
+/// supplies none of).
+fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Result<Vec<String>, String> {
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
-        let (_, e) = every.get(&k)?;
-        if !e.blocked.is_empty()
-            || !e.bound.is_empty()
-            || !e.intrinsics.is_empty()
-            || e.term
-                .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
-            || (at == 0
-                && e.term
-                    .contains(&mir_ctor("Generic.slot", &[]).replace(')', "")))
+        let Some((_, e)) = every.get(&k) else {
+            return Err("reaches a body not embedded".into());
+        };
+        if let Some(b) = e.blocked.iter().next() {
+            return Err(format!("reaches a body blocked by {b}"));
+        }
+        if let Some(b) = e.bound.iter().next() {
+            // A dictionary's name, its generic arguments and the
+            // instance's impl aside: the kind of callee left.
+            let kind =
+                if b.starts_with("core::") || b.starts_with("alloc::") || b.starts_with("std::") {
+                    b.split("::").next().unwrap_or_default().to_string()
+                } else {
+                    "the crate".to_string()
+                };
+            if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
+                eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
+            }
+            return Err(format!("leaves a callee of {kind} to a dictionary"));
+        }
+        if !e.intrinsics.is_empty() {
+            return Err("calls an intrinsic".into());
+        }
+        if e.term
+            .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return None;
+            return Err("reaches an instance no binding fixes".into());
+        }
+        if at == 0
+            && e.term
+                .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
+        {
+            return Err("is generic itself".into());
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -4309,7 +4448,7 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Option<Ve
         }
         at += 1;
     }
-    Some(seen)
+    Ok(seen)
 }
 
 /// The harness crate: one call per case, under `catch_unwind`, each
@@ -4363,6 +4502,7 @@ fn harness_crate(program: &Program, krate: Option<&str>) -> BTreeMap<String, Vec
                 wrappers.push(serde_json::json!({
                     "sample": k,
                     "module": home,
+                    "file": s.file,
                     "code": format!(
                         "#[doc(hidden)] #[allow(warnings)] #[unsafe(no_mangle)] pub extern \"Rust\" {signature} {{ {}({}) }}",
                         s.function,
@@ -5010,6 +5150,110 @@ fn embed_census(
     dumps: &Path,
     only: &[String],
 ) -> Result<(Modules, EmbedCensus, Program), UorustError> {
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &[])?;
+    Ok((modules, census, program))
+}
+
+/// A library crate's program linked into a crate's: its link, which
+/// resolves the calls the crate makes into it, and its bodies, keyed and
+/// naming each other under the library's name (`core::num::<impl
+/// usize>::wrapping_sub`), as the crate's calls print them.
+pub(crate) struct Linked {
+    krate: String,
+    link: crate::mir::link::CoreLink,
+    every: BTreeMap<String, (String, Embedded)>,
+}
+
+/// The program of the library crate `krate` (core, alloc), dumped under
+/// `dumps`, to link into a crate's ([`Linked`]), with the libraries it
+/// builds on (`earlier`: alloc's core) linked into it: every body of its
+/// own embedded, its key and every key of its own its terms name prefixed
+/// with the crate's name.
+pub(crate) fn link_library(
+    krate: &str,
+    root: &Path,
+    dumps: &Path,
+    earlier: &[Linked],
+) -> Result<Linked, UorustError> {
+    // No module of it is the census's: its bodies are the program's alone.
+    let none = ["\u{0}".to_string()];
+    let (_, _, program, link) = embed_linked(krate, &[], root, dumps, &none, earlier)?;
+    let theirs = |k: &str| earlier.iter().any(|l| l.every.contains_key(k));
+    let own: Vec<(String, (String, Embedded))> = program
+        .every
+        .into_iter()
+        .filter(|(k, _)| !theirs(k))
+        .collect();
+    let renamed: BTreeMap<String, String> = own
+        .iter()
+        .map(|(k, _)| (mir_string(k), mir_string(&format!("{krate}::{k}"))))
+        .collect();
+    let mine: BTreeSet<String> = own.iter().map(|(k, _)| k.clone()).collect();
+    let every = own
+        .into_iter()
+        .map(|(k, (kappa, mut e))| {
+            e.term = rename_strings(&e.term, &renamed);
+            e.callees = e
+                .callees
+                .iter()
+                .map(|c| {
+                    if mine.contains(c) {
+                        format!("{krate}::{c}")
+                    } else {
+                        c.clone()
+                    }
+                })
+                .collect();
+            e.key = format!("{krate}::{}", e.key);
+            // Its calls are written: no site is left to bind.
+            e.sites.clear();
+            (format!("{krate}::{k}"), (kappa, e))
+        })
+        .collect();
+    Ok(Linked {
+        krate: krate.to_string(),
+        link,
+        every,
+    })
+}
+
+/// `term` with each string literal `renamed` names (as [`mir_string`]
+/// writes it) replaced.
+fn rename_strings(term: &str, renamed: &BTreeMap<String, String>) -> String {
+    let mut out = String::with_capacity(term.len());
+    let bytes = term.as_bytes();
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] != b'"' {
+            let next = term[i..].find('"').map_or(term.len(), |n| i + n);
+            out.push_str(&term[i..next]);
+            i = next;
+            continue;
+        }
+        let mut j = i + 1;
+        while j < bytes.len() && bytes[j] != b'"' {
+            j += if bytes[j] == b'\\' { 2 } else { 1 };
+        }
+        let end = (j + 1).min(bytes.len());
+        let literal = &term[i..end];
+        out.push_str(renamed.get(literal).map_or(literal, String::as_str));
+        i = end;
+    }
+    out
+}
+
+/// [`embed_census`] with the library crates `linked` linked into the
+/// program: a call the crate's own link leaves unresolved that names one
+/// of them (`core::...`) is resolved by its link to its body, under its
+/// name; its link is returned too.
+fn embed_linked(
+    krate: &str,
+    builds_on: &[String],
+    root: &Path,
+    dumps: &Path,
+    only: &[String],
+    linked: &[Linked],
+) -> Result<(Modules, EmbedCensus, Program, crate::mir::link::CoreLink), UorustError> {
     let (width, big_endian) = dump_target(dumps)?;
     let dirs: Vec<std::path::PathBuf> = dir_paths(dumps)?
         .into_iter()
@@ -5113,9 +5357,22 @@ fn embed_census(
     // program leaves to its dictionary, as a foreign function is: the
     // evaluator is given the platform's, and stops unlinked without it.
     let platform = platform_intrinsics(&library_root(root));
-    let resolve = |callee: &str, args: &[Option<String>], dest: &str| match resolve_callee(
+    let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
+        linked.iter().find_map(|l| {
+            let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
+            match resolve_callee(&l.link, &l.krate, rest, args, dest) {
+                Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+                Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+                Callee::Bound(_) => None,
+            }
+        })
+    };
+    let resolve = |callee: &str, args: &[Option<String>], dest: &str| match match resolve_callee(
         &link, krate, callee, args, dest,
     ) {
+        Callee::Bound(name) => into_linked(callee, args, dest).unwrap_or(Callee::Bound(name)),
+        c => c,
+    } {
         Callee::Intrinsic(p)
             if (platform.contains(&intrinsic_name(&p))
                 || PLATFORM_EFFECTS.contains(&intrinsic_name(&p).as_str()))
@@ -5129,7 +5386,14 @@ fn embed_census(
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
-        let instance = link.constant(printed)?;
+        // A constant item of a linked library (`core::num::<impl
+        // usize>::MAX`), as its own source declares it.
+        let instance = link.constant(printed).or_else(|| {
+            linked.iter().find_map(|l| {
+                l.link
+                    .constant(printed.strip_prefix(&format!("{}::", l.krate))?)
+            })
+        })?;
         let mut b = crate::mir::parse::bodies(&instance.text)
             .into_iter()
             .next()?;
@@ -5277,6 +5541,13 @@ fn embed_census(
         bodies.dedup_by(|a, b| a.0 == b.0);
         modules.push((module.clone(), bodies));
     }
+    // The linked libraries' bodies, which the crate's calls into them
+    // name.
+    for l in linked {
+        for (k, v) in &l.every {
+            every.entry(k.clone()).or_insert_with(|| v.clone());
+        }
+    }
     let unread = {
         let cx = Cx {
             width,
@@ -5339,13 +5610,27 @@ fn embed_census(
     // every body it reaches is embedded, uses no construct the evaluator
     // does not define, calls no intrinsic and leaves no callee to a
     // dictionary.
+    let mut left: BTreeMap<String, usize> = BTreeMap::new();
+    let sampled = samples.len();
     samples.retain_mut(|s| match closure(&every, &s.key) {
-        Some(c) => {
+        Ok(c) => {
             s.closure = c;
             true
         }
-        None => false,
+        Err(why) => {
+            *left.entry(why).or_default() += 1;
+            false
+        }
     });
+    if sampled > 0 {
+        eprintln!(
+            "differential: {} of {sampled} sampled bodies checked{}",
+            samples.len(),
+            left.iter()
+                .map(|(why, n)| format!("; {n} left out: {why}"))
+                .collect::<String>()
+        );
+    }
     let program = Program {
         every,
         samples,
@@ -5355,7 +5640,7 @@ fn embed_census(
         signatures,
         globals: globals.len(),
     };
-    Ok((modules, census, program))
+    Ok((modules, census, program, link))
 }
 
 #[cfg(test)]
@@ -5434,6 +5719,47 @@ mod tests {
     }
 
     use super::*;
+
+    /// A linked library's keys are renamed in its terms as whole string
+    /// literals: a literal that only holds a key, or is another's, is not.
+    #[test]
+    fn a_linked_librarys_keys_are_renamed_as_whole_literals() {
+        let renamed = BTreeMap::from([(mir_string("num::f"), mir_string("core::num::f"))]);
+        let term = format!(
+            "(ctor Callee.body {}) (ctor X {}) (ctor Y {})",
+            mir_string("num::f"),
+            mir_string("num::f::g"),
+            mir_string("q\"num::f")
+        );
+        assert_eq!(
+            rename_strings(&term, &renamed),
+            format!(
+                "(ctor Callee.body {}) (ctor X {}) (ctor Y {})",
+                mir_string("core::num::f"),
+                mir_string("num::f::g"),
+                mir_string("q\"num::f")
+            )
+        );
+    }
+
+    /// An impl's header is read from the span MIR names it by.
+    #[test]
+    fn an_impls_header_is_read_from_its_span() {
+        let dir = std::env::temp_dir().join(format!("uorust-span-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "struct A;\nimpl Tr for\n    u32 {\n}\n",
+        )
+        .unwrap();
+        let (file, text) = span_text(&dir, "src/lib.rs:2:1: 3:8").unwrap();
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(file, "src/lib.rs");
+        assert_eq!(
+            text.split_whitespace().collect::<Vec<_>>(),
+            ["impl", "Tr", "for", "u32"]
+        );
+    }
 
     /// The constructors of the inductive `name` in the semantics.
     fn constructors(name: &str) -> Vec<String> {

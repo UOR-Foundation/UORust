@@ -229,6 +229,7 @@ pub fn lift_crate(
     register: &Path,
     library: Option<&Path>,
     differential: bool,
+    link: &[(String, PathBuf)],
 ) -> Result<Lifted, UorustError> {
     let work = std::env::temp_dir().join(format!("uorust-crate-{name}-{version}"));
     let _ = std::fs::remove_dir_all(&work);
@@ -277,6 +278,7 @@ pub fn lift_crate(
                     library,
                     register,
                     differential,
+                    link,
                 )?;
                 (Some((e.bodies, e.evaluable)), d)
             }
@@ -308,7 +310,12 @@ fn embed_crate(
     library: &Path,
     register: &Path,
     differential: bool,
+    link: &[(String, PathBuf)],
 ) -> Result<(crate::embed::EmbedCensus, Option<(usize, usize)>), UorustError> {
+    let link: Vec<(&str, &Path)> = link
+        .iter()
+        .map(|(k, d)| (k.as_str(), d.as_path()))
+        .collect();
     let toolchain = format!("+{}", crate::mir::spec::TOOLCHAIN);
     let rustc = |args: &[&str]| -> Result<String, UorustError> {
         let out = run(
@@ -380,6 +387,7 @@ fn embed_crate(
         &crate::embed::Outputs {
             harness: differential.then_some(harness.as_path()),
             register: Some(register),
+            link: &link,
             ..Default::default()
         },
     )?;
@@ -399,6 +407,7 @@ fn embed_crate(
                 &crate::embed::Outputs {
                     observed: Some(&observed),
                     differential: Some(&alone),
+                    link: &link,
                     ..Default::default()
                 },
             )?;
@@ -454,6 +463,9 @@ fn run_harness(
     struct Wrapper {
         sample: usize,
         module: Vec<String>,
+        /// For a method, the file of its impl, from the crate's root.
+        #[serde(default)]
+        file: Option<String>,
         code: String,
     }
     let wrappers: Vec<Wrapper> =
@@ -490,10 +502,11 @@ fn run_harness(
         let mut by_file: BTreeMap<PathBuf, Vec<&Wrapper>> = BTreeMap::new();
         for w in wrappers.iter().filter(|w| live.contains(&w.sample)) {
             let module: Vec<&str> = w.module.iter().map(String::as_str).collect();
-            by_file
-                .entry(crate::layouts::module_file(&src, &module))
-                .or_default()
-                .push(w);
+            let home = match &w.file {
+                Some(f) => copy.join(f),
+                None => crate::layouts::module_file(&src, &module),
+            };
+            by_file.entry(home).or_default().push(w);
         }
         for f in by_file.keys() {
             if !pristine.contains_key(f) {
