@@ -2,7 +2,7 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 291 of 1193 functions of product code are lifted; 731
+# Honesty report: 292 of 1194 functions of product code are lifted; 731
 # are residue, 49 foreign and 122 effect rows.
 # Residue by cause:
 #   arithmetic: 1
@@ -12,7 +12,7 @@
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
-#     1 bridge::<impl at crates/uorust/src/bridge.rs:145:1: 145:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 bridge::<impl at crates/uorust/src/bridge.rs:147:1: 147:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 embed::nearest::{closure#0}: type outside the lift: std::str::Split<'_, &str>
 #     1 embed::stamp_rows::{closure#0}: mir::TerminatorKind::Call: std::option::Option::and_then
@@ -492,19 +492,19 @@ reason = "mir"
 detail = "mir::Ty: std::iter::Once<&str>"
 
 [[residue]]
-kappa = "199c1c4398cdf3705b7e619269fe500fab57ad969976b979e37e85176d1aee42"
+kappa = "6bedc633332a2780a5295f21b9f3121a4bbc90f9304c8f8c94475d90097bae0c"
 function = "uorust::bridge::BridgeShape::encode"
 reason = "mir"
 detail = "mir::TerminatorKind::Call: <u32 as std::string::ToString>::to_string"
 
 [[residue]]
-kappa = "78ed73d33ddcce5726870b9fd468af2e0aa54ae1efac92f19ead91e5dd86aba0"
+kappa = "43390719e14a8932f94274fb56cf5d85677eeaefd1e66a9e599f00fbd5771cf3"
 function = "uorust::bridge::BridgeShape::encoder"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: bridge::<impl at crates/uorust/src/bridge.rs:145:1: 145:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+detail = "mir::AggregateKind::Closure: bridge::<impl at crates/uorust/src/bridge.rs:147:1: 147:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 
 [[residue]]
-kappa = "498fb4ce7cf15aa39180513e7199c1a294cc8010f14cbe7bd677cc3bb0fd7d03"
+kappa = "8c05bcde4f7ace236625cf914eaa77b5c35d754acfcf0abcecfb026f28aad2cf"
 function = "uorust::bridge::BridgeShape::parse"
 reason = "mir"
 detail = "mir::TerminatorKind::Call: core::str::<impl str>::split_once"
@@ -522,7 +522,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
 
 [[residue]]
-kappa = "117e2c0e65f05311d386e325aa3c22fe1bb2dfe82e859a748e207cc5bb62484d"
+kappa = "45ef5eecbaabb9d6e2b9d76ea570bd2190697a6c9a087ad25c91680a90e7cf8f"
 function = "uorust::bridge::block"
 reason = "mir"
 detail = "mir::Ty: bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>"
@@ -5337,7 +5337,7 @@ function = "uorust::layouts::module_file"
 effect = "Fs effect: Path::is_file"
 
 [[effect]]
-kappa = "cbd5b57e150d95cf94972fb58c56edd350c3f3c0acb62de43ce85a30189792bc"
+kappa = "aac516d60c0e664acd51dd00e201dbc6a29e2a3efa9d526e96b0ffb58c1e2e37"
 function = "uorust::layouts::run"
 effect = "Fs effect: std::fs::canonicalize"
 
@@ -5752,19 +5752,24 @@ function = "uorust::ast::written"
 definition = "Behavior::written"
 
 [[lifted]]
-kappa = "399199cc2e19a45c20a6910603a37efa7a598f04db579b2d012f90630356219f"
+kappa = "40b7d43ec81d72f7fd9212e22168ae925e53429b161723a3b5e1aa7fba5c6d49"
+function = "uorust::bridge::BridgeShape::constructors"
+definition = "Behavior::bridgeShapeConstructors"
+
+[[lifted]]
+kappa = "2baebf5795bd8695578f8a78a8bf58f2ff447ea7f4d59575c01a472bee088bb8"
 function = "uorust::bridge::BridgeShape::mangle"
 definition = "Behavior::bridgeShapeMangle"
 
 [[lifted]]
-kappa = "4c78f5525334084525e4620e220b99990a7c5f63cce4c32c68390f168f8fc2da"
+kappa = "f2825268c907ca1672573f89b37ed15091136dcd207d5a234265be5a7a04e5a0"
 function = "uorust::bridge::BridgeShape::shallow"
 definition = "Behavior::bridgeShapeShallow"
 
 [[lifted]]
-kappa = "edbd3ce4784a73000d22ddd58b895784eaa16254b2741122ffe82f9d6b0e8040"
-function = "uorust::bridge::boolean_cases"
-definition = "Behavior::booleanCases"
+kappa = "ed5b7b21680922d2f8869a4f2fafd76649742b820ecb37b683a30b64b00fddf2"
+function = "uorust::bridge::constructor_cases"
+definition = "Behavior::constructorCases"
 
 [[lifted]]
 kappa = "366973a5ba123401149437770af9b711e0c3c88ecdd2baa31ac631e13127c144"
