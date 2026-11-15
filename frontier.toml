@@ -2,19 +2,20 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 292 of 1204 functions of product code are lifted; 735
+# Honesty report: 292 of 1205 functions of product code are lifted; 736
 # are residue, 49 foreign and 128 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   form: 2
-#   mir::AggregateKind::Closure: 47
+#   mir::AggregateKind::Closure: 48
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
 #     1 bridge::<impl at crates/uorust/src/bridge.rs:147:1: 147:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
+#     1 certify::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 embed::nearest::{closure#0}: type outside the lift: std::str::Split<'_, &str>
 #     1 embed::stamp_rows::{closure#0}: mir::TerminatorKind::Call: std::option::Option::and_then
 #     1 layouts::same_type::{closure#0}: type outside the lift: std::str::SplitWhitespace<'_>
@@ -222,7 +223,7 @@
 #     1 std::iter::Copied<std::slice::Iter<'_, &str>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4804:17: 4804:20}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3872:21: 3872:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3926:21: 3926:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
@@ -702,6 +703,12 @@ reason = "mir"
 detail = "mir::Ty: std::str::Lines<'_>"
 
 [[residue]]
+kappa = "8233e7ca7f2752eb33dae6bd25f87e2a2044ed202b4932ae12aabe7c68d6ed71"
+function = "uorust::certify::descriptor"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: certify::descriptor::{closure#0}: type outside the lift: std::path::PathBuf"
+
+[[residue]]
 kappa = "ff7854f7dd713d0cda15dcd1d525d0c6b9d18203450b9fbdb53f9301efd35404"
 function = "uorust::certify::first_root"
 reason = "mir"
@@ -804,7 +811,7 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "226e628a8d9e226892b2a0c69c3c39cc62730f31b125bdd48212bb3d4ec64ea8"
+kappa = "c8a1870de61454370606eaeba7292b44e82535162c8124fdde3279710a9a4708"
 function = "uorust::embed::Cx<'_>::discriminant"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -960,13 +967,13 @@ reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "5714cb6e6396104f1dc267e2d5f5867147ca261913fec64dde432e12f5c87185"
+kappa = "615a84a7671dca41a1b52a04d861fdd04ac94cce58766e8f68c53a8580fe4a06"
 function = "uorust::embed::Cx<'_>::rvalue"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
 
 [[residue]]
-kappa = "b7e9b00ebee94fbaa6aed5e496beb000b091c3d7e6155646d3b43535e4e829d7"
+kappa = "2a4be11b20218939f1cdafcd1c3f6bdd7b3484de49e59a405f4986d8845bbb1d"
 function = "uorust::embed::Cx<'_>::sized"
 reason = "type"
 detail = "type outside the lift: Cx<'_>"
@@ -1203,7 +1210,7 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "6f9b966cddbd69d0a18d522f2b4de201242a350ac756d601a7ccf1414a1fe090"
 function = "uorust::embed::fuel"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3872:21: 3872:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:3926:21: 3926:24}>"
 
 [[residue]]
 kappa = "9b06d1e71770a7c515754932ed1fa95b9b3c4fe0c9bf896ecf35b38885e93c62"
@@ -5196,24 +5203,24 @@ function = "uorust::certify::module_prefix"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "91798903b7c91063ae521139464881d61686dfcd659e5fb3232711c82184cd25"
+kappa = "aa95233ad7cfa54eef4382bd902537c8fae64d999dbade8cce6ac983b53e8ab5"
 function = "uorust::certify::production"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "3f3e110b32fb9b53b172c1e736f6850782cfd73b4364fdb6d65d79a46df3188f"
+kappa = "7083a9e50e21e24cf1237db9baeb0601292679b400d259bbd4b0a2fe77b65a26"
 function = "uorust::certify::production_build"
 effect = "Fs effect: Path::exists"
 
 [[effect]]
-kappa = "f58e73dd34d5776af1109cda2e2bc48218fc55b602f4613b48970b613524c8af"
+kappa = "04175b087a60e36f8d872ef72c25138331edc90d37eed8388586522e5131ed1f"
 function = "uorust::certify::sync"
-effect = "Fs effect: std::fs::read_to_string"
+effect = "Fs effect: Path::is_file"
 
 [[effect]]
 kappa = "61d3b598929f1f04938e4afa4c5c82bce2b778948af4795e26ee6207f36190eb"
 function = "uorust::certify::sync_paths"
-effect = "calls uorust::certify::sync, which performs a Fs effect: std::fs::read_to_string"
+effect = "calls uorust::certify::sync, which performs a Fs effect: Path::is_file"
 
 [[effect]]
 kappa = "35a254042df260f28da92e3f1c7b069f0068ab38bfcb8e36a4ee9a418a9ca046"
@@ -5261,7 +5268,7 @@ function = "uorust::embed::embed"
 effect = "calls uorust::embed::embed_with, which performs a Fs effect: Path::exists"
 
 [[effect]]
-kappa = "746957235f4b585594279e4396a9a73281ddc05fbc4cf96c2ee56214fec238e1"
+kappa = "799234ec87e3b96a3b196b045bbbb22a8d4085a8ffc4448c220c43226d99cc1c"
 function = "uorust::embed::embed_census"
 effect = "Fs effect: Path::is_dir"
 
