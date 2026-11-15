@@ -888,6 +888,12 @@ pub mod uorust_mir_core_scope_registry;
 #[path = "../roots/uorust_certified_uorust_mir_layout_refusal_text.rs"]
 pub mod uorust_mir_layout_refusal_text;
 
+/// `uorust::mir::generate::sha256`, certified as `Behavior::uorustSha256`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_uorust_sha256.rs"]
+pub mod uorust_sha256;
+
 /// `uorust::lift::variant_owner`, certified as `Behavior::variantOwner`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
