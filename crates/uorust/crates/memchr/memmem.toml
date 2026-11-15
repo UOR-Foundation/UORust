@@ -1,7 +1,7 @@
 [[fn]]
 path = "memchr::do_packed_search"
 kappa = "12dc17f18aa7ddf2e65e27ca2224eb198762a6476a5e979b3a5dd59f87e6330a"
-embedded = "594fc89b04d19e6efe3fa8e68cee55d3e65ecbcc537baf95e8c2ab9d5e87ba68"
+embedded = "4637c04a7368cb8a17faa60762c1406978965e7ae5d33d6c843ec324cd21d5d1"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item memmem::searcher::do_packed_search::MIN_LEN"
 
@@ -107,14 +107,14 @@ cause = "mir::Ty: memmem::FindIter<'_, '_>"
 [[fn]]
 path = "memchr::memmem::FindIter::next"
 kappa = "7ae6df80842c6f7137b546ae3c40dc90885b3d7372a45e406a812ba2ff34d923"
-embedded = "0da7470510f98b6e4448f44a679efb79527fadc34a59b33cf81e8d555df2b581"
+embedded = "e38b039905301ce072c17fd05859861f4404a28492649db46682e686e6059560"
 status = "residue"
 cause = "mir::Ty: FindIter<'_, '_>"
 
 [[fn]]
 path = "memchr::memmem::FindIter::size_hint"
 kappa = "42a19a2c25c51b04b65b45ed5faf011b860d0cfb495f883fc4f85469d899964f"
-embedded = "47941aa7e75428935cb4f8be4bfb2953aba69b163143d00ec33d7eb3533b8ea7"
+embedded = "b7e0eeccb13cec2d90e779361bbbed6bbed2da59a1709b1261f8a1081c44c1b0"
 status = "residue"
 cause = "mir::Ty: FindIter<'_, '_>"
 
@@ -128,14 +128,14 @@ cause = "mir::Ty: memmem::FindRevIter<'_, '_>"
 [[fn]]
 path = "memchr::memmem::FindRevIter::new"
 kappa = "c66568929e26ae8f5ed49f395052f791cb31cb0dfb7a17e46493082d5daee1fa"
-embedded = "9e03c37709907a1cfdfd464e95a83a5abfe044cd7c9c3ee51a6238c448f4be8c"
+embedded = "c722abc77baba8ed88999607eca9b1e228db65db47d8090de03319dfdf6c4941"
 status = "residue"
 cause = "mir::Ty: memmem::FindRevIter<'_, '_>"
 
 [[fn]]
 path = "memchr::memmem::FindRevIter::next"
 kappa = "2862ce713cc920b428dc2bea2bc8d7dcf8ea16000d1809749e4a7c63cf5c3114"
-embedded = "dc1066dcda2c3523aca71bdcde64d4f9a9a93d5c2d67e6fe0e523fcee04fbd9d"
+embedded = "1b4d06cc88471b9dc16b4c9ad1405c8f47bf8c72709b7778cf38ebd9fd5b69be"
 status = "residue"
 cause = "mir::Ty: FindRevIter<'_, '_>"
 
@@ -291,21 +291,21 @@ cause = "mir::Ty: memmem::FindRevIter<'_, '_>"
 [[fn]]
 path = "memchr::memmem::find"
 kappa = "4796516e5122929bb4c099a7decdb01dd60c1c85309d18a6acd22026fe8ded6d"
-embedded = "6a9ec86bde15002d807df1d8fbd4cfadf4e9647275ceb96838642bad1c2a8e17"
+embedded = "ddd6ff8eda3a9e11b0f30624e9c7aac2d40b5ca6af054e13e1704075179fd0cf"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Finder"
 
 [[fn]]
 path = "memchr::memmem::rfind"
 kappa = "dd975d6c99d51865dd653ce8702c9708bc108b147ee94d57c2ff456a74cba82d"
-embedded = "c6e5a64b720e195a6be937cc4c9e8b4b50038b4472b45efab769274d05eb092b"
+embedded = "4713c5ba1145f38a73a6536a4d8d1814cc221db4c06b4575b21295c3b8f914e4"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::FinderRev"
 
 [[fn]]
 path = "memchr::prefilter_kind_avx2"
 kappa = "c0a5139606f8652c943dc97ea4c8258824f5707e3db03f8f7c18408e605726e6"
-embedded = "05133bde8edbfbd742c0005518566f8108e9c6d8055baa61f8ed93747f57b6c6"
+embedded = "89a54373a1adb99ab449767ba940d5dea865ed957e2cc7206374596542c9d276"
 status = "residue"
 cause = "mir::Ty: Prefilter"
 
@@ -319,7 +319,7 @@ cause = "mir::Ty: Prefilter"
 [[fn]]
 path = "memchr::prefilter_kind_sse2"
 kappa = "ff79c4520cb6001e1588603ba5666b448ba473b516af7a0653c16153c4369152"
-embedded = "0a2dd191533311444ccb5a879062598940f7b3cbe791e4226674c8bac2f83898"
+embedded = "1747ed9957553a1024b126eaeec9abe7895eec23b17baa2f812772d50990cb6f"
 status = "residue"
 cause = "mir::Ty: Prefilter"
 
@@ -439,7 +439,7 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "memchr::searcher::Pre::find"
 kappa = "950341cee62cb661aa83effd7595329de252db4dbd184fb17825033fe8340be0"
-embedded = "776999e7d71643a9a90a2c16203815f86ea064d5b9d967158b0db7e681e58032"
+embedded = "2e96c6598e21a60a1496d5f92242041e34a9cf3e1e9cfc02b6db4eddd86c6cc5"
 status = "residue"
 cause = "mir::Ty: Pre<'_>"
 
@@ -531,21 +531,21 @@ cause = "mir::Ty: memmem::searcher::PrefilterState"
 [[fn]]
 path = "memchr::searcher::PrefilterState::skips"
 kappa = "68244eeec9673bfb66ff559b1659baa82092ca72524eff20a0557435f305a227"
-embedded = "6e4a1e8bd3e39927f6b7693f81bdf5019f7c23d897bbe0f4955701ea78ea6ac5"
+embedded = "b0755b510e25fd1f776bd794522b61c1a6c020a158e98c4e2b66339c1ef529de"
 status = "residue"
 cause = "mir::Ty: PrefilterState"
 
 [[fn]]
 path = "memchr::searcher::PrefilterState::update"
 kappa = "85b15c32352637ba6a0c1fb7d809cf538863bb8695287c3e8e3aad746d48762c"
-embedded = "035d2ee64f76a1279950e6a90270992f8afea9b9b51f7e987a15ef8bd7ac8b9b"
+embedded = "14eb363ef01d021db68e91fc80652e2748d18156183cac5de0f6fdf5aeb8d538"
 status = "residue"
 cause = "mir::Ty: PrefilterState"
 
 [[fn]]
 path = "memchr::searcher::Searcher::find"
 kappa = "a9277dbe8ebbd7698a75d31ac2d89869617e521e79d730c7558a7e60c6dadc74"
-embedded = "e2b2c6620cb2af768d0dbce3891afc5c3097198d0de8ecdeef9b03e5441e2647"
+embedded = "7a31a40b1ed20ee07358bd396123dfbae2037b6eeb8185c34f40dc3857cdbce5"
 status = "residue"
 cause = "mir::Ty: searcher::Searcher"
 
@@ -560,7 +560,7 @@ cause = "mir::Ty: core::fmt::Error"
 path = "memchr::searcher::Searcher::new"
 kappa = "83f4b5dd4799646fbb75a8c8484d42c6763a58b015da9b816150a9634447553f"
 at = "R=u32"
-embedded = "f897dddad944e21031108cdb6251a41a7d998834af9b12915f5d5b2852500cac"
+embedded = "49ea29b0b7d74f38020c94d3e8aec0911a44563deef72a23e98dd02e25d3cadf"
 status = "residue"
 cause = "mir::Ty: memmem::searcher::Searcher"
 
@@ -574,21 +574,21 @@ cause = "mir::Ty: memmem::searcher::Searcher"
 [[fn]]
 path = "memchr::searcher::SearcherRev::new"
 kappa = "9508e6ff768b04959b8803312b7ddb453354ec99cdb55257f765ce2926087eb9"
-embedded = "ef419a8a66fd20b4aa856451aa580cfbebb774a9591105b7c93efdbd9e036ada"
+embedded = "dcf998097355ef215e75a0c8cea4520775b9dca830c99cfff6d0253308a92fdc"
 status = "residue"
 cause = "mir::Ty: memmem::searcher::SearcherRev"
 
 [[fn]]
 path = "memchr::searcher::SearcherRev::rfind"
 kappa = "0c6bd4abc8e24b56ac128632aefe21becdf46641a5329b536a44a42f8d59de99"
-embedded = "0d37e64f9447a84a2e815e7751493151e385ea3637ab4be4eb949329a3de9821"
+embedded = "284f184e2ef80c2cff31b6a6bb7eb75a3917ccba3f3c50356dc337565f11a659"
 status = "residue"
 cause = "mir::Ty: SearcherRev"
 
 [[fn]]
 path = "memchr::searcher_kind_avx2"
 kappa = "02391b5871cc8625b0736cab66083e6c86fee02e52e2ec651de88d1ae67b8b86"
-embedded = "0b1b709b742fcf57e8da58464b2b27949634c2e2ee9d69e757f2569fa0731d61"
+embedded = "4e4e56a9ab6ee1cec5e1795e8b1bccc57886f20d60282a2c29e65a0711056967"
 status = "residue"
 cause = "mir::Ty: searcher::Searcher"
 
@@ -609,7 +609,7 @@ cause = "mir::Ty: searcher::Searcher"
 [[fn]]
 path = "memchr::searcher_kind_sse2"
 kappa = "b04697a1fda43476bf963dbded62bd628aebc4aabf8554a3925f72bae2df1f1d"
-embedded = "dc96c14495f98fa368b566496ad60d55eacc55bb3f3f69988371c37c3d6c604e"
+embedded = "3dd07e27cda5759c33d91b11db7ff529bcf6d615b9c11d8165997f4122fd740e"
 status = "residue"
 cause = "mir::Ty: searcher::Searcher"
 

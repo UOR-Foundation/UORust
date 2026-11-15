@@ -43,8 +43,16 @@ residue = 28
 [embedding]
 bodies = 527
 embedded = 527
-evaluable = 527
-blocked = 0
+evaluable = 520
+blocked = 7
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 7
+
+[differential]
+bodies = 2
+theorems = 14
 
 [[cause]]
 cause = "mir::Ty: core::fmt::Error"
