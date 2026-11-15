@@ -159,6 +159,11 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
             .arg(format!("-Zdump-mir-dir={}", mir.display()))
             .args(["-Coverflow-checks=on", "-Cdebug-assertions=off"])
             .current_dir(dir)
+            // An inherited build directory would hold the crate built
+            // already, and cargo would not run rustc to dump it again.
+            .env_remove("CARGO_BUILD_BUILD_DIR")
+            .env_remove("CARGO_BUILD_TARGET_DIR")
+            .env_remove("CARGO_TARGET_DIR")
             .env("RUSTC_BOOTSTRAP", "1")
             .env("CARGO_INCREMENTAL", "0"),
     )?;
@@ -328,11 +333,15 @@ fn embed_crate(
     .map_err(|e| tool("target.toml", e))?;
     let root = work.join("root").join("library");
     std::fs::create_dir_all(&root).map_err(|e| tool("library", e))?;
+    // A link's target is read from the link's own directory: each is named
+    // absolutely, whatever directory `library` and the crate were given from.
+    let library = std::fs::canonicalize(library).map_err(|e| tool("library", e))?;
+    let dir = std::fs::canonicalize(dir).map_err(|e| tool("library", e))?;
     for krate in ["core", "alloc", "std"] {
         std::os::unix::fs::symlink(library.join(krate), root.join(krate))
             .map_err(|e| tool("library", e))?;
     }
-    std::os::unix::fs::symlink(dir, root.join(name)).map_err(|e| tool("library", e))?;
+    std::os::unix::fs::symlink(&dir, root.join(name)).map_err(|e| tool("library", e))?;
     let census = crate::embed::embed(
         name,
         &root,
