@@ -2317,7 +2317,7 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
         let module = if bare {
             module.to_string()
         } else {
-            format!("{module:?}")
+            toml_quote(module)
         };
         let _ = writeln!(
             modules,
@@ -2482,6 +2482,52 @@ fn toml_quote(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Every module key a register's summary writes, from any module name
+    /// a crate's paths give (`core#1`, rustc's name for a module apart from
+    /// the crate core), is the module's name again to Python's tomllib, as
+    /// the self model's generators read it.
+    #[test]
+    fn every_module_key_round_trips_through_tomllib() {
+        let dir = std::env::temp_dir().join(format!("uorust-keys-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let names = [
+            "crate",
+            "core#1",
+            "raw_table",
+            "a-b",
+            "{impl#0}",
+            "x y",
+            "quote\"d",
+            "back\\slash",
+            "ünï",
+        ];
+        for name in names {
+            let row = "[[fn]]\npath = \"p\"\nkappa = \"k\"\nstatus = \"residue\"\ncause = \"c\"\n";
+            std::fs::write(dir.join(format!("{name}.toml")), row).unwrap();
+        }
+        summarize_register(&Scope::registry("keys", "0.0.0"), &dir).unwrap();
+        let read = std::process::Command::new("python3")
+            .args([
+                "-I",
+                "-c",
+                "import json, sys, tomllib; print(json.dumps(sorted(tomllib.load(open(sys.argv[1], 'rb'))['module'])))",
+            ])
+            .arg(dir.join("frontier.toml"))
+            .output()
+            .unwrap();
+        let _ = std::fs::remove_dir_all(&dir);
+        assert!(
+            read.status.success(),
+            "{}",
+            String::from_utf8_lossy(&read.stderr)
+        );
+        let keys: Vec<String> = serde_json::from_slice(&read.stdout).unwrap();
+        let mut want: Vec<String> = names.iter().map(|n| n.to_string()).collect();
+        want.sort();
+        assert_eq!(keys, want);
+    }
 
     /// The summary counts the embedding by κ: two modules' rows of one κ
     /// (the num shard and the f32 shard reaching one body) and two rows of
