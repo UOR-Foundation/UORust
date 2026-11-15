@@ -2,11 +2,12 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 292 of 1217 functions of product code are lifted; 748
-# are residue, 49 foreign and 128 effect rows.
+# Honesty report: 292 of 1224 functions of product code are lifted; 750
+# are residue, 49 foreign and 133 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
+#   collision: 1
 #   form: 2
 #   mir::AggregateKind::Closure: 50
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
@@ -172,7 +173,7 @@
 #     49 a loop nested in a loop, whose helpers would call each other
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
-#   mir::Ty: 298
+#   mir::Ty: 299
 #     7 A0
 #     3 T
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
@@ -226,7 +227,7 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, (std::string::String, std::string::String)>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:4804:17: 4804:20}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4294:21: 4294:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4439:21: 4439:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
@@ -263,7 +264,7 @@
 #     1 std::slice::Iter<'_, wf::Node>
 #     5 std::str::CharIndices<'_>
 #     12 std::str::Chars<'_>
-#     9 std::str::Lines<'_>
+#     10 std::str::Lines<'_>
 #     2 std::str::MatchIndices<'_, &str>
 #     1 std::str::RSplit<'_, &str>
 #     2 std::str::Split<'_, &str>
@@ -1222,7 +1223,7 @@ reason = "mir"
 detail = "mir::Operand::Constant: {alloc335: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
-kappa = "131faf830fd7e13fea5467f1da2cd72c9a44bbb74c4ceb65d94c07e26fd45357"
+kappa = "84fb8aa9794b800571b84b5281f15b74919af8db68ad53545209f34cd2a12670"
 function = "uorust::embed::differential"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -1261,7 +1262,7 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "6f9b966cddbd69d0a18d522f2b4de201242a350ac756d601a7ccf1414a1fe090"
 function = "uorust::embed::fuel"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4294:21: 4294:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/embed.rs:4439:21: 4439:24}>"
 
 [[residue]]
 kappa = "9b06d1e71770a7c515754932ed1fa95b9b3c4fe0c9bf896ecf35b38885e93c62"
@@ -1282,7 +1283,7 @@ reason = "mir"
 detail = "mir::Ty: core::fmt::rt::Argument<'_>"
 
 [[residue]]
-kappa = "58bf9a2623f4ed2eac4b6bc566bd97de636750e72ecd3cfad13748d70517a90b"
+kappa = "66b9eb170d9d681794ac8c5811daefc4b6580ffd0ea9c5e271dc4ec0a960c070"
 function = "uorust::embed::harness_crate"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -4774,6 +4775,18 @@ reason = "mir"
 detail = "mir::Ty: std::process::Command"
 
 [[residue]]
+kappa = "1cf8fa64cc4d891f9509879fb69e82fbbb4025917cc3ae0cbbba9086d2052e51"
+function = "uorust::registry::sample_cases"
+reason = "collision"
+detail = "another function of the crate is also named uorustSampleCases"
+
+[[residue]]
+kappa = "fbbc8b6d128f4a7eca1fabf6428d7f557cb7035c110894b0a64dee91ea6b85e6"
+function = "uorust::registry::select_samples"
+reason = "mir"
+detail = "mir::Ty: std::str::Lines<'_>"
+
+[[residue]]
 kappa = "e49ccd6555596c31ea4eb94d6f7d2f76a540fa3f156f5090e7451be7909fc552"
 function = "uorust::registry::tool"
 reason = "mir"
@@ -5328,6 +5341,11 @@ function = "uorust::default_name"
 effect = "Fs effect: Path::canonicalize"
 
 [[effect]]
+kappa = "6099f83f97ab8697f8dac490c16b4196e127c11b684b0d678446be441c639809"
+function = "uorust::embed::crate_sample"
+effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
+
+[[effect]]
 kappa = "113e4243ceabf3d5db7a1f1a1a9cfe8fcb647958c8b1fcc9cacd73ae648a15d0"
 function = "uorust::embed::dir_paths"
 effect = "Fs effect: std::fs::read_dir"
@@ -5343,12 +5361,12 @@ function = "uorust::embed::embed"
 effect = "calls uorust::embed::embed_with, which performs a Fs effect: Path::exists"
 
 [[effect]]
-kappa = "5c9f67b28a1aa31360a7cf866d8fb2e96c709a37caeed96858d81cbcb3b6b307"
+kappa = "6add0e1fc66475e6f56f89ac31cd0e8ab920327b4dd7c4069ed88628718d27cb"
 function = "uorust::embed::embed_census"
 effect = "Fs effect: Path::is_dir"
 
 [[effect]]
-kappa = "cc64680daadc6d8a11c006b107d7fb6087ad55ac43eafa85322a4e1743b1f403"
+kappa = "1c9b75afc63f33d944ec70d8cf80584c2af824bc8477592ca3fd82cb8200fb53"
 function = "uorust::embed::embed_with"
 effect = "Fs effect: Path::exists"
 
@@ -5383,7 +5401,7 @@ function = "uorust::embed::replace_dir"
 effect = "Fs effect: Path::exists"
 
 [[effect]]
-kappa = "d0f62a8ccad1ca16ab26f67e3237c66967c41388b6e0c0c53e5812eeaad796a1"
+kappa = "acdbfad3ffe1ed29f4fe188ae8777b85b2628b43c97bbfa387287969d4ded0b5"
 function = "uorust::embed::sample"
 effect = "calls uorust::embed::module_sources, which performs a Fs effect: Path::is_dir"
 
@@ -5508,9 +5526,14 @@ function = "uorust::mir::core::summarize_core_register"
 effect = "calls uorust::mir::core::summarize_register, which performs a Fs effect: std::fs::write"
 
 [[effect]]
-kappa = "ea100b1d9f42d43921e9bf46606dded91413787138c5aaf2f10fe676c884f255"
+kappa = "685dc2ea1796dfa95ff8326a83a07b91490819ba8102bc44466ca426b11037cd"
 function = "uorust::mir::core::summarize_register"
 effect = "Fs effect: std::fs::write"
+
+[[effect]]
+kappa = "612a4671b6886ec214f0fdd44372788ad58c08c3bbbf6eef2bb8445ee612444b"
+function = "uorust::mir::core::unembedded"
+effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 
 [[effect]]
 kappa = "457b56733a1873e37c73899c2ada09c381b6adf5bb85c3fb0e3f28d4fdc46d73"
@@ -5658,7 +5681,7 @@ function = "uorust::registry::dump"
 effect = "Fs effect: std::fs::create_dir_all"
 
 [[effect]]
-kappa = "ef51cabc41a19d824e80ca23d697adbebdd132b568695a872a904be6986b18b7"
+kappa = "06d72d57ad5d47da7ed696b32cc458826eff10390f1f95a3b69fa3cecb260dce"
 function = "uorust::registry::embed_crate"
 effect = "Process effect: Command::new"
 
@@ -5673,12 +5696,27 @@ function = "uorust::registry::layouts"
 effect = "Fs effect: std::fs::create_dir_all"
 
 [[effect]]
-kappa = "f6098eece3eaafb3947f457a159efef63b89c7fa2aab9176916e1d2228cb9b8e"
+kappa = "2feeb884d045f7f78e073179000da27844af7fb4d892ad39f56170d20225187a"
 function = "uorust::registry::lift_crate"
 effect = "Env effect: std::env::temp_dir"
 
 [[effect]]
-kappa = "8c60798c18efed21a600182ce52dfe77cc756f5862aaac51b420bcce49b4cfd8"
+kappa = "a1fa0740fc8ee98ea1b9db46097f7339ea3ea5d78e1c961c694a662f585c164c"
+function = "uorust::registry::run_harness"
+effect = "Fs effect: std::fs::canonicalize"
+
+[[effect]]
+kappa = "63a296057e7a18920f9d14779821f23e6942e893ff43d7a7ef1bbb46914ddf19"
+function = "uorust::registry::stamp_differential"
+effect = "Fs effect: std::fs::write"
+
+[[effect]]
+kappa = "5e195760ded5efd886f1af192bfebb79b0121483f1c0c2f59df73a4f29805bbd"
+function = "uorust::registry::verify_differential"
+effect = "Fs effect: Path::is_file"
+
+[[effect]]
+kappa = "d6522f758a753a85bd440a5ac21f4644f35451f3c94d32e77dff6c7f75bb12ca"
 function = "uorust::run"
 effect = "calls uorust::bridge::verify, which performs a Process effect: std::process::Command::new"
 
