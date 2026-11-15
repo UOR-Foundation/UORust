@@ -222,6 +222,8 @@ jobs:
   gate:
     name: ratchet, differential and fixpoint / ${{ matrix.runner }} / run ${{ matrix.run }}
     needs: land
+    # A shard that failed fails only its roots: the gate runs on what landed.
+    if: ${{ !cancelled() && needs.land.result == 'success' }}
     strategy:
       fail-fast: false
       matrix:
@@ -258,6 +260,7 @@ jobs:
   agree:
     name: every run on every architecture states the same κ
     needs: gate
+    if: ${{ !cancelled() && needs.gate.result == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
