@@ -111,6 +111,45 @@ enum Certify {
         /// are stopped, and the roots not built are refused for this export.
         #[arg(long)]
         within: Option<u64>,
+        /// This export is shard I (from 0) of `--shards` N: it builds every
+        /// Nth root from the Ith.
+        #[arg(long, requires = "shards")]
+        shard: Option<usize>,
+        /// The shards of a sharded export.
+        #[arg(long, requires = "shard")]
+        shards: Option<usize>,
+    },
+    /// Plan a sharded export: print, as JSON, the shards that build the
+    /// roots the prior manifest did not refuse within `budget` seconds, and
+    /// the roots whose compiler refusal the diagnose job keeps in full.
+    Plan {
+        /// The self register, `frontier.toml`.
+        #[arg(long)]
+        register: PathBuf,
+        /// The manifest of the last export.
+        #[arg(long)]
+        prior: PathBuf,
+        /// The seconds each shard may build for.
+        #[arg(long)]
+        budget: u64,
+    },
+    /// Build one root alone and keep everything lexlean prints of it.
+    Diagnose {
+        /// The self projection.
+        #[arg(long)]
+        projection: PathBuf,
+        /// The self register, `frontier.toml`.
+        #[arg(long)]
+        register: PathBuf,
+        /// The output of `lexlean production targets`.
+        #[arg(long)]
+        targets: PathBuf,
+        /// The root, by its definition.
+        #[arg(long)]
+        root: String,
+        /// The production project, with `build.log`.
+        #[arg(long)]
+        out: PathBuf,
     },
     /// Take a published bundle into the certified crate and write its
     /// manifest with the bootstrap's share.
@@ -596,6 +635,8 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             kept,
             prior,
             within,
+            shard,
+            shards,
         } => {
             let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
                 path: targets.clone(),
@@ -608,7 +649,10 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 &targets,
                 &kept,
                 &certify::Manifest::read(&prior)?,
-                within.map(std::time::Duration::from_secs),
+                certify::Scope {
+                    within: within.map(std::time::Duration::from_secs),
+                    shard: shard.zip(shards),
+                },
             )?;
             println!("certified bundle kept in {}", kept.display());
         }
@@ -638,6 +682,42 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 s.reachable,
                 certify::ENTRY
             );
+        }
+        Certify::Plan {
+            register,
+            prior,
+            budget,
+        } => {
+            let (shards, diagnose) = certify::plan(
+                &read_register(&register)?,
+                &certify::Manifest::read(&prior)?,
+                budget,
+            );
+            let shards: Vec<String> = (0..shards).map(|i| format!("{i}-{shards}")).collect();
+            println!(
+                "{}",
+                serde_json::json!({"shards": shards, "diagnose": diagnose})
+            );
+        }
+        Certify::Diagnose {
+            projection,
+            register,
+            targets,
+            root,
+            out,
+        } => {
+            let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
+                path: targets.clone(),
+                reason: e.to_string(),
+            })?;
+            certify::diagnose(
+                &projection,
+                &out,
+                &read_register(&register)?,
+                &targets,
+                &root,
+            )?;
+            println!("{}", out.join("build.log").display());
         }
         Certify::Agree { dir } => {
             for line in certify::agree(&dir)? {

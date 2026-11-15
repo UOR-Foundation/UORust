@@ -311,6 +311,53 @@ fn the_cli_writes_and_merges_library_registers() {
 /// `certify sync` refuses a kept bundle with no `result.json` before it
 /// writes the certified crate or its adapters.
 #[test]
+fn the_cli_plans_an_export_and_refuses_to_diagnose_without_a_target() {
+    let tmp = std::env::temp_dir().join(format!("uorust-certify-plan-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    std::fs::create_dir_all(&tmp).expect("scratch");
+    let missing = tmp.join("no-prior-manifest.toml");
+    let planned = uorust(&[
+        "certify",
+        "plan",
+        "--register",
+        "tests/fixtures/thermostat-prism/frontier.toml",
+        "--prior",
+        &missing.to_string_lossy(),
+        "--budget",
+        "3600",
+    ]);
+    assert!(planned.status.success(), "{planned:?}");
+    let plan: serde_json::Value =
+        serde_json::from_slice(&planned.stdout).expect("the plan is JSON");
+    assert!(
+        plan["shards"].as_array().is_some_and(|s| !s.is_empty()),
+        "{plan}"
+    );
+    assert_eq!(plan["diagnose"], serde_json::json!([]));
+    let targets = tmp.join("targets.json");
+    std::fs::write(&targets, r#"{"targets":[]}"#).expect("targets");
+    let out = tmp.join("diagnose");
+    let refused = uorust(&[
+        "certify",
+        "diagnose",
+        "--projection",
+        "tests/fixtures/thermostat-prism",
+        "--register",
+        "tests/fixtures/thermostat-prism/frontier.toml",
+        "--targets",
+        &targets.to_string_lossy(),
+        "--root",
+        "any",
+        "--out",
+        &out.to_string_lossy(),
+    ]);
+    assert!(!refused.status.success());
+    assert!(String::from_utf8_lossy(&refused.stderr).contains("no rust-std descriptor"));
+    assert!(!out.exists());
+    let _ = std::fs::remove_dir_all(tmp);
+}
+
+#[test]
 fn the_cli_refuses_a_bundle_it_cannot_export_or_take_in() {
     let tmp = std::env::temp_dir().join(format!("uorust-certify-cli-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&tmp);
