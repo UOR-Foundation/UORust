@@ -1,0 +1,156 @@
+[[fn]]
+path = "base64::MAX_INPUT_LEN"
+kappa = "2811769587ddee495825662f6c3f47dd1ab55055bb00926147b6c23a80ef4470"
+embedded = "0e20499b769696f26303cb2c9ee62f9e29d75c8f96f62ea395ece2d1f756289a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item write::encoder::BUF_SIZE"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::drop"
+kappa = "1ee37c2a5c9b7d6ec1899f1c981bdfc7d10f220675563b2d98cf018357dc789c"
+at = "E=u32, W=u32"
+embedded = "a3f71d0bbed53a4df047f11b9aee92fb6c9ce4a53be32b10383300030772d5fe"
+status = "residue"
+cause = "mir::Ty: EncoderWriter<'_, u32, u32>"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::finish"
+kappa = "fb38dcda3ec8b687396d31c96d4b9506171ecc143be3d28d7ffe236457f9bb19"
+at = "E=u32, W=u32"
+embedded = "df93c5ff01ce621ad735b354bc69ffe3a00c4643016de86a2f9fa046beb8df58"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::flush"
+kappa = "0be1f40a9debe5c2476ad856b2fda08f5bb1acec07188d7ee37a60322cd7a82c"
+at = "E=u32, W=u32"
+embedded = "192fe0a8ff49c6ea9fbf57844f79cc7bf68f605161281d7f7e6c23ca8fccb0f0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::fmt"
+kappa = "c91bcd6edaf43d232bb26bf3f178067f32a99e0dad1e81711f1cc25635b5ade1"
+embedded = "b52a57c00df4cfd6158735a0be3d3c4ba899b62357b30d655d01a3a75d022de2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::into_inner"
+kappa = "aaf5e0e83c0fc77eeb33776c0845c2a062178bca50b0b7a52b8ef54fb6c72fa1"
+at = "W=u32"
+embedded = "cde08f805f9d1c38f2e6cb02cb0962202350cad9f48674c3bc33ab29b6184701"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::new"
+kappa = "ebb0f9d41daa103debf2c39539538a03565d7f11906ea570237dd7a6c706a7e7"
+at = "E=u32, W=u32"
+embedded = "ef0811faca95e21a770f8c039c9261819235dc1456eb085aced615a33cf2c967"
+status = "residue"
+cause = "mir::Ty: write::encoder::EncoderWriter<'_, u32, u32>"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::write"
+kappa = "7a95846ca77282b8da2be5138f360f92a1551dea6cf050ef4ada91729729f0c7"
+at = "E=u32, W=u32"
+embedded = "2597dcb2927c63b47b3b216f2e8a9de41a26ca99d79a050a6dfdba2ae8917107"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::write_all_encoded_output"
+kappa = "294981d34c24f360971dece5bc7a1e8ce769ba06c9ca58cf3dbd0caad356d8fd"
+at = "E=u32, W=u32"
+embedded = "6a92bb907249dd9337ec1e27d976fcea7e8efbf321815ea8441d64263448b3b2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::write_final_leftovers"
+kappa = "665a12434863a65592679f45ff0598e2069983fc63cfe1050e034e22ea091495"
+at = "E=u32, W=u32"
+embedded = "4a8dc58bf72308d69ba2c6ad04fe4af9954bef34aaa6ce4f7c60ccb611ce04a1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder::EncoderWriter::write_to_delegate"
+kappa = "bb8a5a1918ce532ed21b7c966bd6df29717123306dd75025f9011110e119dfb7"
+at = "W=u32"
+embedded = "96de459486c0daa94fa4b70762d02b3ed219ea2f25b36d52c5dece2ec400adbb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder_string_writer::<impl at src/write/encoder_string_writer.rs:99:1: 99:53>::consume"
+kappa = "7369a81f50a65aa01bf81063fb051e0154406a3e42da909c2b76c260bf422b17"
+at = "S=u32"
+embedded = "ad9b62443b1ec755c6bb24249db26fd81b0c7e00c79b69ee75167ea470ae4061"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by StrConsumer, which u32 does not implement in core"
+
+[[fn]]
+path = "base64::encoder_string_writer::EncoderStringWriter::flush"
+kappa = "952a3f76617f7c35d83f522756d3872c2b5ce67722a0328c97325b31276642c8"
+at = "E=u32, S=u32"
+embedded = "17480d653444ba9560888081d38bdc4f41647d9f1a6d7dedc5a1af339564c5d4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder_string_writer::EncoderStringWriter::from_consumer"
+kappa = "7a1372ed44b68e2c2ef35999b7015140ae5274727bfb6f71fdae7a27258591fb"
+at = "E=u32, S=u32"
+embedded = "0081e5b103e7a0f0f061b5d36583ad6ba2048212d5cd57504accfdfe3df385ba"
+status = "residue"
+cause = "mir::Ty: write::encoder_string_writer::EncoderStringWriter<'_, u32, u32>"
+
+[[fn]]
+path = "base64::encoder_string_writer::EncoderStringWriter::into_inner"
+kappa = "10e5be1054631779274b0a39412ad616c429cf474cfc0b0307ab39959eaade0e"
+at = "E=u32, S=u32"
+embedded = "00fb9024ca5fcd0386f7aab71373a30222fce0839c8172d30c02af7e09c14999"
+status = "residue"
+cause = "mir::Ty: EncoderStringWriter<'_, u32, u32>"
+
+[[fn]]
+path = "base64::encoder_string_writer::EncoderStringWriter::new"
+kappa = "33c35799ca405d98c44075fb5b9d7a0362e7335b1b2fa3a44b3e84c0cf407ad8"
+at = "E=u32"
+embedded = "12ffe78d587a9c622f059edb3c3a692e42ab1d8ec1b8851a068333d3ff9a3bf8"
+status = "residue"
+cause = "mir::Ty: write::encoder_string_writer::EncoderStringWriter<'_, u32, std::string::String>"
+
+[[fn]]
+path = "base64::encoder_string_writer::EncoderStringWriter::write"
+kappa = "27ff13f32bdf666fc2e45a9efd1d60e685aefb4ddb5cdd1c381ed51dfc0569bc"
+at = "E=u32, S=u32"
+embedded = "1b40a917dd47764cc2a1236f5ef3f3a3943eea45961178ef7a57e3739fb5dc52"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder_string_writer::String::consume"
+kappa = "233638ff617ccfd679d540c2d7440e27e596dae712f22839ee149cd3cd9449a0"
+embedded = "dced06a447081f94062cb0a80a559c44d77d2d470905e0e1f11fd8785e11cb95"
+status = "translated"
+digest = "8c4c2daa130805a9a225987bc3b74d84c78de501d0923524dc9a134c76004b89"
+
+[[fn]]
+path = "base64::encoder_string_writer::Utf8SingleCodeUnitWriter::flush"
+kappa = "db2e0b1b61802f2b63ba276589b6f3e85aa8695d207a3c15b6601ac0d5a9784b"
+embedded = "83882ea2cf062213d26a4af9b5165ab6b6b6b5ddb03dbff4605449c23dca279b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "base64::encoder_string_writer::Utf8SingleCodeUnitWriter::write"
+kappa = "7b26602d28edbcd1f87acf66a7420f95d61cb3c19e922c5ef2bed7122b641b93"
+at = "S=u32"
+embedded = "874a400d0f4d95450a0eb251d02545342a941e14e8abed0cdf8560dce80050e9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

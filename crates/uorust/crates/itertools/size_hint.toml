@@ -1,0 +1,49 @@
+[[fn]]
+path = "itertools::add_scalar"
+kappa = "c1adcd8bbd1eb2a4e55bcd90aab7e8228bf2d117ee16d77520b228920c14d643"
+embedded = "a54b3179e9b26836e5e8076739878c693c3ccecd8c66c04870c36bfb2433c26d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_add"
+
+[[fn]]
+path = "itertools::mul_scalar"
+kappa = "a765a725961665f214c990b528156541eb4b8802a76a1bdf8e42fa52737aad66"
+embedded = "8d5cb16f232658f6bcb34df13b77f23386c1b17f0f8ede12b16bfcb70f8955f3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_mul"
+
+[[fn]]
+path = "itertools::size_hint::add"
+kappa = "46fe8cb31daac1a44d8b5b3caa034c617770e31762471b35f87542b787488e07"
+embedded = "3f8bdf5f08c85d20694f07642cd62dcc6f624dddfce765ad52d75ebe3d0803ce"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_add"
+
+[[fn]]
+path = "itertools::size_hint::max"
+kappa = "f71dd3321e467fe171cab8086fbba0d5e58c57cfb5a197d7377fb0aff4e64d14"
+embedded = "b1baf9166b2f2aa3504ae7240ff9025bbf07c5d765ee96f25d203a9a58258212"
+status = "translated"
+digest = "a4b310bbc48930e5da2735b4a510982f79c0390234cd14222b34a8251b8cb9aa"
+
+[[fn]]
+path = "itertools::size_hint::min"
+kappa = "6a0f8758f171058a121585c979feae37f703d97c2c4c7683475e1a66654845a7"
+embedded = "fddc0e8fa626ff0ac65a1928d731bdb942cf7053eb0dfd7440bc1f3a6de80187"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::or"
+
+[[fn]]
+path = "itertools::size_hint::mul"
+kappa = "ec52cd2943bcd5c3f7cdcb199f857640ec2b611075314808f477d89ee9bebfe0"
+embedded = "e86768093652f18c6cc1c7560d814b9ad24ceb6b5c466f74b869a92bbc4c0b8e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_mul"
+
+[[fn]]
+path = "itertools::sub_scalar"
+kappa = "815abea1a55410cfc7cb36a2b0845bcb3368101e9172382d2a1e68c7745b0468"
+embedded = "2058d892d67447375f285f4c1cdaace97c8866bd43b10ed48435736551760b82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::map"
+

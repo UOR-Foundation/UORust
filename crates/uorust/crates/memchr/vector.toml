@@ -1,0 +1,197 @@
+[[fn]]
+path = "memchr::vector::<impl at src/vector.rs:117:10: 117:15>::clone"
+kappa = "a962e3a8fb0123ac3a68a24455b3631fdd0d86e808c7bcc421f954c5ce05da26"
+embedded = "ffdaff5327b54eaa0ef186a4cd0566153fbd2c2b43c09f58ebdaa18c743b4b7f"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::<impl at src/vector.rs:117:23: 117:28>::fmt"
+kappa = "bd583ef9c027244b337ff932026bfdb6326fc4df11fb7264e87f7f818766a99c"
+embedded = "eaa0673d09019386f7c5500e9a947dfbd427eee993cec1b7ffa4445a90bfef10"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::all_zeros_except_least_significant"
+kappa = "e406b126e48269bacc5f635d240a31fced5fb22759a76d9382d51ff763af5b17"
+embedded = "55c3fc845d48573f30485287ff0204f83ab69296a9abfe7ffccb072de74f2944"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::and"
+kappa = "10d9cb0f923b85b1e9f97c25bab18048753a219f71817cd3ef2557a40e15eb51"
+embedded = "b2a2975ddf7d1e23f3cd734f8cb8a1869f3827c1eb051f0f0af58289fd3a0b5c"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::clear_least_significant_bit"
+kappa = "e386e6a9a8cc92404c4e250536868332084a9c022752859bb08733d466b2bdca"
+embedded = "4cd9e5568063788c3c3644eb7454020677d81b48ed2f151a4a92bc27cec6130a"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::count_ones"
+kappa = "a23d924de5c6a1a591640e46f38d8e3e422ca21cc7e21afe1ae95ed732611a63"
+embedded = "617e99bc625b2fba610e6d76e533435eb4ede002f27588a869b18bb73a32a77b"
+status = "residue"
+cause = "mir::Ty: SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::first_offset"
+kappa = "36650f1dd4f4729d3250bc28ce356ea8ca794f9351cce443518c4296586b9a30"
+embedded = "dfb786102e69157d27feb9892b3294a3b200c1688a0e9c12721b56725de58103"
+status = "residue"
+cause = "mir::Ty: SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::get_for_offset"
+kappa = "54d13d6a6016cc0317ac5c0766e9e2d9e57f44690e6e8d784d7b4fcb8626b623"
+embedded = "7203db7b08ec0ee6df7596f260585f97073aaea736c8d80d3b35f994c52846cc"
+status = "residue"
+cause = "mir::Ty: SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::has_non_zero"
+kappa = "6118b81f15894abd8c055a8d5b11d798a470b610bfb743eb6601e888bc6ee3cb"
+embedded = "a9c2206974374bda39033b1c98f5f90063523eb930631e97da41cd08a147e027"
+status = "residue"
+cause = "mir::Ty: SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::last_offset"
+kappa = "91e9be0b5cfa0c70289b3fa9e591a64f95b1c06dc402d69184a4bea9f91afec9"
+embedded = "4a26f20630bf87cab83725b101321421055a3fdcfe18f35ebc2ffd41b7959d37"
+status = "residue"
+cause = "mir::Ty: SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::SensibleMoveMask::or"
+kappa = "ba4ab0e7855870f548e4596fa5f68c479d18d1906d69b48ac69e802a13907c2c"
+embedded = "5394a0f4d29d90433ad9ceb5ad548daf7148a563ec3cc82d08b3175498344322"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::vector::Vector::movemask_will_have_non_zero"
+kappa = "2144ff7ca07e9605e6bc591aa25691cb909affdcdd2c12a8e2f6f7040a3715f1"
+at = "Self=u32"
+embedded = "49f0604ec255b2a5d2f9d228f6b36b8a68faa4289f4c5774afabdda62cc41c65"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Vector, which u32 does not implement in core"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::ALIGN"
+kappa = "05c05c7eb4b76ad9ba90981bec1808eef048a97b0ece4512cf8884769bafc8ea"
+embedded = "acfa8e2cc93615c404b926871f014adf26c65c30eb0cd3dbf69a000a18584be8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <core::arch::x86_64::__m256i as vector::Vector>::BYTES"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::and"
+kappa = "6cdff5c3d6d917fa4d64abaecefc0f2147999bb33df9a0ab98557d9fff9113a2"
+embedded = "bc2efd662f661834f29b96b4e53c744a9ade105cd7ac00a9e5380201237fea24"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::cmpeq"
+kappa = "1918890b4d5b1615d644ebacfc11c212def569e916fe46aaa65e9ed5caa7d574"
+embedded = "2dacd2b05bd26896415072e76e2a68783a3ed88de3da5828b9dbd2ba37d9e63b"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::load_aligned"
+kappa = "1a608afaba203b9786901c926fcd7a151de70b43b0dd8fee9e5ddbc3ac7103fb"
+embedded = "c119bff6b85708a29ae2625298fdf75e8cf03e0b0bf2602328500aa9a10425be"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::load_unaligned"
+kappa = "230bad6674ecc7e9dd075d621a7c4f57dd845f914e91426a25235e47c0d6c120"
+embedded = "18d8cc6ec4398899077b3ad963e03295f80288dafe43ab560eeb67c226826add"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::movemask"
+kappa = "113c143658a9fea7a12a47fb072392f39cc0259c1eb6dc1f7d028d27c0727b25"
+embedded = "dd91fd75f02dda671efb30f64ecc768885631c0437b11e8f81ac356948902e39"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::or"
+kappa = "fcee67eed58b0ecfe2049948978e4b901650436349d5099cd4baf170ee4fc166"
+embedded = "38fa0d720ceda843384840e58e583349a17bac7cd3b437cf9c6d32d428d5dc72"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86avx2::__m256i::splat"
+kappa = "c798735cf8e378f94d56654e6a289abaf4d829a3d7e160616bcef8ca986f706e"
+embedded = "cf5db7b2f96be3b9ef743f948b1cc19225816252a449a7f34f1e0226c7bc18cf"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::ALIGN"
+kappa = "e247abadda59cc92a29e9028340f8a2fa041ca523c3372b1c5636107b4d18414"
+embedded = "9d1b44b142f7b8a14d7739d44b4b19e0672f11b398b5c180a0d58ae56fd8bf92"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <core::arch::x86_64::__m128i as vector::Vector>::BYTES"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::and"
+kappa = "f77ab2818eb3d61ba109a505c7621a25ea532977706efd0d199cdcfb4d2abee7"
+embedded = "7a2927403137c06fd6a2627718a33c18724757d82865ece6c2a0498cf8e707ee"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::cmpeq"
+kappa = "90cf5a447bbfdbde8350773e7a0fd558d73f81c110747846114a5a48d9bf9969"
+embedded = "641d2d9186c9185e6e16a6fc3dad895af2a294a39d34ce39ab5cb06b10b6d41a"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::load_aligned"
+kappa = "ab739ec1080bce0539c9d5f49920663f4c1f5ac07884041444aa90ec2a73be88"
+embedded = "6fe3fec337b12c17c69ff24db9d17b409f459e2f05855752ce9f34be7962a299"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::load_unaligned"
+kappa = "d4b893d61117959bc74f245de7fa2d169f0ec4d513c8bc521edd779cf3e0e4ea"
+embedded = "91a861d7371939fff66495346159cf747388d51ea7fea4601a348fb148117891"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::movemask"
+kappa = "e3d663c60335496a4a40b3e38eca8fa7dfef50d1ea8ea3d9131348a29786ab38"
+embedded = "4172e32aa9a29b483f81e3ea5345445b6fb53bd913f7428919e71111a8c7bc74"
+status = "residue"
+cause = "mir::Ty: vector::SensibleMoveMask"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::or"
+kappa = "57dab15b9a02981338171298c6c1d7373e97b5fef12af01380fb53f9f75b3801"
+embedded = "a163a3aefd2e867f63829a565ffa0547e158d875232c0b4bdf90c3ac7baac219"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "memchr::x86sse2::__m128i::splat"
+kappa = "8c78855be9a080d5992a56d97f83a5fb589f49fdfec92ea970f8fc548ec69d74"
+embedded = "2b79579e93a6ec82e362eebb3d6c64998f0ee804faee523cc2327839c140b1bf"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+

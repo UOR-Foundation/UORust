@@ -1,0 +1,95 @@
+# The bitflags register (written by `uorust crate bitflags@2.13.2`; do not edit): every body of
+# bitflags's MIR at bitflags 2.13.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 93
+translated = 0
+residue = 93
+
+[module.iter]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.parser]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.traits]
+bodies = 70
+translated = 0
+residue = 70
+
+[embedding]
+embedded = 93
+evaluable = 93
+blocked = 0
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Flags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: parser::ParseError"
+bodies = 18
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: iter::Iter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::IterNames<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as traits::Bits>::EMPTY"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as traits::Flags>::FLAGS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IterNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::IterDefinedNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::IterEqualNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Flag<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterDefinedNames<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterEqualNames<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::Flag<u32>"
+bodies = 1

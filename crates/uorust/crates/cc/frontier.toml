@@ -1,0 +1,482 @@
+# The cc register (written by `uorust crate cc@1.11.2`; do not edit): every body of
+# cc's MIR at cc 1.11.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 404
+translated = 9
+residue = 395
+
+[module.build_env]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.command_helpers]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.crate]
+bodies = 202
+translated = 1
+residue = 201
+
+[module.flags]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.logger]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.target]
+bodies = 19
+translated = 5
+residue = 14
+
+[module.tempfile]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.tool]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.utilities]
+bodies = 26
+translated = 1
+residue = 25
+
+[module.windows_registry]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+embedded = 404
+evaluable = 404
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: tool::Tool"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 31
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: target::TargetInfo<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: command_helpers::CargoOutput"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Build"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Command"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ToolFamily"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: utilities::OnceLock<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RustcCodegenFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: build_env::EnvSnapshot"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utilities::VecMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: windows_registry::VsVers"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EnvSnapshot"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HashRecorder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: build_env::BuildEnv"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: flags::RustcCodegenFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tool::ToolFamily"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Into"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::get_raw_target: cc's MIR stops at type outside the lift: std::sync::Arc<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BuildEnv"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BuildMessageKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompileCommand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProbeKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StderrForwarder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: command_helpers::OutputKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn BuildMessageLogger"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logger::CompileCommand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::process::Stdio"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tempfile::NamedTempfile"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:701:1: 701:11>::remove_flag::{closure#0}: mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:701:1: 701:11>::set_envs_snapshot::{closure#0}: type outside the lift: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::GNU_ARM_ARCHS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::GNU_PREFIXES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::GNU_PREFIX_CANDIDATES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::RISCV32_ELF::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::RISCV64_ELF::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Build::rustc_wrapper_fallback::VALID_WRAPPERS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: flags::RustcCodegenFlags::parse::is_flag_prefix::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as ToString>::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::check_enabled: cc's MIR stops at mir::TerminatorKind::Call: Build::is_disabled: cc's MIR stops at mir::TerminatorKind::Call: Build::get_env_boolean: cc's MIR stops at type outside the lift: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::env: cc's MIR stops at type outside the lift: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::envflags: cc's MIR stops at mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::get_debug_str: cc's MIR stops at type outside the lift: std::sync::Arc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::get_env_boolean: cc's MIR stops at type outside the lift: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::is_disabled: cc's MIR stops at mir::TerminatorKind::Call: Build::get_env_boolean: cc's MIR stops at type outside the lift: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::new: cc's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::try_compile: cc's MIR stops at mir::TerminatorKind::Call: lib_and_archive_names: cc's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Build::try_expand: cc's MIR stops at type outside the lift: tool::Tool"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::binary_search_by_key"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lib_and_archive_names: cc's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tempfile::rand: cc's MIR stops at type outside the lift: std::hash::RandomState"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: try_emit_link_directives: cc's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompilerCommandKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompilerFlag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlagSupportProbeFiles<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NamedTempfile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrefixMapFlag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResetStderr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: command_helpers::ProbeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: command_helpers::StderrForwarder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: find_msvc_tools::Env"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flags::ControlFlowGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Into<Cow<'static"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logger::BuildMessage<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logger::BuildMessageKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logger::Logger<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::array::IntoIter<&str"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::hash::RandomState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Stdout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::Child"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::Output"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<Vec<Box<str>>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: target::parser::TargetInfoParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: target::parser::TargetInfoParserInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tool::CompilerCommandKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utilities::HashRecorder"
+bodies = 1

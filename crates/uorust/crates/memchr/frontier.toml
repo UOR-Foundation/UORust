@@ -1,0 +1,670 @@
+# The memchr register (written by `uorust crate memchr@2.8.3`; do not edit): every body of
+# memchr's MIR at memchr 2.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 527
+translated = 8
+residue = 519
+
+[module.arch]
+bodies = 358
+translated = 6
+residue = 352
+
+[module.cow]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.ext]
+bodies = 4
+translated = 2
+residue = 2
+
+[module.memchr]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.memmem]
+bodies = 88
+translated = 0
+residue = 88
+
+[module.vector]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+embedded = 527
+evaluable = 527
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::One"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: memmem::Finder<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::One"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: all::memchr::One"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: arch::all::packedpair::Pair"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::Three"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::Two"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: memmem::FinderRev<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: searcher::Searcher"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: vector::SensibleMoveMask"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: all::memchr::Three"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: all::memchr::Two"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::Three"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::Two"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Prefilter"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SensibleMoveMask"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::One"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::all::rabinkarp::Hash"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: avx2::packedpair::Finder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: memmem::FindIter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: memmem::FindRevIter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rabinkarp::Hash"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: sse2::packedpair::Finder"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Memchr<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PrefilterState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: all::memchr::OneIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::Three"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::Two"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::packedpair::Finder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::OneIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cow::CowBytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generic::memchr::Iter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generic::memchr::One<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generic::packedpair::Finder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: memchr::Memchr2<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: memchr::Memchr3<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: memchr::Memchr<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: memmem::FinderBuilder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::Prefilter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::OneIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: twoway::Finder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::One::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Memchr2<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Memchr3<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: all::memchr::ThreeIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: all::memchr::TwoIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arch::all::packedpair::Finder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arch::all::rabinkarp::Finder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arch::all::rabinkarp::FinderRev"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::Shift"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::ThreeIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: avx2::memchr::TwoIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: generic::memchr::Three<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: generic::memchr::Two<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::Searcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::ThreeIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sse2::memchr::TwoIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: twoway::FinderRev"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: arch::all::memchr::USIZE_BYTES: mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Three::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Two::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ext::distance: memchr's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::offset_from"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: splat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CowBytes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FindIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pair"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pre<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::OneIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::ThreeIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::memchr::TwoIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::ApproximateByteSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::Finder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::FinderRev"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::Suffix"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::SuffixOrdering"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::generic::memchr::Iter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::generic::memchr::One<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::generic::memchr::Three<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::generic::memchr::Two<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::generic::packedpair::Finder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::OneIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::ThreeIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::avx2::memchr::TwoIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::OneIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::ThreeIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::x86_64::sse2::memchr::TwoIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cow::Imp<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::PrefilterConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::PrefilterState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::SearcherRev"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rabinkarp::Finder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rabinkarp::FinderRev"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memchr2::{closure#0}: mir::TerminatorKind::Call: memchr::memchr2_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memchr2_raw: memchr's MIR stops at mir::Operand::Constant: {alloc17: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memchr3::{closure#0}: mir::TerminatorKind::Call: memchr::memchr3_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memchr3_raw: memchr's MIR stops at mir::Operand::Constant: {alloc25: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memchr::{closure#0}: mir::TerminatorKind::Call: memchr::memchr_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memchr_raw: memchr's MIR stops at mir::Operand::Constant: {alloc9: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memrchr2::{closure#0}: mir::TerminatorKind::Call: memchr::memrchr2_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr2_raw: memchr's MIR stops at mir::Operand::Constant: {alloc21: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memrchr3::{closure#0}: mir::TerminatorKind::Call: memchr::memrchr3_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr3_raw: memchr's MIR stops at mir::Operand::Constant: {alloc29: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: memrchr::{closure#0}: mir::TerminatorKind::Call: memchr::memrchr_raw: memchr's MIR stops at mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr_raw: memchr's MIR stops at mir::Operand::Constant: {alloc13: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by HeuristicFrequencyRank"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Vector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: arch::all::memchr::has_zero_byte::LO: mir::TerminatorKind::Call: splat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <core::arch::x86_64::__m128i as vector::Vector>::BYTES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <core::arch::x86_64::__m256i as vector::Vector>::BYTES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item memmem::searcher::do_packed_search::MIN_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc13: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc17: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc21: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc25: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc29: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc33: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc9: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::all::is_equal_raw: memchr's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::count_raw: memchr's MIR stops at mir::Operand::Constant: {alloc33: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memchr2_raw: memchr's MIR stops at mir::Operand::Constant: {alloc17: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memchr3_raw: memchr's MIR stops at mir::Operand::Constant: {alloc25: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memchr_raw: memchr's MIR stops at mir::Operand::Constant: {alloc9: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr2_raw: memchr's MIR stops at mir::Operand::Constant: {alloc21: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr3_raw: memchr's MIR stops at mir::Operand::Constant: {alloc29: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arch::x86_64::memchr::memrchr_raw: memchr's MIR stops at mir::Operand::Constant: {alloc13: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::offset_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ApproximateByteSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultFrequencyRank"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FindRevIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Imp<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrefilterConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SearcherRev"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: all::packedpair::Finder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::all::shiftor::Finder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::SuffixKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::all::twoway::TwoWay"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::PrefilterKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::SearcherKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::SearcherRevKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: memmem::searcher::TwoWayWithPrefilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shiftor::Finder"
+bodies = 1

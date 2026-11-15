@@ -1,0 +1,32 @@
+[[fn]]
+path = "memchr::ext::<impl at src/ext.rs:20:1: 20:29>::as_usize"
+kappa = "43672fe2df139d0d3197128f45c08c2596f297dbddd4355bc34b63c750f0589b"
+at = "T=u32"
+embedded = "3102121c62bf9e40091c6592628445080da4dd94e42bafd94d617543f8f6c8b3"
+status = "translated"
+digest = "a21d57ed7e088163670e6e19137609b9b61ce447063db8929b1e69f81c91a966"
+
+[[fn]]
+path = "memchr::ext::<impl at src/ext.rs:20:1: 20:29>::distance"
+kappa = "3ba9270cf5d52651bf22316fd364b7344099aa07f48a480c42d8aa549ad21f2a"
+at = "T=u32"
+embedded = "71c480e9180360b0b7961c019cccd65e2e4d900d73518ee281edf8a795a16aa5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::offset_from"
+
+[[fn]]
+path = "memchr::ext::<impl at src/ext.rs:31:1: 31:27>::as_usize"
+kappa = "f19cfc618cbb516081c7f364bcf468f73f0686316244470ab07a6e38bb2379fa"
+at = "T=u32"
+embedded = "0fba372028af26e2fa08630046f9d89c598352d75172ba46e4e6b87d216bd5c7"
+status = "translated"
+digest = "2c74f01e55e8ef41063a25a36f5b951d8e0fca30c2b1ea9c387ac635e18b326b"
+
+[[fn]]
+path = "memchr::ext::<impl at src/ext.rs:31:1: 31:27>::distance"
+kappa = "a23d97a04db1933d450bf2c7797180bddf5336a01cef3e4537f45d5b1c56634c"
+at = "T=u32"
+embedded = "f25f21a673861d859043a497689d34475a94e0199b6d7702016f9e0ae815ad8c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ext::<impl at src/ext.rs:20:1: 20:29>::distance: memchr's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::offset_from"
+

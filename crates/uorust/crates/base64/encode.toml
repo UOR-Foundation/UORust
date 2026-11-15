@@ -1,0 +1,89 @@
+[[fn]]
+path = "base64::add_padding"
+kappa = "8a15546c0d39d351f72d12e6910dede51cbfc6c8229ea5f6526e88b09229cc6f"
+embedded = "ec12a85732ebdb27cd273037013e7f08c25747c2e40037991cc76280424abb2c"
+status = "residue"
+cause = "mir::Ty: Symbol"
+
+[[fn]]
+path = "base64::encode"
+kappa = "bd925e1e4a0ecabe25665e64bb902a9558de8694431971a36b7f30b503a5fbf6"
+at = "T=u32"
+embedded = "bdbe93aa383b751ee9633dbc6a968dec2a1166ae520752a67b261f33e6088df4"
+status = "residue"
+cause = "mir::Operand::Constant: encode::encode::<u32>::promoted[0]"
+
+[[fn]]
+path = "base64::encode::<impl at src/encode.rs:149:10: 149:15>::clone"
+kappa = "c78813800b0b96a3ac2c0a8909764e0267d40a594efa896d510ed563af428f7d"
+embedded = "a33c8cc62e18163035b7c048a8e3ef080fec8eb7e83d802abba06beeb82de5ad"
+status = "residue"
+cause = "mir::Ty: encode::EncodeSliceError"
+
+[[fn]]
+path = "base64::encode::<impl at src/encode.rs:149:17: 149:22>::fmt"
+kappa = "a7590371963b24d3c4fb224bdb37673e20e2c01d0046c876702637c06517213d"
+embedded = "f760fb2f4e4419794eae906562b1d38ec6189265081d447f29d92c7c64d6e54b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "base64::encode::<impl at src/encode.rs:149:24: 149:33>::eq"
+kappa = "38e9a9ff41ea6c34d2ff275621d0cda801bdcb8bfc0cc168673dfedabc0aece5"
+embedded = "59bee74e4a27b6dd4726c56b64b4bb20ec0f19cf2f86c2999d719ae85800a79c"
+status = "residue"
+cause = "mir::Ty: EncodeSliceError"
+
+[[fn]]
+path = "base64::encode::<impl at src/encode.rs:149:35: 149:37>::assert_fields_are_eq"
+kappa = "68e8ca8759b8e660a2e7b0867dbe35409db852a545bc9b37446f49a44507bf4d"
+embedded = "63dbb7c154f5824ab9de2eca80e445b7b5fb0c52659b9a54862236910239cc2a"
+status = "residue"
+cause = "mir::Ty: EncodeSliceError"
+
+[[fn]]
+path = "base64::encode::EncodeSliceError::fmt"
+kappa = "9297f3be6a6c466202ac0cd09026835d9ae0e9e8aee88e252dcde792514066ff"
+embedded = "8bb34786e3fd87740b1cd1369ee2e75a938d4111ff5a74a302d19449786802c1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "base64::encode_engine"
+kappa = "5b2b7a7ea75c14a38c2b4e8dbd75340a65e28c0496206f2056f45cc626cfae6b"
+at = "E=u32, T=u32"
+embedded = "84fc74b3b2a070b56fb7586a60a793ece9f7f0a3038cbaff17a88b9d2f60aa5e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Engine, which u32 does not implement in core"
+
+[[fn]]
+path = "base64::encode_engine_slice"
+kappa = "5c862f9d525755e4d5e04c9b8a34958410e3d0b75481d47bb42f420b07cd6e47"
+at = "E=u32, T=u32"
+embedded = "e34a6b276a9a0c44daa5e33c98d50a487eaad017695d40ed5843104789731913"
+status = "residue"
+cause = "mir::Ty: encode::EncodeSliceError"
+
+[[fn]]
+path = "base64::encode_engine_string"
+kappa = "f948616e42e1ad976392efef25c94f3f9b133e73028f59e14ac321f6893a8f0b"
+at = "E=u32, T=u32"
+embedded = "d7b2bfdd3043059e632ff057feacda70c61c242528832bfe856ba4deccae0e20"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Engine, which u32 does not implement in core"
+
+[[fn]]
+path = "base64::encode_with_padding"
+kappa = "d28c1757e0b973ac558d5107bdf9cdaa6e29e784570d1c56730ff056f6cdc9a1"
+at = "E=u32"
+embedded = "09a1c476950a14cc1825836cf9060cb44fdd57e20192a1e82ea65ce4b51967b2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Engine, which u32 does not implement in core"
+
+[[fn]]
+path = "base64::encoded_len"
+kappa = "0f9743f2ef811d8213d69ada31db5389d5aeac8c3983f346f85e5a87dc3bc434"
+embedded = "ef5ca9d5883396d69f51e5e4a44ac5f9bcdb4cb7a05a4d8e99f5f6e175667628"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_mul"
+

@@ -1,0 +1,129 @@
+[[fn]]
+path = "once_cell::COMPLETE_PTR"
+kappa = "416ecfc5f369987645bb289bfc86ff2c8704f931e13bae21732e68d5294f6329"
+embedded = "8dcba058f4852d42fb1edfa55409b7f038bb1578c17142fe1ab332dfaeb1ad43"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::COMPLETE"
+
+[[fn]]
+path = "once_cell::INCOMPLETE_PTR"
+kappa = "3bedbb42f79e7543ad6fac77018a073ffa08bd57845ef69d968020c888a62a74"
+embedded = "bd0ff8ff47430ac884a0841fe35aba3d8335be9c258afe0a1a5bbeb0a5d45339"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::INCOMPLETE"
+
+[[fn]]
+path = "once_cell::imp::<impl at src/imp_std.rs:13:10: 13:15>::fmt"
+kappa = "2e7210764555096219fd6b585ddb18427bac3c1adf0e2522e17216d698fe15eb"
+at = "T=u32"
+embedded = "6a8d8ecdb71c4f63476e18756bb867a0776a9822ab252a2e625d34ed64749126"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "once_cell::imp::Guard::drop"
+kappa = "98d54e49badfed1d7a5f7fc5b9f00666ba271632a1e1b8dad252a7e3f6afb877"
+embedded = "d59307733280b23785bc3c4838d2128ab4ba8b65fa54da206a67d8cfa7a50c68"
+status = "residue"
+cause = "mir::Ty: Guard<'_>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::get_mut"
+kappa = "60826bd64a0060724e71be23d68fc913dd660fd9e040e263483324ee902ef489"
+at = "T=u32"
+embedded = "dd05d28ea1502971d9c2069a4c6cc55f6d4a6dbc4059aeefac5f8cf61f19b359"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::get_unchecked"
+kappa = "900de0f92c11796279ee0a9d83c55f9188887d8f3810ab1f11daf2c0f6511f42"
+at = "T=u32"
+embedded = "e3432cd4c156b24d2a61955f0b1172736da4645bec219771059890e8d5f7c346"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::initialize"
+kappa = "4a3edec96d614ab023cf3be9ea76850a1b3a2be4b75ff92800f442627d06b9b3"
+at = "E=u32, F=u32, T=u32"
+embedded = "abcfa9f56e1bd48badf350783a2d7fbbeea32b715fe5d38b3a9b1ec00c06702e"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::into_inner"
+kappa = "3ae3b4035491588e83d9db5917b8f75a831e12de67e8b44da0ffbb689dcd3853"
+at = "T=u32"
+embedded = "59af8078d6f2d116a1ea9b8fcd485df25db89ec0c281a876616a51828af9fa3c"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::is_initialized"
+kappa = "20de3a01bf1f8eed5a9032894f927972ea9e9f9c8aec5f64bf788e3e40f3ac93"
+embedded = "abe95b5bac5d37797ddcd331a1d46d9b951cbfe47dd0cd50ef41dec91ff98131"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::new"
+kappa = "a675ebe0d4ea671e7932b93dce160e497b8b334ff711f07313429178eefdab7a"
+at = "T=u32"
+embedded = "4bf3c58f2b0ec1c1a65589d8992c47bcd1b513c00d2f507dc750b38bb295c40d"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::wait"
+kappa = "77a8186569d35bf9dedec9c3b848c4ec995b8790fe1b1e1bef700d89f444331f"
+embedded = "e65af52fd2cc55122b2a705e98776ba1ba599ccd353ea77f8713b2ba5f62ab66"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "once_cell::imp::OnceCell::with_value"
+kappa = "878700b485e066bf5b8380d5dd698bd342f40b0042e7d953145b83ddadc8e3a1"
+at = "T=u32"
+embedded = "3e0e8c690caedb0e40a9859170af6719e337cddcd78fb561b2e5e685251fd038"
+status = "residue"
+cause = "mir::Ty: imp::OnceCell<u32>"
+
+[[fn]]
+path = "once_cell::initialize_or_wait"
+kappa = "698c2c55c175bdbfbf93e80335dc1ecc138ad3edfb341e91197a6178efe4c34a"
+embedded = "cf241ec123673be9fcaf9ae7073593b7a4b8843c1e0cb33a63992e9327a5fd97"
+status = "residue"
+cause = "mir::Ty: Atomic<*mut Waiter>"
+
+[[fn]]
+path = "once_cell::map_addr"
+kappa = "30c9d6a5f65e829ffbf3eff1ef6bba04fe5f77a0205af5afdc368967fdab00dd"
+at = "T=u32"
+embedded = "aa9831d68dec6f0c88d9e00309e7067a8bb2cd0b33a51d38f0f6c05328e03c17"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::strict::with_addr: once_cell's MIR stops at mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_sub"
+
+[[fn]]
+path = "once_cell::strict::addr"
+kappa = "fb056da622e55eba9978293d1d7cbfe42df2616a54fb2c1711392d09b42531bd"
+at = "T=u32"
+embedded = "b5d7c7fbf061b33e48f55f96ba10c58cef1fa795102e4d18027890fa2bfaeec3"
+status = "translated"
+digest = "445d77de5a509beb89c9041c97a23ddc33c851911a20fddca387aa1357c10ab5"
+
+[[fn]]
+path = "once_cell::strict::with_addr"
+kappa = "4ccf4a4ffa043638099cca5f819b4db5ffb8e128a7cc3c53dc32cf90f34e533a"
+at = "T=u32"
+embedded = "40d69eceb61a13388348690ef6b933613bb5f4fb34ba2a0bf4a62902b6531550"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_sub"
+
+[[fn]]
+path = "once_cell::wait"
+kappa = "fec9b0f23a04e01ef853b9226caa71cae7f807e08f6bc45c6aa011d2ccb6edc4"
+embedded = "86b326f3d99da4ccd3f8a17e7a72e64dc39be5407fbeb2dc0bcaea37f6d5b277"
+status = "residue"
+cause = "mir::Ty: Atomic<*mut Waiter>"
+

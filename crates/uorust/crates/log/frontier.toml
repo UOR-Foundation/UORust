@@ -1,0 +1,126 @@
+# The log register (written by `uorust crate log@0.4.35`; do not edit): every body of
+# log's MIR at log 0.4.35, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 119
+translated = 4
+residue = 115
+
+[module.__private_api]
+bodies = 10
+translated = 1
+residue = 9
+
+[module.crate]
+bodies = 109
+translated = 3
+residue = 106
+
+[embedding]
+embedded = 119
+evaluable = 119
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: RecordBuilder<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Metadata<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: MetadataBuilder<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Record<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MaybeStaticStr<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc17: &[&str; 6]}"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc8: &Atomic<usize>}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GlobalLogger"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NopLogger"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn Log"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Arguments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseLevelError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Log"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc5: &Atomic<usize>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Level"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LevelFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::panic::Location<'_>"
+bodies = 1

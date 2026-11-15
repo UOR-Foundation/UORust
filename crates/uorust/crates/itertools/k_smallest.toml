@@ -1,0 +1,38 @@
+[[fn]]
+path = "itertools::children_of"
+kappa = "6fe2bb191ee4fe86346bdaea26150458d76f0c3a090293b55b334b077423c22f"
+embedded = "67051208aac508efc7b0522d5319ec6f6c7634643303731848982072659c64e6"
+status = "translated"
+digest = "68a6349a3b8cfea50e75854f0cc4e64aa431a14fb60804120423c834a457b8b9"
+
+[[fn]]
+path = "itertools::k_smallest_general"
+kappa = "0c38f2c24af25611e18ad40a1bdb04f6c7b777fccde874411bd9cadf38e59ce4"
+at = "F=u32, I=u32"
+embedded = "71dcac4f3ac9474eb984f654259fba8e48ea6aa343e0b3a38959ebf864654130"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::k_smallest_general::sift_down"
+kappa = "69fedfb714540d800fad530d044ba1dc9866cc44d88315a41121da581a727378"
+at = "F=u32, T=u32"
+embedded = "3e060c76e687ce13fbd992dc83cc785334cd58fca7728c5f1166ba33ad295338"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::k_smallest_relaxed_general"
+kappa = "5587b382584d7350c0325523cf529773abfd1297376c17f3bcd7a7348bed51d1"
+at = "F=u32, I=u32"
+embedded = "9341aabef9a20c9896a12212025efc0f7df05e0465936695712e30672fcb534a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::key_to_cmp"
+kappa = "1fe5d55952f89717ca674b7e8e9c53d207dae6fee85fc6297c3acd7dafa55ea1"
+embedded = "6cd651aa2810e274fb551c0ac0cd75fbacc2dc436bbdfda8d212dc5c1ea6acb4"
+status = "residue"
+cause = "mir::Ty: F"
+

@@ -1,0 +1,23 @@
+[[fn]]
+path = "heck::upper_camel::AsUpperCamelCase::fmt"
+kappa = "11f87bbe8fdc3ef0e6403e8bbc65a07734833d677a8a4f531a983e5bd993d82a"
+at = "T=u32"
+embedded = "26484c4fed6946709b24db117605b7ebe71f0004f6f2668a420ee190c829898d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heck::upper_camel::T::to_pascal_case"
+kappa = "2bad74218536519d78e4bac507f9c0e0278181a8f62a363b87b87d30c26f9e41"
+at = "T=u32"
+embedded = "6b4ba6c820d39ff486463836c4e630a695080f4f3869aff2a9fd5e2e603b8640"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ToUpperCamelCase, which u32 does not implement in core"
+
+[[fn]]
+path = "heck::upper_camel::str::to_upper_camel_case"
+kappa = "32cf3f253e8d19d422215fae4dba08fe1960360f003fbd9451d6ba1a03a72693"
+embedded = "50cc1744c2308f9fb4cf2298b70654d094e2f495479f22b6b2d58cf5e77c0787"
+status = "residue"
+cause = "mir::Ty: upper_camel::AsUpperCamelCase<&str>"
+

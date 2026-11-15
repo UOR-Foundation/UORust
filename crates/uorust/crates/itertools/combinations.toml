@@ -1,0 +1,175 @@
+[[fn]]
+path = "itertools::PoolIndex::len"
+kappa = "ef58728d3768fc94b4570511b589b54e9ad85c575bd856dcca9a7b90a2b59231"
+at = "Self=u32"
+embedded = "ae3b2d68169c2fc7bf05e488a77afb232735fdcd6cfe65c9abf2059cf1159b73"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Borrow, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::array_combinations"
+kappa = "6df0ab62cefb38269ee0b349da3d621dd83270f30dbd0e4f4253dde43334257b"
+at = "I=u32, K=#_K"
+embedded = "d621100de8d8690609a92bcb6b477e5e51b1cec0e2f92fbb1b41027fa28321c9"
+status = "residue"
+cause = "mir::Ty: combinations::CombinationsGeneric<u32, [usize; #_K]>"
+
+[[fn]]
+path = "itertools::combinations"
+kappa = "dd5262883f4b950249b8b2480d7461a144b099a0796896f773a18f862b850e0a"
+at = "I=u32"
+embedded = "ded53de793bbcfd37c88f88cd057fe1a640488081ad75cc28b05a7251c7ddf97"
+status = "residue"
+cause = "mir::Ty: combinations::CombinationsGeneric<u32, std::vec::Vec<usize>>"
+
+[[fn]]
+path = "itertools::combinations::<impl at src/combinations.rs:77:1: 77:52>::extract_item"
+kappa = "4f3b93e58fa1cd8a4936b412cdf383f543bbca55632159a1fa1912c5bedfea3a"
+at = "I=u32, K=#usize_K, T=u32"
+embedded = "4e46f0d38042614fe22ce24c2d8211d26dd5f8d4bdfe9b9b0b776f4a3770a484"
+status = "residue"
+cause = "mir::Ty: LazyBuffer<u32>"
+
+[[fn]]
+path = "itertools::combinations::Box::extract_item"
+kappa = "f51d42f8e31bfe7b328894fb8f86bd4f846d01d96e6da75f2e825601028c057a"
+at = "I=u32, T=u32"
+embedded = "db4d712a495cb05fc0a85ed36f0b96e4e683cadad548cbaa69bf2844d425645e"
+status = "residue"
+cause = "mir::Ty: LazyBuffer<u32>"
+
+[[fn]]
+path = "itertools::combinations::Combinations::reset"
+kappa = "5abbdd14b16a132c866b73f8a1a540f240a47cb44f888a9530b73f8d9b549ab8"
+at = "I=u32"
+embedded = "a91bdfae0c6b47469a03b9cee851bbcc880b6d5ec23e903165d834fd637a9840"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, Vec<usize>>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::clone"
+kappa = "721476d249d5cfe8f1cf3631e6ed40657690931a74d4c117df3eadd74e45cbe5"
+at = "I=u32, Idx=u32"
+embedded = "aec428361f0eaa4dd28febd85457548dfecfd2e65c3d95e75061130c8c82cd0c"
+status = "residue"
+cause = "mir::Ty: combinations::CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::count"
+kappa = "d8c12e93b05043b6c446edbe30c5141e81ff48e950a65c1850c4fcd48b774114"
+at = "I=u32, Idx=u32"
+embedded = "243d0eea1eb6820205fed3a737b7b2569cbcabed915f46ae3f3b41bd27a665f5"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::fmt"
+kappa = "fc9d8d1a289249811a83f7cd096e0562bc69ddf080ddcd74298f8d759272fc8b"
+at = "I=u32, Idx=u32"
+embedded = "e3c867c6ba0181098f0526b69a0aae8df9248e7eec6e5bf057895e3cd23d6e81"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::increment_indices"
+kappa = "1dbb0a6df8af147959ea75008f58c21050c3e18eb9741c56307ef41f391cddf6"
+at = "I=u32, Idx=u32"
+embedded = "c7533a528d668362dadf873b8cdd1231946e4650c27b3cce39363f3fa69b82b1"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::init"
+kappa = "d6b5674bff69b17c13f2fb44606f4ad3ec4676615024e6d3d862998cf574c2ca"
+at = "I=u32, Idx=u32"
+embedded = "1076a0e56623b9946c46dce35300c50bc653ea73834500f292821b4c13480da7"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::k"
+kappa = "55d92fe793bc800e45287bc53362faf1a4d0c6160762ce4e2a7878e16e6ac7d6"
+at = "Idx=u32"
+embedded = "0ddf9c4604f21a345bc347b5ea008a3a40d41b2f14b17f6ac2645e5c928729d0"
+status = "residue"
+cause = "mir::Ty: I"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::n"
+kappa = "b44bdc7b34336ea209bd5e565108ad9e311f52214feac563894a2e72fe81b6bd"
+at = "I=u32"
+embedded = "ae38d259f2fbfa80065ba40e7910a1212681978ad52496a7cff8bd283d254c10"
+status = "residue"
+cause = "mir::Ty: Idx"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::n_and_count"
+kappa = "37f2ff7e931f2587960106a9b2b0f6e9c07382507dcb31836ad992b00e850ca3"
+at = "I=u32, Idx=u32"
+embedded = "b8d757a7a5aca56b90c682b7309f399713308aee6fd2c1829a0c3bd9b3a37a15"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::new"
+kappa = "74e35725866f785cd9a87d737ea8e4c88bedd2027fa8271438fe18bc24e04001"
+at = "I=u32, Idx=u32"
+embedded = "56ac67f1733bfb1a576e9e8c8a4b2cbc22df16d287b4cf348cdd3bed2d89de34"
+status = "residue"
+cause = "mir::Ty: combinations::CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::next"
+kappa = "3f14941a1840c2649364522bed9c95b414bfb53c285aac94ac952b9e9f76b656"
+at = "I=u32, Idx=u32"
+embedded = "c245225134e338ff06145b5bde15c62f5ceafb4520a30c54bfd54e26937ba616"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::nth"
+kappa = "41a73c48c3500db7938d53bf93950f9625035ffbe3fbd1636d4209aab18df9a1"
+at = "I=u32, Idx=u32"
+embedded = "034eaa1658d8f0a1b246d8030562f6e8d4be8dbcd557671a1ccc7b29fc3e738d"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::size_hint"
+kappa = "1458bb58cb3ff882458d61fe407a4166140438bd9ac0ac848898f716352e6b92"
+at = "I=u32, Idx=u32"
+embedded = "98d60f4b7268aa9b512e138467e847d551b119589d2cbb0a925153de7a34fcbc"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::src"
+kappa = "e4714aa12072a1dc9ba2e09568c7a74ead5e991c687b1b8a9444269ccd5039b4"
+at = "I=u32"
+embedded = "20b0e1b8948ea61fffa7e6e65095f1b3807fda5d504bd044714e6f75b665360f"
+status = "residue"
+cause = "mir::Ty: lazy_buffer::LazyBuffer<u32>"
+
+[[fn]]
+path = "itertools::combinations::CombinationsGeneric::try_nth"
+kappa = "9630fc4a28aaef48bed1bfcf82482c34482f580a1bbaf5673805f54fcb80734c"
+at = "I=u32, Idx=u32"
+embedded = "0ff24acb9db76f271e03ba90e67c1a48edb7d09c0ae442cc398e2a558798789e"
+status = "residue"
+cause = "mir::Ty: CombinationsGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations::Vec::extract_item"
+kappa = "ef808b3d10a64672fba568306373a37e8c2a313c1cf22a1d56a260bfab32c65b"
+at = "I=u32, T=u32"
+embedded = "489fda15e25f20ada82b3ac784e64a64e308967f2a2ffd55112a9d1f37c16e09"
+status = "residue"
+cause = "mir::Ty: LazyBuffer<u32>"
+
+[[fn]]
+path = "itertools::combinations::remaining_for"
+kappa = "7da986a56d692c97b5e1a6607f89494661f9b1acd628c28be71bac0146f08c45"
+embedded = "85a27fdeb992e45eefd15e2fbcaf7b85b45cc0307acc34e93df1cd794fbf5e55"
+status = "residue"
+cause = "mir::TerminatorKind::Call: adaptors::checked_binomial: itertools's MIR stops at type outside the lift: std::ops::RangeInclusive<usize>"
+

@@ -1,0 +1,52 @@
+[[fn]]
+path = "getrandom::slice_as_uninit"
+kappa = "44d3a32863ae10a060e4fdf55669a2d209748460c9b21aa7edc3f2a5cd6e28aa"
+at = "T=u32"
+embedded = "5ee9e39e36a366a7cf1056295ad8744ff5f1a40308bd8b02d745e12d62d292da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::from_ref"
+
+[[fn]]
+path = "getrandom::slice_as_uninit_mut"
+kappa = "37e48ccbe34a17ec2df3837700ac1d15b6996f16bdccc3afdf427bdaff9baef8"
+at = "T=u32"
+embedded = "de566ed9b3cf9e19a7bfeb1876ad5afec3fde805d53a97eb8cbc1ec6e7cf3df7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::from_mut"
+
+[[fn]]
+path = "getrandom::slice_assume_init_mut"
+kappa = "d345cba62550547db45831ccd56ecaca855f6eb0308448fbfba672299588f4d2"
+at = "T=u32"
+embedded = "e89ec43f09e2b7477a7dbf0b2c2fd60fa2c7bc78f1d6e8ac6407d038c0accf72"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "getrandom::uninit_slice_fill_zero"
+kappa = "aa9ae06e2d6de909c6d6464cfb6a832d208bbe72f1608222eaf419410cd0f144"
+embedded = "ca48c3e10845193098bcc87ebd404e9e7925c74ad32b3e4e536c22baa4735266"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "getrandom::util::inner_u32"
+kappa = "401274e87f5230c6de46cf13e81870cb333fab6229bad0a2f862db0520651758"
+embedded = "34df50ddc19fa6a242914f38ea666d32081d3449c505bf119d2fd48ff70ec591"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::util::inner_u64"
+kappa = "ea0eb362587b35ff915c004acd15e5c3ea28a38e7b4a9388958480496885c7ae"
+embedded = "7dbe2899ba87211a34fcebd0f471d85d392b630c376c9601fbe2c94a9334808c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::util::truncate"
+kappa = "a5ce05097ecb48cc9d9a64216407fd7e8f8331fde1ec0e66fcc695fcbe58973a"
+embedded = "e8260f1cbca312dc8f968333c03c5ce254527984df776e4536ceaa231d4c73ec"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+

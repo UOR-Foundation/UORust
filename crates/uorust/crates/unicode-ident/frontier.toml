@@ -1,0 +1,30 @@
+# The unicode-ident register (written by `uorust crate unicode-ident@1.0.27`; do not edit): every body of
+# unicode-ident's MIR at unicode-ident 1.0.27, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 3
+translated = 1
+residue = 2
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.tables]
+bodies = 1
+translated = 1
+residue = 0
+
+[embedding]
+embedded = 3
+evaluable = 3
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 2

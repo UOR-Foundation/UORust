@@ -1,0 +1,92 @@
+# The getrandom register (written by `uorust crate getrandom@0.4.3`; do not edit): every body of
+# getrandom's MIR at getrandom 0.4.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 45
+translated = 2
+residue = 43
+
+[module.backends]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.error]
+bodies = 16
+translated = 2
+residue = 14
+
+[module.util]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+embedded = 45
+evaluable = 45
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: LazyPtr<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: Slice { alloc_id: alloc41"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::FUTEX_WAIT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::FUTEX_WAKE"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __errno_location"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::from_ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::linux_android_with_fallback::fill_inner::lazy::LazyPtr<u32>"
+bodies = 1

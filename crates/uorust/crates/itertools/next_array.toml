@@ -1,0 +1,56 @@
+[[fn]]
+path = "itertools::next_array"
+kappa = "cc8e2a7af2d29570e09ad7980401b0a372660e41617819abecbcbc0437d97325"
+at = "I=u32, N=#_N"
+embedded = "335b44b107648ba24327732bc7cdb4be8ae19c3a4b35484cec51fd5147c828ed"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "itertools::next_array::ArrayBuilder::as_mut"
+kappa = "d4f3e8daf67c601d911b01fcb16387dbb9a1549ee253d1eb4fc206c8ac6ced26"
+at = "N=#usize_N, T=u32"
+embedded = "a5a40802140a79445e7254559bd74cb2ec0677d79fa14db3939bf9f10100a94d"
+status = "residue"
+cause = "mir::Ty: ArrayBuilder<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::next_array::ArrayBuilder::drop"
+kappa = "497388c15f4279532b2ac9c73cc25461e09b75cb7bb37577ecbbea9e5eff2ec7"
+at = "N=u32, T=u32"
+embedded = "4646aa399deab52cb89d9b65329e90ce5dbd82767864e6a22f5e0ae5f4562a4b"
+status = "residue"
+cause = "mir::Ty: ArrayBuilder<u32, u32>"
+
+[[fn]]
+path = "itertools::next_array::ArrayBuilder::new"
+kappa = "f819b4c83a9ab4fc6eaa55eb81592e4ab1751756a7440f00af870d6becd9e1f8"
+at = "N=#usize_N, T=u32"
+embedded = "c19e9e0a941c4f71bbaf4723305a6aad20ab7615119deac42a45da2088481004"
+status = "residue"
+cause = "mir::Ty: next_array::ArrayBuilder<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::next_array::ArrayBuilder::push"
+kappa = "bdb6540304a44e115213dfd0aed68c7a44d74eeae7c28495ddcd8a80e6ff8ac1"
+at = "T=u32"
+embedded = "af6564b23bdb99040be5f1fd88f6f76358dd117081d96cc22d84a1520d134317"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "itertools::next_array::ArrayBuilder::take"
+kappa = "faa4fbb42697a0c285c94ca37a0b0dd1082d69053bb06c7d44db2b031fa28b0c"
+at = "N=#usize_N, T=u32"
+embedded = "cae80e1feffbbca161fa0867183d31c29ad78d85cac697df2b34d7976d6b946b"
+status = "residue"
+cause = "mir::Ty: ArrayBuilder<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::slice_assume_init_mut"
+kappa = "4896c8ead3622aa496d14552267678381eaf782c71e2173dd130983814e1eea2"
+at = "T=u32"
+embedded = "96d0c29f3c8c95c6c3d1403959181443f8326a8a5d289cb2cf23c0dbfd993fc4"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+

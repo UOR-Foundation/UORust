@@ -1,0 +1,120 @@
+[[fn]]
+path = "itertools::free::all"
+kappa = "70da1c80f8058242de6d8353befdbf442db6203572f60c27c15b9d5e1f79993a"
+at = "F=u32, I=u32"
+embedded = "5fffd0bd328ceb7110f1793562ff77d6494465c84c78e57066b872f4da610825"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::any"
+kappa = "dfc313322afb78589a1944ad5139af9d9c6d6751b561f76be6f1e5f0d7bb2327"
+at = "F=u32, I=u32"
+embedded = "9a1c3a811d775d5a1b0b81e74cebfd0c210b2c53905cb53f7b9c454fdd4949e3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::chain"
+kappa = "d37b324066f80e5b3ac23eb2c90049af5c067d82defe7a31f604abb8fe9c4cd2"
+at = "I=u32, J=u32"
+embedded = "2af0b711121cb533e5a69e7a4c12da8ccdb45ab0da8497ed53d838c2bfd219dc"
+status = "residue"
+cause = "mir::Ty: std::iter::Chain<u32, u32>"
+
+[[fn]]
+path = "itertools::free::cloned"
+kappa = "1707c9b78f99e3f0aba18ebc9783d8c10245fcf603a5ef257efd579bad7cddee"
+at = "I=u32"
+embedded = "928eeb15ada563c7c0c9c01313c1d4086f20ef6f1cc6a92dbc1f435ecf337710"
+status = "residue"
+cause = "mir::Ty: std::iter::Cloned<u32>"
+
+[[fn]]
+path = "itertools::free::enumerate"
+kappa = "350871a436ca8faaeba4f5d6d159cfc69987f3756d93900c25616aabe07f921c"
+at = "I=u32"
+embedded = "34532e0e45f95cacd6f329e1ccff5a624481e07b76e64d2a97c750335507e537"
+status = "residue"
+cause = "mir::Ty: std::iter::Enumerate<u32>"
+
+[[fn]]
+path = "itertools::free::fold"
+kappa = "296250d1a0c62274498c6a2253d6202cc11e0552c72876a14ec18a89a35adf65"
+at = "B=u32, F=u32, I=u32"
+embedded = "a0488d9a9e92bcf3c323054a96848700976f30ea63e189ddb2cfabe9b3c6a4b5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::intersperse"
+kappa = "c8abec90e0029b690bee4d2003d5a3c9d3e8ae4100337507c28be5058b59506a"
+at = "I=u32"
+embedded = "5b1ba5d1df3d19c58691637b06561ad03345482d9a540cd6321d6168aa826fe8"
+status = "residue"
+cause = "mir::Ty: intersperse::IntersperseElementSimple<u32>"
+
+[[fn]]
+path = "itertools::free::intersperse_with"
+kappa = "861ce44974414e0594a3da25690a1849ece2d4d6528c057d1a34d608db06b1dd"
+at = "F=u32, I=u32"
+embedded = "0040e99fc21509c1c4b1100ed8b91ccdb67458f2733d35e90966db61c5348796"
+status = "residue"
+cause = "mir::Ty: intersperse::IntersperseWith<u32, u32>"
+
+[[fn]]
+path = "itertools::free::join"
+kappa = "cdcd690fa121579f7e335698728bf7f0b8bf6f86028b466557c72fba35b18419"
+at = "I=u32"
+embedded = "fe3cd2f4e1548d01c506f32e50c6cb73ea79a772ef9b813553f116330ee36f07"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Itertools, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::max"
+kappa = "5ab8e09ec1d20c7f418e89584bbab401de05cd0456af61c85e4f0f13f8774608"
+at = "I=u32"
+embedded = "5eba35797f69e88cffc4773fc482adee9c7cefdf0196caffbf9df260165cee3c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::min"
+kappa = "f56dc47f657736562d4838711a19993569ae549a4b122f1e90c68291af583c6a"
+at = "I=u32"
+embedded = "a37823a64431b3b70954cdced6f890b74ca8546df3d562c1de65f396ff36bc70"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::free::rev"
+kappa = "5478465c940a37932b6f7156f30e1df82ae79b843805517beba903b50672ca38"
+at = "I=u32"
+embedded = "7b034b3193717229c8c7d0b2949d131ea56f2808744e8ce76b2aed3e9a5d57d4"
+status = "residue"
+cause = "mir::Ty: std::iter::Rev<u32>"
+
+[[fn]]
+path = "itertools::free::zip"
+kappa = "a32e405f26c3de6f66b1f27f07f003a18b3027c00ff51ff1315a26c1bd9f6aa0"
+at = "I=u32, J=u32"
+embedded = "ab5cb1999b936f3d0c1e13ea15bc2ab896fd2baaaf1d7275957569910a4fe5a2"
+status = "residue"
+cause = "mir::Ty: std::iter::Zip<u32, u32>"
+
+[[fn]]
+path = "itertools::sorted"
+kappa = "b39d41b9fdb17bb79a285f1a7ce8a82f7c4e77924a395090f8538b0413935b7e"
+at = "I=u32"
+embedded = "6cb8b39832fe5ba046d02b61992680a39dfaf03e20eb1582418b383bc9935878"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Itertools, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::sorted_unstable"
+kappa = "22383dafc355db5f2eddd5871f01d9a8fe793b4b04a5c605c4a0d63c4a1f650d"
+at = "I=u32"
+embedded = "85d954ae2ac33f4411fd3b73f16aa04dc5e8f5f50b9be3b3ef71925ca2e51fd4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Itertools, which u32 does not implement in core"
+

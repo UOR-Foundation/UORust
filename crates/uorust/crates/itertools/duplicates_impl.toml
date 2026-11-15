@@ -1,0 +1,189 @@
+[[fn]]
+path = "itertools::duplicates_by_with_hasher"
+kappa = "4bda184c8c47a7fc51c6f125bac79a32e15f01fb35a714f874cb230a18e6a19d"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "0dafc11e729e14a3112a04d962ba61a0e3e0ae44ff7e9458f2e631dd6f747338"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::ByFn<u32>"
+
+[[fn]]
+path = "itertools::duplicates_with_hasher"
+kappa = "67cb4eac78ec1f83236c623f2f22a9ffb593cbb7598c055ec1b52c3d30e6741d"
+at = "I=u32, S=u32"
+embedded = "8671cfea8552d3f4de87646fc95a40dc7847386a4081094cd7e8229a8e6523b8"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::ById"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:12:14: 12:19>::clone"
+kappa = "87ea5be00826b4b98518f94689292cfb22f2f0d7ff250409fb72c592275f5e31"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "7502e6bf6a06be26700b6abdc3954eebaafe2b0db78beba839d865a38044649a"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::DuplicatesBy<u32, u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:136:14: 136:19>::fmt"
+kappa = "5cdd75e0a0ccb669cf3e165e36397f9635505b79697ac9c50eb55a3f6e2b4041"
+embedded = "97a8a0c43b344bee4a3a853e3cdfd10d337dbb2f33fd18fd26e25ab519ff99c5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:136:21: 136:26>::clone"
+kappa = "9a6e17e021bda51199ff485a4849b803f791734a440b9f3992fdea081ebb6f58"
+embedded = "a10bdff1a2df5a06b441a8d5bc5113e2124feaf1bbaaaca8bbbf64655b0f7220"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::ById"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:147:14: 147:19>::clone"
+kappa = "cf4b9e1ff95eae48204c555bd147ce7bded443cd5b6d50434ee50759b60a6f14"
+at = "F=u32"
+embedded = "efeaf1172d6d2b03bcb40bbac5673068c2db5d4a80c2341f826cce3f97581e83"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::ByFn<u32>"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:171:14: 171:19>::fmt"
+kappa = "088642eee6a9845d9640aa5a1a951f9776ebd14bf9331a03598a57b2698fbcc9"
+at = "K=u32, V=u32"
+embedded = "7a4ff441e06417de4852d7aba26306d93cbcf16544b82373567850054a4febcc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:185:14: 185:19>::fmt"
+kappa = "1cfb9e07ca417665847cad11763b6b401a131fcd5f718cc1d16dc83cc74c015b"
+at = "V=u32"
+embedded = "95455fb97567e23c8a71a54fcada451d683945f94159a64dcc10f5ebc076c29e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::private::<impl at src/duplicates_impl.rs:44:14: 44:19>::clone"
+kappa = "2b49076ad0a1cbf463f5c09dcc36f432c5829adcbb2db517d311f021bc73cb56"
+at = "F=u32, Key=u32, S=u32"
+embedded = "f86cec72a291da820f931711a2f235affde655ba2f1bdd4293c67eb7ae239138"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::Meta<u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::ByFn::fmt"
+kappa = "104fcf1bdf3c902e4ace7eb1b61fc4b919881da901aad06387c6d7dfb02179d1"
+embedded = "d39aa21a5ba0cb92ec9138de22d4b11fece2dc028c521c989c8d25b53c0f5629"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::private::ByFn::make"
+kappa = "b5be080d4ca4f7590306dc61b455ef30085ebf3746b47b5df1b94cc64157f473"
+at = "F=u32, K=u32, V=u32"
+embedded = "21053f36643d8ce3184a199ee0dd1750526baf8c270cc5df45600c74a287e20b"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::KeyValue<u32, u32>"
+
+[[fn]]
+path = "itertools::private::ById::make"
+kappa = "d2a8a7b5c71911745d04ae78b5c35fa9369cf6247e4e22d246618a970e33db71"
+at = "V=u32"
+embedded = "896e3349abf69034063ea70bbe302d5896d59bacb45c0a68ca792cf1e00cae99"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::JustValue<u32>"
+
+[[fn]]
+path = "itertools::private::DuplicatesBy::fmt"
+kappa = "b6e879d61c3142aba53dfba29c9c08459fbdcc3a173358162ac886e594519071"
+at = "I=u32, S=u32, V=u32"
+embedded = "6f1a63a1f0474a08fe47b457096112a0c428853b9dbfc0bf8af54f0cf837a662"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::private::DuplicatesBy::new"
+kappa = "72ce3366bad5ca29768b7801baf769412333f5ece80b0cd27394427f91790246"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "99762376dba519a2e458b0cf60a4ee87b8e4d377d4ba89247bfd1fe0d0e883d7"
+status = "residue"
+cause = "mir::Ty: duplicates_impl::private::DuplicatesBy<u32, u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::DuplicatesBy::next"
+kappa = "9e56239276fcdf63afa766dd488128385f79359f7c05cf256c266e8ac0f1545e"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "9ce90dcc1b2edf9d7ed5ed6dd6ab59d03dfc00d4169eeb44ced532bfb254362e"
+status = "residue"
+cause = "mir::Ty: private::DuplicatesBy<u32, u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::DuplicatesBy::next_back"
+kappa = "d67e2bce67df6215f3a4b33a1e2668a0fd1f23fd0630a34e903b28caaadf2c15"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "ca1774f9f5a8159e2f14f0f0bb1f79e924cdb7728f0304eec66c74e12410ece1"
+status = "residue"
+cause = "mir::Ty: private::DuplicatesBy<u32, u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::DuplicatesBy::size_hint"
+kappa = "54031c446ffec1621cdbf53550ceb96e4b1f0ec98ee549d30e8a24f4b9cb3527"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "19f9dfaac0099f576477fd8d446bbd786079433b2ac9a3e9eb13b1e3d2506399"
+status = "residue"
+cause = "mir::Ty: private::DuplicatesBy<u32, u32, u32, u32>"
+
+[[fn]]
+path = "itertools::private::JustValue::key"
+kappa = "98961eded73a6dcb7edfbdaaa587ded3a00e5c1d2808232e8da25e426c79faa0"
+at = "V=u32"
+embedded = "356679f984e454dbf97478290b93bc5053af6895c88d61c8979340bcac08b4d2"
+status = "residue"
+cause = "mir::Ty: JustValue<u32>"
+
+[[fn]]
+path = "itertools::private::JustValue::key_ref"
+kappa = "e9fb810df435212ccda4d0c629d85c5d898407d414d87ebd065cb9716dbc88d7"
+at = "V=u32"
+embedded = "148555de9f923b549e4efbd3d0576685808cdd8cf82dea7fd4518fed75c1a401"
+status = "residue"
+cause = "mir::Ty: JustValue<u32>"
+
+[[fn]]
+path = "itertools::private::JustValue::value"
+kappa = "fe8b7bd7311139e87e383bf1a2d839fe5d7b5574a7a91baffb5c7da0bc7d4f6e"
+at = "V=u32"
+embedded = "11b650d4bb7779b0446351b9cba402702abbbf76bf39a3acf98a7a9087eba94e"
+status = "residue"
+cause = "mir::Ty: JustValue<u32>"
+
+[[fn]]
+path = "itertools::private::KeyValue::key"
+kappa = "dc6205571ae2fb6db6d68c7880c6c8c192b59169742c3f8f482ffafe1828105a"
+at = "K=u32"
+embedded = "b0f14b1e0a76c90551a9bd54d41adc3a5496e45e763f07415310d21cc9eb62d5"
+status = "residue"
+cause = "mir::Ty: V"
+
+[[fn]]
+path = "itertools::private::KeyValue::key_ref"
+kappa = "f7c5d0c8cd8ad88aa2c634452f763122ee9f976c716d2c2cb88375197acd56cd"
+at = "K=u32"
+embedded = "14ac8be8ce86432e67d241db2bf018d4f9116d46231eaf593ab6dcc8cbc921bd"
+status = "residue"
+cause = "mir::Ty: V"
+
+[[fn]]
+path = "itertools::private::KeyValue::value"
+kappa = "93f4f2bce37f63493bb176f06179c35e410b078465efec06fe32985f6b0b6dbe"
+at = "V=u32"
+embedded = "de05120e08168661146c4df4b343f6613919b28ab1b03b3020a34b1111b70a3f"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "itertools::private::Meta::filter"
+kappa = "141916d169f1a6bc59357e701b65dd29e273c5758c38ec05578636575d779834"
+at = "F=u32, I=u32, Key=u32, S=u32"
+embedded = "24e87810c5d7e5257b2a46738c435a00e3ff7291547465d7f7a562f89bea699c"
+status = "residue"
+cause = "mir::Ty: Meta<u32, u32, u32>"
+

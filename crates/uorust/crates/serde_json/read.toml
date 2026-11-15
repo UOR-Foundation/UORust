@@ -1,0 +1,507 @@
+[[fn]]
+path = "serde_json::ONE_BYTES"
+kappa = "c4d023250b98cedf6388ea18b0dc877e9bba56fdd5f2547ca3b2cb3139ba4996"
+embedded = "3176460b4b1243410e7745721ba2e3b3c32196143dbea8f5e1f2d2bd0052d12e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "serde_json::STEP"
+kappa = "44e0a0501de5c689b6a53fb2754dfcc17d8cf36892112901c734b63da9bffe29"
+embedded = "eccd30333cf38bf33a5cb95b3cb82de550f59784e8aa387e26fc44c3e42c0586"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "serde_json::as_str"
+kappa = "85e3a4f1ea835f3d1e584fe9ea86d0255e3f13e94ab0d2a1840c58c6c23f4312"
+at = "R=u32"
+embedded = "a262ab1b13ccf9a6327ac8aa560cf622deafa63d88cb29e54f754f9f3f0f968a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::build_hex_table"
+kappa = "d52598302ca71a9bd891bfcc4e220348a2d282c6c7c91c41c25e8262c4b3dbc5"
+embedded = "3212b6e2db5703ea663e2c776fbcbaa21adc0c2f93df7a732373cef98a86a141"
+status = "translated"
+digest = "702f7b50e836aa9e55c45be2ec6433910dbde0e09a24b5405ea0dd38789fc1f8"
+
+[[fn]]
+path = "serde_json::decode_four_hex_digits"
+kappa = "76d29fdaf9c8a1ed7adb90a5abfc4418b7e268dbfc184d4fedde7f83598e8c71"
+embedded = "39e89e115232105607f3a3e78e34cd15919866930283051ecd3349b5ddba32de"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc536: &[i16; 256]}"
+
+[[fn]]
+path = "serde_json::decode_hex_val_slow"
+kappa = "2208670505fb2c79a5a3627c124dea1b1ef6824791eaaf5906d76dd44840739e"
+embedded = "ae3d4e0076a8e0807667c09010b05dbca7cc5a72730c1a2f7ffce8ed6bb58e28"
+status = "translated"
+digest = "f89c0a65a18ae670855e3f35f74f2c19b1cc0496e705454de8677a66531a0827"
+
+[[fn]]
+path = "serde_json::error"
+kappa = "1ec5d0f97edbdabc9260033da8eb2bd6b441162e24258bf2df391eff18431ac0"
+at = "R=u32, T=u32"
+embedded = "a40935e1e1e8d3a9839acae8ef89950ca1ae4e883cc99d80f8ddfc8cde3e5b05"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::ignore_escape"
+kappa = "601534bdc232e43ce3c25c83f5c5d12025f32cf0d46ad489a071cc03ea219a67"
+at = "R=u32"
+embedded = "f71eff7a426d488098e0804ec9a9a126bc79904ddef7723bafafd707bc01a197"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::is_escape"
+kappa = "6ca5b02490f34d7207c020a8bb5ff0ce144a0489926d01ee7213eea24a8929cc"
+embedded = "fbe1f8853fa6a10871ab55f28b02e853dfcd0a3bb2b16c3046b20cc179471b3d"
+status = "translated"
+digest = "c2da922779faf3d58b84c5b5eea8b440bc00e2526458991087eb55d270734781"
+
+[[fn]]
+path = "serde_json::next_or_eof"
+kappa = "197e52f8e703ada9abe0991fcb09430147519b1f5efff7b8323526703b0d500a"
+at = "R=u32"
+embedded = "e4153b66c9c5ed6c59d756760dc4101e255f89a6904f7cd58f36e73d6b771e1a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::parse_escape"
+kappa = "f14a9752ffc2ec4f923ffd0283749c6352d6d590c7dba7cb72666086b2adf284"
+at = "R=u32"
+embedded = "129ad2b37c22c0272bbfed764b73823bfa07cb9d4380b5cf27da59ceb59f1c0a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::parse_unicode_escape"
+kappa = "8ba107bb47541f0cd1aa58fdeac1502767949150ab3b168d37aa7a1ae0d4b032"
+at = "R=u32"
+embedded = "3da774226d36e652d8228af90aafc7981e3b26c1fe702362a171616a2475bdf8"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::peek_or_eof"
+kappa = "dbf1cc338c90acb4ad0402f793a2f435172327550bd32432805a7230b4249ac0"
+at = "R=u32"
+embedded = "2a4ece2c43984509eb9f47327aaabe86ad00f9a3e3d857b638f2cab40ff3b6b0"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::push_wtf8_codepoint"
+kappa = "b81709cd76bf7598ed372c64d52325e3becfe57a4caea74dde6ffcc87ef2beb7"
+embedded = "a12c7928a0f30ca3f03f78a62b46f827ab44e1d5bd9e5b30517c18b4da916faa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::reserve"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::byte_offset"
+kappa = "dfa9778c84fd675d09ea33e219d09a1bdf6917724d114a7cacce85743e4acd94"
+at = "R=u32"
+embedded = "2b9b5d0d95fad57744b3e876c8ae063f62a77ad77b1476254ad2dfbdabab3275"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Read, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::decode_hex_escape"
+kappa = "a919a1d27a48372e2fafc42267f4bb708233a10aea5c4f98b65fcb90270bc80f"
+at = "R=u32"
+embedded = "69b1014e1de72323b3326decdde62d6877634ba25ae126e4a1bc37fa308c587a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::discard"
+kappa = "a9c7d59e47bdc33d808457caa79a89a950dc98686899e8e192aadb03a3c2ba49"
+at = "R=u32"
+embedded = "eefc147957fd8a5bdbfd4de6ace3fa85b97d271ab53e72e7dfe4145a95bcccd7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Read, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::ignore_str"
+kappa = "9fc1a46ead25c86f19deee5a78536ab649a67eaf3838214a80b9a4c53cc3d77d"
+at = "R=u32"
+embedded = "550a3fd264e98b4632bc66d99215b45c3150fc3c3b6e65a6fdbd04cc19ee0560"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::next"
+kappa = "1a1db8477a89d050f3439879d37b3303536224983f6d7e9f2fb5a240f04b4e82"
+at = "R=u32"
+embedded = "8c3a2d4f3a3cd70ebb552d6b29d11ecd12f00e9cbfeeacd8905cd682b0d15e63"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::parse_str"
+kappa = "fe9d913fb1c8a433f52e58a9ff53d2bee403138a486574db450c4a86e1382418"
+at = "R=u32"
+embedded = "16f3aa499a5721b0bcd67d0f695353807be19643bc5a51fd336fe736bd05a25d"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, str>"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::parse_str_raw"
+kappa = "8fa23f4ec37bdb1bd3641e9345e21889a2ded024c6ef37a79e3072b9396ad88e"
+at = "R=u32"
+embedded = "a33787f32d955873cadd37e63bc9f02b6be8a401f44eb5deb9f295adf808b75d"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, [u8]>"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::peek"
+kappa = "9886ed8d2b7c7e034ab912d831da467793d0528af94802ec1cf27269d426880b"
+at = "R=u32"
+embedded = "1160cd39695e7a693b6d3dbb3b4fd316e61568343e4255d930c6ae23fb23aab0"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::peek_position"
+kappa = "c0318fa01511cd7f1bdb45888e69085e926a20dab63397ef3eb9eee81aed6db1"
+at = "R=u32"
+embedded = "1a20820c12fce31c64dd99b231d4eea0065790409fb6a325e42ee12ba7156fd0"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::position"
+kappa = "140847960e32976864e47c2c99d09b2b9e39612d021184fea10e9c466c74fc16"
+at = "R=u32"
+embedded = "fabe64e8d8fac49943239498c69209b79bdbd689ccad1b1490d19ece9e91c7c6"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::set_failed"
+kappa = "7cd019952f86dfb8a46a0e3dbf6e1838af02661cb4bc0a9fb983dee16872725d"
+at = "R=u32"
+embedded = "3669536e2fa314a10e43f6e7417fec98ccb0edd4b2db651b668702ca52dd088c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Read, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_json::read::<impl at src/read.rs:797:1: 799:18>::should_early_return_if_failed"
+kappa = "b43ddd491b359b22ddf8519d2a5ba55df8b2a800edebf1280baf05e2dbd88aae"
+embedded = "e04c175bc6346da5de2aad16f6d1f5496774a03e6080fc8344fba3718f843c28"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <R as read::Read<'_>>::should_early_return_if_failed"
+
+[[fn]]
+path = "serde_json::read::IoRead::byte_offset"
+kappa = "4a32c8542694ac04828ab06bab78fbce1d7a8cd50debeadcecb5d8888af2aa4d"
+at = "R=u32"
+embedded = "ee5ba133809001b64804fbc3363964b4449ed96c359e6a31e7a40fe5a177a3b3"
+status = "residue"
+cause = "mir::Ty: IoRead<u32>"
+
+[[fn]]
+path = "serde_json::read::IoRead::decode_hex_escape"
+kappa = "3295bb49e79939b31c79984adf2f4ee1ea2590744c21fe44bcc587ae3a770abb"
+at = "R=u32"
+embedded = "25c1418cd2c475fe2277c7d289d70cf891b8649a1c2ae6741101a3a289120e25"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::IoRead::discard"
+kappa = "aab287fb01b3c4f51a6ca027437d09ba9174da435b3a8a67181f4f50d4a13ad7"
+embedded = "534dc1c95d683f0e93e6ec7d6630c2cc5c288c1ec45ec3034e990bd10eb8d818"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "serde_json::read::IoRead::ignore_str"
+kappa = "78a9a884b4cbbc2dac0dbc56429e96a097a0b029ac98df80fd1b7e400c30e63d"
+at = "R=u32"
+embedded = "024ab461bde229eb27a50be4517d30218fbf7b4021646561694acb05027b0933"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::IoRead::new"
+kappa = "6371fc93e797348bd2c18a0fd509a70c4bcc62613319867a23e8cfe671fa15b5"
+at = "R=u32"
+embedded = "68413d3edba1357c8b68a853ed5ea842117e18c43761e4211d4039264811b31b"
+status = "residue"
+cause = "mir::Ty: read::IoRead<u32>"
+
+[[fn]]
+path = "serde_json::read::IoRead::next"
+kappa = "7e65a1481ac51e2c9552ad2afa2f08f79d756e0e0083909c28ca590dba0144cc"
+at = "R=u32"
+embedded = "b5464981209c9961747963b7c812dbe74fa93be14593a421729445d0a9660ab1"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::IoRead::parse_str"
+kappa = "da99db65a40a9a9a063541d5c56390bf3adf6b30ca2cb01932a73f854c1cef2e"
+at = "R=u32"
+embedded = "5d0deac669996a92c3e71644f5c674c9280c7b5fa6f4ff05854c6ea950ecec9e"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, str>"
+
+[[fn]]
+path = "serde_json::read::IoRead::parse_str_bytes"
+kappa = "0563c6ebcc61ecd08c5624d2a9a061076e96f368cc1a8df04df1d4c8f5c6ce0f"
+at = "F=u32, R=u32, T=u32"
+embedded = "ffd3779bf28374aae2d639154d545df979b463686d64ebc9b10a7bc818ce4c68"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::IoRead::parse_str_raw"
+kappa = "e0aef3aab870003253d44b2e93651f423b294cf6dd6cff1f6f1bd5b9dbceed82"
+at = "R=u32"
+embedded = "cf3d647c8a3ce1c6b41410a960a2227609d8ee241dac4b7b914551fd9e6d0cac"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, [u8]>"
+
+[[fn]]
+path = "serde_json::read::IoRead::peek"
+kappa = "621772b45065e8073884e28e3deb67a1c7d5d0ecdb070a4f67d07b751ec2e9a7"
+at = "R=u32"
+embedded = "ef03f064defc1fa73083111d561bd24809df9b148e407d7bad4b002ced069342"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::IoRead::peek_position"
+kappa = "f04e022335601eb06e672da831921cd5e379a73ad87736bb3e82141f9d0f153d"
+at = "R=u32"
+embedded = "82446cad5096b0bd1f3fa0a36828d9e9777bb6c7ebd38312edc210d599d770de"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::IoRead::position"
+kappa = "46dd755c6e74a4363914ccac9747cbf29c442ab81fe3018a2b7763f8f21ffe80"
+at = "R=u32"
+embedded = "7aa596d3f6f700aaf71b57f306cfe414b85c9854905e207ac6847ffb87b908dc"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::IoRead::set_failed"
+kappa = "b487e88cbfe01a424530cd5899d2f000f9b40d5a21d5261e6afd0ab2b9c249d3"
+embedded = "210e99eb045059d1ea5b005fe9a5b654981e5de7d48673734e76a312e2e7b45f"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "serde_json::read::Reference::deref"
+kappa = "9595246efc05981d8642300a27960814f2b04f41bdbac42be0e4eef1edd33115"
+at = "T=u32"
+embedded = "1a9c8c0800137d8ca50b876ba4ffe00ba0654106d068523874a1afeb7cacfdac"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, u32>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::byte_offset"
+kappa = "15df505e75885d8c81f173d230a37c03245f4de9e59315ec2b89247b34830d3d"
+embedded = "a49e1e0e937d34878edb21423b8eec0158f4b9587203314f493a89d5128da653"
+status = "residue"
+cause = "mir::Ty: SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::decode_hex_escape"
+kappa = "5c695f57d3d24aa7436eb88761017c8fef0b6f222ed32ab2aaf6008495b7b851"
+embedded = "1a9377bae8ef0be9de461e4723e67cca5e844145bae124bc1066ee4c8b14b3f6"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::SliceRead::discard"
+kappa = "5d34f3fe9ae352741ef79e0031117349b60b9d4f5b337b9687a8a3365398adad"
+embedded = "50ab357ac6b91921cbae42fb085ec9274b9223f4fee08f62a5e27cceb954eafb"
+status = "residue"
+cause = "mir::Ty: SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::ignore_str"
+kappa = "0dbd84c87f385a16136d2df9ae1fa6a58f95a2457bfb444bff49c9757b16b4d1"
+embedded = "74cc28158cb3df0b1184cf09e4aa0ef614d5298458b3d014028fc39bd6e01148"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::SliceRead::new"
+kappa = "8a80000b523f0df5f070bb1d1f38f0763860dc111bb0865db7bdc78338c78299"
+embedded = "c17e865711b8650321b96e3abb011be7a09777f973795d7ea2e9fe38c94734f9"
+status = "residue"
+cause = "mir::Ty: read::SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::next"
+kappa = "611536e4c0a4c3a1a8af4bc1611fda847313c6d62b809c577b7d7574769b4dd2"
+embedded = "39a50292f7424ec6c1fff2281bfd22fd2fde4f3e84478bd62241f3880ca78e37"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::SliceRead::parse_str"
+kappa = "602d5bd7ff6dfd0506c8c10b6704a9a1bb2d208a610a386f5891b537a3bebfd4"
+embedded = "b75b307a926b0fa9637fb327128cb092240c06e5b04994a23f87248ed46fc299"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, str>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::parse_str_bytes"
+kappa = "dd2f5ac3bd4b9e27e86854ad517cca49d3a25d3ffd3f621afa0dcb8929bfefc3"
+at = "F=u32, T=u32"
+embedded = "6db9e5eba00b12029bf630ce75f1c5b82bdff0b1c24cb2a36231851c9f9fb98e"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, u32>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::parse_str_raw"
+kappa = "58e4ebb2e777cc6c66fe317e0e9e48c8ee33dea1929a901b70722c4847e815ec"
+embedded = "81afa58497cfa3e6dc7d3e7f705eaa0a4ee6de05391234d7bc1437d8cd241a18"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, [u8]>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::peek"
+kappa = "e9d309bdeb38e5c3ce9ce40555dd4be816c7c35ad49c4f0cf7e3a2c358d4ae20"
+embedded = "db6aff877d362e908be74ba10b9f8091123557064ece035d8c07ba52231ab883"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::SliceRead::peek_position"
+kappa = "a454ab190fd25118d91cba4643198d1b773725d92590683a7f420ef1ecf5952a"
+embedded = "77129534d5895042f3fac0aecad35cbcaa345a18fe95ca5eeb6c9e272dead545"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::SliceRead::position"
+kappa = "2d925621722cd5cb7d1eb9c1063dafd132d73379dae3d83358214382aaf95d17"
+embedded = "96c890c3991573412afeb991a45be9fded1907640c190c25f25357435e59d888"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::SliceRead::position_of_index"
+kappa = "27901e6b8a964cf258b44235638f359a48dce335442af0295c46708cff4e6771"
+embedded = "5142a77b0fca8097a750a2c05e27980ca86f0c322a4d0bdcff56381def75c9ab"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::SliceRead::set_failed"
+kappa = "49e1360596fc9228de6670a605b1736e81d77697b1b1935c9647229499ff3028"
+embedded = "90059247f7887a699de85b746169e0ca98d47a1810dfb8d44bd6c38ee2d5d454"
+status = "residue"
+cause = "mir::Ty: SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::skip_to_escape"
+kappa = "8796dfa98df5e7d4cb35d5725722a4d513f0b64192e006194336e96be5e46f8d"
+embedded = "69a11c4c6817fc7e414bee7f343bd62e1c54ae086e67e7788148904ff9001bd9"
+status = "residue"
+cause = "mir::Ty: SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::SliceRead::skip_to_escape_slow"
+kappa = "40549eb54b0a9c53d3b3aebcfebfa86f62d2c1c285345d2e929b10978e84fd70"
+embedded = "46d3b74957c4fa45ee1c366bf5b9dfeff1ea2b60ae346a919f2b47d6f6f4517c"
+status = "residue"
+cause = "mir::Ty: SliceRead<'_>"
+
+[[fn]]
+path = "serde_json::read::StrRead::byte_offset"
+kappa = "889bc8b66ec49715ae28dd03878009510e3b1ce64c38dd477d5d2ddc3d821f0d"
+embedded = "ff4a8211c3642284007810bf1efa3b87a7cd730583abd0b5087018e64d124da6"
+status = "residue"
+cause = "mir::Ty: StrRead<'_>"
+
+[[fn]]
+path = "serde_json::read::StrRead::decode_hex_escape"
+kappa = "8f7e75869955fd41086a8d58eb29f4762dc1c3c6d0070d9c6d341f86edc30b7d"
+embedded = "9ab992de416ddf365e2511801a1f013a951776dd11ed21c92b0d87a019755857"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::StrRead::discard"
+kappa = "d2ef1109d2b33ca2ee447629bf4ee70cc5fd92c99bf218f046605e58619122ee"
+embedded = "7a7e660e7f1af6bb09c7801c53205e68566aba15c142b2d94da54f7d0e53bbf3"
+status = "residue"
+cause = "mir::Ty: StrRead<'_>"
+
+[[fn]]
+path = "serde_json::read::StrRead::ignore_str"
+kappa = "8bc8ee0886226d980aaa83fe394ea5957b5059cfb51e000a3d84cc80c33115b3"
+embedded = "60e0653d15bf71f16952079c00ec7ca959d7358eaa1e131d76227429846a9966"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::StrRead::new"
+kappa = "f6cbe62b09f36ff67fdf32675b53811222ce1ca4bb913415118b7e785a28e68e"
+embedded = "45c3914a64b0d015b6684dce4fd15457788719549cee3244feb20f03e6e072b0"
+status = "residue"
+cause = "mir::Ty: read::StrRead<'_>"
+
+[[fn]]
+path = "serde_json::read::StrRead::next"
+kappa = "2d94b1fae16cff1406e8478d030e24904b155a2e0e0ae3ed5a384dc7488676db"
+embedded = "940772cdab389f2beca9edfd43d6fdf98942624be13e8e43cab23cb9e5e834a3"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::StrRead::parse_str"
+kappa = "7c45b1c1d8939fab4072dc5b40440093283f587a2a421c0bb3fa798f4a6a6607"
+embedded = "c501e99dc19c84220877686878c890e35b4f8f3ba5f93ec2090b29124985da95"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, str>"
+
+[[fn]]
+path = "serde_json::read::StrRead::parse_str_raw"
+kappa = "701c13f70dfce9b7c3c927f7289e7fdb6a105b3cd0c988c09660ac7e86b5a585"
+embedded = "2a59fe7a7eb68f6a25a458e3bae19c03db25b07c805bbeb33bdbb2a4911c9754"
+status = "residue"
+cause = "mir::Ty: read::Reference<'_, '_, [u8]>"
+
+[[fn]]
+path = "serde_json::read::StrRead::peek"
+kappa = "ae0c42bbeb76f8c65c4aaaa4c22a156374893cd040f4e9e8abbcfa2defaca678"
+embedded = "9af13c72a13b0db779f6e74ba871864e75ce838f9f167497ce66d2f14e6eba9b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "serde_json::read::StrRead::peek_position"
+kappa = "745caebb602c4d91e83f73a55b5960417c989504358f52810e942f92739c177e"
+embedded = "a78bbcb985db7069348ddf875b9dbf264a8f69df10b94fdcd1d460d24f46c15e"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::StrRead::position"
+kappa = "d64beba5862f563d63809a58df06d0c5a15e70fa75a4c96d93c574dedac58c6d"
+embedded = "448e913d5fe40f3a06b5773e7ff5bb6c05349ad1f138dd2a5b039108d3c00873"
+status = "residue"
+cause = "mir::Ty: read::Position"
+
+[[fn]]
+path = "serde_json::read::StrRead::set_failed"
+kappa = "bcf7e80b60f40afd2302857dd2f81dfe85b9a25104088845565c9d761192974d"
+embedded = "d080114085d26d66a81945a1c0a337a455fe0d0e31c1f4909a8db0a7efb06911"
+status = "residue"
+cause = "mir::Ty: StrRead<'_>"
+

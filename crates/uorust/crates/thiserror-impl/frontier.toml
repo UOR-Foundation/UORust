@@ -1,0 +1,228 @@
+# The thiserror-impl register (written by `uorust crate thiserror-impl@2.0.21`; do not edit): every body of
+# thiserror-impl's MIR at thiserror-impl 2.0.21, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 115
+translated = 2
+residue = 113
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.ast]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.attr]
+bodies = 32
+translated = 2
+residue = 30
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.expand]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.fallback]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.fmt]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.generics]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.prop]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.scan_expr]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.unraw]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.valid]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+embedded = 115
+evaluable = 115
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ast::Field<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: IdentUnraw"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: attr::Trait"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MemberUnraw"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::Enum<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::parse_error_attribute::kw::fmt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::parse_error_attribute::kw::transparent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::ContainerKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::FmtArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unraw::IdentUnraw"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParamsInScope<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attr::Display<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::buffer::Cursor<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InferredBounds"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Input<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Struct<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Variant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Attrs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Fmt<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::From<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Source<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Transparent<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::InferredBounds"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::ParamsInScope<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kw::fmt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::WhereClause"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transparent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unraw::MemberUnraw"
+bodies = 1
