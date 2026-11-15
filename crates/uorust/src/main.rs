@@ -67,6 +67,10 @@ enum Command {
     /// aside as pending until the rest verify, and stamp each translated
     /// row of the register's module files `bridged` or `pending`.
     Bridge(BridgeArgs),
+    /// Carry a register's bridge stamps onto its census taken again on a
+    /// newer head, each row's only while it is the row they were measured
+    /// on.
+    Carry(CarryArgs),
     /// Print the route table.
     Routes,
     /// The certified translator: export the lifted translator through
@@ -244,6 +248,19 @@ struct EmbedArgs {
     /// The directory the bridge's LexLean project is written to.
     #[arg(long, requires = "shallow")]
     bridge: Option<PathBuf>,
+}
+
+#[derive(clap::Args)]
+struct CarryArgs {
+    /// The register's module files the stamps were measured in.
+    #[arg(long)]
+    from: PathBuf,
+    /// The module files of the census taken again, which get them.
+    #[arg(long)]
+    register: PathBuf,
+    /// The commit the stamps were measured at.
+    #[arg(long)]
+    measured: String,
 }
 
 #[derive(clap::Args)]
@@ -489,6 +506,15 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 b.bridged,
                 b.bridged + b.pending,
                 b.pending
+            );
+            Ok(())
+        }
+        Command::Carry(args) => {
+            let (kept, dropped) =
+                uorust::bridge::carry(&args.from, &args.register, &args.measured)?;
+            println!(
+                "carry: {kept} bridge stamps carried from {}, {dropped} rows to measure again",
+                args.measured
             );
             Ok(())
         }

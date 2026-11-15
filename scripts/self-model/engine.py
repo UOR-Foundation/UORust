@@ -349,6 +349,16 @@ jobs:
           pattern: ${{{{ env.CRATE }}}}-register-*
           merge-multiple: true
           path: target/shards
+      # When the job must end, which landing the register finishes within.
+      - name: Note the job's deadline
+        shell: bash
+        run: echo "DEADLINE=$(( $(date +%s) + {stage(krate, merge)['budget']} * 60 ))" >>"$GITHUB_ENV"
+      # Every module's MIR, for the census taken again on a newer head.
+      - name: Fetch every module's MIR
+        uses: {USES['actions/download-artifact']}
+        with:
+          name: ${{{{ env.CRATE }}}}-mir-all
+          path: target/mir
       - name: Merge the shards into the register through the locked SDK
         shell: bash
         run: |
@@ -369,13 +379,17 @@ jobs:
             cat "crates/uorust/$CRATE/frontier.toml" 2>/dev/null || echo "no register yet"
             echo '```'
           }} >>"$GITHUB_STEP_SUMMARY"
+      # A newer commit under an input refuses the push; the census is then
+      # taken again on main's head and the verified columns carried onto it
+      # (scripts/ci/land-register.sh), so the register lands while other
+      # commits keep moving main.
       - name: Push the merged register and regenerate the model from it
         shell: bash
         env:
           GH_TOKEN: ${{{{ github.token }}}}
           REBASE: '1'
           INPUTS: '{" ".join(data["pushPaths"] + [w["file"]])}'
-        run: scripts/ci/push.sh "Regenerate the $CRATE register" "crates/uorust/$CRATE crates/uorust/ledger" generate.yml
+        run: scripts/ci/land-register.sh "$CRATE" "$DEADLINE"
 """
 
 
