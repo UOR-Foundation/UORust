@@ -541,6 +541,14 @@ fn intrinsic_name(path: &str) -> String {
         .to_string()
 }
 
+/// The intrinsics a type query answers (`QUERY::<T>`, `type_query`): a
+/// count rustc's layout data gives, which the evaluator reads as one.
+const TYPE_QUERIES: &[&str] = &[
+    "field_offset",
+    "assert_zero_valid",
+    "assert_mem_uninitialized_valid",
+];
+
 /// The intrinsics whose effect is the platform's, outside the abstract
 /// machine: `breakpoint`'s trap is a debugger's, and `va_arg` reads the
 /// C ABI's variadic arguments, which the target's calling convention
@@ -1886,11 +1894,126 @@ impl Cx<'_> {
     /// The `Generic` of a count MIR prints (`4_usize`, or a const
     /// parameter `N`).
     fn generic_count(&self, text: &str) -> Option<String> {
-        match count_value(text) {
+        match self.count_of(text) {
             Some(n) => Some(mir_ctor("Generic.count", &[n.to_string()])),
             None => (!self.parameters(text).is_empty())
                 .then(|| self.slot(Slot::Count(text.trim().to_string()))),
         }
+    }
+
+    /// A count as MIR prints it, or the answer rustc's layout data gives
+    /// a type query of a type laid out (`field_offset::<F>`).
+    pub(crate) fn count_of(&self, text: &str) -> Option<u64> {
+        count_value(text).or_else(|| self.type_query(text))
+    }
+
+    /// A query of a type that rustc answers from the type's layout, as
+    /// `QUERY::<T>`: `field_offset` of a `FieldRepresentingType<B, V, F>`,
+    /// the offset rustc lays field `F` of variant `V` of `B` at; and
+    /// `assert_zero_valid` and `assert_mem_uninitialized_valid`, 1 where
+    /// rustc's (lax) check lets `T` be filled with zero bytes, or with
+    /// `0x01` bytes, and 0 where it does not.
+    fn type_query(&self, text: &str) -> Option<u64> {
+        let (query, ty) = text.trim().split_once("::<")?;
+        let ty = ty.strip_suffix('>')?.trim();
+        match query.trim() {
+            "field_offset" => self.field_offset(ty),
+            "assert_zero_valid" => self.raw_init_valid(ty, 0, &mut Vec::new()).map(u64::from),
+            "assert_mem_uninitialized_valid" => {
+                self.raw_init_valid(ty, 1, &mut Vec::new()).map(u64::from)
+            }
+            _ => None,
+        }
+    }
+
+    /// The offset rustc lays the field a `FieldRepresentingType<B, V, F>`
+    /// names at: field `F` of `B`, of its variant `V` where `B` has a tag.
+    fn field_offset(&self, ty: &str) -> Option<u64> {
+        let (name, args) = generic_parts(ty);
+        let last = crate::mir::parse::split_path(name).last().copied()?;
+        let [base, variant, field] = args.as_slice() else {
+            return None;
+        };
+        (last == "FieldRepresentingType").then_some(())?;
+        let (variant, field) = (count_value(variant)?, count_value(field)?);
+        let (_, l) = self.layouts.get(base)?;
+        let offsets = match &l.tag {
+            Some(tag) => &tag.variants.get(usize::try_from(variant).ok()?)?.offsets,
+            None => {
+                (variant == 0).then_some(())?;
+                &l.offsets
+            }
+        };
+        offsets.get(usize::try_from(field).ok()?).copied()
+    }
+
+    /// Whether rustc's lax check (`might_permit_raw_init_lax`) lets a `ty`
+    /// be every byte `fill`: its scalar's valid range holds the bytes, a
+    /// reference's pointee is a byte-aligned zero-sized type (no fill
+    /// makes a reference otherwise), and each field of its one variant
+    /// passes too. `None` where rustc's layout of a type it reads is not
+    /// in the dump.
+    fn raw_init_valid(&self, ty: &str, fill: u8, within: &mut Vec<String>) -> Option<bool> {
+        // A type holds no value of itself: one met again inside itself is
+        // a layout this does not read.
+        let (printed, l) = self.layouts.get(ty)?;
+        if within.iter().any(|t| t == printed) {
+            return None;
+        }
+        within.push(printed.to_string());
+        let valid = self.raw_init_fields(ty, l, fill, within);
+        within.pop();
+        valid
+    }
+
+    /// [`Self::raw_init_valid`] of `ty`, laid out as `l`, inside `within`.
+    fn raw_init_fields(
+        &self,
+        ty: &str,
+        l: &crate::layouts::TypeLayout,
+        fill: u8,
+        within: &mut Vec<String>,
+    ) -> Option<bool> {
+        if l.uninhabited {
+            return Some(false);
+        }
+        if let Some(s) = &l.scalar {
+            let size = match s.prim {
+                crate::layouts::Prim::Int { bytes, .. } => bytes,
+                crate::layouts::Prim::Float { bits } => bits / 8,
+                crate::layouts::Prim::Pointer => u64::from(self.width) / 8,
+            };
+            let value = (0..size).fold(0u128, |v, _| (v << 8) | u128::from(fill));
+            let holds = if s.start <= s.end {
+                s.start <= value && value <= s.end
+            } else {
+                value >= s.start || value <= s.end
+            };
+            if !holds {
+                return Some(false);
+            }
+        }
+        if let Some(target) = ty.trim().strip_prefix('&') {
+            if fill == 0 {
+                return Some(false);
+            }
+            let target = pointee(&format!("&{target}"))?.to_string();
+            let (_, p) = self.layouts.get(&target)?;
+            if p.align > 1 || p.size > 0 {
+                return Some(false);
+            }
+        }
+        if l.tag.is_some() || l.offsets.is_empty() {
+            return Some(true);
+        }
+        let fields = l.fields.first()?;
+        (fields.len() == l.offsets.len()).then_some(())?;
+        for f in fields {
+            if !self.raw_init_valid(f.as_deref()?, fill, within)? {
+                return Some(false);
+            }
+        }
+        Some(true)
     }
 
     /// The key of the constant item a constant operand names, where the
@@ -2858,6 +2981,32 @@ impl Cx<'_> {
                             mir_ctor(
                                 "Callee.sizeOf",
                                 &[self.generic_layout(&t).unwrap_or_default()],
+                            )
+                        }
+                        // `field_offset::<F>`, `assert_zero_valid::<T>`: a
+                        // count rustc's layout data gives of the type
+                        // argument, or the slot its instance's fills.
+                        Callee::Intrinsic(p)
+                            if TYPE_QUERIES.contains(&intrinsic_name(&p).as_str())
+                                && defined_layout_queries().contains(&intrinsic_name(&p))
+                                && type_argument(callee)
+                                    .and_then(|t| {
+                                        self.generic_count(&format!(
+                                            "{}::<{t}>",
+                                            intrinsic_name(&p)
+                                        ))
+                                    })
+                                    .is_some() =>
+                        {
+                            let p = intrinsic_name(&p);
+                            let t = type_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.layoutQuery",
+                                &[
+                                    mir_string(&p),
+                                    self.generic_count(&format!("{p}::<{t}>"))
+                                        .unwrap_or_default(),
+                                ],
                             )
                         }
                         // `align_of::<T>`, `assert_inhabited::<T>`: a query
@@ -4350,7 +4499,8 @@ fn instances(
         let fixed = if layout {
             cx.fixed_layout(&text)
         } else {
-            count_value(&text).map(|n| mir_ctor("Generic.count", &[n.to_string()]))
+            cx.count_of(&text)
+                .map(|n| mir_ctor("Generic.count", &[n.to_string()]))
         };
         match fixed {
             Some(g) => At::Fixed(g),
@@ -5019,6 +5169,68 @@ mod tests {
         assert!(ranged("(i8) is (i8::MIN..=-2 | 0..)").is_some_and(|t| t.contains(" 0 254)")));
         assert!(ranged("(i8) is -5..=5").is_some_and(|t| t.contains(" 251 5)")));
         assert_eq!(ranged("(u8) is 5..=1"), None);
+        // A type query reads rustc's layouts: a field's offset, and
+        // whether zero bytes, or 0x01 bytes, are a valid value.
+        use crate::layouts::{Kept, Prim, Scalar, TypeLayout};
+        let scalar = |bytes, end| TypeLayout {
+            size: bytes,
+            align: bytes,
+            scalar: Some(Scalar {
+                prim: Prim::Int {
+                    bytes,
+                    signed: false,
+                },
+                start: 0,
+                end,
+            }),
+            offsets: Vec::new(),
+            single: None,
+            tag: None,
+            fields: Vec::new(),
+            uninhabited: false,
+        };
+        let pair = TypeLayout {
+            size: 8,
+            align: 4,
+            scalar: None,
+            offsets: vec![4, 0],
+            single: None,
+            tag: None,
+            fields: vec![vec![Some("bool".into()), Some("char".into())]],
+            uninhabited: false,
+        };
+        let kept = Kept {
+            layouts: BTreeMap::from([
+                ("bool".to_string(), scalar(1, 1)),
+                ("char".to_string(), scalar(4, 0x10FFFF)),
+                ("Pair".to_string(), pair),
+            ]),
+            names: BTreeMap::new(),
+        };
+        let index = crate::layouts::Index::new(kept);
+        let cx = Cx {
+            layouts: &index,
+            ..cx
+        };
+        assert_eq!(
+            cx.count_of("field_offset::<FieldRepresentingType<Pair, 0_u32, 1_u32>>"),
+            Some(0)
+        );
+        assert_eq!(
+            cx.count_of("field_offset::<FieldRepresentingType<Pair, 1_u32, 1_u32>>"),
+            None
+        );
+        assert_eq!(cx.count_of("assert_zero_valid::<Pair>"), Some(1));
+        assert_eq!(
+            cx.count_of("assert_mem_uninitialized_valid::<bool>"),
+            Some(1)
+        );
+        assert_eq!(
+            cx.count_of("assert_mem_uninitialized_valid::<Pair>"),
+            Some(0)
+        );
+        assert_eq!(cx.count_of("assert_zero_valid::<&Pair>"), None);
+        assert_eq!(cx.count_of("assert_zero_valid::<Unknown>"), None);
     }
 
     #[test]

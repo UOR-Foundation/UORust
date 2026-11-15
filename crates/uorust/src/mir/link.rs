@@ -1093,7 +1093,8 @@ impl CoreLink {
             // module's file is the one the path's longest module
             // prefix names; an item of the module is declared at its
             // top level, one of a function or an impl (`<impl char>::
-            // MAX`) inside, the file's one such declaration.
+            // MAX`) inside, the file's one such declaration, or the one
+            // the function the path names declares.
             let from_source = || -> Option<Instance> {
                 let segs = split_path(printed);
                 let (name, module) = segs.split_last()?;
@@ -1108,22 +1109,39 @@ impl CoreLink {
                 let top = k == module.len();
                 let source = std::fs::read_to_string(file).ok()?;
                 let prefix = format!("const {name}: ");
-                let mut decls = source.lines().filter_map(|l| {
-                    let indented = l.starts_with(char::is_whitespace);
-                    let t = l.trim();
-                    let t = match t.strip_prefix("pub") {
-                        Some(r) if r.starts_with('(') => r[r.find(')')? + 1..].trim_start(),
-                        Some(r) => r.trim_start(),
-                        None => t,
-                    };
-                    let (ty, value) = t.strip_prefix(&prefix)?.split_once(" = ")?;
-                    let value = value.strip_suffix(';')?.trim();
-                    (indented != top).then_some((ty.trim(), value))
-                });
-                let (ty, value) = match (decls.next(), decls.next()) {
-                    (Some(d), None) => d,
+                // The function each line is in: the last one declared above
+                // it, which tells apart one name two functions declare.
+                let mut within = String::new();
+                let decls: Vec<_> = source
+                    .lines()
+                    .filter_map(|l| {
+                        let indented = l.starts_with(char::is_whitespace);
+                        let t = l.trim();
+                        if let Some((_, f)) = t.split_once("fn ") {
+                            let f = f.split(|c: char| !c.is_alphanumeric() && c != '_').next();
+                            within = f.unwrap_or_default().to_string();
+                        }
+                        let t = match t.strip_prefix("pub") {
+                            Some(r) if r.starts_with('(') => r[r.find(')')? + 1..].trim_start(),
+                            Some(r) => r.trim_start(),
+                            None => t,
+                        };
+                        let (ty, value) = t.strip_prefix(&prefix)?.split_once(" = ")?;
+                        let value = value.strip_suffix(';')?.trim();
+                        (indented != top).then_some((within.clone(), ty.trim(), value))
+                    })
+                    .collect();
+                let owner = module.last().copied();
+                let owned: Vec<_> = decls
+                    .iter()
+                    .filter(|d| Some(d.0.as_str()) == owner)
+                    .collect();
+                let (_, ty, value) = match (decls.as_slice(), owned.as_slice()) {
+                    ([d], _) => d,
+                    (_, [d]) => *d,
                     _ => return None,
                 };
+                let (ty, value) = (*ty, *value);
                 let int = ty.strip_prefix(['u', 'i']).is_some_and(|w| {
                     w == "size" || matches!(w.parse::<u32>(), Ok(8 | 16 | 32 | 64 | 128))
                 });

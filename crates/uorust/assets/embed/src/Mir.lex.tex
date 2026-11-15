@@ -2001,14 +2001,43 @@ definition{
 }
 
 definition{
+  name: maskPointer,
+  parameters: [pointer : Value, mask : Value],
+  result: Evaluated,
+  body: (match mask
+    | Value.int width signed bits => (match pointer
+      | Value.int p q address => (ctor Evaluated.found (ctor Value.int p q (bitsAnd p address bits)))
+      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask that clears an address bit of a pointer the memory model places by its place")))
+      | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.tuple p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.adt p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.reference p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.function p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.text p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.uninit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of an uninitialized value")))
+    | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.tuple p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.adt p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.pointer p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.reference p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.function p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.text p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.uninit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by an uninitialized mask")))
+}
+
+definition{
   name: binaryIntrinsic,
   parameters: [name : String, a : Value, b : Value],
   result: (Option Evaluated),
   body: (match (intrinsicBinOp name)
     | Option.some op => (ctor Option.some [Evaluated] (evalBinary op a b))
-    | Option.none => (if ((prim equal name "offset" : Bool) || (prim equal name "arith_offset" : Bool)) then (ctor Option.some [Evaluated] (offsetPointer a b)) else (if (prim equal name "exact_div" : Bool) then (match (evalBinary (ctor BinOp.rem) a b)
+    | Option.none => (if ((prim equal name "offset" : Bool) || (prim equal name "arith_offset" : Bool)) then (ctor Option.some [Evaluated] (offsetPointer a b)) else (if (prim equal name "ptr_mask" : Bool) then (ctor Option.some [Evaluated] (maskPointer a b)) else (if (prim equal name "exact_div" : Bool) then (match (evalBinary (ctor BinOp.rem) a b)
       | Evaluated.stop outcome => (ctor Option.some [Evaluated] (ctor Evaluated.stop outcome))
-      | Evaluated.found left => (if ((reprOfValue left) =? 0) then (ctor Option.some [Evaluated] (evalBinary (ctor BinOp.div) a b)) else (ctor Option.some [Evaluated] (ctor Evaluated.stop (ctor Outcome.ub "an exact division with a remainder"))))) else (saturatingIntrinsic name a b))))
+      | Evaluated.found left => (if ((reprOfValue left) =? 0) then (ctor Option.some [Evaluated] (evalBinary (ctor BinOp.div) a b)) else (ctor Option.some [Evaluated] (ctor Evaluated.stop (ctor Outcome.ub "an exact division with a remainder"))))) else (saturatingIntrinsic name a b)))))
 }
 
 definition{
@@ -3207,7 +3236,11 @@ definition{
       | Option.none => (ctor Outcome.undefined "a generic argument whose alignment the layout table does not hold")
       | Option.some align => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false align))) else (if (prim equal query "assert_inhabited" : Bool) then (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
-      | Option.some layout => (finishCall frames destination target (ctor Value.unit))) else (ctor Outcome.unlinked query)))
+      | Option.some layout => (finishCall frames destination target (ctor Value.unit))) else (if (prim equal query "field_offset" : Bool) then (match (genericCount frames generic)
+      | Option.none => (ctor Outcome.undefined "a field whose offset the layout table does not hold")
+      | Option.some offset => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false offset))) else (if ((prim equal query "assert_zero_valid" : Bool) || (prim equal query "assert_mem_uninitialized_valid" : Bool)) then (match (genericCount frames generic)
+      | Option.none => (ctor Outcome.undefined "a type whose validity the layout table does not hold")
+      | Option.some valid => (if (valid =? 0) then (ctor Outcome.aborted) else (finishCall frames destination target (ctor Value.unit)))) else (ctor Outcome.unlinked query)))))
     | Callee.float e m op => (match (evalOperands program frames args)
       | EvaluatedList.stop outcome => outcome
       | EvaluatedList.found values => (match (floatIntrinsic e m op values)
