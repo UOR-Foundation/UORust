@@ -5640,7 +5640,24 @@ fn rename_strings(term: &str, renamed: &BTreeMap<String, String>) -> String {
         }
         let end = (j + 1).min(bytes.len());
         let literal = &term[i..end];
-        out.push_str(renamed.get(literal).map_or(literal, String::as_str));
+        // Only where a term names a body: an intrinsic's name, a text or a
+        // dictionary's name that a key spells is no key.
+        let before = term[..i].trim_end();
+        let names_body = before.ends_with("path :=")
+            || [
+                "Callee.body",
+                "Callee.instance",
+                "Callee.constant",
+                "Const.function",
+            ]
+            .iter()
+            .any(|c| before.ends_with(c));
+        out.push_str(
+            renamed
+                .get(literal)
+                .filter(|_| names_body)
+                .map_or(literal, String::as_str),
+        );
         i = end;
     }
     out
@@ -6196,18 +6213,20 @@ mod tests {
     fn a_linked_librarys_keys_are_renamed_as_whole_literals() {
         let renamed = BTreeMap::from([(mir_string("num::f"), mir_string("core::num::f"))]);
         let term = format!(
-            "(ctor Callee.body {}) (ctor X {}) (ctor Y {})",
+            "(ctor Callee.body {}) (ctor X {}) (ctor Y {}) (ctor Callee.intrinsic {})",
             mir_string("num::f"),
             mir_string("num::f::g"),
-            mir_string("q\"num::f")
+            mir_string("q\"num::f"),
+            mir_string("num::f")
         );
         assert_eq!(
             rename_strings(&term, &renamed),
             format!(
-                "(ctor Callee.body {}) (ctor X {}) (ctor Y {})",
+                "(ctor Callee.body {}) (ctor X {}) (ctor Y {}) (ctor Callee.intrinsic {})",
                 mir_string("core::num::f"),
                 mir_string("num::f::g"),
-                mir_string("q\"num::f")
+                mir_string("q\"num::f"),
+                mir_string("num::f")
             )
         );
     }

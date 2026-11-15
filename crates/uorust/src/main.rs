@@ -255,6 +255,10 @@ struct EmbedArgs {
     /// The crate the dumps are of: `core`, `std`.
     #[arg(long = "crate")]
     krate: String,
+    /// A library crate to link into the program, `<crate>=<dumps>`, as
+    /// `uorust crate --link` links one.
+    #[arg(long = "link")]
+    link: Vec<String>,
     /// The module shards: one directory of the crate's dumps per module.
     #[arg(long)]
     mir: PathBuf,
@@ -490,6 +494,21 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Embed(args) => {
+            let link = args
+                .link
+                .iter()
+                .map(|l| {
+                    l.split_once('=')
+                        .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
+                        .ok_or_else(|| {
+                            uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                        })
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            let link: Vec<(&str, &std::path::Path)> = link
+                .iter()
+                .map(|(k, d)| (k.as_str(), d.as_path()))
+                .collect();
             let census = uorust::embed::embed(
                 &args.krate,
                 &args.library,
@@ -502,7 +521,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     register: args.register.as_deref(),
                     bridge: args.shallow.as_deref().zip(args.bridge.as_deref()),
                     differential: None,
-                    link: &[],
+                    link: &link,
                 },
             )?;
             println!(
