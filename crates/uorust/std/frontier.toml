@@ -177,16 +177,16 @@ residue = 49
 
 [embedding]
 embedded = 4199
-evaluable = 4193
-blocked = 6
+evaluable = 4196
+blocked = 3
 
 [[construct]]
 construct = "Operand::Constant of a constant the embedding does not read"
-bodies = 6
+bodies = 3
 
 [bridge]
-bridged = 11
-pending = 64
+bridged = 3
+pending = 72
 
 [[pending]]
 shape = "signature: List"
@@ -197,7 +197,7 @@ shape = "definition"
 bodies = 9
 
 [[pending]]
-shape = "proof: straight"
+shape = "timeout: straight"
 bodies = 7
 
 [[pending]]
@@ -205,7 +205,7 @@ shape = "closure: a callee not embedded"
 bodies = 6
 
 [[pending]]
-shape = "proof: binary eq"
+shape = "proof: straight"
 bodies = 5
 
 [[pending]]
@@ -213,11 +213,19 @@ shape = "signature: Unit"
 bodies = 5
 
 [[pending]]
+shape = "proof: binary eq"
+bodies = 4
+
+[[pending]]
 shape = "signature: Nat"
 bodies = 4
 
 [[pending]]
 shape = "signature: TupleNatNat"
+bodies = 3
+
+[[pending]]
+shape = "timeout: binary shl"
 bodies = 3
 
 [[pending]]
@@ -229,8 +237,12 @@ shape = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormatting
 bodies = 2
 
 [[pending]]
-shape = "proof: call"
-bodies = 1
+shape = "timeout: binary eq"
+bodies = 2
+
+[[pending]]
+shape = "timeout: call"
+bodies = 2
 
 [[pending]]
 shape = "signature: CoreIoBorrowedBufBorrowedCursor"
@@ -250,14 +262,6 @@ bodies = 1
 
 [[pending]]
 shape = "timeout: binary div"
-bodies = 1
-
-[[pending]]
-shape = "timeout: binary eq"
-bodies = 1
-
-[[pending]]
-shape = "timeout: straight"
 bodies = 1
 
 [[pending]]
