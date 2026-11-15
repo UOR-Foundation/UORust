@@ -164,7 +164,9 @@ jobs:
   land:
     name: take the shards in and land the certified translator
     needs: [plan, export]
-    if: ${{ !cancelled() && needs.plan.result == 'success' }}
+    # Only main lands: a dispatch on another branch exports its shards for a
+    # local `just certified-sync` of that branch, and pushes nothing.
+    if: ${{ !cancelled() && needs.plan.result == 'success' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
