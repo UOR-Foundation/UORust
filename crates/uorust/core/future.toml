@@ -2,8 +2,7 @@
 path = "core::async_drop_in_place"
 kappa = "32448b06800c5a7b013e852703032045bb2c592d5373002b2032365607cecd67"
 at = "T=u32"
-embedded = "6009946d9ae40fc055006b4cf4ded04cdb6c285ccac0279403babf4918c72111"
-blocked = ["AggregateKind::Coroutine"]
+embedded = "11fbf3aae421c4bf2f9ee716356a35ec0b38874e8f911bbc93d34eeb19cca3bf"
 status = "residue"
 cause = "mir::Ty: {async fn body of future::async_drop::async_drop_in_place<u32>()}"
 
@@ -53,7 +52,7 @@ embedded = "d41994fc31ebf86990ce2623c9e36cd5b5a5e5dc1e597e9737a317925586f741"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreFutureReadyReadyU32"
-measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
+measured = "4941c5fc1b4212f858adfb0fcd2afc875fb40534"
 digest = "d86cd451fc979d16a7212c0fb8464f2971c6e0171a8002b5dedae73f4cc94323"
 
 [[fn]]
@@ -63,7 +62,8 @@ at = "T=u32"
 embedded = "3c1f6f410fbcf6ffce3346181f3bb496285be6472490159aabe23d5a9aec7aad"
 status = "translated"
 bridged = "pending"
-pending = "remeasure"
+pending = "signature: CoreFutureReadyReadyU32"
+measured = "4941c5fc1b4212f858adfb0fcd2afc875fb40534"
 digest = "94128ad53f5f642c619aadab8194941b0198546dab188321024d0ea8ceea9f15"
 
 [[fn]]
@@ -88,7 +88,7 @@ at = "F=u32"
 embedded = "94aaa56821f66934a0bc82ccc74ce00e93b37d9f0218235879651e4a5c13f8bd"
 status = "translated"
 bridged = "proved"
-measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
+measured = "4941c5fc1b4212f858adfb0fcd2afc875fb40534"
 digest = "c3b76fb391e7f374390b1f51c5b70261f7444bc49055763be8f945f29659d572"
 
 [[fn]]
@@ -147,7 +147,7 @@ embedded = "6b1304e3651f750956a3ba79855b8d174551e38c1da6095692ff52eea48d89d5"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreFuturePollFnPollFnU32"
-measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
+measured = "4941c5fc1b4212f858adfb0fcd2afc875fb40534"
 digest = "d7535914b739944be81d1c7d1517657483efd3571d39e34fc670ce8ecd167234"
 
 [[fn]]
@@ -174,6 +174,6 @@ embedded = "45b08b21be8f3e70aa550583d639b8b335a54359d9655c7b81790f1881c18faf"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreFutureReadyReadyU32"
-measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
+measured = "4941c5fc1b4212f858adfb0fcd2afc875fb40534"
 digest = "c4621d1966cf68d9a36f9c1826de4c7f4da66fded0ce4354e5a28456ca2a5a0f"
 
