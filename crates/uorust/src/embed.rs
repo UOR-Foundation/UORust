@@ -30,6 +30,11 @@ use crate::UorustError;
 /// The MIR datatype and its evaluator.
 pub(crate) const SEMANTICS: &str = include_str!("../assets/embed/src/Mir.lex.tex");
 
+/// The evaluator's lemmas: its comparisons on bit patterns, which the
+/// bridge's reductions meet, proved the comparisons of the values the
+/// patterns encode. The embedding's project verifies them.
+const LEMMAS: &str = include_str!("../assets/embed/src/MirLemmas.lex.tex");
+
 /// The lexicon the embedding's titles are words of.
 const LEXICON: &str = include_str!("../assets/embed/language/uorust.mir/lexicon.toml");
 
@@ -315,7 +320,7 @@ pub(crate) fn parts<'t>(
             let key = if count.get(&path).is_some_and(|n| *n > 1) {
                 format!("{path}#{}", def_name(&kappa))
             } else {
-                program_key(link, &path, &kappa)
+                program_key(link, &path, &path, &kappa)
             };
             (stem, key)
         })
@@ -3769,6 +3774,7 @@ pub fn embed_with(
         extra = modules;
         index = Some(checks);
     }
+    extra.insert("src/MirLemmas.lex.tex".into(), LEMMAS.as_bytes().to_vec());
     let mut files = embed_project(krate, &modules, extra, crate::project::MAX_FILE_BYTES);
     files.insert("census.toml".into(), census.render().into_bytes());
     if let Some(checks) = index {
@@ -4503,10 +4509,18 @@ fn arg_type(body: &IrBody, o: &IrOperand) -> Option<String> {
     }
 }
 
-/// The name a body has in the program: its path, or, where a macro's
-/// impls share it, its path and its definition's name.
-pub(crate) fn program_key(link: &crate::mir::link::CoreLink, path: &str, kappa: &str) -> String {
-    if link.bodies.get(path).is_some_and(|b| b.len() > 1) {
+/// The name a body has in the program: its path as its `fn` line prints
+/// it, or, where a macro's impls share the path its dump names them by
+/// (`dumped`, which the linker keys them by), that path and its
+/// definition's name.
+pub(crate) fn program_key(
+    link: &crate::mir::link::CoreLink,
+    dumped: &str,
+    path: &str,
+    kappa: &str,
+) -> String {
+    let shared = |p: &str| link.bodies.get(p).is_some_and(|b| b.len() > 1);
+    if shared(dumped) || shared(path) {
         format!("{path}#{}", def_name(kappa))
     } else {
         path.to_string()
@@ -4525,14 +4539,24 @@ pub(crate) fn resolve_callee(
     args: &[Option<String>],
     dest: &str,
 ) -> Callee {
+    // A body's key, as the program's loop over the dumps keys it: by the
+    // path its `fn` line prints (rustc trims it, `arith::` for
+    // `ops::arith::`), where the linker names it by its dump's.
+    let key = |dumped: &str, text: &str| {
+        let printed = text
+            .lines()
+            .find_map(|l| l.strip_prefix("fn "))
+            .map_or(dumped, |h| &h[..h.find('(').unwrap_or(h.len())]);
+        program_key(link, dumped, printed, &body_kappa(krate, printed, text))
+    };
     let erased = crate::mir::lower::erase(callee);
     let path = link.path(&erased);
     if let Some(p) = path.as_ref().filter(|p| link.decls.intrinsics.contains(*p)) {
         return Callee::Intrinsic(p.clone());
     }
     if let Some(p) = path.as_ref() {
-        if let Some([_]) = link.bodies.get(p).map(Vec::as_slice) {
-            return Callee::Body(p.clone());
+        if let Some([t]) = link.bodies.get(p).map(Vec::as_slice) {
+            return Callee::Body(key(p, t));
         }
     }
     let Some(instance) = link.instance(callee, args, dest) else {
@@ -4541,8 +4565,8 @@ pub(crate) fn resolve_callee(
     let Some(texts) = link.bodies.get(&instance.path) else {
         return Callee::Bound(callee.to_string());
     };
-    if let [_] = texts.as_slice() {
-        return Callee::Body(instance.path);
+    if let [t] = texts.as_slice() {
+        return Callee::Body(key(&instance.path, t));
     }
     // Of a macro's impls, the one whose signature, at the instance's
     // bindings, is the instance's.
@@ -4558,11 +4582,7 @@ pub(crate) fn resolve_callee(
         .iter()
         .filter(|t| head(t).map(|l| crate::mir::stdlib::substitute(&l, &generics)) == want);
     match (hits.next(), hits.next()) {
-        (Some(t), None) => Callee::Body(program_key(
-            link,
-            &instance.path,
-            &body_kappa(krate, &instance.path, t),
-        )),
+        (Some(t), None) => Callee::Body(key(&instance.path, t)),
         _ => Callee::Bound(callee.to_string()),
     }
 }
@@ -5027,7 +5047,9 @@ fn embed_census(
                 let kappa = body_kappa(krate, &b.path, text);
                 let key = match parts.get(stem).filter(|_| is_part(&b.path)) {
                     Some(key) => key.clone(),
-                    None => program_key(&link, &b.path, &kappa),
+                    None => {
+                        program_key(&link, dumped_path(text).unwrap_or(&b.path), &b.path, &kappa)
+                    }
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {

@@ -466,6 +466,13 @@ definition{
 }
 
 definition{
+  name: signBit,
+  parameters: [bits : Nat],
+  result: Nat,
+  body: (match bits | Nat.zero => 1 | Nat.succ rest => (pow2 rest))
+}
+
+definition{
   name: wrapBits,
   parameters: [bits : Nat, value : Nat],
   result: Nat,
@@ -476,7 +483,7 @@ definition{
   name: signedOf,
   parameters: [bits : Nat, signed : Bool, repr : Nat],
   result: Signed,
-  body: (if (signed && ((pow2 (prim subtract bits 1 : Nat)) <=? repr)) then (record Signed {negative := true, magnitude := (prim subtract (pow2 bits) repr : Nat)}) else (record Signed {negative := false, magnitude := repr}))
+  body: (record Signed {negative := (match signed | Bool.true => ((signBit bits) <=? repr) | Bool.false => false), magnitude := (match signed | Bool.true => (if ((signBit bits) <=? repr) then (prim subtract (pow2 bits) repr : Nat) else repr) | Bool.false => repr)})
 }
 
 definition{
@@ -490,14 +497,14 @@ definition{
   name: fitsIn,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Bool,
-  body: (if signed then (if (project value negative) then ((project value magnitude) <=? (pow2 (prim subtract bits 1 : Nat))) else (((project value magnitude) + 1) <=? (pow2 (prim subtract bits 1 : Nat)))) else (((not (project value negative)) || ((project value magnitude) =? 0)) && (((project value magnitude) + 1) <=? (pow2 bits))))
+  body: (if signed then (if (project value negative) then ((project value magnitude) <=? (signBit bits)) else (((project value magnitude) + 1) <=? (signBit bits))) else (((not (project value negative)) || ((project value magnitude) =? 0)) && (((project value magnitude) + 1) <=? (pow2 bits))))
 }
 
 definition{
   name: signedLess,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (if (project a negative) then (if (project b negative) then (((project b magnitude) + 1) <=? (project a magnitude)) else (not (((project a magnitude) =? 0) && ((project b magnitude) =? 0)))) else (if (project b negative) then false else (((project a magnitude) + 1) <=? (project b magnitude))))
+  body: ((((project a negative) && (project b negative)) && (((project b magnitude) + 1) <=? (project a magnitude))) || ((((project a negative) && (not (project b negative))) && (not (((project a magnitude) =? 0) && ((project b magnitude) =? 0)))) || (((not (project a negative)) && (not (project b negative))) && (((project a magnitude) + 1) <=? (project b magnitude)))))
 }
 
 definition{
@@ -511,7 +518,7 @@ definition{
   name: signedAtMost,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (if (project a negative) then (if (project b negative) then ((project b magnitude) <=? (project a magnitude)) else true) else (if (project b negative) then (((project a magnitude) =? 0) && ((project b magnitude) =? 0)) else ((project a magnitude) <=? (project b magnitude))))
+  body: ((((project a negative) && (project b negative)) && ((project b magnitude) <=? (project a magnitude))) || (((project a negative) && (not (project b negative))) || ((((not (project a negative)) && (project b negative)) && (((project a magnitude) =? 0) && ((project b magnitude) =? 0))) || (((not (project a negative)) && (not (project b negative))) && ((project a magnitude) <=? (project b magnitude))))))
 }
 
 definition{
@@ -652,6 +659,53 @@ definition{
 }
 
 definition{
+  name: reprLess,
+  parameters: [bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Bool,
+  body: (match signed | Bool.true => ((((not ((signBit bits) <=? a)) && (b <? (signBit bits))) && (a <? b)) || (((signBit bits) <=? a) && ((b <? (signBit bits)) || (a <? b)))) | Bool.false => (a <? b))
+}
+
+definition{
+  name: reprAtMost,
+  parameters: [bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Bool,
+  body: (match signed | Bool.true => (not (reprLess bits true b a)) | Bool.false => (a <=? b))
+}
+
+definition{
+  name: compareRepr,
+  parameters: [op : BinOp, bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Evaluated,
+  body: (match op
+    | BinOp.eq => (boolValue (a =? b))
+    | BinOp.ne => (boolValue (not (a =? b)))
+    | BinOp.lt => (boolValue (reprLess bits signed a b))
+    | BinOp.le => (boolValue (reprAtMost bits signed a b))
+    | BinOp.gt => (boolValue (reprLess bits signed b a))
+    | BinOp.ge => (boolValue (reprAtMost bits signed b a))
+    | BinOp.add => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.addUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.addWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.sub => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.subUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.subWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mul => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mulUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mulWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.div => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.rem => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitXor => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitAnd => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitOr => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shl => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shlUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shr => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shrUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.cmp => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.offset => (evalCompare op (signedOf bits signed a) (signedOf bits signed b)))
+}
+
+definition{
   name: intValue,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Value,
@@ -702,12 +756,12 @@ definition{
     | BinOp.shlUnchecked => (if ((not (project amount negative)) && (((project amount magnitude) + 1) <=? bits)) then (ctor Evaluated.found (ctor Value.int bits signed (wrapBits bits (prim multiply a (pow2 (project amount magnitude)) : Nat)))) else (ctor Evaluated.stop (ctor Outcome.ub "an unchecked shift by the width or more")))
     | BinOp.shr => (ctor Evaluated.found (ctor Value.int bits signed (shiftRight bits signed a (prim remainder (reprOf bits amount) bits 0 : Nat))))
     | BinOp.shrUnchecked => (if ((not (project amount negative)) && (((project amount magnitude) + 1) <=? bits)) then (ctor Evaluated.found (ctor Value.int bits signed (shiftRight bits signed a (project amount magnitude)))) else (ctor Evaluated.stop (ctor Outcome.ub "an unchecked shift by the width or more")))
-    | BinOp.eq => (evalCompare op x y)
-    | BinOp.lt => (evalCompare op x y)
-    | BinOp.le => (evalCompare op x y)
-    | BinOp.ne => (evalCompare op x y)
-    | BinOp.ge => (evalCompare op x y)
-    | BinOp.gt => (evalCompare op x y)
+    | BinOp.eq => (compareRepr op bits signed a b)
+    | BinOp.lt => (compareRepr op bits signed a b)
+    | BinOp.le => (compareRepr op bits signed a b)
+    | BinOp.ne => (compareRepr op bits signed a b)
+    | BinOp.ge => (compareRepr op bits signed a b)
+    | BinOp.gt => (compareRepr op bits signed a b)
     | BinOp.cmp => (evalCompare op x y)
     | BinOp.offset => (ctor Evaluated.stop (ctor Outcome.undefined "BinOp::Offset")))))
 }
@@ -1909,7 +1963,7 @@ definition{
   name: saturatedValue,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Value,
-  body: (if (fitsIn bits signed value) then (intValue bits signed value) else (if (project value negative) then (intValue bits signed (record Signed {negative := signed, magnitude := (if signed then (pow2 (prim subtract bits 1 : Nat)) else 0)})) else (intValue bits signed (record Signed {negative := false, magnitude := (prim subtract (if signed then (pow2 (prim subtract bits 1 : Nat)) else (pow2 bits)) 1 : Nat)}))))
+  body: (if (fitsIn bits signed value) then (intValue bits signed value) else (if (project value negative) then (intValue bits signed (record Signed {negative := signed, magnitude := (if signed then (signBit bits) else 0)})) else (intValue bits signed (record Signed {negative := false, magnitude := (prim subtract (if signed then (signBit bits) else (pow2 bits)) 1 : Nat)}))))
 }
 
 definition{

@@ -1,0 +1,66 @@
+\begin{lexlean}{MirLemmas}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{uorust.mir@1.0.0}
+\importmodule{Mir}
+\title{MIR semantics}
+\begin{semanticmodule}
+theorem{
+  name: unsignedLessIsSignedLess,
+  parameters: [bits : Nat, a : Nat, b : Nat],
+  statement: ((Mir::reprLess bits false a b) = (Mir::signedLess (Mir::signedOf bits false a) (Mir::signedOf bits false b))),
+  proof: reflexivity{}
+}
+
+theorem{
+  name: unsignedAtMostIsSignedAtMost,
+  parameters: [bits : Nat, a : Nat, b : Nat],
+  statement: ((Mir::reprAtMost bits false a b) = (Mir::signedAtMost (Mir::signedOf bits false a) (Mir::signedOf bits false b))),
+  proof: reflexivity{}
+}
+
+theorem{
+  name: unsignedEqualIsSignedEqual,
+  parameters: [bits : Nat, a : Nat, b : Nat],
+  statement: ((a =? b) = (Mir::signedEqual (Mir::signedOf bits false a) (Mir::signedOf bits false b))),
+  proof: reflexivity{}
+}
+
+theorem{
+  name: signedLessIsSignedLess,
+  parameters: [n : Nat, a : Nat, b : Nat],
+  statement: (((a <? (Mir::pow2 (n + 1))) = true) -> (((b <? (Mir::pow2 (n + 1))) = true) -> (((Mir::reprLess (n + 1) true a b) = true) <-> ((Mir::signedLess (Mir::signedOf (n + 1) true a) (Mir::signedOf (n + 1) true b)) = true)))),
+  proof: linear_arithmetic{
+    definitions: [Mir::pow2, Mir::reprLess, Mir::signBit, Mir::signedLess, Mir::signedOf]
+  },
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+theorem{
+  name: signedAtMostIsSignedAtMost,
+  parameters: [n : Nat, a : Nat, b : Nat],
+  statement: (((a <? (Mir::pow2 (n + 1))) = true) -> (((b <? (Mir::pow2 (n + 1))) = true) -> (((Mir::reprAtMost (n + 1) true a b) = true) <-> ((Mir::signedAtMost (Mir::signedOf (n + 1) true a) (Mir::signedOf (n + 1) true b)) = true)))),
+  proof: linear_arithmetic{
+    definitions: [
+      Mir::pow2,
+      Mir::reprAtMost,
+      Mir::reprLess,
+      Mir::signBit,
+      Mir::signedAtMost,
+      Mir::signedOf
+    ]
+  },
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+theorem{
+  name: signedEqualIsSignedEqual,
+  parameters: [n : Nat, a : Nat, b : Nat],
+  statement: (((a <? (Mir::pow2 (n + 1))) = true) -> (((b <? (Mir::pow2 (n + 1))) = true) -> (((a =? b) = true) <-> ((Mir::signedEqual (Mir::signedOf (n + 1) true a) (Mir::signedOf (n + 1) true b)) = true)))),
+  proof: linear_arithmetic{
+    definitions: [Mir::pow2, Mir::sameBool, Mir::signBit, Mir::signedEqual, Mir::signedOf]
+  },
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+\end{semanticmodule}
+\end{lexlean}
