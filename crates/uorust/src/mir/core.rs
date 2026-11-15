@@ -2301,6 +2301,16 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
             .file_stem()
             .and_then(|n| n.to_str())
             .unwrap_or_default();
+        // A module TOML takes as a bare key as it is; any other (a crate's
+        // `core#1`) quoted.
+        let bare = module
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-');
+        let module = if bare {
+            module.to_string()
+        } else {
+            format!("{module:?}")
+        };
         let _ = writeln!(
             modules,
             "[module.{module}]\nbodies = {}\ntranslated = {translated}\nresidue = {}\n",
