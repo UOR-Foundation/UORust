@@ -2,7 +2,7 @@
 path = "getrandom::slice_as_uninit"
 kappa = "44d3a32863ae10a060e4fdf55669a2d209748460c9b21aa7edc3f2a5cd6e28aa"
 at = "T=u32"
-embedded = "61ea94247bd1d6eeae29d1edbfa41cfb79fb60890d93ca7ac4520d4a7ee376ae"
+embedded = "d84672791f78a10ef0a49a1a5cd91aea04355fc897a56ffc0cf1ac0ed084b807"
 status = "residue"
 cause = "mir::TerminatorKind::Call: core::ptr::from_ref"
 
@@ -10,7 +10,7 @@ cause = "mir::TerminatorKind::Call: core::ptr::from_ref"
 path = "getrandom::slice_as_uninit_mut"
 kappa = "37e48ccbe34a17ec2df3837700ac1d15b6996f16bdccc3afdf427bdaff9baef8"
 at = "T=u32"
-embedded = "72358cb35aabcaf8ebf467421b4df783ca70655613ce88146083dafc7f99e8e5"
+embedded = "c52c18268b7d83a0007f56d299bba7f99e8b7ad3aa5f8fdc15a7d442a4ad6f59"
 status = "residue"
 cause = "mir::TerminatorKind::Call: core::ptr::from_mut"
 
@@ -18,35 +18,35 @@ cause = "mir::TerminatorKind::Call: core::ptr::from_mut"
 path = "getrandom::slice_assume_init_mut"
 kappa = "d345cba62550547db45831ccd56ecaca855f6eb0308448fbfba672299588f4d2"
 at = "T=u32"
-embedded = "da52c2c3ad019bc42e3cbbcbf7e3e348da35e51e3e0b5a98b1235ca3474f39f8"
+embedded = "1dc610a4cb1fc216f3c2f3ba75ab0a0752c0ed49849f2063176f52cd90e428a1"
 status = "residue"
 cause = "mir::Ty: MaybeUninit<u32>"
 
 [[fn]]
 path = "getrandom::uninit_slice_fill_zero"
 kappa = "aa9ae06e2d6de909c6d6464cfb6a832d208bbe72f1608222eaf419410cd0f144"
-embedded = "0732d7581c5a32467bba926a73bbc04d32bda6c50afbdca8ae65187776c4dd2f"
+embedded = "d5208e4f3b7c0a0ae3357db774a98fe0c4975e2738cef98e4e10ba518840e626"
 status = "residue"
 cause = "mir::Ty: MaybeUninit<u8>"
 
 [[fn]]
 path = "getrandom::util::inner_u32"
 kappa = "401274e87f5230c6de46cf13e81870cb333fab6229bad0a2f862db0520651758"
-embedded = "e62615b0b486c6117c678fb328353f4738fbf9b6c9fc2f0cffba20e7a7b2df61"
+embedded = "038b61a764c01a51704a3f4b9e7aef6b47cd8a2d1d387408f9ec3ad77b823c6d"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "getrandom::util::inner_u64"
 kappa = "ea0eb362587b35ff915c004acd15e5c3ea28a38e7b4a9388958480496885c7ae"
-embedded = "f52ea7665ffa970e7e5a0a09cc457665d1d42f10d60f9db231b3755918015f08"
+embedded = "02cdac41df30f76c449f5aa425093fd94acfcdaef957f7a5e3a2f9bb1725d141"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "getrandom::util::truncate"
 kappa = "a5ce05097ecb48cc9d9a64216407fd7e8f8331fde1ec0e66fcc695fcbe58973a"
-embedded = "fa7b932a8b5f310f2068c4569fd683a86447d1b82b660fec3a623b556709dbfd"
+embedded = "97ad2ca3f742a30dd68fd2b0242bd7496c5fcb74910e3ebd70ec4c3062dc20b9"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
 
