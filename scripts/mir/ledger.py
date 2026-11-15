@@ -9,9 +9,11 @@ a tick whose attempts are all held is idle and settles (Engine::settled).
 The model decides those rules over its fixtures; this script computes the
 two κ and applies the same rule to the ledger file:
 
-- the translator κ is the SHA-256 of every file the translation reads from
-  this repository (the translator's sources, its manifest, the lockfile and
-  the dump script), each named by its path and its own SHA-256;
+- the translator κ is the SHA-256 of every file that fixes a row from this
+  repository (the translator's sources, the embedding's LexLean project in
+  crates/uorust/assets, its manifest, the lockfile, the dump script, the
+  differential harness and the register's own workflow), each named by its
+  path and its own SHA-256;
 - the toolchain κ is the SHA-256 of rust-toolchain.toml and the SDK image
   prismpm.lock selects, which fix the compiler, rust-src and the build.
 
@@ -33,7 +35,13 @@ core.toml, std.toml, and crates.toml for the crates of crates.io.
 import hashlib, json, os, subprocess, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-TRANSLATOR = ["crates/uorust/src", "crates/uorust/Cargo.toml", "Cargo.lock", "scripts/mir/dump-lib.sh"]
+# Every file that fixes a row's columns: the translator, its manifest and
+# lockfile, the dump script, the embedding's LexLean project (the evaluator
+# and its datatype, crates/uorust/assets) and the differential check's
+# harness. The workload's own workflow, whose steps run them, is added per
+# register (`workflow`).
+TRANSLATOR = ["crates/uorust/src", "crates/uorust/assets", "crates/uorust/Cargo.toml", "Cargo.lock",
+              "scripts/mir/dump-lib.sh", "scripts/mir/harness.sh"]
 TOOLCHAIN = ["rust-toolchain.toml"]
 
 
@@ -88,8 +96,13 @@ def write_ledger(register, attempts):
     open(ledger_path(register), "w", encoding="utf-8").write((head + rows).rstrip("\n") + "\n")
 
 
-def current(module):
-    return (module, tree_kappa(TRANSLATOR), toolchain_kappa())
+def workflow(register):
+    """The workflow that keeps the register: .github/workflows/<its directory's name>.yml."""
+    return f".github/workflows/{os.path.basename(os.path.normpath(register))}.yml"
+
+
+def current(register, module):
+    return (module, tree_kappa(TRANSLATOR + [workflow(register)]), toolchain_kappa())
 
 
 def stale(attempts, ledger):
@@ -103,7 +116,7 @@ def record(register, modules):
     ledger = read_ledger(register)
     done = {m for m in modules}
     kept = {a for a in ledger if a[0] not in done}
-    write_ledger(register, kept | {current(m) for m in modules})
+    write_ledger(register, kept | {current(register, m) for m in modules})
 
 
 cmd = sys.argv[1]
@@ -111,7 +124,7 @@ if cmd == "--library":
     pass
 elif cmd == "stale":
     register, modules = sys.argv[2], json.load(open(sys.argv[3]))
-    print(json.dumps([a[0] for a in stale([current(m) for m in modules], read_ledger(register))]))
+    print(json.dumps([a[0] for a in stale([current(register, m) for m in modules], read_ledger(register))]))
 elif cmd == "record":
     register, shards = sys.argv[2], sys.argv[3]
     names = sorted(f[:-len(".toml")] for f in os.listdir(shards) if f.endswith(".toml")) if os.path.isdir(shards) else []
@@ -120,7 +133,7 @@ elif cmd == "record":
 elif cmd == "stale-crates":
     registers, ranked = sys.argv[2], json.load(open(sys.argv[3]))
     ledger = read_ledger(registers)
-    keep = {a[0] for a in stale([current(f"{c['name']}@{c['version']}") for c in ranked], ledger)}
+    keep = {a[0] for a in stale([current(registers, f"{c['name']}@{c['version']}") for c in ranked], ledger)}
     print(json.dumps([c for c in ranked if f"{c['name']}@{c['version']}" in keep]))
 elif cmd == "held-crates":
     # The crates REGISTERS holds a register for, each at the newest version
