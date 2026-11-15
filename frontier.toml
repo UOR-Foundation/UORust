@@ -8,11 +8,12 @@
 #   arithmetic: 1
 #   call: 1
 #   form: 2
-#   mir::AggregateKind::Closure: 48
+#   mir::AggregateKind::Closure: 49
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
-#     1 bridge::<impl at crates/uorust/src/bridge.rs:147:1: 147:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::parse::{closure#2}: type outside the lift: std::num::ParseIntError
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
 #     1 certify::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
@@ -96,7 +97,7 @@
 #   mir::Rvalue::Discriminant: 5
 #     5 a discriminant read as a value
 #   mir::Rvalue::Use: 9
-#   mir::TerminatorKind::Call: 151
+#   mir::TerminatorKind::Call: 150
 #     1 <bool as std::string::ToString>::to_string
 #     1 <i128 as std::convert::From>::from
 #     2 <lift::Ty as std::cmp::PartialEq>::eq
@@ -127,7 +128,7 @@
 #     1 core::slice::<impl [lift::Ty]>::contains
 #     3 core::str::<impl str>::as_bytes
 #     3 core::str::<impl str>::rsplit_once
-#     10 core::str::<impl str>::split_once
+#     9 core::str::<impl str>::split_once
 #     1 lift::Split::reach
 #     1 lift::refused
 #     1 project::indexed
@@ -495,7 +496,7 @@ reason = "mir"
 detail = "mir::Ty: std::iter::Once<&str>"
 
 [[residue]]
-kappa = "3804c1e9aa2981c9c9b5d91398898de908bbad6776946d67d52b03f9cc346821"
+kappa = "15d7720d19a64792665f3e8ddcbb35030614cbf89d57ebea2d51c185be21099d"
 function = "uorust::bridge::BridgeShape::encode"
 reason = "mir"
 detail = "mir::TerminatorKind::Call: <u32 as std::string::ToString>::to_string"
@@ -504,13 +505,13 @@ detail = "mir::TerminatorKind::Call: <u32 as std::string::ToString>::to_string"
 kappa = "b7bdca48002745ab89cd6e4f3d9d95b371fae05eb75a19655ed5d5ff78f64dcf"
 function = "uorust::bridge::BridgeShape::encoder"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: bridge::<impl at crates/uorust/src/bridge.rs:147:1: 147:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+detail = "mir::AggregateKind::Closure: bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::encoder::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 
 [[residue]]
-kappa = "8c05bcde4f7ace236625cf914eaa77b5c35d754acfcf0abcecfb026f28aad2cf"
+kappa = "1c21151f9cae3a845a7066d22699d9cedd00a8001f0cae0dfa9bddbc95db738e"
 function = "uorust::bridge::BridgeShape::parse"
 reason = "mir"
-detail = "mir::TerminatorKind::Call: core::str::<impl str>::split_once"
+detail = "mir::AggregateKind::Closure: bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::parse::{closure#2}: type outside the lift: std::num::ParseIntError"
 
 [[residue]]
 kappa = "fc48fedd55113ebb7e8df3c184270ed305df48b0a38cab4848b39c2c34c907a3"
@@ -5886,12 +5887,12 @@ function = "uorust::bridge::BridgeShape::constructors"
 definition = "Behavior::bridgeShapeConstructors"
 
 [[lifted]]
-kappa = "2baebf5795bd8695578f8a78a8bf58f2ff447ea7f4d59575c01a472bee088bb8"
+kappa = "04382a6809d8b8e106c5fa1ee636207809af8410d04ce45e21440e211740b2dc"
 function = "uorust::bridge::BridgeShape::mangle"
 definition = "Behavior::bridgeShapeMangle"
 
 [[lifted]]
-kappa = "f2825268c907ca1672573f89b37ed15091136dcd207d5a234265be5a7a04e5a0"
+kappa = "307bfde07ce1f6604d2f1d4950df421a9d3150e94cc0f50011aa992f4596cffc"
 function = "uorust::bridge::BridgeShape::shallow"
 definition = "Behavior::bridgeShapeShallow"
 
