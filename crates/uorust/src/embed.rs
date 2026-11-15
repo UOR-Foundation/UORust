@@ -4213,11 +4213,15 @@ fn crate_sample(
 
 /// The scalars of `b`'s signature, its parameters' and its result's, where
 /// each is one and it takes one at least.
+/// A sampled signature: its parameters' types and scalars, and its
+/// result's.
+type Signature = (Vec<(String, Sampled)>, (String, Sampled));
+
 fn scalar_signature(
     b: &IrBody,
     width: u32,
     floats: &BTreeMap<String, crate::mir::float::Format>,
-) -> Option<(Vec<(String, Sampled)>, (String, Sampled))> {
+) -> Option<Signature> {
     let scalar = |i: usize| {
         let t = b.locals.get(i)?;
         Some((t.clone(), Sampled::of(t, width, floats)?))
@@ -4397,21 +4401,28 @@ pub(crate) struct Program {
     unread: BTreeSet<String>,
 }
 
+/// What a sample reaches: every body, which the evaluator defines, or
+/// why it does not.
+enum Reach {
+    Closed(Vec<String>),
+    Open(String),
+}
+
 /// The keys of the bodies `key` reaches, itself first, where the evaluator
 /// defines each: else why not, by the first body that stops it, which is
 /// not embedded, is blocked, calls an intrinsic, leaves a callee to a
 /// dictionary, or reaches an instance whose generics no binding fixes
 /// (`Generic.unknown`, and the root's own slots, which a sample's call
 /// supplies none of).
-fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Result<Vec<String>, String> {
+fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
         let Some((_, e)) = every.get(&k) else {
-            return Err("reaches a body not embedded".into());
+            return Reach::Open("reaches a body not embedded".into());
         };
         if let Some(b) = e.blocked.iter().next() {
-            return Err(format!("reaches a body blocked by {b}"));
+            return Reach::Open(format!("reaches a body blocked by {b}"));
         }
         if let Some(b) = e.bound.iter().next() {
             // A dictionary's name, its generic arguments and the
@@ -4425,21 +4436,21 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Result<Ve
             if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
                 eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
             }
-            return Err(format!("leaves a callee of {kind} to a dictionary"));
+            return Reach::Open(format!("leaves a callee of {kind} to a dictionary"));
         }
         if !e.intrinsics.is_empty() {
-            return Err("calls an intrinsic".into());
+            return Reach::Open("calls an intrinsic".into());
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return Err("reaches an instance no binding fixes".into());
+            return Reach::Open("reaches an instance no binding fixes".into());
         }
         if at == 0
             && e.term
                 .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
         {
-            return Err("is generic itself".into());
+            return Reach::Open("is generic itself".into());
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -4448,7 +4459,7 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Result<Ve
         }
         at += 1;
     }
-    Ok(seen)
+    Reach::Closed(seen)
 }
 
 /// The harness crate: one call per case, under `catch_unwind`, each
@@ -4591,6 +4602,16 @@ fn fuel(program: &Program, s: &Sample) -> usize {
     steps * (bits + 1)
 }
 
+/// How many times [`fuel`]'s bound a theorem runs its sample for. The
+/// bound takes a loop to run at most once per bit of the widest input, as
+/// core's loops over an integer do; a constant item a body reads is
+/// evaluated where it is read, and its loops run over its own data
+/// (regex-automata's `WORD`, a `const fn` filling 256 entries), past that
+/// bound, where the run would be `exhausted` and not what rustc's build
+/// returned. Fuel bounds the run and is not spent past its end, so a run
+/// costs its own steps whatever the slack; the split weighs the bound.
+const FUEL_SLACK: usize = 1 << 10;
+
 /// How long `lexlean verify` lets one child process, one module, run
 /// (the project's `child_timeout_ms`).
 const CHILD_TIMEOUT_MS: usize = 300_000;
@@ -4687,7 +4708,7 @@ fn differential(
             );
             theorems.push(format!(
                 "theorem{{\n  name: {theorem},\n  parameters: [],\n  statement: ((Mir::evaluate {} (p{name}) {} {}) = {}),\n  proof: reflexivity{{}}\n}}",
-                fuel(program, s),
+                fuel(program, s).saturating_mul(FUEL_SLACK),
                 mir_string(&s.key),
                 term_list(&args, &mir_name("Value")),
                 mir_ctor("Outcome.returned", &[expected])
@@ -5613,11 +5634,11 @@ fn embed_linked(
     let mut left: BTreeMap<String, usize> = BTreeMap::new();
     let sampled = samples.len();
     samples.retain_mut(|s| match closure(&every, &s.key) {
-        Ok(c) => {
+        Reach::Closed(c) => {
             s.closure = c;
             true
         }
-        Err(why) => {
+        Reach::Open(why) => {
             *left.entry(why).or_default() += 1;
             false
         }

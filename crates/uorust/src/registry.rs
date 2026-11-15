@@ -574,7 +574,22 @@ fn run_harness(
     // The calls of a refused wrapper's sample give way to its cases
     // printed unbuilt.
     let main = harness.join("src").join("main.rs");
+    // The crate as its library is named, which its manifest may name
+    // apart from its package (rustls-webpki's `webpki`).
     let pristine = crate::embed::read_text(&main)?;
+    let lib = lib_name(dir)?;
+    let pristine: String = pristine
+        .lines()
+        .map(|l| {
+            match l
+                .strip_prefix("use ")
+                .and_then(|r| r.strip_suffix(" as _;"))
+            {
+                Some(_) => format!("use {lib} as _;\n"),
+                None => format!("{l}\n"),
+            }
+        })
+        .collect();
     let samples_of = sample_cases(&pristine);
     let host = String::from_utf8_lossy(&run(
         "rustc",
@@ -627,6 +642,24 @@ fn run_harness(
     std::fs::write(observed, out).map_err(|e| tool("observed", e))?;
     let _ = std::fs::remove_dir_all(&target);
     Ok(())
+}
+
+/// The name of the library of the package at `dir`: its manifest's
+/// `[lib] name`, else its package's name with each `-` a `_`.
+fn lib_name(dir: &Path) -> Result<String, UorustError> {
+    let manifest: toml::Table = crate::embed::read_text(&dir.join("Cargo.toml"))?
+        .parse()
+        .map_err(|e| tool("Cargo.toml", e))?;
+    let named = manifest
+        .get("lib")
+        .and_then(|l| l.get("name"))
+        .and_then(toml::Value::as_str);
+    let package = manifest
+        .get("package")
+        .and_then(|p| p.get("name"))
+        .and_then(toml::Value::as_str)
+        .ok_or_else(|| tool("Cargo.toml", "no package name"))?;
+    Ok(named.unwrap_or(package).replace('-', "_"))
 }
 
 /// The sample each case of the harness's `main.rs` belongs to, by case,

@@ -535,7 +535,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                                 ))
                             })
                     })
-                    .collect::<Result<Vec<_>, _>>()?,
+                    .collect::<Result<Vec<_>, UorustError>>()?,
             )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
