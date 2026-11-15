@@ -30,6 +30,18 @@ pub(crate) struct IrBody {
     /// gives them.
     pub(crate) upvars: Vec<Option<(String, String)>>,
     pub(crate) blocks: Vec<IrBlock>,
+    /// Where the source declares the body's return place, as a dump under
+    /// `-Zmir-include-spans` prints it: the signature's return type.
+    pub(crate) span: Option<IrSpan>,
+}
+
+/// A place in a source file, as rustc prints a span's start: the file's
+/// path, its 1-based line and its 1-based column, in characters.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub(crate) struct IrSpan {
+    pub(crate) file: String,
+    pub(crate) line: u32,
+    pub(crate) column: u32,
 }
 
 /// A basic block: statements, then its terminator.
@@ -37,6 +49,9 @@ pub(crate) struct IrBody {
 pub(crate) struct IrBlock {
     pub(crate) statements: Vec<IrStatement>,
     pub(crate) terminator: IrTerminator,
+    /// Where the source writes the terminator, as a dump under
+    /// `-Zmir-include-spans` prints it: a call's call site.
+    pub(crate) span: Option<IrSpan>,
 }
 
 /// A statement.
@@ -114,8 +129,10 @@ pub(crate) enum IrAggregate {
     /// A closure, by its type as printed (`{closure@file:l:c: l:c}`); its
     /// operands are its captures, named.
     Closure(String),
-    /// Any other aggregate kind.
-    Other(spec::MirAggregateKind),
+    /// A coroutine in its unresumed state, by its type as printed
+    /// (`{coroutine@file:l:c: l:c (#0)}`); its operands are its upvars,
+    /// named.
+    Coroutine(String),
 }
 
 /// The right side of an assignment.

@@ -217,6 +217,102 @@ pub fn production(
 /// over budget as a whole, not refused for any one root.
 const TOTAL_BUDGET: &str = "max_total_source_bytes";
 
+/// The build seconds per root an export without a measured figure plans
+/// with: run 43653074598 built 80-root batches in 560 to 800 seconds.
+const MEASURED_SECONDS_PER_ROOT: u64 = 10;
+
+/// The builds of its batch a shard is sized to fit before the deadline: its
+/// first and three more after roots the kernel refuses late.
+const BUILDS_PER_SHARD: u64 = 4;
+
+/// The most roots a shard holds, whatever the timing: the kernel refuses
+/// roots late, one per build, so a shard of this many on its two workers
+/// rebuilds batches of at most half of it, and its deadline holds as many
+/// such rebuilds as it has roots.
+const MAX_ROOTS_PER_SHARD: usize = 8;
+
+/// The most shards an export plans: a matrix GitHub runs at once.
+const MAX_SHARDS: usize = 64;
+
+/// The plan of a sharded export: how many shards build the roots `prior`
+/// did not refuse, each sized so that [`BUILDS_PER_SHARD`] builds of it fit
+/// in `budget` seconds at the prior export's seconds per root, and the roots
+/// whose refusal is the compiler's own (`LLB6005`, or `LLV7015` built alone), whose full
+/// diagnostics the diagnose job keeps.
+pub fn plan(register: &Register, prior: &Manifest, budget: u64) -> (usize, Vec<String>) {
+    let all = roots(register);
+    let refused = |r: &&Root| {
+        prior.refused.contains_key(&r.kappa) && !prior.refused[&r.kappa].starts_with(UNBUILT)
+    };
+    let to_build = all.iter().filter(|r| !refused(r)).count();
+    let per_root = prior
+        .seconds_per_root
+        .unwrap_or(MEASURED_SECONDS_PER_ROOT)
+        .max(1);
+    let per_shard = usize::try_from(budget / (per_root * BUILDS_PER_SHARD))
+        .unwrap_or(usize::MAX)
+        .clamp(1, MAX_ROOTS_PER_SHARD);
+    let shards = to_build.div_ceil(per_shard).clamp(1, MAX_SHARDS);
+    let diagnose = all
+        .iter()
+        .filter(|r| {
+            prior
+                .refused
+                .get(&r.kappa)
+                .is_some_and(|c| c.starts_with(ALONE) || c.starts_with("LLB6005"))
+        })
+        .map(|r| r.definition.clone())
+        .collect();
+    (shards, diagnose)
+}
+
+/// Build `root` alone in a production project at `out` and keep, in
+/// `out/build.log`, everything `lexlean production build` prints in human
+/// form: a refusal's whole diagnostic, which the JSON form cuts short.
+pub fn diagnose(
+    projection: &Path,
+    out: &Path,
+    register: &Register,
+    targets: &str,
+    root: &str,
+) -> Result<(), UorustError> {
+    descriptor(targets)?;
+    if out.exists() {
+        std::fs::remove_dir_all(out).map_err(|e| io(out, e))?;
+    }
+    let only: BTreeSet<String> = [root.to_string()].into_iter().collect();
+    let named = production(
+        projection,
+        out,
+        register,
+        targets,
+        &BTreeMap::new(),
+        Some(&only),
+    )?;
+    if named.is_empty() {
+        return Err(UorustError::Tool(format!("{root} is not an eligible root")));
+    }
+    lexlean(out, &["lock"])?;
+    let run = std::process::Command::new("lexlean")
+        .args([
+            "production",
+            "build",
+            "--request",
+            "request.json",
+            "--diagnostic-format",
+            "human",
+            "--color",
+            "never",
+        ])
+        .current_dir(out)
+        .output()
+        .map_err(|e| UorustError::Tool(format!("lexlean production build: {e}")))?;
+    let log = out.join("build.log");
+    let mut text = run.stdout;
+    text.extend(run.stderr);
+    std::fs::write(&log, text).map_err(|e| io(&log, e))
+}
+
 /// The digest of the [`TARGET`] descriptor in `targets` (the output of
 /// `lexlean production targets`).
 fn descriptor(targets: &str) -> Result<String, UorustError> {
@@ -238,6 +334,52 @@ fn descriptor(targets: &str) -> Result<String, UorustError> {
         .ok_or_else(|| bad(format!("no {TARGET} descriptor")))
 }
 
+/// The file of `kept` that records the build seconds of every pass and the
+/// roots its bundles published, from which the next export sizes its shards.
+pub const TIMING: &str = "timing.toml";
+
+/// The directories of a shard's kept output under a merged `kept`.
+pub const SHARD: &str = "shard-";
+
+/// The kept outputs under `kept`: each `kept/shard-<i>` when the export was
+/// sharded, else `kept` itself.
+fn kept_roots(kept: &Path) -> Result<Vec<PathBuf>, UorustError> {
+    let mut shards: Vec<PathBuf> = std::fs::read_dir(kept)
+        .map_err(|e| io(kept, e))?
+        .filter_map(Result::ok)
+        .filter(|e| e.file_name().to_string_lossy().starts_with(SHARD))
+        .map(|e| e.path())
+        .filter(|p| p.is_dir())
+        .collect();
+    shards.sort();
+    Ok(if shards.is_empty() {
+        vec![kept.to_path_buf()]
+    } else {
+        shards
+    })
+}
+
+/// The file of `kept` that records the κ each root's package was exported
+/// at, by package.
+pub const KAPPAS: &str = "kappas.toml";
+
+/// What part of the export one run builds, and for how long.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct Scope {
+    /// The time it may build for; the roots unbuilt then are refused.
+    pub within: Option<std::time::Duration>,
+    /// Shard I of N: every Nth eligible root, from the Ith.
+    pub shard: Option<(usize, usize)>,
+}
+
+/// The code of the kernel's rejection of a certificate B. Run 43700278692's
+/// diagnose job built roots alone that a batch had refused with it, and the
+/// kernel accepted them.
+const KERNEL: &str = "LLV7015";
+
+/// What a refusal's cause starts with when the root was built alone.
+const ALONE: &str = "built alone: ";
+
 /// The cause of a root no build reached before the export's deadline.
 const UNBUILT: &str = "not built before the export's deadline";
 
@@ -257,6 +399,8 @@ struct Export {
     passes: usize,
     error: Option<UorustError>,
     late: bool,
+    seconds: u64,
+    published: usize,
 }
 
 /// What one build of a batch asks of the export next.
@@ -297,8 +441,14 @@ pub fn production_build(
     targets: &str,
     kept: &Path,
     prior: &Manifest,
-    within: Option<std::time::Duration>,
+    scope: Scope,
 ) -> Result<(), UorustError> {
+    let Scope { within, shard } = scope;
+    if let Some((k, n)) = shard.filter(|(k, n)| k >= n) {
+        return Err(UorustError::Tool(format!(
+            "shard {k} of {n}: a shard is below the count"
+        )));
+    }
     let deadline = within.map(|w| std::time::Instant::now() + w);
     let prefix = format!("{}.{BEHAVIOR}.", module_prefix(projection)?);
     let all = roots(register);
@@ -314,6 +464,9 @@ pub fn production_build(
             by_kappa
                 .get(kappa.as_str())
                 .filter(|_| cause.contains(&format!("`{prefix}")))
+                // A kernel rejection is carried only when the root was built
+                // alone: in a batch it can be the batch's, not the root's.
+                .filter(|_| !cause.starts_with(KERNEL))
                 .map(|d| ((*d).to_string(), cause.clone()))
         }));
     }
@@ -323,10 +476,23 @@ pub fn production_build(
         }
         std::fs::create_dir_all(dir).map_err(|e| io(dir, e))?;
     }
+    // The κ each package is exported at, so that a sync on a newer commit
+    // takes a package only while its function is the one exported.
+    let measured: String = all
+        .iter()
+        .map(|r| format!("{} = \"{}\"\n", r.package(), r.kappa))
+        .collect();
+    let path = kept.join(KAPPAS);
+    std::fs::write(&path, measured).map_err(|e| io(&path, e))?;
     // Every root the request may name: the higher-order ones are refused by
     // `production` itself.
     let probe = out.join("probe");
-    let eligible = production(projection, &probe, register, targets, &compiler, None)?;
+    let eligible: Vec<String> = production(projection, &probe, register, targets, &compiler, None)?
+        .into_iter()
+        .enumerate()
+        .filter(|(i, _)| shard.is_none_or(|(k, n)| i % n == k))
+        .map(|(_, r)| r)
+        .collect();
     std::fs::remove_dir_all(&probe).map_err(|e| io(&probe, e))?;
     let cores = std::thread::available_parallelism().map_or(1, std::num::NonZero::get);
     let workers = (cores / CORES_PER_BUILD).max(1);
@@ -379,10 +545,12 @@ pub fn production_build(
                 let mut s = state.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
                 s.busy -= 1;
                 let seconds = started.elapsed().as_secs();
+                s.seconds += seconds;
                 match outcome {
                     Ok((_, None)) => {}
                     Ok((named, Some(Outcome::Bundle(bundle)))) => {
                         s.bundles += 1;
+                        s.published += named.len();
                         let to = kept.join(s.bundles.to_string());
                         eprintln!(
                             "certify production: pass {pass} (worker {worker}): {} roots published in {seconds}s",
@@ -393,14 +561,33 @@ pub fn production_build(
                         }
                     }
                     Ok((named, Some(Outcome::Refused(refused)))) => {
-                        for (root, cause) in &refused {
+                        let mut rest = named.clone();
+                        for (root, cause) in refused {
+                            // The kernel rejects some roots' certificates in a
+                            // batch that it accepts alone: such a root is
+                            // built alone before it is refused.
+                            if cause.starts_with(KERNEL) && named.len() > 1 {
+                                eprintln!(
+                                    "certify production: pass {pass} (worker {worker}): {root} rejected in a batch after {seconds}s; built alone next"
+                                );
+                                rest.retain(|r| *r != root);
+                                s.batches.push(vec![root]);
+                                continue;
+                            }
                             eprintln!(
                                 "certify production: pass {pass} (worker {worker}): {root} refused after {seconds}s: {}",
                                 cause.lines().next().unwrap_or_default()
                             );
+                            let cause = if cause.starts_with(KERNEL) {
+                                format!("{ALONE}{cause}")
+                            } else {
+                                cause
+                            };
+                            s.compiler.insert(root, cause);
                         }
-                        s.compiler.extend(refused);
-                        s.batches.push(named);
+                        if !rest.is_empty() {
+                            s.batches.push(rest);
+                        }
                     }
                     Ok((named, Some(Outcome::Over(cause)))) => {
                         eprintln!(
@@ -449,6 +636,9 @@ pub fn production_build(
     production(projection, &last, register, targets, &s.compiler, None)?;
     let refusals = last.join(REFUSALS);
     std::fs::copy(&refusals, kept.join(REFUSALS)).map_err(|e| io(&refusals, e))?;
+    let timing = kept.join(TIMING);
+    let text = format!("seconds = {}\nroots = {}\n", s.seconds, s.published);
+    std::fs::write(&timing, text).map_err(|e| io(&timing, e))?;
     eprintln!(
         "certify production: {} bundles in {} passes, {} roots refused by the compiler",
         s.bundles,
@@ -502,17 +692,16 @@ fn build_batch(
         return Ok((named, Some(Outcome::Late)));
     };
     if result.get("success").and_then(serde_json::Value::as_bool) == Some(true) {
-        let bundle = result
+        // The artifact's path is the project's, relative to `dir`, where
+        // lexlean runs.
+        let artifact = result
             .get("artifacts")
             .and_then(|a| a.as_array())
             .and_then(|a| a.first())
             .and_then(|a| a.as_str())
-            .map(|a| dir.join(a))
             .ok_or_else(|| UorustError::Tool("lexlean production build: no bundle".into()))?;
-        let replay = lexlean(
-            dir,
-            &["production", "verify-artifact", &bundle.to_string_lossy()],
-        )?;
+        let bundle = dir.join(artifact);
+        let replay = lexlean(dir, &["production", "verify-artifact", artifact])?;
         if replay.get("success").and_then(serde_json::Value::as_bool) != Some(true) {
             return Err(UorustError::Tool(format!(
                 "lexlean production verify-artifact: {}",
@@ -531,12 +720,19 @@ fn build_batch(
     if !refused.is_empty() {
         return Ok((named, Some(Outcome::Refused(refused))));
     }
-    match messages.iter().find(|m| m.contains(TOTAL_BUDGET)) {
+    // A refusal that names no root (the total budget, or a limit of the
+    // build's own, as run 43706236017's LLI9001 on a deep package manifest)
+    // is the batch's: it is split until the refusal names its root or one
+    // root holds it.
+    match messages
+        .iter()
+        .find(|m| m.contains(TOTAL_BUDGET))
+        .or(messages.first())
+    {
         Some(m) => Ok((named, Some(Outcome::Over(m.clone())))),
-        None => Err(UorustError::Tool(format!(
-            "lexlean production build: {}",
-            messages.join("; ")
-        ))),
+        None => Err(UorustError::Tool(
+            "lexlean production build: refused without a diagnostic".into(),
+        )),
     }
 }
 
@@ -929,6 +1125,9 @@ pub struct Manifest {
     /// The roots the production project could not export, by κ, with
     /// their causes.
     pub refused: BTreeMap<String, String>,
+    /// The build seconds the export spent per root it published, over all
+    /// its passes and shards: what the next export sizes its shards by.
+    pub seconds_per_root: Option<u64>,
 }
 
 /// The figures of the bootstrap.
@@ -1009,6 +1208,11 @@ impl Manifest {
             refused.insert(text_of(row, "kappa")?, text_of(row, "cause")?);
         }
         Ok(Manifest {
+            seconds_per_root: doc
+                .get("timing")
+                .and_then(|t| t.get("seconds_per_root"))
+                .and_then(toml::Value::as_integer)
+                .and_then(|n| u64::try_from(n).ok()),
             refused,
             result: text_of(&doc, "result")?,
             compiler: text_of(&doc, "compiler")?,
@@ -1044,6 +1248,12 @@ impl Manifest {
             "reachable_certified = {}\n",
             s.reachable_certified
         ));
+        if let Some(n) = self.seconds_per_root {
+            out.push_str(
+                "\n# The build seconds per published root, which sizes the next export's shards.\n",
+            );
+            out.push_str(&format!("[timing]\nseconds_per_root = {n}\n"));
+        }
         for r in &self.roots {
             out.push_str("\n[[root]]\n");
             out.push_str(&format!("function = \"{}\"\n", r.function));
@@ -1096,14 +1306,25 @@ pub(crate) fn sync(
     };
     // Refused before anything is written: not what `certify production`
     // keeps, which always holds the refusals and each bundle's result.json.
-    if !production.join(REFUSALS).is_file() {
+    let outputs = kept_roots(production)?;
+    if !outputs.iter().any(|k| k.join(REFUSALS).is_file()) {
         return Err(bad(
             kept,
             format!("no {REFUSALS} beside a bundle's result.json: not kept by certify production"),
         ));
     }
+    let mut measured: Option<toml::Table> = None;
+    let mut all = Vec::new();
+    for k in &outputs {
+        let kappas = k.join(KAPPAS);
+        if let Ok(text) = std::fs::read_to_string(&kappas) {
+            let table: toml::Table = text.parse().map_err(|e| bad(&kappas, format!("{e}")))?;
+            measured.get_or_insert_with(toml::Table::new).extend(table);
+        }
+        all.extend(bundles(k)?);
+    }
     let mut results = Vec::new();
-    for bundle in bundles(kept)? {
+    for bundle in all {
         let path = bundle.join("result.json");
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
         let result: serde_json::Value =
@@ -1145,8 +1366,17 @@ pub(crate) fn sync(
                 let directory = field(package, &["directory"]);
                 let name = directory.rsplit('/').next().unwrap_or_default().to_string();
                 let Some(own) = by_package.get(&name) else {
+                    if measured.is_some() {
+                        continue;
+                    }
                     return Err(bad(path, format!("{name} is no root of the register")));
                 };
+                // A function changed since the export is a new question.
+                if measured.as_ref().is_some_and(|m| {
+                    m.get(&name).and_then(toml::Value::as_str) != Some(own.kappa.as_str())
+                }) {
+                    continue;
+                }
                 let lib = format!("{directory}/src/lib.rs");
                 let recorded = package
                     .get("files")
@@ -1201,21 +1431,42 @@ pub(crate) fn sync(
     let text = adapters_source(&wired, &sites);
     std::fs::write(adapters, text).map_err(|e| io(adapters, e))?;
     let kappas: BTreeSet<String> = certified.iter().map(|c| c.kappa.clone()).collect();
-    let refusals = production.join(REFUSALS);
-    let text = std::fs::read_to_string(&refusals).map_err(|e| io(&refusals, e))?;
-    let doc: toml::Value = text.parse().map_err(|e| bad(&refusals, format!("{e}")))?;
-    let refused: BTreeMap<String, String> = doc
-        .get("refused")
-        .and_then(toml::Value::as_array)
-        .into_iter()
-        .flatten()
-        .filter_map(|r| {
-            Some((
-                r.get("kappa")?.as_str()?.to_string(),
-                r.get("cause")?.as_str()?.to_string(),
-            ))
-        })
-        .collect();
+    let mut refused: BTreeMap<String, String> = BTreeMap::new();
+    let (mut seconds, mut built) = (0u64, 0u64);
+    for k in &outputs {
+        let refusals = k.join(REFUSALS);
+        let Ok(text) = std::fs::read_to_string(&refusals) else {
+            continue;
+        };
+        let doc: toml::Value = text.parse().map_err(|e| bad(&refusals, format!("{e}")))?;
+        refused.extend(
+            doc.get("refused")
+                .and_then(toml::Value::as_array)
+                .into_iter()
+                .flatten()
+                .filter_map(|r| {
+                    Some((
+                        r.get("kappa")?.as_str()?.to_string(),
+                        r.get("cause")?.as_str()?.to_string(),
+                    ))
+                }),
+        );
+        let timing: toml::Table = std::fs::read_to_string(k.join(TIMING))
+            .ok()
+            .and_then(|t| t.parse().ok())
+            .unwrap_or_default();
+        let count = |key: &str| {
+            timing
+                .get(key)
+                .and_then(toml::Value::as_integer)
+                .and_then(|n| u64::try_from(n).ok())
+                .unwrap_or_default()
+        };
+        seconds += count("seconds");
+        built += count("roots");
+    }
+    // A root a shard built is not refused by another shard's view of it.
+    refused.retain(|kappa, _| !kappas.contains(kappa));
     let manifest = Manifest {
         refused,
         result: results
@@ -1226,6 +1477,7 @@ pub(crate) fn sync(
         // As `lexlean --version` states it, which the next export compares
         // its own against: a manifest of no bundle has it too.
         compiler: compiler_version()?,
+        seconds_per_root: seconds.checked_div(built),
         roots: certified,
         share: share(register, &kappas, dumps),
     };
@@ -2145,6 +2397,7 @@ mod tests {
                 reachable: 2,
                 reachable_certified: 1,
             },
+            seconds_per_root: Some(9),
             refused: [(
                 "k2".to_string(),
                 "reaches Behavior::walk, a \"function\"".to_string(),
@@ -2153,6 +2406,36 @@ mod tests {
             .collect(),
         };
         assert_eq!(Manifest::parse(Path::new("m"), &m.to_text()), Ok(m));
+    }
+
+    #[test]
+    fn a_plan_sizes_its_shards_and_names_the_compiler_refusals() {
+        let rows: Vec<(String, String, Status)> = (0..20)
+            .map(|i| {
+                (
+                    format!("k{i}"),
+                    format!("uorust::mir::f{i}"),
+                    Status::Lifted(format!("Behavior::f{i}")),
+                )
+            })
+            .collect();
+        let reg = register(
+            &rows
+                .iter()
+                .map(|(k, f, s)| (k.as_str(), f.as_str(), s.clone()))
+                .collect::<Vec<_>>(),
+        );
+        let mut prior = Manifest::default();
+        prior
+            .refused
+            .insert("k0".into(), "built alone: LLV7015 certificate B: x".into());
+        prior.refused.insert("k1".into(), UNBUILT.into());
+        // Nineteen to build, at most eight a shard however long the budget.
+        let (shards, diagnose) = plan(&reg, &prior, u64::MAX / 2);
+        assert_eq!((shards, diagnose), (3, vec!["f0".to_string()]));
+        // A budget of one build of two roots: ten shards.
+        prior.seconds_per_root = Some(1);
+        assert_eq!(plan(&reg, &prior, 2 * BUILDS_PER_SHARD).0, 10);
     }
 
     #[test]

@@ -2,7 +2,7 @@
 path = "syn::Parser::__parse_scoped"
 kappa = "e602145f919758d953d1c7e19577a5fb94bacc2cb656ea943e0d64c1f4b03d06"
 at = "Self=u32"
-embedded = "552f3cd43c7de51891a8baabfa4af12ebd49505af5646d47bf1d099b98ca9ec1"
+embedded = "8d705048bf68884e9f5cf0f1ba6589bd44e787d25cedaf184fbba9d412687265"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -10,7 +10,7 @@ cause = "mir::Ty: error::Error"
 path = "syn::Parser::parse"
 kappa = "c14ccf78f0d273bf3e437782a3a65863f23c4579c3d99a577bac7d296526ff40"
 at = "Self=u32"
-embedded = "81d390b66e36a6a0d7707bba2ff7fcef2364a93cb35fb4f2c977b5e35ce500e2"
+embedded = "c9a07ceb10d57d6a55dacf3cfc7173b896cc1072d9b351299c7785c0f51e608c"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -18,14 +18,15 @@ cause = "mir::Ty: error::Error"
 path = "syn::Parser::parse_str"
 kappa = "2dbbe87b4108d7b269821d56925cfe25a942f6705119e74e7f04d05bff356bcd"
 at = "Self=u32"
-embedded = "eec615aa5c85d7233801518aafd38307e0258956f830143d4f9ae05c5d6dab63"
+embedded = "2511b9655d872fa0a347f2ffc1cd437889b5c9d6b62c87c2a08d8436d54deedc"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::advance_step_cursor"
 kappa = "06c85e5ae5ff7369e7cdf8e07eaa77592e2f29e481d2db51427856a4aba6ad2e"
-embedded = "012ded68f62190ee9be2feebebb26abf50e11aeac29ba8b328df12b487279664"
+embedded = "9f745679f480f1e3aee146398b5340f41b3a580eae2c85a80435a1d8df19aae1"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: buffer::Cursor<'_>"
 
@@ -33,49 +34,51 @@ cause = "mir::Ty: buffer::Cursor<'_>"
 path = "syn::cell_clone"
 kappa = "57166534272e1c6be38954d4f12d957adf18b702d73e4948f69964bb47b8291a"
 at = "T=u32"
-embedded = "7964a803e0c77ff481eec1b85dcec76d6f23c1dc6d3c9021d52767a9a3838469"
+embedded = "25e9370645493d5b353ff8a46b66e45fa9d6208ef00dd43f2ab2adf1a7896d2d"
 status = "residue"
 cause = "mir::Ty: Cell<u32>"
 
 [[fn]]
 path = "syn::discouraged::ParseBuffer::advance_to"
 kappa = "df6e78579c86d6b3ec862facf58907149da5e171def52b28416d111a28a09d6c"
-embedded = "c6b667427a71e92128159d6934e3b15d2117c1da87379e0e161115713a669f6e"
+embedded = "e2195174ef47636071fe25780b1d766dad96e034edce78258c131b299afddbaa"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::discouraged::ParseBuffer::parse_any_delimiter"
 kappa = "9a96fd8fc7c5b4a36ce035099f3ad354abbdb39f1c2868042640b5145c53e9fd"
-embedded = "a35b7c274f9d8fbb4f14d71506ee56ede64d606b3d09671a34fc2a27127332b4"
+embedded = "d697e646548a061813626c143e0ed05d051bf3952469eb1f4fbeb3c43ff0cd3e"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Delimiter"
 
 [[fn]]
 path = "syn::err_unexpected_token"
 kappa = "6dd4202cb79020ff265c47eba818990fa64b51b972ef7ff339849241685a8cb2"
-embedded = "d842ebdfd28d9702c25daa1c4835ac8a1f78abc1e0c6684cdf057bb31dc504e9"
+embedded = "40e75c27c69929b32fd6ce8c518b28f19b658355ce337ea80b8337a8c73fc603"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::get_unexpected"
 kappa = "0e0e7f2312b8928add8fed22bc522a871dd6d59631b4606f412cc8f5120ae338"
-embedded = "8c8934a2f7cb78a4c3f7616b93b48fcf98310dc697c6a16c29a46cb61aac07c8"
+embedded = "17d4018883383c90088d37b19f11094b37a4fe185944a82af1dae175e3ec513c"
 status = "residue"
 cause = "mir::Ty: parse::Unexpected"
 
 [[fn]]
 path = "syn::inner_unexpected"
 kappa = "02195ab478f50d733273118797f8e84ab76f173de1b656e50da152f6b6a25a7d"
-embedded = "0b3611a99722a090399bc674a78c8fda2ba736aeaf2d3966b890f849e13dd7cc"
+embedded = "5424babd0a9f5f36d9f87e5cd8857a3d7d5c1f12dad07f6da0a664321cd37996"
 status = "residue"
 cause = "mir::Ty: parse::Unexpected"
 
 [[fn]]
 path = "syn::new_parse_buffer"
 kappa = "745d118db840681d58ef15b201caa7d36b9f751de377a37ed3258a458aae2167"
-embedded = "d834abdfc4b3c4236d05bc6d3c65798f5142b7da91512c4353b659bd78431071"
+embedded = "efc633f417f781297858a6dc9c9f741a0edbfd731a0ef7948344772a61359309"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: parse::ParseBuffer<'_>"
 
@@ -83,7 +86,7 @@ cause = "mir::Ty: parse::ParseBuffer<'_>"
 path = "syn::parse"
 kappa = "222ae08926c7b5e9a8a3c261053ca2a1d7001d33f485ae7436c722f106057750"
 at = "T=u32"
-embedded = "a9854091b81da56d74bc227b5c5f50e6d2f048d4bfd8fce5e8e593b5e9ce461a"
+embedded = "edc1de72be764515ae960ce79c2e53693aebbeae9aedb6f3c5aa9ffd06ead1dc"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -91,7 +94,7 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse2"
 kappa = "11c58828e88c0f2bc9206d2e6a52b1c3e8367af0a409f076d0034efc12663f91"
 at = "T=u32"
-embedded = "8628c25eb949026ee9d8c3f0319d80123ec72cb8b0d9c9b3e4876d5e7a0c9acd"
+embedded = "ef24f75534df3fe3f7a7039766f8616f49e246cd095bc125d3b8d01344900d46"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -99,7 +102,7 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::Box::parse"
 kappa = "9f7ee7acdd76f9e99c865cef42a9a9c0b321d27784b082b616fb0b42ff6e22d7"
 at = "T=u32"
-embedded = "f2591207b7c56c06aef7ac598b0b8b3eb0216f226dec03261bd4cb555b30e9b1"
+embedded = "756a9800eb8966d3392027de53773ce27f408aa8211933771003253f775ad17d"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -107,7 +110,7 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::F::__parse_scoped"
 kappa = "a155012315789f513e8a797331e5baca7b900b7d7d2da4270fab439b93c9fbed"
 at = "F=u32, T=u32"
-embedded = "def3ad3617423f5def46b824a126ae2b13b6979298fc4171677cae7ff8c1f6d6"
+embedded = "b661c5dc4e1f3abd7114c9fcbdc0961f0f37aa3446071d6a13a869bee3881a56"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -115,42 +118,42 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::F::parse2"
 kappa = "a127a2d063bc292ad9262a54d3b8defcc458b1a36ea0d0b3a2393681aa544ff9"
 at = "F=u32, T=u32"
-embedded = "ddc1fb54742faa3b2653560654954134b4f2c773865d6329a0748d7a1515a581"
+embedded = "eb00f48755bde54a40bb37e54135059daee650830f088086579503e5ca476f8f"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::Group::parse"
 kappa = "b935664399d0337a28a7956d760a27cbdc1d596925e6679ccc660f28ed74cd64"
-embedded = "8232aba59f86cc445c5a735f6ee900f3423a4f8a6051b7e92e728aa314b9f9be"
+embedded = "abdb0f4ad9c3691c9065f61cdffb91bff436a4c75ff81451e1de5d3e9ecce857"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Group"
 
 [[fn]]
 path = "syn::parse::Literal::parse"
 kappa = "a986434dda66fddb0860a887cc8e23fbfb72fa5be17283da0ac11dd8bf0f810f"
-embedded = "2da565b7ee83bff6ac436fe6f428298a46c403ac79a637b0517c14240861a30b"
+embedded = "27b29571774cd703a02d10b6ca05426cd206a5f4eccc84b69902f1747f7266a3"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Literal"
 
 [[fn]]
 path = "syn::parse::Nothing::clone"
 kappa = "3747cacd18e648fa85897007a6aacac8e2d5307df85d813d4860df442697d29a"
-embedded = "cc869d02ef05013b8b2f66870d396a4b6be2b014d1efd2b186c9ef26278e9ac3"
+embedded = "4e80971a86886c31c4c7bb0649f2f1d79240878f5877fb07149824c3e66104b6"
 status = "residue"
 cause = "mir::Ty: parse::Nothing"
 
 [[fn]]
 path = "syn::parse::Nothing::parse"
 kappa = "4104002208cdb4aa806d22056d1b4c604729807e208526f97153bab029c05ed1"
-embedded = "9d4b80c1f030a8a6adb12313482fae53a9233bdcaaa1066f539b3f35be282bf3"
+embedded = "984672017f17ba822e63e9057c8d1034d076eeca4ba2dcdc9d99307401503508"
 status = "residue"
 cause = "mir::Ty: parse::Nothing"
 
 [[fn]]
 path = "syn::parse::Nothing::to_tokens"
 kappa = "e161f57494b8f5a8c2b1c8ec70cb497b0ac9422a39c8a46258f284ab7bea6e24"
-embedded = "5a5a0c008b4ffb46cd14b153053cd6db5ca0068d1510f3c8bab3ef79ddb5b9bf"
+embedded = "836b97e94b6aef31f9486e1ca6491d2fa18a2c5f68ec43a7cba6cd6817a1bf2f"
 status = "residue"
 cause = "mir::Ty: Nothing"
 
@@ -158,7 +161,7 @@ cause = "mir::Ty: Nothing"
 path = "syn::parse::Option::parse"
 kappa = "47e23f2fe991abf8d66e6a5023341356a83cc5b5f35ad9669151fdcef48acd6f"
 at = "T=u32"
-embedded = "046aae5f017eeb03edeb71e2ba5cee38cb41d63e74e013e50434f3ea591b5ef1"
+embedded = "22b724ba1e6f70e8794d9945d9edbb315c20dbea85e2752ba89ce5e0d431fa1e"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -166,28 +169,28 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::ParseBuffer::call"
 kappa = "8af2ffd4b1651066d9aba8ee9ae6be9c3739e7254e1e6f55b7e19c067f33e999"
 at = "T=u32"
-embedded = "300ecba568ec577ad4aea06accd96b4eeb68294d87c2d5e6da0baa107a681efd"
+embedded = "67db53814c079b4b00522cf90e5751298dc743f6d8da7127f678bbfeb06e1aba"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::check_unexpected"
 kappa = "a6da86b2f6c12484510b950e550d81fb8c734d8b4670558197e603d1e5a0043f"
-embedded = "5cbd94867582eec548dfc3ee9cdfaebd6cfa523f24ebc83d0f12026ebda7fea2"
+embedded = "230a16fb2d41581d1a5b2f8ae17071fb9a23505e19fcef214d581d78c58dce4f"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::cursor"
 kappa = "5362009b5583bfaabced722417621d2cfd2f7a3b75d46645570438a8f5f21621"
-embedded = "e02f7abb56a9d0dad8da1206ef2eb8607c9a66f97a68b6a1fa843f7e7c37825e"
+embedded = "ce5658c38d2b9297073345b8e8b5113f859c5df561df9cee9c03f896a3d14e81"
 status = "residue"
 cause = "mir::Ty: buffer::Cursor<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::drop"
 kappa = "71dde6491d83779a4c2a0666f368d242a7fbde3c1906c70c8447d3bb13f96429"
-embedded = "c0f0baf4d340c197d981f0c9075a6a4721d88a7408e23e3573a0742345acb4fd"
+embedded = "55d768d0f2fa9bc086717d98ff7852101d4bc0444b7ded4074c5f648e4edd68d"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
@@ -195,42 +198,42 @@ cause = "mir::Ty: ParseBuffer<'_>"
 path = "syn::parse::ParseBuffer::error"
 kappa = "54612d2156df5eb3b64808116f864f7ef0b7e8c32243023b9194e06c17ef4a49"
 at = "T=u32"
-embedded = "3e8576a7d7965128430ff43bc8aa555447223edcc454f2b2d2c920f19056f6ca"
+embedded = "b54f4809b49277d30598fa10e56cf3a5533d9e7cd95022a85e056592771a5602"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::fmt"
 kappa = "d0c138ec1ed70506af327858b1d9a4191f665863ecdf98556f8d1418c5f41623"
-embedded = "a6ce59dac4297c7497760032f2600e86065b5cdc0254a610b9858fd186bd3d6c"
+embedded = "c703843ed8a1fc4c61369ecf6f7e9257390c81fb2553e0f92281d3d8c7d86b15"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::fmt#2"
 kappa = "b36090414d231166db5e77fbaa0eaf08d085094ffe2c8f8f566c02d91e318b80"
-embedded = "930917a51a96e6e30e2c9634f61de4467f2a8f9df6f63a05abfbae5c1749c49d"
+embedded = "7bdc79e293965024b2605058c3e7acbe71f8c24da2c05d21d1a509200390e1d1"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::fork"
 kappa = "57c365920f359a4413ac0067c863acb5a66dbc0ddce042807de6d37a3f48f49d"
-embedded = "8fb50277990bde40fb19d6beab0a71823cd96b63bae49c5f1d7794695217697e"
+embedded = "143f3b8c7b90adc1bba28a0419396a57a451ea7d0005ea7692dcbb40a51b9fef"
 status = "residue"
 cause = "mir::Ty: parse::ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::is_empty"
 kappa = "ef9a890a682450fbcc01b35f08911934014b88ce95d09ad1298d1dd54d23c424"
-embedded = "e374c001ff4949c455b726c46ea0e5f8c8a64690b9bc7dcdb2c7506f0412f2c1"
+embedded = "8902450a22a1b091d999e776998669702f6b2d78913c0c670dc43ef983073c0d"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::lookahead1"
 kappa = "77d7ba3a73aea0307b6787c5209b6f262c30244932cf3b79f24ee4dcc0c4db80"
-embedded = "1f1bd87bfbe7aeed4970362a4f6e645f6e63b51c85e717aaf0ef8f1aaa125ab9"
+embedded = "00ca11b3e7ff0707ad18b5c5924cedf59148572051bd61d6fac0523e1e7d6ed1"
 status = "residue"
 cause = "mir::Ty: lookahead::Lookahead1<'_>"
 
@@ -238,7 +241,7 @@ cause = "mir::Ty: lookahead::Lookahead1<'_>"
 path = "syn::parse::ParseBuffer::parse"
 kappa = "051cb3734aab99cce384b61dcb9abab8d4ba089eeaf4dd423d48e4762205c506"
 at = "T=u32"
-embedded = "9ba2379628b0acec64283273c31e04ddf3bf851664c32c347b66bb7639b4201e"
+embedded = "3be5eef360c51ba782b22308fe695019662e58f85f6196062a10a797f536369d"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -246,35 +249,35 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::ParseBuffer::parse_terminated"
 kappa = "0d57613d022981a31dd01181c13b7aad3921d8f6c92b61a4d346ed5406058bbf"
 at = "P=u32, T=u32"
-embedded = "5c7caa0221921322572078b683aff4acf0f19e972867bfb0ad1b6a5427ef0061"
+embedded = "c6779bec73ac596c7b7aff7d787bf53bfb89780445eaf6a2d2bb0b40bd522528"
 status = "residue"
 cause = "mir::Ty: punctuated::Punctuated<u32, u32>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::peek"
 kappa = "ab8de1473e5aa979afecfc418b5bebb8b0c3ff703992b14081e5fa4f3b62d71b"
-embedded = "3fae11823dd1a57e3cb62b17d0fb3409c54add0f8540876be6190ae2a20a7049"
+embedded = "f53a951bb4247272622148922eb71d35afeddc19050b88a4d99dae4a982f8f10"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::peek2"
 kappa = "961d57fee9833044054c5f4cd82e7c318b9a4f6f610ef0c4f121201270f83f58"
-embedded = "51d82ee4c701e77e6239e8b712658645ea75303f3847504e5ea8fce4827e4d3b"
+embedded = "eab56eef0577d31e6475888b318f511d4352a2c7c6270f2fa7cc0ae2a7415579"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::peek3"
 kappa = "214792667d8129323983d23835cfe6838621b1eecc3d8f9bbd13815128ba4a1c"
-embedded = "b9c2cd9387e0beb5af6c55d8375f0e64915a5a25113f8f95e1673d2801a1213d"
+embedded = "453d7c1abf3bee7ca598c51ee595f32627e3148a09aa21ba93fd30c552b388fb"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::parse::ParseBuffer::span"
 kappa = "b639fff58ac950920c988535d5e171a9250fcb311aa8ed5bfc09f0798d6b85a7"
-embedded = "892ea9ffefd89b00ead4548b0e6b9db29cdcdd2a5f55b8e9cfd5798f98780231"
+embedded = "6852a58e7fd0bcf85c509be331f3c0d003e868d7a1552d9d503d1c5a9e49a924"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Span"
 
@@ -282,28 +285,28 @@ cause = "mir::Ty: proc_macro2::Span"
 path = "syn::parse::ParseBuffer::step"
 kappa = "b15d084e67c354affd8c518501c979983ad7b08ff71ae4dfa1c0f45fd7861286"
 at = "F=u32, R=u32"
-embedded = "4935c59d80748af031f7b336ba989c29743cb7b8f857e77d744ea9721c76ec0b"
+embedded = "28da3f4969113342da8305195440360e953734a1281da0b320853852ed77478a"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::Punct::parse"
 kappa = "493f61654d9ff7bc73249a3186c6369ba7db7bc720dfd2d8c02776fa942b2695"
-embedded = "7392eb653c00e8970bfcc81bd3d9b68b7c23483e5d7c4f427990eef8564ed213"
+embedded = "08b9125ada9d60f553ca6337cb437ca6d51a16753a14f559876fecbbef019312"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Punct"
 
 [[fn]]
 path = "syn::parse::StepCursor::clone"
 kappa = "d0c08849d60974fbb7bf0f8f0e0812606e5dcf8d64fb3f43dd2aa573a9c271bd"
-embedded = "7659dad1dc3c56ca08f4fcc1ec85451b1fa3c39cf82b6d962fe2612df1a252ca"
+embedded = "12fda092d71aa4f5b65658582b066ab088e89264e2ba1cd698a16d0052cc43f4"
 status = "residue"
 cause = "mir::Ty: parse::StepCursor<'_, '_>"
 
 [[fn]]
 path = "syn::parse::StepCursor::deref"
 kappa = "d96be46847242e1b41b9c4660b9d9a6bd287607818c35f5ddfcad3673bd74b2c"
-embedded = "ba1e41d9e6d96cf0a4d053984efa9e2fb33971958da3d1e3cd9e0ee0ef7a128d"
+embedded = "416fbd90d6b525c625e8f7ec1a673addcd145778b6887f28d9c202fec951d465"
 status = "residue"
 cause = "mir::Ty: buffer::Cursor<'_>"
 
@@ -311,35 +314,35 @@ cause = "mir::Ty: buffer::Cursor<'_>"
 path = "syn::parse::StepCursor::error"
 kappa = "7a79f02ed4c736320b250c3c4a735233bf273d8d76e750ed602d9b805386d9b7"
 at = "T=u32"
-embedded = "4ad28f786d85d787823e90121b84f3739143a0e2b989503279b4206cc34a2d60"
+embedded = "030bd0a75863f68ec4c39f972162679a1cc906f37d7e93fce745ba6003165be3"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::parse::TokenStream::parse"
 kappa = "93a9513356f1aa5e6e653684c3b71faa998adeddf18360b4f33681b79813b272"
-embedded = "aa19f166909e365f2dafbbd6b3d23b4b38017cf02fa406d1170d47b203a72e26"
+embedded = "32ccb5c45287804a6d037bd8a11062ef4d81570b4042e9bdba9901c6f6f9db16"
 status = "residue"
 cause = "mir::Ty: proc_macro2::TokenStream"
 
 [[fn]]
 path = "syn::parse::TokenTree::parse"
 kappa = "636c5148bd25d645e857e71b619e1bdb5a6999c4863d5a5c200919e99a85c006"
-embedded = "78f1f7ec6e1249b9ac70bdab1bde4010aa7eef2f7edf12a88f6f32f1da4ee40f"
+embedded = "7a4dab16908ffe4c28ad8405b53a4801368756e096f40b8da89d6e0d9d3e5849"
 status = "residue"
 cause = "mir::Ty: proc_macro2::TokenTree"
 
 [[fn]]
 path = "syn::parse::Unexpected::clone"
 kappa = "6be214e163d5ca0ab6d3cef60c2b4276c2e74cab1a1e5e63baa7d9ece25fe06a"
-embedded = "bb644ca1ed33d51d05abc3db35e8b598b7a5670026dcb8c6f8098f900225be6c"
+embedded = "3163f45e3a5b9b52300494ebc6e2c5ab4582df201446473c1d33ef0d4eaa54f5"
 status = "residue"
 cause = "mir::Ty: parse::Unexpected"
 
 [[fn]]
 path = "syn::parse::Unexpected::default"
 kappa = "058707a7372a9d5f274a40e737b338f9aa4751732b7e9ca0e2542276948e92b4"
-embedded = "eaca176eb82abadc50c2fbf07a8702ea5ecbe576f1937db6b4377e3f7eefed4b"
+embedded = "52e579fcd4aad835e41370f84767745b0e35b4e3c8e18ac4acf41f0d936315fc"
 status = "residue"
 cause = "mir::Ty: parse::Unexpected"
 
@@ -347,7 +350,7 @@ cause = "mir::Ty: parse::Unexpected"
 path = "syn::parse_scoped"
 kappa = "edfc4103daa29d93102cc574810229f8dffd35419aac14364bc0acefb509081d"
 at = "F=u32"
-embedded = "74831d10254987a65fecfc4ada7bbef1a5b3e83ab2b961eea8999553936d948a"
+embedded = "2943aa17134d2d6f74ae303cf399e1b58b4f2625c6774ba2b8a9caa61df00568"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -355,35 +358,35 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse_str"
 kappa = "cf23f29b5677663f3ae90fe653e204bcda46fa9a380ee4c4f4825dea4a35640e"
 at = "T=u32"
-embedded = "750cd8d9f058793e3777304f74be9bddadb0e1d3acd813d02d9df48fa037fa6e"
+embedded = "69cd1159044eff0cccc296725ca42bdebedd150a4c85b406090d925262f7901e"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
 [[fn]]
 path = "syn::peek2"
 kappa = "a5f5b1bff161e6dfb49f5ccefbb747414215bf2931e4dfc3398ddc8a3493c3c2"
-embedded = "01fbbef7e14cebace3b4484b485ff9742dddfc33b775fe830a95edfe8ff39075"
+embedded = "8ebd157654ff54a0f9da66feabab70fa3165af0cfea200d6ef4c858fadc15692"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::peek3"
 kappa = "141d0f30b295ab996b60a8d0cb3b69ea70d96d761c7a945db38d72fbb151f377"
-embedded = "c185b11a8005789295d6ba9aa344416f0759f5ac1b8f7b11566e622f68930908"
+embedded = "a1d8dca5bf86973764807fc6b6a67ecf5e21caf7878b440a8681890a6635171c"
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
 [[fn]]
 path = "syn::span_of_unexpected_ignoring_nones"
 kappa = "06d0ec41668836b4eb659ea08a85354ebc3056e166d1fd240a945b69bef43a60"
-embedded = "20b11845451b4f8364eefcfeddff7ced6dc29d809b6b2f2e38f65e292ffbc517"
+embedded = "c41e5d9d73b0f4a0302feb6ae49f528d6ea13addf61878b196f17e6228f582cd"
 status = "residue"
 cause = "mir::Ty: proc_macro2::Span"
 
 [[fn]]
 path = "syn::tokens_to_parse_buffer"
 kappa = "653c471e5ce3c2553240e02acdf12f2f923c61e4feec10fb68cfc2b6ff39e860"
-embedded = "bc4c86c1e2920b9f08cdb14b0c04ade7c250ff367115d9ba16a471c020e9f827"
+embedded = "43050caff9fa81ea21935396eb38782fae8b6c0aa0a5c0a2da5b92953a5f492b"
 status = "residue"
 cause = "mir::Ty: parse::ParseBuffer<'_>"
 

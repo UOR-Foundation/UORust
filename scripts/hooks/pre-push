@@ -62,6 +62,21 @@ while read -r _lref lsha rref rsha; do
   if [ -n "$(git diff --name-only "$base" "$lsha" -- .github scripts app model Cargo.toml Cargo.lock)" ]; then
     packages+=(-p uorust)
   fi
+  # What those tests read: each touched package's sources, and for
+  # uorust's the workflows, scripts, app, model and manifests too. A patch
+  # that passed them on an older main is not tested again when main gained
+  # nothing it or they read (scripts/hooks/passes.py, lane-push.sh).
+  inputs=()
+  for dir in $(git diff --name-only "$base" "$lsha" -- crates | cut -d/ -f2 | sort -u); do
+    [ -f "crates/$dir/Cargo.toml" ] && inputs+=("crates/$dir/src" "crates/$dir/tests" "crates/$dir/assets" "crates/$dir/Cargo.toml")
+  done
+  if [[ " ${packages[*]} " == *" uorust "* ]]; then
+    inputs+=(crates/uorust/src crates/uorust/tests crates/uorust/assets crates/uorust/Cargo.toml .github scripts app model Cargo.toml Cargo.lock)
+  fi
+  passes="$CARGO_BUILD_BUILD_DIR/.hook-passes"
+  if [ ${#packages[@]} -gt 0 ] && python3 -I scripts/hooks/passes.py check "$passes" "$base" "$lsha" "${inputs[@]}"; then
+    packages=()
+  fi
   if [ ${#packages[@]} -gt 0 ]; then
     echo "pre-push: running the tests of ${packages[*]}, which this push touches" >&2
     # Except the lift register's freshness (engine.rs), which generate.yml
@@ -87,6 +102,7 @@ while read -r _lref lsha rref rsha; do
           "${nogit[@]}" cargo test --locked -q -p uorust "${cfg[@]}" --test engine -- --skip no_lifted_kappa_turns_unlifted_ue_16
       fi; } \
       || { echo "pre-push: cargo test ${packages[*]} fails on this push (above)" >&2; exit 1; }
+    python3 -I scripts/hooks/passes.py record "$passes" "$base" "$lsha"
   fi
   if [ -n "$(git diff --name-only "$base" "$lsha" -- crates/uorust/src/mir)" ]; then
     echo "pre-push: the push touches crates/uorust/src/mir; running the core register's ratchet on CI's MIR" >&2

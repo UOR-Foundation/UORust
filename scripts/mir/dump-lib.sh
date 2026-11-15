@@ -10,7 +10,9 @@
 # under target/, builds CRATE from it with -Zbuild-std on the pinned compiler
 # and a -Zdump-mir filter naming the module, and keeps each of CRATE's own
 # bodies' `ElaborateBoxDerefs.before` dump under OUT/MODULE with this
-# machine's paths resolved away. One build dumps every module asked for, so
+# machine's paths resolved away. Each dump prints its spans
+# (-Zmir-include-spans): a call's site is the location `Location::caller`
+# reports (crates/uorust/src/mir/site.rs). One build dumps every module asked for, so
 # a census can link each module against all the others.
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../.." && pwd)
@@ -98,7 +100,7 @@ mkdir -p "$work/mir"
   cd "$work/probe"
   __CARGO_TESTS_ONLY_SRC_ROOT="$cache/library" RUSTC_BOOTSTRAP=1 CARGO_INCREMENTAL=0 \
     CARGO_TARGET_DIR="$work/target" \
-    RUSTFLAGS="-Zdump-mir=$filter -Zdump-mir-dir=$work/mir -Coverflow-checks=on -Cdebug-assertions=off" \
+    RUSTFLAGS="-Zmir-include-spans=on -Zdump-mir=$filter -Zdump-mir-dir=$work/mir -Coverflow-checks=on -Cdebug-assertions=off" \
     cargo +"$channel" build -q -Zbuild-std="$krate" --target "$host"
 )
 rm -rf "$work/target"

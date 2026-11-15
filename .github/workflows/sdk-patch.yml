@@ -1,10 +1,8 @@
 # Publishes the patched PrismPM SDK this project pins until a PrismPM release
-# carries the fixes it needs (UOR-Foundation/PrismPM#612 and the LexLean
-# PF-26 pin, PrismPM#672). The image is the pinned SDK candidate's own layers
-# plus the `prismpm` and `lexlean` binaries built from one PrismPM revision
-# (lexlean from that revision's vendored LexLean, so the two always agree on
-# the compiler semantics) and the inventory that names them, assembled by
-# sdk-patch/assemble.py; nothing else in the SDK changes. Run it from the Actions tab; the summary prints the
+# carries the fix (UOR-Foundation/PrismPM#612, PR #613). The image is the
+# pinned SDK candidate's own layers plus the patched `prismpm` binary and the
+# inventory that names it, assembled by sdk-patch/assemble.py; nothing else in
+# the SDK changes. Run it from the Actions tab; the summary prints the
 # immutable index reference to pin in prismpm.lock.
 name: sdk-patch
 
@@ -12,9 +10,17 @@ on:
   workflow_dispatch:
     inputs:
       prismpm-revision:
-        description: PrismPM commit to build prismpm and its vendored lexlean from.
+        description: PrismPM commit to build prismpm from (the pinned SDK commit plus the fix).
         required: true
-        default: 1eb78eaa771160cce28a387d127f4a293622b277
+        default: 29b4c8b7d6467e3b9a98cce5c5fa88ddcc56bc1c
+      lexlean-repository:
+        description: The LexLean repository to build lexlean from, when lexlean-revision is given.
+        required: false
+        default: UOR-Foundation/LexLean
+      lexlean-revision:
+        description: LexLean commit to build lexlean from (the pinned lexlean plus a fix); empty keeps the SDK's own.
+        required: false
+        default: ''
       base-image:
         description: SDK candidate index the patched image extends.
         required: true
@@ -24,7 +30,7 @@ permissions: {}
 
 jobs:
   binary:
-    name: prismpm + lexlean / ${{ matrix.arch }}
+    name: prismpm / ${{ matrix.arch }}
     strategy:
       fail-fast: true
       matrix:
@@ -41,30 +47,43 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Build prismpm and lexlean at the exact revision
+      - name: Build prismpm at the exact revision
         env:
           REVISION: ${{ inputs.prismpm-revision }}
         shell: bash
         run: |
           set -euo pipefail
           [[ $REVISION =~ ^[0-9a-f]{40}$ ]]
-          # Outside this checkout, so cargo never takes UORust's workspace for
-          # the vendored LexLean's.
-          git init -q ../prismpm
-          git -C ../prismpm fetch -q --depth 1 https://github.com/UOR-Foundation/PrismPM.git "$REVISION"
-          git -C ../prismpm checkout -q FETCH_HEAD
-          cd ../prismpm
+          git init -q prismpm
+          git -C prismpm fetch -q --depth 1 https://github.com/UOR-Foundation/PrismPM.git "$REVISION"
+          git -C prismpm checkout -q FETCH_HEAD
+          cd prismpm
           cargo build --locked --release --package prismpm
-          cargo build --locked --release --manifest-path vendor/lexlean/Cargo.toml --bin lexlean --target-dir target/lexlean
+      - name: Build lexlean at the exact revision
+        if: inputs.lexlean-revision != ''
+        env:
+          REPOSITORY: ${{ inputs.lexlean-repository }}
+          REVISION: ${{ inputs.lexlean-revision }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ $REVISION =~ ^[0-9a-f]{40}$ && $REPOSITORY =~ ^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$ ]]
+          git init -q lexlean
+          git -C lexlean fetch -q --depth 1 "https://github.com/$REPOSITORY.git" "$REVISION"
+          git -C lexlean checkout -q FETCH_HEAD
+          cd lexlean
+          cargo build --locked --release --package lexlean
       - name: Assemble the patched layers
         env:
           BASE: ${{ inputs.base-image }}
           ARCH: ${{ matrix.arch }}
+          LEXLEAN: ${{ inputs.lexlean-revision }}
         shell: bash
-        run: >-
-          python3 sdk-patch/assemble.py layer "$ARCH" "$BASE" "out-$ARCH"
-          prismpm=../prismpm/target/release/prismpm
-          lexlean=../prismpm/target/lexlean/release/lexlean
+        run: |
+          set -euo pipefail
+          binaries=prismpm=prismpm/target/release/prismpm
+          if [[ -n $LEXLEAN ]]; then binaries+=,lexlean=lexlean/target/release/lexlean; fi
+          python3 sdk-patch/assemble.py layer "$ARCH" "$binaries" "$BASE" "out-$ARCH"
       - name: Keep the layers for the publish job
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

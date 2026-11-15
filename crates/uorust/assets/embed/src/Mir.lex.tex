@@ -202,6 +202,7 @@ inductive{
     {name: array, fields: []},
     {name: adt, fields: [String, Signed]},
     {name: closure, fields: [String]},
+    {name: coroutine, fields: [String]},
     {name: other, fields: [String]}
   ]
 }
@@ -312,7 +313,8 @@ inductive{
     {name: sizeOf, fields: [Generic]},
     {name: convert, fields: [Ty, Ty]},
     {name: float, fields: [Nat, Nat, String]},
-    {name: layoutQuery, fields: [String, Generic]}
+    {name: layoutQuery, fields: [String, Generic]},
+    {name: callerLocation, fields: [Layout, Nat, Nat, Nat]}
   ]
 }
 
@@ -321,6 +323,13 @@ structure{
   type_parameters: [],
   parameters: [],
   fields: [{name: value, type: Nat}, {name: target, type: Nat}]
+}
+
+structure{
+  name: Span,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: file, type: String}, {name: line, type: Nat}, {name: column, type: Nat}]
 }
 
 inductive{
@@ -333,7 +342,7 @@ inductive{
     {name: exit, fields: []},
     {name: unreachable, fields: []},
     {name: drop, fields: [Nat]},
-    {name: call, fields: [Place, Callee, (List Operand), (Option Nat)]},
+    {name: call, fields: [Place, Callee, (List Operand), (Option Nat), (Option Span)]},
     {name: assert, fields: [Operand, Bool, AssertKind, Nat]},
     {name: other, fields: [String, String]}
   ]
@@ -355,7 +364,8 @@ structure{
     {name: arity, type: Nat},
     {name: locals, type: (List Ty)},
     {name: blocks, type: (List Block)},
-    {name: entry, type: Nat}
+    {name: entry, type: Nat},
+    {name: tracked, type: (Option Bool)}
   ]
 }
 
@@ -395,7 +405,8 @@ structure{
     {name: target, type: (Option Nat)},
     {name: pinned, type: Bool},
     {name: generics, type: (List Generic)},
-    {name: exposed, type: (List Value)}
+    {name: exposed, type: (List Value)},
+    {name: caller, type: (Option Span)}
   ]
 }
 
@@ -466,6 +477,13 @@ definition{
 }
 
 definition{
+  name: signBit,
+  parameters: [bits : Nat],
+  result: Nat,
+  body: (match bits | Nat.zero => 1 | Nat.succ rest => (pow2 rest))
+}
+
+definition{
   name: wrapBits,
   parameters: [bits : Nat, value : Nat],
   result: Nat,
@@ -476,7 +494,7 @@ definition{
   name: signedOf,
   parameters: [bits : Nat, signed : Bool, repr : Nat],
   result: Signed,
-  body: (if (signed && ((pow2 (prim subtract bits 1 : Nat)) <=? repr)) then (record Signed {negative := true, magnitude := (prim subtract (pow2 bits) repr : Nat)}) else (record Signed {negative := false, magnitude := repr}))
+  body: (record Signed {negative := (match signed | Bool.true => ((signBit bits) <=? repr) | Bool.false => false), magnitude := (match signed | Bool.true => (if ((signBit bits) <=? repr) then (prim subtract (pow2 bits) repr : Nat) else repr) | Bool.false => repr)})
 }
 
 definition{
@@ -490,14 +508,14 @@ definition{
   name: fitsIn,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Bool,
-  body: (if signed then (if (project value negative) then ((project value magnitude) <=? (pow2 (prim subtract bits 1 : Nat))) else (((project value magnitude) + 1) <=? (pow2 (prim subtract bits 1 : Nat)))) else (((not (project value negative)) || ((project value magnitude) =? 0)) && (((project value magnitude) + 1) <=? (pow2 bits))))
+  body: (if signed then (if (project value negative) then ((project value magnitude) <=? (signBit bits)) else (((project value magnitude) + 1) <=? (signBit bits))) else (((not (project value negative)) || ((project value magnitude) =? 0)) && (((project value magnitude) + 1) <=? (pow2 bits))))
 }
 
 definition{
   name: signedLess,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (if (project a negative) then (if (project b negative) then (((project b magnitude) + 1) <=? (project a magnitude)) else (not (((project a magnitude) =? 0) && ((project b magnitude) =? 0)))) else (if (project b negative) then false else (((project a magnitude) + 1) <=? (project b magnitude))))
+  body: ((((project a negative) && (project b negative)) && (((project b magnitude) + 1) <=? (project a magnitude))) || ((((project a negative) && (not (project b negative))) && (not (((project a magnitude) =? 0) && ((project b magnitude) =? 0)))) || (((not (project a negative)) && (not (project b negative))) && (((project a magnitude) + 1) <=? (project b magnitude)))))
 }
 
 definition{
@@ -511,7 +529,7 @@ definition{
   name: signedAtMost,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (if (project a negative) then (if (project b negative) then ((project b magnitude) <=? (project a magnitude)) else true) else (if (project b negative) then (((project a magnitude) =? 0) && ((project b magnitude) =? 0)) else ((project a magnitude) <=? (project b magnitude))))
+  body: ((((project a negative) && (project b negative)) && ((project b magnitude) <=? (project a magnitude))) || (((project a negative) && (not (project b negative))) || ((((not (project a negative)) && (project b negative)) && (((project a magnitude) =? 0) && ((project b magnitude) =? 0))) || (((not (project a negative)) && (not (project b negative))) && ((project a magnitude) <=? (project b magnitude))))))
 }
 
 definition{
@@ -652,6 +670,53 @@ definition{
 }
 
 definition{
+  name: reprLess,
+  parameters: [bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Bool,
+  body: (match signed | Bool.true => ((((not ((signBit bits) <=? a)) && (b <? (signBit bits))) && (a <? b)) || (((signBit bits) <=? a) && ((b <? (signBit bits)) || (a <? b)))) | Bool.false => (a <? b))
+}
+
+definition{
+  name: reprAtMost,
+  parameters: [bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Bool,
+  body: (match signed | Bool.true => (not (reprLess bits true b a)) | Bool.false => (a <=? b))
+}
+
+definition{
+  name: compareRepr,
+  parameters: [op : BinOp, bits : Nat, signed : Bool, a : Nat, b : Nat],
+  result: Evaluated,
+  body: (match op
+    | BinOp.eq => (boolValue (a =? b))
+    | BinOp.ne => (boolValue (not (a =? b)))
+    | BinOp.lt => (boolValue (reprLess bits signed a b))
+    | BinOp.le => (boolValue (reprAtMost bits signed a b))
+    | BinOp.gt => (boolValue (reprLess bits signed b a))
+    | BinOp.ge => (boolValue (reprAtMost bits signed b a))
+    | BinOp.add => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.addUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.addWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.sub => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.subUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.subWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mul => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mulUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.mulWithOverflow => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.div => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.rem => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitXor => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitAnd => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.bitOr => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shl => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shlUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shr => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.shrUnchecked => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.cmp => (evalCompare op (signedOf bits signed a) (signedOf bits signed b))
+    | BinOp.offset => (evalCompare op (signedOf bits signed a) (signedOf bits signed b)))
+}
+
+definition{
   name: intValue,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Value,
@@ -702,12 +767,12 @@ definition{
     | BinOp.shlUnchecked => (if ((not (project amount negative)) && (((project amount magnitude) + 1) <=? bits)) then (ctor Evaluated.found (ctor Value.int bits signed (wrapBits bits (prim multiply a (pow2 (project amount magnitude)) : Nat)))) else (ctor Evaluated.stop (ctor Outcome.ub "an unchecked shift by the width or more")))
     | BinOp.shr => (ctor Evaluated.found (ctor Value.int bits signed (shiftRight bits signed a (prim remainder (reprOf bits amount) bits 0 : Nat))))
     | BinOp.shrUnchecked => (if ((not (project amount negative)) && (((project amount magnitude) + 1) <=? bits)) then (ctor Evaluated.found (ctor Value.int bits signed (shiftRight bits signed a (project amount magnitude)))) else (ctor Evaluated.stop (ctor Outcome.ub "an unchecked shift by the width or more")))
-    | BinOp.eq => (evalCompare op x y)
-    | BinOp.lt => (evalCompare op x y)
-    | BinOp.le => (evalCompare op x y)
-    | BinOp.ne => (evalCompare op x y)
-    | BinOp.ge => (evalCompare op x y)
-    | BinOp.gt => (evalCompare op x y)
+    | BinOp.eq => (compareRepr op bits signed a b)
+    | BinOp.lt => (compareRepr op bits signed a b)
+    | BinOp.le => (compareRepr op bits signed a b)
+    | BinOp.ne => (compareRepr op bits signed a b)
+    | BinOp.ge => (compareRepr op bits signed a b)
+    | BinOp.gt => (compareRepr op bits signed a b)
     | BinOp.cmp => (evalCompare op x y)
     | BinOp.offset => (ctor Evaluated.stop (ctor Outcome.undefined "BinOp::Offset")))))
 }
@@ -1135,7 +1200,7 @@ definition{
   name: withLocal,
   parameters: [frame : Frame, base : Nat, value : Value],
   result: Frame,
-  body: (record Frame {body := (project frame body), block := (project frame block), statement := (project frame statement), locals := (setValue (project frame locals) base value), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed)})
+  body: (record Frame {body := (project frame body), block := (project frame block), statement := (project frame statement), locals := (setValue (project frame locals) base value), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed), caller := (project frame caller)})
 }
 
 definition{
@@ -1341,6 +1406,7 @@ definition{
     | Agg.array => (ctor Evaluated.found (ctor Value.tuple values))
     | Agg.adt variant discriminant => (ctor Evaluated.found (ctor Value.adt variant discriminant values))
     | Agg.closure printed => (ctor Evaluated.found (ctor Value.tuple values))
+    | Agg.coroutine printed => (ctor Evaluated.found (ctor Value.adt "Unresumed" (record Signed {negative := false, magnitude := 0}) values))
     | Agg.other construct => (ctor Evaluated.stop (ctor Outcome.undefined construct)))
 }
 
@@ -1599,23 +1665,23 @@ definition{
 
 definition{
   name: enterFrame,
-  parameters: [callee : Body, args : (List Value), destination : Place, target : (Option Nat), pinned : Bool, generics : (List Generic)],
+  parameters: [callee : Body, args : (List Value), destination : Place, target : (Option Nat), pinned : Bool, generics : (List Generic), caller : (Option Span)],
   result: Frame,
-  body: (record Frame {body := callee, block := (project callee entry), statement := 0, locals := (cons (ctor Value.uninit) (appendValues args (uninits (prim subtract (countTys (project callee locals)) ((countValues args) + 1) : Nat)))), destination := destination, target := target, pinned := pinned, generics := generics, exposed := (nil Value)})
+  body: (record Frame {body := callee, block := (project callee entry), statement := 0, locals := (cons (ctor Value.uninit) (appendValues args (uninits (prim subtract (countTys (project callee locals)) ((countValues args) + 1) : Nat)))), destination := destination, target := target, pinned := pinned, generics := generics, exposed := (nil Value), caller := caller})
 }
 
 definition{
   name: moveTo,
   parameters: [frame : Frame, block : Nat],
   result: Frame,
-  body: (record Frame {body := (project frame body), block := block, statement := 0, locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed)})
+  body: (record Frame {body := (project frame body), block := block, statement := 0, locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed), caller := (project frame caller)})
 }
 
 definition{
   name: advanceFrame,
   parameters: [frame : Frame],
   result: Frame,
-  body: (record Frame {body := (project frame body), block := (project frame block), statement := ((project frame statement) + 1), locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed)})
+  body: (record Frame {body := (project frame body), block := (project frame block), statement := ((project frame statement) + 1), locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := (project frame exposed), caller := (project frame caller)})
 }
 
 definition{
@@ -1681,7 +1747,7 @@ definition{
   name: withExposed,
   parameters: [frame : Frame, exposed : (List Value)],
   result: Frame,
-  body: (record Frame {body := (project frame body), block := (project frame block), statement := (project frame statement), locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := exposed})
+  body: (record Frame {body := (project frame body), block := (project frame block), statement := (project frame statement), locals := (project frame locals), destination := (project frame destination), target := (project frame target), pinned := (project frame pinned), generics := (project frame generics), exposed := exposed, caller := (project frame caller)})
 }
 
 definition{
@@ -1823,14 +1889,15 @@ definition{
     generics : (List Generic),
     args : (List Operand),
     destination : Place,
-    target : (Option Nat)
+    target : (Option Nat),
+    caller : (Option Span)
   ],
   result: Outcome,
   body: (match (findBody (project program bodies) path)
     | Option.none => (ctor Outcome.unlinked path)
     | Option.some callee => (match (evalOperands program frames args)
       | EvaluatedList.stop outcome => outcome
-      | EvaluatedList.found values => (ctor Outcome.running (cons (enterFrame callee values destination target false (resolveGenerics frames generics)) frames))))
+      | EvaluatedList.found values => (ctor Outcome.running (cons (enterFrame callee values destination target false (resolveGenerics frames generics) caller) frames))))
 }
 
 definition{
@@ -1909,7 +1976,7 @@ definition{
   name: saturatedValue,
   parameters: [bits : Nat, signed : Bool, value : Signed],
   result: Value,
-  body: (if (fitsIn bits signed value) then (intValue bits signed value) else (if (project value negative) then (intValue bits signed (record Signed {negative := signed, magnitude := (if signed then (pow2 (prim subtract bits 1 : Nat)) else 0)})) else (intValue bits signed (record Signed {negative := false, magnitude := (prim subtract (if signed then (pow2 (prim subtract bits 1 : Nat)) else (pow2 bits)) 1 : Nat)}))))
+  body: (if (fitsIn bits signed value) then (intValue bits signed value) else (if (project value negative) then (intValue bits signed (record Signed {negative := signed, magnitude := (if signed then (signBit bits) else 0)})) else (intValue bits signed (record Signed {negative := false, magnitude := (prim subtract (if signed then (signBit bits) else (pow2 bits)) 1 : Nat)}))))
 }
 
 definition{
@@ -2008,7 +2075,7 @@ definition{
   body: (match mask
     | Value.int width signed bits => (match pointer
       | Value.int p q address => (ctor Evaluated.found (ctor Value.int p q (bitsAnd p address bits)))
-      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask that clears an address bit of a pointer the memory model places by its place")))
+      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "intrinsic ptr_mask: an address bit of a pointer the memory model places by its place")))
       | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
       | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
       | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
@@ -2056,16 +2123,16 @@ definition{
 
 definition{
   name: callValues,
-  parameters: [program : Program, frames : (List Frame), path : String, values : (List Value), destination : Place, target : (Option Nat)],
+  parameters: [program : Program, frames : (List Frame), path : String, values : (List Value), destination : Place, target : (Option Nat), caller : (Option Span)],
   result: Outcome,
   body: (match (findBody (project program bodies) path)
     | Option.none => (ctor Outcome.unlinked path)
-    | Option.some callee => (ctor Outcome.running (cons (enterFrame callee values destination target false (nil Generic)) frames)))
+    | Option.some callee => (ctor Outcome.running (cons (enterFrame callee values destination target false (nil Generic) caller) frames)))
 }
 
 definition{
   name: selectRuntime,
-  parameters: [program : Program, frames : (List Frame), values : (List Value), destination : Place, target : (Option Nat)],
+  parameters: [program : Program, frames : (List Frame), values : (List Value), destination : Place, target : (Option Nat), caller : (Option Span)],
   result: Outcome,
   body: (match values
     | List.nil => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")
@@ -2082,7 +2149,7 @@ definition{
           | Value.adt p q r => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")
           | Value.pointer p q r => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")
           | Value.reference p => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")
-          | Value.function path => (match (fieldsOf packed) | Option.none => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function") | Option.some args => (callValues program frames path args destination target))
+          | Value.function path => (match (fieldsOf packed) | Option.none => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function") | Option.some args => (callValues program frames path args destination target caller))
           | Value.text p => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")
           | Value.uninit => (ctor Outcome.ub "a const_eval_select without its arguments and its runtime function")))))
 }
@@ -2407,7 +2474,7 @@ definition{
         | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
         | Option.some a => (match (placeOfPointer earlier)
           | Option.none => (ctor Outcome.ub "a ptr_offset_from of a value that is not a pointer to a place")
-          | Option.some b => (if (((project a frame) =? (project b frame)) && (((project a base) =? (project b base)) && (sameSteps (leadingSteps (project a steps)) (leadingSteps (project b steps))))) then (let distance : Signed := (if ((finalStep (project b steps)) <=? (finalStep (project a steps))) then (record Signed {negative := false, magnitude := (prim subtract (finalStep (project a steps)) (finalStep (project b steps)) : Nat)}) else (record Signed {negative := true, magnitude := (prim subtract (finalStep (project b steps)) (finalStep (project a steps)) : Nat)})); (if (unsigned && (project distance negative)) then (ctor Outcome.ub "a ptr_offset_from_unsigned of a pointer before its base") else (finishCall frames destination target (ctor Value.int (project program pointerWidth) (not unsigned) (reprOf (project program pointerWidth) distance))))) else (ctor Outcome.undefined "a ptr_offset_from of pointers the evaluator does not place in one array"))))))
+          | Option.some b => (if (((project a frame) =? (project b frame)) && (((project a base) =? (project b base)) && (sameSteps (leadingSteps (project a steps)) (leadingSteps (project b steps))))) then (let distance : Signed := (if ((finalStep (project b steps)) <=? (finalStep (project a steps))) then (record Signed {negative := false, magnitude := (prim subtract (finalStep (project a steps)) (finalStep (project b steps)) : Nat)}) else (record Signed {negative := true, magnitude := (prim subtract (finalStep (project b steps)) (finalStep (project a steps)) : Nat)})); (if (unsigned && (project distance negative)) then (ctor Outcome.ub "a ptr_offset_from_unsigned of a pointer before its base") else (finishCall frames destination target (ctor Value.int (project program pointerWidth) (not unsigned) (reprOf (project program pointerWidth) distance))))) else (ctor Outcome.undefined "intrinsic ptr_offset_from, ptr_offset_from_unsigned: pointers the memory model does not place in one array"))))))
 }
 
 definition{
@@ -2415,21 +2482,21 @@ definition{
   parameters: [frames : (List Frame), data : Value, length : Nat, destination : Place, target : (Option Nat)],
   result: Outcome,
   body: (match (placeOfPointer data)
-    | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+    | Option.none => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
     | Option.some loc => (match (readAt frames loc)
-      | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+      | Option.none => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
       | Option.some pointee => (match pointee
-        | Value.int p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.unit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
-        | Value.tuple items => (if ((countValues items) =? length) then (finishCall frames destination target data) else (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")))))
+        | Value.int p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.boolean p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.unit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")
+        | Value.tuple items => (if ((countValues items) =? length) then (finishCall frames destination target data) else (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: a subrange the memory model does not place")))))
 }
 
 definition{
@@ -2443,15 +2510,15 @@ definition{
       | List.cons metadata more => (match metadata
         | Value.unit => (finishCall frames destination target data)
         | Value.int bits signed length => (wholeArrayPointer frames data length destination target)
-        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.tuple p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
-        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place"))))
+        | Value.boolean p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.tuple p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "intrinsic aggregate_raw_ptr: metadata the memory model does not place"))))
 }
 
 definition{
@@ -2461,20 +2528,20 @@ definition{
   body: (match values
     | List.nil => (ctor Outcome.ub "a vtable read of no pointer")
     | List.cons pointer rest => (match (placeOfPointer pointer)
-      | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+      | Option.none => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
       | Option.some loc => (match (readAt frames loc)
-        | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+        | Option.none => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
         | Option.some vtable => (match vtable
-          | Value.int p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.boolean p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.character p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.unit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.adt p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.pointer p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.reference p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.function p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.text p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
-          | Value.uninit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.int p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.boolean p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.character p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.unit => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.adt p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.pointer p q r => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.reference p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.function p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.text p => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
+          | Value.uninit => (ctor Outcome.undefined "intrinsic vtable_size, vtable_align: a vtable the memory model does not build")
           | Value.tuple entries => (match (nthValue entries entry)
             | Option.none => (ctor Outcome.ub "a vtable read past the vtable's entries")
             | Option.some value => (finishCall frames destination target value))))))
@@ -2482,11 +2549,11 @@ definition{
 
 definition{
   name: evalIntrinsic,
-  parameters: [program : Program, frames : (List Frame), name : String, args : (List Operand), destination : Place, target : (Option Nat)],
+  parameters: [program : Program, frames : (List Frame), name : String, args : (List Operand), destination : Place, target : (Option Nat), caller : (Option Span)],
   result: Outcome,
   body: (if (prim equal name "unreachable" : Bool) then (ctor Outcome.ub "an unreachable intrinsic reached") else (if (prim equal name "abort" : Bool) then (ctor Outcome.aborted) else (match (evalOperands program frames args)
     | EvaluatedList.stop outcome => outcome
-    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "vtable_size" : Bool) then (vtableEntry frames values 1 destination target) else (if (prim equal name "vtable_align" : Bool) then (vtableEntry frames values 2 destination target) else (if (prim equal name "aggregate_raw_ptr" : Bool) then (sliceFromParts frames values destination target) else (if (prim equal name "compare_bytes" : Bool) then (compareBytes frames values destination target) else (if (prim equal name "ptr_offset_from" : Bool) then (pointerOffset program frames values false destination target) else (if (prim equal name "ptr_offset_from_unsigned" : Bool) then (pointerOffset program frames values true destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
+    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "vtable_size" : Bool) then (vtableEntry frames values 1 destination target) else (if (prim equal name "vtable_align" : Bool) then (vtableEntry frames values 2 destination target) else (if (prim equal name "aggregate_raw_ptr" : Bool) then (sliceFromParts frames values destination target) else (if (prim equal name "compare_bytes" : Bool) then (compareBytes frames values destination target) else (if (prim equal name "ptr_offset_from" : Bool) then (pointerOffset program frames values false destination target) else (if (prim equal name "ptr_offset_from_unsigned" : Bool) then (pointerOffset program frames values true destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target caller) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
       | Option.none => (ctor Outcome.unlinked name)
       | Option.some result => (match result
         | Evaluated.stop outcome => outcome
@@ -3265,6 +3332,108 @@ definition{
 }
 
 definition{
+  name: passedCaller,
+  parameters: [frame : Frame, site : (Option Span)],
+  result: (Option Span),
+  body: (match (project (project frame body) tracked)
+    | Option.none => (ctor Option.none [Span])
+    | Option.some tracked => (if tracked then (project frame caller) else site))
+}
+
+definition{
+  name: fieldsOfLayout,
+  parameters: [layout : Layout],
+  result: (Option (List Layout)),
+  body: (match layout
+    | Layout.int size signed => (ctor Option.none [(List Layout)])
+    | Layout.boolean => (ctor Option.none [(List Layout)])
+    | Layout.character => (ctor Option.none [(List Layout)])
+    | Layout.pointer size => (ctor Option.none [(List Layout)])
+    | Layout.record size adt offsets layouts => (ctor Option.some [(List Layout)] layouts)
+    | Layout.array element count stride => (ctor Option.none [(List Layout)])
+    | Layout.enumeration size signed names discriminants => (ctor Option.none [(List Layout)])
+    | Layout.tagged size tagAt tagBytes tagSigned niche untagged lowest highest start names discriminants variants => (ctor Option.none [(List Layout)])
+    | Layout.ranged base low high => (ctor Option.none [(List Layout)]))
+}
+
+definition{
+  name: textAtLayout,
+  parameters: [fuel : Nat, layout : Layout, text : String],
+  result: (Option Value),
+  body: (match fuel
+    | Nat.zero => (ctor Option.none [Value])
+    | Nat.succ rest => (match layout
+      | Layout.int size signed => (ctor Option.none [Value])
+      | Layout.boolean => (ctor Option.none [Value])
+      | Layout.character => (ctor Option.none [Value])
+      | Layout.pointer size => (ctor Option.some [Value] (ctor Value.text text))
+      | Layout.record size adt offsets layouts => (match layouts
+        | List.nil => (ctor Option.none [Value])
+        | List.cons only others => (match others
+          | List.cons next more => (ctor Option.none [Value])
+          | List.nil => (match (textAtLayout rest only text)
+            | Option.none => (ctor Option.none [Value])
+            | Option.some inner => (ctor Option.some [Value] (ctor Value.adt "" (record Signed {negative := false, magnitude := 0}) (cons inner (nil Value)))))))
+      | Layout.array element count stride => (ctor Option.none [Value])
+      | Layout.enumeration size signed names discriminants => (ctor Option.none [Value])
+      | Layout.tagged size tagAt tagBytes tagSigned niche untagged lowest highest start names discriminants variants => (ctor Option.none [Value])
+      | Layout.ranged base low high => (textAtLayout rest base text))),
+  recursive_argument: fuel
+}
+
+definition{
+  name: numberAtLayout,
+  parameters: [layout : Layout, n : Nat],
+  result: (Option Value),
+  body: (match layout
+    | Layout.int size signed => (let bits : Nat := (prim multiply 8 size : Nat); (if ((n + 1) <=? (if signed then (signBit bits) else (pow2 bits))) then (ctor Option.some [Value] (ctor Value.int bits signed n)) else (ctor Option.none [Value])))
+    | Layout.boolean => (ctor Option.none [Value])
+    | Layout.character => (ctor Option.none [Value])
+    | Layout.pointer size => (ctor Option.none [Value])
+    | Layout.record size adt offsets layouts => (ctor Option.none [Value])
+    | Layout.array element count stride => (ctor Option.none [Value])
+    | Layout.enumeration size signed names discriminants => (ctor Option.none [Value])
+    | Layout.tagged size tagAt tagBytes tagSigned niche untagged lowest highest start names discriminants variants => (ctor Option.none [Value])
+    | Layout.ranged base low high => (ctor Option.none [Value]))
+}
+
+definition{
+  name: emptyAtLayout,
+  parameters: [layout : Layout],
+  result: (Option Value),
+  body: (match (fieldsOfLayout layout)
+    | Option.none => (ctor Option.none [Value])
+    | Option.some layouts => (match layouts
+      | List.nil => (if ((layoutSize layout) =? 0) then (ctor Option.some [Value] (ctor Value.adt "" (record Signed {negative := false, magnitude := 0}) (nil Value))) else (ctor Option.none [Value]))
+      | List.cons head rest => (ctor Option.none [Value])))
+}
+
+definition{
+  name: locationFields,
+  parameters: [fuel : Nat, layouts : (List Layout), index : Nat, fileAt : Nat, lineAt : Nat, columnAt : Nat, span : Span],
+  result: (Option (List Value)),
+  body: (match layouts
+    | List.nil => (ctor Option.some [(List Value)] (nil Value))
+    | List.cons head rest => (match (if (index =? fileAt) then (textAtLayout fuel head (project span file)) else (if (index =? lineAt) then (numberAtLayout head (project span line)) else (if (index =? columnAt) then (numberAtLayout head (project span column)) else (emptyAtLayout head))))
+      | Option.none => (ctor Option.none [(List Value)])
+      | Option.some value => (match (locationFields fuel rest (index + 1) fileAt lineAt columnAt span)
+        | Option.none => (ctor Option.none [(List Value)])
+        | Option.some values => (ctor Option.some [(List Value)] (cons value values))))),
+  recursive_argument: layouts
+}
+
+definition{
+  name: locationValue,
+  parameters: [fuel : Nat, layout : Layout, fileAt : Nat, lineAt : Nat, columnAt : Nat, span : Span],
+  result: (Option Value),
+  body: (match (fieldsOfLayout layout)
+    | Option.none => (ctor Option.none [Value])
+    | Option.some layouts => (match (locationFields fuel layouts 0 fileAt lineAt columnAt span)
+      | Option.none => (ctor Option.none [Value])
+      | Option.some values => (ctor Option.some [Value] (ctor Value.adt "" (record Signed {negative := false, magnitude := 0}) values))))
+}
+
+definition{
   name: evalCall,
   parameters: [
     fuel : Nat,
@@ -3273,19 +3442,20 @@ definition{
     callee : Callee,
     args : (List Operand),
     destination : Place,
-    target : (Option Nat)
+    target : (Option Nat),
+    caller : (Option Span)
   ],
   result: Outcome,
   body: (match callee
-    | Callee.body path => (callBody program frames path (nil Generic) args destination target)
-    | Callee.instance path generics => (callBody program frames path generics args destination target)
+    | Callee.body path => (callBody program frames path (nil Generic) args destination target caller)
+    | Callee.instance path generics => (callBody program frames path generics args destination target caller)
     | Callee.sizeOf generic => (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
       | Option.some layout => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false (layoutSize layout))))
     | Callee.operand op => (match (evalOperand program frames op)
       | Evaluated.stop outcome => outcome
       | Evaluated.found value => (match value
-        | Value.function path => (callBody program frames path (nil Generic) args destination target)
+        | Value.function path => (callBody program frames path (nil Generic) args destination target caller)
         | Value.int p q r => (ctor Outcome.undefined "TerminatorKind::Call of a value that is not a function item")
         | Value.boolean p => (ctor Outcome.ub "a call of a value that is not a function")
         | Value.character p => (ctor Outcome.ub "a call of a value that is not a function")
@@ -3297,12 +3467,17 @@ definition{
         | Value.text p => (ctor Outcome.ub "a call of a value that is not a function")
         | Value.uninit => (ctor Outcome.ub "a call of an uninitialized value")))
     | Callee.bound name => (match (findBinding (project program dictionary) name)
-      | Option.some path => (callBody program frames path (nil Generic) args destination target)
+      | Option.some path => (callBody program frames path (nil Generic) args destination target caller)
       | Option.none => (ctor Outcome.unlinked name))
-    | Callee.intrinsic name => (evalIntrinsic program frames name args destination target)
+    | Callee.intrinsic name => (evalIntrinsic program frames name args destination target caller)
+    | Callee.callerLocation layout fileAt lineAt columnAt => (match caller
+      | Option.none => (ctor Outcome.undefined "a caller location at a call site the dump does not place")
+      | Option.some span => (match (locationValue fuel layout fileAt lineAt columnAt span)
+        | Option.none => (ctor Outcome.undefined "a Location of a layout the evaluator does not build")
+        | Option.some location => (finishCall frames destination target (ctor Value.reference location))))
     | Callee.constant path generics => (match (findBody (project program bodies) path)
       | Option.none => (ctor Outcome.unlinked path)
-      | Option.some item => (ctor Outcome.running (cons (enterFrame item (nil Value) destination target true (resolveGenerics frames generics)) frames)))
+      | Option.some item => (ctor Outcome.running (cons (enterFrame item (nil Value) destination target true (resolveGenerics frames generics) caller) frames)))
     | Callee.layoutQuery query generic => (if (prim equal query "align_of" : Bool) then (match (genericAlign frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose alignment the layout table does not hold")
       | Option.some align => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false align))) else (if (prim equal query "assert_inhabited" : Bool) then (match (genericLayout frames generic)
@@ -3393,7 +3568,7 @@ definition{
     | Terminator.exit => (evalReturn fuel frames)
     | Terminator.unreachable => (ctor Outcome.ub "an unreachable terminator reached")
     | Terminator.drop block => (ctor Outcome.running (replaceTop frames (moveTo frame block)))
-    | Terminator.call destination callee args target => (evalCall fuel program frames callee args destination target)
+    | Terminator.call destination callee args target site => (evalCall fuel program frames callee args destination target (passedCaller frame site))
     | Terminator.assert condition expected kind block => (match (evalOperand program frames condition)
       | Evaluated.stop outcome => outcome
       | Evaluated.found value => (match value
@@ -3517,7 +3692,7 @@ definition{
   name: globalsFrame,
   parameters: [count : Nat],
   result: Frame,
-  body: (record Frame {body := (record Body {path := "", arity := 0, locals := (nil Ty), blocks := (nil Block), entry := 0}), block := 0, statement := 0, locals := (uninits count), destination := (record Place {base := 0, projection := (nil Proj)}), target := (ctor Option.none [Nat]), pinned := false, generics := (nil Generic), exposed := (nil Value)})
+  body: (record Frame {body := (record Body {path := "", arity := 0, locals := (nil Ty), blocks := (nil Block), entry := 0, tracked := (ctor Option.some [Bool] false)}), block := 0, statement := 0, locals := (uninits count), destination := (record Place {base := 0, projection := (nil Proj)}), target := (ctor Option.none [Nat]), pinned := false, generics := (nil Generic), exposed := (nil Value), caller := (ctor Option.none [Span])})
 }
 
 definition{
@@ -3526,7 +3701,7 @@ definition{
   result: Outcome,
   body: (match (findBody (project program bodies) path)
     | Option.none => (ctor Outcome.unlinked path)
-    | Option.some callee => (runFrames fuel program (cons (enterFrame callee args (record Place {base := 0, projection := (nil Proj)}) (ctor Option.none [Nat]) false (nil Generic)) (cons (globalsFrame (project program globals)) (nil Frame)))))
+    | Option.some callee => (runFrames fuel program (cons (enterFrame callee args (record Place {base := 0, projection := (nil Proj)}) (ctor Option.none [Nat]) false (nil Generic) (ctor Option.none [Span])) (cons (globalsFrame (project program globals)) (nil Frame)))))
 }
 \end{semanticmodule}
 \end{lexlean}

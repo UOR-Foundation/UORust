@@ -3452,11 +3452,15 @@ impl Fun<'_, '_> {
             .chain(segs.iter().map(String::as_str))
             .collect();
         let name = crate::lex::camel(&parts);
-        if self.cx.active.contains(&name) {
+        // A constant is active by its path too: its name holds the name
+        // of the body that reads it, which grows as constants nest.
+        let marker = format!("\u{0}{path}");
+        if self.cx.active.contains(&name) || self.cx.active.contains(&marker) {
             return Err(kind(k, &format!("{path}, which refers to itself")));
         }
         let mut active = self.cx.active.to_vec();
         active.push(name.clone());
+        active.push(marker);
         let cx = self.cx.within(&active);
         let lowered =
             lower(&cx, body, &name).map_err(|r| kind(k, &format!("{path}: {}", r.detail())))?;
@@ -5040,7 +5044,9 @@ impl Fun<'_, '_> {
                 }
                 Ok(lift::struct_value(n, &parts, self.cx.types))
             }
-            (IrAggregate::Other(a), _) => Err(kind(a.path(), "")),
+            (IrAggregate::Coroutine(_), _) => {
+                Err(kind(spec::MirAggregateKind::Coroutine.path(), ""))
+            }
             (IrAggregate::Closure(_), _) => Err(kind(
                 spec::MirAggregateKind::Closure.path(),
                 "a closure built where its type is not a function",

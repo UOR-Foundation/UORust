@@ -19,9 +19,10 @@ two κ and applies the same rule to the ledger file:
 
     python3 -I scripts/mir/ledger.py stale REGISTER MODULES.json
     python3 -I scripts/mir/ledger.py record REGISTER SHARDS_DIR
-    python3 -I scripts/mir/ledger.py rank-count REGISTERS BUDGET_SECONDS
-    python3 -I scripts/mir/ledger.py plan-crates REGISTERS RANKED.json EVENT BUDGET_SECONDS
+    python3 -I scripts/mir/ledger.py rank-count REGISTERS BUDGET_SECONDS SHARDS JOBS
+    python3 -I scripts/mir/ledger.py plan-crates REGISTERS RANKED.json EVENT BUDGET_SECONDS SHARDS JOBS
     python3 -I scripts/mir/ledger.py record-crates REGISTERS TIMES_DIR
+    python3 -I scripts/mir/ledger.py crate-line REGISTERS NAME
     python3 -I scripts/mir/ledger.py mir-key
 
 `mir-key` prints the key a library's MIR dump is kept under, as a CI
@@ -162,41 +163,53 @@ def estimate(registers):
     return lambda name: by_name.get(name, mean)
 
 
-def plan_crates(registers, ranked, push, budget):
+def plan_crates(registers, ranked, push, budget, shards, jobs):
     """The crates a run lifts, one shard each: on a push, the held crates
     whose attempt is stale; otherwise those first, then the ranking's crates
-    the ledger has not attempted, in rank order, while the expected seconds
-    of them all fit `budget`. With nothing measured, one new crate is taken,
-    whose attempt then measures the rest."""
+    the ledger has not attempted, in rank order. `budget` is one shard's
+    seconds and `shards` how many run at once, so the run holds
+    `budget * shards` seconds of runner time, about one shard stage of wall
+    time, and at most `jobs` shards (GitHub's matrix cap). A new crate is
+    taken while the expected seconds of them all fit; one expected to
+    outrun its own shard's budget is passed over, as its shard would time
+    out. With nothing measured, one new crate is taken, whose attempt then
+    measures the rest."""
     ledger = read_ledger(registers)
     held = held_crates(registers)
     take = lambda c: current(registers, f"{c['name']}@{c['version']}") not in ledger
     old = [c for c in ({"name": n, "version": v} for n, v in sorted(held.items())) if take(c)]
     if push:
-        return old
+        return old[:jobs]
     expect = estimate(registers)
+    capacity = budget * shards
     spent = sum(expect(c["name"]) or 0 for c in old)
-    out = list(old)
+    out = list(old[:jobs])
     for c in ranked:
+        if len(out) >= jobs:
+            break
         if c["name"] in held or not take(c):
             continue
         cost = expect(c["name"])
         if cost is None:
             return out + [c]
-        if spent + cost > budget:
+        if cost > budget:
+            continue
+        if spent + cost > capacity:
             break
         spent += cost
         out.append(c)
     return out
 
 
-def rank_count(registers, budget):
+def rank_count(registers, budget, shards, jobs):
     """How many of the ranking a plan can read from: every crate the ledger
-    attempted, and as many more as `budget` holds at the fastest measured
-    attempt (one, with nothing measured)."""
+    attempted, and as many more as the run holds (`budget * shards` at the
+    fastest measured attempt, and no more than `jobs`; one, with nothing
+    measured)."""
     attempted = {m.partition("@")[0] for m, _t, _c in read_ledger(registers)}
     measured = [t for t in read_seconds(registers).values() if t > 0]
-    return len(attempted) + (int(budget // min(measured)) if measured else 1)
+    more = min(int(budget * shards // min(measured)), jobs) if measured else 1
+    return len(attempted) + more
 
 
 cmd = sys.argv[1]
@@ -211,10 +224,11 @@ elif cmd == "record":
     record(register, names)
     print(f"ledger: {len(names)} attempts recorded in {ledger_path(register)}")
 elif cmd == "rank-count":
-    print(rank_count(sys.argv[2], float(sys.argv[3])))
+    print(rank_count(sys.argv[2], float(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5])))
 elif cmd == "plan-crates":
     registers, ranked, event, budget = sys.argv[2], json.load(open(sys.argv[3])), sys.argv[4], float(sys.argv[5])
-    print(json.dumps(plan_crates(registers, ranked, event == "push", budget)))
+    shards, jobs = int(sys.argv[6]), int(sys.argv[7])
+    print(json.dumps(plan_crates(registers, ranked, event == "push", budget, shards, jobs)))
 elif cmd == "record-crates":
     # TIMES holds a file per attempt the shards made, named <name>@<version>
     # and holding the seconds it took; a crate that did not build is an
@@ -224,6 +238,17 @@ elif cmd == "record-crates":
                for f in (os.listdir(times) if os.path.isdir(times) else []) if "@" in f}
     record(registers, sorted(seconds), seconds)
     print(f"ledger: {len(seconds)} attempts recorded in {ledger_path(registers)}")
+elif cmd == "crate-line":
+    # A crate's register in a line of the run's summary: its translation,
+    # its embedding and the differential check of it.
+    import tomllib
+    name = sys.argv[3]
+    doc = tomllib.load(open(os.path.join(sys.argv[2], name, "frontier.toml"), "rb"))
+    e, d = doc.get("embedding", {}), doc.get("differential", {})
+    print(f"- {name}: {doc.get('translated', 0)} of {doc.get('bodies', 0)} bodies translated, "
+          f"{e.get('embedded', 0)} of {e.get('bodies', 0)} bodies embedded, {e.get('evaluable', 0)} evaluable, "
+          f"{e.get('blocked', 0)} blocked, {d.get('bodies', 0)} checked against rustc's build by "
+          f"{d.get('theorems', 0)} theorems")
 elif cmd == "mir-key":
     print(mir_key())
 else:

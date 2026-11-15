@@ -2,7 +2,7 @@
 path = "rand_core::SeedableRng::fork"
 kappa = "d9dd8c233f9fe2534e25edec117e0b990192ea0ed76686e80511ee9e92f47648"
 at = "Self=u32"
-embedded = "7c9eb4c3c181198e4354a4c58572529eb61a96c0fc760c1947a03618779af41c"
+embedded = "2012070d6ee60cbf6dc5bd54ab7fbd08097aeb6049d2f9fc9803e36df323901b"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by SeedableRng, which u32 does not implement in core"
 
@@ -10,7 +10,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by SeedableRng, which u
 path = "rand_core::SeedableRng::from_rng"
 kappa = "fa055b3dca375429277a8e79aac7f553fb2a7acbea1ccaa8f627a935b2a385f8"
 at = "R=u32, Self=u32"
-embedded = "f020161a449cfe6eaacbda102289d357211c5bb85c4545d64c2ce29aa4aacba2"
+embedded = "8c7e2fbeb30f85403f2e3edad1f0fe1a04b56c9ad58b87dea42fafe92683742e"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
 
@@ -18,7 +18,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 d
 path = "rand_core::SeedableRng::seed_from_u64"
 kappa = "4626d1a0852657929f4d3b091fd0893c4ea8fc7c5606f22d3880a0734f8781c9"
 at = "Self=u32"
-embedded = "26370aa95230647dd26125599aab4c2fc9486dc53bb3bdc7dc21b58a08525fe3"
+embedded = "01ff7c27960e6e3d444023cc7cada3d526df12ac5fc6ffbf7e007a714b730a2f"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
 
@@ -26,7 +26,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 d
 path = "rand_core::SeedableRng::try_fork"
 kappa = "f792f0470d4ebb77a9312e363fc41c99d226b361210a5ef97fc97bcf17c4c130"
 at = "Self=u32"
-embedded = "76391bf171083a35e0ee3d5fd45e9ffc06c5ce72853b816f4c739481341951c2"
+embedded = "e4aff06195e5671b8ea7b5b6163b6e516dd698c2279a441941b21a95fe977396"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by SeedableRng, which u32 does not implement in core"
 
@@ -34,14 +34,14 @@ cause = "mir::Instantiation: u32 for a parameter bounded by SeedableRng, which u
 path = "rand_core::SeedableRng::try_from_rng"
 kappa = "2a80ed947e0303808125074684c402e0bb2768df4836fd2f9da43358b4641cc9"
 at = "R=u32, Self=u32"
-embedded = "94b313f1b647eb207c48b280e74b713ba1936b133a2dd20bc26daf94e155f486"
+embedded = "e74b746f9f05ed809fe3b89b25c11634e61454652e29ad7ecbd94fb5492089e9"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
 
 [[fn]]
 path = "rand_core::pcg32"
 kappa = "856bbe1e8e01ef566db04d15168f4a31dc5e028b13531af8e04f4e719fe7ee53"
-embedded = "4fc968e07262c3c2fc926d362b8bf78e0ff44a4c57c64922546b2801742253f9"
+embedded = "b5ecd5b160495a4bb60ca5a78e8044af4669b1f16ce7b0ae13b94fc88774d768"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item seedable_rng::pcg32::MUL"
 

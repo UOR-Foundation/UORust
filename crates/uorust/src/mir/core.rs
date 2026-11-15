@@ -186,7 +186,7 @@ pub fn census(
                 .and_then(|n| n.to_str())
                 .unwrap_or_default()
                 .to_string();
-            dumps.push((name, crate::embed::read_text(file)?));
+            dumps.push((name, crate::embed::read_plain_dump(file)?));
         }
         read.push((module, dumps));
     }
@@ -2238,6 +2238,46 @@ pub fn summarize_core_register(dir: &Path) -> Result<(), UorustError> {
     summarize_register(&Scope::core(super::spec::TOOLCHAIN), dir)
 }
 
+/// The paths of the rows of the register `dir` that the embedding did not
+/// stamp: the bodies the rows record whose κ no row embeds.
+pub fn unembedded(dir: &Path) -> Result<Vec<String>, UorustError> {
+    let mut embedded = BTreeSet::new();
+    let mut rows = Vec::new();
+    for file in crate::embed::dir_paths(dir)? {
+        let module = file
+            .file_stem()
+            .and_then(|n| n.to_str())
+            .unwrap_or_default();
+        if file.extension().is_none_or(|x| x != "toml")
+            || module == "frontier"
+            || module == crate::queue::RETRACTED
+        {
+            continue;
+        }
+        let doc: toml::Table = crate::embed::read_text(&file)?
+            .parse()
+            .map_err(|e| UorustError::Tool(format!("{}: {e}", file.display())))?;
+        for row in doc
+            .get("fn")
+            .and_then(toml::Value::as_array)
+            .into_iter()
+            .flatten()
+        {
+            let field = |k: &str| row.get(k).and_then(toml::Value::as_str).unwrap_or("");
+            if field("embedded").is_empty() {
+                rows.push((field("kappa").to_string(), field("path").to_string()));
+            } else {
+                embedded.insert(field("kappa").to_string());
+            }
+        }
+    }
+    Ok(rows
+        .into_iter()
+        .filter(|(k, _)| !embedded.contains(k))
+        .map(|(_, p)| p)
+        .collect())
+}
+
 /// The `frontier.toml` of the register `dir` of the crate `scope` names.
 pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> {
     let (krate, source, command) = (&scope.krate, &scope.source, &scope.command);
@@ -2259,6 +2299,12 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
     // reaches) record it, so each κ counts once, blocked by the union of
     // the constructs its rows name.
     let mut census: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+    // Every body the rows record, by κ, embedded or not: the embedding's
+    // whole, which a register the embedding stamped embeds all of.
+    let mut kappas: BTreeSet<String> = BTreeSet::new();
+    // The differential check's, by κ: the theorems verified of each body
+    // it ran.
+    let mut checked: BTreeMap<String, i64> = BTreeMap::new();
     // The bridge's, by κ: proved, or pending at the shape that stopped it.
     let mut bridge: BTreeMap<String, Option<String>> = BTreeMap::new();
     for file in files {
@@ -2274,6 +2320,10 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
         let mut translated = 0;
         for row in &rows {
             let field = |k: &str| row.get(k).and_then(toml::Value::as_str).unwrap_or("");
+            kappas.insert(field("kappa").to_string());
+            if let Some(n) = row.get("differential").and_then(toml::Value::as_integer) {
+                checked.insert(field("kappa").to_string(), n);
+            }
             if !field("embedded").is_empty() {
                 let blocked = census.entry(field("kappa").to_string()).or_default();
                 for b in row
@@ -2347,7 +2397,8 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
         }
         let _ = writeln!(
             summary,
-            "[embedding]\nembedded = {embedded}\nevaluable = {evaluable}\nblocked = {}\n",
+            "[embedding]\nbodies = {}\nembedded = {embedded}\nevaluable = {evaluable}\nblocked = {}\n",
+            kappas.len(),
             embedded - evaluable
         );
         let mut queue: Vec<(&str, usize)> = blocking.into_iter().collect();
@@ -2359,6 +2410,16 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
                 toml_quote(construct)
             );
         }
+    }
+    // The differential check's count: the bodies whose embedding rustc's
+    // build of the crate agrees with, and the theorems that say so.
+    if !checked.is_empty() {
+        let _ = writeln!(
+            summary,
+            "[differential]\nbodies = {}\ntheorems = {}\n",
+            checked.len(),
+            checked.values().sum::<i64>()
+        );
     }
     // The bridge's count and its queue: the shapes that stop a translated
     // body's theorem, by the bodies each stops.
@@ -2532,7 +2593,8 @@ mod tests {
     /// The summary counts the embedding by κ: two modules' rows of one κ
     /// (the num shard and the f32 shard reaching one body) and two rows of
     /// one κ in a module (a macro's impls of one text) are one body, blocked
-    /// by the union of the constructs its rows name.
+    /// by the union of the constructs its rows name; its `bodies` are every
+    /// κ the rows record, a row the embedding did not stamp among them.
     #[test]
     fn the_embeddings_summary_counts_each_kappa_once() {
         let dir = std::env::temp_dir().join(format!("uorust-census-{}", std::process::id()));
@@ -2563,6 +2625,10 @@ mod tests {
                 &["intrinsic fabs", "CastKind::IntToFloat"],
             ),
             row("core::f32::d", "d", &["CastKind::IntToFloat"]),
+            // A row the embedding did not stamp: a body of the whole that
+            // is not embedded.
+            "[[fn]]\npath = \"core::f32::e\"\nkappa = \"e\"\nstatus = \"residue\"\ncause = \"c\"\n\n"
+                .to_string(),
         ]
         .concat();
         std::fs::write(dir.join("num.toml"), num).unwrap();
@@ -2574,6 +2640,7 @@ mod tests {
             .unwrap();
         let _ = std::fs::remove_dir_all(&dir);
         let embedding = doc["embedding"].as_table().unwrap();
+        assert_eq!(embedding["bodies"].as_integer(), Some(5));
         assert_eq!(embedding["embedded"].as_integer(), Some(4));
         assert_eq!(embedding["evaluable"].as_integer(), Some(2));
         assert_eq!(embedding["blocked"].as_integer(), Some(2));

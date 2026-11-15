@@ -1,28 +1,28 @@
 [[fn]]
 path = "rand_chacha::BLOCK64"
 kappa = "843a15324cbb14d8bfc12f83a0054d4908f5fead61d294adddbfd0e0ebf10144"
-embedded = "d4f26f9bc5895cd00d11073f889fe38b853bd9fa70124428bc271b6c5fc8e458"
+embedded = "e09e04d3ca218a59fdafd280eb0e2d3a64dd0a6b863ae11e62009d1174c9b56a"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item guts::BLOCK"
 
 [[fn]]
 path = "rand_chacha::BUFBLOCKS"
 kappa = "29bf0c82ea4f61417867016eaf014f042e433bca633d489acb05f3cb66e820b5"
-embedded = "c0df88909a55e7b133940b01626b4fde78c87e3536ffb53233d66d976c04365c"
+embedded = "22b397d7d874a67861ea8f97764306cc4df6263e90857aac0811cf43b6af5e55"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item guts::LOG2_BUFBLOCKS"
 
 [[fn]]
 path = "rand_chacha::BUFSZ"
 kappa = "3e6c4535140dfc1ddac58c8b90368d0082ec0f4b7ae96bf8aedb67b1aff5f4e5"
-embedded = "13af425599c5ce0d9eddc1742a7653ea714771ac29d628ae91f294e65b08273b"
+embedded = "438fe3df5479f91487c5df6d16015c2f696b15a24e26d197b6dc95510780883d"
 status = "residue"
 cause = "mir::Operand::Constant: guts::BUFSZ64: mir::Operand::Constant: guts::BLOCK64: mir::Operand::Constant: the constant item guts::BLOCK"
 
 [[fn]]
 path = "rand_chacha::BUFSZ64"
 kappa = "4502587ed87707652040d3fcbcdca0d279462882b58bf2cf9515873c6cfe8119"
-embedded = "f57bbf721fa274a5066b6da82b952811396fa96058798762ba0e844ba0464076"
+embedded = "8dfac143ee339ceec130ea83acde70966344780729d16ce6f3ccd1da5b0f40a1"
 status = "residue"
 cause = "mir::Operand::Constant: guts::BLOCK64: mir::Operand::Constant: the constant item guts::BLOCK"
 
@@ -30,7 +30,7 @@ cause = "mir::Operand::Constant: guts::BLOCK64: mir::Operand::Constant: the cons
 path = "rand_chacha::add_pos"
 kappa = "bf5b60fc132c2723d2c430c491324dec88227ea3fe70c6d9fc31c19a53562d69"
 at = "Mach=u32"
-embedded = "149d6864644963e07862c5e1c6b3dca521c9abfb33da66694a95d613e91c27cf"
+embedded = "bd90b49c39d8feefa367010dd40160e03f27ee085d7fdc84cd94ceff8dba661c"
 status = "residue"
 cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4"
 
@@ -38,7 +38,7 @@ cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4"
 path = "rand_chacha::d0123"
 kappa = "3fe6443677edbe3330c495c6a71527c0442738910481ba99ae98d3ce040959e2"
 at = "Mach=u32"
-embedded = "abe449c560a7e888827cf151811b5077d7af081dab3f538c32a43a19cec2a3fc"
+embedded = "feaf31fca841020384f00f2ac775f8822b055b49ad6bd135448151f3d2bf34e9"
 status = "residue"
 cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4x4"
 
@@ -46,14 +46,14 @@ cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4x4"
 path = "rand_chacha::diagonalize"
 kappa = "08d9e79280ae6a7a701e54f9bf38fbf3aea1571336de1f67b7cfec262d8b6f70"
 at = "V=u32"
-embedded = "8f8e90fb0fba8f690a405287ef2645f0b85fe1c8eb73a9836fb5bcd3475c99dc"
+embedded = "a2a1acf8d041db51acbf82f0de40a81d4d2455ecb54f0a66296876ab660bb0a5"
 status = "residue"
 cause = "mir::Ty: guts::State<u32>"
 
 [[fn]]
 path = "rand_chacha::get_seed"
 kappa = "eb617703f27ee6083a42970a9eb4391c94a81dace2036f7c40b1645aa55e8d32"
-embedded = "d4ac6a99c2899b8009ef82fffd711310168abb5e6d68314c2c4f8536e26b4fe9"
+embedded = "7d725f4ea4f5ac38b0584a962a61ec419691deb90b70dce650ea18bdc5d07653"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -61,28 +61,28 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::get_seed::fn_impl"
 kappa = "5ebe7b7bc58d7f435b765e84409c0d1ec0abe9585f1022317de19cccb4e96990"
 at = "Mach=u32"
-embedded = "0d61c734cec66840e303a0aac74b6c4c060cecc03eb5dc8e6ca16fe22edfeecd"
+embedded = "81457e74008d38ccc3e24fcfda5f25f7fa4d5f0e451513a7dba934a9987f9cd0"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::get_seed::impl_avx"
 kappa = "f8265932169335fdc35f90a91eeb0927142ed279f06a6100d7d8e0250927014b"
-embedded = "3901276b2a07e00e5ad0733c354df7e9c7cdbf20c64cfab3cd83f8eae33dc475"
+embedded = "d643d5a65cf89291f236ccdb759a577394f244a721299f86113d536156919d29"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::get_seed::impl_sse2"
 kappa = "f66287e8d40d4eeae3d3065e84dcf3d8dd1d8a02d6e3746c8e3b4f435292ff70"
-embedded = "c4dba50455b325fa4732b2ce5b79e58f71ee910201de5748758dae2d68c02440"
+embedded = "13b3b8744aaf6cd92f02b053f05dcd53412c13b699dfa85a9427b5f9bf17572b"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::get_stream_param"
 kappa = "159a3554d0319a717e099fbf98827ba7d1da8ff825118a74d840d3c6b03eefd8"
-embedded = "f95a1fe0a40a6796b0e978f8a1f3cf9ab3915c7107fa9d10c0ae0d3acd7a9d82"
+embedded = "bc1e6f8745e947ed106a190b3c6f7ae9a8464d5bfef3a7a3e0b87916e9c21b1e"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -90,42 +90,42 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::get_stream_param::fn_impl"
 kappa = "047569680e5e41bac53c5bb2d7472f352bdf568f044bf034e9526de4a4d5f7c4"
 at = "Mach=u32"
-embedded = "4864ac2b8019df9df9c5272d325498d995deb95a4740b6051f2f3ea4e4a99d07"
+embedded = "320cb362a2cd0c206a0820748ef38fc3fb22be29f4415b167bcddb81615c094d"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::get_stream_param::impl_avx"
 kappa = "939d9732bfd7160d1e3d6a765148b75d23a5e3de875d7a52369c8ad3048316a3"
-embedded = "2727854b71b9cc90cac05968b90b09a861569f3b476fea011f4c78718085e41e"
+embedded = "6804af2c788b4175bc68dff11492145a2b00f94f8e9c6a0cc889ba127aede424"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::get_stream_param::impl_sse2"
 kappa = "d2e3025a348d30ed44304f38a91fffc8fc8f582fd7777b6385905c0a885ed247"
-embedded = "58e919edd46d35d19216c67644e1593e896ff9f01ce0eb2a57d2257396e803e9"
+embedded = "19a9fd9505e4ff99ae385c96bdc4b104509d4dc2807373e90360a88167b1312f"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::<impl at src/guts.rs:29:10: 29:15>::clone"
 kappa = "6fdbcf2c10936e8cd21a32d6215f0cbd79387843a6bb48391bb51754f969e7ec"
-embedded = "58ed105552be2ca8ca0622dffede156adc88f7b8f5b4ecdc542c973a4b59b20e"
+embedded = "773d0b944ef9952095012e9dee6b5de7aa8dffe29d26f3e5a735736081a83a75"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::<impl at src/guts.rs:29:17: 29:26>::eq"
 kappa = "4f95b20e363499f91f018d63a55dd1d815c6dcd11234f5ebece974346d2d6b87"
-embedded = "0889ea7d656af836357a1c35e30af7fe4590f0f40ea03ebfbd206698836b8ea5"
+embedded = "8ff20795ca5a2c44b6ffa85630b97d39b33f6dce51b47ae206122d7f965c5a3a"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::<impl at src/guts.rs:29:28: 29:30>::assert_fields_are_eq"
 kappa = "2d3851249d9c218cf1cd081937a09379491044e3f5aa09120f99d824177c797a"
-embedded = "6d1439344d6dd3e084d956350f749a67c776e79f9abd7b60ab8b6ffb35a26acd"
+embedded = "8a332eaa6f5d24b3073adf6ce364e56eaf5b1fc0ade383c0de589c4f684a4b37"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -133,56 +133,56 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::guts::<impl at src/guts.rs:36:10: 36:15>::clone"
 kappa = "c6317856381caea6d3fdae405c8002e147f9d08c8f211b9c7f61faec795f56e0"
 at = "V=u32"
-embedded = "175afa667aaf340cc21c8322e310ca147c9cb6570fbd6c095cdad62f658272a0"
+embedded = "ddff041260fdd3417a31112f8c316ead240924ded02b59753b7c0428d678d046"
 status = "residue"
 cause = "mir::Ty: guts::State<u32>"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::get_block_pos"
 kappa = "03e9381b7972cbdaac6a844fd2568be9ddc68c940df939baab45330b93560d2e"
-embedded = "8591e0a8a5a5193aef9b82aff6ecc21b80d6bf11c5d96cc860749a99d41d7496"
+embedded = "6b08cd13d96b8e304fac19393698436d9745b24daffccfcc593bdd6eb4723337"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::get_nonce"
 kappa = "f02a3bc194547e51517468102a1dbf2c9c70e974eaec7d2445443c40c712ca37"
-embedded = "382bf925e64606346c90bfd24e23cbcfc432e049e017a9d33aa878909de63145"
+embedded = "cd041ba37ac9a311bde4e76d6d3cb2b410c05979de6a36587de3532b29d4781a"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::get_seed"
 kappa = "4c80eab6f4a19c3cb0523bd84968096f626736d6e8a6bd6509c7c85a1c616d79"
-embedded = "212b3962e857f8ced56332a29cc7f4b5e2c3630ca0311ef996bc2b5fbae5c2b3"
+embedded = "0bc4ddd6b03bb8979a06fbe7034e5cd7d7a63c75885eae49c8ee90139772eec2"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::new"
 kappa = "78e4e9660a2f2557b2493ac6027147fa39ffc3ebcc4054c2556e79045227e167"
-embedded = "a694d901b9d25fcd7e7ed94e4e5b955592acd79b3b8a43634d350d89fdc26ec8"
+embedded = "774f530c944119fbaa84b4ed5d49ee64a5dc9a4f62ab0b9d4d1123bf8c5a36da"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::refill4"
 kappa = "f61e89b7eefc07bd63f80418719c8a50775afe8fba205842f5983044dea802eb"
-embedded = "286b94a74b89edf577699a4b97d5b370a0539a188a99e2de7caec890639c1825"
+embedded = "e95748aecdeb23691f6c391447a14ee2ef59e674b1c507832fba803eb37c961b"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::set_block_pos"
 kappa = "7ae44aa2d6387fe0a36e40c7c35635695ac2f7293e72aa1a0afe79a72e546451"
-embedded = "5ea239d52a055c043e061aa3f77d970a6452817015112c37badc62ea5a63caa8"
+embedded = "082fc2b2ad0eeaed23a575a699aa02cad86ceb40fe20c3a9caf61c1f1aa4e8f3"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::guts::ChaCha::set_nonce"
 kappa = "23c3c5de0525ec8cfbf7d6338d7bf466870bb9f922ca978de8f2b84a217ec354"
-embedded = "1ba13e92f850c718ee6da129cae9cd65c06189d041a82ebeea4ea228ce8b1f10"
+embedded = "51c6f7e0df983acb5e2c09837de723bd3b666e5781dd8a8948ce5619999c002f"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -190,14 +190,14 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::guts::round"
 kappa = "404932c26cf246d625e5a5b5b54cba653fda3ba8e5876616c45c389307d1366f"
 at = "V=u32"
-embedded = "f9c192063052ab79f030f7bd474582efaacb681a9d1ef9ccbf92aa61c7cd0909"
+embedded = "a2c4095a59d49e726d96b81061254271d7e44879b2fa8f5f9d1e2fd87f5d44c9"
 status = "residue"
 cause = "mir::Ty: guts::State<u32>"
 
 [[fn]]
 path = "rand_chacha::init_chacha"
 kappa = "fa89526033b14643654b6e5083c64d99a57f9648594996f1d2777ddd08462fff"
-embedded = "a004020c7b8a710b8b2b25a6bcc517b7bdcc2ba9c0b3f0fceb8ff683c33362ab"
+embedded = "6c1b7803dac3f224caede8aefb27a39dad21fcb67d1030ca163211f32555fb4f"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
@@ -205,28 +205,28 @@ cause = "mir::Ty: guts::ChaCha"
 path = "rand_chacha::init_chacha::fn_impl"
 kappa = "61c972a88b3b5d6cd77dad4df0ce9e2dd1bcf6094ecb3a26769868fbc2e28ef8"
 at = "Mach=u32"
-embedded = "1677c368dfa698cab23f6d07f2d6d96e0a7909c4b63821ebc962bfa1c72491f7"
+embedded = "a8ae99706debca76a0ff28471721364038dc9cf392662e664639777b1a3680ef"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::init_chacha::impl_avx"
 kappa = "c5a957f46f86a9bf6809183ded34758fe91ac878a8681bafd2217d16d6a5a4bd"
-embedded = "bba1e95d2cf6000783f5aa1a59643c27fa5368da448cb7f4dd459da5d635345f"
+embedded = "f75b11a856f624b24199a0c21bb5fba8614042cd5f920714e6b1bb9f9fcfc0f8"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::init_chacha::impl_sse2"
 kappa = "d5519545a7dac36eddccdadb24512fc8896ed67c92eb4cfbf56a73cef817cc7c"
-embedded = "e6cc97c6c49b5396b2efdec93454a43358ad4deaf7784c0b0e8cc26876569286"
+embedded = "5b3e387268d934ec456d14647cc5a91f6ec021741008464d143d0a35fd27d460"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::init_chacha_x"
 kappa = "164212177d7007265c51727000f3ebeb2020511fa6420771b831dfa354a89f1e"
-embedded = "9121ddefb465affe05b7dd2f36aebc5aa353db0acb2da022ba688780249c55db"
+embedded = "7ea9e18a251c3cb0bcb947c0b596ed6983e591435ca672e2a5065d68a45c307c"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
@@ -234,35 +234,35 @@ cause = "mir::Ty: guts::ChaCha"
 path = "rand_chacha::init_chacha_x::fn_impl"
 kappa = "db83e5c1fb4d13b3d9907fd9c84c574acbb418596141ad8e5b0cd58162de29d7"
 at = "Mach=u32"
-embedded = "b55ed6d0bab690ed006abb11f2b214e2d90a63fbacfa547f84c4c8ff1cfd2f98"
+embedded = "8c40dc1c2af3f5e4ff54ce5abaea77ce33a9f7bcec77a969bfd5fa0725f9229b"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::init_chacha_x::impl_avx"
 kappa = "2bacfc60ea151d5bc6f281bbddf07e390a0c2b2f84d7e8f433df2aa35cf3558b"
-embedded = "266c03033c047b324f2c486e9fd57408f35f63c365c1392a3d6661b6ccc9645d"
+embedded = "554c4f157f665a93061a14c6bacf0e55cb3af23b175e0e53cd3dc7807befac42"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::init_chacha_x::impl_sse2"
 kappa = "0f445bda2967ecd7f4f3103eda25868f304b012a0196faa8563f5d24855453b9"
-embedded = "a94022d46b0b0b990664c60fcde6629129f06b71279937c3292dec5a5a599809"
+embedded = "26f0e36c3ad3761b7e1b077e294a5ae8050967bf703f3b1952cf8ebe8990b7dd"
 status = "residue"
 cause = "mir::Ty: guts::ChaCha"
 
 [[fn]]
 path = "rand_chacha::read_u32le"
 kappa = "8a08b4942f33f958097f213992a9368dea924bb5cfbb0383fb525b68e01e6efd"
-embedded = "24d3a069465eaecbf2e9a1f76b44c7dc4b7115e70f1e21307142f2040b6623f0"
+embedded = "693836fed9c488535b9587279c394844145ece5bed3b8924a1b490cad42c3809"
 status = "residue"
 cause = "mir::Ty: core::panicking::AssertKind"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds"
 kappa = "b0a5aab5b203bc490049531606f0c0e29a638798785d07d8d07e1b2b9996829d"
-embedded = "b0381ae8a89b582b182cee08dafe47251addc68d6900ef864ebb47352318f210"
+embedded = "ba6978490280fd6665506a0198344a3b1930839964d4793ef161668c5430a71e"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
@@ -270,49 +270,49 @@ cause = "mir::Ty: ppv_lite86::vec128_storage"
 path = "rand_chacha::refill_narrow_rounds::fn_impl"
 kappa = "3a45a54754d8fb2a3bafc9f6836a9cb1c25f27565f36d8f21dc57f88b7458230"
 at = "Mach=u32"
-embedded = "a92a5c828ee06ea2e3d2eb206890a301cc6a594c5ce40bc162c0e2a7b5dd6d10"
+embedded = "0063c8d7caba3e0ae64ed3a05ec6c7e4f4b60eeec0eebc083edb47e0c7afc85f"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds::impl_avx"
 kappa = "ca9e5f6a2f81351be79e801977e74fdc033f4003df190e85f051e8fb58152fb8"
-embedded = "512d6b28e7be86206c47f72ff070d9b5fc0163a276c097bf526652c5baa90fc4"
+embedded = "9d8ed0547c03aaab8dc949ddf61ff7e25570cffd4145203e7b0b0cd34bb35052"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds::impl_avx2"
 kappa = "3b17149c7045e4af6c5640a256950564872befcec4bba98e499302196d729d2d"
-embedded = "b6bd26ed1a78adf8bcc376f41af7f0353725164a739d227174c190642376c518"
+embedded = "b23cfddbe6189e8db2c6f778329b8e51cbb278e08975213330663c785040bce1"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds::impl_sse2"
 kappa = "9794aa19cddeffb13047fdd1d0f166ce0a96d19d7bb6f7aa64f6f454cdc8ac28"
-embedded = "8303bb036a2e2dae19be3fd795945a853c05511b0e9a546a79ee8e14534eb5e1"
+embedded = "a65f5d5979f5f597d85259572c045101c6444507c0de4529cc7dad9250f423a9"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds::impl_sse41"
 kappa = "3d38353400a6c246b193c74c788774059b6d3d8621a1b536c88e9529bbacd651"
-embedded = "e3554916e41677e308f411ce78911d5b9a003e14901570b4c353c6e1c99eb6e6"
+embedded = "11643a9bd8fdf10527a942c3fcdb25f429e80398506b13dd85ac5331cad1fc31"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_narrow_rounds::impl_ssse3"
 kappa = "97805ab0d0a383ce288bfee9f777b1d77666b5ce6ceeb8366bda73167d7816bb"
-embedded = "05109af14d6d1158958404ed528f20b465a218cbc437e5aed84a55e8b3aae711"
+embedded = "51ea4e4e64dfeb2b1e77806f8ce0af1c920de4d272dcbf45c8ee336e529be954"
 status = "residue"
 cause = "mir::Ty: ppv_lite86::vec128_storage"
 
 [[fn]]
 path = "rand_chacha::refill_wide"
 kappa = "44afb4d69fb9726e7dde73273d187716f9707b98b7dc038093224a3ee9db4c06"
-embedded = "9d22ec39c07b06274ba33230acb5b26bb10163a180902b19d4244f27e4f551d8"
+embedded = "3ee6ca77de33b1a393468cd953e2d2bc19028bd1ca67914f78e97e9ec757fb5b"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -320,42 +320,42 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::refill_wide::fn_impl"
 kappa = "e625d866a6ddf2d40a6934af3b6fed9c9930d8050462db53e2d33fcaaa46b95e"
 at = "Mach=u32"
-embedded = "d430c4efcfbcf1c8c53b196b356cbac40d78c6b61600c492d02f7bf4d2bc0364"
+embedded = "43b14be9103c66a43b24ab08d7b8bf2a5182f74447aa8b9b222f02230af87f37"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::refill_wide::impl_avx"
 kappa = "d0d6e034a1020cf92bd10d1ed1f155f40d040bac2e144245bccbff31b1859ef0"
-embedded = "994217575fa286b58a082a537a9e588e0b7d812ff73328fd1a44ede05efc2913"
+embedded = "72e2da8971f3f47e53ae78234f15dca1ef8c47007abc7c9464c806357e6db803"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::refill_wide::impl_avx2"
 kappa = "8444cd5ab06c55a14ba2fe40b5410d832b8a6c53c569ce9e20fa8e11b27b0bf4"
-embedded = "83f25901d4c0298a1c2a5fec52227f5211d9b7514d865a36121f46c1f66a0b8d"
+embedded = "36837b20ce224a211c841d6304fb137579aa06d38363675b23db5b8114300aee"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::refill_wide::impl_sse2"
 kappa = "ec14af5fbef6a6397c987744872a499fdc3b9f5d8035ba48188bae3f5d317382"
-embedded = "50080d814b84085ce82f581a86a20e9925f48bdb4c32300f4c9929688c11f0cd"
+embedded = "e4fe15487bc66fb898fe6c3c5023e9abb3d92c7572538a200e9f54c0ab4ccfdf"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::refill_wide::impl_sse41"
 kappa = "c46743705c3ad96901db120ecdbc20c9f7adbffac8b07174ca356d39ac7b1477"
-embedded = "f0399a959608e2ea277ed01ec2be9c254d846a4760f8a0a03ed0f975132784b6"
+embedded = "11031507840157c83e363cf42be93d80307730e63f1748331f24e4bd9c673a0a"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::refill_wide::impl_ssse3"
 kappa = "aeacf55492c8a1d9c0d33b4d33db74c917dd463356fd1b4d39edac86b2992c43"
-embedded = "6e672d6de0d4e42336cd42fc2ce5006448fdc9dfd756c491d9cf6f108dbc0bcf"
+embedded = "949870b65bca92fc5f1c61b0270eb76bb65891d497906e8baf9599766743e152"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -363,14 +363,14 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::refill_wide_impl"
 kappa = "b48d644ee8b7bdeb67d015a8f3cec9c531b22832c26f9d4589b83c5664ae2bc9"
 at = "Mach=u32"
-embedded = "a1c9ba21e73420e5035bb934ab129a01e67e236383a98dc3420e23551224841c"
+embedded = "f2ab9e144be1caa1025f53e187fc7ac30256363b786d15a3bd22fa035b847b8f"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::set_stream_param"
 kappa = "c212195e5326cf487b8b27cea64efec80637e9e16cb2c3f62757295efe704901"
-embedded = "96a17b3fa314e6d5a34d66251389cffdaca1e746350d6fee7e5cd33fd8a2d8fc"
+embedded = "17a27895fb48c6109bc68e04818c28652af30bbd13489a251338f3e2f4b4f22a"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -378,21 +378,21 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::set_stream_param::fn_impl"
 kappa = "a6770dc86f9df43acbc944cad6a4ccc38e827fcc6debed251c122790d76d7e29"
 at = "Mach=u32"
-embedded = "4f97f74587bad8437a82df41d1821284849f13aab330c4fc07e706e7d8d23f70"
+embedded = "5cf62a1459929c2d4730ad671d108d38a9e632bd98c69f44e27228ae11602a20"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::set_stream_param::impl_avx"
 kappa = "39c3496fcd5b2367d5dba8efc9dbd9c8f19e4b4649c302d15cf0e6d540e75f76"
-embedded = "db20b366b4d6c99797c137ec0df3ec39fc3144a00962c0d96b90addfa4944e32"
+embedded = "d7a726211b271e72ccb5e810c99d03dacf68897d908b7cb5675d8d445e84c4b6"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
 [[fn]]
 path = "rand_chacha::set_stream_param::impl_sse2"
 kappa = "bd47e651f41e80f9c0b7e69ec236328c5876ad0847541eedeeb5db739d980660"
-embedded = "c823f3081794f377c43adbdbe0174337502d7384d3c139e98bd8320a3d673355"
+embedded = "76b38e676c8c697440cd3d0e6cfd37983a7d5ff1e93da157a21c48b122d016ab"
 status = "residue"
 cause = "mir::Ty: ChaCha"
 
@@ -400,7 +400,7 @@ cause = "mir::Ty: ChaCha"
 path = "rand_chacha::undiagonalize"
 kappa = "9752a56cc48a94ffdf9a0d3ff13717cc53a9fab66aca25f943405ecc97c5290c"
 at = "V=u32"
-embedded = "98fb38820c8db7760852e3bf4923e79fc14e46fec0f4f49392ccf844f2b62622"
+embedded = "2e490dee558f4234567f809e1195584baba7aae38e32fa7f582afd11938a3789"
 status = "residue"
 cause = "mir::Ty: guts::State<u32>"
 

@@ -133,6 +133,9 @@ pub fn write_shallow(dir: &Path, shards: &[CoreShard]) -> Result<(), UorustError
 enum BridgeShape {
     Bool,
     Int(u32, bool),
+    /// An IEEE 754 float of the width, which both the evaluator and the
+    /// shallow translation hold as its bits.
+    Float(u32),
     Char,
     Unit,
     /// A shared reference, which the shallow function takes as its
@@ -162,6 +165,12 @@ impl BridgeShape {
         }
         if let Some((bits, signed)) = crate::embed::int_ty(printed, width) {
             return Some(Self::Int(bits, signed));
+        }
+        if let Some(bits) = printed
+            .strip_prefix('f')
+            .and_then(|b| b.parse::<u32>().ok())
+        {
+            return Some(Self::Float(bits));
         }
         if printed.ends_with("cmp::Ordering") {
             return Some(Self::Ordering);
@@ -195,7 +204,7 @@ impl BridgeShape {
         match self {
             Self::Ordering => "CmpOrdering".into(),
             Self::Bool => "Bool".into(),
-            Self::Int(..) | Self::Char => "Nat".into(),
+            Self::Int(..) | Self::Float(_) | Self::Char => "Nat".into(),
             Self::Unit => "Unit".into(),
             Self::Ref(a) => a.shallow(),
             Self::Option(a) => format!("(Option {})", a.shallow()),
@@ -208,6 +217,7 @@ impl BridgeShape {
         match self {
             Self::Bool => "Bool".into(),
             Self::Int(b, s) => format!("{}{b}", if *s { "I" } else { "U" }),
+            Self::Float(b) => format!("F{b}"),
             Self::Char => "Char".into(),
             Self::Unit => "Unit".into(),
             Self::Ref(a) => format!("Ref{}", a.mangle()),
@@ -218,22 +228,28 @@ impl BridgeShape {
     }
 
     /// The encoding of the shallow term `t` as the evaluator's value, with
-    /// the encoders it names added to `encoders`.
-    fn encode(&self, t: &str, encoders: &mut BTreeMap<String, String>) -> String {
+    /// the encoders it names added to `encoders`, each after the encoders
+    /// its own definition names, so that a part defines each before its use.
+    fn encode(&self, t: &str, encoders: &mut Vec<(String, String)>) -> String {
         match self {
             Self::Bool => mir_ctor("Value.boolean", &[t.to_string()]),
             Self::Int(bits, signed) => mir_ctor(
                 "Value.int",
                 &[bits.to_string(), signed.to_string(), t.to_string()],
             ),
+            // A float's value is its bits (the evaluator's `floatValue`).
+            Self::Float(bits) => mir_ctor(
+                "Value.int",
+                &[bits.to_string(), false.to_string(), t.to_string()],
+            ),
             Self::Char => mir_ctor("Value.character", &[t.to_string()]),
             Self::Unit => mir_ctor("Value.tuple", &[format!("(nil {})", mir_name("Value"))]),
             Self::Ref(a) => mir_ctor("Value.reference", &[a.encode(t, encoders)]),
             Self::Option(_) | Self::Result(..) | Self::Ordering => {
                 let name = format!("bridgeEnc{}", self.mangle());
-                if !encoders.contains_key(&name) {
+                if !encoders.iter().any(|(n, _)| *n == name) {
                     let def = self.encoder(&name, encoders);
-                    encoders.insert(name.clone(), def);
+                    encoders.push((name.clone(), def));
                 }
                 format!("({name} {t})")
             }
@@ -242,7 +258,7 @@ impl BridgeShape {
 
     /// The definition of an enum shape's encoder, `name`: each variant the
     /// evaluator's value of it, by its discriminant.
-    fn encoder(&self, name: &str, encoders: &mut BTreeMap<String, String>) -> String {
+    fn encoder(&self, name: &str, encoders: &mut Vec<(String, String)>) -> String {
         let variant = |v: &str, d: i32, field: Option<String>| {
             let fields = match field {
                 Some(f) => format!("(cons {f} (nil {}))", mir_name("Value")),
@@ -623,7 +639,7 @@ fn block(
         BridgeOutcome::Ready(c) => c,
         BridgeOutcome::Pending(why) => return BridgeOutcome::Pending(why),
     };
-    let mut encoders = BTreeMap::new();
+    let mut encoders = Vec::new();
     let args: Vec<String> = shallow
         .parameters
         .iter()
@@ -638,7 +654,7 @@ fn block(
     };
     let expected = result.encode(&call, &mut encoders);
     let name = def_name(kappa);
-    let mut needed: Vec<(String, String)> = shallow.decls.clone();
+    let mut needed: Vec<(String, String)> = dependency_order(&shallow.decls);
     let mut bodies = Vec::new();
     let mut steps = 0usize;
     for k in &closure {
@@ -709,6 +725,47 @@ fn block(
         .iter()
         .fold(fuel, |c, (_, ks)| c.saturating_mul(ks.len()));
     BridgeOutcome::Ready((theorem, statement, needed, cost))
+}
+
+/// `decls` (each `(name, text)`) with each after the others its text
+/// names, in their order otherwise: a translation renders a callee's
+/// definition before the helpers it names (`mirBitOr`), and a part's
+/// module defines each name before its use.
+fn dependency_order(decls: &[(String, String)]) -> Vec<(String, String)> {
+    let at: BTreeMap<&str, usize> = decls
+        .iter()
+        .enumerate()
+        .map(|(i, (n, _))| (n.as_str(), i))
+        .collect();
+    let deps: Vec<Vec<usize>> = decls
+        .iter()
+        .map(|(n, t)| {
+            t.split(|c: char| !(c.is_alphanumeric() || c == '_'))
+                .filter(|w| *w != n)
+                .filter_map(|w| at.get(w).copied())
+                .collect::<BTreeSet<_>>()
+                .into_iter()
+                .collect()
+        })
+        .collect();
+    // Depth first, each declaration after its dependencies; a cycle (a
+    // mutual group) keeps its members' own order.
+    fn visit(i: usize, deps: &[Vec<usize>], seen: &mut [bool], out: &mut Vec<usize>) {
+        if seen[i] {
+            return;
+        }
+        seen[i] = true;
+        for &d in &deps[i] {
+            visit(d, deps, seen, out);
+        }
+        out.push(i);
+    }
+    let mut seen = vec![false; decls.len()];
+    let mut out = Vec::new();
+    for i in 0..decls.len() {
+        visit(i, &deps, &mut seen, &mut out);
+    }
+    out.into_iter().map(|i| decls[i].clone()).collect()
 }
 
 /// The operators of MIR a proof by the evaluator's reduction is likeliest

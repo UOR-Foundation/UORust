@@ -2,7 +2,7 @@
 path = "rand_core::fill_bytes_via_next_word"
 kappa = "f02dbbedf707091b96cba450364d8573762cc513650c9ed538c48bd626df0827"
 at = "E=u32, W=u32"
-embedded = "9db2b6bd4240b192e76f6d86fa99f9b62b227aac670c3a54473606ef9256a314"
+embedded = "3427f3b2f3150ad58ed10d95f1fe519e167a8d52f9248f967d50f2c195585134"
 status = "residue"
 cause = "mir::Ty: impl FnMut() -> Result<u32, u32>"
 
@@ -10,7 +10,7 @@ cause = "mir::Ty: impl FnMut() -> Result<u32, u32>"
 path = "rand_core::next_u64_via_u32"
 kappa = "979965a54c38cb2a08aaca20523b179dbbcc083a74794d74ded63660be9ee26c"
 at = "R=u32"
-embedded = "eb8bd5b0143cae20ed460e3dc5b9f65cb96681a0633d29460b424f627fa3b415"
+embedded = "0fa1653b286c5dadd2654a6068b753127451dd285b0d25be5f935229e33a0b3c"
 status = "residue"
 cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:203:1: 205:23>::try_next_u32: rand_core's MIR stops at type outside the lift: <<u32 as core::ops::Deref>::Target as TryRng>::Error"
 
@@ -18,7 +18,7 @@ cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:203:1: 205:23>::try_next
 path = "rand_core::next_word_via_fill"
 kappa = "be2a2253b9d94700730cc263c872ed3cd5410e2d2d9c75ee7c265c3d39ef4d5d"
 at = "R=u32, W=u32"
-embedded = "52fd3eabe3565fdcefe70dec595461846360aa87c293629e376db0f123af3f36"
+embedded = "a7da412878651c3e4840d69755748aaece0b9dd0da40e2833012ae7c6c78f901"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
 
@@ -26,7 +26,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 d
 path = "rand_core::read_words"
 kappa = "1604df92f42560afab454191e62370e90e623e693a86bfd39eca29f325ac4bc5"
 at = "N=#_N, W=u32"
-embedded = "fb512112170c22e380c626dbad24c69d953999b8130124b4d4fdbbb637482d33"
+embedded = "825254f0c998e0f850fe8925a2617052c5b6f4f8f869de175c34846843fe0766"
 status = "residue"
 cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
 

@@ -24,9 +24,11 @@ pub(crate) mod link;
 pub(crate) mod lower;
 pub(crate) mod memory;
 pub(crate) mod parse;
+pub(crate) mod site;
 // Generated: its layout is the generator's, which the spec test compares.
 #[rustfmt::skip]
 pub(crate) mod spec;
+pub(crate) mod trips;
 
 #[cfg(test)]
 mod generate;

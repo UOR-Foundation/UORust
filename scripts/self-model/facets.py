@@ -768,8 +768,8 @@ structure{
 }
 
 """
-    out += defn("certifiedShare", "Quality::CertifiedShare",
-                f"(record Quality::CertifiedShare {{translator := {share['translator']}, certified := {share['certified']}, "
+    out += defn("certifiedShare", "CertifiedShare",
+                f"(record CertifiedShare {{translator := {share['translator']}, certified := {share['certified']}, "
                 f"reachable := {share['reachable']}, reachableCertified := {share['reachable_certified']}}})") + "\n"
     out += defn("certifiedEntry", "String", q(certified["entry"])) + "\n"
     for name, small, large in [("certifiedWithinTranslator", "certified", "translator"),

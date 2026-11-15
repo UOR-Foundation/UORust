@@ -30,6 +30,11 @@ use crate::UorustError;
 /// The MIR datatype and its evaluator.
 pub(crate) const SEMANTICS: &str = include_str!("../assets/embed/src/Mir.lex.tex");
 
+/// The evaluator's lemmas: its comparisons on bit patterns, which the
+/// bridge's reductions meet, proved the comparisons of the values the
+/// patterns encode. The embedding's project verifies them.
+const LEMMAS: &str = include_str!("../assets/embed/src/MirLemmas.lex.tex");
+
 /// The lexicon the embedding's titles are words of.
 const LEXICON: &str = include_str!("../assets/embed/language/uorust.mir/lexicon.toml");
 
@@ -91,6 +96,9 @@ pub(crate) struct Cx<'a> {
     pub(crate) cells: BTreeMap<String, Vec<Cell>>,
     /// The first local past the body's own: the constant items' locals.
     pub(crate) base: std::cell::Cell<usize>,
+    /// The block of the body being embedded that is being rendered: its
+    /// calls' sites are its.
+    pub(crate) block: std::cell::Cell<usize>,
     /// Each promoted and anonymous constant's key, by the stem of the file
     /// its dump is in ([`parts`]).
     pub(crate) parts: &'a BTreeMap<String, String>,
@@ -136,7 +144,16 @@ pub(crate) struct Cx<'a> {
     pub(crate) item_texts: std::cell::RefCell<BTreeMap<String, String>>,
     /// The key of the body being embedded, which its calls' tokens hold.
     pub(crate) key: std::cell::RefCell<String>,
+    /// The library's sources, which say whether a body tracks its caller
+    /// and where its calls are ([`crate::mir::site`]).
+    pub(crate) sources: &'a crate::mir::site::Sources,
+    /// What the source declares of the body being embedded.
+    pub(crate) declared: std::cell::RefCell<crate::mir::site::Declared>,
 }
+
+/// The fields of `core::panic::Location` as its declaration names them,
+/// which `caller_location`'s value sets: the file, the line and the column.
+const LOCATION_FIELDS: [&str; 3] = ["filename", "line", "col"];
 
 /// The type of the constant item `key` names in `link`: its return
 /// place's, as each of its dumps prints it, where they agree.
@@ -315,7 +332,7 @@ pub(crate) fn parts<'t>(
             let key = if count.get(&path).is_some_and(|n| *n > 1) {
                 format!("{path}#{}", def_name(&kappa))
             } else {
-                program_key(link, &path, &kappa)
+                program_key(link, &path, &path, &kappa)
             };
             (stem, key)
         })
@@ -368,6 +385,18 @@ struct Laid {
     term: String,
     size: u64,
     assumed: Option<String>,
+}
+
+/// Whether a type as MIR prints it is a function pointer: `fn(u8) -> u8`,
+/// `unsafe fn(..)`, `extern "C" fn(..)`, each a pointer to code (memchr
+/// transmutes its cached `*mut ()` to an `unsafe fn`).
+fn fn_pointer(ty: &str) -> bool {
+    let ty = ty.strip_prefix("unsafe ").unwrap_or(ty);
+    let ty = match ty.strip_prefix("extern \"") {
+        Some(rest) => rest.split_once("\" ").map_or(rest, |(_, after)| after),
+        None => ty,
+    };
+    ty.starts_with("fn(")
 }
 
 /// A type as MIR or the source prints it, its generic arguments split off:
@@ -464,6 +493,34 @@ pub(crate) struct Embedded {
     pub(crate) sites: Vec<Site>,
     /// Its key in the program.
     pub(crate) key: String,
+    /// What one run of it costs the evaluator at most.
+    pub(crate) cost: Cost,
+}
+
+/// The most one run of a body costs the evaluator (UE-19), from its loops'
+/// bounds ([`crate::mir::trips`]): the differential check's fuel.
+#[derive(Clone, Debug, Default)]
+pub(crate) enum Cost {
+    /// A body [`Cx::body`] did not embed, whose cost is not read.
+    #[default]
+    Unread,
+    Bounded {
+        /// Its own steps: each statement and each terminator, once for each
+        /// run of its block, and its constant items' blocks once.
+        steps: u128,
+        /// The bodies it calls, each with the most runs of the block that
+        /// calls it, and whether it is a constant item (evaluated once on
+        /// entry, and its value pinned when it returns).
+        calls: Vec<(String, u128, bool)>,
+        /// The most fuel a step's own work takes past the step, a
+        /// transmute's encoding and decoding: the evaluator bounds it by
+        /// the fuel left.
+        work: u128,
+        /// The fuel pinning its value takes, as a constant item's, where
+        /// its layout is read.
+        pin: Option<u128>,
+    },
+    Unbounded(String),
 }
 
 /// What a body leaves to its instance: a type's layout or a count, as the
@@ -489,6 +546,9 @@ pub(crate) struct Site {
     /// bindings are its trait's `Self` (`<T as Trait>::C`), or none for a
     /// part of the body, which shares the body's parameters.
     pub(crate) constant: bool,
+    /// The body's block that makes the call, or none for a constant item,
+    /// which the body evaluates once, on entry.
+    pub(crate) block: Option<usize>,
 }
 
 /// The constructs the evaluator answers `Outcome.undefined` with, read
@@ -647,6 +707,38 @@ fn read_undefined() -> BTreeSet<String> {
             rest.find('"').map(|end| rest[..end].to_string())
         })
         .collect()
+}
+
+/// The causes the evaluator answers a valid call of intrinsic `name` with
+/// `Outcome.undefined` by, where its model does not yet place the case:
+/// each `intrinsic a, b: why` it names `name` in.
+fn intrinsic_gaps(name: &str) -> Vec<String> {
+    undefined_constructs()
+        .iter()
+        .filter(|u| {
+            u.strip_prefix("intrinsic ")
+                .and_then(|r| r.split_once(": "))
+                .is_some_and(|(names, _)| names.split(", ").any(|n| n == name))
+        })
+        .cloned()
+        .collect()
+}
+
+/// `Option.none` of a call site: one whose location is not read.
+fn no_span() -> String {
+    format!("(ctor Option.none [{}])", mir_name("Span"))
+}
+
+/// `Option.some` of a call site: its file, line and column.
+fn span_term(span: &crate::mir::ir::IrSpan) -> String {
+    format!(
+        "(ctor Option.some [{}] (record {} {{file := {}, line := {}, column := {}}}))",
+        mir_name("Span"),
+        mir_name("Span"),
+        mir_string(&span.file),
+        span.line,
+        span.column
+    )
 }
 
 /// A LexLean name of the datatype, qualified by the semantics module.
@@ -1311,7 +1403,7 @@ impl Cx<'_> {
             || matches!(ty, "bool" | "char" | "()")
             || is_array(ty)
             || pointee(ty).is_some()
-            || ty.starts_with("fn(")
+            || fn_pointer(ty)
             || ty.starts_with('(')
         {
             return Some(true);
@@ -1506,7 +1598,7 @@ impl Cx<'_> {
             return pointee(inner).and_then(|_| self.layout(inner, depth));
         }
         let thin = bytes(self.width);
-        if pointee(ty).is_some() || ty.starts_with("fn(") {
+        if pointee(ty).is_some() || fn_pointer(ty) {
             let (size, assumed) =
                 match pointee(ty).map(|t| (t, self.sized(t, layout_depth(self.structs)))) {
                     None | Some((_, Some(true))) => (thin, None),
@@ -1698,6 +1790,13 @@ impl Cx<'_> {
                     size: inner.size,
                     assumed: None,
                 }
+            }
+            // A pointer that is not null and has no scalar of its own (a
+            // wide one, `(*const str) is !null`, as `NonNull<str>` lays out
+            // its field): laid out as the pointer, as `pattern_type!(*const
+            // T is !null)` is ([`Self::layout`]).
+            (Some(b), None) if pointee(b).is_some() && t.trim().ends_with(") is !null") => {
+                self.layout(b, depth)?
             }
             _ => self.layout(t, depth)?,
         };
@@ -1925,6 +2024,7 @@ impl Cx<'_> {
             args: Vec::new(),
             dest: String::new(),
             constant: true,
+            block: None,
         });
         token
     }
@@ -1986,6 +2086,39 @@ impl Cx<'_> {
     /// The `Generic` of the layout of `ty`: its layout, where it is read
     /// and assumes no pointer's size, or, where `ty` names a generic
     /// parameter, the slot its instance's fills.
+    /// `Callee.callerLocation` of a call of `caller_location` whose
+    /// destination is of type `dest` (`&Location<'_>`): `Location`'s layout
+    /// as rustc lays it out, and the indices of the fields
+    /// [`LOCATION_FIELDS`] names in its declaration.
+    fn caller_location(&self, dest: &str) -> Option<String> {
+        let ty = dest.trim().strip_prefix('&')?.trim();
+        let ty = ty
+            .strip_prefix("'static ")
+            .or_else(|| ty.strip_prefix("'_ "))
+            .unwrap_or(ty);
+        let laid = self.layout(ty, layout_depth(self.structs))?;
+        laid.assumed.is_none().then_some(())?;
+        let (name, _) = generic_parts(ty);
+        let last = crate::mir::parse::split_path(name)
+            .last()
+            .copied()
+            .unwrap_or(name);
+        let [decl] = self.structs.get(last)?.as_slice() else {
+            return None;
+        };
+        let at = |field: &str| {
+            decl.fields
+                .iter()
+                .position(|(n, _)| n.as_deref() == Some(field))
+                .map(|i| i.to_string())
+        };
+        let mut args = vec![laid.term];
+        for field in LOCATION_FIELDS {
+            args.push(at(field)?);
+        }
+        Some(mir_ctor("Callee.callerLocation", &args))
+    }
+
     fn generic_layout(&self, ty: &str) -> Option<String> {
         if let Some(g) = self.fixed_layout(ty) {
             return Some(g);
@@ -2146,6 +2279,30 @@ impl Cx<'_> {
             }
         }
         Some(true)
+    }
+
+    /// The value of a named constant of a primitive type (`HAS_PREFIXES`)
+    /// whose body, its dump's or its declaration's, is one literal.
+    fn named_scalar(&self, c: &IrConstant) -> Option<i128> {
+        let IrConstant::Path(text) = c else {
+            return None;
+        };
+        let body = (self.source_constant)(text)?;
+        let [block] = body.blocks.as_slice() else {
+            return None;
+        };
+        block.statements.iter().find_map(|s| match s {
+            IrStatement::Assign(q, IrRvalue::Use(IrOperand::Constant(c)))
+                if q.local == 0 && q.projection.is_empty() =>
+            {
+                match c {
+                    IrConstant::Bool(b) => Some(i128::from(*b)),
+                    IrConstant::Int(n, _) if *n >= 0 => Some(*n),
+                    _ => None,
+                }
+            }
+            _ => None,
+        })
     }
 
     /// The key of the constant item a constant operand names, where the
@@ -2804,9 +2961,11 @@ impl Cx<'_> {
                     IrAggregate::Closure(t) => {
                         (A::Closure, mir_ctor("Agg.closure", &[mir_string(t)]))
                     }
-                    IrAggregate::Other(k) => {
-                        e.blocked.insert(k.path().to_string());
-                        (*k, mir_ctor("Agg.other", &[mir_string(k.path())]))
+                    // A coroutine is built unresumed: rustc's variant 0
+                    // of its state (`CoroutineArgs::UNRESUMED`), holding
+                    // its upvars.
+                    IrAggregate::Coroutine(t) => {
+                        (A::Coroutine, mir_ctor("Agg.coroutine", &[mir_string(t)]))
                     }
                 };
                 e.uses.insert(k.path().to_string());
@@ -2979,7 +3138,13 @@ impl Cx<'_> {
         term
     }
 
-    fn terminator(&self, t: &IrTerminator, body: &IrBody, e: &mut Embedded) -> String {
+    fn terminator(
+        &self,
+        t: &IrTerminator,
+        span: Option<&crate::mir::ir::IrSpan>,
+        body: &IrBody,
+        e: &mut Embedded,
+    ) -> String {
         use spec::MirTerminatorKind as T;
         let (kind, term) = match t {
             IrTerminator::Goto(b) => (T::Goto, mir_ctor("Terminator.jump", &[b.to_string()])),
@@ -3042,8 +3207,23 @@ impl Cx<'_> {
                                 args: args.iter().map(|a| arg_type(body, a)).collect(),
                                 dest: place_type(body, destination).unwrap_or_default(),
                                 constant: false,
+                                block: Some(self.block.get()),
                             });
                             token
+                        }
+                        // `caller_location`: a reference to the `Location` of
+                        // the call the frame's caller passes, laid out as
+                        // rustc lays out `Location`, its fields found by
+                        // their declared names.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "caller_location"
+                                && place_type(body, destination)
+                                    .and_then(|t| self.caller_location(&t))
+                                    .is_some() =>
+                        {
+                            place_type(body, destination)
+                                .and_then(|t| self.caller_location(&t))
+                                .unwrap_or_default()
                         }
                         // `float_to_int_unchecked`, from its argument's float
                         // type to its destination's integer type.
@@ -3203,6 +3383,11 @@ impl Cx<'_> {
                                 e.intrinsics.insert(p.clone());
                                 e.blocked.insert(format!("intrinsic {p}"));
                             }
+                            // A case of a valid call the memory model does
+                            // not yet place blocks the call, by its cause.
+                            for gap in intrinsic_gaps(&p) {
+                                e.blocked.insert(gap);
+                            }
                             typed = Some(p.clone());
                             mir_ctor("Callee.intrinsic", &[mir_string(&p)])
                         }
@@ -3228,9 +3413,15 @@ impl Cx<'_> {
                 };
                 let destination = self.place(destination, e);
                 let args = self.operands(&args, e);
+                let site = span
+                    .filter(|s| self.declared.borrow().reads(s))
+                    .map_or_else(no_span, span_term);
                 (
                     T::Call,
-                    mir_ctor("Terminator.call", &[destination, callee, args, target]),
+                    mir_ctor(
+                        "Terminator.call",
+                        &[destination, callee, args, target, site],
+                    ),
                 )
             }
             IrTerminator::Assert {
@@ -3282,6 +3473,7 @@ impl Cx<'_> {
                                 mir_ctor("Callee.bound", &[mir_string(&asm.name)]),
                                 args,
                                 target,
+                                no_span(),
                             ],
                         ),
                     )
@@ -3303,6 +3495,93 @@ impl Cx<'_> {
     }
 
     /// The body `b`, named `path` in the program, as a `Mir::Body` term.
+    /// What one run of `b` costs the evaluator at most ([`Cost`]): its
+    /// blocks control `reached` each run at most its loops' bounds, its
+    /// constant `items` evaluated once, its `sites`' callees called from
+    /// their blocks, its rendered `blocks` read for the transmutes in them.
+    fn cost(
+        &self,
+        b: &IrBody,
+        reached: &BTreeSet<usize>,
+        items: &[String],
+        sites: &[Site],
+        blocks: &[String],
+    ) -> Cost {
+        let runs = match crate::mir::trips::runs(b, reached, self.width) {
+            crate::mir::trips::Runs::Bounded(r) => r,
+            crate::mir::trips::Runs::Unbounded(why) => return Cost::Unbounded(why),
+        };
+        let pointer_call = reached.iter().any(|&i| {
+            matches!(&b.blocks[i].terminator, IrTerminator::Call { callee, .. }
+                if matches!(crate::mir::parse::operand(callee), Some(IrOperand::Copy(_) | IrOperand::Move(_))))
+        });
+        if pointer_call {
+            return Cost::Unbounded("calls a function pointer, whose callee bounds no loop".into());
+        }
+        let run = |i: usize| if reached.contains(&i) { runs[i] } else { 0 };
+        // A constant item's block is one step, its call; a static's borrow
+        // is a block of a statement and a jump past it.
+        let entry: u128 = items
+            .iter()
+            .map(|k| if self.slots(k) > 1 { 3 } else { 1 })
+            .sum();
+        let steps = (0..b.blocks.len())
+            .map(|i| run(i).saturating_mul(b.blocks[i].statements.len() as u128 + 1))
+            .fold(entry, u128::saturating_add);
+        let calls = sites
+            .iter()
+            .map(|s| (s.callee.clone(), s.block.map_or(1, run), s.constant))
+            .collect();
+        let mut work = 0u128;
+        for block in blocks {
+            for name in [
+                "Rvalue.transmute",
+                "Callee.transmute",
+                "Callee.rawEq",
+                "Callee.writeBytes",
+            ] {
+                let needle = format!("(ctor {} ", mir_name(name));
+                for (at, _) in block.match_indices(&needle) {
+                    match transmute_work(&block[at..]) {
+                        Some(w) => work = work.max(w),
+                        None => {
+                            return Cost::Unbounded(
+                                "transmutes at a layout its instance supplies, whose size no bound reads"
+                                    .into(),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Cost::Bounded {
+            steps,
+            calls,
+            work,
+            pin: b.locals.first().and_then(|t| self.pin_work(t)),
+        }
+    }
+
+    /// The fuel pinning a value of `ty` takes ([`Cost`]): a step for each
+    /// value in it and one more to rebuild each value it holds others in,
+    /// and one to end. A pointer in it is followed, so its pointee's size
+    /// is read where the value is a reference to a value of no pointer.
+    fn pin_work(&self, ty: &str) -> Option<u128> {
+        let depth = layout_depth(self.structs);
+        let nodes = |ty: &str| -> Option<u128> {
+            let laid = self.layout(ty, depth).filter(|l| l.assumed.is_none())?;
+            if laid.term.contains(&mir_name("Layout.pointer")) {
+                return None;
+            }
+            layout_pieces(&sexp(&laid.term)?)
+        };
+        let count = match ty.strip_prefix("&mut ").or_else(|| ty.strip_prefix('&')) {
+            Some(inner) => nodes(inner.trim_start_matches("'static "))?.checked_add(1)?,
+            None => nodes(ty)?,
+        };
+        count.checked_mul(2)?.checked_add(1)
+    }
+
     pub(crate) fn body(&self, b: &IrBody, path: &str) -> Embedded {
         let mut e = Embedded::default();
         self.items.borrow_mut().clear();
@@ -3311,6 +3590,7 @@ impl Cx<'_> {
         self.sites.borrow_mut().clear();
         self.key.replace(path.to_string());
         self.owner.replace(b.path.clone());
+        self.declared.replace(self.sources.declared(b));
         self.locals.replace(b.locals.clone());
         self.base.set(b.locals.len());
         let mut locals: Vec<String> = b.locals.iter().map(|t| self.ty(t)).collect();
@@ -3344,7 +3624,13 @@ impl Cx<'_> {
         let mut reached = BTreeSet::from([0]);
         let mut work = vec![0];
         while let Some(at) = work.pop() {
-            for next in b.blocks.get(at).map(live_successors).unwrap_or_default() {
+            let named = |c: &IrConstant| self.named_scalar(c);
+            for next in b
+                .blocks
+                .get(at)
+                .map(|block| live_successors(block, &named))
+                .unwrap_or_default()
+            {
                 if !cleanup.contains(&next) && reached.insert(next) {
                     work.push(next);
                 }
@@ -3355,6 +3641,7 @@ impl Cx<'_> {
             .iter()
             .enumerate()
             .map(|(i, block)| {
+                self.block.set(i);
                 let mut cleanup = Embedded::default();
                 let e = if reached.contains(&i) {
                     &mut e
@@ -3370,7 +3657,7 @@ impl Cx<'_> {
                     "(record {} {{statements := {}, terminator := {}}})",
                     mir_name("Block"),
                     term_list(&statements, &mir_name("Statement")),
-                    self.terminator(&block.terminator, b, e)
+                    self.terminator(&block.terminator, block.span.as_ref(), b, e)
                 )
             })
             .collect();
@@ -3417,6 +3704,7 @@ impl Cx<'_> {
                         },
                         term_list(&[], &mir_name("Operand")),
                         format!("(ctor Option.some [Nat] {after})"),
+                        no_span(),
                     ],
                 )
             ));
@@ -3446,13 +3734,18 @@ impl Cx<'_> {
         e.slots = self.slots.take();
         e.key = path.to_string();
         e.sites = self.sites.take();
+        e.cost = self.cost(b, &reached, &items, &e.sites, &blocks);
         e.term = format!(
-            "(record {} {{path := {}, arity := {}, locals := {}, blocks := {}, entry := {entry}}})",
+            "(record {} {{path := {}, arity := {}, locals := {}, blocks := {}, entry := {entry}, tracked := {}}})",
             mir_name("Body"),
             mir_string(path),
             b.arity,
             term_list(&locals, &mir_name("Ty")),
-            term_list(&blocks, &mir_name("Block"))
+            term_list(&blocks, &mir_name("Block")),
+            match self.declared.borrow().tracked {
+                Some(t) => format!("(ctor Option.some [Bool] {t})"),
+                None => "(ctor Option.none [Bool])".to_string(),
+            }
         );
         e
     }
@@ -3492,8 +3785,9 @@ pub(crate) fn enums(decls: &crate::mir::core::CoreDecls) -> Enums {
 /// `#[path = "../../<crate>/src/lib.rs"] mod <module>;`: each module's
 /// name and the crate's directory under `library`.
 fn mounted_crates(root: &Path, krate: &str) -> Vec<(String, String)> {
-    let lib = library_root(root).join(krate).join("src").join("lib.rs");
-    let text = std::fs::read_to_string(lib).unwrap_or_default();
+    let package = library_root(root).join(krate);
+    let lib = crate::layouts::library_file(&package).map(|l| package.join(l));
+    let text = lib.and_then(|l| read_text(&l)).unwrap_or_default();
     let mut out = Vec::new();
     let mut mounted: Option<String> = None;
     for line in text.lines().map(str::trim) {
@@ -3747,9 +4041,21 @@ pub fn embed_with(
         observed,
         register,
         bridge,
+        differential: alone,
+        link,
     } = *outputs;
     let root = library.parent().unwrap_or(library);
-    let (modules, census, program) = embed_census(krate, builds_on, root, dumps, only)?;
+    // Each library linked with those before it: alloc with core.
+    let mut linked: Vec<Linked> = Vec::new();
+    // A library that does not link is named and left out: the crate's
+    // calls into it stay its dictionary's, as they are unlinked.
+    for (lib, dir) in link {
+        match link_library(lib, root, dir, &linked) {
+            Ok(l) => linked.push(l),
+            Err(e) => eprintln!("embed: {lib} is not linked: {e}"),
+        }
+    }
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &linked)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
@@ -3769,6 +4075,15 @@ pub fn embed_with(
         extra = modules;
         index = Some(checks);
     }
+    extra.insert("src/MirLemmas.lex.tex".into(), LEMMAS.as_bytes().to_vec());
+    // The differential check's modules on their own: each holds the
+    // bodies its theorems run, so a project of them and the evaluator
+    // verifies the check apart from the rest of the embedding.
+    if let (Some(dir), Some(checks)) = (alone, index.as_ref()) {
+        let mut files = embed_project(krate, &[], extra.clone(), crate::project::MAX_FILE_BYTES);
+        files.insert("differential.toml".into(), checks.clone().into_bytes());
+        replace_dir(dir, Some(&files))?;
+    }
     let mut files = embed_project(krate, &modules, extra, crate::project::MAX_FILE_BYTES);
     files.insert("census.toml".into(), census.render().into_bytes());
     if let Some(checks) = index {
@@ -3780,7 +4095,9 @@ pub fn embed_with(
     }
     // A module none of whose bodies is sampled has no harness.
     if let Some(dir) = harness {
-        let crate_files = (!program.samples.is_empty()).then(|| harness_crate(&program));
+        let of_crates_io = !["core", "alloc", "std"].contains(&krate);
+        let crate_files = (!program.samples.is_empty())
+            .then(|| harness_crate(&program, of_crates_io.then_some(krate)));
         replace_dir(dir, crate_files.as_ref())?;
     }
     Ok(census)
@@ -3800,6 +4117,12 @@ pub struct Outputs<'a> {
     /// The shallow translations `uorust core --lexlean` wrote, and the
     /// directory the bridge's project is written to (`crate::bridge`).
     pub bridge: Option<(&'a Path, &'a Path)>,
+    /// Where the differential check's modules are written as a project of
+    /// their own, beside the evaluator, with their index.
+    pub differential: Option<&'a Path>,
+    /// Library crates (core, alloc) to link into the program, each with
+    /// its dumps: a call into one names its body ([`link_library`]).
+    pub link: &'a [(&'a str, &'a Path)],
 }
 
 /// A register's module file with each row's embedding stamped on it by
@@ -3856,6 +4179,17 @@ pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> St
 /// A file's text.
 pub(crate) fn read_text(path: &Path) -> Result<String, UorustError> {
     std::fs::read_to_string(path).map_err(|e| crate::error::io(path, e))
+}
+
+/// A dump's text, with the spans it prints ([`crate::mir::parse::dumped`]).
+pub(crate) fn read_dump(path: &Path) -> Result<String, UorustError> {
+    Ok(crate::mir::parse::dumped(&read_text(path)?))
+}
+
+/// A dump's text as rustc prints it without spans
+/// ([`crate::mir::parse::unspanned`]).
+pub(crate) fn read_plain_dump(path: &Path) -> Result<String, UorustError> {
+    Ok(crate::mir::parse::unspanned(&read_dump(path)?))
 }
 
 /// The paths a directory holds, sorted.
@@ -4016,6 +4350,15 @@ pub(crate) struct Sample {
     params: Vec<(String, Sampled)>,
     result: (String, Sampled),
     closure: Vec<String>,
+    /// The fuel a run of it takes at most ([`derived_fuel`]).
+    fuel: u128,
+    /// For a body of a crate of crates.io, the module its call is written
+    /// in: a harness outside the crate calls it through a wrapper there
+    /// ([`harness_crate`]), where its private items are seen.
+    home: Option<Vec<String>>,
+    /// For a method of an impl, the file the impl is written in, from the
+    /// crate's root, its wrapper's home in place of a module's file.
+    file: Option<String>,
 }
 
 impl Sample {
@@ -4042,7 +4385,7 @@ impl Sample {
 /// scalars.
 fn sample(
     root: &Path,
-    src: &Path,
+    lib: &Path,
     b: &IrBody,
     key: &str,
     kappa: &str,
@@ -4060,7 +4403,7 @@ fn sample(
     };
     let params: Vec<(String, Sampled)> = (1..=b.arity).map(scalar).collect::<Option<_>>()?;
     let result = scalar(0)?;
-    if params.is_empty() || !stable_and_safe(&module_sources(src, module), name) {
+    if params.is_empty() || !stable_and_safe(&module_sources(lib, module), name) {
         return None;
     }
     Some(Sample {
@@ -4070,18 +4413,186 @@ fn sample(
         params,
         result,
         closure: Vec::new(),
+        fuel: 0,
+        home: None,
+        file: None,
     })
+}
+
+/// The body `b` of a crate of crates.io, dumped to the file of stem
+/// `stem`, as a sample, where it is a safe function of the crate over
+/// scalars: an item its module path names from `crate::`, which a wrapper
+/// the harness writes in the module that declares it calls (a wrapper
+/// rustc refuses is left out). MIR prints a path trimmed to what tells it
+/// apart (`has_zero_byte` for `arch::all::memchr::has_zero_byte`); its dump's
+/// file is named by the whole of it, `<crate>.arch-all-memchr-has_zero_byte`,
+/// a method's with its impl's `{impl#k}`, which no source path names.
+#[allow(clippy::too_many_arguments)]
+fn crate_sample(
+    stem: &str,
+    package: &Path,
+    lib: &Path,
+    b: &IrBody,
+    key: &str,
+    kappa: &str,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<Sample> {
+    let segments: Vec<&str> = stem.split_once('.')?.1.split('-').collect();
+    if let Some(method) = method_sample(package, b, key, kappa, width, floats) {
+        return Some(method);
+    }
+    let ident = |s: &&str| {
+        s.chars()
+            .next()
+            .is_some_and(|c| c.is_alphabetic() || c == '_')
+            && s.chars().all(|c| c.is_alphanumeric() || c == '_')
+            && *s != "_"
+    };
+    if segments.is_empty() || !segments.iter().all(ident) {
+        return None;
+    }
+    let (name, above) = segments.split_last()?;
+    if crate::mir::parse::split_path(&b.path).last() != Some(name) {
+        return None;
+    }
+    let scalar = |i: usize| {
+        let t = b.locals.get(i)?;
+        Some((t.clone(), Sampled::of(t, width, floats)?))
+    };
+    let params: Vec<(String, Sampled)> = (1..=b.arity).map(scalar).collect::<Option<_>>()?;
+    let result = scalar(0)?;
+    if params.is_empty() {
+        return None;
+    }
+    // Declared in its module's file, and not `unsafe`: a harness calls it
+    // on any input.
+    let file = read_text(&crate::layouts::module_file(lib, above)).ok()?;
+    let decl = format!("fn {name}(");
+    if !file.contains(&decl) || file.contains(&format!("unsafe fn {name}(")) {
+        return None;
+    }
+    Some(Sample {
+        key: key.to_string(),
+        kappa: kappa.to_string(),
+        function: format!("crate::{}", segments.join("::")),
+        params,
+        result,
+        closure: Vec::new(),
+        fuel: 0,
+        home: Some(above.iter().map(|s| s.to_string()).collect()),
+        file: None,
+    })
+}
+
+/// The scalars of `b`'s signature, its parameters' and its result's, where
+/// each is one and it takes one at least.
+/// A sampled signature: its parameters' types and scalars, and its
+/// result's.
+type Signature = (Vec<(String, Sampled)>, (String, Sampled));
+
+fn scalar_signature(
+    b: &IrBody,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<Signature> {
+    let scalar = |i: usize| {
+        let t = b.locals.get(i)?;
+        Some((t.clone(), Sampled::of(t, width, floats)?))
+    };
+    let params: Vec<(String, Sampled)> = (1..=b.arity).map(scalar).collect::<Option<_>>()?;
+    let result = scalar(0)?;
+    (!params.is_empty()).then_some((params, result))
+}
+
+/// A method of one of the crate's impls as a sample (`{impl#k}` in its
+/// dump's name), where the impl's header, which MIR names by its span
+/// (`<impl at src/lib.rs:40:1: 40:9>::f`), is no generic one: `impl T`
+/// calls it `T::f`, `impl Tr for T` calls it `<T as Tr>::f`, written in the
+/// impl's own file, where the names its header writes are seen. A
+/// derive's span (its trait's name alone) is no header.
+fn method_sample(
+    root: &Path,
+    b: &IrBody,
+    key: &str,
+    kappa: &str,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<Sample> {
+    let at = b.path.find("<impl at ")?;
+    let rest = &b.path[at + "<impl at ".len()..];
+    let (span, name) = rest.split_once(">::")?;
+    if name.contains("::") || name.contains('<') || name.contains('{') {
+        return None;
+    }
+    let (params, result) = scalar_signature(b, width, floats)?;
+    let (file, header) = span_text(root, span)?;
+    let header = header.split_whitespace().collect::<Vec<_>>().join(" ");
+    let body = header.strip_prefix("impl ")?;
+    if body.starts_with('<') || body.starts_with('!') || body.contains(" where ") {
+        return None;
+    }
+    let callee = match body.split_once(" for ") {
+        Some((tr, ty)) => format!("<{ty} as {tr}>::{name}"),
+        None => format!("{body}::{name}"),
+    };
+    let text = read_text(&root.join(&file)).ok()?;
+    if !text.contains(&format!("fn {name}(")) || text.contains(&format!("unsafe fn {name}(")) {
+        return None;
+    }
+    Some(Sample {
+        key: key.to_string(),
+        kappa: kappa.to_string(),
+        function: callee,
+        params,
+        result,
+        closure: Vec::new(),
+        fuel: 0,
+        home: Some(Vec::new()),
+        file: Some(file),
+    })
+}
+
+/// The file a span (`src/lib.rs:40:1: 41:9`, lines and columns from one)
+/// names, from `root`, and the text it spans.
+fn span_text(root: &Path, span: &str) -> Option<(String, String)> {
+    let (file, range) = span.split_once(':')?;
+    let (from, to) = range.split_once(": ")?;
+    let (l1, c1) = from.split_once(':')?;
+    let (l2, c2) = to.split_once(':')?;
+    let (l1, c1, l2, c2): (usize, usize, usize, usize) = (
+        l1.parse().ok()?,
+        c1.parse().ok()?,
+        l2.parse().ok()?,
+        c2.parse().ok()?,
+    );
+    let source = read_text(&root.join(file)).ok()?;
+    let lines: Vec<&str> = source.lines().collect();
+    let mut text = String::new();
+    for l in l1..=l2 {
+        let chars: Vec<char> = lines.get(l.checked_sub(1)?)?.chars().collect();
+        let from = if l == l1 { c1.saturating_sub(1) } else { 0 };
+        let to = if l == l2 {
+            c2.saturating_sub(1).min(chars.len())
+        } else {
+            chars.len()
+        };
+        text.extend(chars.get(from..to)?);
+        text.push(' ');
+    }
+    Some((file.to_string(), text))
 }
 
 /// The source files of a top-level module: its directory's, or, for one
 /// the crate root declares at a path (`#[path = "num/f32.rs"] pub mod
 /// f32;`), that file.
-fn module_sources(src: &Path, module: &str) -> Vec<std::path::PathBuf> {
+fn module_sources(lib: &Path, module: &str) -> Vec<std::path::PathBuf> {
+    let src = lib.parent().unwrap_or(lib);
     let own = src.join(module);
     if own.is_dir() {
         return dir_paths(&own).unwrap_or_default();
     }
-    let root = read_text(&src.join("lib.rs")).unwrap_or_default();
+    let root = read_text(lib).unwrap_or_default();
     let mut path: Option<&str> = None;
     for line in root.lines() {
         let t = line.trim();
@@ -4165,26 +4676,299 @@ pub(crate) struct Program {
     unread: BTreeSet<String>,
 }
 
+/// What a sample reaches: every body, which the evaluator defines, or
+/// why it does not.
+enum Reach {
+    Closed(Vec<String>),
+    Open(String),
+}
+
 /// The keys of the bodies `key` reaches, itself first, where the evaluator
-/// defines each: `None` where one is not embedded, is blocked, calls an
-/// intrinsic, leaves a callee to a dictionary, or reaches an instance whose
-/// generics no binding fixes (`Generic.unknown`, and the root's own slots,
-/// which a sample's call supplies none of).
-fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Option<Vec<String>> {
+/// defines each: else why not, by the first body that stops it, which is
+/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
+/// dictionary, or reaches an instance whose generics no binding fixes
+/// (`Generic.unknown`, and the root's own slots, which a sample's call
+/// supplies none of).
+/// A term read as an s-expression: an atom, or a parenthesized list.
+#[derive(Debug, PartialEq, Eq)]
+enum Sexp {
+    Atom(String),
+    List(Vec<Sexp>),
+}
+
+/// The s-expression `text` starts with.
+fn sexp(text: &str) -> Option<Sexp> {
+    fn one(chars: &[char], i: &mut usize) -> Option<Sexp> {
+        while chars.get(*i).is_some_and(|c| c.is_whitespace()) {
+            *i += 1;
+        }
+        match chars.get(*i)? {
+            '(' => {
+                *i += 1;
+                let mut items = Vec::new();
+                loop {
+                    while chars.get(*i).is_some_and(|c| c.is_whitespace()) {
+                        *i += 1;
+                    }
+                    if *chars.get(*i)? == ')' {
+                        *i += 1;
+                        return Some(Sexp::List(items));
+                    }
+                    items.push(one(chars, i)?);
+                }
+            }
+            ')' => None,
+            '"' => {
+                let start = *i;
+                *i += 1;
+                while *chars.get(*i)? != '"' {
+                    *i += if chars[*i] == '\\' { 2 } else { 1 };
+                }
+                *i += 1;
+                Some(Sexp::Atom(chars[start..*i].iter().collect()))
+            }
+            _ => {
+                let start = *i;
+                while chars
+                    .get(*i)
+                    .is_some_and(|c| !c.is_whitespace() && *c != '(' && *c != ')')
+                {
+                    *i += 1;
+                }
+                Some(Sexp::Atom(chars[start..*i].iter().collect()))
+            }
+        }
+    }
+    let chars: Vec<char> = text.chars().collect();
+    one(&chars, &mut 0)
+}
+
+/// A constructor term's name and arguments: `(ctor Mir::T.c a b)`.
+fn ctor_of(s: &Sexp) -> Option<(&str, &[Sexp])> {
+    match s {
+        Sexp::List(items) => match items.as_slice() {
+            [Sexp::Atom(c), Sexp::Atom(name), args @ ..] if c == "ctor" => Some((name, args)),
+            _ => None,
+        },
+        Sexp::Atom(_) => None,
+    }
+}
+
+/// The layouts a list term of layouts holds, however its runs are joined.
+fn layouts_in(s: &Sexp) -> Vec<&Sexp> {
+    if ctor_of(s).is_some_and(|(n, _)| n.starts_with(&mir_name("Layout."))) {
+        return vec![s];
+    }
+    match s {
+        Sexp::List(items) => items.iter().flat_map(layouts_in).collect(),
+        Sexp::Atom(_) => Vec::new(),
+    }
+}
+
+/// The pieces of a value a layout encodes, as the evaluator's encoding and
+/// decoding take them, one task each: the layout itself, and each piece
+/// of each value it holds, an array's elements each, a tagged enum's
+/// largest variant's.
+fn layout_pieces(s: &Sexp) -> Option<u128> {
+    let (name, args) = ctor_of(s)?;
+    let kind = name.strip_prefix(&format!("{}.", mir_name("Layout")))?;
+    let below = match kind {
+        "array" => {
+            let Sexp::Atom(n) = args.get(1)? else {
+                return None;
+            };
+            layout_pieces(args.first()?)?.checked_mul(n.parse().ok()?)?
+        }
+        "record" => layouts_in(args.get(3)?)
+            .into_iter()
+            .map(layout_pieces)
+            .try_fold(0u128, |a, p| a.checked_add(p?))?,
+        "tagged" => layouts_in(args.get(11)?)
+            .into_iter()
+            .map(layout_pieces)
+            .try_fold(0u128, |a, p| Some(a.max(p?)))?,
+        "ranged" => layout_pieces(args.first()?)?,
+        _ => 0,
+    };
+    below.checked_add(1)
+}
+
+/// The bytes a layout spans, as its term states them.
+fn layout_size(s: &Sexp) -> Option<u128> {
+    let (name, args) = ctor_of(s)?;
+    let nat = |i: usize| match args.get(i) {
+        Some(Sexp::Atom(n)) => n.parse::<u128>().ok(),
+        _ => None,
+    };
+    match name.strip_prefix(&format!("{}.", mir_name("Layout")))? {
+        "boolean" => Some(1),
+        "character" => Some(4),
+        "array" => nat(1)?.checked_mul(nat(2)?),
+        "ranged" => layout_size(args.first()?),
+        _ => nat(0),
+    }
+}
+
+/// The fuel a step's own work takes past it, `text` starting with the
+/// term of what does it, each part having the fuel left: a transmute's
+/// source's encoding (a task for each piece and one to end) or its
+/// target's decoding (two for each, the piece and the value built of it
+/// or its range checked, and one to end), whichever is more; a `raw_eq`'s
+/// encoding of its layout; a `write_bytes`'s transmute of its element's
+/// bytes to the element. None where a layout is its instance's.
+fn transmute_work(text: &str) -> Option<u128> {
+    let term = sexp(text)?;
+    let (name, args) = ctor_of(&term)?;
+    fn layout(g: &Sexp) -> Option<&Sexp> {
+        let (name, args) = ctor_of(g)?;
+        (name == mir_name("Generic.layout") || name == mir_name("Generic.aligned"))
+            .then(|| args.first())
+            .flatten()
+    }
+    let encode = |l: &Sexp| layout_pieces(l)?.checked_add(1);
+    let decode = |l: &Sexp| layout_pieces(l)?.checked_mul(2)?.checked_add(1);
+    if name == mir_name("Callee.rawEq") {
+        return encode(layout(args.first()?)?);
+    }
+    if name == mir_name("Callee.writeBytes") {
+        let element = layout(args.first()?)?;
+        // The element's bytes, an array of a piece for each, and its end.
+        let bytes = layout_size(element)?.checked_add(2)?;
+        return Some(bytes.max(decode(element)?));
+    }
+    let from = encode(layout(args.first()?)?)?;
+    let to = decode(layout(args.get(1)?)?)?;
+    Some(from.max(to))
+}
+
+/// The fuel a run of the body `key` takes at most: its steps, each
+/// callee's for each of its calls, and the most fuel a step's own work or
+/// a constant's pinning takes past it, which the evaluator bounds by the
+/// fuel left; or why no bound is read.
+fn derived_fuel(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Fuel {
+    fn go(
+        every: &BTreeMap<String, (String, Embedded)>,
+        key: &str,
+        open: &mut Vec<String>,
+        done: &mut BTreeMap<String, (u128, u128)>,
+    ) -> Fuel {
+        if let Some(&(steps, work)) = done.get(key) {
+            return Fuel::Bounded(steps, work);
+        }
+        if open.iter().any(|k| k == key) {
+            if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
+                eprintln!("differential: a call of {key} reaches it again");
+            }
+            return Fuel::Unbounded(
+                "reaches a body that calls itself, which no loop bound bounds".into(),
+            );
+        }
+        let Some((_, e)) = every.get(key) else {
+            return Fuel::Unbounded("reaches a body not embedded".into());
+        };
+        let (own, calls, mine, _) = match &e.cost {
+            Cost::Bounded {
+                steps,
+                calls,
+                work,
+                pin,
+            } => (*steps, calls, *work, pin),
+            Cost::Unread => return Fuel::Unbounded("reaches a body whose cost is not read".into()),
+            Cost::Unbounded(why) => {
+                if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
+                    eprintln!("differential: {key}: {why}");
+                }
+                // The reason, its block aside, counts the samples it leaves out.
+                let why = match why.split_once(" (at bb") {
+                    Some((head, tail)) => {
+                        format!("{head}{}", tail.split_once(')').map_or("", |(_, t)| t))
+                    }
+                    None => why.clone(),
+                };
+                return Fuel::Unbounded(format!("reaches a body where {why}"));
+            }
+        };
+        open.push(key.to_string());
+        let (mut steps, mut work) = (own, mine);
+        for (callee, runs, constant) in calls {
+            if *runs == 0 {
+                continue;
+            }
+            let (s, w) = match go(every, callee, open, done) {
+                Fuel::Bounded(s, w) => (s, w),
+                unbounded => return unbounded,
+            };
+            steps = steps.saturating_add(runs.saturating_mul(s));
+            work = work.max(w);
+            if *constant {
+                let pin = every.get(callee).and_then(|(_, c)| match &c.cost {
+                    Cost::Bounded { pin, .. } => *pin,
+                    _ => None,
+                });
+                match pin {
+                    Some(p) => work = work.max(p),
+                    None => {
+                        return Fuel::Unbounded(format!(
+                            "reads the constant item {callee}, whose value's size no layout read bounds"
+                        ))
+                    }
+                }
+            }
+        }
+        open.pop();
+        done.insert(key.to_string(), (steps, work));
+        Fuel::Bounded(steps, work)
+    }
+    match go(every, key, &mut Vec::new(), &mut BTreeMap::new()) {
+        Fuel::Bounded(steps, work) => Fuel::Bounded(steps.saturating_add(work), 0),
+        unbounded => unbounded,
+    }
+}
+
+/// [`derived_fuel`]'s answer: the steps and the work past them, or why
+/// no bound is read.
+enum Fuel {
+    Bounded(u128, u128),
+    Unbounded(String),
+}
+
+fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
-        let (_, e) = every.get(&k)?;
-        if !e.blocked.is_empty()
-            || !e.bound.is_empty()
-            || !e.intrinsics.is_empty()
-            || e.term
-                .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
-            || (at == 0
-                && e.term
-                    .contains(&mir_ctor("Generic.slot", &[]).replace(')', "")))
+        let Some((_, e)) = every.get(&k) else {
+            return Reach::Open("reaches a body not embedded".into());
+        };
+        if let Some(b) = e.blocked.iter().next() {
+            return Reach::Open(format!("reaches a body blocked by {b}"));
+        }
+        if let Some(b) = e.bound.iter().next() {
+            // A dictionary's name, its generic arguments and the
+            // instance's impl aside: the kind of callee left.
+            let kind =
+                if b.starts_with("core::") || b.starts_with("alloc::") || b.starts_with("std::") {
+                    b.split("::").next().unwrap_or_default().to_string()
+                } else {
+                    "the crate".to_string()
+                };
+            if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
+                eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
+            }
+            return Reach::Open(format!("leaves a callee of {kind} to a dictionary"));
+        }
+        if !e.intrinsics.is_empty() {
+            return Reach::Open("calls an intrinsic".into());
+        }
+        if e.term
+            .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return None;
+            return Reach::Open("reaches an instance no binding fixes".into());
+        }
+        if at == 0
+            && e.term
+                .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
+        {
+            return Reach::Open("is generic itself".into());
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -4193,22 +4977,77 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Option<Ve
         }
         at += 1;
     }
-    Some(seen)
+    Reach::Closed(seen)
 }
 
 /// The harness crate: one call per case, under `catch_unwind`, each
 /// printed as `<case> <result>` with an integer as its two's complement
 /// bits, after a first line with the build's checks.
-fn harness_crate(program: &Program) -> BTreeMap<String, Vec<u8>> {
+///
+/// For a crate of crates.io (`krate`), whose functions are mostly private,
+/// each sample is called through a wrapper `__uorust_differential_<k>`,
+/// unmangled, that `wrappers.json` asks to be written into the crate's
+/// copy at `../harness-crate` (beside the harness, outside its workspace,
+/// as a crate that declares a workspace of its own must be), in the module
+/// of its function, where its private items
+/// are seen; the harness depends on that copy. Each sample's calls stand
+/// between `// sample <k>` and `// unbuilt <k>`, and the lines from there to
+/// `// end <k>`, commented out, print each of its cases `unbuilt`: where
+/// rustc refuses the wrapper, those are the lines kept
+/// ([`crate::registry`]).
+fn harness_crate(program: &Program, krate: Option<&str>) -> BTreeMap<String, Vec<u8>> {
     let mut main = String::from(
         "// Written by `uorust embed --harness`; do not edit.\n\
-         #![allow(unused_parens)]\n\
-         fn main() {\n    std::panic::set_hook(Box::new(|_| {}));\n    \
+         #![allow(unused_parens)]\n",
+    );
+    if let Some(k) = krate {
+        let _ = writeln!(main, "use {} as _;", k.replace('-', "_"));
+    }
+    main.push_str(
+        "fn main() {\n    std::panic::set_hook(Box::new(|_| {}));\n    \
          let overflow = std::panic::catch_unwind(|| std::hint::black_box(u8::MAX) + 1).is_err();\n    \
          println!(\"checks {} {}\", cfg!(debug_assertions), overflow);\n",
     );
+    let mut wrappers = Vec::new();
     let mut case = 0usize;
-    for s in &program.samples {
+    for (k, s) in program.samples.iter().enumerate() {
+        let show = match s.result.1 {
+            Sampled::Bool => "r.to_string()".to_string(),
+            Sampled::Int(..) => {
+                format!("((r as {}) as u128).to_string()", unsigned(&s.result.0))
+            }
+            Sampled::Float(..) => "r.to_bits().to_string()".to_string(),
+        };
+        let callee = match (&s.home, krate) {
+            (Some(home), Some(_)) => {
+                let wrapper = format!("__uorust_differential_{k}");
+                let names: Vec<String> = (0..s.params.len()).map(|i| format!("a{i}")).collect();
+                let typed: Vec<String> = names
+                    .iter()
+                    .zip(&s.params)
+                    .map(|(n, (t, _))| format!("{n}: {t}"))
+                    .collect();
+                let signature = format!("fn {wrapper}({}) -> {}", typed.join(", "), s.result.0);
+                wrappers.push(serde_json::json!({
+                    "sample": k,
+                    "module": home,
+                    "file": s.file,
+                    "code": format!(
+                        "#[doc(hidden)] #[allow(warnings)] #[unsafe(no_mangle)] pub extern \"Rust\" {signature} {{ {}({}) }}",
+                        s.function,
+                        names.join(", ")
+                    ),
+                }));
+                let _ = writeln!(
+                    main,
+                    "    // sample {k}\n    extern \"Rust\" {{ {signature}; }}"
+                );
+                wrapper
+            }
+            _ => s.function.clone(),
+        };
+        let wrapped = krate.is_some() && s.home.is_some();
+        let first = case;
         for inputs in s.cases() {
             let args: Vec<String> = s
                 .params
@@ -4216,56 +5055,47 @@ fn harness_crate(program: &Program) -> BTreeMap<String, Vec<u8>> {
                 .zip(&inputs)
                 .map(|((printed, scalar), x)| scalar.rust(printed, *x))
                 .collect();
-            let show = match s.result.1 {
-                Sampled::Bool => "r.to_string()".to_string(),
-                Sampled::Int(..) => {
-                    format!("((r as {}) as u128).to_string()", unsigned(&s.result.0))
-                }
-                Sampled::Float(..) => "r.to_bits().to_string()".to_string(),
+            let call = if wrapped {
+                format!("unsafe {{ {callee}({}) }}", args.join(", "))
+            } else {
+                format!("{callee}({})", args.join(", "))
             };
             let _ = write!(
                 main,
-                "    match std::panic::catch_unwind(|| {}({})) {{\n        \
+                "    match std::panic::catch_unwind(|| {call}) {{\n        \
                  Ok(r) => println!(\"{case} {{}}\", {show}),\n        \
                  Err(_) => println!(\"{case} panic\"),\n    }}\n",
-                s.function,
-                args.join(", ")
             );
             case += 1;
         }
+        if wrapped {
+            let _ = writeln!(main, "    // unbuilt {k}");
+            for c in first..case {
+                let _ = writeln!(main, "    // println!(\"{c} unbuilt\");");
+            }
+            let _ = writeln!(main, "    // end {k}");
+        }
     }
     main.push_str("}\n");
-    BTreeMap::from([
+    let dependency = match krate {
+        Some(k) => format!("\n[dependencies]\n{k} = {{ path = \"../harness-crate\" }}\n"),
+        None => String::new(),
+    };
+    let mut files = BTreeMap::from([
         (
             "Cargo.toml".to_string(),
-            "[package]\nname = \"uorust-embed-harness\"\nversion = \"0.1.0\"\nedition = \"2021\"\npublish = false\n\n[workspace]\n"
-                .as_bytes()
-                .to_vec(),
+            format!("[package]\nname = \"uorust-embed-harness\"\nversion = \"0.1.0\"\nedition = \"2021\"\npublish = false\n{dependency}\n[workspace]\n")
+                .into_bytes(),
         ),
         ("src/main.rs".to_string(), main.into_bytes()),
-    ])
-}
-
-/// The steps a run of a sample takes at most: each statement and
-/// terminator of its closure, once per bit of its widest input and once
-/// more, since core's loops over an integer iterate at most once per bit.
-fn fuel(program: &Program, s: &Sample) -> usize {
-    let steps: usize = s
-        .closure
-        .iter()
-        .filter_map(|k| program.every.get(k))
-        .map(|(_, e)| {
-            e.term.matches("(record Mir::Block ").count()
-                + e.term.matches("(ctor Mir::Statement.").count()
-        })
-        .sum();
-    let bits = s
-        .params
-        .iter()
-        .map(|(_, sc)| sc.bits() as usize)
-        .max()
-        .unwrap_or(1);
-    steps * (bits + 1)
+    ]);
+    if krate.is_some() {
+        files.insert(
+            "wrappers.json".to_string(),
+            serde_json::to_vec_pretty(&wrappers).unwrap_or_default(),
+        );
+    }
+    files
 }
 
 /// How long `lexlean verify` lets one child process, one module, run
@@ -4273,7 +5103,7 @@ fn fuel(program: &Program, s: &Sample) -> usize {
 const CHILD_TIMEOUT_MS: usize = 300_000;
 
 /// A measurement of how much the differential check's evaluation costs:
-/// `MEASURED_FUEL` units of [`fuel`], over a module's theorems, verified
+/// `MEASURED_FUEL` units of fuel, over a module's theorems, verified
 /// in one child within `MEASURED_MS` (core::num's `DifferentialPart3` of
 /// 495 theorems, the largest of its parts to verify within the timeout,
 /// on the locked SDK's Lean v4.32.1; its parts of 1,124,627 fuel and more
@@ -4281,13 +5111,26 @@ const CHILD_TIMEOUT_MS: usize = 300_000;
 pub(crate) const MEASURED_FUEL: usize = 664_506;
 pub(crate) const MEASURED_MS: usize = 300_000;
 
+/// The same measurement in units of [`derived_fuel`]. [`MEASURED_FUEL`]
+/// counts the estimate the check ran on before: each statement and block
+/// of a sample's closure, once per bit of its widest input and once more.
+/// Over core::num's samples, the derived fuel is never less than that
+/// estimate divided by [`ESTIMATE_PER_DERIVED`] (a body of no loop and no
+/// call over a `u128`, its steps charged 129 times), so the part measured
+/// held at least this much derived fuel.
+const MEASURED_DERIVED_FUEL: u128 = MEASURED_FUEL as u128 / ESTIMATE_PER_DERIVED;
+
+/// The most that estimate charged a step: once per bit of the widest
+/// input a sample takes, a `u128`, and once more.
+const ESTIMATE_PER_DERIVED: u128 = u128::BITS as u128 + 1;
+
 /// The fuel one module of the differential check holds at most: Lean
 /// decides each theorem by evaluation, at a cost the theorem's fuel
 /// bounds, and a module is one child process that `lexlean verify` stops
 /// at [`CHILD_TIMEOUT_MS`]; so a module's budget is what that timeout
 /// verifies at the measured cost per unit of fuel.
-fn differential_budget() -> usize {
-    CHILD_TIMEOUT_MS.saturating_mul(MEASURED_FUEL) / MEASURED_MS
+fn differential_budget() -> u128 {
+    (CHILD_TIMEOUT_MS as u128).saturating_mul(MEASURED_DERIVED_FUEL) / MEASURED_MS as u128
 }
 
 /// The modules `DifferentialPart{k}`, each with the bodies its theorems
@@ -4317,7 +5160,7 @@ fn differential(
             Some((n.parse().ok()?, r))
         })
         .collect();
-    let mut parts: Vec<(Vec<String>, BTreeSet<String>, usize)> = vec![Default::default()];
+    let mut parts: Vec<(Vec<String>, BTreeSet<String>, u128)> = vec![Default::default()];
     let mut index = String::from(
         "# The differential check (written by `uorust embed --observed`; do not edit):\n\
          # each theorem of Differential, the body it runs, its inputs and what\n\
@@ -4334,7 +5177,9 @@ fn differential(
             let Some(result) = results.get(&(first + i)) else {
                 return Err(bad(format!("no result for case {}", first + i)));
             };
-            if *result == "panic" {
+            // A panic is no value to compare, and an unbuilt case (a
+            // wrapper rustc refused) no run.
+            if *result == "panic" || *result == "unbuilt" {
                 continue;
             }
             let expected = match s.result.1 {
@@ -4354,14 +5199,15 @@ fn differential(
             let theorem = format!("t{name}x{i}");
             let _ = write!(
                 index,
-                "\n[[case]]\ntheorem = \"{theorem}\"\nbody = {}\nfunction = \"{}\"\ninputs = [{}]\nreturned = \"{result}\"\n",
+                "\n[[case]]\ntheorem = \"{theorem}\"\nbody = {}\nkappa = \"{}\"\nfunction = \"{}\"\ninputs = [{}]\nreturned = \"{result}\"\n",
                 census_string(&s.key),
+                s.kappa,
                 s.function,
                 inputs.iter().map(u128::to_string).collect::<Vec<_>>().join(", ")
             );
             theorems.push(format!(
                 "theorem{{\n  name: {theorem},\n  parameters: [],\n  statement: ((Mir::evaluate {} (p{name}) {} {}) = {}),\n  proof: reflexivity{{}}\n}}",
-                fuel(program, s),
+                s.fuel,
                 mir_string(&s.key),
                 term_list(&args, &mir_name("Value")),
                 mir_ctor("Outcome.returned", &[expected])
@@ -4371,8 +5217,13 @@ fn differential(
             continue;
         }
         // A sample's theorems stay in one module, which a sample whose
-        // fuel is past the budget has to itself.
-        let cost = theorems.len().saturating_mul(fuel(program, s));
+        // fuel is past the budget has to itself. A call finds its callee
+        // by comparing paths along the program's bodies, so a step costs
+        // up to the closure's size: the measurement was of samples of one
+        // body.
+        let cost = (theorems.len() as u128)
+            .saturating_mul(s.fuel)
+            .saturating_mul(s.closure.len().max(1) as u128);
         if parts
             .last()
             .is_some_and(|(_, _, n)| *n > 0 && n.saturating_add(cost) > differential_budget())
@@ -4429,13 +5280,14 @@ fn differential(
     Ok((modules, index))
 }
 
-/// A body's κ, as the core register keys it: its crate path and its text,
-/// with the build's allocation numbers renumbered.
+/// A body's κ, as the core register keys it: its crate path and its text
+/// as rustc prints it without spans, with the build's allocation numbers
+/// renumbered.
 pub(crate) fn body_kappa(krate: &str, path: &str, text: &str) -> String {
     crate::project::sha(
         format!(
             "{krate}::{path}\n{}",
-            crate::mir::core::numbered_allocations(text)
+            crate::mir::core::numbered_allocations(&crate::mir::parse::unspanned(text))
         )
         .as_bytes(),
     )
@@ -4452,7 +5304,10 @@ pub(crate) fn has_row(path: &str) -> bool {
 /// local the block last sets to a constant (a `cfg!` or `const` condition,
 /// `_5 = const false; switchInt(move _5)`) goes only to that constant's
 /// arm, and every other terminator to its successors.
-fn live_successors(block: &crate::mir::ir::IrBlock) -> Vec<usize> {
+fn live_successors(
+    block: &crate::mir::ir::IrBlock,
+    named: &dyn Fn(&IrConstant) -> Option<i128>,
+) -> Vec<usize> {
     let IrTerminator::Switch(IrOperand::Copy(p) | IrOperand::Move(p), arms, otherwise) =
         &block.terminator
     else {
@@ -4469,7 +5324,7 @@ fn live_successors(block: &crate::mir::ir::IrBlock) -> Vec<usize> {
             match c {
                 IrConstant::Bool(b) => Some(i128::from(*b)),
                 IrConstant::Int(n, _) if *n >= 0 => Some(*n),
-                _ => None,
+                c => named(c),
             }
         }
         _ => None,
@@ -4503,10 +5358,18 @@ fn arg_type(body: &IrBody, o: &IrOperand) -> Option<String> {
     }
 }
 
-/// The name a body has in the program: its path, or, where a macro's
-/// impls share it, its path and its definition's name.
-pub(crate) fn program_key(link: &crate::mir::link::CoreLink, path: &str, kappa: &str) -> String {
-    if link.bodies.get(path).is_some_and(|b| b.len() > 1) {
+/// The name a body has in the program: its path as its `fn` line prints
+/// it, or, where a macro's impls share the path its dump names them by
+/// (`dumped`, which the linker keys them by), that path and its
+/// definition's name.
+pub(crate) fn program_key(
+    link: &crate::mir::link::CoreLink,
+    dumped: &str,
+    path: &str,
+    kappa: &str,
+) -> String {
+    let shared = |p: &str| link.bodies.get(p).is_some_and(|b| b.len() > 1);
+    if shared(dumped) || shared(path) {
         format!("{path}#{}", def_name(kappa))
     } else {
         path.to_string()
@@ -4525,14 +5388,24 @@ pub(crate) fn resolve_callee(
     args: &[Option<String>],
     dest: &str,
 ) -> Callee {
+    // A body's key, as the program's loop over the dumps keys it: by the
+    // path its `fn` line prints (rustc trims it, `arith::` for
+    // `ops::arith::`), where the linker names it by its dump's.
+    let key = |dumped: &str, text: &str| {
+        let printed = text
+            .lines()
+            .find_map(|l| l.strip_prefix("fn "))
+            .map_or(dumped, |h| &h[..h.find('(').unwrap_or(h.len())]);
+        program_key(link, dumped, printed, &body_kappa(krate, printed, text))
+    };
     let erased = crate::mir::lower::erase(callee);
     let path = link.path(&erased);
     if let Some(p) = path.as_ref().filter(|p| link.decls.intrinsics.contains(*p)) {
         return Callee::Intrinsic(p.clone());
     }
     if let Some(p) = path.as_ref() {
-        if let Some([_]) = link.bodies.get(p).map(Vec::as_slice) {
-            return Callee::Body(p.clone());
+        if let Some([t]) = link.bodies.get(p).map(Vec::as_slice) {
+            return Callee::Body(key(p, t));
         }
     }
     let Some(instance) = link.instance(callee, args, dest) else {
@@ -4541,8 +5414,8 @@ pub(crate) fn resolve_callee(
     let Some(texts) = link.bodies.get(&instance.path) else {
         return Callee::Bound(callee.to_string());
     };
-    if let [_] = texts.as_slice() {
-        return Callee::Body(instance.path);
+    if let [t] = texts.as_slice() {
+        return Callee::Body(key(&instance.path, t));
     }
     // Of a macro's impls, the one whose signature, at the instance's
     // bindings, is the instance's.
@@ -4558,11 +5431,7 @@ pub(crate) fn resolve_callee(
         .iter()
         .filter(|t| head(t).map(|l| crate::mir::stdlib::substitute(&l, &generics)) == want);
     match (hits.next(), hits.next()) {
-        (Some(t), None) => Callee::Body(program_key(
-            link,
-            &instance.path,
-            &body_kappa(krate, &instance.path, t),
-        )),
+        (Some(t), None) => Callee::Body(key(&instance.path, t)),
         _ => Callee::Bound(callee.to_string()),
     }
 }
@@ -4629,12 +5498,17 @@ fn nesting(ty: &str) -> usize {
 /// fixpoint, bounded by the deepest type the program prints: no instance
 /// nests deeper. A slot no binding fixes is `Generic.unknown`, which the
 /// evaluator answers as undefined.
+/// Each call's token written as its callee at its instance's generics,
+/// the layouts no instance reads, and each body's slots, its own and those
+/// its callees leave to it. A call into a library linked into the program
+/// (`linked`, by name) is bound by that library's link.
 fn instances(
     cx: &Cx<'_>,
     link: &crate::mir::link::CoreLink,
+    linked: &[(&str, &crate::mir::link::CoreLink)],
     every: &BTreeMap<String, (String, Embedded)>,
     others: &[&Embedded],
-) -> (BTreeMap<String, String>, BTreeSet<String>) {
+) -> Instances {
     let mut unread = BTreeSet::new();
     let deepest = link
         .locals
@@ -4651,11 +5525,21 @@ fn instances(
         bindings
             .entry(site.token.clone())
             .or_insert_with(|| {
+                // A call into a linked library is bound as its link binds
+                // the call, its name aside.
+                let (link, text) = linked
+                    .iter()
+                    .find_map(|(k, l)| {
+                        let rest = site.text.strip_prefix(&format!("{k}::"))?;
+                        site.callee
+                            .starts_with(&format!("{k}::"))
+                            .then_some((*l, rest))
+                    })
+                    .unwrap_or((link, site.text.as_str()));
                 let bound = if !site.constant {
-                    link.instance(&site.text, &site.args, &site.dest)
-                        .map(|i| i.bound)
-                } else if site.text.starts_with('<') {
-                    link.constant(&site.text).map(|i| i.bound)
+                    link.instance(text, &site.args, &site.dest).map(|i| i.bound)
+                } else if text.starts_with('<') {
+                    link.constant(text).map(|i| i.bound)
                 } else {
                     None
                 };
@@ -4772,8 +5656,15 @@ fn instances(
             out.insert(site.token.clone(), term);
         }
     }
-    (out, unread)
+    (out, unread, slots)
 }
+
+/// [`instances`]' answer.
+type Instances = (
+    BTreeMap<String, String>,
+    BTreeSet<String>,
+    BTreeMap<String, Vec<Slot>>,
+);
 
 /// A body's term with each call's token written as its callee.
 fn write_callees(term: &str, callees: &BTreeMap<String, String>) -> String {
@@ -4801,6 +5692,134 @@ fn embed_census(
     dumps: &Path,
     only: &[String],
 ) -> Result<(Modules, EmbedCensus, Program), UorustError> {
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &[])?;
+    Ok((modules, census, program))
+}
+
+/// A library crate's program linked into a crate's: its link, which
+/// resolves the calls the crate makes into it, and its bodies, keyed and
+/// naming each other under the library's name (`core::num::<impl
+/// usize>::wrapping_sub`), as the crate's calls print them.
+pub(crate) struct Linked {
+    krate: String,
+    link: crate::mir::link::CoreLink,
+    every: BTreeMap<String, (String, Embedded)>,
+}
+
+/// The program of the library crate `krate` (core, alloc), dumped under
+/// `dumps`, to link into a crate's ([`Linked`]), with the libraries it
+/// builds on (`earlier`: alloc's core) linked into it: every body of its
+/// own embedded, its key and every key of its own its terms name prefixed
+/// with the crate's name.
+pub(crate) fn link_library(
+    krate: &str,
+    root: &Path,
+    dumps: &Path,
+    earlier: &[Linked],
+) -> Result<Linked, UorustError> {
+    // No module of it is the census's: its bodies are the program's alone.
+    let none = ["\u{0}".to_string()];
+    let (_, _, program, link) = embed_linked(krate, &[], root, dumps, &none, earlier)?;
+    let theirs = |k: &str| earlier.iter().any(|l| l.every.contains_key(k));
+    let own: Vec<(String, (String, Embedded))> = program
+        .every
+        .into_iter()
+        .filter(|(k, _)| !theirs(k))
+        .collect();
+    let renamed: BTreeMap<String, String> = own
+        .iter()
+        .map(|(k, _)| (mir_string(k), mir_string(&format!("{krate}::{k}"))))
+        .collect();
+    let mine: BTreeSet<String> = own.iter().map(|(k, _)| k.clone()).collect();
+    let every = own
+        .into_iter()
+        .map(|(k, (kappa, mut e))| {
+            e.term = rename_strings(&e.term, &renamed);
+            e.callees = e
+                .callees
+                .iter()
+                .map(|c| {
+                    if mine.contains(c) {
+                        format!("{krate}::{c}")
+                    } else {
+                        c.clone()
+                    }
+                })
+                .collect();
+            if let Cost::Bounded { calls, .. } = &mut e.cost {
+                for (c, _, _) in calls.iter_mut() {
+                    if mine.contains(c.as_str()) {
+                        *c = format!("{krate}::{c}");
+                    }
+                }
+            }
+            e.key = format!("{krate}::{}", e.key);
+            // Its calls are written: no site is left to bind.
+            e.sites.clear();
+            (format!("{krate}::{k}"), (kappa, e))
+        })
+        .collect();
+    Ok(Linked {
+        krate: krate.to_string(),
+        link,
+        every,
+    })
+}
+
+/// `term` with each string literal `renamed` names (as [`mir_string`]
+/// writes it) replaced.
+fn rename_strings(term: &str, renamed: &BTreeMap<String, String>) -> String {
+    let mut out = String::with_capacity(term.len());
+    let bytes = term.as_bytes();
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] != b'"' {
+            let next = term[i..].find('"').map_or(term.len(), |n| i + n);
+            out.push_str(&term[i..next]);
+            i = next;
+            continue;
+        }
+        let mut j = i + 1;
+        while j < bytes.len() && bytes[j] != b'"' {
+            j += if bytes[j] == b'\\' { 2 } else { 1 };
+        }
+        let end = (j + 1).min(bytes.len());
+        let literal = &term[i..end];
+        // Only where a term names a body: an intrinsic's name, a text or a
+        // dictionary's name that a key spells is no key.
+        let before = term[..i].trim_end();
+        let names_body = before.ends_with("path :=")
+            || [
+                "Callee.body",
+                "Callee.instance",
+                "Callee.constant",
+                "Const.function",
+            ]
+            .iter()
+            .any(|c| before.ends_with(c));
+        out.push_str(
+            renamed
+                .get(literal)
+                .filter(|_| names_body)
+                .map_or(literal, String::as_str),
+        );
+        i = end;
+    }
+    out
+}
+
+/// [`embed_census`] with the library crates `linked` linked into the
+/// program: a call the crate's own link leaves unresolved that names one
+/// of them (`core::...`) is resolved by its link to its body, under its
+/// name; its link is returned too.
+fn embed_linked(
+    krate: &str,
+    builds_on: &[String],
+    root: &Path,
+    dumps: &Path,
+    only: &[String],
+    linked: &[Linked],
+) -> Result<(Modules, EmbedCensus, Program, crate::mir::link::CoreLink), UorustError> {
     let (width, big_endian) = dump_target(dumps)?;
     let dirs: Vec<std::path::PathBuf> = dir_paths(dumps)?
         .into_iter()
@@ -4821,7 +5840,7 @@ fn embed_census(
                 .and_then(|n| n.to_str())
                 .unwrap_or_default()
                 .to_string();
-            texts.push((name, read_text(file)?));
+            texts.push((name, read_dump(file)?));
         }
         read.push((module, texts));
     }
@@ -4904,9 +5923,22 @@ fn embed_census(
     // program leaves to its dictionary, as a foreign function is: the
     // evaluator is given the platform's, and stops unlinked without it.
     let platform = platform_intrinsics(&library_root(root));
-    let resolve = |callee: &str, args: &[Option<String>], dest: &str| match resolve_callee(
+    let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
+        linked.iter().find_map(|l| {
+            let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
+            match resolve_callee(&l.link, &l.krate, rest, args, dest) {
+                Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+                Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+                Callee::Bound(_) => None,
+            }
+        })
+    };
+    let resolve = |callee: &str, args: &[Option<String>], dest: &str| match match resolve_callee(
         &link, krate, callee, args, dest,
     ) {
+        Callee::Bound(name) => into_linked(callee, args, dest).unwrap_or(Callee::Bound(name)),
+        c => c,
+    } {
         Callee::Intrinsic(p)
             if (platform.contains(&intrinsic_name(&p))
                 || PLATFORM_EFFECTS.contains(&intrinsic_name(&p).as_str()))
@@ -4920,7 +5952,14 @@ fn embed_census(
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
-        let instance = link.constant(printed)?;
+        // A constant item of a linked library (`core::num::<impl
+        // usize>::MAX`), as its own source declares it.
+        let instance = link.constant(printed).or_else(|| {
+            linked.iter().find_map(|l| {
+                l.link
+                    .constant(printed.strip_prefix(&format!("{}::", l.krate))?)
+            })
+        })?;
         let mut b = crate::mir::parse::bodies(&instance.text)
             .into_iter()
             .next()?;
@@ -4937,7 +5976,12 @@ fn embed_census(
     let mut every: BTreeMap<String, (String, Embedded)> = BTreeMap::new();
     let mut samples = Vec::new();
     let mut signatures = BTreeMap::new();
-    let src = library_root(root).join(krate).join("src");
+    let package = library_root(root).join(krate);
+    let lib = package.join(crate::layouts::library_file(&package)?);
+    let sources = crate::mir::site::Sources::new(root);
+    // Core's, alloc's and std's samples are their primitives' methods; a
+    // crate of crates.io's are its own functions over scalars.
+    let of_library = ["core", "alloc", "std"].contains(&krate);
     let statics = statics(&link);
     let globals = global_statics(&link);
     let static_allocs: BTreeMap<String, String> = read
@@ -5015,6 +6059,9 @@ fn embed_census(
                 sites: Default::default(),
                 item_texts: Default::default(),
                 key: Default::default(),
+                block: Default::default(),
+                sources: &sources,
+                declared: Default::default(),
             };
             // A static's initializer is a body of the program, read where a
             // body reads the static, and no row of the census.
@@ -5027,7 +6074,9 @@ fn embed_census(
                 let kappa = body_kappa(krate, &b.path, text);
                 let key = match parts.get(stem).filter(|_| is_part(&b.path)) {
                     Some(key) => key.clone(),
-                    None => program_key(&link, &b.path, &kappa),
+                    None => {
+                        program_key(&link, dumped_path(text).unwrap_or(&b.path), &b.path, &kappa)
+                    }
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
@@ -5039,7 +6088,12 @@ fn embed_census(
                             b.locals.iter().take(b.arity + 1).cloned().collect(),
                         ),
                     );
-                    if let Some(sample) = sample(root, &src, &b, &key, &kappa, width, &floats) {
+                    let sampled = if of_library {
+                        sample(root, &lib, &b, &key, &kappa, width, &floats)
+                    } else {
+                        crate_sample(stem, &package, &lib, &b, &key, &kappa, width, &floats)
+                    };
+                    if let Some(sample) = sampled {
                         samples.push(sample);
                     }
                 }
@@ -5057,6 +6111,13 @@ fn embed_census(
         bodies.sort_by(|a, b| a.0.cmp(&b.0));
         bodies.dedup_by(|a, b| a.0 == b.0);
         modules.push((module.clone(), bodies));
+    }
+    // The linked libraries' bodies, which the crate's calls into them
+    // name.
+    for l in linked {
+        for (k, v) in &l.every {
+            every.entry(k.clone()).or_insert_with(|| v.clone());
+        }
     }
     let unread = {
         let cx = Cx {
@@ -5086,6 +6147,9 @@ fn embed_census(
             sites: Default::default(),
             item_texts: Default::default(),
             key: Default::default(),
+            block: Default::default(),
+            sources: &sources,
+            declared: Default::default(),
         };
         // The constant items the bodies read that no dump holds: each a
         // body of the program, as its declaration gives it.
@@ -5105,9 +6169,16 @@ fn embed_census(
             .iter()
             .flat_map(|(_, bodies)| bodies.iter().map(|(_, e)| e))
             .collect();
-        let (callees, found) = instances(&cx, &link, &every, &others);
-        for (_, e) in every.values_mut() {
+        let links: Vec<(&str, &crate::mir::link::CoreLink)> =
+            linked.iter().map(|l| (l.krate.as_str(), &l.link)).collect();
+        let (callees, found, slots) = instances(&cx, &link, &links, &every, &others);
+        for (k, (_, e)) in every.iter_mut() {
             e.term = write_callees(&e.term, &callees);
+            // Its slots with those its callees leave it: a caller in a
+            // program this one is linked into supplies them all.
+            if let Some(s) = slots.get(k) {
+                e.slots = s.clone();
+            }
         }
         for (_, bodies) in &mut modules {
             for (_, e) in bodies.iter_mut() {
@@ -5120,13 +6191,34 @@ fn embed_census(
     // every body it reaches is embedded, uses no construct the evaluator
     // does not define, calls no intrinsic and leaves no callee to a
     // dictionary.
+    let mut left: BTreeMap<String, usize> = BTreeMap::new();
+    let sampled = samples.len();
     samples.retain_mut(|s| match closure(&every, &s.key) {
-        Some(c) => {
-            s.closure = c;
-            true
+        Reach::Closed(c) => match derived_fuel(&every, &s.key) {
+            Fuel::Bounded(fuel, _) => {
+                s.closure = c;
+                s.fuel = fuel;
+                true
+            }
+            Fuel::Unbounded(why) => {
+                *left.entry(why).or_default() += 1;
+                false
+            }
+        },
+        Reach::Open(why) => {
+            *left.entry(why).or_default() += 1;
+            false
         }
-        None => false,
     });
+    if sampled > 0 {
+        eprintln!(
+            "differential: {} of {sampled} sampled bodies checked{}",
+            samples.len(),
+            left.iter()
+                .map(|(why, n)| format!("; {n} left out: {why}"))
+                .collect::<String>()
+        );
+    }
     let program = Program {
         every,
         samples,
@@ -5136,7 +6228,7 @@ fn embed_census(
         signatures,
         globals: globals.len(),
     };
-    Ok((modules, census, program))
+    Ok((modules, census, program, link))
 }
 
 #[cfg(test)]
@@ -5215,6 +6307,119 @@ mod tests {
     }
 
     use super::*;
+
+    /// A function pointer is one however its ABI and safety print.
+    #[test]
+    fn a_function_pointer_is_one_however_it_prints() {
+        for ty in [
+            "fn(u8) -> u8",
+            "unsafe fn(u8, *const u8) -> Option<*const u8>",
+            "extern \"C\" fn()",
+            "unsafe extern \"C\" fn(i32)",
+        ] {
+            assert!(fn_pointer(ty), "{ty}");
+        }
+        assert!(!fn_pointer("unsafe_cell::UnsafeCell<u8>"));
+    }
+
+    /// A transmute's work is read from its layouts' terms: a `[u8; 4]`
+    /// to a `u32` encodes the array and its four bytes, and decodes one
+    /// integer.
+    #[test]
+    fn a_transmutes_work_is_read_from_its_layouts() {
+        let byte = mir_ctor("Layout.int", &["1".into(), "false".into()]);
+        let array = mir_ctor("Layout.array", &[byte, "4".into(), "1".into()]);
+        let word = mir_ctor("Layout.int", &["4".into(), "false".into()]);
+        let term = mir_ctor(
+            "Rvalue.transmute",
+            &[
+                mir_ctor("Generic.layout", std::slice::from_ref(&array)),
+                mir_ctor("Generic.layout", &[word]),
+                "x".into(),
+            ],
+        );
+        assert_eq!(layout_pieces(&sexp(&array).unwrap()), Some(5));
+        assert_eq!(layout_size(&sexp(&array).unwrap()), Some(4));
+        assert_eq!(transmute_work(&term), Some(6));
+        let slot = mir_ctor("Callee.rawEq", &[mir_ctor("Generic.slot", &["0".into()])]);
+        assert_eq!(transmute_work(&slot), None);
+    }
+
+    /// A sample's fuel is its steps and each callee's for each call, and
+    /// a body that calls itself has none.
+    #[test]
+    fn a_samples_fuel_counts_each_call_of_each_callee() {
+        let body = |calls: Vec<(String, u128, bool)>| Embedded {
+            cost: Cost::Bounded {
+                steps: 5,
+                calls,
+                work: 0,
+                pin: Some(3),
+            },
+            ..Default::default()
+        };
+        let mut every = BTreeMap::from([
+            (
+                "f".to_string(),
+                (
+                    String::new(),
+                    body(vec![("g".into(), 4, false), ("c".into(), 1, true)]),
+                ),
+            ),
+            ("g".to_string(), (String::new(), body(Vec::new()))),
+            ("c".to_string(), (String::new(), body(Vec::new()))),
+        ]);
+        // 5 own, 4 runs of g's 5, c's 5, and c's value pinned past them.
+        assert!(matches!(derived_fuel(&every, "f"), Fuel::Bounded(33, 0)));
+        every.insert(
+            "g".into(),
+            (String::new(), body(vec![("f".into(), 1, false)])),
+        );
+        assert!(matches!(derived_fuel(&every, "f"), Fuel::Unbounded(_)));
+    }
+
+    /// A linked library's keys are renamed in its terms as whole string
+    /// literals: a literal that only holds a key, or is another's, is not.
+    #[test]
+    fn a_linked_librarys_keys_are_renamed_as_whole_literals() {
+        let renamed = BTreeMap::from([(mir_string("num::f"), mir_string("core::num::f"))]);
+        let term = format!(
+            "(ctor Callee.body {}) (ctor X {}) (ctor Y {}) (ctor Callee.intrinsic {})",
+            mir_string("num::f"),
+            mir_string("num::f::g"),
+            mir_string("q\"num::f"),
+            mir_string("num::f")
+        );
+        assert_eq!(
+            rename_strings(&term, &renamed),
+            format!(
+                "(ctor Callee.body {}) (ctor X {}) (ctor Y {}) (ctor Callee.intrinsic {})",
+                mir_string("core::num::f"),
+                mir_string("num::f::g"),
+                mir_string("q\"num::f"),
+                mir_string("num::f")
+            )
+        );
+    }
+
+    /// An impl's header is read from the span MIR names it by.
+    #[test]
+    fn an_impls_header_is_read_from_its_span() {
+        let dir = std::env::temp_dir().join(format!("uorust-span-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "struct A;\nimpl Tr for\n    u32 {\n}\n",
+        )
+        .unwrap();
+        let (file, text) = span_text(&dir, "src/lib.rs:2:1: 3:8").unwrap();
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(file, "src/lib.rs");
+        assert_eq!(
+            text.split_whitespace().collect::<Vec<_>>(),
+            ["impl", "Tr", "for", "u32"]
+        );
+    }
 
     /// The constructors of the inductive `name` in the semantics.
     fn constructors(name: &str) -> Vec<String> {
@@ -5350,6 +6555,7 @@ mod tests {
             crate::mir::float::Format { exp: 8, frac: 23 },
         )]);
         let resolve = |_: &str, _: &[Option<String>], _: &str| Callee::Bound(String::new());
+        let sources = crate::mir::site::Sources::new(Path::new(""));
         let cx = Cx {
             width: 64,
             enums: &enums,
@@ -5377,6 +6583,9 @@ mod tests {
             sites: Default::default(),
             item_texts: Default::default(),
             key: Default::default(),
+            block: Default::default(),
+            sources: &sources,
+            declared: Default::default(),
         };
         assert_eq!(cx.ty("f32"), "(ctor Mir::Ty.float 8 23)");
         assert_eq!(
@@ -5461,6 +6670,11 @@ mod tests {
         assert_eq!(metadata("[u8]").as_deref(), Some("usize"));
         assert_eq!(metadata("str").as_deref(), Some("usize"));
         assert_eq!(cx.pointee_metadata("<[u8] as Other>::Metadata"), None);
+        assert!(intrinsic_gaps("aggregate_raw_ptr")
+            .iter()
+            .any(|g| g.contains("subrange")));
+        assert_eq!(intrinsic_gaps("vtable_align").len(), 1);
+        assert!(intrinsic_gaps("copy").is_empty());
     }
 
     #[test]

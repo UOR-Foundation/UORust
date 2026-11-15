@@ -7,9 +7,94 @@
 
 use super::ir::{
     IrAggregate, IrBlock, IrBlockId, IrBody, IrConstant, IrLocal, IrOperand, IrPlace, IrProjection,
-    IrRvalue, IrStatement, IrTerminator,
+    IrRvalue, IrSpan, IrStatement, IrTerminator,
 };
 use super::spec;
+
+/// The line a dump keeps a span on, after the line it is of: `// at `
+/// and the span as rustc prints it.
+const SITE: &str = "// at ";
+
+/// The comment `-Zmir-include-spans` ends a line with: `// scope 0 at
+/// span`, `// in scope 1 at span`, `// return place in scope 0 at span`,
+/// split into the line's code and the span, where it has one.
+fn spanned(line: &str) -> Option<(&str, &str)> {
+    let at = line.rfind(" // ")?;
+    let comment = &line[at + " // ".len()..];
+    let rest = ["scope ", "in scope ", "return place in scope "]
+        .iter()
+        .find_map(|k| comment.strip_prefix(k))?;
+    let (scope, span) = rest.split_once(" at ")?;
+    scope.parse::<u32>().ok()?;
+    Some((line[..at].trim_end(), span))
+}
+
+/// A dump rustc prints under `-Zmir-include-spans`, in the notation it
+/// prints without the flag, which every reader of the dumps reads: each
+/// line without its trailing comment, and none of the comment lines the
+/// flag adds (a constant's type and span, a closure's signature). The span
+/// of each terminator and of the return place is kept, on a line of its
+/// own after the line it is of ([`SITE`]), which [`bodies`] reads and
+/// [`unspanned`] drops. A dump printed without the flag is its own reading.
+pub(crate) fn dumped(raw: &str) -> String {
+    let mut out = String::with_capacity(raw.len());
+    let mut in_block = false;
+    for line in raw.lines() {
+        let indent = &line[..line.len() - line.trim_start().len()];
+        if !indent.is_empty() && line.trim_start().starts_with("//") {
+            continue;
+        }
+        let (code, span) = spanned(line).map_or((line, None), |(c, s)| (c, Some(s)));
+        out.push_str(code);
+        out.push('\n');
+        let t = code.trim();
+        if t.starts_with("bb") && t.ends_with(": {") {
+            in_block = true;
+        } else if t == "}" {
+            in_block = false;
+        }
+        let kept = (in_block && terminator(t).is_some())
+            || t.starts_with("let mut _0: ")
+            || t.starts_with("let _0: ");
+        if let (true, Some(span)) = (kept, span) {
+            out.push_str(indent);
+            out.push_str(SITE);
+            out.push_str(span);
+            out.push('\n');
+        }
+    }
+    if !raw.ends_with('\n') {
+        out.pop();
+    }
+    out
+}
+
+/// A dump's reading ([`dumped`]) without the spans it keeps: the text rustc
+/// prints without `-Zmir-include-spans`, which a body's κ and the
+/// translator read.
+pub(crate) fn unspanned(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    for line in text.split_inclusive('\n') {
+        let t = line.trim_start();
+        if t.len() < line.len() && t.starts_with(SITE) {
+            continue;
+        }
+        out.push_str(line);
+    }
+    out
+}
+
+/// A span as rustc prints it, `file:line:column: line:column`: its start.
+fn span_of(text: &str) -> Option<IrSpan> {
+    let (start, _end) = text.trim().rsplit_once(": ")?;
+    let (rest, column) = start.rsplit_once(':')?;
+    let (file, line) = rest.rsplit_once(':')?;
+    Some(IrSpan {
+        file: file.to_string(),
+        line: line.parse().ok()?,
+        column: column.parse().ok()?,
+    })
+}
 
 /// Every function body in the text of one dump file, or of many dump files
 /// joined.
@@ -36,12 +121,35 @@ pub(crate) fn bodies(text: &str) -> Vec<IrBody> {
         };
         let mut current: Option<(IrBlockId, Vec<IrStatement>)> = None;
         let mut blocks: Vec<(IrBlockId, IrBlock)> = Vec::new();
+        // What the last line read was, which a span after it is of.
+        enum Last {
+            Return,
+            Terminator,
+            Other,
+        }
+        let mut last = Last::Other;
         for line in lines.by_ref() {
             if line == "}" {
                 break;
             }
             let t = line.trim();
-            if let Some(rest) = t.strip_prefix("debug ") {
+            if let Some(span) = t.strip_prefix(SITE) {
+                match last {
+                    Last::Return => body.span = span_of(span),
+                    Last::Terminator => {
+                        if let Some((_, b)) = blocks.last_mut() {
+                            b.span = span_of(span);
+                        }
+                    }
+                    Last::Other => {}
+                }
+                last = Last::Other;
+                continue;
+            }
+            last = Last::Other;
+            if t.starts_with("//") {
+                // A comment rustc prints in a body: no code.
+            } else if let Some(rest) = t.strip_prefix("debug ") {
                 if let Some((name, value)) = rest.trim_end_matches(';').split_once(" => ") {
                     if let Some(local) = local_of(value.trim()) {
                         if local < body.names.len() && body.names[local].is_none() {
@@ -58,6 +166,9 @@ pub(crate) fn bodies(text: &str) -> Vec<IrBody> {
                 let rest = rest.strip_prefix("mut ").unwrap_or(rest);
                 if let Some((l, ty)) = rest.trim_end_matches(';').split_once(": ") {
                     if let Some(local) = local_of(l) {
+                        if local == 0 {
+                            last = Last::Return;
+                        }
                         if body.locals.len() <= local {
                             body.locals.resize(local + 1, String::new());
                             body.names.resize(local + 1, None);
@@ -78,9 +189,11 @@ pub(crate) fn bodies(text: &str) -> Vec<IrBody> {
                             IrBlock {
                                 statements: std::mem::take(statements),
                                 terminator: term,
+                                span: None,
                             },
                         ));
                         current = None;
+                        last = Last::Terminator;
                     }
                     None => statements.push(statement(t)),
                 }
@@ -685,7 +798,9 @@ fn rvalue(text: &str) -> IrRvalue {
     }
     // Aggregates: a closure, its type and then its captures,
     // `{closure@a.rs:1:2: 1:5} { x: move _3 }`.
-    if t.starts_with("{closure@") {
+    // A coroutine, `{coroutine@a.rs:1:2: 3:4 (#0)} { x: move _1 }`, alike.
+    let coroutine = t.starts_with("{coroutine@");
+    if t.starts_with("{closure@") || coroutine {
         let Some(end) = t.find('}') else {
             return other(R::Aggregate);
         };
@@ -704,13 +819,13 @@ fn rvalue(text: &str) -> IrRvalue {
         } else if !rest.is_empty() {
             return other(R::Aggregate);
         }
-        return IrRvalue::Aggregate(IrAggregate::Closure(t[..=end].to_string()), ops);
-    }
-    if t.starts_with("{coroutine@") {
-        return IrRvalue::Aggregate(
-            IrAggregate::Other(spec::MirAggregateKind::Coroutine),
-            Vec::new(),
-        );
+        let printed = t[..=end].to_string();
+        let kind = if coroutine {
+            IrAggregate::Coroutine(printed)
+        } else {
+            IrAggregate::Closure(printed)
+        };
+        return IrRvalue::Aggregate(kind, ops);
     }
     if let Some(inner) = t.strip_prefix('[').and_then(|r| r.strip_suffix(']')) {
         if split_top(inner, ';').len() == 2 {
@@ -1152,5 +1267,79 @@ fn sum(_1: &[u64], _2: (u8, bool)) -> u64 {
             split_path("core::num::<impl u64>::wrapping_add"),
             ["core", "num", "<impl u64>", "wrapping_add"]
         );
+    }
+
+    /// `g` as rustc 1.97 prints it under `-Zmir-include-spans=on`.
+    const SPANNED: &str = "// MIR for `g` before ElaborateBoxDerefs
+
+fn g() -> u32 {
+    let mut _0: u32;                     // return place in scope 0 at a.rs:4:15: 4:18
+    let _1: &std::panic::Location<'_>;   // in scope 0 at a.rs:4:25: 4:26
+    scope 1 {
+        debug l => _1;                   // in scope 1 at a.rs:4:25: 4:26
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at a.rs:4:25: 4:26
+        _1 = f() -> [return: bb1, unwind continue]; // scope 0 at a.rs:4:29: 4:32
+                                         // mir::ConstOperand
+                                         // + span: a.rs:4:29: 4:30
+                                         // + const_: Const { ty: fn() -> &'static Location<'static> {f}, val: Value(f) }
+    }
+
+    bb1: {
+        _0 = const 1_u32;                // scope 1 at a.rs:4:34: 4:46
+        StorageDead(_1);                 // scope 0 at a.rs:4:47: 4:48
+        return;                          // scope 0 at a.rs:4:48: 4:48
+    }
+}
+";
+
+    /// `g` as rustc prints it without the flag.
+    const PLAIN: &str = "// MIR for `g` before ElaborateBoxDerefs
+
+fn g() -> u32 {
+    let mut _0: u32;
+    let _1: &std::panic::Location<'_>;
+    scope 1 {
+        debug l => _1;
+    }
+
+    bb0: {
+        StorageLive(_1);
+        _1 = f() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = const 1_u32;
+        StorageDead(_1);
+        return;
+    }
+}
+";
+
+    #[test]
+    fn reads_a_spanned_dump_as_the_plain_one_with_its_spans() {
+        let read = dumped(SPANNED);
+        assert_eq!(unspanned(&read), PLAIN);
+        assert_eq!(dumped(PLAIN), PLAIN);
+        assert_eq!(dumped(SUM), SUM);
+        let at = |file: &str, line, column| {
+            Some(IrSpan {
+                file: file.to_string(),
+                line,
+                column,
+            })
+        };
+        let spanned = bodies(&read).remove(0);
+        let mut plain = bodies(PLAIN).remove(0);
+        assert_eq!(spanned.span, at("a.rs", 4, 15));
+        assert_eq!(spanned.blocks[0].span, at("a.rs", 4, 29));
+        assert_eq!(spanned.blocks[1].span, at("a.rs", 4, 48));
+        plain.span = spanned.span.clone();
+        for (p, s) in plain.blocks.iter_mut().zip(&spanned.blocks) {
+            p.span = s.span.clone();
+        }
+        assert_eq!(spanned, plain);
     }
 }

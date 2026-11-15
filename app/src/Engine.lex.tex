@@ -91,6 +91,10 @@ definition{name: runner, parameters: [], result: String, body: "ubuntu-24.04", a
 
 definition{name: jobTimeoutCap, parameters: [], result: Nat, body: 360, axioms: []}
 
+definition{name: crateShards, parameters: [], result: Nat, body: 20, axioms: []}
+
+definition{name: matrixCap, parameters: [], result: Nat, body: 256, axioms: []}
+
 definition{
   name: secrets,
   parameters: [],
@@ -491,6 +495,14 @@ theorem{
   name: stageBudgetsFitTheJobCap,
   parameters: [],
   statement: ((budgetsFit (stages) (jobTimeoutCap)) = true),
+  proof: decide{},
+  axioms: []
+}
+
+theorem{
+  name: crateShardsFitTheMatrixCap,
+  parameters: [],
+  statement: (((0 <? (crateShards)) && ((crateShards) <=? (matrixCap))) = true),
   proof: decide{},
   axioms: []
 }

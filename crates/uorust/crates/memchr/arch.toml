@@ -1,399 +1,399 @@
 [[fn]]
 path = "memchr::HI"
 kappa = "ec1b3638a8a1a5006b3891bba43e444379fd0ab76b62a6b9b59a023d81647299"
-embedded = "b2f4087032260bbf1f4d97e28a4b41961354d64f72e8e9e6164be6d3c9af1eed"
+embedded = "beb862463570dfeec4e25abd14646c839cab70ecdc551999cbca0f61f7231a4e"
 status = "residue"
 cause = "mir::TerminatorKind::Call: splat"
 
 [[fn]]
 path = "memchr::LO"
 kappa = "fa082250d7df00b89e3a908df8c2c14643ec3017dac5542300845278b95e42ee"
-embedded = "0fecfdf1aa1d8a7fc6f15a2ac278dcf11d94fa958e93ad0f9bc97ca9d39d2b53"
+embedded = "0253f4b7278e3e318f38265926576b985de9159babc8fcc65d6f86d68a2cb759"
 status = "residue"
 cause = "mir::TerminatorKind::Call: splat"
 
 [[fn]]
 path = "memchr::RANK"
 kappa = "c6228fbcf96b26b5d3fd9f22a4bda645df5a45236def844f82c65aa1ceab84e2"
-embedded = "377bfff65a09889dfffa585f37299532b5c4bf4a057ef5d5ee87e79aa4a2b9e9"
+embedded = "bd6426caafb69e500c673fe0f09a64a35ae7c897acf84eaf2cc418c68dc3f271"
 status = "translated"
 digest = "3ba43570070dc77d64ddf74a24a60957ef6a382847312dc19156337097db6d40"
 
 [[fn]]
 path = "memchr::USIZE_ALIGN"
 kappa = "13b4baa5f834eb13042bcec0beaeda903a5d1ca495d4ed22c5046ccd98333ce3"
-embedded = "635688031ce993e4b7e4c07f893eadc74cb9dd1e805c771060d34093ad461e26"
+embedded = "b3b64456fa5cca8278171e0c37b87b5f03b3f8c0ccf25dd97c36cbfb34441304"
 status = "residue"
 cause = "mir::Operand::Constant: arch::all::memchr::USIZE_BYTES: mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
 
 [[fn]]
 path = "memchr::USIZE_BYTES"
 kappa = "6ba8294029a96ddc863d3dbe32dd9f882bf91845219c00777963c4bd17f15c35"
-embedded = "9c4b8cc72eac21f42d7a11e6ba40cb2c6775ea64011845de448c510f2408477e"
+embedded = "64e3efb459cd90e2c12a13ccbb2a8e938147a8a3379bb4bc79f02b103d414257"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
 
 [[fn]]
 path = "memchr::all::is_equal_raw"
 kappa = "5799f6bc7e4da6eb046a441299aa96b535e505419a34f310718b7a0f922b26f1"
-embedded = "844ab5cac11f553521380babb248a44c7cc43d6b36a0e3f16c2114c4d9f523f5"
+embedded = "43cf82ff80e7ebd3e3c0fcc07716b834d739edb3c151ee6bc533a596b9db25d3"
 status = "residue"
 cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::cast"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:302:10: 302:15>::clone"
 kappa = "d73a946ee00c74f5f67e0eb2dad9b53727df6358617bd39fb43dfbb64273a862"
-embedded = "33b7813ba2bc31f16c5f9a6cb474c2dafbfece822bb1bd259bb459129445dabc"
+embedded = "ae0d803956bef2c19a36ac6bbb8e0ede511dc7466bb0cd9a241cbfa09a347677"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:302:17: 302:22>::fmt"
 kappa = "12a502d77bac0513998e9f517900b590995d0513e8ebb797a7fd7877fdf5e533"
-embedded = "83946745963a639a0a8f493dc730ac5f8f1f12a3adac21646bddde4867ddf0e7"
+embedded = "7bdfa5faafe1f358af5f8a33c3f3f394970c1c2bb4fb188f4250a51a281277c4"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:34:10: 34:15>::clone"
 kappa = "9180939f63b144add5c0eb4e9d04af24a67099240fddd5094854f26e59a42a35"
-embedded = "1e85946752f4bb16ff6b2ae326d1441cf42938635f02fa2af1b49fb6d3d59241"
+embedded = "a362acea462336ddaf092e9bed72acc04f4976b589721fa9b9277446838e1852"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:34:23: 34:28>::fmt"
 kappa = "a9badab15caa57d67ba5fe6e656f9f973e8c7465d5fc276a2a1b93a87ea483c6"
-embedded = "70e60b72d20f20952fe2f50941b0ff8cc5a212289474fc37bbbd9e356c7c9286"
+embedded = "cfe36843379d2e6dbbeba47337b2954442d65be872dd05d27c37eb7e3305cd45"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:351:10: 351:15>::clone"
 kappa = "066fda526ef000f4a0747792450ec10121c356cd9905ac5bff7e74114121ba0d"
-embedded = "55cdee5b7f92f6820b1de3132bbfa5a38d2f65b8efaa34f364121f4d5af55ad0"
+embedded = "a225e9614b70edd2631806f2170f7908ca63183ec953580078b3a250aee3b514"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:351:23: 351:28>::fmt"
 kappa = "beb700633a1d0ef3092dcd089144fbae039feab177013ec6b27b93a947047e4d"
-embedded = "21050928f0014df65cafc6f254b892c12d5bf4367cda2755061a202e1ae92923"
+embedded = "78301e33b04b466619f2b0576825fbe4027c56606870be8664697f62f38dcdee"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:567:10: 567:15>::clone"
 kappa = "9a74794c238a75c6a01a9285084481c2751ba7c323e19acaa8fc0166a2dcc31f"
-embedded = "df7855058363241be170947a856d9f7e135170ff54991c1df97c10c358b9d889"
+embedded = "d4956e5013454a806429ec9986767a6c8198d9f1c92c1ee072eed70606438d71"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:567:17: 567:22>::fmt"
 kappa = "72c75497db4c40659a1adc26e790409a65f197ab923d187e225514c2a42163e7"
-embedded = "9080aa9358166dcfa471ed1896be1c12403d6a0b230b1569c3b708a541005c26"
+embedded = "27f8ecdaea37743778f065a0cce3552826e4a128a404d9c2aa5d87553883dc31"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:607:10: 607:15>::clone"
 kappa = "09cc150f03dcc8bfc07d804dc0fff14829cdb6f245f5dfb880cd7f99bd0e4287"
-embedded = "58f6d290570046cb040f3fb36a0f5591db59420cc228e82891cd847e6a6d3caa"
+embedded = "28293691e448dcd1d492f8898064bb799c94a364a1dd402a651aa0d2ed2c5915"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:607:23: 607:28>::fmt"
 kappa = "15838fd1f1c55cadb1a1ea6412adba131129c7b317449fb1afa5925d2078335c"
-embedded = "6f67ed0f6484a0c5f1ea7ba10fbd7fe0831dd2fc7e94f14818e3df474c1cb626"
+embedded = "335ab24599ff23dce8a2f0d053808b83d62efd7a571008dc76e3ba671163a22e"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:835:10: 835:15>::clone"
 kappa = "4bfd1a847c367442ef24231ee8a3263f7323ec1ba75e3944028ab4af08590b6c"
-embedded = "f18e57808fb77ae052b93bb06caa132dae50a1b98ffa6ceaabbab7d9cdbcc5a4"
+embedded = "d2b5ada40a98c734501e945600d69fb9ba914a4af2f73dd15d68b0a6861caa75"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::<impl at src/arch/all/memchr.rs:835:17: 835:22>::fmt"
 kappa = "3fac9754f6c9319f5ebdc5c7989b002eaa4878779fe66d473e9b15f6a2266c81"
-embedded = "d22215cc47593862aae5d4a272e6ca9904c9a499363f68e5d12e2c7114bc3a46"
+embedded = "e8d749939b72bd5dfc6d3942144d39a9fa109a3b8722c6fdfe4542ac3fba0a76"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::memchr::One::LOOP_BYTES"
 kappa = "256baca8cc0661f88da7707c0f722dc0c4f29a5a492f650145e55f0daf76a8bd"
-embedded = "83f4d942e425b3d3d86eca7a70aa5939986e07a8089d8fef7517f59c2c04f3cb"
+embedded = "51195b8594206bbc375c177f70e320978a59885f6b9da6760a6e60df4bbf077b"
 status = "residue"
 cause = "mir::Operand::Constant: arch::all::memchr::USIZE_BYTES: mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
 
 [[fn]]
 path = "memchr::all::memchr::One::confirm"
 kappa = "e0dcf63e3ce06d617709ebd44cc33f6a10d10f638a92b16f175109149c44fcec"
-embedded = "dab0f691d528d8e37e940a1e7807c5d0313c381a954eb1875335c822b09b83b1"
+embedded = "4c1a1ef66c645b81ef90bd86bac7de31f031c547a44c3e5e45401e7c3cf5d47c"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::count"
 kappa = "debe356608cb6eae244b02681e4bd094f86bdae586b2c87da3fb22b01c9355ad"
-embedded = "3a4bb76a9f695c1caa8866856f2d5f76333ad95d3e81a0fd295ecef996ecaef0"
+embedded = "fdf85732d61743807c4f7612b7073569f088850a32c0c476d7eb93cef9d28ddb"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::count_raw"
 kappa = "5e1d6b1161b6c22ebed9e648f2d7f51f3f7b5ff0052fbfc512b3a8feb428064d"
-embedded = "e70bf903bf5edd07ed89942cb67db0c5e6c2df9f87d45cb44bc6098876693142"
+embedded = "73af797ee72775e70a784c3a26de02a94b75004ce2183e9763f9d115210ee70e"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::find"
 kappa = "663b2789b09e6f3616cb27893f6e58c2bbda0962b964d78b9e27033901842f06"
-embedded = "491ea7b9ee75ae3eeca9b8269cee704d5bf77e3dde4423b55ac9b6b8e4b27bc5"
+embedded = "0c669a5707fb9c64600acd2fc2026c777edc1cf30bc4bc1bf962c66eb1bdbfb2"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::find_raw"
 kappa = "aee62a683b1938e05f569a91dae623dbcb730d2a3231048b41dc38a2d05b514e"
-embedded = "6e2ca6221fc10e2cca0c2e2f0a8b2ff78615c616e96e2d9d8bf66c4262f948d9"
+embedded = "375f7fd794beafbf2875c06a20dafb8d6c429d401f2a6e671e63808b4ea7f3f7"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::has_needle"
 kappa = "e7e217216270e1bd7014427660df28d30baea1fe37cdabba0c5407a32243dc55"
-embedded = "5f87cce9be7d60df6962bceb1640fe1ddf9452ba3314b66cd6d03c679ab7d7d5"
+embedded = "10a6f2c13b207704ff36d799342e6e6a49aff50791a777a241f1333b65b9787a"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::iter"
 kappa = "638444215a800533937dafc56601e634f3b44a06fa43480eac2593c72363749a"
-embedded = "a081d0f12ba827d88a9a0c9616c5e240184cd9b89dc34fa5a79d7739eee59706"
+embedded = "9ee426b3a0fb166cfe77648ed0d9ad2a8bdf6d251363035c75c0168f03f2d6a0"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::One::new"
 kappa = "d1b2b81758ca89c0654afa5e7c34e583b82a60476faf3d551037c9571fe7c9b6"
-embedded = "e2d8e869a8b18b8111c3cd8df5fe1fca5f01e3ce55f55fa7aceaf1a10458895f"
+embedded = "d71866ea27ccf92f178fdd0c544ff4a46f0a064ab239856b3c56c22586ff8cad"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::rfind"
 kappa = "878cd8aa70db328e6b05de980ea599e22ad8dba571c66fdecd1ca7c9eebfa9a2"
-embedded = "f34c88b2b32aa204a6aac8661efc049cf6732c3aa92d94cbec5147d54a4f873b"
+embedded = "dd4b71392afb442462f94f1cfcd8145adc4631ff6341184677de4fe617402ce7"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::One::rfind_raw"
 kappa = "21df82ecc362517a96624567971294f85b270afbb7f346a8a4ca50ed0130526f"
-embedded = "5d5be34616d9286203648aef26a8b4608d8ffb47bfa0b125317ff7ec18c79806"
+embedded = "c2426a01c76f9021e67c13c82082f0b778370cf14f2aaae1ae0cd590588f824d"
 status = "residue"
 cause = "mir::Ty: all::memchr::One"
 
 [[fn]]
 path = "memchr::all::memchr::OneIter::count"
 kappa = "1512624f03cb049102d5ba7f2a5595bc9134f03c9287a9ad78f1fbea87626df0"
-embedded = "32c0cccb0c4294298512a455411e4ec8ef243202a8c9d80342f69f8f990d9161"
+embedded = "6cf7e6cc297f9fe5ddbb8782d2adfc66ef2208d6eb5f2b96b2148ed492f339e9"
 status = "residue"
 cause = "mir::Ty: all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::OneIter::next"
 kappa = "a5f0609b6148f24ab17d5a039bc0107b0eaf13f79261f2ffdb81bf5cc8be20ab"
-embedded = "ed08cbe24340804376517f891708a83017502d3b89d60e1f5091efa3e141d60c"
+embedded = "2c28f0fe51b68d8fa77ca4542eac75c76c09c4645569e819fecf35a2b1f43ac3"
 status = "residue"
 cause = "mir::Ty: all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::OneIter::next_back"
 kappa = "47e0da3ff5b03d8387e57db31007bf229582a64335aacaf1e921709167e814f0"
-embedded = "e9203dc81176c4198190e2f97523e3c21bda30a6908f357222c352fdbd7a7183"
+embedded = "53f1e03f386969ff357581d049544be8db1b0abc834dbc0c6648ef7905a4f777"
 status = "residue"
 cause = "mir::Ty: all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::OneIter::size_hint"
 kappa = "4e871c0a1aaf7c9ce214a4f9c17f93360b3e8d4369bc3dc19042e4c89cdc1345"
-embedded = "5a4d3fdadcc0853514f3d04fadbde89e9ccf495d9bf57835a19a7376e9818ab9"
+embedded = "4f158bcbb94b67297fc53b639e8268adc944d23878786c49ba60bdf38462d272"
 status = "residue"
 cause = "mir::Ty: all::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::Three::confirm"
 kappa = "fc5f8ea33622abbe6d13b5c5afe52b17bb4603a432f1fc26e654c0de75c7e9cc"
-embedded = "fd831cf3e8dcafa75d3e7ab05b0c6e0bf23cbe478fce4966f23d7b15265c4ebc"
+embedded = "54820c9a23ea9d2601ffba4d753115f620fd6cc5ae5578bf6fdee40fdd4a4674"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::find"
 kappa = "449b065282a96dc8f039c7197d29a6eaa18152805d6206872e69a76f37748317"
-embedded = "f3411ea77148bff794683c82efe9db5a8b8247087ef1b7d06d48cfe94f0d9eb8"
+embedded = "63d85529d22a5c9ea6689a38df740e9ed0fbd19927ded8e89b73a880e4e3c0e9"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::find_raw"
 kappa = "a78ba61ffa6ee58f96c6729d87ed454c8db528ac5d894d134e98d002e65b3954"
-embedded = "9982aa31e9d4e8594bcd0c5602f2262efac0c5ea5fcde33dab893c6dd6652f72"
+embedded = "23fb45e9eb675408b4ec366ff2253fc77d7accdb928a26ecff0427b5b0301500"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::has_needle"
 kappa = "92d41898b43f0e204cc30d2827b485b59c336a3ae4761d7f56ba019c479046c4"
-embedded = "b776a26731da5cbd5c82d4259c3b7346e44231a024bb7b20a5e1cf66c25856a8"
+embedded = "dd115641b02c651aee1dfb0cf46d099f5c7048d19c896dd48f03ad4b352b153f"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::iter"
 kappa = "5dde4c1126cd9ed530a713efba01813d45dc4e1db6cc3de8cb53154ccc499754"
-embedded = "0ee466e99b4a780a41d16109a1b2618dcd14ea7640e270e94014157f8701de13"
+embedded = "58a7519a798b2bb7f6ac4a6db51c1d21f9c4b59a6164d630b9a1970eec6797b2"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::Three::new"
 kappa = "cfa6f495e5d0666931525e005867f8eb8d6b59321282a8af269b510a8f77f058"
-embedded = "ebc7d2e0b414c99f073ca209408526fa8ff3ea775c3fa306c1b0d7b0f469ce59"
+embedded = "8ca2d84fc1d8c1c3328e4848190b6fb2e46280e039844504ab33f534e547b5fd"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::rfind"
 kappa = "843727f914ffaefdd928e535ea298ddaf5f643476c8cc05c624865ced6439104"
-embedded = "2fe83b75968cd8b620ced79edb0f11851929e5fbabf0277f4cca84d0f2b70fd5"
+embedded = "70832451846090cd63c11bc04215eaf6a8c6be732ceedd4eee17e3a31776f2fb"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::Three::rfind_raw"
 kappa = "97c49fcfc6cbe5eb9fb024032959ac4f4de7652a0dc26ab811cd6f8a34ae21dc"
-embedded = "0a0b5eea12e69544f725efd56fb451f652da4c1f79577fdcb048c1af4c74e717"
+embedded = "a44e9d3538158a27d2638ae7dec71d8c2462a89c4353106afa6c959677e8664f"
 status = "residue"
 cause = "mir::Ty: all::memchr::Three"
 
 [[fn]]
 path = "memchr::all::memchr::ThreeIter::next"
 kappa = "0e2d7bdf356bd147f409dfb52f3f9db7d4635287f3f3f77b7f616a8878aa4386"
-embedded = "43cae13a7c2423ed13bdbb8974136640ffd77b9bb5e2c6153fd34d00c1f7c600"
+embedded = "5ff92c0916758b31a7dd898389f65da461dd8594512e1bea2005020c31e4df5c"
 status = "residue"
 cause = "mir::Ty: all::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::ThreeIter::next_back"
 kappa = "aeddd80ef6e3626f5778ade855dae013b407a45b03ea464979af29b8f224b2f3"
-embedded = "fbb78e24359693bde8db1481ffc35028e69aaba16305b8ee47358a6d3dc5fbda"
+embedded = "0f0c9c164bfbe791692408242fb975aa4264f34ccc2af9a6558d3eaf1faf52d3"
 status = "residue"
 cause = "mir::Ty: all::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::ThreeIter::size_hint"
 kappa = "efe834a03f828fad4edf382162d107f848f1e0e88fe38475e6999c1caa65b1e0"
-embedded = "799040c950b5615d8fc633502554ea18c73227d6ca12623c41deaeb736865e8d"
+embedded = "93f9a676a4e26dcce45674143a4a3d003129ef44bf36d0e274c19f27f3970b40"
 status = "residue"
 cause = "mir::Ty: all::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::Two::confirm"
 kappa = "9c6deb4306af041e379f0b881a6529a8eba60ed7fe626c4d12c79eada898fc71"
-embedded = "ab2f810fe7b5a3f1e874a104d8779380a70f169a33cb5b92c3b3a8498fd71cbd"
+embedded = "62cf9bc7c541dbf178eeb4f84f8d986ce586b8b3590cf24e3b30977f02c3e2b3"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::find"
 kappa = "9b09f9abfd0cf076de06a41b995e8ac09d3ecabb7b9155f35937fb74b68fe5a1"
-embedded = "b2d0c39000faa1ef6e8bf5bf216e3a83250c4b45ea010b04040b4973a30b78f2"
+embedded = "4331f17908bc41f134d9ca7e316e967787885f19bb5cd56410e5c0adfe5e298e"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::find_raw"
 kappa = "c73e46c610aa190d1f6ba82c21bf8a02359df03250c979f3b2f6b7a1fa2c5eea"
-embedded = "aa562078f2f55cae663da53f10c48f1b9a27d7ea11bb270ef6c6eb1f14c81587"
+embedded = "4c88597ffd8a3345f9b5dd6414ee24888b27d4bd7cef9bf4c1bf4073af3679e5"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::has_needle"
 kappa = "86ee7432122d25c85df9af0d2275328aea32a9f9cf2514e9634542a3f5eb1774"
-embedded = "45a296f7f21aed133d22a9e49788ca2f19e0ab329de85d5482a1008539843ef7"
+embedded = "955cc14007f83784826c80aa89ab0fa3f4bb4d9d48e247fb3429139257fff47d"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::iter"
 kappa = "9d25a208675eaec0d9e77947004c8085d200390d4c86f73e3398dce83fc00561"
-embedded = "4578a2414c37c5eb7de4aa5d9de29acc8bead2084d80d41105b62b97e6b8b7a5"
+embedded = "41b24283b24caaca8ab085639d6a9f3e5928a06736bafe13a41736971638fd2b"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::Two::new"
 kappa = "336e2ccf7b6fb8619baf77368bb08d99ad873759c320e385fbfdd6c0b85a3285"
-embedded = "0d3dca206baf3ac7ddf6b1c574a7afd87221f99a62b52d8631cf2f8365fdd555"
+embedded = "053bce3da935e80396af262a601d29a9542574531c2bf3a4a01e849b9bed89f5"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::rfind"
 kappa = "2966d1e0d22c4ed0786d00eb2138bed7d22196f6a9babbc6241dd2ce2fb1439b"
-embedded = "3441036d36e7dd3fdd071ff9c6efdeb038d14d506e12617bb3eb555bf10e5d5f"
+embedded = "58fa8e9cee12ab62a042e81322219df8e87460b86c4d69cebafc36b52f1c6a41"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::Two::rfind_raw"
 kappa = "97646aa0a55eda02f6821a6d1150981de52c15cb2b28231b33c409f0fa07eaee"
-embedded = "96048e9517ed9273f6e41046ae1bb0b57c21a36bd4fe7ea8d0f2cdfada4d21cd"
+embedded = "83b8dcd32cd157156c8f2d3217b62c58495e55fa1b58610daac440b0fd26c685"
 status = "residue"
 cause = "mir::Ty: all::memchr::Two"
 
 [[fn]]
 path = "memchr::all::memchr::TwoIter::next"
 kappa = "fce77eddbff507052152de54c48a019aa5e8368ea541554ccbbab6971d34f945"
-embedded = "b3bede95285e4a1a7f04ce6652dbd90aaaf041cbccc8d953a47f5d472f17b375"
+embedded = "fe297242b9e34c49d97c961860b122e776830a74479a96d2d2bf0bb10ac9faf6"
 status = "residue"
 cause = "mir::Ty: all::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::TwoIter::next_back"
 kappa = "7898eb8cf1e87f303f092d01518a8c540b787c3883882125f51a44991407a31d"
-embedded = "02b6f0f6de1db8f302aecefcb9a5f536c0047fc4ee26613e85510cb9d727470f"
+embedded = "fc5a339379a6ce2f2f8238e23e0f27d76a5c9e031256b8548dc15115b2060e99"
 status = "residue"
 cause = "mir::Ty: all::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::memchr::TwoIter::size_hint"
 kappa = "665df5cc5a3d52595643ea78dbefc20c4fa5c2b38c1f21917260b848e9def0fc"
-embedded = "54444c95c66bcf31cb7f9447a083f57298136341a205be596ef9832a2c80a228"
+embedded = "1d3e49c23684f050a27bfb3bc787e8d9b9983adc73748029c0692c3a5e524894"
 status = "residue"
 cause = "mir::Ty: all::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::all::packedpair::<impl at src/arch/all/packedpair/mod.rs:134:10: 134:15>::clone"
 kappa = "518dafc138be0422c6b01fd9c7ae9f35722fd27679ead4cb40ec0625d2f9f190"
-embedded = "8b0d3a61ebad73b8735d23609d325e58a07c0c1b6f7326d5ee669e17491aaad1"
+embedded = "a6d5ec3f6042d20d41260fabe616fba8fc23914b088d78741467523d3d760715"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::all::packedpair::<impl at src/arch/all/packedpair/mod.rs:134:23: 134:28>::fmt"
 kappa = "7257a216df558d33c4273b27bec4dea1aecea9f183f7d2fd48ecaedea142288f"
-embedded = "6704a33c5f56a9ebed9106a997b74aac9a5c098855a6d39ab1cc1a83a042fe99"
+embedded = "38d8ef1d7e3da267ad34800d68360b5f7b125c5cf66d3c06826fe5637fe9b984"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
@@ -401,84 +401,84 @@ cause = "mir::Ty: core::fmt::Error"
 path = "memchr::all::packedpair::<impl at src/arch/all/packedpair/mod.rs:331:1: 333:31>::rank"
 kappa = "2954ede60ae27bb21a120e92ed6b8e492ca43297fa1ad78912ae1e5d71d56390"
 at = "R=u32"
-embedded = "fb12f2d6d5e4a4b9ae143e9e55fc372d796c0763d5f8da5ef42af6be046e0182"
+embedded = "b358b68a7d97b77e81e4dff1b9202688d83c14764927b615a7a2adcbc04092f4"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by HeuristicFrequencyRank, which u32 does not implement in core"
 
 [[fn]]
 path = "memchr::all::packedpair::<impl at src/arch/all/packedpair/mod.rs:34:10: 34:15>::clone"
 kappa = "7cb107e73a5f1c795e5d4d04806d0c367bc10eb76f3126b458f558a163a958e6"
-embedded = "efb943ba36fe47118a50d0cfa33bc6808c110d76034c3baad3153769b6f46361"
+embedded = "9ccb28968221156d888188eec0646c81a58265586a082de784835c6457f301c0"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Finder"
 
 [[fn]]
 path = "memchr::all::packedpair::<impl at src/arch/all/packedpair/mod.rs:34:23: 34:28>::fmt"
 kappa = "0331c09bcb8bae7c0e588134da4977ff8964af3a2ef21dab56e2e7054709cbf6"
-embedded = "8619569795e1ca6808d86121fa9fa837a73d46d7ce16803c0e7c4f3f0c03f415"
+embedded = "b911c0265279b4d7c877b87812cf4b8770a48ecdaed35ec10126fa1ec15c854e"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::all::packedpair::DefaultFrequencyRank::rank"
 kappa = "d7315472f68602994f8f444032e5879e55deac123d5638d7ad72594f9981a229"
-embedded = "809de200ccf8fe517c6d5382c65082c5c1e47af5d27294272e28fda2b877e886"
+embedded = "6f35ecb246fedc7f6d0677ff69433c66adde0575a6e9b1b4888b68a63afa337e"
 status = "residue"
 cause = "mir::Ty: DefaultFrequencyRank"
 
 [[fn]]
 path = "memchr::all::packedpair::Finder::find_prefilter"
 kappa = "9546a6918b7a1c6b2ccf9cc680537000dbb1b85f80d579383fea8403168fc78d"
-embedded = "ff1cf87a99ede7ce4212f1fe62996299fef92f9b41c45ac1c2861966ebd933b9"
+embedded = "25861ef9efad8d576a26623919160a41590afd0818c45feec64fff7b85c15591"
 status = "residue"
 cause = "mir::Ty: all::packedpair::Finder"
 
 [[fn]]
 path = "memchr::all::packedpair::Finder::new"
 kappa = "795f3e93c9d7bc9f30e7f57bbca1f5fa0aa2fd66f87609e621335deaba24a798"
-embedded = "bf3f5b439ee499f60486dd963083389fdb40dd4c70be7b6b57014c22fba5299d"
+embedded = "6453fab5ab976574b33a09c80ddd175870651f729b6cf135ef8ba0c56d3fbb4a"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Finder"
 
 [[fn]]
 path = "memchr::all::packedpair::Finder::pair"
 kappa = "17ab06fb08cbda37b42a6debfd3052ad4f984f00a7abe51aa5d1c92406c4246b"
-embedded = "74dbeff076f624cbb29c359124dc14f6d58bbf08a9053264e2ca0edb333a09d7"
+embedded = "d55f97b5dfd03ca0ac1b6589ef03b1fbda8bff5e2dbd66f91fed2ac1cc5f8e45"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::all::packedpair::Finder::with_pair"
 kappa = "cb7755148839e7e9ed02bda6aa50906e061649c1aafaded99802c657666a8503"
-embedded = "d1b040876960ebb31f1042ab6d12dfb53d083e91d353335d3cd7b91ef758be7d"
+embedded = "b26ee07b11684330c99646fcca8d2c93c565e5cbe70544ad0bfe6e4a58ae3faf"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Finder"
 
 [[fn]]
 path = "memchr::all::packedpair::Pair::index1"
 kappa = "0941bb60fe1b03f889e77702aa031cafeedf13b4c8f197e551b263d1ebe90d54"
-embedded = "9716da70b5fc10f6865ac2ee4b375bca58e065b7a63a37007aac8a8d2ed71ce0"
+embedded = "fd886d5a8aa93190776c6968a211372c16e58c7056b34a2c76b2dc8d2b17511a"
 status = "residue"
 cause = "mir::Ty: Pair"
 
 [[fn]]
 path = "memchr::all::packedpair::Pair::index2"
 kappa = "5416ed835672d3eb5ead0d3bc89b3b9e70008d90c64d0c3312b04c218a48f6bc"
-embedded = "f4b3e20ff063c87c05c32cd8815ed3bf710923c537490499febca4c90a0f8c85"
+embedded = "8943a9060524bbb226bc2f8fcbf49ec8201039278472bf8675d4d2a7f369179f"
 status = "residue"
 cause = "mir::Ty: Pair"
 
 [[fn]]
 path = "memchr::all::packedpair::Pair::new"
 kappa = "98fd84bb46edb9aaae28aa78cab9871d8843f3504ef909bfccc651be54539777"
-embedded = "4c5855ff24287ea14462c23209de0be3abd183cef70279cd57a7e9c163102d82"
+embedded = "1f26618b03e82c19e0f44f1b1be4a6934d4e1e4d6107817192b858660b3d2fd3"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::all::packedpair::Pair::with_indices"
 kappa = "c34a310a6a0336d26cfd09fa53b59fc5b14c5e6ef217e3a77103476cb4bb665e"
-embedded = "a8d5827f130509d86e46f49d85c8410f2a43e2d23c9cd8cbadadc44b29a36153"
+embedded = "91ab7817a87e2bdc8ac31319267b57f830731aa806240dcc20c3a40b1fffc67d"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
@@ -486,770 +486,770 @@ cause = "mir::Ty: arch::all::packedpair::Pair"
 path = "memchr::all::packedpair::Pair::with_ranker"
 kappa = "764a8fc4219261b89618870e9ce4dde14f6b398fb378064e61f9c92ba67a9a32"
 at = "R=u32"
-embedded = "2aa7fdfb5c4f100fb78ce6173cbcf7a4e6a00997ed316c8e014503db94fb0829"
+embedded = "8b1e31279ee763916a1961920d324b3e80f2ce0ce9f9a7e1dc4d32ab01ba247a"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::count_raw"
 kappa = "89b4ba793a4e69421eaf83009589849f1172645f9fe1fcaacf4fbb10702eb6de"
-embedded = "e2f47783a29051744521d6443ad8ff289bcea658ee99e440ac58075ae63a4b2c"
+embedded = "e381305ddefc6314fb456583c0b43c70654aa7fa205c52a289844b15542d418f"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc33: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::count_raw::detect"
 kappa = "65c02e038efaa7bf604342016182168adbe263a3f709af151b53a3ba7d6dbfb3"
-embedded = "e57c28489c74141701d68722fd1b9e3226d68fb7bd54bbf93cdd10d63f7a28bf"
+embedded = "bac6ed242e85342182832ea458e7173bfe9261cfee231ee24387050dc9cc61eb"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::One::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::count_raw::find_avx2"
 kappa = "7556c124bc09b9f91c824ec81fe09a3a09dc921247fc1d086c9fcee2d07cb78a"
-embedded = "d4162d668c3b6ad06dc7e78665403360d4a7c5722c8ec3850c4474fe7a915d32"
+embedded = "ca221b6c119b6042a2a94e2a8ba864979fc2b95b4ed9eef7cab6483ea1c39fd8"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::count_raw::find_fallback"
 kappa = "bd1abb053e98846d78a9ad0223a6d967328d59f5cb7d869acafc1a9c429dcc24"
-embedded = "02fc14fe036046c7414bf2d05b9208bda3650224385df9ef7be1d8d51081dec6"
+embedded = "fa6547e6d11ef9c9c0358cfe599547b94d33b6db71a38e996ad8f6027a6c1b48"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::count_raw::find_sse2"
 kappa = "329712ac5e508aed2bfe2786c92fa04b40358f7edfcb73a94f01a42bd64dbc6f"
-embedded = "b7c234a94f9b2d924c2b03818b8fbcb57547f1197fb51c97246434cae6e48601"
+embedded = "08dddd09fd1bb3a26f0102b09a4865c15f64cca0cceff1068e2078f3ceb4b823"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr2_raw"
 kappa = "12035a1d9c94a813bd15be4d18f3fd6b43e9bf0512a72dd1f8764c570f5ca625"
-embedded = "0490937957b1633c1c5f42d08fe83e755584ab089539078401e4387ded6f8a4e"
+embedded = "6c6074d9572e6c28fe4baf8c6a9d1b39219f00b18b59017fc6d3c00763ce6394"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc17: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr2_raw::detect"
 kappa = "33b37e29adcd899b7d2374d3ec9dffdbd300ef686cacde4d8a37fc610598c6af"
-embedded = "f2ee4a9357a174da4575cae2a56120bc0d36bdcf7e804e98dd2700505ec3a34d"
+embedded = "b8f3416de5c54d62c6dcb6167338c4e83ea7e342f4d694bfd89465e3b2d85e24"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Two::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr2_raw::find_avx2"
 kappa = "ce8f106a03b03d6838e19f9efa8ce8fa99ddb321bde3b5cd66910e8cdd721f2c"
-embedded = "d275b00dc013f3208ca774b3988fc09c5b9b072df78b59408f0ee9dbc0307845"
+embedded = "a67fd3377f64aaa892732b8581e4cbe1c08a84e54e3c56b3f50b8288c97a39bf"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr2_raw::find_fallback"
 kappa = "653f7374d919730c47b1e2708cfff32431ae2e7f2d5f0ab51573e0b9a4f1e549"
-embedded = "ba42d63265c8e843c9d972fd69f456434d612a97d55f25294210837c4d830656"
+embedded = "b803eac517cb2a7eb518bd534f67de010cf07d1c622ac4c981d8366f6660b791"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr2_raw::find_sse2"
 kappa = "b114f1837eb990d23110ee6f8224c869bfd3c938547c72202abde9212096ec5d"
-embedded = "cb4c45c811e48583dfcb8aa0a7d52469283c7ce4d42ab7ad535d052695261a7b"
+embedded = "4211ed6b9d3492e3282b79982df717e736b9514d4f8312afc4081ec745c02a12"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr3_raw"
 kappa = "a7f675dc18af954e48efe3ba12fe713679aa2249af9efeced58ae51756d37179"
-embedded = "fae10ac1b7572f0ca403c2211323d2f3e57dcee7fa074419a8e63ab3ee43978e"
+embedded = "d8b350f0fcc1bf5d292f93e2c19cca149ec7cc9263352fa93df2897850d25d5d"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc25: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr3_raw::detect"
 kappa = "81b358b392e7a14a9452174aa455f56416154ef4880e09cc6cb86fab2115dc8d"
-embedded = "27fdb88d960ea86e50875c4e84fb7015c2105850e86b4806bbc899a5eb5a0e95"
+embedded = "05d22f4e6adf30fd5469dc403e4eb77e8041e79c0724f2f44b7540e09e4da0a2"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Three::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr3_raw::find_avx2"
 kappa = "94bf06f5f81674969cfce5f790e3d5529d6ea786af1a933a2a067fee4d22aabb"
-embedded = "b4747c4206e3de029c31b6b7dc582031d17134160cf6c33263a7442e4fd7c5a0"
+embedded = "50e78e877b433edd155258bf1adeadd3b834d4acdd41a0bb4333245934532c7f"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr3_raw::find_fallback"
 kappa = "93288c623b632a23359649890f33e7f74a89f2c55406b0cbf59325cc54dc998f"
-embedded = "21b94a52eb377b270aa57e6cefc3206e506238418ee5095affd8e675c8834f62"
+embedded = "140389eb83f40f2be1f75e8ca78a08e3c0c70eee13548bac171b3af64cee2700"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr3_raw::find_sse2"
 kappa = "94fe0b759a27498fbd103185c11aca513f0c4c9d046346228939071e6784a238"
-embedded = "705a53ecd3763f3090d1936280320ae60c0506ee5517a0ad6149aa53b2d1f302"
+embedded = "0093c5a8254603fe59d72dc518e7eb79b27b73ec1976d2f490ff21f8029b9c45"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr_raw"
 kappa = "b92d98f2fdb6e6f98e28909fab8d04ede88b975e314a5e565e3fb03419f50e3e"
-embedded = "15be8d8f1220ea115f29266f6ed0ad27a041bd771a23b0868ac230a7e0ee2e29"
+embedded = "5b180dab03d05a5d0901397bb59a5b5d8ec5b5bddfb7dde22317df11e7c6a21f"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc9: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr_raw::detect"
 kappa = "756fce43bb769bfc9a5df4b04789813addcef6d59c5b34782bc0e4ed316b1aaf"
-embedded = "81216dca7faec46f9a089e24fe78b3be8b0e48cf895c7cd584307edfdd568d8e"
+embedded = "af230e8358656c563270ae2bfc8e340d4a5f7b62ec8992c946ef0406134b8dee"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::One::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr_raw::find_avx2"
 kappa = "edf006e5fddcde921ba2ae169ee792b85c24e241a7add5258b5694bf0424d84c"
-embedded = "7e2e3b9e2c8e18f7fb4c0146d48216919c543cf32b70557ffd5867b59f8b84db"
+embedded = "1bfcc7ac80d8c61ffbcf03c50ccb22154dfe3497055c9938a4371d284d0f8431"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr_raw::find_fallback"
 kappa = "c6355aacc043f6c2f3c338afb96f950d03cadb8ab65c3ae3b0a967c359c4504e"
-embedded = "085bc93dc3866fdb7c3d49e3e47f056c8c841b0fe2c7a7b694cac0e55b9867b0"
+embedded = "e2ad322a28c845f413529cd859bab07d57ca0c0e4856fa2e0fe363cb466e4e16"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memchr_raw::find_sse2"
 kappa = "c3d5ac9b6bc95db70d0ba8f50e4ef3a1d4b25c045a2a420d2977792dd57557bd"
-embedded = "d1c3caf1c9a1fb7697adf4e59043e09c76bcbcefb74b5d716c525e4007d17907"
+embedded = "a0597930468a2e1ccbd16a7fd57dd1b44196722010b1409c3d1f7da9f326ef68"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr2_raw"
 kappa = "dab9f29ab474b43ec925477bd6f739f9ce925f7f677a2e00e3665f936bc184e5"
-embedded = "c97fd9f50ee75e540db99fa8e5ab443a0338bb02593a7f62f65c2770dfc36de7"
+embedded = "dd5d04a1f318578085aab8d604c31a02ab37887dbeed429834343f84c75ebe15"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc21: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr2_raw::detect"
 kappa = "0c2ffd3d001cee8115a1768efe7c17b0001ae0fb56992601e93c46a3e7a70dc0"
-embedded = "663eada8013ee56de406c5fefcddc8bffe88c7d7f06325bf82f63d4ddae60af7"
+embedded = "dcc46119cc17cef9497bb1504ec87f46217c130f2975aa3db995a91891177ed3"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Two::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr2_raw::find_avx2"
 kappa = "bbc49405228eed7ba7aed82cbb9ca3dfd168ffbb5ce6eb49eac11ea2cc9bc880"
-embedded = "aabc6d017c39c0659279265e1ad09c8670780c0366e3bded2382b3adb246ed2f"
+embedded = "880f894b9a80b13aef4c20652e25890ba1a335a66a1fb8556781ce5a3d0ed800"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr2_raw::find_fallback"
 kappa = "407bd12016d15fe2bfe6a5b755d4358a65e953a1105ccdbfee7bbfb4fe22c31f"
-embedded = "3349758603b8c63d72716fe8d1650dc455e7b2f55272c4136a2cd05194c1a47b"
+embedded = "697012e9d286e4f537fe70b1d18523e3c7799fd839ef348264cf78d32473c38b"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr2_raw::find_sse2"
 kappa = "55548a46a570f5d19b5905132e6cde1973db7d1c6a38442e6f78bcc291cc91eb"
-embedded = "32669d60bc74796414c12a3612b5c760b373ead9dde99a77172dda3267d90d1b"
+embedded = "9d346b36c7c4d0915e0a8a56e1597cb8c7701f5f3e0c1d8c2ca4439795d996fc"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr3_raw"
 kappa = "4a90d717648826975bac7d284ad18bdf54bcb9532cd61e096fa58011f5156d5a"
-embedded = "9aeffd62a3b7edebc0c0f06c28dd8a42ef63808a52bfc8e61d58a7ea2634f4a3"
+embedded = "c56a377038ec039ab648ede59aabaca2ad5549488f134fac5bbd1f7a8a6bede5"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc29: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr3_raw::detect"
 kappa = "52241306fe2440bed2200e33b03b31baf020071a8e83de8c5cd4fbc46eb3d9b8"
-embedded = "2662344c42426af641d7913d03d99fee416d945dc6880e7744bad97110b5ed54"
+embedded = "a758ee6a8b6895e045e7949c3affe27e247c6305f70d3ae83a8fdd546ad928fa"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::Three::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr3_raw::find_avx2"
 kappa = "55f8fe525e625f2fe2e5b5302f34a0ea0590d575afe01430337f0c9051b81c0a"
-embedded = "af5e7da54fc5ff699b5078a3e4a5d4b16b75cc776e543d5fce67efae0062031d"
+embedded = "c3ac6c736f17d8e4ebd2218a8e95952781bd8e1a8a95adb82849041e6f945ab2"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr3_raw::find_fallback"
 kappa = "b9bf8e06797378d8685203dfc96ca22d97d249c1a88832863a6e9dcd27c871be"
-embedded = "e7d7bfb4b3fe15ed5b83615597035c2662a06f7ae1ab9bba35d7f47a5b92abce"
+embedded = "b773eda0574868736f231f2330e2de41d678978ba70c041d2d548dcfd0e1aa11"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr3_raw::find_sse2"
 kappa = "31fda38900820dd4215eaf74a14be0ed20d222b2a3517e7db0241aef441b1c11"
-embedded = "3626c3bd55e7eae2fbc8ed75f0e47948efd916d8809076b2f8e914108a129133"
+embedded = "d4d6fdb538a63bb2144df6f58b94c7ccdb832822fefb537c1fdfd69e207b8988"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr_raw"
 kappa = "c98667384f5ea451cf265693bf58ed0ee0ef9a7ff596b78ffcdf5810f767840a"
-embedded = "946db63e22c32a83d1ae0193dd7e1e4b0e44383bdf5215c81cba4d7e3c2f1b0b"
+embedded = "1b054763ebae8c09f81e5b86ceb63f2b881367ec2c77a574aff45057fb1627cf"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc13: &Atomic<*mut ()>}"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr_raw::detect"
 kappa = "dbf8476b99f8ce565c7129ab8bde3e4696db068ca4d221d3c4834b772bdf3bae"
-embedded = "b15be5de726c62d688389f1bced44c9d326bf9b70838146c88f7ebe1f7b365ef"
+embedded = "ad3d6a0e98e2b5dd8b08c9da602445f31dc3ef66b474f8791e9fbe8346410d4b"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::x86_64::avx2::memchr::One::is_available: memchr's MIR stops at mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr_raw::find_avx2"
 kappa = "8d17609f0bc07cd01ad4d5cea27c049e238201991579f31b32b56668fecbd312"
-embedded = "1f0bcda303401001db1fdba8c33dd22d13beac0ead27f2f838eb20a090ea669a"
+embedded = "f18b670cfc62ab13335054cf7d886dcdaec229eee260c7f2b2159ec0e39148df"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr_raw::find_fallback"
 kappa = "866859eff4b2c27b6f4070c760d64015e168225af52e563c50e31ce4a2f6a038"
-embedded = "abadcfa55cb5367a71e4ba66964120b1a75c6f48964dab8d12c40e4aa16d43cd"
+embedded = "5d8b3d504be8502f355e135982b3317fc5bd16e6492dd450337fad1c29cbdb1d"
 status = "residue"
 cause = "mir::Ty: arch::all::memchr::One"
 
 [[fn]]
 path = "memchr::arch::x86_64::memchr::memrchr_raw::find_sse2"
 kappa = "c138c2f95c9b3ced335abc8b4dcf18f990d7496cee3aee177fe686c2d9437162"
-embedded = "ee235d0ada471596d2c031fbdf91d2f3baf98fe9da36ebfc1f06d5de64eb0844"
+embedded = "704acf67010e177f91df33cde5f7eee33e5347383c5593f6609e19f888fe6486"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:1241:10: 1241:15>::clone"
 kappa = "223f14cc55c3428c17b3aa021479e71c91d6cbc03389df53c00468a50a0c8144"
-embedded = "184df4c0f3eb95cf59c8531469d5b446f5c59661b087c25d6842be36336476f1"
+embedded = "aa1e395dd67137682a638c8702603b5c61c8899f53945a81b619eb86255ad62a"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:1241:17: 1241:22>::fmt"
 kappa = "9dc02409240a977796f9f77c529752cfa2f2e17386fc421bc87a0ba336592950"
-embedded = "e628cfa4f937e273bb6f8211fa5ce7be1232bf35e821eb133d4cd0a0e94a1c32"
+embedded = "aaac5bf14900e84adef0ba4d01cce31003d016516c76dc070a00555433ce24a3"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:28:10: 28:15>::clone"
 kappa = "8bd2e63e7e76fff2887e59615e0b6fdb3522faa293c171c48df275a2bbc59bbe"
-embedded = "91579d92fdf6dc5a4bb39a604a141a5efe7f534d53355f1076972308b7f6b185"
+embedded = "9831e254528753d264802db3bf39e57fa4b6fd17d4be261a3b1064839e08a9c8"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:28:23: 28:28>::fmt"
 kappa = "ff5a6b5436ab05b0e47db65341041cb5e014faa29df5e0fff2216a97d89f2437"
-embedded = "3572bbb4972b7266166d094c63a788e8511f2b513ba4db6df3c32679d5ade673"
+embedded = "369efd0126663ea4ac64a35282c94f3408bae2824c820cf6c3f549a74578b008"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:466:10: 466:15>::clone"
 kappa = "86cdc4fe1a10a556af3c3476788f6bca42e5b4475ecedac38846a51d6b3ee86b"
-embedded = "2c315896f858ae6aae3e003d4fcf112c2c0154fe4ab8cc586b5ef08d19fdb9af"
+embedded = "5aaa331a23b8ab40bd3bbe2d787816d46ab286728ca71665ba994cca57689af6"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:466:17: 466:22>::fmt"
 kappa = "e38f2fa3a16f9111144125530c98eaad1ac2be2919b7623104d2b15e3be5cf9b"
-embedded = "1351e80015899e590c9f7c294887014414c43247cd7eb0d06af8bf74037f803c"
+embedded = "c3a0d70b7ff8fc7fbd999a4488ebbeb0dbb57cefba354df0e618db11c3bc2035"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:515:10: 515:15>::clone"
 kappa = "286b278e9c8fc92cf201666d4313b8690c2399c1edc10597ee5f5e17addddc1b"
-embedded = "974d53a8a3d51436c0fcce75f4cca30efb20d8e52a6a6a0461a45094364eaec5"
+embedded = "0623b3ad7eab33141c21800ec7bbd9b914f0dfa6c14c9d282bf9c79fc069b5e1"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:515:23: 515:28>::fmt"
 kappa = "f1cba6b80a0967037718129593b9593baffdeb7dd535641a17d8e0a764d1f39b"
-embedded = "0ea8a36d094679f04293d990d5c604a5b4992b7f9a3fc634ad812a7255976e85"
+embedded = "a0c2a4f8ace7146fee2c0d2153553d87c7aa3b555d382a46da32fc8f17b1ef46"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:854:10: 854:15>::clone"
 kappa = "92881ccec1d4aa9dc5958813c1c97142fef215a2bdc7932d8cbfff6450dbf658"
-embedded = "510d85c2336e2232836e0337fce00d62cbae5ffa2938c38117f29b7fcfc638f7"
+embedded = "9a28e08236cb290dadb5da43dcd5d157f78382963c2509487860fc4725408069"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:854:17: 854:22>::fmt"
 kappa = "6b268c7ac12639498ac98e01a519fac19b7b78c148ec1a155d974f368014070e"
-embedded = "7d66efbcc87bf52c724895da8cfb789d9fcbafddb7e71755e59928c66bcbf064"
+embedded = "ee7247538d8e26d3749e52a9e906944fa8f7ab698b7c8cc612cfc3a465ba5ec6"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:894:10: 894:15>::clone"
 kappa = "ce2eb811958a9d58b68505cc5f091d4c4f73b0696952ef0a357599e1b447996c"
-embedded = "cdcf15edc4180ed2d1504339290370b61420cbc6769ef894d3b4135dcdfd0376"
+embedded = "ecd3452c77230d5db75be1bd8a179bc86218cf5da3d561e4d040447725e3a36b"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::<impl at src/arch/x86_64/avx2/memchr.rs:894:23: 894:28>::fmt"
 kappa = "15c1d7dfc186be6aecbf375378f76ca06db64e729700348c495156f74cec6102"
-embedded = "373508e2c43a4d19b9c78d57d8ab1dfa25047925ea05f027748acdb5724e95bf"
+embedded = "8301f183028a19a5c8c8a6113b6b357d290a4e4b2edcd5c9a08f2fa49fa94c81"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::count"
 kappa = "68c05724d52fd45758ff7031adabf571bd2bb46d92ea7e0433022d08dfc2d9d6"
-embedded = "864ef3df91bed2f4cfebb319080acf7a7769377aba8f40a04ed0163c3f44cfc8"
+embedded = "4a97e9cf31004796b2e0cca6138416190e38f0299c9cb32caac50dd86408dc1d"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::count_raw"
 kappa = "ddeb2193ca4b0e4d152fa49984dfdf2afc47020c34ef7b64acab633151d8ecaa"
-embedded = "e225497982eb404ba5c7be2d81f159f1e58a90bc9376bdf4f5b99d525cda4b7a"
+embedded = "07f4d00e80a46767280c94897e356851835569b0f727f9f82ed9c9a6c54fc150"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::count_raw_avx2"
 kappa = "169dd5410cad2e6308ca7181ecfbb3c12e0a3de348ac8141c6bf6b39da779eb5"
-embedded = "5b7c3b3befe06e2c9a3e9c4febe2a3ff261e0eb90b1d354295c151b36baa4095"
+embedded = "b7504d42c79874d4cf1378494d3d2d1a3cde30b27f04c38973664a2162d13f2b"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::count_raw_sse2"
 kappa = "5e2d24df59645c436952dce37d9745921f16ceed95fde628190c55e4dacaa985"
-embedded = "f8f60e1f9d5b7adfb8996814bdb9b4d8d6eebdfcd0d54f73d46d0173e79466aa"
+embedded = "13985fe09de630a41c3ad86261de8eaad4da3229b1f19b3fab7f304cd2d26688"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::find"
 kappa = "0d724986d7264331b8b994f8893edb9cc809ebc32842224acd3864fb7ca47e15"
-embedded = "6a9ba8c5fa43b86f77afc6611cdeb12606ab88b7d1d9ba2b5ece066adc4b01e6"
+embedded = "0852f9d87070bb5fc55fe12cd8873b5d132307fbad06cbf35dc4aba17363a251"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::find_raw"
 kappa = "0e6d0c273266175ca0503400d60f91e6d81a62cc5e6f7f0be7415b6242e1bd90"
-embedded = "532540e85f5956412519a93d398e3c13e0b135b228d3099ad8937601ab83779f"
+embedded = "d7a91226993800a854b78c8e0ed5009618b4f7ef99189a146622aa49317c4385"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::find_raw_avx2"
 kappa = "b4b5130ec7e5684d74d9931eb2e37bef7e4f2e18007ab3cb74756a4c4c7d930d"
-embedded = "ce7fc82637792602e6a87a2637a7c852da741e9f0348cb5d9b61fa1d2d08f032"
+embedded = "a4f68d843ed0b388fbe44fe54916fe53182cceeef0e7da743a8f06880f98ef07"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::find_raw_sse2"
 kappa = "8d5771383803ff6489adafd6fbc736585e2a800307595c369320e7a364981c65"
-embedded = "8c0d607f94e5cb7a44a8aaa9fdf2f6e3003157d1aa87e8da20640f5f2920da2f"
+embedded = "7ce48e8d321a953ef7f1fe587d07367cbbcb7cf32a9ff81de08e690ba4b23bf4"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::is_available"
 kappa = "4c051fe14f25bb4a1876dfb0307c671c23083ef4ac713c33256498b0e0007f78"
-embedded = "a9c01d100e25be281cfe7fba695dc5d42060d577949cfcc4abb5cd72cbbdae15"
+embedded = "7a31f9aa29a4d18c2553c28a9ace0e21d6f7395084951976236a9b31756ba9b2"
 status = "residue"
 cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::iter"
 kappa = "f510f0029ef3105331b061341f532b6c53e8649f0c50a2a6fbc4d1d69d0c49b6"
-embedded = "a819ea1c9dabf5a5e7b45d35f02403947fc603fa5545a12d9a043047e3a56fed"
+embedded = "b77022d738f01c1ca2c042f22a18f0f721f94e74bc83eb4d9af42c25c8893a57"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::new"
 kappa = "a8dcf2b829e6c523a9556347f6cb5966cb759ca72a5556905c64dc5e2fb9f331"
-embedded = "92e3edeefb1f6b8c77319fbd3fdbd40d61bd4eca57da04546a75f4b4821a7499"
+embedded = "b4ea47dc59f02aa18b744842e7b38bef616afc57edf294f0d55258cf02d01226"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::new_unchecked"
 kappa = "30792eb93fae820f048d1385244d05f0afc20f33d732a22d29e8b8309025655e"
-embedded = "17d822c0b5128442ceca4a1c5128b764c23395c0fad2060600d3dea52c7bda0c"
+embedded = "ed2f8a81bea86cd5b73b4ee2330728654b76c2f90ecb9023fc6af5fb42f7ee68"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::rfind"
 kappa = "60a5de2f94343ae936ba66c29deaab8634d014eaf8b79e203bda5c0191ab4764"
-embedded = "278479ba1fdb71993b5cd7bfb202ed4e826a835c75cffb98f2ba9612b4f49fe1"
+embedded = "c1af1a2659ffd4d3377eb577fa53c7cfef0c01b90c4180c743912abafebe4295"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::rfind_raw"
 kappa = "f3959ec33005061cf112346181a6694290c4f0257cadadad82bca3c8898f3db5"
-embedded = "c27088d34c0aad7bd65312583dc62c5f3a5ae14d5fb860a0fb472ecd3ab56aeb"
+embedded = "7f7b5413ec9478d29e0b4785a2ec9a5a6ce453ea23801726c2a068299623264f"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::rfind_raw_avx2"
 kappa = "3107d87a8cb54767ea6396f9561ad7808777efea8ec4b01932019542aea26464"
-embedded = "880bb978fba4c49cc13807d012dda26ee6004d393df129bb0d6a2392b6ed358a"
+embedded = "e5c815a30b45e19fd4e8cbdf532a67873a98c47cc98265b476f44204bede550c"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::One::rfind_raw_sse2"
 kappa = "0df45b807e4e28fb6c895964bd7e81272bbbfbfd2c592d06baea6f671e807519"
-embedded = "6a21e3dd018f0cd92b0dfae12c8144d25d6e94aa68cc370038df22cd9607cb70"
+embedded = "3a7298138b784a95286280c04dcbec0b0683cbd4c9446a2a43960ae90ee7c2df"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::One"
 
 [[fn]]
 path = "memchr::avx2::memchr::OneIter::count"
 kappa = "7fc3073bdc4abe5bc25e74706b203563da81ef4e282bfc78395f1d4081d4ef05"
-embedded = "c9dca785b5684577497609f343e70913e8931d55da63d389d5575a7c9a93a083"
+embedded = "f15e2fbe1299dcee1325b48555a01902827fd0460f16134bb46ab01f999d6431"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::OneIter::next"
 kappa = "0f382cd78b7a7a387ebab2530ab638156b3bb9f6ce423802a88eb71af4873aca"
-embedded = "d5f3f44c4875bb5cb805e0b5f59e7ea843a09875d3801a0d7ece54532c019616"
+embedded = "c25114c216849d58511a3542ee8e7527cf4ad9accac6424662d86199b22ea611"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::OneIter::next_back"
 kappa = "39ae85548dc214b46d1c57b206b7cd32060f280f97eb8df15517c2ecd21885df"
-embedded = "8f6a07b8e5f430c721ed3bacb3666996b2bbf1dc2685d5c294884dbb364a6cde"
+embedded = "8bf335c6cd081d04c4ff1581870cb441a1e244f5cc30a57251e8c777462c574e"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::OneIter::size_hint"
 kappa = "96e2e3a552152726219f7d7cee3a6c9a5684547d60f328a62cb023cd27335766"
-embedded = "15a7c999e0d99bba14d925e798f4f56109daa3837e6e1be306709da12df097ac"
+embedded = "59b8dce78d4e7559ec2f937bfe441314bf1567784bd2926823a6fa91b60b39c8"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::find"
 kappa = "aeb2d32a7f19b14119b105cf40c9c50845d04ea3f5b68a88d9a9a354a9fd5353"
-embedded = "e41d1658bae161a30602d3d1210777cc48eed465708e1c340f0e61148d18133e"
+embedded = "987550d8800b7d48f61d35abc0a9bb9fd7d88e9b43e9cebea0d9dbad11ba2d36"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::find_raw"
 kappa = "b6deb6671f5cfe2700e3f4a0aeb6487e4c4e82dc9746a3f8f7318d7129f0fd1c"
-embedded = "36d0f06c802d9de0b4e721f6541538373f8efcc31a6a467fd8a30f0ae3ae32e7"
+embedded = "7a78c72a64ff7fbd0c8f5f7cbc93437eaed5038f8fd08544dfd85fa59083fa71"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::find_raw_avx2"
 kappa = "3c786cc4eb70efdef0c29cbc6d5ab1d5849e966f2972b138f6b863b53a05d85a"
-embedded = "a3cdb7263e80cd3f95919a4f08eb30465523334d1e1a1bac6c1c4c674a101464"
+embedded = "804cb2c11d6aba71b998bdc304c537c4693bb289a7a7b0657cbb3eac9caa09b0"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::find_raw_sse2"
 kappa = "4b8d237bf626c3de09ee0091523ed662e0dcbb1529c48ef599cf680b7ea38e84"
-embedded = "b138e8bb5e85634f37f8c0cb9cc6640595104a6ae9e33df05eb57e09b8785a20"
+embedded = "0fda04340f9f26695b3e89b7938aaf112127dc4d96115115cef138499a022ff3"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::is_available"
 kappa = "09f9a6223b6ac19705c1559dd9c9b51fcf3d44afaf004c76c148bad9d5e16942"
-embedded = "a4d7f175ea2e376899ca556bfde35759ec95578fd6eb78b60aa0a596ef1ec7ef"
+embedded = "6af15419d0271c8db95091964aef945b750e5273da85e9d7dae8829ed16e29ee"
 status = "residue"
 cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::iter"
 kappa = "48410117b45a3c4a4b8489f8ead9683626c2b56c029298c6237bf318ccd60c80"
-embedded = "3a37c0d453899634e007ce1cc340d7aa915f00126459f076e10fa7b7243757a7"
+embedded = "2dc398827925c79d3a2d6e4046ec3e00085f5206d3fa430a973e7f1e2375f897"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::new"
 kappa = "37bb5456463fb284847f05f8adcfd4fb44abd7680ed9e3180c28f93a39d876e7"
-embedded = "b09f1984e3c90cd6c38cb9e1469f820ee8e2b117c37022074a01e1eaed93b753"
+embedded = "45790f95ab3a20386313b97b71a40cfa486c78b9032ae0b2a687259b15620020"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::new_unchecked"
 kappa = "85146c6b52ced9fed1032a7cc66db5f662fec97707fe9f8b1082db6a5ef4cca2"
-embedded = "23b5e1cdaaa21e3e978a9aeadbd440e30aefad773d9651bb15c416e7ea6a8459"
+embedded = "129fb4f467d493afcea84e38a1ce424a82212b3af585da85578fd28540122ee0"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::rfind"
 kappa = "3e9648513babc7d5dd1c6a3aa2a30c23951f35790146ae11e3da5f010a6c6d6a"
-embedded = "942add33ad0435fcdb06e47c999d474407daba12f3aa59226ba6ed408d442e41"
+embedded = "4072ec28e91183ba8adde9db0181e180c5d6a75fcd7a560e0e24693b6d629fdd"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::rfind_raw"
 kappa = "7248d56fb336c7ab05fa24f4f06be78cd434b7325db7aeddd1c74e3d195f9beb"
-embedded = "46957696922b1c7ba16c092e2cdfc9c851b2fc6fb2691652e32f83ab6e6a821b"
+embedded = "052852418b4fb7e25a9f68398379f0f5b5cc2ffdc7d7ec7e9bc6e69978b6e16c"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::rfind_raw_avx2"
 kappa = "41f84cf57092213332f55476e8185cdc40f52cfe8485fe6521b63760d508cf34"
-embedded = "c22e9d418bcf15dac5d2777a1cddb4f7a6260829fd52d9d4ab6ba075583ee204"
+embedded = "813f107e5f09348453f7cf69a4d5c85fd733e55db22a70616528cb9e1dd76410"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::Three::rfind_raw_sse2"
 kappa = "f5cf5ff57822399b643a266311b8fa8f7fd51be710e0a78a19606189b89c2a62"
-embedded = "f4c633ad291f8de9ab8a6a9c7b47706b2457b2d0c60b395dbb90d4acb32ae794"
+embedded = "48f136acc0166c20c405e77abb94b37d3de092ab743583ccb38a915713498510"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Three"
 
 [[fn]]
 path = "memchr::avx2::memchr::ThreeIter::next"
 kappa = "4ec2480694eca87402267a1951c7b529df9b23646247080dd4c7f31b237d4fe1"
-embedded = "34ea6a5dff760da833847ee265e7ea72b44eeea6d24c85797301798897da5cca"
+embedded = "493ce9b34c19e1b951fdb663d8cbc5dfc66b87ad77e4ceaa79cb10be6b0df56c"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::ThreeIter::next_back"
 kappa = "54e2fdaf339d0968f242850ee24bfc27eafe4b13b8774254d7c433b255c52deb"
-embedded = "c46b535b2b1e846004c026b72cc009d9f492fdaed8cb777cb24c5de6b15cfa8e"
+embedded = "b99ff20e6865a0f7b4c1ffbce38b09687b6de0d7f17b589978a4b4572194bc5e"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::ThreeIter::size_hint"
 kappa = "52b565048e11d13262f7d83f33faa8abacf3e37ec3f18670d6788072727f69f2"
-embedded = "79bc676909261aa057870e02fa4126cb6915dfb7ad8a70ecff3cfff496d2ddc1"
+embedded = "01d8d3e78ccf64f7593e8fb70b9a10ce812c1eb7e2243df54821fb4e9df8ef72"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::find"
 kappa = "e0efac04d59b98461b1c4fef7a52e72727e3bc86944229119edc54d3e14ece03"
-embedded = "562c834bf5cbf6c6ca360a48c312dfafee4eec9b56b0ff96e07c2caebe7bab69"
+embedded = "88409d07190f5cf0927a88d8b69efced7e8f5eb0874d47bb43318dd1c4593baf"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::find_raw"
 kappa = "5138f0fe9329bdbf6d9e88ba0f9dd482045429b29e431ab9c4989a8f82c56220"
-embedded = "0ebdd7d5e4c7a6707d3b612541ba7d2a0d4006550a4c456f4e5e472e282289bd"
+embedded = "bcc578efb8899f5873f80d4cb629e9cc67fc3ac26999962b04b27d497ec404ea"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::find_raw_avx2"
 kappa = "0da745813d923bc9fd8ba0b30f6be5ce5e93619b6f4eec816343a4065bd568a6"
-embedded = "1ac93c61563e3725fe83d4ba679ea12b350ea3a7ac339dd9b9304f0c79312c0f"
+embedded = "51ee8ee60622dacc11f9284974056520d23628b3f1e9228d2a588c0cfc8a3d7f"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::find_raw_sse2"
 kappa = "2eb248483ade5dc093874069b3c453e4da1984fa6e8e19de0e23bbb8e3fafa1d"
-embedded = "8d2c1fa287df8535894dbfe6e8c6f92374ab87752cd972a7dd5782d1ae76a54a"
+embedded = "07e63bdc45bd9fe2d1e4dfa8e18d5e1d98f54f7617061510ede911515704ab65"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::is_available"
 kappa = "86271b3199d35355d04d71251d18ba1f685f83358b583ba60dced5d01995d7b8"
-embedded = "f61cd30d0bce34c3e3314ef658e6429cb8e66ab3d1e0d1e71aa51f756b99769c"
+embedded = "c70e40e4c2fe80750825904d8577451191885d23d3e2b52f681d7ca5346442f7"
 status = "residue"
 cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::iter"
 kappa = "86a770736f5835747d03a1af1660925486a33cdd23770aeec5d243079cde6ca6"
-embedded = "a57affee7110d7efe972589b18fba28f297403d1e5907f0044a57a883c8c40bb"
+embedded = "aa239c6bb1b03769658417dbce05d4e9e5990ec8af3d775e7210f29506b7e3e3"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::new"
 kappa = "9ad89944e983a63ed07aaa19899b41f2fb0d6cb58fa8e51a68c86e213fcf8a0a"
-embedded = "5f6d4fe8e2e93e22882c080e24bc4c97d0641c7d6a7ae0daa5edd5f1aadf910e"
+embedded = "72455e62f24cc356c5fc5e7260cf52d077493f92b01c1ea7e2dab0b7745821d8"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::new_unchecked"
 kappa = "ef03a30e1ff519f80eb69401d1bc633307f9f16e9d0bb0514b302a55523705f6"
-embedded = "7c5fc036ad11cdb577d80f720b1fb81dc14c641f6d10dd76c90dcd7b6ebeafdc"
+embedded = "e39551394c9d10a7837bd6900a44b634b7569f279cc051b55776d729b4aab41d"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::rfind"
 kappa = "22eaa33f160a0356675e66f1ad3eaa9b1fa22947c1bd41147ebb99bc4a329397"
-embedded = "792750f605795d59c3f79b9da4df6db937cf239336d144a00ba318c21d4b5217"
+embedded = "5156fb077fc0c58cf4f909e9e0cecadc4599d4dc5e8c458fa7ddc6cc54f4beb3"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::rfind_raw"
 kappa = "9dcaa971d7b1f9d9e50682c3dff1c5b4fb761a654bc2ba296cbf2437f066143f"
-embedded = "70689ce53a1a38173787fe6dcc197019be965c82ec51ff789aafdb76f18dbbc7"
+embedded = "bfb4d46a55de8335735f6fac89b9b38d34f62856571ae22729740159ba0af865"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::rfind_raw_avx2"
 kappa = "49f39e4588766d2cfa04b7108e6cdf20118d8d2ba4db5f6dd06a57b03cf3ea5b"
-embedded = "8cd9db5d2bab10fcff935db689d9e457aedd99cb9aa367ba88c1d6ef8b111e67"
+embedded = "e11f850ed8a40e1010a1f500c0b628205a4f85ea61df6b86c66175813c8afddc"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::Two::rfind_raw_sse2"
 kappa = "456a4aa50bed1566907825dc1ba7df37b2d4428451d9bcb64be43af20c0c540e"
-embedded = "72e58f0684ae4379bbc89153b725a760c56d5bde6a8cae69d389c49d94386198"
+embedded = "12a7375265f1eb08a450d7db9974164f26c38a77938d14b65a77f2d8d7c7d045"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::Two"
 
 [[fn]]
 path = "memchr::avx2::memchr::TwoIter::next"
 kappa = "aac47a5c610fce54243406085b662b5d54194c225d16894ce01ec6fe266347b5"
-embedded = "9bd5a871cd20d237f701c36052e9dbdfdcb821d534c000b5323916dbd47667cc"
+embedded = "c947609f9242e6215943b619fc3128350ce4efd4dcb0a5d64f77244b060995bc"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::TwoIter::next_back"
 kappa = "3ddb4425d409449ff7cee1055f131c64b2b19640a2cc8155cdeacbbd557a7f57"
-embedded = "10d64644cbe2a9dfc7e2c565a52da5eebaf505e34d436d868e2d5a76eabe1ce9"
+embedded = "9c9f5075065a2b0c2c697378db5ddac771acf817eb0382a8db5a486b4cb2a3b6"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::memchr::TwoIter::size_hint"
 kappa = "0f1b95e04891c834822df4cfb6244f4c2fda303321559fbc9ce53a79a837b276"
-embedded = "13d851069bfb305c94fab0401b693448039c1b49bf949d0da484ff538166325d"
+embedded = "eb826aed609937d41370d0c445931e1bef8433499978dc42a92b98829d1d8df9"
 status = "residue"
 cause = "mir::Ty: avx2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::avx2::packedpair::<impl at src/arch/x86_64/avx2/packedpair.rs:22:10: 22:15>::clone"
 kappa = "fffe5f4f5337ebaec4d8e752d9774b23594efcab701fdf9f249e9573e228bfbb"
-embedded = "743176072acee1fb8dafb6735b3d23ccf64b0ae8ba56b30e580a575f4d87153d"
+embedded = "564bf5146ca485acde04330fd9371625c00cedc1c200a9faf1cdfbff584c720e"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::<impl at src/arch/x86_64/avx2/packedpair.rs:22:23: 22:28>::fmt"
 kappa = "63c74c3db79f41e0ba29281990fef7e8be0868972f84f1e0ea68156249f43dda"
-embedded = "7904b6e8f1708b02908ef49751d5a89eeac49688bf26dffbecbb5b6041f5c4d0"
+embedded = "a88938948bab9183e3697940e9c8b0089eee1b3a53170bef74644257f7854717"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::find"
 kappa = "8c7f1fdbf9c5e7129f35c13f1ede2fb6c1ecf4dcb74908ebc336ea42c50a12a2"
-embedded = "6e256a207c46127d7c178c50ee4a2444e784d40f2008f2fb219c8fcb3135f403"
+embedded = "7e97395ba210172d7681ecc6ea23eda9be4fecd001daf15434becd8760ddff72"
 status = "residue"
 cause = "mir::Ty: avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::find_impl"
 kappa = "52f0b3d1d89a1e188939def13462c52d6a949652907a87ce50158783c5d393c1"
-embedded = "ca61a6b2abdbbc840938979bd220763a282db57b7c9a40e83bceb4b84002dd43"
+embedded = "8db763083998e3a4da2a0fa1bf464c6be8521098968545b5eb66b9fc28c7406b"
 status = "residue"
 cause = "mir::Ty: avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::find_prefilter"
 kappa = "b767e27fa403ba2ba642ec316b31d53d3f3eb346422bd8296dea82d993b6345d"
-embedded = "83ae6d545917cbb4c5f5ae669d832953cb7e7e4a7a5c35384e3df1a05f4873fc"
+embedded = "42166f13363dbde9b461e80de186105ad5cb671e1f86d60cdb32c769c8cdc52a"
 status = "residue"
 cause = "mir::Ty: avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::find_prefilter_impl"
 kappa = "23eae231184de734e81a7a13bbcec4687829c9a623bd471552063c20ae2fed20"
-embedded = "52991e6828177e01def70513ed75337f9ff0ca91aa87d7f7112cf8774065a06d"
+embedded = "6e9954521146c3b742705f1857066589a070dc241332df6eb337b2f68d8c59a7"
 status = "residue"
 cause = "mir::Ty: avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::is_available"
 kappa = "70cd0a386998cde30a73f195cf28fdffb955f83c51bcf736408fe94b29da20b7"
-embedded = "a04e38b687b0f39e73cc7e55fc3d2936c2141733fa1ba198c1c335347252e842"
+embedded = "aad6e6433a98904287b63db2d5894e8c23e4a3ec2237bd05fc2f7fb4490bee34"
 status = "residue"
 cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::min_haystack_len"
 kappa = "a45b73b3b356b6d2884068c19af7e90c87253ba8779c701a344833d07271e4c1"
-embedded = "28f4f5a338114145f3dd329b01262dae235826d6f091beaa46b32015add320fe"
+embedded = "cfedc47fb60daef02908ae7fda05790f5875d251ca13b1506bd4cf67897a0eae"
 status = "residue"
 cause = "mir::Ty: avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::new"
 kappa = "1733cb32a8cf419ea7f5f466b17e0bd5f9ccb54b397cda894888cabf71e48605"
-embedded = "bf8fbd12ee81e8b8f7afee859be96dd9658abf96e4f25ec94955315267c7c2f1"
+embedded = "2fbffb3adcdd83e95b7cefe50733e83e93953d1be7595a9b5597de8e629ade9b"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::pair"
 kappa = "da2e10fe13e01f8e492135f2e7953bffef259e941cdfb17900f394d12e571ae1"
-embedded = "14621e76a0ab04eb20aa0c9b23609406baa5c665c0209f76e724dae919de84db"
+embedded = "14f4d2ca7e4dcd50f9139e9bfa9707308a1be4fd9ac15619bf18dcfbc9f4b79d"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::with_pair"
 kappa = "8e234c9e532e59c3fae15835f9081a890aa86db86173637371b3b79e2d7767d6"
-embedded = "3f95d4949c174e9c29c538561cfe4ffdfe8a93febbc1d4cf5c657e00adc71426"
+embedded = "df76e61e543e0b5de7d623df206621d892bf0ca5c5635f33743c609753b0803f"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::avx2::packedpair::Finder::with_pair_impl"
 kappa = "94a6f03ffc28912481737465bf67c5d3a9a48eb4c7744c833182d52ddc4023ab"
-embedded = "4bbbdc4bb932510440b003486971664056fa45f62bc345512b5cb831f46e9642"
+embedded = "cf84ebb62efbb5a25db22d86b579d6e1874718f665d44ce77423ca9b17951fc6"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
 
@@ -1257,7 +1257,7 @@ cause = "mir::Ty: arch::x86_64::avx2::packedpair::Finder"
 path = "memchr::count_byte_by_byte"
 kappa = "ea95e9d13f7c8c3d0ca39baf0d93fa3d0183f7dfc00c02b612d3b526ac0f9bc0"
 at = "F=u32"
-embedded = "6d2c8ce551bddca67fab1f6a1ad79d3f2abb37b1664beda598e4816fa2deaa25"
+embedded = "b84a8c379ad7659699d63a86422d6ac11392c6d4944a7e4f6a023c48ad71753b"
 status = "residue"
 cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
 
@@ -1265,7 +1265,7 @@ cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an
 path = "memchr::fwd_byte_by_byte"
 kappa = "538d0f518b188b3dbe7382c10a632e123e78a3d9c3513c8d8b14a8467c05eace"
 at = "F=u32"
-embedded = "5a9c7138770b9cc42a969db0a8caf106f4d5ada2eed97140ee1aff97893b75c5"
+embedded = "cb8124e14a1f634b23f983d5e8ec8f89a515488057e94e7bd5fd83c77e58880a"
 status = "residue"
 cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
 
@@ -1273,7 +1273,7 @@ cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:436:10: 436:15>::clone"
 kappa = "52fa039a1792ec9ccfe0972c49a98b6f0bc7e5d4aeb8ee3eb1675dd3c801815c"
 at = "V=u32"
-embedded = "289857afd7da610c2082c809ea65513f2ae3c6337f189ad47ba9a84939cf2ad4"
+embedded = "7b301af5558a03b2a7d180824f1f2c48d9b79124863de96278fe12dc9416279a"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Two<u32>"
 
@@ -1281,7 +1281,7 @@ cause = "mir::Ty: arch::generic::memchr::Two<u32>"
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:436:23: 436:28>::fmt"
 kappa = "b32d77e05736154be365ab8959a53ebdc62e57950d651c2c24264bf312a36f11"
 at = "V=u32"
-embedded = "4e21ba483f28bfd0ccfbb22b306d449d0cceb9ebe79e1c9a9450ebb15904f02c"
+embedded = "af7e62d0def1680cf1d9e62cd867f17cdee6d1800fd91c6614908b35a6543514"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
@@ -1289,7 +1289,7 @@ cause = "mir::Ty: core::fmt::Error"
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:694:10: 694:15>::clone"
 kappa = "4fe3b194b8d20ab86be5e855e11d04620b37c97bfc0e9f6e18c0cda85f40f6ab"
 at = "V=u32"
-embedded = "3e78977bfcdc5a8a0726800a55a8cc382c6972d3e46b35286a3876e0872ddd03"
+embedded = "06b635bd8f3337d7cf8df3e8be409a998526621c30bb78970303200a34002028"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Three<u32>"
 
@@ -1297,21 +1297,21 @@ cause = "mir::Ty: arch::generic::memchr::Three<u32>"
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:694:23: 694:28>::fmt"
 kappa = "b725f3636c2eda59fbf8ab435701d330744f50a1ebc4939199105836594053ec"
 at = "V=u32"
-embedded = "239084e38f88d6835fb155f0791774ba144bf6fc9813d2a36a3ee4f6877ce62e"
+embedded = "b1dfeb224fb2ea383ae46467de40e6084cef22b5ee6b0007ce0e4430978f3b45"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:998:10: 998:15>::clone"
 kappa = "5601a0eb0869b6e70a9bca5a12df0f252cd99c4f1670bff9cd0aa8b4de9676dd"
-embedded = "7a61b55d5be9494cb87f7fc121a2e798db90754e76c998dbc8bf8d19040e2733"
+embedded = "06311d995719934af9811964338e3496a22520e88ba3a9d886e11a34d801e503"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:998:17: 998:22>::fmt"
 kappa = "d2670e9f8335158b5e4138d60c022b7e454b1a984475ff868c43526250a98886"
-embedded = "58c980faa4265d8375c249a7ee597a9ac8b30735a60b9b2b66355fcdbe97e3a2"
+embedded = "83cf04192f9c9dd013ffdda2ac7d41b2d9b31251fe03ba57ffac93495a9157b2"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
@@ -1319,7 +1319,7 @@ cause = "mir::Ty: core::fmt::Error"
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:99:10: 99:15>::clone"
 kappa = "557c5947ba7612de9e10ada7bb2f51e6343c9c3b9f9c01e19883a53911c5a2f5"
 at = "V=u32"
-embedded = "c4d9284bcd60b1aeef55b88d94683a955a7ac2ea5bdbd40ce21164427be16370"
+embedded = "14de03c80489f4a21abed0cc599222cc7df272c34f30772ebd1d1504fe6a8ff8"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::One<u32>"
 
@@ -1327,49 +1327,49 @@ cause = "mir::Ty: arch::generic::memchr::One<u32>"
 path = "memchr::generic::memchr::<impl at src/arch/generic/memchr.rs:99:23: 99:28>::fmt"
 kappa = "5111ffd0c98f3e2f44390666e9b63bbd874987f47b9dd7f534bf0e5089f735a4"
 at = "V=u32"
-embedded = "8d2c6a6ba7ed37a522d40ee8394d89bda818c495eb7863291ccc63be67a1ec6c"
+embedded = "193fd22ee1d5c949691c88e673ed9ef7934b1b273d0837e8b6a88badccca8cd4"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::generic::memchr::Iter::count"
 kappa = "aeba9c634d1c6b304ca28ca68a78dba876132db51b7aaca0447d34ab320abe85"
-embedded = "699dd6ed75fc48e91b578483abe5d1a1efc238ea80742fd0e5537ea2c87c5f41"
+embedded = "bed71cbc862fccd87a5b1dbac6a8d564e33f1d8991d4ac94995aa33349f47d08"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::Iter::new"
 kappa = "d01ed1e34369155d2831004766ed1584b888d2cbaea107992343556ea7038d22"
-embedded = "ec5a4c3fe391baa4f48f521f03360e3e93ff82a5df6cf9b45e2c5b209695c48d"
+embedded = "ebf8aa69f2ed558ec0c6d4a9e91922c9e93693c7d88616bfb3a834055ee2ef9c"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::Iter::next"
 kappa = "8399b7719e30e9b5d887ac97b1cbedb4a42d74067a7747c02875f403c18aed08"
-embedded = "d86d7739220527060ba805d8fbe4977eb7e4436c6f5c65843b1733e6828833e6"
+embedded = "0a8ca42dc13ccb9bc471ddb99b161018cb454547972fe219d9e66eeb10fbaae3"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::Iter::next_back"
 kappa = "b9073e1f760ad82fb66124103dc8aaae16e23d88ca9db2f5eed65a1e079bcab1"
-embedded = "f3f1394c1a8d8160ef0a848ea2357c07f31ddf36dad6d04c6221bffd6a8b8491"
+embedded = "ac48c5e34d2429972abf657d7ea80c9176e68b6cd13180296f2c4268f82c35c6"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::Iter::size_hint"
 kappa = "bda1710ffe43babf35fd5bd52d5b096b5dd8e87ce1547d09cca20d492185fae3"
-embedded = "6a1609341a1bb8db813fa2d5e1798e605e8947d11d30093efc6889f5730d5e09"
+embedded = "5e76d310bb1995c03ffceb14c700ac486131fd3c5cf79a38046aab61c916d361"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Iter<'_>"
 
 [[fn]]
 path = "memchr::generic::memchr::One::LOOP_SIZE"
 kappa = "b06882098ac42f575b5dcdb8be03e142fecfb69c03cf6fa601d8fa8645fb5e8f"
-embedded = "fde9b68dd90afed38d8a8b044987ed661cbbe7152752ca6abfbdf6f07b3ce518"
+embedded = "e1661df30054abfa036cbe9a24bef1abeae4a2c31ff48cc67902a8f2f1529c43"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 
@@ -1377,7 +1377,7 @@ cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 path = "memchr::generic::memchr::One::count_raw"
 kappa = "c8cb9a5c23e6f1b2f15ad12dd878377080f167e42b5821fc0b315be6be27eb4c"
 at = "V=u32"
-embedded = "cb94b788be98541d0f68ba28d047021eae2ad4ed138bea28adfa9f1c6467b7c1"
+embedded = "01ab6ab46c8f5e82850debf0c6b1bd3aeac01756227d3bd79fe4ec04af78384c"
 status = "residue"
 cause = "mir::Ty: generic::memchr::One<u32>"
 
@@ -1385,14 +1385,14 @@ cause = "mir::Ty: generic::memchr::One<u32>"
 path = "memchr::generic::memchr::One::find_raw"
 kappa = "c2f35b626e3df44176c9b666b99c9380d140a33eb297c58d6a6e31c6b017c620"
 at = "V=u32"
-embedded = "c3f4b17b6d4255adb8569b757b417f0503e5ade93c59171d7749477de8e2e62c"
+embedded = "7249106df3144e2ab0775cb369ccb8d4d81de07cc78c3929bcf3554c36d0427e"
 status = "residue"
 cause = "mir::Ty: generic::memchr::One<u32>"
 
 [[fn]]
 path = "memchr::generic::memchr::One::needle1"
 kappa = "7cb202fbd5be6707e13c4d2cebf1f102d58f79813bc0703096eb261cc7cf4bc6"
-embedded = "4c1956e1057795a7bc4283f96608faa1de7b397a1a288069d2d9d7409a459096"
+embedded = "17b714e1ae7893d589d61070539aa68e806d9119a559996766cc21edaf3f8029"
 status = "residue"
 cause = "mir::Ty: V"
 
@@ -1400,7 +1400,7 @@ cause = "mir::Ty: V"
 path = "memchr::generic::memchr::One::new"
 kappa = "6b3c33b7d4a0ce897b7d72cc39b9f2af10b546dd32306045b947598ba6a2ca54"
 at = "V=u32"
-embedded = "5611801d32b4507cd8584caf839d1e8f2275404e179d69408d16b99d4e492066"
+embedded = "3eb42ef503c87dc5911fa307f8509d56447b6abaf774fb19d143fda87f834d9a"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::One<u32>"
 
@@ -1408,7 +1408,7 @@ cause = "mir::Ty: arch::generic::memchr::One<u32>"
 path = "memchr::generic::memchr::One::rfind_raw"
 kappa = "14306ca27ebefbdab5a8a6216f25ab79044949e18c3fa0d87232686ada123057"
 at = "V=u32"
-embedded = "d3e4e00ad42bfd3f9e8cda354ba5a2961905804f2e9731a3b2ed1054c3415475"
+embedded = "6e251437712189fcd1e326db561aaf56001d13402600afb0f933addd4bc8fcb4"
 status = "residue"
 cause = "mir::Ty: generic::memchr::One<u32>"
 
@@ -1416,14 +1416,14 @@ cause = "mir::Ty: generic::memchr::One<u32>"
 path = "memchr::generic::memchr::One::search_chunk"
 kappa = "01fc4d1b7e7cd72c3b432665ddc49841f720b73f3e3f1c92da9f7d09f22325bb"
 at = "V=u32"
-embedded = "8cf8ded6eadfe6abd49ff3dd1b52b4db35d0944db07124693a83c8fac3cc053c"
+embedded = "1f76537c06b4eb748bc57ecdef4112022ca2c338f98a6f5d460f72a521173317"
 status = "residue"
 cause = "mir::Ty: generic::memchr::One<u32>"
 
 [[fn]]
 path = "memchr::generic::memchr::Three::LOOP_SIZE"
 kappa = "44d4ad9693f075e78125c7693d0c7ca10a4c6d8605715e6777720870ad90fed7"
-embedded = "98c4618600f916b5d74bba057541e04946e9bef29107033d4ac5ecfb44f1c57a"
+embedded = "44b68ed659cf2c28c4ccc5591582ab8a40892893f7c5cc9218e8fa2a399cfb50"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 
@@ -1431,28 +1431,28 @@ cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 path = "memchr::generic::memchr::Three::find_raw"
 kappa = "e9909d85e3f6e9a207e532ed1788b3fa7a7ef5ad7d332aafa9faaae966f5e89c"
 at = "V=u32"
-embedded = "0e09d46955c136878e64f90e2b51934760fd1884b8e6c73f2d2a7e5c0fb4f0e8"
+embedded = "756f75092a94b8ed4757a7a98efe8cb63e920ce5b23b01a6b66c9644229c443c"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Three<u32>"
 
 [[fn]]
 path = "memchr::generic::memchr::Three::needle1"
 kappa = "21e1422bd29abf548ada3e2469a49c9ce8bb71658bc61d0a898234d662ba6dcc"
-embedded = "1061680aa12c220dd4b8db463c271e1c97cf179fa47103e443da0fde4443c4fc"
+embedded = "153dbac9a8dd6f3755b1c716f85e22d3eae6b9066b3cd302da2fabfc4c376465"
 status = "residue"
 cause = "mir::Ty: V"
 
 [[fn]]
 path = "memchr::generic::memchr::Three::needle2"
 kappa = "6b67e15360e3ce8cb0a5a0ba3abd6e6a35cd9ca2b7d3eb6fea881b54f3cc1dee"
-embedded = "6548d4456899fb872d1cf04992a3f399035f0b09a02659f7330422eb69e6100d"
+embedded = "393892af23b99fbcb9ed2a618691361264a8dcfd4278860225c4c6da1efdb756"
 status = "residue"
 cause = "mir::Ty: V"
 
 [[fn]]
 path = "memchr::generic::memchr::Three::needle3"
 kappa = "560023fc1237eca7d81c86de9c413418886b0c0bffa638804611f3397fd043b8"
-embedded = "72d7fb889d3a4d208122451128f3350765734d396318c101ea7ed55a414e4dfc"
+embedded = "ae6f43a20765fa31f295c76c711ffa1c08d0e0260c9e673f90b47e63cb986631"
 status = "residue"
 cause = "mir::Ty: V"
 
@@ -1460,7 +1460,7 @@ cause = "mir::Ty: V"
 path = "memchr::generic::memchr::Three::new"
 kappa = "2cc345b9750772422992acfdd147fe91be604b9b649e544ac6b12ee63ef1bbcc"
 at = "V=u32"
-embedded = "d0c58dcbb5abd1dabc9ded7ab3564c293c4616b9efdc662bc20342a0e747e120"
+embedded = "b9b36221a3d23964ecb9cca77b94802164fc04e04eaa061484280c62e40ffb06"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Three<u32>"
 
@@ -1468,7 +1468,7 @@ cause = "mir::Ty: arch::generic::memchr::Three<u32>"
 path = "memchr::generic::memchr::Three::rfind_raw"
 kappa = "365a683bfe4bf9b756e5d890fca7a7d61858407eebedf0ecb9ad9b48b62f86d5"
 at = "V=u32"
-embedded = "db593f79cbd4f61cc4c1e5687aa3e2aba30577f6f6e1c687a1864aa8fdf7b166"
+embedded = "dde51cfbdce900136ba0d35523365b9a1887f947b34fcb280c87162a97c7959f"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Three<u32>"
 
@@ -1476,14 +1476,14 @@ cause = "mir::Ty: generic::memchr::Three<u32>"
 path = "memchr::generic::memchr::Three::search_chunk"
 kappa = "0428587d9eb778cabd5408e59abd3f99602eb6d15bb732343a1152aeb774c4c8"
 at = "V=u32"
-embedded = "8ae9d2a65053b4b6d626c48603e020528a0a8b5628a6427d76205ff77b255b58"
+embedded = "a8d287d2ae93698d0e4e7fd212cd9e6dd59e00a04346e6f4eb9cd8a1ed0f10b2"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Three<u32>"
 
 [[fn]]
 path = "memchr::generic::memchr::Two::LOOP_SIZE"
 kappa = "6642879c33eddf86371821b47717003992187948c6947a6bfb986c10c4d8ab85"
-embedded = "0a0b127c144035fa9f8e40d823f19589c8bc0f065a75809af9f4973042065a79"
+embedded = "46684f79df3f33a50dbbbcde0a471707cf371bdaabcc5306f09254c6bf3a1268"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 
@@ -1491,21 +1491,21 @@ cause = "mir::Operand::Constant: the constant item <V as vector::Vector>::BYTES"
 path = "memchr::generic::memchr::Two::find_raw"
 kappa = "235f290686ab00ed6c60293ed85aeb73c444c123cab4b9804e7be5363fc9ed5a"
 at = "V=u32"
-embedded = "4d1ec326015ab93c833c0113252f9b46dc7ef9d5aa6fa165461e0a8534d0ca3f"
+embedded = "b1b5ff8350f90b5f49aaff891ef64ec02ec649632ac9a0aae307bd6e3248bbaa"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Two<u32>"
 
 [[fn]]
 path = "memchr::generic::memchr::Two::needle1"
 kappa = "b871e2a2d92bf14c4b39f60018ac068abcaaade1c6129a19c39b676213f24632"
-embedded = "56a37c4ca3683bb5831e224e19e7e3bc5427bfde613a099316bc9458cfef8156"
+embedded = "a338b3c350643dd8e3c76b59435b0fe1ca342ab5ed8ce9a9bdb71fb4065bde4b"
 status = "residue"
 cause = "mir::Ty: V"
 
 [[fn]]
 path = "memchr::generic::memchr::Two::needle2"
 kappa = "6ebe65693673b367c82f15e001821b01fb5dda9279a9168a1b7d73626a8af614"
-embedded = "e9f895e67eebd0d406b91ecba157186c2441a670ccd0875aaba05d77380ab67b"
+embedded = "c4cd7cb39997527e11c6b938c80fe49b8bb7ad448a14475896c030be0e318f33"
 status = "residue"
 cause = "mir::Ty: V"
 
@@ -1513,7 +1513,7 @@ cause = "mir::Ty: V"
 path = "memchr::generic::memchr::Two::new"
 kappa = "0202f10ba6f190e7cf847c2feb4d1b31f85f2977e2e319befafc9889ee790d05"
 at = "V=u32"
-embedded = "14cc02906538c163dea61f1918e96b92d8308cbd1c479173ec05bc1e004f3b14"
+embedded = "a5aa8df18ad51d9358bf3f0941adb3ff4f19b2da4c791d5565cd9837eb01693e"
 status = "residue"
 cause = "mir::Ty: arch::generic::memchr::Two<u32>"
 
@@ -1521,7 +1521,7 @@ cause = "mir::Ty: arch::generic::memchr::Two<u32>"
 path = "memchr::generic::memchr::Two::rfind_raw"
 kappa = "46919e719a8e2b7706d446eefa58841031e1920a161e630ab40df4dc6b609a0d"
 at = "V=u32"
-embedded = "f9d648f81a182407e8caeebc9e07a346f940d03a28f98b20d9414868c534c56e"
+embedded = "d30fb19a41585332a7f86e1b5fcc4451029efeacb4ccbf05c75d21d3d5862721"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Two<u32>"
 
@@ -1529,7 +1529,7 @@ cause = "mir::Ty: generic::memchr::Two<u32>"
 path = "memchr::generic::memchr::Two::search_chunk"
 kappa = "33187b2eed24e34e0b32879323a8c21c46ac04fcdbb0b02901d498de4b3d99b7"
 at = "V=u32"
-embedded = "7728eb4752890528bb3658651fe4d37a61a9106343ff083ded25c550c822bdcc"
+embedded = "66c48749ede01599e5245ed4ff8b9250e5cdd2b5aa9d578d565c63f42b3a3f18"
 status = "residue"
 cause = "mir::Ty: generic::memchr::Two<u32>"
 
@@ -1537,7 +1537,7 @@ cause = "mir::Ty: generic::memchr::Two<u32>"
 path = "memchr::generic::packedpair::<impl at src/arch/generic/packedpair.rs:34:10: 34:15>::clone"
 kappa = "cf74880084516f877b4ea74d28d2ad3e697b91f7aa95a3664bd9e897436533d7"
 at = "V=u32"
-embedded = "184acb00941435e5707d19842a39ba1f10b08692b422ef8b5a457f1a1c9c32da"
+embedded = "d6edc1530e5a116b8f6012a37de581c9a0037fb726cb7f71fcdad6c8bf1205ab"
 status = "residue"
 cause = "mir::Ty: arch::generic::packedpair::Finder<u32>"
 
@@ -1545,7 +1545,7 @@ cause = "mir::Ty: arch::generic::packedpair::Finder<u32>"
 path = "memchr::generic::packedpair::<impl at src/arch/generic/packedpair.rs:34:23: 34:28>::fmt"
 kappa = "a65328dd85fe9794c6fffd18262307b637e3f7ce3a215184319f87ddb995aefc"
 at = "V=u32"
-embedded = "f12270374ca162b9e3077f852ef520b42e27f795550302f448bb7ccfa22371b2"
+embedded = "3fc7d1e3ed89d040149c5000c0ad241108f711a44a51800ba800938f4804eadb"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
@@ -1553,7 +1553,7 @@ cause = "mir::Ty: core::fmt::Error"
 path = "memchr::generic::packedpair::Finder::find"
 kappa = "a7c821384654082cb4cc030f558cc5353e3233da8a04f6dc782beb68616c681f"
 at = "V=u32"
-embedded = "a85738f047bd5549d21bacb8a9fd602d60128a25b14f5c13f5eef85da765923f"
+embedded = "e8d49a9beb502acdc5450c7f281c0c44592c538a810fcd9611649efd0f100cf4"
 status = "residue"
 cause = "mir::Ty: generic::packedpair::Finder<u32>"
 
@@ -1561,7 +1561,7 @@ cause = "mir::Ty: generic::packedpair::Finder<u32>"
 path = "memchr::generic::packedpair::Finder::find_in_chunk"
 kappa = "36a35bad1660a7c8c1d8f6c038b0630bd07dbb049396c3b51e24b7b7b2024fe1"
 at = "V=u32"
-embedded = "0eddf068754735c12a63bb27c316cde0d0979a1d6128752adc5d47b1c1e73e2b"
+embedded = "bf2fa5b92f6882658249589fd67073ff72d3cc6075ba6c90bdc4596dffb0bb43"
 status = "residue"
 cause = "mir::Ty: generic::packedpair::Finder<u32>"
 
@@ -1569,7 +1569,7 @@ cause = "mir::Ty: generic::packedpair::Finder<u32>"
 path = "memchr::generic::packedpair::Finder::find_prefilter"
 kappa = "50e30506b27c1cfe45b6561a9eb2465980816664ff4713242bc5bf9dcb169140"
 at = "V=u32"
-embedded = "e142256e83fcbb8e27c23326871c4e8eacda89b0e1225bc50e82d241dffa9363"
+embedded = "710f436e9f0602f10c1bf79c42b407cc2f53f97c916e3c0edfce6bdf987b731d"
 status = "residue"
 cause = "mir::Ty: generic::packedpair::Finder<u32>"
 
@@ -1577,14 +1577,14 @@ cause = "mir::Ty: generic::packedpair::Finder<u32>"
 path = "memchr::generic::packedpair::Finder::find_prefilter_in_chunk"
 kappa = "750f9cc7b9e4dcac2eea32cd53db8b6be5409b867568629695ba36e730aff42b"
 at = "V=u32"
-embedded = "1edf1ec30dcd29e23fc0791405eb73b55d5825971e2ff73a6f7f95194ad252f6"
+embedded = "10e4622da599570cd35a312807c6c9b5e66c0bdfe2b1f682e0cce41d80bd28fd"
 status = "residue"
 cause = "mir::Ty: generic::packedpair::Finder<u32>"
 
 [[fn]]
 path = "memchr::generic::packedpair::Finder::min_haystack_len"
 kappa = "8660c88edcb6808d5cd340f9a159f8672f8cadab084d23cad0b8f7021a6688e1"
-embedded = "cd8b2ee362a6386d371c59ebe2a95d3a9dd074fe75494c5ac6ab5c552ef53a9b"
+embedded = "177defb099c0ee4be4f9cb522c17572cba0908d96a3f5eee5dc1888bc7f05eb9"
 status = "residue"
 cause = "mir::Ty: V"
 
@@ -1592,210 +1592,211 @@ cause = "mir::Ty: V"
 path = "memchr::generic::packedpair::Finder::new"
 kappa = "14f086e447a57b74df8c84fdce1f2a8141231e8d50899f54c0c186149193cb51"
 at = "V=u32"
-embedded = "50218a16f9dc5c507b6726b35f1954a5010c0570a5650464cdad88c6267c6385"
+embedded = "76501a26b2ee878c73e73782c51d6f8245e2dbc38c8a0b9d91a86445afbaf034"
 status = "residue"
 cause = "mir::Ty: arch::generic::packedpair::Finder<u32>"
 
 [[fn]]
 path = "memchr::generic::packedpair::Finder::pair"
 kappa = "2d45d31580e475f8456fdfe2ba6cf1d5817ebc211b4c1463ba9a92566999ec56"
-embedded = "fca6f127b2f9cc6a0ed657e4671505e1e17f39ed2af16eb1e7e37538e484fb6a"
+embedded = "9c5c768601d03890e9386935cea520e482d0961ef13e134b8e83b7a7f5c56953"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::has_zero_byte"
 kappa = "ed17179c7fb9897c917d6c23955ec81877725c332f5fdb41d50df589e20766fe"
-embedded = "6c416ea68e59925812b8a8691b260fc89e66f8c7e9458f23f7070fcb515a66ea"
+differential = 7
+embedded = "b0ca06d5a98b91390dbca1576ca0faa0a8fc86f1675176e7a78ac1524c960947"
 status = "residue"
 cause = "mir::Operand::Constant: arch::all::memchr::has_zero_byte::LO: mir::TerminatorKind::Call: splat"
 
 [[fn]]
 path = "memchr::is_equal"
 kappa = "1271034eea9f750f9dcb54b7de82235e2b9f58960382d06873791b52862012f3"
-embedded = "2c747a2421b70be588a4a1319a5263db4b99b3b4840ab59fe3e7e4dfd79619b2"
+embedded = "83539323e1da7537202328703652f133da2bf5684ac695e869656c9c43acedf6"
 status = "residue"
 cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
 
 [[fn]]
 path = "memchr::is_fast"
 kappa = "3f6c7b47cfb1e81cf76120cc275738c44bb018b98123514038b830490d118c5a"
-embedded = "57023a1d470e788410dc47e467f85f96242a5b313afb990bd9ece08aa5673ffd"
+embedded = "66b8dd13a0d77c98cd1f4eefeeeee8ca8229bef367aa95af20e40f311b3d378c"
 status = "translated"
 digest = "93b46564ddd6a7ef52d1f205bdcf6c089c67c82ed2fd9f84ad4a0b1118d9ec12"
 
 [[fn]]
 path = "memchr::is_prefix"
 kappa = "ffa14ece43f7376f0550092c67e8383eb8be208e7d0693a5aa8671f02e346bff"
-embedded = "606ee67932a72e62404b952ef4c33994b3abe84303e36b11d7c5eb61c49223ee"
+embedded = "6d13f4e945ad3004d349902e7a88996ba30dcae8082f1c6364210298cb0abd64"
 status = "residue"
 cause = "mir::Ty: core::ops::RangeTo<usize>"
 
 [[fn]]
 path = "memchr::is_suffix"
 kappa = "f21fc2259e1b9d243c7849cc711c4f74d85d343f8c1bd6958ab3573fe9d85982"
-embedded = "3bbd1c326604e7b2e3cd7ba531286e662bd011a45445a3f1336dabcdbeb4d195"
+embedded = "b606c6ef3aaf4045f21eef050e196cd4113a43fc4a311dccecf5f42f66dbac5e"
 status = "residue"
 cause = "mir::Ty: core::ops::RangeFrom<usize>"
 
 [[fn]]
 path = "memchr::matched"
 kappa = "9f69591beabf1f143e0cec61fef1d1b3edfd4fc46c79be6a627a31a60e3f4354"
-embedded = "abeff19cdb6506ad4ca2e99d812a19052f0a9d871f637b1533747779dd73dfb1"
+embedded = "d9233f41b41c123593e682124ccd9c1684aa48218f22c9abdd5d78c657eba677"
 status = "residue"
 cause = "mir::TerminatorKind::Call: ext::<impl at src/ext.rs:20:1: 20:29>::distance: memchr's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::offset_from"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:179:10: 179:15>::clone"
 kappa = "d4c6c8669a3f1ddbe02ecab1452c3fa3d3db8593eb898016bd1a2ef49ecdcf80"
-embedded = "5543abb6ba7641c29dcc7d457e7c820cc7013496cbd270e6691261b6b60d29dd"
+embedded = "35df9b059e71182b8ab4a090275751395742397d1b8321d954ef170aa0379096"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::FinderRev"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:179:17: 179:22>::fmt"
 kappa = "92973adbbebd7c38fa68bb0dece357babd82e699a47057b5903462ea2fb6d277"
-embedded = "a8cbcb8d6b78982220564309a99817fc6653780156d0c9ca35887a9350229425"
+embedded = "74037d51f5865d70c37f25c02e338172393ee0a3b47efb040aa608c554a55cff"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:284:10: 284:15>::clone"
 kappa = "c84222cec91f64b58102917bc545b72f7f4b064fad24a038d85ca08077fc5031"
-embedded = "70cee3a73d56a99ca50b61dff09f90a25b771c828b1334f32c7c954fac7584b6"
+embedded = "dace3b1a0b3f82bab1531dac2b93fb717b79dd69080978591d257ebab577c9c5"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:284:23: 284:28>::fmt"
 kappa = "b1bdab9459dd4808220ce3643d2bea0717eed637a2a3e386774a852e7433115c"
-embedded = "eb5d36ef2b12b6ef60c55a976cfe2b8e76b93c66565cded54acf9d5bab0aba80"
+embedded = "1a932f30681c357849e0fcc1e194c6eef6bac8cd22aef4fac3e27b3a9537ed19"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:284:30: 284:37>::default"
 kappa = "c126d83d1806858dffc234ffb6ddbe52a0c5901e7d757433bd68e41722593e9f"
-embedded = "84cc21e62a77038e5e6019d7f7eac7ad61460947d41b6a7441f14408bc31d474"
+embedded = "6567dee2bee326f69950d021223a0d450de929a73b58d0f5d6920e1d5864b7a3"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:284:39: 284:41>::assert_fields_are_eq"
 kappa = "a9582b349cd345e97c8dd1f8514b7909900bee2447756d01a9fb4c657ef979da"
-embedded = "8f102d2d0b25d031bd158c50d2ca17b86bea971e67b2eda29613727ce2f19f8a"
+embedded = "b5f8984211b7aa3c17fbf254abdec0535a138eb29ebaead2a685f259ce1e2755"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:284:43: 284:52>::eq"
 kappa = "39bf6deb25754dc7f826a48d92197a03377de504636e21d0e8135ce34564e3eb"
-embedded = "aff929abefda28ba505ff64894b4b2e1975552969a3ca1bb2a4fd5234cebf1da"
+embedded = "79ee419443715eafcf4c6cf4100e9936246e5afba3bd16d0ba2b772199a33e5c"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:68:10: 68:15>::clone"
 kappa = "fe4604e8e04481a17e2b3415dff935427ef19bca2a03c595b04ccc1ecd3c40ea"
-embedded = "facc61e768dff77a4bc5ced6a564fd15286cfa019fdf7ebd0bdb57ad849f570b"
+embedded = "c65ea770480ee0abe7a32d8b83f2e18c0345adaa140a7f8be23b5900f529c797"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Finder"
 
 [[fn]]
 path = "memchr::rabinkarp::<impl at src/arch/all/rabinkarp.rs:68:17: 68:22>::fmt"
 kappa = "0ad23146336456714e1c37fdb1b4ffc3dda07b6e4b2b3bcc2935511e970fd677"
-embedded = "7c06c03828620909a02333fb319d68d23d51ad83b831d6655f14a88ac12be773"
+embedded = "f5323cb92ad48da19a618dbe4468603e3775bbdb1280f561a5b34df96c977558"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::rabinkarp::Finder::find"
 kappa = "366d8e542ddfc89057c0b5fc31f0331e275a701378f07c856fd0a5d4018f00f7"
-embedded = "9784cc20f456621a3a0894d0cab993391606f0c724d5ed1c4cfebf1dc09a4e4c"
+embedded = "61ed56ad83568bfee37034d69800953688c940299584bfbf4f0b2f3ca88fe18a"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Finder"
 
 [[fn]]
 path = "memchr::rabinkarp::Finder::find_raw"
 kappa = "79e69816ac8a346a062fc5c6a8ab888709d5b56f5d738237dddf3c3e482f1fc4"
-embedded = "4f8aef87b7dc1662ee0ebfa00bbad59b12946758b9911c6421679d6e14d23889"
+embedded = "8ed6b33119794ceb59f08add709d993f149ac466c7fd9d86e884795750db9b3c"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Finder"
 
 [[fn]]
 path = "memchr::rabinkarp::Finder::new"
 kappa = "7c7ab2993418b2e75167bfff647f0d8e40a0e71bbe3b29efb689a3f94e969a4b"
-embedded = "73aece7ac271ed85c56b43c430b3342b188315163ec7c1130c5587452b535ed6"
+embedded = "8b43667589974373e1b9adec06dcf5871a45cfe79fb78724092cf1cc75992266"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Finder"
 
 [[fn]]
 path = "memchr::rabinkarp::FinderRev::new"
 kappa = "59381473b775438225b1a8848d1a25beb9bcbf6538fbbe529f4ce26c9f643d84"
-embedded = "572d8497871e2eb6d1d07f9620b2a8c2f056ccda6c52cd57dc575146da4da415"
+embedded = "5a950899bdbfdec210903da70378aae491ffc33c513b4c5e05e51dc40a62fcf6"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::FinderRev"
 
 [[fn]]
 path = "memchr::rabinkarp::FinderRev::rfind"
 kappa = "f6ff351e48b5e2bfbafc45e790d42b360e1386d687f225cf2c27aa4d4dbcc227"
-embedded = "ea6ee15738e549b9fbbaac6fed444b5478ad1ca04ebbeadbe345626fe439ea7b"
+embedded = "7d7aecc6f5f503427291930ad639d9beb6776d253a953b08f4f0f75f55bdd968"
 status = "residue"
 cause = "mir::Ty: rabinkarp::FinderRev"
 
 [[fn]]
 path = "memchr::rabinkarp::FinderRev::rfind_raw"
 kappa = "ee8555ab322d32310d174853d0787bbf43fc8ebe284273fb669658b00b7b6549"
-embedded = "d25f1beaca6632f57d079765e65fe3c3f35f99792fd47b316a136c5ad2facd5f"
+embedded = "42bc44793c84c0264bf0cd28b228565b968cb9c086f714560df288389aac9653"
 status = "residue"
 cause = "mir::Ty: rabinkarp::FinderRev"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::add"
 kappa = "55ccfe118d1e1eadc746aa8c46196bdb142465a2f0e1a8cdb1d9ca5a1e8da988"
-embedded = "dbe5fcfb553e494347234566a12b6d8391d0538bcfa49255e5456d6acf0d7ab0"
+embedded = "f2a522dc6308152440107b0173382d2ab93b24b59fad64567b3ea4b4f8a65c82"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::del"
 kappa = "2796a0751673009ac6ad01fc4c5450fffb0de6f58ff3f58e203b6b2759803eec"
-embedded = "87d4a8d503d962dce0fdea0b749b80ec2c7756a1158a0cf1395ddea414460c26"
+embedded = "8031be74c92adfa9e051f18d2217cf4968f1f5dfc29a41e365385b1ca7f71bae"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::forward"
 kappa = "5025182e51dc8ada2f0a3bb0bc991fd9a48b63885da231216f7efee850c44e00"
-embedded = "2581405d656685595ce9b86a7468e7aece01bd4d618427a9cb4309fe8b5c2370"
+embedded = "4467fdf30050832d2bb08d3fb41c1db2510651bbf0ff7c195be03141ba7b004d"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::new"
 kappa = "3257fe332d7f3a44289be71171a8b2047b05ed225f92353c15563969d484eda5"
-embedded = "d77900dc96ed270124ca287a191ef81bf13092a08a4986fb9dc6a0a4756ea965"
+embedded = "fc0ae465e0f62a5308469818e5d8275a70fa60a4c349649c56778d866df46c11"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::reverse"
 kappa = "22627cc3f41250a28827078929b4b52a1e51bca4b236b79311fe1193588232ea"
-embedded = "f72d6f3a68f6572a308d6c43f614a533ee6d6ac105a3794da9726baddaccff85"
+embedded = "1138ed6cadd974caee64019b8cdd9fd66f8cba78077862615bd2a26562b8b3a2"
 status = "residue"
 cause = "mir::Ty: arch::all::rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::Hash::roll"
 kappa = "5a9f40dffdd00b295d1a72c4fb9d2023d78fbf0747f9bb85ca4ec95049ab2182"
-embedded = "ad5034a30b21cc4eb19e0193bc0d40dafe2ca37c2990077dcce4bcfaa4acf69a"
+embedded = "b97a37ffefd2c2af264a70527b93785d5de77bf83a7590feefab715e65c86dfe"
 status = "residue"
 cause = "mir::Ty: rabinkarp::Hash"
 
 [[fn]]
 path = "memchr::rabinkarp::is_equal_raw"
 kappa = "9ddf5d9014f8dab3d31bfa83146df1d4764e3ab4e1bb9a7f480a8fb336a5fc3e"
-embedded = "b5fd0e65a3e23b3de59ff5406dfc1ec0ee0727955787fc80c01fc13147b6f973"
+embedded = "e6aa007e01cc86f6ec93c5ff7a2fba1ae70744a674e07f204eb10be3c78f5bde"
 status = "residue"
 cause = "mir::TerminatorKind::Call: arch::all::is_equal_raw: memchr's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::cast"
 
@@ -1803,735 +1804,736 @@ cause = "mir::TerminatorKind::Call: arch::all::is_equal_raw: memchr's MIR stops 
 path = "memchr::rev_byte_by_byte"
 kappa = "ada70042819acf92879fb357d8c7107dfaf783ac2006b532a281f27c5f2181d8"
 at = "F=u32"
-embedded = "0b185ba5ac7b50cde57677b0031d3d8d2c9a78d1c421083ed377c76d0fe3acd0"
+embedded = "1333d9b66949c18608b6625b032a7318edf90a0b2a4fe46999dd553f141596af"
 status = "residue"
 cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
 
 [[fn]]
 path = "memchr::search_slice_with_raw"
 kappa = "0a216615d8400a2f9b53685a43fdacb15f2e0326438df64c4cbe2fa57221053b"
-embedded = "ab368e7d4ad5669e7a46f8c64ce4fe04b5598b8d471249d53e91965cad682a38"
+embedded = "4c0aad6d9cae401e0cd716def3a0f3a28e6f57569e9791e94659dd46374546e8"
 status = "residue"
 cause = "mir::Ty: impl FnMut(*const u8, *const u8) -> Option<*const u8>"
 
 [[fn]]
 path = "memchr::shiftor::<impl at src/arch/all/shiftor.rs:19:10: 19:15>::fmt"
 kappa = "ff03bb13c44c788ace155c1c5a49c34c6f6a1072ede17e3ba0bb33cd759dd657"
-embedded = "ced55332dc9eb79595e037df89cca5e8a7ac16c052770d6146be34242b5eea18"
+embedded = "b2674c74735a071098f56dcd1b226ad76b479f01e2978e1f161870581f73edab"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::shiftor::Finder::MAX_NEEDLE_LEN"
 kappa = "c4d3f6c3b21a17e3db157a201151334abd82fbaf40dc43f9850412270b52f7aa"
-embedded = "7f37681f896b45ee84b484b046ce434e114297e8da5a77ed12345973cd74ec53"
+embedded = "a1c8ec61ac1ed9b23ae1b14069530c172c3020f7da53725d64137da18c944e39"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::BITS"
 
 [[fn]]
 path = "memchr::shiftor::Finder::find"
 kappa = "baae7dffdbd207d4dc48d714aa48781714c86292c4c961a62b7938b67afe0194"
-embedded = "4e4d15f128a150147f7c0daa6549ffad3a736adb86ce32145ec3a87aadc40832"
+embedded = "5a3259b6f84bcc09435b2cfe044fd8ef52db30e89d26e201d6aa100971632106"
 status = "residue"
 cause = "mir::Ty: shiftor::Finder"
 
 [[fn]]
 path = "memchr::shiftor::Finder::new"
 kappa = "d3c9c6889c31ad99d71561889ca2110a46f3b21f6e08f964a78d8fbcc54fc9b2"
-embedded = "744a764321be4b58f878276da9a2e42abd6b9e845331703201b723f1f5fda267"
+embedded = "5bce7164b65bb10ea040752eede15d88bb3b4aed476430f14dd7be6abf8c5616"
 status = "residue"
 cause = "mir::Ty: arch::all::shiftor::Finder"
 
 [[fn]]
 path = "memchr::splat"
 kappa = "f6edf10171bb7a2a84470bcc461b784d9b83793153ab1d90bd3e4e17dc56c247"
-embedded = "5a21cc927af6d9c3cd8b36f5a4384494b411ff599a2d3b6ca4b9933ac73c2a1d"
+differential = 7
+embedded = "e5f356ef65969142ddf440a0c8e6579d330d0e53457270278132d927b9db8168"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:28:10: 28:15>::clone"
 kappa = "b34e2451594a656a4b423ed24a9665dccdc2ec54716fb2ed67dad922f2b77347"
-embedded = "91e1b6a9d335be91c61b4d5a4ca1543d5b637eecf2687572a5204f691cc534dd"
+embedded = "b0df92f97fe226bba88f52ddcb207ee429844a08c254bdb7a15e4ee9dfca353c"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:28:23: 28:28>::fmt"
 kappa = "2c04dd4ae68928c86cd4a41a44fc2e4024dec676e15fd54f0201e678352b3957"
-embedded = "3306007e9aab977cd1c6f0d9eb51380d95a43240bbc78006b6cb092f5b6e02f2"
+embedded = "884850deda38d17245a21a78c5ff251ebdce5304b6b9363f3de3f1d8fe81678a"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:355:10: 355:15>::clone"
 kappa = "25355538a540343e2cf53e83311b88233c9cff367ffde1db1d9ed7a9e698df26"
-embedded = "bc66269bfc2fff9b6c55cb74836137e8202abca9a69c191a69e0233d0c9e9c0e"
+embedded = "daef60420e49a99ed68c54f5f78fc1791e4270e8bac522cc4c6530c6f6cbeaa2"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:355:17: 355:22>::fmt"
 kappa = "75a16efe65e22ac6aebdc69641182e826ac29f46a0eda5b826de7184d629e82d"
-embedded = "a825fc078a466d819166c01740dc9e9766eeb15263742098031fb7d331bb5bb0"
+embedded = "832a08893276d19cdd3be3f76faf0fee60acc9bac4f24cf38f6f9c480ae503e7"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:404:10: 404:15>::clone"
 kappa = "d00f49e617e1ec8fa444cf491f27b3501d01e598803a319a1e674fe27296ab7b"
-embedded = "e8c91fc20cb2130237275a85043a1f377dd4c9776c1992098465e24ddd11937c"
+embedded = "a17cf3c00c992b0e800e4f2c90733fd0fe8e1b8e12530bb5e6925b14e12bb3ce"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:404:23: 404:28>::fmt"
 kappa = "2310e5be57d421a140b9a72afa1e4351ceead092ddb5ddf3b9aa4889f821a307"
-embedded = "fbeef76d73b22fd54c7d9c21eb0fe83bdd68c9c8711e8282dae3f6e343c8090f"
+embedded = "bc82b3a4f44fcbd10dec8839b58defb055d64cc96ddacf32f459d52a83df5da4"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:661:10: 661:15>::clone"
 kappa = "29d37f70302b482329e2e3338fe9c799a1392dca0c05300826c4a5907f72086c"
-embedded = "e6bb5301d4d77dc1ce610ac74fcdd540d172ba164acee455d47a418f8df0f432"
+embedded = "580a225ac5c501b0b6fd75634c4f4a69eafc610aedb6e8f2560d40afc68ca068"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:661:17: 661:22>::fmt"
 kappa = "5b58e8c43ab0089f38f4f476a8226e950099ee9dc9341ca1bcabcc4ae7c60864"
-embedded = "c52a2a0dff229cc96522db07e5be19eb23d1f1b7b5bd58d7463132100f198d7f"
+embedded = "f56275358ba51aacb7af97328901123de58268ee6b92711c20b6c2b4b9cec23d"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:701:10: 701:15>::clone"
 kappa = "fcdbf3aab9fc016a4e34479a7bd1015671417600d709ac0b2798e2c08dddaac0"
-embedded = "d0a2c682ccd50679aa6b60b5326262797c5330d66d331dc4ee76d93a10cba95f"
+embedded = "767a75e85aed82c23be4ffcaffca1774b9eb4139b784203763f41370388222da"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:701:23: 701:28>::fmt"
 kappa = "3dbe774555a2fc7738c0648da6f5d3d57a8d90ce1208f2f1ed965b6d49cf0eaa"
-embedded = "e5bcff51434b0946355ceb5e44970b771598b542e7f90e4c9c10943715723504"
+embedded = "5838b2653fe0a460aa7a014649b88379b27e97727615f46e697c0186375c649c"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:966:10: 966:15>::clone"
 kappa = "308384665649fec5dd54b5cbf7ae3994ec308cad9488cd3006879f102745a390"
-embedded = "9e75736233808f5606488ff72d1ea05c5ea60f55b110ae0256868792e14378c2"
+embedded = "6d926ed03f1a4026b6d559d8a6bbfd2bd9c7f76eee450dafa705f01e0ef0204c"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::<impl at src/arch/x86_64/sse2/memchr.rs:966:17: 966:22>::fmt"
 kappa = "b9ba4390ebf323d83c3739ed51f00233417b111986608d777cfaa1cac2e99f59"
-embedded = "491dd4dc558886712d390aab4c5fbae39d552bd7e419838e1bd40d760c9a7795"
+embedded = "1a564c7fea6f3c20885c20c975e23663cc475e395bdad6829b58c16803ae7cb7"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::count"
 kappa = "0e99c6eca903e258ab86973acd86ad823ceb4e4c69facfff3923b3328c34117d"
-embedded = "03f9142a3c6a91efae8f04b4c2cefdf53decdf4282c813a30052ae5968759392"
+embedded = "a63469cb4bc8f723f7b7d296225818e201019a302ab02bb153dda3966b04b45a"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::count_raw"
 kappa = "f7c96ff38199260788ddd2a19a6407ec25ff8006e6aa0dd5a616334a11031fcd"
-embedded = "fee419762f4d89f160279a7b34382205d788757b277378a5d62834d08b59042e"
+embedded = "5e30b7da4059d2c934a406c69c213805e4fde5c710cf212d8875d64af2b65cae"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::count_raw_impl"
 kappa = "5849688c229f73007ad5cb3ec5ef2acc057841e37c16886518d122e407f7d6cc"
-embedded = "eeaa9a965168b16d2ff7d8799471c65854fb6e1f3cde447dd028ab0ffeec7fe8"
+embedded = "7ba4636812b7cf6c07a2b500143fc5f59cec6cac9325555967aa7cbebebd95d6"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::find"
 kappa = "7dfa77f47a16ada561056ce2b2ed32826a822bf33b13647508449b088276181a"
-embedded = "5597b7d8f26404e529450b1ca1bf43da2a6f8ec09239ce4cc1cbb16608c309da"
+embedded = "f6327de63ac24c15c45ce52a0804e8d59c611ce22b90ce6b17848d8faff755fe"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::find_raw"
 kappa = "494d9cb9695c41f892698945fc8c14de3a583fd46d6570276e51000c8c030933"
-embedded = "48607b5b2db4d0c2513de7ec421f9251606348bf7416720f05814a44f96931c1"
+embedded = "5aa3a4d0b58079f29d5b92a1de311d6565c10a2c6564be6445781cd90516fe7d"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::find_raw_impl"
 kappa = "03fd6b02cf80d98745ac61138729636f6eef948c6b6378d6a47ef33af4076ace"
-embedded = "4420214f33210b09530a0fc054a179423b0777dde3887b7390aab1dceb34ad2e"
+embedded = "d4adee12a771f16e2bcefda06fa250e136153bd552a89fa47ee3d97013b3f367"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::is_available"
 kappa = "ee3913896d96f8d6c9eac34d402bb4c8ce74aba97ae70638f92ae89ca1c108fd"
-embedded = "55f89d6f78b30bb41de92a0bd10bd4ddac97b78fcd70af97ab116e9c524c34ac"
+embedded = "00a567226e660a4bca5f6551841820791e8d7a4f0cd630845acc8bfa5f466de7"
 status = "translated"
 digest = "39c64deda7d78c54a95a7dccdba663d57781a828dc9fc9a4ef3b94c4c9b7e655"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::iter"
 kappa = "694745a8039a65fe2e4aeff47fde5525c22000f1c8c398c450316cf5344bcd43"
-embedded = "f1dab48ebe0f7422fc7b7a6da4786fc35296f5c0dc589cdfdbfb2f6a79ffacfa"
+embedded = "364920db0b38fb47e5c81d40a763b6eb59eb1a5ad77dd0d3614033a6b3eb9d30"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::new"
 kappa = "0984e166199d2613475ecaccb2162cf9210be6f06e2bbd9dac9d0e971b4c6744"
-embedded = "0f68e278bdd138eee69ad1a218b93e6db7ce3609b14ca3df4bac986ac7986654"
+embedded = "db2db8eddb58a823b5841310c4cfe408ba5bbe02f4e4f7f54d4a5002cbcd578f"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::new_unchecked"
 kappa = "bdcabc6e3737fe8d841b9f4beb97cd83a1f3e41f330eb093e55ff0ef0a02d5bc"
-embedded = "d8e8e4f481dfcfbc96a7dd6ac684b0eb20bee1149ccb5fd20555e56782cd218e"
+embedded = "0aaaeaa17ac08fb64a22755b269c4d79715741d758c266139920d0e9b310ab35"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::rfind"
 kappa = "7c9641c2a7342f801f78b7afd46ed058f564c2f5b6862a43a325c9d4ec77eb49"
-embedded = "0cee0bbc6554e2dc7110fddc98e50a07f0dd57556bfb7c210cb1d41c4eb94006"
+embedded = "d9833911db20478746be19e635ff3dd8d65cf10629ef79cbf7d60cf461f96ce4"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::rfind_raw"
 kappa = "60e24843119b1bc47dbd410813fd78c086d941ecb32a0dd5c30d61b73948c486"
-embedded = "102796e9058dec9b9c7934784787a7ea8dbd2981e7d396f0fec81930139cf589"
+embedded = "01c55018155b6d211c47f818d1e9298d612f5b161712cec27c1ca3bf1b9bde10"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::One::rfind_raw_impl"
 kappa = "9292fe73fb5ec199b15cb435c5795ccdb34ad23667959ab00f9fc9dab0842365"
-embedded = "242dc1ad924bc1e29abcf26d8348e5f8c6580985e667df9a225de48c23e9b369"
+embedded = "dbe4d8680d8216000498c903a05b31764c200065bd6ffa4adcae445f2991f248"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::One"
 
 [[fn]]
 path = "memchr::sse2::memchr::OneIter::count"
 kappa = "7f8c1c2fb889195639743b6445aec5979a5414b653618e2819679944a5ffe141"
-embedded = "b93bed4c9faec7826359ecd45581e879b74254e0e1806ccebc2fa253a226f51b"
+embedded = "494e9e9fd5d2774b080e17e9a25b6f28e1718bbbdc643e54c62ce5aeccda3a97"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::OneIter::next"
 kappa = "5a47f8062cd95a1c1598c8c3724d395adfe66309492dcd5291584e80ab25d5b4"
-embedded = "b68352d8a9cd19e1d141f132ebaef6ab74b499388ce1fa8f0a4af430669597e6"
+embedded = "4b0b88ca51602b77f93340be8e6453d1c39b3d375679d03a148fd8ae00da462f"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::OneIter::next_back"
 kappa = "3d3272e10b1443019d70ff8aec3cb922c97ecda0f46edf38193507085fdad657"
-embedded = "dcc325408d328ebb3868dcc6fa6d2a53a46a5366ebb39a007a95a96092fbdf4f"
+embedded = "027cefdefcfadea7e5388c082aa434f9c9176327cb4b64f22cf6aa094fa6bfb5"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::OneIter::size_hint"
 kappa = "8d4a4095552b1cd36826de63923a25f67b11f7fa80e375ef5ec2fc2c36ed7247"
-embedded = "8b41b43ea6311f3bfb30efe2ec60d4a94914d912563b7e54032eddecac43ab80"
+embedded = "ffcd455e17cf2939ea12d9b67beb5bcf36390eb200e4d268679df451193d158e"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::OneIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::find"
 kappa = "461165bb1b72331c0e7dc4adf0823b6262b93fa234bb21c847bc884589c31c1f"
-embedded = "876e96870421b0099c4cac2ab5b5cbfcfe881629b2c92218b44f319e3a924045"
+embedded = "45dab14bea59c246e5d8cbf764347a86d7f60d42ff26dcbfecef6681c7be8c65"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::find_raw"
 kappa = "e8ba656bb9cf113fa08427a8e0107c66ee0904867d890a4859c1367ff5bac49f"
-embedded = "261fb28d1a3b61e0b33a9a0a51589a456afbf6234dbd3fae555e15716b5af919"
+embedded = "569a6f20bfc32d2de58511b2c46f329d9ce01e54d013bdaf532a3b5e0a145455"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::find_raw_impl"
 kappa = "59aa186e77a117ccb57132cde61f38583180120637672a1763263f3ab3b27d9a"
-embedded = "90a565c2c8d5f8815f4bd4e6554ec4c521edd49f20c57543155155f716381bfe"
+embedded = "fdb3c18597989755821956ec52ab55e98a86376537d6a8ee0dff2bfc432b5652"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::is_available"
 kappa = "cdd82bbf294fd32216d743669ed79c3aae69d4157fb9065b50794c92c3ce5929"
-embedded = "ca0c872d9628b62d876278eba2b745cf71e935fd0cb14c1a453e36725f0128db"
+embedded = "23e0a455f67b4f8d00e5456a229eefe133b4fe4ea66c8d18ab7570fe960dfda5"
 status = "translated"
 digest = "65835923a0da57a8e1cc3004f3a35d29fde96d98e5fa6a3da9374cc7d7bbc89d"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::iter"
 kappa = "a72a8fb26cccead9a0cce6668231fb5f05047ef54786ee365a6d5392dd46d377"
-embedded = "f94d646d0babca3ebf4cdc6aa4a5b8a0f2ba7d57881fb4ae089fae7ef10c3c23"
+embedded = "9f92ddfc49fe95030338284a0520069f5384c6a527c58560c4c148987cb09fb3"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::new"
 kappa = "aff8ad44409db7c99d230fa5193207c7ed42b6eaa97cc32f75eaaa37ececd11b"
-embedded = "fad3cf2b70f032237009f078d0f3cdcbae81ad42a199860c27c142838cb5a211"
+embedded = "5246f75c8d7432beae484627f63a65ff884321d2866be66a2a9a2041c966a2e4"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::new_unchecked"
 kappa = "1422101b7ab8fa5867b93a89baeeffc108b77a82a405a2297fbe9bdba65a2ba6"
-embedded = "4ddc6e71f2592cb9c4eef7e332f7c718ea4857b0f3ac43201616a0cd3f456dd3"
+embedded = "ae3fcfaceed74da9c73a283e918d8333e55ed2e72874e72abb98946e4675baf2"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::rfind"
 kappa = "0554def29a8d2e951498f987eff8b53d067bab80bcfc2d4174b7c3e7eb11d667"
-embedded = "2c0d404c0607cdf96500a24cb8ac1588fc0b839a300e8ad6dbf6956f44682e9d"
+embedded = "e142ed18779fe490a43cf483278c3dbbee8a209ec87476aec7ba66625c5ceae6"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::rfind_raw"
 kappa = "32fc9c484f742fa6db210e3b6a7211db161858cb6a3e2af43a9c53335ec29530"
-embedded = "c06f1105f87f287e946fb1dd6378aa144d3751c2a90be214cacde46e1885ab57"
+embedded = "279ad3de326ce2e5558ff0e6747d95d15643ad402c7a77cf22a508c2e3271522"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::Three::rfind_raw_impl"
 kappa = "f520c3f15f434286b27710b000f727eb99b9bc487fe8f047713b0acac5ab3c0e"
-embedded = "fb0d1ea217b0f3644ebbd1f3c76ff5bf760a6abf77048375e8bc6d0730942869"
+embedded = "6d18c8947b7a6dcec8bfda60cc753c4524be1189362915121329bc5f7d10728b"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Three"
 
 [[fn]]
 path = "memchr::sse2::memchr::ThreeIter::next"
 kappa = "43a2b3cb076d1ee84ff1f972194b7afdb05b0998e1bdce035568a0d70d138b22"
-embedded = "e12556f803a1d4c3e70db1618862813276d1875c915c072766c4960166428543"
+embedded = "2c651b0aea4649a6f4eead7ff58004abf1de7a4e21e46ce215e8087d0d4e82f0"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::ThreeIter::next_back"
 kappa = "0c6e8398a29a4a5bb9af1250c1983b0ff478f0fa3acf057bd429e9aa86e1a812"
-embedded = "032df7d01964f7382b0ee8d4ab2a4b649d5adf14937a0c250a385c57793fec89"
+embedded = "70e1a1df76f018fc13db83c2add6a09a1cb4ae4e9c613b2c736a2b890f0682df"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::ThreeIter::size_hint"
 kappa = "6a1d27390108d4058e49d062a34cecdeee617a158780aa92ed265f2f75818185"
-embedded = "9b2e7613dce7f33d567c1d8d013cbff0bb003b24ed71c5ebc8d30a55c2be4f17"
+embedded = "5b7290669a9008742d522e3b7980f5d686aeb1c91128ff2fa5c6e26f4416469d"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::ThreeIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::find"
 kappa = "5b2735268edd62e41a9445158ad6ce89faf2ec4a63fa7d408bcc3d47ded587b2"
-embedded = "362b0998c947f636fa91d5a95679942e7b6b7d59d158036aa4d4071601bd44ab"
+embedded = "0914dd0f1cc868d97a0571ae5e4f440fbc3f01d7aa338d55471087746fad43ca"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::find_raw"
 kappa = "d01b08ff77d9c33980276f8459eb5b3e0165232632cf7f01b3f5502cbdc3bd17"
-embedded = "9c0cca4b3067b9dcbf013b809d1e07c15c30687e90d69b31877fd9a480726c0a"
+embedded = "6d700488839cdb706743801316697f37ddf6a4d2105efee3b0bad0a5eba8c8ed"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::find_raw_impl"
 kappa = "189b57ccd66e16383bd3b0034bc7c9eecbd3c17eee08a206a4c5c558c2565e17"
-embedded = "70cd010aa51aa102020205b587fde70e886044a39bad31a6d9129bc06b42783b"
+embedded = "2167dd0a0378ddba639010f7cf8b28f57396a182dea4d97339e370136e876823"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::is_available"
 kappa = "d9c8560228f7b78a197b660d1db37089ec45b85f05516e1611b7518243a38406"
-embedded = "ea733a94aa7c44befd7440c1f8143e681b1b097ea90fdeebaec175d4e56abcfe"
+embedded = "2d790a50db52f236623d27f0238b0bf482758c110da994d26d23d63547a46850"
 status = "translated"
 digest = "65eb50ffdd4f9506b14f88d1b9f00dddc0d5ce4ce434384e92fd2c18a5a845bd"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::iter"
 kappa = "17bbac706e2b17a89570bf7fbdea99cf10e10158049ffb6650134f9f677ec5a4"
-embedded = "84383232103b45945befcc4810a1a28fac0237115d46f1f34d657f80b519c3ed"
+embedded = "1b098a0387459db8c326bdfcef6d03fd3f0f36c3b217a40dc2f5b065b3cc2baf"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::new"
 kappa = "061b954fe75ad2a39ec87273116f568270774b85f1edb70a2cd57bec07bc119e"
-embedded = "9acb2ed0eeb283c66eaee38ab9feb844c6b66e0b0fef6567de39db3b3d8f98ce"
+embedded = "03970bbe27d3fd89cc45c71c44bda07b4708b45fbc43d04cfe6b40cada26a7a9"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::new_unchecked"
 kappa = "1a06b94b9796c860657e1286bc18b8542e87d07902fa3a8b927097e546490493"
-embedded = "2c2393acdfdc230714b2fc839b0dbf71e72e15e56199e8835c10c9382786dd9b"
+embedded = "daa923fcd7c0ea03252c884795e0f469cdd878008beec28439843d9c2a88c545"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::rfind"
 kappa = "9e03fb2dfe1b900b6a03b36f4671e41b0c42e2d302b9f407701e364dfbf0dde0"
-embedded = "24262e846f5051b239ffa4530e5e591e47c3ca3e98d855a4348c019beb8734cd"
+embedded = "aad834514091a3164d68bd7a5c324b66a9b7de40aa43914fb873b15db2abed7b"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::rfind_raw"
 kappa = "9e5367f3d1d83505aef0a07fd9e11eb4b774d8d31a616b3e7b548da46572796e"
-embedded = "72dde0ed02da6bca3e746c0c597a676e862d3529bc4b849104769711444a94e7"
+embedded = "dd6c223d9222aa3619f5c7df586332805dd8e5f03f4b4c2ef914d9ac4f55adae"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::Two::rfind_raw_impl"
 kappa = "e8e5fb5d0816d41f40df625e0634270992ce3405903d75780ec9a0f0f17411e5"
-embedded = "375d698c6bf55ccf10fc3ab5beba7b800738039d13ef07262b364760a21de306"
+embedded = "f1a06799a7e8377ee235d511a54dd8755db7b7eaa42fd9bbbbe4f8b08facffc0"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::Two"
 
 [[fn]]
 path = "memchr::sse2::memchr::TwoIter::next"
 kappa = "2926c4be95b8c8d6d1d005ea91bb31e22b9e3639296c86562d72dc624182df13"
-embedded = "ec46efa951adb7a9a9f7bf6ae47133d5d9e43f490575481a55f57bdf8120ec99"
+embedded = "f0e93cfad1f03172b513d2b469081dee8b8183709a0bd1d92d9d862adb47c0f7"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::TwoIter::next_back"
 kappa = "321d0b256b65dcc6a7c1f9bf670ed386fd13dfb2a618932e930c8b48f5c09e4e"
-embedded = "ec1997b8bb0eb33dfe48fc9bc17915cd2c305c1a098dc3c66085ecb3f2f3f10a"
+embedded = "c0e9661086c3c3000a3cf7f8072c7a72ce9f94c1f4071d5b6554257810454b8b"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::memchr::TwoIter::size_hint"
 kappa = "be8b4b43299280c7aa6b161b99db67e38f380f1e17e3ddf67620e1baca6f4809"
-embedded = "88bb18a72fc977900bd2edb5fee450d7f33efa533ad2420501c0bc4e2b196923"
+embedded = "440d6380d5c8781f6c91a7345b86a9693024633f00e7fa9e12202e72f25342a9"
 status = "residue"
 cause = "mir::Ty: sse2::memchr::TwoIter<'_, '_>"
 
 [[fn]]
 path = "memchr::sse2::packedpair::<impl at src/arch/x86_64/sse2/packedpair.rs:22:10: 22:15>::clone"
 kappa = "e4957a2c12ffb1545e1c5bdaf165b83cf31bbe25015eac59fa51f79bb0cb7aad"
-embedded = "35fc8e3b5a377c5fe236a66dd818b02b0dd7e876def9d2e0811408a16ceb3c1b"
+embedded = "25f10529fcd3f9f82d0473a43b95c9d23a4561bdd0f9058b37bd8b06fc567948"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::<impl at src/arch/x86_64/sse2/packedpair.rs:22:23: 22:28>::fmt"
 kappa = "d814b3d76558dfc01a61d6d7fa02ee4e0a95de5f163aa577b94701aac78636e6"
-embedded = "a04a789ff7c6e85437326d0b13653a34cbf4f397166959582865ca6a052ddc5f"
+embedded = "ad51fe9e800b133354c36be9d79077294b6c7d82d267c584e875e667788d1f50"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::find"
 kappa = "a4d1eb35c57556811f8e9ef85023c3bcf94cd680aac06096fc41683fb8dc94cb"
-embedded = "8e4198877831d7155af3c2af8f01e353b4f3fd5a3f75d0aa0a57560ef32784d8"
+embedded = "e0cc355496281b9d31cb87dacdcba288fe2ea859a2882fb2e650619a2638f275"
 status = "residue"
 cause = "mir::Ty: sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::find_impl"
 kappa = "85c7cd3921b7b8c8b14b7d5544747216e7b090daa10515433c936a40783e4ae9"
-embedded = "060004be694f55b8571b7f75ab6fea23c8ff2019715af22857100a861f82411a"
+embedded = "2b44d24127bed56c6f690dc5f9f2a9ac2258107d1ef93c7f0d42df233abec102"
 status = "residue"
 cause = "mir::Ty: sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::find_prefilter"
 kappa = "7c743acb24bdc7a95e7b2414e25133bf6f601f2a0277bba9db9792cb855379a0"
-embedded = "3093ff67d4a031a87edfed74949c411379a3c00602a2e3c9a7f20fe4c2263e8a"
+embedded = "a797d53dd0692fc20323171425c81c07f48b2ac8ae230f934d9eaa14b0436a28"
 status = "residue"
 cause = "mir::Ty: sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::find_prefilter_impl"
 kappa = "8162b290c94b2b9a21d445ec0d57aab4ddb89fd54c5a3f82cee471385374f70c"
-embedded = "d0c122da6c0b7ceea4d1e2f6524d613a31fb5fe3c1357c63ba50c3b74f3a5ba0"
+embedded = "d7fb3175f57af14e4dff71061c0e20528800bb6b7118aad6ab691a0d1b4fd2ff"
 status = "residue"
 cause = "mir::Ty: sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::is_available"
 kappa = "32c4d76a3ec08556bf9a0d0bf75d7c11639c2c704cf6609fa26e2ba5f6070be1"
-embedded = "902c55b86c92dfb4bc78539a8e2c898844f3bc9ebed0be14293d3d3a6db7cba6"
+embedded = "944c10285cb8f2260b8031b8b28be5aa5373ab22f161964ea8ed0a228a88d18c"
 status = "translated"
 digest = "a4898cd099a5b594e2d70027bed9c702395829eec5decb14b9a1dbfc8dde0448"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::min_haystack_len"
 kappa = "d841528a04142ea85f9184a9265df510d29273e8523bc40516c9eeb2cb315c16"
-embedded = "53261e0580534f3ff88ba47550ec55f5473b87f3e494f286302b105acabe1f17"
+embedded = "db971673dd573dc69e03698abbd99410467434bfc823b0611cb3cd473db7ffed"
 status = "residue"
 cause = "mir::Ty: sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::new"
 kappa = "9b952c7f7c87890a217a278aabfced6ca834b92a18b07f1c985fb056eb92f05b"
-embedded = "aff8bb665d41a8004d865d6149df86d1ebeec8d841eca7ae580ceef776135f08"
+embedded = "ea10c21f3afe78a50a3de423952b9ddc05729265c276d4578d3d16e36a6d0b26"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::pair"
 kappa = "0a3a010133306c96ab36718187be0b42f0b24b3e58bb8713b9c3372e40494164"
-embedded = "c2f394a51e2350df8f3bf459b999bffebac6cebf48996c73f85c6c20fca7b8c2"
+embedded = "9ec52c8f59ff58d4c0503b3e9272ce55f9cd78dbd1d89510546cbd893a383bd5"
 status = "residue"
 cause = "mir::Ty: arch::all::packedpair::Pair"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::with_pair"
 kappa = "acc5bc0bbc41cc9085d59c88b73935ac09fe602a4af39b7ec60fea8341b65f94"
-embedded = "cec4777f93b0d201d4069481ac0a252aed36065e6e6504edb9122f22215700e2"
+embedded = "a9f0bf2ad170e869ed57b05237e5355bc7c0cb01e3f09054f2668380fa696a5d"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::sse2::packedpair::Finder::with_pair_impl"
 kappa = "e855b7647904045d4f59e69d2da8a926be700cb17cfa1c61bb6f73af42245ae8"
-embedded = "d690a2a82d2d0dcfae3bce7642f12280dca9c9204e60776a3df920e1ca571963"
+embedded = "f01a12854a0ec46f675635f075149df46ebf7a25f912c83141b673a43a4ebe45"
 status = "residue"
 cause = "mir::Ty: arch::x86_64::sse2::packedpair::Finder"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:36:10: 36:15>::clone"
 kappa = "3f77cd343d89dee478a01e42c6690207f111f9ec92256b047b6ab17f74e558d5"
-embedded = "582915799acc807e0a94ed2ecffd3356e99fd583f312979b807b740576ac79bb"
+embedded = "0aa386cf9d5a5d972792137efd58c2d425e1224e399c919a1e39504dc3c9ec26"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:36:23: 36:28>::fmt"
 kappa = "4c71b1595cd5abcf420ac038d7503dddb16110d38a12eb49247b8bc28c56f550"
-embedded = "379ea7556142f8e12760923e72a2a77f1ed74b88207c07fbd0fea587053cceea"
+embedded = "a24e0958b6b06d1872a97465f67d49df1539fcfc25f9d367b4921fe93a33551a"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:40:10: 40:15>::clone"
 kappa = "789c79f0c754826d10d733fe0d8cba9fca06e2a6e3bee13a8983b5e7ee9233e3"
-embedded = "4d8d7d26fd456cc0735ce61fa97cedad9c66f90b3730acda3b0931cc5ceb7255"
+embedded = "24460ac8fd6402f7e78582ffe100068dae1547c695b48c4e2db5eee796d6dbfd"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::FinderRev"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:40:23: 40:28>::fmt"
 kappa = "dbe2388f6d118b4daf73f7eb8c7f600e61593ab4ecb77c92d42aa65606791f2d"
-embedded = "9fa80e785c3b4109bf6ba67912bb4904814e67b3dcaf5b90e39d2d1e4fa263b2"
+embedded = "c56eaa7f06ae432eaf1e42d4a3f1d4ed81920b26bbe5e6517f89d94a10280cd3"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:427:10: 427:15>::clone"
 kappa = "e85ab63f3196b683c359f0550974805f4a74df461dd3affa9833ab33dd9cb9c8"
-embedded = "5436bad1b239546a02724a40e6359c75418a9303546a946c29cb08eef97bf836"
+embedded = "390f99d79476778681870676bab8bc1bb7dc10dd3b554e01bf247ce8250a74a3"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Shift"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:427:23: 427:28>::fmt"
 kappa = "1399c2cf8311310335b29181acfdc7ba0c721d964825fadf58aef74114a2a77d"
-embedded = "d718f21b8d8dfcf0dcfad66b7662fd2e62b2e8ca37589277dac59b3da7c9043c"
+embedded = "23db19cb757a83f6ba16fcbc11b684e6a8ce6b0360738e334453ea2d5612e057"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:482:10: 482:15>::fmt"
 kappa = "cb373c3935464b0d495be26ebc0f1a7b1b2098a7ee6cec866215c15bf2186269"
-embedded = "f2757385253faee66c35c37cd358db689d7654849e3e907250797018a3abba78"
+embedded = "93cca6a86bce1bcb9270d054d406b8e5e2d187e618656000042e3fee3c685a4a"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:589:10: 589:15>::clone"
 kappa = "addc07c907b42cdef0f9bfbd579203b6ed52b6976e381a54b8a4bdfb32cd0fc8"
-embedded = "eeb77fa2e2e0452b00376d0a59eaa9606fa51bad64b758725868fe1bf5eb9f5b"
+embedded = "ec3ff101dbf71b456043437f25d9bd24d2d163c585a41aae2de6d6e6476509c4"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::SuffixKind"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:589:23: 589:28>::fmt"
 kappa = "abbeaa57e507187e9267840aa514b900460017d706e3feee70f5dbf7fc5d1e69"
-embedded = "5f4497f5e52785d36bde4487491def73b3e867945c4805809b74c952db5acb03"
+embedded = "3750f55e17a6dc7d3d049e80af2d4cebb95e2ac8a79c931a62739673c62613aa"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:608:10: 608:15>::clone"
 kappa = "f8cc22f2b372fea996f4283ab2d614d8cb09b38314dedd18c8904721763fdb36"
-embedded = "bbac59ebc7e92b9e81f645145a239f4705cf4cc20f1d06898e43fade61f0c2af"
+embedded = "13867cb18500eda9b097bb8dcdf5e4c0d51cab1c82f52fc4deb20c26606441e9"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::SuffixOrdering"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:608:23: 608:28>::fmt"
 kappa = "81a3268f63fd00b24de19697036f22f0a9839be04f03ba47b6fb3fd6e262ad86"
-embedded = "080b848d66c9c569156ad9ac2a23fdc089bbc4633292bc329a04994abf294115"
+embedded = "a2ec85f398843c2cc591d0511422a1d11dd7b37f5990fbefb9522cd9b58c22c4"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:650:10: 650:15>::clone"
 kappa = "ad336b37d01da893e6559537ddd20aabd3d4accaaffcfd6fed44e8b7a964a546"
-embedded = "68eee48f17be0bd6b7da28263e88df57c72c41b7475b203b1b8ceea4ba75e57e"
+embedded = "bee35b75ea7c01d9df01fb36d43191589ab4c295d17f62568c8a144066943acf"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::ApproximateByteSet"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:650:23: 650:28>::fmt"
 kappa = "50c979e2108080be49239200ba8d97a2c16380bea7df82fcdeffbbb2fc522a33"
-embedded = "68e36bef0480fff2fdb2e7f423f4cd356dc009cf1054189ab8e479b1d414d569"
+embedded = "899183007854062e9161076cf5d1afedbe86b9003e8bb3dff5dad20cc3fda02f"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:79:10: 79:15>::clone"
 kappa = "cc9b59b0c369b7160c7834f433804dff5314817ca91d04376c2248f05fc8125d"
-embedded = "6d6da31566bae5416cf8e06291579fe6e8be5d6657cf33ae4f7ae148fe6af8a6"
+embedded = "e7acd0971e8518b37ab7530f5ea610a0f7ee99ba5032f6f0fc8b34cc85383516"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::TwoWay"
 
 [[fn]]
 path = "memchr::twoway::<impl at src/arch/all/twoway.rs:79:23: 79:28>::fmt"
 kappa = "766889bf2d65155b1634bb50a2732590189f902fcc5b755d840907634e4b6d88"
-embedded = "dfd255f4d46f3430a819308b41b152adc5bf086b3eb8edc0d2aa951b8d841b8b"
+embedded = "44936092036ab955c98ee5713c95c58f12acfdccc2b887a799bd4e699b89a3d9"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "memchr::twoway::ApproximateByteSet::contains"
 kappa = "af66c57cd8a8c62995a09c4e2b604c4868ea2357e634ff648bb7f7d6b4c56d7d"
-embedded = "1dc118d55a4899acaec719aec388d19ac8362ce018c9e2e744a52767373808e5"
+embedded = "7b610db7bfa13aac696275eb54747d0cc268201fa1645bbe2cd17a8b96b9fa97"
 status = "residue"
 cause = "mir::Ty: ApproximateByteSet"
 
 [[fn]]
 path = "memchr::twoway::ApproximateByteSet::new"
 kappa = "5f4ed63e39fc31f105361b18306b0f9f7fe4e12d001f2dcfbf4416d4d12b2b15"
-embedded = "03645998b6c775d3ffe53cd026d7fbe4cd39c2e140fc8d06a2e40a6fd8281514"
+embedded = "7d61defb42435942d1e9882177a6edf66d2f2e530872b65c3388bca3bb0ee172"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::ApproximateByteSet"
 
 [[fn]]
 path = "memchr::twoway::Finder::find"
 kappa = "f729e01207467ee7946bd886c4007ca4213fa2519489a914228e5c844de37b14"
-embedded = "ba4a2ec1fedab9173e4a04e219d6066bd22d1fe383f9a3a9d027acdc29dd1c8a"
+embedded = "04d64ce471a5d197e9f0771ee440c08bf685d4b23297f4238478c6959a833f64"
 status = "residue"
 cause = "mir::Ty: twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::Finder::find_large_imp"
 kappa = "3823eabdf5cb8df5f057a00e16a61ea10fa043e5792ad415b32e4987476515e0"
-embedded = "0db6c8102a29b971566b02afdae215abfaf67bd0efa3035ff38229db53c60c03"
+embedded = "5ac0caccf85e89b68eda169c0e11445eb82621a8f46249f07d0148efa715cbaf"
 status = "residue"
 cause = "mir::Ty: twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::Finder::find_small_imp"
 kappa = "d883397523fba1fbc2596f569c89c2c5b0300a81c7abc417ae49a2e44fa92598"
-embedded = "bd5e5e80daea6986e1d8f548203ec5938454146265c7841e8ecea120dac7e5d9"
+embedded = "e0a4763d99c3e4c88b297296f4b30f780a183889a6602b88a7962059ca758fe5"
 status = "residue"
 cause = "mir::Ty: twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::Finder::find_with_prefilter"
 kappa = "c839807bf2063d6dfc6d953f5140da40b73d9d8b11ff11be8e25cc804e0a725f"
-embedded = "ec23eb85b61ee6fdd816ca7574bd1e5a2e9bcabfa7cd7a1aa6ceb71431a2d8d1"
+embedded = "abb9f75e526d4836eadccdb27a81bc3feb5b907b455e003c2218ef2afcc9ff2b"
 status = "residue"
 cause = "mir::Ty: twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::Finder::new"
 kappa = "176751a138b198e1787284d9e4c8e591fca1fc88b54fa8895eb279b24640a068"
-embedded = "278e4770bf48d07604c8f6eacc9fd0812cb1c306b0891045795e06012ec3c8d7"
+embedded = "9fd6f95134092ddc151a56e8cdab93e8bf9eb517293ff3c71cec32058bf85f46"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Finder"
 
 [[fn]]
 path = "memchr::twoway::FinderRev::new"
 kappa = "a8833c8bee589c5138119e192bca8fb6711b8084c00209d5e6d285e7f272c6f4"
-embedded = "9459c3d2adf1ebf2ffd4b93aa5462c6612524ef0a314149f8933bf133c6f7af5"
+embedded = "01e18ecd40dde365d2a36f57ece138325cef78772adde61f9096089fb27abec7"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::FinderRev"
 
 [[fn]]
 path = "memchr::twoway::FinderRev::rfind"
 kappa = "ecb9fae3d95ad812695f00f1e7fb5ff69198c92174d79ae8dc558e8a91a2c688"
-embedded = "4022abffdd85cac1ad8a3e0bb8e480f23536898ff78edc35699fcdfe7f5b6855"
+embedded = "53390f339bb756b9319eff2f352220c20f5e96f64d49d87696296d89f1e9423f"
 status = "residue"
 cause = "mir::Ty: twoway::FinderRev"
 
 [[fn]]
 path = "memchr::twoway::FinderRev::rfind_large_imp"
 kappa = "5ad3e21ba1664305446c6332c43a7a4ab030bea9e8eeeb16b108eff16494f768"
-embedded = "794fc9d3feb8919d61999274e99ce1972023972077fc396debe80a971670e9d6"
+embedded = "0c7806b329014e7c36347da5b86d1281622b1ac9c062ffc8ce0b83de0a6e66af"
 status = "residue"
 cause = "mir::Ty: twoway::FinderRev"
 
 [[fn]]
 path = "memchr::twoway::FinderRev::rfind_small_imp"
 kappa = "767e9704861d7b9bece1c5a7ec7077b86ef16f315d9b7725af6c8b3e95eb4739"
-embedded = "d462afa67965ff975468104e4358a1633b2d35df05e3eee40d40baa3579575c4"
+embedded = "2d4c74fe38bd83413113b9f486aee291a33a9f88c295559e69c973a961d3c3fc"
 status = "residue"
 cause = "mir::Ty: twoway::FinderRev"
 
 [[fn]]
 path = "memchr::twoway::Shift::forward"
 kappa = "43de953297b4bcb5a5f8e5a86f1c9c5a792248a126b560f4916430d99ea71c83"
-embedded = "80817c559ccd9d101253ab49facfb8a619909a2fc8287c83ee6634d7b3ca87a8"
+embedded = "178bc45c25c8222825c1426f2f3779469d48b0cd4cf39c1837de088f8046ecef"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Shift"
 
 [[fn]]
 path = "memchr::twoway::Shift::reverse"
 kappa = "b6a972c8685a676183321af2a7617766244f80210c52c2917ad90b3d551377eb"
-embedded = "1a50d07d29129e9eb11cf3bd52d8cc9b959c8c55aacfacca44e6884bd19c819c"
+embedded = "589e12a34f8fa416ecc10adcd58a8f0c0c3d61320cfe84b4930ba8521afbfc7f"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Shift"
 
 [[fn]]
 path = "memchr::twoway::Suffix::forward"
 kappa = "a69569e94a31bd0e08ef8f43ba4160b8fc0836d40bffba03268840e4f1d729d5"
-embedded = "adb2fda65e28a9186afacb485d3e080069c85cde5580b8470f07c7037631e9a4"
+embedded = "930ee9d3ca1c0aa5ba6a11df21f268963b3a11e024f16ea0b19f63296e16b784"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Suffix"
 
 [[fn]]
 path = "memchr::twoway::Suffix::reverse"
 kappa = "a7485ab0242b34abfb4fd4beda095e03db03b94326401b0f77e8c6c37caa41bb"
-embedded = "7fca380af47730aac9c6571204884b7ebffde18876700b54ee489515892a73b4"
+embedded = "9837fd0f685dd67fb0a6d5294d3cc3e1db5625fdfafcfd6dc660924f72b93955"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::Suffix"
 
 [[fn]]
 path = "memchr::twoway::SuffixKind::cmp"
 kappa = "ef7b5a90a0589f2351ee515f7164f3e50daa3f5f8d649b348dd26ff53a5e77ad"
-embedded = "77427473a6d9f8ce390e8c4b20d4d15097839b5f8a510aade0deea175b0a37b4"
+embedded = "3cf566de322ef56de0363c6672345178282864942e82511b96220e628bc03764"
 status = "residue"
 cause = "mir::Ty: arch::all::twoway::SuffixOrdering"
 

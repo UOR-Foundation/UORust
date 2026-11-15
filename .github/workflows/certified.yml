@@ -36,46 +36,161 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  export:
-    name: export the lifted translator through lexlean production
+  # The plan: the shards that build every root the last export did not
+  # refuse, each sized by the last export's seconds per root so that it fits
+  # its deadline with rebuilds to spare (`certify plan`), and the roots the
+  # compiler itself refused, whose whole diagnostics the diagnose job keeps.
+  plan:
+    name: plan the export's shards
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 30
     permissions:
-      contents: write
-      actions: write
-    env:
-      # The minutes `certify production` may build for: the job's 120 less
-      # the SDK pull, the self MIR and projection before it and the sync,
-      # adapter tests and push after it. The roots unbuilt by then are refused
-      # for this export, so it always ends with a manifest inside the timeout.
-      EXPORT_MINUTES: 90
+      contents: read
+      actions: read
+    outputs:
+      shards: ${{ steps.plan.outputs.shards }}
+      diagnose: ${{ steps.plan.outputs.diagnose }}
     steps:
       - name: Check out the exact event revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
           persist-credentials: false
-      # The manifest of the last export, kept as an artifact: its push to main
-      # is dropped whenever main moved during the export, so the refusals it
-      # learnt reach the next export this way (`--prior`), and that one
-      # builds no root the compiler already refused at the same κ.
       - name: Fetch the last export's manifest
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+        run: scripts/ci/certified-prior.sh
+      - name: Plan the shards
+        id: plan
+        shell: bash
         run: |
           set -euo pipefail
-          mkdir -p target/certified-prior
-          id=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=certified-manifest&per_page=20" \
-            --jq '[.artifacts[] | select(.expired | not)] | sort_by(.created_at) | last | .id // empty' || true)
-          if [[ -n $id ]]; then
-            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" >target/certified-prior.zip
-            unzip -q -o target/certified-prior.zip -d target/certified-prior
-          fi
-          ls target/certified-prior
-      - name: Build the certified translator through the locked SDK
+          scripts/ci/sdk.sh "just certified-plan $((EXPORT_MINUTES * 60))" | tail -1 >target/plan.json
+          cat target/plan.json
+          echo "shards=$(jq -c .shards target/plan.json)" >>"$GITHUB_OUTPUT"
+          echo "diagnose=$(jq -c .diagnose target/plan.json)" >>"$GITHUB_OUTPUT"
+    env:
+      EXPORT_MINUTES: 85
+
+  # One shard of the export: every Nth root, from the Ith, built in batches
+  # through `lexlean production` until EXPORT_MINUTES, then kept as an
+  # artifact for the land job. A root no build reached is refused for this
+  # export only.
+  export:
+    name: export shard ${{ matrix.shard }}
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.shards) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      actions: read
+    env:
+      # The minutes `certify production` may build for: the job's 120 less
+      # the SDK pull and the self MIR and projection before it.
+      EXPORT_MINUTES: 85
+      SHARD: ${{ matrix.shard }}
+    steps:
+      - name: Check out the exact event revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Fetch the last export's manifest
         shell: bash
-        run: scripts/ci/sdk.sh "just certified $((EXPORT_MINUTES * 60))"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/ci/certified-prior.sh
+      - name: Build the shard through the locked SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/ci/sdk.sh "just certified-project && just certified-export $SHARD $((EXPORT_MINUTES * 60))"
+          echo "ARTIFACT=shard-$SHARD" >>"$GITHUB_ENV"
+      - name: Keep the shard for the land job
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: target/uorust-certified
+          retention-days: 7
+
+  # Each root the compiler itself refused last time, built alone, with
+  # everything lexlean prints of it in human form (the JSON diagnostic is cut
+  # short) and the certificate sources it generated: the evidence an
+  # upstream fix starts from. It gates nothing.
+  diagnose:
+    name: diagnose ${{ matrix.root }}
+    needs: plan
+    if: needs.plan.outputs.diagnose != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        root: ${{ fromJSON(needs.plan.outputs.diagnose) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    env:
+      ROOT: ${{ matrix.root }}
+    steps:
+      - name: Check out the exact event revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build the root alone through the locked SDK
+        shell: bash
+        run: scripts/ci/sdk.sh "just certified-project && just certified-diagnose $ROOT"
+      - name: Keep its whole diagnostic and generated certificates
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: diagnose-${{ matrix.root }}
+          path: |
+            target/certified-diagnose/build.log
+            target/certified-diagnose/request.json
+            target/certified-diagnose/.lexlean/verified/*/preserve-src
+          retention-days: 14
+
+  # The land: every shard's bundles taken into crates/certified (`just
+  # certified-sync`), the manifest kept for the next export, and pushed; when
+  # main moved under what the sync reads, the sync is taken again on main's
+  # head (land-certified.sh), each package kept only while its κ is the
+  # exported one.
+  land:
+    name: take the shards in and land the certified translator
+    needs: [plan, export]
+    if: ${{ !cancelled() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      actions: write
+    env:
+      # The minutes after this job's start by which the last sync on a newer
+      # main must have pushed: its 60 less one sync's margin.
+      LAND_BY_MINUTES: 50
+    steps:
+      - name: Note the job's start
+        shell: bash
+        run: echo "STARTED=$(date +%s)" >>"$GITHUB_ENV"
+      - name: Check out the exact event revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Fetch every shard
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          pattern: shard-*
+          path: target/uorust-certified
+      - name: Take the shards into crates/certified through the locked SDK
+        shell: bash
+        run: scripts/ci/sdk.sh 'just certified-sync'
       - name: Keep the manifest for the next export
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
@@ -100,11 +215,13 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: scripts/ci/push.sh "Rebuild the certified translator" "crates/certified crates/uorust/src/certified.rs" certified.yml generate.yml
+          REBASE: '1'
+          INPUTS: 'crates/uorust/src/** crates/uorust/assets/** crates/uorust/Cargo.toml frontier.toml lift-verdicts.toml Cargo.lock rust-toolchain.toml prismpm.lock Justfile .github/workflows/certified.yml'
+        run: scripts/ci/land-certified.sh "$((STARTED + LAND_BY_MINUTES * 60))"
 
   gate:
     name: ratchet, differential and fixpoint / ${{ matrix.runner }} / run ${{ matrix.run }}
-    needs: export
+    needs: land
     strategy:
       fail-fast: false
       matrix:

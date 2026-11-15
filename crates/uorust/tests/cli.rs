@@ -311,6 +311,53 @@ fn the_cli_writes_and_merges_library_registers() {
 /// `certify sync` refuses a kept bundle with no `result.json` before it
 /// writes the certified crate or its adapters.
 #[test]
+fn the_cli_plans_an_export_and_refuses_to_diagnose_without_a_target() {
+    let tmp = std::env::temp_dir().join(format!("uorust-certify-plan-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    std::fs::create_dir_all(&tmp).expect("scratch");
+    let missing = tmp.join("no-prior-manifest.toml");
+    let planned = uorust(&[
+        "certify",
+        "plan",
+        "--register",
+        "tests/fixtures/thermostat-prism/frontier.toml",
+        "--prior",
+        &missing.to_string_lossy(),
+        "--budget",
+        "3600",
+    ]);
+    assert!(planned.status.success(), "{planned:?}");
+    let plan: serde_json::Value =
+        serde_json::from_slice(&planned.stdout).expect("the plan is JSON");
+    assert!(
+        plan["shards"].as_array().is_some_and(|s| !s.is_empty()),
+        "{plan}"
+    );
+    assert_eq!(plan["diagnose"], serde_json::json!([]));
+    let targets = tmp.join("targets.json");
+    std::fs::write(&targets, r#"{"targets":[]}"#).expect("targets");
+    let out = tmp.join("diagnose");
+    let refused = uorust(&[
+        "certify",
+        "diagnose",
+        "--projection",
+        "tests/fixtures/thermostat-prism",
+        "--register",
+        "tests/fixtures/thermostat-prism/frontier.toml",
+        "--targets",
+        &targets.to_string_lossy(),
+        "--root",
+        "any",
+        "--out",
+        &out.to_string_lossy(),
+    ]);
+    assert!(!refused.status.success());
+    assert!(String::from_utf8_lossy(&refused.stderr).contains("no rust-std descriptor"));
+    assert!(!out.exists());
+    let _ = std::fs::remove_dir_all(tmp);
+}
+
+#[test]
 fn the_cli_refuses_a_bundle_it_cannot_export_or_take_in() {
     let tmp = std::env::temp_dir().join(format!("uorust-certify-cli-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&tmp);
@@ -475,4 +522,21 @@ fn layouts_of_no_aggregate_ask_for_nothing_ue_19() {
         0
     );
     let _ = std::fs::remove_dir_all(&tmp);
+}
+
+/// The pre-push hook skips a tested patch's tests only when every commit main
+/// gained since touches nothing the patch touches or its tests read
+/// (scripts/hooks/passes.py).
+#[test]
+fn the_hooks_retest_a_patch_unless_main_moved_disjointly() {
+    let script =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../scripts/hooks/passes.py");
+    let run = std::process::Command::new("python3")
+        .arg("-I")
+        .arg(&script)
+        .arg("self-test")
+        .output()
+        .expect("python3");
+    assert!(run.status.success(), "{run:?}");
+    assert!(String::from_utf8_lossy(&run.stdout).contains("the disjointness rule holds"));
 }

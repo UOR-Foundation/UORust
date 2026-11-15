@@ -1098,13 +1098,17 @@ impl CoreLink {
             let from_source = || -> Option<Instance> {
                 let segs = split_path(printed);
                 let (name, module) = segs.split_last()?;
-                let src = self.root.join("library/core/src");
-                let (k, file) = (1..=module.len()).rev().find_map(|k| {
-                    let dir = src.join(module[..k].join("/"));
-                    [dir.with_extension("rs"), dir.join("mod.rs")]
-                        .into_iter()
-                        .find(|f| f.is_file())
-                        .map(|f| (k, f))
+                // core's sources, or std's where core has no such module
+                // (`sys::path::unix::HAS_PREFIXES`).
+                let (k, file) = ["core", "std"].iter().find_map(|krate| {
+                    let src = self.root.join(format!("library/{krate}/src"));
+                    (1..=module.len()).rev().find_map(|k| {
+                        let dir = src.join(module[..k].join("/"));
+                        [dir.with_extension("rs"), dir.join("mod.rs")]
+                            .into_iter()
+                            .find(|f| f.is_file())
+                            .map(|f| (k, f))
+                    })
                 })?;
                 let top = k == module.len();
                 let source = std::fs::read_to_string(file).ok()?;

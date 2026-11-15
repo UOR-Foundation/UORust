@@ -189,11 +189,42 @@ generate: fmt self-model-write fixtures prove-fixture prove register model-write
 # timeout leaves); the roots not built by then are refused for this export
 # and built again by the next.
 certified within="":
-    rm -rf target/uorust-self target/uorust-certify target/uorust-certified
+    just certified-project
+    just certified-export "" {{within}}
+    just certified-sync
+
+# The self projection the export marks: the self MIR, the projection on the
+# generated register, and the target descriptors.
+certified-project:
+    rm -rf target/uorust-self
     cargo run -q --locked -p uorust -- mir . --out target/mir
     cargo run -q --locked -p uorust -- project . --out target/uorust-self --name uorust --last-modified 2026-11-11T00:00:00Z --register frontier.toml {{mir}}
     lexlean production targets --diagnostic-format json >crates/certified/targets.json
-    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` {{ if within == "" { "" } else { "--within " + within } }}
+
+# One export of the projection's roots, all of them or shard `I-N` (every Nth
+# from the Ith), kept in target/uorust-certified for `certified-sync`.
+certified-export shard="" within="":
+    rm -rf target/uorust-certify target/uorust-certified
+    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
+
+# The shards a sharded export builds within `budget` seconds each, and the
+# roots to diagnose, as JSON (certified.yml's plan job).
+certified-plan budget:
+    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}}
+
+# Build one root alone and keep all lexlean prints of it in
+# target/certified-diagnose/build.log (certified.yml's diagnose job).
+certified-diagnose root:
+    cargo run -q --locked -p uorust -- certify diagnose --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --root {{root}} --out target/certified-diagnose
+
+# Take the bundles `certified` kept (target/uorust-certified) into
+# crates/certified on this tree, as it stands: the self MIR dumped again, each
+# package taken only while its function's κ is the one it was exported at
+# (kept/kappas.toml), and the adapters written for this tree's call sites.
+# scripts/ci/land-certified.sh runs it on main's newer head when main moved
+# under the export.
+certified-sync:
+    cargo run -q --locked -p uorust -- mir . --out target/mir
     cargo run -q --locked -p uorust -- certify sync --kept target/uorust-certified --register frontier.toml --mir target/mir --workspace . --dir crates/certified --adapters crates/uorust/src/certified.rs
     rustfmt --edition 2021 crates/uorust/src/certified.rs
     # The adapters compile, and the switch selects, before export pushes them.

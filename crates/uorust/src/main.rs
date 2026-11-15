@@ -111,6 +111,45 @@ enum Certify {
         /// are stopped, and the roots not built are refused for this export.
         #[arg(long)]
         within: Option<u64>,
+        /// This export is shard I (from 0) of `--shards` N: it builds every
+        /// Nth root from the Ith.
+        #[arg(long, requires = "shards")]
+        shard: Option<usize>,
+        /// The shards of a sharded export.
+        #[arg(long, requires = "shard")]
+        shards: Option<usize>,
+    },
+    /// Plan a sharded export: print, as JSON, the shards that build the
+    /// roots the prior manifest did not refuse within `budget` seconds, and
+    /// the roots whose compiler refusal the diagnose job keeps in full.
+    Plan {
+        /// The self register, `frontier.toml`.
+        #[arg(long)]
+        register: PathBuf,
+        /// The manifest of the last export.
+        #[arg(long)]
+        prior: PathBuf,
+        /// The seconds each shard may build for.
+        #[arg(long)]
+        budget: u64,
+    },
+    /// Build one root alone and keep everything lexlean prints of it.
+    Diagnose {
+        /// The self projection.
+        #[arg(long)]
+        projection: PathBuf,
+        /// The self register, `frontier.toml`.
+        #[arg(long)]
+        register: PathBuf,
+        /// The output of `lexlean production targets`.
+        #[arg(long)]
+        targets: PathBuf,
+        /// The root, by its definition.
+        #[arg(long)]
+        root: String,
+        /// The production project, with `build.log`.
+        #[arg(long)]
+        out: PathBuf,
     },
     /// Take a published bundle into the certified crate and write its
     /// manifest with the bootstrap's share.
@@ -216,6 +255,10 @@ struct EmbedArgs {
     /// The crate the dumps are of: `core`, `std`.
     #[arg(long = "crate")]
     krate: String,
+    /// A library crate to link into the program, `<crate>=<dumps>`, as
+    /// `uorust crate --link` links one.
+    #[arg(long = "link")]
+    link: Vec<String>,
     /// The module shards: one directory of the crate's dumps per module.
     #[arg(long)]
     mir: PathBuf,
@@ -290,6 +333,18 @@ struct CrateArgs {
     /// register stamped with its embedding.
     #[arg(long)]
     library: Option<PathBuf>,
+    /// With `--library`, check the embedding against rustc's build of the
+    /// crate: each of its functions over scalars run by both, a theorem per
+    /// case that the evaluator returns what the build did, which `lexlean
+    /// verify` decides; each sampled row is stamped with its theorems.
+    #[arg(long, requires = "library")]
+    differential: bool,
+    /// A library crate to link into the crate's program, `<crate>=<dumps>`
+    /// (`core=target/core-mir`, as `scripts/mir/dump-lib.sh` writes them):
+    /// a call into it names its body, so a body that calls core is
+    /// evaluated through core's.
+    #[arg(long = "link", requires = "library")]
+    link: Vec<String>,
 }
 
 #[derive(clap::Args)]
@@ -439,6 +494,21 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Embed(args) => {
+            let link = args
+                .link
+                .iter()
+                .map(|l| {
+                    l.split_once('=')
+                        .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
+                        .ok_or_else(|| {
+                            uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                        })
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            let link: Vec<(&str, &std::path::Path)> = link
+                .iter()
+                .map(|(k, d)| (k.as_str(), d.as_path()))
+                .collect();
             let census = uorust::embed::embed(
                 &args.krate,
                 &args.library,
@@ -450,6 +520,8 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     observed: args.observed.as_deref(),
                     register: args.register.as_deref(),
                     bridge: args.shallow.as_deref().zip(args.bridge.as_deref()),
+                    differential: None,
+                    link: &link,
                 },
             )?;
             println!(
@@ -464,8 +536,26 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         Command::Crate(args) => {
             let (name, version) = uorust::registry::parse_spec(&args.spec)?;
             let register = args.registers.join(&name);
-            let lifted =
-                uorust::registry::lift_crate(&name, &version, &register, args.library.as_deref())?;
+            let lifted = uorust::registry::lift_crate(
+                &name,
+                &version,
+                &register,
+                args.library.as_deref(),
+                args.differential,
+                &args
+                    .link
+                    .iter()
+                    .map(|l| {
+                        l.split_once('=')
+                            .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
+                            .ok_or_else(|| {
+                                uorust::UorustError::Tool(format!(
+                                    "--link {l}: not <crate>=<dumps>"
+                                ))
+                            })
+                    })
+                    .collect::<Result<Vec<_>, UorustError>>()?,
+            )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
                 lifted.translated,
@@ -476,6 +566,11 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             if let Some((bodies, evaluable)) = lifted.embedding {
                 println!(
                     "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable"
+                );
+            }
+            if let Some((bodies, theorems)) = lifted.differential {
+                println!(
+                    "{name}@{version}: {theorems} differential theorems verified over {bodies} bodies"
                 );
             }
             Ok(())
@@ -579,6 +674,8 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             kept,
             prior,
             within,
+            shard,
+            shards,
         } => {
             let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
                 path: targets.clone(),
@@ -591,7 +688,10 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 &targets,
                 &kept,
                 &certify::Manifest::read(&prior)?,
-                within.map(std::time::Duration::from_secs),
+                certify::Scope {
+                    within: within.map(std::time::Duration::from_secs),
+                    shard: shard.zip(shards),
+                },
             )?;
             println!("certified bundle kept in {}", kept.display());
         }
@@ -621,6 +721,42 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 s.reachable,
                 certify::ENTRY
             );
+        }
+        Certify::Plan {
+            register,
+            prior,
+            budget,
+        } => {
+            let (shards, diagnose) = certify::plan(
+                &read_register(&register)?,
+                &certify::Manifest::read(&prior)?,
+                budget,
+            );
+            let shards: Vec<String> = (0..shards).map(|i| format!("{i}-{shards}")).collect();
+            println!(
+                "{}",
+                serde_json::json!({"shards": shards, "diagnose": diagnose})
+            );
+        }
+        Certify::Diagnose {
+            projection,
+            register,
+            targets,
+            root,
+            out,
+        } => {
+            let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
+                path: targets.clone(),
+                reason: e.to_string(),
+            })?;
+            certify::diagnose(
+                &projection,
+                &out,
+                &read_register(&register)?,
+                &targets,
+                &root,
+            )?;
+            println!("{}", out.join("build.log").display());
         }
         Certify::Agree { dir } => {
             for line in certify::agree(&dir)? {

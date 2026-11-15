@@ -176,17 +176,14 @@ translated = 0
 residue = 49
 
 [embedding]
+bodies = 4199
 embedded = 4199
-evaluable = 4198
-blocked = 1
-
-[[construct]]
-construct = "Operand::Constant of a constant the embedding does not read"
-bodies = 1
+evaluable = 4199
+blocked = 0
 
 [bridge]
-bridged = 3
-pending = 72
+bridged = 7
+pending = 68
 
 [[pending]]
 shape = "signature: List"
@@ -194,15 +191,11 @@ bodies = 12
 
 [[pending]]
 shape = "definition"
-bodies = 9
+bodies = 11
 
 [[pending]]
 shape = "timeout: straight"
 bodies = 7
-
-[[pending]]
-shape = "closure: a callee not embedded"
-bodies = 6
 
 [[pending]]
 shape = "proof: straight"
@@ -213,12 +206,12 @@ shape = "signature: Unit"
 bodies = 5
 
 [[pending]]
-shape = "proof: binary eq"
+shape = "signature: Nat"
 bodies = 4
 
 [[pending]]
-shape = "signature: Nat"
-bodies = 4
+shape = "proof: call"
+bodies = 3
 
 [[pending]]
 shape = "signature: TupleNatNat"
@@ -243,6 +236,10 @@ bodies = 2
 [[pending]]
 shape = "timeout: call"
 bodies = 2
+
+[[pending]]
+shape = "closure: a callee left to a dictionary"
+bodies = 1
 
 [[pending]]
 shape = "signature: CoreIoBorrowedBufBorrowedCursor"

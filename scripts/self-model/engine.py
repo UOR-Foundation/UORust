@@ -105,7 +105,7 @@ def parse(src):
 defs = definitions(open(MODEL, encoding="utf-8").read())
 data = {k: parse(v) for k, v in defs.items()
         if k in ("runner", "secrets", "workloads", "stages", "writeScopes", "pushPaths", "actions", "retentions",
-                 "ledgerFixture", "idleAttemptsFixture", "movedAttemptsFixture")}
+                 "ledgerFixture", "idleAttemptsFixture", "movedAttemptsFixture", "crateShards", "matrixCap")}
 
 # The ledger's adapter (scripts/mir/ledger.py) applies Engine::staleModules;
 # on the model's own fixtures it must answer what the model's theorems
@@ -416,7 +416,9 @@ def crates(w):
 # held crates whose (crate@version, translator κ, toolchain κ) the attempt
 # ledger has not seen first, then, on a tick, the ranking's crates it has not
 # attempted, in rank order, as many as the expected seconds of them all fit
-# the run's budget, one shard stage's ({budget} minutes) of runner time. A
+# the run's budget: {data['crateShards']} shards at once (Engine::crateShards), each
+# a shard stage's ({budget} minutes) of runner time, so the run takes about
+# a stage, and no more shards than GitHub's matrix holds (Engine::matrixCap). A
 # crate's expected seconds are its own last measured attempt, else the mean
 # of the attempts the ledger measured, as the differential check's modules
 # are split by their measured cost per fuel; a shard's seconds are its
@@ -428,7 +430,13 @@ def crates(w):
 # that is now residue, and embeds every body in LexLean beside the pinned
 # rust-src's core, alloc and std, as core's and std's shards do, stamping each
 # row with its embedding and the register with its `[embedding]` totals and
-# blocked constructs; it measures the seconds that took. The writing stage
+# blocked constructs, and checks the embedding against rustc's build of the
+# crate as core's shards do (`--differential`): each of its functions over
+# scalars run by the build and by the evaluator, a theorem per case that the
+# two agree, the theorems split into modules by their cost and verified by
+# `lexlean`, which a disagreement fails; each sampled row is stamped with its
+# theorems and the register with its `[differential]` totals. It measures
+# the seconds that took. The writing stage
 # copies each crate's register into crates/uorust/crates/<name>, records each
 # attempt with its seconds, pushes and dispatches the generate workflow. A
 # crate that does not build here (one that needs a system library, say) is
@@ -451,8 +459,11 @@ concurrency:
   cancel-in-progress: {'true' if w['cancel'] else 'false'}
 
 env:
-  # The run's budget, in seconds: one shard stage of runner time.
+  # A shard's budget, in seconds: one shard stage of runner time.
   BUDGET: '{budget * 60}'
+  # How many shards run at once, and how many a run holds at most.
+  SHARDS: '{data['crateShards']}'
+  JOBS: '{data['matrixCap']}'
 
 jobs:
   {first}:
@@ -472,10 +483,10 @@ jobs:
           if [ "$EVENT" = push ]; then
             echo '[]' >"$RUNNER_TEMP/ranked.json"
           else
-            count=${{COUNT:-$(python3 -I scripts/mir/ledger.py rank-count crates/uorust/crates "$BUDGET")}}
+            count=${{COUNT:-$(python3 -I scripts/mir/ledger.py rank-count crates/uorust/crates "$BUDGET" "$SHARDS" "$JOBS")}}
             python3 -I scripts/mir/top-crates.py crates/uorust/crates "$count" >"$RUNNER_TEMP/ranked.json"
           fi
-          crates=$(python3 -I scripts/mir/ledger.py plan-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json" "$EVENT" "$BUDGET")
+          crates=$(python3 -I scripts/mir/ledger.py plan-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json" "$EVENT" "$BUDGET" "$SHARDS" "$JOBS")
           echo "crates=$crates" >>"$GITHUB_OUTPUT"
           echo "crates: $crates" >>"$GITHUB_STEP_SUMMARY"
       - name: Build uorust through the locked SDK
@@ -487,6 +498,20 @@ jobs:
           name: uorust-crates
           path: target/bin/uorust
           retention-days: {KEEP['uorust']}
+      # Core's and alloc's MIR, which each crate's program links, so a
+      # crate's call into core is evaluated through core's body: dumped
+      # once, as core's own workflow dumps it, for every shard.
+      - name: Dump core's and alloc's MIR through the locked SDK
+        if: ${{{{ steps.crates.outputs.crates != '[]' }}}}
+        shell: bash
+        run: scripts/ci/sdk.sh "scripts/mir/dump-lib.sh core target/library-mir/core && scripts/mir/dump-lib.sh alloc target/library-mir/alloc"
+      - name: Keep core's and alloc's MIR for the shards
+        if: ${{{{ steps.crates.outputs.crates != '[]' }}}}
+        uses: {USES['actions/upload-artifact']}
+        with:
+          name: library-mir-crates
+          path: target/library-mir
+          retention-days: {KEEP['uorust']}
 
   {shard}:
     name: lift ${{{{ matrix.crate.name }}}}@${{{{ matrix.crate.version }}}}
@@ -496,6 +521,7 @@ jobs:
     timeout-minutes: {budget}
     strategy:
       fail-fast: false
+      max-parallel: {data['crateShards']}
       matrix:
         crate: ${{{{ fromJSON(needs.{first}.outputs.crates) }}}}
     steps:
@@ -509,6 +535,11 @@ jobs:
         with:
           name: uorust-crates
           path: target/bin
+      - name: Fetch core's and alloc's MIR
+        uses: {USES['actions/download-artifact']}
+        with:
+          name: library-mir-crates
+          path: target/library-mir
       # The library the crate is embedded beside: dump-lib.sh fetches the
       # pinned rust-src (hash-checked) before it lists core's modules.
       - name: Fetch the pinned rust-src through the locked SDK
@@ -524,7 +555,7 @@ jobs:
           mkdir -p target/tmp target/times
           channel=$(sed -n 's/^channel = "\\(.*\\)"/\\1/p' rust-toolchain.toml)
           status=0
-          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library --differential --link core=target/library-mir/core --link alloc=target/library-mir/alloc" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           # The attempt's seconds, which plan the next run, whether or not
           # the crate built.
           echo $(( $(date +%s) - STARTED )) >"target/times/$SPEC"
@@ -570,7 +601,7 @@ jobs:
             if [ -f "target/registers/$name/frontier.toml" ]; then
               rm -rf "crates/uorust/crates/$name"
               cp -r "target/registers/$name" "crates/uorust/crates/$name"
-              echo "- $name: $(sed -n 's/^translated = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n 's/^bodies = //p' "crates/uorust/crates/$name/frontier.toml") bodies translated, $(sed -n '/^\\[embedding\\]/,/^$/s/^evaluable = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n '/^\\[embedding\\]/,/^$/s/^embedded = //p' "crates/uorust/crates/$name/frontier.toml") embedded bodies evaluable" >>"$GITHUB_STEP_SUMMARY"
+              python3 -I scripts/mir/ledger.py crate-line crates/uorust/crates "$name" >>"$GITHUB_STEP_SUMMARY"
             else
               echo "- $name: not lifted in this run (see its shard)" >>"$GITHUB_STEP_SUMMARY"
             fi
