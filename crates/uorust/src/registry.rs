@@ -21,6 +21,9 @@ pub const ROOT_MODULE: &str = "crate";
 /// What `uorust crate` did.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Lifted {
+    /// The bodies embedded and those evaluable, where the crate was
+    /// embedded too.
+    pub embedding: Option<(usize, usize)>,
     /// The modules translated.
     pub modules: usize,
     /// The bodies of the crate's MIR.
@@ -211,7 +214,12 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
 /// Fetch, dump and translate `name@version` and write its register to
 /// `register`, refusing it when a body the register records as translated
 /// is now residue. A module file the crate no longer has is removed.
-pub fn lift_crate(name: &str, version: &str, register: &Path) -> Result<Lifted, UorustError> {
+pub fn lift_crate(
+    name: &str,
+    version: &str,
+    register: &Path,
+    library: Option<&Path>,
+) -> Result<Lifted, UorustError> {
     let work = std::env::temp_dir().join(format!("uorust-crate-{name}-{version}"));
     let _ = std::fs::remove_dir_all(&work);
     std::fs::create_dir_all(&work).map_err(|e| tool("work", e))?;
@@ -248,7 +256,15 @@ pub fn lift_crate(name: &str, version: &str, register: &Path) -> Result<Lifted, 
             }
         }
         write_register(&scope, register, &census)?;
+        let embedding = match library {
+            Some(library) => Some(embed_crate(
+                &scope, name, &dir, &work, &shards, library, register,
+            )?),
+            None => None,
+        }
+        .map(|e| (e.bodies, e.evaluable));
         Ok(Lifted {
+            embedding,
             modules: census.len(),
             bodies: census.iter().map(|s| s.rows.len()).sum(),
             translated: census.iter().map(|s| s.translated_count()).sum(),
@@ -256,6 +272,82 @@ pub fn lift_crate(name: &str, version: &str, register: &Path) -> Result<Lifted, 
     })();
     let _ = std::fs::remove_dir_all(&work);
     result
+}
+
+/// Embed the crate's bodies in LexLean with the one evaluator core's and
+/// std's are, and stamp each row of its register with its embedding: the
+/// crate's sources sit beside `library`'s core, alloc and std, as a crate
+/// of the library does, so its declarations are read as std's are.
+fn embed_crate(
+    scope: &Scope,
+    name: &str,
+    dir: &Path,
+    work: &Path,
+    shards: &Path,
+    library: &Path,
+    register: &Path,
+) -> Result<crate::embed::EmbedCensus, UorustError> {
+    let toolchain = format!("+{}", crate::mir::spec::TOOLCHAIN);
+    let rustc = |args: &[&str]| -> Result<String, UorustError> {
+        let out = run(
+            "rustc",
+            Command::new("rustc")
+                .arg(&toolchain)
+                .args(args)
+                .env("RUSTC_BOOTSTRAP", "1"),
+        )?;
+        Ok(String::from_utf8_lossy(&out).into_owned())
+    };
+    // The target the bodies were built for, as the library dumps state it.
+    let host = rustc(&["-vV"])?
+        .lines()
+        .find_map(|l| l.strip_prefix("host: "))
+        .map(str::to_string)
+        .ok_or_else(|| tool("rustc", "no host"))?;
+    let width = rustc(&["--print", "cfg", "--target", &host])?
+        .lines()
+        .find_map(|l| l.strip_prefix("target_pointer_width=\""))
+        .map(|w| w.trim_end_matches('"').to_string())
+        .ok_or_else(|| tool("rustc", "no pointer width"))?;
+    let spec: serde_json::Value = serde_json::from_str(&rustc(&[
+        "-Zunstable-options",
+        "--print",
+        "target-spec-json",
+        "--target",
+        &host,
+    ])?)
+    .map_err(|e| tool("rustc", e))?;
+    let layout = spec
+        .get("data-layout")
+        .and_then(serde_json::Value::as_str)
+        .ok_or_else(|| tool("rustc", "no data layout"))?;
+    std::fs::write(
+        shards.join("target.toml"),
+        format!("triple = \"{host}\"\npointer_width = {width}\ndata_layout = \"{layout}\"\n"),
+    )
+    .map_err(|e| tool("target.toml", e))?;
+    let root = work.join("root").join("library");
+    std::fs::create_dir_all(&root).map_err(|e| tool("library", e))?;
+    for krate in ["core", "alloc", "std"] {
+        std::os::unix::fs::symlink(library.join(krate), root.join(krate))
+            .map_err(|e| tool("library", e))?;
+    }
+    std::os::unix::fs::symlink(dir, root.join(name)).map_err(|e| tool("library", e))?;
+    let census = crate::embed::embed(
+        name,
+        &root,
+        shards,
+        &work.join("embed"),
+        &[],
+        &crate::embed::Outputs {
+            harness: None,
+            observed: None,
+            register: Some(register),
+            bridge: None,
+        },
+    )?;
+    crate::mir::core::summarize_register(scope, register)?;
+    Ok(census)
 }
 
 #[cfg(test)]

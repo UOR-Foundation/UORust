@@ -268,6 +268,11 @@ struct CrateArgs {
     /// `<name>` directory.
     #[arg(long, default_value = "crates/uorust/crates")]
     registers: PathBuf,
+    /// The rust-src `library` directory of the pinned toolchain: with it,
+    /// the crate's bodies are embedded in LexLean too, and each row of its
+    /// register stamped with its embedding.
+    #[arg(long)]
+    library: Option<PathBuf>,
 }
 
 #[derive(clap::Args)]
@@ -442,7 +447,8 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         Command::Crate(args) => {
             let (name, version) = uorust::registry::parse_spec(&args.spec)?;
             let register = args.registers.join(&name);
-            let lifted = uorust::registry::lift_crate(&name, &version, &register)?;
+            let lifted =
+                uorust::registry::lift_crate(&name, &version, &register, args.library.as_deref())?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
                 lifted.translated,
@@ -450,6 +456,11 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 lifted.modules,
                 register.display()
             );
+            if let Some((bodies, evaluable)) = lifted.embedding {
+                println!(
+                    "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable"
+                );
+            }
             Ok(())
         }
         Command::Merge(args) => {

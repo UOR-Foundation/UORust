@@ -17,6 +17,7 @@ two κ and applies the same rule to the ledger file:
 
     python3 -I scripts/mir/ledger.py stale REGISTER MODULES.json
     python3 -I scripts/mir/ledger.py record REGISTER SHARDS_DIR
+    python3 -I scripts/mir/ledger.py held-crates REGISTERS RANKED.json
     python3 -I scripts/mir/ledger.py stale-crates REGISTERS RANKED.json
     python3 -I scripts/mir/ledger.py record-crates REGISTERS CRATES_JSON
     python3 -I scripts/mir/ledger.py mir-key
@@ -121,6 +122,22 @@ elif cmd == "stale-crates":
     ledger = read_ledger(registers)
     keep = {a[0] for a in stale([current(f"{c['name']}@{c['version']}") for c in ranked], ledger)}
     print(json.dumps([c for c in ranked if f"{c['name']}@{c['version']}" in keep]))
+elif cmd == "held-crates":
+    # The crates REGISTERS holds a register for, each at the newest version
+    # its ledger records, with RANKED's: a ranked crate at its ranked
+    # version, then each held crate the ranking does not name.
+    registers, ranked = sys.argv[2], json.load(open(sys.argv[3]))
+    import re
+    def order(version):
+        return [int(p) if p.isdigit() else -1 for p in re.split(r"[.+-]", version)]
+    held = {}
+    for module, _translator, _toolchain in read_ledger(registers):
+        name, _, version = module.partition("@")
+        if os.path.isfile(os.path.join(registers, name, "frontier.toml")) \
+                and (name not in held or order(version) > order(held[name])):
+            held[name] = version
+    named = {c["name"] for c in ranked}
+    print(json.dumps(ranked + [{"name": n, "version": v} for n, v in sorted(held.items()) if n not in named]))
 elif cmd == "record-crates":
     registers, crates = sys.argv[2], json.loads(sys.argv[3])
     lifted = [f"{c['name']}@{c['version']}" for c in crates

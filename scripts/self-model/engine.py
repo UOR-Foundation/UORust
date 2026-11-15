@@ -390,12 +390,18 @@ def crates(w):
 # stable version; how many crates is the `count` input, and when it is not
 # given (the daily run), one more than crates/uorust/crates holds registers
 # for, so each run takes on the next crate of the ranking and none is chosen
-# here. The attempt ledger keeps only the crates whose (crate@version,
-# translator κ, toolchain κ) it has not seen. Each shard runs `uorust crate
-# <name>@<version>`: it fetches the crate, checks it against crates.io's
-# checksum, dumps its library's MIR on the pinned toolchain, translates every
-# body and refuses a body the register records as translated that is now
-# residue. The writing stage copies each crate's register into
+# here. A push (a new translator or evaluator) takes no new crate: it lifts
+# again the crates crates/uorust/crates already holds, at the versions the
+# ledger records (scripts/mir/ledger.py held-crates). The attempt ledger
+# keeps only the crates whose (crate@version, translator κ, toolchain κ) it
+# has not seen. Each shard runs `uorust crate <name>@<version> --library`:
+# it fetches the crate, checks it against crates.io's checksum, dumps its
+# library's MIR on the pinned toolchain, translates every body, refuses a
+# body the register records as translated that is now residue, and embeds
+# every body in LexLean beside the pinned rust-src's core, alloc and std, as
+# core's and std's shards do, stamping each row with its embedding and the
+# register with its `[embedding]` totals and blocked constructs. The writing
+# stage copies each crate's register into
 # crates/uorust/crates/<name>, records the attempts, pushes and dispatches
 # the generate workflow. A crate that does not build here (one that needs a
 # system library, say) is reported in the summary and retried next tick.
@@ -428,9 +434,15 @@ jobs:
         shell: bash
         env:
           COUNT: ${{{{ inputs.count }}}}
+          EVENT: ${{{{ github.event_name }}}}
         run: |
-          python3 -I scripts/mir/top-crates.py crates/uorust/crates "$COUNT" >"$RUNNER_TEMP/ranked.json"
-          crates=$(python3 -I scripts/mir/ledger.py stale-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json")
+          if [ "$EVENT" = push ]; then
+            echo '[]' >"$RUNNER_TEMP/ranked.json"
+          else
+            python3 -I scripts/mir/top-crates.py crates/uorust/crates "$COUNT" >"$RUNNER_TEMP/ranked.json"
+          fi
+          python3 -I scripts/mir/ledger.py held-crates crates/uorust/crates "$RUNNER_TEMP/ranked.json" >"$RUNNER_TEMP/listed.json"
+          crates=$(python3 -I scripts/mir/ledger.py stale-crates crates/uorust/crates "$RUNNER_TEMP/listed.json")
           echo "crates=$crates" >>"$GITHUB_OUTPUT"
           echo "crates: $crates" >>"$GITHUB_STEP_SUMMARY"
       - name: Build uorust through the locked SDK
@@ -459,7 +471,7 @@ jobs:
         with:
           name: uorust-crates
           path: target/bin
-      - name: Fetch, dump and translate the crate through the locked SDK
+      - name: Fetch, dump, translate and embed the crate through the locked SDK
         shell: bash
         env:
           SPEC: ${{{{ matrix.crate.name }}}}@${{{{ matrix.crate.version }}}}
@@ -467,7 +479,10 @@ jobs:
         run: |
           chmod +x target/bin/uorust
           mkdir -p target/tmp
-          scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC'"
+          channel=$(sed -n 's/^channel = "\\(.*\\)"/\\1/p' rust-toolchain.toml)
+          # The library the crate is embedded beside: dump-lib.sh fetches the
+          # pinned rust-src (hash-checked) before it lists core's modules.
+          scripts/ci/sdk.sh "scripts/mir/dump-lib.sh core --modules >/dev/null && TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library" | tee -a "$GITHUB_STEP_SUMMARY"
           mkdir -p "target/register/$NAME"
           cp -r "crates/uorust/crates/$NAME/." "target/register/$NAME/"
       - name: Keep the crate's register
@@ -505,7 +520,7 @@ jobs:
             if [ -f "target/registers/$name/frontier.toml" ]; then
               rm -rf "crates/uorust/crates/$name"
               cp -r "target/registers/$name" "crates/uorust/crates/$name"
-              echo "- $name: $(sed -n 's/^translated = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n 's/^bodies = //p' "crates/uorust/crates/$name/frontier.toml") bodies translated" >>"$GITHUB_STEP_SUMMARY"
+              echo "- $name: $(sed -n 's/^translated = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n 's/^bodies = //p' "crates/uorust/crates/$name/frontier.toml") bodies translated, $(sed -n '/^\\[embedding\\]/,/^$/s/^evaluable = //p' "crates/uorust/crates/$name/frontier.toml") of $(sed -n '/^\\[embedding\\]/,/^$/s/^embedded = //p' "crates/uorust/crates/$name/frontier.toml") embedded bodies evaluable" >>"$GITHUB_STEP_SUMMARY"
             else
               echo "- $name: not lifted in this run (see its shard)" >>"$GITHUB_STEP_SUMMARY"
             fi
