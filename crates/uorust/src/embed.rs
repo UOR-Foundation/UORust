@@ -685,6 +685,15 @@ fn type_argument(callee: &str) -> Option<String> {
     }
 }
 
+/// The metadata type `ptr_metadata::<T, M>` prints, `M`.
+fn metadata_argument(callee: &str) -> Option<String> {
+    let (_, args) = generic_parts(callee.trim());
+    match args.as_slice() {
+        [_, m] => Some(m.clone()),
+        _ => None,
+    }
+}
+
 /// A count as MIR prints a constant of `usize`, `4_usize`, or a bare `4`.
 fn count_value(text: &str) -> Option<u64> {
     let count = text.trim();
@@ -1405,6 +1414,14 @@ impl Cx<'_> {
                 match pointee(ty).map(|t| (t, self.sized(t, layout_depth(self.structs)))) {
                     None | Some((_, Some(true))) => (thin, None),
                     Some((_, Some(false))) => (2 * thin, None),
+                    // A pointee rustc lays out that is no slice, `str` or
+                    // trait object (an extern type, `VTable`): thin.
+                    Some((t, None))
+                        if self.layouts.get(t).is_some()
+                            && !(t.starts_with('[') || t == "str" || t.starts_with("dyn ")) =>
+                    {
+                        (thin, None)
+                    }
                     Some((t, None)) => (thin, Some(t.to_string())),
                 };
             return Some(Laid {
@@ -1883,12 +1900,30 @@ impl Cx<'_> {
     /// pointer's size: with its alignment where rustc's layout of it gives
     /// one (`Generic.aligned`).
     pub(crate) fn fixed_layout(&self, ty: &str) -> Option<String> {
+        let metadata = self.pointee_metadata(ty);
+        let ty = metadata.as_deref().unwrap_or(ty);
         let l = self.layout(ty, layout_depth(self.structs))?;
         l.assumed.is_none().then_some(())?;
         Some(match self.layouts.get(ty.trim()) {
             Some((_, rustc)) => mir_ctor("Generic.aligned", &[l.term, rustc.align.to_string()]),
             None => mir_ctor("Generic.layout", &[l.term]),
         })
+    }
+
+    /// The type `<X as Pointee>::Metadata` is, as rustc's built-in impl of
+    /// `Pointee` gives it: `()` of a sized `X`, `usize` of a slice or
+    /// `str`. `None` of any other type, or one whose size is not read.
+    fn pointee_metadata(&self, ty: &str) -> Option<String> {
+        let rest = ty.trim().strip_prefix('<')?;
+        let (x, tail) = rest.rsplit_once(" as ")?;
+        let tail = tail.strip_suffix(">::Metadata")?;
+        (crate::mir::parse::split_path(tail).last() == Some(&"Pointee")).then_some(())?;
+        let x = x.trim();
+        if x == "str" || (x.starts_with('[') && !x.contains(';')) {
+            return Some("usize".to_string());
+        }
+        self.sized(x, layout_depth(self.structs))?
+            .then(|| "()".to_string())
     }
 
     /// The `Generic` of a count MIR prints (`4_usize`, or a const
@@ -3041,6 +3076,21 @@ impl Cx<'_> {
                             mir_ctor(
                                 "Callee.rawEq",
                                 &[self.generic_layout(&t).unwrap_or_default()],
+                            )
+                        }
+                        // `ptr_metadata::<T, M>`: the pointer's metadata,
+                        // of `M`'s layout: `()` of a thin pointer, or a
+                        // slice's length.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "ptr_metadata"
+                                && metadata_argument(callee)
+                                    .and_then(|m| self.generic_layout(&m))
+                                    .is_some() =>
+                        {
+                            let m = metadata_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.metadata",
+                                &[self.generic_layout(&m).unwrap_or_default()],
                             )
                         }
                         Callee::Intrinsic(p)
@@ -5231,6 +5281,11 @@ mod tests {
         );
         assert_eq!(cx.count_of("assert_zero_valid::<&Pair>"), None);
         assert_eq!(cx.count_of("assert_zero_valid::<Unknown>"), None);
+        let metadata =
+            |t: &str| cx.pointee_metadata(&format!("<{t} as ptr::metadata::Pointee>::Metadata"));
+        assert_eq!(metadata("[u8]").as_deref(), Some("usize"));
+        assert_eq!(metadata("str").as_deref(), Some("usize"));
+        assert_eq!(cx.pointee_metadata("<[u8] as Other>::Metadata"), None);
     }
 
     #[test]
