@@ -70,6 +70,16 @@ def parse(src):
         elif head == "cons":
             first = term()
             v = [first] + term()
+        elif head == "prim" and toks[pos] == "append":
+            # A list written as balanced appends (the linker's nesting bound).
+            pos += 1
+            v = term() + term()
+            assert toks[pos] == ":", f"expected : at {toks[pos]}"
+            pos += 1
+            depth = 0
+            while depth or toks[pos] != ")":
+                depth += {"(": 1, ")": -1}.get(toks[pos], 0)
+                pos += 1
         elif head == "record":
             pos += 1  # the structure
             assert toks[pos] == "{"
