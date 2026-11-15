@@ -174,6 +174,16 @@ impl BridgeShape {
     }
 
     /// The shallow type the MIR path lowers this shape to.
+    /// Whether the parameter is a Boolean, or a reference to one, whose
+    /// two values a proof takes as cases.
+    fn is_boolean(&self) -> bool {
+        match self {
+            Self::Bool => true,
+            Self::Ref(a) => a.is_boolean(),
+            _ => false,
+        }
+    }
+
     fn shallow(&self) -> String {
         match self {
             Self::Bool => "Bool".into(),
@@ -665,7 +675,7 @@ fn block(
         .parameters
         .iter()
         .zip(&params)
-        .filter(|(_, s)| **s == BridgeShape::Bool)
+        .filter(|(_, s)| s.is_boolean())
         .map(|((n, _), _)| n.as_str())
         .collect();
     let statement = format!(

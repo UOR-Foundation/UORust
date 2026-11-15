@@ -503,7 +503,14 @@ definition{
   name: signedEqual,
   parameters: [a : Signed, b : Signed],
   result: Bool,
-  body: (((project a magnitude) =? (project b magnitude)) && ((sameBool (project a negative) (project b negative)) || ((project a magnitude) =? 0)))
+  body: (((sameBool (project a negative) (project b negative)) || ((project a magnitude) =? 0)) && ((project a magnitude) =? (project b magnitude)))
+}
+
+definition{
+  name: signedAtMost,
+  parameters: [a : Signed, b : Signed],
+  result: Bool,
+  body: (if (project a negative) then (if (project b negative) then ((project b magnitude) <=? (project a magnitude)) else true) else (if (project b negative) then (((project a magnitude) =? 0) && ((project b magnitude) =? 0)) else ((project a magnitude) <=? (project b magnitude))))
 }
 
 definition{
@@ -635,9 +642,9 @@ definition{
     | BinOp.shrUnchecked => (ctor Evaluated.stop (ctor Outcome.ub "an arithmetic operator on values that are not integers"))
     | BinOp.eq => (boolValue (signedEqual a b))
     | BinOp.lt => (boolValue (signedLess a b))
-    | BinOp.le => (boolValue (not (signedLess b a)))
+    | BinOp.le => (boolValue (signedAtMost a b))
     | BinOp.ne => (boolValue (not (signedEqual a b)))
-    | BinOp.ge => (boolValue (not (signedLess a b)))
+    | BinOp.ge => (boolValue (signedAtMost b a))
     | BinOp.gt => (boolValue (signedLess b a))
     | BinOp.cmp => (ctor Evaluated.found (orderingOf a b))
     | BinOp.offset => (ctor Evaluated.stop (ctor Outcome.undefined "BinOp::Offset")))
@@ -743,7 +750,7 @@ definition{
   result: Evaluated,
   body: (match a
     | Value.int bits signed x => (match b
-      | Value.int bitsB signedB y => (evalArithmetic op bits signed x (wrapBits bits y) (signedOf bitsB signedB y))
+      | Value.int bitsB signedB y => (evalArithmetic op bits signed x (if (bits =? bitsB) then y else (wrapBits bits y)) (signedOf bitsB signedB y))
       | Value.boolean q => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
       | Value.character q => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
       | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a binary operator on values of two types"))
