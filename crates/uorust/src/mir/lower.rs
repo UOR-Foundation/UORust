@@ -5040,7 +5040,9 @@ impl Fun<'_, '_> {
                 }
                 Ok(lift::struct_value(n, &parts, self.cx.types))
             }
-            (IrAggregate::Other(a), _) => Err(kind(a.path(), "")),
+            (IrAggregate::Coroutine(_), _) => {
+                Err(kind(spec::MirAggregateKind::Coroutine.path(), ""))
+            }
             (IrAggregate::Closure(_), _) => Err(kind(
                 spec::MirAggregateKind::Closure.path(),
                 "a closure built where its type is not a function",

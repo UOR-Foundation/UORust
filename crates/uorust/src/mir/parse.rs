@@ -685,7 +685,9 @@ fn rvalue(text: &str) -> IrRvalue {
     }
     // Aggregates: a closure, its type and then its captures,
     // `{closure@a.rs:1:2: 1:5} { x: move _3 }`.
-    if t.starts_with("{closure@") {
+    // A coroutine, `{coroutine@a.rs:1:2: 3:4 (#0)} { x: move _1 }`, alike.
+    let coroutine = t.starts_with("{coroutine@");
+    if t.starts_with("{closure@") || coroutine {
         let Some(end) = t.find('}') else {
             return other(R::Aggregate);
         };
@@ -704,13 +706,13 @@ fn rvalue(text: &str) -> IrRvalue {
         } else if !rest.is_empty() {
             return other(R::Aggregate);
         }
-        return IrRvalue::Aggregate(IrAggregate::Closure(t[..=end].to_string()), ops);
-    }
-    if t.starts_with("{coroutine@") {
-        return IrRvalue::Aggregate(
-            IrAggregate::Other(spec::MirAggregateKind::Coroutine),
-            Vec::new(),
-        );
+        let printed = t[..=end].to_string();
+        let kind = if coroutine {
+            IrAggregate::Coroutine(printed)
+        } else {
+            IrAggregate::Closure(printed)
+        };
+        return IrRvalue::Aggregate(kind, ops);
     }
     if let Some(inner) = t.strip_prefix('[').and_then(|r| r.strip_suffix(']')) {
         if split_top(inner, ';').len() == 2 {

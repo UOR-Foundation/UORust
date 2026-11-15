@@ -202,6 +202,7 @@ inductive{
     {name: array, fields: []},
     {name: adt, fields: [String, Signed]},
     {name: closure, fields: [String]},
+    {name: coroutine, fields: [String]},
     {name: other, fields: [String]}
   ]
 }
@@ -1395,6 +1396,7 @@ definition{
     | Agg.array => (ctor Evaluated.found (ctor Value.tuple values))
     | Agg.adt variant discriminant => (ctor Evaluated.found (ctor Value.adt variant discriminant values))
     | Agg.closure printed => (ctor Evaluated.found (ctor Value.tuple values))
+    | Agg.coroutine printed => (ctor Evaluated.found (ctor Value.adt "Unresumed" (record Signed {negative := false, magnitude := 0}) values))
     | Agg.other construct => (ctor Evaluated.stop (ctor Outcome.undefined construct)))
 }
 

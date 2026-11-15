@@ -114,8 +114,10 @@ pub(crate) enum IrAggregate {
     /// A closure, by its type as printed (`{closure@file:l:c: l:c}`); its
     /// operands are its captures, named.
     Closure(String),
-    /// Any other aggregate kind.
-    Other(spec::MirAggregateKind),
+    /// A coroutine in its unresumed state, by its type as printed
+    /// (`{coroutine@file:l:c: l:c (#0)}`); its operands are its upvars,
+    /// named.
+    Coroutine(String),
 }
 
 /// The right side of an assignment.

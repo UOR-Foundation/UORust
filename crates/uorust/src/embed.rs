@@ -2809,9 +2809,11 @@ impl Cx<'_> {
                     IrAggregate::Closure(t) => {
                         (A::Closure, mir_ctor("Agg.closure", &[mir_string(t)]))
                     }
-                    IrAggregate::Other(k) => {
-                        e.blocked.insert(k.path().to_string());
-                        (*k, mir_ctor("Agg.other", &[mir_string(k.path())]))
+                    // A coroutine is built unresumed: rustc's variant 0
+                    // of its state (`CoroutineArgs::UNRESUMED`), holding
+                    // its upvars.
+                    IrAggregate::Coroutine(t) => {
+                        (A::Coroutine, mir_ctor("Agg.coroutine", &[mir_string(t)]))
                     }
                 };
                 e.uses.insert(k.path().to_string());
