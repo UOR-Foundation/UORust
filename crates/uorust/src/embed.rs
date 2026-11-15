@@ -2153,6 +2153,30 @@ impl Cx<'_> {
         Some(true)
     }
 
+    /// The value of a named constant of a primitive type (`HAS_PREFIXES`)
+    /// whose body, its dump's or its declaration's, is one literal.
+    fn named_scalar(&self, c: &IrConstant) -> Option<i128> {
+        let IrConstant::Path(text) = c else {
+            return None;
+        };
+        let body = (self.source_constant)(text)?;
+        let [block] = body.blocks.as_slice() else {
+            return None;
+        };
+        block.statements.iter().find_map(|s| match s {
+            IrStatement::Assign(q, IrRvalue::Use(IrOperand::Constant(c)))
+                if q.local == 0 && q.projection.is_empty() =>
+            {
+                match c {
+                    IrConstant::Bool(b) => Some(i128::from(*b)),
+                    IrConstant::Int(n, _) if *n >= 0 => Some(*n),
+                    _ => None,
+                }
+            }
+            _ => None,
+        })
+    }
+
     /// The key of the constant item a constant operand names, where the
     /// program has its body: the item itself, or the item of that name in
     /// the body its owner resolves to.
@@ -3351,7 +3375,13 @@ impl Cx<'_> {
         let mut reached = BTreeSet::from([0]);
         let mut work = vec![0];
         while let Some(at) = work.pop() {
-            for next in b.blocks.get(at).map(live_successors).unwrap_or_default() {
+            let named = |c: &IrConstant| self.named_scalar(c);
+            for next in b
+                .blocks
+                .get(at)
+                .map(|block| live_successors(block, &named))
+                .unwrap_or_default()
+            {
                 if !cleanup.contains(&next) && reached.insert(next) {
                     work.push(next);
                 }
@@ -4460,7 +4490,10 @@ pub(crate) fn has_row(path: &str) -> bool {
 /// local the block last sets to a constant (a `cfg!` or `const` condition,
 /// `_5 = const false; switchInt(move _5)`) goes only to that constant's
 /// arm, and every other terminator to its successors.
-fn live_successors(block: &crate::mir::ir::IrBlock) -> Vec<usize> {
+fn live_successors(
+    block: &crate::mir::ir::IrBlock,
+    named: &dyn Fn(&IrConstant) -> Option<i128>,
+) -> Vec<usize> {
     let IrTerminator::Switch(IrOperand::Copy(p) | IrOperand::Move(p), arms, otherwise) =
         &block.terminator
     else {
@@ -4477,7 +4510,7 @@ fn live_successors(block: &crate::mir::ir::IrBlock) -> Vec<usize> {
             match c {
                 IrConstant::Bool(b) => Some(i128::from(*b)),
                 IrConstant::Int(n, _) if *n >= 0 => Some(*n),
-                _ => None,
+                c => named(c),
             }
         }
         _ => None,
