@@ -1762,11 +1762,11 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
         },
         rs::Lit::Byte(b) if !negative => flat(b.to_string(), Ty::Nat(Some(8))),
         rs::Lit::ByteStr(b) if !negative => {
-            let mut list = "(nil Nat)".to_string();
-            for byte in b.iter().rev() {
-                list = format!("(cons {byte} {list})");
-            }
-            flat(list, Ty::List(Box::new(Ty::Nat(Some(8)))))
+            let bytes: Vec<String> = b.iter().map(u8::to_string).collect();
+            flat(
+                crate::embed::term_list(&bytes, "Nat"),
+                Ty::List(Box::new(Ty::Nat(Some(8)))),
+            )
         }
         _ => Err(Residue::Form("literal".to_string())),
     }
@@ -2444,10 +2444,9 @@ fn list_of(
             "an empty list of an unknown type".to_string(),
         ));
     };
-    let mut list = format!("(nil {})", elem.render());
-    for part in parts.iter().rev() {
-        list = format!("(cons {part} {list})");
-    }
+    // A literal can be as long as its author likes, and the linker reads a
+    // term to a bounded depth: the list is written as balanced halves.
+    let list = crate::embed::term_list(&parts, &elem.render());
     Ok(((Expr::Flat(list), Ty::List(Box::new(elem))), acc))
 }
 
@@ -2602,10 +2601,7 @@ fn format_macro(mac: &rs::ExprMacro, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((E
     }
     // Joining strings elaborates through propositional extensionality.
     let acc = acc.axiom("propext");
-    let mut list = "(nil String)".to_string();
-    for piece in pieces.iter().rev() {
-        list = format!("(cons {piece} {list})");
-    }
+    let list = crate::embed::term_list(&pieces, "String");
     Ok((
         (
             Expr::Flat(format!("(prim join {list} \"\" : String)")),
@@ -6938,7 +6934,13 @@ fn matched_row(
         return Err(Residue::Form("non-boolean guard".to_string()));
     }
     let ((then, tt), acc) = expr(e, env, &scope, acc, want)?;
-    let ((other, ot), acc) = compile(m.cols, m.rest, env, ctx, acc, Some(want.unwrap_or(&tt)))?;
+    // The rows after it are written inside this row's binders, which wrap
+    // the whole conditional: none of them may name one of these again.
+    let mut after = ctx.clone();
+    after
+        .hidden
+        .extend(lets.iter().map(|(name, _, _)| name.clone()));
+    let ((other, ot), acc) = compile(m.cols, m.rest, env, &after, acc, Some(want.unwrap_or(&tt)))?;
     if !tt.same(&ot) {
         return Err(Residue::Form("arms of different types".to_string()));
     }
@@ -11176,9 +11178,83 @@ mod tests {
         )
         .expect("lifts");
         assert!(
-            out.contains("(prim join (cons m (cons \"::\" (cons n (nil String)))) \"\" : String)"),
+            out.contains("(prim join (prim append (cons m (nil String)) (cons \"::\" (cons n (nil String))) : (List String)) \"\" : String)"),
             "{out}"
         );
+    }
+
+    #[test]
+    fn a_long_literal_is_balanced_halves() {
+        // The linker reads a term to a bounded depth, and a literal is as
+        // long as its author likes: no list nests one cell per element.
+        let items: Vec<String> = (0..300).map(|i| (i % 250).to_string()).collect();
+        let array = lift(
+            &format!("fn table() -> [u8; 300] {{ [{}] }}", items.join(", ")),
+            &plain(),
+        )
+        .expect("lifts");
+        let bytes = lift(
+            &format!("fn text() -> &'static [u8] {{ b\"{}\" }}", "ab".repeat(150)),
+            &plain(),
+        )
+        .expect("lifts");
+        let pieces = lift(
+            &format!(
+                "fn row(m: &str) -> String {{ format!(\"{}\") }}",
+                "{m}, ".repeat(150)
+            ),
+            &plain(),
+        )
+        .expect("lifts");
+        for out in [array, bytes, pieces] {
+            assert!(out.contains("(prim append "), "{out}");
+            let mut depth = 0usize;
+            let mut deepest = 0usize;
+            for c in out.chars() {
+                match c {
+                    '(' => {
+                        depth += 1;
+                        deepest = deepest.max(depth);
+                    }
+                    ')' => depth -= 1,
+                    _ => {}
+                }
+            }
+            assert!(deepest < 40, "nests {deepest} deep");
+        }
+    }
+
+    #[test]
+    fn a_guarded_row_and_the_rows_after_it_bind_distinct_names() {
+        // The guarded row's binders wrap the whole conditional, so the row
+        // after it, which binds the same Rust name to another part, is
+        // written inside them: a binder there of the same name shadows.
+        let out = lift(
+            "fn k(p: (u8, u8)) -> u8 { match p { (0, d) | (d, 0) if d > 5 => d, (1, d) if d > 7 => d, _ => 2 } }",
+            &plain(),
+        )
+        .expect("lifts");
+        let lets: Vec<usize> = out.match_indices("(let ").map(|(at, _)| at).collect();
+        assert!(lets.len() >= 2, "{out}");
+        for at in lets {
+            let name = out[at + 5..].split_whitespace().next().expect("a binder");
+            let mut depth = 0usize;
+            let end = out[at..]
+                .char_indices()
+                .find_map(|(i, c)| {
+                    match c {
+                        '(' => depth += 1,
+                        ')' => depth -= 1,
+                        _ => {}
+                    }
+                    (depth == 0).then_some(at + i)
+                })
+                .expect("a closed binder");
+            assert!(
+                !out[at + 5..end].contains(&format!("(let {name} ")),
+                "{name} is bound again inside its own scope: {out}"
+            );
+        }
     }
 
     #[test]

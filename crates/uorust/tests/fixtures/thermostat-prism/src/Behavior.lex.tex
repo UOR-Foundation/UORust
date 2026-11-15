@@ -815,7 +815,7 @@ definition{
   name: labelled,
   parameters: [value : String, unit : String],
   result: String,
-  body: (prim join (cons value (cons " " (cons unit (nil String)))) "" : String),
+  body: (prim join (prim append (cons value (nil String)) (cons " " (cons unit (nil String))) : (List String)) "" : String),
   axioms: [propext]
 }
 
@@ -1089,7 +1089,7 @@ definition{
   result: (List String),
   body: (match items1
     | List.nil => (nil String)
-    | List.cons pair1 rest1 => (let name : String := (project pair1 item0); (let reading : Int64 := (project pair1 item1); (cons (prim join (cons name (cons "=" (cons (prim format_decimal reading : String) (nil String)))) "" : String) (pairsMap1 rest1))))),
+    | List.cons pair1 rest1 => (let name : String := (project pair1 item0); (let reading : Int64 := (project pair1 item1); (cons (prim join (prim append (cons name (nil String)) (cons "=" (cons (prim format_decimal reading : String) (nil String))) : (List String)) "" : String) (pairsMap1 rest1))))),
   axioms: [Classical.choice, Quot.sound, propext],
   recursive_argument: items1
 }
@@ -1414,7 +1414,7 @@ definition{
   name: positions,
   parameters: [],
   result: (List String),
-  body: (cons "first" (cons "second" (cons "later" (nil String))))
+  body: (prim append (cons "first" (nil String)) (cons "second" (cons "later" (nil String))) : (List String))
 }
 
 definition{
@@ -2726,7 +2726,7 @@ definition{
   result: (List String),
   body: (match items1
     | List.nil => state1
-    | List.cons phase rest1 => (let lines1 : (List String) := (prim append state1 (cons (prim join (cons (field_Phase_label phase) (cons ": " (cons (Prelude::natDecimal (hasLinePart1 phase)) (nil String)))) "" : String) (nil String)) : (List String)); (hasLineLoop1 rest1 lines1))),
+    | List.cons phase rest1 => (let lines1 : (List String) := (prim append state1 (cons (prim join (prim append (cons (field_Phase_label phase) (nil String)) (cons ": " (cons (Prelude::natDecimal (hasLinePart1 phase)) (nil String))) : (List String)) "" : String) (nil String)) : (List String)); (hasLineLoop1 rest1 lines1))),
   axioms: [Quot.sound, propext],
   recursive_argument: items1
 }
@@ -2801,7 +2801,7 @@ definition{
   result: (List String),
   body: (match items2
     | List.nil => state1
-    | List.cons pair1 rest2 => (let i : Nat := (project pair1 item0); (let room : Room := (project pair1 item1); (let out1 : (List String) := (prim append state1 (cons (prim join (cons (numberedPart1 i) (cons ":" (cons (project room name) (nil String)))) "" : String) (nil String)) : (List String)); (numberedLoop1 rest2 out1))))),
+    | List.cons pair1 rest2 => (let i : Nat := (project pair1 item0); (let room : Room := (project pair1 item1); (let out1 : (List String) := (prim append state1 (cons (prim join (prim append (cons (numberedPart1 i) (nil String)) (cons ":" (cons (project room name) (nil String))) : (List String)) "" : String) (nil String)) : (List String)); (numberedLoop1 rest2 out1))))),
   axioms: [propext],
   recursive_argument: items2
 }
@@ -2827,7 +2827,7 @@ definition{
   name: describe,
   parameters: [phase : Phase],
   result: String,
-  body: (let target : Nat := (describePart1 phase); (let sequence : Bool := (isSequence (field_Phase_step phase)); (prim join (cons (field_Phase_label phase) (cons ": " (cons (Prelude::natDecimal target) (cons (heldUnit) (cons " (sequence: " (cons (if sequence then "true" else "false") (cons ")" (nil String)))))))) "" : String))),
+  body: (let target : Nat := (describePart1 phase); (let sequence : Bool := (isSequence (field_Phase_step phase)); (prim join (prim append (cons (field_Phase_label phase) (cons ": " (cons (Prelude::natDecimal target) (nil String)))) (prim append (cons (heldUnit) (cons " (sequence: " (nil String))) (cons (if sequence then "true" else "false") (cons ")" (nil String))) : (List String)) : (List String)) "" : String))),
   axioms: [Quot.sound, propext]
 }
 

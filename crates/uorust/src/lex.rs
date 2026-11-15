@@ -565,13 +565,13 @@ pub(crate) fn escape(text: &str) -> String {
     out
 }
 
-/// `(cons "a" (cons "b" (nil String)))`.
+/// The list of the strings `items`: `(cons "a" (cons "b" (nil String)))`,
+/// and a long one as balanced halves ([`crate::embed::term_list`]), since a
+/// feature lists every call and acceptance row of its module and the linker
+/// reads a term to a bounded depth.
 pub(crate) fn string_list(items: &[String]) -> String {
-    let mut out = "(nil String)".to_string();
-    for item in items.iter().rev() {
-        out = format!("(cons {} {out})", string(item));
-    }
-    out
+    let quoted: Vec<String> = items.iter().map(|item| string(item)).collect();
+    crate::embed::term_list(&quoted, "String")
 }
 
 /// `lowerCamel` from any Rust or Cargo name: `thermo-core::should_heat` ->
