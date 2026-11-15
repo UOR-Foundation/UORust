@@ -638,7 +638,7 @@ fn source(ty: &str, krate: &str) -> String {
 
 /// The file of the module `module` (a path of `src`'s modules), or of the
 /// nearest module above it that has one.
-fn module_file(src: &Path, module: &[&str]) -> PathBuf {
+pub(crate) fn module_file(src: &Path, module: &[&str]) -> PathBuf {
     for n in (1..=module.len()).rev() {
         let dir: PathBuf = module[..n].iter().collect();
         for f in [

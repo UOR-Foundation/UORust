@@ -290,6 +290,12 @@ struct CrateArgs {
     /// register stamped with its embedding.
     #[arg(long)]
     library: Option<PathBuf>,
+    /// With `--library`, check the embedding against rustc's build of the
+    /// crate: each of its functions over scalars run by both, a theorem per
+    /// case that the evaluator returns what the build did, which `lexlean
+    /// verify` decides; each sampled row is stamped with its theorems.
+    #[arg(long, requires = "library")]
+    differential: bool,
 }
 
 #[derive(clap::Args)]
@@ -450,6 +456,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     observed: args.observed.as_deref(),
                     register: args.register.as_deref(),
                     bridge: args.shallow.as_deref().zip(args.bridge.as_deref()),
+                    differential: None,
                 },
             )?;
             println!(
@@ -464,8 +471,13 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         Command::Crate(args) => {
             let (name, version) = uorust::registry::parse_spec(&args.spec)?;
             let register = args.registers.join(&name);
-            let lifted =
-                uorust::registry::lift_crate(&name, &version, &register, args.library.as_deref())?;
+            let lifted = uorust::registry::lift_crate(
+                &name,
+                &version,
+                &register,
+                args.library.as_deref(),
+                args.differential,
+            )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
                 lifted.translated,
@@ -476,6 +488,11 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             if let Some((bodies, evaluable)) = lifted.embedding {
                 println!(
                     "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable"
+                );
+            }
+            if let Some((bodies, theorems)) = lifted.differential {
+                println!(
+                    "{name}@{version}: {theorems} differential theorems verified over {bodies} bodies"
                 );
             }
             Ok(())

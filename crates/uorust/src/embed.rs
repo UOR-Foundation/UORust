@@ -3784,6 +3784,7 @@ pub fn embed_with(
         observed,
         register,
         bridge,
+        differential: alone,
     } = *outputs;
     let root = library.parent().unwrap_or(library);
     let (modules, census, program) = embed_census(krate, builds_on, root, dumps, only)?;
@@ -3807,6 +3808,14 @@ pub fn embed_with(
         index = Some(checks);
     }
     extra.insert("src/MirLemmas.lex.tex".into(), LEMMAS.as_bytes().to_vec());
+    // The differential check's modules on their own: each holds the
+    // bodies its theorems run, so a project of them and the evaluator
+    // verifies the check apart from the rest of the embedding.
+    if let (Some(dir), Some(checks)) = (alone, index.as_ref()) {
+        let mut files = embed_project(krate, &[], extra.clone(), crate::project::MAX_FILE_BYTES);
+        files.insert("differential.toml".into(), checks.clone().into_bytes());
+        replace_dir(dir, Some(&files))?;
+    }
     let mut files = embed_project(krate, &modules, extra, crate::project::MAX_FILE_BYTES);
     files.insert("census.toml".into(), census.render().into_bytes());
     if let Some(checks) = index {
@@ -3818,7 +3827,9 @@ pub fn embed_with(
     }
     // A module none of whose bodies is sampled has no harness.
     if let Some(dir) = harness {
-        let crate_files = (!program.samples.is_empty()).then(|| harness_crate(&program));
+        let of_crates_io = !["core", "alloc", "std"].contains(&krate);
+        let crate_files = (!program.samples.is_empty())
+            .then(|| harness_crate(&program, of_crates_io.then_some(krate)));
         replace_dir(dir, crate_files.as_ref())?;
     }
     Ok(census)
@@ -3838,6 +3849,9 @@ pub struct Outputs<'a> {
     /// The shallow translations `uorust core --lexlean` wrote, and the
     /// directory the bridge's project is written to (`crate::bridge`).
     pub bridge: Option<(&'a Path, &'a Path)>,
+    /// Where the differential check's modules are written as a project of
+    /// their own, beside the evaluator, with their index.
+    pub differential: Option<&'a Path>,
 }
 
 /// A register's module file with each row's embedding stamped on it by
@@ -4054,6 +4068,10 @@ pub(crate) struct Sample {
     params: Vec<(String, Sampled)>,
     result: (String, Sampled),
     closure: Vec<String>,
+    /// For a body of a crate of crates.io, the module its call is written
+    /// in: a harness outside the crate calls it through a wrapper there
+    /// ([`harness_crate`]), where its private items are seen.
+    home: Option<Vec<String>>,
 }
 
 impl Sample {
@@ -4108,6 +4126,66 @@ fn sample(
         params,
         result,
         closure: Vec::new(),
+        home: None,
+    })
+}
+
+/// The body `b` of a crate of crates.io, dumped to the file of stem
+/// `stem`, as a sample, where it is a safe function of the crate over
+/// scalars: an item its module path names from `crate::`, which a wrapper
+/// the harness writes in the module that declares it calls (a wrapper
+/// rustc refuses is left out). MIR prints a path trimmed to what tells it
+/// apart (`has_zero_byte` for `arch::all::memchr::has_zero_byte`); its dump's
+/// file is named by the whole of it, `<crate>.arch-all-memchr-has_zero_byte`,
+/// a method's with its impl's `{impl#k}`, which no source path names.
+fn crate_sample(
+    stem: &str,
+    src: &Path,
+    b: &IrBody,
+    key: &str,
+    kappa: &str,
+    width: u32,
+    floats: &BTreeMap<String, crate::mir::float::Format>,
+) -> Option<Sample> {
+    let segments: Vec<&str> = stem.split_once('.')?.1.split('-').collect();
+    let ident = |s: &&str| {
+        s.chars()
+            .next()
+            .is_some_and(|c| c.is_alphabetic() || c == '_')
+            && s.chars().all(|c| c.is_alphanumeric() || c == '_')
+            && *s != "_"
+    };
+    if segments.is_empty() || !segments.iter().all(ident) {
+        return None;
+    }
+    let (name, above) = segments.split_last()?;
+    if crate::mir::parse::split_path(&b.path).last() != Some(name) {
+        return None;
+    }
+    let scalar = |i: usize| {
+        let t = b.locals.get(i)?;
+        Some((t.clone(), Sampled::of(t, width, floats)?))
+    };
+    let params: Vec<(String, Sampled)> = (1..=b.arity).map(scalar).collect::<Option<_>>()?;
+    let result = scalar(0)?;
+    if params.is_empty() {
+        return None;
+    }
+    // Declared in its module's file, and not `unsafe`: a harness calls it
+    // on any input.
+    let file = read_text(&crate::layouts::module_file(src, above)).ok()?;
+    let decl = format!("fn {name}(");
+    if !file.contains(&decl) || file.contains(&format!("unsafe fn {name}(")) {
+        return None;
+    }
+    Some(Sample {
+        key: key.to_string(),
+        kappa: kappa.to_string(),
+        function: format!("crate::{}", segments.join("::")),
+        params,
+        result,
+        closure: Vec::new(),
+        home: Some(above.iter().map(|s| s.to_string()).collect()),
     })
 }
 
@@ -4237,16 +4315,70 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Option<Ve
 /// The harness crate: one call per case, under `catch_unwind`, each
 /// printed as `<case> <result>` with an integer as its two's complement
 /// bits, after a first line with the build's checks.
-fn harness_crate(program: &Program) -> BTreeMap<String, Vec<u8>> {
+///
+/// For a crate of crates.io (`krate`), whose functions are mostly private,
+/// each sample is called through a wrapper `__uorust_differential_<k>`,
+/// unmangled, that `wrappers.json` asks to be written into the crate's
+/// copy at `../harness-crate` (beside the harness, outside its workspace,
+/// as a crate that declares a workspace of its own must be), in the module
+/// of its function, where its private items
+/// are seen; the harness depends on that copy. Each sample's calls stand
+/// between `// sample <k>` and `// unbuilt <k>`, and the lines from there to
+/// `// end <k>`, commented out, print each of its cases `unbuilt`: where
+/// rustc refuses the wrapper, those are the lines kept
+/// ([`crate::registry`]).
+fn harness_crate(program: &Program, krate: Option<&str>) -> BTreeMap<String, Vec<u8>> {
     let mut main = String::from(
         "// Written by `uorust embed --harness`; do not edit.\n\
-         #![allow(unused_parens)]\n\
-         fn main() {\n    std::panic::set_hook(Box::new(|_| {}));\n    \
+         #![allow(unused_parens)]\n",
+    );
+    if let Some(k) = krate {
+        let _ = writeln!(main, "use {} as _;", k.replace('-', "_"));
+    }
+    main.push_str(
+        "fn main() {\n    std::panic::set_hook(Box::new(|_| {}));\n    \
          let overflow = std::panic::catch_unwind(|| std::hint::black_box(u8::MAX) + 1).is_err();\n    \
          println!(\"checks {} {}\", cfg!(debug_assertions), overflow);\n",
     );
+    let mut wrappers = Vec::new();
     let mut case = 0usize;
-    for s in &program.samples {
+    for (k, s) in program.samples.iter().enumerate() {
+        let show = match s.result.1 {
+            Sampled::Bool => "r.to_string()".to_string(),
+            Sampled::Int(..) => {
+                format!("((r as {}) as u128).to_string()", unsigned(&s.result.0))
+            }
+            Sampled::Float(..) => "r.to_bits().to_string()".to_string(),
+        };
+        let callee = match (&s.home, krate) {
+            (Some(home), Some(_)) => {
+                let wrapper = format!("__uorust_differential_{k}");
+                let names: Vec<String> = (0..s.params.len()).map(|i| format!("a{i}")).collect();
+                let typed: Vec<String> = names
+                    .iter()
+                    .zip(&s.params)
+                    .map(|(n, (t, _))| format!("{n}: {t}"))
+                    .collect();
+                let signature = format!("fn {wrapper}({}) -> {}", typed.join(", "), s.result.0);
+                wrappers.push(serde_json::json!({
+                    "sample": k,
+                    "module": home,
+                    "code": format!(
+                        "#[doc(hidden)] #[allow(warnings)] #[unsafe(no_mangle)] pub extern \"Rust\" {signature} {{ {}({}) }}",
+                        s.function,
+                        names.join(", ")
+                    ),
+                }));
+                let _ = writeln!(
+                    main,
+                    "    // sample {k}\n    extern \"Rust\" {{ {signature}; }}"
+                );
+                wrapper
+            }
+            _ => s.function.clone(),
+        };
+        let wrapped = krate.is_some() && s.home.is_some();
+        let first = case;
         for inputs in s.cases() {
             let args: Vec<String> = s
                 .params
@@ -4254,34 +4386,47 @@ fn harness_crate(program: &Program) -> BTreeMap<String, Vec<u8>> {
                 .zip(&inputs)
                 .map(|((printed, scalar), x)| scalar.rust(printed, *x))
                 .collect();
-            let show = match s.result.1 {
-                Sampled::Bool => "r.to_string()".to_string(),
-                Sampled::Int(..) => {
-                    format!("((r as {}) as u128).to_string()", unsigned(&s.result.0))
-                }
-                Sampled::Float(..) => "r.to_bits().to_string()".to_string(),
+            let call = if wrapped {
+                format!("unsafe {{ {callee}({}) }}", args.join(", "))
+            } else {
+                format!("{callee}({})", args.join(", "))
             };
             let _ = write!(
                 main,
-                "    match std::panic::catch_unwind(|| {}({})) {{\n        \
+                "    match std::panic::catch_unwind(|| {call}) {{\n        \
                  Ok(r) => println!(\"{case} {{}}\", {show}),\n        \
                  Err(_) => println!(\"{case} panic\"),\n    }}\n",
-                s.function,
-                args.join(", ")
             );
             case += 1;
         }
+        if wrapped {
+            let _ = writeln!(main, "    // unbuilt {k}");
+            for c in first..case {
+                let _ = writeln!(main, "    // println!(\"{c} unbuilt\");");
+            }
+            let _ = writeln!(main, "    // end {k}");
+        }
     }
     main.push_str("}\n");
-    BTreeMap::from([
+    let dependency = match krate {
+        Some(k) => format!("\n[dependencies]\n{k} = {{ path = \"../harness-crate\" }}\n"),
+        None => String::new(),
+    };
+    let mut files = BTreeMap::from([
         (
             "Cargo.toml".to_string(),
-            "[package]\nname = \"uorust-embed-harness\"\nversion = \"0.1.0\"\nedition = \"2021\"\npublish = false\n\n[workspace]\n"
-                .as_bytes()
-                .to_vec(),
+            format!("[package]\nname = \"uorust-embed-harness\"\nversion = \"0.1.0\"\nedition = \"2021\"\npublish = false\n{dependency}\n[workspace]\n")
+                .into_bytes(),
         ),
         ("src/main.rs".to_string(), main.into_bytes()),
-    ])
+    ]);
+    if krate.is_some() {
+        files.insert(
+            "wrappers.json".to_string(),
+            serde_json::to_vec_pretty(&wrappers).unwrap_or_default(),
+        );
+    }
+    files
 }
 
 /// The steps a run of a sample takes at most: each statement and
@@ -4372,7 +4517,9 @@ fn differential(
             let Some(result) = results.get(&(first + i)) else {
                 return Err(bad(format!("no result for case {}", first + i)));
             };
-            if *result == "panic" {
+            // A panic is no value to compare, and an unbuilt case (a
+            // wrapper rustc refused) no run.
+            if *result == "panic" || *result == "unbuilt" {
                 continue;
             }
             let expected = match s.result.1 {
@@ -4392,8 +4539,9 @@ fn differential(
             let theorem = format!("t{name}x{i}");
             let _ = write!(
                 index,
-                "\n[[case]]\ntheorem = \"{theorem}\"\nbody = {}\nfunction = \"{}\"\ninputs = [{}]\nreturned = \"{result}\"\n",
+                "\n[[case]]\ntheorem = \"{theorem}\"\nbody = {}\nkappa = \"{}\"\nfunction = \"{}\"\ninputs = [{}]\nreturned = \"{result}\"\n",
                 census_string(&s.key),
+                s.kappa,
                 s.function,
                 inputs.iter().map(u128::to_string).collect::<Vec<_>>().join(", ")
             );
@@ -4993,6 +5141,9 @@ fn embed_census(
     let mut samples = Vec::new();
     let mut signatures = BTreeMap::new();
     let src = library_root(root).join(krate).join("src");
+    // Core's, alloc's and std's samples are their primitives' methods; a
+    // crate of crates.io's are its own functions over scalars.
+    let of_library = ["core", "alloc", "std"].contains(&krate);
     let statics = statics(&link);
     let globals = global_statics(&link);
     let static_allocs: BTreeMap<String, String> = read
@@ -5096,7 +5247,12 @@ fn embed_census(
                             b.locals.iter().take(b.arity + 1).cloned().collect(),
                         ),
                     );
-                    if let Some(sample) = sample(root, &src, &b, &key, &kappa, width, &floats) {
+                    let sampled = if of_library {
+                        sample(root, &src, &b, &key, &kappa, width, &floats)
+                    } else {
+                        crate_sample(stem, &src, &b, &key, &kappa, width, &floats)
+                    };
+                    if let Some(sample) = sampled {
                         samples.push(sample);
                     }
                 }
