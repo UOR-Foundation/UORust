@@ -5498,12 +5498,17 @@ fn nesting(ty: &str) -> usize {
 /// fixpoint, bounded by the deepest type the program prints: no instance
 /// nests deeper. A slot no binding fixes is `Generic.unknown`, which the
 /// evaluator answers as undefined.
+/// Each call's token written as its callee at its instance's generics,
+/// the layouts no instance reads, and each body's slots, its own and those
+/// its callees leave to it. A call into a library linked into the program
+/// (`linked`, by name) is bound by that library's link.
 fn instances(
     cx: &Cx<'_>,
     link: &crate::mir::link::CoreLink,
+    linked: &[(&str, &crate::mir::link::CoreLink)],
     every: &BTreeMap<String, (String, Embedded)>,
     others: &[&Embedded],
-) -> (BTreeMap<String, String>, BTreeSet<String>) {
+) -> Instances {
     let mut unread = BTreeSet::new();
     let deepest = link
         .locals
@@ -5520,11 +5525,21 @@ fn instances(
         bindings
             .entry(site.token.clone())
             .or_insert_with(|| {
+                // A call into a linked library is bound as its link binds
+                // the call, its name aside.
+                let (link, text) = linked
+                    .iter()
+                    .find_map(|(k, l)| {
+                        let rest = site.text.strip_prefix(&format!("{k}::"))?;
+                        site.callee
+                            .starts_with(&format!("{k}::"))
+                            .then_some((*l, rest))
+                    })
+                    .unwrap_or((link, site.text.as_str()));
                 let bound = if !site.constant {
-                    link.instance(&site.text, &site.args, &site.dest)
-                        .map(|i| i.bound)
-                } else if site.text.starts_with('<') {
-                    link.constant(&site.text).map(|i| i.bound)
+                    link.instance(text, &site.args, &site.dest).map(|i| i.bound)
+                } else if text.starts_with('<') {
+                    link.constant(text).map(|i| i.bound)
                 } else {
                     None
                 };
@@ -5641,8 +5656,15 @@ fn instances(
             out.insert(site.token.clone(), term);
         }
     }
-    (out, unread)
+    (out, unread, slots)
 }
+
+/// [`instances`]' answer.
+type Instances = (
+    BTreeMap<String, String>,
+    BTreeSet<String>,
+    BTreeMap<String, Vec<Slot>>,
+);
 
 /// A body's term with each call's token written as its callee.
 fn write_callees(term: &str, callees: &BTreeMap<String, String>) -> String {
@@ -6147,9 +6169,16 @@ fn embed_linked(
             .iter()
             .flat_map(|(_, bodies)| bodies.iter().map(|(_, e)| e))
             .collect();
-        let (callees, found) = instances(&cx, &link, &every, &others);
-        for (_, e) in every.values_mut() {
+        let links: Vec<(&str, &crate::mir::link::CoreLink)> =
+            linked.iter().map(|l| (l.krate.as_str(), &l.link)).collect();
+        let (callees, found, slots) = instances(&cx, &link, &links, &every, &others);
+        for (k, (_, e)) in every.iter_mut() {
             e.term = write_callees(&e.term, &callees);
+            // Its slots with those its callees leave it: a caller in a
+            // program this one is linked into supplies them all.
+            if let Some(s) = slots.get(k) {
+                e.slots = s.clone();
+            }
         }
         for (_, bodies) in &mut modules {
             for (_, e) in bodies.iter_mut() {
