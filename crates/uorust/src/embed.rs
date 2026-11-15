@@ -224,6 +224,19 @@ fn nearest(statics: &BTreeSet<String>, printed: &str, owner: &str) -> Option<Str
     }
 }
 
+/// [`nearest`], or, for a static an impl's method declares, which MIR
+/// prints through the impl's type (`pool::Pool::<T, F>::f::X`) and dumps
+/// through the impl (`pool::<impl at ..>::f::X`), the static the longest
+/// tail of that path past the type names.
+fn nearest_static(statics: &BTreeSet<String>, printed: &str, owner: &str) -> Option<String> {
+    if let Some(p) = nearest(statics, printed, owner) {
+        return Some(p);
+    }
+    let segments = crate::mir::parse::split_path(printed);
+    (1..segments.len().saturating_sub(1))
+        .find_map(|n| nearest(statics, &segments[n..].join("::"), owner))
+}
+
 /// The path a dump's first line names its body by (`// MIR for `a::b``).
 fn dumped_path(text: &str) -> Option<&str> {
     text.lines()
@@ -937,6 +950,85 @@ pub(crate) fn int_ty(printed: &str, width: u32) -> Option<(u32, bool)> {
         .ok()
         .filter(|b| *b > 0)
         .map(|b| (b, signed))
+}
+
+/// An `asm!` terminator as a call the dictionary answers.
+#[derive(Clone, Debug, PartialEq)]
+struct InlineAsm {
+    /// The assembly with its operands' kinds and registers and its
+    /// options, the operands themselves left out: `asm!("syscall",
+    /// inlateout("ax"), in("di"), lateout("cx"), options(NOSTACK))`.
+    name: String,
+    /// The operands it reads, in order.
+    inputs: Vec<IrOperand>,
+    /// The one place it writes.
+    output: IrPlace,
+    /// Where control goes after it (none for `noreturn`).
+    target: Option<usize>,
+}
+
+/// The `asm!` terminator `text` prints, where its operands are registers'
+/// inputs and outputs and it writes one place: a `const` or `sym` operand,
+/// or several outputs, is none.
+fn inline_asm(text: &str) -> Option<InlineAsm> {
+    let (call, edges) = match text.rfind(" -> ") {
+        Some(at) => (&text[..at], Some(&text[at + 4..])),
+        None => (text, None),
+    };
+    let inner = call.trim().strip_prefix("asm!(")?.strip_suffix(')')?;
+    // `=>`, an inout's output, is no closing bracket to the split.
+    const INTO: &str = " \u{21d2} ";
+    let inner = inner.replace(" => ", INTO);
+    let mut name = Vec::new();
+    let mut inputs = Vec::new();
+    let mut outputs = Vec::new();
+    let mut noreturn = false;
+    for part in crate::mir::parse::split_top(&inner, ',') {
+        let part = part.trim();
+        if part.starts_with('"') || part.starts_with("options(") || part.starts_with("clobber_abi(")
+        {
+            noreturn |= part.starts_with("options(") && part.contains("NORETURN");
+            name.push(part.to_string());
+            continue;
+        }
+        let (spec, rest) = part.split_once(") ")?;
+        let (kind, _) = spec.split_once('(')?;
+        name.push(format!("{spec})"));
+        let (read, written) = match kind {
+            "in" => (Some(rest), None),
+            "out" | "lateout" => (None, Some(rest)),
+            "inout" | "inlateout" => match rest.split_once(INTO) {
+                Some((i, o)) => (Some(i), Some(o)),
+                None => (Some(rest), Some(rest)),
+            },
+            _ => return None,
+        };
+        if let Some(i) = read {
+            inputs.push(crate::mir::parse::operand(i.trim())?);
+        }
+        match written.map(str::trim) {
+            Some("_") | None => {}
+            Some(o) => outputs.push(crate::mir::parse::place(o)?),
+        }
+    }
+    let [output] = <[IrPlace; 1]>::try_from(outputs).ok()?;
+    let target = match edges {
+        _ if noreturn => None,
+        Some(edges) => {
+            let inner = edges.trim().strip_prefix('[')?.strip_suffix(']')?;
+            let ret = crate::mir::parse::split_top(inner, ',')
+                .into_iter()
+                .find_map(|e| e.trim().strip_prefix("return: bb")?.parse().ok());
+            Some(ret.or_else(|| edges.trim().strip_prefix("bb")?.parse().ok())?)
+        }
+        None => None,
+    };
+    Some(InlineAsm {
+        name: format!("asm!({})", name.join(", ")),
+        inputs,
+        output,
+        target,
+    })
 }
 
 /// The integer a constant of a pattern type prints, `65536_i32 is (..)`:
@@ -3161,16 +3253,50 @@ impl Cx<'_> {
                     ),
                 )
             }
-            IrTerminator::Other(k, text) => {
-                e.blocked.insert(k.path().to_string());
-                (
-                    *k,
-                    mir_ctor(
-                        "Terminator.other",
-                        &[mir_string(k.path()), mir_string(text)],
-                    ),
-                )
-            }
+            // Inline assembly is the platform's, outside the abstract
+            // machine: a call the program leaves to its dictionary, as a
+            // foreign function and `va_arg` are, named by the assembly and
+            // its operands' registers, with its inputs as arguments and its
+            // one output as the result; it stops unlinked without it.
+            IrTerminator::Other(k, text) => match (k, inline_asm(text)) {
+                // Inline assembly is the platform's, outside the abstract
+                // machine: a call the program leaves to its dictionary, as
+                // a foreign function and `va_arg` are, named by the
+                // assembly and its operands' registers, with its inputs as
+                // arguments and its one output as the result; it stops
+                // unlinked without it.
+                (spec::MirTerminatorKind::InlineAsm, Some(asm)) => {
+                    e.bound.insert(asm.name.clone());
+                    let target = match asm.target {
+                        Some(b) => format!("(ctor Option.some [Nat] {b})"),
+                        None => "(ctor Option.none [Nat])".to_string(),
+                    };
+                    let destination = self.place(&asm.output, e);
+                    let args = self.operands(&asm.inputs, e);
+                    (
+                        T::Call,
+                        mir_ctor(
+                            "Terminator.call",
+                            &[
+                                destination,
+                                mir_ctor("Callee.bound", &[mir_string(&asm.name)]),
+                                args,
+                                target,
+                            ],
+                        ),
+                    )
+                }
+                _ => {
+                    e.blocked.insert(k.path().to_string());
+                    (
+                        *k,
+                        mir_ctor(
+                            "Terminator.other",
+                            &[mir_string(k.path()), mir_string(text)],
+                        ),
+                    )
+                }
+            },
         };
         e.uses.insert(kind.path().to_string());
         term
@@ -4827,8 +4953,13 @@ fn embed_census(
                 return Some((alloc.trim().to_string(), named.to_string()));
             }
             let (alloc, rest) = l.split_once(" (static: ")?;
-            let named = rest.split([',', ')']).next()?.trim();
-            nearest(&statics, named, owner).map(|p| (alloc.trim().to_string(), p))
+            // The path ends at the allocation's size, past any comma of
+            // its generic arguments (`Pool::<T, F>::f::X`).
+            let named = rest
+                .split_once(", size: ")
+                .map_or_else(|| rest.split([',', ')']).next(), |(n, _)| Some(n))?
+                .trim();
+            nearest_static(&statics, named, owner).map(|p| (alloc.trim().to_string(), p))
         })
         .collect();
     let externs: BTreeSet<String> = read
@@ -5012,6 +5143,21 @@ fn embed_census(
 mod tests {
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
+    #[test]
+    fn inline_assembly_is_a_call_its_dictionary_answers() {
+        let asm = inline_asm("asm!(\"syscall\", inlateout(\"ax\") move _9 => _7, in(\"di\") move _11, lateout(\"cx\") _, options(PRESERVES_FLAGS | NOSTACK)) -> [return: bb1, unwind unreachable]")
+            .expect("a syscall");
+        assert_eq!(
+            asm.name,
+            "asm!(\"syscall\", inlateout(\"ax\"), in(\"di\"), lateout(\"cx\"), options(PRESERVES_FLAGS | NOSTACK))"
+        );
+        assert_eq!(asm.inputs.len(), 2);
+        assert_eq!(asm.output.local, 7);
+        assert_eq!(asm.target, Some(1));
+        assert!(inline_asm("asm!(\"\", const 1_i32, out(reg) _1) -> bb1").is_none());
+        assert!(inline_asm("asm!(\"\", out(reg) _1, out(reg) _2) -> bb1").is_none());
+    }
+
     #[test]
     fn a_pattern_constant_is_its_base_integer() {
         assert_eq!(
