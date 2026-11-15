@@ -746,7 +746,7 @@ fn dumped_types(dumps: &Path) -> Result<BTreeSet<String>, UorustError> {
         .filter(|p| p.is_dir())
     {
         for file in crate::embed::dir_paths(&dir)? {
-            let text = crate::embed::read_text(&file)?;
+            let text = crate::embed::read_plain_dump(&file)?;
             for line in text.lines() {
                 let l = line.trim();
                 if let Some(decl) = l.strip_prefix("let ") {

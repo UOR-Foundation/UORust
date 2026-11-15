@@ -12,7 +12,7 @@ dir=$(cd "$1" && pwd)
 out=$2
 channel=$(sed -n 's/^channel = "\(.*\)"/\1/p' "$root/rust-toolchain.toml")
 cache="$root/target/rust-src-$channel"
-flags=$(sed -n 's/.*RUSTFLAGS="-Zdump-mir=[^ ]* -Zdump-mir-dir=[^ ]* \(-C[^"]*\)".*/\1/p' "$root/scripts/mir/dump-lib.sh")
+flags=$(sed -n 's/.*RUSTFLAGS="[^"]*-Zdump-mir-dir=[^ ]* \(-C[^"]*\)".*/\1/p' "$root/scripts/mir/dump-lib.sh")
 if [ -z "$flags" ]; then
   echo "harness: scripts/mir/dump-lib.sh names no codegen flags to build core with" >&2
   exit 1
