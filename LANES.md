@@ -25,5 +25,8 @@ queue from the files below and needs no other brief.
   that commit is the one gated and released.
 - Don't run `uorust mir .` locally; CI owns the dumps (`scripts/mir/fetch-mir.sh`
   fetches them).
+- In hand-written `.lex.tex` sources, write a list of more than a few records
+  as balanced `prim append` halves (as `embed.rs` `term_list` does), not one
+  nested cons chain: the pinned SDK's linker has a nesting bound (LLP2001).
 - Push few, large commits. Report: commits, blocked counts from CI before and
   after, what is left.
