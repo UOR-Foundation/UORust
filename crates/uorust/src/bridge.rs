@@ -140,6 +140,8 @@ enum BridgeShape {
     Ref(Box<BridgeShape>),
     Option(Box<BridgeShape>),
     Result(Box<BridgeShape>, Box<BridgeShape>),
+    /// `core::cmp::Ordering`, which the evaluator's comparisons return.
+    Ordering,
 }
 
 impl BridgeShape {
@@ -161,6 +163,9 @@ impl BridgeShape {
         if let Some((bits, signed)) = crate::embed::int_ty(printed, width) {
             return Some(Self::Int(bits, signed));
         }
+        if printed.ends_with("cmp::Ordering") {
+            return Some(Self::Ordering);
+        }
         let (head, args) = printed.strip_suffix('>')?.split_once('<')?;
         let args = top_level(args, ',');
         match (head.rsplit("::").next()?, &args[..]) {
@@ -173,19 +178,22 @@ impl BridgeShape {
         }
     }
 
-    /// The shallow type the MIR path lowers this shape to.
-    /// Whether the parameter is a Boolean, or a reference to one, whose
-    /// two values a proof takes as cases.
-    fn is_boolean(&self) -> bool {
+    /// The constructors of a parameter a proof takes as cases, each as the
+    /// shallow type names it: a Boolean's, an `Ordering`'s, or those of
+    /// the referent of a reference to one.
+    fn constructors(&self) -> Option<&'static [&'static str]> {
         match self {
-            Self::Bool => true,
-            Self::Ref(a) => a.is_boolean(),
-            _ => false,
+            Self::Bool => Some(&["\"false\"", "\"true\""]),
+            Self::Ordering => Some(&["Less", "Equal", "Greater"]),
+            Self::Ref(a) => a.constructors(),
+            _ => None,
         }
     }
 
+    /// The shallow type the MIR path lowers this shape to.
     fn shallow(&self) -> String {
         match self {
+            Self::Ordering => "CmpOrdering".into(),
             Self::Bool => "Bool".into(),
             Self::Int(..) | Self::Char => "Nat".into(),
             Self::Unit => "Unit".into(),
@@ -205,6 +213,7 @@ impl BridgeShape {
             Self::Ref(a) => format!("Ref{}", a.mangle()),
             Self::Option(a) => format!("Option{}", a.mangle()),
             Self::Result(a, e) => format!("Result{}{}", a.mangle(), e.mangle()),
+            Self::Ordering => "Ordering".into(),
         }
     }
 
@@ -220,7 +229,7 @@ impl BridgeShape {
             Self::Char => mir_ctor("Value.character", &[t.to_string()]),
             Self::Unit => mir_ctor("Value.tuple", &[format!("(nil {})", mir_name("Value"))]),
             Self::Ref(a) => mir_ctor("Value.reference", &[a.encode(t, encoders)]),
-            Self::Option(_) | Self::Result(..) => {
+            Self::Option(_) | Self::Result(..) | Self::Ordering => {
                 let name = format!("bridgeEnc{}", self.mangle());
                 if !encoders.contains_key(&name) {
                     let def = self.encoder(&name, encoders);
@@ -234,7 +243,7 @@ impl BridgeShape {
     /// The definition of an enum shape's encoder, `name`: each variant the
     /// evaluator's value of it, by its discriminant.
     fn encoder(&self, name: &str, encoders: &mut BTreeMap<String, String>) -> String {
-        let variant = |v: &str, d: u32, field: Option<String>| {
+        let variant = |v: &str, d: i32, field: Option<String>| {
             let fields = match field {
                 Some(f) => format!("(cons {f} (nil {}))", mir_name("Value")),
                 None => format!("(nil {})", mir_name("Value")),
@@ -244,8 +253,10 @@ impl BridgeShape {
                 &[
                     format!("\"{v}\""),
                     format!(
-                        "(record {} {{negative := false, magnitude := {d}}})",
-                        mir_name("Signed")
+                        "(record {} {{negative := {}, magnitude := {}}})",
+                        mir_name("Signed"),
+                        d < 0,
+                        d.unsigned_abs()
                     ),
                     fields,
                 ],
@@ -261,6 +272,13 @@ impl BridgeShape {
                 "    | Result.ok x => {}\n    | Result.error x => {}",
                 variant("Ok", 0, Some(a.encode("x", encoders))),
                 variant("Err", 1, Some(e.encode("x", encoders)))
+            ),
+            // The discriminants `orderingOf` gives: Less is -1.
+            Self::Ordering => format!(
+                "    | CmpOrdering.Less => {}\n    | CmpOrdering.Equal => {}\n    | CmpOrdering.Greater => {}",
+                variant("Less", -1, None),
+                variant("Equal", 0, None),
+                variant("Greater", 1, None)
             ),
             _ => String::new(),
         };
@@ -671,12 +689,11 @@ fn block(
         .iter()
         .map(|(n, t)| format!("{n} : {t}"))
         .collect();
-    let booleans: Vec<&str> = shallow
+    let split: Vec<(&str, &[&str])> = shallow
         .parameters
         .iter()
         .zip(&params)
-        .filter(|(_, s)| s.is_boolean())
-        .map(|((n, _), _)| n.as_str())
+        .filter_map(|((n, _), s)| Some((n.as_str(), s.constructors()?)))
         .collect();
     let statement = format!(
         "theorem{{\n  name: {theorem},\n  parameters: [{}],\n  statement: (({} {fuel} (p{name}) {} {}) = {}),\n  proof: {}\n}}",
@@ -685,14 +702,12 @@ fn block(
         mir_string(key),
         term_list(&args, &mir_name("Value")),
         mir_ctor("Outcome.returned", &[expected]),
-        boolean_cases(&booleans, "reflexivity{}")
+        constructor_cases(&split, "reflexivity{}")
     );
-    // Each Boolean parameter doubles the cases the proof reduces.
-    let cost = fuel.saturating_mul(
-        1usize
-            .checked_shl(u32::try_from(booleans.len()).unwrap_or(u32::MAX))
-            .unwrap_or(usize::MAX),
-    );
+    // Each parameter split multiplies the cases the proof reduces.
+    let cost = split
+        .iter()
+        .fold(fuel, |c, (_, ks)| c.saturating_mul(ks.len()));
     BridgeOutcome::Ready((theorem, statement, needed, cost))
 }
 
@@ -750,14 +765,20 @@ fn head(ty: &str) -> String {
         .to_string()
 }
 
-/// `leaf` under case analysis on each of the Boolean locals `vars`.
-fn boolean_cases(vars: &[&str], leaf: &str) -> String {
+/// The proof `leaf` under a case split of each of `vars` into its
+/// constructors, outermost first.
+fn constructor_cases(vars: &[(&str, &[&str])], leaf: &str) -> String {
     match vars.split_first() {
         None => leaf.to_string(),
-        Some((v, rest)) => {
-            let inner = boolean_cases(rest, leaf);
+        Some(((v, ks), rest)) => {
+            let inner = constructor_cases(rest, leaf);
+            let branches: Vec<String> = ks
+                .iter()
+                .map(|k| format!("{{proof: {inner}, binders: [], constructor: {k}}}"))
+                .collect();
             format!(
-                "cases{{branches: [{{proof: {inner}, binders: [], constructor: \"false\"}}, {{proof: {inner}, binders: [], constructor: \"true\"}}], scrutinee: {v}}}"
+                "cases{{branches: [{}], scrutinee: {v}}}",
+                branches.join(", ")
             )
         }
     }
@@ -1747,8 +1768,9 @@ mod tests {
     /// evaluator's reduction closes each case (UE-19).
     #[test]
     fn each_boolean_input_is_a_case_ue_19() {
-        assert_eq!(boolean_cases(&[], "reflexivity{}"), "reflexivity{}");
-        let one = boolean_cases(&["b"], "reflexivity{}");
+        assert_eq!(constructor_cases(&[], "reflexivity{}"), "reflexivity{}");
+        let booleans = BridgeShape::Bool.constructors().unwrap_or_default();
+        let one = constructor_cases(&[("b", booleans)], "reflexivity{}");
         assert!(one.starts_with(
             "cases{branches: [{proof: reflexivity{}, binders: [], constructor: \"false\"}"
         ));
