@@ -4,7 +4,8 @@ kappa = "22833780f0f6bee96b358caacd5175250edb673602ba7d5bafdd8006fbacfa5a"
 embedded = "e7e1ebd080a8fcc1d20c93a10e98ebc628685c60712842c21d7384bd97c1a05a"
 status = "translated"
 bridged = "pending"
-pending = "closure: a callee not embedded"
+pending = "closure: a callee left to a dictionary"
+measured = "dd4a8c9a5699875caad799d8ff8c2f7deab68a77"
 digest = "52bc96a86e8aaaf6217f47f5e9a177d81307f7c36bed098d3601db82a8b345df"
 
 [[fn]]
@@ -25,28 +26,28 @@ cause = "mir::Ty: fn() -> T"
 [[fn]]
 path = "std::lang_start_internal"
 kappa = "5584a460851f5c24bc9586f3f293f1159818cdcfee143799ea10bd06a53f602f"
-embedded = "5663f10f112ee8db237c316e8e56519b86294829c3aba6f2ae33ea642533e718"
+embedded = "729bd33af252067dcd7496690f08aba72db3095f2de1cc1bab46b464c90cfd20"
 status = "residue"
 cause = "mir::Ty: dyn core::ops::Fn() -> i32 + core::marker::Sync + RefUnwindSafe"
 
 [[fn]]
 path = "std::rt::cleanup"
 kappa = "9e8db5a93e2643ba9535751bf36ea5b502178e056614d2417c4f1def7016640a"
-embedded = "579ee91622a8c7b1ac0fd239d892ab659e3a9d209c5794be6403b7b8508adcd8"
+embedded = "6e910699a0bccbe7440de304990e3ec31ce7f1b88f9be186d2b576d4d24e2a2f"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc61: &sync::once::Once}"
 
 [[fn]]
 path = "std::rt::init"
 kappa = "5a6720a44dfca6b0ef47759d821853332dad29fd1c9fd1625fbf304b0e1478b0"
-embedded = "4bb25e965e6c89c96d203344e26f895b9748057453fad40ce8bca0d70cd6979e"
+embedded = "e0fdc7b98f5ed8098a54d2686cf59cbf0108a86d87bd3f64aa4b0306f47198b1"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
 [[fn]]
 path = "std::thread_cleanup"
 kappa = "a9cb12fe81ab98083039610f0c4d0eb5e1cc20295f9d41202a02fd56e6a29000"
-embedded = "8ce29f9ef17ffcc98ea4457f2d188075cc8fe1ea7d44f7f370bb8418cda4e15b"
+embedded = "79e165f9cc36487cfe19e1964b165dc4a9d920ea566e758724f184700fcc1f2a"
 status = "residue"
 cause = "mir::AggregateKind::Closure: thread_cleanup::{closure#0}: mir::TerminatorKind::Call: thread::current::drop_current: std's MIR stops at mir::Rvalue::Ref"
 

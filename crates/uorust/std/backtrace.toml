@@ -5,15 +5,17 @@ embedded = "2d4408b68255323aa8469eb9206de0d6fee0b8dc10e998011bf10d300378a3a8"
 status = "translated"
 bridged = "pending"
 pending = "proof: straight"
+measured = "dd4a8c9a5699875caad799d8ff8c2f7deab68a77"
 digest = "a7cb631c7a6c760ae703c71e840f31052985d016700b814184fbcb66eb429b33"
 
 [[fn]]
 path = "std::_assert_send_sync"
 kappa = "6da2eca8fd9e0ce1240233c22ebf6e0c38a4f5fa54ed3f4fb53339be4db65e45"
-embedded = "d750faa9741562afcdc520cdaf4e71dc716b01b3c2458ffdc7083c261200270e"
+embedded = "23cc4f8059c4810db84822ec4d0998e9f753edf531ad4688714115191b951733"
 status = "translated"
 bridged = "pending"
-pending = "closure: a callee not embedded"
+pending = "proof: call"
+measured = "dd4a8c9a5699875caad799d8ff8c2f7deab68a77"
 digest = "af180c040dd16a071564aa270c1e6f360fe818f32b3500b609304bb0e11632c7"
 
 [[fn]]
@@ -47,14 +49,14 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "std::backtrace::Backtrace::capture"
 kappa = "9b41bb6d2c047e698ce4ab2843d3436b411036055fea095ff5bc070d10579f31"
-embedded = "5d78ff8e11df50d76ea5a628caad12202b0c678953160241d11b4e39466329ba"
+embedded = "99ab2b446bd2f6d415cebaf4d4b2c16ba8138f24f975f5069e1a0512c91cceac"
 status = "residue"
 cause = "mir::Ty: backtrace::Backtrace"
 
 [[fn]]
 path = "std::backtrace::Backtrace::create"
 kappa = "1bd5c1d9fc5835c629e368cb8f0b0f393f82108c3c219ebd2dd4b88edb9de86c"
-embedded = "257faa06ad7c7027b5f2737db93672651eb9c555088b45d233ebfa914d4cefc3"
+embedded = "5a316ebf39b0c653176099abd2be1d58d2735340db2b330e7cbd86af4fd645c3"
 status = "residue"
 cause = "mir::Ty: backtrace::Backtrace"
 
@@ -68,21 +70,21 @@ cause = "mir::Ty: backtrace::Backtrace"
 [[fn]]
 path = "std::backtrace::Backtrace::enabled"
 kappa = "bc1dccec4d994246e9861efa812b3c612202318b7098cc3ef091784446d6a2e5"
-embedded = "32ecc146f6edf82479c6956dc39712ef8845bca0f57b016f6442c43076d0cf25"
+embedded = "621ce39deedbe794af2e94ca7b4813fab88a92146332c72205f130a62d698612"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc110: &Atomic<u8>}"
 
 [[fn]]
 path = "std::backtrace::Backtrace::fmt"
 kappa = "d5479ec18305664068d895d3417acf318abd76b0fc0604adebb671b06510074b"
-embedded = "616048dc0dc3056141ba2b2866059de955a53c7b55eb4fe0728ebf76493512ae"
+embedded = "64a959b982a05fdd7e2c20ec194d45b28a13f0409f3b003ab6707d0d6ab63729"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
 [[fn]]
 path = "std::backtrace::Backtrace::fmt#2"
 kappa = "de2a8770d3f2301c3211cefc0fef8939e00ec006f726cdd53ffc5a102d9e5b4e"
-embedded = "36bfac80e0fc385055c6d77dcee0df430892444b7e9590a2348b4c56780b4871"
+embedded = "cb5a62178c0dc635dc28dda3701be6d321f2ed19dc675b19ecda7f2c91330ed3"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
@@ -96,7 +98,7 @@ cause = "mir::Ty: backtrace::Backtrace"
 [[fn]]
 path = "std::backtrace::Backtrace::frames"
 kappa = "e3f5b918ff62122b37ccbcae11525493777c2ef68ddafb4207d2696ab6146f3c"
-embedded = "3aa66ff2f0c02f8511c1369dbe304e8900a32299dc125c39453d856110371dc4"
+embedded = "ae4d388d97823eaaa48c23e1a8dc60a473526364738174ae97038264af157009"
 status = "residue"
 cause = "mir::Ty: backtrace::BacktraceFrame"
 
@@ -124,7 +126,7 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "std::backtrace::BytesOrWide::fmt"
 kappa = "99dc8824683ce8f977b5f36c0b331c8f6ab29ec54773526158bc40a9a54a3e6b"
-embedded = "54ab3247fa1cd372fc150708cd8be9a9a67c244f8aa93dad076d2464f415c942"
+embedded = "fc03558ac31eed516a4e3b37a1e1f88c8a0b28ba17e3609e09a455bc94b175e9"
 status = "residue"
 cause = "mir::Ty: core::fmt::Error"
 
