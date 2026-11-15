@@ -18,6 +18,11 @@ queue from the files below and needs no other brief.
 
 ## Rules
 
+- Push with `LANE_N=<n> scripts/hooks/lane-push.sh`, not `git push`: it holds
+  the machine's push lock through the hook's tests and the push, and on a race
+  rebases and pushes again, retesting only when main's newer commits touch what
+  the patch or its tests read.
+
 - Push to main through the versioned hooks (`git config core.hooksPath
   scripts/hooks`, `LANE_N` per worktree); never `--no-verify`, never weaken a
   gate, no magic numbers, the translator ratchet never grows.
