@@ -1679,7 +1679,7 @@ pub(crate) fn adapter(root: &Certified, body: &IrBody, source: &str) -> Option<(
         .unwrap_or(&root.function)
         .replace("::", "_");
     let code = format!(
-        "/// `{}`, certified as `Behavior::{}`.\n#[allow(clippy::all)]\npub(crate) fn {name}({}) -> Option<{rust_result}> {{\n    Some({value})\n}}\n",
+        "/// `{}`, certified as `Behavior::{}`.\n#[allow(clippy::all, non_snake_case, unused_parens)]\npub(crate) fn {name}({}) -> Option<{rust_result}> {{\n    Some({value})\n}}\n",
         root.function,
         root.definition,
         args.join(", ")

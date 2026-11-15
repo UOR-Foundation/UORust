@@ -365,11 +365,12 @@ pub(crate) fn project(
     let toolchain = files.get("lean-toolchain").cloned().unwrap_or_default();
     let lock = format!(
         "spec = \"lexlean/lock/2\"\nlanguage = \"1.2\"\n\
-         compiler_semantics = \"1427f8b629013648a480454d67202788f2303f5396f1d7c70a7c350ddab6f694\"\n\
+         compiler_semantics = \"{}\"\n\
          project_config_sha256 = \"{}\"\nlean_toolchain = \"leanprover/lean4:v4.32.1\"\n\n\
          [[workspace_file]]\npath = \"lake-manifest.json\"\nsha256 = \"{}\"\n\n\
          [[workspace_file]]\npath = \"lakefile.toml\"\nsha256 = \"{}\"\n\n\
          [[workspace_file]]\npath = \"lean-toolchain\"\nsha256 = \"{}\"\n\n{}",
+        compiler_semantics(),
         sha(lexlean.as_bytes()),
         sha(manifest.as_bytes()),
         sha(lakefile.as_bytes()),
@@ -415,6 +416,19 @@ pub(crate) fn project(
         frontier(&notes, &kappas).into_bytes(),
     );
     files
+}
+
+/// The LexLean compiler semantics a projection locks to: the one UORust's own
+/// self model is locked to (`app/lexlean.lock`, which `lexlean lock` in the
+/// locked SDK rewrites), so a projection follows the SDK's compiler without a
+/// copied identity.
+fn compiler_semantics() -> &'static str {
+    const SELF_LOCK: &str = include_str!("../../../app/lexlean.lock");
+    SELF_LOCK
+        .lines()
+        .find_map(|line| line.strip_prefix("compiler_semantics = \""))
+        .and_then(|rest| rest.strip_suffix('"'))
+        .expect("app/lexlean.lock names its compiler semantics")
 }
 
 pub(crate) fn sha(bytes: &[u8]) -> String {

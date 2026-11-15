@@ -42,7 +42,7 @@ macro_rules! certified {
 pub(crate) use certified;
 
 /// `uorust::lex::members`, certified as `Behavior::members`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lex_members(
     p0: &&str,
     p1: &&[std::string::String],
@@ -80,7 +80,7 @@ pub(crate) fn lex_members(
 }
 
 /// `uorust::lift::Types::accessor`, certified as `Behavior::typesAccessor`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_Types_accessor(p0: &&str, p1: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::types_accessor::run(
@@ -93,7 +93,7 @@ pub(crate) fn lift_Types_accessor(p0: &&str, p1: &&str) -> Option<std::string::S
 }
 
 /// `uorust::lift::equality_name`, certified as `Behavior::equalityName`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_equality_name(p0: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::equality_name::run(uorust_certified::equality_name::Str::lit((*p0)))
@@ -103,7 +103,7 @@ pub(crate) fn lift_equality_name(p0: &&str) -> Option<std::string::String> {
 }
 
 /// `uorust::lift::evidence_axioms`, certified as `Behavior::evidenceAxioms`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_evidence_axioms() -> Option<std::vec::Vec<std::string::String>> {
     Some({
         let mut v = Vec::new();
@@ -117,7 +117,7 @@ pub(crate) fn lift_evidence_axioms() -> Option<std::vec::Vec<std::string::String
 }
 
 /// `uorust::lift::evidence_proof`, certified as `Behavior::evidenceProof`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_evidence_proof(p0: &&[std::string::String]) -> Option<std::string::String> {
     Some(
         uorust_certified::evidence_proof::run({
@@ -136,7 +136,7 @@ pub(crate) fn lift_evidence_proof(p0: &&[std::string::String]) -> Option<std::st
 }
 
 /// `uorust::lift::first_free`, certified as `Behavior::firstFree`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_first_free(
     p0: &&str,
     p1: &&[std::string::String],
@@ -161,7 +161,7 @@ pub(crate) fn lift_first_free(
 }
 
 /// `uorust::lift::mentions_word`, certified as `Behavior::mentionsWord`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
     Some(
         match uorust_certified::mentions_word::run(
@@ -175,13 +175,13 @@ pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
 }
 
 /// `uorust::lift::pointer_width`, certified as `Behavior::pointerWidth`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_pointer_width(p0: &&str) -> Option<std::option::Option<u32>> {
     Some(match uorust_certified::pointer_width::run(uorust_certified::pointer_width::Str::lit((*p0))) { Ok(v) => v, Err(_) => panic!("uorust::lift::pointer_width: the certified root overflowed") }.map(|x| u32::try_from(x).expect("a natural the hand-written type holds")))
 }
 
 /// `uorust::lift::unicode_property`, certified as `Behavior::unicodeProperty`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_unicode_property(p0: &&str) -> Option<std::option::Option<std::string::String>> {
     Some(
         uorust_certified::unicode_property::run(uorust_certified::unicode_property::Str::lit(
@@ -192,7 +192,7 @@ pub(crate) fn lift_unicode_property(p0: &&str) -> Option<std::option::Option<std
 }
 
 /// `uorust::mir::lower::address`, certified as `Behavior::address`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_address(p0: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::address::run(uorust_certified::address::Str::lit((*p0)))
@@ -202,7 +202,7 @@ pub(crate) fn mir_lower_address(p0: &&str) -> Option<std::string::String> {
 }
 
 /// `uorust::mir::lower::decoded`, certified as `Behavior::decoded`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_decoded(p0: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::decoded::run(uorust_certified::decoded::Str::lit((*p0)))
@@ -212,7 +212,7 @@ pub(crate) fn mir_lower_decoded(p0: &&str) -> Option<std::string::String> {
 }
 
 /// `uorust::mir::lower::implication`, certified as `Behavior::implication`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_implication(
     p0: &&[std::string::String],
     p1: &&str,
@@ -237,7 +237,7 @@ pub(crate) fn mir_lower_implication(
 }
 
 /// `uorust::mir::lower::is_const_argument`, certified as `Behavior::isConstArgument`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_is_const_argument(p0: &&str) -> Option<bool> {
     Some(
         match uorust_certified::is_const_argument::run(
@@ -252,7 +252,7 @@ pub(crate) fn mir_lower_is_const_argument(p0: &&str) -> Option<bool> {
 }
 
 /// `uorust::mir::lower::pointer_value`, certified as `Behavior::pointerValue`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_pointer_value(
     p0: &&str,
     p1: &&str,
@@ -270,7 +270,7 @@ pub(crate) fn mir_lower_pointer_value(
 }
 
 /// `uorust::mir::lower::referent`, certified as `Behavior::referent`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_referent(p0: &&str) -> Option<std::option::Option<std::string::String>> {
     Some(
         match uorust_certified::referent::run(uorust_certified::referent::Str::lit((*p0))) {
@@ -282,7 +282,7 @@ pub(crate) fn mir_lower_referent(p0: &&str) -> Option<std::option::Option<std::s
 }
 
 /// `uorust::mir::lower::scalar_value`, certified as `Behavior::scalarValue`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_scalar_value(p0: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::scalar_value::run(uorust_certified::scalar_value::Str::lit((*p0)))
@@ -292,7 +292,7 @@ pub(crate) fn mir_lower_scalar_value(p0: &&str) -> Option<std::string::String> {
 }
 
 /// `uorust::mir::lower::uninhabited`, certified as `Behavior::uninhabited`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_lower_uninhabited(p0: &&str) -> Option<bool> {
     Some(
         match uorust_certified::uninhabited::run(uorust_certified::uninhabited::Str::lit((*p0))) {
@@ -303,7 +303,7 @@ pub(crate) fn mir_lower_uninhabited(p0: &&str) -> Option<bool> {
 }
 
 /// `uorust::mir::memory::axioms`, certified as `Behavior::mirMemoryAxioms`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_memory_axioms() -> Option<std::vec::Vec<std::string::String>> {
     Some({
         let mut v = Vec::new();
@@ -317,7 +317,7 @@ pub(crate) fn mir_memory_axioms() -> Option<std::vec::Vec<std::string::String>> 
 }
 
 /// `uorust::mir::memory::of`, certified as `Behavior::of`.
-#[allow(clippy::all)]
+#[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn mir_memory_of(p0: &&str) -> Option<std::string::String> {
     Some(
         uorust_certified::of::run(uorust_certified::of::Str::lit((*p0)))
