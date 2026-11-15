@@ -419,7 +419,8 @@ def crates(w):
 # the run's budget, one shard stage's ({budget} minutes) of runner time. A
 # crate's expected seconds are its own last measured attempt, else the mean
 # of the attempts the ledger measured, as the differential check's modules
-# are split by their measured cost per fuel. A push (a new translator or
+# are split by their measured cost per fuel; a shard's seconds are its
+# runner time, its checkout and fetches included. A push (a new translator or
 # evaluator) takes no new crate. Each crate is a shard, which runs `uorust
 # crate <name>@<version> --library`: it fetches the crate, checks it against
 # crates.io's checksum, dumps its library's MIR on the pinned toolchain,
@@ -498,6 +499,11 @@ jobs:
       matrix:
         crate: ${{{{ fromJSON(needs.{first}.outputs.crates) }}}}
     steps:
+      # The crate's seconds are the shard's runner time, from here: its
+      # checkout and the rust-src it fetches count as its lift does.
+      - name: Note when the shard started
+        shell: bash
+        run: echo "STARTED=$(date +%s)" >>"$GITHUB_ENV"
 {checkout()}      - name: Fetch the built uorust
         uses: {USES['actions/download-artifact']}
         with:
@@ -517,12 +523,11 @@ jobs:
           chmod +x target/bin/uorust
           mkdir -p target/tmp target/times
           channel=$(sed -n 's/^channel = "\\(.*\\)"/\\1/p' rust-toolchain.toml)
-          start=$(date +%s)
           status=0
           scripts/ci/sdk.sh "TMPDIR=$PWD/target/tmp target/bin/uorust crate '$SPEC' --library target/rust-src-$channel/library" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           # The attempt's seconds, which plan the next run, whether or not
           # the crate built.
-          echo $(( $(date +%s) - start )) >"target/times/$SPEC"
+          echo $(( $(date +%s) - STARTED )) >"target/times/$SPEC"
           mkdir -p "target/register/$NAME"
           if [ "$status" -eq 0 ]; then
             cp -r "crates/uorust/crates/$NAME/." "target/register/$NAME/"
