@@ -523,3 +523,20 @@ fn layouts_of_no_aggregate_ask_for_nothing_ue_19() {
     );
     let _ = std::fs::remove_dir_all(&tmp);
 }
+
+/// The pre-push hook skips a tested patch's tests only when every commit main
+/// gained since touches nothing the patch touches or its tests read
+/// (scripts/hooks/passes.py).
+#[test]
+fn the_hooks_retest_a_patch_unless_main_moved_disjointly() {
+    let script =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../scripts/hooks/passes.py");
+    let run = std::process::Command::new("python3")
+        .arg("-I")
+        .arg(&script)
+        .arg("self-test")
+        .output()
+        .expect("python3");
+    assert!(run.status.success(), "{run:?}");
+    assert!(String::from_utf8_lossy(&run.stdout).contains("the disjointness rule holds"));
+}
