@@ -80,12 +80,12 @@
 #     1 the constant item order::PROOF_COLUMN
 #     1 the constant item std::string::String::as_str
 #     1 the constant item wf::Node::word
-#     1 {alloc1042: &std::sync::OnceLock<mir::stdlib::StdTable>}
+#     1 {alloc1043: &std::sync::OnceLock<mir::stdlib::StdTable>}
 #     2 {alloc254: &std::sync::atomic::Atomic<bool>}
-#     1 {alloc303: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc318: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc333: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc359: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc304: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc319: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc334: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc360: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
 #   mir::ProjectionElem::Downcast: 8
 #     8 a variant's field read outside a match on it
 #   mir::ProjectionElem::Subslice: 1
@@ -1193,19 +1193,19 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "e69b494047df0de0474cd19bd1fd0f8b467f867b639f60d60fe50bd3a63abc2b"
 function = "uorust::embed::defined_float_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc318: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc319: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "bcfcb0fdc7be5af8f14bfd9c8dad1d118d2887b7816855fb6ad322fca464c482"
 function = "uorust::embed::defined_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc303: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc304: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "520427207441734718b88fdbf38d7648dcd8182ec0f9e49abc013bf5b066ccf5"
 function = "uorust::embed::defined_layout_queries"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc333: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc334: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "131faf830fd7e13fea5467f1da2cd72c9a44bbb74c4ceb65d94c07e26fd45357"
@@ -1487,7 +1487,7 @@ detail = "mir::TerminatorKind::Call: uorust::embed::generic_parts, whose transla
 kappa = "c55e780bbdd5fed1280f58966b9f63fbf933e85e5043ceab3a04894f3eb9aa92"
 function = "uorust::embed::undefined_constructs"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc359: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc360: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "02aea09e67a6121deca36b2f63056e2fa30ba11499a45bc7d6a51686c68710d7"
@@ -4355,7 +4355,7 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 kappa = "a52e07bf3cf71f0bb47d0620049df5db15379922c1410a447a682b7af77a6e4c"
 function = "uorust::mir::stdlib::table"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc1042: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+detail = "mir::Operand::Constant: {alloc1043: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 
 [[residue]]
 kappa = "47bcab9e837dab29d1ea09c2762342c564778078ae7bdca12f4b27fa4c7b36f1"
@@ -5269,12 +5269,12 @@ function = "uorust::certify::production"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "7083a9e50e21e24cf1237db9baeb0601292679b400d259bbd4b0a2fe77b65a26"
+kappa = "fa179c4c83ccddca8533b40296a542753c3b49c255d5233bc7f24cb8dfb50c75"
 function = "uorust::certify::production_build"
 effect = "Fs effect: Path::exists"
 
 [[effect]]
-kappa = "04175b087a60e36f8d872ef72c25138331edc90d37eed8388586522e5131ed1f"
+kappa = "0944b6a44e92132b65eb331cae55f954d5637cef481d494c776bb10e6506be8f"
 function = "uorust::certify::sync"
 effect = "Fs effect: Path::is_file"
 
