@@ -922,6 +922,15 @@ pub(crate) fn int_ty(printed: &str, width: u32) -> Option<(u32, bool)> {
         .map(|b| (b, signed))
 }
 
+/// The integer a constant of a pattern type prints, `65536_i32 is (..)`:
+/// its value, width and signedness, its base's.
+fn pattern_int(text: &str, width: u32) -> Option<(i128, u32, bool)> {
+    let (literal, _) = text.split_once(" is ")?;
+    let (n, suffix) = literal.trim().rsplit_once('_')?;
+    let (bits, signed) = int_ty(suffix, width)?;
+    Some((n.parse().ok()?, bits, signed))
+}
+
 /// The two's complement bits of `n` at `bits`.
 fn repr(n: i128, bits: u32) -> u128 {
     // `n as u128` is n's two's complement at 128 bits; the low `bits` of
@@ -1042,6 +1051,14 @@ impl Cx<'_> {
                 Some(ty)
             }
             IrOperand::Constant(IrConstant::Int(_, suffix)) => Some(suffix.clone()),
+            // A constant of a pattern type is of `(base) is pattern`.
+            IrOperand::Constant(IrConstant::Other(text))
+                if pattern_int(text, self.width).is_some() =>
+            {
+                let (literal, pattern) = text.split_once(" is ")?;
+                let (_, base) = literal.trim().rsplit_once('_')?;
+                Some(format!("({base}) is {pattern}"))
+            }
             IrOperand::Constant(c) if self.item(c).is_some() => {
                 (self.item_type)(&self.item(c).unwrap_or_default())
             }
@@ -1982,6 +1999,16 @@ impl Cx<'_> {
                 ),
                 None => self.unread(c, e),
             },
+            // A constant of a pattern type, `65536_i32 is (i32::MIN..=-1 | 1..)`,
+            // is its base's value, which rustc's evaluation keeps in the
+            // pattern; the type is laid out as its base.
+            IrConstant::Other(text) if pattern_int(text, self.width).is_some() => {
+                let (n, bits, s) = pattern_int(text, self.width).unwrap_or_default();
+                mir_ctor(
+                    "Const.int",
+                    &[bits.to_string(), s.to_string(), repr(n, bits).to_string()],
+                )
+            }
             IrConstant::Bool(b) => mir_ctor("Const.boolean", &[b.to_string()]),
             IrConstant::Str(s) => mir_ctor("Const.text", &[mir_string(s)]),
             IrConstant::Char(ch) => mir_ctor("Const.character", &[u32::from(*ch).to_string()]),
@@ -4663,6 +4690,16 @@ fn embed_census(
 mod tests {
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
+    #[test]
+    fn a_pattern_constant_is_its_base_integer() {
+        assert_eq!(
+            pattern_int("65536_i32 is (i32::MIN..=-1 | 1..)", 64),
+            Some((65536, 32, true))
+        );
+        assert_eq!(pattern_int("1_usize is 1..", 64), Some((1, 64, false)));
+        assert_eq!(pattern_int("65536_i32", 64), None);
+    }
+
     #[test]
     fn an_array_of_a_parameter_count_is_sized() {
         assert!(super::is_array("[u8; N]"));

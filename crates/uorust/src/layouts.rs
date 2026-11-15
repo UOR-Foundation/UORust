@@ -451,9 +451,12 @@ const DEFERRED: &[&str] = &["error: the type has an unknown layout", "error[E003
 
 /// What one check of the patched crate printed: each layout by the type
 /// rustc names, and each line an error other than a layout is reported at.
+/// A file cargo names relative (a package of its own workspace) is read
+/// from `base`, the package the check builds; the library's are absolute.
 #[allow(clippy::type_complexity)]
 fn diagnostics(
     stderr: &str,
+    base: &Path,
 ) -> (
     BTreeMap<(PathBuf, usize), (String, TypeLayout)>,
     BTreeSet<(PathBuf, usize)>,
@@ -484,7 +487,7 @@ fn diagnostics(
         let place = |at: &str| {
             let mut parts = at.rsplitn(3, ':');
             let (_, line, file) = (parts.next(), parts.next(), parts.next());
-            Some((PathBuf::from(file?), line?.parse::<usize>().ok()?))
+            Some((base.join(file?), line?.parse::<usize>().ok()?))
         };
         match (head, at) {
             (Some(ty), Some(at)) => {
@@ -852,6 +855,52 @@ fn field_text(
     static_lifetimes(&crate::mir::stdlib::substitute(&t, bound))
 }
 
+/// A field's source text read in `module` of the crate `owner`: each path
+/// it starts with `crate::` is `owner`'s, and each bare name but a
+/// primitive's or a keyword's is `module`'s.
+fn qualified(text: &str, owner: &str, module: &str) -> String {
+    const BARE: &[&str] = &[
+        "bool", "char", "str", "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32",
+        "u64", "u128", "usize", "f16", "f32", "f64", "f128", "mut", "const", "dyn", "fn", "impl",
+        "for", "as", "unsafe", "extern", "Self", "self", "super", "static",
+    ];
+    let chars: Vec<char> = text.chars().collect();
+    let mut out = String::new();
+    let mut i = 0;
+    while i < chars.len() {
+        let c = chars[i];
+        if c == '\'' {
+            let start = i;
+            i += 1;
+            while i < chars.len() && (chars[i].is_alphanumeric() || chars[i] == '_') {
+                i += 1;
+            }
+            out.extend(&chars[start..i]);
+            continue;
+        }
+        if c.is_alphabetic() || c == '_' {
+            let start = i;
+            while i < chars.len() && (chars[i].is_alphanumeric() || chars[i] == '_') {
+                i += 1;
+            }
+            let word: String = chars[start..i].iter().collect();
+            let after = start >= 2 && chars[start - 1] == ':' && chars[start - 2] == ':';
+            let pathy = chars.get(i) == Some(&':') && chars.get(i + 1) == Some(&':');
+            if !after && word == "crate" && pathy {
+                out.push_str(owner);
+            } else if !after && !pathy && !BARE.contains(&word.as_str()) {
+                out.push_str(&format!("{module}::{word}"));
+            } else {
+                out.push_str(&word);
+            }
+            continue;
+        }
+        out.push(c);
+        i += 1;
+    }
+    out
+}
+
 /// The modules of the crate's items a type's source text names by their
 /// `crate::` paths: each path but its last segment.
 fn named_modules(text: &str) -> Vec<Vec<String>> {
@@ -1032,7 +1081,7 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
                 .output()
                 .map_err(|e| io(Path::new(check), e))?;
             let stderr = String::from_utf8_lossy(&output.stderr);
-            let (layouts, refused) = diagnostics(&stderr);
+            let (layouts, refused) = diagnostics(&stderr, &copy.join(krate));
             let bad: BTreeSet<usize> = refused.iter().filter_map(|p| at.get(p)).copied().collect();
             if bad.is_empty() {
                 // An error at no alias's line asks nothing of the layouts:
@@ -1158,9 +1207,23 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
                 }
                 _ => None,
             };
+            // A crate that mirrors none of the library's modules (one of
+            // crates.io) writes the field in the type's printed module's
+            // names instead (`core::ffi::CStr`'s `[c_char]` as
+            // `[core::ffi::c_char]`), which that module makes public.
+            let printed_in = match segments.as_slice() {
+                [first, module @ .., _] if EXTERN.contains(first) && !EXTERN.contains(&krate) => {
+                    Some((*first, [&[*first], module].concat().join("::")))
+                }
+                _ => None,
+            };
             for (v, fs) in variants.iter().enumerate() {
                 for (f, t) in fs.iter().enumerate() {
                     let text = field_text(t, &bound, &assoc);
+                    let text = match &printed_in {
+                        Some((owner, module)) => qualified(&text, owner, module),
+                        None => text,
+                    };
                     if let Some(m) = &mirror {
                         declared_in.insert(Ask::Field(p.clone(), v, f), m.clone());
                     }
@@ -1178,6 +1241,19 @@ pub fn run(krate: &str, dumps: &Path, copy: &Path, check: &str) -> Result<usize,
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_field_of_another_crate_is_read_in_its_printed_module() {
+        assert_eq!(
+            qualified("[c_char]", "core", "core::ffi"),
+            "[core::ffi::c_char]"
+        );
+        assert_eq!(
+            qualified("*const crate::ffi::c_char", "core", "core::ffi"),
+            "*const core::ffi::c_char"
+        );
+        assert_eq!(qualified("&'a [u8]", "core", "core::str"), "&'a [u8]");
+    }
 
     const ORDERING: &str = "error: layout_of(sync::atomic::Ordering) = Layout {
            size: Size(1 bytes),
@@ -1251,7 +1327,7 @@ error[E0603]: module `rt` is private
 
     #[test]
     fn reads_a_layout_and_a_refusal() {
-        let (layouts, refused) = diagnostics(ORDERING);
+        let (layouts, refused) = diagnostics(ORDERING, Path::new("/"));
         let (ty, l) = &layouts[&(PathBuf::from("/x/core/src/lib.rs"), 404)];
         assert_eq!(ty, "sync::atomic::Ordering");
         assert_eq!((l.size, l.align, l.offsets.clone()), (1, 1, vec![0]));

@@ -1720,6 +1720,136 @@ fn stamp(text: &str, proved: &BTreeSet<&str>, pending: &BTreeMap<String, String>
     out
 }
 
+/// The verified columns of a register's rows: each row's bridge stamps,
+/// with what they were measured against, by κ.
+struct BridgeMeasured {
+    embedded: Option<String>,
+    digest: Option<String>,
+    stamps: Vec<String>,
+}
+
+/// A register's module file split into its rows, each its lines.
+fn register_rows(text: &str) -> Vec<Vec<&str>> {
+    let mut rows: Vec<Vec<&str>> = Vec::new();
+    for line in text.lines() {
+        if line == "[[fn]]" || rows.is_empty() {
+            rows.push(Vec::new());
+        }
+        if let Some(row) = rows.last_mut() {
+            row.push(line);
+        }
+    }
+    rows
+}
+
+/// A row's field `key`, as written `key = "value"`.
+fn row_field(row: &[&str], key: &str) -> Option<String> {
+    row.iter().find_map(|l| {
+        l.strip_prefix(key)?
+            .strip_prefix(" = \"")?
+            .strip_suffix('"')
+            .map(str::to_string)
+    })
+}
+
+/// Whether a line is one of the verified columns the bridge stamps.
+fn bridge_stamp(line: &str) -> bool {
+    ["bridged = ", "pending = ", "measured = "]
+        .iter()
+        .any(|p| line.starts_with(p))
+}
+
+/// Carry the verified columns of the register in `from`, measured at the
+/// commit `measured`, onto the register in `to`, whose census was taken
+/// again on a newer head: a translated row keeps its stamps, marked with
+/// the commit they were measured at, only when its κ, its embedded term
+/// and its translation's digest are those they were measured on; any
+/// other translated row is pending, to be measured again. Returns how
+/// many rows kept their stamps and how many fell back to pending.
+pub fn carry(from: &Path, to: &Path, measured: &str) -> Result<(usize, usize), UorustError> {
+    let mut before: BTreeMap<String, BridgeMeasured> = BTreeMap::new();
+    for file in crate::embed::dir_paths(from)? {
+        if file.extension().is_none_or(|x| x != "toml") {
+            continue;
+        }
+        let text = crate::embed::read_text(&file)?;
+        for row in register_rows(&text) {
+            let Some(kappa) = row_field(&row, "kappa") else {
+                continue;
+            };
+            let stamps: Vec<String> = row
+                .iter()
+                .filter(|l| bridge_stamp(l))
+                .map(|l| (*l).to_string())
+                .collect();
+            if stamps.is_empty() {
+                continue;
+            }
+            before.insert(
+                kappa,
+                BridgeMeasured {
+                    embedded: row_field(&row, "embedded"),
+                    digest: row_field(&row, "digest"),
+                    stamps,
+                },
+            );
+        }
+    }
+    let (mut kept, mut dropped) = (0, 0);
+    for file in crate::embed::dir_paths(to)? {
+        if file.extension().is_none_or(|x| x != "toml") {
+            continue;
+        }
+        let text = crate::embed::read_text(&file)?;
+        // Only a module file holds rows; the register's summary and its
+        // other files are left as they are.
+        if !text.lines().any(|l| l == "[[fn]]") {
+            continue;
+        }
+        let mut out = String::new();
+        for row in register_rows(&text) {
+            if row.first() != Some(&"[[fn]]") {
+                for line in &row {
+                    out.push_str(line);
+                    out.push('\n');
+                }
+                continue;
+            }
+            let same = row_field(&row, "kappa")
+                .and_then(|k| before.get(&k))
+                .filter(|b| {
+                    b.embedded == row_field(&row, "embedded")
+                        && b.digest == row_field(&row, "digest")
+                });
+            for line in row.iter().filter(|l| !bridge_stamp(l)) {
+                out.push_str(line);
+                out.push('\n');
+                if *line != "status = \"translated\"" {
+                    continue;
+                }
+                match same {
+                    Some(b) => {
+                        kept += 1;
+                        for stamp in &b.stamps {
+                            out.push_str(stamp);
+                            out.push('\n');
+                        }
+                        if !b.stamps.iter().any(|l| l.starts_with("measured = ")) {
+                            let _ = writeln!(out, "measured = \"{measured}\"");
+                        }
+                    }
+                    None => {
+                        dropped += 1;
+                        out.push_str("bridged = \"pending\"\npending = \"remeasure\"\n");
+                    }
+                }
+            }
+        }
+        std::fs::write(&file, out).map_err(|e| crate::error::io(&file, e))?;
+    }
+    Ok((kept, dropped))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1775,5 +1905,32 @@ mod tests {
             "cases{branches: [{proof: reflexivity{}, binders: [], constructor: \"false\"}"
         ));
         assert!(one.ends_with("scrutinee: b}"));
+    }
+
+    /// A carried row keeps its bridge stamps, marked with the commit they
+    /// were measured at, only while its κ, term and translation are the
+    /// ones measured; a changed row is pending again (UE-19).
+    #[test]
+    fn a_carried_stamp_needs_the_row_it_was_measured_on_ue_19() {
+        let dir = std::env::temp_dir().join(format!("bridge-carry-{}", std::process::id()));
+        let (from, to) = (dir.join("from"), dir.join("to"));
+        for d in [&from, &to] {
+            std::fs::create_dir_all(d).expect("dir");
+        }
+        let row = |k: &str, e: &str, extra: &str| {
+            format!("[[fn]]\npath = \"core::{k}\"\nkappa = \"{k}\"\nembedded = \"{e}\"\nstatus = \"translated\"\n{extra}digest = \"d\"\n\n")
+        };
+        let proved = "bridged = \"proved\"\n";
+        std::fs::write(
+            from.join("m.toml"),
+            row("a", "x", proved) + &row("b", "x", proved),
+        )
+        .expect("from");
+        std::fs::write(to.join("m.toml"), row("a", "x", "") + &row("b", "y", "")).expect("to");
+        assert_eq!(carry(&from, &to, "c0").expect("carry"), (1, 1));
+        let text = std::fs::read_to_string(to.join("m.toml")).expect("read");
+        assert!(text.contains("bridged = \"proved\"\nmeasured = \"c0\"\ndigest"));
+        assert!(text.contains("bridged = \"pending\"\npending = \"remeasure\""));
+        let _ = std::fs::remove_dir_all(&dir);
     }
 }
