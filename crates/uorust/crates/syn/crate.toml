@@ -25,7 +25,8 @@ cause = "mir::Ty: error::Error"
 [[fn]]
 path = "syn::advance_step_cursor"
 kappa = "06c85e5ae5ff7369e7cdf8e07eaa77592e2f29e481d2db51427856a4aba6ad2e"
-embedded = "012ded68f62190ee9be2feebebb26abf50e11aeac29ba8b328df12b487279664"
+embedded = "8aab3f95f0afc340856cc443649ecda7f1b1d0d5432c79489e76803d70c8e234"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: buffer::Cursor<'_>"
 
@@ -40,7 +41,8 @@ cause = "mir::Ty: Cell<u32>"
 [[fn]]
 path = "syn::discouraged::ParseBuffer::advance_to"
 kappa = "df6e78579c86d6b3ec862facf58907149da5e171def52b28416d111a28a09d6c"
-embedded = "2976043ad3db80efecadffa3fe4cb2a42a7d6da2811f926d66545e11597eacf8"
+embedded = "84f3e7989d901f83f9fb13670609c8b3736cbb06e24928986e9fcd3e65d092bb"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: ParseBuffer<'_>"
 
@@ -75,7 +77,8 @@ cause = "mir::Ty: parse::Unexpected"
 [[fn]]
 path = "syn::new_parse_buffer"
 kappa = "745d118db840681d58ef15b201caa7d36b9f751de377a37ed3258a458aae2167"
-embedded = "d834abdfc4b3c4236d05bc6d3c65798f5142b7da91512c4353b659bd78431071"
+embedded = "b0771087d05d612285bfd01b13c6ddaff7d4ae090ac0c1d1400e8995a51c29a5"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
 status = "residue"
 cause = "mir::Ty: parse::ParseBuffer<'_>"
 
@@ -99,7 +102,7 @@ cause = "mir::Ty: error::Error"
 path = "syn::parse::Box::parse"
 kappa = "9f7ee7acdd76f9e99c865cef42a9a9c0b321d27784b082b616fb0b42ff6e22d7"
 at = "T=u32"
-embedded = "f2591207b7c56c06aef7ac598b0b8b3eb0216f226dec03261bd4cb555b30e9b1"
+embedded = "af0233f210dbfd3d1cd105d5b9a546ecac5c202bab4d6999df79ffdb23ba5270"
 status = "residue"
 cause = "mir::Ty: error::Error"
 

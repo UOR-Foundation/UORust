@@ -38,8 +38,16 @@ residue = 64
 [embedding]
 bodies = 470
 embedded = 470
-evaluable = 470
-blocked = 0
+evaluable = 468
+blocked = 2
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 2
+
+[differential]
+bodies = 3
+theorems = 16
 
 [[cause]]
 cause = "mir::Ty: distr::uniform::Error"

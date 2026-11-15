@@ -17,7 +17,7 @@ cause = "mir::Ty: decode::DecodeError"
 path = "base64::Engine::decode::inner"
 kappa = "bd0c1a1fc392d3fae6993ad26686ab076727d860d928fc612dc443c8274d5b28"
 at = "E=u32"
-embedded = "803633dd50f19b279db8e24a862a14980043e00102b6f90af829f450809a7640"
+embedded = "b5b185d9f7cbcb3c0094f5f2d50c73d843965829a74a646bafa953ce62fb8197"
 status = "residue"
 cause = "mir::Ty: decode::DecodeError"
 
@@ -33,7 +33,7 @@ cause = "mir::Ty: decode::DecodeSliceError"
 path = "base64::Engine::decode_slice::inner"
 kappa = "3339393f870121a6f01067454a3f32abd47118263b3afea561dad1f9e4de3b01"
 at = "E=u32"
-embedded = "5ff82668f85ef286afbe9ef8cf866555ebd300995a33be2997a8297836d1dad4"
+embedded = "16d9aadb64044a2d0f8decbf48d8380507cb1f43d31b03029750df565d9457ff"
 status = "residue"
 cause = "mir::Ty: decode::DecodeSliceError"
 
@@ -49,7 +49,7 @@ cause = "mir::Ty: decode::DecodeError"
 path = "base64::Engine::decode_slice_unchecked::inner"
 kappa = "f1960188e61276cb51255e9a8fa44f8e289abcc6a9af21d3c52764374185a7c8"
 at = "E=u32"
-embedded = "0f3a4a4eb52448bdad73bbd860cadad546ffaf50a474a4b24c3d796c44a8baaf"
+embedded = "b46d7ecf75c6599775068f1e36434f3bc2273ffbcbe1c537b80ff59422c61394"
 status = "residue"
 cause = "mir::Ty: decode::DecodeError"
 
@@ -65,7 +65,7 @@ cause = "mir::Ty: decode::DecodeError"
 path = "base64::Engine::decode_vec::inner"
 kappa = "c2d061e222bf58e3e4abd51db7b41054088a89ea640b07f3b173a8506a63ff4f"
 at = "E=u32"
-embedded = "3841bd0fef7cea11acdf0f6c84604b599ac245e9089b8997e509678aa561e2a7"
+embedded = "11230503b68733cd9d076b0f8409603d691b15a3e335d8c5219aceb5d1707a25"
 status = "residue"
 cause = "mir::Ty: decode::DecodeError"
 
@@ -81,7 +81,7 @@ cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 doe
 path = "base64::Engine::encode::inner"
 kappa = "70f6ea55980a3559ec9f353914fa92520ca935fb95216b1e503c718678c18215"
 at = "E=u32"
-embedded = "a49a292eb327f917923eb457d3d806aff8f760c84a4015423e267ce7691f9e28"
+embedded = "ccfccfc7d44075251f0b57eb19c12bfb3b6aeadfcd73e6e76e6e0f5ae6898224"
 status = "residue"
 cause = "mir::Instantiation: u32 for a parameter bounded by Engine, which u32 does not implement in core"
 
@@ -97,7 +97,7 @@ cause = "mir::Ty: encode::EncodeSliceError"
 path = "base64::Engine::encode_slice::inner"
 kappa = "ee1992f76e668102451feae91041eda7d61ca341ac41cd84acc6919c59d282d8"
 at = "E=u32"
-embedded = "c1aa3aa8496fc3ffbaa4358252d86bb73f81e03e9a47910523f98fcf2733f2f7"
+embedded = "53cebd35fd8ae9ca501c7da1c422e0a1416813f6cd590f3fa5171bc34af3a42e"
 status = "residue"
 cause = "mir::Ty: encode::EncodeSliceError"
 
@@ -211,49 +211,49 @@ cause = "mir::Ty: SimdKind"
 [[fn]]
 path = "base64::complete_quads_len"
 kappa = "e1c9cbd02821c8962aa8e6c41ad2804e026d3ee17fe1f275a9ef84a9937740d1"
-embedded = "767e24c6c7f9f73f47eeffd87c68b7f91ab1c37ab331c0d4b500b24214e171f6"
+embedded = "d9941144c1242749c58ae029793826aa8d0a39649b652e117ea5a719e10fbc3f"
 status = "residue"
 cause = "mir::Ty: decode::DecodeSliceError"
 
 [[fn]]
 path = "base64::decode_bulk"
 kappa = "65ceece3506a50753971e1807641639ab3731fed89696df27a97e9915ab520be"
-embedded = "040dd14febaa08dd8df2d64a9a4f2abfb3e92db8a079f824b91763a4517e662f"
+embedded = "9be431260a0b50b5ee145c9e145a4f965fc31b9c88c768e24b45e90c0abdb9bd"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item engine::simd::SIMD_MIN_INPUT_DECODE"
 
 [[fn]]
 path = "base64::decode_chunk_4"
 kappa = "a868e1e4f48eb4290c559bbb64831c616ba38b882569fb2340439e8d2826d38c"
-embedded = "579d4f32f6dc2c1868432ee50d57fd985dc7135012521aefeaaa347416beec8a"
+embedded = "1d864a5f21f0919d84e01557ec6e864d291d45f5816c45dbc14c1948bc4a4da4"
 status = "residue"
 cause = "mir::Ty: decode::DecodeError"
 
 [[fn]]
 path = "base64::decode_chunk_8"
 kappa = "40fab8e8ed0ed79c8faeced00c2774f7e72bee5ce3f6d815e2574da664a4c3cf"
-embedded = "3ff90df96ff30991909388a0f10d40040d1aff6e5bb525986f3a72ec614c2552"
+embedded = "eb993a5d2e05cb1a24b7ba98a0c47c15fa3a5087f1afcf2225c707694fa0246d"
 status = "residue"
 cause = "mir::Ty: decode::DecodeError"
 
 [[fn]]
 path = "base64::decode_complete_quads"
 kappa = "50a262b10101a14a14326ac7990731eda008386039277d362e165e3495f8ac4c"
-embedded = "1ff511788bc13f08e2529f8dbeb1db350fd29241bb05dfc633ce84465f707639"
+embedded = "33b6f65709a0fffa052f247a405dc39ba1612c831a529d3cce47a786ac70faba"
 status = "residue"
 cause = "mir::Ty: decode::DecodeSliceError"
 
 [[fn]]
 path = "base64::decode_helper"
 kappa = "e32c5dcb65b3c8d0a888ce6466f6bfb319fc85a64fea5b1289b75601d17a9226"
-embedded = "3a21b87bc9e9efe02323032320a2565fe47d99dbd2d47f600f493f6c47591efa"
+embedded = "8d3164135cf3386bba60411096a617d98e0f57bd8ac5b561e0c0e82fef1f4f20"
 status = "residue"
 cause = "mir::Ty: engine::DecodeMetadata"
 
 [[fn]]
 path = "base64::decode_suffix"
 kappa = "2892b2854e22eca08e62e23b012104bac3da001787768c413dc644244e58b6ad"
-embedded = "2c9fc14bfd7d6bf9a8ced58325393509eb93a1a445a3c99764682281b671be25"
+embedded = "c8951145acb5cbd6797e4581a6e08140fb4037c8c5be44425e78227463e8213e"
 status = "residue"
 cause = "mir::Ty: engine::DecodeMetadata"
 
@@ -267,21 +267,21 @@ cause = "mir::Ty: Alphabet"
 [[fn]]
 path = "base64::encode_bulk"
 kappa = "450853fef8a052bdfd71387b72e455e057d19f1a155d5db0aaab807c13a7f93e"
-embedded = "146f3469aaf1d05db775df9d3c947bc050c91f0f9ac33e6bc804c9256a4779ee"
+embedded = "e3a615007f1b0928f8a3cd5a7569a6961576d5ef0345fe455f8d8c57895d94dc"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item engine::simd::SIMD_MIN_INPUT_ENCODE"
 
 [[fn]]
 path = "base64::encode_helper"
 kappa = "4dde284c557321156b873f1b3e5ee87d543fecc8a4fbd120be829f7edd510e62"
-embedded = "dd6a99a4004c27286deb07a7e5187b7a2f27de451d2c8454e429bc3f03e240d7"
+embedded = "3fdb13fa8a887d8aab0889f271c04a5c2e48e574c95b206189911b671e853e55"
 status = "residue"
 cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <impl FnOnce(&[u8], &mut [u8]) -> (usize, usize) as FnOnce>::call_once, which has no backward function"
 
 [[fn]]
 path = "base64::encode_scalar_tail"
 kappa = "0a2adbe1b67d0691254301a6973b7320cca085adc4e8515974c89c7fce59f4d6"
-embedded = "2796452679117fa25a440f05642c0c9af2282e6be35fd093f6d6a1c9e6cebcc1"
+embedded = "e0986ad98c4009201006f853a2df490102ad973b5c474728fe58819492e889c0"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item engine::general_purpose::encode_scalar_tail::BLOCKS_PER_FAST_LOOP"
 
@@ -750,7 +750,7 @@ cause = "mir::Ty: engine::general_purpose::decode::GeneralPurposeEstimate"
 [[fn]]
 path = "base64::read_u64"
 kappa = "f5705df6da903988cb3d88dbee271d204778809ba4bb0b9fb5f16962d2729cb9"
-embedded = "0521e42283a80fd4bfdb889b5e6582312dffee2c285e97855567780ed374056f"
+embedded = "2b3769599c0d811b57a08310f6b038370f4d335130ec5ed20b636249730f12c2"
 status = "residue"
 cause = "mir::Ty: std::ops::RangeTo<usize>"
 

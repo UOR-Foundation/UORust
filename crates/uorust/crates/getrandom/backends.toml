@@ -1,14 +1,14 @@
 [[fn]]
 path = "getrandom::NOT_AVAILABLE"
 kappa = "7d595d353decb02162385bd4ee9f670228ec9ca649134d4ab548e8a06c5fba78"
-embedded = "c6054cc4bb2c49ab4e05e3a1dfacfd91fbc857f45825af676e9639b89606c7eb"
+embedded = "e8a88485fd3baa1e9e20c52b4da269a1299216bb652a4b4e85d97cec358dac66"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
 
 [[fn]]
 path = "getrandom::get_errno"
 kappa = "dce01cf9c08d23cd55eda5bc7979abb0e8e1262d15b46c3aa0b90632a54c692a"
-embedded = "70f907110e2fcb56880b4631d5e36d5b3339228f987a3e0d5cc69e05aa497b8b"
+embedded = "662ae7cb36ee2c2b39c79e0bcbbe3bef7ad5824df023535317cdc76209933315"
 status = "residue"
 cause = "mir::TerminatorKind::Call: __errno_location"
 
@@ -16,7 +16,7 @@ cause = "mir::TerminatorKind::Call: __errno_location"
 path = "getrandom::init"
 kappa = "174f0fce21b55f2cf30fbe7c47d3ca0814c6fddbcb2ceb2542ad0dda89d57153"
 at = "C=u32"
-embedded = "b0420497ab2b639845ff610e341d259d320e1aa8e14f3c97cee8f8b26892f11a"
+embedded = "6e4a1773b26e9d34348bde866ccd617f6637391f8ac0ef26d8d5793b2978cbb9"
 status = "residue"
 cause = "mir::Operand::Constant: Slice { alloc_id: alloc41, meta: 10 }: &CStr"
 
@@ -56,7 +56,7 @@ cause = "mir::Ty: LazyPtr<u32>"
 path = "getrandom::linux_android_with_fallback::fill_inner"
 kappa = "98a3294a8055d96ea60a522c5828577e50434363d84cb7d20fbe21bcaa8bbbe3"
 at = "C=u32"
-embedded = "ebe926db4b19988296ce865fac72142a4980b4cce2401c4a346508faf3210b29"
+embedded = "7bc52883a32fd29b086d23fd28f66bb47e26d6e56173465b010c4155212ef717"
 status = "residue"
 cause = "mir::Ty: error::Error"
 
@@ -119,7 +119,7 @@ cause = "mir::Ty: error::Error"
 [[fn]]
 path = "getrandom::wait_until_rng_ready"
 kappa = "dfc60d4b10e3b222d8471e804d9fed9843a6d2b0094ecf7d40829415094c0c8d"
-embedded = "8ff22c003efd97f857c9a69c9d058d3593934db6ba44e68ab3b52bce4c2ec8a6"
+embedded = "17f056edf4e6cef7b3cd2703b6bbbd0e8d9a06b127534bf25cad36d2ac57275c"
 status = "residue"
 cause = "mir::Ty: error::Error"
 

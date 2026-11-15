@@ -188,8 +188,12 @@ residue = 1
 [embedding]
 bodies = 1647
 embedded = 1647
-evaluable = 1647
-blocked = 0
+evaluable = 1644
+blocked = 3
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 3
 
 [[cause]]
 cause = "mir::Ty: buffer::Cursor<'_>"
