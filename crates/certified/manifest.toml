@@ -1,0 +1,1274 @@
+# The certified translator, written by `uorust certify sync` (just certified):
+# every lifted translator function exported by `lexlean production` and
+# kernel-checked, keyed by the κ of the Rust function it certifies.
+schema = "uorust/certified/1"
+result = "5d8840950344bafe47acee5c6057c86bd4cdde126bf1f8b2f5df906ffd28f148 0335bdd2b4e81080b2c65c1754a2c606f64fac9032c3f7ccb9906cffc5131ff8 4eed7bf319c427dfa78b29946dd156bbdc7c8dc02386a8659585c84ff1a18788 0e0c4f7b78289cd471125022d17afbfea573528e5929c727526d17985345a1ad 468f08d56fe6fe6c973d507fd7a82904d51fd006d4bae46cba78cbd8cb81ace7 a5d88ae7305bfc2a4e05c064b690704d01a69181239394e3b6b77abb39cfaf95 47ea219aaabf846ae50af3075cbf1cedf665ed4c4e5aedff2c451aadee887bc0 e467d3ae21f4ba3d678a8b5fc3e9ae5b9fa43c3ee46406100fdf01fc32c82ee2 13ae005762565bf542f5e1ffbef0c0c9664d430cd9af0a85cfb70610c4ab46d7 bebe44efb5b809dd0bcad428c5b019d19d2404d4a0268bb8a998d3ce6dfdd833 d5c665cf8bb048da548db5ce3bd5f2f9263fa143c044de696092bf418fc5c4ef 5f040d94ad37dad3d3cbb2f267daef6a808ea9f13c9157c7eb7174775c28f114 9d74b95268ad5135b9412b0d27161e5d2dc8faa028651b1ee250d449908a301c 87478db009d05d86c5ad9fcb94a8413fbfcbca4e3d5a54e8b83049bc3c96515b f35a039dc1cf87128b4a19eb77a278eef4463f8d8a67bfaf982e924b29dfacc5 99d9c4073dc537e4151d1cc1a6449f0441953cb5b2901b79382751c3e30784bb a31e49f1cba07fc95e99f3c4d1c84c6a5da823209e84b4331c85c60b109c75db c8724c661931701847fc8042c1cc59fe001d75ee2f481f4be4e860e1bdcddd81 01806c12a877d582a020cf3f6fc40612bad5d497bc28a6fcf107ad164b18d1cf 5669697a757617b0aab3972a1c492b96a8e579fde5edb6b2f48e6652e18f71f1 da0cdacd5ac0f7744eabb10b78676ee034cd23bbb9f99e57e6916f1264b8c847 1489b33f4daac312e85848c24373be052432fad3c1cba52b15cb81d8cbbde1cc 4c527f9ccde4f9096e359525334fc681c961b9d7a6fabfe35c665f470ec84bf7 ac4be8fa26b5365e6ca36da310a68ce67da60f513bb8fadbf652c059cacaf6a6 d3d6ba61e49a8e2d431a697865e04da440f5a81ededa4da09407f8fd51c26cf4 3bd911d29e3f93f375aeb344e47b5cc446591a58678412529ae2dd5300abcdde"
+compiler = "0.4.0"
+entry = "uorust::mir::core::core_shard"
+
+# The bootstrap: the share of the translator that runs certified.
+[share]
+translator = 665
+certified = 141
+reachable = 0
+reachable_certified = 0
+
+# The build seconds per published root, which sizes the next export's shards.
+[timing]
+seconds_per_root = 95
+
+[[root]]
+function = "uorust::lift::Acc::all_axioms"
+kappa = "47282ab2904bdc549feac5b4ef4fb5bd50ef3a8b4b26715ea7f7c139f5a4c257"
+definition = "accAllAxioms"
+package = "uorust_certified_acc_all_axioms"
+source = "591e869b265f0f7842f28a9d61cda82ed52d214beb801c33c0571bfcdb9766c5"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::axiom"
+kappa = "fc58076ed9e45b680a7f27579779bafaf70b16e2b43d5de335bf828782dfa395"
+definition = "accAxiom"
+package = "uorust_certified_acc_axiom"
+source = "90c055a8dcab560c9d5fc3b6d941367ac3335a0c0c7b614a1ea20210dc52560e"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::axioms_all"
+kappa = "f86640194e33078ede8e321e8345ad59769eee1897e5f5573047cd4ec45d2013"
+definition = "accAxiomsAll"
+package = "uorust_certified_acc_axioms_all"
+source = "801da0a0adc1f2507572aa67cdc2d1b0a950383d14e89391b3c253325d15fb66"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::called"
+kappa = "c793df1c29a3fa4e371b4ddf412b9a96c784210dd5e4038e07e627398e9a8edf"
+definition = "accCalled"
+package = "uorust_certified_acc_called"
+source = "33109ddcb57a2b7af9d0b4743b2250bf4d8f96aae721cc15f628fc90f29389b0"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::called_all"
+kappa = "e1c197b0fb6d63c2977ccf09071432f1b865d075de89336b9fafd32459fd4eb2"
+definition = "accCalledAll"
+package = "uorust_certified_acc_called_all"
+source = "8d6390fa1a9ca2b64c51945bd25acacad6598bd76915f9f452ec6964d59b6e64"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::descended"
+kappa = "dbfd19ff6fdcba53babb2ea901920bf5abe89dcfb303fa6d77a5bd0a5169e99d"
+definition = "accDescended"
+package = "uorust_certified_acc_descended"
+source = "875c0064a9036112e04b9d5387112f320b1f97ef6232f48aa0ea3d63c84ce8a8"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::helper"
+kappa = "ab9964d870ab234f119534da803332743d26be997ce401e8c4d89d53f28aa583"
+definition = "accHelper"
+package = "uorust_certified_acc_helper"
+source = "477ee6b88ebc467680cac7819fa92eaadb1afb9c1382d7856293ce63453eb503"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Acc::rejoin"
+kappa = "e9885374b0e490a68ccd996720600869104548c91c1d957c829da3b1580c35f8"
+definition = "accRejoin"
+package = "uorust_certified_acc_rejoin"
+source = "e60ed89ce80e41da2adc803ff84a69e863fa6e21b1298fb91d79e06e36c5c670"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::address"
+kappa = "c2e62bf6b25f9bf6791024740493769f9a10c1cc44a723ed30218308d2a058c7"
+definition = "address"
+package = "uorust_certified_address"
+source = "b4a27ac45029e900c3c65ff87353f8319325863a2fc8a95e495809976545f864"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::aggregate"
+kappa = "543c25ee1fd0ef04e75f2516fc02a396466c33eef9dfbf7d6ce4e8f431cae0c8"
+definition = "aggregate"
+package = "uorust_certified_aggregate"
+source = "1eb0ed1b9ee1a35ad754c1cbf4a49b774b126cd3efa0dbf9c801bb01d5822f83"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::apart"
+kappa = "3016d993c6fed10293d9cc1020caec1f1e26317fddb95916f987b90f6648bc1f"
+definition = "apart"
+package = "uorust_certified_apart"
+source = "a9f96bf0095652bbb31b0463c8fe63d73c7876b00f1fef8474bf21e8e189a8a6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::assert"
+kappa = "f98295e3cce951cb6c374f599a06c30a8cf71dfbb781550335079c851cd91657"
+definition = "assert"
+package = "uorust_certified_assert"
+source = "d916f8a060060d92151193d865ea4deadc399413e151de2f52b3a5d32b7764f2"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::parse::assert_kind"
+kappa = "50d0ea7988e104c9ca62e34f5cd09d4c7312e16050bfaf7ac3de4ad76a0c46d9"
+definition = "assertKind"
+package = "uorust_certified_assert_kind"
+source = "b78c728d6fbf3fe749bc51b23a9702f90575abe80a6ad5a110a001e493dc0fd3"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::borrow"
+kappa = "f07ccd7894ba06cca3813e07da231ef0503fab2f2886b4f9fe78c591dcbe7da4"
+definition = "borrow"
+package = "uorust_certified_borrow"
+source = "095a72782ff362c0327f1fd50b8ea21978222b85ba87f5f3f63061f997362db6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::Called::value"
+kappa = "b8fa093727ec6ac0f609f80d333b69e90b1287d2c92938dcc6ea05c579c49dbe"
+definition = "calledValue"
+package = "uorust_certified_called_value"
+source = "07d77bfe278bd76ba40cb0c02d2c638e0a05f4d53daf40dcb5ff18a204308d2b"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::captures"
+kappa = "fe30d6a8a06cecbbb0b628d0ab30994df543362259d12b73eb2141741a64ce49"
+definition = "captures"
+package = "uorust_certified_captures"
+source = "dc96ddb15662b4272e4c82847722694fec6b5a4a6fb5ff3e1b88e18703b095de"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::comb_collect"
+kappa = "c16b6607d082fc488e3f35126e25850d027bd2b8da729f5e8826eb9792c1c7f0"
+definition = "combCollect"
+package = "uorust_certified_comb_collect"
+source = "cd910167c52292689235b08326911773ef82bc17f7976fa4b89b3840f5fca445"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::const_marker"
+kappa = "d6a3a776487870d24a30efe1b7b9a73586bac7f15ebbc75d9404447ec906b958"
+definition = "constMarker"
+package = "uorust_certified_const_marker"
+source = "5d956c606dd8711b0671ea07fe13c2388b28c7201a450f1e2a8b4eaa0e3f5484"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::const_of_marker"
+kappa = "42e624747ce44d24d3ee589864d88875c9d4ea52889433b9e792ad9c434d6b3b"
+definition = "constOfMarker"
+package = "uorust_certified_const_of_marker"
+source = "553abfd4788c7dcb55c00e13f18812e82d3df722f8a1d76d271295935c2a8657"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::CoreShard::translated_count"
+kappa = "2e561377057c4bcea13476aaf627366ab1f6fc645a5247b4de7af7dc27be2ccb"
+definition = "coreShardTranslatedCount"
+package = "uorust_certified_core_shard_translated_count"
+source = "62e431e852308bed05e3c847bb4bd86bca373085dbb2c4b90e852dba92947923"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::CoreStruct::name"
+kappa = "473bbce081792d50ad928c0a25c738ba4389d61bf8226d1f28469884fcec754e"
+definition = "coreStructName"
+package = "uorust_certified_core_struct_name"
+source = "7246c9d42fef7fe81c4d001d2a397fea30e1431973dc22ff44a2d8ffb885e118"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::ctor"
+kappa = "5dad399fa122601107dc02d7d1afff4acbbb55adb684dadfc6ce78fc6a20c140"
+definition = "ctorValue"
+package = "uorust_certified_ctor_value"
+source = "c8e722813aa5620977e99726bcd57781849bc6ed9fe7ff683db7666afdcb798c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ctx::below"
+kappa = "e92d1a1a2cba572f6c6f6ecdfcd3924f83ccdf4e52d377123e3d629356cfc697"
+definition = "ctxBelow"
+package = "uorust_certified_ctx_below"
+source = "d630d669c5e7cfb456a890e2598fc674908c916a3a83613c862343c2518108d0"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ctx::fresh"
+kappa = "0e4386bd681545c827d009009122b9b7e201cf71a21ed9f41f544195a5743fd4"
+definition = "ctxFresh"
+package = "uorust_certified_ctx_fresh"
+source = "5ee4cc56a1d4d7e8c859f73c295601109d9d0c317d56fbf02af259cf0ed49f10"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ctx::helper_name"
+kappa = "63d8223842b11c5bda29d5ad277089f65ad81a73fd13078aaaed716063714be0"
+definition = "ctxHelperName"
+package = "uorust_certified_ctx_helper_name"
+source = "d9bb5c8d6b384eaf04fdfc938feec0a772b0f50a1642669df943b9700af65904"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ctx::names_from"
+kappa = "77a32cbfef777373c3dc5d2790f142c4e4f47ed728867f5d23b0f1dbe4a790d1"
+definition = "ctxNamesFrom"
+package = "uorust_certified_ctx_names_from"
+source = "42042825a132ecd570ab4d0d15212cdf89914223dd7f00cd740f1b9df9a6e88b"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::data_variant"
+kappa = "7432c779cb0e30dea650bd249317392af35f8f7d1468f9054303cfbeeef6e0dc"
+definition = "dataVariant"
+package = "uorust_certified_data_variant"
+source = "7ac97053156143fa30186979dc6788c714aa1634a4d7a2adddd9e5c705151e6d"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lex::Decl::name"
+kappa = "52527437ea714a95f547644de401bb6603f142187ac984e18bfac06bb08a55ae"
+definition = "declName"
+package = "uorust_certified_decl_name"
+source = "cf4715087e0888f37c9df42e584d6a886f973830dcff4ca33594a9d5b03dafae"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::decoded"
+kappa = "4313885baf18f2b56409edecc1caefd3afe88cfee95fcc6f0530fe7dd2e4c918"
+definition = "decoded"
+package = "uorust_certified_decoded"
+source = "a6282ab9f20651574b35c12f45739199906f955f82a290544a7f1da089fe3e35"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::memory::definition"
+kappa = "4ee0ea42b8a27ae234c9adeb8625afe94a7f688df3cfb72f06fff8637632ffad"
+definition = "definition"
+package = "uorust_certified_definition"
+source = "2ff86fdcdd8547fca38c9378ee9e66067b241d56ebceebbd6863e29b22b7db76"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::equality"
+kappa = "0597311d641125a2e844618970045d61b8f2aed8b2ecb1bf9e67caa875e2ae93"
+definition = "equality"
+package = "uorust_certified_equality"
+source = "8089d90d6783de15508c9f7c9be0e65ac0ae0e705884f337178645b8c02684c0"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::equality_name"
+kappa = "66553d1c5f6935edf39ed356468b86491e858324e7c4d0e374c9df98c3b793d2"
+definition = "equalityName"
+package = "uorust_certified_equality_name"
+source = "bade6d1fb1cf1ca56230abb4d98cdd799ddc0a65f32fec65dc1d3ea1c2f504b6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::evidence_axioms"
+kappa = "a392175a90325099ba187f814c39c54cb4018e7eb55283195c367e79e491f63e"
+definition = "evidenceAxioms"
+package = "uorust_certified_evidence_axioms"
+source = "50ed320f4e02cee51ba089792e395ba463f332c79c60687c7c87872a4e4aa79c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::evidence_proof"
+kappa = "cf666a1ac9924127fc1150fbed327bf537deb4c8ecf9f82b01a26f16179716da"
+definition = "evidenceProof"
+package = "uorust_certified_evidence_proof"
+source = "524881c57320b18f3ac11d99a3d9035f8621eb9931edc987e625ccfc5f78638f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lex::Expr::is_flat"
+kappa = "9660102a09b0ea32ef5e275bdfb5e6946d1b923558d47c517b501f92d263458c"
+definition = "exprIsFlat"
+package = "uorust_certified_expr_is_flat"
+source = "4bfe9ba2fcc97d1d881e11ea5f012b2851156559dd1c5fb17334351ae0cce3a3"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lex::Expr::pieces"
+kappa = "fced59260d2d83ffe96831b36ef1affa94b1c712d9f3eb2d4585bd0f24a58b8d"
+definition = "exprPieces"
+package = "uorust_certified_expr_pieces"
+source = "6e81b75ef0912d987cfdab294a564855b1b1887b9d54c9a3d34b6966570b8357"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::first_free"
+kappa = "a8c0b097b30fb8d6ef6d7d667fa707a4a94a7751e59d02f76483de783a24fe47"
+definition = "firstFree"
+package = "uorust_certified_first_free"
+source = "71878b0efcc1497cedf74cd63608e6d70decb66a91e8fa81b409105eedcf7ab3"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::fixed"
+kappa = "ffa8577e171fb76b3df744378c5a601e6afb9cb96b2c716b90d42543dca43601"
+definition = "fixed"
+package = "uorust_certified_fixed"
+source = "1bb6b25afd06f491b9e5b610a28ca566cdad4f235840e99a6b8778c22193d068"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::flat_some"
+kappa = "e4f32903da5cf0bee4eb265bc6ee99653e13bd13605f4b9d2dcc6c556d9cb466"
+definition = "flatSome"
+package = "uorust_certified_flat_some"
+source = "0cd1823b1ef84e42f69313409a2c3c1586d9a985071ecc2d20075806ab0b1627"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::holds_no_pointer"
+kappa = "2d57d8527fe3b0c5e296d86c69a6bac89fde4d3b28af2aa1797be22362f0cd1c"
+definition = "holdsNoPointer"
+package = "uorust_certified_holds_no_pointer"
+source = "df53f982a4a3596114f792f26493043e29526a24003565850024ca8d3faa2c55"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::hypotheses"
+kappa = "5e038dcc473e0db8901438b92c6606e645c0f7b83e1e7e7df854e66f8efe8d58"
+definition = "hypotheses"
+package = "uorust_certified_hypotheses"
+source = "9230cbf3c3478665eeb844ab54662588fda695d525556644a80fb1ec18dbbc50"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::implication"
+kappa = "e9a6b0ab4d0fe408c722416c5261e0aeb470406b6249354407ca6169d66a46ee"
+definition = "implication"
+package = "uorust_certified_implication"
+source = "c52bb84ffa10174067374bf063229c709619a9b8eed2a6cebe79c12daad526ed"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::insert_all"
+kappa = "77070144b985d40a851308affce21ca89665d8ac9ed66175f628da916d1dbc4f"
+definition = "insertAll"
+package = "uorust_certified_insert_all"
+source = "12cea76f5a31a2e5a2797ed2cfa9057fe084aef8a322c874fdc47dc491d64a33"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::int_literal"
+kappa = "94478ad7b2f30b6019b124c9f5c56eeafb78b8309e7e91bb3f3f14f88e0815de"
+definition = "intLiteral"
+package = "uorust_certified_int_literal"
+source = "4367af11712a2ff3e28fce58f94586c800f56f36ba304b7f16a294c6f9790b4f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::is_const_argument"
+kappa = "e8c66b0d30a91e0d461463ec8483a365f3135f025955d8974f545faac2412a64"
+definition = "isConstArgument"
+package = "uorust_certified_is_const_argument"
+source = "3df8f530aefb230a2451c695d36ac306fdbf5664293afd81d90ed80d37feaf3e"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::is_enum_or_bool"
+kappa = "cc232825922d5f89341a3dc571df0a6496c70e77e0408093e63c6a26ccb62793"
+definition = "isEnumOrBool"
+package = "uorust_certified_is_enum_or_bool"
+source = "964c27f63214a06ad39738a1af170543cb4fe8fcb0410e62dfd694e7ddbc646c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::is_needs_address"
+kappa = "b0ef31af261fd30e930a917bb79bfbb63662731b6c40e9c44b50bd26a76f233f"
+definition = "isNeedsAddress"
+package = "uorust_certified_is_needs_address"
+source = "723be16abe2f9d61e5a58811b4fcc3ce5f7cac0e502062271221d4c6b4bcc869"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::is_needs_memory"
+kappa = "43d3f99a3c42e8902480305132852fd85060a4d81549e5e464bfe8b3bc9648ff"
+definition = "isNeedsMemory"
+package = "uorust_certified_is_needs_memory"
+source = "f32a5151d605324e6cb62819384f89bbfda592f357fffe66e035314479bd29a9"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::is_pointer"
+kappa = "8c963215b6d53cb79bf74d28aeeec5dd6a9d9910ea4c29611ea56ef32a6dbe87"
+definition = "isPointer"
+package = "uorust_certified_is_pointer"
+source = "186d5fc204d73f6c683aa7ba34db0dee2115e9c53ea15c81ad62dcc6d1f1fdee"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::kind"
+kappa = "c220a113ae402aca6e483173af150f71c51c01c803b14444c11628d65fcecc80"
+definition = "kind"
+package = "uorust_certified_kind"
+source = "670ecd6b7aa0de41d41de9693bd4b4c8a376ee210a9475a8da2ebe8332b7e91a"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Lambda::wrap"
+kappa = "32b9019e9c10079884f7765c93ab19501db7a6029eee2e729c17b5fa86f66cb1"
+definition = "lambdaWrap"
+package = "uorust_certified_lambda_wrap"
+source = "31b0481c31c1955c29b2b2d45a6e6855a16edb721ef1d8f2c0e22630c6a4f7cd"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Lambda::wrap_expr"
+kappa = "a2fb2628a838ae20c9720887e176e73e0f95006a2c558a5775d6b1b9da35133b"
+definition = "lambdaWrapExpr"
+package = "uorust_certified_lambda_wrap_expr"
+source = "df56ab5f9ea61bc5475b46c630450445ea4cc14074c3faf3093364bb4d56824d"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::leaves"
+kappa = "2a819341b8e012fc1c14617d8c68a5bae073a61853be9b8e51813576794b3a0b"
+definition = "leaves"
+package = "uorust_certified_leaves"
+source = "5896cf5b08dbc1b07be048d76df07254eef740a3a1cce9feed0b477ebc6415a0"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::leaving_match"
+kappa = "0c93d31550b1284d4d6856dfa955988e777d055af40933202696c124ac3a8f56"
+definition = "leavingMatch"
+package = "uorust_certified_leaving_match"
+source = "d436b6c2465b7a6920dc1283df9fb065f80b72d5822b80f379dd876c4d84a2cd"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::leaving_value"
+kappa = "b6b13315b326cf8a47ca70d6b2eb800910e01fc609771e35aa743ac17da6e3f9"
+definition = "leavingValue"
+package = "uorust_certified_leaving_value"
+source = "c7b6fc0146a1afaed9aac9c5b2c9bbca147cdecd3c16234e8032715cbc019b37"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::max_of"
+kappa = "00dd4b7aa3f789faa5fc54ce0721af8049fc1c373b84380c6d75064f5f28bd01"
+definition = "liftMaxOf"
+package = "uorust_certified_lift_max_of"
+source = "6214317833d333fd6b3a8465d2cbea6c16975dccc1d7ff389c8480688d6c354c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::pow2"
+kappa = "b04fbbc0c866de6f99f710be379d9f6d2839fccde8dbf53db1333c01d777331d"
+definition = "liftPow2"
+package = "uorust_certified_lift_pow2"
+source = "b6e592597cafb0de6e7f965fb11f76f6cf1b9b45acbbe3aba2bc4433b706c23f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lex::members"
+kappa = "470e1241d4f458887ff8849572936d7c86194b80c15279f069f5cce2c08c862b"
+definition = "members"
+package = "uorust_certified_members"
+source = "6c958480e818cbf3efea727bfa5e95417afa31a222fa2555e989186772228b89"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::memory::memory_fields"
+kappa = "a69810510a5ac698b8372f07db46f4e36ab28a45728eb56ea44e232225e80d81"
+definition = "memoryFields"
+package = "uorust_certified_memory_fields"
+source = "7be9150c2f66e8d7d06ac81c012ea2cbe12972c823fc2e75059b357cc21628a1"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::memory::memory_ty"
+kappa = "847c4f46bbae77c17aaa5c68258aa70605185780abadd4b29980b289abf6d0f7"
+definition = "memoryTy"
+package = "uorust_certified_memory_ty"
+source = "9b06a4b0acb5c18cee6b1bdbac7f62c14906122e7b9efa33fda383f2f41e4a92"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::mentions_word"
+kappa = "225442ba4cdad2267467d27f99fa1678ea3450518ea2de67c80f388299b526ae"
+definition = "mentionsWord"
+package = "uorust_certified_mentions_word"
+source = "c1d90d4dd6f561bc99d6e2b4aec234d52a45734452e6132db194936f0f9a266b"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_char_any"
+kappa = "cced37dc6c8d03f73b19bf9d796fec79affd5723e1c8959615c05eedbe1a2247"
+definition = "methodCharAny"
+package = "uorust_certified_method_char_any"
+source = "ae5af7637bd5e644ae4e73019ce9d428a939bf3a625ed680023f2c768467ae4f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_list_is_empty"
+kappa = "557cea6cc3c05c3ee2c3d217da40884f178a024524807fec915d6cda48a1afdd"
+definition = "methodListIsEmpty"
+package = "uorust_certified_method_list_is_empty"
+source = "c26eb3ed0ec5f61317d349c7edaad24054d21d83ff10e9424ee187b49f5df261"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_list_len"
+kappa = "90cd2f082cc98fb8f6a788ce77515704e20ddcb964b6ed72b343ff14da318c9d"
+definition = "methodListLen"
+package = "uorust_certified_method_list_len"
+source = "7346b06742d8baab56f51914b77a8e824c233e7fc513986914b3766ecf4bcb75"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_option_is_some"
+kappa = "acbac7e641cd1ec3ce42b486c2e11d58b508c255212574e4274202b769bebe65"
+definition = "methodOptionIsSome"
+package = "uorust_certified_method_option_is_some"
+source = "1dcdf648b6b28611366bc74273f62612ed9b001fb043e93879be5f107584ff44"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_outcome_is_ok"
+kappa = "dec119780900d635acf7a0cbebbda250614da7a45822381e7f25dbc3ccd66620"
+definition = "methodOutcomeIsOk"
+package = "uorust_certified_method_outcome_is_ok"
+source = "7ffa09b1a8388aa492a8aabd8fc27c5dfb7afff2880ea786a178490046271e61"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_outcome_ok"
+kappa = "3671943f4abce17d6466590db8b3f1fd09bcb0c6a3295a6cff701ba6343b2523"
+definition = "methodOutcomeOk"
+package = "uorust_certified_method_outcome_ok"
+source = "099546b45fe71d738ff063d576e67d14ae26c1578a6bedbab8e44a20310f386c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_str_is_empty"
+kappa = "8e04562b4479ae16332927bf6429144db05ebdf798faff459c195e654e78d7f7"
+definition = "methodStrIsEmpty"
+package = "uorust_certified_method_str_is_empty"
+source = "0f2f42569f6b5a2a677d303281abb2649a90b119eb440ee8304ad12e99656239"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::method_str_to_string"
+kappa = "ac54614bf7f9d1c165bac4b45343fe4e3a970d5506774e995e3bc1373af5ec44"
+definition = "methodStrToString"
+package = "uorust_certified_method_str_to_string"
+source = "d7842f785f10ed87be5a0fa9b4f1f7d5a77c34ec5f34cba777e45937a125a999"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirAggregateKind::path"
+kappa = "d5a6d8d07096de807f6801489ae7d4f7222943ca545c0100c60d399ee966078b"
+definition = "mirAggregateKindPath"
+package = "uorust_certified_mir_aggregate_kind_path"
+source = "c117b39e9457016bab240b480b7b9a79325a67146aad85be18b0219b218fb9c5"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirAssertKind::path"
+kappa = "55c23fbc0794a68bcff22a742092ac3223077455964713f96542ccdc2406503b"
+definition = "mirAssertKindPath"
+package = "uorust_certified_mir_assert_kind_path"
+source = "c7879722bd30a16b72af9efd660fd87086a86627e4278f0150e7d8fd6c6a1bdc"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirBinOp::path"
+kappa = "90e74471cbcdfeadde06433c82e96b367b0a87832e6ccbe84212a1caee898847"
+definition = "mirBinOpPath"
+package = "uorust_certified_mir_bin_op_path"
+source = "49ad79e04fc7f13808def6d6debae15729e60a63456089c1aba9802fe4331b9a"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirBorrowKind::path"
+kappa = "34043ae8e402141bf0a0b8247880908b5756ad9db78d2d2f4024a47048828651"
+definition = "mirBorrowKindPath"
+package = "uorust_certified_mir_borrow_kind_path"
+source = "f573c47eddbfad886318f6a880e1db1d224592b8059526943945d238e3423f45"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirCastKind::path"
+kappa = "1d9b7d3defd60455481095da45e5400bd7a6a7968652cb322cb604b68d23df2d"
+definition = "mirCastKindPath"
+package = "uorust_certified_mir_cast_kind_path"
+source = "2066adfc6d94bcaac421715b4c4a0c81390f778e067f66292d5b66ac9b7aa057"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::cast"
+kappa = "50a2fd74d60c2058d91508e2c55b55d5b14931e7b0b845bd076cfd44141c8d18"
+definition = "mirCoverageCast"
+package = "uorust_certified_mir_coverage_cast"
+source = "30f8c437c867678044120a11e4bb855c8de43dd70ed3c0b6f040fc2103699ab6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::operand"
+kappa = "b252bc848510741450762aa0d9f027b8c4fbe21479e24b7e1ae1c4740c1bc81d"
+definition = "mirCoverageOperand"
+package = "uorust_certified_mir_coverage_operand"
+source = "18865be6b1b98584fd0f4b784173a966d0d77d3acb63661f9bcc111470c0972e"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::rvalue"
+kappa = "8267e311d134d4c084487d65f7b5e2b49c21b02c70c43cf0f87b9960e848f4bd"
+definition = "mirCoverageRvalue"
+package = "uorust_certified_mir_coverage_rvalue"
+source = "d5d74eddbecc5e3561c5af1a5c5d7b723eb01d78d1b28a733dc8a6e3b8b8e1fe"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::statement"
+kappa = "87754cb59303e522932a5eb04d1434324da99333a9338c3e113b0a38e9138261"
+definition = "mirCoverageStatement"
+package = "uorust_certified_mir_coverage_statement"
+source = "15d58a0e385ae6558ab7ca8dfbb2951f4872176a4fef687258e3d1c19ebfb4c2"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::terminator"
+kappa = "5020595a61dd296fd28b735e1126faf071bf2b9c2c212e64e416765dbd9b44bf"
+definition = "mirCoverageTerminator"
+package = "uorust_certified_mir_coverage_terminator"
+source = "6e1f1df74d5e082316c3c48dbf00480aa1205f27e0c477a5aebe7611b3df417f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::memory::axioms"
+kappa = "fe7cc92a8c2f566be2b52b1a1d80f66d5633e3aec17323318e6b90cda1a0aa9a"
+definition = "mirMemoryAxioms"
+package = "uorust_certified_mir_memory_axioms"
+source = "50ed320f4e02cee51ba089792e395ba463f332c79c60687c7c87872a4e4aa79c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirNonDivergingIntrinsic::path"
+kappa = "4ba4e2deffb354a0b34b06431c2eaf2d3584d569d29347a86ca4402d661370f0"
+definition = "mirNonDivergingIntrinsicPath"
+package = "uorust_certified_mir_non_diverging_intrinsic_path"
+source = "98c5c1911aa46be5c1bb09c242fe89cb57543dcd09616804a0b9444cd50b27db"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirOperand::path"
+kappa = "241688bc7e2f0ca0629619b1861e907a57eda52ab264710bade0a900afe46782"
+definition = "mirOperandPath"
+package = "uorust_certified_mir_operand_path"
+source = "5c27ead165075158660cbe67ce3e74ee42a856739cbdb92f770f6c89ffbb7ac5"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirProjectionElem::path"
+kappa = "403da65ca96827394a9b6700d89fa218cb63e2844ec42acdf5c5bf11101f8fc3"
+definition = "mirProjectionElemPath"
+package = "uorust_certified_mir_projection_elem_path"
+source = "d3a82d4cff127e2fe46fd75fbdaabf77d5f52651edf818b8e3c60c437de612cd"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirRuntimeChecks::path"
+kappa = "bbb59781b5428a4bfb756f9402ec25aa0d0269dd39fb5d1ff072909daf78687e"
+definition = "mirRuntimeChecksPath"
+package = "uorust_certified_mir_runtime_checks_path"
+source = "4562049ad75a99cccca7270dd757bbf5e67de32219182d95ea745e922dfd6e78"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirRvalue::path"
+kappa = "b3b8bcad993eb880423874b3861bbd47d48fbb4b88cc77cb66cdd718f01ba22c"
+definition = "mirRvaluePath"
+package = "uorust_certified_mir_rvalue_path"
+source = "89aa560fb85fa0a6169b873662dec225e7d434bf4e5baa2db52aec0b34df9b97"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirStatementKind::path"
+kappa = "5635ced5eee56619bc0daae167fcff0c2cda6a3eae8c83c83eb3208defc85d48"
+definition = "mirStatementKindPath"
+package = "uorust_certified_mir_statement_kind_path"
+source = "44935a950a6a645f20ca18976c3a4252ccf8773cde91a5760e711be50dbe959f"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirTerminatorKind::path"
+kappa = "a84ff8286fae0aa196bf120c7291b4d50c404568d02d542b6dff3d4d7ef17b7c"
+definition = "mirTerminatorKindPath"
+package = "uorust_certified_mir_terminator_kind_path"
+source = "f3e3135831fdd7b5e1f9916479751e1202c368bdf7b2d2eadb58c32c8b4ca0ed"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::spec::MirUnOp::path"
+kappa = "038ebbdc410d2cad20ce406753023153f514becd9792537d9a328a9344fac7aa"
+definition = "mirUnOpPath"
+package = "uorust_certified_mir_un_op_path"
+source = "af4e0624b043b07a9121ed1b5c9fd716a949ed36b5858b0ad0b880752ed5b493"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::mut_target"
+kappa = "e52ac3a4f850329bf994a4e9d74e58251d64c44888c4f529bc2fc212083d312b"
+definition = "mutTarget"
+package = "uorust_certified_mut_target"
+source = "80bb1ce15b72a781d1d80c63c94bf63a38192a939ea73e1d94984b3b58116ddd"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::named_field"
+kappa = "a9b8ffb5ab52b803002c411d2daad4c44ed29a51db7c6b3c26509f07e0a3eb1f"
+definition = "namedField"
+package = "uorust_certified_named_field"
+source = "aebb30911cea30e82b357c5886a244ff95892b0c7ff7c0d1888b23a0992dc586"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::named_in"
+kappa = "673cdbb5ad7f9344acbfbe2ef0a1450e9feaa5e71070d015d54f12e0ade9a6e4"
+definition = "namedIn"
+package = "uorust_certified_named_in"
+source = "34afb29949a2c82f1b42881851cee6c6c930c52bee58ae66f1a5a0d29c0ed6b5"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::needs_address"
+kappa = "3ba6543b3c24da1e772a69f2fb760c1d5dc78700835b276273033aef27139746"
+definition = "needsAddress"
+package = "uorust_certified_needs_address"
+source = "777ff671bfed92cadadfe536728ec9875426cafedf4fadb6bd17e231868d3ff0"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::needs_memory"
+kappa = "bde72c5383d8fb3e70aa51a52c13728981eb630ffe716ce2fa12cbf5a52fc2e8"
+definition = "needsMemory"
+package = "uorust_certified_needs_memory"
+source = "476847ca38e33cf387cd9f8cc2a6b8a7a518b17970c9c858b312adecace01ffa"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::none_of"
+kappa = "160fa0308816df0b691741aa54ae358f63f18609cdee064c395c66bd4abb23d3"
+definition = "noneOf"
+package = "uorust_certified_none_of"
+source = "6e1fad10a8e80e390751c0139c9bb8957730ddac356758385362f85190047335"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::memory::of"
+kappa = "e83d1a3e8e8538c70fd7f676a0642097b35177d7941aba7928b22c755bd5e7ca"
+definition = "of"
+package = "uorust_certified_of"
+source = "ca728e685fc574d05cc3d920a3222d8111de0228f57f6d67597060085718e1ab"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::opt_of"
+kappa = "c1ff22086007cc3d71c18bc7bb8718d0f2f7c19dfc2dfc86a32d1bacc545ebe7"
+definition = "optOf"
+package = "uorust_certified_opt_of"
+source = "6118e37ddf262662d6f7e8a31b731215bb80a98fad305915b870e25b1740f2fe"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lex::params"
+kappa = "eed3bbb135ec803687ee54bb6f66a15301bf12c4ce907a632af0d0fd8381d8d8"
+definition = "params"
+package = "uorust_certified_params"
+source = "d4b9f3f2eda436fb5c0bca412001efee76ddc58ad741d1aa903dd8f277402776"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::plain_cell"
+kappa = "70a5dc8bec23fe7b2456f7f72e21a06ae9def6df8dac10ffadf47797546368e8"
+definition = "plainCell"
+package = "uorust_certified_plain_cell"
+source = "956db1e8b0662288961d7348fdc89b411c17a7b76108ffd37bb137a90de39218"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::pointer_fields"
+kappa = "73dc254259250ba33b656ff830f3fb89480246045c90efc8ce4081b7c431e996"
+definition = "pointerFields"
+package = "uorust_certified_pointer_fields"
+source = "33db614fdc4465aad5819b71f27a79fce48f7b21a8e836190efab700e24bc145"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::pointer_value"
+kappa = "8a14edbc109ac4c3d7d54a92fe50be1d1ce5c4c7876ee0084d86794d87a30896"
+definition = "pointerValue"
+package = "uorust_certified_pointer_value"
+source = "baa9bc2a07ae1450121d7c57e5cef15e22597f890c0890d43f6f51ef2d6d25d2"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::pointer_width"
+kappa = "93f59d7433add38636a1fd1955b12e12f1558c4d69e33fc45ef6cbe3b3b8d834"
+definition = "pointerWidth"
+package = "uorust_certified_pointer_width"
+source = "181098b699f958ed7e8556343e4d8808f9e159b8e3264ee2f6fb987834b553cc"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::projection"
+kappa = "8aa9590ce43ad0737664e17277c3123b0b3cf7c09a6dcc0ee7c8f9c2fd1d1195"
+definition = "projection"
+package = "uorust_certified_projection"
+source = "1a2764f6465c3e49744c838d019963f6cff5699ffb815c5951288220663d997a"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::layout::reason"
+kappa = "e04624761c8813403d0aa2c061d8d2b50c1453bfbc480bb446c8c634db66f38d"
+definition = "reason"
+package = "uorust_certified_reason"
+source = "3ebcd9d87ee64c24ac85652eb02e44ef8b617ba2a2a588b3914ab9af70b9b7df"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::referent"
+kappa = "5d2dee89d075fbc0b8d3df1433657360e58c6c49539a13076afe082dd847548d"
+definition = "referent"
+package = "uorust_certified_referent"
+source = "ce90222b49979e051328d0a0ba84d0db45d743b4605e54d368f038c6697b6813"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Residue::code"
+kappa = "83db2a19761d0e7fa0da55a34a3d91b382d0b1cf2ab676c84a71515f1c4bc554"
+definition = "residueCode"
+package = "uorust_certified_residue_code"
+source = "15df176c93ab8dc8c54ffa0890168374044198a73356cfc7ecbeb2d5fd852501"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Residue::detail"
+kappa = "931ce096e620cbc47dbe46390d3c15d8ac274f56fc564c3ba691d75dc0baaeb2"
+definition = "residueDetail"
+package = "uorust_certified_residue_detail"
+source = "f83cd2127ec067f32286d2d8a8f07c35e18df1275b9b64b2163a2517833e5933"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::returned"
+kappa = "b93cdfff403bd36ee6a9715e715beee1557580f87602d3f462484975946f254f"
+definition = "returned"
+package = "uorust_certified_returned"
+source = "548dbc5d2a04f8d6eb4fa76658443ed6f4ad00ea6ee8f49146ec4c54e9d43a7b"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::runtime_checks"
+kappa = "06683e19d2fd394d69e7c7cacf7d3bf7e955a08e66443a200eb9a06df0a1f634"
+definition = "runtimeChecks"
+package = "uorust_certified_runtime_checks"
+source = "324c9c2c4204d06e87f9e91e0c228f6e0b3dcc6bd44d23b1b2e02b3d65f76c23"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::same_constructor"
+kappa = "201fd6f5370c2260d9e2118bce76a7aa5b20e6b2b22d18169537e4f77d93013e"
+definition = "sameConstructor"
+package = "uorust_certified_same_constructor"
+source = "3f09a6c36070cba85044fdfb231386f5c52ff8d3af304554f9fdca5225995498"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::scalar_value"
+kappa = "658be6382910603f89063b2260891b4fbfb7aec293ba58a2d6f36cb8dda8c0e6"
+definition = "scalarValue"
+package = "uorust_certified_scalar_value"
+source = "089aeb87733109e14d27f8e103d787c181fb09c35d7f7789e1f39ee7587b3785"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::settled"
+kappa = "0e4208d906a5b4e24a5aee4c59d061d2c73d92972e64d3ba5ed1c036dc11949a"
+definition = "settled"
+package = "uorust_certified_settled"
+source = "d2b725d6acc0704e7ad6a0125bf36b995ea229ddebf8e57e78b3841ca6fdaf9e"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::single_field"
+kappa = "ab8b087cdb28516ec99d3f174646addc96fb76d449f346c280dbe34e69da7101"
+definition = "singleField"
+package = "uorust_certified_single_field"
+source = "a501d45584716f973c82163acc5b7d186a57dba6b3c98936b7ec7c5affd125de"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::size_suffix"
+kappa = "8a06236aca30e5c62bf58c0e3e026bc7c96baee8064e17aa23d111af5357a65f"
+definition = "sizeSuffix"
+package = "uorust_certified_size_suffix"
+source = "b8c5aeacfef30d5136a03dee1c2258ea2f444d540a95dd4fe2d04284979e3e44"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::some_of"
+kappa = "469501c6bfa9bcb3867b0f2f0da862e7e47cbac21a9d1b6e1222140f05f4574e"
+definition = "someOf"
+package = "uorust_certified_some_of"
+source = "84e8276192231fa67443d0ecdd9004210d276a60216b5e62061f957ac40f2e08"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::state_expr"
+kappa = "4106c8989d44db6b9bb5a44d5b2e91c971291e5e2fa1be4552ca708a6835652f"
+definition = "stateExpr"
+package = "uorust_certified_state_expr"
+source = "6f8cca4d42b58364c44690b4c9af00a33daf474ac67aac3e44bb0bb17a29c230"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::then_rest"
+kappa = "5345d6296812f819d3a2da21ee14f8adb37745d42cf36861434d59879b2af6ad"
+definition = "thenRest"
+package = "uorust_certified_then_rest"
+source = "b306a5144c3ba848c94bcac29a4ebd0620e7474d244b1f3b73b9f41ac1df1c67"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::through_pointer"
+kappa = "3585dd6116cdeebce028dedbb5b88148b2d7440f69055645158db1c436677bed"
+definition = "throughPointer"
+package = "uorust_certified_through_pointer"
+source = "ac297da22ccb78837653a96b4facc82ea6b66ea24c241264cde78fdaa5fccaf6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::Trial::admits"
+kappa = "bf24882f5c53a2a4d7c45e1b6d0c805346ecef520d459a8498caa2c0a0d16833"
+definition = "trialAdmits"
+package = "uorust_certified_trial_admits"
+source = "9bd8fd11d8d08595d1a8aea2d3624160082f0090c4b91ddd62251cb54730b0a2"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::tuple_item"
+kappa = "0bf991a1eea796ea190d1cfc9ff552271328ed4f949780744e5793b7233882cc"
+definition = "tupleItem"
+package = "uorust_certified_tuple_item"
+source = "7369a15d15a1cb6ede118010ff6fa9fd49830b49b218dd88b315d57a4ba24117"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::tuple_value"
+kappa = "6d597a25a6a1c39ba49293b3a48996aa1d811e342be8e319de27ff9811dc69b0"
+definition = "tupleValue"
+package = "uorust_certified_tuple_value"
+source = "5ffbf2e8bdea92e793fda1f20a772feb9b7a013aaa1d1f206fb83a35f89d3e7d"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ty::entry"
+kappa = "543f83e17ea3c7c7a0f72f577eaf755c827a71a6c0e25796b841ba79ded5eb75"
+definition = "tyEntry"
+package = "uorust_certified_ty_entry"
+source = "9501e8f742c19ad9783988fc6385ec98d62c5d19b2867aec2873167a283992f7"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ty::render"
+kappa = "f95f90aabcd550da6a694e5702eed73b44eca6e9d3ce71ab28060c92e791fd95"
+definition = "tyRender"
+package = "uorust_certified_ty_render"
+source = "09d3499d3d70cc49490720348e8cd7eee29c7262bf5f040d73c4b68983bb8e70"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ty::same"
+kappa = "7762a395a1911b2e3f3fc632c8ef5768390a6bad5ab7f1964c4e33dfe13f7468"
+definition = "tySame"
+package = "uorust_certified_ty_same"
+source = "25005d8fab3e272fec8625dd105922ace1f3f6215e640444a9b5bddf981d88c9"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Ty::tag"
+kappa = "9d9512bf2c91b294cce1521ef4a120cfd1f2848575f1572a435b0b0b2092473f"
+definition = "tyTag"
+package = "uorust_certified_ty_tag"
+source = "3139b9ab044e8fa698e46e0c884a452402631e870c203aab9d3598a90dba67a8"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Types::accessor"
+kappa = "5b1db3a24f0ce568624150909f94be0817b5fd53a27753653bf5b4cb0fe64f36"
+definition = "typesAccessor"
+package = "uorust_certified_types_accessor"
+source = "259076195ced9ee0b907b09b30dd950945377ec476bb19d8fab2307344244af3"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Types::family_of"
+kappa = "c9aea8208e5215269776909f967196678adac819813f35afd74cd514dc41ef4b"
+definition = "typesFamilyOf"
+package = "uorust_certified_types_family_of"
+source = "7029fec113b4aeb84023dbd9063d520d349c3809aac2bc8fc88f75f2e8a03254"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::types_has_data"
+kappa = "de2ca02eeaa740e42da48aa79a532dd978a33811a219054f4428d3c5c75563e0"
+definition = "typesHasData"
+package = "uorust_certified_types_has_data"
+source = "9f9fbcc15d1d7c4d12dbf9998eb7f73322d5f45cbd5ca866efcbe1d9219705be"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Types::resolve"
+kappa = "cbe30114b7921677e5d8f5eb5468566ccf1efb331eb748d5aee828f785bac773"
+definition = "typesResolve"
+package = "uorust_certified_types_resolve"
+source = "fe0506f9c99f4e81a8f49b66bdf04c9f21cf3832c24422245cbda753077e295a"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::Types::size_name"
+kappa = "ee7f8c251085eebc28a8d49f6f847463a5399c931b6255a50567071a43a7ef31"
+definition = "typesSizeName"
+package = "uorust_certified_types_size_name"
+source = "a890afced64dba8b8241610caed9213df91de30ad94403f141aeca94251caafe"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::unicode_property"
+kappa = "24d859b19c5ef875d871a3f92bbf53f218072313fa2611ed4e7de0c8d826ecf8"
+definition = "unicodeProperty"
+package = "uorust_certified_unicode_property"
+source = "d369196662ab75c76c460159710bfc79a4b162ba1f2452f084395df86b8e212d"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::lower::uninhabited"
+kappa = "a3ca0d0c90eeaaf1e9f2363641676e8ce049947060fc14eea7d1f78f5c2b9f69"
+definition = "uninhabited"
+package = "uorust_certified_uninhabited"
+source = "da9c564f48d44a10d9a022fd103da3ca76f4f5831fad8f4800bf382d2a1c1c41"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::coverage::unop"
+kappa = "af66e4d0da2eaeb061a017fa699adc53ea315c5dafb997b458fd7bf4e5920e7d"
+definition = "unop"
+package = "uorust_certified_unop"
+source = "7972aedd08d76350cf78cea6ab4cc0a3ffd64a7b1734e6b46f6cb1f961b7a244"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::untyped"
+kappa = "4b467d250fed725a263d58d71626203b2099511d26b7ff372868b33db3b30553"
+definition = "untyped"
+package = "uorust_certified_untyped"
+source = "9acf5eb90a039c7e35e7182dd371a4baf5dad73a9973874a4ed86090d376ec3d"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::int::helper"
+kappa = "1139af8f4a7b37589a0151e0714c0bb3ed03ed42f2525fe74bdb7a8030dbf095"
+definition = "uorustHelper"
+package = "uorust_certified_uorust_helper"
+source = "bca3eb8d3715340d28d963a9e66c1bceabafff5d57a5632407640e36788a0a16"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::Scope::core"
+kappa = "6e7b8dff53abdc269e5138c2205de51804481f36652796052549d2dda53c53f3"
+definition = "uorustMirCoreScopeCore"
+package = "uorust_certified_uorust_mir_core_scope_core"
+source = "e979af05e801e742c87f97b7d2dd49dd44a759215205060e7e431668a16522a5"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::Scope::library"
+kappa = "14e94a977285220dcb0b99c5dd466e9279d2fe931d532c08469b19dcaea73fa4"
+definition = "uorustMirCoreScopeLibrary"
+package = "uorust_certified_uorust_mir_core_scope_library"
+source = "32c3dee18751d888807f9bbf83c96e5cf08b9c41b4521e142e27168de14eb52c"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::core::Scope::registry"
+kappa = "d93ee866e5746e929da97ea6dc939bf1db9975f1a9dda63a7041932cd5553e0b"
+definition = "uorustMirCoreScopeRegistry"
+package = "uorust_certified_uorust_mir_core_scope_registry"
+source = "ce5e7ecae3790befd5110e83f1c402d8b5e5253aa661f7f25a7f22eb393cea35"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::mir::layout::Refusal::text"
+kappa = "1bc30116949784e7dd00e6a5c1df7be67a9a75166d1e47b65c75933e5af6462f"
+definition = "uorustMirLayoutRefusalText"
+package = "uorust_certified_uorust_mir_layout_refusal_text"
+source = "5b3504387f53f40c411244fbe90f8a89dd506c5cfe73bf9b90e7f6efeb07b5c1"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::variant_owner"
+kappa = "e23985b01d982d7d49eb88cc3ae46d0222a96b23813655811c314b7aaa62c6b5"
+definition = "variantOwner"
+package = "uorust_certified_variant_owner"
+source = "1aa3c71dbfa21508fcf5c47236979e21cb0e6e88d86a55b1d53ee4a8ccfe78e6"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::word_char"
+kappa = "1c93669aa7db6605f98bc3350ec82a0b3cda0568e0677fb85d8b1096c79d4e91"
+definition = "wordChar"
+package = "uorust_certified_word_char"
+source = "875b8fb486f7425be1c5ab33de1b2f5a27e093850a888a974fe526d85035fa35"
+certification = "kernel-checked"
+
+[[root]]
+function = "uorust::lift::wrap_lets"
+kappa = "46b77dfae61358f07975af0a2d60a199403a5ce382cb8995a7cdc163a113d8dd"
+definition = "wrapLets"
+package = "uorust_certified_wrap_lets"
+source = "e74aba63d0cce9522f6a5e75ed0b09fc0b28f8c959da28c753372c4d1473d48a"
+certification = "kernel-checked"
+
+[[refused]]
+kappa = "0bd257c18e1a137976f064f13724a3ecaf23ca3e1d4e8bcef8056a06f9cfc4c6"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.C065d5b80fc42b1635777f9d95420336e.R0.RustStd` was rejected in `fun1` of root `Uorust.Behavior.isEmptyVec`: error: native core declaration 'LexLeanPreserve.C065d5b80fc42b1635777f9d95420336e.R0.RustStd.fun1':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.matchArms
+      (LexLeanPreservation.Rust.Corr.var
+        (Eq.refl (LexLeanPreservation.Rust.ctxLookup [(0, LexLeanTarget.TargetSyntax.Ty.adt 29, some 0)] 0))
+        (Eq.refl
+          (LexLeanPreservation.Rust.readOf
+            (LexLeanTarget.RustSyntax.Expr.move
+              (LexLeanTarget.RustSyntax.Ident.generated LexLeanTarget.RustSyntax.IdentKind.binding 0)))))
+      (LexLeanPreservation.Rust.Corr.mCons LexLeanPreservation.Rust.Corr.mNil
+        (Eq.refl
+          [LexLeanTarget.TargetSyntax.Arm.arm (LexLeanTarget.TargetSyntax.Shape.adt 0) [1, 2]"""
+
+[[refused]]
+kappa = "0f301aed82f63d62779c619632aa2d1ef82c2fb80c41acab8673b579f70e2bdb"
+cause = "LLB6005 root `Uorust.Behavior.accSaw`: package `uorust_certified_acc_saw` for rust-std: function 29: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "412da91afe2fdde4845de990b136d3a5ae8df0387d40b32df9a43c5ac06dcb94"
+cause = "LLB6005 root `Uorust.Behavior.positive`: package `uorust_certified_positive` for rust-std: function 40: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "59cd35aaafd0bff3e97dc4e3dfa2addbc5fd4f649e095bee32fbfa2427e2f4a6"
+cause = "reaches Behavior::walk, a definition with a function parameter, which no production root may"
+
+[[refused]]
+kappa = "657c6ede2afce13b299afe133dff562d43ee0ddc27f834ea005bc4c8744e366a"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.Cb2ff7b54a1a7d822257144bb5f3bacb6.R0.RustStd` was rejected in `fun1` of root `Uorust.Behavior.defaultEntry`: error: native core declaration 'LexLeanPreserve.Cb2ff7b54a1a7d822257144bb5f3bacb6.R0.RustStd.fun1':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.matchArms
+      (LexLeanPreservation.Rust.Corr.var
+        (Eq.refl (LexLeanPreservation.Rust.ctxLookup [(0, LexLeanTarget.TargetSyntax.Ty.adt 40, some 0)] 0))
+        (Eq.refl
+          (LexLeanPreservation.Rust.readOf
+            (LexLeanTarget.RustSyntax.Expr.move
+              (LexLeanTarget.RustSyntax.Ident.generated LexLeanTarget.RustSyntax.IdentKind.binding 0)))))
+      (LexLeanPreservation.Rust.Corr.mCons LexLeanPreservation.Rust.Corr.mNil
+        (Eq.refl
+          [LexLeanTarget.TargetSyntax.Arm.arm (LexLeanTarget.TargetSyntax.Shape.adt 0) [1, 2, 3, 4]"""
+
+[[refused]]
+kappa = "6d971932d213a34f41223d7a54ee6f390a634005f34dedca1347a2fae7fcd693"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.C644947920115a29d27cb4d3b0a5060c3.R0.RustStd` was rejected in `fun2` of root `Uorust.Behavior.tailType`: error: native core declaration 'LexLeanPreserve.C644947920115a29d27cb4d3b0a5060c3.R0.RustStd.fun2':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.matchArms
+      (LexLeanPreservation.Rust.Corr.var
+        (Eq.refl (LexLeanPreservation.Rust.ctxLookup [(0, LexLeanTarget.TargetSyntax.Ty.adt 29, some 0)] 0))
+        (Eq.refl
+          (LexLeanPreservation.Rust.readOf
+            (LexLeanTarget.RustSyntax.Expr.move
+              (LexLeanTarget.RustSyntax.Ident.generated LexLeanTarget.RustSyntax.IdentKind.binding 0)))))
+      (LexLeanPreservation.Rust.Corr.mCons LexLeanPreservation.Rust.Corr.mNil
+        (Eq.refl
+          [LexLeanTarget.TargetSyntax.Arm.arm (LexLeanTarget.TargetSyntax.Shape.adt 0) [1, 2]"""
+
+[[refused]]
+kappa = "8371e6e46a4854777a75291d5f39b7b0fb50c1664b2bbe92494c28a185fc2103"
+cause = "LLS8002 root `Uorust.Behavior.updateTarget`: max_file_bytes exceeded in phase lowering: configured 4194304, its certificate A is at least 5433320 bytes (12055 program nodes)"
+
+[[refused]]
+kappa = "8a8e2a53bcbb9eda89c4bfb164046dfe7230f1dfa26dbb0d4604ff63888a6734"
+cause = "LLB6005 root `Uorust.Behavior.nestedOk`: package `uorust_certified_nested_ok` for rust-std: function 30: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "9060decb3c32b9cd2ecc7113b16f99d738aa970231034f994171f5b545650e0a"
+cause = "LLB6005 root `Uorust.Behavior.typesTuple`: package `uorust_certified_types_tuple` for rust-std: function 35: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "94947562a32784b956b6483a1c22d62b5f325c398f8e0a74f53d0d1738006d9f"
+cause = "LLB6005 root `Uorust.Behavior.threadedResult`: package `uorust_certified_threaded_result` for rust-std: function 36: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "a494753839e902f04ac21bb67009f22acd4fcb8cd90a8db434d671c03de1af64"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.C62d687306dc69a237f72a0f74c75b965.R0.RustStd` was rejected in `fun14` of root `Uorust.Behavior.hexOf`: error: native core declaration 'LexLeanPreserve.C62d687306dc69a237f72a0f74c75b965.R0.RustStd.fun14':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.matchArms
+      (LexLeanPreservation.Rust.Corr.var
+        (Eq.refl (LexLeanPreservation.Rust.ctxLookup [(0, LexLeanTarget.TargetSyntax.Ty.adt 9, some 0)] 0))
+        (Eq.refl
+          (LexLeanPreservation.Rust.readOf
+            (LexLeanTarget.RustSyntax.Expr.move
+              (LexLeanTarget.RustSyntax.Ident.generated LexLeanTarget.RustSyntax.IdentKind.binding 0)))))
+      (LexLeanPreservation.Rust.Corr.mCons LexLeanPreservation.Rust.Corr.mNil
+        (Eq.refl
+          [LexLeanTarget.TargetSyntax.Arm.arm (LexLeanTarget.TargetSyntax.Shape.adt 0) [1, 2, 3]"""
+
+[[refused]]
+kappa = "bb0e9ee4917461bfeee904cf8f0a81d762155fc976f35ca537a1c3cf0d7791fc"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.C9cd8f5135b4765354196637a26c73039.R0.RustStd` was rejected in `fun10` of root `Uorust.Behavior.advance`: error: native core declaration 'LexLeanPreserve.C9cd8f5135b4765354196637a26c73039.R0.RustStd.fun10':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.matchArms
+      (LexLeanPreservation.Rust.Corr.var
+        (Eq.refl (LexLeanPreservation.Rust.ctxLookup [(0, LexLeanTarget.TargetSyntax.Ty.adt 18, some 0)] 0))
+        (Eq.refl
+          (LexLeanPreservation.Rust.readOf
+            (LexLeanTarget.RustSyntax.Expr.move
+              (LexLeanTarget.RustSyntax.Ident.generated LexLeanTarget.RustSyntax.IdentKind.binding 0)))))
+      (LexLeanPreservation.Rust.Corr.mCons LexLeanPreservation.Rust.Corr.mNil
+        (Eq.refl
+          [LexLeanTarget.TargetSyntax.Arm.arm (LexLeanTarget.TargetSyntax.Shape.adt 0) [1, 2]"""
+
+[[refused]]
+kappa = "e2f1f285292f85398d7b97b88f1ee07da629d0031254b56fc99b8541a96541ef"
+cause = "LLB6005 root `Uorust.Behavior.tyMentions`: package `uorust_certified_ty_mentions` for rust-std: function 29: the lowering and the calculus disagree on whether its self calls are a loop"
+
+[[refused]]
+kappa = "f33ab30ae423bef6a769290a8c65756c4ba850bea06b55ab7033a7c253b18719"
+cause = """
+built alone: LLV7015 certificate B: `LexLeanPreserve.Cf497986a838d1611219280bd37e5cdcc.R0.RustStd` was rejected in `fun1` of root `Uorust.Behavior.rangeBounds`: error: native core declaration 'LexLeanPreserve.Cf497986a838d1611219280bd37e5cdcc.R0.RustStd.fun1':
+  (kernel) application type mismatch
+    LexLeanPreservation.Rust.Corr.mCons
+      (LexLeanPreservation.Rust.Corr.mCons
+        (LexLeanPreservation.Rust.Corr.mCons
+          (LexLeanPreservation.Rust.Corr.mCons
+            (LexLeanPreservation.Rust.Corr.mCons
+              (LexLeanPreservation.Rust.Corr.mCons
+                (LexLeanPreservation.Rust.Corr.mCons
+                  (LexLeanPreservation.Rust.Corr.mCons
+                    (LexLeanPreservation.Rust.Corr.mCons
+                      (LexLeanPreservation.Rust.Corr.mCons"""
