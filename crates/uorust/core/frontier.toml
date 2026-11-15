@@ -372,12 +372,12 @@ construct = "intrinsic vtable_size, vtable_align: a vtable the memory model does
 bodies = 2
 
 [bridge]
-bridged = 418
-pending = 10198
+bridged = 381
+pending = 10235
 
 [[pending]]
 shape = "timeout: call"
-bodies = 1798
+bodies = 1903
 
 [[pending]]
 shape = "closure: a callee left to a dictionary"
@@ -392,16 +392,12 @@ shape = "signature: Result"
 bodies = 389
 
 [[pending]]
+shape = "timeout: straight"
+bodies = 340
+
+[[pending]]
 shape = "signature: an arity the body does not have"
 bodies = 337
-
-[[pending]]
-shape = "timeout: straight"
-bodies = 324
-
-[[pending]]
-shape = "proof: call"
-bodies = 262
 
 [[pending]]
 shape = "signature: List"
@@ -410,6 +406,10 @@ bodies = 205
 [[pending]]
 shape = "signature: TupleNatBool"
 bodies = 192
+
+[[pending]]
+shape = "proof: call"
+bodies = 173
 
 [[pending]]
 shape = "signature: RawPointer"
@@ -433,7 +433,7 @@ bodies = 114
 
 [[pending]]
 shape = "timeout: float"
-bodies = 113
+bodies = 114
 
 [[pending]]
 shape = "signature: TupleNatOptionNat"
@@ -446,6 +446,10 @@ bodies = 75
 [[pending]]
 shape = "signature: CoreNumNonzeroNonZeroU32"
 bodies = 72
+
+[[pending]]
+shape = "timeout: cast"
+bodies = 68
 
 [[pending]]
 shape = "signature: CoreNumWrappingWrappingU32"
@@ -500,16 +504,12 @@ shape = "signature: CoreNumWrappingWrappingUsize"
 bodies = 61
 
 [[pending]]
+shape = "timeout: binary div"
+bodies = 59
+
+[[pending]]
 shape = "signature: CoreOpsRangeBoundU32"
 bodies = 58
-
-[[pending]]
-shape = "timeout: cast"
-bodies = 58
-
-[[pending]]
-shape = "timeout: binary div"
-bodies = 57
 
 [[pending]]
 shape = "signature: CoreNumSaturatingSaturatingU32"
@@ -560,12 +560,12 @@ shape = "signature: CoreNumSaturatingSaturatingUsize"
 bodies = 50
 
 [[pending]]
-shape = "signature: CoreTimeDuration"
-bodies = 47
+shape = "timeout: binary rem"
+bodies = 48
 
 [[pending]]
-shape = "timeout: binary rem"
-bodies = 46
+shape = "signature: CoreTimeDuration"
+bodies = 47
 
 [[pending]]
 shape = "signature: CoreNumNonzeroNonZeroUsize"
@@ -636,11 +636,15 @@ shape = "signature: String"
 bodies = 25
 
 [[pending]]
-shape = "proof: switch"
+shape = "definition"
 bodies = 21
 
 [[pending]]
-shape = "definition"
+shape = "proof: switch"
+bodies = 20
+
+[[pending]]
+shape = "timeout: binary bitOr"
 bodies = 19
 
 [[pending]]
@@ -696,6 +700,10 @@ shape = "signature: TupleUnitCoreNumWrappingWrappingUsize"
 bodies = 18
 
 [[pending]]
+shape = "timeout: binary le"
+bodies = 18
+
+[[pending]]
 shape = "signature: CoreNetIpAddrIpAddr"
 bodies = 17
 
@@ -748,14 +756,6 @@ shape = "signature: TupleUnitCoreNumSaturatingSaturatingUsize"
 bodies = 16
 
 [[pending]]
-shape = "timeout: binary bitOr"
-bodies = 16
-
-[[pending]]
-shape = "proof: cast"
-bodies = 15
-
-[[pending]]
 shape = "signature: TupleNatNatNat"
 bodies = 14
 
@@ -785,6 +785,10 @@ bodies = 11
 
 [[pending]]
 shape = "signature: TupleOptionNatCoreOpsRangeRangeU32"
+bodies = 11
+
+[[pending]]
+shape = "timeout: binary lt"
 bodies = 11
 
 [[pending]]
@@ -844,14 +848,6 @@ shape = "signature: TupleNatNatNatNatNatNatNatNatNatNatNatNat"
 bodies = 10
 
 [[pending]]
-shape = "timeout: binary le"
-bodies = 10
-
-[[pending]]
-shape = "timeout: binary lt"
-bodies = 10
-
-[[pending]]
 shape = "signature: CoreCmpReverseU32"
 bodies = 9
 
@@ -884,7 +880,7 @@ shape = "signature: TupleCoreFmtFormattingOptionsCoreFmtFormattingOptions"
 bodies = 8
 
 [[pending]]
-shape = "proof: binary le"
+shape = "proof: cast"
 bodies = 7
 
 [[pending]]
@@ -996,6 +992,10 @@ shape = "signature: TupleListNatListNat"
 bodies = 6
 
 [[pending]]
+shape = "timeout: binary gt"
+bodies = 6
+
+[[pending]]
 shape = "signature: CoreCharCharCase"
 bodies = 5
 
@@ -1082,14 +1082,6 @@ bodies = 5
 [[pending]]
 shape = "signature: TupleCoreOpsRangeOneSidedRangeBoundNat"
 bodies = 5
-
-[[pending]]
-shape = "timeout: binary gt"
-bodies = 5
-
-[[pending]]
-shape = "proof: straight"
-bodies = 4
 
 [[pending]]
 shape = "signature: CoreBstrByteStr"
@@ -1224,7 +1216,7 @@ shape = "signature: TupleUnitCoreTimeDuration"
 bodies = 4
 
 [[pending]]
-shape = "proof: binary bitOr"
+shape = "proof: straight"
 bodies = 3
 
 [[pending]]
@@ -1517,18 +1509,6 @@ bodies = 3
 
 [[pending]]
 shape = "closure: a generic no binding fixes"
-bodies = 2
-
-[[pending]]
-shape = "proof: binary div"
-bodies = 2
-
-[[pending]]
-shape = "proof: binary lt"
-bodies = 2
-
-[[pending]]
-shape = "proof: binary rem"
 bodies = 2
 
 [[pending]]
@@ -1900,15 +1880,15 @@ shape = "signature: TupleUnitListNat"
 bodies = 2
 
 [[pending]]
+shape = "timeout: switch"
+bodies = 2
+
+[[pending]]
 shape = "closure: Operand::Constant of a constant the embedding does not read"
 bodies = 1
 
 [[pending]]
-shape = "proof: binary ge"
-bodies = 1
-
-[[pending]]
-shape = "proof: binary gt"
+shape = "proof: binary lt"
 bodies = 1
 
 [[pending]]
@@ -2396,7 +2376,7 @@ shape = "timeout: binary eq"
 bodies = 1
 
 [[pending]]
-shape = "timeout: switch"
+shape = "timeout: binary ge"
 bodies = 1
 
 [[cause]]
