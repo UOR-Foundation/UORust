@@ -1217,6 +1217,15 @@ impl Cx<'_> {
         let decl = match (found.as_slice(), named) {
             ([one], _) => *one,
             ([], [one]) => one,
+            // Where no path tells them apart, an enum (or a type of data)
+            // is sized whichever of them it is.
+            ([], [_, ..])
+                if named
+                    .iter()
+                    .all(|d| d.variants.is_some() || d.data.is_some()) =>
+            {
+                return Some(true);
+            }
             _ => return None,
         };
         if decl.variants.is_some() || decl.data.is_some() {
@@ -2519,11 +2528,17 @@ impl Cx<'_> {
                     IrAggregate::Array => (A::Array, mir_ctor("Agg.array", &[])),
                     IrAggregate::Adt(ty, variant) => {
                         let v = variant.clone().unwrap_or_default();
-                        let d = variant
-                            .as_deref()
-                            .and_then(|v| self.discriminant(ty, v))
-                            .unwrap_or_default();
-                        if variant.is_some() && self.discriminant(ty, &v).is_none() {
+                        // An enum MIR names by its bare name where several
+                        // share it is the one the local it builds is of.
+                        let named = |t: &str| last_segment(t) == last_segment(ty);
+                        let at = |v: &str| {
+                            self.discriminant(ty, v).or_else(|| {
+                                dest.filter(|t| named(t))
+                                    .and_then(|t| self.discriminant(t, v))
+                            })
+                        };
+                        let d = variant.as_deref().and_then(at).unwrap_or_default();
+                        if variant.is_some() && at(&v).is_none() {
                             e.blocked.insert(
                                 "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
                                     .to_string(),
