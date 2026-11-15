@@ -1,0 +1,112 @@
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:108:10: 108:15>::fmt"
+kappa = "7242dc3aaaf644a274b2b8ef5eb8cb09571cd67d084d09c24165d9213ddc3662"
+at = "N=#_N, T=u32"
+embedded = "a6dc7f78712a27e6822b0d5d8023678656fa1609d6a911bd08fab67cd31843c2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:108:17: 108:22>::clone"
+kappa = "fa687f6f68aa901b694471d1ef1a9c4ae7cbebf45d2251ba827aec93086196a5"
+at = "N=#_N, T=u32"
+embedded = "91f2d59f9d70cd1cce51f71a3a47b820a1120073564b0e9a10376de1b174ee2f"
+status = "residue"
+cause = "mir::Ty: array_impl::CircularArrayWindowsInner<u32, #_N>"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:19:10: 19:15>::fmt"
+kappa = "a8168617b8ca096cc097de643d7eec4e3a9cb148976921958a037e9d28364c41"
+at = "N=#_N, T=u32"
+embedded = "e6e10bafb2a7ffabb00e57aa514de9b8203cc3b7a7f85a5fabbb002013f916f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:19:17: 19:22>::clone"
+kappa = "12edcc72a50b231bf24fa0f2f2160856486dce812b4c34a2e7bbfde0d3aeb0b2"
+at = "N=#_N, T=u32"
+embedded = "1f212c12739e04e717751b5352c11cdedfbbf9acd1cb98f4d8a35f3183b5b51d"
+status = "residue"
+cause = "mir::Ty: array_impl::ArrayWindowsInner<u32, #_N>"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:98:10: 98:15>::fmt"
+kappa = "1f5783a7788a881443e8df43f4c9f8ced1ed52a3762b86f4462b61bbfc6fea7f"
+at = "I=u32, N=u32"
+embedded = "ee6b9c5df8533b7c768f59f6da2b3b3f44852b8a169e09f8cb35e8da508a78e5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:98:17: 98:22>::clone"
+kappa = "3603742e3221578b3f364d81a994e4790ba293e6e6f56e403202c9f0521a2a02"
+at = "I=u32, N=u32"
+embedded = "2d7215644eabfa65868b3e9a8a8f8018006761a073bc5d97909efa196a99f6b7"
+status = "residue"
+cause = "mir::Ty: array_impl::CircularArrayWindows<u32, u32>"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:9:10: 9:15>::fmt"
+kappa = "ff0f78e50f3da77dcbb9f3054eaa3e07433dd8a526c636f65d91dd54936661eb"
+at = "I=u32, N=u32"
+embedded = "0a9477359c4628b74296d3cc0621c7a755f658bcdd00c2a55a02f5044769c64d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::array_impl::<impl at src/array_impl.rs:9:17: 9:22>::clone"
+kappa = "fc8e384c96156a295d529a84552aa461f98d2b6344d74aaf96c16ad3a6af43f0"
+at = "I=u32, N=u32"
+embedded = "9245e27c59e214b940eadf15cc7961b500e32a5a2bd37658d42666b29055fd6b"
+status = "residue"
+cause = "mir::Ty: array_impl::ArrayWindows<u32, u32>"
+
+[[fn]]
+path = "itertools::array_impl::ArrayWindows::next"
+kappa = "63b1094a006cdca7b0a867aa2db370618c57d4a85ded3a92aaf9ca541194d3f1"
+at = "I=u32, N=#usize_N"
+embedded = "fd19fdd183e31d921b1e2da0849581e1fe70af669699d8d32d040d8a82e9e048"
+status = "residue"
+cause = "mir::Ty: array_impl::ArrayWindows<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::array_impl::ArrayWindowsInner::add_to_buffer"
+kappa = "efe60596451208f99b8836ba742c7742e495ab3522bfa31873e27d2c795413c1"
+at = "T=u32"
+embedded = "ffff70481cce44956495da52f8aa6aef50f7c3fde286007b87e295db0ff35974"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "itertools::array_impl::ArrayWindowsInner::make_window"
+kappa = "aedbf6e12025af29427603bb2df930dfc540206854a86fc62bff0edf2514ac4d"
+at = "N=#usize_N, T=u32"
+embedded = "5a8254692ffbd8fe97ff0929a241d644a2d20a3c7fa11be9690f57e08003d5b0"
+status = "residue"
+cause = "mir::Ty: ArrayWindowsInner<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::array_impl::CircularArrayWindows::next"
+kappa = "6434dec3829ed8c218102edf47f185f5e1958f889f81791f5f8ab884d4d5bda2"
+at = "I=u32, N=#usize_N"
+embedded = "f6e4b54346c4387834fa8d316c2d2e9ab4f7daefb594c15287d517559ab1b356"
+status = "residue"
+cause = "mir::Ty: array_impl::CircularArrayWindows<u32, #usize_N>"
+
+[[fn]]
+path = "itertools::array_windows"
+kappa = "154d1b630925a3e66e38bf1d9656762fd80612acfc965de4b4d64decd5e91bbe"
+at = "I=u32, N=u32"
+embedded = "65bf71d6d8f3905d791a6100c7e88df5a8a0ad64a1cc20a4e77c61da6cbf7be6"
+status = "residue"
+cause = "mir::Ty: array_impl::ArrayWindows<u32, u32>"
+
+[[fn]]
+path = "itertools::circular_array_windows"
+kappa = "f19a7b649b82a5c6a0d983d5d9da319d44f79025e96b0f8e8ff342dd2c234834"
+at = "I=u32, N=u32"
+embedded = "cf66a19c828c7f817e7818a09c80d4188b273f6534e158686fa09edcbdbec972"
+status = "residue"
+cause = "mir::Ty: array_impl::CircularArrayWindows<u32, u32>"
+

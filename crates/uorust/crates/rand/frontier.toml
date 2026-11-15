@@ -1,0 +1,661 @@
+# The rand register (written by `uorust crate rand@0.10.3`; do not edit): every body of
+# rand's MIR at rand 0.10.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 470
+translated = 25
+residue = 445
+
+[module.crate]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.distr]
+bodies = 312
+translated = 15
+residue = 297
+
+[module.rng]
+bodies = 30
+translated = 3
+residue = 27
+
+[module.rngs]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.seq]
+bodies = 71
+translated = 7
+residue = 64
+
+[embedding]
+embedded = 470
+evaluable = 470
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::Error"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: StandardUniform"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: rand_core::Infallible"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: seq::index_::IndexVec"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: rngs::thread::ThreadRng"
+bodies = 8
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IndexedRandom"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IndexVec"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WeightedIndex<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: distr::StandardUniform"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: distr::bernoulli::Bernoulli"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: distr::weighted::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: seq::slice::IndexedSamples<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CoinFlipper<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UniformChar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UniformInt<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UniformUsize"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformUsize"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::other::UniformChar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::other::UniformDuration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndex<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rngs::small::SmallRng"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rngs::xoshiro128plusplus::Xoshiro128PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rngs::xoshiro256plusplus::Xoshiro256PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Distribution"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IteratorRandom"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item distr::uniform::other::CHAR_SURROGATE_START"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <u32 as distr::uniform::UniformSampler>::X"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Alphabetic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Alphanumeric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bernoulli"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BernoulliError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Choose<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IndexVecIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReseedingCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SmallRng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StdRng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Uniform<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformDuration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformDurationMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UniformInt<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WeightedIndexIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: X"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Xoshiro128PlusPlus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Xoshiro256PlusPlus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::distribution::Iter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::float::Open01"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::float::OpenClosed01"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::other::Alphabetic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::other::Alphanumeric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::slice::Choose<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::int::UniformInt<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndexIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: getrandom::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_::IndexVecIntoIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rngs::thread::ReseedingCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: seq::index_::IndexVecIntoIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uniform::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: weighted::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Rng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SampleRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u32 as rng::RngExt>::random::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: seq::increasing_uniform::calculate_bound_u32::RESULT2: mir::TerminatorKind::Call: seq::increasing_uniform::calculate_bound_u32::inner: rand's MIR stops at mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u128 as distr::utils::WideningMultiply>::wmul::LOWER_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: seq::increasing_uniform::calculate_bound_u32::inner: rand's MIR stops at mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: seq::slice::partial_shuffle: rand's MIR stops at mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IncreasingUniform<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IndexedSamples<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Uniform<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UniformFloat<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeToInclusive<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::bernoulli::BernoulliError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::distribution::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::slice::Empty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::Uniform<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::float::UniformFloat<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distr::uniform::other::UniformDurationMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distribution::Iter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: distribution::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mut [u32]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rngs::std::StdRng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sample_efraimidis_spirakis::Element<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seq::coin_flipper::CoinFlipper<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seq::coin_flipper::CoinFlipper<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seq::increasing_uniform::IncreasingUniform<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seq::index_::IndexVecIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

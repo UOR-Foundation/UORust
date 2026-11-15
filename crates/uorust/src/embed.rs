@@ -224,6 +224,19 @@ fn nearest(statics: &BTreeSet<String>, printed: &str, owner: &str) -> Option<Str
     }
 }
 
+/// [`nearest`], or, for a static an impl's method declares, which MIR
+/// prints through the impl's type (`pool::Pool::<T, F>::f::X`) and dumps
+/// through the impl (`pool::<impl at ..>::f::X`), the static the longest
+/// tail of that path past the type names.
+fn nearest_static(statics: &BTreeSet<String>, printed: &str, owner: &str) -> Option<String> {
+    if let Some(p) = nearest(statics, printed, owner) {
+        return Some(p);
+    }
+    let segments = crate::mir::parse::split_path(printed);
+    (1..segments.len().saturating_sub(1))
+        .find_map(|n| nearest(statics, &segments[n..].join("::"), owner))
+}
+
 /// The path a dump's first line names its body by (`// MIR for `a::b``).
 fn dumped_path(text: &str) -> Option<&str> {
     text.lines()
@@ -541,6 +554,14 @@ fn intrinsic_name(path: &str) -> String {
         .to_string()
 }
 
+/// The intrinsics a type query answers (`QUERY::<T>`, `type_query`): a
+/// count rustc's layout data gives, which the evaluator reads as one.
+const TYPE_QUERIES: &[&str] = &[
+    "field_offset",
+    "assert_zero_valid",
+    "assert_mem_uninitialized_valid",
+];
+
 /// The intrinsics whose effect is the platform's, outside the abstract
 /// machine: `breakpoint`'s trap is a debugger's, and `va_arg` reads the
 /// C ABI's variadic arguments, which the target's calling convention
@@ -673,6 +694,15 @@ fn type_argument(callee: &str) -> Option<String> {
     let (_, args) = generic_parts(callee.trim());
     match args.as_slice() {
         [t] => Some(t.clone()),
+        _ => None,
+    }
+}
+
+/// The metadata type `ptr_metadata::<T, M>` prints, `M`.
+fn metadata_argument(callee: &str) -> Option<String> {
+    let (_, args) = generic_parts(callee.trim());
+    match args.as_slice() {
+        [_, m] => Some(m.clone()),
         _ => None,
     }
 }
@@ -922,6 +952,85 @@ pub(crate) fn int_ty(printed: &str, width: u32) -> Option<(u32, bool)> {
         .map(|b| (b, signed))
 }
 
+/// An `asm!` terminator as a call the dictionary answers.
+#[derive(Clone, Debug, PartialEq)]
+struct InlineAsm {
+    /// The assembly with its operands' kinds and registers and its
+    /// options, the operands themselves left out: `asm!("syscall",
+    /// inlateout("ax"), in("di"), lateout("cx"), options(NOSTACK))`.
+    name: String,
+    /// The operands it reads, in order.
+    inputs: Vec<IrOperand>,
+    /// The one place it writes.
+    output: IrPlace,
+    /// Where control goes after it (none for `noreturn`).
+    target: Option<usize>,
+}
+
+/// The `asm!` terminator `text` prints, where its operands are registers'
+/// inputs and outputs and it writes one place: a `const` or `sym` operand,
+/// or several outputs, is none.
+fn inline_asm(text: &str) -> Option<InlineAsm> {
+    let (call, edges) = match text.rfind(" -> ") {
+        Some(at) => (&text[..at], Some(&text[at + 4..])),
+        None => (text, None),
+    };
+    let inner = call.trim().strip_prefix("asm!(")?.strip_suffix(')')?;
+    // `=>`, an inout's output, is no closing bracket to the split.
+    const INTO: &str = " \u{21d2} ";
+    let inner = inner.replace(" => ", INTO);
+    let mut name = Vec::new();
+    let mut inputs = Vec::new();
+    let mut outputs = Vec::new();
+    let mut noreturn = false;
+    for part in crate::mir::parse::split_top(&inner, ',') {
+        let part = part.trim();
+        if part.starts_with('"') || part.starts_with("options(") || part.starts_with("clobber_abi(")
+        {
+            noreturn |= part.starts_with("options(") && part.contains("NORETURN");
+            name.push(part.to_string());
+            continue;
+        }
+        let (spec, rest) = part.split_once(") ")?;
+        let (kind, _) = spec.split_once('(')?;
+        name.push(format!("{spec})"));
+        let (read, written) = match kind {
+            "in" => (Some(rest), None),
+            "out" | "lateout" => (None, Some(rest)),
+            "inout" | "inlateout" => match rest.split_once(INTO) {
+                Some((i, o)) => (Some(i), Some(o)),
+                None => (Some(rest), Some(rest)),
+            },
+            _ => return None,
+        };
+        if let Some(i) = read {
+            inputs.push(crate::mir::parse::operand(i.trim())?);
+        }
+        match written.map(str::trim) {
+            Some("_") | None => {}
+            Some(o) => outputs.push(crate::mir::parse::place(o)?),
+        }
+    }
+    let [output] = <[IrPlace; 1]>::try_from(outputs).ok()?;
+    let target = match edges {
+        _ if noreturn => None,
+        Some(edges) => {
+            let inner = edges.trim().strip_prefix('[')?.strip_suffix(']')?;
+            let ret = crate::mir::parse::split_top(inner, ',')
+                .into_iter()
+                .find_map(|e| e.trim().strip_prefix("return: bb")?.parse().ok());
+            Some(ret.or_else(|| edges.trim().strip_prefix("bb")?.parse().ok())?)
+        }
+        None => None,
+    };
+    Some(InlineAsm {
+        name: format!("asm!({})", name.join(", ")),
+        inputs,
+        output,
+        target,
+    })
+}
+
 /// The integer a constant of a pattern type prints, `65536_i32 is (..)`:
 /// its value, width and signedness, its base's.
 fn pattern_int(text: &str, width: u32) -> Option<(i128, u32, bool)> {
@@ -1104,10 +1213,45 @@ impl Cx<'_> {
             .trim_end_matches("::")
             .to_string();
         let candidates = self.enums.get(&last)?;
-        let mut found = candidates.iter().filter(|(path, variants)| {
-            (candidates.len() == 1 || same_item(&erased, path))
-                && variants.iter().any(|(v, _)| v == variant)
-        });
+        let has = |vs: &Vec<(String, i128)>| vs.iter().any(|(v, _)| v == variant);
+        // The enum of exactly the printed path (a crate prints its own
+        // items by their paths from its root), else each whose path the
+        // printed one ends alike with, else, for a path through a module
+        // no source declares (one a build script writes), the enums of
+        // that name its crate declares; each where they give the variant's
+        // discriminant alike.
+        let exact: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| *path == erased && has(vs))
+            .collect();
+        let alike: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| (candidates.len() == 1 || same_item(&erased, path)) && has(vs))
+            .collect();
+        let first = crate::mir::parse::split_path(&erased)
+            .first()
+            .copied()
+            .unwrap_or_default();
+        let owned: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| {
+                crate::mir::parse::split_path(path).first().copied() == Some(first) && has(vs)
+            })
+            .collect();
+        // Else every enum of the name that has the variant.
+        let only: Vec<_> = candidates.iter().filter(|(_, vs)| has(vs)).collect();
+        let chosen = if !exact.is_empty() {
+            exact
+        } else if !alike.is_empty() {
+            alike
+        } else if !owned.is_empty() {
+            owned
+        } else if !only.is_empty() {
+            only
+        } else {
+            return None;
+        };
+        let mut found = chosen.into_iter();
         // Where several enums could be the one MIR prints (cfg'd twins, a
         // path printed from the reader's module), the variant's
         // discriminant, where every one of them gives it alike.
@@ -1187,6 +1331,15 @@ impl Cx<'_> {
         let decl = match (found.as_slice(), named) {
             ([one], _) => *one,
             ([], [one]) => one,
+            // Where no path tells them apart, an enum (or a type of data)
+            // is sized whichever of them it is.
+            ([], [_, ..])
+                if named
+                    .iter()
+                    .all(|d| d.variants.is_some() || d.data.is_some()) =>
+            {
+                return Some(true);
+            }
             _ => return None,
         };
         if decl.variants.is_some() || decl.data.is_some() {
@@ -1358,6 +1511,14 @@ impl Cx<'_> {
                 match pointee(ty).map(|t| (t, self.sized(t, layout_depth(self.structs)))) {
                     None | Some((_, Some(true))) => (thin, None),
                     Some((_, Some(false))) => (2 * thin, None),
+                    // A pointee rustc lays out that is no slice, `str` or
+                    // trait object (an extern type, `VTable`): thin.
+                    Some((t, None))
+                        if self.layouts.get(t).is_some()
+                            && !(t.starts_with('[') || t == "str" || t.starts_with("dyn ")) =>
+                    {
+                        (thin, None)
+                    }
                     Some((t, None)) => (thin, Some(t.to_string())),
                 };
             return Some(Laid {
@@ -1836,6 +1997,8 @@ impl Cx<'_> {
     /// pointer's size: with its alignment where rustc's layout of it gives
     /// one (`Generic.aligned`).
     pub(crate) fn fixed_layout(&self, ty: &str) -> Option<String> {
+        let metadata = self.pointee_metadata(ty);
+        let ty = metadata.as_deref().unwrap_or(ty);
         let l = self.layout(ty, layout_depth(self.structs))?;
         l.assumed.is_none().then_some(())?;
         Some(match self.layouts.get(ty.trim()) {
@@ -1844,14 +2007,145 @@ impl Cx<'_> {
         })
     }
 
+    /// The type `<X as Pointee>::Metadata` is, as rustc's built-in impl of
+    /// `Pointee` gives it: `()` of a sized `X`, `usize` of a slice or
+    /// `str`. `None` of any other type, or one whose size is not read.
+    fn pointee_metadata(&self, ty: &str) -> Option<String> {
+        let rest = ty.trim().strip_prefix('<')?;
+        let (x, tail) = rest.rsplit_once(" as ")?;
+        let tail = tail.strip_suffix(">::Metadata")?;
+        (crate::mir::parse::split_path(tail).last() == Some(&"Pointee")).then_some(())?;
+        let x = x.trim();
+        if x == "str" || (x.starts_with('[') && !x.contains(';')) {
+            return Some("usize".to_string());
+        }
+        self.sized(x, layout_depth(self.structs))?
+            .then(|| "()".to_string())
+    }
+
     /// The `Generic` of a count MIR prints (`4_usize`, or a const
     /// parameter `N`).
     fn generic_count(&self, text: &str) -> Option<String> {
-        match count_value(text) {
+        match self.count_of(text) {
             Some(n) => Some(mir_ctor("Generic.count", &[n.to_string()])),
             None => (!self.parameters(text).is_empty())
                 .then(|| self.slot(Slot::Count(text.trim().to_string()))),
         }
+    }
+
+    /// A count as MIR prints it, or the answer rustc's layout data gives
+    /// a type query of a type laid out (`field_offset::<F>`).
+    pub(crate) fn count_of(&self, text: &str) -> Option<u64> {
+        count_value(text).or_else(|| self.type_query(text))
+    }
+
+    /// A query of a type that rustc answers from the type's layout, as
+    /// `QUERY::<T>`: `field_offset` of a `FieldRepresentingType<B, V, F>`,
+    /// the offset rustc lays field `F` of variant `V` of `B` at; and
+    /// `assert_zero_valid` and `assert_mem_uninitialized_valid`, 1 where
+    /// rustc's (lax) check lets `T` be filled with zero bytes, or with
+    /// `0x01` bytes, and 0 where it does not.
+    fn type_query(&self, text: &str) -> Option<u64> {
+        let (query, ty) = text.trim().split_once("::<")?;
+        let ty = ty.strip_suffix('>')?.trim();
+        match query.trim() {
+            "field_offset" => self.field_offset(ty),
+            "assert_zero_valid" => self.raw_init_valid(ty, 0, &mut Vec::new()).map(u64::from),
+            "assert_mem_uninitialized_valid" => {
+                self.raw_init_valid(ty, 1, &mut Vec::new()).map(u64::from)
+            }
+            _ => None,
+        }
+    }
+
+    /// The offset rustc lays the field a `FieldRepresentingType<B, V, F>`
+    /// names at: field `F` of `B`, of its variant `V` where `B` has a tag.
+    fn field_offset(&self, ty: &str) -> Option<u64> {
+        let (name, args) = generic_parts(ty);
+        let last = crate::mir::parse::split_path(name).last().copied()?;
+        let [base, variant, field] = args.as_slice() else {
+            return None;
+        };
+        (last == "FieldRepresentingType").then_some(())?;
+        let (variant, field) = (count_value(variant)?, count_value(field)?);
+        let (_, l) = self.layouts.get(base)?;
+        let offsets = match &l.tag {
+            Some(tag) => &tag.variants.get(usize::try_from(variant).ok()?)?.offsets,
+            None => {
+                (variant == 0).then_some(())?;
+                &l.offsets
+            }
+        };
+        offsets.get(usize::try_from(field).ok()?).copied()
+    }
+
+    /// Whether rustc's lax check (`might_permit_raw_init_lax`) lets a `ty`
+    /// be every byte `fill`: its scalar's valid range holds the bytes, a
+    /// reference's pointee is a byte-aligned zero-sized type (no fill
+    /// makes a reference otherwise), and each field of its one variant
+    /// passes too. `None` where rustc's layout of a type it reads is not
+    /// in the dump.
+    fn raw_init_valid(&self, ty: &str, fill: u8, within: &mut Vec<String>) -> Option<bool> {
+        // A type holds no value of itself: one met again inside itself is
+        // a layout this does not read.
+        let (printed, l) = self.layouts.get(ty)?;
+        if within.iter().any(|t| t == printed) {
+            return None;
+        }
+        within.push(printed.to_string());
+        let valid = self.raw_init_fields(ty, l, fill, within);
+        within.pop();
+        valid
+    }
+
+    /// [`Self::raw_init_valid`] of `ty`, laid out as `l`, inside `within`.
+    fn raw_init_fields(
+        &self,
+        ty: &str,
+        l: &crate::layouts::TypeLayout,
+        fill: u8,
+        within: &mut Vec<String>,
+    ) -> Option<bool> {
+        if l.uninhabited {
+            return Some(false);
+        }
+        if let Some(s) = &l.scalar {
+            let size = match s.prim {
+                crate::layouts::Prim::Int { bytes, .. } => bytes,
+                crate::layouts::Prim::Float { bits } => bits / 8,
+                crate::layouts::Prim::Pointer => u64::from(self.width) / 8,
+            };
+            let value = (0..size).fold(0u128, |v, _| (v << 8) | u128::from(fill));
+            let holds = if s.start <= s.end {
+                s.start <= value && value <= s.end
+            } else {
+                value >= s.start || value <= s.end
+            };
+            if !holds {
+                return Some(false);
+            }
+        }
+        if let Some(target) = ty.trim().strip_prefix('&') {
+            if fill == 0 {
+                return Some(false);
+            }
+            let target = pointee(&format!("&{target}"))?.to_string();
+            let (_, p) = self.layouts.get(&target)?;
+            if p.align > 1 || p.size > 0 {
+                return Some(false);
+            }
+        }
+        if l.tag.is_some() || l.offsets.is_empty() {
+            return Some(true);
+        }
+        let fields = l.fields.first()?;
+        (fields.len() == l.offsets.len()).then_some(())?;
+        for f in fields {
+            if !self.raw_init_valid(f.as_deref()?, fill, within)? {
+                return Some(false);
+            }
+        }
+        Some(true)
     }
 
     /// The key of the constant item a constant operand names, where the
@@ -2489,11 +2783,17 @@ impl Cx<'_> {
                     IrAggregate::Array => (A::Array, mir_ctor("Agg.array", &[])),
                     IrAggregate::Adt(ty, variant) => {
                         let v = variant.clone().unwrap_or_default();
-                        let d = variant
-                            .as_deref()
-                            .and_then(|v| self.discriminant(ty, v))
-                            .unwrap_or_default();
-                        if variant.is_some() && self.discriminant(ty, &v).is_none() {
+                        // An enum MIR names by its bare name where several
+                        // share it is the one the local it builds is of.
+                        let named = |t: &str| last_segment(t) == last_segment(ty);
+                        let at = |v: &str| {
+                            self.discriminant(ty, v).or_else(|| {
+                                dest.filter(|t| named(t))
+                                    .and_then(|t| self.discriminant(t, v))
+                            })
+                        };
+                        let d = variant.as_deref().and_then(at).unwrap_or_default();
+                        if variant.is_some() && at(&v).is_none() {
                             e.blocked.insert(
                                 "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
                                     .to_string(),
@@ -2815,6 +3115,32 @@ impl Cx<'_> {
                                 &[self.generic_layout(&t).unwrap_or_default()],
                             )
                         }
+                        // `field_offset::<F>`, `assert_zero_valid::<T>`: a
+                        // count rustc's layout data gives of the type
+                        // argument, or the slot its instance's fills.
+                        Callee::Intrinsic(p)
+                            if TYPE_QUERIES.contains(&intrinsic_name(&p).as_str())
+                                && defined_layout_queries().contains(&intrinsic_name(&p))
+                                && type_argument(callee)
+                                    .and_then(|t| {
+                                        self.generic_count(&format!(
+                                            "{}::<{t}>",
+                                            intrinsic_name(&p)
+                                        ))
+                                    })
+                                    .is_some() =>
+                        {
+                            let p = intrinsic_name(&p);
+                            let t = type_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.layoutQuery",
+                                &[
+                                    mir_string(&p),
+                                    self.generic_count(&format!("{p}::<{t}>"))
+                                        .unwrap_or_default(),
+                                ],
+                            )
+                        }
                         // `align_of::<T>`, `assert_inhabited::<T>`: a query
                         // of its type argument's layout.
                         // `align_of_val::<T>` of a `T` laid out, as
@@ -2847,6 +3173,21 @@ impl Cx<'_> {
                             mir_ctor(
                                 "Callee.rawEq",
                                 &[self.generic_layout(&t).unwrap_or_default()],
+                            )
+                        }
+                        // `ptr_metadata::<T, M>`: the pointer's metadata,
+                        // of `M`'s layout: `()` of a thin pointer, or a
+                        // slice's length.
+                        Callee::Intrinsic(p)
+                            if intrinsic_name(&p) == "ptr_metadata"
+                                && metadata_argument(callee)
+                                    .and_then(|m| self.generic_layout(&m))
+                                    .is_some() =>
+                        {
+                            let m = metadata_argument(callee).unwrap_or_default();
+                            mir_ctor(
+                                "Callee.metadata",
+                                &[self.generic_layout(&m).unwrap_or_default()],
                             )
                         }
                         Callee::Intrinsic(p)
@@ -2912,16 +3253,50 @@ impl Cx<'_> {
                     ),
                 )
             }
-            IrTerminator::Other(k, text) => {
-                e.blocked.insert(k.path().to_string());
-                (
-                    *k,
-                    mir_ctor(
-                        "Terminator.other",
-                        &[mir_string(k.path()), mir_string(text)],
-                    ),
-                )
-            }
+            // Inline assembly is the platform's, outside the abstract
+            // machine: a call the program leaves to its dictionary, as a
+            // foreign function and `va_arg` are, named by the assembly and
+            // its operands' registers, with its inputs as arguments and its
+            // one output as the result; it stops unlinked without it.
+            IrTerminator::Other(k, text) => match (k, inline_asm(text)) {
+                // Inline assembly is the platform's, outside the abstract
+                // machine: a call the program leaves to its dictionary, as
+                // a foreign function and `va_arg` are, named by the
+                // assembly and its operands' registers, with its inputs as
+                // arguments and its one output as the result; it stops
+                // unlinked without it.
+                (spec::MirTerminatorKind::InlineAsm, Some(asm)) => {
+                    e.bound.insert(asm.name.clone());
+                    let target = match asm.target {
+                        Some(b) => format!("(ctor Option.some [Nat] {b})"),
+                        None => "(ctor Option.none [Nat])".to_string(),
+                    };
+                    let destination = self.place(&asm.output, e);
+                    let args = self.operands(&asm.inputs, e);
+                    (
+                        T::Call,
+                        mir_ctor(
+                            "Terminator.call",
+                            &[
+                                destination,
+                                mir_ctor("Callee.bound", &[mir_string(&asm.name)]),
+                                args,
+                                target,
+                            ],
+                        ),
+                    )
+                }
+                _ => {
+                    e.blocked.insert(k.path().to_string());
+                    (
+                        *k,
+                        mir_ctor(
+                            "Terminator.other",
+                            &[mir_string(k.path()), mir_string(text)],
+                        ),
+                    )
+                }
+            },
         };
         e.uses.insert(kind.path().to_string());
         term
@@ -4305,7 +4680,8 @@ fn instances(
         let fixed = if layout {
             cx.fixed_layout(&text)
         } else {
-            count_value(&text).map(|n| mir_ctor("Generic.count", &[n.to_string()]))
+            cx.count_of(&text)
+                .map(|n| mir_ctor("Generic.count", &[n.to_string()]))
         };
         match fixed {
             Some(g) => At::Fixed(g),
@@ -4463,7 +4839,51 @@ fn embed_census(
         read.iter()
             .flat_map(|(_, texts)| texts.iter().map(|(n, t)| (n.as_str(), t))),
     );
-    let mut enums = enums(&link.decls);
+    // The enums of the crates it builds on are theirs by their crate's
+    // name (`hashbrown::TryReserveError`), as its bodies print them, and
+    // not by a path of its own.
+    // So are core's and alloc's (`core::io::ErrorKind`, not serde_json's
+    // own `io::core::ErrorKind`), for such a crate.
+    let mut enums = if builds_on.is_empty() {
+        enums(&link.decls)
+    } else {
+        enums(&crate::mir::core::library_decls(root, &[krate]))
+    };
+    let library = ["core", "alloc"].map(String::from);
+    let theirs: &[String] = if builds_on.is_empty() { &[] } else { &library };
+    for dep in theirs.iter().chain(builds_on) {
+        let decls = crate::mir::core::library_decls(root, &[dep.as_str()]);
+        let mut by_path: BTreeMap<String, Vec<(String, i128)>> =
+            self::enums(&decls).into_values().flatten().collect();
+        // An enum by each path a `use` re-exports it at too
+        // (`aho_corasick::MatchKind` of `util::search::MatchKind`), a
+        // re-export of a re-export as well.
+        // Each round adds a path no round had, of finitely many uses.
+        loop {
+            let more: Vec<(String, Vec<(String, i128)>)> = decls
+                .uses()
+                .filter_map(|(module, name, target)| {
+                    let at = if module.is_empty() {
+                        name.to_string()
+                    } else {
+                        format!("{module}::{name}")
+                    };
+                    let variants = by_path.get(target)?;
+                    (!by_path.contains_key(&at)).then(|| (at, variants.clone()))
+                })
+                .collect();
+            if more.is_empty() {
+                break;
+            }
+            by_path.extend(more);
+        }
+        for (path, variants) in by_path {
+            enums
+                .entry(last_segment(&path))
+                .or_default()
+                .push((format!("{dep}::{path}"), variants));
+        }
+    }
     // The enums of a crate the crate's source mounts as a module of its own
     // (std's `#[path = "../../backtrace/src/lib.rs"] mod backtrace_rs;`),
     // by their paths under that module.
@@ -4533,8 +4953,13 @@ fn embed_census(
                 return Some((alloc.trim().to_string(), named.to_string()));
             }
             let (alloc, rest) = l.split_once(" (static: ")?;
-            let named = rest.split([',', ')']).next()?.trim();
-            nearest(&statics, named, owner).map(|p| (alloc.trim().to_string(), p))
+            // The path ends at the allocation's size, past any comma of
+            // its generic arguments (`Pool::<T, F>::f::X`).
+            let named = rest
+                .split_once(", size: ")
+                .map_or_else(|| rest.split([',', ')']).next(), |(n, _)| Some(n))?
+                .trim();
+            nearest_static(&statics, named, owner).map(|p| (alloc.trim().to_string(), p))
         })
         .collect();
     let externs: BTreeSet<String> = read
@@ -4718,6 +5143,21 @@ fn embed_census(
 mod tests {
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
+    #[test]
+    fn inline_assembly_is_a_call_its_dictionary_answers() {
+        let asm = inline_asm("asm!(\"syscall\", inlateout(\"ax\") move _9 => _7, in(\"di\") move _11, lateout(\"cx\") _, options(PRESERVES_FLAGS | NOSTACK)) -> [return: bb1, unwind unreachable]")
+            .expect("a syscall");
+        assert_eq!(
+            asm.name,
+            "asm!(\"syscall\", inlateout(\"ax\"), in(\"di\"), lateout(\"cx\"), options(PRESERVES_FLAGS | NOSTACK))"
+        );
+        assert_eq!(asm.inputs.len(), 2);
+        assert_eq!(asm.output.local, 7);
+        assert_eq!(asm.target, Some(1));
+        assert!(inline_asm("asm!(\"\", const 1_i32, out(reg) _1) -> bb1").is_none());
+        assert!(inline_asm("asm!(\"\", out(reg) _1, out(reg) _2) -> bb1").is_none());
+    }
+
     #[test]
     fn a_pattern_constant_is_its_base_integer() {
         assert_eq!(
@@ -4954,6 +5394,73 @@ mod tests {
         assert!(ranged("(i8) is (i8::MIN..=-2 | 0..)").is_some_and(|t| t.contains(" 0 254)")));
         assert!(ranged("(i8) is -5..=5").is_some_and(|t| t.contains(" 251 5)")));
         assert_eq!(ranged("(u8) is 5..=1"), None);
+        // A type query reads rustc's layouts: a field's offset, and
+        // whether zero bytes, or 0x01 bytes, are a valid value.
+        use crate::layouts::{Kept, Prim, Scalar, TypeLayout};
+        let scalar = |bytes, end| TypeLayout {
+            size: bytes,
+            align: bytes,
+            scalar: Some(Scalar {
+                prim: Prim::Int {
+                    bytes,
+                    signed: false,
+                },
+                start: 0,
+                end,
+            }),
+            offsets: Vec::new(),
+            single: None,
+            tag: None,
+            fields: Vec::new(),
+            uninhabited: false,
+        };
+        let pair = TypeLayout {
+            size: 8,
+            align: 4,
+            scalar: None,
+            offsets: vec![4, 0],
+            single: None,
+            tag: None,
+            fields: vec![vec![Some("bool".into()), Some("char".into())]],
+            uninhabited: false,
+        };
+        let kept = Kept {
+            layouts: BTreeMap::from([
+                ("bool".to_string(), scalar(1, 1)),
+                ("char".to_string(), scalar(4, 0x10FFFF)),
+                ("Pair".to_string(), pair),
+            ]),
+            names: BTreeMap::new(),
+        };
+        let index = crate::layouts::Index::new(kept);
+        let cx = Cx {
+            layouts: &index,
+            ..cx
+        };
+        assert_eq!(
+            cx.count_of("field_offset::<FieldRepresentingType<Pair, 0_u32, 1_u32>>"),
+            Some(0)
+        );
+        assert_eq!(
+            cx.count_of("field_offset::<FieldRepresentingType<Pair, 1_u32, 1_u32>>"),
+            None
+        );
+        assert_eq!(cx.count_of("assert_zero_valid::<Pair>"), Some(1));
+        assert_eq!(
+            cx.count_of("assert_mem_uninitialized_valid::<bool>"),
+            Some(1)
+        );
+        assert_eq!(
+            cx.count_of("assert_mem_uninitialized_valid::<Pair>"),
+            Some(0)
+        );
+        assert_eq!(cx.count_of("assert_zero_valid::<&Pair>"), None);
+        assert_eq!(cx.count_of("assert_zero_valid::<Unknown>"), None);
+        let metadata =
+            |t: &str| cx.pointee_metadata(&format!("<{t} as ptr::metadata::Pointee>::Metadata"));
+        assert_eq!(metadata("[u8]").as_deref(), Some("usize"));
+        assert_eq!(metadata("str").as_deref(), Some("usize"));
+        assert_eq!(cx.pointee_metadata("<[u8] as Other>::Metadata"), None);
     }
 
     #[test]

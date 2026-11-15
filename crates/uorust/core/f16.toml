@@ -1,0 +1,538 @@
+[[fn]]
+path = "core::f16::f16::INFINITY"
+kappa = "8c5bf7183ba622e8f1b5a5661f31768756937595a636da53482438363cec0a75"
+embedded = "322b218c15c75f640aa539bd9924d7a823036bc211d7df9167ce735a9d91f9ce"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "1b13351a037d55f00c73bb1932363a4505c1c41d6158cac05f1333a93478e4b4"
+
+[[fn]]
+path = "core::f16::f16::MAX_EXACT_INTEGER"
+kappa = "11148e0464294b2beb7f456cd9a160086a9a1bae127fd26251f921b8fe39d74b"
+embedded = "6e34417ed855302c138f18441d24a8af928b56d8b1eb11d13bfa518880f9d33d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::MANTISSA_DIGITS"
+
+[[fn]]
+path = "core::f16::f16::MIN_EXACT_INTEGER"
+kappa = "be9d22c824cf79ae66f4ac0ff35c2cf83ff95b0a659a468d6af51b1a69db657b"
+embedded = "a1c81514b0beffd12f8fff879f037f248d11dd3f3723bc1d2aa164336413b1d4"
+status = "residue"
+cause = "mir::Operand::Constant: f16::<impl f16>::MAX_EXACT_INTEGER: mir::Operand::Constant: the constant item f16::<impl f16>::MANTISSA_DIGITS"
+
+[[fn]]
+path = "core::f16::f16::NAN"
+kappa = "01ee939cffd0e65529a6cd97dbb3ba4efe38fedadb2d6f9329161ebb50498bdc"
+embedded = "b952945db998c5b782f47d8f760538a91cf0615885fb79d774b6f489b91ed6d3"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "8a8a74a35d880946a6e45baf19355bf31f687127773fa852cb342d02d96c5544"
+
+[[fn]]
+path = "core::f16::f16::NEG_INFINITY"
+kappa = "320d87d06588aad0c9ad2edd7ab6fc46e9d59add59f96dad54d94e697fa07da8"
+embedded = "4caccd8fb6b40911dd59f06d718da859f84ac867a4ca10144ec844d3094aeea2"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "49d94dee93a45450b0286d80607af40e8471f700a872f380e1afce82e3d605ca"
+
+[[fn]]
+path = "core::f16::f16::NEG_TINY_BITS"
+kappa = "9d5941b0ef14527caeec101200e3c17c757cc6ee89ef45b59ef34c06ea99e569"
+embedded = "bd1e44c42a733529d06c4140aec70e5e71d2e28dc1a7048d9dbe4129d1edae0e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::TINY_BITS"
+
+[[fn]]
+path = "core::f16::f16::abs"
+kappa = "23d4af406b290975f9128d3499586fa96156397545f37711ca1551fae74f82f9"
+embedded = "e30b4be9179a4047ccd2f5dad6a881a411a1e977f2a0b0cea02f33cc27a25668"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::fabs, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::algebraic_add"
+kappa = "1c4bfff8896b00919fd16bc9f6f983967832d7861a2f2d4b6b5c19f5440573f4"
+embedded = "2b79088fd7bc4f3ff76424ba68cd45b4d8fedbe3efd4afa31df816a1e585906f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::fadd_algebraic, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::algebraic_div"
+kappa = "a1ac8cc4734ab007ea6970b3708c5ea2e1649d752da73bd3ae124d4386c53f4d"
+embedded = "7a6872f850506030b2c7a50dfd8b6de39466ac73a20400af1282b21cf0a7dafb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::fdiv_algebraic, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::algebraic_mul"
+kappa = "7c2f4eb1c43a81e05994ff5a9ba45ccd3e5a01422da15c90571257754056a1ac"
+embedded = "cd8459c981fa7145c6cddb233abcbff4ad316f5220b6a7203a8cc8349846ace2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::fmul_algebraic, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::algebraic_rem"
+kappa = "f72fb3efd0d3fffffd037aaf9c8b56d2287ee30a39d76143f753ba1be565e725"
+embedded = "5e56c4906d68d14c052a05ddc2d04fdde896d0759afeac9e2d604a4d857ffccc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::frem_algebraic, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::algebraic_sub"
+kappa = "6d3cf67b5c8cb49f4f45a2022f43ed04f4f80dd51e964f47922392086fc71c5d"
+embedded = "26124c6363196e9c3fdd980d6787f682c7a01cd646039e25615777aa0344f514"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::fsub_algebraic, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::cbrt"
+kappa = "6e1c944f0c18a92beb6a27c00ff3eb6e7c801967b55f0a3e7d90c6045e26443e"
+embedded = "769e993071d5927cc4926a7c7ba13cafb347a1b246cdceac59e4a7895a900e20"
+status = "residue"
+cause = "mir::TerminatorKind::Call: libm::cbrtf"
+
+[[fn]]
+path = "core::f16::f16::ceil"
+kappa = "289b02edd4702c012a6b97be632bf12294eee8d815f3b8d2198c3c11f536dde7"
+embedded = "88462195e8e06000c76f66b747ece3e920aee255036e42f2909b32eb49978381"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "3d7044e3af9e01760572292e9449d29d85e885c9f31b099668668f149cc855ff"
+
+[[fn]]
+path = "core::f16::f16::clamp"
+kappa = "21117ae80b7fda644aa056f9f61db695de1b4f350372972c7953408d72572f0c"
+embedded = "873331f12adcfb256ebb94313fb8ddd7c3790e719c1d06503fa0f018dc22e879"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f1c162333060de2582e18cfe4e66a31078aa03f6d65888afae05980b8576b302"
+
+[[fn]]
+path = "core::f16::f16::clamp::do_panic"
+kappa = "cc8fe9693d531a3dc3b4b376cff0412dbadf818e85d62b247668d77c12ccb767"
+embedded = "1a2e53f80f84db5236eb8a4a20262eb4b62d9a0b4991b08660fe8cc0cd4d138c"
+status = "translated"
+bridged = "pending"
+pending = "signature: Unit"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "a9713d8a225fa95c20a7ce95869a2928b22492750d1036e9d98ecc4c18936b56"
+
+[[fn]]
+path = "core::f16::f16::clamp::do_panic::compiletime"
+kappa = "513e020634dd80d9fb8ad939a51767424a3c4c613625f1265babc5455498f8a3"
+embedded = "1aaab46d2c8fc5924784b51f0b4fc1b37a4bfbc1c1b95fc095a827238bf49646"
+status = "translated"
+bridged = "pending"
+pending = "signature: Unit"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "13ced26be58ba48a8c004a605b4feffb4d097de3886d8187b9cef818a2f891f3"
+
+[[fn]]
+path = "core::f16::f16::clamp::do_panic::runtime"
+kappa = "3599a8047ca5b8de7104094dd482f536a3dde00f3b7d3b70d903f641cb5ec111"
+embedded = "bb18e45431fa3bed74d009eabdc8710ee9d3626bfff4378e2204f79fa8fc2ed2"
+status = "residue"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
+
+[[fn]]
+path = "core::f16::f16::clamp_magnitude"
+kappa = "35d16c1fca89de66e61819ef5e39053869f67ebf93c7bb993f8cf1ccd0252d2c"
+embedded = "f48b3bf68a2441f05e222716a1c400ed4a9313a5530d402c1baf376e279ec08d"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "8e44483814da2339cb7cebd2233ff5d9ad29c01c982b2e36e420b304e5e76089"
+
+[[fn]]
+path = "core::f16::f16::classify"
+kappa = "2c086d066ccdebdca33bf6b9a880e8247c0b3008e1b13a37fda76c051663f383"
+embedded = "3eb1217cd9fca2afbab157d5334f43d526e357952525eb5ccaa5005087420734"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::MANTISSA_MASK"
+
+[[fn]]
+path = "core::f16::f16::copysign"
+kappa = "12a1fa941819e6bb43ecda27c1136c1819ff31050e06b2ebc6b03825915c40e3"
+embedded = "076e80b8d9792c1714f8b59e2e25d46ff4c7852a0e4cb16de5b1e75621b6dac2"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "49681086c8fa4bbacfe7c4b5bba6f3ac47b9155582047d17b09fe2c766328c25"
+
+[[fn]]
+path = "core::f16::f16::div_euclid"
+kappa = "d52095ef00c621b21c5ac7741ebf8af1dfa11f635068942d72d7335cc8fd11ee"
+embedded = "5c962e33b1d6071bb7dc9d1ad555908f5ddf913a51ccc4f9ed248bd69c843857"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "8e402df9ed0a23dff20703fb3abc5a603269824bb44607af0765548d6a864a02"
+
+[[fn]]
+path = "core::f16::f16::floor"
+kappa = "800c33a9a7c5c44a90cc381c18772e03369eb6f74726935e964b19fe2933d658"
+embedded = "fa9cb2be3ffe1c3f9642328204bfedc45a850ab86c3d22a7e113db46b84e2e08"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "98a89633f35fc7b17edbe1b4a9bf45ceace0a50c02651a0010942d02da47f3ec"
+
+[[fn]]
+path = "core::f16::f16::fract"
+kappa = "7d627db55b4bf7b465e24f434cc3047a5b86184c24b94ffe90082f456c2c7c49"
+embedded = "efe94edb536150e278e5d5485b76d28051ea90891c4318fab7c726de7947f97b"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "8be01d1ff95cdba53a48f2af92ca203885036d9259af439f5864477c1f255497"
+
+[[fn]]
+path = "core::f16::f16::from_be_bytes"
+kappa = "b1f83b341922442bc0ca5ea1fd46a2cfbc135fa8a0c77dd8947876bb36925392"
+embedded = "3d54b072781e944e0576e6d21f82725bc11e7a74299f055806837b145ab97c87"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "bceff8d0036058073311276d764d53e9093734e897c7ea3130f00f560afa3e18"
+
+[[fn]]
+path = "core::f16::f16::from_bits"
+kappa = "e129c1547c3e659061a826b3f03ec6666bdf68d3bd5f43af7a3b35c5965df7bf"
+embedded = "9a154a7c02c8ebe245f4f13e5fd584a659a39973aa79ba2fa69f676c572d648b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::transmute from Nat to Nat, of layouts the lift does not relate"
+
+[[fn]]
+path = "core::f16::f16::from_le_bytes"
+kappa = "cbbbe57df69d4e71031a496bf2456b812e10d2d2eeb7e1013975556650c5486f"
+embedded = "6f79915a45153522d182474fba602afdb2b9c01ff2ebbc4b6dec32c83976d4b8"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "e8f8ae60b17bd71fd6c2224ce2088749c25669db38b04279cb5614f7c56c4a4a"
+
+[[fn]]
+path = "core::f16::f16::from_ne_bytes"
+kappa = "2c84195d97222e29a13349f6812ad4e6dcb2eeae33a184a8e2c1c3dc6af6ac07"
+embedded = "374f95bef3eb443a5667e631fedcd7b86959325bae9f65fc34cc8869fdf32abe"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "4d430c0e7c9a1826653c3a8f6ea6d44f5eecacc57ff5fc70cb8fdc604a684851"
+
+[[fn]]
+path = "core::f16::f16::is_finite"
+kappa = "0b959f4594b166ee7b3624e07a3bb823f2767e29d16d155a873adc17a281ea32"
+embedded = "f585190d46294d1d671a89064971f77e700862e882884700ae2123fc86dd2673"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "5b6090132960f22135e156a64bc40c6de2d31e512daef701b49cbad492cf39f4"
+
+[[fn]]
+path = "core::f16::f16::is_infinite"
+kappa = "72d621ef4fd74b4df8b039cce8ab705a3f6101469e0611977dc10dc2ad693904"
+embedded = "e50e12ad0899286fb0fefeb88b0a37b74ed482c021d2af542b775ebf4e956f06"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "c9c7c152a67289a5c22bcda570a853c191ef0699c45dac38154b057998415d3f"
+
+[[fn]]
+path = "core::f16::f16::is_nan"
+kappa = "797bed3ec18f0b3dfa65bc846cb20f315ebb5c506fc6fcebe21c571a6276619f"
+embedded = "6bcccaeabe9bdb315fe6336f36f9d2b99c0e95a2b914ff16053b0009af8356da"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "221cd01baf0092d5d0c748f0e46fd68e8be69b085cac1f57c84292866e95478c"
+
+[[fn]]
+path = "core::f16::f16::is_normal"
+kappa = "cdb519f5da292f01406ead3d54b2dbed25d9515eb8fc7c3ef721e581c965d4d1"
+embedded = "f1680bafdd1f7118321614665087b621d974938fd7db43e3dab0c46d3a29f87b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: f16::<impl at library/core/src/num/f16.rs:149:1: 149:9>::classify: core's MIR stops at mir::Operand::Constant: the constant item f16::<impl f16>::MANTISSA_MASK"
+
+[[fn]]
+path = "core::f16::f16::is_sign_negative"
+kappa = "24574ee0d9b739de7744e333d0cae73050f404bbb7d0fe849c8c15ff8d7e096e"
+embedded = "91cf208bf446b45a98668fd21b8cce05e7a5ddd5824cdcc275011ba45bb1076d"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "a9e54dc70b585d6a02c606c3346470a70ced851c4cd20d344e39c5b61436b2d5"
+
+[[fn]]
+path = "core::f16::f16::is_sign_positive"
+kappa = "2aab6a39acf7422514148f98ed967abdce2eb9eb12ec4be1f2fae9f7b7cca7ba"
+embedded = "4a8dfb46d0b0dfba29f2fc72b9003e5453ff24aef48481a9ff85f03a4d1463a6"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "7156cfdeceebe28a0f9eefd3b1bc4252b6b5644353386cc65fb363059f19f4d0"
+
+[[fn]]
+path = "core::f16::f16::is_subnormal"
+kappa = "887d45c27755e0fc9951b567c9b59a83177fe0fdc2729d13293a23b70e5956ac"
+embedded = "d40213ed1ffbef0911332c97c17b4a22b1c5ca8f88b800b708404150c05af887"
+status = "residue"
+cause = "mir::TerminatorKind::Call: f16::<impl at library/core/src/num/f16.rs:149:1: 149:9>::classify: core's MIR stops at mir::Operand::Constant: the constant item f16::<impl f16>::MANTISSA_MASK"
+
+[[fn]]
+path = "core::f16::f16::max"
+kappa = "1a93866ca5679b5be22e874350f0e38e513ce37cf290a281fed81b94bdcc0527"
+embedded = "4f73e7c96198d94c294d648c49bbb69fc19f1348cfb5d6a6b881f73e70d7bb7b"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "66691e332c8bebd075b0aca8ac9b810446186d893e7883ed599042cf9adc6253"
+
+[[fn]]
+path = "core::f16::f16::maximum"
+kappa = "a005e11692bc16195c4bdc8ba96415bf9d626772b2db8c59f1bc6d7f3a1d8439"
+embedded = "53bae4cb1f1a62201249b646ff4df0f5bc046c692a982d65fb17431c18451339"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "e054211ed5e360033c0ce0bb465adebb02bab5d766cf6a370142659f462c4b02"
+
+[[fn]]
+path = "core::f16::f16::midpoint"
+kappa = "c02e9f4a87dffd68363ef1a4cc92bc0656a9baadd6f77a6776ea8dcc6c8b214c"
+embedded = "132bd61cceea8babacf198e3117ece7fd962c71d121c76879a6afd45c00d00c3"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "b94ffdfa826359b00b8443609b7ccbaef6fa8205234f067f2d9d99068d512caa"
+
+[[fn]]
+path = "core::f16::f16::midpoint::HI"
+kappa = "9c6a5499948ee607afb0f56b6e974ef9df0e42036a07cc3b31f67ed28505bfac"
+embedded = "3fa7ca81a2e75401dced19e20a8da4de8bd5ee573822945ddf1abaacb547010f"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "d34ea1309b53325dcd42e39754a9b3f77417040bab8fb264d6adabde44c5c276"
+
+[[fn]]
+path = "core::f16::f16::min"
+kappa = "199eec12065babc0b51f7b641b45db75c84c732b924bad1b7e2bd154f3974574"
+embedded = "4809c90758d7eb5c8a8a5ff8e187e4fb0ee334f64cc63edd735f8ac52b223a72"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f71d45172136a005a2e80b49c103e4d646327d2182c9cd8c8218d4bdc7f9b58a"
+
+[[fn]]
+path = "core::f16::f16::minimum"
+kappa = "9c9c33d9cdf17fc5a3b2fe033812e2d5a07d52f7cc1ebb638a460902243d3896"
+embedded = "cf3449bbacfe0bd35de61fb5ba170ec64887c4f8351c484bc7496e1b62919200"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "a34e813d4203e2b5f311361db05c3627d89f17d18e08f0191d4165977c5f785e"
+
+[[fn]]
+path = "core::f16::f16::mul_add"
+kappa = "31403cec54b0f4bfff983136f837e1fc593e804b8604704abf6192510d06b36f"
+embedded = "fb3484f6b76db0e09be631dc2071325a51eae63c0fd7fdec1e6e80fd1027a5f0"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f03c2b0b1af298c5d620b481771f0d2e6767ab19b31f0c37fe84c2c0e9e3f872"
+
+[[fn]]
+path = "core::f16::f16::next_down"
+kappa = "a86c9309201de6ead64cc8004c7d1611396c6404a5f6fc322826ab1432ef2954"
+embedded = "cac2979edd5be75b4f8defac9dc94aa4b64161a6eac5aecc0c4bc15d779e51e8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::SIGN_MASK"
+
+[[fn]]
+path = "core::f16::f16::next_up"
+kappa = "4d84bef98eab3ec182756312cf66d7c485db7009e87d9d67214578169a037b99"
+embedded = "a14f173989881fc5ebc800b92aa541ccfdcbd4bc80020ebc20b984702867cfcb"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::SIGN_MASK"
+
+[[fn]]
+path = "core::f16::f16::powi"
+kappa = "0c8e667072a912de85813253c65aace1c7ddcfc2474a81ec261cb612b90c0619"
+embedded = "e3cc75d930042c972b5b51111579c0e52fa93198d510c75cf135ad9b17f93451"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::powif16, an intrinsic the table does not model"
+
+[[fn]]
+path = "core::f16::f16::recip"
+kappa = "414947a90678c2f7a24c2134a6b73848f56c1af26a22553f432c02f9548c8a5d"
+embedded = "2a6105be75869bf823d3e99dcdc1b83b4b6831b6f9173a0f71c41f93e09a9e30"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "caa36c98b0b35b26a8a71909e029b2c550d748579e64edaf2c84344bd209662f"
+
+[[fn]]
+path = "core::f16::f16::rem_euclid"
+kappa = "d82ca128a09ca0730b168018aac6a781853f031b83477937f0f76594e390d887"
+embedded = "213f2219c68c15d72fdb0260d754beb166adcbb1a2885605effbaa769df7d379"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "0c4094c870fcbfb52abfed1d53c0eb24de8dcc7ed30c118c098be305a724d941"
+
+[[fn]]
+path = "core::f16::f16::round"
+kappa = "8e1e64ba64b233f876cc27c0fb39e44c3f626c2c4d9cce6f706062adfb5f16cd"
+embedded = "1e26c530b116b869134e4da6fc54404993d44e6d06f8d48446d03007893cf7c4"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "4ac33cb1a77d37e5b0438d0bc15d0438ec1132305b67a72c448aefcedf6187b6"
+
+[[fn]]
+path = "core::f16::f16::round_ties_even"
+kappa = "5de0a621512db3e023be028899fd2faecf1ec7ed73daf2c00e0d363f2cca26dc"
+embedded = "455a1cfb7987764ffb6bf912679a8cc6ceee1878923d272bb152d8ff88410795"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "ab57aa87459de8efad7497bd83969d171e4af972137f70584c651bc2ad8d40e5"
+
+[[fn]]
+path = "core::f16::f16::signum"
+kappa = "4c056121ad0a657472838656251fcb8fa2a642a1693993cef4a1d325bbc1daf9"
+embedded = "98e55a312596b0ced2015552c44c17483ad4916fa2d0ffff8d92316b1b7027f1"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "557c57d12a38a86a779b4938460aa87d44d12517bc92293e29d86ec46c079d21"
+
+[[fn]]
+path = "core::f16::f16::sqrt"
+kappa = "1414418990717c87594e537a68d622d7cc95929f368b9e6022c5a492514d3145"
+embedded = "202ac5d67f35484a474d40109ac7ca6271cf4d38b07c91776d256f570c32212b"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "1975c1e576a4921559ccd3b3d5fa932bbe5589571add985679dfc64b61f1a1d7"
+
+[[fn]]
+path = "core::f16::f16::to_be_bytes"
+kappa = "11a69a60eba3e22a148954fde0dc3971611ca34dbab3f02f5c8e36dba705489e"
+embedded = "1ac6652e1d9209735fc754d2c87bd53fe27325c1be7f85210a052beb20ce7ecd"
+status = "translated"
+bridged = "pending"
+pending = "signature: List"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "0a704d791ea174a43d6e87695f4f1e6f4d048b082d7b30352f4a3c94b695e9b4"
+
+[[fn]]
+path = "core::f16::f16::to_bits"
+kappa = "0e86a17489f55b31aeaa2fd123ca2cbeef807ac67bdfe06442a520dd6bd19b84"
+embedded = "3c5a5b4af613597422babd3424faf621b09ab3715823dc63996919897542fe65"
+status = "residue"
+cause = "mir::TerminatorKind::Call: intrinsics::transmute from Nat to Nat, of layouts the lift does not relate"
+
+[[fn]]
+path = "core::f16::f16::to_degrees"
+kappa = "d3a46e53a11c549f595313e58652cb345d2776c1a0a545399862c99d199944eb"
+embedded = "9b6c92f7e177a42fa5b2c80e33b9a8cd2a3f932c839ff1c829b42616a1507ad6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::to_degrees::PIS_IN_180"
+
+[[fn]]
+path = "core::f16::f16::to_int_unchecked"
+kappa = "ea690b789183db6df16f83915a486d3a71b1db88f2c736a200e72cfe031e9af8"
+at = "Int=u32"
+embedded = "55d8544df0c6a8012dd59d9b3175f557622fdd2ba2da8c9966beeda7c996a966"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "bb27f3528c3eb49e033de66ab721587fee4183ab1ecd6023aff5ea8a3ac89f7e"
+
+[[fn]]
+path = "core::f16::f16::to_le_bytes"
+kappa = "16819e9cd62a254eb408218140ffd82993d80feb8f9ab01ca64ba643d24ffc33"
+embedded = "e153eaee1dee11066c9c7381ace62e9203711f6ed262b83c14cc7297d6df7ca0"
+status = "translated"
+bridged = "pending"
+pending = "signature: List"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "10a985bab5b2c57806a0ab35fdea261151f38cd66e7f560ac760bca795539ff0"
+
+[[fn]]
+path = "core::f16::f16::to_ne_bytes"
+kappa = "16445f34fd6535bbac94ad2263f0493fcc6c7782c9f8d6b269582932f1d26ef3"
+embedded = "4a1b07139f97f9395506481140a0ad6d32349c64ba38a4f633a3e4b536cc3d18"
+status = "translated"
+bridged = "pending"
+pending = "signature: List"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "b1c92aadd4e588c7efcd4d5b894a3201bf3cb1266297e857e8c21b001794a751"
+
+[[fn]]
+path = "core::f16::f16::to_radians"
+kappa = "da1d14b2f5c270117c3cc605dbe8b904a20e34ff8ac73847f8c857f26256edad"
+embedded = "efba817ed2ff3fb454db3afd41686faf825bf841fe208ed2f67d150b3a961940"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item f16::<impl f16>::to_radians::RADS_PER_DEG"
+
+[[fn]]
+path = "core::f16::f16::total_cmp"
+kappa = "3f1183eb17d1cb2e4312303ce45455cbecf63d73da6e50d72afbd8133dcc294a"
+embedded = "583e057423821545eb3478bc6f384788449ffaa97578adcc672dd321bf275f85"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f39ef0d793af12869f853e9823d83405b8fc04e6fd558d7cfdbdab8bdeff0f89"
+
+[[fn]]
+path = "core::f16::f16::trunc"
+kappa = "04aabd5bb6d67d8f5e7b0e214ea50e886f862f28f0145c7da548c077cdefd495"
+embedded = "6580e5eb8e562cec1894546ae5a0c48c9cfb30e1f34cf59253670d8b7e0c2680"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "97b552c32bb12237ba75ac22581d9be3644e1a493aa8aa35c40c2d084c68850a"
+

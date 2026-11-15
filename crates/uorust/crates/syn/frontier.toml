@@ -1,0 +1,2091 @@
+# The syn register (written by `uorust crate syn@3.0.10`; do not edit): every body of
+# syn's MIR at syn 3.0.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1647
+translated = 121
+residue = 1526
+
+[module.attr]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.bigint]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.buffer]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.classify]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.data]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.derive]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.drops]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.error]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.expr]
+bodies = 91
+translated = 0
+residue = 91
+
+[module.ext]
+bodies = 8
+translated = 1
+residue = 7
+
+[module.fixup]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.gen]
+bodies = 86
+translated = 0
+residue = 86
+
+[module.generics]
+bodies = 57
+translated = 0
+residue = 57
+
+[module.group]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.ident]
+bodies = 12
+translated = 2
+residue = 10
+
+[module.lifetime]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.lit]
+bodies = 143
+translated = 9
+residue = 134
+
+[module.lookahead]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.mac]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.meta]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.op]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.parse_quote]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.path]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.precedence]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.print]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.punctuated]
+bodies = 91
+translated = 0
+residue = 91
+
+[module.restriction]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.scan_expr]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.span]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.spanned]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.thread]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.token]
+bodies = 794
+translated = 108
+residue = 686
+
+[module.ty]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.verbatim]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+embedded = 1647
+evaluable = 1647
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: buffer::Cursor<'_>"
+bodies = 146
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: token::private::WithSpan"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: Punctuated<u32"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: ParseBuffer<'_>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: expr::Expr"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: lifetime::Lifetime"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: path::Path"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: precedence::Precedence"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: punctuated::Punctuated<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: data::Field"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Literal"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: attr::Attribute"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: punctuated::Iter<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ty::Type"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lit::value::byte: syn's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: generics::WhereClause"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: punctuated::IterMut<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: attr::Meta"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: expr::Index"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: expr::Member"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: lit::Lit"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: punctuated::IntoIter<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: punctuated::Pair<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: generics::LifetimeParam"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: generics::TypeParam"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: generics::TypeParamBound"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Box"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Break"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Colon"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Comma"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Const"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Continue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Default"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Enum"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Eq"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Fn"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Macro"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Match"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Minus"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Not"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Plus"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Ref"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Shl"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Shr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Struct"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Tilde"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Trait"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Try"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Type"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: token::Union"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BigInt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Expr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitByte"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitByteStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitChar"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitFloat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitInt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LitStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Member"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: alloc::ffi::CString"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::MetaList"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::MetaNameValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generics::BoundLifetimes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generics::ConstParam"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitBool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitByte"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitByteStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitCStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitChar"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitFloat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitInt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lit::LitStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::ParseBuffer<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::Unexpected"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: path::PathSegment"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::extra::DelimSpan"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Abstract"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::And"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::AndAnd"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::AndEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::As"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Async"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::At"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Auto"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Await"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Become"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Brace"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Bracket"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Caret"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::CaretEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Crate"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Do"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Dollar"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Dot"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::DotDot"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::DotDotDot"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::DotDotEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Dyn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Else"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::EqEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Extern"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::FatArrow"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Final"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::For"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Ge"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Group"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Gt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::If"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Impl"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::In"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::LArrow"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Le"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Let"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Loop"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Lt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::MinusEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Mod"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Move"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Mut"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Ne"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Or"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::OrEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::OrOr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Override"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::PathSep"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Percent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::PercentEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::PlusEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Pound"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Priv"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Pub"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Question"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::RArrow"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Raw"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Return"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Safe"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::SelfType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::SelfValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Semi"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::ShlEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::ShrEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Slash"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::SlashEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Star"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::StarEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Static"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Super"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Typeof"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Underscore"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Unsafe"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Unsized"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Use"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Virtual"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Where"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::While"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Yield"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ty::Abi"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ty::NamedArg"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ty::ReturnType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ty::TypeImplTrait"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ty::TypeTraitObject"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Fields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Lit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LitBool"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LitCStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PathArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PrivateIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PrivateIterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: data::Variant"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: expr::ExprStruct"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fixup::FixupContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: generics::Generics"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: generics::TraitBound"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mac::Macro"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: path::AngleBracketedGenericArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Delimiter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Punct"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: restriction::Visibility"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: token::Paren"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ty::TypeParen"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a string LexLean source cannot write"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lit::value::byte: syn's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprBinary"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprCast"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprMethodCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprReference"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprUnary"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IntoPairs<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Lookahead1<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoDrop<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pair<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pairs<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PairsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Precedence"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::Entry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::TokenBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::FieldModifiers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::FieldsNamed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::FieldsUnnamed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::Members<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: derive::DeriveInput"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::ExprLit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::ExprMacro"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::ExprPath"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::FieldValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ext::private::PeekFn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generics::GenericParam"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generics::ImplGenerics<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generics::TraitBoundModifiers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generics::Turbofish<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generics::WherePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lookahead::Lookahead1<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mac::MacroDelimiter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: op::BinOp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: op::UnOp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::Nothing"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::GenericArgument"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::ParenthesizedGenericArguments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::PathArguments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::QSelf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Group"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: punctuated::IntoPairs<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: punctuated::Pair<&mut u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: punctuated::Pair<&u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: punctuated::Pairs<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: thread::ThreadBound<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::FnPtrVariadic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::PointerMutability"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeArray"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeFnPtr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeGroup"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeInfer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeMacro"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeNever"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypePath"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypePtr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeReference"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeSlice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ty::TypeTuple"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as CustomToken>::display"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::into_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Abstract"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: And"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AndAnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AndEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AngleBracketedGenericArguments"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: As"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AssocConst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AssocType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Async"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: At"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Auto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Await"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Become"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BinOp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoundLifetimes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Caret"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CaretEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConstParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Constraint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Crate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeriveInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Do"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dollar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DotDot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DotDotDot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DotDotEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dyn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Else"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EqEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprArray"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprAssign"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprAsync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprAwait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprBreak"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprClosure"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprConst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprContinue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprForLoop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprGroup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprInfer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprLet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprLit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprLoop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprMacro"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprMatch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprParen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprRawAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprRepeat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprReturn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprTry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprTryBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprTuple"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprUnsafe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprWhile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprYield"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Extern"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FatArrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldsNamed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldsUnnamed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Final"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FnPtrVariadic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: For"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Ge"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArgument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Generics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Gt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: If"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Impl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImplGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: In"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LArrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Let"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LifetimeParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Lt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MacroDelimiter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Meta"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MetaList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MetaNameValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MinusEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Mod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Move"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NamedArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Ne"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Nothing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Or"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OrEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OrOr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Override"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Paren"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParenthesizedGenericArguments"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathSegment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathSep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Percent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PercentEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PlusEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PointerMutability"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PreciseCapture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PredicateLifetime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PredicateType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Priv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pub"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QSelfDelimiters<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Question"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RArrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Return"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReturnType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SelfType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SelfValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Semi"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ShlEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ShrEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Slash"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SlashEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Star"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StarEq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Static"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Super"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ThreadBound<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenMarker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokensOrDefault<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TraitBound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Turbofish<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeArray"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeFnPtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeGroup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeImplTrait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeInfer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeMacro"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeNever"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeParamBound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeParen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypePtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeReference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeTraitObject"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeTuple"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Typeof"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnOp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Underscore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unsafe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unsized"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Virtual"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VisRestricted"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Visibility"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Where"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhereClause"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WherePredicate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: While"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Yield"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::AttrStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bigint::BigInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: data::Fields"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive::Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive::DataEnum"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive::DataStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive::DataUnion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: drops::NoDrop<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn punctuated::IterTrait<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::IntoIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Iter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::SpanRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprBinary"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprCall"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprCast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprField"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprGroup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprMethodCall"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprParen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprReference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprTuple"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expr::ExprUnary"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::ConstParams<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::ConstParamsMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::Lifetimes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::LifetimesMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::PredicateLifetime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::PredicateType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::TypeGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::TypeParams<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::TypeParamsMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: group::Braces<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: group::Brackets<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: group::Group<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: group::Parens<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lit::LitFloatRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lit::LitIntRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lit::LitRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lookahead::End"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::StepCursor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: path::AssocConst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: path::AssocType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: path::Constraint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: path::printing::PathStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: punctuated::PairsMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: punctuated::PrivateIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: restriction::VisRestricted"
+bodies = 1

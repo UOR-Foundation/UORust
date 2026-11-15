@@ -1,0 +1,33 @@
+# The windows-sys register (written by `uorust crate windows-sys@0.61.2`; do not edit): every body of
+# windows-sys's MIR at windows-sys 0.61.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 7
+translated = 0
+residue = 7
+
+[module."core#1"]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+embedded = 7
+evaluable = 7
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::GUID"
+bodies = 5
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::literals::decode_utf8_char: windows-sys's MIR stops at mir::Rvalue::Use"
+bodies = 1

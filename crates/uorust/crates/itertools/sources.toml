@@ -1,0 +1,71 @@
+[[fn]]
+path = "itertools::iterate"
+kappa = "764b15f215b8a41f1116e94bc7e77a2a1bf32bfa2dacdbea32b12ae3afa93c57"
+at = "F=u32, St=u32"
+embedded = "f0f59785c91962f7ff7135697f55328d3d4c2980e2508bef119641ea4fea5444"
+status = "residue"
+cause = "mir::Ty: sources::Iterate<u32, u32>"
+
+[[fn]]
+path = "itertools::sources::<impl at src/sources.rs:66:10: 66:15>::clone"
+kappa = "e056107dd5c9d0f7f7a69dc6081a1e785e72ab5390b23907070b93d8b9c5e90b"
+at = "F=u32, St=u32"
+embedded = "02d8cb0a62ef6abe40eb9a6ff7536d867f7cfdafc979780cea64b024432e7aef"
+status = "residue"
+cause = "mir::Ty: sources::Unfold<u32, u32>"
+
+[[fn]]
+path = "itertools::sources::<impl at src/sources.rs:94:10: 94:15>::clone"
+kappa = "cb9d441aea61670e122b24da8a6987c1f9c27f7177108ec0ba97d4ed1a97ce3a"
+at = "F=u32, St=u32"
+embedded = "39a7c2a4e889b1ceb2d45d4c3f1ec37baf3ade1b7eabe212f01a0f51eee9ba81"
+status = "residue"
+cause = "mir::Ty: sources::Iterate<u32, u32>"
+
+[[fn]]
+path = "itertools::sources::Iterate::fmt"
+kappa = "e57a7fb732115dd1e7b8d5f0660147b7193c2a55759bd6c213ba07df443e1775"
+at = "St=u32"
+embedded = "7cd1307a0e64a04d290a69363db33dd1a03b93da205f55c2355c4b3aacb9af61"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::sources::Iterate::next"
+kappa = "fb5ae4be0b923eb1e1275571f6c83d6cf9e75461f5452162051034f332f8528f"
+at = "F=u32, St=u32"
+embedded = "9a05e6b3e308e6aae0400cffed6b47d77e1617ae4c30395f93603fa7fbca4e34"
+status = "residue"
+cause = "mir::Ty: Iterate<u32, u32>"
+
+[[fn]]
+path = "itertools::sources::Iterate::size_hint"
+kappa = "069e0ec70d8bbeb34524b98b68bf621e0383423d4dfc478da8cb73bfb21def05"
+embedded = "e1c1b2d9320a52c57afbb0b3be78083a01ce6ceb5fc522c5b872468f1ad526b6"
+status = "residue"
+cause = "mir::Ty: St"
+
+[[fn]]
+path = "itertools::sources::Unfold::fmt"
+kappa = "ded08a2fcc2bd4afba49d298137a739fb09177578dc589163488863db3314736"
+at = "St=u32"
+embedded = "2850533428bcde22157afd21b41c1acddbe8fe95534848861540e9f9fd63d72c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::sources::Unfold::next"
+kappa = "adf3ff7b0ed0483c5c3d828d100bc30d11a6c0d98d900372821c594394b211a8"
+at = "A=u32, F=u32, St=u32"
+embedded = "0c8da8639eb7927d4d8532a4e224c756ebf1a849ca7c4bccc34827eb4eb0831d"
+status = "residue"
+cause = "mir::Ty: Unfold<u32, u32>"
+
+[[fn]]
+path = "itertools::unfold"
+kappa = "e8c7df35b47dcb9b35ffce8d097210b0cd3d132cae89dad1daaabb5fb0fbba1d"
+at = "F=u32, St=u32"
+embedded = "db753eeab4e79ec3ed537272a92531fb5b523bd35f9407671145caacb59250b5"
+status = "residue"
+cause = "mir::Ty: sources::Unfold<u32, u32>"
+

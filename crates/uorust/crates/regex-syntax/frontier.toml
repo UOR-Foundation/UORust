@@ -1,0 +1,831 @@
+# The regex-syntax register (written by `uorust crate regex-syntax@0.8.11`; do not edit): every body of
+# regex-syntax's MIR at regex-syntax 0.8.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1495
+translated = 540
+residue = 955
+
+[module.ast]
+bodies = 376
+translated = 3
+residue = 373
+
+[module.crate]
+bodies = 7
+translated = 2
+residue = 5
+
+[module.debug]
+bodies = 4
+translated = 1
+residue = 3
+
+[module.either]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.error]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.hir]
+bodies = 453
+translated = 7
+residue = 446
+
+[module.parser]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.rank]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.unicode]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.unicode_tables]
+bodies = 526
+translated = 526
+residue = 0
+
+[module.utf8]
+bodies = 32
+translated = 0
+residue = 32
+
+[embedding]
+embedded = 1495
+evaluable = 1495
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 146
+
+[[cause]]
+cause = "mir::Ty: hir::ClassUnicode"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: Seq"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: hir::Hir"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: ast::Ast"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: LookSet"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: ast::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: literal::Literal"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: hir::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: hir::LookSet"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ParserI<'_"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ast::Span"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: hir::literal::Seq"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: parser::ParserBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ClassBytes"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: hir::Class"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ClassBytesRange"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ClassUnicodeRange"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: hir::Properties"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: hir::translate::TranslatorBuilder"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: IntervalSet<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Properties"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ast::Literal"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Ast"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Hir"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ast::Concat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: hir::ClassBytes"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: hir::Look"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: hir::literal::Extractor"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Utf8Sequence"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ast::Flags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ast::parse::ParserBuilder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hir::literal::Literal"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: translate::Flags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Interval"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Span"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: hir::translate::Flags"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unicode::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ClassSetBinaryOp"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Spans<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Utf8Range"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::ClassUnicode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::ErrorKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::Group"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::visitor::HeapVisitor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hir::ClassBytesRange"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hir::ClassUnicodeRange"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hir::ErrorKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: unicode::CaseFoldError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: utf8::Utf8Range"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ClassSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ClassSetItem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::CaptureName"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSetItem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSetUnion"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::parse::Parser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::parse::Primitive"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hir::HirKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hir::Repetition"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hir::translate::Translator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: unicode::UnicodeWordError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClassSetRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClassSetUnion"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClassUnicodeOpKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Extractor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FlagsItemKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HexLiteralKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PreferenceTrie"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RepetitionRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ScalarRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SimpleCaseFolder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TranslatorI<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Alternation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::ClassBracketed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Position"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Repetition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::WithComments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::print::PrinterBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::visitor::ClassInduct<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hir::Capture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hir::Literal"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hir::print::PrinterBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::Parser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utf8::Utf8Sequence"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::binary_search_by_key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Assertion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AssertionKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CanonicalClassQuery"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassAscii"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassAsciiKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassBracketed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassPerl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassPerlKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassSetBinaryOpKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClassUnicodeKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Comment"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Dot"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtractKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Flag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlagsItem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GroupKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HirFrame"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HirKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LiteralKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Primitive"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PropertiesI"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RepetitionKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RepetitionOp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpecialLiteralKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Utf8Sequences"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WithComments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::AssertionKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ClassAscii"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ClassAsciiKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ClassPerl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Flag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::SetFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::parse::ParserI<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::print::Printer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::visitor::ClassFrame<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::visitor::Frame<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Copied<core::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::LookSetIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::interval::IntervalSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::literal::ExtractKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::print::Printer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::translate::HirFrame"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::translate::TranslatorI<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::visitor::Frame<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::visitor::HeapVisitor<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unicode::CanonicalClassQuery"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::ages::imp::AGES::promoted[0]: mir::Operand::Constant: unicode_tables::age::V1_1: mir::Operand::Constant: unicode_tables::age::V1_1::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::reserve"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntervalSetIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Left"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Assertion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassPerlKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSetBinaryOp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSetBinaryOpKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassSetRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassUnicodeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ClassUnicodeOpKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Comment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FlagsItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FlagsItemKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::GroupKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::HexLiteralKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::LiteralKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::RepetitionKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::RepetitionOp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::RepetitionRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::SpecialLiteralKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::parse::ClassState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::parse::GroupState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::parse::NestLimiter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Repeat<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: either::Either<char"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: either::Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Spans<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::ClassBytesIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::ClassUnicodeIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::Dot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::PropertiesI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::interval::IntervalSetIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::literal::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::Parser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unicode::SimpleCaseFolder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utf8::ScalarRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utf8::Utf8Sequences"
+bodies = 1

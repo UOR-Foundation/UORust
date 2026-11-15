@@ -1,0 +1,48 @@
+[[fn]]
+path = "rand_core::R::fill_bytes"
+kappa = "4bb088f306f47b1b83cddcb0306099ea37a32eab0aa3a1a8fcce8b3fb8dd87b2"
+at = "R=u32"
+embedded = "cf1df66adeca98b4a75bea684bd6a053d6d8f1a5c73e0521ee2c32734615ab31"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:203:1: 205:23>::try_fill_bytes: rand_core's MIR stops at type outside the lift: <<u32 as core::ops::Deref>::Target as TryRng>::Error"
+
+[[fn]]
+path = "rand_core::R::next_u32"
+kappa = "cd0718b63142cf338c5d76f8ef57ec7daa571160ac98c5adac3b94189d48f659"
+at = "R=u32"
+embedded = "0b6a04ba5a31829f9415a274e8e44f247d7b4a2f7f80825cb580b96d91d7e5ae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:203:1: 205:23>::try_next_u32: rand_core's MIR stops at type outside the lift: <<u32 as core::ops::Deref>::Target as TryRng>::Error"
+
+[[fn]]
+path = "rand_core::R::next_u64"
+kappa = "7d1a06c867064276246e4a292a9fbb7bdb47d243421f9e8d40033b9e6d61fb4c"
+at = "R=u32"
+embedded = "c27163a48dbbc3441fb2c6de3b585b39a16115b0f5565e05821d2434dc991f80"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:203:1: 205:23>::try_next_u64: rand_core's MIR stops at type outside the lift: <<u32 as core::ops::Deref>::Target as TryRng>::Error"
+
+[[fn]]
+path = "rand_core::R::try_fill_bytes"
+kappa = "f3353b3d3df1765cca858f0a95ffa68b9a5dab7a9880b394d7c02bf7b0f8c835"
+at = "R=u32"
+embedded = "bf8cf1332691b38d1ffd812f0e052aa57bc1faedb531a6ffba2d023c799fceff"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut, which u32 does not implement in core"
+
+[[fn]]
+path = "rand_core::R::try_next_u32"
+kappa = "c0441c76608803414833ab03cf5933fdf09138bc259c1c522e4a9d21e300b98c"
+at = "R=u32"
+embedded = "f19b58be67dbc67cc3b819368159ca56911bde67a856f2a1708396dff304e931"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut, which u32 does not implement in core"
+
+[[fn]]
+path = "rand_core::R::try_next_u64"
+kappa = "5d511ba646e202390af8cf0b749459eb3658057f87abff5221a1e59abe8860b3"
+at = "R=u32"
+embedded = "de02a2cbfc0b3db17e7d78630ed5967cf27e27cc8d3d5232c194223232129b02"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut, which u32 does not implement in core"
+

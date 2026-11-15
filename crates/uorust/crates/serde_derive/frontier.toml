@@ -1,0 +1,335 @@
+# The serde_derive register (written by `uorust crate serde_derive@1.0.229`; do not edit): every body of
+# serde_derive's MIR at serde_derive 1.0.229, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 326
+translated = 0
+residue = 326
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.bound]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.de]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.deprecated]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.dummy]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.fragment]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.internals]
+bodies = 201
+translated = 0
+residue = 201
+
+[module.pretend]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.ser]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.this]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+embedded = 326
+evaluable = 326
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: fragment::Fragment"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: internals::symbol::Symbol"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: Ctxt"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: ReplaceReceiver<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: attr::Field"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: syn::Generics"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: syn::WherePredicate"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: FindTyParams<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: internals::name::Name"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::ExprPath"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: attr::Container"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: attr::Variant"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: internals::attr::RenameAllRules"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Attr<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: internals::ast::Style"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: internals::name::MultiName"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Lifetime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RenameRule"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VecAttr<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Identifier"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: internals::case::RenameRule"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BoolAttr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeriveInput"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Field<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::Parameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fragment::Stmts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internals::attr::TagType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internals::attr::VecAttr<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internals::ctxt::Ctxt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::Parameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeImplGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeTypeGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Generics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Member"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stmts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Data<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::BorrowedLifetimes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::DeImplGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = &internals::ast::Field<'_>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fragment::Expr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fragment::Match"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::Derive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::ast::Container<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::ast::Field<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::ast::Variant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Attr<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::attr::BoolAttr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Container"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Field"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internals::attr::Variant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::LifetimeParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::TypePath"
+bodies = 1

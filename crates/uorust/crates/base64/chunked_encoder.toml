@@ -1,0 +1,37 @@
+[[fn]]
+path = "base64::CHUNK_SIZE"
+kappa = "74a94fe95abc322268dc5d4f9b23ae1517739611b47db8a92f8b7b53d39df0f8"
+embedded = "158802e2526a56e0f182987d082f514223189633c6b37ca977739e3c47e12b0d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item chunked_encoder::ChunkedEncoder::<'e, E>::encode::BUF_SIZE"
+
+[[fn]]
+path = "base64::chunked_encoder::ChunkedEncoder::encode"
+kappa = "8f4ce4292ebe20b4e28b231ab21bb94e41a071fddec78f37281d054099118589"
+at = "E=u32, S=u32"
+embedded = "c99587cef859c090535f647233eb1d0ab110b5b916688292743bc665357c91a4"
+status = "residue"
+cause = "mir::Ty: ChunkedEncoder<'_, u32>"
+
+[[fn]]
+path = "base64::chunked_encoder::ChunkedEncoder::new"
+kappa = "4e5a2b1f1bd9fbd22363f42d91ce093801010244c1a6627cdb67750f221a9a0a"
+at = "E=u32"
+embedded = "64101bae2f1d0a2dbb885a1078f46d2ea41fa614e012bfa40573c20420f5674a"
+status = "residue"
+cause = "mir::Ty: chunked_encoder::ChunkedEncoder<'_, u32>"
+
+[[fn]]
+path = "base64::chunked_encoder::StringSink::new"
+kappa = "d3ff61003210c878c1180155df3b9e89d88cfaa61e8042b00d0451d6280eb898"
+embedded = "61aba924183bc7985f2fdfbb7413793634284b8629945962ae2c4a0ac1a9b9f1"
+status = "residue"
+cause = "mir::Ty: chunked_encoder::StringSink<'_>"
+
+[[fn]]
+path = "base64::chunked_encoder::StringSink::write_encoded_bytes"
+kappa = "1031608a7553a0f4c53d817e2fb93755624f1cd3214efb069cb969b79604b4f1"
+embedded = "52d8ea6af0506fa7931c532f58bf86b042f934507b1cc9f7493007e3ad6d92ad"
+status = "residue"
+cause = "mir::Ty: StringSink<'_>"
+

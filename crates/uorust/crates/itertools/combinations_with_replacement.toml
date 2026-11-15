@@ -1,0 +1,87 @@
+[[fn]]
+path = "itertools::array_combinations_with_replacement"
+kappa = "c25e2636bbdc3ecc1ff873ed32413401ae256c016d2de7965487e0a21fa70ff9"
+at = "I=u32, K=#_K"
+embedded = "5fd2dcd4bc14947658ab3ef18ee3c846fad10e4e16effc2e7d6c8eb65468726d"
+status = "residue"
+cause = "mir::Ty: combinations_with_replacement::CombinationsWithReplacementGeneric<u32, [usize; #_K]>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement"
+kappa = "22a3cd04a385c60f15d2935c7a352879cdaa53e5e56dbc64a6aeb97e8f9d2ddf"
+at = "I=u32"
+embedded = "2c3b92d0d4bed9b812131a89feb5f83833ac85431f913affee8bcb197025cfea"
+status = "residue"
+cause = "mir::Ty: combinations_with_replacement::CombinationsWithReplacementGeneric<u32, std::boxed::Box<[usize]>>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::<impl at src/combinations_with_replacement.rs:12:10: 12:15>::clone"
+kappa = "7e9961581df42be892921cace1b24b7adf52dc70bf30d2da40954efe5c95c5d8"
+at = "I=u32, Idx=u32"
+embedded = "0ad200e7477ed8c048ad46e4cf05d6c4abc92dd65a43746f1b9376847394ae7d"
+status = "residue"
+cause = "mir::Ty: combinations_with_replacement::CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::count"
+kappa = "299579126513e3df5c5f00410d68b956c6c15f19fc1b5c6a309266c8399d563c"
+at = "I=u32, Idx=u32"
+embedded = "9dfd860889a44ae642592b6672a53cae1b7c65347126b967b80a6a8f95463019"
+status = "residue"
+cause = "mir::Ty: CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::fmt"
+kappa = "da2e981188024ebffa5d357da7673aad47708dd85d282e846cd1763a94a86856"
+at = "I=u32, Idx=u32"
+embedded = "da0ddb1d5e36f536b295dafd01bf051d9edd7776ca9ba5f4c4c43848938d0c46"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::increment_indices"
+kappa = "9288847e13c6f90902ec40b8c8e045485f4ce4b7adb059a1be54d9d34242a4c8"
+at = "I=u32, Idx=u32"
+embedded = "68f09884e38ec583ea36f3e5f63f2fc1d1d337f2981291a7bb332e21ec34318d"
+status = "residue"
+cause = "mir::Ty: CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::new"
+kappa = "2f0eede11e4f7c6c9d68a269de82106be87ffbe95c1e9d1aba8960ddf346081a"
+at = "I=u32, Idx=u32"
+embedded = "b3a84143c4807b7516faaa12102d91575fb495989d24e6d8fc81e4b566567964"
+status = "residue"
+cause = "mir::Ty: combinations_with_replacement::CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::next"
+kappa = "d235296fe4ef084c4ec0837ebdb7d9d4961173e300c30b846298b80ab22b431d"
+at = "I=u32, Idx=u32"
+embedded = "5dff0ec0ab5db2db5fd4c695c6eed13d0aa1d09d8eac2e0b6dcf5b5e9d9ffd06"
+status = "residue"
+cause = "mir::Ty: CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::nth"
+kappa = "2e186969afc650542c4c2ab6b6e3518306a46d29192c8b5cae36fc0a1030026c"
+at = "I=u32, Idx=u32"
+embedded = "3572c4315d26f1fc41f45339907513b5b16f3752482b553988bcc345cef05025"
+status = "residue"
+cause = "mir::Ty: CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::CombinationsWithReplacementGeneric::size_hint"
+kappa = "2441d7a8c62f429df7ede9c938d77f553977e5c8cb0b58b3e0034ae4122a8029"
+at = "I=u32, Idx=u32"
+embedded = "e8d7ce8646435de48b4c7b9b95a5240f5b0845192f73af9e65ee1589a5002e71"
+status = "residue"
+cause = "mir::Ty: CombinationsWithReplacementGeneric<u32, u32>"
+
+[[fn]]
+path = "itertools::combinations_with_replacement::remaining_for"
+kappa = "4da09bc257105a69a3f7a447a53f631e87195a3e7503d587d521ce1a382b2e27"
+embedded = "096c6076a6d07ec278df34170e07b69946c8b20286678bf5ab833a13b01bc4a3"
+status = "residue"
+cause = "mir::AggregateKind::Closure: combinations_with_replacement::remaining_for::{closure#0}: mir::TerminatorKind::Call: adaptors::checked_binomial: itertools's MIR stops at type outside the lift: std::ops::RangeInclusive<usize>"
+

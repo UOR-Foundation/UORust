@@ -1,0 +1,49 @@
+[[fn]]
+path = "cc::create_named"
+kappa = "4a9bbadd05ee060445aad49f0a572bfcfcb9c496a86a0a1b1eda2ba856d2e562"
+embedded = "433ee385fd2c41cb3f9fb760aa3708a0a13e92cc2f0d518bbb760452205357a2"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "cc::rand"
+kappa = "caf24b45d3340e59b7470b8cedad8c46f72f3e91230654faf65319cce3202268"
+embedded = "13337046a1e8ed6a6366fbc149a337a8c67a4ec766f7dc0110837a0ed19fdbe3"
+status = "residue"
+cause = "mir::Ty: std::hash::RandomState"
+
+[[fn]]
+path = "cc::tempfile::NamedTempfile::drop"
+kappa = "2a56a55787880e9ce1283d84edf983fcf685ea34f7d0c5ae773b493f3ffe63ab"
+embedded = "da01b022a1d1f35e4f248c5c36a7f9308b75f37109ea809db457bc0e342a5e75"
+status = "residue"
+cause = "mir::Ty: NamedTempfile"
+
+[[fn]]
+path = "cc::tempfile::NamedTempfile::new"
+kappa = "2f31ea2586f4c55b804bbc6517a4f595ecfa233eec598fb8c0ce0dd90fa70edf"
+embedded = "1236fdaa1a4575f63044e84ba419504422f7c82a626a495da49e1b5761837fc5"
+status = "residue"
+cause = "mir::Ty: tempfile::NamedTempfile"
+
+[[fn]]
+path = "cc::tempfile::NamedTempfile::path"
+kappa = "ce297eaeebf2cb4050b0e9a3b882ae9ff757d813c077db209eb162f6e8638e15"
+embedded = "ce79b2bb4f56a189a26d7c183bc4abe543bc39dfa284fa7c2517e82be7c0d3c5"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "cc::tempfile::NamedTempfile::take_file"
+kappa = "6dffa13adf55742be58ad2e8b666c284b3d762aecee68d4d407b7aae78512624"
+embedded = "5c8d79523985e9e449fea45d246ac834cf481865031d6f75e06da7e05690a16f"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "cc::tmpname"
+kappa = "371d6a1262da71df836b2adf307b074899bc46550eca686b87ce8716caff7bd6"
+embedded = "113a4f4ee87845f6aae883ad27b6486e019b11e29a597d37efc7d6c8868b7ffb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: tempfile::rand: cc's MIR stops at type outside the lift: std::hash::RandomState"
+

@@ -1,0 +1,134 @@
+[[fn]]
+path = "itertools::heapify"
+kappa = "3bf921f33b662ddd06a64b0d30b14f7233ee8bc94187044c867b38f55ffeb2de"
+at = "S=u32, T=u32"
+embedded = "81b091a1a09201194f284ddf148718611b3d77ee07ec7d918f9bc173a58d1b1b"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "itertools::kmerge_by"
+kappa = "e1f861faf519158ae406bb4f864e1ccae45bc4cf34898f8e614a38ac0614c224"
+at = "F=u32, I=u32"
+embedded = "3bae994b97e21951abc6cbc5390e69d2d1baa55efafcc22debf630aad4afc490"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::KMergeBy<u32, u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::<impl at src/kmerge_impl.rs:112:10: 112:15>::clone"
+kappa = "acbfb22a9cb95ccf4a18db78af006360cc0428665da2de4d5edd188918d0d625"
+embedded = "c09e7715f118c51cf1d43729a19e096d8c4c7e349f0bdddf3b187f0eb5ffc5df"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::KMergeByLt"
+
+[[fn]]
+path = "itertools::kmerge_impl::<impl at src/kmerge_impl.rs:112:17: 112:22>::fmt"
+kappa = "7b6fd8b3ff56b439a2c59ea8b5a28e5325b2353f6890e1b43f04ee467c062522"
+embedded = "e853ada3e476384e32cf7659f28f7d81230e29c513b2e8756d85e9115e665316"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::kmerge_impl::<impl at src/kmerge_impl.rs:15:10: 15:15>::fmt"
+kappa = "354474a5dbe69488a9fb68b9129b8b45e9e3d86fdb62ff36e1d6919260171c7b"
+at = "I=u32"
+embedded = "1bd0aefe3e36a211f5ff4f023263fc0251128722778dde50696baceeeb074a4d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::kmerge_impl::F::kmerge_pred"
+kappa = "1d808b8d70ba768c22ecd5b5f1e52f39f43f6a51dbc78ffa34f2571ce0c02458"
+at = "F=u32, T=u32"
+embedded = "33956f010e9da6bc34c3d4e8b5c16ffbd40705e3461464fb23178c1b180ee5f3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::kmerge_impl::HeadTail::clone"
+kappa = "f77159b0593c4e4ef33ae15343bf44c1086bca3215db66fbc2e433af8785601e"
+at = "I=u32"
+embedded = "9443a50d1e7e2720006c257bd955f7f24d1c2f56f411ddaa58fba36463f24e5f"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::HeadTail<u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::HeadTail::new"
+kappa = "f8bc8df9da41fa83b6823fac4f9c9b74196f1a6660400a47e05085a6d79bc224"
+at = "I=u32"
+embedded = "603e7526d5eae4d7a1d64d03e01f271f15f0f19cf0b2db8f26d5773c4a7cd749"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::HeadTail<u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::HeadTail::next"
+kappa = "205e13069789b69aa980dc9abd902219e3f0651bf9cddc07b51d8723beff4ed5"
+at = "I=u32"
+embedded = "a2f9cc99ad751bba4566bbe08c2454e1d8775f7f8dbee4108eaf9dedebb66ce7"
+status = "residue"
+cause = "mir::Ty: HeadTail<u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::HeadTail::size_hint"
+kappa = "680ca3a2fdc736dbdf6d304fa05e3948ce9cc37c2f75a9d29c026a74e301948b"
+at = "I=u32"
+embedded = "85e344037f2353a67c12acbf792f7b88237c3d25738c403462332f2b0e87863d"
+status = "residue"
+cause = "mir::Ty: HeadTail<u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::KMergeBy::clone"
+kappa = "c76b71b02a05431e02e419790a08c67ddce12507986c26b3b5b04245c3bbd027"
+at = "F=u32, I=u32"
+embedded = "1d97aa50c5ec3b7b12d078591d1b970c1e779f5640f5add78bb807d0cba0774f"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::KMergeBy<u32, u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::KMergeBy::fmt"
+kappa = "fc26b9bbdf3b246c174e0999fef564594f3b1979caeafd1a1ab3a2dbfe53dfdf"
+at = "I=u32"
+embedded = "93cdb90be9fc83104f43012b0cf92bdea7608f5addc9e952fa611e48224823b8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "itertools::kmerge_impl::KMergeBy::next"
+kappa = "fac40d40b10e60a67b3d70b1286c9e9bdf1fcec660c60e8269cc82114a3d9553"
+at = "F=u32, I=u32"
+embedded = "279055110ed302a0219345c235cc8c74982d735139324a39f61bb830e9c6250d"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::KMergeBy<u32, u32>"
+
+[[fn]]
+path = "itertools::kmerge_impl::KMergeBy::size_hint"
+kappa = "cc31eb2b42e99f0705c20efe37a9af3699aa2dae894dbaa2f4e3a848086aac43"
+at = "I=u32"
+embedded = "70712deff26f85df12c444f37cfdfe8656cefa631d3c7f1dd1432fe0037027c1"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "itertools::kmerge_impl::KMergeByLt::kmerge_pred"
+kappa = "d0309c0ef3a9c6e84ce34f8033ddfbdc2a27efa298e3130765125363291a8582"
+at = "T=u32"
+embedded = "e9583724e4d0d4b26967a2ad24c97f6a554ccf22cc90557ec8944e2a761f0460"
+status = "residue"
+cause = "mir::Ty: KMergeByLt"
+
+[[fn]]
+path = "itertools::kmerge_impl::kmerge"
+kappa = "c4b256ef10f31fdfe2b37cb8598fd834e34693f5d4571719a16c23fe0700ff5e"
+at = "I=u32"
+embedded = "c1297d312d42b06e5cff6c4275be0ef1b9be131ce44939ea547c55a4547337ef"
+status = "residue"
+cause = "mir::Ty: kmerge_impl::KMergeByLt"
+
+[[fn]]
+path = "itertools::kmerge_impl::sift_down"
+kappa = "48799158e3a07b20a4e540d6ae5373c2410393661ce2c04ef823532e623c9a8d"
+at = "S=u32, T=u32"
+embedded = "43aaeb188db8ba4121a988c554e1fc90f36acf741e243907bbc3ae3bd94433ca"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+

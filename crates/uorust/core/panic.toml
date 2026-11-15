@@ -1,67 +1,82 @@
 [[fn]]
 path = "core::PanicPayload::as_str"
 kappa = "c936c48749c393dcb3528cb0c0b94c899752a4e0e3b1441faac4b40cde778be1"
+embedded = "536ab03ba6fdc34ee1ac1786ac0c08aa6b4e5d0eb3791c3976ba14f074279861"
 status = "residue"
 cause = "mir::Ty: Self"
 
 [[fn]]
 path = "core::abort_unwind"
 kappa = "6821a9147aba327d422a11664674e0704deaa79097fdf684b405f1321f64ae6a"
-at = "F=u32, R=u32"
-status = "residue"
-cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+at = "F=impl FnOnce() -> u32, R=u32"
+embedded = "7f2cdc667911b8fceb6d0f4fb784c5cb585234cc17379a931f8073ce29a5258c"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "4656ae809d8c0d4d88180680706f989072cf29871e01aa6547c831ec55b533ab"
 
 [[fn]]
 path = "core::location::<impl at library/core/src/panic/location.rs:37:16: 37:21>::clone"
 kappa = "a6d9c31a4a884d055182c664a6d9257308c7ba5b21e5f722d2ccb8c1c6372d36"
+embedded = "bf1f89cf04147314625a78075106239691c7d08fe729b25308b2b71ed9a42f69"
 status = "residue"
 cause = "mir::Ty: panic::location::Location<'_>"
 
 [[fn]]
 path = "core::location::Location::caller"
 kappa = "33a459565281ad85d5c1171eb647deedb869028e736f34516a3e2469e4e9f7db"
+embedded = "963327dcc82382b930440d4c1ed635eb0315fca1cba224216092c28bc3163861"
+blocked = ["intrinsic caller_location"]
 status = "residue"
 cause = "mir::Ty: panic::location::Location<'_>"
 
 [[fn]]
 path = "core::location::Location::cmp"
 kappa = "4de16009cf304c78ac3ce824597af2310ac6dbfa5452d255226eea87363b223e"
+embedded = "759238506dba502f9bbf05fc48fc2a80ae45f5201bc3423c06f87952764e412c"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::column"
 kappa = "569f6614830dd0f05f16cec195289e6301c824f71e9243e904972bbcf16cac89"
+embedded = "a0d8763f37cec7a90c0b1bcde74dcaf2de0783cad00075d029ab7fa248e03ca3"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::eq"
 kappa = "553ea7930ceeb8dd1bdcda72bb08560431e4a0242af75b04433d8cc06f672d8f"
+embedded = "7a361695b2bc52a4846c4c2014f7dd4933bb09f9ff7815d269e45be58c7aa1f7"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::file"
 kappa = "ec2d90447575a45e72db24127df404068bab05b9c3487ec0ead443ffe78a16cd"
+embedded = "28670e60b40ac62c5a95e8b8916bdfe4833ec912ad155a59ecbf1e035e7d1c61"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::file_as_c_str"
 kappa = "8844e545cb0d1992c22488d3c0b0ea8c504800d318312d693b171d779de01f7f"
+embedded = "dfa1a720772f511960d209e324dfe5a850a8c14fa9f7d6015df93d8aca30f2dd"
 status = "residue"
 cause = "mir::Ty: ffi::c_str::CStr"
 
 [[fn]]
 path = "core::location::Location::fmt"
 kappa = "c56a1212cd886d868f8b49d96db4b21def6fd020be8ce1bba93106fdc409aa4f"
+embedded = "11d378866b72536f62fdcc8fac6500b890f2e464459387dab36dd3ed8c03b89e"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::fmt#2"
 kappa = "fd1c91e39e2d124606232ac5180e9233337ca1ce8467d6ab645c18b22c9e9860"
+embedded = "4db3829ca02adcbb2b1e8f3fe48293a9f8ffa14eea739b75ee0730489e79df6c"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
@@ -69,119 +84,150 @@ cause = "mir::Ty: Location<'_>"
 path = "core::location::Location::hash"
 kappa = "a1975492b0a94219349918c99d36a1dcad3a2c090fd39dc1a49c6b5d5d9ffa0f"
 at = "H=u32"
+embedded = "f0240f5bb93af0d0cb33873b57e1051ddbc00df6346b37a0f84d717d9baf783d"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::line"
 kappa = "87b6a138bc70c82a73e7dc3b7b5fd56e1b4ff38b61d64c808c721f6d50e14c5b"
+embedded = "3426a8a5237c7f71c715dc67019af3c111b72126c27de799ed7a92e3b1b7ad0d"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::location::Location::partial_cmp"
 kappa = "026f29befbe5b01b9ad7ead0bf81ffa369e351b8b27f057f12319916e6b30684"
+embedded = "3f05c342a4c82d0a76bc8654be66efbf22d5f88d5fd887e52a33c18b8fb43aac"
 status = "residue"
 cause = "mir::Ty: Location<'_>"
 
 [[fn]]
 path = "core::panic_info::<impl at library/core/src/panic/panic_info.rs:13:10: 13:15>::fmt"
 kappa = "622136ce255efb836388161f93ee6d7d3a96ebaeca9c4549da9a886a3bf7d7a7"
+embedded = "9ca7516b898ad2deabf203287352247f115f2384c3801ee473612c29a58a77d1"
 status = "residue"
 cause = "mir::Ty: PanicInfo<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::can_unwind"
 kappa = "558bbab9aa1cc83761eeffb9ca6766aa6534340bac90c4212c73b8e43ceb7e07"
+embedded = "fdc0a07d3d9be5709c7c9dcc9c231c84c5bd8f4ea8c0f12f57c94be90b0c4161"
 status = "residue"
 cause = "mir::Ty: PanicInfo<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::fmt"
 kappa = "04f81569a2cfb64e3361c3d2b4e982806f026c72915253376dc6fc0c63e85348"
+embedded = "9ccfa64f196692f7a9d6ef6b675db7a84dfedaad448ba54f013c6b72fbf99d11"
 status = "residue"
 cause = "mir::Ty: PanicInfo<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::force_no_backtrace"
 kappa = "ce7e0bfd5b09523f840c61385fdea7b5632ce38df576d371c83b0f8c83b20005"
+embedded = "2f2777d7e9e0c03aaba22dc7c4c706b6309b81bacba558958966b4cd5543d224"
 status = "residue"
 cause = "mir::Ty: PanicInfo<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::location"
 kappa = "48118ca82b54d47e429c4a3011fd120ef005b14bc5e857391ee7b04d3d5d95cd"
+embedded = "92097dc5dce00e42e1437a46235920b7ae59a2df750d238432e36c3884d8d653"
 status = "residue"
 cause = "mir::Ty: panic::location::Location<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::message"
 kappa = "ffa7a034f8b3f58f4ab75a750b6ccf8c82bad98b446d3158758d97910d32c927"
+embedded = "04a39119a7f4fd448119e1051434146f471b42e12d8669f897ebb1acd05d69a1"
 status = "residue"
 cause = "mir::Ty: panic::panic_info::PanicMessage<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::new"
 kappa = "981f37982f57dfba09274f3a346d83d860826f4e34681a56f075c060cf60fbc4"
+embedded = "c6cd05277d76fc6f8b2056de62b00a6314c3a811fdea032ea8582081afaa2903"
 status = "residue"
 cause = "mir::Ty: panic::panic_info::PanicInfo<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicInfo::payload"
 kappa = "1eb316833d5f0ad6800d997e080c712badb8bad8414d595a74fd9b501af01b57"
+embedded = "7629c2860d4837591596b4d512a7db3fa14edae1b5e09c7fb6e0fe45436fce47"
 status = "residue"
 cause = "mir::Ty: dyn any::Any + marker::Send"
 
 [[fn]]
 path = "core::panic_info::PanicMessage::as_str"
 kappa = "9914354021f9d1e21c5ed93f0d06a7a6a0c4f415c9ef366ce916582ea9299571"
+embedded = "3812c417e28d37867cb6f039f495ea0c3c937be2cbb2705a83d64e0b96406e64"
 status = "residue"
 cause = "mir::Ty: PanicMessage<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicMessage::fmt"
 kappa = "57f604fcd79964c24e2d85f5f15a50bea82074cf1706827605223db577fdf8ec"
+embedded = "f0bac43ebfef2e43ceddc37ba540a7217f9ee62e161dedb93b053c7353f375c4"
 status = "residue"
 cause = "mir::Ty: PanicMessage<'_>"
 
 [[fn]]
 path = "core::panic_info::PanicMessage::fmt#2"
 kappa = "aead9b1a3e2ea45f5f782b9f2f11f967c514bc0c1552c99176e164a63aa94b6e"
+embedded = "98b8a0c68fad17128df95d768eb97d8b12543ccff1bdb72f2ab790495791ff16"
 status = "residue"
 cause = "mir::Ty: PanicMessage<'_>"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::call_once"
 kappa = "2a0eccb9e823e1a5c561bfab17d794e8ef3fb0f5024f407cc5c262978479b2db"
-at = "F=u32, R=u32"
-status = "residue"
-cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+at = "F=impl FnOnce() -> u32, R=u32"
+embedded = "c2d00d4e2dd0576ef760e65c705648fe73b9d0a9771d6c2deb6660ddc9dad33d"
+status = "translated"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "76b2067c23e3952ee5cf9ae73efefa51a4e706939482d1aea5127dc1af961fe1"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::default"
 kappa = "979422a83c1b34f81c12d0a4b60ed5b55bce268deb76d4ef863a8a6396dd1758"
 at = "T=u32"
+embedded = "ff1a731f8d8e93c06456b41220b180b6515475640d0d6bca7eb306ab527c5eef"
 status = "translated"
+bridged = "pending"
+pending = "signature: CorePanicUnwindSafeAssertUnwindSafeU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "415497af0bfeb7d50143a3731c859a58172c836b5d86ecf1bcfcdcf29406d30d"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::deref"
 kappa = "98a1b22ec1c059fcbb286a04c35b400863031df7f8c9eff7c493afb1aaff6bd8"
 at = "T=u32"
+embedded = "9f3ec4da881cc6ef03e010e22278498aad9e07ca98fc70a1cc7c0620d903eeff"
 status = "translated"
+bridged = "pending"
+pending = "signature: CorePanicUnwindSafeAssertUnwindSafeU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "124708a1cf7754e646b73a1d5ac88665156ff1174501557b2258749828c9c526"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::deref_mut"
 kappa = "fe58d9c00e404e6c7b0300d45f9aa21fa97e5a0361e0bcd020452900fb023128"
 at = "T=u32"
+embedded = "531f1e8728712d72253ebe39175400d0ff03349473209f7dbfe0d45efa57fcc0"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatCorePanicUnwindSafeAssertUnwindSafeU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "b2cf15453ff9aa8d7e8f2110379ebab2a07e22c35911d8eb9261a9ac39e53834"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::fmt"
 kappa = "c6bf778a2964c970ea21597225dce0a205e749e8e520675707836fa7d497925e"
 at = "T=u32"
+embedded = "70ce3e9b6ec525a31b821ffab0f75694a307865c805b6e688a9e95a325e7dfbf"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
@@ -189,13 +235,18 @@ cause = "mir::Ty: mut fmt::Formatter<'_>"
 path = "core::unwind_safe::AssertUnwindSafe::from"
 kappa = "da6730c40018bbc74e4fc50b8612ef06c2d04efdd75d2eb32eda67dfd4b76457"
 at = "T=u32"
+embedded = "d814f6abdaa3501072d46007b60772f38dd719087a465712ce737a0885d93d9c"
 status = "translated"
+bridged = "pending"
+pending = "signature: CorePanicUnwindSafeAssertUnwindSafeU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "c7abfbdc3c2004d65496026a322f01262e5e0664d12bf84f381a17858d013ef5"
 
 [[fn]]
 path = "core::unwind_safe::AssertUnwindSafe::poll"
 kappa = "8d50e7a874b9da4133efcfc8aca19e417d4ac38397fc2575677e88522397526e"
 at = "F=u32"
+embedded = "631ae0f3f130188db585e097cd61645764706b775e4a5aa61335c0064205f4dd"
 status = "residue"
 cause = "mir::Ty: Context<'_>"
 
@@ -203,6 +254,7 @@ cause = "mir::Ty: Context<'_>"
 path = "core::unwind_safe::AssertUnwindSafe::poll_next"
 kappa = "b974be5a64345ec4c7706d9b92133f9340de7f6bf4983bf371fe4f55bff5f1cc"
 at = "S=u32"
+embedded = "36d0090ece6f3da66f419afb4199232fe0a2f0fe609e2d695e39579ed8edda62"
 status = "residue"
 cause = "mir::Ty: Context<'_>"
 
@@ -210,6 +262,10 @@ cause = "mir::Ty: Context<'_>"
 path = "core::unwind_safe::AssertUnwindSafe::size_hint"
 kappa = "ba1d0bc768085f1c059cb5e45e00d1e9526b0def313ee34a2a0e8d4af371720a"
 at = "S=u32"
+embedded = "ad6617870199bb85fe1b7b405a93078405df19026e8f6ef4b5b5b2e967d11d51"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatOptionNat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "70e974df86690899fc5426306c3a6229a4894e0e60bbfa9d048ea7b0dade7fcc"
 

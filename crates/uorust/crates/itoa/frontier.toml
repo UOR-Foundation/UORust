@@ -1,0 +1,70 @@
+# The itoa register (written by `uorust crate itoa@1.0.19`; do not edit): every body of
+# itoa's MIR at itoa 1.0.19, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 44
+translated = 1
+residue = 43
+
+[module.crate]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.u128_ext]
+bodies = 1
+translated = 1
+residue = 0
+
+[embedding]
+embedded = 44
+evaluable = 44
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 10
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Buffer::new: itoa's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: divmod100::SIG: mir::Operand::Constant: the constant item divmod100::EXP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i64 as Integer>::MAX_STR_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u64 as Integer>::MAX_STR_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item div_rem_1e16::D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item divmod100::EXP"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 1

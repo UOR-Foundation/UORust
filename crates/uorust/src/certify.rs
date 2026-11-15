@@ -110,27 +110,6 @@ pub fn roots(register: &Register) -> Vec<Root> {
     out
 }
 
-/// The digest of the `rust-std` descriptor in `targets` (the output of
-/// `lexlean production targets`).
-fn target_digest(targets: &str) -> Result<String, UorustError> {
-    let bad = |reason: String| UorustError::Malformed {
-        path: Path::new("targets.json").to_path_buf(),
-        reason,
-    };
-    let descriptors: serde_json::Value =
-        serde_json::from_str(targets).map_err(|e| bad(e.to_string()))?;
-    Ok(descriptors
-        .get("targets")
-        .and_then(|t| t.as_array())
-        .into_iter()
-        .flatten()
-        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
-        .and_then(|t| t.get("digest"))
-        .and_then(|d| d.as_str())
-        .ok_or_else(|| bad(format!("no {TARGET} descriptor")))?
-        .to_string())
-}
-
 /// Write the production project: the projection at `projection` with every
 /// root's definition marked as a production root, and `request.json`, the
 /// `lexlean/production-request/1` document naming one package per root at
@@ -149,7 +128,7 @@ pub fn production(
         path: path.to_path_buf(),
         reason,
     };
-    let digest = target_digest(targets)?;
+    let digest = descriptor(targets)?;
     let prefix = module_prefix(projection)?;
     copy_tree(projection, out)?;
     let roots = roots(register);
@@ -238,6 +217,27 @@ pub fn production(
 /// over budget as a whole, not refused for any one root.
 const TOTAL_BUDGET: &str = "max_total_source_bytes";
 
+/// The digest of the [`TARGET`] descriptor in `targets` (the output of
+/// `lexlean production targets`).
+fn descriptor(targets: &str) -> Result<String, UorustError> {
+    let bad = |reason: String| UorustError::Malformed {
+        path: PathBuf::from("targets.json"),
+        reason,
+    };
+    let descriptors: serde_json::Value =
+        serde_json::from_str(targets).map_err(|e| bad(e.to_string()))?;
+    descriptors
+        .get("targets")
+        .and_then(|t| t.as_array())
+        .into_iter()
+        .flatten()
+        .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(TARGET))
+        .and_then(|t| t.get("digest"))
+        .and_then(|d| d.as_str())
+        .map(str::to_string)
+        .ok_or_else(|| bad(format!("no {TARGET} descriptor")))
+}
+
 /// The cause of a root no build reached before the export's deadline.
 const UNBUILT: &str = "not built before the export's deadline";
 
@@ -299,13 +299,13 @@ pub fn production_build(
     prior: &Manifest,
     within: Option<std::time::Duration>,
 ) -> Result<(), UorustError> {
-    // Refuse targets with no descriptor before anything is written or run.
-    target_digest(targets)?;
     let deadline = within.map(|w| std::time::Instant::now() + w);
     let prefix = format!("{}.{BEHAVIOR}.", module_prefix(projection)?);
     let all = roots(register);
+    // Refused before anything is written: no descriptor to export to.
+    descriptor(targets)?;
     let mut compiler: BTreeMap<String, String> = BTreeMap::new();
-    if prior.compiler == compiler_version()? {
+    if !prior.compiler.is_empty() && prior.compiler == compiler_version()? {
         let by_kappa: BTreeMap<&str, &str> = all
             .iter()
             .map(|r| (r.kappa.as_str(), r.definition.as_str()))
@@ -540,7 +540,7 @@ fn build_batch(
     }
 }
 
-/// The LexLean compiler's version, as a bundle's result records it.
+/// The LexLean compiler's version, as `lexlean --version` states it.
 fn compiler_version() -> Result<String, UorustError> {
     let run = std::process::Command::new("lexlean")
         .arg("--version")
@@ -1094,20 +1094,16 @@ pub(crate) fn sync(
         path: path.to_path_buf(),
         reason,
     };
-    // `certify production` always keeps the refusals beside its bundles, so a
-    // directory without them is refused before anything is written.
-    let kept_bundles = bundles(kept)?;
+    // Refused before anything is written: not what `certify production`
+    // keeps, which always holds the refusals and each bundle's result.json.
     if !production.join(REFUSALS).is_file() {
         return Err(bad(
             kept,
-            format!(
-                "holds {} bundle result.json and no {REFUSALS}: it is not what `certify production` keeps",
-                kept_bundles.len()
-            ),
+            format!("no {REFUSALS} beside a bundle's result.json: not kept by certify production"),
         ));
     }
     let mut results = Vec::new();
-    for bundle in kept_bundles {
+    for bundle in bundles(kept)? {
         let path = bundle.join("result.json");
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
         let result: serde_json::Value =
@@ -1227,10 +1223,9 @@ pub(crate) fn sync(
             .map(|(_, _, r)| field(r, &["result_id"]))
             .collect::<Vec<_>>()
             .join(" "),
-        compiler: results
-            .first()
-            .map(|(_, _, r)| field(r, &["compiler", "version"]))
-            .unwrap_or_default(),
+        // As `lexlean --version` states it, which the next export compares
+        // its own against: a manifest of no bundle has it too.
+        compiler: compiler_version()?,
         roots: certified,
         share: share(register, &kappas, dumps),
     };

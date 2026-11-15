@@ -13,3 +13,11 @@ for p in uorust repo-model repo-conformance xtask; do
 done
 export CARGO_BUILD_BUILD_DIR=${CARGO_BUILD_BUILD_DIR:-/home/user/uorust-engine/target}
 export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-/home/user/uorust-engine/lanes/$N} CARGO_INCREMENTAL=0
+# The build dir is shared by every lane's hooks, and Cargo locks only a
+# target dir: a lane's build can replace or remove the test binary another
+# lane is about to run there ("could not execute process ... (never
+# executed)"). So a hook holds this lock on the build dir for as long as it
+# runs; the lanes' hooks take turns.
+mkdir -p "$CARGO_BUILD_BUILD_DIR"
+exec 9>"$CARGO_BUILD_BUILD_DIR/.hooks.lock"
+flock 9

@@ -1,0 +1,16 @@
+[[fn]]
+path = "itertools::max_set_impl"
+kappa = "b78ea2d54a4e5b5288de7b1e3c4de82253b40f6b724f979a3354267e5e73ee4e"
+at = "Compare=u32, F=u32, I=u32"
+embedded = "7092797584eb25e921dd42810a0658f89057a23cbf80eac3989fcb7ce4753bdd"
+status = "residue"
+cause = "mir::AggregateKind::Closure: max_set_impl::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "itertools::min_set_impl"
+kappa = "8d3f0e34c5717d31fc0ae941a64d346c7266f944739c7643b9361f6c755ced2e"
+at = "Compare=u32, F=u32, I=u32, K=u32"
+embedded = "4cf365a3370a037e976ada582d309b449e5c54806595d789bef97019d78644d1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+

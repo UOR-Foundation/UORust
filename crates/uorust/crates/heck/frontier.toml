@@ -1,0 +1,117 @@
+# The heck register (written by `uorust crate heck@0.5.0`; do not edit): every body of
+# heck's MIR at heck 0.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 25
+translated = 0
+residue = 25
+
+[module.crate]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.kebab]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.lower_camel]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.shouty_kebab]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.shouty_snake]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.snake]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.title]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.train]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.upper_camel]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+embedded = 25
+evaluable = 25
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToShoutySnakeCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToSnakeCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToUpperCamelCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WordMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kebab::AsKebabCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lower_camel::AsLowerCamelCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shouty_kebab::AsShoutyKebabCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shouty_snake::AsShoutySnakeCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: snake::AsSnakeCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: title::AsTitleCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: train::AsTrainCase<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transform::WordMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: upper_camel::AsUpperCamelCase<&str>"
+bodies = 1

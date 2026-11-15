@@ -1,0 +1,276 @@
+# The base64 register (written by `uorust crate base64@0.23.1`; do not edit): every body of
+# base64's MIR at base64 0.23.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 201
+translated = 9
+residue = 192
+
+[module.alphabet]
+bodies = 31
+translated = 1
+residue = 30
+
+[module.chunked_encoder]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.decode]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.display]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.encode]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.engine]
+bodies = 106
+translated = 7
+residue = 99
+
+[module.read]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.write]
+bodies = 20
+translated = 1
+residue = 19
+
+[embedding]
+embedded = 201
+evaluable = 201
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: engine::general_purpose::GeneralPurposeConfig"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: decode::DecodeError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: alphabet::Alphabet"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: engine::general_purpose::GeneralPurpose"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: alphabet::Symbol"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: decode::DecodeSliceError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Symbol"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: engine::DecodeMetadata"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Alphabet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: engine::simd::Avx2"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: engine::simd::Simd"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Engine"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SimdKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encode::EncodeSliceError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: engine::general_purpose::decode::GeneralPurposeEstimate"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: GeneralPurpose"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodeMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodePaddingMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodeSliceError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EncodeSliceError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GeneralPurposeConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseAlphabetError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chunked_encoder::StringSink<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: engine::DecodePaddingMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::encoder_string_writer::EncoderStringWriter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by StrConsumer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decode::decoded_len_estimate::promoted[0]: type outside the lift: engine::general_purpose::GeneralPurpose"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: encode::encode::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item chunked_encoder::ChunkedEncoder::encode::BUF_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item engine::general_purpose::decode::decode_complete_quads::UNROLLED_INPUT_CHUNK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item engine::general_purpose::encode_scalar_tail::BLOCKS_PER_FAST_LOOP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item engine::simd::SIMD_MIN_INPUT_DECODE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item engine::simd::SIMD_MIN_INPUT_ENCODE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item write::encoder::BUF_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <impl FnOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Avx2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChunkedEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncoderStringWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncoderWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GeneralPurposeEstimate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringSink<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chunked_encoder::ChunkedEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: display::Base64Display<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: engine::simd::Backend"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: engine::simd::SimdKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::decoder::DecoderReader<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::encoder::EncoderWriter<'_"
+bodies = 1

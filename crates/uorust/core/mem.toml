@@ -1,36 +1,42 @@
 [[fn]]
 path = "core::SizedTypeProperties::ALIGN"
 kappa = "fa3141a0a9b96bb5fc1bdf95e1372b2604d70709cae9dbecb88c8768a835ae7d"
+embedded = "e4ba7745ebaeff2cd68cd2782e65e460dc151f76a9e479c8499bbdbced14224a"
 status = "residue"
 cause = "mir::Ty: Self"
 
 [[fn]]
 path = "core::SizedTypeProperties::ALIGNMENT"
 kappa = "144348caca9672f07026c08959a70e9183a1f73406876ac5962dd9953e553dc8"
+embedded = "0dd7282dd46c6f59036642d5061b89dc190bae8990bccd2b812ae8269e0adc08"
 status = "residue"
 cause = "mir::Operand::Constant: <Self as mem::SizedTypeProperties>::ALIGN: type outside the lift: Self"
 
 [[fn]]
 path = "core::SizedTypeProperties::IS_ZST"
 kappa = "c934f2bcd6108890eed677c2d24282cfe3cb33977a6dfaa56c2ce1c7662d5ef9"
+embedded = "563dc630890ba2ae39fb63d109f975e91fe336ec3acd5fe5e613c97d283e57ab"
 status = "residue"
 cause = "mir::Operand::Constant: <Self as mem::SizedTypeProperties>::SIZE: type outside the lift: Self"
 
 [[fn]]
 path = "core::SizedTypeProperties::LAYOUT"
 kappa = "b8298e71bf35e60ecebb9c86edfc2831defe25d64b5d1324e7b879a5ae55fba1"
+embedded = "5695334055d73a738d4b22da33ac0d09a70c227f8fb4b32cc8442810e64c03a3"
 status = "residue"
 cause = "mir::Operand::Constant: <Self as mem::SizedTypeProperties>::SIZE: type outside the lift: Self"
 
 [[fn]]
 path = "core::SizedTypeProperties::MAX_SLICE_LEN"
 kappa = "d79419d0749ef965b335bdb007f10eff36ff83273858765e8ca12be1da270289"
+embedded = "f9bc39a44392bc77978b0c95cae3eaca251bc0b72c943757dfb17b5816b31bb0"
 status = "residue"
 cause = "mir::Operand::Constant: <Self as mem::SizedTypeProperties>::SIZE: type outside the lift: Self"
 
 [[fn]]
 path = "core::SizedTypeProperties::SIZE"
 kappa = "968035d88eb6f9dd073423787860cc55a11317e46a916fa36b0513d811bacfa8"
+embedded = "001e9f77632aec6a703cec5ce634e8142db3c6fe1a6ca7b2cf408713f9f9b0f6"
 status = "residue"
 cause = "mir::Ty: Self"
 
@@ -38,146 +44,224 @@ cause = "mir::Ty: Self"
 path = "core::TransmuteFrom::transmute"
 kappa = "55f8b275083a0385808addbaed669b1971e23d27165faa27265ba4b8c8edb3d2"
 at = "Self=u32, Src=u32"
+embedded = "329e324fcb32c3a31876690f0ef7f097856b2566d3115190b89b86b31521a441"
 status = "residue"
 cause = "mir::Ty: mem::transmutability::TransmuteFrom::transmute::Transmute<u32, u32>"
 
 [[fn]]
 path = "core::_alignment_can_be_structurally_matched"
 kappa = "84d3ab8aa6cc977c34014d7c192ad0a7b247dbcb6c14bab51e7a5d7d67301af3"
-status = "residue"
-cause = "mir::Rvalue::Discriminant: CoreMemAlignmentAlignmentEnum, whose variants set their discriminants"
+embedded = "b6a289c4d3ee1992d01e7977d33b836eb5ccced6f59a476b1618601751e4d954"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "17f36a0ff9b8456248945153b632c1ab95a7fcba6c799a57c9d53303f785718e"
 
 [[fn]]
 path = "core::align_of_val_raw"
 kappa = "425f22b592804a0a5c6bb61fa217a30bf467cc3c201e3da0e9799a1c7e85fdbe"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::align_of_val, an intrinsic the table does not model"
+embedded = "52e1ced869d9531977ce1e40d538ffc5d293ca3acc207a7931b39ffc31d7cfd1"
+status = "translated"
+bridged = "pending"
+pending = "signature: RawPointer"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "dd03e3e0af1027937c17d47a041c3599d49cb7d924aff1eddd7e21aaf72da4f3"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:15:16: 15:21>::clone"
 kappa = "991ea331f79ef90c5fcf72b6364ba35261526ce31e23eb9387b99c8e5b389225"
+embedded = "5904fd0466ee557aa7b0e0e15f00f28b6f581c6b631a81eb5d5161061d59c97c"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "ae9b6066c2882c4ffb16a30433fc609e689dfeebd4404f6c7bd9a6d0f5378217"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:15:23: 15:32>::eq"
 kappa = "389163c0b5b05cbaf151a9e41a9620cc36ef2b674b402436b3d6eca06027993f"
+embedded = "a0b82792a248717990212ad2770d03368e91401bb87ee06d51aebfff327c5268"
 status = "residue"
 cause = "mir::TerminatorKind::Call: mem::alignment::<impl at library/core/src/mem/alignment.rs:405:23: 405:32>::eq: core's MIR stops at mir::TerminatorKind::Call: intrinsics::discriminant_value of AlignmentEnum, whose variants its source declares by target"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:15:34: 15:36>::assert_fields_are_eq"
 kappa = "f682898be7457b417722be620d6b7ab67061ccfdac0d3577193b0a6bc83c753b"
+embedded = "544eab641b2ac4d68af8af9ea3d4836fa8195a0a639fac0b9e94384b4a4d034b"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "88a95ba6dfbf1fa1b54497bb142314409de7fc068fbe76da6ddcebc9213d09dd"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:405:16: 405:21>::clone"
 kappa = "ea079d8bb154522c05c2ce38b4dd7d10392941d03b6ff945be4c988cff3c16b8"
+embedded = "df03099a874ae42010ae110afee49cd647aee9c1a8d2539129afc891cade6766"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignmentEnum"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "064e111b8512bf3dca8d7ad78e92479d44e16f258d89befe341dd2a0535c67ce"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:405:23: 405:32>::eq"
 kappa = "045af1d9f433cd6e744fe7f56aa51cc71ac80f757123b14f2cd30cd35563de0e"
+embedded = "d9e00f44fa1987719f45d831ee0cbe60a3b6673ccf08f496397f18069d9f5ffd"
 status = "residue"
 cause = "mir::TerminatorKind::Call: intrinsics::discriminant_value of AlignmentEnum, whose variants its source declares by target"
 
 [[fn]]
 path = "core::alignment::<impl at library/core/src/mem/alignment.rs:405:34: 405:36>::assert_fields_are_eq"
 kappa = "b5ee3175a55d48bb601090ee9a7ed5e438961282b595095d511683b860ad4a12"
+embedded = "5b9ef0408210b6f4bbf33cb89acb8afdaeec04fdac6399e7693e77291652c367"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignmentEnum"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "e82b185251b9d6db4f675191365e57b344cfed0042be7fde5f23725da66a5d2e"
 
 [[fn]]
 path = "core::alignment::Alignment::MIN"
 kappa = "59f0f67aa31d38fceff99c534da24d9f9cbf5681166e6bd44f3fa8e457cf67db"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::new: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::new_unchecked: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from Nat to CoreMemAlignmentAlignment, of layouts the lift does not relate"
+embedded = "13f490bcea79d3c2b6ba63e67be5d282fc60febe5be8b2e995a2a0f8b2021b31"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "3202bc80da46c59ff9e93cf63875f739656ee5bde0883d311cd47c9edc5a9b09"
 
 [[fn]]
 path = "core::alignment::Alignment::as_nonzero"
 kappa = "90e9a92afcff44fd088ffc86713767e8f8c40a2dd230790ed20a3cbab13191a8"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "767514d444aae2a393018916dd126436861d66cc6e387e94cf382efc7c1c70f4"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreNumNonzeroNonZeroUsize"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "807a245e368868b77e268a0e46ca80d379fbaf5258c6a2071da75d1d90b01f06"
 
 [[fn]]
 path = "core::alignment::Alignment::as_nonzero_usize"
 kappa = "0e0dea81286f772c63dcfdad00e09d676ecaa0e3e6eb5dd83c1f76d654126b5e"
-status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "2206a1ea97c37e4aaf15b9109e967e6e4865f79b1600aee025ecef8903e425ad"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreNumNonzeroNonZeroUsize"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "12f743a2f7aab2546c15571143ab7656d9f45bf36201eebf24943b622626d07b"
 
 [[fn]]
 path = "core::alignment::Alignment::as_usize"
 kappa = "91c1d99011b7df5f6d43e2000a853859190956cc729727f7e2f90df871bbb0c6"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "55609e2b65ae8704f3b780f2412a81b1b206e43229e0e1742428aa60b200f29b"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "1f8b91705352982540d85dd8a5c952d265524655f47e7dc112fe3728f900d30a"
 
 [[fn]]
 path = "core::alignment::Alignment::cmp"
 kappa = "002966fcf28c04ac2145235d7ed3e0e62090bd19c7e0a047d55afadff19bcdc9"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "a4fda2db6ab44c8717d375e629b0dc34e86037d12541423cca7825d493877ab7"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "88dae1f365fc602cfe05fab1accfe19906012ffe2f5f8c7f62073e89d06bfc6a"
 
 [[fn]]
 path = "core::alignment::Alignment::default"
 kappa = "213977bcbc2c19f750cae59907cebc50496f5cc85cac4a78955c316f42fcd761"
-status = "residue"
-cause = "mir::Operand::Constant: mem::alignment::Alignment::MIN: mir::TerminatorKind::Call: mem::alignment::Alignment::new: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::new_unchecked: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from Nat to CoreMemAlignmentAlignment, of layouts the lift does not relate"
+embedded = "e2273cbb53ace106efddfe15891e8ad2b01cf70800709bce8ebd456dcd866ee6"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f3982afd5a992466e53b025f2f5bcbc95e890fd7e02638a24cb5adee60344de0"
 
 [[fn]]
 path = "core::alignment::Alignment::fmt"
 kappa = "795e5fa1d032d799a5b38fe21f210bd3184c5455a47db8c76182332c439c9298"
+embedded = "8b79800037009f90cda1a9b444a95bcef63784ad2bca2e8c14c1f047194ed395"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+cause = "mir::TerminatorKind::Call: <NonZero as fmt::Debug>::fmt"
 
 [[fn]]
 path = "core::alignment::Alignment::hash"
 kappa = "3025b8b5bb9907c74a5cb11d8c2cbb83e5a9c05d7f8674efc4579f483b46321d"
 at = "H=u32"
+embedded = "75f746ced3bcad76a5ced0af5c089d81da5c3136a396b77cc5cacb4cf86ec6ca"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+cause = "mir::TerminatorKind::Call: num::nonzero::<impl at library/core/src/num/nonzero.rs:298:1: 300:33>::hash: core's MIR stops at type outside the lift: mut u32"
 
 [[fn]]
 path = "core::alignment::Alignment::log2"
 kappa = "463b88039099557c2cd1f82c55b287b6145260bf5dc2889af8198fdeec9f5bdf"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "cd4f52819c0635e9feac69508ff1416f85830625a21515f3254387bc074ac8e8"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "e8b2aeaf30afa4d5023d2de30ab729ddc10a8ec17b29ab85ac8c9972c4f22014"
 
 [[fn]]
 path = "core::alignment::Alignment::mask"
 kappa = "14878d0483cda056bf53d77a9515b8253130d03da3ce4120f2acef3c967cdef9"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_usize: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "7aa64e8a7eb7e6e3f0d097c47ae3c0cf0d433944cc19d4624326f1e7d915ba81"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "7e38fc6316851c3402748a4bee6ce4d009e993820d6690ddc7fb3b50df1e40cc"
 
 [[fn]]
 path = "core::alignment::Alignment::max"
 kappa = "73d7fbdf2280dc26a7b295e79493f6fd05e7b55f6721a99711b0adbf3dc4dac9"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_usize: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "3f105630900ae64bf672d76b5af91b6bf54dccaed16877214ed0788917dbc7fc"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "3fc75c0f5e8e1640f2a41900537cb04e00a5bfa40c2face759ea17f57be0b6cc"
 
 [[fn]]
 path = "core::alignment::Alignment::new"
 kappa = "37a979b306f315a28561a72206fc3decc75cb433e9734bea9bbbe51734c20048"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::new_unchecked: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from Nat to CoreMemAlignmentAlignment, of layouts the lift does not relate"
+embedded = "69a1c0eed0829a5b9a57324e689ce939adc9893cbef4e99d9a452f85d6b16522"
+status = "translated"
+bridged = "pending"
+pending = "signature: Option"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "5a32f0169f82c5af97ff384fea7b2aeec75a64f7647155187b42d92a07dacc1f"
 
 [[fn]]
 path = "core::alignment::Alignment::new_unchecked"
 kappa = "3a6ab5f0fc5649b1daabe017cb42666978d9a142560b23db6bb2b1e6de292530"
-status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::transmute from Nat to CoreMemAlignmentAlignment, of layouts the lift does not relate"
+embedded = "cc3a863fceab7be4e6aa7f3b1df9d8e504cdd02785808420707aa20d170132b3"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "1504ac645b9a8d8b37bfed0afd847c48a2944747a77b04002c4fbff0e44c576c"
 
 [[fn]]
 path = "core::alignment::Alignment::new_unchecked::precondition_check"
 kappa = "bfdfc8f5901d515ae3598e9c4ade272f166929f433a6e8695545db6b8506fdb0"
+embedded = "65471e6deff5c492434bfcfa139f127aba9164dc4c09a1bc54a2355e0775b9e3"
 status = "translated"
+bridged = "pending"
+pending = "closure: a callee not embedded"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "e4d21d5d73e678999a6bf97c03ee3f104b300a0ab2a01e497a60b83fd0ca0276"
 
 [[fn]]
 path = "core::alignment::Alignment::of"
 kappa = "722874d79b5d00d4cb13ab6aa1ea45e7a22cafe7501fc637cf19708df3d3da66"
+embedded = "b5c5d940c84240fa9bcbbdcd73b16b6269d77af3da9e9a4c126c3673b53c8b02"
 status = "residue"
 cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGNMENT: mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGN: mir::TerminatorKind::Call: intrinsics::align_of, an intrinsic the table does not model"
 
@@ -185,87 +269,125 @@ cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGNMENT: mir
 path = "core::alignment::Alignment::of_val"
 kappa = "afe305a42c5488f6dbbb6094d0987e53c559b78abd54d00bbf6237ee1adc4f16"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::align_of_val: core's MIR stops at mir::TerminatorKind::Call: intrinsics::align_of_val, an intrinsic the table does not model"
+embedded = "20b33a04890a762a25f7ac4d22cc7b89526904fcbabb769ff2872245a41879aa"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "72a1c8dfeb3a72a690033d326db6044aa5b7cc40217309043faab6b108e298b7"
 
 [[fn]]
 path = "core::alignment::Alignment::of_val_raw"
 kappa = "31291a79bf07032d0309d02d453378da8bf4e7aa9a0ea315d089a6624c0b063a"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::align_of_val_raw: core's MIR stops at mir::TerminatorKind::Call: intrinsics::align_of_val, an intrinsic the table does not model"
+embedded = "66198212c0c311b72d55362466f2f3858be9e2eef3cda669b8825a2012af429f"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "2bb62dc8fefb683311ca30ecc345f0b64d9dc80f19aaa5d67b5c0af71515dfbc"
 
 [[fn]]
 path = "core::alignment::Alignment::partial_cmp"
 kappa = "b5946e56a39ba1845a133b1c6c51fa28485582e69afa40e4e8ab9f63de726b36"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::<impl at library/core/src/mem/alignment.rs:308:1: 308:34>::cmp: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "9449b46c1cb583864cc0b08d134fe4c316844b701678e46c63988983a7434172"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "5b63fbafbac8d8ae7da6edae4221bca1c751d04fd494b0b0dfbe92ca328e04f1"
 
 [[fn]]
 path = "core::alignment::Alignment::try_from"
 kappa = "713c4ea32ee3a820a5f5524bc4bb21023d405eaf68763be0415ded6946860c2e"
+embedded = "ef55114755c510741083886bddc827f524d5318b5042f09802cbbfe5859974f0"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at type outside the lift: <mem::alignment::Alignment as convert::TryFrom<usize>>::Error"
 
 [[fn]]
 path = "core::alignment::Alignment::try_from#2"
 kappa = "a45c44da8d700e475bcaf2fd7b4dbb9f54b9da0351a55e21b540846255834bf7"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::new: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::new_unchecked: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from Nat to CoreMemAlignmentAlignment, of layouts the lift does not relate"
+embedded = "cb63d8687a969ba4a56cacdf276b7442173f0590bb878c5e436bebe6dfe49273"
+status = "translated"
+bridged = "pending"
+pending = "signature: Result"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "e373eb955df8a5064a30ce7757d3a8450b01dd9f724081f19e83d7ccfb10c082"
 
 [[fn]]
 path = "core::alignment::NonZero::from"
 kappa = "3189d818bfab4ad4f373e4e3b8c6ac32217c2435c475ca893066644a6097d9e3"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "5ecbeda61f41f23ad1b322765160b0cecf41facb2212c932072cc4151490cbca"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreNumNonzeroNonZeroUsize"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "78d3b6896653ee01a03395badcb526bac558cfb50888fba5e1c7b6ee92e793b6"
 
 [[fn]]
 path = "core::alignment::_"
 kappa = "c39172e316715a63c6181c31fec05f921402cf6592c73ff8d40daad800ea2aa2"
+embedded = "630d7ef1d9b24fe5b4e57a73431a45c08a4cfe6774b4200f927180e862845c05"
 status = "residue"
 cause = "mir::TerminatorKind::Call: mem::align_of: core's MIR stops at mir::Operand::Constant: <alignment::Alignment as mem::SizedTypeProperties>::ALIGN: mir::TerminatorKind::Call: intrinsics::align_of of the layout of CoreMemAlignmentAlignment, which the data layout of x86_64-unknown-linux-gnu does not state"
 
 [[fn]]
 path = "core::alignment::_#2"
 kappa = "2a3796b8af605b8f885eddcfa8141c863d7908848619acb417d3532a893bd04e"
+embedded = "5d11efe342df896bb836100a77522b6ff64f5b0e1f9a3c3e1f3056ea45986579"
 status = "residue"
 cause = "mir::TerminatorKind::Call: mem::size_of: core's MIR stops at mir::Operand::Constant: <alignment::Alignment as mem::SizedTypeProperties>::SIZE: mir::TerminatorKind::Call: intrinsics::size_of of the layout of CoreMemAlignmentAlignment, which the data layout of x86_64-unknown-linux-gnu does not state"
 
 [[fn]]
 path = "core::alignment::usize::from"
 kappa = "296f69a62f8a8cfc13daee4f1c471910bf2b9ee994d8fbc1d4e455c81694869f"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::alignment::Alignment::as_usize: core's MIR stops at mir::TerminatorKind::Call: mem::alignment::Alignment::as_nonzero_usize: core's MIR stops at mir::TerminatorKind::Call: intrinsics::transmute from CoreMemAlignmentAlignment to CoreNumNonzeroNonZeroUsize, of layouts the lift does not relate"
+embedded = "d8262f729d2f5dd94ecb313485a0fa60c9c7cbbad0a6915836a264817b303ea8"
+status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemAlignmentAlignment"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "dc4c5b2bf7a0c784d30ed6412592afa84a7643d5a2ec8d6ed8aa1765154bd465"
 
 [[fn]]
 path = "core::conjure_zst"
 kappa = "f5d12bfa2075cd4c9329b1f6c14e87f013fd03bb5302f3e0a65ff625942ca9b7"
 at = "T=u32"
+embedded = "6ed58857385af4f6500e2085e9f19cecce0627e2b91f2dc86a76f10e202b6551"
 status = "residue"
 cause = "mir::TerminatorKind::Call: any::type_name: core's MIR stops at mir::Operand::Constant: any::type_name::<u32>::{constant#0}"
 
 [[fn]]
 path = "core::conjure_zst::do_panic"
 kappa = "2be792d280d6cb8a7c425729703ba6d9dc3c1584c8f37a182d638665f9645bc3"
+embedded = "8908d8508fa87f0c4e8bf3a59dec940a13daec74151a29b30d5a873aba6dde2a"
 status = "translated"
+bridged = "pending"
+pending = "signature: Unit"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0881931c212c3f27f6931403cd87b5a0b72c32a56e8bfffbb60f4287441ae4a1"
 
 [[fn]]
 path = "core::conjure_zst::do_panic::compiletime"
 kappa = "d48183b99d14cebdf8d25bb961f65984974c1c0063f28db03e9db05fe094e1e2"
+embedded = "c4920182873ac0c686e4d741f13d80da210af96575e4253973879f9acf116225"
 status = "translated"
+bridged = "pending"
+pending = "signature: Unit"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "7faf95ad5654fafe712e05739f565da756be7a4637ce908f163b4c1f234004e8"
 
 [[fn]]
 path = "core::conjure_zst::do_panic::runtime"
 kappa = "619fa5f07e46758d3cb426db1812ddcc7a6145e7c2d15ddb7d43a1ff2c0f48b7"
+embedded = "3a68f356890db424a79f118b3533e1b10778b2f327f6df8c8735fbb7e921bdf6"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&str as fmt::Display>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::discriminant"
 kappa = "d2a1b514ff7622065e0cb7f0dc9cd331fb85afffc4625a2a586a90d002c77b21"
 at = "T=u32"
+embedded = "c4eecb5534e7188c2aeb7ebaea8d55797230452eb64f835a08f87461d397fc19"
 status = "residue"
 cause = "mir::Ty: mem::Discriminant<u32>"
 
@@ -273,41 +395,59 @@ cause = "mir::Ty: mem::Discriminant<u32>"
 path = "core::drop"
 kappa = "3647c549a4e2d74ea9faff54214aad4e088b9db0188947cae2549e7af74c045d"
 at = "T=u32"
+embedded = "421d90f8d8e5ce90588298157cfddb3669c8859a92ab1c424f777f5498b3bf6b"
 status = "translated"
+bridged = "pending"
+pending = "proof: straight"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "7a7bb25cd4b34f00f8119c8a15d286da14342230cb11599de7bc330f645ddb19"
 
 [[fn]]
 path = "core::drop_guard::DropGuard::deref"
 kappa = "dbca26b3b6388be38a3c3beb3c42f5078b5ecf3bce0647f27b49aea3745df44d"
-at = "F=u32, T=u32"
+at = "F=impl FnOnce(u32) -> (), T=u32"
+embedded = "bc80d923eeafa765fed2cf469e844ad0061a4496fd57a6ccd825d5c7bd584fa3"
 status = "translated"
-digest = "bdd3bec2da3efdbe82ac6adfcdc6bcd79ea67d7bbf32f82a2376527774c5c621"
+bridged = "pending"
+pending = "signature: Nat"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "cca9e401cf875055c0f00651981c7aa6ea2aacdafc2c1d25b945ab6426a47388"
 
 [[fn]]
 path = "core::drop_guard::DropGuard::deref_mut"
 kappa = "6f196562207c521cc598e0468f76cd597d36cf2e21f11e5ed693a7cfdd372180"
-at = "F=u32, T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::manually_drop::<impl at library/core/src/mem/manually_drop.rs:283:1: 283:51>::deref_mut: core's MIR stops at mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+at = "F=impl FnOnce(u32) -> (), T=u32"
+embedded = "ebc4b45966f46bbfee09e4bf7832b2b433260398c7c94576621d05471afad1e5"
+status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatCoreMemDropGuardDropGuardU32ImplFnOnceU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "0f4e82228e67777b3df7a46c78403818b0e2e726564585cc976e89be06f0c609"
 
 [[fn]]
 path = "core::drop_guard::DropGuard::dismiss"
 kappa = "fe51a8c4563c49d97b18e93cb6e1d4de54f2c29bc7cecb5e91f62f99d98060a8"
-at = "F=u32, T=u32"
+at = "F=impl FnOnce(u32) -> (), T=u32"
+embedded = "15a4799a8d52feb0edfab4c6d85b0a1cce743e8d6628c7582f419fb0f1ea87fc"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::manually_drop::<impl at library/core/src/mem/manually_drop.rs:283:1: 283:51>::deref_mut: core's MIR stops at type outside the lift: ManuallyDrop<mem::drop_guard::DropGuard<u32, u32>>"
+cause = "mir::TerminatorKind::Call: mem::manually_drop::<impl at library/core/src/mem/manually_drop.rs:283:1: 283:51>::deref_mut: core's MIR stops at type outside the lift: ManuallyDrop<mem::drop_guard::DropGuard<u32, impl FnOnce(u32) -> ()>>"
 
 [[fn]]
 path = "core::drop_guard::DropGuard::drop"
 kappa = "e61ad21c653d0240ff2e177865cc233da04303d572e75571a13b02cb3ebeffbc"
-at = "F=u32, T=u32"
-status = "residue"
-cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+at = "F=impl FnOnce(u32) -> (), T=u32"
+embedded = "b82225248349bf96d30e2ede584c60e76b9a1cd44f998f527c1cee755f4ca5f9"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "dd9c70f7c57974fc9ccfa286ae22a82f739e963a36bb778b8cb781e8760f6b27"
 
 [[fn]]
 path = "core::drop_guard::DropGuard::fmt"
 kappa = "0ab3466209bb5abf8eee061940fddbdad43239422efcbe1fc7ef5aec179b4386"
-at = "F=u32, T=u32"
+at = "F=impl FnOnce(u32) -> (), T=u32"
+embedded = "23aa293e38df30c8c49262818172ad2e7515e80c9de198aac93226b8e1fa9f2b"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
@@ -315,76 +455,114 @@ cause = "mir::Ty: mut fmt::Formatter<'_>"
 path = "core::drop_guard::DropGuard::new"
 kappa = "e1ddefb87aae78039274e365df25a6e8008d90185e01215b4663e6cd9faeabde"
 at = "F=u32, T=u32"
+embedded = "ce7521ee6a43c582446037bb0d7eea7af985547b01cf3ddc1684d2b79c7636a9"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemDropGuardDropGuardU32U32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "04dd04ae891573a02333ab83b552c085895d5b120c418fb3d5b3dbe9e0e0af34"
 
 [[fn]]
 path = "core::forget_unsized"
 kappa = "5b034d7ae0cffe02e0ed3ee847758d28ae200f9036a8a5ee3ef0c85b03ea21f9"
 at = "T=u32"
+embedded = "c3d8e7359ff583a51a6246fb48c05fdf271610b433d57ead0f667aee1f9c8873"
 status = "translated"
+bridged = "pending"
+pending = "proof: call"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "5e6f5e617fca95d86186c7102585d0012c8674859b330f1ddff712ff3b12ebd8"
 
 [[fn]]
 path = "core::manually_drop::<impl at library/core/src/mem/manually_drop.rs:158:16: 158:21>::clone"
 kappa = "869bc2bbfaf43ff5167881863c04f7fe1d85b725927124131ee4271921e0f831"
 at = "T=u32"
+embedded = "fd7a8632d82aa01a312eb9ad61a41027d96e1dd43aff7d76313a31fe7bedd9ba"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0399bf2096d8e8d238070e543d6f6f69121eb8f7594fdd39ac8ec2f040629d5a"
 
 [[fn]]
 path = "core::manually_drop::<impl at library/core/src/mem/manually_drop.rs:158:23: 158:28>::fmt"
 kappa = "b63480fd56ac6d997e7964cfdfe4aab77126aa6f5dbe3a88a02c319de68f5141"
 at = "T=u32"
+embedded = "3ccacd2bb111d57c1db1112464e58b1951913f0b2222fe38da9c591078e395fa"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&mem::maybe_dangling::MaybeDangling as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::manually_drop::<impl at library/core/src/mem/manually_drop.rs:158:30: 158:37>::default"
 kappa = "f66c399de63e6e30d3b5fe374473a7259f84e2889b77f67b7bd648046d56a837"
 at = "T=u32"
+embedded = "0843583f62dacc0cda7b1f9e75ab1bb361e07d4880cd176891aaee78522b62b3"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "ec051939cbf19aa6801d016c2b8fe5ccb62baee416bb2985e56fef2deb3490ec"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::cmp"
 kappa = "d6cdfcb55045952a29fdd35f637a88845b954387cf20e62eea7f0bdb97f34623"
 at = "T=u32"
+embedded = "0bccf785717eba8c8eafa0f73f36f5eb2976f8676f4f66d88feff59e5d14b9a0"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "5581520287a2069c484872cf3eb30cd70d9412147084686f867b4d002cf63996"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::deref"
 kappa = "5016c5c5abebece29ef1c1b19f1deabe6570de8e0ae52918d1c076d8ff9a25d7"
 at = "T=u32"
+embedded = "545b5e939eeabb2aaabd6f08941d755a25f03e92b2320655c7429b22dcef8fd5"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "4fcc79b291de8216c7426a3252bc4353019693403ce5e7a654ea4ebc905d4b18"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::deref_mut"
 kappa = "bf2493649eae5e786e02bae3d132d54199bc5613b4fe25ce18df710c7519f883"
 at = "T=u32"
-status = "residue"
-cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+embedded = "649438ba723b6e0b1cb7609ccd67e17ca0f2ff2ff43976cb248ea75fc404f51f"
+status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatCoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "afd95cf536d141d2c3819de25036cbbffe54c6ea942e07f978882c4b9447db40"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::drop"
 kappa = "1144863dcbbacee603b7212e23b3ab8b8e07b145f29cfd8179a555c1d41c09d2"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: ptr::drop_in_place: core's MIR stops at mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+embedded = "aec5476526e6a40d19cb5d4aa6612de85b634028b51549c9a6a4d231742819a1"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "480063b2afa167456ba3e9977d2a7b32b913022358a2221ee72f55cd2b9ac0a5"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::eq"
 kappa = "ee59704cfe41a677d793863ae82da75a82abaefad2b5afcb9ca940680a8380f2"
 at = "T=u32"
+embedded = "fe9b6585e4571cd244ae67de5b209a2bbba9b5359466c49196d82b1e3ad9401c"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "ddcdc431f2be20a8043fe008a265fcd7065114a276bc7d60ba581940def15296"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::hash"
 kappa = "6b5f3e7104700ebc32b4647b51b4e66d2744d1dc7e1f7d454f8c913f5c965cc2"
 at = "H=u32, T=u32"
+embedded = "4cf65f855cb400764680c8c17bd1f1034ad9c01e1d368dea6d0185c5cf752bf9"
 status = "residue"
 cause = "mir::Ty: mut u32"
 
@@ -392,69 +570,103 @@ cause = "mir::Ty: mut u32"
 path = "core::manually_drop::ManuallyDrop::into_inner"
 kappa = "0734310711f143aba1226ebfd018264e1089f4480b95028beca6a1c9ce5b4ed6"
 at = "T=u32"
+embedded = "f59c97a34d0d32329d28aad48ee3b5cd6c3338fc86919215932a8cedb9e655f1"
 status = "translated"
-digest = "eda55320ecf4f5c090c4e47dc5853066c75a094064a7631e836b9ee97fde444c"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "a8cbb2956cda116cabfa2e558445adecb17db384bf009d3cb8a9830bc4bac4e8"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::new"
 kappa = "5ebb5fa4a2e833534b5960e65ae8c7c59b8b4833f20dc815d9ccad36cb07ae29"
 at = "T=u32"
+embedded = "eef1159344d61daec64688fa76968cbd14d70ab47b6065abda62b93ae688a537"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "43d3e397eba55f001d941a6236b75c75db7a6f5104a963b776a89fa2ccf667ee"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::partial_cmp"
 kappa = "0de7dd90f7376277b001299c62ecd8bf40ea19e8197ba2704ab0a647d51b1200"
 at = "T=u32"
+embedded = "47b07e3d3231391c411256038037e5ce20871d418b0d5e52967f732573f2eb1e"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemManuallyDropManuallyDropU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "c2ab282c3fe51e0fb99aa3c4a11f91947a7fbd0a67b7c3c9f89797ea6c0740bb"
 
 [[fn]]
 path = "core::manually_drop::ManuallyDrop::take"
 kappa = "d8cebcfb6458eb012857264d202d67a20e9f23a1eb5df7b0afef309502c7db46"
 at = "T=u32"
+embedded = "32700871a900a0d5f6d3374f64d5daefef6d071841342db7d43846a140a21a0f"
 status = "translated"
-digest = "f8a643afc0ee6954e0ee8bc2431f262b481d8d896e544e7af72fb687b741ee06"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "74ffc9b7c59e3bedf51a760981de3fc452cdc768b8a438c95799ca388086e877"
 
 [[fn]]
 path = "core::maybe_dangling::<impl at library/core/src/mem/maybe_dangling.rs:72:10: 72:15>::fmt"
 kappa = "42d0f28bfbd4b9620e79b8adee203d66f0f889366b1275da14f3277894544da5"
 at = "P=u32"
+embedded = "486191377c4c5734327dbc7fec17112a62f96e099032947a0dda10de7ae3b8c1"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&u32 as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::maybe_dangling::<impl at library/core/src/mem/maybe_dangling.rs:72:23: 72:28>::clone"
 kappa = "387d750f8c37e245f687dbf94125f98339b79e5b5090b5426c0b7ba744342656"
 at = "P=u32"
+embedded = "7dee25a9afc52b819ceb753e5de55e3fb50ffe4c495479bc01d303377e7cc1df"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemMaybeDanglingMaybeDanglingU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "de7d56340ed5632b88fda7ca57588913ef4d5ed02d61925b1855b2ecbc0e2a4f"
 
 [[fn]]
 path = "core::maybe_dangling::<impl at library/core/src/mem/maybe_dangling.rs:72:30: 72:37>::default"
 kappa = "0488bc83ba68c6cf023315d2137be2632ecd14aac3a5e481b60a96eae543b567"
 at = "P=u32"
+embedded = "453be47bd2bf8a396c1599f9abd520f49d891eb44cbdfe5723ffb047c86382ec"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemMaybeDanglingMaybeDanglingU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "b92454a26801f41cff24a761e1b5d527e54f4ca4a539404a4cc7ab9036a317ba"
 
 [[fn]]
 path = "core::maybe_dangling::MaybeDangling::as_mut"
 kappa = "d8a359e12697eaa287bb2d4a720a61f7f3551f625b494264add186c4320a38c9"
 at = "P=u32"
+embedded = "eb3a50c6b48d106f36a9af90d8035df6db78bdc35f6dca169cdc362faf6c5ab3"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleNatCoreMemMaybeDanglingMaybeDanglingU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "53bcb49837452c6db4b209e230e9e26648850694b3885e1e70fee5dd61236ace"
 
 [[fn]]
 path = "core::maybe_dangling::MaybeDangling::as_ref"
 kappa = "9302054bced8752e5afca5fb90e60f843384b0af55834e9b269ae85c7656f1a0"
 at = "P=u32"
+embedded = "04a6f4b9ff3c214b0ba0ff20e46fce7f2e2a025db55a0f64e4787df902cdb0c1"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemMaybeDanglingMaybeDanglingU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "74eb610de37202d80c4e78929f9611e0795ce6ccff65d83d0fde713c9ecdeb1d"
 
 [[fn]]
 path = "core::maybe_dangling::MaybeDangling::into_inner"
 kappa = "59dbddea44b7b34af28d7d81e11e58329dab82956f75c10725d38ba4a8c0257e"
 at = "P=u32"
+embedded = "6e93224e1f55d081b288fd6d7a6292e020043afa331d97a48530647f6a0a5a63"
 status = "residue"
 cause = "mir::TerminatorKind::Call: mem::forget: core's MIR stops at mir::TerminatorKind::Call: mem::manually_drop::ManuallyDrop::new: core's MIR stops at type outside the lift: mem::maybe_dangling::MaybeDangling<MaybeDangling<u32>>"
 
@@ -462,48 +674,64 @@ cause = "mir::TerminatorKind::Call: mem::forget: core's MIR stops at mir::Termin
 path = "core::maybe_dangling::MaybeDangling::new"
 kappa = "11cbdf6f143e8b73f3174c1309826ee484de99334728c03501293e90a3d9c024"
 at = "P=u32"
+embedded = "a73e1167f5c84a6cbc2506b78b10623743595c97db8d04ae6fb69014ff4e3b87"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemMaybeDanglingMaybeDanglingU32"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "7d7310691a9f17c475eda0828a22dfe559491b6f86ed5403323bd5aff8a34e25"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::as_bytes"
 kappa = "18cb2a4bff9225b5a5ae8b1fa00abba430576064a5052b39f11a610047e7df18"
 at = "T=u32"
+embedded = "01b12de0d03289730d31152abc9b0b1a0b3f0de89ef871abbcf9c0b3f9c963df"
 status = "residue"
-cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::as_ptr: core's MIR stops at mir::Memory: a value of (Option Nat), which the memory holds no cells of"
+cause = "mir::TerminatorKind::Call: mem::size_of_val: core's MIR stops at mir::TerminatorKind::Call: intrinsics::size_of_val of the layout of (List (Option Nat)), which the data layout of x86_64-unknown-linux-gnu does not state"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::as_bytes_mut"
 kappa = "c940eafc5e519b48de3c939919c17271d2367690e1822c1bfbe6b06bf73cbb75"
 at = "T=u32"
+embedded = "5926aab1a1eee22fbe091174ab96ac7fc6c84aa53217045729ae9a2b820e0447"
 status = "residue"
-cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::as_mut_ptr: core's MIR stops at mir::Memory: a value of (Option Nat), which the memory holds no cells of"
+cause = "mir::TerminatorKind::Call: mem::size_of_val: core's MIR stops at mir::TerminatorKind::Call: intrinsics::size_of_val of the layout of (List (Option Nat)), which the data layout of x86_64-unknown-linux-gnu does not state"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::assume_init_drop"
 kappa = "681a2310e5b6d8f3e497f194f6d24b21663714bd25443411dff530d53fedf774"
 at = "T=u32"
+embedded = "a6d2566b20874788ad2347a573091dd31502c7045dfa01de64e1c82cf6e6bceb"
 status = "residue"
-cause = "mir::Memory: a value of (Option Nat), which the memory holds no cells of"
+cause = "mir::TerminatorKind::Call: ptr::drop_in_place: core's MIR stops at mir::Memory: an array or slice in memory, read whole"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::assume_init_mut"
 kappa = "f8f4c25332bafc2dee8b29290ffb38b3882b705560e64ffe0ddadb4acde4de89"
 at = "T=u32"
-status = "residue"
-cause = "mir::Memory: a value of (Option Nat), which the memory holds no cells of"
+embedded = "bf9583189600302009501fdc5ca46f19cec9254e83146a79be5f6a020efc27c0"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "b26dffd950e6a4eb71d41cc7a82a4ab6e5b30a0b7c5a14e925d345e526c68015"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::assume_init_ref"
 kappa = "ad1ad474220c737cf4b45ce02d4b0498032993f436d1e7d6cfc19b5d035bbe7e"
 at = "T=u32"
-status = "residue"
-cause = "mir::Memory: a value of (Option Nat), which the memory holds no cells of"
+embedded = "1cf3b3b53c24e7919633a0e1ab4529b229fe87729157906e887f521fe9a99df9"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "caecf0fe903b74c730d4213bfab5b0af1b44609ba8b7d23489dff80cea7aee9d"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::write_clone_of_slice"
 kappa = "a31655628c82a54631545105510c48d901fb844d5f2b413bcaacfa982a2d8365"
 at = "T=u32"
+embedded = "314c5f60be00f66656ff113f15c6fa794390ebb925c4c7dc9a079cd93e5808a6"
 status = "residue"
 cause = "mir::TerminatorKind::Call: slice::index::<impl at library/core/src/slice/index.rs:11:1: 13:32>::index: core's MIR stops at type outside the lift: <ops::range::RangeTo<usize> as slice::index::SliceIndex<[u32]>>::Output"
 
@@ -511,6 +739,7 @@ cause = "mir::TerminatorKind::Call: slice::index::<impl at library/core/src/slic
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::write_copy_of_slice"
 kappa = "a3cce72dfefba9652eeebf188210c0e8ac243f704edb2ad3380cde61a2a5a883"
 at = "T=u32"
+embedded = "c3cd54377be9da3b534cce0c98705c607ffb49675a1f0a597eb8de4217494667"
 status = "residue"
 cause = "mir::TerminatorKind::Call: intrinsics::transmute from (List Nat) to (List (Option Nat)), of layouts the lift does not relate"
 
@@ -518,6 +747,7 @@ cause = "mir::TerminatorKind::Call: intrinsics::transmute from (List Nat) to (Li
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::write_filled"
 kappa = "21ac1375e9df26f01892f21780786cb78947c4afbf6c406bb554d236068def2c"
 at = "T=u32"
+embedded = "a5951940527994ec116110e9d0a222deeaf3964c449ebf2244fcac6197b11ad2"
 status = "residue"
 cause = "mir::TerminatorKind::Call: <[maybe_uninit::MaybeUninit] as maybe_uninit::SpecFill>::spec_fill"
 
@@ -525,27 +755,31 @@ cause = "mir::TerminatorKind::Call: <[maybe_uninit::MaybeUninit] as maybe_uninit
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::write_iter"
 kappa = "e0d99b2f77118b7012967ffede0905667f6992c50260f4ce3490fc59409b54e7"
 at = "I=u32, T=u32"
+embedded = "f1aed3d7dd7d32b37b58a0be5a4fa2b0faeb2e61e91804c7875bcdcdee6a79a1"
 status = "residue"
-cause = "mir::Ty: mem::maybe_uninit::Guard<'_, u32>"
+cause = "mir::Ty: slice::iter::IterMut<'_, mem::maybe_uninit::MaybeUninit<u32>>"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1119:1: 1119:25>::write_with"
 kappa = "dcc75a3ec7830bbd7a3ecf78db49894abf653e880ef98d0001409ae1e5b42be5"
 at = "F=u32, T=u32"
+embedded = "09d19268531fd4a9dc2d7563d198c06d1368e844f6bd909c7ab55d00a7f63c86"
 status = "residue"
-cause = "mir::Ty: mem::maybe_uninit::Guard<'_, u32>"
+cause = "mir::Ty: slice::iter::IterMut<'_, mem::maybe_uninit::MaybeUninit<u32>>"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1596:1: 1596:74>::from"
 kappa = "e07b955645030a530373821182cbedba4ffc9dcbc58953ec0db9508a30034b3c"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "efcbd5feabc2a4cecadb210e525b610d2f870f2d201832b568b0398509792dd8"
 status = "residue"
 cause = "mir::TerminatorKind::Call: maybe_uninit::MaybeUninit::transpose"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1603:1: 1603:44>::transpose"
 kappa = "4e633fdfd006310a7ba7904db9a71c7e2b954c3fe6d805b4fb513c659b453e31"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "65c1068bbd3edc03a6195d955b3c067cbafefd89872b485c846925602c1c590c"
 status = "residue"
 cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (List (Option Nat)) to (Option (List Nat)), of layouts the lift does not relate"
 
@@ -553,13 +787,15 @@ cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (List (
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1642:1: 1642:48>::spec_fill"
 kappa = "509766400388e91637c92e0adc5ef5600421f72f4444345d7ad1630272214626"
 at = "T=u32"
+embedded = "32ed7ca9e1f6b362889a9571e728be7ff9058e5b515530c6dc3a4d61434acaba"
 status = "residue"
-cause = "mir::Ty: mem::maybe_uninit::Guard<'_, u32>"
+cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_last_mut: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::maybe_uninit::<impl at library/core/src/mem/maybe_uninit.rs:1658:1: 1658:55>::spec_fill"
 kappa = "c0d35a628399b7853072ab194fa3d03f5c228f54e4b48864cd94a67ebd245dd5"
 at = "T=u32"
+embedded = "93525d6546b8d3081b0b6b0dd4b6df83804d17b016469d858afc1a22e7482fc7"
 status = "residue"
 cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::fill_with: core's MIR stops at type outside the lift: slice::iter::IterMut<'_, mem::maybe_uninit::MaybeUninit<u32>>"
 
@@ -567,13 +803,15 @@ cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.r
 path = "core::maybe_uninit::Guard::drop"
 kappa = "b1cb4fb1932ee7e486b133b083920ad6b0336efe3c904389ffb2b6fe24058311"
 at = "T=u32"
+embedded = "a6d792268136fcb71b856600e955e873c55e23f411575b8f5fffc9db1dc5e04e"
 status = "residue"
-cause = "mir::Ty: maybe_uninit::Guard<'_, u32>"
+cause = "mir::TerminatorKind::Call: slice::index::<impl at library/core/src/slice/index.rs:25:1: 27:32>::index_mut: core's MIR stops at type outside the lift: <ops::range::RangeTo<usize> as slice::index::SliceIndex<[mem::maybe_uninit::MaybeUninit<u32>]>>::Output"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::array_assume_init"
 kappa = "a3840e753abee615c79962af2114d84268aa55e10da3899a649d7df2463f74fc"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "967df07719b29e00dfe7aa57d0b9f36c1d5cc36b365486b135681457dfde5450"
 status = "residue"
 cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (List (Option Nat)) to (List Nat), of layouts the lift does not relate"
 
@@ -581,27 +819,34 @@ cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (List (
 path = "core::maybe_uninit::MaybeUninit::as_bytes"
 kappa = "185e4758a16eb23306dd326aefcc785352f5bb5a98f321d6eae52db129b78223"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "6a78f7f2d87a98b1a39ff0c25cc17aa26713c491f4684957a566d467b3e6f940"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "ee01ed35712089a6f8ec0fd3b45b0e58679e34f7760433102eae855edfbf7996"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_bytes_mut"
 kappa = "67ff3b7539176ad844cbe14976df3dbe960aa2318495b9c3150734284e85436b"
 at = "T=u32"
+embedded = "1968bbb8299c6323399c3877e672572374a72366968161d94c5f6da76a179db0"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_mut"
 kappa = "a2fdbf9b81d7d71c1009d928e38eb043fc3553f0c7288ad921f6248526eacbd3"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "2c2514f1337adf411cd305670af72e98553375ff7e4d755eef6159789d1dfdf0"
 status = "residue"
 cause = "mir::TerminatorKind::Call: <maybe_uninit::MaybeUninit as convert::AsMut>::as_mut"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_mut#2"
 kappa = "776099a7aaea66d9a98a80640a06f596743e96375b6cd03328f6f0811df24f7b"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "1f4c5cdfdc761fa12e6efc842512cc00cfc2aa2c374ab879a3cef80a1729af47"
 status = "residue"
 cause = "mir::TerminatorKind::Call: ptr::from_mut: core's MIR stops at mir::Memory: a value of (List Nat), which the memory holds no cells of"
 
@@ -609,27 +854,37 @@ cause = "mir::TerminatorKind::Call: ptr::from_mut: core's MIR stops at mir::Memo
 path = "core::maybe_uninit::MaybeUninit::as_mut_ptr"
 kappa = "f68b63b35ca0af294ea0963e5ed41edae5b045bd4d4227d85d15fe0c75f65979"
 at = "T=u32"
-status = "residue"
-cause = "mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "08cbdb28a5ecc90b9f77a9dc36dd94b8821ff326f97f37a03a4674ad1d7bbbab"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "cd24f4b5a9ec815e9fdf30ec7ca5b3555a8c167a0cd9faf51c6cb5e0efb3ccf4"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_ptr"
 kappa = "7a3c63c7bb701bac1ffa53ca1a1a579fbda70b8185b4813a48b65e265a31b7cc"
 at = "T=u32"
-status = "residue"
-cause = "mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "b8c0290bf6ee8091b8c09f89d439bf3448ab4001b50a361b7221056a17fb8a21"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "4dc872b88124ac1ab6bf89fbe615e2a01555e3c18ac472720f2c1872617363bb"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_ref"
 kappa = "f8a7ac31da1d5d4957d257be5770a3325226702ae1d249e9e7ee19a46ab4aaf0"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "8a46b178e8ccd93dcd8d57abb8624aa822be11691e032c027a57b897b0a7bfe3"
 status = "residue"
 cause = "mir::TerminatorKind::Call: ptr::from_ref: core's MIR stops at mir::Memory: a value of (List Nat), which the memory holds no cells of"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::as_ref#2"
 kappa = "b01777ae2d75fd0828f71bb8ad8373c260fcbef5564386b717612086d1f520c7"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "8cb6c2f45039d875f27195e784adb648e4d3e4ff9d327bd6eefda38a09a18fd4"
 status = "residue"
 cause = "mir::TerminatorKind::Call: <maybe_uninit::MaybeUninit as convert::AsRef>::as_ref"
 
@@ -637,69 +892,100 @@ cause = "mir::TerminatorKind::Call: <maybe_uninit::MaybeUninit as convert::AsRef
 path = "core::maybe_uninit::MaybeUninit::assume_init"
 kappa = "8f9474779438b81d580c65afe2bf2140f8e1823ec7660c7b6c12e3e76dbfe13d"
 at = "T=u32"
+embedded = "f0a1cc38a676b09d96126f2d1de2a68d711410be2459cd4c7372ec8a0036c725"
 status = "translated"
-digest = "662fc8abc76d2c3245051190b5ca50bf3bec4883fa1eb5bcd75fbdc5f2a11ff2"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "881f4d24cecff9592d4873735a8b9413766d271f16310a1d5df33065927ed89c"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::assume_init_drop"
 kappa = "5518f22b260e44c3d586f419c952e602078b762756f7497e6c4e3f3a99c85238"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "81f2475569c9bed0383297f5c343904564d101e95e03ecd0a6258db4848ce945"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "0b1d72652e3a4c512a2a6347b89672823939f98c2addfff8d5197f92ccc815f8"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::assume_init_mut"
 kappa = "c373dd525024b36b98899f77db91132b003be4f59bef760343534ad8a980932d"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "13df4d8629c11bd8bf8b4d76fbacf1c9a4a5ec4f7580eff727e4b598088a75ae"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "0c34909b03e250213c399400f87106d73fe62f4b0034767632b6adb03cca4dda"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::assume_init_read"
 kappa = "8b34e92f3cbf91e931ef284c855c2b37abf54b2bc1f533f4fb69254474e1a539"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "5b4c964c8afe2363b01ba0d63c165804b626a2f4180f66a8103d63c1b38d6e19"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "41fc30c396a9d5eaecc27b8cd5770f1a7e659676233b8146256669596d5be062"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::assume_init_ref"
 kappa = "c3ad04f09d43feafa26ab0f9fa09f06a67f633785cb3c780c8f10c15e134d768"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "d318e2ceec828ccebfed1259305ba706622a1fcdc9f348f42a8c51d014bfa271"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "54507d3beb19395c1a35e63e48144abb026be5bcf330eca31d485b56f1108f36"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::clone"
 kappa = "85b2684933e1d32faa118499f273c66dde5eac4d5e16e0898e900130dcf1c912"
 at = "T=u32"
+embedded = "b8e689b2e371c68c356cf7386104b7f468f4ea82ebeb87acb75b79f37e730da8"
 status = "translated"
+bridged = "pending"
+pending = "signature: Option"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "1f4149ee7617b8ee7d4df1bbe6a4908642c8c935d4bd73049cc29c0d44c95343"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::fmt"
 kappa = "469da303f46d92c7cc3530432cb5f4e717408091a5852fdf9dca2da22bcd1521"
 at = "T=u32"
+embedded = "b5998ed0e33c9792e8c8974fb9f2890c8fa24f29924278616793e9bbd76ca567"
 status = "residue"
 cause = "mir::TerminatorKind::Call: any::type_name: core's MIR stops at mir::Operand::Constant: any::type_name::<maybe_uninit::MaybeUninit<u32>>::{constant#0}"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::from"
 kappa = "04681c5cf215986b2a019362c59950abcf5efb769d8ee323132f8bfddea4453e"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "54351b039d9a01b72769c646a429ec7d1c15fd8e29027fcf0a89cd5532ed39d7"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <[maybe_uninit::MaybeUninit; #]>::transpose"
+cause = "mir::TerminatorKind::Call: <[maybe_uninit::MaybeUninit; #usize_N]>::transpose"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::new"
 kappa = "165bd6643e4962e0fe3fb098945dafb97da42987d6147e5f382eb4886064501a"
 at = "T=u32"
+embedded = "ec395cdf4131aedae169e67b0c37be2afa6108bf4489b70cbb7755c063e848c5"
 status = "translated"
+bridged = "pending"
+pending = "signature: Option"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "62298452c36c0b5d191a79279f10024dfde510cb4a7bcbe3abb0a9afb0b1ffa6"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::transpose"
 kappa = "afedbc8c9654192cba1ee14bf1e3fdc923d86a252793712fa625379a60462505"
-at = "N=#, T=u32"
+at = "N=#usize_N, T=u32"
+embedded = "dde1b234cc32c52ec04d107d2e39a6e8c275e0dca7856cc9df6742a2ed2e5495"
 status = "residue"
 cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (Option (List Nat)) to (List (Option Nat)), of layouts the lift does not relate"
 
@@ -707,27 +993,34 @@ cause = "mir::TerminatorKind::Call: intrinsics::transmute_unchecked from (Option
 path = "core::maybe_uninit::MaybeUninit::uninit"
 kappa = "cd1ac2a7d15f94714ea5fd2fc6f8e9498485445fdca4a06b1a54315b23417bd1"
 at = "T=u32"
+embedded = "02d14aebbc7ad1a2f992add56ee4682276d188f3318fc154499283ee3d914221"
 status = "translated"
+bridged = "pending"
+pending = "signature: Option"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "6444e833c354917db321a35f50b685f3e4158a08c52eb59647e0a9177bebb4a5"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::write"
 kappa = "addb5455ef2265f035cb1855c9d8761d9fc2dac5e74e29b2393a7a03236c08b2"
 at = "T=u32"
+embedded = "87289d995d5ff5840f7cf966e8ee94dfedfd6252d3199c474b8d6b634f9469f1"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::assume_init_mut: core's MIR stops at mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
 
 [[fn]]
 path = "core::maybe_uninit::MaybeUninit::zeroed"
 kappa = "21248ac6b2e50b112d145db7d6e9cb2ce9781444d2c8e342fa6ea296e4777cbe"
 at = "T=u32"
+embedded = "3f7bb11a35fc98f8562e900f6b789c5dc7e3c393e5511cb9243ce7ae277f867c"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+cause = "mir::TerminatorKind::Call: ptr::mut_ptr::<impl at library/core/src/ptr/mut_ptr.rs:8:1: 8:29>::write_bytes: core's MIR stops at mir::TerminatorKind::Call: ptr::write_bytes: core's MIR stops at mir::TerminatorKind::Call: intrinsics::write_bytes, an intrinsic the table does not model"
 
 [[fn]]
 path = "core::mem::Discriminant::clone"
 kappa = "9b9050e9f78ee3c544d4199acd95b903f7a57d82a4e2c346e4253761aff87017"
 at = "T=u32"
+embedded = "5e8175c9b920d05377d57797356dc9152eb29df78d2c28f9cc54a019e4e01405"
 status = "residue"
 cause = "mir::Ty: mem::Discriminant<u32>"
 
@@ -735,6 +1028,7 @@ cause = "mir::Ty: mem::Discriminant<u32>"
 path = "core::mem::Discriminant::eq"
 kappa = "347924cb41c240442b00e53d7f9955dff4736b90918d2f2d71d7e98b25090089"
 at = "T=u32"
+embedded = "182915456393d184a26263fa006e8076cda304c7351bc834fd8bda1575010b4d"
 status = "residue"
 cause = "mir::Ty: Discriminant<u32>"
 
@@ -742,6 +1036,7 @@ cause = "mir::Ty: Discriminant<u32>"
 path = "core::mem::Discriminant::fmt"
 kappa = "17bea6307c41ff6350513774b51583afdf7e2d14a74b85947e6c167c13a52be1"
 at = "T=u32"
+embedded = "b66890a2076633ad1a1b832e884b52f5c7881348361ba72a235aecb9d64fc912"
 status = "residue"
 cause = "mir::Ty: Discriminant<u32>"
 
@@ -749,12 +1044,14 @@ cause = "mir::Ty: Discriminant<u32>"
 path = "core::mem::Discriminant::hash"
 kappa = "f1a910231062b0cdcdfdb81453c6976e9676e473538bd9760b1fa944ef6125e3"
 at = "H=u32, T=u32"
+embedded = "23e0b4b3e6238f10a6dad44be8ccee6f9b071aef54b8793228c0ed4be03c7cb9"
 status = "residue"
 cause = "mir::Ty: Discriminant<u32>"
 
 [[fn]]
 path = "core::mem::align_of"
 kappa = "f37de8680216e206f9ac39b0fc12f193008dcbbab6d7bea1281a96df119bcc39"
+embedded = "9f07c90aa735119a31d59c4a741947ea851bb222897cc21412247909734a8157"
 status = "residue"
 cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGN: mir::TerminatorKind::Call: intrinsics::align_of, an intrinsic the table does not model"
 
@@ -762,26 +1059,38 @@ cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGN: mir::Te
 path = "core::mem::align_of_val"
 kappa = "7f8fd3613f8a098164342a0869d369a0352a82a45ab1cc82dee11a4e046d1a1c"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::align_of_val, an intrinsic the table does not model"
+embedded = "9c39ae78628a6a5fe38e795d19ec95273923e169a5df37d59b6a8bf129d45593"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "a5854e53d54b5e63dcecd6d688e180b2234e262ad4b9ebdaa1dd5bb095c6a716"
 
 [[fn]]
 path = "core::mem::copy"
 kappa = "14bc2d12d78ef19825f087ab559b9ad0e2ccd888ff1cd2f01425449ad2d5f707"
 at = "T=u32"
+embedded = "f4471c80b859a248d201745cbb330a252de748a24bc9f1c271d99a85d8232e0b"
 status = "translated"
+bridged = "proved"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "471c9f8189c43b50e64418d6eac248fc4eccdf5ad7a3c79aa99705e5adda1d0e"
 
 [[fn]]
 path = "core::mem::forget"
 kappa = "f19759da208d8e3bd4a8304bb7fbabe36834c73e5ac2b8487e24603f37c87796"
 at = "T=u32"
+embedded = "23bf8e13f5c0ae64fa6b630988de67e6369c1a7e036302b130e247499f816bba"
 status = "translated"
+bridged = "pending"
+pending = "closure: a callee not embedded"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "a12f1c3a6147d80b93d46f5a19cbe91cc0ef7a2ac85ee7312b1c81463567f0e6"
 
 [[fn]]
 path = "core::mem::needs_drop"
 kappa = "75d569b4d4a3081a92022be8168f260d1aef70ce31b54e041856b847ec39ccf1"
+embedded = "c901456f7b9500c03674261db479094fd25440474d8521ea0e8df82508937803"
 status = "residue"
 cause = "mir::Operand::Constant: mem::needs_drop::<T>::{constant#0}"
 
@@ -789,12 +1098,17 @@ cause = "mir::Operand::Constant: mem::needs_drop::<T>::{constant#0}"
 path = "core::mem::replace"
 kappa = "aefd1de1b8b37775ec1360674883c0a1487a94dc099188d7f9a2bfc702a858fc"
 at = "T=u32"
+embedded = "59e6c6573b2c347ddcc5adb7ae28887da09f9e271eff78bbcbb56ebcf0aa67d1"
 status = "translated"
-digest = "d7270e0f410af9fd593e674eb38e1129cd95d5215e19fae779875d0cf50a52f0"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "6905343ad2f9eb647dbd5443dd13bcfc834b178e21c32021fca04f93835989eb"
 
 [[fn]]
 path = "core::mem::size_of"
 kappa = "7de4141d6c57450ae19a824e420fbef297edecdbd85d3bbd1b3ce81b4609e5b4"
+embedded = "a335bc50c476a311bb8c35493c44c54a5b00ce1815a2e45dc9d832138d4f912d"
 status = "residue"
 cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::SIZE: mir::TerminatorKind::Call: intrinsics::size_of, an intrinsic the table does not model"
 
@@ -802,32 +1116,43 @@ cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::SIZE: mir::Ter
 path = "core::mem::size_of_val"
 kappa = "6ab52045ef0d3be024235757bb31ebdd6a6013b68485730acbf282031b65e11c"
 at = "T=u32"
+embedded = "afb87c081ee5327aa7a8af1ca9f83d5c00c0d79d620fbb6fdfd474d0381edd5a"
 status = "translated"
-digest = "f0c293bdf17075e31b1b84b9f44f3c6e9b7647dbf217174adb258639270e1fd7"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "189b5df5baca7b29a42b48ddd5ccaf6b0c800b111c3bc92ee6602076556689ce"
 
 [[fn]]
 path = "core::mem::swap"
 kappa = "d96c68206699a15dbfe71f4dc06d810968b5d07586706b26292f995cb8c0c03d"
 at = "T=u32"
+embedded = "b282537484355d9abed0f95f87295c17dfcc99de897d1dfebda832570bb765ff"
 status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::typed_swap_nonoverlapping: core's MIR stops at mir::TerminatorKind::Call: ptr::swap_nonoverlapping: core's MIR stops at mir::TerminatorKind::Call: ptr::swap_nonoverlapping::runtime: core's MIR stops at mir::TerminatorKind::Call: ptr::slice_from_raw_parts_mut: core's MIR stops at mir::TerminatorKind::Call: ptr::metadata::from_raw_parts_mut"
+cause = "mir::TerminatorKind::Call: intrinsics::typed_swap_nonoverlapping: core's MIR stops at mir::TerminatorKind::Call: ptr::swap_nonoverlapping: core's MIR stops at mir::TerminatorKind::Call: ptr::swap_nonoverlapping::runtime: core's MIR stops at mir::TerminatorKind::Call: mem::size_of_val_raw: core's MIR stops at mir::TerminatorKind::Call: intrinsics::size_of_val of the layout of (List Nat), which the data layout of x86_64-unknown-linux-gnu does not state"
 
 [[fn]]
 path = "core::mem::take"
 kappa = "7ae978fa01c04b96b2a6a14ca53c0f16465c4fccea7524893cd071a57ba63ffc"
 at = "T=u32"
+embedded = "84215f1483d22cae52784ed2e76e53b8e1bbdb56cd7b15d85d82e47e55dddf5f"
 status = "translated"
-digest = "61ec2b7fe6fed0fa982f207fd4633ab1dcc450db33cfe712e413d1848d41fdc7"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "4e35c576c59095b8244e277c29e175cb29853769a11da42a053fbb7b184b29ff"
 
 [[fn]]
 path = "core::mem::variant_count"
 kappa = "c44332847fee007a238ec314c6642126f09ba4a632b55747a645bb5084f3e28f"
+embedded = "73978aa9784d510f70a43ab19ad54593e64b469d8a656972975997cbc186674a"
 status = "residue"
 cause = "mir::Operand::Constant: mem::variant_count::<T>::{constant#0}"
 
 [[fn]]
 path = "core::min_align_of"
 kappa = "cfc20147d577e654d233caa6992e683ef35900cd1e0d00ca513bf51e51301398"
+embedded = "690322229b5737510bc685a55a27ae83a2da059e01ec9effc9e8282b2dd68ce2"
 status = "residue"
 cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGN: mir::TerminatorKind::Call: intrinsics::align_of, an intrinsic the table does not model"
 
@@ -835,105 +1160,167 @@ cause = "mir::Operand::Constant: <T as mem::SizedTypeProperties>::ALIGN: mir::Te
 path = "core::min_align_of_val"
 kappa = "f21448c0982eeaab57404ef3cd3166b7d99830a4c8896b47abcc7d06783639b2"
 at = "T=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: intrinsics::align_of_val, an intrinsic the table does not model"
+embedded = "0a5b4af3cee9d732cb0829d7c24de76a65de133b9a20157d0d1cf35a05a60848"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "b2222f858d11d9763869f39421cba18d107ba228e4df922623fe10d7e956755b"
 
 [[fn]]
 path = "core::size_of_val_raw"
 kappa = "e54d9009e20d857ff8aa02da9ac9e160d1f4a28f046ab356b50ee88bd923bcf4"
 at = "T=u32"
+embedded = "db61b9c2a8b616e325504003353d87f7b44c8e12bdc6aabfcbe8ce7b9fff86ff"
 status = "translated"
+bridged = "pending"
+pending = "signature: RawPointer"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "bc27c1b1862a845451f0a11569adc6d588f109d41be7b5e56783626ef869a0fa"
 
 [[fn]]
 path = "core::transmutability::<impl at library/core/src/mem/transmutability.rs:150:10: 150:19>::eq"
 kappa = "85dea70e4eaf07b4a56dbb5db5f35f1d6b0c1c3ef31bac62e75e5cc68aa13bbd"
+embedded = "bdd2e23caadf15deee33383f0e549f17c97860f93f9d41ba5c2e6a43af90bbac"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "f787f8467bfb8d531f710c8817d35e0b11ee1729c64b06007cb23b76b670bfe9"
 
 [[fn]]
 path = "core::transmutability::<impl at library/core/src/mem/transmutability.rs:150:21: 150:23>::assert_fields_are_eq"
 kappa = "15bf3f26d4b54051afa42c312614e4e700fb199441181e3a343448f6b595ee99"
+embedded = "d807d8f16ed24ca64e76a440c19aae19e0f602c56320e487794c1d18da3e7710"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "80bc25536e27629b55dc52f850d7aa3a462055ebcca3cedb546c40135dad58d2"
 
 [[fn]]
 path = "core::transmutability::<impl at library/core/src/mem/transmutability.rs:150:25: 150:30>::clone"
 kappa = "310732d96018e7a9554f0929be0db748881694fe2944bbcfac41f82c43a86d41"
+embedded = "a5b16bfe45a47e1046d43a3b71965a928ee7663afcf50e02e6588ea637b60ac1"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "de82572b530571a8c725852c2e165c08490178b429a399683b5a43e459290b5d"
 
 [[fn]]
 path = "core::transmutability::<impl at library/core/src/mem/transmutability.rs:150:38: 150:43>::fmt"
 kappa = "ae352975344e92c9b81ccc4895ebae562e8e1242c1ed1b34370a0f15e31b6c45"
+embedded = "0d4654832deb11f7a0beb2a94ee4d4040d4cfffca2630919263c9f3ada19264c"
 status = "residue"
-cause = "mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2901:1: 2901:20>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2909:1: 2909:22>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2965:1: 2965:21>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::Formatter::pad: core's MIR stops at type outside the lift: str::iter::Chars<'_>"
+cause = "mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2901:1: 2901:20>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2909:1: 2909:22>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:2965:1: 2965:21>::fmt: core's MIR stops at mir::TerminatorKind::Call: fmt::Formatter::pad: core's MIR stops at mir::TerminatorKind::Call: str::iter::<impl at library/core/src/str/iter.rs:35:1: 35:32>::count: core's MIR stops at mir::TerminatorKind::Call: str::iter::Chars::as_str: core's MIR stops at mir::TerminatorKind::Call: slice::iter::Iter::as_slice: core's MIR stops at mir::TerminatorKind::Call: slice::iter::<impl at library/core/src/slice/iter/macros.rs:74:9: 74:33>::make_slice: core's MIR stops at mir::TerminatorKind::Call: ptr::non_null::NonNull::offset_from_unsigned: core's MIR stops at mir::TerminatorKind::Call: ptr::mut_ptr::<impl at library/core/src/ptr/mut_ptr.rs:8:1: 8:29>::offset_from_unsigned: core's MIR stops at mir::TerminatorKind::Call: ptr::const_ptr::<impl at library/core/src/ptr/const_ptr.rs:7:1: 7:31>::offset_from_unsigned: core's MIR stops at mir::TerminatorKind::Call: intrinsics::ptr_offset_from_unsigned, an intrinsic the table does not model"
 
 [[fn]]
 path = "core::transmutability::Assume::ALIGNMENT"
 kappa = "0f96431d3c5aa66f5597358ed41b94d887ede9197285ca1ab83f09b6e87ee2ac"
+embedded = "2b4ebff23e0cb8e17087c96479cab5eecc38619b3def5d762380790f0b68416f"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "9b66d4cc362f0e4a73ffb6a23853a5871e4e3ef98dc2e6c914d2384777cfb852"
 
 [[fn]]
 path = "core::transmutability::Assume::LIFETIMES"
 kappa = "aaa7317bf3550c043d2689e2a3d26195648f9f640763ff670087c924e6330103"
+embedded = "1be8afef7873928496102fe64873187cf50599359bb65e32295c392c1c12c7d2"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "dd04d6931d4a0f13dc9ba10c782179edc688df1c77028ac199351cddbf8d850f"
 
 [[fn]]
 path = "core::transmutability::Assume::NOTHING"
 kappa = "d9a7de1fe31403cdb84d10bf74d47a05fa2f5a30564c9afe84b6cc5e158153ed"
+embedded = "109dbe018ca772234a4611ec2ca210aa21393735cf4ea377d9eb06a4754c97e4"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0c672638c268b38b44302bb55c478909667fd605c9eaf0c8bf49ce86a6cc7195"
 
 [[fn]]
 path = "core::transmutability::Assume::SAFETY"
 kappa = "d830bd11580ea5b2098787487109c96942406e9a3c5c7d2d3157ab524fa8540e"
+embedded = "978ffd4386a3ae357f4e48a5e797001d410930dc33c60f69280e7123c69543e6"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "63d6ba21a3fa848cf717bbbd4dea89695785bddb2c922e78cf3d209c8fc32901"
 
 [[fn]]
 path = "core::transmutability::Assume::VALIDITY"
 kappa = "859b9c29b80002cb0e4cf53a18c67840cd2043375037e00e877519f9309d0fb9"
+embedded = "016c2d57776d8312c7055840a3a62136237afbd4ab85e784c21af740f56ed2f4"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "ed61115f8a8a79dd8c9335992908ddf1849281b664b23a49419eb03e016d92d5"
 
 [[fn]]
 path = "core::transmutability::Assume::add"
 kappa = "2c411f3b25d8f75263a0309e987ba2fc1c94c8f5f246c5e501975467e3bc22c9"
+embedded = "e1d521773abeeac9561af3c7e4ba1533cc7006c1a905b4ae38a90424540154af"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "cd9bfd7156ad488ed5c950a219ebf7693ff413978a708505c504e2abdadf7007"
 
 [[fn]]
 path = "core::transmutability::Assume::and"
 kappa = "2902eab20539a4b0feb108e91368615d2fd6971887af5095c4dab56afa36dca7"
+embedded = "5db3cddd1d69a6231ee615265fce72af965a63589213afe89fec83f1d5e0469b"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "3ab7918a44c6f75ee4248a7ce19b250bb7698efdabac124c764f4a062b00cf66"
 
 [[fn]]
 path = "core::transmutability::Assume::but_not"
 kappa = "91756cd77a8a36249127b1aa788784a7338ff9b40a2bac7c19546f2e6f7bea2b"
+embedded = "cec0536be4f3f3081f4a966c62b6f82f2f0b6435fe0cf3e020be937555187e26"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "a64734b107dccd8d77f2d52832f9861c4dc4a9a3601008c40db32edbdee5baff"
 
 [[fn]]
 path = "core::transmutability::Assume::sub"
 kappa = "94311a26ea3103a3e62b87e9dccde8027998f08a7f5587aaeb265220679de8b8"
+embedded = "9006044150c810e51e28a27b7d0ccd6ffe655f1e739a55c2dd045dcd6ab7eff3"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTransmutabilityAssume"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "48d2c96b5b3ebd48ac2aed11ee5dece197ebf763c4a863ebb3b94b7ff0917df1"
 
 [[fn]]
 path = "core::transmute_copy"
 kappa = "cf3af12df5fc102c4aa854ab59c322941ae0f66ac28751171a6673e6ec6222dc"
 at = "Dst=u32, Src=u32"
-status = "residue"
-cause = "mir::TerminatorKind::Call: ptr::read_unaligned: core's MIR stops at mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+embedded = "76e933d5e3fff34c3e6c8131225a5046579a878aa97f08e9c893344e4b411c9a"
+status = "translated"
+bridged = "pending"
+pending = "signature: an arity the body does not have"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
+digest = "f01514a06541fe1e979378e87095b753332e1464825c998df3ac6857dc271f56"
 
 [[fn]]
 path = "core::transmute_neo"
 kappa = "8d6835142df6824fce9a1c9c7e1edca26388a9771af7bda59ba2c530b010e678"
 at = "Dst=u32, Src=u32"
+embedded = "033296b64bb1be2035c957ab9246f8156d2c08b4b0b460c11b2956c9d67fe893"
 status = "residue"
 cause = "mir::Operand::Constant: mem::transmute_neo::<u32, u32>::{constant#0}"
 
@@ -941,78 +1328,91 @@ cause = "mir::Operand::Constant: mem::transmute_neo::<u32, u32>::{constant#0}"
 path = "core::transmute_prefix"
 kappa = "c952c7ce7696dc586752061b70540e5fd270a3d67b2262db69289dc7a641d3bc"
 at = "Dst=u32, Src=u32"
+embedded = "15a136d496ec07028c025549672f0185ec1d288cd7635e86481bf8902bbffd42"
 status = "residue"
 cause = "mir::Operand::Constant: mem::transmute_prefix::<u32, u32>::{constant#0}"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:100:10: 100:15>::fmt"
 kappa = "be1a6baa76bbc08920f1a48a87f5b2ffeb12b0b3ed8a2a746914a59bd1e0783f"
+embedded = "6b15d30e5b0babf6e50ad02d4f8781bc6b71998f9837e352f7ca5f93e1ad1283"
 status = "residue"
 cause = "mir::Ty: type_info::Tuple"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:109:10: 109:15>::fmt"
 kappa = "bf5f3257b564de3812045887e2b41972d38b4b5ceb3eeec153ca6defe9611b6a"
+embedded = "dc0e6bda049e7704d109ca6d8247ef09802b8d12743695d1cdf6c4611f6db6f2"
 status = "residue"
 cause = "mir::Ty: type_info::Field"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:10:10: 10:15>::fmt"
 kappa = "9685e83d2b9fcbba79930bccc4f758bdbbf91ba3678c7a361b83759743a1f2d7"
+embedded = "cf2cc1f7fc1d6cd2713434db819e4842187c6104f0e2caf76b721cff61ce08fa"
 status = "residue"
 cause = "mir::Ty: type_info::Type"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:122:10: 122:15>::fmt"
 kappa = "d787077e24d866d5f05e8c6d66cf4611629f9b7fedbf53acfc5ff1e038d3f280"
+embedded = "99caba0e13019a5d5ec7c606a3554961a9c89bb003f001a9abcbc9d693aac21f"
 status = "residue"
 cause = "mir::Ty: Array"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:133:10: 133:15>::fmt"
 kappa = "39d692e8cc32a38e0080f0f061dba7dfd4642efa79f4ed8a3e5fd4e524ef934f"
+embedded = "6c0687ca0c8449cf7f6d5766e34b864681c19fe6a7b5ccd4ebfc07c564bc9933"
 status = "residue"
 cause = "mir::Ty: Slice"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:143:10: 143:15>::fmt"
 kappa = "88685ec82409877d8a090ffcd5adcc9ebdf01aa9a6651a190cd33ea289d3c43e"
+embedded = "092d5371bdd877b56fe60d88e9464f25685c04ced18cbe28eadd589187464f52"
 status = "residue"
 cause = "mir::Ty: DynTrait"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:152:10: 152:15>::fmt"
 kappa = "a36d808f7e556d6747690859ac0b1b609c957f595369adca7b83fd8df4414aba"
+embedded = "fea726a1602a6aa46f18605a17a2d470326a8f6d4455bdc2ddd4e282e0207d95"
 status = "residue"
 cause = "mir::Ty: DynTraitPredicate"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:161:10: 161:15>::fmt"
 kappa = "76df682d5f5571fafc0ca0f7b6aa9f12fb1cb3518ca5d0284ca15900150ab532"
+embedded = "b15fcdbe34159289d955a23f8b92f9932a74c62fb3be7eefcde92e071f5bf3c0"
 status = "residue"
 cause = "mir::Ty: Trait"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:172:10: 172:15>::fmt"
 kappa = "58efe61f03760534618a8f1551c76feb28a13d22353b962ae09717da4b68457e"
+embedded = "da557f79499278d18e55d48435921065c0928d9bb228a8d57dcf849d3d614d08"
 status = "residue"
 cause = "mir::Ty: Struct"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:185:10: 185:15>::fmt"
 kappa = "53788b06274e37da51ede9134129566d280b4724a4dccbd3c12863cd6b33ff9c"
+embedded = "7c6207837878eae30760a04509170cf0fc2cf69723e531b311ab86529454c647"
 status = "residue"
 cause = "mir::Ty: Union"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:196:10: 196:15>::fmt"
 kappa = "d1d2ba827525cca5c8fbed6ed5791eef36e14410e13c5e1671b38b8fa982a698"
+embedded = "8cc051183742ae468c231b3193712b7072647f89d41128bc1583e442004b137e"
 status = "residue"
 cause = "mir::Ty: Enum"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:209:10: 209:15>::fmt"
 kappa = "0f6bce8816f1d084dc8d6e5d80d640dec395d71de79242ea4de12be83102604a"
+embedded = "f5c111f72e8445f9a379c0c565e888ee654088a592ade68c845ee3dde33eeed0"
 status = "residue"
 cause = "mir::Ty: Variant"
 
@@ -1020,6 +1420,7 @@ cause = "mir::Ty: Variant"
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:20:10: 20:15>::fmt"
 kappa = "fcdd1dc5fc083de3a53c2ad05b05ef0dca5c8bba865a42d630b0979828054415"
 at = "T=u32"
+embedded = "2f5de08e4aeb8b0609e3d7356ce45c2714737b04d2e9135f44155d5e843ab87e"
 status = "residue"
 cause = "mir::Ty: TraitImpl<u32>"
 
@@ -1027,102 +1428,134 @@ cause = "mir::Ty: TraitImpl<u32>"
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:20:17: 20:26>::eq"
 kappa = "333d8a8dc1ec77e8bb64f0af51ba397a007697d93f0e0b2dad7c0317f1a4c90d"
 at = "T=u32"
+embedded = "00d5eb7bca44b7c825deaa9783831737efb7cee5c427dcd1e601798978e73a28"
 status = "residue"
 cause = "mir::Ty: TraitImpl<u32>"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:20:28: 20:30>::assert_fields_are_eq"
 kappa = "7fcf01cbf3ff2615a65e9709649778f97bafa9712e4b609cdb4542edd9a09b23"
+embedded = "e6d7c9749681b1ddad3c3ac0bffa68720e75498953fb9e6ba1d40dedc0fc6075"
 status = "residue"
 cause = "mir::Ty: T"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:222:10: 222:15>::fmt"
 kappa = "fab99f2fcdac1712730f7488564441c4d07c17cdea53de22d81f3c4dbcdd1042"
+embedded = "e2dd1a20e4aba4344ca3e526ea758be12468ca9cbe32f9cd2db075bfa4963c7f"
 status = "residue"
 cause = "mir::Ty: Generic"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:235:10: 235:15>::fmt"
 kappa = "c90c5d8fe1fe0e1e047847ecdba2f7ec285dd56281b8b303820dbfb0ca754c9c"
+embedded = "e9fa7704a6d365819814ad2b2fd5d105678a5f1136d7ea46bfe219fe6980960b"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "ad37b1f3a933038f4bfbfd2a6ee8265fa4d7acff6bda90984857dc3cd174cb77"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:243:10: 243:15>::fmt"
 kappa = "533acc5541ca7f7107716602f7ad21d90b276393681d8e3d1d41cd0610b5eda4"
+embedded = "f7906e7a5236570dadfb9e8667d735a55bfc330a0a45f9c084a52dabe38e32b5"
 status = "residue"
 cause = "mir::Ty: GenericType"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:252:10: 252:15>::fmt"
 kappa = "513f163d3c50b373c95f45ba27bd299a774e1cda47b0ea55636bac4635fa824d"
+embedded = "f07a3e779f27aca2fbf0b5533e72a1b181ee5d80af2fb6236121962f7d91f61f"
 status = "residue"
 cause = "mir::Ty: Const"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:261:10: 261:15>::fmt"
 kappa = "745642eb839159ac05293b65df9d92e34c3d7ce5396946bec2e2e651454cbdd0"
+embedded = "3fe04c820bf4a7c6271537c3de83ce624bd8baba7ef0a5367322bd28c71da165"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "2751b03daa7d1d5ca13396ad209d04d9d36db0569853ab2429fd9874abec10e8"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:269:10: 269:15>::fmt"
 kappa = "495ae208abe8952a0344bd679ab9585ee0640956ed9d4bcad09143ba5682ee1d"
+embedded = "ac4cd7659f8abd6388054c592d024da788afd0e852e1f88f1cd40e261a1162ad"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "5ebc6059e5045d53c0c552de76121d60b244a02d776d103fff5325b9f11580ae"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:277:10: 277:15>::fmt"
 kappa = "410eba8415e349c57487091174e6fc58faabf8af4b347413f7d88a824158c8b1"
+embedded = "8215a0984fa4ae735dbd36bc24e5bcf97e7e6514e909e76048bbbb6216996f33"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:288:10: 288:15>::fmt"
 kappa = "b51d905738700cfd5cbcae4b4392ecaceb765fcafa3194037763bc70b288cf62"
+embedded = "df525fac18380af2f5228714186a9939acc98f4a4a42540766b0ac0be6bb1959"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&u32 as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:297:10: 297:15>::fmt"
 kappa = "718b6d122f20c79763b6794c7420cafe114fc8797b8cdd3eab30ac50159dd91c"
+embedded = "305822127e45ae1f67cdcccaf4b97fb15cb64e0f6ae464056d0e3b2b8aef942f"
 status = "translated"
+bridged = "pending"
+pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "0574aae555f7a93d9ec143c2137050102a4afe7e87e2f0f5debf084c605c8f76"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:305:10: 305:15>::fmt"
 kappa = "dfe925c93a59d4b13aaafdf8c217e9f233c1cd9028b1170d7fc788bb0deb52fe"
+embedded = "9c084b04b0dfd4d9fdf2a57bc9a5cf539a5eb2e022c700deec41fdcfa8348854"
 status = "residue"
 cause = "mir::Ty: Reference"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:316:10: 316:15>::fmt"
 kappa = "113dd7cc874faf8efa735c0675da0551104aeffd13e920f7e4bba4070c65fb2b"
+embedded = "e288b993d173a39e5bee8bab2fbb1d0af57af9d6592d5e8497e2ee144758269c"
 status = "residue"
 cause = "mir::Ty: type_info::Pointer"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:326:10: 326:15>::fmt"
 kappa = "3c18d040460217469a41f70935e720385e0dfd15cb4b313b5421954a4fb7192e"
+embedded = "2f7d0b8ff29452595031d3b8a071ae82b11587f6f63125483a069efce95b5570"
 status = "residue"
 cause = "mir::Ty: type_info::FnPtr"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:346:10: 346:15>::fmt"
 kappa = "9c9691470f1533507a971c8c23d28b90111f9afbf68952f648bd7b334285a057"
+embedded = "cb26e5dad7b7b7e5f2457e2c3318b065ad90829547476e8fdd897a5ba27fb61d"
 status = "residue"
-cause = "mir::TerminatorKind::Call: <&&str as fmt::Debug>::fmt"
+cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:346:17: 346:24>::default"
 kappa = "98d9880e5f1afe6cdcdc59785438b04d3ddc6ffe13df80b66725847345d654d3"
+embedded = "a1ad96e523feb9793e7f09e366e657ee34e1eaef93db1247e947b2dc4e74f53c"
 status = "translated"
+bridged = "pending"
+pending = "signature: CoreMemTypeInfoAbi"
+measured = "349c8d4749f5d2f9691e6cedc88a32b28769c29e"
 digest = "d5a9ee59fe5586ed1dfc3f31b7e0a5cdd7ebf9e73e92762db09c754fe3e023ae"
 
 [[fn]]
 path = "core::type_info::<impl at library/core/src/mem/type_info.rs:61:10: 61:15>::fmt"
 kappa = "9f9cbee0d4a126e45bacadf84da95247d1e88d46385f42ea25c4d46aa8f343c9"
+embedded = "c282d26f91062ff97f04248d0e7bb7ee42ec73ad75f7565cc98df9053e803e5a"
 status = "residue"
 cause = "mir::Ty: TypeKind"
 
@@ -1130,24 +1563,28 @@ cause = "mir::Ty: TypeKind"
 path = "core::type_info::TraitImpl::get_vtable"
 kappa = "8941a51fccb34e4888a0b24d72d4e7386c812e399b8fec822118593b0b875e99"
 at = "T=u32"
+embedded = "0e22796685023097836fb9364fee15d077c75c61effecf0035c3a5afd595fc34"
 status = "residue"
 cause = "mir::Ty: ptr::metadata::DynMetadata<u32>"
 
 [[fn]]
 path = "core::type_info::Type::of"
 kappa = "ce1c5e8a853687b69b20391b919c55890e9802037f525bdaa193dab22f7ca6dd"
+embedded = "107841c31a6a6e3f29cae5aa23db3a26d1e4be00d0f1983f977281e19617098f"
 status = "residue"
 cause = "mir::Ty: mem::type_info::Type"
 
 [[fn]]
 path = "core::type_info::TypeId::info"
 kappa = "abdacaf7822d7c899fb850c46e81cb326fa0e2714010f8eb9c55802c33ef594d"
+embedded = "2dcd813670d3908332f94ae63709d58de220c7f23a7a4adee99fe8482e8345df"
 status = "residue"
 cause = "mir::Ty: mem::type_info::Type"
 
 [[fn]]
 path = "core::type_info::TypeId::size"
 kappa = "38e9deeda9434c3591a85ac26dc92f03542ed75887b49dab6054f8fcd938626f"
+embedded = "8286a8456409e257de9f942d14808f39166d903a564e5baa8f528f4f92a8cf39"
 status = "residue"
 cause = "mir::Ty: TypeId"
 
@@ -1155,13 +1592,15 @@ cause = "mir::Ty: TypeId"
 path = "core::uninitialized"
 kappa = "bc567155dca1ebd5847330fa78527688bf2b55f960620255238e74815904add3"
 at = "T=u32"
+embedded = "ca9715fe99b5c85de3d47eee56a6891f7ae6b2d64a96e86920f8a7272ffc7a07"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+cause = "mir::TerminatorKind::Call: ptr::mut_ptr::<impl at library/core/src/ptr/mut_ptr.rs:8:1: 8:29>::write_bytes: core's MIR stops at mir::TerminatorKind::Call: ptr::write_bytes: core's MIR stops at mir::TerminatorKind::Call: intrinsics::write_bytes, an intrinsic the table does not model"
 
 [[fn]]
 path = "core::zeroed"
 kappa = "ce282cd621e980b8fc716251e0fe034dbe3e5d3b5cf1e2d04c765fff90bcdf42"
 at = "T=u32"
+embedded = "5bf6b84c4f75e9ba94cda1663fe4b0ece7cf27ceaf4407c1154efa969593ba2a"
 status = "residue"
-cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::zeroed: core's MIR stops at mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::as_mut_ptr: core's MIR stops at mir::Memory: a pointer to a place the caller lent, returned: the value model gives that place no address"
+cause = "mir::TerminatorKind::Call: mem::maybe_uninit::MaybeUninit::zeroed: core's MIR stops at mir::TerminatorKind::Call: ptr::mut_ptr::<impl at library/core/src/ptr/mut_ptr.rs:8:1: 8:29>::write_bytes: core's MIR stops at mir::TerminatorKind::Call: ptr::write_bytes: core's MIR stops at mir::TerminatorKind::Call: intrinsics::write_bytes, an intrinsic the table does not model"
 

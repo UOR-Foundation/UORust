@@ -1,0 +1,333 @@
+# The serde register (written by `uorust crate serde@1.0.229`; do not edit): every body of
+# serde's MIR at serde 1.0.229, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 665
+translated = 1
+residue = 664
+
+[module.private]
+bodies = 665
+translated = 1
+residue = 664
+
+[embedding]
+embedded = 665
+evaluable = 665
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: serde_core::__private229::Content<'_>"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: private::de::content::MapDeserializer<'_"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: MapRefDeserializer<'_"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: private::de::content::SeqDeserializer<'_"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: SeqRefDeserializer<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: ContentDeserializer<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: ContentRefDeserializer<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: private::de::BorrowedStrDeserializer<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: private::de::StrDeserializer<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: MissingFieldDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: PairDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: PairRefDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: FlatMapDeserializer<'_"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::Content"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: private::de::content::TagOrContent<'_>"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: TaggedSerializer<u32>"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: FlatMapSerializer<'_"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: FlatMapSerializeMap<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VariantDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VariantRefDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private::de::content::TagContentOtherField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private::de::content::TagOrContentField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeMap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private::de::content::ContentRefDeserializer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: serde_core::ser::Impossible<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: serde_core::ser::Impossible<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FlatMapAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatMapSerializeStruct<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatMapSerializeStructVariantAsMapValue<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatMapSerializeTupleVariantAsMapValue<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatStructAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InternallyTaggedUnitVisitor<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeStructVariantAsMapValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeTupleVariantAsMapValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UntaggedUnitVisitor<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::de::content::ContentDeserializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::FlatMapSerializeStructVariantAsMapValue<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::FlatMapSerializeTupleVariantAsMapValue<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeSeq<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeStruct<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeStructVariant<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeStructVariantAsMapValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeTuple<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeTupleStruct<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeTupleVariant<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::SerializeTupleVariantAsMapValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AdjacentlyTaggedEnumVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AdjacentlyTaggedEnumVariantSeed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AdjacentlyTaggedEnumVariantVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Content"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PairRefVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PairVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::borrow_cow_bytes::CowBytesVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::borrow_cow_str::CowStrVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::ContentVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::EnumDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::InternallyTaggedUnitVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::MapRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::SeqRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::TagOrContentVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::TaggedContentVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::UntaggedUnitVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::VariantDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::de::content::VariantRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::ser::FlatMapSerializeMap<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::ser::FlatMapSerializeStruct<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::ser::TaggedSerializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::ser::Unsupported"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::ser::content::ContentSerializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::Unexpected<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::value::BorrowedBytesDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::value::BytesDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::value::U64Deserializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+bodies = 1

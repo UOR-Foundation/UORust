@@ -1,0 +1,132 @@
+[[fn]]
+path = "getrandom::NOT_AVAILABLE"
+kappa = "7d595d353decb02162385bd4ee9f670228ec9ca649134d4ab548e8a06c5fba78"
+embedded = "c6054cc4bb2c49ab4e05e3a1dfacfd91fbc857f45825af676e9639b89606c7eb"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "getrandom::get_errno"
+kappa = "dce01cf9c08d23cd55eda5bc7979abb0e8e1262d15b46c3aa0b90632a54c692a"
+embedded = "70f907110e2fcb56880b4631d5e36d5b3339228f987a3e0d5cc69e05aa497b8b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "getrandom::init"
+kappa = "174f0fce21b55f2cf30fbe7c47d3ca0814c6fddbcb2ceb2542ad0dda89d57153"
+at = "C=u32"
+embedded = "80f4483c5d1870b750e3b46ab3e22580d8de8ceeea1d6b221aec3b3fcc6c13ad"
+status = "residue"
+cause = "mir::Operand::Constant: Slice { alloc_id: alloc41, meta: 10 }: &CStr"
+
+[[fn]]
+path = "getrandom::lazy::LazyPtr::cold_init"
+kappa = "6697c0d0fbf246fa6ad5055e1b5e2d3158cdc8a3aaee4cabefb0533e89266e9d"
+at = "E=u32, T=u32"
+embedded = "5a789bc819f2cda9dec4f94f72ba4510d7dc318e0524bf44f31fd324f6529cb7"
+status = "residue"
+cause = "mir::Ty: LazyPtr<u32>"
+
+[[fn]]
+path = "getrandom::lazy::LazyPtr::new"
+kappa = "7c65e9346f92184f822257ca07129db975c484fc9798ca5bf05c61741a863df2"
+at = "T=u32"
+embedded = "44432807ad2097f0f81c09c5cde8c8a0190437a965845d5640d12f00f9c91c77"
+status = "residue"
+cause = "mir::Ty: backends::linux_android_with_fallback::fill_inner::lazy::LazyPtr<u32>"
+
+[[fn]]
+path = "getrandom::lazy::LazyPtr::try_unsync_init"
+kappa = "8222721edd9d49ff0e06d683606a46a1f80fdb4c8a16751ff1d93d6bd7328ce7"
+at = "E=u32, T=u32"
+embedded = "6b30970e189d3f4aec5cb70be7dc621186dfd02deccab90ae9c5bead9cee35f6"
+status = "residue"
+cause = "mir::Ty: LazyPtr<u32>"
+
+[[fn]]
+path = "getrandom::lazy::LazyPtr::unsync_init"
+kappa = "455102401c8bfa2fe0093a2ff2dc93dc1431fc1934a4231843763de968ee711b"
+at = "T=u32"
+embedded = "9e59add0ba21726ae2cdbf6db28003e0233a31521b17d304ab8bce02b4d908cc"
+status = "residue"
+cause = "mir::Ty: LazyPtr<u32>"
+
+[[fn]]
+path = "getrandom::linux_android_with_fallback::fill_inner"
+kappa = "98a3294a8055d96ea60a522c5828577e50434363d84cb7d20fbe21bcaa8bbbe3"
+at = "C=u32"
+embedded = "b9229666b72f82a4c69d212421de65d4d62e782bd4a41dd9731a1c38e99e5b55"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::open_fd"
+kappa = "29ab20cd8dc835948408ca1f127c6c245c7e59e9fb8b3e55b227a927303b43b5"
+embedded = "e9f6da479d71e132c70e6d0c2b903f3745465644e8a80dce6e47e17e349484fc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::open_or_wait"
+kappa = "72f93f163ea69ed5438865031fb5deb1147a02809390911b2ac6105b5cdf9a42"
+embedded = "4fd590d81b096e5b69e61e160742efdf9c3c1a8b99023b519be9bfc728479b81"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::open_readonly"
+kappa = "536808bac62f0fda8734357953b58de4d658f1d5d53b6f61f53b113547961ee3"
+embedded = "5a7f93d32e2b3130d1ce30c2dafa3015b94ea5569daee5a231e278c36adb07b9"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::sys_fill_exact"
+kappa = "4efc369b1e6e388ac2acbaf1dd5a016f6c0b6bb6af517847f919f2a253030f59"
+embedded = "0e214aaa31b4d1e90efc2342ec50f048799c3a3b9b856163dce845ab4614229f"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "getrandom::unpoison"
+kappa = "d6e6390925c2f73f6c5d1ee33010223e70d0fb68ff6634ca190172f28706c9b9"
+embedded = "60b1fc40bb463e1ee009786d775b38f8019fe0277b587680359ffb0babec08e7"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "getrandom::use_file::fill_inner"
+kappa = "22073be1d282d70a1768a988e50449e6b9cc1ccf1a0391277c891d30352530de"
+embedded = "4deb1defcd8d2ebe67f0768a70e5f1b5adbf91e2e2cc86ec9fbde2ce63ce7487"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::use_file::sync::wait"
+kappa = "409bee5d84fa2bac398c2458b12e4231e2216af2b026c8bd31a35ac9b68fe35f"
+embedded = "ed16796d8e3a42ed80428abaeae115300a8aacaf3fd04a542847b6354e52ed37"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::FUTEX_WAIT"
+
+[[fn]]
+path = "getrandom::use_file_fallback"
+kappa = "2e6280af8c83dccab6f6aa47e38b41f2ecf6d1096f7be0dc5e3b889028d239ad"
+embedded = "7353d68225742b1aba2d29f720a6364e384579ea7ad67454be2f2b43767f2e14"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::wait_until_rng_ready"
+kappa = "dfc60d4b10e3b222d8471e804d9fed9843a6d2b0094ecf7d40829415094c0c8d"
+embedded = "9f1111bbc95fe8716986716dcc0a07eaf0ad6a35af87df676506bb5c57ee4f44"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "getrandom::wake"
+kappa = "f3c2506e88d9e744ec4d3b8e5596913f1e631bec0d7cc9164828bdcbcd666f0d"
+embedded = "1b1834a45202a253be84a759dbdcbdd2e6f4ae064aed7446497fb810c2ad6d5c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::FUTEX_WAKE"
+

@@ -1,0 +1,148 @@
+# The once_cell register (written by `uorust crate once_cell@1.21.4`; do not edit): every body of
+# once_cell's MIR at once_cell 1.21.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 115
+translated = 4
+residue = 111
+
+[module.imp]
+bodies = 17
+translated = 1
+residue = 16
+
+[module.race]
+bodies = 43
+translated = 2
+residue = 41
+
+[module.sync]
+bodies = 29
+translated = 1
+residue = 28
+
+[module.unsync]
+bodies = 26
+translated = 0
+residue = 26
+
+[embedding]
+embedded = 115
+evaluable = 115
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: sync::OnceCell<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: unsync::OnceCell<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: OnceBox<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: OnceRef<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: imp::OnceCell<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sync::Lazy<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unsync::Lazy<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OnceBool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: race::once_box::OnceBox<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Atomic<*mut Waiter>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OnceNonZeroUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: race::OnceBool"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: race::OnceNonZeroUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: race::OnceRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::COMPLETE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::INCOMPLETE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::strict::with_addr: once_cell's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Guard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::Lazy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unsync::Lazy<u32>"
+bodies = 1

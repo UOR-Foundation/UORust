@@ -1,0 +1,237 @@
+[[fn]]
+path = "rand::RngExt::fill"
+kappa = "90cdd3cf43542246c5f99642cef08d73f902fe706e661fe44386bab8a20a274f"
+at = "Self=u32, T=u32"
+embedded = "aff9b4b19ba8d0941f025a2172c103c5b8f428c0c92023bafc207efeaa574738"
+status = "residue"
+cause = "mir::Ty: mut [u32]"
+
+[[fn]]
+path = "rand::RngExt::random"
+kappa = "cd170acb8e65ae4fedea6aab92228a1f9dae06c357b93af963ecb5ccd5fe8321"
+at = "Self=u32, T=u32"
+embedded = "8678b2e38c210d225a1b55ed012ba389d0e55b164a9aac949be9ec45ee86dd2a"
+status = "residue"
+cause = "mir::Operand::Constant: <u32 as rng::RngExt>::random::<u32>::promoted[0]"
+
+[[fn]]
+path = "rand::RngExt::random_bool"
+kappa = "76b536a8eb56af45b2af31ca7a46b5f8cab1324192be2caf8541a158af371a4f"
+at = "Self=u32"
+embedded = "c9a53236fc48907e90fc9fd92579ac6b388607334add642cae8b9142a282f87d"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::RngExt::random_iter"
+kappa = "2e54159ebf6af836d6348f896cf2ab8a79f66e4c7bcc654865af63c27cb6875c"
+at = "Self=u32, T=u32"
+embedded = "1114d68fdb771e7d8b92efe68f1c8623530b1e3296c3f7a90b9e7123e4c6b398"
+status = "residue"
+cause = "mir::Ty: distr::StandardUniform"
+
+[[fn]]
+path = "rand::RngExt::random_range"
+kappa = "3b298a1fee0d077919317863f44738d22863837808ed7db5659d30affa4730a8"
+at = "R=u32, Self=u32, T=u32"
+embedded = "8ca435ff02773de9e9152bf9d6f0109b4ffc5bebc51e9f1ad8cc58dbc5ae702f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by SampleRange, which u32 does not implement in core"
+
+[[fn]]
+path = "rand::RngExt::random_ratio"
+kappa = "e489538f68864da542fa5084248f1b8d4083da09a3a24cc33664ef58255ebbd2"
+at = "Self=u32"
+embedded = "d5334ffcb314e68864e3fce5d7f32fe7bd93cac358df75f57b26daf184aa5ff8"
+status = "residue"
+cause = "mir::Ty: distr::bernoulli::Bernoulli"
+
+[[fn]]
+path = "rand::RngExt::sample"
+kappa = "72302a09400431553f4ad5ffcde790b5ebde4bc2f1397104e6d32930c7522585"
+at = "D=u32, Self=u32, T=u32"
+embedded = "d31e643076c7a9072b11def050be9aca224f197e89b4eb82675b3a5472988e0d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Distribution, which u32 does not implement in core"
+
+[[fn]]
+path = "rand::RngExt::sample_iter"
+kappa = "e0646b26cafe73dccf2a61f0ad8a15e0570adf3c652f928e077039efe0263767"
+at = "D=u32, Self=u32, T=u32"
+embedded = "438679a4ec54e7e9be26007641f8b37fc697ed4b99cfd4deedfdeffd6047039c"
+status = "residue"
+cause = "mir::Ty: distr::distribution::Iter<u32, u32, u32>"
+
+[[fn]]
+path = "rand::__unsafe"
+kappa = "be0dd10cbc0e25766f12aae45ab63291ebf864a669b9031863735a807cc3d784"
+embedded = "bcf0bf0d70595e844256021c3fabb34198d114d775fe88a8bae35f326d0f6525"
+status = "translated"
+digest = "ae85361e5848f340a1c3b58fe9002e7ad369917c8dea02692246100dc2e71c0b"
+
+[[fn]]
+path = "rand::rng::_"
+kappa = "d625605d81c78909a09e253a9a8ea4176a8051396a550b81824b682a6b83c6bf"
+embedded = "446051742036b57c33da8c6912fda00055706767a30dc1869cb30c8d6d5c037d"
+status = "translated"
+digest = "3377867aa6078f988f5f29e4ecc7000e97290f82b6af0d6a1a76f628047f32b0"
+
+[[fn]]
+path = "rand::rng::_#2"
+kappa = "a6736b14776bbbeccd84be4be31e767230c6a78d4324a8a9c5d803fbd10bbfc8"
+embedded = "d2b7ef324096224cad4257cddb233126d17389ca08c7bf9b16249b35118b5645"
+status = "translated"
+digest = "3377867aa6078f988f5f29e4ecc7000e97290f82b6af0d6a1a76f628047f32b0"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice"
+kappa = "84bfccd9980819455018af5cec302fd69025c614af4300c0d42b032c47cef8cb"
+at = "R=u32"
+embedded = "615f3e307ec3cc8673710c984088beaff6c76d9a243d6730f601990a3b52eaf8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#2"
+kappa = "5c27afa8483102f8e196dd304c4640ef19c774f3c2f6810820fa3da153db316b"
+at = "R=u32"
+embedded = "0e36df79806b5ed2b3a6863657a925ea75e71fcb90deac911a819bbe72af3e25"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#3"
+kappa = "0ff882bcd150312792edfffbdb0f7b675531641ce6144514fa7737e8aa3643d0"
+at = "R=u32"
+embedded = "cc5ec157b10c0faaeffd1e77b4b0b356d14759a695a262b88533e9ab34090b96"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#4"
+kappa = "d3ae0d32c8f570ca269d3be711a79a663f404d17f01fdeeace092e5edd73dce0"
+at = "R=u32"
+embedded = "4f88572e4c82633e629735ced39d5b31f8f1264cb44efd5add272f8e7dd36b8d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#5"
+kappa = "0f41aa5d147ce3c3c9b75e766c90759ef24936dea6abf1085adc58e2822c66e2"
+at = "R=u32"
+embedded = "f205f6af356dd4a8d9caffd3f52820a0db6a36f95589ffb094089e6478be4fc6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#6"
+kappa = "af9248c571c6c84c13800756a60f082f3b4a71d9566a00938a23bcc5ef8b448b"
+at = "R=u32"
+embedded = "5473de1b7e8181b5eb7ed5256cb75a0d313741c706b282de01f971959afb6f59"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#7"
+kappa = "c935f7d6ac297b4de755de9f47fe979957decb86e9b7e346fe52d7c5a1082eb4"
+at = "R=u32"
+embedded = "4de703aba9b0b5698cfedc9b1e48c42af8a7ef6683b0f2bc313093efec059a58"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#8"
+kappa = "c0e52dc35825165def9e83498b1e340499f745aeaecb73865d6c763beb1d862a"
+at = "R=u32"
+embedded = "d2dbd48ff79c5525b6500dc82dc6a6974fae236bb14d9efc8dd802f8714f6c7e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::<impl at src/rng.rs:386:9: 386:25>::fill_slice#9"
+kappa = "fb70b6e5d7fdccdd779896a525b0c9e8ac097eb9124c7c777804e4563eeb7d1c"
+at = "R=u32"
+embedded = "6216ea27724c01911d71e54d325c3b223ddeacc786a2b2f5b0764962826f2de2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice"
+kappa = "9993af9f8a045befcfc1b5898f9473612888e54f872768ba0142575485dedfab"
+at = "R=u32"
+embedded = "6bb3ba01fefcdb764a6afeb7f4cb7e2c745a97a8732cb3e2a8de4a4da709c66b"
+status = "residue"
+cause = "mir::Ty: Wrapping<i8>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#2"
+kappa = "7878f0668041b787945c42cf2892996c99a5f8752b80bc40c2e422a9daba74a2"
+at = "R=u32"
+embedded = "87d30ba7eb4d9c6fbfc12c5d01e5f274e526f6d89137efdce6cd025b37d1b371"
+status = "residue"
+cause = "mir::Ty: Wrapping<i16>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#3"
+kappa = "765438d71f9de54274ef5dc8c8bdb81b754a4dfdf48131f99a07e9b009ab5610"
+at = "R=u32"
+embedded = "cfcc8ccc381272ce5aedadfb7f5a5babbb47654955557636b44ebb5b221411f4"
+status = "residue"
+cause = "mir::Ty: Wrapping<i32>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#4"
+kappa = "79ac78d2232953d3754b9500ea3c651feae2fa91fc564544e7bfc7e3e9c4e164"
+at = "R=u32"
+embedded = "e7c5eb7efbd06012f88dd5c8d4a09ffca8fe06592fc3ff4c1b9a6182dd8d3504"
+status = "residue"
+cause = "mir::Ty: Wrapping<i64>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#5"
+kappa = "d4866abd045fb7668597713f95bbde7bc476d3ea5d4561163bd3852120f938de"
+at = "R=u32"
+embedded = "8ba592b4f232dc237009e3c385e7d2e630aa73716d063625a6e2f7803fd3f845"
+status = "residue"
+cause = "mir::Ty: Wrapping<i128>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#6"
+kappa = "ce230180557de49f772bd0119477939a9f6f8ca6864eb442be1ebab5ec483ca9"
+at = "R=u32"
+embedded = "83039320c6dc2f79586f0e4b79eb542737d39242f309b0193a2da148cd105ab4"
+status = "residue"
+cause = "mir::Ty: Wrapping<u16>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#7"
+kappa = "f684e19294aaeb375e920f4e27c43e97558ef026d9a56c870c143a5ddb88f122"
+at = "R=u32"
+embedded = "47adbf1b98d576d0847b08a3e5faf6338b4ddd76f04f18a40d8edd7c2a03d8ce"
+status = "residue"
+cause = "mir::Ty: Wrapping<u32>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#8"
+kappa = "c48c4ee15b4ca076576d3462b9e683fb3303156e4dd87978438bd9963c17a462"
+at = "R=u32"
+embedded = "d9edd5686e7c059184aa60a29ea36f7d087624e3f451763a2ad57893a58e9eac"
+status = "residue"
+cause = "mir::Ty: Wrapping<u64>"
+
+[[fn]]
+path = "rand::rng::_::Wrapping::fill_slice#9"
+kappa = "0e521e3195544a1fd4aa1c6821b2f02214bb45d1b1a25538f2a0236d241042cc"
+at = "R=u32"
+embedded = "e3757f3f94c9b2ecd236a5ca1ce8e05c6f46e069bc3d0ab17953b9a7cd35530e"
+status = "residue"
+cause = "mir::Ty: Wrapping<u128>"
+
+[[fn]]
+path = "rand::rng::u8::fill_slice"
+kappa = "aa6679355c7402efbb920f6d92928b3f923654fae16920edd3cd0b09f53fde87"
+at = "R=u32"
+embedded = "802e749cdc17d50a1cd93dfc86d80ae7dce37face8dcf08eb17c6b6389aeaec9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Rng, which u32 does not implement in core"
+

@@ -50,6 +50,44 @@ while read -r _lref lsha rref rsha; do
   if [ "$base" = "$zero" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
     base=$(git merge-base origin/main "$lsha")
   fi
+  # The tests of what the push touches: each package whose directory it
+  # changes, and uorust's, whose tests read the workflows, the CI scripts,
+  # the self model and this workspace's own projection (engine.rs, cli.rs),
+  # for a change to any of those.
+  packages=()
+  for dir in $(git diff --name-only "$base" "$lsha" -- crates | cut -d/ -f2 | sort -u); do
+    [ -f "crates/$dir/Cargo.toml" ] || continue
+    packages+=(-p "$(sed -n 's/^name = "\(.*\)"/\1/p' "crates/$dir/Cargo.toml" | head -1)")
+  done
+  if [ -n "$(git diff --name-only "$base" "$lsha" -- .github scripts app model Cargo.toml Cargo.lock)" ]; then
+    packages+=(-p uorust)
+  fi
+  if [ ${#packages[@]} -gt 0 ]; then
+    echo "pre-push: running the tests of ${packages[*]}, which this push touches" >&2
+    # Except the lift register's freshness (engine.rs), which generate.yml
+    # restores on main after every source push from `uorust mir .`, a run
+    # no lane makes locally; bootstrap checks it on main's regenerated head.
+    # A hook runs with git's GIT_DIR set, which the tests' scratch
+    # repositories must not inherit.
+    # uorust's engine.rs dumps this workspace's MIR, and that dump's
+    # `cargo clean -p uorust` removes uorust's other test binaries from the
+    # build dir. So engine.rs runs alone, after every other test target.
+    nogit=(env -u GIT_DIR -u GIT_INDEX_FILE -u GIT_WORK_TREE -u GIT_PREFIX)
+    first=(--lib --bins)
+    for t in crates/uorust/tests/*.rs; do
+      [ "$(basename "$t" .rs)" = engine ] || first+=(--test "$(basename "$t" .rs)")
+    done
+    others=()
+    for p in "${packages[@]}"; do
+      case $p in -p | uorust) ;; *) others+=(-p "$p") ;; esac
+    done
+    { if [ ${#others[@]} -gt 0 ]; then "${nogit[@]}" cargo test --locked -q "${others[@]}" "${cfg[@]}"; fi &&
+      if [[ " ${packages[*]} " == *" uorust "* ]]; then
+        "${nogit[@]}" cargo test --locked -q -p uorust "${cfg[@]}" "${first[@]}" &&
+          "${nogit[@]}" cargo test --locked -q -p uorust "${cfg[@]}" --test engine -- --skip no_lifted_kappa_turns_unlifted_ue_16
+      fi; } \
+      || { echo "pre-push: cargo test ${packages[*]} fails on this push (above)" >&2; exit 1; }
+  fi
   if [ -n "$(git diff --name-only "$base" "$lsha" -- crates/uorust/src/mir)" ]; then
     echo "pre-push: the push touches crates/uorust/src/mir; running the core register's ratchet on CI's MIR" >&2
     scripts/mir/core-gate.sh "${cfg[@]}" \

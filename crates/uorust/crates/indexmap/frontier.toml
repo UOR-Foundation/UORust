@@ -1,0 +1,313 @@
+# The indexmap register (written by `uorust crate indexmap@2.14.2`; do not edit): every body of
+# indexmap's MIR at indexmap 2.14.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 797
+translated = 1
+residue = 796
+
+[module.crate]
+bodies = 32
+translated = 1
+residue = 31
+
+[module.inner]
+bodies = 92
+translated = 0
+residue = 92
+
+[module.map]
+bodies = 431
+translated = 0
+residue = 431
+
+[module.set]
+bodies = 236
+translated = 0
+residue = 236
+
+[module.util]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+embedded = 797
+evaluable = 797
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: map::slice::Slice<u32"
+bodies = 87
+
+[[cause]]
+cause = "mir::Ty: IndexSet<u32"
+bodies = 72
+
+[[cause]]
+cause = "mir::Ty: IndexMap<u32"
+bodies = 59
+
+[[cause]]
+cause = "mir::Ty: set::slice::Slice<u32>"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: Core<u32"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: Bucket<u32"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: inner::entry::OccupiedEntry<'_"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: map::iter::IntoIter<u32"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: map::iter::Iter<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: set::iter::IntoIter<u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: set::iter::Iter<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: map::iter::IterMut<'_"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: map::iter::Keys<'_"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: map::iter::IntoKeys<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: map::iter::IntoValues<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: map::iter::Values<'_"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: IndexedEntry<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: map::iter::ValuesMut<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: map::iter::Drain<'_"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: set::iter::Drain<'_"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: map::entry::Entry<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: set::IndexSet<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: IterMut2<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: map::IndexMap<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: set::iter::SymmetricDifference<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: set::iter::Union<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: inner::Core<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: inner::entry::VacantEntry<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: set::iter::Splice<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RawEntryBuilder<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: map::entry::IndexedEntry<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: set::iter::Difference<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: set::iter::Intersection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: map::raw_entry_v1::RawEntryMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashTable<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RawEntryMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RawOccupiedEntryMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::iter::ExtractIf<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::iter::IterMut2<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::iter::Splice<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: set::IndexSet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: set::iter::ExtractIf<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawVacantEntryMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryReserveError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtractCore<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GetDisjointMutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryReserveErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::TryReserveError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hashbrown::TryReserveError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inner::extract::ExtractCore<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::raw_entry_v1::RawEntryBuilder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::raw_entry_v1::RawEntryBuilderMut<'_"
+bodies = 1

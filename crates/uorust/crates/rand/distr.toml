@@ -1,0 +1,2369 @@
+[[fn]]
+path = "rand::ALWAYS_TRUE"
+kappa = "a0a7d8490e3fa2f96ec66d24dc506afa86292297677038c277fd05df5f108c35"
+embedded = "adc89233ac41576b784ba5dd97eda546fdfb514a79bebe84a65464ce8cabc1b0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "rand::CHAR_SURROGATE_LEN"
+kappa = "ca8c87b59155ebb409c5170039a7346100a06c898b088cd63cea2908a48f3614"
+embedded = "ba7318915fc0fce3768071112c0aebce2a2bed1767d2faadb0f9b38e4732d0e8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item distr::uniform::other::CHAR_SURROGATE_START"
+
+[[fn]]
+path = "rand::FloatAsSIMD::splat"
+kappa = "954eb27baa48856eb8d527ccf8b658a0a3b07390f187dab489fbd4ac6bee334a"
+at = "Self=u32"
+embedded = "97391223a1369959baa14d6d6a48cf4a0b5ad1e17b8ceb9ee6e17e8e3c25b5ac"
+status = "translated"
+digest = "69f83106375bd4153b23a267cb8c17edc80012a7ee457fe7e9d0e6c21466563b"
+
+[[fn]]
+path = "rand::GAP_SIZE"
+kappa = "75f0f7aaefd08e6e8165450a99ef5adc7e3b4012fbcca5f22b059aa11fb5a243"
+embedded = "1e9899402e02a79e822f3747a5be4054d65d0a64648933a19a194cb2666cc64a"
+status = "translated"
+digest = "d61996b0cb2c35ddb20c90de04eb4c41b066ef2e9d39baab03f6c8fcb9ea02fa"
+
+[[fn]]
+path = "rand::GEN_ASCII_STR_CHARSET"
+kappa = "66d3285fb244403fd78192454e9a784a50b1895a6b31ef000b261fe4f7ae6145"
+embedded = "ae8f1bff9ed5ae02e1dc2774804e4332ae053ff0b57ac0066780011677630b3b"
+status = "translated"
+digest = "963995cf8fe25c0d7937145c627c306d29d6513c52970015c9115e7ec8073c0c"
+
+[[fn]]
+path = "rand::IntAsSIMD::splat"
+kappa = "35638f7149135d8b3033e03fac15d872bbb5bef89dda99564fbbd45c269a9210"
+at = "Self=u32"
+embedded = "4dd52abddfa4468cb288cbe6ea57830de8843911143dfdaf37d049a78010146c"
+status = "translated"
+digest = "d1666bb1dd7a4d827eeca6403ad1b300668b2031aa687a609178b443b32a7431"
+
+[[fn]]
+path = "rand::LOWER_MASK"
+kappa = "adacbee405091ba4442dcecd3d5e55bb2802ce2c52e2649babf78f37efe69f29"
+embedded = "e036f7e8b8c1bc26b3bf41a6e9315aa4b74f6019f926d9d397231269f7e9d1f2"
+status = "translated"
+digest = "c7992b3429898a1e2c3a738acb17710bbdd8e586364e5ea550098e8d9c0ce2f8"
+
+[[fn]]
+path = "rand::SCALE"
+kappa = "3207d1e2c0c9a2fc9782e98d492f8b08927881a6306fc87b3dd68e1ca8f8faab"
+embedded = "4e54b57c18ef40e60cd8a6d455d7849570c3b4a0585194d846973087aa06fcde"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::SampleString::sample_string"
+kappa = "89ede049e1a26c495241769e917243b55c49f214f9c8c4db2d37344063911a82"
+at = "R=u32, Self=u32"
+embedded = "71ad798c5c8b0bc8c8f1559ff8ec914aa1678971c5975c051418ffd537456a3b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::new"
+
+[[fn]]
+path = "rand::UniformSampler::sample_single"
+kappa = "29884ea7bf7d848d4b3dd37f60f8b2ffdd3bd0be33d1c64f1535e1b267b7b511"
+at = "B1=u32, B2=u32, R=u32, Self=u32"
+embedded = "be3f740085951fd4de231cdfd2f8e89e5a478a749904e8989c06ab459d9aa55d"
+status = "residue"
+cause = "mir::Ty: <u32 as distr::uniform::UniformSampler>::X"
+
+[[fn]]
+path = "rand::UniformSampler::sample_single_inclusive"
+kappa = "a3a5ce09a8194c4bd5b38cf445962a06cab757933d72f7612bc1115e6fe301cd"
+at = "B1=u32, B2=u32, R=u32, Self=u32"
+embedded = "15dcbaf40ab47e2f0a7b85e4588d2d0971aaf76227532396559f4bc0a7167ead"
+status = "residue"
+cause = "mir::Ty: <u32 as distr::uniform::UniformSampler>::X"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:46:10: 46:15>::clone"
+kappa = "429f398c24e80d888165e465de381e33464f42fe16a2b5f0ddca2dcef13178c9"
+embedded = "cbcde28b4c7e9016a7c0dffb3d9dc20aa136369992a5e2201e5a6bf8fd7dce32"
+status = "residue"
+cause = "mir::Ty: distr::bernoulli::Bernoulli"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:46:23: 46:28>::fmt"
+kappa = "1b254ee82b50e4dad10b025ea545df648fac02e92bbf577a20af18b7e14fbca5"
+embedded = "57da9a4f84114001bb9c7a99690d10979be47f144b0e79467c2e8d730470691c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:46:30: 46:39>::eq"
+kappa = "0e301c7dad4d96996d7445558f892cbfab99f65f8d87402557ecfced1049188d"
+embedded = "1a85d18517b54466508f64f2dd816b7eeef051ff25cc31545ef8a8a3de7dc1a4"
+status = "residue"
+cause = "mir::Ty: Bernoulli"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:79:10: 79:15>::clone"
+kappa = "612f0342cf739c14deb11ad82777fbe6569da6af53718a8d6e61b4655c5f0013"
+embedded = "81cada1e989fc156567e3c52161c88b03e1d24bf5b7b290cc25535793896bb00"
+status = "residue"
+cause = "mir::Ty: distr::bernoulli::BernoulliError"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:79:23: 79:28>::fmt"
+kappa = "e7612230ef7ae521c8a9c47e852e676ef8fc01556c7b3c5d6ed31d63ece6dd09"
+embedded = "1c5388e618991aebff1244a61a26da41e59dbbffdcb26daa0860eed1e6f706db"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:79:30: 79:39>::eq"
+kappa = "1b8fec7ab4cda291df30fa81916737acea8cd66ed5c29dfd443115e4fa64bde8"
+embedded = "3a7d3023f5bdea4bde8a5b9660e476a3bb842cee94f3e30b07c80fcfe05a81d7"
+status = "residue"
+cause = "mir::Ty: BernoulliError"
+
+[[fn]]
+path = "rand::bernoulli::<impl at src/distr/bernoulli.rs:79:41: 79:43>::assert_fields_are_eq"
+kappa = "9e0a8e158003512bbd4f0f9c70ff8b27b6e145381b1591d969fd25cf8b0ecfc0"
+embedded = "a75144b88649bfd2ed665778d010bae4eb89dc102c2f13b42087c2b852b2078f"
+status = "residue"
+cause = "mir::Ty: BernoulliError"
+
+[[fn]]
+path = "rand::bernoulli::Bernoulli::from_ratio"
+kappa = "9b8c5df29a8b6bbde5227a0eeeeef88b6ef7f67151ff6b51877b0f1661c8131c"
+embedded = "077fa88828b835308dad610697e011c48ecf3f0574a268eb1d9f207f86c85192"
+status = "residue"
+cause = "mir::Ty: distr::bernoulli::Bernoulli"
+
+[[fn]]
+path = "rand::bernoulli::Bernoulli::new"
+kappa = "ae84cc29e0b1bcf19364886a587dc16cf8916f1804618642580610d208e15b47"
+embedded = "93821c18f54f7f5aeedb2ec81a6623d67a474f496d0fdaf96ccba02ade7147ad"
+status = "residue"
+cause = "mir::Ty: distr::bernoulli::Bernoulli"
+
+[[fn]]
+path = "rand::bernoulli::Bernoulli::p"
+kappa = "96924bf5b8c074ab405e10053cb095e7e6f7942f0227a315536dfb63f9fe2d6a"
+embedded = "847a4a99eabd0683df42f70cc4dfed4e4656af00be2caf00f1a2e931663d60bd"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::bernoulli::Bernoulli::sample"
+kappa = "abfb69ddfdd137aa3779380ad3594bbc6aaeb00315bd2e8cd822eb6d6c95aed1"
+at = "R=u32"
+embedded = "a57b0fe90c9fcbc043c2931051fa3afd7955f3bd45f8a92a0e9ed7e2df9982dd"
+status = "residue"
+cause = "mir::Ty: Bernoulli"
+
+[[fn]]
+path = "rand::bernoulli::BernoulliError::fmt"
+kappa = "a338146731aadaacba97ae9ab3907facd63448f33f7a6ad5f4f42bf5e566fe0e"
+embedded = "c7c06a36d0991c1df1989564bc438bd6345f2c71baab4c2ca51ea03d8d65a2e9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::char_to_comp_u32"
+kappa = "8b7eedd494674e5440828dcca9e7caa42de93105b5fd5db49815cfb2ed79dd7a"
+embedded = "3e6b24aff7db0f180c1209da821b026905a757cef4d607587adb928f1564f500"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item distr::uniform::other::CHAR_SURROGATE_START"
+
+[[fn]]
+path = "rand::distr::<impl at src/distr/mod.rs:219:10: 219:15>::clone"
+kappa = "1a6fa257794ebbf2f83651b1d8fa8f6fcc53de3589ad90a454608f243ced8374"
+embedded = "b09a3c33fac9a47a6f60adb7f15d8ac4e4c77308976590ef8898147751456a13"
+status = "residue"
+cause = "mir::Ty: distr::StandardUniform"
+
+[[fn]]
+path = "rand::distr::<impl at src/distr/mod.rs:219:23: 219:28>::fmt"
+kappa = "f18788535361d2a94de51767821711d4151143de39eefc2fe5b4293391cc17d8"
+embedded = "5f480a0471ee9fa2b4e0aa8214b1aae9690e229776bd51a1d1f8944b5e5b408a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::<impl at src/distr/mod.rs:219:30: 219:37>::default"
+kappa = "a3d9837f422cb9c4da75a33b46bd6944af9388adb6c1b51baf7ae95123190dc7"
+embedded = "9cf08a59ea503df20af0d3357ab5010d65d84872ab94d036aed2e7f44f6202d8"
+status = "residue"
+cause = "mir::Ty: distr::StandardUniform"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:45:10: 45:15>::clone"
+kappa = "9f7cb56a8d5b7aaf993652b5e57e88d1ba27947ba2a9b66056a5717dd87419b9"
+embedded = "fa17af39182938c4d75608fa820de11f75d5f74d606b05b77872456971e5c6cf"
+status = "residue"
+cause = "mir::Ty: distr::float::OpenClosed01"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:45:23: 45:28>::fmt"
+kappa = "24842de195de0f204fd63fba2d36dd6f4293005082d4b195d39c68786086cee3"
+embedded = "8dc0c2dbb661b4403ab00addb0069d4c4f9ec33cf50f96f3bbd00974e104ccb9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:45:30: 45:37>::default"
+kappa = "90896fd72f994414642b7dd8d2eb4a7a9b873e01cd3f2ea400148c28e2d67249"
+embedded = "4503e78b904a15612de2e964367967611e34890e3dd4eecde2d9a557fb860c23"
+status = "residue"
+cause = "mir::Ty: distr::float::OpenClosed01"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:72:10: 72:15>::clone"
+kappa = "2af47ba30f0cef24e8bd8c3e7055e34504898c3007f7d16f209156228b8a36f3"
+embedded = "3b4e48fd88ebabbb8317cc045f100c5e6178d13b2b716911cad26180b4727f24"
+status = "residue"
+cause = "mir::Ty: distr::float::Open01"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:72:23: 72:28>::fmt"
+kappa = "a080a599275c5d6715aba435a7100a6d94ac92cb771de6444a111f8aa9b13092"
+embedded = "080979914ffb662ebe647f53480d7b7798ce7ce6fdcd1957cd82f54e77fda6e3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:72:30: 72:37>::default"
+kappa = "6bb7b99e59ea847616bd86862bf72b802418d3054b9eec35db2de1410855076c"
+embedded = "08aae0339cbf4a5e7480966b518f8b5c3fcc215bfd7c20b98d74f3a55aa4e08a"
+status = "residue"
+cause = "mir::Ty: distr::float::Open01"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:96:9: 96:32>::into_float_with_exponent"
+kappa = "4d55411d1188302807a1f4308f89509a313c2f37e9939eab5e457a0f42f4bf8e"
+embedded = "f412464f64c2813c413184ca27ad4e706eb1550682d623669baed07f9b317ab1"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::float::<impl at src/distr/float.rs:96:9: 96:32>::into_float_with_exponent#2"
+kappa = "2825ef88a8a40f7182009566446daeb4424a354596556c1f5770e5ee69983743"
+embedded = "3bbe3609649b8952eb1084392bfd52b3e8e34192b68d3e519b1c2b5b4503cd38"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::float::Open01::sample"
+kappa = "0c24c3f08f5ecd664f71583c6202546314e2e6ab6a1577c0552f19d02da6aa23"
+at = "R=u32"
+embedded = "669f17951cdb1ac89c5ed7152f5e2a33eb001cb5c73e80c574444e9919f2a854"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::float::Open01::sample#2"
+kappa = "2a0fc9ee85dd305265ceb375f894a4ca47da2cf24804f1a67726fd2ef9f1baab"
+at = "R=u32"
+embedded = "19f22bb6c5707908ea85d919c5fecf8a643cd5a0ae599dd9be5cb84774d92c6f"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::float::OpenClosed01::sample"
+kappa = "1d02d68d7f068696d400c9a4d97dced0c18382b643164355b1ccf3398cea8e1d"
+at = "R=u32"
+embedded = "03da74e90d3ee8798434b4aab4810399964f0e70b1473309992fcea7fcfb2432"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::float::OpenClosed01::sample#2"
+kappa = "339f0836d9079d97284ba5398323873dfa9a7383bb16e8477c49f0aa7d219583"
+at = "R=u32"
+embedded = "28f248130e92318d3f0ce50612aa2fff48770358ad91499a7efa955508db7679"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::float::StandardUniform::sample"
+kappa = "e6773ff6b00a06a74f49f3a5082cecbced49da104bdc075508fccb5af36eabba"
+at = "R=u32"
+embedded = "6a1591d9ed473894bbfbb1fd69caa12d824b0c4cca48c2aad15e14337a73b799"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::float::StandardUniform::sample#2"
+kappa = "70d9c2962d8e0b8e359be031b3e36fe38f5e2ccceaa2cbbaddc39b13a310bfb9"
+at = "R=u32"
+embedded = "fed72c4f2222706a71ede21b408357af9deb9e1ca400c5870287455caf1d659f"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:69:10: 69:15>::fmt"
+kappa = "0ef470c4ecb58765c193858dd43bcb44b35b4bcc41bce641431ceeb87f5c1e7e"
+embedded = "27a315adaf846b14b165f48a4a0a10164e650c884df3da2c9cf39476752f876e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:69:17: 69:22>::clone"
+kappa = "b6724c799afde89887d5f8734e59dc6b1fd2ca1cc724fadfc8f85fe4d78d0319"
+embedded = "acc15805b8163b50d75559812ea589da31bd53dad3ca95984cabfe5baf378d4b"
+status = "residue"
+cause = "mir::Ty: distr::other::Alphanumeric"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:69:30: 69:37>::default"
+kappa = "bae0110e4b99f9f27c3816ca56a2ce21cbb2e3b7f83e38daef73227c373dce91"
+embedded = "4af56b65ff82640e19bf95c21c30a745c22f53de6ffe7c3b7a25c29a57800c0e"
+status = "residue"
+cause = "mir::Ty: distr::other::Alphanumeric"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:98:10: 98:15>::fmt"
+kappa = "6fa25d2c82fda3543777532e852119f6886e14e8f57ccff55a01b77bef2e7699"
+embedded = "6eff110626dade0780ba573eed596727225d0c738f19ff9179e80e6a0f0b9d8f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:98:17: 98:22>::clone"
+kappa = "0403f5e8cbc97c943205d2aa3feafec4c3b6f9ac0bffc220511cb1da241b03fa"
+embedded = "a39d058e2c2b714f7596ed5aeb6e9f8e0e77c061f988d25103be257afbc85177"
+status = "residue"
+cause = "mir::Ty: distr::other::Alphabetic"
+
+[[fn]]
+path = "rand::distr::other::<impl at src/distr/other.rs:98:30: 98:37>::default"
+kappa = "eb27fd073eee20cae46ba7b25211d72274e5d298e73759577c6868af648b4a06"
+embedded = "0711bc63211cffc843e1b9378647c7342ee2f2bf2afd7c06c29505a42513b60b"
+status = "residue"
+cause = "mir::Ty: distr::other::Alphabetic"
+
+[[fn]]
+path = "rand::distr::other::Alphabetic::append_string"
+kappa = "f8f9da812e3c9b0a8c3700f8d0e670d9e07fc825b80026783c67dc01f206db04"
+at = "R=u32"
+embedded = "ba2ceb43c004111b93a7a12aa7e81bacbbd966499ee3a9b358a79dc6921fe6d3"
+status = "residue"
+cause = "mir::Ty: Alphabetic"
+
+[[fn]]
+path = "rand::distr::other::Alphabetic::sample"
+kappa = "d56a487043e5f02e09ca223f45ffd961ed568a0a329985ef8dcee86abeecf784"
+at = "R=u32"
+embedded = "a6518fab05cb6eae3558b932866538cd6204689b2874f3a71f13f3fc9430b870"
+status = "residue"
+cause = "mir::Ty: Alphabetic"
+
+[[fn]]
+path = "rand::distr::other::Alphabetic::sample::RANGE"
+kappa = "bb3ffd710321530ce057f29a8602b8f643b78588afa97e15e68f006f379a8234"
+embedded = "73aa0462e2c406b4442cbe22cc820280391407707597a5d1ca13ab3a8d58aa28"
+status = "translated"
+digest = "bf1859872901f7a231e53177b030790ec678002836f6919e093017985d510651"
+
+[[fn]]
+path = "rand::distr::other::Alphanumeric::append_string"
+kappa = "deb204c99e70f97f70701434010a80342ff71d5e6310e9beee93e0e8d8feba3d"
+at = "R=u32"
+embedded = "13703c3cfec434df764821dd1fd4743a7677fd8a4d1ceff6436a5caf41c02bc3"
+status = "residue"
+cause = "mir::Ty: Alphanumeric"
+
+[[fn]]
+path = "rand::distr::other::Alphanumeric::sample"
+kappa = "b698cc64b4831a07acc3f1ef6d2436b50f3a70094a8bd29b41353851c6c1d528"
+at = "R=u32"
+embedded = "e161532998c74de615350dc6293d2233f9e1ef52f4ad27e1c02fc4cc31bea857"
+status = "residue"
+cause = "mir::Ty: Alphanumeric"
+
+[[fn]]
+path = "rand::distr::other::Alphanumeric::sample::RANGE"
+kappa = "9af9f30455bf446bca7a4e6b37bf6ec6f3a230c0c3af64cff3faffed2d40f768"
+embedded = "4ecef5d029c36abebf3740dd6be4e7a34175b59127e8b9915564cded68b88f99"
+status = "translated"
+digest = "fc681237b17f068da21d48abdff0c4ee19ee2316c8df93c75dd00bf98ca40056"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::append_string"
+kappa = "e6c80a975d412c88f3f3074d73d0187913bb0da1738618e3839b1adefbcbf3af"
+at = "R=u32"
+embedded = "4478abb2f9d6b0487dff9e60de687b77f9ad0eed9dd42e5169fa8d5165443843"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample"
+kappa = "a0ca514e9270d58549ff4d4689b8b3d677ef6c0d0242c40d31f88cc5fb1135a3"
+at = "R=u32"
+embedded = "9805ef81b24e5c8def8faaa2053976d81c789dffe6004193305d8ce1e6d76bb2"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#10"
+kappa = "6288cb271ce6f3e1f8d6e57895ddc33cd84e82bb4b891b1a5218322960d8dd5b"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, H=u32, R=u32"
+embedded = "3275cdd1cd01fcd5cef8fa80d58e56e1a81b084c01ff106be4c116cbb1071b37"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#11"
+kappa = "9434333f1428a01c175b32eaaa78c90638ef06b6235726c592fd941740aa6a73"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, H=u32, I=u32, R=u32"
+embedded = "0fa20e687b79a508a63ccc1179c9f6cb33a2d375d79b355c0772f4fe39d09f68"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#12"
+kappa = "c7d9835aa6a7b2a559eac6756559d7e70f1b5afc801ff7531e8b8bb215305b2b"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, H=u32, I=u32, J=u32, R=u32"
+embedded = "ac9211a36801ae3703123f221c00d6a168fcdb70e2fd02d8acfe84888ee43326"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#13"
+kappa = "fc2b82038541e17aa8b87ca8bb38aa47448ed36638a0f48575ecad6074aee972"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, H=u32, I=u32, J=u32, K=u32, R=u32"
+embedded = "c2c1e8dc439dc8ec05bd8dfc13ad61f8a17a2c622999243883210bd9777e87dd"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#14"
+kappa = "875895c375364edd6f64bb83246dca8d5e9a899a46a62f7b7f062fd26a62f81b"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, H=u32, I=u32, J=u32, K=u32, L=u32, R=u32"
+embedded = "b5730c4e3f22fd528d73c1067905ae9f870894a812a07f9e6771bdf0a9432f91"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#15"
+kappa = "c1d249bdabefe7086b01a3e8065f5ce6253d82924074f566e2e769c325961100"
+at = "R=u32"
+embedded = "c9a480002e5aa01f73bad439e4fe37e5265fe0b3f2092c998f20bfdb2151313a"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#16"
+kappa = "ec8f2df4fa1493d34587caa656f108889f5a50944c50e49146a774242c1315f7"
+at = "N=#usize_N, R=u32, T=u32"
+embedded = "4341894fde5d1aabe2c577aed2ff89e53731262610de7a014cf926559f5d35f0"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#17"
+kappa = "17e5a143b049fd8f29b08191b6deda850716353847788af4c7b8b1079a8b1722"
+at = "R=u32, T=u32"
+embedded = "c433819b209aee0069d204b91e2036c04744d88d7fa0ea024d4c2ecc0970b5aa"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u32>"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#2"
+kappa = "c8c84d00b06acd766028effe616001ed2f5831ccba0ad6056eea5448b12e3316"
+at = "R=u32"
+embedded = "bb66fef2f8692dd817f0a426b7f77f3390d062cbacd3d9de3383fbdd3185721b"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#3"
+kappa = "c2277c581272268921b4333f105a0105e01188ea9f9b41de083fd97c11638507"
+at = "A=u32, R=u32"
+embedded = "6cd8dcd49601e866b1b526af2d7f7f0c99161647e9d1ff8f825e01b3ae08c39c"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#4"
+kappa = "a153c0b3938d7bdd1e3dac84e19a05044e1ae2199093df024a91720daadb1fe5"
+at = "A=u32, B=u32, R=u32"
+embedded = "255480b76c2385b6701a08f6f217a4d1c22953a4753b5d15a41b65f49047341f"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#5"
+kappa = "d1e9ed6c60cb5ddd4d44d7caca32bdc6851aa875a3580d1b4aa3a3362782eefc"
+at = "A=u32, B=u32, C=u32, R=u32"
+embedded = "5e809a1c9111ab6579837c7ea1a3391d7b92c7371c3eb251a4bd539a914ad8a5"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#6"
+kappa = "3ec7b00da1930284f6e6026146271ec667bedfc2866cfea14c5cf084677652a4"
+at = "A=u32, B=u32, C=u32, D=u32, R=u32"
+embedded = "546d2f909f086bbd9a97c134f76b10688567166d348380cab42c315feccd0495"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#7"
+kappa = "515dc99666d4c3ee1a1e7d94e4ac61796ce5c1dce341913e57608ebf544f1306"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, R=u32"
+embedded = "20cd9752d34ff3e80d96bedab223ad2044f32a7e649b221701853ecafa608d81"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#8"
+kappa = "9f93b079ead9906e6122dad41ec69238137925e91986d3d9f696e3d29923b6c0"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, R=u32"
+embedded = "b40df769b89511681157de9915b38def7145f55eb920a4322023b9810c3c5eef"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::other::StandardUniform::sample#9"
+kappa = "cda14ad02c6da31a860833b1f175fddb42f981ee5b35ea2f8996768e3e623ac5"
+at = "A=u32, B=u32, C=u32, D=u32, E=u32, F=u32, G=u32, R=u32"
+embedded = "6157bf5276265cdc27960bca837e185cbda14fa7ef527e5a8394683fc024fc9d"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::distr::slice::<impl at src/distr/slice.rs:59:10: 59:15>::fmt"
+kappa = "bed7d8c373ab19b93f40d91ee6990f5339fcc4db32c4dd3e5b1495a31b6782b9"
+at = "T=u32"
+embedded = "97e8194fb129232e3220b8812ea02ce358e6861f767a0b18542f729e6b31f24b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::slice::<impl at src/distr/slice.rs:59:17: 59:22>::clone"
+kappa = "3ba7385a49b71b2570c72cce11876795fc552c529ea7601331c394421ce311ce"
+at = "T=u32"
+embedded = "772d0babfa8cafe7337e501012eda4492d821ddfe1ab1e54d98e60f62631c6e7"
+status = "residue"
+cause = "mir::Ty: distr::slice::Choose<'_, u32>"
+
+[[fn]]
+path = "rand::distr::slice::<impl at src/distr/slice.rs:98:10: 98:15>::fmt"
+kappa = "3d107fd447048cdfea1b06b94f63d9e9f0c794a88fab8b11683b3a4cff2dfc8f"
+embedded = "c2f370b14888e27babeee6e0c93a1f39d0a268a43f6d1cda876a5f0b0a75d62f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::slice::<impl at src/distr/slice.rs:98:17: 98:22>::clone"
+kappa = "3a5e16c61d225ff622bf621ed279f26923981f06c7f038dd0c6b7293c224ba77"
+embedded = "f1e41a3f00cf1153788effa18db8207a73d9c74ca562441fbccdc80d62f402c8"
+status = "residue"
+cause = "mir::Ty: distr::slice::Empty"
+
+[[fn]]
+path = "rand::distr::slice::Choose::append_string"
+kappa = "d604db2d163feaee07d41f558d5ddc6dd55af32119e7d3009c5ae8fd285d7603"
+at = "R=u32"
+embedded = "7d92dbb3880172403475a080b4034542bca8a8c2776869ea64d070ff01f6bd7e"
+status = "residue"
+cause = "mir::Ty: Choose<'_, char>"
+
+[[fn]]
+path = "rand::distr::slice::Choose::new"
+kappa = "fc8ebe069138091e0ea8c80ee87936faccf59ac26f9dbbb44e2b1e0fe780669c"
+at = "T=u32"
+embedded = "b5782718bdd9e3d48bad25a91aec126ac0a8a5734ca2df1dd85b352e7ad37246"
+status = "residue"
+cause = "mir::Ty: distr::slice::Choose<'_, u32>"
+
+[[fn]]
+path = "rand::distr::slice::Choose::num_choices"
+kappa = "b359b6885d9cf4f959baebfad145801fcc085045432ea2262d0b2aba1c532f44"
+embedded = "a40ffe6338749094d9a6acb619b1ff8135c63e70c5d30f7a474110335e505ee8"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "rand::distr::slice::Choose::sample"
+kappa = "11943fc60de8b8e82e7dbdbd2bfc301c9c9f3a9d86d1927da8cbd6dc76ac1e9f"
+at = "R=u32, T=u32"
+embedded = "be183a6c9073a40d1d915462b8045f47900f36fa22615da29426784f8859a560"
+status = "residue"
+cause = "mir::Ty: Choose<'_, u32>"
+
+[[fn]]
+path = "rand::distr::slice::Empty::fmt"
+kappa = "fbe2f0183062b8bd412c85bfda74053e202d17cce32c792f7e3b9e6327f2223e"
+embedded = "da8838e017f7a87df5c17d08f922ebf4bda6bdf58cd0ebe8b22214433cace303"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:24:9: 24:38>::wmul"
+kappa = "e69d21595e254eec66a1cbf8f0f8b556d63ad680d86113686d279b71cc636280"
+embedded = "e7ee7b0a2beb00955d14817bc477c376ff5edcf87be7e0e044cf5e31f7846000"
+status = "translated"
+digest = "b31c312d38899d8ce387310a3a0b3cb8c16b44d976b6570b85ff74e697a19a87"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:24:9: 24:38>::wmul#2"
+kappa = "e75410b560ebcb273e13207e50d19917a2a7e9d4c669bb597d1386624c44dd0b"
+embedded = "e9273cab779954891b52b2368848f4ffb372ac9aebf6d47330fb6447ced792d5"
+status = "translated"
+digest = "6d627c8b73928d5f2e4b689c0d7ed7d9bfffc5a91a47a49f7dac4dc8eb709553"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:24:9: 24:38>::wmul#3"
+kappa = "f96893057b6196f961eb425d64410e10a772803f01c70d0ccad7f68273a63df0"
+embedded = "d382e33108dc0ec1b27352d3eb253a7ff040df6b2d43ed33b512219b3540af99"
+status = "translated"
+digest = "895f777689c14282e0841afe8a89d3c3d41ebaf3b59c9de9e2c7cc2d5d000ba7"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:24:9: 24:38>::wmul#4"
+kappa = "b3658f4532d77003efe2890be87a800d0205693dd76e18297463de6512654615"
+embedded = "35f0a6e7f00c3df63a748fefaf8945393799541201e165c7c6caf5c9e28eafea"
+status = "translated"
+digest = "23d41c2c9e3c5214f190ac819a8dcb6f60a25e53fbb4ced5612f0c5ef613eeb2"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_finite"
+kappa = "a650dd1cd75d8fedf3102e4fb94647766c13cdd691d5d60f931dd309f5ea6443"
+embedded = "c14e35bd1d465e09be4e821e344f790ee48229ed41e467c8196d0a49b4fb7e83"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_finite#2"
+kappa = "3ea4388c8b74376784cf758ef54e12d4cce198f01e3115a85a4ee3af61a0eb56"
+embedded = "c7672b215c03f1bc7a574c47311611c9aba2ce215511ec1ca49e204f3304b298"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_le"
+kappa = "33b5a914f4bc0fd2dc7cd5c8c54cf18db2d4d3a260b78e2d44a588781b2f34c3"
+embedded = "71f5beec267ef95df61db41a6901c022240d7dcdf069d84c7c816b9d5c060fe4"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_le#2"
+kappa = "3916e366c74a80f4ae35e08b7bf0ee277bbce5607728586caf5cb1c7ff9e0f97"
+embedded = "d44be7e69cc3562330d1a8c6793e7a147985dbad332a68e34c7e65a09ec12933"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_lt"
+kappa = "855d98bfa99a9d909e1ae7ed1820242106f268f4cd57ed1824a694d7182ebf13"
+embedded = "e7b01404a27a3250fdeda39321cccca6ca58303500ff34e07238e872adb1a8ee"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::all_lt#2"
+kappa = "536b81ba3645b48b92227af3132d828a76bace854bda55166b299a775efa9555"
+embedded = "ce307fb18c668617a3619bd78a9bbea68a625fe1b520894f0b2cc28c87a3033e"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::cast_from_int"
+kappa = "cb4debb390ee11bd64cd42182e07ddb1464daafb99bbc4894d9397d7e62380e6"
+embedded = "517a38c66eb9919a8b05f37e468ed7fa85b7a7b87023a7bb25564d7abae601ea"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::cast_from_int#2"
+kappa = "ec98b645571f3ca73e0608a21a198239a18f4ddb2ecc5c48d680ac226eb9c039"
+embedded = "7275d105c460817db560542628d058f27133bcff165f28cc9234c40192c07182"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::decrease_masked"
+kappa = "0c3ae7c603cf48480eef4520ff47b86aa60c016187ecd0b98d0a8bc192378338"
+embedded = "ebaee87597fc8cbafc3ea1e3304c93f2a412babeffead3c26faf673dc0fe1bb9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::decrease_masked#2"
+kappa = "5165dcce920940dd94f2751a5409d5a38563d35a4559708fa896eeb2259720ba"
+embedded = "61aa8af352584da3cf85c929d659a655c38ced1896b24de4766aa57a87e5cbf5"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::le_mask"
+kappa = "84a5db02b31af1f7bcb1ea69b33312228a2acf438ed703db7766949dbe4facc3"
+embedded = "cf49bc82a3cb4220317a7329a9078d5b5a6dd6dd8003cacbee84b3af8a33ae88"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:278:9: 278:36>::le_mask#2"
+kappa = "bde4307f4dbe416fc9a83371d07fd31be3f7e2b5b004be58b035d00be0552935"
+embedded = "ca8ed5a5c68dfc0411184890f6a2a9592e4719ccc25ccb0ac4a90582ad8ec5c7"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::distr::utils::<impl at src/distr/utils.rs:71:9: 71:38>::wmul"
+kappa = "b541b93ab2c28d5571afc3444bf1e30f6babfdcf0b85673ca577441c773f986f"
+embedded = "aec6042b01953cac2e7c75a67250c9d76566178d9ff0a0a5cb1068e5f2601ebe"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u128 as distr::utils::WideningMultiply>::wmul::LOWER_MASK"
+
+[[fn]]
+path = "rand::distr::utils::bool::all"
+kappa = "66e70031f281f21c04562ca944c8a6662d4b2c8e5a0827009a0e218e3381053c"
+embedded = "16152b33c665e4124e824173b12a5efcd5a02aa2320c8050c1ffe9153d479951"
+status = "translated"
+digest = "ac74964a9a8a3f88f1432929d6057033980a690cbb06a5a26613ff2d23fefdbf"
+
+[[fn]]
+path = "rand::distr::utils::usize::wmul"
+kappa = "8520e1ade7fb437fe59b6a8c5bb53cea7f3f086b30020c136bb9deceaadcbcef"
+embedded = "d991641dacc24ddd907340f8f0f2894f84a2c8b258d41c56e1396021fc2c0aad"
+status = "translated"
+digest = "19818fd8841d1419dd1da20a193d8631d42a40f4f75e45c916e597c6297ecbf5"
+
+[[fn]]
+path = "rand::distribution::<impl at src/distr/distribution.rs:113:1: 113:60>::sample"
+kappa = "466ae75c8e897ad6bb3525f8f15f1c40802505ee4e075ce86de1695f40aacee0"
+at = "D=u32, R=u32, T=u32"
+embedded = "0049ac2d0a786be5fcfa32d5d2a3ecb1064d9e52b0f29a5c32e64ad41d666214"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Distribution, which u32 does not implement in core"
+
+[[fn]]
+path = "rand::distribution::<impl at src/distr/distribution.rs:127:10: 127:15>::fmt"
+kappa = "5d6fcb9d76772b9bd410b3022260c2fcc604aaf2be0d0de95c1072bbd6c1e590"
+at = "D=u32, R=u32, T=u32"
+embedded = "4e01398dc3339f17faa1aeee4cb92caa8bf4f2a5cc0f31ca8239a20454f8f8ce"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distribution::<impl at src/distr/distribution.rs:165:10: 165:15>::fmt"
+kappa = "dc9eb2c7a2fb2c81df1fb716e462c212ee9da4f58e03c77d894f786c822670f9"
+at = "D=u32, F=u32, S=u32, T=u32"
+embedded = "846f695530d50f1ea4a12d0d0cf039eab9dea3e9fc2d18cba57e53da74f9fabf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::distribution::Distribution::map"
+kappa = "f4655ff129d3f7d8b09934c861751eec122b92b2e7ef44c509d5f0589f276e2e"
+at = "F=u32, S=u32, Self=u32, T=u32"
+embedded = "e8f26a3281a485f94b86863eed01e45bd8054124b2b26bac42e620e1b731bf09"
+status = "residue"
+cause = "mir::Ty: distr::distribution::Map<u32, u32, u32, u32>"
+
+[[fn]]
+path = "rand::distribution::Distribution::sample_iter"
+kappa = "f8b46722df20be66be64058cb8616a44e8910c18b82f0142ed99ad4094f640f3"
+at = "R=u32, Self=u32, T=u32"
+embedded = "331ff0747378bbbb56595da08455cab4e98c05a4e1c000589d48d8e63b76d8b9"
+status = "residue"
+cause = "mir::Ty: distr::distribution::Iter<u32, u32, u32>"
+
+[[fn]]
+path = "rand::distribution::Iter::next"
+kappa = "ed2cf933381a62894775f99abaad83d0022e9278f093b4a3ce78f2c379a5e95c"
+at = "D=u32, R=u32, T=u32"
+embedded = "8f1f965e226770d629addb246d36c2a87f7c26e9032fa56bb48c042aafdf3da5"
+status = "residue"
+cause = "mir::Ty: distribution::Iter<u32, u32, u32>"
+
+[[fn]]
+path = "rand::distribution::Iter::size_hint"
+kappa = "d66471b74a800c6edcacaa507e24e7f8ea4702a9318d8ad5e1064c5dca5a7f64"
+embedded = "daacb6299b22422dd0416e15f3ca12a04ca85c9504199c2b27b8e65a0651304d"
+status = "residue"
+cause = "mir::Ty: D"
+
+[[fn]]
+path = "rand::distribution::Map::sample"
+kappa = "02a115f11c95fb3edadec12ba00a6cfd78c7f1d2365b5c382f402c742663889e"
+at = "D=u32, F=u32, R=u32, S=u32, T=u32"
+embedded = "083831eadd613612031c9da00b4783440e2690b1b648cc3e9d149193c9d6a809"
+status = "residue"
+cause = "mir::Ty: distribution::Map<u32, u32, u32, u32>"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:417:10: 417:15>::clone"
+kappa = "64697d5d6a55b1f94b38b4bb952c0be124a46f6c7f40d5cfb2abb9af39a68ab9"
+embedded = "2a8463500e9978b329007760b4b7226585479d8b24b0bf67b020e36c23777df9"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformUsize"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:417:23: 417:28>::fmt"
+kappa = "6b5812a18ef0b6cb66be0734bc2518f53f950842ed2d9d0d45f8b996ba0667fd"
+embedded = "a27dc158749a869fc1db74a66997d2c82d2ff2b18beb34954dd5829a94661d66"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:417:30: 417:39>::eq"
+kappa = "0ebef43aeb70eba1e626cedcdff347ec994a9511feff3e90c76f9381d4221466"
+embedded = "7f130da5725a3ffe7102a41e5adf17e951e97079804e0edeac79c6757a7f1112"
+status = "residue"
+cause = "mir::Ty: UniformUsize"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:417:41: 417:43>::assert_fields_are_eq"
+kappa = "b2d329f070c55d75ac2f45af96731051bb67202a27331967653779d14e58fdb2"
+embedded = "b2d6486189c1b51c2479016aabdede26ce40213969c32eca339a77fb086145f7"
+status = "residue"
+cause = "mir::Ty: UniformUsize"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:67:10: 67:15>::clone"
+kappa = "d4cb09d18f35924961872a3f529ac0c1ced8c6a324b6e16c473b3ff4818e47ac"
+at = "X=u32"
+embedded = "4cf6607f9ea616b5428ca47ea823d563184996d5bfee1fd5cb5ee29b9cd53816"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:67:23: 67:28>::fmt"
+kappa = "2915fe7a46831be0384ccbb865e3a2f9832643545f61f1a853a04253c5ab01e5"
+at = "X=u32"
+embedded = "9db4165bbf042114ae81df15ce02151fc3ba0d720ec43f74d68bb0985dfe677d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:67:30: 67:39>::eq"
+kappa = "737cd602374ef5866d4ad3cd99f35ef151de78027ca74f3f49f6806b48fe2c1b"
+at = "X=u32"
+embedded = "25ca64858b34499b5abecd4bdbde4de459a3c8e2e33e4738bff28e45ec9cd125"
+status = "residue"
+cause = "mir::Ty: UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::<impl at src/distr/uniform_int.rs:67:41: 67:43>::assert_fields_are_eq"
+kappa = "eae204495a29912b81edf7c39e02c761913ef58f308dbc3f8c07d3b3be4bc0cf"
+embedded = "b6184d0835940bdf227f4071828221c50ae135935eb2d9dece641c488debc297"
+status = "residue"
+cause = "mir::Ty: X"
+
+[[fn]]
+path = "rand::int::UniformInt::max"
+kappa = "8b7113a785e342dff24eef88efcc29f43a20b65be585ac3965847cca9e16ff90"
+embedded = "97e9c205491b25b6fa5978e7b55dcdbe31cfedfcd995522cd1b4264d35d230a5"
+status = "residue"
+cause = "mir::Ty: UniformInt<i16>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#10"
+kappa = "a3ea5ae49839e0e2b58665416209b3aa2686caffbc1a212b59b7c47a8fddaba9"
+embedded = "9e18f7aa15cbbe8b67f850cbe5656004700b15994eae68856e4f3e8ca6c0d4f8"
+status = "residue"
+cause = "mir::Ty: UniformInt<i8>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#2"
+kappa = "1d8453d792f0489d862a99b1780cb2e61122c68ea61cc32838d702912fd8e24e"
+embedded = "ad68e9cdf6be6c728d855f2da11e3d47494be31f600f654e5f813e8ec0c9321a"
+status = "residue"
+cause = "mir::Ty: UniformInt<i32>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#3"
+kappa = "a9dc7ba2b08de2899fcc7eee93b59bed033b36b6bdcf089835407ad3d2040da3"
+embedded = "59b99f063ba622245d046929f017eb2694b664554371d3e045658a111749facd"
+status = "residue"
+cause = "mir::Ty: UniformInt<i64>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#4"
+kappa = "c54918e5e1a5f9b1b57b75747de2e3ee8c2f476028b6dd0f30700da36944724e"
+embedded = "9cd2f0a36de59105207b0d26ce8fa8a75cb44efd8cd97beeed470908f83e7f2f"
+status = "residue"
+cause = "mir::Ty: UniformInt<i128>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#5"
+kappa = "9ed67a691f435d1f2c00f44926368891143ccf2d83b71021686b231c7f46059f"
+embedded = "f58476f3482b484a25bd8ab37d381e873fdd73eb5b66f1e658bfed7ec839043c"
+status = "residue"
+cause = "mir::Ty: UniformInt<u8>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#6"
+kappa = "9b122a4ae2c6e544948452639726ef4c1700ee8f632e5cd9937fc76e40fd1eae"
+embedded = "36f63d534130fdc4ae65b97b1d94355439b8a0c3035c1ef9b15a928657db3234"
+status = "residue"
+cause = "mir::Ty: UniformInt<u16>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#7"
+kappa = "8bd4547761ecbe26f0f721f6cd1f43a8fdd3b458b20dcd68372c63442a17f9f2"
+embedded = "4a4b7ab92b282a2a70ef43f457f3f2e6a1880c98e0fa4cc4d60cbcf8a8676596"
+status = "residue"
+cause = "mir::Ty: UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#8"
+kappa = "3009fac86bc2178bd7a485d4dbbf82afd7d1d16a34b2e091a31ce1d911e3580e"
+embedded = "ceb31b3a809c99a5b51e55155a3b55be836fd02297141ffa85dbb3b6102fe40b"
+status = "residue"
+cause = "mir::Ty: UniformInt<u64>"
+
+[[fn]]
+path = "rand::int::UniformInt::max#9"
+kappa = "38454354293e485a6b4f87437600b859d3853ac3dc59daa004acc9567f4d9d00"
+embedded = "f4582583ffe141acd9a05f2cc827a3986d8cc626f9981a8a0bb025e1d889f636"
+status = "residue"
+cause = "mir::Ty: UniformInt<u128>"
+
+[[fn]]
+path = "rand::int::UniformInt::new"
+kappa = "c939b2ccd81aeb6d0c1c439d3581d94711eadf44968fddc7fd35553a79ab419d"
+at = "B1=u32, B2=u32"
+embedded = "3a16d97b24a8a2bf10d95d5f6f68dc7645267794a103d7dc5398ba34ad99c633"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i8>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#10"
+kappa = "5dd834e183b6a6b11a4ec32ddd40b61518ca1f953c5da55f2ebf725a5d18b662"
+at = "B1=u32, B2=u32"
+embedded = "88f9613e9cf02d9011a6e27c09c69e0b2dc7c85dab420d44639d00ec6827f67a"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u128>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#2"
+kappa = "56f54ba07d44b9a49aeece1d3cd7051b243a33702a8016c0e51e5328f6a0d631"
+at = "B1=u32, B2=u32"
+embedded = "df3823e860af0cea062df74852135cda8e2aefbd9d0d54d9b9e82af4df1f9eeb"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i16>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#3"
+kappa = "5628a120a4287fed41a233826812236647721ce5f7ad47f6bf638a81d055773b"
+at = "B1=u32, B2=u32"
+embedded = "3132a24a471fb1279b1b088b34398ab877c1eb816b81630cbdb635786dcfecf6"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i32>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#4"
+kappa = "b11230f141a8b178652411b4bda809f8000fe620ef8b240c3f45df6d71ff6bf2"
+at = "B1=u32, B2=u32"
+embedded = "1e3b1d69934fa4d5e2b74c78482556610c41482605a8f2cc9c76aa5237eb3a7b"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i64>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#5"
+kappa = "010e5843b89cf90d40cd36480eb743a50f2acdb637be1ccbfc1dee47ea16866f"
+at = "B1=u32, B2=u32"
+embedded = "d4e6f245f6fc44bf4645c6062740d5f2ab77903123d58655ca09a0578544cd5c"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i128>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#6"
+kappa = "f455fb5d5cc22e2515143bd22bb11330c113f64d073a20a5f1e3aa319415c9ac"
+at = "B1=u32, B2=u32"
+embedded = "b8a122d0c059a5dbd093bdfc96f9ee9da1422f0778eb1844c2fc1b4944cb25af"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u8>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#7"
+kappa = "4229e2160b6347833fba7fc0c7ab20555493f587ec17fd94ea2361cf288ef1db"
+at = "B1=u32, B2=u32"
+embedded = "bffeee0ea307198d9f8df640c531edd53613d5286c875d871d255c16ad5c973a"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u16>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#8"
+kappa = "c8bf860abad5c9b689a3eb6b89d23d75d57db49aad7be202aa57973f595c109f"
+at = "B1=u32, B2=u32"
+embedded = "bcca31166b233450b93a00ad8728e87e0465a36135d05657d4ac5703915cea78"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::UniformInt::new#9"
+kappa = "8419a63fd2cc657b11e2d2be2431f3ed0c68f88c9deaaaf25a858d6e31a9911c"
+at = "B1=u32, B2=u32"
+embedded = "8b76417a3663ea2ded68398cb960347340fd8ca55c3d4af4376904d416ab5799"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u64>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive"
+kappa = "9cfc891b268e250e7227bac109f2f11cceef6024a5bb222bcaa66ef85bd54f66"
+at = "B1=u32, B2=u32"
+embedded = "422ad3aa85c3eecbdefc09f8bd45681b37aea2b0fcd9230de9a8e92aa6a9563b"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i8>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#10"
+kappa = "496bdb3d49e4d01400b8f9042dc4acfe5edb1d0998e13c485e0260f180a3d6c1"
+at = "B1=u32, B2=u32"
+embedded = "2bae9943f67c86ac36556783a3b358e10600a7cf3661c06affd5361e3eab64b7"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u128>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#2"
+kappa = "6368fe8d713231f603bb77111df0e1ffdc90cfc7cc9809d351390967e27a5b80"
+at = "B1=u32, B2=u32"
+embedded = "96549b6d000b3bd20d1a6139830c2774acdabd34e5f73d32997f66600353b287"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i16>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#3"
+kappa = "994ef284e13b6c9d42ff3f28fc8a6bd641870fe3fc7970fc22cf5e28258c5249"
+at = "B1=u32, B2=u32"
+embedded = "e330571250818831363ea865c7786d0b424d0bbe1c09c74d4b8bf8b2d7038248"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i32>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#4"
+kappa = "59410f78a08902508006cc28342269ead97f4d4666eeb3da9006f081a4206002"
+at = "B1=u32, B2=u32"
+embedded = "66a2e20ebc3f8e3190734940b0e29de9b31d50b38655dea5c063e04fd1ea26f3"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i64>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#5"
+kappa = "b9c16d3b82c3ec2b9c5f605b7898b77eb7434e6bfafc0f3595e7dcd2918bb2c9"
+at = "B1=u32, B2=u32"
+embedded = "cec1d3d6b318db24398bc7072ef6ff020ca7e6640da1b72c8916194c92aa2f38"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<i128>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#6"
+kappa = "708ad1c511f427589cc60fe3459f25e47aedff365a9e9da27cd30a4d41b2c057"
+at = "B1=u32, B2=u32"
+embedded = "c8ba73d2af1a0e8e6053db4b7143af774016129659bb4263a744ff35d8b5c7db"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u8>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#7"
+kappa = "ed681451ebca252fd4211b5c957c67e6b70a1e1b4687ad528a1fef6636df8308"
+at = "B1=u32, B2=u32"
+embedded = "e98906529f52a76878dca07e586ef31acb407a91c04f95765d4998d453cbeab1"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u16>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#8"
+kappa = "a7d63b48bc2b8963e4175e4149a662711c789b32637ed338a3632679565df4a7"
+at = "B1=u32, B2=u32"
+embedded = "37fed0f4820e538c9bf089eba64053590c60530f2d99ccd5eb1d59570adda586"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::UniformInt::new_inclusive#9"
+kappa = "821113902f1a265613f150d33b6462c8dd43b249a6dcd0bbbaa29844ae2c5407"
+at = "B1=u32, B2=u32"
+embedded = "46a0b5783ffb6cb4dd71cb0ea95e11a1e4939d23cee043971b6225ef0f6f398f"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformInt<u64>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample"
+kappa = "c9faf5d5d145aa27d736b1f342f0da4f2404595181f550e911f1ffb087dc0fb8"
+at = "R=u32"
+embedded = "7a747240ffba968aa6363199f1c7ab1b0828598e16afeef1fcda0db67730eeab"
+status = "residue"
+cause = "mir::Ty: UniformInt<i8>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#10"
+kappa = "3ef06684950adee8762921b8a60c4fdd8f33740c83fa89a514f431cd7da2b01d"
+at = "R=u32"
+embedded = "094641be54f04b1990da19fe01689723ea6804d5dc3122a855c7f611768f4dd1"
+status = "residue"
+cause = "mir::Ty: UniformInt<u128>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#2"
+kappa = "74b41a132e7950c6a5ce70f254d3d46db3e537b3421d2867578a799a76cd651b"
+at = "R=u32"
+embedded = "5a96fdd80674efe44f14c9ca9b0ad7fd1ab561e0b57ae79b71a4bcc9eb1c2a4a"
+status = "residue"
+cause = "mir::Ty: UniformInt<i16>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#3"
+kappa = "334a3aa7442acdf58f9c4bd9e28f9887e62a79308ea06eb9adbbc1d3211d2448"
+at = "R=u32"
+embedded = "7d3543c400250d803d2c55db95290d5e5b98ab7218e12d01b038d22adf95bf95"
+status = "residue"
+cause = "mir::Ty: UniformInt<i32>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#4"
+kappa = "d725a5b0b36f6272d507f69c21b24c3d06d93f19ae108ff22bdee30ac386a883"
+at = "R=u32"
+embedded = "d6240c4da6216e660f0a52a0a50e88f2c4c91bb39b843a51c1fc5afe34d7223c"
+status = "residue"
+cause = "mir::Ty: UniformInt<i64>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#5"
+kappa = "2744bdcadf969806aaa4217764945fe0e5622a49bebb42a4bb6709855441ce85"
+at = "R=u32"
+embedded = "867660b8befba930ed03900b7f1cb9b8946e6a41f35602d431ca4e687eae2162"
+status = "residue"
+cause = "mir::Ty: UniformInt<i128>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#6"
+kappa = "8a3fc37aa67db29d31924b8dc9bf4c1bbc3dd917fdc784fda3f47d25257bf304"
+at = "R=u32"
+embedded = "0517f4a880819bb4862d23d57a1f8fcd56e354c2214a4c23daacb481e7ca4d82"
+status = "residue"
+cause = "mir::Ty: UniformInt<u8>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#7"
+kappa = "c8c871e6a90779f3c043e09563eeb0008d8533d65e60b932db291d6cea66da17"
+at = "R=u32"
+embedded = "af31d9c89edf68496f2dfa5e0a5680ad87951fc630a7378dc7a7c3e2dc7bae2c"
+status = "residue"
+cause = "mir::Ty: UniformInt<u16>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#8"
+kappa = "4d8a2b8ac8517912d01d4eeca623881a62ec87ee305529335694a1f7395fae3b"
+at = "R=u32"
+embedded = "b6f9369675cbd84c81161aae66451e61475fd6c1daf590e28fb188b85553c899"
+status = "residue"
+cause = "mir::Ty: UniformInt<u32>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample#9"
+kappa = "1719e42e57b93e835d51f6d8fc8d2c1a396e384022f0220fe9571ef09afca27f"
+at = "R=u32"
+embedded = "f9eb43003c36d5c18076fb15cf43adb1e8b4743c0a1e7afd799dff24a7c3110f"
+status = "residue"
+cause = "mir::Ty: UniformInt<u64>"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single"
+kappa = "801ed15ca66145422f5a9daae92fac3ac4c59cc696f7b82ca1dda631daa54f18"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "2a9c8f10decb18704232a6aaaa6b662463b94f485364a65acb9bae509338b0e2"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#10"
+kappa = "252d5bf1aa35f0c7b0d2e0d31c427af70de74e45e3c349acf86952829f57aa7e"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "10814b1f3613104467c31782d993b2abe1dd75fb1dc1aba6a4e724350946cb5c"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#2"
+kappa = "5b36c32abd7119bad5c7909a719675db0bf0551dc539a39608e6b7f84547077f"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "fd91b642ae64178f7c5993a97a7f52b69f6ac95ca6efe8b51557ece4b0aeb604"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#3"
+kappa = "162bd572a0c2ac73a5319b36a7217a640220f50d9556cac735780fa66b95414b"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "b4b4d8ee5346b75b6ea9ee51054fb4ade8b9863d8b33d088c9382b816457324a"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#4"
+kappa = "326ec0ae9c05f468e22c6a9370dd7cabce864fabe15dfacdaa1fafd222d80857"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "1b4fd1c436b67a349cf09809c2dd6e68463a0002fdc8ba81de46e7d6c6feed8b"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#5"
+kappa = "837171b9cb68c85e74b76cd556c373289a0c46df3f64132505466f52a640b64c"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "628baf17916e3a17cbc016f30ca1f05aaf14cc672c3e1cc46c14dd4d1c50fbb3"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#6"
+kappa = "3872a0581d3536cd999142890d47036e7b760058dc8d421ba182f125c148c8bd"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "8bac75ba9a6dcb029aaf903d01a2f4b7c0e183d3f8e0f17e64d5a792387a31fc"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#7"
+kappa = "5e08e92c745852d6ba8d8ec8550a34ab65926ce51e089a562ded46f0a9c55d6d"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "ac6daa4e7ff05460d6b356e79dec01c7e234ee2179d5ef12130cd4d6ee075da9"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#8"
+kappa = "8daf4f96c62f7cb89bf347b0a7377961f9fcd741dc55b4ccf8abd94d7d93b19e"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "e358a6332163a192e2cb2ded8b3c15a8a514693c0c832eee5d8757247c12a9f6"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single#9"
+kappa = "c70d2cd3f0b21ef21756faff8efa0f99e026e85231df0e534ade48ca8848c087"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "5a3f66d2415a40a9af22c42707aad6012845d54ecd4453e7919db0bb097e4547"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive"
+kappa = "51bf5aa2e94939ceea856f0d256ea603a12eed88064d84a2328ee8c1d3f8ecdd"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "1471ee4ef14aafd4df053a1e64c8852bff8c6e8ec6b9c233ab32c4282d7e74ed"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#10"
+kappa = "dbbaa533fb5d80bf88beb5754a216da325d2ea909f1f90eab04d6055e8933386"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "75694b24ee29bbdad1e9fda047017564ca69b92bbfc00bba3cb0a1440e00b328"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#2"
+kappa = "aa9a65867391b8f2bf87dfc90be1294e060a200050e6dc69e867ecb65e15ab93"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "6d499e78f47af22f6450da9adc8cf9fe3dce9d9abead33bb0d42bfc138f78e8e"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#3"
+kappa = "d68309cc944aeadb3bcf59e17a7aff53dac6ca6fb132235988b1968bb9a3e817"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "a401a525d9d75236bd2906d00b677bc5c338550e9b17f8460e75d56a5a86d51b"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#4"
+kappa = "28beae5a88eb8c10f07393545272c3b893cb5aa59449efd3f470c0a1d2449951"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "3428f478a7b5bcf7167b66eb58c796a59722228072fac9065c19d6b80ddf0044"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#5"
+kappa = "36bade9bf0d5ea1d921b1578be08415ea6b9d2a2f2c00fcc885d41418b438d24"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "07a1fec23b9e0e561cb1a043b29a14c3cedfb2353935fcb25442d6ffe0a2539d"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#6"
+kappa = "05a95c0fccb34aba968f1638f34ada51d5a55d62de97be38f2266233a055ebb3"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "a11cd973be34eff908beb6a7539bd9b750c74c631efa778ac49145ae7fd11e5c"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#7"
+kappa = "75e08148eb874911cf76b595c681cc283bf7d8701a3363ba9f3df0a7ca7219b1"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "da869d6852a4da8f21d7e72fb17e498f00e5eeda0edc6ff59f5cf7a38e710380"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#8"
+kappa = "755e5496274bf53677012caf37c70900c4f690a09b7ed6e9cd764ae52216e837"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "4898ceb006951fcf88355cfc89722f9e23c0ae8822574e8ba3c796d6a32570f0"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformInt::sample_single_inclusive#9"
+kappa = "74ea5028362089446621639e891cce3be951350531c7e913ba2a6bfd2426a625"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "9049af27c55fc56c94d7297bda54a4505091f693f357d411a611356e785d8e5f"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformUsize::new"
+kappa = "681155d389dc057d2fcaaab13fe1dc0ce397a2db69996e7dfbfe18596a7e4ef6"
+at = "B1=u32, B2=u32"
+embedded = "3fa75190af72443451c1df9ecd6ab381efc07e0f5f0ea232a0c091ab5ff8a413"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformUsize"
+
+[[fn]]
+path = "rand::int::UniformUsize::new_inclusive"
+kappa = "abe3710608c4e6f8f5dd5e6bb3f699c5bd56cf9b37030aa88eeb7ae46d030845"
+at = "B1=u32, B2=u32"
+embedded = "5f2e94f52d8cfd79c895a421a6c717e9c5b21054f2c63a40403dfa40f74cde1a"
+status = "residue"
+cause = "mir::Ty: distr::uniform::int::UniformUsize"
+
+[[fn]]
+path = "rand::int::UniformUsize::sample"
+kappa = "510333c740e8a341c124694a2b2e5de473d8fcd2214dc70697cef28163975afe"
+at = "R=u32"
+embedded = "fef9295e1fc40630ad510b0ebc78c6b5d86e11d1f17401e6c114e0ca7dbeba4c"
+status = "residue"
+cause = "mir::Ty: UniformUsize"
+
+[[fn]]
+path = "rand::int::UniformUsize::sample_single"
+kappa = "c7ab31a0e1031768f5326db531783de71e7d4998b64eb3694e3ec8a960706d14"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "651a02ea08d1d1a551cba4af0b9959b46fb98c066d8104055a4449596d1e4142"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::int::UniformUsize::sample_single_inclusive"
+kappa = "70330c8fe1f9aee1208e0c97e2c8b6bdf4dffb9567d97b0e5a6f8a18ab8d29aa"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "885b3dc603fde082fe19d70f640443ac7dc2f465185c013ff68e7d8904f44df6"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample"
+kappa = "92a0ccdf0930e7640b2a5e34b74c01cf34f3055f6f43c1a150d63390bb356a33"
+at = "R=u32"
+embedded = "7260acf1db245bb9e67a4d95d5deba80d7f5081f27b4d15cd3379f0aae91ceb5"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#10"
+kappa = "bf2a3fe3803b99f6f5a90adf47f252787a8f9b8fd7c1b15ef005c17c39a35538"
+at = "R=u32"
+embedded = "de0200d053140c9c7369f4f9f8295961321638edf42cdb17c45ed722af9f3e18"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<i16>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#11"
+kappa = "f9a649ee52060e251c7b6fc84cbb76d510e29b0f8437b950de8b03cfb415bcc6"
+at = "R=u32"
+embedded = "7bfe1b9f7897122db53ddd2418c66e1a43a73d1089b1baff6c39fa8f0d41056a"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<i32>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#12"
+kappa = "afe58f6a8644833f57f2ed4285da343ab512051fdd229fdd8723340936e7fdc4"
+at = "R=u32"
+embedded = "bb876787be9488558373161798566c45b006298448287274b384b5b3defeecec"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#13"
+kappa = "d062c47042b215d4d5d3da777ee2e743de9050154d764501f73e08ec9ddab352"
+at = "R=u32"
+embedded = "7bc341a6ca4db924f51461c9c921690a713974924450262eac9b18f487f08ceb"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<i64>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#14"
+kappa = "d27f735e9d54036616ee473a7a5c4ce13eaac53d2bb82090921b85eccf7adb3e"
+at = "R=u32"
+embedded = "bb1d19368d0b74435734051f54c2d653f4aa75722fdf32692b01410b4561a91f"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<i128>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#15"
+kappa = "bef9cf97fc58ce5c3d134528d92988efb3858201aa4edd084a3267cbcbf66b3f"
+at = "R=u32"
+embedded = "5a24fade357ea243c3dcbe4f9a9c2d6fe76f0907439d260cc615521b53380176"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#16"
+kappa = "57b3ea3ae400d338ead78fc67378b66310a558452a07a577f6ebf30ee279e293"
+at = "R=u32"
+embedded = "504e2fa92e8169b8f8d3576c1b0efb16106a5fbee1412e5de6b521c1e13dc448"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#17"
+kappa = "8eebab3d4dd514c8e45a589587e99b102d0b9dfa2a6a78092d4b56d3d3783dab"
+at = "R=u32"
+embedded = "f84206417694f741950c0c69fc55cc9d156a9937ebbe9b2448b294ddff3dee56"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#18"
+kappa = "54c1cc92208690e20344304aff42f0fb499a52e56bcda7f3a0f31707c625a02d"
+at = "R=u32"
+embedded = "50c4e7050a514e323d45ec4025d1b90cc9e3b915b7305a2a58b2ac6b3b371747"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#19"
+kappa = "062a457b584f9ec82cf38022a454a3829fe618fa64abb08ef9d520361f7cc6e6"
+at = "R=u32"
+embedded = "189b96ad56466093fe0ec09031e936490a32a463d9dc49039d475d169d08d3c3"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#2"
+kappa = "5af378d0705a76dd7a953cbc069e75747a628e82c272982ab8fbfb328630ba82"
+at = "R=u32"
+embedded = "3aa412ebe134a5fe8a557342586331ecec3120ff81fbf09554e1d2ddc86acfc0"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#20"
+kappa = "27effe5b40b459e76fc7811ef125473e8168d2cd433d8381580ae43134a46753"
+at = "R=u32"
+embedded = "688cc4b53372db26b561849fa236d5a6379e9559674ac9b5da91852e4a9609aa"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#21"
+kappa = "386b6498bf8412408bd9fc18d0e4c77db9ef6ec932fd899d3b442ca99f5be2c6"
+at = "R=u32"
+embedded = "bf5a78e11191d0962edaa323ee8a27b8d35c1ea99ac3315a0d330774461c68be"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#22"
+kappa = "cecf3351d868191695509287b1ffe610d3e6922760f9e1d446c9c596619d0430"
+at = "R=u32"
+embedded = "8a18a465671f41d03bfd47da2a7277bfccf9d76419113ec86dd75693f81499a3"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#3"
+kappa = "61424bebb5b6f7a39e3507f92b724f0218ee1e629b32e1de888d2768480bebd7"
+at = "R=u32"
+embedded = "4ee708d9d20712eb61ba7999f79b0b779d5b53cf78b2e672a27ed8365043a6d8"
+status = "residue"
+cause = "mir::Ty: StandardUniform"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#4"
+kappa = "5696e30caf91a9b708dcb8719c711f3091ec4010340a43b4b74a0959fb78fdaf"
+at = "R=u32"
+embedded = "44fe97933606bd44e685c1c9a4e759ed29409ab0ce276c7717c7ff394ec5759d"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u8>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#5"
+kappa = "3b9817d8c5c48a9f37e60733ed0f8623ac3a881e882fa3cbac2315a961d9ec73"
+at = "R=u32"
+embedded = "a0f84ce37b3e1937d17af756cb5cf7dc5e6a85c9f185fc26fb7db43482cb63f7"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u16>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#6"
+kappa = "d3e82b7aba3a0f1ee9946335488c727f8cbc33e8e81491b593f4424f7567e7ed"
+at = "R=u32"
+embedded = "acabfbfeb42d5aa326c7dabd1180133efbf5f72adcf2c723b4a0bd186e68d991"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u32>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#7"
+kappa = "1f57294bb3a746cf498ad49f6798d9ccdc64f21eb36f1d9619154e96f5c1c271"
+at = "R=u32"
+embedded = "af2cb403906e3fa45bc525eb556fde20edb91407693cf9294526b3451d30b00a"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u64>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#8"
+kappa = "094758a7b943623eaf1b0c287d2abdef6afb089e7e8b018b9ed9847d98ed0906"
+at = "R=u32"
+embedded = "6af3f3729d59b35c349f648df76101bd2b434134d52bf75e61e17b079aa3afd9"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u128>"
+
+[[fn]]
+path = "rand::integer::StandardUniform::sample#9"
+kappa = "022d3e58ae3b37068b841ec9be879a683d619f4546db64bd574eae4dc3354f6c"
+at = "R=u32"
+embedded = "944ae13d15768e141f1e8b867c70826f4ccd4f7845c358f3708ff9095990a877"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<i8>"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:122:10: 122:15>::clone"
+kappa = "87d9a7dea02ae690f91d9fef41089a864ed387f5d2154eddf3bb6d2e52879f73"
+embedded = "c941c8227139788f5c5790b77aef62c091f01759f070292d488f91aa9490c4de"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:122:23: 122:28>::fmt"
+kappa = "677a1656a9bbc4bee67297a9953f0f52610c5e2ad5b3848a1a38b7f9eabbc938"
+embedded = "9210e8a5f1e67147c8ba455c738bb157b212ed4d4fc53ac8b12c9ec22c055a00"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:122:30: 122:39>::eq"
+kappa = "7815a16af053bc639f7178de953a069c78b6f59028605e6edca75e6ce38df62d"
+embedded = "64a6b0d25584851c24bac313758eceacb78e1a3a9de7fe2f42ad11334cb672c9"
+status = "residue"
+cause = "mir::Ty: uniform::Error"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:122:41: 122:43>::assert_fields_are_eq"
+kappa = "b7b62f5d2e34e50fd15faca000d98cdbc64bb52f8dc6db3874aec1eefbd2a84c"
+embedded = "471359d16f324996205af5f6700612d8a54f2290db7845b4852ea0c387948c5b"
+status = "residue"
+cause = "mir::Ty: uniform::Error"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:215:10: 215:15>::clone"
+kappa = "ca993924db70aa4a577844d8239c0aa39a7a26a0b9a0690a1f32db02ea22aebd"
+at = "X=u32"
+embedded = "9517f7391194e62a9dfa125c6e07572b676eee32a59adcae51292a2b53a04990"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:215:23: 215:28>::fmt"
+kappa = "43cfe30d083dd93e967de82935a49bef8f08aa9c3a91d2f4c60ab215a0c67e82"
+at = "X=u32"
+embedded = "5158e6d07ea6481533d470f8d61d4556a467392d68494bfa34a52c235c52a8e8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:215:30: 215:39>::eq"
+kappa = "12b169248ce2bae18007665d36665b04e9a21979928063c435e1dd13eede58ae"
+at = "X=u32"
+embedded = "e2fae7e5fcd65d5af827525374de35229b4f16de289623cae997c275212c2b65"
+status = "residue"
+cause = "mir::Ty: Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:215:41: 215:43>::assert_fields_are_eq"
+kappa = "ce21928b76ef00a4c34915c57268b1c3343d3e2ebe058d300ad28a4adcb766c6"
+embedded = "cf966d3abe6033d904182a9b8a42f40eb06ae047813c2ad239dd4f0aadf4f311"
+status = "residue"
+cause = "mir::Ty: X"
+
+[[fn]]
+path = "rand::uniform::<impl at src/distr/uniform.rs:410:1: 412:29>::borrow"
+kappa = "f4d1fe8d11d3cb42c30186b9b73539b4ff5bb704569c9f26c9e18670d2af984d"
+at = "Borrowed=u32"
+embedded = "ae4d7505e868e9721b60eef9ce0676d69b07de293a75cce489430fd1a7036cc2"
+status = "translated"
+digest = "6fcec939e1e505198b4c2a01b35ab6952dc6dfec5d58aa4d886ca6495fee420f"
+
+[[fn]]
+path = "rand::uniform::Borrowed::borrow"
+kappa = "71a982ce376b672ce762c8fd29fa635a434a7e47212b4e2217b41151f24d59e7"
+at = "Borrowed=u32"
+embedded = "5518b9f320bc62d0e0cd8da57f651743ebbdb84327027169ba0b6fe9dae8d5c2"
+status = "translated"
+digest = "229e0800d82f7004d154a495050f99d025e50086df51ede6b2c18750c3c37d14"
+
+[[fn]]
+path = "rand::uniform::Error::fmt"
+kappa = "2adbfe0de6fa074878aa8745bb3f2deed8790b89843c02852a9f52f7b098291a"
+embedded = "504e24e6c975c05dd9e1c789afef577248d08afab89e5690841c8714e4da4696"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::Range::is_empty"
+kappa = "4e44e7551e549ee30b19cadec7efb5abed994010a2253572c9fb2ba2efae9b99"
+at = "T=u32"
+embedded = "25adb41935586a1bb93b01e874a6ee9beea986d06f50561185a906775b233e61"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<u32>"
+
+[[fn]]
+path = "rand::uniform::Range::sample_single"
+kappa = "08eb5041182c4439b0cf692a80c7d60984107192e743223f80e21d4fa8bd22f0"
+at = "R=u32, T=u32"
+embedded = "490bbe421d9c433d03e65e18f50f3f39e3062fa8826d78c79f38ca9f8852a7e0"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeInclusive::is_empty"
+kappa = "3cf0bedd2007e3f5ad3147724df7f463fdd45d55904df028ab3fae960cd03769"
+at = "T=u32"
+embedded = "cf80f1096c26378f210c20db649e376f0f803ee2746263c3c518a14b8c51a366"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+
+[[fn]]
+path = "rand::uniform::RangeInclusive::sample_single"
+kappa = "0c04da2c441f0bb0e5a2228eb763afc9d2982cda1f9d0784753aa497819dd2c1"
+at = "R=u32, T=u32"
+embedded = "2571ff039126df26172876e15abc0c3f24241c1ebca8f4d20adde9e9213eecad"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty"
+kappa = "c481a63c9dcf1f65797887229a7bb53d67ecfe37d5b03c1c027f1de251eb20e2"
+embedded = "8bd020b8d0a79cfe6ec3f3a7fec494ee1263aabae6a33372bfa42466fa23275c"
+status = "residue"
+cause = "mir::Ty: RangeTo<u8>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty#2"
+kappa = "5e46913ded41ae5862b74363412cdd70b2d1cc73a16347aa9798f18f96cfd565"
+embedded = "38b6761e62d7b00a6536266128d2448c4d3d3e0d29ee2c0f5c5d1710e3154835"
+status = "residue"
+cause = "mir::Ty: RangeTo<u16>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty#3"
+kappa = "5ed2d964ca44251580ce4ea88940604d5e946f873eebe90d4d7968f3ab764350"
+embedded = "851e1ac725fa558545d0ce66799ec0d1a5f175282ee9c49d58144a0a88365c37"
+status = "residue"
+cause = "mir::Ty: RangeTo<u32>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty#4"
+kappa = "6cd1deae9c39613745e914dfd90fffa8950b75e09c55085eb66cbe7dd2d92530"
+embedded = "bfa9c6141076fb2bcdc87466bf0fa7abcce435a4d24dd9a2215e04757adaca62"
+status = "residue"
+cause = "mir::Ty: RangeTo<u64>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty#5"
+kappa = "2f87e44f875085ad0ef37fe37374748c1051321228c697d06f9a84d793e93943"
+embedded = "8bba7353a332903b00b83bcbb757642604eb4c4ec3d56acd45cba115a9374a8f"
+status = "residue"
+cause = "mir::Ty: RangeTo<u128>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::is_empty#6"
+kappa = "581a710d16697779b654478ab269563d0f69bcf6ef8d1748ed12be1ca32bcef9"
+embedded = "b40a69d4dc65b253008cf64d134368de89a6230b7d279dfe2ff30b051709ba46"
+status = "residue"
+cause = "mir::Ty: RangeTo<usize>"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single"
+kappa = "a8207c9afedb0975a2ccc10ca50295ed46c2c7f992d8437cf28db3d525dee4ec"
+at = "R=u32"
+embedded = "b8335c22259c6cac9fe33bd28a03a6513696593219303ab456db8ebb52745cdd"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single#2"
+kappa = "47cb5bf57d0c8c8054b11fcbff74f3025d9cff40530f93edd9c77df8629bb084"
+at = "R=u32"
+embedded = "aeb82e9c6e1fef6c1584f1262ddc57f4cb042d2923fd5d910c0b31567ed4c122"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single#3"
+kappa = "de90e7256acbe8906fb901b7e1ba1a870dc5829f28a8b4655b6ef824e566ba70"
+at = "R=u32"
+embedded = "9b85c518d26598e0b59b85a584978dff82377ab9d2a00fca2f1aa0c525d91d7a"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single#4"
+kappa = "96e92b15694e075a8724452451fa21233261867a11dd0420706aca5108093fd3"
+at = "R=u32"
+embedded = "4d7dc28ee6c9f852d4c3fdaa4c41a795578ea1e6590dbcdd0d8ee7b12bbad0be"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single#5"
+kappa = "17fcc7f9f5eeafb95c9e3fcb0b709fee47e922df60b0fddedca4f6060a423747"
+at = "R=u32"
+embedded = "1cc25e1d35940f55bb29940b3fe34be0fa3c3fd4ce04445f3156ae96a6487523"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeTo::sample_single#6"
+kappa = "b632e93ede00ba59057a1ce62a5c56583a1e1f5a39c185306afd9e92e418e072"
+at = "R=u32"
+embedded = "0bf9e9a60c9dcc83d050db285c695429e958bf52bcb5e733a86b59c90fd55947"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty"
+kappa = "9dfb3c4ec6b3d00ebc65bb7acf008d29558e90001325fef007027a35bafb6d54"
+embedded = "1787301cb2e53df6c3fe4748bf6c38e8b793e4f02318c41ae0d3cf22a88b8a6c"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<u8>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty#2"
+kappa = "7f3031fd7396e4caa7a2d2f7577a3a33e4cac6e98292c03de76b57fd4b8f2634"
+embedded = "88bc7705af4bebce03ab797530842c76a5ead0720422c63a8b87e30eb0844d4f"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<u16>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty#3"
+kappa = "e4e00879f8c57ed424f2f6aee01e2c97b71ce3622727a426908be2b8520f0801"
+embedded = "005e11c292256f4876e5477e131f0c9d2e4a7c41267e32b18e9359ad7cdaa13a"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<u32>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty#4"
+kappa = "62b03d2f78e0579a10ed393e647df503ce86f2f2f3d5d1ac088c1055709d99bf"
+embedded = "474af14dc53825dcf06fe4c8edd67314c9441ce7b9a137b1e0147cc7bb049755"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<u64>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty#5"
+kappa = "80c5f24922a05d8b3d938020dba20d35eb45fa2b2efc933ddf8ac13755760386"
+embedded = "d35b0cbd66ffb25776c92c8369f640e3762b29c5134efc1df78a81100042b353"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<u128>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::is_empty#6"
+kappa = "e40adb4dbc8e3ad95c750e456fcef34262294c8ca360da5e9a5b44bf1d9af0f8"
+embedded = "4bff14205389b341cec7859fea127e527ef70d0ad7e27be3444019c9da5d6bf2"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeToInclusive<usize>"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single"
+kappa = "9a46976d8b2e12b34c235686f3cafdbd0da172c4322de0ae3d51dd747e5c1052"
+at = "R=u32"
+embedded = "542c1fe872dc5ab45d8de75f16fe8af53e4c2bf6ca85d3db5cc45c8e8bb2d99f"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single#2"
+kappa = "fb30ed67d7ec881a1503204d365e85504474e8e0c8a7ffdcbc6cf546ca690d50"
+at = "R=u32"
+embedded = "8017099cb34ab4dfcb7097ecb9fb884729c7351fe3aa0412dbb15a58e24e4447"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single#3"
+kappa = "90b2141b3bda1223c7b526748a4a8f2a3ceb50b3f42d89300baea46780623381"
+at = "R=u32"
+embedded = "898b215ba1c4a23594dfe44dede68ead2b0179e85fd7f8c91062b947585bf632"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single#4"
+kappa = "d9121c56c186d247494cd46c5b78caa335024a303d052c88d446452ed2e05046"
+at = "R=u32"
+embedded = "90a21b7c39cc1b120680d771f4ea4fc8429ec9cdbb6787f3c772f2f7803ce0bb"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single#5"
+kappa = "b6407c5068ebc1d08cd09e747254fb19c93883a6758a6ffc75ed5c14dda2e903"
+at = "R=u32"
+embedded = "2245266af00a8b4e893d80aeb9670a7d1c7da1fb3ef5cc57755c5225e1b383d6"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::RangeToInclusive::sample_single#6"
+kappa = "ff1a96ea00d23d0afe4337b02b5c571fd85559b7fbadec57842373cb6e51b247"
+at = "R=u32"
+embedded = "7ffb6bc453906e8316f8fe9d3e6278d5acf495161ccbf9de20db1d4c3f9bba1d"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Error"
+
+[[fn]]
+path = "rand::uniform::Uniform::new"
+kappa = "24af9e8804dde0e88aebffff644e9d41f60a3c569a2b1d8df925b49d6b7c6eb2"
+at = "B1=u32, B2=u32, X=u32"
+embedded = "ad9fc853cd785cb9b1af28e364c29dc8f0152b0327a8c47770b0517c4965a31c"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::Uniform::new_inclusive"
+kappa = "97688e3f59543f4b4189ab0d2cc7031c68f5a06bbaf2fd19945fc0f87121a4d3"
+at = "B1=u32, B2=u32, X=u32"
+embedded = "e331184557f6cd46cbf2f728a8f79745df27d2e5eac6cc2bfa72ba910659d1a2"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::Uniform::sample"
+kappa = "4c0d6b4555bcc1636fb5105f8749ecd58193058464f8e8ca7ae6da264f1a4d21"
+at = "R=u32, X=u32"
+embedded = "0ccaf44c065b921a8e8d94d216105ac73f41af9430e66c0d46e864a0c950580c"
+status = "residue"
+cause = "mir::Ty: Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::Uniform::try_from"
+kappa = "fe1bec06ea01fd2819a667c9c2d8c30ea56a7b6b107357733370a43e027ba7e5"
+at = "X=u32"
+embedded = "fd7ccb023d6b1ebf9b15460c30fff0d7f53510d621a0c05523eb3707c4f52947"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::Uniform::try_from#2"
+kappa = "707cd14e7dd22b13edd23069beffafb0ef701d985d28d9d93581af8f27872c8f"
+at = "X=u32"
+embedded = "4f689195a9bf3f8267717672c6ac9342be36e9e61ddc6fa3724343d57ab956f3"
+status = "residue"
+cause = "mir::Ty: distr::uniform::Uniform<u32>"
+
+[[fn]]
+path = "rand::uniform::float::<impl at src/distr/uniform_float.rs:46:10: 46:15>::clone"
+kappa = "ef23191cf8554b714459d77ecb35dfbb06ab18c90c38b7b6f12e55290efa933c"
+at = "X=u32"
+embedded = "b7f2c54863f47ab4caa8f5af09a49d875e67915d8524215fef9db94b744a81c1"
+status = "residue"
+cause = "mir::Ty: distr::uniform::float::UniformFloat<u32>"
+
+[[fn]]
+path = "rand::uniform::float::<impl at src/distr/uniform_float.rs:46:23: 46:28>::fmt"
+kappa = "ae1b560e3da4e81c16148b4c2e2550687b38dba60f6fec7101c9084c7d8299f3"
+at = "X=u32"
+embedded = "cb805248862b7e3d9851d63a1cec6ea7c2771ef3ec9e080e4ddd352c47af4154"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::float::<impl at src/distr/uniform_float.rs:46:30: 46:39>::eq"
+kappa = "64abe26bb984b223522fcf9762a50d1ec719462003ae5de578f2cd71e70fb0a6"
+at = "X=u32"
+embedded = "913f8fbe262701efd4704ec8981a7ad295c3de84e617673e06e5d904fdd45f02"
+status = "residue"
+cause = "mir::Ty: UniformFloat<u32>"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new"
+kappa = "4ea355cb01ae3d179056465373d7d0d2a17399a322484419a7d519db7b29a012"
+at = "B1=u32, B2=u32"
+embedded = "f3d7776ce0c82f08794231bf603930466c052e4f041c8bd23f66a8bbeafea832"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new#2"
+kappa = "312e3aca2cd5c3bcc628ff28caa63242d937b47f6326d427ad2fd3f5c42c2e07"
+at = "B1=u32, B2=u32"
+embedded = "52633c34ecb9b1205b1401a923fa102d749f19302bb0b550033b5fdc78bf3881"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new_bounded"
+kappa = "98e3237d6a716a049826fc4e819d658c069c8d2e9e294f075a1e34bf79e9b7bd"
+embedded = "818339be049c20713a20dcf30fe67ad9d7b3a4c59cf4ebba6fc1964ece2defc9"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new_bounded#2"
+kappa = "a89b9009d578bf839139f1c2222cdeb414669f9cca6837338621824fff51e969"
+embedded = "716787006616d6865ca79146e3b2c009e0db6558a5e2486dea3c101e8e69ea99"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new_inclusive"
+kappa = "190e1734c63b352d768bf4e6cb560ad99a370aa5c7cfc4ff7ca6561dbdcc0482"
+at = "B1=u32, B2=u32"
+embedded = "344b1f00290fc83c42029b23a0a4ba06446a87dc45a4323c6a2015f24c2afd65"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::new_inclusive#2"
+kappa = "1a9d337cd0ee5aa6be6e80476267f761578982c809d105210968f7a6f8dc93eb"
+at = "B1=u32, B2=u32"
+embedded = "c672c996f3da54dc922b71c24c7931f9dc58e5ab4bd3c6244f2d95297d2d8c57"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample"
+kappa = "d1e6fc50f3c59253a7e38c2a9ab35edc6c5d81c452b24f00f8d801ee01a4904b"
+at = "R=u32"
+embedded = "2eae83601d8076a7fcb67d3a0aad344fd1b290cf3dcc7a323ec90db9cacf8ac3"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample#2"
+kappa = "6530e59189b20d72b45935c7bdf2ae9fa769c26267dc33b408f981379d5dcb01"
+at = "R=u32"
+embedded = "5cad54169e08e99368e76c3e01d30d0398005fa1674d5c51220d3a85fff5db20"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample_single"
+kappa = "1e41572b635e0c96621162377b7b4dd5a150e9416385c756ac3b6eba5cb0359d"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "fe714da49791a0c24e2ef565f9f28a643f55b0d0deb3ab7135a750b497418f09"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample_single#2"
+kappa = "1e6037415fddb05ccfdf2e43357d86b501e99be9cabc16c04d6b33eed092900a"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "d76c970b9880d6ce3548a97d12c866ce8fa55757c114a9707a5eabe6a3234076"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample_single_inclusive"
+kappa = "dc1d18f5d9c148972b098d163cf40796b32df519cb6cc7097616008df7e0e540"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "1558cc23becd2b3de612b7b15c1c5bb55f94574d4ac32e4ca1ec51ee09ae6361"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::uniform::float::UniformFloat::sample_single_inclusive#2"
+kappa = "9a49afe060d8124bd3a16f6b2e4579f9fd5d1e502872aab241ff35cd77f17390"
+at = "B1=u32, B2=u32, R=u32"
+embedded = "97dba357658366a9dafb956b17f08d09b1b20cb3b64fa1cb4f7324babf7008c4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:131:10: 131:15>::clone"
+kappa = "610bffe303c5ae81f76aac436441e115510f7fa60c229f2ce68028fd9d0e6640"
+embedded = "dc972baaad15ab18a862d63334c18613e9715095ce6fee93a0ba9c9a7286ed2d"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformDuration"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:131:23: 131:28>::fmt"
+kappa = "28080b5e90a2e15a099323ebf94e022c6fda092759a93344c7998c81fa4dfcfd"
+embedded = "a259dc6c4a1c3525be64268fdcb58248bb18b7402ccab0a235c6beb6a88e3163"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:131:30: 131:39>::eq"
+kappa = "1190d186296f6a6996fc84576f3f0602fb9fe96568d557091506ca39089c98f5"
+embedded = "0a67941d76365e7ba5bb81b12b77b4a04f0045fe327c68609ff66c2ae530bbde"
+status = "residue"
+cause = "mir::Ty: UniformDuration"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:131:41: 131:43>::assert_fields_are_eq"
+kappa = "1794d6a9c95be8a9d387fca4aa66d36d0f84d401969ec4ac938c152707c5eb72"
+embedded = "0b0c6e4b98dbc24fb11f5e133fd73300b35459cba0018ccb352faa85686160bf"
+status = "residue"
+cause = "mir::Ty: UniformDuration"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:138:10: 138:15>::fmt"
+kappa = "051ad6b382591811a092e99e9dc15cf8e16569962093db12b3fb5c8db3456a0f"
+embedded = "cee4ae0414e1a09a75d9ea0c270c31e22aee926bb59c4d4494fe04c61a883354"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:138:23: 138:28>::clone"
+kappa = "af41a44579480648ccf27a156f79875c7552efb9aa9eb4ab5b69eeac9306fbdd"
+embedded = "c550efee432c4ba7a19a27a06d61304caafa3e8377f9e74f9faacbb8321673a9"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformDurationMode"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:138:30: 138:39>::eq"
+kappa = "5b237b6b91856e89d190ed02fa9c4c66faaa60e890a986ccbfe7b4f42136b7dc"
+embedded = "1e6378693c0a5738ee0997811a6f8f84dc8b5f680e189c2854ae6f9099dd8365"
+status = "residue"
+cause = "mir::Ty: UniformDurationMode"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:138:41: 138:43>::assert_fields_are_eq"
+kappa = "2c08ed74cc8bc615584eac3c8cc552d029e638501c02d956533ad8046ba03094"
+embedded = "fde0f17136ca81a62f87f2dd69faa660778054296522543dfe4c5ce1e170a78e"
+status = "residue"
+cause = "mir::Ty: UniformDurationMode"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:33:10: 33:15>::clone"
+kappa = "505d8abdbaba91aa7318c235bddfd5c40c6f54fb9541d265f2d88ab1d2d1c2a9"
+embedded = "fd107ed2da793ca79fd41a5b142059f4432c939b66ab14619752953fc325a209"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:33:23: 33:28>::fmt"
+kappa = "7946025a368a47675a638e521d2d569555717780b28696aa1f027fd71f0b937d"
+embedded = "b505173e5b09eb62021a05e106d2e361e730e2b3f60a7546cc2423050ede7270"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:33:30: 33:39>::eq"
+kappa = "8d9fbeabe90f4fd2f7b529d44beff8b24cb6548636dc643f32683c3effd5b8d1"
+embedded = "2e33869d20f412405ef47b2c9d12eea7bab175e3ed569d0ade0d4fc05c003361"
+status = "residue"
+cause = "mir::Ty: UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::<impl at src/distr/uniform_other.rs:33:41: 33:43>::assert_fields_are_eq"
+kappa = "b2ebf88adaed7c6e8778e4265df7b034496351087d296dd66bb43013c5b66cb6"
+embedded = "6b610951318e6e435884390fda47b531de8a9b25e2c98b4becc7813e846bfa51"
+status = "residue"
+cause = "mir::Ty: UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::Uniform::append_string"
+kappa = "31fba68694305aa30f871ef4ca209d5b277122cf1dd7dcc69a0e6ba00e3296df"
+at = "R=u32"
+embedded = "e8765ef49fb31ace51be3717f06aa962a33abb004d655e7e239ccfffdf5bdd44"
+status = "residue"
+cause = "mir::Ty: Uniform<char>"
+
+[[fn]]
+path = "rand::uniform::other::UniformChar::new"
+kappa = "6cee8469a18f145c4c18d6229876793205bd839d05bc62db8e19e2094a281bc4"
+at = "B1=u32, B2=u32"
+embedded = "b395827d0da49e6a74fdc6f379afedfe38f2ec309bd2c75f887d56ef4bd9bb14"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::UniformChar::new_inclusive"
+kappa = "71abe7a5b1e7234c8167daa02468054c6ecec241aea4804d614f9cd859da108e"
+at = "B1=u32, B2=u32"
+embedded = "6307d5c11029cc14edd65dc46cd4f6291c8f83f4c1494fe3ab40263c9350d984"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::UniformChar::sample"
+kappa = "c87069fa68f78ef480cea143275b031c84d2af48e2f847b1859fad5b2245e86b"
+at = "R=u32"
+embedded = "3c0cec22d4c9c19ec3fda6fadd12281032cd04037a57f8d86938b5093498f423"
+status = "residue"
+cause = "mir::Ty: UniformChar"
+
+[[fn]]
+path = "rand::uniform::other::UniformDuration::new"
+kappa = "56b365f0483798b6ca4a93920e56805c1e555d04a5096d156b190d210ebee510"
+at = "B1=u32, B2=u32"
+embedded = "3384396d7bac4f313312ac29758c7a6da166ab991513de51f2bf3011509ec2a2"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformDuration"
+
+[[fn]]
+path = "rand::uniform::other::UniformDuration::new_inclusive"
+kappa = "d4cc443d4a441ecae3527bd4a6bb56d82e9a8e2485ea9e46ef8593172eb5978c"
+at = "B1=u32, B2=u32"
+embedded = "cc56c77f08553584c15c97149ef611a9f5c82a9c78a6c036543504b84a320ad1"
+status = "residue"
+cause = "mir::Ty: distr::uniform::other::UniformDuration"
+
+[[fn]]
+path = "rand::uniform::other::UniformDuration::sample"
+kappa = "ed0a7649b931d93a8df5ac31e0c92f235b4513929d4f5e7d5c96d72e566051c3"
+at = "R=u32"
+embedded = "997068b73741d7a87258b13a974ce3a2d9ffa568ce76c00486b3e08b92016651"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign"
+kappa = "288063ad68a6fcf85e8fa69550d7d2df625d75d952dfa07415e02b588f1ecd6f"
+embedded = "4c926b6deddcd63e8a1f005ee5c2515051608e3d49401f94506027a34b100bbb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#10"
+kappa = "f6c1e277c0840b50f98c9d9d2889477a9fb99a1ff799d44dcce7cd2b5cbf719d"
+embedded = "eaf2a8a5d06b6499d0e662849c6a3abbb89bd7897fdabb330443b6c7b6f88eb7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#11"
+kappa = "725a161618a710bb907daf4a1d924f8c690582ac08e062329455ece8f17ef384"
+embedded = "2bc06c5b973ba18e3e95286314e4a643eef5ef3de52c3878d190e9bc0a7d6627"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#12"
+kappa = "58f8e1e2376a278c24eba14a6f6ef46aba45479d09af5063499ec37e93f1cc89"
+embedded = "a155fecb5e05a102e0415f6f6866a68f38927a0dbf292dc835a6e689a3540e11"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#2"
+kappa = "609d049e77c05a592f98ecfc7d6457443c5d37493e7e140ef15ae857571b8f44"
+embedded = "082cdb529f310f87d226f710deac250437d5173015c6e59d223bde83d31a1a2c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#3"
+kappa = "ae06d8b8846d1e3a37e21f5dbb358f2692c9ecf3292f69836736cde44d3d82c3"
+embedded = "2b60672877aa86f3a602fe0136b0ec6fa81db3d1a7620b7df15867321ac3d5ea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#4"
+kappa = "6bdcdd6498413087d8a1b6bba6206ac2c0b1fe182e660a12f95e4aed0b0031e0"
+embedded = "f04b711154233e57797ce614ab1d0d28fde5cf68ea7a65500e9aff11dc8ee312"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#5"
+kappa = "a7266fb11be8409e20b8b10782064f9779e09d7c7c2c899cace86b93003717c7"
+embedded = "5e32690921525ee35563480dbdfe30771d619f7b82c843a24420eabfbca6bdaa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#6"
+kappa = "3bfbfc8bb12430829531847c17596c10c82b2e42b04154933f800fe0186fdae7"
+embedded = "82b75b21ea266b79816691bd55e01841cce80ff1c6fe52a6e1b714af60867b49"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#7"
+kappa = "472f757842237de22b8842b73369e00b09c49ff8cf59cb66556ba3d38df73ac6"
+embedded = "2e081641c37075327d3babf1fe59be0200acb320adf547f2f6ef6162993a36d2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#8"
+kappa = "b3f2f991438b78e527552da9927e6dcbf35f5fecf39dd437e9e95c4ad33efe98"
+embedded = "d7607e425c9977c4320b9fec725e12edb0cbc063028d8eb62798f0cc20cc1de4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:44:9: 44:27>::checked_add_assign#9"
+kappa = "d8c31b39fe7e5978a825bcb5ec3c396cdf1d4baffd6430e4dfda633d38f2a634"
+embedded = "29a778f405a8007eb66bfc57f434447002d6c04dfea4c1e1f2fc89b2d1b42f4f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::checked_add"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:67:9: 67:27>::checked_add_assign"
+kappa = "fa99c6837fb3b02537e0ab876f217bcd2cb26f3fd2c9d4b720e9a206059a54de"
+embedded = "f4bf33919886a0a5b90955a2db86e1bbdc26bf2e77a947041074a5dd95a953a9"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:67:9: 67:27>::checked_add_assign#2"
+kappa = "d38f9584bec050f7d0f200ee5f02653b57fd770b28d66307b7c91bbe5fbd7a9e"
+embedded = "3968ecccf04f64a569019be7bd7b3da145bb6bb69543380bad63baca50e05a8a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:85:10: 85:15>::fmt"
+kappa = "a796fc0926fcb9c07248bf50de7dbbe14ffc296c2bf3d1e768d5b70e7b3359bb"
+embedded = "c36ab0ba80fb9b49b2c7ba2ed40270690cc05ecb574d3fdfe1b98aebd2f05a86"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:85:17: 85:22>::clone"
+kappa = "7ee44f94d2202a09857891bca3e72a4f9f44d4721bd45b3f5e7a3f59202bb7cd"
+embedded = "7748a3619f54b867446f9077aaf9a0aa595be82c2d1c6906277f3971384c570a"
+status = "residue"
+cause = "mir::Ty: distr::weighted::Error"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:85:30: 85:39>::eq"
+kappa = "22eea2646e9b654cc65c1fbdaccf7c42bcf4c10ef59fba3c637d957f6853f124"
+embedded = "8623d46e0f188cc84584d0909abb8ee78eb9b0b20dc68838ad372daae00d47f6"
+status = "residue"
+cause = "mir::Ty: weighted::Error"
+
+[[fn]]
+path = "rand::weighted::<impl at src/distr/weighted/mod.rs:85:41: 85:43>::assert_fields_are_eq"
+kappa = "2ae05467f7709a17e7bf1d09dd3af5c373cd1a73ae9278ab0b0270b3a04dd3f9"
+embedded = "7776ecaf2bf0859214b603c9e71955b682343628cee94a41bc7b1e0dbec4bd20"
+status = "residue"
+cause = "mir::Ty: weighted::Error"
+
+[[fn]]
+path = "rand::weighted::Error::fmt"
+kappa = "2f202a4947dcf0e29a5ee6d9aa4dec7da195b2cc91ebb24a491b67e867c2fbbe"
+embedded = "547401753a3aa7b728d91a18dccc48735a5f4d94286d5f2a450e912f1a00157b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::weighted_index::<impl at src/distr/weighted/weighted_index.rs:79:10: 79:15>::fmt"
+kappa = "75c6e8b441d75cf03ce2fa78235243331354c95cb62cc1752d0fd3d833c0d870"
+at = "X=u32"
+embedded = "fc284854e805855adb425470aae1f115e0d2ca528214bdf8611891a43ac7c824"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::weighted_index::<impl at src/distr/weighted/weighted_index.rs:79:17: 79:22>::clone"
+kappa = "a8ab32d1087109223c8e2a06f66475df677d949619c710e0166c8b01e1c0808d"
+at = "X=u32"
+embedded = "c32eec43589198e13d34c5baa04b1a00d116f1ca28371bf157ad064365d97616"
+status = "residue"
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::<impl at src/distr/weighted/weighted_index.rs:79:24: 79:33>::eq"
+kappa = "56db3022750779b453b27868ea3c61eda987db3180dd6faa4c24c916d4267016"
+at = "X=u32"
+embedded = "9e06d96e7becaa359be2a467fe74a5d2a18ba74afc00b3c611752bc8f27a86c9"
+status = "residue"
+cause = "mir::Ty: WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::new"
+kappa = "0ed752128d7dce7c9ba98e94c6dff6628102e7f6eeed02fba60c01d09f89199c"
+at = "I=u32, X=u32"
+embedded = "a966391ef0292f741b6b868929262cc43c1a3dacf9f09e118d728541deefcbd8"
+status = "residue"
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::sample"
+kappa = "81a2c315e42b6c2b95e4388996e42f86bf2c93950c24f6a4aa00f9dece1e3308"
+at = "R=u32, X=u32"
+embedded = "0a0e15609f6f452ec56e1a6b181123482371537c73db0a32523722ad022d3157"
+status = "residue"
+cause = "mir::Ty: WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::total_weight"
+kappa = "8daef64f9d552c186449e417e40f7347046a5058d32a24740359fb9deeb1d24b"
+at = "X=u32"
+embedded = "f89e7dcda0789862de8a06cd3a3bc28438959a185900f62f7d873273cbb73b19"
+status = "residue"
+cause = "mir::Ty: WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::update_weights"
+kappa = "6a24a9d7a3b13ffbf4efd26a1ba5ccd6761203009a26cab503a4219acaa932ca"
+at = "X=u32"
+embedded = "8446da6b91cf819c4f04f14cf3c9199aba796a9432934ac5fef0596f8e425b62"
+status = "residue"
+cause = "mir::Ty: distr::weighted::Error"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::weight"
+kappa = "7d483d6a786938016d79866b8103daa7c2645549885207c70ac3a42fad74e828"
+at = "X=u32"
+embedded = "8f3c281d84846a703fd3c8c72104dc61158065c48d32bc936c2a4f2b55833b8a"
+status = "residue"
+cause = "mir::Ty: WeightedIndex<u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndex::weights"
+kappa = "89ec46d7ed3e84a8a6079c556d0e491da719893d4361b8deb8863633bceb3dbb"
+at = "X=u32"
+embedded = "dc432cb8dcc1a5631305eaf65d30743c488fbaaaa43bfe1473ffe4886296fe62"
+status = "residue"
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndexIter<'_, u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndexIter::clone"
+kappa = "b419e24de826cb218277946eae3759b47bdf927d6e0d0cccfcde94d4de32c06c"
+at = "X=u32"
+embedded = "1d06397cdbe2e47e27cfe1532cc564fa165ee56dab8bdfb05356974a1fff02ec"
+status = "residue"
+cause = "mir::Ty: distr::weighted::weighted_index::WeightedIndexIter<'_, u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndexIter::fmt"
+kappa = "4b6ee7b6d051af99dbabf4c6f43f1e030884236eb6f869742c6b17fd66444cdc"
+at = "X=u32"
+embedded = "29b92017a042c82fea0f7ba5fa95d6dc4f90e0a972168a9795c60fcc4e0691ec"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndexIter::next"
+kappa = "660c97bb79bc592d5b67e38e685878b2aafd2615547c57c452d9e3a4ae54ef63"
+at = "X=u32"
+embedded = "0be1e084810c6fc2ab07744c4f257a2c8d46706c493f74e9bc334f0cbc3e2c98"
+status = "residue"
+cause = "mir::Ty: WeightedIndexIter<'_, u32>"
+
+[[fn]]
+path = "rand::weighted_index::WeightedIndexIter::size_hint"
+kappa = "58ac3b479369b3b93f5c1adf550fba5e33db1e0e5ebf8f56f06e2db9b9beff48"
+at = "X=u32"
+embedded = "5a2a3be2bfb62aa3975625fe97df556de95dbb396e7c06e81517942812529fb8"
+status = "residue"
+cause = "mir::Ty: WeightedIndexIter<'_, u32>"
+

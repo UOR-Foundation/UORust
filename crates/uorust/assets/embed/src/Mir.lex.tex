@@ -307,6 +307,7 @@ inductive{
     {name: transmute, fields: [Generic, Generic]},
     {name: writeBytes, fields: [Generic]},
     {name: rawEq, fields: [Generic]},
+    {name: metadata, fields: [Generic]},
     {name: instance, fields: [String, (List Generic)]},
     {name: sizeOf, fields: [Generic]},
     {name: convert, fields: [Ty, Ty]},
@@ -2001,14 +2002,43 @@ definition{
 }
 
 definition{
+  name: maskPointer,
+  parameters: [pointer : Value, mask : Value],
+  result: Evaluated,
+  body: (match mask
+    | Value.int width signed bits => (match pointer
+      | Value.int p q address => (ctor Evaluated.found (ctor Value.int p q (bitsAnd p address bits)))
+      | Value.pointer frame base steps => (if (bits =? (prim subtract (pow2 width) 1 : Nat)) then (ctor Evaluated.found pointer) else (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask that clears an address bit of a pointer the memory model places by its place")))
+      | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.tuple p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.adt p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of a value that is not a pointer"))
+      | Value.reference p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.function p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.text p => (ctor Evaluated.stop (ctor Outcome.undefined "a ptr_mask of a pointer the memory model does not place"))
+      | Value.uninit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask of an uninitialized value")))
+    | Value.boolean p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.character p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.unit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.tuple p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.adt p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.pointer p q r => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.reference p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.function p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.text p => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by a mask that is not an integer"))
+    | Value.uninit => (ctor Evaluated.stop (ctor Outcome.ub "a ptr_mask by an uninitialized mask")))
+}
+
+definition{
   name: binaryIntrinsic,
   parameters: [name : String, a : Value, b : Value],
   result: (Option Evaluated),
   body: (match (intrinsicBinOp name)
     | Option.some op => (ctor Option.some [Evaluated] (evalBinary op a b))
-    | Option.none => (if ((prim equal name "offset" : Bool) || (prim equal name "arith_offset" : Bool)) then (ctor Option.some [Evaluated] (offsetPointer a b)) else (if (prim equal name "exact_div" : Bool) then (match (evalBinary (ctor BinOp.rem) a b)
+    | Option.none => (if ((prim equal name "offset" : Bool) || (prim equal name "arith_offset" : Bool)) then (ctor Option.some [Evaluated] (offsetPointer a b)) else (if (prim equal name "ptr_mask" : Bool) then (ctor Option.some [Evaluated] (maskPointer a b)) else (if (prim equal name "exact_div" : Bool) then (match (evalBinary (ctor BinOp.rem) a b)
       | Evaluated.stop outcome => (ctor Option.some [Evaluated] (ctor Evaluated.stop outcome))
-      | Evaluated.found left => (if ((reprOfValue left) =? 0) then (ctor Option.some [Evaluated] (evalBinary (ctor BinOp.div) a b)) else (ctor Option.some [Evaluated] (ctor Evaluated.stop (ctor Outcome.ub "an exact division with a remainder"))))) else (saturatingIntrinsic name a b))))
+      | Evaluated.found left => (if ((reprOfValue left) =? 0) then (ctor Option.some [Evaluated] (evalBinary (ctor BinOp.div) a b)) else (ctor Option.some [Evaluated] (ctor Evaluated.stop (ctor Outcome.ub "an exact division with a remainder"))))) else (saturatingIntrinsic name a b)))))
 }
 
 definition{
@@ -2381,16 +2411,86 @@ definition{
 }
 
 definition{
+  name: wholeArrayPointer,
+  parameters: [frames : (List Frame), data : Value, length : Nat, destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match (placeOfPointer data)
+    | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+    | Option.some loc => (match (readAt frames loc)
+      | Option.none => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+      | Option.some pointee => (match pointee
+        | Value.int p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.unit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")
+        | Value.tuple items => (if ((countValues items) =? length) then (finishCall frames destination target data) else (ctor Outcome.undefined "an aggregate_raw_ptr of a subrange the memory model does not place")))))
+}
+
+definition{
+  name: sliceFromParts,
+  parameters: [frames : (List Frame), values : (List Value), destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "an aggregate_raw_ptr of no pointer")
+    | List.cons data rest => (match rest
+      | List.nil => (ctor Outcome.ub "an aggregate_raw_ptr of no metadata")
+      | List.cons metadata more => (match metadata
+        | Value.unit => (finishCall frames destination target data)
+        | Value.int bits signed length => (wholeArrayPointer frames data length destination target)
+        | Value.boolean p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.character p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.tuple p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.adt p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.pointer p q r => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.reference p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.function p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.text p => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place")
+        | Value.uninit => (ctor Outcome.undefined "an aggregate_raw_ptr of metadata the memory model does not place"))))
+}
+
+definition{
+  name: vtableEntry,
+  parameters: [frames : (List Frame), values : (List Value), entry : Nat, destination : Place, target : (Option Nat)],
+  result: Outcome,
+  body: (match values
+    | List.nil => (ctor Outcome.ub "a vtable read of no pointer")
+    | List.cons pointer rest => (match (placeOfPointer pointer)
+      | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+      | Option.some loc => (match (readAt frames loc)
+        | Option.none => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+        | Option.some vtable => (match vtable
+          | Value.int p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.boolean p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.character p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.unit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.adt p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.pointer p q r => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.reference p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.function p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.text p => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.uninit => (ctor Outcome.undefined "a vtable read of a pointer that is not to a vtable the memory model places")
+          | Value.tuple entries => (match (nthValue entries entry)
+            | Option.none => (ctor Outcome.ub "a vtable read past the vtable's entries")
+            | Option.some value => (finishCall frames destination target value))))))
+}
+
+definition{
   name: evalIntrinsic,
   parameters: [program : Program, frames : (List Frame), name : String, args : (List Operand), destination : Place, target : (Option Nat)],
   result: Outcome,
   body: (if (prim equal name "unreachable" : Bool) then (ctor Outcome.ub "an unreachable intrinsic reached") else (if (prim equal name "abort" : Bool) then (ctor Outcome.aborted) else (match (evalOperands program frames args)
     | EvaluatedList.stop outcome => outcome
-    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "compare_bytes" : Bool) then (compareBytes frames values destination target) else (if (prim equal name "ptr_offset_from" : Bool) then (pointerOffset program frames values false destination target) else (if (prim equal name "ptr_offset_from_unsigned" : Bool) then (pointerOffset program frames values true destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
+    | EvaluatedList.found values => (if (prim equal name "copy" : Bool) then (copyElements frames values destination target) else (if (prim equal name "copy_nonoverlapping" : Bool) then (copyApart frames values destination target) else (if (prim equal name "vtable_size" : Bool) then (vtableEntry frames values 1 destination target) else (if (prim equal name "vtable_align" : Bool) then (vtableEntry frames values 2 destination target) else (if (prim equal name "aggregate_raw_ptr" : Bool) then (sliceFromParts frames values destination target) else (if (prim equal name "compare_bytes" : Bool) then (compareBytes frames values destination target) else (if (prim equal name "ptr_offset_from" : Bool) then (pointerOffset program frames values false destination target) else (if (prim equal name "ptr_offset_from_unsigned" : Bool) then (pointerOffset program frames values true destination target) else (if (prim equal name "const_eval_select" : Bool) then (selectRuntime program frames values destination target) else (if (prim equal name "slice_get_unchecked" : Bool) then (sliceElement frames values destination target) else (if ((prim equal name "read_via_copy" : Bool) || ((prim equal name "volatile_load" : Bool) || ((prim equal name "volatile_store" : Bool) || ((prim equal name "atomic_load" : Bool) || ((prim equal name "atomic_store" : Bool) || ((prim equal name "atomic_xchg" : Bool) || ((prim equal name "atomic_xadd" : Bool) || ((prim equal name "atomic_xsub" : Bool) || ((prim equal name "atomic_and" : Bool) || ((prim equal name "atomic_or" : Bool) || ((prim equal name "atomic_xor" : Bool) || ((prim equal name "atomic_nand" : Bool) || ((prim equal name "atomic_max" : Bool) || ((prim equal name "atomic_min" : Bool) || ((prim equal name "atomic_umax" : Bool) || ((prim equal name "atomic_umin" : Bool) || ((prim equal name "atomic_cxchg" : Bool) || ((prim equal name "atomic_cxchgweak" : Bool) || ((prim equal name "atomic_fence" : Bool) || (prim equal name "atomic_singlethreadfence" : Bool)))))))))))))))))))) then (evalAtomic frames name values destination target) else (match (if (prim equal name "discriminant_value" : Bool) then (ctor Option.some [Evaluated] (discriminantValue frames values)) else (intrinsicValue name values))
       | Option.none => (ctor Outcome.unlinked name)
       | Option.some result => (match result
         | Evaluated.stop outcome => outcome
-        | Evaluated.found value => (finishCall frames destination target value))))))))))))))
+        | Evaluated.found value => (finishCall frames destination target value)))))))))))))))))
 }
 
 definition{
@@ -3207,7 +3307,11 @@ definition{
       | Option.none => (ctor Outcome.undefined "a generic argument whose alignment the layout table does not hold")
       | Option.some align => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false align))) else (if (prim equal query "assert_inhabited" : Bool) then (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
-      | Option.some layout => (finishCall frames destination target (ctor Value.unit))) else (ctor Outcome.unlinked query)))
+      | Option.some layout => (finishCall frames destination target (ctor Value.unit))) else (if (prim equal query "field_offset" : Bool) then (match (genericCount frames generic)
+      | Option.none => (ctor Outcome.undefined "a field whose offset the layout table does not hold")
+      | Option.some offset => (finishCall frames destination target (ctor Value.int (project program pointerWidth) false offset))) else (if ((prim equal query "assert_zero_valid" : Bool) || (prim equal query "assert_mem_uninitialized_valid" : Bool)) then (match (genericCount frames generic)
+      | Option.none => (ctor Outcome.undefined "a type whose validity the layout table does not hold")
+      | Option.some valid => (if (valid =? 0) then (ctor Outcome.aborted) else (finishCall frames destination target (ctor Value.unit)))) else (ctor Outcome.unlinked query)))))
     | Callee.float e m op => (match (evalOperands program frames args)
       | EvaluatedList.stop outcome => outcome
       | EvaluatedList.found values => (match (floatIntrinsic e m op values)
@@ -3220,6 +3324,15 @@ definition{
         | List.cons value others => (match (evalUnchecked source target2 value)
           | Evaluated.stop outcome => outcome
           | Evaluated.found result => (finishCall frames destination target result))))
+    | Callee.metadata generic => (match (genericLayout frames generic)
+      | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
+      | Option.some layout => (match (evalOperands program frames args)
+        | EvaluatedList.stop outcome => outcome
+        | EvaluatedList.found values => (match values
+          | List.nil => (ctor Outcome.ub "a ptr_metadata of no pointer")
+          | List.cons pointer others => (if ((layoutSize layout) =? 0) then (finishCall frames destination target (ctor Value.unit)) else (match (metadataOf program frames pointer)
+            | Evaluated.stop outcome => outcome
+            | Evaluated.found length => (finishCall frames destination target length))))))
     | Callee.rawEq generic => (match (genericLayout frames generic)
       | Option.none => (ctor Outcome.undefined "a generic argument whose layout the layout table does not hold")
       | Option.some layout => (match (evalOperands program frames args)

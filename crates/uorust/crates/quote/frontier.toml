@@ -1,0 +1,141 @@
+# The quote register (written by `uorust crate quote@1.0.47`; do not edit): every body of
+# quote's MIR at quote 1.0.47, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 199
+translated = 1
+residue = 198
+
+[module.__private]
+bodies = 133
+translated = 1
+residue = 132
+
+[module.ext]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.ident_fragment]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.spanned]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.to_tokens]
+bodies = 36
+translated = 0
+residue = 36
+
+[embedding]
+embedded = 199
+evaluable = 199
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 129
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: __private::HasIterator<true>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: RepInterp<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: __private::HasIterator<false>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GetSpanBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::IdentFragmentAdapter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::RepInterp<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::get_span::GetSpan<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::get_span::GetSpanBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::get_span::GetSpanInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Group"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Literal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Punct"
+bodies = 1

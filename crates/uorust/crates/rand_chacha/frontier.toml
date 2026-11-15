@@ -1,0 +1,138 @@
+# The rand_chacha register (written by `uorust crate rand_chacha@0.10.0`; do not edit): every body of
+# rand_chacha's MIR at rand_chacha 0.10.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 128
+translated = 0
+residue = 128
+
+[module.chacha]
+bodies = 72
+translated = 0
+residue = 72
+
+[module.guts]
+bodies = 56
+translated = 0
+residue = 56
+
+[embedding]
+embedded = 128
+evaluable = 128
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ChaCha"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha12Rng"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha20Rng"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha8Rng"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: guts::ChaCha"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: rand_core::Infallible"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ppv_lite86::vec128_storage"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: guts::State<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ChaCha12Core"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChaCha20Core"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChaCha8Core"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: abstract12::ChaCha12Rng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: abstract20::ChaCha20Rng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: abstract8::ChaCha8Rng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha12Core"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha20Core"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chacha::ChaCha8Core"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: guts::BLOCK64: mir::Operand::Constant: the constant item guts::BLOCK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: guts::BUFSZ64: mir::Operand::Constant: guts::BLOCK64: mir::Operand::Constant: the constant item guts::BLOCK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item guts::BLOCK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item guts::LOG2_BUFBLOCKS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as ppv_lite86::Machine>::u32x4x4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha::abstract12::ChaCha12Rng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha::abstract20::ChaCha20Rng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha::abstract8::ChaCha8Rng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::panicking::AssertKind"
+bodies = 1

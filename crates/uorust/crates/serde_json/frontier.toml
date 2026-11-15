@@ -1,0 +1,360 @@
+# The serde_json register (written by `uorust crate serde_json@1.0.154`; do not edit): every body of
+# serde_json's MIR at serde_json 1.0.154, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1040
+translated = 3
+residue = 1037
+
+[module.de]
+bodies = 131
+translated = 0
+residue = 131
+
+[module.error]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.iter]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.map]
+bodies = 93
+translated = 0
+residue = 93
+
+[module.number]
+bodies = 104
+translated = 0
+residue = 104
+
+[module.read]
+bodies = 68
+translated = 3
+residue = 65
+
+[module.ser]
+bodies = 143
+translated = 0
+residue = 143
+
+[module.value]
+bodies = 467
+translated = 0
+residue = 467
+
+[embedding]
+embedded = 1040
+evaluable = 1039
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 532
+
+[[cause]]
+cause = "mir::Ty: value::Value"
+bodies = 140
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 94
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: number::Number"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: Number"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: read::Reference<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::Position"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ser::Compound<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: map::Keys<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SliceRead<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: map::Iter<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ser::PrettyFormatter<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: de::ParserNumber"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: map::IterMut<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: map::Values<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Read"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StrRead<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::Entry<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::IntoIter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::IntoValues"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: map::ValuesMut<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::de::KeyClass"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeVec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Category"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::Deserializer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::StreamDeserializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::UnitVariantAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::VariantAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Category"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::IoRead<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::SliceRead<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::StrRead<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::CompactFormatter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serde::de::Unexpected<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::de::MapDeserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::de::SeqDeserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <R as read::Read<'_>>::should_early_return_if_failed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc536: &[i16; 256]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::reserve"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IoRead<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeqRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::io::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::ParseIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::MapAccess<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::SeqAccess<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::LineColIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::OccupiedEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::VacantEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: number::N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::BorrowedCowStrDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::MapRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::SeqRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::UnitOnly"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::VariantDeserializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::VariantRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeStructVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeTupleVariant"
+bodies = 1

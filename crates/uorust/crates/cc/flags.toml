@@ -1,0 +1,123 @@
+[[fn]]
+path = "cc::X86_FEATURES"
+kappa = "3cc0459846b86ee8f72e6d8328129a3f557f52e0d42e1815f7bb597cdc8ff7e4"
+embedded = "19b2c520fb9990449f7568eb7f6bf01fd15cdf365c56c0a4f63490852bc1358d"
+status = "translated"
+digest = "776142876abc28db6993f959f091f7af82d84d211f3b3a0e6cadf29c2f113136"
+
+[[fn]]
+path = "cc::X86_RENAMED_FEATURES"
+kappa = "b6b877ef267febb90880df8caa764cf4c519013f149b9ec4fc6a566a5a576312"
+embedded = "47985ca60283118249738f78e4e21b182868a8f39cd8016e25fff476853bf89a"
+status = "translated"
+digest = "526ac10be4643fdbfe644f0a02a5198640ed8518b56fad09efd29ef21a0baff7"
+
+[[fn]]
+path = "cc::arg_to_bool"
+kappa = "786027f1420e21a67e81aa9179d51150f5c420a3021d605211741079fbec0833"
+embedded = "a217396f80b05ce8691049f885fec2667b07f0d7033c2739fed161a2462c88c2"
+status = "residue"
+cause = "mir::Ty: impl AsRef<str>"
+
+[[fn]]
+path = "cc::arg_to_u32"
+kappa = "71ff1430188f011c2ddcb48223533da83cce44100c7ab3d2c2b5b84a2efe9341"
+embedded = "cda0a7e4a05b73c9ed42ff48459b013748def144815581f968326e9817469280"
+status = "residue"
+cause = "mir::Ty: impl AsRef<str>"
+
+[[fn]]
+path = "cc::flag_not_empty_generic"
+kappa = "460eb7b6e96986b41e32764a4cd7b2dca5cfccef626d7a7f706da151ac63157d"
+at = "Error=u32, ErrorKind=u32, T=u32"
+embedded = "6f942a10bb8dced93da6a5c9acc17894057785bf3940986776c7dcee9ec44dda"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "cc::flags::<impl at src/flags.rs:6:10: 6:15>::fmt"
+kappa = "edb826a92b56e338b312579dd09e54cc095e036cd84efc002df417687d7e4062"
+embedded = "27febd61cd8bec34e0aa5410843c6a522b2f14e62e0c70b74a464a10c50048da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "cc::flags::<impl at src/flags.rs:6:17: 6:26>::eq"
+kappa = "036f27103b73a54a7a5febcacb97ac2d62719321063ecaa57c7ee66b77f37d3e"
+embedded = "a7ad72223faabd9cc234207550df72e5ec0b8b5e6177027cdd48f1071dce1931"
+status = "residue"
+cause = "mir::Ty: RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::<impl at src/flags.rs:6:28: 6:35>::default"
+kappa = "a96fb5f73bb5b3e723f8076b62a55c130fe1d4c3a90dd111e11009fbbdafcf36"
+embedded = "8ba483a3cd6afa955647696e778afb8c39dd996a10279928132166293a73a595"
+status = "residue"
+cause = "mir::Ty: flags::RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::cc_flags"
+kappa = "99ef214586fcc1d4f645ba9a7f56335b8c814172bbc1658d7990673c67777f05"
+at = "Build=u32, CompilerFlag=u32"
+embedded = "d3defc1fbddd6c4e1f50a4b475d3e1433d8fb9eac3b67f286522f7845a98119d"
+status = "residue"
+cause = "mir::Ty: RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::control_flow_guard"
+kappa = "d1bb53563e9f48486785bb6a171f6cfda0061afff390f6493ec27b3b31bae38a"
+embedded = "63ccade9aa644022f1bc2e42768bf128a32267195c2468ba7527e572a1ac591d"
+status = "residue"
+cause = "mir::Ty: flags::ControlFlowGuard"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::linker_plugin_lto"
+kappa = "a5c0c6794601171538abaa6429c1c3f6f5afa11a6996554d85577f93cc6e4b56"
+embedded = "a189056d3bec0e7724c3cd2e2707f7d5383381009145deed8a416f528815ec3b"
+status = "residue"
+cause = "mir::Ty: RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::parse"
+kappa = "ec0d83b5f4a4655ffa530b2c9fda196d2290472210e8153d66a5e886657de36e"
+at = "Error=u32"
+embedded = "a61c2fe15465440acfec3ab883f3efbf5bad153137f677e7e7df998ee558a09d"
+status = "residue"
+cause = "mir::Ty: flags::RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::set_rustc_flag"
+kappa = "25d8f4dd1bee00722a2cc734925ea25b55224db07ea2818c73197d485e440473"
+at = "Error=u32"
+embedded = "5ef17d814ddf44225ffae0d38866140a34086497b48650721e8b1194757df487"
+status = "residue"
+cause = "mir::Ty: RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::target_cpu"
+kappa = "04171478f9c976d5295e1370f22eb95d71cf080ccb001d12549709ef9cc52487"
+embedded = "c8f534f2b187da4e2c22632355102244805a2c30b7c59f321929d9c6e863315c"
+status = "residue"
+cause = "mir::Ty: RustcCodegenFlags"
+
+[[fn]]
+path = "cc::flags::RustcCodegenFlags::target_feature_cc_flag"
+kappa = "03de6aa28a8b1403f4704a8f682367bfba51a0c0308c1121ad08a9be33acf4b8"
+embedded = "b8ddf4ed2a8396f8168d8f38646cc42bdb377a572c0fb097384d25df3c3e3031"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "cc::handle_flag_prefix"
+kappa = "75be22337e748e484ff6d1f0089d75a949cfcd945b3323e508fade1e5be4f6b7"
+embedded = "12f8225ae1a654a661e22b9837849ea2e9d933d2fc84bb47b9c5950a1c94ba5e"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "cc::is_flag_prefix"
+kappa = "45dfc85d7538ca5dfbc6daf2ef09df5ec430be4bab623d5ea697492b30490f2f"
+embedded = "95d9df4ed1c83866c1421dd7880335090bcaa2202de5533ee904b994df400308"
+status = "residue"
+cause = "mir::Operand::Constant: flags::RustcCodegenFlags::parse::is_flag_prefix::promoted[0]"
+

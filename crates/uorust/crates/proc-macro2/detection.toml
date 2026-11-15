@@ -1,0 +1,28 @@
+[[fn]]
+path = "proc-macro2::force_fallback"
+kappa = "88c415ae9e34dc464a6a2def2cb0459c9158313de952ff00b001ef3d75de6355"
+embedded = "f940daf036a78b9e44524933536afeb88b32e7730b78b191814d3505a00261fa"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc7: &Atomic<usize>}"
+
+[[fn]]
+path = "proc-macro2::initialize"
+kappa = "3f6167b8555b60de15ec989f15ebbade13410d3e8f4a1cff37e26351bf735265"
+embedded = "3ce9797274cab2c256dc2a20eb3accec85133164f076abc6f282b78d664eedbc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: is_available"
+
+[[fn]]
+path = "proc-macro2::inside_proc_macro"
+kappa = "d2e243e3783bddaf1782a07ef61ebb4f98ae28c20718c94cc040ba47965bbed6"
+embedded = "b7e7e7a0b256cee859b4892c5eccc8166f93285193290d82753b8bf4230530bf"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc7: &Atomic<usize>}"
+
+[[fn]]
+path = "proc-macro2::unforce_fallback"
+kappa = "34599b9211c691be57383188dd6f1882c8bcd346620e5d11c532d575d06eca93"
+embedded = "16b10c8953871de58af0fc90bf6412f18016fe3d024f02b0b6266a8ca2b02afa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: detection::initialize: proc-macro2's MIR stops at mir::TerminatorKind::Call: is_available"
+
