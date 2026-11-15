@@ -571,11 +571,17 @@ jobs:
             fi
           done
           python3 -I scripts/mir/ledger.py record-crates crates/uorust/crates target/registers
+      # Each attempt is recorded at the κ of the commit its shard checked
+      # out, so a register landed over a newer translator is not taken for
+      # the newer one's: the ledger holds that attempt stale, and the newer
+      # commit's own run, queued behind this one, lifts the crate again.
+      # It is rebased over any newer commit; one that wrote the same files
+      # conflicts, and nothing is pushed.
       - name: Push the registers and regenerate the model from them
         shell: bash
         env:
           GH_TOKEN: ${{{{ github.token }}}}
-          REBASE: '1'
+          REBASE: any
         run: scripts/ci/push.sh "Regenerate the crates' registers" "crates/uorust/crates crates/uorust/ledger" generate.yml
 """
 
