@@ -1177,8 +1177,17 @@ impl Cx<'_> {
             .last()
             .copied()
             .unwrap_or(name);
-        let Some([decl]) = self.structs.get(name).map(Vec::as_slice) else {
-            return None;
+        // Of the declarations of that name, the one of the path MIR prints
+        // (`ty::Type`, not `token::Type` or core's `mem::type_info::Type`).
+        // A path a re-export prints (`core::ffi::CStr` of `ffi::c_str::CStr`)
+        // is the one declaration of its name.
+        let (head, _) = generic_parts(ty);
+        let named = self.structs.get(name).map_or(&[][..], Vec::as_slice);
+        let found: Vec<_> = named.iter().filter(|d| same_item(head, &d.path)).collect();
+        let decl = match (found.as_slice(), named) {
+            ([one], _) => *one,
+            ([], [one]) => one,
+            _ => return None,
         };
         if decl.variants.is_some() || decl.data.is_some() {
             return Some(true);
