@@ -67,14 +67,14 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "std::count_is_zero"
 kappa = "b43f851d7fcb67c2ef81336ec941dd9b2e73dd16a38a752317e0b9b60b666e47"
-embedded = "d2e1b7992d7d2745aa64b583590b4e5523405fb2377055b874edabc44f9fd45f"
+embedded = "752262ad0195bdb5f16fe2a1dc01db858de72f03717d532a8d6273832816e088"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc735: &Atomic<usize>}"
 
 [[fn]]
 path = "std::decrease"
 kappa = "76579050e70927dd63d5b0388880bfe845b930cc9b8149afef39be494993fdb3"
-embedded = "7264f920aac9e7bb9868a15843342d7c7ec35c0852c8b50f7284479da2739fd9"
+embedded = "328d61a7631f4eb21c62396a71368c3222a0088d246bf1949687685927a2df25"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc735: &Atomic<usize>}"
 
@@ -118,7 +118,7 @@ cause = "mir::Operand::Constant: panicking::panic_count::get_count::promoted[0]:
 [[fn]]
 path = "std::increase"
 kappa = "36087faab6929fb814886764ec2320cb10809cb117d0308fff262b387a980194"
-embedded = "e0eef386dc60a958ddb94a129cc207799875852a76e890dd63a1b24d3899310e"
+embedded = "77bebd5fadbd14651b8204d03d19cb87ca8c955d4fc5ee058b9f234bb501a2bb"
 status = "residue"
 cause = "mir::Ty: panicking::panic_count::MustAbort"
 
@@ -202,7 +202,7 @@ cause = "mir::Ty: core::fmt::Error"
 [[fn]]
 path = "std::panic_with_hook"
 kappa = "862b46b0fd4a640a36d2fc33f12c857eba1e3cf6c5fab5160f0ebe28a94fe26a"
-embedded = "376508fa12b0cf1ab6ed9074743e960e135602600761883b01e6cb34906be70d"
+embedded = "bc438080bcf4262d809d373de1a74c70ed3a96e427c9ebe604b642446916d46b"
 status = "residue"
 cause = "mir::Ty: dyn core::panic::PanicPayload"
 
@@ -287,28 +287,28 @@ cause = "mir::Ty: dyn core::panic::PanicPayload"
 [[fn]]
 path = "std::set_always_abort"
 kappa = "b42dcd7e9442dadd2a66f5f5c6d55190e8d3bde027e6b20664a2f9d9113544ea"
-embedded = "18ba56cde4ec2ac040ce992c4a27ab0efb0dc287d0da26067070ffba6bce651f"
+embedded = "6da5898c2ebec3560823c80e72785d9a11a45f7761aafccdce8e101e90cb6109"
 status = "residue"
 cause = "mir::Operand::Constant: {alloc735: &Atomic<usize>}"
 
 [[fn]]
 path = "std::set_hook"
 kappa = "0dacc872e1cc929ff6434cf383b96b9c2a99d32de11d2290deafb9e4608245c0"
-embedded = "f1faeaac312a60365dbafd437665a48358117c3b5e21b76cef6b12c9937653e1"
+embedded = "7df850290691b30923baa01558c2c70cdcf171ad3023d9223da3b48801bd4aa4"
 status = "residue"
 cause = "mir::Ty: dyn for<'a, 'b> core::ops::Fn(&'a PanicHookInfo<'b>) + core::marker::Send + core::marker::Sync"
 
 [[fn]]
 path = "std::take_hook"
 kappa = "f01a5ef76dfb8e1ed2e55e42ec94f7608dad966f17b6f3819a1bcc3d0932de33"
-embedded = "37ec00e918634fdfb55af82ed62515deada8e1dad2bb2a9008a530eaecaf562f"
+embedded = "20e2a4968f242804308aabd91c44d3492d00317b312f4f8a06177022c61d54cd"
 status = "residue"
 cause = "mir::Ty: dyn for<'a, 'b> core::ops::Fn(&'a panic::PanicHookInfo<'b>) + core::marker::Send + core::marker::Sync"
 
 [[fn]]
 path = "std::update_hook"
 kappa = "119c21292342f28edaa17af5ace84db135bfed0e5e77f884d336762b89295360"
-embedded = "1429309b0ba63c5ce2a19df34fbdbd071d5841f2d3dc9fa0a361072a7e6c5e9b"
+embedded = "77cf64ef2eae97c1e022a6ee47e82d29eec19b87ba52a127512541b9373873ab"
 status = "residue"
 cause = "mir::Ty: F"
 

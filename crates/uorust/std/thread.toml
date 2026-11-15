@@ -40,6 +40,7 @@ embedded = "f25b0fa20def38550ae017a96ab56c00b24633707f526c028e5a7963fbb7d927"
 status = "translated"
 bridged = "pending"
 pending = "proof: straight"
+measured = "c73cd8bd542693b84adb7441fa39921a66c0e79e"
 digest = "633a822b66ba880aa021eb4add35abfffee621187dcdfa3b9a960a01ef1de7e3"
 
 [[fn]]
@@ -49,6 +50,7 @@ embedded = "8111569ab77a482ec0a9542ba13f11d48aeb9e94132cdeab6c51459d5bf7988a"
 status = "translated"
 bridged = "pending"
 pending = "closure: a callee not embedded"
+measured = "c73cd8bd542693b84adb7441fa39921a66c0e79e"
 digest = "f1e7ac0e6919ecb331751b8f5621a2a14f5f156aec099eec7cdf2e58a7ab9675"
 
 [[fn]]
@@ -112,7 +114,7 @@ cause = "mir::Ty: thread::builder::Builder"
 [[fn]]
 path = "std::current"
 kappa = "138e1bd7bd4018314bcf7ce5e77670bc22ad0fa8a88272ac7ee7223a9c798838"
-embedded = "0f2e70218c3f313c1274782ecde4db1f49fd500b94610a14e2d40ad1fccaed5f"
+embedded = "004de3d8970896de68653c18d80c88474d95509f01ae4821295e1a7e8cb104c2"
 status = "residue"
 cause = "mir::Ty: thread::thread::Thread"
 
@@ -126,14 +128,14 @@ cause = """mir::TerminatorKind::Call: sys::thread::unix::current_os_id: std's MI
 [[fn]]
 path = "std::current::id::get"
 kappa = "6be2cb4a96fa7ccd68ffd20ab0b08fb4e1bcd28c0e6ebd046930dc14373ff791"
-embedded = "b2fa6721aedc9688e4546099e852396ddef6cba73b74b759d68ab1eadbf7ab93"
+embedded = "19f7e66059225eb6c1c65589c9316362cef839b521fd52af4725578307e511ab"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
 [[fn]]
 path = "std::current::id::set"
 kappa = "01a7bff4157b569a7258bd1d4f7ccbabad7250f23abc2bac8adebe33ad2592a3"
-embedded = "f608c03e559a3a1e5ee9233bd5c5af8b9b719e686157679cfe9ead811efecee3"
+embedded = "7fd7daa82aacaf4028f576670bbec44c7d130de288cb2499562cc232cf37b30d"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
@@ -147,14 +149,14 @@ cause = "mir::Ty: thread::id::ThreadId"
 [[fn]]
 path = "std::current_or_unnamed"
 kappa = "7c462f7f122ad5fc712fcfa9fe28a5aef0b292715f3ea5800384079909508e83"
-embedded = "a4679ca2c398b4d34dfd485019a6dd57a4cb838d20082d674e408192e5977045"
+embedded = "d3215a3a4c00bc237d6d9527fb515c59d53a11a0544864b547ba1e945e29efce"
 status = "residue"
 cause = "mir::Ty: thread::thread::Thread"
 
 [[fn]]
 path = "std::drop_current"
 kappa = "36b857cbd95acb95c9280677271785c821412341df08a8c018ba1d6eac253fd6"
-embedded = "59b540d940339f840738b6f397181c02fee0afef45fb1cf0982f125eab25c80f"
+embedded = "137db7f555c65438c43e1a0e1444925fd3b9c8e9e5e723493776ddc9df103c23"
 status = "residue"
 cause = "mir::Rvalue::Ref"
 
@@ -165,6 +167,7 @@ embedded = "be72ddde2ed3cef89a2085ba883bc1ff9408f8b0758c56b85a14b1a96faf01e7"
 status = "translated"
 bridged = "pending"
 pending = "signature: Unit"
+measured = "c73cd8bd542693b84adb7441fa39921a66c0e79e"
 digest = "942f1fea18886110264e6f284ed1cbd07c155e8674ec0694c2812ba49fc22cf3"
 
 [[fn]]
@@ -219,7 +222,7 @@ cause = "mir::Ty: thread::id::ThreadId"
 [[fn]]
 path = "std::init_current"
 kappa = "c299c67e69a40d0170c8b297d50312972a562cabffd77d2b1a946ca47dcca9ab"
-embedded = "53cbc589861752021a984e63526f325bd4bb58adc14165d52d4cd771219ffd3a"
+embedded = "43c2982f8b879c72cde7034ffd37aa31ca3dc0a33c5d862cf040c36e42ad57ca"
 status = "residue"
 cause = "mir::Ty: thread::thread::Thread"
 
@@ -479,14 +482,14 @@ cause = "mir::Ty: RefCell<u32>"
 [[fn]]
 path = "std::main_thread::get"
 kappa = "368c7ce03ba749432aa94767316bc186504d524a270d8c4818367fffbb4dd6f2"
-embedded = "d9d85060bab1dec02fc914d701813007b6fb6842635e412cc3004eb512869393"
+embedded = "904a60e7e1eb4ef2b0b9bf167b03d363ff82cdfc4d96702244bcb9be969d94ca"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
 [[fn]]
 path = "std::main_thread::set"
 kappa = "da7d40251880a1f0fe08f938bf82d7af738621de4b5265dc03b5dc18de93d25a"
-embedded = "dc6cebede8425a360414fd258968fd4697855f3f7d2e4e16be1be0a8e12ca44e"
+embedded = "c643ea4e3005fa3103ac73be424b04a6d28aeb42666759b4dcfb7c866e6e735d"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
@@ -611,7 +614,7 @@ cause = "mir::Ty: F"
 [[fn]]
 path = "std::set_current"
 kappa = "a64ae37ad5876ac0e771bc07b0d3b2d920b8d9a22fb40ac9c989dd0377e4ea1e"
-embedded = "184b295d223c0cd9c74da0c966adeed694d7852e22665b075b8653612f16c8ab"
+embedded = "49f7459682fa9f138bf38bad1388d740cb4f50baa813176619a1630a89eadfb8"
 status = "residue"
 cause = "mir::Ty: thread::thread::Thread"
 
@@ -725,7 +728,7 @@ cause = "mir::Ty: thread::id::ThreadId"
 [[fn]]
 path = "std::thread::id::ThreadId::new"
 kappa = "54b53391e893f70e47f939420ad52c4b6c85e7f8345d2d3670785af10d519a90"
-embedded = "d3c6cea3a770f90feaac7d7afd44d353add3d0ffce1c66ff882612a75e1afba7"
+embedded = "a1c71fb68ae4907daf564b8ce957948d55d1759b53cade91ae0a78770e87117c"
 status = "residue"
 cause = "mir::Ty: thread::id::ThreadId"
 
@@ -838,7 +841,7 @@ cause = "mir::Ty: thread::thread::thread_name_string::ThreadNameString"
 path = "std::try_with_current"
 kappa = "fdec161fe49e475ca83f7ad6ee3be5f1551085e2412f11da86ad29627e521f20"
 at = "F=u32, R=u32"
-embedded = "54f4c509b5ccfae4e6fa8f919df539390b80f49e7936827be7a5fc5487a68062"
+embedded = "1e18045a7fd367e70b68604f064923db159dedb6bb1a6db7d4ad26b2ad8beb76"
 status = "residue"
 cause = "mir::Rvalue::Ref"
 
