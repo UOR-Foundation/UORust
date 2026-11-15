@@ -2831,10 +2831,38 @@ definition{
   axioms: [Quot.sound, propext]
 }
 
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount3Root,
+  parameters: [],
+  result: Bool,
+  body: ((above (cons 17 (cons 19 (cons 23 (nil Nat)))) 18) =? 2)
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount3RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount3Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreBandsMeasureAndCount3,
   parameters: [],
   statement: ((above (cons 17 (cons 19 (cons 23 (nil Nat)))) 18) = 2),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount4Root,
+  parameters: [],
+  result: Bool,
+  body: (match (firstReading (nil Nat)) | Option.none => true | Option.some held => false)
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount4RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount4Root) = true),
   proof: decide{}
 }
 
@@ -2845,10 +2873,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount5Root,
+  parameters: [],
+  result: Bool,
+  body: ((targetOr (ctor Option.none [Nat]) 21) =? 21)
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount5RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount5Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreBandsMeasureAndCount5,
   parameters: [],
   statement: ((targetOr (ctor Option.none [Nat]) 21) = 21),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount11Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (labelOf (record Labelled {label := "night", band := (record Band {low := 16, high := 18})})) "night" : Bool)
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount11RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount11Root) = true),
   proof: decide{}
 }
 
@@ -2859,10 +2915,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount13Root,
+  parameters: [],
+  result: Bool,
+  body: (notANumber (ctor ConfigError.NotANumber))
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount13RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount13Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreBandsMeasureAndCount13,
   parameters: [],
   statement: ((notANumber (ctor ConfigError.NotANumber)) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount14Root,
+  parameters: [],
+  result: Bool,
+  body: (not (notANumber (ctor ConfigError.Unreadable)))
+}
+
+theorem{
+  name: acceptThermoCoreBandsMeasureAndCount14RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandsMeasureAndCount14Root) = true),
   proof: decide{}
 }
 
@@ -2873,6 +2957,20 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings0Root,
+  parameters: [],
+  result: Bool,
+  body: ((tick 255) =? 0)
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings0Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreCountersAndSignedReadings0,
   parameters: [],
@@ -2880,10 +2978,42 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings1Root,
+  parameters: [],
+  result: Bool,
+  body: (freezing (-3 : Int64)),
+  axioms: [propext]
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings1Root) = true),
+  proof: decide{},
+  axioms: [propext]
+}
+
 theorem{
   name: acceptThermoCoreCountersAndSignedReadings1,
   parameters: [],
   statement: ((freezing (-3 : Int64)) = true),
+  proof: decide{},
+  axioms: [propext]
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings2Root,
+  parameters: [],
+  result: Bool,
+  body: (not (freezing (4 : Int64))),
+  axioms: [propext]
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings2RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings2Root) = true),
   proof: decide{},
   axioms: [propext]
 }
@@ -2896,10 +3026,38 @@ theorem{
   axioms: [propext]
 }
 
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings4Root,
+  parameters: [],
+  result: Bool,
+  body: (isCelsius "C")
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings4RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings4Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreCountersAndSignedReadings4,
   parameters: [],
   statement: ((isCelsius "C") = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings5Root,
+  parameters: [],
+  result: Bool,
+  body: (not (isCelsius "F"))
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings5RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings5Root) = true),
   proof: decide{}
 }
 
@@ -2910,10 +3068,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings6Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (fanLabel 2) "low" : Bool)
+}
+
+theorem{
+  name: acceptThermoCoreCountersAndSignedReadings6RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreCountersAndSignedReadings6Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreCountersAndSignedReadings6,
   parameters: [],
   statement: ((fanLabel 2) = "low"),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreHeatsWhenCold0Root,
+  parameters: [],
+  result: Bool,
+  body: (shouldHeat 18 21)
+}
+
+theorem{
+  name: acceptThermoCoreHeatsWhenCold0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreHeatsWhenCold0Root) = true),
   proof: decide{}
 }
 
@@ -2924,10 +3110,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreHeatsWhenCold1Root,
+  parameters: [],
+  result: Bool,
+  body: (not (shouldHeat 22 21))
+}
+
+theorem{
+  name: acceptThermoCoreHeatsWhenCold1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreHeatsWhenCold1Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreHeatsWhenCold1,
   parameters: [],
   statement: ((shouldHeat 22 21) = false),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreBandIsInclusive0Root,
+  parameters: [],
+  result: Bool,
+  body: (withinBand 5 5 9)
+}
+
+theorem{
+  name: acceptThermoCoreBandIsInclusive0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandIsInclusive0Root) = true),
   proof: decide{}
 }
 
@@ -2938,10 +3152,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreBandIsInclusive1Root,
+  parameters: [],
+  result: Bool,
+  body: (not (withinBand 10 5 9))
+}
+
+theorem{
+  name: acceptThermoCoreBandIsInclusive1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreBandIsInclusive1Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreBandIsInclusive1,
   parameters: [],
   statement: ((withinBand 10 5 9) = false),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreMidpointOfABand0Root,
+  parameters: [],
+  result: Bool,
+  body: ((midpoint 4 8) =? 6)
+}
+
+theorem{
+  name: acceptThermoCoreMidpointOfABand0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreMidpointOfABand0Root) = true),
   proof: decide{}
 }
 
@@ -2952,10 +3194,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreTheRosterReadsItsRooms0Root,
+  parameters: [],
+  result: Bool,
+  body: ((slots (nil Room)) =? 1)
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterReadsItsRooms0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterReadsItsRooms0Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreTheRosterReadsItsRooms0,
   parameters: [],
   statement: ((slots (nil Room)) = 1),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps0Root,
+  parameters: [],
+  result: Bool,
+  body: (allWithin (cons 18 (cons 20 (nil Nat))) 16 22)
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterFoldsAndClamps0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterFoldsAndClamps0Root) = true),
   proof: decide{}
 }
 
@@ -2966,11 +3236,41 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps1Root,
+  parameters: [],
+  result: Bool,
+  body: ((highest (cons 3 (cons 9 (cons 4 (nil Nat))))) =? 9)
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterFoldsAndClamps1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterFoldsAndClamps1Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreTheRosterFoldsAndClamps1,
   parameters: [],
   statement: ((highest (cons 3 (cons 9 (cons 4 (nil Nat))))) = 9),
   proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps5Root,
+  parameters: [],
+  result: Bool,
+  body: ((labelWidth "hall") =? 4),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterFoldsAndClamps5RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterFoldsAndClamps5Root) = true),
+  proof: decide{},
+  axioms: [Classical.choice, Quot.sound, propext]
 }
 
 theorem{
@@ -2981,10 +3281,38 @@ theorem{
   axioms: [Classical.choice, Quot.sound, propext]
 }
 
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps6Root,
+  parameters: [],
+  result: Bool,
+  body: (scheduled (cons "hall" (nil String)) "hall")
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterFoldsAndClamps6RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterFoldsAndClamps6Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreTheRosterFoldsAndClamps6,
   parameters: [],
   statement: ((scheduled (cons "hall" (nil String)) "hall") = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps8Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (blank) "" : Bool)
+}
+
+theorem{
+  name: acceptThermoCoreTheRosterFoldsAndClamps8RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreTheRosterFoldsAndClamps8Root) = true),
   proof: decide{}
 }
 
@@ -2995,10 +3323,42 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom0Root,
+  parameters: [],
+  result: Bool,
+  body: (sortsBefore (record Request {priority := (ctor Priority.Low), room := "hall"}) (record Request {priority := (ctor Priority.Urgent), room := "hall"})),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom0RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom0Root) = true),
+  proof: decide{},
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom0,
   parameters: [],
   statement: ((sortsBefore (record Request {priority := (ctor Priority.Low), room := "hall"}) (record Request {priority := (ctor Priority.Urgent), room := "hall"})) = true),
+  proof: decide{},
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom1Root,
+  parameters: [],
+  result: Bool,
+  body: (sameZone (ctor Zone.Room "hall") (ctor Zone.Room "hall")),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom1Root) = true),
   proof: decide{},
   axioms: [Classical.choice, Quot.sound, propext]
 }
@@ -3011,10 +3371,38 @@ theorem{
   axioms: [Classical.choice, Quot.sound, propext]
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom6Root,
+  parameters: [],
+  result: Bool,
+  body: ((saturatedTotal (cons 1 (cons 2 (nil Nat)))) =? 3)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom6RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom6Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom6,
   parameters: [],
   statement: ((saturatedTotal (cons 1 (cons 2 (nil Nat)))) = 3),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom7Root,
+  parameters: [],
+  result: Bool,
+  body: (not (urgentAndNamed (record Request {priority := (ctor Priority.Low), room := "hall"})))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom7RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom7Root) = true),
   proof: decide{}
 }
 
@@ -3025,10 +3413,40 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom8Root,
+  parameters: [],
+  result: Bool,
+  body: (match (secondLast (cons 4 (cons 5 (cons 6 (nil Nat)))))
+    | Option.none => false
+    | Option.some held => (held =? 5))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom8RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom8Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom8,
   parameters: [],
   statement: ((secondLast (cons 4 (cons 5 (cons 6 (nil Nat))))) = (ctor Option.some [Nat] 5)),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom9Root,
+  parameters: [],
+  result: Bool,
+  body: ((aboveTen 12) =? 2)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom9RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom9Root) = true),
   proof: decide{}
 }
 
@@ -3039,10 +3457,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom10Root,
+  parameters: [],
+  result: Bool,
+  body: (match (warm 20) | Option.none => false | Option.some held => (held =? 20))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom10RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom10Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom10,
   parameters: [],
   statement: ((warm 20) = (ctor Option.some [Nat] 20)),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom21Root,
+  parameters: [],
+  result: Bool,
+  body: (startsUnnamed (nil String))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom21RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom21Root) = true),
   proof: decide{}
 }
 
@@ -3053,10 +3499,42 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom22Root,
+  parameters: [],
+  result: Bool,
+  body: (match (bookedOrFirst (ctor Option.none [String]) (ctor Option.none [(List String)]))
+    | Option.none => true
+    | Option.some held => false)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom22RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom22Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom22,
   parameters: [],
   statement: ((bookedOrFirst (ctor Option.none [String]) (ctor Option.none [(List String)])) = (ctor Option.none [String])),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom23Root,
+  parameters: [],
+  result: Bool,
+  body: (match (namedOrSpare (ctor Option.none [String]) (ctor Option.some [String] "den"))
+    | Option.none => false
+    | Option.some held => (prim equal held "den" : Bool))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom23RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom23Root) = true),
   proof: decide{}
 }
 
@@ -3067,10 +3545,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom27Root,
+  parameters: [],
+  result: Bool,
+  body: (readingWithin 20 18 20)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom27RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom27Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom27,
   parameters: [],
   statement: ((readingWithin 20 18 20) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom28Root,
+  parameters: [],
+  result: Bool,
+  body: (not (readingWithin 21 18 20))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom28RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom28Root) = true),
   proof: decide{}
 }
 
@@ -3081,10 +3587,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom29Root,
+  parameters: [],
+  result: Bool,
+  body: (inComfortBand 20)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom29RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom29Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom29,
   parameters: [],
   statement: ((inComfortBand 20) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom30Root,
+  parameters: [],
+  result: Bool,
+  body: (not (inComfortBand 30))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom30RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom30Root) = true),
   proof: decide{}
 }
 
@@ -3095,10 +3629,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom31Root,
+  parameters: [],
+  result: Bool,
+  body: (pressing (ctor Priority.Urgent))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom31RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom31Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom31,
   parameters: [],
   statement: ((pressing (ctor Priority.Urgent)) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom32Root,
+  parameters: [],
+  result: Bool,
+  body: ((countByte 300) =? 44)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom32RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom32Root) = true),
   proof: decide{}
 }
 
@@ -3109,10 +3671,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom33Root,
+  parameters: [],
+  result: Bool,
+  body: ((codeIndex 7) =? 7)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom33RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom33Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom33,
   parameters: [],
   statement: ((codeIndex 7) = 7),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom37Root,
+  parameters: [],
+  result: Bool,
+  body: (not (startsUnnamed (cons "den" (nil String))))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom37RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom37Root) = true),
   proof: decide{}
 }
 
@@ -3123,10 +3713,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom38Root,
+  parameters: [],
+  result: Bool,
+  body: ((perRoom 7 2) =? 3)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom38RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom38Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom38,
   parameters: [],
   statement: ((perRoom 7 2) = 3),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom39Root,
+  parameters: [],
+  result: Bool,
+  body: ((perRoom 7 0) =? 0)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom39RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom39Root) = true),
   proof: decide{}
 }
 
@@ -3137,10 +3755,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom40Root,
+  parameters: [],
+  result: Bool,
+  body: (match (leftOver 7 0) | Option.none => true | Option.some held => false)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom40RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom40Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom40,
   parameters: [],
   statement: ((leftOver 7 0) = (ctor Option.none [Nat])),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom41Root,
+  parameters: [],
+  result: Bool,
+  body: (match (leftOver 7 3) | Option.none => false | Option.some held => (held =? 1))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom41RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom41Root) = true),
   proof: decide{}
 }
 
@@ -3151,10 +3797,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom43Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (firstValue) "hall" : Bool)
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom43RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom43Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom43,
   parameters: [],
   statement: ((firstValue) = "hall"),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom52Root,
+  parameters: [],
+  result: Bool,
+  body: (opening "den")
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom52RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom52Root) = true),
   proof: decide{}
 }
 
@@ -3165,10 +3839,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom53Root,
+  parameters: [],
+  result: Bool,
+  body: (not (opening "attic"))
+}
+
+theorem{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom53RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreRequestsSortByPriorityThenRoom53Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreRequestsSortByPriorityThenRoom53,
   parameters: [],
   statement: ((opening "attic") = false),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm3Root,
+  parameters: [],
+  result: Bool,
+  body: (match (singleLabel (nil Phase)) | Option.none => true | Option.some held => false)
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm3RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm3Root) = true),
   proof: decide{}
 }
 
@@ -3179,10 +3881,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm7Root,
+  parameters: [],
+  result: Bool,
+  body: (comfortable (record Band {low := 18, high := 22}))
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm7RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm7Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreNestedPatternsChooseTheArm7,
   parameters: [],
   statement: ((comfortable (record Band {low := 18, high := 22})) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm8Root,
+  parameters: [],
+  result: Bool,
+  body: (not (comfortable (record Band {low := 16, high := 22})))
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm8RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm8Root) = true),
   proof: decide{}
 }
 
@@ -3193,10 +3923,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm12Root,
+  parameters: [],
+  result: Bool,
+  body: (steady true false false)
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm12RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm12Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreNestedPatternsChooseTheArm12,
   parameters: [],
   statement: ((steady true false false) = true),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm13Root,
+  parameters: [],
+  result: Bool,
+  body: (steady false false true)
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm13RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm13Root) = true),
   proof: decide{}
 }
 
@@ -3207,10 +3965,38 @@ theorem{
   proof: decide{}
 }
 
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm14Root,
+  parameters: [],
+  result: Bool,
+  body: (not (steady true false true))
+}
+
+theorem{
+  name: acceptThermoCoreNestedPatternsChooseTheArm14RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreNestedPatternsChooseTheArm14Root) = true),
+  proof: decide{}
+}
+
 theorem{
   name: acceptThermoCoreNestedPatternsChooseTheArm14,
   parameters: [],
   statement: ((steady true false true) = false),
+  proof: decide{}
+}
+
+definition{
+  name: acceptThermoCoreAHeldPhaseKeepsItsLabel1Root,
+  parameters: [],
+  result: Bool,
+  body: (not (isSequence (ctor Step.Hold 21)))
+}
+
+theorem{
+  name: acceptThermoCoreAHeldPhaseKeepsItsLabel1RootHolds,
+  parameters: [],
+  statement: ((acceptThermoCoreAHeldPhaseKeepsItsLabel1Root) = true),
   proof: decide{}
 }
 

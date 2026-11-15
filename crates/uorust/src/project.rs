@@ -3772,17 +3772,39 @@ fn behavior(
             .iter()
             .enumerate()
         {
-            if let Some((statement, callee)) =
+            if let Some(accepted) =
                 lift::acceptance(kind, args, sigs, &file_scopes[&(r.pkg, r.file)])
             {
                 let name = format!("accept{}{}", pascal(&[&ctx.package(r).name, &f.name]), i);
                 if theorems.insert(name.clone()) {
+                    let axioms = axioms.get(&accepted.callee).cloned().unwrap_or_default();
+                    // The acceptance root: the claim as a closed Boolean
+                    // definition, which a native library lists and its
+                    // generated package executes (SPEC 12.6).
+                    let root = format!("{name}Root");
+                    decls.push(Decl::Definition {
+                        name: root.clone(),
+                        parameters: Vec::new(),
+                        result: "Bool".to_string(),
+                        body: Expr::Flat(accepted.check),
+                        axioms: axioms.clone(),
+                        recursive: None,
+                        termination: None,
+                        mutual: None,
+                    });
+                    decls.push(Decl::Theorem {
+                        name: format!("{root}Holds"),
+                        parameters: Vec::new(),
+                        statement: format!("(({root}) = true)"),
+                        proof: "decide{}".to_string(),
+                        axioms: axioms.clone(),
+                    });
                     decls.push(Decl::Theorem {
                         name,
                         parameters: Vec::new(),
-                        statement,
+                        statement: accepted.statement,
                         proof: "decide{}".to_string(),
-                        axioms: axioms.get(&callee).cloned().unwrap_or_default(),
+                        axioms,
                     });
                 }
             }

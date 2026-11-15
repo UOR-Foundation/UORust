@@ -10877,15 +10877,72 @@ fn applied(
     Some((format!("({})", parts.join(" ")), sig.result.clone(), name))
 }
 
-/// The acceptance statement an assertion makes about a lifted function, and
-/// that function's Rust name, when it is a closed instance: `assert!(f(1, 2))`,
-/// `assert!(!f(..))`, `assert_eq!(f(..), 3)`.
+/// What an assertion of a test states about a lifted function, when it is a
+/// closed instance: `assert!(f(1, 2))`, `assert!(!f(..))`, `assert_eq!(f(..), 3)`.
+pub(crate) struct Acceptance {
+    /// The claim as a proposition: `(f 1 2 = true)`.
+    pub(crate) statement: String,
+    /// The same claim as a Boolean term with no free variable, the body of the
+    /// acceptance root a native library declares (SPEC 12.6: acceptance roots
+    /// are zero-argument Boolean definitions).
+    pub(crate) check: String,
+    /// The lifted function's Rust name.
+    pub(crate) callee: String,
+}
+
+/// The Boolean term that holds exactly when `call`, of type `result`,
+/// equals the literal `right`: the decidable equality of each type the
+/// statement admits, written with the operators LexLean gives it.
+fn holds(call: &str, result: &Ty, right: &rs::RustExpr, types: &Types) -> Option<String> {
+    match result {
+        Ty::Bool => match literal(right, result, types)?.as_str() {
+            "true" => Some(call.to_string()),
+            "false" => Some(format!("(not {call})")),
+            _ => None,
+        },
+        Ty::Nat(_) => Some(format!("({call} =? {})", literal(right, result, types)?)),
+        Ty::Str => Some(format!(
+            "(prim equal {call} {} : Bool)",
+            literal(right, result, types)?
+        )),
+        Ty::Option(inner) => {
+            let (none, some) = match right {
+                rs::RustExpr::Path(p) if wrapper(p) == Some("None") => {
+                    ("true".to_string(), "false".to_string())
+                }
+                rs::RustExpr::Call(c) => {
+                    let rs::RustExpr::Path(p) = &*c.func else {
+                        return None;
+                    };
+                    match (wrapper(p), c.args.as_slice()) {
+                        (Some("Some"), [one]) => {
+                            ("false".to_string(), holds("held", inner, one, types)?)
+                        }
+                        _ => return None,
+                    }
+                }
+                rs::RustExpr::Paren(p) => return holds(call, result, p, types),
+                _ => return None,
+            };
+            if matches!(**inner, Ty::Option(_)) {
+                return None;
+            }
+            Some(format!(
+                "(match {call} | Option.none => {none} | Option.some held => {some})"
+            ))
+        }
+        _ => None,
+    }
+}
+
+/// The acceptance an assertion makes about a lifted function, when it is a
+/// closed instance over a type with decidable equality.
 pub(crate) fn acceptance(
     kind: &str,
     args: &[rs::RustExpr],
     lifted: &BTreeMap<String, Sig>,
     types: &Types,
-) -> Option<(String, String)> {
+) -> Option<Acceptance> {
     match (kind, args) {
         ("assert", [single, ..]) => {
             let (inner, value) = match single {
@@ -10893,14 +10950,22 @@ pub(crate) fn acceptance(
                     op: rs::UnOp::Not,
                     expr,
                     ..
-                }) => (&**expr, "false"),
-                other => (other, "true"),
+                }) => (&**expr, false),
+                other => (other, true),
             };
-            let (call, result, name) = applied(inner, lifted, types)?;
-            (result == Ty::Bool).then(|| (format!("({call} = {value})"), name))
+            let (call, result, callee) = applied(inner, lifted, types)?;
+            (result == Ty::Bool).then(|| Acceptance {
+                statement: format!("({call} = {value})"),
+                check: if value {
+                    call.clone()
+                } else {
+                    format!("(not {call})")
+                },
+                callee,
+            })
         }
         ("assert_eq", [left, right, ..]) => {
-            let (call, result, name) = applied(left, lifted, types)?;
+            let (call, result, callee) = applied(left, lifted, types)?;
             let decidable = |t: &Ty| matches!(t, Ty::Bool | Ty::Nat(_) | Ty::Str);
             let comparable = match &result {
                 Ty::Option(inner) => decidable(inner),
@@ -10910,7 +10975,12 @@ pub(crate) fn acceptance(
                 return None;
             }
             let value = literal(right, &result, types)?;
-            Some((format!("({call} = {value})"), name))
+            let check = holds(&call, &result, right, types)?;
+            Some(Acceptance {
+                statement: format!("({call} = {value})"),
+                check,
+                callee,
+            })
         }
         _ => None,
     }
