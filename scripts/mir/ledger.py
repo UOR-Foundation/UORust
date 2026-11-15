@@ -19,9 +19,9 @@ two κ and applies the same rule to the ledger file:
 
     python3 -I scripts/mir/ledger.py stale REGISTER MODULES.json
     python3 -I scripts/mir/ledger.py record REGISTER SHARDS_DIR
-    python3 -I scripts/mir/ledger.py held-crates REGISTERS RANKED.json
-    python3 -I scripts/mir/ledger.py stale-crates REGISTERS RANKED.json
-    python3 -I scripts/mir/ledger.py record-crates REGISTERS CRATES_JSON
+    python3 -I scripts/mir/ledger.py rank-count REGISTERS BUDGET_SECONDS
+    python3 -I scripts/mir/ledger.py plan-crates REGISTERS RANKED.json EVENT BUDGET_SECONDS
+    python3 -I scripts/mir/ledger.py record-crates REGISTERS TIMES_DIR
     python3 -I scripts/mir/ledger.py mir-key
 
 `mir-key` prints the key a library's MIR dump is kept under, as a CI
@@ -86,9 +86,21 @@ def read_ledger(register):
     return {(a["module"], a["translator"], a["toolchain"]) for a in doc.get("attempt", [])}
 
 
-def write_ledger(register, attempts):
+def read_seconds(register):
+    """The seconds each attempt took, by module, where it was measured."""
+    path = ledger_path(register)
+    if not os.path.exists(path):
+        return {}
+    import tomllib
+    doc = tomllib.loads(open(path, encoding="utf-8").read())
+    return {a["module"]: a["seconds"] for a in doc.get("attempt", []) if "seconds" in a}
+
+
+def write_ledger(register, attempts, seconds=None):
+    seconds = read_seconds(register) if seconds is None else seconds
     os.makedirs(os.path.dirname(ledger_path(register)), exist_ok=True)
-    rows = "".join(f'[[attempt]]\nmodule = {json.dumps(m)}\ntranslator = "{t}"\ntoolchain = "{c}"\n\n'
+    rows = "".join(f'[[attempt]]\nmodule = {json.dumps(m)}\ntranslator = "{t}"\ntoolchain = "{c}"\n'
+                   + (f"seconds = {seconds[m]}\n" if m in seconds else "") + "\n"
                    for m, t, c in sorted(attempts))
     head = ("# The attempt ledger (written by scripts/mir/ledger.py; do not edit): each\n"
             "# (module, translator κ, toolchain κ) the workload translated. An attempt\n"
@@ -110,13 +122,81 @@ def stale(attempts, ledger):
     return [a for a in attempts if a not in ledger]
 
 
-def record(register, modules):
+def record(register, modules, seconds=None):
     """The ledger with the current attempt of each module, the older
-    attempts of those modules replaced."""
+    attempts of those modules replaced, and the seconds each attempt took
+    where `seconds` measured it."""
     ledger = read_ledger(register)
     done = {m for m in modules}
     kept = {a for a in ledger if a[0] not in done}
-    write_ledger(register, kept | {current(register, m) for m in modules})
+    held = {m: t for m, t in read_seconds(register).items() if m not in done}
+    write_ledger(register, kept | {current(register, m) for m in modules}, {**held, **(seconds or {})})
+
+
+def version_order(version):
+    import re
+    return [int(p) if p.isdigit() else -1 for p in re.split(r"[.+-]", version)]
+
+
+def held_crates(registers):
+    """The crates REGISTERS holds a register for, each at the newest version
+    its ledger records."""
+    held = {}
+    for module, _translator, _toolchain in read_ledger(registers):
+        name, _, version = module.partition("@")
+        if os.path.isfile(os.path.join(registers, name, "frontier.toml")) \
+                and (name not in held or version_order(version) > version_order(held[name])):
+            held[name] = version
+    return held
+
+
+def estimate(registers):
+    """The seconds a crate's attempt is expected to take: its own last
+    measured attempt, at any version, or else the mean of the attempts the
+    ledger measured; None when it measured none."""
+    measured = read_seconds(registers)
+    by_name = {}
+    for module, took in sorted(measured.items(), key=lambda kv: version_order(kv[0].partition("@")[2])):
+        by_name[module.partition("@")[0]] = took
+    mean = sum(measured.values()) / len(measured) if measured else None
+    return lambda name: by_name.get(name, mean)
+
+
+def plan_crates(registers, ranked, push, budget):
+    """The crates a run lifts, one shard each: on a push, the held crates
+    whose attempt is stale; otherwise those first, then the ranking's crates
+    the ledger has not attempted, in rank order, while the expected seconds
+    of them all fit `budget`. With nothing measured, one new crate is taken,
+    whose attempt then measures the rest."""
+    ledger = read_ledger(registers)
+    held = held_crates(registers)
+    take = lambda c: current(registers, f"{c['name']}@{c['version']}") not in ledger
+    old = [c for c in ({"name": n, "version": v} for n, v in sorted(held.items())) if take(c)]
+    if push:
+        return old
+    expect = estimate(registers)
+    spent = sum(expect(c["name"]) or 0 for c in old)
+    out = list(old)
+    for c in ranked:
+        if c["name"] in held or not take(c):
+            continue
+        cost = expect(c["name"])
+        if cost is None:
+            return out + [c]
+        if spent + cost > budget:
+            break
+        spent += cost
+        out.append(c)
+    return out
+
+
+def rank_count(registers, budget):
+    """How many of the ranking a plan can read from: every crate the ledger
+    attempted, and as many more as `budget` holds at the fastest measured
+    attempt (one, with nothing measured)."""
+    attempted = {m.partition("@")[0] for m, _t, _c in read_ledger(registers)}
+    measured = [t for t in read_seconds(registers).values() if t > 0]
+    return len(attempted) + (int(budget // min(measured)) if measured else 1)
 
 
 cmd = sys.argv[1]
@@ -130,33 +210,20 @@ elif cmd == "record":
     names = sorted(f[:-len(".toml")] for f in os.listdir(shards) if f.endswith(".toml")) if os.path.isdir(shards) else []
     record(register, names)
     print(f"ledger: {len(names)} attempts recorded in {ledger_path(register)}")
-elif cmd == "stale-crates":
-    registers, ranked = sys.argv[2], json.load(open(sys.argv[3]))
-    ledger = read_ledger(registers)
-    keep = {a[0] for a in stale([current(registers, f"{c['name']}@{c['version']}") for c in ranked], ledger)}
-    print(json.dumps([c for c in ranked if f"{c['name']}@{c['version']}" in keep]))
-elif cmd == "held-crates":
-    # The crates REGISTERS holds a register for, each at the newest version
-    # its ledger records, with RANKED's: a ranked crate at its ranked
-    # version, then each held crate the ranking does not name.
-    registers, ranked = sys.argv[2], json.load(open(sys.argv[3]))
-    import re
-    def order(version):
-        return [int(p) if p.isdigit() else -1 for p in re.split(r"[.+-]", version)]
-    held = {}
-    for module, _translator, _toolchain in read_ledger(registers):
-        name, _, version = module.partition("@")
-        if os.path.isfile(os.path.join(registers, name, "frontier.toml")) \
-                and (name not in held or order(version) > order(held[name])):
-            held[name] = version
-    named = {c["name"] for c in ranked}
-    print(json.dumps(ranked + [{"name": n, "version": v} for n, v in sorted(held.items()) if n not in named]))
+elif cmd == "rank-count":
+    print(rank_count(sys.argv[2], float(sys.argv[3])))
+elif cmd == "plan-crates":
+    registers, ranked, event, budget = sys.argv[2], json.load(open(sys.argv[3])), sys.argv[4], float(sys.argv[5])
+    print(json.dumps(plan_crates(registers, ranked, event == "push", budget)))
 elif cmd == "record-crates":
-    registers, crates = sys.argv[2], json.loads(sys.argv[3])
-    lifted = [f"{c['name']}@{c['version']}" for c in crates
-              if os.path.exists(os.path.join(registers, c["name"], "frontier.toml"))]
-    record(registers, lifted)
-    print(f"ledger: {len(lifted)} attempts recorded in {ledger_path(registers)}")
+    # TIMES holds a file per attempt the shards made, named <name>@<version>
+    # and holding the seconds it took; a crate that did not build is an
+    # attempt too, made again when its κ moves.
+    registers, times = sys.argv[2], sys.argv[3]
+    seconds = {f: int(open(os.path.join(times, f)).read().strip())
+               for f in (os.listdir(times) if os.path.isdir(times) else []) if "@" in f}
+    record(registers, sorted(seconds), seconds)
+    print(f"ledger: {len(seconds)} attempts recorded in {ledger_path(registers)}")
 elif cmd == "mir-key":
     print(mir_key())
 else:
