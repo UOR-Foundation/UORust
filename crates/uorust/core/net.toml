@@ -2,7 +2,7 @@
 path = "core::display_buffer::DisplayBuffer::as_str"
 kappa = "4dd5d2c3a7db5d0acc9f4f32d58e83856f9ff31e3ca279c6b0bbd6d9a86cc090"
 at = "SIZE=#usize_SIZE"
-embedded = "5de1dd3b58b5be55143085561a827674f5b149bd00cf645fe92276d9897863b7"
+embedded = "38f7bbc21956f74cbf8816e270d7a4cb8f980c23a72cdaff4f35ef9feba12411"
 status = "residue"
 cause = "mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[mem::maybe_uninit::MaybeUninit<u8>] as ops::index::Index<ops::range::RangeTo<usize>>>::Output"
 
@@ -10,11 +10,10 @@ cause = "mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.r
 path = "core::display_buffer::DisplayBuffer::new"
 kappa = "a92181ff75b0acbc57020539701c30b0ab22e615aa78adc8625c2bcf9cfdf23e"
 at = "SIZE=#usize_SIZE"
-embedded = "ff7693d45e6b6c61a67106b2da64dfe7107cd3eb8d1074f8aefda324a69c882d"
+embedded = "424ffedeba2199da073e64ed4c5595ef730e2791385bcc12dbf3bb9cd6de7e55"
 status = "translated"
 bridged = "pending"
-pending = "signature: an arity the body does not have"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "05fc99d16c4dcea964297d79a6ffcee1f1e9617647e5718ae0d8284960df14d9"
 
 [[fn]]
@@ -28,7 +27,7 @@ cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.r
 [[fn]]
 path = "core::fmt_subslice"
 kappa = "4257d5cbf01f6ff481467de3aadea9c3594bbcab1e46f22df99888627abe2bef"
-embedded = "b732ed5842576f74dfaefb42b49bddd6e64d3bf524dc9a6140075d9d0c1478e0"
+embedded = "470524e7888dc9767a1721777bdcb370950d33824ba445751badd52fbf6a9aca"
 status = "residue"
 cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
@@ -39,17 +38,16 @@ embedded = "496aaa5a6ceb9cc6977e65ad3cf19ff96753fb8ec8a46f58f752e6a7abab76b1"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "7b7197ff3b1988ffd80e28b1a3f3cea02049a44ab9365f3cc9b3fbb6590209b1"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:166:23: 166:32>::eq"
 kappa = "cdab4f08e59eb5de1fddc322722cf54d17eaffb47bf7fe88cd865760ae492c07"
-embedded = "1a97862baa630d6d384fbbfca29c64638c843d2b07c596b949178e3af883a42e"
+embedded = "c79de0ce36c4e2cf59307c7f74c12ade74e9fd0848ee23e656cb70b28deee72d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "417837176dfce9d6e80d153bfd177aa93348c5676fb978bf6620ba6342efc0d4"
 
 [[fn]]
@@ -59,7 +57,7 @@ embedded = "df07793bb0f77ef086daf0a3e6f1c560b8755b9231e49305cc77185b33b577fa"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "5820070df3526c897538545e764cb4005ca2a939b296d635e3a30081475e9cf3"
 
 [[fn]]
@@ -83,17 +81,16 @@ embedded = "22f1481e504ef40764ab4797f430e39458342a87f44e8727a6f56eb6d4471a40"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6MulticastScope"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "f71666902d7b8061ea329a80dbce8be78f2e93c8cc8e2bcb9351abf6848dbc2b"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:226:23: 226:28>::fmt"
 kappa = "a3c0d772eafe8bd98afd8255748c52cc225c69fe253fbe35c590e6ccbc1609ea"
-embedded = "ca77d8c00ae4c645f26d4f5fdfb390be6ddb2491b3a6997bfd9ea103c2aa200b"
+embedded = "fea8984f06303c03cacdec56ef3e09b8db6f13d4cc79630c42c20d0915866506"
 status = "translated"
 bridged = "pending"
-pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "fd01494c5849ee2abdf629ed9cff73fa408e264ed7ca7e38b492ed040de09023"
 
 [[fn]]
@@ -103,7 +100,7 @@ embedded = "e1c4cf08f76cb5a100e44daf61a753ab1f736f952633d0cb2928e7f1910f83c1"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6MulticastScope"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "9af5febc18659bd8b9333c6ed37f1ab5e55d3de6523bcae5d8c407a0f0128513"
 
 [[fn]]
@@ -113,7 +110,7 @@ embedded = "817b88b0d4d40dfb3461525cb3772895fd5afaff797ba139a481cdbb97ea789b"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6MulticastScope"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "8d07780f7333da10ac93e633cdb03b0afc4c5706f88a2f62f71acbd3ffdc8b4e"
 
 [[fn]]
@@ -123,7 +120,7 @@ embedded = "03add635026183d6701c650c358e4a1ec9864678934755331f74d26dfc10e016"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6MulticastScope"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2cea4fab25b515785e977921a488dd2fff1fed97e7c39b7b51ba7b45e554e3f1"
 
 [[fn]]
@@ -133,7 +130,7 @@ embedded = "e9efb37ccf13b0a3078fede38d403d6abf1831821a8e0c28e26513a208c77d93"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6MulticastScope"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "5d0be8b89d8903fe6246d3c4ff33f7fdac564a3c5fc1366e7072b17dc91e106a"
 
 [[fn]]
@@ -146,188 +143,186 @@ cause = "mir::Ty: __H"
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2428:1: 2428:32>::not"
 kappa = "f385b32bb1ccd89bf250ff75ae6e291bf8525cb0f7e960f6a725bb14920709a7"
-embedded = "75aef86019af4a98c62b027e6bc311c00fcc2fa0ddaf8d77d0d0dc50e8e153fc"
+embedded = "5c06fd6fca980c6f0b8142ddc5d78ae90fb7ec9b91784aa0c3948f72fcad8538"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "5468ceb94b429e7b72b4ac92f37d10f5c4556ddeace7a699ea28659d407acc69"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2455:1: 2455:32>::not"
 kappa = "df11e46e66e57c27896160cf7bc0ed2a9e917090205d41b0090cfbffd9b42f7e"
-embedded = "3c183879c70a330ffc7807903da8cbe7b57fc70496f6eb61475d2928ede407bd"
+embedded = "b9b231b570c5200b4be6db51d3927075b07d7839633755ae4eac19b325cbbd19"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "0ec353f59822bca6fccdcfe3d6b1cfe40b6ff3a76a5a231b5eb170995c3d4e0a"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2471:13: 2471:44>::bitand_assign"
 kappa = "057bf7bc4596504b72924d90c2cf635a986ed6856304dab10ed7b2493b968c34"
-embedded = "d6f038808ca80e2bace069993e70f925bc03470ad3ef18a878ebaac967ea000b"
+embedded = "3b73fb2901255ab026d3a34493c7c924ac8991a9c90f8cb952adb106d74963f5"
 status = "residue"
 cause = "mir::Ty: mut u8"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2471:13: 2471:44>::bitand_assign#2"
 kappa = "47d4bcaa663b86b3c5816550230c09211639d62eb8a9cc786f2c7cb3857b7a62"
-embedded = "829298e2b4b4125bf4274d1f307b6d1ef0be8efa5e9f3238426a6813fc632608"
+embedded = "d7850d1f7f3a3ec12cfff4e543719cc5e551cc73b5362d0762fec21040f26f1f"
 status = "residue"
 cause = "mir::Ty: mut u8"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2471:13: 2471:44>::bitor_assign"
 kappa = "f2547e20646d5bd85dc259fb78cb0bd36ef5a3642a1099ce4d37cc26912db4b5"
-embedded = "37be5890ba41a850299ae778ea316a467fd0ab14ebe455246d3681f0b414ec0b"
+embedded = "401267ae409993ba1496a060e3b7457597347ac4ec4ca2de834076f2200c2500"
 status = "residue"
 cause = "mir::Ty: mut u8"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2471:13: 2471:44>::bitor_assign#2"
 kappa = "af6be43682afadcdedd22742b4b594292189d34fe21b1f2b407dcc2881f60163"
-embedded = "0b2297a054bb12b28b5b6fb6801d0b3fb5408aa61e33c17f927626db197662dc"
+embedded = "e02fff0811d17cfaf67af776f978bc165c4d5055dd340c5669610944a77b2ef3"
 status = "residue"
 cause = "mir::Ty: mut u8"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2482:13: 2482:53>::bitand_assign"
 kappa = "8dd175d3063879c2d2c8dcde28ebebe7c0c5bdadf91b4c25c3ec5d98ae0db903"
-embedded = "aac251f2fc396a07f80bbce7704b63b9a2e3f280243360a4acd0635c690084dc"
+embedded = "dee71d6883c07e8b1555fe15b272c1d532437fe8e8164e2a74263a2aac07e34a"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2482:13: 2482:53>::bitand_assign#2"
 kappa = "ed446729779fc5e272b4748f85d57a075a577cd32c9330d465c9b1c915d69aee"
-embedded = "4cc9bdb8bc8e8f833a96ba8ccac0f94092b037365ef243677088af6b7e53d8fa"
+embedded = "18db7364befcba172cf6597a118692b6d5b62d62cf6f126ba1c87b71d823cd82"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2482:13: 2482:53>::bitor_assign"
 kappa = "2cf6f9c52aa09aae8c9d2b14b111576ea7c8a38ae48d1242eda1137f079266ef"
-embedded = "acae5d43c6b4ed49ff7a6535c17e64d07105bca7de51db26bd31fae41918fbfd"
+embedded = "2b04e5b0ee5f7af2ec57eb45e2ee020b45776a86da49fa995c1aaabdd8a4b210"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2482:13: 2482:53>::bitor_assign#2"
 kappa = "adff3a6847ab1abf8d1e7f8fdb74d35810ffb1ac565155b024e6877de9263198"
-embedded = "8453af942b33eb2a17baaa9c1b919399f27ac70231ad402a6a2abb60d4e789df"
+embedded = "c9cc56f92a44459c2088ed3a986f5a11cb8694fecae5aea8e26808b0709ee7ee"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2489:13: 2489:38>::bitand"
 kappa = "0b70349de069b54546f1a6e2af97a584fef5e1beda586deb0268ae341dc28ba3"
-embedded = "6aa2a29b5f7ee1ea1ec3af48666cd3e6d7f3ca37ab565dd67ffefa9ae9596288"
+embedded = "f03592ab2565adcd35d2c55d460a749c6db726ba1d0d44a6cadedca27fdcaf0a"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2489:13: 2489:38>::bitand#2"
 kappa = "2d1e95b0c277579218785679eb1c719cdff297abc0a62fba0cd719023caefdc1"
-embedded = "646854ee01e8f10284d2885519b1a0c008181867f4e6ddf75fe8b264bebd576c"
+embedded = "1cd897efc48d6bb23090b0250598cfeb54d8a4d0b28ccb2c607c68462c573abb"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2489:13: 2489:38>::bitor"
 kappa = "5c25fd5f6adf6d2240243f492137234a46b4aa8b92446e1097380b76986b050a"
-embedded = "a5c7ee097b20e39f95505569a36b214ec8b7ae66a6060bcfad967e3759579b4c"
+embedded = "6138707d03e4bb11de809b8a003ed2893acbbafcf15cc7aba074736f48833237"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2489:13: 2489:38>::bitor#2"
 kappa = "742c7c0648bff09c4c463572a47fdd6b571a7a9fcb2ab0ff0738a98327aca8ad"
-embedded = "f1df151b331b8dc170164e28dc9ec874aae62bb3d085818309e740190e15141a"
+embedded = "76abfb6b26cf1b20bff70fcbada76d5d5553006f573195c89531e46d12e20a02"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2500:13: 2500:47>::bitand"
 kappa = "13806c2513f5b32dfa453fe92f03aaf5778b9ce995c4b2ef8e0010c0f508a59d"
-embedded = "57ecb0470a7fcfb4078666fd55a56fbd11e6b5c339ce56d0033f30c3c1d2acef"
+embedded = "7fe927547f4a44369fa925d61561ce61c8112517ded052e3fda15fff1f6070b3"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2500:13: 2500:47>::bitand#2"
 kappa = "aed52598d0d17c313462b7741a389f18f6e0ff184e7319b03fd68c91ef12c2d4"
-embedded = "9970d59a6c549c03ce3b9913ff02f5022fda2ed147e776cda998ff8e6301b818"
+embedded = "b3642af74c5e687612f1c6a671f7f9ed40b8cfc5df0ec0f5a98bc8a68dabd169"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2500:13: 2500:47>::bitor"
 kappa = "cde25d43e7460fe4cebbf8cc31f18e2ced523cecb8fd666f8bdc1de674eb251e"
-embedded = "4fa6d915e29aef444e86d1c783a9ab3c6caa7606b22d038e266064dd41fcb7e0"
+embedded = "bf6a9b3e87fdf8e0dbc1cbc35574109a990a6ffb01e863cd4f8fdb6bc1643ad3"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2500:13: 2500:47>::bitor#2"
 kappa = "af67af181f335aea2572a1ad0dde8251be78d90c73d2912f0d27c8f0f36e5c37"
-embedded = "8e43e5b39af624b66f5478d3bf505e4d8427b164beef656fdb60dfa553159ee6"
+embedded = "b8b1fe9307a4a81d56190b254907841b4c2452504470ef6e6e2310d102863970"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2511:13: 2511:47>::bitand"
 kappa = "c30648e4d611b02564f39b4aecdda80abe7427c3e13d2f400e805f59f0c445b3"
-embedded = "2057c5dcc512fe621079f961c78206f9ce651c89a9689640bcabdeb3a5844db8"
+embedded = "6ecb819049d2855ab6dc9fc3cc9054de8e6a6cde0cdb99b0cc9c26d43374c43b"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2511:13: 2511:47>::bitand#2"
 kappa = "0d527a8bf015246e7c20ee002967c16b497f7fa666833cfd341ef77ddc351c62"
-embedded = "9f34023faf41453eae3cf893a4d9f875b7abf63552b96b6a4eb04fc4aa8b4164"
+embedded = "aa5c92d444883b6080e669aeec42f0bf7a1a067a2d9b0d289291facdac876fac"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2511:13: 2511:47>::bitor"
 kappa = "2ca6308cffa3e625324571d1d002aa47de1412876136bddfc5e5a32712c02d70"
-embedded = "02fc93848a06c43e7aab75fa08b39dcb38c143f1f8277be4718a81d94898eb52"
+embedded = "66ea468dd5ebc761ea9fc4d45d68a57786c0185f74503ee30a3f31b3c53cb800"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2511:13: 2511:47>::bitor#2"
 kappa = "9323fb502e3193b44758da1a9f233d273a2d04ae5d95f21adde65df5e925ff55"
-embedded = "032ac3503d231f87fe69a1ba6c8509ad2611166094dc5ab63db473c69a055ef7"
+embedded = "998d06aac09dd3e50bda8f4c7b9ebe0b4631023c89ce5700027d5c4dc21fc908"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2523:13: 2523:51>::bitand"
 kappa = "bfad3b552d968c15532f0191793e822659c00e02a9959423b2dcfc2ee412d99e"
-embedded = "2faa2554236abc6fcff5a7ae1b149d1bcc4e81f52dbdad3bec32bc121fccefd4"
+embedded = "7a07ef211909faf81410e35b22296dd73115491d9bca285140399a0ff0785a32"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2523:13: 2523:51>::bitand#2"
 kappa = "b4eb8c447572967d72340774bf56c67726d01f8c1d4523e424b0049dd11a5e25"
-embedded = "25ce1f7e0e5795554dd638b4a4480f710a43b6803c7b5fe1dfb1dbb2cf5f4cf6"
+embedded = "3014a81ac24841f6d296cd4fa5fc67959ed38dead90a9bf9006d3b03b92a1a72"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2523:13: 2523:51>::bitor"
 kappa = "d0ab589b80dfb04a4c7add616ae43daf07fe8d6bda89b3d2471e093b448f92e0"
-embedded = "a4c63157435ae462e42d6717d8bc7a1ec7e2556188cce06ce7cdce8edf5f8e67"
+embedded = "8d5afc4ea8d74b5298f0880e2bce83c42224dd02ee42b129f9842825496cb340"
 status = "residue"
 cause = "mir::Ty: mut Ipv4Addr"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:2523:13: 2523:51>::bitor#2"
 kappa = "f6445e4ee01b4d503e5511f30d5f43f0dabf8e9ec6e0726051d9d4cc80010eef"
-embedded = "b1cda13b0903b65de3e96ce2a376f4396ed4af1b4c9e6ade765f1fb212003b07"
+embedded = "34ab96efdb3937e99c864aaf7f33699e2c17b1e4c36ce3fc9444a05d6cc52d5d"
 status = "residue"
 cause = "mir::Ty: mut Ipv6Addr"
 
@@ -338,7 +333,7 @@ embedded = "f4cffee259bff838a0bd388494146de7f207061350cb3c5386c3c85322442d6c"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a036e0da381a2ea9fffaaa6a1eda2602d6ab45abf4bc3452062d9a07bec733c9"
 
 [[fn]]
@@ -348,7 +343,7 @@ embedded = "4eb0d6dc0e9a923bb6ade7a1a03341d47309a26b707cbe791f0952dcb6e6a6d5"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "d0d9e32ec9f4172bd696da7557db8cda227371fd4a18def3f88ce46b87a6195d"
 
 [[fn]]
@@ -361,21 +356,21 @@ cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match o
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:29:38: 29:42>::hash"
 kappa = "def062100774f0a07565b11b05eb254779f2bc22a7342cce1ed93700faecef73"
-embedded = "dbb85b8f837baf146099245018a69314698b0d434cc2dc8a8ebd0ebbb61cdec3"
+embedded = "cb32aa6b4a9db432738de3f34855ad6ce68983b5d4e7fbfa508f1a073458b6e6"
 status = "residue"
 cause = "mir::Ty: __H"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:29:44: 29:54>::partial_cmp"
 kappa = "22f0b23e4b0fb5d4a6119c7d24fed99a302b19896e296cdd1f042f1502134342"
-embedded = "13dfca6b5b6664869980aba33dd8ad29ce69840de0141569a16d06a0778e49ce"
+embedded = "6d851729491f02737fddc53cecc87867aea9e3049bfa83ccfa22f5298228a569"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:29:56: 29:59>::cmp"
 kappa = "fe7cde39870e5810179e8160abff516e7769cad693b78f5874172c48aa40d1d4"
-embedded = "04e63a22c33f7783f9de1b3efd90c5095fde709f134f2af0beaa1ae3c6ee7ccf"
+embedded = "f68f5b71121c33176fab88395f85f555b6c6cdc61726d067b64b79afc38288b4"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
@@ -386,17 +381,16 @@ embedded = "b00f0986466b5c2c23a48317d1aaa474d7cc216c29bd531fc28a2e5c8e596c01"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2e848c7d64df4c1fc7b20a3bdc816550e9770219a9bfe195f9db7305472acc53"
 
 [[fn]]
 path = "core::ip_addr::<impl at library/core/src/net/ip_addr.rs:72:23: 72:32>::eq"
 kappa = "5670580997df36d920b3732ca2924c24948b56a31a8e35dad98e5bbeab45eb34"
-embedded = "08a2d8125602f8433695e960b7ac57ed46a30e0fd826f8a4cb72bfee0fd39867"
+embedded = "506e3157bb5d64a340f7bea27908b75bb67099ba5b819fd060430fa626a750f3"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "67084050383f27fc032d016f566caee480b89a0fdf57fb56668fa8cab9cfeb93"
 
 [[fn]]
@@ -406,17 +400,16 @@ embedded = "ec06cd10ddc708e3f1e80a406c72bb916774fe2492e2dbda8e265219f612aec5"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "c1449e9fb36a7ed76caaa7621e7b18e45cd7c0b9d4c3964bcec95177ea690c1e"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::as_octets"
 kappa = "45bca06d6311bc303d94212bc7aa9d4f90514301f4222728d70fc9bc96314ee1"
-embedded = "8eb93bee85d9e1832020d729186ba787d3e0431da2c6ac6209d4632f1f18b7b8"
+embedded = "b5f377b64dafe82fa120178a190cabddb1dfe9c47b56377a4267fefec186d165"
 status = "translated"
 bridged = "pending"
-pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "78e878afec2b2861edcab729156a245fddd29efd52ebff50ddb868b42a2c9b9f"
 
 [[fn]]
@@ -426,7 +419,7 @@ embedded = "5aa2b52ffa0efcf41ed657d002cd0d2494510af2ca3f9521eab8674f8bffdd8b"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2fd966f74bd6141ac1f89aa2835ac1db86138e01b88ea16e3ac4056b1fa05ace"
 
 [[fn]]
@@ -436,51 +429,48 @@ embedded = "5a87ab1a1877dd2cc414226b72e67b0b351a3f73db430d9e4dcd0fa54ff1dd8b"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "75bcc1fd762869a6c1189986185b6455864571960fa2da702d9a9a8e1f502d28"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::fmt"
 kappa = "4bf5cf8b9350fd6e18e84c8a75069a5ac2524d68e82691ed8ba9144c12f4da94"
-embedded = "f1fbeeb5ea44d8f80a6735102e53435caec2a31575c68a3da75e81f487f6ef32"
+embedded = "536ab24782a874066e1208bc04a7693044fd4b7a34747b5b3ae8b0a7764cc7e4"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1184:1: 1184:31>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::fmt#2"
 kappa = "244913caa93fb4d9dfde40b298aeae428bcb8011ba1f95a93c3b5ce8046df61f"
-embedded = "6504b48c4da23f88d8599c5b88284b21c429da5befc9f9a8f82c664719e67c8e"
+embedded = "0b5d61ed46586f1de1308f55fc2c0e1d2796c5a47daca8c0efb97c68b2eb8715"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1121:1: 1121:29>::fmt: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1184:1: 1184:31>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::from"
 kappa = "4fc591b3082fb26aa8a6c7d3a65981733c5a19962763f3ee795d346d55f30336"
-embedded = "d0196cf73f8052268db8337501b95f20f889c07d4e54ce840f318892873fc691"
+embedded = "0a8e5ff95ba6bbd1075ca71c2ee9801e129c14fc9d6d07a74e5ba7d95c94afd9"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "cf8f3b393e64cd9649113b9e253ce1de06884b7d798a7b5a65f2e732518c6ac3"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::from#2"
 kappa = "8f7051e75eb47f16894d6aaf8cb6eac17b5dc755915fc2d6b9b96dbc67fd1fea"
-embedded = "41fadd872f02e4641716963bfd760300bc1471b97b8495660d5c6c126cf9207a"
+embedded = "ce6c7bae542736f6918d9618c4fbd910cdcba9b82fc02024a6492afc938d1dfe"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "a384257e4a5282ed596bf8221ca9677798fd58200d341827f39b5f2b2e520842"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::from#3"
 kappa = "37284d6f6742912f83cceaa715e32b5c6ec7c99645aa8c7d55f1932e7ab938e1"
-embedded = "f9a3c8ada64f2877feadd03b10793c21316023ce2b013ae6f23c95483ee9b38a"
+embedded = "d3aee6056912124d952cf31e81b01c7d8db66ceded462592dbe70ff433e1247f"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "ed44269d67eb4418e9bd713d6f1950c0164186453c8e64ded50c85742e787f2f"
 
 [[fn]]
@@ -490,7 +480,7 @@ embedded = "c92124677451eaeb22e61ff82ff4f8e7984e34f925854ab2ad6d3a14e4d51372"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "b19780af090590c23f644537f8dd29b4d58cac75dff5ea03343813bb346ecf5a"
 
 [[fn]]
@@ -500,33 +490,31 @@ embedded = "28e44b0c001ae773c5604c7d333e81aefcd48b949373952601d902a3d6baed4c"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "7ea8de4410b15b52ba4364f83de4be59d0f30cbaa7236e5a25bcdd5051e38443"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_benchmarking"
 kappa = "1f90d73fd3b05fbcbe2b2e31d05cf8565843c69fa7990092e68e5dfa4f3136e9"
-embedded = "fc92df4f76a02c0e5df55ba6ebf3265f8693a9070684fa52458d5d821a4f87e2"
+embedded = "18f72002ef3438abdc6d2761c4ab7371636c61d204db90e18e0d4005ed405a7f"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "d4c253d96b59b96c7031823eed4d2b7a4605110190c5e1b9d26ced7ec5055cea"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_documentation"
 kappa = "224aa3d2d006a1ce4afd540d1007e2be95d9aa4929b273fb81f46d3012e4c61a"
-embedded = "0c16df7d79909a8c49816179326caf1bbb5534232614df5754aeb84744e7ab9a"
+embedded = "b51d6c70d510119598a991891c5d59c8e6ddcba8a8103fd02ab579b28a88b217"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "a25d6df023ab237696177376880408d2d77c6155c2e6c31502efca5d9ae24247"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_global"
 kappa = "90ea85372265bcdcbb5ed7e4938501c8d2c6c1561fc6665f05d22e57f0441d4d"
-embedded = "ccff85d1c6a99b44326fab54c0e61aa1e561ad788194fdffd5c8dee854d28a7c"
+embedded = "f5ea62b0130fc0a148a521a29ddd8a18a346d734fe9ab3709b6800a21b2daf63"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_global: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_reserved: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_broadcast: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv4Addr::is_broadcast::promoted[0]"
 
@@ -537,7 +525,7 @@ embedded = "8f0c9a1e1080006f7ea78181dafdd9cdc180eff5d5bc3c345e56b422f1108b61"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "7db311fdff431b24504964191b88e3ac1244deb035b0fc6be107491ab15024f0"
 
 [[fn]]
@@ -547,85 +535,80 @@ embedded = "11d095340816bdb9bdb8e8b223ab8e46551d1e60ba1598542b901853058608ad"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "45ac751115d4b971eb49ea246610bb0a74dfa040fc726729934983ccf08d68f8"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_loopback"
 kappa = "718a3ffb4bdb0d0b9441f93183e43ce68d03e0427558765a86fc8c1c902e52df"
-embedded = "a6d0f96a758e8e66cf86f08fa5eef47ccee60a1a893077e5ed204286622ba2ff"
+embedded = "e79d74f307ec608cd0e39f3342352fa927fe706a28576d9b54ac0cba19ae38ae"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv6Addr::is_loopback: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_loopback::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_multicast"
 kappa = "989685760a1f9b95a86ee14bc53da48fb8864e634eac38160fe10836c386cfc9"
-embedded = "744e11ec4bfd59b767d5ccd7d520ef5d1978f5cb5839c8637432dd2c2e228a21"
+embedded = "11627356e0f598db098fec302abc35fb2d4fbb2259cfe93b6b5d302d40b59aae"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "48b9f2ba9a294b715a10fde900dd2de8dae755d41841e0624474ba134053ea6a"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::is_unspecified"
 kappa = "87b6f1069976bbc78a6ecbff6a8f8e47f3b53db33e1b2c75a48148c11b404382"
-embedded = "3f44eeca4e8cb0d6d0dec1cf800875f8844600e38d175553b1186bbe123bb9dc"
+embedded = "fe7d2586f32d9bc0b37a9fdcbbd2ad61e86dd0db00d0f85a2101a7a80fa1b465"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv6Addr::is_unspecified: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_unspecified::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::partial_cmp"
 kappa = "0d0b11ad72fb43dbce5f1eee173add4cf9365c482a387df37a4e58afd141921f"
-embedded = "a84e4dbe22c262ef30d4b189880505f9de1617e0e69f5b2abe0cf592c635011d"
+embedded = "0f06c2f128f0de84baab9aee56b2af113e49eb2b5cf894fbb4cc51b249ae6a47"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1235:1: 1235:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1266:1: 1266:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u8] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::partial_cmp#2"
 kappa = "67770d06b90f91083280987f97a877b8400f7fa0b240861c0ab48d1c80a231bd"
-embedded = "4398801c90cdcf373f270ace027ef8e185f181eec9fbf9f04aa310f905b32523"
+embedded = "d27cc73e3b07af4f8ff01cc1ee2a2ee11a163570ff0dd244b06ee913a89fe0ff"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2240:1: 2240:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2271:1: 2271:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::ip_addr::IpAddr::to_canonical"
 kappa = "0b745906025c95af2a7cc97a7a2c13f0406ade04b24a1938fcd0564531e69e5f"
-embedded = "815cc1df23dd790c83f76b5d448f37eac247b43fda92a3372de8852ad20801d2"
+embedded = "6dda686225f1190436b4901e92fc93c62049651fa460a28fd94ad3f3d8688438"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "5d4400cd6d8798957fa2c8330bdda655b71ab7c297f7a211ace084db4adbde0c"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::BROADCAST"
 kappa = "1683116513f64a53d5540b6aabbd5c882e14e8d02365efaf2c8cb263975d95cf"
-embedded = "059a934df7eb26c6462da5821833f0fe8ad117dc6ad12c51dbd39d5f5c562151"
+embedded = "0a08c0b9494b1bd1d9f53225507b40dc2150b4d33b3a54d45e216570b0fd72ed"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "cf3a1d3e500319d0249245f0ae7c261acbcd8e49a8c49ccb7331e07637bc9a71"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::LOCALHOST"
 kappa = "ed72b188f8ce29156c85dda7835ed08fe75b36efb1692307f0e1a0ab4f35cce9"
-embedded = "b082736334e4a295e52b8a1c6164c6731927f79233ccba2f6cb2ada70f1bd763"
+embedded = "52ab3951a65d50d184c7ad0372328c5c739427ca654d3bd9149a367b882426f8"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "df35e5090c4cf7ff2503a97c8562526c4346dbacb187c4b8f49a8c7bbaa463c6"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::UNSPECIFIED"
 kappa = "59a5428f4b89d8ecccca6ca09286347cc228bd4f9df0a7ca5cb2359a9f8d8d65"
-embedded = "b459c73d2b7aa0fa75ee7dc2fffe95151d4f5f3565da966e09ff01c49581cca4"
+embedded = "03f679b25ad2c98beec94c8405638c4710ebb47f4aa60f1ec0aeec11362f3f31"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "ced937152d729a8867d78313434d830eca6c45fed3cbd23cd0e93803a21ff168"
 
 [[fn]]
@@ -635,7 +618,7 @@ embedded = "38c17818411a5beeb12164106c6fdbe4d02440fb7de2419c57d86e923091eb67"
 status = "translated"
 bridged = "pending"
 pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "948fbed25ec73b1c408226d47031313819b991551ed41fae2f33ce2676afee28"
 
 [[fn]]
@@ -652,31 +635,30 @@ embedded = "050acbd863a3de248a9b05917c7927dc1bb40693f2e2f2c4a96b20fede96ecae"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "97d44be9ee2cc751f036f964b1e613d6efc4b321845c31cc0aaefb3904f3b400"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::fmt"
 kappa = "249d2b13cac75a1e872a11afb5ab41e8f4ecb6261d298627afe53f2364851a98"
-embedded = "5dcce067d3904063db1f24deb98bd17b70922569b6e7daca3e9e82f398893948"
+embedded = "c2065387358ff2c7640f68bfd8a3a9daf39c6cc634da9629eedd9fc07a13c9dd"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::fmt#2"
 kappa = "5b2da46ea10469e2cf111ba2a548c20cb059f707fdd460eec8a3cf287de9c5db"
-embedded = "a1524448c9251beab18ce75e6de5bc954dbfc2aa5e4adb311d245b0c01fc9cc4"
+embedded = "f010c830baa9c4b3e8ff9aa167d82da324857dfbb3f85d2284ba363f05a66ba1"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1184:1: 1184:31>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::from"
 kappa = "4fc0eeab65260d4fd651df72ae0b50ea0a8857afacd54bf52cc032bac58ee480"
-embedded = "e08da23361163fa72d04eefee60dd362ed5fcc86f4c6916e99f5399f7e677e1a"
+embedded = "ed0c702329d4d0785613a0923a62d0826d87be01e8f1a9780c8b61393be07dd9"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "143bb8cc807b50eb5dc2efc007ed03124fe59ce675a0f7d952ab2169cdbd870c"
 
 [[fn]]
@@ -686,7 +668,7 @@ embedded = "fe6e68d423f4826fa59c9fce56611e086686362f602436275be45ff15475ff09"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "ff85c3b75bd3510c1b404fa59b19412d9ca02c1bf20d51566633f569ad1aad90"
 
 [[fn]]
@@ -696,7 +678,7 @@ embedded = "ab445daa173ea1a3e83df6e9241018ab8a016386cc5c5b7b2929609522125e2f"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "4a4136418dcc7246559980958a03f8e1ffe06014e54c827c00c2fefd1c8cd7c5"
 
 [[fn]]
@@ -706,7 +688,7 @@ embedded = "e98b869ec44c424bc384795ea20a088ef7853bde26b25d774f5b37e5c97fc2b2"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2848d5289e28dfa37aa01510c18b852bccf4a59c9fd974cd60831fa5a7b3e5f5"
 
 [[fn]]
@@ -720,92 +702,85 @@ cause = "mir::Ty: mut u32"
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_benchmarking"
 kappa = "f6c2038d802b576a522d703742da619887bda0903a60df628f43e3d676049e03"
-embedded = "beb331365c5b6739532d5448d9505ec026471e879a56fce83102f736154c248e"
+embedded = "7a86af239eca354f94ac27c56a9d6c9a768e0ac7892caeefb6b335bb5d36f9a9"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "aa3f0560da0d21ee794f7f4baf65cfea60bdd9cd85fb79f7620f9b8edb674538"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_broadcast"
 kappa = "d7c072c3669e8d6a1468f743da0d44c4c75fea41c0aac1f04d8d2bda4aef28f6"
-embedded = "901a55a75f4440109636fc48ab3c80476b10ccfcc486ebdf09143fc65339beb3"
+embedded = "feaa5c5bdffde13ff3702a42a9d649f2598e1f2c9d45493f45f44c8edf1184e8"
 status = "residue"
 cause = "mir::Operand::Constant: net::ip_addr::Ipv4Addr::is_broadcast::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_documentation"
 kappa = "1be1b4c105fd7615a817bb1d9b87f548eeac4598342f80ee5651706db81222e4"
-embedded = "60034ba6f4f4c0305054365b9bc4c202661b691f0c6fdfd1417475fe222afc4f"
+embedded = "90245ace5634cebccf800bbbab93bc2e6620db54ea9cf79e5f5f6b1663f33a26"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "3ef3fd8cd8fe9a6e5989151712b49ae0d0b525cb980dff3ec2fc04d3761825b4"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_global"
 kappa = "dd513e96b3c4fdf7b4e84a081ddaa4a16a6abd10d86275243664a2a5cd44175c"
-embedded = "3b8060f190faea73951ed06738edbb9a1ef9e9665e28078b4be26413be10abac"
+embedded = "903958e24d2a6d1a3ca1d86e1e1eaa90b2f66f88dcd9d03088720f4900e9b975"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_reserved: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_broadcast: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv4Addr::is_broadcast::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_link_local"
 kappa = "3a893cb1dd2874fb60bc62593583cf1198b2b8b01e35d6ce48b07f99fd83f25f"
-embedded = "c8b0b43c19c7dc856bb7965b438860eff68ab326d0bac84f3c117b94a5c187e6"
+embedded = "bb2938f178c3468b5aabadb37d1d19fc15801eeb9cfe8633f9fc80245c46e85f"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "4478851fd92383eb22322a9253058dc329fe5e75a855e8f975ba0a0d854a7704"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_loopback"
 kappa = "6ee819a322597ac01fa2ef0d26e32317ce38e715e5ba8f85e08913a62504517b"
-embedded = "d2add5246ffb0b70cd70b6a4a91666f7073ba9245b2db2a5e64954306ca6aceb"
+embedded = "c620bd49b003ae01e2d92d1623196633922be7ca857baf6e48732dfa53ec5117"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "8a1ee73a3af6882f2977e83f977943d5ed42d65ba352d4a88dd5074cff5e548a"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_multicast"
 kappa = "2c828340ea7acc909bc036f63721bbe15d0bc3f328363dc28bd549acfbf23b05"
-embedded = "9a5bd0b048114ca7f47fa55c678366c078b173ebe581d5892de955da27e30a13"
+embedded = "3a40d430060c8f03450f55e114f6987ca6b408b5a209f9c7bf176a82bfd7f79d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "ced631c56f853b09cffb7d8a6ad7344d06f52da98dcad9d7921a8525d3124586"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_private"
 kappa = "8cb97edf219714db1b6896dabad3aca71dcc81327b71833f799d066501000faa"
-embedded = "1b3c623f0db4369160093b083f3eb04f463ecd74b9ea0652e88dbe7b9adfff1d"
+embedded = "2a107c266a829e7cb5a44e2ebbf2d09e25f37f4626c615aa3cade1d108ccf83d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "99288e14209513dbeb636dcc2b38341e02e3c9364f2c49407a16d925a548d066"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_reserved"
 kappa = "499eb0fbe77b0dbc115164e91076502964fc6c8367aa8e42f2e0326e1e57dc5d"
-embedded = "0e0c81bd221fc1e886f6b8038b2cd0fa13b079365f40c0519b61e4c39fef3615"
+embedded = "74576cf81a1728696d582c75647f6328d66def0d6421fb68fac84b87fb17adac"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv4Addr::is_broadcast: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv4Addr::is_broadcast::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::is_shared"
 kappa = "0cdcf6bb5e9954abcf7d51024dffcbb07a623df4dc3413d75f723efc56ab466e"
-embedded = "4fb28f583317eb59bf02303ace5c48beb38a9709980b0ffa0df2ac100c89340f"
+embedded = "0475cb0ad7daecddb676205438cec4245d64ace289c81c87401ab1b5232520bd"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "5e85b5a94174c26c04930174ec6ca900e5c745fdc84c1dfc5e075690988ccc1e"
 
 [[fn]]
@@ -815,7 +790,7 @@ embedded = "4c45ec0ff3879e2120fac25e7d9173bd1611f9a87360e6a2f23d6c4bdf6b8220"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a20f7a776bcbac5bd697432655c698293127c1bae8b9755095ab1113b75ec852"
 
 [[fn]]
@@ -825,7 +800,7 @@ embedded = "180c974402c88b65a7946cab6f2b3f9f926410deeb5b4769f7179aec3ea0f96d"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "43822f6c19118f20a492f107f822b7f74e3b562f5517178a5f1715a35a410df8"
 
 [[fn]]
@@ -835,7 +810,7 @@ embedded = "53a21545da01895404e18755d5c50d68d00ac7edf839b1521515e649e8c45e4c"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "72a9715c018224bdaebbb12bad5574daba52c86ee25a1e6390bb9805b1dde7b7"
 
 [[fn]]
@@ -845,20 +820,20 @@ embedded = "d517d7b076afc35daf210599d8bf0e5362415d99f31f9b22567374fe324e03d9"
 status = "translated"
 bridged = "pending"
 pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "f7b32de57e34d5ac1d7e360b0b062401cdfcb7789eff2f9ffb8f9549fa6b6c10"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::partial_cmp"
 kappa = "9e999a7af81a59aaac81d50ecef22d4b54a4d2d627622d4a3110a4b78330ece0"
-embedded = "15e92d6959dfb1a154ba6cbd4d1b1227dc0764808fb4d54c9660e92a54ddcdc7"
+embedded = "c4e9e25ff5b2a75c0220ae95ddbbfb622ecf80a8f6dbf2b2add90b4b67b3173d"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1266:1: 1266:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u8] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::partial_cmp#2"
 kappa = "7fcdcd9bc8de5e4a27c73f1da532205cc305fc0b28a3191f553401c6f0870cef"
-embedded = "cdc08b04d7a33ce603a60b56386a77541b0ba723640fa277d8dfa15f87e311a1"
+embedded = "7a87f3d5f146e33c504dfd33ccb860e643ad4c986af88b1778b6387abc432aeb"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1235:1: 1235:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1266:1: 1266:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u8] as ops::index::Index<ops::range::RangeFull>>::Output"
 
@@ -869,47 +844,43 @@ embedded = "bf181b3356dfb525eda19b23930781fcac8546434ea4aa114b69d7e1d4024582"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "19bf40941b506cbd2db3ab1368c170b7cc7238ba92f70f9fe8d9b10fec5d3848"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::to_ipv6_compatible"
 kappa = "b020245ff839ecbfb7741bf7c22ea37a8390646f9a537d2f35a432f6093aa476"
-embedded = "1df09fdddd1c5bba29044f47f4ec1ad1488fea7fa5c5763150807d85db8f9726"
+embedded = "ed81942fd866471aabba43d152bb2c0db418d9671f3c60044898f7a40d3c9302"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "1ee6992fdb38e7f804f7fece73f073ae19bc9075037048cd0d5e13521d2a1183"
 
 [[fn]]
 path = "core::ip_addr::Ipv4Addr::to_ipv6_mapped"
 kappa = "eafc73628c6acba980929ce2e2415e97e873cb8a6ac9b3c5f5b74d4da91570ca"
-embedded = "1fec41714c61837c4eabac2c82f1191aef11afe3143274707d6cf92870601fd2"
+embedded = "b63aadf1b7bf81183443171c017867a9ac5ac52221c71c52bdaa6fe967ea7a87"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "eb7a1081a4b699cb806774163022113c9ceaf1955b8d5122c554a79a93faa1cc"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::LOCALHOST"
 kappa = "930ee1572c2b9c0be8ca3e2d1f113882386f7ac4ed7b27fa7dc38bfcdd2aab8f"
-embedded = "01f11c6047d6b8be44ffe118c7a0a27e578461a92c96be8919e90b7724aba886"
+embedded = "c5a259d413d8dac821eb0bd8c07d6c39b5f13d708cef97e24056e4e0e54e798d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "eded80521dba7c2247cf9eeb77f62276e713da814582b2daff8e71285b0183a8"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::UNSPECIFIED"
 kappa = "7399278d2a06e19da8e2452fb86f0646c57e32ea01e492e89c509b9c7d3623ab"
-embedded = "f0567734e2596206cc842a8603ca9631acc1f7950ac58d7af73772e3bed8e13b"
+embedded = "fee3a13baae64bad263be70c14d49839e403cecad3bf333652f057c2fb4c49a6"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "6b23168cc220e5a5eef9ec39c42c36cd1af0608407b9ef7a67c4f24fc19a7099"
 
 [[fn]]
@@ -919,13 +890,13 @@ embedded = "596150085ffc61c2dc051d0964112f458e6e94b4bb8cff16fd03d0c8f7156363"
 status = "translated"
 bridged = "pending"
 pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a81e5a01c650dc63a1003c4983a9a9aad83f9b5968e53f92009e0e2939fa39b9"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::cmp"
 kappa = "6df75e52b5d63ace9dd99e08a5cd4b105ea019e8d73aa7379c0c969bad61e629"
-embedded = "99305025f8efadecf7588467553d2ada9e00f9a2768d3465ece185024edfc65f"
+embedded = "2d89b88d9384e5ba76c44aab3ed2766dec0831fb946a941ca7252bd61fbda576"
 status = "residue"
 cause = "mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
@@ -936,31 +907,30 @@ embedded = "2cfffaad8306e8ebcd65b20b2e665806015358d4333e700aff9974809fe40401"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "3cee36ee2a91fb6020347009ec27fc4b09fed11f28e7aca8fe7921503ff24af5"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::fmt"
 kappa = "8c785c07d7dfeb116292333e0f49ea3f21232689e70eeeb691b51d434a8a6376"
-embedded = "e62ad67cc861ce387c25c446518e4867d21e37c3e0fe83fd5d6e0acd2fa063a7"
+embedded = "10a4ccaa59c518c99ab87c51812756073976cb80fe589e685697efeadce83f58"
 status = "residue"
 cause = "mir::Ty: <net::ip_addr::Ipv6Addr as fmt::Display>::fmt::Span"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::fmt#2"
 kappa = "e0c88164a84115d329be04026cdae497e337fa51a5c5288d2d3786c4ed0a8ebb"
-embedded = "7076c946f17bae18649711964ef490b0de12b58953971bcc9e44663caa5fc600"
+embedded = "12947d961157cc535c5604cc8eaaec92f99fd2be7a6cf2e792241218c135277c"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2136:1: 2136:31>::fmt: core's MIR stops at type outside the lift: <net::ip_addr::Ipv6Addr as fmt::Display>::fmt::Span"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::from"
 kappa = "02a0f04f8c8d9094d04f2fd0470c65689751a4d0977b85d791cf45875df7f6ad"
-embedded = "6f7442ef6f7f3b55d3b6e3352ae70bf26049885edd5518c6601f31346fd2698b"
+embedded = "3939053b2e4396005813786d2480c19134f64af7797f0a022ecd6eafa18b2fc9"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "0860a855962f6adadecd096a0903ca7c9aa0cd6cdfd0c65808e6668541340cdf"
 
 [[fn]]
@@ -970,17 +940,16 @@ embedded = "2e65dba9f83e7aadb72a9b8fc8cf32006fe0718f5a5b5c34b1890dd9ad2f7b35"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2d6d2a3c137adece2354f126a4de3b75213e451cb3b9fda75cd2dec0a4ca057b"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::from#3"
 kappa = "3178079aace70d1d38d88edcae93a2dba39c5979c340932ab47231e888b063e3"
-embedded = "35ab6b7e37310662caea4540403074afc793355262da895b888e06aa12de31e1"
+embedded = "594af54a10d6bb5b299d0865896798ea92ca3e03ad9425b757affc4da33c395c"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "de7871371949f771accd6e4ce7f26c9a535816ae5fb25b8e03aaa4305acffbec"
 
 [[fn]]
@@ -990,7 +959,7 @@ embedded = "bf600fa643b878fd7086273b6d2edff890864e88aa97c45d24418cca4fb4b8e8"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "dba01ca271bbedf7a7630458918c857b6a1e87d9b96b8cdc33415cd536afbbdc"
 
 [[fn]]
@@ -1000,17 +969,16 @@ embedded = "9b6e180478c13a1b4c14b2a7596812627b1d4b7fa693b1fb858c39dd8e849693"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "e8107dae674cb9a9674fea69c7baff8c7b6975a7c54c70d4ff6cb157fc7fe66f"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::from_segments"
 kappa = "cfa7453780db8816ada3c1a2f59fdc81e69bc6c3ac44802c06770d2115ddc3c4"
-embedded = "6705cc5c2ae0b767db95123679876ba8514934cb079b9da5cd83894db730a7f2"
+embedded = "c64c636b946a202bb5da7d510e3ce14acc97b6d608604bacc720c99b4e18531e"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "c6c0669b9640d88d6df705be312f5758156f95364cb29cdaf606e47f7d5dbc84"
 
 [[fn]]
@@ -1024,109 +992,101 @@ cause = "mir::Ty: mut u32"
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_benchmarking"
 kappa = "62b3caaf6fd01aae56de58819080555424b54e5b9f66f1b42f820cf016e07549"
-embedded = "1127611af245fe465a1cd6919b9e3b289167cb40f9260da4fb7539cc7baf60d9"
+embedded = "a8edb64ce7fd0457e0673c8cbc3ed99181867e97bf243708b3ef28daa395f767"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "39b5f90cd31f4931d78bf5aba29d94e9ab8b943d02744c6dab54a1fe6cea4b31"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_documentation"
 kappa = "0efda4feef19dc76e31c129dccff46a8055d1eccab68874df11ce084c376677e"
-embedded = "ae7920486d2e46647bcf725a8e32edd76fa02b2ca8928bcb44d24aa8526ae509"
+embedded = "a4472364e2f3fbb7d37913467ed445309702d8cc6193f7fc68633057a127755b"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "cd5d0fb7fd44354b8e2352bcfe6d3af7b5c4dc77bdd2f8ca9803a60c805f8821"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_global"
 kappa = "e6d1820a8345072678ac1802c19727438e1dd9af09a014d4829262ec891069ac"
-embedded = "0441a8e14d3b3da3de61637bc5fadc03d03861d02939404a5b5af03367c910f5"
+embedded = "3c8134a11d4009ff1851855aa38ac9fb0f6db07e2a46caf0f1c60ef334bd6c51"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv6Addr::is_unspecified: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_unspecified::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_ipv4_mapped"
 kappa = "3b915810ee349fed0bdc35bf7012fe80d4ce3fe231b9baa4f7d3e1d65734a795"
-embedded = "aaf119190aeea20047833c74b638685b45ecd972d61af65abaf59a9bbed957d6"
+embedded = "176b0f5ed3778ad9a3114d29fa9b17a373b1e309f7bb83ab7cc5a51fd8d7cccc"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "2a9ec0aea4bc2e3061f0029932bb499afecb2720bc3e24c1afcb59c90c960fc2"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_loopback"
 kappa = "44a8690789405bfd8d68d52e3ffe82d63578f8ffa2f8fe30200aa93447152857"
-embedded = "5d687a0bb6eb28c07f42394dd07aa18762db44a4aa61332cb0f8efa388d7dbf2"
+embedded = "dea38b428edd948e821ff130f87ff11afc560ebe0b9d14708a9ba8ae962fc337"
 status = "residue"
 cause = "mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_loopback::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_multicast"
 kappa = "5a35b9ae93ef68dfb21d47b6030d89084fa6d8e73849de7bddeb261291ffadee"
-embedded = "92eb39693955a0d2f0e443b58b1739c862e377af3c37916e619df6322286078b"
+embedded = "36e138c77f7697712249540f434b24c9f88972e7932d897704c8c57c2b94d375"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "96f18e8daf10ec56342041d06d8d66b153742b3cb06d3f53906221ac1b7e6d85"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_unicast"
 kappa = "9bb4c8ab9684c9e5726e8b1cc0bfb8acf77a4d153cad99c2829ff30881275262"
-embedded = "cdc71195e92ff44a2a5130f2a3ffe9c57a16ecff62df848ebd6c18c116f4bf7d"
+embedded = "ed61362f4e75a6d134cacca11e4509b1bdcf9577bf1c33c9fdec4fc569b824be"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "fbdfa4914d2953a9d12651096ccb6b7badd224a9ff6dafcc7b91a2878fbe3f93"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_unicast_global"
 kappa = "a8118428e51f36694726dcf5f43f10aeba9cd5aaa57c68a2c8c91c873180e111"
-embedded = "0bc2af47a6aff712b8e97cdcb1d5c1805531464dc592f8f0e65776a3de086743"
+embedded = "b45f36018804370c8fbb83379df60ca2ac0b15b2b7952c763d857f1d84f553e9"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::Ipv6Addr::is_loopback: core's MIR stops at mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_loopback::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_unicast_link_local"
 kappa = "603e1161cab3a205d54fddc9e3a993f97f2b6bc45539263fe5bc2f104ba20520"
-embedded = "e8bfa5af783c0bcb736aea89f2b6762b3cfdd3d0dc92acc7a04b009db8d2ca57"
+embedded = "e8d73c5d1d9253a7575488b42c46f498b8029fff506cdb2ae6e6d1b253ee5472"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "e12868684f816675c33beb7cf1aba47c289e500a7db6d8dbfb14a7b5d37ca372"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_unique_local"
 kappa = "7ca29c9682cc96019bde9b24295abd55c9725383525f170f440311b40e77ac15"
-embedded = "3e1f198cd258c4869d03caff948ffcadb7ec76b228c35dbc556be253ec145f50"
+embedded = "e2fb8e3b1706ce649d7f3b0cc33b69c79fbf581dd3ab86dfa5fa69101fe45ded"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "8aed8878bcf4c3459f81491d7f7b98b55f557d13639b8c56da89241b3a84eb3f"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::is_unspecified"
 kappa = "4e055cfcaa5926f0dd29f003c877998512643811e116d72abeefbee5cf2be2e2"
-embedded = "ecf43a49322b172ab47407ee732cc4800d881605695c93eb5ac36a6654e13a51"
+embedded = "72f0986ee5143d43126017846a3aa6615d7bad4f6c3026723ed4373653568c53"
 status = "residue"
 cause = "mir::Operand::Constant: net::ip_addr::Ipv6Addr::is_unspecified::promoted[0]"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::multicast_scope"
 kappa = "5bf148c617e363dc2a62f91813210421368ce087b76b8f99dfe1400634f33f56"
-embedded = "c95cee469933e06a74c614d53b5e2092e34c5f1ff5451bed4dc483ac3b894cf1"
+embedded = "99396044e7196da6be4c4732b025c3e027cc1c770a941b386e8f98c5a58e7b9b"
 status = "translated"
 bridged = "pending"
-pending = "signature: Option"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "e726b12091a9d9d72777053653068eb4ccb85089c496af8e28e4e6691ae27152"
 
 [[fn]]
@@ -1136,7 +1096,7 @@ embedded = "cfdf521a6990fe42ec409e142de78bc1d3f69d983e624030ebf1b550e6ed95d4"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "c72042e2501eb3c807aadbfa7984dfba71fe6e01a957c9ba663197cf44410423"
 
 [[fn]]
@@ -1146,7 +1106,7 @@ embedded = "40880055d7cf4c8178b944d9476d9fcceb0f2c2c9e93fcfb24b504451ca6b041"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "d51f9f8e81c7a741d63cb1898beb939b8e51e7af21caa869dadbded0f5afafe6"
 
 [[fn]]
@@ -1156,20 +1116,20 @@ embedded = "78bd072828131024bc8ebb26970ac25ca8b7ece7b36c1f7626799f31b0279572"
 status = "translated"
 bridged = "pending"
 pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "08a57f48f3f675bf108bb7c5be72426e1a36af678960a4902442516e5b7ab923"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::partial_cmp"
 kappa = "c50ec53371e462b7c2b9b13bdd1dd5cc263c9713466484d657f43b07560c3ea7"
-embedded = "026027e7040206ae703cb58efe41826484e25fa513765c37d269a3007847fc22"
+embedded = "371e7ae3ff89b98055ef2259c80e9d6e6a141bfd0e649f03cce88fb62062675a"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2271:1: 2271:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::partial_cmp#2"
 kappa = "7700ad19e4787b4a98966fb3e316ef5284956626f27e0e47e985b3d71c86e24e"
-embedded = "6e7067b3a582d231d4e232709693d33f673a519d6e356b464f089347e1215fdf"
+embedded = "e9e6019705cca4c396166dd63eec579ad4fb61b521c7734a3c82c02b9eeb6721"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2240:1: 2240:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2271:1: 2271:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
@@ -1180,7 +1140,7 @@ embedded = "a090ea3c2a6a352dfaece25ae9b76a6a65ecd054b0024e944efda3632f2d7759"
 status = "translated"
 bridged = "pending"
 pending = "signature: List"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "589345f9deaf189b7c0d1fc8c1aecb2ffebc14b4ea74af93a654a93b639a950c"
 
 [[fn]]
@@ -1190,109 +1150,103 @@ embedded = "c352f7e43be2c0395616486b48c4d885bdef85487cf620256b8dbabcb2f07a9a"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a870747f6b9e3ab112dbba119cde1d5605179d05ee6e32f0939371cf0e7f7d15"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::to_canonical"
 kappa = "07a5687aeda48a1f8ae8217b77d7a72a5a92579454a18fe95f6afdb5436c8e21"
-embedded = "188b05d7ffd625342abdcde100809838e599be1fad22245d377573a3dd421484"
+embedded = "721c3be8dbf8514fb60fa3dc98758323a118962e3b89e707724286d0789a431a"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "77ee98f15fb3f01be08510e5bf354427ddbb65bdad1f18473d1ef938caf22ecc"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::to_ipv4"
 kappa = "c309b3b52d3d10a275e19bc013010b147a9e6b05827962d637a10df76c76ce1f"
-embedded = "cfb65569e2db1225c135d8f4912e068db94068437e78e79bada1dc4d8b1c41d0"
+embedded = "fc78aba941a57ec41b744d69b5d1d40070c56b979e50699ccdc927b8d45f512c"
 status = "translated"
 bridged = "pending"
-pending = "signature: Option"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "d2c825c2417fb9d075a754be7427a921f2481d84500ac5e28c46fe74c3be87fc"
 
 [[fn]]
 path = "core::ip_addr::Ipv6Addr::to_ipv4_mapped"
 kappa = "5a7ecf983911bf2fb3e6a7cb9271c0622fcedcdfbf639b3af57fa9b03ea35993"
-embedded = "cd922bd29b4a3aa76357ca3e730b45b70c253aa276e02d2234b50716d1542b30"
+embedded = "e8b0ba833ee5bfd34b7b50dd332d5a2283b76a10e86eb325c688c98f69fc9e59"
 status = "translated"
 bridged = "pending"
-pending = "signature: Option"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "8d7793fabc2c57f2bc4f27f669b95ad0dd241e1acaade2c76216c627c5e5fd85"
 
 [[fn]]
 path = "core::ip_addr::u128::from"
 kappa = "d90f8e96584efeebb5a897d94790793ced3cbfb6844c47f465a1f44730f79884"
-embedded = "9a3ed73dea7b98dcec59f0d5c23f1e4b0e77eea2356e58d2ef53b9f949db28d5"
+embedded = "f9c02460b1dfbfaa636553f764035bf4aec86ae8f3cf7741e955c1c23cbc2844"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "31a7bada6cecb0941e881c80b24a85d2e386b0e00f8d332b216f5c504e5aefc2"
 
 [[fn]]
 path = "core::ip_addr::u32::from"
 kappa = "64cb01e355c20004cdc3e1745bfb45b047fe71cff48f26d5b8bd9fdee5baf614"
-embedded = "53d3ce7553853a778532e8b181065d6f04087a7f71bb74de39f2aa80515e3e8a"
+embedded = "7e0bc710967a9991876bad1d10e54aa6112968b346e7292d91095b16b58c0270"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "cfe1aebaa100a2e1a8c701acbb7d42fe2ba3f17e257b4ce414758181cb58b883"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_add"
 kappa = "556f9e95a067d02da26fcb4b9577975beb4c0446e9c144458a493aabe8578d3d"
-embedded = "ae6e812d84711a023e82767e704a1369e93b9fdf527669c04d54d3b2050fd1a5"
+embedded = "8537995dfa0df80ca195047160b2a4d5e60a11a4c65ebda02d39c2495c851703"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u8 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_add#2"
 kappa = "5ab1eacc01d1a7bf008d11c9498d33d09f951235841d08b135b5f0ed8ac072b3"
-embedded = "cef6e2669f94d5a9138f44fa3cfe1ea61255dcfe7b4b475879ee870dbc2ae684"
+embedded = "95442fb5b10ccf3cdf8a38d3c74863195096a553d5eee15e8f8eb97ed0ae9ae4"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u16 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_add#3"
 kappa = "5613e618f1e7a64e75a3aa09cc57c05b241199661d5a79af321a19041b0c0f07"
-embedded = "373626c5344b6af5a9b21736e03ad8d72a4dcf05616ce3273f3c651060cb7949"
+embedded = "ebff7de1bbae051df3700dfa539565d70e5f4e11f9b844ab29e7dced4879d167"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u32 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_mul"
 kappa = "38bc6894aba43b311433cc3a9d0ca0f71121801f8a26ff52f584e8891c14b6ae"
-embedded = "2ae641b431c91dfc389485bcdcdbd9fece8af09bee5817c0ea530ff020f16d37"
+embedded = "4b3aa1397304f6d53721f7531f6c3ae8e5d1e6e23f4185fce6e8032a66dcde22"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u8 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_mul#2"
 kappa = "37fdd71ec3bf7ea1103a6c0bf7b78bbb00d057f8c6bd4f2c518d18c564c9b300"
-embedded = "c0540f92c146abb00707d9554419fb0acf3d51fc39ef7b9d3800eca49c99904b"
+embedded = "81d50435015cfc0040aa2b53c2d3329e59be6ea4954ea70215df7fab7c0f9a0c"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u16 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:18:23: 18:51>::checked_mul#3"
 kappa = "6878ac8807936734162418e65af57fcd67e59d5b0440cecb3ff328db563cf659"
-embedded = "fb61d7ea748f13bd4f1920231ce3a5702197ff7b80eff0aefe5134a08845362c"
+embedded = "6d81f66168dc7e3e78100e3586958f3fa6ecd2cd8d9aab578b3558b4e0345105"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:812:1: 814:27>::try_into: core's MIR stops at mir::TerminatorKind::Call: <u32 as TryFrom>::try_from"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:460:10: 460:15>::fmt"
 kappa = "fbf606a6ba8096ffdecb2047e6af4596b56ab50ce2a19d73123056c791023637"
-embedded = "dddbeddb5d465776015db8edfc0766289870bfc8f1e99f8277bc10eab848952a"
+embedded = "0908aa3f20f1b769e58b90b0d07e68053e385419a9e40c9c4a99cc14bb71d217"
 status = "translated"
 bridged = "pending"
-pending = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "687855814abf70885821f51663af14dc63bcb5f9ab57f946b3adfcdce43d918e"
 
 [[fn]]
@@ -1302,7 +1256,7 @@ embedded = "fd3adc92947f77f4b515c9e7aed91f030d997907c43b2d8f4d819dc284b23250"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetParserAddrKind"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "34b4a62c1f090c23c5775cfc70fb829f049e110f444294a9696ea0e20e652234"
 
 [[fn]]
@@ -1312,7 +1266,7 @@ embedded = "1d42e0a7d4da5f810841a843c2cbc3ada01d0d892529a34687ea04701ca81344"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetParserAddrKind"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2ed43f1963192c7468f4801f5dfdfc23bc23e544d31b08c9511a0068d1129b79"
 
 [[fn]]
@@ -1322,34 +1276,32 @@ embedded = "79cd76f04a249c81c9a0a3f1cebaa57231564f845ef896993dd2832aa58fe531"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetParserAddrKind"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "bff142708a58a419b646622bae50a37d58a42851f8e3a87712e9cb5226ee09ad"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:495:10: 495:15>::fmt"
 kappa = "bddfac6f61460f54a00b22ac99e00434578b791b5a93027f0b71032077d9c5cb"
-embedded = "9a68c565efb2dd196e6f65370c6c3d1d66f52d0b03ddb94adb676a5771495006"
+embedded = "8a86fc5330615a9c2bfe8fcd10718f3bce41293695b29c67f155ae0fc7782c0f"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:495:17: 495:22>::clone"
 kappa = "6c78bfad64b872dec28539270d095d75cb8009f4e6db2e106a814163fce8ff58"
-embedded = "65d6187644ff67d042d231f2dea7b60bb6d233364ebbb6b1945e6ab64d8c9952"
+embedded = "531c77eebde2544436349fd686c975c758c5260e77068a1ce9cfe2aef5660590"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetParserAddrParseError"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "1856616b5b526ed0be40837f69f8af6be0961a3e7cc68768e19ee6943ec6e459"
 
 [[fn]]
 path = "core::parser::<impl at library/core/src/net/parser.rs:495:24: 495:33>::eq"
 kappa = "6095325270d418dbb89d389c72ec9add06da50b40c1c9acc7e0480f074389002"
-embedded = "9efe7527fbdddeebd137d88d9ecb29e73a5e64f367ee6e89add6995cc4ed758b"
+embedded = "919fe5a8b9cb8b1a8105f575ffd55bf099672b440091e6a3060f34c755b1fea7"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetParserAddrParseError"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "9460e175a22ce6dae50240a3c649ee854c0b6c1ea2287669d115688153f7b0d3"
 
 [[fn]]
@@ -1359,7 +1311,7 @@ embedded = "81408d6911476825da295eeb6920666f6c5f58cfded3bc16f48a85b2478da93f"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetParserAddrParseError"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "28df9304db16b59fcca2e2832fbbbd9f9bac1459d50f0826a9e84b00a9b41075"
 
 [[fn]]
@@ -1372,42 +1324,42 @@ cause = "mir::TerminatorKind::Call: fmt::<impl at library/core/src/fmt/mod.rs:29
 [[fn]]
 path = "core::parser::IpAddr::from_str"
 kappa = "8aa39d63bc55126d0f08588cbe212c301090eb619b52f58770c92bec9e86ca0d"
-embedded = "bcdb0efedb89789349c62fd21034fa2e06fb56a787eaceeaf08871cb901b6736"
+embedded = "5c9e17d21c5e1f35d906ef0bb0ff5966bf435ba86b0fced24056437ffe26ce02"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:295:1: 295:12>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:295:1: 295:12>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ip_addr: core's MIR stops at mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::IpAddr::parse_ascii"
 kappa = "384551981b3036102600432abda3d53b2a5d3a6167dbca5d058a303c95c68155"
-embedded = "720d3d3a66b7d43c5cc936b1af48c398e01b9f1f71686cbda000c61d0f0dade3"
+embedded = "abd1b0182a4fc46f12e6c0cea05d7f356a9828e76a5659d04f158dae9247b494"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:295:1: 295:12>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ip_addr: core's MIR stops at mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Ipv4Addr::from_str"
 kappa = "671c0ca9715362ffc9ad4002c79c8a030e1ee7cf7c5d4cfc4edbd96edf77866c"
-embedded = "c16ceb45153c801c62733b0f0e5480819af70d93c5485e970009d27e05388942"
+embedded = "9745ef664fda9bff0f469807ec99f8c8918e91758fc560219fe9500a7dd5643b"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:323:1: 323:14>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:323:1: 323:14>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Ipv4Addr::parse_ascii"
 kappa = "ea082011d71a8b0e0aa7ab87d5b2371282bfcece926539bb55ce6139a1aebd77"
-embedded = "f69f90e741e174ec540ad0060d6aed5065d151bfe3235b1f9dbd97c6d15f15bf"
+embedded = "60300eb8d7891f5661ce1549645a5db8f07d2b9d0ffb1ff6389f1b3b2baa2f76"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:323:1: 323:14>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Ipv6Addr::from_str"
 kappa = "6c94fc1edcbbd03db0e95bdf32ecafaed98c9f27f390352d00e19c917fc32965"
-embedded = "23e90297205eb0572c647e19e4593ff41c06a9ac418a2eb639c4a187d4fd7dda"
+embedded = "9dc3f533f7afc09e7f347c615402ab9d42fa6b941acf1043aab8acf8c1e687f9"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:354:1: 354:14>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:354:1: 354:14>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv6_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::{closure#0}: mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::read_groups: core's MIR stops at type outside the lift: slice::iter::IterMut<'_, u16>"
 
 [[fn]]
 path = "core::parser::Ipv6Addr::parse_ascii"
 kappa = "3ab352704d29953af1d51080411e2e80574cf4e1d72a50fef025e22c9b9bd44c"
-embedded = "f2ffbba8c4b39b883f8b53fbea1969dc076e978d6a7def6193e1a0216f487360"
+embedded = "004f39016d37ebe8ce2c381d9319c9bdfeac6e9630779654031ec846d98decf2"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:354:1: 354:14>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv6_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::{closure#0}: mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::read_groups: core's MIR stops at type outside the lift: slice::iter::IterMut<'_, u16>"
 
@@ -1418,67 +1370,66 @@ embedded = "de27b7426e5878e3fc6f8358fb5a9f5e2584a0bc51dcc76465c283cf2d58c326"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetParserParser"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "6fe44eff17241562519d1f7f369398c2d6c238f1ea67d5a346fff8e62316f5c0"
 
 [[fn]]
 path = "core::parser::Parser::parse_with"
 kappa = "747170053e8f5e3b62ae36aba4fc4afd2eee35c1fe9a59406d00de7f6518409d"
 at = "F=impl FnOnce(&mut Parser<'_>) -> Option<u32>, T=u32"
-embedded = "7d9ec0934f36a2209c8608eb28a77fea492e80a8872023c7941e4197fba0fce6"
+embedded = "64b730d59a5fdc3b4bba7ae09d2413edcf4733c1c3554f1066f7e71fa362c6cd"
 status = "residue"
 cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <impl FnOnce(&mut Parser) -> Option as function::FnOnce>::call_once, which has no backward function"
 
 [[fn]]
 path = "core::parser::Parser::peek_char"
 kappa = "27b2aaf60a76ec0ad7958f4e1123435f8cab4cb5c26f37afb0175788b0595e60"
-embedded = "c9d7ce0ef620febaf8b87bdd0cdde020d0eac9dab61b12a6ac6b58ec19127b3c"
+embedded = "f4b2a8fa09b705e4a7e8ceef3318ec762e7ca93d905736bcd250a3852bfe4582"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetParserParser"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "67f8a2e130bdcad1af426d19cb6bae63c26f9de0ae9aded247021db2e0d7d7ab"
 
 [[fn]]
 path = "core::parser::Parser::read_atomically"
 kappa = "43992ed5fd89b5f0016a298143f456d5183bb8fa262d919619d910562a181e1f"
 at = "F=impl FnOnce(&mut Parser<'_>) -> Option<u32>, T=u32"
-embedded = "52437bcc4e6cddb7f1db5a5a74712befb6abe0fccdb0e1f0b47fce195b1d918b"
+embedded = "ee80b3f3606545aa0852e5b8e96e56957336b6d5baa7c66567739418992462c0"
 status = "residue"
 cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <impl FnOnce(&mut Parser) -> Option as function::FnOnce>::call_once, which has no backward function"
 
 [[fn]]
 path = "core::parser::Parser::read_char"
 kappa = "89a937993e73b9bb33e145650bbcb9ba1225110f85453d219204bd8a9036ee68"
-embedded = "6f0bbf2d919ed6711829459d5f7052c305344c087814efd1ec96409c34ec612b"
+embedded = "0b730ac053114e19a5fa33e25b84366662b54fe02dcb3a6c8598cf0ede354bfd"
 status = "residue"
 cause = "mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::Parser::read_given_char"
 kappa = "48302cbcc9bbc216f227b916135fce78040fd8cb73fddacf4fda7226788dcb29"
-embedded = "423d9a1d952a6aa2cfb40606b04ed4cb3b8dac662bbf7e9f4d6075822f457202"
+embedded = "68e621536235fb39c47bd9f97b34f1c2382a8ee9babddf1ccb4867631e139b25"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::Parser::read_ip_addr"
 kappa = "8eb4a123598b96123975382917478bdf1509afa683edcda8dc6329d0688de31d"
-embedded = "55a69822cb156fa838d530e366c0f5b0898e266e0ce376aafd2e9c86145916ef"
+embedded = "2fd034c1b9d946d8c466c4282d9cae73f2cb6de4b730d46c0edd79b8c93adb0c"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Parser::read_ipv4_addr"
 kappa = "e1b92a9e424d508b671cf8e6cf4e5c9e7d134aab79a56aa03a5f124113872503"
-embedded = "b7e686646e476971d9d0e313233c5c79197f34e8f6f33df09c54eea646cd6d96"
+embedded = "2f1e38f43417da62197cee46a6591c24dc232b7d071e8a9612f70b17c8b61888"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Parser::read_ipv6_addr"
 kappa = "bab19ea33c0ea09d4419a8c338d3bc537155e2dc5089ab4c46f0a0cfb6896c25"
-embedded = "48867a8521d54c819804a0e14b14e10aceac1e700566619bc75733569f90b6a1"
+embedded = "21fe4b7b1cb4b105c3e9819419084d7713a1e4d6a4ad41ed66ef7aa281417413"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::{closure#0}: mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv6_addr::read_groups: core's MIR stops at type outside the lift: slice::iter::IterMut<'_, u16>"
 
@@ -1486,21 +1437,21 @@ cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/pars
 path = "core::parser::Parser::read_number"
 kappa = "77ffe1bb127ad7bdaee8643093bd54051f8bea6558737fbbf826781cb44b732c"
 at = "T=u32"
-embedded = "c3f82867274b75ca58729155c8a2a6271838b0c082587d29fa22fb4d6c32ff30"
+embedded = "aa301fc6179a5562c398d19cded5c11876cad163cab199b79efbd97042074a51"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_number::{closure#0}: mir::Operand::Constant: net::parser::Parser::<'_>::read_number::<u32>::{closure#0}::promoted[0]"
 
 [[fn]]
 path = "core::parser::Parser::read_port"
 kappa = "bc35fa334212c2d36ee9a3ca57b1ffcf2cd06e7fb5b5592e77f2d11e2acc304c"
-embedded = "0f119f773d9b496edf29cf888e99fa93be44699c6c28e737fa982113231928db"
+embedded = "15159fdc21e62c3e1e06435dd199c31b7c654f6c6e593511630463ea7c4189f7"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_port::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::Parser::read_scope_id"
 kappa = "17d40420ae3d394595991c9416f771f95fbb8badeaebb28c28196e615cdd7295"
-embedded = "c8416730b7f28ef4eed6efb1eca9e06b02c00f9256b3ce8717878f3b4ad31536"
+embedded = "301cbcab205c1f2ecb8b3e94524cacb3da6b091a2047b832404521e26d76d88d"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_scope_id::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
@@ -1508,77 +1459,77 @@ cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/pars
 path = "core::parser::Parser::read_separator"
 kappa = "cd956eeecdccdbb4490b63198682174cfcf07a44bc8a75407623d0fb610fb436"
 at = "F=impl FnOnce(&mut Parser<'_>) -> Option<u32>, T=u32"
-embedded = "9eb5ba9333e227ebf7ffe4a969b467d0596b19f37031a5b6b667de98e8ba3cf8"
+embedded = "d61fb6c3d5849a3176d6ed0cc636b1cd48b0ebc03809f02b845127cd5dd26665"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_separator::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::Parser::read_socket_addr"
 kappa = "abfa8f6de447749bd8e14a246514823f1688be70c4a52a70eb2e3c74259c6f48"
-embedded = "541e357b914a6359b558ecbf4ecc6b2558a2783ae8ab721cb986f3d86858d2e7"
+embedded = "2a092af398a91ce2fb38f008eb1e3f66e84017429c903ebdf6db1fb92df98cf2"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v4: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Parser::read_socket_addr_v4"
 kappa = "bad316728521b0b27a2ca600f2674ca268cb8c8455020adade4dd7f60b4b57d8"
-embedded = "56d94988bb67d138591109916956f41d7a8a02103436e9c9c1bad5c26db459bb"
+embedded = "400d50bcaf1ac0d6b319bf7b4e6559e015b622fe43c3ef84921c1e62927dc682"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::Parser::read_socket_addr_v6"
 kappa = "a980347fc9a18ecbacd4e06a6d572c261e69c655d4484e282793f5b0cc72ad6d"
-embedded = "0ca42e57683b53dcd6eea150b3b48a1c18ed4e5d4c2c974749dd65667b184b86"
+embedded = "3c185f1f23235af904a2c1e41768eb2177adba9145c461f6c25eb8cbfe05e3db"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v6::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::SocketAddr::from_str"
 kappa = "bb010142bd6538f3d9ed3d20c661984375fa57090ce15ef3b1feb9762bba2b4d"
-embedded = "450731ce0990101bdfe1df81915067f4fa567926f43c9fc01e7c83a2069d8fd3"
+embedded = "c52e9f5173cdd8d8869a8efcd47b3736d0909fd51133c1bf25fb1baeacf49772"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:432:1: 432:16>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:432:1: 432:16>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr: core's MIR stops at mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v4: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::SocketAddr::parse_ascii"
 kappa = "94f3f5cc6f74f79ae873424869f1759d5049e48f97e8217a730d9186aa37047a"
-embedded = "9f4eddba392f70864fd1af614a5cf3ddb0ca6839426cd6af877455121bd7b005"
+embedded = "b2d8ef8200ff366f194b4e67a420caa9ed143d17280bd6fed346ce53e3859e83"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:432:1: 432:16>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr: core's MIR stops at mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v4: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::SocketAddrV4::from_str"
 kappa = "6992525d7d2e0f7303210967ae9a6f7ce957f707fba1511e51018a42c8f3c500"
-embedded = "bceb09d500d04f26fa4f55d36befdbb65bd15d8f07b222da4a435b426cc0db2d"
+embedded = "bcafa5a534e1232defa50e925e2aa620f79ff4016ae59862d0fa50648a2c8305"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:380:1: 380:18>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:380:1: 380:18>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v4: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::SocketAddrV4::parse_ascii"
 kappa = "90ecb294adefb10d5ae97ed32612d4f602962db9305e333acde1d13b42b736f2"
-embedded = "be14cc70f4ecc6108abe4dea7af4bf48ae9422ab644d0153bc7e89770077e1a4"
+embedded = "9a7886785a737bb86a3e6a9fea63bb83a93426b7ad3aeb6343f52965719075a6"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:380:1: 380:18>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v4: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v4::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_ipv4_addr: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_ipv4_addr::{closure#0}: type outside the lift: slice::iter::IterMut<'_, u8>"
 
 [[fn]]
 path = "core::parser::SocketAddrV6::from_str"
 kappa = "d699c07d52e79301528cbd36e597c954a55db3c300881cfb0db6653bb8145a20"
-embedded = "5f290ad7462154c660e90501d3d7c07e9ac351874b9174530f789ef07dfc0979"
+embedded = "18fef0df83442d7e75ee89a66d78dcf9639b2fca9254c93f9170897c6fe18c5b"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::parser::<impl at library/core/src/net/parser.rs:406:1: 406:18>::parse_ascii: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:406:1: 406:18>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v6: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v6::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::parser::SocketAddrV6::parse_ascii"
 kappa = "9dc8d5641fb31b6ef08c033569f237d1085d2bee106330245e89c86270492608"
-embedded = "1f4632f6420e992907c3edcfce0ab295ed621766dc89bee2556adf533102c099"
+embedded = "f35fa90e1b517d98418572c74b44ef8100f413fdbf826489d0b2d8e98d85a6c8"
 status = "residue"
 cause = "mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:406:1: 406:18>::parse_ascii::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_socket_addr_v6: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_socket_addr_v6::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_given_char: core's MIR stops at mir::AggregateKind::Closure: parser::<impl at library/core/src/net/parser.rs:38:1: 38:20>::read_given_char::{closure#0}: mir::TerminatorKind::Call: net::parser::Parser::read_char: core's MIR stops at mir::TerminatorKind::Call: slice::<impl at library/core/src/slice/mod.rs:101:1: 101:12>::split_first: core's MIR stops at mir::ProjectionElem::Subslice"
 
 [[fn]]
 path = "core::read_groups"
 kappa = "8af01d3f6fb9e110680212a3ad1c41874fe230297866e1caa65e62d76042e8f2"
-embedded = "81951eada8064ff90dca2bc38ac391fb880fa2a89cbe1b6b73e0d9ff1c589e73"
+embedded = "ad918f0206e1518fd895c7fc4bf2788201cb7a903795e71e0ceec52e0e9cbbae"
 status = "residue"
 cause = "mir::Ty: slice::iter::IterMut<'_, u16>"
 
@@ -1589,7 +1540,7 @@ embedded = "be9a7329b2c43d79d63eaff0304f91e787bf71d3781b23a3b480948bb1694921"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "5ac1c24f816ea22da7627ef8c6b6ec132875f80c63f31952a573e19952d384be"
 
 [[fn]]
@@ -1599,37 +1550,36 @@ embedded = "c4e474f45bf856a680abbf92b02d21e5f254ad8f28beaceee5f3e428703895f3"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "62f169275bcd5cc1cf1e8466fea90d3749c887a79e70eac4c4d7c2437efd8903"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:145:27: 145:36>::eq"
 kappa = "1f74063c4366f834818dcbb7f21f61b707b40b6ebf1a74eca079898792621b22"
-embedded = "86d2d8906d51c6c3d19252cc3382b6f8cd6efd7c99745ed4d9d3475bf575a80d"
+embedded = "d64dd64b8039aaf7ecb7c4910b4a877e37cfc2dcc776b45094189276abbfde42"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "c43a8ba14b30550698214a684a37bd729c2bb032fc6981d9f0ba949f91f41697"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:145:38: 145:41>::cmp"
 kappa = "328c06c5a7694b4b820fe6e93af1446dd13154214d63c73ba2deac2c1384d2a0"
-embedded = "ce4913634cc966cb2339008683c653b849338db15edfb2012ccfea837a03dc6d"
+embedded = "d68ab3406fe582f8baec3681d46ab9ee38f540b648ca9ccefbdba2219d2989cb"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2271:1: 2271:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:145:43: 145:53>::partial_cmp"
 kappa = "cef9d0acaaf6b840c9ebbdd461607397174dfdab565c29b068186a0a2a9f345b"
-embedded = "2ed93164e00da25c2db1ec72a3b697591cd9c48522a8293ba78587df27b2cdac"
+embedded = "2e58fb3f87592a67ac3bdfea99179fafeeb76f03c8e1ed4e2219b8f3591a2acf"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2240:1: 2240:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:2271:1: 2271:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u16] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:145:55: 145:59>::hash"
 kappa = "e495f2d2eaa90ecead478ced0040e9271a06fe6b937e6c1c5fb4e42a1661f4f2"
-embedded = "04a5f5062b16fe6576a3f77451fb8dad46eced84385f11a401eebb244a6b1eee"
+embedded = "3f9dbd97d1b7aa56d6c016ec8e2bbd64717bab2fd9a6c9e2659c701df828937b"
 status = "residue"
 cause = "mir::Ty: __H"
 
@@ -1640,7 +1590,7 @@ embedded = "1de9f92f7cc96557ae231cae2cf7e6d5b96c7e017728fe6683ce9a41abb18ca5"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2599c73c1e7fd62a4935c31f5028d58474cadb796cd6377bdf3d7bd8cf45b1fe"
 
 [[fn]]
@@ -1657,27 +1607,27 @@ embedded = "4be0a6e854af6a05bbaf6400e660ddbceaa1980c9dc92bd705dfe77e107ed0a1"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "40173676b7861527e374e2eecc0ca67e53e22baf13fb1c7f593deeb8140c09d5"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:31:38: 31:42>::hash"
 kappa = "9814591e4890d721922e1806aefb69cf2ea9261f12b5f3ac2c076e783634db3d"
-embedded = "d4dafe0f65873be6192ec40c35778102df8452a92412ea68c39b0b2b4a992c33"
+embedded = "c4718661e12ee4b977bdef79b0e8786f09b5e62f077687838f661f91d662630c"
 status = "residue"
 cause = "mir::Ty: __H"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:31:44: 31:54>::partial_cmp"
 kappa = "a3c6da7f66d54f8d59d338009ac007019389d1d8681a1729a639a18945d6f7c7"
-embedded = "4707d1aab3bb38181a7e24aed428276355d6f11d27eba9bf624d0296945cac67"
+embedded = "1126020799d61b66782aa045cdd440546f4c7512d32a34e1d7314363690c6f97"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:31:56: 31:59>::cmp"
 kappa = "c398c0313636483c288c21f3bf05f66a7d53a326124052f23aa7a2306caee7d7"
-embedded = "8ef64da04d4da7fd0f0be2d4d060688ee71a55a9de950eecb5ad1af9d8150e9d"
+embedded = "5a90a758cdab3583e9456ac8271486fe93c676700fc22cdc60b2fcef9172721a"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
@@ -1688,7 +1638,7 @@ embedded = "af091b1af27a67c1c5914017e89e995bcaa1056f5cc2e68b8105abec63b0ec5a"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "03b56a7b653a673e5a38e78ae5d6684e1d4aec5086636ed59aad52fe1289af74"
 
 [[fn]]
@@ -1698,51 +1648,50 @@ embedded = "edb9734cd5a52b1cd4c6748098da9ade56938577bf3213ca29a1247b3e4a340f"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "69a9f035b77bd70c49178df12cc0204f676e308165e4b20179373b937978eef3"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:79:27: 79:36>::eq"
 kappa = "53f258e673c609e865655d9dcbeebbab0a7685f9162e2a2f62b58df6dbc90d40"
-embedded = "f62d24ec02b2a7e88b7d4efa89bf275b354c6b0a12f387f3db35ae56bca29c6e"
+embedded = "c42bd8a5c669266b4fd1af5d85895700f9a2794da8842f6a742a0cebc25f3510"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "c055ed18b242ed9e714f1f78121943e2bf6a1b14a4d9913b5e97f6fa7704fa8f"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:79:38: 79:41>::cmp"
 kappa = "1fb53cd572656f440d2bd40b4c8a3c5934cd287f115cbeddb7a381c90acf2ec1"
-embedded = "192df7f75b75516ad20796fe3a7d0798fb99dfd627bb05deb24283f490221942"
+embedded = "87d076e48530f1f374f411017225f5b3333d3a7631a70db173de4dc26340ae83"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1266:1: 1266:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u8] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:79:43: 79:53>::partial_cmp"
 kappa = "726c9fa72d2ea01e17a22ed0b92d9e76fdfdcbdeaa9a616d187cebd8d78c4abd"
-embedded = "a7bb8bb2db4bee36cbf59b42d01421e4f9816dc36d7e7a4882ec2d57d675972a"
+embedded = "70177ef4658108684df24d4cd933ca586490558a072f151d7d32d6d23d43e3a5"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1235:1: 1235:35>::partial_cmp: core's MIR stops at mir::TerminatorKind::Call: net::ip_addr::<impl at library/core/src/net/ip_addr.rs:1266:1: 1266:28>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:436:1: 436:58>::cmp: core's MIR stops at mir::TerminatorKind::Call: array::<impl at library/core/src/array/mod.rs:383:1: 385:27>::index: core's MIR stops at type outside the lift: <[u8] as ops::index::Index<ops::range::RangeFull>>::Output"
 
 [[fn]]
 path = "core::socket_addr::<impl at library/core/src/net/socket_addr.rs:79:55: 79:59>::hash"
 kappa = "5a64508882a3bd9c592d221866a840a272f9ac282579472aa83c74efbef96290"
-embedded = "6c129b9a4054cf0c71af394571268b24f5869cef655f7c4cf709470266acc81c"
+embedded = "d1c101e35eaf8c307544f67e67f8f747050a5680ece7bbb6955d362d607d4899"
 status = "residue"
 cause = "mir::Ty: __H"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::fmt"
 kappa = "ea773a45eda9258b1152ca814c7a6055bf07919977797eebd76a3b8245ea1de2"
-embedded = "4dbbe77f65a7ecf1bddbc2c6bde91ce9fbfffd8594cf01b48a62ef79ceb84a05"
+embedded = "5f554a98d11d2b65e0af781ce35e51aa4ea6ce92d1db6424859faaba1fbccb91"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::socket_addr::<impl at library/core/src/net/socket_addr.rs:646:1: 646:35>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::fmt#2"
 kappa = "9e4d013224a1886f2075018a8078e26eed467d9cc98719703e8f924ae3d3aeb0"
-embedded = "68ca0a99cf67591013fae344d69f52c00db3a2878bbaa92ac7c736d8d7a99dbc"
+embedded = "e8761d274452737ae16656f066033aa975a873a8d19a9dcc5491b330d2eade31"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::socket_addr::<impl at library/core/src/net/socket_addr.rs:629:1: 629:33>::fmt: core's MIR stops at mir::TerminatorKind::Call: net::socket_addr::<impl at library/core/src/net/socket_addr.rs:646:1: 646:35>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
@@ -1753,7 +1702,7 @@ embedded = "736a431f64a29f0799a64cacec3cd6688c73d92f3af3bb72bd82df09b40380ee"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "245ad67da2c789026bbe2da1dadfc770b983704954096818cb9d8a6fb034e3ec"
 
 [[fn]]
@@ -1763,25 +1712,24 @@ embedded = "7ae1d09ea1b34229290c33ae197e2e21e412ae53c7bc5c3f046e914e9638cd92"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "23cb4dc583160ad1304bd08bd9bfe2f46d542e77098c922e92809dbbab330acf"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::from#3"
 kappa = "9708ae7420615831f30affee3dd4877a5f9b8e73319636cd29d6cf0f516ecdd7"
 at = "I=u32"
-embedded = "29aca06e3d8e933dbd4f57a3467d160ad8e6088551d0077a0c1aa356955ac9c2"
+embedded = "12e13c82b02919974df12b3af5ad4af29cbb30718475bc77c746deafb8e190df"
 status = "residue"
 cause = "mir::TerminatorKind::Call: convert::<impl at library/core/src/convert/mod.rs:768:1: 770:24>::into: core's MIR stops at mir::TerminatorKind::Call: <net::ip_addr::IpAddr as convert::From>::from"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::ip"
 kappa = "98aa23a7ed0c88521b2bb678d25e2a9380c8fee76be472dbcd546c9e49077f7f"
-embedded = "cdb4e6a119c29725047967a93f1f1a53caa16efeb8ffe300acc4573f4957e089"
+embedded = "27ed3ff45aa78a296979fae392e61df8c075c1e79463bf37009b02bd1a20918d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetIpAddrIpAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "00941375a0d6b66bb80ffb3f6b42fe7e431f9b53eb063d0d65750065d581347b"
 
 [[fn]]
@@ -1791,7 +1739,7 @@ embedded = "3ca7981cf938d364b3a2e4080e127467fb79c2df9f2a010a12f84dad9fe76d64"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "1a96ffa0d22f88cecdb6f58c970d7e371c4cd26f8354af88c708d66fcbe2bf8d"
 
 [[fn]]
@@ -1801,54 +1749,52 @@ embedded = "8ff0e19fb62979157f6d9555fb2800a726b08b910fa92866ad2eb23d803fde99"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "77f5d28072eb7395e0069bbf66ce708fb29f5c874b6cad811c4bf22deca1d074"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::new"
 kappa = "187e228045e142456fa50e5d37e9d9b1b80d28a87c27b5b05e83cf5378f4b4f4"
-embedded = "3aed967facb18766b32aa2286086371022b776fb0336ca7bae43a99442ddbd8e"
+embedded = "b87eaa4902bfff447ab6d69a425c8f6a254258f08b7f87897b3acb9d4e515368"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "acf305f4efa45e5b2d26de00ac967166e1b5ea8895604592c9ce0c980755b6bb"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::port"
 kappa = "163925b9c2114db7e100106c318353a5b7cc231012dab0f5fe2b4f1833b36a6f"
-embedded = "ad7ba71faaa3c178d61f4b0f0129acf074823a31a3c67da02d3cd9bb8ca1a7b1"
+embedded = "3407b78492b85f137c4ba5f56988c68c427b513319c5b2048b65307a73cf353d"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreNetSocketAddrSocketAddr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "521b7cf0a658a8c37fb42a97ea0b1de876489c8abc393d3a009abf0c12b1683c"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::set_ip"
 kappa = "c5f5f3214861191eaefb286fce573e4e41649c7ea84c78026c84817900f4729e"
-embedded = "be2b65e9ed765c704f9afa6ceb644bb1c51d0d4533db19eb98bb677c3f5029f8"
+embedded = "55bae7dd0d892390774729f2afce5ab59c136013a995489853ffc6e73fca23eb"
 status = "residue"
 cause = "mir::ProjectionElem::Downcast: a variant's field read outside a match on it"
 
 [[fn]]
 path = "core::socket_addr::SocketAddr::set_port"
 kappa = "2dac59cbfcaab92ed0856e93c33ee2ab42adf3c7229236f6cfe80bb29e85f425"
-embedded = "bbdab6c3e3855489cc3392a3f27a4406a568c4f21540a928c32fbaa14a823327"
+embedded = "db3d76fbb0029e3df17727ed51feae1e5d7845d1510a7d97d4aff8348ceb28d8"
 status = "residue"
 cause = "mir::StatementKind::Assign: a write into a field of an enum's variant"
 
 [[fn]]
 path = "core::socket_addr::SocketAddrV4::fmt"
 kappa = "af807eba63f863783b35c337420f9213d64fa63923a32aacbb0ef621073ffedc"
-embedded = "31c95b8392b18995ef540489f862e445dd21675e0b19ba3b847a18b4670f97c7"
+embedded = "982839bd962112a58657bd8b01991a8f1e7c8161954ef247bfb84e77f417d80f"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::socket_addr::SocketAddrV4::fmt#2"
 kappa = "b513342ca50fe220b53ef0ac63f4334f5d80e39fb269c833badb83ea903d6c20"
-embedded = "a6666950ec67b6c47a0846557dd57947128a7184965b7155ef3ecc9b3851e40d"
+embedded = "2d4fa31b6226971eb45545f25e3d6884952b0341085f19a5a57aabf1cd3a9f17"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::socket_addr::<impl at library/core/src/net/socket_addr.rs:646:1: 646:35>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
@@ -1859,7 +1805,7 @@ embedded = "a63efa885ef49a3066b965bd3bf6ec601bea13a1c42daab398848d5406572309"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv4Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2191b9297c98d61479eea38dd8bb4caf130051856564b9fcbfd2405c2b73b934"
 
 [[fn]]
@@ -1869,7 +1815,7 @@ embedded = "d317ead3d0f91a3db051323175d5697856fe861286a8b24b55ef6f66f83e96cb"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "423e88724554d2667f7596b869357fd91516b5122cc5c9b6c9c1397d63466687"
 
 [[fn]]
@@ -1879,7 +1825,7 @@ embedded = "fcec725f2a2286b61d2c38071e30e7d43bdb9518ecc46c7b0aad0072a4fc2358"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "4626b1c2c979251fe8a8f8164b169bb0ba24419bc51a4449c0254ed88097b4bb"
 
 [[fn]]
@@ -1889,7 +1835,7 @@ embedded = "2c2f3ad7388f6d0f0cd882567b60c2a3cadbacbe59d1f1a9bffcd1116dfd6ef2"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "b1058bef006de0cf196bf05a11522c557d6837f7af1b9e6135b7e730998f0273"
 
 [[fn]]
@@ -1899,7 +1845,7 @@ embedded = "6d5b34103df556c42381029e21b4fef5adaa51c5eeed1a8eec114a034542aed8"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV4"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "41bf0fb00a4f73fa2c7398bcb829c725a4caa6bb61525eef53b1f1fa16bdaf2b"
 
 [[fn]]
@@ -1909,20 +1855,20 @@ embedded = "2c836468606f75862e916370059af4bc9883549067e3e8b5b199b3b0b2a598e6"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "74c83c6faf28a3fdfacd24fe8e3f7446d0922e70fb416be26e0259c48fbc3259"
 
 [[fn]]
 path = "core::socket_addr::SocketAddrV6::fmt"
 kappa = "f61f5ad8983523a2edb4ec125e07b701dcc10943a2ff46f27b6b248b34a8bbd0"
-embedded = "0bfb414ff586f9fe852f9ac2dc0a700d1a4149715894834dacf8f8ca83f303a0"
+embedded = "d7f21f0f89aa0ccbfa74b50f94c533a80cfa102a7b791c0612a9f6a3d2fb6b55"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
 [[fn]]
 path = "core::socket_addr::SocketAddrV6::fmt#2"
 kappa = "71d26a845ab414c5b85382518b2797e115b1f80c9b43e1e77821c31b2bea1beb"
-embedded = "0e637b52584be4d3a7f17f5db4adabb6512e338a8cdf84f7a21ca17ffa3f4ca8"
+embedded = "dcd9d52067a587222e7863a63b96ec01ed250f8793691ddb63ae272515874fa2"
 status = "residue"
 cause = "mir::TerminatorKind::Call: net::socket_addr::<impl at library/core/src/net/socket_addr.rs:672:1: 672:35>::fmt: core's MIR stops at type outside the lift: mut fmt::Formatter<'_>"
 
@@ -1933,7 +1879,7 @@ embedded = "c57a57946ff14a58cc061e3bc69c53c59d8da6f42e2b2c033f56557b5f06287c"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetIpAddrIpv6Addr"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a2dce91627389eced8453ba0d461c713adf82a5861000e509a4a52a50ede9577"
 
 [[fn]]
@@ -1943,7 +1889,7 @@ embedded = "e9fcc121d7748de4fe21f21719774b0d731e5dcfdefdd5bb66ab4140c5af88a3"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "d0c9c66f0a499e56d84ca10afb3a2a75346c1f2179b1f4ca8443e6bbb98066a8"
 
 [[fn]]
@@ -1953,7 +1899,7 @@ embedded = "403f498e60ad335d87902c684bb0c5f2c25af04ac0ab53c4c21ebfc05c9b91b0"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "11a0dbfd4f6cc9c0d7b205002d8f3d583ba9a670ca48de9acf15b4709d016756"
 
 [[fn]]
@@ -1963,7 +1909,7 @@ embedded = "7b65ccad25c4e2d0d47969b834267bbe079b21070b3d92729aec08ec83bb23f1"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "28b9c82483239db0bf195ed1cbff7c729c4b98ce82baf4299bc4c7c298f927d7"
 
 [[fn]]
@@ -1973,7 +1919,7 @@ embedded = "0a670a65ab1f6459700b514f71ea833461a2bb0ce7903893d57366b7e999c6fa"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "74e12da34e308e7161ca5a689c9a39d1de32820913eb2df14ca3072e6f654158"
 
 [[fn]]
@@ -1983,7 +1929,7 @@ embedded = "03695bdab6ce0705afa88be051b4d50ad43b7b14fa930bde24d931c382911721"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "6566fb9323fab050042fe130075e9543d3f344354ad9e41131b49bd0aa6d64f5"
 
 [[fn]]
@@ -1993,7 +1939,7 @@ embedded = "4326b48848c347d85da7fbe08c0ef9c4c3f00b6aac3c5824f84ecbe07826daff"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "819ab99cf8e08f7dc8ed0bf912add7ed68f01598c2f4e7f4eea129ec1d2d2328"
 
 [[fn]]
@@ -2003,6 +1949,6 @@ embedded = "36e7ab4df41ab442f1b60ecc0aa68b3fd6b92aed04cd3d5333c6bfd17ef18387"
 status = "translated"
 bridged = "pending"
 pending = "signature: TupleUnitCoreNetSocketAddrSocketAddrV6"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "c6a792ceeaa0af9838983011e07dc5237d04dc300f7e4a52e03e23b8df92c91d"
 

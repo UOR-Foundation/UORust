@@ -6,14 +6,14 @@ embedded = "92f430b90c4170a61fa9bd1904b967f51294bc0549d95d2a1126134bb5ace4db"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollU32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "0af91fd6f81ca10132be452faf2be86e7ed92b50211790361460c25725cc3c6e"
 
 [[fn]]
 path = "core::poll::<impl at library/core/src/task/poll.rs:11:23: 11:28>::fmt"
 kappa = "8ae1f5b2347d18dc19adcd3374302335898629866fe8f834298ea8ae7769ea2c"
 at = "T=u32"
-embedded = "ac8f3a58dd12828c862500bf988d232d9b76bfb57fc4c05b6d686a318d47ec46"
+embedded = "7c7a0f7ae7fbff5ef7495497d01b037f03149b1a61d2e63401e17242283b25db"
 status = "residue"
 cause = "mir::Ty: mut fmt::Formatter<'_>"
 
@@ -64,7 +64,7 @@ embedded = "1f0ea0c40ccb0ecf2b5cf6a10fc656a30c3735ac0fff46318560cca5f09917a4"
 status = "translated"
 bridged = "pending"
 pending = "signature: Result"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "b69b6f226040d32fd61296da68e314d1deca34fd6bb093e652bc446a7cd139ec"
 
 [[fn]]
@@ -75,7 +75,7 @@ embedded = "90199c401ddc32b7defe43cbd3f2b7518c808f904e411930ece2b03047c7922c"
 status = "translated"
 bridged = "pending"
 pending = "signature: Result"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "1d5b3a80bf397997d748f495968e2b62b634c2b4150f0db84abf1275e40bf00b"
 
 [[fn]]
@@ -86,14 +86,14 @@ embedded = "83ca458082cdb61c8b5f8360eef392589139b0c2fa29e65b3210f6d5790c51d3"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollU32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a996d94152218033e9ed596170002cf41c3d982298dad3fb1a6d3b8ada45523f"
 
 [[fn]]
 path = "core::poll::Poll::from_output"
 kappa = "dc9f32634941172cf8ba928831cd5309fe78de5cbbbd3ab6b4663f40808aa1e3"
 at = "E=u32, T=u32"
-embedded = "dd4b6fe0ed4677d3d1e3fa7ea5ff2c9f6b59396abde10368f84fe74b42cd521a"
+embedded = "67ba10c33c12217349a7795843d8796214551d683f4d70e9d1a631015421b3fc"
 status = "residue"
 cause = "mir::Operand::Constant: the constant item result::Result::<u32, u32>::Ok"
 
@@ -101,7 +101,7 @@ cause = "mir::Operand::Constant: the constant item result::Result::<u32, u32>::O
 path = "core::poll::Poll::from_output#2"
 kappa = "6cee139c4bafbb8ea6dd3c5af3f5999f69f72e4f3e0d0b9922bfa90394138e9f"
 at = "E=u32, T=u32"
-embedded = "126a0f97b01196121649f21ba659cf8ae33fd708943a8cd6e6b5b72741e13b5a"
+embedded = "018942e278c3f24f677be895d6942badf9105bc44bf21625e7c828e768bfd378"
 status = "residue"
 cause = "mir::AggregateKind::Closure: poll::<impl at library/core/src/task/poll.rs:264:1: 264:51>::from_output::{closure#0}: mir::Operand::Constant: the constant item result::Result::<u32, u32>::Ok"
 
@@ -113,7 +113,7 @@ embedded = "18e04d514abfa08f7c6fb5dc00a552a873fef6c012f1bddf88cd63aa5cfb9675"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2b3b92e33eb3a1f239950f981d8ad3ba5c57e1b0cd61e05a39dfcef0b8048cb0"
 
 [[fn]]
@@ -124,18 +124,17 @@ embedded = "b2a0d1392a52f55e7205ae7402cadc33241ac0106e4d2f716e5da32696257d12"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollOptionOptionResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "473554bf8b0487bdc6f705d6cc1e22910da87b532ce5b0f8eba372cfa99ee057"
 
 [[fn]]
 path = "core::poll::Poll::is_pending"
 kappa = "7753a13ec812405dc119d13c1f59aa00640f51c70a44c4b4a8f011f6326b1a6a"
 at = "T=u32"
-embedded = "355e27b1f3c2821fbbd6432a728c80e6d2670e3116d5d5a9f93a8eaa74010c6e"
+embedded = "123798738fcfa490637b5dcf113cdbccaddd6c2e67f6d99e93cc86b68058f2e6"
 status = "translated"
 bridged = "pending"
-pending = "signature: CoreTaskPollPollU32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "81bc74c82435e3ca5b2fb7bb4ee290c30b6c93f212ee4df91869232812716397"
 
 [[fn]]
@@ -146,7 +145,7 @@ embedded = "5a027e582833450c826b976883e96bd0c9a66dcb2deeb36e34c246a7f97ab4b1"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollU32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "7fe0dfa69b83909691576b41d5fafeac7e0a3681f5718e908519ce1ed982d8c5"
 
 [[fn]]
@@ -157,7 +156,7 @@ embedded = "c5d2fe71a2859315169f356c498cc3ef809e7b187b641d5e142a01c498855459"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollU32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "935eb122886501d4fbc55d9d0ecbaff7440de715646588ebbf4aa85e62d5b4ac"
 
 [[fn]]
@@ -168,7 +167,7 @@ embedded = "165ba654a7571066a3199f2e8373de84563d92551f623eb791237fb07db3755a"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "0bfb08a4f4533e28b400f67e38a988f09db142611eb174d730510431252ed220"
 
 [[fn]]
@@ -179,7 +178,7 @@ embedded = "551b2655381a65826ccc101c8de833630b87025a558fe6e091493b980f0fdcf5"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollOptionOptionResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2cdd6962ce0da85f349b0530931d1cce3ac2369a13bf92f63ade6c70c3f41403"
 
 [[fn]]
@@ -190,7 +189,7 @@ embedded = "ea07dbb3e7b2f2170016ad696575ad9c6d84ff72c9df6464b3ea4b5a6cbc7fa8"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "b048fa0ccf574c54984f9c301f6e651eba8109805041817c1f7f26ab0ff93d7e"
 
 [[fn]]
@@ -201,7 +200,7 @@ embedded = "07657a4e19f6a47ecc71f4bfae91535f121256f15a77c4ec829d09fb8652b3ce"
 status = "translated"
 bridged = "pending"
 pending = "signature: CoreTaskPollPollOptionOptionResultResultU32U32"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "14015506c5fe84b309f1fda5ec661d5b03ebb9e1208b7de15c52e0ee347c8cbc"
 
 [[fn]]
@@ -228,7 +227,7 @@ cause = "mir::Ty: RawWakerVTable"
 [[fn]]
 path = "core::wake::<impl at library/core/src/task/wake.rs:206:10: 206:15>::fmt"
 kappa = "0a9311e2ad34c0372830bfc05d251eefdb0f19aace50bc4f5ac8591ba325b4a8"
-embedded = "653fb531ee4d6338a4b6f20babf3db7d3cbb2af5596134b4343d6e720238d0e0"
+embedded = "6959eefd310846c8e42ec16a09d2ca876f6e1e9f61f63913ae9562e00a60304d"
 status = "residue"
 cause = "mir::Ty: ExtData<'_>"
 
@@ -242,7 +241,7 @@ cause = "mir::Ty: RawWaker"
 [[fn]]
 path = "core::wake::<impl at library/core/src/task/wake.rs:20:21: 20:26>::fmt"
 kappa = "3893f61a72a7b6b59bc9e075c49e76596a6d5c1bbd506b865951f85f7e3452fa"
-embedded = "487debfe648fcb59b08c82ccbf368502d16d9fee83443e111b7e0fe3c7ef64c7"
+embedded = "fccd99174867cce13710a7f107ccb3bb417d702c9e8c13dde8b4ead4b6bff7e5"
 status = "residue"
 cause = "mir::Ty: RawWaker"
 
@@ -263,14 +262,14 @@ cause = "mir::Ty: dyn any::Any"
 [[fn]]
 path = "core::wake::Context::fmt"
 kappa = "92618a96f5bd648f848a4eaa0f610c0360212de987529edc04014fe4a9ff3f5f"
-embedded = "04a368c1627bd55187f7796459e7c6ea626b423c9d3d9562398f0e2dff12a349"
+embedded = "e17e3b2a58c8ad55d9365241b5753e8244e3fb38131c51c576d530a6e2ca001f"
 status = "residue"
 cause = "mir::Ty: Context<'_>"
 
 [[fn]]
 path = "core::wake::Context::from_waker"
 kappa = "5bc6d737c34a65ac69511de1e57241cb34b71b22f7ad23560a9dd52d348e8e98"
-embedded = "4d0b48aa435f360fb4674a196c8b93bb83b2e88aa65835d6ea42c0eab6c23660"
+embedded = "ddca559ed1f78fedddd9e67a5cfa2e8d544093a215bfa8dc4ab9d40c1e14e97c"
 status = "residue"
 cause = "mir::Ty: task::wake::Context<'_>"
 
@@ -340,7 +339,7 @@ cause = "mir::Ty: task::wake::LocalWaker"
 [[fn]]
 path = "core::wake::LocalWaker::clone_from"
 kappa = "4e9d01a3f884412fa42e3504981aebdbab7443d2ca482b577bb413458d355a89"
-embedded = "5a6b86c602c432fd44d25faba9b955be6492bb7f5f7fbb403724b51dca436e1b"
+embedded = "2a6dea7c4c2f61f4c6d26fc284ad459918b4cd1cc56dbd162a4a598f47892f7a"
 status = "residue"
 cause = "mir::Ty: LocalWaker"
 
@@ -361,14 +360,14 @@ cause = "mir::Ty: LocalWaker"
 [[fn]]
 path = "core::wake::LocalWaker::fmt"
 kappa = "7d340a794fe48ff4f4878bf985b4999323172dbf85cc92c7fe3ef9e96a83c2b7"
-embedded = "dcdb34b26dd8dc7f93b13b239225f13991c4dde25ee3e6ff6c2c08220d2556d1"
+embedded = "06fb24e0a029a2481343bdd1a7233fbb397311ededc04178770e88de8a5d215e"
 status = "residue"
 cause = "mir::Ty: LocalWaker"
 
 [[fn]]
 path = "core::wake::LocalWaker::from_fn_ptr"
 kappa = "42aca26e0dda0433326b5146ebe2e664cc12dc4791d9758cf3d4b57ece4dc02c"
-embedded = "c6290614082010ae8ffdd113be3a954c28f3dd3bcadce20c67881181d5225495"
+embedded = "d8bd301bded0722e8b8fd399af759b99614783ed9c671531e572f0649c6aae98"
 status = "residue"
 cause = "mir::Ty: task::wake::LocalWaker"
 
@@ -410,7 +409,7 @@ cause = "mir::Ty: task::wake::RawWakerVTable"
 [[fn]]
 path = "core::wake::LocalWaker::wake"
 kappa = "aea96f925b7cbfe4914f09d8131c7e83aa3c7557a3e01289c9b5f8bddab1b001"
-embedded = "b90bd9fc8a33fcf84f5f0d7a7b47dcf159f5f78a6f3ea8c6323b17f526b6dc52"
+embedded = "596800707b4fd673545634bf39ec8b68fd7efa8024953d4427915c39bf5ade79"
 status = "residue"
 cause = "mir::Ty: LocalWaker"
 
@@ -424,14 +423,14 @@ cause = "mir::Ty: LocalWaker"
 [[fn]]
 path = "core::wake::LocalWaker::will_wake"
 kappa = "ab4d7ad69842b3fe6a2f4257e79b0c47aec9c6170fa9b2f11a285b02d03d993c"
-embedded = "f13d26d31844ea67789972cde03818deeb7c059683ed4bd9dc46bf78e4827cf1"
+embedded = "7b9054e452ac6d5b0fed948f6b3614a1b389dda1139842bf1c4743901a3b75ad"
 status = "residue"
 cause = "mir::Ty: LocalWaker"
 
 [[fn]]
 path = "core::wake::RawWaker::NOOP"
 kappa = "f6bf4466f34eac59f166a2dca8d4b8f066c8cbabd3f40342ce64fb892a54a142"
-embedded = "e148d8bd8f373753e19147ac70bf27ec4b1667ed3213dd026a567bdf53fbd49c"
+embedded = "a5eee5da6736a31a2c09b317e7b1e6f368768bd2349942753b598501588bca2c"
 status = "residue"
 cause = "mir::Ty: task::wake::RawWaker"
 
@@ -473,7 +472,7 @@ cause = "mir::Ty: task::wake::Waker"
 [[fn]]
 path = "core::wake::Waker::clone_from"
 kappa = "14aa6903efb5ac3ce917f99b41cfcbbf705447afe8842c4047af73a64d0a9202"
-embedded = "72b798765561e4a257d4cd3c1e16a3befc3e08dd65f57ea07ebbc148af8a7010"
+embedded = "61fad2375d04c40d5693c257e700a4969c841a420e49fe35dab99adb5c8d418f"
 status = "residue"
 cause = "mir::Ty: Waker"
 
@@ -494,14 +493,14 @@ cause = "mir::Ty: Waker"
 [[fn]]
 path = "core::wake::Waker::fmt"
 kappa = "fcd6da604374a4e10f5a53be645a741f245f7db76194462fde541c467115f334"
-embedded = "689fc7319d06c13918a577855c14d94eaf3b91c489228ba76284fd94109871c4"
+embedded = "f70903d34322fe026d8c3d204717fa78e12497680ebce4feccc2c1012f1bf340"
 status = "residue"
 cause = "mir::Ty: Waker"
 
 [[fn]]
 path = "core::wake::Waker::from_fn_ptr"
 kappa = "0a3d7c8b5247f3b7545745d53af8a469ae79aca73db77811d832383b8f0b6af6"
-embedded = "68d889a113057f4525cf082d9a84adf868b0bd186aa7d24518e453de1b916a73"
+embedded = "a38cf2fd10f4697814bb8fc59bc04d926e6b222fc57326625160851482caed53"
 status = "residue"
 cause = "mir::Ty: task::wake::Waker"
 
@@ -543,7 +542,7 @@ cause = "mir::Ty: task::wake::RawWakerVTable"
 [[fn]]
 path = "core::wake::Waker::wake"
 kappa = "ba16a8caf5dd4e6be43d71f4429f172a232fd0c9eaf9dff74b0a1cb8406692e4"
-embedded = "a347a9ed812f4ec89ff1bcdc8ff3afe0c5c5abc841b2c6f72bf6f16dbfc47828"
+embedded = "429be72428e815bfbb7c6e6197f02e7db82ce8dd3b1fef9a69e95b260b1a7ed1"
 status = "residue"
 cause = "mir::Ty: Waker"
 
@@ -557,7 +556,7 @@ cause = "mir::Ty: Waker"
 [[fn]]
 path = "core::wake::Waker::will_wake"
 kappa = "464630ac4fee0b79ba2b9a497a0cb9d96ab4f63d9aad503a652b9f55224f63a1"
-embedded = "58957c3a4468bfba3ef74367828c20dcf250641d94ca052636468e18ea9ae319"
+embedded = "522cb923a28c4ca320a1eec068eced63a95e38fecf989d921fce7b5401758241"
 status = "residue"
 cause = "mir::Ty: Waker"
 

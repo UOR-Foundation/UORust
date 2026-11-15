@@ -359,36 +359,24 @@ construct = "intrinsic caller_location"
 bodies = 1
 
 [bridge]
-bridged = 205
-pending = 10411
+bridged = 192
+pending = 10424
 
 [[pending]]
-shape = "closure: a callee not embedded"
-bodies = 1849
-
-[[pending]]
-shape = "closure: a callee left to a dictionary"
-bodies = 516
-
-[[pending]]
-shape = "signature: Nat"
-bodies = 506
-
-[[pending]]
-shape = "signature: TupleUnitNat"
-bodies = 447
+shape = "remeasure"
+bodies = 6438
 
 [[pending]]
 shape = "timeout: call"
-bodies = 428
+bodies = 396
 
 [[pending]]
-shape = "signature: Result"
-bodies = 389
+shape = "signature: Nat"
+bodies = 388
 
 [[pending]]
-shape = "signature: an arity the body does not have"
-bodies = 337
+shape = "closure: a callee left to a dictionary"
+bodies = 356
 
 [[pending]]
 shape = "definition"
@@ -396,103 +384,35 @@ bodies = 259
 
 [[pending]]
 shape = "timeout: straight"
-bodies = 242
+bodies = 214
 
 [[pending]]
 shape = "signature: List"
-bodies = 193
+bodies = 189
+
+[[pending]]
+shape = "signature: Result"
+bodies = 182
 
 [[pending]]
 shape = "signature: TupleNatBool"
-bodies = 192
+bodies = 180
+
+[[pending]]
+shape = "signature: an arity the body does not have"
+bodies = 149
 
 [[pending]]
 shape = "signature: RawPointer"
-bodies = 162
+bodies = 122
 
 [[pending]]
-shape = "timeout: binary shr"
-bodies = 150
-
-[[pending]]
-shape = "timeout: binary shl"
-bodies = 144
-
-[[pending]]
-shape = "signature: Option"
-bodies = 120
-
-[[pending]]
-shape = "signature: Unit"
-bodies = 114
-
-[[pending]]
-shape = "signature: TupleNatOptionNat"
-bodies = 95
+shape = "closure: a callee not embedded"
+bodies = 88
 
 [[pending]]
 shape = "proof: call"
-bodies = 84
-
-[[pending]]
-shape = "signature: TupleNatNat"
-bodies = 75
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroU32"
-bodies = 72
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingU32"
 bodies = 66
-
-[[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
-bodies = 66
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingI128"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingI16"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingI32"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingI64"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingI8"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingIsize"
-bodies = 62
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingU128"
-bodies = 61
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingU16"
-bodies = 61
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingU64"
-bodies = 61
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingU8"
-bodies = 61
-
-[[pending]]
-shape = "signature: CoreNumWrappingWrappingUsize"
-bodies = 61
 
 [[pending]]
 shape = "timeout: cast"
@@ -503,31 +423,7 @@ shape = "signature: CoreOpsRangeBoundU32"
 bodies = 58
 
 [[pending]]
-shape = "signature: CoreNumSaturatingSaturatingU32"
-bodies = 55
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingI128"
-bodies = 54
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingI16"
-bodies = 54
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingI32"
-bodies = 54
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingI64"
-bodies = 54
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingI8"
-bodies = 54
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingIsize"
+shape = "signature: TupleNatOptionNat"
 bodies = 54
 
 [[pending]]
@@ -535,208 +431,28 @@ shape = "timeout: binary div"
 bodies = 53
 
 [[pending]]
-shape = "signature: CoreNumSaturatingSaturatingU128"
-bodies = 50
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingU16"
-bodies = 50
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingU64"
-bodies = 50
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingU8"
-bodies = 50
-
-[[pending]]
-shape = "signature: CoreNumSaturatingSaturatingUsize"
-bodies = 50
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroUsize"
-bodies = 44
-
-[[pending]]
 shape = "timeout: binary rem"
 bodies = 42
 
 [[pending]]
-shape = "signature: CoreTimeDuration"
-bodies = 41
+shape = "signature: TupleNatNat"
+bodies = 40
 
 [[pending]]
-shape = "signature: CoreNumNonzeroNonZeroU128"
-bodies = 38
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroI128"
-bodies = 37
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroU64"
-bodies = 37
-
-[[pending]]
-shape = "signature: CoreAsciiAsciiCharAsciiChar"
-bodies = 36
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroU16"
-bodies = 36
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroI64"
-bodies = 35
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroU8"
-bodies = 35
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroI32"
-bodies = 33
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroIsize"
-bodies = 32
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroI16"
+shape = "signature: Unit"
 bodies = 31
 
 [[pending]]
-shape = "timeout: float"
-bodies = 30
-
-[[pending]]
-shape = "signature: CoreNetIpAddrIpv6Addr"
-bodies = 29
-
-[[pending]]
-shape = "signature: CoreNumNonzeroNonZeroI8"
-bodies = 29
-
-[[pending]]
-shape = "signature: CoreNetIpAddrIpv4Addr"
-bodies = 27
+shape = "signature: Option"
+bodies = 23
 
 [[pending]]
 shape = "signature: String"
-bodies = 25
+bodies = 22
 
 [[pending]]
 shape = "proof: switch"
 bodies = 21
-
-[[pending]]
-shape = "signature: CoreMemAlignmentAlignment"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingI128"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingI16"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingI32"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingI64"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingI8"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingIsize"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingU128"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingU16"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingU32"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingU64"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingU8"
-bodies = 18
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumWrappingWrappingUsize"
-bodies = 18
-
-[[pending]]
-shape = "signature: CoreNetIpAddrIpAddr"
-bodies = 17
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingI128"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingI16"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingI32"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingI64"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingI8"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingIsize"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingU128"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingU16"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingU32"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingU64"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingU8"
-bodies = 16
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumSaturatingSaturatingUsize"
-bodies = 16
-
-[[pending]]
-shape = "timeout: binary bitOr"
-bodies = 16
 
 [[pending]]
 shape = "proof: binary le"
@@ -747,35 +463,19 @@ shape = "signature: TupleNatNatNat"
 bodies = 14
 
 [[pending]]
-shape = "timeout: binary bitAnd"
-bodies = 13
-
-[[pending]]
-shape = "timeout: binary bitXor"
-bodies = 13
-
-[[pending]]
 shape = "proof: cast"
 bodies = 12
 
 [[pending]]
-shape = "signature: CoreMemTransmutabilityAssume"
+shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtFormatter"
 bodies = 12
 
 [[pending]]
-shape = "signature: CoreOpsRangeRangeU32"
-bodies = 12
-
-[[pending]]
-shape = "signature: CoreWtf8CodePoint"
-bodies = 12
-
-[[pending]]
-shape = "signature: CoreFmtFormattingOptions"
+shape = "signature: CoreAsciiAsciiCharAsciiChar"
 bodies = 11
 
 [[pending]]
-shape = "signature: TupleOptionNatCoreOpsRangeRangeU32"
+shape = "signature: CoreNetIpAddrIpv4Addr"
 bodies = 11
 
 [[pending]]
@@ -783,23 +483,11 @@ shape = "proof: binary lt"
 bodies = 10
 
 [[pending]]
-shape = "signature: CoreAllocLayoutLayout"
+shape = "signature: CoreMemTransmutabilityAssume"
 bodies = 10
 
 [[pending]]
-shape = "signature: CoreFmtFormatter"
-bodies = 10
-
-[[pending]]
-shape = "signature: CoreOpsIndexRangeIndexRange"
-bodies = 10
-
-[[pending]]
-shape = "signature: CoreOpsRangeRangeInclusiveU32"
-bodies = 10
-
-[[pending]]
-shape = "signature: CorePinPinU32"
+shape = "signature: CoreNetIpAddrIpv6Addr"
 bodies = 10
 
 [[pending]]
@@ -843,7 +531,15 @@ shape = "signature: CoreCmpReverseU32"
 bodies = 9
 
 [[pending]]
-shape = "signature: CoreSyncSyncViewSyncViewU32"
+shape = "signature: CoreFmtFormatter"
+bodies = 9
+
+[[pending]]
+shape = "signature: CoreFmtFormattingOptions"
+bodies = 9
+
+[[pending]]
+shape = "signature: CoreOpsRangeRangeU32"
 bodies = 9
 
 [[pending]]
@@ -851,15 +547,7 @@ shape = "timeout: binary le"
 bodies = 9
 
 [[pending]]
-shape = "signature: CoreNetSocketAddrSocketAddr"
-bodies = 8
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesCodePointInner"
-bodies = 8
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNanoseconds"
+shape = "signature: CoreNetIpAddrIpAddr"
 bodies = 8
 
 [[pending]]
@@ -867,7 +555,7 @@ shape = "signature: CoreRangeIterRangeIterU32"
 bodies = 8
 
 [[pending]]
-shape = "signature: CoreWtf8Wtf8"
+shape = "signature: CoreSyncSyncViewSyncViewU32"
 bodies = 8
 
 [[pending]]
@@ -875,23 +563,23 @@ shape = "signature: TupleCoreFmtFormattingOptionsCoreFmtFormattingOptions"
 bodies = 8
 
 [[pending]]
+shape = "signature: TupleOptionNatCoreOpsRangeRangeU32"
+bodies = 8
+
+[[pending]]
+shape = "signature: TupleUnitNat"
+bodies = 8
+
+[[pending]]
 shape = "signature: CoreIoCursorCursorU32"
 bodies = 7
 
 [[pending]]
-shape = "signature: CoreMemManuallyDropManuallyDropU32"
+shape = "signature: CoreOpsIndexRangeIndexRange"
 bodies = 7
 
 [[pending]]
-shape = "signature: CoreNetSocketAddrSocketAddrV6"
-bodies = 7
-
-[[pending]]
-shape = "signature: CoreRangeRangeU32"
-bodies = 7
-
-[[pending]]
-shape = "signature: CoreUnicodeUnicodeDataConversionsRange"
+shape = "signature: CoreOpsRangeRangeInclusiveU32"
 bodies = 7
 
 [[pending]]
@@ -923,79 +611,19 @@ shape = "signature: CoreMarkerPhantomPinned"
 bodies = 6
 
 [[pending]]
-shape = "signature: CoreNumNicheTypesI32NotAllOnes"
+shape = "signature: CoreNetSocketAddrSocketAddr"
 bodies = 6
 
 [[pending]]
-shape = "signature: CoreNumNicheTypesI64NotAllOnes"
+shape = "signature: CoreNetSocketAddrSocketAddrV6"
 bodies = 6
 
 [[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroCharInner"
+shape = "signature: CorePinPinU32"
 bodies = 6
 
 [[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroI128Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroI16Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroI32Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroI64Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroI8Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroIsizeInner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroU128Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroU16Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroU32Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroU64Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroU8Inner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesNonZeroUsizeInner"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesU32NotAllOnes"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesU64NotAllOnes"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreNumNicheTypesUsizeNoHighBit"
-bodies = 6
-
-[[pending]]
-shape = "signature: CoreOpsRangeRangeUsize"
+shape = "signature: CoreRangeRangeU32"
 bodies = 6
 
 [[pending]]
@@ -1007,8 +635,8 @@ shape = "timeout: binary gt"
 bodies = 6
 
 [[pending]]
-shape = "proof: straight"
-bodies = 5
+shape = "timeout: binary shr"
+bodies = 6
 
 [[pending]]
 shape = "signature: CoreCharCharCase"
@@ -1023,43 +651,11 @@ shape = "signature: CoreIoUtilTakeU32"
 bodies = 5
 
 [[pending]]
-shape = "signature: CoreIterAdaptersChainChainU32U32"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreIterAdaptersCopiedCopiedU32"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreIterAdaptersEnumerateEnumerateU32"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreIterAdaptersFuseFuseU32"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreIterAdaptersRevRevU32"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomContravariantLifetime"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomCovariantLifetime"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomInvariantLifetime"
+shape = "signature: CoreMemAlignmentAlignment"
 bodies = 5
 
 [[pending]]
 shape = "signature: CoreNetIpAddrIpv6MulticastScope"
-bodies = 5
-
-[[pending]]
-shape = "signature: CoreNetSocketAddrSocketAddrV4"
 bodies = 5
 
 [[pending]]
@@ -1071,19 +667,15 @@ shape = "signature: CoreNumErrorTryFromIntError"
 bodies = 5
 
 [[pending]]
-shape = "signature: CoreNumFloatParseParseFloatError"
-bodies = 5
-
-[[pending]]
 shape = "signature: CoreNumImpDec2fltCommonBiasedFp"
 bodies = 5
 
 [[pending]]
-shape = "signature: CoreRangeRangeFromU32"
+shape = "signature: CoreNumSaturatingSaturatingU32"
 bodies = 5
 
 [[pending]]
-shape = "signature: CoreRangeRangeInclusiveU32"
+shape = "signature: CoreNumWrappingWrappingU32"
 bodies = 5
 
 [[pending]]
@@ -1091,28 +683,16 @@ shape = "signature: CoreSliceSortStableDriftDriftsortRun"
 bodies = 5
 
 [[pending]]
-shape = "signature: CoreTaskPollPollU32"
+shape = "signature: CoreTimeDuration"
+bodies = 5
+
+[[pending]]
+shape = "signature: CoreWtf8Wtf8"
 bodies = 5
 
 [[pending]]
 shape = "signature: TupleCoreOpsRangeOneSidedRangeBoundNat"
 bodies = 5
-
-[[pending]]
-shape = "signature: CoreBstrByteStr"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreCellCellU32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreCellSyncUnsafeCellU32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreCellUnsafeCellU32"
-bodies = 4
 
 [[pending]]
 shape = "signature: CoreCharDecodeDecodeUtf16Error"
@@ -1131,19 +711,7 @@ shape = "signature: CoreIntrinsicsMirUnwindActionArg"
 bodies = 4
 
 [[pending]]
-shape = "signature: CoreIterAdaptersClonedClonedU32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreIterAdaptersMapMapU32U32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreIterAdaptersZipZipU32U32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreIterSourcesRepeatRepeatU32"
+shape = "signature: CoreIterAdaptersFuseFuseU32"
 bodies = 4
 
 [[pending]]
@@ -1152,6 +720,10 @@ bodies = 4
 
 [[pending]]
 shape = "signature: CoreMemMaybeDanglingMaybeDanglingU32"
+bodies = 4
+
+[[pending]]
+shape = "signature: CoreNetSocketAddrSocketAddrV4"
 bodies = 4
 
 [[pending]]
@@ -1167,23 +739,11 @@ shape = "signature: CoreNumImpDec2fltDecimalDecimal"
 bodies = 4
 
 [[pending]]
-shape = "signature: CoreNumImpDiyFloatFp"
-bodies = 4
-
-[[pending]]
-shape = "signature: CoreOpsRangeRangeFromU32"
-bodies = 4
-
-[[pending]]
 shape = "signature: CoreOpsRangeRangeFull"
 bodies = 4
 
 [[pending]]
-shape = "signature: CoreOpsRangeRangeToInclusiveU32"
-bodies = 4
-
-[[pending]]
-shape = "signature: CorePinUnsafePinnedUnsafePinnedU32"
+shape = "signature: CoreOpsRangeRangeUsize"
 bodies = 4
 
 [[pending]]
@@ -1191,7 +751,7 @@ shape = "signature: CoreRangeIterRangeInclusiveIterU32"
 bodies = 4
 
 [[pending]]
-shape = "signature: CoreRangeRangeToInclusiveU32"
+shape = "signature: CoreRangeRangeFromU32"
 bodies = 4
 
 [[pending]]
@@ -1207,6 +767,10 @@ shape = "signature: CoreSyncAtomicOrdering"
 bodies = 4
 
 [[pending]]
+shape = "signature: CoreTaskPollPollU32"
+bodies = 4
+
+[[pending]]
 shape = "signature: TupleListNatCoreBstrByteStr"
 bodies = 4
 
@@ -1216,10 +780,6 @@ bodies = 4
 
 [[pending]]
 shape = "signature: TupleOptionNatCoreRangeIterRangeIterU32"
-bodies = 4
-
-[[pending]]
-shape = "signature: TupleOptionNatOptionNat"
 bodies = 4
 
 [[pending]]
@@ -1239,11 +799,15 @@ shape = "signature: CoreAllocAllocError"
 bodies = 3
 
 [[pending]]
+shape = "signature: CoreAllocLayoutLayout"
+bodies = 3
+
+[[pending]]
 shape = "signature: CoreAllocLayoutLayoutError"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreCellOnceOnceCellU32"
+shape = "signature: CoreBstrByteStr"
 bodies = 3
 
 [[pending]]
@@ -1283,10 +847,6 @@ shape = "signature: CoreFmtSign"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreFutureReadyReadyU32"
-bodies = 3
-
-[[pending]]
 shape = "signature: CoreIntrinsicsMirBasicBlock"
 bodies = 3
 
@@ -1299,10 +859,6 @@ shape = "signature: CoreIoBorrowedBufBorrowedBuf"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIoBorrowedBufBorrowedCursor"
-bodies = 3
-
-[[pending]]
 shape = "signature: CoreIoUtilEmpty"
 bodies = 3
 
@@ -1311,67 +867,27 @@ shape = "signature: CoreIoUtilSink"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIterAdaptersFilterFilterU32U32"
+shape = "signature: CoreIterAdaptersCopiedCopiedU32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIterAdaptersFilterMapFilterMapU32U32"
+shape = "signature: CoreIterAdaptersEnumerateEnumerateU32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIterAdaptersInspectInspectU32U32"
+shape = "signature: CoreIterAdaptersMapMapU32U32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIterAdaptersMapWhileMapWhileU32U32"
+shape = "signature: CoreIterAdaptersRevRevU32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreIterAdaptersScanScanU32U32U32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterAdaptersSkipSkipU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterAdaptersSkipWhileSkipWhileU32U32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterAdaptersStepByStepByU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterAdaptersTakeTakeU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterAdaptersTakeWhileTakeWhileU32U32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreIterSourcesRepeatNRepeatNU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomContravariantT"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomCovariantT"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomInvariantT"
+shape = "signature: CoreIterAdaptersZipZipU32U32"
 bodies = 3
 
 [[pending]]
 shape = "signature: CoreNetParserAddrKind"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreNetParserAddrParseError"
 bodies = 3
 
 [[pending]]
@@ -1383,11 +899,15 @@ shape = "signature: CoreNumFloatParseFloatErrorKind"
 bodies = 3
 
 [[pending]]
+shape = "signature: CoreNumFloatParseParseFloatError"
+bodies = 3
+
+[[pending]]
 shape = "signature: CoreNumFpCategory"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreNumImpDec2fltDecimalSeqDecimalSeq"
+shape = "signature: CoreNumImpDiyFloatFp"
 bodies = 3
 
 [[pending]]
@@ -1399,15 +919,15 @@ shape = "signature: CoreNumImpFlt2decSign"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreNumImpFmtPart"
+shape = "signature: CoreNumNonzeroNonZeroUsize"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreOpsRangeRangeToU32"
+shape = "signature: CoreOpsRangeRangeFromU32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreOptionIterU32"
+shape = "signature: CoreOpsRangeRangeToInclusiveU32"
 bodies = 3
 
 [[pending]]
@@ -1419,27 +939,15 @@ shape = "signature: CoreRangeIterRangeFromIterU32"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreResultIterU32"
+shape = "signature: CoreRangeRangeInclusiveU32"
+bodies = 3
+
+[[pending]]
+shape = "signature: CoreRangeRangeToInclusiveU32"
 bodies = 3
 
 [[pending]]
 shape = "signature: CoreSliceGetDisjointMutError"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreSliceIterChunkByU32U32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreSliceIterChunksU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreSliceIterRchunksU32"
-bodies = 3
-
-[[pending]]
-shape = "signature: CoreSliceIterWindowsU32"
 bodies = 3
 
 [[pending]]
@@ -1463,10 +971,6 @@ shape = "signature: CoreStrIterCharIndices"
 bodies = 3
 
 [[pending]]
-shape = "signature: CoreStrIterChars"
-bodies = 3
-
-[[pending]]
 shape = "signature: CoreTaskPollPollOptionOptionResultResultU32U32"
 bodies = 3
 
@@ -1487,27 +991,11 @@ shape = "signature: CoreTimeTryFromFloatSecsErrorKind"
 bodies = 3
 
 [[pending]]
+shape = "signature: CoreUnicodeUnicodeDataConversionsRange"
+bodies = 3
+
+[[pending]]
 shape = "signature: CoreUnicodeUnicodeDataShortOffsetRunHeader"
-bodies = 3
-
-[[pending]]
-shape = "signature: TupleBoolListNat"
-bodies = 3
-
-[[pending]]
-shape = "signature: TupleListNatNatNat"
-bodies = 3
-
-[[pending]]
-shape = "signature: TupleNatListNat"
-bodies = 3
-
-[[pending]]
-shape = "signature: TupleOptionListNatCoreSliceIterRsplitMutU32ImplFnU32Bool"
-bodies = 3
-
-[[pending]]
-shape = "signature: TupleOptionListNatCoreSliceIterRsplitU32ImplFnU32Bool"
 bodies = 3
 
 [[pending]]
@@ -1515,15 +1003,15 @@ shape = "signature: TupleOptionNatListNat"
 bodies = 3
 
 [[pending]]
-shape = "signature: TupleRawPointerUnit"
+shape = "signature: TupleOptionNatOptionNat"
 bodies = 3
 
 [[pending]]
-shape = "signature: TupleUnitBool"
+shape = "timeout: binary bitOr"
 bodies = 3
 
 [[pending]]
-shape = "closure: a generic no binding fixes"
+shape = "proof: straight"
 bodies = 2
 
 [[pending]]
@@ -1531,19 +1019,15 @@ shape = "signature: CoreArrayTryFromSliceError"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreAsyncIterFromIterFromIterU32"
-bodies = 2
-
-[[pending]]
-shape = "signature: CoreCellLazyLazyCellU32U32"
-bodies = 2
-
-[[pending]]
-shape = "signature: CoreCharDecodeDecodeUtf16U32"
+shape = "signature: CoreCellUnsafeCellU32"
 bodies = 2
 
 [[pending]]
 shape = "signature: CoreFfiCStrFromBytesWithNulError"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreFutureReadyReadyU32"
 bodies = 2
 
 [[pending]]
@@ -1571,11 +1055,55 @@ shape = "signature: CoreIntrinsicsSimdSimdAlign"
 bodies = 2
 
 [[pending]]
+shape = "signature: CoreIoBorrowedBufBorrowedCursor"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersChainChainU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersClonedClonedU32"
+bodies = 2
+
+[[pending]]
 shape = "signature: CoreIterAdaptersCycleCycleU32"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreIterAdaptersFlattenFlattenCompatU32U32"
+shape = "signature: CoreIterAdaptersFilterFilterU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersFilterMapFilterMapU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersInspectInspectU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersMapWhileMapWhileU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersScanScanU32U32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersSkipSkipU32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersSkipWhileSkipWhileU32U32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersTakeTakeU32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterAdaptersTakeWhileTakeWhileU32U32"
 bodies = 2
 
 [[pending]]
@@ -1595,6 +1123,14 @@ shape = "signature: CoreIterSourcesOnceWithOnceWithU32"
 bodies = 2
 
 [[pending]]
+shape = "signature: CoreIterSourcesRepeatNRepeatNU32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreIterSourcesRepeatRepeatU32"
+bodies = 2
+
+[[pending]]
 shape = "signature: CoreIterSourcesRepeatWithRepeatWithU32"
 bodies = 2
 
@@ -1603,7 +1139,7 @@ shape = "signature: CoreMemAlignmentAlignmentEnum"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreNetParserParser"
+shape = "signature: CoreNumImpDec2fltDecimalSeqDecimalSeq"
 bodies = 2
 
 [[pending]]
@@ -1611,7 +1147,19 @@ shape = "signature: CoreNumImpFlt2decDecoderFullDecoded"
 bodies = 2
 
 [[pending]]
+shape = "signature: CoreNumImpFmtPart"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreNumNonzeroNonZeroU32"
+bodies = 2
+
+[[pending]]
 shape = "signature: CoreOpsRangeRangeInclusiveUsize"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreOpsRangeRangeToU32"
 bodies = 2
 
 [[pending]]
@@ -1623,10 +1171,6 @@ shape = "signature: CoreOptionIntoIterU32"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreOptionItemU32"
-bodies = 2
-
-[[pending]]
 shape = "signature: CoreRangeRangeInclusiveUsize"
 bodies = 2
 
@@ -1635,11 +1179,11 @@ shape = "signature: CoreRangeRangeUsize"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreResultIntoIterU32"
+shape = "signature: CoreSliceIterArrayWindowsU32U32"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreSliceIterArrayWindowsU32U32"
+shape = "signature: CoreSliceIterChunkByU32U32"
 bodies = 2
 
 [[pending]]
@@ -1647,7 +1191,15 @@ shape = "signature: CoreSliceIterChunksExactU32"
 bodies = 2
 
 [[pending]]
+shape = "signature: CoreSliceIterChunksU32"
+bodies = 2
+
+[[pending]]
 shape = "signature: CoreSliceIterRchunksExactU32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreSliceIterRchunksU32"
 bodies = 2
 
 [[pending]]
@@ -1671,15 +1223,15 @@ shape = "signature: CoreSliceIterSplitU32U32"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreStrIterBytes"
+shape = "signature: CoreSliceIterWindowsU32"
+bodies = 2
+
+[[pending]]
+shape = "signature: CoreStrIterChars"
 bodies = 2
 
 [[pending]]
 shape = "signature: CoreStrIterEncodeUtf16"
-bodies = 2
-
-[[pending]]
-shape = "signature: CoreStrIterSplitAsciiWhitespace"
 bodies = 2
 
 [[pending]]
@@ -1707,11 +1259,7 @@ shape = "signature: CoreStrPatternUtf8Pattern"
 bodies = 2
 
 [[pending]]
-shape = "signature: CoreWtf8EncodeWide"
-bodies = 2
-
-[[pending]]
-shape = "signature: CoreWtf8Wtf8CodePoints"
+shape = "signature: CoreWtf8CodePoint"
 bodies = 2
 
 [[pending]]
@@ -1720,26 +1268,6 @@ bodies = 2
 
 [[pending]]
 shape = "signature: TupleCoreBstrByteStrCoreBstrByteStr"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreFmtBuildersDebugListCoreFmtFormatter"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreFmtBuildersDebugMapCoreFmtFormatter"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreFmtBuildersDebugSetCoreFmtFormatter"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreFmtBuildersDebugStructCoreFmtFormatter"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreFmtBuildersDebugTupleCoreFmtFormatter"
 bodies = 2
 
 [[pending]]
@@ -1752,46 +1280,6 @@ bodies = 2
 
 [[pending]]
 shape = "signature: TupleCoreIoBorrowedBufBorrowedCursorCoreIoBorrowedBufBorrowedCursor"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroI128Bool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroI16Bool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroI32Bool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroI64Bool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroI8Bool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreNumNonzeroNonZeroIsizeBool"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreOpsIndexRangeIndexRangeCoreOpsIndexRangeIndexRange"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreOptionIterMutU32OptionNat"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreResultIterMutU32ResultNatNat"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleCoreSliceIterChunkByMutU32U32ListNat"
 bodies = 2
 
 [[pending]]
@@ -1811,23 +1299,11 @@ shape = "signature: TupleNatCoreOpsIndexRangeIndexRange"
 bodies = 2
 
 [[pending]]
+shape = "signature: TupleNatListNat"
+bodies = 2
+
+[[pending]]
 shape = "signature: TupleOptionListNatListNat"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreIterAdaptersStepByStepByOpsRangeRangeU16"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreIterAdaptersStepByStepByOpsRangeRangeU32"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreIterAdaptersStepByStepByOpsRangeRangeU8"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreIterAdaptersStepByStepByOpsRangeRangeUsize"
 bodies = 2
 
 [[pending]]
@@ -1835,31 +1311,11 @@ shape = "signature: TupleOptionNatCoreIterSourcesEmptyEmptyU32"
 bodies = 2
 
 [[pending]]
-shape = "signature: TupleOptionNatCoreIterSourcesOnceWithOnceWithImplFnOnceU32"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreOpsIndexRangeIndexRange"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatCoreOpsRangeRangeInclusiveU32"
-bodies = 2
-
-[[pending]]
 shape = "signature: TupleOptionNatCoreRangeIterRangeInclusiveIterU32"
 bodies = 2
 
 [[pending]]
-shape = "signature: TupleOptionNatCoreStrIterChars"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionNatOptionOptionNat"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormattingOptionsNatListFnCoreFmtFormattingOptionsStringToTupleResultUnitCoreFmtErrorString"
+shape = "signature: TupleRawPointerUnit"
 bodies = 2
 
 [[pending]]
@@ -1871,19 +1327,11 @@ shape = "signature: TupleStringString"
 bodies = 2
 
 [[pending]]
-shape = "signature: TupleUnitCoreAsciiAsciiCharAsciiChar"
-bodies = 2
-
-[[pending]]
 shape = "signature: TupleUnitCoreIoCursorCursorU32"
 bodies = 2
 
 [[pending]]
 shape = "signature: TupleUnitCoreNetSocketAddrSocketAddrV4"
-bodies = 2
-
-[[pending]]
-shape = "signature: TupleUnitCoreNumNonzeroNonZeroU32"
 bodies = 2
 
 [[pending]]
@@ -1907,19 +1355,23 @@ shape = "proof: binary shl"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreArrayIterIntoIterU32N"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreArrayIterIterInnerPolymorphicIterMemMaybeUninitMaybeUninitU32UsizeN"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreArrayIterIterInnerPolymorphicIterU32"
+shape = "signature: CoreAssertingCaptureU32U32"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreAssertingCaptureU32U32"
+shape = "signature: CoreAsyncIterFromIterFromIterU32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreCellSyncUnsafeCellU32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreCharDecodeDecodeUtf16U32"
 bodies = 1
 
 [[pending]]
@@ -1932,22 +1384,6 @@ bodies = 1
 
 [[pending]]
 shape = "signature: CoreEscapeMaybeEscaped"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreFmtBuildersDebugInner"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreFmtBuildersDebugMap"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreFmtBuildersDebugStruct"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreFmtBuildersDebugTuple"
 bodies = 1
 
 [[pending]]
@@ -1971,23 +1407,7 @@ shape = "signature: CoreHashSipHasherU32"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreHashSipSipHasher"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreHashSipSipHasher13"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreHashSipSipHasher24"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreHashSipState"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreIndexClampUsize"
 bodies = 1
 
 [[pending]]
@@ -1996,6 +1416,14 @@ bodies = 1
 
 [[pending]]
 shape = "signature: CoreIoUtilRepeat"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreIterAdaptersFlattenFlattenCompatU32U32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreIterAdaptersStepByStepByU32"
 bodies = 1
 
 [[pending]]
@@ -2011,10 +1439,6 @@ shape = "signature: CoreIterSourcesEmptyEmptyU32"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreIterSourcesRepeatNRepeatNinnerU32"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreIterSourcesSuccessorsSuccessorsU32ImplFnU32OptionU32"
 bodies = 1
 
@@ -2023,27 +1447,27 @@ shape = "signature: CoreIterSourcesSuccessorsSuccessorsU32U32"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreMarkerVariancePhantomContravariantU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomCovariantU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreMarkerVariancePhantomInvariantU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreMemDropGuardDropGuardU32U32"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreMemTypeInfoAbi"
 bodies = 1
 
 [[pending]]
+shape = "signature: CoreNetParserAddrParseError"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreNetParserParser"
+bodies = 1
+
+[[pending]]
 shape = "signature: CoreNumImpFmtFormatted"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreNumNicheTypesCodePointInner"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreNumNicheTypesNanoseconds"
 bodies = 1
 
 [[pending]]
@@ -2055,18 +1479,6 @@ shape = "signature: CoreOpsRangeBoundMutU32"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreOpsRangeRangeU16"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreOpsRangeRangeU64"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreOpsRangeRangeU8"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreOpsTryTraitYeet"
 bodies = 1
 
@@ -2075,11 +1487,27 @@ shape = "signature: CoreOpsTryTraitYeetU32"
 bodies = 1
 
 [[pending]]
+shape = "signature: CoreOptionItemU32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreOptionIterU32"
+bodies = 1
+
+[[pending]]
 shape = "signature: CoreOptionOptionFlattenU32"
 bodies = 1
 
 [[pending]]
 shape = "signature: CorePinPinMutU32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreResultIntoIterU32"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreResultIterU32"
 bodies = 1
 
 [[pending]]
@@ -2119,10 +1547,6 @@ shape = "signature: CoreStrIsWhitespace"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreStrIterLines"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreStrIterLinesAny"
 bodies = 1
 
@@ -2139,15 +1563,15 @@ shape = "signature: CoreStrPatternEmptyNeedle"
 bodies = 1
 
 [[pending]]
-shape = "signature: CoreStrPatternStrSearcher"
-bodies = 1
-
-[[pending]]
-shape = "signature: CoreStrPatternStrSearcherImpl"
-bodies = 1
-
-[[pending]]
 shape = "signature: CoreStrUnsafeBytesToStr"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreWtf8EncodeWide"
+bodies = 1
+
+[[pending]]
+shape = "signature: CoreWtf8Wtf8CodePoints"
 bodies = 1
 
 [[pending]]
@@ -2179,7 +1603,7 @@ shape = "signature: TupleCoreIoBorrowedBufBorrowedBufListOptionNat"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleCorePinPinMutU32Nat"
+shape = "signature: TupleCoreSliceIterChunkByMutU32U32ListNat"
 bodies = 1
 
 [[pending]]
@@ -2199,22 +1623,6 @@ shape = "signature: TupleListCoreAsciiAsciiCharAsciiCharNat"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleNatCoreBstrByteStr"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleNatCoreCellCellU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleNatCoreCellLazyLazyCellU32ImplFnOnceU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleNatCoreCellSyncUnsafeCellU32"
-bodies = 1
-
-[[pending]]
 shape = "signature: TupleNatCoreCellUnsafeCellU32"
 bodies = 1
 
@@ -2224,14 +1632,6 @@ bodies = 1
 
 [[pending]]
 shape = "signature: TupleNatCoreIoUtilTakeU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleNatCoreMemDropGuardDropGuardU32ImplFnOnceU32"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleNatCoreMemManuallyDropManuallyDropU32"
 bodies = 1
 
 [[pending]]
@@ -2259,11 +1659,11 @@ shape = "signature: TupleOptionCoreBstrByteStrCoreBstrByteStr"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleOptionCoreWtf8CodePointCoreWtf8Wtf8CodePoints"
+shape = "signature: TupleOptionListNatCoreSliceIterRsplitMutU32ImplFnU32Bool"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleOptionNatCoreIterAdaptersStepByStepByOpsRangeRangeU64"
+shape = "signature: TupleOptionListNatCoreSliceIterRsplitU32ImplFnU32Bool"
 bodies = 1
 
 [[pending]]
@@ -2279,7 +1679,7 @@ shape = "signature: TupleOptionNatCoreOpsRangeRangeFromU32"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleOptionNatCoreRangeIterRangeFromIterU32"
+shape = "signature: TupleOptionStringListTupleStringOptionTupleCoreFmtFormattingOptionsNatListFnCoreFmtFormattingOptionsStringToTupleResultUnitCoreFmtErrorString"
 bodies = 1
 
 [[pending]]
@@ -2291,27 +1691,7 @@ shape = "signature: TupleResultNatNatResultNatNat"
 bodies = 1
 
 [[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtBuildersDebugList"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtBuildersDebugSet"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtBuildersDebugStruct"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtBuildersDebugTuple"
-bodies = 1
-
-[[pending]]
 shape = "signature: TupleResultUnitCoreFmtErrorCoreFmtBuildersPadAdapter"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleResultUnitCoreFmtErrorString"
 bodies = 1
 
 [[pending]]
@@ -2328,10 +1708,6 @@ bodies = 1
 
 [[pending]]
 shape = "signature: TupleTupleNatNatCoreIoUtilChainU32U32"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleTupleNatNatCoreIterAdaptersZipZipU32U32"
 bodies = 1
 
 [[pending]]
@@ -2356,26 +1732,6 @@ bodies = 1
 
 [[pending]]
 shape = "signature: TupleUnitOptionListNatOptionListNat"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleUnitTupleNatNat"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleUnitTupleNatNatNat"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleUnitTupleNatNatNatNat"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleUnitTupleNatNatNatNatNat"
-bodies = 1
-
-[[pending]]
-shape = "signature: TupleUnitTupleNatNatNatNatNatNat"
 bodies = 1
 
 [[pending]]

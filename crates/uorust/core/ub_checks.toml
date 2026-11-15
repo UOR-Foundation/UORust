@@ -1,11 +1,10 @@
 [[fn]]
 path = "core::check_language_ub"
 kappa = "7ca3b31bc62d62ff3370b0f247eee35b54df97823b9abc4451e0aa5cde57b353"
-embedded = "e476f39b0da5e907f380b83dbbdbbe16194ebae0572e3f25d41ac4ff686d6be0"
+embedded = "3cc9ad88bfda541de7300931da0a752e45a27af0cc135e7354bc3df3511b7a6a"
 status = "translated"
 bridged = "pending"
-pending = "closure: a callee not embedded"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "72c8b19203c4ced92b33abec2e866ee5b95d7f616c50d15ee44171b009cae105"
 
 [[fn]]
@@ -14,7 +13,7 @@ kappa = "db99d267a3466fa1a28f8963497c7e69349cf2984945593f66a7106cbef77f7a"
 embedded = "ddbfcfb14a71743f295a79db62a263e8ea727f3bf3804506971bf005262b8ced"
 status = "translated"
 bridged = "proved"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "87b096d721d7addc88ea2a84455412068e94f2b514b4c8cc2e218763a045d4ef"
 
 [[fn]]
@@ -23,7 +22,7 @@ kappa = "f120fa7823965e6c2650fdd81d3210076c9fca84ee4b62e7137895a7a9adaceb"
 embedded = "bfe0e1bde0a98b07400c4cef290d7e9fdafba9985afc08283165ec9216993ea6"
 status = "translated"
 bridged = "proved"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "1419a5949fd1d5e270c76d2c4a5b29711fda1f5fbc1ae199b941fd92d88e8576"
 
 [[fn]]
@@ -33,17 +32,16 @@ embedded = "a704dc01118b96722d0b9687e49b0ede6b227a4c47aa45fccedadcfe4a043ef5"
 status = "translated"
 bridged = "pending"
 pending = "proof: call"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "a7e4e8c84541f51ccccc7b2ffc01672ead5fb1af14d72d11489ae3dfc56451a2"
 
 [[fn]]
 path = "core::maybe_is_aligned"
 kappa = "aa29f837098c1d2b0c22890981ce291896478c41e3a27eab5e2c8480ef4f28d5"
-embedded = "5aace0d3e380cbd17e31535ac95cf3b61699faa0709236ef8a62bbbf99f99736"
+embedded = "a9d5fa1ad631c6cd4ee9ace94dbd54837e3628865766aad53051546d8457f5f5"
 status = "translated"
 bridged = "pending"
-pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "020f19e7a77063b33efb2ebca158d050e3daa8813224ffe828b5d7a5f876555e"
 
 [[fn]]
@@ -53,7 +51,7 @@ embedded = "3f027457aa35bb37d5dd0602b200048b1bd2a16734d69e088c63cb869b896dfb"
 status = "translated"
 bridged = "pending"
 pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "2f1f1fc9fdfddc3a723bb58af0e72ab9fd5ec1fd42f48e17efdea08078404abf"
 
 [[fn]]
@@ -63,24 +61,23 @@ embedded = "26a447faa9e8a39dd0c570140a42b4c348c5ec07dd5bc6abd9c885068cf80513"
 status = "translated"
 bridged = "pending"
 pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "1e39bdfe0d6640a4a517ba897c93d147098eec48eb4cf9410235776682d18b2d"
 
 [[fn]]
 path = "core::maybe_is_aligned_and_not_null"
 kappa = "f2d6ef039f565f5439b7e08f22d55525a0ad863afb2e49da0a97302b9053d043"
-embedded = "7a93bb1eeab2b0c2a269347a7160b6d32fc02958b55c2aad468a53bcef0f3b8e"
+embedded = "955644e75fe49ae8e366b4131fe5ced1d71fe1f0d9a3fcb8892d60a373f3c8c3"
 status = "residue"
 cause = "mir::TerminatorKind::Call: ptr::const_ptr::<impl at library/core/src/ptr/const_ptr.rs:7:1: 7:31>::is_null: core's MIR stops at mir::TerminatorKind::Call: ptr::const_ptr::<impl *const ()>::is_null::runtime"
 
 [[fn]]
 path = "core::maybe_is_nonoverlapping"
 kappa = "6fe729a9a9801604588a75a51cf5b214f19f3879173820626389ff30e3124dcf"
-embedded = "4f2dd28b3709d80d2c75ca7553ef200180e265f28b0e2f62c8e909bffd5358ce"
+embedded = "3fb2bd9ceeb0c37eaa0a11bc77f37790c5d36c5e5e7b0025bd9d9f83f3f57160"
 status = "translated"
 bridged = "pending"
-pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "a9b2361e6b1c949a233636c9ac331024cb74c0a6d2747ae575e2628dc8dc0cd4"
 
 [[fn]]
@@ -90,16 +87,15 @@ embedded = "49fb740cf3b5261d362035a80e77c391d8abd7832e6495880bd8d3922b15e61a"
 status = "translated"
 bridged = "pending"
 pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+measured = "5b882cb50bbae10f416196dbf5baa254fcbc0ceb"
 digest = "75bec775d82144987e1fd2c04b0d45debbf56ae62c926517b2a9516889698a98"
 
 [[fn]]
 path = "core::maybe_is_nonoverlapping::runtime"
 kappa = "16762e6762c82736796d085d50363cbb8170ca07e99ba3a23896b3929b1715c6"
-embedded = "24a03418d471b2bf8a828016baab5167059c60b652298a9cb8d39e48c51ae35e"
+embedded = "97b675ef6dd54776dd9967402b2a310f20cc8979c4572eba407f7841f962c69d"
 status = "translated"
 bridged = "pending"
-pending = "signature: RawPointer"
-measured = "b8816ed6137d587508e170decf36a175de92f953"
+pending = "remeasure"
 digest = "b83610e19da3529ba80dd60cdb98b1c53c559863f93cd3d1eabac1fcf5c9f7a4"
 
