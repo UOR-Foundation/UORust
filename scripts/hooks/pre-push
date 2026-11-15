@@ -69,8 +69,23 @@ while read -r _lref lsha rref rsha; do
     # no lane makes locally; bootstrap checks it on main's regenerated head.
     # A hook runs with git's GIT_DIR set, which the tests' scratch
     # repositories must not inherit.
-    env -u GIT_DIR -u GIT_INDEX_FILE -u GIT_WORK_TREE -u GIT_PREFIX \
-      cargo test --locked -q "${packages[@]}" "${cfg[@]}" -- --skip no_lifted_kappa_turns_unlifted_ue_16 \
+    # uorust's engine.rs dumps this workspace's MIR, and that dump's
+    # `cargo clean -p uorust` removes uorust's other test binaries from the
+    # build dir. So engine.rs runs alone, after every other test target.
+    nogit=(env -u GIT_DIR -u GIT_INDEX_FILE -u GIT_WORK_TREE -u GIT_PREFIX)
+    first=(--lib --bins)
+    for t in crates/uorust/tests/*.rs; do
+      [ "$(basename "$t" .rs)" = engine ] || first+=(--test "$(basename "$t" .rs)")
+    done
+    others=()
+    for p in "${packages[@]}"; do
+      case $p in -p | uorust) ;; *) others+=(-p "$p") ;; esac
+    done
+    { if [ ${#others[@]} -gt 0 ]; then "${nogit[@]}" cargo test --locked -q "${others[@]}" "${cfg[@]}"; fi &&
+      if [[ " ${packages[*]} " == *" uorust "* ]]; then
+        "${nogit[@]}" cargo test --locked -q -p uorust "${cfg[@]}" "${first[@]}" &&
+          "${nogit[@]}" cargo test --locked -q -p uorust "${cfg[@]}" --test engine -- --skip no_lifted_kappa_turns_unlifted_ue_16
+      fi; } \
       || { echo "pre-push: cargo test ${packages[*]} fails on this push (above)" >&2; exit 1; }
   fi
   if [ -n "$(git diff --name-only "$base" "$lsha" -- crates/uorust/src/mir)" ]; then
