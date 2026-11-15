@@ -133,6 +133,9 @@ pub fn write_shallow(dir: &Path, shards: &[CoreShard]) -> Result<(), UorustError
 enum BridgeShape {
     Bool,
     Int(u32, bool),
+    /// An IEEE 754 float of the width, which both the evaluator and the
+    /// shallow translation hold as its bits.
+    Float(u32),
     Char,
     Unit,
     /// A shared reference, which the shallow function takes as its
@@ -162,6 +165,12 @@ impl BridgeShape {
         }
         if let Some((bits, signed)) = crate::embed::int_ty(printed, width) {
             return Some(Self::Int(bits, signed));
+        }
+        if let Some(bits) = printed
+            .strip_prefix('f')
+            .and_then(|b| b.parse::<u32>().ok())
+        {
+            return Some(Self::Float(bits));
         }
         if printed.ends_with("cmp::Ordering") {
             return Some(Self::Ordering);
@@ -195,7 +204,7 @@ impl BridgeShape {
         match self {
             Self::Ordering => "CmpOrdering".into(),
             Self::Bool => "Bool".into(),
-            Self::Int(..) | Self::Char => "Nat".into(),
+            Self::Int(..) | Self::Float(_) | Self::Char => "Nat".into(),
             Self::Unit => "Unit".into(),
             Self::Ref(a) => a.shallow(),
             Self::Option(a) => format!("(Option {})", a.shallow()),
@@ -208,6 +217,7 @@ impl BridgeShape {
         match self {
             Self::Bool => "Bool".into(),
             Self::Int(b, s) => format!("{}{b}", if *s { "I" } else { "U" }),
+            Self::Float(b) => format!("F{b}"),
             Self::Char => "Char".into(),
             Self::Unit => "Unit".into(),
             Self::Ref(a) => format!("Ref{}", a.mangle()),
@@ -226,6 +236,11 @@ impl BridgeShape {
             Self::Int(bits, signed) => mir_ctor(
                 "Value.int",
                 &[bits.to_string(), signed.to_string(), t.to_string()],
+            ),
+            // A float's value is its bits (the evaluator's `floatValue`).
+            Self::Float(bits) => mir_ctor(
+                "Value.int",
+                &[bits.to_string(), false.to_string(), t.to_string()],
             ),
             Self::Char => mir_ctor("Value.character", &[t.to_string()]),
             Self::Unit => mir_ctor("Value.tuple", &[format!("(nil {})", mir_name("Value"))]),
