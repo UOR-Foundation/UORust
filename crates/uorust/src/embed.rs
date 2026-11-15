@@ -1104,10 +1104,40 @@ impl Cx<'_> {
             .trim_end_matches("::")
             .to_string();
         let candidates = self.enums.get(&last)?;
-        let mut found = candidates.iter().filter(|(path, variants)| {
-            (candidates.len() == 1 || same_item(&erased, path))
-                && variants.iter().any(|(v, _)| v == variant)
-        });
+        let has = |vs: &Vec<(String, i128)>| vs.iter().any(|(v, _)| v == variant);
+        // The enum of exactly the printed path (a crate prints its own
+        // items by their paths from its root), else each whose path the
+        // printed one ends alike with, else, for a path through a module
+        // no source declares (one a build script writes), the one enum of
+        // that name its crate declares.
+        let exact: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| *path == erased && has(vs))
+            .collect();
+        let alike: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| (candidates.len() == 1 || same_item(&erased, path)) && has(vs))
+            .collect();
+        let first = crate::mir::parse::split_path(&erased)
+            .first()
+            .copied()
+            .unwrap_or_default();
+        let owned: Vec<_> = candidates
+            .iter()
+            .filter(|(path, vs)| {
+                crate::mir::parse::split_path(path).first().copied() == Some(first) && has(vs)
+            })
+            .collect();
+        let chosen = if !exact.is_empty() {
+            exact
+        } else if !alike.is_empty() {
+            alike
+        } else if owned.len() == 1 {
+            owned
+        } else {
+            return None;
+        };
+        let mut found = chosen.into_iter();
         // Where several enums could be the one MIR prints (cfg'd twins, a
         // path printed from the reader's module), the variant's
         // discriminant, where every one of them gives it alike.
@@ -4463,7 +4493,27 @@ fn embed_census(
         read.iter()
             .flat_map(|(_, texts)| texts.iter().map(|(n, t)| (n.as_str(), t))),
     );
-    let mut enums = enums(&link.decls);
+    // The enums of the crates it builds on are theirs by their crate's
+    // name (`hashbrown::TryReserveError`), as its bodies print them, and
+    // not by a path of its own.
+    let mut enums = if builds_on.is_empty() {
+        enums(&link.decls)
+    } else {
+        enums(&crate::mir::core::library_decls(
+            root,
+            &["core", "alloc", krate],
+        ))
+    };
+    for dep in builds_on {
+        let decls = crate::mir::core::library_decls(root, &[dep.as_str()]);
+        for (last, found) in self::enums(&decls) {
+            enums.entry(last).or_default().extend(
+                found
+                    .into_iter()
+                    .map(|(path, variants)| (format!("{dep}::{path}"), variants)),
+            );
+        }
+    }
     // The enums of a crate the crate's source mounts as a module of its own
     // (std's `#[path = "../../backtrace/src/lib.rs"] mod backtrace_rs;`),
     // by their paths under that module.
