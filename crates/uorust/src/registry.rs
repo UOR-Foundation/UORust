@@ -342,6 +342,7 @@ fn embed_crate(
             .map_err(|e| tool("library", e))?;
     }
     std::os::unix::fs::symlink(&dir, root.join(name)).map_err(|e| tool("library", e))?;
+    layouts(name, &dir, work, shards, &library, &toolchain)?;
     let census = crate::embed::embed(
         name,
         &root,
@@ -357,6 +358,55 @@ fn embed_crate(
     )?;
     crate::mir::core::summarize_register(scope, register)?;
     Ok(census)
+}
+
+/// Ask rustc for the layouts of the aggregates the crate's dumps print, as
+/// the library's dump step does (`crate::layouts`): in a copy of the crate
+/// beside `library`'s core, alloc and std, checked by cargo with
+/// `rustc_attrs` enabled for the aliases, into `shards`' layouts file.
+fn layouts(
+    name: &str,
+    dir: &Path,
+    work: &Path,
+    shards: &Path,
+    library: &Path,
+    toolchain: &str,
+) -> Result<usize, UorustError> {
+    let copy = work.join("layouts").join("library");
+    std::fs::create_dir_all(&copy).map_err(|e| tool("layouts", e))?;
+    for krate in ["core", "alloc", "std"] {
+        std::os::unix::fs::symlink(library.join(krate), copy.join(krate))
+            .map_err(|e| tool("layouts", e))?;
+    }
+    let own = copy.join(name);
+    copy_tree(dir, &own)?;
+    let target = work.join("layouts").join("target");
+    let quote = |p: &Path| format!("'{}'", p.display());
+    let check = format!(
+        "cd {} && RUSTC_BOOTSTRAP=1 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR={} \
+         RUSTFLAGS='-Ztrim-diagnostic-paths=no -Zcrate-attr=feature(rustc_attrs) -Coverflow-checks=on -Cdebug-assertions=off' \
+         cargo {toolchain} check -q --lib",
+        quote(&own),
+        quote(&target),
+    );
+    let n = crate::layouts::run(name, shards, &copy, &check)?;
+    let _ = std::fs::remove_dir_all(&target);
+    Ok(n)
+}
+
+/// Copy the tree `from` to `to`, its links followed.
+fn copy_tree(from: &Path, to: &Path) -> Result<(), UorustError> {
+    std::fs::create_dir_all(to).map_err(|e| tool("copy", e))?;
+    for entry in std::fs::read_dir(from).map_err(|e| tool("copy", e))? {
+        let entry = entry.map_err(|e| tool("copy", e))?;
+        let (src, dst) = (entry.path(), to.join(entry.file_name()));
+        if src.is_dir() {
+            copy_tree(&src, &dst)?;
+        } else {
+            std::fs::copy(&src, &dst).map_err(|e| tool("copy", e))?;
+        }
+    }
+    Ok(())
 }
 
 #[cfg(test)]
