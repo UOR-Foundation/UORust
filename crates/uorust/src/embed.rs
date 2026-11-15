@@ -3342,6 +3342,22 @@ pub fn embed(
     only: &[String],
     outputs: &Outputs<'_>,
 ) -> Result<EmbedCensus, UorustError> {
+    embed_with(krate, &[], library, dumps, out, only, outputs)
+}
+
+/// [`embed`] for a crate that builds on the crates `builds_on` as well as
+/// core and alloc, each a directory of `library` by its name (a crate of
+/// crates.io and its dependencies): its bodies make values of their enums
+/// and structs, read from their declarations as core's are.
+pub fn embed_with(
+    krate: &str,
+    builds_on: &[String],
+    library: &Path,
+    dumps: &Path,
+    out: &Path,
+    only: &[String],
+    outputs: &Outputs<'_>,
+) -> Result<EmbedCensus, UorustError> {
     let Outputs {
         harness,
         observed,
@@ -3349,7 +3365,7 @@ pub fn embed(
         bridge,
     } = *outputs;
     let root = library.parent().unwrap_or(library);
-    let (modules, census, program) = embed_census(krate, root, dumps, only)?;
+    let (modules, census, program) = embed_census(krate, builds_on, root, dumps, only)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
@@ -4201,7 +4217,7 @@ pub(crate) fn instance_types(
     root: &Path,
     dumps: &Path,
 ) -> Result<BTreeSet<String>, UorustError> {
-    Ok(embed_census(krate, root, dumps, &[])?.2.unread)
+    Ok(embed_census(krate, &[], root, dumps, &[])?.2.unread)
 }
 
 /// How deep a type MIR prints nests: its brackets' depth.
@@ -4395,6 +4411,7 @@ type Modules = Vec<(String, Vec<(String, Embedded)>)>;
 
 fn embed_census(
     krate: &str,
+    builds_on: &[String],
     root: &Path,
     dumps: &Path,
     only: &[String],
@@ -4429,7 +4446,9 @@ fn embed_census(
         if krate == "core" {
             crate::mir::core::core_decls(root)
         } else {
-            crate::mir::core::library_decls(root, &["core", "alloc", krate])
+            let mut krates = vec!["core", "alloc", krate];
+            krates.extend(builds_on.iter().map(String::as_str));
+            crate::mir::core::library_decls(root, &krates)
         },
         root,
         read.iter()

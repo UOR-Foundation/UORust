@@ -342,9 +342,19 @@ fn embed_crate(
             .map_err(|e| tool("library", e))?;
     }
     std::os::unix::fs::symlink(&dir, root.join(name)).map_err(|e| tool("library", e))?;
+    // The crates it builds on, beside it by their names, whose enums and
+    // structs its bodies make values of.
+    let mut builds_on = Vec::new();
+    for (lib, source) in dependencies(&dir, &toolchain)? {
+        if lib != name && !root.join(&lib).exists() {
+            std::os::unix::fs::symlink(&source, root.join(&lib)).map_err(|e| tool("library", e))?;
+            builds_on.push(lib);
+        }
+    }
     layouts(name, &dir, work, shards, &library, &toolchain)?;
-    let census = crate::embed::embed(
+    let census = crate::embed::embed_with(
         name,
+        &builds_on,
         &root,
         shards,
         &work.join("embed"),
@@ -358,6 +368,85 @@ fn embed_crate(
     )?;
     crate::mir::core::summarize_register(scope, register)?;
     Ok(census)
+}
+
+/// The library crates the crate at `dir` builds on, as cargo resolved them
+/// for its dump: each normal dependency, and theirs, by its library's crate
+/// name with the directory of its package.
+fn dependencies(dir: &Path, toolchain: &str) -> Result<Vec<(String, PathBuf)>, UorustError> {
+    let out = run(
+        "cargo metadata",
+        Command::new("cargo")
+            .args([toolchain, "metadata", "-q", "--format-version", "1"])
+            .current_dir(dir),
+    )?;
+    let meta: serde_json::Value = serde_json::from_slice(&out).map_err(|e| tool("metadata", e))?;
+    let str_of =
+        |v: &serde_json::Value, k: &str| v.get(k).and_then(|x| x.as_str()).map(str::to_string);
+    let nodes: std::collections::BTreeMap<String, &serde_json::Value> = meta
+        .pointer("/resolve/nodes")
+        .and_then(|n| n.as_array())
+        .into_iter()
+        .flatten()
+        .filter_map(|n| Some((str_of(n, "id")?, n)))
+        .collect();
+    let mut seen = std::collections::BTreeSet::new();
+    let mut next: Vec<String> = meta
+        .pointer("/resolve/root")
+        .and_then(|r| r.as_str())
+        .map(str::to_string)
+        .into_iter()
+        .collect();
+    let root = next.first().cloned().unwrap_or_default();
+    while let Some(id) = next.pop() {
+        let Some(node) = nodes.get(&id) else { continue };
+        for dep in node
+            .get("deps")
+            .and_then(|d| d.as_array())
+            .into_iter()
+            .flatten()
+        {
+            let normal = dep
+                .get("dep_kinds")
+                .and_then(|k| k.as_array())
+                .into_iter()
+                .flatten()
+                .any(|k| k.get("kind").is_some_and(serde_json::Value::is_null));
+            if let Some(pkg) = str_of(dep, "pkg").filter(|_| normal) {
+                if seen.insert(pkg.clone()) {
+                    next.push(pkg);
+                }
+            }
+        }
+    }
+    let mut found = Vec::new();
+    for package in meta
+        .get("packages")
+        .and_then(|p| p.as_array())
+        .into_iter()
+        .flatten()
+    {
+        let id = str_of(package, "id").unwrap_or_default();
+        if id == root || !seen.contains(&id) {
+            continue;
+        }
+        let manifest = str_of(package, "manifest_path").map(PathBuf::from);
+        let lib = package
+            .get("targets")
+            .and_then(|t| t.as_array())
+            .into_iter()
+            .flatten()
+            .find(|t| {
+                t.get("kind")
+                    .and_then(|k| k.as_array())
+                    .is_some_and(|k| k.iter().any(|k| k == "lib" || k == "rlib"))
+            })
+            .and_then(|t| str_of(t, "name"));
+        if let (Some(lib), Some(dir)) = (lib, manifest.as_deref().and_then(Path::parent)) {
+            found.push((lib.replace('-', "_"), dir.to_path_buf()));
+        }
+    }
+    Ok(found)
 }
 
 /// Ask rustc for the layouts of the aggregates the crate's dumps print, as
