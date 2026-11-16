@@ -666,19 +666,8 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             .map(|(k, d)| (k.as_str(), d.as_path()))
             .collect();
         let all = modules(&shards)?;
-        let run = |only: &[String], out: &Path| {
-            let census = crate::embed::embed_with(
-                e.krate,
-                &builds_on,
-                &library,
-                &shards,
-                out,
-                only,
-                &crate::embed::Outputs {
-                    link: &link,
-                    ..crate::embed::Outputs::default()
-                },
-            )?;
+        // Each project's configuration and record beside its census.
+        let record = |only: &[String], out: &Path, census: &crate::embed::EmbedCensus| {
             if let Some(text) = &configuration {
                 let file = out.join(CONFIGURATION);
                 std::fs::write(&file, text).map_err(|x| io(&file, x))?;
@@ -690,24 +679,50 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             let file = out.join(RECORD);
             std::fs::write(
                 &file,
-                render_record(e.krate, &config, only, &held, &link, &census),
+                render_record(e.krate, &config, only, &held, &link, census),
             )
-            .map_err(|x| io(&file, x))?;
-            Ok::<_, UorustError>(census)
+            .map_err(|x| io(&file, x))
         };
         if !e.each_module {
+            let census = crate::embed::embed_with(
+                e.krate,
+                &builds_on,
+                &library,
+                &shards,
+                e.out,
+                &only,
+                &crate::embed::Outputs {
+                    link: &link,
+                    ..crate::embed::Outputs::default()
+                },
+            )?;
+            record(&only, e.out, &census)?;
             return Ok(vec![Embedded {
                 module: None,
-                census: run(&only, e.out)?,
+                census,
             }]);
         }
+        // One project per module (or per module or part `only` names),
+        // the libraries linked once for all of them.
+        let names: Vec<String> = if only.is_empty() {
+            all.iter().map(|m| m.name.clone()).collect()
+        } else {
+            only.clone()
+        };
+        let sets: Vec<(Vec<String>, PathBuf)> = names
+            .iter()
+            .map(|n| (vec![n.clone()], e.out.join(n.replacen(PART, "::", 1))))
+            .collect();
+        let censuses =
+            crate::embed::embed_each(e.krate, &builds_on, &library, &shards, &sets, &link)?;
         let mut done = Vec::new();
-        for m in all.iter().cloned() {
-            let census = run(std::slice::from_ref(&m.name), &e.out.join(&m.name))?;
-            done.push(Embedded {
-                module: Some(m),
-                census,
+        for ((only, out), census) in sets.iter().zip(censuses) {
+            record(only, out, &census)?;
+            let module = all.iter().find(|m| only.contains(&m.name)).map(|m| Module {
+                name: m.name.replacen(PART, "::", 1),
+                ..m.clone()
             });
+            done.push(Embedded { module, census });
         }
         Ok(done)
     })();
@@ -1257,6 +1272,35 @@ mod tests {
         let record = std::fs::read_to_string(part.join(RECORD)).unwrap();
         assert!(record.contains("modules = [\"inner::deep\"]\n"), "{record}");
         assert!(record.contains("dump_files = 1\n"), "{record}");
+        // Several parts, one project each, the libraries linked once.
+        let each = work.join("parts");
+        let done = embed_workspace_crate(&WorkspaceEmbed {
+            workspace: &ws,
+            krate: "m",
+            dumps: &dumps,
+            library: &library,
+            out: &each,
+            only: &["inner::deep".to_string(), "inner::crate".to_string()],
+            each_module: true,
+            link: &linked,
+        })
+        .expect("the embedding of two parts");
+        let named: Vec<(String, usize)> = done
+            .iter()
+            .map(|d| (d.module.as_ref().unwrap().name.clone(), d.census.bodies))
+            .collect();
+        assert_eq!(
+            named,
+            [
+                ("inner::deep".to_string(), 1),
+                ("inner::crate".to_string(), 1)
+            ]
+        );
+        let crate_part = std::fs::read_to_string(each.join("inner::crate").join(RECORD)).unwrap();
+        assert!(
+            crate_part.contains("[[linked]]\ninto = \"dep\"\ncalls = 1\n"),
+            "{crate_part}"
+        );
         std::fs::remove_dir_all(&work).unwrap();
     }
 

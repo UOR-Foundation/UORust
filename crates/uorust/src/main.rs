@@ -401,8 +401,9 @@ struct EmbedArgs {
     links: Option<PathBuf>,
     /// With `--workspace`: one project per module of the crate,
     /// `<out>/<module>`, smallest module first, each linked against every
-    /// module, as one `--only <module>` run each.
-    #[arg(long, requires = "workspace", conflicts_with = "only")]
+    /// module, as one `--only <module>` run each; with `--only`, one per
+    /// module or part it names. The libraries are linked once for all.
+    #[arg(long, requires = "workspace")]
     each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
     /// `uorust crate --link` links one: core, alloc, or with `--workspace`

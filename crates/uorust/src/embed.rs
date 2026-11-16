@@ -4194,26 +4194,70 @@ pub fn embed_with(
     only: &[String],
     outputs: &Outputs<'_>,
 ) -> Result<EmbedCensus, UorustError> {
-    let Outputs {
-        harness,
-        observed,
-        register,
-        bridge,
-        differential: alone,
-        link,
-    } = *outputs;
     let root = library.parent().unwrap_or(library);
-    // Each library linked with those before it: alloc with core.
+    let linked = link_all(outputs.link, root);
+    embed_into(krate, builds_on, root, dumps, out, only, outputs, &linked)
+}
+
+/// Each library of `link` linked with those before it (alloc with core),
+/// its declarations read under `root`. A library that does not link is
+/// named and left out: the crate's calls into it stay its dictionary's,
+/// as they are unlinked.
+fn link_all(link: &[(&str, &Path)], root: &Path) -> Vec<Linked> {
     let mut linked: Vec<Linked> = Vec::new();
-    // A library that does not link is named and left out: the crate's
-    // calls into it stay its dictionary's, as they are unlinked.
     for (lib, dir) in link {
         match link_library(lib, root, dir, &linked) {
             Ok(l) => linked.push(l),
             Err(e) => eprintln!("embed: {lib} is not linked: {e}"),
         }
     }
-    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &linked)?;
+    linked
+}
+
+/// [`embed_with`] for several sets of modules, each `(only, out)` its own
+/// project, with the libraries `link` names linked once for all of them:
+/// what one factory step per (configuration, module) costs apart from the
+/// linking, which every set shares.
+pub fn embed_each(
+    krate: &str,
+    builds_on: &[String],
+    library: &Path,
+    dumps: &Path,
+    sets: &[(Vec<String>, std::path::PathBuf)],
+    link: &[(&str, &Path)],
+) -> Result<Vec<EmbedCensus>, UorustError> {
+    let root = library.parent().unwrap_or(library);
+    let linked = link_all(link, root);
+    let outputs = Outputs {
+        link,
+        ..Outputs::default()
+    };
+    sets.iter()
+        .map(|(only, out)| embed_into(krate, builds_on, root, dumps, out, only, &outputs, &linked))
+        .collect()
+}
+
+/// [`embed_with`] with its libraries already linked.
+#[allow(clippy::too_many_arguments)]
+fn embed_into(
+    krate: &str,
+    builds_on: &[String],
+    root: &Path,
+    dumps: &Path,
+    out: &Path,
+    only: &[String],
+    outputs: &Outputs<'_>,
+    linked: &[Linked],
+) -> Result<EmbedCensus, UorustError> {
+    let Outputs {
+        harness,
+        observed,
+        register,
+        bridge,
+        differential: alone,
+        link: _,
+    } = *outputs;
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, linked)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
