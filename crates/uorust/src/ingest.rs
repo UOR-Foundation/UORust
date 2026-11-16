@@ -1079,6 +1079,7 @@ fn function(
         trait_path: None,
         impl_params: Vec::new(),
         scope: 0,
+        impl_line: None,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -1196,6 +1197,10 @@ fn items(
                         None => written.join("::"),
                     }
                 });
+                // The line of `impl`, where the dump's span of the header
+                // starts; a header with `unsafe` or `default` on an earlier
+                // line keys another line, and its methods join no body.
+                let impl_line = Some(imp.impl_token.span.start().line);
                 let impl_params: Vec<String> = imp
                     .generics
                     .params
@@ -1223,6 +1228,7 @@ fn items(
                         fact.trait_ref.clone_from(&trait_ref);
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
+                        fact.impl_line = impl_line;
                         fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
@@ -1360,7 +1366,11 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
+                    let at = file.scopes.len();
                     items(inner, rel, None, test, product, lib, file, syntax);
+                    let mut chain = file.scopes[scope].inline.clone();
+                    chain.push(m.ident.unraw().to_string());
+                    file.scopes[at].inline = chain;
                 }
             }
             _ => {}

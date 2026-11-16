@@ -186,6 +186,9 @@ pub(crate) struct FnFact {
     /// Which of its file's module scopes (`SourceFile::scopes`) declares
     /// the function.
     pub(crate) scope: usize,
+    /// For a method of an `impl` block: the line its header starts on, by
+    /// which the compiler's dump names the impl (`<impl at file:line:..>`).
+    pub(crate) impl_line: Option<usize>,
 }
 
 /// One module scope of a file: the file's own items, or an inline module's.
@@ -201,6 +204,9 @@ pub(crate) struct ScopeFact {
     pub(crate) traits: Vec<String>,
     /// The modules the scope declares out of line, each a file of its own.
     pub(crate) mods: Vec<String>,
+    /// The inline modules from the file's own scope to this one, outermost
+    /// first: empty for the file's own.
+    pub(crate) inline: Vec<String>,
 }
 
 #[derive(Clone, Debug)]

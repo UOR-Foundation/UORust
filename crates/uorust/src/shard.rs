@@ -107,6 +107,26 @@ impl Configuration {
         args
     }
 
+    /// The configuration's name as a register row states it: its features
+    /// (every feature, or the default ones with those named, or only those
+    /// named) and its target where one is named.
+    pub fn label(&self) -> String {
+        let features = if self.all_features {
+            "all features".to_string()
+        } else {
+            match (self.no_default_features, self.features.is_empty()) {
+                (false, true) => "default features".to_string(),
+                (false, false) => format!("default features and {}", self.features.join(",")),
+                (true, true) => "no features".to_string(),
+                (true, false) => format!("features {}", self.features.join(",")),
+            }
+        };
+        match &self.target {
+            Some(t) => format!("{features} on {t}"),
+            None => features,
+        }
+    }
+
     /// The configuration as [`CONFIGURATION`] records it, with the triple
     /// the build was for.
     pub fn render(&self, triple: &str) -> String {
@@ -610,7 +630,9 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             let file = out.join(RECORD);
             std::fs::write(
                 &file,
-                render_record(e.krate, &config, only, &held, &link, &census, &project),
+                render_record(
+                    e.krate, &config, only, &held, &all, &link, &census, &project,
+                ),
             )
             .map_err(|x| io(&file, x))?;
             Ok::<_, UorustError>(census)
@@ -672,18 +694,20 @@ pub fn project_digest(dir: &Path) -> Result<String, UorustError> {
 /// [`RECORD`] of one embedding of the modules `only` (every module when
 /// empty) of `krate`, dumped in `config`, into the project whose digest is
 /// `project` ([`project_digest`]): the configuration, the modules and
-/// their dump files, the libraries linked, then the census's counts:
+/// their dump files, every module of the crate (`every`), the libraries linked, then the census's counts:
 /// bodies embedded, evaluable, leaving a callee to a dictionary, and the
 /// calls that name a body, by where it is, and those left to a dictionary,
 /// by why ([`crate::embed::unlinked_reason`]); then one `[[body]]` row per
 /// body ([`crate::embed::BodyFact`]): the path the dump prints, its κ, its
 /// term's digest, what blocks it, its reach and the callees it leaves
 /// unlinked, each with why.
+#[allow(clippy::too_many_arguments)]
 pub fn render_record(
     krate: &str,
     config: &Configuration,
     only: &[String],
     held: &[&Module],
+    every: &[Module],
     link: &[(&str, &Path)],
     census: &crate::embed::EmbedCensus,
     project: &str,
@@ -695,7 +719,7 @@ pub fn render_record(
         "# One embedding of a workspace library's modules in one configuration\n\
          # (written by `uorust embed --workspace`; do not edit).\n\n\
          crate = {}\nmodules = [{}]\nfeatures = [{}]\ndefault_features = {}\nall_features = {}\n\
-         target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\nproject = {}\n\
+         target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\ncrate_modules = [{}]\nproject = {}\n\
          embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n\
          closed = {}\n",
         quote(krate),
@@ -707,6 +731,7 @@ pub fn render_record(
         list(&mut link.iter().map(|(k, _)| *k)),
         held.iter().map(|m| m.files).sum::<usize>(),
         held.iter().map(|m| m.bytes).sum::<u64>(),
+        list(&mut every.iter().map(|m| m.name.as_str())),
         quote(project),
         census.bodies,
         census.evaluable,

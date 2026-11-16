@@ -30,6 +30,7 @@ fn options(name: &str) -> Options {
         last_modified: STAMP.to_string(),
         advisories: None,
         mir: None,
+        embedding: None,
     }
 }
 
@@ -379,6 +380,7 @@ fn every_failure_is_a_typed_variant_ue_06() {
         last_modified: "yesterday".into(),
         advisories: None,
         mir: None,
+        embedding: None,
     };
     assert!(matches!(
         uorust::project_workspace(&fixture(), &bad_stamp),

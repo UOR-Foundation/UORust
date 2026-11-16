@@ -25,6 +25,11 @@ pub struct Options {
     pub advisories: Option<std::path::PathBuf>,
     /// The MIR path of the lift, when it runs: see [`crate::mir`].
     pub mir: Option<crate::mir::MirOptions>,
+    /// The records of `uorust embed --workspace` (any depth under it): a
+    /// function row that did not lift is joined to its body's in every
+    /// configuration, and is embedded-closed where they say so
+    /// ([`crate::embedding`]).
+    pub embedding: Option<std::path::PathBuf>,
 }
 
 /// The largest source file the projection's LexLean project admits.
@@ -368,7 +373,11 @@ pub(crate) fn project(
     // The lift register of this run, read from the function rows the
     // frontier is about to carry: what the queue ranks and the Quality facet
     // measures is what a reader of the frontier finds.
-    let rows = function_rows(&notes, &kappas);
+    let embedded = match &options.embedding {
+        Some(dir) => crate::embedding::closed(dir, &embedding_keys(&ctx))?,
+        None => BTreeMap::new(),
+    };
+    let rows = function_rows(&notes, &kappas, &embedded);
     let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
     // Quality is written last of the facets: it measures what the others
     // admitted, refused and lifted.
@@ -5827,9 +5836,68 @@ fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
     out
 }
 
+/// The key of the item each function of product code is, as the
+/// compiler's dump names it ([`crate::embedding::Key`]), by the function's
+/// path: its file's module and the inline modules around it, its impl by
+/// the package-relative file and the line its header starts on, a trait's
+/// provided method under its trait. A path two functions share keys none.
+fn embedding_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::Key> {
+    let mut keys: BTreeMap<String, Option<crate::embedding::Key>> = BTreeMap::new();
+    for r in ctx.all_fns().into_iter().filter(|&r| ctx.product(r)) {
+        let (file, f) = (ctx.file(r), ctx.func(r));
+        let mut module: Vec<String> = file
+            .module
+            .split("::")
+            .filter(|m| !m.is_empty())
+            .map(str::to_string)
+            .collect();
+        module.extend(
+            file.scopes
+                .get(f.scope)
+                .into_iter()
+                .flat_map(|s| s.inline.clone()),
+        );
+        let dir = &ctx.package(r).dir;
+        let own = match dir.as_str() {
+            "" | "." => file.rel.clone(),
+            d => file
+                .rel
+                .strip_prefix(&format!("{d}/"))
+                .unwrap_or(&file.rel)
+                .to_string(),
+        };
+        let impl_at = match (&f.owner, f.in_trait) {
+            (Some(trait_name), true) => {
+                module.push(trait_name.clone());
+                None
+            }
+            (Some(_), false) => f.impl_line.map(|l| (own, l)),
+            (None, _) => None,
+        };
+        let key = crate::embedding::Key {
+            krate: ctx.crate_ident(r),
+            module,
+            impl_at,
+            name: f.name.clone(),
+        };
+        keys.entry(ctx.path(r))
+            .and_modify(|k| *k = None)
+            .or_insert(Some(key));
+    }
+    keys.into_iter()
+        .filter_map(|(path, key)| Some((path, key?)))
+        .collect()
+}
+
 /// The frontier's function rows: every function of product code under the
-/// table of what the lift decided for it, keyed by its κ.
-fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
+/// table of what the lift decided for it, keyed by its κ. A function that
+/// did not lift and is `embedded`-closed is written under that table, with
+/// where, in place of its residue, foreign or effect row.
+fn function_rows(
+    notes: &Notes,
+    kappas: &BTreeMap<String, String>,
+    embedded: &BTreeMap<String, Vec<crate::register::EmbeddedAt>>,
+) -> String {
     let kappa = |path: &str| {
         kappas
             .get(path)
@@ -5837,7 +5905,29 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             .unwrap_or_default()
     };
     let mut out = String::new();
-    for (path, (span, reason)) in &notes.residue {
+    let spans = notes
+        .residue
+        .iter()
+        .map(|(p, (s, _))| (p, s))
+        .chain(notes.foreign.iter().map(|(p, (s, _))| (p, s)))
+        .chain(notes.effects.iter().map(|(p, (s, _))| (p, s)));
+    for (path, span) in spans {
+        if let Some(at) = embedded.get(path) {
+            out.push_str(&format!(
+                "\n[[{}]]\n{}function = {}\nspan = {}\n{}",
+                crate::register::EMBEDDED,
+                kappa(path),
+                toml_string(path),
+                toml_string(&span.render()),
+                crate::register::embedded_fields(at)
+            ));
+        }
+    }
+    for (path, (span, reason)) in notes
+        .residue
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
             kappa(path),
@@ -5847,7 +5937,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&reason.detail())
         ));
     }
-    for (path, (span, detail)) in &notes.foreign {
+    for (path, (span, detail)) in notes
+        .foreign
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n",
             kappa(path),
@@ -5856,7 +5950,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(detail)
         ));
     }
-    for (path, (span, effect)) in &notes.effects {
+    for (path, (span, effect)) in notes
+        .effects
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n",
             kappa(path),
@@ -6279,6 +6377,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            embedding: None,
         };
         let projected = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -6459,6 +6558,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            embedding: None,
         };
         let out = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(&dir);
@@ -6949,6 +7049,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".into(),
             advisories: None,
             mir: None,
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(dir);
@@ -7072,7 +7173,7 @@ mod tests {
             .into_iter()
             .map(|path| (path.to_string(), crate::register::kappa(path, "fn f () {}")))
             .collect();
-        let rows = function_rows(&notes, &kappas);
+        let rows = function_rows(&notes, &kappas, &BTreeMap::new());
         let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
         let text = frontier(&notes, &lift, &rows);
         let doc: toml::Value = text.parse().expect("the frontier is TOML");
@@ -7112,7 +7213,7 @@ mod tests {
         assert!(matches!(
             Register::parse(
                 Path::new(FRONTIER),
-                &function_rows(&notes, &BTreeMap::new())
+                &function_rows(&notes, &BTreeMap::new(), &BTreeMap::new())
             ),
             Err(UorustError::Malformed { .. })
         ));
@@ -7423,6 +7524,7 @@ mod tests {
             last_modified: "2026-11-15T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);

@@ -19,6 +19,7 @@ pub mod certified;
 pub mod certify;
 mod convert;
 pub mod embed;
+mod embedding;
 mod error;
 mod expand;
 mod facts;

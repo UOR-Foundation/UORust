@@ -598,6 +598,13 @@ struct Args {
     /// is admitted only on a proved verdict.
     #[arg(long, requires = "mir")]
     verdicts: Option<PathBuf>,
+    /// The records `uorust embed --workspace` wrote (any depth under the
+    /// directory): a function row that did not lift is joined to its body
+    /// in every configuration, by the item the dump names, and is
+    /// embedded-closed where every one is embedded, evaluable and reaches
+    /// only linked bodies.
+    #[arg(long)]
+    embedding: Option<PathBuf>,
 }
 
 fn options(args: &Args) -> Result<Options, UorustError> {
@@ -626,6 +633,7 @@ fn options(args: &Args) -> Result<Options, UorustError> {
         last_modified,
         advisories: args.advisories.clone(),
         mir,
+        embedding: args.embedding.clone(),
     })
 }
 
