@@ -125,10 +125,11 @@ pub(crate) struct SourceFile {
     pub(crate) structs: Vec<StructFact>,
     pub(crate) error_impls: Vec<String>,
     /// Every type the file declares, inline modules included: each struct,
-    /// enum, union, trait, trait alias and type alias, by name, at the line
-    /// of its name. A construct of the lift register names the sites that
-    /// define the types it writes from these.
-    pub(crate) declared: Vec<(String, Span)>,
+    /// enum, union, trait, trait alias and type alias, with the module scope
+    /// that declares it (an index into `scopes`), by name, at the line of its
+    /// name. A construct of the lift register names the sites that define
+    /// the types it writes from these.
+    pub(crate) declared: Vec<(usize, String, Span)>,
     /// The types the file declares in a shape the lift does not read, each
     /// with that shape (`a tuple struct`).
     pub(crate) unread: Vec<(String, &'static str)>,
@@ -206,6 +207,14 @@ pub(crate) struct ScopeFact {
     pub(crate) traits: Vec<String>,
     /// The modules the scope declares out of line, each a file of its own.
     pub(crate) mods: Vec<String>,
+    /// The inline module the scope is, by its path inside the file (`a::b`),
+    /// `""` for the file's own: part of the path of every item it declares.
+    pub(crate) module: String,
+    /// The macros the scope invokes in item position, each with the
+    /// identifiers its arguments write and where: an item such a macro
+    /// expands to is declared in the scope, though no item of the source
+    /// names it.
+    pub(crate) invoked: Vec<(Vec<String>, Span)>,
 }
 
 #[derive(Clone, Debug)]

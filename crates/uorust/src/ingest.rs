@@ -831,7 +831,7 @@ fn source(
     items(
         &parsed.items,
         &rel,
-        None,
+        "",
         test_target || test_file,
         product,
         lib,
@@ -1090,10 +1090,29 @@ fn function(
 
 /// The names one module scope binds for its trait methods: what its `use`
 /// items name, whether one of them is a glob, and the traits it declares.
-fn scope_fact(list: &[syn::Item]) -> ScopeFact {
-    let mut fact = ScopeFact::default();
+fn scope_fact(list: &[syn::Item], rel: &str, module: &str) -> ScopeFact {
+    let mut fact = ScopeFact {
+        module: module.to_string(),
+        ..ScopeFact::default()
+    };
     for item in list {
         match item {
+            // An invocation, not a `macro_rules!` definition (which names
+            // the macro it defines).
+            syn::Item::Macro(m) if m.ident.is_none() => {
+                let mut idents = Vec::new();
+                macro_idents(m.mac.tokens.clone(), &mut idents);
+                let span = Span {
+                    file: rel.to_string(),
+                    line: m
+                        .mac
+                        .path
+                        .segments
+                        .first()
+                        .map_or(0, |s| s.ident.span().start().line),
+                };
+                fact.invoked.push((idents, span));
+            }
             syn::Item::Use(u) => scope_uses(&u.tree, &[], u.leading_colon.is_some(), &mut fact),
             syn::Item::Trait(t) => fact.traits.push(t.ident.unraw().to_string()),
             syn::Item::Mod(m) if m.content.is_none() => {
@@ -1103,6 +1122,17 @@ fn scope_fact(list: &[syn::Item]) -> ScopeFact {
         }
     }
     fact
+}
+
+/// Every identifier a macro's arguments write, groups included.
+fn macro_idents(tokens: proc_macro2::TokenStream, out: &mut Vec<String>) {
+    for tree in tokens {
+        match tree {
+            proc_macro2::TokenTree::Ident(i) => out.push(i.unraw().to_string()),
+            proc_macro2::TokenTree::Group(g) => macro_idents(g.stream(), out),
+            _ => {}
+        }
+    }
 }
 
 /// The bindings of one `use` tree, each with the path it names; a path
@@ -1148,7 +1178,7 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
 fn items(
     list: &[syn::Item],
     rel: &str,
-    _owner: Option<String>,
+    module: &str,
     in_test: bool,
     product: bool,
     lib: bool,
@@ -1156,14 +1186,14 @@ fn items(
     syntax: &mut FileSyntax,
 ) {
     let scope = file.scopes.len();
-    file.scopes.push(scope_fact(list));
+    file.scopes.push(scope_fact(list, rel, module));
     for item in list {
         if let Some(ident) = declared(item) {
             let span = Span {
                 file: rel.to_string(),
                 line: ident.span().start().line,
             };
-            file.declared.push((ident.unraw().to_string(), span));
+            file.declared.push((scope, ident.unraw().to_string(), span));
         }
         match item {
             syn::Item::Fn(f) => {
@@ -1367,7 +1397,11 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
-                    items(inner, rel, None, test, product, lib, file, syntax);
+                    let inner_module = match module {
+                        "" => m.ident.unraw().to_string(),
+                        outer => format!("{outer}::{}", m.ident.unraw()),
+                    };
+                    items(inner, rel, &inner_module, test, product, lib, file, syntax);
                 }
             }
             _ => {}
@@ -1616,7 +1650,7 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
     items(
         &parsed.items,
         "lib.rs",
-        None,
+        "",
         false,
         true,
         true,

@@ -82,6 +82,7 @@ function = "thermo_core::config::ConfigError::fmt"
 span = "thermo-core/src/config.rs:15"
 reason = "form"
 detail = "expression form outside the lift: format! hole"
+stops = [["type", "type outside the lift: &mut std::fmt::Formatter<'_>"], ["type", "type outside the lift: std::fmt::Result"]]
 
 [[residue]]
 status = "open"
@@ -90,6 +91,7 @@ function = "thermo_core::sensor::Sensor::calibrated"
 span = "thermo-core/src/sensor.rs:9"
 reason = "signature"
 detail = "signature outside the lift: a default method of Sensor that calls Sensor::read, which the trait declares without a body: it means each implementing type's"
+stops = []
 
 [[residue]]
 status = "open"
@@ -98,6 +100,7 @@ function = "thermo_core::sensor::Sensor::read"
 span = "thermo-core/src/sensor.rs:6"
 reason = "signature"
 detail = "signature outside the lift: a method Sensor declares without a body, which each implementing type gives"
+stops = []
 
 [[residue]]
 status = "open"
@@ -106,24 +109,28 @@ function = "thermo_core::sensor::total"
 span = "thermo-core/src/sensor.rs:15"
 reason = "arithmetic"
 detail = "usize + wraps or panics where its value leaves the pointer width: past 2^16 on any 16-bit target, past 2^32 on any 32-bit target, past 2^64 on any 64-bit target"
+stops = []
 
 [[effect]]
 kappa = "d863e3f4f3b888e8f7fededbe0a0d31230d2a1ae1a4399f53b6374340b948008"
 function = "thermo::main"
 span = "thermo-cli/src/main.rs:6"
 effect = "Env effect: std::env::args"
+stops = []
 
 [[effect]]
 kappa = "8dc0cb022c1bd4c27dabe8687dd3266c85b6efbeb80db72346c76d7e4282baf3"
 function = "thermo_core::config::load_target"
 span = "thermo-core/src/config.rs:28"
 effect = "Fs effect: fs::read_to_string"
+stops = []
 
 [[effect]]
 kappa = "e48df321142b8eaa537bcb5b48fee10c4ee3aecdc5b23630e71214d97c4655f8"
 function = "thermo_core::config::target_from_env"
 span = "thermo-core/src/config.rs:34"
 effect = "Env effect: std::env::var"
+stops = []
 
 [[lifted]]
 kappa = "c59889176d44d3885a1f9c07db82c8fab5f652a64698f32e34c28fd6978b5270"

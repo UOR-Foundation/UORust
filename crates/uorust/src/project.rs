@@ -111,9 +111,16 @@ struct Notes {
     /// The acceptance roots each package's tests yield, by package name: the
     /// closed Boolean definitions the Behavior module proves true.
     roots: BTreeMap<String, Vec<String>>,
-    /// Where the workspace declares each type, `path:line` by name, in
-    /// order: the sites a type construct of the work queue is defined at.
-    declared: BTreeMap<String, Vec<String>>,
+    /// Every construct the types of each function's signature state, by
+    /// the function's path: the constructs that stop it whichever the lift
+    /// meets first.
+    stops: BTreeMap<String, Vec<(String, String)>>,
+    /// Each LexLean name of a workspace type with the site that declares
+    /// it, and whether it is another name than the type's own: a chain
+    /// names the owners of its places by these.
+    lexed: BTreeMap<String, (Span, bool)>,
+    /// The sites of each type construct of the queue, by construct.
+    sites: BTreeMap<String, crate::register::Sites>,
 }
 
 impl Model {
@@ -142,12 +149,19 @@ impl Model {
     /// `crate::module::Type::name`; and `crate::module::<Type as
     /// Trait>::name` for a trait implementation's method whose type has
     /// another method of its name, which is how Rust names the two apart.
+    /// The module is the one Rust names: the file's, then the inline
+    /// modules around the function, so a function of `mod m { .. }` and one
+    /// of its name beside it are two paths, two rows and two κ.
     fn path(&self, r: FnRef) -> String {
         let file = self.file(r);
         let f = self.func(r);
         let mut parts = vec![self.crate_ident(r)];
         if !file.module.is_empty() {
             parts.push(file.module.clone());
+        }
+        match file.scopes.get(f.scope).map(|s| s.module.as_str()) {
+            Some("") | None => {}
+            Some(inline) => parts.push(inline.to_string()),
         }
         if let Some(owner) = &f.owner {
             match &f.trait_ref {
@@ -172,22 +186,39 @@ impl Model {
         self.targets.get(&(r.pkg, self.file(r).target))
     }
 
+    /// The foreign row's detail of a refusal of `r` whose type is a
+    /// registry dependency's, if it is one.
+    fn foreign_detail(&self, r: FnRef, reason: &Residue) -> Option<String> {
+        let Residue::Type(ty) = reason else {
+            return None;
+        };
+        let package = &self.ws.packages[r.pkg];
+        let dep = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty))?;
+        Some(format!(
+            "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
+        ))
+    }
+
+    /// The cause and construct a refusal of `r` is counted under in the
+    /// register, as [`crate::register::Status::construct`] reads its row:
+    /// a foreign row's, or the residue's code and detail.
+    fn counted(&self, r: FnRef, reason: &Residue) -> (String, String) {
+        match self.foreign_detail(r, reason) {
+            Some(detail) => ("foreign".to_string(), detail),
+            None => (reason.code().to_string(), reason.detail()),
+        }
+    }
+
     /// A function the lift refused: residue, or a foreign row when what
     /// stopped it is a type of a registry dependency.
     fn record_residue(&self, notes: &mut Notes, r: FnRef, span: Span, reason: Residue) {
-        let package = &self.ws.packages[r.pkg];
-        if let Residue::Type(ty) = &reason {
-            if let Some(dep) = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)) {
-                let detail = format!(
-                    "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
-                );
-                // A path two functions project to (a name collision) keeps
-                // one row: residue, wherever one of them is residue.
-                if !notes.residue.contains_key(&self.path(r)) {
-                    notes.foreign.insert(self.path(r), (span, detail));
-                }
-                return;
+        if let Some(detail) = self.foreign_detail(r, &reason) {
+            // A path two functions project to (a name collision) keeps
+            // one row: residue, wherever one of them is residue.
+            if !notes.residue.contains_key(&self.path(r)) {
+                notes.foreign.insert(self.path(r), (span, detail));
             }
+            return;
         }
         notes.foreign.remove(&self.path(r));
         notes.residue.insert(self.path(r), (span, reason));
@@ -276,24 +307,6 @@ pub(crate) fn project(
     dumps: Option<&crate::mir::Dumps>,
 ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
-    // Every declaration of every build configuration is a site that defines
-    // its type, so they are read before the configurations are stated.
-    for (name, span) in ws
-        .packages
-        .iter()
-        .flat_map(|p| &p.files)
-        .flat_map(|f| &f.declared)
-    {
-        notes
-            .declared
-            .entry(name.clone())
-            .or_default()
-            .push(span.render());
-    }
-    for sites in notes.declared.values_mut() {
-        sites.sort();
-        sites.dedup();
-    }
     // Items under `cfg` predicates no build holds together are one fact:
     // the projection states the variant its configuration compiles.
     let (ws, syntax, variants) = crate::names::stated(ws, syntax);
@@ -391,6 +404,7 @@ pub(crate) fn project(
     // measures is what a reader of the frontier finds.
     let rows = function_rows(&notes, &kappas);
     let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
+    notes.sites = type_sites(&ctx, &notes);
     // Quality is written last of the facets: it measures what the others
     // admitted, refused and lifted.
     let (quality, refused) = quality(&ctx, iface.feature_count, &lift, &notes.refusals);
@@ -3523,6 +3537,17 @@ fn behavior(
             d.datas.remove(&key);
         }
     }
+    // Where each LexLean name of a type is declared: a type construct names
+    // the owners of its chain's places by these.
+    for (d, named) in declared.iter().zip(&lexes) {
+        for (key, lex) in named {
+            if let Some(span) = d.spans.get(key) {
+                notes
+                    .lexed
+                    .insert(lex.clone(), (span.clone(), *lex != key.2));
+            }
+        }
+    }
     // Each file's reading of its crate's shared names: the type its module
     // declares or its `use` names, and otherwise none.
     let mut overlays: BTreeMap<(usize, usize), BTreeMap<String, String>> = BTreeMap::new();
@@ -3813,6 +3838,29 @@ fn behavior(
                 || types.structs.contains_key(&types.resolve(o))
                 || types.datas.contains_key(&types.resolve(o))
         };
+        // Every type of the signature outside the lift stops the function,
+        // whichever the lift meets first: the register holds them all, so
+        // that a later register can show that one of them no longer stops
+        // it ([`register::admit_parent`]).
+        let stops = notes.stops.entry(ctx.path(r)).or_default();
+        let fn_sig = &syntax.function(&ctx.file(r).rel, r.idx).signature;
+        let written = fn_sig
+            .inputs
+            .iter()
+            .filter_map(|i| match i {
+                crate::ast::FnArg::Typed(t) => Some(&t.ty),
+                crate::ast::FnArg::Receiver { .. } => None,
+            })
+            .chain(fn_sig.output.iter());
+        for ty in written {
+            let ty = expanded(r.pkg, &ty.localized(&ctx.file(r).imports));
+            if let Err(reason @ Residue::Type(_)) = types.ty(&ty) {
+                let counted = ctx.counted(r, &reason);
+                if !stops.contains(&counted) {
+                    stops.push(counted);
+                }
+            }
+        }
         // A path Rust's own naming leaves to two trait methods (an impl or
         // a trait declared once per configuration) is one row, and names
         // neither of them.
@@ -4182,6 +4230,12 @@ fn behavior(
         let out = lift::lift_all(candidates, types, &widths, &every_name);
         for (rust, reason) in out.failed {
             if let Some(&r) = names.get(&rust) {
+                let reason = match reason {
+                    Residue::Call(callee) => {
+                        Residue::Call(callee_path(ctx, &file_scopes, names, r, &callee))
+                    }
+                    other => other,
+                };
                 ctx.stopped(notes, &effectful, r, reason);
             }
         }
@@ -5499,6 +5553,284 @@ fn calls_through_self(block: &crate::ast::Block, out: &mut Vec<String>) {
     }
 }
 
+/// A module of a crate: its package, its target, and its path in the
+/// crate (the file's module, then the inline modules around).
+type ModKey = (usize, usize, String);
+
+/// What a name a type construct writes stands for where it is written.
+enum Found {
+    /// A type of the workspace, declared at these sites.
+    Sites(Vec<String>),
+    /// No type of the workspace: a primitive, the standard library's, an
+    /// extern crate's, or a word of the chain's prose.
+    Outside,
+    /// Perhaps a type of the workspace, whose declaration the tool cannot
+    /// place.
+    Unknown,
+}
+
+/// Every module of the workspace with its bindings and its declarations,
+/// to read the names a type construct writes as Rust reads them.
+struct TypeIndex<'a> {
+    ctx: &'a Model,
+    /// Each module: the file and the scope of it that holds its items.
+    modules: BTreeMap<ModKey, (usize, usize)>,
+    /// The sites of each type a module declares, by module and name.
+    decls: BTreeMap<(ModKey, String), Vec<String>>,
+    /// The module each declaration site stands in.
+    at: BTreeMap<String, ModKey>,
+}
+
+impl<'a> TypeIndex<'a> {
+    fn new(ctx: &'a Model) -> Self {
+        let mut index = TypeIndex {
+            ctx,
+            modules: BTreeMap::new(),
+            decls: BTreeMap::new(),
+            at: BTreeMap::new(),
+        };
+        for (pkg, package) in ctx.ws.packages.iter().enumerate() {
+            for (fi, file) in package.files.iter().enumerate() {
+                let module = |si: usize| -> ModKey {
+                    let inline = file.scopes.get(si).map_or("", |s| s.module.as_str());
+                    (pkg, file.target, join_path(&file.module, inline))
+                };
+                for si in 0..file.scopes.len() {
+                    index.modules.entry(module(si)).or_insert((fi, si));
+                }
+                for (si, name, span) in &file.declared {
+                    let sites = index.decls.entry((module(*si), name.clone())).or_default();
+                    if !sites.contains(&span.render()) {
+                        sites.push(span.render());
+                    }
+                    index.at.insert(span.render(), module(*si));
+                }
+            }
+        }
+        index
+    }
+
+    /// The module of the function `r`.
+    fn module_of(&self, r: FnRef) -> ModKey {
+        let file = self.ctx.file(r);
+        let inline = file
+            .scopes
+            .get(self.ctx.func(r).scope)
+            .map_or("", |s| s.module.as_str());
+        (r.pkg, file.target, join_path(&file.module, inline))
+    }
+
+    /// What `path` names in `module` as Rust reads it: `crate::`, `self::`
+    /// and `super::`, a child module, then the last segment as a type the
+    /// module declares, or one a `use` of it binds (followed to its
+    /// declaration, so a renaming `use` names the type it renames), or one
+    /// a macro the module invokes writes into its arguments (the item it
+    /// expands to is declared there). A first segment that is no module of
+    /// the crate is an extern crate's or the standard library's. A name
+    /// the module neither declares nor binds is the prelude's where it
+    /// was written bare and no glob may bind it; where a glob may, or
+    /// inside a module the path walked into, it is not placed.
+    fn resolve(&self, module: &ModKey, path: &str, seen: &mut BTreeSet<(ModKey, String)>) -> Found {
+        let segments: Vec<&str> = path.split("::").collect();
+        let Some((last, prefix)) = segments.split_last() else {
+            return Found::Outside;
+        };
+        let mut cur = module.clone();
+        let mut walked = false;
+        for (i, seg) in prefix.iter().enumerate() {
+            match *seg {
+                "crate" if i == 0 => cur.2 = String::new(),
+                "self" if i == 0 => {}
+                "super" if prefix[..i].iter().all(|s| *s == "super") => {
+                    cur.2 = cur.2.rsplit_once("::").map_or("", |(up, _)| up).to_string();
+                }
+                seg => {
+                    let child = (cur.0, cur.1, join_path(&cur.2, seg));
+                    if self.modules.contains_key(&child) {
+                        cur = child;
+                    } else if i == 0
+                        && self
+                            .scope(&cur)
+                            .is_some_and(|s| !s.uses.iter().any(|(n, _)| n == seg))
+                    {
+                        return Found::Outside;
+                    } else {
+                        return Found::Unknown;
+                    }
+                }
+            }
+            walked = true;
+        }
+        if !seen.insert((cur.clone(), (*last).to_string())) {
+            return Found::Unknown;
+        }
+        if let Some(sites) = self.decls.get(&(cur.clone(), (*last).to_string())) {
+            return Found::Sites(sites.clone());
+        }
+        let Some(scope) = self.scope(&cur) else {
+            return Found::Unknown;
+        };
+        if let Some((_, bound)) = scope.uses.iter().find(|(n, _)| n == last) {
+            return self.resolve(&cur, bound, seen);
+        }
+        let invoked: Vec<String> = scope
+            .invoked
+            .iter()
+            .filter(|(idents, _)| idents.iter().any(|i| i == last))
+            .map(|(_, span)| span.render())
+            .collect();
+        if !invoked.is_empty() {
+            return Found::Sites(invoked);
+        }
+        if walked || scope.glob {
+            Found::Unknown
+        } else {
+            Found::Outside
+        }
+    }
+
+    fn scope(&self, module: &ModKey) -> Option<&'a crate::facts::ScopeFact> {
+        let &(fi, si) = self.modules.get(module)?;
+        self.ctx.ws.packages[module.0].files[fi].scopes.get(si)
+    }
+}
+
+fn join_path(outer: &str, inner: &str) -> String {
+    match (outer, inner) {
+        ("", inner) => inner.to_string(),
+        (outer, "") => outer.to_string(),
+        (outer, inner) => format!("{outer}::{inner}"),
+    }
+}
+
+/// The sites of each type construct of the queue: for every function a
+/// type stops, each name its construct writes ([`crate::register::named_types`])
+/// read where the chain writes it. The owner of a place is a type of the
+/// workspace by its LexLean name, or by its path; a name after a place is
+/// written in the declaration of that place's owner, and is read in its
+/// module; a name before any place is written in the function's
+/// signature, and is read in the function's module ([`TypeIndex::resolve`]),
+/// or as a LexLean name the projection gave a type in place of its own. So
+/// a type is never sited by another type's name: `RefCell` read where a
+/// `use` binds the standard library's has no site, though the workspace
+/// declares a `RefCell` elsewhere. A name the tool cannot place is listed
+/// apart, unless it is one word that begins in lower case (a word of the
+/// chain's prose, or a primitive: Rust's naming convention writes a type
+/// otherwise).
+fn type_sites(ctx: &Model, notes: &Notes) -> BTreeMap<String, crate::register::Sites> {
+    let index = TypeIndex::new(ctx);
+    let product: BTreeMap<String, FnRef> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.product(r))
+        .map(|r| (ctx.path(r), r))
+        .collect();
+    let mut out: BTreeMap<String, crate::register::Sites> = BTreeMap::new();
+    for (path, (_, reason)) in &notes.residue {
+        let Residue::Type(_) = reason else {
+            continue;
+        };
+        let construct = reason.detail();
+        let (defined, unsited) = out.entry(construct.clone()).or_default();
+        let Some(&r) = product.get(path) else {
+            continue;
+        };
+        let mut context = index.module_of(r);
+        for named in crate::register::named_types(&construct) {
+            let mut seen = BTreeSet::new();
+            let lexed = notes.lexed.get(named.name);
+            let found = match lexed {
+                Some((span, renamed)) if named.place || *renamed => {
+                    Found::Sites(vec![span.render()])
+                }
+                _ => match index.resolve(&context, named.name, &mut seen) {
+                    Found::Sites(sites) => Found::Sites(sites),
+                    // `Enum::Variant.0`: the place's owner is the enum.
+                    _ if named.place && named.name.contains("::") => {
+                        let owner = named.name.rsplit_once("::").map_or("", |(o, _)| o);
+                        index.resolve(&context, owner, &mut BTreeSet::new())
+                    }
+                    other => other,
+                },
+            };
+            match found {
+                Found::Sites(sites) => {
+                    if named.place {
+                        if let Some(module) = sites.first().and_then(|s| index.at.get(s)) {
+                            context = module.clone();
+                        }
+                    }
+                    for site in sites {
+                        if !defined.contains(&site) {
+                            defined.push(site);
+                        }
+                    }
+                }
+                Found::Unknown => {
+                    let word = !named.name.contains("::")
+                        && named.name.starts_with(|c: char| c.is_lowercase());
+                    if !word && !unsited.iter().any(|u| u == named.name) {
+                        unsited.push(named.name.to_string());
+                    }
+                }
+                Found::Outside => {}
+            }
+        }
+    }
+    out
+}
+
+/// The callee a refusal `calls NAME` of `r` means, by its crate path, where
+/// the projection can tell which function of `r`'s crate it is: every call
+/// `r` writes whose last segment is NAME (`Alpha::make`, `Self::make`, or
+/// `make` alone) reads, through the type its prefix names in `r`'s file, as
+/// one key of the crate's candidates, and those keys are one function; or
+/// `r` writes no such call and NAME is a candidate's key itself (a method
+/// call's `Type::name`). Otherwise NAME as the lift wrote it: two callees of
+/// one name (`Alpha::make` beside `Beta::make`) are then never one
+/// construct of the register by their last segment alone.
+fn callee_path(
+    ctx: &Model,
+    file_scopes: &BTreeMap<(usize, usize), Types>,
+    names: &BTreeMap<String, FnRef>,
+    r: FnRef,
+    callee: &str,
+) -> String {
+    let types = &file_scopes[&(r.pkg, r.file)];
+    let mut meant: BTreeSet<FnRef> = BTreeSet::new();
+    let mut written = false;
+    for call in &ctx.func(r).calls {
+        let segments: Vec<&str> = call.split("::").collect();
+        let key = match segments.as_slice() {
+            [.., owner, last] if *last == callee => {
+                let owner = match (*owner, &ctx.func(r).owner) {
+                    ("Self", Some(own)) => own.as_str(),
+                    (owner, _) => owner,
+                };
+                format!("{}::{last}", types.resolve(owner))
+            }
+            [last] if *last == callee => callee.to_string(),
+            _ => continue,
+        };
+        written = true;
+        match names.get(&key) {
+            Some(&g) => {
+                meant.insert(g);
+            }
+            None => return callee.to_string(),
+        }
+    }
+    if !written {
+        if let Some(&g) = names.get(callee) {
+            meant.insert(g);
+        }
+    }
+    match meant.into_iter().collect::<Vec<_>>().as_slice() {
+        [g] => ctx.path(*g),
+        _ => callee.to_string(),
+    }
+}
+
 /// Why the lift does not name the type a method is of, as the file `fi` of
 /// package `pkg` writes it: the shape it is declared in, or the first of
 /// its fields whose type is outside the lift and, where that is another
@@ -5812,7 +6144,7 @@ fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
          spec = \"uorust/frontier/1\"\n",
     );
     out.push_str(&refusal_queue(&notes.refusals));
-    out.push_str(&lift.queue_text_with(Some(&notes.declared)));
+    out.push_str(&lift.queue_text_with(Some(&notes.sites)));
     for r in &notes.refusals {
         out.push_str(&format!(
             "\n[[refusal]]\nstatus = \"open\"\nreason = \"{}\"\nroute = \"{}\"\nspan = {}\ndetail = {}\n",
@@ -5857,33 +6189,39 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             .map(|k| format!("kappa = \"{k}\"\n"))
             .unwrap_or_default()
     };
+    let stops = |path: &str| {
+        crate::register::stops_line(notes.stops.get(path).map_or(&[][..], Vec::as_slice))
+    };
     let mut out = String::new();
     for (path, (span, reason)) in &notes.residue {
         out.push_str(&format!(
-            "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
+            "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n{}",
             kappa(path),
             toml_string(path),
             toml_string(&span.render()),
             reason.code(),
-            toml_string(&reason.detail())
+            toml_string(&reason.detail()),
+            stops(path)
         ));
     }
     for (path, (span, detail)) in &notes.foreign {
         out.push_str(&format!(
-            "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n",
+            "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n{}",
             kappa(path),
             toml_string(path),
             toml_string(&span.render()),
-            toml_string(detail)
+            toml_string(detail),
+            stops(path)
         ));
     }
     for (path, (span, effect)) in &notes.effects {
         out.push_str(&format!(
-            "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n",
+            "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n{}",
             kappa(path),
             toml_string(path),
             toml_string(&span.render()),
-            toml_string(effect)
+            toml_string(effect),
+            stops(path)
         ));
     }
     for (path, (span, definition, divergence)) in &notes.lifted {
@@ -6335,6 +6673,637 @@ mod tests {
         let lift = crate::register::Register::read(Path::new(FRONTIER), &frontier);
         assert!(lift.is_ok(), "{lift:?}");
     }
+
+    /// The register of a one-crate workspace of these files, as a
+    /// projection's frontier states it.
+    fn register_kai_of(name: &str, files: &[(&str, &str)]) -> crate::register::Register {
+        let frontier = frontier_of(name, files);
+        crate::register::Register::read(Path::new(FRONTIER), &frontier).expect("a register")
+    }
+
+    /// The refuter's first case of the law per function: only P changes,
+    /// and `uses_pq` (its tokens the same) is now counted under P's field
+    /// while Q's still stops it, though Q's stops no other function. The
+    /// register records every construct of its signature, so the move is
+    /// refused. Planted: a register that keeps only the first construct
+    /// (`stops` empty) is refused for want of evidence, never admitted.
+    #[test]
+    fn register_kai_a_move_while_the_parents_construct_still_applies_is_refused() {
+        let parent = register_kai_of("kaitwo", &[("src/lib.rs", W2P)]);
+        let candidate = register_kai_of("kaitwo", &[("src/lib.rs", W2C)]);
+        let refused = crate::register::admit_parent(&parent, &candidate);
+        assert_eq!(refused.len(), 1, "{refused:?}");
+        assert!(
+            refused[0].starts_with("kaitwo::uses_pq ") && refused[0].contains("Q.c: RefCell<u8>"),
+            "{refused:?}"
+        );
+        let row = candidate
+            .rows
+            .values()
+            .find(|r| r.function == "kaitwo::uses_pq")
+            .expect("its row");
+        let stops: Vec<&str> = row
+            .stops
+            .iter()
+            .flatten()
+            .map(|(_, c)| c.as_str())
+            .collect();
+        assert_eq!(
+            stops,
+            [
+                "type outside the lift: P.v: RefCell<u8>",
+                "type outside the lift: Q.c: RefCell<u8>"
+            ]
+        );
+    }
+
+    /// The refuter's second case: `Alpha::make` lifts, and `fa` (its tokens
+    /// the same) moves on to its next call, while `Beta::make`, of the same
+    /// last segment, is still residue. A call construct names its callee by
+    /// its path, so the two are two constructs and the advance is admitted.
+    #[test]
+    fn register_kai_a_callee_that_lifts_lets_its_caller_move_on() {
+        let parent = register_kai_of("kaisix", &[("src/lib.rs", W6P)]);
+        let candidate = register_kai_of("kaisix", &[("src/lib.rs", W6C)]);
+        let construct = |r: &crate::register::Register, f: &str| {
+            r.rows
+                .values()
+                .find(|row| row.function == f)
+                .and_then(|row| row.status.construct().map(|(_, c)| c.to_string()))
+        };
+        assert_eq!(
+            construct(&parent, "kaisix::fa").as_deref(),
+            Some("calls kaisix::Alpha::make, which is not lifted")
+        );
+        assert_eq!(
+            construct(&parent, "kaisix::fb").as_deref(),
+            Some("calls kaisix::Beta::make, which is not lifted")
+        );
+        assert_eq!(
+            construct(&candidate, "kaisix::fa").as_deref(),
+            Some("calls kaisix::k, which is not lifted")
+        );
+        let refused = crate::register::admit_parent(&parent, &candidate);
+        assert!(refused.is_empty(), "{refused:?}");
+    }
+
+    /// The refuter's third case: an inline module adds a homonym of a
+    /// lifted root function. Each function keeps a row of its own path,
+    /// so the root's κ stays lifted and the register counts both.
+    #[test]
+    fn register_kai_an_inline_homonym_is_a_row_of_its_own() {
+        let parent = register_kai_of("kaieight", &[("src/lib.rs", W8P)]);
+        let candidate = register_kai_of("kaieight", &[("src/lib.rs", W8C)]);
+        let functions: Vec<&str> = candidate
+            .rows
+            .values()
+            .map(|r| r.function.as_str())
+            .collect();
+        assert_eq!(functions.len(), 4, "{functions:?}");
+        assert!(functions.contains(&"kaieight::m::h"), "{functions:?}");
+        for (kappa, row) in &parent.rows {
+            assert_eq!(
+                candidate.rows.get(kappa).map(|r| &r.status),
+                Some(&row.status)
+            );
+        }
+        assert!(crate::register::admit_parent(&parent, &candidate).is_empty());
+    }
+
+    /// The refuter's sites: each type construct names the declarations its
+    /// chain means, read where the chain writes each name. Two homonyms of
+    /// two inline modules each have their own; std's `RefCell` has none,
+    /// though the workspace declares a `RefCell` elsewhere; a renaming
+    /// `use` leads to the type it renames; a type a macro invocation writes
+    /// is sited at the invocation; a type the projection renamed is sited
+    /// by its new name.
+    #[test]
+    fn register_kai_a_type_construct_is_sited_where_its_names_are_written() {
+        let sites = |frontier: &str| -> std::collections::BTreeMap<String, (String, String)> {
+            frontier
+                .split("\n[[construct]]\n")
+                .skip(1)
+                .map(|row| row.split("\n\n").next().unwrap_or_default())
+                .filter(|row| row.contains("\ncause = \"type\"\n"))
+                .filter_map(|row| {
+                    let line = |key: &str| {
+                        row.lines()
+                            .find_map(|l| l.strip_prefix(key))
+                            .map(str::to_string)
+                    };
+                    let construct = line("construct = ")?;
+                    Some((construct, (line("defined = ")?, line("unsited = ")?)))
+                })
+                .collect()
+        };
+        let one = sites(&frontier_of("kaisites", &[("src/lib.rs", W1)]));
+        let at = |construct: &str| {
+            one.get(&format!("\"type outside the lift: {construct}\""))
+                .cloned()
+                .unwrap_or_else(|| panic!("{construct} in {one:?}"))
+        };
+        let none = "[]".to_string();
+        assert_eq!(at("a::Node"), ("[\"src/lib.rs:25\"]".into(), none.clone()));
+        assert_eq!(at("b::Node"), ("[\"src/lib.rs:34\"]".into(), none.clone()));
+        assert_eq!(
+            at("Q.c: RefCell<u8>"),
+            ("[\"src/lib.rs:11\"]".into(), none.clone())
+        );
+        assert_eq!(at("Alias"), ("[\"src/lib.rs:75\"]".into(), none.clone()));
+        assert_eq!(at("Made"), ("[\"src/lib.rs:65\"]".into(), none.clone()));
+        let four = sites(&frontier_of(
+            "kaifour",
+            &[("src/lib.rs", W4L), ("src/a.rs", W4A), ("src/b.rs", W4B)],
+        ));
+        let renamed: Vec<&(String, String)> = four
+            .iter()
+            .filter(|(c, _)| c.contains("Node.c"))
+            .map(|(_, s)| s)
+            .collect();
+        assert_eq!(renamed.len(), 2, "{four:?}");
+        assert!(
+            renamed.contains(&&("[\"src/a.rs:6\"]".to_string(), none.clone())),
+            "{four:?}"
+        );
+        assert!(
+            renamed.contains(&&("[\"src/b.rs:5\"]".to_string(), none)),
+            "{four:?}"
+        );
+    }
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W2P: &str = r##"//! Synthetic two.
+use std::cell::RefCell;
+
+/// P.
+pub struct P {
+    /// v.
+    pub v: u8,
+}
+
+/// Q: outside the lift.
+pub struct Q {
+    /// c.
+    pub c: RefCell<u8>,
+}
+
+/// Uses P then Q.
+pub fn uses_pq(p: &P, q: &Q) -> u8 {
+    let _ = p;
+    *q.c.borrow()
+}
+
+/// Other: outside.
+pub struct Other {
+    /// c.
+    pub c: RefCell<i8>,
+}
+
+/// a.
+pub mod a {
+    use std::cell::RefCell;
+    /// Node a.
+    pub struct Node {
+        /// c.
+        pub c: RefCell<u8>,
+    }
+    /// Uses Node, then Other.
+    pub fn fa(n: &Node, o: &super::Other) -> u8 {
+        let _ = n;
+        *o.c.borrow() as u8
+    }
+}
+/// b.
+pub mod b {
+    use std::cell::RefCell;
+    /// Node b.
+    pub struct Node {
+        /// c.
+        pub c: RefCell<u8>,
+    }
+    /// Uses Node.
+    pub fn fb(n: &Node) -> u8 {
+        *n.c.borrow()
+    }
+}
+
+/// One
+pub fn ident(x: u64) -> u64 {
+    x
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W2C: &str = r##"//! Synthetic two.
+use std::cell::RefCell;
+
+/// P.
+pub struct P {
+    /// v.
+    pub v: RefCell<u8>,
+}
+
+/// Q: outside the lift.
+pub struct Q {
+    /// c.
+    pub c: RefCell<u8>,
+}
+
+/// Uses P then Q.
+pub fn uses_pq(p: &P, q: &Q) -> u8 {
+    let _ = p;
+    *q.c.borrow()
+}
+
+/// Other: outside.
+pub struct Other {
+    /// c.
+    pub c: RefCell<i8>,
+}
+
+/// a.
+pub mod a {
+    use std::cell::RefCell;
+    /// Node a.
+    pub struct Node {
+        /// c.
+        pub c: u8,
+    }
+    /// Uses Node, then Other.
+    pub fn fa(n: &Node, o: &super::Other) -> u8 {
+        let _ = n;
+        *o.c.borrow() as u8
+    }
+}
+/// b.
+pub mod b {
+    use std::cell::RefCell;
+    /// Node b.
+    pub struct Node {
+        /// c.
+        pub c: RefCell<u8>,
+    }
+    /// Uses Node.
+    pub fn fb(n: &Node) -> u8 {
+        *n.c.borrow()
+    }
+}
+
+/// Two
+pub fn ident(x: u64) -> u64 {
+    x
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W6P: &str = r##"//! Synthetic six.
+
+/// Alpha.
+pub struct Alpha {
+    /// v.
+    pub v: u8,
+}
+
+impl Alpha {
+    /// make of Alpha.
+    pub fn make(x: u8) -> u8 {
+        let mut y = x;
+        while y > 3 {
+            y -= 1;
+        }
+        y
+    }
+}
+
+/// Beta.
+pub struct Beta {
+    /// v.
+    pub v: u8,
+}
+
+impl Beta {
+    /// make of Beta.
+    pub fn make(x: u8) -> u8 {
+        let mut y = x;
+        while y > 3 {
+            y -= 1;
+        }
+        y
+    }
+}
+
+/// Residue k.
+pub fn k(x: u8) -> u8 {
+    let mut y = x;
+    while y > 5 {
+        y -= 1;
+    }
+    y
+}
+
+/// Calls Alpha::make, then k.
+pub fn fa(x: u8) -> u8 {
+    let y = Alpha::make(x);
+    k(y)
+}
+
+/// Calls Beta::make.
+pub fn fb(x: u8) -> u8 {
+    let y = Beta::make(x);
+    y
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W6C: &str = r##"//! Synthetic six.
+
+/// Alpha.
+pub struct Alpha {
+    /// v.
+    pub v: u8,
+}
+
+impl Alpha {
+    /// make of Alpha.
+    pub fn make(x: u8) -> u8 {
+        if x > 3 { 3 } else { x }
+    }
+}
+
+/// Beta.
+pub struct Beta {
+    /// v.
+    pub v: u8,
+}
+
+impl Beta {
+    /// make of Beta.
+    pub fn make(x: u8) -> u8 {
+        let mut y = x;
+        while y > 3 {
+            y -= 1;
+        }
+        y
+    }
+}
+
+/// Residue k.
+pub fn k(x: u8) -> u8 {
+    let mut y = x;
+    while y > 5 {
+        y -= 1;
+    }
+    y
+}
+
+/// Calls Alpha::make, then k.
+pub fn fa(x: u8) -> u8 {
+    let y = Alpha::make(x);
+    k(y)
+}
+
+/// Calls Beta::make.
+pub fn fb(x: u8) -> u8 {
+    let y = Beta::make(x);
+    y
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W8P: &str = r##"//! Synthetic eight.
+
+/// P.
+pub struct P {
+    /// v.
+    pub v: u8,
+}
+
+/// Lifted: reads v.
+pub fn getv(p: &P) -> u8 {
+    p.v
+}
+
+/// Lifted: identity.
+pub fn h(x: u8) -> u8 {
+    x
+}
+
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W8C: &str = r##"//! Synthetic eight.
+
+/// P.
+pub struct P {
+    /// v.
+    pub v: u8,
+}
+
+/// Lifted: reads v.
+pub fn getv(p: &P) -> u8 {
+    p.v
+}
+
+/// Lifted: identity.
+pub fn h(x: u8) -> u8 {
+    x
+}
+
+/// An inline module with a homonym of h.
+pub mod m {
+    /// h of m.
+    pub fn h(x: u8) -> u8 {
+        let mut y = x;
+        while y > 3 {
+            y -= 1;
+        }
+        y
+    }
+}
+
+/// Calls the root h.
+pub fn calls_root(x: u8) -> u8 {
+    h(x)
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W1: &str = r##"//! Synthetic.
+use std::cell::RefCell;
+
+/// P: liftable in v1.
+pub struct P {
+    /// v.
+    pub v: u8,
+}
+
+/// Q: outside the lift.
+pub struct Q {
+    /// c.
+    pub c: RefCell<u8>,
+}
+
+/// Uses P then Q.
+pub fn uses_pq(p: &P, q: &Q) -> u8 {
+    p.v + *q.c.borrow()
+}
+
+/// Inline modules with homonym types.
+pub mod a {
+    use std::cell::RefCell;
+    /// Node a.
+    pub struct Node {
+        /// c.
+        pub c: RefCell<u8>,
+    }
+}
+/// b.
+pub mod b {
+    use std::cell::RefCell;
+    /// Node b.
+    pub struct Node {
+        /// c.
+        pub c: RefCell<u8>,
+    }
+}
+
+/// Other: outside.
+pub struct Other {
+    /// c.
+    pub c: RefCell<i8>,
+}
+
+/// Uses a::Node, then Other.
+pub fn fa(n: &a::Node, o: &Other) -> u8 {
+    *n.c.borrow() + (*o.c.borrow() as u8)
+}
+
+/// Uses b::Node.
+pub fn fb(n: &b::Node) -> u8 {
+    *n.c.borrow()
+}
+
+macro_rules! mk {
+    ($n:ident) => {
+        /// made.
+        pub struct $n {
+            /// c.
+            pub c: RefCell<u8>,
+        }
+    };
+}
+mk!(Made);
+
+/// Uses Made.
+pub fn fm(m: &Made) -> u8 {
+    *m.c.borrow()
+}
+
+mod inner {
+    use std::cell::RefCell;
+    /// Deep.
+    pub struct Deep {
+        /// c.
+        pub c: RefCell<u16>,
+    }
+}
+pub use inner::Deep as Alias;
+
+/// Uses the alias.
+pub fn fr(x: &Alias) -> u16 {
+    *x.c.borrow()
+}
+
+/// Generic.
+pub struct Wrap<T> {
+    /// v.
+    pub v: T,
+}
+
+/// Uses Wrap.
+pub fn fw(w: &Wrap<u8>) -> u8 {
+    w.v
+}
+
+/// Twin under x.
+#[cfg(feature = "x")]
+pub struct Twin {
+    /// c.
+    pub c: RefCell<u8>,
+}
+/// Twin otherwise.
+#[cfg(not(feature = "x"))]
+pub struct Twin {
+    /// c.
+    pub c: std::cell::Cell<u8>,
+}
+
+/// Uses Twin.
+pub fn ft(t: &Twin) -> u8 {
+    #[cfg(feature = "x")]
+    return *t.c.borrow();
+    #[cfg(not(feature = "x"))]
+    return t.c.get();
+}
+
+/// Unrelated module that declares its own RefCell.
+pub mod mine {
+    /// A homonym of std's.
+    pub struct RefCell {
+        /// v.
+        pub v: u8,
+    }
+}
+
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W4L: &str = r##"//! Synthetic four.
+use std::cell::RefCell;
+
+pub mod a;
+pub mod b;
+
+/// Other: outside.
+pub struct Other {
+    /// c.
+    pub c: RefCell<i8>,
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W4A: &str = r##"//! a.
+#[allow(unused_imports)]
+use std::cell::RefCell;
+
+/// Node of a.
+pub struct Node {
+    /// c.
+    pub c: RefCell<u8>,
+}
+
+/// Uses Node, then Other.
+pub fn fa(n: &Node, o: &crate::Other) -> u8 {
+    let _ = n;
+    *o.c.borrow() as u8
+}
+"##;
+
+    /// A synthetic crate of the refuter of the register lane.
+    const W4B: &str = r##"//! b.
+use std::cell::RefCell;
+
+/// Node of b.
+pub struct Node {
+    /// c.
+    pub c: RefCell<u8>,
+}
+
+/// Uses Node.
+pub fn fb(n: &Node) -> u8 {
+    *n.c.borrow()
+}
+"##;
 
     /// The frontier of a one-crate workspace of these files, written under
     /// the system's temporary directory and projected.

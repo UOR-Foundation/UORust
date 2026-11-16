@@ -74,8 +74,9 @@ enum Command {
     /// Admit a lift register against its parent's (a register file or a
     /// `frontier.toml` each), by the register's law per function: a lifted
     /// function stays lifted, and an unchanged one stays under its construct
-    /// while that construct stops a function; refused, naming each function
-    /// re-decided.
+    /// until the candidate shows that construct no longer stops it (gone
+    /// from the constructs its signature states, its callee lifted, or no
+    /// effect reached); refused, naming each function re-decided.
     Admit(AdmitArgs),
     /// Print the route table.
     Routes,

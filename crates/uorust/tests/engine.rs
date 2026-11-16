@@ -1449,11 +1449,14 @@ fn a_lifted_kappa_that_turns_unlifted_is_refused_ue_16() {
 }
 
 /// The law per function, on a register the tool wrote: two functions of a
-/// synthetic workspace stopped by one construct. The planted defect moves one
-/// of them, unchanged, under another construct while the construct still
-/// stops the other: `uorust::admit_register` (the `uorust admit --parent`
-/// command) refuses it, naming the function. Moving both on, as when the
-/// construct is removed, raises the other cause and is admitted.
+/// synthetic workspace stopped by one construct of their signatures, which
+/// the register records among every construct their signatures state. The
+/// planted defect moves one of them, unchanged, under another construct
+/// while the register still records the first for it: `uorust::admit_register`
+/// (the `uorust admit --parent` command) refuses it, naming the function,
+/// whether or not the other moves too. Moving both on where the candidate's
+/// signatures no longer state the construct (its blocker shown gone) raises
+/// the other cause and is admitted.
 #[test]
 fn a_function_stays_under_its_construct_while_it_stops_one_ue_16() {
     use uorust::register::{Register, Status};
@@ -1481,11 +1484,21 @@ fn a_function_stays_under_its_construct_while_it_stops_one_ue_16() {
         construct.is_some() && construct == s2.construct().map(|(c, d)| (c, d.to_string())),
         "both functions are stopped by one construct: {s1:?} {s2:?}"
     );
+    let recorded = |k: &String| {
+        let stops = parent.rows[k].stops.clone().unwrap_or_default();
+        let (cause, detail) = s1.construct().expect("stopped");
+        stops.contains(&(cause, detail.to_string()))
+    };
+    assert!(recorded(&k1) && recorded(&k2), "{parent:?}");
     let next = Status::Residue("form".into(), "a construct planted as the next".into());
-    let with = |moved: &[&String]| {
+    let with = |moved: &[&String], gone: bool| {
         let mut r: Register = parent.clone();
         for k in moved {
-            r.rows.get_mut(*k).expect("a row").status = next.clone();
+            let row = r.rows.get_mut(*k).expect("a row");
+            row.status = next.clone();
+            if gone {
+                row.stops = Some(Vec::new());
+            }
         }
         r
     };
@@ -1497,18 +1510,26 @@ fn a_function_stays_under_its_construct_while_it_stops_one_ue_16() {
         path
     };
     let at = file("parent.toml", &parent);
-    // Both moved on: the construct stops nothing, the cause `form` rises.
-    let moved = with(&[&k1, &k2]);
+    // Both moved on, the construct gone from both signatures: the cause
+    // `form` rises, admitted.
+    let moved = with(&[&k1, &k2], true);
     assert!(uorust::admit_register(&at, &file("moved.toml", &moved)).is_ok());
-    // One moved while the construct still stops the other: refused.
-    match uorust::admit_register(&at, &file("planted.toml", &with(&[&k1]))) {
-        Err(UorustError::Regressed(rows)) => {
-            assert!(
-                rows.len() == 1 && rows[0].starts_with("moves::one "),
-                "{rows:?}"
-            );
+    // One moved while its signature still states the construct: refused,
+    // whether the other stays or moves too.
+    for planted in [with(&[&k1], false), {
+        let mut both = with(&[&k1, &k2], false);
+        both.rows.get_mut(&k2).expect("two").stops = Some(Vec::new());
+        both
+    }] {
+        match uorust::admit_register(&at, &file("planted.toml", &planted)) {
+            Err(UorustError::Regressed(rows)) => {
+                assert!(
+                    rows.len() == 1 && rows[0].starts_with("moves::one "),
+                    "{rows:?}"
+                );
+            }
+            other => panic!("expected Regressed, got {other:?}"),
         }
-        other => panic!("expected Regressed, got {other:?}"),
     }
     for dir in [root, dir] {
         let _ = std::fs::remove_dir_all(dir);

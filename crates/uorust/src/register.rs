@@ -17,9 +17,9 @@
 //! states and no gate asserts. Against a parent's register, given to
 //! `uorust admit --parent`, the classification is also held per function,
 //! not per cause: an unchanged κ stays under the construct the parent stated
-//! for it until it lifts or that construct stops no function at all
-//! ([`admit_parent`]), so a cause may rise only by new questions and by
-//! functions whose blocker is gone.
+//! for it until it lifts or the candidate shows that this construct no
+//! longer stops that function ([`admit_parent`]), so a cause may rise only
+//! by new questions and by functions whose blocker is shown gone.
 //!
 //! The register is also the work queue. Beside its rows it carries, as data,
 //! the totals ([`Totals`], the `[lift]` table) and one `[[construct]]` row
@@ -63,41 +63,73 @@ const TYPE: &str = "type";
 /// The key a type construct row's definition sites are written under.
 pub const DEFINED: &str = "defined";
 
-/// The names of the types a type construct writes, in its order: every
-/// identifier of the chain after the residue's own words (`type outside
-/// the lift: `) except the name of a field (`leaf` of `Mid.leaf`) and of a
-/// variant in a place (`Variant` of `Enum::Variant.0`), so the owners of
-/// the chain's places, its leaf's types (`RefCell<Node>` naming `RefCell`
-/// and `Node`) and the types its words name (`Outer, whose field f holds
-/// Leaf.x`) are named. A name is a type only where the workspace declares
-/// one under it, so a word of the chain's prose names none unless a type is
-/// declared under that word.
-pub fn named_types(construct: &str) -> Vec<&str> {
+/// The key a type construct row lists, under, the names its chain writes
+/// that may be types of the workspace and whose declaration the tool
+/// cannot place: a name a glob may bind, or one no declaration, `use` or
+/// macro invocation of its module gives.
+pub const UNSITED: &str = "unsited";
+
+/// A name a type construct writes: a path as the chain writes it (`a::Node`,
+/// `RefCell`, a LexLean name such as `CrateNode`), and whether it owns a
+/// place of the chain (`Node` of `Node.c`, `Enum::Big` of `Enum::Big.0`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Named<'a> {
+    /// The path, `::`-joined, as written.
+    pub name: &'a str,
+    /// Whether a place follows it: the name is a type of the workspace (or
+    /// a type and its variant) whose field the chain reads.
+    pub place: bool,
+}
+
+/// The names a type construct writes, in its order: every path of the
+/// chain after the residue's own words (`type outside the lift: `) except
+/// the name of a field (`leaf` of `Mid.leaf`) and a word that follows a
+/// digit, so the owners of the chain's places, its leaf's types
+/// (`RefCell<Node>` naming `RefCell` and `Node`) and the types its words
+/// name (`Outer, whose field f holds Leaf.x`) are named. A path stays whole
+/// (`holder::Holder`): what it names is read where it is written, not by
+/// its last identifier ([`Named`]).
+pub fn named_types(construct: &str) -> Vec<Named<'_>> {
     let chain = construct
         .split_once(": ")
         .map_or(construct, |(_, chain)| chain);
     let word = |c: char| c.is_alphanumeric() || c == '_';
+    let starts = |c: char| c.is_alphabetic() || c == '_';
     let mut names = Vec::new();
     let mut rest = chain;
-    while let Some(start) = rest.find(|c: char| c.is_alphabetic() || c == '_') {
-        let len = rest[start..]
+    while let Some(start) = rest.find(starts) {
+        let mut len = rest[start..]
             .find(|c: char| !word(c))
             .unwrap_or(rest.len() - start);
+        // A path goes on past `::` while an identifier follows.
+        while rest[start + len..].starts_with("::") && rest[start + len + 2..].starts_with(starts) {
+            len += 2;
+            len += rest[start + len..]
+                .find(|c: char| !word(c))
+                .unwrap_or(rest.len() - start - len);
+        }
         let (before, name, after) = (
             &rest[..start],
             &rest[start..start + len],
             &rest[start + len..],
         );
         let field = before.ends_with('.');
-        let variant = after.starts_with('.') && before.ends_with("::");
         let number = before.ends_with(|c: char| c.is_ascii_digit());
-        if !(field || variant || number) {
-            names.push(name);
+        if !(field || number) {
+            names.push(Named {
+                name,
+                place: after.starts_with('.'),
+            });
         }
         rest = after;
     }
     names
 }
+
+/// The sites of a type construct: where the workspace declares each type
+/// it writes (`path:line`), and the names it writes whose declaration the
+/// tool cannot place ([`UNSITED`]).
+pub type Sites = (Vec<String>, Vec<String>);
 
 /// The κ of a function: SHA-256 over [`DOMAIN`], its crate path and its
 /// normalized token stream, one line each, as lowercase hex.
@@ -253,6 +285,11 @@ pub struct Row {
     /// a cause the lift states, such as a Unicode table LexLean does not
     /// bind. A row that is not lifted has none.
     pub divergence: Option<String>,
+    /// For a row that is not lifted, where the register records them: every
+    /// construct the types of its signature state (cause and construct),
+    /// whichever stops it first. A register an earlier tool wrote records
+    /// none (`None`), and an empty list records that none does.
+    pub stops: Option<Vec<(String, String)>>,
 }
 
 /// Every function of product code, by κ.
@@ -337,10 +374,33 @@ impl Register {
                     }
                     Some(_) => Some(field("divergence")?),
                 };
+                let stops = match row.get(STOPS) {
+                    None => None,
+                    Some(_) if table == "lifted" => {
+                        return Err(bad(format!("a lifted row with {STOPS}: {row}")));
+                    }
+                    Some(list) => {
+                        let pair = |v: &toml::Value| match v.as_array().map(Vec::as_slice) {
+                            Some([cause, construct]) => cause
+                                .as_str()
+                                .zip(construct.as_str())
+                                .map(|(a, b)| (a.to_string(), b.to_string())),
+                            _ => None,
+                        };
+                        let pairs: Option<Vec<(String, String)>> =
+                            list.as_array().and_then(|l| l.iter().map(pair).collect());
+                        Some(pairs.ok_or_else(|| {
+                            bad(format!(
+                                "{STOPS} is not a list of [cause, construct]: {row}"
+                            ))
+                        })?)
+                    }
+                };
                 let new = Row {
                     function,
                     status,
                     divergence,
+                    stops,
                 };
                 if register.rows.insert(kappa.clone(), new).is_some() {
                     return Err(bad(format!("κ {kappa} has more than one row")));
@@ -447,13 +507,13 @@ impl Register {
         self.queue_text_with(None)
     }
 
-    /// [`Register::queue_text`], and where the declaration sites of the
-    /// workspace's types are given (`path:line` by type name), each row
-    /// whose cause is a type outside the lift with the sites that define
-    /// the types its construct writes ([`named_types`]), in the order it
-    /// writes them, under [`DEFINED`]. A projection's `frontier.toml`
-    /// carries them; a register file, written from rows alone, does not.
-    pub fn queue_text_with(&self, sites: Option<&BTreeMap<String, Vec<String>>>) -> String {
+    /// [`Register::queue_text`], and where the sites of the type
+    /// constructs are given (by construct, [`Sites`]), each row whose cause
+    /// is a type outside the lift with the sites that define the types its
+    /// construct writes under [`DEFINED`] and the names it cannot place
+    /// under [`UNSITED`]. A projection's `frontier.toml` carries them; a
+    /// register file, written from rows alone, does not.
+    pub fn queue_text_with(&self, sites: Option<&BTreeMap<String, Sites>>) -> String {
         let mut out = format!("\n[{LIFT}]\n");
         for (key, count) in self.totals().fields() {
             out.push_str(&format!("{key} = {count}\n"));
@@ -467,16 +527,11 @@ impl Register {
                 row.functions,
             ));
             if let Some(sites) = sites.filter(|_| row.cause == TYPE) {
-                let mut defined: Vec<&str> = Vec::new();
-                for name in named_types(&row.construct) {
-                    for site in sites.get(name).into_iter().flatten() {
-                        if !defined.contains(&site.as_str()) {
-                            defined.push(site);
-                        }
-                    }
+                let (defined, unsited) = sites.get(&row.construct).cloned().unwrap_or_default();
+                for (key, list) in [(DEFINED, defined), (UNSITED, unsited)] {
+                    let quoted: Vec<String> = list.iter().map(|s| quoted(s)).collect();
+                    out.push_str(&format!("{key} = [{}]\n", quoted.join(", ")));
                 }
-                let quoted: Vec<String> = defined.iter().map(|s| quoted(s)).collect();
-                out.push_str(&format!("{DEFINED} = [{}]\n", quoted.join(", ")));
             }
         }
         out
@@ -590,10 +645,26 @@ impl Register {
                 if let Some(divergence) = &row.divergence {
                     out.push_str(&format!("divergence = {}\n", quoted(divergence)));
                 }
+                if let Some(stops) = &row.stops {
+                    out.push_str(&stops_line(stops));
+                }
             }
         }
         out
     }
+}
+
+/// The key a row's [`Row::stops`] are written under.
+pub const STOPS: &str = "stops";
+
+/// A row's [`Row::stops`] as the register writes them: one
+/// `[cause, construct]` pair each.
+pub fn stops_line(stops: &[(String, String)]) -> String {
+    let pairs: Vec<String> = stops
+        .iter()
+        .map(|(cause, construct)| format!("[{}, {}]", quoted(cause), quoted(construct)))
+        .collect();
+    format!("{STOPS} = [{}]\n", pairs.join(", "))
 }
 
 /// The κ the incumbent records as lifted that the candidate decides
@@ -632,34 +703,61 @@ pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
 /// against the law per function, each with both decisions: empty exactly
 /// when the candidate is admitted. Beside [`admit`] (a lifted κ stays
 /// lifted, an exact one exact), a κ the parent records as stopped by a
-/// construct (its cause and detail, [`Status::construct`]) is counted under
-/// the same construct, or lifts, or is counted under another construct only
-/// when the candidate states the parent's construct for no function at all:
-/// the blocker was removed and the function moved on to the next thing
-/// that stops it. While the parent's construct still stops some function,
-/// the same question counted under another construct is a re-decision,
-/// refused. So a cause's count rises only by new questions (a κ the parent
-/// does not hold) or by functions that moved on from a construct the
-/// candidate no longer states.
+/// construct A (its cause and detail, [`Status::construct`]) is counted
+/// under A again, or lifts, or is counted under another construct only when
+/// the candidate shows that A no longer stops that function. A function's
+/// row states only the first construct the lift met, so another construct
+/// may stand in front of A while A still applies (a type of another
+/// parameter that changed, a callee that came to reach an effect); the
+/// candidate shows A gone in exactly these ways, and every other move is
+/// refused:
 ///
-/// A κ's own tokens are its question, so a function whose callee changed
-/// keeps its κ: a move such a change causes (into an effect or a foreign
-/// row, or onto the callee's call) is refused while the construct it left
-/// still stops a function, as a lifted κ's is.
+/// - A is a construct of a type of the signature: both registers record
+///   every construct the signature's types state ([`Row::stops`]), the
+///   parent's holds A and the candidate's does not. The κ is unchanged, so
+///   the signature is the same tokens, and none of its types states A now.
+/// - A is a call of a callee the register names by its path (`calls
+///   c::T::f, which is not lifted`): the parent holds that function not
+///   lifted and the candidate holds it lifted.
+/// - A is an effect and the candidate counts the function under no effect:
+///   the projection decides an effect before every other construct, so a
+///   function it counts otherwise reaches none.
+///
+/// So a cause's count rises only by new questions (a κ the parent does not
+/// hold) and by functions whose blocker is shown gone. A κ's own tokens are
+/// its question: a function whose callee changed keeps its κ, and a move
+/// such a change causes (into an effect, or onto the callee's call) is
+/// refused while the construct it left still applies, as a lifted κ's is.
 pub fn admit_parent(parent: &Register, candidate: &Register) -> Vec<String> {
-    let stated: std::collections::BTreeSet<(String, &str)> = candidate
-        .rows
-        .values()
-        .filter_map(|row| row.status.construct())
-        .collect();
+    let lifted = |register: &Register| -> BTreeMap<String, bool> {
+        register
+            .rows
+            .values()
+            .map(|r| (r.function.clone(), matches!(r.status, Status::Lifted(_))))
+            .collect()
+    };
+    let (before, after) = (lifted(parent), lifted(candidate));
     let moved = parent.rows.iter().filter_map(|(kappa, row)| {
         let was = row.status.construct()?;
         let now = candidate.rows.get(kappa)?;
         let is = now.status.construct()?;
-        (was != is && stated.contains(&was)).then(|| {
+        if was == is {
+            return None;
+        }
+        let pair = (was.0.clone(), was.1.to_string());
+        let signature = row.stops.as_ref().is_some_and(|s| s.contains(&pair))
+            && now.stops.as_ref().is_some_and(|s| !s.contains(&pair));
+        let callee = (was.0 == "call")
+            .then(|| was.1.strip_prefix("calls "))
+            .flatten()
+            .and_then(|c| c.strip_suffix(", which is not lifted"));
+        let call =
+            callee.is_some_and(|c| before.get(c) == Some(&false) && after.get(c) == Some(&true));
+        let effect = was.0 == "effect" && is.0 != "effect";
+        (!(signature || call || effect)).then(|| {
             format!(
                 "{} (κ {kappa}) was stopped by {} under {} and is now counted under {} \
-                 ({}), while {} still stops a function",
+                 ({}), and the candidate does not show that {} no longer stops it",
                 row.function,
                 quoted(was.1),
                 quoted(&was.0),
@@ -698,6 +796,7 @@ mod tests {
                 function: function.into(),
                 status,
                 divergence: None,
+                stops: None,
             },
         )
     }
@@ -719,6 +818,7 @@ mod tests {
                         function: "c::g".into(),
                         status: Status::Lifted("Behavior::g".into()),
                         divergence: None,
+                        stops: None,
                     },
                 ),
             ]
@@ -740,6 +840,7 @@ mod tests {
                         function: "c::f".into(),
                         status: Status::Residue("call".into(), "calls g".into()),
                         divergence: None,
+                        stops: None,
                     },
                 ),
                 other,
@@ -767,88 +868,108 @@ mod tests {
     }
 
     /// The law per function: an unchanged κ stays under the construct the
-    /// parent stated for it while that construct still stops a function,
-    /// and moves on to its next construct once it stops none.
+    /// parent stated for it until the candidate shows that construct gone
+    /// for that function: a type of its signature no longer states it, its
+    /// callee lifted, or it reaches no effect. Whether another function
+    /// still states the construct decides nothing.
     #[test]
-    fn a_function_moves_to_another_cause_only_when_its_blocker_is_gone() {
-        let residue = |f: &str, cause: &str, detail: &str| {
-            row(f, Status::Residue(cause.into(), detail.into()))
+    fn a_function_moves_on_only_when_its_construct_is_shown_gone() {
+        let pair = |cause: &str, detail: &str| (cause.to_string(), detail.to_string());
+        let residue = |f: &str, cause: &str, detail: &str, stops: Option<Vec<(String, String)>>| {
+            let (k, mut r) = row(f, Status::Residue(cause.into(), detail.into()));
+            r.stops = stops;
+            (k, r)
         };
         let register = |rows: Vec<(String, Row)>| Register {
             rows: rows.into_iter().collect(),
         };
-        // The parent: a construct A of cause `type` stops f and g.
+        let (a, b) = (pair("type", "A"), pair("type", "B"));
+        // The parent: f's signature states A and B, the lift met A first;
+        // A is the only construct of the register that states A.
         let parent = register(vec![
-            residue("c::f", "type", "A"),
-            residue("c::g", "type", "A"),
-            residue("c::h", "form", "a loop"),
+            residue("c::f", "type", "A", Some(vec![a.clone(), b.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
         ]);
-        // A is removed: f and g move on to what stops them next, so the
-        // cause `form` rises from one function to three. Admitted.
-        let moved_on = register(vec![
-            residue("c::f", "form", "a loop"),
-            residue("c::g", "form", "a loop"),
-            residue("c::h", "form", "a loop"),
+        // The refuter's first case: another type of the signature changed
+        // and now stands in front of A, which still applies to f and stops
+        // no other function. Refused, naming f and A.
+        let masked = register(vec![
+            residue("c::f", "type", "B", Some(vec![b.clone(), a.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
         ]);
-        assert!(admit_parent(&parent, &moved_on).is_empty());
-        let before = parent.queue();
-        let after = moved_on.queue();
-        assert_eq!((before[1].cause.as_str(), before[1].functions), ("form", 1));
-        assert_eq!((after[0].cause.as_str(), after[0].functions), ("form", 3));
-        // The planted re-decision: A still stops g, and the unchanged f is
-        // counted under `form`. Refused, naming f and both constructs.
-        let re_decided = register(vec![
-            residue("c::f", "form", "a loop"),
-            residue("c::g", "type", "A"),
-            residue("c::h", "form", "a loop"),
-        ]);
-        let refused = admit_parent(&parent, &re_decided);
+        let refused = admit_parent(&parent, &masked);
         assert_eq!(refused.len(), 1, "{refused:?}");
         assert!(
             refused[0].starts_with("c::f ") && refused[0].contains("\"A\""),
             "{refused:?}"
         );
-        // Another detail under the same cause is another construct: the
-        // same refusal when A still stops g.
-        let re_detailed = register(vec![
-            residue("c::f", "type", "B"),
-            residue("c::g", "type", "A"),
-            residue("c::h", "form", "a loop"),
+        // A is gone from f's signature: f moves on to B. Admitted, and the
+        // cause `type` keeps its count by a function whose blocker went.
+        let moved_on = register(vec![
+            residue("c::f", "type", "B", Some(vec![b.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
         ]);
-        assert_eq!(admit_parent(&parent, &re_detailed).len(), 1);
-        // A residue row of the parent decided foreign or an effect while A
-        // still stops g: the same refusal; lifting f is always admitted.
-        for status in [
-            Status::Foreign("x crate with no LexLean model: T".into()),
-            Status::Effect("io".into()),
-        ] {
-            let other = register(vec![
-                row("c::f", status),
-                residue("c::g", "type", "A"),
-                residue("c::h", "form", "a loop"),
-            ]);
-            assert_eq!(admit_parent(&parent, &other).len(), 1);
-        }
+        assert!(admit_parent(&parent, &moved_on).is_empty());
+        // A candidate that records no signature constructs shows nothing.
+        let unrecorded = register(vec![
+            residue("c::f", "type", "B", None),
+            residue("c::h", "form", "a loop", None),
+        ]);
+        assert_eq!(admit_parent(&parent, &unrecorded).len(), 1);
+        // A construct of the body (h's loop) never moves while h's tokens
+        // are the same, though no function states it any more.
+        let collided = register(vec![
+            residue("c::f", "type", "A", Some(vec![a.clone(), b.clone()])),
+            residue("c::h", "collision", "h", Some(vec![])),
+        ]);
+        let refused = admit_parent(&parent, &collided);
+        assert!(
+            refused.len() == 1 && refused[0].starts_with("c::h "),
+            "{refused:?}"
+        );
+        // Lifting is always admitted; a new κ is counted under anything.
         let lifted = register(vec![
             row("c::f", Status::Lifted("Behavior::f".into())),
-            residue("c::g", "type", "A"),
-            residue("c::h", "form", "a loop"),
+            row("c::h", Status::Lifted("Behavior::h".into())),
         ]);
         assert!(admit_parent(&parent, &lifted).is_empty());
-        // A new question (a κ the parent does not hold) is counted under any
-        // construct, even one that still stops another function.
-        let mut grown = re_decided.clone();
-        grown.rows.remove(&kappa("c::f", "fn f () {}"));
-        grown.rows.insert(
-            kappa("c::f", "fn f () { 1 }"),
-            Row {
-                function: "c::f".into(),
-                status: Status::Residue("form".into(), "a loop".into()),
-                divergence: None,
-            },
-        );
+        let mut grown = masked.clone();
+        let (_, f) = grown
+            .rows
+            .remove(&kappa("c::f", "fn f () {}"))
+            .map(|r| ((), r))
+            .expect("f");
+        grown.rows.insert(kappa("c::f", "fn f () { 1 }"), f);
         assert!(admit_parent(&parent, &grown).is_empty());
-        // Through the files, as `uorust admit --parent` reads them.
+        // A call names its callee by path: f's callee lifted, so f moves on
+        // to its next call. The refuter's second case: a homonym callee of
+        // another type is still residue, and that decides nothing for f.
+        let calls = |callee: &str| pair("call", &format!("calls {callee}, which is not lifted"));
+        let make = calls("c::Alpha::make");
+        let k = calls("c::k");
+        let at = |status: Status| status;
+        let callers = |alpha: Status, f: (String, String), beta: Status| {
+            register(vec![
+                row("c::Alpha::make", at(alpha)),
+                row("c::Beta::make", at(beta)),
+                residue("c::f", &f.0, &f.1, Some(vec![])),
+                residue("c::k", "form", "a loop", Some(vec![])),
+            ])
+        };
+        let form = || Status::Residue("form".into(), "a loop".into());
+        let before = callers(form(), make.clone(), form());
+        let advanced = callers(Status::Lifted("Behavior::make".into()), k.clone(), form());
+        assert!(admit_parent(&before, &advanced).is_empty());
+        let other = callers(form(), k.clone(), Status::Lifted("Behavior::make".into()));
+        assert_eq!(admit_parent(&before, &other).len(), 1);
+        // An effect the function no longer reaches; and the reverse, a
+        // callee that came to reach one while the loop still stops h.
+        let effect = register(vec![row("c::h", Status::Effect("Fs effect: read".into()))]);
+        let looped = register(vec![residue("c::h", "form", "a loop", Some(vec![]))]);
+        assert!(admit_parent(&effect, &looped).is_empty());
+        assert_eq!(admit_parent(&looped, &effect).len(), 1);
+        // Through the files, as `uorust admit --parent` reads them: the
+        // signature constructs round-trip, and a lifted row carries none.
         let dir = std::env::temp_dir().join(format!("uorust-admit-parent-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         std::fs::create_dir_all(&dir).expect("a scratch directory");
@@ -857,18 +978,32 @@ mod tests {
             std::fs::write(&path, r.to_text()).expect("write");
             path
         };
+        assert_eq!(
+            Register::read(Path::new("p"), &parent.to_text()),
+            Ok(parent.clone())
+        );
         let at = file("parent.toml", &parent);
         let totals = crate::admit_register(&at, &file("moved.toml", &moved_on));
         assert_eq!(totals, Ok(moved_on.totals()));
+        let refused = admit_parent(&parent, &masked);
         assert_eq!(
-            crate::admit_register(&at, &file("re-decided.toml", &re_decided)),
+            crate::admit_register(&at, &file("masked.toml", &masked)),
             Err(UorustError::Regressed(refused))
         );
+        let stray = lifted.to_text().replace(
+            "definition = \"Behavior::f\"\n",
+            "definition = \"Behavior::f\"\nstops = []\n",
+        );
+        assert!(Register::parse(Path::new("p"), &stray).is_err());
+        let bent = parent
+            .to_text()
+            .replace("stops = [[\"type\", \"A\"]", "stops = [[\"type\"]");
+        assert!(Register::parse(Path::new("p"), &bent).is_err());
         // A parent an earlier tool wrote, whose queue this tool derives
         // otherwise, is read by its rows; a candidate is read as written.
         let older = parent
             .to_text()
-            .replace("functions = 3\n", "functions = 4\n");
+            .replace("functions = 2\n", "functions = 3\n");
         std::fs::write(&at, &older).expect("write");
         let moved = file("moved.toml", &moved_on);
         assert_eq!(crate::admit_register(&at, &moved), Ok(moved_on.totals()));
@@ -880,27 +1015,39 @@ mod tests {
     }
 
     /// A type construct names the types of its chain by their owners and
-    /// its leaf by its identifiers, and its row carries the sites of those
-    /// the workspace declares, in the chain's order, each once; a variant
-    /// or a field is no type, and a row of another cause carries none.
+    /// its leaf by its paths, kept whole, and marks the owners of places; a
+    /// field is no type. Its row carries the sites and the unplaced names a
+    /// projection found for it, and a row of another cause carries none.
     #[test]
     fn a_type_construct_row_carries_the_sites_of_its_types() {
-        let construct = "type outside the lift: Mid.leaf: Enum::Big.0: RefCell<Node>";
-        assert_eq!(named_types(construct), ["Mid", "Enum", "RefCell", "Node"]);
-        assert_eq!(named_types("type outside the lift: f64"), ["f64"]);
+        let construct = "type outside the lift: Mid.leaf: Enum::Big.0: RefCell<a::Node>";
+        let names =
+            |c| -> Vec<(&str, bool)> { named_types(c).iter().map(|n| (n.name, n.place)).collect() };
         assert_eq!(
-            named_types("type outside the lift: a::Outer, whose field x holds Leaf.y: u8"),
-            ["a", "Outer", "whose", "field", "x", "holds", "Leaf", "u8"]
+            names(construct),
+            [
+                ("Mid", true),
+                ("Enum::Big", true),
+                ("RefCell", false),
+                ("a::Node", false)
+            ]
         );
-        let sites: BTreeMap<String, Vec<String>> = [
-            ("Mid", vec!["a.rs:3"]),
-            ("Enum", vec!["a.rs:9", "b.rs:2"]),
-            ("Node", vec!["a.rs:3"]),
-            ("Big", vec!["c.rs:1"]),
-            ("leaf", vec!["c.rs:2"]),
-        ]
+        assert_eq!(names("type outside the lift: f64"), [("f64", false)]);
+        assert_eq!(
+            names("type outside the lift: a::Outer, whose field x holds Leaf.y: u8")
+                .iter()
+                .map(|n| n.0)
+                .collect::<Vec<_>>(),
+            ["a::Outer", "whose", "field", "x", "holds", "Leaf", "u8"]
+        );
+        let sites: BTreeMap<String, Sites> = [(
+            construct.to_string(),
+            (
+                vec!["a.rs:3".to_string(), "a.rs:9".to_string()],
+                vec!["Made".to_string()],
+            ),
+        )]
         .into_iter()
-        .map(|(k, v)| (k.to_string(), v.into_iter().map(String::from).collect()))
         .collect();
         let register = Register {
             rows: [
@@ -913,7 +1060,8 @@ mod tests {
         let text = register.queue_text_with(Some(&sites));
         assert!(
             text.contains(&format!(
-                "cause = \"type\"\nfunctions = 1\n{DEFINED} = [\"a.rs:3\", \"a.rs:9\", \"b.rs:2\"]\n"
+                "cause = \"type\"\nfunctions = 1\n{DEFINED} = [\"a.rs:3\", \"a.rs:9\"]\n\
+                 {UNSITED} = [\"Made\"]\n"
             )),
             "{text}"
         );
