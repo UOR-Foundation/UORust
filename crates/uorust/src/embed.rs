@@ -497,6 +497,11 @@ pub(crate) struct Embedded {
     pub(crate) cost: Cost,
 }
 
+/// The construct a body is blocked by when control reaches a block it
+/// lacks: an edge to a block the reader did not read, or an entry block of a
+/// body read with none ([`Cx::cost`]).
+const LACKED: &str = "Terminator to a block the body lacks";
+
 /// The most one run of a body costs the evaluator (UE-19), from its loops'
 /// bounds ([`crate::mir::trips`]): the differential check's fuel.
 #[derive(Clone, Debug, Default)]
@@ -1153,9 +1158,11 @@ fn signed(n: i128) -> String {
     )
 }
 
-/// A LexLean string literal of `text`, every character kept: a quote and a
-/// backslash escaped, and a control character and `%` (which LexLean's TeX
-/// surface reserves) written as their `\\u` escape.
+/// A LexLean string literal of `text`, every character kept, in the
+/// spelling the SDK's `lexlean fmt` writes (LLL1003): a quote and a
+/// backslash escaped, a newline, return, tab, backspace and form feed by
+/// their letter escapes, and every other control character and `%` (which
+/// LexLean's TeX surface reserves) as their `\\u` escape.
 pub(crate) fn mir_string(text: &str) -> String {
     let mut out = String::with_capacity(text.len() + 2);
     out.push('"');
@@ -1163,6 +1170,11 @@ pub(crate) fn mir_string(text: &str) -> String {
         match c {
             '"' => out.push_str("\\\""),
             '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            '\u{8}' => out.push_str("\\b"),
+            '\u{c}' => out.push_str("\\f"),
             c if c == '%' || c.is_control() => {
                 let mut units = [0u16; 2];
                 for u in c.encode_utf16(&mut units) {
@@ -3507,6 +3519,11 @@ impl Cx<'_> {
         sites: &[Site],
         blocks: &[String],
     ) -> Cost {
+        // A reached block the body lacks is no run of it: a dump the reader
+        // read short, whatever the input, is refused, never indexed.
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            return Cost::Unbounded(LACKED.into());
+        }
         let runs = match crate::mir::trips::runs(b, reached, self.width) {
             crate::mir::trips::Runs::Bounded(r) => r,
             crate::mir::trips::Runs::Unbounded(why) => return Cost::Unbounded(why),
@@ -3635,6 +3652,9 @@ impl Cx<'_> {
                     work.push(next);
                 }
             }
+        }
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            e.blocked.insert(LACKED.to_string());
         }
         let blocks: Vec<String> = b
             .blocks
@@ -3833,10 +3853,78 @@ pub struct EmbedCensus {
     pub blocked: BTreeMap<String, usize>,
     /// How many bodies leave a callee to a dictionary.
     pub bound: usize,
+    /// The calls (each callee once per body) that name a body of the
+    /// program, by where the body is: [`OWN`] for the crate's own modules,
+    /// else the linked library's name.
+    pub linked: BTreeMap<String, usize>,
+    /// The calls (each callee once per body) left to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, usize>,
+}
+
+/// The key of [`EmbedCensus::linked`] for a call into the crate's own
+/// modules, which no crate name can be.
+pub const OWN: &str = "(the crate's own modules)";
+
+/// Why a callee `name` a body of `krate` leaves to its dictionary is not
+/// linked, read from the path the dump prints, with the libraries
+/// `linked` into the program: the crate the path names (a qualified
+/// path's self type, or its trait where the self type is a primitive), or
+/// a generic parameter the caller's bound abstracts, or the platform (an
+/// intrinsic, inline assembly, a foreign item: a name with no path).
+pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
+    // A qualified path `<Self as Trait>::item`: its self type, unless that
+    // is a primitive or a parameter, then its trait.
+    let named = match name.strip_prefix('<') {
+        Some(rest) => {
+            let mut depth = 0usize;
+            let mut split = None;
+            for (i, c) in rest.char_indices() {
+                match c {
+                    '<' | '(' | '[' => depth += 1,
+                    '>' | ')' | ']' if depth == 0 => break,
+                    '>' | ')' | ']' => depth -= 1,
+                    _ if depth == 0 && rest[i..].starts_with(" as ") => {
+                        split = Some(i);
+                        break;
+                    }
+                    _ => {}
+                }
+            }
+            let ty = rest[..split.unwrap_or(rest.len())]
+                .trim_start_matches(['&', '*', '(', '['])
+                .trim_start_matches("mut ")
+                .trim_start_matches("const ")
+                .trim_start_matches("dyn ");
+            let head = ty.split("::").next().unwrap_or_default();
+            let head = head.split('<').next().unwrap_or_default();
+            if ty.contains("::") {
+                Some(head.to_string())
+            } else if head.starts_with(char::is_uppercase) {
+                return "a generic parameter's bound".into();
+            } else {
+                // A primitive's impl is its trait's crate's.
+                split
+                    .map(|at| &rest[at + " as ".len()..])
+                    .and_then(|t| t.split("::").next())
+                    .map(|t| t.split('<').next().unwrap_or_default().to_string())
+            }
+        }
+        None => name
+            .contains("::")
+            .then(|| name.split("::").next().unwrap_or_default().to_string()),
+    };
+    match named.as_deref() {
+        None | Some("") => "the platform (an intrinsic, assembly, a foreign item)".into(),
+        Some("core" | "alloc" | "std") => "core, alloc and std are not linked".into(),
+        Some(c) if c == krate => "the crate's own, with no body in the dump".into(),
+        Some(c) if linked.contains(&c) => "a linked library leaves it to a dictionary".into(),
+        Some(c) => format!("crate `{c}` is not linked"),
+    }
 }
 
 impl EmbedCensus {
-    fn add(&mut self, e: &Embedded) {
+    fn add(&mut self, e: &Embedded, krate: &str, linked: &[&str]) {
         self.bodies += 1;
         if e.blocked.is_empty() {
             self.evaluable += 1;
@@ -3849,6 +3937,19 @@ impl EmbedCensus {
         }
         if !e.bound.is_empty() {
             self.bound += 1;
+        }
+        for c in &e.callees {
+            let at = linked
+                .iter()
+                .find(|l| c.starts_with(&format!("{l}::")))
+                .map_or(OWN, |l| l);
+            *self.linked.entry(at.to_string()).or_default() += 1;
+        }
+        for b in &e.bound {
+            *self
+                .unlinked
+                .entry(unlinked_reason(b, krate, linked))
+                .or_default() += 1;
         }
     }
 
@@ -3876,6 +3977,20 @@ impl EmbedCensus {
                 out,
                 "\n[[construct]]\nconstruct = {}\nbodies = {n}\n",
                 census_string(c)
+            );
+        }
+        for (at, n) in &self.linked {
+            let _ = write!(
+                out,
+                "\n[[linked]]\ninto = {}\ncalls = {n}\n",
+                census_string(at)
+            );
+        }
+        for (why, n) in &self.unlinked {
+            let _ = write!(
+                out,
+                "\n[[unlinked]]\nreason = {}\ncalls = {n}\n",
+                census_string(why)
             );
         }
         out
@@ -5949,6 +6064,7 @@ fn embed_linked(
         c => c,
     };
     let mut census = EmbedCensus::default();
+    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
@@ -6080,7 +6196,7 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e);
+                    census.add(&e, krate, &linked_names);
                     signatures.insert(
                         kappa.clone(),
                         (
@@ -6732,7 +6848,9 @@ mod tests {
     #[test]
     fn a_string_keeps_every_character_ue_19() {
         assert_eq!(mir_string("a%b"), "\"a\\u0025b\"");
-        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\u000a\"");
+        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\n\"");
+        // The letter escapes `lexlean fmt` writes, and `\u` for the rest.
+        assert_eq!(mir_string("\r\t\u{8}\u{c}\u{1}"), "\"\\r\\t\\b\\f\\u0001\"");
     }
 
     #[test]
@@ -6743,6 +6861,54 @@ mod tests {
         assert_eq!(int_ty("usize", 64), Some((64, false)));
         assert_eq!(int_ty("i16", 64), Some((16, true)));
         assert_eq!(int_ty("u", 64), None);
+    }
+
+    // bare switch: a body control leaves for a block it lacks is refused by
+    // its construct, never indexed past (mir-4-1).
+
+    fn bare_switch_embed(dumps: &[(&str, &str)]) -> EmbedCensus {
+        let fixture = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core");
+        let work = std::env::temp_dir().join(format!(
+            "uorust-bare-switch-{}-{}",
+            std::process::id(),
+            dumps.len()
+        ));
+        let _ = std::fs::remove_dir_all(&work);
+        let module = work.join("mir/lacked");
+        std::fs::create_dir_all(&module).unwrap();
+        for (name, text) in dumps {
+            std::fs::write(module.join(name), text).unwrap();
+        }
+        std::fs::write(
+            work.join("mir/target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let census = embed(
+            "core",
+            &fixture.join("library"),
+            &work.join("mir"),
+            &work.join("out"),
+            &[],
+            &Outputs::default(),
+        )
+        .expect("the embedding");
+        let _ = std::fs::remove_dir_all(&work);
+        census
+    }
+
+    #[test]
+    fn bare_switch_a_block_the_body_lacks_is_a_construct_not_a_panic() {
+        // `bb0` goes to `bb1`, which the dump does not hold, as a body the
+        // reader read short; the other body reads whole.
+        let short = "// MIR for `lacked::f` before ElaborateBoxDerefs\n\nfn lacked::f() -> () {\n    let mut _0: ();\n\n    bb0: {\n        goto -> bb1;\n    }\n}\n";
+        let whole = "// MIR for `lacked::g` before ElaborateBoxDerefs\n\nfn lacked::g(_1: bool) -> () {\n    let mut _0: ();\n\n    bb0: {\n        switchInt(copy _1) -> bb1;\n    }\n\n    bb1: {\n        return;\n    }\n}\n";
+        let census = bare_switch_embed(&[
+            ("core.lacked-f.2-0.ElaborateBoxDerefs.before.mir", short),
+            ("core.lacked-g.2-0.ElaborateBoxDerefs.before.mir", whole),
+        ]);
+        assert_eq!(census.bodies, 2);
+        assert_eq!(census.blocked.get(LACKED), Some(&1), "{:?}", census.blocked);
     }
 }
 

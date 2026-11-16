@@ -994,10 +994,17 @@ fn terminator(t: &str) -> Option<IrTerminator> {
         .strip_prefix("switchInt(")
         .and_then(|r| r.strip_suffix(')'))
     {
-        let list = edges.strip_prefix('[')?.strip_suffix(']')?;
+        // rustc's printer writes a terminator of one successor and no
+        // unwind edge bare (`-> bbN`, `TerminatorKind`'s `Debug`), and a
+        // switch's successors are its values' targets then `otherwise`: a
+        // bare switch has no values, and its one target is `otherwise`.
+        let list = match single {
+            Some(only) => format!("otherwise: bb{only}"),
+            None => edges.strip_prefix('[')?.strip_suffix(']')?.to_string(),
+        };
         let mut arms = Vec::new();
         let mut otherwise = None;
-        for e in split_top(list, ',') {
+        for e in split_top(&list, ',') {
             let (v, b) = e.split_once(": ")?;
             let b = block_of(b)?;
             if v == "otherwise" {
@@ -1341,5 +1348,137 @@ fn g() -> u32 {
             p.span = s.span.clone();
         }
         assert_eq!(spanned, plain);
+    }
+
+    // bare switch: a `switchInt` of one successor, as rustc 1.97.1 prints a
+    // match on a one-variant enum after a move out of its field.
+
+    const BARE_SWITCH_TAKE: &str = "// MIR for `take` before ElaborateBoxDerefs
+
+fn take(_1: Holder) -> usize {
+    debug h => _1;
+    let mut _0: usize;
+    let _2: One;
+    let mut _4: &std::string::String;
+    let mut _5: isize;
+    let mut _6: isize;
+    let mut _7: isize;
+    scope 1 {
+        debug one => _2;
+        let _3: std::string::String;
+        scope 2 {
+            debug s => _3;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = move (_1.0: One);
+        PlaceMention(_2);
+        StorageLive(_3);
+        _3 = move ((_2 as Only).0: std::string::String);
+        StorageLive(_4);
+        _4 = &_3;
+        _0 = String::len(move _4) -> [return: bb1, unwind: bb5];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        drop(_3) -> [return: bb2, unwind: bb6];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        goto -> bb11;
+    }
+
+    bb3: {
+        StorageDead(_2);
+        goto -> bb13;
+    }
+
+    bb4: {
+        return;
+    }
+
+    bb5 (cleanup): {
+        drop(_3) -> [return: bb6, unwind terminate(cleanup)];
+    }
+
+    bb6 (cleanup): {
+        goto -> bb15;
+    }
+
+    bb7 (cleanup): {
+        goto -> bb16;
+    }
+
+    bb8 (cleanup): {
+        resume;
+    }
+
+    bb9: {
+        goto -> bb3;
+    }
+
+    bb10: {
+        goto -> bb9;
+    }
+
+    bb11: {
+        _5 = discriminant(_2);
+        switchInt(move _5) -> bb10;
+    }
+
+    bb12: {
+        goto -> bb4;
+    }
+
+    bb13: {
+        goto -> bb12;
+    }
+
+    bb14 (cleanup): {
+        goto -> bb7;
+    }
+
+    bb15 (cleanup): {
+        _7 = discriminant(_2);
+        switchInt(move _7) -> bb14;
+    }
+
+    bb16 (cleanup): {
+        goto -> bb8;
+    }
+}
+";
+
+    #[test]
+    fn bare_switch_reads_its_one_target_as_otherwise() {
+        let local = |l| IrPlace {
+            local: l,
+            projection: Vec::new(),
+        };
+        let b = bodies(BARE_SWITCH_TAKE).remove(0);
+        // Every block is read: none is left without its terminator.
+        assert_eq!(b.blocks.len(), 17);
+        assert_eq!(
+            b.blocks[11].terminator,
+            IrTerminator::Switch(IrOperand::Move(local(5)), Vec::new(), 10)
+        );
+        assert_eq!(
+            b.blocks[15].terminator,
+            IrTerminator::Switch(IrOperand::Move(local(7)), Vec::new(), 14)
+        );
+        assert_eq!(b.blocks[11].terminator.successors(), vec![10]);
+        // The bracketed form is read as before.
+        assert_eq!(
+            terminator("switchInt(move _4) -> [0: bb3, otherwise: bb2];"),
+            Some(IrTerminator::Switch(
+                IrOperand::Move(local(4)),
+                vec![(0, 3)],
+                2
+            ))
+        );
     }
 }
