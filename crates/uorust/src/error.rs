@@ -26,6 +26,10 @@ pub enum UorustError {
         /// What the operating system reported.
         reason: String,
     },
+    /// No `--name` was given and the workspace's root manifest (the path)
+    /// declares no package whose name the projection could take: a virtual
+    /// workspace. The directory's name is never taken instead.
+    NoName(PathBuf),
     /// The control set needs a `lastModified` instant and none was given: no
     /// `--last-modified`, and the workspace is not a git checkout with a commit.
     NoTimestamp,
@@ -78,6 +82,12 @@ impl fmt::Display for UorustError {
                 write!(f, "{} does not parse: {reason}", path.display())
             }
             Self::Io { path, reason } => write!(f, "{}: {reason}", path.display()),
+            Self::NoName(manifest) => write!(
+                f,
+                "no project name: pass --name, since {} declares no [package] whose name \
+                 the projection could take",
+                manifest.display()
+            ),
             Self::NoTimestamp => write!(
                 f,
                 "no lastModified instant: pass --last-modified YYYY-MM-DDThh:mm:ssZ or run \

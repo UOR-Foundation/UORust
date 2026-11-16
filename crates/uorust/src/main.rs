@@ -575,7 +575,9 @@ struct Args {
     /// The directory the Prism project is written to or checked in.
     #[arg(long)]
     out: PathBuf,
-    /// The project name; the workspace directory's name when absent.
+    /// The project name; when absent, the name of the package the
+    /// workspace's root manifest declares (a virtual workspace declares
+    /// none, and then the name must be given). Never the directory's name.
     #[arg(long)]
     name: Option<String>,
     /// The control set's lastModified, YYYY-MM-DDThh:mm:ssZ; the HEAD commit time when absent.
@@ -609,7 +611,7 @@ struct Args {
 fn options(args: &Args) -> Result<Options, UorustError> {
     let name = match &args.name {
         Some(name) => name.clone(),
-        None => uorust::default_name(&args.workspace)?,
+        None => uorust::declared_name(&args.workspace)?,
     };
     let last_modified = match &args.last_modified {
         Some(value) => value.clone(),

@@ -94,7 +94,27 @@ fn project_workspace_here(
     Ok(files)
 }
 
-/// The workspace's name: its directory name.
+/// The name a projection takes when no `--name` is given: the `name` of the
+/// `[package]` the workspace's root manifest declares, a fact of the
+/// workspace that does not change with the directory it is checked out
+/// under. A virtual workspace (no root package) declares no name, and
+/// [`UorustError::NoName`] asks for one.
+pub fn declared_name(root: &Path) -> Result<String, UorustError> {
+    let manifest = root.join("Cargo.toml");
+    let text = std::fs::read_to_string(&manifest).map_err(|e| error::io(&manifest, e))?;
+    let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+        path: manifest.clone(),
+        reason: format!("{e}"),
+    })?;
+    doc.get("package")
+        .and_then(|p| p.get("name"))
+        .and_then(toml::Value::as_str)
+        .map(str::to_string)
+        .ok_or(UorustError::NoName(manifest))
+}
+
+/// The workspace's directory name, which the certified export's package
+/// name derives from (`certify::profile`); a projection never takes it.
 pub fn default_name(root: &Path) -> Result<String, UorustError> {
     let root = root.canonicalize().map_err(|e| error::io(root, e))?;
     Ok(root
@@ -259,5 +279,42 @@ mod tests {
         assert_eq!(utc(951_782_400), "2000-02-29T00:00:00Z");
         assert!(is_timestamp(&utc(1_762_884_000)));
         assert!(!is_timestamp("2026-11-11"));
+    }
+
+    /// Without `--name` a projection takes the root package's name, the
+    /// same under any directory name (the refuter's two copies, `w1` and
+    /// `x`), and a virtual workspace has none: the name is asked for, never
+    /// taken from the directory.
+    #[test]
+    fn a_projection_without_a_name_takes_the_root_package_never_the_directory() {
+        let base = std::env::temp_dir().join(format!("uorust-name-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&base);
+        for dir in ["w1", "x"] {
+            let root = base.join(dir);
+            std::fs::create_dir_all(&root).expect("a workspace");
+            std::fs::write(
+                root.join("Cargo.toml"),
+                "[package]\nname = \"omega\"\nversion = \"0.1.0\"\n\n[workspace]\n",
+            )
+            .expect("a manifest");
+            assert_eq!(declared_name(&root), Ok("omega".to_string()));
+        }
+        let virtual_root = base.join("v");
+        std::fs::create_dir_all(&virtual_root).expect("a workspace");
+        std::fs::write(
+            virtual_root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"a\"]\n",
+        )
+        .expect("a manifest");
+        let got = declared_name(&virtual_root);
+        let _ = std::fs::remove_dir_all(&base);
+        assert_eq!(
+            got,
+            Err(UorustError::NoName(virtual_root.join("Cargo.toml")))
+        );
+        assert!(got
+            .expect_err("no name")
+            .to_string()
+            .starts_with("no project name: pass --name"));
     }
 }
