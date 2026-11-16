@@ -932,26 +932,39 @@ fn items(
                         .collect(),
                 });
             }
-            syn::Item::Struct(st) if only_lifetimes(&st.generics) => {
-                if let syn::Fields::Named(named) = &st.fields {
-                    file.structs.push(StructFact {
-                        name: st.ident.to_string(),
-                        span: Span {
-                            file: rel.to_string(),
-                            line: st.ident.span().start().line,
-                        },
-                        derives: derives(&attrs(&st.attrs)),
-                    });
-                    syntax.structs.push(
-                        named
-                            .named
-                            .iter()
-                            .filter_map(|f| {
-                                Some((f.ident.as_ref()?.to_string(), crate::convert::ty(&f.ty)))
-                            })
-                            .collect(),
-                    );
-                }
+            // Every struct is registered, so that a type the lift does not
+            // read is named with its shape and not as an unknown name. A
+            // unit struct is a struct of no fields.
+            syn::Item::Struct(st) => {
+                file.structs.push(StructFact {
+                    name: st.ident.to_string(),
+                    span: Span {
+                        file: rel.to_string(),
+                        line: st.ident.span().start().line,
+                    },
+                    derives: derives(&attrs(&st.attrs)),
+                });
+                syntax.structs.push(match &st.fields {
+                    _ if !only_lifetimes(&st.generics) => {
+                        vec![crate::lift::unread_shape(crate::lift::PARAMETRIC_STRUCT)]
+                    }
+                    syn::Fields::Named(named) => named
+                        .named
+                        .iter()
+                        .filter_map(|f| {
+                            Some((f.ident.as_ref()?.to_string(), crate::convert::ty(&f.ty)))
+                        })
+                        .collect(),
+                    // A tuple struct's field is named by its position, as
+                    // Rust reads it (`value.0`).
+                    syn::Fields::Unnamed(unnamed) => unnamed
+                        .unnamed
+                        .iter()
+                        .enumerate()
+                        .map(|(i, f)| (i.to_string(), crate::convert::ty(&f.ty)))
+                        .collect(),
+                    syn::Fields::Unit => Vec::new(),
+                });
             }
             syn::Item::Type(t)
                 if !in_test
@@ -1207,4 +1220,57 @@ fn effect_of(block: &syn::Block) -> Option<(Capability, String)> {
     let mut scan = Scan(None);
     scan.visit_block(block);
     scan.0
+}
+
+/// The facts and the syntax of one library source text, as [`source`]
+/// reads a file.
+#[cfg(test)]
+pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
+    let parsed = syn::parse_file(text).expect("the source parses");
+    let mut file = SourceFile::default();
+    let mut syntax = FileSyntax::default();
+    items(
+        &parsed.items,
+        "lib.rs",
+        None,
+        false,
+        true,
+        true,
+        &mut file,
+        &mut syntax,
+    );
+    (file, syntax)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Types outside the lift.
+
+    #[test]
+    fn every_struct_is_registered_with_the_fields_its_shape_has() {
+        let (file, syntax) = read_text(
+            "struct Named { a: u8 } struct Meters(u32, bool); struct Marker; \
+             struct Wrapper<T> { value: T } struct Reader<'a> { text: &'a str }",
+        );
+        let names: Vec<&str> = file.structs.iter().map(|s| s.name.as_str()).collect();
+        assert_eq!(names, ["Named", "Meters", "Marker", "Wrapper", "Reader"]);
+        let fields = |i: usize| -> Vec<(&str, &str)> {
+            syntax.structs[i]
+                .iter()
+                .map(|(n, t)| (n.as_str(), t.text.as_str()))
+                .collect()
+        };
+        assert_eq!(fields(0), [("a", "u8")]);
+        // A tuple struct's fields are named by position.
+        assert_eq!(fields(1), [("0", "u32"), ("1", "bool")]);
+        // A unit struct has none.
+        assert!(fields(2).is_empty());
+        // A struct with a type parameter is no one type: it is registered
+        // under no field name, with its shape.
+        assert_eq!(fields(3), [("", crate::lift::PARAMETRIC_STRUCT)]);
+        // A lifetime is no such parameter.
+        assert_eq!(fields(4), [("text", "&'a str")]);
+    }
 }

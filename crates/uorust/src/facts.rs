@@ -171,7 +171,7 @@ pub(crate) struct EnumFact {
     pub(crate) variants: Vec<Variant>,
 }
 
-/// A struct with named fields and no generic parameters.
+/// A struct, whatever its shape: its syntax says which fields it has.
 #[derive(Clone, Debug)]
 pub(crate) struct StructFact {
     pub(crate) name: String,

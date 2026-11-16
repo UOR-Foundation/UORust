@@ -3272,7 +3272,10 @@ fn behavior(
             .iter()
             .map(|key| {
                 let (target, module, name) = key;
-                let lex = if everywhere[name] == 1 {
+                // A name LexLean writes for a type of its own (`Prop`) is
+                // shared with it as with another crate's type.
+                let taken = lift::name_taken(name, !d.enums.contains_key(key));
+                let lex = if everywhere[name] == 1 && !taken {
                     name.clone()
                 } else if in_crate[name.as_str()] == 1 {
                     format!("{}{name}", pascal(&[&package.name]))
@@ -3619,7 +3622,7 @@ fn behavior(
                 Some(types.resolve(o))
             }
             (Some(o), None) => {
-                ctx.stopped(notes, &effectful, r, Residue::Type(o.clone()));
+                ctx.stopped(notes, &effectful, r, types.unnamed(o));
                 continue;
             }
         };
@@ -3824,8 +3827,21 @@ fn behavior(
                 out.decls.iter().any(|d| d.name() == c.name),
                 names.get(&c.rust),
             ) {
+                // A path has one row and one κ. Two functions share a path
+                // where two traits give one type a method of one name (the
+                // `fmt` of `Display` and of `Debug`): where the other did
+                // not lift, the path's row stays the one that says so,
+                // since the κ the register holds for the path may be
+                // either function's.
+                let path = ctx.path(r);
+                if notes.residue.contains_key(&path)
+                    || notes.foreign.contains_key(&path)
+                    || notes.effects.contains_key(&path)
+                {
+                    continue;
+                }
                 notes.lifted.insert(
-                    ctx.path(r),
+                    path,
                     (
                         ctx.func(r).span.clone(),
                         qualified(BEHAVIOR, &c.name),
