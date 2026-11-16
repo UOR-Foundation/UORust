@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -885,7 +886,9 @@ pub enum Adt1 {
 }
 
 pub fn f0() -> List<(Str, Adt0)> {
-    List::cons((Str::lit("allocation"), Adt0::C2(None::<u64>)), List::cons((Str::lit("address"), Adt0::C2(None::<u64>)), List::cons((Str::lit("metadata"), Adt0::C2(None::<u64>)), List::<(Str, Adt0)>::nil())))
+    let a1 = List::cons((Str::lit("allocation"), Adt0::C2(None::<u64>)), List::<(Str, Adt0)>::nil());
+    let a2 = List::cons((Str::lit("address"), Adt0::C2(None::<u64>)), List::cons((Str::lit("metadata"), Adt0::C2(None::<u64>)), List::<(Str, Adt0)>::nil()));
+    append_list(a1, a2)
 }
 
 pub fn run() -> List<(Str, Adt0)> {

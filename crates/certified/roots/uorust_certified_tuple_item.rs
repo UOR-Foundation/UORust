@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -888,196 +889,289 @@ pub fn f0(v0: Adt0, v1: Str, v2: u64) -> R<Str> {
     let m1 = v0;
     match m1 {
         Adt0::C0 => {
-            let a2 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a3 = Str::lit("");
-            Ok(join(a2, a3))
-        }
-        Adt0::C1 => {
-            let a4 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+            let a4 = {
+                let a2 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a3 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a2, a3)
+            };
             let a5 = Str::lit("");
             Ok(join(a4, a5))
         }
-        Adt0::C2(_) => {
-            let a6 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a7 = Str::lit("");
-            Ok(join(a6, a7))
-        }
-        Adt0::C3(_) => {
-            let a8 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C1 => {
+            let a8 = {
+                let a6 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a7 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a6, a7)
+            };
             let a9 = Str::lit("");
             Ok(join(a8, a9))
         }
-        Adt0::C4(_) => {
-            let a10 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a11 = Str::lit("");
-            Ok(join(a10, a11))
-        }
-        Adt0::C5(_) => {
-            let a12 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C2(_) => {
+            let a12 = {
+                let a10 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a11 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a10, a11)
+            };
             let a13 = Str::lit("");
             Ok(join(a12, a13))
         }
-        Adt0::C6 => {
-            let a14 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a15 = Str::lit("");
-            Ok(join(a14, a15))
-        }
-        Adt0::C7 => {
-            let a16 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C3(_) => {
+            let a16 = {
+                let a14 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a15 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a14, a15)
+            };
             let a17 = Str::lit("");
             Ok(join(a16, a17))
         }
-        Adt0::C8 => {
-            let a18 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a19 = Str::lit("");
-            Ok(join(a18, a19))
-        }
-        Adt0::C9 => {
-            let a20 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C4(_) => {
+            let a20 = {
+                let a18 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a19 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a18, a19)
+            };
             let a21 = Str::lit("");
             Ok(join(a20, a21))
         }
-        Adt0::C10 => {
-            let a22 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a23 = Str::lit("");
-            Ok(join(a22, a23))
-        }
-        Adt0::C11(_) => {
-            let a24 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C5(_) => {
+            let a24 = {
+                let a22 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a23 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a22, a23)
+            };
             let a25 = Str::lit("");
             Ok(join(a24, a25))
         }
-        Adt0::C12(_) => {
-            let a26 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a27 = Str::lit("");
-            Ok(join(a26, a27))
-        }
-        Adt0::C13(_, _) => {
-            let a28 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C6(_) => {
+            let a28 = {
+                let a26 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a27 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a26, a27)
+            };
             let a29 = Str::lit("");
             Ok(join(a28, a29))
         }
-        Adt0::C14(_) => {
-            let a30 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a31 = Str::lit("");
-            Ok(join(a30, a31))
-        }
-        Adt0::C15(_) => {
-            let a32 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C7 => {
+            let a32 = {
+                let a30 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a31 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a30, a31)
+            };
             let a33 = Str::lit("");
             Ok(join(a32, a33))
         }
-        Adt0::C16(_) => {
-            let a34 = v2;
-            let a35 = 0u64;
-            if nat_eq(a34, a35) {
-                let a36 = List::cons(Str::lit("(first "), List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil())));
-                let a37 = Str::lit("");
-                Ok(join(a36, a37))
-            } else {
-                let a38 = List::cons(Str::lit("(second "), List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil())));
-                let a39 = Str::lit("");
-                Ok(join(a38, a39))
-            }
+        Adt0::C8 => {
+            let a36 = {
+                let a34 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a35 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a34, a35)
+            };
+            let a37 = Str::lit("");
+            Ok(join(a36, a37))
         }
-        Adt0::C17(_, _, _) => {
-            let a40 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C9 => {
+            let a40 = {
+                let a38 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a39 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a38, a39)
+            };
             let a41 = Str::lit("");
             Ok(join(a40, a41))
         }
-        Adt0::C18(_, _) => {
-            let a42 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a43 = Str::lit("");
-            Ok(join(a42, a43))
-        }
-        Adt0::C19(_, _) => {
-            let a44 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())))));
+        Adt0::C10 => {
+            let a44 = {
+                let a42 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a43 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a42, a43)
+            };
             let a45 = Str::lit("");
             Ok(join(a44, a45))
+        }
+        Adt0::C11 => {
+            let a48 = {
+                let a46 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a47 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a46, a47)
+            };
+            let a49 = Str::lit("");
+            Ok(join(a48, a49))
+        }
+        Adt0::C12(_) => {
+            let a52 = {
+                let a50 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a51 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a50, a51)
+            };
+            let a53 = Str::lit("");
+            Ok(join(a52, a53))
+        }
+        Adt0::C13(_) => {
+            let a56 = {
+                let a54 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a55 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a54, a55)
+            };
+            let a57 = Str::lit("");
+            Ok(join(a56, a57))
+        }
+        Adt0::C14(_, _) => {
+            let a60 = {
+                let a58 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a59 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a58, a59)
+            };
+            let a61 = Str::lit("");
+            Ok(join(a60, a61))
+        }
+        Adt0::C15(_) => {
+            let a64 = {
+                let a62 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a63 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a62, a63)
+            };
+            let a65 = Str::lit("");
+            Ok(join(a64, a65))
+        }
+        Adt0::C16(_) => {
+            let a68 = {
+                let a66 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a67 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a66, a67)
+            };
+            let a69 = Str::lit("");
+            Ok(join(a68, a69))
+        }
+        Adt0::C17(_) => {
+            let a70 = v2;
+            let a71 = 0u64;
+            if nat_eq(a70, a71) {
+                let a74 = {
+                    let a72 = List::cons(Str::lit("(first "), List::<Str>::nil());
+                    let a73 = List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil()));
+                    append_list(a72, a73)
+                };
+                let a75 = Str::lit("");
+                Ok(join(a74, a75))
+            } else {
+                let a78 = {
+                    let a76 = List::cons(Str::lit("(second "), List::<Str>::nil());
+                    let a77 = List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil()));
+                    append_list(a76, a77)
+                };
+                let a79 = Str::lit("");
+                Ok(join(a78, a79))
+            }
+        }
+        Adt0::C18(_, _, _) => {
+            let a82 = {
+                let a80 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a81 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a80, a81)
+            };
+            let a83 = Str::lit("");
+            Ok(join(a82, a83))
+        }
+        Adt0::C19(_, _) => {
+            let a86 = {
+                let a84 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a85 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a84, a85)
+            };
+            let a87 = Str::lit("");
+            Ok(join(a86, a87))
+        }
+        Adt0::C20(_, _) => {
+            let a90 = {
+                let a88 = List::cons(Str::lit("(project "), List::cons(v1, List::<Str>::nil()));
+                let a89 = List::cons(Str::lit(" item"), List::cons(f1(v2)?, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a88, a89)
+            };
+            let a91 = Str::lit("");
+            Ok(join(a90, a91))
         }
     }
 }
 
 pub fn f1(v0: u64) -> R<Str> {
     Ok(f2({
-        let a46 = v0;
-        let a47 = 1u64;
-        nat_add(a46, a47)?
+        let a92 = v0;
+        let a93 = 1u64;
+        nat_add(a92, a93)?
     }, v0))
 }
 
 pub fn f2(v0: u64, v1: u64) -> Str {
-    let m48 = v0;
-    if m48 == 0 {
+    let m94 = v0;
+    if m94 == 0 {
         Str::lit("")
     } else {
-        let v2 = m48 - 1;
-        let a49 = v1;
-        let a50 = 10u64;
-        if nat_lt(a49, a50) {
+        let v2 = m94 - 1;
+        let a95 = v1;
+        let a96 = 10u64;
+        if nat_lt(a95, a96) {
             f3(v1)
         } else {
-            let a57 = List::cons(f2(v2, {
-                let a51 = v1;
-                let a52 = 10u64;
-                let a53 = 0u64;
-                nat_quot(a51, a52, a53)
+            let a103 = List::cons(f2(v2, {
+                let a97 = v1;
+                let a98 = 10u64;
+                let a99 = 0u64;
+                nat_quot(a97, a98, a99)
             }), List::cons(f3({
-                let a54 = v1;
-                let a55 = 10u64;
-                let a56 = 0u64;
-                nat_rem(a54, a55, a56)
+                let a100 = v1;
+                let a101 = 10u64;
+                let a102 = 0u64;
+                nat_rem(a100, a101, a102)
             }), List::<Str>::nil()));
-            let a58 = Str::lit("");
-            join(a57, a58)
+            let a104 = Str::lit("");
+            join(a103, a104)
         }
     }
 }
 
 pub fn f3(v0: u64) -> Str {
-    let a59 = v0;
-    let a60 = 0u64;
-    if nat_eq(a59, a60) {
+    let a105 = v0;
+    let a106 = 0u64;
+    if nat_eq(a105, a106) {
         Str::lit("0")
     } else {
-        let a61 = v0;
-        let a62 = 1u64;
-        if nat_eq(a61, a62) {
+        let a107 = v0;
+        let a108 = 1u64;
+        if nat_eq(a107, a108) {
             Str::lit("1")
         } else {
-            let a63 = v0;
-            let a64 = 2u64;
-            if nat_eq(a63, a64) {
+            let a109 = v0;
+            let a110 = 2u64;
+            if nat_eq(a109, a110) {
                 Str::lit("2")
             } else {
-                let a65 = v0;
-                let a66 = 3u64;
-                if nat_eq(a65, a66) {
+                let a111 = v0;
+                let a112 = 3u64;
+                if nat_eq(a111, a112) {
                     Str::lit("3")
                 } else {
-                    let a67 = v0;
-                    let a68 = 4u64;
-                    if nat_eq(a67, a68) {
+                    let a113 = v0;
+                    let a114 = 4u64;
+                    if nat_eq(a113, a114) {
                         Str::lit("4")
                     } else {
-                        let a69 = v0;
-                        let a70 = 5u64;
-                        if nat_eq(a69, a70) {
+                        let a115 = v0;
+                        let a116 = 5u64;
+                        if nat_eq(a115, a116) {
                             Str::lit("5")
                         } else {
-                            let a71 = v0;
-                            let a72 = 6u64;
-                            if nat_eq(a71, a72) {
+                            let a117 = v0;
+                            let a118 = 6u64;
+                            if nat_eq(a117, a118) {
                                 Str::lit("6")
                             } else {
-                                let a73 = v0;
-                                let a74 = 7u64;
-                                if nat_eq(a73, a74) {
+                                let a119 = v0;
+                                let a120 = 7u64;
+                                if nat_eq(a119, a120) {
                                     Str::lit("7")
                                 } else {
-                                    let a75 = v0;
-                                    let a76 = 8u64;
-                                    if nat_eq(a75, a76) {
+                                    let a121 = v0;
+                                    let a122 = 8u64;
+                                    if nat_eq(a121, a122) {
                                         Str::lit("8")
                                     } else {
                                         Str::lit("9")

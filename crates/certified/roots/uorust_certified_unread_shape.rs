@@ -857,126 +857,54 @@ pub fn format_int(p0: i64) -> Str {
 
 #[derive(Clone)]
 pub enum Adt0 {
-    C0,
-    C1,
-    C2(Option<u64>),
-    C3(u64),
-    C4(Adt1),
-    C5(Option<u64>),
-    C6,
-    C7,
-    C8,
-    C9,
-    C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
-    C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C0(Str, Adt1),
 }
 
 #[derive(Clone)]
 pub enum Adt1 {
-    C0(u64, u64),
+    C0(Str, std::rc::Rc<Adt2>),
 }
 
-pub fn f0(v0: Adt0) -> Adt0 {
-    let m1 = v0;
-    match m1 {
-        Adt0::C0 => {
-            let v1: Adt0 = Adt0::C0;
-            v1
-        }
-        Adt0::C1 => {
-            let v2: Adt0 = Adt0::C1;
-            v2
-        }
-        Adt0::C2(v3) => {
-            let v4: Adt0 = Adt0::C2(v3);
-            v4
-        }
-        Adt0::C3(v5) => {
-            let v6: Adt0 = Adt0::C3(v5);
-            v6
-        }
-        Adt0::C4(v7) => {
-            let v8: Adt0 = Adt0::C4(v7);
-            v8
-        }
-        Adt0::C5(v9) => {
-            let v10: Adt0 = Adt0::C5(v9);
-            v10
-        }
-        Adt0::C6 => {
-            let v11: Adt0 = Adt0::C6;
-            v11
-        }
-        Adt0::C7 => {
-            let v12: Adt0 = Adt0::C7;
-            v12
-        }
-        Adt0::C8 => {
-            let v13: Adt0 = Adt0::C8;
-            v13
-        }
-        Adt0::C9 => {
-            let v14: Adt0 = Adt0::C9;
-            v14
-        }
-        Adt0::C10 => {
-            let v15: Adt0 = Adt0::C10;
-            v15
-        }
-        Adt0::C11(v16) => {
-            let v17: Adt0 = Adt0::C11(v16);
-            v17
-        }
-        Adt0::C12(r2) => {
-            let v18 = (*r2).clone();
-            let v19: Adt0 = Adt0::C12(std::rc::Rc::new(v18));
-            v19
-        }
-        Adt0::C13(r3, r4) => {
-            let v20 = (*r3).clone();
-            let v21 = (*r4).clone();
-            let v22: Adt0 = Adt0::C13(std::rc::Rc::new(v20), std::rc::Rc::new(v21));
-            v22
-        }
-        Adt0::C14(r5) => {
-            let v23 = (*r5).clone();
-            let v24: Adt0 = Adt0::C14(std::rc::Rc::new(v23));
-            v24
-        }
-        Adt0::C15(v25) => {
-            let v26: Adt0 = Adt0::C15(v25);
-            v26
-        }
-        Adt0::C16(v27) => {
-            let v28: Adt0 = Adt0::C16(v27);
-            v28
-        }
-        Adt0::C17(r6, r7, _) => {
-            let v29 = (*r6).clone();
-            let v30 = (*r7).clone();
-            Adt0::C15(List::cons(v29, List::cons(v30, List::<Adt0>::nil())))
-        }
-        Adt0::C18(r8, v33) => {
-            let v32 = (*r8).clone();
-            let v34: Adt0 = Adt0::C18(std::rc::Rc::new(v32), v33);
-            v34
-        }
-        Adt0::C19(v35, r9) => {
-            let v36 = (*r9).clone();
-            let v37: Adt0 = Adt0::C19(v35, std::rc::Rc::new(v36));
-            v37
-        }
-    }
+#[derive(Clone)]
+pub enum Adt2 {
+    C0(bool, std::rc::Rc<Adt1>),
+    C1(std::rc::Rc<Adt1>),
+    C2(std::rc::Rc<Adt1>, Str),
+    C3(List<Adt1>, std::rc::Rc<Adt1>),
+    C4(std::rc::Rc<Adt1>),
+    C5(List<Adt1>),
+    C6(bool, Adt3),
+    C7,
 }
 
-pub fn run(p0: Adt0) -> Adt0 {
+#[derive(Clone)]
+pub enum Adt3 {
+    C0(List<Adt4>, Str),
+}
+
+#[derive(Clone)]
+pub enum Adt4 {
+    C0(Str, Adt5),
+}
+
+#[derive(Clone)]
+pub enum Adt5 {
+    C0,
+    C1(List<Adt6>),
+    C2,
+}
+
+#[derive(Clone)]
+pub enum Adt6 {
+    C0(Adt1),
+    C1(Str),
+}
+
+pub fn f0(v0: Str) -> Adt0 {
+    let v1: Adt1 = Adt1::C0(v0, std::rc::Rc::new(Adt2::C7));
+    Adt0::C0(Str::lit(""), v1)
+}
+
+pub fn run(p0: Str) -> Adt0 {
     f0(p0)
 }

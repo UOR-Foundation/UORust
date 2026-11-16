@@ -862,13 +862,21 @@ pub enum Adt0 {
 
 pub fn f0(v0: Str, v1: Str) -> Adt0 {
     Adt0::C0(v0.clone(), false, {
-        let a1 = List::cons(v0.clone(), List::cons(Str::lit(" "), List::cons(v1.clone(), List::<Str>::nil())));
-        let a2 = Str::lit("");
-        join(a1, a2)
-    }, {
-        let a3 = List::cons(Str::lit("uorust crate "), List::cons(v0, List::cons(Str::lit("@"), List::cons(v1, List::<Str>::nil()))));
+        let a3 = {
+            let a1 = List::cons(v0.clone(), List::<Str>::nil());
+            let a2 = List::cons(Str::lit(" "), List::cons(v1.clone(), List::<Str>::nil()));
+            append_list(a1, a2)
+        };
         let a4 = Str::lit("");
         join(a3, a4)
+    }, {
+        let a7 = {
+            let a5 = List::cons(Str::lit("uorust crate "), List::cons(v0, List::<Str>::nil()));
+            let a6 = List::cons(Str::lit("@"), List::cons(v1, List::<Str>::nil()));
+            append_list(a5, a6)
+        };
+        let a8 = Str::lit("");
+        join(a7, a8)
     })
 }
 

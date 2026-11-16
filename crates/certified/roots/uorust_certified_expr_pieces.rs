@@ -883,20 +883,32 @@ pub fn f0(v0: Adt0) -> List<Adt2> {
         Adt0::C1(_, _) => {
             List::<Adt2>::nil()
         }
-        Adt0::C2(r4, r5, r6) => {
-            let v4 = (*r4).clone();
-            let v5 = (*r5).clone();
-            let v6 = (*r6).clone();
-            List::cons(Adt2::C0(Str::lit("(if ")), List::cons(Adt2::C1(v4), List::cons(Adt2::C0(Str::lit(" then ")), List::cons(Adt2::C1(v5), List::cons(Adt2::C0(Str::lit(" else ")), List::cons(Adt2::C1(v6), List::cons(Adt2::C0(Str::lit(")")), List::<Adt2>::nil())))))))
+        Adt0::C2(r12, r13, r14) => {
+            let v4 = (*r12).clone();
+            let v5 = (*r13).clone();
+            let v6 = (*r14).clone();
+            let a4 = List::cons(Adt2::C0(Str::lit("(if ")), List::cons(Adt2::C1(v4), List::cons(Adt2::C0(Str::lit(" then ")), List::<Adt2>::nil())));
+            let a5 = {
+                let a2 = List::cons(Adt2::C1(v5), List::cons(Adt2::C0(Str::lit(" else ")), List::<Adt2>::nil()));
+                let a3 = List::cons(Adt2::C1(v6), List::cons(Adt2::C0(Str::lit(")")), List::<Adt2>::nil()));
+                append_list(a2, a3)
+            };
+            append_list(a4, a5)
         }
-        Adt0::C3(v7, v8, r7, r8) => {
-            let v9 = (*r7).clone();
-            let v10 = (*r8).clone();
-            List::cons(Adt2::C0({
-                let a2 = List::cons(Str::lit("(let "), List::cons(v7, List::cons(Str::lit(" : "), List::cons(v8, List::cons(Str::lit(" := "), List::<Str>::nil())))));
-                let a3 = Str::lit("");
-                join(a2, a3)
-            }), List::cons(Adt2::C1(v9), List::cons(Adt2::C0(Str::lit("; ")), List::cons(Adt2::C1(v10), List::cons(Adt2::C0(Str::lit(")")), List::<Adt2>::nil())))))
+        Adt0::C3(v7, v8, r15, r16) => {
+            let v9 = (*r15).clone();
+            let v10 = (*r16).clone();
+            let a10 = List::cons(Adt2::C0({
+                let a8 = {
+                    let a6 = List::cons(Str::lit("(let "), List::cons(v7, List::<Str>::nil()));
+                    let a7 = List::cons(Str::lit(" : "), List::cons(v8, List::cons(Str::lit(" := "), List::<Str>::nil())));
+                    append_list(a6, a7)
+                };
+                let a9 = Str::lit("");
+                join(a8, a9)
+            }), List::cons(Adt2::C1(v9), List::<Adt2>::nil()));
+            let a11 = List::cons(Adt2::C0(Str::lit("; ")), List::cons(Adt2::C1(v10), List::cons(Adt2::C0(Str::lit(")")), List::<Adt2>::nil())));
+            append_list(a10, a11)
         }
     }
 }

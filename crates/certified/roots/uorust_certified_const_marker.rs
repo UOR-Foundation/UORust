@@ -856,14 +856,18 @@ pub fn format_int(p0: i64) -> Str {
 }
 
 pub fn f0(v0: Str, v1: Option<Str>) -> Str {
-    let a1 = List::cons(Str::lit("#"), List::cons(f1(v1), List::cons(Str::lit("_"), List::cons(v0, List::<Str>::nil()))));
-    let a2 = Str::lit("");
-    join(a1, a2)
+    let a3 = {
+        let a1 = List::cons(Str::lit("#"), List::cons(f1(v1), List::<Str>::nil()));
+        let a2 = List::cons(Str::lit("_"), List::cons(v0, List::<Str>::nil()));
+        append_list(a1, a2)
+    };
+    let a4 = Str::lit("");
+    join(a3, a4)
 }
 
 pub fn f1(v0: Option<Str>) -> Str {
-    let m3 = v0;
-    match m3 {
+    let m5 = v0;
+    match m5 {
         None => {
             Str::lit("")
         }

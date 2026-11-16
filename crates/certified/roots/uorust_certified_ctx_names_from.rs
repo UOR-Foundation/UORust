@@ -868,20 +868,21 @@ pub enum Adt1 {
     C3(u64),
     C4(Adt2),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt1>),
-    C13(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
-    C14(std::rc::Rc<Adt1>),
-    C15(List<Adt1>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt1>),
+    C14(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
+    C15(std::rc::Rc<Adt1>),
     C16(List<Adt1>),
-    C17(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
-    C18(std::rc::Rc<Adt1>, bool),
-    C19(List<Adt1>, std::rc::Rc<Adt1>),
+    C17(List<Adt1>),
+    C18(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
+    C19(std::rc::Rc<Adt1>, bool),
+    C20(List<Adt1>, std::rc::Rc<Adt1>),
 }
 
 #[derive(Clone)]
@@ -1252,7 +1253,7 @@ pub enum Adt56 {
 
 #[derive(Clone)]
 pub enum Adt57 {
-    C0(List<Adt58>, List<Adt59>, List<Adt4>, List<Adt60>, List<List<Str>>, List<Adt58>, List<Adt58>, bool, List<Adt61>, List<Adt62>, List<Adt63>, List<Adt65>),
+    C0(List<Adt58>, List<Adt59>, List<Adt4>, List<Adt60>, List<List<Str>>, List<Adt58>, List<Adt58>, bool, List<Adt61>, List<Adt62>, List<Adt63>, List<Adt65>, List<Adt4>),
 }
 
 #[derive(Clone)]

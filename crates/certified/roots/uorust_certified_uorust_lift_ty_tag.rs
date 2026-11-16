@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -884,149 +885,9 @@ pub enum Adt1 {
     C0(u64, u64),
 }
 
-pub fn f0(v0: Adt0, v1: Adt0) -> bool {
-    let a1 = f1(v0);
-    let a2 = f1(v1);
-    equal(a1, a2)
-}
-
-pub fn f1(v0: Adt0) -> Str {
-    let m3 = v0;
-    match m3 {
-        Adt0::C0 => {
-            Str::lit("Unit")
-        }
-        Adt0::C1 => {
-            Str::lit("Bool")
-        }
-        Adt0::C2(_) => {
-            Str::lit("Nat")
-        }
-        Adt0::C3(_) => {
-            Str::lit("Int64")
-        }
-        Adt0::C4(_) => {
-            Str::lit("Nat")
-        }
-        Adt0::C5(_) => {
-            Str::lit("Nat")
-        }
-        Adt0::C6 => {
-            Str::lit("String")
-        }
-        Adt0::C7 => {
-            Str::lit("String")
-        }
-        Adt0::C8 => {
-            Str::lit("Nat")
-        }
-        Adt0::C9 => {
-            let a4 = List::cons(f2(), List::cons(Str::lit("::ParseIntError"), List::<Str>::nil()));
-            let a5 = Str::lit("");
-            join(a4, a5)
-        }
-        Adt0::C10 => {
-            let a6 = List::cons(f2(), List::cons(Str::lit("::FilePath"), List::<Str>::nil()));
-            let a7 = Str::lit("");
-            join(a6, a7)
-        }
-        Adt0::C11(v5) => {
-            v5
-        }
-        Adt0::C12(r30) => {
-            let v6 = (*r30).clone();
-            let a8 = List::cons(Str::lit("(Option "), List::cons(f1(v6), List::cons(Str::lit(")"), List::<Str>::nil())));
-            let a9 = Str::lit("");
-            join(a8, a9)
-        }
-        Adt0::C13(r31, r32) => {
-            let v7 = (*r31).clone();
-            let v8 = (*r32).clone();
-            let a10 = List::cons(Str::lit("(Result "), List::cons(f1(v7), List::cons(Str::lit(" "), List::cons(f1(v8), List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a11 = Str::lit("");
-            join(a10, a11)
-        }
-        Adt0::C14(r33) => {
-            let v9 = (*r33).clone();
-            let a12 = List::cons(Str::lit("(List "), List::cons(f1(v9), List::cons(Str::lit(")"), List::<Str>::nil())));
-            let a13 = Str::lit("");
-            join(a12, a13)
-        }
-        Adt0::C15(v10) => {
-            let a16 = List::cons(Str::lit("Tuple"), List::cons({
-                let a14 = f3(v10);
-                let a15 = Str::lit("");
-                join(a14, a15)
-            }, List::<Str>::nil()));
-            let a17 = Str::lit("");
-            join(a16, a17)
-        }
-        Adt0::C16(v11) => {
-            let a20 = List::cons(Str::lit("("), List::cons({
-                let a18 = f4(v11);
-                let a19 = Str::lit(" * ");
-                join(a18, a19)
-            }, List::cons(Str::lit(")"), List::<Str>::nil())));
-            let a21 = Str::lit("");
-            join(a20, a21)
-        }
-        Adt0::C17(r34, r35, _) => {
-            let v12 = (*r34).clone();
-            let v13 = (*r35).clone();
-            let a22 = List::cons(Str::lit("(List Tuple"), List::cons(f5(v12), List::cons(f5(v13), List::cons(Str::lit(")"), List::<Str>::nil()))));
-            let a23 = Str::lit("");
-            join(a22, a23)
-        }
-        Adt0::C18(r36, _) => {
-            let v15 = (*r36).clone();
-            let a24 = List::cons(Str::lit("(List "), List::cons(f1(v15), List::cons(Str::lit(")"), List::<Str>::nil())));
-            let a25 = Str::lit("");
-            join(a24, a25)
-        }
-        Adt0::C19(v17, r37) => {
-            let v18 = (*r37).clone();
-            let a28 = List::cons(Str::lit("(Fn ("), List::cons({
-                let a26 = f6(v17);
-                let a27 = Str::lit(" ");
-                join(a26, a27)
-            }, List::cons(Str::lit(") "), List::cons(f1(v18), List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a29 = Str::lit("");
-            join(a28, a29)
-        }
-    }
-}
-
-pub fn f2() -> Str {
-    Str::lit("Prelude")
-}
-
-pub fn f3(v0: List<Adt0>) -> List<Str> {
-    let m38 = v0;
-    match m38.uncons() {
-        None => {
-            List::<Str>::nil()
-        }
-        Some((v1, v2)) => {
-            List::cons(f5(v1), f3(v2))
-        }
-    }
-}
-
-pub fn f4(v0: List<Adt0>) -> List<Str> {
-    let m39 = v0;
-    match m39.uncons() {
-        None => {
-            List::<Str>::nil()
-        }
-        Some((v1, v2)) => {
-            List::cons(f1(v1), f4(v2))
-        }
-    }
-}
-
-pub fn f5(v0: Adt0) -> Str {
-    let m40 = v0;
-    match m40 {
+pub fn f0(v0: Adt0) -> Str {
+    let m1 = v0;
+    match m1 {
         Adt0::C0 => {
             Str::lit("Unit")
         }
@@ -1043,137 +904,144 @@ pub fn f5(v0: Adt0) -> Str {
             Str::lit("Nat")
         }
         Adt0::C5(_) => {
-            Str::lit("Nat")
+            f1()
         }
-        Adt0::C6 => {
-            Str::lit("String")
+        Adt0::C6(_) => {
+            Str::lit("Nat")
         }
         Adt0::C7 => {
             Str::lit("String")
         }
         Adt0::C8 => {
-            Str::lit("Nat")
+            Str::lit("String")
         }
         Adt0::C9 => {
-            Str::lit("ParseIntError")
+            Str::lit("Nat")
         }
         Adt0::C10 => {
+            Str::lit("ParseIntError")
+        }
+        Adt0::C11 => {
             Str::lit("FilePath")
         }
-        Adt0::C11(v5) => {
-            v5
+        Adt0::C12(v6) => {
+            v6
         }
-        Adt0::C12(r63) => {
-            let v6 = (*r63).clone();
-            let a41 = List::cons(Str::lit("Option"), List::cons(f5(v6), List::<Str>::nil()));
-            let a42 = Str::lit("");
-            join(a41, a42)
+        Adt0::C13(r30) => {
+            let v7 = (*r30).clone();
+            let a2 = List::cons(Str::lit("Option"), List::cons(f0(v7), List::<Str>::nil()));
+            let a3 = Str::lit("");
+            join(a2, a3)
         }
-        Adt0::C13(r64, r65) => {
-            let v7 = (*r64).clone();
-            let v8 = (*r65).clone();
-            let a43 = List::cons(Str::lit("Result"), List::cons(f5(v7), List::cons(f5(v8), List::<Str>::nil())));
-            let a44 = Str::lit("");
-            join(a43, a44)
+        Adt0::C14(r31, r32) => {
+            let v8 = (*r31).clone();
+            let v9 = (*r32).clone();
+            let a6 = {
+                let a4 = List::cons(Str::lit("Result"), List::<Str>::nil());
+                let a5 = List::cons(f0(v8), List::cons(f0(v9), List::<Str>::nil()));
+                append_list(a4, a5)
+            };
+            let a7 = Str::lit("");
+            join(a6, a7)
         }
-        Adt0::C14(r66) => {
-            let v9 = (*r66).clone();
-            let a45 = List::cons(Str::lit("List"), List::cons(f5(v9), List::<Str>::nil()));
-            let a46 = Str::lit("");
-            join(a45, a46)
-        }
-        Adt0::C15(v10) => {
-            let a49 = List::cons(Str::lit("Tuple"), List::cons({
-                let a47 = f7(v10);
-                let a48 = Str::lit("");
-                join(a47, a48)
-            }, List::<Str>::nil()));
-            let a50 = Str::lit("");
-            join(a49, a50)
+        Adt0::C15(r33) => {
+            let v10 = (*r33).clone();
+            let a8 = List::cons(Str::lit("List"), List::cons(f0(v10), List::<Str>::nil()));
+            let a9 = Str::lit("");
+            join(a8, a9)
         }
         Adt0::C16(v11) => {
-            let a53 = List::cons(Str::lit("Pair"), List::cons({
-                let a51 = f8(v11);
-                let a52 = Str::lit("");
-                join(a51, a52)
+            let a12 = List::cons(Str::lit("Tuple"), List::cons({
+                let a10 = f2(v11);
+                let a11 = Str::lit("");
+                join(a10, a11)
             }, List::<Str>::nil()));
-            let a54 = Str::lit("");
-            join(a53, a54)
+            let a13 = Str::lit("");
+            join(a12, a13)
         }
-        Adt0::C17(r67, r68, _) => {
-            let v12 = (*r67).clone();
-            let v13 = (*r68).clone();
-            let a55 = List::cons(Str::lit("ListTuple"), List::cons(f5(v12), List::cons(f5(v13), List::<Str>::nil())));
-            let a56 = Str::lit("");
-            join(a55, a56)
+        Adt0::C17(v12) => {
+            let a16 = List::cons(Str::lit("Pair"), List::cons({
+                let a14 = f3(v12);
+                let a15 = Str::lit("");
+                join(a14, a15)
+            }, List::<Str>::nil()));
+            let a17 = Str::lit("");
+            join(a16, a17)
         }
-        Adt0::C18(r69, _) => {
-            let v15 = (*r69).clone();
-            let a57 = List::cons(Str::lit("List"), List::cons(f5(v15), List::<Str>::nil()));
-            let a58 = Str::lit("");
-            join(a57, a58)
+        Adt0::C18(r34, r35, _) => {
+            let v13 = (*r34).clone();
+            let v14 = (*r35).clone();
+            let a20 = {
+                let a18 = List::cons(Str::lit("ListTuple"), List::<Str>::nil());
+                let a19 = List::cons(f0(v13), List::cons(f0(v14), List::<Str>::nil()));
+                append_list(a18, a19)
+            };
+            let a21 = Str::lit("");
+            join(a20, a21)
         }
-        Adt0::C19(v17, r70) => {
-            let v18 = (*r70).clone();
-            let a61 = List::cons(Str::lit("Fn"), List::cons({
-                let a59 = f9(v17);
-                let a60 = Str::lit("");
-                join(a59, a60)
-            }, List::cons(Str::lit("To"), List::cons(f5(v18), List::<Str>::nil()))));
-            let a62 = Str::lit("");
-            join(a61, a62)
+        Adt0::C19(r36, _) => {
+            let v16 = (*r36).clone();
+            let a22 = List::cons(Str::lit("List"), List::cons(f0(v16), List::<Str>::nil()));
+            let a23 = Str::lit("");
+            join(a22, a23)
+        }
+        Adt0::C20(v18, r37) => {
+            let v19 = (*r37).clone();
+            let a28 = {
+                let a26 = List::cons(Str::lit("Fn"), List::cons({
+                    let a24 = f4(v18);
+                    let a25 = Str::lit("");
+                    join(a24, a25)
+                }, List::<Str>::nil()));
+                let a27 = List::cons(Str::lit("To"), List::cons(f0(v19), List::<Str>::nil()));
+                append_list(a26, a27)
+            };
+            let a29 = Str::lit("");
+            join(a28, a29)
         }
     }
 }
 
-pub fn f6(v0: List<Adt0>) -> List<Str> {
-    let m71 = v0;
-    match m71.uncons() {
+pub fn f1() -> Str {
+    Str::lit("LexLeanInt")
+}
+
+pub fn f2(v0: List<Adt0>) -> List<Str> {
+    let m38 = v0;
+    match m38.uncons() {
         None => {
             List::<Str>::nil()
         }
         Some((v1, v2)) => {
-            List::cons(f1(v1), f6(v2))
+            List::cons(f0(v1), f2(v2))
         }
     }
 }
 
-pub fn f7(v0: List<Adt0>) -> List<Str> {
-    let m72 = v0;
-    match m72.uncons() {
+pub fn f3(v0: List<Adt0>) -> List<Str> {
+    let m39 = v0;
+    match m39.uncons() {
         None => {
             List::<Str>::nil()
         }
         Some((v1, v2)) => {
-            List::cons(f5(v1), f7(v2))
+            List::cons(f0(v1), f3(v2))
         }
     }
 }
 
-pub fn f8(v0: List<Adt0>) -> List<Str> {
-    let m73 = v0;
-    match m73.uncons() {
+pub fn f4(v0: List<Adt0>) -> List<Str> {
+    let m40 = v0;
+    match m40.uncons() {
         None => {
             List::<Str>::nil()
         }
         Some((v1, v2)) => {
-            List::cons(f5(v1), f8(v2))
+            List::cons(f0(v1), f4(v2))
         }
     }
 }
 
-pub fn f9(v0: List<Adt0>) -> List<Str> {
-    let m74 = v0;
-    match m74.uncons() {
-        None => {
-            List::<Str>::nil()
-        }
-        Some((v1, v2)) => {
-            List::cons(f5(v1), f9(v2))
-        }
-    }
-}
-
-pub fn run(p0: Adt0, p1: Adt0) -> bool {
-    f0(p0, p1)
+pub fn run(p0: Adt0) -> Str {
+    f0(p0)
 }

@@ -882,9 +882,13 @@ pub fn f1(v0: List<Adt0>) -> List<Str> {
                 }
             };
             List::cons({
-                let a4 = List::cons(v3, List::cons(Str::lit(" : "), List::cons(v4, List::<Str>::nil())));
-                let a5 = Str::lit("");
-                join(a4, a5)
+                let a6 = {
+                    let a4 = List::cons(v3, List::<Str>::nil());
+                    let a5 = List::cons(Str::lit(" : "), List::cons(v4, List::<Str>::nil()));
+                    append_list(a4, a5)
+                };
+                let a7 = Str::lit("");
+                join(a6, a7)
             }, f1(v2))
         }
     }

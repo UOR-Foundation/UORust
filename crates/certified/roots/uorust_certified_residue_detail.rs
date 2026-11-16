@@ -913,240 +913,284 @@ pub fn f0(v0: Adt0) -> R<Str> {
             Ok(Str::lit("the body has statements other than let"))
         }
         Adt0::C3(v3) => {
-            let a6 = List::cons(Str::lit("integer operator "), List::cons(v3, List::cons(Str::lit(" wraps or panics depending on the build profile"), List::<Str>::nil())));
-            let a7 = Str::lit("");
-            Ok(join(a6, a7))
+            let a8 = {
+                let a6 = List::cons(Str::lit("integer operator "), List::<Str>::nil());
+                let a7 = List::cons(v3, List::cons(Str::lit(" wraps or panics depending on the build profile"), List::<Str>::nil()));
+                append_list(a6, a7)
+            };
+            let a9 = Str::lit("");
+            Ok(join(a8, a9))
         }
         Adt0::C4(v4, v5) => {
             let v6: List<Str> = f1(v5)?;
-            let a10 = List::cons(Str::lit("usize "), List::cons(v4, List::cons(Str::lit(" wraps or panics where its value leaves the pointer width: "), List::cons({
-                let a8 = v6;
-                let a9 = Str::lit(", ");
-                join(a8, a9)
-            }, List::<Str>::nil()))));
-            let a11 = Str::lit("");
-            Ok(join(a10, a11))
-        }
-        Adt0::C5(v7) => {
-            let a12 = List::cons(v7, List::cons(Str::lit(" depends on an integer width LexLean does not fix"), List::<Str>::nil()));
-            let a13 = Str::lit("");
-            Ok(join(a12, a13))
-        }
-        Adt0::C6(v8) => {
-            let a14 = List::cons(Str::lit("expression form outside the lift: "), List::cons(v8, List::<Str>::nil()));
+            let a14 = {
+                let a12 = List::cons(Str::lit("usize "), List::cons(v4, List::<Str>::nil()));
+                let a13 = List::cons(Str::lit(" wraps or panics where its value leaves the pointer width: "), List::cons({
+                    let a10 = v6;
+                    let a11 = Str::lit(", ");
+                    join(a10, a11)
+                }, List::<Str>::nil()));
+                append_list(a12, a13)
+            };
             let a15 = Str::lit("");
             Ok(join(a14, a15))
         }
-        Adt0::C7(v9) => {
-            let a16 = List::cons(Str::lit("calls "), List::cons(v9, List::cons(Str::lit(", which is not lifted"), List::<Str>::nil())));
+        Adt0::C5(v7) => {
+            let a16 = List::cons(v7, List::cons(Str::lit(" depends on an integer width LexLean does not fix"), List::<Str>::nil()));
             let a17 = Str::lit("");
             Ok(join(a16, a17))
         }
-        Adt0::C8(v10) => {
-            let a18 = List::cons(Str::lit("another function of the crate is also named "), List::cons(v10, List::<Str>::nil()));
+        Adt0::C6(v8) => {
+            let a18 = List::cons(Str::lit("expression form outside the lift: "), List::cons(v8, List::<Str>::nil()));
             let a19 = Str::lit("");
             Ok(join(a18, a19))
         }
-        Adt0::C9(v11) => {
-            let a20 = List::cons(Str::lit("mir::"), List::cons(v11, List::<Str>::nil()));
-            let a21 = Str::lit("");
-            Ok(join(a20, a21))
-        }
-        Adt0::C10(v12) => {
-            let a22 = List::cons(Str::lit("mir::Memory: "), List::cons(f2(v12)?, List::<Str>::nil()));
+        Adt0::C7(v9) => {
+            let a22 = {
+                let a20 = List::cons(Str::lit("calls "), List::<Str>::nil());
+                let a21 = List::cons(v9, List::cons(Str::lit(", which is not lifted"), List::<Str>::nil()));
+                append_list(a20, a21)
+            };
             let a23 = Str::lit("");
             Ok(join(a22, a23))
+        }
+        Adt0::C8(v10) => {
+            let a24 = List::cons(Str::lit("another function of the crate is also named "), List::cons(v10, List::<Str>::nil()));
+            let a25 = Str::lit("");
+            Ok(join(a24, a25))
+        }
+        Adt0::C9(v11) => {
+            let a26 = List::cons(Str::lit("mir::"), List::cons(v11, List::<Str>::nil()));
+            let a27 = Str::lit("");
+            Ok(join(a26, a27))
+        }
+        Adt0::C10(v12) => {
+            let a28 = List::cons(Str::lit("mir::Memory: "), List::cons(f2(v12)?, List::<Str>::nil()));
+            let a29 = Str::lit("");
+            Ok(join(a28, a29))
         }
     }
 }
 
 pub fn f1(v0: List<Adt1>) -> R<List<Str>> {
-    let m24 = v0;
-    match m24.uncons() {
+    let m30 = v0;
+    match m30.uncons() {
         None => {
             Ok(List::<Str>::nil())
         }
         Some((v1, v2)) => {
             let v3: u64 = match v1.clone() {
-                Adt1::C0(h25, _) => {
-                    h25
+                Adt1::C0(h31, _) => {
+                    h31
                 }
             };
             let v4: List<Str> = match v1 {
-                Adt1::C0(_, h26) => {
-                    h26
+                Adt1::C0(_, h32) => {
+                    h32
                 }
             };
             Ok(List::cons({
-                let a29 = List::cons(Str::lit("past 2^"), List::cons(f3(v3)?, List::cons(Str::lit(" on "), List::cons({
-                    let a27 = v4;
-                    let a28 = Str::lit(" and ");
-                    join(a27, a28)
-                }, List::<Str>::nil()))));
-                let a30 = Str::lit("");
-                join(a29, a30)
+                let a37 = {
+                    let a35 = List::cons(Str::lit("past 2^"), List::cons(f3(v3)?, List::<Str>::nil()));
+                    let a36 = List::cons(Str::lit(" on "), List::cons({
+                        let a33 = v4;
+                        let a34 = Str::lit(" and ");
+                        join(a33, a34)
+                    }, List::<Str>::nil()));
+                    append_list(a35, a36)
+                };
+                let a38 = Str::lit("");
+                join(a37, a38)
             }, f1(v2)?))
         }
     }
 }
 
 pub fn f2(v0: Adt2) -> R<Str> {
-    let m31 = v0;
-    match m31 {
+    let m39 = v0;
+    match m39 {
         Adt2::C0(v1, v2) => {
-            let a32 = List::cons(Str::lit("`"), List::cons(v1, List::cons(Str::lit("` is not a number of bits in `"), List::cons(v2, List::cons(Str::lit("`"), List::<Str>::nil())))));
-            let a33 = Str::lit("");
-            Ok(join(a32, a33))
+            let a42 = {
+                let a40 = List::cons(Str::lit("`"), List::cons(v1, List::<Str>::nil()));
+                let a41 = List::cons(Str::lit("` is not a number of bits in `"), List::cons(v2, List::cons(Str::lit("`"), List::<Str>::nil())));
+                append_list(a40, a41)
+            };
+            let a43 = Str::lit("");
+            Ok(join(a42, a43))
         }
         Adt2::C1(v3) => {
-            let a34 = List::cons(Str::lit("a pointer without a size in `"), List::cons(v3, List::cons(Str::lit("`"), List::<Str>::nil())));
-            let a35 = Str::lit("");
-            Ok(join(a34, a35))
+            let a46 = {
+                let a44 = List::cons(Str::lit("a pointer without a size in `"), List::<Str>::nil());
+                let a45 = List::cons(v3, List::cons(Str::lit("`"), List::<Str>::nil()));
+                append_list(a44, a45)
+            };
+            let a47 = Str::lit("");
+            Ok(join(a46, a47))
         }
         Adt2::C2(v4) => {
-            let a36 = List::cons(Str::lit("a width without an alignment in `"), List::cons(v4, List::cons(Str::lit("`"), List::<Str>::nil())));
-            let a37 = Str::lit("");
-            Ok(join(a36, a37))
+            let a50 = {
+                let a48 = List::cons(Str::lit("a width without an alignment in `"), List::<Str>::nil());
+                let a49 = List::cons(v4, List::cons(Str::lit("`"), List::<Str>::nil()));
+                append_list(a48, a49)
+            };
+            let a51 = Str::lit("");
+            Ok(join(a50, a51))
         }
         Adt2::C3 => {
             Ok(Str::lit("a data layout without its triple"))
         }
         Adt2::C4(v5) => {
-            let a38 = List::cons(Str::lit("the layout of "), List::cons(v5, List::cons(Str::lit(", with no data layout recorded for the target"), List::<Str>::nil())));
-            let a39 = Str::lit("");
-            Ok(join(a38, a39))
+            let a54 = {
+                let a52 = List::cons(Str::lit("the layout of "), List::<Str>::nil());
+                let a53 = List::cons(v5, List::cons(Str::lit(", with no data layout recorded for the target"), List::<Str>::nil()));
+                append_list(a52, a53)
+            };
+            let a55 = Str::lit("");
+            Ok(join(a54, a55))
         }
         Adt2::C5(v6, v7) => {
-            let a40 = List::cons(Str::lit("the layout of "), List::cons(v6, List::cons(Str::lit(", which the data layout of "), List::cons(v7, List::cons(Str::lit(" does not state"), List::<Str>::nil())))));
-            let a41 = Str::lit("");
-            Ok(join(a40, a41))
+            let a58 = {
+                let a56 = List::cons(Str::lit("the layout of "), List::cons(v6, List::<Str>::nil()));
+                let a57 = List::cons(Str::lit(", which the data layout of "), List::cons(v7, List::cons(Str::lit(" does not state"), List::<Str>::nil())));
+                append_list(a56, a57)
+            };
+            let a59 = Str::lit("");
+            Ok(join(a58, a59))
         }
         Adt2::C6(v8, v9) => {
-            let a44 = List::cons(Str::lit("the layout of "), List::cons(v8, List::cons(Str::lit(", which differs by target: "), List::cons({
-                let a42 = f4(v9)?;
-                let a43 = Str::lit(", ");
-                join(a42, a43)
-            }, List::<Str>::nil()))));
-            let a45 = Str::lit("");
-            Ok(join(a44, a45))
+            let a64 = {
+                let a62 = List::cons(Str::lit("the layout of "), List::cons(v8, List::<Str>::nil()));
+                let a63 = List::cons(Str::lit(", which differs by target: "), List::cons({
+                    let a60 = f4(v9)?;
+                    let a61 = Str::lit(", ");
+                    join(a60, a61)
+                }, List::<Str>::nil()));
+                append_list(a62, a63)
+            };
+            let a65 = Str::lit("");
+            Ok(join(a64, a65))
         }
     }
 }
 
 pub fn f3(v0: u64) -> R<Str> {
     Ok(f5({
-        let a46 = v0;
-        let a47 = 1u64;
-        nat_add(a46, a47)?
+        let a66 = v0;
+        let a67 = 1u64;
+        nat_add(a66, a67)?
     }, v0))
 }
 
 pub fn f4(v0: List<Adt3>) -> R<List<Str>> {
-    let m48 = v0;
-    match m48.uncons() {
+    let m68 = v0;
+    match m68.uncons() {
         None => {
             Ok(List::<Str>::nil())
         }
         Some((v1, v2)) => {
             let v3: Str = match v1.clone() {
-                Adt3::C0(h49, _) => {
-                    h49
+                Adt3::C0(h69, _) => {
+                    h69
                 }
             };
             let v4: Adt4 = match v1 {
-                Adt3::C0(_, h50) => {
-                    h50
+                Adt3::C0(_, h70) => {
+                    h70
                 }
             };
             Ok(List::cons({
-                let a53 = List::cons(Str::lit("size "), List::cons(f3(match v4.clone() {
-                    Adt4::C0(h51, _) => {
-                        h51
-                    }
-                })?, List::cons(Str::lit(" align "), List::cons(f3(match v4 {
-                    Adt4::C0(_, h52) => {
-                        h52
-                    }
-                })?, List::cons(Str::lit(" on "), List::cons(v3, List::<Str>::nil()))))));
-                let a54 = Str::lit("");
-                join(a53, a54)
+                let a75 = {
+                    let a73 = List::cons(Str::lit("size "), List::cons(f3(match v4.clone() {
+                        Adt4::C0(h71, _) => {
+                            h71
+                        }
+                    })?, List::cons(Str::lit(" align "), List::<Str>::nil())));
+                    let a74 = List::cons(f3(match v4 {
+                        Adt4::C0(_, h72) => {
+                            h72
+                        }
+                    })?, List::cons(Str::lit(" on "), List::cons(v3, List::<Str>::nil())));
+                    append_list(a73, a74)
+                };
+                let a76 = Str::lit("");
+                join(a75, a76)
             }, f4(v2)?))
         }
     }
 }
 
 pub fn f5(v0: u64, v1: u64) -> Str {
-    let m55 = v0;
-    if m55 == 0 {
+    let m77 = v0;
+    if m77 == 0 {
         Str::lit("")
     } else {
-        let v2 = m55 - 1;
-        let a56 = v1;
-        let a57 = 10u64;
-        if nat_lt(a56, a57) {
+        let v2 = m77 - 1;
+        let a78 = v1;
+        let a79 = 10u64;
+        if nat_lt(a78, a79) {
             f6(v1)
         } else {
-            let a64 = List::cons(f5(v2, {
-                let a58 = v1;
-                let a59 = 10u64;
-                let a60 = 0u64;
-                nat_quot(a58, a59, a60)
+            let a86 = List::cons(f5(v2, {
+                let a80 = v1;
+                let a81 = 10u64;
+                let a82 = 0u64;
+                nat_quot(a80, a81, a82)
             }), List::cons(f6({
-                let a61 = v1;
-                let a62 = 10u64;
-                let a63 = 0u64;
-                nat_rem(a61, a62, a63)
+                let a83 = v1;
+                let a84 = 10u64;
+                let a85 = 0u64;
+                nat_rem(a83, a84, a85)
             }), List::<Str>::nil()));
-            let a65 = Str::lit("");
-            join(a64, a65)
+            let a87 = Str::lit("");
+            join(a86, a87)
         }
     }
 }
 
 pub fn f6(v0: u64) -> Str {
-    let a66 = v0;
-    let a67 = 0u64;
-    if nat_eq(a66, a67) {
+    let a88 = v0;
+    let a89 = 0u64;
+    if nat_eq(a88, a89) {
         Str::lit("0")
     } else {
-        let a68 = v0;
-        let a69 = 1u64;
-        if nat_eq(a68, a69) {
+        let a90 = v0;
+        let a91 = 1u64;
+        if nat_eq(a90, a91) {
             Str::lit("1")
         } else {
-            let a70 = v0;
-            let a71 = 2u64;
-            if nat_eq(a70, a71) {
+            let a92 = v0;
+            let a93 = 2u64;
+            if nat_eq(a92, a93) {
                 Str::lit("2")
             } else {
-                let a72 = v0;
-                let a73 = 3u64;
-                if nat_eq(a72, a73) {
+                let a94 = v0;
+                let a95 = 3u64;
+                if nat_eq(a94, a95) {
                     Str::lit("3")
                 } else {
-                    let a74 = v0;
-                    let a75 = 4u64;
-                    if nat_eq(a74, a75) {
+                    let a96 = v0;
+                    let a97 = 4u64;
+                    if nat_eq(a96, a97) {
                         Str::lit("4")
                     } else {
-                        let a76 = v0;
-                        let a77 = 5u64;
-                        if nat_eq(a76, a77) {
+                        let a98 = v0;
+                        let a99 = 5u64;
+                        if nat_eq(a98, a99) {
                             Str::lit("5")
                         } else {
-                            let a78 = v0;
-                            let a79 = 6u64;
-                            if nat_eq(a78, a79) {
+                            let a100 = v0;
+                            let a101 = 6u64;
+                            if nat_eq(a100, a101) {
                                 Str::lit("6")
                             } else {
-                                let a80 = v0;
-                                let a81 = 7u64;
-                                if nat_eq(a80, a81) {
+                                let a102 = v0;
+                                let a103 = 7u64;
+                                if nat_eq(a102, a103) {
                                     Str::lit("7")
                                 } else {
-                                    let a82 = v0;
-                                    let a83 = 8u64;
-                                    if nat_eq(a82, a83) {
+                                    let a104 = v0;
+                                    let a105 = 8u64;
+                                    if nat_eq(a104, a105) {
                                         Str::lit("8")
                                     } else {
                                         Str::lit("9")
