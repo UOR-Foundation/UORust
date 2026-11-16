@@ -47,6 +47,8 @@ inductive{
   constructors: [{name: Unreadable, fields: []}, {name: NotANumber, fields: []}]
 }
 
+structure{name: Fixed, type_parameters: [], parameters: [], fields: [{name: item0, type: Nat}]}
+
 structure{
   name: Labelled,
   type_parameters: [],
@@ -2773,6 +2775,13 @@ definition{
   parameters: [readings : (List Nat), floor : Nat],
   result: (List Nat),
   body: (let out : (List Nat) := (nil Nat); (let state2 : (List Nat) := (atLeastLoop1 readings out floor); state2))
+}
+
+definition{
+  name: fixedSensorRead,
+  parameters: [selfValue : Fixed],
+  result: Nat,
+  body: (project selfValue item0)
 }
 
 definition{

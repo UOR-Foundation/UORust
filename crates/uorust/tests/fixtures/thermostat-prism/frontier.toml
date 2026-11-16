@@ -28,15 +28,10 @@ refusals = 1
 
 [lift]
 functions = 149
-lifted = 141
-residue = 5
+lifted = 142
+residue = 4
 foreign = 0
 effect = 3
-
-[[construct]]
-construct = "signature outside the lift: a method a trait declares"
-cause = "signature"
-functions = 2
 
 [[construct]]
 construct = "usize + wraps or panics where its value leaves the pointer width: past 2^16 on any 16-bit target, past 2^32 on any 32-bit target, past 2^64 on any 64-bit target"
@@ -64,7 +59,12 @@ cause = "form"
 functions = 1
 
 [[construct]]
-construct = "signature outside the lift: implements the trait Sensor"
+construct = "signature outside the lift: a default method of Sensor that calls Sensor::read, which the trait declares without a body: it means each implementing type's"
+cause = "signature"
+functions = 1
+
+[[construct]]
+construct = "signature outside the lift: a method Sensor declares without a body, which each implementing type gives"
 cause = "signature"
 functions = 1
 
@@ -82,14 +82,6 @@ function = "thermo_core::config::ConfigError::fmt"
 span = "thermo-core/src/config.rs:15"
 reason = "form"
 detail = "expression form outside the lift: format! hole"
-
-[[residue]]
-status = "open"
-kappa = "d14ab24fef42a528488c4d86b88652360bfe897939a4dd9bd6d2deb39518d112"
-function = "thermo_core::sensor::Fixed::read"
-span = "thermo-core/src/sensor.rs:36"
-reason = "type"
-detail = "type outside the lift: Fixed, a tuple struct, which the lift does not read"
 
 [[residue]]
 status = "open"
@@ -962,6 +954,12 @@ kappa = "35a3a9b3a4fa18e46335bb03430c4d6057cc4ad680f06c0a72ac1eea35dfd1a7"
 function = "thermo_core::schedule::validate"
 span = "thermo-core/src/schedule.rs:114"
 definition = "Behavior::validate"
+
+[[lifted]]
+kappa = "d14ab24fef42a528488c4d86b88652360bfe897939a4dd9bd6d2deb39518d112"
+function = "thermo_core::sensor::Fixed::read"
+span = "thermo-core/src/sensor.rs:36"
+definition = "Behavior::fixedSensorRead"
 
 [[lifted]]
 kappa = "6c3926e3c4c8456a182f927e61fdd77231d66cc20fef86931d821e50dd95cf32"
