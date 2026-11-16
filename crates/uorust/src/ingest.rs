@@ -1191,6 +1191,35 @@ fn items(
                         syn::GenericParam::Lifetime(_) => None,
                     })
                     .collect();
+                if let Some(trait_path) = &trait_path {
+                    let plain =
+                        match &*imp.self_ty {
+                            syn::Type::Path(tp)
+                                if tp.qself.is_none()
+                                    && tp.path.segments.iter().all(|s| {
+                                        matches!(s.arguments, syn::PathArguments::None)
+                                    })
+                                    && !(tp.path.segments.len() == 1
+                                        && impl_params
+                                            .contains(&tp.path.segments[0].ident.to_string())) =>
+                            {
+                                let written: Vec<String> = tp
+                                    .path
+                                    .segments
+                                    .iter()
+                                    .map(|s| s.ident.to_string())
+                                    .collect();
+                                Some(written.join("::"))
+                            }
+                            _ => None,
+                        };
+                    file.trait_impls.push(crate::facts::TraitImpl {
+                        trait_path: trait_path.clone(),
+                        self_ty: self_ty.clone(),
+                        plain,
+                        scope,
+                    });
+                }
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));

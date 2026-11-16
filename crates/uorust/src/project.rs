@@ -5484,10 +5484,13 @@ const BLANKET_METHODS: [&str; 2] = ["into", "try_into"];
 ///   methods its body calls of each trait of the crate that bounds it (see
 ///   `lift::Generic`), where each such trait has no parameters,
 ///   supertraits, associated items or `unsafe`, is the one trait of its
-///   name in the crate, and the scope of the function brings no trait in
-///   from outside the workspace by a glob or from a registry crate (such a
-///   trait could give a method of the name at an earlier step of Rust's
-///   method lookup than the bound's);
+///   name in the crate, is implemented only for types of the crate named
+///   as themselves (`wrapped_impl`: no impl for a reference, a box or by a
+///   blanket impl, which the lift would read as the type they wrap), and
+///   the scope of the function brings no trait in by a glob or from
+///   another crate, a path dependency of the workspace included
+///   (`leaves_crate`: such a trait could give a method of the name at an
+///   earlier step of Rust's method lookup than the bound's);
 /// - with no bound but [`MARKER_BOUNDS`], a type parameter with no
 ///   dictionary: the body can only move its values.
 ///
@@ -5655,12 +5658,11 @@ fn generic_reading(
             || here
                 .uses
                 .iter()
-                .any(|(_, path)| foreign_crate(package, path).is_some());
+                .any(|(_, path)| leaves_crate(package, path));
         if outside {
             return Err(named(format!(
-                "{} in a scope that brings in names from outside the workspace by a glob or \
-                 from a registry crate: a trait among them could give a method of a bound's \
-                 name first",
+                "{} in a scope that brings in names by a glob or from another crate: a trait \
+                 among them could give a method of a bound's name first",
                 params
                     .iter()
                     .map(|p| p.as_str())
@@ -5691,6 +5693,12 @@ fn generic_reading(
         };
         if let Some(why) = stop {
             return Err(named(format!("{p}: {name}, {why}")));
+        }
+        if let Some(wrapped) = wrapped_impl(package, r.pkg, file_scopes, name) {
+            return Err(named(format!(
+                "{p}: {name}, which the crate implements for {wrapped}, a type the lift does \
+                 not read as itself: a call through the bound could select that impl"
+            )));
         }
         let file = &package.files[tf];
         let Ty::Param(lex) = &reads[*p] else {
@@ -6029,6 +6037,63 @@ fn homonym_reading(
         }
     }
     out
+}
+
+/// Whether a `use` path leaves the crate: its first segment names a
+/// dependency of the package, a registry crate or a path one alike, or the
+/// path starts at the extern prelude (`::`). The standard library's crates
+/// are read by `BLANKET_METHODS`: no trait of theirs has a blanket impl
+/// over every type with a by-value method beside `Into` and `TryInto`.
+fn leaves_crate(package: &Package, path: &str) -> bool {
+    if path.starts_with("::") {
+        return true;
+    }
+    let head = path.split("::").next().unwrap_or(path);
+    package
+        .deps
+        .iter()
+        .any(|d| d.name.replace('-', "_") == head)
+}
+
+/// The first impl of the crate's trait `name` (matched by the trait path's
+/// last segment, so that any trait of that name counts) whose self type is
+/// not a type of the crate named by its own plain path at its file's own
+/// scope: a reference, a `Box`, `Rc` or `Arc`, an alias, or a type
+/// parameter of a blanket impl. The lift reads `&X`, `Box<X>`, `Rc<X>` and
+/// `Arc<X>` as `X` and keys impls by the named type, so where such an impl
+/// exists Rust's method probe (which tries the receiver's own type, then
+/// its autoref, before it dereferences) and its trait selection at a call
+/// (`T = &Square` with `impl Area for &Square`) can choose an impl the
+/// dictionary does not hold. Where none exists, `X: Tr` is the only impl
+/// a call or a probe through the wrapper can reach, since an impl of the
+/// crate's trait for a wrapper can only be written in this crate or in a
+/// dependent one, whose impls a body of this crate does not see.
+fn wrapped_impl(
+    package: &Package,
+    pkg: usize,
+    file_scopes: &BTreeMap<(usize, usize), Types>,
+    name: &str,
+) -> Option<String> {
+    package.files.iter().enumerate().find_map(|(fi, file)| {
+        file.trait_impls
+            .iter()
+            .filter(|i| i.trait_path.rsplit("::").next() == Some(name))
+            .find(|i| {
+                let named = |types: &Types, plain: &str| {
+                    let key = types.resolve(plain);
+                    types.structs.contains_key(&key)
+                        || types.enums.contains_key(&key)
+                        || types.datas.contains_key(&key)
+                };
+                match (&i.plain, i.scope) {
+                    (Some(plain), 0) => {
+                        !file_scopes.get(&(pkg, fi)).is_some_and(|t| named(t, plain))
+                    }
+                    _ => true,
+                }
+            })
+            .map(|i| i.self_ty.clone())
+    })
 }
 
 /// The registry dependency a type the lift refused belongs to: `syn` for
@@ -7959,7 +8024,136 @@ mod tests {
         let (frontier, _) = dictionary_projected("globbed", "use std::collections::*;\n");
         let found = row(&frontier, "globbed::twice");
         assert!(
-            found.contains("generic over T in a scope that brings in names from outside"),
+            found.contains("generic over T in a scope that brings in names by a glob"),
+            "{found}"
+        );
+    }
+
+    // Class: a trait is a dictionary (kai, round 4, repair): what Rust's
+    // method probe and trait selection can reach beside the bound's impl
+    // for the named type stops the reading.
+
+    /// A crate with a trait `Area`, a `Square` that implements it, a
+    /// function generic over `T: Area`, and `extra` written after them.
+    fn dictionary_repair_crate(extra: &str) -> String {
+        format!(
+            "//! Areas.\n\
+             /// Something with an area.\n\
+             pub trait Area {{\n    /// The area.\n    fn area(&self) -> u32;\n}}\n\
+             /// A square.\npub struct Square {{\n    /// Its side.\n    pub side: u32,\n}}\n\
+             impl Area for Square {{\n    fn area(&self) -> u32 {{\n        self.side\n    }}\n}}\n\
+             /// The area of a value.\n\
+             pub fn by_val<T: Area>(x: T) -> u32 {{\n    x.area()\n}}\n\
+             /// A square's area.\npub fn square(s: Square) -> u32 {{\n    by_val(s)\n}}\n\
+             {extra}"
+        )
+    }
+
+    #[test]
+    fn dictionary_repair_an_impl_for_a_wrapper_stops_the_bound() {
+        // Each impl makes Rust select another impl than `Square`'s at a
+        // call or a probe the lift reads as `Square`.
+        for (name, extra) in [
+            (
+                "boxed",
+                "impl<X: Area> Area for Box<X> {\n    fn area(&self) -> u32 {\n        1000\n    \
+                 }\n}\n/// Boxed.\npub fn boxed_area<T: Area>(b: Box<T>) -> u32 {\n    \
+                 b.area()\n}\n",
+            ),
+            (
+                "byref",
+                "impl Area for &Square {\n    fn area(&self) -> u32 {\n        77\n    }\n}\n\
+                 /// Through a reference.\npub fn via_ref(s: &Square) -> u32 {\n    \
+                 by_val(s)\n}\n",
+            ),
+            (
+                "blanket",
+                "impl<X: Area> Area for &X {\n    fn area(&self) -> u32 {\n        500\n    \
+                 }\n}\n/// Through a reference.\npub fn via_ref(s: &Square) -> u32 {\n    \
+                 by_val(s)\n}\n",
+            ),
+        ] {
+            let source = dictionary_repair_crate(extra);
+            let (frontier, behavior) = projected(name, &[("src/lib.rs", source.as_str())]);
+            let found = row(&frontier, &format!("{name}::by_val"));
+            assert!(
+                found.contains("generic over T: Area, which the crate implements for"),
+                "{name}: {found}"
+            );
+            assert!(!behavior.contains("(byVal [Square]"), "{name}:\n{behavior}");
+        }
+        // Without such an impl the reading holds.
+        let source = dictionary_repair_crate("");
+        let (frontier, behavior) = projected("plain", &[("src/lib.rs", source.as_str())]);
+        assert!(
+            definition(&behavior, "square").contains("(byVal [Square] (ref squareAreaArea) s)"),
+            "{frontier}\n{behavior}"
+        );
+    }
+
+    #[test]
+    fn dictionary_repair_a_path_dependency_trait_in_scope_stops_the_bound() {
+        // `loud` gives every type a by-value `area`, which Rust finds on
+        // `x: T` before the bound's `area(&self)`.
+        let source = dictionary_repair_crate("");
+        let (head, rest) = source.split_once('\n').expect("a doc line");
+        let sib = format!("{head}\nuse loud::Loud;\n{rest}");
+        let (frontier, behavior) = projected(
+            "sib",
+            &[
+                (
+                    "Cargo.toml",
+                    "[package]\nname = \"sib\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n\
+                     [dependencies]\nloud = { path = \"loud\" }\n\n[workspace]\n\
+                     members = [\".\", \"loud\"]\n",
+                ),
+                ("src/lib.rs", sib.as_str()),
+                (
+                    "loud/Cargo.toml",
+                    "[package]\nname = \"loud\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+                ),
+                (
+                    "loud/src/lib.rs",
+                    "//! Loud.\n/// Loud.\npub trait Loud {\n    /// A number.\n    \
+                     fn area(self) -> u32;\n}\n\
+                     impl<X> Loud for X {\n    fn area(self) -> u32 {\n        999\n    }\n}\n",
+                ),
+            ],
+        );
+        let found = row(&frontier, "sib::by_val");
+        assert!(
+            found.contains(
+                "generic over T in a scope that brings in names by a glob or from another crate"
+            ),
+            "{found}"
+        );
+        assert!(
+            !behavior.contains("(sibByVal [") && !behavior.contains("(byVal ["),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn dictionary_repair_a_literal_takes_the_width_the_other_argument_fixes() {
+        let source = "//! Widths.\n/// The first of two.\n\
+             pub fn first<T>(a: T, b: T) -> T {\n    let _ = b;\n    a\n}\n\
+             /// A literal first, a byte second.\n\
+             pub fn literal_first(x: u8) -> u8 {\n    first(200, x).wrapping_add(100)\n}\n\
+             /// A byte first.\n\
+             pub fn byte_first(x: u8) -> u8 {\n    first(x, 7).wrapping_add(100)\n}\n\
+             /// Literals alone.\n\
+             pub fn literals() -> u8 {\n    first(200, 7)\n}\n";
+        let (frontier, behavior) = projected("wid", &[("src/lib.rs", source)]);
+        let byte = definition(&behavior, "byteFirst");
+        // Rust makes `200` a `u8`: the sum wraps at 2^8, as `byte_first`'s.
+        let literal = definition(&behavior, "literalFirst");
+        assert!(literal.contains(" 256 "), "{literal}\n{byte}\n{frontier}");
+        assert!(!literal.contains("4294967296"), "{literal}");
+        assert!(literal.contains("[Nat] 200 x"), "{literal}");
+        // A type parameter only literals fix takes the type of the context.
+        let found = row(&frontier, "wid::literals");
+        assert!(
+            found.contains("whose type parameter only an unsuffixed number literal fixes"),
             "{found}"
         );
     }

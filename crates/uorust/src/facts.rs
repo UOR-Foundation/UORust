@@ -127,6 +127,9 @@ pub(crate) struct SourceFile {
     /// The traits the file declares, each with what a dictionary of its
     /// methods does not read.
     pub(crate) trait_decls: Vec<TraitFact>,
+    /// The file's impls of a trait, methods or none: which types a call
+    /// through the trait can select an impl of.
+    pub(crate) trait_impls: Vec<TraitImpl>,
     /// The types the file declares in a shape the lift does not read, each
     /// with that shape (`a tuple struct`).
     pub(crate) unread: Vec<(String, &'static str)>,
@@ -157,6 +160,21 @@ pub(crate) struct TraitFact {
     pub(crate) associated: Vec<String>,
     /// `unsafe trait`: an implementation promises what no method states.
     pub(crate) marked: bool,
+}
+
+/// An `impl Trait for Type`, whatever methods it writes.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct TraitImpl {
+    /// The trait's path as written, without arguments.
+    pub(crate) trait_path: String,
+    /// The self type as written.
+    pub(crate) self_ty: String,
+    /// The self type where it is a path with no arguments that names no
+    /// parameter of the impl: a type by its own name, not a reference, a
+    /// box or any type a blanket impl covers.
+    pub(crate) plain: Option<String>,
+    /// The index of the module scope it is written in.
+    pub(crate) scope: usize,
 }
 
 #[derive(Clone, Debug)]

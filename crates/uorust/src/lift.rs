@@ -2181,6 +2181,35 @@ fn int_literal(e: &rs::RustExpr) -> Option<u128> {
     }
 }
 
+/// A number literal without a suffix, negated, in parentheses or in
+/// arithmetic with others of its kind: its type is whatever inference
+/// gives it.
+fn untyped_number(e: &rs::RustExpr) -> bool {
+    match e {
+        rs::RustExpr::Lit(rs::Lit::Int { suffix, .. }) => suffix.is_empty(),
+        rs::RustExpr::Lit(rs::Lit::Other) => true,
+        rs::RustExpr::Unary(u) => {
+            matches!(u.op, rs::UnOp::Neg | rs::UnOp::Not) && untyped_number(&u.expr)
+        }
+        rs::RustExpr::Paren(p) => untyped_number(p),
+        // Arithmetic of such literals has their one inferred type; a shift
+        // has its left operand's.
+        rs::RustExpr::Binary(b) => match b.op {
+            rs::BinOp::Add
+            | rs::BinOp::Sub
+            | rs::BinOp::Mul
+            | rs::BinOp::Div
+            | rs::BinOp::Rem
+            | rs::BinOp::BitXor
+            | rs::BinOp::BitAnd
+            | rs::BinOp::BitOr => untyped_number(&b.left) && untyped_number(&b.right),
+            rs::BinOp::Shl | rs::BinOp::Shr => untyped_number(&b.left),
+            _ => false,
+        },
+        _ => false,
+    }
+}
+
 fn is_literal(e: &rs::RustExpr) -> bool {
     match e {
         rs::RustExpr::Lit(_) => true,
@@ -3921,8 +3950,10 @@ fn dictionary_call(
 /// name type parameters) is `actual`, or `false` where none does.
 fn instantiate(pattern: &Ty, actual: &Ty, bind: &mut BTreeMap<String, Ty>) -> bool {
     match (pattern, actual) {
+        // One type argument is one Rust type: widths and orders count,
+        // though `Nat` renders every unsigned width alike.
         (Ty::Param(p), _) => match bind.get(p) {
-            Some(held) => held.same(actual),
+            Some(held) => held == actual,
             None => {
                 bind.insert(p.clone(), actual.clone());
                 true
@@ -3966,6 +3997,13 @@ fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
 /// the trait gives, the one impl coherence admits. Any other type, a
 /// method an impl leaves to the trait's default body, and a type
 /// parameter no argument fixes stop the call.
+///
+/// An unsuffixed number literal has no type of its own: Rust gives it the
+/// type the call's other arguments fix (`first(200, x)` with `x: u8` makes
+/// `200` a `u8`). Such arguments are therefore lifted after the others,
+/// against the type those fixed; a type parameter only such literals fix
+/// takes its type from the call's context, which the lift does not read,
+/// and stops the call.
 fn generic_call(
     c: &rs::ExprCall,
     name: &str,
@@ -3976,12 +4014,23 @@ fn generic_call(
     acc: Acc,
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut bind: BTreeMap<String, Ty> = BTreeMap::new();
-    let mut args = Vec::new();
+    let mut lifted: Vec<Option<String>> = vec![None; c.args.len().min(sig.params.len())];
     let mut descends = None;
     let mut acc = acc;
-    for (i, (arg, ty)) in c.args.iter().zip(&sig.params).enumerate() {
+    let pairs: Vec<(usize, (&rs::RustExpr, &Ty))> =
+        c.args.iter().zip(&sig.params).enumerate().collect();
+    let (inferred, fixed): (Vec<_>, Vec<_>) = pairs
+        .into_iter()
+        .partition(|(_, (arg, ty))| untyped_number(arg) && ty.render().contains('\''));
+    for (i, (arg, ty)) in fixed.into_iter().chain(inferred) {
         let wanted = instantiated(ty, &bind);
-        let want = (!wanted.render().contains('\'')).then_some(&wanted);
+        let typed = !wanted.render().contains('\'');
+        if !typed && untyped_number(arg) {
+            return Err(Residue::Form(format!(
+                "a call of {name} whose type parameter only an unsuffixed number literal fixes"
+            )));
+        }
+        let want = typed.then_some(&wanted);
         let ((v, vt), next) = flat_of(arg, env, ctx, acc, want)?;
         acc = next;
         if !instantiate(ty, &vt, &mut bind) {
@@ -3990,8 +4039,9 @@ fn generic_call(
         if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
             descends = Some(i);
         }
-        args.push(v);
+        lifted[i] = Some(v);
     }
+    let args: Vec<String> = lifted.into_iter().flatten().collect();
     let mut types = Vec::new();
     for p in &generic.types {
         let Some(t) = bind.get(p) else {
