@@ -1452,6 +1452,94 @@ fn a_lifted_kappa_that_turns_unlifted_is_refused_ue_16() {
     }
 }
 
+/// The law per function, on a register the tool wrote: two functions of a
+/// synthetic workspace stopped by one construct of their signatures, which
+/// the register records among every construct their signatures state. The
+/// planted defect moves one of them, unchanged, under another construct
+/// while the register still records the first for it: `uorust::admit_register`
+/// (the `uorust admit --parent` command) refuses it, naming the function,
+/// whether or not the other moves too. Moving both on where the candidate's
+/// signatures no longer state the construct (its blocker shown gone) raises
+/// the other cause and is admitted.
+#[test]
+fn a_function_stays_under_its_construct_while_it_stops_one_ue_16() {
+    use uorust::register::{Register, Status};
+    let manifest =
+        "[package]\nname = \"moves\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n";
+    let lib = "//! M.\n\nuse std::cell::RefCell;\n\n\
+               /// One.\npub fn one(x: &RefCell<u8>) -> u8 {\n    *x.borrow()\n}\n\n\
+               /// Two.\npub fn two(x: &RefCell<u8>) -> u8 {\n    *x.borrow() + 1\n}\n";
+    let root = scratch(
+        "ue16-moves",
+        &[("Cargo.toml", manifest), ("src/lib.rs", lib)],
+    );
+    let parent = uorust::lift_register(&project(&root, "moves")).expect("a register");
+    let stopped = |name: &str| {
+        parent
+            .rows
+            .iter()
+            .find(|(_, r)| r.function == format!("moves::{name}"))
+            .map(|(k, r)| (k.clone(), r.status.clone()))
+            .expect("a row")
+    };
+    let ((k1, s1), (k2, s2)) = (stopped("one"), stopped("two"));
+    let construct = s1.construct().map(|(c, d)| (c, d.to_string()));
+    assert!(
+        construct.is_some() && construct == s2.construct().map(|(c, d)| (c, d.to_string())),
+        "both functions are stopped by one construct: {s1:?} {s2:?}"
+    );
+    let recorded = |k: &String| {
+        let stops = parent.rows[k].stops.clone().unwrap_or_default();
+        let (cause, detail) = s1.construct().expect("stopped");
+        stops.contains(&(cause, detail.to_string()))
+    };
+    assert!(recorded(&k1) && recorded(&k2), "{parent:?}");
+    let next = Status::Residue("form".into(), "a construct planted as the next".into());
+    let with = |moved: &[&String], gone: bool| {
+        let mut r: Register = parent.clone();
+        for k in moved {
+            let row = r.rows.get_mut(*k).expect("a row");
+            row.status = next.clone();
+            if gone {
+                row.stops = Some(Vec::new());
+            }
+        }
+        r
+    };
+    let dir = scratch("ue16-moves-registers", &[]);
+    std::fs::create_dir_all(&dir).expect("dir");
+    let file = |name: &str, r: &Register| {
+        let path = dir.join(name);
+        std::fs::write(&path, r.to_text()).expect("write");
+        path
+    };
+    let at = file("parent.toml", &parent);
+    // Both moved on, the construct gone from both signatures: the cause
+    // `form` rises, admitted.
+    let moved = with(&[&k1, &k2], true);
+    assert!(uorust::admit_register(&at, &file("moved.toml", &moved)).is_ok());
+    // One moved while its signature still states the construct: refused,
+    // whether the other stays or moves too.
+    for planted in [with(&[&k1], false), {
+        let mut both = with(&[&k1, &k2], false);
+        both.rows.get_mut(&k2).expect("two").stops = Some(Vec::new());
+        both
+    }] {
+        match uorust::admit_register(&at, &file("planted.toml", &planted)) {
+            Err(UorustError::Regressed(rows)) => {
+                assert!(
+                    rows.len() == 1 && rows[0].starts_with("moves::one "),
+                    "{rows:?}"
+                );
+            }
+            other => panic!("expected Regressed, got {other:?}"),
+        }
+    }
+    for dir in [root, dir] {
+        let _ = std::fs::remove_dir_all(dir);
+    }
+}
+
 fn mir_fixture() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/mir-path")
 }

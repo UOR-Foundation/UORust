@@ -3864,6 +3864,7 @@ mod tests {
                     function: (*function).to_string(),
                     status: status.clone(),
                     divergence: None,
+                    stops: None,
                 },
             );
         }
@@ -5687,6 +5688,7 @@ mod tests {
                 function: "meter::apply_both".to_string(),
                 status: Status::Lifted("Behavior::applyBoth".into()),
                 divergence: None,
+                stops: None,
             },
         );
         let profile = keyed_profile();

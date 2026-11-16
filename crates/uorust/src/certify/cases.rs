@@ -410,6 +410,7 @@ mod tests {
                     function: (*function).to_string(),
                     status: Status::Lifted(format!("Behavior::{definition}")),
                     divergence: None,
+                    stops: None,
                 },
             );
         }
