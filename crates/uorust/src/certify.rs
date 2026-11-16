@@ -672,15 +672,22 @@ enum Outcome {
 /// [`UNBUILT`], so the export ends with what it published. The project and
 /// the build may live on a scratch volume.
 ///
-/// A root whose identity ([`identities`], under `compiler`) the prior
-/// manifest holds as certified, in a project that verifies ([`carry`]: the
-/// prior export verified the same [`project_identity`], or the verification
-/// runs once now), is carried: its package source is taken from
-/// `prior`'s source directories byte for byte, checked against the SHA-256
-/// the manifest records, and kept under [`CARRIED_DIR`] for `sync`; it is
-/// not built, so an export whose roots are all unchanged runs no build. A
-/// shard carries every Nth carried root from the Ith, as it builds every
-/// Nth of the rest.
+/// A root whose closure κ ([`closure_kappas`], under `compiler`) the prior
+/// manifest holds as certified ([`carry`]) is carried: its package source is
+/// taken from `prior`'s source directories byte for byte, checked against
+/// the SHA-256 the manifest records, and kept under [`CARRIED_DIR`] for
+/// `sync`; it is not built, so an export whose roots are all unchanged runs
+/// no build. It is carried only into a project that verifies: the prior
+/// export verified the same [`project_identity`], or a build of this export
+/// published (every build verifies the whole selection first, SPEC §24.7),
+/// or, when none did, one verification of the production project with a
+/// single carried root marked passes (`prior.verify`; its cost does not grow
+/// with the roots, as a verification with every root marked does until it
+/// passes the compiler's total budget). When that verification refuses, the
+/// carried roots are built as a fresh export builds them. An export that
+/// stops (an error, the deadline) before its project is verified publishes
+/// no carried root. A shard carries every Nth carried root from the Ith, as
+/// it builds every Nth of the rest.
 pub fn production_build(
     input: &Input<'_>,
     out: &Path,
@@ -714,9 +721,7 @@ pub fn production_build(
         }
         std::fs::create_dir_all(dir).map_err(|e| io(dir, e))?;
     }
-    // The verification before a carry runs where the first worker builds,
-    // so a project that links packages finds its workspace as a build does.
-    let decided = self::carry(input, &all, compiler, carry, &out.join("0"))?;
+    let decided = self::carry(input, &all, compiler, carry)?;
     let Carry {
         ids,
         project,
@@ -746,7 +751,7 @@ pub fn production_build(
             ))
         })
         .collect();
-    let path = kept.join(IDENTITIES);
+    let path = kept.join(CLOSURES);
     std::fs::write(&path, identified).map_err(|e| io(&path, e))?;
     let own_carried: Vec<&Carried> = carried
         .iter()
@@ -754,7 +759,6 @@ pub fn production_build(
         .filter(|(i, _)| shard.is_none_or(|(k, n)| i % n == k))
         .map(|(_, c)| c)
         .collect();
-    keep_carried(kept, &own_carried, &prior.result)?;
     // What the export is of, for the steps that take it in. The
     // translator's own is every step's default and is not restated.
     if *profile != Profile::default() {
@@ -796,7 +800,6 @@ pub fn production_build(
         compiler,
         ..Export::default()
     });
-    let wake = std::sync::Condvar::new();
     let source = Source {
         profile,
         projection,
@@ -805,9 +808,157 @@ pub fn production_build(
         prefix: &prefix,
         deadline,
     };
+    build_all(&source, out, kept, workers, &state);
+    // A carried root is published only into a project a build or a
+    // verification of this export verified (SPEC §24.7: every build verifies
+    // the whole entrypoint selection before it renders a package). A build
+    // that published has; when none did, one verification with the fewest
+    // roots marked (one carried root) does, so that what it costs does not
+    // grow with the roots. When it refuses, the carried roots are built as a
+    // fresh export builds them, and each is refused as such a build refuses.
+    let mut own_carried = own_carried;
+    let mut verified = verified;
+    let (unverified, stopped) = {
+        let s = state
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        (s.published == 0 && !verified, s.error.is_some() || s.late)
+    };
+    if unverified && stopped {
+        // No build passed and none may run: the carried roots are left
+        // unbuilt, never published unverified.
+        let roots: Vec<String> = own_carried.iter().map(|c| c.definition.clone()).collect();
+        own_carried.clear();
+        state
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .batches
+            .push(roots);
+    } else if unverified {
+        // The verification runs where the first worker builds, so a project
+        // that links packages finds its workspace as a build does.
+        if let Some(first) = own_carried.first() {
+            let only: BTreeSet<String> = std::iter::once(first.definition.clone()).collect();
+            let scratch = out.join("0");
+            if scratch.exists() {
+                std::fs::remove_dir_all(&scratch).map_err(|e| io(&scratch, e))?;
+            }
+            let refusals = state
+                .lock()
+                .unwrap_or_else(std::sync::PoisonError::into_inner)
+                .compiler
+                .clone();
+            production(
+                profile,
+                projection,
+                &scratch,
+                register,
+                targets,
+                &refusals,
+                Some(&only),
+            )?;
+            let verdict = (carry.verify)(&scratch)?;
+            std::fs::remove_dir_all(&scratch).map_err(|e| io(&scratch, e))?;
+            match verdict {
+                None => verified = true,
+                Some(refusal) => {
+                    eprintln!(
+                        "certify production: the project does not verify, so nothing is carried and the {} carried roots are built: {}",
+                        own_carried.len(),
+                        refusal.lines().next().unwrap_or_default()
+                    );
+                    let roots: Vec<String> =
+                        own_carried.iter().map(|c| c.definition.clone()).collect();
+                    own_carried.clear();
+                    let count = workers.min(roots.len()).max(1);
+                    let mut batches: Vec<Vec<String>> = vec![Vec::new(); count];
+                    for (i, root) in roots.into_iter().enumerate() {
+                        batches[i % count].push(root);
+                    }
+                    state
+                        .lock()
+                        .unwrap_or_else(std::sync::PoisonError::into_inner)
+                        .batches
+                        .extend(batches.into_iter().rev());
+                    build_all(&source, out, kept, workers, &state);
+                }
+            }
+        }
+    }
+    keep_carried(kept, &own_carried, &prior.result)?;
+    let mut s = state
+        .into_inner()
+        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    if let Some(e) = s.error {
+        return Err(e);
+    }
+    // The roots no build reached by the deadline: uncertified at this
+    // export, and built again by the next, since no compiler refused them.
+    let unbuilt: Vec<String> = s.batches.drain(..).flatten().collect();
+    for root in unbuilt {
+        s.compiler
+            .entry(root)
+            .or_insert_with(|| UNBUILT.to_string());
+    }
+    // The refusals of every root refused by the end.
+    let last = out.join("refusals");
+    production(
+        profile,
+        projection,
+        &last,
+        register,
+        targets,
+        &s.compiler,
+        None,
+    )?;
+    let refusals = last.join(REFUSALS);
+    std::fs::copy(&refusals, kept.join(REFUSALS)).map_err(|e| io(&refusals, e))?;
+    let timing = kept.join(TIMING);
+    // An export that built nothing measured nothing: it keeps the prior
+    // export's figure, which the next export sizes its shards by.
+    let (seconds, roots) = match (s.published, prior.seconds_per_root) {
+        (0, Some(per_root)) => (per_root, 1),
+        _ => (s.seconds, u64::try_from(s.published).unwrap_or(u64::MAX)),
+    };
+    let text = format!("seconds = {seconds}\nroots = {roots}\n");
+    std::fs::write(&timing, text).map_err(|e| io(&timing, e))?;
+    // A build that published verified the whole project it was built in.
+    if verified || s.published > 0 {
+        let path = kept.join(PROJECT);
+        std::fs::write(&path, format!("identity = \"{project}\"\n")).map_err(|e| io(&path, e))?;
+    }
+    // Builds are the passes that reached `lexlean production build`: a
+    // batch every root of which was refused before is no build.
+    eprintln!(
+        "certify production: {} roots carried, {} bundles in {} passes, {} roots refused by the compiler, {} by the marking",
+        own_carried.len(),
+        s.bundles,
+        s.passes,
+        s.compiler.len(),
+        marked.len()
+    );
+    Ok(Exported {
+        carried: own_carried.len(),
+        built: s.published,
+        builds: s.builds,
+        refused: s.compiler.len() + marked.len(),
+    })
+}
+
+/// Run the batches of `state` to the end on `workers` parallel workers,
+/// each in its own directory under `out`, keeping each published bundle
+/// under `kept` ([`production_build`]).
+fn build_all(
+    source: &Source<'_>,
+    out: &Path,
+    kept: &Path,
+    workers: usize,
+    state: &std::sync::Mutex<Export>,
+) {
+    let wake = std::sync::Condvar::new();
     std::thread::scope(|scope| {
         for worker in 0..workers {
-            let (state, wake, source) = (&state, &wake, &source);
+            let wake = &wake;
             let dir = out.join(worker.to_string());
             scope.spawn(move || loop {
                 let (batch, compiler, pass) = {
@@ -905,63 +1056,6 @@ pub fn production_build(
             });
         }
     });
-    let mut s = state
-        .into_inner()
-        .unwrap_or_else(std::sync::PoisonError::into_inner);
-    if let Some(e) = s.error {
-        return Err(e);
-    }
-    // The roots no build reached by the deadline: uncertified at this
-    // export, and built again by the next, since no compiler refused them.
-    let unbuilt: Vec<String> = s.batches.drain(..).flatten().collect();
-    for root in unbuilt {
-        s.compiler
-            .entry(root)
-            .or_insert_with(|| UNBUILT.to_string());
-    }
-    // The refusals of every root refused by the end.
-    let last = out.join("refusals");
-    production(
-        profile,
-        projection,
-        &last,
-        register,
-        targets,
-        &s.compiler,
-        None,
-    )?;
-    let refusals = last.join(REFUSALS);
-    std::fs::copy(&refusals, kept.join(REFUSALS)).map_err(|e| io(&refusals, e))?;
-    let timing = kept.join(TIMING);
-    // An export that built nothing measured nothing: it keeps the prior
-    // export's figure, which the next export sizes its shards by.
-    let (seconds, roots) = match (s.published, prior.seconds_per_root) {
-        (0, Some(per_root)) => (per_root, 1),
-        _ => (s.seconds, u64::try_from(s.published).unwrap_or(u64::MAX)),
-    };
-    let text = format!("seconds = {seconds}\nroots = {roots}\n");
-    std::fs::write(&timing, text).map_err(|e| io(&timing, e))?;
-    // A build that published verified the whole project it was built in.
-    if verified || s.published > 0 {
-        let path = kept.join(PROJECT);
-        std::fs::write(&path, format!("identity = \"{project}\"\n")).map_err(|e| io(&path, e))?;
-    }
-    // Builds are the passes that reached `lexlean production build`: a
-    // batch every root of which was refused before is no build.
-    eprintln!(
-        "certify production: {} roots carried, {} bundles in {} passes, {} roots refused by the compiler, {} by the marking",
-        own_carried.len(),
-        s.bundles,
-        s.passes,
-        s.compiler.len(),
-        marked.len()
-    );
-    Ok(Exported {
-        carried: own_carried.len(),
-        built: s.published,
-        builds: s.builds,
-        refused: s.compiler.len() + marked.len(),
-    })
 }
 
 /// What every build of an export reads: the projection, the register, the
@@ -1088,12 +1182,17 @@ impl Compiler {
     }
 }
 
-/// The domain tag of a root's export identity ([`identities`]).
-pub const IDENTITY: &str = "uorust/certified-root/1";
+/// The domain tag of a root's closure κ ([`closure_kappas`]): the identity
+/// of everything its exported package is a function of. Its text is the one
+/// the first keyed export recorded, so the roots a manifest holds at it are
+/// still carried; a manifest's closure κ of another tag (an export's before
+/// the project, the linked packages and the order of declarations were in
+/// it) never equals one of this tag, and its roots are built once again.
+pub const CLOSURE: &str = "uorust/certified-root/1";
 
-/// The file of `kept` that records the identity each root's package was
+/// The file of `kept` that records the closure κ each root's package was
 /// exported at, by package, so that the manifest keeps it for the next export.
-pub const IDENTITIES: &str = "identities.toml";
+pub const CLOSURES: &str = "closures.toml";
 
 /// The file of `kept` that lists the packages an export carried from the
 /// prior one; their sources are kept beside it under [`CARRIED_DIR`].
@@ -1395,7 +1494,7 @@ pub const PROJECT_IDENTITY: &str = "uorust/certified-project/1";
 /// A build verifies the whole entrypoint selection (SPEC §24.7), so a root
 /// whose closure is unchanged is still refused by a fresh build when any
 /// other declaration of the project, in any module, no longer verifies (a
-/// false theorem, a forward reference). A root's identity ([`identities`])
+/// false theorem, a forward reference). A root's identity ([`closure_kappas`])
 /// therefore says what its package is, and this identity says whether the
 /// project it would be built in is the one an earlier export verified:
 /// a root is carried only under both ([`carry`]).
@@ -1491,7 +1590,7 @@ pub fn project_identity(input: &Input<'_>, compiler: &Compiler) -> Result<String
 /// each package is rendered for its own root. Whether the rest of the
 /// project still verifies, which decides whether a build publishes the
 /// package at all, is the project's identity's ([`project_identity`]).
-pub fn identities(
+pub fn closure_kappas(
     input: &Input<'_>,
     roots: &[Root],
     compiler: &Compiler,
@@ -1504,7 +1603,7 @@ pub fn identities(
     } = *input;
     let prefix = module_prefix(projection)?;
     let modules = modules(projection)?;
-    let mut shared = format!("{IDENTITY}\n");
+    let mut shared = format!("{CLOSURE}\n");
     for line in compiler.0.lines() {
         shared.push_str(&format!("compiler {line}\n"));
     }
@@ -1632,7 +1731,7 @@ pub struct Carried {
     /// Its package.
     pub package: String,
     /// The identity it was exported at, which is this export's too.
-    pub identity: String,
+    pub closure: String,
     /// The SHA-256 of the package's `src/lib.rs`, as the prior manifest
     /// records it.
     pub source: String,
@@ -1670,7 +1769,7 @@ pub fn carried(
             .manifest
             .roots
             .iter()
-            .find(|c| c.package == package && c.identity.as_deref() == Some(id.as_str()))
+            .find(|c| c.package == package && c.closure.as_deref() == Some(id.as_str()))
         else {
             continue;
         };
@@ -1690,7 +1789,7 @@ pub fn carried(
             out.push(Carried {
                 definition: root.definition.clone(),
                 package: package.clone(),
-                identity: id.clone(),
+                closure: id.clone(),
                 source: was.source.clone(),
                 certification: was.certification.clone(),
                 edition: edition.clone(),
@@ -1710,10 +1809,12 @@ pub struct Carry {
     pub ids: BTreeMap<String, String>,
     /// The projection's identity ([`project_identity`]).
     pub project: String,
-    /// Whether this export's project is known to verify without a build:
-    /// the prior export verified it, or it was verified now.
+    /// Whether this export's project is known to verify without a build or
+    /// a verification: the prior export verified a project of the same
+    /// identity.
     pub verified: bool,
-    /// The roots carried.
+    /// The roots carried when the project verifies (candidates, until the
+    /// export has verified it).
     pub carried: Vec<Carried>,
     /// The roots the prior export's compiler refused, refused again before
     /// any build (by definition, with the cause).
@@ -1755,57 +1856,31 @@ fn prior_refusals(
 }
 
 /// Decide what an export of `roots` carries from `prior` and refuses before
-/// any build. A root is carried when the prior manifest certified it at its
-/// identity ([`carried`]) and the project it would be built in verifies: the
-/// prior export verified a project of the same [`project_identity`], or
-/// `prior.verify` verifies the production project written under `scratch`
-/// now (once, whatever the number of roots). When that verification
-/// refuses, nothing is carried and every root is built, so each is refused
-/// as a fresh build refuses it. The marking's own refusals are counted here
-/// too, so that a plan and its export state the same counts.
+/// any build. A root is a carried candidate when the prior manifest
+/// certified it at its closure κ ([`carried`]): its package is then the one
+/// a build would render. Whether the project it is carried into verifies is
+/// decided by the export, never here and never by a verification that grows
+/// with the number of roots ([`production_build`]): `verified` says only
+/// whether the prior export verified a project of the same
+/// [`project_identity`]. The marking's own refusals are counted here too, so
+/// that a plan and its export state the same counts.
 pub fn carry(
     input: &Input<'_>,
     roots: &[Root],
     compiler: &Compiler,
     prior: &Prior<'_>,
-    scratch: &Path,
 ) -> Result<Carry, UorustError> {
     let Input {
         profile,
         projection,
-        register,
-        targets,
+        ..
     } = *input;
-    let ids = identities(input, roots, compiler)?;
+    let ids = closure_kappas(input, roots, compiler)?;
     let project = project_identity(input, compiler)?;
     let prefix = format!("{}.{BEHAVIOR}.", module_prefix(projection)?);
     let before = prior_refusals(roots, prior.manifest, &compiler.version(), &prefix);
-    let mut carried = carried(roots, &ids, prior)?;
-    let mut verified = prior.manifest.project.as_deref() == Some(project.as_str());
-    if !carried.is_empty() && !verified {
-        let names: BTreeSet<&str> = carried.iter().map(|c| c.definition.as_str()).collect();
-        let kept: BTreeMap<String, String> = before
-            .iter()
-            .filter(|(d, _)| !names.contains(d.as_str()))
-            .map(|(d, c)| (d.clone(), c.clone()))
-            .collect();
-        if scratch.exists() {
-            std::fs::remove_dir_all(scratch).map_err(|e| io(scratch, e))?;
-        }
-        production(profile, projection, scratch, register, targets, &kept, None)?;
-        let verdict = (prior.verify)(scratch)?;
-        std::fs::remove_dir_all(scratch).map_err(|e| io(scratch, e))?;
-        match verdict {
-            None => verified = true,
-            Some(refusal) => {
-                eprintln!(
-                    "certify production: the project does not verify, so nothing is carried: {}",
-                    refusal.lines().next().unwrap_or_default()
-                );
-                carried.clear();
-            }
-        }
-    }
+    let carried = carried(roots, &ids, prior)?;
+    let verified = prior.manifest.project.as_deref() == Some(project.as_str());
     let names: BTreeSet<&str> = carried.iter().map(|c| c.definition.as_str()).collect();
     let refused: BTreeMap<String, String> = before
         .into_iter()
@@ -1916,9 +1991,9 @@ fn keep_carried(kept: &Path, carried: &[&Carried], results: &str) -> Result<(), 
         let path = dir.join(format!("{}.rs", c.package));
         std::fs::write(&path, &c.bytes).map_err(|e| io(&path, e))?;
         text.push_str(&format!(
-            "\n[[carried]]\npackage = \"{}\"\nidentity = \"{}\"\nsource = \"{}\"\ncertification = {}\nedition = {}\n",
+            "\n[[carried]]\npackage = \"{}\"\nclosure = \"{}\"\nsource = \"{}\"\ncertification = {}\nedition = {}\n",
             c.package,
-            c.identity,
+            c.closure,
             c.source,
             toml_quoted(&c.certification),
             toml_quoted(&c.edition)
@@ -2317,10 +2392,10 @@ pub struct Certified {
     pub source: String,
     /// The kernel's status of its certificates.
     pub certification: String,
-    /// The identity its package was exported at ([`identities`]); a
-    /// manifest written before identities has none, and its roots are built
+    /// The closure κ its package was exported at ([`closure_kappas`]); a
+    /// manifest written before closure κs has none, and its roots are built
     /// again by the next export.
-    pub identity: Option<String>,
+    pub closure: Option<String>,
     /// The Rust edition its package's Cargo manifest declares; a root
     /// without one is built again rather than carried.
     pub edition: Option<String>,
@@ -2415,9 +2490,11 @@ impl Manifest {
                 package: text_of(row, "package")?,
                 source: text_of(row, "source")?,
                 certification: text_of(row, "certification")?,
-                identity: row
-                    .get("identity")
-                    .and_then(toml::Value::as_str)
+                // An export that kept the key under its first name,
+                // `identity`, is read as it wrote it.
+                closure: ["closure", "identity"]
+                    .iter()
+                    .find_map(|k| row.get(*k).and_then(toml::Value::as_str))
                     .map(str::to_string),
                 edition: row
                     .get("edition")
@@ -2526,8 +2603,8 @@ impl Manifest {
             out.push_str(&format!("package = \"{}\"\n", r.package));
             out.push_str(&format!("source = \"{}\"\n", r.source));
             out.push_str(&format!("certification = \"{}\"\n", r.certification));
-            if let Some(identity) = &r.identity {
-                out.push_str(&format!("identity = \"{identity}\"\n"));
+            if let Some(closure) = &r.closure {
+                out.push_str(&format!("closure = \"{closure}\"\n"));
             }
             if let Some(edition) = &r.edition {
                 out.push_str(&format!("edition = \"{edition}\"\n"));
@@ -2623,7 +2700,7 @@ pub(crate) fn sync(
             let table: toml::Table = text.parse().map_err(|e| bad(&kappas, format!("{e}")))?;
             measured.get_or_insert_with(toml::Table::new).extend(table);
         }
-        let ids = k.join(IDENTITIES);
+        let ids = k.join(CLOSURES);
         if let Ok(text) = std::fs::read_to_string(&ids) {
             let table: toml::Table = text.parse().map_err(|e| bad(&ids, format!("{e}")))?;
             identified.extend(table);
@@ -2705,7 +2782,7 @@ pub(crate) fn sync(
                     function: own.function.clone(),
                     kappa: own.kappa.clone(),
                     definition: own.definition.clone(),
-                    identity: identified
+                    closure: identified
                         .get(&name)
                         .and_then(toml::Value::as_str)
                         .map(str::to_string),
@@ -2772,7 +2849,7 @@ pub(crate) fn sync(
                 package: name,
                 source: digest,
                 certification: text_of("certification")?,
-                identity: Some(text_of("identity")?),
+                closure: Some(text_of("closure")?),
                 edition: Some(text_of("edition")?),
             });
         }
@@ -3775,6 +3852,60 @@ mod tests {
         );
     }
 
+    // Main's test of the closure κ (6d6b4e6), on the merged key: a root's
+    // closure κ changes exactly with what its root reaches, and with the
+    // compiler and the descriptors. A type no root reaches changes no root's
+    // closure κ here (its package cannot differ, SPEC §24.7); it changes the
+    // project's identity, without which no root is carried unverified.
+    #[test]
+    fn a_closure_kappa_changes_exactly_with_what_its_root_reaches() {
+        let tmp = scratch("closure-kappa");
+        let behavior = |c_body: &str, type_body: &str| {
+            format!(
+                "\\begin{{lexlean}}{{Behavior}}\n\\begin{{semanticmodule}}\ninductive{{\n  name: T,\n  constructors: [{type_body}]\n}}\n\ndefinition{{\n  name: a,\n  body: (b 1)\n}}\n\ndefinition{{\n  name: b,\n  body: (Prelude::p 1)\n}}\n\ndefinition{{name: c, parameters: [], body: {c_body}}}\n\\end{{semanticmodule}}\n\\end{{lexlean}}\n"
+            )
+        };
+        let prelude = "\\begin{lexlean}{Prelude}\n\\begin{semanticmodule}\ndefinition{\n  name: p,\n  body: 1\n}\n\\end{semanticmodule}\n\\end{lexlean}\n";
+        let register = register(&[
+            ("k1", "meter::a", Status::Lifted("Behavior::a".into())),
+            ("k2", "meter::b", Status::Lifted("Behavior::b".into())),
+            ("k3", "meter::c", Status::Lifted("Behavior::c".into())),
+        ]);
+        let profile = keyed_profile();
+        let keys = |name: &str, c_body: &str, type_body: &str, compiler: &str, runtime: &str| {
+            let dir = tmp.join(name);
+            keyed_projection(&dir, &behavior(c_body, type_body), prelude);
+            let targets = keyed_targets(runtime);
+            let input = Input {
+                profile: &profile,
+                projection: &dir,
+                register: &register,
+                targets: &targets,
+            };
+            let compiler = Compiler(compiler.into());
+            (
+                closure_kappas(&input, &profile.roots(&register), &compiler).expect("closure κs"),
+                project_identity(&input, &compiler).expect("a project identity"),
+            )
+        };
+        let (base, project) = keys("base", "1", "x", "lexlean 1", "r1");
+        let (c_changed, _) = keys("c", "2", "x", "lexlean 1", "r1");
+        assert_eq!(base.len(), 3);
+        assert_eq!(base["a"], c_changed["a"]);
+        assert_eq!(base["b"], c_changed["b"]);
+        assert_ne!(base["c"], c_changed["c"]);
+        let (typed, typed_project) = keys("typed", "1", "y", "lexlean 1", "r1");
+        assert_eq!(base, typed);
+        assert_ne!(project, typed_project);
+        // The compiler or the descriptors change every package.
+        let (compiled, _) = keys("compiled", "1", "x", "lexlean 2", "r1");
+        let (described, _) = keys("described", "1", "x", "lexlean 1", "r2");
+        for r in ["a", "b", "c"] {
+            assert_ne!(base[r], compiled[r]);
+            assert_ne!(base[r], described[r]);
+        }
+    }
+
     #[test]
     fn marking_makes_the_roots_production_and_their_callees_executable() {
         let behavior = "\\begin{lexlean}{Behavior}\ndefinition{\n  name: a,\n  body: x\n}\n\ndefinition{\n  name: b,\n  body: (c (Prelude::p 1)),\n  axioms: []\n}\ndefinition{name: c, parameters: [], body: 1}\n";
@@ -3810,7 +3941,7 @@ mod tests {
             package: "uorust_certified_implication".into(),
             source: "s".into(),
             certification: "kernel-checked".into(),
-            identity: None,
+            closure: None,
             edition: None,
         };
         let body = IrBody {
@@ -3923,7 +4054,7 @@ mod tests {
                 package: "uorust_certified_a".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
-                identity: None,
+                closure: None,
                 edition: None,
             }],
             ..Manifest::default()
@@ -4003,7 +4134,7 @@ mod tests {
                 package: "uorust_certified_binop".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
-                identity: None,
+                closure: None,
                 edition: Some("2021".into()),
             }],
             share: Share {
@@ -4174,7 +4305,7 @@ mod tests {
             package: "meter_certified_read".into(),
             source: "s".into(),
             certification: "kernel-checked".into(),
-            identity: None,
+            closure: None,
             edition: None,
         };
         let body = IrBody {
@@ -4433,7 +4564,7 @@ mod tests {
                 package: "meter_certified_read".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
-                identity: None,
+                closure: None,
                 edition: None,
             }],
             ..Manifest::default()
@@ -4644,7 +4775,7 @@ mod tests {
             register: &register,
             targets,
         };
-        identities(
+        closure_kappas(
             &input,
             &profile.roots(&register),
             &Compiler(compiler.into()),
@@ -4669,7 +4800,7 @@ mod tests {
                 package: root.package(),
                 source: crate::project::sha(bytes.as_bytes()),
                 certification: "kernel-checked".into(),
-                identity: ids.get(&root.definition).cloned(),
+                closure: ids.get(&root.definition).cloned(),
                 edition: Some("2021".into()),
             });
         }
@@ -4768,7 +4899,7 @@ mod tests {
                 prior.expect("the prior source"),
                 now.expect("the carried source")
             );
-            assert_eq!(root.identity, ids.get(&root.definition).cloned());
+            assert_eq!(root.closure, ids.get(&root.definition).cloned());
         }
         assert_eq!(synced.result, "r-prior");
         // The figure the shards are sized by survives an export that built
@@ -4920,14 +5051,8 @@ mod tests {
             register: &register,
             targets: &targets,
         };
-        let decided = carry(
-            &input,
-            &roots,
-            &Compiler(KEYED_COMPILER.into()),
-            &prior,
-            &tmp.join("scratch"),
-        )
-        .expect("carry");
+        let decided =
+            carry(&input, &roots, &Compiler(KEYED_COMPILER.into()), &prior).expect("carry");
         assert_eq!(decided.ids, callee);
         let carried_now: BTreeSet<String> = decided
             .carried
@@ -4946,7 +5071,7 @@ mod tests {
         // A manifest written before identities carries nothing.
         let mut old = manifest.clone();
         for r in &mut old.roots {
-            r.identity = None;
+            r.closure = None;
         }
         let none = carried(
             &roots,
@@ -5052,7 +5177,7 @@ mod tests {
                 targets: &targets,
             };
             all_differ(
-                &identities(
+                &closure_kappas(
                     &input,
                     &profile.roots(&register),
                     &Compiler(KEYED_COMPILER.into()),
@@ -5074,7 +5199,7 @@ mod tests {
             targets: &targets,
         };
         all_differ(
-            &identities(
+            &closure_kappas(
                 &input,
                 &profile.roots(&register),
                 &Compiler(KEYED_COMPILER.into()),
@@ -5119,6 +5244,15 @@ mod tests {
         Ok(None)
     }
 
+    // keyed2: the verification of a project nothing was built in marks one
+    // root, so that its cost does not grow with the roots.
+    fn keyed_verifies_one(dir: &Path) -> Result<Option<String>, UorustError> {
+        let request = std::fs::read_to_string(dir.join("request.json")).expect("a request");
+        let request: serde_json::Value = serde_json::from_str(&request).expect("json");
+        assert_eq!(request["roots"].as_array().map(Vec::len), Some(1));
+        Ok(None)
+    }
+
     fn keyed_refuses(dir: &Path) -> Result<Option<String>, UorustError> {
         assert!(dir.join("request.json").is_file(), "no production project");
         Ok(Some(
@@ -5132,7 +5266,7 @@ mod tests {
 
     /// The input of the base projection under `dir`, read with the
     /// compiler and descriptors of the other keyed tests.
-    fn keyed_decide(dir: &Path, register: &Register, prior: &Prior<'_>, scratch: &Path) -> Carry {
+    fn keyed_decide(dir: &Path, register: &Register, prior: &Prior<'_>) -> Carry {
         let profile = keyed_profile();
         let targets = keyed_targets("r1");
         let input = Input {
@@ -5146,7 +5280,6 @@ mod tests {
             &profile.roots(register),
             &Compiler(KEYED_COMPILER.into()),
             prior,
-            scratch,
         )
         .expect("carry")
     }
@@ -5207,7 +5340,7 @@ mod tests {
                 register: &register,
                 targets: &targets,
             };
-            identities(
+            closure_kappas(
                 &input,
                 &profile.roots(&register),
                 &Compiler(KEYED_COMPILER.into()),
@@ -5323,32 +5456,31 @@ mod tests {
         let (dir, register) = (tmp.join("false"), keyed_register());
         let project = keyed_project(&dir);
         assert_ne!(project, keyed_project(&tmp.join("base")));
-        let decide = |manifest: &Manifest, verify: Verifier| {
+        let decide = |manifest: &Manifest| {
             keyed_decide(
                 &dir,
                 &register,
                 &Prior {
                     manifest,
                     sources: std::slice::from_ref(&sources),
-                    verify,
+                    verify: keyed_never_verified,
                 },
-                &tmp.join("scratch"),
             )
         };
-        let refused = decide(&manifest, keyed_refuses);
-        assert_eq!((refused.carried.len(), refused.verified), (0, false));
+        // The decision verifies nothing: both roots are candidates, and the
+        // plan counts them carried, as an export that verifies carries them.
+        let candidates = decide(&manifest);
+        assert_eq!((candidates.carried.len(), candidates.verified), (2, false));
         let plan = plan_keyed(
             &keyed_profile().roots(&register),
-            Some(&refused),
+            Some(&candidates),
             &manifest,
             u64::MAX / 2,
         );
-        assert_eq!((plan.carried, plan.build), (Some(0), 2));
-        let verified = decide(&manifest, keyed_verifies);
-        assert_eq!((verified.carried.len(), verified.verified), (2, true));
-        // The project the prior export verified is not verified again.
+        assert_eq!((plan.carried, plan.build), (Some(2), 0));
+        // The project the prior export verified is known to verify.
         manifest.project = Some(project.clone());
-        let known = decide(&manifest, keyed_never_verified);
+        let known = decide(&manifest);
         assert_eq!((known.carried.len(), known.verified), (2, true));
         assert_eq!(known.project, project);
         // A module no root imports, and the project's lock, are verified
@@ -5364,8 +5496,7 @@ mod tests {
         assert_ne!(keyed_project(&dir), project);
         std::fs::write(&lock, locked).expect("restore");
         std::fs::write(dir.join("frontier.toml"), "# moved\n").expect("write");
-        // The export: with the project refused, nothing is carried, so the
-        // roots are built (and no compiler is found here).
+        // The export, of a project no export verified.
         manifest.project = None;
         let profile = keyed_profile();
         let input = Input {
@@ -5374,13 +5505,13 @@ mod tests {
             register: &register,
             targets: &targets,
         };
-        let export = |verify: Verifier| {
+        let export = |manifest: &Manifest, verify: Verifier| {
             production_build(
                 &input,
                 &tmp.join("out"),
                 &tmp.join("kept"),
                 &Prior {
-                    manifest: &manifest,
+                    manifest,
                     sources: std::slice::from_ref(&sources),
                     verify,
                 },
@@ -5388,11 +5519,19 @@ mod tests {
                 Scope::default(),
             )
         };
-        assert!(export(keyed_refuses).is_err());
-        let done = export(keyed_verifies).expect("an export");
+        // An export that builds nothing verifies the project once, with one
+        // root marked; when it refuses, the carried roots are built (and no
+        // compiler is found here), so nothing is published unverified.
+        assert!(export(&manifest, keyed_refuses).is_err());
+        let done = export(&manifest, keyed_verifies_one).expect("an export");
         assert_eq!((done.carried, done.builds), (2, 0));
         let kept = std::fs::read_to_string(tmp.join("kept").join(PROJECT)).expect("the project");
         assert_eq!(kept, format!("identity = \"{}\"\n", keyed_project(&dir)));
+        // Verified by the prior export, it is not verified again.
+        let mut verified = manifest.clone();
+        verified.project = Some(keyed_project(&dir));
+        let steady = export(&verified, keyed_never_verified).expect("a steady export");
+        assert_eq!((steady.carried, steady.builds), (2, 0));
         let _ = std::fs::remove_dir_all(tmp);
     }
 
@@ -5512,7 +5651,7 @@ mod tests {
             sources: std::slice::from_ref(&sources),
             verify: keyed_verifies,
         };
-        let decided = keyed_decide(&projection, &register, &prior, &tmp.join("scratch"));
+        let decided = keyed_decide(&projection, &register, &prior);
         assert_eq!(
             decided
                 .marked
@@ -5547,6 +5686,58 @@ mod tests {
                 refused: 1
             }
         );
+        let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    // keyed2: one key after the merge of main's closure κ. A manifest of
+    // either past shape is read: the first keyed export's (`identity` rows)
+    // is carried, since its key is this one under its first name; main's
+    // (`closure` rows of its own tag and text) never equals this key, so
+    // its roots are built once.
+    #[test]
+    fn keyed2_a_manifest_of_either_past_shape_is_read_and_only_this_key_carries() {
+        let tmp = scratch("keyed2-shapes");
+        let targets = keyed_targets("r1");
+        let ids = keyed_ids(
+            &tmp,
+            "p",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            KEYED_COMPILER,
+            &targets,
+        );
+        let sources = tmp.join("prior");
+        let written = keyed_prior(&sources, &ids).to_text();
+        assert_eq!(written.matches("\nclosure = ").count(), 2);
+        let path = tmp.join("manifest.toml");
+        let carry = |text: &str| {
+            let manifest = Manifest::parse(&path, text).expect("a manifest of a past shape");
+            carried(
+                &keyed_profile().roots(&keyed_register()),
+                &ids,
+                &Prior {
+                    manifest: &manifest,
+                    sources: std::slice::from_ref(&sources),
+                    verify: keyed_verifies,
+                },
+            )
+            .expect("carried")
+            .len()
+        };
+        assert_eq!(carry(&written), 2);
+        let first = written.replace("\nclosure = ", "\nidentity = ");
+        assert_eq!(carry(&first), 2);
+        // Main's shape: each root's closure κ of main's own text.
+        let mut main = written.clone();
+        for id in ids.values() {
+            let theirs =
+                crate::project::sha(format!("uorust/certified-closure/1\n{id}").as_bytes());
+            main = main.replace(id.as_str(), &theirs);
+        }
+        assert_eq!(carry(&main), 0);
+        // Rewritten, a manifest keeps the key under this name only.
+        let read = Manifest::parse(&path, &first).expect("a manifest");
+        assert_eq!(read.to_text(), written);
         let _ = std::fs::remove_dir_all(tmp);
     }
 }
