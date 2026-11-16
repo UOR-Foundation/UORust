@@ -481,6 +481,12 @@ pub(crate) enum Lit {
     Char(char),
     Byte(u8),
     ByteStr(Vec<u8>),
+    /// A float: its decimal digits as written, without `_`, and its
+    /// suffix.
+    Float {
+        digits: String,
+        suffix: String,
+    },
     Other,
 }
 

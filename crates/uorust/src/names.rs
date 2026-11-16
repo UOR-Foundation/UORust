@@ -2504,15 +2504,70 @@ impl<'a> Resolver<'a> {
     /// The bare type names a function's module binds to a type of a
     /// registry crate, each with the crate: `Value` of `use serde_json::Value`.
     pub(crate) fn registry_types(&self, f: FnId) -> BTreeMap<String, String> {
-        let module = self.module(f);
-        let Some(scope) = self.scope(&module) else {
+        self.registry_paths(&self.module(f))
+            .into_iter()
+            .filter_map(|(name, to)| Some((name, to.first()?.clone())))
+            .collect()
+    }
+
+    /// The bare names a source file binds to one of `paths` (each a path
+    /// through a registry crate, `num_bigint::BigInt`), each with its path,
+    /// for a reading that holds across the whole file.
+    ///
+    /// A name is kept only where every module of the file (its own and each
+    /// inline `mod`) either resolves the bare name to that same path or
+    /// binds nothing of it (`Prelude`, `Absent`: the name, not being of the
+    /// prelude, cannot be written there to mean a type). A module that
+    /// declares a type of the name, binds it to another path, or may bind it
+    /// through a glob of an outside crate (`Outside`) drops the name: Rust
+    /// resolves a bare name per module, and the binding read file-wide must
+    /// be the one every module of the file would give.
+    pub(crate) fn registry_bindings(
+        &self,
+        pkg: usize,
+        fi: usize,
+        paths: &[String],
+    ) -> BTreeMap<String, String> {
+        let modules: Vec<&ModKey> = self
+            .modules
+            .iter()
+            .filter(|(key, (file, _))| key.0 == pkg && *file == fi)
+            .map(|(key, _)| key)
+            .collect();
+        let mut candidates = BTreeMap::new();
+        for m in &modules {
+            for (name, to) in self.registry_paths(m) {
+                let to = to.join("::");
+                if paths.contains(&to) {
+                    candidates.insert(name, to);
+                }
+            }
+        }
+        candidates.retain(|name, to| {
+            modules.iter().all(|m| {
+                match self.path(m, std::slice::from_ref(name), false, &mut Vec::new()) {
+                    Found::Extern(at) => at.join("::") == *to,
+                    Found::Prelude(_) | Found::Absent => true,
+                    _ => false,
+                }
+            })
+        });
+        candidates
+    }
+
+    /// The bare names a module binds to a path through a registry crate,
+    /// each with the path as the resolver follows it: one reading of a
+    /// module's `use` bindings for [`Self::registry_types`] and
+    /// [`Self::registry_bindings`].
+    fn registry_paths(&self, module: &ModKey) -> BTreeMap<String, Vec<String>> {
+        let Some(scope) = self.scope(module) else {
             return BTreeMap::new();
         };
         // The names the module's own `use` binds, and those of the modules
         // of the workspace it imports whole.
         let mut names: BTreeSet<&str> = scope.uses.iter().map(|u| u.name.as_str()).collect();
         for glob in &scope.globs {
-            if let Found::Module(y) = self.path(&module, &glob.path, false, &mut Vec::new()) {
+            if let Found::Module(y) = self.path(module, &glob.path, false, &mut Vec::new()) {
                 if let Some(imported) = self.scope(&y) {
                     names.extend(imported.uses.iter().map(|u| u.name.as_str()));
                 }
@@ -2521,9 +2576,9 @@ impl<'a> Resolver<'a> {
         let mut out = BTreeMap::new();
         for name in names {
             let path = [name.to_string()];
-            if let Found::Extern(to) = self.path(&module, &path, false, &mut Vec::new()) {
-                if let Some(krate) = to.first().filter(|k| self.registry.contains(*k)) {
-                    out.insert(name.to_string(), krate.clone());
+            if let Found::Extern(to) = self.path(module, &path, false, &mut Vec::new()) {
+                if to.first().is_some_and(|k| self.registry.contains(k)) {
+                    out.insert(name.to_string(), to);
                 }
             }
         }
@@ -2954,6 +3009,81 @@ mod tests {
             got.iter()
                 .any(|g| g.starts_with("unknown: A::from -> open ")),
             "{got:#?}"
+        );
+    }
+
+    // Registry number types (merge): what a file's `use` binds to a
+    // registered crate's type is the resolver's reading, module by module.
+
+    /// The bare names `source` (a library `lib.rs` of a package depending
+    /// on the registry crates `num-bigint` and `other`) binds to
+    /// `num_bigint::BigInt` in every module of the file.
+    fn registered_bindings_of(tag: &str, source: &str) -> BTreeMap<String, String> {
+        let dir = std::env::temp_dir().join(format!("uorust-names-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let (mut ws, syntax) = crate::ingest::workspace(&dir, None).expect("a workspace");
+        let syntax = read(&dir, &ws, syntax).expect("its names");
+        let _ = std::fs::remove_dir_all(&dir);
+        for name in ["num-bigint", "other"] {
+            ws.packages[0].deps.push(crate::facts::Dep {
+                name: name.into(),
+                rename: None,
+                kind: "normal".into(),
+                path: None,
+                inside: false,
+            });
+        }
+        let resolver = Resolver::new(&ws, &syntax);
+        resolver.registry_bindings(0, 0, &["num_bigint::BigInt".to_string()])
+    }
+
+    #[test]
+    fn registered_bindings_hold_only_where_every_module_of_the_file_agrees() {
+        let big = |names: &[&str]| -> BTreeMap<String, String> {
+            names
+                .iter()
+                .map(|n| (n.to_string(), "num_bigint::BigInt".to_string()))
+                .collect()
+        };
+        // A `use`, a renaming one from the crate graph's root, and an inline
+        // module that imports its parent whole.
+        assert_eq!(
+            registered_bindings_of(
+                "reg-use",
+                "use num_bigint::BigInt;\nuse ::num_bigint::BigInt as Big;\n\
+                 mod inner { use super::*; }\nmod empty {}\n"
+            ),
+            big(&["Big", "BigInt"])
+        );
+        // An inline module binding the name to a type of the workspace, or
+        // importing an outside crate whole (which may bind it): the file
+        // does not read the name as the crate's.
+        assert_eq!(
+            registered_bindings_of(
+                "reg-other",
+                "use num_bigint::BigInt;\nuse num_bigint::BigInt as Big;\n\
+                 mod inner { use crate::mine::BigInt; }\n\
+                 mod mine { pub struct BigInt(pub u8); }\n"
+            ),
+            big(&["Big"])
+        );
+        assert_eq!(
+            registered_bindings_of(
+                "reg-glob",
+                "use num_bigint::BigInt;\nmod inner { use other::*; }\n"
+            ),
+            big(&[])
+        );
+        // A path to another item of the crate is not the read type.
+        assert_eq!(
+            registered_bindings_of("reg-path", "use num_bigint::BigUint as BigInt;\n"),
+            big(&[])
         );
     }
 }

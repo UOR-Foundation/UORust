@@ -121,6 +121,17 @@ pub(crate) enum Ty {
     /// `Nat`: the width says what an operation may return, and is no part
     /// of how a value is held.
     Integer(Option<u32>),
+    /// An integer of a registered crate whose values are exactly the
+    /// mathematical integers (`num_bigint::BigInt`, see
+    /// [`crate::registered::readings`]): LexLean's `Int`, with no width
+    /// an operation could overflow.
+    Unbounded,
+    /// A ratio of two integers of no width as a registered crate stores it
+    /// (`num_rational::BigRational`, see [`crate::registered::readings`]):
+    /// the pair of its numerator and denominator, Lean's `(Int * Int)`. The
+    /// pair is the stored one, not a reduced one, so the lift reads no
+    /// equality or order of it: the crate's own compares values.
+    Ratio,
     /// The MIR path's signed integer of this many bits (`None` for
     /// `isize`), held as its two's-complement bit pattern in `Nat`: LexLean
     /// converts no `Nat` to a signed family, so a cast between the two
@@ -167,7 +178,8 @@ impl Ty {
             Self::Bool => "Bool".into(),
             Self::Nat(_) | Self::Float(_) | Self::Signed(_) | Self::Scalar => "Nat".into(),
             Self::Int(_) => "Int64".into(),
-            Self::Integer(_) => "Int".into(),
+            Self::Integer(_) | Self::Unbounded => "Int".into(),
+            Self::Ratio => "(Int * Int)".into(),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => format!("{PRELUDE}::ParseIntError"),
             Self::Path => format!("{PRELUDE}::FilePath"),
@@ -212,7 +224,9 @@ impl Ty {
             Self::Int(_) => "Int".into(),
             // `Int` is the tag of `Int64`; a name of the prefix no
             // workspace type lifts under tells the two apart.
-            Self::Integer(_) => INTEGER_TAG.into(),
+            Self::Integer(_) | Self::Unbounded => INTEGER_TAG.into(),
+            // The tag of the pair of two `Int`s, which it is.
+            Self::Ratio => format!("Pair{INTEGER_TAG}{INTEGER_TAG}"),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => "ParseIntError".into(),
             Self::Path => "FilePath".into(),
@@ -1185,8 +1199,61 @@ impl Types {
             rs::TypeKind::Path { qself: false, path } if path.segments.len() == 1 => {
                 self.named(t, &path.segments[0], false)
             }
+            // A registered crate's type by its path (`num_bigint::BigInt`).
+            rs::TypeKind::Path { qself: false, path }
+                if path
+                    .segments
+                    .iter()
+                    .all(|s| s.arguments == rs::PathArguments::None) =>
+            {
+                let written: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
+                let joined = written.join("::");
+                self.registered(joined.strip_prefix("::").unwrap_or(&joined))
+                    .map_or_else(bad, Ok)
+            }
             _ => bad(),
         }
+    }
+
+    /// The type a registered crate's path reads as, where the scope admits
+    /// the reading: the package's lock pins a version it was read from
+    /// (see [`crate::registered::of_package`]), which puts the path among
+    /// the scope's names.
+    pub(crate) fn float(&self, name: &str) -> Option<crate::mir::float::Format> {
+        use crate::mir::float::Format;
+        // The width of a float is that of the unsigned integer its
+        // `to_bits` returns; its digits and largest exponent are core's
+        // `MANTISSA_DIGITS` and `MAX_EXP`, as the core the tool is built
+        // with states them. The language fixes both types as IEEE 754's
+        // binary32 and binary64, so no build of core states others.
+        let host = |bytes: usize, digits: u32, max_exp: i32| {
+            let bits = u8::BITS * u32::try_from(bytes).ok()?;
+            Format::from_core(bits, digits, i64::from(max_exp))
+        };
+        match self.floats.get(name) {
+            Some(f) => Some(*f),
+            None => match name {
+                "f32" => host(
+                    std::mem::size_of::<f32>(),
+                    f32::MANTISSA_DIGITS,
+                    f32::MAX_EXP,
+                ),
+                "f64" => host(
+                    std::mem::size_of::<f64>(),
+                    f64::MANTISSA_DIGITS,
+                    f64::MAX_EXP,
+                ),
+                _ => None,
+            },
+        }
+    }
+
+    /// The type a registered crate's path reads as (see below).
+    pub(crate) fn registered(&self, path: &str) -> Option<Ty> {
+        self.aliases
+            .get(path)
+            .filter(|named| *named == path)
+            .and_then(|_| crate::registered::reading(path))
     }
 
     /// The type one path segment names, with its arguments: a type of the
@@ -1235,6 +1302,12 @@ impl Types {
             ("isize", 0) => Ty::Integer(None),
             ("String", 0) => Ty::Str,
             ("char", 0) => Ty::Char,
+            // A float of the language: IEEE 754's binary format of the
+            // widths core's own constants state (see `Types::float`).
+            ("f32" | "f64", 0) if imported => match self.float(&name) {
+                Some(f) => Ty::Float(f),
+                None => return bad(),
+            },
             ("Option", 1) => Ty::Option(arg(0)?),
             ("Result", 2) => Ty::Outcome(arg(0)?, arg(1)?),
             ("Vec", 1) => Ty::List(arg(0)?),
@@ -1262,6 +1335,11 @@ impl Types {
             ("Range", 1) if imported => {
                 let bound = *arg(0)?;
                 self.tuple(vec![bound.clone(), bound])
+            }
+            // A registered crate's type, where the package's lock admits
+            // the reading: the scope names its path.
+            (n, 0) if !library && self.registered(&self.resolve(n)).is_some() => {
+                self.registered(&self.resolve(n)).unwrap_or(Ty::Unit)
             }
             (n, 0)
                 if !library
@@ -2181,7 +2259,9 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 "i128" => Ty::Integer(Some(128)),
                 "isize" => Ty::Integer(None),
                 "" => match want {
-                    Some(t @ (Ty::Nat(_) | Ty::Int(_) | Ty::Integer(_))) => t.clone(),
+                    Some(t @ (Ty::Nat(_) | Ty::Int(_) | Ty::Integer(_) | Ty::Unbounded)) => {
+                        t.clone()
+                    }
                     _ if negative => Ty::Int(32),
                     _ => Ty::Nat(Some(32)),
                 },
@@ -2194,7 +2274,7 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 }
                 // The widest signed type bounds the literal Rust accepts;
                 // the mathematical `Int` holds every one of them.
-                Ty::Integer(_) if v <= i128::MAX as u128 + u128::from(negative) => {
+                Ty::Integer(_) | Ty::Unbounded if v <= i128::MAX as u128 + u128::from(negative) => {
                     let sign = if negative { "-" } else { "" };
                     flat(format!("({sign}{v} : Int)"), ty)
                 }
@@ -2211,6 +2291,21 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
             None => Err(Residue::Form(PERCENT.to_string())),
         },
         rs::Lit::Byte(b) if !negative => flat(b.to_string(), Ty::Nat(Some(8))),
+        // A float literal: the format's value nearest the decimal, ties to
+        // even, as Rust rounds one; unsuffixed and not otherwise typed, it
+        // is an `f64`, the language's fallback.
+        rs::Lit::Float { digits, suffix } => {
+            let named = match (suffix.as_str(), want) {
+                ("f32" | "f64", _) => suffix.as_str(),
+                ("", Some(Ty::Float(f))) => return float_literal(*f, digits, negative),
+                ("", _) => "f64",
+                _ => return Err(Residue::Form("float literal".to_string())),
+            };
+            match Types::default().float(named) {
+                Some(f) => float_literal(f, digits, negative),
+                None => Err(Residue::Form("float literal".to_string())),
+            }
+        }
         rs::Lit::ByteStr(b) if !negative => {
             let bytes: Vec<String> = b.iter().map(u8::to_string).collect();
             flat(
@@ -2473,6 +2568,21 @@ fn unary_value(
         }
         rs::UnOp::Neg => match &*u.expr {
             rs::RustExpr::Lit(lit) => literal_of(lit, want, true).map(|v| (v, acc)),
+            // A float negates its sign, a NaN's too.
+            e if float_operand(e, env, ctx, &acc) => {
+                let ((x, xt), acc) = flat_of(e, env, ctx, acc, None)?;
+                let Ty::Float(f) = xt else {
+                    return Err(Residue::Arithmetic("-".to_string()));
+                };
+                let (term, acc) = float_term(f, "Neg", &[&x], acc);
+                flat_lift(term, xt, acc)
+            }
+            // An integer of no width negates exactly (see
+            // `unbounded_arithmetic`).
+            e if unbounded_operand(e, env, ctx, &acc) => {
+                let ((x, _), acc) = flat_of(e, env, ctx, acc, Some(&Ty::Unbounded))?;
+                flat_lift(format!("(prim negate {x} : Int)"), Ty::Unbounded, acc)
+            }
             _ => Err(Residue::Arithmetic("-".to_string())),
         },
         rs::UnOp::Deref => expr(&u.expr, env, ctx, acc, want),
@@ -3127,7 +3237,19 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         }
         // The mathematical `Int` has an order and no `equal`: two values
         // are the same where neither is below the other.
-        (Ty::Integer(_), _) => {
+        // IEEE 754's comparisons, a NaN unordered: the prelude's model.
+        (Ty::Float(f), _) => {
+            let op = match b.op {
+                B::Eq => "Eq",
+                B::Ne => "Ne",
+                B::Lt => "Lt",
+                B::Le => "Le",
+                B::Gt => "Gt",
+                _ => "Ge",
+            };
+            float_term(*f, op, &[&l, &r], acc)
+        }
+        (Ty::Integer(_) | Ty::Unbounded, _) => {
             let acc = acc.axiom("propext");
             let below = |x: &str, y: &str| format!("(prim less_than {x} {y} : Bool)");
             let text = match b.op {
@@ -3248,6 +3370,18 @@ fn binary(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty
         B::And | B::Or => logic(b, env, ctx, acc),
         B::Eq | B::Ne | B::Lt | B::Le | B::Gt | B::Ge => comparison(b, env, ctx, acc),
         // `s + t` of a `String` and a `&str`: the two joined.
+        B::Add | B::Sub | B::Mul | B::Div | B::Rem
+            if float_operand(&b.left, env, ctx, &acc)
+                || float_operand(&b.right, env, ctx, &acc) =>
+        {
+            float_arithmetic(b, env, ctx, acc)
+        }
+        B::Add | B::Sub | B::Mul | B::Div | B::Rem
+            if unbounded_operand(&b.left, env, ctx, &acc)
+                || unbounded_operand(&b.right, env, ctx, &acc) =>
+        {
+            unbounded_arithmetic(b, env, ctx, acc)
+        }
         B::Add if text_operand(&b.left, env, ctx, &acc) => text_join(b, env, ctx, acc),
         B::Add => nat_sum(b, env, ctx, acc),
         // `a - k` where the conditions in scope bound `a` below by `k` or
@@ -3313,6 +3447,109 @@ fn nat_difference(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((
         }
         _ => Err(Residue::Arithmetic(b.op.text().to_string())),
     }
+}
+
+/// Whether an operand is an integer of no width (see [`Ty::Unbounded`]).
+fn unbounded_operand(e: &rs::RustExpr, env: &Env, ctx: &Ctx, acc: &Acc) -> bool {
+    matches!(
+        flat_of(e, env, ctx, acc.clone(), None),
+        Ok(((_, Ty::Unbounded), _))
+    )
+}
+
+/// `a + b`, `a - b`, `a * b`, `a / b` and `a % b` of integers of no width:
+/// the crate's operators are exact (see [`crate::registered::readings`]),
+/// and a literal operand, whichever scalar type Rust infers for it, is
+/// promoted to the same integer. `/` and `%` truncate toward zero, as
+/// LexLean's `Int` quotient and remainder do; Rust panics on a zero
+/// divisor, and the definition agrees with it wherever it returns.
+fn unbounded_arithmetic(
+    b: &rs::ExprBinary,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    use rs::BinOp as B;
+    let want = Ty::Unbounded;
+    let ((l, lt), acc) = flat_of(&b.left, env, ctx, acc, Some(&want))?;
+    let ((r, rt), acc) = flat_of(&b.right, env, ctx, acc, Some(&want))?;
+    if lt != want || rt != want {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    }
+    let text = match b.op {
+        B::Add => format!("(prim subtract {l} (prim negate {r} : Int) : Int)"),
+        B::Sub => format!("(prim subtract {l} {r} : Int)"),
+        B::Mul => format!("(prim multiply {l} {r} : Int)"),
+        B::Div => format!("(prim quotient {l} {r} (0 : Int) : Int)"),
+        _ => format!("(prim remainder {l} {r} (0 : Int) : Int)"),
+    };
+    flat_lift(text, want, acc)
+}
+
+/// Whether an operand is a float of the language.
+fn float_operand(e: &rs::RustExpr, env: &Env, ctx: &Ctx, acc: &Acc) -> bool {
+    matches!(
+        flat_of(e, env, ctx, acc.clone(), None),
+        Ok(((_, Ty::Float(_)), _))
+    )
+}
+
+/// The prelude's IEEE 754 operation `op` of a format (see
+/// [`crate::mir::float`]), with the axioms its definition states.
+fn float_term(f: crate::mir::float::Format, op: &str, args: &[&str], acc: Acc) -> (String, Acc) {
+    let axioms = prelude_axioms(&format!("float{op}"));
+    (
+        f.term(op, args),
+        acc.axioms_all(axioms.into_iter().collect()),
+    )
+}
+
+/// A float literal of a format: the prelude's value of its decimal digits
+/// (`crate::mir::float::literal`), negated where written so.
+fn float_literal(f: crate::mir::float::Format, digits: &str, negative: bool) -> Lift<(Expr, Ty)> {
+    let text = if negative {
+        format!("-{digits}")
+    } else {
+        digits.to_string()
+    };
+    match crate::mir::float::literal(f, &text) {
+        Some(term) => Ok((Expr::Flat(term), Ty::Float(f))),
+        None => Err(Residue::Form("float literal".to_string())),
+    }
+}
+
+/// `a + b`, `a - b`, `a * b`, `a / b` and `a % b` of floats of one
+/// format: IEEE 754's correctly rounded operations, to nearest with ties
+/// to even, which Rust's are, and `%` the remainder truncated toward zero
+/// that Rust's `%` on floats is; the prelude's model (see
+/// [`crate::mir::float`]), the MIR path's too.
+fn float_arithmetic(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty), Acc)> {
+    use rs::BinOp as B;
+    let first = if float_operand(&b.left, env, ctx, &acc) {
+        &b.left
+    } else {
+        &b.right
+    };
+    let Ok(((_, want), _)) = flat_of(first, env, ctx, acc.clone(), None) else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    let ((l, lt), acc) = flat_of(&b.left, env, ctx, acc, Some(&want))?;
+    let ((r, rt), acc) = flat_of(&b.right, env, ctx, acc, Some(&want))?;
+    let Ty::Float(f) = want else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    if lt != want || rt != want {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    }
+    let op = match b.op {
+        B::Add => "Add",
+        B::Sub => "Sub",
+        B::Mul => "Mul",
+        B::Div => "Div",
+        _ => "Rem",
+    };
+    let (term, acc) = float_term(f, op, &[&l, &r], acc);
+    flat_lift(term, want, acc)
 }
 
 /// `a / k` and `a % k` by a divisor that is not zero.
@@ -3654,7 +3891,139 @@ fn path_call(
     if let Some(lifted) = known {
         return Ok((lifted, acc));
     }
+    let (known, acc) = unbounded_call(&segments, &call_args, env, ctx, acc)?;
+    if let Some(lifted) = known {
+        return Ok((lifted, acc));
+    }
     fn_call(c, &segments, env, ctx, acc)
+}
+
+/// The traits of `num-traits` whose associated function a call through an
+/// integer of no width names, each with the paths a `use` may bind it by
+/// (the crate's root re-exports its `identities` module's traits).
+const UNBOUNDED_IDENTITIES: &[(&str, &str, &[&str])] = &[
+    (
+        "zero",
+        "(0 : Int)",
+        &["num_traits::Zero", "num_traits::identities::Zero"],
+    ),
+    (
+        "one",
+        "(1 : Int)",
+        &["num_traits::One", "num_traits::identities::One"],
+    ),
+];
+
+/// A constructor of an integer of no width, by the type's path
+/// (`BigInt::from(n)`): the reading's crate defines each (see
+/// [`crate::registered::readings`]). `from` of a signed integer of the
+/// language is that integer, exactly, as the crate's `From` of every
+/// signed width is, and of the type itself is the value; `default` is
+/// zero. `zero` and `one` are the `num-traits` identities, which name the
+/// crate's own implementation where the file's `use` brings the trait into
+/// scope: the type declares no associated function of either name, so a
+/// call that compiles names the trait in scope, and Rust refuses one where
+/// another trait in scope gives the name too.
+fn unbounded_call(
+    segments: &[String],
+    call_args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(Option<(Expr, Ty)>, Acc)> {
+    let [owner, function] = segments else {
+        return Ok((None, acc));
+    };
+    match env.types.registered(&env.types.resolve(owner)) {
+        Some(Ty::Unbounded) => {}
+        Some(Ty::Ratio) => return ratio_call(owner, function, call_args, env, ctx, acc),
+        _ => return Ok((None, acc)),
+    }
+    let want = Ty::Unbounded;
+    match (function.as_str(), call_args) {
+        ("from", [a]) => {
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, None)?;
+            match vt {
+                Ty::Unbounded | Ty::Integer(_) => flat_some(v, want, acc),
+                // The conversion of a fixed width to `Int` elaborates
+                // through these two.
+                Ty::Int(_) => {
+                    let acc = acc.axiom("Quot.sound").axiom("propext");
+                    flat_some(format!("(prim to_int {v} : Int)"), want, acc)
+                }
+                other => Err(Residue::Form(format!(
+                    "{owner}::from of {}, where LexLean binds no conversion to Int",
+                    other.render()
+                ))),
+            }
+        }
+        ("default", []) => flat_some("(0 : Int)".into(), want, acc),
+        (name, []) => match identity(name, ctx) {
+            Some(value) => flat_some(value.into(), want, acc),
+            None => Ok((None, acc)),
+        },
+        _ => Ok((None, acc)),
+    }
+}
+
+/// The value of a `num-traits` identity (`zero`, `one`) the file's `use`
+/// brings into scope.
+fn identity(name: &str, ctx: &Ctx) -> Option<&'static str> {
+    UNBOUNDED_IDENTITIES
+        .iter()
+        .find(|(n, _, _)| *n == name)
+        .filter(|(_, _, paths)| ctx.imports.values().any(|p| paths.contains(&p.as_str())))
+        .map(|(_, value, _)| *value)
+}
+
+/// A constructor of a ratio by the type's path, as num-rational 0.4.2's
+/// `src/lib.rs` defines each on the stored pair: `new_raw(n, d)` stores
+/// the pair as given; `from_integer(n)` and `from(n)` of an integer are
+/// `new_raw(n, 1)`; `zero()` is `new_raw(0, 1)`, `one()` is
+/// `new_raw(1, 1)`, and `default()` is `zero()`. `new` and `from` of a pair
+/// reduce by the greatest common divisor, which LexLean's `Int` gives no
+/// operation for: they stay outside.
+fn ratio_call(
+    owner: &str,
+    function: &str,
+    call_args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(Option<(Expr, Ty)>, Acc)> {
+    let integer = Ty::Unbounded;
+    let pair = |n: &str, d: &str| format!("({n}, {d})");
+    match (function, call_args) {
+        ("new_raw", [n, d]) => {
+            let ((n, nt), acc) = flat_of(n, env, ctx, acc, Some(&integer))?;
+            let ((d, dt), acc) = flat_of(d, env, ctx, acc, Some(&integer))?;
+            if nt != integer || dt != integer {
+                return Err(Residue::Form(format!("{owner}::new_raw of another type")));
+            }
+            flat_some(pair(&n, &d), Ty::Ratio, acc)
+        }
+        ("from_integer" | "from", [n]) => {
+            let ((n, nt), acc) = flat_of(n, env, ctx, acc, Some(&integer))?;
+            if nt != integer {
+                return Err(Residue::Form(format!(
+                    "{owner}::{function} of {}, which reduces by a greatest common divisor \
+                     LexLean's Int gives no operation for",
+                    nt.render()
+                )));
+            }
+            flat_some(pair(&n, "(1 : Int)"), Ty::Ratio, acc)
+        }
+        ("default", []) => flat_some(pair("(0 : Int)", "(1 : Int)"), Ty::Ratio, acc),
+        (name, []) => match identity(name, ctx) {
+            Some(value) => flat_some(pair(value, "(1 : Int)"), Ty::Ratio, acc),
+            None => Ok((None, acc)),
+        },
+        ("new", [_, _]) => Err(Residue::Form(format!(
+            "{owner}::new, which reduces by a greatest common divisor LexLean's Int gives \
+             no operation for"
+        ))),
+        _ => Ok((None, acc)),
+    }
 }
 
 /// A constructor of the standard library the lift knows, by its path's
@@ -4546,6 +4915,46 @@ fn method_typed(
             Ty::Integer(bits),
             "checked_add" | "checked_sub" | "checked_mul" | "checked_div" | "checked_neg",
         ) => method_integer_checked(bits, name, r, rt, args, env, ctx, acc),
+        // A float's inherent methods, which take precedence over any
+        // trait's: the prelude's model, by the table the MIR path reads.
+        (Ty::Float(f), _) if float_method(name, args.len()).is_some() => {
+            method_float(*f, name, r, rt, args, env, ctx, acc)
+        }
+        // A ratio's inherent accessors (num-rational 0.4.2, `src/lib.rs`),
+        // which an inherent method's precedence over a trait's keeps: the
+        // stored numerator and denominator, whether the denominator is
+        // one, and the reciprocal, which swaps the two and keeps the
+        // denominator's sign positive (Rust panics on a zero numerator).
+        (Ty::Ratio, "numer") if args.is_empty() => {
+            flat_lift(format!("(first {r})"), Ty::Unbounded, acc)
+        }
+        (Ty::Ratio, "denom") if args.is_empty() => {
+            flat_lift(format!("(second {r})"), Ty::Unbounded, acc)
+        }
+        (Ty::Ratio, "is_integer") if args.is_empty() => {
+            let acc = acc.axiom("propext");
+            let d = format!("(second {r})");
+            flat_lift(
+                format!(
+                    "(not ((prim less_than {d} (1 : Int) : Bool) || \
+                     (prim less_than (1 : Int) {d} : Bool)))"
+                ),
+                Ty::Bool,
+                acc,
+            )
+        }
+        (Ty::Ratio, "recip") if args.is_empty() => {
+            let acc = acc.axiom("propext");
+            let (n, d) = (format!("(first {r})"), format!("(second {r})"));
+            flat_lift(
+                format!(
+                    "(if (prim less_than {n} (0 : Int) : Bool) then \
+                     ((prim negate {d} : Int), (prim negate {n} : Int)) else ({d}, {n}))"
+                ),
+                Ty::Ratio,
+                acc,
+            )
+        }
         (Ty::List(_), "len") if args.is_empty() => {
             method_list_len(r, acc)
         }
@@ -4961,6 +5370,64 @@ fn method_integer_checked(
     flat_lift(text, opt_of(rt), acc)
 }
 
+/// The prelude's operation and kind of a float's inherent method of this
+/// many arguments besides `self`, by the table the MIR path reads
+/// ([`crate::mir::float::METHODS`]).
+fn float_method(name: &str, args: usize) -> Option<(&'static str, crate::mir::float::Kind)> {
+    use crate::mir::float::Kind;
+    crate::mir::float::METHODS
+        .iter()
+        .find(|(t, m, _, n, kind)| {
+            t.is_empty()
+                && *m == name
+                && *n == args + 1
+                && (matches!(kind, Kind::Value | Kind::Test) || *m == "to_bits")
+        })
+        .map(|(_, _, op, _, kind)| (*op, *kind))
+}
+
+/// `x.abs()`, `x.is_nan()`, `x.to_bits()` and the other inherent methods
+/// of a float the prelude models, each on operands of the receiver's
+/// format. `to_bits` is the bit pattern a float is held as.
+#[allow(clippy::too_many_arguments)]
+fn method_float(
+    f: crate::mir::float::Format,
+    name: &str,
+    r: &str,
+    rt: &Ty,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    use crate::mir::float::Kind;
+    let Some((op, kind)) = float_method(name, args.len()) else {
+        return Err(Residue::Form(format!("method call .{name}")));
+    };
+    if name == "to_bits" {
+        return flat_lift(r.to_string(), Ty::Nat(Some(1 + f.exp + f.frac)), acc);
+    }
+    let mut terms = vec![r.to_string()];
+    let mut acc = acc;
+    for a in args {
+        let ((v, vt), next) = flat_of(a, env, ctx, acc, Some(rt))?;
+        if vt != *rt {
+            return Err(Residue::Form(format!(
+                "method call .{name} of another type"
+            )));
+        }
+        terms.push(v);
+        acc = next;
+    }
+    let refs: Vec<&str> = terms.iter().map(String::as_str).collect();
+    let (term, acc) = float_term(f, op, &refs, acc);
+    let ty = match kind {
+        Kind::Test => Ty::Bool,
+        _ => rt.clone(),
+    };
+    flat_lift(term, ty, acc)
+}
+
 /// `.min` on a receiver of type `Int`.
 fn method_int_min(
     name: &str,
@@ -5300,7 +5767,8 @@ fn default_in(ty: &Ty, types: &Types, depth: usize) -> Option<String> {
         Ty::Bool => "false".into(),
         Ty::Nat(_) | Ty::Float(_) | Ty::Signed(_) | Ty::Scalar => "0".into(),
         Ty::Int(_) => "(0 : Int64)".into(),
-        Ty::Integer(_) => "(0 : Int)".into(),
+        Ty::Integer(_) | Ty::Unbounded => "(0 : Int)".into(),
+        Ty::Ratio => "((0 : Int), (1 : Int))".into(),
         Ty::Str | Ty::Char => "\"\"".into(),
         Ty::ParseError => format!("(ctor {PRELUDE}::ParseIntError.InvalidDigit)"),
         Ty::Option(t) => format!("(ctor Option.none [{}])", t.render()),
@@ -12105,20 +12573,22 @@ mod tests {
     #[test]
     fn a_type_outside_the_lift_names_the_chain_to_its_leaf() {
         let types = types_of(
-            "struct Leaf { x: f64 } struct Mid { n: u32, leaf: Leaf, other: f32 } \
+            "struct Leaf { x: Cell<u8> } struct Mid { n: u32, leaf: Leaf, other: Cell<u16> } \
              struct Top { mids: Vec<Option<Mid>> }",
         );
         // Through the containers the lift reads, down to the first field
         // in declaration order that is outside.
         assert_eq!(
             lift("fn through(t: &Top) -> bool { true }", &types),
-            Err(Residue::Type("Top.mids: Mid.leaf: Leaf.x: f64".to_string()))
+            Err(Residue::Type(
+                "Top.mids: Mid.leaf: Leaf.x: Cell<u8>".to_string()
+            ))
         );
         // The owner of a method is named the same way; a name the
         // workspace does not declare is its own leaf.
         assert_eq!(
             types.unnamed("Mid"),
-            Residue::Type("Mid.leaf: Leaf.x: f64".to_string())
+            Residue::Type("Mid.leaf: Leaf.x: Cell<u8>".to_string())
         );
         assert_eq!(
             types.unnamed("Elsewhere"),
@@ -12126,7 +12596,7 @@ mod tests {
         );
         assert_eq!(
             types.unnamed("Mid").detail(),
-            "type outside the lift: Mid.leaf: Leaf.x: f64"
+            "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>"
         );
     }
 
@@ -12134,24 +12604,25 @@ mod tests {
     fn a_chain_never_leads_back_into_the_type_it_explains() {
         // `A` holds `B` first, and `B` is outside only because it holds
         // `A`: the chain of `A` names what kept `A` out on its own.
-        let types = types_of("struct A { b: Vec<B>, x: f64 } struct B { a: Option<A> }");
-        assert_eq!(types.outside["A"], "A.x: f64");
-        assert_eq!(types.outside["B"], "B.a: A.x: f64");
+        let types = types_of("struct A { b: Vec<B>, x: Cell<u8> } struct B { a: Option<A> }");
+        assert_eq!(types.outside["A"], "A.x: Cell<u8>");
+        assert_eq!(types.outside["B"], "B.a: A.x: Cell<u8>");
         // Each of two types outside on its own account names the other
         // first, as declared, and then what keeps that one out.
-        let types = types_of("struct T { u: Vec<U>, x: f64 } struct U { t: Box<T>, y: f32 }");
-        assert_eq!(types.outside["T"], "T.u: U.y: f32");
-        assert_eq!(types.outside["U"], "U.t: T.x: f64");
+        let types =
+            types_of("struct T { u: Vec<U>, x: Cell<u8> } struct U { t: Box<T>, y: Cell<u16> }");
+        assert_eq!(types.outside["T"], "T.u: U.y: Cell<u16>");
+        assert_eq!(types.outside["U"], "U.t: T.x: Cell<u8>");
     }
 
     #[test]
     fn an_enum_names_the_variant_and_the_field_of_its_leaf() {
         let types = types_of(
-            "enum Reading { Count(u32), Pair(u8, f64), Level { level: f64 } } \
+            "enum Reading { Count(u32), Pair(u8, Cell<u8>), Level { level: Cell<u8> } } \
              enum Tree { Leaf, Node(BTreeMap<String, Tree>) } \
              struct Parent { kids: BTreeSet<Child> } struct Child { parent: Vec<Parent> }",
         );
-        assert_eq!(types.outside["Reading"], "Reading::Pair.1: f64");
+        assert_eq!(types.outside["Reading"], "Reading::Pair.1: Cell<u8>");
         assert_eq!(
             types.outside["Tree"],
             format!("Tree::Node.0: BTreeMap<String, Tree>: {NOT_NESTED}")
@@ -12372,7 +12843,7 @@ mod tests {
     #[test]
     fn every_struct_shape_is_a_type_or_names_its_leaf() {
         let types = types_of(
-            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, f64); \
+            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, Cell<u8>); \
              struct Wrapper<T> { value: T } struct Holder { m: Marker, w: Wrapper<u32> }",
         );
         // A struct of no fields has one value: one constructor.
@@ -12389,7 +12860,7 @@ mod tests {
         assert!(out.contains("body: (project m item0)"), "{out}");
         let out = lift("fn make(n: u32) -> Meters { Meters(n) }", &types).expect("lifts");
         assert!(out.contains("body: (record Meters {item0 := n})"), "{out}");
-        assert_eq!(types.outside["Pair"], "Pair.1: f64");
+        assert_eq!(types.outside["Pair"], "Pair.1: Cell<u8>");
         // A struct with a type parameter is the leaf.
         assert_eq!(
             types.outside["Wrapper"],
@@ -12487,5 +12958,255 @@ mod tests {
                 "generic, async, unsafe or variadic".to_string()
             ))
         );
+    }
+
+    // Registry number types.
+
+    /// A scope where the package's lock admits the big integer reading and
+    /// the file's `use` binds `BigInt` to it.
+    fn registry_number_scope() -> Types {
+        let path = "num_bigint::BigInt".to_string();
+        Types {
+            aliases: BTreeMap::from([("BigInt".to_string(), path.clone()), (path.clone(), path)]),
+            ..Types::default()
+        }
+    }
+
+    fn registry_number_lift(src: &str, imports: &[(&str, &str)]) -> Result<String, Residue> {
+        let types = registry_number_scope();
+        let f: syn::ItemFn = syn::parse_str(src).expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        let block = crate::convert::block(&f.block);
+        let (params, result) = types.signature(&sig, None)?;
+        let c = Candidate {
+            rust: sig.ident.clone(),
+            name: camel(&[&sig.ident]),
+            params,
+            result,
+            block: &block,
+            imports: imports
+                .iter()
+                .map(|(n, p)| (n.to_string(), p.to_string()))
+                .collect(),
+            aliases: BTreeMap::new(),
+            homonyms: BTreeMap::new(),
+            called: sig.ident.clone(),
+            formatter: None,
+        };
+        let out = lift_all(&[c], &types, &pointer_widths(&[]), &BTreeSet::new());
+        match out.failed.into_values().next() {
+            Some(r) => Err(r),
+            None => Ok(out
+                .decls
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect::<Vec<_>>()
+                .join("\n")),
+        }
+    }
+
+    #[test]
+    fn a_registered_big_integer_is_an_int_where_the_lock_admits_it() {
+        let types = registry_number_scope();
+        let named = |text: &str| {
+            let f: syn::ItemFn = syn::parse_str(&format!("fn f(x: {text}) {{}}")).expect("parses");
+            let sig = crate::convert::signature(&f.sig);
+            types
+                .signature(&sig, None)
+                .map(|(params, _)| params[0].2.clone())
+        };
+        assert_eq!(named("BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(named("num_bigint::BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(named("&::num_bigint::BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(
+            named("Vec<BigInt>").map(|t| t.render()),
+            Ok("(List Int)".to_string())
+        );
+        // Without the lock's admission the name is the leaf, as written.
+        let f: syn::ItemFn = syn::parse_str("fn f(x: BigInt) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert_eq!(
+            Types::default().signature(&sig, None).err(),
+            Some(Residue::Type("BigInt".to_string()))
+        );
+        let f: syn::ItemFn = syn::parse_str("fn f(x: num_bigint::BigUint) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert_eq!(
+            types.signature(&sig, None).err(),
+            Some(Residue::Type("num_bigint::BigUint".to_string()))
+        );
+    }
+
+    #[test]
+    fn a_registered_big_integer_computes_exactly() {
+        let lifted = registry_number_lift(
+            "fn mix(a: BigInt, b: &BigInt) -> BigInt { -(a.clone() * b + 2) / (a - b) % b }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(
+            lifted.contains(
+                "(prim remainder (prim quotient (prim negate (prim subtract \
+                 (prim multiply a b : Int) (prim negate (2 : Int) : Int) : Int) : Int) \
+                 (prim subtract a b : Int) (0 : Int) : Int) b (0 : Int) : Int)"
+            ),
+            "{lifted}"
+        );
+        let lifted =
+            registry_number_lift("fn below(a: &BigInt, b: &BigInt) -> bool { a < b }", &[])
+                .expect("lifts");
+        assert!(lifted.contains("(prim less_than a b : Bool)"), "{lifted}");
+    }
+
+    #[test]
+    fn a_registered_big_integer_is_built_from_what_the_crate_defines() {
+        let lifted = registry_number_lift("fn of(n: i64) -> BigInt { BigInt::from(n) }", &[])
+            .expect("lifts");
+        assert!(lifted.contains("(prim to_int n : Int)"), "{lifted}");
+        let lifted =
+            registry_number_lift("fn none() -> BigInt { BigInt::default() }", &[]).expect("lifts");
+        assert!(lifted.contains("(0 : Int)"), "{lifted}");
+        // `zero` and `one` are the trait's where the file brings it into
+        // scope, and no function of the lift otherwise.
+        let zero = "fn none() -> BigInt { BigInt::zero() }";
+        let lifted = registry_number_lift(zero, &[("Zero", "num_traits::Zero")]).expect("lifts");
+        assert!(lifted.contains("(0 : Int)"), "{lifted}");
+        assert!(registry_number_lift(zero, &[]).is_err());
+        let one = "fn unit() -> BigInt { BigInt::one() }";
+        let lifted =
+            registry_number_lift(one, &[("One", "num_traits::identities::One")]).expect("lifts");
+        assert!(lifted.contains("(1 : Int)"), "{lifted}");
+        // LexLean converts no `Nat` to `Int`.
+        assert_eq!(
+            registry_number_lift("fn of(n: u32) -> BigInt { BigInt::from(n) }", &[]).err(),
+            Some(Residue::Form(
+                "BigInt::from of Nat, where LexLean binds no conversion to Int".to_string()
+            ))
+        );
+    }
+
+    #[test]
+    fn a_registered_ratio_is_the_pair_it_stores() {
+        let mut types = registry_number_scope();
+        let ratio = "num_rational::BigRational".to_string();
+        types.aliases.insert("BigRational".into(), ratio.clone());
+        types.aliases.insert(ratio.clone(), ratio);
+        let lift = |src: &str, imports: &[(&str, &str)]| {
+            let f: syn::ItemFn = syn::parse_str(src).expect("parses");
+            let sig = crate::convert::signature(&f.sig);
+            let block = crate::convert::block(&f.block);
+            let (params, result) = types.signature(&sig, None)?;
+            let c = Candidate {
+                rust: sig.ident.clone(),
+                name: camel(&[&sig.ident]),
+                params,
+                result,
+                block: &block,
+                imports: imports
+                    .iter()
+                    .map(|(n, p)| (n.to_string(), p.to_string()))
+                    .collect(),
+                aliases: BTreeMap::new(),
+                homonyms: BTreeMap::new(),
+                called: sig.ident.clone(),
+                formatter: None,
+            };
+            let out = lift_all(&[c], &types, &pointer_widths(&[]), &BTreeSet::new());
+            match out.failed.into_values().next() {
+                Some(r) => Err(r),
+                None => Ok(out
+                    .decls
+                    .iter()
+                    .map(crate::lex::render_decl)
+                    .collect::<Vec<_>>()
+                    .join("\n")),
+            }
+        };
+        let lifted = lift(
+            "fn raw(n: BigInt, d: BigInt) -> BigRational { BigRational::new_raw(n, d) }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("result: (Int * Int)"), "{lifted}");
+        assert!(lifted.contains("(n, d)"), "{lifted}");
+        let lifted = lift(
+            "fn whole(n: BigInt) -> BigRational { BigRational::from(n) }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(n, (1 : Int))"), "{lifted}");
+        let lifted = lift(
+            "fn unit() -> BigRational { BigRational::one() }",
+            &[("One", "num_traits::One")],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("((1 : Int), (1 : Int))"), "{lifted}");
+        let lifted = lift(
+            "fn top(r: &BigRational) -> BigInt { r.numer().clone() }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(first r)"), "{lifted}");
+        let lifted =
+            lift("fn flip(r: &BigRational) -> BigRational { r.recip() }", &[]).expect("lifts");
+        assert!(
+            lifted.contains(
+                "(if (prim less_than (first r) (0 : Int) : Bool) then \
+                 ((prim negate (second r) : Int), (prim negate (first r) : Int)) \
+                 else ((second r), (first r)))"
+            ),
+            "{lifted}"
+        );
+        // Two stored pairs may be one value: no comparison is read, and
+        // what reduces stays outside.
+        assert!(matches!(
+            lift(
+                "fn same(a: &BigRational, b: &BigRational) -> bool { a == b }",
+                &[]
+            ),
+            Err(Residue::Form(_))
+        ));
+        assert!(matches!(
+            lift(
+                "fn reduced(n: BigInt, d: BigInt) -> BigRational { BigRational::new(n, d) }",
+                &[]
+            ),
+            Err(Residue::Form(_))
+        ));
+    }
+
+    #[test]
+    fn a_float_is_ieee_754s_binary_format_core_states() {
+        let f64_format = Types::default().float("f64").expect("binary64");
+        assert_eq!((f64_format.exp, f64_format.frac), (11, 52));
+        let f32_format = Types::default().float("f32").expect("binary32");
+        assert_eq!((f32_format.exp, f32_format.frac), (8, 23));
+        let lifted = lift(
+            "fn mix(a: f64, b: f64) -> f64 { -(a * b + 0.5) / a % b }",
+            &plain(),
+        )
+        .expect("lifts");
+        let add = format!(
+            "(Prelude::floatAdd 11 52 (Prelude::floatMul 11 52 a b) {})",
+            crate::mir::float::literal(f64_format, "0.5").expect("a literal")
+        );
+        assert!(lifted.contains(&add), "{lifted}");
+        assert!(
+            lifted.contains("(Prelude::floatRem 11 52 (Prelude::floatDiv"),
+            "{lifted}"
+        );
+        assert!(lifted.contains("(Prelude::floatNeg 11 52 "), "{lifted}");
+        let lifted = lift(
+            "fn below(a: f32, b: f32) -> bool { a < b && !b.is_nan() }",
+            &plain(),
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(Prelude::floatLt 8 23 a b)"), "{lifted}");
+        assert!(lifted.contains("(Prelude::floatIsNan 8 23 b)"), "{lifted}");
+        let lifted = lift("fn bits(a: f64) -> u64 { a.abs().to_bits() }", &plain()).expect("lifts");
+        assert!(lifted.contains("(Prelude::floatAbs 11 52 a)"), "{lifted}");
+        // Two formats do not mix, and a method the model has not is no
+        // definition.
+        assert!(lift("fn sin(a: f64) -> f64 { a.sin() }", &plain()).is_err());
     }
 }

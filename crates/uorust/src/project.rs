@@ -86,6 +86,10 @@ struct Model {
     /// The bare names a function's module binds by a `use` to a type of a
     /// registry crate, each with the crate.
     registry: BTreeMap<FnRef, BTreeMap<String, String>>,
+    /// The bare names each source file `(package, file)` binds, in every
+    /// one of its modules, to a registered crate's type whose reading the
+    /// package's lock admits, each with the type's path.
+    registered: BTreeMap<(usize, usize), BTreeMap<String, String>>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -303,6 +307,7 @@ pub(crate) fn project(
         calls: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
         registry: BTreeMap::new(),
+        registered: BTreeMap::new(),
     };
     ctx.registry = ctx
         .all_fns()
@@ -310,6 +315,19 @@ pub(crate) fn project(
         .map(|r| (r, resolver.registry_types((r.pkg, r.file, r.idx))))
         .filter(|(_, bound)| !bound.is_empty())
         .collect();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        let read = crate::registered::of_package(package, &ws.lock);
+        if read.is_empty() {
+            continue;
+        }
+        for fi in 0..package.files.len() {
+            let bound = resolver.registry_bindings(pkg, fi, &read);
+            let bound = crate::registered::bindings(package, bound);
+            if !bound.is_empty() {
+                ctx.registered.insert((pkg, fi), bound);
+            }
+        }
+    }
     ctx.edges = edges(&ctx);
     let (calls, refused) = resolve(&ctx, &resolver);
     ctx.calls = calls;
@@ -3522,6 +3540,11 @@ fn behavior(
                     names.insert(name.clone(), lex.clone());
                 }
             }
+            // A registered crate's type a `use` of the file binds, where
+            // the package's lock admits its reading.
+            if let Some(bound) = ctx.registered.get(&(pkg, fi)) {
+                names.extend(bound.clone());
+            }
             overlays.insert((pkg, fi), names);
         }
     }
@@ -3538,6 +3561,11 @@ fn behavior(
                 .filter(|((_, _, name), lex)| *lex != name && !ambiguous[pkg].contains(name))
                 .map(|((_, _, name), lex)| (name.clone(), lex.clone()))
                 .collect();
+            // The registered crates' types whose reading the package's lock
+            // admits, each naming itself (`Types::registered`).
+            for path in crate::registered::of_package(package, &ws.lock) {
+                aliases.insert(path.clone(), path);
+            }
             let mut enums: Variants = d
                 .enums
                 .into_iter()
@@ -6259,7 +6287,7 @@ mod tests {
              pub struct Handle {\n    /// A raw handle.\n    pub raw: u64,\n}\n\n\
              /// Stopped by a name two declarations share.\n\
              pub fn opened(h: &Handle) -> bool {\n    let _ = h;\n    true\n}\n\n\
-             /// A float.\npub struct Leaf {\n    /// The float.\n    pub x: f64,\n}\n\n\
+             /// A cell.\npub struct Leaf {\n    /// The cell.\n    pub x: Cell<u8>,\n}\n\n\
              /// Holds the leaf.\npub struct Mid {\n    /// A count.\n    pub n: u32,\n    \
              /// The leaf.\n    pub leaf: Leaf,\n}\n\n\
              impl Mid {\n    /// Stopped by the type it is a method of.\n    \
@@ -6278,7 +6306,7 @@ mod tests {
              /// One function for each build configuration.\n#[cfg(unix)]\n\
              pub fn width() -> u32 {\n    1\n}\n\n\
              /// One function for each build configuration.\n#[cfg(not(unix))]\n\
-             pub fn width(scale: f64) -> u32 {\n    let _ = scale;\n    2\n}\n",
+             pub fn width(scale: Cell<u8>) -> u32 {\n    let _ = scale;\n    2\n}\n",
         ),
         (
             "src/first.rs",
@@ -6350,7 +6378,7 @@ mod tests {
             rows_of(&frontier, "owners::Mid::count", "detail"),
             vec![(
                 "residue".to_string(),
-                "type outside the lift: Mid.leaf: Leaf.x: f64".to_string()
+                "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>".to_string()
             )]
         );
     }
@@ -6725,7 +6753,7 @@ mod tests {
                 "src/lib.rs",
                 "//! Reasons.\n\
                  /// A circle.\npub struct Circle(pub u32);\n\
-                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: f64,\n}\n\
+                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: Cell<u8>,\n}\n\
                  /// A bag.\npub struct Bag {\n    /// Its blob.\n    pub blob: Blob,\n}\n\
                  /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
                  impl Circle {\n    /// The radius.\n    \
@@ -6754,7 +6782,7 @@ mod tests {
             (
                 "reasons::Bag::count",
                 "type",
-                "type outside the lift: Bag.blob: Blob.weight: f64",
+                "type outside the lift: Bag.blob: Blob.weight: Cell<u8>",
             ),
             (
                 "reasons::Square::grow",
