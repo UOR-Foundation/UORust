@@ -91,6 +91,50 @@ fn unlifted(files: &BTreeMap<String, Vec<u8>>) -> String {
         .to_string()
 }
 
+/// The rows of the array of tables `table` in a projection's frontier.
+fn frontier_rows(files: &BTreeMap<String, Vec<u8>>, table: &str) -> Vec<toml::Value> {
+    let frontier: toml::Value =
+        toml::from_str(&text(files, "frontier.toml")).expect("frontier parses");
+    frontier
+        .get(table)
+        .and_then(|v| v.as_array())
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// The `[[refusal]]` rows of `reason` in a projection's frontier, and the
+/// count the work queue's `[[reason]]` row of that reason carries: read as
+/// rows, so a reason text in the queue never counts as a refusal and a
+/// refusal row is never stood in for by the queue's summary.
+fn refused(files: &BTreeMap<String, Vec<u8>>, reason: &str) -> (usize, Option<i64>) {
+    let of = |row: &toml::Value| row.get("reason").and_then(|v| v.as_str()) == Some(reason);
+    let rows = frontier_rows(files, "refusal")
+        .iter()
+        .filter(|r| of(r))
+        .count();
+    let queued: Vec<i64> = frontier_rows(files, "reason")
+        .iter()
+        .filter(|r| of(r))
+        .map(|r| {
+            r.get("refusals")
+                .and_then(|v| v.as_integer())
+                .expect("a queue row counts its refusals")
+        })
+        .collect();
+    assert!(queued.len() <= 1, "{reason} is queued twice: {queued:?}");
+    (rows, queued.first().copied())
+}
+
+/// The reasons of the `[[residue]]` rows of `function`.
+fn residue_reasons(files: &BTreeMap<String, Vec<u8>>, function: &str) -> Vec<String> {
+    frontier_rows(files, "residue")
+        .iter()
+        .filter(|r| r.get("function").and_then(|v| v.as_str()) == Some(function))
+        .filter_map(|r| r.get("reason").and_then(|v| v.as_str()))
+        .map(str::to_string)
+        .collect()
+}
+
 fn text(files: &BTreeMap<String, Vec<u8>>, path: &str) -> String {
     String::from_utf8(files.get(path).cloned().unwrap_or_default()).expect("utf-8")
 }
@@ -253,12 +297,6 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
     assert!(behavior.contains("proof: decide{}"));
     assert!(behavior.contains("(prim quotient (low + high) 2 0 : Nat)"));
     let frontier = text(&files, "frontier.toml");
-    let residue = |function: &str, reason: &str| {
-        frontier.contains(&format!("function = \"{function}\"\nspan = "))
-            && frontier.split("[[residue]]").any(|row| {
-                row.contains(function) && row.contains(&format!("reason = \"{reason}\""))
-            })
-    };
     // Arithmetic whose meaning is a build setting stays typed residue.
     let planted = scratch(
         "arith",
@@ -273,11 +311,12 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
             ),
         ],
     );
-    let planted_frontier = text(&project(&planted, "arith"), "frontier.toml");
-    assert!(
-        planted_frontier.contains("function = \"arith::mid\"")
-            && planted_frontier.contains("reason = \"arithmetic\""),
-        "{planted_frontier}"
+    let planted_files = project(&planted, "arith");
+    assert_eq!(
+        residue_reasons(&planted_files, "arith::mid"),
+        ["arithmetic"],
+        "{}",
+        text(&planted_files, "frontier.toml")
     );
     let _ = std::fs::remove_dir_all(planted);
     // The I/O shell is an effect row, not residue: `load_target` reads a file
@@ -296,7 +335,7 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
         "{frontier}"
     );
     assert!(
-        !residue("thermo_core::config::load_target", "type"),
+        residue_reasons(&files, "thermo_core::config::load_target").is_empty(),
         "{frontier}"
     );
 }
@@ -663,7 +702,12 @@ fn advisories_are_risks_on_the_supply_chain_ue_12() {
 
     // Without a database, the frontier says no advisory was consulted.
     let files = project(&advised, "advised");
-    assert!(text(&files, "frontier.toml").contains("reason = \"advisories-unconsulted\""));
+    assert_eq!(
+        refused(&files, "advisories-unconsulted"),
+        (1, Some(1)),
+        "{}",
+        text(&files, "frontier.toml")
+    );
     assert!(!text(&files, "src/Security.lex.tex").contains("Advisory"));
 
     // Without deny.toml, an advisory nothing answers is refused, not modeled.
@@ -690,9 +734,10 @@ fn advisories_are_risks_on_the_supply_chain_ue_12() {
     };
     let files = uorust::project_workspace(&copy, &bare).expect("projects");
     let frontier = text(&files, "frontier.toml");
+    // Four refusals, one per advisory, and the work queue counts them.
     assert_eq!(
-        frontier.matches("reason = \"unanswered-advisory\"").count(),
-        4,
+        refused(&files, "unanswered-advisory"),
+        (4, Some(4)),
         "{frontier}"
     );
     assert!(!text(&files, "src/Security.lex.tex").contains("Advisory"));
@@ -1025,8 +1070,9 @@ fn no_lifted_kappa_turns_unlifted_ue_16() {
 
 /// Every function of product code, counted from the source apart from the
 /// engine: free functions, inherent and trait-impl methods and trait methods
-/// at item level, outside `#[cfg(test)]` modules and not `#[test]`, in the
-/// `src/` tree of every package under `root`.
+/// at item level, outside `#[cfg(test)]` modules (inline, or out of line in
+/// their own file or directory) and not `#[test]`, in the `src/` tree of
+/// every package of the workspace at `root` ([`members`]).
 fn product_functions(root: &Path) -> Vec<String> {
     fn cfg_test(attrs: &[syn::Attribute]) -> bool {
         attrs.iter().any(|a| {
@@ -1041,7 +1087,15 @@ fn product_functions(root: &Path) -> Vec<String> {
             .iter()
             .any(|a| a.path().segments.last().is_some_and(|s| s.ident == "test"))
     }
-    fn items(list: &[syn::Item], at: &str, out: &mut Vec<String>) {
+    /// The functions of `list`, and in `tests` the file and the directory of
+    /// each out-of-line `#[cfg(test)] mod name;`, which lie in `dir`.
+    fn items(
+        list: &[syn::Item],
+        at: &str,
+        dir: &Path,
+        out: &mut Vec<String>,
+        tests: &mut Vec<PathBuf>,
+    ) {
         for item in list {
             match item {
                 syn::Item::Fn(f) if !is_test(&f.attrs) => out.push(format!("{at}{}", f.sig.ident)),
@@ -1063,14 +1117,23 @@ fn product_functions(root: &Path) -> Vec<String> {
                 }
                 syn::Item::Mod(m) if !cfg_test(&m.attrs) => {
                     if let Some((_, inner)) = &m.content {
-                        items(inner, at, out);
+                        items(inner, at, &dir.join(m.ident.to_string()), out, tests);
                     }
+                }
+                syn::Item::Mod(m) if m.content.is_none() => {
+                    assert!(
+                        !m.attrs.iter().any(|a| a.path().is_ident("path")),
+                        "{at}a #[path] test module this walker does not resolve"
+                    );
+                    let name = m.ident.to_string();
+                    tests.push(dir.join(format!("{name}.rs")));
+                    tests.push(dir.join(name));
                 }
                 _ => {}
             }
         }
     }
-    fn walk(dir: &Path, top: bool, out: &mut Vec<String>) {
+    fn walk(dir: &Path, top: bool, out: &mut Vec<PathBuf>) {
         let mut entries: Vec<PathBuf> = std::fs::read_dir(dir)
             .expect("dir")
             .map(|e| e.expect("entry").path())
@@ -1086,43 +1149,196 @@ fn product_functions(root: &Path) -> Vec<String> {
                     walk(&path, false, out);
                 }
             } else if path.extension().is_some_and(|e| e == "rs") {
-                let text = std::fs::read_to_string(&path).expect("source");
-                let file = syn::parse_file(&text).expect("parses");
-                items(&file.items, &format!("{}: ", path.display()), out);
-            }
-        }
-    }
-    fn packages(dir: &Path, out: &mut Vec<String>) {
-        if dir.join("Cargo.toml").is_file() && dir.join("src").is_dir() {
-            walk(&dir.join("src"), true, out);
-        }
-        let mut subdirs: Vec<PathBuf> = std::fs::read_dir(dir)
-            .expect("dir")
-            .map(|e| e.expect("entry").path())
-            .filter(|p| p.is_dir())
-            .collect();
-        subdirs.sort();
-        for sub in subdirs {
-            let name = sub.file_name().and_then(|n| n.to_str()).unwrap_or("");
-            // Dot directories hold build output (`app/.prism` holds the Rust
-            // prismpm generates), never a package of this workspace.
-            if !name.starts_with('.')
-                && !matches!(
-                    name,
-                    "target" | "fixtures" | "src" | "node_modules" | "tests"
-                )
-            {
-                packages(&sub, out);
+                out.push(path);
             }
         }
     }
     let mut out = Vec::new();
-    packages(root, &mut out);
+    for package in members(root) {
+        assert!(
+            package.join("src").is_dir(),
+            "{}: a member with no src/ tree",
+            package.display()
+        );
+        let mut files = Vec::new();
+        walk(&package.join("src"), true, &mut files);
+        let (mut found, mut tests) = (Vec::new(), Vec::new());
+        for path in &files {
+            let text = std::fs::read_to_string(path).expect("source");
+            let file = syn::parse_file(&text).expect("parses");
+            // A module's children lie beside a crate root or a `mod.rs`, and
+            // in the directory named after any other file.
+            let parent = path.parent().expect("a directory");
+            let stem = path.file_stem().and_then(|s| s.to_str()).unwrap_or("");
+            let root_file = matches!(stem, "lib" | "main" | "mod") || parent.ends_with("src/bin");
+            let dir = if root_file {
+                parent.to_path_buf()
+            } else {
+                parent.join(stem)
+            };
+            let mut functions = Vec::new();
+            items(
+                &file.items,
+                &format!("{}: ", path.display()),
+                &dir,
+                &mut functions,
+                &mut tests,
+            );
+            found.push((path, functions));
+        }
+        for (path, functions) in found {
+            if !tests.iter().any(|t| path.starts_with(t)) {
+                out.extend(functions);
+            }
+        }
+    }
     out
 }
 
+/// The packages of the workspace whose root is `root`, as cargo decides
+/// them and read apart from the engine (which asks `cargo metadata`): the
+/// root itself when its manifest has a `[package]`, and every directory a
+/// `workspace.members` entry names or matches, less `workspace.exclude`. A
+/// package below `root` that is not a member is not this workspace's.
+fn members(root: &Path) -> Vec<PathBuf> {
+    let manifest: toml::Value = toml::from_str(
+        &std::fs::read_to_string(root.join("Cargo.toml")).expect("the root manifest"),
+    )
+    .expect("the root manifest parses");
+    let list = |key: &str| -> Vec<String> {
+        manifest
+            .get("workspace")
+            .and_then(|w| w.get(key))
+            .and_then(|v| v.as_array())
+            .into_iter()
+            .flatten()
+            .map(|v| v.as_str().expect("a path").to_string())
+            .collect()
+    };
+    let excluded: Vec<PathBuf> = list("exclude").iter().map(|e| root.join(e)).collect();
+    let mut out = Vec::new();
+    if manifest.get("package").is_some() {
+        out.push(root.to_path_buf());
+    }
+    for pattern in list("members") {
+        let mut found = vec![root.to_path_buf()];
+        for part in pattern.split('/').filter(|p| !p.is_empty() && *p != ".") {
+            assert!(
+                !part.contains("**") && !part.contains('['),
+                "{pattern}: a member glob this reader does not expand"
+            );
+            let mut next = Vec::new();
+            for dir in found {
+                if !part.contains(['*', '?']) {
+                    next.push(dir.join(part));
+                    continue;
+                }
+                let mut matched: Vec<PathBuf> = std::fs::read_dir(&dir)
+                    .expect("a member's parent")
+                    .map(|e| e.expect("entry").path())
+                    .filter(|p| p.is_dir())
+                    .filter(|p| {
+                        let name = p.file_name().and_then(|n| n.to_str()).unwrap_or("");
+                        glob_matches(part, name)
+                    })
+                    .collect();
+                matched.sort();
+                next.extend(matched);
+            }
+            found = next;
+        }
+        for dir in found {
+            assert!(
+                dir.join("Cargo.toml").is_file(),
+                "{pattern}: {} is a member with no manifest",
+                dir.display()
+            );
+            if !excluded.contains(&dir) && !out.contains(&dir) {
+                out.push(dir);
+            }
+        }
+    }
+    out
+}
+
+/// Whether one path component `name` matches the glob component `pattern`
+/// (`*` any run of characters, `?` one character), as cargo's member globs.
+fn glob_matches(pattern: &str, name: &str) -> bool {
+    fn at(p: &[char], n: &[char]) -> bool {
+        match p.split_first() {
+            None => n.is_empty(),
+            Some(('*', rest)) => (0..=n.len()).any(|i| at(rest, &n[i..])),
+            Some(('?', rest)) => !n.is_empty() && at(rest, &n[1..]),
+            Some((c, rest)) => n.first() == Some(c) && at(rest, &n[1..]),
+        }
+    }
+    let (p, n): (Vec<char>, Vec<char>) = (pattern.chars().collect(), name.chars().collect());
+    at(&p, &n)
+}
+
+/// Product code is what cargo makes a member of the workspace: the walker
+/// reads the root manifest's `workspace.members` and `exclude` itself, so a
+/// member with no row fails this test whatever its directory is called, and a
+/// package that is not a member is not counted.
+///
+/// Left outside by that rule today, as an open row for a later projection of
+/// that workspace under its own profile: the three packages the installed
+/// Prism factory brings, none a member here. `prism-factory/host` declares
+/// its own `[workspace]` and is upstream's factory host, held to upstream's
+/// text by `prism-factory/upstream.toml` and `graph.py`; its one adapted file
+/// is covered by the factory's own gate (UE-20), not by this lift register.
+/// `prism-factory/certified/packages/rust-std/factory_plan` and
+/// `factory_reweigh` are Rust that a LexLean production generated and that
+/// `verify-artifact` replays byte for byte.
 #[test]
 fn every_function_of_product_code_has_exactly_one_row_ue_16() {
+    // The walker's own rule, on a planted workspace: members by path and by
+    // glob count, an excluded directory, a package that is not a member (its
+    // own `[workspace]`, beside the members) and an out-of-line test module
+    // do not.
+    let package = |name: &str| format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\n");
+    let planted = scratch(
+        "ue16-members",
+        &[
+            (
+                "Cargo.toml",
+                "[workspace]\nmembers = [\"crates/*\", \"tool\"]\nexclude = [\"crates/skipped\"]\n",
+            ),
+            ("crates/alpha/Cargo.toml", &package("alpha")),
+            (
+                "crates/alpha/src/lib.rs",
+                "/// A.\npub fn alpha() {}\n/// T.\npub struct T;\nimpl T {\n    /// M.\n    pub fn method(&self) {}\n}\n",
+            ),
+            ("crates/beta/Cargo.toml", &package("beta")),
+            (
+                "crates/beta/src/lib.rs",
+                "/// B.\npub fn beta() {}\nmod inner;\n#[cfg(test)]\nmod tests;\n",
+            ),
+            ("crates/beta/src/inner.rs", "/// I.\npub fn inner() {}\n"),
+            ("crates/beta/src/tests.rs", "/// Only a test's.\npub fn helper() {}\n"),
+            ("crates/beta/src/tests/deep.rs", "/// A test's too.\npub fn deep() {}\n"),
+            ("crates/skipped/Cargo.toml", &package("skipped")),
+            ("crates/skipped/src/lib.rs", "/// S.\npub fn skipped() {}\n"),
+            ("tool/Cargo.toml", &package("tool")),
+            ("tool/src/main.rs", "fn main() {}\n"),
+            (
+                "outside/host/Cargo.toml",
+                &format!("{}\n[workspace]\n", package("host")),
+            ),
+            ("outside/host/src/lib.rs", "/// H.\npub fn host() {}\n"),
+        ],
+    );
+    let names: Vec<String> = product_functions(&planted)
+        .iter()
+        .map(|f| f.rsplit(": ").next().unwrap_or_default().to_string())
+        .collect();
+    assert_eq!(
+        names,
+        ["alpha", "impl method", "inner", "beta", "main"],
+        "{names:?}"
+    );
+    let _ = std::fs::remove_dir_all(planted);
+
     for (root, name) in [(root(), "uorust"), (fixture(), "thermostat")] {
         let files = project(&root, name);
         let frontier: toml::Value =
