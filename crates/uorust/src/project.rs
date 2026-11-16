@@ -111,6 +111,9 @@ struct Notes {
     /// The acceptance roots each package's tests yield, by package name: the
     /// closed Boolean definitions the Behavior module proves true.
     roots: BTreeMap<String, Vec<String>>,
+    /// Where the workspace declares each type, `path:line` by name, in
+    /// order: the sites a type construct of the work queue is defined at.
+    declared: BTreeMap<String, Vec<String>>,
 }
 
 impl Model {
@@ -273,6 +276,24 @@ pub(crate) fn project(
     dumps: Option<&crate::mir::Dumps>,
 ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
+    // Every declaration of every build configuration is a site that defines
+    // its type, so they are read before the configurations are stated.
+    for (name, span) in ws
+        .packages
+        .iter()
+        .flat_map(|p| &p.files)
+        .flat_map(|f| &f.declared)
+    {
+        notes
+            .declared
+            .entry(name.clone())
+            .or_default()
+            .push(span.render());
+    }
+    for sites in notes.declared.values_mut() {
+        sites.sort();
+        sites.dedup();
+    }
     // Items under `cfg` predicates no build holds together are one fact:
     // the projection states the variant its configuration compiles.
     let (ws, syntax, variants) = crate::names::stated(ws, syntax);
@@ -5791,7 +5812,7 @@ fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
          spec = \"uorust/frontier/1\"\n",
     );
     out.push_str(&refusal_queue(&notes.refusals));
-    out.push_str(&lift.queue_text());
+    out.push_str(&lift.queue_text_with(Some(&notes.declared)));
     for r in &notes.refusals {
         out.push_str(&format!(
             "\n[[refusal]]\nstatus = \"open\"\nreason = \"{}\"\nroute = \"{}\"\nspan = {}\ndetail = {}\n",
@@ -6261,6 +6282,59 @@ mod tests {
     }
 
     // Types outside the lift.
+
+    /// A type construct of the work queue carries the sites that define the
+    /// types it writes: the struct of the chain at the line of its name, in
+    /// whichever file declares it, and nothing for a type of the standard
+    /// library. Planted: a site read off by a line, or a chain read without
+    /// its owner, fails here.
+    #[test]
+    fn register_a_type_construct_names_the_sites_that_define_it() {
+        let frontier = frontier_of(
+            "defined",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! D.\n\npub mod holder;\n\nuse holder::Holder;\n\n/// Holds a holder.\npub struct Outer {\n    /// The holder.\n    pub held: Holder,\n}\n\n/// Reads it.\npub fn read(o: &Outer) -> u8 {\n    *o.held.cell.borrow()\n}\n\n/// Reads one by its path.\npub fn read_at(h: &holder::Holder) -> u8 {\n    *h.cell.borrow()\n}\n",
+                ),
+                (
+                    "src/holder.rs",
+                    "//! H.\n\n/// Holds a cell.\npub struct Holder {\n    /// The cell.\n    pub cell: std::cell::RefCell<u8>,\n}\n",
+                ),
+            ],
+        );
+        let rows: std::collections::BTreeMap<&str, &str> = frontier
+            .split("\n[[construct]]\n")
+            .skip(1)
+            .map(|row| row.split("\n\n").next().unwrap_or_default())
+            .filter(|row| row.contains("\ncause = \"type\"\n"))
+            .filter_map(|row| {
+                let construct = row.lines().next()?.strip_prefix("construct = ")?;
+                let defined = row.lines().find_map(|l| l.strip_prefix("defined = "))?;
+                Some((construct, defined))
+            })
+            .collect();
+        // The chain from the struct of this file down to the cell, and the
+        // struct of the other file the path names: each site at the line of
+        // the type's name, in the chain's order.
+        let chained = rows
+            .iter()
+            .find(|(construct, _)| construct.contains("Outer.held"))
+            .map(|(_, defined)| *defined);
+        assert_eq!(
+            chained,
+            Some("[\"src/lib.rs:8\", \"src/holder.rs:4\"]"),
+            "{frontier}"
+        );
+        let named = rows
+            .iter()
+            .find(|(construct, _)| !construct.contains("Outer") && construct.contains("Holder"))
+            .map(|(_, defined)| *defined);
+        assert_eq!(named, Some("[\"src/holder.rs:4\"]"), "{frontier}");
+        // The register reads such a frontier as it reads any other.
+        let lift = crate::register::Register::read(Path::new(FRONTIER), &frontier);
+        assert!(lift.is_ok(), "{lift:?}");
+    }
 
     /// The frontier of a one-crate workspace of these files, written under
     /// the system's temporary directory and projected.

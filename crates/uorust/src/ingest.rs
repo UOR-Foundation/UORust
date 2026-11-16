@@ -1158,6 +1158,13 @@ fn items(
     let scope = file.scopes.len();
     file.scopes.push(scope_fact(list));
     for item in list {
+        if let Some(ident) = declared(item) {
+            let span = Span {
+                file: rel.to_string(),
+                line: ident.span().start().line,
+            };
+            file.declared.push((ident.unraw().to_string(), span));
+        }
         match item {
             syn::Item::Fn(f) => {
                 let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -1373,6 +1380,20 @@ fn items(
             scan.visit_item(item);
             file.capabilities.extend(scan.found);
         }
+    }
+}
+
+/// The name an item declares a type under: a struct, enum, union, trait,
+/// trait alias or type alias.
+fn declared(item: &syn::Item) -> Option<&syn::Ident> {
+    match item {
+        syn::Item::Struct(s) => Some(&s.ident),
+        syn::Item::Enum(e) => Some(&e.ident),
+        syn::Item::Union(u) => Some(&u.ident),
+        syn::Item::Trait(t) => Some(&t.ident),
+        syn::Item::TraitAlias(t) => Some(&t.ident),
+        syn::Item::Type(t) => Some(&t.ident),
+        _ => None,
     }
 }
 

@@ -57,6 +57,48 @@ const CAUSE: &str = "cause";
 /// is functions of product code.
 const UNIT: &str = "functions";
 
+/// The cause of a residue row whose function a type outside the lift stops.
+const TYPE: &str = "type";
+
+/// The key a type construct row's definition sites are written under.
+pub const DEFINED: &str = "defined";
+
+/// The names of the types a type construct writes, in its order: every
+/// identifier of the chain after the residue's own words (`type outside
+/// the lift: `) except the name of a field (`leaf` of `Mid.leaf`) and of a
+/// variant in a place (`Variant` of `Enum::Variant.0`), so the owners of
+/// the chain's places, its leaf's types (`RefCell<Node>` naming `RefCell`
+/// and `Node`) and the types its words name (`Outer, whose field f holds
+/// Leaf.x`) are named. A name is a type only where the workspace declares
+/// one under it, so a word of the chain's prose names none unless a type is
+/// declared under that word.
+pub fn named_types(construct: &str) -> Vec<&str> {
+    let chain = construct
+        .split_once(": ")
+        .map_or(construct, |(_, chain)| chain);
+    let word = |c: char| c.is_alphanumeric() || c == '_';
+    let mut names = Vec::new();
+    let mut rest = chain;
+    while let Some(start) = rest.find(|c: char| c.is_alphabetic() || c == '_') {
+        let len = rest[start..]
+            .find(|c: char| !word(c))
+            .unwrap_or(rest.len() - start);
+        let (before, name, after) = (
+            &rest[..start],
+            &rest[start..start + len],
+            &rest[start + len..],
+        );
+        let field = before.ends_with('.');
+        let variant = after.starts_with('.') && before.ends_with("::");
+        let number = before.ends_with(|c: char| c.is_ascii_digit());
+        if !(field || variant || number) {
+            names.push(name);
+        }
+        rest = after;
+    }
+    names
+}
+
 /// The κ of a function: SHA-256 over [`DOMAIN`], its crate path and its
 /// normalized token stream, one line each, as lowercase hex.
 pub fn kappa(path: &str, tokens: &str) -> String {
@@ -402,6 +444,16 @@ impl Register {
     /// table, then one `[[construct]]` row per row of the queue. A register
     /// file and a projection's `frontier.toml` both carry this text.
     pub fn queue_text(&self) -> String {
+        self.queue_text_with(None)
+    }
+
+    /// [`Register::queue_text`], and where the declaration sites of the
+    /// workspace's types are given (`path:line` by type name), each row
+    /// whose cause is a type outside the lift with the sites that define
+    /// the types its construct writes ([`named_types`]), in the order it
+    /// writes them, under [`DEFINED`]. A projection's `frontier.toml`
+    /// carries them; a register file, written from rows alone, does not.
+    pub fn queue_text_with(&self, sites: Option<&BTreeMap<String, Vec<String>>>) -> String {
         let mut out = format!("\n[{LIFT}]\n");
         for (key, count) in self.totals().fields() {
             out.push_str(&format!("{key} = {count}\n"));
@@ -414,6 +466,18 @@ impl Register {
                 UNIT,
                 row.functions,
             ));
+            if let Some(sites) = sites.filter(|_| row.cause == TYPE) {
+                let mut defined: Vec<&str> = Vec::new();
+                for name in named_types(&row.construct) {
+                    for site in sites.get(name).into_iter().flatten() {
+                        if !defined.contains(&site.as_str()) {
+                            defined.push(site);
+                        }
+                    }
+                }
+                let quoted: Vec<String> = defined.iter().map(|s| quoted(s)).collect();
+                out.push_str(&format!("{DEFINED} = [{}]\n", quoted.join(", ")));
+            }
         }
         out
     }
@@ -813,6 +877,54 @@ mod tests {
             Err(UorustError::Malformed { .. })
         ));
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A type construct names the types of its chain by their owners and
+    /// its leaf by its identifiers, and its row carries the sites of those
+    /// the workspace declares, in the chain's order, each once; a variant
+    /// or a field is no type, and a row of another cause carries none.
+    #[test]
+    fn a_type_construct_row_carries_the_sites_of_its_types() {
+        let construct = "type outside the lift: Mid.leaf: Enum::Big.0: RefCell<Node>";
+        assert_eq!(named_types(construct), ["Mid", "Enum", "RefCell", "Node"]);
+        assert_eq!(named_types("type outside the lift: f64"), ["f64"]);
+        assert_eq!(
+            named_types("type outside the lift: a::Outer, whose field x holds Leaf.y: u8"),
+            ["a", "Outer", "whose", "field", "x", "holds", "Leaf", "u8"]
+        );
+        let sites: BTreeMap<String, Vec<String>> = [
+            ("Mid", vec!["a.rs:3"]),
+            ("Enum", vec!["a.rs:9", "b.rs:2"]),
+            ("Node", vec!["a.rs:3"]),
+            ("Big", vec!["c.rs:1"]),
+            ("leaf", vec!["c.rs:2"]),
+        ]
+        .into_iter()
+        .map(|(k, v)| (k.to_string(), v.into_iter().map(String::from).collect()))
+        .collect();
+        let register = Register {
+            rows: [
+                row("c::f", Status::Residue("type".into(), construct.into())),
+                row("c::g", Status::Residue("form".into(), "Mid.leaf".into())),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        let text = register.queue_text_with(Some(&sites));
+        assert!(
+            text.contains(&format!(
+                "cause = \"type\"\nfunctions = 1\n{DEFINED} = [\"a.rs:3\", \"a.rs:9\", \"b.rs:2\"]\n"
+            )),
+            "{text}"
+        );
+        assert_eq!(text.matches(DEFINED).count(), 1, "{text}");
+        // Without sites the text is the register file's, and a file that
+        // carries the sites reads back to the same rows.
+        assert!(!register.queue_text().contains(DEFINED));
+        let file = register.to_text().replace(&register.queue_text(), &text);
+        assert!(file.contains(DEFINED));
+        let read = Register::read(Path::new("frontier.toml"), &file);
+        assert_eq!(read, Ok(register));
     }
 
     #[test]

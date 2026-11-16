@@ -124,6 +124,11 @@ pub(crate) struct SourceFile {
     pub(crate) enums: Vec<EnumFact>,
     pub(crate) structs: Vec<StructFact>,
     pub(crate) error_impls: Vec<String>,
+    /// Every type the file declares, inline modules included: each struct,
+    /// enum, union, trait, trait alias and type alias, by name, at the line
+    /// of its name. A construct of the lift register names the sites that
+    /// define the types it writes from these.
+    pub(crate) declared: Vec<(String, Span)>,
     /// The types the file declares in a shape the lift does not read, each
     /// with that shape (`a tuple struct`).
     pub(crate) unread: Vec<(String, &'static str)>,

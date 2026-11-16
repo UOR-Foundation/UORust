@@ -101,7 +101,7 @@ Feature: engine
   Scenario: A lifted function never turns unlifted
     Given this workspace, the thermostat fixture and their committed lift registers
     When the suite exercises UE-16
-    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check, and a planted unchanged function counted under another construct while its own still stops a function is refused by uorust admit against its parent's register, while moving every function of a construct on is admitted
+    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check, and a planted unchanged function counted under another construct while its own still stops a function is refused by uorust admit against its parent's register, while moving every function of a construct on is admitted, and the frontier's type construct row names the file and line that declare the type of its chain
 
   @UE-17 @build
   Scenario: The lift translates MIR mechanically
