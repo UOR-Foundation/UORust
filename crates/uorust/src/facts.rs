@@ -275,6 +275,7 @@ pub(crate) type ConstSyntax = (
     crate::ast::Block,
     usize,
     String,
+    usize,
 );
 
 /// One file's syntax, in the order of its [`SourceFile`]'s facts.
@@ -289,7 +290,8 @@ pub(crate) struct FileSyntax {
     pub(crate) enums: Vec<crate::lift::RawVariants>,
     /// The constants of product code outside tests: name, type, the value
     /// as a block, which lifts like a function of no parameters, the module
-    /// scope (`SourceFile::scopes`) that declares it, and its tokens.
+    /// scope (`SourceFile::scopes`) that declares it, its tokens, and the
+    /// line of its name.
     pub(crate) consts: Vec<ConstSyntax>,
     /// The type aliases: `type Name<P, ..> = Type;`.
     pub(crate) aliases: Vec<(String, crate::ast::Alias)>,

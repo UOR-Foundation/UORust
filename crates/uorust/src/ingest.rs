@@ -1350,6 +1350,7 @@ fn items(
                     crate::convert::block(&value),
                     scope,
                     c.to_token_stream().to_string(),
+                    c.ident.span().start().line,
                 ));
             }
             syn::Item::Use(u) => {
