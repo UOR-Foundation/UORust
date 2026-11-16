@@ -56,6 +56,11 @@ enum Command {
     /// The layouts rustc chose for the aggregates a library's dumps print,
     /// as the dump step asks for them (`scripts/mir/dump-lib.sh`).
     Layouts(LayoutsArgs),
+    /// Dump the MIR of core, alloc or std of the pinned toolchain's
+    /// rust-src, one directory per module, as `scripts/mir/dump-lib.sh`
+    /// does, with the dump's key and the digest of what it wrote
+    /// (`library-mir.toml`): what `uorust embed --link <crate>=<dir>` links.
+    LibraryMir(LibraryMirArgs),
     /// Fetch a crate of crates.io, dump the MIR of its library, translate
     /// every body and write its register, `crates/uorust/crates/<name>`.
     Crate(CrateArgs),
@@ -362,6 +367,30 @@ struct CoreArgs {
     /// embed --shallow` bridges to the evaluator.
     #[arg(long)]
     lexlean: Option<PathBuf>,
+}
+
+#[derive(clap::Args)]
+struct LibraryMirArgs {
+    /// The library: `core`, `alloc` or `std`.
+    #[arg(value_name = "CRATE")]
+    krate: String,
+    /// The directory the dumps are written to.
+    #[arg(long, required_unless_present_any = ["key", "modules"])]
+    out: Option<PathBuf>,
+    /// Dump only this top-level module (repeatable); every module when none.
+    #[arg(long)]
+    only: Vec<String>,
+    /// Where rust-src of the pinned toolchain is unpacked, taken again only
+    /// at the digest its channel manifest records; `<out>/../rust-src-<toolchain>`
+    /// when not given.
+    #[arg(long)]
+    source_cache: Option<PathBuf>,
+    /// Print the dump's key, read from the toolchain alone, and dump nothing.
+    #[arg(long, conflicts_with = "modules")]
+    key: bool,
+    /// Print the library's top-level modules as a JSON array and dump nothing.
+    #[arg(long)]
+    modules: bool,
 }
 
 #[derive(clap::Args)]
@@ -699,6 +728,55 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Core(args) => library("core", &args),
+        Command::LibraryMir(args) => {
+            let here = std::path::Path::new(".");
+            if args.key {
+                let inputs = uorust::library::inputs(&args.krate, here)?;
+                println!("{}", uorust::library::key(&inputs));
+                return Ok(());
+            }
+            let toolchain_cache =
+                |base: &std::path::Path| base.join(format!("rust-src-{}", uorust::mir::TOOLCHAIN));
+            let base = args
+                .out
+                .as_deref()
+                .and_then(std::path::Path::parent)
+                .unwrap_or(here)
+                .to_path_buf();
+            let cache = args
+                .source_cache
+                .clone()
+                .unwrap_or_else(|| toolchain_cache(&base));
+            if args.modules {
+                let inputs = uorust::library::inputs(&args.krate, here)?;
+                let library = uorust::library::source(&inputs, &cache)?;
+                let found = uorust::library::modules(&library, &args.krate)?;
+                println!("{}", serde_json::to_string(&found).unwrap_or_default());
+                return Ok(());
+            }
+            let out = args.out.as_deref().unwrap_or(here);
+            let work = base.join(format!(
+                ".library-mir-{}-{}",
+                args.krate,
+                std::process::id()
+            ));
+            let done = uorust::library::dump(&args.krate, out, &args.only, &cache, &work)?;
+            for k in &done.kept {
+                println!("{}: {} bodies, {} bytes", k.module, k.files, k.bytes);
+            }
+            println!(
+                "library-mir {}: {} modules, {} bodies, {} bytes, {} layouts; key {}; digest {}; library {}",
+                args.krate,
+                done.kept.len(),
+                done.kept.iter().map(|k| k.files).sum::<usize>(),
+                done.kept.iter().map(|k| k.bytes).sum::<u64>(),
+                done.layouts,
+                done.key,
+                done.digest,
+                done.library.display()
+            );
+            Ok(())
+        }
         Command::Layouts(args) => {
             let n = uorust::layouts::run(&args.krate, &args.mir, &args.copy, &args.check)?;
             eprintln!("layouts: {n} types laid out");
