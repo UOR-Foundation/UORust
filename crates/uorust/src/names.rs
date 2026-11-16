@@ -2708,10 +2708,10 @@ pub(crate) enum TypeReading {
 }
 
 impl Resolver<'_> {
-    /// What the bare type name `name` names in the inline module `inline`
-    /// (`""` for the file's own) of file `fi` of package `pkg`: what the
-    /// module declares, then what its `use` binds, then its globs, as
-    /// [`Resolver::path`] reads every path.
+    /// What the type name `name` (bare, or a path such as `super::T`)
+    /// names in the inline module `inline` (`""` for the file's own) of
+    /// file `fi` of package `pkg`: what the module declares, then what its
+    /// `use` binds, then its globs, as [`Resolver::path`] reads every path.
     pub(crate) fn type_reading(
         &self,
         pkg: usize,
@@ -2724,7 +2724,8 @@ impl Resolver<'_> {
         if !self.modules.contains_key(&module) {
             return TypeReading::Open;
         }
-        match self.path(&module, &[name.to_string()], false, &mut Vec::new()) {
+        let segments: Vec<String> = name.split("::").map(str::to_string).collect();
+        match self.path(&module, &segments, false, &mut Vec::new()) {
             Found::Type((p, t, m), n) => TypeReading::Declared(p, t, m, n),
             Found::Extern(path) => TypeReading::Extern(path.join("::")),
             _ => TypeReading::Open,

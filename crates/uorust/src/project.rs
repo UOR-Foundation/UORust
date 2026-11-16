@@ -374,16 +374,26 @@ pub(crate) fn project(
             .filter(|(_, n)| *n > 1)
             .map(|(name, _)| name)
             .collect();
-        if shared.is_empty() {
-            continue;
-        }
         for (fi, file) in package.files.iter().enumerate() {
             for inline in syntax.names.inline_modules(&file.rel) {
-                let read = shared
+                // The shared names, and each method's self type written by
+                // a path (`super::T`), which only the module reads.
+                let pathed = file
+                    .fns
                     .iter()
+                    .filter(|f| syntax.names.fn_module(&file.rel, f.span.line, &f.name) == inline)
+                    .filter_map(|f| f.owner.as_deref())
+                    .map(|o| o.split('<').next().unwrap_or(o).trim())
+                    .filter(|o| o.contains("::"));
+                let read: BTreeMap<String, crate::names::TypeReading> = shared
+                    .iter()
+                    .copied()
+                    .chain(pathed)
                     .map(|n| (n.to_string(), resolver.type_reading(pkg, fi, &inline, n)))
                     .collect();
-                ctx.type_readings.insert((pkg, fi, inline), read);
+                if !read.is_empty() {
+                    ctx.type_readings.insert((pkg, fi, inline), read);
+                }
             }
         }
     }
@@ -3623,8 +3633,15 @@ fn behavior(
         for (fi, file) in package.files.iter().enumerate() {
             for inline in syntax.names.inline_modules(&file.rel) {
                 let readings = ctx.type_readings.get(&(pkg, fi, inline.clone()));
+                // A self type written by a path reads as the type it names.
+                let paths = readings
+                    .into_iter()
+                    .flatten()
+                    .filter(|(n, _)| n.contains("::"))
+                    .map(|(n, _)| n);
                 let names: Overlay = ambiguous[pkg]
                     .iter()
+                    .chain(paths)
                     .map(|n| {
                         let read = match readings.and_then(|r| r.get(n)) {
                             Some(crate::names::TypeReading::Declared(p, t, m, name)) => lexes
@@ -7795,5 +7812,18 @@ mod tests {
             "{frontier}"
         );
         assert!(type_names_row(&frontier, "w::lone").contains("a type of the bits crate"));
+    }
+
+    #[test]
+    fn type_names_a_self_type_written_by_a_path_reads_as_the_type_it_names() {
+        let frontier = resolved_frontier(
+            "owner-path",
+            "",
+            "pub struct Shape { pub w: u8 }\n\
+             pub mod ext {\n impl super::Shape {\n  pub fn width(&self) -> u8 { self.w }\n }\n}\n",
+        );
+        let at = frontier.find("::width\"").expect("a row of width");
+        let start = frontier[..at].rfind("[[").unwrap();
+        assert!(frontier[start..].starts_with("[[lifted]]"), "{frontier}");
     }
 }
