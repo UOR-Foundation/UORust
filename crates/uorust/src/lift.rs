@@ -1504,6 +1504,9 @@ impl Types {
             Some(Owner::Implementor) | None => None,
         };
         let mut params = Vec::new();
+        // The types of the `&mut` parameters, which the definition gives
+        // back after its result (see [`threads`]).
+        let mut states = Vec::new();
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
@@ -1516,12 +1519,18 @@ impl Types {
                             || self.structs.contains_key(*name)
                             || self.datas.contains_key(*name) =>
                     {
-                        if !*plain {
-                            return Err(Residue::Signature(format!(
-                                "takes {} of {name}: the lift reads self and &self as the \
-                                 value, and threads no other receiver",
-                                receiver.unwrap_or("self")
-                            )));
+                        match (*plain, receiver.map(Receiver::of)) {
+                            (true, _) | (false, Some(Receiver::Owned)) => {}
+                            (false, Some(Receiver::Unique)) => {
+                                states.push(Ty::Named((*name).to_string()));
+                            }
+                            _ => {
+                                return Err(Residue::Signature(format!(
+                                    "takes {} of {name}: the lift reads self, mut self, &self \
+                                     and &mut self, and no other receiver",
+                                    receiver.unwrap_or("self")
+                                )));
+                            }
                         }
                         params.push((
                             "self".to_string(),
@@ -1543,7 +1552,15 @@ impl Types {
                         return Err(Residue::Signature("pattern parameter".to_string()));
                     };
                     let rust = name.ident.clone();
-                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, named)?));
+                    let ty = match unique_target(&pat.ty) {
+                        Some(target) => {
+                            let ty = self.ty_in(target, named)?;
+                            states.push(ty.clone());
+                            ty
+                        }
+                        None => self.ty_in(&pat.ty, named)?,
+                    };
+                    params.push((rust.clone(), local_name(&rust), ty));
                 }
             }
         }
@@ -1551,7 +1568,10 @@ impl Types {
             None => Ty::Unit,
             Some(t) => self.ty_in(t, named)?,
         };
-        Ok((params, result))
+        Ok((
+            params,
+            crate::mir::lower::threaded_result(&result, &states, self),
+        ))
     }
 
     /// A type where `Self` names the method's owner.
@@ -1740,6 +1760,86 @@ pub(crate) enum Owner<'a> {
     Implementor,
 }
 
+/// A receiver that is not `self` or `&self`, as the method writes it.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum Receiver {
+    /// `mut self`: the method owns the value, and its binding is mutable.
+    /// Nothing else reaches the value, so a change to it is a new binding
+    /// that the method's own later statements read, as for any local.
+    Owned,
+    /// `&mut self` (`&'a mut self`): a borrow nothing else may use while it
+    /// lives, which Rust's borrow checker guarantees of every program. The
+    /// place it lends holds, when the method returns, the value the
+    /// method's last statement leaves in it, and no one reads the place in
+    /// between: the method is the function from the old value to its
+    /// result and the new value (see [`threads`]).
+    Unique,
+    /// `self: T` and any other written receiver.
+    Other,
+}
+
+impl Receiver {
+    pub(crate) fn of(written: &str) -> Receiver {
+        let words: Vec<&str> = written.split_whitespace().collect();
+        match words.as_slice() {
+            ["mut", "self"] => Receiver::Owned,
+            [borrow, "mut", "self"] if borrow.starts_with('&') => Receiver::Unique,
+            ["&mut", "self"] => Receiver::Unique,
+            _ => Receiver::Other,
+        }
+    }
+}
+
+/// The type a `&mut T` parameter lends, where the lift threads it: any `T`
+/// but a slice or `str`, whose length the borrow fixes and whose items it
+/// changes in place.
+fn unique_target(t: &rs::RustType) -> Option<&rs::RustType> {
+    match &t.kind {
+        rs::TypeKind::Reference {
+            mutable: true,
+            elem,
+        } => match &elem.kind {
+            rs::TypeKind::Slice(_) => None,
+            rs::TypeKind::Path { qself: false, path } if path.is_ident("str") => None,
+            _ => Some(elem),
+        },
+        _ => None,
+    }
+}
+
+/// The positions, among a candidate's parameters, of those the definition
+/// threads: a `&mut self` receiver and each `&mut T` parameter. As
+/// `mir::lower::threaded` does for a body's locals, the definition takes
+/// the borrowed value and returns the tuple of its result and, after it,
+/// the value each such parameter's place holds when the function returns
+/// (`mir::lower::threaded_result`); a caller writes each back into the
+/// place it lent. A `&mut` borrow is the only way to the place while it
+/// lives, so no other reader sees the place between the call and the
+/// write.
+pub(crate) fn threads(sig: &rs::Signature, owner: Option<&Owner<'_>>) -> Vec<usize> {
+    let mut out = Vec::new();
+    let mut at = 0;
+    for input in &sig.inputs {
+        match input {
+            rs::FnArg::Receiver { plain } => {
+                if let Some(Owner::Type { receiver, .. }) = owner {
+                    if !*plain && receiver.map(Receiver::of) == Some(Receiver::Unique) {
+                        out.push(at);
+                    }
+                    at += 1;
+                }
+            }
+            rs::FnArg::Typed(pat) => {
+                if unique_target(&pat.ty).is_some() {
+                    out.push(at);
+                }
+                at += 1;
+            }
+        }
+    }
+    out
+}
+
 /// A lifted function's signature.
 #[derive(Clone, Debug)]
 pub(crate) struct Sig {
@@ -1748,6 +1848,9 @@ pub(crate) struct Sig {
     pub(crate) result: Ty,
     /// Its type parameters and its dictionary, where it is generic.
     pub(crate) generic: Option<Generic>,
+    /// The positions of the parameters it threads (see [`threads`]):
+    /// `result` is then the tuple of its own result and their values.
+    pub(crate) threads: Vec<usize>,
 }
 
 /// What a function generic over type parameters takes besides its own
@@ -1865,6 +1968,10 @@ struct Ctx {
     /// statements after it are not part of it, so an update of one there
     /// would be lost to them, and is refused.
     sealed: BTreeSet<String>,
+    /// The Rust names a `ref` or `ref mut` pattern of the body binds: such a
+    /// binder is a borrow of the place it matched, so an update of it is
+    /// one of that place, which no rebinding of the binder writes back.
+    borrowed: BTreeSet<String>,
 }
 
 /// A closure a `let` binds: its parameters, its body, and the locals in
@@ -2117,6 +2224,11 @@ impl Ctx {
     /// Why an update of `target` here is refused, where it is one an
     /// operand makes of a local bound outside it.
     fn unsealed(&self, target: &str) -> Lift<()> {
+        if self.borrowed.contains(target) {
+            return Err(Residue::Form(format!(
+                "an update of {target}, which a ref pattern binds to the place it borrows"
+            )));
+        }
         if self.sealed.contains(target) {
             return Err(Residue::Form(format!(
                 "an update of {target} inside an operand, which the statements after it do not see"
@@ -4467,6 +4579,9 @@ fn fn_call(
     let Some(sig) = env.fns.get(&name) else {
         return Err(Residue::Call(name));
     };
+    if !sig.threads.is_empty() {
+        return Err(threaded_operand(&name));
+    }
     if sig.params.len() != c.args.len() {
         return Err(Residue::Call(name));
     }
@@ -5239,6 +5354,9 @@ fn method_on(
     if let Ty::Named(owner) = &rt {
         let key = format!("{owner}::{name}");
         if let Some(sig) = env.fns.get(&key) {
+            if !sig.threads.is_empty() {
+                return Err(threaded_operand(&key));
+            }
             if key == ctx.current {
                 // Recursion on a sub-term of `self` descends; any other does not.
                 if ctx.tails.get(&r) != ctx.params.first() {
@@ -9057,6 +9175,8 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
         // `x.f = v`: the structure `x` with its field `f` replaced.
         rs::RustExpr::Assign(a) => match &*a.left {
             rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
+            // `*x = v` through a `&mut` the function threads: its new value.
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => ident(&u.expr),
             left => ident(left),
         },
         // `*m.entry(k).or_default() += v` and `m.entry(k).or_default().push(v)`
@@ -10511,6 +10631,36 @@ fn block(
     match stmts {
         // A block with no value is `()`.
         [] if want == Some(&Ty::Unit) => Ok(((Expr::Flat("()".into()), Ty::Unit), acc)),
+        // `x.m(..);`, `f(&mut x, ..);` and a block's last call: a call of a
+        // function that threads `&mut` parameters, each place it lends
+        // rebound to the value it gives back.
+        [rs::Stmt::Expr(e, semi), rest @ ..]
+            if (*semi || rest.is_empty()) && threaded_call(e, env, ctx).is_some() =>
+        {
+            let Some(call) = threaded_call(e, env, ctx) else {
+                return Err(Residue::Statements);
+            };
+            threaded_stmt(call, None, !*semi, rest, env, ctx, acc, want)
+        }
+        // `let x = x.m(..);`: the same, with `x` bound to the call's result.
+        [rs::Stmt::Local(l), rest @ ..]
+            if threaded_let(l).is_some_and(|(_, _, e)| threaded_call(e, env, ctx).is_some()) =>
+        {
+            let (Some((binder, declared, e)), true) =
+                (threaded_let(l), !rest.is_empty() || want == Some(&Ty::Unit))
+            else {
+                return Err(Residue::Statements);
+            };
+            let Some(call) = threaded_call(e, env, ctx) else {
+                return Err(Residue::Statements);
+            };
+            let declared = match declared {
+                Some(t) => Some(env.types.ty(&t.localized(&ctx.imports))?),
+                None => None,
+            };
+            let bound = binder.map(|b| (b, declared));
+            threaded_stmt(call, bound, false, rest, env, ctx, acc, want)
+        }
         // The arms of a match and the branches of an if in tail position
         // are in tail position too: a `return` there leaves the function.
         [rs::Stmt::Expr(e @ (rs::RustExpr::Match(_) | rs::RustExpr::If(_)), false)] => {
@@ -10883,6 +11033,789 @@ fn update_stmt(
         ),
         acc,
     ))
+}
+
+/// The names the `ref` patterns of these statements bind, anywhere in them.
+fn ref_binders(stmts: &[rs::Stmt]) -> BTreeSet<String> {
+    fn pat(p: &rs::Pat, out: &mut BTreeSet<String>) {
+        match p {
+            rs::Pat::Ident(i) => {
+                if i.by_ref {
+                    out.insert(i.ident.clone());
+                }
+                if let Some(sub) = &i.subpat {
+                    pat(sub, out);
+                }
+            }
+            rs::Pat::Reference(inner) => pat(inner, out),
+            rs::Pat::Type(pt) => pat(&pt.pat, out),
+            rs::Pat::Tuple(ps) | rs::Pat::Slice(ps) | rs::Pat::Or(ps) => {
+                ps.iter().for_each(|p| pat(p, out));
+            }
+            rs::Pat::TupleStruct(ts) => ts.elems.iter().for_each(|p| pat(p, out)),
+            rs::Pat::Struct(ps) => ps.fields.iter().for_each(|f| pat(&f.pat, out)),
+            rs::Pat::Guard(g) => pat(&g.pat, out),
+            rs::Pat::Wild | rs::Pat::Rest | rs::Pat::Lit(_) | rs::Pat::Range(_) => {}
+            rs::Pat::Path(_) | rs::Pat::Other => {}
+        }
+    }
+    fn expr(e: &rs::RustExpr, out: &mut BTreeSet<String>) {
+        match e {
+            rs::RustExpr::Match(m) => m.arms.iter().for_each(|a| pat(&a.pat, out)),
+            rs::RustExpr::Let(l) => pat(&l.pat, out),
+            rs::RustExpr::ForLoop(f) => pat(&f.pat, out),
+            rs::RustExpr::Closure(c) => c.inputs.iter().for_each(|p| pat(p, out)),
+            rs::RustExpr::Macro(m) => {
+                if let Some(mm) = &m.matches {
+                    pat(&mm.pat, out);
+                }
+            }
+            _ => {}
+        }
+        let (exprs, blocks) = e.parts();
+        exprs.into_iter().for_each(|e| expr(e, out));
+        blocks.into_iter().for_each(|b| walk(&b.stmts, out));
+    }
+    fn walk(ss: &[rs::Stmt], out: &mut BTreeSet<String>) {
+        for s in ss {
+            match s {
+                rs::Stmt::Local(l) => {
+                    pat(&l.pat, out);
+                    if let Some(init) = &l.init {
+                        expr(&init.expr, out);
+                        if let Some(d) = &init.diverge {
+                            expr(d, out);
+                        }
+                    }
+                }
+                rs::Stmt::Expr(e, _) => expr(e, out),
+                rs::Stmt::Macro(_) | rs::Stmt::Other => {}
+            }
+        }
+    }
+    let mut out = BTreeSet::new();
+    walk(stmts, &mut out);
+    out
+}
+
+/// Why a call of a function that threads `&mut` parameters is not read
+/// where it stands: as an operand, nothing writes back what it gives back.
+fn threaded_operand(key: &str) -> Residue {
+    Residue::Form(format!(
+        "a call of {key}, which changes what it borrows mutably, as an operand"
+    ))
+}
+
+/// A place a statement lends mutably: a local, or a named field of one.
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct Place {
+    local: String,
+    field: Option<String>,
+}
+
+impl Place {
+    /// The place an expression names, read through `&mut`, `*` and
+    /// parentheses: `x`, `&mut x`, `&mut *x`, `x.f`, `&mut x.f`.
+    fn of(e: &rs::RustExpr) -> Option<Place> {
+        match e {
+            rs::RustExpr::Paren(inner) => Place::of(inner),
+            rs::RustExpr::Reference(r) if r.mutable => Place::of(&r.expr),
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => match &*u.expr {
+                rs::RustExpr::Path(p) => p.get_ident().map(|l| Place {
+                    local: l.clone(),
+                    field: None,
+                }),
+                _ => None,
+            },
+            rs::RustExpr::Path(p) => p.get_ident().map(|l| Place {
+                local: l.clone(),
+                field: None,
+            }),
+            rs::RustExpr::Field(f) => match (&*f.base, &f.member) {
+                (rs::RustExpr::Path(p), rs::Member::Named(m)) => p.get_ident().map(|l| Place {
+                    local: l.clone(),
+                    field: Some(m.clone()),
+                }),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+
+    /// The place as an expression that reads it.
+    fn read(&self) -> rs::RustExpr {
+        let local = rs::RustExpr::Path(rs::Path::ident(&self.local));
+        match &self.field {
+            None => local,
+            Some(m) => rs::RustExpr::Field(rs::ExprField {
+                base: Box::new(local),
+                member: rs::Member::Named(m.clone()),
+            }),
+        }
+    }
+
+    /// The new value of the place's local once the place holds `value`:
+    /// `value` itself, or the structure with that field replaced.
+    fn written(&self, value: &str, env: &Env, ctx: &Ctx) -> Lift<String> {
+        let Some((current, ty)) = ctx.locals.get(&self.local) else {
+            return Err(Residue::Form(format!("an update of {}", self.local)));
+        };
+        let Some(member) = &self.field else {
+            return Ok(value.to_string());
+        };
+        let Ty::Named(name) = ty else {
+            return Err(Residue::Form(format!(
+                "an update of a field of {}",
+                self.local
+            )));
+        };
+        let Some(fields) = env.types.structs.get(name) else {
+            return Err(Residue::Form(format!("a field update of {name}")));
+        };
+        let target = local_name(member);
+        if !fields.iter().any(|(f, _)| *f == target) {
+            return Err(Residue::Form(format!("a field update of {name}")));
+        }
+        let parts: Vec<(&String, String)> = fields
+            .iter()
+            .map(|(field, _)| {
+                let v = if *field == target {
+                    value.to_string()
+                } else if env.types.boxed(name) {
+                    format!("({} {current})", Types::accessor(name, field))
+                } else {
+                    format!("(project {current} {field})")
+                };
+                (field, v)
+            })
+            .collect();
+        Ok(struct_value(name, &parts, &env.types))
+    }
+}
+
+/// A call of a function that threads `&mut` parameters: its key, its
+/// signature, its arguments with the receiver first, and the place each
+/// threaded one lends.
+struct Threaded<'e> {
+    key: String,
+    sig: Sig,
+    args: Vec<&'e rs::RustExpr>,
+    places: Vec<Place>,
+}
+
+/// The call `e` is, where it calls a function that threads `&mut`
+/// parameters and each threaded argument lends a place: the receiver of a
+/// method (which Rust borrows mutably on its own), `&mut p`, or a local
+/// that is itself such a borrow (a threaded parameter, reborrowed).
+fn threaded_call<'e>(e: &'e rs::RustExpr, env: &Env, ctx: &Ctx) -> Option<Threaded<'e>> {
+    let (key, args): (String, Vec<&rs::RustExpr>) = match e {
+        rs::RustExpr::MethodCall(m) => {
+            let place = Place::of(&m.receiver)?;
+            let (_, ty) = ctx.locals.get(&place.local)?;
+            let ty = match &place.field {
+                None => ty.clone(),
+                Some(member) => {
+                    let Ty::Named(name) = ty else { return None };
+                    let target = local_name(member);
+                    let fields = env.types.structs.get(name)?;
+                    fields.iter().find(|(f, _)| *f == target)?.1.clone()
+                }
+            };
+            let Ty::Named(owner) = ty else { return None };
+            let mut args = vec![&*m.receiver];
+            args.extend(&m.args);
+            (format!("{owner}::{}", m.method), args)
+        }
+        rs::RustExpr::Call(c) => {
+            let rs::RustExpr::Path(p) = &*c.func else {
+                return None;
+            };
+            let segments: Vec<String> = p.segments.iter().map(|s| s.ident.clone()).collect();
+            (callee_key(&segments, env, ctx), c.args.iter().collect())
+        }
+        _ => return None,
+    };
+    let sig = env.fns.get(&key)?;
+    if sig.threads.is_empty() || sig.params.len() != args.len() {
+        return None;
+    }
+    let mut places = Vec::new();
+    for &i in &sig.threads {
+        let arg = args[i];
+        // A method's receiver is a place Rust borrows on its own; an
+        // argument lends one by `&mut`, or is a borrow already.
+        let lends = i == 0 && matches!(e, rs::RustExpr::MethodCall(_))
+            || matches!(arg, rs::RustExpr::Reference(r) if r.mutable)
+            || matches!(arg, rs::RustExpr::Path(_));
+        if !lends {
+            return None;
+        }
+        places.push(Place::of(arg)?);
+    }
+    Some(Threaded {
+        key,
+        sig: sig.clone(),
+        args,
+        places,
+    })
+}
+
+/// The key a call by path names: `Type::method` where the crate has one
+/// (`Self` the type of the function in hand), else the last segment.
+fn callee_key(segments: &[String], env: &Env, ctx: &Ctx) -> String {
+    if let [.., owner, method] = segments {
+        let owner = if owner == "Self" {
+            ctx.current
+                .split_once("::")
+                .map_or(owner.as_str(), |(o, _)| o)
+        } else {
+            owner.as_str()
+        };
+        let key = format!("{}::{method}", env.types.resolve(owner));
+        if env.fns.contains_key(&key) {
+            return key;
+        }
+    }
+    segments.last().cloned().unwrap_or_default()
+}
+
+/// A statement that calls a function threading `&mut` parameters: the
+/// call, then each place it lent written back with the value the callee
+/// gives back for it, in the order it gives them, then `bound` (the
+/// `let`'s binder, if any) bound to the call's own result, then `rest`. A
+/// call that ends the block (`tail`) is its own result.
+#[allow(clippy::too_many_arguments)]
+fn threaded_stmt(
+    call: Threaded<'_>,
+    bound: Option<(&str, Option<Ty>)>,
+    tail: bool,
+    rest: &[rs::Stmt],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+    want: Option<&Ty>,
+) -> Lift<((Expr, Ty), Acc)> {
+    if call.key == ctx.current {
+        return Err(Residue::Form(
+            "a function that threads its &mut parameters and calls itself".to_string(),
+        ));
+    }
+    let full = call.sig.result.clone();
+    let items = match &full {
+        Ty::Tuple(ts) | Ty::Pair(ts) if ts.len() == call.places.len() + 1 => ts.clone(),
+        _ => {
+            return Err(Residue::Form(format!(
+                "a call of {} of another type",
+                call.key
+            )))
+        }
+    };
+    let mut acc = acc;
+    let mut parts = vec![call.sig.name.clone()];
+    for (i, (arg, ty)) in call.args.iter().zip(&call.sig.params).enumerate() {
+        let read = match call.sig.threads.iter().position(|&t| t == i) {
+            Some(j) => call.places[j].read(),
+            None => (*arg).clone(),
+        };
+        let ((v, vt), next) = flat_of(&read, env, ctx, acc, Some(ty))?;
+        acc = next;
+        if !vt.same(ty) {
+            return Err(Residue::Form(format!(
+                "argument of another type to {}",
+                call.key
+            )));
+        }
+        parts.push(v);
+    }
+    let acc = acc.called(call.key.clone());
+    let (whole, acc) = ctx.fresh(env, acc, "threaded");
+    let mut lets: Vec<(String, String, String)> = vec![(
+        whole.clone(),
+        full.render(),
+        format!("({})", parts.join(" ")),
+    )];
+    let mut scope = ctx.clone();
+    let mut acc = acc;
+    for (j, place) in call.places.iter().enumerate() {
+        scope.unsealed(&place.local)?;
+        let value = place.written(&tuple_item(&full, &whole, j + 1), env, &scope)?;
+        let Some((_, ty)) = scope.locals.get(&place.local).cloned() else {
+            return Err(Residue::Form(format!("an update of {}", place.local)));
+        };
+        let (next, name, after) = scope.bind(env, acc, &place.local, ty.clone());
+        lets.push((name, ty.render(), value));
+        scope = next;
+        acc = after;
+    }
+    let result = tuple_item(&full, &whole, 0);
+    let ((body, rt), acc) = if tail {
+        ((Expr::Flat(result), items[0].clone()), acc)
+    } else {
+        match bound {
+            Some((ident, declared)) => {
+                if declared.as_ref().is_some_and(|d| !d.same(&items[0])) {
+                    return Err(Residue::Form("let of another type".to_string()));
+                }
+                let (next, name, acc) = scope.bind(env, acc, ident, items[0].clone());
+                lets.push((name, items[0].render(), result));
+                block(rest, env, &next, acc, want)?
+            }
+            None => block(rest, env, &scope, acc, want)?,
+        }
+    };
+    Ok(((wrap_lets(lets, body), rt), acc))
+}
+
+/// The statements of a body whose `&mut` parameters `states` are threaded,
+/// rewritten so that every way out of it gives the tuple of its value and
+/// their values at that point: each tail `v` and `return v` becomes
+/// `{ let r = v; (r, s1, ..) }`, and a body of no value ends in
+/// `((), s1, ..)`. The rewrite is refused where a state escapes as itself
+/// rather than through its fields or a lifted call (`let s = self;`,
+/// `match self { .. }`, `Some(self)`): there it is a second borrow of the
+/// place, which the lift would read as a copy that changes apart from it.
+fn thread_body(
+    stmts: &[rs::Stmt],
+    states: &[String],
+    full: &Ty,
+    env: &Env,
+    current: &str,
+) -> Lift<Vec<rs::Stmt>> {
+    let unit = matches!(full, Ty::Tuple(ts) | Ty::Pair(ts) if ts.first() == Some(&Ty::Unit));
+    let scan = StateScan {
+        states,
+        env,
+        current,
+    };
+    for stmt in stmts {
+        scan.stmt(stmt)?;
+    }
+    let mut result = "threaded".to_string();
+    while states.contains(&result) {
+        result.push('_');
+    }
+    let path = |n: &str| rs::RustExpr::Path(rs::Path::ident(n));
+    let out = |value: Option<rs::RustExpr>| -> rs::RustExpr {
+        let mut items = vec![path(&result)];
+        items.extend(states.iter().map(|s| path(s)));
+        let stmts = match value {
+            None => {
+                items[0] = rs::RustExpr::Tuple(Vec::new());
+                vec![rs::Stmt::Expr(rs::RustExpr::Tuple(items), false)]
+            }
+            // A value of `()` is a statement, so that what it updates
+            // reaches the tuple after it.
+            Some(v) if unit => vec![
+                rs::Stmt::Expr(v, true),
+                rs::Stmt::Expr(
+                    rs::RustExpr::Tuple({
+                        items[0] = rs::RustExpr::Tuple(Vec::new());
+                        items
+                    }),
+                    false,
+                ),
+            ],
+            Some(v) => vec![
+                rs::Stmt::Local(rs::Local {
+                    pat: rs::Pat::Ident(rs::PatIdent {
+                        ident: result.clone(),
+                        by_ref: false,
+                        subpat: None,
+                    }),
+                    init: Some(rs::LocalInit {
+                        expr: Box::new(v),
+                        diverge: None,
+                    }),
+                }),
+                rs::Stmt::Expr(rs::RustExpr::Tuple(items), false),
+            ],
+        };
+        rs::RustExpr::Block(rs::ExprBlock {
+            label: false,
+            block: rs::Block { stmts },
+        })
+    };
+    let mut body = stmts.to_vec();
+    for stmt in &mut body {
+        returns_threaded(stmt, &out);
+    }
+    Ok(tails_threaded(body, &out))
+}
+
+/// The statements with their value threaded: the tail expression's own
+/// tails, or `out(None)` after statements of no value.
+fn tails_threaded(
+    mut stmts: Vec<rs::Stmt>,
+    out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr,
+) -> Vec<rs::Stmt> {
+    match stmts.pop() {
+        Some(rs::Stmt::Expr(e, false)) => stmts.push(rs::Stmt::Expr(tail_threaded(e, out), false)),
+        Some(other) => {
+            stmts.push(other);
+            stmts.push(rs::Stmt::Expr(out(None), false));
+        }
+        None => stmts.push(rs::Stmt::Expr(out(None), false)),
+    }
+    stmts
+}
+
+/// A tail expression with its value threaded at each of its own tails.
+fn tail_threaded(
+    e: rs::RustExpr,
+    out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr,
+) -> rs::RustExpr {
+    match e {
+        rs::RustExpr::Block(b) if !b.label => rs::RustExpr::Block(rs::ExprBlock {
+            label: false,
+            block: rs::Block {
+                stmts: tails_threaded(b.block.stmts, out),
+            },
+        }),
+        rs::RustExpr::Paren(inner) => tail_threaded(*inner, out),
+        rs::RustExpr::If(i) => {
+            let then_branch = rs::Block {
+                stmts: tails_threaded(i.then_branch.stmts, out),
+            };
+            let else_branch = match i.else_branch {
+                Some(e) => tail_threaded(*e, out),
+                None => out(None),
+            };
+            rs::RustExpr::If(rs::ExprIf {
+                cond: i.cond,
+                then_branch,
+                else_branch: Some(Box::new(else_branch)),
+            })
+        }
+        rs::RustExpr::Match(m) => rs::RustExpr::Match(rs::ExprMatch {
+            expr: m.expr,
+            arms: m
+                .arms
+                .into_iter()
+                .map(|a| rs::MatchArm {
+                    pat: a.pat,
+                    body: Box::new(tail_threaded(*a.body, out)),
+                })
+                .collect(),
+        }),
+        // A `return` already gives the tuple (see `returns_threaded`).
+        rs::RustExpr::Return(r) => rs::RustExpr::Return(r),
+        other => out(Some(other)),
+    }
+}
+
+/// Each `return v` of a statement, outside the closures it holds, as
+/// `return out(v)`.
+fn returns_threaded(stmt: &mut rs::Stmt, out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr) {
+    match stmt {
+        rs::Stmt::Local(l) => {
+            if let Some(init) = &mut l.init {
+                return_threaded(&mut init.expr, out);
+                if let Some(d) = &mut init.diverge {
+                    return_threaded(d, out);
+                }
+            }
+        }
+        rs::Stmt::Expr(e, _) => return_threaded(e, out),
+        rs::Stmt::Macro(_) | rs::Stmt::Other => {}
+    }
+}
+
+fn return_threaded(e: &mut rs::RustExpr, out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr) {
+    if let rs::RustExpr::Return(r) = e {
+        let value = r.take().map(|v| {
+            let mut v = *v;
+            return_threaded(&mut v, out);
+            v
+        });
+        *r = Some(Box::new(out(value)));
+        return;
+    }
+    let each = |e: &mut rs::RustExpr| return_threaded(e, out);
+    let blocks = |b: &mut rs::Block| {
+        for s in &mut b.stmts {
+            returns_threaded(s, out);
+        }
+    };
+    each_part(e, each, blocks);
+}
+
+/// Every expression and block directly inside `e`, as
+/// [`rs::RustExpr::parts`] lists them, outside a closure's body: what a
+/// `return` there leaves is the closure.
+fn each_part(
+    e: &mut rs::RustExpr,
+    mut each: impl FnMut(&mut rs::RustExpr),
+    mut blocks: impl FnMut(&mut rs::Block),
+) {
+    match e {
+        rs::RustExpr::Array(items) | rs::RustExpr::Tuple(items) => items.iter_mut().for_each(each),
+        rs::RustExpr::Assign(a) => {
+            each(&mut a.left);
+            each(&mut a.right);
+        }
+        rs::RustExpr::Binary(b) => {
+            each(&mut b.left);
+            each(&mut b.right);
+        }
+        rs::RustExpr::Block(b) => blocks(&mut b.block),
+        rs::RustExpr::Break(b) => {
+            if let Some(v) = &mut b.expr {
+                each(v);
+            }
+        }
+        rs::RustExpr::Call(c) => {
+            each(&mut c.func);
+            c.args.iter_mut().for_each(each);
+        }
+        rs::RustExpr::Cast(c) => each(&mut c.expr),
+        rs::RustExpr::Closure(_) => {}
+        rs::RustExpr::Field(f) => each(&mut f.base),
+        rs::RustExpr::ForLoop(f) => {
+            each(&mut f.expr);
+            blocks(&mut f.body);
+        }
+        rs::RustExpr::Loop(l) => blocks(&mut l.body),
+        rs::RustExpr::While(w) => {
+            each(&mut w.cond);
+            blocks(&mut w.body);
+        }
+        rs::RustExpr::If(i) => {
+            each(&mut i.cond);
+            blocks(&mut i.then_branch);
+            if let Some(e) = &mut i.else_branch {
+                each(e);
+            }
+        }
+        rs::RustExpr::Index(i) => {
+            each(&mut i.expr);
+            each(&mut i.index);
+        }
+        rs::RustExpr::Let(l) => each(&mut l.expr),
+        rs::RustExpr::Match(m) => {
+            each(&mut m.expr);
+            for arm in &mut m.arms {
+                if let rs::Pat::Guard(g) = &mut arm.pat {
+                    each(&mut g.guard);
+                }
+                each(&mut arm.body);
+            }
+        }
+        rs::RustExpr::MethodCall(m) => {
+            each(&mut m.receiver);
+            m.args.iter_mut().for_each(each);
+        }
+        rs::RustExpr::Paren(e) | rs::RustExpr::Try(e) => each(e),
+        rs::RustExpr::Reference(r) => each(&mut r.expr),
+        rs::RustExpr::Return(r) => {
+            if let Some(v) = r {
+                each(v);
+            }
+        }
+        rs::RustExpr::Struct(s) => {
+            for f in &mut s.fields {
+                each(&mut f.expr);
+            }
+            if let Some(r) = &mut s.rest {
+                each(r);
+            }
+        }
+        rs::RustExpr::Unary(u) => each(&mut u.expr),
+        rs::RustExpr::Other(o) => {
+            o.exprs.iter_mut().for_each(&mut each);
+            o.blocks.iter_mut().for_each(blocks);
+        }
+        rs::RustExpr::Continue(_)
+        | rs::RustExpr::Lit(_)
+        | rs::RustExpr::Macro(_)
+        | rs::RustExpr::Path(_) => {}
+    }
+}
+
+/// The macros whose arguments Rust only reads (each is formatted or
+/// compared through a shared borrow).
+const READING_MACROS: [&str; 12] = [
+    "format",
+    "write",
+    "writeln",
+    "print",
+    "println",
+    "eprint",
+    "eprintln",
+    "panic",
+    "assert",
+    "assert_eq",
+    "assert_ne",
+    "debug_assert",
+];
+
+/// Where a threaded body's states are used as themselves.
+struct StateScan<'a> {
+    states: &'a [String],
+    env: &'a Env,
+    current: &'a str,
+}
+
+impl StateScan<'_> {
+    /// The state `e` is, itself or through `&`, `&mut`, `*` or
+    /// parentheses.
+    fn state<'e>(&self, e: &'e rs::RustExpr) -> Option<&'e String> {
+        match e {
+            rs::RustExpr::Path(p) => p.get_ident().filter(|i| self.states.contains(i)),
+            rs::RustExpr::Paren(inner) => self.state(inner),
+            rs::RustExpr::Reference(r) => self.state(&r.expr),
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => self.state(&u.expr),
+            _ => None,
+        }
+    }
+
+    fn escapes(&self, state: &str) -> Residue {
+        Residue::Form(format!(
+            "{state} used as itself, a second borrow of the place it lends, which the lift \
+             would read as a copy"
+        ))
+    }
+
+    fn stmt(&self, stmt: &rs::Stmt) -> Lift<()> {
+        match stmt {
+            rs::Stmt::Local(l) => {
+                if let Some(init) = &l.init {
+                    self.operand(&init.expr)?;
+                    if let Some(d) = &init.diverge {
+                        self.operand(d)?;
+                    }
+                }
+                Ok(())
+            }
+            rs::Stmt::Expr(e, _) => self.operand(e),
+            rs::Stmt::Macro(m) => self.mac(m),
+            rs::Stmt::Other => Ok(()),
+        }
+    }
+
+    /// An expression in a position that takes its value.
+    fn operand(&self, e: &rs::RustExpr) -> Lift<()> {
+        if let Some(s) = self.state(e) {
+            return Err(self.escapes(s));
+        }
+        // A failed `?` leaves with the error alone, not the states with it.
+        if matches!(e, rs::RustExpr::Try(_)) {
+            return Err(Residue::Form(
+                "? in a body that threads its &mut parameters".to_string(),
+            ));
+        }
+        self.within(e)
+    }
+
+    /// What is inside `e`: a state read through (a field's base, a method's
+    /// receiver, an argument of a lifted function) is no escape.
+    fn within(&self, e: &rs::RustExpr) -> Lift<()> {
+        match e {
+            rs::RustExpr::Field(f) if self.state(&f.base).is_some() => Ok(()),
+            // `*s = v` writes the place itself.
+            rs::RustExpr::Assign(a)
+                if matches!(&*a.left, rs::RustExpr::Unary(u)
+                    if matches!(u.op, rs::UnOp::Deref) && self.state(&u.expr).is_some()) =>
+            {
+                self.operand(&a.right)
+            }
+            rs::RustExpr::MethodCall(m) => {
+                if self.state(&m.receiver).is_none() {
+                    self.operand(&m.receiver)?;
+                }
+                m.args.iter().try_for_each(|a| self.operand(a))
+            }
+            rs::RustExpr::Call(c) => {
+                let lifted = match &*c.func {
+                    rs::RustExpr::Path(p) => {
+                        let segments: Vec<String> =
+                            p.segments.iter().map(|s| s.ident.clone()).collect();
+                        self.lifted(&segments)
+                    }
+                    _ => false,
+                };
+                self.operand(&c.func)?;
+                c.args.iter().try_for_each(|a| {
+                    if lifted && self.state(a).is_some() {
+                        Ok(())
+                    } else {
+                        self.operand(a)
+                    }
+                })
+            }
+            rs::RustExpr::Macro(m) => self.mac(m),
+            _ => {
+                let (exprs, blocks) = e.parts();
+                for inner in exprs {
+                    self.operand(inner)?;
+                }
+                for b in blocks {
+                    for s in &b.stmts {
+                        self.stmt(s)?;
+                    }
+                }
+                Ok(())
+            }
+        }
+    }
+
+    /// A macro's arguments: read by a formatting or comparing macro, an
+    /// operand of any other.
+    fn mac(&self, m: &rs::ExprMacro) -> Lift<()> {
+        let reads = READING_MACROS.iter().any(|r| m.path.is_ident(r));
+        for item in m.args.iter().flat_map(|a| &a.items) {
+            if reads && self.state(item).is_some() {
+                continue;
+            }
+            self.operand(item)?;
+        }
+        if let Some(mm) = &m.matches {
+            self.operand(&mm.expr)?;
+        }
+        Ok(())
+    }
+
+    /// Whether a call by these segments names a candidate function, which
+    /// takes a state's value (or threads it) and returns no borrow of it.
+    fn lifted(&self, segments: &[String]) -> bool {
+        if let [.., owner, method] = segments {
+            let owner = if owner == "Self" {
+                self.current
+                    .split_once("::")
+                    .map_or(owner.as_str(), |(o, _)| o)
+            } else {
+                owner.as_str()
+            };
+            if self
+                .env
+                .fns
+                .contains_key(&format!("{}::{method}", self.env.types.resolve(owner)))
+            {
+                return true;
+            }
+        }
+        segments.len() == 1
+            && segments
+                .last()
+                .is_some_and(|s| self.env.fns.contains_key(s))
+    }
+}
+
+/// `let x = call;`, `let x: T = call;` or `let _ = call;` of a call the
+/// block threads: the binder, its declared type and the call.
+fn threaded_let(l: &rs::Local) -> Option<(Option<&str>, Option<&rs::RustType>, &rs::RustExpr)> {
+    let init = l.init.as_ref().filter(|i| i.diverge.is_none())?;
+    fn plain(p: &rs::Pat) -> Option<Option<&str>> {
+        match p {
+            rs::Pat::Ident(i) if i.subpat.is_none() && !i.by_ref => Some(Some(i.ident.as_str())),
+            rs::Pat::Wild => Some(None),
+            _ => None,
+        }
+    }
+    let (binder, declared) = match &l.pat {
+        rs::Pat::Type(pt) => (plain(&pt.pat)?, Some(&pt.ty)),
+        p => (plain(p)?, None),
+    };
+    Some((binder, declared, &init.expr))
 }
 
 /// `match e { p => .. } rest`: the rest after each arm.
@@ -11704,6 +12637,20 @@ pub(crate) struct Candidate<'a> {
     pub(crate) formatter: Option<String>,
     /// What its own module scope binds (see [`Seen`]).
     pub(crate) seen: Seen,
+    /// The positions of the parameters it threads (see [`threads`]): its
+    /// `result` is then the tuple of the Rust result and their values.
+    pub(crate) threads: Vec<usize>,
+}
+
+impl Candidate<'_> {
+    /// The Rust result: `result`, or where the definition threads `&mut`
+    /// parameters, the first item of its tuple.
+    pub(crate) fn forward(&self) -> Ty {
+        match (&self.result, self.threads.is_empty()) {
+            (Ty::Tuple(ts) | Ty::Pair(ts), false) if !ts.is_empty() => ts[0].clone(),
+            (t, _) => t.clone(),
+        }
+    }
 }
 
 /// What a lift produced.
@@ -11791,6 +12738,7 @@ pub(crate) fn lift_all(
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         result: c.result.clone(),
                         generic: c.generic.clone(),
+                        threads: c.threads.clone(),
                     },
                 )
             })
@@ -11843,6 +12791,7 @@ pub(crate) fn lift_all(
                     .map(|g| g.dictionary.clone())
                     .unwrap_or_default(),
                 sealed: BTreeSet::new(),
+                borrowed: ref_binders(&c.block.stmts),
             };
             env.types.paths_open = c.seen.paths_open;
             // A type parameter is the candidate's own.
@@ -11864,7 +12813,25 @@ pub(crate) fn lift_all(
                     None => env.fns.remove(key),
                 };
             }
-            let lifted = block(&c.block.stmts, &env, &ctx, Acc::default(), Some(&c.result));
+            let threaded;
+            let stmts = if c.threads.is_empty() {
+                &c.block.stmts
+            } else {
+                let states: Vec<String> =
+                    c.threads.iter().map(|&i| c.params[i].0.clone()).collect();
+                match thread_body(&c.block.stmts, &states, &c.result, &env, &c.called) {
+                    Ok(stmts) => {
+                        threaded = stmts;
+                        &threaded
+                    }
+                    Err(r) => {
+                        failed.insert(c.rust.clone(), r);
+                        changed = true;
+                        continue;
+                    }
+                }
+            };
+            let lifted = block(stmts, &env, &ctx, Acc::default(), Some(&c.result));
             let outcome = match lifted {
                 Ok(((body, ty), acc)) if ty.same(&c.result) => {
                     let descends = acc.descends.clone();
@@ -13033,6 +14000,7 @@ mod tests {
             called: sig.ident.clone(),
             formatter: None,
             seen: Seen::default(),
+            threads: threads(&sig, None),
         };
         let out = lift_all(&[c], types, &pointer_widths(&[]), &BTreeSet::new());
         match out.failed.into_values().next() {
@@ -13622,20 +14590,19 @@ mod tests {
     #[test]
     fn a_receiver_the_lift_does_not_thread_is_named_with_its_type() {
         let types = with_square();
-        for receiver in ["&mut self", "mut self"] {
-            let owner = Owner::Type {
-                name: "Square",
-                receiver: Some(receiver),
-            };
-            let src = format!("fn grow({receiver}, by: bool) {{}}");
-            assert_eq!(
-                method_signature(&src, Some(&owner), &types).err(),
-                Some(Residue::Signature(format!(
-                    "takes {receiver} of Square: the lift reads self and &self as the value, \
-                     and threads no other receiver"
-                )))
-            );
-        }
+        let receiver = "self: Box<Self>";
+        let owner = Owner::Type {
+            name: "Square",
+            receiver: Some(receiver),
+        };
+        let src = format!("fn grow({receiver}, by: bool) {{}}");
+        assert_eq!(
+            method_signature(&src, Some(&owner), &types).err(),
+            Some(Residue::Signature(format!(
+                "takes {receiver} of Square: the lift reads self, mut self, &self and &mut \
+                 self, and no other receiver"
+            )))
+        );
         // A type the scope does not name, and a receiver outside any type.
         let owner = Owner::Type {
             name: "Circle",
@@ -14568,5 +15535,124 @@ mod tests {
                 lift(src, &plain())
             );
         }
+    }
+
+    #[test]
+    fn mutation_a_receiver_is_threaded_where_rust_makes_it_the_only_way_in() {
+        assert_eq!(Receiver::of("mut self"), Receiver::Owned);
+        assert_eq!(Receiver::of("&mut self"), Receiver::Unique);
+        assert_eq!(Receiver::of("&'a mut self"), Receiver::Unique);
+        assert_eq!(Receiver::of("self: Box<Self>"), Receiver::Other);
+        let types = with_square();
+        let f: syn::ImplItemFn = syn::parse_str(
+            "fn grow(&mut self, by: &mut u32, n: u32, s: &mut Vec<u8>) -> bool { true }",
+        )
+        .expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        let unique = Owner::Type {
+            name: "Square",
+            receiver: Some("&mut self"),
+        };
+        assert_eq!(threads(&sig, Some(&unique)), vec![0, 1, 3]);
+        let (params, result) = types.signature(&sig, Some(&unique)).expect("lifts");
+        assert_eq!(params[1].2, Ty::Nat(Some(32)));
+        assert_eq!(
+            result,
+            Ty::Tuple(vec![
+                Ty::Bool,
+                Ty::Named("Square".to_string()),
+                Ty::Nat(Some(32)),
+                Ty::List(Box::new(Ty::Nat(Some(8)))),
+            ])
+        );
+        // An owned receiver is a local of the method: nothing is given back.
+        let owned = Owner::Type {
+            name: "Square",
+            receiver: Some("mut self"),
+        };
+        let f: syn::ImplItemFn =
+            syn::parse_str("fn grown(mut self) -> Self { self }").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert!(threads(&sig, Some(&owned)).is_empty());
+        assert_eq!(
+            types.signature(&sig, Some(&owned)).expect("lifts").1,
+            Ty::Named("Square".to_string())
+        );
+        // A borrowed slice is changed in place, item by item: not threaded.
+        let f: syn::ItemFn = syn::parse_str("fn zero(xs: &mut [u8]) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert!(threads(&sig, None).is_empty());
+        assert_eq!(
+            types.signature(&sig, None).err(),
+            Some(Residue::Type("&mut [u8]".to_string()))
+        );
+    }
+
+    #[test]
+    fn mutation_a_mut_parameter_is_given_back_after_the_result() {
+        let out = lift(
+            "fn fill(out: &mut Vec<u32>, x: u32) { out.push(x); }",
+            &plain(),
+        )
+        .expect("lifts");
+        assert!(out.contains("result: TupleUnitListNat"), "{out}");
+        assert!(
+            out.contains("(record TupleUnitListNat {item0 := (), item1 := out1})"),
+            "{out}"
+        );
+        let out = lift(
+            "fn both(a: &mut u32, b: &mut u32, c: bool) -> bool { if c { *a = 1; return false; } \
+             *b = 2; true }",
+            &plain(),
+        )
+        .expect("lifts");
+        // Each way out gives the values the places hold there.
+        assert!(
+            out.contains("item0 := threaded, item1 := a1, item2 := b"),
+            "{out}"
+        );
+        assert!(
+            out.contains("item0 := threaded, item1 := a, item2 := b1"),
+            "{out}"
+        );
+    }
+
+    #[test]
+    fn mutation_a_borrow_the_lift_would_copy_is_refused() {
+        let escapes = |state: &str| {
+            Err(Residue::Form(format!(
+                "{state} used as itself, a second borrow of the place it lends, which the lift \
+                 would read as a copy"
+            )))
+        };
+        for src in [
+            "fn f(a: &mut u32) -> u32 { let b = a; *b }",
+            "fn f(a: &mut Option<u32>) { match a { Some(v) => *v = 1, None => {} } }",
+            "fn f(a: &mut u32) -> Option<u32> { let o = Some(a); None }",
+            "fn f(a: &mut Vec<u32>) -> usize { let v = vec![a]; v.len() }",
+        ] {
+            assert_eq!(lift(src, &plain()), escapes("a"), "{src}");
+        }
+        // A `ref` binder borrows the place it matched.
+        assert_eq!(
+            lift(
+                "fn f(o: Option<Vec<u32>>) -> Option<Vec<u32>> { let mut o = o; \
+                 match o { Some(ref mut v) => v.push(1), None => {} } o }",
+                &plain()
+            ),
+            Err(Residue::Form(
+                "an update of v, which a ref pattern binds to the place it borrows".to_string()
+            ))
+        );
+        // A failed `?` would leave without the places' values.
+        assert_eq!(
+            lift(
+                "fn f(a: &mut u32, s: Option<u32>) -> Option<u32> { let x = s?; *a = x; Some(x) }",
+                &plain()
+            ),
+            Err(Residue::Form(
+                "? in a body that threads its &mut parameters".to_string()
+            ))
+        );
     }
 }

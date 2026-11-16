@@ -4516,6 +4516,12 @@ fn behavior(
             )),
             _ => types.signature(sig, owner.as_ref()),
         };
+        // A Display impl's formatter is the text it writes, not a borrow
+        // the definition threads.
+        let threads = match formatter {
+            Some(_) => Vec::new(),
+            None => lift::threads(sig, owner.as_ref()),
+        };
         match signature {
             Ok((params, result)) => {
                 let holder = candidates
@@ -4569,6 +4575,7 @@ fn behavior(
                     homonyms: reads.call_reading(r),
                     called,
                     formatter,
+                    threads,
                 });
             }
             Err(reason) => ctx.stopped(notes, &effectful, r, reason),
@@ -4665,6 +4672,7 @@ fn behavior(
                     ),
                     called: rust.clone(),
                     formatter: None,
+                    threads: Vec::new(),
                 });
             }
         }
@@ -4804,6 +4812,7 @@ fn behavior(
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         result: c.result.clone(),
                         generic: c.generic.clone(),
+                        threads: c.threads.clone(),
                     },
                 )
             })
@@ -4820,8 +4829,12 @@ fn behavior(
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
-                        result: c.result.clone(),
-                        threads: None,
+                        // A definition that threads its `&mut` parameters
+                        // returns its own result first, as a translated
+                        // one does.
+                        result: c.forward(),
+                        threads: (!c.threads.is_empty())
+                            .then(|| (c.result.clone(), c.threads.clone())),
                     },
                 );
             }
@@ -9342,7 +9355,10 @@ pub fn fb(n: &Node) -> u8 {
             )],
         );
         // A tuple struct's fields are read by position, so its method
-        // lifts.
+        // lifts; a method that changes its receiver gives back its new
+        // value.
+        let grow = row(&frontier, "reasons::Square::grow");
+        assert!(grow.starts_with("[[lifted]]"), "{grow}");
         let radius = row(&frontier, "reasons::Circle::radius");
         assert!(
             radius.starts_with("[[lifted]]")
@@ -9354,12 +9370,6 @@ pub fn fb(n: &Node) -> u8 {
                 "reasons::Bag::count",
                 "type",
                 "type outside the lift: Bag.blob: Blob.weight: Cell<u8>",
-            ),
-            (
-                "reasons::Square::grow",
-                "signature",
-                "signature outside the lift: takes &mut self of Square: the lift reads self \
-                 and &self as the value, and threads no other receiver",
             ),
             (
                 "reasons::Square::scale",
@@ -11759,5 +11769,110 @@ pub fn fb(n: &Node) -> u8 {
             found.contains("whose type parameter only an unsuffixed number literal fixes"),
             "{found}"
         );
+    }
+
+    // Mutation as state passing: a method that changes its receiver is the
+    // function from the old value to its result and the new value, and a
+    // caller rebinds the place it lent.
+
+    fn mutation_projected() -> (String, String) {
+        projected(
+            "tally",
+            &[(
+                "src/lib.rs",
+                "//! Tallies.\n\
+                 /// A tally.\npub struct Tally {\n    /// Its count.\n    pub count: u32,\n    \
+                 /// Its marks.\n    pub marks: Vec<u32>,\n}\n\
+                 /// A board.\npub struct Board {\n    /// Its tally.\n    pub tally: Tally,\n    \
+                 /// Whether it was touched.\n    pub touched: bool,\n}\n\
+                 impl Tally {\n    \
+                 /// Count one more.\n    pub fn tick(&mut self) -> u32 {\n        \
+                 self.count = self.count.saturating_add(1);\n        self.count\n    }\n    \
+                 /// Mark a value.\n    pub fn mark(&mut self, m: u32) {\n        \
+                 self.marks.push(m);\n    }\n    \
+                 /// The tally with a count.\n    pub fn with(mut self, count: u32) -> Self {\n        \
+                 self.count = count;\n        self\n    }\n    \
+                 /// Itself, borrowed again.\n    pub fn again(&mut self) -> u32 {\n        \
+                 let other = self;\n        other.count\n    }\n}\n\
+                 impl Board {\n    /// Touch the board.\n    pub fn touch(&mut self) {\n        \
+                 self.tally.mark(7);\n        self.touched = true;\n    }\n}\n\
+                 /// Push onto a list.\npub fn push_on(out: &mut Vec<u32>, x: u32) {\n    \
+                 out.push(x);\n}\n\
+                 /// Two ticks of a fresh tally.\npub fn two() -> u32 {\n    \
+                 let mut t = Tally { count: 0, marks: Vec::new() };\n    t.tick();\n    \
+                 let n = t.tick();\n    let mut v = Vec::new();\n    push_on(&mut v, n);\n    \
+                 t.count.saturating_add(v.len() as u32)\n}\n\
+                 /// A tick as an operand.\npub fn inside(t: Tally) -> u32 {\n    \
+                 let mut t = t;\n    t.tick().saturating_add(1)\n}\n",
+            )],
+        )
+    }
+
+    #[test]
+    fn mutation_a_method_and_its_callers_thread_the_receiver() {
+        let (frontier, behavior) = mutation_projected();
+        for function in [
+            "tally::Tally::tick",
+            "tally::Tally::mark",
+            "tally::Tally::with",
+            "tally::Board::touch",
+            "tally::push_on",
+            "tally::two",
+        ] {
+            let found = row(&frontier, function);
+            assert!(found.starts_with("[[lifted]]"), "{found}");
+        }
+        // The new value after the result.
+        let tick = definition(&behavior, "tallyTick");
+        assert!(tick.contains("result: TupleNatTally"), "{tick}");
+        assert!(
+            tick.contains("(record TupleNatTally {item0 := threaded, item1 := selfValue1})"),
+            "{tick}"
+        );
+        // A field's method writes the field back.
+        let touch = definition(&behavior, "boardTouch");
+        assert!(
+            touch.contains("(tallyMark (project selfValue tally) 7)")
+                && touch.contains("tally := (project threaded1 item1)"),
+            "{touch}"
+        );
+        // A caller reads the receiver as each call leaves it.
+        let two = definition(&behavior, "two");
+        assert!(
+            two.contains("(tallyTick t)")
+                && two.contains("(let t1 : Tally := (project threaded1 item1)")
+                && two.contains("(tallyTick t1)")
+                && two.contains("(let n : Nat := (project threaded2 item0)")
+                && two.contains("(pushOn v n)")
+                && two.contains("(project t2 count)"),
+            "{two}"
+        );
+        // An owned receiver is the method's own local.
+        let with = definition(&behavior, "tallyWith");
+        assert!(with.contains("result: Tally,"), "{with}");
+    }
+
+    #[test]
+    fn mutation_a_change_nothing_writes_back_keeps_a_row() {
+        let (frontier, _) = mutation_projected();
+        for (function, detail) in [
+            (
+                "tally::inside",
+                "expression form outside the lift: a call of Tally::tick, which changes what it \
+                 borrows mutably, as an operand",
+            ),
+            (
+                "tally::Tally::again",
+                "expression form outside the lift: self used as itself, a second borrow of the \
+                 place it lends, which the lift would read as a copy",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.starts_with("[[residue]]")
+                    && found.contains(&format!("detail = \"{detail}\"")),
+                "{found}"
+            );
+        }
     }
 }
