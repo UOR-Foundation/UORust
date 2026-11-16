@@ -100,9 +100,11 @@ impl Limits {
             path: path.to_path_buf(),
             reason,
         };
-        let value: toml::Value = String::from_utf8_lossy(&bytes)
-            .parse()
-            .map_err(|e| refused(format!("{e}")))?;
+        // TOML 1.0 is UTF-8: a file that is not is no TOML document, and
+        // reading it lossily would take a file no TOML reader takes.
+        let text = std::str::from_utf8(&bytes)
+            .map_err(|e| refused(format!("the file is not UTF-8, as TOML requires: {e}")))?;
+        let value: toml::Value = text.parse().map_err(|e| refused(format!("{e}")))?;
         let sdk = Self::sdk();
         let lexlean = table(&value, "lexlean", &sdk.lexlean, path)?;
         let prismpm = table(&value, "prismpm", &sdk.prismpm, path)?;
@@ -312,5 +314,25 @@ mod tests {
         assert!(table.contains("states no [prismpm] table"), "{table}");
         let extra = limits_refusal("extra", |t| t + "\n[lake]\nx = 1\n");
         assert!(extra.contains("a table `lake`"), "{extra}");
+    }
+
+    /// A limits file that is not UTF-8 is no TOML document, though every
+    /// key and value in it is valid: the refuter's file, the valid one with
+    /// a first comment line holding the bytes `ff fe`.
+    #[test]
+    fn limits_a_file_that_is_not_utf8_is_refused() {
+        let path = limits_file("utf8", |t| t);
+        let valid = std::fs::read(&path).expect("the file");
+        let mut bytes = b"# \xff\xfe not utf-8\n".to_vec();
+        bytes.extend(valid);
+        std::fs::write(&path, bytes).expect("a limits file");
+        let got = Limits::declared(&path);
+        let _ = std::fs::remove_file(&path);
+        match got {
+            Err(UorustError::Limits { reason, .. }) => {
+                assert!(reason.contains("not UTF-8"), "{reason}")
+            }
+            other => panic!("not refused: {other:?}"),
+        }
     }
 }
