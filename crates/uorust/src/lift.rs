@@ -1217,6 +1217,36 @@ impl Types {
     /// the reading: the package's lock pins a version it was read from
     /// (see [`crate::registered::of_package`]), which puts the path among
     /// the scope's names.
+    pub(crate) fn float(&self, name: &str) -> Option<crate::mir::float::Format> {
+        use crate::mir::float::Format;
+        // The width of a float is that of the unsigned integer its
+        // `to_bits` returns; its digits and largest exponent are core's
+        // `MANTISSA_DIGITS` and `MAX_EXP`, as the core the tool is built
+        // with states them. The language fixes both types as IEEE 754's
+        // binary32 and binary64, so no build of core states others.
+        let host = |bytes: usize, digits: u32, max_exp: i32| {
+            let bits = u8::BITS * u32::try_from(bytes).ok()?;
+            Format::from_core(bits, digits, i64::from(max_exp))
+        };
+        match self.floats.get(name) {
+            Some(f) => Some(*f),
+            None => match name {
+                "f32" => host(
+                    std::mem::size_of::<f32>(),
+                    f32::MANTISSA_DIGITS,
+                    f32::MAX_EXP,
+                ),
+                "f64" => host(
+                    std::mem::size_of::<f64>(),
+                    f64::MANTISSA_DIGITS,
+                    f64::MAX_EXP,
+                ),
+                _ => None,
+            },
+        }
+    }
+
+    /// The type a registered crate's path reads as (see below).
     pub(crate) fn registered(&self, path: &str) -> Option<Ty> {
         self.aliases
             .get(path)
@@ -1270,6 +1300,12 @@ impl Types {
             ("isize", 0) => Ty::Integer(None),
             ("String", 0) => Ty::Str,
             ("char", 0) => Ty::Char,
+            // A float of the language: IEEE 754's binary format of the
+            // widths core's own constants state (see `Types::float`).
+            ("f32" | "f64", 0) if imported => match self.float(&name) {
+                Some(f) => Ty::Float(f),
+                None => return bad(),
+            },
             ("Option", 1) => Ty::Option(arg(0)?),
             ("Result", 2) => Ty::Outcome(arg(0)?, arg(1)?),
             ("Vec", 1) => Ty::List(arg(0)?),
@@ -2253,6 +2289,21 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
             None => Err(Residue::Form(PERCENT.to_string())),
         },
         rs::Lit::Byte(b) if !negative => flat(b.to_string(), Ty::Nat(Some(8))),
+        // A float literal: the format's value nearest the decimal, ties to
+        // even, as Rust rounds one; unsuffixed and not otherwise typed, it
+        // is an `f64`, the language's fallback.
+        rs::Lit::Float { digits, suffix } => {
+            let named = match (suffix.as_str(), want) {
+                ("f32" | "f64", _) => suffix.as_str(),
+                ("", Some(Ty::Float(f))) => return float_literal(*f, digits, negative),
+                ("", _) => "f64",
+                _ => return Err(Residue::Form("float literal".to_string())),
+            };
+            match Types::default().float(named) {
+                Some(f) => float_literal(f, digits, negative),
+                None => Err(Residue::Form("float literal".to_string())),
+            }
+        }
         rs::Lit::ByteStr(b) if !negative => {
             let bytes: Vec<String> = b.iter().map(u8::to_string).collect();
             flat(
@@ -2515,6 +2566,15 @@ fn unary_value(
         }
         rs::UnOp::Neg => match &*u.expr {
             rs::RustExpr::Lit(lit) => literal_of(lit, want, true).map(|v| (v, acc)),
+            // A float negates its sign, a NaN's too.
+            e if float_operand(e, env, ctx, &acc) => {
+                let ((x, xt), acc) = flat_of(e, env, ctx, acc, None)?;
+                let Ty::Float(f) = xt else {
+                    return Err(Residue::Arithmetic("-".to_string()));
+                };
+                let (term, acc) = float_term(f, "Neg", &[&x], acc);
+                flat_lift(term, xt, acc)
+            }
             // An integer of no width negates exactly (see
             // `unbounded_arithmetic`).
             e if unbounded_operand(e, env, ctx, &acc) => {
@@ -3175,6 +3235,18 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         }
         // The mathematical `Int` has an order and no `equal`: two values
         // are the same where neither is below the other.
+        // IEEE 754's comparisons, a NaN unordered: the prelude's model.
+        (Ty::Float(f), _) => {
+            let op = match b.op {
+                B::Eq => "Eq",
+                B::Ne => "Ne",
+                B::Lt => "Lt",
+                B::Le => "Le",
+                B::Gt => "Gt",
+                _ => "Ge",
+            };
+            float_term(*f, op, &[&l, &r], acc)
+        }
         (Ty::Integer(_) | Ty::Unbounded, _) => {
             let acc = acc.axiom("propext");
             let below = |x: &str, y: &str| format!("(prim less_than {x} {y} : Bool)");
@@ -3297,6 +3369,12 @@ fn binary(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty
         B::Eq | B::Ne | B::Lt | B::Le | B::Gt | B::Ge => comparison(b, env, ctx, acc),
         // `s + t` of a `String` and a `&str`: the two joined.
         B::Add | B::Sub | B::Mul | B::Div | B::Rem
+            if float_operand(&b.left, env, ctx, &acc)
+                || float_operand(&b.right, env, ctx, &acc) =>
+        {
+            float_arithmetic(b, env, ctx, acc)
+        }
+        B::Add | B::Sub | B::Mul | B::Div | B::Rem
             if unbounded_operand(&b.left, env, ctx, &acc)
                 || unbounded_operand(&b.right, env, ctx, &acc) =>
         {
@@ -3404,6 +3482,72 @@ fn unbounded_arithmetic(
         _ => format!("(prim remainder {l} {r} (0 : Int) : Int)"),
     };
     flat_lift(text, want, acc)
+}
+
+/// Whether an operand is a float of the language.
+fn float_operand(e: &rs::RustExpr, env: &Env, ctx: &Ctx, acc: &Acc) -> bool {
+    matches!(
+        flat_of(e, env, ctx, acc.clone(), None),
+        Ok(((_, Ty::Float(_)), _))
+    )
+}
+
+/// The prelude's IEEE 754 operation `op` of a format (see
+/// [`crate::mir::float`]), with the axioms its definition states.
+fn float_term(f: crate::mir::float::Format, op: &str, args: &[&str], acc: Acc) -> (String, Acc) {
+    let axioms = prelude_axioms(&format!("float{op}"));
+    (
+        f.term(op, args),
+        acc.axioms_all(axioms.into_iter().collect()),
+    )
+}
+
+/// A float literal of a format: the prelude's value of its decimal digits
+/// (`crate::mir::float::literal`), negated where written so.
+fn float_literal(f: crate::mir::float::Format, digits: &str, negative: bool) -> Lift<(Expr, Ty)> {
+    let text = if negative {
+        format!("-{digits}")
+    } else {
+        digits.to_string()
+    };
+    match crate::mir::float::literal(f, &text) {
+        Some(term) => Ok((Expr::Flat(term), Ty::Float(f))),
+        None => Err(Residue::Form("float literal".to_string())),
+    }
+}
+
+/// `a + b`, `a - b`, `a * b`, `a / b` and `a % b` of floats of one
+/// format: IEEE 754's correctly rounded operations, to nearest with ties
+/// to even, which Rust's are, and `%` the remainder truncated toward zero
+/// that Rust's `%` on floats is; the prelude's model (see
+/// [`crate::mir::float`]), the MIR path's too.
+fn float_arithmetic(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty), Acc)> {
+    use rs::BinOp as B;
+    let first = if float_operand(&b.left, env, ctx, &acc) {
+        &b.left
+    } else {
+        &b.right
+    };
+    let Ok(((_, want), _)) = flat_of(first, env, ctx, acc.clone(), None) else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    let ((l, lt), acc) = flat_of(&b.left, env, ctx, acc, Some(&want))?;
+    let ((r, rt), acc) = flat_of(&b.right, env, ctx, acc, Some(&want))?;
+    let Ty::Float(f) = want else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    if lt != want || rt != want {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    }
+    let op = match b.op {
+        B::Add => "Add",
+        B::Sub => "Sub",
+        B::Mul => "Mul",
+        B::Div => "Div",
+        _ => "Rem",
+    };
+    let (term, acc) = float_term(f, op, &[&l, &r], acc);
+    flat_lift(term, want, acc)
 }
 
 /// `a / k` and `a % k` by a divisor that is not zero.
@@ -4769,6 +4913,11 @@ fn method_typed(
             Ty::Integer(bits),
             "checked_add" | "checked_sub" | "checked_mul" | "checked_div" | "checked_neg",
         ) => method_integer_checked(bits, name, r, rt, args, env, ctx, acc),
+        // A float's inherent methods, which take precedence over any
+        // trait's: the prelude's model, by the table the MIR path reads.
+        (Ty::Float(f), _) if float_method(name, args.len()).is_some() => {
+            method_float(*f, name, r, rt, args, env, ctx, acc)
+        }
         // A ratio's inherent accessors (num-rational 0.4.2, `src/lib.rs`),
         // which an inherent method's precedence over a trait's keeps: the
         // stored numerator and denominator, whether the denominator is
@@ -5217,6 +5366,64 @@ fn method_integer_checked(
         None => checked,
     };
     flat_lift(text, opt_of(rt), acc)
+}
+
+/// The prelude's operation and kind of a float's inherent method of this
+/// many arguments besides `self`, by the table the MIR path reads
+/// ([`crate::mir::float::METHODS`]).
+fn float_method(name: &str, args: usize) -> Option<(&'static str, crate::mir::float::Kind)> {
+    use crate::mir::float::Kind;
+    crate::mir::float::METHODS
+        .iter()
+        .find(|(t, m, _, n, kind)| {
+            t.is_empty()
+                && *m == name
+                && *n == args + 1
+                && (matches!(kind, Kind::Value | Kind::Test) || *m == "to_bits")
+        })
+        .map(|(_, _, op, _, kind)| (*op, *kind))
+}
+
+/// `x.abs()`, `x.is_nan()`, `x.to_bits()` and the other inherent methods
+/// of a float the prelude models, each on operands of the receiver's
+/// format. `to_bits` is the bit pattern a float is held as.
+#[allow(clippy::too_many_arguments)]
+fn method_float(
+    f: crate::mir::float::Format,
+    name: &str,
+    r: &str,
+    rt: &Ty,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    use crate::mir::float::Kind;
+    let Some((op, kind)) = float_method(name, args.len()) else {
+        return Err(Residue::Form(format!("method call .{name}")));
+    };
+    if name == "to_bits" {
+        return flat_lift(r.to_string(), Ty::Nat(Some(1 + f.exp + f.frac)), acc);
+    }
+    let mut terms = vec![r.to_string()];
+    let mut acc = acc;
+    for a in args {
+        let ((v, vt), next) = flat_of(a, env, ctx, acc, Some(rt))?;
+        if vt != *rt {
+            return Err(Residue::Form(format!(
+                "method call .{name} of another type"
+            )));
+        }
+        terms.push(v);
+        acc = next;
+    }
+    let refs: Vec<&str> = terms.iter().map(String::as_str).collect();
+    let (term, acc) = float_term(f, op, &refs, acc);
+    let ty = match kind {
+        Kind::Test => Ty::Bool,
+        _ => rt.clone(),
+    };
+    flat_lift(term, ty, acc)
 }
 
 /// `.min` on a receiver of type `Int`.
@@ -12364,20 +12571,22 @@ mod tests {
     #[test]
     fn a_type_outside_the_lift_names_the_chain_to_its_leaf() {
         let types = types_of(
-            "struct Leaf { x: f64 } struct Mid { n: u32, leaf: Leaf, other: f32 } \
+            "struct Leaf { x: Cell<u8> } struct Mid { n: u32, leaf: Leaf, other: Cell<u16> } \
              struct Top { mids: Vec<Option<Mid>> }",
         );
         // Through the containers the lift reads, down to the first field
         // in declaration order that is outside.
         assert_eq!(
             lift("fn through(t: &Top) -> bool { true }", &types),
-            Err(Residue::Type("Top.mids: Mid.leaf: Leaf.x: f64".to_string()))
+            Err(Residue::Type(
+                "Top.mids: Mid.leaf: Leaf.x: Cell<u8>".to_string()
+            ))
         );
         // The owner of a method is named the same way; a name the
         // workspace does not declare is its own leaf.
         assert_eq!(
             types.unnamed("Mid"),
-            Residue::Type("Mid.leaf: Leaf.x: f64".to_string())
+            Residue::Type("Mid.leaf: Leaf.x: Cell<u8>".to_string())
         );
         assert_eq!(
             types.unnamed("Elsewhere"),
@@ -12385,7 +12594,7 @@ mod tests {
         );
         assert_eq!(
             types.unnamed("Mid").detail(),
-            "type outside the lift: Mid.leaf: Leaf.x: f64"
+            "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>"
         );
     }
 
@@ -12393,24 +12602,25 @@ mod tests {
     fn a_chain_never_leads_back_into_the_type_it_explains() {
         // `A` holds `B` first, and `B` is outside only because it holds
         // `A`: the chain of `A` names what kept `A` out on its own.
-        let types = types_of("struct A { b: Vec<B>, x: f64 } struct B { a: Option<A> }");
-        assert_eq!(types.outside["A"], "A.x: f64");
-        assert_eq!(types.outside["B"], "B.a: A.x: f64");
+        let types = types_of("struct A { b: Vec<B>, x: Cell<u8> } struct B { a: Option<A> }");
+        assert_eq!(types.outside["A"], "A.x: Cell<u8>");
+        assert_eq!(types.outside["B"], "B.a: A.x: Cell<u8>");
         // Each of two types outside on its own account names the other
         // first, as declared, and then what keeps that one out.
-        let types = types_of("struct T { u: Vec<U>, x: f64 } struct U { t: Box<T>, y: f32 }");
-        assert_eq!(types.outside["T"], "T.u: U.y: f32");
-        assert_eq!(types.outside["U"], "U.t: T.x: f64");
+        let types =
+            types_of("struct T { u: Vec<U>, x: Cell<u8> } struct U { t: Box<T>, y: Cell<u16> }");
+        assert_eq!(types.outside["T"], "T.u: U.y: Cell<u16>");
+        assert_eq!(types.outside["U"], "U.t: T.x: Cell<u8>");
     }
 
     #[test]
     fn an_enum_names_the_variant_and_the_field_of_its_leaf() {
         let types = types_of(
-            "enum Reading { Count(u32), Pair(u8, f64), Level { level: f64 } } \
+            "enum Reading { Count(u32), Pair(u8, Cell<u8>), Level { level: Cell<u8> } } \
              enum Tree { Leaf, Node(BTreeMap<String, Tree>) } \
              struct Parent { kids: BTreeSet<Child> } struct Child { parent: Vec<Parent> }",
         );
-        assert_eq!(types.outside["Reading"], "Reading::Pair.1: f64");
+        assert_eq!(types.outside["Reading"], "Reading::Pair.1: Cell<u8>");
         assert_eq!(
             types.outside["Tree"],
             format!("Tree::Node.0: BTreeMap<String, Tree>: {NOT_NESTED}")
@@ -12631,7 +12841,7 @@ mod tests {
     #[test]
     fn every_struct_shape_is_a_type_or_names_its_leaf() {
         let types = types_of(
-            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, f64); \
+            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, Cell<u8>); \
              struct Wrapper<T> { value: T } struct Holder { m: Marker, w: Wrapper<u32> }",
         );
         // A struct of no fields has one value: one constructor.
@@ -12648,7 +12858,7 @@ mod tests {
         assert!(out.contains("body: (project m item0)"), "{out}");
         let out = lift("fn make(n: u32) -> Meters { Meters(n) }", &types).expect("lifts");
         assert!(out.contains("body: (record Meters {item0 := n})"), "{out}");
-        assert_eq!(types.outside["Pair"], "Pair.1: f64");
+        assert_eq!(types.outside["Pair"], "Pair.1: Cell<u8>");
         // A struct with a type parameter is the leaf.
         assert_eq!(
             types.outside["Wrapper"],
@@ -12961,5 +13171,40 @@ mod tests {
             ),
             Err(Residue::Form(_))
         ));
+    }
+
+    #[test]
+    fn a_float_is_ieee_754s_binary_format_core_states() {
+        let f64_format = Types::default().float("f64").expect("binary64");
+        assert_eq!((f64_format.exp, f64_format.frac), (11, 52));
+        let f32_format = Types::default().float("f32").expect("binary32");
+        assert_eq!((f32_format.exp, f32_format.frac), (8, 23));
+        let lifted = lift(
+            "fn mix(a: f64, b: f64) -> f64 { -(a * b + 0.5) / a % b }",
+            &plain(),
+        )
+        .expect("lifts");
+        let add = format!(
+            "(Prelude::floatAdd 11 52 (Prelude::floatMul 11 52 a b) {})",
+            crate::mir::float::literal(f64_format, "0.5").expect("a literal")
+        );
+        assert!(lifted.contains(&add), "{lifted}");
+        assert!(
+            lifted.contains("(Prelude::floatRem 11 52 (Prelude::floatDiv"),
+            "{lifted}"
+        );
+        assert!(lifted.contains("(Prelude::floatNeg 11 52 "), "{lifted}");
+        let lifted = lift(
+            "fn below(a: f32, b: f32) -> bool { a < b && !b.is_nan() }",
+            &plain(),
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(Prelude::floatLt 8 23 a b)"), "{lifted}");
+        assert!(lifted.contains("(Prelude::floatIsNan 8 23 b)"), "{lifted}");
+        let lifted = lift("fn bits(a: f64) -> u64 { a.abs().to_bits() }", &plain()).expect("lifts");
+        assert!(lifted.contains("(Prelude::floatAbs 11 52 a)"), "{lifted}");
+        // Two formats do not mix, and a method the model has not is no
+        // definition.
+        assert!(lift("fn sin(a: f64) -> f64 { a.sin() }", &plain()).is_err());
     }
 }
