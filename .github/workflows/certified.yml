@@ -9,8 +9,9 @@
 # certified-gate`), whose outputs are compared by their κ, never by an exit
 # code. The last job requires both architectures' κ to be equal.
 #
-# On a pull request's branch, generate.yml dispatches this with land_branch
-# when the branch's translator has more uncertified functions than main's:
+# On a branch, generate.yml dispatches this with land_branch only when it was
+# itself dispatched there with `export` and the branch's translator has more
+# uncertified functions than main's (no push to a pull request starts it):
 # the export runs on the branch's head, the land takes it onto the branch
 # merged onto main (scripts/ci/merge-main.sh) and pushes that merge to the
 # branch (scripts/ci/push-branch.sh), never to main, then dispatches

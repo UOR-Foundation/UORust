@@ -10,14 +10,15 @@
 # lift's honesty report: how many functions lifted, and the residue by the MIR
 # kind or obligation that stopped it.
 #
-# A pull request from a branch of this repository gets the same writers on
-# its branch (scripts/ci/generate-branch.sh): they run on the branch merged
-# onto main, and what changed is pushed to the branch as that merge (first
-# parent main), never to main or to a fork; the gate is dispatched on it, and
-# the certified export too when the translator's uncertified functions
-# outnumber main's (certified.yml lands on the branch and dispatches this
-# again on it). A pull request from a fork runs nothing here: its token is
-# read-only and the job's condition skips it.
+# A branch of this repository gets the same writers only when a person
+# dispatches this workflow on it (scripts/ci/generate-branch.sh): they run on
+# the branch merged onto main, and what changed is pushed to the branch as
+# that merge (first parent main), never to main or to a fork; the gate is
+# dispatched on it, and the certified export too when `export` is given and
+# the translator's uncertified functions outnumber main's. No push to a pull
+# request starts it: these runs repeat every writer and every export whatever
+# changed, so until each is an obligation keyed on its own inputs they are
+# started on purpose, never by a push.
 name: generate
 
 on:
@@ -26,17 +27,14 @@ on:
   # Hourly, so the brand follows uor.foundation without a push here.
   schedule:
     - cron: '41 * * * *'
-  # A pull request's branch, and a dispatch on one (certified.yml's land).
-  # GitHub runs no pull_request workflow while the pull request conflicts
-  # with main, as it does once main regenerates the files this pushed to the
-  # branch: a person then dispatches it on the branch, with export to hold
-  # the ratchet as a push does (gh workflow run generate.yml --ref <branch>
-  # -f export=true); the merge takes main's side of the generated files.
-  pull_request:
+  # A dispatch on a branch (a person's, or certified.yml's land): gh workflow
+  # run generate.yml --ref <branch>, with -f export=true to also dispatch the
+  # certified export when the ratchet grows; the merge takes main's side of
+  # the generated files.
   workflow_dispatch:
     inputs:
       export:
-        description: On a branch other than main, dispatch the certified export when the ratchet grows, as a pull request's push does.
+        description: On a branch other than main, also dispatch the certified export when the ratchet grows.
         type: boolean
         default: false
 
