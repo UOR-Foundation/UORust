@@ -1158,9 +1158,11 @@ fn signed(n: i128) -> String {
     )
 }
 
-/// A LexLean string literal of `text`, every character kept: a quote and a
-/// backslash escaped, and a control character and `%` (which LexLean's TeX
-/// surface reserves) written as their `\\u` escape.
+/// A LexLean string literal of `text`, every character kept, in the
+/// spelling the SDK's `lexlean fmt` writes (LLL1003): a quote and a
+/// backslash escaped, a newline, return, tab, backspace and form feed by
+/// their letter escapes, and every other control character and `%` (which
+/// LexLean's TeX surface reserves) as their `\\u` escape.
 pub(crate) fn mir_string(text: &str) -> String {
     let mut out = String::with_capacity(text.len() + 2);
     out.push('"');
@@ -1168,6 +1170,11 @@ pub(crate) fn mir_string(text: &str) -> String {
         match c {
             '"' => out.push_str("\\\""),
             '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            '\u{8}' => out.push_str("\\b"),
+            '\u{c}' => out.push_str("\\f"),
             c if c == '%' || c.is_control() => {
                 let mut units = [0u16; 2];
                 for u in c.encode_utf16(&mut units) {
@@ -6745,7 +6752,9 @@ mod tests {
     #[test]
     fn a_string_keeps_every_character_ue_19() {
         assert_eq!(mir_string("a%b"), "\"a\\u0025b\"");
-        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\u000a\"");
+        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\n\"");
+        // The letter escapes `lexlean fmt` writes, and `\u` for the rest.
+        assert_eq!(mir_string("\r\t\u{8}\u{c}\u{1}"), "\"\\r\\t\\b\\f\\u0001\"");
     }
 
     #[test]
