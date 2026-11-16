@@ -313,6 +313,52 @@ pub(crate) struct TypeDecl {
     /// How many type parameters it takes.
     generics: usize,
     vis: Vis,
+    /// What a struct or enum declares of its values.
+    shape: Shape,
+}
+
+/// What a struct or enum declaration writes of its values beyond its name:
+/// the names of its type parameters, a struct's fields (a tuple struct's
+/// by position, `0` first) and the derives its attributes name.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Shape {
+    params: Vec<String>,
+    fields: Vec<(String, RustType)>,
+    derives: Vec<String>,
+}
+
+impl Shape {
+    fn of(
+        generics: &syn::Generics,
+        fields: Option<&syn::Fields>,
+        attrs: &[syn::Attribute],
+    ) -> Shape {
+        let fields = fields
+            .into_iter()
+            .flatten()
+            .enumerate()
+            .map(|(i, f)| {
+                let name = f
+                    .ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string);
+                (name, crate::convert::ty(&f.ty))
+            })
+            .collect();
+        let mut derives = Vec::new();
+        for attr in attrs.iter().filter(|a| a.path().is_ident("derive")) {
+            let list =
+                attr.parse_args_with(Punctuated::<syn::Path, syn::Token![,]>::parse_terminated);
+            for path in list.into_iter().flatten() {
+                derives.push(idents(&path).join("::"));
+            }
+        }
+        Shape {
+            params: type_params(generics),
+            fields,
+            derives,
+        }
+    }
 }
 
 /// An `impl` block: its self type, the trait it implements by its last
@@ -377,6 +423,8 @@ pub(crate) enum Hint {
     /// variant.
     Ctor(Vec<String>),
     Tuple(Vec<Hint>),
+    /// `e.name`, or `e.0` by its position.
+    Field(Box<Hint>, String),
 }
 
 /// What a call calls.
@@ -673,7 +721,18 @@ impl FileNames {
                     kind,
                     generics,
                     vis: Vis::read(vis),
+                    shape: Shape::default(),
                 });
+        };
+        // The shape of the declaration `declare` pushed last.
+        let shaped = |scope: &mut Scope, name: &syn::Ident, shape: Shape| {
+            if let Some(decl) = scope
+                .types
+                .get_mut(&name.to_string())
+                .and_then(|d| d.last_mut())
+            {
+                decl.shape = shape;
+            }
         };
         for item in list {
             match item {
@@ -741,11 +800,14 @@ impl FileNames {
                     let variants = e.variants.iter().map(|v| v.ident.to_string()).collect();
                     let generics = type_params(&e.generics).len();
                     declare(&mut scope, &e.ident, Kind::Enum(variants), generics, &e.vis);
+                    shaped(&mut scope, &e.ident, Shape::of(&e.generics, None, &e.attrs));
                     self.site(&e.ident, module, under(&e.attrs));
                 }
                 syn::Item::Struct(s) => {
                     let generics = type_params(&s.generics).len();
                     declare(&mut scope, &s.ident, Kind::Struct, generics, &s.vis);
+                    let shape = Shape::of(&s.generics, Some(&s.fields), &s.attrs);
+                    shaped(&mut scope, &s.ident, shape);
                     self.site(&s.ident, module, under(&s.attrs));
                 }
                 syn::Item::Union(u) => {
@@ -1197,6 +1259,13 @@ impl Walker {
                 }
             }
             syn::Expr::Try(t) => Hint::Try(Box::new(self.expr(&t.expr))),
+            syn::Expr::Field(f) => {
+                let base = Box::new(self.expr(&f.base));
+                match &f.member {
+                    syn::Member::Named(name) => Hint::Field(base, name.to_string()),
+                    syn::Member::Unnamed(index) => Hint::Field(base, index.index.to_string()),
+                }
+            }
             syn::Expr::Tuple(t) => Hint::Tuple(t.elems.iter().map(|x| self.expr(x)).collect()),
             syn::Expr::Block(b) => self.block(&b.block),
             syn::Expr::Unsafe(u) => self.block(&u.block),
@@ -1628,6 +1697,13 @@ impl<'a> Resolver<'a> {
         let fact = &file.fns[f.2];
         let read = self.syntax.names.files.get(&file.rel)?;
         read.fns.get(&(fact.span.line, fact.name.clone()))
+    }
+
+    /// The module a function stands in, inside its target: its file's
+    /// module and the inline modules around it (`a::b` of `mod b` inside
+    /// `mod a` of the crate root).
+    pub(crate) fn module_path(&self, f: FnId) -> String {
+        self.module(f).2
     }
 
     /// The module a function stands in.
@@ -2391,6 +2467,9 @@ impl<'a> Resolver<'a> {
 
     /// What a method call calls, by the type its receiver is written with.
     fn method_call(&self, caller: FnId, name: &str, receiver: &Ty, args: &[Ty]) -> Outcome {
+        if payload(name, receiver).is_some() {
+            return Outcome::Outside;
+        }
         let mut of = receiver;
         while let Ty::Ref(_, inner) = of {
             of = inner;
@@ -2436,6 +2515,12 @@ impl<'a> Resolver<'a> {
             Hint::Ref(mutable, inner) => Ty::Ref(*mutable, Box::new(of(inner))),
             Hint::Deref(inner) => match of(inner) {
                 Ty::Ref(_, to) => *to,
+                // `*` of a `Box<T>` is the box's `T`: the language's own
+                // dereference of a box (the Rust reference, "The
+                // dereference operator"), which no `Deref` impl changes.
+                Ty::Named(id, mut args) if boxes(&id) && args.len() == 1 => {
+                    args.pop().unwrap_or(Ty::Open)
+                }
                 _ => Ty::Open,
             },
             Hint::This => reading.this.clone().unwrap_or(Ty::Open),
@@ -2447,6 +2532,104 @@ impl<'a> Resolver<'a> {
             },
             Hint::Ctor(segments) => self.constructed(reading, segments),
             Hint::Tuple(items) => Ty::Tuple(items.iter().map(of).collect()),
+            Hint::Field(base, name) => self.field(&of(base), name),
+        }
+    }
+
+    /// The type a method call outside the workspace returns, where the
+    /// standard library's definition decides it from the receiver's type:
+    /// a payload method of `Option` or `Result` (see [`payload`]), and
+    /// `clone` of a reference to a type of the workspace that derives the
+    /// standard `Clone`. For `r.clone()` with `r: &T`, method lookup tries
+    /// the receiver type `&T` first, where `<T as Clone>::clone(&self)` is
+    /// found; a method of another trait with that receiver type would make
+    /// the call ambiguous, which rustc rejects (E0034), and the workspace
+    /// declares no `clone` of `T` (the call is outside it). `Clone` of
+    /// `&T` itself (`&&T` receivers) is not this rule's.
+    fn outside_result(&self, name: &str, receiver: &Ty, args: &[Ty]) -> Ty {
+        if let Some(ty) = payload(name, receiver) {
+            return ty;
+        }
+        let Ty::Ref(_, of) = receiver else {
+            return Ty::Open;
+        };
+        match (name, args, of.as_ref()) {
+            ("clone", [], Ty::Named(TypeId::Local(module, ty), _))
+                if self.derives_clone(module, ty) =>
+            {
+                (**of).clone()
+            }
+            _ => Ty::Open,
+        }
+    }
+
+    /// Whether the one declaration of `ty` in `module` derives the standard
+    /// library's `Clone`: by the prelude's name, which nothing the module
+    /// binds may shadow, or by its path.
+    fn derives_clone(&self, module: &ModKey, ty: &str) -> bool {
+        let decls = self
+            .scope(module)
+            .and_then(|s| s.types.get(ty))
+            .map(Vec::as_slice)
+            .unwrap_or(&[]);
+        let [decl] = decls else {
+            return false;
+        };
+        decl.shape.derives.iter().any(|d| {
+            let segments: Vec<String> = d.split("::").map(str::to_string).collect();
+            match self.path(module, &segments, false, &mut Vec::new()) {
+                Found::Prelude(name) => name == "Clone",
+                Found::Extern(path) => {
+                    matches!(path.as_slice(), [k, m, n] if (k == "std" || k == "core") && m == "clone" && n == "Clone")
+                }
+                _ => false,
+            }
+        })
+    }
+
+    /// The type of field `name` of a value of type `of`. A field
+    /// expression dereferences its operand's references until it reaches a
+    /// type with the field (the Rust reference, "Field access
+    /// expressions"); a reference has no fields, so the first type that is
+    /// not one decides it. A tuple's field is its element; a struct of the
+    /// workspace declared once has the field's type as it is written in the
+    /// declaration, with the struct's arguments for its parameters. A type
+    /// without the field (reached through a `Deref` impl) stays open.
+    fn field(&self, of: &Ty, name: &str) -> Ty {
+        let mut of = of;
+        while let Ty::Ref(_, inner) = of {
+            of = inner;
+        }
+        match of {
+            Ty::Tuple(items) => name
+                .parse::<usize>()
+                .ok()
+                .and_then(|i| items.get(i).cloned())
+                .unwrap_or(Ty::Open),
+            Ty::Named(TypeId::Local(module, ty), args) => {
+                let decls = self
+                    .scope(module)
+                    .and_then(|s| s.types.get(ty))
+                    .map(Vec::as_slice)
+                    .unwrap_or(&[]);
+                let [decl] = decls else {
+                    return Ty::Open;
+                };
+                if !matches!(decl.kind, Kind::Struct) || decl.shape.params.len() != args.len() {
+                    return Ty::Open;
+                }
+                let Some((_, written)) = decl.shape.fields.iter().find(|(n, _)| n == name) else {
+                    return Ty::Open;
+                };
+                let reading = Reading {
+                    module: module.clone(),
+                    generics: &decl.shape.params,
+                    this: None,
+                };
+                let ty = self.ty(&reading, written, self.aliases);
+                substituted(&ty, &decl.shape.params, args)
+            }
+            _ => Ty::Open,
         }
     }
 
@@ -2471,7 +2654,12 @@ impl<'a> Resolver<'a> {
                 } => self.path_call(f, &reading, segments, qself, &args),
                 Callee::Method { name, receiver } => {
                     let receiver = self.hint(f, &reading, receiver, &done);
-                    (self.method_call(f, name, &receiver, &args), Ty::Open)
+                    let outcome = self.method_call(f, name, &receiver, &args);
+                    let ty = match outcome {
+                        Outcome::Outside => self.outside_result(name, &receiver, &args),
+                        _ => Ty::Open,
+                    };
+                    (outcome, ty)
                 }
                 // A closure or a body-local function: no fact of the
                 // workspace, and nothing admission resolves by name.
@@ -2583,6 +2771,55 @@ impl<'a> Resolver<'a> {
             }
         }
         out
+    }
+}
+
+/// The inherent methods of the standard library's `Option<T>` and
+/// `Result<T, E>` that take `self` by value and return one of the type's
+/// arguments, each with that argument's position (core's `option.rs` and
+/// `result.rs`; the tool's core register records each as an inherent
+/// `core::option::Option::name` or `core::result::Result::name`).
+const PAYLOAD_METHODS: [(&str, usize); 7] = [
+    ("unwrap", 0),
+    ("expect", 0),
+    ("unwrap_or", 0),
+    ("unwrap_or_else", 0),
+    ("unwrap_or_default", 0),
+    ("unwrap_err", 1),
+    ("expect_err", 1),
+];
+
+/// The type `receiver.name(..)` returns when `name` is a payload method of
+/// [`PAYLOAD_METHODS`] and the receiver is an `Option` or a `Result` by
+/// value. Method lookup tries the receiver's own type first and, at each
+/// type, inherent methods before trait methods (the Rust reference,
+/// "Method-call expressions"), so the inherent method with a by-value
+/// `self` is the one called, whatever trait is in scope. A receiver behind
+/// a reference is first looked up at the reference type, where a trait's
+/// method could be found, so it is not this rule's.
+fn payload(name: &str, receiver: &Ty) -> Option<Ty> {
+    let Ty::Named(id, args) = receiver else {
+        return None;
+    };
+    if !unwraps(id) {
+        return None;
+    }
+    let (_, i) = PAYLOAD_METHODS.iter().find(|(m, _)| *m == name)?;
+    Some(args.get(*i).cloned().unwrap_or(Ty::Open))
+}
+
+/// Whether the type is the standard library's `Box`, by the prelude's name
+/// or by path.
+fn boxes(id: &TypeId) -> bool {
+    match id {
+        TypeId::Prelude(name) => name == "Box",
+        TypeId::Extern(path) => match path.as_slice() {
+            [krate, module, name] => {
+                (krate == "std" || krate == "alloc") && module == "boxed" && name == "Box"
+            }
+            _ => false,
+        },
+        _ => false,
     }
 }
 
@@ -3084,6 +3321,112 @@ mod tests {
         assert_eq!(
             registered_bindings_of("reg-path", "use num_bigint::BigUint as BigInt;\n"),
             big(&[])
+        );
+    }
+    // Class: calls the language resolves by type (kai, round 3).
+
+    /// The resolutions of `source`'s calls whose caller is `caller`.
+    fn typed_call_of(tag: &str, source: &str, caller: &str) -> Vec<String> {
+        let prefix = format!("{caller}: ");
+        resolutions(tag, "", source)
+            .into_iter()
+            .filter(|g| g.starts_with(&prefix))
+            .collect()
+    }
+
+    /// Three `From` impls of one type, each told apart only by its
+    /// argument's type: `From<u8>` on line 2, `From<u16>` on 3, `From<C>`
+    /// on 4.
+    const TYPED_CALL_IMPLS: &str = "pub struct A(u16);\n\
+         impl From<u8> for A { fn from(x: u8) -> A { A(x as u16) } }\n\
+         impl From<u16> for A { fn from(x: u16) -> A { A(x) } }\n\
+         impl From<C> for A { fn from(_: C) -> A { A(0) } }\n\
+         #[derive(Clone)]\npub struct C;\n\
+         pub struct D;\n";
+
+    #[test]
+    fn a_payload_method_of_an_option_or_a_result_by_value_gives_its_argument() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             pub fn small() -> Option<u8> {{ Some(1) }}\n\
+             pub fn wide() -> Result<u16, u8> {{ Ok(1) }}\n\
+             pub fn first() -> A {{ A::from(small().unwrap()) }}\n\
+             pub fn second() -> A {{ A::from(wide().expect(\"x\")) }}\n\
+             pub fn error() -> A {{ A::from(wide().unwrap_err()) }}\n\
+             pub fn behind(o: &Option<u8>) -> A {{ A::from(o.unwrap()) }}\n"
+        );
+        let got = resolutions("typed-payload", "", &source);
+        for want in [
+            "first: A::from -> A::from@2",
+            "second: A::from -> A::from@3",
+            "error: A::from -> A::from@2",
+            // A payload method is the standard library's, not a workspace
+            // method of the name.
+            "first: .unwrap -> outside",
+        ] {
+            assert!(got.iter().any(|g| g == want), "{want} not in {got:#?}");
+        }
+        // Behind a reference a trait's method of the reference type would
+        // come first: the receiver's payload is not read.
+        let behind = typed_call_of("typed-behind", &source, "behind");
+        assert!(
+            behind
+                .iter()
+                .any(|g| g.starts_with("behind: A::from -> open ")),
+            "{behind:#?}"
+        );
+    }
+
+    #[test]
+    fn a_field_has_the_type_its_struct_declares() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             pub struct W {{ pub x: u16, pub b: Box<u8> }}\n\
+             pub struct T(pub u8, pub u16);\n\
+             pub struct G<P> {{ pub v: P }}\n\
+             pub fn named(w: &W) -> A {{ A::from(w.x) }}\n\
+             pub fn boxed(w: &W) -> A {{ A::from(*w.b) }}\n\
+             pub fn place(t: T) -> A {{ A::from(t.1) }}\n\
+             pub fn pair(p: (u16, u8)) -> A {{ A::from(p.1) }}\n\
+             pub fn generic(g: G<u8>) -> A {{ A::from(g.v) }}\n\
+             pub fn missing(w: &W) -> A {{ A::from(w.y) }}\n"
+        );
+        let got = resolutions("typed-field", "", &source);
+        for want in [
+            "named: A::from -> A::from@3",
+            "boxed: A::from -> A::from@2",
+            "place: A::from -> A::from@3",
+            "pair: A::from -> A::from@2",
+            "generic: A::from -> A::from@2",
+        ] {
+            assert!(got.iter().any(|g| g == want), "{want} not in {got:#?}");
+        }
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("missing: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_clone_of_a_reference_to_a_type_deriving_clone_is_that_type() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             impl From<&D> for A {{ fn from(_: &D) -> A {{ A(1) }} }}\n\
+             pub fn derived(c: &C) -> A {{ A::from(c.clone()) }}\n\
+             pub fn underived(d: &D) -> A {{ A::from(d.clone()) }}\n"
+        );
+        let got = resolutions("typed-clone", "", &source);
+        assert!(
+            got.iter().any(|g| g == "derived: A::from -> A::from@4"),
+            "{got:#?}"
+        );
+        // `D` is not `Clone`: `d.clone()` is `Clone` of `&D`, which this
+        // rule does not read.
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("underived: A::from -> open ")),
+            "{got:#?}"
         );
     }
 }

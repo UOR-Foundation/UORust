@@ -13,98 +13,98 @@ definition{
 }
 
 definition{
-  name: acThermoCoreThermoCoreBandBandsMeasureAndCount,
+  name: acThermoCoreThermoCoreBandTestsBandsMeasureAndCount,
   parameters: [],
   result: String,
   body: "bands_measure_and_count at thermo-core/src/band.rs:178 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreBandCountersAndSignedReadings,
+  name: acThermoCoreThermoCoreBandTestsCountersAndSignedReadings,
   parameters: [],
   result: String,
   body: "counters_and_signed_readings at thermo-core/src/band.rs:208 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreHeatsWhenCold,
+  name: acThermoCoreThermoCoreTestsHeatsWhenCold,
   parameters: [],
   result: String,
   body: "heats_when_cold at thermo-core/src/lib.rs:84: A cold room heats."
 }
 
 definition{
-  name: acThermoCoreThermoCoreBandIsInclusive,
+  name: acThermoCoreThermoCoreTestsBandIsInclusive,
   parameters: [],
   result: String,
   body: "band_is_inclusive at thermo-core/src/lib.rs:90 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreIdleRoomThatIsColdHeats,
+  name: acThermoCoreThermoCoreTestsIdleRoomThatIsColdHeats,
   parameters: [],
   result: String,
   body: "idle_room_that_is_cold_heats at thermo-core/src/lib.rs:96 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreMidpointOfABand,
+  name: acThermoCoreThermoCoreTestsMidpointOfABand,
   parameters: [],
   result: String,
   body: "midpoint_of_a_band at thermo-core/src/lib.rs:102 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterTheRosterReadsItsRooms,
+  name: acThermoCoreThermoCoreRosterTestsTheRosterReadsItsRooms,
   parameters: [],
   result: String,
   body: "the_roster_reads_its_rooms at thermo-core/src/roster.rs:816 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterTheRosterFoldsAndClamps,
+  name: acThermoCoreThermoCoreRosterTestsTheRosterFoldsAndClamps,
   parameters: [],
   result: String,
   body: "the_roster_folds_and_clamps at thermo-core/src/roster.rs:830 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterTheRosterLoopsOverItsRooms,
+  name: acThermoCoreThermoCoreRosterTestsTheRosterLoopsOverItsRooms,
   parameters: [],
   result: String,
   body: "the_roster_loops_over_its_rooms at thermo-core/src/roster.rs:846 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterTheRosterReadsItsMaps,
+  name: acThermoCoreThermoCoreRosterTestsTheRosterReadsItsMaps,
   parameters: [],
   result: String,
   body: "the_roster_reads_its_maps at thermo-core/src/roster.rs:854 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterTheRosterReadsText,
+  name: acThermoCoreThermoCoreRosterTestsTheRosterReadsText,
   parameters: [],
   result: String,
   body: "the_roster_reads_text at thermo-core/src/roster.rs:866 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreRosterRequestsSortByPriorityThenRoom,
+  name: acThermoCoreThermoCoreRosterTestsRequestsSortByPriorityThenRoom,
   parameters: [],
   result: String,
   body: "requests_sort_by_priority_then_room at thermo-core/src/roster.rs:889 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreScheduleNestedPatternsChooseTheArm,
+  name: acThermoCoreThermoCoreScheduleTestsNestedPatternsChooseTheArm,
   parameters: [],
   result: String,
   body: "nested_patterns_choose_the_arm at thermo-core/src/schedule.rs:216 passes."
 }
 
 definition{
-  name: acThermoCoreThermoCoreSensorAFixedSensorReadsItsValue,
+  name: acThermoCoreThermoCoreSensorTestsAFixedSensorReadsItsValue,
   parameters: [],
   result: String,
   body: "a_fixed_sensor_reads_its_value at thermo-core/src/sensor.rs:46 passes."
@@ -1164,14 +1164,14 @@ definition{
   name: featureThermoCore,
   parameters: [],
   result: Foundation.Arch::Feature,
-  body: (record Foundation.Arch::Feature {statement := "thermo_core: Thermostat control: decides from a reading and a target whether to heat.", calls := (prim append (cons "Interface::callThermoCoreShouldHeat" (cons "Interface::callThermoCoreWithinBand" (nil String))) (cons "Interface::callThermoCoreNextMode" (cons "Interface::callThermoCoreHalt" (cons "Interface::callThermoCoreMidpoint" (nil String)))) : (List String)), acceptance := (prim append (cons "Interface::acDocThermoCoreShouldHeat" (cons "Interface::acThermoCoreThermoCoreBandIsInclusive" (nil String))) (cons "Interface::acThermoCoreThermoCoreHeatsWhenCold" (cons "Interface::acThermoCoreThermoCoreIdleRoomThatIsColdHeats" (cons "Interface::acThermoCoreThermoCoreMidpointOfABand" (nil String)))) : (List String))})
+  body: (record Foundation.Arch::Feature {statement := "thermo_core: Thermostat control: decides from a reading and a target whether to heat.", calls := (prim append (cons "Interface::callThermoCoreShouldHeat" (cons "Interface::callThermoCoreWithinBand" (nil String))) (cons "Interface::callThermoCoreNextMode" (cons "Interface::callThermoCoreHalt" (cons "Interface::callThermoCoreMidpoint" (nil String)))) : (List String)), acceptance := (prim append (cons "Interface::acDocThermoCoreShouldHeat" (cons "Interface::acThermoCoreThermoCoreTestsBandIsInclusive" (nil String))) (cons "Interface::acThermoCoreThermoCoreTestsHeatsWhenCold" (cons "Interface::acThermoCoreThermoCoreTestsIdleRoomThatIsColdHeats" (cons "Interface::acThermoCoreThermoCoreTestsMidpointOfABand" (nil String)))) : (List String))})
 }
 
 definition{
   name: featureThermoCoreBand,
   parameters: [],
   result: Foundation.Arch::Feature,
-  body: (record Foundation.Arch::Feature {statement := "thermo_core::band: Temperature bands, counters and readings.", calls := (prim append (prim append (cons "Interface::callThermoCoreBandWidth" (cons "Interface::callThermoCoreBandCheckedMidpoint" (cons "Interface::callThermoCoreBandTick" (cons "Interface::callThermoCoreBandShortfall" (cons "Interface::callThermoCoreBandFreezing" (nil String)))))) (cons "Interface::callThermoCoreBandDelta" (cons "Interface::callThermoCoreBandChecked" (cons "Interface::callThermoCoreBandIsCelsius" (cons "Interface::callThermoCoreBandAbove" (cons "Interface::callThermoCoreBandFirstReading" (nil String)))))) : (List String)) (prim append (cons "Interface::callThermoCoreBandTargetOr" (cons "Interface::callThermoCoreBandHeatFor" (cons "Interface::callThermoCoreBandFanLabel" (cons "Interface::callThermoCoreBandLabelled" (cons "Interface::callThermoCoreBandLowOf" (nil String)))))) (prim append (cons "Interface::callThermoCoreBandNotANumber" (cons "Interface::callThermoCoreBandWithHigh" (cons "Interface::callThermoCoreBandWithLow" (nil String)))) (cons "Interface::callThermoCoreBandJoined" (cons "Interface::callThermoCoreBandLabelOf" (cons "Interface::callThermoCoreBandClamped" (nil String)))) : (List String)) : (List String)) : (List String)), acceptance := (cons "Interface::acThermoCoreThermoCoreBandBandsMeasureAndCount" (cons "Interface::acThermoCoreThermoCoreBandCountersAndSignedReadings" (nil String)))})
+  body: (record Foundation.Arch::Feature {statement := "thermo_core::band: Temperature bands, counters and readings.", calls := (prim append (prim append (cons "Interface::callThermoCoreBandWidth" (cons "Interface::callThermoCoreBandCheckedMidpoint" (cons "Interface::callThermoCoreBandTick" (cons "Interface::callThermoCoreBandShortfall" (cons "Interface::callThermoCoreBandFreezing" (nil String)))))) (cons "Interface::callThermoCoreBandDelta" (cons "Interface::callThermoCoreBandChecked" (cons "Interface::callThermoCoreBandIsCelsius" (cons "Interface::callThermoCoreBandAbove" (cons "Interface::callThermoCoreBandFirstReading" (nil String)))))) : (List String)) (prim append (cons "Interface::callThermoCoreBandTargetOr" (cons "Interface::callThermoCoreBandHeatFor" (cons "Interface::callThermoCoreBandFanLabel" (cons "Interface::callThermoCoreBandLabelled" (cons "Interface::callThermoCoreBandLowOf" (nil String)))))) (prim append (cons "Interface::callThermoCoreBandNotANumber" (cons "Interface::callThermoCoreBandWithHigh" (cons "Interface::callThermoCoreBandWithLow" (nil String)))) (cons "Interface::callThermoCoreBandJoined" (cons "Interface::callThermoCoreBandLabelOf" (cons "Interface::callThermoCoreBandClamped" (nil String)))) : (List String)) : (List String)) : (List String)), acceptance := (cons "Interface::acThermoCoreThermoCoreBandTestsBandsMeasureAndCount" (cons "Interface::acThermoCoreThermoCoreBandTestsCountersAndSignedReadings" (nil String)))})
 }
 
 definition{
@@ -1185,21 +1185,21 @@ definition{
   name: featureThermoCoreRoster,
   parameters: [],
   result: Foundation.Arch::Feature,
-  body: (record Foundation.Arch::Feature {statement := "thermo_core::roster: Rooms, their readings and the schedule that names them.", calls := (prim append (prim append (prim append (prim append (cons "Interface::callThermoCoreRosterRoomIsCold" (cons "Interface::callThermoCoreRosterRoomReread" (cons "Interface::callThermoCoreRosterRoomLabel" (cons "Interface::callThermoCoreRosterNames" (cons "Interface::callThermoCoreRosterCold" (nil String)))))) (cons "Interface::callThermoCoreRosterAnyCold" (cons "Interface::callThermoCoreRosterAllWithin" (cons "Interface::callThermoCoreRosterFirstCold" (cons "Interface::callThermoCoreRosterHighest" (cons "Interface::callThermoCoreRosterColdCount" (cons "Interface::callThermoCoreRosterScheduled" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterRoll" (cons "Interface::callThermoCoreRosterPairs" (cons "Interface::callThermoCoreRosterTargetOf" (cons "Interface::callThermoCoreRosterRoomsOf" (cons "Interface::callThermoCoreRosterHasTarget" (cons "Interface::callThermoCoreRosterClosed" (nil String))))))) (cons "Interface::callThermoCoreRosterLabelWidth" (cons "Interface::callThermoCoreRosterClamp" (cons "Interface::callThermoCoreRosterBlank" (cons "Interface::callThermoCoreRosterColdNames" (cons "Interface::callThermoCoreRosterReport" (cons "Interface::callThermoCoreRosterReadingsOf" (nil String))))))) : (List String)) : (List String)) (prim append (prim append (cons "Interface::callThermoCoreRosterLineRoom" (cons "Interface::callThermoCoreRosterLineTarget" (cons "Interface::callThermoCoreRosterScheduleRooms" (cons "Interface::callThermoCoreRosterRoomsUntilStop" (cons "Interface::callThermoCoreRosterTag" (nil String)))))) (cons "Interface::callThermoCoreRosterIsZone" (cons "Interface::callThermoCoreRosterDivider" (cons "Interface::callThermoCoreRosterSignKind" (cons "Interface::callThermoCoreRosterDigitCount" (cons "Interface::callThermoCoreRosterNumbered" (cons "Interface::callThermoCoreRosterPositions" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterFirstIs" (cons "Interface::callThermoCoreRosterFirstWord" (cons "Interface::callThermoCoreRosterSpelled" (cons "Interface::callThermoCoreRosterSlots" (cons "Interface::callThermoCoreRosterZoneHeats" (cons "Interface::callThermoCoreRosterAllNamed" (nil String))))))) (cons "Interface::callThermoCoreRosterZoneRooms" (cons "Interface::callThermoCoreRosterApart" (cons "Interface::callThermoCoreRosterRequestedRooms" (cons "Interface::callThermoCoreRosterOwnRooms" (cons "Interface::callThermoCoreRosterAllGroupsNamed" (cons "Interface::callThermoCoreRosterTrimmed" (nil String))))))) : (List String)) : (List String)) : (List String)) (prim append (prim append (prim append (cons "Interface::callThermoCoreRosterUrgentRooms" (cons "Interface::callThermoCoreRosterBandWidths" (cons "Interface::callThermoCoreRosterSaturatedTotal" (cons "Interface::callThermoCoreRosterPaired" (cons "Interface::callThermoCoreRosterUrgentAndNamed" (nil String)))))) (cons "Interface::callThermoCoreRosterSecondLast" (cons "Interface::callThermoCoreRosterAboveTen" (cons "Interface::callThermoCoreRosterWarm" (cons "Interface::callThermoCoreRosterBooked" (cons "Interface::callThermoCoreRosterPerRoom" (cons "Interface::callThermoCoreRosterLeftOver" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterUps" (cons "Interface::callThermoCoreRosterScheduleFile" (cons "Interface::callThermoCoreRosterMissingSchedule" (cons "Interface::callThermoCoreRosterNoneTaken" (cons "Interface::callThermoCoreRosterAllBooked" (cons "Interface::callThermoCoreRosterRosterChecks" (nil String))))))) (cons "Interface::callThermoCoreRosterFiledName" (cons "Interface::callThermoCoreRosterSameFile" (cons "Interface::callThermoCoreRosterCutName" (cons "Interface::callThermoCoreRosterCountByte" (cons "Interface::callThermoCoreRosterCodeIndex" (cons "Interface::callThermoCoreRosterInComfortBand" (nil String))))))) : (List String)) : (List String)) (prim append (prim append (cons "Interface::callThermoCoreRosterPressing" (cons "Interface::callThermoCoreRosterFloors" (cons "Interface::callThermoCoreRosterRoomLabels" (cons "Interface::callThermoCoreRosterReadingWithin" (cons "Interface::callThermoCoreRosterBookedOrFirst" (nil String)))))) (cons "Interface::callThermoCoreRosterNamedOrSpare" (cons "Interface::callThermoCoreRosterStartsUnnamed" (cons "Interface::callThermoCoreRosterMarkedRooms" (cons "Interface::callThermoCoreRosterDoubledRoom" (cons "Interface::callThermoCoreRosterQueue" (cons "Interface::callThermoCoreRosterSortsBefore" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterSameZone" (cons "Interface::callThermoCoreRosterSetPoint" (cons "Interface::callThermoCoreRosterFirst" (cons "Interface::callThermoCoreRosterOpening" (cons "Interface::callThermoCoreRosterSpareRoom" (cons "Interface::callThermoCoreRosterEveryOther" (nil String))))))) (cons "Interface::callThermoCoreRosterFirstRooms" (cons "Interface::callThermoCoreRosterAnnexedRoom" (cons "Interface::callThermoCoreRosterRenamed" (cons "Interface::callThermoCoreRosterPrefixed" (cons "Interface::callThermoCoreRosterByReading" (cons "Interface::callThermoCoreRosterOpeningBand" (nil String))))))) : (List String)) : (List String)) : (List String)) : (List String)), acceptance := (prim append (cons "Interface::acThermoCoreThermoCoreRosterRequestsSortByPriorityThenRoom" (cons "Interface::acThermoCoreThermoCoreRosterTheRosterFoldsAndClamps" (cons "Interface::acThermoCoreThermoCoreRosterTheRosterLoopsOverItsRooms" (nil String)))) (cons "Interface::acThermoCoreThermoCoreRosterTheRosterReadsItsMaps" (cons "Interface::acThermoCoreThermoCoreRosterTheRosterReadsItsRooms" (cons "Interface::acThermoCoreThermoCoreRosterTheRosterReadsText" (nil String)))) : (List String))})
+  body: (record Foundation.Arch::Feature {statement := "thermo_core::roster: Rooms, their readings and the schedule that names them.", calls := (prim append (prim append (prim append (prim append (cons "Interface::callThermoCoreRosterRoomIsCold" (cons "Interface::callThermoCoreRosterRoomReread" (cons "Interface::callThermoCoreRosterRoomLabel" (cons "Interface::callThermoCoreRosterNames" (cons "Interface::callThermoCoreRosterCold" (nil String)))))) (cons "Interface::callThermoCoreRosterAnyCold" (cons "Interface::callThermoCoreRosterAllWithin" (cons "Interface::callThermoCoreRosterFirstCold" (cons "Interface::callThermoCoreRosterHighest" (cons "Interface::callThermoCoreRosterColdCount" (cons "Interface::callThermoCoreRosterScheduled" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterRoll" (cons "Interface::callThermoCoreRosterPairs" (cons "Interface::callThermoCoreRosterTargetOf" (cons "Interface::callThermoCoreRosterRoomsOf" (cons "Interface::callThermoCoreRosterHasTarget" (cons "Interface::callThermoCoreRosterClosed" (nil String))))))) (cons "Interface::callThermoCoreRosterLabelWidth" (cons "Interface::callThermoCoreRosterClamp" (cons "Interface::callThermoCoreRosterBlank" (cons "Interface::callThermoCoreRosterColdNames" (cons "Interface::callThermoCoreRosterReport" (cons "Interface::callThermoCoreRosterReadingsOf" (nil String))))))) : (List String)) : (List String)) (prim append (prim append (cons "Interface::callThermoCoreRosterLineRoom" (cons "Interface::callThermoCoreRosterLineTarget" (cons "Interface::callThermoCoreRosterScheduleRooms" (cons "Interface::callThermoCoreRosterRoomsUntilStop" (cons "Interface::callThermoCoreRosterTag" (nil String)))))) (cons "Interface::callThermoCoreRosterIsZone" (cons "Interface::callThermoCoreRosterDivider" (cons "Interface::callThermoCoreRosterSignKind" (cons "Interface::callThermoCoreRosterDigitCount" (cons "Interface::callThermoCoreRosterNumbered" (cons "Interface::callThermoCoreRosterPositions" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterFirstIs" (cons "Interface::callThermoCoreRosterFirstWord" (cons "Interface::callThermoCoreRosterSpelled" (cons "Interface::callThermoCoreRosterSlots" (cons "Interface::callThermoCoreRosterZoneHeats" (cons "Interface::callThermoCoreRosterAllNamed" (nil String))))))) (cons "Interface::callThermoCoreRosterZoneRooms" (cons "Interface::callThermoCoreRosterApart" (cons "Interface::callThermoCoreRosterRequestedRooms" (cons "Interface::callThermoCoreRosterOwnRooms" (cons "Interface::callThermoCoreRosterAllGroupsNamed" (cons "Interface::callThermoCoreRosterTrimmed" (nil String))))))) : (List String)) : (List String)) : (List String)) (prim append (prim append (prim append (cons "Interface::callThermoCoreRosterUrgentRooms" (cons "Interface::callThermoCoreRosterBandWidths" (cons "Interface::callThermoCoreRosterSaturatedTotal" (cons "Interface::callThermoCoreRosterPaired" (cons "Interface::callThermoCoreRosterUrgentAndNamed" (nil String)))))) (cons "Interface::callThermoCoreRosterSecondLast" (cons "Interface::callThermoCoreRosterAboveTen" (cons "Interface::callThermoCoreRosterWarm" (cons "Interface::callThermoCoreRosterBooked" (cons "Interface::callThermoCoreRosterPerRoom" (cons "Interface::callThermoCoreRosterLeftOver" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterUps" (cons "Interface::callThermoCoreRosterScheduleFile" (cons "Interface::callThermoCoreRosterMissingSchedule" (cons "Interface::callThermoCoreRosterNoneTaken" (cons "Interface::callThermoCoreRosterAllBooked" (cons "Interface::callThermoCoreRosterRosterChecks" (nil String))))))) (cons "Interface::callThermoCoreRosterFiledName" (cons "Interface::callThermoCoreRosterSameFile" (cons "Interface::callThermoCoreRosterCutName" (cons "Interface::callThermoCoreRosterCountByte" (cons "Interface::callThermoCoreRosterCodeIndex" (cons "Interface::callThermoCoreRosterInComfortBand" (nil String))))))) : (List String)) : (List String)) (prim append (prim append (cons "Interface::callThermoCoreRosterPressing" (cons "Interface::callThermoCoreRosterFloors" (cons "Interface::callThermoCoreRosterRoomLabels" (cons "Interface::callThermoCoreRosterReadingWithin" (cons "Interface::callThermoCoreRosterBookedOrFirst" (nil String)))))) (cons "Interface::callThermoCoreRosterNamedOrSpare" (cons "Interface::callThermoCoreRosterStartsUnnamed" (cons "Interface::callThermoCoreRosterMarkedRooms" (cons "Interface::callThermoCoreRosterDoubledRoom" (cons "Interface::callThermoCoreRosterQueue" (cons "Interface::callThermoCoreRosterSortsBefore" (nil String))))))) : (List String)) (prim append (cons "Interface::callThermoCoreRosterSameZone" (cons "Interface::callThermoCoreRosterSetPoint" (cons "Interface::callThermoCoreRosterFirst" (cons "Interface::callThermoCoreRosterOpening" (cons "Interface::callThermoCoreRosterSpareRoom" (cons "Interface::callThermoCoreRosterEveryOther" (nil String))))))) (cons "Interface::callThermoCoreRosterFirstRooms" (cons "Interface::callThermoCoreRosterAnnexedRoom" (cons "Interface::callThermoCoreRosterRenamed" (cons "Interface::callThermoCoreRosterPrefixed" (cons "Interface::callThermoCoreRosterByReading" (cons "Interface::callThermoCoreRosterOpeningBand" (nil String))))))) : (List String)) : (List String)) : (List String)) : (List String)), acceptance := (prim append (cons "Interface::acThermoCoreThermoCoreRosterTestsRequestsSortByPriorityThenRoom" (cons "Interface::acThermoCoreThermoCoreRosterTestsTheRosterFoldsAndClamps" (cons "Interface::acThermoCoreThermoCoreRosterTestsTheRosterLoopsOverItsRooms" (nil String)))) (cons "Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsItsMaps" (cons "Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsItsRooms" (cons "Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsText" (nil String)))) : (List String))})
 }
 
 definition{
   name: featureThermoCoreSchedule,
   parameters: [],
   result: Foundation.Arch::Feature,
-  body: (record Foundation.Arch::Feature {statement := "thermo_core::schedule: A heating schedule: steps that hold a target, choose between steps, or run labelled phases in order.", calls := (prim append (prim append (cons "Interface::callThermoCoreScheduleOccupiedTarget" (cons "Interface::callThermoCoreScheduleIsSequence" (cons "Interface::callThermoCoreScheduleHold" (cons "Interface::callThermoCoreSchedulePhaseLabel" (cons "Interface::callThermoCoreScheduleIsFinal" (nil String)))))) (cons "Interface::callThermoCoreScheduleLabelOr" (cons "Interface::callThermoCoreScheduleLabels" (cons "Interface::callThermoCoreScheduleHeldTargets" (cons "Interface::callThermoCoreScheduleDescribe" (cons "Interface::callThermoCoreScheduleValidate" (nil String)))))) : (List String)) (prim append (cons "Interface::callThermoCoreScheduleFirstHold" (cons "Interface::callThermoCoreScheduleSingleLabel" (cons "Interface::callThermoCoreScheduleModeFor" (cons "Interface::callThermoCoreScheduleComfortable" (cons "Interface::callThermoCoreScheduleEither" (nil String)))))) (cons "Interface::callThermoCoreScheduleHoldsOff" (cons "Interface::callThermoCoreSchedulePhasesOff" (cons "Interface::callThermoCoreSchedulePhaseOff" (cons "Interface::callThermoCoreScheduleHasLine" (cons "Interface::callThermoCoreScheduleSteady" (nil String)))))) : (List String)) : (List String)), acceptance := (prim append (cons "Interface::acThermoCoreScheduleAHeldPhaseKeepsItsLabel" (nil String)) (cons "Interface::acThermoCoreScheduleLabelsAreKeptOnceAndInOrder" (cons "Interface::acThermoCoreThermoCoreScheduleNestedPatternsChooseTheArm" (nil String))) : (List String))})
+  body: (record Foundation.Arch::Feature {statement := "thermo_core::schedule: A heating schedule: steps that hold a target, choose between steps, or run labelled phases in order.", calls := (prim append (prim append (cons "Interface::callThermoCoreScheduleOccupiedTarget" (cons "Interface::callThermoCoreScheduleIsSequence" (cons "Interface::callThermoCoreScheduleHold" (cons "Interface::callThermoCoreSchedulePhaseLabel" (cons "Interface::callThermoCoreScheduleIsFinal" (nil String)))))) (cons "Interface::callThermoCoreScheduleLabelOr" (cons "Interface::callThermoCoreScheduleLabels" (cons "Interface::callThermoCoreScheduleHeldTargets" (cons "Interface::callThermoCoreScheduleDescribe" (cons "Interface::callThermoCoreScheduleValidate" (nil String)))))) : (List String)) (prim append (cons "Interface::callThermoCoreScheduleFirstHold" (cons "Interface::callThermoCoreScheduleSingleLabel" (cons "Interface::callThermoCoreScheduleModeFor" (cons "Interface::callThermoCoreScheduleComfortable" (cons "Interface::callThermoCoreScheduleEither" (nil String)))))) (cons "Interface::callThermoCoreScheduleHoldsOff" (cons "Interface::callThermoCoreSchedulePhasesOff" (cons "Interface::callThermoCoreSchedulePhaseOff" (cons "Interface::callThermoCoreScheduleHasLine" (cons "Interface::callThermoCoreScheduleSteady" (nil String)))))) : (List String)) : (List String)), acceptance := (prim append (cons "Interface::acThermoCoreScheduleAHeldPhaseKeepsItsLabel" (nil String)) (cons "Interface::acThermoCoreScheduleLabelsAreKeptOnceAndInOrder" (cons "Interface::acThermoCoreThermoCoreScheduleTestsNestedPatternsChooseTheArm" (nil String))) : (List String))})
 }
 
 definition{
   name: featureThermoCoreSensor,
   parameters: [],
   result: Foundation.Arch::Feature,
-  body: (record Foundation.Arch::Feature {statement := "thermo_core::sensor: Temperature sensors the controller reads from.", calls := (prim append (cons "Interface::callThermoCoreSensorSensorRead" (cons "Interface::callThermoCoreSensorSensorCalibrated" (nil String))) (cons "Interface::callThermoCoreSensorTotal" (cons "Interface::callThermoCoreSensorAtLeast" (nil String))) : (List String)), acceptance := (cons "Interface::acThermoCoreThermoCoreSensorAFixedSensorReadsItsValue" (nil String))})
+  body: (record Foundation.Arch::Feature {statement := "thermo_core::sensor: Temperature sensors the controller reads from.", calls := (prim append (cons "Interface::callThermoCoreSensorSensorRead" (cons "Interface::callThermoCoreSensorSensorCalibrated" (nil String))) (cons "Interface::callThermoCoreSensorTotal" (cons "Interface::callThermoCoreSensorAtLeast" (nil String))) : (List String)), acceptance := (cons "Interface::acThermoCoreThermoCoreSensorTestsAFixedSensorReadsItsValue" (nil String))})
 }
 
 definition{
