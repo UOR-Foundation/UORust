@@ -323,13 +323,70 @@ pub fn modules(shards: &Path) -> Result<Vec<Module>, UorustError> {
     Ok(out)
 }
 
+/// The separator of a part's directory in a view of the shards
+/// ([`embed_workspace_crate`]): no module's name holds it.
+const PART: char = '.';
+
+/// The parts of the module `module` of the shards under `shards`, smallest
+/// first: its dump files grouped by the submodule their item is in, as
+/// [`crate::registry::dump_module`] groups a crate's by module (an item of
+/// the module's own, or a function's closures, in the part
+/// `<module>::crate`), each named by its path `<module>::<submodule>`. A
+/// module whose project is larger than the compiler's budgets is embedded
+/// a part at a time (`--only <module>::<submodule>`).
+pub fn parts(shards: &Path, module: &str) -> Result<Vec<Module>, UorustError> {
+    let dir = shards.join(module);
+    let mut sizes: std::collections::BTreeMap<String, (usize, u64)> = Default::default();
+    for (name, bytes) in part_files(&dir, module)?
+        .into_iter()
+        .map(|(part, f)| (part, f.metadata().map(|m| m.len())))
+    {
+        let entry = sizes.entry(format!("{module}::{name}")).or_default();
+        entry.0 += 1;
+        entry.1 += bytes.map_err(|e| io(&dir, e))?;
+    }
+    let mut out: Vec<Module> = sizes
+        .into_iter()
+        .map(|(name, (files, bytes))| Module { name, files, bytes })
+        .collect();
+    out.sort_by(|a, b| a.bytes.cmp(&b.bytes).then_with(|| a.name.cmp(&b.name)));
+    Ok(out)
+}
+
+/// Each dump file of the module directory `dir` with the submodule of
+/// `module` its item is in.
+fn part_files(dir: &Path, module: &str) -> Result<Vec<(String, PathBuf)>, UorustError> {
+    let mut files: Vec<PathBuf> = std::fs::read_dir(dir)
+        .map_err(|e| io(dir, e))?
+        .filter_map(Result::ok)
+        .map(|e| e.path())
+        .collect();
+    files.sort();
+    let prefix = format!("{module}-");
+    let rest = |f: &PathBuf| -> String {
+        let name = f.file_name().and_then(|n| n.to_str()).unwrap_or_default();
+        crate::registry::dump_item(name)
+            .and_then(|i| i.strip_prefix(&prefix))
+            .unwrap_or_default()
+            .to_string()
+    };
+    let rests: Vec<String> = files.iter().map(rest).collect();
+    let items: BTreeSet<&str> = rests.iter().map(String::as_str).collect();
+    Ok(files
+        .iter()
+        .zip(&rests)
+        .map(|(f, r)| (crate::registry::dump_module(r, &items), f.clone()))
+        .collect())
+}
+
 /// Write [`MODULES`] in `shards`: each module with its files and bytes,
-/// smallest first ([`modules`]).
+/// smallest first ([`modules`]), then each module's parts ([`parts`]).
 pub fn write_modules(shards: &Path) -> Result<Vec<Module>, UorustError> {
     let found = modules(shards)?;
     let mut text = String::from(
         "# The modules of these shards, smallest first (written by `uorust mir`;\n\
-         # do not edit): one `uorust embed --only <name>` project each.\n",
+         # do not edit): one `uorust embed --only <name>` project each; a module\n\
+         # too large for one project, one per part (`--only <part>`).\n",
     );
     for m in &found {
         text.push_str(&format!(
@@ -338,6 +395,17 @@ pub fn write_modules(shards: &Path) -> Result<Vec<Module>, UorustError> {
             m.files,
             m.bytes
         ));
+    }
+    for m in &found {
+        for p in parts(shards, &m.name)? {
+            text.push_str(&format!(
+                "\n[[part]]\nmodule = {}\nname = {}\nfiles = {}\nbytes = {}\n",
+                toml::Value::String(m.name.clone()),
+                toml::Value::String(p.name.clone()),
+                p.files,
+                p.bytes
+            ));
+        }
     }
     let file = shards.join(MODULES);
     std::fs::write(&file, text).map_err(|e| io(&file, e))?;
@@ -576,6 +644,21 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
     let _ = std::fs::remove_dir_all(&root);
     let result = (|| {
         let builds_on = mount(&root, e.library, e.krate, &dir, &deps)?;
+        // A part of a module (`<module>::<submodule>`) is embedded from a
+        // view of the shards whose split modules are one directory per
+        // part, every body still read for linking.
+        let (shards, only) = if e.only.iter().any(|o| o.contains("::")) {
+            let view = root.join("shards");
+            split_view(&shards, &view, e.only)?;
+            let only: Vec<String> = e
+                .only
+                .iter()
+                .map(|o| o.replace("::", &PART.to_string()))
+                .collect();
+            (view, only)
+        } else {
+            (shards.clone(), e.only.to_vec())
+        };
         let library = root.join("library");
         let link: Vec<(&str, &Path)> = e
             .link
@@ -615,7 +698,7 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
         if !e.each_module {
             return Ok(vec![Embedded {
                 module: None,
-                census: run(e.only, e.out)?,
+                census: run(&only, e.out)?,
             }]);
         }
         let mut done = Vec::new();
@@ -630,6 +713,39 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
     })();
     let _ = std::fs::remove_dir_all(&root);
     result
+}
+
+/// Lay a view of `shards` out in `view`: each file beside the modules
+/// linked, each module `only` names a part of (`<module>::<submodule>`)
+/// one directory per part ([`parts`]), `<module>.<submodule>`, each other
+/// module linked whole.
+fn split_view(shards: &Path, view: &Path, only: &[String]) -> Result<(), UorustError> {
+    let split: BTreeSet<&str> = only
+        .iter()
+        .filter_map(|o| o.split_once("::").map(|(m, _)| m))
+        .collect();
+    std::fs::create_dir_all(view).map_err(|x| io(view, x))?;
+    let link = |from: &Path, at: &Path| std::os::unix::fs::symlink(from, at).map_err(|x| io(at, x));
+    for entry in std::fs::read_dir(shards).map_err(|x| io(shards, x))? {
+        let path = entry.map_err(|x| io(shards, x))?.path();
+        let path = std::fs::canonicalize(&path).map_err(|x| io(&path, x))?;
+        let name = path
+            .file_name()
+            .and_then(|n| n.to_str())
+            .unwrap_or_default()
+            .to_string();
+        if !path.is_dir() || !split.contains(name.as_str()) {
+            link(&path, &view.join(&name))?;
+            continue;
+        }
+        for (part, file) in part_files(&path, &name)? {
+            let dir = view.join(format!("{name}{PART}{part}"));
+            std::fs::create_dir_all(&dir).map_err(|x| io(&dir, x))?;
+            let base = file.file_name().unwrap_or_default();
+            link(&file, &dir.join(base))?;
+        }
+    }
+    Ok(())
 }
 
 /// [`RECORD`] of one embedding of the modules `only` (every module when
@@ -656,7 +772,14 @@ pub fn render_record(
          target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\n\
          embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n",
         quote(krate),
-        list(&mut only.iter().map(String::as_str)),
+        list(
+            &mut only
+                .iter()
+                .map(|o| o.replacen(PART, "::", 1))
+                .collect::<Vec<_>>()
+                .iter()
+                .map(String::as_str)
+        ),
         list(&mut config.features.iter().map(String::as_str)),
         !config.no_default_features,
         config.all_features,
@@ -1100,12 +1223,46 @@ mod tests {
             .join(crate::registry::ROOT_MODULE)
             .join(RECORD)
             .is_file());
+        // A part of a module: `inner::deep` alone, its caller in the
+        // module's own part linked.
+        join_write(
+            &shards.join("inner"),
+            "m.inner-deep-leaf.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body("inner::deep::leaf", "_0 = copy _2;\n        goto -> bb1;"),
+        );
+        let names: Vec<String> = parts(&shards, "inner")
+            .unwrap()
+            .into_iter()
+            .map(|p| p.name)
+            .collect();
+        assert_eq!(names.len(), 2, "{names:?}");
+        assert!(
+            names.contains(&"inner::deep".to_string())
+                && names.contains(&"inner::crate".to_string()),
+            "{names:?}"
+        );
+        let part = work.join("part");
+        let done = embed_workspace_crate(&WorkspaceEmbed {
+            workspace: &ws,
+            krate: "m",
+            dumps: &dumps,
+            library: &library,
+            out: &part,
+            only: &["inner::deep".to_string()],
+            each_module: false,
+            link: &linked,
+        })
+        .expect("the embedding of a part");
+        assert_eq!(done[0].census.bodies, 1, "{:?}", done[0].census);
+        let record = std::fs::read_to_string(part.join(RECORD)).unwrap();
+        assert!(record.contains("modules = [\"inner::deep\"]\n"), "{record}");
+        assert!(record.contains("dump_files = 1\n"), "{record}");
         std::fs::remove_dir_all(&work).unwrap();
     }
 
     #[test]
     fn join_an_unlinked_call_is_named_by_the_crate_its_path_names() {
-        let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &["fnv"]);
+        let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &["inner"], &["fnv"]);
         assert_eq!(
             reason("core::num::<impl u32>::max"),
             "core, alloc and std are not linked"
@@ -1135,6 +1292,38 @@ mod tests {
         assert_eq!(
             reason("m::inner::gone"),
             "the crate's own, with no body in the dump"
+        );
+        // A workspace dump prints the crate's own items from its modules.
+        assert_eq!(
+            reason("<inner::Num as core::convert::From<i32>>::from"),
+            "the crate's own, with no body in the dump"
+        );
+        assert_eq!(
+            reason("i64::checked_add"),
+            "core, alloc and std are not linked"
+        );
+        // A slice or reference of the crate's type, under its lifetime.
+        assert_eq!(
+            reason("<&'a [inner::Num] as core::fmt::Debug>::fmt"),
+            "the crate's own, with no body in the dump"
+        );
+        assert_eq!(
+            reason("<&'b (dyn inner::Walk + 'b) as inner::Walk>::go"),
+            "the crate's own, with no body in the dump"
+        );
+        assert_eq!(
+            reason("<impl Fn(&u8) -> bool as core::ops::Fn<(&u8,)>>::call"),
+            "a generic parameter's bound"
+        );
+        let value = "a call through a function value (a closure, a function pointer, `dyn Fn`)";
+        assert_eq!(
+            reason("move _7 as &dyn for<'a> std::ops::Fn(&'a u8)"),
+            value
+        );
+        assert_eq!(reason("(_14 as Continue).0: itertools::Thing"), value);
+        assert_eq!(
+            reason("<(&str, &inner::Num) as core::cmp::PartialEq>::eq"),
+            "core, alloc and std are not linked"
         );
         assert_eq!(
             reason("sqrtf64"),
