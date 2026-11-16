@@ -153,6 +153,13 @@ enum Certify {
         /// production --carry`).
         #[arg(long)]
         carry: Vec<PathBuf>,
+        /// The export's own scratch directory (as `certify production
+        /// --out`): a project the prior export did not verify is verified
+        /// in its first worker's directory before the plan counts a root as
+        /// carried, as the export does; a directory under the system's
+        /// temporary one when none is given.
+        #[arg(long, requires = "targets")]
+        out: Option<PathBuf>,
         #[command(flatten)]
         profile: ProfileArgs,
     },
@@ -830,6 +837,7 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 &certify::Prior {
                     manifest: &manifest,
                     sources: &sources,
+                    verify: certify::verify_project,
                 },
                 &certify::Compiler::installed()?,
                 certify::Scope {
@@ -895,6 +903,7 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             projection,
             targets,
             carry,
+            out,
             profile,
         } => {
             let profile = profile.profile()?;
@@ -919,19 +928,27 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                         register: &register,
                         targets: &read(targets)?,
                     };
-                    let ids =
-                        certify::identities(&input, &roots, &certify::Compiler::installed()?)?;
                     let sources = carried_from(&prior, carry);
                     let prior = certify::Prior {
                         manifest: &manifest,
                         sources: &sources,
+                        verify: certify::verify_project,
                     };
-                    Some(
-                        certify::carried(&roots, &ids, &prior)?
-                            .into_iter()
-                            .map(|c| c.definition)
-                            .collect(),
-                    )
+                    let temp = out.is_none();
+                    let out = out.unwrap_or_else(|| {
+                        std::env::temp_dir().join(format!("uorust-plan-{}", std::process::id()))
+                    });
+                    let decided = certify::carry(
+                        &input,
+                        &roots,
+                        &certify::Compiler::installed()?,
+                        &prior,
+                        &out.join("0"),
+                    );
+                    if temp {
+                        let _ = std::fs::remove_dir_all(&out);
+                    }
+                    Some(decided?)
                 }
                 _ => None,
             };

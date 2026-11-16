@@ -488,6 +488,7 @@ mod tests {
                     source: "s".into(),
                     certification: "kernel-checked".into(),
                     identity: None,
+                    edition: None,
                 })
                 .collect(),
             ..Manifest::default()

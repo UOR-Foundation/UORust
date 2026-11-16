@@ -204,7 +204,8 @@ certified-project:
 # One export of the projection's roots, all of them or shard `I-N` (every Nth
 # from the Ith), kept in target/uorust-certified for `certified-sync`. A root
 # the prior manifest certified at its identity (the root's closure, the
-# compiler, the descriptor, the project's configuration) is carried from
+# compiler, the descriptor, the project's configuration and linked packages),
+# in a project an export verified (or that verifies once now), is carried from
 # crates/certified byte for byte and never built again.
 certified-export shard="" within="":
     rm -rf target/uorust-certify target/uorust-certified
@@ -216,7 +217,7 @@ certified-export shard="" within="":
 # job has none) no identity is known: `carried` is null and every root not
 # refused is planned as built.
 certified-plan budget:
-    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json || true`
+    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json --out target/uorust-certify || true`
 
 # Build one root alone and keep all lexlean prints of it in
 # target/certified-diagnose/build.log (certified.yml's diagnose job).
