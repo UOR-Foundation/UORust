@@ -429,6 +429,57 @@ pub(crate) struct Types {
     /// trait, as a dictionary entry names it; the type, by LexLean name;
     /// the method) -> the key the impl's method lifts under.
     pub(crate) impls: BTreeMap<(String, String, String), String>,
+    /// The fields of the lifted structs that are cells (see [`CellKind`]),
+    /// by struct and field LexLean name: each holds its content, and is
+    /// read only as [`CellKind`] says.
+    pub(crate) cells: BTreeMap<String, BTreeMap<String, CellKind>>,
+}
+
+/// A standard cell a struct's field may be: a value whose content changes
+/// behind a shared borrow. Each holds one `T` (`RefCell` beside a borrow
+/// flag, `Cell` as `UnsafeCell<T>` alone, `Mutex` and `RwLock` beside a
+/// lock and a poison flag), so the struct's value holds the content. The
+/// flags are not part of what the lift reads: an operation that consults
+/// one panics or blocks where it is set, and the lifted definition agrees
+/// with Rust wherever Rust returns, as `default_of` does for a panic.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) enum CellKind {
+    RefCell,
+    Cell,
+    Mutex,
+    RwLock,
+}
+
+impl CellKind {
+    pub(crate) fn name(self) -> &'static str {
+        match self {
+            Self::RefCell => "RefCell",
+            Self::Cell => "Cell",
+            Self::Mutex => "Mutex",
+            Self::RwLock => "RwLock",
+        }
+    }
+
+    fn named(name: &str) -> Option<CellKind> {
+        [Self::RefCell, Self::Cell, Self::Mutex, Self::RwLock]
+            .into_iter()
+            .find(|k| k.name() == name)
+    }
+
+    /// The method that reads the content where the read is the content as
+    /// the function was called with it: `RefCell::borrow` and `Cell::get`.
+    /// Neither cell is `Sync`, so no other thread reaches it, and no lifted
+    /// code changes a cell (every change is a typed row), so the content
+    /// stays what it was at the call. A `Mutex` or `RwLock` is `Sync`:
+    /// another thread may change it between two locks, so its content is
+    /// not read.
+    fn read(self) -> Option<&'static str> {
+        match self {
+            Self::RefCell => Some("borrow"),
+            Self::Cell => Some("get"),
+            Self::Mutex | Self::RwLock => None,
+        }
+    }
 }
 
 /// What a function's own module scope lets a name of its body mean, beyond
@@ -897,11 +948,13 @@ impl Types {
                     .cloned()
                     .collect();
                 outside.extend(probe.chains(&pending, datas, structs));
+                let cells = probe.cells_of(&fields_of, structs);
                 return Self {
                     datas: lifted,
                     structs: fields_of,
                     families,
                     outside,
+                    cells,
                     ..base
                 };
             }
@@ -966,7 +1019,7 @@ impl Types {
                     .get(n)
                     .into_iter()
                     .flatten()
-                    .filter_map(|(f, t)| stop(format!("{n}.{f}"), own.ty(t), t, ""));
+                    .filter_map(|(f, t)| stop(format!("{n}.{f}"), own.field_ty(t), t, ""));
                 (n, of_variants.chain(of_fields).collect())
             })
             .collect();
@@ -1023,11 +1076,73 @@ impl Types {
     /// A struct's fields as the lift names them, where every one lifts. A
     /// tuple struct's field is named by its position.
     fn fields_read(&self, raw: &[(String, rs::RustType)]) -> Option<Vec<(String, Ty)>> {
-        let read: Vec<(String, Ty)> = raw
-            .iter()
-            .filter_map(|(field, t)| self.ty(t).ok().map(|ty| (field_name(field), ty)))
-            .collect();
-        (read.len() == raw.len()).then_some(read)
+        raw.iter()
+            .map(|(field, t)| Some((field_name(field), self.field_ty(t).ok()?)))
+            .collect()
+    }
+
+    /// The cell a written type is, of the standard library (by its full
+    /// path, or by its name where the workspace declares none), and the
+    /// type it holds.
+    fn cell_of<'t>(&self, t: &'t rs::RustType) -> Option<(CellKind, &'t rs::RustType)> {
+        let rs::TypeKind::Path { qself: false, path } = &t.kind else {
+            return None;
+        };
+        let last = path.segments.last()?;
+        let kind = CellKind::named(&last.ident)?;
+        let module = match kind {
+            CellKind::RefCell | CellKind::Cell => "cell",
+            CellKind::Mutex | CellKind::RwLock => "sync",
+        };
+        let full = match path.segments.as_slice() {
+            [root, m, _] => {
+                matches!(root.ident.as_str(), "std" | "core" | "alloc")
+                    && m.ident == module
+                    && root.arguments == rs::PathArguments::None
+                    && m.arguments == rs::PathArguments::None
+            }
+            _ => false,
+        };
+        let library = full || (path.segments.len() == 1 && !self.declares(&last.ident));
+        let rs::PathArguments::AngleBracketed(args) = &last.arguments else {
+            return None;
+        };
+        match args.as_slice() {
+            [rs::GenericArgument::Type(inner)] if library => Some((kind, inner)),
+            _ => None,
+        }
+    }
+
+    /// The type of a struct's field: a cell's is the content it holds.
+    fn field_ty(&self, t: &rs::RustType) -> Lift<Ty> {
+        match self.cell_of(t) {
+            Some((_, inner)) => self.ty(inner),
+            None => self.ty(t),
+        }
+    }
+
+    /// The cell fields of these lifted structs (see [`Types::cells`]).
+    fn cells_of(
+        &self,
+        lifted: &BTreeMap<String, Vec<(String, Ty)>>,
+        structs: &BTreeMap<String, Vec<(String, rs::RustType)>>,
+    ) -> BTreeMap<String, BTreeMap<String, CellKind>> {
+        lifted
+            .keys()
+            .filter_map(|n| {
+                let cells: BTreeMap<String, CellKind> = structs
+                    .get(n)?
+                    .iter()
+                    .filter_map(|(f, t)| Some((field_name(f), self.cell_of(t)?.0)))
+                    .collect();
+                (!cells.is_empty()).then(|| (n.clone(), cells))
+            })
+            .collect()
+    }
+
+    /// The cell a lifted struct's field is, if any.
+    pub(crate) fn cell(&self, name: &str, field: &str) -> Option<CellKind> {
+        self.cells.get(name)?.get(field).copied()
     }
 
     /// A data-carrying enum's variants as the lift names them, where every
@@ -1111,11 +1226,13 @@ impl Types {
             if lifted.len() == names.len() {
                 let pending = candidates.difference(&names).cloned().collect();
                 outside.extend(probe.chains(&pending, &BTreeMap::new(), structs));
+                let cells = probe.cells_of(&lifted, structs);
                 return Self {
                     enums,
                     structs: lifted,
                     aliases,
                     outside,
+                    cells,
                     ..Self::default()
                 };
             }
@@ -3079,6 +3196,9 @@ fn field_value(f: &rs::ExprField, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             else {
                 return Err(Residue::Form("field of an unknown struct".to_string()));
             };
+            if let Some(kind) = env.types.cell(s, &name) {
+                return Err(cell_unread(kind, s, &name, None));
+            }
             if env.types.boxed(s) {
                 flat_lift(
                     format!("({} {base})", Types::accessor(s, &name)),
@@ -3179,6 +3299,10 @@ fn struct_literal(s: &rs::ExprStruct, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((
     for (field, ty) in fields {
         let v = match (given.get(field), &base) {
             (Some(value), _) => {
+                let value = match env.types.cell(&name, field) {
+                    Some(kind) => cell_made(value, kind, &name, field)?,
+                    None => *value,
+                };
                 let ((v, vt), next) = flat_of(value, env, ctx, acc, Some(ty))?;
                 acc = next;
                 if !vt.same(ty) {
@@ -4140,7 +4264,11 @@ fn tuple_struct_value(
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut acc = acc;
     let mut values = Vec::new();
-    for (arg, (_, ty)) in c.args.iter().zip(fields) {
+    for (arg, (field, ty)) in c.args.iter().zip(fields) {
+        let arg = match env.types.cell(name, field) {
+            Some(kind) => cell_made(arg, kind, name, field)?,
+            None => arg,
+        };
         let ((v, vt), next) = flat_of(arg, env, ctx, acc, Some(ty))?;
         if !vt.same(ty) {
             return Err(Residue::Form(format!("{name} of another type")));
@@ -5275,6 +5403,9 @@ fn method(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     let name = m.method.to_string();
+    if let Some(read) = cell_method(m, env, ctx, &acc) {
+        return read(acc);
+    }
     let (shaped, acc) = receiver_shape(m, &name, env, ctx, acc, want)?;
     if let Some(lifted) = shaped {
         return Ok((lifted, acc));
@@ -7051,6 +7182,11 @@ fn bind_pat(
                 let Some((_, t)) = fields.iter().find(|(name, _)| *name == field) else {
                     return Err(Residue::Form("closure pattern".to_string()));
                 };
+                if let Some(kind) = env.types.cell(n, &field) {
+                    if !matches!(f.pat, rs::Pat::Wild) {
+                        return Err(cell_unread(kind, n, &field, None));
+                    }
+                }
                 parts.push((&f.pat, t.clone(), field));
             }
             bind_parts(&parts, ty, env, ctx, acc, lets)
@@ -8367,6 +8503,9 @@ fn head<'a>(cell: Cell<'a>, ty: &Ty, types: &Types) -> Option<(Vec<String>, Head
 }
 
 fn pat_head<'a>(p: &'a rs::Pat, ty: &Ty, types: &Types) -> Option<(Vec<String>, Head<'a>)> {
+    if binds_cell(p, ty, types) {
+        return None;
+    }
     match p {
         rs::Pat::Wild | rs::Pat::Rest => Some((Vec::new(), Head::Any)),
         rs::Pat::Reference(inner) => pat_head(inner, ty, types),
@@ -9263,6 +9402,9 @@ fn updated(
             let Some((_, fty)) = fields.iter().find(|(f, _)| *f == target) else {
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
+            if let Some(kind) = env.types.cell(name, &target) {
+                return Err(cell_unread(kind, name, &target, Some(&m.method)));
+            }
             let read = |field: &String| {
                 if env.types.boxed(name) {
                     format!("({} {current})", Types::accessor(name, field))
@@ -9301,6 +9443,9 @@ fn updated(
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
             let target = local_name(member);
+            if let Some(kind) = env.types.cell(name, &target) {
+                return Err(cell_unread(kind, name, &target, None));
+            }
             let mut acc = acc;
             let mut parts = Vec::new();
             for (field, fty) in fields {
@@ -9371,6 +9516,9 @@ fn updated(
             let Some(rs::Member::Named(member)) = named_field(&b.left).map(|f| &f.member) else {
                 return Err(Residue::Form("an update outside the lift".to_string()));
             };
+            if let Some(kind) = env.types.cell(name, &local_name(member)) {
+                return Err(cell_unread(kind, name, &local_name(member), None));
+            }
             let place = Place {
                 local: String::new(),
                 field: Some(member.clone()),
@@ -10775,6 +10923,20 @@ fn block(
         [rs::Stmt::Local(local), rest @ ..] if !rest.is_empty() => {
             let_stmt(local, rest, env, ctx, acc, want)
         }
+        // `x.c.set(v);`, `x.c.borrow_mut().push(v);`: a change of a cell
+        // field, which keeps its own row.
+        [rs::Stmt::Expr(rs::RustExpr::MethodCall(m), true), ..] => {
+            let mut call = m;
+            loop {
+                if let Some(Err(row)) = cell_method(call, env, ctx, &acc).map(|r| r(acc.clone())) {
+                    return Err(row);
+                }
+                match &*call.receiver {
+                    rs::RustExpr::MethodCall(inner) => call = inner,
+                    _ => return Err(Residue::Statements),
+                }
+            }
+        }
         _ => Err(Residue::Statements),
     }
 }
@@ -11121,6 +11283,114 @@ fn ref_binders(stmts: &[rs::Stmt]) -> BTreeSet<String> {
     out
 }
 
+/// Why a cell field is not read where it stands: as itself, or by a
+/// method other than the one that reads its content (`method`).
+fn cell_unread(kind: CellKind, owner: &str, field: &str, method: Option<&str>) -> Residue {
+    let what = match method {
+        Some(m) => format!("{}::{m} on {owner}.{field}", kind.name()),
+        None => format!("the {} field {owner}.{field} as itself", kind.name()),
+    };
+    Residue::Form(match kind.read() {
+        Some(read) => format!(
+            "{what}: the lift reads a {} only by {read}, and changes none, since another \
+             borrow of the value would see the change",
+            kind.name()
+        ),
+        None => format!(
+            "{what}: a {} is shared across threads, and another may change it between two \
+             reads",
+            kind.name()
+        ),
+    })
+}
+
+/// The content a cell field is made with: `Kind::new(v)` is `v`.
+fn cell_made<'e>(
+    e: &'e rs::RustExpr,
+    kind: CellKind,
+    owner: &str,
+    field: &str,
+) -> Lift<&'e rs::RustExpr> {
+    if let rs::RustExpr::Call(c) = e {
+        if let (rs::RustExpr::Path(p), [content]) = (&*c.func, c.args.as_slice()) {
+            let names: Vec<&str> = p.segments.iter().map(|s| s.ident.as_str()).collect();
+            if let [.., cell, "new"] = names.as_slice() {
+                if *cell == kind.name() {
+                    return Ok(content);
+                }
+            }
+        }
+    }
+    Err(cell_unread(kind, owner, field, None))
+}
+
+/// `x.c.borrow()` of a `RefCell` field and `x.c.get()` of a `Cell` field:
+/// the content (see [`CellKind::read`]); any other method of a cell field
+/// is a typed row. `None` where the receiver is no cell field.
+#[allow(clippy::type_complexity)]
+fn cell_method<'a>(
+    m: &'a rs::ExprMethodCall,
+    env: &'a Env,
+    ctx: &'a Ctx,
+    acc: &Acc,
+) -> Option<Box<dyn FnOnce(Acc) -> Lift<((Expr, Ty), Acc)> + 'a>> {
+    let mut receiver = &*m.receiver;
+    while let rs::RustExpr::Paren(inner) = receiver {
+        receiver = inner;
+    }
+    let rs::RustExpr::Field(f) = receiver else {
+        return None;
+    };
+    let field = match &f.member {
+        rs::Member::Named(name) => local_name(name),
+        rs::Member::Unnamed(position) => field_name(&position.to_string()),
+    };
+    let ((_, bt), _) = flat_of(&f.base, env, ctx, acc.clone(), None).ok()?;
+    let Ty::Named(owner) = bt else { return None };
+    let kind = env.types.cell(&owner, &field)?;
+    Some(Box::new(move |acc: Acc| {
+        if kind.read() != Some(m.method.as_str()) || !m.args.is_empty() {
+            return Err(cell_unread(kind, &owner, &field, Some(&m.method)));
+        }
+        let ((base, _), acc) = flat_of(&f.base, env, ctx, acc, None)?;
+        let Some((_, ty)) = env
+            .types
+            .structs
+            .get(&owner)
+            .and_then(|fs| fs.iter().find(|(n, _)| *n == field))
+        else {
+            return Err(Residue::Form("field of an unknown struct".to_string()));
+        };
+        let read = if env.types.boxed(&owner) {
+            format!("({} {base})", Types::accessor(&owner, &field))
+        } else {
+            format!("(project {base} {field})")
+        };
+        flat_lift(read, ty.clone(), acc)
+    }))
+}
+
+/// Whether a pattern of a struct binds a field of it that is a cell: the
+/// binder would be the cell, which the lift reads only by its method.
+fn binds_cell(p: &rs::Pat, ty: &Ty, types: &Types) -> bool {
+    let Ty::Named(n) = ty else { return false };
+    let Some(cells) = types.cells.get(n) else {
+        return false;
+    };
+    let bound = |p: &rs::Pat| !matches!(p, rs::Pat::Wild | rs::Pat::Rest);
+    match p {
+        rs::Pat::Struct(ps) => ps.fields.iter().any(|f| {
+            let name = match &f.member {
+                rs::Member::Named(m) => local_name(m),
+                rs::Member::Unnamed(i) => field_name(&i.to_string()),
+            };
+            cells.contains_key(&name) && bound(&f.pat)
+        }),
+        rs::Pat::TupleStruct(ts) => ts.elems.iter().any(bound),
+        _ => false,
+    }
+}
+
 /// Why a call of a function that threads `&mut` parameters is not read
 /// where it stands: as an operand, nothing writes back what it gives back.
 fn threaded_operand(key: &str) -> Residue {
@@ -11263,6 +11533,10 @@ fn threaded_call<'e>(e: &'e rs::RustExpr, env: &Env, ctx: &Ctx) -> Option<Thread
                 Some(member) => {
                     let Ty::Named(name) = ty else { return None };
                     let target = local_name(member);
+                    // A cell's methods are its own (see `cell_method`).
+                    if env.types.cell(name, &target).is_some() {
+                        return None;
+                    }
                     let fields = env.types.structs.get(name)?;
                     fields.iter().find(|(f, _)| *f == target)?.1.clone()
                 }
@@ -14681,10 +14955,14 @@ mod tests {
                 field("deep", Ty::List(Box::new(Ty::Nat(Some(8))))),
             ]
         );
-        // A cell that changes behind a shared borrow is the leaf, whatever
-        // shares it and whatever it holds.
+        // A cell that changes behind a shared borrow is the leaf where
+        // another owner shares it; a field that is a cell holds its content
+        // (see `CellKind`).
         assert_eq!(types.outside["Cellular"], "Cellular.inner: RefCell<u32>");
-        assert_eq!(types.outside["Counted"], "Counted.hits: Cell<u32>");
+        assert_eq!(
+            fields(&types, "Counted"),
+            [field("hits", Ty::Nat(Some(32)))]
+        );
         assert_eq!(types.outside["Locked"], "Locked.state: Mutex<Vec<u8>>");
         // Another owner, and a new one, are the content.
         let out = lift(
@@ -14842,7 +15120,7 @@ mod tests {
             "struct Window { bounds: Range<u32>, queue: VecDeque<u8>, \
              index: std::collections::BTreeMap<String, u32>, text: std::string::String, \
              shared: alloc::sync::Arc<core::option::Option<u8>>, at: std::path::PathBuf } \
-             struct Borrowed { cell: std::cell::RefCell<u8> } struct Misplaced { rc: std::fmt::Rc<u8> }",
+             struct Borrowed { cell: std::cell::OnceCell<u8> } struct Misplaced { rc: std::fmt::Rc<u8> }",
         );
         let nat = |bits: u32| Box::new(Ty::Nat(Some(bits)));
         assert_eq!(
@@ -14859,7 +15137,7 @@ mod tests {
         // A full path the lift does not read is the leaf, as written.
         assert_eq!(
             types.outside["Borrowed"],
-            "Borrowed.cell: std::cell::RefCell<u8>"
+            "Borrowed.cell: std::cell::OnceCell<u8>"
         );
         assert_eq!(types.outside["Misplaced"], "Misplaced.rc: std::fmt::Rc<u8>");
     }
@@ -15721,5 +15999,109 @@ mod tests {
             lift("fn tick(log: &mut Log, t: u64) { log.time += t; }", &types),
             Err(Residue::Arithmetic("+=".to_string()))
         );
+    }
+
+    fn mutation_cells() -> Types {
+        types_of(
+            "struct Model { root: RefCell<Vec<u32>>, hits: Cell<u32>, \
+             lock: std::sync::Mutex<u32>, name: String } \
+             struct Shared { inner: Rc<RefCell<u32>> }",
+        )
+    }
+
+    #[test]
+    fn mutation_a_cell_field_holds_its_content() {
+        let types = mutation_cells();
+        assert_eq!(
+            fields(&types, "Model"),
+            [
+                field("root", Ty::List(Box::new(Ty::Nat(Some(32))))),
+                field("hits", Ty::Nat(Some(32))),
+                field("lock", Ty::Nat(Some(32))),
+                field("name", Ty::Str),
+            ]
+        );
+        // Another owner of the cell may change it: it stays the leaf.
+        assert_eq!(types.outside["Shared"], "Shared.inner: RefCell<u32>");
+        let out = lift(
+            "fn size(m: &Model) -> usize { m.root.borrow().len() }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(
+            out.contains("(prim length (project m root) : Nat)"),
+            "{out}"
+        );
+        assert!(lift("fn hits(m: &Model) -> u32 { m.hits.get() }", &types).is_ok());
+        let out = lift(
+            "fn make(name: String) -> Model { Model { root: RefCell::new(Vec::new()), \
+             hits: Cell::new(3), lock: std::sync::Mutex::new(1), name } }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(out.contains("hits := 3, lock := 1"), "{out}");
+    }
+
+    #[test]
+    fn mutation_a_cell_is_changed_or_read_apart_only_with_a_row() {
+        let types = mutation_cells();
+        let changes = |method: &str, kind: &str, field: &str, read: &str| {
+            Err(Residue::Form(format!(
+                "{kind}::{method} on Model.{field}: the lift reads a {kind} only by {read}, and \
+                 changes none, since another borrow of the value would see the change"
+            )))
+        };
+        assert_eq!(
+            lift("fn touch(m: &Model) { m.hits.set(1); }", &types),
+            changes("set", "Cell", "hits", "get")
+        );
+        assert_eq!(
+            lift(
+                "fn push(m: &Model) { m.root.borrow_mut().push(1); }",
+                &types
+            ),
+            changes("borrow_mut", "RefCell", "root", "borrow")
+        );
+        // `take` is the cell's own, whatever the content's methods are.
+        assert_eq!(
+            lift(
+                "fn grab(m: &mut Model) -> Vec<u32> { m.root.take() }",
+                &types
+            ),
+            changes("take", "RefCell", "root", "borrow")
+        );
+        assert_eq!(
+            lift(
+                "fn locked(m: &Model) -> u32 { *m.lock.lock().unwrap() }",
+                &types
+            ),
+            Err(Residue::Form(
+                "Mutex::lock on Model.lock: a Mutex is shared across threads, and another may \
+                 change it between two reads"
+                    .to_string()
+            ))
+        );
+        assert_eq!(
+            lift(
+                "fn itself(m: &Model) -> usize { let r = &m.root; r.borrow().len() }",
+                &types
+            ),
+            Err(Residue::Form(
+                "the RefCell field Model.root as itself: the lift reads a RefCell only by \
+                 borrow, and changes none, since another borrow of the value would see the change"
+                    .to_string()
+            ))
+        );
+        assert!(lift(
+            "fn bound(m: &Model) -> usize { let Model { root, .. } = m; root.borrow().len() }",
+            &types
+        )
+        .is_err());
+        assert!(lift(
+            "fn other(m: &Model) -> Model { Model { root: m.root.clone(), hits: Cell::new(0), \
+             lock: std::sync::Mutex::new(0), name: String::new() } }",
+            &types
+        )
+        .is_err());
     }
 }
