@@ -497,6 +497,11 @@ pub(crate) struct Embedded {
     pub(crate) cost: Cost,
 }
 
+/// The construct a body is blocked by when control reaches a block it
+/// lacks: an edge to a block the reader did not read, or an entry block of a
+/// body read with none ([`Cx::cost`]).
+const LACKED: &str = "Terminator to a block the body lacks";
+
 /// The most one run of a body costs the evaluator (UE-19), from its loops'
 /// bounds ([`crate::mir::trips`]): the differential check's fuel.
 #[derive(Clone, Debug, Default)]
@@ -3507,6 +3512,11 @@ impl Cx<'_> {
         sites: &[Site],
         blocks: &[String],
     ) -> Cost {
+        // A reached block the body lacks is no run of it: a dump the reader
+        // read short, whatever the input, is refused, never indexed.
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            return Cost::Unbounded(LACKED.into());
+        }
         let runs = match crate::mir::trips::runs(b, reached, self.width) {
             crate::mir::trips::Runs::Bounded(r) => r,
             crate::mir::trips::Runs::Unbounded(why) => return Cost::Unbounded(why),
@@ -3635,6 +3645,9 @@ impl Cx<'_> {
                     work.push(next);
                 }
             }
+        }
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            e.blocked.insert(LACKED.to_string());
         }
         let blocks: Vec<String> = b
             .blocks
@@ -6743,6 +6756,54 @@ mod tests {
         assert_eq!(int_ty("usize", 64), Some((64, false)));
         assert_eq!(int_ty("i16", 64), Some((16, true)));
         assert_eq!(int_ty("u", 64), None);
+    }
+
+    // bare switch: a body control leaves for a block it lacks is refused by
+    // its construct, never indexed past (mir-4-1).
+
+    fn bare_switch_embed(dumps: &[(&str, &str)]) -> EmbedCensus {
+        let fixture = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core");
+        let work = std::env::temp_dir().join(format!(
+            "uorust-bare-switch-{}-{}",
+            std::process::id(),
+            dumps.len()
+        ));
+        let _ = std::fs::remove_dir_all(&work);
+        let module = work.join("mir/lacked");
+        std::fs::create_dir_all(&module).unwrap();
+        for (name, text) in dumps {
+            std::fs::write(module.join(name), text).unwrap();
+        }
+        std::fs::write(
+            work.join("mir/target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let census = embed(
+            "core",
+            &fixture.join("library"),
+            &work.join("mir"),
+            &work.join("out"),
+            &[],
+            &Outputs::default(),
+        )
+        .expect("the embedding");
+        let _ = std::fs::remove_dir_all(&work);
+        census
+    }
+
+    #[test]
+    fn bare_switch_a_block_the_body_lacks_is_a_construct_not_a_panic() {
+        // `bb0` goes to `bb1`, which the dump does not hold, as a body the
+        // reader read short; the other body reads whole.
+        let short = "// MIR for `lacked::f` before ElaborateBoxDerefs\n\nfn lacked::f() -> () {\n    let mut _0: ();\n\n    bb0: {\n        goto -> bb1;\n    }\n}\n";
+        let whole = "// MIR for `lacked::g` before ElaborateBoxDerefs\n\nfn lacked::g(_1: bool) -> () {\n    let mut _0: ();\n\n    bb0: {\n        switchInt(copy _1) -> bb1;\n    }\n\n    bb1: {\n        return;\n    }\n}\n";
+        let census = bare_switch_embed(&[
+            ("core.lacked-f.2-0.ElaborateBoxDerefs.before.mir", short),
+            ("core.lacked-g.2-0.ElaborateBoxDerefs.before.mir", whole),
+        ]);
+        assert_eq!(census.bodies, 2);
+        assert_eq!(census.blocked.get(LACKED), Some(&1), "{:?}", census.blocked);
     }
 }
 
