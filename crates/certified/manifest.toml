@@ -2,9 +2,9 @@
 # every lifted translator function exported by `lexlean production` and
 # kernel-checked, keyed by the κ of the Rust function it certifies.
 schema = "uorust/certified/1"
-result = "b8927a3f013bd8faecb96fe29d3448182f4b98666b9bf4bcc3f0807d6dbd8068 0b21ec6486b7cac0bcc903ab9bcf3b5dbe8c30ca295dcc0fb612664b0ae44ce3"
+result = "3cfb1b1ef3ca0760729bcead45d6ba7caa6884fd6fd445e39dd7727a1f2a726d f18b4d1b95f08e4338a836963907b589349bd83f8ebebfabfbd5324ca10307a6 b8927a3f013bd8faecb96fe29d3448182f4b98666b9bf4bcc3f0807d6dbd8068 0b21ec6486b7cac0bcc903ab9bcf3b5dbe8c30ca295dcc0fb612664b0ae44ce3"
 compiler = "0.4.0"
-project = "95af4d84275660dcf740e356b3c295e5febdbff7ab00404203f673cb4321d62d"
+project = "787d5b077d89db31665da4c01e03c7ffe5baae7405b233cb1bf7f47dcbd6d30b"
 entry = "uorust::mir::core::core_shard"
 
 # The bootstrap: the share of the translator that runs certified.
@@ -16,7 +16,7 @@ reachable_certified = 0
 
 # The build seconds per published root, which sizes the next export's shards.
 [timing]
-seconds_per_root = 21
+seconds_per_root = 64
 
 [[root]]
 function = "uorust::lift::Acc::all_axioms"
@@ -125,7 +125,7 @@ definition = "aggregate"
 package = "uorust_certified_aggregate"
 source = "44c8ee7cd4ff693d930944dc8bf7eedc1fc361af24bd3793d6b61126d87fa9b8"
 certification = "kernel-checked"
-closure = "cf7a1fbc74237da575e998e5b48eab509f410948eeb61bb982d876ecb10dc1ed"
+closure = "a6ef138eec75819d29c8b533ca97452c7768ae532bb332a6c033d79152241a48"
 edition = "2021"
 
 [[root]]
@@ -215,7 +215,7 @@ definition = "captures"
 package = "uorust_certified_captures"
 source = "2f7a7696a7eb0c8a69caa9f64cf62a358d134ed692a56bcaa5d9b4f515564c95"
 certification = "kernel-checked"
-closure = "664835c0903094a61f3cb75e47ce01a351fff5c261e231f22c9c8a7b8f0dde88"
+closure = "96661078412af459764fa24d084c32c521ac8b9f45c476f571b3938ab06cc974"
 edition = "2021"
 
 [[root]]
@@ -275,7 +275,7 @@ definition = "ctorValue"
 package = "uorust_certified_ctor_value"
 source = "936026ace11ca91e02145a9d53f7ee6ea37a82f614fe545e6e35236fc55fb22b"
 certification = "kernel-checked"
-closure = "257cbd78b2245f02b0370986c75e5436ce7b230f32b030e942dfeab9c41a4a26"
+closure = "dc83497fa38081cd3f06827450d40215956969250efc1b57d7b4a7a28fdb4b12"
 edition = "2021"
 
 [[root]]
@@ -285,7 +285,7 @@ definition = "ctxBelow"
 package = "uorust_certified_ctx_below"
 source = "f142d4d06e27e40eec5880d96334fbb3fd04d16921a7a2fd413218f7de0977eb"
 certification = "kernel-checked"
-closure = "68d6e0e664ea2562dd23a245140a6145b74b1f9226d7bd655e0966d1b55cf6aa"
+closure = "d50f7bf30b5f1ff0834954f64bdff16b3e95029134801f24e9f9ec9745afece1"
 edition = "2021"
 
 [[root]]
@@ -295,7 +295,7 @@ definition = "ctxFresh"
 package = "uorust_certified_ctx_fresh"
 source = "1a05b06fe6b4999aaa1d1fc83b6dced26b99ef1f96441062df79ce4cb0944356"
 certification = "kernel-checked"
-closure = "9345b8806c483deb8857e9bbe1cb7784e8d871e75c9d03c6293c54c984e3b902"
+closure = "089d69f87bcec98d630a7c4a0e05867df3770041d224861d3fc0a45ac553ff28"
 edition = "2021"
 
 [[root]]
@@ -305,7 +305,7 @@ definition = "ctxHelperName"
 package = "uorust_certified_ctx_helper_name"
 source = "eb676019defe61c763131f3f14c1784fb2127e7e972a813f0b7fbe5b3eebf117"
 certification = "kernel-checked"
-closure = "f0cb63b0b6ca4a1ce0563112fa5566fdbdf44b7ba90417f52dcd23003fd094a9"
+closure = "64e40e75a5826558e8eecd23f499c1c9404c3bc4e21cc3105e8b3b08dcb44174"
 edition = "2021"
 
 [[root]]
@@ -315,7 +315,7 @@ definition = "ctxNamesFrom"
 package = "uorust_certified_ctx_names_from"
 source = "1f4069ae06383967dcc679889db9195d333e40190393ba1adbe5152786c5b65f"
 certification = "kernel-checked"
-closure = "1e5c92f15e51c07b32b62eb731fd6818957449aee3da97ce5229c22c5613b4f7"
+closure = "a552bd31f4c181b76b157bb25b7078a91ef7a3b4cbe426f78965cd07570f876d"
 edition = "2021"
 
 [[root]]
@@ -325,7 +325,7 @@ definition = "ctxTaken"
 package = "uorust_certified_ctx_taken"
 source = "19dd26bd9d3febc53830bbb0a35a03e59f5d893ed8bc165b2becf62ae1d20b2f"
 certification = "kernel-checked"
-closure = "2eea5e59c7a4574488a26537a20f97c2e0a9d3d7aae0dba8ff8c1a685bb11622"
+closure = "7cd38f358cad2a038e07176d3f8575920126303a94453375fe6dd9e5ef0e64bd"
 edition = "2021"
 
 [[root]]
@@ -335,7 +335,7 @@ definition = "dataVariant"
 package = "uorust_certified_data_variant"
 source = "909ca01d80576dfc980087ae43b4e8ff11b817d148c58491190afbb0d0942b50"
 certification = "kernel-checked"
-closure = "3ae06b61c077a0d31311d87ea1bf517d0cd5daa8a06de7717ce6fca59148e653"
+closure = "61e92be42f52013cda6ae120897dcd2188b806f587a25be5d6071356e598eebd"
 edition = "2021"
 
 [[root]]
@@ -515,7 +515,7 @@ definition = "insertAll"
 package = "uorust_certified_insert_all"
 source = "d06b4316b3a02890ba1bbbe55b1016ea8b550d9b9e0eae5351d3bc7c298f3ebb"
 certification = "kernel-checked"
-closure = "b0321dabc12ea82064e504836c744d570f2c5437ec5bb0c5a4722c553309b268"
+closure = "ee287b03766f833be6367532009bd12436b6271845c906bf9cfcdc50a6938d08"
 edition = "2021"
 
 [[root]]
@@ -545,7 +545,7 @@ definition = "isEnumOrBool"
 package = "uorust_certified_is_enum_or_bool"
 source = "b6280cb5eda6cc73ef0f6e5e0eebd0a6ce2b7766242a653b5df92d3068203515"
 certification = "kernel-checked"
-closure = "18a47456d6f0c1e94e837b54ad9597fa8fd1f68c708ac5a6d8288526677ee8b8"
+closure = "8388e637d7aca5e2157ec3849b4996a617cb161a2ae9d852ed384a0c368b47c7"
 edition = "2021"
 
 [[root]]
@@ -645,7 +645,7 @@ definition = "leavingValue"
 package = "uorust_certified_leaving_value"
 source = "291f03a092d8f88a2be2e47d18692b33f468cacb696ab8aafadd931bd74d04dc"
 certification = "kernel-checked"
-closure = "7bb2007be3bc81985d558f4b403e8f735e0d146c93647f088d71438460213f20"
+closure = "86684089042b391d32d4b16ebf1108f2d9f61805ee32c61dc30c1bc627f1ac69"
 edition = "2021"
 
 [[root]]
@@ -765,7 +765,7 @@ definition = "methodOptionIsSome"
 package = "uorust_certified_method_option_is_some"
 source = "34e9bf50c967d147a10041bc2ebd48841ceed6b14f09a7ce37840d25e0413853"
 certification = "kernel-checked"
-closure = "46b4f96c365f697ae462ae601f10fd30057a0b12e4589306b413bcf32ecc881a"
+closure = "1afa50dc214b18f95f84bd4f142b2594125ab648f1023bf9b1b280eb5c5321d5"
 edition = "2021"
 
 [[root]]
@@ -775,7 +775,7 @@ definition = "methodOutcomeIsOk"
 package = "uorust_certified_method_outcome_is_ok"
 source = "1b9ca9d67cf67d4685df9e7d027e0a0ee538d1045fe3c26f7c6b2c1ff2753f70"
 certification = "kernel-checked"
-closure = "f8c1214373cb425de44fbce2eb70e1ce6c837f599cba84e5a0deb12b9665cd49"
+closure = "8f0ee43527ae475f3a6b924bc6f872a70aac032133988877db41d57ea2fe5adb"
 edition = "2021"
 
 [[root]]
@@ -785,7 +785,7 @@ definition = "methodOutcomeOk"
 package = "uorust_certified_method_outcome_ok"
 source = "e1a2e07c2a9593ca4c2a344ef63170f0498aaad7cd8f4d2618f65def9d04f30b"
 certification = "kernel-checked"
-closure = "22f822fc46b033d8bfc16c48a264e0d4ccd7c897541b47786f195810266e6208"
+closure = "05ff6dc65b4b6a0c1da46488d3a25e9565434ec02c962c065122d709bd3d6050"
 edition = "2021"
 
 [[root]]
@@ -895,7 +895,7 @@ definition = "mirCoverageRvalue"
 package = "uorust_certified_mir_coverage_rvalue"
 source = "b59fadd2d988facd38248e8ebcd63ee79309e3bf1c2a886130a168777bbce7c8"
 certification = "kernel-checked"
-closure = "3c480b48fa8caac6e6643134d6990f32ccc9b69ebbb0a21153391d30c8c91235"
+closure = "0e80681d8192c3ad8ed155d5dcc6adf18624877cf5c1fdb749340a4adb12063d"
 edition = "2021"
 
 [[root]]
@@ -1295,7 +1295,7 @@ definition = "singleField"
 package = "uorust_certified_single_field"
 source = "82432eba744b0097700a50332e8d3ab5807c4818a94a36e6f263c67614526913"
 certification = "kernel-checked"
-closure = "ad432b8cd0318b64f5a11a0bd75bbb4e532c18a5971ae0974afe1be19e6378f6"
+closure = "1b9c592d81f2df44d67b9d52902f9920ce78472c1dcf54b4bb1d82080f673a76"
 edition = "2021"
 
 [[root]]
@@ -1365,7 +1365,7 @@ definition = "structValue"
 package = "uorust_certified_struct_value"
 source = "980b4bb36d13dc434c5e7121f0b295fecfbafe9a736cb48f6004c38381580646"
 certification = "kernel-checked"
-closure = "3e28f17d6d607721f1ae80ba6cad96b3fc1463f09f6373325401ce3a7127246e"
+closure = "bf5f303c1886839feae5ae3fde4d415be9893aade48959fdd0ba0ef7a7aac029"
 edition = "2021"
 
 [[root]]
@@ -1415,7 +1415,7 @@ definition = "tupleStruct"
 package = "uorust_certified_tuple_struct"
 source = "8bb4d3762f2f68d6ba900992c31fce24c29d8f85fd3f538a13a57eb1ade3fe30"
 certification = "kernel-checked"
-closure = "6b6b9cf5e69c73d5dbddbb3d399a605df150ca05b93a2b39985de02198e6e639"
+closure = "cf349f2ec544f66f8911db5b191787fd6e4dced18de2f5d88f0d26c3a9c9d7b7"
 edition = "2021"
 
 [[root]]
@@ -1445,7 +1445,7 @@ definition = "typesBoxed"
 package = "uorust_certified_types_boxed"
 source = "27696a5f559ed3dd9251c9d9b65a0b5a8fe80e69ad2b61993a1ef2173813e986"
 certification = "kernel-checked"
-closure = "b87aa81c64567280707765a9234c80ffa0170e79743449eddce6aaaee9c39216"
+closure = "75c761b608b65a6ee131c12f09ccb7ddea70c1e4a48d08c00f8ea3af8bada77c"
 edition = "2021"
 
 [[root]]
@@ -1455,7 +1455,7 @@ definition = "typesDeclares"
 package = "uorust_certified_types_declares"
 source = "336d6ae5361d598ea55da47c8e13586078adcdc13b25e23546e8f1e94077fcfa"
 certification = "kernel-checked"
-closure = "60025c8a05d568c27080338a55473bde66fdad6e9297797ff26f4f6f67a611df"
+closure = "3626439cbe1a9fd6082e72f2f55ef067dca05d30c1a677e4d294838454ac08fd"
 edition = "2021"
 
 [[root]]
@@ -1465,7 +1465,7 @@ definition = "typesFamilyOf"
 package = "uorust_certified_types_family_of"
 source = "5f5f64226e821ff3164cc161868393854e9e9e8bd330e29f15ce65ffa43d8628"
 certification = "kernel-checked"
-closure = "c7dee6cdf1f882604922e45ea1e2ff2299f7112218a171b3f9a74892be988b26"
+closure = "97205d6d7a8b6a27820ee12345e65e5abf3137d244764733eea2b8b21f424100"
 edition = "2021"
 
 [[root]]
@@ -1475,7 +1475,7 @@ definition = "typesHasData"
 package = "uorust_certified_types_has_data"
 source = "e934fefc8a4a1ab35873da9fc9b6be2a923158a0fb6323b2837d7c92c9cae615"
 certification = "kernel-checked"
-closure = "f04a2a08246735a2c7d3579800fa864192136e53bb187238b96aa387831f1c45"
+closure = "945e649c33bd018adfca71598b919e09731c6d002f7fc76fbc60790b04864d6f"
 edition = "2021"
 
 [[root]]
@@ -1485,7 +1485,7 @@ definition = "typesResolve"
 package = "uorust_certified_types_resolve"
 source = "21dde66ddfefc1a28d2adfad877325f89f6015f19c527371be4464a93591809c"
 certification = "kernel-checked"
-closure = "70523bb42279ea78f097173758202fe5dfadadcbd9f5cd139a91da852f5ab19b"
+closure = "7e156ccb2f346855b16e8ada137a4397da08bf84f6035ad2c880ce3d9e270a8d"
 edition = "2021"
 
 [[root]]
@@ -1495,7 +1495,7 @@ definition = "typesSizeName"
 package = "uorust_certified_types_size_name"
 source = "2f201716e3acf38575e3f229017000768765b65820fd71e1c2c74b33e07c93ad"
 certification = "kernel-checked"
-closure = "d2012e03503b028090d7fcf7ee3a7a672dbd8781bf0c68ff4978b801e60ca7cb"
+closure = "d03707c2d7c22204ea8366fa59251baef08e70d72a272fb7ecb95b41d64f630b"
 edition = "2021"
 
 [[root]]
@@ -1505,7 +1505,7 @@ definition = "typesUnnamed"
 package = "uorust_certified_types_unnamed"
 source = "ebb887f5cf94a74f606b459fdfd1dacf6e6626590a69ab12f3c928b86663dd5b"
 certification = "kernel-checked"
-closure = "f2de6d6e66e071a2081bb095596abb49196587771160cf1340dd3b713ed7d133"
+closure = "734f92c81f8ef64eba550cd4b6b1a54e510135fc37f2ec2d79550d11c97e7651"
 edition = "2021"
 
 [[root]]
@@ -1665,7 +1665,7 @@ definition = "variantOwner"
 package = "uorust_certified_variant_owner"
 source = "e692ce33fab0a2dff4323b524df4ee9f1619dc2a38487e2f1004bf8480047ee8"
 certification = "kernel-checked"
-closure = "8fe3dc4a57ae7196143ad1644f357aaa241105d3a28ae37fd8f8bf654ddacf42"
+closure = "e5ae197c753233a47722e19fae613d9d045a972b2e0df25e1e84d7189b8feffc"
 edition = "2021"
 
 [[root]]
