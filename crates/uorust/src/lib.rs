@@ -51,6 +51,29 @@ pub fn project_workspace(
     root: &Path,
     options: &Options,
 ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
+    // The lift and the MIR path recurse on the depth of the code they read,
+    // which the workspace, not the caller, sets: the certified adapters
+    // overflowed a test thread's 2 MiB. So the projection runs on a thread
+    // whose stack is its own, whatever thread asks for it.
+    std::thread::scope(|scope| {
+        std::thread::Builder::new()
+            .stack_size(PROJECTION_STACK)
+            .spawn_scoped(scope, || project_workspace_here(root, options))
+            .map_err(|e| UorustError::Tool(format!("the projection's thread: {e}")))?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    })
+}
+
+/// The stack [`project_workspace`] runs on: the 64 MiB that holds the
+/// projection of this workspace with its certified translator, as the
+/// evaluator's deep recursion is held (`mir::float`'s tests).
+const PROJECTION_STACK: usize = 1 << 26;
+
+fn project_workspace_here(
+    root: &Path,
+    options: &Options,
+) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     if !is_timestamp(&options.last_modified) {
         return Err(UorustError::BadTimestamp(options.last_modified.clone()));
     }

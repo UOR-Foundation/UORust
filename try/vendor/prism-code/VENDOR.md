@@ -1,13 +1,13 @@
 # Vendored `prism-code`
 
 This directory is a byte-for-byte copy of the browser-relevant files from the
-published `prism-code@0.2.0` npm package. Nothing here is rebuilt.
+published `prism-code@0.9.1` npm package. Nothing here is rebuilt.
 
-- Package: `prism-code@0.2.0`
-- Source: <https://registry.npmjs.org/prism-code/-/prism-code-0.2.0.tgz>
-- Tarball shasum (SHA-1): `b2c980029bd85b080116604e606b73021447ac21`
+- Package: `prism-code@0.9.1`
+- Source: <https://registry.npmjs.org/prism-code/-/prism-code-0.9.1.tgz>
+- Tarball shasum (SHA-1): `36fe09ce09dcf3f393ab3bd68c350ce2e965ff07`
 - Tarball integrity:
-  `sha512-LBjO3WVy0ZHiWUjgAveUJoT6Fz7u+Oh0IEQyNXldX76jFMkOU44wnL0tp46Xx4/p1QLh8gItYGVRIvaPSW/a8g==`
+  `sha512-AecO+1zwolME+fCdLRD8IS/1j/4lneAmnqhll2ConDHJ2OG+dEiPbl94/nB4BdlWwp5vAT1AffOuT0SYECrxOg==`
 - Files taken: `src/`, `fixtures/Calculator.holo`, `LICENSE`.
 - `package.json` here is a minimal replacement that keeps `version` and
   `type: module` (the published manifest is not needed for relative imports).
@@ -20,7 +20,7 @@ the browser and are kept only so the vendored tree matches the published `src/`.
 
 ## Local patch
 
-`src/core.mjs` differs from the published file in one place: `compileGuest`
+`src/core.mjs` differs from the published 0.9.1 file in one place: `compileGuest`
 also accepts a target/2 guest's immutable `__stack_low` and `__stack_high`
 global exports (PrismPM `SPEC.md`, application V2), both or neither. The fix
 is proposed upstream as
