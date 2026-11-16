@@ -91,6 +91,50 @@ fn unlifted(files: &BTreeMap<String, Vec<u8>>) -> String {
         .to_string()
 }
 
+/// The rows of the array of tables `table` in a projection's frontier.
+fn frontier_rows(files: &BTreeMap<String, Vec<u8>>, table: &str) -> Vec<toml::Value> {
+    let frontier: toml::Value =
+        toml::from_str(&text(files, "frontier.toml")).expect("frontier parses");
+    frontier
+        .get(table)
+        .and_then(|v| v.as_array())
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// The `[[refusal]]` rows of `reason` in a projection's frontier, and the
+/// count the work queue's `[[reason]]` row of that reason carries: read as
+/// rows, so a reason text in the queue never counts as a refusal and a
+/// refusal row is never stood in for by the queue's summary.
+fn refused(files: &BTreeMap<String, Vec<u8>>, reason: &str) -> (usize, Option<i64>) {
+    let of = |row: &toml::Value| row.get("reason").and_then(|v| v.as_str()) == Some(reason);
+    let rows = frontier_rows(files, "refusal")
+        .iter()
+        .filter(|r| of(r))
+        .count();
+    let queued: Vec<i64> = frontier_rows(files, "reason")
+        .iter()
+        .filter(|r| of(r))
+        .map(|r| {
+            r.get("refusals")
+                .and_then(|v| v.as_integer())
+                .expect("a queue row counts its refusals")
+        })
+        .collect();
+    assert!(queued.len() <= 1, "{reason} is queued twice: {queued:?}");
+    (rows, queued.first().copied())
+}
+
+/// The reasons of the `[[residue]]` rows of `function`.
+fn residue_reasons(files: &BTreeMap<String, Vec<u8>>, function: &str) -> Vec<String> {
+    frontier_rows(files, "residue")
+        .iter()
+        .filter(|r| r.get("function").and_then(|v| v.as_str()) == Some(function))
+        .filter_map(|r| r.get("reason").and_then(|v| v.as_str()))
+        .map(str::to_string)
+        .collect()
+}
+
 fn text(files: &BTreeMap<String, Vec<u8>>, path: &str) -> String {
     String::from_utf8(files.get(path).cloned().unwrap_or_default()).expect("utf-8")
 }
@@ -195,12 +239,6 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
     assert!(behavior.contains("proof: decide{}"));
     assert!(behavior.contains("(prim quotient (low + high) 2 0 : Nat)"));
     let frontier = text(&files, "frontier.toml");
-    let residue = |function: &str, reason: &str| {
-        frontier.contains(&format!("function = \"{function}\"\nspan = "))
-            && frontier.split("[[residue]]").any(|row| {
-                row.contains(function) && row.contains(&format!("reason = \"{reason}\""))
-            })
-    };
     // Arithmetic whose meaning is a build setting stays typed residue.
     let planted = scratch(
         "arith",
@@ -215,11 +253,12 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
             ),
         ],
     );
-    let planted_frontier = text(&project(&planted, "arith"), "frontier.toml");
-    assert!(
-        planted_frontier.contains("function = \"arith::mid\"")
-            && planted_frontier.contains("reason = \"arithmetic\""),
-        "{planted_frontier}"
+    let planted_files = project(&planted, "arith");
+    assert_eq!(
+        residue_reasons(&planted_files, "arith::mid"),
+        ["arithmetic"],
+        "{}",
+        text(&planted_files, "frontier.toml")
     );
     let _ = std::fs::remove_dir_all(planted);
     // The I/O shell is an effect row, not residue: `load_target` reads a file
@@ -238,7 +277,7 @@ fn the_floor_lifts_and_the_rest_is_typed_residue_ue_04() {
         "{frontier}"
     );
     assert!(
-        !residue("thermo_core::config::load_target", "type"),
+        residue_reasons(&files, "thermo_core::config::load_target").is_empty(),
         "{frontier}"
     );
 }
@@ -605,7 +644,12 @@ fn advisories_are_risks_on_the_supply_chain_ue_12() {
 
     // Without a database, the frontier says no advisory was consulted.
     let files = project(&advised, "advised");
-    assert!(text(&files, "frontier.toml").contains("reason = \"advisories-unconsulted\""));
+    assert_eq!(
+        refused(&files, "advisories-unconsulted"),
+        (1, Some(1)),
+        "{}",
+        text(&files, "frontier.toml")
+    );
     assert!(!text(&files, "src/Security.lex.tex").contains("Advisory"));
 
     // Without deny.toml, an advisory nothing answers is refused, not modeled.
@@ -632,9 +676,10 @@ fn advisories_are_risks_on_the_supply_chain_ue_12() {
     };
     let files = uorust::project_workspace(&copy, &bare).expect("projects");
     let frontier = text(&files, "frontier.toml");
+    // Four refusals, one per advisory, and the work queue counts them.
     assert_eq!(
-        frontier.matches("reason = \"unanswered-advisory\"").count(),
-        4,
+        refused(&files, "unanswered-advisory"),
+        (4, Some(4)),
         "{frontier}"
     );
     assert!(!text(&files, "src/Security.lex.tex").contains("Advisory"));
