@@ -1018,6 +1018,24 @@ fn derives(attrs: &[Attr]) -> Vec<String> {
 }
 
 /// Collapse the token spacing of printed Rust to the way it is written.
+/// Each field of `fields`, by its name or its position, with its type as
+/// the source writes it: what the ownership reading reads a type's fields
+/// by ([`crate::ownership::Declared`]).
+fn source_fields(fields: &syn::Fields) -> Vec<(String, String)> {
+    fields
+        .iter()
+        .enumerate()
+        .map(|(i, f)| {
+            (
+                f.ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string),
+                tidy(&f.ty.to_token_stream().to_string()),
+            )
+        })
+        .collect()
+}
+
 pub(crate) fn tidy(text: &str) -> String {
     let mut out = text.to_string();
     for (from, to) in [
@@ -1096,6 +1114,7 @@ fn function(
         trait_path: None,
         impl_params: Vec::new(),
         scope: 0,
+        impl_at: None,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -1250,6 +1269,17 @@ fn items(
                         None => written.join("::"),
                     }
                 });
+                // Where the dump's span of the header starts: its first
+                // token after the attributes (`default`, `unsafe` or
+                // `impl`), its column counted from 1 as rustc prints it.
+                let first = imp
+                    .modifiers
+                    .defaultness
+                    .map(|d| d.span)
+                    .or(imp.unsafety.map(|u| u.span))
+                    .unwrap_or(imp.impl_token.span)
+                    .start();
+                let impl_at = Some((first.line, first.column + 1));
                 let impl_params: Vec<String> = imp
                     .generics
                     .params
@@ -1277,6 +1307,7 @@ fn items(
                         fact.trait_ref.clone_from(&trait_ref);
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
+                        fact.impl_at = impl_at;
                         fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
@@ -1334,6 +1365,15 @@ fn items(
                     scope,
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    fields: e
+                        .variants
+                        .iter()
+                        .flat_map(|v| {
+                            source_fields(&v.fields)
+                                .into_iter()
+                                .map(move |(f, t)| (format!("{}.{f}", v.ident), t))
+                        })
+                        .collect(),
                     variants: e
                         .variants
                         .iter()
@@ -1358,6 +1398,7 @@ fn items(
                     },
                     scope,
                     derives: derives(&attrs(&st.attrs)),
+                    fields: source_fields(&st.fields),
                 });
                 syntax.structs.push(match &st.fields {
                     _ if !only_lifetimes(&st.generics) => {

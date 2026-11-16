@@ -156,6 +156,20 @@ pub fn kappa_preimage(path: &str, tokens: &str) -> Vec<u8> {
     format!("{DOMAIN}\n{path}\n{tokens}\n").into_bytes()
 }
 
+/// Where a function's body is embedded with its reach closed, in one
+/// configuration whose dump compiles it: the configuration, the digest of
+/// the module project that holds the body (what a verification of the
+/// project is a receipt of), and the digest of the body's term.
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct EmbeddedAt {
+    /// The configuration, as its record names it.
+    pub configuration: String,
+    /// The module project's digest.
+    pub project: String,
+    /// The body's term's digest.
+    pub body: String,
+}
+
 /// What the lift decided for one function.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Status {
@@ -168,6 +182,15 @@ pub enum Status {
     Foreign(String),
     /// It performs or reaches an operating-system effect: the kind.
     Effect(String),
+    /// It did not lift, and its body is embedded-closed in every declared
+    /// configuration whose dump compiles it: embedded, every construct
+    /// defined by the evaluator, every call reaching a linked body
+    /// ([`crate::embed::BodyFact`]), in the module projects named, one per
+    /// configuration. The tool does not verify a project: a reader that
+    /// counts the row as closed joins each project's digest to a receipt
+    /// of its verification. A row is residue, foreign or effect only while
+    /// it is not embedded-closed.
+    Embedded(Vec<EmbeddedAt>),
 }
 
 impl Status {
@@ -178,9 +201,14 @@ impl Status {
             Self::Residue(..) => "residue",
             Self::Foreign(_) => "foreign",
             Self::Effect(_) => "effect",
+            Self::Embedded(_) => EMBEDDED,
         }
     }
 }
+
+/// The table of the rows whose bodies are embedded-closed, and the key of
+/// the totals that counts them.
+pub const EMBEDDED: &str = "embedded";
 
 impl Status {
     /// What stops a function that is not lifted, as `(cause, construct)`:
@@ -192,7 +220,7 @@ impl Status {
     /// lifted function is stopped by nothing.
     pub fn construct(&self) -> Option<(String, &str)> {
         match self {
-            Self::Lifted(_) => None,
+            Self::Lifted(_) | Self::Embedded(_) => None,
             Self::Residue(reason, detail) => Some((residue_cause(reason, detail).0, detail)),
             Self::Foreign(detail) => Some((self.table().to_string(), detail)),
             Self::Effect(effect) => Some((self.table().to_string(), effect)),
@@ -214,7 +242,7 @@ fn residue_cause(reason: &str, detail: &str) -> (String, String) {
 }
 
 /// The totals of a register: the functions of product code, and how many of
-/// them each table holds. The four tables part the functions, so they sum
+/// them each table holds. The five tables part the functions, so they sum
 /// to `functions`.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Totals {
@@ -228,18 +256,27 @@ pub struct Totals {
     pub foreign: usize,
     /// Those that perform or reach an operating-system effect.
     pub effect: usize,
+    /// Those that did not lift and whose bodies are embedded-closed.
+    pub embedded: usize,
 }
 
 impl Totals {
     /// The totals by the key each is written under, in the order written.
-    pub fn fields(&self) -> [(&'static str, usize); 5] {
-        [
+    /// The embedded-closed count is written where it is not zero, so a
+    /// register of a run with no embedding reads as it always did, and a
+    /// register that states none states zero.
+    pub fn fields(&self) -> Vec<(&'static str, usize)> {
+        let mut out = vec![
             ("functions", self.functions),
             ("lifted", self.lifted),
             ("residue", self.residue),
             ("foreign", self.foreign),
             ("effect", self.effect),
-        ]
+        ];
+        if self.embedded > 0 {
+            out.push((EMBEDDED, self.embedded));
+        }
+        out
     }
 }
 
@@ -337,7 +374,7 @@ impl Register {
         let doc: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
         let mut register = Register::default();
         let mut functions = BTreeMap::new();
-        for table in ["lifted", "residue", "foreign", "effect"] {
+        for table in ["lifted", "residue", "foreign", "effect", EMBEDDED] {
             let rows = doc.get(table).and_then(toml::Value::as_array);
             for row in rows.into_iter().flatten() {
                 let field = |name: &str| {
@@ -359,7 +396,10 @@ impl Register {
                         }
                         Status::Foreign(detail)
                     }
-                    _ => Status::Effect(field("effect")?),
+                    "effect" => Status::Effect(field("effect")?),
+                    _ => Status::Embedded(embedded_at(row).ok_or_else(|| {
+                        bad(format!("an {EMBEDDED} row {EMBEDDED_SHAPE}: {row}"))
+                    })?),
                 };
                 if kappa.len() != 64 || !kappa.bytes().all(|b| b.is_ascii_hexdigit()) {
                     return Err(bad(format!("{function}: κ {kappa} is not a SHA-256")));
@@ -419,6 +459,16 @@ impl Register {
     fn misstated(&self, doc: &toml::Value) -> Option<String> {
         let totals = doc.get(LIFT);
         if let Some(stated) = totals {
+            // The count is written only where it is not zero, so a stated
+            // count is checked here even where the rows hold none.
+            let embedded = self.totals().embedded;
+            if let Some(n) = stated.get(EMBEDDED).and_then(toml::Value::as_integer) {
+                if i64::try_from(embedded).ok() != Some(n) {
+                    return Some(format!(
+                        "[{LIFT}] states {EMBEDDED} = {n} and the rows hold {embedded}"
+                    ));
+                }
+            }
             for (key, counted) in self.totals().fields() {
                 let found = stated.get(key).and_then(toml::Value::as_integer);
                 if found != i64::try_from(counted).ok() {
@@ -474,6 +524,7 @@ impl Register {
                 Status::Residue(..) => totals.residue += 1,
                 Status::Foreign(_) => totals.foreign += 1,
                 Status::Effect(_) => totals.effect += 1,
+                Status::Embedded(_) => totals.embedded += 1,
             }
         }
         totals
@@ -562,11 +613,12 @@ impl Register {
     /// or obligation that stopped it), as comment lines.
     pub fn honesty(&self) -> String {
         let mut by: BTreeMap<String, BTreeMap<String, usize>> = BTreeMap::new();
-        let (mut foreign, mut effect) = (0usize, 0usize);
+        let (mut foreign, mut effect, mut embedded) = (0usize, 0usize, 0usize);
         let mut mir = false;
         for row in self.rows.values() {
             match &row.status {
                 Status::Lifted(_) => {}
+                Status::Embedded(_) => embedded += 1,
                 Status::Foreign(_) => foreign += 1,
                 Status::Effect(_) => effect += 1,
                 Status::Residue(reason, detail) => {
@@ -583,6 +635,15 @@ impl Register {
             self.lifted(),
             self.rows.len()
         );
+        // Written where there is one, so a register of a run with no
+        // embedding reads as it always did.
+        if embedded > 0 {
+            out.push_str(&format!(
+                "# {embedded} that did not lift are embedded-closed: each body embedded,\n\
+                 # evaluable and reaching only linked bodies in every declared configuration\n\
+                 # whose dump compiles it, in the module projects each row names.\n"
+            ));
+        }
         if residue > 0 {
             out.push_str("# Residue by cause:\n");
         }
@@ -619,7 +680,7 @@ impl Register {
         out.push_str(&self.queue_text());
         let mut rows: Vec<(&String, &Row)> = self.rows.iter().collect();
         rows.sort_by(|a, b| a.1.function.cmp(&b.1.function));
-        for table in ["residue", "foreign", "effect", "lifted"] {
+        for table in ["residue", "foreign", "effect", EMBEDDED, "lifted"] {
             for (kappa, row) in &rows {
                 if row.status.table() != table {
                     continue;
@@ -641,6 +702,7 @@ impl Register {
                     Status::Effect(effect) => {
                         out.push_str(&format!("effect = {}\n", quoted(effect)));
                     }
+                    Status::Embedded(at) => out.push_str(&embedded_fields(at)),
                 }
                 if let Some(divergence) = &row.divergence {
                     out.push_str(&format!("divergence = {}\n", quoted(divergence)));
@@ -671,7 +733,50 @@ pub fn stops_line(stops: &[(String, String)]) -> String {
 /// otherwise, each with both decisions: empty exactly when the candidate is
 /// admitted. A κ the candidate does not hold is a question no longer asked
 /// (its function changed or went away), not a regression.
+/// An embedded-closed κ is held the same way: it stays embedded-closed or
+/// lifts, and a candidate that decides it open (residue, foreign or effect)
+/// is refused, naming it. Embedded-closed again, it must be so in every
+/// configuration the incumbent states it closed in: a candidate that
+/// states fewer (its records leave one out, or decide it open there) no
+/// longer claims what was established, and is refused naming the
+/// configurations it drops.
 pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
+    let closed = incumbent
+        .rows
+        .iter()
+        .filter_map(|(kappa, row)| match &row.status {
+            Status::Embedded(was) => Some((kappa, row, was)),
+            _ => None,
+        })
+        .filter_map(|(kappa, row, was)| {
+            let now = candidate.rows.get(kappa)?;
+            match &now.status {
+                Status::Embedded(at) => {
+                    let dropped: Vec<&str> = was
+                        .iter()
+                        .map(|w| w.configuration.as_str())
+                        .filter(|c| !at.iter().any(|a| a.configuration == *c))
+                        .collect();
+                    (!dropped.is_empty()).then(|| {
+                        format!(
+                            "{} (κ {kappa}) was embedded-closed in {} and is no longer stated closed in {}",
+                            row.function,
+                            was.iter()
+                                .map(|w| w.configuration.as_str())
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                            dropped.join(", ")
+                        )
+                    })
+                }
+                Status::Lifted(_) => None,
+                other => Some(format!(
+                    "{} (κ {kappa}) was embedded-closed and is now {}",
+                    row.function,
+                    describe(other)
+                )),
+            }
+        });
     incumbent
         .rows
         .iter()
@@ -696,6 +801,7 @@ pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
                 )),
             }
         })
+        .chain(closed)
         .collect()
 }
 
@@ -774,6 +880,7 @@ pub fn admit_parent(parent: &Register, candidate: &Register) -> Vec<String> {
 
 fn describe(status: &Status) -> String {
     match status {
+        Status::Embedded(at) => format!("embedded-closed in {} configurations", at.len()),
         Status::Lifted(d) => format!("lifted to {d}"),
         Status::Residue(_, detail) => format!("residue: {detail}"),
         Status::Foreign(detail) => format!("foreign: {detail}"),
@@ -783,6 +890,60 @@ fn describe(status: &Status) -> String {
 
 fn quoted(text: &str) -> String {
     toml::Value::String(text.to_string()).to_string()
+}
+
+/// An embedded-closed row's own keys, as a register and a frontier write
+/// them: the configurations, and in the same order each one's module
+/// project and body digest.
+pub fn embedded_fields(at: &[EmbeddedAt]) -> String {
+    let list = |f: &dyn Fn(&EmbeddedAt) -> &str| {
+        at.iter()
+            .map(|a| quoted(f(a)))
+            .collect::<Vec<_>>()
+            .join(", ")
+    };
+    format!(
+        "configurations = [{}]\nprojects = [{}]\nbodies = [{}]\n",
+        list(&|a| &a.configuration),
+        list(&|a| &a.project),
+        list(&|a| &a.body)
+    )
+}
+
+/// What an embedded-closed row holds, as a refusal of one that does not
+/// states it.
+const EMBEDDED_SHAPE: &str = "needs configurations, projects and bodies, three lists of \
+     strings of one nonempty length, each project and body a SHA-256";
+
+/// An embedded-closed row's configurations, projects and bodies, read
+/// back, where the row holds them as [`EMBEDDED_SHAPE`] says.
+fn embedded_at(row: &toml::Value) -> Option<Vec<EmbeddedAt>> {
+    let list = |key: &str| -> Option<Vec<String>> {
+        row.get(key)?
+            .as_array()?
+            .iter()
+            .map(|v| v.as_str().map(str::to_string))
+            .collect()
+    };
+    let (configurations, projects, bodies) =
+        (list("configurations")?, list("projects")?, list("bodies")?);
+    let sha = |d: &String| d.len() == 64 && d.bytes().all(|b| b.is_ascii_hexdigit());
+    let shaped = !configurations.is_empty()
+        && projects.len() == configurations.len()
+        && bodies.len() == configurations.len()
+        && projects.iter().chain(&bodies).all(sha);
+    shaped.then(|| {
+        configurations
+            .into_iter()
+            .zip(projects)
+            .zip(bodies)
+            .map(|((configuration, project), body)| EmbeddedAt {
+                configuration,
+                project,
+                body,
+            })
+            .collect()
+    })
 }
 
 #[cfg(test)]
@@ -1198,7 +1359,8 @@ mod tests {
                 lifted: 2,
                 residue: 6,
                 foreign: 1,
-                effect: 1
+                effect: 1,
+                embedded: 0
             }
         );
         // The tables part the functions.
@@ -1444,5 +1606,136 @@ mod tests {
             ),
             "[[construct]]\nconstruct = 'a \"loop\"'\ncause = \"form\"\nfunctions = 2\n"
         );
+    }
+
+    // lift: a row whose body is embedded-closed.
+
+    fn lift_at(configuration: &str) -> EmbeddedAt {
+        EmbeddedAt {
+            configuration: configuration.into(),
+            project: "a".repeat(64),
+            body: "b".repeat(64),
+        }
+    }
+
+    #[test]
+    fn lift_an_embedded_closed_row_is_counted_apart_and_held_by_admit() {
+        let closed = row(
+            "c::f",
+            Status::Embedded(vec![lift_at("default features"), lift_at("all features")]),
+        );
+        let lifted = row("c::g", Status::Lifted("Behavior::g".into()));
+        let open = row("c::h", Status::Residue("form".into(), "a loop".into()));
+        let register = Register {
+            rows: [closed.clone(), lifted.clone(), open.clone()]
+                .into_iter()
+                .collect(),
+        };
+        // Counted apart from lifted, in the totals and the honesty line,
+        // and stopped by nothing in the queue.
+        let totals = register.totals();
+        assert_eq!((totals.lifted, totals.embedded, totals.residue), (1, 1, 1));
+        assert_eq!(register.queue().len(), 1);
+        let text = register.to_text();
+        assert!(
+            text.contains("# 1 that did not lift are embedded-closed"),
+            "{text}"
+        );
+        assert!(text.contains("\n[lift]\nfunctions = 3\nlifted = 1\nresidue = 1\nforeign = 0\neffect = 0\nembedded = 1\n"), "{text}");
+        assert!(
+            text.contains("configurations = [\"default features\", \"all features\"]\n"),
+            "{text}"
+        );
+        // It reads back as written, its totals held to its rows.
+        let path = Path::new("register.toml");
+        assert_eq!(Register::read(path, &text), Ok(register.clone()));
+        let misstated = text.replace("embedded = 1\n", "embedded = 2\n");
+        assert!(Register::read(path, &misstated).is_err());
+        // A true count of none, stated, is read; a false one is refused.
+        let none = Register {
+            rows: [lifted.clone(), open.clone()].into_iter().collect(),
+        };
+        let stated = none
+            .to_text()
+            .replace("effect = 0\n", "effect = 0\nembedded = 0\n");
+        assert!(stated.contains("embedded = 0\n"), "{stated}");
+        assert_eq!(Register::read(path, &stated), Ok(none.clone()));
+        let false_none = stated.replace("embedded = 0\n", "embedded = 1\n");
+        assert!(Register::read(path, &false_none).is_err());
+        let uneven = text.replace(
+            "configurations = [\"default features\", \"all features\"]",
+            "configurations = [\"default features\"]",
+        );
+        assert!(Register::parse(path, &uneven).is_err());
+        // A register with none states none, and reads as it always did.
+        let plain = Register {
+            rows: [lifted.clone(), open.clone()].into_iter().collect(),
+        };
+        assert!(!plain.to_text().contains("embedded"));
+        // Held: decided open again it is refused; lifted, or closed
+        // again, it is admitted.
+        let as_ = |status: Status| Register {
+            rows: [
+                (
+                    closed.0.clone(),
+                    Row {
+                        function: "c::f".into(),
+                        status,
+                        divergence: None,
+                        stops: None,
+                    },
+                ),
+                lifted.clone(),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        let refused = admit(
+            &register,
+            &as_(Status::Residue("form".into(), "a loop".into())),
+        );
+        assert_eq!(refused.len(), 1, "{refused:?}");
+        assert!(refused[0].contains("was embedded-closed and is now residue: a loop"));
+        assert!(admit(&register, &as_(Status::Lifted("Behavior::f".into()))).is_empty());
+        assert!(admit(
+            &register,
+            &as_(Status::Embedded(vec![
+                lift_at("all features"),
+                lift_at("default features"),
+                lift_at("features x")
+            ]))
+        )
+        .is_empty());
+        // Closed in fewer configurations than the incumbent states (the
+        // refuter's case: a run whose records hold the default
+        // configuration alone) is refused, naming the one it drops.
+        let fewer = admit(
+            &register,
+            &as_(Status::Embedded(vec![lift_at("default features")])),
+        );
+        assert_eq!(fewer.len(), 1, "{fewer:?}");
+        assert!(
+            fewer[0].ends_with("is no longer stated closed in all features"),
+            "{fewer:?}"
+        );
+        // A lifted κ the candidate decides embedded-closed is no longer
+        // lifted: refused, as any other status is.
+        let demoted = Register {
+            rows: [
+                closed.clone(),
+                (
+                    lifted.0.clone(),
+                    Row {
+                        function: "c::g".into(),
+                        status: Status::Embedded(vec![lift_at("default features")]),
+                        divergence: None,
+                        stops: None,
+                    },
+                ),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        assert_eq!(admit(&register, &demoted).len(), 1);
     }
 }

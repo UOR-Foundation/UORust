@@ -407,9 +407,11 @@ struct EmbedArgs {
     #[arg(long, requires = "workspace")]
     links: Option<PathBuf>,
     /// With `--workspace`: one project per module of the crate,
-    /// `<out>/<module>`, smallest module first, each linked against every
-    /// module, as one `--only <module>` run each; with `--only`, one per
-    /// module or part it names. The libraries are linked once for all.
+    /// `<out>/<module>/project` (its configuration and record in
+    /// `<out>/<module>`, outside the project), smallest module first, each
+    /// linked against every module, as one `--only <module>` run each; with
+    /// `--only`, one per module or part it names. The libraries are linked
+    /// once for all.
     #[arg(long, requires = "workspace")]
     each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
@@ -623,6 +625,22 @@ struct Args {
     /// is admitted only on a proved verdict.
     #[arg(long, requires = "mir")]
     verdicts: Option<PathBuf>,
+    /// The records `uorust embed --workspace` wrote (any depth under the
+    /// directory), of this workspace's sources as they are now: a function
+    /// row that did not lift is joined to its body in every declared
+    /// `--configuration`, by the item the dump names, and is embedded-closed
+    /// where every one is embedded, evaluable and reaches only linked
+    /// bodies. A record of another source tree is refused.
+    #[arg(long, requires = "configuration")]
+    embedding: Option<PathBuf>,
+    /// A configuration the workspace declares, by the label its records
+    /// state, target included as `uorust mir` records it (`default features
+    /// on x86_64-unknown-linux-gnu`, `all features on <target>`, `default
+    /// features and a,b on <target>`; repeatable): a row is embedded-closed
+    /// only where the records of every declared configuration cover its
+    /// crate, so a label no record states leaves every row as it was.
+    #[arg(long, requires = "embedding")]
+    configuration: Vec<String>,
 }
 
 fn options(args: &Args) -> Result<Options, UorustError> {
@@ -652,6 +670,10 @@ fn options(args: &Args) -> Result<Options, UorustError> {
         advisories: args.advisories.clone(),
         mir,
         limits: args.limits.clone(),
+        embedding: args.embedding.clone().map(|records| uorust::Embedding {
+            records,
+            configurations: args.configuration.clone(),
+        }),
     })
 }
 
@@ -776,7 +798,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                         c.bound,
                         c.linked.values().sum::<usize>(),
                         c.unlinked.values().sum::<usize>(),
-                        args.out.join(&m.name).display()
+                        args.out.join(&m.name).join(uorust::shard::PROJECT).display()
                     ),
                     None => println!(
                         "embed: {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
@@ -785,7 +807,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                         c.bound,
                         c.linked.values().sum::<usize>(),
                         c.unlinked.values().sum::<usize>(),
-                        args.out.display()
+                        args.out.join(uorust::shard::PROJECT).display()
                     ),
                 }
             }

@@ -19,6 +19,7 @@ pub mod certified;
 pub mod certify;
 mod convert;
 pub mod embed;
+mod embedding;
 mod error;
 mod expand;
 mod facts;
@@ -30,6 +31,7 @@ pub mod limits;
 pub mod mir;
 mod names;
 mod order;
+mod ownership;
 mod project;
 pub mod queue;
 pub mod register;
@@ -42,7 +44,7 @@ use std::collections::BTreeMap;
 use std::path::Path;
 
 pub use error::UorustError;
-pub use project::Options;
+pub use project::{Embedding, Options};
 pub use route::{classify, respond, Route, Routing, REQUEST_LIMIT, ROUTES};
 
 /// The name of the file that lists what a projection wrote, with digests.
@@ -70,7 +72,7 @@ pub fn project_workspace(
 /// The stack [`project_workspace`] runs on: the 64 MiB that holds the
 /// projection of this workspace with its certified translator, as the
 /// evaluator's deep recursion is held (`mir::float`'s tests).
-const PROJECTION_STACK: usize = 1 << 26;
+pub(crate) const PROJECTION_STACK: usize = 1 << 26;
 
 fn project_workspace_here(
     root: &Path,
@@ -85,7 +87,19 @@ fn project_workspace_here(
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
     };
-    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref())?;
+    // The digest of the workspace's sources, which the embedding's records
+    // must state to be joined.
+    let source = match &options.embedding {
+        Some(_) => Some(shard::source_digest(root)?),
+        None => None,
+    };
+    let mut files = project::project(
+        &workspace,
+        &syntax,
+        options,
+        dumps.as_ref(),
+        source.as_deref(),
+    )?;
     let manifest: String = files
         .iter()
         .map(|(path, bytes)| format!("{}  {path}\n", project::sha(bytes)))

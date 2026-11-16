@@ -31,6 +31,25 @@ pub struct Options {
     /// and PrismPM projects (`--limits`); without one, the SDK scaffold's,
     /// and the frontier says which: see [`crate::limits`].
     pub limits: Option<std::path::PathBuf>,
+    /// The records of `uorust embed --workspace` and the configurations
+    /// the workspace declares: a function row that did not lift is joined
+    /// to its body in each declared configuration, and is embedded-closed
+    /// where they say so ([`crate::embedding`]).
+    pub embedding: Option<Embedding>,
+}
+
+/// What `project --embedding` joins ([`crate::embedding`]).
+#[derive(Clone, Debug)]
+pub struct Embedding {
+    /// The directory of the records `uorust embed --workspace` wrote (any
+    /// depth under it).
+    pub records: std::path::PathBuf,
+    /// The configurations the workspace declares, each by its label
+    /// ([`crate::shard::Configuration::label`]: `default features`, `all
+    /// features`, ...). A row is embedded-closed only where the records of
+    /// every one of them cover its crate; records of another configuration
+    /// are not read.
+    pub configurations: Vec<String>,
 }
 
 /// The largest source file of the projects the tool writes that take no
@@ -341,6 +360,7 @@ pub(crate) fn project(
     syntax: &Syntax,
     options: &Options,
     dumps: Option<&crate::mir::Dumps>,
+    source: Option<&str>,
 ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
     // Items under `cfg` predicates no build holds together are one fact:
@@ -451,7 +471,22 @@ pub(crate) fn project(
     // The lift register of this run, read from the function rows the
     // frontier is about to carry: what the queue ranks and the Quality facet
     // measures is what a reader of the frontier finds.
-    let rows = function_rows(&notes, &kappas);
+    // The records are read against the workspace's source digest: a
+    // record of another tree is refused.
+    let records = match &options.embedding {
+        Some(e) => Some(crate::embedding::read(
+            &e.records,
+            source.unwrap_or_default(),
+        )?),
+        None => None,
+    };
+    let embedded = match (&options.embedding, &records) {
+        (Some(e), Some(records)) => {
+            crate::embedding::closed(records, &e.configurations, &embedding_keys(&ctx))
+        }
+        _ => BTreeMap::new(),
+    };
+    let rows = function_rows(&notes, &kappas, &embedded);
     let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
     notes.sites = type_sites(&ctx, &notes);
     // Quality is written last of the facets: it measures what the others
@@ -503,6 +538,13 @@ pub(crate) fn project(
     if let Some(listing) = candidates {
         files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
     }
+    // How the program holds each type, where the embedding's records read it.
+    let rows = match &records {
+        Some(records) => {
+            rows + &holding_rows(&crate::embedding::holdings(records, &type_keys(&ctx)))
+        }
+        None => rows,
+    };
     files.insert(
         FRONTIER.into(),
         frontier(&notes, &lift, &rows, &ctx.limits).into_bytes(),
@@ -6374,9 +6416,124 @@ fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
     out
 }
 
+/// The key of the item each function of product code is, as the
+/// compiler's dump names it ([`crate::embedding::Key`]), by the function's
+/// path: its file's module and the inline modules around it, its impl by
+/// the package-relative file and the line and column its header starts at,
+/// a trait's provided method under its trait. A path two functions share keys none.
+fn embedding_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::Key> {
+    let mut keys: BTreeMap<String, Option<crate::embedding::Key>> = BTreeMap::new();
+    for r in ctx.all_fns().into_iter().filter(|&r| ctx.product(r)) {
+        let (file, f) = (ctx.file(r), ctx.func(r));
+        let mut module: Vec<String> = ctx
+            .module_of(r)
+            .split("::")
+            .filter(|m| !m.is_empty())
+            .map(str::to_string)
+            .collect();
+        let dir = &ctx.package(r).dir;
+        let own = match dir.as_str() {
+            "" | "." => file.rel.clone(),
+            d => file
+                .rel
+                .strip_prefix(&format!("{d}/"))
+                .unwrap_or(&file.rel)
+                .to_string(),
+        };
+        let impl_at = match (&f.owner, f.in_trait) {
+            (Some(trait_name), true) => {
+                module.push(trait_name.clone());
+                None
+            }
+            (Some(_), false) => f.impl_at.map(|(line, column)| (own, line, column)),
+            (None, _) => None,
+        };
+        let key = crate::embedding::Key {
+            krate: ctx.crate_ident(r),
+            module,
+            impl_at,
+            name: f.name.clone(),
+        };
+        keys.entry(ctx.path(r))
+            .and_modify(|k| *k = None)
+            .or_insert(Some(key));
+    }
+    keys.into_iter()
+        .filter_map(|(path, key)| Some((path, key?)))
+        .collect()
+}
+
+/// The key of each struct and enum of a library or binary target, as the
+/// compiler's dump prints it ([`crate::embedding::TypeKey`]), by the
+/// type's path `crate::module::Type`.
+fn type_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::TypeKey> {
+    let mut keys = BTreeMap::new();
+    for package in &ctx.ws.packages {
+        for file in &package.files {
+            let target = &package.targets[file.target];
+            if !matches!(target.kind, TargetKind::Lib | TargetKind::Bin) {
+                continue;
+            }
+            let krate = target.name.replace('-', "_");
+            let module: Vec<String> = file
+                .module
+                .split("::")
+                .filter(|m| !m.is_empty())
+                .map(str::to_string)
+                .collect();
+            let names = file
+                .structs
+                .iter()
+                .map(|s| (&s.name, &s.fields))
+                .chain(file.enums.iter().map(|e| (&e.name, &e.fields)));
+            for (name, fields) in names {
+                let mut path = vec![krate.clone()];
+                path.extend(module.iter().cloned());
+                path.push(name.clone());
+                keys.insert(
+                    path.join("::"),
+                    crate::embedding::TypeKey {
+                        krate: krate.clone(),
+                        module: module.clone(),
+                        name: name.clone(),
+                        fields: fields.clone(),
+                    },
+                );
+            }
+        }
+    }
+    keys
+}
+
+/// The frontier's `[[holding]]` rows: each type of the workspace the
+/// embedding's records hold, owned, shared or interior-mutable, with the
+/// chains of wrappers it was found in.
+fn holding_rows(holdings: &BTreeMap<String, crate::ownership::Held>) -> String {
+    let mut out = String::new();
+    for (path, held) in holdings {
+        out.push_str(&format!(
+            "\n[[holding]]\ntype = {}\nholding = \"{}\"\nwithin = [{}]\n",
+            toml_string(path),
+            held.holding.word(),
+            held.within
+                .iter()
+                .map(|w| toml_string(w))
+                .collect::<Vec<_>>()
+                .join(", ")
+        ));
+    }
+    out
+}
+
 /// The frontier's function rows: every function of product code under the
-/// table of what the lift decided for it, keyed by its κ.
-fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
+/// table of what the lift decided for it, keyed by its κ. A function that
+/// did not lift and is `embedded`-closed is written under that table, with
+/// where, in place of its residue, foreign or effect row.
+fn function_rows(
+    notes: &Notes,
+    kappas: &BTreeMap<String, String>,
+    embedded: &BTreeMap<String, Vec<crate::register::EmbeddedAt>>,
+) -> String {
     let kappa = |path: &str| {
         kappas
             .get(path)
@@ -6387,7 +6544,29 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
         crate::register::stops_line(notes.stops.get(path).map_or(&[][..], Vec::as_slice))
     };
     let mut out = String::new();
-    for (path, (span, reason)) in &notes.residue {
+    let spans = notes
+        .residue
+        .iter()
+        .map(|(p, (s, _))| (p, s))
+        .chain(notes.foreign.iter().map(|(p, (s, _))| (p, s)))
+        .chain(notes.effects.iter().map(|(p, (s, _))| (p, s)));
+    for (path, span) in spans {
+        if let Some(at) = embedded.get(path) {
+            out.push_str(&format!(
+                "\n[[{}]]\n{}function = {}\nspan = {}\n{}",
+                crate::register::EMBEDDED,
+                kappa(path),
+                toml_string(path),
+                toml_string(&span.render()),
+                crate::register::embedded_fields(at)
+            ));
+        }
+    }
+    for (path, (span, reason)) in notes
+        .residue
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n{}",
             kappa(path),
@@ -6398,7 +6577,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             stops(path)
         ));
     }
-    for (path, (span, detail)) in &notes.foreign {
+    for (path, (span, detail)) in notes
+        .foreign
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n{}",
             kappa(path),
@@ -6408,7 +6591,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             stops(path)
         ));
     }
-    for (path, (span, effect)) in &notes.effects {
+    for (path, (span, effect)) in notes
+        .effects
+        .iter()
+        .filter(|(p, _)| !embedded.contains_key(*p))
+    {
         out.push_str(&format!(
             "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n{}",
             kappa(path),
@@ -7526,6 +7713,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let projected = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -7707,6 +7895,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let out = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(&dir);
@@ -8198,6 +8387,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(dir);
@@ -8321,7 +8511,7 @@ pub fn fb(n: &Node) -> u8 {
             .into_iter()
             .map(|path| (path.to_string(), crate::register::kappa(path, "fn f () {}")))
             .collect();
-        let rows = function_rows(&notes, &kappas);
+        let rows = function_rows(&notes, &kappas, &BTreeMap::new());
         let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
         let text = frontier(&notes, &lift, &rows, &crate::limits::Limits::sdk());
         let doc: toml::Value = text.parse().expect("the frontier is TOML");
@@ -8361,7 +8551,7 @@ pub fn fb(n: &Node) -> u8 {
         assert!(matches!(
             Register::parse(
                 Path::new(FRONTIER),
-                &function_rows(&notes, &BTreeMap::new())
+                &function_rows(&notes, &BTreeMap::new(), &BTreeMap::new())
             ),
             Err(UorustError::Malformed { .. })
         ));
@@ -8409,6 +8599,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: file.clone(),
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options);
         let _ = std::fs::remove_dir_all(dir);
@@ -8811,6 +9002,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -9433,6 +9625,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let projected = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -9524,6 +9717,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -9604,6 +9798,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let projected = crate::project_workspace(dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(dir);
@@ -9836,6 +10031,7 @@ pub fn fb(n: &Node) -> u8 {
             advisories: None,
             mir: None,
             limits: None,
+            embedding: None,
         };
         let mut projections = Vec::new();
         for place in ["here", "elsewhere/other-place-ZZ"] {

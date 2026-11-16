@@ -207,6 +207,10 @@ pub(crate) struct FnFact {
     /// Which of its file's module scopes (`SourceFile::scopes`) declares
     /// the function.
     pub(crate) scope: usize,
+    /// For a method of an `impl` block: the line and the column (from 1,
+    /// in characters) its header starts at, by which the compiler's dump
+    /// names the impl (`<impl at file:line:column: ..>`).
+    pub(crate) impl_at: Option<(usize, usize)>,
 }
 
 /// One module scope of a file: the file's own items, or an inline module's.
@@ -246,6 +250,9 @@ pub(crate) struct EnumFact {
     pub(crate) explicit: bool,
     /// Variant name, whether it is a unit variant, its doc, whether `#[default]`.
     pub(crate) variants: Vec<Variant>,
+    /// Each variant's fields, `Variant.field` (a position for a tuple
+    /// variant's), with its type as the source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// A struct, whatever its shape: its syntax says which fields it has.
@@ -258,6 +265,9 @@ pub(crate) struct StructFact {
     pub(crate) scope: usize,
     /// The traits a `#[derive(...)]` names.
     pub(crate) derives: Vec<String>,
+    /// Each field (a position for a tuple struct's), with its type as the
+    /// source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// The syntax the lift reads, kept apart from the facts: per source file,

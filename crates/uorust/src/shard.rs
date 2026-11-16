@@ -42,6 +42,13 @@ pub const TARGET: &str = "target.toml";
 /// (configuration, module).
 pub const RECORD: &str = "record.toml";
 
+/// The directory of an embedding's output that holds the project
+/// `lexlean verify` decides. The [`CONFIGURATION`] and the [`RECORD`] lie
+/// beside it, never in it: a module whose dump is the same in two
+/// configurations is one project, of one digest ([`project_digest`]), and
+/// one verification of it is a receipt for both.
+pub const PROJECT: &str = "project";
+
 /// The configuration a crate is built and dumped in: the cargo feature set
 /// and the target, as `cargo rustc` takes them. The default is the
 /// workspace's default features on the host.
@@ -105,6 +112,26 @@ impl Configuration {
             args.push(t.clone());
         }
         args
+    }
+
+    /// The configuration's name as a register row states it: its features
+    /// (every feature, or the default ones with those named, or only those
+    /// named) and its target where one is named.
+    pub fn label(&self) -> String {
+        let features = if self.all_features {
+            "all features".to_string()
+        } else {
+            match (self.no_default_features, self.features.is_empty()) {
+                (false, true) => "default features".to_string(),
+                (false, false) => format!("default features and {}", self.features.join(",")),
+                (true, true) => "no features".to_string(),
+                (true, false) => format!("features {}", self.features.join(",")),
+            }
+        };
+        match &self.target {
+            Some(t) => format!("{features} on {t}"),
+            None => features,
+        }
     }
 
     /// The configuration as [`CONFIGURATION`] records it, with the triple
@@ -555,7 +582,9 @@ pub struct WorkspaceEmbed<'a> {
     pub dumps: &'a Path,
     /// The rust-src `library` directory of the pinned toolchain.
     pub library: &'a Path,
-    /// The project directory; with `each_module`, one per module under it.
+    /// The output directory: the project in its [`PROJECT`], the
+    /// configuration and the record beside it; with `each_module`, one
+    /// such directory per module under it.
     pub out: &'a Path,
     /// Embed only these modules into one project.
     pub only: &'a [String],
@@ -583,8 +612,9 @@ pub struct Embedded {
 /// resolves them in the dump's configuration) are mounted beside core,
 /// alloc and std, and the crate is embedded as one project, or, with
 /// `each_module`, as one project per module, each linked against every
-/// module the shards hold, as CI embeds core. The dump's configuration is
-/// written into each project beside its census.
+/// module the shards hold, as CI embeds core. Each project is written to
+/// `<out>/`[`PROJECT`]; the dump's configuration and the [`RECORD`] are
+/// written to `<out>`, outside the project.
 pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, UorustError> {
     let shards = e.dumps.join(format!("{SHARDS}{}", e.krate));
     if !shards.join(TARGET).is_file() {
@@ -639,8 +669,16 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
         ..config.clone()
     };
     let deps = dependencies(e.workspace, &resolve.cargo_args(true), Some(name))?;
-    let root =
-        std::env::temp_dir().join(format!("uorust-embed-{}-{}", e.krate, std::process::id()));
+    let source = source_digest(e.workspace)?;
+    // One mount per call: two embeddings of one crate in one process
+    // (tests run in parallel) never share it.
+    static CALL: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+    let call = CALL.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let root = std::env::temp_dir().join(format!(
+        "uorust-embed-{}-{}-{call}",
+        e.krate,
+        std::process::id()
+    ));
     let _ = std::fs::remove_dir_all(&root);
     let result = (|| {
         let builds_on = mount(&root, e.library, e.krate, &dir, &deps)?;
@@ -666,8 +704,11 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             .map(|(k, d)| (k.as_str(), d.as_path()))
             .collect();
         let all = modules(&shards)?;
-        // Each project's configuration and record beside its census.
+        // Each project's configuration and record beside it, outside what
+        // the project names: the project as the embedding wrote it in
+        // `<out>/`[`PROJECT`].
         let record = |only: &[String], out: &Path, census: &crate::embed::EmbedCensus| {
+            let project = project_digest(&out.join(PROJECT))?;
             if let Some(text) = &configuration {
                 let file = out.join(CONFIGURATION);
                 std::fs::write(&file, text).map_err(|x| io(&file, x))?;
@@ -676,12 +717,28 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
                 .iter()
                 .filter(|m| only.is_empty() || only.contains(&m.name))
                 .collect();
+            // How the embedded modules' bodies hold each type.
+            let mut holdings = std::collections::BTreeMap::new();
+            for m in &held {
+                let dir = shards.join(&m.name);
+                let mut files: Vec<PathBuf> = std::fs::read_dir(&dir)
+                    .map_err(|x| io(&dir, x))?
+                    .filter_map(Result::ok)
+                    .map(|f| f.path())
+                    .filter(|f| f.extension().is_some_and(|x| x == "mir"))
+                    .collect();
+                files.sort();
+                for f in files {
+                    let text = std::fs::read_to_string(&f).map_err(|x| io(&f, x))?;
+                    crate::ownership::read(&text, &mut holdings);
+                }
+            }
             let file = out.join(RECORD);
-            std::fs::write(
-                &file,
-                render_record(e.krate, &config, only, &held, &link, census),
-            )
-            .map_err(|x| io(&file, x))
+            let mut text = render_record(
+                e.krate, &config, only, &held, &all, &link, census, &project, &source,
+            );
+            text.push_str(&crate::ownership::render(&holdings));
+            std::fs::write(&file, text).map_err(|x| io(&file, x))
         };
         if !e.each_module {
             let census = crate::embed::embed_with(
@@ -689,7 +746,7 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
                 &builds_on,
                 &library,
                 &shards,
-                e.out,
+                &e.out.join(PROJECT),
                 &only,
                 &crate::embed::Outputs {
                     link: &link,
@@ -713,8 +770,12 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             .iter()
             .map(|n| (vec![n.clone()], e.out.join(n.replacen(PART, "::", 1))))
             .collect();
+        let projects: Vec<(Vec<String>, PathBuf)> = sets
+            .iter()
+            .map(|(only, out)| (only.clone(), out.join(PROJECT)))
+            .collect();
         let censuses =
-            crate::embed::embed_each(e.krate, &builds_on, &library, &shards, &sets, &link)?;
+            crate::embed::embed_each(e.krate, &builds_on, &library, &shards, &projects, &link)?;
         let mut done = Vec::new();
         for ((only, out), census) in sets.iter().zip(censuses) {
             record(only, out, &census)?;
@@ -763,19 +824,100 @@ fn split_view(shards: &Path, view: &Path, only: &[String]) -> Result<(), UorustE
     Ok(())
 }
 
+/// The SHA-256 of a project directory's files: each file's path under
+/// `dir` and its bytes, in path order, every file as the embedding wrote
+/// it. It names the project a verification of it is a receipt of.
+pub fn project_digest(dir: &Path) -> Result<String, UorustError> {
+    let mut files: Vec<PathBuf> = Vec::new();
+    let mut next = vec![dir.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for entry in std::fs::read_dir(&d).map_err(|x| io(&d, x))? {
+            let path = entry.map_err(|x| io(&d, x))?.path();
+            if path.is_dir() {
+                next.push(path);
+            } else {
+                files.push(path);
+            }
+        }
+    }
+    digest_files(dir, files)
+}
+
+/// The SHA-256 of `files`, each by its path under `dir` and its bytes, in
+/// path order.
+fn digest_files(dir: &Path, mut files: Vec<PathBuf>) -> Result<String, UorustError> {
+    use sha2::{Digest, Sha256};
+    files.sort();
+    let mut hash = Sha256::new();
+    for f in files {
+        let name = f
+            .strip_prefix(dir)
+            .unwrap_or(&f)
+            .to_string_lossy()
+            .into_owned();
+        let bytes = std::fs::read(&f).map_err(|x| io(&f, x))?;
+        hash.update(name.as_bytes());
+        hash.update([0u8]);
+        hash.update((bytes.len() as u64).to_le_bytes());
+        hash.update(&bytes);
+    }
+    Ok(hash.finalize().iter().map(|b| format!("{b:02x}")).collect())
+}
+
+/// The SHA-256 of a workspace's sources, hashed as [`project_digest`]
+/// hashes a project: every `.rs` file, every `Cargo.toml` and every
+/// `Cargo.lock` under `workspace`, outside its `target` directory and any
+/// directory whose name starts with a dot. A record states the digest of
+/// the tree it was embedded from, and a projection joins only the records
+/// of its own tree ([`crate::embedding`]), so no row is stamped by the
+/// record of a body that has since changed, in its crate or in any crate
+/// of the workspace its calls reach. The dumps are those of the tree
+/// `uorust mir` read; that it is the tree embedded is the caller's, which
+/// runs both on one input.
+pub fn source_digest(workspace: &Path) -> Result<String, UorustError> {
+    let mut files: Vec<PathBuf> = Vec::new();
+    let mut next = vec![workspace.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for entry in std::fs::read_dir(&d).map_err(|x| io(&d, x))? {
+            let path = entry.map_err(|x| io(&d, x))?.path();
+            let name = path
+                .file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or_default();
+            if path.is_dir() {
+                if !name.starts_with('.') && path != workspace.join("target") {
+                    next.push(path);
+                }
+            } else if name.ends_with(".rs") || name == "Cargo.toml" || name == "Cargo.lock" {
+                files.push(path);
+            }
+        }
+    }
+    digest_files(workspace, files)
+}
+
 /// [`RECORD`] of one embedding of the modules `only` (every module when
-/// empty) of `krate`, dumped in `config`: the configuration, the modules
-/// and their dump files, the libraries linked, then the census's counts:
+/// empty) of `krate`, dumped in `config`, into the project whose digest is
+/// `project` ([`project_digest`]), from the workspace whose sources' digest
+/// is `source` ([`source_digest`]): the configuration, the modules and
+/// their dump files, every module of the crate (`every`), the libraries linked, then the census's counts:
 /// bodies embedded, evaluable, leaving a callee to a dictionary, and the
 /// calls that name a body, by where it is, and those left to a dictionary,
-/// by why ([`crate::embed::unlinked_reason`]).
+/// by why ([`crate::embed::unlinked_reason`]); then one `[[body]]` row per
+/// body ([`crate::embed::BodyFact`]): the path the dump prints, its κ, its
+/// term's digest, what blocks it, its reach and the callees it leaves
+/// unlinked, each with why.
+#[allow(clippy::too_many_arguments)]
 pub fn render_record(
     krate: &str,
     config: &Configuration,
     only: &[String],
     held: &[&Module],
+    every: &[Module],
     link: &[(&str, &Path)],
     census: &crate::embed::EmbedCensus,
+    project: &str,
+    source: &str,
 ) -> String {
     let quote = |s: &str| toml::Value::String(s.to_string()).to_string();
     let list =
@@ -784,8 +926,9 @@ pub fn render_record(
         "# One embedding of a workspace library's modules in one configuration\n\
          # (written by `uorust embed --workspace`; do not edit).\n\n\
          crate = {}\nmodules = [{}]\nfeatures = [{}]\ndefault_features = {}\nall_features = {}\n\
-         target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\n\
-         embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n",
+         target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\ncrate_modules = [{}]\nproject = {}\n\
+         embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n\
+         closed = {}\nsource = {}\n",
         quote(krate),
         list(
             &mut only
@@ -802,11 +945,15 @@ pub fn render_record(
         list(&mut link.iter().map(|(k, _)| *k)),
         held.iter().map(|m| m.files).sum::<usize>(),
         held.iter().map(|m| m.bytes).sum::<u64>(),
+        list(&mut every.iter().map(|m| m.name.as_str())),
+        quote(project),
         census.bodies,
         census.evaluable,
         census.bound,
         census.linked.values().sum::<usize>(),
         census.unlinked.values().sum::<usize>(),
+        census.rows.iter().filter(|r| r.open.is_none()).count(),
+        quote(source),
     );
     for (at, n) in &census.linked {
         out.push_str(&format!(
@@ -818,6 +965,27 @@ pub fn render_record(
         out.push_str(&format!(
             "\n[[unlinked]]\nreason = {}\ncalls = {n}\n",
             quote(why)
+        ));
+    }
+    for r in &census.rows {
+        let blocked: Vec<String> = r.blocked.iter().map(|b| quote(b)).collect();
+        let unlinked: Vec<String> = r
+            .unlinked
+            .iter()
+            .flat_map(|(why, callees)| {
+                callees
+                    .iter()
+                    .map(move |c| format!("{{ reason = {}, callee = {} }}", quote(why), quote(c)))
+            })
+            .collect();
+        out.push_str(&format!(
+            "\n[[body]]\npath = {}\nkappa = {}\nembedded = {}\nblocked = [{}]\nreach = {}\nunlinked = [{}]\n",
+            quote(&r.path),
+            quote(&r.kappa),
+            quote(&r.embedded),
+            blocked.join(", "),
+            quote(&r.reach()),
+            unlinked.join(", ")
         ));
     }
     out
@@ -884,6 +1052,7 @@ fn read_configuration(text: Option<&str>) -> Configuration {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::BTreeMap;
 
     // embed: the shard layout of a workspace crate and its configuration.
 
@@ -1043,13 +1212,40 @@ mod tests {
         for d in &done {
             assert_eq!(d.census.bodies, 1);
             assert_eq!(d.census.evaluable, 1, "{:?}", d.census.blocked);
-            let project = out.join(&d.module.as_ref().unwrap().name);
-            assert!(project.join("census.toml").is_file());
+            let out = out.join(&d.module.as_ref().unwrap().name);
+            assert!(out.join(PROJECT).join("census.toml").is_file());
+            assert!(!out.join(PROJECT).join(CONFIGURATION).exists());
             assert_eq!(
-                std::fs::read_to_string(project.join(CONFIGURATION)).unwrap(),
+                std::fs::read_to_string(out.join(CONFIGURATION)).unwrap(),
                 recorded
             );
         }
+        // The same dumps in another configuration: each module's project
+        // has the digest it has in the first, its record another label.
+        let recorded_of = |out: &Path, module: &str| -> toml::Table {
+            std::fs::read_to_string(out.join(module).join(RECORD))
+                .unwrap()
+                .parse()
+                .unwrap()
+        };
+        let all = Configuration {
+            all_features: true,
+            ..Configuration::default()
+        }
+        .render("x86_64-unknown-linux-gnu");
+        std::fs::write(shards.join(CONFIGURATION), &all).unwrap();
+        let other = work.join("other");
+        embed_workspace_crate(&WorkspaceEmbed {
+            out: &other,
+            ..e.clone()
+        })
+        .expect("the embedding in the other configuration");
+        for module in ["inner", crate::registry::ROOT_MODULE] {
+            let (a, b) = (recorded_of(&out, module), recorded_of(&other, module));
+            assert_eq!(a.get("project"), b.get("project"), "{module}");
+            assert_ne!(a.get("all_features"), b.get("all_features"), "{module}");
+        }
+        std::fs::write(shards.join(CONFIGURATION), &recorded).unwrap();
         // One project of the whole crate.
         let whole = embed_workspace_crate(&WorkspaceEmbed {
             each_module: false,
@@ -1373,5 +1569,192 @@ mod tests {
             reason("sqrtf64"),
             "the platform (an intrinsic, assembly, a foreign item)"
         );
+    }
+
+    // lift: each body of a module's embedding is recorded by the path the
+    // dump prints, with its reach and the callees it leaves unlinked.
+
+    /// The source of a synthetic crate `m` whose dump holds a trait's
+    /// method in two impls of one trait, a generic impl's method and an
+    /// inline module's function of a name the root module also declares,
+    /// and the dumps `uorust mir` lays out for it, under `work`.
+    fn lift_crate(work: &Path) -> (PathBuf, PathBuf) {
+        let ws = work.join("ws");
+        join_write(
+            &ws,
+            "Cargo.toml",
+            "[workspace]\nmembers = [\"m\"]\nresolver = \"2\"\n",
+        );
+        join_write(
+            &ws.join("m"),
+            "Cargo.toml",
+            "[package]\nname = \"m\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        );
+        join_write(
+            &ws.join("m/src"),
+            "lib.rs",
+            "pub mod inner {\n    pub fn go(a: u32, b: u32) -> u32 { a }\n    pub fn run(a: u32, b: u32) -> u32 { go(a, b) }\n}\n\
+             pub trait Shape { fn f(&self, b: u32) -> u32; }\npub struct Sq(pub u32);\npub struct Ci(pub u32);\n\
+             impl Shape for Sq { fn f(&self, b: u32) -> u32 { self.0 } }\n\
+             impl Shape for Ci { fn f(&self, b: u32) -> u32 { b } }\n\
+             pub struct Wrap<T>(pub T);\nimpl<T: Copy> Wrap<T> { pub fn get(&self) -> T { self.0 } }\n\
+             pub fn go(a: u32, b: u32) -> u32 { a.wrapping_add(b) }\n",
+        );
+        let dumps = work.join("dumps");
+        let shards = dumps.join(format!("{SHARDS}m"));
+        let root = shards.join(crate::registry::ROOT_MODULE);
+        let call = |callee: &str| {
+            format!("_0 = {callee}(copy _1, copy _2) -> [return: bb1, unwind continue];")
+        };
+        for (dir, name, text) in [
+            (&root, "m.{impl#0}-f", join_body("<impl at src/lib.rs:8:1: 8:18>::f", "_0 = copy _2;\n        goto -> bb1;")),
+            (&root, "m.{impl#1}-f", join_body("<impl at src/lib.rs:9:1: 9:18>::f", "_0 = copy _2;\n        goto -> bb1;")),
+            (
+                &root,
+                "m.{impl#2}-get",
+                "// MIR for `<impl at src/lib.rs:11:1: 11:22>::get` before ElaborateBoxDerefs\n\nfn <impl at src/lib.rs:11:1: 11:22>::get(_1: &Wrap<T>) -> T {\n    debug self => _1;\n    let mut _0: T;\n\n    bb0: {\n        _0 = copy ((*_1).0: T);\n        return;\n    }\n}\n".to_string(),
+            ),
+            (&root, "m.go", join_body("go", &call("core::num::<impl u32>::wrapping_add"))),
+            (&root, "m.pick", join_body("pick", &call("<T as Shape>::f"))),
+            // A drop of a place with drop glue, and a call of a value: each
+            // reaches what no named body states.
+            (&root, "m.defuse", join_body("defuse", "drop(_1) -> [return: bb1, unwind continue];")),
+            (&root, "m.apply", join_body("apply", "_0 = copy _1(copy _2) -> [return: bb1, unwind continue];")),
+            (&shards.join("inner"), "m.inner-go", join_body("inner::go", "_0 = copy _1;\n        goto -> bb1;")),
+            (&shards.join("inner"), "m.inner-run", join_body("inner::run", &call("inner::go"))),
+        ] {
+            join_write(dir, &format!("{name}.2-2-009.ElaborateBoxDerefs.before.mir"), &text);
+        }
+        join_write(
+            &shards,
+            TARGET,
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        );
+        join_write(
+            &shards,
+            CONFIGURATION,
+            &Configuration::default().render("x86_64-unknown-linux-gnu"),
+        );
+        (ws, dumps)
+    }
+
+    /// The record of the whole crate `m` embedded into `out`.
+    fn lift_record(work: &Path, out: &str) -> (crate::embed::EmbedCensus, toml::Table) {
+        let (ws, dumps) = lift_crate(work);
+        let library = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core/library");
+        let out = work.join(out);
+        let done = embed_workspace_crate(&WorkspaceEmbed {
+            workspace: &ws,
+            krate: "m",
+            dumps: &dumps,
+            library: &library,
+            out: &out,
+            only: &[],
+            each_module: false,
+            link: &[],
+        })
+        .expect("the embedding");
+        let record = std::fs::read_to_string(out.join(RECORD)).expect("the record");
+        (
+            done[0].census.clone(),
+            record.parse().expect("a record is TOML"),
+        )
+    }
+
+    #[test]
+    fn lift_each_body_is_recorded_by_the_path_its_dump_prints_with_its_reach() {
+        let work = std::env::temp_dir().join(format!("uorust-shard-lift-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let (census, record) = lift_record(&work, "out");
+        let bodies: BTreeMap<String, &toml::Value> = record["body"]
+            .as_array()
+            .expect("body rows")
+            .iter()
+            .map(|b| (b["path"].as_str().unwrap().to_string(), b))
+            .collect();
+        // One row per body, by the path the dump prints: the two impls of
+        // one trait apart, the generic impl's method, and the inline
+        // module's function apart from the root's of its name.
+        let paths: Vec<&str> = bodies.keys().map(String::as_str).collect();
+        assert_eq!(
+            paths,
+            [
+                "<impl at src/lib.rs:11:1: 11:22>::get",
+                "<impl at src/lib.rs:8:1: 8:18>::f",
+                "<impl at src/lib.rs:9:1: 9:18>::f",
+                "apply",
+                "defuse",
+                "go",
+                "inner::go",
+                "inner::run",
+                "pick"
+            ],
+            "{record}"
+        );
+        assert_eq!(census.rows.len(), 9);
+        // A drop runs drop glue the evaluator does not run, and a call of a
+        // value names no body: both open at themselves.
+        assert_eq!(
+            bodies["defuse"]["reach"].as_str(),
+            Some("open: drops a value, whose drop glue the evaluator does not run (at defuse)"),
+            "{record}"
+        );
+        assert_eq!(
+            bodies["apply"]["reach"].as_str(),
+            Some("open: calls a function pointer or closure value, which names no body (at apply)"),
+            "{record}"
+        );
+        let reach = |p: &str| bodies[p]["reach"].as_str().unwrap().to_string();
+        // A body that calls a body of the crate reaches it: closed.
+        assert_eq!(reach("inner::run"), "closed");
+        assert_eq!(reach("<impl at src/lib.rs:8:1: 8:18>::f"), "closed");
+        // A generic impl's method that reads its value whatever the type
+        // reaches every body it calls; one that calls its parameter's
+        // trait leaves the callee to the bound's dictionary, and a call
+        // into core, which is not linked, leaves it to core's: each open
+        // at itself, the callee named by why.
+        assert_eq!(reach("<impl at src/lib.rs:11:1: 11:22>::get"), "closed");
+        assert_eq!(
+            reach("pick"),
+            "open: leaves a callee of the crate to a dictionary (at pick)"
+        );
+        assert_eq!(
+            bodies["pick"]["unlinked"][0]["reason"].as_str(),
+            Some("a generic parameter's bound")
+        );
+        assert_eq!(
+            reach("go"),
+            "open: leaves a callee of core to a dictionary (at go)"
+        );
+        let unlinked = bodies["go"]["unlinked"].as_array().unwrap();
+        assert_eq!(unlinked.len(), 1, "{record}");
+        assert_eq!(
+            unlinked[0]["reason"].as_str(),
+            Some("core, alloc and std are not linked")
+        );
+        assert_eq!(
+            unlinked[0]["callee"].as_str(),
+            Some("core::num::<impl u32>::wrapping_add")
+        );
+        assert!(bodies["inner::run"]["unlinked"]
+            .as_array()
+            .unwrap()
+            .is_empty());
+        // Each row's digest is its term's, as the register's stamp writes
+        // it, and its κ the body's; the counts agree with the rows.
+        for r in &census.rows {
+            assert_eq!(
+                bodies[&r.path]["embedded"].as_str(),
+                Some(r.embedded.as_str())
+            );
+            assert_eq!(bodies[&r.path]["kappa"].as_str(), Some(r.kappa.as_str()));
+        }
+        assert_eq!(record["closed"].as_integer(), Some(5), "{record}");
+        assert_eq!(
+            record["project"].as_str().map(str::len),
+            Some(64),
+            "{record}"
+        );
+        std::fs::remove_dir_all(&work).unwrap();
     }
 }

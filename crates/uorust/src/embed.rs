@@ -3860,6 +3860,48 @@ pub struct EmbedCensus {
     /// The calls (each callee once per body) left to a dictionary, by why
     /// ([`unlinked_reason`]).
     pub unlinked: BTreeMap<String, usize>,
+    /// Each body counted, by the path the dump prints for it: what joins a
+    /// register row to its body ([`BodyFact`]).
+    pub rows: Vec<BodyFact>,
+}
+
+/// One body's embedding, keyed by the path the dump prints for it
+/// (`a::<impl at src/a.rs:3:1: 3:9>::f`, `inner::run`), which is the item
+/// the compiler resolved and never a path the surface reader spells: a
+/// trait's method in two impls of one type, a generic impl's method and a
+/// function of an inline module each keep their own. Its reach is closed
+/// exactly when every body it reaches, itself first, is embedded, uses no
+/// construct the evaluator does not define, calls no intrinsic, leaves no
+/// callee to a dictionary and fixes every instance's generics, and it is
+/// not generic itself (the one test [`closure`] states, which the
+/// differential check's samples are held to as well).
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct BodyFact {
+    /// The path the dump prints.
+    pub path: String,
+    /// The body's κ ([`body_kappa`]).
+    pub kappa: String,
+    /// The SHA-256 of its term, as the register's stamp writes it.
+    pub embedded: String,
+    /// The constructs it uses that the evaluator does not define.
+    pub blocked: Vec<String>,
+    /// Where its reach is open: why, and the key of the body that stops
+    /// it (itself or one it reaches). `None` where it is closed.
+    pub open: Option<(String, String)>,
+    /// The callees it leaves to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, BTreeSet<String>>,
+}
+
+impl BodyFact {
+    /// Its reach as the register's stamp and a record write it: `closed`,
+    /// or `open: <why> (at <body>)`.
+    pub fn reach(&self) -> String {
+        match &self.open {
+            None => "closed".to_string(),
+            Some((why, at)) => format!("open: {why} (at {at})"),
+        }
+    }
 }
 
 /// The key of [`EmbedCensus::linked`] for a call into the crate's own
@@ -4181,10 +4223,55 @@ pub fn embed(
     embed_with(krate, &[], library, dumps, out, only, outputs)
 }
 
+/// The stack one body on the path of the embedding's walks takes at most:
+/// a page, the unit a thread's stack is mapped in. The walks over the
+/// program (the fuel and instance walks follow calls) nest once per body
+/// on a call path; measured on a chain of calls in a debug build, a path of
+/// 5000 bodies was held by the main thread's 8 MiB and one of 10000 was
+/// not, so a level takes between about 840 and 1680 bytes, under a page.
+const BODY_STACK: usize = 4096;
+
+/// The bodies the dumps under `dir` hold, at any depth: each `// MIR for`
+/// header.
+fn bodies_under(dir: &Path) -> usize {
+    let mut count = 0;
+    let mut next = vec![dir.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for path in std::fs::read_dir(&d)
+            .into_iter()
+            .flatten()
+            .filter_map(Result::ok)
+            .map(|e| e.path())
+        {
+            if path.is_dir() {
+                next.push(path);
+            } else if let Ok(text) = std::fs::read_to_string(&path) {
+                count += text.matches("// MIR for `").count();
+            }
+        }
+    }
+    count
+}
+
+/// The stack the embedding of the dumps under `dumps`, with the libraries
+/// `link` linked, runs on: a [`BODY_STACK`] for each body the program can
+/// hold, since no call path of it is longer, and never less than the
+/// projection's own ([`crate::PROJECTION_STACK`]).
+fn embedding_stack(dumps: &Path, link: &[(&str, &Path)]) -> usize {
+    let bodies = bodies_under(dumps) + link.iter().map(|(_, d)| bodies_under(d)).sum::<usize>();
+    bodies
+        .saturating_add(1)
+        .saturating_mul(BODY_STACK)
+        .max(crate::PROJECTION_STACK)
+}
+
 /// [`embed`] for a crate that builds on the crates `builds_on` as well as
 /// core and alloc, each a directory of `library` by its name (a crate of
 /// crates.io and its dependencies): its bodies make values of their enums
-/// and structs, read from their declarations as core's are.
+/// and structs, read from their declarations as core's are. It runs on a
+/// thread whose stack is sized for the program ([`embedding_stack`]):
+/// the walks nest once per body on a call path, which the input, not the
+/// caller's thread, bounds.
 pub fn embed_with(
     krate: &str,
     builds_on: &[String],
@@ -4194,9 +4281,29 @@ pub fn embed_with(
     only: &[String],
     outputs: &Outputs<'_>,
 ) -> Result<EmbedCensus, UorustError> {
-    let root = library.parent().unwrap_or(library);
-    let linked = link_all(outputs.link, root);
-    embed_into(krate, builds_on, root, dumps, out, only, outputs, &linked)
+    on_embedding_stack(dumps, outputs.link, || {
+        let root = library.parent().unwrap_or(library);
+        let linked = link_all(outputs.link, root);
+        embed_into(krate, builds_on, root, dumps, out, only, outputs, &linked)
+    })
+}
+
+/// `work` on a thread whose stack is sized for the program the dumps under
+/// `dumps` and the libraries `link` make ([`embedding_stack`]).
+fn on_embedding_stack<T: Send>(
+    dumps: &Path,
+    link: &[(&str, &Path)],
+    work: impl FnOnce() -> Result<T, UorustError> + Send,
+) -> Result<T, UorustError> {
+    let stack = embedding_stack(dumps, link);
+    std::thread::scope(|scope| {
+        std::thread::Builder::new()
+            .stack_size(stack)
+            .spawn_scoped(scope, work)
+            .map_err(|e| UorustError::Tool(format!("the embedding's thread: {e}")))?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    })
 }
 
 /// Each library of `link` linked with those before it (alloc with core),
@@ -4226,15 +4333,19 @@ pub fn embed_each(
     sets: &[(Vec<String>, std::path::PathBuf)],
     link: &[(&str, &Path)],
 ) -> Result<Vec<EmbedCensus>, UorustError> {
-    let root = library.parent().unwrap_or(library);
-    let linked = link_all(link, root);
-    let outputs = Outputs {
-        link,
-        ..Outputs::default()
-    };
-    sets.iter()
-        .map(|(only, out)| embed_into(krate, builds_on, root, dumps, out, only, &outputs, &linked))
-        .collect()
+    on_embedding_stack(dumps, link, || {
+        let root = library.parent().unwrap_or(library);
+        let linked = link_all(link, root);
+        let outputs = Outputs {
+            link,
+            ..Outputs::default()
+        };
+        sets.iter()
+            .map(|(only, out)| {
+                embed_into(krate, builds_on, root, dumps, out, only, &outputs, &linked)
+            })
+            .collect()
+    })
 }
 
 /// [`embed_with`] with its libraries already linked.
@@ -4264,7 +4375,9 @@ fn embed_into(
             if file.exists() {
                 let by_kappa: BTreeMap<&str, &Embedded> =
                     bodies.iter().map(|(k, e)| (k.as_str(), e)).collect();
-                let text = stamp_rows(&read_text(&file)?, &by_kappa);
+                let reach: BTreeMap<&str, &BodyFact> =
+                    census.rows.iter().map(|r| (r.kappa.as_str(), r)).collect();
+                let text = stamp_rows(&read_text(&file)?, &by_kappa, &reach);
                 std::fs::write(&file, text).map_err(|e| crate::error::io(&file, e))?;
             }
         }
@@ -4328,11 +4441,16 @@ pub struct Outputs<'a> {
 }
 
 /// A register's module file with each row's embedding stamped on it by
-/// its κ: the digest of the body's term (`embedded`) and the constructs
-/// the evaluator does not define that it uses (`blocked`), in place of
+/// its κ: the digest of the body's term (`embedded`), the constructs
+/// the evaluator does not define that it uses (`blocked`) and its reach
+/// ([`BodyFact::reach`], where `reach` holds the κ), in place of
 /// whatever the row recorded. A row whose κ the embedding has no body of
 /// records none.
-pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> String {
+pub(crate) fn stamp_rows(
+    text: &str,
+    by_kappa: &BTreeMap<&str, &Embedded>,
+    reach: &BTreeMap<&str, &BodyFact>,
+) -> String {
     let mut out = String::new();
     let mut kappa: Option<String> = None;
     let mut pending = false;
@@ -4347,10 +4465,16 @@ pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> St
                 let quoted: Vec<String> = e.blocked.iter().map(|b| census_string(b)).collect();
                 let _ = writeln!(out, "blocked = [{}]", quoted.join(", "));
             }
+            if let Some(r) = kappa.as_deref().and_then(|k| reach.get(k)) {
+                let _ = writeln!(out, "reach = {}", census_string(&r.reach()));
+            }
         }
     };
     for line in text.lines() {
-        if line.starts_with("embedded = ") || line.starts_with("blocked = ") {
+        if line.starts_with("embedded = ")
+            || line.starts_with("blocked = ")
+            || line.starts_with("reach = ")
+        {
             continue;
         }
         // The stamp follows a row's κ and its span, as the register writes
@@ -4878,19 +5002,13 @@ pub(crate) struct Program {
     unread: BTreeSet<String>,
 }
 
-/// What a sample reaches: every body, which the evaluator defines, or
-/// why it does not.
+/// What a body reaches: every body, which the evaluator defines, or
+/// why it does not and the key of the body that stops it.
 enum Reach {
     Closed(Vec<String>),
-    Open(String),
+    Open { why: String, at: String },
 }
 
-/// The keys of the bodies `key` reaches, itself first, where the evaluator
-/// defines each: else why not, by the first body that stops it, which is
-/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
-/// dictionary, or reaches an instance whose generics no binding fixes
-/// (`Generic.unknown`, and the root's own slots, which a sample's call
-/// supplies none of).
 /// A term read as an s-expression: an atom, or a parenthesized list.
 #[derive(Debug, PartialEq, Eq)]
 enum Sexp {
@@ -5134,15 +5252,38 @@ enum Fuel {
     Unbounded(String),
 }
 
+/// The keys of the bodies `key` reaches, itself first, where the evaluator
+/// defines each: else why not, by the first body that stops it, which is
+/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
+/// dictionary, drops a value, calls a value, or reaches an instance whose
+/// generics no binding fixes (`Generic.unknown`, and the root's own slots,
+/// which a sample's call supplies none of).
+///
+/// A body whose term holds a `drop` is open: rustc keeps a `drop`
+/// terminator after drop elaboration only for a place whose type has drop
+/// glue (a `Drop` impl in it, a type parameter, a box), and the evaluator
+/// takes `Terminator.drop` as a jump, so a `Drop` body that panics or
+/// changes what the caller reads would not run. A call whose callee is an
+/// operand (`Callee.operand`: a function pointer, a closure or a `FnOnce`
+/// value) names no body, so what it calls is not among the callees walked.
 fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
+    let open = |why: String, at: &str| Reach::Open {
+        why,
+        at: at.to_string(),
+    };
+    // `(ctor Mir::C ` with its first argument to come: the constructor
+    // applied, never a longer name that starts with it.
+    let applies = |term: &str, ctor: &str| {
+        term.contains(mir_ctor(ctor, &[String::new()]).trim_end_matches(')'))
+    };
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
         let Some((_, e)) = every.get(&k) else {
-            return Reach::Open("reaches a body not embedded".into());
+            return open("reaches a body not embedded".into(), &k);
         };
         if let Some(b) = e.blocked.iter().next() {
-            return Reach::Open(format!("reaches a body blocked by {b}"));
+            return open(format!("reaches a body blocked by {b}"), &k);
         }
         if let Some(b) = e.bound.iter().next() {
             // A dictionary's name, its generic arguments and the
@@ -5156,21 +5297,33 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
             if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
                 eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
             }
-            return Reach::Open(format!("leaves a callee of {kind} to a dictionary"));
+            return open(format!("leaves a callee of {kind} to a dictionary"), &k);
         }
         if !e.intrinsics.is_empty() {
-            return Reach::Open("calls an intrinsic".into());
+            return open("calls an intrinsic".into(), &k);
+        }
+        if applies(&e.term, "Terminator.drop") {
+            return open(
+                "drops a value, whose drop glue the evaluator does not run".into(),
+                &k,
+            );
+        }
+        if applies(&e.term, "Callee.operand") {
+            return open(
+                "calls a function pointer or closure value, which names no body".into(),
+                &k,
+            );
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return Reach::Open("reaches an instance no binding fixes".into());
+            return open("reaches an instance no binding fixes".into(), &k);
         }
         if at == 0
             && e.term
                 .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
         {
-            return Reach::Open("is generic itself".into());
+            return open("is generic itself".into(), &k);
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -6178,6 +6331,8 @@ fn embed_linked(
     };
     let mut modules = Vec::new();
     let mut every: BTreeMap<String, (String, Embedded)> = BTreeMap::new();
+    // Each counted body: the path its dump prints, its key, its κ.
+    let mut counted: Vec<(String, String, String)> = Vec::new();
     let mut samples = Vec::new();
     let mut signatures = BTreeMap::new();
     let package = library_root(root).join(krate);
@@ -6285,6 +6440,7 @@ fn embed_linked(
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
                     census.add(&e, krate, &own_modules, &linked_names);
+                    counted.push((b.path.clone(), key.clone(), kappa.clone()));
                     signatures.insert(
                         kappa.clone(),
                         (
@@ -6409,7 +6565,7 @@ fn embed_linked(
                 false
             }
         },
-        Reach::Open(why) => {
+        Reach::Open { why, .. } => {
             *left.entry(why).or_default() += 1;
             false
         }
@@ -6423,6 +6579,32 @@ fn embed_linked(
                 .collect::<String>()
         );
     }
+    // Each counted body's reach and what it leaves unlinked, over the
+    // whole program: its own crate's bodies and the linked libraries'.
+    census.rows = counted
+        .into_iter()
+        .filter_map(|(path, key, kappa)| {
+            let (_, e) = every.get(&key)?;
+            let mut unlinked: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+            for b in &e.bound {
+                unlinked
+                    .entry(unlinked_reason(b, krate, &own_modules, &linked_names))
+                    .or_default()
+                    .insert(b.clone());
+            }
+            Some(BodyFact {
+                path,
+                kappa,
+                embedded: crate::project::sha(e.term.as_bytes()),
+                blocked: e.blocked.iter().cloned().collect(),
+                open: match closure(&every, &key) {
+                    Reach::Closed(_) => None,
+                    Reach::Open { why, at } => Some((why, at)),
+                },
+                unlinked,
+            })
+        })
+        .collect();
     let program = Program {
         every,
         samples,
@@ -6437,6 +6619,71 @@ fn embed_linked(
 
 #[cfg(test)]
 mod tests {
+    // lift: a deep call chain embeds whatever the caller's stack.
+
+    #[test]
+    fn lift_a_deep_call_chain_embeds_on_a_stack_sized_for_it() {
+        let work = std::env::temp_dir().join(format!("uorust-embed-deep-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let fixture =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core/library");
+        let library = work.join("library");
+        let source = library.join("m/src");
+        std::fs::create_dir_all(&source).unwrap();
+        for k in ["core", "alloc", "std"] {
+            if fixture.join(k).exists() {
+                std::os::unix::fs::symlink(fixture.join(k), library.join(k)).unwrap();
+            }
+        }
+        std::fs::write(
+            library.join("m/Cargo.toml"),
+            "[package]\nname = \"m\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        // A chain of calls `f0` -> `f1` -> ... as deep as the walks nest.
+        let depth = 600;
+        let dumps = work.join("dumps");
+        let module = dumps.join(crate::registry::ROOT_MODULE);
+        std::fs::create_dir_all(&module).unwrap();
+        std::fs::write(
+            dumps.join("target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let mut lib = String::new();
+        for i in 0..depth {
+            let call = if i + 1 < depth {
+                format!("_0 = f{}(copy _1) -> [return: bb1, unwind continue];\n    }}\n\n    bb1: {{\n        return;", i + 1)
+            } else {
+                "_0 = copy _1;\n        return;".to_string()
+            };
+            std::fs::write(
+                module.join(format!("m.f{i}.2-2-009.ElaborateBoxDerefs.before.mir")),
+                format!("// MIR for `f{i}` before ElaborateBoxDerefs\n\nfn f{i}(_1: u32) -> u32 {{\n    let mut _0: u32;\n\n    bb0: {{\n        {call}\n    }}\n}}\n"),
+            )
+            .unwrap();
+            lib.push_str(&format!("pub fn f{i}(x: u32) -> u32 {{ x }}\n"));
+        }
+        std::fs::write(source.join("lib.rs"), lib).unwrap();
+        // Called from a thread whose stack the chain's walks overflow.
+        let census = std::thread::Builder::new()
+            .stack_size(1 << 18)
+            .spawn({
+                let (library, dumps, out) = (library.clone(), dumps.clone(), work.join("out"));
+                move || super::embed("m", &library, &dumps, &out, &[], &super::Outputs::default())
+            })
+            .unwrap()
+            .join()
+            .unwrap()
+            .expect("the embedding");
+        assert_eq!(census.bodies, depth);
+        assert_eq!(
+            census.rows.iter().filter(|r| r.open.is_none()).count(),
+            depth
+        );
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
     #[test]
@@ -6487,7 +6734,7 @@ mod tests {
         let text = "[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"old\"\nblocked = [\"CastKind::IntToFloat\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nembedded = \"old\"\nstatus = \"translated\"\ndigest = \"d\"\n";
         let (t, u) = (crate::project::sha(b"t"), crate::project::sha(b"u"));
         assert_eq!(
-            super::stamp_rows(text, &by_kappa),
+            super::stamp_rows(text, &by_kappa, &BTreeMap::new()),
             format!("[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"{t}\"\nblocked = [\"intrinsic fabs\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nembedded = \"{u}\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nstatus = \"translated\"\ndigest = \"d\"\n")
         );
     }

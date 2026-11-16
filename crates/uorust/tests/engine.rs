@@ -31,6 +31,7 @@ fn options(name: &str) -> Options {
         advisories: None,
         mir: None,
         limits: None,
+        embedding: None,
     }
 }
 
@@ -381,6 +382,7 @@ fn every_failure_is_a_typed_variant_ue_06() {
         advisories: None,
         mir: None,
         limits: None,
+        embedding: None,
     };
     assert!(matches!(
         uorust::project_workspace(&fixture(), &bad_stamp),
