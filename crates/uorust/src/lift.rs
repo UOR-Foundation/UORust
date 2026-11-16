@@ -1547,6 +1547,15 @@ impl Types {
             // atomic) is not read: it stays outside, the leaf of every
             // chain through it.
             ("Box", 1) => *arg(0)?,
+            // A cell another owner shares is changed through any owner,
+            // and every other sees the change: the alias is the leaf.
+            ("Rc" | "Arc", 1) if imported && self.cell_of(written[0]).is_some() => {
+                let kind = self.cell_of(written[0]).map_or("cell", |(k, _)| k.name());
+                return Err(Residue::Type(format!(
+                    "{}: a {kind} that another owner shares, which sees every change",
+                    t.text
+                )));
+            }
             ("Rc" | "Arc", 1) if imported => *arg(0)?,
             ("BTreeMap", 2) => Ty::Map(arg(0)?, arg(1)?, true),
             ("HashMap", 2) => Ty::Map(arg(0)?, arg(1)?, false),
@@ -14958,12 +14967,20 @@ mod tests {
         // A cell that changes behind a shared borrow is the leaf where
         // another owner shares it; a field that is a cell holds its content
         // (see `CellKind`).
-        assert_eq!(types.outside["Cellular"], "Cellular.inner: RefCell<u32>");
+        assert_eq!(
+            types.outside["Cellular"],
+            "Cellular.inner: Rc<RefCell<u32>>: a RefCell that another owner shares, which sees \
+             every change"
+        );
         assert_eq!(
             fields(&types, "Counted"),
             [field("hits", Ty::Nat(Some(32)))]
         );
-        assert_eq!(types.outside["Locked"], "Locked.state: Mutex<Vec<u8>>");
+        assert_eq!(
+            types.outside["Locked"],
+            "Locked.state: Arc<Mutex<Vec<u8>>>: a Mutex that another owner shares, which sees \
+             every change"
+        );
         // Another owner, and a new one, are the content.
         let out = lift(
             "fn again(s: &Shared) -> Arc<u32> { Arc::clone(&s.inner) }",
@@ -16021,8 +16038,12 @@ mod tests {
                 field("name", Ty::Str),
             ]
         );
-        // Another owner of the cell may change it: it stays the leaf.
-        assert_eq!(types.outside["Shared"], "Shared.inner: RefCell<u32>");
+        // Another owner of the cell may change it: the alias is the leaf.
+        assert_eq!(
+            types.outside["Shared"],
+            "Shared.inner: Rc<RefCell<u32>>: a RefCell that another owner shares, which sees \
+             every change"
+        );
         let out = lift(
             "fn size(m: &Model) -> usize { m.root.borrow().len() }",
             &types,
