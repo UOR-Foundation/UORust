@@ -202,15 +202,21 @@ certified-project:
     lexlean production targets --diagnostic-format json >crates/certified/targets.json
 
 # One export of the projection's roots, all of them or shard `I-N` (every Nth
-# from the Ith), kept in target/uorust-certified for `certified-sync`.
+# from the Ith), kept in target/uorust-certified for `certified-sync`. A root
+# the prior manifest certified at its identity (the root's closure, the
+# compiler, the descriptor, the project's configuration) is carried from
+# crates/certified byte for byte and never built again.
 certified-export shard="" within="":
     rm -rf target/uorust-certify target/uorust-certified
-    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
+    cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --carry crates/certified {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
 
 # The shards a sharded export builds within `budget` seconds each, and the
-# roots to diagnose, as JSON (certified.yml's plan job).
+# roots to diagnose, as JSON (certified.yml's plan job), with the counts of
+# roots carried, to build and refused. Without the self projection (the plan
+# job has none) no identity is known: `carried` is null and every root not
+# refused is planned as built.
 certified-plan budget:
-    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}}
+    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json || true`
 
 # Build one root alone and keep all lexlean prints of it in
 # target/certified-diagnose/build.log (certified.yml's diagnose job).

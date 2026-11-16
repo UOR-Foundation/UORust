@@ -331,29 +331,8 @@ pub fn plan(register: &Register, prior: &Manifest, budget: u64) -> (usize, Vec<S
 
 /// [`plan`] over the roots of any export.
 pub fn plan_of(all: &[Root], prior: &Manifest, budget: u64) -> (usize, Vec<String>) {
-    let refused = |r: &&Root| {
-        prior.refused.contains_key(&r.kappa) && !prior.refused[&r.kappa].starts_with(UNBUILT)
-    };
-    let to_build = all.iter().filter(|r| !refused(r)).count();
-    let per_root = prior
-        .seconds_per_root
-        .unwrap_or(MEASURED_SECONDS_PER_ROOT)
-        .max(1);
-    let per_shard = usize::try_from(budget / (per_root * BUILDS_PER_SHARD))
-        .unwrap_or(usize::MAX)
-        .clamp(1, MAX_ROOTS_PER_SHARD);
-    let shards = to_build.div_ceil(per_shard).clamp(1, MAX_SHARDS);
-    let diagnose = all
-        .iter()
-        .filter(|r| {
-            prior
-                .refused
-                .get(&r.kappa)
-                .is_some_and(|c| c.starts_with(ALONE) || c.starts_with("LLB6005"))
-        })
-        .map(|r| r.definition.clone())
-        .collect();
-    (shards, diagnose)
+    let plan = plan_keyed(all, None, prior, budget);
+    (plan.shards, plan.diagnose)
 }
 
 /// Build `root` alone in a production project at `out` and keep, in
@@ -569,6 +548,26 @@ impl Profile {
             .map(str::to_string)
             .ok_or_else(|| bad(format!("no {} descriptor", self.target)))
     }
+
+    /// The whole descriptor of the profile's target in `targets`, as JSON
+    /// text: its renderer and runtime digests with the rest, all of which a
+    /// root's identity binds.
+    fn descriptor_text(&self, targets: &str) -> Result<String, UorustError> {
+        let bad = |reason: String| UorustError::Malformed {
+            path: PathBuf::from("targets.json"),
+            reason,
+        };
+        let descriptors: serde_json::Value =
+            serde_json::from_str(targets).map_err(|e| bad(e.to_string()))?;
+        descriptors
+            .get("targets")
+            .and_then(|t| t.as_array())
+            .into_iter()
+            .flatten()
+            .find(|t| t.get("id").and_then(|i| i.as_str()) == Some(self.target.as_str()))
+            .map(serde_json::Value::to_string)
+            .ok_or_else(|| bad(format!("no {} descriptor", self.target)))
+    }
 }
 
 /// The file of `kept` that records the build seconds of every pass and the
@@ -638,6 +637,7 @@ struct Export {
     late: bool,
     seconds: u64,
     published: usize,
+    builds: usize,
 }
 
 /// What one build of a batch asks of the export next.
@@ -671,13 +671,24 @@ enum Outcome {
 /// still running are stopped and the roots not yet built are refused as
 /// [`UNBUILT`], so the export ends with what it published. The project and
 /// the build may live on a scratch volume.
+///
+/// A root whose identity ([`identities`], under `compiler`) the prior
+/// manifest holds as certified is carried: its package source is taken from
+/// `prior`'s source directories byte for byte, checked against the SHA-256
+/// the manifest records, and kept under [`CARRIED_DIR`] for `sync`; it is
+/// not built, so an export whose roots are all unchanged runs no build. A
+/// shard carries every Nth carried root from the Ith, as it builds every
+/// Nth of the rest.
 pub fn production_build(
     input: &Input<'_>,
     out: &Path,
     kept: &Path,
-    prior: &Manifest,
+    prior: &Prior<'_>,
+    compiler: &Compiler,
     scope: Scope,
-) -> Result<(), UorustError> {
+) -> Result<Exported, UorustError> {
+    let carry = prior;
+    let prior = prior.manifest;
     let Input {
         profile,
         projection,
@@ -695,8 +706,12 @@ pub fn production_build(
     let all = profile.export_roots(projection, register)?;
     // Refused before anything is written: no descriptor to export to.
     profile.descriptor(targets)?;
+    let version = compiler.version();
+    let ids = identities(input, &all, compiler)?;
+    let carried = carried(&all, &ids, carry)?;
+    let carried_names: BTreeSet<&str> = carried.iter().map(|c| c.definition.as_str()).collect();
     let mut compiler: BTreeMap<String, String> = BTreeMap::new();
-    if !prior.compiler.is_empty() && prior.compiler == compiler_version()? {
+    if !prior.compiler.is_empty() && prior.compiler == version {
         let by_kappa: BTreeMap<&str, &str> = all
             .iter()
             .map(|r| (r.kappa.as_str(), r.definition.as_str()))
@@ -708,6 +723,7 @@ pub fn production_build(
                 // A kernel rejection is carried only when the root was built
                 // alone: in a batch it can be the batch's, not the root's.
                 .filter(|_| !cause.starts_with(KERNEL))
+                .filter(|d| !carried_names.contains(**d))
                 .map(|d| ((*d).to_string(), cause.clone()))
         }));
     }
@@ -725,6 +741,27 @@ pub fn production_build(
         .collect();
     let path = kept.join(KAPPAS);
     std::fs::write(&path, measured).map_err(|e| io(&path, e))?;
+    // The identity each package is exported at, which the manifest keeps so
+    // that the next export carries the package while it is unchanged.
+    let identified: String = all
+        .iter()
+        .filter_map(|r| {
+            Some(format!(
+                "{} = \"{}\"\n",
+                r.package(),
+                ids.get(&r.definition)?
+            ))
+        })
+        .collect();
+    let path = kept.join(IDENTITIES);
+    std::fs::write(&path, identified).map_err(|e| io(&path, e))?;
+    let own_carried: Vec<&Carried> = carried
+        .iter()
+        .enumerate()
+        .filter(|(i, _)| shard.is_none_or(|(k, n)| i % n == k))
+        .map(|(_, c)| c)
+        .collect();
+    keep_carried(kept, &own_carried, &prior.result)?;
     // What the export is of, for the steps that take it in. The
     // translator's own is every step's default and is not restated.
     if *profile != Profile::default() {
@@ -739,6 +776,7 @@ pub fn production_build(
     )?;
     let eligible: Vec<String> = admitted
         .into_iter()
+        .filter(|r| !carried_names.contains(r.as_str()))
         .enumerate()
         .filter(|(i, _)| shard.is_none_or(|(k, n)| i % n == k))
         .map(|(_, r)| r)
@@ -751,9 +789,12 @@ pub fn production_build(
     for (i, root) in eligible.into_iter().enumerate() {
         batches[i % count].push(root);
     }
+    batches.retain(|b| !b.is_empty());
     batches.reverse();
     eprintln!(
-        "certify production: {} batches on {workers} workers, {} roots refused before any build",
+        "certify production: {} roots carried from the prior export, {} to build in {} batches on {workers} workers, {} roots refused before any build",
+        own_carried.len(),
+        batches.iter().map(Vec::len).sum::<usize>(),
         batches.len(),
         compiler.len()
     );
@@ -797,6 +838,9 @@ pub fn production_build(
                 s.busy -= 1;
                 let seconds = started.elapsed().as_secs();
                 s.seconds += seconds;
+                if matches!(outcome, Ok((_, Some(_)))) {
+                    s.builds += 1;
+                }
                 match outcome {
                     Ok((_, None)) => {}
                     Ok((named, Some(Outcome::Bundle(bundle)))) => {
@@ -896,15 +940,29 @@ pub fn production_build(
     let refusals = last.join(REFUSALS);
     std::fs::copy(&refusals, kept.join(REFUSALS)).map_err(|e| io(&refusals, e))?;
     let timing = kept.join(TIMING);
-    let text = format!("seconds = {}\nroots = {}\n", s.seconds, s.published);
+    // An export that built nothing measured nothing: it keeps the prior
+    // export's figure, which the next export sizes its shards by.
+    let (seconds, roots) = match (s.published, prior.seconds_per_root) {
+        (0, Some(per_root)) => (per_root, 1),
+        _ => (s.seconds, u64::try_from(s.published).unwrap_or(u64::MAX)),
+    };
+    let text = format!("seconds = {seconds}\nroots = {roots}\n");
     std::fs::write(&timing, text).map_err(|e| io(&timing, e))?;
+    // Builds are the passes that reached `lexlean production build`: a
+    // batch every root of which was refused before is no build.
     eprintln!(
-        "certify production: {} bundles in {} passes, {} roots refused by the compiler",
+        "certify production: {} roots carried, {} bundles in {} passes, {} roots refused by the compiler",
+        own_carried.len(),
         s.bundles,
         s.passes,
         s.compiler.len()
     );
-    Ok(())
+    Ok(Exported {
+        carried: own_carried.len(),
+        built: s.published,
+        builds: s.builds,
+        refused: s.compiler.len(),
+    })
 }
 
 /// What every build of an export reads: the projection, the register, the
@@ -999,16 +1057,458 @@ fn build_batch(
 
 /// The LexLean compiler's version, as `lexlean --version` states it.
 fn compiler_version() -> Result<String, UorustError> {
-    let run = std::process::Command::new("lexlean")
-        .arg("--version")
-        .output()
-        .map_err(|e| UorustError::Tool(format!("lexlean --version: {e}")))?;
-    Ok(String::from_utf8_lossy(&run.stdout)
-        .lines()
-        .next()
-        .and_then(|l| l.split_whitespace().nth(1))
-        .unwrap_or_default()
-        .to_string())
+    Ok(Compiler::installed()?.version())
+}
+
+/// The compiler an export builds with: every line `lexlean --version`
+/// prints. Its version alone is not the compiler: two builds of one version
+/// can differ in their compiler semantics (the digest `lexlean --version`
+/// states on its own line, which the lock and the result bind, SPEC §21.2,
+/// §24.7) or in the Lean toolchain, and either changes what a build emits.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Compiler(pub String);
+
+impl Compiler {
+    /// The compiler on the path.
+    pub fn installed() -> Result<Compiler, UorustError> {
+        let run = std::process::Command::new("lexlean")
+            .arg("--version")
+            .output()
+            .map_err(|e| UorustError::Tool(format!("lexlean --version: {e}")))?;
+        Ok(Compiler(String::from_utf8_lossy(&run.stdout).into_owned()))
+    }
+
+    /// The version the manifest records: the second word of the first line.
+    pub fn version(&self) -> String {
+        self.0
+            .lines()
+            .next()
+            .and_then(|l| l.split_whitespace().nth(1))
+            .unwrap_or_default()
+            .to_string()
+    }
+}
+
+/// The domain tag of a root's export identity ([`identities`]).
+pub const IDENTITY: &str = "uorust/certified-root/1";
+
+/// The file of `kept` that records the identity each root's package was
+/// exported at, by package, so that the manifest keeps it for the next export.
+pub const IDENTITIES: &str = "identities.toml";
+
+/// The file of `kept` that lists the packages an export carried from the
+/// prior one; their sources are kept beside it under [`CARRIED_DIR`].
+pub const CARRIED: &str = "carried.toml";
+
+/// The directory of `kept` that holds each carried package's `src/lib.rs`,
+/// as `<package>.rs`.
+pub const CARRIED_DIR: &str = "carried";
+
+/// A module's text read for an identity: its frame (every non-blank line
+/// outside a top-level declaration, in order) and each top-level
+/// declaration (a definition, structure, inductive, theorem, any `kind{..}`
+/// block) by name, with its text. Blank lines and the order of declarations
+/// are left out: they are not what a declaration means, and inserting a
+/// declaration moves every other one.
+fn declarations(source: &str) -> (Vec<String>, BTreeMap<String, String>) {
+    let mut frame = Vec::new();
+    let mut decls: BTreeMap<String, String> = BTreeMap::new();
+    let mut open: Option<(Option<String>, String)> = None;
+    let starts = |line: &str| {
+        line.split_once('{').is_some_and(|(kind, _)| {
+            !kind.is_empty() && kind.chars().all(|c| c.is_ascii_lowercase() || c == '_')
+        })
+    };
+    let mut close = |name: Option<String>, text: String, frame: &mut Vec<String>| match name {
+        Some(name) => decls.entry(name).or_default().push_str(&text),
+        None => frame.extend(text.lines().map(str::to_string)),
+    };
+    for line in source.lines() {
+        if let Some((name, text)) = open.as_mut() {
+            if name.is_none() {
+                *name = line
+                    .strip_prefix("  name: ")
+                    .and_then(|n| n.strip_suffix(','))
+                    .map(str::to_string);
+            }
+            text.push_str(line);
+            text.push('\n');
+            if line == "}" {
+                let (name, text) = open.take().unwrap_or_default();
+                close(name, text, &mut frame);
+            }
+            continue;
+        }
+        if !starts(line) {
+            if !line.trim().is_empty() {
+                frame.push(line.to_string());
+            }
+            continue;
+        }
+        let one_line = line.ends_with('}');
+        let name = line
+            .split_once("{name: ")
+            .and_then(|(_, rest)| rest.split([',', '}']).next())
+            .map(str::to_string);
+        if one_line {
+            close(name, format!("{line}\n"), &mut frame);
+        } else {
+            open = Some((name, format!("{line}\n")));
+        }
+    }
+    if let Some((name, text)) = open {
+        close(name, text, &mut frame);
+    }
+    (frame, decls)
+}
+
+/// The files of a projection outside its modules that a build reads, by
+/// project-relative path, with their SHA-256: `lexlean.toml`; the workspace
+/// files its lock binds (`[[workspace_file]]` of the lock it names, the Lake
+/// files and the Lean toolchain); and every file of each lexicon source it
+/// reads from a path. The builtin lexicons are the compiler's own and are
+/// bound by its semantics ([`Compiler`]). A listed file that is absent is
+/// stated absent, so that its appearing changes the identity too.
+fn project_files(projection: &Path) -> Result<Vec<(String, String)>, UorustError> {
+    let config_path = projection.join("lexlean.toml");
+    let config_text = std::fs::read_to_string(&config_path).map_err(|e| io(&config_path, e))?;
+    let config: toml::Value = config_text.parse().map_err(|e| UorustError::Malformed {
+        path: config_path.clone(),
+        reason: format!("{e}"),
+    })?;
+    let mut files: BTreeSet<String> = ["lexlean.toml".to_string()].into_iter().collect();
+    let lock = config
+        .get("lockfile")
+        .and_then(toml::Value::as_str)
+        .unwrap_or("lexlean.lock");
+    if let Ok(text) = std::fs::read_to_string(projection.join(lock)) {
+        if let Ok(doc) = text.parse::<toml::Value>() {
+            files.extend(
+                doc.get("workspace_file")
+                    .and_then(toml::Value::as_array)
+                    .into_iter()
+                    .flatten()
+                    .filter_map(|f| f.get("path")?.as_str().map(str::to_string)),
+            );
+        }
+    }
+    for source in config
+        .get("lexicon_source")
+        .and_then(toml::Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter(|s| s.get("kind").and_then(toml::Value::as_str) == Some("path"))
+    {
+        let Some(dir) = source.get("path").and_then(toml::Value::as_str) else {
+            continue;
+        };
+        let root = projection.join(dir);
+        if root.is_dir() {
+            let mut found = Vec::new();
+            tree_files(projection, &root, &mut found)?;
+            files.extend(found.into_iter().map(|(rel, _)| rel));
+        } else {
+            files.insert(dir.to_string());
+        }
+    }
+    files
+        .into_iter()
+        .map(|rel| {
+            let path = projection.join(&rel);
+            let digest = match std::fs::read(&path) {
+                Ok(bytes) => crate::project::sha(&bytes),
+                Err(e) if e.kind() == std::io::ErrorKind::NotFound => "absent".to_string(),
+                Err(e) => return Err(io(&path, e)),
+            };
+            Ok((rel, digest))
+        })
+        .collect()
+}
+
+/// The identity of each root's export, by definition: the SHA-256 of the
+/// text below, which states once everything the root's package source is a
+/// function of.
+///
+/// ```text
+/// uorust/certified-root/1
+/// compiler <line>                one per line of `lexlean --version`
+/// target <id> <sha256>           the profile's target descriptor, as JSON
+/// effects <effect> ..            the effects every root admits
+/// file <sha256> <path>           one per file of [`project_files`]
+/// frame <module> <sha256>        Behavior's and Prelude's lines outside declarations
+/// module <module> <sha256>       any other module either imports, whole
+/// package <name> <version>       the package the request names
+/// root <prefix>.Behavior.<name>  the production root
+/// declaration <Module::name> <sha256>   one per declaration of the closure
+/// ```
+///
+/// The closure is the root's declaration and every declaration of Behavior
+/// and Prelude its text reaches, definitions and the types they name alike,
+/// by the same reading of names as [`Definitions::closure`]: a callee is in
+/// it, so a change in a callee changes the identity although the root's own
+/// κ (its Rust function's) does not change. What the closure leaves out does
+/// not reach the package: the compiler renders a root's package from its
+/// verified lowered program alone (SPEC §24.7, "the renderer of §17.16 over
+/// the verified lowered program"), and `sync` takes only its `src/lib.rs`,
+/// not the manifests that bind the whole project's semantic identity. The
+/// batch a root is built in is no input either: a request names roots, and
+/// each package is rendered for its own root.
+pub fn identities(
+    input: &Input<'_>,
+    roots: &[Root],
+    compiler: &Compiler,
+) -> Result<BTreeMap<String, String>, UorustError> {
+    let Input {
+        profile,
+        projection,
+        targets,
+        ..
+    } = *input;
+    let prefix = module_prefix(projection)?;
+    let modules = modules(projection)?;
+    let mut shared = format!("{IDENTITY}\n");
+    for line in compiler.0.lines() {
+        shared.push_str(&format!("compiler {line}\n"));
+    }
+    let descriptor = profile.descriptor_text(targets)?;
+    shared.push_str(&format!(
+        "target {} {}\n",
+        profile.target,
+        crate::project::sha(descriptor.as_bytes())
+    ));
+    shared.push_str(&format!("effects {}\n", profile.effects.join(" ")));
+    for (path, digest) in project_files(projection)? {
+        shared.push_str(&format!("file {digest} {path}\n"));
+    }
+    let mut all: BTreeMap<String, String> = BTreeMap::new();
+    let mut imported: BTreeSet<String> = BTreeSet::new();
+    for (module, text) in &modules {
+        let (frame, decls) = declarations(text);
+        let frame = frame.join("\n");
+        shared.push_str(&format!(
+            "frame {module} {}\n",
+            crate::project::sha(frame.as_bytes())
+        ));
+        imported.extend(
+            frame
+                .lines()
+                .filter_map(|l| l.strip_prefix("\\importmodule{")?.strip_suffix('}'))
+                .filter(|m| !modules.contains_key(*m))
+                .map(str::to_string),
+        );
+        all.extend(
+            decls
+                .into_iter()
+                .map(|(n, t)| (format!("{module}::{n}"), t)),
+        );
+    }
+    for module in imported {
+        let path = projection
+            .join("src")
+            .join(format!("{}.lex.tex", module.replace('.', "/")));
+        let digest = match std::fs::read(&path) {
+            Ok(bytes) => crate::project::sha(&bytes),
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => "absent".to_string(),
+            Err(e) => return Err(io(&path, e)),
+        };
+        shared.push_str(&format!("module {module} {digest}\n"));
+    }
+    let declarations = Definitions(all);
+    let mut out = BTreeMap::new();
+    for root in roots {
+        let mut text = shared.clone();
+        text.push_str(&format!("package {} {PACKAGE_VERSION}\n", root.package()));
+        text.push_str(&format!("root {prefix}.{BEHAVIOR}.{}\n", root.definition));
+        for d in declarations.closure(&format!("{BEHAVIOR}::{}", root.definition)) {
+            let body = declarations.text(&d).unwrap_or_default();
+            text.push_str(&format!(
+                "declaration {d} {}\n",
+                crate::project::sha(body.as_bytes())
+            ));
+        }
+        out.insert(
+            root.definition.clone(),
+            crate::project::sha(text.as_bytes()),
+        );
+    }
+    Ok(out)
+}
+
+/// What an export takes from the one before it: its manifest, and the
+/// directories that hold its packages' sources in a certified crate's layout
+/// (`<dir>/roots/<package>.rs`), searched in order.
+#[derive(Clone, Copy, Debug)]
+pub struct Prior<'a> {
+    /// The manifest of the last export.
+    pub manifest: &'a Manifest,
+    /// Where its package sources are.
+    pub sources: &'a [PathBuf],
+}
+
+/// A root an export takes from the prior export without a build.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Carried {
+    /// The definition.
+    pub definition: String,
+    /// Its package.
+    pub package: String,
+    /// The identity it was exported at, which is this export's too.
+    pub identity: String,
+    /// The SHA-256 of the package's `src/lib.rs`, as the prior manifest
+    /// records it.
+    pub source: String,
+    /// The kernel's status of its certificates, as the prior manifest
+    /// records it.
+    pub certification: String,
+    /// The package's `src/lib.rs`.
+    pub bytes: Vec<u8>,
+}
+
+/// The roots of `roots` the prior export certified at the identity `ids`
+/// states for them, with their package sources: a root is carried only when
+/// the prior manifest has a root of the same package at that identity and a
+/// source directory holds a file whose SHA-256 is the one the manifest
+/// records, so what is carried is byte for byte what the prior build
+/// published. Any other root is built.
+pub fn carried(
+    roots: &[Root],
+    ids: &BTreeMap<String, String>,
+    prior: &Prior<'_>,
+) -> Result<Vec<Carried>, UorustError> {
+    let mut out = Vec::new();
+    for root in roots {
+        let Some(id) = ids.get(&root.definition) else {
+            continue;
+        };
+        let package = root.package();
+        let Some(was) = prior
+            .manifest
+            .roots
+            .iter()
+            .find(|c| c.package == package && c.identity.as_deref() == Some(id.as_str()))
+        else {
+            continue;
+        };
+        for dir in prior.sources {
+            let path = dir.join("roots").join(format!("{package}.rs"));
+            let bytes = match std::fs::read(&path) {
+                Ok(bytes) => bytes,
+                Err(e) if e.kind() == std::io::ErrorKind::NotFound => continue,
+                Err(e) => return Err(io(&path, e)),
+            };
+            if crate::project::sha(&bytes) != was.source {
+                continue;
+            }
+            out.push(Carried {
+                definition: root.definition.clone(),
+                package: package.clone(),
+                identity: id.clone(),
+                source: was.source.clone(),
+                certification: was.certification.clone(),
+                bytes,
+            });
+            break;
+        }
+    }
+    Ok(out)
+}
+
+/// What an export is left to do: the shards that build it within a budget,
+/// the roots to diagnose, and the counts of roots carried from the prior
+/// export (`None` when no identity was computed, so nothing could be
+/// carried), left to build, and refused before any build.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct Plan {
+    /// Shards.
+    pub shards: usize,
+    /// Roots whose compiler refusal is kept in full.
+    pub diagnose: Vec<String>,
+    /// Roots carried, when identities were computed.
+    pub carried: Option<usize>,
+    /// Roots left to build.
+    pub build: usize,
+    /// Roots the prior export refused.
+    pub refused: usize,
+}
+
+/// [`plan_of`] that leaves out the roots `carried` names (by definition):
+/// only what is left to build is sharded.
+pub fn plan_keyed(
+    all: &[Root],
+    carried: Option<&BTreeSet<String>>,
+    prior: &Manifest,
+    budget: u64,
+) -> Plan {
+    let refused = |r: &Root| {
+        prior.refused.contains_key(&r.kappa) && !prior.refused[&r.kappa].starts_with(UNBUILT)
+    };
+    let is_carried = |r: &Root| carried.is_some_and(|c| c.contains(&r.definition));
+    let left: Vec<&Root> = all
+        .iter()
+        .filter(|r| !is_carried(r) && !refused(r))
+        .collect();
+    let per_root = prior
+        .seconds_per_root
+        .unwrap_or(MEASURED_SECONDS_PER_ROOT)
+        .max(1);
+    let per_shard = usize::try_from(budget / (per_root * BUILDS_PER_SHARD))
+        .unwrap_or(usize::MAX)
+        .clamp(1, MAX_ROOTS_PER_SHARD);
+    let shards = left.len().div_ceil(per_shard).clamp(1, MAX_SHARDS);
+    let diagnose = all
+        .iter()
+        .filter(|r| !is_carried(r))
+        .filter(|r| {
+            prior
+                .refused
+                .get(&r.kappa)
+                .is_some_and(|c| c.starts_with(ALONE) || c.starts_with("LLB6005"))
+        })
+        .map(|r| r.definition.clone())
+        .collect();
+    Plan {
+        shards,
+        diagnose,
+        carried: carried.map(|_| all.iter().filter(|r| is_carried(r)).count()),
+        build: left.len(),
+        refused: all.iter().filter(|r| !is_carried(r) && refused(r)).count(),
+    }
+}
+
+/// What one export did: the roots it carried, the roots it published by a
+/// build, the builds it ran, and the roots refused by the end.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct Exported {
+    /// Roots carried from the prior export.
+    pub carried: usize,
+    /// Roots published by this export's builds.
+    pub built: usize,
+    /// Builds run (`lexlean production build` invocations).
+    pub builds: usize,
+    /// Roots refused.
+    pub refused: usize,
+}
+
+/// Write what an export carried under `kept`: [`CARRIED`] with one row per
+/// package and the prior export's result ids, and each package's source
+/// under [`CARRIED_DIR`].
+fn keep_carried(kept: &Path, carried: &[&Carried], results: &str) -> Result<(), UorustError> {
+    let dir = kept.join(CARRIED_DIR);
+    std::fs::create_dir_all(&dir).map_err(|e| io(&dir, e))?;
+    let mut text = format!("results = {}\n", toml_quoted(results));
+    for c in carried {
+        let path = dir.join(format!("{}.rs", c.package));
+        std::fs::write(&path, &c.bytes).map_err(|e| io(&path, e))?;
+        text.push_str(&format!(
+            "\n[[carried]]\npackage = \"{}\"\nidentity = \"{}\"\nsource = \"{}\"\ncertification = {}\n",
+            c.package,
+            c.identity,
+            c.source,
+            toml_quoted(&c.certification)
+        ));
+    }
+    let path = kept.join(CARRIED);
+    std::fs::write(&path, text).map_err(|e| io(&path, e))
 }
 
 /// Keep what [`sync`] reads of a bundle under `to`: its `result.json` and
@@ -1400,6 +1900,10 @@ pub struct Certified {
     pub source: String,
     /// The kernel's status of its certificates.
     pub certification: String,
+    /// The identity its package was exported at ([`identities`]); a
+    /// manifest written before identities has none, and its roots are built
+    /// again by the next export.
+    pub identity: Option<String>,
 }
 
 /// The certified translator: the bundle it came from, its roots, and the
@@ -1488,6 +1992,10 @@ impl Manifest {
                 package: text_of(row, "package")?,
                 source: text_of(row, "source")?,
                 certification: text_of(row, "certification")?,
+                identity: row
+                    .get("identity")
+                    .and_then(toml::Value::as_str)
+                    .map(str::to_string),
             });
         }
         let mut refused = BTreeMap::new();
@@ -1584,6 +2092,9 @@ impl Manifest {
             out.push_str(&format!("package = \"{}\"\n", r.package));
             out.push_str(&format!("source = \"{}\"\n", r.source));
             out.push_str(&format!("certification = \"{}\"\n", r.certification));
+            if let Some(identity) = &r.identity {
+                out.push_str(&format!("identity = \"{identity}\"\n"));
+            }
         }
         for (kappa, cause) in &self.refused {
             out.push_str("\n[[refused]]\n");
@@ -1667,12 +2178,18 @@ pub(crate) fn sync(
         ));
     }
     let mut measured: Option<toml::Table> = None;
+    let mut identified = toml::Table::new();
     let mut all = Vec::new();
     for k in &outputs {
         let kappas = k.join(KAPPAS);
         if let Ok(text) = std::fs::read_to_string(&kappas) {
             let table: toml::Table = text.parse().map_err(|e| bad(&kappas, format!("{e}")))?;
             measured.get_or_insert_with(toml::Table::new).extend(table);
+        }
+        let ids = k.join(IDENTITIES);
+        if let Ok(text) = std::fs::read_to_string(&ids) {
+            let table: toml::Table = text.parse().map_err(|e| bad(&ids, format!("{e}")))?;
+            identified.extend(table);
         }
         all.extend(bundles(k)?);
     }
@@ -1755,11 +2272,74 @@ pub(crate) fn sync(
                     function: own.function.clone(),
                     kappa: own.kappa.clone(),
                     definition: own.definition.clone(),
+                    identity: identified
+                        .get(&name)
+                        .and_then(toml::Value::as_str)
+                        .map(str::to_string),
                     package: name,
                     source: digest,
                     certification: field(output, &["certification", "status"]),
                 });
             }
+        }
+    }
+    let mut carried_results: Vec<String> = Vec::new();
+    for k in &outputs {
+        let list = k.join(CARRIED);
+        let Ok(text) = std::fs::read_to_string(&list) else {
+            continue;
+        };
+        let doc: toml::Value = text.parse().map_err(|e| bad(&list, format!("{e}")))?;
+        let rows = doc.get("carried").and_then(toml::Value::as_array);
+        if rows.is_some_and(|r| !r.is_empty()) {
+            carried_results.extend(
+                doc.get("results")
+                    .and_then(toml::Value::as_str)
+                    .unwrap_or_default()
+                    .split_whitespace()
+                    .map(str::to_string),
+            );
+        }
+        for row in rows.into_iter().flatten() {
+            let text_of = |key: &str| {
+                row.get(key)
+                    .and_then(toml::Value::as_str)
+                    .map(str::to_string)
+                    .ok_or_else(|| bad(&list, format!("a carried package without {key}")))
+            };
+            let name = text_of("package")?;
+            let Some(own) = by_package.get(&name) else {
+                continue;
+            };
+            // As a built package: taken only while its function is the one
+            // exported, and once.
+            if measured.as_ref().is_some_and(|m| {
+                m.get(&name).and_then(toml::Value::as_str) != Some(own.kappa.as_str())
+            }) || certified.iter().any(|c| c.package == name)
+            {
+                continue;
+            }
+            let recorded = text_of("source")?;
+            let source_path = k.join(CARRIED_DIR).join(format!("{name}.rs"));
+            let bytes = std::fs::read(&source_path).map_err(|e| io(&source_path, e))?;
+            let digest = crate::project::sha(&bytes);
+            if digest != recorded {
+                return Err(bad(
+                    &source_path,
+                    format!("SHA-256 {digest}, the prior manifest records {recorded}"),
+                ));
+            }
+            let target = roots_dir.join(format!("{name}.rs"));
+            std::fs::write(&target, &bytes).map_err(|e| io(&target, e))?;
+            certified.push(Certified {
+                function: own.function.clone(),
+                kappa: own.kappa.clone(),
+                definition: own.definition.clone(),
+                package: name,
+                source: digest,
+                certification: text_of("certification")?,
+                identity: Some(text_of("identity")?),
+            });
         }
     }
     certified.sort_by(|a, b| a.package.cmp(&b.package));
@@ -1836,11 +2416,20 @@ pub(crate) fn sync(
     refused.retain(|kappa, _| !kappas.contains(kappa));
     let manifest = Manifest {
         refused,
-        result: results
-            .iter()
-            .map(|(_, _, r)| field(r, &["result_id"]))
-            .collect::<Vec<_>>()
-            .join(" "),
+        // The bundles this export published, then those the carried
+        // packages were published in.
+        result: {
+            let mut ids: Vec<String> = results
+                .iter()
+                .map(|(_, _, r)| field(r, &["result_id"]))
+                .collect();
+            for id in carried_results {
+                if !ids.contains(&id) {
+                    ids.push(id);
+                }
+            }
+            ids.join(" ")
+        },
         // As `lexlean --version` states it, which the next export compares
         // its own against: a manifest of no bundle has it too.
         compiler: compiler.to_string(),
@@ -2764,6 +3353,7 @@ mod tests {
             package: "uorust_certified_implication".into(),
             source: "s".into(),
             certification: "kernel-checked".into(),
+            identity: None,
         };
         let body = IrBody {
             arity: 2,
@@ -2875,6 +3465,7 @@ mod tests {
                 package: "uorust_certified_a".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
+                identity: None,
             }],
             ..Manifest::default()
         };
@@ -2952,6 +3543,7 @@ mod tests {
                 package: "uorust_certified_binop".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
+                identity: None,
             }],
             share: Share {
                 translator: 3,
@@ -3121,6 +3713,7 @@ mod tests {
             package: "meter_certified_read".into(),
             source: "s".into(),
             certification: "kernel-checked".into(),
+            identity: None,
         };
         let body = IrBody {
             arity: 2,
@@ -3378,6 +3971,7 @@ mod tests {
                 package: "meter_certified_read".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
+                identity: None,
             }],
             ..Manifest::default()
         };
@@ -3507,6 +4101,506 @@ mod tests {
                 ("LLT4005 phase production: production root `_` is not eligible for target `rust-std`: effect mismatch: construct `prim append` realizes effect `allocation`, which the root does not admit".to_string(), 2),
                 ("reaches _ a definition with a function parameter, which no production root may".to_string(), 1),
             ]
+        );
+    }
+
+    // Class: keyed. A certified root is never built twice: its export's
+    // identity states everything its package is a function of, and an export
+    // carries every root the prior manifest certified at its identity.
+
+    const KEYED_BEHAVIOR: &str = "\\begin{lexlean}{Behavior}\n\\importmodule{Prelude}\n\\begin{semanticmodule}\nstructure{\n  name: Reading,\n  type_parameters: [],\n  parameters: [],\n  fields: [{name: value, type: Nat}]\n}\n\ndefinition{\n  name: helper,\n  parameters: [x : Nat],\n  result: Nat,\n  body: x\n}\n\ndefinition{\n  name: read,\n  parameters: [r : Reading],\n  result: Nat,\n  body: helper (Prelude::unit r.value)\n}\n\ndefinition{name: scale, parameters: [x : Nat], result: Nat, body: x}\n\ndefinition{name: spare, parameters: [x : Nat], result: Nat, body: x}\n\\end{semanticmodule}\n\\end{lexlean}\n";
+
+    const KEYED_PRELUDE: &str = "\\begin{lexlean}{Prelude}\n\\begin{semanticmodule}\ndefinition{name: unit, parameters: [x : Nat], result: Nat, body: x}\n\\end{semanticmodule}\n\\end{lexlean}\n";
+
+    const KEYED_COMPILER: &str = "lexlean 0.4.0\nlanguage 1.0\ncompiler-semantics aaaa\nlean-toolchain leanprover/lean4:v4.32.1\n";
+
+    fn keyed_targets(runtime: &str) -> String {
+        format!(
+            "{{\"targets\":[{{\"id\":\"rust-std\",\"digest\":\"d1\",\"runtime\":\"{runtime}\"}},{{\"id\":\"rust-core\",\"digest\":\"d2\",\"runtime\":\"r2\"}}]}}"
+        )
+    }
+
+    /// A projection of two roots, `read` (which reaches `helper`, the
+    /// structure `Reading` and Prelude's `unit`) and `scale` (which reaches
+    /// nothing), with the configuration files a build reads.
+    fn keyed_projection(dir: &Path, behavior: &str, prelude: &str) {
+        let write = |rel: &str, text: &str| {
+            let path = dir.join(rel);
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+            std::fs::write(path, text).expect("a file");
+        };
+        write(
+            "lexlean.toml",
+            "spec = \"lexlean/project/1\"\nname = \"meter\"\nmodule_prefix = \"Meter\"\nlockfile = \"lexlean.lock\"\n\n[[lexicon_source]]\npackage = \"meter.words\"\nkind = \"path\"\npath = \"language/meter.words\"\n",
+        );
+        write(
+            "lexlean.lock",
+            "spec = \"lexlean/lock/2\"\n\n[[workspace_file]]\npath = \"lakefile.toml\"\nsha256 = \"x\"\n",
+        );
+        write("lakefile.toml", "name = \"Meter\"\n");
+        write("language/meter.words/glossary.toml", "words = 1\n");
+        write("frontier.toml", "# the register, which no build reads\n");
+        write("src/Behavior.lex.tex", behavior);
+        write("src/Prelude.lex.tex", prelude);
+    }
+
+    fn keyed_register() -> Register {
+        register(&[
+            ("k1", "meter::read", Status::Lifted("Behavior::read".into())),
+            (
+                "k2",
+                "meter::scale",
+                Status::Lifted("Behavior::scale".into()),
+            ),
+        ])
+    }
+
+    fn keyed_profile() -> Profile {
+        Profile {
+            target: TARGET.to_string(),
+            ..meter()
+        }
+    }
+
+    /// The identities of the two roots of a projection written with these
+    /// texts, under this compiler and these descriptors.
+    fn keyed_ids(
+        tmp: &Path,
+        name: &str,
+        behavior: &str,
+        prelude: &str,
+        compiler: &str,
+        targets: &str,
+    ) -> BTreeMap<String, String> {
+        let dir = tmp.join(name);
+        keyed_projection(&dir, behavior, prelude);
+        let (profile, register) = (keyed_profile(), keyed_register());
+        let input = Input {
+            profile: &profile,
+            projection: &dir,
+            register: &register,
+            targets,
+        };
+        identities(
+            &input,
+            &profile.roots(&register),
+            &Compiler(compiler.into()),
+        )
+        .expect("identities")
+    }
+
+    /// A prior manifest that certifies each root at its identity, and the
+    /// source directory that holds each package as a certified crate does.
+    fn keyed_prior(sources: &Path, ids: &BTreeMap<String, String>) -> Manifest {
+        let profile = keyed_profile();
+        let mut roots = Vec::new();
+        for root in profile.roots(&keyed_register()) {
+            let bytes = format!("pub fn run() -> u64 {{ {} }}\n", root.definition.len());
+            let path = sources.join("roots").join(format!("{}.rs", root.package()));
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("roots");
+            std::fs::write(&path, &bytes).expect("a source");
+            roots.push(Certified {
+                function: root.function.clone(),
+                kappa: root.kappa.clone(),
+                definition: root.definition.clone(),
+                package: root.package(),
+                source: crate::project::sha(bytes.as_bytes()),
+                certification: "kernel-checked".into(),
+                identity: ids.get(&root.definition).cloned(),
+            });
+        }
+        Manifest {
+            result: "r-prior".into(),
+            compiler: "0.4.0".into(),
+            roots,
+            seconds_per_root: Some(7),
+            ..Manifest::default()
+        }
+    }
+
+    // The planted defects: an export that builds the roots it carries runs
+    // `lexlean` (absent here) and fails; a sync that drops the carried
+    // packages certifies nothing; a manifest that loses the identity carries
+    // nothing the next time.
+    #[test]
+    fn keyed_an_unchanged_root_is_carried_byte_for_byte_and_never_built() {
+        let tmp = scratch("keyed-carry");
+        let targets = keyed_targets("r1");
+        let ids = keyed_ids(
+            &tmp,
+            "p",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            KEYED_COMPILER,
+            &targets,
+        );
+        let sources = tmp.join("prior");
+        let manifest = keyed_prior(&sources, &ids);
+        let (profile, register) = (keyed_profile(), keyed_register());
+        let projection = tmp.join("p");
+        let input = Input {
+            profile: &profile,
+            projection: &projection,
+            register: &register,
+            targets: &targets,
+        };
+        let export = |manifest: &Manifest, sources: &[PathBuf], kept: &Path| {
+            production_build(
+                &input,
+                &tmp.join("out"),
+                kept,
+                &Prior { manifest, sources },
+                &Compiler(KEYED_COMPILER.into()),
+                Scope::default(),
+            )
+        };
+        let kept = tmp.join("kept");
+        let done = export(&manifest, std::slice::from_ref(&sources), &kept).expect("an export");
+        assert_eq!(
+            done,
+            Exported {
+                carried: 2,
+                built: 0,
+                builds: 0,
+                refused: 0
+            }
+        );
+        let dir = tmp.join("certified");
+        let synced = sync(
+            &profile,
+            &Sync {
+                kept: &kept,
+                dir: &dir,
+                register: &register,
+                projection: None,
+                adapters: None,
+                mir: None,
+            },
+            &profile.roots(&register),
+            None,
+            "0.4.0",
+        )
+        .expect("a sync");
+        assert_eq!(
+            synced.kappas(),
+            ["k1", "k2"].map(String::from).into_iter().collect()
+        );
+        for root in &synced.roots {
+            let prior = std::fs::read(sources.join("roots").join(format!("{}.rs", root.package)));
+            let now = std::fs::read(dir.join("roots").join(format!("{}.rs", root.package)));
+            assert_eq!(
+                prior.expect("the prior source"),
+                now.expect("the carried source")
+            );
+            assert_eq!(root.identity, ids.get(&root.definition).cloned());
+        }
+        assert_eq!(synced.result, "r-prior");
+        // The figure the shards are sized by survives an export that built
+        // nothing.
+        assert_eq!(synced.seconds_per_root, Some(7));
+        let text = std::fs::read_to_string(dir.join("manifest.toml")).expect("the manifest");
+        assert_eq!(
+            Manifest::parse(&dir.join("manifest.toml"), &text).as_ref(),
+            Ok(&synced)
+        );
+        // A steady export: the synced manifest is the next prior, its crate
+        // the next source, and again nothing is built.
+        let again = export(&synced, std::slice::from_ref(&dir), &tmp.join("kept2"))
+            .expect("a steady export");
+        assert_eq!((again.carried, again.builds), (2, 0));
+        // A source that is not the one the manifest records is not carried:
+        // the export then builds it, and finds no compiler here.
+        std::fs::write(
+            sources.join("roots").join("meter_certified_scale.rs"),
+            "pub fn run() -> u64 { 0 }\n",
+        )
+        .expect("plant");
+        let found = carried(
+            &profile.roots(&register),
+            &ids,
+            &Prior {
+                manifest: &manifest,
+                sources: std::slice::from_ref(&sources),
+            },
+        )
+        .expect("carried");
+        assert_eq!(
+            found
+                .iter()
+                .map(|c| c.definition.as_str())
+                .collect::<Vec<_>>(),
+            ["read"]
+        );
+        assert!(export(
+            &manifest,
+            std::slice::from_ref(&sources),
+            &tmp.join("kept3")
+        )
+        .is_err());
+        // A carried source changed after the export is refused by the sync.
+        std::fs::write(kept.join(CARRIED_DIR).join("meter_certified_read.rs"), "x").expect("plant");
+        let refused = sync(
+            &profile,
+            &Sync {
+                kept: &kept,
+                dir: &dir,
+                register: &register,
+                projection: None,
+                adapters: None,
+                mir: None,
+            },
+            &profile.roots(&register),
+            None,
+            "0.4.0",
+        );
+        match refused {
+            Err(UorustError::Malformed { reason, .. }) => {
+                assert!(reason.contains("the prior manifest records"), "{reason}");
+            }
+            other => panic!("not refused: {other:?}"),
+        }
+        let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    // The planted defects: an identity of the root's own declaration alone,
+    // or a carry keyed by κ, carries `read` after its callee changed.
+    #[test]
+    fn keyed_a_change_in_a_roots_closure_builds_it_again_though_its_kappa_is_unchanged() {
+        let tmp = scratch("keyed-closure");
+        let targets = keyed_targets("r1");
+        let at = |name: &str, behavior: &str, prelude: &str| {
+            keyed_ids(&tmp, name, behavior, prelude, KEYED_COMPILER, &targets)
+        };
+        let base = at("base", KEYED_BEHAVIOR, KEYED_PRELUDE);
+        let same = |ids: &BTreeMap<String, String>, def: &str| ids[def] == base[def];
+        // The callee changes; the register (every κ) does not.
+        let callee = at(
+            "callee",
+            &KEYED_BEHAVIOR.replace(
+                "  body: x\n}\n\ndefinition{\n  name: read",
+                "  body: 0\n}\n\ndefinition{\n  name: read",
+            ),
+            KEYED_PRELUDE,
+        );
+        assert!(!same(&callee, "read") && same(&callee, "scale"));
+        // A type the root names, and a definition of another module it calls.
+        let ty = at(
+            "type",
+            &KEYED_BEHAVIOR.replace("{name: value, type: Nat}", "{name: value, type: Int}"),
+            KEYED_PRELUDE,
+        );
+        assert!(!same(&ty, "read") && same(&ty, "scale"));
+        let prelude = at(
+            "prelude",
+            KEYED_BEHAVIOR,
+            &KEYED_PRELUDE.replace("body: x}", "body: 1}"),
+        );
+        assert!(!same(&prelude, "read") && same(&prelude, "scale"));
+        // What no root reaches, the order of declarations, blank lines and
+        // the files no build reads change nothing.
+        let spare = at(
+            "spare",
+            &KEYED_BEHAVIOR.replace(
+                "name: spare, parameters: [x : Nat], result: Nat, body: x",
+                "name: spare, parameters: [x : Nat], result: Nat, body: 2",
+            ),
+            KEYED_PRELUDE,
+        );
+        assert_eq!(spare, base);
+        let moved = at(
+            "moved",
+            &KEYED_BEHAVIOR.replace(
+                "\\begin{semanticmodule}\n",
+                "\\begin{semanticmodule}\nstructure{\n  name: Other,\n  type_parameters: [],\n  parameters: [],\n  fields: []\n}\n\n\n",
+            ),
+            KEYED_PRELUDE,
+        );
+        assert_eq!(moved, base);
+        std::fs::write(tmp.join("base").join("frontier.toml"), "# moved\n").expect("write");
+        assert_eq!(at("base", KEYED_BEHAVIOR, KEYED_PRELUDE), base);
+        // The plan counts what is left: the prior certified both at the base.
+        let sources = tmp.join("prior");
+        let manifest = keyed_prior(&sources, &base);
+        let roots = keyed_profile().roots(&keyed_register());
+        let prior = Prior {
+            manifest: &manifest,
+            sources: std::slice::from_ref(&sources),
+        };
+        let carried_now: BTreeSet<String> = carried(&roots, &callee, &prior)
+            .expect("carried")
+            .into_iter()
+            .map(|c| c.definition)
+            .collect();
+        assert_eq!(carried_now, ["scale".to_string()].into_iter().collect());
+        let plan = plan_keyed(&roots, Some(&carried_now), &manifest, u64::MAX / 2);
+        assert_eq!(
+            (plan.carried, plan.build, plan.refused, plan.shards),
+            (Some(1), 1, 0, 1)
+        );
+        // Without identities nothing is known to be carried.
+        let blind = plan_keyed(&roots, None, &manifest, u64::MAX / 2);
+        assert_eq!((blind.carried, blind.build), (None, 2));
+        // A manifest written before identities carries nothing.
+        let mut old = manifest.clone();
+        for r in &mut old.roots {
+            r.identity = None;
+        }
+        let none = carried(
+            &roots,
+            &base,
+            &Prior {
+                manifest: &old,
+                sources: &[sources],
+            },
+        );
+        assert_eq!(none.map(|c| c.len()), Ok(0));
+        let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    // The planted defect: an identity without the compiler's lines, the
+    // descriptor or the project's files keeps every root carried.
+    #[test]
+    fn keyed_a_compiler_descriptor_or_configuration_change_builds_every_root_again() {
+        let tmp = scratch("keyed-toolchain");
+        let targets = keyed_targets("r1");
+        let base = keyed_ids(
+            &tmp,
+            "base",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            KEYED_COMPILER,
+            &targets,
+        );
+        let all_differ = |ids: &BTreeMap<String, String>| {
+            assert_eq!(ids.len(), base.len());
+            for (def, id) in ids {
+                assert_ne!(&base[def], id, "{def} keeps its identity");
+            }
+        };
+        // One version, another compiler semantics.
+        let semantics = KEYED_COMPILER.replace("aaaa", "bbbb");
+        assert_eq!(
+            Compiler(semantics.clone()).version(),
+            Compiler(KEYED_COMPILER.into()).version()
+        );
+        all_differ(&keyed_ids(
+            &tmp,
+            "c",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            &semantics,
+            &targets,
+        ));
+        let toolchain = KEYED_COMPILER.replace("v4.32.1", "v4.33.0");
+        all_differ(&keyed_ids(
+            &tmp,
+            "l",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            &toolchain,
+            &targets,
+        ));
+        // The target's runtime, under one descriptor id.
+        all_differ(&keyed_ids(
+            &tmp,
+            "t",
+            KEYED_BEHAVIOR,
+            KEYED_PRELUDE,
+            KEYED_COMPILER,
+            &keyed_targets("r9"),
+        ));
+        // Another target's descriptor is no input.
+        let other = targets.replace("\"r2\"", "\"r8\"");
+        assert_eq!(
+            keyed_ids(
+                &tmp,
+                "o",
+                KEYED_BEHAVIOR,
+                KEYED_PRELUDE,
+                KEYED_COMPILER,
+                &other
+            ),
+            base
+        );
+        // The project's configuration, a lexicon it reads, a workspace file
+        // its lock binds.
+        for (rel, text) in [
+            ("lexlean.toml", None),
+            ("language/meter.words/glossary.toml", Some("words = 2\n")),
+            ("lakefile.toml", Some("name = \"Meter2\"\n")),
+        ] {
+            let name = format!("f-{}", rel.replace('/', "-"));
+            let dir = tmp.join(&name);
+            keyed_projection(&dir, KEYED_BEHAVIOR, KEYED_PRELUDE);
+            let path = dir.join(rel);
+            let changed = match text {
+                Some(t) => t.to_string(),
+                None => {
+                    std::fs::read_to_string(&path).expect("read") + "\n[limits]\nmax_ir_nodes = 1\n"
+                }
+            };
+            std::fs::write(&path, changed).expect("write");
+            let (profile, register) = (keyed_profile(), keyed_register());
+            let input = Input {
+                profile: &profile,
+                projection: &dir,
+                register: &register,
+                targets: &targets,
+            };
+            all_differ(
+                &identities(
+                    &input,
+                    &profile.roots(&register),
+                    &Compiler(KEYED_COMPILER.into()),
+                )
+                .expect("identities"),
+            );
+        }
+        // The effects the roots admit.
+        let dir = tmp.join("base");
+        let profile = Profile {
+            effects: vec!["allocation".into()],
+            ..keyed_profile()
+        };
+        let register = keyed_register();
+        let input = Input {
+            profile: &profile,
+            projection: &dir,
+            register: &register,
+            targets: &targets,
+        };
+        all_differ(
+            &identities(
+                &input,
+                &profile.roots(&register),
+                &Compiler(KEYED_COMPILER.into()),
+            )
+            .expect("identities"),
+        );
+        let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    #[test]
+    fn keyed_a_modules_declarations_are_read_by_name_whatever_their_kind_and_place() {
+        let (frame, decls) = declarations(KEYED_BEHAVIOR);
+        assert_eq!(
+            decls.keys().map(String::as_str).collect::<Vec<_>>(),
+            ["Reading", "helper", "read", "scale", "spare"]
+        );
+        assert_eq!(
+            frame,
+            [
+                "\\begin{lexlean}{Behavior}",
+                "\\importmodule{Prelude}",
+                "\\begin{semanticmodule}",
+                "\\end{semanticmodule}",
+                "\\end{lexlean}"
+            ]
+        );
+        assert!(decls["Reading"].starts_with("structure{\n") && decls["Reading"].ends_with("}\n"));
+        assert_eq!(
+            decls["scale"],
+            "definition{name: scale, parameters: [x : Nat], result: Nat, body: x}\n"
         );
     }
 }

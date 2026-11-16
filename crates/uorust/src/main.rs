@@ -104,9 +104,16 @@ enum Certify {
         #[arg(long)]
         kept: PathBuf,
         /// The manifest of the last export: the roots it refused at an
-        /// unchanged κ and compiler are refused again without a build.
+        /// unchanged κ and compiler are refused again without a build, and
+        /// the roots it certified at an unchanged identity are carried.
         #[arg(long)]
         prior: PathBuf,
+        /// A directory holding the prior export's package sources as a
+        /// certified crate does (`roots/<package>.rs`), searched in order
+        /// (repeatable); the prior manifest's own directory when none is
+        /// given.
+        #[arg(long)]
+        carry: Vec<PathBuf>,
         /// Seconds the export may build for: the builds still running then
         /// are stopped, and the roots not built are refused for this export.
         #[arg(long)]
@@ -134,9 +141,18 @@ enum Certify {
         /// The seconds each shard may build for.
         #[arg(long)]
         budget: u64,
-        /// The projection, which the roots of a cases export are read from.
+        /// The projection, which the roots of a cases export are read from,
+        /// and with `--targets` the roots' identities, so that the plan
+        /// leaves out the roots the prior export carries.
         #[arg(long)]
         projection: Option<PathBuf>,
+        /// The output of `lexlean production targets`.
+        #[arg(long, requires = "projection")]
+        targets: Option<PathBuf>,
+        /// Where the prior export's package sources are (as `certify
+        /// production --carry`).
+        #[arg(long)]
+        carry: Vec<PathBuf>,
         #[command(flatten)]
         profile: ProfileArgs,
     },
@@ -765,6 +781,19 @@ fn read_register(path: &std::path::Path) -> Result<uorust::register::Register, U
     uorust::register::Register::read(path, &text)
 }
 
+/// Where an export takes the prior export's package sources from: the
+/// directories given, else the prior manifest's own.
+fn carried_from(prior: &std::path::Path, given: Vec<PathBuf>) -> Vec<PathBuf> {
+    if !given.is_empty() {
+        return given;
+    }
+    prior
+        .parent()
+        .map(std::path::Path::to_path_buf)
+        .into_iter()
+        .collect()
+}
+
 fn certify(step: Certify) -> Result<(), UorustError> {
     use uorust::certify;
     let read = |path: &PathBuf| {
@@ -781,12 +810,15 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             out,
             kept,
             prior,
+            carry,
             within,
             shard,
             shards,
             profile,
         } => {
-            certify::production_build(
+            let manifest = certify::Manifest::read(&prior)?;
+            let sources = carried_from(&prior, carry);
+            let done = certify::production_build(
                 &certify::Input {
                     profile: &profile.profile()?,
                     projection: &projection,
@@ -795,13 +827,24 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 },
                 &out,
                 &kept,
-                &certify::Manifest::read(&prior)?,
+                &certify::Prior {
+                    manifest: &manifest,
+                    sources: &sources,
+                },
+                &certify::Compiler::installed()?,
                 certify::Scope {
                     within: within.map(std::time::Duration::from_secs),
                     shard: shard.zip(shards),
                 },
             )?;
-            println!("certified bundle kept in {}", kept.display());
+            println!(
+                "carried {}, built {} in {} builds, refused {}; certified bundle kept in {}",
+                done.carried,
+                done.built,
+                done.builds,
+                done.refused,
+                kept.display()
+            );
         }
         Certify::Sync {
             kept,
@@ -850,6 +893,8 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             prior,
             budget,
             projection,
+            targets,
+            carry,
             profile,
         } => {
             let profile = profile.profile()?;
@@ -865,12 +910,44 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 }
                 (certify::Kind::Functions, _) => profile.roots(&register),
             };
-            let (shards, diagnose) =
-                certify::plan_of(&roots, &certify::Manifest::read(&prior)?, budget);
-            let shards: Vec<String> = (0..shards).map(|i| format!("{i}-{shards}")).collect();
+            let manifest = certify::Manifest::read(&prior)?;
+            let carried = match (&projection, &targets) {
+                (Some(projection), Some(targets)) => {
+                    let input = certify::Input {
+                        profile: &profile,
+                        projection,
+                        register: &register,
+                        targets: &read(targets)?,
+                    };
+                    let ids =
+                        certify::identities(&input, &roots, &certify::Compiler::installed()?)?;
+                    let sources = carried_from(&prior, carry);
+                    let prior = certify::Prior {
+                        manifest: &manifest,
+                        sources: &sources,
+                    };
+                    Some(
+                        certify::carried(&roots, &ids, &prior)?
+                            .into_iter()
+                            .map(|c| c.definition)
+                            .collect(),
+                    )
+                }
+                _ => None,
+            };
+            let plan = certify::plan_keyed(&roots, carried.as_ref(), &manifest, budget);
+            let shards: Vec<String> = (0..plan.shards)
+                .map(|i| format!("{i}-{}", plan.shards))
+                .collect();
             println!(
                 "{}",
-                serde_json::json!({"shards": shards, "diagnose": diagnose})
+                serde_json::json!({
+                    "shards": shards,
+                    "diagnose": plan.diagnose,
+                    "carried": plan.carried,
+                    "build": plan.build,
+                    "refused": plan.refused,
+                })
             );
         }
         Certify::Diagnose {
