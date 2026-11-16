@@ -31,8 +31,10 @@ permissions:
 # One run at a time, never cancelled: an export takes longer than main stays
 # still, so cancelling in progress meant no export ever finished. GitHub keeps
 # the newest waiting run; it runs next, on the newest main (as generate.yml).
+# Each branch is its own queue, so a branch's export (which lands nothing) is
+# never replaced by main's newer runs, nor holds them back.
 concurrency:
-  group: certified
+  group: certified-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
