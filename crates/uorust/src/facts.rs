@@ -145,10 +145,57 @@ pub(crate) struct SourceFile {
     pub(crate) capabilities: Vec<(Capability, Span, String)>,
     /// `use` imports: the imported name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
-    /// Whether product code of the file invokes a macro in item position
-    /// (or among a trait's items): the items it expands to (a type, a
-    /// trait, a module) are in no fact.
-    pub(crate) item_macros: bool,
+    /// The macros product code of the file invokes in item position (or
+    /// among a trait's items), by the last segment of their path: the
+    /// items they expand to are in no fact (see [`Package::makes_items`]).
+    pub(crate) item_macros: Vec<String>,
+    /// The macros the file defines by `macro_rules!`.
+    pub(crate) macro_defs: Vec<String>,
+}
+
+impl ScopeFact {
+    /// Whether the scope (the `i`th of its file, the file's own first) has
+    /// a glob import that may reach outside its file: any but `use
+    /// super::*` of an inline module, which names the module around it in
+    /// the same file.
+    pub(crate) fn outward_glob(&self, i: usize) -> bool {
+        self.globs.iter().any(|g| i == 0 || g != "super")
+    }
+}
+
+/// The standard library's macros whose expansion in item position
+/// declares no type, trait or module: `thread_local!` declares only the
+/// `static` keys it names (`std::thread::LocalKey`, the macro's own
+/// documentation).
+const STATICS_ONLY: [&str; 1] = ["thread_local"];
+
+impl Package {
+    /// Whether file `fi` invokes a macro in item position that may make an
+    /// item (a type, a trait, a module, an `impl`) no fact holds: any but a
+    /// standard macro of [`STATICS_ONLY`], which counts only where nothing
+    /// of the package defines or imports a macro of its name.
+    pub(crate) fn file_makes_items(&self, fi: usize) -> bool {
+        let shadowed = |name: &str| {
+            self.files.iter().any(|f| {
+                f.macro_defs.iter().any(|d| d == name)
+                    || f.scopes
+                        .iter()
+                        .any(|s| s.uses.iter().any(|(n, _)| n == name))
+            })
+        };
+        self.files[fi]
+            .item_macros
+            .iter()
+            .any(|m| !STATICS_ONLY.contains(&m.as_str()) || shadowed(m))
+    }
+
+    /// Whether a file of the same target as file `fi` makes such items: a
+    /// target is one crate, and another target's items are not in its
+    /// scope.
+    pub(crate) fn makes_items(&self, fi: usize) -> bool {
+        let target = self.files[fi].target;
+        (0..self.files.len()).any(|i| self.files[i].target == target && self.file_makes_items(i))
+    }
 }
 
 #[derive(Clone, Debug)]
@@ -210,6 +257,8 @@ pub(crate) struct ScopeFact {
     pub(crate) uses: Vec<(String, String)>,
     /// Whether a `use` of the scope ends in `*`: it may bind any name.
     pub(crate) glob: bool,
+    /// The path of each glob import of the scope, as written.
+    pub(crate) globs: Vec<String>,
     /// The traits the scope declares.
     pub(crate) traits: Vec<String>,
     /// The modules the scope declares out of line, each a file of its own.

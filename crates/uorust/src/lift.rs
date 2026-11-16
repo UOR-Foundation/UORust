@@ -406,6 +406,11 @@ pub(crate) struct Types {
     /// (`Mid.leaf: Leaf.x: f64`), so that a residue row states its cause
     /// and not only the nearest type the cause is inside.
     pub(crate) outside: BTreeMap<String, String>,
+    /// Whether a registered crate's type by its path (`num_bigint::BigInt`,
+    /// or a bare name a `use` binds to it) is not read in this scope: a
+    /// macro the package invokes in item position may declare a module of
+    /// the crate's name that a relative path here names first.
+    pub(crate) paths_open: bool,
 }
 
 /// What a function's own module scope lets a name of its body mean, beyond
@@ -431,9 +436,14 @@ pub(crate) struct Seen {
     /// and the standard library, or has a glob import of anything but the
     /// standard library.
     pub(crate) outside_traits: bool,
-    /// Whether the package invokes a macro in item position, whose items
-    /// (a type, a trait, a module) no declaration the tool reads shows.
+    /// Whether an item a macro makes in item position (a type, a trait, a
+    /// module), which no declaration the tool reads shows, may be in the
+    /// scope: the file invokes such a macro, or the package does and the
+    /// scope imports by a glob or by a path inside the crate.
     pub(crate) macro_items: bool,
+    /// Whether such an item may be what a path of the function's file
+    /// names (`Types::paths_open`).
+    pub(crate) paths_open: bool,
 }
 
 /// The language's primitive types a path of one segment may name.
@@ -1265,6 +1275,9 @@ impl Types {
             {
                 let written: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
                 let joined = written.join("::");
+                if self.paths_open && !joined.starts_with("::") {
+                    return bad();
+                }
                 self.registered(joined.strip_prefix("::").unwrap_or(&joined))
                     .map_or_else(bad, Ok)
             }
@@ -11348,6 +11361,7 @@ pub(crate) fn lift_all(
                 seen: c.seen.clone(),
                 formatter: c.formatter.clone(),
             };
+            env.types.paths_open = c.seen.paths_open;
             // Every candidate's file reads each shared name, so one file's
             // reading never outlives its candidates.
             env.types

@@ -161,14 +161,28 @@ pub(crate) fn of_package(
 /// resolver binds to it in every module of the file
 /// (`names::Resolver::registry_bindings`, the one reading of a `use`), less
 /// any name a type of the package declares, since the lift's own tables
-/// read a declared type's bare name across the package. A package that
-/// invokes a macro in item position may declare a type the facts do not
-/// hold, so none of its names is read.
+/// read a declared type's bare name across the package. A macro invoked
+/// in item position may declare a type the facts do not hold, in the
+/// module it is invoked in (an item's name is not hygienic), and a glob
+/// import may bring that type to another module: so no name of file `fi`
+/// is read where the file invokes such a macro, or where the package does
+/// and a module of the file imports by a glob that may reach another file
+/// (any but an inline module's `use super::*`). A `use` that names the
+/// type by its path binds the name to another path, which the resolver
+/// already reads as no binding of the registered type.
 pub(crate) fn bindings(
     package: &Package,
+    fi: usize,
     mut bound: BTreeMap<String, String>,
 ) -> BTreeMap<String, String> {
-    if package.files.iter().any(|f| f.item_macros) {
+    let file = &package.files[fi];
+    let macros = package.makes_items(fi);
+    let outward = file
+        .scopes
+        .iter()
+        .enumerate()
+        .any(|(i, s)| s.outward_glob(i));
+    if package.file_makes_items(fi) || (macros && outward) {
         return BTreeMap::new();
     }
     let declared = |name: &str| {
@@ -282,11 +296,11 @@ mod tests {
         };
         let source = "use num_bigint::BigInt;\nuse ::num_bigint::BigInt as Big;\n";
         let package = registered_package(Vec::new(), source);
-        assert_eq!(bindings(&package, bound()), bound());
+        assert_eq!(bindings(&package, 0, bound()), bound());
         let declared = "use num_bigint::BigInt as Big;\npub struct Big(u8);\n";
         let package = registered_package(Vec::new(), declared);
         assert_eq!(
-            bindings(&package, bound()),
+            bindings(&package, 0, bound()),
             BTreeMap::from([("BigInt".to_string(), "num_bigint::BigInt".to_string())])
         );
     }
@@ -353,15 +367,28 @@ mod tests {
     fn a_package_that_makes_items_by_a_macro_binds_no_registered_name() {
         let bound = || BTreeMap::from([("BigInt".to_string(), "num_bigint::BigInt".to_string())]);
         let plain = registered_package(Vec::new(), "use num_bigint::BigInt;\n");
-        assert_eq!(bindings(&plain, bound()), bound());
+        assert_eq!(bindings(&plain, 0, bound()), bound());
         let made = registered_package(
             Vec::new(),
             "use num_bigint::BigInt;\nmacro_rules! m { () => {} }\nmod inner { m!(); }\n",
         );
-        assert!(made.files[0].item_macros);
-        assert!(bindings(&made, bound()).is_empty());
+        assert!(made.file_makes_items(0));
+        assert!(bindings(&made, 0, bound()).is_empty());
         // A macro's definition alone makes no item.
         let defined = registered_package(Vec::new(), "macro_rules! m { () => {} }\n");
-        assert!(!defined.files[0].item_macros);
+        assert!(!defined.file_makes_items(0));
+        // `thread_local!` of the standard library declares statics only,
+        // unless the package gives the name a macro of its own.
+        let statics = "thread_local! { static K: u8 = 1; }\n";
+        assert!(!registered_package(Vec::new(), statics).file_makes_items(0));
+        let own = format!("macro_rules! thread_local {{ () => {{}} }}\n{statics}");
+        assert!(registered_package(Vec::new(), &own).file_makes_items(0));
+        // A macro in another target's file is another crate's.
+        let mut two = registered_package(Vec::new(), "mod inner { m!(); }\n");
+        let (other, _) = crate::ingest::read_text("use num_bigint::BigInt;\n");
+        two.files
+            .push(crate::facts::SourceFile { target: 1, ..other });
+        assert!(two.makes_items(0));
+        assert!(!two.makes_items(1));
     }
 }

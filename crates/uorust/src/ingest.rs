@@ -1158,7 +1158,10 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
             out.uses
                 .push((r.rename.to_string(), printed(with(&r.ident))));
         }
-        syn::UseTree::Glob(_) => out.glob = true,
+        syn::UseTree::Glob(_) => {
+            out.glob = true;
+            out.globs.push(printed(prefix.to_vec()));
+        }
         syn::UseTree::Group(g) => {
             for item in &g.items {
                 scope_uses(item, prefix, rooted, out);
@@ -1259,7 +1262,13 @@ fn items(
                         .iter()
                         .any(|m| matches!(m, syn::TraitItem::Macro(_)))
                 {
-                    file.item_macros = true;
+                    file.item_macros
+                        .extend(t.items.iter().filter_map(|m| match m {
+                            syn::TraitItem::Macro(m) => {
+                                m.mac.path.segments.last().map(|s| s.ident.to_string())
+                            }
+                            _ => None,
+                        }));
                 }
                 for member in &t.items {
                     if let syn::TraitItem::Fn(f) = member {
@@ -1395,7 +1404,12 @@ fn items(
             }
             // `macro_rules! name { .. }` defines a macro; any other macro in
             // item position is an invocation.
-            syn::Item::Macro(m) if m.ident.is_none() && !in_test => file.item_macros = true,
+            syn::Item::Macro(m) if !in_test => match &m.ident {
+                Some(defined) => file.macro_defs.push(defined.to_string()),
+                None => file
+                    .item_macros
+                    .extend(m.mac.path.segments.last().map(|s| s.ident.to_string())),
+            },
             _ => {}
         }
         if product && !in_test && !matches!(item, syn::Item::Mod(_)) {

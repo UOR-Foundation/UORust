@@ -99,8 +99,9 @@ struct Model {
     /// may bring a trait from outside the workspace into scope
     /// (`names::Resolver::scope_binding`).
     scoped: BTreeMap<FnRef, (BTreeSet<String>, bool)>,
-    /// Each trait of the workspace, by name, with the names of the methods
-    /// and associated functions it declares.
+    /// Each trait of the workspace that may give a method to a type outside
+    /// the workspace (`names::Resolver::foreign_impl_traits`), by name, with
+    /// the names of the methods and associated functions it declares.
     trait_decls: BTreeMap<String, BTreeSet<String>>,
 }
 
@@ -177,7 +178,20 @@ impl Model {
             })
             .flat_map(|(_, methods)| methods.iter().cloned())
             .collect();
+        // A macro in item position makes items in the module it is invoked
+        // in, which a glob or a `use` of a path inside the crate may bring
+        // to another module.
+        let internal = |p: &str| {
+            let head = p.split("::").next().unwrap_or(p);
+            matches!(head, "crate" | "self" | "super") || local.contains(head)
+        };
+        let package = &self.ws.packages[r.pkg];
+        let package_macros = package.makes_items(r.file);
+        let macro_items = package.file_makes_items(r.file)
+            || (package_macros
+                && (at.outward_glob(scope) || at.uses.iter().any(|(_, p)| internal(p))));
         lift::Seen {
+            paths_open: macro_reachable(&self.ws.packages[r.pkg], r.file),
             trait_methods,
             uses: file
                 .scopes
@@ -186,7 +200,7 @@ impl Model {
                 .unwrap_or_default(),
             local,
             outside_traits,
-            macro_items: self.ws.packages[r.pkg].files.iter().any(|f| f.item_macros),
+            macro_items,
         }
     }
 
@@ -379,6 +393,20 @@ pub(crate) fn project(
         scoped: BTreeMap::new(),
         trait_decls: BTreeMap::new(),
     };
+    // A trait counts only where some `impl` may give its methods to a type
+    // the lift reads as the standard library's or a registered crate's;
+    // where a macro of a library or binary of the workspace may write an
+    // `impl`, every trait (a test, bench or example target is a crate of
+    // its own that nothing depends on).
+    let foreign = resolver.foreign_impl_traits();
+    let macros = ws.packages.iter().any(|p| {
+        (0..p.files.len()).any(|i| {
+            matches!(
+                p.targets[p.files[i].target].kind,
+                TargetKind::Lib | TargetKind::Bin
+            ) && p.file_makes_items(i)
+        })
+    });
     for f in ws
         .packages
         .iter()
@@ -386,6 +414,9 @@ pub(crate) fn project(
         .flat_map(|f| &f.fns)
     {
         if let (true, Some(owner)) = (f.in_trait, &f.owner) {
+            if !macros && !foreign.contains(owner) {
+                continue;
+            }
             ctx.trait_decls
                 .entry(owner.clone())
                 .or_default()
@@ -423,7 +454,7 @@ pub(crate) fn project(
         ctx.readable.insert(pkg, read.clone());
         for fi in 0..package.files.len() {
             let bound = resolver.registry_bindings(pkg, fi, &read);
-            let bound = crate::registered::bindings(package, bound);
+            let bound = crate::registered::bindings(package, fi, bound);
             if !bound.is_empty() {
                 ctx.registered.insert((pkg, fi), bound);
             }
@@ -3775,6 +3806,7 @@ fn behavior(
         .map(|(&(pkg, fi), names)| {
             let mut scope = scopes[pkg].clone();
             scope.aliases.extend(names.clone());
+            scope.paths_open = macro_reachable(&ws.packages[pkg], fi);
             ((pkg, fi), scope)
         })
         .collect();
@@ -4211,6 +4243,7 @@ fn behavior(
                     seen: lift::Seen {
                         outside_traits: true,
                         macro_items: true,
+                        paths_open: true,
                         ..lift::Seen::default()
                     },
                     aliases: overlays[&(pkg, fi)].clone(),
@@ -5778,22 +5811,35 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
     out
 }
 
+/// Whether an item a macro of the package makes in item position may be
+/// what a name of file `fi` means: the file invokes such a macro (an
+/// item's name is not hygienic, so it lands in the invoking module), or
+/// the package does and a module of the file imports by a glob.
+fn macro_reachable(package: &Package, fi: usize) -> bool {
+    let file = &package.files[fi];
+    package.file_makes_items(fi)
+        || (package.makes_items(fi)
+            && file
+                .scopes
+                .iter()
+                .enumerate()
+                .any(|(i, s)| s.outward_glob(i)))
+}
+
 /// The registered crates' type paths a package reads
 /// ([`crate::registered::of_package`]), less those it cannot: a path whose
 /// head (`num_bigint` of `num_bigint::BigInt`) a module, type, function or
 /// `use` of the package binds itself, since a path written relative to a
-/// module starts at what that module binds before it reaches a crate; and
-/// every path of a package that invokes a macro in item position, whose
-/// items the facts do not hold.
+/// module starts at what that module binds before it reaches a crate. (A
+/// macro of the package may declare a module of the crate's name: where
+/// it can be reached the lift reads no type by its path,
+/// `Types::paths_open`.)
 fn registered_paths(
     ws: &Workspace,
     resolver: &crate::names::Resolver<'_>,
     pkg: usize,
 ) -> Vec<String> {
     let package = &ws.packages[pkg];
-    if package.files.iter().any(|f| f.item_macros) {
-        return Vec::new();
-    }
     let mut read = crate::registered::of_package(package, &ws.lock, &ws.replaced);
     read.retain(|path| {
         let head = path.split("::").next().unwrap_or(path);
@@ -7792,5 +7838,20 @@ mod tests {
             frontier.contains("a primitive type's name an alias takes"),
             "{frontier}"
         );
+    }
+
+    #[test]
+    fn only_a_glob_that_may_leave_its_file_brings_a_macros_items() {
+        let scope = |globs: &[&str]| crate::facts::ScopeFact {
+            glob: !globs.is_empty(),
+            globs: globs.iter().map(|g| g.to_string()).collect(),
+            ..crate::facts::ScopeFact::default()
+        };
+        assert!(!scope(&["super"]).outward_glob(1));
+        assert!(!scope(&[]).outward_glob(0));
+        // The file's own scope: `super` is another file's module.
+        assert!(scope(&["super"]).outward_glob(0));
+        assert!(scope(&["crate::other"]).outward_glob(1));
+        assert!(scope(&["super", "other"]).outward_glob(1));
     }
 }

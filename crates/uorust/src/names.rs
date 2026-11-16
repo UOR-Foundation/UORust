@@ -2789,6 +2789,57 @@ impl<'a> Resolver<'a> {
         (local, outside)
     }
 
+    /// The traits, by the last segment of their path, that some `impl` of
+    /// the workspace implements for a type other than a struct, enum or
+    /// union the workspace declares under that name: a type parameter, a
+    /// reference, an alias, a primitive, a type of another crate. Only such
+    /// a trait can give a method to a float, a ratio or a type of the
+    /// standard library; every `impl` of a trait the workspace declares
+    /// is in the workspace (an `impl` may stand only where its trait or
+    /// its type is local, and no crate the workspace depends on depends on
+    /// it). An `impl` inside a function body is not read here.
+    pub(crate) fn foreign_impl_traits(&self) -> BTreeSet<String> {
+        let mut declared: BTreeSet<&str> = BTreeSet::new();
+        for key in self.modules.keys() {
+            if let Some(scope) = self.scope(key) {
+                for (name, decls) in &scope.types {
+                    if decls
+                        .iter()
+                        .all(|d| matches!(d.kind, Kind::Struct | Kind::Enum(_) | Kind::Union))
+                    {
+                        declared.insert(name.as_str());
+                    }
+                }
+            }
+        }
+        let mut out = BTreeSet::new();
+        for key in self.modules.keys() {
+            let Some(scope) = self.scope(key) else {
+                continue;
+            };
+            for imp in &scope.impls {
+                let Some(name) = &imp.trait_name else {
+                    continue;
+                };
+                let local = match &imp.self_ty.kind {
+                    crate::ast::TypeKind::Path { qself: false, path } => {
+                        path.segments.last().is_some_and(|last| {
+                            let ident = last.ident.as_str();
+                            declared.contains(ident)
+                                && !imp.generics.iter().any(|g| g == ident)
+                                && !crate::lift::PRIMITIVE_TYPES.contains(&ident)
+                        })
+                    }
+                    _ => false,
+                };
+                if !local {
+                    out.insert(name.clone());
+                }
+            }
+        }
+        out
+    }
+
     /// Whether any module of a package binds `name` itself: declares a
     /// module, type or function of it, or a `use` of it or of a function
     /// body binds it. A relative path whose head is such a name may start
@@ -3683,6 +3734,33 @@ mod tests {
                 assert!(of("far"));
                 assert!(of("wide"));
                 assert!(!of("near"));
+            },
+        );
+    }
+
+    #[test]
+    fn only_a_trait_implemented_for_a_type_outside_the_workspace_reaches_a_float() {
+        refuted_resolved(
+            "refuted-impls",
+            "pub struct Mine;\n\
+             pub type Alias = f64;\n\
+             pub trait Own { fn len(&self) -> u8; }\n\
+             impl Own for Mine { fn len(&self) -> u8 { 1 } }\n\
+             pub trait Odd { fn abs(&self) -> u8; }\n\
+             impl Odd for f64 { fn abs(&self) -> u8 { 7 } }\n\
+             pub trait Any { fn any(&self) -> u8 { 0 } }\n\
+             impl<T> Any for T {}\n\
+             pub trait Named { fn named(&self) -> u8 { 0 } }\n\
+             impl Named for Alias {}\n",
+            |_, resolver| {
+                let got = resolver.foreign_impl_traits();
+                assert_eq!(
+                    got,
+                    ["Any", "Named", "Odd"]
+                        .iter()
+                        .map(|s| s.to_string())
+                        .collect::<BTreeSet<String>>()
+                );
             },
         );
     }
