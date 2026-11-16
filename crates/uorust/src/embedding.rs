@@ -338,17 +338,20 @@ pub(crate) fn closed(
 }
 
 /// A type of the surface as the dump prints it: its crate, its file's
-/// module path and its name.
+/// module path and its name; and its fields as its declaration writes
+/// them, which the ownership reading reads what it holds by.
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct TypeKey {
     pub(crate) krate: String,
     pub(crate) module: Vec<String>,
     pub(crate) name: String,
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// How `records` hold each type of `types` (each type's path and its key),
-/// in every configuration and module they hold: the most it is held
-/// anywhere. A record names a type of its crate by its
+/// in every configuration and module they hold, decided against its
+/// crate's declarations ([`crate::ownership::resolve`]): the most it is
+/// held anywhere. A record names a type of its crate by its
 /// crate-relative path, or, in a signature, by its name alone, which
 /// names the one type of that name in the crate or none. A type no
 /// record holds is not stated.
@@ -356,8 +359,9 @@ pub(crate) fn holdings(
     records: &[Recorded],
     types: &BTreeMap<String, TypeKey>,
 ) -> BTreeMap<String, crate::ownership::Held> {
-    let mut out: BTreeMap<String, crate::ownership::Held> = BTreeMap::new();
+    let mut by_crate: BTreeMap<&str, BTreeMap<String, crate::ownership::Held>> = BTreeMap::new();
     for r in records {
+        let out = by_crate.entry(r.krate.as_str()).or_default();
         for (printed, held) in &r.holdings {
             let segments: Vec<&str> = printed.split("::").collect();
             let Some((name, module)) = segments.split_last() else {
@@ -378,6 +382,19 @@ pub(crate) fn holdings(
                 }
             }
         }
+    }
+    let mut out = BTreeMap::new();
+    for (krate, read) in by_crate {
+        let declared: Vec<crate::ownership::Declared> = types
+            .iter()
+            .filter(|(_, t)| t.krate == krate)
+            .map(|(path, t)| crate::ownership::Declared {
+                path: path.clone(),
+                name: t.name.clone(),
+                fields: t.fields.clone(),
+            })
+            .collect();
+        out.extend(crate::ownership::resolve(&read, &declared));
     }
     out
 }

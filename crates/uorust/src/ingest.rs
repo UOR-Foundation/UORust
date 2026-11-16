@@ -1001,6 +1001,24 @@ fn derives(attrs: &[Attr]) -> Vec<String> {
 }
 
 /// Collapse the token spacing of printed Rust to the way it is written.
+/// Each field of `fields`, by its name or its position, with its type as
+/// the source writes it: what the ownership reading reads a type's fields
+/// by ([`crate::ownership::Declared`]).
+fn source_fields(fields: &syn::Fields) -> Vec<(String, String)> {
+    fields
+        .iter()
+        .enumerate()
+        .map(|(i, f)| {
+            (
+                f.ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string),
+                tidy(&f.ty.to_token_stream().to_string()),
+            )
+        })
+        .collect()
+}
+
 pub(crate) fn tidy(text: &str) -> String {
     let mut out = text.to_string();
     for (from, to) in [
@@ -1292,6 +1310,15 @@ fn items(
                     },
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    fields: e
+                        .variants
+                        .iter()
+                        .flat_map(|v| {
+                            source_fields(&v.fields)
+                                .into_iter()
+                                .map(move |(f, t)| (format!("{}.{f}", v.ident), t))
+                        })
+                        .collect(),
                     variants: e
                         .variants
                         .iter()
@@ -1315,6 +1342,7 @@ fn items(
                         line: st.ident.span().start().line,
                     },
                     derives: derives(&attrs(&st.attrs)),
+                    fields: source_fields(&st.fields),
                 });
                 syntax.structs.push(match &st.fields {
                     _ if !only_lifetimes(&st.generics) => {

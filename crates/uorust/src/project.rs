@@ -5943,9 +5943,9 @@ fn type_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::TypeKey> {
             let names = file
                 .structs
                 .iter()
-                .map(|s| &s.name)
-                .chain(file.enums.iter().map(|e| &e.name));
-            for name in names {
+                .map(|s| (&s.name, &s.fields))
+                .chain(file.enums.iter().map(|e| (&e.name, &e.fields)));
+            for (name, fields) in names {
                 let mut path = vec![krate.clone()];
                 path.extend(module.iter().cloned());
                 path.push(name.clone());
@@ -5955,6 +5955,7 @@ fn type_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::TypeKey> {
                         krate: krate.clone(),
                         module: module.clone(),
                         name: name.clone(),
+                        fields: fields.clone(),
                     },
                 );
             }

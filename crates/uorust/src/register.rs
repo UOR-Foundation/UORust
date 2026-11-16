@@ -103,7 +103,7 @@ pub enum Status {
     Foreign(String),
     /// It performs or reaches an operating-system effect: the kind.
     Effect(String),
-    /// It did not lift, and its body is embedded-closed in every
+    /// It did not lift, and its body is embedded-closed in every declared
     /// configuration whose dump compiles it: embedded, every construct
     /// defined by the evaluator, every call reaching a linked body
     /// ([`crate::embed::BodyFact`]), in the module projects named, one per
@@ -516,8 +516,8 @@ impl Register {
         if embedded > 0 {
             out.push_str(&format!(
                 "# {embedded} that did not lift are embedded-closed: each body embedded,\n\
-                 # evaluable and reaching only linked bodies in every configuration whose\n\
-                 # dump compiles it, in the module projects each row names.\n"
+                 # evaluable and reaching only linked bodies in every declared configuration\n\
+                 # whose dump compiles it, in the module projects each row names.\n"
             ));
         }
         if residue > 0 {

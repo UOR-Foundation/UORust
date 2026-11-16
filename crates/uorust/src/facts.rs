@@ -220,6 +220,9 @@ pub(crate) struct EnumFact {
     pub(crate) explicit: bool,
     /// Variant name, whether it is a unit variant, its doc, whether `#[default]`.
     pub(crate) variants: Vec<Variant>,
+    /// Each variant's fields, `Variant.field` (a position for a tuple
+    /// variant's), with its type as the source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// A struct, whatever its shape: its syntax says which fields it has.
@@ -229,6 +232,9 @@ pub(crate) struct StructFact {
     pub(crate) span: Span,
     /// The traits a `#[derive(...)]` names.
     pub(crate) derives: Vec<String>,
+    /// Each field (a position for a tuple struct's), with its type as the
+    /// source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// The syntax the lift reads, kept apart from the facts: per source file,
