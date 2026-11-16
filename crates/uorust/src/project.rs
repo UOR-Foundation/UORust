@@ -81,6 +81,11 @@ struct Model {
     edges: BTreeMap<String, (String, String)>,
     /// Resolved calls: caller -> callees.
     calls: BTreeMap<FnRef, BTreeSet<FnRef>>,
+    /// Each call a function writes, as written, -> the one function of
+    /// product code the language's name resolution names at every place it
+    /// is written, or none where the places differ or the call is not one
+    /// function. Admission's reading, which the lift reads calls by too.
+    named: BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>>,
     /// The route the router admitted for each enum: `(package, file, enum)`.
     enum_routes: BTreeMap<(usize, usize, usize), &'static str>,
     /// The bare names a function's module binds by a `use` to a type of a
@@ -301,6 +306,7 @@ pub(crate) fn project(
         index,
         edges: BTreeMap::new(),
         calls: BTreeMap::new(),
+        named: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
         registry: BTreeMap::new(),
     };
@@ -311,8 +317,9 @@ pub(crate) fn project(
         .filter(|(_, bound)| !bound.is_empty())
         .collect();
     ctx.edges = edges(&ctx);
-    let (calls, refused) = resolve(&ctx, &resolver);
+    let (calls, named, refused) = resolve(&ctx, &resolver);
     ctx.calls = calls;
+    ctx.named = named;
     notes.refusals.extend(refused);
     let (enum_routes, refused) = route_enums(&ctx);
     ctx.enum_routes = enum_routes;
@@ -822,9 +829,14 @@ fn edges(ctx: &Model) -> BTreeMap<String, (String, String)> {
 fn resolve(
     ctx: &Model,
     resolver: &crate::names::Resolver<'_>,
-) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
+) -> (
+    BTreeMap<FnRef, BTreeSet<FnRef>>,
+    BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>>,
+    Vec<Refusal>,
+) {
     use crate::names::Outcome;
     let mut calls = BTreeMap::new();
+    let mut named: BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>> = BTreeMap::new();
     let mut refusals = Vec::new();
     let all = ctx.all_fns();
     let mut by_name: BTreeMap<&str, Vec<FnRef>> = BTreeMap::new();
@@ -864,6 +876,20 @@ fn resolve(
                 v.retain(|r| ctx.product(*r));
                 v
             };
+            if outcome.is_some() {
+                let one = match outcome {
+                    Some(Outcome::Resolved(fns)) => match product(fns).as_slice() {
+                        [only] => Some(*only),
+                        _ => None,
+                    },
+                    _ => None,
+                };
+                let reading = named.entry(caller).or_default();
+                let agreed = reading
+                    .get(call)
+                    .map_or(one, |seen| one.filter(|_| *seen == one));
+                reading.insert(call.clone(), agreed);
+            }
             match outcome {
                 // One function, or the variants of one no build holds
                 // together: the call reaches each.
@@ -1037,7 +1063,7 @@ fn resolve(
             calls.insert(caller, out);
         }
     }
-    (calls, refusals)
+    (calls, named, refusals)
 }
 
 fn record(ty: &str, fields: &[(&str, String)]) -> String {
@@ -4013,7 +4039,7 @@ fn behavior(
                     block,
                     imports: ctx.file(r).imports.clone(),
                     aliases: overlays[&(r.pkg, r.file)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, r.pkg, r.file),
+                    homonyms: call_reading(ctx, &homonyms, r),
                     called,
                     formatter,
                 });
@@ -5623,6 +5649,36 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
         for site in clashing {
             let names = qualified(&site);
             out.insert(site, names);
+        }
+    }
+    out
+}
+
+/// How a function reads each name its crate's free functions share: as the
+/// one function admission's name resolution names for the call (a glob
+/// import's, say), and where it names none, as its file does.
+fn call_reading(
+    ctx: &Model,
+    homonyms: &BTreeMap<FnSite, (String, String)>,
+    r: FnRef,
+) -> BTreeMap<String, Option<String>> {
+    let mut out = homonym_reading(ctx, homonyms, r.pkg, r.file);
+    for (call, callee) in ctx.named.get(&r).into_iter().flatten() {
+        let (Some(meant), Some(callee)) = (out.get_mut(call), callee) else {
+            continue;
+        };
+        if ctx.func(*callee).owner.is_some() {
+            continue;
+        }
+        let file = ctx.file(*callee);
+        let site = (
+            callee.pkg,
+            file.target,
+            file.module.clone(),
+            ctx.func(*callee).name.clone(),
+        );
+        if let Some((rust, _)) = homonyms.get(&site) {
+            *meant = Some(rust.clone());
         }
     }
     out
