@@ -3750,7 +3750,7 @@ fn behavior(
     // The trait methods a call can mean, each with its crate, the key such a
     // call reads and its own key; and the candidates that give way.
     let mut reach: Vec<(usize, String, String, FnRef)> = Vec::new();
-    let mut yielding: BTreeSet<(usize, String)> = BTreeSet::new();
+    let mut yielding: BTreeMap<(usize, String), u8> = BTreeMap::new();
     for &r in &all {
         let f = ctx.func(r);
         let types = &file_scopes[&(r.pkg, r.file)];
@@ -3941,9 +3941,15 @@ fn behavior(
         if let Some(plain) = reached {
             reach.push((r.pkg, plain, rust.clone(), r));
         }
-        // A trait's method gives way: a free function or an inherent method
-        // that lifts to the same name keeps it.
-        let yields = f.in_trait || (f.implements.is_some() && !display);
+        // Who keeps a name two functions lift to, whichever the projection
+        // reaches first: a free function before a type's own method
+        // (`sample_cases` beside `Sample::cases`), and that before a
+        // trait's method.
+        let yields: u8 = if f.in_trait || (f.implements.is_some() && !display) {
+            2
+        } else {
+            u8::from(method.is_some())
+        };
         let owner = match (&method, &f.owner) {
             (Some(o), _) => Some(lift::Owner::Type {
                 name: o,
@@ -3973,9 +3979,10 @@ fn behavior(
                     .iter()
                     .position(|c: &Candidate<'_>| c.name == name)
                     .filter(|&i| {
-                        !yields
-                            && !names.contains_key(&rust)
-                            && yielding.contains(&(r.pkg, candidates[i].rust.clone()))
+                        !names.contains_key(&rust)
+                            && yielding
+                                .get(&(r.pkg, candidates[i].rust.clone()))
+                                .is_some_and(|held| yields < *held)
                     });
                 if let Some(held) = holder.and_then(|i| names.remove(&candidates[i].rust)) {
                     // The name's holder gives way, and keeps its row.
@@ -3996,9 +4003,7 @@ fn behavior(
                     ctx.stopped(notes, &effectful, r, Residue::Collision(name));
                     continue;
                 }
-                if yields {
-                    yielding.insert((r.pkg, rust.clone()));
-                }
+                yielding.insert((r.pkg, rust.clone()), yields);
                 names.insert(rust.clone(), r);
                 candidates.push(Candidate {
                     rust,
@@ -5566,31 +5571,58 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
             .or_default()
             .insert(site);
     }
+    // A site's key and name by its target and module.
+    let qualified = |site: &FnSite| {
+        let package = &ctx.ws.packages[site.0];
+        let target = &package.targets[site.1];
+        let mut parts: Vec<String> = Vec::new();
+        if !matches!(target.kind, TargetKind::Lib) {
+            parts.push(target.name.replace('-', "_"));
+        }
+        parts.extend(
+            site.2
+                .split("::")
+                .filter(|m| !m.is_empty())
+                .map(str::to_string),
+        );
+        if parts.is_empty() {
+            parts.push(package.name.replace('-', "_"));
+        }
+        parts.push(site.3.clone());
+        let rust = format!("{}#{}", site.1, parts.join("::"));
+        (rust, lift::local_name(&parts.join("_")))
+    };
     let mut out = BTreeMap::new();
-    for ((pkg, name), at) in sites {
+    let mut single: Vec<FnSite> = Vec::new();
+    for at in sites.into_values() {
         if at.len() < 2 {
+            single.extend(at);
             continue;
         }
-        let package = &ctx.ws.packages[pkg];
         for site in at {
-            let target = &package.targets[site.1];
-            let mut parts: Vec<String> = Vec::new();
-            if !matches!(target.kind, TargetKind::Lib) {
-                parts.push(target.name.replace('-', "_"));
-            }
-            parts.extend(
-                site.2
-                    .split("::")
-                    .filter(|m| !m.is_empty())
-                    .map(str::to_string),
-            );
-            if parts.is_empty() {
-                parts.push(package.name.replace('-', "_"));
-            }
-            parts.push(name.clone());
-            let rust = format!("{}#{}", site.1, parts.join("::"));
-            let lex = lift::local_name(&parts.join("_"));
-            out.insert(site, (rust, lex));
+            let names = qualified(&site);
+            out.insert(site, names);
+        }
+    }
+    // A function alone of its name, whose name reads as one a module gave
+    // (`mir_memory_axioms` beside `axioms` of `mir::memory`), takes its
+    // module's too: the names stay one per function whichever of the two
+    // lifts, and whichever the projection reaches first.
+    loop {
+        let given: BTreeSet<(usize, String)> = out
+            .iter()
+            .map(|(site, (_, lex)): (&FnSite, &(String, String))| (site.0, lex.clone()))
+            .collect();
+        let (clashing, rest): (Vec<FnSite>, Vec<FnSite>) = single
+            .into_iter()
+            .partition(|site| given.contains(&(site.0, lift::local_name(&site.3))));
+        single = rest;
+        if clashing.is_empty() {
+            break;
+        }
+        for site in clashing {
+            let names = qualified(&site);
+            out.insert(site, names);
         }
     }
     out
@@ -7378,6 +7410,86 @@ mod tests {
         assert!(
             frontier.contains("w::variant has a variant under cfg(feature = \\\"wide\\\")"),
             "{frontier}"
+        );
+    }
+
+    // One name per function, whichever lifts and whichever is reached first.
+
+    #[test]
+    fn a_name_a_module_gave_is_not_taken_by_a_function_alone_of_its_name() {
+        // `axioms` of two modules are named by their modules; `mir_memory_axioms`,
+        // alone of its name and in a file read before `mir/memory.rs`, would
+        // read as the second of them.
+        let (frontier, _) = projected(
+            "given",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Given names.\npub mod adapters;\npub mod mir;\npub mod order;\n",
+                ),
+                (
+                    "src/adapters.rs",
+                    "//! Adapters.\n/// Outside the lift by its body.\n\
+                     pub fn mir_memory_axioms(n: u32) -> u32 {\n    let mut m = n;\n    \
+                     while m > 9 {\n        m /= 2;\n    }\n    m\n}\n",
+                ),
+                ("src/mir/mod.rs", "//! Mir.\npub mod memory;\n"),
+                (
+                    "src/mir/memory.rs",
+                    "//! Memory.\n/// Two.\npub fn axioms() -> u32 {\n    2\n}\n",
+                ),
+                (
+                    "src/order.rs",
+                    "//! Order.\n/// One.\npub fn axioms() -> u32 {\n    1\n}\n",
+                ),
+            ],
+        );
+        let kept = row(&frontier, "given::mir::memory::axioms");
+        assert!(
+            kept.starts_with("[[lifted]]")
+                && kept.contains("definition = \"Behavior::mirMemoryAxioms\""),
+            "{kept}"
+        );
+        let other = row(&frontier, "given::adapters::mir_memory_axioms");
+        assert!(
+            !other.contains("reason = \"collision\"") && !other.contains("mirMemoryAxioms\""),
+            "{other}"
+        );
+        assert!(!frontier.contains("more than one fact"), "{frontier}");
+    }
+
+    #[test]
+    fn a_free_function_keeps_the_name_a_method_reached_first_also_lifts_to() {
+        let (frontier, _) = projected(
+            "kept",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Kept names.\npub mod embed;\npub mod registry;\n",
+                ),
+                (
+                    "src/embed.rs",
+                    "//! Embed.\n/// A sample.\npub struct Sample {\n    /// Its size.\n    \
+                     pub n: u32,\n}\nimpl Sample {\n    /// Its cases.\n    \
+                     pub fn cases(&self) -> u32 {\n        self.n\n    }\n}\n",
+                ),
+                (
+                    "src/registry.rs",
+                    "//! Registry.\n/// The cases of a sample.\n\
+                     pub fn sample_cases(n: u32) -> u32 {\n    n\n}\n",
+                ),
+            ],
+        );
+        let free = row(&frontier, "kept::registry::sample_cases");
+        assert!(
+            free.starts_with("[[lifted]]")
+                && free.contains("definition = \"Behavior::sampleCases\""),
+            "{free}"
+        );
+        let method = row(&frontier, "kept::embed::Sample::cases");
+        assert!(
+            method.starts_with("[[residue]]") && method.contains("reason = \"collision\""),
+            "{method}"
         );
     }
 }

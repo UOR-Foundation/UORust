@@ -461,8 +461,10 @@ fn std_path(path: &rs::Path) -> bool {
 /// Whether a generic argument, as written, is a lifetime (`'a`, `'_`): a
 /// character literal, a const argument, closes its quote.
 fn is_lifetime(argument: &str) -> bool {
-    let a = argument.trim();
-    a.starts_with('\'') && !a[1..].contains('\'')
+    match argument.trim().strip_prefix('\'') {
+        Some(name) => !name.contains('\''),
+        None => false,
+    }
 }
 
 /// A field of a variant as Rust writes its place: `Enum::Variant.name`, or

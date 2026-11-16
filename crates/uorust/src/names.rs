@@ -835,7 +835,7 @@ impl FileNames {
 
 /// A name a body binds.
 #[derive(Clone, Debug)]
-enum Local {
+enum BodyName {
     /// A variable, with what the code writes of its type.
     Value(Hint),
     /// A function declared inside the body, which no fact holds.
@@ -847,7 +847,7 @@ enum Local {
 /// The names one block of a body binds.
 #[derive(Default)]
 struct Bindings {
-    names: BTreeMap<String, Local>,
+    names: BTreeMap<String, BodyName>,
     /// The block has a glob import, whose names the block does not say.
     glob: bool,
 }
@@ -907,7 +907,7 @@ impl Walker {
                         syn::ReceiverKind::Typed(_, ty) => Hint::Written(crate::convert::ty(ty)),
                         _ => Hint::Open,
                     };
-                    walker.bind("self".to_string(), Local::Value(hint));
+                    walker.bind("self".to_string(), BodyName::Value(hint));
                 }
                 syn::FnArg::Typed(t) => walker.typed(&t.pat, &t.ty),
             }
@@ -916,7 +916,7 @@ impl Walker {
         (walker.calls, walker.rebound)
     }
 
-    fn bind(&mut self, name: String, local: Local) {
+    fn bind(&mut self, name: String, local: BodyName) {
         if let Some(scope) = self.scopes.last_mut() {
             scope.names.insert(name, local);
         }
@@ -928,7 +928,7 @@ impl Walker {
         match pat {
             syn::Pat::Ident(i) if i.subpat.is_none() && i.by_ref.is_none() => {
                 let hint = Hint::Written(crate::convert::ty(ty));
-                self.bind(i.ident.to_string(), Local::Value(hint));
+                self.bind(i.ident.to_string(), BodyName::Value(hint));
             }
             other => self.pattern(other),
         }
@@ -947,7 +947,7 @@ impl Walker {
                 let mut bound = Bound(Vec::new());
                 bound.visit_pat(other);
                 for name in bound.0 {
-                    self.bind(name, Local::Value(Hint::Open));
+                    self.bind(name, BodyName::Value(Hint::Open));
                 }
             }
         }
@@ -955,7 +955,7 @@ impl Walker {
 
     /// What the innermost scope that binds `name` binds it to, and whether
     /// a block with a glob import lies between.
-    fn local(&self, name: &str) -> (Option<&Local>, bool) {
+    fn local(&self, name: &str) -> (Option<&BodyName>, bool) {
         let mut glob = false;
         for scope in self.scopes.iter().rev() {
             if let Some(local) = scope.names.get(name) {
@@ -973,7 +973,7 @@ impl Walker {
             return (segments, false);
         };
         match self.local(head) {
-            (Some(Local::Use(path)), glob) => {
+            (Some(BodyName::Use(path)), glob) => {
                 let mut out = path.clone();
                 out.extend(segments.into_iter().skip(1));
                 (out, glob)
@@ -993,14 +993,14 @@ impl Walker {
         for stmt in &block.stmts {
             match stmt {
                 syn::Stmt::Item(syn::Item::Fn(f)) => {
-                    self.bind(f.sig.ident.to_string(), Local::Item);
+                    self.bind(f.sig.ident.to_string(), BodyName::Item);
                 }
                 syn::Stmt::Item(syn::Item::Use(u)) => {
                     let mut scope = Scope::default();
                     use_item(u, &[], &mut scope);
                     for bound in scope.uses {
                         self.rebound.insert(bound.name.clone());
-                        self.bind(bound.name, Local::Use(bound.path));
+                        self.bind(bound.name, BodyName::Use(bound.path));
                     }
                     if let (false, Some(bindings)) =
                         (scope.globs.is_empty(), self.scopes.last_mut())
@@ -1010,11 +1010,11 @@ impl Walker {
                 }
                 syn::Stmt::Item(syn::Item::Const(c)) => {
                     let hint = Hint::Written(crate::convert::ty(&c.ty));
-                    self.bind(c.ident.to_string(), Local::Value(hint));
+                    self.bind(c.ident.to_string(), BodyName::Value(hint));
                 }
                 syn::Stmt::Item(syn::Item::Static(s)) => {
                     let hint = Hint::Written(crate::convert::ty(&s.ty));
-                    self.bind(s.ident.to_string(), Local::Value(hint));
+                    self.bind(s.ident.to_string(), BodyName::Value(hint));
                 }
                 syn::Stmt::Item(syn::Item::Struct(syn::ItemStruct { ident, .. }))
                 | syn::Stmt::Item(syn::Item::Enum(syn::ItemEnum { ident, .. }))
@@ -1043,7 +1043,7 @@ impl Walker {
                     };
                     match &l.pat {
                         syn::Pat::Ident(i) if i.subpat.is_none() && i.by_ref.is_none() => {
-                            self.bind(i.ident.to_string(), Local::Value(hint));
+                            self.bind(i.ident.to_string(), BodyName::Value(hint));
                         }
                         other => self.pattern(other),
                     }
@@ -1091,7 +1091,7 @@ impl Walker {
                 // A closure or a function a variable holds, or a function
                 // the body declares, is no path to a function fact.
                 if let ([one], None) = (segments.as_slice(), &p.qself) {
-                    if matches!(self.local(one).0, Some(Local::Value(_) | Local::Item)) {
+                    if matches!(self.local(one).0, Some(BodyName::Value(_) | BodyName::Item)) {
                         return self.push(Call {
                             callee: Callee::Local(one.clone()),
                             args,
@@ -1142,9 +1142,9 @@ impl Walker {
                 let segments = idents(&p.path);
                 if let [one] = segments.as_slice() {
                     match self.local(one).0 {
-                        Some(Local::Value(hint)) => return hint.clone(),
-                        Some(Local::Item) => return Hint::Open,
-                        Some(Local::Use(_)) | None => {}
+                        Some(BodyName::Value(hint)) => return hint.clone(),
+                        Some(BodyName::Item) => return Hint::Open,
+                        Some(BodyName::Use(_)) | None => {}
                     }
                 }
                 match self.written_out(segments) {
