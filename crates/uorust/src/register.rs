@@ -352,13 +352,15 @@ impl Register {
     fn misstated(&self, doc: &toml::Value) -> Option<String> {
         let totals = doc.get(LIFT);
         if let Some(stated) = totals {
-            if let (Some(n), 0) = (
-                stated.get(EMBEDDED).and_then(toml::Value::as_integer),
-                self.totals().embedded,
-            ) {
-                return Some(format!(
-                    "[{LIFT}] states {EMBEDDED} = {n} and the rows hold 0"
-                ));
+            // The count is written only where it is not zero, so a stated
+            // count is checked here even where the rows hold none.
+            let embedded = self.totals().embedded;
+            if let Some(n) = stated.get(EMBEDDED).and_then(toml::Value::as_integer) {
+                if i64::try_from(embedded).ok() != Some(n) {
+                    return Some(format!(
+                        "[{LIFT}] states {EMBEDDED} = {n} and the rows hold {embedded}"
+                    ));
+                }
             }
             for (key, counted) in self.totals().fields() {
                 let found = stated.get(key).and_then(toml::Value::as_integer);
@@ -593,16 +595,41 @@ impl Register {
 /// (its function changed or went away), not a regression.
 /// An embedded-closed κ is held the same way: it stays embedded-closed or
 /// lifts, and a candidate that decides it open (residue, foreign or effect)
-/// is refused, naming it.
+/// is refused, naming it. Embedded-closed again, it must be so in every
+/// configuration the incumbent states it closed in: a candidate that
+/// states fewer (its records leave one out, or decide it open there) no
+/// longer claims what was established, and is refused naming the
+/// configurations it drops.
 pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
     let closed = incumbent
         .rows
         .iter()
-        .filter(|(_, row)| matches!(row.status, Status::Embedded(_)))
-        .filter_map(|(kappa, row)| {
+        .filter_map(|(kappa, row)| match &row.status {
+            Status::Embedded(was) => Some((kappa, row, was)),
+            _ => None,
+        })
+        .filter_map(|(kappa, row, was)| {
             let now = candidate.rows.get(kappa)?;
             match &now.status {
-                Status::Embedded(_) | Status::Lifted(_) => None,
+                Status::Embedded(at) => {
+                    let dropped: Vec<&str> = was
+                        .iter()
+                        .map(|w| w.configuration.as_str())
+                        .filter(|c| !at.iter().any(|a| a.configuration == *c))
+                        .collect();
+                    (!dropped.is_empty()).then(|| {
+                        format!(
+                            "{} (κ {kappa}) was embedded-closed in {} and is no longer stated closed in {}",
+                            row.function,
+                            was.iter()
+                                .map(|w| w.configuration.as_str())
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                            dropped.join(", ")
+                        )
+                    })
+                }
+                Status::Lifted(_) => None,
                 other => Some(format!(
                     "{} (κ {kappa}) was embedded-closed and is now {}",
                     row.function,
@@ -1200,6 +1227,17 @@ mod tests {
         assert_eq!(Register::read(path, &text), Ok(register.clone()));
         let misstated = text.replace("embedded = 1\n", "embedded = 2\n");
         assert!(Register::read(path, &misstated).is_err());
+        // A true count of none, stated, is read; a false one is refused.
+        let none = Register {
+            rows: [lifted.clone(), open.clone()].into_iter().collect(),
+        };
+        let stated = none
+            .to_text()
+            .replace("effect = 0\n", "effect = 0\nembedded = 0\n");
+        assert!(stated.contains("embedded = 0\n"), "{stated}");
+        assert_eq!(Register::read(path, &stated), Ok(none.clone()));
+        let false_none = stated.replace("embedded = 0\n", "embedded = 1\n");
+        assert!(Register::read(path, &false_none).is_err());
         let uneven = text.replace(
             "configurations = [\"default features\", \"all features\"]",
             "configurations = [\"default features\"]",
@@ -1236,9 +1274,25 @@ mod tests {
         assert!(admit(&register, &as_(Status::Lifted("Behavior::f".into()))).is_empty());
         assert!(admit(
             &register,
-            &as_(Status::Embedded(vec![lift_at("default features")]))
+            &as_(Status::Embedded(vec![
+                lift_at("all features"),
+                lift_at("default features"),
+                lift_at("features x")
+            ]))
         )
         .is_empty());
+        // Closed in fewer configurations than the incumbent states (the
+        // refuter's case: a run whose records hold the default
+        // configuration alone) is refused, naming the one it drops.
+        let fewer = admit(
+            &register,
+            &as_(Status::Embedded(vec![lift_at("default features")])),
+        );
+        assert_eq!(fewer.len(), 1, "{fewer:?}");
+        assert!(
+            fewer[0].ends_with("is no longer stated closed in all features"),
+            "{fewer:?}"
+        );
         // A lifted κ the candidate decides embedded-closed is no longer
         // lifted: refused, as any other status is.
         let demoted = Register {
