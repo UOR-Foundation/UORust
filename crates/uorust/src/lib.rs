@@ -27,6 +27,7 @@ pub mod layouts;
 mod lex;
 mod lift;
 pub mod mir;
+mod names;
 mod order;
 mod project;
 pub mod queue;
@@ -54,6 +55,7 @@ pub fn project_workspace(
         return Err(UorustError::BadTimestamp(options.last_modified.clone()));
     }
     let (workspace, syntax) = ingest::workspace(root, options.advisories.as_deref())?;
+    let syntax = names::read(root, &workspace, syntax)?;
     let dumps = match &options.mir {
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
