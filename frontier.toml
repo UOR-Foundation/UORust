@@ -159,7 +159,7 @@
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
 #   mir::Ty: 280
-#     1 A0
+#     2 A0
 #     3 T
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
 #     2 bridge::BridgeOutcome<std::vec::Vec<std::string::String>>
@@ -260,7 +260,6 @@
 #     1 uorust_certified::equality_name::Str
 #     1 uorust_certified::evidence_axioms::Str
 #     1 uorust_certified::evidence_proof::Str
-#     1 uorust_certified::first_free::Str
 #     1 uorust_certified::implication::Str
 #     1 uorust_certified::is_const_argument::Str
 #     1 uorust_certified::members::Str
@@ -665,10 +664,10 @@ reason = "mir"
 detail = "mir::Ty: uorust_certified::evidence_proof::Str"
 
 [[residue]]
-kappa = "6a2bdf3085389e80cc338e0391fa337860a9cedcf2e75f02a24121528f5a97bd"
+kappa = "767912e80216da7d626e571a5d7532d97141585bcd6b73cdc5737d33fe30507b"
 function = "uorust::certified::lift_first_free"
 reason = "mir"
-detail = "mir::Ty: uorust_certified::first_free::Str"
+detail = "mir::Ty: A0"
 
 [[residue]]
 kappa = "86c90d59860ad9179ca2805bf4d7b34e376250ccf2c216a4b667561d9c60f9cf"
