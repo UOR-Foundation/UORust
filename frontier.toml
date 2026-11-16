@@ -5,7 +5,7 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 341 of 1483 functions of product code are lifted; 878
+# Honesty report: 341 of 1485 functions of product code are lifted; 880
 # are residue, 92 foreign and 172 effect rows.
 # Residue by cause:
 #   arithmetic: 1
@@ -212,7 +212,7 @@
 #     59 a loop nested in a loop, whose helpers would call each other
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
-#   mir::Ty: 342
+#   mir::Ty: 344
 #     1 A0
 #     1 K
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
@@ -334,10 +334,12 @@
 #     1 uorust_certified::equality_name::Str
 #     1 uorust_certified::evidence_axioms::Str
 #     1 uorust_certified::evidence_proof::Str
+#     1 uorust_certified::field_name::Str
 #     1 uorust_certified::first_free::Str
 #     1 uorust_certified::implication::Str
 #     1 uorust_certified::is_const_argument::Str
 #     1 uorust_certified::is_lifetime::Str
+#     1 uorust_certified::local_name::Str
 #     1 uorust_certified::members::Str
 #     1 uorust_certified::mentions_word::Str
 #     1 uorust_certified::mir_memory_axioms::Str
@@ -479,9 +481,9 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1483
+functions = 1485
 lifted = 341
-residue = 878
+residue = 880
 foreign = 92
 effect = 172
 
@@ -2646,6 +2648,11 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
+construct = "mir::Ty: uorust_certified::field_name::Str"
+cause = "mir::Ty"
+functions = 1
+
+[[construct]]
 construct = "mir::Ty: uorust_certified::first_free::Str"
 cause = "mir::Ty"
 functions = 1
@@ -2662,6 +2669,11 @@ functions = 1
 
 [[construct]]
 construct = "mir::Ty: uorust_certified::is_lifetime::Str"
+cause = "mir::Ty"
+functions = 1
+
+[[construct]]
+construct = "mir::Ty: uorust_certified::local_name::Str"
 cause = "mir::Ty"
 functions = 1
 
@@ -3022,6 +3034,12 @@ reason = "mir"
 detail = "mir::Ty: uorust_certified::evidence_proof::Str"
 
 [[residue]]
+kappa = "2f1fdfa749044542401a717207f993b06dc5a520b928d4349dca1ffdfa49b836"
+function = "uorust::certified::lift_field_name"
+reason = "mir"
+detail = "mir::Ty: uorust_certified::field_name::Str"
+
+[[residue]]
 kappa = "6a2bdf3085389e80cc338e0391fa337860a9cedcf2e75f02a24121528f5a97bd"
 function = "uorust::certified::lift_first_free"
 reason = "mir"
@@ -3032,6 +3050,12 @@ kappa = "c5b17fd72961669a904ba0f671022520db83a0ae90c072e82113ab280ee072d2"
 function = "uorust::certified::lift_is_lifetime"
 reason = "mir"
 detail = "mir::Ty: uorust_certified::is_lifetime::Str"
+
+[[residue]]
+kappa = "f1c46f9eebfe583730988ec934804800a7ff1b7723eed2fb0069daa86056ce1c"
+function = "uorust::certified::lift_local_name"
+reason = "mir"
+detail = "mir::Ty: uorust_certified::local_name::Str"
 
 [[residue]]
 kappa = "86c90d59860ad9179ca2805bf4d7b34e376250ccf2c216a4b667561d9c60f9cf"
