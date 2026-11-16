@@ -400,8 +400,9 @@ struct EmbedArgs {
     #[arg(long, requires = "workspace")]
     links: Option<PathBuf>,
     /// With `--workspace`: one project per module of the crate,
-    /// `<out>/<module>`, smallest module first, each linked against every
-    /// module, as one `--only <module>` run each.
+    /// `<out>/<module>/project` (its configuration and record in
+    /// `<out>/<module>`, outside the project), smallest module first, each
+    /// linked against every module, as one `--only <module>` run each.
     #[arg(long, requires = "workspace", conflicts_with = "only")]
     each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
@@ -758,7 +759,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                         c.bound,
                         c.linked.values().sum::<usize>(),
                         c.unlinked.values().sum::<usize>(),
-                        args.out.join(&m.name).display()
+                        args.out.join(&m.name).join(uorust::shard::PROJECT).display()
                     ),
                     None => println!(
                         "embed: {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
@@ -767,7 +768,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                         c.bound,
                         c.linked.values().sum::<usize>(),
                         c.unlinked.values().sum::<usize>(),
-                        args.out.display()
+                        args.out.join(uorust::shard::PROJECT).display()
                     ),
                 }
             }

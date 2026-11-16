@@ -42,6 +42,13 @@ pub const TARGET: &str = "target.toml";
 /// (configuration, module).
 pub const RECORD: &str = "record.toml";
 
+/// The directory of an embedding's output that holds the project
+/// `lexlean verify` decides. The [`CONFIGURATION`] and the [`RECORD`] lie
+/// beside it, never in it: a module whose dump is the same in two
+/// configurations is one project, of one digest ([`project_digest`]), and
+/// one verification of it is a receipt for both.
+pub const PROJECT: &str = "project";
+
 /// The configuration a crate is built and dumped in: the cargo feature set
 /// and the target, as `cargo rustc` takes them. The default is the
 /// workspace's default features on the host.
@@ -507,7 +514,9 @@ pub struct WorkspaceEmbed<'a> {
     pub dumps: &'a Path,
     /// The rust-src `library` directory of the pinned toolchain.
     pub library: &'a Path,
-    /// The project directory; with `each_module`, one per module under it.
+    /// The output directory: the project in its [`PROJECT`], the
+    /// configuration and the record beside it; with `each_module`, one
+    /// such directory per module under it.
     pub out: &'a Path,
     /// Embed only these modules into one project.
     pub only: &'a [String],
@@ -535,8 +544,9 @@ pub struct Embedded {
 /// resolves them in the dump's configuration) are mounted beside core,
 /// alloc and std, and the crate is embedded as one project, or, with
 /// `each_module`, as one project per module, each linked against every
-/// module the shards hold, as CI embeds core. The dump's configuration is
-/// written into each project beside its census.
+/// module the shards hold, as CI embeds core. Each project is written to
+/// `<out>/`[`PROJECT`]; the dump's configuration and the [`RECORD`] are
+/// written to `<out>`, outside the project.
 pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, UorustError> {
     let shards = e.dumps.join(format!("{SHARDS}{}", e.krate));
     if !shards.join(TARGET).is_file() {
@@ -591,8 +601,15 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
         ..config.clone()
     };
     let deps = dependencies(e.workspace, &resolve.cargo_args(true), Some(name))?;
-    let root =
-        std::env::temp_dir().join(format!("uorust-embed-{}-{}", e.krate, std::process::id()));
+    // One mount per call: two embeddings of one crate in one process
+    // (tests run in parallel) never share it.
+    static CALL: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+    let call = CALL.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let root = std::env::temp_dir().join(format!(
+        "uorust-embed-{}-{}-{call}",
+        e.krate,
+        std::process::id()
+    ));
     let _ = std::fs::remove_dir_all(&root);
     let result = (|| {
         let builds_on = mount(&root, e.library, e.krate, &dir, &deps)?;
@@ -604,21 +621,22 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             .collect();
         let all = modules(&shards)?;
         let run = |only: &[String], out: &Path| {
+            let dir = out.join(PROJECT);
             let census = crate::embed::embed_with(
                 e.krate,
                 &builds_on,
                 &library,
                 &shards,
-                out,
+                &dir,
                 only,
                 &crate::embed::Outputs {
                     link: &link,
                     ..crate::embed::Outputs::default()
                 },
             )?;
-            // The project as the embedding wrote it, before the
-            // configuration and the record are put beside it.
-            let project = project_digest(out)?;
+            // The project as the embedding wrote it; the configuration
+            // and the record lie beside it, outside what it names.
+            let project = project_digest(&dir)?;
             if let Some(text) = &configuration {
                 let file = out.join(CONFIGURATION);
                 std::fs::write(&file, text).map_err(|x| io(&file, x))?;
@@ -997,13 +1015,40 @@ mod tests {
         for d in &done {
             assert_eq!(d.census.bodies, 1);
             assert_eq!(d.census.evaluable, 1, "{:?}", d.census.blocked);
-            let project = out.join(&d.module.as_ref().unwrap().name);
-            assert!(project.join("census.toml").is_file());
+            let out = out.join(&d.module.as_ref().unwrap().name);
+            assert!(out.join(PROJECT).join("census.toml").is_file());
+            assert!(!out.join(PROJECT).join(CONFIGURATION).exists());
             assert_eq!(
-                std::fs::read_to_string(project.join(CONFIGURATION)).unwrap(),
+                std::fs::read_to_string(out.join(CONFIGURATION)).unwrap(),
                 recorded
             );
         }
+        // The same dumps in another configuration: each module's project
+        // has the digest it has in the first, its record another label.
+        let recorded_of = |out: &Path, module: &str| -> toml::Table {
+            std::fs::read_to_string(out.join(module).join(RECORD))
+                .unwrap()
+                .parse()
+                .unwrap()
+        };
+        let all = Configuration {
+            all_features: true,
+            ..Configuration::default()
+        }
+        .render("x86_64-unknown-linux-gnu");
+        std::fs::write(shards.join(CONFIGURATION), &all).unwrap();
+        let other = work.join("other");
+        embed_workspace_crate(&WorkspaceEmbed {
+            out: &other,
+            ..e.clone()
+        })
+        .expect("the embedding in the other configuration");
+        for module in ["inner", crate::registry::ROOT_MODULE] {
+            let (a, b) = (recorded_of(&out, module), recorded_of(&other, module));
+            assert_eq!(a.get("project"), b.get("project"), "{module}");
+            assert_ne!(a.get("all_features"), b.get("all_features"), "{module}");
+        }
+        std::fs::write(shards.join(CONFIGURATION), &recorded).unwrap();
         // One project of the whole crate.
         let whole = embed_workspace_crate(&WorkspaceEmbed {
             each_module: false,
