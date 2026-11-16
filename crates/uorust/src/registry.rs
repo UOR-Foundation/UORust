@@ -181,8 +181,7 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
     )?)
     .trim()
     .to_string();
-    let cargo_home = std::env::var("CARGO_HOME")
-        .unwrap_or_else(|_| format!("{}/.cargo", std::env::var("HOME").unwrap_or_default()));
+    let cargo_home = cargo_home().display().to_string();
     let own = format!("{}/", dir.display());
     let registry = format!("{cargo_home}/registry/src/");
     let mut files: Vec<PathBuf> = std::fs::read_dir(&mir)
@@ -921,6 +920,131 @@ fn copy_tree(from: &Path, to: &Path) -> Result<(), UorustError> {
     Ok(())
 }
 
+/// Where Cargo keeps its registry: `$CARGO_HOME`, else `~/.cargo`.
+pub(crate) fn cargo_home() -> PathBuf {
+    match std::env::var("CARGO_HOME") {
+        Ok(home) => PathBuf::from(home),
+        Err(_) => PathBuf::from(format!(
+            "{}/.cargo",
+            std::env::var("HOME").unwrap_or_default()
+        )),
+    }
+}
+
+/// The public type aliases a registry crate's library root declares, by
+/// their path (`krate::Alias`), each with what it stands for written by
+/// full paths. They are read from the crate's own source: its archive in
+/// Cargo's cache at the version Cargo.lock pins, checked against the
+/// checksum Cargo.lock records, which is the source Cargo builds. A name
+/// the root declares once, or binds by one `use`, is that declaration or
+/// binding whatever `cfg` it stands under: the workspace that names the
+/// alias compiles, so the alias and what it names are compiled in. A name
+/// declared or bound more than once is not read. Nothing is read (`None`)
+/// where the crate is not pinned once, or no archive of it at the locked
+/// checksum is in the cache, or its manifest or library root does not read.
+pub(crate) fn crate_aliases(
+    cargo_home: &Path,
+    krate: &str,
+    lock: &[crate::facts::LockedPackage],
+) -> Option<BTreeMap<String, crate::ast::Alias>> {
+    let pinned: Vec<&crate::facts::LockedPackage> = lock
+        .iter()
+        .filter(|l| l.name.replace('-', "_") == krate && l.source.starts_with("registry+"))
+        .collect();
+    let [locked] = pinned.as_slice() else {
+        return None;
+    };
+    let stem = format!("{}-{}", locked.name, locked.version);
+    let caches = std::fs::read_dir(cargo_home.join("registry").join("cache")).ok()?;
+    let archive = caches
+        .filter_map(Result::ok)
+        .map(|index| index.path().join(format!("{stem}.crate")))
+        .find(|archive| {
+            std::fs::read(archive).is_ok_and(|bytes| {
+                let digest: String = Sha256::digest(&bytes)
+                    .iter()
+                    .map(|b| format!("{b:02x}"))
+                    .collect();
+                digest == locked.checksum
+            })
+        })?;
+    // A member of the archive as text, or none where it does not extract
+    // or is not UTF-8.
+    let member = |inside: &str| -> Option<String> {
+        let out = run(
+            "tar",
+            Command::new("tar")
+                .arg("-xzOf")
+                .arg(&archive)
+                .arg(format!("{stem}/{inside}")),
+        )
+        .ok()?;
+        String::from_utf8(out).ok()
+    };
+    let manifest: toml::Value = member("Cargo.toml")?.parse().ok()?;
+    let root = manifest
+        .get("lib")
+        .and_then(|lib| lib.get("path"))
+        .and_then(toml::Value::as_str)
+        .unwrap_or("src/lib.rs")
+        .to_string();
+    let file = syn::parse_file(&member(&root)?).ok()?;
+    let (uses, declared) = crate::names::root_names(&file);
+    // What each name the root writes bare names, by its full path.
+    let mut paths: BTreeMap<String, String> = declared
+        .iter()
+        .filter(|n| !uses.contains_key(*n))
+        .map(|n| (n.clone(), format!("{krate}::{n}")))
+        .collect();
+    for (name, bound) in &uses {
+        let [path] = bound.iter().collect::<Vec<_>>()[..] else {
+            continue;
+        };
+        let path = match path.first().map(String::as_str) {
+            Some("crate" | "self") => std::iter::once(krate.to_string())
+                .chain(path[1..].iter().cloned())
+                .collect::<Vec<_>>(),
+            Some("super") => continue,
+            Some("") => path[1..].to_vec(),
+            _ => path.clone(),
+        };
+        if !declared.contains(name) {
+            paths.insert(name.clone(), path.join("::"));
+        }
+    }
+    let mut written: BTreeMap<String, Vec<&syn::ItemType>> = BTreeMap::new();
+    for item in &file.items {
+        if let syn::Item::Type(t) = item {
+            written.entry(t.ident.to_string()).or_default().push(t);
+        }
+    }
+    let mut out = BTreeMap::new();
+    for (name, items) in written {
+        let [t] = items.as_slice() else {
+            continue;
+        };
+        if !matches!(t.vis, syn::Visibility::Public(_)) {
+            continue;
+        }
+        let alias = crate::convert::alias(&t.generics, &t.ty);
+        // A type parameter of the alias is no name of the root.
+        let names: BTreeMap<String, String> = paths
+            .iter()
+            .filter(|(n, _)| !alias.params.contains(n))
+            .map(|(n, p)| (n.clone(), p.clone()))
+            .collect();
+        let to = alias.to.renamed(&names);
+        out.insert(
+            format!("{krate}::{name}"),
+            crate::ast::Alias {
+                params: alias.params,
+                to,
+            },
+        );
+    }
+    Some(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -972,5 +1096,99 @@ mod tests {
             Some(("serde".to_string(), "1.0.0".to_string()))
         );
         assert!(parse_spec("serde").is_err() && parse_spec("@1").is_err());
+    }
+
+    // What a type name means: a registry crate's alias, read from its own
+    // source at the locked version.
+
+    /// A cargo home whose cache holds one archive of a synthetic hasher
+    /// crate, and the lock entry that pins it.
+    fn type_names_cache(tag: &str) -> (PathBuf, crate::facts::LockedPackage) {
+        let home =
+            std::env::temp_dir().join(format!("uorust-aliases-{tag}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&home);
+        let src = home.join("work/fastmap-1.0.0/src");
+        std::fs::create_dir_all(&src).unwrap();
+        std::fs::write(
+            src.parent().unwrap().join("Cargo.toml"),
+            "[package]\nname = \"fastmap\"\nversion = \"1.0.0\"\n",
+        )
+        .unwrap();
+        std::fs::write(
+            src.join("lib.rs"),
+            "#![no_std]\n#[cfg(feature = \"std\")]\nextern crate std;\n\
+             use core::hash::BuildHasherDefault;\n\
+             #[cfg(feature = \"std\")]\nuse std::collections::{HashMap, HashSet};\n\
+             pub struct FastHasher { hash: usize }\n\
+             #[cfg(feature = \"std\")]\n\
+             pub type FastMap<K, V> = HashMap<K, V, BuildHasherDefault<FastHasher>>;\n\
+             pub type FastSet<V> = HashSet<V, BuildHasherDefault<FastHasher>>;\n\
+             type Private = u8;\n",
+        )
+        .unwrap();
+        let cache = home.join("registry/cache/index-x");
+        std::fs::create_dir_all(&cache).unwrap();
+        let archive = cache.join("fastmap-1.0.0.crate");
+        let status = Command::new("tar")
+            .arg("-czf")
+            .arg(&archive)
+            .arg("-C")
+            .arg(home.join("work"))
+            .arg("fastmap-1.0.0")
+            .status()
+            .unwrap();
+        assert!(status.success());
+        let checksum: String = Sha256::digest(std::fs::read(&archive).unwrap())
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect();
+        let locked = crate::facts::LockedPackage {
+            name: "fastmap".to_string(),
+            version: "1.0.0".to_string(),
+            source: "registry+https://github.com/rust-lang/crates.io-index".to_string(),
+            checksum,
+        };
+        (home, locked)
+    }
+
+    #[test]
+    fn type_names_a_crate_alias_reads_as_the_standard_map_it_names() {
+        let (home, locked) = type_names_cache("read");
+        let aliases = crate_aliases(&home, "fastmap", std::slice::from_ref(&locked))
+            .expect("the archive at the locked checksum reads");
+        let _ = std::fs::remove_dir_all(&home);
+        assert_eq!(
+            aliases.keys().collect::<Vec<_>>(),
+            ["fastmap::FastMap", "fastmap::FastSet"]
+        );
+        assert_eq!(
+            aliases["fastmap::FastMap"].to.text,
+            "std::collections::HashMap<K, V, core::hash::BuildHasherDefault<fastmap::FastHasher>>"
+        );
+        // The workspace writes the alias; the lift reads the standard map.
+        let written: syn::Type = syn::parse_str("fastmap::FastMap<u8, String>").unwrap();
+        let read = crate::convert::ty(&written).expanded(&aliases, aliases.len());
+        let types = crate::lift::Types::default();
+        assert!(
+            matches!(types.ty(&read), Ok(crate::lift::Ty::Map(_, _, false))),
+            "{}",
+            read.text
+        );
+        let set: syn::Type = syn::parse_str("fastmap::FastSet<u8>").unwrap();
+        let read = crate::convert::ty(&set).expanded(&aliases, aliases.len());
+        assert!(matches!(
+            types.ty(&read),
+            Ok(crate::lift::Ty::Set(_, false))
+        ));
+    }
+
+    #[test]
+    fn type_names_an_archive_not_at_the_locked_checksum_is_not_read() {
+        let (home, mut locked) = type_names_cache("checksum");
+        locked.checksum = "0".repeat(64);
+        let read = crate_aliases(&home, "fastmap", std::slice::from_ref(&locked));
+        let _ = std::fs::remove_dir_all(&home);
+        // The archive is in the cache: only its checksum keeps it unread.
+        assert!(read.is_none());
     }
 }

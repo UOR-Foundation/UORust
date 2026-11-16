@@ -652,7 +652,8 @@ fn idents(path: &syn::Path) -> Vec<String> {
     out
 }
 
-fn join(module: &str, name: &str) -> String {
+/// A module's path inside its crate joined with a path below it.
+pub(crate) fn join(module: &str, name: &str) -> String {
     match (module.is_empty(), name.is_empty()) {
         (true, _) => name.to_string(),
         (_, true) => module.to_string(),
@@ -1429,6 +1430,65 @@ const INTEGER_FALLBACK: &str = "i32";
 const FLOAT_FALLBACK: &str = "f64";
 
 /// The crates every build has without a manifest naming them.
+/// The type and trait names the standard prelude of some edition binds
+/// (`std::prelude::rust_2015` to `rust_2024`), and the primitive types: a
+/// name a glob may bind in place of the prelude's.
+const PRELUDE_TYPES: &[&str] = &[
+    "AsMut",
+    "AsRef",
+    "Box",
+    "Clone",
+    "Copy",
+    "Default",
+    "DoubleEndedIterator",
+    "Drop",
+    "Eq",
+    "ExactSizeIterator",
+    "Extend",
+    "Fn",
+    "FnMut",
+    "FnOnce",
+    "From",
+    "FromIterator",
+    "Future",
+    "Into",
+    "IntoFuture",
+    "IntoIterator",
+    "Iterator",
+    "Option",
+    "Ord",
+    "PartialEq",
+    "PartialOrd",
+    "Result",
+    "Send",
+    "Sized",
+    "String",
+    "Sync",
+    "ToOwned",
+    "ToString",
+    "TryFrom",
+    "TryInto",
+    "Unpin",
+    "Vec",
+    "bool",
+    "char",
+    "f32",
+    "f64",
+    "i128",
+    "i16",
+    "i32",
+    "i64",
+    "i8",
+    "isize",
+    "str",
+    "u128",
+    "u16",
+    "u32",
+    "u64",
+    "u8",
+    "usize",
+];
+
 const SYSROOT: [&str; 5] = ["std", "core", "alloc", "proc_macro", "test"];
 
 /// What a path names.
@@ -1928,7 +1988,7 @@ impl<'a> Resolver<'a> {
             .filter(|u| hold(&u.cfg, config) != Some(false))
             .collect();
         for binding in if live.is_empty() { &bound } else { &live } {
-            match self.path(x, &binding.path, value, seen) {
+            match self.use_path(x, &binding.path, value, seen) {
                 // The binding names nothing in this namespace.
                 Found::Absent => {}
                 one => add(one),
@@ -1969,6 +2029,36 @@ impl<'a> Resolver<'a> {
             1 => found.pop(),
             _ => Some(Found::Unknown),
         }
+    }
+
+    /// What a `use` path names, read in module `x`. Its first segment,
+    /// where nothing the module declares or binds by a `use` has the name,
+    /// is the crate of that name where there is one, whatever the module's
+    /// globs import: a glob that bound the name too would make the `use`
+    /// ambiguous, which rustc rejects (E0659, a glob import against the
+    /// extern prelude during import resolution), so in a program that
+    /// compiles no glob changes what the path names.
+    fn use_path(
+        &self,
+        x: &ModKey,
+        segments: &[String],
+        value: bool,
+        seen: &mut Vec<(ModKey, String, bool)>,
+    ) -> Found {
+        if let (Some(first), Some(scope)) = (segments.first(), self.scope(x)) {
+            let special = matches!(first.as_str(), "" | "crate" | "self" | "super" | "Self");
+            let bound = scope.types.contains_key(first)
+                || scope.values.contains_key(first)
+                || scope.mods.contains(first)
+                || scope.uses.iter().any(|u| &u.name == first);
+            if !special && !bound && !matches!(self.krate(first), Found::Unknown) {
+                let rooted: Vec<String> = std::iter::once(String::new())
+                    .chain(segments.iter().cloned())
+                    .collect();
+                return self.path(x, &rooted, value, seen);
+            }
+        }
+        self.path(x, segments, value, seen)
     }
 
     /// What a path names, read in module `m`: the last segment as a value
@@ -2917,16 +3007,84 @@ impl<'a> Resolver<'a> {
         candidates
     }
 
-    /// The bare names a module binds to a path through a registry crate,
-    /// each with the path as the resolver follows it: one reading of a
-    /// module's `use` bindings for [`Self::registry_types`] and
-    /// [`Self::registry_bindings`].
+    /// The bare names an inline module of a file (`""` for the file's
+    /// own) binds by a `use` to an item of a registry crate, each with the
+    /// full path the binding names: `BigX` of `use big::BigX` reads
+    /// `big::BigX`. A `use` gives the name its meaning in its module, so
+    /// the name is that path wherever the module writes it bare.
+    pub(crate) fn inline_registry_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+    ) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let module = (pkg, source.target, join(&source.module, inline));
+        self.registry_paths(&module)
+            .into_iter()
+            .map(|(name, to)| (name, to.join("::")))
+            .collect()
+    }
+
+    /// Of `written`, the bare names a file writes, those only a glob of a
+    /// registry crate can bind in its inline module `inline`, each with
+    /// the path the glob gives it: in a module that neither declares nor
+    /// imports the name, whose globs all import one module of one registry
+    /// crate (`use big::prelude::*`), a name the standard prelude does not
+    /// bind is that module's item, the one binding the language leaves it.
+    /// A name the prelude binds may be the glob's or the prelude's, and
+    /// stays unread.
+    pub(crate) fn glob_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+        written: &BTreeSet<String>,
+    ) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let module = (pkg, source.target, join(&source.module, inline));
+        let Some(scope) = self.scope(&module) else {
+            return BTreeMap::new();
+        };
+        let globbed: BTreeSet<Vec<String>> = scope
+            .globs
+            .iter()
+            .map(
+                |g| match self.use_path(&module, &g.path, false, &mut Vec::new()) {
+                    Found::Extern(to) if to.first().is_some_and(|k| self.registry.contains(k)) => {
+                        to
+                    }
+                    _ => Vec::new(),
+                },
+            )
+            .collect();
+        let [from] = globbed.iter().collect::<Vec<_>>()[..] else {
+            return BTreeMap::new();
+        };
+        if from.is_empty() {
+            return BTreeMap::new();
+        }
+        written
+            .iter()
+            .filter(|n| !PRELUDE_TYPES.contains(&n.as_str()))
+            .filter(|n| {
+                self.path(&module, std::slice::from_ref(*n), false, &mut Vec::new())
+                    == Found::Outside
+            })
+            .map(|n| (n.clone(), format!("{}::{n}", from.join("::"))))
+            .collect()
+    }
+
+    /// The bare names a module's `use` binds to an item of a registry
+    /// crate, and those of the modules of the workspace it imports whole,
+    /// each with the path it names, crate first, as the resolver follows
+    /// it: one reading of a module's `use` bindings for
+    /// [`Self::registry_types`], [`Self::registry_bindings`] (file-wide)
+    /// and [`Self::inline_registry_paths`] (one inline module).
     fn registry_paths(&self, module: &ModKey) -> BTreeMap<String, Vec<String>> {
         let Some(scope) = self.scope(module) else {
             return BTreeMap::new();
         };
-        // The names the module's own `use` binds, and those of the modules
-        // of the workspace it imports whole.
         let mut names: BTreeSet<&str> = scope.uses.iter().map(|u| u.name.as_str()).collect();
         for glob in &scope.globs {
             if let Found::Module(y) = self.path(module, &glob.path, false, &mut Vec::new()) {
@@ -2995,6 +3153,97 @@ fn boxes(id: &TypeId) -> bool {
         },
         _ => false,
     }
+}
+
+/// What a bare type name a module writes names, as the language resolves
+/// it: a struct or enum of the workspace, by package, target, module and
+/// declared name; an item outside the workspace, by its path; or nothing
+/// the written code decides (a glob of an outside crate may bind it).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) enum TypeReading {
+    Declared(usize, usize, String, String),
+    Extern(String),
+    Open,
+}
+
+impl Resolver<'_> {
+    /// What the type name `name` (bare, or a path such as `super::T`)
+    /// names in the inline module `inline` (`""` for the file's own) of
+    /// file `fi` of package `pkg`: what the module declares, then what its
+    /// `use` binds, then its globs, as [`Resolver::path`] reads every path.
+    pub(crate) fn type_reading(
+        &self,
+        pkg: usize,
+        fi: usize,
+        inline: &str,
+        name: &str,
+    ) -> TypeReading {
+        let file = &self.ws.packages[pkg].files[fi];
+        let module = (pkg, file.target, join(&file.module, inline));
+        if !self.modules.contains_key(&module) {
+            return TypeReading::Open;
+        }
+        let segments: Vec<String> = name.split("::").map(str::to_string).collect();
+        match self.path(&module, &segments, false, &mut Vec::new()) {
+            Found::Type((p, t, m), n) => TypeReading::Declared(p, t, m, n),
+            Found::Extern(path) => TypeReading::Extern(path.join("::")),
+            _ => TypeReading::Open,
+        }
+    }
+}
+
+impl Names {
+    /// The inline modules of a file, by their path inside it, the file's
+    /// own (`""`) among them.
+    pub(crate) fn inline_modules(&self, rel: &str) -> Vec<String> {
+        let mut out: Vec<String> = self
+            .files
+            .get(rel)
+            .map(|f| f.modules.keys().cloned().collect())
+            .unwrap_or_default();
+        if !out.iter().any(String::is_empty) {
+            out.insert(0, String::new());
+        }
+        out
+    }
+
+    /// The inline module a function stands in, by the line and name of
+    /// its fact: `""` for the file's own.
+    pub(crate) fn fn_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.fns.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
+    }
+
+    /// The inline module an enum or a struct stands in, by the line and
+    /// name of its fact: `""` for the file's own.
+    pub(crate) fn type_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.types.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
+    }
+}
+
+/// What the root module of a crate outside the workspace names bare, read
+/// from its library root: each name a `use` binds, with every path a
+/// binding of it names (a name under several `cfg` predicates may have
+/// more than one), and the types the root declares.
+pub(crate) fn root_names(
+    file: &syn::File,
+) -> (BTreeMap<String, BTreeSet<Vec<String>>>, BTreeSet<String>) {
+    let names = FileNames::of(file);
+    let Some(root) = names.modules.get("") else {
+        return (BTreeMap::new(), BTreeSet::new());
+    };
+    let mut uses: BTreeMap<String, BTreeSet<Vec<String>>> = BTreeMap::new();
+    for u in &root.uses {
+        uses.entry(u.name.clone())
+            .or_default()
+            .insert(u.path.clone());
+    }
+    (uses, root.types.keys().cloned().collect())
 }
 
 /// What a type is named by, without its references.

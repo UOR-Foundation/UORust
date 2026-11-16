@@ -1401,8 +1401,20 @@ impl Types {
             ("Rc" | "Arc", 1) if imported => *arg(0)?,
             ("BTreeMap", 2) => Ty::Map(arg(0)?, arg(1)?, true),
             ("HashMap", 2) => Ty::Map(arg(0)?, arg(1)?, false),
+            // `HashMap<K, V, S>` and `HashSet<T, S>`: the standard map and
+            // set with the hasher `S` (the standard library declares both
+            // with `S = RandomState`). Which keys a map holds and the value
+            // at each is fixed by `K`'s `Eq` alone: the library requires of
+            // every `BuildHasher` that the hashers one value builds hash
+            // equal input equally, so the hasher changes where an entry is
+            // stored and the order iteration visits them, never what
+            // `get`, `contains_key`, `contains` or `len` return. The map is
+            // read as the unordered one, whose forms the lift takes only
+            // where they do not depend on that order, whatever `S` is.
+            ("HashMap", 3) => Ty::Map(arg(0)?, arg(1)?, false),
             ("BTreeSet", 1) => Ty::Set(arg(0)?, true),
             ("HashSet", 1) => Ty::Set(arg(0)?, false),
+            ("HashSet", 2) => Ty::Set(arg(0)?, false),
             // A double-ended queue is the sequence of its items, front to
             // back, as a vector is.
             ("VecDeque", 1) if imported => Ty::List(arg(0)?),
