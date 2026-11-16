@@ -3866,13 +3866,30 @@ pub struct EmbedCensus {
 /// modules, which no crate name can be.
 pub const OWN: &str = "(the crate's own modules)";
 
+/// The primitive types, whose inherent methods core and alloc define: a
+/// path a dump prints from one (`i64::checked_add`) is theirs.
+const PRIMITIVES: [&str; 17] = [
+    "bool", "char", "str", "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64",
+    "u128", "usize", "f32", "f64",
+];
+
 /// Why a callee `name` a body of `krate` leaves to its dictionary is not
-/// linked, read from the path the dump prints, with the libraries
-/// `linked` into the program: the crate the path names (a qualified
-/// path's self type, or its trait where the self type is a primitive), or
-/// a generic parameter the caller's bound abstracts, or the platform (an
-/// intrinsic, inline assembly, a foreign item: a name with no path).
-pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
+/// linked, read from the path the dump prints, with the crate's own
+/// top-level modules `own` (a workspace dump prints the crate's items from
+/// them, without the crate's name) and the libraries `linked` into the
+/// program: the crate the path names (a qualified path's self type, or its
+/// trait where the self type is a primitive; a primitive's own path is
+/// core's), or a generic parameter the caller's bound abstracts, or the
+/// platform (an intrinsic, inline assembly, a foreign item: a name with no
+/// path).
+pub fn unlinked_reason(name: &str, krate: &str, own: &[&str], linked: &[&str]) -> String {
+    const VALUE: &str = "a call through a function value (a closure, a function pointer, `dyn Fn`)";
+    const BOUND: &str = "a generic parameter's bound";
+    // A call the dump prints through an operand (`move _5 as &dyn Fn(..)`,
+    // `(_3 as Continue).0: F`) names no item.
+    if name.starts_with(['_', '(']) || name.starts_with("move ") || name.starts_with("copy ") {
+        return VALUE.into();
+    }
     // A qualified path `<Self as Trait>::item`: its self type, unless that
     // is a primitive or a parameter, then its trait.
     let named = match name.strip_prefix('<') {
@@ -3891,17 +3908,37 @@ pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
                     _ => {}
                 }
             }
-            let ty = rest[..split.unwrap_or(rest.len())]
-                .trim_start_matches(['&', '*', '(', '['])
-                .trim_start_matches("mut ")
-                .trim_start_matches("const ")
-                .trim_start_matches("dyn ");
+            // The type under its references, pointers, slices, tuples,
+            // lifetimes and binders.
+            let mut ty = rest[..split.unwrap_or(rest.len())].trim();
+            loop {
+                let before = ty;
+                ty = ty.trim_start_matches(['&', '*', '(', '[', ' ']);
+                for word in ["mut ", "const ", "dyn "] {
+                    ty = ty.strip_prefix(word).unwrap_or(ty);
+                }
+                if let Some(r) = ty.strip_prefix('\'') {
+                    ty = r.split_once(' ').map_or("", |(_, t)| t);
+                }
+                if let Some(r) = ty.strip_prefix("for<") {
+                    ty = r.split_once("> ").map_or("", |(_, t)| t);
+                }
+                if ty == before {
+                    break;
+                }
+            }
+            if ty.starts_with("impl ") {
+                return BOUND.into();
+            }
+            if ty.starts_with("fn(") || ty.starts_with("{closure") {
+                return VALUE.into();
+            }
             let head = ty.split("::").next().unwrap_or_default();
             let head = head.split('<').next().unwrap_or_default();
             if ty.contains("::") {
                 Some(head.to_string())
             } else if head.starts_with(char::is_uppercase) {
-                return "a generic parameter's bound".into();
+                return BOUND.into();
             } else {
                 // A primitive's impl is its trait's crate's.
                 split
@@ -3916,15 +3953,21 @@ pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
     };
     match named.as_deref() {
         None | Some("") => "the platform (an intrinsic, assembly, a foreign item)".into(),
+        // A tuple's trait impls are core's.
+        Some(c) if c.contains(", ") => "core, alloc and std are not linked".into(),
+        Some(c) if !c.chars().all(|x| x.is_alphanumeric() || x == '_') => VALUE.into(),
         Some("core" | "alloc" | "std") => "core, alloc and std are not linked".into(),
-        Some(c) if c == krate => "the crate's own, with no body in the dump".into(),
+        Some(c) if PRIMITIVES.contains(&c) => "core, alloc and std are not linked".into(),
+        Some(c) if c == krate || own.contains(&c) => {
+            "the crate's own, with no body in the dump".into()
+        }
         Some(c) if linked.contains(&c) => "a linked library leaves it to a dictionary".into(),
         Some(c) => format!("crate `{c}` is not linked"),
     }
 }
 
 impl EmbedCensus {
-    fn add(&mut self, e: &Embedded, krate: &str, linked: &[&str]) {
+    fn add(&mut self, e: &Embedded, krate: &str, own: &[&str], linked: &[&str]) {
         self.bodies += 1;
         if e.blocked.is_empty() {
             self.evaluable += 1;
@@ -3948,7 +3991,7 @@ impl EmbedCensus {
         for b in &e.bound {
             *self
                 .unlinked
-                .entry(unlinked_reason(b, krate, linked))
+                .entry(unlinked_reason(b, krate, own, linked))
                 .or_default() += 1;
         }
     }
@@ -4151,26 +4194,70 @@ pub fn embed_with(
     only: &[String],
     outputs: &Outputs<'_>,
 ) -> Result<EmbedCensus, UorustError> {
-    let Outputs {
-        harness,
-        observed,
-        register,
-        bridge,
-        differential: alone,
-        link,
-    } = *outputs;
     let root = library.parent().unwrap_or(library);
-    // Each library linked with those before it: alloc with core.
+    let linked = link_all(outputs.link, root);
+    embed_into(krate, builds_on, root, dumps, out, only, outputs, &linked)
+}
+
+/// Each library of `link` linked with those before it (alloc with core),
+/// its declarations read under `root`. A library that does not link is
+/// named and left out: the crate's calls into it stay its dictionary's,
+/// as they are unlinked.
+fn link_all(link: &[(&str, &Path)], root: &Path) -> Vec<Linked> {
     let mut linked: Vec<Linked> = Vec::new();
-    // A library that does not link is named and left out: the crate's
-    // calls into it stay its dictionary's, as they are unlinked.
     for (lib, dir) in link {
         match link_library(lib, root, dir, &linked) {
             Ok(l) => linked.push(l),
             Err(e) => eprintln!("embed: {lib} is not linked: {e}"),
         }
     }
-    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &linked)?;
+    linked
+}
+
+/// [`embed_with`] for several sets of modules, each `(only, out)` its own
+/// project, with the libraries `link` names linked once for all of them:
+/// what one factory step per (configuration, module) costs apart from the
+/// linking, which every set shares.
+pub fn embed_each(
+    krate: &str,
+    builds_on: &[String],
+    library: &Path,
+    dumps: &Path,
+    sets: &[(Vec<String>, std::path::PathBuf)],
+    link: &[(&str, &Path)],
+) -> Result<Vec<EmbedCensus>, UorustError> {
+    let root = library.parent().unwrap_or(library);
+    let linked = link_all(link, root);
+    let outputs = Outputs {
+        link,
+        ..Outputs::default()
+    };
+    sets.iter()
+        .map(|(only, out)| embed_into(krate, builds_on, root, dumps, out, only, &outputs, &linked))
+        .collect()
+}
+
+/// [`embed_with`] with its libraries already linked.
+#[allow(clippy::too_many_arguments)]
+fn embed_into(
+    krate: &str,
+    builds_on: &[String],
+    root: &Path,
+    dumps: &Path,
+    out: &Path,
+    only: &[String],
+    outputs: &Outputs<'_>,
+    linked: &[Linked],
+) -> Result<EmbedCensus, UorustError> {
+    let Outputs {
+        harness,
+        observed,
+        register,
+        bridge,
+        differential: alone,
+        link: _,
+    } = *outputs;
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, linked)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
@@ -6065,6 +6152,7 @@ fn embed_linked(
     };
     let mut census = EmbedCensus::default();
     let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
+    let own_modules: Vec<&str> = read.iter().map(|(m, _)| m.as_str()).collect();
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
@@ -6196,7 +6284,7 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e, krate, &linked_names);
+                    census.add(&e, krate, &own_modules, &linked_names);
                     signatures.insert(
                         kappa.clone(),
                         (
