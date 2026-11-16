@@ -1586,6 +1586,74 @@ fn layouts(
     Ok(n)
 }
 
+/// What marks a published link's dumps as unpacked whole under its
+/// digest: written last, so a directory without it is an interrupted
+/// unpacking, done again.
+const UNPACKED: &str = ".unpacked";
+
+/// The dumps a `--link <crate>=<dumps>` names: a directory as it is, or a
+/// published archive of one, `<url>#sha256=<hex>` (a release asset, any
+/// URL curl reads, `file://` among them), fetched into `cache` under its
+/// digest and unpacked there only when the archive's SHA-256 is the one
+/// named; the archive holds the dumps at its root (`target.toml`, the
+/// layouts, a directory per module). The digest is the trust: a link pins
+/// the bytes it was measured with, as a lock pins a crate's.
+pub fn link_dumps(dumps: &str, cache: &Path) -> Result<PathBuf, UorustError> {
+    let Some((url, digest)) = dumps.split_once("#sha256=") else {
+        return Ok(PathBuf::from(dumps));
+    };
+    let digest = digest.to_ascii_lowercase();
+    if digest.len() != 64 || !digest.chars().all(|c| c.is_ascii_hexdigit()) {
+        return Err(tool(
+            "--link",
+            format!("`{digest}` is not a SHA-256 in hex"),
+        ));
+    }
+    let dir = cache.join(&digest);
+    if dir.join(UNPACKED).is_file() {
+        return Ok(dir);
+    }
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(cache).map_err(|e| tool("--link", e))?;
+    let archive = cache.join(format!("{digest}.tar.gz"));
+    run(
+        "--link fetch",
+        Command::new("curl")
+            .args(["-sSfL", "-A", USER_AGENT, "-o"])
+            .arg(&archive)
+            .arg(url),
+    )?;
+    let bytes = std::fs::read(&archive).map_err(|e| tool("--link fetch", e))?;
+    let found = sha256_hex(&bytes);
+    if found != digest {
+        let _ = std::fs::remove_file(&archive);
+        return Err(tool(
+            "--link fetch",
+            format!("{url} is {found}, the link names {digest}"),
+        ));
+    }
+    std::fs::create_dir_all(&dir).map_err(|e| tool("--link", e))?;
+    let unpacked = run(
+        "tar",
+        Command::new("tar")
+            .arg("-xzf")
+            .arg(&archive)
+            .arg("-C")
+            .arg(&dir),
+    );
+    let _ = std::fs::remove_file(&archive);
+    unpacked?;
+    if !dir.join("target.toml").is_file() {
+        let _ = std::fs::remove_dir_all(&dir);
+        return Err(tool(
+            "--link fetch",
+            format!("{url} holds no target.toml at its root"),
+        ));
+    }
+    std::fs::write(dir.join(UNPACKED), &digest).map_err(|e| tool("--link", e))?;
+    Ok(dir)
+}
+
 /// Copy the tree `from` to `to`, its links followed.
 fn copy_tree(from: &Path, to: &Path) -> Result<(), UorustError> {
     std::fs::create_dir_all(to).map_err(|e| tool("copy", e))?;
@@ -2044,5 +2112,60 @@ mod tests {
                 .is_err_and(|e| e.to_string().contains("kept dumps need the library")),
             "{refused:?}"
         );
+    }
+
+    /// A link named by a published archive is fetched, checked against the
+    /// digest it names and unpacked under it; an archive of another digest
+    /// is refused and nothing of it is kept; a directory is itself.
+    #[test]
+    fn link_a_published_archive_is_taken_by_its_digest() {
+        let work = std::env::temp_dir().join(format!("uorust-link-fetch-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let dumps = work.join("dumps");
+        std::fs::create_dir_all(dumps.join("num")).expect("the dumps");
+        std::fs::write(dumps.join("target.toml"), "pointer_width = 64\n").expect("the target");
+        std::fs::write(dumps.join("num").join("core.f.mir"), "fn f() {}\n").expect("a dump");
+        let archive = work.join("core.tar.gz");
+        let packed = Command::new("tar")
+            .arg("-czf")
+            .arg(&archive)
+            .arg("-C")
+            .arg(&dumps)
+            .args(["target.toml", "num"])
+            .status()
+            .expect("tar");
+        assert!(packed.success());
+        let digest = sha256_hex(&std::fs::read(&archive).expect("the archive"));
+        let url = format!("file://{}", archive.display());
+        let cache = work.join("cache");
+        let got = link_dumps(&format!("{url}#sha256={digest}"), &cache).expect("fetched");
+        assert_eq!(got, cache.join(&digest));
+        assert_eq!(
+            std::fs::read_to_string(got.join("num").join("core.f.mir")).expect("unpacked"),
+            "fn f() {}\n"
+        );
+        // Taken again from the cache, unfetched: the archive is gone.
+        std::fs::remove_file(&archive).expect("removed");
+        assert_eq!(
+            link_dumps(&format!("{url}#sha256={digest}"), &cache).ok(),
+            Some(cache.join(&digest))
+        );
+        // Another archive under the digest named: refused, nothing kept.
+        std::fs::write(&archive, b"not the archive").expect("replaced");
+        let other = "0".repeat(64);
+        let refused = link_dumps(&format!("{url}#sha256={other}"), &cache);
+        assert!(
+            refused
+                .as_ref()
+                .is_err_and(|e| e.to_string().contains(&format!("the link names {other}"))),
+            "{refused:?}"
+        );
+        assert!(!cache.join(&other).exists());
+        assert!(link_dumps(&format!("{url}#sha256=xyz"), &cache).is_err());
+        assert_eq!(
+            link_dumps("target/core-mir", &cache).ok(),
+            Some(PathBuf::from("target/core-mir"))
+        );
+        let _ = std::fs::remove_dir_all(&work);
     }
 }

@@ -472,7 +472,8 @@ struct CrateArgs {
     /// A library crate to link into the crate's program, `<crate>=<dumps>`
     /// (`core=target/core-mir`, as `scripts/mir/dump-lib.sh` writes them):
     /// a call into it names its body, so a body that calls core is
-    /// evaluated through core's.
+    /// evaluated through core's. `<dumps>` may be a published archive of
+    /// them, `<url>#sha256=<hex>`, fetched and taken only at that digest.
     #[arg(long = "link", requires = "library")]
     link: Vec<String>,
 }
@@ -664,15 +665,22 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         }
         Command::Std(args) => library("std", &args),
         Command::Crate(args) => {
+            // A published link's dumps are kept by their digest, beside
+            // the kept dumps where there are some.
+            let cache = args
+                .dumps
+                .as_deref()
+                .and_then(std::path::Path::parent)
+                .map_or_else(std::env::temp_dir, std::path::Path::to_path_buf)
+                .join("uorust-links");
             let link = args
                 .link
                 .iter()
                 .map(|l| {
-                    l.split_once('=')
-                        .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
-                        .ok_or_else(|| {
-                            uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
-                        })
+                    let (k, d) = l.split_once('=').ok_or_else(|| {
+                        uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                    })?;
+                    Ok((k.to_string(), uorust::registry::link_dumps(d, &cache)?))
                 })
                 .collect::<Result<Vec<_>, UorustError>>()?;
             if let (Some(root), Some(dumps), Some(library)) =
