@@ -2,9 +2,9 @@
 # every lifted translator function exported by `lexlean production` and
 # kernel-checked, keyed by the κ of the Rust function it certifies.
 schema = "uorust/certified/1"
-result = "3cfb1b1ef3ca0760729bcead45d6ba7caa6884fd6fd445e39dd7727a1f2a726d f18b4d1b95f08e4338a836963907b589349bd83f8ebebfabfbd5324ca10307a6 b8927a3f013bd8faecb96fe29d3448182f4b98666b9bf4bcc3f0807d6dbd8068 0b21ec6486b7cac0bcc903ab9bcf3b5dbe8c30ca295dcc0fb612664b0ae44ce3"
+result = "c32516ef6b47674da2fadc6fa570525926d3dc80fa3b47185ea467e88cb0eb7c 3cfb1b1ef3ca0760729bcead45d6ba7caa6884fd6fd445e39dd7727a1f2a726d f18b4d1b95f08e4338a836963907b589349bd83f8ebebfabfbd5324ca10307a6 b8927a3f013bd8faecb96fe29d3448182f4b98666b9bf4bcc3f0807d6dbd8068 0b21ec6486b7cac0bcc903ab9bcf3b5dbe8c30ca295dcc0fb612664b0ae44ce3"
 compiler = "0.4.0"
-project = "787d5b077d89db31665da4c01e03c7ffe5baae7405b233cb1bf7f47dcbd6d30b"
+project = "0e69f10d3f5a7c8c2e4c51c8948d02b7e9fbd8bdfedf7eff3faa148c8189c4f7"
 entry = "uorust::mir::core::core_shard"
 
 # The bootstrap: the share of the translator that runs certified.
@@ -16,7 +16,7 @@ reachable_certified = 0
 
 # The build seconds per published root, which sizes the next export's shards.
 [timing]
-seconds_per_root = 64
+seconds_per_root = 391
 
 [[root]]
 function = "uorust::lift::Acc::all_axioms"
@@ -915,7 +915,7 @@ definition = "mirCoverageTerminator"
 package = "uorust_certified_mir_coverage_terminator"
 source = "c75e0a7ef5decc8df0f31419a3a645a710f1890b6e4c48d9eaeaf3cc9dfdac74"
 certification = "kernel-checked"
-closure = "8fd7240eb30e6e6fd2aab1f740f45ec82c1645694ab1853f25cb7ffb59a6db30"
+closure = "c7edfbda8d68bff0b49f7d9d9381de8494a5f4a0b28347d2b1304855ec4a7ae2"
 edition = "2021"
 
 [[root]]

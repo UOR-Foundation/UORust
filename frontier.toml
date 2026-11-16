@@ -5,8 +5,8 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 341 of 1486 functions of product code are lifted; 880
-# are residue, 92 foreign and 173 effect rows.
+# Honesty report: 341 of 1488 functions of product code are lifted; 881
+# are residue, 92 foreign and 174 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
@@ -20,7 +20,7 @@
 #     1 bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::parse::{closure#2}: type outside the lift: std::num::ParseIntError
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
-#     1 certify::<impl at crates/uorust/src/certify.rs:3390:1: 3390:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor_text::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::plan_keyed::{closure#0}: mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index
@@ -105,12 +105,12 @@
 #     1 the constant item project::compiler_semantics::SELF_LOCK
 #     1 the constant item std::string::String::as_str
 #     1 the constant item wf::Node::word
-#     1 {alloc1162: &std::sync::OnceLock<mir::stdlib::StdTable>}
+#     1 {alloc1163: &std::sync::OnceLock<mir::stdlib::StdTable>}
 #     2 {alloc257: &std::sync::atomic::Atomic<bool>}
-#     1 {alloc333: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc348: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc363: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc389: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc334: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc349: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc364: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc390: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
 #   mir::ProjectionElem::Downcast: 10
 #     10 a variant's field read outside a match on it
 #   mir::ProjectionElem::Subslice: 1
@@ -121,7 +121,7 @@
 #   mir::Rvalue::Discriminant: 5
 #     5 a discriminant read as a value
 #   mir::Rvalue::Use: 11
-#   mir::TerminatorKind::Call: 177
+#   mir::TerminatorKind::Call: 178
 #     1 <bool as std::string::ToString>::to_string
 #     3 <certify::profile::Profile as std::cmp::PartialEq>::eq
 #     1 <i128 as std::convert::From>::from
@@ -168,7 +168,7 @@
 #     1 slice::iter::Iter::find: std's MIR stops at mir::Rvalue::Use
 #     18 std::boxed::Box::new_uninit
 #     1 std::char::methods::<impl char>::is_alphanumeric
-#     1 std::collections::BTreeMap::get
+#     2 std::collections::BTreeMap::get
 #     1 std::collections::BTreeSet::insert
 #     8 std::option::Option::and_then
 #     1 std::option::Option::filter
@@ -270,7 +270,7 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, (std::string::String, std::string::String)>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     2 std::iter::Enumerate<std::slice::Iter<'_, std::vec::Vec<char>>>
-#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5690:17: 5690:20}>
+#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5746:17: 5746:20}>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:746:32: 746:35}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:1099:54: 1099:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:182:37: 182:40}>
@@ -281,7 +281,7 @@
 #     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:2305:54: 2305:57}>
 #     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:3658:55: 3658:58}>
 #     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5894:53: 5894:56}>
-#     1 std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1841:14: 1841:17}>
+#     1 std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1884:14: 1884:17}>
 #     1 std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/lex.rs:573:48: 573:54}>
 #     1 std::iter::Once<&str>
 #     1 std::iter::Rev<std::slice::Iter<'_, names::Bindings>>
@@ -320,7 +320,7 @@
 #     1 std::str::Split<'_, &str>
 #     1 std::str::Split<'_, [char; 2]>
 #     1 std::str::Split<'_, char>
-#     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6030:16: 6030:30}>
+#     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6086:16: 6086:30}>
 #     1 std::str::SplitWhitespace<'_>
 #     1 std::str::Utf8Error
 #     1 syn::Generics
@@ -481,11 +481,11 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1486
+functions = 1488
 lifted = 341
-residue = 880
+residue = 881
 foreign = 92
-effect = 173
+effect = 174
 
 [[construct]]
 construct = "type outside the lift: Fun.cx: UorustMirLowerCx.consts: IrBody.blocks: IrBlock.statements: IrStatement::Assign.0: IrPlace.projection: IrProjection::Other.0: spec::MirProjectionElem"
@@ -1003,6 +1003,11 @@ cause = "mir::TerminatorKind::Call"
 functions = 2
 
 [[construct]]
+construct = "mir::TerminatorKind::Call: std::collections::BTreeMap::get"
+cause = "mir::TerminatorKind::Call"
+functions = 2
+
+[[construct]]
 construct = "mir::TerminatorKind::Call: std::option::Option::or_else"
 cause = "mir::TerminatorKind::Call"
 functions = 2
@@ -1199,6 +1204,11 @@ functions = 1
 
 [[construct]]
 construct = "calls uorust::certify::profile::Profile::resolve, which reaches an effect"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "calls uorust::certify::run_lexlean, which reaches an effect"
 cause = "effect"
 functions = 1
 
@@ -1508,7 +1518,7 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
-construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3390:1: 3390:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -1913,27 +1923,27 @@ cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc1162: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+construct = "mir::Operand::Constant: {alloc1163: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc333: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc334: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc348: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc349: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc363: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc364: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc389: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc390: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
@@ -2089,11 +2099,6 @@ functions = 1
 
 [[construct]]
 construct = "mir::TerminatorKind::Call: std::char::methods::<impl char>::is_alphanumeric"
-cause = "mir::TerminatorKind::Call"
-functions = 1
-
-[[construct]]
-construct = "mir::TerminatorKind::Call: std::collections::BTreeMap::get"
 cause = "mir::TerminatorKind::Call"
 functions = 1
 
@@ -2423,7 +2428,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5690:17: 5690:20}>"
+construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5746:17: 5746:20}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -2478,7 +2483,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1841:14: 1841:17}>"
+construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1884:14: 1884:17}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -2588,7 +2593,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6030:16: 6030:30}>"
+construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6086:16: 6086:30}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3159,7 +3164,7 @@ reason = "mir"
 detail = "mir::Ty: std::collections::btree_map::Values<'_, std::string::String, std::string::String>"
 
 [[residue]]
-kappa = "cb8d9b71b1cdf70204fbc68f3e124f77a37b56057f5b0ea97e8ec1387d2a4e33"
+kappa = "1f58fec1f826fc47072c4e76812712807435916400e44f80dabf02db803d8091"
 function = "uorust::certify::Compiler::version"
 reason = "mir"
 detail = "mir::Ty: std::str::Lines<'_>"
@@ -3204,7 +3209,7 @@ detail = "mir::Ty: mir::ir::IrBody"
 kappa = "a6f0acd7875848fae482fd78593f32df889beb11c75c8554e97a0d49d4c4f89f"
 function = "uorust::certify::Profile::cargo_manifest"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3390:1: 3390:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 
 [[residue]]
 kappa = "4524f44ab3599fff8c711259814066946be6a7ec0eff85d1aad10ce449999e4c"
@@ -3372,7 +3377,7 @@ detail = "mir::TerminatorKind::Call: uorust::certify::plan_keyed, whose translat
 kappa = "96ff8494a504d9c4d198b6b14ea7bc5f12bd08ca4d419f75306782c623b92cd1"
 function = "uorust::certify::prior_refusals"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1841:14: 1841:17}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1884:14: 1884:17}>"
 
 [[residue]]
 kappa = "ec590593c7df28918a514e8102fd0184fbc94616a4697679452ea48a31fa7677"
@@ -3876,19 +3881,19 @@ detail = "mir::Ty: std::ops::RangeTo<usize>"
 kappa = "e69b494047df0de0474cd19bd1fd0f8b467f867b639f60d60fe50bd3a63abc2b"
 function = "uorust::embed::defined_float_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc348: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc349: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "bcfcb0fdc7be5af8f14bfd9c8dad1d118d2887b7816855fb6ad322fca464c482"
 function = "uorust::embed::defined_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc333: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc334: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "520427207441734718b88fdbf38d7648dcd8182ec0f9e49abc013bf5b066ccf5"
 function = "uorust::embed::defined_layout_queries"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc363: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc364: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "fa0b949c883de29ac1f28340729feb593944e35b0eb69196a5488f81d3e557a5"
@@ -4218,7 +4223,7 @@ detail = "mir::TerminatorKind::Call: uorust::embed::generic_parts, whose transla
 kappa = "c55e780bbdd5fed1280f58966b9f63fbf933e85e5043ceab3a04894f3eb9aa92"
 function = "uorust::embed::undefined_constructs"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc389: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc390: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 
 [[residue]]
 kappa = "02aea09e67a6121deca36b2f63056e2fa30ba11499a45bc7d6a51686c68710d7"
@@ -7104,7 +7109,7 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 kappa = "a52e07bf3cf71f0bb47d0620049df5db15379922c1410a447a682b7af77a6e4c"
 function = "uorust::mir::stdlib::table"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc1162: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+detail = "mir::Operand::Constant: {alloc1163: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 
 [[residue]]
 kappa = "47bcab9e837dab29d1ea09c2762342c564778078ae7bdca12f4b27fa4c7b36f1"
@@ -7575,10 +7580,16 @@ reason = "mir"
 detail = "mir::TerminatorKind::Call: project::indexed"
 
 [[residue]]
-kappa = "010195e80a46b96ae710c768b51c4248c72bba17aaa53a7eb06e0d4997ad349a"
+kappa = "5ed00b90d0cc4723f46045505e92e9e2e67c13eae7f87c6d27a6512ec834ab15"
 function = "uorust::project::behavior"
 reason = "mir"
 detail = "mir::Ty: project::Notes"
+
+[[residue]]
+kappa = "657fde1b2e0a37b2fd6c7d5609853bf7a96369fdb2ec6db1f4702349862207d0"
+function = "uorust::project::call_reading"
+reason = "mir"
+detail = "mir::TerminatorKind::Call: std::collections::BTreeMap::get"
 
 [[residue]]
 kappa = "088e89b79f5e816d55d327e9e51126bbbb5cf6e30e2159626747fc6b0ad9a216"
@@ -7638,7 +7649,7 @@ detail = "mir::Ty: std::collections::BTreeSet<lift::Ty>"
 kappa = "dfc0d7cab9d26456c3716f11b6f77193223b923bb050d34e875d8a1b9e8c9a22"
 function = "uorust::project::foreign_crate"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5690:17: 5690:20}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5746:17: 5746:20}>"
 
 [[residue]]
 kappa = "36a3cc676d83c1654cfdeb0f07b8c8b4855ca1f5ff4fa460024152569937291d"
@@ -7713,7 +7724,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index"
 
 [[residue]]
-kappa = "c842ebe386b746978888fc15bdee5761f64b0275d23528dc662f3b470b6f87d9"
+kappa = "cce910e01d594f1915647b451ec3362da123e50042ebd5eab64a5f2c362f02f2"
 function = "uorust::project::project"
 reason = "mir"
 detail = "mir::Ty: project::Options"
@@ -7749,7 +7760,7 @@ reason = "mir"
 detail = "mir::Ty: dyn for<'a> std::ops::Fn(&'a str) -> std::option::Option<&str>"
 
 [[residue]]
-kappa = "402853d0e963b774f903c865fac785077afaddcf4d6d0c7dc5a866bf81e37b99"
+kappa = "0138575fb336ebe5e64d970ac343b3e5e4152cf5e2f35e83b41b32659c01d3a1"
 function = "uorust::project::resolve"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -7818,7 +7829,7 @@ detail = "mir::Operand::Constant: the constant item project::LEXLEAN"
 kappa = "8dc88bd771106676e5f7cbff4fe0272c5aabb6ba15e27545959fdb18979e67cd"
 function = "uorust::project::words"
 reason = "mir"
-detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6030:16: 6030:30}>"
+detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6086:16: 6086:30}>"
 
 [[residue]]
 kappa = "32f540e330344f10efa97e8456914778545d4d73323f8cfafcd1ed7cf348c830"
@@ -8598,7 +8609,7 @@ function = "uorust::certify"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "32478e1a1091c8a4c8ecfbf66bbd1d16833f2394d2b751447b53fe3c6d6aeac6"
+kappa = "d098413cd4cd69e8308ab925fcb24e29a04ca767aab3775e4289918ac3a2aea6"
 function = "uorust::certify::Compiler::installed"
 effect = "Process effect: std::process::Command::new"
 
@@ -8628,7 +8639,7 @@ function = "uorust::certify::build_all"
 effect = "calls uorust::certify::build_batch, which performs a Fs effect: Path::exists"
 
 [[effect]]
-kappa = "a1866616483113a94b4048942fd12315f612afb4d1ef07c85229fb18478623c0"
+kappa = "bce41d7fe5a38a9caff73d7033374eeb4317d7ee9013a824af73c39cc396443b"
 function = "uorust::certify::build_batch"
 effect = "Fs effect: Path::exists"
 
@@ -8668,7 +8679,7 @@ function = "uorust::certify::cases::tests"
 effect = "Process effect: std::process::Command::new"
 
 [[effect]]
-kappa = "062e612dcee17c8677813ada90889f174f60674d6770424bcabc9f6c3f7db300"
+kappa = "8e5188d799ba6c952bcf83353307e88439362895b39f7ad1862c548054201d56"
 function = "uorust::certify::closure_kappas"
 effect = "Fs effect: std::fs::read"
 
@@ -8708,12 +8719,12 @@ function = "uorust::certify::kept_roots"
 effect = "Fs effect: std::fs::read_dir"
 
 [[effect]]
-kappa = "74bbbe041d53a176a3a8569db6714177f863472b5afc961bd66e97c2c130358b"
+kappa = "b1006a1bc087fd5183d042fe9bbde533e140ede4e7bfd1f5b92f082b6f829efc"
 function = "uorust::certify::lexlean"
-effect = "calls uorust::certify::lexlean_until, which performs a Process effect: std::process::Command::new"
+effect = "calls uorust::certify::run_lexlean, which reaches an effect"
 
 [[effect]]
-kappa = "ee24f5106b3a8058a4242ca0000582189feaaf33086cc31384b1b5189e197edd"
+kappa = "1dfed5f1399e73643675b8cfb8d0f17184b9ce69c5034746a9f64907ece7075d"
 function = "uorust::certify::lexlean_until"
 effect = "Process effect: std::process::Command::new"
 
@@ -8748,7 +8759,7 @@ function = "uorust::certify::production"
 effect = "Fs effect: std::fs::write"
 
 [[effect]]
-kappa = "91eb1c8bbfb062e331344939feffdc44617a5eaef3f3435e03cf82f22bca8b6d"
+kappa = "a091db36e1f7ea60e757a85d9eca8821ad85c09d27695e4efb18e7abbe7c9c53"
 function = "uorust::certify::production_build"
 effect = "Fs effect: Path::exists"
 
@@ -8778,9 +8789,14 @@ function = "uorust::certify::project_files"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "123b287f38ba882d63a0cbef87385efec52eae0927c91bf9bde46a1747f735eb"
+kappa = "ad99276ed6c8744cc32436f978852f6cf8653731fd37f647d170b5200a3f4859"
 function = "uorust::certify::project_identity"
 effect = "Fs effect: std::fs::read_to_string"
+
+[[effect]]
+kappa = "89354d5db9b2132f109f1e6ae63f5938b724903929b62b9477db939d77955e51"
+function = "uorust::certify::run_lexlean"
+effect = "calls uorust::certify::lexlean_until, which performs a Process effect: std::process::Command::new"
 
 [[effect]]
 kappa = "279e810db9b06e22c8010cb0e594e2152edd59114425e75beeefc158bcf35b2d"
