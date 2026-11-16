@@ -843,6 +843,110 @@ fn lib_files(package: &Package) -> BTreeSet<&str> {
         .collect()
 }
 
+/// The native-library profile's bounds on the Cargo metadata it holds
+/// (SPEC 12.6, enforced by PrismPM's `holo/library.rs` `validate`): a
+/// description of at most 1024 UTF-8 bytes, a Cargo name of at most 64, and
+/// repository and homepage URIs of at most 2048.
+const DESCRIPTION_BYTES: usize = 1024;
+const CARGO_NAME_BYTES: usize = 64;
+const URI_BYTES: usize = 2048;
+
+/// What the native-library profile admits for the metadata `slot`, when
+/// `value` is not that (SPEC 12.6): a control-free description of at most
+/// [`DESCRIPTION_BYTES`]; a Cargo name of 1 to [`CARGO_NAME_BYTES`]
+/// lowercase ASCII letters, digits, `_` or `-`, beginning with a letter; a
+/// canonical stable SemVer version (no pre-release, no build metadata); and
+/// for the repository and the homepage an ASCII `https` URI of at most
+/// [`URI_BYTES`] by RFC 3986's grammar, whose host is a registered name or
+/// an IPv4 address. Cargo admits more in each (an `http` URL, an upper-case
+/// name, a pre-release), and a project holding such a value is one
+/// `prismpm check` refuses, so the package gets a row instead.
+///
+/// A value holding a percent sign is refused whatever the slot: a LexLean
+/// source admits no raw percent character (LexLean SPEC 12.1), in a string
+/// literal too, so no project can state it.
+fn refused(slot: &str, value: &str) -> Option<String> {
+    if value.contains('%') {
+        return Some("no percent sign in a LexLean source (LexLean SPEC 12.1)".to_string());
+    }
+    let admitted = match slot {
+        "description" => value.len() <= DESCRIPTION_BYTES && !value.chars().any(char::is_control),
+        "name" => {
+            value.len() <= CARGO_NAME_BYTES
+                && value.as_bytes().first().is_some_and(u8::is_ascii_lowercase)
+                && value.bytes().all(|b| {
+                    b.is_ascii_lowercase() || b.is_ascii_digit() || matches!(b, b'_' | b'-')
+                })
+        }
+        "version" => semver::Version::parse(value)
+            .is_ok_and(|v| v.pre.is_empty() && v.build.is_empty() && v.to_string() == value),
+        _ => value.len() <= URI_BYTES && https_uri(value),
+    };
+    if admitted {
+        return None;
+    }
+    Some(match slot {
+        "description" => format!("control-free text of at most {DESCRIPTION_BYTES} bytes"),
+        "name" => format!(
+            "1 to {CARGO_NAME_BYTES} lowercase ASCII letters, digits, underscores or \
+             hyphens, beginning with a letter"
+        ),
+        "version" => "a canonical stable SemVer version".to_string(),
+        _ => format!(
+            "an ASCII https URI of at most {URI_BYTES} bytes whose host is a name or an \
+             IPv4 address"
+        ),
+    })
+}
+
+/// Whether `value` is an `https` URI by RFC 3986's grammar (`"https://"
+/// authority path-abempty ["?" query] ["#" fragment]`), with the host a
+/// registered name or an IPv4 address (both read by the `reg-name` rule) and
+/// no IP literal, which this check does not read and so refuses.
+fn https_uri(value: &str) -> bool {
+    const SUB_DELIMS: &[u8] = b"!$&'()*+,;=";
+    let unreserved = |b: u8| b.is_ascii_alphanumeric() || matches!(b, b'-' | b'.' | b'_' | b'~');
+    // Each byte is in `extra`, unreserved or a sub-delimiter, or begins a
+    // percent-encoded octet.
+    let chars = |text: &str, extra: &[u8]| {
+        let bytes = text.as_bytes();
+        let mut i = 0;
+        while i < bytes.len() {
+            let b = bytes[i];
+            if b == b'%' {
+                let hex = |at: usize| bytes.get(at).is_some_and(u8::is_ascii_hexdigit);
+                if !(hex(i + 1) && hex(i + 2)) {
+                    return false;
+                }
+                i += 3;
+                continue;
+            }
+            if !(unreserved(b) || SUB_DELIMS.contains(&b) || extra.contains(&b)) {
+                return false;
+            }
+            i += 1;
+        }
+        true
+    };
+    let Some(rest) = value.strip_prefix("https://") else {
+        return false;
+    };
+    let (rest, fragment) = rest.split_once('#').unwrap_or((rest, ""));
+    let (rest, query) = rest.split_once('?').unwrap_or((rest, ""));
+    let (authority, path) = match rest.find('/') {
+        Some(at) => rest.split_at(at),
+        None => (rest, ""),
+    };
+    let (userinfo, host_port) = authority.split_once('@').unwrap_or(("", authority));
+    let (host, port) = host_port.rsplit_once(':').unwrap_or((host_port, ""));
+    chars(fragment, b":@/?")
+        && chars(query, b":@/?")
+        && chars(path, b":@/")
+        && chars(userinfo, b":")
+        && chars(host, b"")
+        && port.bytes().all(|b| b.is_ascii_digit())
+}
+
 /// The package's `NativeLibrary` value over `exports` and `acceptance`, or
 /// none, with each slot no rule defines an undefined slot of the register.
 fn project(
@@ -894,6 +998,30 @@ fn project(
                 format!(
                     "its Cargo.toml states no {fields}; the SDK's native-library profile \
                      requires cargo{} and no rule infers one",
+                    pascal(&[slot])
+                ),
+            ));
+        } else if let Some(want) = refused(slot, value) {
+            undefined.push((
+                slot,
+                format!(
+                    "its Cargo.toml states {fields} as a value no library project can \
+                     hold as cargo{}: the SDK admits {want}",
+                    pascal(&[slot])
+                ),
+            ));
+        }
+    }
+    for (slot, value, field) in [
+        ("name", &package.name, "`package.name`"),
+        ("version", &package.version, "`package.version`"),
+    ] {
+        if let Some(want) = refused(slot, value) {
+            undefined.push((
+                slot,
+                format!(
+                    "its Cargo.toml states {field} as a value no library project can \
+                     hold as cargo{}: the SDK admits {want}",
                     pascal(&[slot])
                 ),
             ));
@@ -1313,5 +1441,60 @@ mod tests {
             cause.contains("last component textLength is also that of Prelude::textLength"),
             "{cause}"
         );
+    }
+
+    /// The profile's metadata rules (SPEC 12.6), both ways: what PrismPM
+    /// admits is admitted, what Cargo admits beyond it is refused.
+    #[test]
+    fn library_profile_admits_only_what_the_sdk_admits() {
+        for uri in [
+            "https://example.org/zeta",
+            "https://example.org",
+            "https://user:pw@example.org:8443/a/b?q=1&r=/x?#frag/ment",
+            "https://127.0.0.1/",
+            "https://example.org/a(b)!$*,;=~",
+        ] {
+            assert_eq!(refused("repository", uri), None, "{uri}");
+            assert_eq!(refused("homepage", uri), None, "{uri}");
+        }
+        for uri in [
+            "http://example.org/zeta",
+            "HTTPS://example.org",
+            "ftp://example.org",
+            "https://exa mple.org",
+            "https://example.org/caf\u{e9}",
+            "https://example.org/%zz",
+            "https://example.org/%4",
+            "https://example.org/a%2Fb",
+            "https://example.org:80a/",
+            "https://a:b:c/",
+            "https://a@b@c/",
+            "https://[::1]/",
+            "https://example.org/a^b",
+            "https://example.org/#a#b",
+            "https://example.org/\u{7f}",
+        ] {
+            assert!(refused("repository", uri).is_some(), "{uri}");
+        }
+        let long = format!("https://example.org/{}", "a".repeat(URI_BYTES));
+        assert!(refused("repository", &long).is_some());
+        assert_eq!(refused("repository", &long[..URI_BYTES]), None);
+        for name in ["zeta", "z", "zeta-core_2"] {
+            assert_eq!(refused("name", name), None, "{name}");
+        }
+        for name in ["Zeta", "2zeta", "_zeta", "ze.ta", ""] {
+            assert!(refused("name", name).is_some(), "{name}");
+        }
+        assert!(refused("name", &"z".repeat(CARGO_NAME_BYTES + 1)).is_some());
+        assert_eq!(refused("name", &"z".repeat(CARGO_NAME_BYTES)), None);
+        assert_eq!(refused("version", "0.1.0"), None);
+        for version in ["0.1.0-alpha.1", "1.0.0+build", "1.0", "01.0.0"] {
+            assert!(refused("version", version).is_some(), "{version}");
+        }
+        assert_eq!(refused("description", "The zeta part."), None);
+        assert!(refused("description", "Two\nlines").is_some());
+        assert!(refused("description", "The 100% part.").is_some());
+        assert!(refused("description", &"d".repeat(DESCRIPTION_BYTES + 1)).is_some());
+        assert_eq!(refused("description", &"d".repeat(DESCRIPTION_BYTES)), None);
     }
 }

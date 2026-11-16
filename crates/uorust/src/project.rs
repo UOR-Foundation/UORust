@@ -7983,4 +7983,69 @@ mod tests {
             assert!(!behavior.contains(&format!("name: {other},")), "{behavior}");
         }
     }
+
+    /// A package whose repository is an `http` URL (Cargo takes it; the
+    /// SDK's profile admits only `https`) gets no library project, which
+    /// `prismpm check` would refuse, but a row naming the field; so does a
+    /// pre-release version.
+    #[test]
+    fn library_route_a_value_the_profile_does_not_admit_is_refused_naming_the_field() {
+        let dir = std::env::temp_dir().join(format!("uorust-libroute-http-{}", std::process::id()));
+        let zeta = "[package]\nname = \"zeta\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+                    rust-version = \"1.70\"\ndescription = \"The zeta part.\"\n\
+                    repository = \"http://example.org/zeta\"\n";
+        let iota = library_route_manifest("iota", "").replace("0.1.0", "0.1.0-alpha.1");
+        let files = library_route_written(
+            &dir,
+            &[
+                (
+                    "Cargo.toml",
+                    "[workspace]\nmembers = [\"zeta\", \"iota\"]\nresolver = \"2\"\n",
+                ),
+                ("zeta/Cargo.toml", zeta),
+                (
+                    "zeta/src/lib.rs",
+                    "//! Zeta.\n\n/// Zero.\npub fn zero(n: u8) -> bool {\n    n == 0\n}\n",
+                ),
+                (
+                    "zeta/tests/claims.rs",
+                    "#[test]\nfn zero_holds() {\n    assert!(zeta::zero(0));\n}\n",
+                ),
+                ("iota/Cargo.toml", &iota),
+                (
+                    "iota/src/lib.rs",
+                    "//! Iota.\n\n/// One.\npub fn one(n: u8) -> bool {\n    n == 1\n}\n",
+                ),
+                (
+                    "iota/tests/claims.rs",
+                    "#[test]\nfn one_holds() {\n    assert!(iota::one(1));\n}\n",
+                ),
+            ],
+        );
+        let frontier = library_route_text(&files, "frontier.toml");
+        assert!(
+            frontier.contains(
+                "its Cargo.toml states `package.repository` as a value no library project \
+                 can hold as cargoRepository: the SDK admits"
+            ),
+            "{frontier}"
+        );
+        assert!(
+            frontier.contains(
+                "its Cargo.toml states `package.homepage` or `package.repository` as a value"
+            ),
+            "{frontier}"
+        );
+        assert!(
+            frontier.contains(
+                "its Cargo.toml states `package.version` as a value no library project \
+                 can hold as cargoVersion: the SDK admits"
+            ),
+            "{frontier}"
+        );
+        assert!(
+            !files.keys().any(|p| p.starts_with("library/")),
+            "{frontier}"
+        );
+    }
 }
