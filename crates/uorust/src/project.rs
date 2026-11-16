@@ -92,6 +92,9 @@ struct Notes {
     /// Functions the lift took: the definition each lifted to, and where it
     /// parts from the Rust function, if anywhere.
     lifted: BTreeMap<String, (Span, String, Vec<String>)>,
+    /// The acceptance roots each package's tests yield, by package name: the
+    /// closed Boolean definitions the Behavior module proves true.
+    roots: BTreeMap<String, Vec<String>>,
 }
 
 impl Model {
@@ -485,40 +488,44 @@ fn library(ws: &Workspace, prefix: &str, behavior: &Module, notes: &mut Notes) -
     } else {
         package.homepage.clone()
     };
-    let qualified = |name: &str| format!("{prefix}.{BEHAVIOR}.{name}");
-    let mut exports: Vec<String> = Vec::new();
-    let mut acceptance: Vec<String> = Vec::new();
-    // An acceptance root is a closed Boolean definition the module proves
-    // true: the theorem `(({root}) = true)` is what makes it one.
-    let proved: BTreeSet<&str> = behavior
+    // The library's exports are the definitions its own functions lifted to
+    // (their crate path begins with the lib target's crate name) and its
+    // acceptance roots; every acceptance root is an export (SPEC 12.6).
+    let lib_crate = package
+        .targets
+        .iter()
+        .find(|t| t.kind == TargetKind::Lib)
+        .map(|t| format!("{}::", t.name.replace('-', "_")))
+        .unwrap_or_default();
+    let defined: BTreeSet<&str> = behavior
         .decls
         .iter()
         .filter_map(|decl| match decl {
-            Decl::Theorem {
-                statement,
-                parameters,
-                ..
-            } if parameters.is_empty() => statement
-                .strip_prefix("((")
-                .and_then(|s| s.strip_suffix(") = true)")),
+            Decl::Definition { name, .. } => Some(name.as_str()),
             _ => None,
         })
         .collect();
-    for decl in &behavior.decls {
-        if let Decl::Definition {
-            name,
-            parameters,
-            result,
-            ..
-        } = decl
-        {
-            exports.push(qualified(name));
-            if parameters.is_empty() && result == "Bool" && proved.contains(name.as_str()) {
-                acceptance.push(qualified(name));
-            }
-        }
-    }
+    let in_behavior = |q: &str| q.strip_prefix(&qualified(BEHAVIOR, "")).map(str::to_string);
+    let mut acceptance: Vec<String> = notes
+        .roots
+        .get(&package.name)
+        .into_iter()
+        .flatten()
+        .filter(|root| defined.contains(root.as_str()))
+        .map(|root| format!("{prefix}.{BEHAVIOR}.{root}"))
+        .collect();
+    let mut exports: Vec<String> = notes
+        .lifted
+        .iter()
+        .filter(|(path, _)| path.starts_with(&lib_crate))
+        .filter_map(|(_, (_, q, _))| in_behavior(q))
+        .filter(|name| defined.contains(name.as_str()))
+        .map(|name| format!("{prefix}.{BEHAVIOR}.{name}"))
+        .chain(acceptance.iter().cloned())
+        .collect();
+    exports.dedup();
     exports.sort();
+    exports.dedup();
     acceptance.sort();
     let mut undefined = Vec::new();
     for (slot, value) in [
@@ -3942,6 +3949,11 @@ fn behavior(
                     // definition, which a native library lists and its
                     // generated package executes (SPEC 12.6).
                     let root = format!("{name}Root");
+                    notes
+                        .roots
+                        .entry(ctx.package(r).name.clone())
+                        .or_default()
+                        .push(root.clone());
                     decls.push(Decl::Definition {
                         name: root.clone(),
                         parameters: Vec::new(),
