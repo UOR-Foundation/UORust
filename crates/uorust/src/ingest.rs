@@ -1277,6 +1277,7 @@ fn items(
                         file: rel.to_string(),
                         line: e.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
                     variants: e
@@ -1301,6 +1302,7 @@ fn items(
                         file: rel.to_string(),
                         line: st.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&st.attrs)),
                 });
                 syntax.structs.push(match &st.fields {
@@ -1346,6 +1348,9 @@ fn items(
                     c.ident.to_string(),
                     crate::convert::ty(&c.ty),
                     crate::convert::block(&value),
+                    scope,
+                    c.to_token_stream().to_string(),
+                    c.ident.span().start().line,
                 ));
             }
             syn::Item::Use(u) => {
@@ -1360,7 +1365,16 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
+                    // The scopes the module's items push are named inside
+                    // it; each module around them puts its name before.
+                    let own = file.scopes.len();
                     items(inner, rel, None, test, product, lib, file, syntax);
+                    for inside in &mut file.scopes[own..] {
+                        inside.module = match inside.module.as_str() {
+                            "" => m.ident.unraw().to_string(),
+                            below => format!("{}::{below}", m.ident.unraw()),
+                        };
+                    }
                 }
             }
             _ => {}

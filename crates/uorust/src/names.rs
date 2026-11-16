@@ -25,7 +25,7 @@ use syn::visit::Visit;
 use crate::admit::Refusal;
 use crate::ast::{FnArg, GenericArgument, PathArguments, RustType, TypeKind};
 use crate::error::{io, UorustError};
-use crate::facts::{FnFact, SourceFile, Syntax, TargetKind, Workspace};
+use crate::facts::{FnFact, SourceFile, Span, Syntax, TargetKind, Workspace};
 
 /// A `cfg` predicate, as its attribute writes it.
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -330,8 +330,16 @@ pub(crate) struct Scope {
     uses: Vec<UseName>,
     globs: Vec<Glob>,
     types: BTreeMap<String, Vec<TypeDecl>>,
-    /// The free functions it declares, each with who may name it.
-    values: BTreeMap<String, Vec<Vis>>,
+    /// The free functions, constants and statics it declares (the items
+    /// of the value namespace a path reads), each with who may name it and
+    /// the `cfg` predicates it stands under.
+    values: BTreeMap<String, Vec<(Vis, Vec<Cfg>)>>,
+    /// It invokes a macro at item level (`make!(go, 4);`), whose expansion
+    /// may declare any name: the items it declares are not read here.
+    opaque: bool,
+    /// The `cfg` predicates each declaration of the module stands under
+    /// (one, or one per configuration for a module written twice).
+    cfgs: Vec<Vec<Cfg>>,
     /// The modules it declares, inline or in a file of their own.
     mods: BTreeSet<String>,
     impls: Vec<ImplDecl>,
@@ -459,6 +467,8 @@ pub(crate) struct FileNames {
     fns: BTreeMap<(usize, String), FnNames>,
     /// Each enum and struct, by the line and the name of its fact.
     types: BTreeMap<(usize, String), Site>,
+    /// Each constant, by the line and the name of its identifier.
+    consts: BTreeMap<(usize, String), Site>,
 }
 
 /// What name resolution reads of a workspace.
@@ -659,7 +669,10 @@ impl FileNames {
         let under = |attrs: &[syn::Attribute]| -> Vec<Cfg> {
             cfg.iter().cloned().chain(Cfg::of(attrs)).collect()
         };
-        let mut scope = Scope::default();
+        let mut scope = Scope {
+            cfgs: vec![cfg.to_vec()],
+            ..Scope::default()
+        };
         let declare = |scope: &mut Scope,
                        name: &syn::Ident,
                        kind: Kind,
@@ -682,7 +695,7 @@ impl FileNames {
                         .values
                         .entry(f.sig.ident.to_string())
                         .or_default()
-                        .push(Vis::read(&f.vis));
+                        .push((Vis::read(&f.vis), under(&f.attrs)));
                     self.function(
                         &f.sig,
                         Some(&f.block),
@@ -758,6 +771,31 @@ impl FileNames {
                     declare(&mut scope, &t.ident, kind, params.len(), &t.vis);
                 }
                 syn::Item::Use(u) => use_item(u, &under(&u.attrs), &mut scope),
+                syn::Item::Const(c) => {
+                    scope
+                        .values
+                        .entry(c.ident.to_string())
+                        .or_default()
+                        .push((Vis::read(&c.vis), under(&c.attrs)));
+                    self.consts.insert(
+                        (c.ident.span().start().line, c.ident.to_string()),
+                        Site {
+                            module: module.to_string(),
+                            cfg: under(&c.attrs),
+                        },
+                    );
+                }
+                syn::Item::Static(st) => {
+                    scope
+                        .values
+                        .entry(st.ident.to_string())
+                        .or_default()
+                        .push((Vis::read(&st.vis), under(&st.attrs)));
+                }
+                // `macro_rules! name { .. }` declares a macro, no item; any
+                // other macro at item level expands to items this does not
+                // see.
+                syn::Item::Macro(m) if m.ident.is_none() => scope.opaque = true,
                 syn::Item::ExternCrate(e) => {
                     let name = match &e.rename {
                         Some((_, rename)) => rename.to_string(),
@@ -792,6 +830,8 @@ impl FileNames {
         }
         merged.mods.extend(scope.mods);
         merged.impls.extend(scope.impls);
+        merged.opaque |= scope.opaque;
+        merged.cfgs.extend(scope.cfgs);
     }
 
     fn site(&mut self, ident: &syn::Ident, module: &str, cfg: Vec<Cfg>) {
@@ -1342,7 +1382,8 @@ enum Found {
     Module(ModKey),
     /// A type a module declares.
     Type(ModKey, String),
-    /// A free function a module declares.
+    /// A free function, constant or static a module declares: an item of
+    /// the value namespace.
     Fn(ModKey, String),
     /// An item of a type: `Type::item`.
     Assoc(Box<Found>, Vec<String>),
@@ -1782,11 +1823,31 @@ impl<'a> Resolver<'a> {
             return Some(Found::Unknown);
         };
         let types = scope.types.get(name).map(Vec::as_slice).unwrap_or(&[]);
+        let config = &self.configs[x.0];
+        // A value the projected configuration compiles out is no item of
+        // the build: a reader the configuration compiles reads the name as
+        // what else binds it there (a glob's item, `r07`), and as that
+        // value only where nothing else does. A reader compiled out itself
+        // (a `#[cfg(test)]` module) reads it as the build that compiles
+        // both does.
+        let mut compiled_out = false;
         if value {
             let fns = scope.values.get(name).map(Vec::as_slice).unwrap_or(&[]);
-            if fns.iter().any(|vis| Self::visible(vis, x, from)) {
+            let visible: Vec<&Vec<Cfg>> = fns
+                .iter()
+                .filter(|(vis, _)| Self::visible(vis, x, from))
+                .map(|(_, cfg)| cfg)
+                .collect();
+            let reader_built = self.scope(from).is_none_or(|reader| {
+                reader.cfgs.is_empty() || reader.cfgs.iter().any(|c| hold(c, config) != Some(false))
+            });
+            if visible
+                .iter()
+                .any(|cfg| !reader_built || hold(cfg, config) != Some(false))
+            {
                 return Some(Found::Fn(x.clone(), name.to_string()));
             }
+            compiled_out = !visible.is_empty();
             // A struct's name is a value too: its constructor.
             let ctor =
                 |d: &TypeDecl| matches!(d.kind, Kind::Struct) && Self::visible(&d.vis, x, from);
@@ -1806,7 +1867,6 @@ impl<'a> Resolver<'a> {
                 return Some(Found::Type(x.clone(), name.to_string()));
             }
         }
-        let config = &self.configs[x.0];
         let mut found: Vec<Found> = Vec::new();
         let mut add = |one: Found| {
             if !found.contains(&one) {
@@ -1837,6 +1897,11 @@ impl<'a> Resolver<'a> {
             1 => return found.pop(),
             _ => return Some(Found::Unknown),
         }
+        // An item a macro invocation of the scope expands to stands before
+        // every glob's, and this does not read which names those are.
+        if value && scope.opaque {
+            return Some(Found::Unknown);
+        }
         let mut outside = false;
         let mut unknown = false;
         for glob in scope
@@ -1863,9 +1928,34 @@ impl<'a> Resolver<'a> {
         match found.len() {
             0 if unknown => Some(Found::Unknown),
             0 if outside => Some(Found::Outside),
+            0 if compiled_out => Some(Found::Fn(x.clone(), name.to_string())),
             0 => None,
             1 => found.pop(),
             _ => Some(Found::Unknown),
+        }
+    }
+
+    /// The item of its own crate a bare name of the value namespace
+    /// (`go` of `go()`, `N` of `N + 1`) names where module `module` of
+    /// target `target` of package `pkg` reads it: the module that declares
+    /// the item and the item's name, which differs from `name` through a
+    /// renaming `use`. Rust's own order decides it: an item the module
+    /// declares (compiled in by the projected configuration), a `use`
+    /// binding, an item a macro invocation of the module expands to, a
+    /// glob's item, the preludes. `None` where the name reads as anything
+    /// else (a crate outside the workspace, a variant a glob imports, a
+    /// name of the standard prelude) or where this does not follow it (a
+    /// macro's expansion, an unread module): a reader then binds none of
+    /// the crate's items to it.
+    pub(crate) fn bare_value(
+        &self,
+        (pkg, target, module): (usize, usize, &str),
+        name: &str,
+    ) -> Option<(String, String)> {
+        let at = (pkg, target, module.to_string());
+        match self.path(&at, &[name.to_string()], true, &mut Vec::new()) {
+            Found::Fn((p, t, declared), item) if (p, t) == (pkg, target) => Some((declared, item)),
+            _ => None,
         }
     }
 
@@ -2583,10 +2673,25 @@ pub(crate) fn stated(ws: &Workspace, syntax: &Syntax) -> (Workspace, Syntax, Vec
         let mut fns: BTreeMap<FnPath, Vec<Variant>> = BTreeMap::new();
         let mut enums: BTreeMap<(usize, String, String), Vec<Variant>> = BTreeMap::new();
         let mut structs: BTreeMap<(usize, String, String), Vec<Variant>> = BTreeMap::new();
+        // A constant's path: target, module and name, as a function's.
+        let mut consts: BTreeMap<(usize, String, String), Vec<Variant>> = BTreeMap::new();
         for (fi, file) in package.files.iter().enumerate() {
             let Some(read) = syntax.names.files.get(&file.rel) else {
                 continue;
             };
+            let declared = syntax
+                .files
+                .get(&file.rel)
+                .map_or(&[][..], |f| &f.consts[..]);
+            for (idx, (name, .., line)) in declared.iter().enumerate() {
+                if let Some(site) = read.consts.get(&(*line, name.clone())) {
+                    let key = (file.target, join(&file.module, &site.module), name.clone());
+                    consts
+                        .entry(key)
+                        .or_default()
+                        .push((fi, idx, site.cfg.clone()));
+                }
+            }
             for (idx, fact) in file.fns.iter().enumerate() {
                 let Some(names) = read.fns.get(&(fact.span.line, fact.name.clone())) else {
                     continue;
@@ -2657,6 +2762,7 @@ pub(crate) fn stated(ws: &Workspace, syntax: &Syntax) -> (Workspace, Syntax, Vec
         let mut drop_fns: BTreeSet<(usize, usize)> = BTreeSet::new();
         let mut drop_enums: BTreeSet<(usize, usize)> = BTreeSet::new();
         let mut drop_structs: BTreeSet<(usize, usize)> = BTreeSet::new();
+        let mut drop_consts: BTreeSet<(usize, usize)> = BTreeSet::new();
         for ((_, module, owner, _, _, name), variants) in &fns {
             for (fi, idx, cfg) in unstated(variants) {
                 let file = &package.files[fi];
@@ -2675,6 +2781,33 @@ pub(crate) fn stated(ws: &Workspace, syntax: &Syntax) -> (Workspace, Syntax, Vec
                     predicate: predicate(&cfg),
                 });
                 drop_fns.insert((fi, idx));
+            }
+        }
+        // A constant declared once per configuration is one constant, as a
+        // function is: the variant the configuration compiles is stated,
+        // each other is an open claim (`const K` under `cfg(any())` beside
+        // one under `cfg(all())`: the build reads the second).
+        for ((_, module, name), variants) in &consts {
+            for (fi, idx, cfg) in unstated(variants) {
+                let file = &package.files[fi];
+                let mut parts = vec![krate(file)];
+                parts.extend(
+                    module
+                        .split("::")
+                        .filter(|s| !s.is_empty())
+                        .map(str::to_string),
+                );
+                parts.push(name.clone());
+                let line = syntax.files.get(&file.rel).map_or(1, |f| f.consts[idx].5);
+                refusals.push(Refusal::CfgVariant {
+                    span: Span {
+                        file: file.rel.clone(),
+                        line,
+                    },
+                    name: parts.join("::"),
+                    predicate: predicate(&cfg),
+                });
+                drop_consts.insert((fi, idx));
             }
         }
         for (types, dropped, enumeration) in [
@@ -2724,6 +2857,7 @@ pub(crate) fn stated(ws: &Workspace, syntax: &Syntax) -> (Workspace, Syntax, Vec
             keep(&mut file_syntax.enums, fi, &drop_enums);
             keep(&mut file.structs, fi, &drop_structs);
             keep(&mut file_syntax.structs, fi, &drop_structs);
+            keep(&mut file_syntax.consts, fi, &drop_consts);
         }
     }
     (ws, syntax, refusals)

@@ -51,6 +51,18 @@ const PSEC: &str = "prism.sec@1.0.0";
 const PQUAL: &str = "prism.qual@1.0.0";
 const TITLES: &str = "uorust.titles@1.0.0";
 
+/// What name resolution names one call by (`Model::named`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Meant {
+    /// This one function of product code.
+    Fn(FnRef),
+    /// Nothing of product code: a function outside the workspace, a
+    /// constructor, a closure or a function the body itself declares.
+    Outside,
+    /// The places it is written differ, or the rules leave it open.
+    Open,
+}
+
 /// A function in the workspace: package, file and position in the file.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 struct FnRef {
@@ -81,11 +93,13 @@ struct Model {
     edges: BTreeMap<String, (String, String)>,
     /// Resolved calls: caller -> callees.
     calls: BTreeMap<FnRef, BTreeSet<FnRef>>,
-    /// Each call a function writes, as written, -> the one function of
-    /// product code the language's name resolution names at every place it
-    /// is written, or none where the places differ or the call is not one
-    /// function. Admission's reading, which the lift reads calls by too.
-    named: BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>>,
+    /// Each call a function writes, as written, -> what the language's name
+    /// resolution names at every place it is written: one function of
+    /// product code, nothing of product code (a function outside the
+    /// workspace, a constructor, a closure), or open where the places
+    /// differ or the rules do not follow the call. Admission's reading,
+    /// which the lift reads calls by too.
+    named: BTreeMap<FnRef, BTreeMap<String, Meant>>,
     /// The route the router admitted for each enum: `(package, file, enum)`.
     enum_routes: BTreeMap<(usize, usize, usize), &'static str>,
     /// The bare names a function's module binds by a `use` to a type of a
@@ -136,15 +150,25 @@ impl Model {
         self.package(r).targets[file.target].name.replace('-', "_")
     }
 
+    /// The module a function stands in inside its target: its file's
+    /// module joined with the inline modules around it in the file
+    /// (`SourceFile::item_module`). Rust names a function through both, so
+    /// this, not the file's module, is what tells two functions of one
+    /// name apart: `go` of the crate root and `go` of an inline
+    /// `mod inner` beside it are two items.
+    fn module_of(&self, r: FnRef) -> String {
+        self.file(r).item_module(self.func(r).scope)
+    }
+
     /// `crate::module::Type::name`; and `crate::module::<Type as
     /// Trait>::name` for a trait implementation's method whose type has
     /// another method of its name, which is how Rust names the two apart.
     fn path(&self, r: FnRef) -> String {
-        let file = self.file(r);
         let f = self.func(r);
         let mut parts = vec![self.crate_ident(r)];
-        if !file.module.is_empty() {
-            parts.push(file.module.clone());
+        let module = self.module_of(r);
+        if !module.is_empty() {
+            parts.push(module);
         }
         if let Some(owner) = &f.owner {
             match &f.trait_ref {
@@ -351,7 +375,7 @@ pub(crate) fn project(
     }
     let security = security(&ctx, options);
     let mir = dumps.zip(options.mir.as_ref());
-    let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
+    let (behavior, candidates) = behavior(&ctx, syntax, &resolver, &mut notes, mir);
     let supply = supply(&ctx);
     let library = library(ws, &prefix, &behavior, &mut notes);
     // The κ of every function of product code: the question its row answers.
@@ -831,12 +855,12 @@ fn resolve(
     resolver: &crate::names::Resolver<'_>,
 ) -> (
     BTreeMap<FnRef, BTreeSet<FnRef>>,
-    BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>>,
+    BTreeMap<FnRef, BTreeMap<String, Meant>>,
     Vec<Refusal>,
 ) {
     use crate::names::Outcome;
     let mut calls = BTreeMap::new();
-    let mut named: BTreeMap<FnRef, BTreeMap<String, Option<FnRef>>> = BTreeMap::new();
+    let mut named: BTreeMap<FnRef, BTreeMap<String, Meant>> = BTreeMap::new();
     let mut refusals = Vec::new();
     let all = ctx.all_fns();
     let mut by_name: BTreeMap<&str, Vec<FnRef>> = BTreeMap::new();
@@ -879,15 +903,17 @@ fn resolve(
             if outcome.is_some() {
                 let one = match outcome {
                     Some(Outcome::Resolved(fns)) => match product(fns).as_slice() {
-                        [only] => Some(*only),
-                        _ => None,
+                        [only] => Meant::Fn(*only),
+                        _ => Meant::Open,
                     },
-                    _ => None,
+                    Some(Outcome::Outside) => Meant::Outside,
+                    _ => Meant::Open,
                 };
                 let reading = named.entry(caller).or_default();
-                let agreed = reading
-                    .get(call)
-                    .map_or(one, |seen| one.filter(|_| *seen == one));
+                let agreed = match reading.get(call) {
+                    Some(seen) if *seen != one => Meant::Open,
+                    _ => one,
+                };
                 reading.insert(call.clone(), agreed);
             }
             match outcome {
@@ -1498,10 +1524,11 @@ fn interface(ctx: &Model) -> (Interface, Vec<Refusal>) {
         let file = ctx.file(r);
         let package = ctx.package(r);
         let target = &package.targets[file.target];
+        let module = ctx.module_of(r);
         let parts = [
             package.name.as_str(),
             target.name.as_str(),
-            file.module.as_str(),
+            module.as_str(),
             f.name.as_str(),
         ];
         let name = format!("ac{}", pascal(&parts));
@@ -1561,7 +1588,7 @@ fn interface(ctx: &Model) -> (Interface, Vec<Refusal>) {
     for r in call_of.keys() {
         let file = ctx.file(*r);
         by_module
-            .entry((r.pkg, file.target, file.module.clone()))
+            .entry((r.pkg, file.target, ctx.module_of(*r)))
             .or_default()
             .push(*r);
     }
@@ -2326,13 +2353,14 @@ fn module_opm(ctx: &Model, processes: &BTreeMap<FnRef, String>) -> Vec<Decl> {
         };
         let file = ctx.file(*r);
         let target = &ctx.package(*r).targets[file.target].name;
-        let path = if file.module.is_empty() {
+        let module = ctx.module_of(*r);
+        let path = if module.is_empty() {
             target.replace('-', "_")
         } else {
-            format!("{}::{}", target.replace('-', "_"), file.module)
+            format!("{}::{module}", target.replace('-', "_"))
         };
         by_module
-            .entry((component.clone(), file.module.clone(), path))
+            .entry((component.clone(), module, path))
             .or_default()
             .push(*r);
     }
@@ -3276,18 +3304,53 @@ fn quality(
 fn behavior(
     ctx: &Model,
     syntax: &Syntax,
+    resolver: &crate::names::Resolver<'_>,
     notes: &mut Notes,
     mir: Option<(&crate::mir::Dumps, &crate::mir::MirOptions)>,
 ) -> (Module, Option<String>) {
     let ws = &ctx.ws;
     let mut decls = Vec::new();
-    // Each crate's type aliases, which its types and signatures are read
-    // through. An alias spelled like a type the crate declares names one
-    // thing in its module and another elsewhere: it is not read.
-    let type_aliases: Vec<BTreeMap<String, crate::ast::Alias>> = ws
+    // Each crate's type names that two of its modules declare (an inline
+    // module is a module), whether or not the lift reads both. A file reads
+    // such a name only by its own module scope's declaration or `use`
+    // (`overlays`), and a path written to one (`crate::inner::P`,
+    // `super::P`) not at all: the lift reads a type path by its last segment
+    // in the reader's scope, which names the type the path names only where
+    // that scope happens to bind the name to it (`written_through_paths`).
+    let shared: Vec<BTreeSet<String>> = ws
         .packages
         .iter()
         .map(|package| {
+            let mut at: BTreeMap<&str, BTreeSet<(usize, String)>> = BTreeMap::new();
+            for file in &package.files {
+                if !matches!(
+                    package.targets[file.target].kind,
+                    TargetKind::Lib | TargetKind::Bin
+                ) {
+                    continue;
+                }
+                let enums = file.enums.iter().map(|e| (&e.name, e.scope));
+                let structs = file.structs.iter().map(|st| (&st.name, st.scope));
+                for (name, scope) in enums.chain(structs) {
+                    let module = (file.target, file.item_module(scope));
+                    at.entry(name.as_str()).or_default().insert(module);
+                }
+            }
+            at.into_iter()
+                .filter(|(_, modules)| modules.len() > 1)
+                .map(|(name, _)| name.to_string())
+                .collect()
+        })
+        .collect();
+    // Each crate's type aliases, which its types and signatures are read
+    // through. An alias spelled like a type the crate declares names one
+    // thing in its module and another elsewhere: it is not read; nor is one
+    // whose target writes a path to a shared name.
+    let type_aliases: Vec<BTreeMap<String, crate::ast::Alias>> = ws
+        .packages
+        .iter()
+        .enumerate()
+        .map(|(pkg, package)| {
             let declared: BTreeSet<&str> = package
                 .files
                 .iter()
@@ -3306,6 +3369,7 @@ fn behavior(
                         .aliases
                         .iter()
                         .filter(|(n, _)| !declared.contains(n.as_str()))
+                        .filter(|(_, a)| written_through_paths(&a.to.text, &shared[pkg]).is_empty())
                         .map(|(n, a)| {
                             let to = a.to.localized(&file.imports);
                             let alias = crate::ast::Alias {
@@ -3328,14 +3392,19 @@ fn behavior(
     // configuration) is refused; one name in two modules or two crates is
     // two types, each lifting under the shortest name that tells it apart.
     type Key = (usize, String, String);
+    /// A file and one of its module scopes.
+    type Scope = (usize, usize);
     /// The lifted kinds of one crate's types, by key, each struct and data
     /// enum with the file that declares it, which its fields are read in.
     #[derive(Default)]
     struct Declared {
         enums: BTreeMap<Key, Vec<String>>,
-        structs: BTreeMap<Key, (usize, Vec<(String, crate::ast::RustType)>)>,
-        datas: BTreeMap<Key, (usize, lift::RawVariants)>,
+        structs: BTreeMap<Key, (Scope, Vec<(String, crate::ast::RustType)>)>,
+        datas: BTreeMap<Key, (Scope, lift::RawVariants)>,
         spans: BTreeMap<Key, Span>,
+        /// The shared names a type's fields write through a path, which
+        /// its fields read as no type.
+        blind: BTreeMap<Key, BTreeSet<String>>,
         /// The names of the keys declared twice, which name no one type.
         twice: BTreeSet<String>,
     }
@@ -3360,7 +3429,7 @@ fn behavior(
                 if e.variants.is_empty() || (data && payload.is_empty()) {
                     continue;
                 }
-                let key = (file.target, file.module.clone(), e.name.clone());
+                let key = (file.target, file.item_module(e.scope), e.name.clone());
                 if d.spans.insert(key.clone(), e.span.clone()).is_some() {
                     clashing.insert(key);
                     notes.refusals.insert(Refusal::Collision {
@@ -3382,7 +3451,13 @@ fn behavior(
                             (v.clone(), fs)
                         })
                         .collect();
-                    d.datas.insert(key, (fi, variants));
+                    let blind: BTreeSet<String> = payload
+                        .iter()
+                        .flat_map(|(_, fs)| fs.iter())
+                        .flat_map(|(_, t)| written_through_paths(&t.text, &shared[pkg]))
+                        .collect();
+                    d.blind.insert(key.clone(), blind);
+                    d.datas.insert(key, ((fi, e.scope), variants));
                 } else {
                     d.enums
                         .insert(key, e.variants.iter().map(|v| v.name.clone()).collect());
@@ -3394,7 +3469,7 @@ fn behavior(
                 continue;
             }
             for (st, fields) in file.structs.iter().zip(&syntax.files[&file.rel].structs) {
-                let key = (file.target, file.module.clone(), st.name.clone());
+                let key = (file.target, file.item_module(st.scope), st.name.clone());
                 if d.spans.insert(key.clone(), st.span.clone()).is_some() {
                     clashing.insert(key);
                     notes.refusals.insert(Refusal::Collision {
@@ -3403,11 +3478,16 @@ fn behavior(
                     });
                     continue;
                 }
+                let blind: BTreeSet<String> = fields
+                    .iter()
+                    .flat_map(|(_, t)| written_through_paths(&t.text, &shared[pkg]))
+                    .collect();
+                d.blind.insert(key.clone(), blind);
                 let fields = fields
                     .iter()
                     .map(|(n, t)| (n.clone(), expanded(pkg, &t.localized(&file.imports))))
                     .collect();
-                d.structs.insert(key, (fi, fields));
+                d.structs.insert(key, ((fi, st.scope), fields));
             }
         }
         for key in &clashing {
@@ -3440,7 +3520,7 @@ fn behavior(
     // Each crate's names that two of its types share: a file reads one by
     // its own module's declaration or its import of it.
     let mut ambiguous: Vec<BTreeSet<String>> = Vec::new();
-    for (d, package) in declared.iter().zip(&ws.packages) {
+    for (pkg, (d, package)) in declared.iter().zip(&ws.packages).enumerate() {
         let ks = keys(d);
         let mut in_crate: BTreeMap<&str, usize> = BTreeMap::new();
         for (_, _, name) in &ks {
@@ -3453,9 +3533,10 @@ fn behavior(
                 // A name LexLean writes for a type of its own (`Prop`) is
                 // shared with it as with another crate's type.
                 let taken = lift::name_taken(name, !d.enums.contains_key(key));
-                let lex = if everywhere[name] == 1 && !taken {
+                let apart = shared[pkg].contains(name);
+                let lex = if everywhere[name] == 1 && !taken && !apart {
                     name.clone()
-                } else if in_crate[name.as_str()] == 1 {
+                } else if in_crate[name.as_str()] == 1 && !apart {
                     format!("{}{name}", pascal(&[&package.name]))
                 } else {
                     let mut parts: Vec<&str> = vec![&package.name];
@@ -3470,13 +3551,7 @@ fn behavior(
             })
             .collect();
         lexes.push(named);
-        ambiguous.push(
-            in_crate
-                .into_iter()
-                .filter(|(_, n)| *n > 1)
-                .map(|(name, _)| name.to_string())
-                .collect(),
-        );
+        ambiguous.push(shared[pkg].clone());
     }
     // Two keys whose qualified names meet name neither.
     let mut lex_count: BTreeMap<String, usize> = BTreeMap::new();
@@ -3502,53 +3577,60 @@ fn behavior(
             d.datas.remove(&key);
         }
     }
-    // Each file's reading of its crate's shared names: the type its module
-    // declares or its `use` names, and otherwise none.
-    let mut overlays: BTreeMap<(usize, usize), BTreeMap<String, String>> = BTreeMap::new();
+    // Each module scope's reading of its crate's shared names: the type
+    // its module declares or one of its own `use` items names, and
+    // otherwise none. An inline module is a scope of its own: Rust gives it
+    // neither the types nor the `use` bindings of the module around it, and
+    // gives the module around it none of its own.
+    let mut overlays: BTreeMap<(usize, usize, usize), BTreeMap<String, String>> = BTreeMap::new();
     for (pkg, package) in ws.packages.iter().enumerate() {
         for (fi, file) in package.files.iter().enumerate() {
-            let mut names: BTreeMap<String, String> = ambiguous[pkg]
-                .iter()
-                .map(|n| (n.clone(), n.clone()))
-                .collect();
-            let module: Vec<&str> = file.module.split("::").filter(|s| !s.is_empty()).collect();
-            for (local, path) in &file.imports {
-                if !names.contains_key(local) {
-                    continue;
-                }
-                // `crate::`, `self::` and `super::` as Rust reads them, any
-                // other path from the file's module.
-                let mut at = module.clone();
-                let mut segs: Vec<&str> = path.split("::").collect();
-                match segs.first() {
-                    Some(&"crate") => {
-                        at.clear();
+            for scope in 0..file.scopes.len().max(1) {
+                let reader = file.item_module(scope);
+                let mut names: BTreeMap<String, String> = ambiguous[pkg]
+                    .iter()
+                    .map(|n| (n.clone(), n.clone()))
+                    .collect();
+                let module: Vec<&str> = reader.split("::").filter(|s| !s.is_empty()).collect();
+                let uses = file.scopes.get(scope).map(|s| s.uses.as_slice());
+                for (local, path) in uses.unwrap_or_default() {
+                    if !names.contains_key(local) {
+                        continue;
+                    }
+                    // `crate::`, `self::` and `super::` as Rust reads them,
+                    // any other path from the scope's module.
+                    let mut at = module.clone();
+                    let mut segs: Vec<&str> = path.split("::").collect();
+                    match segs.first() {
+                        Some(&"crate") => {
+                            at.clear();
+                            segs.remove(0);
+                        }
+                        Some(&"self") => {
+                            segs.remove(0);
+                        }
+                        _ => {}
+                    }
+                    while segs.first() == Some(&"super") {
+                        at.pop();
                         segs.remove(0);
                     }
-                    Some(&"self") => {
-                        segs.remove(0);
+                    let Some((name, prefix)) = segs.split_last() else {
+                        continue;
+                    };
+                    at.extend(prefix);
+                    let key = (file.target, at.join("::"), name.to_string());
+                    if let Some(lex) = lexes[pkg].get(&key) {
+                        names.insert(local.clone(), lex.clone());
                     }
-                    _ => {}
                 }
-                while segs.first() == Some(&"super") {
-                    at.pop();
-                    segs.remove(0);
+                for ((target, m, name), lex) in &lexes[pkg] {
+                    if *target == file.target && *m == reader && names.contains_key(name) {
+                        names.insert(name.clone(), lex.clone());
+                    }
                 }
-                let Some((name, prefix)) = segs.split_last() else {
-                    continue;
-                };
-                at.extend(prefix);
-                let key = (file.target, at.join("::"), name.to_string());
-                if let Some(lex) = lexes[pkg].get(&key) {
-                    names.insert(local.clone(), lex.clone());
-                }
+                overlays.insert((pkg, fi, scope), names);
             }
-            for ((target, m, name), lex) in &lexes[pkg] {
-                if *target == file.target && *m == file.module && names.contains_key(name) {
-                    names.insert(name.clone(), lex.clone());
-                }
-            }
-            overlays.insert((pkg, fi), names);
         }
     }
     let scopes: Vec<Types> = declared
@@ -3582,12 +3664,12 @@ fn behavior(
                 );
                 aliases.insert(rust.to_string(), crate::order::ORDERING.to_string());
             }
-            // A field's type is read in the file that declares it.
+            // A field's type is read in the module scope that declares it.
             let mut structs: Fields = d
                 .structs
                 .into_iter()
-                .map(|(key, (fi, fs))| {
-                    let names = &overlays[&(pkg, fi)];
+                .map(|(key, ((fi, scope), fs))| {
+                    let names = &blinded(&overlays[&(pkg, fi, scope)], d.blind.get(&key));
                     let fs = fs.into_iter().map(|(n, t)| (n, t.renamed(names))).collect();
                     (named[&key].clone(), fs)
                 })
@@ -3595,8 +3677,8 @@ fn behavior(
             let datas: Datas = d
                 .datas
                 .into_iter()
-                .map(|(key, (fi, vs))| {
-                    let names = &overlays[&(pkg, fi)];
+                .map(|(key, ((fi, scope), vs))| {
+                    let names = &blinded(&overlays[&(pkg, fi, scope)], d.blind.get(&key));
                     let vs = vs
                         .into_iter()
                         .map(|(v, fs)| {
@@ -3615,12 +3697,16 @@ fn behavior(
                 .files
                 .iter()
                 .flat_map(|file| {
-                    let enums = file.enums.iter().map(|e| (&e.name, &e.derives));
-                    let structs = file.structs.iter().map(|st| (&st.name, &st.derives));
+                    let enums = file.enums.iter().map(|e| (&e.name, e.scope, &e.derives));
+                    let structs = file
+                        .structs
+                        .iter()
+                        .map(|st| (&st.name, st.scope, &st.derives));
                     enums
                         .chain(structs)
-                        .filter_map(|(n, ds)| {
-                            let lex = named.get(&(file.target, file.module.clone(), n.clone()))?;
+                        .filter_map(|(n, scope, ds)| {
+                            let key = (file.target, file.item_module(scope), n.clone());
+                            let lex = named.get(&key)?;
                             Some((lex.clone(), ds.iter().cloned().collect()))
                         })
                         .collect::<Vec<_>>()
@@ -3647,16 +3733,45 @@ fn behavior(
             }
         })
         .collect();
-    // Each file's scope: its crate's, with the crate's shared names read as
-    // the file reads them.
-    let file_scopes: BTreeMap<(usize, usize), Types> = overlays
+    // Each module scope's types: its crate's, with the crate's shared names
+    // read as the scope reads them.
+    let file_scopes: BTreeMap<(usize, usize, usize), Types> = overlays
         .iter()
-        .map(|(&(pkg, fi), names)| {
-            let mut scope = scopes[pkg].clone();
+        .map(|(&at, names)| {
+            let mut scope = scopes[at.0].clone();
             scope.aliases.extend(names.clone());
-            ((pkg, fi), scope)
+            (at, scope)
         })
         .collect();
+    // A function that writes a path to one of its crate's shared type names
+    // reads that name as no type, in its signature and its body alike.
+    let blind_of = |r: FnRef| -> BTreeSet<String> {
+        let f = ctx.func(r);
+        let mut out = written_through_paths(&f.tokens, &shared[r.pkg]);
+        if let Some(owner) = &f.owner {
+            out.extend(written_through_paths(owner, &shared[r.pkg]));
+        }
+        out
+    };
+    let fn_aliases = |r: FnRef| -> BTreeMap<String, String> {
+        let at = (r.pkg, r.file, ctx.func(r).scope);
+        blinded(&overlays[&at], Some(&blind_of(r)))
+    };
+    let fn_scopes: BTreeMap<FnRef, Types> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| !blind_of(r).is_empty())
+        .map(|r| {
+            let mut scope = file_scopes[&(r.pkg, r.file, ctx.func(r).scope)].clone();
+            scope.aliases.extend(fn_aliases(r));
+            (r, scope)
+        })
+        .collect();
+    let types_of = |r: FnRef| -> &Types {
+        fn_scopes
+            .get(&r)
+            .unwrap_or(&file_scopes[&(r.pkg, r.file, ctx.func(r).scope)])
+    };
     // Each target's scope for the MIR path, which prints a type of the
     // crate by its full path: `project::Model`.
     let mut mir_scopes: BTreeMap<(usize, usize), Types> = BTreeMap::new();
@@ -3753,7 +3868,14 @@ fn behavior(
     // A function name two crates share lifts qualified by the crate's name.
     // A free function's name two modules of a crate share lifts qualified
     // by its module.
-    let homonyms = homonym_fns(ctx);
+    let sites = value_sites(ctx, syntax);
+    let homonyms = homonym_fns(ctx, &sites);
+    let reads = Reads {
+        ctx,
+        resolver,
+        homonyms: &homonyms,
+        sites: &sites,
+    };
     let mut scoped: Vec<(Vec<Candidate<'_>>, BTreeMap<String, FnRef>)> = ws
         .packages
         .iter()
@@ -3769,7 +3891,7 @@ fn behavior(
         *pathed.entry(ctx.path(r)).or_default() += 1;
         let f = ctx.func(r);
         if let (Some(o), false) = (&f.owner, f.in_trait) {
-            let owner = file_scopes[&(r.pkg, r.file)].resolve(o);
+            let owner = types_of(r).resolve(o);
             *methods.entry((r.pkg, owner, f.name.clone())).or_default() += 1;
         }
     }
@@ -3779,7 +3901,7 @@ fn behavior(
     let mut yielding: BTreeMap<(usize, String), u8> = BTreeMap::new();
     for &r in &all {
         let f = ctx.func(r);
-        let types = &file_scopes[&(r.pkg, r.file)];
+        let types = types_of(r);
         if !ctx.product(r) {
             continue;
         }
@@ -3902,12 +4024,7 @@ fn behavior(
         let Some(block) = &fn_syntax.block else {
             continue;
         };
-        let site = (
-            r.pkg,
-            ctx.file(r).target,
-            ctx.file(r).module.clone(),
-            f.name.clone(),
-        );
+        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
         // The key a call written `Type::name` or `value.name()` reads, where
         // this is a trait's method such a call can mean.
         let mut reached = None;
@@ -4038,8 +4155,8 @@ fn behavior(
                     result,
                     block,
                     imports: ctx.file(r).imports.clone(),
-                    aliases: overlays[&(r.pkg, r.file)].clone(),
-                    homonyms: call_reading(ctx, &homonyms, r),
+                    aliases: fn_aliases(r),
+                    homonyms: reads.call_reading(r),
                     called,
                     formatter,
                 });
@@ -4047,45 +4164,86 @@ fn behavior(
             Err(reason) => ctx.stopped(notes, &effectful, r, reason),
         }
     }
-    // Constants lift as definitions of no parameters.
+    // Constants lift as definitions of no parameters. A module that still
+    // declares a constant twice holds two variants the configuration does
+    // not decide between (`names::stated` has dropped every variant it
+    // compiles out): neither is the constant, so neither lifts, and a
+    // reader of the name binds none.
+    let mut declared: BTreeMap<FnSite, usize> = BTreeMap::new();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        for file in &package.files {
+            for (rust, _, _, scope, _, _) in syntax
+                .files
+                .get(&file.rel)
+                .map_or(&[][..], |f| &f.consts[..])
+            {
+                let site = (pkg, file.target, file.item_module(*scope), rust.clone());
+                *declared.entry(site).or_default() += 1;
+            }
+        }
+    }
     for (pkg, package) in ws.packages.iter().enumerate() {
         for (fi, file) in package.files.iter().enumerate() {
-            let types = &file_scopes[&(pkg, fi)];
             if !matches!(
                 package.targets[file.target].kind,
                 TargetKind::Lib | TargetKind::Bin
             ) {
                 continue;
             }
-            for (rust, ty, block) in &syntax.files[&file.rel].consts {
+            for (rust, ty, block, scope, tokens, _) in &syntax.files[&file.rel].consts {
+                let site = (pkg, file.target, file.item_module(*scope), rust.clone());
+                if declared.get(&site).is_some_and(|n| *n > 1) {
+                    continue;
+                }
+                let blind = written_through_paths(tokens, &shared[pkg]);
+                let aliases = blinded(&overlays[&(pkg, fi, *scope)], Some(&blind));
+                let mut blinded_types = None;
+                if !blind.is_empty() {
+                    let mut scope = file_scopes[&(pkg, fi, *scope)].clone();
+                    scope.aliases.extend(aliases.clone());
+                    blinded_types = Some(scope);
+                }
+                let types = blinded_types
+                    .as_ref()
+                    .unwrap_or(&file_scopes[&(pkg, fi, *scope)]);
                 let Ok(result) = types.ty(ty) else {
                     continue;
                 };
                 let (candidates, names) = &mut scoped[pkg];
+                // A name two modules of the crate declare lifts under its
+                // module's key and name, and each reader reads the one its
+                // own module means (`Reads::scope_reading`).
+                let (key, spelled) = match homonyms.get(&site) {
+                    Some((key, lex)) => (key.clone(), lex.clone()),
+                    None => (rust.clone(), rust.clone()),
+                };
+                let plain = lift::local_name(&spelled);
                 // A constant spelled like a function, `REVERSE` beside
                 // `reverse`, takes its kind as a suffix.
-                let plain = lift::local_name(rust);
                 let name = if candidates.iter().any(|c: &Candidate<'_>| c.name == plain) {
-                    lift::local_name(&format!("{rust}_CONST"))
+                    lift::local_name(&format!("{spelled}_CONST"))
                 } else {
                     plain
                 };
-                if names.contains_key(rust)
+                if names.contains_key(&key)
                     || candidates
                         .iter()
-                        .any(|c: &Candidate<'_>| c.rust == *rust || c.name == name)
+                        .any(|c: &Candidate<'_>| c.rust == key || c.name == name)
                 {
                     continue;
                 }
                 candidates.push(Candidate {
-                    rust: rust.clone(),
+                    rust: key,
                     name,
                     params: Vec::new(),
                     result,
                     block,
                     imports: file.imports.clone(),
-                    aliases: overlays[&(pkg, fi)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, pkg, fi),
+                    aliases,
+                    homonyms: reads.scope_reading(
+                        (pkg, file.target, &file.item_module(*scope)),
+                        &identifiers(tokens),
+                    ),
                     called: rust.clone(),
                     formatter: None,
                 });
@@ -4239,7 +4397,16 @@ fn behavior(
         taken.extend(types.enums.keys().cloned());
         taken.extend(types.structs.keys().cloned());
         taken.extend(types.datas.keys().cloned());
-        let out = mir_lift(ctx, notes, dumps, options, &mir_scopes, &callees, &taken);
+        let out = mir_lift(
+            ctx,
+            notes,
+            dumps,
+            options,
+            &mir_scopes,
+            &callees,
+            &taken,
+            &homonyms,
+        );
         mentioned.extend(out.types);
         translated = out.decls;
         listing = out.listing;
@@ -4300,9 +4467,7 @@ fn behavior(
             .iter()
             .enumerate()
         {
-            if let Some(accepted) =
-                lift::acceptance(kind, args, sigs, &file_scopes[&(r.pkg, r.file)])
-            {
+            if let Some(accepted) = lift::acceptance(kind, args, sigs, types_of(r)) {
                 let name = format!("accept{}{}", pascal(&[&ctx.package(r).name, &f.name]), i);
                 if theorems.insert(name.clone()) {
                     let axioms = axioms.get(&accepted.callee).cloned().unwrap_or_default();
@@ -4388,10 +4553,10 @@ fn mir_lift(
     scopes: &BTreeMap<(usize, usize), Types>,
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
     taken: &BTreeSet<String>,
+    homonyms: &BTreeMap<FnSite, (String, String)>,
 ) -> MirOut {
     use crate::mir::lower;
     use crate::mir::verdict::Decision;
-    let homonyms = homonym_fns(ctx);
     // Every crate's closures, by the type MIR prints for each: a closure's
     // type is the struct of the values it captures.
     let closures: BTreeMap<String, crate::mir::IrBody> = dumps
@@ -4454,10 +4619,11 @@ fn mir_lift(
     for (pkg, package) in ctx.ws.packages.iter().enumerate() {
         for file in &package.files {
             for e in file.enums.iter().filter(|e| e.explicit) {
-                let printed = if file.module.is_empty() {
+                let module = file.item_module(e.scope);
+                let printed = if module.is_empty() {
                     e.name.clone()
                 } else {
-                    format!("{}::{}", file.module, e.name)
+                    format!("{module}::{}", e.name)
                 };
                 explicit.insert(scopes[&(pkg, file.target)].resolve(&printed));
             }
@@ -4488,12 +4654,7 @@ fn mir_lift(
             continue;
         };
         let f = ctx.func(r);
-        let site = (
-            r.pkg,
-            ctx.file(r).target,
-            ctx.file(r).module.clone(),
-            f.name.clone(),
-        );
+        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
         let base = match (&f.owner, homonyms.get(&site)) {
             (Some(o), _) => lift::local_name(&format!("{o}_{}", f.name)),
             (None, Some((_, lex))) => lex.clone(),
@@ -5487,7 +5648,7 @@ fn calls_through_self(block: &crate::ast::Block, out: &mut Vec<String>) {
 fn unlifted_type(
     ctx: &Model,
     syntax: &Syntax,
-    scopes: &BTreeMap<(usize, usize), Types>,
+    scopes: &BTreeMap<(usize, usize, usize), Types>,
     expanded: &dyn Fn(usize, &crate::ast::RustType) -> crate::ast::RustType,
     pkg: usize,
     fi: usize,
@@ -5531,7 +5692,7 @@ fn unlifted_type(
                     .iter()
                     .map(|(field, t)| (format!("field {field}"), t.clone()))
                     .collect::<Vec<_>>();
-                found = Some(Ok((at, fields)));
+                found = Some(Ok((at, file.structs[i].scope, fields)));
             } else if let Some(i) = file.enums.iter().position(|e| e.name == name) {
                 let fields = read.enums[i]
                     .iter()
@@ -5541,7 +5702,7 @@ fn unlifted_type(
                             .map(move |(_, t)| (format!("variant {variant}"), t.clone()))
                     })
                     .collect::<Vec<_>>();
-                found = Some(Ok((at, fields)));
+                found = Some(Ok((at, file.enums[i].scope, fields)));
             }
             if found.is_some() {
                 break;
@@ -5550,8 +5711,8 @@ fn unlifted_type(
         match found {
             None => out.push("which this crate does not declare".to_string()),
             Some(Err(shape)) => out.push(format!("{shape}, which the lift does not read")),
-            Some(Ok((at, fields))) => {
-                let scope = &scopes[&(pkg, at)];
+            Some(Ok((at, declared, fields))) => {
+                let scope = &scopes[&(pkg, at, declared)];
                 let imports = &package.files[at].imports;
                 let outside = fields.iter().find_map(|(part, t)| {
                     match scope.ty(&expanded(pkg, &t.localized(imports))) {
@@ -5577,26 +5738,58 @@ fn unlifted_type(
     out.join(", ")
 }
 
-/// The free functions of product code whose name two modules (or two
-/// targets) of one crate share, `toml_string` in `project` and in
-/// `certify`, each -> its `rust` key and the LexLean name it lifts under:
-/// qualified by its module, and by its target where that is not the
-/// library, so that no two of them can meet. A name only one module
-/// declares keeps its own, and so its definition and every κ's verdict.
-fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
+/// Every item of product code's value namespace a body can name by one
+/// identifier: each free function of product code and each constant of a
+/// library or binary target, by package and name, at its site (`(pkg,
+/// target, module, name)`, the module the language names it through).
+fn value_sites(ctx: &Model, syntax: &Syntax) -> BTreeMap<(usize, String), BTreeSet<FnSite>> {
     let mut sites: BTreeMap<(usize, String), BTreeSet<FnSite>> = BTreeMap::new();
+    for (pkg, package) in ctx.ws.packages.iter().enumerate() {
+        for file in &package.files {
+            if !matches!(
+                package.targets[file.target].kind,
+                TargetKind::Lib | TargetKind::Bin
+            ) {
+                continue;
+            }
+            let Some(read) = syntax.files.get(&file.rel) else {
+                continue;
+            };
+            for (name, _, _, scope, _, _) in &read.consts {
+                let site = (pkg, file.target, file.item_module(*scope), name.clone());
+                sites.entry((pkg, name.clone())).or_default().insert(site);
+            }
+        }
+    }
     for r in ctx.all_fns() {
         let f = ctx.func(r);
         if f.owner.is_some() || !ctx.product(r) {
             continue;
         }
         let file = ctx.file(r);
-        let site = (r.pkg, file.target, file.module.clone(), f.name.clone());
+        let site = (r.pkg, file.target, ctx.module_of(r), f.name.clone());
         sites
             .entry((r.pkg, f.name.clone()))
             .or_default()
             .insert(site);
     }
+    sites
+}
+
+/// The free functions of product code whose name two modules (or two
+/// targets) of one crate share, `toml_string` in `project` and in
+/// `certify`, each -> its `rust` key and the LexLean name it lifts under:
+/// qualified by its module, and by its target where that is not the
+/// library, so that no two of them can meet. A name only one module
+/// declares keeps its own, and so its definition and every κ's verdict.
+/// A constant of product code is a site of the same kind: Rust reads a
+/// bare `N` as the constant its module declares or a `use` of it binds,
+/// so constants of one name in two modules are homonyms as functions are
+/// (`(pkg, target, module, name)` names one item of the value namespace).
+fn homonym_fns(
+    ctx: &Model,
+    sites: &BTreeMap<(usize, String), BTreeSet<FnSite>>,
+) -> BTreeMap<FnSite, (String, String)> {
     // A site's key and name by its target and module.
     let qualified = |site: &FnSite| {
         let package = &ctx.ws.packages[site.0];
@@ -5620,14 +5813,14 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
     };
     let mut out = BTreeMap::new();
     let mut single: Vec<FnSite> = Vec::new();
-    for at in sites.into_values() {
+    for at in sites.values() {
         if at.len() < 2 {
-            single.extend(at);
+            single.extend(at.iter().cloned());
             continue;
         }
         for site in at {
-            let names = qualified(&site);
-            out.insert(site, names);
+            let names = qualified(site);
+            out.insert(site.clone(), names);
         }
     }
     // A function alone of its name, whose name reads as one a module gave
@@ -5654,85 +5847,149 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
     out
 }
 
-/// How a function reads each name its crate's free functions share: as the
-/// one function admission's name resolution names for the call (a glob
-/// import's, say), and where it names none, as its file does.
-fn call_reading(
-    ctx: &Model,
-    homonyms: &BTreeMap<FnSite, (String, String)>,
-    r: FnRef,
-) -> BTreeMap<String, Option<String>> {
-    let mut out = homonym_reading(ctx, homonyms, r.pkg, r.file);
-    for (call, callee) in ctx.named.get(&r).into_iter().flatten() {
-        let (Some(meant), Some(callee)) = (out.get_mut(call), callee) else {
-            continue;
-        };
-        if ctx.func(*callee).owner.is_some() {
-            continue;
+/// The identifiers of Rust tokens, string literals included (a format
+/// string names its inline arguments): every name a body can write.
+fn identifiers(tokens: &str) -> BTreeSet<String> {
+    tokens
+        .split(|c: char| !(c.is_alphanumeric() || c == '_'))
+        .filter(|w| w.starts_with(|c: char| c.is_alphabetic() || c == '_'))
+        .map(str::to_string)
+        .collect()
+}
+
+/// How a body reads the names of its crate's value namespace: what the
+/// candidate's `homonyms` holds, for every such name, not only those two
+/// modules share. The lift reads a bare name, and a path call by its last
+/// segment, as the crate's item of that key (`env.fns`), so a name the
+/// language binds to anything else there must read as none: a function
+/// of another module that the reader's scope does not reach, the item a
+/// renaming `use` binds, a function outside the crate (`use
+/// std::cmp::max`), a variant a glob imports, an item a macro invocation
+/// declares, a function the configuration compiles out.
+struct Reads<'a> {
+    ctx: &'a Model,
+    resolver: &'a crate::names::Resolver<'a>,
+    homonyms: &'a BTreeMap<FnSite, (String, String)>,
+    sites: &'a BTreeMap<(usize, String), BTreeSet<FnSite>>,
+}
+
+impl Reads<'_> {
+    /// The key a site lifts under: its module's where two modules share
+    /// its name, its own name otherwise; none for no site of product code.
+    fn key(&self, site: &FnSite) -> Option<String> {
+        if let Some((rust, _)) = self.homonyms.get(site) {
+            return Some(rust.clone());
         }
-        let file = ctx.file(*callee);
-        let site = (
-            callee.pkg,
-            file.target,
-            file.module.clone(),
-            ctx.func(*callee).name.clone(),
-        );
-        if let Some((rust, _)) = homonyms.get(&site) {
-            *meant = Some(rust.clone());
+        self.sites
+            .get(&(site.0, site.3.clone()))
+            .is_some_and(|at| at.contains(site))
+            .then(|| site.3.clone())
+    }
+
+    /// How a function reads each value name its body writes. A call is
+    /// read as the one function admission's name resolution names for
+    /// every call of the body that ends in that name (the lift reads a
+    /// call by its last segment, so `go()`, `inner::go()` and `super::go()`
+    /// of one body are one name to it): a glob import's, an inline
+    /// module's, `super`'s, a block `use`'s, and none where those calls
+    /// mean two functions, a method, or nothing of product code (`max` of
+    /// `use std::cmp::max`). A bare call resolution leaves open, and every
+    /// name not called, reads as the module scope does (`scope_reading`).
+    fn call_reading(&self, r: FnRef) -> BTreeMap<String, Option<String>> {
+        let ctx = self.ctx;
+        let f = ctx.func(r);
+        let at = (r.pkg, ctx.file(r).target, ctx.module_of(r));
+        let mut out = self.scope_reading((at.0, at.1, &at.2), &identifiers(&f.tokens));
+        let mut meant: BTreeMap<String, BTreeSet<Option<String>>> = BTreeMap::new();
+        for (call, callee) in ctx.named.get(&r).into_iter().flatten() {
+            let name = call.rsplit("::").next().unwrap_or(call);
+            let Some(scoped) = out.get(name) else {
+                continue;
+            };
+            let reading = match callee {
+                Meant::Fn(g) if ctx.func(*g).owner.is_none() => self.key(&(
+                    g.pkg,
+                    ctx.file(*g).target,
+                    ctx.module_of(*g),
+                    ctx.func(*g).name.clone(),
+                )),
+                Meant::Open if call == name => scoped.clone(),
+                Meant::Fn(_) | Meant::Outside | Meant::Open => None,
+            };
+            meant.entry(name.to_string()).or_default().insert(reading);
+        }
+        for (name, readings) in meant {
+            let one = match readings.len() {
+                1 => readings.into_iter().next().flatten(),
+                _ => None,
+            };
+            out.insert(name, one);
+        }
+        out
+    }
+
+    /// How module `module` of target `target` of package `pkg` reads each
+    /// of `words` that names an item of its crate's value namespace: the
+    /// key of the item Rust's name resolution binds the bare name to there
+    /// (`names::Resolver::bare_value`: an item the module declares and its
+    /// configuration compiles, a `use` binding, renaming ones included, a
+    /// glob's item), or none where it binds none of the crate's items or
+    /// the resolution cannot tell (an item-level macro invocation of the
+    /// module). Rust gives an inline module none of the names of the
+    /// module around it, so a function is read through its own module.
+    fn scope_reading(
+        &self,
+        (pkg, target, module): (usize, usize, &str),
+        words: &BTreeSet<String>,
+    ) -> BTreeMap<String, Option<String>> {
+        let mut out = BTreeMap::new();
+        for name in words {
+            if !self.sites.contains_key(&(pkg, name.clone())) {
+                continue;
+            }
+            let bound = self
+                .resolver
+                .bare_value((pkg, target, module), name)
+                .and_then(|(declared, item)| self.key(&(pkg, target, declared, item)));
+            out.insert(name.clone(), bound);
+        }
+        out
+    }
+}
+
+/// The names of `names` that `text` (Rust tokens, spaced or tidied) writes
+/// behind a path separator: `P` of `crate::inner::P`, `super::P`,
+/// `Vec<a::P>` or `a::P::new`. The lift reads a type path by its last
+/// segment in the reader's own scope (`ast::Path::localized`, and an owner
+/// of `Owner::f` by its name), so for a name two modules declare such a
+/// path names the type the reader's scope binds, which need not be the one
+/// the path leads to: a name found here is read as no type.
+fn written_through_paths(text: &str, names: &BTreeSet<String>) -> BTreeSet<String> {
+    let mut out = BTreeSet::new();
+    let mut rest = text;
+    while let Some(at) = rest.find("::") {
+        rest = rest[at + 2..].trim_start();
+        let end = rest
+            .find(|c: char| !(c.is_alphanumeric() || c == '_'))
+            .unwrap_or(rest.len());
+        let word = &rest[..end];
+        if names.contains(word) {
+            out.insert(word.to_string());
         }
     }
     out
 }
 
-/// How a file reads each name its crate's free functions share: the
-/// function its module declares, else the one its `use` names, else none.
-fn homonym_reading(
-    ctx: &Model,
-    homonyms: &BTreeMap<FnSite, (String, String)>,
-    pkg: usize,
-    fi: usize,
-) -> BTreeMap<String, Option<String>> {
-    let file = &ctx.ws.packages[pkg].files[fi];
-    let mut out = BTreeMap::new();
-    for ((p, target, module, name), (rust, _)) in homonyms {
-        if *p != pkg {
-            continue;
-        }
-        let entry = out.entry(name.clone()).or_insert(None);
-        if *target != file.target {
-            continue;
-        }
-        if *module == file.module {
-            *entry = Some(rust.clone());
-            continue;
-        }
-        let Some(path) = file.imports.get(name) else {
-            continue;
-        };
-        // `crate::`, `self::` and `super::` as Rust reads them, any other
-        // path from the file's module.
-        let mut at: Vec<&str> = file.module.split("::").filter(|s| !s.is_empty()).collect();
-        let mut segs: Vec<&str> = path.split("::").collect();
-        match segs.first() {
-            Some(&"crate") => {
-                at.clear();
-                segs.remove(0);
-            }
-            Some(&"self") => {
-                segs.remove(0);
-            }
-            _ => {}
-        }
-        while segs.first() == Some(&"super") {
-            at.pop();
-            segs.remove(0);
-        }
-        if let Some((last, prefix)) = segs.split_last() {
-            at.extend(prefix);
-            if *last == name.as_str() && at.join("::") == *module && entry.is_none() {
-                *entry = Some(rust.clone());
-            }
-        }
+/// A scope's reading of its crate's shared type names with each of
+/// `blind` read as no type: the name itself, which the crate's types
+/// register as one several types share (`lift::SHARED_NAME`).
+fn blinded(
+    names: &BTreeMap<String, String>,
+    blind: Option<&BTreeSet<String>>,
+) -> BTreeMap<String, String> {
+    let mut out = names.clone();
+    for name in blind.into_iter().flatten() {
+        out.insert(name.clone(), name.clone());
     }
     out
 }
@@ -7547,5 +7804,453 @@ mod tests {
             method.starts_with("[[residue]]") && method.contains("reason = \"collision\""),
             "{method}"
         );
+    }
+
+    // An item of an inline module stands in that module: Rust names it
+    // through the inline module's path, and two items of one name are one
+    // item only where that path is the same (lane amb2).
+
+    #[test]
+    fn inline_a_call_reads_the_function_its_own_inline_module_declares() {
+        // `inner::go` shadows the glob's `go`; the crate root has a `go` of
+        // its own. Rust: `inner::run()` is 4.
+        let (frontier, behavior) = projected(
+            "amb",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Shadowed.\npub mod a;\npub mod b;\n/// Three.\n\
+                     pub fn go() -> u8 {\n    3\n}\n/// Inner.\npub mod inner {\n    \
+                     #[allow(unused_imports)]\n    use crate::a::*;\n    /// Four.\n    \
+                     pub fn go() -> u8 {\n        4\n    }\n    /// Calls the inner one.\n    \
+                     pub fn run() -> u8 {\n        go()\n    }\n}\n",
+                ),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// One.\npub fn go() -> u8 {\n    1\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// Two.\npub fn go() -> u8 {\n    2\n}\n",
+                ),
+            ],
+        );
+        let inner = row(&frontier, "amb::inner::go");
+        assert!(
+            inner.starts_with("[[lifted]]") && inner.contains("definition = \"Behavior::innerGo\""),
+            "{inner}"
+        );
+        let root = row(&frontier, "amb::go");
+        assert!(
+            root.starts_with("[[lifted]]") && root.contains("definition = \"Behavior::ambGo\""),
+            "{root}"
+        );
+        let run = definition(&behavior, "run");
+        assert!(run.contains("body: (innerGo)"), "{run}");
+        assert!(
+            definition(&behavior, "innerGo").contains("body: 4"),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn inline_functions_of_one_name_in_nested_modules_are_three_items() {
+        let (frontier, behavior) = projected(
+            "nest",
+            &[(
+                "src/lib.rs",
+                "//! Nested.\n/// Three.\npub fn go() -> u8 {\n    3\n}\n/// Root's.\n\
+                 pub fn top() -> u8 {\n    go()\n}\n/// Outer.\npub mod outer {\n    \
+                 /// Five.\n    pub fn go() -> u8 {\n        5\n    }\n    /// Outer's.\n    \
+                 pub fn mid() -> u8 {\n        go()\n    }\n    /// Deep.\n    \
+                 pub mod deep {\n        /// Six.\n        pub fn go() -> u8 {\n            \
+                 6\n        }\n        /// Deep's.\n        pub fn low() -> u8 {\n            \
+                 go()\n        }\n    }\n}\n",
+            )],
+        );
+        for (function, lex) in [
+            ("nest::go", "nestGo"),
+            ("nest::outer::go", "outerGo"),
+            ("nest::outer::deep::go", "outerDeepGo"),
+        ] {
+            let kept = row(&frontier, function);
+            assert!(
+                kept.starts_with("[[lifted]]")
+                    && kept.contains(&format!("definition = \"Behavior::{lex}\"")),
+                "{kept}"
+            );
+        }
+        for (caller, callee) in [
+            ("top", "nestGo"),
+            ("mid", "outerGo"),
+            ("low", "outerDeepGo"),
+        ] {
+            let read = definition(&behavior, caller);
+            assert!(read.contains(&format!("body: ({callee})")), "{read}");
+        }
+    }
+
+    #[test]
+    fn inline_a_function_of_an_inline_module_in_a_file_module_is_its_own() {
+        let (frontier, behavior) = projected(
+            "filed",
+            &[
+                ("src/lib.rs", "//! Filed.\npub mod a;\npub mod b;\n"),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// One.\npub fn go() -> u8 {\n    1\n}\n/// A's.\n\
+                     pub fn here() -> u8 {\n    go()\n}\n/// Inner.\npub mod inner {\n    \
+                     /// Eight.\n    pub fn go() -> u8 {\n        8\n    }\n    \
+                     /// Inner's.\n    pub fn run() -> u8 {\n        go()\n    }\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// Two.\npub fn go() -> u8 {\n    2\n}\n/// B's.\n\
+                     pub fn there() -> u8 {\n    go()\n}\n",
+                ),
+            ],
+        );
+        let inner = row(&frontier, "filed::a::inner::go");
+        assert!(
+            inner.starts_with("[[lifted]]")
+                && inner.contains("definition = \"Behavior::aInnerGo\""),
+            "{inner}"
+        );
+        for (caller, callee) in [("here", "aGo"), ("run", "aInnerGo"), ("there", "bGo")] {
+            let read = definition(&behavior, caller);
+            assert!(read.contains(&format!("body: ({callee})")), "{read}");
+        }
+    }
+
+    #[test]
+    fn inline_a_type_an_inline_module_declares_is_not_its_files_module_type() {
+        // The crate root imports `a::E`; `inner` declares an `E` of its own.
+        // Rust: the root's `pick` is `a::E::B`, `inner::pick` is
+        // `inner::E::B`.
+        let (frontier, behavior) = projected(
+            "enums",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Enums.\npub mod a;\nuse crate::a::E;\n/// Root's.\n\
+                     pub fn pick() -> E {\n    E::B\n}\n/// Inner.\npub mod inner {\n    \
+                     /// Reversed.\n    pub enum E {\n        /// First.\n        B,\n        \
+                     /// Second.\n        A,\n        /// Third.\n        C,\n    }\n    \
+                     /// Inner's.\n    pub fn pick() -> E {\n        E::B\n    }\n}\n",
+                ),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// In order.\npub enum E {\n    /// First.\n    A,\n    \
+                     /// Second.\n    B,\n}\n",
+                ),
+            ],
+        );
+        for function in ["enums::pick", "enums::inner::pick"] {
+            let kept = row(&frontier, function);
+            assert!(kept.starts_with("[[lifted]]"), "{kept}");
+        }
+        let root = definition(&behavior, "enumsPick");
+        assert!(root.contains("result: EnumsAE,"), "{root}");
+        let inner = definition(&behavior, "innerPick");
+        assert!(inner.contains("result: EnumsInnerE,"), "{inner}");
+    }
+
+    #[test]
+    fn inline_a_type_written_through_a_module_path_is_not_the_readers_own() {
+        // `P` is declared by the root and by `inner`. The lift reads a type
+        // path by its last segment, so `crate::inner::P` in the root and
+        // `super::P` in `inner` would read the reader's own `P`: neither
+        // is lifted. `mine` writes the bare name and lifts.
+        let (frontier, _) = projected(
+            "paths",
+            &[(
+                "src/lib.rs",
+                "//! Paths.\n/// Root's.\npub struct P {\n    /// Value.\n    pub v: u8,\n}\n\
+                 /// Own.\npub fn mine(p: P) -> u8 {\n    p.v\n}\n\
+                 /// Inner's.\npub fn theirs(p: crate::inner::P) -> u8 {\n    p.v\n}\n\
+                 /// Inner's, made.\npub fn make() -> crate::inner::P {\n    \
+                 crate::inner::P { v: 5 }\n}\n/// Inner.\npub mod inner {\n    \
+                 /// Inner's.\n    pub struct P {\n        /// Value.\n        pub v: u8,\n    }\n    \
+                 /// Root's.\n    pub fn back(p: super::P) -> u8 {\n        p.v\n    }\n}\n",
+            )],
+        );
+        let kept = row(&frontier, "paths::mine");
+        assert!(kept.starts_with("[[lifted]]"), "{kept}");
+        for function in ["paths::theirs", "paths::make", "paths::inner::back"] {
+            let kept = row(&frontier, function);
+            assert!(!kept.starts_with("[[lifted]]"), "{kept}");
+        }
+    }
+
+    #[test]
+    fn inline_a_constant_is_the_one_its_own_module_declares() {
+        // Rust: `outer()` 3, `inner::run()` 4, `a::fa()` 1, `b::fb()` 2.
+        let (frontier, behavior) = projected(
+            "konst",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Constants.\npub mod a;\npub mod b;\n/// Three.\npub const N: u8 = 3;\n\
+                     /// Root's.\npub fn outer() -> u8 {\n    N\n}\n/// Inner.\npub mod inner {\n    \
+                     /// Four.\n    pub const N: u8 = 4;\n    /// Inner's.\n    \
+                     pub fn run() -> u8 {\n        N\n    }\n}\n",
+                ),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// One.\npub const N: u8 = 1;\n/// A's.\n\
+                     pub fn fa() -> u8 {\n    N\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// Two.\npub const N: u8 = 2;\n/// B's.\n\
+                     pub fn fb() -> u8 {\n    N\n}\n",
+                ),
+            ],
+        );
+        for function in [
+            "konst::outer",
+            "konst::inner::run",
+            "konst::a::fa",
+            "konst::b::fb",
+        ] {
+            let kept = row(&frontier, function);
+            assert!(kept.starts_with("[[lifted]]"), "{kept}");
+        }
+        for (reader, constant, value) in [
+            ("outer", "konstN", 3),
+            ("run", "innerN", 4),
+            ("fa", "aN", 1),
+            ("fb", "bN", 2),
+        ] {
+            let read = definition(&behavior, reader);
+            assert!(read.contains(&format!("body: ({constant})")), "{read}");
+            let stated = definition(&behavior, constant);
+            assert!(stated.contains(&format!("body: {value}")), "{stated}");
+        }
+    }
+
+    #[test]
+    fn inline_a_call_through_a_module_path_reads_the_function_the_path_names() {
+        // Rust: `down()` 4, `top()` 1, `inner::up()` 3, `inner::me()` 4;
+        // `both()` calls two functions named `go`, which the lift reads by
+        // one name, so it is not lifted.
+        let (frontier, behavior) = projected(
+            "paths",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Paths.\npub mod a;\n/// Three.\npub fn go() -> u8 {\n    3\n}\n\
+                     /// Down.\npub fn down() -> u8 {\n    inner::go()\n}\n/// Over.\n\
+                     pub fn top() -> u8 {\n    a::go()\n}\n/// Both.\n\
+                     pub fn both() -> u8 {\n    go() + inner::go()\n}\n/// Inner.\n\
+                     pub mod inner {\n    /// Four.\n    pub fn go() -> u8 {\n        4\n    }\n    \
+                     /// Up.\n    pub fn up() -> u8 {\n        super::go()\n    }\n    \
+                     /// Me.\n    pub fn me() -> u8 {\n        self::go()\n    }\n}\n",
+                ),
+                ("src/a.rs", "//! A.\n/// One.\npub fn go() -> u8 {\n    1\n}\n"),
+            ],
+        );
+        for (caller, callee) in [
+            ("down", "innerGo"),
+            ("top", "aGo"),
+            ("up", "pathsGo"),
+            ("me", "innerGo"),
+        ] {
+            let read = definition(&behavior, caller);
+            assert!(read.contains(&format!("body: ({callee})")), "{read}");
+        }
+        let both = row(&frontier, "paths::both");
+        assert!(both.starts_with("[[residue]]"), "{both}");
+    }
+
+    #[test]
+    fn inline_tests_of_one_name_in_two_inline_modules_are_two_acceptance_rows() {
+        let (frontier, _) = projected(
+            "twice",
+            &[(
+                "src/lib.rs",
+                "//! Twice.\n/// One.\npub fn one() -> u8 {\n    1\n}\n#[cfg(test)]\n\
+                 mod first {\n    #[test]\n    fn same() {\n        \
+                 assert_eq!(super::one(), 1);\n    }\n}\n#[cfg(test)]\nmod second {\n    \
+                 #[test]\n    fn same() {\n        assert_eq!(super::one(), 1);\n    }\n}\n",
+            )],
+        );
+        assert!(!frontier.contains("name-collision"), "{frontier}");
+    }
+
+    // A body reads a bare name of its crate's value namespace as Rust's name
+    // resolution binds it in the body's own module, whether or not another
+    // module declares the name too (lane amb2's repair; the refuter's
+    // counterexamples r06, r07, r08, r11, r14, r15, r23).
+
+    #[test]
+    fn amb2_a_constant_the_configuration_compiles_out_is_not_the_constant() {
+        // Rust: `run3()` is 5; the `K` under `cfg(any())` is in no build.
+        let (frontier, behavior) = projected(
+            "twin",
+            &[(
+                "src/lib.rs",
+                "//! Twins.\n/// Nine.\n#[cfg(any())]\npub const K: u8 = 9;\n/// Five.\n\
+                 #[cfg(all())]\npub const K: u8 = 5;\n/// Reads K.\n\
+                 pub fn run3() -> u8 {\n    K\n}\n",
+            )],
+        );
+        assert!(
+            frontier.contains("reason = \"cfg-variant\"") && frontier.contains("twin::K"),
+            "{frontier}"
+        );
+        assert!(definition(&behavior, "k").contains("body: 5"), "{behavior}");
+        assert!(
+            definition(&behavior, "run3").contains("body: (k)"),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn amb2_a_function_the_configuration_compiles_out_does_not_shadow_a_glob() {
+        // Rust: `inner::run()` is 1, the glob's `a::go`.
+        let (_, behavior) = projected(
+            "shade",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Shade.\npub mod a;\npub mod b;\n/// Inner.\npub mod inner {\n    \
+                     #[allow(unused_imports)]\n    use crate::a::*;\n    /// Nine.\n    \
+                     #[cfg(any())]\n    pub fn go() -> u8 {\n        9\n    }\n    \
+                     /// Calls the glob's.\n    pub fn run() -> u8 {\n        go()\n    }\n}\n",
+                ),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// One.\npub fn go() -> u8 {\n    1\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// Two.\npub fn go() -> u8 {\n    2\n}\n",
+                ),
+            ],
+        );
+        let run = definition(&behavior, "run");
+        assert!(run.contains("body: (aGo)"), "{run}");
+    }
+
+    #[test]
+    fn amb2_a_module_that_invokes_a_macro_binds_no_name_of_another_module() {
+        // Rust: `inner::run()` is 4 and `other::run()` 6, each the macro's.
+        let (frontier, behavior) = projected(
+            "made",
+            &[(
+                "src/lib.rs",
+                "//! Made.\nmacro_rules! make {\n    ($n:ident, $v:expr) => {\n        \
+                 pub fn $n() -> u8 {\n            $v\n        }\n    };\n}\n/// Three.\n\
+                 pub fn go() -> u8 {\n    3\n}\n/// Inner.\npub mod inner {\n    \
+                 make!(go, 4);\n    /// Calls the macro's.\n    pub fn run() -> u8 {\n        \
+                 go()\n    }\n}\n/// Three.\npub fn solo() -> u8 {\n    3\n}\n/// Other.\n\
+                 pub mod other {\n    make!(solo, 6);\n    /// Calls the macro's.\n    \
+                 pub fn run() -> u8 {\n        solo()\n    }\n}\n",
+            )],
+        );
+        for function in ["made::inner::run", "made::other::run"] {
+            let read = row(&frontier, function);
+            assert!(!read.starts_with("[[lifted]]"), "{read}");
+        }
+        assert!(!behavior.contains("body: (go)"), "{behavior}");
+        assert!(!behavior.contains("body: (solo)"), "{behavior}");
+    }
+
+    #[test]
+    fn amb2_a_variant_a_glob_imports_is_not_a_function_of_its_name() {
+        // Rust: `inner::halt()` is `E::Stop`, not the crate's `fn Stop`.
+        let (_, behavior) = projected(
+            "vary",
+            &[(
+                "src/lib.rs",
+                "//! Variants.\n/// E.\n#[derive(Debug, PartialEq, Clone, Copy)]\n\
+                 pub enum E {\n    /// Go.\n    Go(u8),\n    /// Stop.\n    Stop,\n}\n\
+                 /// A function named like a variant.\n#[allow(non_snake_case)]\n\
+                 pub fn Stop() -> E {\n    E::Go(0)\n}\n/// Inner.\npub mod inner {\n    \
+                 use super::E;\n    use super::E::*;\n    /// The variant.\n    \
+                 pub fn halt() -> E {\n        Stop\n    }\n}\n",
+            )],
+        );
+        assert!(!behavior.contains("body: (stop)"), "{behavior}");
+    }
+
+    #[test]
+    fn amb2_a_renaming_use_binds_the_item_its_path_names() {
+        // Rust: `inner::run()` is 1 (`a::go`), `helper()` 3.
+        let (_, behavior) = projected(
+            "named",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Renamed.\npub mod a;\n/// Three.\npub fn helper() -> u8 {\n    3\n}\n\
+                     /// Inner.\npub mod inner {\n    use crate::a::go as helper;\n    \
+                     /// Calls a::go.\n    pub fn run() -> u8 {\n        helper()\n    }\n}\n",
+                ),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// One.\npub fn go() -> u8 {\n    1\n}\n",
+                ),
+            ],
+        );
+        let run = definition(&behavior, "run");
+        assert!(run.contains("body: (go)"), "{run}");
+        assert!(
+            definition(&behavior, "go").contains("body: 1"),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn amb2_a_use_of_a_path_outside_the_crate_is_no_function_of_the_crate() {
+        // Rust: `inner::run()` and `run2()` are 9 (`std::cmp::max`), `run()`
+        // is 1 (the crate's `max`).
+        let (frontier, behavior) = projected(
+            "most",
+            &[(
+                "src/lib.rs",
+                "//! Outside.\n/// The first.\npub fn max(a: u8, _b: u8) -> u8 {\n    a\n}\n\
+                 /// Inner.\npub mod inner {\n    use std::cmp::max;\n    /// The std one.\n    \
+                 pub fn run() -> u8 {\n        max(1, 9)\n    }\n}\n/// The crate's.\n\
+                 pub fn run() -> u8 {\n    max(1, 9)\n}\n/// The std one, by a block use.\n\
+                 pub fn run2() -> u8 {\n    use std::cmp::max;\n    max(1, 9)\n}\n",
+            )],
+        );
+        for function in ["most::inner::run", "most::run2"] {
+            let read = row(&frontier, function);
+            if read.starts_with("[[lifted]]") {
+                let name = read
+                    .split("definition = \"Behavior::")
+                    .nth(1)
+                    .and_then(|d| d.split('"').next())
+                    .expect("a definition");
+                assert!(
+                    !definition(&behavior, name).contains("(max 1 9)"),
+                    "{behavior}"
+                );
+            }
+        }
+        assert!(
+            definition(&behavior, "mostRun").contains("body: (max 1 9)"),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn amb2_a_module_the_configuration_compiles_out_reads_its_own_functions() {
+        // Under `feature = "x"` the module is built whole: `run()` calls its
+        // own `helper`, not anything the outside glob could bring.
+        let (_, behavior) = projected(
+            "gated",
+            &[(
+                "src/lib.rs",
+                "//! Gated.\n/// Gated.\n#[cfg(feature = \"x\")]\npub mod m {\n    \
+                 #[allow(unused_imports)]\n    use std::cmp::*;\n    /// One.\n    \
+                 pub fn helper() -> u8 {\n        1\n    }\n    /// Calls helper.\n    \
+                 pub fn run() -> u8 {\n        helper()\n    }\n}\n",
+            )],
+        );
+        let run = definition(&behavior, "run");
+        assert!(run.contains("body: (helper)"), "{run}");
     }
 }
