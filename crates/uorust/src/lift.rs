@@ -402,10 +402,20 @@ const NOT_NESTED: &str =
 /// instance.
 pub(crate) const PARAMETRIC_STRUCT: &str = "a struct with type or const parameters";
 
-/// A struct the reader of structs does not read as fields, registered so
-/// that the type side names it: under no field name, with its shape where
-/// a field's type stands. A shape is no type, so the struct stays outside
-/// the lift and is itself the leaf of every chain through it.
+/// A name two declarations of one module share: one type per build
+/// configuration, or an item of an inline module read at its file's.
+pub(crate) const DECLARED_TWICE: &str = "a type declared twice in one module";
+
+/// A name several types of a crate share, where the file that writes it
+/// neither declares nor imports one of them.
+pub(crate) const SHARED_NAME: &str =
+    "one of several types of this name in its crate, which the file does not tell apart";
+
+/// A struct the reader of structs does not read as fields, or a name that
+/// reads as no one type, registered so that the type side names it: under
+/// no field name, with its shape where a field's type stands. A shape is
+/// no type, so the name stays outside the lift and is itself the leaf of
+/// every chain through it.
 pub(crate) fn unread_shape(shape: &str) -> (String, rs::RustType) {
     let shape = rs::RustType {
         text: shape.to_string(),

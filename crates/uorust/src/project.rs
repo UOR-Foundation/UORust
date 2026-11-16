@@ -3161,6 +3161,8 @@ fn behavior(
         structs: BTreeMap<Key, (usize, Vec<(String, crate::ast::RustType)>)>,
         datas: BTreeMap<Key, (usize, lift::RawVariants)>,
         spans: BTreeMap<Key, Span>,
+        /// The names of the keys declared twice, which name no one type.
+        twice: BTreeSet<String>,
     }
     let mut declared: Vec<Declared> = Vec::new();
     for (pkg, package) in ws.packages.iter().enumerate() {
@@ -3237,6 +3239,7 @@ fn behavior(
             d.enums.remove(key);
             d.structs.remove(key);
             d.datas.remove(key);
+            d.twice.insert(key.2.clone());
         }
         declared.push(d);
     }
@@ -3405,7 +3408,7 @@ fn behavior(
                 aliases.insert(rust.to_string(), crate::order::ORDERING.to_string());
             }
             // A field's type is read in the file that declares it.
-            let structs: Fields = d
+            let mut structs: Fields = d
                 .structs
                 .into_iter()
                 .map(|(key, (fi, fs))| {
@@ -3448,6 +3451,21 @@ fn behavior(
                         .collect::<Vec<_>>()
                 })
                 .collect();
+            // A name of the crate that reads as no one type is registered
+            // with the reason, so that a row it stops states it: a key
+            // declared twice, and a name several of the crate's types
+            // share where a file does not say which it means.
+            let unread = d
+                .twice
+                .iter()
+                .map(|n| (n, lift::DECLARED_TWICE))
+                .chain(ambiguous[pkg].iter().map(|n| (n, lift::SHARED_NAME)));
+            for (name, why) in unread {
+                let free = !enums.contains_key(name) && !datas.contains_key(name);
+                if free && !structs.contains_key(name) {
+                    structs.insert(name.clone(), vec![lift::unread_shape(why)]);
+                }
+            }
             Types {
                 derives,
                 ..Types::with_data(enums, &datas, &structs, aliases)
@@ -5281,5 +5299,169 @@ mod tests {
                 assert_eq!(sha(&msg), md);
             }
         }
+    }
+
+    // Types outside the lift.
+
+    /// The frontier of a one-crate workspace of these files, written under
+    /// the system's temporary directory and projected.
+    fn frontier_of(name: &str, files: &[(&str, &str)]) -> String {
+        let dir = std::env::temp_dir().join(format!("uorust-lib-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let manifest =
+            format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n");
+        for (path, body) in [("Cargo.toml", manifest.as_str())].iter().chain(files) {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+            std::fs::write(path, body).expect("a file");
+        }
+        let options = super::Options {
+            name: name.to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let projected = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        String::from_utf8(projected["frontier.toml"].clone()).expect("text")
+    }
+
+    /// The rows of a frontier that are of this function: each one's table
+    /// and the line of it that starts with this key.
+    fn rows_of(frontier: &str, function: &str, key: &str) -> Vec<(String, String)> {
+        frontier
+            .split("\n[[")
+            .filter(|row| row.contains(&format!("\nfunction = \"{function}\"\n")))
+            .map(|row| {
+                let table = row.split("]]").next().unwrap_or_default().to_string();
+                let line = row
+                    .lines()
+                    .find_map(|l| l.strip_prefix(&format!("{key} = ")))
+                    .unwrap_or_default()
+                    .trim_matches('"')
+                    .to_string();
+                (table, line)
+            })
+            .collect()
+    }
+
+    const NAMES: &[(&str, &str)] = &[
+        (
+            "src/lib.rs",
+            "//! Names that read as one type, as none, or as a leaf.\n\
+             pub mod first;\npub mod reader;\npub mod second;\npub mod teller;\n\n\
+             /// One type for each build configuration.\n#[cfg(unix)]\n\
+             pub struct Handle {\n    /// A descriptor.\n    pub fd: u32,\n}\n\n\
+             /// One type for each build configuration.\n#[cfg(not(unix))]\n\
+             pub struct Handle {\n    /// A raw handle.\n    pub raw: u64,\n}\n\n\
+             /// Stopped by a name two declarations share.\n\
+             pub fn opened(h: &Handle) -> bool {\n    let _ = h;\n    true\n}\n\n\
+             /// A float.\npub struct Leaf {\n    /// The float.\n    pub x: f64,\n}\n\n\
+             /// Holds the leaf.\npub struct Mid {\n    /// A count.\n    pub n: u32,\n    \
+             /// The leaf.\n    pub leaf: Leaf,\n}\n\n\
+             impl Mid {\n    /// Stopped by the type it is a method of.\n    \
+             pub fn count(&self) -> u32 {\n        self.n\n    }\n}\n\n\
+             /// A type named as LexLean names one of its own.\n\
+             pub struct Prop {\n    /// A power.\n    pub power: u8,\n}\n\n\
+             /// Reads it.\npub fn power(p: &Prop) -> u8 {\n    p.power\n}\n\n\
+             /// Two traits give one type a method of one name.\n\
+             pub struct Label {\n    /// The text.\n    pub text: String,\n}\n\n\
+             impl std::fmt::Display for Label {\n    \
+             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+             write!(f, \"{}\", self.text)\n    }\n}\n\n\
+             impl std::fmt::Debug for Label {\n    \
+             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+             f.write_str(\"label\")\n    }\n}\n",
+        ),
+        (
+            "src/first.rs",
+            "//! The first of two modules that declare a type of one name.\n\n\
+             /// A shape with sides.\npub struct Shape {\n    /// The sides.\n    pub sides: u32,\n}\n\n\
+             /// Reads the shape its own module declares.\n\
+             pub fn sides(s: &Shape) -> u32 {\n    s.sides\n}\n",
+        ),
+        (
+            "src/second.rs",
+            "//! The second of two modules that declare a type of one name.\n\n\
+             /// A shape with a radius.\npub struct Shape {\n    /// The radius.\n    pub radius: u32,\n}\n\n\
+             /// Reads the shape its own module declares.\n\
+             pub fn radius(s: &Shape) -> u32 {\n    s.radius\n}\n",
+        ),
+        (
+            "src/teller.rs",
+            "//! A file that says which of the two shapes it means.\n\n\
+             use crate::second::Shape;\n\n\
+             /// Reads the shape its import names.\n\
+             pub fn round(s: &Shape) -> u32 {\n    s.radius\n}\n",
+        ),
+        (
+            "src/reader.rs",
+            "//! A file that does not say which of the two shapes it means.\n\n\
+             use crate::first::*;\n\n\
+             /// Stopped by a name the file does not tell apart.\n\
+             pub fn corners(s: &Shape) -> u32 {\n    s.sides\n}\n",
+        ),
+    ];
+
+    #[test]
+    fn a_name_that_reads_as_no_one_type_states_why() {
+        let frontier = frontier_of("names", NAMES);
+        let detail = |function: &str| rows_of(&frontier, function, "detail");
+        let residue = |why: String| vec![("residue".to_string(), why)];
+        // One name, two declarations in one module: neither is the type.
+        assert_eq!(
+            detail("names::opened"),
+            residue(format!(
+                "type outside the lift: Handle: {}",
+                crate::lift::DECLARED_TWICE
+            ))
+        );
+        // One name, two modules: the module that declares one and the file
+        // that imports one read it, and a file that does neither reads none.
+        assert_eq!(
+            detail("names::reader::corners"),
+            residue(format!(
+                "type outside the lift: Shape: {}",
+                crate::lift::SHARED_NAME
+            ))
+        );
+        for told in [
+            "names::first::sides",
+            "names::second::radius",
+            "names::teller::round",
+        ] {
+            let rows = rows_of(&frontier, told, "definition");
+            assert_eq!(rows.len(), 1, "{told}: {rows:?}");
+            assert_eq!(rows[0].0, "lifted", "{told}");
+        }
+    }
+
+    #[test]
+    fn a_method_of_a_type_outside_the_lift_names_the_leaf() {
+        let frontier = frontier_of("owners", NAMES);
+        assert_eq!(
+            rows_of(&frontier, "owners::Mid::count", "detail"),
+            vec![(
+                "residue".to_string(),
+                "type outside the lift: Mid.leaf: Leaf.x: f64".to_string()
+            )]
+        );
+    }
+
+    #[test]
+    fn a_type_named_as_lexlean_names_its_own_lifts_under_its_crate() {
+        let frontier = frontier_of("taken", NAMES);
+        let rows = rows_of(&frontier, "taken::power", "definition");
+        assert_eq!(rows.len(), 1, "{rows:?}");
+        assert_eq!(rows[0].0, "lifted");
+    }
+
+    #[test]
+    fn two_functions_of_one_path_share_one_row() {
+        let frontier = frontier_of("paths", NAMES);
+        let rows = rows_of(&frontier, "paths::Label::fmt", "detail");
+        assert_eq!(rows.len(), 1, "{rows:?}");
+        // The row is the one that claims least: the function not lifted.
+        assert_eq!(rows[0].0, "residue");
     }
 }
