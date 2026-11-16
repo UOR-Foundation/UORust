@@ -134,12 +134,28 @@ impl Model {
     /// `crate::module::Type::name`; and `crate::module::<Type as
     /// Trait>::name` for a trait implementation's method whose type has
     /// another method of its name, which is how Rust names the two apart.
-    fn path(&self, r: FnRef) -> String {
+    /// The module a function stands in, inside its target: its file's
+    /// module and the inline modules around it in the file. Rust's path of
+    /// the function runs through both.
+    fn module_of(&self, r: FnRef) -> String {
         let file = self.file(r);
+        let inline = file
+            .scopes
+            .get(self.func(r).scope)
+            .map_or("", |s| s.module.as_str());
+        match (file.module.as_str(), inline) {
+            (outer, "") => outer.to_string(),
+            ("", inner) => inner.to_string(),
+            (outer, inner) => format!("{outer}::{inner}"),
+        }
+    }
+
+    fn path(&self, r: FnRef) -> String {
         let f = self.func(r);
         let mut parts = vec![self.crate_ident(r)];
-        if !file.module.is_empty() {
-            parts.push(file.module.clone());
+        let module = self.module_of(r);
+        if !module.is_empty() {
+            parts.push(module);
         }
         if let Some(owner) = &f.owner {
             match &f.trait_ref {
@@ -1472,10 +1488,11 @@ fn interface(ctx: &Model) -> (Interface, Vec<Refusal>) {
         let file = ctx.file(r);
         let package = ctx.package(r);
         let target = &package.targets[file.target];
+        let module = ctx.module_of(r);
         let parts = [
             package.name.as_str(),
             target.name.as_str(),
-            file.module.as_str(),
+            module.as_str(),
             f.name.as_str(),
         ];
         let name = format!("ac{}", pascal(&parts));
@@ -3876,12 +3893,7 @@ fn behavior(
         let Some(block) = &fn_syntax.block else {
             continue;
         };
-        let site = (
-            r.pkg,
-            ctx.file(r).target,
-            ctx.file(r).module.clone(),
-            f.name.clone(),
-        );
+        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
         // The key a call written `Type::name` or `value.name()` reads, where
         // this is a trait's method such a call can mean.
         let mut reached = None;
@@ -4008,7 +4020,7 @@ fn behavior(
                     block,
                     imports: ctx.file(r).imports.clone(),
                     aliases: overlays[&(r.pkg, r.file)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, r.pkg, r.file),
+                    homonyms: homonym_reading(ctx, &homonyms, r.pkg, r.file, &ctx.module_of(r)),
                     called,
                     formatter,
                 });
@@ -4054,7 +4066,7 @@ fn behavior(
                     block,
                     imports: file.imports.clone(),
                     aliases: overlays[&(pkg, fi)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, pkg, fi),
+                    homonyms: homonym_reading(ctx, &homonyms, pkg, fi, &file.module),
                     called: rust.clone(),
                     formatter: None,
                 });
@@ -4457,12 +4469,7 @@ fn mir_lift(
             continue;
         };
         let f = ctx.func(r);
-        let site = (
-            r.pkg,
-            ctx.file(r).target,
-            ctx.file(r).module.clone(),
-            f.name.clone(),
-        );
+        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
         let base = match (&f.owner, homonyms.get(&site)) {
             (Some(o), _) => lift::local_name(&format!("{o}_{}", f.name)),
             (None, Some((_, lex))) => lex.clone(),
@@ -5560,7 +5567,7 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
             continue;
         }
         let file = ctx.file(r);
-        let site = (r.pkg, file.target, file.module.clone(), f.name.clone());
+        let site = (r.pkg, file.target, ctx.module_of(r), f.name.clone());
         sites
             .entry((r.pkg, f.name.clone()))
             .or_default()
@@ -5596,13 +5603,15 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
     out
 }
 
-/// How a file reads each name its crate's free functions share: the
-/// function its module declares, else the one its `use` names, else none.
+/// How a module of a file (its own, or an inline module inside it) reads
+/// each name its crate's free functions share: the function the module
+/// declares, else the one the file's `use` names, else none.
 fn homonym_reading(
     ctx: &Model,
     homonyms: &BTreeMap<FnSite, (String, String)>,
     pkg: usize,
     fi: usize,
+    reader: &str,
 ) -> BTreeMap<String, Option<String>> {
     let file = &ctx.ws.packages[pkg].files[fi];
     let mut out = BTreeMap::new();
@@ -5614,7 +5623,7 @@ fn homonym_reading(
         if *target != file.target {
             continue;
         }
-        if *module == file.module {
+        if module == reader {
             *entry = Some(rust.clone());
             continue;
         }
@@ -5623,7 +5632,7 @@ fn homonym_reading(
         };
         // `crate::`, `self::` and `super::` as Rust reads them, any other
         // path from the file's module.
-        let mut at: Vec<&str> = file.module.split("::").filter(|s| !s.is_empty()).collect();
+        let mut at: Vec<&str> = reader.split("::").filter(|s| !s.is_empty()).collect();
         let mut segs: Vec<&str> = path.split("::").collect();
         match segs.first() {
             Some(&"crate") => {
@@ -7379,5 +7388,51 @@ mod tests {
             frontier.contains("w::variant has a variant under cfg(feature = \\\"wide\\\")"),
             "{frontier}"
         );
+    }
+
+    // Class: calls the language resolves by type (kai, round 3): a
+    // function's inline module is part of its path.
+
+    /// The projection of a one-library workspace with `source` as its
+    /// `lib.rs`: its frontier and its interface module.
+    fn typed_call_projection(tag: &str, source: &str) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-typed-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        let text = |suffix: &str| {
+            files
+                .iter()
+                .find(|(k, _)| k.ends_with(suffix))
+                .map(|(_, v)| String::from_utf8(v.clone()).unwrap())
+                .unwrap_or_default()
+        };
+        (text("frontier.toml"), text("Interface.lex.tex"))
+    }
+
+    #[test]
+    fn functions_of_one_name_in_two_inline_modules_have_two_paths() {
+        let (frontier, interface) = typed_call_projection(
+            "inline",
+            "pub mod outer {\n pub mod left {\n  pub fn pick() -> u8 { 1 }\n }\n \
+             pub mod right {\n  pub fn pick() -> u8 { 2 }\n }\n}\n",
+        );
+        assert!(!frontier.contains("name-collision"), "{frontier}");
+        for want in ["callWOuterLeftPick", "callWOuterRightPick"] {
+            assert!(interface.contains(want), "{want} not in {interface}");
+        }
     }
 }

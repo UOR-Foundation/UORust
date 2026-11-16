@@ -193,6 +193,9 @@ pub(crate) struct FnFact {
 /// inherits no name from the module around it.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct ScopeFact {
+    /// The scope's module path inside its file: `""` for the file's own
+    /// items, `a::b` for an inline `mod b` inside an inline `mod a`.
+    pub(crate) module: String,
     /// Each name a `use` of the scope binds, with the path it names.
     pub(crate) uses: Vec<(String, String)>,
     /// Whether a `use` of the scope ends in `*`: it may bind any name.

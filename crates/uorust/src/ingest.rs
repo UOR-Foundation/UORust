@@ -1345,7 +1345,16 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
+                    // The scopes the module's items push are named inside
+                    // it; each module around them puts its name before.
+                    let own = file.scopes.len();
                     items(inner, rel, None, test, product, lib, file, syntax);
+                    for inside in &mut file.scopes[own..] {
+                        inside.module = match inside.module.as_str() {
+                            "" => m.ident.to_string(),
+                            below => format!("{}::{below}", m.ident),
+                        };
+                    }
                 }
             }
             _ => {}

@@ -12,10 +12,10 @@ Feature: thermo-core
     And the interface call Interface::callThermoCoreHalt is made
     And the interface call Interface::callThermoCoreMidpoint is made
     Then the acceptance row Interface::acDocThermoCoreShouldHeat holds
-    And the acceptance row Interface::acThermoCoreThermoCoreBandIsInclusive holds
-    And the acceptance row Interface::acThermoCoreThermoCoreHeatsWhenCold holds
-    And the acceptance row Interface::acThermoCoreThermoCoreIdleRoomThatIsColdHeats holds
-    And the acceptance row Interface::acThermoCoreThermoCoreMidpointOfABand holds
+    And the acceptance row Interface::acThermoCoreThermoCoreTestsBandIsInclusive holds
+    And the acceptance row Interface::acThermoCoreThermoCoreTestsHeatsWhenCold holds
+    And the acceptance row Interface::acThermoCoreThermoCoreTestsIdleRoomThatIsColdHeats holds
+    And the acceptance row Interface::acThermoCoreThermoCoreTestsMidpointOfABand holds
 
   @FT-02 @build
   Scenario: thermo_core::band: Temperature bands, counters and readings.
@@ -41,8 +41,8 @@ Feature: thermo-core
     And the interface call Interface::callThermoCoreBandJoined is made
     And the interface call Interface::callThermoCoreBandLabelOf is made
     And the interface call Interface::callThermoCoreBandClamped is made
-    Then the acceptance row Interface::acThermoCoreThermoCoreBandBandsMeasureAndCount holds
-    And the acceptance row Interface::acThermoCoreThermoCoreBandCountersAndSignedReadings holds
+    Then the acceptance row Interface::acThermoCoreThermoCoreBandTestsBandsMeasureAndCount holds
+    And the acceptance row Interface::acThermoCoreThermoCoreBandTestsCountersAndSignedReadings holds
 
   @FT-03 @build
   Scenario: thermo_core::config: Reads the target temperature from a file or the environment.
@@ -147,12 +147,12 @@ Feature: thermo-core
     And the interface call Interface::callThermoCoreRosterPrefixed is made
     And the interface call Interface::callThermoCoreRosterByReading is made
     And the interface call Interface::callThermoCoreRosterOpeningBand is made
-    Then the acceptance row Interface::acThermoCoreThermoCoreRosterRequestsSortByPriorityThenRoom holds
-    And the acceptance row Interface::acThermoCoreThermoCoreRosterTheRosterFoldsAndClamps holds
-    And the acceptance row Interface::acThermoCoreThermoCoreRosterTheRosterLoopsOverItsRooms holds
-    And the acceptance row Interface::acThermoCoreThermoCoreRosterTheRosterReadsItsMaps holds
-    And the acceptance row Interface::acThermoCoreThermoCoreRosterTheRosterReadsItsRooms holds
-    And the acceptance row Interface::acThermoCoreThermoCoreRosterTheRosterReadsText holds
+    Then the acceptance row Interface::acThermoCoreThermoCoreRosterTestsRequestsSortByPriorityThenRoom holds
+    And the acceptance row Interface::acThermoCoreThermoCoreRosterTestsTheRosterFoldsAndClamps holds
+    And the acceptance row Interface::acThermoCoreThermoCoreRosterTestsTheRosterLoopsOverItsRooms holds
+    And the acceptance row Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsItsMaps holds
+    And the acceptance row Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsItsRooms holds
+    And the acceptance row Interface::acThermoCoreThermoCoreRosterTestsTheRosterReadsText holds
 
   @FT-05 @build
   Scenario: thermo_core::schedule: A heating schedule: steps that hold a target, choose between steps, or run labelled phases in order.
@@ -179,7 +179,7 @@ Feature: thermo-core
     And the interface call Interface::callThermoCoreScheduleSteady is made
     Then the acceptance row Interface::acThermoCoreScheduleAHeldPhaseKeepsItsLabel holds
     And the acceptance row Interface::acThermoCoreScheduleLabelsAreKeptOnceAndInOrder holds
-    And the acceptance row Interface::acThermoCoreThermoCoreScheduleNestedPatternsChooseTheArm holds
+    And the acceptance row Interface::acThermoCoreThermoCoreScheduleTestsNestedPatternsChooseTheArm holds
 
   @FT-06 @build
   Scenario: thermo_core::sensor: Temperature sensors the controller reads from.
@@ -188,4 +188,4 @@ Feature: thermo-core
     And the interface call Interface::callThermoCoreSensorSensorCalibrated is made
     And the interface call Interface::callThermoCoreSensorTotal is made
     And the interface call Interface::callThermoCoreSensorAtLeast is made
-    Then the acceptance row Interface::acThermoCoreThermoCoreSensorAFixedSensorReadsItsValue holds
+    Then the acceptance row Interface::acThermoCoreThermoCoreSensorTestsAFixedSensorReadsItsValue holds
