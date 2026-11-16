@@ -3522,6 +3522,10 @@ fn behavior(
                     names.insert(name.clone(), lex.clone());
                 }
             }
+            // A registered crate's type a `use` of the file binds, where
+            // the package's lock admits its reading.
+            let read = crate::registered::of_package(package, &ws.lock);
+            names.extend(crate::registered::bindings(file, package, &read));
             overlays.insert((pkg, fi), names);
         }
     }
@@ -3538,6 +3542,11 @@ fn behavior(
                 .filter(|((_, _, name), lex)| *lex != name && !ambiguous[pkg].contains(name))
                 .map(|((_, _, name), lex)| (name.clone(), lex.clone()))
                 .collect();
+            // The registered crates' types whose reading the package's lock
+            // admits, each naming itself (`Types::registered`).
+            for path in crate::registered::of_package(package, &ws.lock) {
+                aliases.insert(path.clone(), path);
+            }
             let mut enums: Variants = d
                 .enums
                 .into_iter()

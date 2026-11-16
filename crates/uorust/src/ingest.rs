@@ -407,6 +407,10 @@ fn package(
         let inside = path.as_ref().is_some_and(|p| p.starts_with(root));
         deps.push(Dep {
             name: text(dep, "name"),
+            rename: dep
+                .get("rename")
+                .and_then(Value::as_str)
+                .map(str::to_string),
             kind: dep
                 .get("kind")
                 .and_then(Value::as_str)

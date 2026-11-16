@@ -101,6 +101,9 @@ pub(crate) struct Target {
 #[derive(Clone, Debug)]
 pub(crate) struct Dep {
     pub(crate) name: String,
+    /// The name the package's code knows the dependency by, where the
+    /// manifest renames it (`big = { package = "num-bigint" }`).
+    pub(crate) rename: Option<String>,
     /// `normal`, `dev` or `build`.
     pub(crate) kind: String,
     /// The path of a path dependency relative to the workspace root, or the
