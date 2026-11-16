@@ -747,18 +747,17 @@ pub(super) fn libraries(
         .iter()
         .filter(|p| p.targets.iter().any(|t| t.kind == TargetKind::Lib))
     {
-        let lib_crate = package
-            .targets
-            .iter()
-            .find(|t| t.kind == TargetKind::Lib)
-            .map(|t| format!("{}::", t.name.replace('-', "_")))
-            .unwrap_or_default();
         // The library's own lifted functions, by definition, and whether
-        // each is public.
+        // each is public: those defined in a file of this package's library
+        // target. A crate name does not say it: Cargo lets two packages give
+        // their libraries one name, and a binary target (of this package, or
+        // another's `[[bin]]`) take the library's name, and neither puts a
+        // function into the library.
+        let files = lib_files(package);
         let own: BTreeMap<String, bool> = notes
             .lifted
             .iter()
-            .filter(|(path, _)| path.starts_with(&lib_crate))
+            .filter(|(_, (span, _, _))| files.contains(span.file.as_str()))
             .filter_map(|(path, (_, q, _))| {
                 q.strip_prefix(&qualified(BEHAVIOR, ""))
                     .filter(|name| defined.contains(name))
@@ -824,6 +823,24 @@ pub(super) fn libraries(
         }
     }
     out
+}
+
+/// The files of the package's library target, by their path relative to the
+/// workspace root: those ingest assigns to it (`ingest::assign`, the target
+/// whose root's directory tree holds the file, the library before a binary
+/// in a shared `src/`).
+fn lib_files(package: &Package) -> BTreeSet<&str> {
+    package
+        .files
+        .iter()
+        .filter(|f| {
+            package
+                .targets
+                .get(f.target)
+                .is_some_and(|t| t.kind == TargetKind::Lib)
+        })
+        .map(|f| f.rel.as_str())
+        .collect()
 }
 
 /// The package's `NativeLibrary` value over `exports` and `acceptance`, or

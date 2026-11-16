@@ -7834,4 +7834,153 @@ mod tests {
             "{frontier}"
         );
     }
+
+    /// The projection of a workspace written from `files` (path, text) under
+    /// `dir`, named `w`.
+    fn library_route_written(dir: &Path, files: &[(&str, &str)]) -> BTreeMap<String, Vec<u8>> {
+        let _ = std::fs::remove_dir_all(dir);
+        for (path, body) in files {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+            std::fs::write(path, body).expect("a file");
+        }
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+        };
+        let projected = crate::project_workspace(dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(dir);
+        projected
+    }
+
+    /// A package manifest of the library route's tests, with `extra` lines.
+    fn library_route_manifest(name: &str, extra: &str) -> String {
+        format!(
+            "[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\ndescription = \"The {name} part.\"\n\
+             repository = \"https://example.org/{name}\"\n{extra}"
+        )
+    }
+
+    /// Two packages whose libraries share one crate name (Cargo builds them,
+    /// warning of an output filename collision) are two libraries: each
+    /// exports only the functions its own files define, and only the claims
+    /// over them (a test of `twin-b` calling `twin::left` does not compile).
+    #[test]
+    fn library_route_two_packages_of_one_library_name_are_told_apart() {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-libroute-twins-{}", std::process::id()));
+        let a = library_route_manifest("twin-a", "\n[lib]\nname = \"twin\"\n");
+        let b = library_route_manifest("twin-b", "\n[lib]\nname = \"twin\"\n");
+        let files = library_route_written(
+            &dir,
+            &[
+                (
+                    "Cargo.toml",
+                    "[workspace]\nmembers = [\"twin-a\", \"twin-b\"]\nresolver = \"2\"\n",
+                ),
+                ("twin-a/Cargo.toml", &a),
+                (
+                    "twin-a/src/lib.rs",
+                    "//! Twin a.\n\n/// Left.\npub fn left(n: u8) -> bool {\n    n < 10\n}\n",
+                ),
+                (
+                    "twin-a/tests/claims.rs",
+                    "#[test]\nfn left_holds() {\n    assert!(twin::left(1));\n}\n",
+                ),
+                ("twin-b/Cargo.toml", &b),
+                (
+                    "twin-b/src/lib.rs",
+                    "//! Twin b.\n\n/// Right.\npub fn right(n: u8) -> bool {\n    n > 10\n}\n",
+                ),
+                (
+                    "twin-b/tests/claims.rs",
+                    "#[test]\nfn right_holds() {\n    assert!(twin::right(20));\n}\n",
+                ),
+            ],
+        );
+        for (package, own, other, claim) in [
+            ("twin-a", "left", "right", "acceptTwinBRightHolds"),
+            ("twin-b", "right", "left", "acceptTwinALeftHolds"),
+        ] {
+            let dir = format!("library/{package}");
+            let value = library_route_text(&files, &format!("{dir}/src/Library.lex.tex"));
+            assert!(value.contains(&format!("\"W.Behavior.{own}\"")), "{value}");
+            assert!(
+                !value.contains(&format!("\"W.Behavior.{other}\"")),
+                "{value}"
+            );
+            assert!(!value.contains(claim), "{value}");
+            let behavior = library_route_text(&files, &format!("{dir}/src/Behavior.lex.tex"));
+            assert!(!behavior.contains(&format!("name: {other},")), "{behavior}");
+        }
+    }
+
+    /// A binary's functions are in no library: not those of the package's
+    /// own `src/main.rs` (the binary takes the library's crate name), nor
+    /// those of another package's `[[bin]]` named like the library.
+    #[test]
+    fn library_route_a_binary_named_like_a_library_adds_nothing_to_it() {
+        let dir = std::env::temp_dir().join(format!("uorust-libroute-bins-{}", std::process::id()));
+        let mu = library_route_manifest("mu", "");
+        let kappa = library_route_manifest("kappa", "");
+        let tool = library_route_manifest(
+            "kappa-tool",
+            "\n[[bin]]\nname = \"kappa\"\npath = \"src/main.rs\"\n",
+        );
+        let files = library_route_written(
+            &dir,
+            &[
+                (
+                    "Cargo.toml",
+                    "[workspace]\nmembers = [\"mu\", \"kappa\", \"kappa-tool\"]\n\
+                     resolver = \"2\"\n",
+                ),
+                ("mu/Cargo.toml", &mu),
+                (
+                    "mu/src/lib.rs",
+                    "//! Mu.\n\n/// Low.\npub fn low(n: u8) -> bool {\n    n < 4\n}\n",
+                ),
+                (
+                    "mu/src/main.rs",
+                    "//! Mu tool.\n\n/// Wide.\npub fn wide(n: u8) -> bool {\n    n > 100\n}\n\n\
+                     fn main() {\n    println!(\"{}\", wide(200));\n}\n",
+                ),
+                (
+                    "mu/tests/claims.rs",
+                    "#[test]\nfn low_holds() {\n    assert!(mu::low(1));\n}\n",
+                ),
+                ("kappa/Cargo.toml", &kappa),
+                (
+                    "kappa/src/lib.rs",
+                    "//! Kappa.\n\n/// One.\npub fn one(n: u8) -> bool {\n    n == 1\n}\n",
+                ),
+                (
+                    "kappa/tests/claims.rs",
+                    "#[test]\nfn one_holds() {\n    assert!(kappa::one(1));\n}\n",
+                ),
+                ("kappa-tool/Cargo.toml", &tool),
+                (
+                    "kappa-tool/src/main.rs",
+                    "//! Kappa tool.\n\n/// Two.\npub fn two(n: u8) -> bool {\n    n == 2\n}\n\n\
+                     fn main() {\n    println!(\"{}\", two(2));\n}\n",
+                ),
+            ],
+        );
+        assert!(!files.keys().any(|p| p.starts_with("library/kappa-tool/")));
+        for (package, own, other) in [("mu", "low", "wide"), ("kappa", "one", "two")] {
+            let dir = format!("library/{package}");
+            let value = library_route_text(&files, &format!("{dir}/src/Library.lex.tex"));
+            assert!(value.contains(&format!("\"W.Behavior.{own}\"")), "{value}");
+            assert!(
+                !value.contains(&format!("\"W.Behavior.{other}\"")),
+                "{value}"
+            );
+            let behavior = library_route_text(&files, &format!("{dir}/src/Behavior.lex.tex"));
+            assert!(!behavior.contains(&format!("name: {other},")), "{behavior}");
+        }
+    }
 }
