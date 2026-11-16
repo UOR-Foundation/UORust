@@ -861,13 +861,13 @@ pub fn f0(v0: List<Str>, v1: Str) -> Str {
     v3
 }
 
-pub fn f1(p5: List<Str>, p6: Str) -> Str {
-    let m4 = (p5, p6);
+pub fn f1(p7: List<Str>, p8: Str) -> Str {
+    let m6 = (p7, p8);
     {
-        let mut m4 = m4;
+        let mut m6 = m6;
         loop {
             let step = {
-                let (v0, v1) = m4;
+                let (v0, v1) = m6;
                 let m1 = v0;
                 match m1.uncons() {
                     None => {
@@ -875,16 +875,20 @@ pub fn f1(p5: List<Str>, p6: Str) -> Str {
                     }
                     Some((v2, v3)) => {
                         let v4: Str = {
-                            let a2 = List::cons(Str::lit("("), List::cons(v2, List::cons(Str::lit(" -> "), List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil())))));
-                            let a3 = Str::lit("");
-                            join(a2, a3)
+                            let a4 = {
+                                let a2 = List::cons(Str::lit("("), List::cons(v2, List::<Str>::nil()));
+                                let a3 = List::cons(Str::lit(" -> "), List::cons(v1, List::cons(Str::lit(")"), List::<Str>::nil())));
+                                append_list(a2, a3)
+                            };
+                            let a5 = Str::lit("");
+                            join(a4, a5)
                         };
                         Ok::<(List<Str>, Str), Str>((v3, v4))
                     }
                 }
             };
             match step {
-                Ok(next) => { m4 = next; }
+                Ok(next) => { m6 = next; }
                 Err(done) => break done,
             }
         }
@@ -892,15 +896,15 @@ pub fn f1(p5: List<Str>, p6: Str) -> Str {
 }
 
 pub fn f2(v0: List<Str>) -> List<Str> {
-    let m7 = v0;
-    match m7.uncons() {
+    let m9 = v0;
+    match m9.uncons() {
         None => {
             List::<Str>::nil()
         }
         Some((v1, v2)) => {
-            let a8 = f2(v2);
-            let a9 = List::cons(v1, List::<Str>::nil());
-            append_list(a8, a9)
+            let a10 = f2(v2);
+            let a11 = List::cons(v1, List::<Str>::nil());
+            append_list(a10, a11)
         }
     }
 }

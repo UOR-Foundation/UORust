@@ -163,6 +163,17 @@ pub(crate) fn lift_first_free(
     )
 }
 
+/// `uorust::lift::is_lifetime`, certified as `Behavior::isLifetime`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_is_lifetime(p0: &&str) -> Option<bool> {
+    Some(
+        match uorust_certified::is_lifetime::run(uorust_certified::is_lifetime::Str::lit((*p0))) {
+            Ok(v) => v,
+            Err(_) => panic!("uorust::lift::is_lifetime: the certified root overflowed"),
+        },
+    )
+}
+
 /// `uorust::lift::mentions_word`, certified as `Behavior::mentionsWord`.
 #[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
@@ -175,6 +186,15 @@ pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
             Err(_) => panic!("uorust::lift::mentions_word: the certified root overflowed"),
         },
     )
+}
+
+/// `uorust::lift::name_taken`, certified as `Behavior::nameTaken`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_name_taken(p0: &&str, p1: &bool) -> Option<bool> {
+    Some(uorust_certified::name_taken::run(
+        uorust_certified::name_taken::Str::lit((*p0)),
+        *p1,
+    ))
 }
 
 /// `uorust::lift::pointer_width`, certified as `Behavior::pointerWidth`.

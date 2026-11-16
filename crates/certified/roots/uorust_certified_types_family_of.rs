@@ -857,7 +857,7 @@ pub fn format_int(p0: i64) -> Str {
 
 #[derive(Clone)]
 pub enum Adt0 {
-    C0(List<Adt1>, List<Adt2>, List<Adt5>, List<Adt6>, List<List<Str>>, List<Adt1>, List<Adt1>, bool, List<Adt7>, List<Adt8>, List<Adt9>, List<Adt11>),
+    C0(List<Adt1>, List<Adt2>, List<Adt5>, List<Adt6>, List<List<Str>>, List<Adt1>, List<Adt1>, bool, List<Adt7>, List<Adt8>, List<Adt9>, List<Adt11>, List<Adt5>),
 }
 
 #[derive(Clone)]
@@ -878,20 +878,21 @@ pub enum Adt3 {
     C3(u64),
     C4(Adt4),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt3>),
-    C13(std::rc::Rc<Adt3>, std::rc::Rc<Adt3>),
-    C14(std::rc::Rc<Adt3>),
-    C15(List<Adt3>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt3>),
+    C14(std::rc::Rc<Adt3>, std::rc::Rc<Adt3>),
+    C15(std::rc::Rc<Adt3>),
     C16(List<Adt3>),
-    C17(std::rc::Rc<Adt3>, std::rc::Rc<Adt3>, bool),
-    C18(std::rc::Rc<Adt3>, bool),
-    C19(List<Adt3>, std::rc::Rc<Adt3>),
+    C17(List<Adt3>),
+    C18(std::rc::Rc<Adt3>, std::rc::Rc<Adt3>, bool),
+    C19(std::rc::Rc<Adt3>, bool),
+    C20(List<Adt3>, std::rc::Rc<Adt3>),
 }
 
 #[derive(Clone)]
@@ -936,7 +937,7 @@ pub enum Adt11 {
 
 pub fn f0(v0: Adt0, v1: Str) -> Option<List<Str>> {
     f1(match v0 {
-        Adt0::C0(_, _, _, _, h1, _, _, _, _, _, _, _) => {
+        Adt0::C0(_, _, _, _, h1, _, _, _, _, _, _, _, _) => {
             h1
         }
     }, v1)

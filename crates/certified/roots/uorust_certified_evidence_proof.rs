@@ -856,13 +856,17 @@ pub fn format_int(p0: i64) -> Str {
 }
 
 pub fn f0(v0: List<Str>) -> Str {
-    let a3 = List::cons(Str::lit("linear_arithmetic{definitions: ["), List::cons({
-        let a1 = v0;
-        let a2 = Str::lit(", ");
-        join(a1, a2)
-    }, List::cons(Str::lit("]}"), List::<Str>::nil())));
-    let a4 = Str::lit("");
-    join(a3, a4)
+    let a5 = {
+        let a3 = List::cons(Str::lit("linear_arithmetic{definitions: ["), List::<Str>::nil());
+        let a4 = List::cons({
+            let a1 = v0;
+            let a2 = Str::lit(", ");
+            join(a1, a2)
+        }, List::cons(Str::lit("]}"), List::<Str>::nil()));
+        append_list(a3, a4)
+    };
+    let a6 = Str::lit("");
+    join(a5, a6)
 }
 
 pub fn run(p0: List<Str>) -> Str {

@@ -1194,20 +1194,21 @@ pub enum Adt48 {
     C3(u64),
     C4(Adt49),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt48>),
-    C13(std::rc::Rc<Adt48>, std::rc::Rc<Adt48>),
-    C14(std::rc::Rc<Adt48>),
-    C15(List<Adt48>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt48>),
+    C14(std::rc::Rc<Adt48>, std::rc::Rc<Adt48>),
+    C15(std::rc::Rc<Adt48>),
     C16(List<Adt48>),
-    C17(std::rc::Rc<Adt48>, std::rc::Rc<Adt48>, bool),
-    C18(std::rc::Rc<Adt48>, bool),
-    C19(List<Adt48>, std::rc::Rc<Adt48>),
+    C17(List<Adt48>),
+    C18(std::rc::Rc<Adt48>, std::rc::Rc<Adt48>, bool),
+    C19(std::rc::Rc<Adt48>, bool),
+    C20(List<Adt48>, std::rc::Rc<Adt48>),
 }
 
 #[derive(Clone)]
@@ -1307,10 +1308,14 @@ pub fn f0(v0: Adt0, v1: Str, v2: Adt48, v3: Adt48, v4: Adt50) -> Result<(Option<
         } else {
             let v6: Adt50 = f3(v4, Str::lit("propext"));
             f4({
-                let a2 = List::cons(Str::lit("(prim join "), List::cons(v1, List::cons(Str::lit(" \"\" : String)"), List::<Str>::nil())));
-                let a3 = Str::lit("");
-                join(a2, a3)
-            }, Adt48::C6, v6)
+                let a4 = {
+                    let a2 = List::cons(Str::lit("(prim join "), List::<Str>::nil());
+                    let a3 = List::cons(v1, List::cons(Str::lit(" \"\" : String)"), List::<Str>::nil()));
+                    append_list(a2, a3)
+                };
+                let a5 = Str::lit("");
+                join(a4, a5)
+            }, Adt48::C7, v6)
         }
     } else {
         f4(v1, v3, v4)
@@ -1318,27 +1323,27 @@ pub fn f0(v0: Adt0, v1: Str, v2: Adt48, v3: Adt48, v4: Adt50) -> Result<(Option<
 }
 
 pub fn f1(v0: Adt0) -> bool {
-    let m4 = f5(v0);
-    match m4 {
+    let m6 = f5(v0);
+    match m6 {
         None => {
             false
         }
         Some(v1) => {
-            let m5 = v1;
-            match m5.uncons() {
+            let m7 = v1;
+            match m7.uncons() {
                 None => {
                     false
                 }
                 Some((v2, v3)) => {
-                    let m6 = v2;
-                    match m6 {
+                    let m8 = v2;
+                    match m8 {
                         Adt17::C0(v4) => {
-                            let m7 = v3;
-                            match m7.uncons() {
+                            let m9 = v3;
+                            match m9.uncons() {
                                 None => {
-                                    let a8 = f6(v4);
-                                    let a9 = Str::lit("String");
-                                    equal(a8, a9)
+                                    let a10 = f6(v4);
+                                    let a11 = Str::lit("String");
+                                    equal(a10, a11)
                                 }
                                 Some((_, _)) => {
                                     false
@@ -1356,8 +1361,8 @@ pub fn f1(v0: Adt0) -> bool {
 }
 
 pub fn f2(v0: Adt48) -> bool {
-    let m10 = v0;
-    match m10 {
+    let m12 = v0;
+    match m12 {
         Adt48::C0 => {
             false
         }
@@ -1376,14 +1381,14 @@ pub fn f2(v0: Adt48) -> bool {
         Adt48::C5(_) => {
             false
         }
-        Adt48::C6 => {
-            true
+        Adt48::C6(_) => {
+            false
         }
         Adt48::C7 => {
             true
         }
         Adt48::C8 => {
-            false
+            true
         }
         Adt48::C9 => {
             false
@@ -1391,16 +1396,16 @@ pub fn f2(v0: Adt48) -> bool {
         Adt48::C10 => {
             false
         }
-        Adt48::C11(_) => {
+        Adt48::C11 => {
             false
         }
         Adt48::C12(_) => {
             false
         }
-        Adt48::C13(_, _) => {
+        Adt48::C13(_) => {
             false
         }
-        Adt48::C14(_) => {
+        Adt48::C14(_, _) => {
             false
         }
         Adt48::C15(_) => {
@@ -1409,13 +1414,16 @@ pub fn f2(v0: Adt48) -> bool {
         Adt48::C16(_) => {
             false
         }
-        Adt48::C17(_, _, _) => {
+        Adt48::C17(_) => {
             false
         }
-        Adt48::C18(_, _) => {
+        Adt48::C18(_, _, _) => {
             false
         }
         Adt48::C19(_, _) => {
+            false
+        }
+        Adt48::C20(_, _) => {
             false
         }
     }
@@ -1423,34 +1431,34 @@ pub fn f2(v0: Adt48) -> bool {
 
 pub fn f3(v0: Adt50, v1: Str) -> Adt50 {
     let v2: List<Str> = match v0.clone() {
-        Adt50::C0(_, _, _, _, h11, _, _) => {
-            h11
+        Adt50::C0(_, _, _, _, h13, _, _) => {
+            h13
         }
     };
     let v3: List<Str> = f7(v2, v1);
     Adt50::C0(match v0.clone() {
-        Adt50::C0(h12, _, _, _, _, _, _) => {
-            h12
-        }
-    }, match v0.clone() {
-        Adt50::C0(_, h13, _, _, _, _, _) => {
-            h13
-        }
-    }, match v0.clone() {
-        Adt50::C0(_, _, h14, _, _, _, _) => {
+        Adt50::C0(h14, _, _, _, _, _, _) => {
             h14
         }
     }, match v0.clone() {
-        Adt50::C0(_, _, _, h15, _, _, _) => {
+        Adt50::C0(_, h15, _, _, _, _, _) => {
             h15
         }
-    }, v3, match v0.clone() {
-        Adt50::C0(_, _, _, _, _, h16, _) => {
+    }, match v0.clone() {
+        Adt50::C0(_, _, h16, _, _, _, _) => {
             h16
         }
-    }, match v0 {
-        Adt50::C0(_, _, _, _, _, _, h17) => {
+    }, match v0.clone() {
+        Adt50::C0(_, _, _, h17, _, _, _) => {
             h17
+        }
+    }, v3, match v0.clone() {
+        Adt50::C0(_, _, _, _, _, h18, _) => {
+            h18
+        }
+    }, match v0 {
+        Adt50::C0(_, _, _, _, _, _, h19) => {
+            h19
         }
     })
 }
@@ -1460,8 +1468,8 @@ pub fn f4(v0: Str, v1: Adt48, v2: Adt50) -> Result<(Option<(Adt53, Adt48)>, Adt5
 }
 
 pub fn f5(v0: Adt0) -> Option<List<Adt17>> {
-    let m18 = v0;
-    match m18 {
+    let m20 = v0;
+    match m20 {
         Adt0::C0(_, _, v3, _) => {
             v3
         }
@@ -1469,8 +1477,8 @@ pub fn f5(v0: Adt0) -> Option<List<Adt17>> {
 }
 
 pub fn f6(v0: Adt12) -> Str {
-    let m19 = v0;
-    match m19 {
+    let m21 = v0;
+    match m21 {
         Adt12::C0(v1, _) => {
             v1
         }
@@ -1478,23 +1486,23 @@ pub fn f6(v0: Adt12) -> Str {
 }
 
 pub fn f7(v0: List<Str>, v1: Str) -> List<Str> {
-    let m20 = v0;
-    match m20.uncons() {
+    let m22 = v0;
+    match m22.uncons() {
         None => {
             List::cons(v1, List::<Str>::nil())
         }
         Some((v2, v3)) => {
-            let a21 = v1.clone();
-            let a22 = v2.clone();
-            if equal(a21, a22) {
+            let a23 = v1.clone();
+            let a24 = v2.clone();
+            if equal(a23, a24) {
                 List::cons(v2, v3)
             } else {
-                let m25 = {
-                    let a23 = v1.clone();
-                    let a24 = v2.clone();
-                    compare(a23, a24)
+                let m27 = {
+                    let a25 = v1.clone();
+                    let a26 = v2.clone();
+                    compare(a25, a26)
                 };
-                if match m25 {
+                if match m27 {
                     Ordering::Less => {
                         true
                     }

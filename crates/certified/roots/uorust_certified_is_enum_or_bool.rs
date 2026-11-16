@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -891,7 +892,7 @@ pub enum Adt2 {
 
 #[derive(Clone)]
 pub enum Adt3 {
-    C0(List<Adt4>, List<Adt5>, List<Adt6>, List<Adt7>, List<List<Str>>, List<Adt4>, List<Adt4>, bool, List<Adt8>, List<Adt9>, List<Adt10>, List<Adt12>),
+    C0(List<Adt4>, List<Adt5>, List<Adt6>, List<Adt7>, List<List<Str>>, List<Adt4>, List<Adt4>, bool, List<Adt8>, List<Adt9>, List<Adt10>, List<Adt12>, List<Adt6>),
 }
 
 #[derive(Clone)]
@@ -975,7 +976,7 @@ pub fn f0(v0: Adt0, v1: Adt2) -> bool {
         Adt0::C5(_) => {
             false
         }
-        Adt0::C6 => {
+        Adt0::C6(_) => {
             false
         }
         Adt0::C7 => {
@@ -990,7 +991,10 @@ pub fn f0(v0: Adt0, v1: Adt2) -> bool {
         Adt0::C10 => {
             false
         }
-        Adt0::C11(v6) => {
+        Adt0::C11 => {
+            false
+        }
+        Adt0::C12(v7) => {
             f1({
                 let m4 = match v1 {
                     Adt2::C0(h3, _, _, _) => {
@@ -998,19 +1002,16 @@ pub fn f0(v0: Adt0, v1: Adt2) -> bool {
                     }
                 };
                 match m4 {
-                    Adt3::C0(h2, _, _, _, _, _, _, _, _, _, _, _) => {
+                    Adt3::C0(h2, _, _, _, _, _, _, _, _, _, _, _, _) => {
                         h2
                     }
                 }
-            }, v6)
+            }, v7)
         }
-        Adt0::C12(_) => {
+        Adt0::C13(_) => {
             false
         }
-        Adt0::C13(_, _) => {
-            false
-        }
-        Adt0::C14(_) => {
+        Adt0::C14(_, _) => {
             false
         }
         Adt0::C15(_) => {
@@ -1019,13 +1020,16 @@ pub fn f0(v0: Adt0, v1: Adt2) -> bool {
         Adt0::C16(_) => {
             false
         }
-        Adt0::C17(_, _, _) => {
+        Adt0::C17(_) => {
             false
         }
-        Adt0::C18(_, _) => {
+        Adt0::C18(_, _, _) => {
             false
         }
         Adt0::C19(_, _) => {
+            false
+        }
+        Adt0::C20(_, _) => {
             false
         }
     }

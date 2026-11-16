@@ -907,9 +907,13 @@ pub fn f1(v0: Str, v1: Str) -> Adt0 {
         Adt0::C9(v0)
     } else {
         Adt0::C9({
-            let a3 = List::cons(v0, List::cons(Str::lit(": "), List::cons(v1, List::<Str>::nil())));
-            let a4 = Str::lit("");
-            join(a3, a4)
+            let a5 = {
+                let a3 = List::cons(v0, List::<Str>::nil());
+                let a4 = List::cons(Str::lit(": "), List::cons(v1, List::<Str>::nil()));
+                append_list(a3, a4)
+            };
+            let a6 = Str::lit("");
+            join(a5, a6)
         })
     }
 }

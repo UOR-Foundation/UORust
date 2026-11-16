@@ -880,74 +880,102 @@ pub fn f0(v0: Adt0) -> R<Str> {
     let m1 = v0;
     match m1 {
         Adt0::C0(v1, v2) => {
-            let a2 = List::cons(Str::lit("`"), List::cons(v1, List::cons(Str::lit("` is not a number of bits in `"), List::cons(v2, List::cons(Str::lit("`"), List::<Str>::nil())))));
-            let a3 = Str::lit("");
-            Ok(join(a2, a3))
-        }
-        Adt0::C1(v3) => {
-            let a4 = List::cons(Str::lit("a pointer without a size in `"), List::cons(v3, List::cons(Str::lit("`"), List::<Str>::nil())));
+            let a4 = {
+                let a2 = List::cons(Str::lit("`"), List::cons(v1, List::<Str>::nil()));
+                let a3 = List::cons(Str::lit("` is not a number of bits in `"), List::cons(v2, List::cons(Str::lit("`"), List::<Str>::nil())));
+                append_list(a2, a3)
+            };
             let a5 = Str::lit("");
             Ok(join(a4, a5))
         }
+        Adt0::C1(v3) => {
+            let a8 = {
+                let a6 = List::cons(Str::lit("a pointer without a size in `"), List::<Str>::nil());
+                let a7 = List::cons(v3, List::cons(Str::lit("`"), List::<Str>::nil()));
+                append_list(a6, a7)
+            };
+            let a9 = Str::lit("");
+            Ok(join(a8, a9))
+        }
         Adt0::C2(v4) => {
-            let a6 = List::cons(Str::lit("a width without an alignment in `"), List::cons(v4, List::cons(Str::lit("`"), List::<Str>::nil())));
-            let a7 = Str::lit("");
-            Ok(join(a6, a7))
+            let a12 = {
+                let a10 = List::cons(Str::lit("a width without an alignment in `"), List::<Str>::nil());
+                let a11 = List::cons(v4, List::cons(Str::lit("`"), List::<Str>::nil()));
+                append_list(a10, a11)
+            };
+            let a13 = Str::lit("");
+            Ok(join(a12, a13))
         }
         Adt0::C3 => {
             Ok(Str::lit("a data layout without its triple"))
         }
         Adt0::C4(v5) => {
-            let a8 = List::cons(Str::lit("the layout of "), List::cons(v5, List::cons(Str::lit(", with no data layout recorded for the target"), List::<Str>::nil())));
-            let a9 = Str::lit("");
-            Ok(join(a8, a9))
+            let a16 = {
+                let a14 = List::cons(Str::lit("the layout of "), List::<Str>::nil());
+                let a15 = List::cons(v5, List::cons(Str::lit(", with no data layout recorded for the target"), List::<Str>::nil()));
+                append_list(a14, a15)
+            };
+            let a17 = Str::lit("");
+            Ok(join(a16, a17))
         }
         Adt0::C5(v6, v7) => {
-            let a10 = List::cons(Str::lit("the layout of "), List::cons(v6, List::cons(Str::lit(", which the data layout of "), List::cons(v7, List::cons(Str::lit(" does not state"), List::<Str>::nil())))));
-            let a11 = Str::lit("");
-            Ok(join(a10, a11))
+            let a20 = {
+                let a18 = List::cons(Str::lit("the layout of "), List::cons(v6, List::<Str>::nil()));
+                let a19 = List::cons(Str::lit(", which the data layout of "), List::cons(v7, List::cons(Str::lit(" does not state"), List::<Str>::nil())));
+                append_list(a18, a19)
+            };
+            let a21 = Str::lit("");
+            Ok(join(a20, a21))
         }
         Adt0::C6(v8, v9) => {
-            let a14 = List::cons(Str::lit("the layout of "), List::cons(v8, List::cons(Str::lit(", which differs by target: "), List::cons({
-                let a12 = f1(v9)?;
-                let a13 = Str::lit(", ");
-                join(a12, a13)
-            }, List::<Str>::nil()))));
-            let a15 = Str::lit("");
-            Ok(join(a14, a15))
+            let a26 = {
+                let a24 = List::cons(Str::lit("the layout of "), List::cons(v8, List::<Str>::nil()));
+                let a25 = List::cons(Str::lit(", which differs by target: "), List::cons({
+                    let a22 = f1(v9)?;
+                    let a23 = Str::lit(", ");
+                    join(a22, a23)
+                }, List::<Str>::nil()));
+                append_list(a24, a25)
+            };
+            let a27 = Str::lit("");
+            Ok(join(a26, a27))
         }
     }
 }
 
 pub fn f1(v0: List<Adt1>) -> R<List<Str>> {
-    let m16 = v0;
-    match m16.uncons() {
+    let m28 = v0;
+    match m28.uncons() {
         None => {
             Ok(List::<Str>::nil())
         }
         Some((v1, v2)) => {
             let v3: Str = match v1.clone() {
-                Adt1::C0(h17, _) => {
-                    h17
+                Adt1::C0(h29, _) => {
+                    h29
                 }
             };
             let v4: Adt2 = match v1 {
-                Adt1::C0(_, h18) => {
-                    h18
+                Adt1::C0(_, h30) => {
+                    h30
                 }
             };
             Ok(List::cons({
-                let a21 = List::cons(Str::lit("size "), List::cons(f2(match v4.clone() {
-                    Adt2::C0(h19, _) => {
-                        h19
-                    }
-                })?, List::cons(Str::lit(" align "), List::cons(f2(match v4 {
-                    Adt2::C0(_, h20) => {
-                        h20
-                    }
-                })?, List::cons(Str::lit(" on "), List::cons(v3, List::<Str>::nil()))))));
-                let a22 = Str::lit("");
-                join(a21, a22)
+                let a35 = {
+                    let a33 = List::cons(Str::lit("size "), List::cons(f2(match v4.clone() {
+                        Adt2::C0(h31, _) => {
+                            h31
+                        }
+                    })?, List::cons(Str::lit(" align "), List::<Str>::nil())));
+                    let a34 = List::cons(f2(match v4 {
+                        Adt2::C0(_, h32) => {
+                            h32
+                        }
+                    })?, List::cons(Str::lit(" on "), List::cons(v3, List::<Str>::nil())));
+                    append_list(a33, a34)
+                };
+                let a36 = Str::lit("");
+                join(a35, a36)
             }, f1(v2)?))
         }
     }
@@ -955,84 +983,84 @@ pub fn f1(v0: List<Adt1>) -> R<List<Str>> {
 
 pub fn f2(v0: u64) -> R<Str> {
     Ok(f3({
-        let a23 = v0;
-        let a24 = 1u64;
-        nat_add(a23, a24)?
+        let a37 = v0;
+        let a38 = 1u64;
+        nat_add(a37, a38)?
     }, v0))
 }
 
 pub fn f3(v0: u64, v1: u64) -> Str {
-    let m25 = v0;
-    if m25 == 0 {
+    let m39 = v0;
+    if m39 == 0 {
         Str::lit("")
     } else {
-        let v2 = m25 - 1;
-        let a26 = v1;
-        let a27 = 10u64;
-        if nat_lt(a26, a27) {
+        let v2 = m39 - 1;
+        let a40 = v1;
+        let a41 = 10u64;
+        if nat_lt(a40, a41) {
             f4(v1)
         } else {
-            let a34 = List::cons(f3(v2, {
-                let a28 = v1;
-                let a29 = 10u64;
-                let a30 = 0u64;
-                nat_quot(a28, a29, a30)
+            let a48 = List::cons(f3(v2, {
+                let a42 = v1;
+                let a43 = 10u64;
+                let a44 = 0u64;
+                nat_quot(a42, a43, a44)
             }), List::cons(f4({
-                let a31 = v1;
-                let a32 = 10u64;
-                let a33 = 0u64;
-                nat_rem(a31, a32, a33)
+                let a45 = v1;
+                let a46 = 10u64;
+                let a47 = 0u64;
+                nat_rem(a45, a46, a47)
             }), List::<Str>::nil()));
-            let a35 = Str::lit("");
-            join(a34, a35)
+            let a49 = Str::lit("");
+            join(a48, a49)
         }
     }
 }
 
 pub fn f4(v0: u64) -> Str {
-    let a36 = v0;
-    let a37 = 0u64;
-    if nat_eq(a36, a37) {
+    let a50 = v0;
+    let a51 = 0u64;
+    if nat_eq(a50, a51) {
         Str::lit("0")
     } else {
-        let a38 = v0;
-        let a39 = 1u64;
-        if nat_eq(a38, a39) {
+        let a52 = v0;
+        let a53 = 1u64;
+        if nat_eq(a52, a53) {
             Str::lit("1")
         } else {
-            let a40 = v0;
-            let a41 = 2u64;
-            if nat_eq(a40, a41) {
+            let a54 = v0;
+            let a55 = 2u64;
+            if nat_eq(a54, a55) {
                 Str::lit("2")
             } else {
-                let a42 = v0;
-                let a43 = 3u64;
-                if nat_eq(a42, a43) {
+                let a56 = v0;
+                let a57 = 3u64;
+                if nat_eq(a56, a57) {
                     Str::lit("3")
                 } else {
-                    let a44 = v0;
-                    let a45 = 4u64;
-                    if nat_eq(a44, a45) {
+                    let a58 = v0;
+                    let a59 = 4u64;
+                    if nat_eq(a58, a59) {
                         Str::lit("4")
                     } else {
-                        let a46 = v0;
-                        let a47 = 5u64;
-                        if nat_eq(a46, a47) {
+                        let a60 = v0;
+                        let a61 = 5u64;
+                        if nat_eq(a60, a61) {
                             Str::lit("5")
                         } else {
-                            let a48 = v0;
-                            let a49 = 6u64;
-                            if nat_eq(a48, a49) {
+                            let a62 = v0;
+                            let a63 = 6u64;
+                            if nat_eq(a62, a63) {
                                 Str::lit("6")
                             } else {
-                                let a50 = v0;
-                                let a51 = 7u64;
-                                if nat_eq(a50, a51) {
+                                let a64 = v0;
+                                let a65 = 7u64;
+                                if nat_eq(a64, a65) {
                                     Str::lit("7")
                                 } else {
-                                    let a52 = v0;
-                                    let a53 = 8u64;
-                                    if nat_eq(a52, a53) {
+                                    let a66 = v0;
+                                    let a67 = 8u64;
+                                    if nat_eq(a66, a67) {
                                         Str::lit("8")
                                     } else {
                                         Str::lit("9")

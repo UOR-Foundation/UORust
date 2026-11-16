@@ -856,9 +856,17 @@ pub fn format_int(p0: i64) -> Str {
 }
 
 pub fn f0(v0: Str) -> Str {
-    let a1 = List::cons(Str::lit("((("), List::cons(v0.clone(), List::cons(Str::lit(" <? 55296) || (57343 <? "), List::cons(v0.clone(), List::cons(Str::lit(")) && ("), List::cons(v0, List::cons(Str::lit(" <? 1114112))"), List::<Str>::nil())))))));
-    let a2 = Str::lit("");
-    join(a1, a2)
+    let a5 = {
+        let a3 = List::cons(Str::lit("((("), List::cons(v0.clone(), List::cons(Str::lit(" <? 55296) || (57343 <? "), List::<Str>::nil())));
+        let a4 = {
+            let a1 = List::cons(v0.clone(), List::cons(Str::lit(")) && ("), List::<Str>::nil()));
+            let a2 = List::cons(v0, List::cons(Str::lit(" <? 1114112))"), List::<Str>::nil()));
+            append_list(a1, a2)
+        };
+        append_list(a3, a4)
+    };
+    let a6 = Str::lit("");
+    join(a5, a6)
 }
 
 pub fn run(p0: Str) -> Str {

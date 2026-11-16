@@ -862,7 +862,7 @@ pub enum Adt0 {
 
 #[derive(Clone)]
 pub enum Adt1 {
-    C0(List<Adt2>, List<Adt3>, List<Adt6>, List<Adt7>, List<List<Str>>, List<Adt2>, List<Adt2>, bool, List<Adt8>, List<Adt9>, List<Adt10>, List<Adt12>),
+    C0(List<Adt2>, List<Adt3>, List<Adt6>, List<Adt7>, List<List<Str>>, List<Adt2>, List<Adt2>, bool, List<Adt8>, List<Adt9>, List<Adt10>, List<Adt12>, List<Adt6>),
 }
 
 #[derive(Clone)]
@@ -883,20 +883,21 @@ pub enum Adt4 {
     C3(u64),
     C4(Adt5),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt4>),
-    C13(std::rc::Rc<Adt4>, std::rc::Rc<Adt4>),
-    C14(std::rc::Rc<Adt4>),
-    C15(List<Adt4>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt4>),
+    C14(std::rc::Rc<Adt4>, std::rc::Rc<Adt4>),
+    C15(std::rc::Rc<Adt4>),
     C16(List<Adt4>),
-    C17(std::rc::Rc<Adt4>, std::rc::Rc<Adt4>, bool),
-    C18(std::rc::Rc<Adt4>, bool),
-    C19(List<Adt4>, std::rc::Rc<Adt4>),
+    C17(List<Adt4>),
+    C18(std::rc::Rc<Adt4>, std::rc::Rc<Adt4>, bool),
+    C19(std::rc::Rc<Adt4>, bool),
+    C20(List<Adt4>, std::rc::Rc<Adt4>),
 }
 
 #[derive(Clone)]

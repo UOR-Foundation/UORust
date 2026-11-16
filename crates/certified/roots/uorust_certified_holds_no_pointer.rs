@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -903,56 +904,59 @@ pub fn f0(v0: Adt0) -> bool {
             true
         }
         Adt0::C5(_) => {
-            true
+            false
         }
-        Adt0::C6 => {
+        Adt0::C6(_) => {
             true
         }
         Adt0::C7 => {
-            false
-        }
-        Adt0::C8 => {
             true
         }
-        Adt0::C9 => {
+        Adt0::C8 => {
             false
+        }
+        Adt0::C9 => {
+            true
         }
         Adt0::C10 => {
             false
         }
-        Adt0::C11(_) => {
+        Adt0::C11 => {
             false
         }
-        Adt0::C12(r2) => {
-            let v6 = (*r2).clone();
-            f0(v6)
+        Adt0::C12(_) => {
+            false
         }
-        Adt0::C13(r3, r4) => {
-            let v7 = (*r3).clone();
-            let v8 = (*r4).clone();
-            if f0(v7) {
-                f0(v8)
+        Adt0::C13(r2) => {
+            let v7 = (*r2).clone();
+            f0(v7)
+        }
+        Adt0::C14(r3, r4) => {
+            let v8 = (*r3).clone();
+            let v9 = (*r4).clone();
+            if f0(v8) {
+                f0(v9)
             } else {
                 false
             }
         }
-        Adt0::C14(r5) => {
-            let v9 = (*r5).clone();
-            f0(v9)
-        }
-        Adt0::C15(v10) => {
-            f1(v10)
+        Adt0::C15(r5) => {
+            let v10 = (*r5).clone();
+            f0(v10)
         }
         Adt0::C16(v11) => {
-            f2(v11)
+            f1(v11)
         }
-        Adt0::C17(_, _, _) => {
-            false
+        Adt0::C17(v12) => {
+            f2(v12)
         }
-        Adt0::C18(_, _) => {
+        Adt0::C18(_, _, _) => {
             false
         }
         Adt0::C19(_, _) => {
+            false
+        }
+        Adt0::C20(_, _) => {
             false
         }
     }
