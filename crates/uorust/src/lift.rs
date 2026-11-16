@@ -294,7 +294,10 @@ fn named_in(types: &BTreeSet<Ty>) -> BTreeSet<String> {
 /// constructor `mk` of a struct of a recursive family.
 pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Types) -> String {
     if types.boxed(name) {
-        let args: String = fields.iter().map(|(_, v)| format!(" {v}")).collect();
+        let args = fields
+            .iter()
+            .map(|(_, v)| format!(" {v}"))
+            .collect::<String>();
         format!("(ctor {name}.mk{args})")
     } else {
         let parts: Vec<String> = fields.iter().map(|(f, v)| format!("{f} := {v}")).collect();
@@ -380,9 +383,12 @@ const INTEGER_TAG: &str = "LexLeanInt";
 const SOLE: &str = "mk";
 
 /// The LexLean name of a struct's field: a tuple struct's, which Rust
-/// names by position, as a generated tuple's item is named.
+/// names by position, as a generated tuple's item is named. A position is
+/// read as a `u32`, a width fixed on every target: rustc numbers a
+/// struct's fields by `FieldIdx`, a 32-bit index, so every position Rust
+/// can write fits it, and the reading holds whatever `usize` is.
 fn field_name(rust: &str) -> String {
-    match rust.parse::<usize>() {
+    match rust.parse::<u32>() {
         Ok(position) => format!("item{position}"),
         Err(_) => local_name(rust),
     }
@@ -449,7 +455,7 @@ fn std_path(path: &rs::Path) -> bool {
     let [root, module, last] = path.segments.as_slice() else {
         return false;
     };
-    let plain = |s: &rs::PathSegment| s.arguments == rs::PathArguments::None;
+    let plain = |s: &rs::PathSegment| matches!(s.arguments, rs::PathArguments::None);
     matches!(root.ident.as_str(), "std" | "core" | "alloc")
         && plain(root)
         && plain(module)
@@ -919,9 +925,11 @@ impl Types {
     /// A struct's fields as the lift names them, where every one lifts. A
     /// tuple struct's field is named by its position.
     fn fields_read(&self, raw: &[(String, rs::RustType)]) -> Option<Vec<(String, Ty)>> {
-        raw.iter()
-            .map(|(field, t)| Some((field_name(field), self.ty(t).ok()?)))
-            .collect()
+        let read: Vec<(String, Ty)> = raw
+            .iter()
+            .filter_map(|(field, t)| self.ty(t).ok().map(|ty| (field_name(field), ty)))
+            .collect();
+        (read.len() == raw.len()).then_some(read)
     }
 
     /// A data-carrying enum's variants as the lift names them, where every
@@ -932,16 +940,20 @@ impl Types {
         name: &str,
         raw: &[RawVariant],
     ) -> Option<Vec<(String, Vec<DataField>)>> {
-        let mut variants = Vec::new();
-        for (variant, fields) in raw {
-            let mut tys = Vec::new();
-            for (field, t) in fields {
-                let ty = self.ty(t).ok().filter(|ty| nested_ok(ty, name))?;
-                tys.push((field.clone(), ty));
-            }
-            variants.push((variant.clone(), tys));
-        }
-        Some(variants)
+        let read = raw
+            .iter()
+            .filter_map(|(variant, fields)| {
+                let tys: Vec<(Option<String>, Ty)> = fields
+                    .iter()
+                    .filter_map(|(field, t)| {
+                        let ty = self.ty(t).ok().filter(|ty| nested_ok(ty, name));
+                        ty.map(|ty| (field.clone(), ty))
+                    })
+                    .collect();
+                (tys.len() == fields.len()).then_some((variant.clone(), tys))
+            })
+            .collect::<Vec<_>>();
+        (read.len() == raw.len()).then_some(read)
     }
 
     /// The structs whose every field lifts, to the fixpoint where a struct
@@ -2240,12 +2252,12 @@ fn ctor(path: &rs::Path, types: &Types) -> Option<(String, String)> {
     let n = path.segments.len();
     // `S` of `struct S;`: the one value of its type. No variant of an
     // enum lifts under the constructor's name, so the name alone tells.
-    if let [one] = path.segments.as_slice() {
-        let owner = types.resolve(&one.ident);
+    if n == 1 {
+        let owner = types.resolve(&path.segments[0].ident);
         let sole = types
             .enums
             .get(&owner)
-            .is_some_and(|vs| vs.iter().map(String::as_str).eq([SOLE]));
+            .is_some_and(|vs| vs.len() == 1 && vs.iter().all(|v| v == SOLE));
         return sole.then(|| (owner, SOLE.to_string()));
     }
     if n < 2 {
@@ -3498,7 +3510,7 @@ fn tuple_struct<'e>(
     let positional = fields
         .iter()
         .enumerate()
-        .all(|(i, (f, _))| *f == field_name(&i.to_string()));
+        .all(|(i, (f, _))| *f == field_name(&format!("{i}")));
     (positional && fields.len() == arity).then_some((name, fields.as_slice()))
 }
 
@@ -12501,5 +12513,176 @@ mod tests {
                 "generic, async, unsafe or variadic".to_string()
             ))
         );
+    }
+
+    // residue: the translator's own functions, rewritten inside the fragment
+    // the tool lifts from itself; each test pins what the old body did.
+
+    fn residue_path(src: &str) -> rs::Path {
+        crate::convert::path(&syn::parse_str::<syn::Path>(src).expect("parses"))
+    }
+
+    fn residue_ty(src: &str) -> rs::RustType {
+        crate::convert::ty(&syn::parse_str::<syn::Type>(src).expect("parses"))
+    }
+
+    #[test]
+    fn residue_a_unit_value_is_named_by_its_type_or_its_variant() {
+        let types = types_of(
+            "struct Mark; enum Two { A, B } enum Only { One } \
+             enum Mixed { Bare, Held(u8) } enum Never {}",
+        );
+        let ctor_of = |src: &str| ctor(&residue_path(src), &types);
+        let named = |o: &str, v: &str| Some((o.to_string(), v.to_string()));
+        // A struct of no fields: its one value, under the name alone.
+        assert_eq!(ctor_of("Mark"), named("Mark", SOLE));
+        // An enum's name alone is no value, whatever its variants.
+        assert_eq!(ctor_of("Two"), None);
+        assert_eq!(ctor_of("Only"), None);
+        assert_eq!(ctor_of("Mixed"), None);
+        // An enum of no variants has no value to name.
+        assert_eq!(ctor_of("Never"), None);
+        // A unit variant, by the last two segments.
+        assert_eq!(ctor_of("Two::A"), named("Two", "A"));
+        assert_eq!(ctor_of("crate::Two::B"), named("Two", "B"));
+        assert_eq!(ctor_of("Only::One"), named("Only", "One"));
+        assert_eq!(ctor_of("Mixed::Bare"), named("Mixed", "Bare"));
+        // A variant that carries data, or none of the enum's, is no unit.
+        assert_eq!(ctor_of("Mixed::Held"), None);
+        assert_eq!(ctor_of("Two::C"), None);
+        assert_eq!(ctor_of("Missing::A"), None);
+        assert_eq!(ctor_of("Missing"), None);
+    }
+
+    #[test]
+    fn residue_a_library_path_is_plain_full_and_of_a_type_the_lift_reads() {
+        for full in [
+            "std::collections::BTreeMap",
+            "core::option::Option",
+            "alloc::sync::Arc",
+            "std::vec::Vec",
+            "std::path::PathBuf",
+            // The last segment's arguments are the type's own.
+            "std::collections::HashMap<u8, u8>",
+        ] {
+            assert!(std_path(&residue_path(full)), "{full}");
+        }
+        for other in [
+            "std::fmt::Rc",
+            "std::collections::Rc",
+            "mine::collections::BTreeMap",
+            "collections::BTreeMap",
+            "std::collections::btree_map::BTreeMap",
+            "BTreeMap",
+        ] {
+            assert!(!std_path(&residue_path(other)), "{other}");
+        }
+        // Arguments on the root or the module make it no library path.
+        for at in [0, 1] {
+            let mut path = residue_path("std::collections::BTreeMap");
+            path.segments[at].arguments = rs::PathArguments::Parenthesized;
+            assert!(!std_path(&path), "arguments at {at}");
+        }
+    }
+
+    #[test]
+    fn residue_a_field_named_by_position_is_an_item() {
+        assert_eq!(field_name("0"), "item0");
+        assert_eq!(field_name("12"), "item12");
+        // What `str::parse` accepts as a number reads as one.
+        assert_eq!(field_name("+3"), "item3");
+        assert_eq!(field_name("007"), "item7");
+        assert_eq!(field_name("4294967295"), "item4294967295");
+        // A name is the local name of its identifier.
+        assert_eq!(field_name("name"), local_name("name"));
+        assert_eq!(field_name("r#type"), local_name("r#type"));
+        assert_eq!(field_name("-1"), local_name("-1"));
+        assert_eq!(field_name(""), local_name(""));
+    }
+
+    #[test]
+    fn residue_fields_and_variants_read_only_where_every_one_lifts() {
+        let types = types_of("struct Leaf { n: u8 }");
+        let raw = |fields: &[(&str, &str)]| -> Vec<(String, rs::RustType)> {
+            fields
+                .iter()
+                .map(|(f, t)| (f.to_string(), residue_ty(t)))
+                .collect()
+        };
+        assert_eq!(
+            types.fields_read(&raw(&[("0", "u8"), ("1", "String")])),
+            Some(vec![
+                field("item0", Ty::Nat(Some(8))),
+                field("item1", Ty::Str)
+            ])
+        );
+        assert_eq!(
+            types.fields_read(&raw(&[("leaf", "Leaf"), ("flag", "bool")])),
+            Some(vec![
+                field(&local_name("leaf"), Ty::Named("Leaf".to_string())),
+                field(&local_name("flag"), Ty::Bool)
+            ])
+        );
+        assert_eq!(types.fields_read(&[]), Some(Vec::new()));
+        // One field outside, first or last, keeps the whole out.
+        assert_eq!(
+            types.fields_read(&raw(&[("a", "std::cell::RefCell<u8>"), ("b", "u8")])),
+            None
+        );
+        assert_eq!(
+            types.fields_read(&raw(&[("a", "u8"), ("b", "std::cell::RefCell<u8>")])),
+            None
+        );
+        let variant = |v: &str, fields: &[(Option<&str>, &str)]| -> RawVariant {
+            let fields = fields
+                .iter()
+                .map(|(f, t)| (f.map(str::to_string), residue_ty(t)))
+                .collect();
+            (v.to_string(), fields)
+        };
+        let mut own = types.clone();
+        own.datas.insert("Tree".to_string(), Vec::new());
+        let read = own.variants_read(
+            "Tree",
+            &[
+                variant("Leaf", &[]),
+                variant("Node", &[(None, "Vec<Tree>"), (Some("tag"), "u8")]),
+            ],
+        );
+        assert_eq!(
+            read,
+            Some(vec![
+                ("Leaf".to_string(), Vec::new()),
+                (
+                    "Node".to_string(),
+                    vec![
+                        (None, Ty::List(Box::new(Ty::Named("Tree".to_string())))),
+                        (Some("tag".to_string()), Ty::Nat(Some(8)))
+                    ]
+                )
+            ])
+        );
+        assert_eq!(own.variants_read("Tree", &[]), Some(Vec::new()));
+        // A field outside the lift, or the enum inside a map where Lean
+        // nests no inductive, keeps the whole out.
+        for bad in ["std::cell::RefCell<u8>", "BTreeMap<u8, Tree>"] {
+            let raw = [variant("Leaf", &[]), variant("Node", &[(None, bad)])];
+            assert_eq!(own.variants_read("Tree", &raw), None, "{bad}");
+        }
+    }
+
+    #[test]
+    fn residue_a_struct_value_is_a_record_or_its_family_constructor() {
+        let types = types_of("struct P { a: u8, b: u8 }");
+        let (a, b) = ("a".to_string(), "b".to_string());
+        let parts = [(&a, "1".to_string()), (&b, "2".to_string())];
+        assert_eq!(
+            struct_value("P", &parts, &types),
+            "(record P {a := 1, b := 2})"
+        );
+        let mut family = types.clone();
+        family.families.push(BTreeSet::from(["P".to_string()]));
+        assert_eq!(struct_value("P", &parts, &family), "(ctor P.mk 1 2)");
+        assert_eq!(struct_value("P", &[], &family), "(ctor P.mk)");
     }
 }
