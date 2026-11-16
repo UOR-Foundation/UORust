@@ -138,6 +138,31 @@ pub(crate) fn lift_evidence_proof(p0: &&[std::string::String]) -> Option<std::st
     )
 }
 
+/// `uorust::lift::first_free`, certified as `Behavior::firstFree`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_first_free(
+    p0: &&str,
+    p1: &&[std::string::String],
+) -> Option<std::string::String> {
+    Some(
+        match uorust_certified::first_free::run(uorust_certified::first_free::Str::lit((*p0)), {
+            let mut l = uorust_certified::first_free::List::nil();
+            for x in (*p1).iter().rev() {
+                l = uorust_certified::first_free::List::cons(
+                    uorust_certified::first_free::Str::lit(x),
+                    l,
+                );
+            }
+            l
+        }) {
+            Ok(v) => v,
+            Err(_) => panic!("uorust::lift::first_free: the certified root overflowed"),
+        }
+        .text()
+        .to_string(),
+    )
+}
+
 /// `uorust::lift::mentions_word`, certified as `Behavior::mentionsWord`.
 #[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
@@ -306,11 +331,6 @@ pub(crate) fn mir_memory_of(p0: &&str) -> Option<std::string::String> {
 
 /// Not certified at this commit: the hand-written body runs.
 pub(crate) fn f<A0: ?Sized, R>(_: &A0) -> Option<R> {
-    None
-}
-
-/// Not certified at this commit: the hand-written body runs.
-pub(crate) fn lift_first_free<A0: ?Sized, A1: ?Sized, R>(_: &A0, _: &A1) -> Option<R> {
     None
 }
 
