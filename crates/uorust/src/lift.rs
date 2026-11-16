@@ -1860,6 +1860,11 @@ struct Ctx {
     formatter: Option<String>,
     /// The dictionary of the generic function being lifted.
     dictionary: Vec<Entry>,
+    /// The Rust locals bound outside the expression in hand where its value
+    /// is an operand (a `let`'s value, an argument, a closure's body): the
+    /// statements after it are not part of it, so an update of one there
+    /// would be lost to them, and is refused.
+    sealed: BTreeSet<String>,
 }
 
 /// A closure a `let` binds: its parameters, its body, and the locals in
@@ -2096,7 +2101,28 @@ impl Ctx {
         if let Some((old, _)) = next.locals.insert(ident.to_string(), (name.clone(), ty)) {
             next.hidden.push(old);
         }
+        // A local bound inside an operand is the operand's own.
+        next.sealed.remove(ident);
         (next, name, acc)
+    }
+
+    /// The locals an operand of the expression in hand may not update:
+    /// every one bound so far.
+    fn sealing(&self) -> BTreeSet<String> {
+        let mut sealed = self.sealed.clone();
+        sealed.extend(self.locals.keys().cloned());
+        sealed
+    }
+
+    /// Why an update of `target` here is refused, where it is one an
+    /// operand makes of a local bound outside it.
+    fn unsealed(&self, target: &str) -> Lift<()> {
+        if self.sealed.contains(target) {
+            return Err(Residue::Form(format!(
+                "an update of {target} inside an operand, which the statements after it do not see"
+            )));
+        }
+        Ok(())
     }
 
     /// A binder no name in scope and no name given before takes: `base`
@@ -2218,6 +2244,7 @@ fn flat_of(
         top: false,
         looping: None,
         hidden: Vec::new(),
+        sealed: ctx.sealing(),
         ..ctx.clone()
     };
     let (inner, before) = acc.apart();
@@ -7000,6 +7027,7 @@ fn lambda(
         looping: None,
         hidden: Vec::new(),
         elements: None,
+        sealed: ctx.sealing(),
         ..ctx.clone()
     };
     let mut binders = Vec::new();
@@ -9480,6 +9508,9 @@ fn loop_state(body: &[rs::Stmt], ctx: &Ctx) -> Lift<Vec<String>> {
         .into_iter()
         .filter(|u| ctx.locals.contains_key(u) && !declared.contains(u))
         .collect();
+    for local in &state {
+        ctx.unsealed(local)?;
+    }
     // A loop of the function's own statements that updates nothing may
     // still leave it: a walk whose state is `()`.
     if state.is_empty() && !ctx.top {
@@ -10836,6 +10867,7 @@ fn update_stmt(
     let Some((current, ty)) = ctx.locals.get(&target).cloned() else {
         return Err(Residue::Form(format!("an update of {target}")));
     };
+    ctx.unsealed(&target)?;
     let (value, acc) = updated(e, &ty, &current, env, ctx, acc)?;
     let (scope, name, acc) = ctx.bind(env, acc, &target, ty.clone());
     let ((rest, rt), acc) = block(rest, env, &scope, acc, want)?;
@@ -11810,6 +11842,7 @@ pub(crate) fn lift_all(
                     .as_ref()
                     .map(|g| g.dictionary.clone())
                     .unwrap_or_default(),
+                sealed: BTreeSet::new(),
             };
             env.types.paths_open = c.seen.paths_open;
             // A type parameter is the candidate's own.
@@ -14109,6 +14142,20 @@ mod tests {
         );
     }
 
+    // Mutation as state passing: an update is a new binding of the local
+    // for the statements after it, so it is read only where those
+    // statements are part of the expression that makes it.
+
+    fn mutation_refused_as_lost(src: &str, local: &str) {
+        assert_eq!(
+            lift(src, &plain()),
+            Err(Residue::Form(format!(
+                "an update of {local} inside an operand, which the statements after it do not see"
+            ))),
+            "{src}"
+        );
+    }
+
     #[test]
     fn a_registered_big_integer_computes_exactly() {
         let lifted = registry_number_lift(
@@ -14154,6 +14201,37 @@ mod tests {
             Some(Residue::Form(
                 "BigInt::from of Nat, where LexLean binds no conversion to Int".to_string()
             ))
+        );
+    }
+
+    #[test]
+    fn mutation_an_update_inside_an_operand_is_not_lost() {
+        // A `let`'s value, an argument and a closure's body are operands:
+        // the statements after them would read the local as it was.
+        mutation_refused_as_lost(
+            "fn f(c: bool) -> u32 { let mut a = 0u32; \
+             let r = if c { a = 1; 5 } else { 6 }; a.saturating_add(r) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f(c: Option<u32>) -> u32 { let mut a = 0u32; \
+             let r = match c { Some(v) => { a = v; 1 } None => 2 }; a.saturating_add(r) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f() -> u32 { let mut a = 0u32; let b = a.saturating_add({ a = 3; 1 }); \
+             a.saturating_add(b) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             let ys: Vec<u32> = xs.iter().map(|x| { n = 7; *x }).collect(); n }",
+            "n",
+        );
+        mutation_refused_as_lost(
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             let m = { for x in xs { n = x; } 1u32 }; n.saturating_add(m) }",
+            "n",
         );
     }
 
@@ -14471,5 +14549,24 @@ mod tests {
         let types = types_of("pub struct f32(pub u8);");
         assert!(lift("fn w(x: f32) -> bool { true }", &types).is_err());
         assert!(lift("fn v(x: f64) -> bool { true }", &types).is_ok());
+    }
+
+    #[test]
+    fn mutation_an_update_the_statements_after_it_read_lifts() {
+        for src in [
+            "fn f(c: bool) -> u32 { let mut a = 0u32; if c { a = 1; } a }",
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             for x in xs { n = n.saturating_add(x); } n }",
+            // A local the operand binds is its own to update.
+            "fn f() -> u32 { let r = { let mut b = 2u32; b = 3; b }; r }",
+            "fn f() -> u32 { let a = 1u32; let r = { let mut a = 2u32; a = 3; a }; \
+             a.saturating_add(r) }",
+        ] {
+            assert!(
+                lift(src, &plain()).is_ok(),
+                "{src}: {:?}",
+                lift(src, &plain())
+            );
+        }
     }
 }
