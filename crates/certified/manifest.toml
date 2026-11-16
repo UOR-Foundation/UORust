@@ -2,21 +2,21 @@
 # every lifted translator function exported by `lexlean production` and
 # kernel-checked, keyed by the κ of the Rust function it certifies.
 schema = "uorust/certified/1"
-result = "bdd50e02ee5430a014c9a1dbdca22ba0b3ce1ce0f10408fbcfb8088b9ad0325c 11330c1800b7e391bfda504f46f97f586a37edbbc6588055e3d39090ef29faba"
+result = "b8927a3f013bd8faecb96fe29d3448182f4b98666b9bf4bcc3f0807d6dbd8068 0b21ec6486b7cac0bcc903ab9bcf3b5dbe8c30ca295dcc0fb612664b0ae44ce3"
 compiler = "0.4.0"
-project = "7ed8171c2d8b578dbf9cc9082b23b072c0e1bac8cc5f76b96203cd67afcc00c6"
+project = "95af4d84275660dcf740e356b3c295e5febdbff7ab00404203f673cb4321d62d"
 entry = "uorust::mir::core::core_shard"
 
 # The bootstrap: the share of the translator that runs certified.
 [share]
 translator = 675
-certified = 158
+certified = 167
 reachable = 0
 reachable_certified = 0
 
 # The build seconds per published root, which sizes the next export's shards.
 [timing]
-seconds_per_root = 22
+seconds_per_root = 21
 
 [[root]]
 function = "uorust::lift::Acc::all_axioms"
@@ -199,6 +199,16 @@ identity = "dbf83546e947c8ea0732ffa2e490636cc817decabf40a50a0799d888b9a56367"
 edition = "2021"
 
 [[root]]
+function = "uorust::lex::camel"
+kappa = "6b16217f511a471cd3b91013548b9c15ab3d9c9006b9c8176f6eca94e795b142"
+definition = "camel"
+package = "uorust_certified_camel"
+source = "affcc7cfcc05973589b8437c63af5bc9b60fc724e7bcb2fbcb9ab35c74f16727"
+certification = "kernel-checked"
+identity = "9657d31c709cec6032d8282aa78a0995ae6b21c9c5c991d9e1b1f89e1531d03f"
+edition = "2021"
+
+[[root]]
 function = "uorust::lift::captures"
 kappa = "fe30d6a8a06cecbbb0b628d0ab30994df543362259d12b73eb2141741a64ce49"
 definition = "captures"
@@ -256,6 +266,16 @@ package = "uorust_certified_core_struct_name"
 source = "e4425d2bba2bfdadd88aeaaf2228ca1374ed0decb87a1025e5c003c617fd075d"
 certification = "kernel-checked"
 identity = "96296729a35265741372ea0e9ec29fe8fff7624e58c689fe35ab9e6a74e8fb54"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::ctor"
+kappa = "0662bfe272125b82ad1f8eafe42ee2e13096e04fd0e28bc9dac4aeaf1d786a9b"
+definition = "ctorValue"
+package = "uorust_certified_ctor_value"
+source = "936026ace11ca91e02145a9d53f7ee6ea37a82f614fe545e6e35236fc55fb22b"
+certification = "kernel-checked"
+identity = "257cbd78b2245f02b0370986c75e5436ce7b230f32b030e942dfeab9c41a4a26"
 edition = "2021"
 
 [[root]]
@@ -406,6 +426,16 @@ package = "uorust_certified_expr_pieces"
 source = "763445f65962871fcb86a9c76c388e60ffdb0ed92e3ac54e03dea06161b90974"
 certification = "kernel-checked"
 identity = "c99491d1d7ec35ddd28cef8d2be08390154d9323464f00b47838d88944671b85"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::field_name"
+kappa = "ad1b8db73c93fbca0f83f3fd853618b9d40a52b7a503507062098747923c77c3"
+definition = "fieldName"
+package = "uorust_certified_field_name"
+source = "e34880c9713aad6fe48592e14c09a27c8bc46a8886817eaf6ab7fe7f4bf0aa10"
+certification = "kernel-checked"
+identity = "72edf9235848c7408e51bed9d99a2ce823d115cb5465a3a349565ccfac7585f6"
 edition = "2021"
 
 [[root]]
@@ -636,6 +666,16 @@ package = "uorust_certified_lift_pow2"
 source = "7c8cfde1440491f0b6fac0758a1fb395a821385ccba0756935e28ff0317d6cc3"
 certification = "kernel-checked"
 identity = "dd9afe3ef36118f3cdf58ec4e058d8d19900a16cd91cb863d082c2fad286a613"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::local_name"
+kappa = "0e97be65c6b9ad4c218ce327e3f6f2030810589ce9fde63a76cb6eaae9748b9a"
+definition = "localName"
+package = "uorust_certified_local_name"
+source = "74973bcbdaa6f1715ece1ad2aa68ccef94bc0fdd8f6f5e4858e3c8dcaaeca7e5"
+certification = "kernel-checked"
+identity = "b733b1786402ad6eea50b9dfa9e1a9a7fb5436b2eb1a530c83051a19efca27e8"
 edition = "2021"
 
 [[root]]
@@ -1079,6 +1119,16 @@ identity = "83bae612a690775efbb636071695a3585100d3bcf96e09ef5287bd28d1de7f03"
 edition = "2021"
 
 [[root]]
+function = "uorust::lex::pascal"
+kappa = "548a3c1396c0fe8b72fdda4ebb9f675442b958dc416743af9a50d0c3d416946b"
+definition = "pascal"
+package = "uorust_certified_pascal"
+source = "ac247566cfbd25eb5fea5371aefeced42066a2d9ef732411ee05a4d6c024626a"
+certification = "kernel-checked"
+identity = "adec8ca0072b28c8334ba418f283eaafa43faddaade4bca38d27839b7e40cb0b"
+edition = "2021"
+
+[[root]]
 function = "uorust::mir::lower::plain_cell"
 kappa = "70a5dc8bec23fe7b2456f7f72e21a06ae9def6df8dac10ffadf47797546368e8"
 definition = "plainCell"
@@ -1289,6 +1339,36 @@ identity = "2a8c53508e7590c3058c31e7d6c9d2dbcedaf20a8500f67d239448a626306fbc"
 edition = "2021"
 
 [[root]]
+function = "uorust::lift::std_path"
+kappa = "69dd66085c364077047e892eeddcb14faa11ea674ab5726f9ac92b7811defad7"
+definition = "stdPath"
+package = "uorust_certified_std_path"
+source = "2ba8c173b781432178c4e85725da97b9a6564f967189822b580054ef62ec9a72"
+certification = "kernel-checked"
+identity = "97cf65b85bd8534015c668d8e283277cb8bb476a8353869ae980018a5893039c"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::struct_cells"
+kappa = "92794968d3b2d1c0aca715a4299e5e9826f8b7dc181e5933f108dbf8ed84863f"
+definition = "structCells"
+package = "uorust_certified_struct_cells"
+source = "189600c92214d91ca27738e788581278703c6ab3cae4837dfc26776b8668f057"
+certification = "kernel-checked"
+identity = "9ca86675552552be0777e0ea2ef29daa469313b6d1bb947e544c6fe94f68c66f"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::struct_value"
+kappa = "ccbed5f276702aeb8a5a0a22cc077eff427ce371382dcb56548bac162d3033df"
+definition = "structValue"
+package = "uorust_certified_struct_value"
+source = "980b4bb36d13dc434c5e7121f0b295fecfbafe9a736cb48f6004c38381580646"
+certification = "kernel-checked"
+identity = "3e28f17d6d607721f1ae80ba6cad96b3fc1463f09f6373325401ce3a7127246e"
+edition = "2021"
+
+[[root]]
 function = "uorust::lift::then_rest"
 kappa = "5345d6296812f819d3a2da21ee14f8adb37745d42cf36861434d59879b2af6ad"
 definition = "thenRest"
@@ -1326,6 +1406,16 @@ package = "uorust_certified_tuple_item"
 source = "bc1b9adce876ca73b9e60302824efa70ac13ce3529c736e03ed9071e10b3af8d"
 certification = "kernel-checked"
 identity = "d45f33572dc7b5a144fc3c5f9ceedb9aced1cca43eca3c7c5c343abaa1f75103"
+edition = "2021"
+
+[[root]]
+function = "uorust::lift::tuple_struct"
+kappa = "199e15dc577b1d2e4baaf50c1a545f5ea261f84c5947e17f432f349e8fb97f9c"
+definition = "tupleStruct"
+package = "uorust_certified_tuple_struct"
+source = "8bb4d3762f2f68d6ba900992c31fce24c29d8f85fd3f538a13a57eb1ade3fe30"
+certification = "kernel-checked"
+identity = "6b6b9cf5e69c73d5dbddbb3d399a605df150ca05b93a2b39985de02198e6e639"
 edition = "2021"
 
 [[root]]

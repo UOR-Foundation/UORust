@@ -114,6 +114,12 @@ pub mod borrow;
 #[path = "../roots/uorust_certified_called_value.rs"]
 pub mod called_value;
 
+/// `uorust::lex::camel`, certified as `Behavior::camel`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_camel.rs"]
+pub mod camel;
+
 /// `uorust::lift::captures`, certified as `Behavior::captures`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -149,6 +155,12 @@ pub mod core_shard_translated_count;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_core_struct_name.rs"]
 pub mod core_struct_name;
+
+/// `uorust::lift::ctor`, certified as `Behavior::ctorValue`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_ctor_value.rs"]
+pub mod ctor_value;
 
 /// `uorust::lift::Ctx::below`, certified as `Behavior::ctxBelow`.
 #[rustfmt::skip]
@@ -239,6 +251,12 @@ pub mod expr_is_flat;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_expr_pieces.rs"]
 pub mod expr_pieces;
+
+/// `uorust::lift::field_name`, certified as `Behavior::fieldName`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_field_name.rs"]
+pub mod field_name;
 
 /// `uorust::lift::first_free`, certified as `Behavior::firstFree`.
 #[rustfmt::skip]
@@ -377,6 +395,12 @@ pub mod lift_max_of;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_lift_pow2.rs"]
 pub mod lift_pow2;
+
+/// `uorust::lift::local_name`, certified as `Behavior::localName`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_local_name.rs"]
+pub mod local_name;
 
 /// `uorust::lex::members`, certified as `Behavior::members`.
 #[rustfmt::skip]
@@ -642,6 +666,12 @@ pub mod opt_of;
 #[path = "../roots/uorust_certified_params.rs"]
 pub mod params;
 
+/// `uorust::lex::pascal`, certified as `Behavior::pascal`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_pascal.rs"]
+pub mod pascal;
+
 /// `uorust::mir::lower::plain_cell`, certified as `Behavior::plainCell`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -768,6 +798,24 @@ pub mod some_value;
 #[path = "../roots/uorust_certified_state_expr.rs"]
 pub mod state_expr;
 
+/// `uorust::lift::std_path`, certified as `Behavior::stdPath`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_std_path.rs"]
+pub mod std_path;
+
+/// `uorust::lift::struct_cells`, certified as `Behavior::structCells`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_struct_cells.rs"]
+pub mod struct_cells;
+
+/// `uorust::lift::struct_value`, certified as `Behavior::structValue`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_struct_value.rs"]
+pub mod struct_value;
+
 /// `uorust::lift::then_rest`, certified as `Behavior::thenRest`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -791,6 +839,12 @@ pub mod trial_admits;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_tuple_item.rs"]
 pub mod tuple_item;
+
+/// `uorust::lift::tuple_struct`, certified as `Behavior::tupleStruct`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_tuple_struct.rs"]
+pub mod tuple_struct;
 
 /// `uorust::lift::tuple_value`, certified as `Behavior::tupleValue`.
 #[rustfmt::skip]
