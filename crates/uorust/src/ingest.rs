@@ -41,11 +41,6 @@ pub(crate) fn workspace(
         syntax.files.extend(files);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
-    let name = root
-        .file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("workspace")
-        .to_string();
     let lock = lock(&root.join("Cargo.lock"))?;
     let deny = root.join("deny.toml");
     let deny_ignores = if deny.is_file() {
@@ -65,7 +60,6 @@ pub(crate) fn workspace(
     };
     Ok((
         Workspace {
-            name,
             lock,
             has_deny: deny.is_file(),
             deny_ignores,

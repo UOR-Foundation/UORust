@@ -71,6 +71,11 @@ struct Component {
 /// the components, their edges, the resolved calls and the routed enums.
 /// Built once, then only read.
 struct Model {
+    /// The projection's name, as `--name` gives it: the only name the
+    /// projection writes for the workspace. The directory the workspace is
+    /// checked out in is no fact of the workspace and enters no file, so
+    /// two checkouts of one tree project byte for byte alike.
+    name: String,
     ws: Workspace,
     /// `(package, target index)` of a product target -> component ID.
     targets: BTreeMap<(usize, usize), String>,
@@ -300,6 +305,7 @@ pub(crate) fn project(
     let (targets, components, index, refused) = components(ws);
     notes.refusals.extend(refused);
     let mut ctx = Model {
+        name: options.name.clone(),
         ws: ws.clone(),
         targets,
         components,
@@ -1226,13 +1232,13 @@ fn audience(ctx: &Model) -> (Named, Named, Viewpoints) {
     let maintainers = if authors.is_empty() {
         format!(
             "Maintain the {} workspace and its {} packages.",
-            ws.name,
+            ctx.name,
             ws.packages.len()
         )
     } else {
         format!(
             "Maintain the {} workspace: {}.",
-            ws.name,
+            ctx.name,
             authors.join(", ")
         )
     };
@@ -1294,7 +1300,7 @@ fn audience(ctx: &Model) -> (Named, Named, Viewpoints) {
             a(&format!("stakeholderAuthor{}", pascal(&[&name]))),
             (
                 name,
-                format!("Listed as an author of the {} workspace.", ws.name),
+                format!("Listed as an author of the {} workspace.", ctx.name),
             ),
         ));
     }
@@ -7116,6 +7122,30 @@ mod tests {
             ),
             Err(UorustError::Malformed { .. })
         ));
+    }
+
+    /// The name given with `--name` is the only name the projection writes:
+    /// one tree checked out under two directory names projects to the same
+    /// bytes, and the directory's name is in no file.
+    #[test]
+    fn projection_name_one_tree_under_two_directory_names_projects_alike() {
+        let alpha = projected_files("alpha");
+        let beta = projected_files("beta");
+        let differ: Vec<&String> = alpha
+            .keys()
+            .chain(beta.keys())
+            .filter(|path| alpha.get(*path) != beta.get(*path))
+            .collect();
+        assert!(differ.is_empty(), "these files differ: {differ:?}");
+        for (path, bytes) in &alpha {
+            let text = String::from_utf8_lossy(bytes);
+            assert!(
+                !text.contains("uorust-queue-alpha"),
+                "{path} names the workspace's directory"
+            );
+        }
+        let arch = String::from_utf8_lossy(&alpha["src/Architecture.lex.tex"]);
+        assert!(arch.contains("Maintain the queue workspace"), "{arch}");
     }
 
     #[test]

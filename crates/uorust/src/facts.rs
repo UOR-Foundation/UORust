@@ -17,8 +17,6 @@ impl Span {
 
 #[derive(Clone, Debug)]
 pub(crate) struct Workspace {
-    /// The workspace directory name, the project's name.
-    pub(crate) name: String,
     pub(crate) packages: Vec<Package>,
     pub(crate) lock: Vec<LockedPackage>,
     pub(crate) has_deny: bool,
