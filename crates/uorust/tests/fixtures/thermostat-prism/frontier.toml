@@ -34,8 +34,8 @@ status = "open"
 kappa = "d14ab24fef42a528488c4d86b88652360bfe897939a4dd9bd6d2deb39518d112"
 function = "thermo_core::sensor::Fixed::read"
 span = "thermo-core/src/sensor.rs:36"
-reason = "signature"
-detail = "signature outside the lift: implements the trait Sensor"
+reason = "type"
+detail = "type outside the lift: Fixed, a tuple struct, which the lift does not read"
 
 [[residue]]
 status = "open"
@@ -43,7 +43,7 @@ kappa = "7a6ce7c2f703134bd32798d5fdda3757ecf7ce2aa9f62532342d5a3c442ca180"
 function = "thermo_core::sensor::Sensor::calibrated"
 span = "thermo-core/src/sensor.rs:9"
 reason = "signature"
-detail = "signature outside the lift: a method a trait declares"
+detail = "signature outside the lift: a default method of Sensor that calls Sensor::read, which the trait declares without a body: it means each implementing type's"
 
 [[residue]]
 status = "open"
@@ -51,7 +51,7 @@ kappa = "564cdc8bc2e971e52e5ce23026fe9d54b25f56234597ffca82e339a6be765898"
 function = "thermo_core::sensor::Sensor::read"
 span = "thermo-core/src/sensor.rs:6"
 reason = "signature"
-detail = "signature outside the lift: a method a trait declares"
+detail = "signature outside the lift: a method Sensor declares without a body, which each implementing type gives"
 
 [[residue]]
 status = "open"

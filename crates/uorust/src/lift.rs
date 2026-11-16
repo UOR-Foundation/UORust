@@ -1284,11 +1284,12 @@ impl Types {
         Ok(ty)
     }
 
-    /// The LexLean signature of a candidate, or why it is not one.
+    /// The LexLean signature of a candidate, or why it is not one. `owner`
+    /// says what its `self` and `Self` name, where it is a method.
     pub(crate) fn signature(
         &self,
         sig: &rs::Signature,
-        owner: Option<&str>,
+        owner: Option<&Owner<'_>>,
     ) -> Lift<(Vec<Param>, Ty)> {
         // A lifetime parameter says how long a borrow lives, which a value
         // of LexLean does not have: it is erased. A type or const parameter
@@ -1302,36 +1303,59 @@ impl Types {
                 "generic, async, unsafe or variadic".to_string(),
             ));
         }
+        // The type `Self` names: none in a default method, where it is each
+        // implementing type.
+        let named = match owner {
+            Some(Owner::Type { name, .. }) => Some(*name),
+            Some(Owner::Implementor) | None => None,
+        };
         let mut params = Vec::new();
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
-                    Some(o)
-                        if *plain
-                            && (self.enums.contains_key(o)
-                                || self.structs.contains_key(o)
-                                || self.datas.contains_key(o)) =>
+                    // A default method that lifts reads nothing of `self`,
+                    // which is each implementing type's value: the
+                    // definition does not take it.
+                    Some(Owner::Implementor) => {}
+                    Some(Owner::Type { name, receiver })
+                        if self.enums.contains_key(*name)
+                            || self.structs.contains_key(*name)
+                            || self.datas.contains_key(*name) =>
                     {
+                        if !*plain {
+                            return Err(Residue::Signature(format!(
+                                "takes {} of {name}: the lift reads self and &self as the \
+                                 value, and threads no other receiver",
+                                receiver.unwrap_or("self")
+                            )));
+                        }
                         params.push((
                             "self".to_string(),
                             local_name("self"),
-                            Ty::Named(o.to_string()),
+                            Ty::Named((*name).to_string()),
                         ));
                     }
-                    _ => return Err(Residue::Signature("takes self".to_string())),
+                    Some(Owner::Type { name, .. }) => {
+                        return Err(Residue::Signature(format!(
+                            "takes self of {name}, a type outside the lift"
+                        )));
+                    }
+                    None => {
+                        return Err(Residue::Signature("takes self outside a type".to_string()));
+                    }
                 },
                 rs::FnArg::Typed(pat) => {
                     let rs::Pat::Ident(name) = &*pat.pat else {
                         return Err(Residue::Signature("pattern parameter".to_string()));
                     };
                     let rust = name.ident.clone();
-                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, owner)?));
+                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, named)?));
                 }
             }
         }
         let result = match &sig.output {
             None => Ty::Unit,
-            Some(t) => self.ty_in(t, owner)?,
+            Some(t) => self.ty_in(t, named)?,
         };
         Ok((params, result))
     }
@@ -1507,6 +1531,20 @@ pub(crate) fn local_name(ident: &str) -> String {
 
 /// A parameter: its Rust name, its LexLean name and its type.
 pub(crate) type Param = (String, String, Ty);
+
+/// What `self` and `Self` name in a method's signature.
+#[derive(Clone, Copy, Debug)]
+pub(crate) enum Owner<'a> {
+    /// The type the method is of, by its LexLean name, and the receiver as
+    /// the method writes it (`&mut self`), where it takes one.
+    Type {
+        name: &'a str,
+        receiver: Option<&'a str>,
+    },
+    /// Each type that implements the trait: a default method the trait
+    /// declares.
+    Implementor,
+}
 
 /// A lifted function's signature.
 #[derive(Clone, Debug)]
@@ -12126,6 +12164,96 @@ mod tests {
         );
     }
 
+    // Functions refused by their signature: what `self` and `Self` name in
+    // a method's signature, by the type that owns the method.
+
+    fn method_signature(
+        src: &str,
+        owner: Option<&Owner<'_>>,
+        types: &Types,
+    ) -> Lift<(Vec<Param>, Ty)> {
+        let f: syn::ImplItemFn = syn::parse_str(src).expect("parses");
+        types.signature(&crate::convert::signature(&f.sig), owner)
+    }
+
+    fn with_square() -> Types {
+        let mut types = Types::default();
+        types.structs.insert("Square".to_string(), Vec::new());
+        types
+    }
+
+    #[test]
+    fn a_method_takes_the_value_of_its_type_first() {
+        let types = with_square();
+        for (src, receiver) in [
+            ("fn area(&self, by: bool) -> bool { by }", "&self"),
+            ("fn area(self, by: bool) -> bool { by }", "self"),
+        ] {
+            let owner = Owner::Type {
+                name: "Square",
+                receiver: Some(receiver),
+            };
+            let (params, result) = method_signature(src, Some(&owner), &types).expect("lifts");
+            assert_eq!(params.len(), 2, "{src}");
+            assert_eq!(
+                params[0],
+                (
+                    "self".to_string(),
+                    local_name("self"),
+                    Ty::Named("Square".to_string())
+                )
+            );
+            assert_eq!(result, Ty::Bool);
+        }
+        // `Self` is the type the method is of.
+        let owner = Owner::Type {
+            name: "Square",
+            receiver: None,
+        };
+        let (params, result) = method_signature(
+            "fn same(other: Self) -> Self { other }",
+            Some(&owner),
+            &types,
+        )
+        .expect("lifts");
+        assert_eq!(params[0].2, Ty::Named("Square".to_string()));
+        assert_eq!(result, Ty::Named("Square".to_string()));
+    }
+
+    #[test]
+    fn a_receiver_the_lift_does_not_thread_is_named_with_its_type() {
+        let types = with_square();
+        for receiver in ["&mut self", "mut self"] {
+            let owner = Owner::Type {
+                name: "Square",
+                receiver: Some(receiver),
+            };
+            let src = format!("fn grow({receiver}, by: bool) {{}}");
+            assert_eq!(
+                method_signature(&src, Some(&owner), &types).err(),
+                Some(Residue::Signature(format!(
+                    "takes {receiver} of Square: the lift reads self and &self as the value, \
+                     and threads no other receiver"
+                )))
+            );
+        }
+        // A type the scope does not name, and a receiver outside any type.
+        let owner = Owner::Type {
+            name: "Circle",
+            receiver: Some("&self"),
+        };
+        assert_eq!(
+            method_signature("fn area(&self) -> bool { true }", Some(&owner), &types).err(),
+            Some(Residue::Signature(
+                "takes self of Circle, a type outside the lift".to_string()
+            ))
+        );
+        assert_eq!(
+            method_signature("fn area(&self) -> bool { true }", None, &types).err(),
+            Some(Residue::Signature("takes self outside a type".to_string()))
+        );
+    }
+
     #[test]
     fn shared_ownership_reads_as_its_content() {
         let types = types_of(
@@ -12322,5 +12450,40 @@ mod tests {
             "Borrowed.cell: std::cell::RefCell<u8>"
         );
         assert_eq!(types.outside["Misplaced"], "Misplaced.rc: std::fmt::Rc<u8>");
+    }
+
+    #[test]
+    fn a_default_method_takes_no_value_of_an_implementing_type() {
+        let types = with_square();
+        let (params, result) = method_signature(
+            "fn corners(&self, sharp: bool) -> bool { sharp }",
+            Some(&Owner::Implementor),
+            &types,
+        )
+        .expect("lifts");
+        assert_eq!(
+            params,
+            [("sharp".to_string(), local_name("sharp"), Ty::Bool)]
+        );
+        assert_eq!(result, Ty::Bool);
+        // `Self` there is each implementing type: no one type.
+        assert!(method_signature(
+            "fn same(&self) -> Self { loop {} }",
+            Some(&Owner::Implementor),
+            &types
+        )
+        .is_err());
+        // And a method is generic as a function is.
+        assert_eq!(
+            method_signature(
+                "fn map<T>(&self, t: T) -> T { t }",
+                Some(&Owner::Implementor),
+                &types
+            )
+            .err(),
+            Some(Residue::Signature(
+                "generic, async, unsafe or variadic".to_string()
+            ))
+        );
     }
 }

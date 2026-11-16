@@ -1,19 +1,21 @@
 //! Ingest: `cargo metadata`, the manifests, `Cargo.lock` and every source file,
 //! parsed with `syn`, into [`facts`](crate::facts) with spans.
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use quote::ToTokens;
 use serde_json::Value;
+use syn::ext::IdentExt;
 use syn::punctuated::Punctuated;
 use syn::visit::Visit;
 
 use crate::error::{io, UorustError};
 use crate::facts::{
     Advisories, Advisory, Capability, Dep, EnumFact, FileSyntax, FnFact, FnSyntax, LockedPackage,
-    Package, SourceFile, Span, StructFact, Syntax, Target, TargetKind, Variant, Workspace,
+    Package, ScopeFact, SourceFile, Span, StructFact, Syntax, Target, TargetKind, Variant,
+    Workspace,
 };
 
 /// Read a workspace from its root directory: its facts, and the syntax the
@@ -424,12 +426,32 @@ fn package(
         collect_rs(&dir_abs.join(sub), &mut paths)?;
     }
     paths.sort();
+    // Each file is read and parsed once, and the files that are test code
+    // as a whole are found across them before any file's facts are read.
+    let mut read = Vec::new();
     for path in paths {
         let rel_path = rel(&root_text, &path_text(&path));
         let Some((target, module)) = assign(&rel_path, &dir, &targets) else {
             continue;
         };
-        let (file, file_syntax) = source(&path, rel_path, target, module, &targets[target].kind)?;
+        let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
+        read.push((path, rel_path, target, module, syn::parse_file(&text)));
+    }
+    let roots: Vec<PathBuf> = targets.iter().map(|t| root.join(&t.src)).collect();
+    let trees: BTreeMap<&Path, &syn::File> = read
+        .iter()
+        .filter_map(|(path, _, _, _, parsed)| Some((path.as_path(), parsed.as_ref().ok()?)))
+        .collect();
+    let tests = test_files(&roots, &trees);
+    for (path, rel_path, target, module, parsed) in &read {
+        let (file, file_syntax) = source(
+            parsed,
+            rel_path.clone(),
+            *target,
+            module.clone(),
+            &targets[*target].kind,
+            tests.contains(path),
+        );
         syntax.insert(file.rel.clone(), file_syntax);
         files.push(file);
     }
@@ -562,14 +584,211 @@ fn lock(path: &Path) -> Result<Vec<LockedPackage>, UorustError> {
     Ok(out)
 }
 
+/// A file a `mod` declaration names, as the walk over a package's module
+/// tree meets it.
+struct ModFile {
+    file: PathBuf,
+    /// The directory its own out-of-line modules are found from.
+    dir: PathBuf,
+    /// The directory under `dir` that holds them where the file is neither
+    /// a `mod.rs` nor named by a `#[path]`: its own name.
+    own: Option<String>,
+    /// Whether the declaration that names it stands in test code.
+    test: bool,
+}
+
+/// The files of a package that are test code as a whole: each file an
+/// out-of-line `mod name;` names under a test cfg, in a test module or in a
+/// test file, unless another declaration names it outside all three, since
+/// a build without tests then holds it too. Read from the target roots down,
+/// as Rust reads the module tree.
+fn test_files(roots: &[PathBuf], trees: &BTreeMap<&Path, &syn::File>) -> BTreeSet<PathBuf> {
+    // Per named file: whether a declaration outside test code names it.
+    let mut named: BTreeMap<PathBuf, bool> = BTreeMap::new();
+    let mut seen: BTreeSet<(PathBuf, bool)> = BTreeSet::new();
+    let mut todo: Vec<ModFile> = roots
+        .iter()
+        .map(|root| ModFile {
+            file: root.clone(),
+            dir: parent(root),
+            own: None,
+            test: false,
+        })
+        .collect();
+    while let Some(at) = todo.pop() {
+        if !seen.insert((at.file.clone(), at.test)) {
+            continue;
+        }
+        let Some(tree) = trees.get(at.file.as_path()) else {
+            continue;
+        };
+        let mut found = Vec::new();
+        declared_files(&tree.items, &at.dir, at.own.as_deref(), at.test, &mut found);
+        for next in found {
+            if trees.contains_key(next.file.as_path()) {
+                *named.entry(next.file.clone()).or_insert(false) |= !next.test;
+                todo.push(next);
+            }
+        }
+    }
+    named
+        .into_iter()
+        .filter(|(_, product)| !product)
+        .map(|(file, _)| file)
+        .collect()
+}
+
+/// The files the out-of-line modules among `items` name, by Rust's own
+/// rule: `name.rs` or `name/mod.rs` in the directory of a target root, a
+/// `mod.rs` or a `#[path]` file, and under the declaring file's own name
+/// otherwise; the inline modules around a declaration are directories on
+/// the way; and a `#[path]` names the file itself, or an inline module's
+/// directory. Both files a plain declaration could mean are given: the one
+/// that exists is the module.
+fn declared_files(
+    items: &[syn::Item],
+    dir: &Path,
+    own: Option<&str>,
+    test: bool,
+    out: &mut Vec<ModFile>,
+) {
+    for item in items {
+        let syn::Item::Mod(m) = item else {
+            continue;
+        };
+        let test = test || is_cfg_test(&attrs(&m.attrs));
+        let name = m.ident.unraw().to_string();
+        let under = match own {
+            Some(own) => dir.join(own),
+            None => dir.to_path_buf(),
+        };
+        match (&m.content, path_attr(&m.attrs)) {
+            (Some((_, inner)), Some(given)) => {
+                declared_files(inner, &normal(&dir.join(given)), None, test, out);
+            }
+            (Some((_, inner)), None) => {
+                declared_files(inner, &under.join(&name), None, test, out);
+            }
+            (None, Some(given)) => {
+                let file = normal(&dir.join(given));
+                out.push(ModFile {
+                    dir: parent(&file),
+                    file,
+                    own: None,
+                    test,
+                });
+            }
+            (None, None) => {
+                out.push(ModFile {
+                    file: under.join(format!("{name}.rs")),
+                    dir: under.clone(),
+                    own: Some(name.clone()),
+                    test,
+                });
+                out.push(ModFile {
+                    file: under.join(&name).join("mod.rs"),
+                    dir: under.join(&name),
+                    own: None,
+                    test,
+                });
+            }
+        }
+    }
+}
+
+/// The file or directory a `#[path = "..."]` attribute gives.
+fn path_attr(list: &[syn::Attribute]) -> Option<String> {
+    list.iter().find_map(|a| match &a.meta {
+        syn::Meta::NameValue(nv) if a.path().is_ident("path") => match &nv.value {
+            syn::Expr::Lit(syn::ExprLit {
+                lit: syn::Lit::Str(s),
+                ..
+            }) => Some(s.value()),
+            _ => None,
+        },
+        _ => None,
+    })
+}
+
+/// The directory of a file.
+fn parent(file: &Path) -> PathBuf {
+    file.parent().map(Path::to_path_buf).unwrap_or_default()
+}
+
+/// A path without its `.` and `..` components, each `..` taking the
+/// component before it: the path a `#[path]` that climbs out of its
+/// directory names.
+fn normal(path: &Path) -> PathBuf {
+    let mut out = PathBuf::new();
+    for part in path.components() {
+        match part {
+            std::path::Component::CurDir => {}
+            std::path::Component::ParentDir => {
+                out.pop();
+            }
+            other => out.push(other),
+        }
+    }
+    out
+}
+
+/// Rust names a method `Type::name` while its type has one method of that
+/// name, and `<Type as Trait>::name` once it has several: an inherent one
+/// beside a trait's, two traits', or one generic trait's at two argument
+/// lists. Each method of a trait implementation that shares its type and
+/// name with another method of the file, in the same build (with tests or
+/// without), is marked as named apart.
+fn name_apart(fns: &mut [FnFact]) {
+    let mut sharing: BTreeMap<(String, String, bool), usize> = BTreeMap::new();
+    for f in fns.iter().filter(|f| !f.in_trait) {
+        if let Some(owner) = &f.owner {
+            *sharing
+                .entry((owner.clone(), f.name.clone(), f.in_test_module))
+                .or_default() += 1;
+        }
+    }
+    for f in fns.iter_mut().filter(|f| f.trait_ref.is_some()) {
+        if let Some(owner) = &f.owner {
+            let key = (owner.clone(), f.name.clone(), f.in_test_module);
+            f.apart = sharing.get(&key).is_some_and(|n| *n > 1);
+        }
+    }
+}
+
+/// The types among `items` that are declared in a shape the lift does not
+/// read, each with that shape, so that a refusal over one can say why.
+fn unread_types(items: &[syn::Item], out: &mut Vec<(String, &'static str)>) {
+    for item in items {
+        match item {
+            syn::Item::Struct(st) => {
+                // A struct's fields are read whatever its form, named or
+                // by position; only its own parameters leave it unread.
+                if !only_lifetimes(&st.generics) {
+                    out.push((st.ident.to_string(), crate::lift::PARAMETRIC_STRUCT));
+                }
+            }
+            syn::Item::Enum(e) if !only_lifetimes(&e.generics) => {
+                out.push((e.ident.to_string(), "an enum with type parameters"));
+            }
+            syn::Item::Union(u) => out.push((u.ident.to_string(), "a union")),
+            syn::Item::Mod(m) => {
+                if let Some((_, inner)) = &m.content {
+                    unread_types(inner, out);
+                }
+            }
+            _ => {}
+        }
+    }
+}
+
 fn source(
-    path: &Path,
+    parsed: &Result<syn::File, syn::Error>,
     rel: String,
     target: usize,
     module: String,
     kind: &TargetKind,
-) -> Result<(SourceFile, FileSyntax), UorustError> {
-    let text = std::fs::read_to_string(path).map_err(|e| io(path, e))?;
+    test_file: bool,
+) -> (SourceFile, FileSyntax) {
     let mut file = SourceFile {
         rel: rel.clone(),
         target,
@@ -577,16 +796,17 @@ fn source(
         ..SourceFile::default()
     };
     let mut syntax = FileSyntax::default();
-    let parsed = match syn::parse_file(&text) {
+    let parsed = match parsed {
         Ok(parsed) => parsed,
         Err(error) => {
             let at = error.span().start();
             file.parse_error = Some(format!("{}:{}: {error}", rel, at.line));
-            return Ok((file, syntax));
+            return (file, syntax);
         }
     };
     let file_attrs = attrs(&parsed.attrs);
     file.doc = doc_of(&file_attrs);
+    file.no_prelude = file_attrs.iter().any(|a| named(a, "no_implicit_prelude"));
     file.forbids_unsafe = file_attrs
         .iter()
         .any(|a| named(a, "forbid") && a.tokens.contains("unsafe_code"));
@@ -597,15 +817,17 @@ fn source(
         &parsed.items,
         &rel,
         None,
-        test_target,
+        test_target || test_file,
         product,
         lib,
         &mut file,
         &mut syntax,
     );
+    name_apart(&mut file.fns);
+    unread_types(&parsed.items, &mut file.unread);
     file.capabilities.sort();
     file.capabilities.dedup();
-    Ok((file, syntax))
+    (file, syntax)
 }
 
 /// An attribute, as the facts read it.
@@ -621,6 +843,33 @@ struct Attr {
     doc: Option<String>,
     /// The type names a `#[derive(...)]` lists.
     derives: Vec<String>,
+    /// For a `#[cfg(..)]`: whether its predicate holds in a test build
+    /// alone.
+    test_only: bool,
+}
+
+/// Whether a `cfg` predicate holds in a test build alone: `test` itself, an
+/// `all(..)` one of whose members does, or an `any(..)` whose every member
+/// does. A `not(..)`, a feature or a target holds in some build without
+/// tests, where what stands under it is product code.
+fn only_in_tests(predicate: &syn::Meta) -> bool {
+    match predicate {
+        syn::Meta::Path(p) => p.is_ident("test"),
+        syn::Meta::List(list) => {
+            let members: Vec<syn::Meta> = list
+                .parse_args_with(Punctuated::<syn::Meta, syn::Token![,]>::parse_terminated)
+                .map(|members| members.into_iter().collect())
+                .unwrap_or_default();
+            if list.path.is_ident("all") {
+                members.iter().any(only_in_tests)
+            } else {
+                list.path.is_ident("any")
+                    && !members.is_empty()
+                    && members.iter().all(only_in_tests)
+            }
+        }
+        syn::Meta::NameValue(_) => false,
+    }
 }
 
 /// The attributes of an item, converted once from `syn`.
@@ -650,6 +899,9 @@ fn attrs(list: &[syn::Attribute]) -> Vec<Attr> {
             } else {
                 Vec::new()
             };
+            let test_only = ident.as_deref() == Some("cfg")
+                && a.parse_args::<syn::Meta>()
+                    .is_ok_and(|predicate| only_in_tests(&predicate));
             Attr {
                 last: a
                     .path()
@@ -661,6 +913,7 @@ fn attrs(list: &[syn::Attribute]) -> Vec<Attr> {
                 tokens: a.to_token_stream().to_string(),
                 doc,
                 derives,
+                test_only,
             }
         })
         .collect()
@@ -674,10 +927,10 @@ fn named(attr: &Attr, name: &str) -> bool {
     }
 }
 
+/// Whether an item stands under a cfg that holds in a test build alone:
+/// several `#[cfg]` attributes hold together, so one such is enough.
 fn is_cfg_test(attrs: &[Attr]) -> bool {
-    attrs
-        .iter()
-        .any(|a| named(a, "cfg") && a.tokens.contains("test"))
+    attrs.iter().any(|a| a.test_only)
 }
 
 fn doc_of(attrs: &[Attr]) -> String {
@@ -803,6 +1056,14 @@ fn function(
         effect: block.and_then(effect_of),
         in_trait: false,
         implements: None,
+        trait_ref: None,
+        apart: false,
+        receiver: sig
+            .receiver()
+            .map(|r| tidy(&r.to_token_stream().to_string())),
+        trait_path: None,
+        impl_params: Vec::new(),
+        scope: 0,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -810,6 +1071,62 @@ fn function(
         asserts: body.asserts,
     };
     (fact, syntax)
+}
+
+/// The names one module scope binds for its trait methods: what its `use`
+/// items name, whether one of them is a glob, and the traits it declares.
+fn scope_fact(list: &[syn::Item]) -> ScopeFact {
+    let mut fact = ScopeFact::default();
+    for item in list {
+        match item {
+            syn::Item::Use(u) => scope_uses(&u.tree, &[], u.leading_colon.is_some(), &mut fact),
+            syn::Item::Trait(t) => fact.traits.push(t.ident.unraw().to_string()),
+            syn::Item::Mod(m) if m.content.is_none() => {
+                fact.mods.push(m.ident.unraw().to_string());
+            }
+            _ => {}
+        }
+    }
+    fact
+}
+
+/// The bindings of one `use` tree, each with the path it names; a path
+/// written from the crate graph's root (`::name`) keeps its two colons.
+fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut ScopeFact) {
+    let with = |ident: &syn::Ident| {
+        let mut path = prefix.to_vec();
+        path.push(ident.to_string());
+        path
+    };
+    let printed = |path: Vec<String>| match rooted {
+        true => format!("::{}", path.join("::")),
+        false => path.join("::"),
+    };
+    match tree {
+        syn::UseTree::Path(p) => scope_uses(&p.tree, &with(&p.ident), rooted, out),
+        syn::UseTree::Name(n) if n.ident == "self" => {
+            if let Some(last) = prefix.last() {
+                out.uses.push((last.clone(), printed(prefix.to_vec())));
+            }
+        }
+        syn::UseTree::Name(n) => out
+            .uses
+            .push((n.ident.to_string(), printed(with(&n.ident)))),
+        syn::UseTree::Rename(r) if r.ident == "self" => {
+            out.uses
+                .push((r.rename.to_string(), printed(prefix.to_vec())));
+        }
+        syn::UseTree::Rename(r) => {
+            out.uses
+                .push((r.rename.to_string(), printed(with(&r.ident))));
+        }
+        syn::UseTree::Glob(_) => out.glob = true,
+        syn::UseTree::Group(g) => {
+            for item in &g.items {
+                scope_uses(item, prefix, rooted, out);
+            }
+        }
+    }
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -823,11 +1140,13 @@ fn items(
     file: &mut SourceFile,
     syntax: &mut FileSyntax,
 ) {
+    let scope = file.scopes.len();
+    file.scopes.push(scope_fact(list));
     for item in list {
         match item {
             syn::Item::Fn(f) => {
                 let public = matches!(f.vis, syn::Visibility::Public(_));
-                let (fact, fn_syntax) = function(
+                let (mut fact, fn_syntax) = function(
                     &f.sig,
                     Some(&f.block),
                     &attrs(&f.attrs),
@@ -837,6 +1156,7 @@ fn items(
                     in_test,
                     lib,
                 );
+                fact.scope = scope;
                 file.fns.push(fact);
                 syntax.fns.push(fn_syntax);
             }
@@ -847,11 +1167,30 @@ fn items(
                         file.error_impls.push(self_ty.clone());
                     }
                 }
-                let implements = imp
+                let named_trait = imp
                     .trait_
                     .as_ref()
-                    .and_then(|(path, _)| path.segments.last())
-                    .map(|s| s.ident.to_string());
+                    .and_then(|(path, _)| path.segments.last());
+                let implements = named_trait.map(|s| s.ident.to_string());
+                let trait_ref = named_trait.map(|s| tidy(&s.to_token_stream().to_string()));
+                let trait_path = imp.trait_.as_ref().map(|(path, _)| {
+                    let written: Vec<String> =
+                        path.segments.iter().map(|s| s.ident.to_string()).collect();
+                    match path.leading_colon {
+                        Some(_) => format!("::{}", written.join("::")),
+                        None => written.join("::"),
+                    }
+                });
+                let impl_params: Vec<String> = imp
+                    .generics
+                    .params
+                    .iter()
+                    .filter_map(|p| match p {
+                        syn::GenericParam::Type(t) => Some(t.ident.to_string()),
+                        syn::GenericParam::Const(c) => Some(c.ident.to_string()),
+                        syn::GenericParam::Lifetime(_) => None,
+                    })
+                    .collect();
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -866,6 +1205,10 @@ fn items(
                             lib,
                         );
                         fact.implements.clone_from(&implements);
+                        fact.trait_ref.clone_from(&trait_ref);
+                        fact.trait_path.clone_from(&trait_path);
+                        fact.impl_params.clone_from(&impl_params);
+                        fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
                     }
@@ -886,6 +1229,7 @@ fn items(
                             lib,
                         );
                         fact.in_trait = true;
+                        fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
                     }
@@ -995,8 +1339,12 @@ fn items(
                 }
             }
             syn::Item::Mod(m) => {
+                let marks = attrs(&m.attrs);
+                if marks.iter().any(|a| named(a, "no_implicit_prelude")) {
+                    file.no_prelude = true;
+                }
                 if let Some((_, inner)) = &m.content {
-                    let test = in_test || is_cfg_test(&attrs(&m.attrs));
+                    let test = in_test || is_cfg_test(&marks);
                     items(inner, rel, None, test, product, lib, file, syntax);
                 }
             }
@@ -1272,5 +1620,221 @@ mod tests {
         assert_eq!(fields(3), [("", crate::lift::PARAMETRIC_STRUCT)]);
         // A lifetime is no such parameter.
         assert_eq!(fields(4), [("text", "&'a str")]);
+    }
+
+    // Functions refused by their signature or misread by where they stand:
+    // which files and modules are test code, the names each module scope
+    // binds, and the facts a trait implementation's method carries.
+
+    fn facts(src: &str, test_file: bool) -> SourceFile {
+        let parsed = syn::parse_file(src).map_err(|e| panic!("parses: {e}"));
+        let rel = "src/lib.rs".to_string();
+        source(&parsed, rel, 0, String::new(), &TargetKind::Lib, test_file).0
+    }
+
+    fn method<'a>(file: &'a SourceFile, owner: &str, of: Option<&str>, name: &str) -> &'a FnFact {
+        file.fns
+            .iter()
+            .find(|f| {
+                f.owner.as_deref() == Some(owner)
+                    && f.trait_ref.as_deref() == of
+                    && f.name == name
+                    && !f.in_trait
+            })
+            .unwrap_or_else(|| panic!("{owner} has {name} of {of:?}"))
+    }
+
+    #[test]
+    fn a_cfg_marks_test_code_where_it_holds_in_a_test_build_alone() {
+        let marked = |cfg: &str| -> bool {
+            let item: syn::ItemMod =
+                syn::parse_str(&format!("#[cfg({cfg})] mod m;")).expect("parses");
+            is_cfg_test(&attrs(&item.attrs))
+        };
+        for cfg in [
+            "test",
+            "all(test, feature = \"x\")",
+            "all(unix, any(test))",
+            "any(test)",
+            "any(test, all(test, unix))",
+        ] {
+            assert!(marked(cfg), "{cfg} holds in a test build alone");
+        }
+        for cfg in [
+            "not(test)",
+            "any(test, feature = \"x\")",
+            "all(unix, not(test))",
+            "feature = \"test\"",
+            "target_os = \"test\"",
+            "any()",
+            "all()",
+        ] {
+            assert!(!marked(cfg), "{cfg} holds outside a test build too");
+        }
+        // Several attributes hold together: one that is a test build's is
+        // enough.
+        let both: syn::ItemMod =
+            syn::parse_str("#[cfg(unix)] #[cfg(test)] mod m;").expect("parses");
+        assert!(is_cfg_test(&attrs(&both.attrs)));
+    }
+
+    #[test]
+    fn a_module_declared_out_of_line_under_a_test_cfg_marks_its_files() {
+        let sources = [
+            (
+                "src/lib.rs",
+                "#[cfg(test)] mod tests; mod a; mod plain; #[cfg(test)] mod deep; \
+                 #[cfg(test)] #[path = \"elsewhere/odd.rs\"] mod odd; \
+                 #[cfg(test)] pub mod both; #[cfg(not(test))] mod both; \
+                 #[cfg(any(test, feature = \"x\"))] mod shared; \
+                 mod inline { #[cfg(test)] mod under; mod over; }",
+            ),
+            ("src/tests.rs", "mod helpers;"),
+            ("src/tests/helpers.rs", ""),
+            ("src/a.rs", "#[cfg(test)] mod t; mod u;"),
+            ("src/a/t.rs", ""),
+            ("src/a/u.rs", ""),
+            ("src/plain.rs", ""),
+            ("src/deep/mod.rs", "mod inner;"),
+            ("src/deep/inner.rs", ""),
+            ("src/elsewhere/odd.rs", "mod beside;"),
+            ("src/elsewhere/beside.rs", ""),
+            ("src/both.rs", "mod part;"),
+            ("src/both/part.rs", ""),
+            ("src/shared.rs", ""),
+            ("src/inline/under.rs", ""),
+            ("src/inline/over.rs", ""),
+            // A file no declaration names is no module at all.
+            ("src/stray.rs", ""),
+        ];
+        let parsed: Vec<(PathBuf, syn::File)> = sources
+            .iter()
+            .map(|(path, src)| (PathBuf::from(path), syn::parse_file(src).expect("parses")))
+            .collect();
+        let trees: BTreeMap<&Path, &syn::File> =
+            parsed.iter().map(|(p, f)| (p.as_path(), f)).collect();
+        let found = test_files(&[PathBuf::from("src/lib.rs")], &trees);
+        let expected: BTreeSet<PathBuf> = [
+            "src/a/t.rs",
+            "src/deep/inner.rs",
+            "src/deep/mod.rs",
+            "src/elsewhere/beside.rs",
+            "src/elsewhere/odd.rs",
+            "src/inline/under.rs",
+            "src/tests.rs",
+            "src/tests/helpers.rs",
+        ]
+        .iter()
+        .map(PathBuf::from)
+        .collect();
+        assert_eq!(found, expected);
+    }
+
+    #[test]
+    fn a_function_of_a_test_file_is_test_code() {
+        let src = "pub fn helper() -> u32 { 1 } pub struct S; impl S { fn m(&self) {} }";
+        assert!(facts(src, true).fns.iter().all(|f| f.in_test_module));
+        assert!(facts(src, false).fns.iter().all(|f| !f.in_test_module));
+    }
+
+    #[test]
+    fn a_trait_method_stands_apart_where_its_type_has_another_of_its_name() {
+        let file = facts(
+            "struct S; struct T; \
+             trait A { fn m(&self) -> u32; fn n(&self) -> u32; } \
+             trait B { fn m(&self) -> u32; } \
+             impl S { fn n(&self) -> u32 { 0 } } \
+             impl A for S { fn m(&self) -> u32 { 1 } fn n(&self) -> u32 { 2 } } \
+             impl B for S { fn m(&self) -> u32 { 3 } } \
+             impl A for T { fn m(&self) -> u32 { 4 } fn n(&self) -> u32 { 5 } } \
+             impl From<u8> for T { fn from(_n: u8) -> T { T } } \
+             impl From<u16> for T { fn from(_n: u16) -> T { T } } \
+             impl From<u8> for S { fn from(_n: u8) -> S { S } }",
+            false,
+        );
+        // Two traits give `S` an `m`, and an inherent `n` stands beside a
+        // trait's; one generic trait gives `T` a `from` twice.
+        assert!(method(&file, "S", Some("A"), "m").apart);
+        assert!(method(&file, "S", Some("B"), "m").apart);
+        assert!(method(&file, "S", Some("A"), "n").apart);
+        assert!(method(&file, "T", Some("From<u8>"), "from").apart);
+        assert!(method(&file, "T", Some("From<u16>"), "from").apart);
+        // One trait for two types, and a type's only method of a name.
+        assert!(!method(&file, "T", Some("A"), "m").apart);
+        assert!(!method(&file, "T", Some("A"), "n").apart);
+        assert!(!method(&file, "S", Some("From<u8>"), "from").apart);
+        // An inherent method is `Type::name` whatever stands beside it.
+        assert!(!method(&file, "S", None, "n").apart);
+    }
+
+    #[test]
+    fn each_module_scope_keeps_the_names_it_binds() {
+        let file = facts(
+            "#![no_implicit_prelude] \
+             use std::fmt; use crate::shapes::{self, Shape, Named as _}; use ::serde::Serialize; \
+             mod child; \
+             trait Local { fn m(&mut self); } \
+             struct S; \
+             impl Local for S { fn m(&mut self) {} } \
+             pub mod inner { \
+                 use super::*; \
+                 pub struct T; \
+                 impl crate::shapes::Shape for T { fn area(&self) -> u32 { 0 } } \
+                 impl<X: Copy, const N: usize> From<[X; N]> for T { fn from(_x: [X; N]) -> T { T } } \
+             }",
+            false,
+        );
+        assert!(file.no_prelude);
+        assert_eq!(file.scopes.len(), 2);
+        let uses: Vec<(&str, &str)> = file.scopes[0]
+            .uses
+            .iter()
+            .map(|(n, p)| (n.as_str(), p.as_str()))
+            .collect();
+        assert_eq!(
+            uses,
+            [
+                ("fmt", "std::fmt"),
+                ("shapes", "crate::shapes"),
+                ("Shape", "crate::shapes::Shape"),
+                ("_", "crate::shapes::Named"),
+                ("Serialize", "::serde::Serialize"),
+            ]
+        );
+        assert!(!file.scopes[0].glob);
+        assert_eq!(file.scopes[0].traits, ["Local"]);
+        assert_eq!(file.scopes[0].mods, ["child"]);
+        // The inline module binds nothing by name, and its glob may bind
+        // anything.
+        assert!(file.scopes[1].glob && file.scopes[1].uses.is_empty());
+        let m = method(&file, "S", Some("Local"), "m");
+        assert_eq!((m.scope, m.trait_path.as_deref()), (0, Some("Local")));
+        assert_eq!(m.receiver.as_deref(), Some("&mut self"));
+        assert!(m.impl_params.is_empty());
+        let area = method(&file, "T", Some("Shape"), "area");
+        assert_eq!(
+            (area.scope, area.trait_path.as_deref()),
+            (1, Some("crate::shapes::Shape"))
+        );
+        let from = file.fns.iter().find(|f| f.name == "from").expect("from");
+        assert_eq!(from.impl_params, ["X", "N"]);
+        assert_eq!(from.receiver, None);
+    }
+
+    #[test]
+    fn a_type_the_lift_does_not_read_says_its_shape() {
+        let file = facts(
+            "struct A(u32); struct B; struct C<T> { t: T } enum D<T> { X(T) } \
+             union E { a: u32 } struct F { a: u32 } enum G { X } struct H<'a> { a: &'a str }",
+            false,
+        );
+        assert_eq!(
+            file.unread,
+            [
+                ("C".to_string(), crate::lift::PARAMETRIC_STRUCT),
+                ("D".to_string(), "an enum with type parameters"),
+                ("E".to_string(), "a union"),
+            ]
+        );
     }
 }

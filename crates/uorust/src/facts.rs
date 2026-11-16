@@ -124,6 +124,15 @@ pub(crate) struct SourceFile {
     pub(crate) enums: Vec<EnumFact>,
     pub(crate) structs: Vec<StructFact>,
     pub(crate) error_impls: Vec<String>,
+    /// The types the file declares in a shape the lift does not read, each
+    /// with that shape (`a tuple struct`).
+    pub(crate) unread: Vec<(String, &'static str)>,
+    /// The file's module scopes: its own first, then each inline module's
+    /// in source order.
+    pub(crate) scopes: Vec<ScopeFact>,
+    /// Whether the file, or a module it declares, is marked
+    /// `no_implicit_prelude`.
+    pub(crate) no_prelude: bool,
     pub(crate) capabilities: Vec<(Capability, Span, String)>,
     /// `use` imports: the imported name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
@@ -157,6 +166,41 @@ pub(crate) struct FnFact {
     pub(crate) in_trait: bool,
     /// For a method of `impl Trait for Type`: the trait's last segment.
     pub(crate) implements: Option<String>,
+    /// For a method of `impl Trait for Type`: the trait as the impl names
+    /// it, its last segment with its arguments (`From<u8>`).
+    pub(crate) trait_ref: Option<String>,
+    /// Whether the method's type has another method of its name in the same
+    /// build: an inherent one beside a trait's, two traits', or one generic
+    /// trait's at two argument lists. Rust then names a trait's method
+    /// `<Type as Trait>::name`, and `Type::name` otherwise.
+    pub(crate) apart: bool,
+    /// The receiver as the method writes it (`&mut self`), where it takes
+    /// one.
+    pub(crate) receiver: Option<String>,
+    /// For a method of `impl Trait for Type`: the trait's path as the impl
+    /// writes it, without its arguments (`fmt::Display`).
+    pub(crate) trait_path: Option<String>,
+    /// The type and const parameters of the method's impl block: a method
+    /// of `impl<T: Bound> Trait for T` is one function per type.
+    pub(crate) impl_params: Vec<String>,
+    /// Which of its file's module scopes (`SourceFile::scopes`) declares
+    /// the function.
+    pub(crate) scope: usize,
+}
+
+/// One module scope of a file: the file's own items, or an inline module's.
+/// A trait's methods are callable where the trait is in scope, and a scope
+/// inherits no name from the module around it.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct ScopeFact {
+    /// Each name a `use` of the scope binds, with the path it names.
+    pub(crate) uses: Vec<(String, String)>,
+    /// Whether a `use` of the scope ends in `*`: it may bind any name.
+    pub(crate) glob: bool,
+    /// The traits the scope declares.
+    pub(crate) traits: Vec<String>,
+    /// The modules the scope declares out of line, each a file of its own.
+    pub(crate) mods: Vec<String>,
 }
 
 #[derive(Clone, Debug)]

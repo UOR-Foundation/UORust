@@ -120,7 +120,9 @@ impl Model {
         self.package(r).targets[file.target].name.replace('-', "_")
     }
 
-    /// `crate::module::Type::name`.
+    /// `crate::module::Type::name`; and `crate::module::<Type as
+    /// Trait>::name` for a trait implementation's method whose type has
+    /// another method of its name, which is how Rust names the two apart.
     fn path(&self, r: FnRef) -> String {
         let file = self.file(r);
         let f = self.func(r);
@@ -129,7 +131,10 @@ impl Model {
             parts.push(file.module.clone());
         }
         if let Some(owner) = &f.owner {
-            parts.push(owner.clone());
+            match &f.trait_ref {
+                Some(named) if f.apart => parts.push(format!("<{owner} as {named}>")),
+                _ => parts.push(owner.clone()),
+            }
         }
         parts.push(f.name.clone());
         parts.join("::")
@@ -3584,20 +3589,47 @@ fn behavior(
         .iter()
         .map(|_| (Vec::new(), BTreeMap::new()))
         .collect();
+    // How many functions of product code each path names, and how many
+    // methods each type has of each name over its crate. Rust reads
+    // `Type::name` and `value.name()` as the type's one method of that name,
+    // an inherent one before a trait's.
+    let mut pathed: BTreeMap<String, usize> = BTreeMap::new();
+    let mut methods: BTreeMap<(usize, String, String), usize> = BTreeMap::new();
+    for &r in all.iter().filter(|&&r| ctx.product(r)) {
+        *pathed.entry(ctx.path(r)).or_default() += 1;
+        let f = ctx.func(r);
+        if let (Some(o), false) = (&f.owner, f.in_trait) {
+            let owner = file_scopes[&(r.pkg, r.file)].resolve(o);
+            *methods.entry((r.pkg, owner, f.name.clone())).or_default() += 1;
+        }
+    }
+    // The trait methods a call can mean, each with its crate, the key such a
+    // call reads and its own key; and the candidates that give way.
+    let mut reach: Vec<(usize, String, String, FnRef)> = Vec::new();
+    let mut yielding: BTreeSet<(usize, String)> = BTreeSet::new();
     for &r in &all {
         let f = ctx.func(r);
         let types = &file_scopes[&(r.pkg, r.file)];
         if !ctx.product(r) {
             continue;
         }
-        // Inherent methods of a type the lift names lift with `self` as their
-        // first parameter; trait methods and methods of other types stop, each
-        // with a row of its own.
+        // Methods of a type the lift names lift with `self` as their first
+        // parameter, inherent ones and a trait implementation's alike;
+        // methods of other types stop, each with a row of its own that says
+        // why its type is outside the lift.
         let known = |o: &String| {
             types.enums.contains_key(&types.resolve(o))
                 || types.structs.contains_key(&types.resolve(o))
                 || types.datas.contains_key(&types.resolve(o))
         };
+        // A path Rust's own naming leaves to two trait methods (an impl or
+        // a trait declared once per configuration) is one row, and names
+        // neither of them.
+        if (f.implements.is_some() || f.in_trait) && pathed[&ctx.path(r)] > 1 {
+            ctx.stopped(notes, &effectful, r, Residue::Collision(ctx.path(r)));
+            continue;
+        }
+        let fn_syntax = syntax.function(&ctx.file(r).rel, r.idx);
         // `Display::fmt` lifts as the function from the value to the text
         // it writes: `write!` into its formatter is that `format!`.
         let display = matches!(
@@ -3606,45 +3638,78 @@ fn behavior(
         );
         let method = match (&f.owner, &f.implements) {
             (None, _) => None,
-            (Some(o), Some(_)) if display => Some(types.resolve(o)),
-            (Some(_), _) if f.in_trait => {
-                let reason = Residue::Signature("a method a trait declares".to_string());
-                ctx.stopped(notes, &effectful, r, reason);
-                continue;
-            }
-            // A trait method over a registry crate's types, such as a `syn`
-            // visitor, is the converter shell's: a foreign row.
-            (Some(_), Some(t)) => {
-                let sig = &syntax.function(&ctx.file(r).rel, r.idx).signature;
-                let foreign = sig
-                    .inputs
-                    .iter()
-                    .filter_map(|i| match i {
-                        crate::ast::FnArg::Typed(p) => Some(p.ty.text.clone()),
-                        crate::ast::FnArg::Receiver { .. } => None,
-                    })
-                    .chain(sig.output.iter().map(|o| o.text.clone()))
-                    .find(|ty| foreign_crate(&ctx.ws.packages[r.pkg], ty).is_some());
-                let reason = match foreign {
-                    Some(ty) => Residue::Type(ty),
-                    None => Residue::Signature(format!("implements the trait {t}")),
+            // A method a trait declares: its default body, where it is one
+            // function for every implementing type.
+            (Some(declarer), _) if f.in_trait => {
+                let refusal = match &fn_syntax.block {
+                    None => Some(Residue::Signature(format!(
+                        "a method {declarer} declares without a body, which each implementing \
+                         type gives"
+                    ))),
+                    Some(block) => default_refusal(ctx.file(r), f, declarer, block),
                 };
-                ctx.stopped(notes, &effectful, r, reason);
-                continue;
+                if let Some(reason) = refusal {
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
+                None
             }
-            (Some(o), None)
-                if types.enums.contains_key(&types.resolve(o))
-                    || types.structs.contains_key(&types.resolve(o))
-                    || types.datas.contains_key(&types.resolve(o)) =>
-            {
-                Some(types.resolve(o))
-            }
-            (Some(o), None) => {
-                ctx.stopped(notes, &effectful, r, types.unnamed(o));
-                continue;
+            (Some(o), Some(_)) if display => Some(types.resolve(o)),
+            (Some(o), implements) => {
+                // A trait method over a registry crate's types, such as a
+                // `syn` visitor, is the converter shell's: a foreign row.
+                let foreign = implements.as_ref().and_then(|_| {
+                    let sig = &fn_syntax.signature;
+                    sig.inputs
+                        .iter()
+                        .filter_map(|i| match i {
+                            crate::ast::FnArg::Typed(p) => Some(p.ty.text.clone()),
+                            crate::ast::FnArg::Receiver { .. } => None,
+                        })
+                        .chain(sig.output.iter().map(|o| o.text.clone()))
+                        .find(|ty| foreign_crate(&ctx.ws.packages[r.pkg], ty).is_some())
+                });
+                if let Some(ty) = foreign {
+                    ctx.stopped(notes, &effectful, r, Residue::Type(ty));
+                    continue;
+                }
+                // An impl with parameters of its own is one impl for each
+                // type or constant that takes their place, and its methods
+                // are generic as a function with parameters is.
+                if implements.is_some() && !f.impl_params.is_empty() {
+                    let reason = Residue::Signature(format!(
+                        "a method of an impl generic in {}: one function for each type or \
+                         constant that takes its place",
+                        f.impl_params.join(", ")
+                    ));
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
+                if known(o) {
+                    Some(types.resolve(o))
+                } else if foreign_crate(&ctx.ws.packages[r.pkg], o).is_some() {
+                    ctx.stopped(notes, &effectful, r, Residue::Type(o.clone()));
+                    continue;
+                } else {
+                    // The type and why the lift does not name it. The row
+                    // stays residue whatever the cause names: a foreign row
+                    // is a function that takes or returns a registry
+                    // crate's type itself.
+                    // A type the workspace registers is named by the
+                    // chain down to its leaf, as a parameter of the type
+                    // is; any other by what the crate's source shows.
+                    let reason = if types.outside.contains_key(&types.resolve(o)) {
+                        types.unnamed(o)
+                    } else {
+                        let why =
+                            unlifted_type(ctx, syntax, &file_scopes, &expanded, r.pkg, r.file, o);
+                        Residue::Type(format!("{o}, {why}"))
+                    };
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
             }
         };
-        let fn_syntax = syntax.function(&ctx.file(r).rel, r.idx);
         let mut sig = fn_syntax.signature.clone();
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
@@ -3675,17 +3740,75 @@ fn behavior(
             ctx.file(r).module.clone(),
             f.name.clone(),
         );
-        let (rust, name) = match (&method, homonyms.get(&site)) {
-            (Some(o), _) => (
-                format!("{o}::{}", f.name),
-                lift::local_name(&format!("{o}_{}", f.name)),
+        // The key a call written `Type::name` or `value.name()` reads, where
+        // this is a trait's method such a call can mean.
+        let mut reached = None;
+        let (rust, name) = match (&method, &f.owner, homonyms.get(&site)) {
+            (Some(o), _, _) => {
+                let plain = (
+                    format!("{o}::{}", f.name),
+                    lift::local_name(&format!("{o}_{}", f.name)),
+                );
+                let sole = methods[&(r.pkg, o.clone(), f.name.clone())] == 1;
+                match &f.trait_ref {
+                    None => plain,
+                    // The text a value displays as keeps the key and the
+                    // name it had: no call reads it, `write!` and `format!`
+                    // do.
+                    Some(_) if display && sole => plain,
+                    // A trait's method lifts under a key no call writes,
+                    // and each scope that sees the trait reads the call's
+                    // key as it (`trait_in_scope`). Where its type has
+                    // another method of the name, Rust names this one by
+                    // its trait and no call is read as it. Nor where the
+                    // trait is generic: it is implemented once per argument
+                    // list (`From<A>` beside `From<B>` and core's own
+                    // `From<T> for T`), and Rust picks among them by the
+                    // types at the call. Its definition is named by its
+                    // type and its trait whatever else its type has, so the
+                    // name is one for each trait of a type and each type of
+                    // a trait, and a method the type gains later leaves it.
+                    Some(t) => {
+                        if sole && !t.contains('<') {
+                            reached = Some(plain.0);
+                        }
+                        (
+                            format!("{o}::<{t}>::{}", f.name),
+                            lift::local_name(&format!("{o}_{t}_{}", f.name)),
+                        )
+                    }
+                }
+            }
+            // A default method lifts under its trait's name, and under a
+            // key no call writes: a call means an implementing type's.
+            (None, Some(declarer), _) => (
+                format!("<{declarer}>::{}", f.name),
+                lift::local_name(&format!("{declarer}_{}", f.name)),
             ),
-            (None, Some((rust, lex))) => (rust.clone(), lex.clone()),
-            (None, None) => (f.name.clone(), lift::local_name(&f.name)),
+            (None, None, Some((rust, lex))) => (rust.clone(), lex.clone()),
+            (None, None, None) => (f.name.clone(), lift::local_name(&f.name)),
         };
-        let called = match &method {
-            Some(_) => rust.clone(),
-            None => f.name.clone(),
+        // What a call of the function by itself is written as: a free
+        // function's name, a method's key, and a trait's method as its own
+        // scope reads it.
+        let called = match (&method, &f.owner, &reached) {
+            (None, None, _) => f.name.clone(),
+            (_, _, Some(plain)) if trait_in_scope(ctx, r, r) => plain.clone(),
+            _ => rust.clone(),
+        };
+        if let Some(plain) = reached {
+            reach.push((r.pkg, plain, rust.clone(), r));
+        }
+        // A trait's method gives way: a free function or an inherent method
+        // that lifts to the same name keeps it.
+        let yields = f.in_trait || (f.implements.is_some() && !display);
+        let owner = match (&method, &f.owner) {
+            (Some(o), _) => Some(lift::Owner::Type {
+                name: o,
+                receiver: f.receiver.as_deref(),
+            }),
+            (None, Some(_)) => Some(lift::Owner::Implementor),
+            (None, None) => None,
         };
         let (candidates, names) = &mut scoped[r.pkg];
         let signature = match (&formatter, &method) {
@@ -3700,11 +3823,27 @@ fn behavior(
             (None, _) if display => Err(Residue::Signature(
                 "a Display impl whose formatter is not a plain parameter".to_string(),
             )),
-            _ => types.signature(sig, method.as_deref()),
+            _ => types.signature(sig, owner.as_ref()),
         };
         match signature {
             Ok((params, result)) => {
-                if names.contains_key(&rust)
+                let holder = candidates
+                    .iter()
+                    .position(|c: &Candidate<'_>| c.name == name)
+                    .filter(|&i| {
+                        !yields
+                            && !names.contains_key(&rust)
+                            && yielding.contains(&(r.pkg, candidates[i].rust.clone()))
+                    });
+                if let Some(held) = holder.and_then(|i| names.remove(&candidates[i].rust)) {
+                    // The name's holder gives way, and keeps its row.
+                    candidates.retain(|c| c.name != name);
+                    notes.refusals.insert(Refusal::Collision {
+                        span: ctx.func(held).span.clone(),
+                        name: qualified(BEHAVIOR, &name),
+                    });
+                    ctx.stopped(notes, &effectful, held, Residue::Collision(name.clone()));
+                } else if names.contains_key(&rust)
                     || candidates.iter().any(|c: &Candidate<'_>| c.name == name)
                 {
                     notes.refusals.insert(Refusal::Collision {
@@ -3714,6 +3853,9 @@ fn behavior(
                     // The register keeps a row for it all the same.
                     ctx.stopped(notes, &effectful, r, Residue::Collision(name));
                     continue;
+                }
+                if yields {
+                    yielding.insert((r.pkg, rust.clone()));
                 }
                 names.insert(rust.clone(), r);
                 candidates.push(Candidate {
@@ -3774,6 +3916,18 @@ fn behavior(
                     called: rust.clone(),
                     formatter: None,
                 });
+            }
+        }
+    }
+    // Each candidate reads a call's key as the trait's method where its
+    // scope sees the trait, and as no function where it does not. A
+    // constant's value calls no trait's method.
+    for (pkg, (candidates, names)) in scoped.iter_mut().enumerate() {
+        for c in candidates.iter_mut() {
+            let caller = names.get(&c.rust).copied();
+            for (_, plain, key, imp) in reach.iter().filter(|(p, ..)| *p == pkg) {
+                let seen = caller.is_some_and(|caller| trait_in_scope(ctx, caller, *imp));
+                c.homonyms.insert(plain.clone(), seen.then(|| key.clone()));
             }
         }
     }
@@ -4934,6 +5088,322 @@ fn toml_string(text: &str) -> String {
 /// target, module and name.
 type FnSite = (usize, usize, String, String);
 
+/// Whether the trait a method implements is in scope where `caller` stands:
+/// Rust reads `Type::name` and `value.name()` as a trait's method there
+/// alone. Three rules of the language decide it, and whatever they leave
+/// open counts as out of scope, so a call is refused before it is misread:
+/// the scope that names a trait by one segment has it in scope (it declares
+/// the trait, imports it, or takes it from the prelude); a name the impl's
+/// scope neither declares nor imports, with no glob that could bind it, is
+/// the standard prelude's, in scope everywhere in a crate that keeps its
+/// prelude; and a file's own scope has a trait it declares or imports by a
+/// path that leads to the trait's declaration (`declared_trait`).
+fn trait_in_scope(ctx: &Model, caller: FnRef, imp: FnRef) -> bool {
+    let method = ctx.func(imp);
+    let Some(path) = &method.trait_path else {
+        return false;
+    };
+    let single = !path.contains("::");
+    let from = ctx.func(caller);
+    if single && caller.pkg == imp.pkg && caller.file == imp.file && from.scope == method.scope {
+        return true;
+    }
+    let package = &ctx.ws.packages[imp.pkg];
+    let home = &ctx.file(imp).scopes[method.scope];
+    let bound = home.traits.contains(path) || home.uses.iter().any(|(n, _)| n == path);
+    if single && !bound && !home.glob {
+        return caller.pkg == imp.pkg && !package.files.iter().any(|f| f.no_prelude);
+    }
+    if caller.pkg != imp.pkg || from.scope != 0 || method.scope != 0 {
+        return false;
+    }
+    let Some(named) = declared_trait(ctx, imp.pkg, imp.file, path) else {
+        return false;
+    };
+    let here = ctx.file(caller);
+    let (file, name) = &named;
+    (*file == caller.file && here.scopes[0].traits.contains(name))
+        || here.scopes[0].uses.iter().any(|(_, used)| {
+            declared_trait(ctx, caller.pkg, caller.file, used).as_ref() == Some(&named)
+        })
+}
+
+/// The trait a path names from a file's own scope: the file of the crate
+/// that declares it, and its name there. The path is read as Rust reads it,
+/// through the scope's own `use` bindings, from a module the scope declares
+/// and from `crate`, `self` and `super`, and through each module that only
+/// re-exports the name. A path
+/// into another crate, and one Rust would read from a name this does not
+/// see, names no trait here.
+fn declared_trait(ctx: &Model, pkg: usize, fi: usize, path: &str) -> Option<(usize, String)> {
+    let files = &ctx.ws.packages[pkg].files;
+    let mut at = fi;
+    let mut path = path.to_string();
+    let mut seen: BTreeSet<(usize, String)> = BTreeSet::new();
+    // Each step moves to another module's file or reads another binding, and
+    // no step is taken twice.
+    while seen.insert((at, path.clone())) {
+        let file = &files[at];
+        let scope = file.scopes.first()?;
+        let mut segs: Vec<&str> = path.split("::").collect();
+        let first = *segs.first()?;
+        if first.is_empty() {
+            return None;
+        }
+        if segs.len() == 1 && scope.traits.iter().any(|t| t == first) {
+            return Some((at, first.to_string()));
+        }
+        let own = scope.mods.iter().any(|m| m == first);
+        if !own && !matches!(first, "crate" | "self" | "super") {
+            // The scope's own binding of the first name, read in its place.
+            let (_, bound) = scope
+                .uses
+                .iter()
+                .find(|(n, used)| n == first && *used != path)?;
+            let rest = segs[1..].join("::");
+            path = match rest.is_empty() {
+                true => bound.clone(),
+                false => format!("{bound}::{rest}"),
+            };
+            continue;
+        }
+        let mut module: Vec<&str> = file.module.split("::").filter(|s| !s.is_empty()).collect();
+        match first {
+            "crate" => {
+                module.clear();
+                segs.remove(0);
+            }
+            "self" => {
+                segs.remove(0);
+            }
+            _ => {}
+        }
+        while segs.first() == Some(&"super") {
+            module.pop()?;
+            segs.remove(0);
+        }
+        let name = segs.pop()?;
+        module.extend(segs);
+        let module = module.join("::");
+        at = files
+            .iter()
+            .position(|f| f.target == file.target && f.module == module)?;
+        path = name.to_string();
+    }
+    None
+}
+
+/// Why a default method a trait declares is not one function for every
+/// implementing type, if it is not: it calls a method through `self` or
+/// `Self`, which is each implementing type's (the trait's own body of it is
+/// one an implementation may replace), or reads `self` or names `Self`
+/// otherwise. `None` for a body that does neither: it means the same for
+/// every implementing type, and lifts as written.
+fn default_refusal(
+    file: &SourceFile,
+    f: &FnFact,
+    declarer: &str,
+    block: &crate::ast::Block,
+) -> Option<Residue> {
+    let mut called = Vec::new();
+    calls_through_self(block, &mut called);
+    if let Some(method) = called.first() {
+        let declared = file
+            .fns
+            .iter()
+            .find(|g| g.in_trait && g.owner.as_deref() == Some(declarer) && &g.name == method);
+        let whose = match declared {
+            Some(g) if g.tokens.ends_with('}') => format!(
+                "{declarer}::{method}, whose body in the trait an implementing type may replace"
+            ),
+            Some(_) => format!("{declarer}::{method}, which the trait declares without a body"),
+            None => format!("{method}, which {declarer} does not declare"),
+        };
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that calls {whose}: it means each implementing \
+             type's"
+        )));
+    }
+    let words = |word: &str| {
+        f.tokens
+            .split(|c: char| !(c.is_alphanumeric() || c == '_'))
+            .filter(|w| *w == word)
+            .count()
+    };
+    if words("Self") > 0 {
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that names Self, each implementing type"
+        )));
+    }
+    // The receiver is the one `self` a signature writes.
+    if words("self") > usize::from(f.receiver.is_some()) {
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that reads self, each implementing type's value"
+        )));
+    }
+    None
+}
+
+/// The methods a body calls on `self` and the functions it calls as
+/// `Self::name`, in source order.
+fn calls_through_self(block: &crate::ast::Block, out: &mut Vec<String>) {
+    use crate::ast::{RustExpr, Stmt, UnOp};
+    fn is_self(e: &RustExpr) -> bool {
+        match e {
+            RustExpr::Path(p) => p.is_ident("self"),
+            RustExpr::Paren(inner) => is_self(inner),
+            RustExpr::Reference(r) => is_self(&r.expr),
+            RustExpr::Unary(u) => matches!(u.op, UnOp::Deref) && is_self(&u.expr),
+            _ => false,
+        }
+    }
+    fn expr(e: &RustExpr, out: &mut Vec<String>) {
+        match e {
+            RustExpr::MethodCall(m) if is_self(&m.receiver) => out.push(m.method.clone()),
+            RustExpr::Call(c) => {
+                if let RustExpr::Path(p) = &*c.func {
+                    if let [owner, name] = p.segments.as_slice() {
+                        if owner.ident == "Self" {
+                            out.push(name.ident.clone());
+                        }
+                    }
+                }
+            }
+            RustExpr::Macro(m) => {
+                for arg in m.args.iter().flat_map(|a| &a.items) {
+                    expr(arg, out);
+                }
+            }
+            _ => {}
+        }
+        let (exprs, blocks) = e.parts();
+        for inner in exprs {
+            expr(inner, out);
+        }
+        for inner in blocks {
+            calls_through_self(inner, out);
+        }
+    }
+    for stmt in &block.stmts {
+        match stmt {
+            Stmt::Local(l) => {
+                if let Some(init) = &l.init {
+                    expr(&init.expr, out);
+                    if let Some(diverge) = &init.diverge {
+                        expr(diverge, out);
+                    }
+                }
+            }
+            Stmt::Expr(e, _) => expr(e, out),
+            Stmt::Macro(m) => {
+                for arg in m.args.iter().flat_map(|a| &a.items) {
+                    expr(arg, out);
+                }
+            }
+            Stmt::Other => {}
+        }
+    }
+}
+
+/// Why the lift does not name the type a method is of, as the file `fi` of
+/// package `pkg` writes it: the shape it is declared in, or the first of
+/// its fields whose type is outside the lift and, where that is another
+/// type of the crate, why that one is, down to a type the crate does not
+/// declare. Each type is explained once, so a family of types that hold
+/// each other ends.
+fn unlifted_type(
+    ctx: &Model,
+    syntax: &Syntax,
+    scopes: &BTreeMap<(usize, usize), Types>,
+    expanded: &dyn Fn(usize, &crate::ast::RustType) -> crate::ast::RustType,
+    pkg: usize,
+    fi: usize,
+    written: &str,
+) -> String {
+    let package = &ctx.ws.packages[pkg];
+    let mut seen: BTreeSet<String> = BTreeSet::new();
+    let mut out: Vec<String> = Vec::new();
+    let mut next = Some((fi, written.to_string()));
+    while let Some((from, ty)) = next.take() {
+        // The name a declaration would carry: the path's last segment,
+        // without its arguments.
+        let head = ty.split('<').next().unwrap_or(&ty);
+        let name = head.rsplit("::").next().unwrap_or(head).trim().to_string();
+        let plain = name.chars().all(|c| c.is_alphanumeric() || c == '_') && !name.is_empty();
+        if !plain || !seen.insert(name.clone()) {
+            out.push(if plain {
+                "which holds itself where no inductive type can".to_string()
+            } else {
+                "which is not a struct or an enum by name".to_string()
+            });
+            break;
+        }
+        if ty.contains('<') && out.is_empty() {
+            out.push(
+                "written with arguments, where a method's type is read by its name alone"
+                    .to_string(),
+            );
+            break;
+        }
+        // Its declaration: the writing file's own, else the crate's first.
+        let order = std::iter::once(from).chain((0..package.files.len()).filter(|i| *i != from));
+        let mut found = None;
+        for at in order {
+            let file = &package.files[at];
+            let read = &syntax.files[&file.rel];
+            if let Some(shape) = file.unread.iter().find(|(n, _)| *n == name) {
+                found = Some(Err(shape.1.to_string()));
+            } else if let Some(i) = file.structs.iter().position(|st| st.name == name) {
+                let fields = read.structs[i]
+                    .iter()
+                    .map(|(field, t)| (format!("field {field}"), t.clone()))
+                    .collect::<Vec<_>>();
+                found = Some(Ok((at, fields)));
+            } else if let Some(i) = file.enums.iter().position(|e| e.name == name) {
+                let fields = read.enums[i]
+                    .iter()
+                    .flat_map(|(variant, fields)| {
+                        fields
+                            .iter()
+                            .map(move |(_, t)| (format!("variant {variant}"), t.clone()))
+                    })
+                    .collect::<Vec<_>>();
+                found = Some(Ok((at, fields)));
+            }
+            if found.is_some() {
+                break;
+            }
+        }
+        match found {
+            None => out.push("which this crate does not declare".to_string()),
+            Some(Err(shape)) => out.push(format!("{shape}, which the lift does not read")),
+            Some(Ok((at, fields))) => {
+                let scope = &scopes[&(pkg, at)];
+                let imports = &package.files[at].imports;
+                let outside = fields.iter().find_map(|(part, t)| {
+                    match scope.ty(&expanded(pkg, &t.localized(imports))) {
+                        Err(Residue::Type(inner)) => Some((part, inner)),
+                        _ => None,
+                    }
+                });
+                match outside {
+                    Some((part, inner)) => {
+                        out.push(format!("whose {part} holds {inner}"));
+                        next = Some((at, inner));
+                    }
+                    None => out.push(
+                        "which the lift leaves out though each of its parts lifts: it has no \
+                         part, it is declared twice, its name is one the projection keeps, or \
+                         it holds itself where no inductive type can"
+                            .to_string(),
+                    ),
+                }
+            }
+        }
+    }
+    out.join(", ")
+}
+
 /// The free functions of product code whose name two modules (or two
 /// targets) of one crate share, `toml_string` in `project` and in
 /// `certify`, each -> its `rust` key and the LexLean name it lifts under:
@@ -5371,7 +5841,11 @@ mod tests {
              write!(f, \"{}\", self.text)\n    }\n}\n\n\
              impl std::fmt::Debug for Label {\n    \
              fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
-             f.write_str(\"label\")\n    }\n}\n",
+             f.write_str(\"label\")\n    }\n}\n\n\
+             /// One function for each build configuration.\n#[cfg(unix)]\n\
+             pub fn width() -> u32 {\n    1\n}\n\n\
+             /// One function for each build configuration.\n#[cfg(not(unix))]\n\
+             pub fn width(scale: f64) -> u32 {\n    let _ = scale;\n    2\n}\n",
         ),
         (
             "src/first.rs",
@@ -5459,9 +5933,480 @@ mod tests {
     #[test]
     fn two_functions_of_one_path_share_one_row() {
         let frontier = frontier_of("paths", NAMES);
-        let rows = rows_of(&frontier, "paths::Label::fmt", "detail");
+        let rows = rows_of(&frontier, "paths::width", "detail");
         assert_eq!(rows.len(), 1, "{rows:?}");
         // The row is the one that claims least: the function not lifted.
         assert_eq!(rows[0].0, "residue");
+        // Two traits' methods of one name on one type are two paths, each
+        // with its own row.
+        for path in ["paths::<Label as Display>::fmt", "paths::<Label as Debug>::fmt"] {
+            let rows = rows_of(&frontier, path, "function");
+            assert_eq!(rows.len(), 1, "{path}: {rows:?}");
+        }
+    }
+
+    // Functions refused by their signature or misread by where they stand:
+    // a trait implementation's method, a default method, a method of a type
+    // outside the lift, and a module declared out of line under a test cfg.
+    // Each projects a crate written for the test.
+
+    /// The frontier and the behaviour module of the crate `name` of `files`.
+    fn projected(name: &str, files: &[(&str, &str)]) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-stand-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let manifest =
+            format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n");
+        let manifest = ("Cargo.toml", manifest.as_str());
+        for (path, body) in std::iter::once(&manifest).chain(files) {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("parent")).expect("dir");
+            std::fs::write(path, body).expect("write");
+        }
+        let options = crate::Options {
+            name: name.to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let out = crate::project_workspace(&dir, &options).expect("projects");
+        let _ = std::fs::remove_dir_all(&dir);
+        // A crate none of whose functions lifts has no behaviour module.
+        let text = |path: &str| {
+            String::from_utf8(out.get(path).cloned().unwrap_or_default()).expect("utf-8")
+        };
+        (text("frontier.toml"), text("src/Behavior.lex.tex"))
+    }
+
+    /// The register row of a function: its kind and its lines.
+    fn row(frontier: &str, function: &str) -> String {
+        let needle = format!("function = \"{function}\"\n");
+        let rows: Vec<&str> = frontier
+            .split("\n\n")
+            .filter(|row| row.contains(&needle))
+            .collect();
+        assert_eq!(rows.len(), 1, "{function} has one row:\n{frontier}");
+        rows[0].to_string()
+    }
+
+    /// One definition of the behaviour module, flattened to a line.
+    fn definition(behavior: &str, name: &str) -> String {
+        let found = behavior
+            .split("definition{")
+            .find(|d| d.trim_start().starts_with(&format!("name: {name},")))
+            .unwrap_or_else(|| panic!("{name} is defined:\n{behavior}"));
+        found.split_whitespace().collect::<Vec<_>>().join(" ")
+    }
+
+    #[test]
+    fn a_trait_implementations_method_lifts_as_a_function_of_its_type_ue_15() {
+        let (frontier, behavior) = projected(
+            "shapes",
+            &[(
+                "src/lib.rs",
+                "//! Shapes.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n}\n\
+                 /// Something with a label.\n\
+                 pub trait Label {\n    /// An area.\n    fn area(&self) -> u32;\n    \
+                 /// The label.\n    fn label(&self) -> String;\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 /// A rectangle.\npub struct Rect {\n    /// Its width.\n    pub w: u32,\n    \
+                 /// Its height.\n    pub h: u32,\n}\n\
+                 impl Shape for Square {\n    fn area(&self) -> u32 {\n        \
+                 self.side.saturating_mul(self.side)\n    }\n}\n\
+                 impl Shape for Rect {\n    fn area(&self) -> u32 {\n        \
+                 self.w.saturating_mul(self.h)\n    }\n}\n\
+                 impl Label for Rect {\n    fn area(&self) -> u32 {\n        0\n    }\n    \
+                 fn label(&self) -> String {\n        \"rect\".to_string()\n    }\n}\n\
+                 impl Default for Square {\n    fn default() -> Self {\n        \
+                 Square { side: 1 }\n    }\n}\n\
+                 impl From<u32> for Rect {\n    fn from(side: u32) -> Self {\n        \
+                 Rect { w: side, h: side }\n    }\n}\n\
+                 impl From<bool> for Rect {\n    fn from(whole: bool) -> Self {\n        \
+                 if whole {\n            Rect { w: 1, h: 1 }\n        } else {\n            \
+                 Rect { w: 0, h: 0 }\n        }\n    }\n}\n\
+                 impl std::fmt::Display for Rect {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"rect\")\n    }\n}\n\
+                 /// The area of a square.\npub fn square_area(s: &Square) -> u32 {\n    \
+                 s.area()\n}\n\
+                 /// The unit square.\npub fn unit() -> Square {\n    Square::default()\n}\n\
+                 /// A rectangle's label.\npub fn label_of(r: &Rect) -> String {\n    \
+                 r.label()\n}\n\
+                 /// A rectangle of a side.\npub fn of_side(side: u32) -> Rect {\n    \
+                 Rect::from(side)\n}\n",
+            )],
+        );
+        // A function of the implementing type, with `self` first; one name
+        // for each type of a trait and each trait of a type.
+        for (name, needle) in [
+            (
+                "squareShapeArea",
+                "parameters: [selfValue : Square], result: Nat",
+            ),
+            (
+                "rectShapeArea",
+                "parameters: [selfValue : Rect], result: Nat",
+            ),
+            (
+                "rectLabelArea",
+                "parameters: [selfValue : Rect], result: Nat, body: 0",
+            ),
+            (
+                "rectLabelLabel",
+                "parameters: [selfValue : Rect], result: String",
+            ),
+            ("squareDefaultDefault", "parameters: [], result: Square"),
+            ("rectFromU32From", "parameters: [side : Nat], result: Rect"),
+            (
+                "rectFromBoolFrom",
+                "parameters: [whole : Bool], result: Rect",
+            ),
+            // The text a value displays as keeps the name it had.
+            ("rectFmt", "parameters: [selfValue : Rect], result: String"),
+            // A call written on the value or the type means the type's one
+            // method of the name.
+            ("squareArea", "body: (squareShapeArea s)"),
+            ("unit", "body: (squareDefaultDefault)"),
+            ("labelOf", "body: (rectLabelLabel r)"),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+        // Rust's own name for each: `Type::name` where the type has one
+        // method of the name, `<Type as Trait>::name` where it has several.
+        for (function, lifted) in [
+            ("shapes::Square::area", "Behavior::squareShapeArea"),
+            ("shapes::<Rect as Shape>::area", "Behavior::rectShapeArea"),
+            ("shapes::<Rect as Label>::area", "Behavior::rectLabelArea"),
+            ("shapes::Rect::label", "Behavior::rectLabelLabel"),
+            ("shapes::Square::default", "Behavior::squareDefaultDefault"),
+            (
+                "shapes::<Rect as From<u32>>::from",
+                "Behavior::rectFromU32From",
+            ),
+            (
+                "shapes::<Rect as From<bool>>::from",
+                "Behavior::rectFromBoolFrom",
+            ),
+            ("shapes::Rect::fmt", "Behavior::rectFmt"),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.starts_with("[[lifted]]")
+                    && found.contains(&format!("definition = \"{lifted}\"")),
+                "{found}"
+            );
+        }
+        // A generic trait is implemented once per argument list, and the
+        // types at the call pick among them: no call is read as one.
+        let found = row(&frontier, "shapes::of_side");
+        assert!(found.contains("reason = \"call\""), "{found}");
+        // A method the trait declares without a body is no one function.
+        let found = row(&frontier, "shapes::Shape::area");
+        assert!(
+            found.contains(
+                "detail = \"signature outside the lift: a method Shape declares without a \
+                 body, which each implementing type gives\""
+            ),
+            "{found}"
+        );
+    }
+
+    #[test]
+    fn a_call_means_a_traits_method_only_where_the_trait_is_in_scope() {
+        let (frontier, behavior) = projected(
+            "scopes",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Scopes.\npub mod far;\npub mod near;\npub mod shapes;\n\
+                     pub use shapes::Label;\n",
+                ),
+                (
+                    "src/shapes.rs",
+                    "//! A square and its traits.\n\
+                     /// A square.\n#[derive(Clone)]\npub struct Square {\n    \
+                     /// Its side.\n    pub side: u32,\n}\n\
+                     /// Something that gives a fresh square.\n\
+                     pub trait Fresh {\n    /// A fresh square.\n    \
+                     fn clone(&self) -> Square;\n}\n\
+                     impl Fresh for Square {\n    fn clone(&self) -> Square {\n        \
+                     Square { side: 0 }\n    }\n}\n\
+                     /// Something with a label.\n\
+                     pub trait Label {\n    /// The label.\n    fn label(&self) -> String;\n}\n\
+                     impl Label for Square {\n    fn label(&self) -> String {\n        \
+                     \"square\".to_string()\n    }\n}\n\
+                     /// The label, where the trait is declared.\n\
+                     pub fn here(s: &Square) -> String {\n    s.label()\n}\n",
+                ),
+                (
+                    "src/far.rs",
+                    "//! Where `Fresh` is not in scope.\nuse crate::shapes::Square;\n\
+                     /// The square again, as `Clone` gives it.\n\
+                     pub fn again(s: &Square) -> Square {\n    s.clone()\n}\n",
+                ),
+                (
+                    "src/near.rs",
+                    "//! Where the traits are imported.\n\
+                     use crate::shapes::{Fresh, Square};\nuse crate::Label as _;\n\
+                     /// A fresh square, named by its trait.\n\
+                     pub fn fresh(s: &Square) -> Square {\n    Fresh::clone(s)\n}\n\
+                     /// The label, through a trait the crate root re-exports.\n\
+                     pub fn label_of(s: &Square) -> String {\n    s.label()\n}\n\
+                     /// A module with a scope of its own.\n\
+                     pub mod inner {\n    use crate::shapes::Square;\n    \
+                     /// The square again: this scope does not import `Fresh`.\n    \
+                     pub fn inner_again(s: &Square) -> Square {\n        s.clone()\n    }\n}\n",
+                ),
+            ],
+        );
+        // The trait's method lifts wherever it is called from.
+        let found = row(&frontier, "scopes::shapes::Square::clone");
+        assert!(
+            found.contains("definition = \"Behavior::squareFreshClone\""),
+            "{found}"
+        );
+        for (name, needle) in [
+            // Out of the trait's scope `.clone()` is `Clone`'s: the value.
+            ("again", "body: s}"),
+            ("innerAgain", "body: s}"),
+            // In its scope a call is the trait's method: where the trait is
+            // declared, and where a `use` leads to its declaration.
+            ("here", "body: (squareLabelLabel s)"),
+            ("labelOf", "body: (squareLabelLabel s)"),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+    }
+
+    #[test]
+    fn a_traits_method_gives_way_to_the_function_that_holds_its_name() {
+        let (frontier, _) = projected(
+            "yields",
+            &[(
+                "src/lib.rs",
+                "//! Names.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 /// A rectangle.\npub struct Rect {\n    /// Its width.\n    pub w: u32,\n}\n\
+                 /// Spelled as the method of `Rect` below lifts.\n\
+                 pub fn rect_shape_area(n: u32) -> u32 {\n    n\n}\n\
+                 impl Shape for Rect {\n    fn area(&self) -> u32 {\n        self.w\n    }\n}\n\
+                 impl Shape for Square {\n    fn area(&self) -> u32 {\n        self.side\n    }\n}\n\
+                 /// Spelled as the method of `Square` above lifts.\n\
+                 pub fn square_shape_area(n: u32) -> u32 {\n    n\n}\n",
+            )],
+        );
+        // Before the method or after it, the function keeps the name.
+        for (function, method) in [
+            ("yields::rect_shape_area", "yields::Rect::area"),
+            ("yields::square_shape_area", "yields::Square::area"),
+        ] {
+            let kept = row(&frontier, function);
+            assert!(kept.starts_with("[[lifted]]"), "{kept}");
+            let gave = row(&frontier, method);
+            assert!(
+                gave.starts_with("[[residue]]") && gave.contains("reason = \"collision\""),
+                "{gave}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_default_method_lifts_where_its_body_is_one_for_every_implementing_type() {
+        let (frontier, behavior) = projected(
+            "defaults",
+            &[(
+                "src/lib.rs",
+                "//! Defaults.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n    \
+                 /// The corners of a shape that does not say.\n    \
+                 fn corners(&self) -> u32 {\n        4\n    }\n    \
+                 /// The area doubled.\n    \
+                 fn doubled(&self) -> u32 {\n        self.area().saturating_mul(2)\n    }\n    \
+                 /// The corners doubled.\n    \
+                 fn corners_doubled(&self) -> u32 {\n        \
+                 self.corners().saturating_mul(2)\n    }\n    \
+                 /// The shape itself.\n    fn same(&self) -> &Self {\n        self\n    }\n    \
+                 /// A hook that does nothing.\n    fn visit(&mut self, _n: u32) {}\n}\n\
+                 /// Spelled like a default method.\n\
+                 pub fn corners() -> u32 {\n    3\n}\n\
+                 /// A trait whose default method calls a function of that spelling.\n\
+                 pub trait Count {\n    /// The count.\n    \
+                 fn count(&self) -> u32 {\n        corners()\n    }\n}\n",
+            )],
+        );
+        // One function for every implementing type takes no value of one.
+        for (name, needle) in [
+            ("shapeCorners", "parameters: [], result: Nat, body: 4}"),
+            ("shapeVisit", "parameters: [n : Nat], result: Unit"),
+            // A free function of a method's spelling is the free function.
+            (
+                "countCount",
+                "parameters: [], result: Nat, body: (corners)}",
+            ),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+        // What it uses of an implementing type keeps it out, by name.
+        for (function, detail) in [
+            (
+                "defaults::Shape::doubled",
+                "a default method of Shape that calls Shape::area, which the trait declares \
+                 without a body: it means each implementing type's",
+            ),
+            (
+                "defaults::Shape::corners_doubled",
+                "a default method of Shape that calls Shape::corners, whose body in the trait \
+                 an implementing type may replace: it means each implementing type's",
+            ),
+            (
+                "defaults::Shape::same",
+                "a default method of Shape that names Self, each implementing type",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.contains("reason = \"signature\"")
+                    && found.contains(&format!(
+                        "detail = \"signature outside the lift: {detail}\""
+                    )),
+                "{found}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_method_outside_the_lift_names_its_type_and_why() {
+        let (frontier, _) = projected(
+            "reasons",
+            &[(
+                "src/lib.rs",
+                "//! Reasons.\n\
+                 /// A circle.\npub struct Circle(pub u32);\n\
+                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: f64,\n}\n\
+                 /// A bag.\npub struct Bag {\n    /// Its blob.\n    pub blob: Blob,\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 impl Circle {\n    /// The radius.\n    \
+                 pub fn radius(&self) -> u32 {\n        self.0\n    }\n}\n\
+                 impl Bag {\n    /// How many blobs.\n    \
+                 pub fn count(&self) -> u32 {\n        1\n    }\n}\n\
+                 impl Square {\n    /// Grow.\n    pub fn grow(&mut self, by: u32) {\n        \
+                 self.side = self.side.saturating_add(by);\n    }\n}\n\
+                 /// Something that scales by a factor of some type.\n\
+                 pub trait Scale<T> {\n    /// The side scaled.\n    \
+                 fn scale(&self, by: T) -> u32;\n}\n\
+                 impl<T: Into<u32>> Scale<T> for Square {\n    \
+                 fn scale(&self, by: T) -> u32 {\n        \
+                 self.side.saturating_mul(by.into())\n    }\n}\n",
+            )],
+        );
+        // A tuple struct's fields are read by position, so its method
+        // lifts.
+        let radius = row(&frontier, "reasons::Circle::radius");
+        assert!(
+            radius.starts_with("[[lifted]]")
+                && radius.contains("definition = \"Behavior::circleRadius\""),
+            "{radius}"
+        );
+        for (function, reason, detail) in [
+            (
+                "reasons::Bag::count",
+                "type",
+                "type outside the lift: Bag.blob: Blob.weight: f64",
+            ),
+            (
+                "reasons::Square::grow",
+                "signature",
+                "signature outside the lift: takes &mut self of Square: the lift reads self \
+                 and &self as the value, and threads no other receiver",
+            ),
+            (
+                "reasons::Square::scale",
+                "signature",
+                "signature outside the lift: a method of an impl generic in T: one function \
+                 for each type or constant that takes its place",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.starts_with("[[residue]]")
+                    && found.contains(&format!("reason = \"{reason}\""))
+                    && found.contains(&format!("detail = \"{detail}\"")),
+                "{found}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_module_declared_out_of_line_under_a_test_cfg_is_no_product_code() {
+        let (frontier, _) = projected(
+            "marks",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Marks.\n#[cfg(test)]\nmod tests;\n\
+                     #[cfg(any(test, feature = \"x\"))]\nmod shared;\n\
+                     /// Twice.\npub fn twice(n: u32) -> u32 {\n    n.saturating_mul(2)\n}\n",
+                ),
+                (
+                    "src/tests.rs",
+                    "mod helpers;\n\nfn four() -> u32 {\n    helpers::helper(super::twice(2))\n}\n",
+                ),
+                (
+                    "src/tests/helpers.rs",
+                    "pub fn helper(n: u32) -> u32 {\n    n\n}\n",
+                ),
+                (
+                    "src/shared.rs",
+                    "/// In a build with the feature too.\n\
+                     pub fn shared_fn(n: u32) -> u32 {\n    n\n}\n",
+                ),
+            ],
+        );
+        // The crate's own function, and the module a build without tests
+        // can hold, have their rows; the test tree has none.
+        row(&frontier, "marks::twice");
+        row(&frontier, "marks::shared::shared_fn");
+        for helper in ["four", "helper"] {
+            assert!(
+                !frontier.contains(&format!("::{helper}\"")),
+                "{helper} is test code:\n{frontier}"
+            );
+        }
+    }
+
+    #[test]
+    fn two_traits_methods_of_one_name_keep_a_row_each() {
+        let (frontier, _) = projected(
+            "texts",
+            &[(
+                "src/lib.rs",
+                "//! Texts.\n\
+                 /// A point.\npub struct Point {\n    /// Its place.\n    pub x: u32,\n}\n\
+                 impl std::fmt::Display for Point {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"point\")\n    }\n}\n\
+                 impl std::fmt::Debug for Point {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"Point\")\n    }\n}\n",
+            )],
+        );
+        let shown = row(&frontier, "texts::<Point as Display>::fmt");
+        assert!(
+            shown.contains("definition = \"Behavior::pointDisplayFmt\""),
+            "{shown}"
+        );
+        let debugged = row(&frontier, "texts::<Point as Debug>::fmt");
+        assert!(debugged.starts_with("[[residue]]"), "{debugged}");
+        // One row per function and per κ: the frontier is a register.
+        let read =
+            crate::register::Register::parse(std::path::Path::new("frontier.toml"), &frontier);
+        assert!(read.is_ok(), "{:?}", read.err().map(|e| e.to_string()));
     }
 }
