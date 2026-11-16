@@ -3860,6 +3860,48 @@ pub struct EmbedCensus {
     /// The calls (each callee once per body) left to a dictionary, by why
     /// ([`unlinked_reason`]).
     pub unlinked: BTreeMap<String, usize>,
+    /// Each body counted, by the path the dump prints for it: what joins a
+    /// register row to its body ([`BodyFact`]).
+    pub rows: Vec<BodyFact>,
+}
+
+/// One body's embedding, keyed by the path the dump prints for it
+/// (`a::<impl at src/a.rs:3:1: 3:9>::f`, `inner::run`), which is the item
+/// the compiler resolved and never a path the surface reader spells: a
+/// trait's method in two impls of one type, a generic impl's method and a
+/// function of an inline module each keep their own. Its reach is closed
+/// exactly when every body it reaches, itself first, is embedded, uses no
+/// construct the evaluator does not define, calls no intrinsic, leaves no
+/// callee to a dictionary and fixes every instance's generics, and it is
+/// not generic itself (the one test [`closure`] states, which the
+/// differential check's samples are held to as well).
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct BodyFact {
+    /// The path the dump prints.
+    pub path: String,
+    /// The body's κ ([`body_kappa`]).
+    pub kappa: String,
+    /// The SHA-256 of its term, as the register's stamp writes it.
+    pub embedded: String,
+    /// The constructs it uses that the evaluator does not define.
+    pub blocked: Vec<String>,
+    /// Where its reach is open: why, and the key of the body that stops
+    /// it (itself or one it reaches). `None` where it is closed.
+    pub open: Option<(String, String)>,
+    /// The callees it leaves to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, BTreeSet<String>>,
+}
+
+impl BodyFact {
+    /// Its reach as the register's stamp and a record write it: `closed`,
+    /// or `open: <why> (at <body>)`.
+    pub fn reach(&self) -> String {
+        match &self.open {
+            None => "closed".to_string(),
+            Some((why, at)) => format!("open: {why} (at {at})"),
+        }
+    }
 }
 
 /// The key of [`EmbedCensus::linked`] for a call into the crate's own
@@ -4177,7 +4219,9 @@ pub fn embed_with(
             if file.exists() {
                 let by_kappa: BTreeMap<&str, &Embedded> =
                     bodies.iter().map(|(k, e)| (k.as_str(), e)).collect();
-                let text = stamp_rows(&read_text(&file)?, &by_kappa);
+                let reach: BTreeMap<&str, &BodyFact> =
+                    census.rows.iter().map(|r| (r.kappa.as_str(), r)).collect();
+                let text = stamp_rows(&read_text(&file)?, &by_kappa, &reach);
                 std::fs::write(&file, text).map_err(|e| crate::error::io(&file, e))?;
             }
         }
@@ -4241,11 +4285,16 @@ pub struct Outputs<'a> {
 }
 
 /// A register's module file with each row's embedding stamped on it by
-/// its κ: the digest of the body's term (`embedded`) and the constructs
-/// the evaluator does not define that it uses (`blocked`), in place of
+/// its κ: the digest of the body's term (`embedded`), the constructs
+/// the evaluator does not define that it uses (`blocked`) and its reach
+/// ([`BodyFact::reach`], where `reach` holds the κ), in place of
 /// whatever the row recorded. A row whose κ the embedding has no body of
 /// records none.
-pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> String {
+pub(crate) fn stamp_rows(
+    text: &str,
+    by_kappa: &BTreeMap<&str, &Embedded>,
+    reach: &BTreeMap<&str, &BodyFact>,
+) -> String {
     let mut out = String::new();
     let mut kappa: Option<String> = None;
     let mut pending = false;
@@ -4260,10 +4309,16 @@ pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> St
                 let quoted: Vec<String> = e.blocked.iter().map(|b| census_string(b)).collect();
                 let _ = writeln!(out, "blocked = [{}]", quoted.join(", "));
             }
+            if let Some(r) = kappa.as_deref().and_then(|k| reach.get(k)) {
+                let _ = writeln!(out, "reach = {}", census_string(&r.reach()));
+            }
         }
     };
     for line in text.lines() {
-        if line.starts_with("embedded = ") || line.starts_with("blocked = ") {
+        if line.starts_with("embedded = ")
+            || line.starts_with("blocked = ")
+            || line.starts_with("reach = ")
+        {
             continue;
         }
         // The stamp follows a row's κ and its span, as the register writes
@@ -4791,11 +4846,11 @@ pub(crate) struct Program {
     unread: BTreeSet<String>,
 }
 
-/// What a sample reaches: every body, which the evaluator defines, or
-/// why it does not.
+/// What a body reaches: every body, which the evaluator defines, or
+/// why it does not and the key of the body that stops it.
 enum Reach {
     Closed(Vec<String>),
-    Open(String),
+    Open { why: String, at: String },
 }
 
 /// The keys of the bodies `key` reaches, itself first, where the evaluator
@@ -5048,14 +5103,18 @@ enum Fuel {
 }
 
 fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
+    let open = |why: String, at: &str| Reach::Open {
+        why,
+        at: at.to_string(),
+    };
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
         let Some((_, e)) = every.get(&k) else {
-            return Reach::Open("reaches a body not embedded".into());
+            return open("reaches a body not embedded".into(), &k);
         };
         if let Some(b) = e.blocked.iter().next() {
-            return Reach::Open(format!("reaches a body blocked by {b}"));
+            return open(format!("reaches a body blocked by {b}"), &k);
         }
         if let Some(b) = e.bound.iter().next() {
             // A dictionary's name, its generic arguments and the
@@ -5069,21 +5128,21 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
             if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
                 eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
             }
-            return Reach::Open(format!("leaves a callee of {kind} to a dictionary"));
+            return open(format!("leaves a callee of {kind} to a dictionary"), &k);
         }
         if !e.intrinsics.is_empty() {
-            return Reach::Open("calls an intrinsic".into());
+            return open("calls an intrinsic".into(), &k);
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return Reach::Open("reaches an instance no binding fixes".into());
+            return open("reaches an instance no binding fixes".into(), &k);
         }
         if at == 0
             && e.term
                 .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
         {
-            return Reach::Open("is generic itself".into());
+            return open("is generic itself".into(), &k);
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -6090,6 +6149,8 @@ fn embed_linked(
     };
     let mut modules = Vec::new();
     let mut every: BTreeMap<String, (String, Embedded)> = BTreeMap::new();
+    // Each counted body: the path its dump prints, its key, its κ.
+    let mut counted: Vec<(String, String, String)> = Vec::new();
     let mut samples = Vec::new();
     let mut signatures = BTreeMap::new();
     let package = library_root(root).join(krate);
@@ -6197,6 +6258,7 @@ fn embed_linked(
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
                     census.add(&e, krate, &linked_names);
+                    counted.push((b.path.clone(), key.clone(), kappa.clone()));
                     signatures.insert(
                         kappa.clone(),
                         (
@@ -6321,7 +6383,7 @@ fn embed_linked(
                 false
             }
         },
-        Reach::Open(why) => {
+        Reach::Open { why, .. } => {
             *left.entry(why).or_default() += 1;
             false
         }
@@ -6335,6 +6397,32 @@ fn embed_linked(
                 .collect::<String>()
         );
     }
+    // Each counted body's reach and what it leaves unlinked, over the
+    // whole program: its own crate's bodies and the linked libraries'.
+    census.rows = counted
+        .into_iter()
+        .filter_map(|(path, key, kappa)| {
+            let (_, e) = every.get(&key)?;
+            let mut unlinked: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+            for b in &e.bound {
+                unlinked
+                    .entry(unlinked_reason(b, krate, &linked_names))
+                    .or_default()
+                    .insert(b.clone());
+            }
+            Some(BodyFact {
+                path,
+                kappa,
+                embedded: crate::project::sha(e.term.as_bytes()),
+                blocked: e.blocked.iter().cloned().collect(),
+                open: match closure(&every, &key) {
+                    Reach::Closed(_) => None,
+                    Reach::Open { why, at } => Some((why, at)),
+                },
+                unlinked,
+            })
+        })
+        .collect();
     let program = Program {
         every,
         samples,
@@ -6399,7 +6487,7 @@ mod tests {
         let text = "[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"old\"\nblocked = [\"CastKind::IntToFloat\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nembedded = \"old\"\nstatus = \"translated\"\ndigest = \"d\"\n";
         let (t, u) = (crate::project::sha(b"t"), crate::project::sha(b"u"));
         assert_eq!(
-            super::stamp_rows(text, &by_kappa),
+            super::stamp_rows(text, &by_kappa, &BTreeMap::new()),
             format!("[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"{t}\"\nblocked = [\"intrinsic fabs\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nembedded = \"{u}\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nstatus = \"translated\"\ndigest = \"d\"\n")
         );
     }
