@@ -124,6 +124,9 @@ pub(crate) struct SourceFile {
     pub(crate) enums: Vec<EnumFact>,
     pub(crate) structs: Vec<StructFact>,
     pub(crate) error_impls: Vec<String>,
+    /// The traits the file declares, each with what a dictionary of its
+    /// methods does not read.
+    pub(crate) trait_decls: Vec<TraitFact>,
     /// The types the file declares in a shape the lift does not read, each
     /// with that shape (`a tuple struct`).
     pub(crate) unread: Vec<(String, &'static str)>,
@@ -136,6 +139,24 @@ pub(crate) struct SourceFile {
     pub(crate) capabilities: Vec<(Capability, Span, String)>,
     /// `use` imports: the imported name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
+}
+
+/// A trait declaration: what, besides its methods, it asks of an
+/// implementing type.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct TraitFact {
+    pub(crate) name: String,
+    /// The index of the module scope it is declared in.
+    pub(crate) scope: usize,
+    /// Its type and const parameters: a trait implemented once per
+    /// argument list.
+    pub(crate) params: Vec<String>,
+    /// Its supertraits as written, and any `where` clause on `Self`.
+    pub(crate) supertraits: Vec<String>,
+    /// Its associated types and constants, by name.
+    pub(crate) associated: Vec<String>,
+    /// `unsafe trait`: an implementation promises what no method states.
+    pub(crate) marked: bool,
 }
 
 #[derive(Clone, Debug)]

@@ -68,6 +68,7 @@ fn axioms() -> Vec<String> {
 
 fn definition(name: &str, parameters: &[(&str, &str)], result: &str, body: String) -> Decl {
     Decl::Definition {
+        type_parameters: Vec::new(),
         name: name.to_string(),
         parameters: parameters
             .iter()
@@ -294,7 +295,7 @@ pub(crate) fn definitions() -> Vec<Decl> {
     ));
     // `count` items read from `pointer` on, `stride` bytes apart: an
     // array or slice in memory, read whole.
-    out.push(Decl::Definition {
+    out.push(Decl::Definition { type_parameters: Vec::new(),
         name: "mirLoadItems".into(),
         parameters: vec![
             ("memory".into(), MEMORY.into()),
@@ -314,7 +315,7 @@ pub(crate) fn definitions() -> Vec<Decl> {
     });
     // Each of `count` items from `pointer` on readable: an array or slice
     // read whole through a pointer.
-    out.push(Decl::Definition {
+    out.push(Decl::Definition { type_parameters: Vec::new(),
         name: "mirReadableItems".into(),
         parameters: vec![
             ("memory".into(), MEMORY.into()),
@@ -427,7 +428,7 @@ pub(crate) fn definitions() -> Vec<Decl> {
     ));
     // A `MaybeUninit`'s cell: its value where it holds one.
     // Codes read back as the options they code.
-    out.push(Decl::Definition {
+    out.push(Decl::Definition { type_parameters: Vec::new(),
         name: "mirDecodeOptions".into(),
         parameters: vec![("codes".into(), "(List Nat)".into())],
         result: "(List (Option Nat))".into(),

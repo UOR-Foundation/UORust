@@ -1216,6 +1216,7 @@ fn items(
             }
             syn::Item::Trait(t) => {
                 let public = matches!(t.vis, syn::Visibility::Public(_));
+                file.trait_decls.push(trait_fact(t, scope));
                 for member in &t.items {
                     if let syn::TraitItem::Fn(f) = member {
                         let (mut fact, fn_syntax) = function(
@@ -1597,6 +1598,46 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
         &mut syntax,
     );
     (file, syntax)
+}
+
+/// What a trait declares besides its methods.
+fn trait_fact(t: &syn::ItemTrait, scope: usize) -> crate::facts::TraitFact {
+    use quote::ToTokens;
+    let text = |tokens: &dyn ToTokens| tidy(&tokens.to_token_stream().to_string());
+    let mut supertraits: Vec<String> = t
+        .supertraits
+        .iter()
+        .filter(|b| matches!(b, syn::TypeParamBound::Trait(_)))
+        .map(|b| text(b))
+        .collect();
+    if let Some(clause) = &t.generics.where_clause {
+        supertraits.extend(clause.predicates.iter().map(|p| text(p)));
+    }
+    crate::facts::TraitFact {
+        name: t.ident.unraw().to_string(),
+        scope,
+        params: t
+            .generics
+            .params
+            .iter()
+            .filter_map(|p| match p {
+                syn::GenericParam::Type(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Const(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Lifetime(_) => None,
+            })
+            .collect(),
+        supertraits,
+        associated: t
+            .items
+            .iter()
+            .filter_map(|i| match i {
+                syn::TraitItem::Type(a) => Some(a.ident.to_string()),
+                syn::TraitItem::Const(c) => Some(c.ident.to_string()),
+                _ => None,
+            })
+            .collect(),
+        marked: t.unsafety.is_some(),
+    }
 }
 
 #[cfg(test)]

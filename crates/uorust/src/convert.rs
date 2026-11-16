@@ -8,7 +8,7 @@ use quote::ToTokens;
 use syn::punctuated::Punctuated;
 
 use crate::ast::{
-    Alias, BinOp, Block, ExprAssign, ExprBinary, ExprBlock, ExprBreak, ExprCall, ExprCast,
+    Alias, BinOp, Block, Bound, ExprAssign, ExprBinary, ExprBlock, ExprBreak, ExprCall, ExprCast,
     ExprClosure, ExprField, ExprForLoop, ExprIf, ExprIndex, ExprLet, ExprLoop, ExprMacro,
     ExprMatch, ExprMethodCall, ExprOther, ExprReference, ExprStruct, ExprUnary, ExprWhile,
     FieldPat, FieldValue, FnArg, GenericArgument, GenericParam, Lit, Local, LocalInit, MacroArgs,
@@ -78,8 +78,14 @@ pub(crate) fn ty(t: &syn::Type) -> RustType {
     }
 }
 
-/// The kind of `dyn B` or `impl B`: a function type where the one bound is
-/// `Fn(A, ..) -> R`.
+/// The kind of `dyn B` or `impl B`: a function type where the one trait
+/// bound that is not a marker is `Fn(A, ..) -> R`. A trait object admits
+/// beside its one principal trait only auto traits (`Send`, `Sync`; the
+/// language rejects any other, E0225), which declare no method; in `impl
+/// B` a further bound only narrows which types may be passed. Either way a
+/// call of the value is the principal's `Fn::call`, whatever else the
+/// value implements, so the bounds beside an `Fn` bound are read as
+/// nothing.
 fn function(bounds: &Punctuated<syn::TypeParamBound, syn::Token![+]>) -> TypeKind {
     let traits: Vec<&syn::TraitBound> = bounds
         .iter()
@@ -88,12 +94,17 @@ fn function(bounds: &Punctuated<syn::TypeParamBound, syn::Token![+]>) -> TypeKin
             _ => None,
         })
         .collect();
-    let [one] = traits.as_slice() else {
-        return TypeKind::Other;
-    };
-    let Some(last) = one.path.segments.last() else {
-        return TypeKind::Other;
-    };
+    let mut functions = traits.iter().filter_map(|t| fn_bound(t));
+    match (functions.next(), functions.next()) {
+        (Some(kind), None) => kind,
+        _ => TypeKind::Other,
+    }
+}
+
+/// The function type a trait bound `Fn(A, ..) -> R` names, written by its
+/// one-segment name, and `None` for any other bound.
+fn fn_bound(one: &syn::TraitBound) -> Option<TypeKind> {
+    let last = one.path.segments.last()?;
     match (&last.arguments, one.path.segments.len()) {
         (syn::PathArguments::Parenthesized(p), 1) if last.ident == "Fn" => {
             let output = match &p.output {
@@ -103,13 +114,75 @@ fn function(bounds: &Punctuated<syn::TypeParamBound, syn::Token![+]>) -> TypeKin
                 },
                 syn::ReturnType::Type(_, t) => ty(t),
             };
-            TypeKind::Fn(
+            Some(TypeKind::Fn(
                 p.inputs.iter().map(|a| ty(&a.ty)).collect(),
                 Box::new(output),
-            )
+            ))
         }
-        _ => TypeKind::Other,
+        _ => None,
     }
+}
+
+/// The trait bounds of a signature's type parameters, from their own lists
+/// and from the `where` clause, in source order; and each `where`
+/// predicate whose bounded type is not one of the parameters, as written.
+/// A lifetime bound says how long a borrow lives, which a value of
+/// LexLean does not have: it is erased, as a lifetime parameter is.
+fn bounds(generics: &syn::Generics) -> (Vec<Bound>, Vec<String>) {
+    let params: Vec<String> = generics
+        .params
+        .iter()
+        .filter_map(|p| match p {
+            syn::GenericParam::Type(t) => Some(t.ident.to_string()),
+            _ => None,
+        })
+        .collect();
+    let mut out = Vec::new();
+    let mut unread = Vec::new();
+    let mut push = |param: &str, list: &Punctuated<syn::TypeParamBound, syn::Token![+]>| {
+        for b in list {
+            if let syn::TypeParamBound::Trait(t) = b {
+                out.push(Bound {
+                    param: param.to_string(),
+                    text: text(t),
+                    path: path(&t.path),
+                    maybe: t.maybe.is_some(),
+                    function: fn_bound(t).map(|kind| RustType {
+                        text: text(t),
+                        kind,
+                    }),
+                });
+            }
+        }
+    };
+    for p in &generics.params {
+        if let syn::GenericParam::Type(t) = p {
+            push(&t.ident.to_string(), &t.bounds);
+        }
+    }
+    if let Some(clause) = &generics.where_clause {
+        for predicate in &clause.predicates {
+            match predicate {
+                syn::WherePredicate::Type(pt) => {
+                    let named = match &pt.bounded_ty {
+                        syn::Type::Path(tp) if tp.qself.is_none() => tp
+                            .path
+                            .get_ident()
+                            .map(ToString::to_string)
+                            .filter(|n| params.contains(n)),
+                        _ => None,
+                    };
+                    match (named, &pt.lifetimes) {
+                        (Some(n), None) => push(&n, &pt.bounds),
+                        _ => unread.push(text(predicate)),
+                    }
+                }
+                syn::WherePredicate::Lifetime(_) => {}
+                other => unread.push(text(other)),
+            }
+        }
+    }
+    (out, unread)
 }
 
 /// A type alias: its type parameters and the type it stands for.
@@ -583,6 +656,7 @@ pub(crate) fn pat(p: &syn::Pat) -> Pat {
 
 /// A signature.
 pub(crate) fn signature(sig: &syn::Signature) -> Signature {
+    let read = bounds(&sig.generics);
     Signature {
         ident: sig.ident.to_string(),
         generics: sig
@@ -597,6 +671,8 @@ pub(crate) fn signature(sig: &syn::Signature) -> Signature {
                 syn::GenericParam::Const(c) => GenericParam::Const(c.ident.to_string()),
             })
             .collect(),
+        bounds: read.0,
+        unread_where: read.1,
         asyncness: sig.asyncness.is_some(),
         unsafety: matches!(sig.safety, syn::Safety::Unsafe(_)),
         variadic: sig.variadic.is_some(),

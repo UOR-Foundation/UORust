@@ -250,6 +250,8 @@ pub(crate) enum Decl {
     },
     Definition {
         name: String,
+        /// Its type parameters, each a LexLean name its types write `'T`.
+        type_parameters: Vec<String>,
         parameters: Vec<(String, String)>,
         result: String,
         body: Expr,
@@ -286,6 +288,7 @@ impl Decl {
     /// A record definition with no parameters.
     pub(crate) fn value(name: impl Into<String>, result: impl Into<String>, body: String) -> Self {
         Self::Definition {
+            type_parameters: Vec::new(),
             name: name.into(),
             parameters: Vec::new(),
             result: result.into(),
@@ -418,6 +421,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
         }
         Decl::Definition {
             name,
+            type_parameters,
             parameters,
             result,
             body,
@@ -437,20 +441,26 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 other => other,
             };
             let ps = params(parameters);
-            let mut flat = vec![
-                format!("name: {name}"),
+            // A definition of no type parameters writes none, as `lexlean
+            // fmt` leaves it.
+            let generic = (!type_parameters.is_empty())
+                .then(|| format!("type_parameters: [{}]", type_parameters.join(", ")));
+            let mut flat = vec![format!("name: {name}")];
+            flat.extend(generic.clone());
+            flat.extend([
                 format!("parameters: [{}]", ps.join(", ")),
                 format!("result: {result}"),
                 format!("body: {}", body.flat()),
-            ];
+            ]);
             let more = recursive.is_some() || termination.is_some() || mutual.is_some();
             let trail = usize::from(more || !axioms.is_empty());
-            let mut broken = vec![
-                format!("  name: {name}"),
+            let mut broken = vec![format!("  name: {name}")];
+            broken.extend(generic.map(|g| format!("  {g}")));
+            broken.extend([
                 list("parameters", &ps, 2, true),
                 format!("  result: {result}"),
                 format!("  body: {}", body.render_at(0, 8, trail)),
-            ];
+            ]);
             if !axioms.is_empty() {
                 flat.push(format!("axioms: [{}]", axioms.join(", ")));
                 broken.push(list("axioms", axioms, 2, more));
