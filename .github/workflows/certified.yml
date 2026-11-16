@@ -179,8 +179,8 @@ jobs:
     name: take the shards in and land the certified translator
     needs: [plan, export]
     # main lands on main; another branch only when dispatched with
-    # land_branch, and then only on that branch.
-    if: ${{ !cancelled() && needs.plan.result == 'success' && (github.ref == 'refs/heads/main' || inputs.land_branch) }}
+    # land_branch, and then only on that branch (never a tag).
+    if: ${{ !cancelled() && needs.plan.result == 'success' && (github.ref == 'refs/heads/main' || (inputs.land_branch && startsWith(github.ref, 'refs/heads/'))) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
@@ -210,6 +210,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           BRANCH: ${{ github.ref_name }}
+          # A conflict in crates/certified takes main's: the sync rewrites it.
+          TAKE_CERTIFIED: '1'
         # Status 2: the branch holds nothing main lacks, and nothing lands.
         run: scripts/ci/merge-main.sh || [[ $? == 2 ]]
       - name: Take the shards into crates/certified through the locked SDK

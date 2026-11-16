@@ -14,17 +14,22 @@
 # files of the very tree it gates and compares the ratchet with main, as the
 # pull request's own gate would.
 #
-# A conflict inside a file only the writers write (below) is taken as main
-# has it, the whole unit at once, since the writers run next and rewrite it;
-# any other conflict refuses, naming the files: a person merges main into the
-# branch. A merge that would bring main's workflow files onto the branch
-# refuses too: the workflow token cannot push a change to a workflow file.
+# A conflicted file that only the writers write, whole (below), is taken as
+# main has it, that file alone, since the writers run next and rewrite it;
+# every path that merged cleanly stays as merged. Any other conflict refuses,
+# naming the files: a person merges main into the branch. crates/certified and
+# its adapters are taken as main has them, whole, only for certified.yml's
+# land (TAKE_CERTIFIED=1), whose sync rewrites them next; nothing in `just
+# generate` does, so in generate.yml a conflict there refuses, and the
+# branch's land stays. A merge that would bring main's workflow files onto
+# the branch refuses too: the workflow token cannot push a change to a
+# workflow file.
 # Exit status: 0 merged (the state is in $(git rev-parse --git-dir)/branch-merge,
 # "MAIN HEAD"), 2 when the branch holds nothing main lacks, 1 on a refusal.
 set -euo pipefail
 branch=${BRANCH:?BRANCH is required}
 : "${GH_TOKEN:?GH_TOKEN is required}"
-if [[ $branch == main ]] || ! git check-ref-format --branch "$branch" >/dev/null; then
+if [[ $branch == main || $branch == refs/* ]] || ! git check-ref-format --branch "$branch" >/dev/null; then
   printf 'merge-main: not a pull request branch: %s\n' "$branch" >&2
   exit 1
 fi
@@ -45,38 +50,61 @@ if git merge-base --is-ancestor "$head" "$main"; then
   echo "merge-main: $branch ($head) holds nothing main ($main) lacks"
   exit 2
 fi
-# The writers' units: every file in each is written by a writer of `just
-# generate` or `just certified`, so main's version is as good a start as
-# the branch's.
-units=(
+# Files a writer of `just generate` writes whole (a path ending in / is every
+# file under it), so main's version is as good a start as the branch's. Not
+# here: what people also edit, or a writer only rewrites in part, such as
+# app/src/System.lex.tex (a writer rebinds only its digest), Routes, Guide and
+# Engine.
+written=(
   frontier.toml
   lift-verdicts.toml
   CONFORMANCE.md
   crates/uorust/tests/fixtures/mir-path/lift-verdicts.toml
-  crates/uorust/tests/fixtures/thermostat-prism
-  "crates/certified crates/uorust/src/certified.rs"
-  "app/src app/lexlean.lock"
+  crates/uorust/tests/fixtures/thermostat-prism/
+  app/lexlean.lock
+  app/src/Architecture.lex.tex
+  app/src/Design.lex.tex
+  app/src/Features.lex.tex
+  app/src/Security.lex.tex
+  app/src/Quality.lex.tex
+  app/src/Release.lex.tex
+  app/src/Cadence.lex.tex
+  app/src/Brand.lex.tex
+  app/src/Users.lex.tex
+  app/src/Foundation/Experience/V1/Model.lex.tex
 )
+certified=(crates/certified crates/uorust/src/certified.rs)
 git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
   merge -q --no-ff --no-commit "$head" >/dev/null 2>&1 || true
 if [[ ! -f $(git rev-parse --git-dir)/MERGE_HEAD ]]; then
   echo "merge-main: git did not start the merge of $head onto $main" >&2
   exit 1
 fi
+# Take main's side of one path (none, when main has none).
+take() {
+  git rm -r -q --cached --ignore-unmatch -- "$@"
+  rm -rf -- "$@"
+  for member in "$@"; do
+    if git cat-file -e "$main:$member" 2>/dev/null; then
+      git checkout -q "$main" -- "$member"
+    fi
+  done
+}
 taken=()
-for unit in "${units[@]}"; do
-  read -r -a members <<<"$unit"
-  if [[ -n $(git diff --name-only --diff-filter=U -- "${members[@]}") ]]; then
-    git rm -r -q --cached --ignore-unmatch -- "${members[@]}"
-    rm -rf -- "${members[@]}"
-    for member in "${members[@]}"; do
-      if git cat-file -e "$main:$member" 2>/dev/null; then
-        git checkout -q "$main" -- "$member"
-      fi
-    done
-    taken+=("$unit")
-  fi
-done
+if [[ ${TAKE_CERTIFIED:-} == 1 && -n $(git diff --name-only --diff-filter=U -- "${certified[@]}") ]]; then
+  take "${certified[@]}"
+  taken+=("${certified[@]}")
+fi
+unmerged=$(git diff --name-only --diff-filter=U)
+while IFS= read -r path; do
+  for file in "${written[@]}"; do
+    if [[ $path == "$file" || ($file == */ && $path == "$file"*) ]]; then
+      take "$path"
+      taken+=("$path")
+      break
+    fi
+  done
+done <<<"$unmerged"
 if ((${#taken[@]})); then
   echo "merge-main: taken as main has them, for the writers to rewrite: ${taken[*]}"
 fi
@@ -84,6 +112,9 @@ conflicts=$(git diff --name-only --diff-filter=U)
 if [[ -n $conflicts ]]; then
   git merge --abort
   printf '::error::%s conflicts with main outside the generated files; merge main into it by hand:\n%s\n' "$branch" "$conflicts" >&2
+  if grep -q -e '^crates/certified/' -e '^crates/uorust/src/certified.rs$' <<<"$conflicts"; then
+    printf '::error::or, for crates/certified alone, land the export again on the branch: gh workflow run certified.yml --ref %s -f land_branch=true\n' "$branch" >&2
+  fi
   exit 1
 fi
 workflows=$(git diff --cached --name-only "$head" -- .github/workflows)

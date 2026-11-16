@@ -26,8 +26,14 @@ if [[ ${BRANCH:-main} != main ]]; then
     echo "land: $BRANCH holds nothing main lacks; nothing lands"
     exit 0
   fi
-  exec scripts/ci/push-branch.sh "Rebuild the certified translator" \
-    "crates/certified crates/uorust/src/certified.rs" generate.yml
+  status=0
+  scripts/ci/push-branch.sh "Rebuild the certified translator" \
+    "crates/certified crates/uorust/src/certified.rs" generate.yml || status=$?
+  # Status 3: the branch moved, and that push has its own run.
+  if [[ $status == 3 ]]; then
+    exit 0
+  fi
+  exit "$status"
 fi
 took=0
 for attempt in $(seq 1 1000000); do

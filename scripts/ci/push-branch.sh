@@ -10,17 +10,23 @@
 # compares with main, as the pull request's own gate does. Nothing is
 # pushed when the merge's tree is the head's own and the head already holds
 # main: the pull request's own gate reads that tree. Nothing is pushed when
-# the branch moved past the head the writers ran on: that push started its
-# own run. The push is a fast-forward and never forced. A push made with the
-# workflow token starts no workflow, so the gate is dispatched for it here.
-# It prints "push: pushed <sha>" when it pushed.
+# the branch is no longer the head the writers ran on (moved on, or reset by
+# a person): that push started its own run. The push is a fast-forward of
+# that head, and the forge checks the branch is still that head as it
+# updates it (--force-with-lease names the head), so a branch reset to an
+# ancestor meanwhile is refused, never fast-forwarded back. A push made with
+# the workflow token starts no workflow, so the gate is dispatched for it
+# here.
+# Exit status: 0 and "push: pushed <sha>" when it pushed, 0 and "push:
+# nothing changed ..." when nothing was to push, 3 and "push: <branch> moved
+# ..." when the branch moved, 1 on a refusal.
 set -euo pipefail
 subject=$1
 read -r -a paths <<<"$2"
 shift 2
 branch=${BRANCH:?BRANCH is required}
 : "${GH_TOKEN:?GH_TOKEN is required}"
-if [[ $branch == main ]] || ! git check-ref-format --branch "$branch" >/dev/null; then
+if [[ $branch == main || $branch == refs/* ]] || ! git check-ref-format --branch "$branch" >/dev/null; then
   printf 'push: not a pull request branch: %s\n' "$branch" >&2
   exit 1
 fi
@@ -45,20 +51,25 @@ git -c user.name='github-actions[bot]' \
   commit -q -m "$subject" -m "Written by the ${GITHUB_WORKFLOW:-local} workflow on $branch at ${head}, merged onto main at ${main}."
 auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
 remote="https://github.com/${GITHUB_REPOSITORY:?}.git"
-now=$(git -c "http.extraheader=AUTHORIZATION: basic $auth" ls-remote "$remote" "refs/heads/$branch" | cut -f1)
-if [[ $now != "$head" ]]; then
-  echo "push: $branch moved from $head to $now; its own run regenerates"
-  exit 0
-fi
-if ! git -c "http.extraheader=AUTHORIZATION: basic $auth" push "$remote" "HEAD:refs/heads/$branch"; then
-  now=$(git -c "http.extraheader=AUTHORIZATION: basic $auth" ls-remote "$remote" "refs/heads/$branch" | cut -f1)
+# The branch's tip on the forge: the exact ref, never a longer one ending in it.
+tip() {
+  git -c "http.extraheader=AUTHORIZATION: basic $auth" ls-remote "$remote" "refs/heads/$branch" |
+    awk -v ref="refs/heads/$branch" '$2 == ref { print $1 }'
+}
+if ! git -c "http.extraheader=AUTHORIZATION: basic $auth" push --force-with-lease="refs/heads/$branch:$head" \
+  "$remote" "HEAD:refs/heads/$branch"; then
+  now=$(tip)
   if [[ $now != "$head" ]]; then
-    echo "push: $branch moved while pushing; its own run regenerates"
-    exit 0
+    echo "push: $branch moved from $head to ${now:-nothing}; its own run regenerates"
+    exit 3
   fi
   # The branch stands where it was, so the forge refused the push itself
-  # (a protected branch, a token without contents: write); git printed why.
+  # (a protected branch, a token without contents: write, or a workflow file
+  # the token may not push); git printed why.
   echo "::error::the push to $branch was refused with the branch unmoved" >&2
+  if [[ -n $(git diff --name-only "$main" HEAD -- .github/workflows) ]]; then
+    echo "::error::$branch itself changes workflow files, which this merge carries against main, its first parent: if git printed 'without \`workflows\` permission', the forge judges a merge by its first parent, and the workflow changes must reach main first" >&2
+  fi
   exit 1
 fi
 rm -f "$state"

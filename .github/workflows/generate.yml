@@ -27,8 +27,18 @@ on:
   schedule:
     - cron: '41 * * * *'
   # A pull request's branch, and a dispatch on one (certified.yml's land).
+  # GitHub runs no pull_request workflow while the pull request conflicts
+  # with main, as it does once main regenerates the files this pushed to the
+  # branch: a person then dispatches it on the branch, with export to hold
+  # the ratchet as a push does (gh workflow run generate.yml --ref <branch>
+  # -f export=true); the merge takes main's side of the generated files.
   pull_request:
   workflow_dispatch:
+    inputs:
+      export:
+        description: On a branch other than main, dispatch the certified export when the ratchet grows, as a pull request's push does.
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -38,9 +48,18 @@ permissions:
 # keeps one pending run per group). Cancelling in progress meant a steady
 # stream of pushes starved every run and nothing was ever regenerated.
 # A pull request's branch is a queue of its own (its pushes and the runs
-# dispatched on it), so it neither waits for main's nor replaces them.
+# dispatched on it), so it neither waits for main's nor replaces them. A
+# pull request the job skips (from a fork, into another base, Dependabot's)
+# gets a group of its own run, so it never replaces a branch's pending run.
 concurrency:
-  group: ${{ github.ref == 'refs/heads/main' && 'generate' || format('generate-branch-{0}', github.head_ref || github.ref_name) }}
+  group: >-
+    ${{ github.ref == 'refs/heads/main' && 'generate' ||
+    (github.event_name == 'pull_request' &&
+    (github.event.pull_request.head.repo.full_name != github.repository ||
+    github.event.pull_request.base.ref != 'main' ||
+    github.event.pull_request.user.login == 'dependabot[bot]')) &&
+    format('generate-skipped-{0}', github.run_id) ||
+    format('generate-branch-{0}', github.head_ref || github.ref_name) }}
   cancel-in-progress: false
 
 jobs:
@@ -81,14 +100,16 @@ jobs:
           scripts/ci/generate-loop.sh "Regenerate the generated files" \
             "$WRITTEN" \
             bootstrap.yml pages.yml certified.yml
-      # Never main: the scripts refuse BRANCH main, and push only to it.
+      # Never main: the scripts refuse BRANCH main, and push only to it. A
+      # dispatch on a tag runs neither step.
       - name: Run every writer on the branch merged onto main, and push the merge to the branch
-        if: github.ref != 'refs/heads/main'
+        if: github.ref != 'refs/heads/main' && (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/'))
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           BRANCH: ${{ github.head_ref || github.ref_name }}
           EVENT: ${{ github.event_name }}
+          EXPORT: ${{ inputs.export == true }}
         run: |
           scripts/ci/generate-branch.sh "Regenerate the generated files" \
             "$WRITTEN"
