@@ -279,23 +279,25 @@ impl Register {
                 }
             }
         }
-        register.stated(&doc).map_err(bad)?;
-        Ok(register)
+        match register.misstated(&doc) {
+            Some(how) => Err(bad(how)),
+            None => Ok(register),
+        }
     }
 
-    /// Whether the totals and the queue `doc` states are those of the rows:
-    /// the totals where it has a `[lift]` table, and the queue, row for row
-    /// in its ranked order, where it has that table or any `[[construct]]`
-    /// row. Both are derived data, so a register that states them otherwise
-    /// was not written from its rows; one that states neither is older than
-    /// both and is not asked for them.
-    fn stated(&self, doc: &toml::Value) -> Result<(), String> {
+    /// How the totals or the queue `doc` states differ from those of the
+    /// rows, if they do: the totals where it has a `[lift]` table, and the
+    /// queue, row for row in its ranked order, where it has that table or any
+    /// `[[construct]]` row. Both are derived data, so a register that states
+    /// them otherwise was not written from its rows; one that states neither
+    /// is older than both and is not asked for them.
+    fn misstated(&self, doc: &toml::Value) -> Option<String> {
         let totals = doc.get(LIFT);
         if let Some(stated) = totals {
             for (key, counted) in self.totals().fields() {
                 let found = stated.get(key).and_then(toml::Value::as_integer);
                 if found != i64::try_from(counted).ok() {
-                    return Err(format!(
+                    return Some(format!(
                         "[{LIFT}] states {key} = {} and the rows hold {counted}",
                         found.map_or_else(|| "nothing".to_string(), |n| n.to_string())
                     ));
@@ -304,12 +306,12 @@ impl Register {
         }
         let rows = doc.get(CONSTRUCT).and_then(toml::Value::as_array);
         if totals.is_none() && rows.is_none() {
-            return Ok(());
+            return None;
         }
         let stated: Vec<&toml::Value> = rows.into_iter().flatten().collect();
         let queue = self.queue();
         if stated.len() != queue.len() {
-            return Err(format!(
+            return Some(format!(
                 "the queue states {} [[{CONSTRUCT}]] rows and the rows give {}",
                 stated.len(),
                 queue.len()
@@ -322,7 +324,7 @@ impl Register {
                 && found.get(UNIT).and_then(toml::Value::as_integer)
                     == i64::try_from(expected.functions).ok();
             if !same {
-                return Err(format!(
+                return Some(format!(
                     "[[{CONSTRUCT}]] row {} of the queue is {found} and the rows give \
                      {} under {}, blocking {} {UNIT}",
                     i + 1,
@@ -332,7 +334,7 @@ impl Register {
                 ));
             }
         }
-        Ok(())
+        None
     }
 
     /// The totals: every function, and how many each table holds.
