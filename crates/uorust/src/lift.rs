@@ -1938,16 +1938,30 @@ pub(crate) struct Helper {
     pub(crate) termination: Option<(String, Vec<Decl>)>,
 }
 
-/// The first of `base1`, `base2`, .. that `taken` does not hold. Each
-/// taken name rules out at most one of the first `taken.len() + 1`
-/// numbers, so one of them is free.
+/// A name `base<k>` that `taken` does not hold: one past the largest `k`
+/// any taken `base<k>` spells, so a single pass over `taken` decides it
+/// (searching `base1`, `base2`, .. against every taken name cost the
+/// square of a function's helpers). A `k` past `u32::MAX` is passed over:
+/// the name made has a smaller number, so it is never that one; and `u32`
+/// keeps the successor's bound a literal the production target represents.
+/// Only a taken name of `u32::MAX` leaves no successor, and then the first
+/// free of `base1`, `base2`, .. is taken: each taken name rules out at most
+/// one of the first `taken.len() + 1`.
 fn first_free(base: &str, taken: &[String]) -> String {
     #[cfg(not(uorust_lift))]
     crate::certified::certified!(lift_first_free, base, taken);
-    (1..taken.len() + 2)
-        .map(|k| format!("{base}{k}"))
-        .find(|name| !taken.contains(name))
-        .unwrap_or_default()
+    let top = taken
+        .iter()
+        .filter_map(|name| name.strip_prefix(base))
+        .filter_map(|rest| rest.parse::<u32>().ok())
+        .fold(0_u32, |most, k| most.max(k));
+    match top.checked_add(1) {
+        Some(next) => format!("{base}{next}"),
+        None => (1..taken.len() + 2)
+            .map(|k| format!("{base}{k}"))
+            .find(|name| !taken.contains(name))
+            .unwrap_or_default(),
+    }
 }
 
 impl Ctx {

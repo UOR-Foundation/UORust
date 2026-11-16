@@ -482,14 +482,17 @@ fn package(
         .collect();
     let tests = test_files(&roots, &trees);
     for (path, rel_path, target, module, parsed) in &read {
-        let (file, file_syntax) = source(
-            parsed,
-            rel_path.clone(),
-            *target,
-            module.clone(),
-            &targets[*target].kind,
-            tests.contains(path),
-        );
+        let (file, file_syntax) = match parsed {
+            Ok(tree) => source(
+                tree,
+                rel_path.clone(),
+                *target,
+                module.clone(),
+                &targets[*target].kind,
+                tests.contains(path),
+            ),
+            Err(error) => unparsed(rel_path.clone(), *target, module.clone(), error),
+        };
         syntax.insert(file.rel.clone(), file_syntax);
         files.push(file);
     }
@@ -819,8 +822,28 @@ fn unread_types(items: &[syn::Item], out: &mut Vec<(String, &'static str)>) {
     }
 }
 
+/// The facts of a file `syn` does not parse: where it stands and why it is
+/// not read, with no item of it. The projection records the reason and the
+/// names resolved through the file stay open.
+fn unparsed(
+    rel: String,
+    target: usize,
+    module: String,
+    error: &syn::Error,
+) -> (SourceFile, FileSyntax) {
+    let at = error.span().start();
+    let file = SourceFile {
+        parse_error: Some(format!("{}:{}: {error}", rel, at.line)),
+        rel,
+        target,
+        module,
+        ..SourceFile::default()
+    };
+    (file, FileSyntax::default())
+}
+
 fn source(
-    parsed: &Result<syn::File, syn::Error>,
+    parsed: &syn::File,
     rel: String,
     target: usize,
     module: String,
@@ -834,14 +857,6 @@ fn source(
         ..SourceFile::default()
     };
     let mut syntax = FileSyntax::default();
-    let parsed = match parsed {
-        Ok(parsed) => parsed,
-        Err(error) => {
-            let at = error.span().start();
-            file.parse_error = Some(format!("{}:{}: {error}", rel, at.line));
-            return (file, syntax);
-        }
-    };
     let file_attrs = attrs(&parsed.attrs);
     file.doc = doc_of(&file_attrs);
     file.no_prelude = file_attrs.iter().any(|a| named(a, "no_implicit_prelude"));
@@ -1689,7 +1704,7 @@ mod tests {
     // binds, and the facts a trait implementation's method carries.
 
     fn facts(src: &str, test_file: bool) -> SourceFile {
-        let parsed = syn::parse_file(src).map_err(|e| panic!("parses: {e}"));
+        let parsed = syn::parse_file(src).unwrap_or_else(|e| panic!("parses: {e}"));
         let rel = "src/lib.rs".to_string();
         source(&parsed, rel, 0, String::new(), &TargetKind::Lib, test_file).0
     }

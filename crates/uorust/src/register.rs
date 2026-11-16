@@ -220,11 +220,32 @@ impl Register {
     /// row carries a κ that appears once, every function appears once, and
     /// every row that is not lifted is typed: a residue row its reason and
     /// detail, a foreign row the crate of its type, an effect row its effect.
-    /// Where it states its totals or its queue, they are those of its rows;
-    /// a register written before either existed states neither and is read
-    /// by its rows alone. A register that is not one is
-    /// [`UorustError::Malformed`] at `path`.
+    /// A register that is not one is [`UorustError::Malformed`] at `path`.
+    /// The totals and the queue a register states are derived from these
+    /// rows and are not read here: [`Register::read`] holds them to the rows.
     pub fn parse(path: &Path, text: &str) -> Result<Register, UorustError> {
+        Register::rows_of(path, text).map(|(register, _)| register)
+    }
+
+    /// Read a register as its generator wrote it: its rows as
+    /// [`Register::parse`] reads them, and, where it states its totals or its
+    /// queue, those of its rows. A register written before either existed
+    /// states neither and is read by its rows alone; one that states them
+    /// otherwise was not written from its rows and is
+    /// [`UorustError::Malformed`] at `path`.
+    pub fn read(path: &Path, text: &str) -> Result<Register, UorustError> {
+        let (register, doc) = Register::rows_of(path, text)?;
+        match register.misstated(&doc) {
+            Some(reason) => Err(UorustError::Malformed {
+                path: path.to_path_buf(),
+                reason,
+            }),
+            None => Ok(register),
+        }
+    }
+
+    /// The rows of a register and the document they were read from.
+    fn rows_of(path: &Path, text: &str) -> Result<(Register, toml::Value), UorustError> {
         let bad = |reason: String| UorustError::Malformed {
             path: path.to_path_buf(),
             reason,
@@ -279,23 +300,22 @@ impl Register {
                 }
             }
         }
-        register.stated(&doc).map_err(bad)?;
-        Ok(register)
+        Ok((register, doc))
     }
 
-    /// Whether the totals and the queue `doc` states are those of the rows:
-    /// the totals where it has a `[lift]` table, and the queue, row for row
-    /// in its ranked order, where it has that table or any `[[construct]]`
-    /// row. Both are derived data, so a register that states them otherwise
-    /// was not written from its rows; one that states neither is older than
-    /// both and is not asked for them.
-    fn stated(&self, doc: &toml::Value) -> Result<(), String> {
+    /// How the totals or the queue `doc` states differ from those of the
+    /// rows, if they do: the totals where it has a `[lift]` table, and the
+    /// queue, row for row in its ranked order, where it has that table or any
+    /// `[[construct]]` row. Both are derived data, so a register that states
+    /// them otherwise was not written from its rows; one that states neither
+    /// is older than both and is not asked for them.
+    fn misstated(&self, doc: &toml::Value) -> Option<String> {
         let totals = doc.get(LIFT);
         if let Some(stated) = totals {
             for (key, counted) in self.totals().fields() {
                 let found = stated.get(key).and_then(toml::Value::as_integer);
                 if found != i64::try_from(counted).ok() {
-                    return Err(format!(
+                    return Some(format!(
                         "[{LIFT}] states {key} = {} and the rows hold {counted}",
                         found.map_or_else(|| "nothing".to_string(), |n| n.to_string())
                     ));
@@ -304,12 +324,12 @@ impl Register {
         }
         let rows = doc.get(CONSTRUCT).and_then(toml::Value::as_array);
         if totals.is_none() && rows.is_none() {
-            return Ok(());
+            return None;
         }
         let stated: Vec<&toml::Value> = rows.into_iter().flatten().collect();
         let queue = self.queue();
         if stated.len() != queue.len() {
-            return Err(format!(
+            return Some(format!(
                 "the queue states {} [[{CONSTRUCT}]] rows and the rows give {}",
                 stated.len(),
                 queue.len()
@@ -322,7 +342,7 @@ impl Register {
                 && found.get(UNIT).and_then(toml::Value::as_integer)
                     == i64::try_from(expected.functions).ok();
             if !same {
-                return Err(format!(
+                return Some(format!(
                     "[[{CONSTRUCT}]] row {} of the queue is {found} and the rows give \
                      {} under {}, blocking {} {UNIT}",
                     i + 1,
@@ -332,7 +352,7 @@ impl Register {
                 ));
             }
         }
-        Ok(())
+        None
     }
 
     /// The totals: every function, and how many each table holds.
@@ -833,7 +853,7 @@ mod tests {
     fn a_register_whose_queue_is_not_its_rows_is_refused() {
         let at = Path::new("register.toml");
         let text = queued().to_text();
-        let refused = |planted: String| match Register::parse(at, &planted) {
+        let refused = |planted: String| match Register::read(at, &planted) {
             Err(UorustError::Malformed { reason, .. }) => reason,
             other => panic!("expected Malformed, got {other:?}"),
         };
@@ -873,7 +893,7 @@ mod tests {
         );
         let doc: toml::Value = headless.parse().expect("TOML");
         assert!(doc.get(LIFT).is_none() && doc.get(CONSTRUCT).is_some());
-        assert!(Register::parse(at, &headless).is_ok());
+        assert!(Register::read(at, &headless).is_ok());
         let reason = refused(headless.replace("functions = 3\n", "functions = 4\n"));
         assert!(reason.contains("row 1"), "{reason}");
     }

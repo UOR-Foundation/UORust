@@ -9,6 +9,15 @@
 # run re-decides the MIR path's translations (`uorust prove`) and publishes the
 # lift's honesty report: how many functions lifted, and the residue by the MIR
 # kind or obligation that stopped it.
+#
+# A pull request from a branch of this repository gets the same writers on
+# its branch (scripts/ci/generate-branch.sh): they run on the branch merged
+# onto main, and what changed is pushed to the branch as that merge (first
+# parent main), never to main or to a fork; the gate is dispatched on it, and
+# the certified export too when the translator's uncertified functions
+# outnumber main's (certified.yml lands on the branch and dispatches this
+# again on it). A pull request from a fork runs nothing here: its token is
+# read-only and the job's condition skips it.
 name: generate
 
 on:
@@ -17,7 +26,19 @@ on:
   # Hourly, so the brand follows uor.foundation without a push here.
   schedule:
     - cron: '41 * * * *'
+  # A pull request's branch, and a dispatch on one (certified.yml's land).
+  # GitHub runs no pull_request workflow while the pull request conflicts
+  # with main, as it does once main regenerates the files this pushed to the
+  # branch: a person then dispatches it on the branch, with export to hold
+  # the ratchet as a push does (gh workflow run generate.yml --ref <branch>
+  # -f export=true); the merge takes main's side of the generated files.
+  pull_request:
   workflow_dispatch:
+    inputs:
+      export:
+        description: On a branch other than main, dispatch the certified export when the ratchet grows, as a pull request's push does.
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -26,8 +47,19 @@ permissions:
 # and only the newest of the pushes that land meanwhile runs next (GitHub
 # keeps one pending run per group). Cancelling in progress meant a steady
 # stream of pushes starved every run and nothing was ever regenerated.
+# A pull request's branch is a queue of its own (its pushes and the runs
+# dispatched on it), so it neither waits for main's nor replaces them. A
+# pull request the job skips (from a fork, into another base, Dependabot's)
+# gets a group of its own run, so it never replaces a branch's pending run.
 concurrency:
-  group: generate
+  group: >-
+    ${{ github.ref == 'refs/heads/main' && 'generate' ||
+    (github.event_name == 'pull_request' &&
+    (github.event.pull_request.head.repo.full_name != github.repository ||
+    github.event.pull_request.base.ref != 'main' ||
+    github.event.pull_request.user.login == 'dependabot[bot]')) &&
+    format('generate-skipped-{0}', github.run_id) ||
+    format('generate-branch-{0}', github.head_ref || github.ref_name) }}
   cancel-in-progress: false
 
 jobs:
@@ -35,9 +67,19 @@ jobs:
     name: run every writer and push what changed
     runs-on: ubuntu-24.04
     timeout-minutes: 120
+    # Main; a pull request into main from a branch of this repository that a
+    # person (not Dependabot, whose token is read-only) opened; a dispatch.
+    if: >-
+      github.event_name != 'pull_request' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.user.login != 'dependabot[bot]')
     permissions:
       contents: write
       actions: write
+    env:
+      # What the writers write, which both steps commit.
+      WRITTEN: CONFORMANCE.md README.md app model brand crates xtask frontier.toml lift-verdicts.toml
     steps:
       - name: Check out the exact event revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -49,14 +91,28 @@ jobs:
       # main in this job (decided verdicts carry over), so what lands is
       # always the output of the tree it lands on and no push is lost.
       - name: Run every writer on main as it is, and push what changed
+        if: github.ref == 'refs/heads/main'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           GENERATE_BUDGET: '4200'
         run: |
           scripts/ci/generate-loop.sh "Regenerate the generated files" \
-            "CONFORMANCE.md README.md app model brand crates xtask frontier.toml lift-verdicts.toml" \
+            "$WRITTEN" \
             bootstrap.yml pages.yml certified.yml
+      # Never main: the scripts refuse BRANCH main, and push only to it. A
+      # dispatch on a tag runs neither step.
+      - name: Run every writer on the branch merged onto main, and push the merge to the branch
+        if: github.ref != 'refs/heads/main' && (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/'))
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+          EVENT: ${{ github.event_name }}
+          EXPORT: ${{ inputs.export == true }}
+        run: |
+          scripts/ci/generate-branch.sh "Regenerate the generated files" \
+            "$WRITTEN"
       - name: Publish the lift's honesty report
         if: always()
         shell: bash
