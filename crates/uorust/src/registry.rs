@@ -175,52 +175,8 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
             .env("RUSTC_BOOTSTRAP", "1")
             .env("CARGO_INCREMENTAL", "0"),
     )?;
-    let sysroot = String::from_utf8_lossy(&run(
-        "rustc --print sysroot",
-        Command::new("rustc").args([toolchain.as_str(), "--print", "sysroot"]),
-    )?)
-    .trim()
-    .to_string();
-    let cargo_home = std::env::var("CARGO_HOME")
-        .unwrap_or_else(|_| format!("{}/.cargo", std::env::var("HOME").unwrap_or_default()));
-    let own = format!("{}/", dir.display());
-    let registry = format!("{cargo_home}/registry/src/");
-    let mut files: Vec<PathBuf> = std::fs::read_dir(&mir)
-        .map_err(|e| tool("mir", e))?
-        .filter_map(Result::ok)
-        .map(|e| e.path())
-        .filter(|p| {
-            p.file_name()
-                .and_then(|n| n.to_str())
-                .is_some_and(|n| n.ends_with(".ElaborateBoxDerefs.before.mir"))
-        })
-        .collect();
-    files.sort();
-    let names: Vec<String> = files
-        .iter()
-        .map(|f| {
-            f.file_name()
-                .and_then(|n| n.to_str())
-                .unwrap_or_default()
-                .to_string()
-        })
-        .collect();
-    let items: std::collections::BTreeSet<&str> =
-        names.iter().filter_map(|n| dump_item(n)).collect();
-    for (file, name) in files.iter().zip(&names) {
-        let Some(item) = dump_item(name) else {
-            continue;
-        };
-        let module = dump_module(item, &items);
-        let text = std::fs::read_to_string(file).map_err(|e| tool("mir", e))?;
-        let text = text
-            .replace(&own, "")
-            .replace(&registry, "<registry>/")
-            .replace(&sysroot, "<sysroot>");
-        let dest = shards.join(&module);
-        std::fs::create_dir_all(&dest).map_err(|e| tool("mir", e))?;
-        std::fs::write(dest.join(name), text).map_err(|e| tool("mir", e))?;
-    }
+    let sysroot = crate::shard::sysroot(dir, Some(&toolchain))?;
+    crate::shard::lay_out(&mir, shards, &format!("{}/", dir.display()), &sysroot)?;
     Ok(())
 }
 
@@ -321,44 +277,9 @@ fn embed_crate(
         .map(|(k, d)| (k.as_str(), d.as_path()))
         .collect();
     let toolchain = format!("+{}", crate::mir::spec::TOOLCHAIN);
-    let rustc = |args: &[&str]| -> Result<String, UorustError> {
-        let out = run(
-            "rustc",
-            Command::new("rustc")
-                .arg(&toolchain)
-                .args(args)
-                .env("RUSTC_BOOTSTRAP", "1"),
-        )?;
-        Ok(String::from_utf8_lossy(&out).into_owned())
-    };
-    // The target the bodies were built for, as the library dumps state it.
-    let host = rustc(&["-vV"])?
-        .lines()
-        .find_map(|l| l.strip_prefix("host: "))
-        .map(str::to_string)
-        .ok_or_else(|| tool("rustc", "no host"))?;
-    let width = rustc(&["--print", "cfg", "--target", &host])?
-        .lines()
-        .find_map(|l| l.strip_prefix("target_pointer_width=\""))
-        .map(|w| w.trim_end_matches('"').to_string())
-        .ok_or_else(|| tool("rustc", "no pointer width"))?;
-    let spec: serde_json::Value = serde_json::from_str(&rustc(&[
-        "-Zunstable-options",
-        "--print",
-        "target-spec-json",
-        "--target",
-        &host,
-    ])?)
-    .map_err(|e| tool("rustc", e))?;
-    let layout = spec
-        .get("data-layout")
-        .and_then(serde_json::Value::as_str)
-        .ok_or_else(|| tool("rustc", "no data layout"))?;
-    std::fs::write(
-        shards.join("target.toml"),
-        format!("triple = \"{host}\"\npointer_width = {width}\ndata_layout = \"{layout}\"\n"),
-    )
-    .map_err(|e| tool("target.toml", e))?;
+    // The target the bodies were built for: the host, as the dump builds.
+    let host = crate::shard::host(dir, Some(&toolchain))?;
+    crate::shard::write_target(shards, &host, dir, Some(&toolchain))?;
     let root = work.join("root").join("library");
     std::fs::create_dir_all(&root).map_err(|e| tool("library", e))?;
     // A link's target is read from the link's own directory: each is named
@@ -797,79 +718,7 @@ fn stamp_differential(dir: &Path, theorems: &BTreeMap<String, usize>) -> Result<
 /// for its dump: each normal dependency, and theirs, by its library's crate
 /// name with the directory of its package.
 fn dependencies(dir: &Path, toolchain: &str) -> Result<Vec<(String, PathBuf)>, UorustError> {
-    let out = run(
-        "cargo metadata",
-        Command::new("cargo")
-            .args([toolchain, "metadata", "-q", "--format-version", "1"])
-            .current_dir(dir),
-    )?;
-    let meta: serde_json::Value = serde_json::from_slice(&out).map_err(|e| tool("metadata", e))?;
-    let str_of =
-        |v: &serde_json::Value, k: &str| v.get(k).and_then(|x| x.as_str()).map(str::to_string);
-    let nodes: std::collections::BTreeMap<String, &serde_json::Value> = meta
-        .pointer("/resolve/nodes")
-        .and_then(|n| n.as_array())
-        .into_iter()
-        .flatten()
-        .filter_map(|n| Some((str_of(n, "id")?, n)))
-        .collect();
-    let mut seen = std::collections::BTreeSet::new();
-    let mut next: Vec<String> = meta
-        .pointer("/resolve/root")
-        .and_then(|r| r.as_str())
-        .map(str::to_string)
-        .into_iter()
-        .collect();
-    let root = next.first().cloned().unwrap_or_default();
-    while let Some(id) = next.pop() {
-        let Some(node) = nodes.get(&id) else { continue };
-        for dep in node
-            .get("deps")
-            .and_then(|d| d.as_array())
-            .into_iter()
-            .flatten()
-        {
-            let normal = dep
-                .get("dep_kinds")
-                .and_then(|k| k.as_array())
-                .into_iter()
-                .flatten()
-                .any(|k| k.get("kind").is_some_and(serde_json::Value::is_null));
-            if let Some(pkg) = str_of(dep, "pkg").filter(|_| normal) {
-                if seen.insert(pkg.clone()) {
-                    next.push(pkg);
-                }
-            }
-        }
-    }
-    let mut found = Vec::new();
-    for package in meta
-        .get("packages")
-        .and_then(|p| p.as_array())
-        .into_iter()
-        .flatten()
-    {
-        let id = str_of(package, "id").unwrap_or_default();
-        if id == root || !seen.contains(&id) {
-            continue;
-        }
-        let manifest = str_of(package, "manifest_path").map(PathBuf::from);
-        let lib = package
-            .get("targets")
-            .and_then(|t| t.as_array())
-            .into_iter()
-            .flatten()
-            .find(|t| {
-                t.get("kind")
-                    .and_then(|k| k.as_array())
-                    .is_some_and(|k| k.iter().any(|k| k == "lib" || k == "rlib"))
-            })
-            .and_then(|t| str_of(t, "name"));
-        if let (Some(lib), Some(dir)) = (lib, manifest.as_deref().and_then(Path::parent)) {
-            found.push((lib.replace('-', "_"), dir.to_path_buf()));
-        }
-    }
-    Ok(found)
+    crate::shard::dependencies(dir, &[toolchain.to_string()], None)
 }
 
 /// Ask rustc for the layouts of the aggregates the crate's dumps print, as

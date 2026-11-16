@@ -309,6 +309,20 @@ struct MirArgs {
     /// The directory the dumps are written to.
     #[arg(long)]
     out: PathBuf,
+    /// Build with these features enabled (repeatable, or comma-separated),
+    /// as cargo takes them: a body under a feature the default build
+    /// leaves off exists only in a dump that enables it.
+    #[arg(long)]
+    features: Vec<String>,
+    /// Build without the default features.
+    #[arg(long)]
+    no_default_features: bool,
+    /// Build with every feature.
+    #[arg(long, conflicts_with_all = ["features", "no_default_features"])]
+    all_features: bool,
+    /// Build for this target triple; the host's when absent.
+    #[arg(long)]
+    target: Option<String>,
 }
 
 #[derive(clap::Args)]
@@ -354,9 +368,21 @@ struct LayoutsArgs {
 
 #[derive(clap::Args)]
 struct EmbedArgs {
-    /// The crate the dumps are of: `core`, `std`.
+    /// The crate the dumps are of: `core`, `std`, or with `--workspace` a
+    /// library crate of that workspace.
     #[arg(long = "crate")]
     krate: String,
+    /// The workspace the crate is a library of: `--mir` is then the
+    /// directory `uorust mir` dumped it into, whose `shards-<crate>` are
+    /// embedded, with the crate's declarations and those of the crates it
+    /// builds on mounted beside `--library`'s core, alloc and std.
+    #[arg(long, conflicts_with_all = ["link", "harness", "observed", "register", "shallow", "bridge"])]
+    workspace: Option<PathBuf>,
+    /// With `--workspace`: one project per module of the crate,
+    /// `<out>/<module>`, smallest module first, each linked against every
+    /// module, as one `--only <module>` run each.
+    #[arg(long, requires = "workspace", conflicts_with = "only")]
+    each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
     /// `uorust crate --link` links one.
     #[arg(long = "link")]
@@ -558,7 +584,20 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Mir(args) => {
-            uorust::mir::dump(&args.workspace, &args.out)?;
+            let config = uorust::shard::Configuration {
+                features: args
+                    .features
+                    .iter()
+                    .flat_map(|f| f.split(','))
+                    .map(str::trim)
+                    .filter(|f| !f.is_empty())
+                    .map(str::to_string)
+                    .collect(),
+                no_default_features: args.no_default_features,
+                all_features: args.all_features,
+                target: args.target.clone(),
+            };
+            uorust::mir::dump(&args.workspace, &args.out, &config)?;
             println!(
                 "dumped the MIR of {} into {}",
                 args.workspace.display(),
@@ -593,6 +632,44 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         Command::Layouts(args) => {
             let n = uorust::layouts::run(&args.krate, &args.mir, &args.copy, &args.check)?;
             eprintln!("layouts: {n} types laid out");
+            Ok(())
+        }
+        Command::Embed(args) if args.workspace.is_some() => {
+            let workspace = args
+                .workspace
+                .as_deref()
+                .unwrap_or(std::path::Path::new("."));
+            let done = uorust::shard::embed_workspace_crate(&uorust::shard::WorkspaceEmbed {
+                workspace,
+                krate: &args.krate,
+                dumps: &args.mir,
+                library: &args.library,
+                out: &args.out,
+                only: &args.only,
+                each_module: args.each_module,
+            })?;
+            for d in &done {
+                let c = &d.census;
+                match &d.module {
+                    Some(m) => println!(
+                        "embed: {} ({} files, {} bytes): {} bodies embedded, {} of them evaluable, {} bound; project in {}",
+                        m.name,
+                        m.files,
+                        m.bytes,
+                        c.bodies,
+                        c.evaluable,
+                        c.bound,
+                        args.out.join(&m.name).display()
+                    ),
+                    None => println!(
+                        "embed: {} bodies embedded, {} of them evaluable, {} bound; project in {}",
+                        c.bodies,
+                        c.evaluable,
+                        c.bound,
+                        args.out.display()
+                    ),
+                }
+            }
             Ok(())
         }
         Command::Embed(args) => {
