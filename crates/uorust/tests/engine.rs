@@ -447,7 +447,7 @@ fn the_widened_lift_covers_the_fixture_ue_11() {
         ("fanLabel", "(if (speed =? 0) then \"off\""),
         (
             "labelled",
-            "(prim join (cons value (cons \" \" (cons unit (nil String)))) \"\" : String)",
+            "(prim join (prim append (cons value (nil String)) (cons \" \" (cons unit (nil String))) : (List String)) \"\" : String)",
         ),
     ] {
         let decl = behavior
