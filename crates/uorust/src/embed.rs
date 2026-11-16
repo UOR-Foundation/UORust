@@ -4180,11 +4180,79 @@ pub fn embed(
     embed_with(krate, &[], library, dumps, out, only, outputs)
 }
 
+/// The stack one body on the path of the embedding's walks takes at most:
+/// a page, the unit a thread's stack is mapped in. The walks over the
+/// program (the fuel and instance walks follow calls) nest once per body
+/// on a call path; measured on a chain of calls in a debug build, a path of
+/// 5000 bodies was held by the main thread's 8 MiB and one of 10000 was
+/// not, so a level takes between about 840 and 1680 bytes, under a page.
+const BODY_STACK: usize = 4096;
+
+/// The bodies the dumps under `dir` hold, at any depth: each `// MIR for`
+/// header.
+fn bodies_under(dir: &Path) -> usize {
+    let mut count = 0;
+    let mut next = vec![dir.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for path in std::fs::read_dir(&d)
+            .into_iter()
+            .flatten()
+            .filter_map(Result::ok)
+            .map(|e| e.path())
+        {
+            if path.is_dir() {
+                next.push(path);
+            } else if let Ok(text) = std::fs::read_to_string(&path) {
+                count += text.matches("// MIR for `").count();
+            }
+        }
+    }
+    count
+}
+
+/// The stack the embedding of the dumps under `dumps`, with the libraries
+/// `link` linked, runs on: a [`BODY_STACK`] for each body the program can
+/// hold, since no call path of it is longer, and never less than the
+/// projection's own ([`crate::PROJECTION_STACK`]).
+fn embedding_stack(dumps: &Path, link: &[(&str, &Path)]) -> usize {
+    let bodies = bodies_under(dumps) + link.iter().map(|(_, d)| bodies_under(d)).sum::<usize>();
+    bodies
+        .saturating_add(1)
+        .saturating_mul(BODY_STACK)
+        .max(crate::PROJECTION_STACK)
+}
+
 /// [`embed`] for a crate that builds on the crates `builds_on` as well as
 /// core and alloc, each a directory of `library` by its name (a crate of
 /// crates.io and its dependencies): its bodies make values of their enums
-/// and structs, read from their declarations as core's are.
+/// and structs, read from their declarations as core's are. It runs on a
+/// thread whose stack is sized for the program ([`embedding_stack`]):
+/// the walks nest once per body on a call path, which the input, not the
+/// caller's thread, bounds.
 pub fn embed_with(
+    krate: &str,
+    builds_on: &[String],
+    library: &Path,
+    dumps: &Path,
+    out: &Path,
+    only: &[String],
+    outputs: &Outputs<'_>,
+) -> Result<EmbedCensus, UorustError> {
+    let stack = embedding_stack(dumps, outputs.link);
+    std::thread::scope(|scope| {
+        std::thread::Builder::new()
+            .stack_size(stack)
+            .spawn_scoped(scope, || {
+                embed_here(krate, builds_on, library, dumps, out, only, outputs)
+            })
+            .map_err(|e| UorustError::Tool(format!("the embedding's thread: {e}")))?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    })
+}
+
+/// [`embed_with`] on the thread it runs on.
+fn embed_here(
     krate: &str,
     builds_on: &[String],
     library: &Path,
@@ -6437,6 +6505,71 @@ fn embed_linked(
 
 #[cfg(test)]
 mod tests {
+    // lift: a deep call chain embeds whatever the caller's stack.
+
+    #[test]
+    fn lift_a_deep_call_chain_embeds_on_a_stack_sized_for_it() {
+        let work = std::env::temp_dir().join(format!("uorust-embed-deep-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let fixture =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core/library");
+        let library = work.join("library");
+        let source = library.join("m/src");
+        std::fs::create_dir_all(&source).unwrap();
+        for k in ["core", "alloc", "std"] {
+            if fixture.join(k).exists() {
+                std::os::unix::fs::symlink(fixture.join(k), library.join(k)).unwrap();
+            }
+        }
+        std::fs::write(
+            library.join("m/Cargo.toml"),
+            "[package]\nname = \"m\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        // A chain of calls `f0` -> `f1` -> ... as deep as the walks nest.
+        let depth = 600;
+        let dumps = work.join("dumps");
+        let module = dumps.join(crate::registry::ROOT_MODULE);
+        std::fs::create_dir_all(&module).unwrap();
+        std::fs::write(
+            dumps.join("target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let mut lib = String::new();
+        for i in 0..depth {
+            let call = if i + 1 < depth {
+                format!("_0 = f{}(copy _1) -> [return: bb1, unwind continue];\n    }}\n\n    bb1: {{\n        return;", i + 1)
+            } else {
+                "_0 = copy _1;\n        return;".to_string()
+            };
+            std::fs::write(
+                module.join(format!("m.f{i}.2-2-009.ElaborateBoxDerefs.before.mir")),
+                format!("// MIR for `f{i}` before ElaborateBoxDerefs\n\nfn f{i}(_1: u32) -> u32 {{\n    let mut _0: u32;\n\n    bb0: {{\n        {call}\n    }}\n}}\n"),
+            )
+            .unwrap();
+            lib.push_str(&format!("pub fn f{i}(x: u32) -> u32 {{ x }}\n"));
+        }
+        std::fs::write(source.join("lib.rs"), lib).unwrap();
+        // Called from a thread whose stack the chain's walks overflow.
+        let census = std::thread::Builder::new()
+            .stack_size(1 << 18)
+            .spawn({
+                let (library, dumps, out) = (library.clone(), dumps.clone(), work.join("out"));
+                move || super::embed("m", &library, &dumps, &out, &[], &super::Outputs::default())
+            })
+            .unwrap()
+            .join()
+            .unwrap()
+            .expect("the embedding");
+        assert_eq!(census.bodies, depth);
+        assert_eq!(
+            census.rows.iter().filter(|r| r.open.is_none()).count(),
+            depth
+        );
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
     #[test]

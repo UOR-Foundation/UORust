@@ -70,7 +70,7 @@ pub fn project_workspace(
 /// The stack [`project_workspace`] runs on: the 64 MiB that holds the
 /// projection of this workspace with its certified translator, as the
 /// evaluator's deep recursion is held (`mir::float`'s tests).
-const PROJECTION_STACK: usize = 1 << 26;
+pub(crate) const PROJECTION_STACK: usize = 1 << 26;
 
 fn project_workspace_here(
     root: &Path,
