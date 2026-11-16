@@ -636,8 +636,10 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
 /// empty) of `krate`, dumped in `config`: the configuration, the modules
 /// and their dump files, the libraries linked, then the census's counts:
 /// bodies embedded, evaluable, leaving a callee to a dictionary, and the
-/// calls that name a body, by where it is, and those left to a dictionary,
-/// by why ([`crate::embed::unlinked_reason`]).
+/// calls that name a body, by where it is; of those, the ones whose
+/// callee's reach is closed (`calls_closed`), and the open ones by where
+/// and why (`[[open]]`): a call linked is not a call closed; and those
+/// left to a dictionary, by why ([`crate::embed::unlinked_reason`]).
 pub fn render_record(
     krate: &str,
     config: &Configuration,
@@ -654,7 +656,8 @@ pub fn render_record(
          # (written by `uorust embed --workspace`; do not edit).\n\n\
          crate = {}\nmodules = [{}]\nfeatures = [{}]\ndefault_features = {}\nall_features = {}\n\
          target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\n\
-         embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n",
+         embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_closed = {}\n\
+         calls_unlinked = {}\n",
         quote(krate),
         list(&mut only.iter().map(String::as_str)),
         list(&mut config.features.iter().map(String::as_str)),
@@ -668,6 +671,7 @@ pub fn render_record(
         census.evaluable,
         census.bound,
         census.linked.values().sum::<usize>(),
+        census.closed.values().sum::<usize>(),
         census.unlinked.values().sum::<usize>(),
     );
     for (at, n) in &census.linked {
@@ -675,6 +679,15 @@ pub fn render_record(
             "\n[[linked]]\ninto = {}\ncalls = {n}\n",
             quote(at)
         ));
+    }
+    for (at, by) in &census.open {
+        for (why, n) in by {
+            out.push_str(&format!(
+                "\n[[open]]\ninto = {}\nreason = {}\ncalls = {n}\n",
+                quote(at),
+                quote(why)
+            ));
+        }
     }
     for (why, n) in &census.unlinked {
         out.push_str(&format!(
@@ -1105,7 +1118,7 @@ mod tests {
 
     #[test]
     fn join_an_unlinked_call_is_named_by_the_crate_its_path_names() {
-        let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &["fnv"]);
+        let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &[], &["fnv"]);
         assert_eq!(
             reason("core::num::<impl u32>::max"),
             "crate `core` is not linked"
@@ -1121,16 +1134,91 @@ mod tests {
         // A library linked: what it leaves is its, and a trait object's
         // method is chosen at run time whatever is linked.
         assert_eq!(
-            crate::embed::unlinked_reason("core::num::<impl u32>::max", "m", &["core"]),
+            crate::embed::unlinked_reason("core::num::<impl u32>::max", "m", &[], &["core"]),
             "a linked library leaves it to a dictionary"
         );
         assert_eq!(
             reason("<dyn core::fmt::Write as core::fmt::Write>::write_str"),
             "a trait object's method, chosen at run time"
         );
+        // refute-stdlink-7 item 5: behind a reference the self type is
+        // no trait object; core's `impl Iterator for &mut I` and `impl
+        // Display for &T` are static calls, core's to hold.
+        assert_eq!(
+            reason(
+                "<&mut dyn core::iter::Iterator<Item = u32> as core::iter::Iterator>::sum::<u32>"
+            ),
+            "crate `core` is not linked"
+        );
+        assert_eq!(
+            reason("<&dyn core::fmt::Display as core::fmt::Display>::fmt"),
+            "crate `core` is not linked"
+        );
+        assert_eq!(
+            crate::embed::unlinked_reason(
+                "<&mut dyn core::iter::Iterator<Item = u32> as core::iter::Iterator>::count",
+                "m",
+                &[],
+                &["core"]
+            ),
+            "a linked library leaves it to a dictionary"
+        );
         assert_eq!(
             reason("<&mut dyn Tr as Tr>::go"),
-            "a trait object's method, chosen at run time"
+            "the crate's own, with no body in the dump"
+        );
+        // refute-stdlink-7 item 7: the crate's own paths print from its
+        // modules; a library's blanket impl or default body for its own
+        // type is the trait's crate's.
+        let in_module =
+            |n: &str, linked: &[&str]| crate::embed::unlinked_reason(n, "m", &["blanket"], linked);
+        assert_eq!(
+            in_module("<blanket::Mine as alloc::string::ToString>::to_string", &[]),
+            "crate `alloc` is not linked"
+        );
+        assert_eq!(
+            in_module(
+                "<blanket::Countdown as core::iter::Iterator>::sum::<u32>",
+                &["core"]
+            ),
+            "a linked library leaves it to a dictionary"
+        );
+        assert_eq!(
+            in_module("blanket::helper", &["core"]),
+            "the crate's own, with no body in the dump"
+        );
+        assert_eq!(
+            in_module("<blanket::Mine as blanket::Own>::go", &["core"]),
+            "the crate's own, with no body in the dump"
+        );
+        // refute-stdlink-7 item 8: an impl of a core trait for a primitive
+        // whose argument is std's type can be held by std alone.
+        assert_eq!(
+            crate::embed::unlinked_reason(
+                "<str as core::convert::AsRef<std::path::Path>>::as_ref",
+                "m",
+                &[],
+                &["core", "alloc"]
+            ),
+            "crate `std` is not linked"
+        );
+        assert_eq!(
+            crate::embed::unlinked_reason(
+                "<&alloc::string::String as core::convert::AsRef<std::ffi::OsStr>>::as_ref",
+                "m",
+                &[],
+                &["core", "alloc"]
+            ),
+            "crate `std` is not linked"
+        );
+        assert_eq!(
+            crate::embed::unlinked_reason(
+                "<alloc::vec::Vec<u8> as core::clone::Clone>::clone",
+                "m",
+                &[],
+                &["core"]
+            ),
+            "crate `alloc` is not linked"
         );
         assert_eq!(reason("<T as Trait>::go"), "a generic parameter's bound");
         assert_eq!(reason("<&T as Trait>::go"), "a generic parameter's bound");
@@ -1176,7 +1264,7 @@ mod tests {
         join_write(
             &library.join("alloc/src"),
             "num.rs",
-            "pub fn double(a: u32, b: u32) -> u32 {\n    a\n}\npub fn triple(a: u32, b: u32) -> u32 {\n    a\n}\n",
+            "pub fn double(a: u32, b: u32) -> u32 {\n    a\n}\npub fn triple(a: u32, b: u32) -> u32 {\n    a\n}\npub fn quad(a: u32, b: u32) -> u32 {\n    a\n}\n",
         );
         join_write(
             &library.join("std/src"),
@@ -1189,6 +1277,16 @@ mod tests {
             &alloc.join("num"),
             "alloc.num-double.2-2-009.ElaborateBoxDerefs.before.mir",
             &join_body("num::double", "_0 = copy _1;\n        goto -> bb1;"),
+        );
+        // A body of the library that leaves a call of its own to a
+        // dictionary: a call linked to it is not closed.
+        join_write(
+            &alloc.join("num"),
+            "alloc.num-quad.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body(
+                "num::quad",
+                "_0 = elsewhere::gone(copy _1, copy _2) -> [return: bb1, unwind continue];",
+            ),
         );
         join_write(&alloc, TARGET, target);
         let ws = work.join("ws");
@@ -1206,7 +1304,7 @@ mod tests {
         join_write(
             &ws.join("sl/src"),
             "inner.rs",
-            "pub fn top(a: u32, b: u32) -> u32 {\n    std::num::triple(std::num::double(a, b), b)\n}\n",
+            "pub fn top(a: u32, b: u32) -> u32 {\n    std::num::triple(std::num::double(a, b), std::num::quad(a, b))\n}\n",
         );
         let dumps = work.join("dumps");
         let shards = dumps.join(format!("{SHARDS}sl"));
@@ -1215,7 +1313,7 @@ mod tests {
             "sl.inner-top.2-2-009.ElaborateBoxDerefs.before.mir",
             // `triple` has no body in alloc's dumps: left to a dictionary,
             // and named by the library that defines it, not by std.
-            "// MIR for `inner::top` before ElaborateBoxDerefs\n\nfn inner::top(_1: u32, _2: u32) -> u32 {\n    let mut _0: u32;\n    let mut _3: u32;\n\n    bb0: {\n        _3 = std::num::double(copy _1, copy _2) -> [return: bb1, unwind continue];\n    }\n\n    bb1: {\n        _0 = std::num::triple(copy _3, copy _2) -> [return: bb2, unwind continue];\n    }\n\n    bb2: {\n        return;\n    }\n}\n",
+            "// MIR for `inner::top` before ElaborateBoxDerefs\n\nfn inner::top(_1: u32, _2: u32) -> u32 {\n    let mut _0: u32;\n    let mut _3: u32;\n    let mut _4: u32;\n\n    bb0: {\n        _3 = std::num::double(copy _1, copy _2) -> [return: bb1, unwind continue];\n    }\n\n    bb1: {\n        _4 = std::num::quad(copy _1, copy _2) -> [return: bb2, unwind continue];\n    }\n\n    bb2: {\n        _0 = std::num::triple(copy _3, copy _4) -> [return: bb3, unwind continue];\n    }\n\n    bb3: {\n        return;\n    }\n}\n",
         );
         join_write(&shards, TARGET, target);
         // Its own crate name: the embedding mounts its sources under a
@@ -1241,11 +1339,66 @@ mod tests {
         assert_eq!((alone.bodies, alone.bound), (1, 1), "{record}");
         assert_eq!(
             alone.unlinked.get("crate `std` is not linked"),
-            Some(&2),
+            Some(&3),
             "{record}"
         );
+        // refute-stdlink-7 item 1: a library dumped for another target
+        // (the workspace dumped for a 32-bit target, the library for the
+        // 64-bit host) is refused, not linked.
+        let wide = work.join("alloc-wide");
+        join_write(
+            &wide.join("num"),
+            "alloc.num-double.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body("num::double", "_0 = copy _1;\n        goto -> bb1;"),
+        );
+        join_write(&wide, TARGET, target);
+        let narrow = "triple = \"wasm32-unknown-unknown\"\npointer_width = 32\n";
+        join_write(&shards, TARGET, narrow);
+        let refused = embed_workspace_crate(&WorkspaceEmbed {
+            workspace: &ws,
+            krate: "sl",
+            dumps: &dumps,
+            library: &library,
+            out: &work.join("wasm"),
+            only: &["inner".to_string()],
+            each_module: false,
+            link: &[("alloc".to_string(), wide.clone())],
+        });
+        let Err(refusal) = refused else {
+            panic!("a library of another target was linked");
+        };
+        let why = format!("{refusal:?}");
+        assert!(
+            why.contains("alloc") && why.contains("triple") && why.contains("wasm32"),
+            "{why}"
+        );
+        join_write(&wide, TARGET, narrow);
+        assert!(crate::embed::other_target(&shards, &wide).is_none());
+        join_write(
+            &wide,
+            TARGET,
+            "triple = \"wasm32-unknown-unknown\"\npointer_width = 32\ndata_layout = \"E\"\n",
+        );
+        assert!(
+            crate::embed::other_target(&shards, &wide).is_some_and(|w| w.contains("data_layout"))
+        );
+        join_write(&shards, TARGET, target);
         let (linked, record) = embed("linked", &[("alloc".to_string(), alloc)]);
-        assert_eq!(linked.linked.get("alloc"), Some(&1), "{record}");
+        assert_eq!(linked.linked.get("alloc"), Some(&2), "{record}");
+        // refute-stdlink-7 item 6: of the two calls linked into alloc, the
+        // one whose body leaves a call to a dictionary is open, named by
+        // the library that body is alloc's, not as the crate's.
+        assert_eq!(linked.closed.get("alloc"), Some(&1), "{record}");
+        assert!(
+            record.contains("calls_linked = 2\ncalls_closed = 1\n"),
+            "{record}"
+        );
+        assert!(
+            record.contains(
+                "[[open]]\ninto = \"alloc\"\nreason = \"leaves a callee of alloc to a dictionary\"\ncalls = 1\n"
+            ),
+            "{record}"
+        );
         assert_eq!(
             linked
                 .unlinked

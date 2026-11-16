@@ -33,13 +33,70 @@ pub const RECORD: &str = "library-mir.toml";
 
 /// The text that opens the key's preimage: the protocol of [`key`], so
 /// that a change of what the key covers changes every key.
-const PROTOCOL: &str = "uorust/library-mir/1";
+const PROTOCOL: &str = "uorust/library-mir/2";
 
 /// The code that decides a dump's bytes besides the inputs [`key`] names:
-/// this module's steps and the layouts it asks rustc for. A change of
-/// either changes the key, as `scripts/mir/ledger.py mir-key` digests
-/// `dump-lib.sh` and `layouts.rs`.
-const CODE: [&str; 2] = [include_str!("library.rs"), include_str!("layouts.rs")];
+/// every source file of the tool, and the lock file that fixes the
+/// versions of the crates it is built with. The dump's path reaches far
+/// past this module: `target.toml` is written by `shard::write_target`,
+/// and `layouts.json` by `layouts::run`, which reads the dumps through
+/// `embed` and `mir` (`instance_types`, `structs`, `core_decls`,
+/// `substitute`), and those reach most of the crate. A list of the files
+/// it reaches would have to follow every call to stay true; the whole
+/// source cannot miss one. A file of the crate this list does not name
+/// fails `stdlink_the_code_digest_names_every_source_file_of_the_tool`.
+const CODE: [(&str, &str); 50] = [
+    ("src/admit.rs", include_str!("admit.rs")),
+    ("src/assets.rs", include_str!("assets.rs")),
+    ("src/ast.rs", include_str!("ast.rs")),
+    ("src/bridge.rs", include_str!("bridge.rs")),
+    ("src/certified.rs", include_str!("certified.rs")),
+    ("src/certify.rs", include_str!("certify.rs")),
+    ("src/certify/cases.rs", include_str!("certify/cases.rs")),
+    ("src/certify/profile.rs", include_str!("certify/profile.rs")),
+    ("src/convert.rs", include_str!("convert.rs")),
+    ("src/embed.rs", include_str!("embed.rs")),
+    ("src/error.rs", include_str!("error.rs")),
+    ("src/expand.rs", include_str!("expand.rs")),
+    ("src/facts.rs", include_str!("facts.rs")),
+    ("src/ingest.rs", include_str!("ingest.rs")),
+    ("src/layouts.rs", include_str!("layouts.rs")),
+    ("src/lex.rs", include_str!("lex.rs")),
+    ("src/lib.rs", include_str!("lib.rs")),
+    ("src/library.rs", include_str!("library.rs")),
+    ("src/lift.rs", include_str!("lift.rs")),
+    ("src/main.rs", include_str!("main.rs")),
+    ("src/mir/core.rs", include_str!("mir/core.rs")),
+    ("src/mir/coverage.rs", include_str!("mir/coverage.rs")),
+    ("src/mir/float.rs", include_str!("mir/float.rs")),
+    ("src/mir/generate.rs", include_str!("mir/generate.rs")),
+    ("src/mir/int.rs", include_str!("mir/int.rs")),
+    ("src/mir/intrinsic.rs", include_str!("mir/intrinsic.rs")),
+    ("src/mir/ir.rs", include_str!("mir/ir.rs")),
+    ("src/mir/layout.rs", include_str!("mir/layout.rs")),
+    ("src/mir/link.rs", include_str!("mir/link.rs")),
+    ("src/mir/lower.rs", include_str!("mir/lower.rs")),
+    ("src/mir/memory.rs", include_str!("mir/memory.rs")),
+    ("src/mir/mod.rs", include_str!("mir/mod.rs")),
+    ("src/mir/parse.rs", include_str!("mir/parse.rs")),
+    ("src/mir/prove.rs", include_str!("mir/prove.rs")),
+    ("src/mir/site.rs", include_str!("mir/site.rs")),
+    ("src/mir/spec.rs", include_str!("mir/spec.rs")),
+    ("src/mir/std_vectors.rs", include_str!("mir/std_vectors.rs")),
+    ("src/mir/stdlib.rs", include_str!("mir/stdlib.rs")),
+    ("src/mir/trips.rs", include_str!("mir/trips.rs")),
+    ("src/mir/verdict.rs", include_str!("mir/verdict.rs")),
+    ("src/names.rs", include_str!("names.rs")),
+    ("src/order.rs", include_str!("order.rs")),
+    ("src/project.rs", include_str!("project.rs")),
+    ("src/queue.rs", include_str!("queue.rs")),
+    ("src/register.rs", include_str!("register.rs")),
+    ("src/registry.rs", include_str!("registry.rs")),
+    ("src/route.rs", include_str!("route.rs")),
+    ("src/shard.rs", include_str!("shard.rs")),
+    ("src/wf.rs", include_str!("wf.rs")),
+    ("Cargo.lock", include_str!("../../../Cargo.lock")),
+];
 
 /// The flags every dump is built with: spans printed (a call's site is the
 /// location `Location::caller` reports), overflow checks on and debug
@@ -84,19 +141,42 @@ pub struct Inputs {
     pub source_url: String,
     /// Its SHA-256, as the channel manifest records it.
     pub source_sha256: String,
-    /// The host triple the library is built for.
+    /// The triple the library is built for (the host's unless asked).
     pub triple: String,
     /// That target's data layout, as its specification states it.
     pub data_layout: String,
 }
 
-/// The key of a dump of `inputs`: the SHA-256 of [`PROTOCOL`], the crate,
-/// the toolchain, the rust-src digest, the triple, the data layout, the
-/// flags, and the digest of [`CODE`], each ended by a NUL. Two dumps of one
-/// key hold the same bytes; the modules asked for are the record's, not the
-/// key's (a dump of every module is the one a link reads).
-pub fn key(inputs: &Inputs) -> String {
-    let code = sha256_hex(CODE.concat().as_bytes());
+/// The modules a dump of `only` holds, as [`key`] names them: every
+/// module of the crate's tree (`*`, a function of the rust-src digest)
+/// when `only` is empty, else the modules asked for, sorted, each once.
+pub fn selection(only: &[String]) -> String {
+    if only.is_empty() {
+        return "*".to_string();
+    }
+    let set: BTreeSet<&str> = only.iter().map(String::as_str).collect();
+    set.into_iter().collect::<Vec<_>>().join(",")
+}
+
+/// The key of a dump of `inputs` holding the modules `only` asks for: the
+/// SHA-256 of [`PROTOCOL`], the crate, the toolchain, the rust-src digest,
+/// the triple, the data layout, the flags, the module [`selection`], and
+/// the digest of [`CODE`] (each file's path and text), each ended by a
+/// NUL. Two dumps of one key hold the same bytes: the library's text is a
+/// function of the archive's digest ([`source`] unpacks it anew from an
+/// archive checked against that digest), the target's of the triple and
+/// its layout, which modules are kept of the selection, and every step
+/// of the tool of [`CODE`].
+pub fn key(inputs: &Inputs, only: &[String]) -> String {
+    let mut code = String::new();
+    for (path, text) in CODE {
+        code.push_str(path);
+        code.push('\0');
+        code.push_str(&sha256_hex(text.as_bytes()));
+        code.push('\n');
+    }
+    let code = sha256_hex(code.as_bytes());
+    let modules = selection(only);
     let parts = [
         PROTOCOL,
         &inputs.krate,
@@ -106,6 +186,7 @@ pub fn key(inputs: &Inputs) -> String {
         &inputs.data_layout,
         FLAGS,
         CHECK_FLAGS,
+        &modules,
         &code,
     ];
     let mut text = String::new();
@@ -143,9 +224,13 @@ fn source_of(sysroot: &Path) -> Result<(String, String), UorustError> {
     Ok((field("xz_url")?, field("xz_hash")?))
 }
 
-/// The [`Inputs`] of a dump of `krate` on the pinned toolchain, read from
-/// the toolchain alone (run in `dir`).
-pub fn inputs(krate: &str, dir: &Path) -> Result<Inputs, UorustError> {
+/// The [`Inputs`] of a dump of `krate` on the pinned toolchain for
+/// `target` (the host when none), read from the toolchain alone (run in
+/// `dir`). A library is compiled for one target: its `cfg`s choose its
+/// items (`impl usize` is `u32`'s width on a 32-bit target), so a dump
+/// is linked only into a program of the same triple and data layout
+/// (`embed` refuses another).
+pub fn inputs(krate: &str, dir: &Path, target: Option<&str>) -> Result<Inputs, UorustError> {
     if !LIBRARIES.contains(&krate) {
         return Err(tool(
             "uorust library-mir",
@@ -155,7 +240,10 @@ pub fn inputs(krate: &str, dir: &Path) -> Result<Inputs, UorustError> {
     let toolchain = format!("+{}", crate::mir::TOOLCHAIN);
     let sysroot = crate::shard::sysroot(dir, Some(&toolchain))?;
     let (source_url, source_sha256) = source_of(Path::new(&sysroot))?;
-    let triple = crate::shard::host(dir, Some(&toolchain))?;
+    let triple = match target {
+        Some(t) => t.to_string(),
+        None => crate::shard::host(dir, Some(&toolchain))?,
+    };
     let spec: serde_json::Value = serde_json::from_str(&output(
         "rustc --print target-spec-json",
         Command::new("rustc")
@@ -181,53 +269,60 @@ pub fn inputs(krate: &str, dir: &Path) -> Result<Inputs, UorustError> {
     })
 }
 
-/// The file in a source cache that names the archive digest its
-/// `library` was unpacked from.
-const SOURCE_DIGEST: &str = "rust-src.sha256";
+/// The archive a source cache keeps: rust-src as its channel manifest
+/// names it, checked against the manifest's digest each time it is read.
+const SOURCE_ARCHIVE: &str = "rust-src.tar.xz";
 
-/// rust-src's `library` directory under `cache`, unpacked from the archive
-/// `inputs` names and taken only at its digest: a cache that records
-/// another digest, or none, is fetched again.
+/// rust-src's `library` directory under `cache`, unpacked anew from the
+/// archive `inputs` names, every time: the archive kept in `cache` is
+/// taken only while its bytes hash to the manifest's digest (else it is
+/// fetched again and checked), and a `library` tree already in `cache` is
+/// never reused, so that no file of it can differ from the archive's (a
+/// label beside an unpacked tree says nothing of the tree).
 pub fn source(inputs: &Inputs, cache: &Path) -> Result<PathBuf, UorustError> {
-    let library = cache.join("library");
-    let recorded = std::fs::read_to_string(cache.join(SOURCE_DIGEST)).unwrap_or_default();
-    if recorded.trim() == inputs.source_sha256 && library.join(&inputs.krate).is_dir() {
-        return Ok(library);
-    }
-    let _ = std::fs::remove_dir_all(cache);
     std::fs::create_dir_all(cache).map_err(|e| io(cache, e))?;
-    let archive = cache.join("rust-src.tar.xz");
-    output(
-        "rust-src fetch",
-        Command::new("curl")
-            .args(["-sSfL", "-o"])
-            .arg(&archive)
-            .arg(&inputs.source_url),
-    )?;
-    let bytes = std::fs::read(&archive).map_err(|e| io(&archive, e))?;
-    let found = sha256_hex(&bytes);
-    drop(bytes);
-    if found != inputs.source_sha256 {
-        let _ = std::fs::remove_dir_all(cache);
-        return Err(tool(
-            "rust-src fetch",
-            format!(
-                "{} is {found}, the channel manifest records {}",
-                inputs.source_url, inputs.source_sha256
-            ),
-        ));
+    let library = cache.join("library");
+    if library.exists() {
+        std::fs::remove_dir_all(&library).map_err(|e| io(&library, e))?;
     }
+    let archive = cache.join(SOURCE_ARCHIVE);
+    let held = std::fs::read(&archive).is_ok_and(|b| sha256_hex(&b) == inputs.source_sha256);
+    if !held {
+        let _ = std::fs::remove_file(&archive);
+        output(
+            "rust-src fetch",
+            Command::new("curl")
+                .args(["-sSfL", "-o"])
+                .arg(&archive)
+                .arg(&inputs.source_url),
+        )?;
+        let bytes = std::fs::read(&archive).map_err(|e| io(&archive, e))?;
+        let found = sha256_hex(&bytes);
+        drop(bytes);
+        if found != inputs.source_sha256 {
+            let _ = std::fs::remove_file(&archive);
+            return Err(tool(
+                "rust-src fetch",
+                format!(
+                    "{} is {found}, the channel manifest records {}",
+                    inputs.source_url, inputs.source_sha256
+                ),
+            ));
+        }
+    }
+    let unpack = cache.join("unpack");
+    let _ = std::fs::remove_dir_all(&unpack);
+    std::fs::create_dir_all(&unpack).map_err(|e| io(&unpack, e))?;
     output(
         "tar",
         Command::new("tar")
             .arg("-xJf")
             .arg(&archive)
             .arg("-C")
-            .arg(cache),
+            .arg(&unpack),
     )?;
-    std::fs::remove_file(&archive).map_err(|e| io(&archive, e))?;
     // The archive holds `rust-src-<v>/rust-src/lib/rustlib/src/rust/library`.
-    let unpacked = crate::embed::dir_paths(cache)?
+    let unpacked = crate::embed::dir_paths(&unpack)?
         .into_iter()
         .find(|p| {
             p.file_name()
@@ -237,9 +332,7 @@ pub fn source(inputs: &Inputs, cache: &Path) -> Result<PathBuf, UorustError> {
         .ok_or_else(|| tool("rust-src", "the archive holds no rust-src-* directory"))?;
     let from = unpacked.join("rust-src/lib/rustlib/src/rust/library");
     std::fs::rename(&from, &library).map_err(|e| io(&from, e))?;
-    std::fs::remove_dir_all(&unpacked).map_err(|e| io(&unpacked, e))?;
-    let file = cache.join(SOURCE_DIGEST);
-    std::fs::write(&file, format!("{}\n", inputs.source_sha256)).map_err(|e| io(&file, e))?;
+    std::fs::remove_dir_all(&unpack).map_err(|e| io(&unpack, e))?;
     Ok(library)
 }
 
@@ -389,20 +482,33 @@ pub struct Kept {
     pub bytes: u64,
 }
 
-/// [`RECORD`] of a dump of `inputs`'s crate: its key, its inputs, the
-/// modules kept, and the digest of what was written.
-pub fn render_record(inputs: &Inputs, kept: &[Kept], layouts: usize, digest: &str) -> String {
+/// [`RECORD`] of a dump of `inputs`'s crate holding the modules `only`
+/// asks for: its key, its inputs, the module selection, the digest of the
+/// rust-src tree it was built from (`source_tree`, [`digest`] of the
+/// unpacked `library`: what an embedding's `--library` is checked
+/// against), the modules kept, and the digest of what was written.
+pub fn render_record(
+    inputs: &Inputs,
+    only: &[String],
+    kept: &[Kept],
+    layouts: usize,
+    digest: &str,
+    source_tree: &str,
+) -> String {
     let quote = |s: &str| toml::Value::String(s.to_string()).to_string();
     let mut out = format!(
         "# The MIR of a library of the pinned toolchain's rust-src\n\
          # (written by `uorust library-mir`; do not edit).\n\n\
          crate = {}\nkey = {}\ntoolchain = {}\nsource_url = {}\nsource_sha256 = {}\n\
+         source_tree = {}\nselection = {}\n\
          triple = {}\ndata_layout = {}\nlayouts = {layouts}\nfiles = {}\nbytes = {}\ndigest = {}\n",
         quote(&inputs.krate),
-        quote(&key(inputs)),
+        quote(&key(inputs, only)),
         quote(&inputs.toolchain),
         quote(&inputs.source_url),
         quote(&inputs.source_sha256),
+        quote(source_tree),
+        quote(&selection(only)),
         quote(&inputs.triple),
         quote(&inputs.data_layout),
         kept.iter().map(|k| k.files).sum::<usize>(),
@@ -447,20 +553,23 @@ pub struct Dumped {
     pub layouts: usize,
 }
 
-/// Dump `krate`'s MIR into `out`, one directory per module (every module
-/// when `only` is empty), with rust-src unpacked under `cache` and the
-/// build done under `work`, which is removed afterwards; write
-/// `target.toml`, `layouts.json` and [`RECORD`] beside the modules.
+/// Dump `krate`'s MIR for `target` (the host when none) into `out`, one
+/// directory per module (every module when `only` is empty), with
+/// rust-src unpacked under `cache` and the build done under `work`, which
+/// is removed afterwards; write `target.toml`, `layouts.json` and
+/// [`RECORD`] beside the modules.
 pub fn dump(
     krate: &str,
+    target: Option<&str>,
     out: &Path,
     only: &[String],
     cache: &Path,
     work: &Path,
 ) -> Result<Dumped, UorustError> {
     std::fs::create_dir_all(out).map_err(|e| io(out, e))?;
-    let inputs = inputs(krate, out)?;
+    let inputs = inputs(krate, out, target)?;
     let library = source(&inputs, cache)?;
+    let source_tree = digest(&library)?;
     let library = std::fs::canonicalize(&library).map_err(|e| io(&library, e))?;
     let toolchain = format!("+{}", inputs.toolchain);
     let sysroot = crate::shard::sysroot(out, Some(&toolchain))?;
@@ -561,10 +670,13 @@ pub fn dump(
     let (kept, layouts) = result?;
     let digest = digest(out)?;
     let file = out.join(RECORD);
-    std::fs::write(&file, render_record(&inputs, &kept, layouts, &digest))
-        .map_err(|e| io(&file, e))?;
+    std::fs::write(
+        &file,
+        render_record(&inputs, only, &kept, layouts, &digest, &source_tree),
+    )
+    .map_err(|e| io(&file, e))?;
     Ok(Dumped {
-        key: key(&inputs),
+        key: key(&inputs, only),
         digest,
         library,
         kept,
@@ -1014,8 +1126,8 @@ mod tests {
     #[test]
     fn stdlink_the_key_moves_with_every_input_but_not_the_url() {
         let base = stdlink_inputs();
-        let k = key(&base);
-        assert_eq!(k, key(&base.clone()));
+        let k = key(&base, &[]);
+        assert_eq!(k, key(&base.clone(), &[]));
         let changed = [
             Inputs {
                 krate: "alloc".into(),
@@ -1039,14 +1151,74 @@ mod tests {
             },
         ];
         for c in &changed {
-            assert_ne!(key(c), k, "{c:?}");
+            assert_ne!(key(c, &[]), k, "{c:?}");
         }
         // The archive is named by its digest: a mirror is the same input.
         let mirrored = Inputs {
             source_url: "file:///mirror/rust-src.tar.xz".into(),
             ..base
         };
-        assert_eq!(key(&mirrored), k);
+        assert_eq!(key(&mirrored, &[]), k);
+    }
+
+    #[test]
+    fn stdlink_a_dump_of_some_modules_has_another_key_than_one_of_every_module() {
+        // refute-stdlink-7 item 3: `--only hint` (1 module) and the whole
+        // crate (67) printed one key.
+        let base = stdlink_inputs();
+        let every = key(&base, &[]);
+        let hint = key(&base, &["hint".to_string()]);
+        assert_ne!(hint, every);
+        // The selection is a set: order and repetition name the same dump.
+        let two = key(&base, &["num".to_string(), "hint".to_string()]);
+        assert_eq!(
+            two,
+            key(
+                &base,
+                &["hint".to_string(), "num".to_string(), "hint".to_string()]
+            )
+        );
+        assert_ne!(two, hint);
+        assert_ne!(two, every);
+    }
+
+    #[test]
+    fn stdlink_the_code_digest_names_every_source_file_of_the_tool() {
+        // refute-stdlink-7 item 4: `target.toml` and `layouts.json` are
+        // written by code outside this module (shard.rs, embed.rs, mir/).
+        let src = Path::new(env!("CARGO_MANIFEST_DIR")).join("src");
+        let mut found = BTreeSet::new();
+        let mut stack = vec![src.clone()];
+        while let Some(at) = stack.pop() {
+            for p in crate::embed::dir_paths(&at).unwrap() {
+                if p.is_dir() {
+                    stack.push(p);
+                } else if p.extension().is_some_and(|x| x == "rs") {
+                    let rel = p.strip_prefix(&src).unwrap().to_string_lossy();
+                    found.insert(format!("src/{rel}"));
+                }
+            }
+        }
+        let named: BTreeSet<String> = CODE
+            .iter()
+            .map(|(p, _)| p.to_string())
+            .filter(|p| p.starts_with("src/"))
+            .collect();
+        assert_eq!(named, found);
+        for module in [
+            "src/shard.rs",
+            "src/embed.rs",
+            "src/mir/core.rs",
+            "src/layouts.rs",
+        ] {
+            assert!(named.contains(module), "{module}");
+        }
+        assert!(CODE.iter().any(|(p, _)| *p == "Cargo.lock"));
+        // Each file's text is what it holds on disk.
+        for (path, text) in CODE.iter().filter(|(p, _)| p.starts_with("src/")) {
+            let on_disk = std::fs::read_to_string(src.join(&path[4..])).unwrap();
+            assert_eq!(*text, on_disk, "{path}");
+        }
     }
 
     #[test]
@@ -1121,8 +1293,10 @@ mod tests {
         assert_eq!(digest(&dir).unwrap(), d);
         std::fs::rename(dir.join("num/a.mir"), dir.join("num/b.mir")).unwrap();
         assert_ne!(digest(&dir).unwrap(), d);
+        let only = ["num".to_string()];
         let record = render_record(
             &stdlink_inputs(),
+            &only,
             &[Kept {
                 module: "num".into(),
                 files: 1,
@@ -1130,38 +1304,91 @@ mod tests {
             }],
             0,
             &d,
+            "ab",
         );
         let doc: toml::Table = record.parse().unwrap();
-        assert_eq!(doc["key"].as_str(), Some(key(&stdlink_inputs()).as_str()));
+        assert_eq!(
+            doc["key"].as_str(),
+            Some(key(&stdlink_inputs(), &only).as_str())
+        );
+        assert_eq!(doc["selection"].as_str(), Some("num"));
+        assert_eq!(doc["source_tree"].as_str(), Some("ab"));
         assert_eq!(doc["digest"].as_str(), Some(d.as_str()));
         assert_eq!(doc["files"].as_integer(), Some(1));
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A rust-src archive as the channel names one, holding `files`
+    /// under `library/`; its URL and digest.
+    fn stdlink_archive(dir: &Path, name: &str, files: &[(&str, &str)]) -> (String, String) {
+        let stage = dir.join(format!("stage-{name}"));
+        let root = stage.join("rust-src-1.0.0/rust-src/lib/rustlib/src/rust/library");
+        for (path, text) in files {
+            stdlink_write(&root.join(path), text);
+        }
+        let archive = dir.join(format!("{name}.tar.xz"));
+        let ok = Command::new("tar")
+            .arg("-cJf")
+            .arg(&archive)
+            .arg("-C")
+            .arg(&stage)
+            .arg("rust-src-1.0.0")
+            .status()
+            .unwrap()
+            .success();
+        assert!(ok);
+        let sha = sha256_hex(&std::fs::read(&archive).unwrap());
+        (format!("file://{}", archive.display()), sha)
     }
 
     #[test]
     fn stdlink_a_source_cache_is_taken_only_at_the_manifests_digest() {
         let dir = stdlink_dir("source");
         let cache = dir.join("cache");
-        let inputs = stdlink_inputs();
-        stdlink_write(&cache.join("library/core/src/lib.rs"), "");
-        stdlink_write(
-            &cache.join(SOURCE_DIGEST),
-            &format!("{}\n", inputs.source_sha256),
+        let hint = "pub fn spin_loop() {}\n";
+        let (url, sha) = stdlink_archive(&dir, "good", &[("core/src/hint.rs", hint)]);
+        let inputs = Inputs {
+            source_url: url,
+            source_sha256: sha,
+            ..stdlink_inputs()
+        };
+        let library = source(&inputs, &cache).unwrap();
+        assert_eq!(library, cache.join("library"));
+        let file = library.join("core/src/hint.rs");
+        assert_eq!(std::fs::read_to_string(&file).unwrap(), hint);
+        // refute-stdlink-7 item 2: the unpacked tree edited after the
+        // fetch, a body planted, a file added. The cache's archive still
+        // hashes to the digest, so the tree is unpacked from it again and
+        // nothing planted survives.
+        stdlink_write(&file, "pub fn spin_loop() {}\npub fn refute_plant() {}\n");
+        stdlink_write(&library.join("core/src/planted.rs"), "");
+        let again = source(&inputs, &cache).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(again.join("core/src/hint.rs")).unwrap(),
+            hint
         );
-        assert_eq!(source(&inputs, &cache).unwrap(), cache.join("library"));
-        // Another digest recorded: the cache is fetched again, and the
-        // fetch of an unreachable archive fails rather than keeping it.
+        assert!(!again.join("core/src/planted.rs").exists());
+        // The kept archive replaced by another one's bytes: it no longer
+        // hashes to the digest and is fetched again from the URL.
+        let (_, _) = stdlink_archive(&dir, "bad", &[("core/src/hint.rs", "pub fn x() {}\n")]);
+        std::fs::copy(dir.join("bad.tar.xz"), cache.join(SOURCE_ARCHIVE)).unwrap();
+        let third = source(&inputs, &cache).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(third.join("core/src/hint.rs")).unwrap(),
+            hint
+        );
+        // An archive at the URL that is not the digest's: refused, and no
+        // tree is left to be taken.
         let other = Inputs {
-            source_url: format!("file://{}", dir.join("absent.tar.xz").display()),
             source_sha256: "22".repeat(32),
             ..inputs
         };
         assert!(source(&other, &cache).is_err());
+        assert!(!cache.join(SOURCE_ARCHIVE).exists());
         assert!(!cache.join("library").exists());
         let _ = std::fs::remove_dir_all(&dir);
     }
 
-    /// A synthetic rust-src: core, alloc and std, each a few files.
     fn stdlink_library(dir: &Path) -> PathBuf {
         let lib = dir.join("library");
         let w = |p: &str, t: &str| stdlink_write(&lib.join(p), t);

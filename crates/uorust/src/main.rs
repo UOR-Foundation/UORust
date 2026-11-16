@@ -380,12 +380,18 @@ struct LibraryMirArgs {
     /// Dump only this top-level module (repeatable); every module when none.
     #[arg(long)]
     only: Vec<String>,
-    /// Where rust-src of the pinned toolchain is unpacked, taken again only
-    /// at the digest its channel manifest records; `<out>/../rust-src-<toolchain>`
-    /// when not given.
+    /// The target triple the library is built for; the host's when not
+    /// given. It enters the key: a dump links only into a program of the
+    /// same triple and data layout.
+    #[arg(long)]
+    target: Option<String>,
+    /// Where rust-src's archive of the pinned toolchain is kept (taken only
+    /// at the digest its channel manifest records) and unpacked anew for
+    /// each run; `<out>/../rust-src-<toolchain>` when not given.
     #[arg(long)]
     source_cache: Option<PathBuf>,
-    /// Print the dump's key, read from the toolchain alone, and dump nothing.
+    /// Print the dump's key (for the target and the modules asked), read
+    /// from the toolchain alone, and dump nothing.
     #[arg(long, conflicts_with = "modules")]
     key: bool,
     /// Print the library's top-level modules as a JSON array and dump nothing.
@@ -731,8 +737,8 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         Command::LibraryMir(args) => {
             let here = std::path::Path::new(".");
             if args.key {
-                let inputs = uorust::library::inputs(&args.krate, here)?;
-                println!("{}", uorust::library::key(&inputs));
+                let inputs = uorust::library::inputs(&args.krate, here, args.target.as_deref())?;
+                println!("{}", uorust::library::key(&inputs, &args.only));
                 return Ok(());
             }
             let toolchain_cache =
@@ -748,7 +754,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 .clone()
                 .unwrap_or_else(|| toolchain_cache(&base));
             if args.modules {
-                let inputs = uorust::library::inputs(&args.krate, here)?;
+                let inputs = uorust::library::inputs(&args.krate, here, args.target.as_deref())?;
                 let library = uorust::library::source(&inputs, &cache)?;
                 let found = uorust::library::modules(&library, &args.krate)?;
                 println!("{}", serde_json::to_string(&found).unwrap_or_default());
@@ -760,7 +766,14 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 args.krate,
                 std::process::id()
             ));
-            let done = uorust::library::dump(&args.krate, out, &args.only, &cache, &work)?;
+            let done = uorust::library::dump(
+                &args.krate,
+                args.target.as_deref(),
+                out,
+                &args.only,
+                &cache,
+                &work,
+            )?;
             for k in &done.kept {
                 println!("{}: {} bodies, {} bytes", k.module, k.files, k.bytes);
             }

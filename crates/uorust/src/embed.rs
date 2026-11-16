@@ -3860,91 +3860,278 @@ pub struct EmbedCensus {
     /// The calls (each callee once per body) left to a dictionary, by why
     /// ([`unlinked_reason`]).
     pub unlinked: BTreeMap<String, usize>,
+    /// Of the calls [`Self::linked`] counts, those whose callee's reach is
+    /// closed ([`EmbedCensus::reach`]), by where the callee is.
+    pub closed: BTreeMap<String, usize>,
+    /// Of those calls, the ones whose callee's reach is open, by where the
+    /// callee is, then by why.
+    pub open: BTreeMap<String, BTreeMap<String, usize>>,
 }
 
 /// The key of [`EmbedCensus::linked`] for a call into the crate's own
 /// modules, which no crate name can be.
 pub const OWN: &str = "(the crate's own modules)";
 
-/// What a callee's printed path names as its home: a crate (a qualified
-/// path's self type's, or its trait's where the self type is a primitive),
-/// a generic parameter the caller's bound abstracts, a trait object, or
-/// the platform (a name with no path).
-enum Home {
+/// What a callee's printed path names as its home: a crate (a plain
+/// path's), the crates that may hold the impl a qualified path calls, the
+/// crate's own modules, a generic parameter the caller's bound abstracts,
+/// a trait object, or the platform (a name with no path).
+pub(crate) enum Home {
     Crate(String),
+    /// `<Self as Trait<..>>::item`: the crates that can hold the impl, by
+    /// the orphan rule and by what each can name ([`impl_crates`]), the
+    /// crate's own left out (its bodies are in its dump); the trait's
+    /// crate among them where it can hold it (its default bodies and
+    /// blanket impls are there).
+    Impl(Vec<String>),
+    Own,
     Parameter,
     Object,
     Platform,
 }
 
-fn home_of(name: &str) -> Home {
-    // A qualified path `<Self as Trait>::item`: its self type, unless that
-    // is a primitive or a parameter, then its trait.
-    let named = match name.strip_prefix('<') {
-        Some(rest) => {
-            let mut depth = 0usize;
-            let mut split = None;
-            for (i, c) in rest.char_indices() {
-                match c {
-                    '<' | '(' | '[' => depth += 1,
-                    '>' | ')' | ']' if depth == 0 => break,
-                    '>' | ')' | ']' => depth -= 1,
-                    _ if depth == 0 && rest[i..].starts_with(" as ") => {
-                        split = Some(i);
-                        break;
-                    }
-                    _ => {}
-                }
+/// The top-level arguments of the generic list that opens at `text`'s
+/// first `<` (`Map<A, B<C, D>>` gives `A` and `B<C, D>`): none when it
+/// has no list.
+fn generic_args(text: &str) -> Vec<&str> {
+    let Some(open) = text.find('<') else {
+        return Vec::new();
+    };
+    let mut out = Vec::new();
+    let mut depth = 0usize;
+    let mut start = open + 1;
+    for (i, c) in text.char_indices().skip_while(|(i, _)| *i <= open) {
+        match c {
+            '<' | '(' | '[' => depth += 1,
+            '>' | ')' | ']' if depth == 0 => {
+                out.push(text[start..i].trim());
+                return out;
             }
-            let ty = rest[..split.unwrap_or(rest.len())]
-                .trim_start_matches(['&', '*', '(', '['])
-                .trim_start_matches("mut ")
-                .trim_start_matches("const ");
-            if ty.starts_with("dyn ") {
-                return Home::Object;
+            '>' | ')' | ']' => depth -= 1,
+            ',' if depth == 0 => {
+                out.push(text[start..i].trim());
+                start = i + 1;
             }
-            let head = ty.split("::").next().unwrap_or_default();
-            let head = head.split('<').next().unwrap_or_default();
-            if ty.contains("::") {
-                Some(head.to_string())
-            } else if head.starts_with(char::is_uppercase) {
-                return Home::Parameter;
+            _ => {}
+        }
+    }
+    out
+}
+
+/// A type's text past the fundamental wrappers the orphan rule looks
+/// through (`&`, `&mut`, `Box<T>`, `Pin<T>`): an impl for `&Local` or
+/// `Box<Local>` may be in `Local`'s crate.
+fn past_fundamental(ty: &str) -> &str {
+    let mut t = ty.trim();
+    loop {
+        if let Some(r) = t.strip_prefix('&') {
+            t = r.trim_start();
+            if t.starts_with('\'') {
+                t = t.split_once(' ').map_or("", |(_, r)| r).trim_start();
+            }
+            t = t.strip_prefix("mut ").unwrap_or(t).trim_start();
+            continue;
+        }
+        let wrapped = [
+            "alloc::boxed::Box<",
+            "std::boxed::Box<",
+            "core::pin::Pin<",
+            "std::pin::Pin<",
+        ]
+        .iter()
+        .any(|w| t.starts_with(w));
+        match generic_args(t).first() {
+            Some(inner) if wrapped => t = inner,
+            _ => return t,
+        }
+    }
+}
+
+/// What a type's text says of the crate an impl for it may be in.
+enum TypeHome {
+    /// A path's first segment: a crate, or a module of the crate's own.
+    Path(String),
+    /// A trait object `dyn path::Trait`: local to the trait's crate.
+    Object(String),
+    /// A generic parameter (one capitalised segment).
+    Parameter,
+    /// A primitive, a slice, array, tuple, pointer or function type: no
+    /// crate's own.
+    Primitive,
+}
+
+fn type_home(ty: &str) -> TypeHome {
+    let t = past_fundamental(ty);
+    let head = |p: &str| {
+        p.split("::")
+            .next()
+            .unwrap_or_default()
+            .split(['<', ' ', '+'])
+            .next()
+            .unwrap_or_default()
+            .to_string()
+    };
+    if let Some(object) = t.strip_prefix("dyn ") {
+        // A trait of the crate's root prints with no path: the crate's own.
+        let object = object.trim_start();
+        let first = object.split(['<', ' ', '+']).next().unwrap_or_default();
+        return TypeHome::Object(if first.contains("::") {
+            head(object)
+        } else {
+            String::new()
+        });
+    }
+    if t.starts_with(['[', '(', '*', '!']) || t.starts_with("fn(") || t.starts_with("unsafe ") {
+        return TypeHome::Primitive;
+    }
+    let first = t.split(['<', ' ']).next().unwrap_or_default();
+    if !first.contains("::") {
+        return if first.starts_with(char::is_uppercase) {
+            TypeHome::Parameter
+        } else {
+            TypeHome::Primitive
+        };
+    }
+    TypeHome::Path(head(t))
+}
+
+/// Where a library sits in the order in which crates can name each other:
+/// core names none, alloc core, std both, any other crate all three and
+/// may name any other crate but these.
+fn rank(krate: &str) -> usize {
+    crate::library::LIBRARIES
+        .iter()
+        .position(|l| *l == krate)
+        .unwrap_or(crate::library::LIBRARIES.len())
+}
+
+/// The crates that can hold the impl `<self_ty as trait_path>` calls,
+/// own modules left out: by the orphan rule, the trait's crate or the
+/// crate of one of the types (`self_ty` and the trait's arguments, each
+/// past its fundamental wrappers); and of those only a crate that can
+/// name every other one the impl names, since an impl names them all (core
+/// cannot hold an impl for alloc's `Vec`, nor core or alloc one whose
+/// trait argument is std's `Path`). `own` says whether a path's first
+/// segment is the crate's own.
+fn impl_crates(self_ty: &str, trait_path: &str, own: &dyn Fn(&str) -> bool) -> Vec<String> {
+    let mut named = BTreeSet::new();
+    let trait_head = trait_path.split("::").next().unwrap_or_default();
+    if trait_path.contains("::") {
+        named.insert(trait_head.split('<').next().unwrap_or_default().to_string());
+    }
+    for ty in std::iter::once(self_ty).chain(generic_args(trait_path)) {
+        match type_home(ty) {
+            TypeHome::Path(c) | TypeHome::Object(c) => {
+                named.insert(c);
+            }
+            TypeHome::Parameter | TypeHome::Primitive => {}
+        }
+    }
+    named.retain(|c| !c.is_empty() && !own(c));
+    let can_hold = |c: &String| {
+        named
+            .iter()
+            .all(|d| d == c || rank(d) < rank(c) || rank(c) == crate::library::LIBRARIES.len())
+    };
+    named.iter().filter(|c| can_hold(c)).cloned().collect()
+}
+
+/// The home of the callee `name` (written from the crate that defines it
+/// where the library's paths resolve it) of a body whose own modules
+/// `own` names (the crate's name and its top-level modules, as its MIR
+/// prints its own paths).
+pub(crate) fn home_of(name: &str, own: &dyn Fn(&str) -> bool) -> Home {
+    let Some(rest) = name.strip_prefix('<') else {
+        if !name.contains("::") {
+            return Home::Platform;
+        }
+        let head = name.split("::").next().unwrap_or_default();
+        return if own(head) {
+            Home::Own
+        } else if head.is_empty() {
+            Home::Platform
+        } else {
+            Home::Crate(head.to_string())
+        };
+    };
+    // A qualified path `<Self as Trait>::item`.
+    let mut depth = 0usize;
+    let mut split = None;
+    let mut end = rest.len();
+    for (i, c) in rest.char_indices() {
+        match c {
+            '<' | '(' | '[' => depth += 1,
+            '>' | ')' | ']' if depth == 0 => {
+                end = i;
+                break;
+            }
+            '>' | ')' | ']' => depth -= 1,
+            _ if depth == 0 && split.is_none() && rest[i..].starts_with(" as ") => {
+                split = Some(i);
+            }
+            _ => {}
+        }
+    }
+    let self_ty = rest[..split.unwrap_or(end)].trim();
+    // A trait object's method is chosen at run time only where the self
+    // type is the object itself: `&dyn T`, `&mut dyn T` are references,
+    // whose impls (`impl<I: Iterator + ?Sized> Iterator for &mut I`,
+    // `impl<T: Display + ?Sized> Display for &T`) are static calls.
+    if self_ty.starts_with("dyn ") {
+        return Home::Object;
+    }
+    if matches!(type_home(self_ty), TypeHome::Parameter) {
+        return Home::Parameter;
+    }
+    let trait_path = split.map(|at| rest[at + " as ".len()..end].trim());
+    match trait_path {
+        Some(tr) => {
+            let crates = impl_crates(self_ty, tr, own);
+            if crates.is_empty() {
+                Home::Own
             } else {
-                // A primitive's impl is its trait's crate's.
-                split
-                    .map(|at| &rest[at + " as ".len()..])
-                    .and_then(|t| t.split("::").next())
-                    .map(|t| t.split('<').next().unwrap_or_default().to_string())
+                Home::Impl(crates)
             }
         }
-        None => name
-            .contains("::")
-            .then(|| name.split("::").next().unwrap_or_default().to_string()),
-    };
-    match named {
-        Some(c) if !c.is_empty() => Home::Crate(c),
-        _ => Home::Platform,
+        // `<Type>::item`: an inherent item, its type's crate's.
+        None => match type_home(self_ty) {
+            TypeHome::Path(c) | TypeHome::Object(c) if own(&c) => Home::Own,
+            TypeHome::Path(c) | TypeHome::Object(c) => Home::Crate(c),
+            _ => Home::Platform,
+        },
     }
 }
 
 /// Why a callee `name` a body of `krate` leaves to its dictionary is not
 /// linked, read from the path the dump prints (written from the crate
 /// that defines it where the library's paths resolve it,
-/// [`crate::library::Paths::canonical_text`]), with the libraries
-/// `linked` into the program: the crate the path names, a generic
-/// parameter the caller's bound abstracts, a trait object's method (the
-/// impl is chosen at run time), or the platform (an intrinsic, inline
-/// assembly, a foreign item: a name with no path).
-pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
-    match home_of(name) {
+/// [`crate::library::Paths::canonical_text`]), with the crate's top-level
+/// modules `modules` (its own paths print from them, without its name)
+/// and the libraries `linked` into the program: the crate that holds it
+/// (for a trait method, the crate that can hold the impl,
+/// [`impl_crates`]) when that is not linked, a linked library's own
+/// resolution, the crate's own, a generic parameter the caller's bound
+/// abstracts, a trait object's method (the impl is chosen at run time),
+/// or the platform (an intrinsic, inline assembly, a foreign item: a name
+/// with no path).
+pub fn unlinked_reason(name: &str, krate: &str, modules: &[&str], linked: &[&str]) -> String {
+    let own = |c: &str| {
+        (c == krate || modules.contains(&c))
+            && !linked.contains(&c)
+            && !crate::library::LIBRARIES.contains(&c)
+    };
+    let leaves = || "a linked library leaves it to a dictionary".to_string();
+    match home_of(name, &own) {
         Home::Platform => "the platform (an intrinsic, assembly, a foreign item)".into(),
         Home::Parameter => "a generic parameter's bound".into(),
         Home::Object => "a trait object's method, chosen at run time".into(),
-        Home::Crate(c) if c == krate => "the crate's own, with no body in the dump".into(),
-        Home::Crate(c) if linked.contains(&c.as_str()) => {
-            "a linked library leaves it to a dictionary".into()
-        }
+        Home::Own => "the crate's own, with no body in the dump".into(),
+        Home::Crate(c) if linked.contains(&c.as_str()) => leaves(),
         Home::Crate(c) => format!("crate `{c}` is not linked"),
+        Home::Impl(crates) => match crates.iter().find(|c| !linked.contains(&c.as_str())) {
+            Some(c) => format!("crate `{c}` is not linked"),
+            None => leaves(),
+        },
     }
 }
 
@@ -3953,6 +4140,7 @@ impl EmbedCensus {
         &mut self,
         e: &Embedded,
         krate: &str,
+        modules: &[&str],
         linked: &[&str],
         paths: Option<&crate::library::Paths>,
     ) {
@@ -3980,8 +4168,48 @@ impl EmbedCensus {
             let named = paths.map_or_else(|| b.clone(), |p| p.canonical_text(b));
             *self
                 .unlinked
-                .entry(unlinked_reason(&named, krate, linked))
+                .entry(unlinked_reason(&named, krate, modules, linked))
                 .or_default() += 1;
+        }
+    }
+
+    /// Read the reach of each call `calls` names (a body of the program,
+    /// once per calling body) in `every`: a call is closed only where
+    /// every body its callee reaches is embedded, evaluable and leaves
+    /// nothing to a dictionary ([`closure`], the callee taken at the
+    /// call's instance), and is counted open, by why, otherwise. A linked
+    /// library's generic body whose trait calls its own dump leaves to a
+    /// dictionary (`Iterator::count` leaving `fold`) does not evaluate at
+    /// the call, so linking it does not close the call.
+    fn reach(
+        &mut self,
+        calls: &[String],
+        every: &BTreeMap<String, (String, Embedded)>,
+        linked: &[&str],
+    ) {
+        let mut known: BTreeMap<&str, Option<String>> = BTreeMap::new();
+        for c in calls {
+            let at = linked
+                .iter()
+                .find(|l| c.starts_with(&format!("{l}::")))
+                .map_or(OWN, |l| l);
+            let why = known
+                .entry(c.as_str())
+                .or_insert_with(|| match closure(every, c, false) {
+                    Reach::Closed(_) => None,
+                    Reach::Open(why) => Some(why),
+                });
+            match why {
+                None => *self.closed.entry(at.to_string()).or_default() += 1,
+                Some(why) => {
+                    *self
+                        .open
+                        .entry(at.to_string())
+                        .or_default()
+                        .entry(why.clone())
+                        .or_default() += 1;
+                }
+            }
         }
     }
 
@@ -4192,6 +4420,17 @@ pub fn embed_with(
         link,
     } = *outputs;
     let root = library.parent().unwrap_or(library);
+    // A library's dump is of one target: its `cfg`s chose its items
+    // (`impl usize` at `u64`'s width on a 64-bit target), so it is linked
+    // only into a program dumped for the same target.
+    for (lib, dir) in link {
+        if let Some(why) = other_target(dumps, dir) {
+            return Err(UorustError::Tool(format!(
+                "embed: {lib} at {} is not linked: {why}",
+                dir.display()
+            )));
+        }
+    }
     // Each library linked with those before it: alloc with core.
     let mut linked: Vec<Linked> = Vec::new();
     // A library that does not link is named and left out: the crate's
@@ -5079,7 +5318,10 @@ enum Fuel {
     Unbounded(String),
 }
 
-fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
+/// The reach of `key` (see the doc above [`Sexp`]): for a `sample`, the
+/// root's own generic slots open it, since a sample's call binds none;
+/// for a call, the call binds them.
+fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str, sample: bool) -> Reach {
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
@@ -5091,13 +5333,19 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
         }
         if let Some(b) = e.bound.iter().next() {
             // A dictionary's name, its generic arguments and the
-            // instance's impl aside: the kind of callee left.
-            let kind =
-                if b.starts_with("core::") || b.starts_with("alloc::") || b.starts_with("std::") {
-                    b.split("::").next().unwrap_or_default().to_string()
-                } else {
-                    "the crate".to_string()
-                };
+            // instance's impl aside: the kind of callee left. A linked
+            // library's body prints its own paths from its root
+            // (`convert::From`), so its leftover is named by the library
+            // its key is under (`core::...`), not as the crate's.
+            let library = |p: &str| {
+                crate::library::LIBRARIES
+                    .iter()
+                    .find(|l| p.starts_with(&format!("{l}::")))
+                    .map(|l| l.to_string())
+            };
+            let kind = library(b)
+                .or_else(|| library(&k))
+                .unwrap_or_else(|| "the crate".to_string());
             if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
                 eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
             }
@@ -5111,7 +5359,8 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
         {
             return Reach::Open("reaches an instance no binding fixes".into());
         }
-        if at == 0
+        if sample
+            && at == 0
             && e.term
                 .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
         {
@@ -5581,6 +5830,32 @@ pub(crate) fn resolve_callee(
         (Some(t), None) => Callee::Body(key(&instance.path, t)),
         _ => Callee::Bound(callee.to_string()),
     }
+}
+
+/// How the target the dumps under `linked` were built for differs from
+/// the one of the dumps under `dumps`, by their `target.toml`s: the
+/// triple, the pointer width or the data layout; none where they agree.
+/// A library compiled for another target holds other items (its `cfg`s
+/// chose them) and other layouts, so linking its bodies into the program
+/// would evaluate another program than the one the target compiles.
+pub(crate) fn other_target(dumps: &Path, linked: &Path) -> Option<String> {
+    let read = |dir: &Path| -> Option<toml::Table> {
+        read_text(&dir.join("target.toml")).ok()?.parse().ok()
+    };
+    let (Some(own), Some(theirs)) = (read(dumps), read(linked)) else {
+        return Some("a target.toml is missing or unreadable".into());
+    };
+    ["triple", "pointer_width", "data_layout"]
+        .into_iter()
+        .find(|f| own.get(*f) != theirs.get(*f))
+        .map(|f| {
+            let shown = |t: &toml::Table| t.get(f).map_or("none".to_string(), ToString::to_string);
+            format!(
+                "its {f} is {}, the program's is {}",
+                shown(&theirs),
+                shown(&own)
+            )
+        })
 }
 
 /// The pointer width the dumps under `dumps` were built for, and whether
@@ -6080,23 +6355,41 @@ fn embed_linked(
         .iter()
         .any(|l| crate::library::LIBRARIES.contains(&l.krate.as_str()))
         .then(|| crate::library::Paths::read(&library_root(root)));
+    // The crate's own paths print from its top-level modules, without its
+    // name (`blanket::Mine`).
+    let module_names: Vec<&str> = read.iter().map(|(m, _)| m.as_str()).collect();
+    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
+    let is_own = |c: &str| {
+        (c == krate || module_names.contains(&c))
+            && !linked_names.contains(&c)
+            && !crate::library::LIBRARIES.contains(&c)
+    };
+    // A plain path is its crate's; a trait method's body is in the crate
+    // that holds the impl ([`impl_crates`]): for a primitive's, a trait
+    // object's behind a reference, or the crate's own type's through a
+    // blanket impl or a default body, that is the trait's crate alone (the
+    // crate's own impl, where it has one, was resolved in its own dump
+    // first).
     let in_library = |callee: &str, args: &[Option<String>], dest: &str| {
         let paths = paths.as_ref()?;
         let named = paths.canonical_text(callee);
-        let owner = match home_of(&named) {
-            Home::Crate(c) => c,
+        let owners = match home_of(&named, &is_own) {
+            Home::Crate(c) => vec![c],
+            Home::Impl(crates) => crates,
             _ => return None,
         };
-        let l = linked
-            .iter()
-            .find(|l| l.krate == owner && crate::library::LIBRARIES.contains(&owner.as_str()))?;
-        let own = |t: &str| crate::library::without_crate(&paths.canonical_text(t), &l.krate);
-        let args: Vec<Option<String>> = args.iter().map(|a| a.as_deref().map(own)).collect();
-        match resolve_callee(&l.link, &l.krate, &own(callee), &args, &own(dest)) {
-            Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
-            Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
-            Callee::Bound(_) => None,
-        }
+        owners.iter().find_map(|owner| {
+            let l = linked.iter().find(|l| {
+                &l.krate == owner && crate::library::LIBRARIES.contains(&owner.as_str())
+            })?;
+            let own = |t: &str| crate::library::without_crate(&paths.canonical_text(t), &l.krate);
+            let args: Vec<Option<String>> = args.iter().map(|a| a.as_deref().map(own)).collect();
+            match resolve_callee(&l.link, &l.krate, &own(callee), &args, &own(dest)) {
+                Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+                Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+                Callee::Bound(_) => None,
+            }
+        })
     };
     let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
         linked
@@ -6127,7 +6420,9 @@ fn embed_linked(
         c => c,
     };
     let mut census = EmbedCensus::default();
-    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
+    // The calls of each body the census counts, whose reach is read once
+    // every body of the program, the linked libraries' too, is known.
+    let mut counted_calls: Vec<String> = Vec::new();
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
@@ -6259,7 +6554,8 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e, krate, &linked_names, paths.as_ref());
+                    census.add(&e, krate, &module_names, &linked_names, paths.as_ref());
+                    counted_calls.extend(e.callees.iter().cloned());
                     signatures.insert(
                         kappa.clone(),
                         (
@@ -6298,6 +6594,7 @@ fn embed_linked(
             every.entry(k.clone()).or_insert_with(|| v.clone());
         }
     }
+    census.reach(&counted_calls, &every, &linked_names);
     let unread = {
         let cx = Cx {
             width,
@@ -6372,7 +6669,7 @@ fn embed_linked(
     // dictionary.
     let mut left: BTreeMap<String, usize> = BTreeMap::new();
     let sampled = samples.len();
-    samples.retain_mut(|s| match closure(&every, &s.key) {
+    samples.retain_mut(|s| match closure(&every, &s.key, true) {
         Reach::Closed(c) => match derived_fuel(&every, &s.key) {
             Fuel::Bounded(fuel, _) => {
                 s.closure = c;
