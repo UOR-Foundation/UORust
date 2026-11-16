@@ -8048,4 +8048,72 @@ mod tests {
             "{frontier}"
         );
     }
+
+    /// A workspace whose member lies outside its root (`members =
+    /// ["../member"]`, which Cargo builds) projects to the same bytes
+    /// wherever the two directories lie: a member's paths are written
+    /// relative to the root, never absolute.
+    #[test]
+    fn projection_name_a_member_outside_the_root_projects_alike_anywhere() {
+        let base = std::env::temp_dir().join(format!("uorust-outside-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&base);
+        let files = [
+            (
+                "root/Cargo.toml",
+                "[workspace]\nmembers = [\"../member\"]\nresolver = \"2\"\n",
+            ),
+            (
+                "member/Cargo.toml",
+                "[package]\nname = \"omega\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+                 rust-version = \"1.70\"\nworkspace = \"../root\"\n",
+            ),
+            (
+                "member/src/lib.rs",
+                "//! Omega.\n\n/// Last.\npub fn last(n: u8) -> bool {\n    n == 255\n}\n",
+            ),
+            (
+                "member/tests/claims.rs",
+                "#[test]\nfn last_holds() {\n    assert!(omega::last(255));\n}\n",
+            ),
+        ];
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+        };
+        let mut projections = Vec::new();
+        for place in ["here", "elsewhere/other-place-ZZ"] {
+            let dir = base.join(place);
+            for (path, body) in files {
+                let path = dir.join(path);
+                std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+                std::fs::write(path, body).expect("a file");
+            }
+            projections
+                .push(crate::project_workspace(&dir.join("root"), &options).expect("a projection"));
+        }
+        let _ = std::fs::remove_dir_all(&base);
+        let (here, there) = (&projections[0], &projections[1]);
+        let differ: Vec<&String> = here
+            .keys()
+            .chain(there.keys())
+            .filter(|path| here.get(*path) != there.get(*path))
+            .collect();
+        assert!(differ.is_empty(), "these files differ: {differ:?}");
+        let base_text = base.to_string_lossy().to_string();
+        for (path, bytes) in here {
+            let text = String::from_utf8_lossy(bytes);
+            assert!(
+                !text.contains(&base_text),
+                "{path} names where the workspace lies"
+            );
+        }
+        let frontier = String::from_utf8_lossy(&here["frontier.toml"]);
+        assert!(
+            frontier.contains("\"../member/src/lib.rs:4\""),
+            "{frontier}"
+        );
+    }
 }

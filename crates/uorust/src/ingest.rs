@@ -311,17 +311,40 @@ fn lints_of(table: Option<&toml::Value>) -> BTreeMap<String, String> {
     out
 }
 
-/// `path` relative to `root`, both as text: the path itself when it is not
-/// inside `root`.
+/// `path` relative to `root`, both absolute and as text with `/`
+/// separators: below `root` the path under it, and elsewhere (a member or
+/// a path dependency Cargo reaches by `..`, as in `members = ["../m"]`) one
+/// `..` for each component of `root` past the two paths' common ancestor,
+/// then the rest of `path`. Never the absolute path, so that nothing of
+/// where the workspace lies on the machine enters a projection.
 fn rel(root: &str, path: &str) -> String {
-    match path.strip_prefix(root) {
-        Some("") => String::new(),
-        Some(rest) => match rest.strip_prefix('/') {
-            Some(inner) => inner.to_string(),
-            None => path.to_string(),
-        },
-        None => path.to_string(),
+    let parts = |text: &str| -> Vec<String> {
+        text.split('/')
+            .filter(|c| !c.is_empty() && *c != ".")
+            .map(str::to_string)
+            .collect()
+    };
+    let (root, path) = (parts(root), parts(path));
+    let common = root.iter().zip(&path).take_while(|(a, b)| a == b).count();
+    let mut out: Vec<String> = vec!["..".to_string(); root.len() - common];
+    out.extend(path[common..].iter().cloned());
+    out.join("/")
+}
+
+/// The file `rel` names under `root` (as [`rel`] writes it), with each `..`
+/// taken lexically, as Cargo forms a member's path from its manifest.
+fn under(root: &Path, rel: &str) -> PathBuf {
+    let mut out = root.to_path_buf();
+    for part in rel.split('/') {
+        match part {
+            "" | "." => {}
+            ".." => {
+                out.pop();
+            }
+            part => out.push(part),
+        }
     }
+    out
 }
 
 fn text(value: &Value, key: &str) -> String {
@@ -431,7 +454,7 @@ fn package(
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
         read.push((path, rel_path, target, module, syn::parse_file(&text)));
     }
-    let roots: Vec<PathBuf> = targets.iter().map(|t| root.join(&t.src)).collect();
+    let roots: Vec<PathBuf> = targets.iter().map(|t| under(root, &t.src)).collect();
     let trees: BTreeMap<&Path, &syn::File> = read
         .iter()
         .filter_map(|(path, _, _, _, parsed)| Some((path.as_path(), parsed.as_ref().ok()?)))
@@ -1844,6 +1867,28 @@ mod tests {
                 ("D".to_string(), "an enum with type parameters"),
                 ("E".to_string(), "a union"),
             ]
+        );
+    }
+
+    /// A path outside the root is written with `..` steps, never as the
+    /// absolute path, and [`under`] reads it back to the same file.
+    #[test]
+    fn a_path_outside_the_root_is_relative_by_dot_dot_steps() {
+        assert_eq!(rel("/w/root", "/w/root"), "");
+        assert_eq!(rel("/w/root", "/w/root/src/lib.rs"), "src/lib.rs");
+        assert_eq!(
+            rel("/w/root", "/w/member/src/lib.rs"),
+            "../member/src/lib.rs"
+        );
+        assert_eq!(rel("/w/root", "/w/rootless/a.rs"), "../rootless/a.rs");
+        assert_eq!(rel("/w/a/b", "/x/y.rs"), "../../../x/y.rs");
+        assert_eq!(
+            under(Path::new("/w/root"), "../member/src/lib.rs"),
+            Path::new("/w/member/src/lib.rs")
+        );
+        assert_eq!(
+            under(Path::new("/w/root"), "src/lib.rs"),
+            Path::new("/w/root/src/lib.rs")
         );
     }
 }
