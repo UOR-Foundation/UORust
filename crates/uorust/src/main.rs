@@ -430,9 +430,9 @@ struct CrateArgs {
     /// Every library of crates.io the build of this workspace links, each
     /// at the version and checksum its lock records and with the features
     /// the build enables for it (cargo's unit graph of the build), dumped,
-    /// translated and embedded with those it builds on linked; with
-    /// `--dumps` and `--library`. Each register is the `<name>-<version>`
-    /// directory of `--registers`.
+    /// translated and embedded with those it builds on linked (after each
+    /// `--link`); with `--dumps` and `--library`. Each register is the
+    /// `<name>-<version>` directory of `--registers`.
     #[arg(long, requires_all = ["dumps", "library"])]
     workspace: Option<PathBuf>,
     /// With `--workspace`, only these packages and those they build on
@@ -701,6 +701,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                         registers: &args.registers,
                         library,
                         only: &args.only,
+                        link: &link,
                     })?;
                 let lifted = outcomes
                     .iter()

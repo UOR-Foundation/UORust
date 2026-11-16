@@ -533,6 +533,28 @@ impl Graph {
         // `locked` is in dependency order already.
         seen.into_iter().collect()
     }
+
+    /// The `--link` list of a body that calls `deps`: the libraries
+    /// `first` names (core, alloc), then those `deps` reach ([`closure`]),
+    /// each by its kept dumps under `dumps`.
+    ///
+    /// [`closure`]: Graph::closure
+    pub fn links(
+        &self,
+        deps: &[usize],
+        first: &[(String, PathBuf)],
+        dumps: &Path,
+    ) -> Vec<(String, PathBuf)> {
+        first
+            .iter()
+            .cloned()
+            .chain(
+                self.closure(deps)
+                    .into_iter()
+                    .map(|d| (self.locked[d].lib.clone(), dumps.join(self.locked[d].dir()))),
+            )
+            .collect()
+    }
 }
 
 /// The package a cargo package id names, `(source, name, version)`: a
@@ -801,6 +823,9 @@ pub struct Workspace<'a> {
     /// Only these packages (by name) and those they build on; every
     /// library the build links when empty.
     pub only: &'a [String],
+    /// Libraries linked into every crate's program before those it builds
+    /// on (core, alloc), `(crate, dumps)`.
+    pub link: &'a [(String, PathBuf)],
 }
 
 /// Every library of crates.io the build of a workspace links, each at its
@@ -842,16 +867,7 @@ pub fn lift_workspace(ws: &Workspace<'_>) -> Result<(Graph, Vec<Outcome>), Uorus
             .map(|d| graph.locked[d].dir())
             .collect();
         let outcome = if refused.is_empty() {
-            let link: Vec<(String, PathBuf)> = graph
-                .closure(&l.deps)
-                .into_iter()
-                .map(|d| {
-                    (
-                        graph.locked[d].lib.clone(),
-                        ws.dumps.join(graph.locked[d].dir()),
-                    )
-                })
-                .collect();
+            let link = graph.links(&l.deps, ws.link, ws.dumps);
             let kept = ws.dumps.join(l.dir());
             let options = Options {
                 library: Some(ws.library),
@@ -1977,8 +1993,18 @@ mod tests {
             members,
             [("app", "app", &[1, 2][..]), ("app", "app_cli", &[0][..])]
         );
-        // A library is linked after those it builds on.
+        // A library is linked after those it builds on, and after the
+        // libraries every crate links.
         assert_eq!(g.closure(&[1]), [0, 1]);
+        let core = [("core".to_string(), PathBuf::from("core-mir"))];
+        assert_eq!(
+            g.links(&[1], &core, Path::new("d")),
+            [
+                ("core".to_string(), PathBuf::from("core-mir")),
+                ("bit_vec".to_string(), PathBuf::from("d/bit-vec-0.6.3")),
+                ("bit_set".to_string(), PathBuf::from("d/bit-set-0.5.3")),
+            ]
+        );
         let done = [
             (0, Outcome::Refused("the embedding panicked: x".into())),
             (
