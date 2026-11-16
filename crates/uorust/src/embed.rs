@@ -3872,6 +3872,12 @@ pub struct EmbedCensus {
 /// modules, which no crate name can be.
 pub const OWN: &str = "(the crate's own modules)";
 
+/// Why a trait method's call stays unlinked where the crate's own dump
+/// holds a method of that name for an impl over the call's self type
+/// ([`own_impl_body`]): the crate's own impl is the one the call selects,
+/// and its own resolution did not find it.
+pub const OWN_IMPL: &str = "the crate's own impl, which its link does not select";
+
 /// What a callee's printed path names as its home: a crate (a plain
 /// path's), the crates that may hold the impl a qualified path calls, the
 /// crate's own modules, a generic parameter the caller's bound abstracts,
@@ -4036,12 +4042,65 @@ fn impl_crates(self_ty: &str, trait_path: &str, own: &dyn Fn(&str) -> bool) -> V
     named.iter().filter(|c| can_hold(c)).cloned().collect()
 }
 
+/// A qualified path `<Self as Trait>::item...` split into its self type,
+/// its trait (none for `<Type>::item`) and the item's name.
+fn qualified(name: &str) -> Option<(&str, Option<&str>, &str)> {
+    let rest = name.strip_prefix('<')?;
+    let mut depth = 0usize;
+    let mut split = None;
+    let mut end = None;
+    for (i, c) in rest.char_indices() {
+        match c {
+            '<' | '(' | '[' => depth += 1,
+            '>' | ')' | ']' if depth == 0 => {
+                end = Some(i);
+                break;
+            }
+            '>' | ')' | ']' => depth -= 1,
+            _ if depth == 0 && split.is_none() && rest[i..].starts_with(" as ") => {
+                split = Some(i);
+            }
+            _ => {}
+        }
+    }
+    let end = end.unwrap_or(rest.len());
+    let self_ty = rest[..split.unwrap_or(end)].trim();
+    let trait_path = split.map(|at| rest[at + " as ".len()..end].trim());
+    let item = rest
+        .get(end + 1..)
+        .unwrap_or_default()
+        .trim_start_matches("::")
+        .split("::")
+        .next()
+        .unwrap_or_default();
+    Some((self_ty, trait_path, item))
+}
+
+/// Whether the crate's own dump holds a method of the name `name` calls,
+/// of an impl whose signature names `name`'s self type (`fn
+/// m::<impl at src/m.rs:4:10: 4:15>::clone(_1: &m::Mine)`): then the
+/// crate's own impl is the one the call selects, even where its own
+/// resolution did not find it, and no default body or blanket impl of the
+/// trait's crate may stand for it. `heads` are the `fn` lines of the
+/// crate's own bodies. The test reads the type's path without its
+/// generic arguments, so a generic own type counts too: it can only keep
+/// a call unlinked, never link it.
+pub(crate) fn own_impl_body(name: &str, heads: &[&str]) -> bool {
+    let Some((self_ty, Some(_), item)) = qualified(name) else {
+        return false;
+    };
+    let ty = past_fundamental(self_ty);
+    let ty = ty.split('<').next().unwrap_or_default();
+    let method = format!(">::{item}(");
+    !ty.is_empty() && heads.iter().any(|h| h.contains(&method) && h.contains(ty))
+}
+
 /// The home of the callee `name` (written from the crate that defines it
 /// where the library's paths resolve it) of a body whose own modules
 /// `own` names (the crate's name and its top-level modules, as its MIR
 /// prints its own paths).
 pub(crate) fn home_of(name: &str, own: &dyn Fn(&str) -> bool) -> Home {
-    let Some(rest) = name.strip_prefix('<') else {
+    if !name.starts_with('<') {
         if !name.contains("::") {
             return Home::Platform;
         }
@@ -4053,26 +4112,10 @@ pub(crate) fn home_of(name: &str, own: &dyn Fn(&str) -> bool) -> Home {
         } else {
             Home::Crate(head.to_string())
         };
-    };
-    // A qualified path `<Self as Trait>::item`.
-    let mut depth = 0usize;
-    let mut split = None;
-    let mut end = rest.len();
-    for (i, c) in rest.char_indices() {
-        match c {
-            '<' | '(' | '[' => depth += 1,
-            '>' | ')' | ']' if depth == 0 => {
-                end = i;
-                break;
-            }
-            '>' | ')' | ']' => depth -= 1,
-            _ if depth == 0 && split.is_none() && rest[i..].starts_with(" as ") => {
-                split = Some(i);
-            }
-            _ => {}
-        }
     }
-    let self_ty = rest[..split.unwrap_or(end)].trim();
+    let Some((self_ty, trait_path, _)) = qualified(name) else {
+        return Home::Platform;
+    };
     // A trait object's method is chosen at run time only where the self
     // type is the object itself: `&dyn T`, `&mut dyn T` are references,
     // whose impls (`impl<I: Iterator + ?Sized> Iterator for &mut I`,
@@ -4083,7 +4126,6 @@ pub(crate) fn home_of(name: &str, own: &dyn Fn(&str) -> bool) -> Home {
     if matches!(type_home(self_ty), TypeHome::Parameter) {
         return Home::Parameter;
     }
-    let trait_path = split.map(|at| rest[at + " as ".len()..end].trim());
     match trait_path {
         Some(tr) => {
             let crates = impl_crates(self_ty, tr, own);
@@ -4141,6 +4183,7 @@ impl EmbedCensus {
         e: &Embedded,
         krate: &str,
         modules: &[&str],
+        heads: &[&str],
         linked: &[&str],
         paths: Option<&crate::library::Paths>,
     ) {
@@ -4166,10 +4209,12 @@ impl EmbedCensus {
         }
         for b in &e.bound {
             let named = paths.map_or_else(|| b.clone(), |p| p.canonical_text(b));
-            *self
-                .unlinked
-                .entry(unlinked_reason(&named, krate, modules, linked))
-                .or_default() += 1;
+            let why = if own_impl_body(&named, heads) {
+                OWN_IMPL.to_string()
+            } else {
+                unlinked_reason(&named, krate, modules, linked)
+            };
+            *self.unlinked.entry(why).or_default() += 1;
         }
     }
 
@@ -6370,9 +6415,17 @@ fn embed_linked(
     // blanket impl or a default body, that is the trait's crate alone (the
     // crate's own impl, where it has one, was resolved in its own dump
     // first).
+    let own_heads: Vec<&str> = read
+        .iter()
+        .flat_map(|(_, texts)| texts.iter())
+        .flat_map(|(_, t)| t.lines().filter(|l| l.starts_with("fn ")))
+        .collect();
     let in_library = |callee: &str, args: &[Option<String>], dest: &str| {
         let paths = paths.as_ref()?;
         let named = paths.canonical_text(callee);
+        if own_impl_body(&named, &own_heads) {
+            return None;
+        }
         let owners = match home_of(&named, &is_own) {
             Home::Crate(c) => vec![c],
             Home::Impl(crates) => crates,
@@ -6554,7 +6607,14 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e, krate, &module_names, &linked_names, paths.as_ref());
+                    census.add(
+                        &e,
+                        krate,
+                        &module_names,
+                        &own_heads,
+                        &linked_names,
+                        paths.as_ref(),
+                    );
                     counted_calls.extend(e.callees.iter().cloned());
                     signatures.insert(
                         kappa.clone(),

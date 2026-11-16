@@ -1244,6 +1244,29 @@ mod tests {
         );
     }
 
+    #[test]
+    fn stdlink_an_own_impl_in_the_dump_is_not_stood_for_by_the_traits_body() {
+        // The crate's derived `Clone` for its own type is in its dump; a
+        // call of it that its own link does not select must not take the
+        // trait crate's body (a default body would be another function).
+        let heads = [
+            "fn blanket::<impl at src/blanket.rs:4:10: 4:15>::clone(_1: &blanket::Mine) -> blanket::Mine {",
+            "fn blanket::<impl at src/blanket.rs:14:1: 14:28>::count(_1: blanket::Wrap<T>) -> usize {",
+        ];
+        let holds = |n: &str| crate::embed::own_impl_body(n, &heads);
+        assert!(holds("<blanket::Mine as core::clone::Clone>::clone"));
+        assert!(holds("<&blanket::Mine as core::clone::Clone>::clone"));
+        assert!(holds("<blanket::Wrap<u32> as core::iter::Iterator>::count"));
+        // A default body or a blanket impl the crate does not override.
+        assert!(!holds(
+            "<blanket::Countdown as core::iter::Iterator>::sum::<u32>"
+        ));
+        assert!(!holds(
+            "<blanket::Mine as alloc::string::ToString>::to_string"
+        ));
+        assert!(!holds("blanket::helper"));
+    }
+
     // stdlink: a call the crate's MIR prints by a path through std reaches
     // the body of the library that defines it.
 
