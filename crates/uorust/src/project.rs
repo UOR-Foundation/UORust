@@ -92,6 +92,16 @@ struct Model {
     registered: BTreeMap<(usize, usize), BTreeMap<String, String>>,
     /// The module each function stands in (`Model::module_of`).
     modules: BTreeMap<FnRef, String>,
+    /// Per package, the registered crates' type paths it reads
+    /// (`registered_paths`).
+    readable: BTreeMap<usize, Vec<String>>,
+    /// What each function's own module scope binds itself, and whether it
+    /// may bring a trait from outside the workspace into scope
+    /// (`names::Resolver::scope_binding`).
+    scoped: BTreeMap<FnRef, (BTreeSet<String>, bool)>,
+    /// Each trait of the workspace, by name, with the names of the methods
+    /// and associated functions it declares.
+    trait_decls: BTreeMap<String, BTreeSet<String>>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -135,6 +145,49 @@ impl Model {
     fn crate_ident(&self, r: FnRef) -> String {
         let file = self.file(r);
         self.package(r).targets[file.target].name.replace('-', "_")
+    }
+
+    /// What the lift may read of a function's own module scope
+    /// (`lift::Seen`): the names its `use` items bind (scope `scope` of its
+    /// file), the names the module and the body bind themselves, whether a
+    /// trait from outside the workspace may be in scope, and whether the
+    /// package invokes a macro in item position.
+    fn seen(&self, r: FnRef, scope: usize) -> lift::Seen {
+        let file = self.file(r);
+        let (local, outside_traits) = self
+            .scoped
+            .get(&r)
+            .cloned()
+            .unwrap_or_else(|| (BTreeSet::new(), true));
+        let empty = crate::facts::ScopeFact::default();
+        let at = file.scopes.get(scope).unwrap_or(&empty);
+        // A trait is in scope where the scope declares it or a `use` binds
+        // it; a `use` is matched by the last segment of its path, which
+        // also covers `use path::Trait as _`, and a glob may bind any.
+        let trait_methods = self
+            .trait_decls
+            .iter()
+            .filter(|(t, _)| {
+                at.glob
+                    || at.traits.contains(t)
+                    || at
+                        .uses
+                        .iter()
+                        .any(|(n, p)| n == *t || p.rsplit("::").next() == Some(t.as_str()))
+            })
+            .flat_map(|(_, methods)| methods.iter().cloned())
+            .collect();
+        lift::Seen {
+            trait_methods,
+            uses: file
+                .scopes
+                .get(scope)
+                .map(|s| s.uses.iter().cloned().collect())
+                .unwrap_or_default(),
+            local,
+            outside_traits,
+            macro_items: self.ws.packages[r.pkg].files.iter().any(|f| f.item_macros),
+        }
     }
 
     /// The module a function stands in, inside its target: its file's
@@ -322,7 +375,28 @@ pub(crate) fn project(
         registry: BTreeMap::new(),
         registered: BTreeMap::new(),
         modules: BTreeMap::new(),
+        readable: BTreeMap::new(),
+        scoped: BTreeMap::new(),
+        trait_decls: BTreeMap::new(),
     };
+    for f in ws
+        .packages
+        .iter()
+        .flat_map(|p| &p.files)
+        .flat_map(|f| &f.fns)
+    {
+        if let (true, Some(owner)) = (f.in_trait, &f.owner) {
+            ctx.trait_decls
+                .entry(owner.clone())
+                .or_default()
+                .insert(f.name.clone());
+        }
+    }
+    ctx.scoped = ctx
+        .all_fns()
+        .into_iter()
+        .map(|r| (r, resolver.scope_binding((r.pkg, r.file, r.idx))))
+        .collect();
     ctx.modules = ctx
         .all_fns()
         .into_iter()
@@ -335,10 +409,18 @@ pub(crate) fn project(
         .filter(|(_, bound)| !bound.is_empty())
         .collect();
     for (pkg, package) in ws.packages.iter().enumerate() {
-        let read = crate::registered::of_package(package, &ws.lock);
+        let read = registered_paths(ws, &resolver, pkg);
+        if !ws.replaced.is_empty()
+            && !crate::registered::of_package(package, &ws.lock, &[]).is_empty()
+        {
+            notes.refusals.insert(Refusal::SourceReplaced {
+                config: ws.replaced.join(", "),
+            });
+        }
         if read.is_empty() {
             continue;
         }
+        ctx.readable.insert(pkg, read.clone());
         for fi in 0..package.files.len() {
             let bound = resolver.registry_bindings(pkg, fi, &read);
             let bound = crate::registered::bindings(package, bound);
@@ -3319,6 +3401,23 @@ fn behavior(
                         .iter()
                         .filter(|(n, _)| !declared.contains(n.as_str()))
                         .map(|(n, a)| {
+                            // An alias that takes a primitive type's name
+                            // (`type f64 = f32;`) names its body in its own
+                            // module and the primitive everywhere else: the
+                            // crate-wide table reads the name as neither.
+                            if lift::PRIMITIVE_TYPES.contains(&n.as_str()) {
+                                let to = crate::ast::RustType {
+                                    text: format!("{n}, a primitive type's name an alias takes"),
+                                    kind: crate::ast::TypeKind::Other,
+                                };
+                                return (
+                                    n.clone(),
+                                    crate::ast::Alias {
+                                        params: Vec::new(),
+                                        to,
+                                    },
+                                );
+                            }
                             let to = a.to.localized(&file.imports);
                             let alias = crate::ast::Alias {
                                 params: a.params.clone(),
@@ -3583,7 +3682,7 @@ fn behavior(
                 .collect();
             // The registered crates' types whose reading the package's lock
             // admits, each naming itself (`Types::registered`).
-            for path in crate::registered::of_package(package, &ws.lock) {
+            for path in ctx.readable.get(&pkg).into_iter().flatten().cloned() {
                 aliases.insert(path.clone(), path);
             }
             let mut enums: Variants = d
@@ -4055,8 +4154,14 @@ fn behavior(
                     result,
                     block,
                     imports: ctx.file(r).imports.clone(),
+                    seen: ctx.seen(r, f.scope),
                     aliases: overlays[&(r.pkg, r.file)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, r.pkg, r.file, &ctx.module_of(r)),
+                    homonyms: homonym_reading(
+                        ctx,
+                        &homonyms,
+                        (r.pkg, r.file, f.scope),
+                        &ctx.module_of(r),
+                    ),
                     called,
                     formatter,
                 });
@@ -4101,8 +4206,15 @@ fn behavior(
                     result,
                     block,
                     imports: file.imports.clone(),
+                    // A constant's scope is read as one that may see any
+                    // trait: no method of its value is read as inherent.
+                    seen: lift::Seen {
+                        outside_traits: true,
+                        macro_items: true,
+                        ..lift::Seen::default()
+                    },
                     aliases: overlays[&(pkg, fi)].clone(),
-                    homonyms: homonym_reading(ctx, &homonyms, pkg, fi, &file.module),
+                    homonyms: homonym_reading(ctx, &homonyms, (pkg, fi, 0), &file.module),
                     called: rust.clone(),
                     formatter: None,
                 });
@@ -5666,17 +5778,53 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
     out
 }
 
+/// The registered crates' type paths a package reads
+/// ([`crate::registered::of_package`]), less those it cannot: a path whose
+/// head (`num_bigint` of `num_bigint::BigInt`) a module, type, function or
+/// `use` of the package binds itself, since a path written relative to a
+/// module starts at what that module binds before it reaches a crate; and
+/// every path of a package that invokes a macro in item position, whose
+/// items the facts do not hold.
+fn registered_paths(
+    ws: &Workspace,
+    resolver: &crate::names::Resolver<'_>,
+    pkg: usize,
+) -> Vec<String> {
+    let package = &ws.packages[pkg];
+    if package.files.iter().any(|f| f.item_macros) {
+        return Vec::new();
+    }
+    let mut read = crate::registered::of_package(package, &ws.lock, &ws.replaced);
+    read.retain(|path| {
+        let head = path.split("::").next().unwrap_or(path);
+        !resolver.package_binds(pkg, head)
+    });
+    read
+}
+
 /// How a module of a file (its own, or an inline module inside it) reads
 /// each name its crate's free functions share: the function the module
 /// declares, else the one the file's `use` names, else none.
 fn homonym_reading(
     ctx: &Model,
     homonyms: &BTreeMap<FnSite, (String, String)>,
-    pkg: usize,
-    fi: usize,
+    (pkg, fi, scope): (usize, usize, usize),
     reader: &str,
 ) -> BTreeMap<String, Option<String>> {
     let file = &ctx.ws.packages[pkg].files[fi];
+    // The `use` items of the reader's own module scope: an inline module
+    // inherits no name from the module around it, and the file-wide
+    // imports keep the last `use` of a name in any of its modules.
+    let uses: BTreeMap<&str, &str> = file
+        .scopes
+        .get(scope)
+        .map(|s| {
+            s.uses
+                .iter()
+                .map(|(n, p)| (n.as_str(), p.as_str()))
+                .collect()
+        })
+        .unwrap_or_default();
     let mut out = BTreeMap::new();
     for ((p, target, module, name), (rust, _)) in homonyms {
         if *p != pkg {
@@ -5690,7 +5838,7 @@ fn homonym_reading(
             *entry = Some(rust.clone());
             continue;
         }
-        let Some(path) = file.imports.get(name) else {
+        let Some(path) = uses.get(name.as_str()) else {
             continue;
         };
         // `crate::`, `self::` and `super::` as Rust reads them, any other
@@ -7576,5 +7724,73 @@ mod tests {
         for want in ["callWOuterLeftPick", "callWOuterRightPick"] {
             assert!(interface.contains(want), "{want} not in {interface}");
         }
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    /// The frontier and the behavior module of a one-file package.
+    fn refuted_projection(tag: &str, source: &str) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-refuted-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        let text = |suffix: &str| {
+            files
+                .iter()
+                .find(|(k, _)| k.ends_with(suffix))
+                .map(|(_, v)| String::from_utf8(v.clone()).unwrap())
+                .unwrap_or_default()
+        };
+        (text("frontier.toml"), text("Behavior.lex.tex"))
+    }
+
+    #[test]
+    fn an_inline_module_reads_a_shared_name_by_its_own_use_alone() {
+        let (_, behavior) = refuted_projection(
+            "homonym-use",
+            "mod left {\n pub fn pick() -> u8 { 1 }\n}\n\
+             mod right {\n pub fn pick() -> u8 { 2 }\n}\n\
+             use right::pick;\n\
+             pub fn top() -> u8 { pick() }\n\
+             pub mod inner {\n use crate::left::pick;\n pub fn caller() -> u8 { pick() }\n}\n",
+        );
+        let top = behavior
+            .lines()
+            .find(|l| l.contains("name: top,"))
+            .unwrap_or_default();
+        assert!(top.contains("(rightPick)"), "{behavior}");
+        let caller = behavior
+            .lines()
+            .find(|l| l.contains("name: caller,"))
+            .unwrap_or_default();
+        assert!(caller.contains("(leftPick)"), "{behavior}");
+    }
+
+    #[test]
+    fn an_alias_that_takes_a_primitive_name_is_read_nowhere() {
+        let (frontier, behavior) = refuted_projection(
+            "primitive-alias",
+            "pub mod narrow {\n #[allow(non_camel_case_types)]\n pub type f64 = f32;\n \
+             pub fn small(x: f64) -> bool { x > 0.5 }\n}\n\
+             pub fn wide(x: f64) -> bool { x > 0.5 }\n",
+        );
+        assert!(!behavior.contains("8 23"), "{behavior}");
+        assert!(
+            frontier.contains("a primitive type's name an alias takes"),
+            "{frontier}"
+        );
     }
 }

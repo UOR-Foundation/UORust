@@ -317,6 +317,24 @@ pub(crate) struct TypeDecl {
     shape: Shape,
 }
 
+/// Whether an item of visibility `vis` declared in module `at` may be
+/// named from module `from`: `pub` and `pub(crate)` anywhere in the crate,
+/// a private item in its own module and the modules inside it. Any other
+/// restriction (`pub(super)`, `pub(in ..)`), and an unknown visibility,
+/// is read as not visible, which keeps what depends on it open.
+fn visible_from(vis: Option<&Vis>, at: &ModKey, from: &ModKey) -> bool {
+    let same_crate = at.0 == from.0 && at.1 == from.1;
+    match vis {
+        Some(Vis::Public) => true,
+        Some(Vis::Crate) => same_crate,
+        Some(Vis::Private) => {
+            same_crate
+                && (at.2.is_empty() || from.2 == at.2 || from.2.starts_with(&format!("{}::", at.2)))
+        }
+        _ => false,
+    }
+}
+
 /// What a struct or enum declaration writes of its values beyond its name:
 /// the names of its type parameters, a struct's fields (a tuple struct's
 /// by position, `0` first) and the derives its attributes name.
@@ -324,6 +342,8 @@ pub(crate) struct TypeDecl {
 pub(crate) struct Shape {
     params: Vec<String>,
     fields: Vec<(String, RustType)>,
+    /// Who may name each field, by position in `fields`.
+    field_vis: Vec<Vis>,
     derives: Vec<String>,
 }
 
@@ -333,7 +353,12 @@ impl Shape {
         fields: Option<&syn::Fields>,
         attrs: &[syn::Attribute],
     ) -> Shape {
-        let fields = fields
+        let field_vis = fields
+            .into_iter()
+            .flatten()
+            .map(|f| Vis::read(&f.vis))
+            .collect();
+        let fields: Vec<(String, RustType)> = fields
             .into_iter()
             .flatten()
             .enumerate()
@@ -356,6 +381,7 @@ impl Shape {
         Shape {
             params: type_params(generics),
             fields,
+            field_vis,
             derives,
         }
     }
@@ -2530,9 +2556,19 @@ impl<'a> Resolver<'a> {
                 Ty::Named(id, args) if unwraps(&id) => args.first().cloned().unwrap_or(Ty::Open),
                 _ => Ty::Open,
             },
+            // A struct literal or value path whose head the body itself
+            // declares (`struct W { .. }` inside the function) names the
+            // body's item, which shadows the module's: it stays open.
+            Hint::Ctor(segments)
+                if segments.first().is_some_and(|head| {
+                    self.names(caller).is_some_and(|n| n.rebound.contains(head))
+                }) =>
+            {
+                Ty::Open
+            }
             Hint::Ctor(segments) => self.constructed(reading, segments),
             Hint::Tuple(items) => Ty::Tuple(items.iter().map(of).collect()),
-            Hint::Field(base, name) => self.field(&of(base), name),
+            Hint::Field(base, name) => self.field(&of(base), name, &reading.module),
         }
     }
 
@@ -2565,7 +2601,11 @@ impl<'a> Resolver<'a> {
 
     /// Whether the one declaration of `ty` in `module` derives the standard
     /// library's `Clone`: by the prelude's name, which nothing the module
-    /// binds may shadow, or by its path.
+    /// binds may shadow, or by its path. The declaration takes no type
+    /// parameter: `derive(Clone)` of `C<T>` implements `Clone` only where
+    /// `T: Clone` (the standard library's documentation of the derive),
+    /// so `C<D>` with `D` not `Clone` is not `Clone` and `c.clone()` of a
+    /// `&C<D>` is `<&C<D> as Clone>::clone`, a reference.
     fn derives_clone(&self, module: &ModKey, ty: &str) -> bool {
         let decls = self
             .scope(module)
@@ -2575,6 +2615,9 @@ impl<'a> Resolver<'a> {
         let [decl] = decls else {
             return false;
         };
+        if decl.generics != 0 || !decl.shape.params.is_empty() {
+            return false;
+        }
         decl.shape.derives.iter().any(|d| {
             let segments: Vec<String> = d.split("::").map(str::to_string).collect();
             match self.path(module, &segments, false, &mut Vec::new()) {
@@ -2594,8 +2637,12 @@ impl<'a> Resolver<'a> {
     /// not one decides it. A tuple's field is its element; a struct of the
     /// workspace declared once has the field's type as it is written in the
     /// declaration, with the struct's arguments for its parameters. A type
-    /// without the field (reached through a `Deref` impl) stays open.
-    fn field(&self, of: &Ty, name: &str) -> Ty {
+    /// without the field (reached through a `Deref` impl) stays open, and
+    /// so does a field the expression's module may not name: field lookup
+    /// skips a field that is not visible there and goes on through
+    /// `Deref` (the Rust reference, "Field access expressions"), so a
+    /// private field read from outside its module is another field.
+    fn field(&self, of: &Ty, name: &str, from: &ModKey) -> Ty {
         let mut of = of;
         while let Ty::Ref(_, inner) = of {
             of = inner;
@@ -2618,9 +2665,13 @@ impl<'a> Resolver<'a> {
                 if !matches!(decl.kind, Kind::Struct) || decl.shape.params.len() != args.len() {
                     return Ty::Open;
                 }
-                let Some((_, written)) = decl.shape.fields.iter().find(|(n, _)| n == name) else {
+                let Some(at) = decl.shape.fields.iter().position(|(n, _)| n == name) else {
                     return Ty::Open;
                 };
+                let written = &decl.shape.fields[at].1;
+                if !visible_from(decl.shape.field_vis.get(at), module, from) {
+                    return Ty::Open;
+                }
                 let reading = Reading {
                     module: module.clone(),
                     generics: &decl.shape.params,
@@ -2687,6 +2738,78 @@ impl<'a> Resolver<'a> {
                 .map(|(call, (outcome, _))| (call.text(), outcome))
                 .collect(),
         )
+    }
+
+    /// What a function's own module scope binds itself, and whether it may
+    /// bring a trait of a crate outside the workspace into scope: the names
+    /// its module declares (modules, types, functions) or a `use` of it
+    /// binds, with those the body binds anew; and whether a `use` or a glob
+    /// of the module names a path that starts neither at the standard
+    /// library, nor in the crate (`crate`, `self`, `super`, a module or type
+    /// of the module), nor at a package of the workspace, and is not a
+    /// registered crate's type path. A path of a workspace package is
+    /// inside: its traits are the workspace's own.
+    pub(crate) fn scope_binding(&self, f: FnId) -> (BTreeSet<String>, bool) {
+        let module = self.module(f);
+        let mut local = BTreeSet::new();
+        let mut outside = false;
+        let packages: BTreeSet<String> = self
+            .ws
+            .packages
+            .iter()
+            .map(|p| p.name.replace('-', "_"))
+            .collect();
+        if let Some(scope) = self.scope(&module) {
+            local.extend(scope.mods.iter().cloned());
+            local.extend(scope.types.keys().cloned());
+            local.extend(scope.values.keys().cloned());
+            local.extend(scope.uses.iter().map(|u| u.name.clone()));
+            let inside = |path: &[String]| {
+                let path = match path.first() {
+                    Some(first) if first.is_empty() => &path[1..],
+                    _ => path,
+                };
+                // A registered crate's type (`num_bigint::BigInt`) is a
+                // type its crate's own source declares, not a trait.
+                let registered = crate::registered::reading(&path.join("::")).is_some();
+                registered
+                    || path.first().is_some_and(|head| {
+                        ["std", "core", "alloc", "crate", "self", "super"].contains(&head.as_str())
+                            || scope.mods.contains(head)
+                            || scope.types.contains_key(head)
+                            || packages.contains(head)
+                    })
+            };
+            outside = scope.uses.iter().any(|u| !inside(&u.path))
+                || scope.globs.iter().any(|g| !inside(&g.path));
+        }
+        if let Some(names) = self.names(f) {
+            local.extend(names.rebound.iter().cloned());
+        }
+        (local, outside)
+    }
+
+    /// Whether any module of a package binds `name` itself: declares a
+    /// module, type or function of it, or a `use` of it or of a function
+    /// body binds it. A relative path whose head is such a name may start
+    /// there rather than at the crate of that name.
+    pub(crate) fn package_binds(&self, pkg: usize, name: &str) -> bool {
+        let in_scopes = self.modules.keys().filter(|k| k.0 == pkg).any(|m| {
+            self.scope(m).is_some_and(|s| {
+                s.mods.contains(name)
+                    || s.types.contains_key(name)
+                    || s.values.contains_key(name)
+                    || s.uses.iter().any(|u| u.name == name)
+            })
+        });
+        let in_bodies = self.ws.packages[pkg].files.iter().any(|file| {
+            self.syntax
+                .names
+                .files
+                .get(&file.rel)
+                .is_some_and(|names| names.fns.values().any(|n| n.rebound.contains(name)))
+        });
+        in_scopes || in_bodies
     }
 
     /// The bare type names a function's module binds to a type of a
@@ -3274,6 +3397,7 @@ mod tests {
                 kind: "normal".into(),
                 path: None,
                 inside: false,
+                platform: None,
             });
         }
         let resolver = Resolver::new(&ws, &syntax);
@@ -3427,6 +3551,139 @@ mod tests {
             got.iter()
                 .any(|g| g.starts_with("underived: A::from -> open ")),
             "{got:#?}"
+        );
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    /// `TYPED_CALL_IMPLS` and a type `G<T>` deriving `Clone`, with a `From`
+    /// of `G<D>` (line 9) and of `&G<D>` (line 10).
+    fn refuted_source(rest: &str) -> String {
+        format!(
+            "{TYPED_CALL_IMPLS}\
+             #[derive(Clone)]\npub struct G<T>(pub T);\n\
+             impl From<G<D>> for A {{ fn from(_: G<D>) -> A {{ A(2) }} }}\n\
+             impl<'a> From<&'a G<D>> for A {{ fn from(_: &'a G<D>) -> A {{ A(3) }} }}\n\
+             {rest}"
+        )
+    }
+
+    #[test]
+    fn a_private_field_read_from_outside_its_module_stays_open() {
+        let source = refuted_source(
+            "pub mod wrap {\n\
+             pub struct Inner { pub x: u16 }\n\
+             pub struct W { x: u8, pub inner: Inner }\n\
+             impl core::ops::Deref for W { type Target = Inner; fn deref(&self) -> &Inner { &self.inner } }\n\
+             pub fn inside(w: &W) -> super::A { super::A::from(w.x) }\n\
+             }\n\
+             pub fn outside(w: &wrap::W) -> A { A::from(w.x) }\n",
+        );
+        let got = resolutions("refuted-private", "", &source);
+        // Inside `wrap` the private `u8` field is the field read.
+        assert!(
+            got.iter()
+                .any(|g| g == "inside: super::A::from -> A::from@2"),
+            "{got:#?}"
+        );
+        // Outside it field lookup skips it and goes on through `Deref`.
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("outside: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_clone_of_a_reference_to_a_generic_type_deriving_clone_stays_open() {
+        // `derive(Clone)` of `G<T>` requires `T: Clone`; `D` is not, so
+        // `g.clone()` is `Clone` of `&G<D>`.
+        let source = refuted_source("pub fn generic(g: &G<D>) -> A { A::from(g.clone()) }\n");
+        let got = resolutions("refuted-clone", "", &source);
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("generic: A::from -> open ")),
+            "{got:#?}"
+        );
+        assert!(
+            !got.iter().any(|g| g == "generic: A::from -> A::from@9"),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_struct_the_body_declares_shadows_the_modules_of_its_name() {
+        let source = refuted_source(
+            "pub struct W { pub x: u8 }\n\
+             pub fn outer(w: W) -> A { A::from(w.x) }\n\
+             pub fn local() -> A { struct W { x: u16 } let w = W { x: 300 }; A::from(w.x) }\n",
+        );
+        let got = resolutions("refuted-local", "", &source);
+        assert!(
+            got.iter().any(|g| g == "outer: A::from -> A::from@2"),
+            "{got:#?}"
+        );
+        assert!(
+            got.iter().any(|g| g.starts_with("local: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    /// The resolver of a one-file package of `source`.
+    fn refuted_resolved(tag: &str, source: &str, check: impl Fn(&Workspace, &Resolver<'_>)) {
+        let dir = std::env::temp_dir().join(format!("uorust-names-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let (ws, syntax) = crate::ingest::workspace(&dir, None).expect("a workspace");
+        let syntax = read(&dir, &ws, syntax).expect("its names");
+        let _ = std::fs::remove_dir_all(&dir);
+        let resolver = Resolver::new(&ws, &syntax);
+        check(&ws, &resolver);
+    }
+
+    #[test]
+    fn a_crate_name_a_module_of_the_package_binds_is_the_modules() {
+        refuted_resolved(
+            "refuted-binds",
+            "mod num_bigint { pub type BigInt = i64; }\n\
+             pub fn sq(a: num_bigint::BigInt) -> num_bigint::BigInt { a * a }\n",
+            |_, resolver| {
+                assert!(resolver.package_binds(0, "num_bigint"));
+                assert!(!resolver.package_binds(0, "num_rational"));
+            },
+        );
+    }
+
+    #[test]
+    fn a_scope_that_imports_from_outside_the_workspace_may_see_its_traits() {
+        refuted_resolved(
+            "refuted-scope",
+            "use num_bigint::BigInt;\n\
+             pub fn plain(x: f64) -> f64 { x }\n\
+             pub mod far { use other::Odd; pub fn far(x: f64) -> f64 { x } }\n\
+             pub mod wide { use other::*; pub fn wide(x: f64) -> f64 { x } }\n\
+             pub mod near { use crate::plain; pub fn near(x: f64) -> f64 { plain(x) } }\n",
+            |ws, resolver| {
+                let of = |name: &str| {
+                    let idx = ws.packages[0].files[0]
+                        .fns
+                        .iter()
+                        .position(|f| f.name == name)
+                        .expect("the function");
+                    resolver.scope_binding((0, 0, idx)).1
+                };
+                // A registered crate's type is no trait; another crate's
+                // name, or a glob of it, may be.
+                assert!(!of("plain"));
+                assert!(of("far"));
+                assert!(of("wide"));
+                assert!(!of("near"));
+            },
         );
     }
 }

@@ -28,6 +28,10 @@ pub(crate) struct Workspace {
     pub(crate) advisories: Option<Advisories>,
     /// The targets `rust-toolchain.toml` declares the workspace is built for.
     pub(crate) targets: Vec<String>,
+    /// The Cargo configuration files that apply to the workspace and
+    /// replace a source or override a package's path (`[source]`,
+    /// `paths`): Cargo then builds what they name, not the locked archive.
+    pub(crate) replaced: Vec<String>,
 }
 
 /// What an advisory database says about the locked packages.
@@ -110,6 +114,8 @@ pub(crate) struct Dep {
     /// absolute path when it lies outside it.
     pub(crate) path: Option<String>,
     pub(crate) inside: bool,
+    /// The platform a `[target.'..'.dependencies]` table restricts it to.
+    pub(crate) platform: Option<String>,
 }
 
 /// What one source file holds.
@@ -139,6 +145,10 @@ pub(crate) struct SourceFile {
     pub(crate) capabilities: Vec<(Capability, Span, String)>,
     /// `use` imports: the imported name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
+    /// Whether product code of the file invokes a macro in item position
+    /// (or among a trait's items): the items it expands to (a type, a
+    /// trait, a module) are in no fact.
+    pub(crate) item_macros: bool,
 }
 
 #[derive(Clone, Debug)]

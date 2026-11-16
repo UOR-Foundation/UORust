@@ -115,19 +115,35 @@ pub(crate) fn reading(path: &str) -> Option<Ty> {
 }
 
 /// The paths of the readings that hold for a package: it depends on the
-/// reading's package by that package's own name, no other dependency is
-/// renamed to the crate's name, and the lock pins one version of it, and
-/// of each package the type is made of, that a reading records with the
-/// same checksum.
-pub(crate) fn of_package(package: &Package, lock: &[LockedPackage]) -> Vec<String> {
+/// reading's package by that package's own name, as a normal dependency on
+/// every platform (a build or dev dependency is not in the library's crate
+/// graph, and another normal dependency whose library takes the name then
+/// is what the name means; two of them the compiler refuses, E0464), no
+/// other dependency is renamed to the crate's name, and the lock pins one
+/// version of it, and of each package the type is made of, that a reading
+/// records with the same checksum. A checksum identifies the source only
+/// where Cargo builds from the registry's archive: where a configuration
+/// file replaces the source or overrides a path (`replaced`), Cargo builds
+/// what that names with the lock unchanged, and no reading holds.
+pub(crate) fn of_package(
+    package: &Package,
+    lock: &[LockedPackage],
+    replaced: &[String],
+) -> Vec<String> {
+    if !replaced.is_empty() {
+        return Vec::new();
+    }
     readings()
         .into_iter()
         .filter(|r| {
             let krate = r.package.replace('-', "_");
-            let depends = package
-                .deps
-                .iter()
-                .any(|d| d.name == r.package && d.path.is_none() && d.rename.is_none());
+            let depends = package.deps.iter().any(|d| {
+                d.name == r.package
+                    && d.path.is_none()
+                    && d.rename.is_none()
+                    && d.kind == "normal"
+                    && d.platform.is_none()
+            });
             let shadowed = package
                 .deps
                 .iter()
@@ -145,11 +161,16 @@ pub(crate) fn of_package(package: &Package, lock: &[LockedPackage]) -> Vec<Strin
 /// resolver binds to it in every module of the file
 /// (`names::Resolver::registry_bindings`, the one reading of a `use`), less
 /// any name a type of the package declares, since the lift's own tables
-/// read a declared type's bare name across the package.
+/// read a declared type's bare name across the package. A package that
+/// invokes a macro in item position may declare a type the facts do not
+/// hold, so none of its names is read.
 pub(crate) fn bindings(
     package: &Package,
     mut bound: BTreeMap<String, String>,
 ) -> BTreeMap<String, String> {
+    if package.files.iter().any(|f| f.item_macros) {
+        return BTreeMap::new();
+    }
     let declared = |name: &str| {
         package.files.iter().any(|f| {
             f.structs.iter().any(|s| s.name == name)
@@ -196,6 +217,7 @@ mod tests {
             kind: "normal".into(),
             path: None,
             inside: false,
+            platform: None,
         }
     }
 
@@ -213,19 +235,19 @@ mod tests {
         let package = registered_package(vec![registered_dep("num-bigint", None)], "");
         let read = vec!["num_bigint::BigInt".to_string()];
         assert_eq!(
-            of_package(&package, &[registered_lock("0.4.8", BIGINT_SUM)]),
+            of_package(&package, &[registered_lock("0.4.8", BIGINT_SUM)], &[]),
             read
         );
         // Another version, the same version from another archive, two
         // versions at once, or none: the type is not read.
-        assert!(of_package(&package, &[registered_lock("0.4.9", BIGINT_SUM)]).is_empty());
-        assert!(of_package(&package, &[registered_lock("0.4.8", &"0".repeat(64))]).is_empty());
+        assert!(of_package(&package, &[registered_lock("0.4.9", BIGINT_SUM)], &[]).is_empty());
+        assert!(of_package(&package, &[registered_lock("0.4.8", &"0".repeat(64))], &[]).is_empty());
         let both = [
             registered_lock("0.4.8", BIGINT_SUM),
             registered_lock("0.3.3", BIGINT_SUM),
         ];
-        assert!(of_package(&package, &both).is_empty());
-        assert!(of_package(&package, &[]).is_empty());
+        assert!(of_package(&package, &both, &[]).is_empty());
+        assert!(of_package(&package, &[], &[]).is_empty());
     }
 
     #[test]
@@ -234,9 +256,9 @@ mod tests {
         // The package not a dependency, renamed, or its name taken by
         // another package's rename.
         let none = registered_package(Vec::new(), "");
-        assert!(of_package(&none, &lock).is_empty());
+        assert!(of_package(&none, &lock, &[]).is_empty());
         let renamed = registered_package(vec![registered_dep("num-bigint", Some("big"))], "");
-        assert!(of_package(&renamed, &lock).is_empty());
+        assert!(of_package(&renamed, &lock, &[]).is_empty());
         let taken = registered_package(
             vec![
                 registered_dep("num-bigint", None),
@@ -244,7 +266,7 @@ mod tests {
             ],
             "",
         );
-        assert!(of_package(&taken, &lock).is_empty());
+        assert!(of_package(&taken, &lock, &[]).is_empty());
     }
 
     #[test]
@@ -282,11 +304,64 @@ mod tests {
         assert_eq!(
             of_package(
                 &package,
-                &[ratio.clone(), registered_lock("0.4.8", BIGINT_SUM)]
+                &[ratio.clone(), registered_lock("0.4.8", BIGINT_SUM)],
+                &[]
             ),
             ["num_rational::BigRational".to_string()]
         );
-        assert!(of_package(&package, std::slice::from_ref(&ratio)).is_empty());
-        assert!(of_package(&package, &[ratio, registered_lock("0.4.7", BIGINT_SUM)]).is_empty());
+        assert!(of_package(&package, std::slice::from_ref(&ratio), &[]).is_empty());
+        assert!(of_package(
+            &package,
+            &[ratio, registered_lock("0.4.7", BIGINT_SUM)],
+            &[]
+        )
+        .is_empty());
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    fn refuted_dep(kind: &str, platform: Option<&str>) -> Dep {
+        Dep {
+            kind: kind.into(),
+            platform: platform.map(str::to_string),
+            ..registered_dep("num-bigint", None)
+        }
+    }
+
+    #[test]
+    fn a_reading_holds_only_for_a_normal_dependency_built_from_its_archive() {
+        let lock = [registered_lock("0.4.8", BIGINT_SUM)];
+        let normal = registered_package(vec![refuted_dep("normal", None)], "");
+        assert_eq!(of_package(&normal, &lock, &[]).len(), 1);
+        // A build or dev dependency is not in the library's crate graph;
+        // a platform's dependency is not on every platform.
+        for dep in [
+            refuted_dep("build", None),
+            refuted_dep("dev", None),
+            refuted_dep("normal", Some("cfg(windows)")),
+        ] {
+            let package = registered_package(vec![dep], "");
+            assert!(of_package(&package, &lock, &[]).is_empty());
+        }
+        // A configuration that replaces the source: the lock no longer
+        // names what Cargo builds.
+        let replaced = [".cargo/config.toml".to_string()];
+        assert!(of_package(&normal, &lock, &replaced).is_empty());
+    }
+
+    #[test]
+    fn a_package_that_makes_items_by_a_macro_binds_no_registered_name() {
+        let bound = || BTreeMap::from([("BigInt".to_string(), "num_bigint::BigInt".to_string())]);
+        let plain = registered_package(Vec::new(), "use num_bigint::BigInt;\n");
+        assert_eq!(bindings(&plain, bound()), bound());
+        let made = registered_package(
+            Vec::new(),
+            "use num_bigint::BigInt;\nmacro_rules! m { () => {} }\nmod inner { m!(); }\n",
+        );
+        assert!(made.files[0].item_macros);
+        assert!(bindings(&made, bound()).is_empty());
+        // A macro's definition alone makes no item.
+        let defined = registered_package(Vec::new(), "macro_rules! m { () => {} }\n");
+        assert!(!defined.files[0].item_macros);
     }
 }
