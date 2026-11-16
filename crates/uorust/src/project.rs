@@ -350,12 +350,31 @@ pub(crate) fn project(
     }
     let mut entrypoints: Vec<String> = files
         .keys()
-        .filter(|p| p.ends_with(".lex.tex"))
+        .filter(|p| p.ends_with(MODULE_SUFFIX))
         .cloned()
         .collect();
-    for module in &modules {
-        entrypoints.push(module.path());
-        files.insert(module.path(), module.render().into_bytes());
+    // Every file that is no generated module comes first: beside the modules
+    // themselves, these are what can cite a record of one by its ID.
+    for (path, bytes) in register(&iface.register) {
+        files.insert(path, bytes);
+    }
+    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
+    // The prover's trial run lists the translations it admitted on trial.
+    if let Some(listing) = candidates {
+        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
+    }
+    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
+    let cited = |id: &str| {
+        files
+            .values()
+            .any(|bytes| String::from_utf8_lossy(bytes).contains(id))
+    };
+    // Each module within the limit the project file below states, in parts
+    // where it is beyond it and its declarations can be written apart.
+    let written = sized(&modules, MAX_FILE_BYTES, &cited);
+    for (path, text) in written {
+        entrypoints.push(path.clone());
+        files.insert(path, text.into_bytes());
     }
     entrypoints.sort();
     let toml_name: String = options
@@ -425,15 +444,6 @@ pub(crate) fn project(
         ".gitignore".into(),
         b"/.lexlean/\n/.prism/\n/.lake/\n".to_vec(),
     );
-    for (path, bytes) in register(&iface.register) {
-        files.insert(path, bytes);
-    }
-    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
-    // The prover's trial run lists the translations it admitted on trial.
-    if let Some(listing) = candidates {
-        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
-    }
-    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
     within_limit(&files)?;
     Ok(files)
 }
@@ -5236,6 +5246,184 @@ fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
 /// What the path of a LexLean module's source ends with.
 const MODULE_SUFFIX: &str = ".lex.tex";
 
+/// The modules as they are written, each `(path, text)`: a module within
+/// `limit` bytes whole, and a module beyond it as its [`parts`] where its
+/// records can be written apart and nothing but the module itself cites one
+/// (no other module, and no other file, which `cited` answers for the text
+/// `Module::`). A module beyond the limit that cannot be parted is written
+/// whole, and [`within_limit`] refuses the projection by its name and size.
+fn sized(modules: &[Module], limit: usize, cited: &dyn Fn(&str) -> bool) -> Vec<(String, String)> {
+    let texts: Vec<String> = modules.iter().map(Module::render).collect();
+    let taken: BTreeSet<&str> = modules.iter().map(|m| m.name.as_str()).collect();
+    let mut out = Vec::new();
+    for (i, (module, text)) in modules.iter().zip(&texts).enumerate() {
+        if text.len() > limit {
+            let id = format!("{}::", module.name);
+            let elsewhere = cited(&id)
+                || texts
+                    .iter()
+                    .enumerate()
+                    .any(|(j, other)| j != i && other.contains(&id));
+            let parted = (!elsewhere).then(|| parts(module, limit, &taken)).flatten();
+            if let Some(parted) = parted {
+                out.extend(parted.iter().map(|part| (part.path(), part.render())));
+                continue;
+            }
+        }
+        out.push((module.path(), text.clone()));
+    }
+    out
+}
+
+/// The parts a module is written as when it is beyond `limit` bytes: its
+/// declarations in their order, each part the longest run of them that
+/// stays within the limit. The first part keeps the module's name and the
+/// `n`th is named `{Module}{n}`, so a record's ID (`Module::name`, which
+/// PrismPM reads from the module that declares it) names its part, and every
+/// reference to a record of the module is rewritten to the part it is in.
+///
+/// Only a module of separate records is parted: every declaration a closed
+/// value in which no word outside a string is another declaration's name
+/// (the term is not read further, so a field or a constructor spelled like
+/// one counts as naming it), and none carrying a canonical `index`, which
+/// PrismPM derives from the order of the IDs a parting changes. `None` where
+/// the module is not one, where one record alone is beyond the limit, or
+/// where a part's name is `taken`.
+fn parts(module: &Module, limit: usize, taken: &BTreeSet<&str>) -> Option<Vec<Module>> {
+    let names: BTreeSet<&str> = module.decls.iter().map(Decl::name).collect();
+    let mut records = Vec::new();
+    for decl in &module.decls {
+        let Decl::Definition {
+            name,
+            parameters,
+            result,
+            body: Expr::Flat(body),
+            axioms,
+            recursive: None,
+            termination: None,
+            mutual: None,
+        } = decl
+        else {
+            return None;
+        };
+        let indexed = body.contains("{index := ") || body.contains(", index := ");
+        if !parameters.is_empty()
+            || !axioms.is_empty()
+            || indexed
+            || words(body).any(|word| names.contains(word))
+        {
+            return None;
+        }
+        records.push((name, result, body));
+    }
+    let part = |decls: Vec<Decl>, name: String| Module {
+        name,
+        glossaries: module.glossaries.clone(),
+        imports: module.imports.clone(),
+        title: module.title,
+        decls,
+    };
+    // The size of each record under the longest name a part can have: there
+    // are no more parts than records, so no part's number is wider than
+    // their count. A shorter name never prints a record larger, since a
+    // line that fits stays flat.
+    let widest = format!("{}{}", module.name, module.decls.len());
+    let room = limit.checked_sub(part(Vec::new(), widest.clone()).render().len() + "\n".len())?;
+    let between = "\n\n".len();
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    let mut used = 0;
+    for (i, (name, result, body)) in records.iter().enumerate() {
+        let widened = renamed(body, &module.name, &|n| {
+            names.contains(n).then_some(widest.as_str())
+        });
+        let size = crate::lex::render_decl(&Decl::value(*name, *result, widened)).len();
+        match groups.last_mut() {
+            Some(group) if used + between + size <= room => {
+                group.push(i);
+                used += between + size;
+            }
+            _ if size <= room => {
+                groups.push(vec![i]);
+                used = size;
+            }
+            _ => return None,
+        }
+    }
+    let part_names: Vec<String> = (0..groups.len())
+        .map(|k| match k {
+            0 => module.name.clone(),
+            _ => format!("{}{}", module.name, k + 1),
+        })
+        .collect();
+    if part_names[1..].iter().any(|n| taken.contains(n.as_str())) {
+        return None;
+    }
+    let part_of: BTreeMap<&str, &str> = groups
+        .iter()
+        .zip(&part_names)
+        .flat_map(|(group, part)| {
+            group
+                .iter()
+                .map(|&i| (records[i].0.as_str(), part.as_str()))
+        })
+        .collect();
+    Some(
+        groups
+            .iter()
+            .zip(&part_names)
+            .map(|(group, name)| {
+                let decls = group
+                    .iter()
+                    .map(|&i| {
+                        let (record, result, body) = records[i];
+                        let body = renamed(body, &module.name, &|n| part_of.get(n).copied());
+                        Decl::value(record, result, body)
+                    })
+                    .collect();
+                part(decls, name.clone())
+            })
+            .collect(),
+    )
+}
+
+/// `text` with every string that is an ID of `module` (`"Module::name"`)
+/// naming the module `part_of` gives for its `name`; an ID it gives none for
+/// stays as it is.
+fn renamed<'a>(text: &str, module: &str, part_of: &dyn Fn(&str) -> Option<&'a str>) -> String {
+    let opening = format!("\"{module}::");
+    let mut out = String::with_capacity(text.len());
+    let mut rest = text;
+    while let Some(at) = rest.find(&opening) {
+        let after = &rest[at + opening.len()..];
+        let name = &after[..after.find('"').unwrap_or(after.len())];
+        out.push_str(&rest[..at]);
+        match part_of(name) {
+            Some(part) => out.push_str(&format!("\"{part}::")),
+            None => out.push_str(&opening),
+        }
+        rest = after;
+    }
+    out.push_str(rest);
+    out
+}
+
+/// The words of a term outside its string literals: each run of letters,
+/// digits and underscores, the shape of a declaration's name.
+fn words(text: &str) -> impl Iterator<Item = &str> {
+    let (mut quoted, mut escaped) = (false, false);
+    text.split(move |c: char| {
+        let inside = quoted;
+        match c {
+            _ if escaped => escaped = false,
+            '\\' if quoted => escaped = true,
+            '"' => quoted = !quoted,
+            _ => {}
+        }
+        inside || !(c.is_alphanumeric() || c == '_')
+    })
+    .filter(|word| !word.is_empty())
+}
+
 fn spdx(ws: &Workspace, options: &Options) -> String {
     let id = |name: &str, version: &str| {
         let raw = format!("SPDXRef-Package-{name}-{version}");
@@ -5725,6 +5913,178 @@ mod tests {
                 module: largest,
                 bytes,
                 limit: lower,
+            })
+        );
+    }
+
+    use super::{parts, record, sized, string, Decl, Module};
+
+    /// A module of separate records in the shape of a design facet: a view,
+    /// `n` processes, and `n` things that each cite the view and a process.
+    fn design_like(n: usize) -> Module {
+        let t = "Foundation.Arch::";
+        let id = |name: &str| string(&format!("Design::{name}"));
+        let mut decls = vec![Decl::value(
+            "opmView",
+            format!("{t}DesignView"),
+            record(&format!("{t}DesignView"), &[("title", string("Processes"))]),
+        )];
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("process{i}"),
+                format!("{t}SystemProcess"),
+                record(&format!("{t}SystemProcess"), &[("owner", string("c"))]),
+            ));
+        }
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("thing{i}"),
+                format!("{t}OpmThing"),
+                record(
+                    &format!("{t}OpmThing"),
+                    &[
+                        ("view", id("opmView")),
+                        ("subject", id(&format!("process{i}"))),
+                    ],
+                ),
+            ));
+        }
+        Module {
+            name: "Design".into(),
+            glossaries: vec![super::BOOL],
+            imports: vec!["Foundation.Arch".into()],
+            title: "design view",
+            decls,
+        }
+    }
+
+    /// The names a module text declares, in order.
+    fn declared(text: &str) -> Vec<String> {
+        text.split("name: ")
+            .skip(1)
+            .map(|rest| rest.split(',').next().expect("a name").to_string())
+            .collect()
+    }
+
+    /// Every ID a module text cites: each string of the form `"Design..::name"`.
+    fn cited_ids(text: &str) -> Vec<String> {
+        text.split('"')
+            .filter(|piece| piece.starts_with("Design") && piece.contains("::"))
+            .map(str::to_string)
+            .collect()
+    }
+
+    #[test]
+    fn a_module_of_separate_records_beyond_the_limit_is_written_in_parts() {
+        let module = design_like(40);
+        let whole = module.render();
+        let nothing = |_: &str| false;
+        // Within the limit it is written whole, byte for byte.
+        assert_eq!(
+            sized(std::slice::from_ref(&module), whole.len(), &nothing),
+            [(module.path(), whole.clone())]
+        );
+        // A third of its size holds no more than a third of it.
+        let limit = whole.len() / 3;
+        let written = sized(std::slice::from_ref(&module), limit, &nothing);
+        assert!(written.len() > 3, "{} parts", written.len());
+        let mut ids = BTreeSet::new();
+        let mut order = Vec::new();
+        for (k, (path, text)) in written.iter().enumerate() {
+            // Each part is a module of its own, within the limit, named in turn.
+            let name = match k {
+                0 => "Design".to_string(),
+                _ => format!("Design{}", k + 1),
+            };
+            assert_eq!(path, &format!("src/{name}.lex.tex"));
+            assert!(text.starts_with(&format!("\\begin{{lexlean}}{{{name}}}\n")));
+            assert!(text.len() <= limit, "{path}: {} > {limit}", text.len());
+            for declared in declared(text) {
+                assert!(
+                    ids.insert(format!("{name}::{declared}")),
+                    "{declared} twice"
+                );
+                order.push(declared);
+            }
+        }
+        // Every record is written once, in its order.
+        assert_eq!(order, declared(&whole));
+        // Every reference names the part its record is in, and some reach
+        // back into the first part and some into a later one.
+        let cited: Vec<String> = written.iter().flat_map(|(_, t)| cited_ids(t)).collect();
+        assert_eq!(cited.len(), cited_ids(&whole).len());
+        for id in &cited {
+            assert!(ids.contains(id), "{id} names no record");
+        }
+        let last = &written[written.len() - 1].1;
+        assert!(last.contains("\"Design::opmView\""), "{last}");
+        assert!(cited.iter().any(|id| !id.starts_with("Design::")));
+        // The parts are the same on a second run.
+        assert_eq!(
+            written,
+            sized(std::slice::from_ref(&module), limit, &nothing)
+        );
+    }
+
+    /// What is not a module of separate records, or is cited from outside
+    /// itself, is written whole, and the size check refuses the projection.
+    #[test]
+    fn a_module_that_cannot_be_parted_is_left_to_the_typed_error() {
+        let module = design_like(40);
+        let whole = module.render();
+        let limit = whole.len() / 3;
+        let taken = BTreeSet::new();
+        assert!(parts(&module, limit, &taken).is_some());
+        let unparted = [(module.path(), whole.clone())];
+        // Another file cites one of its records.
+        let elsewhere = |id: &str| id == "Design::";
+        assert_eq!(
+            sized(std::slice::from_ref(&module), limit, &elsewhere),
+            unparted
+        );
+        // Another module does.
+        let citing = Module {
+            name: "Interface".into(),
+            decls: vec![Decl::value("journey", "String", string("Design::opmView"))],
+            ..design_like(0)
+        };
+        let both = [module.clone(), citing];
+        assert_eq!(sized(&both, limit, &|_| false)[0], unparted[0]);
+        // A record with a canonical index, whose order its ID decides.
+        let mut indexed = design_like(40);
+        indexed.decls[0] = Decl::value("opmView", "T", record("T", &[("index", "0".into())]));
+        assert!(parts(&indexed, limit, &taken).is_none());
+        // A declaration that names another outside a string, or takes a
+        // parameter, is no separate record.
+        let mut naming = design_like(40);
+        naming.decls[1] = Decl::value("process0", "T", "opmView".to_string());
+        assert!(parts(&naming, limit, &taken).is_none());
+        let mut taking = design_like(40);
+        if let Decl::Definition { parameters, .. } = &mut taking.decls[1] {
+            parameters.push(("x".into(), "Nat".into()));
+        }
+        assert!(parts(&taking, limit, &taken).is_none());
+        // One record alone beyond the limit, and a part's name already a
+        // module's.
+        let one = crate::lex::render_decl(&module.decls[0]).len();
+        assert!(parts(&module, one, &taken).is_none());
+        assert!(parts(&module, limit, &BTreeSet::from(["Design2"])).is_none());
+        // Left whole, it is the typed error's.
+        let files: BTreeMap<String, Vec<u8>> = [
+            (
+                LEXLEAN.to_string(),
+                format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+            ),
+            (module.path(), whole.clone().into_bytes()),
+        ]
+        .into_iter()
+        .collect();
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: whole.len(),
+                limit,
             })
         );
     }
