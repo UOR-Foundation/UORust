@@ -1338,6 +1338,10 @@ mod tests {
             ),
             (&root, "m.go", join_body("go", &call("core::num::<impl u32>::wrapping_add"))),
             (&root, "m.pick", join_body("pick", &call("<T as Shape>::f"))),
+            // A drop of a place with drop glue, and a call of a value: each
+            // reaches what no named body states.
+            (&root, "m.defuse", join_body("defuse", "drop(_1) -> [return: bb1, unwind continue];")),
+            (&root, "m.apply", join_body("apply", "_0 = copy _1(copy _2) -> [return: bb1, unwind continue];")),
             (&shards.join("inner"), "m.inner-go", join_body("inner::go", "_0 = copy _1;\n        goto -> bb1;")),
             (&shards.join("inner"), "m.inner-run", join_body("inner::run", &call("inner::go"))),
         ] {
@@ -1400,6 +1404,8 @@ mod tests {
                 "<impl at src/lib.rs:11:1: 11:22>::get",
                 "<impl at src/lib.rs:8:1: 8:18>::f",
                 "<impl at src/lib.rs:9:1: 9:18>::f",
+                "apply",
+                "defuse",
                 "go",
                 "inner::go",
                 "inner::run",
@@ -1407,7 +1413,19 @@ mod tests {
             ],
             "{record}"
         );
-        assert_eq!(census.rows.len(), 7);
+        assert_eq!(census.rows.len(), 9);
+        // A drop runs drop glue the evaluator does not run, and a call of a
+        // value names no body: both open at themselves.
+        assert_eq!(
+            bodies["defuse"]["reach"].as_str(),
+            Some("open: drops a value, whose drop glue the evaluator does not run (at defuse)"),
+            "{record}"
+        );
+        assert_eq!(
+            bodies["apply"]["reach"].as_str(),
+            Some("open: calls a function pointer or closure value, which names no body (at apply)"),
+            "{record}"
+        );
         let reach = |p: &str| bodies[p]["reach"].as_str().unwrap().to_string();
         // A body that calls a body of the crate reaches it: closed.
         assert_eq!(reach("inner::run"), "closed");

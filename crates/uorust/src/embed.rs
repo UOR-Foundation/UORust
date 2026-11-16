@@ -4921,12 +4921,6 @@ enum Reach {
     Open { why: String, at: String },
 }
 
-/// The keys of the bodies `key` reaches, itself first, where the evaluator
-/// defines each: else why not, by the first body that stops it, which is
-/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
-/// dictionary, or reaches an instance whose generics no binding fixes
-/// (`Generic.unknown`, and the root's own slots, which a sample's call
-/// supplies none of).
 /// A term read as an s-expression: an atom, or a parenthesized list.
 #[derive(Debug, PartialEq, Eq)]
 enum Sexp {
@@ -5170,10 +5164,29 @@ enum Fuel {
     Unbounded(String),
 }
 
+/// The keys of the bodies `key` reaches, itself first, where the evaluator
+/// defines each: else why not, by the first body that stops it, which is
+/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
+/// dictionary, drops a value, calls a value, or reaches an instance whose
+/// generics no binding fixes (`Generic.unknown`, and the root's own slots,
+/// which a sample's call supplies none of).
+///
+/// A body whose term holds a `drop` is open: rustc keeps a `drop`
+/// terminator after drop elaboration only for a place whose type has drop
+/// glue (a `Drop` impl in it, a type parameter, a box), and the evaluator
+/// takes `Terminator.drop` as a jump, so a `Drop` body that panics or
+/// changes what the caller reads would not run. A call whose callee is an
+/// operand (`Callee.operand`: a function pointer, a closure or a `FnOnce`
+/// value) names no body, so what it calls is not among the callees walked.
 fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
     let open = |why: String, at: &str| Reach::Open {
         why,
         at: at.to_string(),
+    };
+    // `(ctor Mir::C ` with its first argument to come: the constructor
+    // applied, never a longer name that starts with it.
+    let applies = |term: &str, ctor: &str| {
+        term.contains(mir_ctor(ctor, &[String::new()]).trim_end_matches(')'))
     };
     let mut seen = vec![key.to_string()];
     let mut at = 0;
@@ -5200,6 +5213,18 @@ fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
         }
         if !e.intrinsics.is_empty() {
             return open("calls an intrinsic".into(), &k);
+        }
+        if applies(&e.term, "Terminator.drop") {
+            return open(
+                "drops a value, whose drop glue the evaluator does not run".into(),
+                &k,
+            );
+        }
+        if applies(&e.term, "Callee.operand") {
+            return open(
+                "calls a function pointer or closure value, which names no body".into(),
+                &k,
+            );
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
