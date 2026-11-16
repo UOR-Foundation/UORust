@@ -112,10 +112,17 @@ pub const CANDIDATES: &str = "mir-candidates.toml";
 const DUMPED: &str = ".ElaborateBoxDerefs.before.mir";
 
 /// Dump the MIR of every library and binary target of the workspace at
-/// `root` under `out`, one directory per target, `<kind>-<name>`. This
-/// compiles the workspace, offline: its build scripts and macros run, as in
-/// any build of it.
-pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
+/// `root` under `out`, one directory per target, `<kind>-<name>`, built in
+/// the configuration `config` (its features and target), which is recorded
+/// beside them. Each library's dumps are also laid out as `uorust embed`
+/// reads a crate's, `shards-<name>` ([`crate::shard`]). This compiles the
+/// workspace, offline: its build scripts and macros run, as in any build of
+/// it.
+pub fn dump(
+    root: &Path,
+    out: &Path,
+    config: &crate::shard::Configuration,
+) -> Result<(), UorustError> {
     let tool = |what: &str, reason: String| UorustError::Tool(format!("{what}: {reason}"));
     let meta = Command::new("cargo")
         .args([
@@ -144,6 +151,15 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
         .and_then(serde_json::Value::as_array)
         .cloned()
         .unwrap_or_default();
+    std::fs::create_dir_all(out).map_err(|e| io(out, e))?;
+    let workspace = root.canonicalize().map_err(|e| io(root, e))?;
+    let triple = match &config.target {
+        Some(t) => t.clone(),
+        None => crate::shard::host(root, None)?,
+    };
+    let sysroot = crate::shard::sysroot(root, None)?;
+    let recorded = out.join(crate::shard::CONFIGURATION);
+    std::fs::write(&recorded, config.render(&triple)).map_err(|e| io(&recorded, e))?;
     for package in packages {
         let name = package
             .get("name")
@@ -163,6 +179,14 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 String::from_utf8_lossy(&clean.stderr).into_owned(),
             ));
         }
+        // The configuration this package is built in: the features of
+        // `config` it declares.
+        let declared: std::collections::BTreeSet<String> = package
+            .get("features")
+            .and_then(serde_json::Value::as_object)
+            .map(|f| f.keys().cloned().collect())
+            .unwrap_or_default();
+        let own_config = config.for_package(name, &declared);
         let targets = package
             .get("targets")
             .and_then(serde_json::Value::as_array)
@@ -199,6 +223,7 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 name.to_string(),
             ];
             args.extend(flag);
+            args.extend(own_config.cargo_args(false));
             args.push("--".to_string());
             args.extend(FLAGS.iter().map(|f| (*f).to_string()));
             args.push(format!("-Zdump-mir-dir={}", dir.display()));
@@ -226,6 +251,34 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 if !keep {
                     std::fs::remove_file(&path).map_err(|e| io(&path, e))?;
                 }
+            }
+            if kind == "lib" {
+                // The package's sources as the dump names them: relative to
+                // the workspace root, which cargo runs rustc in.
+                let own = package
+                    .get("manifest_path")
+                    .and_then(serde_json::Value::as_str)
+                    .map(Path::new)
+                    .and_then(Path::parent)
+                    .and_then(|d| d.strip_prefix(&workspace).ok())
+                    .map(|d| d.display().to_string())
+                    .filter(|d| !d.is_empty())
+                    .map_or_else(String::new, |d| format!("{d}/"));
+                let shards = out.join(format!(
+                    "{}{}",
+                    crate::shard::SHARDS,
+                    tname.replace('-', "_")
+                ));
+                if shards.exists() {
+                    std::fs::remove_dir_all(&shards).map_err(|e| io(&shards, e))?;
+                }
+                std::fs::create_dir_all(&shards).map_err(|e| io(&shards, e))?;
+                crate::shard::lay_out(&dir, &shards, &own, &sysroot)?;
+                crate::shard::write_target(&shards, &triple, root, None)?;
+                crate::shard::write_modules(&shards)?;
+                let recorded = shards.join(crate::shard::CONFIGURATION);
+                std::fs::write(&recorded, own_config.render(&triple))
+                    .map_err(|e| io(&recorded, e))?;
             }
         }
     }

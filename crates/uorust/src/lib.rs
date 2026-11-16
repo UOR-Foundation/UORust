@@ -34,6 +34,7 @@ pub mod queue;
 pub mod register;
 pub mod registry;
 mod route;
+pub mod shard;
 mod wf;
 
 use std::collections::BTreeMap;

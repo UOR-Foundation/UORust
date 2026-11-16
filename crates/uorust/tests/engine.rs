@@ -58,7 +58,7 @@ fn dumped(root: &Path, name: &str) -> PathBuf {
         .entry(name.to_string())
         .or_insert_with(|| {
             let out = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join(format!("mir-{name}"));
-            uorust::mir::dump(root, &out).expect("the MIR dumps");
+            uorust::mir::dump(root, &out, &Default::default()).expect("the MIR dumps");
             out
         })
         .clone()
@@ -1251,7 +1251,7 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
     use uorust::mir::Trial;
     // The dump: one file per body of the library.
     let fresh = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("mir-walk-fresh");
-    uorust::mir::dump(&mir_fixture(), &fresh).expect("the MIR dumps");
+    uorust::mir::dump(&mir_fixture(), &fresh, &Default::default()).expect("the MIR dumps");
     assert!(std::fs::read_dir(fresh.join("lib-walk"))
         .expect("the library's dumps")
         .filter_map(|e| e.ok()?.file_name().into_string().ok())
