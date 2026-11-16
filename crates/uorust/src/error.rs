@@ -96,8 +96,8 @@ impl fmt::Display for UorustError {
             Self::Regressed(rows) => write!(
                 f,
                 "a function is re-decided: a lifted κ stays lifted, and against a parent's register \
-                 an unchanged κ stays under its construct while that construct stops a function: \
-                 {}",
+                 an unchanged κ stays under its construct until the register shows that construct \
+                 gone for it: {}",
                 rows.join("; ")
             ),
             Self::ModuleTooLarge {
