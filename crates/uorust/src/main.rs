@@ -762,7 +762,7 @@ fn read_register(path: &std::path::Path) -> Result<uorust::register::Register, U
         path: path.to_path_buf(),
         reason: e.to_string(),
     })?;
-    uorust::register::Register::parse(path, &text)
+    uorust::register::Register::read(path, &text)
 }
 
 fn certify(step: Certify) -> Result<(), UorustError> {

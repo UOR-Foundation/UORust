@@ -145,7 +145,7 @@ pub fn admit(path: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<(), Uorus
         return Ok(());
     }
     let text = std::fs::read_to_string(path).map_err(|e| error::io(path, e))?;
-    let incumbent = register::Register::parse(path, &text)?;
+    let incumbent = register::Register::read(path, &text)?;
     let regressed = register::admit(&incumbent, &lift_register(files)?);
     if regressed.is_empty() {
         Ok(())
