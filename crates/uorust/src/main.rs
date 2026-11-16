@@ -467,11 +467,52 @@ struct BridgeArgs {
 #[derive(clap::Args)]
 struct CrateArgs {
     /// The crate and its version, `<name>@<version>`.
-    spec: String,
+    #[arg(required_unless_present = "workspace", conflicts_with = "workspace")]
+    spec: Option<String>,
+    /// Every library of crates.io the build of this workspace links, each
+    /// at the version and checksum its lock records and with the features
+    /// the build enables for it (cargo's unit graph of the build), dumped,
+    /// translated and embedded with those it builds on linked (after each
+    /// `--link`); with `--dumps` and `--library`. Each register is the
+    /// `<name>-<version>` directory of `--registers`.
+    #[arg(long, requires_all = ["dumps", "library"])]
+    workspace: Option<PathBuf>,
+    /// With `--workspace`, only these packages and those they build on
+    /// (repeatable).
+    #[arg(long, requires = "workspace")]
+    only: Vec<String>,
+    /// The features to build with: the crate's own, exactly, in place of
+    /// its defaults (with `<spec>`); the workspace build's, as cargo takes
+    /// them (with `--workspace`).
+    #[arg(long, value_delimiter = ',')]
+    features: Vec<String>,
+    /// Build without the default features (the crate's with `<spec>`, the
+    /// workspace build's with `--workspace`).
+    #[arg(long)]
+    no_default_features: bool,
+    /// Keep the crate's dumps (one directory per module, `target.toml`,
+    /// the layouts, `dump.toml`) in this directory, as `--link
+    /// <crate>=<dumps>` reads them; with `--workspace`, one directory per
+    /// crate and `links.toml`.
+    #[arg(long, requires = "library")]
+    dumps: Option<PathBuf>,
     /// The directory the crates' registers are in; the register is its
     /// `<name>` directory.
     #[arg(long, default_value = "crates/uorust/crates")]
     registers: PathBuf,
+    /// With `<spec>`, the register's directory itself, in place of
+    /// `<registers>/<name>`.
+    #[arg(long, conflicts_with = "workspace")]
+    register: Option<PathBuf>,
+    /// With `<spec>`, the checksum a consuming workspace's lock records for
+    /// the crate: the archive is cargo's cached one where the cache holds
+    /// it, and must have this digest.
+    #[arg(long, conflicts_with = "workspace")]
+    checksum: Option<String>,
+    /// With `<spec>`, a consuming workspace's lock file: the crate's own
+    /// dependencies are resolved at the versions it locks.
+    #[arg(long, conflicts_with = "workspace")]
+    lock: Option<PathBuf>,
     /// The rust-src `library` directory of the pinned toolchain: with it,
     /// the crate's bodies are embedded in LexLean too, and each row of its
     /// register stamped with its embedding.
@@ -486,7 +527,8 @@ struct CrateArgs {
     /// A library crate to link into the crate's program, `<crate>=<dumps>`
     /// (`core=target/core-mir`, as `scripts/mir/dump-lib.sh` writes them):
     /// a call into it names its body, so a body that calls core is
-    /// evaluated through core's.
+    /// evaluated through core's. `<dumps>` may be a published archive of
+    /// them, `<url>#sha256=<hex>`, fetched and taken only at that digest.
     #[arg(long = "link", requires = "library")]
     link: Vec<String>,
 }
@@ -729,27 +771,77 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         }
         Command::Std(args) => library("std", &args),
         Command::Crate(args) => {
-            let (name, version) = uorust::registry::parse_spec(&args.spec)?;
-            let register = args.registers.join(&name);
+            // A published link's dumps are kept by their digest, beside
+            // the kept dumps where there are some.
+            let cache = args
+                .dumps
+                .as_deref()
+                .and_then(std::path::Path::parent)
+                .map_or_else(std::env::temp_dir, std::path::Path::to_path_buf)
+                .join("uorust-links");
+            let link = args
+                .link
+                .iter()
+                .map(|l| {
+                    let (k, d) = l.split_once('=').ok_or_else(|| {
+                        uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                    })?;
+                    Ok((k.to_string(), uorust::registry::link_dumps(d, &cache)?))
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            if let (Some(root), Some(dumps), Some(library)) =
+                (&args.workspace, &args.dumps, &args.library)
+            {
+                let mut cargo_args = Vec::new();
+                if !args.features.is_empty() {
+                    cargo_args.push(format!("--features={}", args.features.join(",")));
+                }
+                if args.no_default_features {
+                    cargo_args.push("--no-default-features".to_string());
+                }
+                let (graph, outcomes) =
+                    uorust::registry::lift_workspace(&uorust::registry::Workspace {
+                        root,
+                        cargo_args: &cargo_args,
+                        dumps,
+                        registers: &args.registers,
+                        library,
+                        only: &args.only,
+                        link: &link,
+                    })?;
+                let lifted = outcomes
+                    .iter()
+                    .filter(|o| matches!(o, uorust::registry::Outcome::Lifted(_)))
+                    .count();
+                println!(
+                    "{} of {} libraries of crates.io the build links lifted, {} refused; index in {}",
+                    lifted,
+                    graph.locked.len(),
+                    outcomes.len() - lifted,
+                    dumps.join(uorust::registry::LINKS).display()
+                );
+                return Ok(());
+            }
+            let spec = args.spec.as_deref().unwrap_or_default();
+            let (name, version) = uorust::registry::parse_spec(spec)?;
+            let register = args
+                .register
+                .clone()
+                .unwrap_or_else(|| args.registers.join(&name));
             let lifted = uorust::registry::lift_crate(
                 &name,
                 &version,
                 &register,
-                args.library.as_deref(),
-                args.differential,
-                &args
-                    .link
-                    .iter()
-                    .map(|l| {
-                        l.split_once('=')
-                            .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
-                            .ok_or_else(|| {
-                                uorust::UorustError::Tool(format!(
-                                    "--link {l}: not <crate>=<dumps>"
-                                ))
-                            })
-                    })
-                    .collect::<Result<Vec<_>, UorustError>>()?,
+                &uorust::registry::Options {
+                    library: args.library.as_deref(),
+                    differential: args.differential,
+                    link: &link,
+                    features: &args.features,
+                    no_default_features: args.no_default_features,
+                    checksum: args.checksum.as_deref(),
+                    lock: args.lock.as_deref(),
+                    dumps: args.dumps.as_deref(),
+                },
             )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
@@ -758,9 +850,9 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 lifted.modules,
                 register.display()
             );
-            if let Some((bodies, evaluable)) = lifted.embedding {
+            if let Some((bodies, evaluable, bound)) = lifted.embedding {
                 println!(
-                    "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable"
+                    "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable, {bound} leave a callee unlinked"
                 );
             }
             if let Some((bodies, theorems)) = lifted.differential {
