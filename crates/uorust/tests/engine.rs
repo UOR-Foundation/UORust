@@ -355,7 +355,8 @@ fn pub_trait_methods_are_interface_calls_ue_08() {
     assert!(feature.contains("\"Interface::callThermoCoreSensorSensorRead\""));
     assert!(feature.contains("\"Interface::callThermoCoreSensorSensorCalibrated\""));
     assert!(
-        feature.contains("\"Interface::acThermoCoreThermoCoreSensorAFixedSensorReadsItsValue\""),
+        feature
+            .contains("\"Interface::acThermoCoreThermoCoreSensorTestsAFixedSensorReadsItsValue\""),
         "{feature}"
     );
 }
