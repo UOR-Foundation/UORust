@@ -138,6 +138,23 @@ pub(crate) struct SourceFile {
     pub(crate) imports: BTreeMap<String, String>,
 }
 
+impl SourceFile {
+    /// The module an item of the scope `scope` (an index of `scopes`)
+    /// stands in, inside its target: the file's module joined with the
+    /// scope's inline modules. It is the module Rust names the item
+    /// through, so two items of one kind and name are one item only where
+    /// this is the same: `go` of the crate root and `go` of an inline
+    /// `mod inner` beside it are two.
+    pub(crate) fn item_module(&self, scope: usize) -> String {
+        let inline = self.scopes.get(scope).map_or("", |s| s.module.as_str());
+        match (self.module.as_str(), inline) {
+            (outer, "") => outer.to_string(),
+            ("", inner) => inner.to_string(),
+            (outer, inner) => format!("{outer}::{inner}"),
+        }
+    }
+}
+
 #[derive(Clone, Debug)]
 pub(crate) struct FnFact {
     pub(crate) name: String,
@@ -193,6 +210,10 @@ pub(crate) struct FnFact {
 /// inherits no name from the module around it.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct ScopeFact {
+    /// The scope's module path inside its file: `""` for the file's own
+    /// items, `a::b` for an inline `mod b` inside an inline `mod a`. Rust
+    /// names every item of the scope through it (`SourceFile::item_module`).
+    pub(crate) module: String,
     /// Each name a `use` of the scope binds, with the path it names.
     pub(crate) uses: Vec<(String, String)>,
     /// Whether a `use` of the scope ends in `*`: it may bind any name.
@@ -207,6 +228,9 @@ pub(crate) struct ScopeFact {
 pub(crate) struct EnumFact {
     pub(crate) name: String,
     pub(crate) span: Span,
+    /// Which of its file's module scopes (`SourceFile::scopes`) declares
+    /// the enum.
+    pub(crate) scope: usize,
     pub(crate) derives: Vec<String>,
     /// Whether a variant sets its discriminant (`A = 5`): the values MIR
     /// switches on are then not the variants' positions.
@@ -220,6 +244,9 @@ pub(crate) struct EnumFact {
 pub(crate) struct StructFact {
     pub(crate) name: String,
     pub(crate) span: Span,
+    /// Which of its file's module scopes (`SourceFile::scopes`) declares
+    /// the struct.
+    pub(crate) scope: usize,
     /// The traits a `#[derive(...)]` names.
     pub(crate) derives: Vec<String>,
 }
@@ -241,6 +268,15 @@ impl Syntax {
     }
 }
 
+/// A constant as [`FileSyntax::consts`] holds it.
+pub(crate) type ConstSyntax = (
+    String,
+    crate::ast::RustType,
+    crate::ast::Block,
+    usize,
+    String,
+);
+
 /// One file's syntax, in the order of its [`SourceFile`]'s facts.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct FileSyntax {
@@ -251,9 +287,10 @@ pub(crate) struct FileSyntax {
     /// The payload of each variant of each of [`SourceFile::enums`]: its
     /// fields, named or positional, in order. Empty for a generic enum.
     pub(crate) enums: Vec<crate::lift::RawVariants>,
-    /// The constants of product code outside tests: name, type, and the
-    /// value as a block, which lifts like a function of no parameters.
-    pub(crate) consts: Vec<(String, crate::ast::RustType, crate::ast::Block)>,
+    /// The constants of product code outside tests: name, type, the value
+    /// as a block, which lifts like a function of no parameters, the module
+    /// scope (`SourceFile::scopes`) that declares it, and its tokens.
+    pub(crate) consts: Vec<ConstSyntax>,
     /// The type aliases: `type Name<P, ..> = Type;`.
     pub(crate) aliases: Vec<(String, crate::ast::Alias)>,
 }
