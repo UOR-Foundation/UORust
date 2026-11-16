@@ -300,6 +300,39 @@ certified-gate out="target/certified-gate":
 hooks:
     git config core.hooksPath scripts/hooks
 
+# The factory (prism-factory/, the upstream Prism factory with this tool's
+# graph): every part of the gate, every writer and the certified export is an
+# obligation keyed on its declared inputs, and the certified core decides what
+# is proved, what to run, what is refuted and what waits. These run on the
+# machine that launches the SDK (prism-factory/sdk.sh), never inside it.
+# FACTORY_RECEIPTS names the receipt store, a directory outside the worktree
+# and the target directory, so receipts outlive both.
+
+# The factory-model obligation: the factory checks itself.
+factory-model:
+    bash prism-factory/check.sh
+
+# The factory-upstream obligation: every installed file of prism-factory/ holds
+# to upstream's at the revision prism-factory/upstream.toml names (it fetches it).
+factory-upstream:
+    bash prism-factory/upstream.sh
+
+# Each obligation's route (proved, observe, refuted, blocked) and how many are left.
+factory-plan:
+    prism-factory/factory.sh routes
+
+# Plan and run to the fixed point; a second run on the same tree runs nothing.
+factory *only:
+    prism-factory/factory.sh run {{only}}
+
+# The same, detached: its log and its one-line status are kept beside the receipts.
+factory-start *only:
+    prism-factory/factory.sh start {{only}}
+
+# The status of the last detached run: `running`, or `done <exit code>` and the counts.
+factory-status:
+    prism-factory/factory.sh status
+
 # The content standard (scripts/content/standard.json) on an assembled site.
 content site="site":
     node scripts/content/enrich.mjs {{site}}

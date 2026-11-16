@@ -1,0 +1,7 @@
+Feature: factory
+
+  @UE-20 @build
+  Scenario: The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, and the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity
+    Given the fixture UE-20 needs
+    When the suite exercises UE-20
+    Then The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, and the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity
