@@ -3770,6 +3770,9 @@ impl Profile {
                     }
                     (Status::Foreign(detail), _) => format!("foreign: {detail}"),
                     (Status::Effect(effect), _) => format!("effect: {effect}"),
+                    (Status::Embedded(at), _) => {
+                        format!("embedded-closed in {} configurations", at.len())
+                    }
                 };
                 (r.function.clone(), cause)
             })
