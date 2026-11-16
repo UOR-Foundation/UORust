@@ -407,6 +407,13 @@ fn lift_source(
         }
         None => (None, None),
     };
+    let lifted = Lifted {
+        embedding,
+        differential: checked,
+        modules: census.len(),
+        bodies: census.iter().map(|s| s.rows.len()).sum(),
+        translated: census.iter().map(|s| s.translated_count()).sum(),
+    };
     if let Some(kept) = options.dumps {
         keep_dumps(
             &shards,
@@ -415,16 +422,11 @@ fn lift_source(
                 name,
                 version,
                 options,
+                lifted: &lifted,
             },
         )?;
     }
-    Ok(Lifted {
-        embedding,
-        differential: checked,
-        modules: census.len(),
-        bodies: census.iter().map(|s| s.rows.len()).sum(),
-        translated: census.iter().map(|s| s.translated_count()).sum(),
-    })
+    Ok(lifted)
 }
 
 /// What a kept dump was built from, recorded beside it.
@@ -432,18 +434,24 @@ struct Kept<'a> {
     name: &'a str,
     version: &'a str,
     options: &'a Options<'a>,
+    lifted: &'a Lifted,
 }
 
 /// The name of the file a kept dump records its build in.
 pub const DUMP_RECORD: &str = "dump.toml";
 
 /// Replace `kept` with the shards at `shards` (each module's dumps, the
-/// target, the layouts), and record beside them the package, its checksum
-/// and the features it was built with, so that a link names what it links.
+/// target, the layouts), and record beside them the package, its checksum,
+/// the features it was built with, the libraries it was linked with and
+/// what its run counted, so that a link names what it links and a run of
+/// the same build is known as done.
 fn keep_dumps(shards: &Path, kept: &Path, what: &Kept<'_>) -> Result<(), UorustError> {
     let _ = std::fs::remove_dir_all(kept);
     copy_tree(shards, kept)?;
     let quoted = |s: &str| toml::Value::String(s.to_string()).to_string();
+    let list = |items: &mut dyn Iterator<Item = String>| {
+        items.map(|x| quoted(&x)).collect::<Vec<_>>().join(", ")
+    };
     let mut record = format!(
         "# The build this crate's dumps are of (written by `uorust crate`; do not edit).\n\n\
          name = {}\nversion = {}\n",
@@ -453,17 +461,68 @@ fn keep_dumps(shards: &Path, kept: &Path, what: &Kept<'_>) -> Result<(), UorustE
     if let Some(c) = what.options.checksum {
         record.push_str(&format!("checksum = {}\n", quoted(c)));
     }
+    let l = what.lifted;
     record.push_str(&format!(
-        "default-features = {}\nfeatures = [{}]\n",
+        "default-features = {}\nfeatures = [{}]\nlink = [{}]\n\n[counts]\n\
+         modules = {}\nbodies = {}\ntranslated = {}\n",
         !what.options.no_default_features,
-        what.options
-            .features
-            .iter()
-            .map(|x| quoted(x))
-            .collect::<Vec<_>>()
-            .join(", ")
+        list(&mut what.options.features.iter().cloned()),
+        list(&mut link_args(what.options.link).into_iter()),
+        l.modules,
+        l.bodies,
+        l.translated,
     ));
+    if let Some((b, e, u)) = l.embedding {
+        record.push_str(&format!("embedded = {b}\nevaluable = {e}\nbound = {u}\n"));
+    }
     std::fs::write(kept.join(DUMP_RECORD), record).map_err(|e| tool(DUMP_RECORD, e))
+}
+
+/// Each link as `--link` takes it, `<crate>=<dumps>`.
+fn link_args(link: &[(String, PathBuf)]) -> Vec<String> {
+    link.iter()
+        .map(|(k, d)| format!("{k}={}", d.display()))
+        .collect()
+}
+
+/// What the record of the kept dumps at `kept` counted, when it records
+/// the build `options` asks for: the same checksum, features and links. A
+/// run of that build is done; any other record is not this build's.
+pub fn recorded(kept: &Path, options: &Options<'_>) -> Option<Lifted> {
+    let doc: toml::Table = std::fs::read_to_string(kept.join(DUMP_RECORD))
+        .ok()?
+        .parse()
+        .ok()?;
+    let strings = |k: &str| -> Option<Vec<String>> {
+        doc.get(k)?
+            .as_array()?
+            .iter()
+            .map(|v| v.as_str().map(str::to_string))
+            .collect()
+    };
+    let same = doc.get("checksum").and_then(toml::Value::as_str) == options.checksum
+        && doc.get("default-features").and_then(toml::Value::as_bool)
+            == Some(!options.no_default_features)
+        && strings("features")? == options.features
+        && strings("link")? == link_args(options.link);
+    let counts = doc.get("counts")?;
+    let count = |k: &str| -> Option<usize> {
+        counts
+            .get(k)?
+            .as_integer()
+            .and_then(|n| usize::try_from(n).ok())
+    };
+    let embedding = match (count("embedded"), count("evaluable"), count("bound")) {
+        (Some(b), Some(e), Some(u)) => Some((b, e, u)),
+        _ => None,
+    };
+    same.then_some(Lifted {
+        embedding,
+        differential: None,
+        modules: count("modules")?,
+        bodies: count("bodies")?,
+        translated: count("translated")?,
+    })
 }
 
 /// A library of crates.io as a workspace's build links it: the package at
@@ -880,20 +939,9 @@ pub fn lift_workspace(ws: &Workspace<'_>) -> Result<(Graph, Vec<Outcome>), Uorus
                 dumps: Some(&kept),
             };
             let register = ws.registers.join(l.dir());
-            let run = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-                lift_crate(&l.name, &l.version, &register, &options)
-            }));
-            match run {
-                Ok(Ok(lifted)) => Outcome::Lifted(lifted),
-                Ok(Err(e)) => Outcome::Refused(e.to_string()),
-                Err(panic) => Outcome::Refused(format!(
-                    "the embedding panicked: {}",
-                    panic
-                        .downcast_ref::<String>()
-                        .cloned()
-                        .or_else(|| panic.downcast_ref::<&str>().map(|s| (*s).to_string()))
-                        .unwrap_or_default()
-                )),
+            match recorded(&kept, &options) {
+                Some(done) => Outcome::Lifted(done),
+                None => lift_apart(&l.name, &l.version, &register, &options),
             }
         } else {
             Outcome::Refused(format!(
@@ -916,15 +964,74 @@ pub fn lift_workspace(ws: &Workspace<'_>) -> Result<(Graph, Vec<Outcome>), Uorus
             }
         );
         outcomes[i] = Some(outcome);
+        // The index as it stands after each crate, so that what was done
+        // is named whatever ends the run.
+        let done: Vec<(usize, Outcome)> = outcomes
+            .iter()
+            .enumerate()
+            .filter_map(|(i, o)| Some((i, o.clone()?)))
+            .collect();
+        std::fs::write(ws.dumps.join(LINKS), render_links(&graph, &done))
+            .map_err(|e| tool(LINKS, e))?;
     }
-    let done: Vec<(usize, Outcome)> = outcomes
-        .into_iter()
-        .enumerate()
-        .filter_map(|(i, o)| Some((i, o?)))
-        .collect();
-    std::fs::write(ws.dumps.join(LINKS), render_links(&graph, &done))
-        .map_err(|e| tool(LINKS, e))?;
-    Ok((graph, done.into_iter().map(|(_, o)| o).collect()))
+    let done: Vec<Outcome> = outcomes.into_iter().flatten().collect();
+    Ok((graph, done))
+}
+
+/// [`lift_crate`] run by this tool's own executable as a process of its
+/// own (`uorust crate <spec>` with the build `options` names), so that
+/// what ends that run (an exhausted stack aborts the process) is the
+/// crate's refused row and not the end of the rest; what it counted is read
+/// back from its kept dumps' record.
+fn lift_apart(name: &str, version: &str, register: &Path, options: &Options<'_>) -> Outcome {
+    let (Some(library), Some(kept)) = (options.library, options.dumps) else {
+        return Outcome::Refused("a crate of a build is embedded and kept".into());
+    };
+    let exe = match std::env::current_exe() {
+        Ok(e) => e,
+        Err(e) => return Outcome::Refused(format!("this tool's executable: {e}")),
+    };
+    let mut command = Command::new(exe);
+    command
+        .arg("crate")
+        .arg(format!("{name}@{version}"))
+        .arg("--register")
+        .arg(register)
+        .arg("--library")
+        .arg(library)
+        .arg("--dumps")
+        .arg(kept);
+    command.args(build_flags(options));
+    if let Some(c) = options.checksum {
+        command.args(["--checksum", c]);
+    }
+    if let Some(lock) = options.lock {
+        command.arg("--lock").arg(lock);
+    }
+    for l in link_args(options.link) {
+        command.arg("--link").arg(l);
+    }
+    let out = match command.output() {
+        Ok(o) => o,
+        Err(e) => return Outcome::Refused(format!("`uorust crate` did not start: {e}")),
+    };
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    eprint!("{stderr}");
+    if !out.status.success() {
+        let last = stderr
+            .lines()
+            .rev()
+            .find(|l| !l.trim().is_empty())
+            .unwrap_or_default();
+        return Outcome::Refused(format!("`uorust crate` ended {}: {last}", out.status));
+    }
+    match recorded(kept, options) {
+        Some(lifted) => Outcome::Lifted(lifted),
+        None => Outcome::Refused(format!(
+            "`uorust crate` kept no record of this build in {}",
+            kept.display()
+        )),
+    }
 }
 
 /// [`LINKS`]: each crate lifted or refused, with its build and its
@@ -1855,6 +1962,36 @@ mod tests {
         assert!(
             record.contains("name = \"dep\"\nversion = \"0.1.0\"\nchecksum = \"c0ffee\"\ndefault-features = true\nfeatures = []\n"),
             "{record}"
+        );
+        // The record is the run's: the same build is known as done, with
+        // what it counted; another build is not.
+        let asked = Options {
+            library: Some(&library),
+            dumps: Some(&dumps),
+            checksum: Some("c0ffee"),
+            ..Options::default()
+        };
+        assert_eq!(recorded(&dumps, &asked), Some(kept.clone()));
+        let other = ["std".to_string()];
+        assert_eq!(
+            recorded(
+                &dumps,
+                &Options {
+                    features: &other,
+                    ..asked
+                }
+            ),
+            None
+        );
+        assert_eq!(
+            recorded(
+                &dumps,
+                &Options {
+                    checksum: None,
+                    ..asked
+                }
+            ),
+            None
         );
         let user = |w: &str, link: &[(String, PathBuf)]| {
             let lifted = lift_source(

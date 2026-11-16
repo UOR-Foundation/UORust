@@ -458,6 +458,19 @@ struct CrateArgs {
     /// `<name>` directory.
     #[arg(long, default_value = "crates/uorust/crates")]
     registers: PathBuf,
+    /// With `<spec>`, the register's directory itself, in place of
+    /// `<registers>/<name>`.
+    #[arg(long, conflicts_with = "workspace")]
+    register: Option<PathBuf>,
+    /// With `<spec>`, the checksum a consuming workspace's lock records for
+    /// the crate: the archive is cargo's cached one where the cache holds
+    /// it, and must have this digest.
+    #[arg(long, conflicts_with = "workspace")]
+    checksum: Option<String>,
+    /// With `<spec>`, a consuming workspace's lock file: the crate's own
+    /// dependencies are resolved at the versions it locks.
+    #[arg(long, conflicts_with = "workspace")]
+    lock: Option<PathBuf>,
     /// The rust-src `library` directory of the pinned toolchain: with it,
     /// the crate's bodies are embedded in LexLean too, and each row of its
     /// register stamped with its embedding.
@@ -718,7 +731,10 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             }
             let spec = args.spec.as_deref().unwrap_or_default();
             let (name, version) = uorust::registry::parse_spec(spec)?;
-            let register = args.registers.join(&name);
+            let register = args
+                .register
+                .clone()
+                .unwrap_or_else(|| args.registers.join(&name));
             let lifted = uorust::registry::lift_crate(
                 &name,
                 &version,
@@ -729,8 +745,8 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     link: &link,
                     features: &args.features,
                     no_default_features: args.no_default_features,
-                    checksum: None,
-                    lock: None,
+                    checksum: args.checksum.as_deref(),
+                    lock: args.lock.as_deref(),
                     dumps: args.dumps.as_deref(),
                 },
             )?;
