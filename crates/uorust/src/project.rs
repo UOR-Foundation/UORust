@@ -5844,8 +5844,8 @@ fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
 /// The key of the item each function of product code is, as the
 /// compiler's dump names it ([`crate::embedding::Key`]), by the function's
 /// path: its file's module and the inline modules around it, its impl by
-/// the package-relative file and the line its header starts on, a trait's
-/// provided method under its trait. A path two functions share keys none.
+/// the package-relative file and the line and column its header starts at,
+/// a trait's provided method under its trait. A path two functions share keys none.
 fn embedding_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::Key> {
     let mut keys: BTreeMap<String, Option<crate::embedding::Key>> = BTreeMap::new();
     for r in ctx.all_fns().into_iter().filter(|&r| ctx.product(r)) {
@@ -5876,7 +5876,7 @@ fn embedding_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::Key> {
                 module.push(trait_name.clone());
                 None
             }
-            (Some(_), false) => f.impl_line.map(|l| (own, l)),
+            (Some(_), false) => f.impl_at.map(|(line, column)| (own, line, column)),
             (None, _) => None,
         };
         let key = crate::embedding::Key {

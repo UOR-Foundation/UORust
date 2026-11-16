@@ -8,10 +8,14 @@
 //! its module path, inline modules included, the impl by the place of its
 //! header, and the item's own name. A function of the surface reader is
 //! keyed the same way from its own facts (its file's module, the inline
-//! modules around it, the line of its impl's header in its package), so a
-//! row is joined to the body of the one item Rust means by it, never by the
-//! surface path, which names a trait's method in two impls of one type, or
-//! an inline module's function beside its file module's of one name, alike.
+//! modules around it, the line and column its impl's header starts at in
+//! its package), so a row is joined to the body of the one item Rust means
+//! by it, never by the surface path, which names a trait's method in two
+//! impls of one type, or an inline module's function beside its file
+//! module's of one name, alike. A function nested in a function prints the
+//! path a module's function of the outer one's name prints (`outer::helper`):
+//! a body whose owner path is a body's path is not told apart, and its row
+//! stays as it was.
 //!
 //! A row that did not lift is embedded-closed ([`crate::register::Status::
 //! Embedded`]) when, in every configuration the directory holds a record
@@ -33,21 +37,23 @@ use crate::UorustError;
 
 /// The item a body is of, as the dump prints its path: the crate, the
 /// module path (a trait's name too, for a trait's provided method), the
-/// impl by its package-relative file and its header's first line, and the
-/// item's name.
+/// impl by its package-relative file and the line and column its header
+/// starts at, and the item's name. Two impls on one line are two impls, so
+/// the column is part of the key.
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct Key {
     pub(crate) krate: String,
     pub(crate) module: Vec<String>,
-    pub(crate) impl_at: Option<(String, usize)>,
+    pub(crate) impl_at: Option<(String, usize, usize)>,
     pub(crate) name: String,
 }
 
-/// One body of a record: its key, the digest of its term, and whether it
-/// is evaluable with its reach closed.
+/// One body of a record: its key, the path the dump prints, the digest of
+/// its term, and whether it is evaluable with its reach closed.
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct Body {
     key: Key,
+    path: String,
     embedded: String,
     closed: bool,
 }
@@ -112,10 +118,13 @@ pub(crate) fn body_key(krate: &str, path: &str) -> Option<Key> {
                 if impl_at.is_some() {
                     return None;
                 }
-                // `src/a.rs:3:1: 3:9`: the file and the first line.
+                // `src/a.rs:3:1: 3:9`: the file, the first line and its
+                // column.
                 let (file, rest) = span.split_once(':')?;
-                let line = rest.split(':').next()?.parse().ok()?;
-                impl_at = Some((file.to_string(), line));
+                let mut at = rest.split(':');
+                let line = at.next()?.parse().ok()?;
+                let column = at.next()?.trim().parse().ok()?;
+                impl_at = Some((file.to_string(), line, column));
             }
             None if impl_at.is_some() || p.starts_with('<') || p.contains('{') => return None,
             None => module.push(p),
@@ -213,11 +222,13 @@ fn read(dir: &Path) -> Result<Vec<Recorded>, UorustError> {
                 .get("blocked")
                 .and_then(toml::Value::as_array)
                 .is_some_and(|l| !l.is_empty());
-            let Some(key) = body_key(&krate, &field("path")?) else {
+            let path = field("path")?;
+            let Some(key) = body_key(&krate, &path) else {
                 continue;
             };
             bodies.push(Body {
                 key,
+                path,
                 embedded: field("embedded")?,
                 closed: field("reach")? == "closed" && !blocked,
             });
@@ -248,6 +259,19 @@ pub(crate) fn closed(
     for r in &records {
         by.entry((&r.krate, &r.configuration)).or_default().push(r);
     }
+    // By crate and configuration: the paths of the bodies, so that a body
+    // whose owner is itself a body (a function nested in a function prints
+    // `outer::helper`, as a module `outer`'s function does) is told apart.
+    let owners: BTreeMap<(&str, &str), BTreeSet<&str>> = by
+        .iter()
+        .map(|(at, records)| {
+            let paths = records
+                .iter()
+                .flat_map(|r| r.bodies.iter().map(|b| b.path.as_str()))
+                .collect();
+            (*at, paths)
+        })
+        .collect();
     let mut out = BTreeMap::new();
     'rows: for (path, key) in keys {
         let mut at = Vec::new();
@@ -260,6 +284,19 @@ pub(crate) fn closed(
                 .flat_map(|r| r.bodies.iter().map(move |b| (*r, b)))
                 .filter(|(_, b)| &b.key == key)
                 .collect();
+            // A body of the key whose owner path is a function's: the dump
+            // does not say whether it is that function's nested item or a
+            // module's of the owner's name, so the row stays as it was.
+            let nested = found.iter().any(|(_, b)| {
+                let mut parts = segments(&b.path);
+                parts.pop();
+                owners
+                    .get(&(*krate, *configuration))
+                    .is_some_and(|o| o.contains(parts.join("::").as_str()))
+            });
+            if nested {
+                continue 'rows;
+            }
             match found.as_slice() {
                 [(r, b)] if b.closed => at.push(EmbeddedAt {
                     configuration: (*configuration).to_string(),
@@ -348,7 +385,7 @@ mod tests {
             Some(Key {
                 krate: "m".into(),
                 module: vec!["a".into()],
-                impl_at: Some(("src/a.rs".into(), 3)),
+                impl_at: Some(("src/a.rs".into(), 3, 1)),
                 name: "f".into(),
             })
         );
@@ -399,14 +436,20 @@ mod tests {
     /// The register of the workspace projected with the records under
     /// `records`.
     fn lift_projected(work: &Path, records: &Path) -> crate::register::Register {
+        lift_projected_from(work, records, LIFT_SOURCE)
+    }
+
+    /// The register of the workspace whose library is `source`, projected
+    /// with the records under `records`.
+    fn lift_projected_from(work: &Path, records: &Path, source: &str) -> crate::register::Register {
         let ws = work.join("ws");
         std::fs::create_dir_all(ws.join("src")).unwrap();
         std::fs::write(
             ws.join("Cargo.toml"),
-            "[package]\nname = \"probe\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+            "[package]\nname = \"probe\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[features]\nx = []\n\n[workspace]\n",
         )
         .unwrap();
-        std::fs::write(ws.join("src/lib.rs"), LIFT_SOURCE).unwrap();
+        std::fs::write(ws.join("src/lib.rs"), source).unwrap();
         let options = crate::Options {
             name: "probe".into(),
             last_modified: "2026-11-15T00:00:00Z".into(),
@@ -494,6 +537,73 @@ mod tests {
             status(&register, "probe::first"),
             Status::Residue(..)
         ));
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
+    /// Two impls on one line, one per configuration, and a module `outer`
+    /// whose function's path a function nested in a function `outer`
+    /// prints too (refute-lift-7, counterexamples 3 and 4).
+    const LIFT_ONE_LINE: &str = "pub struct A<T>(pub T);\npub struct B<T>(pub T);\n\
+        #[cfg(not(feature = \"x\"))] impl<T: Copy> A<T> { pub fn get(&self) -> T { self.0 } } \
+        #[cfg(feature = \"x\")] impl<T: Copy> B<T> { pub fn get(&self) -> T { self.0 } }\n\
+        pub mod outer {\n    pub fn helper<T: Copy>(x: T, _y: T) -> T { x }\n}\n";
+
+    #[test]
+    fn lift_two_impls_on_one_line_and_a_nested_function_are_told_apart() {
+        use crate::register::Status;
+        let work = std::env::temp_dir().join(format!("uorust-one-line-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let records = work.join("records");
+        let default = "features = []\ndefault_features = true\nall_features = false\n";
+        let all = "features = []\ndefault_features = true\nall_features = true\n";
+        // Each impl's header as the dump prints it: line 3, at the column
+        // of its `impl`, counted from 1.
+        let line = LIFT_ONE_LINE.lines().nth(2).unwrap();
+        let header = |of: &str| {
+            let column = line.find(&format!("impl<T: Copy> {of}<T>")).unwrap() + 1;
+            format!("<impl at src/lib.rs:3:{column}: 3:{}>::get", column + 15)
+        };
+        lift_write_record(
+            &records.join("default"),
+            default,
+            &[],
+            &[(&header("A"), "closed"), ("outer::helper", "closed")],
+        );
+        // With `x`, `outer` is a function and `outer::helper` the function
+        // nested in it.
+        lift_write_record(
+            &records.join("all"),
+            all,
+            &[],
+            &[
+                (&header("B"), "closed"),
+                ("outer", "closed"),
+                ("outer::helper", "closed"),
+            ],
+        );
+        let register = lift_projected_from(&work, &records, LIFT_ONE_LINE);
+        let status = |f: &str| {
+            register
+                .rows
+                .values()
+                .find(|r| r.function == f)
+                .map(|r| r.status.clone())
+                .expect(f)
+        };
+        let configurations = |f: &str| match status(f) {
+            Status::Embedded(at) => at.into_iter().map(|a| a.configuration).collect(),
+            other => vec![format!("{other:?}")],
+        };
+        // Each impl's method by its own impl: closed where its dump compiles
+        // it, absent where it does not, never the other's body.
+        assert_eq!(configurations("probe::A<T>::get"), ["default features"]);
+        assert_eq!(configurations("probe::B<T>::get"), ["all features"]);
+        // The module's function is not joined to the nested function.
+        assert!(
+            matches!(status("probe::helper"), Status::Residue(..)),
+            "{:?}",
+            status("probe::helper")
+        );
         std::fs::remove_dir_all(&work).unwrap();
     }
 

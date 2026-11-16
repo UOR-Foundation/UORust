@@ -1079,7 +1079,7 @@ fn function(
         trait_path: None,
         impl_params: Vec::new(),
         scope: 0,
-        impl_line: None,
+        impl_at: None,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -1197,10 +1197,17 @@ fn items(
                         None => written.join("::"),
                     }
                 });
-                // The line of `impl`, where the dump's span of the header
-                // starts; a header with `unsafe` or `default` on an earlier
-                // line keys another line, and its methods join no body.
-                let impl_line = Some(imp.impl_token.span.start().line);
+                // Where the dump's span of the header starts: its first
+                // token after the attributes (`default`, `unsafe` or
+                // `impl`), its column counted from 1 as rustc prints it.
+                let first = imp
+                    .modifiers
+                    .defaultness
+                    .map(|d| d.span)
+                    .or(imp.unsafety.map(|u| u.span))
+                    .unwrap_or(imp.impl_token.span)
+                    .start();
+                let impl_at = Some((first.line, first.column + 1));
                 let impl_params: Vec<String> = imp
                     .generics
                     .params
@@ -1228,7 +1235,7 @@ fn items(
                         fact.trait_ref.clone_from(&trait_ref);
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
-                        fact.impl_line = impl_line;
+                        fact.impl_at = impl_at;
                         fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);

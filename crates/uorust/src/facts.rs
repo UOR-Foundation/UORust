@@ -186,9 +186,10 @@ pub(crate) struct FnFact {
     /// Which of its file's module scopes (`SourceFile::scopes`) declares
     /// the function.
     pub(crate) scope: usize,
-    /// For a method of an `impl` block: the line its header starts on, by
-    /// which the compiler's dump names the impl (`<impl at file:line:..>`).
-    pub(crate) impl_line: Option<usize>,
+    /// For a method of an `impl` block: the line and the column (from 1,
+    /// in characters) its header starts at, by which the compiler's dump
+    /// names the impl (`<impl at file:line:column: ..>`).
+    pub(crate) impl_at: Option<(usize, usize)>,
 }
 
 /// One module scope of a file: the file's own items, or an inline module's.
