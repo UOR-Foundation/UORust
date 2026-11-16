@@ -11,8 +11,62 @@
 # product code has exactly one residue, foreign, effect or lifted row, keyed
 # by the κ of its question (crate path and tokens): a lifted κ never turns
 # unlifted in a later projection.
+# The work queue comes first: [admission] counts the refusals and each
+# [[reason]] row the refusals of one reason; [lift] counts the functions by
+# table and each [[construct]] row the functions one cause and detail stops.
+# Both queues are ranked, what stops the most first.
 
 spec = "uorust/frontier/1"
+
+[admission]
+refusals = 1
+
+[[reason]]
+reason = "advisories-unconsulted"
+route = "UR-R21"
+refusals = 1
+
+[lift]
+functions = 149
+lifted = 141
+residue = 5
+foreign = 0
+effect = 3
+
+[[construct]]
+construct = "signature outside the lift: a method a trait declares"
+cause = "signature"
+functions = 2
+
+[[construct]]
+construct = "usize + wraps or panics where its value leaves the pointer width: past 2^16 on any 16-bit target, past 2^32 on any 32-bit target, past 2^64 on any 64-bit target"
+cause = "arithmetic"
+functions = 1
+
+[[construct]]
+construct = "Env effect: std::env::args"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "Env effect: std::env::var"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "Fs effect: fs::read_to_string"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "expression form outside the lift: format! hole"
+cause = "form"
+functions = 1
+
+[[construct]]
+construct = "signature outside the lift: implements the trait Sensor"
+cause = "signature"
+functions = 1
 
 [[refusal]]
 status = "open"

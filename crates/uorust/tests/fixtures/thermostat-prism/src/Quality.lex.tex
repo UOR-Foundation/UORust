@@ -111,52 +111,73 @@ definition{
 }
 
 definition{
-  name: requirementLintRustMissingDocs,
+  name: requirementLiftedFunctions,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 3, subcharacteristicIndex := 2})
+  body: (record Foundation.Qual::QualityRequirement {index := 3, subcharacteristicIndex := 3})
 }
 
 definition{
-  name: requirementLintRustUnsafeCode,
+  name: requirementLintRustMissingDocs,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
   body: (record Foundation.Qual::QualityRequirement {index := 4, subcharacteristicIndex := 2})
 }
 
 definition{
+  name: requirementLintRustUnsafeCode,
+  parameters: [],
+  result: Foundation.Qual::QualityRequirement,
+  body: (record Foundation.Qual::QualityRequirement {index := 5, subcharacteristicIndex := 2})
+}
+
+definition{
   name: requirementMinimumRustMinor,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 5, subcharacteristicIndex := 0})
+  body: (record Foundation.Qual::QualityRequirement {index := 6, subcharacteristicIndex := 0})
+}
+
+definition{
+  name: requirementOpenRefusals,
+  parameters: [],
+  result: Foundation.Qual::QualityRequirement,
+  body: (record Foundation.Qual::QualityRequirement {index := 7, subcharacteristicIndex := 3})
+}
+
+definition{
+  name: requirementProductFunctions,
+  parameters: [],
+  result: Foundation.Qual::QualityRequirement,
+  body: (record Foundation.Qual::QualityRequirement {index := 8, subcharacteristicIndex := 3})
 }
 
 definition{
   name: requirementTests,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 6, subcharacteristicIndex := 6})
+  body: (record Foundation.Qual::QualityRequirement {index := 9, subcharacteristicIndex := 6})
 }
 
 definition{
   name: requirementTypedFailureVariants,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 7, subcharacteristicIndex := 2})
+  body: (record Foundation.Qual::QualityRequirement {index := 10, subcharacteristicIndex := 2})
 }
 
 definition{
   name: requirementUnsafeAndForeignSites,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 8, subcharacteristicIndex := 4})
+  body: (record Foundation.Qual::QualityRequirement {index := 11, subcharacteristicIndex := 4})
 }
 
 definition{
   name: requirementWorkspacePackages,
   parameters: [],
   result: Foundation.Qual::QualityRequirement,
-  body: (record Foundation.Qual::QualityRequirement {index := 9, subcharacteristicIndex := 5})
+  body: (record Foundation.Qual::QualityRequirement {index := 12, subcharacteristicIndex := 5})
 }
 
 definition{
@@ -181,38 +202,59 @@ definition{
 }
 
 definition{
+  name: measureLiftedFunctions,
+  parameters: [],
+  result: Foundation.Qual::QualityMeasure,
+  body: (record Foundation.Qual::QualityMeasure {index := 3, requirementIndex := 3, threshold := 141})
+}
+
+definition{
   name: measureMinimumRustMinor,
   parameters: [],
   result: Foundation.Qual::QualityMeasure,
-  body: (record Foundation.Qual::QualityMeasure {index := 3, requirementIndex := 5, threshold := 85})
+  body: (record Foundation.Qual::QualityMeasure {index := 4, requirementIndex := 6, threshold := 85})
+}
+
+definition{
+  name: measureOpenRefusals,
+  parameters: [],
+  result: Foundation.Qual::QualityMeasure,
+  body: (record Foundation.Qual::QualityMeasure {index := 5, requirementIndex := 7, threshold := 1})
+}
+
+definition{
+  name: measureProductFunctions,
+  parameters: [],
+  result: Foundation.Qual::QualityMeasure,
+  body: (record Foundation.Qual::QualityMeasure {index := 6, requirementIndex := 8, threshold := 149})
 }
 
 definition{
   name: measureTests,
   parameters: [],
   result: Foundation.Qual::QualityMeasure,
-  body: (record Foundation.Qual::QualityMeasure {index := 4, requirementIndex := 6, threshold := 19})
+  body: (record Foundation.Qual::QualityMeasure {index := 7, requirementIndex := 9, threshold := 19})
 }
 
 definition{
   name: measureTypedFailureVariants,
   parameters: [],
   result: Foundation.Qual::QualityMeasure,
-  body: (record Foundation.Qual::QualityMeasure {index := 5, requirementIndex := 7, threshold := 4})
+  body: (record Foundation.Qual::QualityMeasure {index := 8, requirementIndex := 10, threshold := 4})
 }
 
 definition{
   name: measureUnsafeAndForeignSites,
   parameters: [],
   result: Foundation.Qual::QualityMeasure,
-  body: (record Foundation.Qual::QualityMeasure {index := 6, requirementIndex := 8, threshold := 0})
+  body: (record Foundation.Qual::QualityMeasure {index := 9, requirementIndex := 11, threshold := 0})
 }
 
 definition{
   name: measureWorkspacePackages,
   parameters: [],
   result: Foundation.Qual::QualityMeasure,
-  body: (record Foundation.Qual::QualityMeasure {index := 7, requirementIndex := 9, threshold := 2})
+  body: (record Foundation.Qual::QualityMeasure {index := 10, requirementIndex := 12, threshold := 2})
 }
 \end{semanticmodule}
 \end{lexlean}

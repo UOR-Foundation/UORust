@@ -10,6 +10,8 @@ use crate::facts::{Capability, FnFact, Package, SourceFile, Span, Syntax, Target
 use crate::ingest::summary;
 use crate::lex::{pascal, string, string_list, Arm, Decl, Expr, Module};
 use crate::lift::{self, Candidate, Residue, Ty, Types};
+use crate::register::{queue_row, ranked, Register};
+use crate::UorustError;
 
 /// What a projection is parameterised by beyond the workspace.
 #[derive(Clone, Debug)]
@@ -27,6 +29,12 @@ pub struct Options {
 
 /// The largest source file the projection's LexLean project admits.
 pub(crate) const MAX_FILE_BYTES: usize = 4_194_304;
+
+/// The projection's own register of what it did not admit or lift.
+const FRONTIER: &str = "frontier.toml";
+
+/// The projection's LexLean project file, which states its limits.
+const LEXLEAN: &str = "lexlean.toml";
 
 const ARCH: &str = "Architecture";
 const IFACE: &str = "Interface";
@@ -233,13 +241,15 @@ fn kebab(name: &str) -> String {
     out
 }
 
-/// The whole projection: path -> bytes.
+/// The whole projection: path -> bytes. There is none where the function
+/// rows it would write are not a lift register, or where a module it would
+/// write is larger than the limit its own `lexlean.toml` states.
 pub(crate) fn project(
     ws: &Workspace,
     syntax: &Syntax,
     options: &Options,
     dumps: Option<&crate::mir::Dumps>,
-) -> BTreeMap<String, Vec<u8>> {
+) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
     for package in &ws.packages {
         for file in &package.files {
@@ -303,12 +313,30 @@ pub(crate) fn project(
         }
     }
     let security = security(&ctx, options);
-    let (quality, refused) = quality(&ctx, iface.feature_count);
-    notes.refusals.extend(refused);
     let mir = dumps.zip(options.mir.as_ref());
     let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
     let supply = supply(&ctx);
     let library = library(ws, &prefix, &behavior, &mut notes);
+    // The κ of every function of product code: the question its row answers.
+    let kappas: BTreeMap<String, String> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.product(r))
+        .map(|r| {
+            let path = ctx.path(r);
+            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
+            (path, kappa)
+        })
+        .collect();
+    // The lift register of this run, read from the function rows the
+    // frontier is about to carry: what the queue ranks and the Quality facet
+    // measures is what a reader of the frontier finds.
+    let rows = function_rows(&notes, &kappas);
+    let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
+    // Quality is written last of the facets: it measures what the others
+    // admitted, refused and lifted.
+    let (quality, refused) = quality(&ctx, iface.feature_count, &lift, &notes.refusals);
+    notes.refusals.extend(refused);
     modules.push(arch);
     modules.push(iface.module);
     modules.push(design);
@@ -327,12 +355,31 @@ pub(crate) fn project(
     }
     let mut entrypoints: Vec<String> = files
         .keys()
-        .filter(|p| p.ends_with(".lex.tex"))
+        .filter(|p| p.ends_with(MODULE_SUFFIX))
         .cloned()
         .collect();
-    for module in &modules {
-        entrypoints.push(module.path());
-        files.insert(module.path(), module.render().into_bytes());
+    // Every file that is no generated module comes first: beside the modules
+    // themselves, these are what can cite a record of one by its ID.
+    for (path, bytes) in register(&iface.register) {
+        files.insert(path, bytes);
+    }
+    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
+    // The prover's trial run lists the translations it admitted on trial.
+    if let Some(listing) = candidates {
+        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
+    }
+    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
+    let cited = |id: &str| {
+        files
+            .values()
+            .any(|bytes| String::from_utf8_lossy(bytes).contains(id))
+    };
+    // Each module within the limit the project file below states, in parts
+    // where it is beyond it and its declarations can be written apart.
+    let written = sized(&modules, MAX_FILE_BYTES, &cited);
+    for (path, text) in written {
+        entrypoints.push(path.clone());
+        files.insert(path, text.into_bytes());
     }
     entrypoints.sort();
     let toml_name: String = options
@@ -392,7 +439,7 @@ pub(crate) fn project(
          build_root = \".prism\"\n\n[limits]\nmax_holo_bytes = 16777216\nmax_entities = 100000\n\
          max_diagnostics = 256\n"
     );
-    files.insert("lexlean.toml".into(), lexlean.into_bytes());
+    files.insert(LEXLEAN.into(), lexlean.into_bytes());
     files.insert("lexlean.lock".into(), lock.into_bytes());
     files.insert("lakefile.toml".into(), lakefile.into_bytes());
     files.insert("lake-manifest.json".into(), manifest.into_bytes());
@@ -402,30 +449,8 @@ pub(crate) fn project(
         ".gitignore".into(),
         b"/.lexlean/\n/.prism/\n/.lake/\n".to_vec(),
     );
-    for (path, bytes) in register(&iface.register) {
-        files.insert(path, bytes);
-    }
-    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
-    // The prover's trial run lists the translations it admitted on trial.
-    if let Some(listing) = candidates {
-        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
-    }
-    // The κ of every function of product code: the question its row answers.
-    let kappas: BTreeMap<String, String> = ctx
-        .all_fns()
-        .into_iter()
-        .filter(|&r| ctx.product(r))
-        .map(|r| {
-            let path = ctx.path(r);
-            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
-            (path, kappa)
-        })
-        .collect();
-    files.insert(
-        "frontier.toml".into(),
-        frontier(&notes, &kappas).into_bytes(),
-    );
-    files
+    within_limit(&files)?;
+    Ok(files)
 }
 
 /// The LexLean compiler semantics a projection locks to: the one UORust's own
@@ -2873,7 +2898,18 @@ fn truncate(text: &str, limit: usize) -> String {
     }
 }
 
-fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
+/// The Quality facet. Beside what it counts in the workspace, it states the
+/// lift and the admission as measures of the model: the functions of product
+/// code and those of them that lifted, from `lift` (the register this run
+/// writes), and the open refusals, `admitted`'s and its own. Each is a
+/// measured count under its own requirement, as every other measure here is;
+/// none is a threshold the tool chose.
+fn quality(
+    ctx: &Model,
+    features: usize,
+    lift: &Register,
+    admitted: &BTreeSet<Refusal>,
+) -> (Module, Vec<Refusal>) {
     let mut refusals = Vec::new();
     let ws = &ctx.ws;
     let q = "Foundation.Qual::";
@@ -2943,6 +2979,14 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
         }
     }
     let crates = ws.packages.len();
+    // The refusals the frontier will count: the other facets' and the ones
+    // found above, each once.
+    let open_refusals = admitted
+        .iter()
+        .chain(&refusals)
+        .collect::<BTreeSet<_>>()
+        .len();
+    let lift = lift.totals();
     // (characteristic, subcharacteristic, measure, threshold)
     let mut measures: Vec<(&str, &str, &str, usize)> = vec![
         (
@@ -2950,6 +2994,24 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
             "FunctionalCompleteness",
             "AdmittedFeatures",
             features,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "OpenRefusals",
+            open_refusals,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "ProductFunctions",
+            lift.functions,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "LiftedFunctions",
+            lift.lifted,
         ),
         (
             "Maintainability",
@@ -5529,13 +5591,17 @@ fn effect_phrase(effect: &str) -> String {
     }
 }
 
-fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
-    let kappa = |path: &str| {
-        kappas
-            .get(path)
-            .map(|k| format!("kappa = \"{k}\"\n"))
-            .unwrap_or_default()
-    };
+/// The table the frontier's count of refusals is written under: the stage
+/// that refused them.
+const ADMISSION: &str = "admission";
+
+/// The unit the frontier's refusal queue counts in.
+const REFUSALS: &str = "refusals";
+
+/// The projection's `frontier.toml`: the counts and the ranked queues, then
+/// every refusal and every function row. `lift` is the register of `rows`,
+/// the function rows ([`function_rows`]).
+fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\
          # A refusal is an open claim: the router proposed it and admission would\n\
@@ -5549,9 +5615,15 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
          # definition parts from the Rust function, its divergence. Every function of\n\
          # product code has exactly one residue, foreign, effect or lifted row, keyed\n\
          # by the κ of its question (crate path and tokens): a lifted κ never turns\n\
-         # unlifted in a later projection.\n\n\
+         # unlifted in a later projection.\n\
+         # The work queue comes first: [admission] counts the refusals and each\n\
+         # [[reason]] row the refusals of one reason; [lift] counts the functions by\n\
+         # table and each [[construct]] row the functions one cause and detail stops.\n\
+         # Both queues are ranked, what stops the most first.\n\n\
          spec = \"uorust/frontier/1\"\n",
     );
+    out.push_str(&refusal_queue(&notes.refusals));
+    out.push_str(&lift.queue_text());
     for r in &notes.refusals {
         out.push_str(&format!(
             "\n[[refusal]]\nstatus = \"open\"\nreason = \"{}\"\nroute = \"{}\"\nspan = {}\ndetail = {}\n",
@@ -5561,6 +5633,42 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&r.detail())
         ));
     }
+    out.push_str(rows);
+    out
+}
+
+/// The refusals as the frontier counts and ranks them: the `[admission]`
+/// table, then one `[[reason]]` row per reason a refusal carries, with the
+/// route that refused it and the refusals of that reason, in the order and
+/// the row shape of the lift's queue ([`ranked`], [`queue_row`]).
+fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
+    let mut reasons: BTreeMap<(&str, &str), usize> = BTreeMap::new();
+    for r in refusals {
+        *reasons.entry((r.code(), r.route())).or_default() += 1;
+    }
+    let mut out = format!("\n[{ADMISSION}]\n{REFUSALS} = {}\n", refusals.len());
+    for ((reason, route), count) in ranked(reasons) {
+        out.push('\n');
+        out.push_str(&queue_row(
+            "reason",
+            &[("reason", reason), ("route", route)],
+            REFUSALS,
+            count,
+        ));
+    }
+    out
+}
+
+/// The frontier's function rows: every function of product code under the
+/// table of what the lift decided for it, keyed by its κ.
+fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
+    let kappa = |path: &str| {
+        kappas
+            .get(path)
+            .map(|k| format!("kappa = \"{k}\"\n"))
+            .unwrap_or_default()
+    };
+    let mut out = String::new();
     for (path, (span, reason)) in &notes.residue {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
@@ -5605,6 +5713,219 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
         }
     }
     out
+}
+
+/// Every module of the projection within the `max_file_bytes` its own
+/// `lexlean.toml` states, which LexLean refuses a source file beyond
+/// (LLS8002): the limit is read back from the project file the same run
+/// writes, so the check and the stated limit cannot part. A module beyond it
+/// is [`UorustError::ModuleTooLarge`], naming the first such module.
+fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
+    let at = std::path::Path::new(LEXLEAN);
+    let bad = |reason: String| UorustError::Malformed {
+        path: at.to_path_buf(),
+        reason,
+    };
+    let text = String::from_utf8_lossy(files.get(LEXLEAN).map_or(&[][..], Vec::as_slice));
+    let config: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let limit = config
+        .get("limits")
+        .and_then(|limits| limits.get("max_file_bytes"))
+        .and_then(toml::Value::as_integer)
+        .and_then(|n| usize::try_from(n).ok())
+        .ok_or_else(|| bad("it states no [limits] max_file_bytes".to_string()))?;
+    match files
+        .iter()
+        .find(|(path, bytes)| path.ends_with(MODULE_SUFFIX) && bytes.len() > limit)
+    {
+        Some((path, bytes)) => Err(UorustError::ModuleTooLarge {
+            module: path.clone(),
+            bytes: bytes.len(),
+            limit,
+        }),
+        None => Ok(()),
+    }
+}
+
+/// What the path of a LexLean module's source ends with.
+const MODULE_SUFFIX: &str = ".lex.tex";
+
+/// The modules as they are written, each `(path, text)`: a module within
+/// `limit` bytes whole, and a module beyond it as its [`parts`] where its
+/// records can be written apart and nothing but the module itself cites one
+/// (no other module, and no other file, which `cited` answers for the text
+/// `Module::`). A module beyond the limit that cannot be parted is written
+/// whole, and [`within_limit`] refuses the projection by its name and size.
+fn sized(modules: &[Module], limit: usize, cited: &dyn Fn(&str) -> bool) -> Vec<(String, String)> {
+    let texts: Vec<String> = modules.iter().map(Module::render).collect();
+    let taken: BTreeSet<&str> = modules.iter().map(|m| m.name.as_str()).collect();
+    let mut out = Vec::new();
+    for (i, (module, text)) in modules.iter().zip(&texts).enumerate() {
+        if text.len() > limit {
+            let id = format!("{}::", module.name);
+            let elsewhere = cited(&id)
+                || texts
+                    .iter()
+                    .enumerate()
+                    .any(|(j, other)| j != i && other.contains(&id));
+            let parted = (!elsewhere).then(|| parts(module, limit, &taken)).flatten();
+            if let Some(parted) = parted {
+                out.extend(parted.iter().map(|part| (part.path(), part.render())));
+                continue;
+            }
+        }
+        out.push((module.path(), text.clone()));
+    }
+    out
+}
+
+/// The parts a module is written as when it is beyond `limit` bytes: its
+/// declarations in their order, each part the longest run of them that
+/// stays within the limit. The first part keeps the module's name and the
+/// `n`th is named `{Module}{n}`, so a record's ID (`Module::name`, which
+/// PrismPM reads from the module that declares it) names its part, and every
+/// reference to a record of the module is rewritten to the part it is in.
+///
+/// Only a module of separate records is parted: every declaration a closed
+/// value in which no word outside a string is another declaration's name
+/// (the term is not read further, so a field or a constructor spelled like
+/// one counts as naming it), and none carrying a canonical `index`, which
+/// PrismPM derives from the order of the IDs a parting changes. `None` where
+/// the module is not one, where one record alone is beyond the limit, or
+/// where a part's name is `taken`.
+fn parts(module: &Module, limit: usize, taken: &BTreeSet<&str>) -> Option<Vec<Module>> {
+    let names: BTreeSet<&str> = module.decls.iter().map(Decl::name).collect();
+    let mut records = Vec::new();
+    for decl in &module.decls {
+        let Decl::Definition {
+            name,
+            parameters,
+            result,
+            body: Expr::Flat(body),
+            axioms,
+            recursive: None,
+            termination: None,
+            mutual: None,
+        } = decl
+        else {
+            return None;
+        };
+        let indexed = body.contains("{index := ") || body.contains(", index := ");
+        if !parameters.is_empty()
+            || !axioms.is_empty()
+            || indexed
+            || words(body).any(|word| names.contains(word))
+        {
+            return None;
+        }
+        records.push((name, result, body));
+    }
+    let part = |decls: Vec<Decl>, name: String| Module {
+        name,
+        glossaries: module.glossaries.clone(),
+        imports: module.imports.clone(),
+        title: module.title,
+        decls,
+    };
+    // The size of each record under the longest name a part can have: there
+    // are no more parts than records, so no part's number is wider than
+    // their count. A shorter name never prints a record larger, since a
+    // line that fits stays flat.
+    let widest = format!("{}{}", module.name, module.decls.len());
+    let room = limit.checked_sub(part(Vec::new(), widest.clone()).render().len() + "\n".len())?;
+    let between = "\n\n".len();
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    let mut used = 0;
+    for (i, (name, result, body)) in records.iter().enumerate() {
+        let widened = renamed(body, &module.name, &|n| {
+            names.contains(n).then_some(widest.as_str())
+        });
+        let size = crate::lex::render_decl(&Decl::value(*name, *result, widened)).len();
+        match groups.last_mut() {
+            Some(group) if used + between + size <= room => {
+                group.push(i);
+                used += between + size;
+            }
+            _ if size <= room => {
+                groups.push(vec![i]);
+                used = size;
+            }
+            _ => return None,
+        }
+    }
+    let part_names: Vec<String> = (0..groups.len())
+        .map(|k| match k {
+            0 => module.name.clone(),
+            _ => format!("{}{}", module.name, k + 1),
+        })
+        .collect();
+    if part_names[1..].iter().any(|n| taken.contains(n.as_str())) {
+        return None;
+    }
+    let part_of: BTreeMap<&str, &str> = groups
+        .iter()
+        .zip(&part_names)
+        .flat_map(|(group, part)| {
+            group
+                .iter()
+                .map(|&i| (records[i].0.as_str(), part.as_str()))
+        })
+        .collect();
+    Some(
+        groups
+            .iter()
+            .zip(&part_names)
+            .map(|(group, name)| {
+                let decls = group
+                    .iter()
+                    .map(|&i| {
+                        let (record, result, body) = records[i];
+                        let body = renamed(body, &module.name, &|n| part_of.get(n).copied());
+                        Decl::value(record, result, body)
+                    })
+                    .collect();
+                part(decls, name.clone())
+            })
+            .collect(),
+    )
+}
+
+/// `text` with every string that is an ID of `module` (`"Module::name"`)
+/// naming the module `part_of` gives for its `name`; an ID it gives none for
+/// stays as it is.
+fn renamed<'a>(text: &str, module: &str, part_of: &dyn Fn(&str) -> Option<&'a str>) -> String {
+    let opening = format!("\"{module}::");
+    let mut out = String::with_capacity(text.len());
+    let mut rest = text;
+    while let Some(at) = rest.find(&opening) {
+        let after = &rest[at + opening.len()..];
+        let name = &after[..after.find('"').unwrap_or(after.len())];
+        out.push_str(&rest[..at]);
+        match part_of(name) {
+            Some(part) => out.push_str(&format!("\"{part}::")),
+            None => out.push_str(&opening),
+        }
+        rest = after;
+    }
+    out.push_str(rest);
+    out
+}
+
+/// The words of a term outside its string literals: each run of letters,
+/// digits and underscores, the shape of a declaration's name.
+fn words(text: &str) -> impl Iterator<Item = &str> {
+    let (mut quoted, mut escaped) = (false, false);
+    text.split(move |c: char| {
+        let inside = quoted;
+        match c {
+            _ if escaped => escaped = false,
+            '\\' if quoted => escaped = true,
+            '"' => quoted = !quoted,
+            _ => {}
+        }
+        inside || !(c.is_alphanumeric() || c == '_')
+    })
+    .filter(|word| !word.is_empty())
 }
 
 fn spdx(ws: &Workspace, options: &Options) -> String {
@@ -6408,5 +6729,506 @@ mod tests {
         let read =
             crate::register::Register::parse(std::path::Path::new("frontier.toml"), &frontier);
         assert!(read.is_ok(), "{:?}", read.err().map(|e| e.to_string()));
+    }
+
+    // The register as the work queue: the frontier's ranked refusals and
+    // lift queue, the lift as Quality measures, and the size of every
+    // module against the limit the projection states.
+
+    use std::collections::{BTreeMap, BTreeSet};
+    use std::path::{Path, PathBuf};
+
+    use super::{
+        frontier, function_rows, refusal_queue, within_limit, Notes, Refusal, Register, Residue,
+        Span, UorustError, FRONTIER, LEXLEAN, MAX_FILE_BYTES,
+    };
+
+    fn at(line: usize) -> Span {
+        Span {
+            file: "src/lib.rs".into(),
+            line,
+        }
+    }
+
+    /// A one-package workspace with no `rust-version`, written fresh: `over`
+    /// lifts, and `next` and `after` stop at the same arithmetic.
+    fn workspace(name: &str) -> PathBuf {
+        let dir = std::env::temp_dir().join(format!("uorust-queue-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(dir.join("src")).expect("a scratch workspace");
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"queue\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+        )
+        .expect("a manifest");
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "//! Q.\n\n/// Over one.\npub fn over(x: u8) -> bool {\n    x > 1\n}\n\n\
+             /// One more.\npub fn next(x: u8) -> u8 {\n    x + 1\n}\n\n\
+             /// One more again.\npub fn after(x: u8) -> u8 {\n    x + 1\n}\n",
+        )
+        .expect("a library");
+        dir
+    }
+
+    fn projected_files(name: &str) -> BTreeMap<String, Vec<u8>> {
+        let dir = workspace(name);
+        let options = super::Options {
+            name: "queue".into(),
+            last_modified: "2026-11-11T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("projects");
+        let _ = std::fs::remove_dir_all(dir);
+        files
+    }
+
+    fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
+        String::from_utf8_lossy(&files[path])
+            .parse()
+            .expect("the file is TOML")
+    }
+
+    fn count(value: &toml::Value) -> usize {
+        usize::try_from(value.as_integer().expect("a count")).expect("a count")
+    }
+
+    /// The `(requirementIndex, threshold)` of the Quality measure `name`.
+    fn measure(quality: &str, name: &str) -> (usize, usize) {
+        let from = quality
+            .find(&format!("name: measure{name},"))
+            .unwrap_or_else(|| panic!("no measure{name} in:\n{quality}"));
+        let record = &quality[from..from + quality[from..].find("\n}").expect("a record")];
+        let field = |key: &str| {
+            let rest = &record[record.find(&format!("{key} := ")).expect("a field") + key.len()..];
+            rest.trim_start_matches(" := ")
+                .chars()
+                .take_while(char::is_ascii_digit)
+                .collect::<String>()
+                .parse::<usize>()
+                .expect("a number")
+        };
+        (field("requirementIndex"), field("threshold"))
+    }
+
+    /// The `index` of the Quality requirement `name`.
+    fn requirement(quality: &str, name: &str) -> usize {
+        let from = quality
+            .find(&format!("name: requirement{name},"))
+            .unwrap_or_else(|| panic!("no requirement{name} in:\n{quality}"));
+        let rest = &quality[from + quality[from..].find("{index := ").expect("an index")..];
+        rest.trim_start_matches("{index := ")
+            .chars()
+            .take_while(char::is_ascii_digit)
+            .collect::<String>()
+            .parse()
+            .expect("a number")
+    }
+
+    #[test]
+    fn the_frontier_ranks_its_refusals_by_reason() {
+        let collision = |line: usize| Refusal::Collision {
+            span: at(line),
+            name: format!("n{line}"),
+        };
+        let unaccepted = |line: usize| Refusal::Unaccepted {
+            span: at(line),
+            feature: format!("f{line}"),
+        };
+        let refusals: BTreeSet<Refusal> = [
+            Refusal::AdvisoriesUnconsulted,
+            Refusal::NoMsrv {
+                package: "p".into(),
+            },
+            unaccepted(1),
+            unaccepted(2),
+            collision(3),
+            collision(4),
+            collision(5),
+        ]
+        .into_iter()
+        .collect();
+        let doc: toml::Value = refusal_queue(&refusals).parse().expect("TOML");
+        assert_eq!(count(&doc["admission"]["refusals"]), refusals.len());
+        let rows: Vec<(&str, &str, usize)> = doc["reason"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["reason"].as_str().expect("a reason"),
+                    r["route"].as_str().expect("a route"),
+                    count(&r["refusals"]),
+                )
+            })
+            .collect();
+        // The most refusals first; as many, by reason.
+        assert_eq!(
+            rows,
+            [
+                ("name-collision", "UR-R13", 3),
+                ("feature-without-acceptance", "UR-R10", 2),
+                ("advisories-unconsulted", "UR-R21", 1),
+                ("no-msrv", "UR-R24", 1),
+            ]
+        );
+        assert_eq!(rows.iter().map(|r| r.2).sum::<usize>(), refusals.len());
+        // No refusal: the count is stated, and the queue is empty.
+        let none: toml::Value = refusal_queue(&BTreeSet::new()).parse().expect("TOML");
+        assert_eq!(count(&none["admission"]["refusals"]), 0);
+        assert!(none.get("reason").is_none());
+    }
+
+    #[test]
+    fn the_frontier_carries_the_queue_of_its_own_rows() {
+        let mut notes = Notes::default();
+        notes.refusals.insert(Refusal::AdvisoriesUnconsulted);
+        for (i, name) in ["c::t1", "c::t2"].into_iter().enumerate() {
+            let reason = Residue::Type("Wide".into());
+            notes.residue.insert(name.into(), (at(i + 1), reason));
+        }
+        let form = Residue::Form("a\tloop".into());
+        notes.residue.insert("c::g".into(), (at(3), form));
+        notes
+            .effects
+            .insert("c::e".into(), (at(4), "Fs effect: std::fs::read".into()));
+        notes.lifted.insert(
+            "c::f".into(),
+            (at(5), "Behavior::f".into(), vec!["ASCII only".into()]),
+        );
+        let kappas: BTreeMap<String, String> = ["c::t1", "c::t2", "c::g", "c::e", "c::f"]
+            .into_iter()
+            .map(|path| (path.to_string(), crate::register::kappa(path, "fn f () {}")))
+            .collect();
+        let rows = function_rows(&notes, &kappas);
+        let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
+        let text = frontier(&notes, &lift, &rows);
+        let doc: toml::Value = text.parse().expect("the frontier is TOML");
+        let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
+            .iter()
+            .map(|key| count(&doc["lift"][key]))
+            .collect();
+        assert_eq!(totals, [5, 1, 3, 0, 1]);
+        let queue: Vec<(&str, &str, usize)> = doc["construct"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["cause"].as_str().expect("a cause"),
+                    r["construct"].as_str().expect("a construct"),
+                    count(&r["functions"]),
+                )
+            })
+            .collect();
+        // A construct is the detail as a reader of the rows finds it: the
+        // tab the frontier writes as a space is a space in the queue too.
+        assert_eq!(
+            queue,
+            [
+                ("type", "type outside the lift: Wide", 2),
+                ("effect", "Fs effect: std::fs::read", 1),
+                ("form", "expression form outside the lift: a loop", 1),
+            ]
+        );
+        assert_eq!(count(&doc["admission"]["refusals"]), 1);
+        assert_eq!(doc["refusal"].as_array().map(Vec::len), Some(1));
+        // The frontier is the register it was written from, queue and all.
+        assert_eq!(Register::parse(Path::new(FRONTIER), &text), Ok(lift));
+        // Rows that are not a register give no projection: a function with
+        // no κ has no row to key.
+        assert!(matches!(
+            Register::parse(
+                Path::new(FRONTIER),
+                &function_rows(&notes, &BTreeMap::new())
+            ),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    #[test]
+    fn quality_states_the_lift_and_the_open_refusals_as_measures() {
+        let files = projected_files("quality");
+        let frontier = toml_of(&files, FRONTIER);
+        let quality = String::from_utf8_lossy(&files["src/Quality.lex.tex"]).to_string();
+        // The register the same run writes.
+        let totals = crate::lift_register(&files).expect("a register").totals();
+        assert_eq!((totals.functions, totals.lifted, totals.residue), (3, 1, 2));
+        let refusals = frontier["refusal"].as_array().expect("refusals").len();
+        // Quality's own refusal (no `rust-version`) is one of them.
+        assert!(frontier["refusal"]
+            .as_array()
+            .expect("refusals")
+            .iter()
+            .any(|r| r["reason"].as_str() == Some("no-msrv")));
+        assert_eq!(count(&frontier["admission"]["refusals"]), refusals);
+        assert_eq!(count(&frontier["lift"]["functions"]), totals.functions);
+        assert_eq!(count(&frontier["lift"]["lifted"]), totals.lifted);
+        for (name, measured) in [
+            ("ProductFunctions", totals.functions),
+            ("LiftedFunctions", totals.lifted),
+            ("OpenRefusals", refusals),
+        ] {
+            let (of, threshold) = measure(&quality, name);
+            assert_eq!(threshold, measured, "measure{name}");
+            // Built as every other measure is: under its own requirement.
+            assert_eq!(of, requirement(&quality, name), "measure{name}");
+        }
+        // The measure this one is modelled on is still built the same way.
+        let (of, _) = measure(&quality, "AdmittedFeatures");
+        assert_eq!(of, requirement(&quality, "AdmittedFeatures"));
+        // The queue of the two functions one construct stops.
+        let first = &frontier["construct"].as_array().expect("the queue")[0];
+        assert_eq!(first["cause"].as_str(), Some("arithmetic"));
+        assert_eq!(count(&first["functions"]), 2);
+    }
+
+    #[test]
+    fn a_module_beyond_the_stated_limit_is_a_typed_error() {
+        let project = |limit: usize, module: usize| -> BTreeMap<String, Vec<u8>> {
+            [
+                (
+                    LEXLEAN.to_string(),
+                    format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+                ),
+                ("src/Design.lex.tex".to_string(), vec![b' '; module]),
+                // No module: LexLean does not read it as a source file.
+                (FRONTIER.to_string(), vec![b'#'; limit + 1]),
+            ]
+            .into_iter()
+            .collect()
+        };
+        let limit = 64;
+        // At the limit a module is admitted; one byte beyond it is refused.
+        assert_eq!(within_limit(&project(limit, limit)), Ok(()));
+        let refused = within_limit(&project(limit, limit + 1)).expect_err("beyond the limit");
+        assert_eq!(
+            refused,
+            UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: limit + 1,
+                limit,
+            }
+        );
+        let said = refused.to_string();
+        assert!(
+            said.contains("src/Design.lex.tex") && said.contains("65 bytes") && said.contains("64"),
+            "{said}"
+        );
+        // A project file that states no limit is not one to check against.
+        let mut silent = project(limit, limit);
+        silent.insert(LEXLEAN.to_string(), b"[limits]\n".to_vec());
+        assert!(matches!(
+            within_limit(&silent),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    /// The limit checked is the one the projection's own `lexlean.toml`
+    /// states: a projection is within it, and the same files under a lower
+    /// stated limit are refused at their largest module.
+    #[test]
+    fn a_projection_is_checked_against_the_limit_it_states() {
+        let mut files = projected_files("limit");
+        let stated = format!("max_file_bytes = {MAX_FILE_BYTES}\n");
+        let config = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        assert!(config.contains(&stated), "{config}");
+        assert_eq!(within_limit(&files), Ok(()));
+        // The first of the largest, in the order the check reads them.
+        let (largest, bytes) = files
+            .iter()
+            .rev()
+            .filter(|(path, _)| path.ends_with(".lex.tex"))
+            .map(|(path, bytes)| (path.clone(), bytes.len()))
+            .max_by_key(|(_, bytes)| *bytes)
+            .expect("a module");
+        let lower = bytes - 1;
+        files.insert(
+            LEXLEAN.to_string(),
+            config
+                .replace(&stated, &format!("max_file_bytes = {lower}\n"))
+                .into_bytes(),
+        );
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: largest,
+                bytes,
+                limit: lower,
+            })
+        );
+    }
+
+    use super::{parts, record, sized, string, Decl, Module};
+
+    /// A module of separate records in the shape of a design facet: a view,
+    /// `n` processes, and `n` things that each cite the view and a process.
+    fn design_like(n: usize) -> Module {
+        let t = "Foundation.Arch::";
+        let id = |name: &str| string(&format!("Design::{name}"));
+        let mut decls = vec![Decl::value(
+            "opmView",
+            format!("{t}DesignView"),
+            record(&format!("{t}DesignView"), &[("title", string("Processes"))]),
+        )];
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("process{i}"),
+                format!("{t}SystemProcess"),
+                record(&format!("{t}SystemProcess"), &[("owner", string("c"))]),
+            ));
+        }
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("thing{i}"),
+                format!("{t}OpmThing"),
+                record(
+                    &format!("{t}OpmThing"),
+                    &[
+                        ("view", id("opmView")),
+                        ("subject", id(&format!("process{i}"))),
+                    ],
+                ),
+            ));
+        }
+        Module {
+            name: "Design".into(),
+            glossaries: vec![super::BOOL],
+            imports: vec!["Foundation.Arch".into()],
+            title: "design view",
+            decls,
+        }
+    }
+
+    /// The names a module text declares, in order.
+    fn declared(text: &str) -> Vec<String> {
+        text.split("name: ")
+            .skip(1)
+            .map(|rest| rest.split(',').next().expect("a name").to_string())
+            .collect()
+    }
+
+    /// Every ID a module text cites: each string of the form `"Design..::name"`.
+    fn cited_ids(text: &str) -> Vec<String> {
+        text.split('"')
+            .filter(|piece| piece.starts_with("Design") && piece.contains("::"))
+            .map(str::to_string)
+            .collect()
+    }
+
+    #[test]
+    fn a_module_of_separate_records_beyond_the_limit_is_written_in_parts() {
+        let module = design_like(40);
+        let whole = module.render();
+        let nothing = |_: &str| false;
+        // Within the limit it is written whole, byte for byte.
+        assert_eq!(
+            sized(std::slice::from_ref(&module), whole.len(), &nothing),
+            [(module.path(), whole.clone())]
+        );
+        // A third of its size holds no more than a third of it.
+        let limit = whole.len() / 3;
+        let written = sized(std::slice::from_ref(&module), limit, &nothing);
+        assert!(written.len() > 3, "{} parts", written.len());
+        let mut ids = BTreeSet::new();
+        let mut order = Vec::new();
+        for (k, (path, text)) in written.iter().enumerate() {
+            // Each part is a module of its own, within the limit, named in turn.
+            let name = match k {
+                0 => "Design".to_string(),
+                _ => format!("Design{}", k + 1),
+            };
+            assert_eq!(path, &format!("src/{name}.lex.tex"));
+            assert!(text.starts_with(&format!("\\begin{{lexlean}}{{{name}}}\n")));
+            assert!(text.len() <= limit, "{path}: {} > {limit}", text.len());
+            for declared in declared(text) {
+                assert!(
+                    ids.insert(format!("{name}::{declared}")),
+                    "{declared} twice"
+                );
+                order.push(declared);
+            }
+        }
+        // Every record is written once, in its order.
+        assert_eq!(order, declared(&whole));
+        // Every reference names the part its record is in, and some reach
+        // back into the first part and some into a later one.
+        let cited: Vec<String> = written.iter().flat_map(|(_, t)| cited_ids(t)).collect();
+        assert_eq!(cited.len(), cited_ids(&whole).len());
+        for id in &cited {
+            assert!(ids.contains(id), "{id} names no record");
+        }
+        let last = &written[written.len() - 1].1;
+        assert!(last.contains("\"Design::opmView\""), "{last}");
+        assert!(cited.iter().any(|id| !id.starts_with("Design::")));
+        // The parts are the same on a second run.
+        assert_eq!(
+            written,
+            sized(std::slice::from_ref(&module), limit, &nothing)
+        );
+    }
+
+    /// What is not a module of separate records, or is cited from outside
+    /// itself, is written whole, and the size check refuses the projection.
+    #[test]
+    fn a_module_that_cannot_be_parted_is_left_to_the_typed_error() {
+        let module = design_like(40);
+        let whole = module.render();
+        let limit = whole.len() / 3;
+        let taken = BTreeSet::new();
+        assert!(parts(&module, limit, &taken).is_some());
+        let unparted = [(module.path(), whole.clone())];
+        // Another file cites one of its records.
+        let elsewhere = |id: &str| id == "Design::";
+        assert_eq!(
+            sized(std::slice::from_ref(&module), limit, &elsewhere),
+            unparted
+        );
+        // Another module does.
+        let citing = Module {
+            name: "Interface".into(),
+            decls: vec![Decl::value("journey", "String", string("Design::opmView"))],
+            ..design_like(0)
+        };
+        let both = [module.clone(), citing];
+        assert_eq!(sized(&both, limit, &|_| false)[0], unparted[0]);
+        // A record with a canonical index, whose order its ID decides.
+        let mut indexed = design_like(40);
+        indexed.decls[0] = Decl::value("opmView", "T", record("T", &[("index", "0".into())]));
+        assert!(parts(&indexed, limit, &taken).is_none());
+        // A declaration that names another outside a string, or takes a
+        // parameter, is no separate record.
+        let mut naming = design_like(40);
+        naming.decls[1] = Decl::value("process0", "T", "opmView".to_string());
+        assert!(parts(&naming, limit, &taken).is_none());
+        let mut taking = design_like(40);
+        if let Decl::Definition { parameters, .. } = &mut taking.decls[1] {
+            parameters.push(("x".into(), "Nat".into()));
+        }
+        assert!(parts(&taking, limit, &taken).is_none());
+        // One record alone beyond the limit, and a part's name already a
+        // module's.
+        let one = crate::lex::render_decl(&module.decls[0]).len();
+        assert!(parts(&module, one, &taken).is_none());
+        assert!(parts(&module, limit, &BTreeSet::from(["Design2"])).is_none());
+        // Left whole, it is the typed error's.
+        let files: BTreeMap<String, Vec<u8>> = [
+            (
+                LEXLEAN.to_string(),
+                format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+            ),
+            (module.path(), whole.clone().into_bytes()),
+        ]
+        .into_iter()
+        .collect();
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: whole.len(),
+                limit,
+            })
+        );
     }
 }
