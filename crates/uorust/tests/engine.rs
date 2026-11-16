@@ -144,17 +144,23 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
             ),
             (
                 "src/lib.rs",
-                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n",
+                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n\n/// Picks an implementation by its argument's type.\npub fn pick(p: a::Pair) -> a::Wide {\n    a::Wide::from(p.0)\n}\n",
             ),
             (
                 "src/a.rs",
-                "/// One.\npub fn go() -> u8 {\n    1\n}\n\n/// Both a state and an error.\n#[derive(Debug)]\npub enum LoadState {\n    /// Idle.\n    Idle,\n    /// Done.\n    Done,\n}\n\nimpl std::fmt::Display for LoadState {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        write!(f, \"{self:?}\")\n    }\n}\n\nimpl std::error::Error for LoadState {}\n",
+                "/// One.\npub fn go() -> u8 {\n    1\n}\n\n/// A byte.\npub struct Pair(pub u8);\n\n/// A wide value.\npub struct Wide(pub u32);\n\nimpl From<u8> for Wide {\n    fn from(x: u8) -> Wide {\n        Wide(u32::from(x))\n    }\n}\n\nimpl From<u16> for Wide {\n    fn from(x: u16) -> Wide {\n        Wide(u32::from(x) + 1)\n    }\n}\n\n/// Both a state and an error.\n#[derive(Debug)]\npub enum LoadState {\n    /// Idle.\n    Idle,\n    /// Done.\n    Done,\n}\n\nimpl std::fmt::Display for LoadState {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        write!(f, \"{self:?}\")\n    }\n}\n\nimpl std::error::Error for LoadState {}\n",
             ),
             ("src/b.rs", "/// Two.\npub fn go() -> u8 {\n    2\n}\n"),
         ],
     );
     let files = project(&dir, "amb");
     let frontier = text(&files, "frontier.toml");
+    // Each reason from a refusal row of its own, an open claim; the queue's
+    // [[reason]] counts alone do not show one.
+    let refusals: Vec<&str> = frontier
+        .split("\n[[")
+        .filter_map(|row| row.strip_prefix("refusal]]\n"))
+        .collect();
     for reason in [
         "ambiguous-call",
         "ambiguous-fact",
@@ -162,11 +168,27 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
         "no-msrv",
     ] {
         assert!(
-            frontier.contains(&format!("reason = \"{reason}\"")),
+            refusals.iter().any(
+                |row| row.lines().any(|l| l == format!("reason = \"{reason}\""))
+                    && row.lines().any(|l| l == "status = \"open\"")
+            ),
             "{reason} missing:\n{frontier}"
         );
     }
-    assert!(frontier.contains("status = \"open\""));
+    // The ambiguous call is the one the written code leaves open: `p.0` is
+    // a field, whose type the resolution does not read, and both `From`
+    // implementations of the workspace can take it.
+    let ambiguous = refusals
+        .iter()
+        .find(|row| row.contains("reason = \"ambiguous-call\""))
+        .expect("an ambiguous-call row");
+    assert!(
+        ambiguous.contains("span = \"src/lib.rs:12\"")
+            && ambiguous.contains("Wide::from")
+            && ambiguous.contains("src/a.rs:13")
+            && ambiguous.contains("src/a.rs:19"),
+        "{ambiguous}"
+    );
     let interface = text(&files, "src/Interface.lex.tex");
     assert!(
         !interface.contains("Foundation.Arch::Feature {"),
@@ -178,6 +200,42 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
     let quality = text(&files, "src/Quality.lex.tex");
     assert!(!quality.contains("MinimumRustMinor"));
     let _ = std::fs::remove_dir_all(dir);
+}
+
+#[test]
+fn a_call_admission_resolves_lifts_as_the_function_it_resolves_to() {
+    // `go` of the root module is `a::go`, through the glob import: one
+    // function by the language's name resolution, which admission and the
+    // lift both read it by.
+    let dir = scratch(
+        "glob-call",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"amb\"\nversion = \"0.1.0\"\nedition = \"2021\"\nrust-version = \"1.70\"\n\n[workspace]\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! A glob import.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n",
+            ),
+            ("src/a.rs", "/// One.\npub fn go() -> u8 {\n    1\n}\n"),
+            ("src/b.rs", "/// Two.\npub fn go() -> u8 {\n    2\n}\n"),
+        ],
+    );
+    let files = project(&dir, "amb");
+    let _ = std::fs::remove_dir_all(&dir);
+    let frontier = text(&files, "frontier.toml");
+    assert!(!frontier.contains("ambiguous-call"), "{frontier}");
+    assert!(
+        frontier.contains("[lift]\nfunctions = 3\nlifted = 3\nresidue = 0\n"),
+        "{frontier}"
+    );
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    let run = behavior
+        .split("definition{")
+        .find(|d| d.contains("name: run,"))
+        .unwrap_or_else(|| panic!("run is not lifted:\n{behavior}"));
+    assert!(run.contains("body: (aGo)}"), "run calls another go:\n{run}");
 }
 
 #[test]
