@@ -1108,15 +1108,29 @@ mod tests {
         let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &["fnv"]);
         assert_eq!(
             reason("core::num::<impl u32>::max"),
-            "core, alloc and std are not linked"
+            "crate `core` is not linked"
         );
         assert_eq!(
             reason("<alloc::vec::Vec<u8> as core::clone::Clone>::clone"),
-            "core, alloc and std are not linked"
+            "crate `alloc` is not linked"
         );
         assert_eq!(
             reason("<u32 as std::ops::Add>::add"),
-            "core, alloc and std are not linked"
+            "crate `std` is not linked"
+        );
+        // A library linked: what it leaves is its, and a trait object's
+        // method is chosen at run time whatever is linked.
+        assert_eq!(
+            crate::embed::unlinked_reason("core::num::<impl u32>::max", "m", &["core"]),
+            "a linked library leaves it to a dictionary"
+        );
+        assert_eq!(
+            reason("<dyn core::fmt::Write as core::fmt::Write>::write_str"),
+            "a trait object's method, chosen at run time"
+        );
+        assert_eq!(
+            reason("<&mut dyn Tr as Tr>::go"),
+            "a trait object's method, chosen at run time"
         );
         assert_eq!(reason("<T as Trait>::go"), "a generic parameter's bound");
         assert_eq!(reason("<&T as Trait>::go"), "a generic parameter's bound");
@@ -1140,5 +1154,106 @@ mod tests {
             reason("sqrtf64"),
             "the platform (an intrinsic, assembly, a foreign item)"
         );
+    }
+
+    // stdlink: a call the crate's MIR prints by a path through std reaches
+    // the body of the library that defines it.
+
+    #[test]
+    fn stdlink_a_call_printed_through_std_links_the_body_alloc_defines() {
+        let work =
+            std::env::temp_dir().join(format!("uorust-shard-stdlink-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        // rust-src: alloc defines the function, std re-exports its module
+        // under the name the language's own `extern crate .. as` gives it.
+        let library = work.join("src/library");
+        join_write(&library.join("core/src"), "lib.rs", "#![no_std]\n");
+        join_write(
+            &library.join("alloc/src"),
+            "lib.rs",
+            "#![no_std]\npub mod num;\n",
+        );
+        join_write(
+            &library.join("alloc/src"),
+            "num.rs",
+            "pub fn double(a: u32, b: u32) -> u32 {\n    a\n}\npub fn triple(a: u32, b: u32) -> u32 {\n    a\n}\n",
+        );
+        join_write(
+            &library.join("std/src"),
+            "lib.rs",
+            "extern crate alloc as alloc_crate;\npub use alloc_crate::num;\n",
+        );
+        let target = "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n";
+        let alloc = work.join("alloc-mir");
+        join_write(
+            &alloc.join("num"),
+            "alloc.num-double.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body("num::double", "_0 = copy _1;\n        goto -> bb1;"),
+        );
+        join_write(&alloc, TARGET, target);
+        let ws = work.join("ws");
+        join_write(
+            &ws,
+            "Cargo.toml",
+            "[workspace]\nmembers = [\"sl\"]\nresolver = \"2\"\n",
+        );
+        join_write(
+            &ws.join("sl"),
+            "Cargo.toml",
+            "[package]\nname = \"sl\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        );
+        join_write(&ws.join("sl/src"), "lib.rs", "pub mod inner;\n");
+        join_write(
+            &ws.join("sl/src"),
+            "inner.rs",
+            "pub fn top(a: u32, b: u32) -> u32 {\n    std::num::triple(std::num::double(a, b), b)\n}\n",
+        );
+        let dumps = work.join("dumps");
+        let shards = dumps.join(format!("{SHARDS}sl"));
+        join_write(
+            &shards.join("inner"),
+            "sl.inner-top.2-2-009.ElaborateBoxDerefs.before.mir",
+            // `triple` has no body in alloc's dumps: left to a dictionary,
+            // and named by the library that defines it, not by std.
+            "// MIR for `inner::top` before ElaborateBoxDerefs\n\nfn inner::top(_1: u32, _2: u32) -> u32 {\n    let mut _0: u32;\n    let mut _3: u32;\n\n    bb0: {\n        _3 = std::num::double(copy _1, copy _2) -> [return: bb1, unwind continue];\n    }\n\n    bb1: {\n        _0 = std::num::triple(copy _3, copy _2) -> [return: bb2, unwind continue];\n    }\n\n    bb2: {\n        return;\n    }\n}\n",
+        );
+        join_write(&shards, TARGET, target);
+        // Its own crate name: the embedding mounts its sources under a
+        // directory named by the crate and the process, which a test of
+        // another crate `m` running beside it would share.
+        let embed = |out: &str, link: &[(String, PathBuf)]| {
+            let out = work.join(out);
+            let done = embed_workspace_crate(&WorkspaceEmbed {
+                workspace: &ws,
+                krate: "sl",
+                dumps: &dumps,
+                library: &library,
+                out: &out,
+                only: &["inner".to_string()],
+                each_module: false,
+                link,
+            })
+            .expect("the embedding");
+            let record = std::fs::read_to_string(out.join(RECORD)).expect("the record");
+            (done[0].census.clone(), record)
+        };
+        let (alone, record) = embed("alone", &[]);
+        assert_eq!((alone.bodies, alone.bound), (1, 1), "{record}");
+        assert_eq!(
+            alone.unlinked.get("crate `std` is not linked"),
+            Some(&2),
+            "{record}"
+        );
+        let (linked, record) = embed("linked", &[("alloc".to_string(), alloc)]);
+        assert_eq!(linked.linked.get("alloc"), Some(&1), "{record}");
+        assert_eq!(
+            linked
+                .unlinked
+                .get("a linked library leaves it to a dictionary"),
+            Some(&1),
+            "{record}"
+        );
+        assert_eq!(linked.unlinked.len(), 1, "{record}");
+        std::fs::remove_dir_all(&work).unwrap();
     }
 }

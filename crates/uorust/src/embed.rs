@@ -3866,13 +3866,18 @@ pub struct EmbedCensus {
 /// modules, which no crate name can be.
 pub const OWN: &str = "(the crate's own modules)";
 
-/// Why a callee `name` a body of `krate` leaves to its dictionary is not
-/// linked, read from the path the dump prints, with the libraries
-/// `linked` into the program: the crate the path names (a qualified
-/// path's self type, or its trait where the self type is a primitive), or
-/// a generic parameter the caller's bound abstracts, or the platform (an
-/// intrinsic, inline assembly, a foreign item: a name with no path).
-pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
+/// What a callee's printed path names as its home: a crate (a qualified
+/// path's self type's, or its trait's where the self type is a primitive),
+/// a generic parameter the caller's bound abstracts, a trait object, or
+/// the platform (a name with no path).
+enum Home {
+    Crate(String),
+    Parameter,
+    Object,
+    Platform,
+}
+
+fn home_of(name: &str) -> Home {
     // A qualified path `<Self as Trait>::item`: its self type, unless that
     // is a primitive or a parameter, then its trait.
     let named = match name.strip_prefix('<') {
@@ -3894,14 +3899,16 @@ pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
             let ty = rest[..split.unwrap_or(rest.len())]
                 .trim_start_matches(['&', '*', '(', '['])
                 .trim_start_matches("mut ")
-                .trim_start_matches("const ")
-                .trim_start_matches("dyn ");
+                .trim_start_matches("const ");
+            if ty.starts_with("dyn ") {
+                return Home::Object;
+            }
             let head = ty.split("::").next().unwrap_or_default();
             let head = head.split('<').next().unwrap_or_default();
             if ty.contains("::") {
                 Some(head.to_string())
             } else if head.starts_with(char::is_uppercase) {
-                return "a generic parameter's bound".into();
+                return Home::Parameter;
             } else {
                 // A primitive's impl is its trait's crate's.
                 split
@@ -3914,17 +3921,41 @@ pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
             .contains("::")
             .then(|| name.split("::").next().unwrap_or_default().to_string()),
     };
-    match named.as_deref() {
-        None | Some("") => "the platform (an intrinsic, assembly, a foreign item)".into(),
-        Some("core" | "alloc" | "std") => "core, alloc and std are not linked".into(),
-        Some(c) if c == krate => "the crate's own, with no body in the dump".into(),
-        Some(c) if linked.contains(&c) => "a linked library leaves it to a dictionary".into(),
-        Some(c) => format!("crate `{c}` is not linked"),
+    match named {
+        Some(c) if !c.is_empty() => Home::Crate(c),
+        _ => Home::Platform,
+    }
+}
+
+/// Why a callee `name` a body of `krate` leaves to its dictionary is not
+/// linked, read from the path the dump prints (written from the crate
+/// that defines it where the library's paths resolve it,
+/// [`crate::library::Paths::canonical_text`]), with the libraries
+/// `linked` into the program: the crate the path names, a generic
+/// parameter the caller's bound abstracts, a trait object's method (the
+/// impl is chosen at run time), or the platform (an intrinsic, inline
+/// assembly, a foreign item: a name with no path).
+pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
+    match home_of(name) {
+        Home::Platform => "the platform (an intrinsic, assembly, a foreign item)".into(),
+        Home::Parameter => "a generic parameter's bound".into(),
+        Home::Object => "a trait object's method, chosen at run time".into(),
+        Home::Crate(c) if c == krate => "the crate's own, with no body in the dump".into(),
+        Home::Crate(c) if linked.contains(&c.as_str()) => {
+            "a linked library leaves it to a dictionary".into()
+        }
+        Home::Crate(c) => format!("crate `{c}` is not linked"),
     }
 }
 
 impl EmbedCensus {
-    fn add(&mut self, e: &Embedded, krate: &str, linked: &[&str]) {
+    fn add(
+        &mut self,
+        e: &Embedded,
+        krate: &str,
+        linked: &[&str],
+        paths: Option<&crate::library::Paths>,
+    ) {
         self.bodies += 1;
         if e.blocked.is_empty() {
             self.evaluable += 1;
@@ -3946,9 +3977,10 @@ impl EmbedCensus {
             *self.linked.entry(at.to_string()).or_default() += 1;
         }
         for b in &e.bound {
+            let named = paths.map_or_else(|| b.clone(), |p| p.canonical_text(b));
             *self
                 .unlinked
-                .entry(unlinked_reason(b, krate, linked))
+                .entry(unlinked_reason(&named, krate, linked))
                 .or_default() += 1;
         }
     }
@@ -6038,15 +6070,46 @@ fn embed_linked(
     // program leaves to its dictionary, as a foreign function is: the
     // evaluator is given the platform's, and stops unlinked without it.
     let platform = platform_intrinsics(&library_root(root));
+    // A call into core, alloc or std, as the crate's MIR prints it (by a
+    // path visible from the crate, `std::vec::Vec::<u32>::push`), is the
+    // body of the library that defines it, found by its path from that
+    // library's root (`library::Paths`) with that library's own paths
+    // written as its dumps print them, from its root
+    // (`<ops::range::Range<u32> as iter::traits::iterator::Iterator>::next`).
+    let paths = linked
+        .iter()
+        .any(|l| crate::library::LIBRARIES.contains(&l.krate.as_str()))
+        .then(|| crate::library::Paths::read(&library_root(root)));
+    let in_library = |callee: &str, args: &[Option<String>], dest: &str| {
+        let paths = paths.as_ref()?;
+        let named = paths.canonical_text(callee);
+        let owner = match home_of(&named) {
+            Home::Crate(c) => c,
+            _ => return None,
+        };
+        let l = linked
+            .iter()
+            .find(|l| l.krate == owner && crate::library::LIBRARIES.contains(&owner.as_str()))?;
+        let own = |t: &str| crate::library::without_crate(&paths.canonical_text(t), &l.krate);
+        let args: Vec<Option<String>> = args.iter().map(|a| a.as_deref().map(own)).collect();
+        match resolve_callee(&l.link, &l.krate, &own(callee), &args, &own(dest)) {
+            Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+            Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+            Callee::Bound(_) => None,
+        }
+    };
     let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
-        linked.iter().find_map(|l| {
-            let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
-            match resolve_callee(&l.link, &l.krate, rest, args, dest) {
-                Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
-                Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
-                Callee::Bound(_) => None,
-            }
-        })
+        linked
+            .iter()
+            .find_map(|l| {
+                let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
+                match resolve_callee(&l.link, &l.krate, rest, args, dest) {
+                    Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+                    Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+                    Callee::Bound(_) => None,
+                }
+            })
+            .or_else(|| in_library(callee, args, dest))
     };
     let resolve = |callee: &str, args: &[Option<String>], dest: &str| match match resolve_callee(
         &link, krate, callee, args, dest,
@@ -6196,7 +6259,7 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e, krate, &linked_names);
+                    census.add(&e, krate, &linked_names, paths.as_ref());
                     signatures.insert(
                         kappa.clone(),
                         (

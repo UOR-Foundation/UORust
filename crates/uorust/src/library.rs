@@ -420,6 +420,17 @@ pub fn render_record(inputs: &Inputs, kept: &[Kept], layouts: usize, digest: &st
     out
 }
 
+/// The crates `-Zbuild-std` builds for `krate`: alloc with the core it
+/// is built on named too, since a `no_std` probe takes its core from the
+/// sysroot otherwise and two cores' lang items collide (E0152).
+fn build_std(krate: &str) -> &'static str {
+    match krate {
+        "core" => "core",
+        "alloc" => "core,alloc",
+        _ => "std",
+    }
+}
+
 /// What [`dump`] wrote.
 #[derive(Clone, Debug)]
 pub struct Dumped {
@@ -495,7 +506,7 @@ pub fn dump(
         let cargo = |lib: &Path, flags: String, verb: &str| {
             let mut c = Command::new("cargo");
             c.arg(&toolchain)
-                .args([verb, "-q", &format!("-Zbuild-std={krate}")])
+                .args([verb, "-q", &format!("-Zbuild-std={}", build_std(krate))])
                 .args(["--target", &inputs.triple])
                 .current_dir(&probe)
                 .env("__CARGO_TESTS_ONLY_SRC_ROOT", lib)
@@ -536,10 +547,11 @@ pub fn dump(
         let check = format!(
             "cd '{}' && __CARGO_TESTS_ONLY_SRC_ROOT='{}' RUSTC_BOOTSTRAP=1 CARGO_INCREMENTAL=0 \
              CARGO_TARGET_DIR='{}' RUSTFLAGS='{CHECK_FLAGS}' cargo {toolchain} check -q \
-             -Zbuild-std={krate} --target {}",
+             -Zbuild-std={} --target {}",
             probe.display(),
             copy.display(),
             target.display(),
+            build_std(krate),
             inputs.triple
         );
         let layouts = crate::layouts::run(krate, out, &copy, &check)?;
@@ -558,6 +570,417 @@ pub fn dump(
         kept,
         layouts,
     })
+}
+
+/// What one library crate of rust-src makes nameable from outside: its
+/// modules, the items each declares, and each module's `pub use` names
+/// and globs, every target written from a crate's root
+/// (`["core", "option"]`).
+#[derive(Clone, Debug, Default)]
+struct Exports {
+    /// Every module, by its path from the crate's root ("" the root).
+    modules: BTreeSet<String>,
+    /// (module, name) of every item a module declares, but modules.
+    items: BTreeSet<(String, String)>,
+    /// (module, name) of every `pub use` name, with its target.
+    named: std::collections::BTreeMap<(String, String), Vec<String>>,
+    /// Every `pub use target::*` of a module, by the module.
+    globs: std::collections::BTreeMap<String, Vec<Vec<String>>>,
+}
+
+/// The public paths of the library crates of rust-src, read from their
+/// sources: how a path a workspace's MIR prints (rustc prints an item by a
+/// path visible from the caller's crate, `std::vec::Vec`,
+/// `std::cmp::max`) names the item a library defines (`alloc::vec::Vec`,
+/// `core::cmp::max`), by Rust's own resolution of the `pub use`
+/// declarations it passes through.
+///
+/// The reading holds for every program because it is name resolution as
+/// the language states it, applied to the library's own source at the
+/// pinned toolchain: in a module, an item the module declares or a name
+/// it imports explicitly shadows a glob import; a name two globs bring
+/// in is ambiguous, and an ambiguous name is never taken here; `crate`,
+/// `self`, `super` and an extern crate's name (its `extern crate .. as`
+/// alias included) start a path as the language reads them. A path that
+/// does not resolve so is left as printed, so it stays unlinked rather
+/// than linked to another item.
+#[derive(Clone, Debug, Default)]
+pub struct Paths {
+    by_crate: std::collections::BTreeMap<String, Exports>,
+}
+
+impl Paths {
+    /// The public paths of core, alloc and std under rust-src's `library`.
+    pub fn read(library: &Path) -> Paths {
+        let by_crate = LIBRARIES
+            .iter()
+            .map(|k| (k.to_string(), exports(library, k)))
+            .collect();
+        Paths { by_crate }
+    }
+
+    /// `text` (a callee, or a type, as MIR prints it) with each path that
+    /// starts with a library's name written from the crate that defines
+    /// what it names (`std::vec::Vec::<u32>::push` as
+    /// `alloc::vec::Vec::<u32>::push`); a path that does not resolve is
+    /// kept as printed.
+    pub fn canonical_text(&self, text: &str) -> String {
+        let bytes = text.as_bytes();
+        let ident = |b: u8| b.is_ascii_alphanumeric() || b == b'_';
+        let mut out = String::with_capacity(text.len());
+        let mut i = 0;
+        while i < bytes.len() {
+            let at_start = i == 0 || !(ident(bytes[i - 1]) || bytes[i - 1] == b':');
+            let lib = at_start
+                .then(|| {
+                    self.by_crate
+                        .keys()
+                        .find(|k| text[i..].starts_with(&format!("{k}::")))
+                })
+                .flatten();
+            let Some(_) = lib else {
+                let next = text[i..]
+                    .char_indices()
+                    .nth(1)
+                    .map_or(text.len(), |(n, _)| i + n);
+                out.push_str(&text[i..next]);
+                i = next;
+                continue;
+            };
+            // The run `ident(::ident)*` from here.
+            let mut end = i;
+            let mut segs: Vec<String> = Vec::new();
+            loop {
+                let from = end;
+                while end < bytes.len() && ident(bytes[end]) {
+                    end += 1;
+                }
+                if end == from {
+                    break;
+                }
+                segs.push(text[from..end].to_string());
+                if text[end..].starts_with("::") && bytes.get(end + 2).copied().is_some_and(ident) {
+                    end += 2;
+                } else {
+                    break;
+                }
+            }
+            let run_end = end;
+            match self.resolve(&segs, &mut BTreeSet::new()) {
+                Some(found) => out.push_str(&found.join("::")),
+                None => out.push_str(&text[i..run_end]),
+            }
+            i = run_end;
+        }
+        out
+    }
+
+    /// The path `segs` (a crate's name first, then identifiers) names, from
+    /// the crate that declares it: `None` where a segment names nothing
+    /// the crate's modules, items or `pub use` names give, or a glob
+    /// import leaves it ambiguous.
+    fn resolve(&self, segs: &[String], seen: &mut BTreeSet<String>) -> Option<Vec<String>> {
+        let ex = self.by_crate.get(segs.first()?)?;
+        if !seen.insert(segs.join("::")) {
+            return None;
+        }
+        let mut module: Vec<&str> = Vec::new();
+        for (i, s) in segs.iter().enumerate().skip(1) {
+            let m = module.join("::");
+            if ex.items.contains(&(m.clone(), s.clone())) {
+                return Some(segs.to_vec());
+            }
+            let child = if m.is_empty() {
+                s.clone()
+            } else {
+                format!("{m}::{s}")
+            };
+            if ex.modules.contains(&child) {
+                module.push(s);
+                continue;
+            }
+            if let Some(t) = ex.named.get(&(m.clone(), s.clone())) {
+                let mut next = t.clone();
+                next.extend(segs[i + 1..].iter().cloned());
+                return self.resolve(&next, seen);
+            }
+            let mut found: Vec<Vec<String>> = ex
+                .globs
+                .get(&m)
+                .into_iter()
+                .flatten()
+                .filter_map(|g| {
+                    let mut next = g.clone();
+                    next.extend(segs[i..].iter().cloned());
+                    self.resolve(&next, &mut seen.clone())
+                })
+                .collect();
+            found.sort();
+            found.dedup();
+            return match found.as_slice() {
+                [one] => Some(one.clone()),
+                _ => None,
+            };
+        }
+        Some(segs.to_vec())
+    }
+}
+
+/// `text` with each path that starts with `krate::` written from that
+/// crate's root (`core::ops::range::Range<u32>` as `ops::range::Range<u32>`),
+/// as the crate's own dumps print its items; a `krate::` inside a longer
+/// path is kept.
+pub fn without_crate(text: &str, krate: &str) -> String {
+    let prefix = format!("{krate}::");
+    let bytes = text.as_bytes();
+    let mut out = String::with_capacity(text.len());
+    let mut i = 0;
+    while i < text.len() {
+        let at_start = i == 0
+            || !(bytes[i - 1].is_ascii_alphanumeric()
+                || bytes[i - 1] == b'_'
+                || bytes[i - 1] == b':');
+        if at_start && text[i..].starts_with(&prefix) {
+            i += prefix.len();
+            continue;
+        }
+        let next = text[i..]
+            .char_indices()
+            .nth(1)
+            .map_or(text.len(), |(n, _)| i + n);
+        out.push_str(&text[i..next]);
+        i = next;
+    }
+    out
+}
+
+/// [`Exports`] of `krate` under rust-src's `library`: each source file is
+/// the module its path names (`src/a/b.rs`, `src/a/b/mod.rs`: `a::b`),
+/// except a root module the crate root mounts by `#[path]`.
+fn exports(library: &Path, krate: &str) -> Exports {
+    fn walk(dir: &Path, files: &mut Vec<PathBuf>) {
+        for p in crate::embed::dir_paths(dir).unwrap_or_default() {
+            if p.is_dir() {
+                walk(&p, files);
+            } else if p.extension().is_some_and(|x| x == "rs") {
+                files.push(p);
+            }
+        }
+    }
+    let src = library.join(krate).join("src");
+    let mut files = Vec::new();
+    walk(&src, &mut files);
+    // The extern crates a path may start with: the prelude's, and each
+    // `extern crate x as y;` of the crate root.
+    let mut externs: std::collections::BTreeMap<String, String> = LIBRARIES
+        .iter()
+        .take_while(|k| **k != krate)
+        .chain(std::iter::once(&krate))
+        .map(|k| (k.to_string(), k.to_string()))
+        .collect();
+    let mut mounted: std::collections::BTreeMap<PathBuf, String> = Default::default();
+    let root = src.join("lib.rs");
+    if let Some(parsed) = parse_items(&root) {
+        for item in &parsed {
+            match item {
+                syn::Item::ExternCrate(e) => {
+                    let name = e.ident.to_string();
+                    let name = if name == "self" {
+                        krate.to_string()
+                    } else {
+                        name
+                    };
+                    let alias = e
+                        .rename
+                        .as_ref()
+                        .map_or_else(|| name.clone(), |(_, r)| r.to_string());
+                    externs.insert(alias, name);
+                }
+                syn::Item::Mod(m) if m.content.is_none() => {
+                    let path = m.attrs.iter().find_map(|a| match &a.meta {
+                        syn::Meta::NameValue(nv) if nv.path.is_ident("path") => match &nv.value {
+                            syn::Expr::Lit(syn::ExprLit {
+                                lit: syn::Lit::Str(s),
+                                ..
+                            }) => Some(s.value()),
+                            _ => None,
+                        },
+                        _ => None,
+                    });
+                    if let Some(p) = path.filter(|p| !p.starts_with("..")) {
+                        mounted.insert(src.join(p), m.ident.to_string());
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    let mut out = Exports::default();
+    out.modules.insert(String::new());
+    for file in files {
+        let Some(parsed) = parse_items(&file) else {
+            continue;
+        };
+        let module: Vec<String> = match mounted.get(&file) {
+            Some(m) => vec![m.clone()],
+            None => {
+                let rel = file.strip_prefix(&src).unwrap_or(&file).with_extension("");
+                let mut m: Vec<String> = rel
+                    .components()
+                    .map(|c| c.as_os_str().to_string_lossy().into_owned())
+                    .collect();
+                if matches!(m.last().map(String::as_str), Some("mod" | "lib")) {
+                    m.pop();
+                }
+                m
+            }
+        };
+        export_items(krate, &externs, &module, &parsed, &mut out);
+    }
+    out
+}
+
+/// Record the modules, items and public `use` names of `items`, the
+/// items of `module` of `krate`, into `out`.
+fn export_items(
+    krate: &str,
+    externs: &std::collections::BTreeMap<String, String>,
+    module: &[String],
+    items: &[syn::Item],
+    out: &mut Exports,
+) {
+    let m = module.join("::");
+    for i in items {
+        let declared = match i {
+            syn::Item::Mod(md) => {
+                let mut path = module.to_vec();
+                path.push(md.ident.to_string());
+                out.modules.insert(path.join("::"));
+                if let Some((_, inner)) = &md.content {
+                    export_items(krate, externs, &path, inner, out);
+                }
+                None
+            }
+            syn::Item::Fn(f) => Some(&f.sig.ident),
+            syn::Item::Struct(s) => Some(&s.ident),
+            syn::Item::Enum(e) => Some(&e.ident),
+            syn::Item::Union(u) => Some(&u.ident),
+            syn::Item::Trait(t) => Some(&t.ident),
+            syn::Item::TraitAlias(t) => Some(&t.ident),
+            syn::Item::Type(t) => Some(&t.ident),
+            syn::Item::Const(c) => Some(&c.ident),
+            syn::Item::Static(s) => Some(&s.ident),
+            _ => None,
+        };
+        if let Some(name) = declared {
+            out.items.insert((m.clone(), name.to_string()));
+        }
+        let syn::Item::Use(u) = i else {
+            continue;
+        };
+        if !matches!(u.vis, syn::Visibility::Public(_)) {
+            continue;
+        }
+        let mut found = Vec::new();
+        use_paths(&[], &u.tree, &mut found);
+        for (name, path) in found {
+            let Some(target) = use_target(krate, externs, module, &path) else {
+                continue;
+            };
+            match name {
+                Some(n) => {
+                    out.named.insert((m.clone(), n), target);
+                }
+                None => out.globs.entry(m.clone()).or_default().push(target),
+            }
+        }
+    }
+}
+
+/// A source file's items, read past the const-trait syntax the library is
+/// written in and syn does not read (`const trait`, `impl const`,
+/// `[const]` and `~const` bounds): what is left declares the same names.
+fn parse_items(file: &Path) -> Option<Vec<syn::Item>> {
+    let text = std::fs::read_to_string(file).ok()?;
+    // syn reads a `const trait` as tokens it does not parse
+    // (`Item::Verbatim`), so the syntax is left out before it reads.
+    let plain = text
+        .replace("const trait ", "trait ")
+        .replace("impl const ", "impl ")
+        .replace("> const ", "> ")
+        .replace("[const] ", "")
+        .replace("~const ", "");
+    syn::parse_file(&plain)
+        .or_else(|_| syn::parse_file(&text))
+        .ok()
+        .map(|f| f.items)
+}
+
+/// Each name a use tree brings in with the path it names (a glob's name
+/// none, its path the module), in the tree's own words.
+fn use_paths(prefix: &[String], tree: &syn::UseTree, out: &mut Vec<(Option<String>, Vec<String>)>) {
+    let with = |s: String| {
+        let mut p = prefix.to_vec();
+        p.push(s);
+        p
+    };
+    match tree {
+        syn::UseTree::Path(p) => use_paths(&with(p.ident.to_string()), &p.tree, out),
+        syn::UseTree::Name(n) if n.ident == "self" => {
+            if let Some(last) = prefix.last() {
+                out.push((Some(last.clone()), prefix.to_vec()));
+            }
+        }
+        syn::UseTree::Name(n) => out.push((Some(n.ident.to_string()), with(n.ident.to_string()))),
+        syn::UseTree::Rename(r) if r.rename != "_" => {
+            out.push((Some(r.rename.to_string()), with(r.ident.to_string())));
+        }
+        syn::UseTree::Rename(_) => {}
+        syn::UseTree::Glob(_) => out.push((None, prefix.to_vec())),
+        syn::UseTree::Group(g) => {
+            for t in &g.items {
+                use_paths(prefix, t, out);
+            }
+        }
+    }
+}
+
+/// The path `path`, written in a `use` of `module` of `krate`, names from
+/// a crate's root, its crate's name first: `crate`, `self`, `super` and an
+/// extern crate's name as the language reads them; a path that starts
+/// with any other name is relative to the module (the 2018 edition's
+/// uniform paths).
+fn use_target(
+    krate: &str,
+    externs: &std::collections::BTreeMap<String, String>,
+    module: &[String],
+    path: &[String],
+) -> Option<Vec<String>> {
+    let first = path.first()?;
+    let here = || {
+        let mut m = vec![krate.to_string()];
+        m.extend(module.iter().cloned());
+        m
+    };
+    let (mut at, rest) = match first.as_str() {
+        "crate" => (vec![krate.to_string()], &path[1..]),
+        "self" => (here(), &path[1..]),
+        "super" => (here(), path),
+        f => match externs.get(f) {
+            Some(k) => (vec![k.clone()], &path[1..]),
+            None => (here(), path),
+        },
+    };
+    for s in rest {
+        match s.as_str() {
+            "super" if at.len() > 1 => {
+                at.pop();
+            }
+            "super" | "self" => {}
+            _ => at.push(s.clone()),
+        }
+    }
+    Some(at)
 }
 
 #[cfg(test)]
@@ -736,5 +1159,105 @@ mod tests {
         assert!(source(&other, &cache).is_err());
         assert!(!cache.join("library").exists());
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A synthetic rust-src: core, alloc and std, each a few files.
+    fn stdlink_library(dir: &Path) -> PathBuf {
+        let lib = dir.join("library");
+        let w = |p: &str, t: &str| stdlink_write(&lib.join(p), t);
+        w(
+            "core/src/lib.rs",
+            "pub mod option;\npub mod cmp;\npub mod clone;\n",
+        );
+        w(
+            "core/src/option.rs",
+            "pub enum Option<T> {\n    None,\n    Some(T),\n}\n",
+        );
+        w(
+            "core/src/cmp.rs",
+            "pub fn max<T>(a: T, b: T) -> T {\n    a\n}\n",
+        );
+        w(
+            "core/src/clone.rs",
+            "pub const trait Clone {\n    fn clone(&self) -> Self;\n}\n",
+        );
+        w("alloc/src/lib.rs", "#![no_std]\npub mod vec;\n");
+        w("alloc/src/vec/mod.rs", "pub struct Vec<T>(T);\n");
+        w(
+            "std/src/lib.rs",
+            "extern crate alloc as alloc_crate;\npub use core::option;\npub use core::cmp;\n\
+             pub use core::clone;\npub use alloc_crate::vec;\npub mod collections;\n\
+             #[path = \"num/f64.rs\"]\npub mod f64;\npub mod alloc;\n\
+             pub mod g1 {\n    pub fn f() {}\n}\npub mod g2 {\n    pub fn f() {}\n}\n\
+             pub mod amb {\n    pub use crate::g1::*;\n    pub use crate::g2::*;\n}\n\
+             pub mod sh {\n    pub use crate::g1::*;\n    pub fn f() {}\n}\n\
+             pub mod hidden {\n    pub(crate) use core::option::Option;\n}\n",
+        );
+        w("std/src/alloc.rs", "pub struct System;\n");
+        w("std/src/num/f64.rs", "pub fn local() {}\n");
+        w(
+            "std/src/collections/mod.rs",
+            "pub use self::hash_map::HashMap;\nmod hash;\npub mod hash_map {\n    pub use super::hash::map::*;\n}\n",
+        );
+        w("std/src/collections/hash/mod.rs", "pub mod map;\n");
+        w(
+            "std/src/collections/hash/map.rs",
+            "pub struct HashMap<K, V>(K, V);\n",
+        );
+        lib
+    }
+
+    #[test]
+    fn stdlink_a_printed_library_path_is_written_from_the_crate_that_defines_it() {
+        let dir = stdlink_dir("paths");
+        let paths = Paths::read(&stdlink_library(&dir));
+        let c = |t: &str| paths.canonical_text(t);
+        // Through a re-export of another crate's module, `extern crate .. as`
+        // included.
+        assert_eq!(
+            c("std::vec::Vec::<u32>::push"),
+            "alloc::vec::Vec::<u32>::push"
+        );
+        assert_eq!(c("std::cmp::max::<u64>"), "core::cmp::max::<u64>");
+        // Inside a qualified path and its generic arguments; a trait the
+        // library writes `const trait` is read.
+        assert_eq!(
+            c("<std::option::Option<std::vec::Vec<u8>> as std::clone::Clone>::clone"),
+            "<core::option::Option<alloc::vec::Vec<u8>> as core::clone::Clone>::clone"
+        );
+        // A name, then a glob of an inline module, to a private module's item.
+        assert_eq!(
+            c("std::collections::HashMap::<K, V>::new"),
+            "std::collections::hash::map::HashMap::<K, V>::new"
+        );
+        // The crate's own module, mounted by `#[path]`, and its own `alloc`.
+        assert_eq!(
+            c("std::f64::<impl f64>::sqrt"),
+            "std::f64::<impl f64>::sqrt"
+        );
+        assert_eq!(c("std::f64::local"), "std::f64::local");
+        assert_eq!(c("std::alloc::System"), "std::alloc::System");
+        // A name two globs bring in is ambiguous and kept; an item the
+        // module declares shadows its glob; a `pub(crate) use` is not a
+        // public path; a path inside a longer one is not a library's.
+        assert_eq!(c("std::amb::f"), "std::amb::f");
+        assert_eq!(c("std::sh::f"), "std::sh::f");
+        assert_eq!(c("std::hidden::Option"), "std::hidden::Option");
+        assert_eq!(c("my::std::vec::Vec"), "my::std::vec::Vec");
+        assert_eq!(c("mystd::vec::Vec"), "mystd::vec::Vec");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn stdlink_a_crates_own_paths_are_written_from_its_root() {
+        assert_eq!(
+            without_crate(
+                "<core::ops::Range<core::num::NonZero<u32>> as core::iter::Iterator>::next",
+                "core"
+            ),
+            "<ops::Range<num::NonZero<u32>> as iter::Iterator>::next"
+        );
+        assert_eq!(without_crate("x::core::y", "core"), "x::core::y");
+        assert_eq!(without_crate("alloc::vec::Vec", "core"), "alloc::vec::Vec");
     }
 }
