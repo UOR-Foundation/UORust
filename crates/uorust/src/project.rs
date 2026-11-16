@@ -75,6 +75,9 @@ struct Model {
     calls: BTreeMap<FnRef, BTreeSet<FnRef>>,
     /// The route the router admitted for each enum: `(package, file, enum)`.
     enum_routes: BTreeMap<(usize, usize, usize), &'static str>,
+    /// The bare names a function's module binds by a `use` to a type of a
+    /// registry crate, each with the crate.
+    registry: BTreeMap<FnRef, BTreeMap<String, String>>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -135,6 +138,15 @@ impl Model {
         parts.join("::")
     }
 
+    /// The registry crate a type names through a `use` of the function's
+    /// module: `Value` where `use serde_json::Value;` binds it.
+    fn bound_crate(&self, r: FnRef, ty: &str) -> Option<String> {
+        let bound = self.registry.get(&r)?;
+        ty.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
+            .filter_map(|word| word.split("::").next())
+            .find_map(|head| bound.get(head).cloned())
+    }
+
     fn component_of(&self, r: FnRef) -> Option<&String> {
         self.targets.get(&(r.pkg, self.file(r).target))
     }
@@ -144,14 +156,19 @@ impl Model {
     fn record_residue(&self, notes: &mut Notes, r: FnRef, span: Span, reason: Residue) {
         let package = &self.ws.packages[r.pkg];
         if let Residue::Type(ty) = &reason {
-            if let Some(dep) = foreign_crate(package, ty) {
+            if let Some(dep) = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)) {
                 let detail = format!(
                     "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
                 );
-                notes.foreign.insert(self.path(r), (span, detail));
+                // A path two functions project to (a name collision) keeps
+                // one row: residue, wherever one of them is residue.
+                if !notes.residue.contains_key(&self.path(r)) {
+                    notes.foreign.insert(self.path(r), (span, detail));
+                }
                 return;
             }
         }
+        notes.foreign.remove(&self.path(r));
         notes.residue.insert(self.path(r), (span, reason));
     }
 
@@ -236,6 +253,12 @@ pub(crate) fn project(
     dumps: Option<&crate::mir::Dumps>,
 ) -> BTreeMap<String, Vec<u8>> {
     let mut notes = Notes::default();
+    // Items under `cfg` predicates no build holds together are one fact:
+    // the projection states the variant its configuration compiles.
+    let (ws, syntax, variants) = crate::names::stated(ws, syntax);
+    let (ws, syntax) = (&ws, &syntax);
+    notes.refusals.extend(variants);
+    let resolver = crate::names::Resolver::new(ws, syntax);
     for package in &ws.packages {
         for file in &package.files {
             if let Some(reason) = &file.parse_error {
@@ -264,9 +287,16 @@ pub(crate) fn project(
         edges: BTreeMap::new(),
         calls: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
+        registry: BTreeMap::new(),
     };
+    ctx.registry = ctx
+        .all_fns()
+        .into_iter()
+        .map(|r| (r, resolver.registry_types((r.pkg, r.file, r.idx))))
+        .filter(|(_, bound)| !bound.is_empty())
+        .collect();
     ctx.edges = edges(&ctx);
-    let (calls, refused) = resolve(&ctx);
+    let (calls, refused) = resolve(&ctx, &resolver);
     ctx.calls = calls;
     notes.refusals.extend(refused);
     let (enum_routes, refused) = route_enums(&ctx);
@@ -755,9 +785,15 @@ fn edges(ctx: &Model) -> BTreeMap<String, (String, String)> {
     edges
 }
 
-/// Resolve every path call and unique method call to workspace functions.
+/// Resolve every call to workspace functions: by the language's own name
+/// resolution where the written code decides it ([`crate::names`]), and by
+/// name where those rules could not follow the call.
 #[allow(clippy::type_complexity)]
-fn resolve(ctx: &Model) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
+fn resolve(
+    ctx: &Model,
+    resolver: &crate::names::Resolver<'_>,
+) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
+    use crate::names::Outcome;
     let mut calls = BTreeMap::new();
     let mut refusals = Vec::new();
     let all = ctx.all_fns();
@@ -782,10 +818,56 @@ fn resolve(ctx: &Model) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
                 .map(move |t| (t.name.replace('-', "_"), pkg))
         })
         .collect();
+    let fn_ref = |(pkg, file, idx): crate::names::FnId| FnRef { pkg, file, idx };
     for &caller in &all {
         let f = ctx.func(caller);
         let mut out = BTreeSet::new();
-        for call in &f.calls {
+        let ruled: Vec<(String, Option<Outcome>)> =
+            match resolver.calls((caller.pkg, caller.file, caller.idx)) {
+                Some(list) => list.into_iter().map(|(c, o)| (c, Some(o))).collect(),
+                None => f.calls.iter().map(|c| (c.clone(), None)).collect(),
+            };
+        for (call, outcome) in &ruled {
+            // Product code's functions only, as by name below.
+            let product = |fns: &[crate::names::FnId]| -> Vec<FnRef> {
+                let mut v: Vec<FnRef> = fns.iter().map(|g| fn_ref(*g)).collect();
+                v.retain(|r| ctx.product(*r));
+                v
+            };
+            match outcome {
+                // One function, or the variants of one no build holds
+                // together: the call reaches each.
+                Some(Outcome::Resolved(fns)) => {
+                    out.extend(product(fns));
+                    continue;
+                }
+                Some(Outcome::Outside) => continue,
+                // The written code leaves it open between these.
+                Some(Outcome::Open(fns)) => {
+                    match product(fns).as_slice() {
+                        [] => {}
+                        [only] => {
+                            out.insert(*only);
+                        }
+                        many => {
+                            let mut names: Vec<String> = many
+                                .iter()
+                                .map(|r| {
+                                    format!("{} ({})", ctx.path(*r), ctx.func(*r).span.render())
+                                })
+                                .collect();
+                            names.sort();
+                            refusals.push(Refusal::AmbiguousCall {
+                                span: f.span.clone(),
+                                callee: call.clone(),
+                                candidates: names,
+                            });
+                        }
+                    }
+                    continue;
+                }
+                Some(Outcome::Unknown) | None => {}
+            }
             if let Some(method) = call.strip_prefix('.') {
                 let candidates: Vec<FnRef> = by_name
                     .get(method)
@@ -5265,5 +5347,71 @@ mod tests {
                 assert_eq!(sha(&msg), md);
             }
         }
+    }
+
+    // Name resolution: admission resolves names as the language does.
+
+    /// The frontier of a one-library workspace with `source` as its `lib.rs`.
+    fn frontier_of(tag: &str, manifest_extra: &str, source: &str) -> String {
+        let dir = std::env::temp_dir().join(format!("uorust-resolve-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            format!(
+                "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+                 rust-version = \"1.70\"\n{manifest_extra}"
+            ),
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        String::from_utf8(files["frontier.toml"].clone()).unwrap()
+    }
+
+    #[test]
+    fn a_call_resolves_in_its_nearest_module_before_it_is_ambiguous() {
+        let frontier = frontier_of(
+            "near",
+            "",
+            "pub mod left {\n pub fn near() -> u8 { 3 }\n pub fn here() -> u8 { near() }\n}\n\
+             pub mod right {\n pub fn near() -> u8 { 4 }\n}\n",
+        );
+        assert!(!frontier.contains("ambiguous-call"), "{frontier}");
+    }
+
+    #[test]
+    fn a_registry_type_a_use_binds_is_a_foreign_row() {
+        let frontier = frontier_of(
+            "foreign",
+            "\n[dependencies]\nserde_json = \"1\"\n",
+            "use serde_json::Value;\npub fn null(v: Value) -> bool { v.is_null() }\n",
+        );
+        assert!(
+            frontier.contains("takes or returns Value, a type of the serde_json crate"),
+            "{frontier}"
+        );
+    }
+
+    #[test]
+    fn complementary_cfg_variants_are_one_fact_not_a_collision() {
+        let frontier = frontier_of(
+            "variant",
+            "\n[features]\nwide = []\n",
+            "#[cfg(feature = \"wide\")]\npub fn variant() -> u8 { 1 }\n\
+             #[cfg(not(feature = \"wide\"))]\npub fn variant() -> u8 { 2 }\n",
+        );
+        assert!(!frontier.contains("name-collision"), "{frontier}");
+        assert!(frontier.contains("reason = \"cfg-variant\""), "{frontier}");
+        assert!(
+            frontier.contains("w::variant has a variant under cfg(feature = \\\"wide\\\")"),
+            "{frontier}"
+        );
     }
 }

@@ -185,6 +185,9 @@ pub(crate) struct StructFact {
 #[derive(Clone, Debug, Default)]
 pub(crate) struct Syntax {
     pub(crate) files: BTreeMap<String, FileSyntax>,
+    /// What name resolution reads of the workspace: each module's bindings
+    /// and each body's calls.
+    pub(crate) names: crate::names::Names,
 }
 
 impl Syntax {
