@@ -20,7 +20,7 @@
 
 [sets]
 sdk = ["prismpm.lock", "prism-factory/sdk.sh"]
-manifests = ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml"]
+manifests = ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", ".cargo/"]
 # What the workspace compiles: every crate's sources and manifests, without
 # the registers, ledgers and fixture workspaces the build never reads, plus
 # the files outside crates/ that a crate embeds (include_str!/include_bytes!).

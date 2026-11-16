@@ -41,6 +41,13 @@ routes() {
     }'
 }
 
+# Exit 1, naming them, when the plan holds a refuted obligation.
+refuted() {
+  "$host" plan --receipts "$store" | awk '
+    $1 == "obligation" && $3 == "refuted" { print "factory: " $2 " is refuted on these inputs" > "/dev/stderr"; bad = 1 }
+    END { exit bad }'
+}
+
 only() { local name; for name in "$@"; do printf -- '--only\n%s\n' "$name"; done; }
 
 command=${1:-}
@@ -53,7 +60,10 @@ case "$command" in
     shift
     build
     mapfile -t selected < <(only "$@")
-    exec "$host" run --receipts "$store" --work "$work" "${selected[@]}"
+    "$host" run --receipts "$store" --work "$work" "${selected[@]}"
+    # A hermetic failure is refuted and is not run again, so a second run of a
+    # refuted tree runs nothing; it still fails.
+    refuted
     ;;
   start)
     shift
@@ -72,6 +82,7 @@ case "$command" in
       echo "running $$ $(date -u +%Y-%m-%dT%H:%M:%SZ)" >"$status"
       "$host" run --receipts "$store" --work "$work" "$@" >"$log" 2>&1
       code=$?
+      [[ $code == 0 ]] && "$host" plan --receipts "$store" | grep -qE "^obligation [^ ]+ refuted " && code=1
       established=$(grep -cE "^factory: [^ ]+ (passed|failed)$" "$log" || true)
       counts=$("$host" plan --receipts "$store" | awk "\$1 == \"obligation\" { c[\$3]++ } END { printf \"proved %d refuted %d blocked %d observe %d\", c[\"proved\"], c[\"refuted\"], c[\"blocked\"], c[\"observe\"] }")
       echo "done $code established $established $counts" >"$status"
