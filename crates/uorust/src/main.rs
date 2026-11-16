@@ -608,10 +608,11 @@ struct Args {
     #[arg(long, requires = "configuration")]
     embedding: Option<PathBuf>,
     /// A configuration the workspace declares, by the label its records
-    /// state (`default features`, `all features`, `default features and
-    /// a,b`, `features a on <target>`; repeatable): a row is embedded-closed
+    /// state, target included as `uorust mir` records it (`default features
+    /// on x86_64-unknown-linux-gnu`, `all features on <target>`, `default
+    /// features and a,b on <target>`; repeatable): a row is embedded-closed
     /// only where the records of every declared configuration cover its
-    /// crate.
+    /// crate, so a label no record states leaves every row as it was.
     #[arg(long, requires = "embedding")]
     configuration: Vec<String>,
 }
