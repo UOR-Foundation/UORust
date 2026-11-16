@@ -97,7 +97,16 @@ fn self_model_sm_01() {
     let file = read("model/routes.toml");
     let model = read("app/src/Routes.lex.tex");
     let routes = tables(&file, "route");
-    assert_eq!(routes.len(), 28, "the route table has 28 routes");
+    let translator = read("crates/uorust/src/route.rs");
+    let rules = translator
+        .match_indices("\"UR-R")
+        .filter(|(at, _)| translator[at + 5..].starts_with(|c: char| c.is_ascii_digit()))
+        .count();
+    assert_eq!(
+        routes.len(),
+        rules,
+        "model/routes.toml has a row for each of the translator's {rules} routes"
+    );
 
     let table = declaration(&model, "routes");
     let route_of = declaration(&model, "routeOf");
