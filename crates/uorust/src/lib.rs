@@ -178,6 +178,25 @@ pub fn admit(path: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<(), Uorus
     }
 }
 
+/// Admit the register file `candidate` against its parent's, `parent` (a
+/// register file or a `frontier.toml` each), by the law per function
+/// ([`register::admit_parent`]), and return the candidate's totals: refused,
+/// naming each function re-decided. The parent is read by its rows alone
+/// ([`register::Register::parse`]), since an earlier tool may have derived
+/// its queue otherwise; the candidate as this tool writes it
+/// ([`register::Register::read`]).
+pub fn admit_register(parent: &Path, candidate: &Path) -> Result<register::Totals, UorustError> {
+    let text = |path: &Path| std::fs::read_to_string(path).map_err(|e| error::io(path, e));
+    let incumbent = register::Register::parse(parent, &text(parent)?)?;
+    let candidate = register::Register::read(candidate, &text(candidate)?)?;
+    let regressed = register::admit_parent(&incumbent, &candidate);
+    if regressed.is_empty() {
+        Ok(candidate.totals())
+    } else {
+        Err(UorustError::Regressed(regressed))
+    }
+}
+
 /// Admit a projection against the register file at `path`, then write the
 /// projection's register there.
 pub fn write_register(path: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {

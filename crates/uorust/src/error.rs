@@ -35,8 +35,11 @@ pub enum UorustError {
     ForeignOutput(PathBuf),
     /// `uorust check` found the committed projection differs from a fresh one.
     Stale(Vec<String>),
-    /// A function the incumbent lift register records as lifted (a proved
-    /// claim, by κ) is decided unlifted by this projection.
+    /// A function of the incumbent lift register is re-decided against the
+    /// register's law, by κ: one it records as lifted is decided unlifted,
+    /// or, against a parent's register, one it records as stopped by a
+    /// construct is counted under another while that construct still stops
+    /// a function.
     Regressed(Vec<String>),
     /// A module of the projection is larger than the `max_file_bytes` the
     /// projection's own `lexlean.toml` states, so LexLean would refuse the
@@ -92,7 +95,9 @@ impl fmt::Display for UorustError {
             ),
             Self::Regressed(rows) => write!(
                 f,
-                "a lifted function is no longer lifted, and a lifted κ is never re-decided: {}",
+                "a function is re-decided: a lifted κ stays lifted, and against a parent's register \
+                 an unchanged κ stays under its construct while that construct stops a function: \
+                 {}",
                 rows.join("; ")
             ),
             Self::ModuleTooLarge {

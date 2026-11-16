@@ -71,6 +71,12 @@ enum Command {
     /// newer head, each row's only while it is the row they were measured
     /// on.
     Carry(CarryArgs),
+    /// Admit a lift register against its parent's (a register file or a
+    /// `frontier.toml` each), by the register's law per function: a lifted
+    /// function stays lifted, and an unchanged one stays under its construct
+    /// while that construct stops a function; refused, naming each function
+    /// re-decided.
+    Admit(AdmitArgs),
     /// Print the route table.
     Routes,
     /// The certified translator: export the lifted translator through
@@ -443,6 +449,15 @@ struct EmbedArgs {
     /// The directory the bridge's LexLean project is written to.
     #[arg(long, requires = "shallow")]
     bridge: Option<PathBuf>,
+}
+
+#[derive(clap::Args)]
+struct AdmitArgs {
+    /// The parent's lift register: the incumbent every row is held against.
+    #[arg(long)]
+    parent: PathBuf,
+    /// The candidate lift register.
+    candidate: PathBuf,
 }
 
 #[derive(clap::Args)]
@@ -939,6 +954,17 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Certify(step) => certify(step),
+        Command::Admit(args) => {
+            let totals = uorust::admit_register(&args.parent, &args.candidate)?;
+            println!(
+                "{} admitted against {}: {} of {} functions lifted",
+                args.candidate.display(),
+                args.parent.display(),
+                totals.lifted,
+                totals.functions
+            );
+            Ok(())
+        }
         Command::Routes => {
             for route in uorust::ROUTES {
                 println!(

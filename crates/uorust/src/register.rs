@@ -14,7 +14,12 @@
 //! Residue, foreign and effect rows classify what is not lifted yet; none of
 //! them is a budget. Their number is the distance to the requirement that
 //! every function of product code lifts, an open claim the honesty report
-//! states and no gate asserts.
+//! states and no gate asserts. Against a parent's register, given to
+//! `uorust admit --parent`, the classification is also held per function,
+//! not per cause: an unchanged κ stays under the construct the parent stated
+//! for it until it lifts or that construct stops no function at all
+//! ([`admit_parent`]), so a cause may rise only by new questions and by
+//! functions whose blocker is gone.
 //!
 //! The register is also the work queue. Beside its rows it carries, as data,
 //! the totals ([`Totals`], the `[lift]` table) and one `[[construct]]` row
@@ -559,6 +564,52 @@ pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
         .collect()
 }
 
+/// Every function of the parent's register that the candidate decides
+/// against the law per function, each with both decisions: empty exactly
+/// when the candidate is admitted. Beside [`admit`] (a lifted κ stays
+/// lifted, an exact one exact), a κ the parent records as stopped by a
+/// construct (its cause and detail, [`Status::construct`]) is counted under
+/// the same construct, or lifts, or is counted under another construct only
+/// when the candidate states the parent's construct for no function at all:
+/// the blocker was removed and the function moved on to the next thing
+/// that stops it. While the parent's construct still stops some function,
+/// the same question counted under another construct is a re-decision,
+/// refused. So a cause's count rises only by new questions (a κ the parent
+/// does not hold) or by functions that moved on from a construct the
+/// candidate no longer states.
+///
+/// A κ's own tokens are its question, so a function whose callee changed
+/// keeps its κ: a move such a change causes (into an effect or a foreign
+/// row, or onto the callee's call) is refused while the construct it left
+/// still stops a function, as a lifted κ's is.
+pub fn admit_parent(parent: &Register, candidate: &Register) -> Vec<String> {
+    let stated: std::collections::BTreeSet<(String, &str)> = candidate
+        .rows
+        .values()
+        .filter_map(|row| row.status.construct())
+        .collect();
+    let moved = parent.rows.iter().filter_map(|(kappa, row)| {
+        let was = row.status.construct()?;
+        let now = candidate.rows.get(kappa)?;
+        let is = now.status.construct()?;
+        (was != is && stated.contains(&was)).then(|| {
+            format!(
+                "{} (κ {kappa}) was stopped by {} under {} and is now counted under {} \
+                 ({}), while {} still stops a function",
+                row.function,
+                quoted(was.1),
+                quoted(&was.0),
+                quoted(&is.0),
+                describe(&now.status),
+                quoted(was.1)
+            )
+        })
+    });
+    let mut refused = admit(parent, candidate);
+    refused.extend(moved);
+    refused
+}
+
 fn describe(status: &Status) -> String {
     match status {
         Status::Lifted(d) => format!("lifted to {d}"),
@@ -649,6 +700,119 @@ mod tests {
         assert_eq!(refused.len(), 1);
         assert!(refused[0].contains("now diverges"), "{refused:?}");
         assert!(admit(&weaker, &incumbent).is_empty());
+    }
+
+    /// The law per function: an unchanged κ stays under the construct the
+    /// parent stated for it while that construct still stops a function,
+    /// and moves on to its next construct once it stops none.
+    #[test]
+    fn a_function_moves_to_another_cause_only_when_its_blocker_is_gone() {
+        let residue = |f: &str, cause: &str, detail: &str| {
+            row(f, Status::Residue(cause.into(), detail.into()))
+        };
+        let register = |rows: Vec<(String, Row)>| Register {
+            rows: rows.into_iter().collect(),
+        };
+        // The parent: a construct A of cause `type` stops f and g.
+        let parent = register(vec![
+            residue("c::f", "type", "A"),
+            residue("c::g", "type", "A"),
+            residue("c::h", "form", "a loop"),
+        ]);
+        // A is removed: f and g move on to what stops them next, so the
+        // cause `form` rises from one function to three. Admitted.
+        let moved_on = register(vec![
+            residue("c::f", "form", "a loop"),
+            residue("c::g", "form", "a loop"),
+            residue("c::h", "form", "a loop"),
+        ]);
+        assert!(admit_parent(&parent, &moved_on).is_empty());
+        let before = parent.queue();
+        let after = moved_on.queue();
+        assert_eq!((before[1].cause.as_str(), before[1].functions), ("form", 1));
+        assert_eq!((after[0].cause.as_str(), after[0].functions), ("form", 3));
+        // The planted re-decision: A still stops g, and the unchanged f is
+        // counted under `form`. Refused, naming f and both constructs.
+        let re_decided = register(vec![
+            residue("c::f", "form", "a loop"),
+            residue("c::g", "type", "A"),
+            residue("c::h", "form", "a loop"),
+        ]);
+        let refused = admit_parent(&parent, &re_decided);
+        assert_eq!(refused.len(), 1, "{refused:?}");
+        assert!(
+            refused[0].starts_with("c::f ") && refused[0].contains("\"A\""),
+            "{refused:?}"
+        );
+        // Another detail under the same cause is another construct: the
+        // same refusal when A still stops g.
+        let re_detailed = register(vec![
+            residue("c::f", "type", "B"),
+            residue("c::g", "type", "A"),
+            residue("c::h", "form", "a loop"),
+        ]);
+        assert_eq!(admit_parent(&parent, &re_detailed).len(), 1);
+        // A residue row of the parent decided foreign or an effect while A
+        // still stops g: the same refusal; lifting f is always admitted.
+        for status in [
+            Status::Foreign("x crate with no LexLean model: T".into()),
+            Status::Effect("io".into()),
+        ] {
+            let other = register(vec![
+                row("c::f", status),
+                residue("c::g", "type", "A"),
+                residue("c::h", "form", "a loop"),
+            ]);
+            assert_eq!(admit_parent(&parent, &other).len(), 1);
+        }
+        let lifted = register(vec![
+            row("c::f", Status::Lifted("Behavior::f".into())),
+            residue("c::g", "type", "A"),
+            residue("c::h", "form", "a loop"),
+        ]);
+        assert!(admit_parent(&parent, &lifted).is_empty());
+        // A new question (a κ the parent does not hold) is counted under any
+        // construct, even one that still stops another function.
+        let mut grown = re_decided.clone();
+        grown.rows.remove(&kappa("c::f", "fn f () {}"));
+        grown.rows.insert(
+            kappa("c::f", "fn f () { 1 }"),
+            Row {
+                function: "c::f".into(),
+                status: Status::Residue("form".into(), "a loop".into()),
+                divergence: None,
+            },
+        );
+        assert!(admit_parent(&parent, &grown).is_empty());
+        // Through the files, as `uorust admit --parent` reads them.
+        let dir = std::env::temp_dir().join(format!("uorust-admit-parent-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).expect("a scratch directory");
+        let file = |name: &str, r: &Register| {
+            let path = dir.join(name);
+            std::fs::write(&path, r.to_text()).expect("write");
+            path
+        };
+        let at = file("parent.toml", &parent);
+        let totals = crate::admit_register(&at, &file("moved.toml", &moved_on));
+        assert_eq!(totals, Ok(moved_on.totals()));
+        assert_eq!(
+            crate::admit_register(&at, &file("re-decided.toml", &re_decided)),
+            Err(UorustError::Regressed(refused))
+        );
+        // A parent an earlier tool wrote, whose queue this tool derives
+        // otherwise, is read by its rows; a candidate is read as written.
+        let older = parent
+            .to_text()
+            .replace("functions = 3\n", "functions = 4\n");
+        std::fs::write(&at, &older).expect("write");
+        let moved = file("moved.toml", &moved_on);
+        assert_eq!(crate::admit_register(&at, &moved), Ok(moved_on.totals()));
+        assert!(matches!(
+            crate::admit_register(&moved, &at),
+            Err(UorustError::Malformed { .. })
+        ));
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     #[test]
