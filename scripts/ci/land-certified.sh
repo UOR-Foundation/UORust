@@ -13,8 +13,22 @@
 # Nothing lands when the sync refuses, or when main keeps moving until
 # another sync would outrun the job's deadline (seconds since the epoch),
 # timed by the sync before it: the next run exports again.
+#
+# On a pull request's branch (BRANCH set, not main; certified.yml dispatched
+# with land_branch) the sync already ran on the branch merged onto main
+# (scripts/ci/merge-main.sh), and the result is pushed to the branch as that
+# merge (scripts/ci/push-branch.sh), which dispatches generate.yml on it to
+# regenerate and gate. A branch that moved meanwhile had its own run.
 set -euo pipefail
 deadline=$1
+if [[ ${BRANCH:-main} != main ]]; then
+  if [[ ! -f $(git rev-parse --git-dir)/branch-merge ]]; then
+    echo "land: $BRANCH holds nothing main lacks; nothing lands"
+    exit 0
+  fi
+  exec scripts/ci/push-branch.sh "Rebuild the certified translator" \
+    "crates/certified crates/uorust/src/certified.rs" generate.yml
+fi
 took=0
 for attempt in $(seq 1 1000000); do
   status=0

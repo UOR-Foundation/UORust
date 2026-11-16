@@ -6,8 +6,17 @@
 set -euo pipefail
 : "${GH_TOKEN:?GH_TOKEN is required}"
 mkdir -p target/certified-prior
-id=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=certified-manifest&per_page=20" \
-  --jq '[.artifacts[] | select(.expired | not)] | sort_by(.created_at) | last | .id // empty' || true)
+# main's export reads main's manifests only; a pull request's branch reads
+# its own newest, else main's (its land keeps one too).
+newest() {
+  { gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=certified-manifest&per_page=20" || echo '{"artifacts":[]}'; } |
+    jq -r --arg branch "$1" '[.artifacts[] | select((.expired | not) and .workflow_run.head_branch == $branch)] | sort_by(.created_at) | last | .id // empty' || true
+}
+branch=${GITHUB_REF_NAME:-main}
+id=$(newest "$branch")
+if [[ -z $id && $branch != main ]]; then
+  id=$(newest main)
+fi
 if [[ -n $id ]]; then
   gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" >target/certified-prior.zip
   unzip -q -o target/certified-prior.zip -d target/certified-prior
