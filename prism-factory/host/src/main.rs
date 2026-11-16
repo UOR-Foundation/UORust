@@ -6,15 +6,29 @@
 //! identity, an order or releasability itself.
 //!
 //! This is upstream's host (PrismPM `prism-factory/host/src/main.rs` at the
-//! revision `prism-factory/upstream.toml` names) with the release and forge
-//! commands left out, because the tool installs only the `plan` and `reweigh`
-//! roots; every function it keeps is upstream's.
+//! revision `prism-factory/upstream.toml` names), adapted:
+//! - the release and forge commands are left out, because the tool installs
+//!   only the `plan` and `reweigh` roots;
+//! - `run` gives every closure its base and its own repository the way
+//!   upstream's `forge.rs` does for a lent runner (`base`, `entries_with_base`,
+//!   `closure_repository`, `git_with_input`, `git_fixed`, `git_indexed` are
+//!   upstream's code from there), so a ratchet's base is a declared input;
+//! - two additions are the tool's own: `interrupted` (a command stopped by a
+//!   signal reached no verdict and leaves no receipt) and
+//!   `ancestor_configuration` (a work directory under a cargo or rustup
+//!   configuration is refused, since every closure under it would read it).
+//!
+//! Every other function is upstream's.
 
 use std::collections::BTreeMap;
 use std::fs;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::path::{Path, PathBuf};
-use std::process::{Command, ExitCode, Stdio};
+use std::process::{Command, ExitCode, ExitStatus, Stdio};
+
+/// The exit of `run` when an obligation's command was stopped by a signal: no
+/// receipt was written for it, and the next run runs it again.
+const INTERRUPTED: u8 = 75;
 
 
 const USAGE: &str = "usage: prism-factory <command> [options]
@@ -23,6 +37,7 @@ commands:
   request           print the plan request for a revision (tree, contexts, receipts, weights)
   plan              print the certified plan for a revision
   run               run every obligation the plan routes to `observe` on this host
+                    (exit 1: a verdict failed; 75: a command was stopped by a signal, no receipt)
   plan-request      print the certified plan for a request on stdin (as `request` prints it)
   reweigh           print the next weights for `weight` and `outcome` lines on stdin
 
@@ -131,8 +146,36 @@ fn receipt_lines(store: &Path) -> Result<String, String> {
     Ok(out)
 }
 
+/// The base of a revision is its first parent: for a pull request's merge
+/// commit, the tip of the branch it merges into; for a push, the previous tip.
+/// A check that compares the tree with its base (a ratchet) declares
+/// `@base:PATH`, and reads the base's entry at PATH and nothing else of it.
+pub(crate) fn base(revision: &str) -> Result<Option<String>, String> {
+    let commit = git(&["cat-file", "commit", revision])?;
+    let header = String::from_utf8_lossy(&commit);
+    let Some(parent) = header.lines().take_while(|line| !line.is_empty()).find_map(|line| line.strip_prefix("parent ")) else {
+        return Ok(None);
+    };
+    let parent = parent.trim().to_string();
+    if git(&["cat-file", "-e", &format!("{parent}^{{tree}}")]).is_err() {
+        return Err(format!("the base {parent} of {revision} is not here; fetch it (git fetch --depth=1 origin {parent})"));
+    }
+    Ok(Some(parent))
+}
+
+/// Every entry of the tree, then every entry of its base under `@base:`.
+fn entries_with_base(revision: &str) -> Result<Vec<Entry>, String> {
+    let mut entries = tree(revision)?;
+    if let Some(parent) = base(revision)? {
+        for entry in tree(&parent)? {
+            entries.push(Entry { path: format!("@base:{}", entry.path), object: entry.object });
+        }
+    }
+    Ok(entries)
+}
+
 pub(crate) fn request(options: &Options) -> Result<(String, Vec<Entry>), String> {
-    let entries = tree(&options.revision)?;
+    let entries = entries_with_base(&options.revision)?;
     let mut text = String::new();
     for entry in &entries {
         text.push_str(&format!("tree {} {}\n", entry.object, entry.path));
@@ -239,6 +282,132 @@ pub(crate) fn materialize(entries: &[Entry], files: &[String], destination: &Pat
     Ok(())
 }
 
+fn git_with_input(arguments: &[&str], input: &[u8]) -> Result<Vec<u8>, String> {
+    let mut child = Command::new("git").args(arguments).stdin(Stdio::piped()).stdout(Stdio::piped()).spawn().map_err(|error| format!("git: {error}"))?;
+    child.stdin.take().ok_or("git stdin")?.write_all(input).map_err(|error| error.to_string())?;
+    let out = child.wait_with_output().map_err(|error| error.to_string())?;
+    if !out.status.success() {
+        return Err(format!("git {} failed", arguments.join(" ")));
+    }
+    Ok(out.stdout)
+}
+
+/// A closure commit is a function of the closure alone: its dates are fixed, so
+/// an image labelled with the closure's revision is reproducible from κ.
+fn git_fixed(arguments: &[&str]) -> Result<Vec<u8>, String> {
+    let out = Command::new("git")
+        .env("GIT_AUTHOR_DATE", "1970-01-01T00:00:00Z")
+        .env("GIT_COMMITTER_DATE", "1970-01-01T00:00:00Z")
+        .args(arguments)
+        .output()
+        .map_err(|error| format!("git: {error}"))?;
+    if !out.status.success() {
+        return Err(format!("git {} failed: {}", arguments.join(" "), String::from_utf8_lossy(&out.stderr)));
+    }
+    Ok(out.stdout)
+}
+
+fn git_indexed(index: &Path, arguments: &[&str]) -> Result<Vec<u8>, String> {
+    let out = Command::new("git").env("GIT_INDEX_FILE", index).args(arguments).output().map_err(|error| format!("git: {error}"))?;
+    if !out.status.success() {
+        return Err(format!("git {} failed: {}", arguments.join(" "), String::from_utf8_lossy(&out.stderr)));
+    }
+    Ok(out.stdout)
+}
+
+/// The closure gets its own repository, whose one commit tracks exactly the
+/// closure, so no Git command in it can reach the checkout around it and
+/// `git ls-files` lists exactly what the identity covers. When the closure
+/// reads its base, that commit's parent holds exactly the base entries it
+/// declared, named `origin/main` as a full checkout names the base.
+/// (Upstream's `forge.rs`, `prepare`, from `git init` to the closure commit.)
+fn closure_repository(entries: &[Entry], based: &[String], work: &Path, kappa: &str) -> Result<(), String> {
+    let at = work.to_string_lossy();
+    git(&["init", "--quiet", &at])?;
+    let identity = ["-c", "user.name=prism-factory", "-c", "user.email=prism-factory@users.noreply.github.com", "-c", "commit.gpgsign=false"];
+    if !based.is_empty() {
+        let by_path: BTreeMap<&str, &str> = entries.iter().map(|entry| (entry.path.as_str(), entry.object.as_str())).collect();
+        // GIT_INDEX_FILE resolves against the directory `-C` enters, so name it absolutely.
+        let index = fs::canonicalize(work).map_err(|error| format!("{}: {error}", work.display()))?.join(".git/prism-base-index");
+        let _ = fs::remove_file(&index);
+        for path in based {
+            let object = by_path.get(path.as_str()).ok_or(format!("{path} is not in the base"))?;
+            let (mode, oid) = object.split_once(':').ok_or("bad object")?;
+            let blob = git(&["cat-file", "blob", oid])?;
+            let stored = String::from_utf8(git_with_input(&["-C", &at, "hash-object", "-w", "--stdin"], &blob)?).map_err(|_| "git hash-object")?;
+            git_indexed(&index, &["-C", &at, "update-index", "--add", "--cacheinfo", &format!("{mode},{},{}", stored.trim(), &path["@base:".len()..])])?;
+        }
+        let tree = String::from_utf8(git_indexed(&index, &["-C", &at, "write-tree"])?).map_err(|_| "git write-tree")?;
+        let _ = fs::remove_file(&index);
+        let mut arguments = vec!["-C", &*at];
+        arguments.extend(identity);
+        let message = format!("base of closure {kappa}");
+        arguments.extend(["commit-tree", tree.trim(), "-m", &message]);
+        let commit = String::from_utf8(git_fixed(&arguments)?).map_err(|_| "git commit-tree")?;
+        git(&["-C", &at, "update-ref", "refs/remotes/origin/main", commit.trim()])?;
+        git(&["-C", &at, "update-ref", "HEAD", commit.trim()])?;
+    }
+    git(&["-C", &at, "add", "--all", "--force"])?;
+    let mut arguments = vec!["-C", &*at];
+    arguments.extend(identity);
+    let message = format!("closure {kappa}");
+    arguments.extend(["commit", "--quiet", "--allow-empty", "-m", &message]);
+    git_fixed(&arguments)?;
+    Ok(())
+}
+
+/// The signal that stopped an obligation's command, if one did. The tool's own.
+///
+/// A command stopped by a signal (an OOM kill, a killed session, an operator's
+/// interrupt) reached no verdict on its inputs, so it leaves no receipt: a
+/// fail receipt of a hermetic obligation would refute its inputs for good, and
+/// the obligation in flight is all an interruption may lose. `bash -c` reports
+/// a child stopped by signal N as exit 128 + N, so those exits count too, for
+/// the signals that stop a process from outside (HUP 1, INT 2, KILL 9, TERM
+/// 15). A command that crashes by its own fault under cargo (a test's SIGSEGV
+/// or SIGABRT) makes cargo exit 101, and that stays a verdict.
+fn interrupted(status: &ExitStatus) -> Option<i32> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::process::ExitStatusExt;
+        if let Some(signal) = status.signal() {
+            return Some(signal);
+        }
+    }
+    match status.code() {
+        Some(code @ (129 | 130 | 137 | 143)) => Some(code - 128),
+        _ => None,
+    }
+}
+
+/// Files outside a closure that change what runs in it. The tool's own.
+///
+/// Cargo reads `.cargo/config.toml` (and the older `.cargo/config`) in every
+/// ancestor of the directory it runs in, and rustup reads the nearest
+/// `rust-toolchain.toml` (or `rust-toolchain`). Such a file above the work
+/// directory would be read by every compiling obligation run under it, and no
+/// identity declares it, so the work directory is refused before anything
+/// runs and no receipt is written.
+const ANCESTOR_CONFIGURATION: [&str; 4] = [".cargo/config.toml", ".cargo/config", "rust-toolchain.toml", "rust-toolchain"];
+
+fn ancestor_configuration(work: &Path) -> Result<(), String> {
+    fs::create_dir_all(work).map_err(|error| format!("{}: {error}", work.display()))?;
+    let work = fs::canonicalize(work).map_err(|error| format!("{}: {error}", work.display()))?;
+    for directory in work.ancestors() {
+        for name in ANCESTOR_CONFIGURATION {
+            let path = directory.join(name);
+            if path.exists() {
+                return Err(format!(
+                    "{} would be read by every obligation run under {}, and no identity declares it; choose a --work without it",
+                    path.display(),
+                    work.display()
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
 fn record(store: &Path, name: &str, kappa: &str, passed: bool, revision: &str) -> Result<(), String> {
     fs::create_dir_all(store).map_err(|error| format!("{}: {error}", store.display()))?;
     let verdict = if passed { "pass" } else { "fail" };
@@ -255,11 +424,19 @@ pub(crate) fn reweigh(store: &Path, outcomes: &[(String, bool)]) -> Result<(), S
     fs::write(store.join("weights"), next).map_err(|error| error.to_string())
 }
 
-fn run(options: &Options) -> Result<bool, String> {
+/// How a run ended: every obligation it ran reached a verdict (and whether one
+/// failed), or one was stopped by a signal and left no receipt.
+pub(crate) enum Finish {
+    Verdicts { failed: bool },
+    Interrupted,
+}
+
+fn run(options: &Options) -> Result<Finish, String> {
     let revision = String::from_utf8(git(&["rev-parse", "--verify", &format!("{}^{{commit}}", options.revision)])?)
         .map_err(|_| "revision")?
         .trim()
         .to_string();
+    ancestor_configuration(&options.work)?;
     let mut attempted = std::collections::BTreeSet::new();
     let mut failed = false;
     for round in 0..options.rounds {
@@ -281,7 +458,7 @@ fn run(options: &Options) -> Result<bool, String> {
                 }
             }
             eprintln!("factory: releasable {}", if plan.releasable { "yes" } else { "no" });
-            return Ok(!failed);
+            return Ok(Finish::Verdicts { failed });
         }
         let mut outcomes = Vec::new();
         for name in runnable {
@@ -291,7 +468,12 @@ fn run(options: &Options) -> Result<bool, String> {
             if git(&["-C", &options.work.to_string_lossy(), "rev-parse", "--show-toplevel"]).is_ok() {
                 return Err(format!("{} is inside a Git repository; a closure must not see anything else", options.work.display()));
             }
-            materialize(&entries, plan.files.get(&name).map(Vec::as_slice).unwrap_or(&[]), &work)?;
+            let (based, files): (Vec<String>, Vec<String>) =
+                plan.files.get(&name).cloned().unwrap_or_default().into_iter().partition(|path| path.starts_with("@base:"));
+            // A context (`@key`) is part of the identity, not a file.
+            let files: Vec<String> = files.into_iter().filter(|path| !path.starts_with('@')).collect();
+            materialize(&entries, &files, &work)?;
+            closure_repository(&entries, &based, &work, &kappa)?;
             eprintln!("factory: round {round}: running {name} ({kappa})");
             let status = Command::new("bash")
                 .args(["-euo", "pipefail", "-c", &plan.run[&name]])
@@ -301,6 +483,13 @@ fn run(options: &Options) -> Result<bool, String> {
                 .env("FACTORY_REVISION", &revision)
                 .status()
                 .map_err(|error| format!("{name}: {error}"))?;
+            if let Some(signal) = interrupted(&status) {
+                eprintln!("factory: {name} interrupted by signal {signal}; no receipt is written, so the next run runs it again");
+                if !outcomes.is_empty() {
+                    reweigh(&options.receipts, &outcomes)?;
+                }
+                return Ok(Finish::Interrupted);
+            }
             let passed = status.success();
             failed |= !passed;
             eprintln!("factory: {name} {}", if passed { "passed" } else { "failed" });
@@ -345,7 +534,11 @@ fn main() -> ExitCode {
             print!("{plan}");
             true
         }),
-        "run" => run(&options),
+        "run" => match run(&options) {
+            Ok(Finish::Verdicts { failed }) => Ok(!failed),
+            Ok(Finish::Interrupted) => return ExitCode::from(INTERRUPTED),
+            Err(error) => Err(error),
+        },
         "plan-request" => {
             let mut text = String::new();
             std::io::stdin().read_to_string(&mut text).map_err(|error| error.to_string()).and_then(|_| plan_text(&text)).map(|plan| {

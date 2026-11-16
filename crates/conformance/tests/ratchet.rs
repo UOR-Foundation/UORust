@@ -57,28 +57,54 @@ fn manifest_at(root: &Path, text: Option<String>) -> Manifest {
     }
 }
 
-#[test]
-fn the_hand_written_translator_only_shrinks_ue_18() {
-    let root = root();
+/// Whether the base must be there. CI checks out the whole history
+/// (fetch-depth: 0). The Prism factory runs this suite in a closure that is its
+/// own repository, whose parent commit holds the base entries `test` declares
+/// (`@base:frontier.toml`, `@base:crates/certified/manifest.toml`), and its
+/// host names the obligation (`FACTORY_KAPPA`). In either place, a missing base
+/// means the comparison cannot be made, so UE-18 fails instead of passing
+/// undecided.
+fn base_required() -> bool {
+    std::env::var_os("CI").is_some() || std::env::var_os("FACTORY_KAPPA").is_some()
+}
+
+/// UE-18 at `root`: refused when more translator functions are uncertified
+/// than under the base. Without a base it passes only where none is
+/// `required` (a checkout without history, outside CI and the factory).
+fn ue_18(root: &Path, required: bool) -> Result<(), String> {
     let head_text = std::fs::read_to_string(root.join(REGISTER)).expect("frontier.toml");
     let head = Register::parse(&root.join(REGISTER), &head_text).expect("the register parses");
-    let head_manifest = manifest_at(&root, std::fs::read_to_string(root.join(MANIFEST)).ok());
-    let Some(rev) = base(&root) else {
-        // A checkout without the parent cannot be compared; CI checks out
-        // the whole history (fetch-depth: 0), so this never decides there.
-        assert!(
-            std::env::var_os("CI").is_none(),
-            "CI must check out the parent commit to decide the ratchet"
-        );
-        return;
+    let head_manifest = manifest_at(root, std::fs::read_to_string(root.join(MANIFEST)).ok());
+    let Some(rev) = base(root) else {
+        if required {
+            return Err(
+                "UE-18 has no base to compare: CI must check out the parent commit, \
+                 and a factory closure must declare @base:frontier.toml and \
+                 @base:crates/certified/manifest.toml"
+                    .into(),
+            );
+        }
+        return Ok(());
     };
-    let Some(base_text) = git(&root, &["show", &format!("{rev}:{REGISTER}")]) else {
-        return;
+    let Some(base_text) = git(root, &["show", &format!("{rev}:{REGISTER}")]) else {
+        if required {
+            return Err(format!(
+                "UE-18: the base {rev} holds no {REGISTER} to compare"
+            ));
+        }
+        return Ok(());
     };
     let base = Register::parse(Path::new(REGISTER), &base_text).expect("the base register parses");
-    let base_manifest = manifest_at(&root, git(&root, &["show", &format!("{rev}:{MANIFEST}")]));
-    if let Err(refusal) = ratchet(&head, &head_manifest, &base, &base_manifest) {
-        panic!("UE-18 against {rev}: {refusal}");
+    let base_manifest = manifest_at(root, git(root, &["show", &format!("{rev}:{MANIFEST}")]));
+    ratchet(&head, &head_manifest, &base, &base_manifest)
+        .map(|_| ())
+        .map_err(|refusal| format!("UE-18 against {rev}: {refusal}"))
+}
+
+#[test]
+fn the_hand_written_translator_only_shrinks_ue_18() {
+    if let Err(refusal) = ue_18(&root(), base_required()) {
+        panic!("{refusal}");
     }
 }
 
@@ -105,4 +131,73 @@ fn a_grown_translator_is_refused_ue_18() {
         message.contains("uorust::mir::lower::planted: residue (mir): mir::Rvalue::Use"),
         "{message}"
     );
+}
+
+// Class: the factory's closure (refute-factory-6, UE-18 read the parent from
+// history the identity did not cover). In a closure the base is a declared
+// input; a closure without it fails UE-18 instead of skipping it, and a closure
+// whose parent commit holds the base decides against it.
+
+/// A fresh directory holding the head's register and manifest; with `parent`,
+/// a repository of two commits whose first holds `parent` as the register.
+fn closure_ue_18(label: &str, parent: Option<&str>, head: &str) -> PathBuf {
+    let dir = std::env::temp_dir().join(format!("uorust-ue18-{label}-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(dir.join("crates/certified")).expect("scratch");
+    let manifest = std::fs::read_to_string(root().join(MANIFEST)).unwrap_or_default();
+    std::fs::write(dir.join(MANIFEST), &manifest).expect("manifest");
+    let commit = |message: &str| {
+        for args in [
+            vec!["add", "--all"],
+            vec![
+                "-c",
+                "user.name=t",
+                "-c",
+                "user.email=t@t",
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "--quiet",
+                "--allow-empty",
+                "-m",
+                message,
+            ],
+        ] {
+            assert!(git(&dir, &args).is_some(), "git {args:?}");
+        }
+    };
+    if let Some(parent) = parent {
+        assert!(git(&dir, &["init", "--quiet"]).is_some());
+        std::fs::write(dir.join(REGISTER), parent).expect("base register");
+        commit("base");
+        std::fs::write(dir.join(REGISTER), head).expect("register");
+        commit("closure");
+    } else {
+        std::fs::write(dir.join(REGISTER), head).expect("register");
+    }
+    dir
+}
+
+#[test]
+fn a_closure_without_its_base_fails_ue_18_and_one_with_it_decides() {
+    let text = std::fs::read_to_string(root().join(REGISTER)).expect("frontier.toml");
+    let grown = format!(
+        "{text}\n[[residue]]\nkappa = \"{}\"\nfunction = \"uorust::mir::lower::planted\"\nreason = \"mir\"\ndetail = \"mir::Rvalue::Use\"\n",
+        "0".repeat(64)
+    );
+    // No history: undecided, so it fails where a base is required and passes elsewhere.
+    let bare = closure_ue_18("bare", None, &grown);
+    let refusal = ue_18(&bare, true).expect_err("a required base that is absent fails");
+    assert!(refusal.contains("@base:frontier.toml"), "{refusal}");
+    assert!(ue_18(&bare, false).is_ok());
+    // The parent holds the base: the same grown head is refused against it,
+    // and an unchanged head passes.
+    let grew = closure_ue_18("grew", Some(&text), &grown);
+    let refusal = ue_18(&grew, true).expect_err("a grown translator is refused against the base");
+    assert!(refusal.contains("uorust::mir::lower::planted"), "{refusal}");
+    let same = closure_ue_18("same", Some(&text), &text);
+    assert!(ue_18(&same, true).is_ok());
+    for dir in [bare, grew, same] {
+        let _ = std::fs::remove_dir_all(dir);
+    }
 }

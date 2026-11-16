@@ -61,8 +61,8 @@ kind = "hermetic"
 recipe = "factory-model"
 sdk = true
 sets = ["sdk"]
-inputs = ["prism-factory/", "Justfile"]
-untouched = "anything outside prism-factory/, the Justfile and the SDK lock"
+inputs = ["prism-factory/", "Justfile", "rust-toolchain.toml"]
+untouched = "anything outside prism-factory/, the Justfile, the toolchain file and the SDK lock"
 
 [[obligation]]
 name = "factory-upstream"
@@ -141,8 +141,29 @@ kind = "fetch"
 recipe = "test"
 sdk = true
 sets = ["sdk", "manifests", "workspace"]
-inputs = ["model/", "features/", "app/", "Justfile", "CONFORMANCE.md", "README.md", "scripts/ci/"]
-untouched = "the site, the brand, scripts other than scripts/ci/, the documents other than CONFORMANCE.md and README.md"
+# UE-20 (crates/conformance/tests/factory.rs) checks this component, SM-05
+# (self_model.rs) reads the brand's foundation stylesheet, a CLI test runs
+# scripts/hooks/passes.py, the R2 meta-check (crates/conformance/src/meta.rs)
+# reads VERIFICATION.md and ANALYSIS.md where they exist, and UE-18
+# (ratchet.rs) compares the register and the manifest with the parent's: the
+# `@base:` entries, so a test of one tree under two parents is two identities.
+inputs = [
+  "model/",
+  "features/",
+  "app/",
+  "Justfile",
+  "CONFORMANCE.md",
+  "README.md",
+  "VERIFICATION.md",
+  "ANALYSIS.md",
+  "scripts/ci/",
+  "scripts/hooks/passes.py",
+  "prism-factory/",
+  "brand/foundation/src/index.css",
+  "@base:frontier.toml",
+  "@base:crates/certified/manifest.toml",
+]
+untouched = "the site, the brand other than its foundation stylesheet, scripts other than scripts/ci/ and scripts/hooks/passes.py, the documents other than CONFORMANCE.md, README.md, VERIFICATION.md and ANALYSIS.md, the parent's files other than its register and manifest"
 
 [[obligation]]
 name = "deny"

@@ -4,7 +4,7 @@
 #   factory.sh routes            each obligation's route (proved, observe, refuted, blocked) and how many are left
 #   factory.sh run [NAME...]     plan and run to the fixed point (only the NAMEs, when given)
 #   factory.sh start [NAME...]   the same, detached: its log and one-line status beside the receipts
-#   factory.sh status            the status line of the last detached run
+#   factory.sh status            the status line of the last detached run (`stale` when its process is gone)
 #   factory.sh keep BRANCH       commit the store's receipts onto BRANCH of origin and push it
 #   factory.sh plan|request|plan-request|reweigh [options]   the host CLI (see `prism-factory`)
 #
@@ -15,21 +15,45 @@
 #                     and the target directory (default target/factory/receipts)
 #   FACTORY_WORK      scratch for closures, outside any repository (default $TMPDIR/prism-factory)
 #   FACTORY_PROFILE   the cargo profile the host is built with (default release)
+#   FACTORY_HOST      a host binary already built from prism-factory/host (the
+#                     entry's own tests use it); the entry then builds nothing
 #   FACTORY_SDK_CONTAINER, FACTORY_CARGO_TARGET_DIR   read by prism-factory/sdk.sh
 set -euo pipefail
+self=$(cd "$(dirname "$0")" && pwd)/$(basename "$0")
 root=$(git rev-parse --show-toplevel)
 cd "$root"
 manifest=prism-factory/host/Cargo.toml
 profile=${FACTORY_PROFILE:-release}
 directory=$profile
 [[ $profile == dev ]] && directory=debug
-host=${CARGO_TARGET_DIR:-$root/prism-factory/host/target}/$directory/prism-factory
+host=${FACTORY_HOST:-${CARGO_TARGET_DIR:-$root/prism-factory/host/target}/$directory/prism-factory}
 store=${FACTORY_RECEIPTS:-$root/target/factory/receipts}
 work=${FACTORY_WORK:-${TMPDIR:-/tmp}/prism-factory}
 mkdir -p "$store"
 store=$(cd "$store" && pwd)
+status=$store/status log=$store/factory.log
 
-build() { cargo build --quiet --profile "$profile" --locked --offline --manifest-path "$manifest"; }
+build() {
+  [[ -n ${FACTORY_HOST:-} ]] || cargo build --quiet --profile "$profile" --locked --offline --manifest-path "$manifest"
+}
+
+# A source of an obligation that names a tracked file the obligation does not
+# declare is refused before anything is planned (`graph.py reads`): in the
+# closure that read would fail, or, where the source tolerates a missing file,
+# pass on other inputs than the identity covers.
+reads() { python3 -I prism-factory/graph.py reads >/dev/null; }
+
+# One run at a time per store. The lock is taken before the status is read or
+# written and is held by the detached run and every process it starts, so two
+# starts never both pass the check, never share closures and never write one
+# log; a second one is refused while any process of the first is alive.
+lock() {
+  exec 9>>"$store/lock"
+  if ! flock --nonblock 9; then
+    echo "factory: a run is in progress ($(cat "$status" 2>/dev/null || echo 'no status yet'))" >&2
+    exit 75
+  fi
+}
 
 # The plan's routes, then their counts and how many are left (not proved).
 routes() {
@@ -54,12 +78,16 @@ command=${1:-}
 case "$command" in
   routes)
     build
+    reads
     routes
     ;;
   run)
     shift
     build
+    reads
+    lock
     mapfile -t selected < <(only "$@")
+    # Exit 75: an obligation's command was stopped by a signal and left no receipt.
     "$host" run --receipts "$store" --work "$work" "${selected[@]}"
     # A hermetic failure is refuted and is not run again, so a second run of a
     # refuted tree runs nothing; it still fails.
@@ -68,29 +96,52 @@ case "$command" in
   start)
     shift
     build
-    status=$store/status log=$store/factory.log
-    if [[ -f $status ]] && read -r state pid _ <"$status" && [[ $state == running ]] && kill -0 "$pid" 2>/dev/null; then
-      echo "factory: a run is in progress ($(cat "$status"))" >&2
-      exit 75
-    fi
-    # The detached run writes `running PID` first and its counts last; it needs
-    # no agent and no terminal, and an interrupted run loses at most the
-    # obligation in flight, whose receipt is the one not yet written.
-    nohup setsid bash -c '
-      set -uo pipefail
-      host=$1 store=$2 work=$3 status=$4 log=$5; shift 5
-      echo "running $$ $(date -u +%Y-%m-%dT%H:%M:%SZ)" >"$status"
-      "$host" run --receipts "$store" --work "$work" "$@" >"$log" 2>&1
-      code=$?
-      [[ $code == 0 ]] && "$host" plan --receipts "$store" | grep -qE "^obligation [^ ]+ refuted " && code=1
-      established=$(grep -cE "^factory: [^ ]+ (passed|failed)$" "$log" || true)
-      counts=$("$host" plan --receipts "$store" | awk "\$1 == \"obligation\" { c[\$3]++ } END { printf \"proved %d refuted %d blocked %d observe %d\", c[\"proved\"], c[\"refuted\"], c[\"blocked\"], c[\"observe\"] }")
-      echo "done $code established $established $counts" >"$status"
-    ' factory-start "$host" "$store" "$work" "$status" "$log" $(only "$@") </dev/null >/dev/null 2>&1 &
+    reads
+    lock
+    # The detached run inherits the lock (descriptor 9), writes `running PID`
+    # first and its end last; it needs no agent and no terminal.
+    nohup setsid bash "$self" detached "$host" "$store" "$work" $(only "$@") </dev/null >/dev/null 2>&1 &
     echo "factory: started; log $log, status $status"
     ;;
+  detached)
+    # The body of `start`, in its own session. Its end is one line:
+    #   done CODE ...          the host ended by itself (CODE 1: a verdict failed or a refuted obligation remains)
+    #   interrupted SIGNAL ... an obligation's command, or the host, or this run was stopped by SIGNAL;
+    #                          the obligation in flight has no receipt and the next run runs it again
+    # each followed by the counts. A run killed outright (SIGKILL of its session)
+    # writes nothing, and `status` reports its `running` line as stale.
+    host=$2 store=$3 work=$4
+    shift 4
+    set +e
+    finish() {
+      local established counts
+      established=$(grep -cE "^factory: [^ ]+ (passed|failed)$" "$log")
+      counts=$("$host" plan --receipts "$store" | awk '$1 == "obligation" { c[$3]++ } END { printf "proved %d refuted %d blocked %d observe %d", c["proved"], c["refuted"], c["blocked"], c["observe"] }')
+      echo "$1 established $established $counts" >"$status"
+    }
+    trap 'finish "interrupted 1"; exit 129' HUP
+    trap 'finish "interrupted 2"; exit 130' INT
+    trap 'finish "interrupted 15"; exit 143' TERM
+    echo "running $$ $(date -u +%Y-%m-%dT%H:%M:%SZ)" >"$status"
+    "$host" run --receipts "$store" --work "$work" "$@" >"$log" 2>&1
+    code=$?
+    if ((code > 128)); then
+      finish "interrupted $((code - 128))"
+    elif ((code == 75)); then
+      finish "interrupted $(sed -n 's/^factory: [^ ]* interrupted by signal \([0-9]*\);.*/\1/p' "$log" | tail -n 1)"
+    else
+      if [[ $code == 0 ]] && "$host" plan --receipts "$store" | grep -qE "^obligation [^ ]+ refuted "; then code=1; fi
+      finish "done $code"
+    fi
+    ;;
   status)
-    cat "$store/status" 2>/dev/null || { echo "factory: no detached run has started (no $store/status)" >&2; exit 66; }
+    [[ -f $status ]] || { echo "factory: no detached run has started (no $status)" >&2; exit 66; }
+    read -r state pid _ <"$status"
+    if [[ $state == running ]] && ! kill -0 "$pid" 2>/dev/null; then
+      echo "stale $(cat "$status"): that process is gone without writing its end, so the run was interrupted; the next run runs only what has no receipt"
+      exit 1
+    fi
+    cat "$status"
     ;;
   keep)
     # Upstream's receipts branch: the store's receipts added to the branch's

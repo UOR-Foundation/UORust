@@ -55,7 +55,7 @@ fn factory_edit(path: &Path, from: &str, to: &str) {
     std::fs::write(path, text.replacen(from, to, 1)).expect("writable");
 }
 
-/// `UE-20`: The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, and the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity
+/// `UE-20`: The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity, a test target that names or a compiled source that embeds a tracked file its obligation does not declare is refused before the plan, each obligation runs in a closure that is its own repository whose parent holds exactly the base entries it declares, under a work directory no cargo or rustup configuration sits above, a command stopped by a signal leaves no receipt, and one run at a time holds the receipt store
 #[test]
 fn factory_ue_20() {
     let (passed, words) = factory_check(&root());
@@ -143,4 +143,88 @@ fn factory_ue_20() {
     for dir in [drifted, stale, whole, unpinned] {
         let _ = std::fs::remove_dir_all(dir);
     }
+}
+
+// Class: the factory's closure (refute-factory-6: `test` read prism-factory/
+// and the brand's stylesheet without declaring them). `graph.py reads`, run
+// by the entry on a checkout before it plans, refuses an obligation whose test
+// target names, or whose compiled source embeds, a tracked file the
+// obligation does not declare; declaring it lifts the refusal.
+
+/// `graph.py reads` on the component at `root`: its exit and its words.
+fn closure_reads(root: &Path) -> (bool, String) {
+    let out = Command::new("python3")
+        .args(["-I", "prism-factory/graph.py", "reads"])
+        .current_dir(root)
+        .output()
+        .expect("python3 runs");
+    let words = format!(
+        "{}{}",
+        String::from_utf8_lossy(&out.stdout),
+        String::from_utf8_lossy(&out.stderr)
+    );
+    (out.status.success(), words)
+}
+
+/// A checkout of the component with one workspace member whose test reads
+/// `brand/planted.css` and whose library embeds `site/planted.txt`.
+fn closure_checkout(label: &str) -> PathBuf {
+    let dir = factory_copy(label);
+    let files = [
+        ("Cargo.toml", "[workspace]\nmembers = [\"crates/*\"]\n"),
+        (
+            "crates/probe/Cargo.toml",
+            "[package]\nname = \"probe\"\nversion = \"0.0.0\"\n",
+        ),
+        (
+            "crates/probe/src/lib.rs",
+            "pub const PLANTED: &str = include_str!(\"../../../site/planted.txt\");\n",
+        ),
+        (
+            "crates/probe/tests/probe.rs",
+            "#[test]\nfn reads() {\n    let root = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\")).join(\"../..\");\n    std::fs::read_to_string(root.join(\"brand/planted.css\")).unwrap();\n}\n",
+        ),
+        ("brand/planted.css", ":root {}\n"),
+        ("site/planted.txt", "planted\n"),
+    ];
+    for (path, text) in files {
+        let target = dir.join(path);
+        std::fs::create_dir_all(target.parent().expect("a parent")).expect("scratch");
+        std::fs::write(target, text).expect("writable");
+    }
+    for args in [vec!["init", "--quiet"], vec!["add", "--all"]] {
+        let status = Command::new("git")
+            .args(&args)
+            .current_dir(&dir)
+            .status()
+            .expect("git runs");
+        assert!(status.success(), "git {args:?}");
+    }
+    dir
+}
+
+#[test]
+fn an_undeclared_read_of_a_test_or_an_embedded_file_is_refused_ue_20() {
+    let planted = closure_checkout("reads");
+    let (passed, words) = closure_reads(&planted);
+    assert!(!passed, "{words}");
+    assert!(
+        words.contains("test reads brand/planted.css (crates/probe/tests/probe.rs:4)"),
+        "{words}"
+    );
+    assert!(
+        words.contains("lint embeds site/planted.txt (crates/probe/src/lib.rs:1)"),
+        "{words}"
+    );
+    // Declared where it is read, nothing is refused.
+    let graph = planted.join("prism-factory/graph.toml");
+    factory_edit(
+        &graph,
+        "  \"brand/foundation/src/index.css\",\n",
+        "  \"brand/foundation/src/index.css\",\n  \"brand/planted.css\",\n  \"site/planted.txt\",\n",
+    );
+    factory_edit(&graph, "rust = [\n", "rust = [\n  \"site/planted.txt\",\n");
+    let (passed, words) = closure_reads(&planted);
+    assert!(passed, "{words}");
+    let _ = std::fs::remove_dir_all(planted);
 }

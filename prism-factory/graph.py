@@ -11,17 +11,22 @@
     graph.py request TARGETS  write production-request.json (the roots `plan` and `reweigh`, each
                               pinned to the rust-std descriptor TARGETS, the JSON of
                               `lexlean production targets`, states); `request-check TARGETS` refuses a stale one
+    graph.py reads            refuse an obligation whose compiled or run sources name a tracked
+                              file it does not declare (on a checkout: it reads `git ls-files`)
     graph.py runs             print each obligation's name and run, one per line (for tests)
 
 The graph's one source is graph.toml with the Justfile's recipe bodies. This
 script writes the model text the certified core is exported from; it decides
 no route, identity or order (the certified core does).
 """
+import fnmatch
 import hashlib
 import json
 import pathlib
+import posixpath
 import re
 import shlex
+import subprocess
 import sys
 import tomllib
 
@@ -48,8 +53,9 @@ KEPT = [
 ]
 # How each installed file stands to upstream's: byte for byte; derived by
 # `derive`; reduced (upstream's code with only the release and forge parts
-# left out, as the file's own header says); relocked (upstream's lock with this
-# compiler's semantics digest).
+# left out, as the file's own header says); adapted (reduced, with the parts of
+# upstream's forge host and the additions the file's own header lists);
+# relocked (upstream's lock with this compiler's semantics digest).
 INSTALLED = {
     "lexlean-workspace.toml": "identical",
     "model/lakefile.toml": "identical",
@@ -68,7 +74,7 @@ INSTALLED = {
     "std/src/Sha256.lex.tex": "identical",
     "std/src/Text.lex.tex": "identical",
     "host/src/lib.rs": "reduced",
-    "host/src/main.rs": "reduced",
+    "host/src/main.rs": "adapted",
 }
 KEPT_IMPORTS = ["LexLeanStd.Buffer", "LexLeanStd.Text", "Factory.Engine", "Factory.UORust"]
 
@@ -188,6 +194,136 @@ def validate(graph, recipes, obligations):
             problems.append(f"the writer {writer} of `just generate` has no obligation that checks its output")
     if problems:
         raise Refused("\n".join(problems))
+
+
+# What a source reads that its obligation must declare. A compiled source embeds
+# the file an `include_str!`, `include_bytes!` or `include!` names, relative to
+# the source, or to its package with `concat!(env!("CARGO_MANIFEST_DIR"), ...)`.
+# The compiled sources are the workspace members' for a `--workspace` command
+# and, for `cargo run -p NAME`, NAME's and those of the members it depends on
+# by path (a test build also compiles a source's `#[cfg(test)] mod`). A test
+# target (a member's `tests/`, under `cargo test`) reads a tracked file when a
+# string literal that names one, from the root or from its package, is the
+# path argument of a file or process call (`join`, `read_to_string`,
+# `Path::new`, `arg`, `args`, ...); a tool's own sources take their paths from
+# its arguments, so they are not read this way. Such a file outside the
+# obligation's declared inputs is absent from
+# its closure, so the read fails there and passes in a checkout. The check is
+# syntactic, so it is an early refusal and not the proof: the proof of an
+# obligation's declarations is its run in its closure. It needs the tracked
+# tree (`git ls-files`), so `factory.sh` runs it on the checkout before it
+# plans; it is not part of `check`, which runs inside a closure.
+INCLUDE = re.compile(r'include(?:_str|_bytes)?!\s*\(\s*(concat!\s*\(\s*env!\s*\(\s*"CARGO_MANIFEST_DIR"\s*\)\s*,\s*)?"([^"\\]+)"')
+PATH_LITERAL = r'"([A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*/?)"'
+PATH_CALL = re.compile(r'(?:\.join|\bread|read_to_string|read_dir|File::open|Path::new|PathBuf::from|\.arg|\.current_dir|\.exists|\.is_file|\.is_dir)\(\s*&?' + PATH_LITERAL)
+ARGS = re.compile(r'\.args\(\s*&?\[([^\]]*)\]')
+LITERAL = re.compile(PATH_LITERAL)
+COMPILES = re.compile(r"\bcargo (?:test|run|clippy|build|check)\b")
+
+
+def reach(prefix, path):
+    """The engine's `reaches` for a plain path: the prefix's length plus one when the path starts with it."""
+    if prefix.startswith("@"):
+        return 0
+    return len(prefix.encode()) + 1 if path.startswith(prefix) else 0
+
+
+def covers(inputs, path):
+    """The engine's `covered`: the longest inclusion is longer than the longest exclusion."""
+    include = max([reach(i, path) for i in inputs if not i.startswith("!")] or [0])
+    exclude = max([reach(i[1:], path) for i in inputs if i.startswith("!")] or [0])
+    return exclude < include
+
+
+def undeclared_reads(root, obligations):
+    listing = subprocess.run(["git", "-C", str(root), "ls-files", "-z"], capture_output=True, check=True).stdout
+    tracked = sorted(path for path in listing.decode("utf-8").split("\0") if path)
+    files = set(tracked)
+    directories = {path[: index + 1] for path in tracked for index, char in enumerate(path) if char == "/"}
+    # The workspace's members (globs of the root manifest), by directory: name and path dependencies.
+    workspace = tomllib.loads((root / "Cargo.toml").read_text(encoding="utf-8")).get("workspace", {})
+    members = {}
+    for path in tracked:
+        if not path.endswith("/Cargo.toml"):
+            continue
+        directory = path[: -len("Cargo.toml")]
+        if not any(fnmatch.fnmatchcase(directory.rstrip("/"), pattern) for pattern in workspace.get("members", [])):
+            continue
+        manifest = tomllib.loads((root / path).read_text(encoding="utf-8"))
+        if "package" not in manifest:
+            continue
+        local = set()
+        # `cargo run` compiles a package's dependencies and build dependencies, not its dev-dependencies.
+        for table in ("dependencies", "build-dependencies"):
+            for key, spec in manifest.get(table, {}).items():
+                if isinstance(spec, dict) and "path" in spec:
+                    local.add(posixpath.normpath(posixpath.join(directory, spec["path"])) + "/")
+                elif isinstance(spec, dict) and spec.get("workspace"):
+                    shared = workspace.get("dependencies", {}).get(key, {})
+                    if isinstance(shared, dict) and "path" in shared:
+                        local.add(posixpath.normpath(shared["path"]) + "/")
+        members[directory] = (manifest["package"]["name"], local)
+
+    def compiled_by(names):
+        """The member directories `cargo run -p` of these names compiles: theirs and their path dependencies'."""
+        todo = [directory for directory, (name, _) in members.items() if name in names]
+        seen = set()
+        while todo:
+            directory = todo.pop()
+            if directory in seen or directory not in members:
+                continue
+            seen.add(directory)
+            todo.extend(members[directory][1])
+        return seen
+
+    def member_of(path):
+        return max((directory for directory in members if path.startswith(directory)), key=len, default=None)
+
+    def declared(inputs, path):
+        if path in files:
+            return covers(inputs, path)
+        return all(covers(inputs, entry) for entry in tracked if entry.startswith(path))
+
+    def literals(text):
+        for found in PATH_CALL.finditer(text):
+            yield found.start(1), found.group(1)
+        for found in ARGS.finditer(text):
+            for inner in LITERAL.finditer(found.group(1)):
+                yield found.start(1) + inner.start(1), inner.group(1)
+
+    problems = []
+    for item in obligations:
+        if not COMPILES.search(item["run"]):
+            continue
+        named = set(re.findall(r"cargo run [^&|;]*?-p ([A-Za-z0-9_-]+)", item["run"]))
+        whole = bool(re.search(r"cargo (?:test|clippy|build|check) [^&|;]*--workspace", item["run"]))
+        compiled = set(members) if whole else compiled_by(named)
+        running = set(members) if "cargo test" in item["run"] else set()
+        for source in tracked:
+            package = member_of(source)
+            if not source.endswith(".rs") or package not in compiled or not covers(item["inputs"], source):
+                continue
+            text = (root / source).read_text(encoding="utf-8", errors="replace")
+            if "cargo test" not in item["run"]:
+                # Only a test build compiles a source's trailing `#[cfg(test)] mod`.
+                text = text.split("\n#[cfg(test)]\nmod ", 1)[0]
+            here = posixpath.dirname(source)
+            for found in INCLUDE.finditer(text):
+                target = posixpath.normpath(posixpath.join(package if found.group(1) else here, found.group(2).lstrip("/")))
+                if target in files and not covers(item["inputs"], target):
+                    line = text.count("\n", 0, found.start()) + 1
+                    problems.append(f"{item['name']} embeds {target} ({source}:{line}) without declaring it")
+            # A tool's own sources take their paths from its arguments, relative to a root
+            # it is given; a test target's are the repository's (its root is the checkout).
+            if package not in running or not source.startswith(package + "tests/"):
+                continue
+            for offset, literal in literals(text):
+                candidates = {posixpath.normpath(literal), posixpath.normpath(posixpath.join(package, literal))}
+                hits = [path if path in files else path + "/" for path in candidates if path in files or path + "/" in directories]
+                if hits and not any(declared(item["inputs"], path) for path in hits):
+                    line = text.count("\n", 0, offset) + 1
+                    problems.append(f"{item['name']} reads {min(hits)} ({source}:{line}) without declaring it")
+    return problems
 
 
 def lex_string(text):
@@ -398,6 +534,13 @@ def main(argv):
             raise Refused("the revision is a full commit hash")
         UPSTREAM.write_text(record_text(pathlib.Path(argv[2]), argv[3]), encoding="utf-8")
         print(f"graph.py: wrote {UPSTREAM.relative_to(ROOT)}")
+    elif command == "reads":
+        graph, recipes, obligations = load()
+        validate(graph, recipes, obligations)
+        problems = undeclared_reads(ROOT, obligations)
+        if problems:
+            raise Refused("an obligation reads a tracked file it does not declare:\n" + "\n".join(problems))
+        print(f"graph.py: every tracked file a source of an obligation names is declared by it ({len(obligations)} obligations)")
     elif command == "runs":
         _, _, obligations = load()
         for item in obligations:

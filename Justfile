@@ -329,7 +329,8 @@ factory *only:
 factory-start *only:
     prism-factory/factory.sh start {{only}}
 
-# The status of the last detached run: `running`, or `done <exit code>` and the counts.
+# The status of the last detached run: `running`, then `done <exit code>` or
+# `interrupted <signal>` and the counts; `stale` when its process is gone.
 factory-status:
     prism-factory/factory.sh status
 
