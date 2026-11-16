@@ -25,9 +25,15 @@ pub struct Options {
     pub advisories: Option<std::path::PathBuf>,
     /// The MIR path of the lift, when it runs: see [`crate::mir`].
     pub mir: Option<crate::mir::MirOptions>,
+    /// The limits file the workspace declares for its projection's LexLean
+    /// and PrismPM projects (`--limits`); without one, the SDK scaffold's,
+    /// and the frontier says which: see [`crate::limits`].
+    pub limits: Option<std::path::PathBuf>,
 }
 
-/// The largest source file the projection's LexLean project admits.
+/// The largest source file of the projects the tool writes that take no
+/// `--limits` (the embedding, the bridge, the core MIR path): the SDK
+/// scaffold's `max_file_bytes`, which a test holds equal to the asset's.
 pub(crate) const MAX_FILE_BYTES: usize = 4_194_304;
 
 /// The projection's own register of what it did not admit or lift.
@@ -76,6 +82,9 @@ struct Model {
     /// checked out in is no fact of the workspace and enters no file, so
     /// two checkouts of one tree project byte for byte alike.
     name: String,
+    /// The limits the projection's project files state, and where they
+    /// came from.
+    limits: crate::limits::Limits,
     ws: Workspace,
     /// `(package, target index)` of a product target -> component ID.
     targets: BTreeMap<(usize, usize), String>,
@@ -304,8 +313,13 @@ pub(crate) fn project(
     }
     let (targets, components, index, refused) = components(ws);
     notes.refusals.extend(refused);
+    let limits = match &options.limits {
+        Some(path) => crate::limits::Limits::declared(path)?,
+        None => crate::limits::Limits::sdk(),
+    };
     let mut ctx = Model {
         name: options.name.clone(),
+        limits,
         ws: ws.clone(),
         targets,
         components,
@@ -411,7 +425,10 @@ pub(crate) fn project(
     if let Some(listing) = candidates {
         files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
     }
-    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
+    files.insert(
+        FRONTIER.into(),
+        frontier(&notes, &lift, &rows, &ctx.limits).into_bytes(),
+    );
     let cited = |id: &str| {
         files
             .values()
@@ -419,7 +436,7 @@ pub(crate) fn project(
     };
     // Each module within the limit the project file below states, in parts
     // where it is beyond it and its declarations can be written apart.
-    let written = sized(&modules, MAX_FILE_BYTES, &cited);
+    let written = sized(&modules, ctx.limits.max_file_bytes(), &cited);
     for (path, text) in written {
         entrypoints.push(path.clone());
         files.insert(path, text.into_bytes());
@@ -446,15 +463,13 @@ pub(crate) fn project(
          [[lexicon_source]]\npackage = \"prism.qual\"\nkind = \"path\"\npath = \"language/prism.qual\"\n\n\
          [[lexicon_source]]\npackage = \"prism.sec\"\nkind = \"path\"\npath = \"language/prism.sec\"\n\n\
          [[lexicon_source]]\npackage = \"uorust.titles\"\nkind = \"path\"\npath = \"language/uorust.titles\"\n\n\
-         [limits]\nmax_file_bytes = {MAX_FILE_BYTES}\nmax_total_source_bytes = 67108864\n\
-         max_primitive_atoms = 2000000\nmax_token_lattice_edges = 4000000\nmax_parse_states = 4000000\n\
-         max_ir_nodes = 2000000\nmax_scope_depth = 1024\nmax_import_depth = 128\nmax_diagnostics = 256\n\
-         max_child_output_bytes = 16777216\nchild_timeout_ms = 300000\n",
+         {}",
         entrypoints
             .iter()
             .map(|e| format!("\"{e}\""))
             .collect::<Vec<_>>()
-            .join(", ")
+            .join(", "),
+        crate::limits::Limits::table_text(&ctx.limits.lexlean)
     );
     let lakefile = format!(
         "name = \"{prefix}\"\nversion = \"0.1.0\"\ndefaultTargets = [\"{prefix}\"]\n\n[[lean_lib]]\nname = \"{prefix}\"\n"
@@ -479,8 +494,8 @@ pub(crate) fn project(
     );
     let prismpm = format!(
         "spec = \"prismpm/project/1\"\nproject = \"{prefix}\"\nlexlean_project = \"lexlean.toml\"\n\
-         build_root = \".prism\"\n\n[limits]\nmax_holo_bytes = 16777216\nmax_entities = 100000\n\
-         max_diagnostics = 256\n"
+         build_root = \".prism\"\n\n{}",
+        crate::limits::Limits::table_text(&ctx.limits.prismpm)
     );
     files.insert(LEXLEAN.into(), lexlean.into_bytes());
     files.insert("lexlean.lock".into(), lock.into_bytes());
@@ -4572,7 +4587,7 @@ fn mir_lift(
             krate: ctx.crate_ident(r),
             taken: &names,
             explicit: &explicit,
-            limit: MAX_FILE_BYTES,
+            limit: ctx.limits.max_file_bytes(),
             consts: dumps.consts.get(&ctx.crate_ident(r)).unwrap_or(&no_consts),
             closures: &closures,
             active: &[],
@@ -5775,7 +5790,7 @@ const REFUSALS: &str = "refusals";
 /// The projection's `frontier.toml`: the counts and the ranked queues, then
 /// every refusal and every function row. `lift` is the register of `rows`,
 /// the function rows ([`function_rows`]).
-fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
+fn frontier(notes: &Notes, lift: &Register, rows: &str, limits: &crate::limits::Limits) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\
          # A refusal is an open claim: the router proposed it and admission would\n\
@@ -5796,6 +5811,7 @@ fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
          # Both queues are ranked, what stops the most first.\n\n\
          spec = \"uorust/frontier/1\"\n",
     );
+    out.push_str(&limits.frontier_text());
     out.push_str(&refusal_queue(&notes.refusals));
     out.push_str(&lift.queue_text());
     for r in &notes.refusals {
@@ -6285,6 +6301,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            limits: None,
         };
         let projected = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);
@@ -6465,6 +6482,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            limits: None,
         };
         let out = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(&dir);
@@ -6955,6 +6973,7 @@ mod tests {
             last_modified: "2026-11-11T00:00:00Z".into(),
             advisories: None,
             mir: None,
+            limits: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("projects");
         let _ = std::fs::remove_dir_all(dir);
@@ -7080,7 +7099,7 @@ mod tests {
             .collect();
         let rows = function_rows(&notes, &kappas);
         let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
-        let text = frontier(&notes, &lift, &rows);
+        let text = frontier(&notes, &lift, &rows, &crate::limits::Limits::sdk());
         let doc: toml::Value = text.parse().expect("the frontier is TOML");
         let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
             .iter()
@@ -7146,6 +7165,120 @@ mod tests {
         }
         let arch = String::from_utf8_lossy(&alpha["src/Architecture.lex.tex"]);
         assert!(arch.contains("Maintain the queue workspace"), "{arch}");
+    }
+
+    /// The queue workspace projected with the limits file `limits` states
+    /// (none: the SDK scaffold's).
+    fn limits_projection(
+        tag: &str,
+        limits: Option<&str>,
+    ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
+        let dir = workspace(&format!("limits-{tag}"));
+        let file = limits.map(|text| {
+            let path = dir.with_extension("limits.toml");
+            std::fs::write(&path, text).expect("a limits file");
+            path
+        });
+        let options = super::Options {
+            name: "queue".into(),
+            last_modified: "2026-11-11T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+            limits: file.clone(),
+        };
+        let files = crate::project_workspace(&dir, &options);
+        let _ = std::fs::remove_dir_all(dir);
+        if let Some(path) = file {
+            let _ = std::fs::remove_file(path);
+        }
+        files
+    }
+
+    /// The scaffold's limits as a limits file, each value through `value`.
+    fn limits_declared(value: impl Fn(&str, u64) -> u64) -> String {
+        let sdk = crate::limits::Limits::sdk();
+        let table = |name: &str, rows: &[(String, u64)]| {
+            let mut out = format!("[{name}]\n");
+            for (key, v) in rows {
+                out.push_str(&format!("{key} = {}\n", value(key, *v)));
+            }
+            out
+        };
+        format!(
+            "{}\n{}",
+            table("lexlean", &sdk.lexlean),
+            table("prismpm", &sdk.prismpm)
+        )
+    }
+
+    #[test]
+    fn limits_without_a_file_the_projection_states_the_scaffold_and_says_so() {
+        let files = limits_projection("sdk", None).expect("projects");
+        let sdk = crate::limits::Limits::sdk();
+        let lexlean = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        let prismpm = String::from_utf8_lossy(&files["prismpm.toml"]).to_string();
+        assert!(
+            lexlean.ends_with(&crate::limits::Limits::table_text(&sdk.lexlean)),
+            "{lexlean}"
+        );
+        assert!(
+            prismpm.ends_with(&crate::limits::Limits::table_text(&sdk.prismpm)),
+            "{prismpm}"
+        );
+        let limits = toml_of(&files, FRONTIER)["limits"].clone();
+        assert_eq!(limits["source"].as_str(), Some("sdk-scaffold"), "{limits}");
+        assert!(limits.get("lexlean_sha256").is_some(), "{limits}");
+    }
+
+    #[test]
+    fn limits_a_declared_file_is_what_the_projection_states() {
+        let declared = limits_declared(|key, v| match key {
+            "max_ir_nodes" | "max_entities" => v * 2,
+            _ => v,
+        });
+        let files = limits_projection("declared", Some(&declared)).expect("projects");
+        let sdk = crate::limits::Limits::sdk();
+        let doubled = |rows: &[(String, u64)], key: &str| {
+            let v = rows.iter().find(|(k, _)| k == key).expect("a key").1;
+            format!("\n{key} = {}\n", v * 2)
+        };
+        let lexlean = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        let prismpm = String::from_utf8_lossy(&files["prismpm.toml"]).to_string();
+        assert!(
+            lexlean.contains(&doubled(&sdk.lexlean, "max_ir_nodes")),
+            "{lexlean}"
+        );
+        assert!(
+            prismpm.contains(&doubled(&sdk.prismpm, "max_entities")),
+            "{prismpm}"
+        );
+        let limits = toml_of(&files, FRONTIER)["limits"].clone();
+        assert_eq!(limits["source"].as_str(), Some("declared"), "{limits}");
+        assert_eq!(
+            limits["sha256"].as_str(),
+            Some(super::sha(declared.as_bytes()).as_str()),
+            "{limits}"
+        );
+        // The lock pins the project file, so it moves with the limits too.
+        let default = limits_projection("default", None).expect("projects");
+        assert_ne!(files["lexlean.lock"], default["lexlean.lock"]);
+    }
+
+    #[test]
+    fn limits_a_declared_max_file_bytes_is_the_limit_the_modules_are_held_to() {
+        let declared = limits_declared(|key, v| if key == "max_file_bytes" { 1 } else { v });
+        match limits_projection("tiny", Some(&declared)) {
+            Err(UorustError::ModuleTooLarge { limit, .. }) => assert_eq!(limit, 1),
+            other => panic!(
+                "not held to the declared limit: {:?}",
+                other.map(|f| f.len())
+            ),
+        }
+        let refused = limits_projection("refused", Some("[lexlean]\n"));
+        assert!(
+            matches!(refused, Err(UorustError::Limits { .. })),
+            "{refused:?}"
+        );
     }
 
     #[test]
@@ -7453,6 +7586,7 @@ mod tests {
             last_modified: "2026-11-15T00:00:00Z".to_string(),
             advisories: None,
             mir: None,
+            limits: None,
         };
         let files = crate::project_workspace(&dir, &options).expect("a projection");
         let _ = std::fs::remove_dir_all(&dir);

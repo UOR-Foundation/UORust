@@ -584,6 +584,12 @@ struct Args {
     /// A RustSec advisory database checkout to check Cargo.lock against.
     #[arg(long)]
     advisories: Option<PathBuf>,
+    /// The limits the projection's LexLean and PrismPM projects state: a
+    /// TOML file with a [lexlean] and a [prismpm] table holding every key
+    /// the SDK's project schema requires. Without it the SDK scaffold's
+    /// limits are written, and the frontier's [limits] table says which.
+    #[arg(long)]
+    limits: Option<PathBuf>,
     /// A lift register file: the projection is admitted against it (no
     /// function it records as lifted may be decided otherwise), then
     /// `project` writes the projection's register there and `check` requires
@@ -626,6 +632,7 @@ fn options(args: &Args) -> Result<Options, UorustError> {
         last_modified,
         advisories: args.advisories.clone(),
         mir,
+        limits: args.limits.clone(),
     })
 }
 

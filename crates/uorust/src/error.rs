@@ -49,6 +49,15 @@ pub enum UorustError {
         /// The limit the projection states.
         limit: usize,
     },
+    /// A limits file (`--limits`) the projection cannot take: a table or a
+    /// key the SDK's project schema does not list, a key it requires that
+    /// the file does not state, or a value that is no positive integer.
+    Limits {
+        /// The limits file.
+        path: PathBuf,
+        /// What is wrong, naming the table and the key.
+        reason: String,
+    },
     /// A tool the engine runs could not be run or failed: `cargo rustc`
     /// dumping MIR, or `lexlean verify` deciding the MIR path's theorems.
     Tool(String),
@@ -104,6 +113,9 @@ impl fmt::Display for UorustError {
                 "the module {module} is {bytes} bytes, beyond the max_file_bytes of {limit} the \
                  projection states in lexlean.toml"
             ),
+            Self::Limits { path, reason } => {
+                write!(f, "the limits file {} is refused: {reason}", path.display())
+            }
             Self::Tool(reason) => write!(f, "{reason}"),
             Self::Disagree(rows) => write!(
                 f,

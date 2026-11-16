@@ -26,6 +26,7 @@ mod ingest;
 pub mod layouts;
 mod lex;
 mod lift;
+pub mod limits;
 pub mod mir;
 mod names;
 mod order;
