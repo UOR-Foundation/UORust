@@ -4165,7 +4165,7 @@ mod tests {
                 package: "uorust_certified_binop".into(),
                 source: "s".into(),
                 certification: "kernel-checked".into(),
-                closure: None,
+                closure: Some("c1".into()),
                 edition: Some("2021".into()),
             }],
             share: Share {
