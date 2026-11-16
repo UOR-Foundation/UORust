@@ -1826,7 +1826,7 @@ impl<'a> Resolver<'a> {
             .filter(|u| hold(&u.cfg, config) != Some(false))
             .collect();
         for binding in if live.is_empty() { &bound } else { &live } {
-            match self.path(x, &binding.path, value, seen) {
+            match self.use_path(x, &binding.path, value, seen) {
                 // The binding names nothing in this namespace.
                 Found::Absent => {}
                 one => add(one),
@@ -1867,6 +1867,36 @@ impl<'a> Resolver<'a> {
             1 => found.pop(),
             _ => Some(Found::Unknown),
         }
+    }
+
+    /// What a `use` path names, read in module `x`. Its first segment,
+    /// where nothing the module declares or binds by a `use` has the name,
+    /// is the crate of that name where there is one, whatever the module's
+    /// globs import: a glob that bound the name too would make the `use`
+    /// ambiguous, which rustc rejects (E0659, a glob import against the
+    /// extern prelude during import resolution), so in a program that
+    /// compiles no glob changes what the path names.
+    fn use_path(
+        &self,
+        x: &ModKey,
+        segments: &[String],
+        value: bool,
+        seen: &mut Vec<(ModKey, String, bool)>,
+    ) -> Found {
+        if let (Some(first), Some(scope)) = (segments.first(), self.scope(x)) {
+            let special = matches!(first.as_str(), "" | "crate" | "self" | "super" | "Self");
+            let bound = scope.types.contains_key(first)
+                || scope.values.contains_key(first)
+                || scope.mods.contains(first)
+                || scope.uses.iter().any(|u| &u.name == first);
+            if !special && !bound && !matches!(self.krate(first), Found::Unknown) {
+                let rooted: Vec<String> = std::iter::once(String::new())
+                    .chain(segments.iter().cloned())
+                    .collect();
+                return self.path(x, &rooted, value, seen);
+            }
+        }
+        self.path(x, segments, value, seen)
     }
 
     /// What a path names, read in module `m`: the last segment as a value
@@ -2504,15 +2534,53 @@ impl<'a> Resolver<'a> {
     /// The bare type names a function's module binds to a type of a
     /// registry crate, each with the crate: `Value` of `use serde_json::Value`.
     pub(crate) fn registry_types(&self, f: FnId) -> BTreeMap<String, String> {
-        let module = self.module(f);
-        let Some(scope) = self.scope(&module) else {
+        self.registry_bindings(&self.module(f))
+            .into_iter()
+            .filter_map(|(name, to)| Some((name, to.first()?.clone())))
+            .collect()
+    }
+
+    /// The bare names a file binds to an item of a registry crate, each
+    /// with the full path the binding names: `BigX` of `use big::BigX`
+    /// reads `big::BigX`. A `use` gives the name its meaning in its module,
+    /// so the name is that path wherever the module writes it bare. The
+    /// projection reads an item of an inline module at its file's, so a
+    /// name the file's modules bind to two paths names neither.
+    pub(crate) fn registry_paths(&self, pkg: usize, file: usize) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let inline = self
+            .syntax
+            .names
+            .files
+            .get(&source.rel)
+            .map(|f| f.modules.keys().cloned().collect::<Vec<_>>())
+            .unwrap_or_default();
+        let mut out: BTreeMap<String, Option<String>> = BTreeMap::new();
+        for inner in inline {
+            let module = (pkg, source.target, join(&source.module, &inner));
+            for (name, to) in self.registry_bindings(&module) {
+                let to = to.join("::");
+                let entry = out.entry(name).or_insert_with(|| Some(to.clone()));
+                if entry.as_ref() != Some(&to) {
+                    *entry = None;
+                }
+            }
+        }
+        out.into_iter()
+            .filter_map(|(name, to)| Some((name, to?)))
+            .collect()
+    }
+
+    /// The bare names a module's `use` binds to an item of a registry
+    /// crate, and those of the modules of the workspace it imports whole,
+    /// each with the path it names, crate first.
+    fn registry_bindings(&self, module: &ModKey) -> BTreeMap<String, Vec<String>> {
+        let Some(scope) = self.scope(module) else {
             return BTreeMap::new();
         };
-        // The names the module's own `use` binds, and those of the modules
-        // of the workspace it imports whole.
         let mut names: BTreeSet<&str> = scope.uses.iter().map(|u| u.name.as_str()).collect();
         for glob in &scope.globs {
-            if let Found::Module(y) = self.path(&module, &glob.path, false, &mut Vec::new()) {
+            if let Found::Module(y) = self.path(module, &glob.path, false, &mut Vec::new()) {
                 if let Some(imported) = self.scope(&y) {
                     names.extend(imported.uses.iter().map(|u| u.name.as_str()));
                 }
@@ -2521,9 +2589,9 @@ impl<'a> Resolver<'a> {
         let mut out = BTreeMap::new();
         for name in names {
             let path = [name.to_string()];
-            if let Found::Extern(to) = self.path(&module, &path, false, &mut Vec::new()) {
-                if let Some(krate) = to.first().filter(|k| self.registry.contains(*k)) {
-                    out.insert(name.to_string(), krate.clone());
+            if let Found::Extern(to) = self.path(module, &path, false, &mut Vec::new()) {
+                if to.first().is_some_and(|k| self.registry.contains(k)) {
+                    out.insert(name.to_string(), to);
                 }
             }
         }

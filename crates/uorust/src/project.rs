@@ -86,6 +86,10 @@ struct Model {
     /// The bare names a function's module binds by a `use` to a type of a
     /// registry crate, each with the crate.
     registry: BTreeMap<FnRef, BTreeMap<String, String>>,
+    /// The bare names each file, by package and file, binds by a `use` to
+    /// an item of a registry crate, each with the path it names: the file
+    /// that declares a type names its fields' types so.
+    registry_paths: BTreeMap<(usize, usize), BTreeMap<String, String>>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -160,6 +164,31 @@ impl Model {
             .find_map(|head| bound.get(head).cloned())
     }
 
+    /// The registry crate whose item a leaf's head path names, among the
+    /// registry dependencies of every package (the package that declares
+    /// the type the leaf is a field of is the one that depends on it):
+    /// `big` for `big::BigX` and `big::Ratio<i64>`. A borrow reads as what
+    /// it borrows; a head the lift does not read (`RefCell<big::BigX>`) is
+    /// the leaf whatever it holds.
+    fn registry_crate(&self, leaf: &str) -> Option<String> {
+        let mut head = leaf.trim_start();
+        while let Some(rest) = head.strip_prefix('&') {
+            let rest = rest.trim_start();
+            head = rest.strip_prefix("mut ").unwrap_or(rest).trim_start();
+        }
+        let end = head
+            .find(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
+            .unwrap_or(head.len());
+        let (krate, _) = head[..end].split_once("::")?;
+        self.ws
+            .packages
+            .iter()
+            .flat_map(|p| &p.deps)
+            .filter(|d| d.path.is_none())
+            .map(|d| d.name.replace('-', "_"))
+            .find(|dep| dep == krate)
+    }
+
     fn component_of(&self, r: FnRef) -> Option<&String> {
         self.targets.get(&(r.pkg, self.file(r).target))
     }
@@ -169,7 +198,15 @@ impl Model {
     fn record_residue(&self, notes: &mut Notes, r: FnRef, span: Span, reason: Residue) {
         let package = &self.ws.packages[r.pkg];
         if let Residue::Type(ty) = &reason {
-            if let Some(dep) = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)) {
+            // The leaf decides the row. A chain through the fields of the
+            // workspace's types names its leaf as the file that declares
+            // the last of them writes it; a type the function's own
+            // signature writes is named as its own file binds it.
+            let dep = match chain_leaf(ty) {
+                Some(leaf) => self.registry_crate(leaf),
+                None => foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)),
+            };
+            if let Some(dep) = dep {
                 let detail = format!(
                     "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
                 );
@@ -303,7 +340,16 @@ pub(crate) fn project(
         calls: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
         registry: BTreeMap::new(),
+        registry_paths: BTreeMap::new(),
     };
+    ctx.registry_paths = ws
+        .packages
+        .iter()
+        .enumerate()
+        .flat_map(|(pkg, package)| (0..package.files.len()).map(move |fi| (pkg, fi)))
+        .map(|(pkg, fi)| ((pkg, fi), resolver.registry_paths(pkg, fi)))
+        .filter(|(_, bound)| !bound.is_empty())
+        .collect();
     ctx.registry = ctx
         .all_fns()
         .into_iter()
@@ -3261,7 +3307,8 @@ fn behavior(
     let type_aliases: Vec<BTreeMap<String, crate::ast::Alias>> = ws
         .packages
         .iter()
-        .map(|package| {
+        .enumerate()
+        .map(|(pkg, package)| {
             let declared: BTreeSet<&str> = package
                 .files
                 .iter()
@@ -3275,13 +3322,16 @@ fn behavior(
             package
                 .files
                 .iter()
-                .flat_map(|file| {
+                .enumerate()
+                .flat_map(|(fi, file)| {
+                    let bound = ctx.registry_paths.get(&(pkg, fi));
                     syntax.files[&file.rel]
                         .aliases
                         .iter()
                         .filter(|(n, _)| !declared.contains(n.as_str()))
-                        .map(|(n, a)| {
+                        .map(move |(n, a)| {
                             let to = a.to.localized(&file.imports);
+                            let to = bound.map_or_else(|| to.clone(), |b| to.renamed(b));
                             let alias = crate::ast::Alias {
                                 params: a.params.clone(),
                                 to,
@@ -3296,6 +3346,17 @@ fn behavior(
     // the crate has aliases.
     let expanded = |pkg: usize, ty: &crate::ast::RustType| {
         ty.expanded(&type_aliases[pkg], type_aliases[pkg].len())
+    };
+    // A field's type as the file that declares it writes it: a bare name
+    // its `use` binds to a registry crate's item is that item's path, so
+    // the chain through the field ends at the crate's type, by its crate.
+    let declared_in = |pkg: usize, fi: usize, ty: &crate::ast::RustType| {
+        let file = &ws.packages[pkg].files[fi];
+        let ty = ty.localized(&file.imports);
+        match ctx.registry_paths.get(&(pkg, fi)) {
+            Some(bound) => expanded(pkg, &ty.renamed(bound)),
+            None => expanded(pkg, &ty),
+        }
     };
     // A type of product code is keyed by its full path in its crate: its
     // target, its module and its name. A key declared twice (once per
@@ -3349,9 +3410,7 @@ fn behavior(
                         .map(|(v, fs)| {
                             let fs = fs
                                 .iter()
-                                .map(|(n, t)| {
-                                    (n.clone(), expanded(pkg, &t.localized(&file.imports)))
-                                })
+                                .map(|(n, t)| (n.clone(), declared_in(pkg, fi, t)))
                                 .collect();
                             (v.clone(), fs)
                         })
@@ -3379,7 +3438,7 @@ fn behavior(
                 }
                 let fields = fields
                     .iter()
-                    .map(|(n, t)| (n.clone(), expanded(pkg, &t.localized(&file.imports))))
+                    .map(|(n, t)| (n.clone(), declared_in(pkg, fi, t)))
                     .collect();
                 d.structs.insert(key, (fi, fields));
             }
@@ -5663,6 +5722,41 @@ fn foreign_crate(package: &Package, ty: &str) -> Option<String> {
         .find(|head| deps.contains(head))
 }
 
+/// The leaf of a type residue that is a chain through the fields of the
+/// workspace's types (`Outer.inner: Inner::Some.0: big::BigX`): what follows
+/// the last place, `Type.field` or `Type::Variant.field`, the chain passes
+/// through. A residue that passes through no place has none.
+fn chain_leaf(detail: &str) -> Option<&str> {
+    let ident = |s: &str| {
+        s.chars()
+            .next()
+            .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+            && s.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+    };
+    let place = |s: &str| {
+        let Some((owner, field)) = s.split_once('.') else {
+            return false;
+        };
+        let owner_ok = match owner.split_once("::") {
+            Some((ty, variant)) => ident(ty) && ident(variant),
+            None => ident(owner),
+        };
+        owner_ok
+            && !field.is_empty()
+            && field.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+    };
+    let mut rest = detail;
+    let mut through = false;
+    while let Some((head, tail)) = rest.split_once(": ") {
+        if !place(head) {
+            break;
+        }
+        through = true;
+        rest = tail;
+    }
+    through.then_some(rest)
+}
+
 /// How an effect reads after "which": `performs a Fs effect: std::fs::read`.
 fn effect_phrase(effect: &str) -> String {
     match effect.strip_prefix("calls ") {
@@ -7379,5 +7473,66 @@ mod tests {
             frontier.contains("w::variant has a variant under cfg(feature = \\\"wide\\\")"),
             "{frontier}"
         );
+    }
+
+    // What a type name means: the leaf of a chain is named as the file
+    // that declares the last type of the chain writes it.
+
+    /// The row the frontier writes for `function`: its table and detail.
+    fn type_names_row(frontier: &str, function: &str) -> String {
+        let at = frontier
+            .find(&format!("function = \"{function}\""))
+            .unwrap_or_else(|| panic!("no row of {function}: {frontier}"));
+        let start = frontier[..at].rfind("[[").unwrap();
+        let end = frontier[at..]
+            .find("\n\n")
+            .map_or(frontier.len(), |e| at + e);
+        frontier[start..end].to_string()
+    }
+
+    #[test]
+    fn type_names_a_chain_ending_at_a_registry_type_is_a_foreign_row() {
+        let frontier = resolved_frontier(
+            "leaf-foreign",
+            "\n[dependencies]\nbignum = \"1\"\nwide = \"1\"\n",
+            "pub mod num {\n use wide::prelude::*;\n use bignum::BigX;\n\
+             pub struct Ratio { pub q: BigX }\n}\n\
+             pub mod calc {\n use crate::num::Ratio;\n\
+             pub fn keep(r: Ratio) -> Ratio { r }\n}\n",
+        );
+        let row = type_names_row(&frontier, "w::keep");
+        assert!(row.starts_with("[[foreign]]"), "{row}");
+        assert!(
+            row.contains("Ratio.q: bignum::BigX, a type of the bignum crate"),
+            "{row}"
+        );
+    }
+
+    #[test]
+    fn type_names_a_head_the_lift_does_not_read_is_the_leaf() {
+        let frontier = resolved_frontier(
+            "leaf-head",
+            "\n[dependencies]\nbignum = \"1\"\n",
+            "use std::cell::RefCell;\nuse bignum::BigX;\n\
+             pub struct Held { pub c: RefCell<BigX> }\n\
+             pub fn keep(h: Held) -> Held { h }\n",
+        );
+        let row = type_names_row(&frontier, "w::keep");
+        assert!(row.starts_with("[[residue]]"), "{row}");
+        assert!(row.contains("Held.c: RefCell<bignum::BigX>"), "{row}");
+    }
+
+    #[test]
+    fn type_names_a_registry_map_a_use_binds_is_not_the_standard_one() {
+        let frontier = resolved_frontier(
+            "leaf-map",
+            "\n[dependencies]\nfastmap = \"1\"\n",
+            "use fastmap::HashMap;\n\
+             pub struct Index { pub at: HashMap<u8, u8> }\n\
+             pub fn size(i: &Index) -> usize { i.at.len() }\n",
+        );
+        let row = type_names_row(&frontier, "w::size");
+        assert!(row.starts_with("[[foreign]]"), "{row}");
+        assert!(row.contains("a type of the fastmap crate"), "{row}");
     }
 }

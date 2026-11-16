@@ -281,6 +281,9 @@ impl RustType {
     /// as the name it maps to, in its arguments too: a localized type of
     /// this crate read by the name its declaration lifts to, where the file
     /// that writes it says which of the crate's types of that name it is.
+    /// A name mapped to a path (`big::BigX`, the item a `use` of a crate
+    /// outside the workspace binds) is written as that path, its arguments
+    /// on the last segment, as Rust reads the bare name.
     pub(crate) fn renamed(&self, names: &BTreeMap<String, String>) -> RustType {
         let inner = |t: &RustType| Box::new(t.renamed(names));
         let kind = match &self.kind {
@@ -297,15 +300,11 @@ impl RustType {
             TypeKind::Tuple(ts) => TypeKind::Tuple(ts.iter().map(|t| t.renamed(names)).collect()),
             TypeKind::Path { qself: false, path } => {
                 let one = path.segments.len() == 1;
-                let segments = path
+                let segments: Vec<PathSegment> = path
                     .segments
                     .iter()
-                    .map(|s| PathSegment {
-                        ident: match names.get(&s.ident) {
-                            Some(n) if one => n.clone(),
-                            _ => s.ident.clone(),
-                        },
-                        arguments: match &s.arguments {
+                    .flat_map(|s| {
+                        let arguments = match &s.arguments {
                             PathArguments::AngleBracketed(args) => PathArguments::AngleBracketed(
                                 args.iter()
                                     .map(|a| match a {
@@ -317,7 +316,22 @@ impl RustType {
                                     .collect(),
                             ),
                             other => other.clone(),
-                        },
+                        };
+                        let to = match names.get(&s.ident) {
+                            Some(n) if one => n.as_str(),
+                            _ => s.ident.as_str(),
+                        };
+                        let mut written: Vec<PathSegment> = to
+                            .split("::")
+                            .map(|ident| PathSegment {
+                                ident: ident.to_string(),
+                                arguments: PathArguments::None,
+                            })
+                            .collect();
+                        if let Some(last) = written.last_mut() {
+                            last.arguments = arguments;
+                        }
+                        written
                     })
                     .collect();
                 TypeKind::Path {
