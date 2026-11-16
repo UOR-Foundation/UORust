@@ -9185,6 +9185,8 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
             rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => {
                 ident(default_entry(&u.expr)?.0)
             }
+            // `x.f += v`: the structure `x` with its field `f` added to.
+            rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
             left => ident(left),
         },
         rs::RustExpr::MethodCall(m) if default_entry(&m.receiver).is_some() => {
@@ -9363,6 +9365,27 @@ fn updated(
             let (insert, acc) = sorted_insert(ty, env, ctx, acc)?;
             let (helper, acc) = insert_all(ty, &items, &insert, env, ctx, acc);
             Ok((format!("({helper} {v} {current})"), acc))
+        }
+        // `x.f += v`: the field's new value, as a local's would be.
+        (rs::RustExpr::Binary(b), Ty::Named(name)) if named_field(&b.left).is_some() => {
+            let Some(rs::Member::Named(member)) = named_field(&b.left).map(|f| &f.member) else {
+                return Err(Residue::Form("an update outside the lift".to_string()));
+            };
+            let place = Place {
+                local: String::new(),
+                field: Some(member.clone()),
+            };
+            let Some((fty, read)) = place.field_of(name, current, env) else {
+                return Err(Residue::Form(format!("a field update of {name}")));
+            };
+            if matches!(fty, Ty::Named(_)) {
+                return Err(Residue::Form(format!(
+                    "an operator update of a field of {name} of type {}",
+                    fty.render()
+                )));
+            }
+            let (v, acc) = updated(e, &fty, &read, env, ctx, acc)?;
+            Ok((place.replaced(name, current, &v, env)?, acc))
         }
         (rs::RustExpr::Binary(b), Ty::Str) => {
             let (piece, acc) = value_of(&b.right, &Ty::Str, acc)?;
@@ -11160,14 +11183,37 @@ impl Place {
         let Some((current, ty)) = ctx.locals.get(&self.local) else {
             return Err(Residue::Form(format!("an update of {}", self.local)));
         };
-        let Some(member) = &self.field else {
+        if self.field.is_none() {
             return Ok(value.to_string());
-        };
+        }
         let Ty::Named(name) = ty else {
             return Err(Residue::Form(format!(
                 "an update of a field of {}",
                 self.local
             )));
+        };
+        self.replaced(name, current, value, env)
+    }
+
+    /// The type of the place's field in the structure `name`, and its value
+    /// in the structure's value `current`.
+    fn field_of(&self, name: &str, current: &str, env: &Env) -> Option<(Ty, String)> {
+        let target = local_name(self.field.as_ref()?);
+        let fields = env.types.structs.get(name)?;
+        let (_, ty) = fields.iter().find(|(f, _)| *f == target)?;
+        let read = if env.types.boxed(name) {
+            format!("({} {current})", Types::accessor(name, &target))
+        } else {
+            format!("(project {current} {target})")
+        };
+        Some((ty.clone(), read))
+    }
+
+    /// The structure `name` of value `current` with the place's field
+    /// replaced by `value`.
+    fn replaced(&self, name: &str, current: &str, value: &str, env: &Env) -> Lift<String> {
+        let Some(member) = &self.field else {
+            return Ok(value.to_string());
         };
         let Some(fields) = env.types.structs.get(name) else {
             return Err(Residue::Form(format!("a field update of {name}")));
@@ -15653,6 +15699,27 @@ mod tests {
             Err(Residue::Form(
                 "? in a body that threads its &mut parameters".to_string()
             ))
+        );
+    }
+
+    #[test]
+    fn mutation_an_operator_update_of_a_field_is_the_fields_new_value() {
+        let types = types_of("struct Log { text: String, time: u64 }");
+        let out = lift(
+            "fn note(log: &mut Log, piece: &str) { log.text += piece; }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(
+            out.contains(
+                "text := (prim join (cons (project log text) (cons piece (nil String))) \"\" : String)"
+            ) && out.contains("time := (project log time)"),
+            "{out}"
+        );
+        // A field's arithmetic is the arithmetic, whatever holds it.
+        assert_eq!(
+            lift("fn tick(log: &mut Log, t: u64) { log.time += t; }", &types),
+            Err(Residue::Arithmetic("+=".to_string()))
         );
     }
 }

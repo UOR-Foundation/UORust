@@ -11775,9 +11775,11 @@ pub fn fb(n: &Node) -> u8 {
     // function from the old value to its result and the new value, and a
     // caller rebinds the place it lent.
 
-    fn mutation_projected() -> (String, String) {
+    /// The tally workspace, projected under its own directory `dir` (tests
+    /// run at once, each in a directory of its own).
+    fn mutation_projected(dir: &str) -> (String, String) {
         projected(
-            "tally",
+            dir,
             &[(
                 "src/lib.rs",
                 "//! Tallies.\n\
@@ -11810,7 +11812,7 @@ pub fn fb(n: &Node) -> u8 {
 
     #[test]
     fn mutation_a_method_and_its_callers_thread_the_receiver() {
-        let (frontier, behavior) = mutation_projected();
+        let (frontier, behavior) = mutation_projected("tally");
         for function in [
             "tally::Tally::tick",
             "tally::Tally::mark",
@@ -11854,15 +11856,15 @@ pub fn fb(n: &Node) -> u8 {
 
     #[test]
     fn mutation_a_change_nothing_writes_back_keeps_a_row() {
-        let (frontier, _) = mutation_projected();
+        let (frontier, _) = mutation_projected("tallies");
         for (function, detail) in [
             (
-                "tally::inside",
+                "tallies::inside",
                 "expression form outside the lift: a call of Tally::tick, which changes what it \
                  borrows mutably, as an operand",
             ),
             (
-                "tally::Tally::again",
+                "tallies::Tally::again",
                 "expression form outside the lift: self used as itself, a second borrow of the \
                  place it lends, which the lift would read as a copy",
             ),
