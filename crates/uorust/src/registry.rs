@@ -1018,12 +1018,11 @@ fn lift_apart(name: &str, version: &str, register: &Path, options: &Options<'_>)
     let stderr = String::from_utf8_lossy(&out.stderr);
     eprint!("{stderr}");
     if !out.status.success() {
-        let last = stderr
-            .lines()
-            .rev()
-            .find(|l| !l.trim().is_empty())
-            .unwrap_or_default();
-        return Outcome::Refused(format!("`uorust crate` ended {}: {last}", out.status));
+        return Outcome::Refused(format!(
+            "`uorust crate` ended {}: {}",
+            out.status,
+            why_ended(&stderr)
+        ));
     }
     match recorded(kept, options) {
         Some(lifted) => Outcome::Lifted(lifted),
@@ -1032,6 +1031,24 @@ fn lift_apart(name: &str, version: &str, register: &Path, options: &Options<'_>)
             kept.display()
         )),
     }
+}
+
+/// What a run's stderr says ended it: a panic's place and message, else
+/// its last line that says something (an abort's `fatal runtime error`,
+/// an error the tool returned), past the notes a panic prints after it.
+fn why_ended(stderr: &str) -> String {
+    let lines: Vec<&str> = stderr.lines().map(str::trim).collect();
+    if let Some(at) = lines.iter().rposition(|l| l.contains(" panicked at ")) {
+        let place = lines[at].split(" panicked at ").nth(1).unwrap_or_default();
+        let message = lines.get(at + 1).copied().unwrap_or_default();
+        return format!("panicked at {place} {message}");
+    }
+    lines
+        .iter()
+        .rev()
+        .find(|l| !l.is_empty() && !l.starts_with("note:"))
+        .map(|l| (*l).to_string())
+        .unwrap_or_default()
 }
 
 /// [`LINKS`]: each crate lifted or refused, with its build and its
@@ -2330,5 +2347,21 @@ mod tests {
             Some(PathBuf::from("target/core-mir"))
         );
         let _ = std::fs::remove_dir_all(&work);
+    }
+
+    /// A run that panicked is refused with the panic's place and message,
+    /// not the note printed after it; an abort with its last line.
+    #[test]
+    fn link_a_crate_that_ends_its_run_is_refused_with_why() {
+        let panicked = "\nthread 'main' (7) panicked at src/x.rs:3:31:\nindex out of bounds\nnote: run with `RUST_BACKTRACE=1`\n";
+        assert_eq!(
+            why_ended(panicked),
+            "panicked at src/x.rs:3:31: index out of bounds"
+        );
+        let aborted = "thread 'main' (7) has overflowed its stack\nfatal runtime error: stack overflow, aborting\n";
+        assert_eq!(
+            why_ended(aborted),
+            "fatal runtime error: stack overflow, aborting"
+        );
     }
 }
