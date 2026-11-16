@@ -75,6 +75,10 @@ pub enum UorustError {
     /// The differential: an output of the certified translator differs from
     /// the hand-written one's, by κ; each names the output and both κ.
     Disagree(Vec<String>),
+    /// `uorust figures check` found a numeric literal without a home, a
+    /// figure without one, or a register or generated file that is stale;
+    /// each line names one.
+    Figures(Vec<String>),
 }
 
 impl fmt::Display for UorustError {
@@ -137,6 +141,7 @@ impl fmt::Display for UorustError {
                 "the certified and the hand-written translator disagree: {}",
                 rows.join("; ")
             ),
+            Self::Figures(rows) => write!(f, "the figures do not hold:\n  {}", rows.join("\n  ")),
             Self::Grown(rows) => write!(
                 f,
                 "the hand-written translator may only shrink: {}",

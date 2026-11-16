@@ -8,9 +8,10 @@
 //! threat-model module and the Lean toolchain pin.
 //!
 //! `language/uorust.titles` is the engine's own glossary: the label words that
-//! title the Behavior, Prelude and SupplyChain modules, which no facet glossary
-//! names. `src/Prelude.lex.tex` is the engine's own text prelude: the
-//! byte-level string definitions that lifted `str` methods call.
+//! title the Behavior, Prelude and SupplyChain modules and the Figures module
+//! `uorust figures write` generates, which no facet glossary names.
+//! `src/Prelude.lex.tex` is the engine's own text prelude: the byte-level
+//! string definitions that lifted `str` methods call.
 
 /// `(path inside the projection, bytes)`, sorted by path.
 pub(crate) const FIXED: &[(&str, &str)] = &[
@@ -229,6 +230,10 @@ pub(crate) const FIXED: &[(&str, &str)] = &[
     (
         "language/uorust.titles/entries/behavior.toml",
         include_str!("../assets/project/language/uorust.titles/entries/behavior.toml"),
+    ),
+    (
+        "language/uorust.titles/entries/figures.toml",
+        include_str!("../assets/project/language/uorust.titles/entries/figures.toml"),
     ),
     (
         "language/uorust.titles/entries/supply-chain.toml",

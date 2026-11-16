@@ -120,3 +120,9 @@ Feature: engine
     Given core's MIR dumps, rust-src at the pinned toolchain and the MIR semantics module
     When the suite exercises UE-19
     Then every body is a value of the MIR datatype whose kinds are rustc's, a long list nests no deeper than its root, the constructs the evaluator does not define are read from its source, each register row records its embedding and what blocks it, and each sampled case is a theorem that the evaluator returns what rustc's build returned
+
+  @UE-21 @build
+  Scenario: Every numeric literal of a workspace gets a home by extraction and rewrite
+    Given small synthetic workspaces and figure registers written for them
+    When the suite exercises UE-21
+    Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, and the gate holds the workspace to its register

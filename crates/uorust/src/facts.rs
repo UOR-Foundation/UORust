@@ -69,6 +69,8 @@ pub(crate) struct Package {
     pub(crate) homepage: String,
     pub(crate) license: String,
     pub(crate) rust_version: Option<String>,
+    /// The Rust edition the package's manifest states.
+    pub(crate) edition: String,
     pub(crate) authors: Vec<String>,
     /// The package directory relative to the workspace root.
     pub(crate) dir: String,
@@ -115,6 +117,9 @@ pub(crate) struct SourceFile {
     pub(crate) target: usize,
     /// The module path inside the target, `""` for the root.
     pub(crate) module: String,
+    /// Whether the whole file is test code: a test target's file, or a
+    /// file only test code declares as a module.
+    pub(crate) test: bool,
     pub(crate) parse_error: Option<String>,
     pub(crate) doc: String,
     pub(crate) forbids_unsafe: bool,
