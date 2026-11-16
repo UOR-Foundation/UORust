@@ -18,15 +18,21 @@
 //! stays as it was.
 //!
 //! A row that did not lift is embedded-closed ([`crate::register::Status::
-//! Embedded`]) when, in every configuration the directory holds a record
-//! of for its crate, the one body of its key is embedded with its reach
-//! closed, or the configuration's records cover every module of the crate
-//! and none holds the key (its dump does not compile the function), and at
-//! least one configuration holds it. A configuration whose records do not
-//! cover every module and lack the key leaves the row as it was: whether
-//! that dump compiles the function is not read. Two bodies of one key in
-//! one configuration, or two functions of one surface path, leave the row
-//! as it was too. None of this is translation.
+//! Embedded`]) when, in every configuration the workspace declares
+//! ([`crate::project::Embedding::configurations`]), the one body of its key
+//! is embedded with its reach closed, or the configuration's records cover
+//! every module of the crate and none holds the key (its dump does not
+//! compile the function), and at least one configuration holds it. A
+//! declared configuration with no record of the crate, or whose records do
+//! not cover every module and lack the key, leaves the row as it was:
+//! whether that dump compiles the function is not read. Two bodies of one
+//! key in one configuration, or two functions of one surface path, leave
+//! the row as it was too. None of this is translation.
+//!
+//! Each record states the digest of the workspace's sources it was embedded
+//! from ([`crate::shard::source_digest`]); a record whose digest is not the
+//! projected workspace's is of another tree and is refused, so a changed
+//! body is never joined to the record of the body it replaced.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
@@ -61,7 +67,7 @@ struct Body {
 /// One record: its configuration, its project's digest, the modules it
 /// embedded (empty: every module), every module of the crate, its bodies.
 #[derive(Clone, Debug)]
-struct Recorded {
+pub(crate) struct Recorded {
     krate: String,
     configuration: String,
     project: String,
@@ -167,8 +173,9 @@ fn label(doc: &toml::Table) -> String {
     .label()
 }
 
-/// Every record under `dir`, at any depth.
-fn read(dir: &Path) -> Result<Vec<Recorded>, UorustError> {
+/// Every record under `dir`, at any depth; a record whose source digest
+/// is not `source`, the projected workspace's, is refused.
+pub(crate) fn read(dir: &Path, source: &str) -> Result<Vec<Recorded>, UorustError> {
     let mut files = Vec::new();
     let mut next = vec![dir.to_path_buf()];
     while let Some(d) = next.pop() {
@@ -205,6 +212,12 @@ fn read(dir: &Path) -> Result<Vec<Recorded>, UorustError> {
                 .collect()
         };
         let krate = text_of("crate")?;
+        let stated = text_of("source")?;
+        if stated != source {
+            return Err(bad(format!(
+                "a record of another source tree (source {stated}; the workspace projected is {source}): embed the workspace again"
+            )));
+        }
         let mut bodies = Vec::new();
         for b in doc
             .get("body")
@@ -247,17 +260,20 @@ fn read(dir: &Path) -> Result<Vec<Recorded>, UorustError> {
 }
 
 /// The rows of `keys` (each function's path and the key of the item it
-/// is) that the records under `dir` show embedded-closed, with where:
-/// one [`EmbeddedAt`] per configuration that holds the body.
+/// is) that `records` show embedded-closed in every one of the declared
+/// `configurations`, with where: one [`EmbeddedAt`] per configuration that
+/// holds the body.
 pub(crate) fn closed(
-    dir: &Path,
+    records: &[Recorded],
+    configurations: &[String],
     keys: &BTreeMap<String, Key>,
-) -> Result<BTreeMap<String, Vec<EmbeddedAt>>, UorustError> {
-    let records = read(dir)?;
-    // By crate and configuration: the records.
+) -> BTreeMap<String, Vec<EmbeddedAt>> {
+    // By crate and declared configuration: the records.
     let mut by: BTreeMap<(&str, &str), Vec<&Recorded>> = BTreeMap::new();
-    for r in &records {
-        by.entry((&r.krate, &r.configuration)).or_default().push(r);
+    for r in records {
+        if configurations.contains(&r.configuration) {
+            by.entry((&r.krate, &r.configuration)).or_default().push(r);
+        }
     }
     // By crate and configuration: the paths of the bodies, so that a body
     // whose owner is itself a body (a function nested in a function prints
@@ -275,10 +291,14 @@ pub(crate) fn closed(
     let mut out = BTreeMap::new();
     'rows: for (path, key) in keys {
         let mut at = Vec::new();
-        for ((krate, configuration), records) in &by {
-            if *krate != key.krate {
-                continue;
-            }
+        for configuration in configurations {
+            let Some((krate, records)) = by
+                .get_key_value(&(key.krate.as_str(), configuration.as_str()))
+                .map(|((k, _), r)| (*k, r))
+            else {
+                // A declared configuration with no record of the crate.
+                continue 'rows;
+            };
             let found: Vec<(&Recorded, &Body)> = records
                 .iter()
                 .flat_map(|r| r.bodies.iter().map(move |b| (*r, b)))
@@ -291,7 +311,7 @@ pub(crate) fn closed(
                 let mut parts = segments(&b.path);
                 parts.pop();
                 owners
-                    .get(&(*krate, *configuration))
+                    .get(&(krate, configuration.as_str()))
                     .is_some_and(|o| o.contains(parts.join("::").as_str()))
             });
             if nested {
@@ -299,7 +319,7 @@ pub(crate) fn closed(
             }
             match found.as_slice() {
                 [(r, b)] if b.closed => at.push(EmbeddedAt {
-                    configuration: (*configuration).to_string(),
+                    configuration: configuration.clone(),
                     project: r.project.clone(),
                     body: b.embedded.clone(),
                 }),
@@ -308,10 +328,13 @@ pub(crate) fn closed(
             }
         }
         if !at.is_empty() {
+            // In label order, whatever order the configurations were
+            // declared in, so one declaration writes one register.
+            at.sort_by(|a, b| a.configuration.cmp(&b.configuration));
             out.insert(path.clone(), at);
         }
     }
-    Ok(out)
+    out
 }
 
 /// A type of the surface as the dump prints it: its crate, its file's
@@ -323,18 +346,18 @@ pub(crate) struct TypeKey {
     pub(crate) name: String,
 }
 
-/// How the records under `dir` hold each type of `types` (each type's
-/// path and its key), in every configuration and module they hold: the
-/// most it is held anywhere. A record names a type of its crate by its
+/// How `records` hold each type of `types` (each type's path and its key),
+/// in every configuration and module they hold: the most it is held
+/// anywhere. A record names a type of its crate by its
 /// crate-relative path, or, in a signature, by its name alone, which
 /// names the one type of that name in the crate or none. A type no
 /// record holds is not stated.
 pub(crate) fn holdings(
-    dir: &Path,
+    records: &[Recorded],
     types: &BTreeMap<String, TypeKey>,
-) -> Result<BTreeMap<String, crate::ownership::Held>, UorustError> {
+) -> BTreeMap<String, crate::ownership::Held> {
     let mut out: BTreeMap<String, crate::ownership::Held> = BTreeMap::new();
-    for r in read(dir)? {
+    for r in records {
         for (printed, held) in &r.holdings {
             let segments: Vec<&str> = printed.split("::").collect();
             let Some((name, module)) = segments.split_last() else {
@@ -356,7 +379,7 @@ pub(crate) fn holdings(
             }
         }
     }
-    Ok(out)
+    out
 }
 
 /// Whether one configuration's records embed every module of the crate,
@@ -417,7 +440,7 @@ mod tests {
         let quote = |s: &str| toml::Value::String(s.to_string()).to_string();
         let mut text = format!(
             "crate = \"probe\"\nmodules = [{}]\ncrate_modules = [\"crate\", \"inner\"]\n{configuration}\
-             target = \"\"\nproject = \"{}\"\n",
+             target = \"\"\nproject = \"{}\"\nsource = \"{LIFT_SOURCE_DIGEST}\"\n",
             modules.iter().map(|m| quote(m)).collect::<Vec<_>>().join(", "),
             "c".repeat(64)
         );
@@ -433,6 +456,42 @@ mod tests {
         std::fs::write(dir.join(RECORD), text).unwrap();
     }
 
+    /// What a test record states as its source digest until
+    /// [`lift_options`] writes the workspace's in its place.
+    const LIFT_SOURCE_DIGEST: &str = "the workspace's";
+
+    /// The two configurations the tests' workspace declares.
+    const LIFT_DECLARED: [&str; 2] = ["default features", "all features"];
+
+    /// The options that project the workspace `ws` with the records under
+    /// `records`, declaring `declared`; each record that states the
+    /// placeholder digest is given the workspace's sources' digest.
+    fn lift_options(ws: &Path, records: &Path, declared: &[&str]) -> crate::Options {
+        let digest = crate::shard::source_digest(ws).unwrap();
+        let mut next = vec![records.to_path_buf()];
+        while let Some(d) = next.pop() {
+            for entry in std::fs::read_dir(&d).unwrap() {
+                let path = entry.unwrap().path();
+                if path.is_dir() {
+                    next.push(path);
+                } else {
+                    let text = std::fs::read_to_string(&path).unwrap();
+                    std::fs::write(&path, text.replace(LIFT_SOURCE_DIGEST, &digest)).unwrap();
+                }
+            }
+        }
+        crate::Options {
+            name: "probe".into(),
+            last_modified: "2026-11-15T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+            embedding: Some(crate::Embedding {
+                records: records.to_path_buf(),
+                configurations: declared.iter().map(|c| c.to_string()).collect(),
+            }),
+        }
+    }
+
     /// The register of the workspace projected with the records under
     /// `records`.
     fn lift_projected(work: &Path, records: &Path) -> crate::register::Register {
@@ -442,6 +501,16 @@ mod tests {
     /// The register of the workspace whose library is `source`, projected
     /// with the records under `records`.
     fn lift_projected_from(work: &Path, records: &Path, source: &str) -> crate::register::Register {
+        lift_projected_declaring(work, records, source, &LIFT_DECLARED).expect("a projection")
+    }
+
+    /// The projection's register, the workspace declaring `declared`.
+    fn lift_projected_declaring(
+        work: &Path,
+        records: &Path,
+        source: &str,
+        declared: &[&str],
+    ) -> Result<crate::register::Register, UorustError> {
         let ws = work.join("ws");
         std::fs::create_dir_all(ws.join("src")).unwrap();
         std::fs::write(
@@ -450,15 +519,9 @@ mod tests {
         )
         .unwrap();
         std::fs::write(ws.join("src/lib.rs"), source).unwrap();
-        let options = crate::Options {
-            name: "probe".into(),
-            last_modified: "2026-11-15T00:00:00Z".into(),
-            advisories: None,
-            mir: None,
-            embedding: Some(records.to_path_buf()),
-        };
-        let files = crate::project_workspace(&ws, &options).expect("a projection");
-        crate::lift_register(&files).expect("a register")
+        let options = lift_options(&ws, records, declared);
+        let files = crate::project_workspace(&ws, &options)?;
+        Ok(crate::lift_register(&files).expect("a register"))
     }
 
     #[test]
@@ -608,6 +671,78 @@ mod tests {
     }
 
     #[test]
+    fn lift_a_declared_configuration_unread_or_a_record_of_another_tree_stamps_nothing() {
+        use crate::register::Status;
+        let work = std::env::temp_dir().join(format!("uorust-declared-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let records = work.join("records");
+        let default = "features = []\ndefault_features = true\nall_features = false\n";
+        // The default configuration's records alone, closed, while the
+        // workspace declares two (refute-lift-7, counterexample 5): the
+        // other's dump may compile the function and leave it open.
+        lift_write_record(
+            &records.join("default"),
+            default,
+            &[],
+            &[
+                ("<impl at src/lib.rs:2:1: 2:22>::get", "closed"),
+                ("inner::first", "closed"),
+            ],
+        );
+        let status = |register: &crate::register::Register, f: &str| {
+            register
+                .rows
+                .values()
+                .find(|r| r.function == f)
+                .map(|r| r.status.clone())
+                .expect(f)
+        };
+        let register = lift_projected(&work, &records);
+        assert!(
+            matches!(
+                status(&register, "probe::Wrap<T>::get"),
+                Status::Residue(..)
+            ),
+            "{:?}",
+            status(&register, "probe::Wrap<T>::get")
+        );
+        assert_eq!(register.totals().embedded, 0);
+        // Declaring the one configuration the records hold, it is closed.
+        let ws = work.join("ws");
+        let one = lift_projected_declaring(&work, &records, LIFT_SOURCE, &["default features"])
+            .expect("a projection");
+        assert!(matches!(
+            status(&one, "probe::Wrap<T>::get"),
+            Status::Embedded(at) if at.len() == 1
+        ));
+        // A change of the workspace's sources after the embedding (the
+        // refuter's counterexample 7: the records of one tree projected
+        // with another): the records are refused.
+        std::fs::write(
+            ws.join("src/lib.rs"),
+            format!("{LIFT_SOURCE}pub fn more() -> u32 {{ 1 }}\n"),
+        )
+        .unwrap();
+        let options = crate::Options {
+            embedding: Some(crate::Embedding {
+                records: records.clone(),
+                configurations: vec!["default features".into()],
+            }),
+            ..lift_options(&ws, &records, &["default features"])
+        };
+        match crate::project_workspace(&ws, &options) {
+            Err(UorustError::Malformed { reason, .. }) => {
+                assert!(
+                    reason.starts_with("a record of another source tree"),
+                    "{reason}"
+                )
+            }
+            other => panic!("{:?}", other.map(|f| f.len())),
+        }
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
+    #[test]
     fn lift_the_frontier_states_how_each_type_is_held() {
         let work = std::env::temp_dir().join(format!("uorust-holding-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&work);
@@ -638,13 +773,7 @@ mod tests {
         );
         let ws = work.join("ws");
         lift_projected(&work, &records);
-        let options = crate::Options {
-            name: "probe".into(),
-            last_modified: "2026-11-15T00:00:00Z".into(),
-            advisories: None,
-            mir: None,
-            embedding: Some(records.clone()),
-        };
+        let options = lift_options(&ws, &records, &LIFT_DECLARED);
         let files = crate::project_workspace(&ws, &options).expect("a projection");
         let frontier: toml::Table = String::from_utf8(files["frontier.toml"].clone())
             .unwrap()

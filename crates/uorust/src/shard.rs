@@ -601,6 +601,7 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
         ..config.clone()
     };
     let deps = dependencies(e.workspace, &resolve.cargo_args(true), Some(name))?;
+    let source = source_digest(e.workspace)?;
     // One mount per call: two embeddings of one crate in one process
     // (tests run in parallel) never share it.
     static CALL: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
@@ -663,7 +664,7 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             }
             let file = out.join(RECORD);
             let mut text = render_record(
-                e.krate, &config, only, &held, &all, &link, &census, &project,
+                e.krate, &config, only, &held, &all, &link, &census, &project, &source,
             );
             text.push_str(&crate::ownership::render(&holdings));
             std::fs::write(&file, text).map_err(|x| io(&file, x))?;
@@ -693,7 +694,6 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
 /// `dir` and its bytes, in path order, every file as the embedding wrote
 /// it. It names the project a verification of it is a receipt of.
 pub fn project_digest(dir: &Path) -> Result<String, UorustError> {
-    use sha2::{Digest, Sha256};
     let mut files: Vec<PathBuf> = Vec::new();
     let mut next = vec![dir.to_path_buf()];
     while let Some(d) = next.pop() {
@@ -706,6 +706,13 @@ pub fn project_digest(dir: &Path) -> Result<String, UorustError> {
             }
         }
     }
+    digest_files(dir, files)
+}
+
+/// The SHA-256 of `files`, each by its path under `dir` and its bytes, in
+/// path order.
+fn digest_files(dir: &Path, mut files: Vec<PathBuf>) -> Result<String, UorustError> {
+    use sha2::{Digest, Sha256};
     files.sort();
     let mut hash = Sha256::new();
     for f in files {
@@ -723,9 +730,42 @@ pub fn project_digest(dir: &Path) -> Result<String, UorustError> {
     Ok(hash.finalize().iter().map(|b| format!("{b:02x}")).collect())
 }
 
+/// The SHA-256 of a workspace's sources, hashed as [`project_digest`]
+/// hashes a project: every `.rs` file, every `Cargo.toml` and every
+/// `Cargo.lock` under `workspace`, outside its `target` directory and any
+/// directory whose name starts with a dot. A record states the digest of
+/// the tree it was embedded from, and a projection joins only the records
+/// of its own tree ([`crate::embedding`]), so no row is stamped by the
+/// record of a body that has since changed, in its crate or in any crate
+/// of the workspace its calls reach. The dumps are those of the tree
+/// `uorust mir` read; that it is the tree embedded is the caller's, which
+/// runs both on one input.
+pub fn source_digest(workspace: &Path) -> Result<String, UorustError> {
+    let mut files: Vec<PathBuf> = Vec::new();
+    let mut next = vec![workspace.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for entry in std::fs::read_dir(&d).map_err(|x| io(&d, x))? {
+            let path = entry.map_err(|x| io(&d, x))?.path();
+            let name = path
+                .file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or_default();
+            if path.is_dir() {
+                if !name.starts_with('.') && path != workspace.join("target") {
+                    next.push(path);
+                }
+            } else if name.ends_with(".rs") || name == "Cargo.toml" || name == "Cargo.lock" {
+                files.push(path);
+            }
+        }
+    }
+    digest_files(workspace, files)
+}
+
 /// [`RECORD`] of one embedding of the modules `only` (every module when
 /// empty) of `krate`, dumped in `config`, into the project whose digest is
-/// `project` ([`project_digest`]): the configuration, the modules and
+/// `project` ([`project_digest`]), from the workspace whose sources' digest
+/// is `source` ([`source_digest`]): the configuration, the modules and
 /// their dump files, every module of the crate (`every`), the libraries linked, then the census's counts:
 /// bodies embedded, evaluable, leaving a callee to a dictionary, and the
 /// calls that name a body, by where it is, and those left to a dictionary,
@@ -743,6 +783,7 @@ pub fn render_record(
     link: &[(&str, &Path)],
     census: &crate::embed::EmbedCensus,
     project: &str,
+    source: &str,
 ) -> String {
     let quote = |s: &str| toml::Value::String(s.to_string()).to_string();
     let list =
@@ -753,7 +794,7 @@ pub fn render_record(
          crate = {}\nmodules = [{}]\nfeatures = [{}]\ndefault_features = {}\nall_features = {}\n\
          target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\ncrate_modules = [{}]\nproject = {}\n\
          embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n\
-         closed = {}\n",
+         closed = {}\nsource = {}\n",
         quote(krate),
         list(&mut only.iter().map(String::as_str)),
         list(&mut config.features.iter().map(String::as_str)),
@@ -771,6 +812,7 @@ pub fn render_record(
         census.linked.values().sum::<usize>(),
         census.unlinked.values().sum::<usize>(),
         census.rows.iter().filter(|r| r.open.is_none()).count(),
+        quote(source),
     );
     for (at, n) in &census.linked {
         out.push_str(&format!(

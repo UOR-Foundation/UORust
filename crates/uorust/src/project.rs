@@ -25,11 +25,25 @@ pub struct Options {
     pub advisories: Option<std::path::PathBuf>,
     /// The MIR path of the lift, when it runs: see [`crate::mir`].
     pub mir: Option<crate::mir::MirOptions>,
-    /// The records of `uorust embed --workspace` (any depth under it): a
-    /// function row that did not lift is joined to its body's in every
-    /// configuration, and is embedded-closed where they say so
-    /// ([`crate::embedding`]).
-    pub embedding: Option<std::path::PathBuf>,
+    /// The records of `uorust embed --workspace` and the configurations
+    /// the workspace declares: a function row that did not lift is joined
+    /// to its body in each declared configuration, and is embedded-closed
+    /// where they say so ([`crate::embedding`]).
+    pub embedding: Option<Embedding>,
+}
+
+/// What `project --embedding` joins ([`crate::embedding`]).
+#[derive(Clone, Debug)]
+pub struct Embedding {
+    /// The directory of the records `uorust embed --workspace` wrote (any
+    /// depth under it).
+    pub records: std::path::PathBuf,
+    /// The configurations the workspace declares, each by its label
+    /// ([`crate::shard::Configuration::label`]: `default features`, `all
+    /// features`, ...). A row is embedded-closed only where the records of
+    /// every one of them cover its crate; records of another configuration
+    /// are not read.
+    pub configurations: Vec<String>,
 }
 
 /// The largest source file the projection's LexLean project admits.
@@ -276,6 +290,7 @@ pub(crate) fn project(
     syntax: &Syntax,
     options: &Options,
     dumps: Option<&crate::mir::Dumps>,
+    source: Option<&str>,
 ) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
     // Items under `cfg` predicates no build holds together are one fact:
@@ -373,9 +388,20 @@ pub(crate) fn project(
     // The lift register of this run, read from the function rows the
     // frontier is about to carry: what the queue ranks and the Quality facet
     // measures is what a reader of the frontier finds.
-    let embedded = match &options.embedding {
-        Some(dir) => crate::embedding::closed(dir, &embedding_keys(&ctx))?,
-        None => BTreeMap::new(),
+    // The records are read against the workspace's source digest: a
+    // record of another tree is refused.
+    let records = match &options.embedding {
+        Some(e) => Some(crate::embedding::read(
+            &e.records,
+            source.unwrap_or_default(),
+        )?),
+        None => None,
+    };
+    let embedded = match (&options.embedding, &records) {
+        (Some(e), Some(records)) => {
+            crate::embedding::closed(records, &e.configurations, &embedding_keys(&ctx))
+        }
+        _ => BTreeMap::new(),
     };
     let rows = function_rows(&notes, &kappas, &embedded);
     let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
@@ -415,8 +441,10 @@ pub(crate) fn project(
         files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
     }
     // How the program holds each type, where the embedding's records read it.
-    let rows = match &options.embedding {
-        Some(dir) => rows + &holding_rows(&crate::embedding::holdings(dir, &type_keys(&ctx))?),
+    let rows = match &records {
+        Some(records) => {
+            rows + &holding_rows(&crate::embedding::holdings(records, &type_keys(&ctx)))
+        }
         None => rows,
     };
     files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());

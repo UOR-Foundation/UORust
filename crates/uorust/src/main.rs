@@ -600,12 +600,20 @@ struct Args {
     #[arg(long, requires = "mir")]
     verdicts: Option<PathBuf>,
     /// The records `uorust embed --workspace` wrote (any depth under the
-    /// directory): a function row that did not lift is joined to its body
-    /// in every configuration, by the item the dump names, and is
-    /// embedded-closed where every one is embedded, evaluable and reaches
-    /// only linked bodies.
-    #[arg(long)]
+    /// directory), of this workspace's sources as they are now: a function
+    /// row that did not lift is joined to its body in every declared
+    /// `--configuration`, by the item the dump names, and is embedded-closed
+    /// where every one is embedded, evaluable and reaches only linked
+    /// bodies. A record of another source tree is refused.
+    #[arg(long, requires = "configuration")]
     embedding: Option<PathBuf>,
+    /// A configuration the workspace declares, by the label its records
+    /// state (`default features`, `all features`, `default features and
+    /// a,b`, `features a on <target>`; repeatable): a row is embedded-closed
+    /// only where the records of every declared configuration cover its
+    /// crate.
+    #[arg(long, requires = "embedding")]
+    configuration: Vec<String>,
 }
 
 fn options(args: &Args) -> Result<Options, UorustError> {
@@ -634,7 +642,10 @@ fn options(args: &Args) -> Result<Options, UorustError> {
         last_modified,
         advisories: args.advisories.clone(),
         mir,
-        embedding: args.embedding.clone(),
+        embedding: args.embedding.clone().map(|records| uorust::Embedding {
+            records,
+            configurations: args.configuration.clone(),
+        }),
     })
 }
 

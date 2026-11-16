@@ -43,7 +43,7 @@ use std::collections::BTreeMap;
 use std::path::Path;
 
 pub use error::UorustError;
-pub use project::Options;
+pub use project::{Embedding, Options};
 pub use route::{classify, respond, Route, Routing, REQUEST_LIMIT, ROUTES};
 
 /// The name of the file that lists what a projection wrote, with digests.
@@ -86,7 +86,19 @@ fn project_workspace_here(
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
     };
-    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref())?;
+    // The digest of the workspace's sources, which the embedding's records
+    // must state to be joined.
+    let source = match &options.embedding {
+        Some(_) => Some(shard::source_digest(root)?),
+        None => None,
+    };
+    let mut files = project::project(
+        &workspace,
+        &syntax,
+        options,
+        dumps.as_ref(),
+        source.as_deref(),
+    )?;
     let manifest: String = files
         .iter()
         .map(|(path, bytes)| format!("{}  {path}\n", project::sha(bytes)))
