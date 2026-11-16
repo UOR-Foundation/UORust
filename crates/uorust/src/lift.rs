@@ -1294,14 +1294,8 @@ impl Types {
         // A lifetime parameter says how long a borrow lives, which a value
         // of LexLean does not have: it is erased. A type or const parameter
         // is not.
-        let generic = sig
-            .generics
-            .iter()
-            .any(|p| !matches!(p, rs::GenericParam::Lifetime(_)));
-        if generic || sig.asyncness || sig.unsafety || sig.variadic {
-            return Err(Residue::Signature(
-                "generic, async, unsafe or variadic".to_string(),
-            ));
+        if let Some(what) = unread_signature(sig) {
+            return Err(Residue::Signature(what));
         }
         // The type `Self` names: none in a default method, where it is each
         // implementing type.
@@ -11617,6 +11611,52 @@ pub(crate) fn acceptance(
     }
 }
 
+/// What of a signature the lift does not read, each part named, or `None`
+/// when it reads all of it. A type or const parameter makes the function
+/// one per instantiation, and an `async`, `unsafe` or variadic function
+/// is not a total function of its arguments' values. A lifetime parameter
+/// says how long a borrow lives, which a value of LexLean does not have:
+/// it is erased.
+fn unread_signature(sig: &rs::Signature) -> Option<String> {
+    let mut parts = Vec::new();
+    let named = |kind: &str, names: Vec<&String>| {
+        let names: Vec<&str> = names.iter().map(|n| n.as_str()).collect();
+        format!("generic over {kind} {}", names.join(", "))
+    };
+    let types: Vec<&String> = sig
+        .generics
+        .iter()
+        .filter_map(|p| match p {
+            rs::GenericParam::Type(n) => Some(n),
+            _ => None,
+        })
+        .collect();
+    let consts: Vec<&String> = sig
+        .generics
+        .iter()
+        .filter_map(|p| match p {
+            rs::GenericParam::Const(n) => Some(n),
+            _ => None,
+        })
+        .collect();
+    if !types.is_empty() {
+        parts.push(named("type parameters", types));
+    }
+    if !consts.is_empty() {
+        parts.push(named("const parameters", consts));
+    }
+    for (holds, what) in [
+        (sig.asyncness, "async"),
+        (sig.unsafety, "unsafe"),
+        (sig.variadic, "variadic"),
+    ] {
+        if holds {
+            parts.push(what.to_string());
+        }
+    }
+    (!parts.is_empty()).then(|| parts.join(", "))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -12482,8 +12522,33 @@ mod tests {
             )
             .err(),
             Some(Residue::Signature(
-                "generic, async, unsafe or variadic".to_string()
+                "generic over type parameters T".to_string()
             ))
         );
+    }
+
+    // Class: calls the language resolves by type (kai, round 3): a
+    // signature the lift does not read says which part.
+
+    #[test]
+    fn an_unread_signature_names_each_part_that_stops_it() {
+        let types = Types::default();
+        let reason = |text: &str| method_signature(text, None, &types).err();
+        let row = |s: &str| Some(Residue::Signature(s.to_string()));
+        assert_eq!(
+            reason("fn pick<T, U, const N: usize>(t: T) -> u8 { 1 }"),
+            row("generic over type parameters T, U, generic over const parameters N")
+        );
+        assert_eq!(reason("async fn wait() -> u8 { 1 }"), row("async"));
+        assert_eq!(reason("unsafe fn raw() -> u8 { 1 }"), row("unsafe"));
+        assert_eq!(
+            reason("async unsafe fn both() -> u8 { 1 }"),
+            row("async, unsafe")
+        );
+        // A lifetime parameter is erased.
+        assert!(!matches!(
+            reason("fn first<'a>(x: &'a u8) -> u8 { *x }"),
+            Some(Residue::Signature(_))
+        ));
     }
 }
