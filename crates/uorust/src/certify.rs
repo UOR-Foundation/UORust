@@ -1590,7 +1590,7 @@ pub fn project_identity(input: &Input<'_>, compiler: &Compiler) -> Result<String
 /// file <sha256> <path>           one per file of [`project_files`]
 /// <line>                         one per line of [`source_packages`]
 /// frame <module> <sha256>        Behavior's and Prelude's lines outside declarations
-/// module <module> <sha256>       any other module of the project either imports, whole
+/// module <module> <sha256>       any other module of the project their imports reach, whole
 /// package <name> <version>       the package the request names
 /// root <prefix>.Behavior.<name>  the production root
 /// declaration <Module::name> <sha256>   one per declaration of the closure
@@ -1667,15 +1667,35 @@ pub fn closure_kappas(
                 .map(|(n, t)| (format!("{module}::{n}"), t)),
         );
     }
-    for module in imported {
+    // A module is bound whole with every module its own imports reach: the
+    // compiler renders a root through each of them, so one read only at the
+    // first step would leave a body two imports away in no identity.
+    let mut reached: BTreeMap<String, String> = BTreeMap::new();
+    let mut pending: Vec<String> = imported.into_iter().collect();
+    while let Some(module) = pending.pop() {
+        if reached.contains_key(&module) {
+            continue;
+        }
         let path = projection
             .join("src")
             .join(format!("{}.lex.tex", module.replace('.', "/")));
         let digest = match std::fs::read(&path) {
-            Ok(bytes) => crate::project::sha(&bytes),
+            Ok(bytes) => {
+                pending.extend(
+                    String::from_utf8_lossy(&bytes)
+                        .lines()
+                        .filter_map(|l| l.trim().strip_prefix("\\importmodule{")?.strip_suffix('}'))
+                        .filter(|m| !modules.contains_key(*m))
+                        .map(str::to_string),
+                );
+                crate::project::sha(&bytes)
+            }
             Err(e) if e.kind() == std::io::ErrorKind::NotFound => "absent".to_string(),
             Err(e) => return Err(io(&path, e)),
         };
+        reached.insert(module, digest);
+    }
+    for (module, digest) in &reached {
         shared.push_str(&format!("module {module} {digest}\n"));
     }
     let declarations = Definitions(all);
@@ -5765,6 +5785,62 @@ mod tests {
         // Rewritten, a manifest keeps the key under this name only.
         let read = Manifest::parse(&path, &first).expect("a manifest");
         assert_eq!(read.to_text(), written);
+        let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    // Class keyed, the refuter's transitive case: a module that only another
+    // module's import reaches.
+    #[test]
+    fn keyed_a_module_reached_through_another_modules_import_is_in_every_roots_identity() {
+        let tmp = scratch("keyed-transitive");
+        let targets = keyed_targets("r1");
+        let behavior = KEYED_BEHAVIOR.replace(
+            "\\importmodule{Prelude}\n",
+            "\\importmodule{Prelude}\n\\importmodule{Helpers}\n",
+        );
+        assert_ne!(behavior, KEYED_BEHAVIOR);
+        let ids = |name: &str, deep: &str, apart: &str| {
+            let dir = tmp.join(name);
+            keyed_projection(&dir, &behavior, KEYED_PRELUDE);
+            let write = |module: &str, text: &str| {
+                std::fs::write(dir.join("src").join(format!("{module}.lex.tex")), text)
+                    .expect("a module");
+            };
+            write(
+                "Helpers",
+                "\\begin{lexlean}{Helpers}\n\\importmodule{Deep}\n\\end{lexlean}\n",
+            );
+            write("Deep", deep);
+            write("Apart", apart);
+            let (profile, register) = (keyed_profile(), keyed_register());
+            let input = Input {
+                profile: &profile,
+                projection: &dir,
+                register: &register,
+                targets: &targets,
+            };
+            closure_kappas(
+                &input,
+                &profile.roots(&register),
+                &keyed_compiler(KEYED_COMPILER),
+            )
+            .expect("identities")
+        };
+        // Deep imports Helpers back, so the walk must end on a cycle.
+        let and = "\\begin{lexlean}{Deep}\n\\importmodule{Helpers}\ncore a b = (a && b)\n\\end{lexlean}\n";
+        let base = ids("base", and, "one\n");
+        assert!(!base.is_empty());
+        assert_eq!(ids("again", and, "one\n"), base);
+        // Helpers alone imports Deep: its body is in every root's identity.
+        let or = and.replace("&&", "||");
+        for (def, id) in &ids("or", &or, "one\n") {
+            assert_ne!(
+                &base[def], id,
+                "{def} keeps its identity though Deep changed"
+            );
+        }
+        // A module no import reaches is the project's identity's, not a root's.
+        assert_eq!(ids("apart", and, "two\n"), base);
         let _ = std::fs::remove_dir_all(tmp);
     }
 
