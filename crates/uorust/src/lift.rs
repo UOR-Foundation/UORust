@@ -16020,8 +16020,8 @@ mod tests {
 
     fn mutation_cells() -> Types {
         types_of(
-            "struct Model { root: RefCell<Vec<u32>>, hits: Cell<u32>, \
-             lock: std::sync::Mutex<u32>, name: String } \
+            "struct Shelf { books: RefCell<Vec<u32>>, loans: Cell<u32>, \
+             latch: std::sync::Mutex<u32>, label: String } \
              struct Shared { inner: Rc<RefCell<u32>> }",
         )
     }
@@ -16030,12 +16030,12 @@ mod tests {
     fn mutation_a_cell_field_holds_its_content() {
         let types = mutation_cells();
         assert_eq!(
-            fields(&types, "Model"),
+            fields(&types, "Shelf"),
             [
-                field("root", Ty::List(Box::new(Ty::Nat(Some(32))))),
-                field("hits", Ty::Nat(Some(32))),
-                field("lock", Ty::Nat(Some(32))),
-                field("name", Ty::Str),
+                field("books", Ty::List(Box::new(Ty::Nat(Some(32))))),
+                field("loans", Ty::Nat(Some(32))),
+                field("latch", Ty::Nat(Some(32))),
+                field("label", Ty::Str),
             ]
         );
         // Another owner of the cell may change it: the alias is the leaf.
@@ -16045,22 +16045,22 @@ mod tests {
              every change"
         );
         let out = lift(
-            "fn size(m: &Model) -> usize { m.root.borrow().len() }",
+            "fn size(m: &Shelf) -> usize { m.books.borrow().len() }",
             &types,
         )
         .expect("lifts");
         assert!(
-            out.contains("(prim length (project m root) : Nat)"),
+            out.contains("(prim length (project m books) : Nat)"),
             "{out}"
         );
-        assert!(lift("fn hits(m: &Model) -> u32 { m.hits.get() }", &types).is_ok());
+        assert!(lift("fn loans(m: &Shelf) -> u32 { m.loans.get() }", &types).is_ok());
         let out = lift(
-            "fn make(name: String) -> Model { Model { root: RefCell::new(Vec::new()), \
-             hits: Cell::new(3), lock: std::sync::Mutex::new(1), name } }",
+            "fn make(label: String) -> Shelf { Shelf { books: RefCell::new(Vec::new()), \
+             loans: Cell::new(3), latch: std::sync::Mutex::new(1), label } }",
             &types,
         )
         .expect("lifts");
-        assert!(out.contains("hits := 3, lock := 1"), "{out}");
+        assert!(out.contains("loans := 3, latch := 1"), "{out}");
     }
 
     #[test]
@@ -16068,59 +16068,59 @@ mod tests {
         let types = mutation_cells();
         let changes = |method: &str, kind: &str, field: &str, read: &str| {
             Err(Residue::Form(format!(
-                "{kind}::{method} on Model.{field}: the lift reads a {kind} only by {read}, and \
+                "{kind}::{method} on Shelf.{field}: the lift reads a {kind} only by {read}, and \
                  changes none, since another borrow of the value would see the change"
             )))
         };
         assert_eq!(
-            lift("fn touch(m: &Model) { m.hits.set(1); }", &types),
-            changes("set", "Cell", "hits", "get")
+            lift("fn touch(m: &Shelf) { m.loans.set(1); }", &types),
+            changes("set", "Cell", "loans", "get")
         );
         assert_eq!(
             lift(
-                "fn push(m: &Model) { m.root.borrow_mut().push(1); }",
+                "fn push(m: &Shelf) { m.books.borrow_mut().push(1); }",
                 &types
             ),
-            changes("borrow_mut", "RefCell", "root", "borrow")
+            changes("borrow_mut", "RefCell", "books", "borrow")
         );
         // `take` is the cell's own, whatever the content's methods are.
         assert_eq!(
             lift(
-                "fn grab(m: &mut Model) -> Vec<u32> { m.root.take() }",
+                "fn grab(m: &mut Shelf) -> Vec<u32> { m.books.take() }",
                 &types
             ),
-            changes("take", "RefCell", "root", "borrow")
+            changes("take", "RefCell", "books", "borrow")
         );
         assert_eq!(
             lift(
-                "fn locked(m: &Model) -> u32 { *m.lock.lock().unwrap() }",
+                "fn locked(m: &Shelf) -> u32 { *m.latch.lock().unwrap() }",
                 &types
             ),
             Err(Residue::Form(
-                "Mutex::lock on Model.lock: a Mutex is shared across threads, and another may \
+                "Mutex::lock on Shelf.latch: a Mutex is shared across threads, and another may \
                  change it between two reads"
                     .to_string()
             ))
         );
         assert_eq!(
             lift(
-                "fn itself(m: &Model) -> usize { let r = &m.root; r.borrow().len() }",
+                "fn itself(m: &Shelf) -> usize { let r = &m.books; r.borrow().len() }",
                 &types
             ),
             Err(Residue::Form(
-                "the RefCell field Model.root as itself: the lift reads a RefCell only by \
+                "the RefCell field Shelf.books as itself: the lift reads a RefCell only by \
                  borrow, and changes none, since another borrow of the value would see the change"
                     .to_string()
             ))
         );
         assert!(lift(
-            "fn bound(m: &Model) -> usize { let Model { root, .. } = m; root.borrow().len() }",
+            "fn bound(m: &Shelf) -> usize { let Shelf { books, .. } = m; books.borrow().len() }",
             &types
         )
         .is_err());
         assert!(lift(
-            "fn other(m: &Model) -> Model { Model { root: m.root.clone(), hits: Cell::new(0), \
-             lock: std::sync::Mutex::new(0), name: String::new() } }",
+            "fn other(m: &Shelf) -> Shelf { Shelf { books: m.books.clone(), loans: Cell::new(0), \
+             latch: std::sync::Mutex::new(0), label: String::new() } }",
             &types
         )
         .is_err());
