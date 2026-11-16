@@ -428,6 +428,7 @@ fn vv_runs_the_sdk_checks_on_both_projections_ue_07() {
     for needle in [
         "check crates/uorust/tests/fixtures/thermostat",
         "cd crates/uorust/tests/fixtures/thermostat-prism && lexlean fmt --check && lexlean lock --check && lexlean verify && prismpm check",
+        "thermostat-prism/library/*/; do (cd \"$lib\" && lexlean fmt --check && lexlean lock --check && prismpm check && prismpm verify) || exit 1; done",
         "project . --out target/uorust-self",
         "cd target/uorust-self && lexlean fmt --check && lexlean lock --check && lexlean verify && prismpm check",
         "--advisories crates/uorust/tests/fixtures/advised/advisory-db",

@@ -19,7 +19,12 @@
 spec = "uorust/frontier/1"
 
 [admission]
-refusals = 1
+refusals = 83
+
+[[reason]]
+reason = "library-root"
+route = "UR-R29"
+refusals = 82
 
 [[reason]]
 reason = "advisories-unconsulted"
@@ -74,6 +79,580 @@ reason = "advisories-unconsulted"
 route = "UR-R21"
 span = "Cargo.lock"
 detail = "no RustSec advisory database was given (--advisories), so no locked package was checked against advisories"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreAHeldPhaseKeepsItsLabel1Root: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreBandsMeasureAndCount4Root: it reaches Behavior::acceptThermoCoreBandsMeasureAndCount4Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreCountersAndSignedReadings1Root: it reaches Behavior::freezing, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreCountersAndSignedReadings2Root: it reaches Behavior::freezing, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreNestedPatternsChooseTheArm3Root: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom0Root: it reaches Behavior::compare_String, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom1Root: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom21Root: it reaches Behavior::acceptThermoCoreRequestsSortByPriorityThenRoom21Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom37Root: it reaches Behavior::acceptThermoCoreRequestsSortByPriorityThenRoom37Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom52Root: it reaches Behavior::opening, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom53Root: it reaches Behavior::opening, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreRequestsSortByPriorityThenRoom8Root: it reaches Behavior::acceptThermoCoreRequestsSortByPriorityThenRoom8Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreTheRosterFoldsAndClamps0Root: it reaches Behavior::acceptThermoCoreTheRosterFoldsAndClamps0Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root acceptThermoCoreTheRosterFoldsAndClamps6Root: it reaches Behavior::acceptThermoCoreTheRosterFoldsAndClamps6Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root allGroupsNamed: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root allNamed: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root annexedRoom: it reaches the type Floor of the mutual inductive block FloorGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root apart: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root atLeast: it reaches Behavior::atLeast, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root booked: it reaches Behavior::booked, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root byReading: it reaches Behavior::byReading, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root cold: it reaches Behavior::cold, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root coldCount: it reaches Behavior::coldCount, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root coldNames: it reaches Behavior::coldNames, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root cutName: it reaches Behavior::cutName, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root describe: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root digitCount: it reaches Behavior::digitCount, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root divider: it reaches Prelude::textRepeat, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root doubledRoom: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root either: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root everyOther: it reaches Behavior::everyOther, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root firstHold: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root firstRooms: it reaches Behavior::firstRooms, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root firstWord: it reaches Behavior::firstWord, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root freezing: it reaches Behavior::freezing, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root hasLine: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root heldTargets: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root hold: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root holdsOff: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root isFinal: it reaches the type Menu, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root isSequence: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root joined: it reaches Behavior::joined, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root labelOr: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root labelled: it reaches Behavior::labelled, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root labels: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root markedRooms: it reaches Behavior::markedRooms, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root missingSchedule: it reaches Behavior::scheduleFile, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root names: it reaches Behavior::names, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root numbered: it reaches Behavior::numbered, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root occupiedTarget: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root opening: it reaches Behavior::opening, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root ownRooms: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root paired: it reaches Behavior::paired, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root pairs: it reaches Behavior::pairs, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root phaseLabel: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root phaseOff: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root phasesOff: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root positions: it reaches Behavior::positions, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root prefixed: it reaches Behavior::prefixed, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root queue: it reaches Behavior::compare_String, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root readingsOf: it reaches Behavior::readingsOf, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root renamed: it reaches Behavior::renamed, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root report: it reaches Behavior::reportLoop1, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root requestedRooms: it reaches Behavior::requestedRooms, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root roll: it reaches Behavior::names, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root roomLabels: it reaches Behavior::roomLabels, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root roomsOf: it reaches Behavior::roomsOf, whose result is a list of elements that are not Copy, which the pinned code generator writes from borrowed elements without a clone"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root roomsUntilStop: it reaches Behavior::roomsUntilStop, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root sameZone: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root scheduleFile: it reaches Behavior::scheduleFile, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root scheduleRooms: it reaches Behavior::scheduleRooms, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root signKind: it reaches Behavior::signKind, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root singleLabel: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root sortsBefore: it reaches Behavior::compare_String, which calls the primitive less_than, a call of LexLean's collections runtime the pinned exporter leaves unresolved"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root spareRoom: it reaches Behavior::spareRoom, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root spelled: it reaches Behavior::spelled, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root trimmed: it reaches Behavior::trimmed, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root ups: it reaches Behavior::ups, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root urgentRooms: it reaches Behavior::urgentRooms, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root validate: it reaches the type Phase of the mutual inductive block PhaseGroup, for which the pinned code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root zoneHeats: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root zoneRooms: it reaches the type Zone, which is defined in terms of itself, and the pinned code generator renders a recursive type only under another memory profile than the library's"
 
 [[residue]]
 status = "open"

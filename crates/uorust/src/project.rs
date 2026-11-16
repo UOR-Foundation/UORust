@@ -13,6 +13,8 @@ use crate::lift::{self, Candidate, Residue, Ty, Types};
 use crate::register::{queue_row, ranked, Register};
 use crate::UorustError;
 
+mod library;
+
 /// What a projection is parameterised by beyond the workspace.
 #[derive(Clone, Debug)]
 pub struct Options {
@@ -373,7 +375,14 @@ pub(crate) fn project(
     let mir = dumps.zip(options.mir.as_ref());
     let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
     let supply = supply(&ctx);
-    let library = library(ws, &prefix, &behavior, &mut notes);
+    // What a library package offers by Rust's own rule: its `pub` functions.
+    let public: BTreeSet<String> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.func(r).public)
+        .map(|r| ctx.path(r))
+        .collect();
+    let libraries = library::libraries(ws, &prefix, &behavior, &public, &mut notes);
     // The κ of every function of product code: the question its row answers.
     let kappas: BTreeMap<String, String> = ctx
         .all_fns()
@@ -401,14 +410,28 @@ pub(crate) fn project(
     modules.push(quality);
     modules.push(behavior);
     modules.push(supply);
-    modules.extend(library);
     // LexLean refuses a semantic module with no declaration (LLT4001), and a
     // workspace with nothing to lift (a fresh `cargo new`) leaves Behavior so.
     modules.retain(|m| !m.decls.is_empty());
 
     let mut files: BTreeMap<String, Vec<u8>> = BTreeMap::new();
+    // The library profile's type belongs to the library projects alone: a
+    // project with no library value states no library.
+    let source = |name: &str| {
+        Module {
+            name: name.into(),
+            glossaries: Vec::new(),
+            imports: Vec::new(),
+            title: "",
+            decls: Vec::new(),
+        }
+        .path()
+    };
+    let (library_model, prelude) = (source(library::LIBRARY_MODEL), source(lift::PRELUDE));
     for (path, bytes) in crate::assets::FIXED {
-        files.insert((*path).to_string(), bytes.as_bytes().to_vec());
+        if *path != library_model {
+            files.insert((*path).to_string(), bytes.as_bytes().to_vec());
+        }
     }
     let mut entrypoints: Vec<String> = files
         .keys()
@@ -442,8 +465,66 @@ pub(crate) fn project(
         files.insert(path, text.into_bytes());
     }
     entrypoints.sort();
-    let toml_name: String = options
-        .name
+    let toolchain = files.get("lean-toolchain").cloned().unwrap_or_default();
+    files.extend(config(
+        &prefix,
+        &options.name,
+        &entrypoints,
+        &toolchain,
+        &ctx.limits,
+    ));
+    // Each library project beside the workspace project: the fixed files a
+    // LexLean project of the engine's lexicon needs, its closure and its
+    // value, each module within the same limit.
+    for lib in &libraries {
+        let dir = format!("{}/{}/", library::LIBRARIES, lib.package);
+        let mut own: BTreeMap<String, Vec<u8>> = crate::assets::FIXED
+            .iter()
+            .filter(|(path, _)| {
+                !path.starts_with("src/") || *path == library_model || *path == prelude
+            })
+            .map(|(path, bytes)| ((*path).to_string(), bytes.as_bytes().to_vec()))
+            .collect();
+        let mut entrypoints: Vec<String> = own
+            .keys()
+            .filter(|p| p.ends_with(MODULE_SUFFIX))
+            .cloned()
+            .collect();
+        let modules = [lib.behavior.clone(), lib.value.clone()];
+        for (path, text) in sized(&modules, ctx.limits.max_file_bytes(), &|_| false) {
+            entrypoints.push(path.clone());
+            own.insert(path, text.into_bytes());
+        }
+        entrypoints.sort();
+        own.extend(config(
+            &prefix,
+            &lib.package,
+            &entrypoints,
+            &toolchain,
+            &ctx.limits,
+        ));
+        files.extend(
+            own.into_iter()
+                .map(|(path, bytes)| (format!("{dir}{path}"), bytes)),
+        );
+    }
+    within_limit(&files)?;
+    Ok(files)
+}
+
+/// The project files of one LexLean and PrismPM project named `name` (in
+/// TOML, each character outside ASCII letters and digits a hyphen) over
+/// `entrypoints`, with the engine's lexicon sources and the Lean toolchain
+/// pin `toolchain`, stating `limits`: the workspace project and each
+/// library project are written by this one function.
+fn config(
+    prefix: &str,
+    name: &str,
+    entrypoints: &[String],
+    toolchain: &[u8],
+    limits: &crate::limits::Limits,
+) -> Vec<(String, Vec<u8>)> {
+    let toml_name: String = name
         .chars()
         .map(|c| {
             if c.is_ascii_alphanumeric() {
@@ -469,7 +550,7 @@ pub(crate) fn project(
             .map(|e| format!("\"{e}\""))
             .collect::<Vec<_>>()
             .join(", "),
-        crate::limits::Limits::table_text(&ctx.limits.lexlean)
+        crate::limits::Limits::table_text(&limits.lexlean)
     );
     let lakefile = format!(
         "name = \"{prefix}\"\nversion = \"0.1.0\"\ndefaultTargets = [\"{prefix}\"]\n\n[[lean_lib]]\nname = \"{prefix}\"\n"
@@ -477,7 +558,6 @@ pub(crate) fn project(
     let manifest = format!(
         "{{\"version\":\"1.2.0\",\"packagesDir\":\".lake/packages\",\"packages\":[],\"name\":\"{prefix}\",\"lakeDir\":\".lake\",\"fixedToolchain\":false}}\n"
     );
-    let toolchain = files.get("lean-toolchain").cloned().unwrap_or_default();
     let lock = format!(
         "spec = \"lexlean/lock/2\"\nlanguage = \"1.2\"\n\
          compiler_semantics = \"{}\"\n\
@@ -489,26 +569,26 @@ pub(crate) fn project(
         sha(lexlean.as_bytes()),
         sha(manifest.as_bytes()),
         sha(lakefile.as_bytes()),
-        sha(&toolchain),
+        sha(toolchain),
         crate::assets::LOCK_PACKAGES
     );
     let prismpm = format!(
         "spec = \"prismpm/project/1\"\nproject = \"{prefix}\"\nlexlean_project = \"lexlean.toml\"\n\
          build_root = \".prism\"\n\n{}",
-        crate::limits::Limits::table_text(&ctx.limits.prismpm)
+        crate::limits::Limits::table_text(&limits.prismpm)
     );
-    files.insert(LEXLEAN.into(), lexlean.into_bytes());
-    files.insert("lexlean.lock".into(), lock.into_bytes());
-    files.insert("lakefile.toml".into(), lakefile.into_bytes());
-    files.insert("lake-manifest.json".into(), manifest.into_bytes());
-    files.insert("prismpm.toml".into(), prismpm.into_bytes());
-    files.insert(".gitattributes".into(), b"* -text\n".to_vec());
-    files.insert(
-        ".gitignore".into(),
-        b"/.lexlean/\n/.prism/\n/.lake/\n".to_vec(),
-    );
-    within_limit(&files)?;
-    Ok(files)
+    vec![
+        (LEXLEAN.into(), lexlean.into_bytes()),
+        ("lexlean.lock".into(), lock.into_bytes()),
+        ("lakefile.toml".into(), lakefile.into_bytes()),
+        ("lake-manifest.json".into(), manifest.into_bytes()),
+        ("prismpm.toml".into(), prismpm.into_bytes()),
+        (".gitattributes".into(), b"* -text\n".to_vec()),
+        (
+            ".gitignore".into(),
+            b"/.lexlean/\n/.prism/\n/.lake/\n".to_vec(),
+        ),
+    ]
 }
 
 /// The LexLean compiler semantics a projection locks to: the one UORust's own
@@ -523,168 +603,6 @@ fn compiler_semantics() -> &'static str {
         .and_then(|rest| rest.strip_suffix('"'))
         .expect("app/lexlean.lock names its compiler semantics")
 }
-
-/// The native-library profile's bound on each root list (SPEC 12.6: 1..1024
-/// roots), which PrismPM's projection enforces.
-const LIBRARY_ROOTS: usize = 1024;
-
-/// The crate's profile when it is a library (SPEC 12.6): the one
-/// `Foundation.Library.V1.Model::NativeLibrary` value of the project, its
-/// metadata from Cargo, its exports every lifted definition and its
-/// acceptance roots the closed Boolean claims its tests make (UR-R29).
-///
-/// A slot Cargo leaves empty is inferred where Cargo itself defines the
-/// default: the homepage is the repository when only that is declared
-/// (Cargo's manifest reference: a homepage distinct from the source
-/// repository), and the description is the crate doc's summary line, the
-/// text rustdoc and crates.io show for the crate. A slot no rule defines is
-/// an undefined slot in the register, and no profile is written.
-fn library(ws: &Workspace, prefix: &str, behavior: &Module, notes: &mut Notes) -> Option<Module> {
-    let libraries: Vec<&Package> = ws
-        .packages
-        .iter()
-        .filter(|p| p.targets.iter().any(|t| t.kind == TargetKind::Lib))
-        .collect();
-    let [package] = libraries.as_slice() else {
-        if libraries.len() > 1 {
-            for package in libraries {
-                notes.refusals.insert(Refusal::UndefinedSlot {
-                    package: package.name.clone(),
-                    slot: "library",
-                    reason: "a project holds one NativeLibrary value and the workspace has \
-                             more than one library package"
-                        .to_string(),
-                });
-            }
-        }
-        return None;
-    };
-    let crate_doc = package
-        .targets
-        .iter()
-        .find(|t| t.kind == TargetKind::Lib)
-        .and_then(|t| package.files.iter().find(|f| f.rel == t.src))
-        .map(|f| summary(&f.doc))
-        .unwrap_or_default();
-    let description = if package.description.trim().is_empty() {
-        crate_doc
-    } else {
-        package.description.clone()
-    };
-    let homepage = if package.homepage.is_empty() {
-        package.repository.clone()
-    } else {
-        package.homepage.clone()
-    };
-    // The library's exports are the definitions its own functions lifted to
-    // (their crate path begins with the lib target's crate name) and its
-    // acceptance roots; every acceptance root is an export (SPEC 12.6).
-    let lib_crate = package
-        .targets
-        .iter()
-        .find(|t| t.kind == TargetKind::Lib)
-        .map(|t| format!("{}::", t.name.replace('-', "_")))
-        .unwrap_or_default();
-    let defined: BTreeSet<&str> = behavior
-        .decls
-        .iter()
-        .filter_map(|decl| match decl {
-            Decl::Definition { name, .. } => Some(name.as_str()),
-            _ => None,
-        })
-        .collect();
-    let in_behavior = |q: &str| q.strip_prefix(&qualified(BEHAVIOR, "")).map(str::to_string);
-    let mut acceptance: Vec<String> = notes
-        .roots
-        .get(&package.name)
-        .into_iter()
-        .flatten()
-        .filter(|root| defined.contains(root.as_str()))
-        .map(|root| format!("{prefix}.{BEHAVIOR}.{root}"))
-        .collect();
-    let mut exports: Vec<String> = notes
-        .lifted
-        .iter()
-        .filter(|(path, _)| path.starts_with(&lib_crate))
-        .filter_map(|(_, (_, q, _))| in_behavior(q))
-        .filter(|name| defined.contains(name.as_str()))
-        .map(|name| format!("{prefix}.{BEHAVIOR}.{name}"))
-        .chain(acceptance.iter().cloned())
-        .collect();
-    exports.dedup();
-    exports.sort();
-    exports.dedup();
-    acceptance.sort();
-    let mut undefined = Vec::new();
-    for (slot, value) in [
-        ("description", &description),
-        ("repository", &package.repository),
-        ("homepage", &homepage),
-    ] {
-        if value.trim().is_empty() {
-            undefined.push((
-                slot,
-                format!("Cargo declares no {slot} and no rule infers one"),
-            ));
-        }
-    }
-    for (slot, roots) in [("exportRoots", &exports), ("acceptanceRoots", &acceptance)] {
-        if roots.is_empty() {
-            undefined.push((slot, format!("the crate yields no {slot}")));
-        } else if roots.len() > LIBRARY_ROOTS {
-            undefined.push((
-                slot,
-                format!(
-                    "the crate yields {} {slot}, past the profile's {LIBRARY_ROOTS}",
-                    roots.len()
-                ),
-            ));
-        }
-    }
-    if !undefined.is_empty() {
-        for (slot, reason) in undefined {
-            notes.refusals.insert(Refusal::UndefinedSlot {
-                package: package.name.clone(),
-                slot,
-                reason,
-            });
-        }
-        return None;
-    }
-    let list = |roots: &[String]| {
-        crate::embed::term_list(
-            &roots.iter().map(|r| string(r)).collect::<Vec<_>>(),
-            "String",
-        )
-    };
-    let body = format!(
-        "(record {LIBRARY_MODEL}::NativeLibrary {{profile := \"prismpm/native-library/1\", \
-         name := {}, cargoName := {}, cargoVersion := {}, cargoDescription := {}, \
-         cargoRepository := {}, cargoHomepage := {}, exportRoots := {}, acceptanceRoots := {}}})",
-        string(&package.name),
-        string(&package.name),
-        string(&package.version),
-        string(&description),
-        string(&package.repository),
-        string(&homepage),
-        list(&exports),
-        list(&acceptance),
-    );
-    Some(Module {
-        name: "Library".into(),
-        glossaries: vec![BOOL, NAT],
-        imports: vec![LIBRARY_MODEL.into()],
-        title: "Boolean",
-        decls: vec![Decl::value(
-            "library",
-            format!("{LIBRARY_MODEL}::NativeLibrary"),
-            body,
-        )],
-    })
-}
-
-/// The SDK module that declares the native-library profile's type.
-const LIBRARY_MODEL: &str = "Foundation.Library.V1.Model";
 
 pub(crate) fn sha(bytes: &[u8]) -> String {
     Sha256::digest(bytes)
@@ -7710,6 +7628,210 @@ mod tests {
         assert!(
             method.starts_with("[[residue]]") && method.contains("reason = \"collision\""),
             "{method}"
+        );
+    }
+
+    // Class: the library route (one library project per library package).
+
+    /// The projection of a workspace of library packages, each `(name, lib
+    /// source, test source)`, every package with a description and a
+    /// repository so that only roots decide its profile.
+    fn library_route_projection(
+        tag: &str,
+        packages: &[(&str, &str, &str)],
+    ) -> BTreeMap<String, Vec<u8>> {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-libroute-{tag}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let members: Vec<String> = packages
+            .iter()
+            .map(|(n, _, _)| format!("\"{n}\""))
+            .collect();
+        let mut files = vec![(
+            "Cargo.toml".to_string(),
+            format!(
+                "[workspace]\nmembers = [{}]\nresolver = \"2\"\n",
+                members.join(", ")
+            ),
+        )];
+        for (name, lib, test) in packages {
+            files.push((
+                format!("{name}/Cargo.toml"),
+                format!(
+                    "[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+                     rust-version = \"1.70\"\ndescription = \"The {name} part.\"\n\
+                     repository = \"https://example.org/{name}\"\n"
+                ),
+            ));
+            files.push((format!("{name}/src/lib.rs"), (*lib).to_string()));
+            if !test.is_empty() {
+                files.push((format!("{name}/tests/claims.rs"), (*test).to_string()));
+            }
+        }
+        for (path, body) in &files {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+            std::fs::write(path, body).expect("a file");
+        }
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+        };
+        let projected = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        projected
+    }
+
+    fn library_route_text(files: &BTreeMap<String, Vec<u8>>, path: &str) -> String {
+        String::from_utf8(files.get(path).cloned().unwrap_or_default()).expect("text")
+    }
+
+    #[test]
+    fn library_route_each_library_package_is_a_project_of_its_own_closure() {
+        let files = library_route_projection(
+            "two",
+            &[
+                (
+                    "alpha",
+                    "//! Alpha.\n\n/// Big.\npub fn big(n: u8) -> bool {\n    n > 3\n}\n",
+                    "#[test]\nfn big_is_big() {\n    assert!(alpha::big(5));\n}\n",
+                ),
+                (
+                    "beta",
+                    "//! Beta.\n\n/// Small.\npub fn small(n: u8) -> bool {\n    n < 3\n}\n",
+                    "#[test]\nfn small_is_small() {\n    assert!(beta::small(1));\n}\n",
+                ),
+            ],
+        );
+        let frontier = library_route_text(&files, "frontier.toml");
+        assert!(!frontier.contains("undefined-slot"), "{frontier}");
+        // The workspace project states no library; each package's does.
+        assert!(!files.contains_key("src/Library.lex.tex"));
+        assert!(!files.contains_key("src/Foundation/Library/V1/Model.lex.tex"));
+        assert!(!library_route_text(&files, "lexlean.toml").contains("Library"));
+        for (name, own, other) in [("alpha", "big", "small"), ("beta", "small", "big")] {
+            let dir = format!("library/{name}");
+            let value = library_route_text(&files, &format!("{dir}/src/Library.lex.tex"));
+            assert!(
+                value.contains(&format!("cargoName := \"{name}\"")),
+                "{value}"
+            );
+            assert!(value.contains(&format!("\"W.Behavior.{own}\"")), "{value}");
+            assert!(
+                !value.contains(&format!("\"W.Behavior.{other}\"")),
+                "{value}"
+            );
+            let behavior = library_route_text(&files, &format!("{dir}/src/Behavior.lex.tex"));
+            assert!(behavior.contains(&format!("name: {own},")), "{behavior}");
+            assert!(!behavior.contains(&format!("name: {other},")), "{behavior}");
+            for file in [
+                "prismpm.toml",
+                "lexlean.lock",
+                "lakefile.toml",
+                "lean-toolchain",
+            ] {
+                assert!(files.contains_key(&format!("{dir}/{file}")), "{dir}/{file}");
+            }
+            let config = library_route_text(&files, &format!("{dir}/lexlean.toml"));
+            assert!(config.contains("src/Library.lex.tex"), "{config}");
+            assert!(!config.contains("src/Architecture.lex.tex"), "{config}");
+        }
+    }
+
+    #[test]
+    fn library_route_a_package_with_no_repository_is_refused_naming_the_field() {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-libroute-norepo-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(dir.join("src")).expect("a workspace");
+        std::fs::create_dir_all(dir.join("tests")).expect("a workspace");
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"eta\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\ndescription = \"The eta part.\"\n\n[workspace]\n",
+        )
+        .expect("a manifest");
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "//! Eta.\n\n/// Big.\npub fn big(n: u8) -> bool {\n    n > 3\n}\n",
+        )
+        .expect("a library");
+        std::fs::write(
+            dir.join("tests/claims.rs"),
+            "#[test]\nfn big_is_big() {\n    assert!(eta::big(5));\n}\n",
+        )
+        .expect("a test");
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        let frontier = library_route_text(&files, "frontier.toml");
+        assert!(
+            frontier.contains(
+                "its Cargo.toml states no `package.repository`; the SDK's native-library \
+                 profile requires cargoRepository"
+            ),
+            "{frontier}"
+        );
+        assert!(
+            frontier.contains("states no `package.homepage` or `package.repository`"),
+            "{frontier}"
+        );
+        assert!(
+            !frontier.contains("requires cargoDescription"),
+            "{frontier}"
+        );
+        assert!(!files.keys().any(|p| p.starts_with("library/")));
+    }
+
+    #[test]
+    fn library_route_a_package_with_no_claim_says_which_root_list_is_empty() {
+        let files = library_route_projection(
+            "noclaim",
+            &[(
+                "gamma",
+                "//! Gamma.\n\n/// Big.\npub fn big(n: u8) -> bool {\n    n > 3\n}\n",
+                "",
+            )],
+        );
+        let frontier = library_route_text(&files, "frontier.toml");
+        assert!(
+            frontier.contains(
+                "the library profile's acceptanceRoots is undefined: its tests state no \
+                 closed claim over its lifted functions"
+            ),
+            "{frontier}"
+        );
+        assert!(!files.keys().any(|p| p.starts_with("library/")));
+    }
+
+    #[test]
+    fn library_route_a_refused_root_is_a_row_and_the_rest_is_kept() {
+        let files = library_route_projection(
+            "refused",
+            &[(
+                "delta",
+                "//! Delta.\n\n/// Big.\npub fn big(n: u8) -> bool {\n    n > 3\n}\n\n\
+                 /// Applied.\npub fn applied(f: &dyn Fn(u8) -> u8, n: u8) -> u8 {\n    f(n)\n}\n",
+                "#[test]\nfn big_is_big() {\n    assert!(delta::big(5));\n}\n",
+            )],
+        );
+        let frontier = library_route_text(&files, "frontier.toml");
+        let value = library_route_text(&files, "library/delta/src/Library.lex.tex");
+        assert!(value.contains("\"W.Behavior.big\""), "{value}\n{frontier}");
+        assert!(!value.contains("\"W.Behavior.applied\""), "{value}");
+        assert!(frontier.contains("reason = \"library-root\""), "{frontier}");
+        assert!(
+            frontier.contains("does not take the root applied: it reaches Behavior::applied"),
+            "{frontier}"
         );
     }
 }
