@@ -94,6 +94,10 @@ struct Model {
     /// module that may write it, by package, file and inline module, as
     /// the language resolves it.
     type_readings: BTreeMap<(usize, usize, String), BTreeMap<String, crate::names::TypeReading>>,
+    /// The public type aliases the registry crates the packages depend on
+    /// declare at their roots, by path (`krate::Alias`), read from each
+    /// crate's source at the version Cargo.lock pins.
+    crate_aliases: BTreeMap<String, crate::ast::Alias>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -175,15 +179,7 @@ impl Model {
     /// it borrows; a head the lift does not read (`RefCell<big::BigX>`) is
     /// the leaf whatever it holds.
     fn registry_crate(&self, leaf: &str) -> Option<String> {
-        let mut head = leaf.trim_start();
-        while let Some(rest) = head.strip_prefix('&') {
-            let rest = rest.trim_start();
-            head = rest.strip_prefix("mut ").unwrap_or(rest).trim_start();
-        }
-        let end = head
-            .find(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
-            .unwrap_or(head.len());
-        let (krate, _) = head[..end].split_once("::")?;
+        let (krate, _) = leaf_head(leaf).split_once("::")?;
         self.ws
             .packages
             .iter()
@@ -200,7 +196,6 @@ impl Model {
     /// A function the lift refused: residue, or a foreign row when what
     /// stopped it is a type of a registry dependency.
     fn record_residue(&self, notes: &mut Notes, r: FnRef, span: Span, reason: Residue) {
-        let package = &self.ws.packages[r.pkg];
         if let Residue::Type(ty) = &reason {
             // The leaf decides the row. A chain through the fields of the
             // workspace's types names its leaf as the file that declares
@@ -208,7 +203,9 @@ impl Model {
             // signature writes is named as its own file binds it.
             let dep = match chain_leaf(ty) {
                 Some(leaf) => self.registry_crate(leaf),
-                None => foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)),
+                None => self
+                    .registry_crate(ty)
+                    .or_else(|| self.bound_crate(r, leaf_head(ty))),
             };
             if let Some(dep) = dep {
                 let detail = format!(
@@ -346,7 +343,23 @@ pub(crate) fn project(
         registry: BTreeMap::new(),
         registry_paths: BTreeMap::new(),
         type_readings: BTreeMap::new(),
+        crate_aliases: BTreeMap::new(),
     };
+    let registry_deps: BTreeSet<String> = ws
+        .packages
+        .iter()
+        .flat_map(|p| &p.deps)
+        .filter(|d| d.path.is_none())
+        .map(|d| d.name.replace('-', "_"))
+        .collect();
+    let cargo_home = crate::registry::cargo_home();
+    for krate in &registry_deps {
+        // A crate whose source is not read declares no alias the lift
+        // reads: a type it names stays a type of that crate.
+        if let Ok(aliases) = crate::registry::crate_aliases(&cargo_home, krate, &ws.lock) {
+            ctx.crate_aliases.extend(aliases);
+        }
+    }
     for (pkg, package) in ws.packages.iter().enumerate() {
         let mut declared: BTreeMap<&str, usize> = BTreeMap::new();
         for file in &package.files {
@@ -3370,6 +3383,7 @@ fn behavior(
                             (n.clone(), alias)
                         })
                 })
+                .chain(ctx.crate_aliases.clone())
                 .collect()
         })
         .collect();
@@ -3378,9 +3392,11 @@ fn behavior(
     let expanded = |pkg: usize, ty: &crate::ast::RustType| {
         ty.expanded(&type_aliases[pkg], type_aliases[pkg].len())
     };
-    // A field's type as the file that declares it writes it: a bare name
-    // its `use` binds to a registry crate's item is that item's path, so
-    // the chain through the field ends at the crate's type, by its crate.
+    // A type as the file that writes it names it, a field's or a
+    // signature's: a bare name its `use` binds to a registry crate's item
+    // is that item's path, so the chain through a field ends at the
+    // crate's type, by its crate, and an alias the crate declares reads as
+    // what it stands for.
     let declared_in = |pkg: usize, fi: usize, ty: &crate::ast::RustType| {
         let file = &ws.packages[pkg].files[fi];
         let ty = ty.localized(&file.imports);
@@ -3963,11 +3979,11 @@ fn behavior(
         let mut sig = fn_syntax.signature.clone();
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
-                t.ty = expanded(r.pkg, &t.ty.localized(&ctx.file(r).imports));
+                t.ty = declared_in(r.pkg, r.file, &t.ty);
             }
         }
         if let Some(t) = &mut sig.output {
-            *t = expanded(r.pkg, &t.localized(&ctx.file(r).imports));
+            *t = declared_in(r.pkg, r.file, t);
         }
         let formatter = match sig.inputs.as_slice() {
             [crate::ast::FnArg::Receiver { plain: true }, crate::ast::FnArg::Typed(t)]
@@ -5769,6 +5785,20 @@ fn foreign_crate(package: &Package, ty: &str) -> Option<String> {
         .find(|head| deps.contains(head))
 }
 
+/// The path a leaf's text is headed by, without its arguments: what the
+/// lift read first and did not read. A borrow reads as what it borrows.
+fn leaf_head(leaf: &str) -> &str {
+    let mut head = leaf.trim_start();
+    while let Some(rest) = head.strip_prefix('&') {
+        let rest = rest.trim_start();
+        head = rest.strip_prefix("mut ").unwrap_or(rest).trim_start();
+    }
+    let end = head
+        .find(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
+        .unwrap_or(head.len());
+    &head[..end]
+}
+
 /// The leaf of a type residue that is a chain through the fields of the
 /// workspace's types (`Outer.inner: Inner::Some.0: big::BigX`): what follows
 /// the last place, `Type.field` or `Type::Variant.field`, the chain passes
@@ -7495,7 +7525,7 @@ mod tests {
             "use serde_json::Value;\npub fn null(v: Value) -> bool { v.is_null() }\n",
         );
         assert!(
-            frontier.contains("takes or returns Value, a type of the serde_json crate"),
+            frontier.contains("takes or returns serde_json::Value, a type of the serde_json crate"),
             "{frontier}"
         );
     }
@@ -7626,5 +7656,30 @@ mod tests {
         );
         let row = type_names_row(&frontier, "w::keep");
         assert!(row.contains(crate::lift::SHARED_NAME), "{row}");
+    }
+
+    #[test]
+    fn type_names_a_standard_map_with_a_hasher_reads_as_the_unordered_map() {
+        let frontier = resolved_frontier(
+            "hasher-map",
+            "",
+            "use std::collections::{HashMap, HashSet};\nuse std::hash::BuildHasherDefault;\n\
+             pub struct Mix { pub state: u64 }\n\
+             pub struct Index {\n pub at: HashMap<u8, u8, BuildHasherDefault<Mix>>,\n\
+             pub seen: HashSet<u8, BuildHasherDefault<Mix>>,\n}\n\
+             pub fn has(i: &Index, k: u8) -> bool { i.at.contains_key(&k) }\n\
+             pub fn saw(i: &Index, k: u8) -> bool { i.seen.contains(&k) }\n\
+             pub fn keys(i: &Index) -> Vec<u8> { i.at.keys().cloned().collect() }\n",
+        );
+        assert!(
+            type_names_row(&frontier, "w::has").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        assert!(
+            type_names_row(&frontier, "w::saw").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        let keys = type_names_row(&frontier, "w::keys");
+        assert!(keys.contains("whose order is unspecified"), "{keys}");
     }
 }

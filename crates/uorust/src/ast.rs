@@ -90,12 +90,15 @@ impl RustType {
     /// The type with every alias of `aliases` it names replaced by what the
     /// alias stands for. An alias may name another; each expansion counts
     /// against `depth`, the aliases left to expand along one path, so a
-    /// cycle of aliases ends.
+    /// cycle of aliases ends. An alias of the workspace is named by its
+    /// name; one a crate outside it declares, by its path (`krate::Alias`).
     pub(crate) fn expanded(&self, aliases: &BTreeMap<String, Alias>, depth: usize) -> RustType {
         if let TypeKind::Path { qself: false, path } = &self.kind {
-            if let [one] = path.segments.as_slice() {
-                if depth > 0 {
-                    if let Some(alias) = aliases.get(&one.ident) {
+            if let Some((one, prefix)) = path.segments.split_last() {
+                let plain = prefix.iter().all(|s| s.arguments == PathArguments::None);
+                let key: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
+                if depth > 0 && plain {
+                    if let Some(alias) = aliases.get(&key.join("::")) {
                         let args: Vec<RustType> = match &one.arguments {
                             PathArguments::AngleBracketed(args) => args
                                 .iter()

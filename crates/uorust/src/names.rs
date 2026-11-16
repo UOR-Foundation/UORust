@@ -2670,6 +2670,26 @@ impl Names {
     }
 }
 
+/// What the root module of a crate outside the workspace names bare, read
+/// from its library root: each name a `use` binds, with every path a
+/// binding of it names (a name under several `cfg` predicates may have
+/// more than one), and the types the root declares.
+pub(crate) fn root_names(
+    file: &syn::File,
+) -> (BTreeMap<String, BTreeSet<Vec<String>>>, BTreeSet<String>) {
+    let names = FileNames::of(file);
+    let Some(root) = names.modules.get("") else {
+        return (BTreeMap::new(), BTreeSet::new());
+    };
+    let mut uses: BTreeMap<String, BTreeSet<Vec<String>>> = BTreeMap::new();
+    for u in &root.uses {
+        uses.entry(u.name.clone())
+            .or_default()
+            .insert(u.path.clone());
+    }
+    (uses, root.types.keys().cloned().collect())
+}
+
 /// What a type is named by, without its references.
 fn head(ty: &Ty) -> Option<TypeId> {
     match ty {
