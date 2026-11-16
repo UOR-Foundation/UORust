@@ -22,9 +22,10 @@ pub const ROOT_MODULE: &str = "crate";
 /// What `uorust crate` did.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Lifted {
-    /// The bodies embedded and those evaluable, where the crate was
+    /// The bodies embedded, those evaluable and those that leave a callee
+    /// to a dictionary (call something not linked), where the crate was
     /// embedded too.
-    pub embedding: Option<(usize, usize)>,
+    pub embedding: Option<(usize, usize, usize)>,
     /// The bodies the differential check ran and the theorems `lexlean`
     /// verified of them, where it was asked.
     pub differential: Option<(usize, usize)>,
@@ -85,45 +86,96 @@ pub fn dump_module(item: &str, items: &std::collections::BTreeSet<&str>) -> Stri
     }
 }
 
-/// Fetch `name@version` from crates.io into `work`, checked against the
-/// checksum crates.io records, and return its unpacked directory.
-fn fetch(name: &str, version: &str, work: &Path) -> Result<PathBuf, UorustError> {
-    let meta = run(
-        "crates.io",
-        Command::new("curl").args([
-            "-sSfL",
-            "-A",
-            USER_AGENT,
-            &format!("https://crates.io/api/v1/crates/{name}/{version}"),
-        ]),
-    )?;
-    let doc: serde_json::Value = serde_json::from_slice(&meta).map_err(|e| tool("crates.io", e))?;
-    let checksum = doc
-        .pointer("/version/checksum")
-        .and_then(serde_json::Value::as_str)
-        .ok_or_else(|| tool("crates.io", format!("{name}@{version} has no checksum")))?
-        .to_string();
-    let archive = work.join(format!("{name}-{version}.crate"));
-    run(
-        "crates.io download",
-        Command::new("curl").args([
-            "-sSfL",
-            "-A",
-            USER_AGENT,
-            "-o",
-            &archive.display().to_string(),
-            &format!("https://static.crates.io/crates/{name}/{name}-{version}.crate"),
-        ]),
-    )?;
-    let bytes = std::fs::read(&archive).map_err(|e| tool("crates.io download", e))?;
-    let digest: String = Sha256::digest(&bytes)
+/// The directory cargo keeps its registries in: `CARGO_HOME`, else
+/// `~/.cargo`, as cargo itself resolves it.
+fn cargo_home() -> PathBuf {
+    std::env::var_os("CARGO_HOME").map_or_else(
+        || PathBuf::from(std::env::var_os("HOME").unwrap_or_default()).join(".cargo"),
+        PathBuf::from,
+    )
+}
+
+/// The archive of `name@version` that cargo's own cache holds, from any
+/// registry index it has fetched it through.
+fn cached_archive(name: &str, version: &str) -> Option<PathBuf> {
+    let cache = cargo_home().join("registry").join("cache");
+    let file = format!("{name}-{version}.crate");
+    let mut found: Vec<PathBuf> = std::fs::read_dir(cache)
+        .ok()?
+        .filter_map(Result::ok)
+        .map(|e| e.path().join(&file))
+        .filter(|p| p.is_file())
+        .collect();
+    found.sort();
+    found.into_iter().next()
+}
+
+/// The SHA-256 of `bytes`, in lower-case hex, as crates.io and a lock file
+/// record a package's checksum.
+fn sha256_hex(bytes: &[u8]) -> String {
+    Sha256::digest(bytes)
         .iter()
         .map(|b| format!("{b:02x}"))
-        .collect();
+        .collect()
+}
+
+/// Fetch `name@version` into `work`, checked against a checksum, and
+/// return its unpacked directory. With `locked`, the checksum a lock file
+/// records for it, the archive is cargo's cached one where the cache holds
+/// it (no network), and crates.io's otherwise; without, the checksum is the
+/// one crates.io records. An archive of another digest is refused either
+/// way, never replaced.
+fn fetch(
+    name: &str,
+    version: &str,
+    work: &Path,
+    locked: Option<&str>,
+) -> Result<PathBuf, UorustError> {
+    let checksum = match locked {
+        Some(c) => c.to_string(),
+        None => {
+            let meta = run(
+                "crates.io",
+                Command::new("curl").args([
+                    "-sSfL",
+                    "-A",
+                    USER_AGENT,
+                    &format!("https://crates.io/api/v1/crates/{name}/{version}"),
+                ]),
+            )?;
+            let doc: serde_json::Value =
+                serde_json::from_slice(&meta).map_err(|e| tool("crates.io", e))?;
+            doc.pointer("/version/checksum")
+                .and_then(serde_json::Value::as_str)
+                .ok_or_else(|| tool("crates.io", format!("{name}@{version} has no checksum")))?
+                .to_string()
+        }
+    };
+    let archive = work.join(format!("{name}-{version}.crate"));
+    match locked.and_then(|_| cached_archive(name, version)) {
+        Some(cached) => {
+            std::fs::copy(&cached, &archive).map_err(|e| tool("cargo cache", e))?;
+        }
+        None => {
+            run(
+                "crates.io download",
+                Command::new("curl").args([
+                    "-sSfL",
+                    "-A",
+                    USER_AGENT,
+                    "-o",
+                    &archive.display().to_string(),
+                    &format!("https://static.crates.io/crates/{name}/{name}-{version}.crate"),
+                ]),
+            )?;
+        }
+    }
+    let bytes = std::fs::read(&archive).map_err(|e| tool("crates.io download", e))?;
+    let digest = sha256_hex(&bytes);
     if digest != checksum {
         return Err(tool(
             "crates.io download",
-            format!("{name}@{version} is {digest}, crates.io records {checksum}"),
+            format!("{name}@{version} is {digest}, the checksum recorded is {checksum}"),
         ));
     }
     run(
@@ -144,19 +196,36 @@ fn fetch(name: &str, version: &str, work: &Path) -> Result<PathBuf, UorustError>
     Ok(dir)
 }
 
+/// The flags of cargo that select the features `options` names: the
+/// crate's defaults left off where it says so, and the features named.
+fn build_flags(options: &Options<'_>) -> Vec<String> {
+    let mut flags = Vec::new();
+    if options.no_default_features {
+        flags.push("--no-default-features".to_string());
+    }
+    if !options.features.is_empty() {
+        flags.push(format!("--features={}", options.features.join(",")));
+    }
+    flags
+}
+
 /// Dump the MIR of the library of the crate at `dir` on the pinned
 /// toolchain, with this machine's paths resolved away, into one directory
-/// per module under `shards`.
-fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
+/// per module under `shards`, its library built with the features
+/// `options` selects ([`build_flags`]).
+fn dump(dir: &Path, work: &Path, shards: &Path, options: &Options<'_>) -> Result<(), UorustError> {
     let toolchain = format!("+{}", crate::mir::spec::TOOLCHAIN);
     let mir = work.join("mir");
     std::fs::create_dir_all(&mir).map_err(|e| tool("mir", e))?;
+    let selected = build_flags(options);
     // Only the library's own flags carry the dump: `cargo rustc` passes them
     // to the one target.
     run(
         "cargo rustc",
         Command::new("cargo")
-            .args([toolchain.as_str(), "rustc", "--lib", "-q", "--target-dir"])
+            .args([toolchain.as_str(), "rustc", "--lib", "-q"])
+            .args(&selected)
+            .arg("--target-dir")
             .arg(work.join("target"))
             .arg("--")
             .arg("-Zdump-mir=ElaborateBoxDerefs")
@@ -181,10 +250,8 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
     )?)
     .trim()
     .to_string();
-    let cargo_home = std::env::var("CARGO_HOME")
-        .unwrap_or_else(|_| format!("{}/.cargo", std::env::var("HOME").unwrap_or_default()));
     let own = format!("{}/", dir.display());
-    let registry = format!("{cargo_home}/registry/src/");
+    let registry = format!("{}/registry/src/", cargo_home().display());
     let mut files: Vec<PathBuf> = std::fs::read_dir(&mir)
         .map_err(|e| tool("mir", e))?
         .filter_map(Result::ok)
@@ -224,6 +291,36 @@ fn dump(dir: &Path, work: &Path, shards: &Path) -> Result<(), UorustError> {
     Ok(())
 }
 
+/// How `uorust crate` builds, embeds and keeps a crate.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct Options<'a> {
+    /// The rust-src `library` directory of the pinned toolchain: with it,
+    /// the crate's bodies are embedded too.
+    pub library: Option<&'a Path>,
+    /// With `library`, check the embedding against rustc's build.
+    pub differential: bool,
+    /// Library crates to link into the crate's program, `(crate, dumps)`,
+    /// those a linked crate calls before it.
+    pub link: &'a [(String, PathBuf)],
+    /// The features to build the crate with, besides its default ones
+    /// unless `no_default_features`.
+    pub features: &'a [String],
+    /// Build without the crate's default features: with `features`, the
+    /// exact set a consuming workspace's build enables (`default` among
+    /// them where it does).
+    pub no_default_features: bool,
+    /// The checksum a consuming workspace's lock records for the crate: the
+    /// archive must have it, and is cargo's cached one where it is cached.
+    pub checksum: Option<&'a str>,
+    /// The consuming workspace's lock file: the crate's own dependencies
+    /// are resolved at the versions it locks.
+    pub lock: Option<&'a Path>,
+    /// With `library`, the directory the crate's module shards, its
+    /// `target.toml`, its layouts and its `dump.toml` are kept in: what
+    /// `--link <crate>=<dumps>` reads.
+    pub dumps: Option<&'a Path>,
+}
+
 /// Fetch, dump and translate `name@version` and write its register to
 /// `register`, refusing it when a body the register records as translated
 /// is now residue. A module file the crate no longer has is removed.
@@ -231,73 +328,656 @@ pub fn lift_crate(
     name: &str,
     version: &str,
     register: &Path,
-    library: Option<&Path>,
-    differential: bool,
-    link: &[(String, PathBuf)],
+    options: &Options<'_>,
 ) -> Result<Lifted, UorustError> {
     let work = std::env::temp_dir().join(format!("uorust-crate-{name}-{version}"));
     let _ = std::fs::remove_dir_all(&work);
     std::fs::create_dir_all(&work).map_err(|e| tool("work", e))?;
-    let result = (|| {
-        let dir = fetch(name, version, &work)?;
-        let shards = work.join("shards");
-        std::fs::create_dir_all(&shards).map_err(|e| tool("mir", e))?;
-        dump(&dir, &work, &shards)?;
-        let scope = Scope::registry(name, version);
-        let census = census(&scope, &dir, &shards, &[])?;
-        let regressed = core_regressions(register, &census);
-        if !regressed.is_empty() {
-            return Err(tool(
-                &format!("{name}@{version}"),
-                format!(
-                    "a body the register records as translated is now residue: {}",
-                    regressed.join("; ")
-                ),
-            ));
+    let result = fetch(name, version, &work, options.checksum)
+        .and_then(|dir| lift_source(name, version, &dir, &work, register, options));
+    let _ = std::fs::remove_dir_all(&work);
+    result
+}
+
+/// [`lift_crate`] of the crate whose package is unpacked at `dir`, its
+/// work done under `work`.
+fn lift_source(
+    name: &str,
+    version: &str,
+    dir: &Path,
+    work: &Path,
+    register: &Path,
+    options: &Options<'_>,
+) -> Result<Lifted, UorustError> {
+    if options.dumps.is_some() && options.library.is_none() {
+        // The dumps a link reads carry the target the embedding states.
+        return Err(tool(
+            &format!("{name}@{version}"),
+            "kept dumps need the library to embed against",
+        ));
+    }
+    if let Some(lock) = options.lock {
+        std::fs::copy(lock, dir.join("Cargo.lock")).map_err(|e| tool("Cargo.lock", e))?;
+    }
+    let shards = work.join("shards");
+    std::fs::create_dir_all(&shards).map_err(|e| tool("mir", e))?;
+    dump(dir, work, &shards, options)?;
+    let scope = Scope::registry(name, version);
+    let census = census(&scope, dir, &shards, &[])?;
+    let regressed = core_regressions(register, &census);
+    if !regressed.is_empty() {
+        return Err(tool(
+            &format!("{name}@{version}"),
+            format!(
+                "a body the register records as translated is now residue: {}",
+                regressed.join("; ")
+            ),
+        ));
+    }
+    if register.exists() {
+        for entry in std::fs::read_dir(register)
+            .map_err(|e| tool("register", e))?
+            .filter_map(Result::ok)
+        {
+            let p = entry.path();
+            let stem = p.file_stem().and_then(|n| n.to_str()).unwrap_or_default();
+            let kept = stem == "frontier"
+                || stem == crate::queue::RETRACTED
+                || census.iter().any(|s| s.module == stem);
+            if p.extension().is_some_and(|x| x == "toml") && !kept {
+                std::fs::remove_file(&p).map_err(|e| tool("register", e))?;
+            }
         }
-        if register.exists() {
-            for entry in std::fs::read_dir(register)
-                .map_err(|e| tool("register", e))?
-                .filter_map(Result::ok)
-            {
-                let p = entry.path();
-                let stem = p.file_stem().and_then(|n| n.to_str()).unwrap_or_default();
-                let kept = stem == "frontier"
-                    || stem == crate::queue::RETRACTED
-                    || census.iter().any(|s| s.module == stem);
-                if p.extension().is_some_and(|x| x == "toml") && !kept {
-                    std::fs::remove_file(&p).map_err(|e| tool("register", e))?;
+    }
+    write_register(&scope, register, &census)?;
+    let (embedding, checked) = match options.library {
+        Some(library) => {
+            let (e, d) = embed_crate(
+                &scope,
+                name,
+                dir,
+                work,
+                &shards,
+                library,
+                register,
+                options.differential,
+                options.link,
+            )?;
+            (Some((e.bodies, e.evaluable, e.bound)), d)
+        }
+        None => (None, None),
+    };
+    if let Some(kept) = options.dumps {
+        keep_dumps(
+            &shards,
+            kept,
+            &Kept {
+                name,
+                version,
+                options,
+            },
+        )?;
+    }
+    Ok(Lifted {
+        embedding,
+        differential: checked,
+        modules: census.len(),
+        bodies: census.iter().map(|s| s.rows.len()).sum(),
+        translated: census.iter().map(|s| s.translated_count()).sum(),
+    })
+}
+
+/// What a kept dump was built from, recorded beside it.
+struct Kept<'a> {
+    name: &'a str,
+    version: &'a str,
+    options: &'a Options<'a>,
+}
+
+/// The name of the file a kept dump records its build in.
+pub const DUMP_RECORD: &str = "dump.toml";
+
+/// Replace `kept` with the shards at `shards` (each module's dumps, the
+/// target, the layouts), and record beside them the package, its checksum
+/// and the features it was built with, so that a link names what it links.
+fn keep_dumps(shards: &Path, kept: &Path, what: &Kept<'_>) -> Result<(), UorustError> {
+    let _ = std::fs::remove_dir_all(kept);
+    copy_tree(shards, kept)?;
+    let quoted = |s: &str| toml::Value::String(s.to_string()).to_string();
+    let mut record = format!(
+        "# The build this crate's dumps are of (written by `uorust crate`; do not edit).\n\n\
+         name = {}\nversion = {}\n",
+        quoted(what.name),
+        quoted(what.version)
+    );
+    if let Some(c) = what.options.checksum {
+        record.push_str(&format!("checksum = {}\n", quoted(c)));
+    }
+    record.push_str(&format!(
+        "default-features = {}\nfeatures = [{}]\n",
+        !what.options.no_default_features,
+        what.options
+            .features
+            .iter()
+            .map(|x| quoted(x))
+            .collect::<Vec<_>>()
+            .join(", ")
+    ));
+    std::fs::write(kept.join(DUMP_RECORD), record).map_err(|e| tool(DUMP_RECORD, e))
+}
+
+/// A library of crates.io as a workspace's build links it: the package at
+/// its locked version and checksum, its library's crate name, the features
+/// the build enables for it, and the libraries of crates.io it builds on
+/// (indices into the same list, each before it).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Locked {
+    /// The package's name.
+    pub name: String,
+    /// Its version, as the lock records it.
+    pub version: String,
+    /// Its library's crate name, as the code that calls it names it.
+    pub lib: String,
+    /// The features the workspace's build enables for it, exactly.
+    pub features: Vec<String>,
+    /// The checksum the lock records.
+    pub checksum: String,
+    /// The libraries of crates.io it builds on, directly.
+    pub deps: Vec<usize>,
+}
+
+impl Locked {
+    /// The directory, under a kept dumps root, its dumps are kept in: one
+    /// per package version, since a build may link two versions of one
+    /// crate.
+    pub fn dir(&self) -> String {
+        format!("{}-{}", self.name, self.version)
+    }
+}
+
+/// A workspace member's library or binary, with the libraries of crates.io
+/// it calls into directly (indices into [`Graph::locked`]).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Member {
+    /// The package's name.
+    pub package: String,
+    /// The target's crate name.
+    pub target: String,
+    /// The libraries of crates.io it builds on, directly.
+    pub deps: Vec<usize>,
+}
+
+/// What a workspace's build links of crates.io.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct Graph {
+    /// Every library of crates.io the build compiles into the code it
+    /// builds, those each builds on first.
+    pub locked: Vec<Locked>,
+    /// The members' targets the build builds.
+    pub members: Vec<Member>,
+}
+
+impl Graph {
+    /// The libraries `deps` reach, each after those it builds on: the
+    /// `--link` list of a body that calls them, in the order the linker
+    /// takes them (a linked library's own calls are bound by those before
+    /// it).
+    pub fn closure(&self, deps: &[usize]) -> Vec<usize> {
+        let mut seen = BTreeSet::new();
+        let mut next: Vec<usize> = deps.to_vec();
+        while let Some(i) = next.pop() {
+            if seen.insert(i) {
+                next.extend(self.locked.get(i).into_iter().flat_map(|l| l.deps.iter()));
+            }
+        }
+        // `locked` is in dependency order already.
+        seen.into_iter().collect()
+    }
+}
+
+/// The package a cargo package id names, `(source, name, version)`: a
+/// specification (`registry+https://…#name@1.0.0`, a path's `path+file://…#0.1.0`
+/// naming no name, which is the directory's) or the older
+/// `name 1.0.0 (registry+https://…)`.
+fn package_id(id: &str) -> Option<(String, String, String)> {
+    if let Some((source, rest)) = id.split_once('#') {
+        let (name, version) = match rest.split_once('@') {
+            Some((n, v)) => (n.to_string(), v.to_string()),
+            None => {
+                let last = source.trim_end_matches('/').rsplit('/').next()?;
+                (last.to_string(), rest.to_string())
+            }
+        };
+        return Some((source.to_string(), name, version));
+    }
+    let mut parts = id.splitn(3, ' ');
+    let name = parts.next()?.to_string();
+    let version = parts.next()?.to_string();
+    let source = parts
+        .next()?
+        .trim_matches(|c| c == '(' || c == ')')
+        .to_string();
+    Some((source, name, version))
+}
+
+/// What a workspace's build links of crates.io, read from cargo's unit
+/// graph of that build (`cargo build --unit-graph`) and the workspace's
+/// lock: from each root unit (a member's library or binary), every library
+/// unit its compiled code depends on, through libraries only. A build
+/// script's dependencies run on the host and are not linked into the code
+/// built, and a procedural macro's expand the source, so neither is
+/// followed: the features of a library are those of the unit the target
+/// code links, which is what cargo's feature resolver decided for it.
+/// A library of crates.io whose lock row has no checksum, or that two
+/// units of the build link with different features, is refused: its
+/// dumps would not be of one build.
+pub fn graph(unit_graph: &str, lock: &str) -> Result<Graph, UorustError> {
+    let bad = |reason: String| tool("unit graph", reason);
+    let doc: serde_json::Value =
+        serde_json::from_str(unit_graph).map_err(|e| bad(e.to_string()))?;
+    let lock: toml::Table = lock.parse().map_err(|e| tool("Cargo.lock", e))?;
+    let checksums: BTreeMap<(String, String), String> = lock
+        .get("package")
+        .and_then(toml::Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(|p| {
+            let s = |k: &str| p.get(k).and_then(toml::Value::as_str).map(str::to_string);
+            Some(((s("name")?, s("version")?), s("checksum")?))
+        })
+        .collect();
+    let units = doc
+        .get("units")
+        .and_then(serde_json::Value::as_array)
+        .ok_or_else(|| bad("no units".into()))?;
+    let kinds = |u: &serde_json::Value| -> Vec<String> {
+        u.pointer("/target/kind")
+            .and_then(serde_json::Value::as_array)
+            .into_iter()
+            .flatten()
+            .filter_map(|k| k.as_str().map(str::to_string))
+            .collect()
+    };
+    // A build script's kind is `custom-build` and a procedural macro's
+    // `proc-macro`: neither is a library the built code links.
+    let linked = |u: &serde_json::Value| {
+        kinds(u)
+            .iter()
+            .any(|k| ["lib", "rlib", "dylib", "staticlib", "cdylib"].contains(&k.as_str()))
+    };
+    let deps_of = |u: &serde_json::Value| -> Vec<usize> {
+        u.get("dependencies")
+            .and_then(serde_json::Value::as_array)
+            .into_iter()
+            .flatten()
+            .filter_map(|d| {
+                d.get("index")?
+                    .as_u64()
+                    .and_then(|i| usize::try_from(i).ok())
+            })
+            .filter(|i| units.get(*i).is_some_and(linked))
+            .collect()
+    };
+    let roots: Vec<usize> = doc
+        .get("roots")
+        .and_then(serde_json::Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(|r| r.as_u64().and_then(|i| usize::try_from(i).ok()))
+        .collect();
+    // Every unit the roots' code links, each after those it builds on.
+    let mut order: Vec<usize> = Vec::new();
+    let mut state: BTreeMap<usize, bool> = BTreeMap::new();
+    for &root in &roots {
+        let mut stack: Vec<(usize, bool)> = vec![(root, false)];
+        while let Some((i, done)) = stack.pop() {
+            if done {
+                state.insert(i, true);
+                order.push(i);
+                continue;
+            }
+            if state.contains_key(&i) {
+                continue;
+            }
+            state.insert(i, false);
+            stack.push((i, true));
+            let u = units.get(i).ok_or_else(|| bad(format!("no unit {i}")))?;
+            for d in deps_of(u).into_iter().rev() {
+                if !state.contains_key(&d) {
+                    stack.push((d, false));
                 }
             }
         }
-        write_register(&scope, register, &census)?;
-        let (embedding, checked) = match library {
-            Some(library) => {
-                let (e, d) = embed_crate(
-                    &scope,
-                    name,
-                    &dir,
-                    &work,
-                    &shards,
-                    library,
-                    register,
-                    differential,
-                    link,
-                )?;
-                (Some((e.bodies, e.evaluable)), d)
-            }
-            None => (None, None),
+    }
+    let registry_unit = |i: usize| -> Option<(String, String)> {
+        let id = units.get(i)?.get("pkg_id")?.as_str()?;
+        let (source, name, version) = package_id(id)?;
+        source.starts_with("registry+").then_some((name, version))
+    };
+    let mut graph = Graph::default();
+    let mut index: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut by_package: BTreeMap<(String, String), usize> = BTreeMap::new();
+    let features_of = |u: &serde_json::Value| -> Vec<String> {
+        let mut f: Vec<String> = u
+            .get("features")
+            .and_then(serde_json::Value::as_array)
+            .into_iter()
+            .flatten()
+            .filter_map(|x| x.as_str().map(str::to_string))
+            .collect();
+        f.sort();
+        f
+    };
+    for &i in &order {
+        let Some((name, version)) = registry_unit(i) else {
+            continue;
         };
-        Ok(Lifted {
-            embedding,
-            differential: checked,
-            modules: census.len(),
-            bodies: census.iter().map(|s| s.rows.len()).sum(),
-            translated: census.iter().map(|s| s.translated_count()).sum(),
-        })
-    })();
+        let u = &units[i];
+        let features = features_of(u);
+        let deps: Vec<usize> = deps_of(u)
+            .into_iter()
+            .filter_map(|d| index.get(&d).copied())
+            .collect();
+        let key = (name.clone(), version.clone());
+        if let Some(&at) = by_package.get(&key) {
+            let same: &Locked = &graph.locked[at];
+            if same.features != features {
+                return Err(bad(format!(
+                    "{name}@{version} is linked with features [{}] and [{}]",
+                    same.features.join(", "),
+                    features.join(", ")
+                )));
+            }
+            index.insert(i, at);
+            continue;
+        }
+        let checksum = checksums
+            .get(&key)
+            .cloned()
+            .ok_or_else(|| tool("Cargo.lock", format!("{name}@{version} has no checksum")))?;
+        let lib = u
+            .pointer("/target/name")
+            .and_then(serde_json::Value::as_str)
+            .unwrap_or(&name)
+            .replace('-', "_");
+        index.insert(i, graph.locked.len());
+        by_package.insert(key, graph.locked.len());
+        graph.locked.push(Locked {
+            name,
+            version,
+            lib,
+            features,
+            checksum,
+            deps,
+        });
+    }
+    for &root in &roots {
+        let u = &units[root];
+        let (_, package, _) = u
+            .get("pkg_id")
+            .and_then(serde_json::Value::as_str)
+            .and_then(package_id)
+            .ok_or_else(|| bad(format!("unit {root} has no package")))?;
+        let target = u
+            .pointer("/target/name")
+            .and_then(serde_json::Value::as_str)
+            .unwrap_or(&package)
+            .replace('-', "_");
+        let mut deps: Vec<usize> = deps_of(u)
+            .into_iter()
+            .filter_map(|d| index.get(&d).copied())
+            .collect();
+        deps.sort_unstable();
+        deps.dedup();
+        graph.members.push(Member {
+            package,
+            target,
+            deps,
+        });
+    }
+    Ok(graph)
+}
+
+/// The unit graph of the build of the workspace at `workspace`, at its
+/// lock (`--locked`: the lock is not rewritten) with `args` (features)
+/// added, written by cargo without building anything. Cargo opens the
+/// flag on the stable toolchain under `RUSTC_BOOTSTRAP`, as the dump does.
+fn unit_graph(workspace: &Path, work: &Path, args: &[String]) -> Result<String, UorustError> {
+    let toolchain = format!("+{}", crate::mir::spec::TOOLCHAIN);
+    let out = run(
+        "cargo build --unit-graph",
+        Command::new("cargo")
+            .args([
+                toolchain.as_str(),
+                "build",
+                "--workspace",
+                "--locked",
+                "-q",
+                "--unit-graph",
+                "-Zunstable-options",
+            ])
+            .args(args)
+            .current_dir(workspace)
+            // Nothing is written into the workspace.
+            .env_remove("CARGO_BUILD_BUILD_DIR")
+            .env_remove("CARGO_BUILD_TARGET_DIR")
+            .env("CARGO_TARGET_DIR", work.join("target"))
+            .env("RUSTC_BOOTSTRAP", "1"),
+    )?;
+    String::from_utf8(out).map_err(|e| tool("cargo build --unit-graph", e))
+}
+
+/// What `uorust crate --workspace` did with one library of crates.io.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Outcome {
+    /// Dumped, translated and embedded, its dumps kept: what [`Lifted`]
+    /// counts.
+    Lifted(Lifted),
+    /// Not lifted, with why: what failed, or a library it builds on that
+    /// was not lifted, whose calls would be left unlinked.
+    Refused(String),
+}
+
+/// The name of the index `uorust crate --workspace` writes under its kept
+/// dumps.
+pub const LINKS: &str = "links.toml";
+
+/// What the workspace driver is given.
+#[derive(Clone, Copy, Debug)]
+pub struct Workspace<'a> {
+    /// The workspace's root.
+    pub root: &'a Path,
+    /// What the workspace's build is run with (its features), as cargo
+    /// takes them.
+    pub cargo_args: &'a [String],
+    /// The directory each crate's dumps are kept in, by [`Locked::dir`],
+    /// with [`LINKS`].
+    pub dumps: &'a Path,
+    /// The directory each crate's register is written in, by
+    /// [`Locked::dir`].
+    pub registers: &'a Path,
+    /// The rust-src `library` directory of the pinned toolchain.
+    pub library: &'a Path,
+    /// Only these packages (by name) and those they build on; every
+    /// library the build links when empty.
+    pub only: &'a [String],
+}
+
+/// Every library of crates.io the build of a workspace links, each at its
+/// locked version and checksum and with the features the build enables
+/// for it, dumped, translated and embedded with the libraries it builds on
+/// linked (those first), its dumps kept; then [`LINKS`], which names each
+/// crate's kept dumps and, for each member's target, the `--link` list of
+/// its embedding. A crate that fails is a refused row of the index, and so
+/// is one that builds on a refused one; a panic of the embedding is caught
+/// as such a row, so that the rest are measured.
+pub fn lift_workspace(ws: &Workspace<'_>) -> Result<(Graph, Vec<Outcome>), UorustError> {
+    let work = std::env::temp_dir().join(format!("uorust-workspace-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&work);
-    result
+    std::fs::create_dir_all(&work).map_err(|e| tool("work", e))?;
+    let lock_file = ws.root.join("Cargo.lock");
+    let lock = crate::embed::read_text(&lock_file)?;
+    let graph = unit_graph(ws.root, &work, ws.cargo_args).and_then(|g| graph(&g, &lock));
+    let _ = std::fs::remove_dir_all(&work);
+    let graph = graph?;
+    let wanted: BTreeSet<usize> = if ws.only.is_empty() {
+        (0..graph.locked.len()).collect()
+    } else {
+        let named: Vec<usize> = (0..graph.locked.len())
+            .filter(|&i| ws.only.contains(&graph.locked[i].name))
+            .collect();
+        graph.closure(&named).into_iter().collect()
+    };
+    std::fs::create_dir_all(ws.dumps).map_err(|e| tool("dumps", e))?;
+    let mut outcomes: Vec<Option<Outcome>> = vec![None; graph.locked.len()];
+    for i in 0..graph.locked.len() {
+        if !wanted.contains(&i) {
+            continue;
+        }
+        let l = &graph.locked[i];
+        let refused: Vec<String> = graph
+            .closure(&l.deps)
+            .into_iter()
+            .filter(|d| !matches!(outcomes[*d], Some(Outcome::Lifted(_))))
+            .map(|d| graph.locked[d].dir())
+            .collect();
+        let outcome = if refused.is_empty() {
+            let link: Vec<(String, PathBuf)> = graph
+                .closure(&l.deps)
+                .into_iter()
+                .map(|d| {
+                    (
+                        graph.locked[d].lib.clone(),
+                        ws.dumps.join(graph.locked[d].dir()),
+                    )
+                })
+                .collect();
+            let kept = ws.dumps.join(l.dir());
+            let options = Options {
+                library: Some(ws.library),
+                differential: false,
+                link: &link,
+                features: &l.features,
+                no_default_features: true,
+                checksum: Some(&l.checksum),
+                lock: Some(&lock_file),
+                dumps: Some(&kept),
+            };
+            let register = ws.registers.join(l.dir());
+            let run = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                lift_crate(&l.name, &l.version, &register, &options)
+            }));
+            match run {
+                Ok(Ok(lifted)) => Outcome::Lifted(lifted),
+                Ok(Err(e)) => Outcome::Refused(e.to_string()),
+                Err(panic) => Outcome::Refused(format!(
+                    "the embedding panicked: {}",
+                    panic
+                        .downcast_ref::<String>()
+                        .cloned()
+                        .or_else(|| panic.downcast_ref::<&str>().map(|s| (*s).to_string()))
+                        .unwrap_or_default()
+                )),
+            }
+        } else {
+            Outcome::Refused(format!(
+                "builds on what was not lifted: {}",
+                refused.join(", ")
+            ))
+        };
+        eprintln!(
+            "crate {}: {}",
+            l.dir(),
+            match &outcome {
+                Outcome::Lifted(x) => format!(
+                    "{} bodies, {}",
+                    x.bodies,
+                    x.embedding.map_or(String::new(), |(b, e, u)| format!(
+                        "{b} embedded, {e} evaluable, {u} bound"
+                    ))
+                ),
+                Outcome::Refused(why) => format!("refused: {why}"),
+            }
+        );
+        outcomes[i] = Some(outcome);
+    }
+    let done: Vec<(usize, Outcome)> = outcomes
+        .into_iter()
+        .enumerate()
+        .filter_map(|(i, o)| Some((i, o?)))
+        .collect();
+    std::fs::write(ws.dumps.join(LINKS), render_links(&graph, &done))
+        .map_err(|e| tool(LINKS, e))?;
+    Ok((graph, done.into_iter().map(|(_, o)| o).collect()))
+}
+
+/// [`LINKS`]: each crate lifted or refused, with its build and its
+/// embedding's counts, then each member's target with the `--link`
+/// arguments of its embedding, the dumps named relative to the index.
+pub fn render_links(graph: &Graph, done: &[(usize, Outcome)]) -> String {
+    let quoted = |s: &str| toml::Value::String(s.to_string()).to_string();
+    let list = |items: &[String]| {
+        items
+            .iter()
+            .map(|x| quoted(x))
+            .collect::<Vec<_>>()
+            .join(", ")
+    };
+    let lifted: BTreeSet<usize> = done
+        .iter()
+        .filter(|(_, o)| matches!(o, Outcome::Lifted(_)))
+        .map(|(i, _)| *i)
+        .collect();
+    let link_args = |deps: &[usize]| -> Vec<String> {
+        graph
+            .closure(deps)
+            .into_iter()
+            .filter(|d| lifted.contains(d))
+            .map(|d| format!("{}={}", graph.locked[d].lib, graph.locked[d].dir()))
+            .collect()
+    };
+    let mut out = String::from(
+        "# The libraries of crates.io a workspace's build links (written by\n\
+         # `uorust crate --workspace`; do not edit): each at its locked version,\n\
+         # built with the features the build enables for it, its dumps kept in\n\
+         # its directory beside this file, embedded with those it builds on\n\
+         # linked; then each member's target with the `--link` list of its\n\
+         # embedding.\n",
+    );
+    for (i, outcome) in done {
+        let l = &graph.locked[*i];
+        out.push_str(&format!(
+            "\n[[crate]]\nname = {}\nversion = {}\nlib = {}\nchecksum = {}\nfeatures = [{}]\ndumps = {}\nlink = [{}]\n",
+            quoted(&l.name),
+            quoted(&l.version),
+            quoted(&l.lib),
+            quoted(&l.checksum),
+            list(&l.features),
+            quoted(&l.dir()),
+            list(&link_args(&l.deps)),
+        ));
+        match outcome {
+            Outcome::Lifted(x) => {
+                out.push_str(&format!(
+                    "bodies = {}\ntranslated = {}\n",
+                    x.bodies, x.translated
+                ));
+                if let Some((b, e, u)) = x.embedding {
+                    out.push_str(&format!("embedded = {b}\nevaluable = {e}\nbound = {u}\n"));
+                }
+            }
+            Outcome::Refused(why) => out.push_str(&format!("refused = {}\n", quoted(why))),
+        }
+    }
+    for m in &graph.members {
+        out.push_str(&format!(
+            "\n[[member]]\npackage = {}\ntarget = {}\nlink = [{}]\n",
+            quoted(&m.package),
+            quoted(&m.target),
+            list(&link_args(&m.deps)),
+        ));
+    }
+    out
 }
 
 /// Embed the crate's bodies in LexLean with the one evaluator core's and
@@ -972,5 +1652,397 @@ mod tests {
             Some(("serde".to_string(), "1.0.0".to_string()))
         );
         assert!(parse_spec("serde").is_err() && parse_spec("@1").is_err());
+    }
+
+    // link: a library of crates.io kept, read from a build's unit graph,
+    // and linked into the crate that calls it.
+
+    /// A package `name` at `dir` whose library is `lib`, building on the
+    /// packages `deps` beside it, each by its absolute path (the layouts
+    /// step checks a copy of the package elsewhere).
+    fn link_package(dir: &Path, name: &str, deps: &[&str], lib: &str) {
+        std::fs::create_dir_all(dir.join("src")).expect("the package");
+        let beside = dir.parent().unwrap_or(dir);
+        let deps: String = deps
+            .iter()
+            .map(|d| format!("{d} = {{ path = \"{}\" }}\n", beside.join(d).display()))
+            .collect();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            format!(
+                "[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n\
+                 [dependencies]\n{deps}\n[workspace]\n"
+            ),
+        )
+        .expect("the manifest");
+        std::fs::write(dir.join("src/lib.rs"), lib).expect("the library");
+    }
+
+    /// A `library` directory of core, alloc and std with no declarations:
+    /// what the embedding reads besides the dumps, for bodies over
+    /// integers alone.
+    fn link_library_root(at: &Path) -> PathBuf {
+        let library = at.join("library");
+        for krate in ["core", "alloc", "std"] {
+            let src = library.join(krate).join("src");
+            std::fs::create_dir_all(&src).expect("the library");
+            std::fs::write(src.join("lib.rs"), "").expect("the library");
+        }
+        library
+    }
+
+    /// The callees the embedded project under `out` leaves to a
+    /// dictionary and those it names a body of, by their texts.
+    fn link_callees(out: &Path) -> (Vec<String>, Vec<String>) {
+        fn walk(dir: &Path, text: &mut String) {
+            for p in crate::embed::dir_paths(dir).unwrap_or_default() {
+                if p.is_dir() {
+                    walk(&p, text);
+                } else if p.extension().is_some_and(|x| x == "tex") {
+                    text.push_str(&std::fs::read_to_string(&p).unwrap_or_default());
+                }
+            }
+        }
+        // The crate's modules, each a directory of `src`; the evaluator's
+        // own files beside them name no body of the crate.
+        let mut text = String::new();
+        for p in crate::embed::dir_paths(&out.join("src")).unwrap_or_default() {
+            if p.is_dir() {
+                walk(&p, &mut text);
+            }
+        }
+        let of = |tag: &str| -> Vec<String> {
+            text.match_indices(tag)
+                .filter_map(|(i, _)| {
+                    let rest = &text[i + tag.len()..];
+                    let rest = rest.strip_prefix('"')?;
+                    Some(rest[..rest.find('"')?].to_string())
+                })
+                .collect()
+        };
+        (of("Callee.bound "), of("Callee.body "))
+    }
+
+    /// A call into a crate whose dumps `uorust crate` kept is the linked
+    /// crate's body when the crate is linked, and a dictionary's entry when
+    /// it is not; the kept dumps record the build they are of.
+    #[test]
+    fn link_a_call_into_a_kept_crate_is_its_body() {
+        let work = std::env::temp_dir().join(format!("uorust-link-test-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let library = link_library_root(&work);
+        link_package(
+            &work.join("dep"),
+            "dep",
+            &[],
+            "pub fn max(a: u32, b: u32) -> u32 {\n    if a > b { a } else { b }\n}\n",
+        );
+        // `max` is core's name too, so the call prints its crate's path.
+        link_package(
+            &work.join("user"),
+            "user",
+            &["dep"],
+            "pub fn top(a: u32, b: u32) -> u32 {\n    dep::max(a, b)\n}\n",
+        );
+        let dumps = work.join("dumps").join("dep");
+        let kept = lift_source(
+            "dep",
+            "0.1.0",
+            &work.join("dep"),
+            &work.join("w-dep"),
+            &work.join("reg").join("dep"),
+            &Options {
+                library: Some(&library),
+                dumps: Some(&dumps),
+                checksum: Some("c0ffee"),
+                ..Options::default()
+            },
+        )
+        .expect("dep lifts");
+        assert_eq!(kept.embedding, Some((1, 1, 0)), "{kept:?}");
+        for file in ["target.toml", "layouts.json", DUMP_RECORD] {
+            assert!(dumps.join(file).is_file(), "{file} is not kept");
+        }
+        assert!(
+            dumps.join(ROOT_MODULE).is_dir(),
+            "the module shard is not kept"
+        );
+        let record = std::fs::read_to_string(dumps.join(DUMP_RECORD)).expect("the record");
+        assert!(
+            record.contains("name = \"dep\"\nversion = \"0.1.0\"\nchecksum = \"c0ffee\"\ndefault-features = true\nfeatures = []\n"),
+            "{record}"
+        );
+        let user = |w: &str, link: &[(String, PathBuf)]| {
+            let lifted = lift_source(
+                "user",
+                "0.1.0",
+                &work.join("user"),
+                &work.join(w),
+                &work.join("reg").join(w),
+                &Options {
+                    library: Some(&library),
+                    link,
+                    ..Options::default()
+                },
+            )
+            .expect("user lifts");
+            (lifted, link_callees(&work.join(w).join("embed")))
+        };
+        let (alone, (bound, _)) = user("w-alone", &[]);
+        assert_eq!(alone.embedding, Some((1, 1, 1)), "{alone:?}");
+        assert_eq!(bound, ["dep::max"]);
+        let (linked, (bound, bodies)) = user("w-linked", &[("dep".to_string(), dumps.clone())]);
+        assert_eq!(linked.embedding, Some((1, 1, 0)), "{linked:?}");
+        assert!(bound.is_empty(), "{bound:?}");
+        assert_eq!(bodies, ["dep::max"]);
+        let _ = std::fs::remove_dir_all(&work);
+    }
+
+    /// A unit of a unit graph: its package id, target kinds and name, its
+    /// features and the units it depends on.
+    fn link_unit(id: &str, kind: &str, name: &str, features: &[&str], deps: &[usize]) -> String {
+        let deps: Vec<String> = deps
+            .iter()
+            .map(|d| format!("{{\"index\": {d}, \"extern_crate_name\": \"x\"}}"))
+            .collect();
+        let features: Vec<String> = features.iter().map(|f| format!("\"{f}\"")).collect();
+        format!(
+            "{{\"pkg_id\": \"{id}\", \"target\": {{\"kind\": [\"{kind}\"], \"name\": \"{name}\"}}, \
+             \"mode\": \"build\", \"features\": [{}], \"platform\": null, \"dependencies\": [{}]}}",
+            features.join(", "),
+            deps.join(", ")
+        )
+    }
+
+    const LINK_REGISTRY: &str = "registry+https://github.com/rust-lang/crates.io-index";
+
+    fn link_lock(packages: &[(&str, &str)]) -> String {
+        packages
+            .iter()
+            .map(|(n, v)| {
+                format!(
+                    "[[package]]\nname = \"{n}\"\nversion = \"{v}\"\nsource = \"{LINK_REGISTRY}\"\nchecksum = \"sum-{n}\"\n\n"
+                )
+            })
+            .collect()
+    }
+
+    /// The build links what its members' code calls, each library after
+    /// those it builds on, with the features the unit graph gives it; a
+    /// build script's dependencies and a procedural macro's are not linked.
+    #[test]
+    fn link_a_build_links_what_its_members_code_calls() {
+        let reg = |n: &str, v: &str| format!("{LINK_REGISTRY}#{n}@{v}");
+        let units = [
+            // 0: the member's library.
+            link_unit("path+file:///w/app#0.1.0", "lib", "app", &[], &[1, 3, 4, 6]),
+            // 1: a library of crates.io building on 2, its features exact.
+            link_unit(&reg("bit-set", "0.5.3"), "lib", "bit_set", &[], &[2]),
+            link_unit(&reg("bit-vec", "0.6.3"), "lib", "bit_vec", &[], &[]),
+            // 3: a procedural macro and what it builds on: not linked.
+            link_unit(&reg("derive", "1.0.0"), "proc-macro", "derive", &[], &[5]),
+            // 4: the member's build script and what it builds on: not linked.
+            link_unit(
+                "path+file:///w/app#0.1.0",
+                "custom-build",
+                "build-script-build",
+                &[],
+                &[5],
+            ),
+            link_unit(&reg("syn", "2.0.0"), "lib", "syn", &["full"], &[]),
+            // 6: the older form of a package id.
+            link_unit(
+                &format!("fnv 1.0.7 ({LINK_REGISTRY})"),
+                "lib",
+                "fnv",
+                &["std", "default"],
+                &[],
+            ),
+            // 7: the member's binary, building on its library and on 2.
+            link_unit("path+file:///w/app#0.1.0", "bin", "app-cli", &[], &[0, 2]),
+        ];
+        let graph_json = format!(
+            "{{\"version\": 1, \"units\": [{}], \"roots\": [0, 7]}}",
+            units.join(", ")
+        );
+        let lock = link_lock(&[
+            ("bit-set", "0.5.3"),
+            ("bit-vec", "0.6.3"),
+            ("derive", "1.0.0"),
+            ("syn", "2.0.0"),
+            ("fnv", "1.0.7"),
+        ]);
+        let g = graph(&graph_json, &lock).expect("the graph");
+        let names: Vec<(&str, &str, Vec<String>, &[usize])> = g
+            .locked
+            .iter()
+            .map(|l| {
+                (
+                    l.name.as_str(),
+                    l.lib.as_str(),
+                    l.features.clone(),
+                    l.deps.as_slice(),
+                )
+            })
+            .collect();
+        assert_eq!(
+            names,
+            [
+                ("bit-vec", "bit_vec", vec![], &[][..]),
+                ("bit-set", "bit_set", vec![], &[0][..]),
+                (
+                    "fnv",
+                    "fnv",
+                    vec!["default".to_string(), "std".to_string()],
+                    &[][..]
+                ),
+            ]
+        );
+        assert_eq!(g.locked[1].checksum, "sum-bit-set");
+        assert_eq!(g.locked[1].dir(), "bit-set-0.5.3");
+        let members: Vec<(&str, &str, &[usize])> = g
+            .members
+            .iter()
+            .map(|m| (m.package.as_str(), m.target.as_str(), m.deps.as_slice()))
+            .collect();
+        assert_eq!(
+            members,
+            [("app", "app", &[1, 2][..]), ("app", "app_cli", &[0][..])]
+        );
+        // A library is linked after those it builds on.
+        assert_eq!(g.closure(&[1]), [0, 1]);
+        let done = [
+            (0, Outcome::Refused("the embedding panicked: x".into())),
+            (
+                1,
+                Outcome::Refused("builds on what was not lifted: bit-vec-0.6.3".into()),
+            ),
+            (
+                2,
+                Outcome::Lifted(Lifted {
+                    embedding: Some((4, 4, 1)),
+                    differential: None,
+                    modules: 1,
+                    bodies: 4,
+                    translated: 0,
+                }),
+            ),
+        ];
+        let links = render_links(&g, &done);
+        assert!(
+            links.contains("name = \"fnv\"\nversion = \"1.0.7\"\nlib = \"fnv\"\nchecksum = \"sum-fnv\"\nfeatures = [\"default\", \"std\"]\ndumps = \"fnv-1.0.7\"\nlink = []\nbodies = 4\ntranslated = 0\nembedded = 4\nevaluable = 4\nbound = 1\n"),
+            "{links}"
+        );
+        assert!(
+            links.contains("refused = \"the embedding panicked: x\"\n"),
+            "{links}"
+        );
+        // Only what was lifted is linked.
+        assert!(
+            links.contains(
+                "[[member]]\npackage = \"app\"\ntarget = \"app\"\nlink = [\"fnv=fnv-1.0.7\"]\n"
+            ),
+            "{links}"
+        );
+        assert!(links.parse::<toml::Table>().is_ok(), "{links}");
+    }
+
+    /// A library two units of one build link with different features, or
+    /// one whose lock row records no checksum, is refused.
+    #[test]
+    fn link_a_library_of_two_builds_or_no_checksum_is_refused() {
+        let reg = |n: &str| format!("{LINK_REGISTRY}#{n}@1.0.0");
+        let units = [
+            link_unit("path+file:///w/a#0.1.0", "lib", "a", &[], &[1]),
+            link_unit(&reg("x"), "lib", "x", &["std"], &[]),
+            link_unit("path+file:///w/b#0.1.0", "lib", "b", &[], &[3]),
+            link_unit(&reg("x"), "lib", "x", &[], &[]),
+        ];
+        let two = format!(
+            "{{\"version\": 1, \"units\": [{}], \"roots\": [0, 2]}}",
+            units.join(", ")
+        );
+        let refused = graph(&two, &link_lock(&[("x", "1.0.0")]));
+        assert!(
+            refused.as_ref().is_err_and(|e| e
+                .to_string()
+                .contains("x@1.0.0 is linked with features [std] and []")),
+            "{refused:?}"
+        );
+        let one = format!(
+            "{{\"version\": 1, \"units\": [{}], \"roots\": [0]}}",
+            units[..2].join(", ")
+        );
+        assert!(graph(&one, &link_lock(&[("x", "1.0.0")])).is_ok());
+        let unsummed = graph(&one, "");
+        assert!(
+            unsummed
+                .as_ref()
+                .is_err_and(|e| e.to_string().contains("x@1.0.0 has no checksum")),
+            "{unsummed:?}"
+        );
+    }
+
+    /// The features a consuming build enables are passed exactly: the
+    /// crate's defaults off, each feature named.
+    #[test]
+    fn link_a_dump_takes_the_features_it_is_given() {
+        let exact = ["default".to_string(), "std".to_string()];
+        assert_eq!(
+            build_flags(&Options {
+                features: &exact,
+                no_default_features: true,
+                ..Options::default()
+            }),
+            ["--no-default-features", "--features=default,std"]
+        );
+        assert_eq!(
+            build_flags(&Options {
+                no_default_features: true,
+                ..Options::default()
+            }),
+            ["--no-default-features"]
+        );
+        assert!(build_flags(&Options::default()).is_empty());
+        assert_eq!(
+            package_id("registry+https://x/index#a-b@1.2.3"),
+            Some((
+                "registry+https://x/index".into(),
+                "a-b".into(),
+                "1.2.3".into()
+            ))
+        );
+        assert_eq!(
+            package_id("path+file:///w/app#0.1.0").map(|p| p.1),
+            Some("app".to_string())
+        );
+    }
+
+    /// An archive whose digest is not the one recorded is refused, and the
+    /// kept dumps need the library their target is read with.
+    #[test]
+    fn link_a_kept_dump_needs_its_library_and_the_recorded_digest() {
+        assert_eq!(
+            sha256_hex(b"abc"),
+            "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        );
+        let work = std::env::temp_dir().join(format!("uorust-link-nolib-{}", std::process::id()));
+        let refused = lift_source(
+            "dep",
+            "0.1.0",
+            &work,
+            &work,
+            &work,
+            &Options {
+                dumps: Some(&work),
+                ..Options::default()
+            },
+        );
+        assert!(
+            refused
+                .as_ref()
+                .is_err_and(|e| e.to_string().contains("kept dumps need the library")),
+            "{refused:?}"
+        );
     }
 }
