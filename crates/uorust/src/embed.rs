@@ -4077,22 +4077,34 @@ fn qualified(name: &str) -> Option<(&str, Option<&str>, &str)> {
 }
 
 /// Whether the crate's own dump holds a method of the name `name` calls,
-/// of an impl whose signature names `name`'s self type (`fn
-/// m::<impl at src/m.rs:4:10: 4:15>::clone(_1: &m::Mine)`): then the
-/// crate's own impl is the one the call selects, even where its own
-/// resolution did not find it, and no default body or blanket impl of the
-/// trait's crate may stand for it. `heads` are the `fn` lines of the
-/// crate's own bodies. The test reads the type's path without its
-/// generic arguments, so a generic own type counts too: it can only keep
-/// a call unlinked, never link it.
-pub(crate) fn own_impl_body(name: &str, heads: &[&str]) -> bool {
-    let Some((self_ty, Some(_), item)) = qualified(name) else {
+/// of an impl that can be the one the call selects: one whose signature
+/// names a type of the crate's own that the call's self type or trait
+/// arguments name (`fn m::<impl at src/m.rs:4:10: 4:15>::clone(_1:
+/// &m::Mine)` for `<m::Mine as Clone>::clone`, or `fn
+/// m::<impl ..>::from(_1: m::Mine) -> u64` for `<u64 as From<m::Mine>>::from`).
+/// Then the crate's own impl is the one the call selects, even where its
+/// own resolution did not find it, and no default body or blanket impl of
+/// the trait's crate may stand for it. A call that names no type of the
+/// crate's own (`<u64 as From<u16>>::from`) cannot select an impl of the
+/// crate (by the orphan rule it holds none for foreign types alone).
+/// `heads` are the `fn` lines of the crate's own bodies; `own` says
+/// whether a path's first segment is the crate's own. The test reads a
+/// type's path without its generic arguments, so a generic own type
+/// counts too: it can only keep a call unlinked, never link it.
+pub(crate) fn own_impl_body(name: &str, heads: &[&str], own: &dyn Fn(&str) -> bool) -> bool {
+    let Some((self_ty, Some(trait_path), item)) = qualified(name) else {
         return false;
     };
-    let ty = past_fundamental(self_ty);
-    let ty = ty.split('<').next().unwrap_or_default();
     let method = format!(">::{item}(");
-    !ty.is_empty() && heads.iter().any(|h| h.contains(&method) && h.contains(ty))
+    std::iter::once(self_ty)
+        .chain(generic_args(trait_path))
+        .filter_map(|ty| {
+            let ty = past_fundamental(ty);
+            let ty = ty.split('<').next().unwrap_or_default();
+            let head = ty.split("::").next().unwrap_or_default();
+            (ty.contains("::") && own(head)).then_some(ty)
+        })
+        .any(|ty| heads.iter().any(|h| h.contains(&method) && h.contains(ty)))
 }
 
 /// The home of the callee `name` (written from the crate that defines it
@@ -4209,7 +4221,12 @@ impl EmbedCensus {
         }
         for b in &e.bound {
             let named = paths.map_or_else(|| b.clone(), |p| p.canonical_text(b));
-            let why = if own_impl_body(&named, heads) {
+            let own = |c: &str| {
+                (c == krate || modules.contains(&c))
+                    && !linked.contains(&c)
+                    && !crate::library::LIBRARIES.contains(&c)
+            };
+            let why = if own_impl_body(&named, heads, &own) {
                 OWN_IMPL.to_string()
             } else {
                 unlinked_reason(&named, krate, modules, linked)
@@ -6423,7 +6440,7 @@ fn embed_linked(
     let in_library = |callee: &str, args: &[Option<String>], dest: &str| {
         let paths = paths.as_ref()?;
         let named = paths.canonical_text(callee);
-        if own_impl_body(&named, &own_heads) {
+        if own_impl_body(&named, &own_heads, &is_own) {
             return None;
         }
         let owners = match home_of(&named, &is_own) {

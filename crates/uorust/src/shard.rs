@@ -1253,7 +1253,7 @@ mod tests {
             "fn blanket::<impl at src/blanket.rs:4:10: 4:15>::clone(_1: &blanket::Mine) -> blanket::Mine {",
             "fn blanket::<impl at src/blanket.rs:14:1: 14:28>::count(_1: blanket::Wrap<T>) -> usize {",
         ];
-        let holds = |n: &str| crate::embed::own_impl_body(n, &heads);
+        let holds = |n: &str| crate::embed::own_impl_body(n, &heads, &|c| c == "blanket");
         assert!(holds("<blanket::Mine as core::clone::Clone>::clone"));
         assert!(holds("<&blanket::Mine as core::clone::Clone>::clone"));
         assert!(holds("<blanket::Wrap<u32> as core::iter::Iterator>::count"));
@@ -1265,6 +1265,16 @@ mod tests {
             "<blanket::Mine as alloc::string::ToString>::to_string"
         ));
         assert!(!holds("blanket::helper"));
+        // An own impl for a primitive over an own type: a call of it names
+        // the own type; a call that names no own type cannot select it.
+        let from =
+            ["fn blanket::<impl at src/blanket.rs:9:1: 9:22>::from(_1: blanket::Mine) -> u64 {"];
+        let from_holds = |n: &str| crate::embed::own_impl_body(n, &from, &|c| c == "blanket");
+        assert!(from_holds(
+            "<u64 as core::convert::From<blanket::Mine>>::from"
+        ));
+        assert!(!from_holds("<u64 as core::convert::From<u16>>::from"));
+        assert!(!from_holds("<u64 as core::convert::From<u32>>::from"));
     }
 
     // stdlink: a call the crate's MIR prints by a path through std reaches
