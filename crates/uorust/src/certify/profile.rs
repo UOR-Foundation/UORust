@@ -184,7 +184,7 @@ impl Profile {
                 .ok_or_else(|| bad(format!("{key} is not a list")))?
                 .iter()
                 .map(|item| text(key, item))
-                .collect::<Result<Vec<_>, _>>()
+                .collect::<Result<Vec<_>, UorustError>>()
         };
         let mut profile = base;
         for (key, value) in rows {
@@ -222,7 +222,8 @@ impl Profile {
                 EFFECTS.join(", ")
             )));
         }
-        if self.package.is_empty() || crate_name(&self.package) != self.package {
+        let named = self.package.starts_with(|c: char| c.is_ascii_lowercase());
+        if !named || crate_name(&self.package) != self.package {
             return Err(bad(format!(
                 "the package prefix {:?} is not a crate name's",
                 self.package

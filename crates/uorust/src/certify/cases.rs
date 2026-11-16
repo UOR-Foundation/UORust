@@ -125,27 +125,38 @@ pub fn cases(
 }
 
 /// The source of the example that runs every case of a manifest and prints
-/// `<definition> <answer>` for each: `true`, `false`, or `overflow` when the
-/// package's naturals left the target's width.
+/// `<definition> <what its run returned>` for each, as Rust prints the
+/// value: a Boolean, or one in the package's own bounded result.
 pub fn harness(profile: &Profile, manifest: &Manifest) -> String {
     let krate = profile.crate_name();
     let mut out = String::from(
         "//! Written by `uorust certify agree`: runs every certified case of\n\
-         //! `manifest.toml` and prints what each answers.\n\n\
-         trait Answer {\n    fn answer(self) -> &'static str;\n}\n\n\
-         impl Answer for bool {\n    fn answer(self) -> &'static str {\n        if self {\n            \"true\"\n        } else {\n            \"false\"\n        }\n    }\n}\n\n\
-         impl<E> Answer for Result<bool, E> {\n    fn answer(self) -> &'static str {\n        match self {\n            Ok(held) => held.answer(),\n            Err(_) => \"overflow\",\n        }\n    }\n}\n\n\
+         //! `manifest.toml` and prints what each returns.\n\n\
          fn main() {\n",
     );
     for root in &manifest.roots {
         out.push_str(&format!(
-            "    println!(\"{} {{}}\", {krate}::{}::run().answer());\n",
+            "    println!(\"{} {{:?}}\", {krate}::{}::run());\n",
             root.definition,
             profile.module(&root.package)
         ));
     }
     out.push_str("}\n");
     out
+}
+
+/// What a case answers, from what its run printed: `true` or `false`, bare
+/// or as the `Ok` of a package whose naturals are the target's width, and
+/// `overflow` for that package's failure.
+fn answer(printed: &str) -> String {
+    match printed
+        .strip_prefix("Ok(")
+        .and_then(|p| p.strip_suffix(')'))
+    {
+        Some(held) => held.to_string(),
+        None if printed.starts_with("Err(") => "overflow".to_string(),
+        None => printed.to_string(),
+    }
 }
 
 /// What each case of the certified crate at `dir` answers, by definition:
@@ -196,7 +207,7 @@ pub fn answers(
     Ok(String::from_utf8_lossy(&run.stdout)
         .lines()
         .filter_map(|l| l.split_once(' '))
-        .map(|(d, a)| (d.to_string(), a.to_string()))
+        .map(|(d, a)| (d.to_string(), answer(a)))
         .collect())
 }
 
@@ -236,14 +247,16 @@ pub fn ran(package: &str, output: &str, into: &mut BTreeMap<String, Ran>) {
     }
 }
 
-/// The package whose tests state a case: the one whose name in Pascal case
-/// the case's definition has after `accept`, the longest when several do.
-fn package_of<'a>(definition: &str, packages: &'a [String]) -> Option<&'a str> {
+/// The packages whose tests may state a case: each whose name in Pascal
+/// case the case's definition has after `accept`. One package's name can
+/// start another's, so every one that fits is run, and the test function's
+/// own key decides ([`test_of`]).
+fn packages_of<'a>(definition: &str, packages: &'a [String]) -> Vec<&'a str> {
     packages
         .iter()
         .filter(|p| definition.starts_with(&format!("{ACCEPT}{}", crate::lex::pascal(&[p]))))
-        .max_by_key(|p| p.len())
         .map(String::as_str)
+        .collect()
 }
 
 /// The tests of the workspace at `workspace` that state the manifest's
@@ -273,7 +286,7 @@ pub fn tests(workspace: &Path, manifest: &Manifest) -> Result<BTreeMap<String, R
     let named: BTreeSet<&str> = manifest
         .roots
         .iter()
-        .filter_map(|r| package_of(&r.definition, &packages))
+        .flat_map(|r| packages_of(&r.definition, &packages))
         .collect();
     let mut out = BTreeMap::new();
     for package in named {
@@ -557,11 +570,41 @@ mod tests {
     }
 
     #[test]
+    fn every_package_whose_name_fits_a_case_is_run() {
+        let packages = [
+            "meter".to_string(),
+            "meter-core".to_string(),
+            "gauge".to_string(),
+        ];
+        assert_eq!(
+            packages_of("acceptMeterCoreReads0Root", &packages),
+            ["meter", "meter-core"]
+        );
+        // The test function's own key decides: the longest that fits.
+        let mut tests = BTreeMap::new();
+        ran("meter", "test core_reads ... FAILED\n", &mut tests);
+        ran(
+            "meter-core",
+            "test reads ... ok\ntest reads_low ... ok\n",
+            &mut tests,
+        );
+        assert_eq!(tests.len(), 2);
+        let found = test_of("acceptMeterCoreReads0Root", &tests).expect("a test");
+        assert_eq!(found.passed, ["reads"]);
+        assert_eq!(found.other, ["core_reads FAILED"]);
+        assert!(test_of("acceptMeterCoreReadsLow0Root", &tests).is_some());
+        assert!(test_of("acceptMeterCoreReadsHigh0Root", &tests).is_none());
+    }
+
+    #[test]
     fn the_harness_runs_every_case_of_the_manifest() {
         let text = harness(&profile(), &manifest(&["acceptMeterCountsAbove0Root"]));
         assert!(text.contains(
-            "println!(\"acceptMeterCountsAbove0Root {}\", meter_certified::acceptmetercountsabove0root::run().answer());"
+            "println!(\"acceptMeterCountsAbove0Root {:?}\", meter_certified::acceptmetercountsabove0root::run());"
         ));
-        assert!(text.contains("impl<E> Answer for Result<bool, E>"));
+        assert_eq!(answer("true"), "true");
+        assert_eq!(answer("Ok(true)"), "true");
+        assert_eq!(answer("Ok(false)"), "false");
+        assert_eq!(answer("Err(Overflow)"), "overflow");
     }
 }

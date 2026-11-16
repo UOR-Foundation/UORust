@@ -963,7 +963,10 @@ fn certify(step: Certify) -> Result<(), UorustError> {
                 &read_register(&base_register)?,
                 &certify::Manifest::read(&base_manifest)?,
             )?;
-            println!("{n} translator functions uncertified, none more than in the base");
+            println!(
+                "{n} {} uncertified, none more than in the base",
+                head_profile.measured()
+            );
         }
     }
     Ok(())

@@ -90,9 +90,22 @@ pub struct Root {
     pub prefix: String,
 }
 
+/// The most characters a crate's name has, as the compiler states the rule
+/// (`LLC0201`: a crate name is `[a-z][a-z0-9_]{0,63}`).
+const CRATE_NAME: usize = 64;
+
+/// The hexadecimal digits of the SHA-256 of a longer name that end its
+/// shortened form: a quarter of the digest, 64 bits, which no two roots of a
+/// workspace share by chance; two that did would be refused by name
+/// ([`Profile::export_roots`]).
+const NAME_DIGEST: usize = CRATE_NAME / 4;
+
 impl Root {
     /// The certified package's name: the profile's prefix ([`PACKAGE`], for
-    /// the translator) and the definition in snake case.
+    /// the translator) and the definition in snake case. A name longer than
+    /// a crate's may be ([`CRATE_NAME`]) keeps its start and ends with the
+    /// first [`NAME_DIGEST`] digits of its own SHA-256, so it is still the
+    /// root's alone and the same at every export.
     pub fn package(&self) -> String {
         let mut out = self.prefix.clone();
         for c in self.definition.chars() {
@@ -103,7 +116,12 @@ impl Root {
                 out.push(c);
             }
         }
-        out
+        if out.chars().count() <= CRATE_NAME {
+            return out;
+        }
+        let digest = crate::project::sha(out.as_bytes());
+        let kept: String = out.chars().take(CRATE_NAME - NAME_DIGEST - 1).collect();
+        format!("{kept}_{}", &digest[..NAME_DIGEST])
     }
 }
 
@@ -147,13 +165,26 @@ impl Profile {
         projection: &Path,
         register: &Register,
     ) -> Result<Vec<Root>, UorustError> {
-        match self.kind {
-            Kind::Functions => Ok(self.roots(register)),
-            Kind::Cases => Ok(cases::cases(self, &modules(projection)?, register)
+        let roots: Vec<Root> = match self.kind {
+            Kind::Functions => self.roots(register),
+            Kind::Cases => cases::cases(self, &modules(projection)?, register)
                 .into_iter()
                 .map(|c| c.root)
-                .collect()),
+                .collect(),
+        };
+        // A package is one root's: two definitions that come to one name
+        // would have one certify the other's function.
+        let mut packages: BTreeMap<String, &str> = BTreeMap::new();
+        for root in &roots {
+            if let Some(other) = packages.insert(root.package(), &root.definition) {
+                return Err(UorustError::Tool(format!(
+                    "the definitions {other} and {} come to one package name, {}",
+                    root.definition,
+                    root.package()
+                )));
+            }
         }
+        Ok(roots)
     }
 }
 
@@ -1752,7 +1783,10 @@ pub(crate) fn sync(
                 .map_err(|e| io(&roots_dir, e))?;
             let (krate, path) = c.function.split_once("::").unwrap_or(("", &c.function));
             let bodies = dumps.crates.get(krate).unwrap_or(&empty);
-            if let Some((name, code)) = bodies.get(path).and_then(|b| adapter(c, b, &source)) {
+            let adapted = bodies
+                .get(path)
+                .and_then(|b| profile.adapter(c, b, &source));
+            if let Some((name, code)) = adapted {
                 wired.insert(name, code);
             }
         }
@@ -2016,52 +2050,65 @@ mod tests {
 
 /// The adapter of a certified root over its hand-written function's body:
 /// none when a parameter or the result has no conversion.
+#[cfg(test)]
 pub(crate) fn adapter(root: &Certified, body: &IrBody, source: &str) -> Option<(String, String)> {
-    let (params, result) = run_signature(source)?;
-    if params.len() != body.arity {
-        return None;
-    }
-    let m = format!(
-        "uorust_certified::{}",
-        root.package.strip_prefix(PACKAGE).unwrap_or(&root.package)
-    );
-    let mut args = Vec::new();
-    let mut converted = Vec::new();
-    for (i, cert) in params.iter().enumerate() {
-        let rust = unlifetimed(body.locals.get(i + 1)?);
-        // Each argument comes by reference, so the hand-written body still
-        // owns it when the root is not certified.
-        args.push(format!("p{i}: &{rust}"));
-        converted.push(if rust.starts_with('&') {
-            to_cert(&format!("(*p{i})"), &rust, cert, &m)?
-        } else {
-            to_cert(&format!("p{i}"), &format!("&{rust}"), cert, &m)?
-        });
-    }
-    let rust_result = unlifetimed(body.locals.first()?);
-    let call = format!("{m}::run({})", converted.join(", "));
-    let value = match result.strip_prefix("R<").and_then(|r| r.strip_suffix('>')) {
-        Some(inner) => {
-            let overflow = format!(
+    Profile::default().adapter(root, body, source)
+}
+
+impl Profile {
+    /// The adapter of a root certified under this profile over its function's
+    /// body, calling its module of the profile's certified crate and named by
+    /// the function's path in its own crate: none when a parameter or the
+    /// result has no conversion.
+    pub(crate) fn adapter(
+        &self,
+        root: &Certified,
+        body: &IrBody,
+        source: &str,
+    ) -> Option<(String, String)> {
+        let (params, result) = run_signature(source)?;
+        if params.len() != body.arity {
+            return None;
+        }
+        let m = format!("{}::{}", self.crate_name(), self.module(&root.package));
+        let mut args = Vec::new();
+        let mut converted = Vec::new();
+        for (i, cert) in params.iter().enumerate() {
+            let rust = unlifetimed(body.locals.get(i + 1)?);
+            // Each argument comes by reference, so the hand-written body still
+            // owns it when the root is not certified.
+            args.push(format!("p{i}: &{rust}"));
+            converted.push(if rust.starts_with('&') {
+                to_cert(&format!("(*p{i})"), &rust, cert, &m)?
+            } else {
+                to_cert(&format!("p{i}"), &format!("&{rust}"), cert, &m)?
+            });
+        }
+        let rust_result = unlifetimed(body.locals.first()?);
+        let call = format!("{m}::run({})", converted.join(", "));
+        let value = match result.strip_prefix("R<").and_then(|r| r.strip_suffix('>')) {
+            Some(inner) => {
+                let overflow = format!(
                 "match {call} {{ Ok(v) => v, Err(_) => panic!(\"{}: the certified root overflowed\") }}",
                 root.function
             );
-            from_cert(&overflow, inner, &rust_result)?
-        }
-        None => from_cert(&call, &result, &rust_result)?,
-    };
-    let name = root
-        .function
-        .strip_prefix("uorust::")
-        .unwrap_or(&root.function)
-        .replace("::", "_");
-    let code = format!(
+                from_cert(&overflow, inner, &rust_result)?
+            }
+            None => from_cert(&call, &result, &rust_result)?,
+        };
+        let name = root
+            .function
+            .split_once("::")
+            .map_or(root.function.as_str(), |(_, path)| path)
+            .replace("::", "_");
+        let code = format!(
         "/// `{}`, certified as `Behavior::{}`.\n#[allow(clippy::all, non_snake_case, unused_parens)]\npub(crate) fn {name}({}) -> Option<{rust_result}> {{\n    Some({value})\n}}\n",
         root.function,
         root.definition,
         args.join(", ")
     );
-    Some((name, code))
+        Some((name, code))
+    }
 }
 
 /// A type as MIR prints it, without its lifetimes.
@@ -2570,8 +2617,9 @@ impl Profile {
             return Ok(now.len());
         }
         let mut rows = vec![format!(
-            "{} uncertified translator functions, {} in the parent",
+            "{} uncertified {}, {} in the parent",
             now.len(),
+            self.measured(),
             before.len()
         )];
         rows.extend(
@@ -2580,6 +2628,16 @@ impl Profile {
                 .map(|(f, cause)| format!("{f}: {cause}")),
         );
         Err(UorustError::Grown(rows))
+    }
+
+    /// What the ratchet counts, in words: the translator's functions, or
+    /// the functions in another workspace's scope.
+    pub fn measured(&self) -> &'static str {
+        if *self == Profile::default() {
+            "translator functions"
+        } else {
+            "functions in scope"
+        }
     }
 
     /// [`Profile::ratchet`] of a head measured under this profile against a
@@ -2606,11 +2664,10 @@ impl Profile {
                 "the scope measures less than the base's: {} of its prefixes are left out",
                 dropped.len()
             )];
-            rows.extend(
-                dropped
-                    .into_iter()
-                    .map(|p| format!("{p}: no longer in scope")),
-            );
+            rows.extend(dropped.into_iter().map(|p| {
+                let prefix = if p.is_empty() { "every function" } else { &p };
+                format!("{prefix}: no longer in scope")
+            }));
             return Err(UorustError::Grown(rows));
         }
         self.ratchet(head, head_manifest, base, base_manifest)
@@ -3052,6 +3109,28 @@ mod tests {
         assert!(out["Behavior"].contains(
             "  executable: true,\n  production: {effects: [overflow], targets: [rust-core]}\n}\n"
         ));
+        // An adapter calls the workspace's own certified crate and is named
+        // by the function's path in its own crate.
+        let certified = Certified {
+            function: "meter::dial::read".into(),
+            kappa: "a".into(),
+            definition: "read".into(),
+            package: "meter_certified_read".into(),
+            source: "s".into(),
+            certification: "kernel-checked".into(),
+        };
+        let body = IrBody {
+            arity: 2,
+            locals: vec!["u32".into(), "&[u32]".into(), "u32".into()],
+            ..IrBody::default()
+        };
+        let source = "pub fn run(p0: List<u64>, p1: u64) -> R<u64> {\n}\n";
+        let (name, code) = meter
+            .adapter(&certified, &body, source)
+            .expect("an adapter");
+        assert_eq!(name, "dial_read");
+        assert!(code.contains("pub(crate) fn dial_read(p0: &&[u32], p1: &u32) -> Option<u32>"));
+        assert!(code.contains("meter_certified::read::run("), "{code}");
         // The request's descriptor is the profile's target's.
         let targets =
             r#"{"targets":[{"id":"rust-core","digest":"c0"},{"id":"rust-std","digest":"5d"}]}"#;
@@ -3117,6 +3196,7 @@ mod tests {
             "roots = \"tests\"\n",
             "scopes = []\n",
             "package = \"Meter-\"\n",
+            "package = \"9meter_\"\n",
             "scope = []\n",
         ] {
             std::fs::write(&cargo, format!("[package.metadata.uorust.certify]\n{bad}"))
@@ -3321,8 +3401,9 @@ mod tests {
         assert_eq!(ratchet(&grown, &certified, &base, &certified), Ok(0));
         match meter.ratchet(&grown, &certified, &base, &certified) {
             Err(UorustError::Grown(rows)) => assert_eq!(
-                rows[1..],
+                rows,
                 [
+                    "3 uncertified functions in scope, 1 in the parent",
                     "meter::read: lifted as Behavior::read, not yet certified",
                     "meter::sum: effect: Fs effect: fs::read"
                 ]
@@ -3336,7 +3417,9 @@ mod tests {
             ..meter.clone()
         };
         match meter.ratchet_from(Some(&wide), &base, &certified, &base, &certified) {
-            Err(UorustError::Grown(rows)) => assert_eq!(rows[1], ": no longer in scope"),
+            Err(UorustError::Grown(rows)) => {
+                assert_eq!(rows[1], "every function: no longer in scope");
+            }
             other => panic!("not refused: {other:?}"),
         }
         assert_eq!(
@@ -3380,6 +3463,20 @@ mod tests {
             roots.iter().map(Root::package).collect()
         };
         assert_eq!(of(&functions), ["meter_certified_read"]);
+        // A name longer than a crate's may be is shortened to the bound,
+        // the same at every export and each root's alone.
+        let long = |end: &str| Root {
+            definition: format!(
+                "acceptMeterReadsEveryRoomOfTheRosterInItsOwnOrderAndKeepsThem{end}"
+            ),
+            ..functions.roots(&r)[0].clone()
+        };
+        let (first, second) = (long("0Root").package(), long("1Root").package());
+        assert_eq!((first.len(), second.len()), (CRATE_NAME, CRATE_NAME));
+        assert!(
+            first.starts_with("meter_certified_accept_meter_reads_every_room_") && first != second
+        );
+        assert_eq!(first, long("0Root").package());
         assert_eq!(of(&cases), ["meter_certified_accept_meter_reads0_root"]);
         let found = cases.export_roots(&tmp, &r).expect("the roots");
         assert_eq!(found[0].function, "meter::read");
