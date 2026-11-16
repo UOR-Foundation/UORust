@@ -868,20 +868,21 @@ pub enum Adt1 {
     C3(u64),
     C4(Adt2),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt1>),
-    C13(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
-    C14(std::rc::Rc<Adt1>),
-    C15(List<Adt1>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt1>),
+    C14(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
+    C15(std::rc::Rc<Adt1>),
     C16(List<Adt1>),
-    C17(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
-    C18(std::rc::Rc<Adt1>, bool),
-    C19(List<Adt1>, std::rc::Rc<Adt1>),
+    C17(List<Adt1>),
+    C18(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
+    C19(std::rc::Rc<Adt1>, bool),
+    C20(List<Adt1>, std::rc::Rc<Adt1>),
 }
 
 #[derive(Clone)]
@@ -969,9 +970,13 @@ pub enum Adt13 {
 
 pub fn f0(v0: Str, v1: Adt0) -> Result<((Adt5, Adt1), Adt0), Adt9> {
     f1({
-        let a1 = List::cons(Str::lit("(prim equal "), List::cons(v0, List::cons(Str::lit(" \"\" : Bool)"), List::<Str>::nil())));
-        let a2 = Str::lit("");
-        join(a1, a2)
+        let a3 = {
+            let a1 = List::cons(Str::lit("(prim equal "), List::<Str>::nil());
+            let a2 = List::cons(v0, List::cons(Str::lit(" \"\" : Bool)"), List::<Str>::nil()));
+            append_list(a1, a2)
+        };
+        let a4 = Str::lit("");
+        join(a3, a4)
     }, Adt1::C1, v1)
 }
 

@@ -27,6 +27,7 @@ pub mod layouts;
 mod lex;
 mod lift;
 pub mod mir;
+mod names;
 mod order;
 mod project;
 pub mod queue;
@@ -77,11 +78,12 @@ fn project_workspace_here(
         return Err(UorustError::BadTimestamp(options.last_modified.clone()));
     }
     let (workspace, syntax) = ingest::workspace(root, options.advisories.as_deref())?;
+    let syntax = names::read(root, &workspace, syntax)?;
     let dumps = match &options.mir {
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
     };
-    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref());
+    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref())?;
     let manifest: String = files
         .iter()
         .map(|(path, bytes)| format!("{}  {path}\n", project::sha(bytes)))
@@ -166,7 +168,7 @@ pub fn admit(path: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<(), Uorus
         return Ok(());
     }
     let text = std::fs::read_to_string(path).map_err(|e| error::io(path, e))?;
-    let incumbent = register::Register::parse(path, &text)?;
+    let incumbent = register::Register::read(path, &text)?;
     let regressed = register::admit(&incumbent, &lift_register(files)?);
     if regressed.is_empty() {
         Ok(())

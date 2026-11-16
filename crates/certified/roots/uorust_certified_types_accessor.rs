@@ -856,9 +856,13 @@ pub fn format_int(p0: i64) -> Str {
 }
 
 pub fn f0(v0: Str, v1: Str) -> Str {
-    let a1 = List::cons(Str::lit("field_"), List::cons(v0, List::cons(Str::lit("_"), List::cons(v1, List::<Str>::nil()))));
-    let a2 = Str::lit("");
-    join(a1, a2)
+    let a3 = {
+        let a1 = List::cons(Str::lit("field_"), List::cons(v0, List::<Str>::nil()));
+        let a2 = List::cons(Str::lit("_"), List::cons(v1, List::<Str>::nil()));
+        append_list(a1, a2)
+    };
+    let a4 = Str::lit("");
+    join(a3, a4)
 }
 
 pub fn run(p0: Str, p1: Str) -> Str {

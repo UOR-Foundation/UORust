@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -975,24 +976,32 @@ pub fn f0(v0: u64, v1: Str, v2: Str, v3: Adt0, v4: Adt2) -> R<Result<((Adt5, Adt
     };
     if bool_not(a3) {
         Ok(Err::<((Adt5, Adt0), Adt2), Adt9>(Adt9::C5({
-            let a4 = List::cons(Str::lit("."), List::cons(v1, List::cons(Str::lit(" on i"), List::cons(f1(v0)?, List::<Str>::nil()))));
-            let a5 = Str::lit("");
-            join(a4, a5)
+            let a6 = {
+                let a4 = List::cons(Str::lit("."), List::cons(v1, List::<Str>::nil()));
+                let a5 = List::cons(Str::lit(" on i"), List::cons(f1(v0)?, List::<Str>::nil()));
+                append_list(a4, a5)
+            };
+            let a7 = Str::lit("");
+            join(a6, a7)
         })))
     } else {
         Ok(f2({
-            let a6 = List::cons(Str::lit("(prim checked_negate "), List::cons(v2, List::cons(Str::lit(" : (Option Int64))"), List::<Str>::nil())));
-            let a7 = Str::lit("");
-            join(a6, a7)
+            let a10 = {
+                let a8 = List::cons(Str::lit("(prim checked_negate "), List::<Str>::nil());
+                let a9 = List::cons(v2, List::cons(Str::lit(" : (Option Int64))"), List::<Str>::nil()));
+                append_list(a8, a9)
+            };
+            let a11 = Str::lit("");
+            join(a10, a11)
         }, f3(v3), v4))
     }
 }
 
 pub fn f1(v0: u64) -> R<Str> {
     Ok(f4({
-        let a8 = v0;
-        let a9 = 1u64;
-        nat_add(a8, a9)?
+        let a12 = v0;
+        let a13 = 1u64;
+        nat_add(a12, a13)?
     }, v0))
 }
 
@@ -1001,81 +1010,81 @@ pub fn f2(v0: Str, v1: Adt0, v2: Adt2) -> Result<((Adt5, Adt0), Adt2), Adt9> {
 }
 
 pub fn f3(v0: Adt0) -> Adt0 {
-    Adt0::C12(std::rc::Rc::new(v0))
+    Adt0::C13(std::rc::Rc::new(v0))
 }
 
 pub fn f4(v0: u64, v1: u64) -> Str {
-    let m10 = v0;
-    if m10 == 0 {
+    let m14 = v0;
+    if m14 == 0 {
         Str::lit("")
     } else {
-        let v2 = m10 - 1;
-        let a11 = v1;
-        let a12 = 10u64;
-        if nat_lt(a11, a12) {
+        let v2 = m14 - 1;
+        let a15 = v1;
+        let a16 = 10u64;
+        if nat_lt(a15, a16) {
             f5(v1)
         } else {
-            let a19 = List::cons(f4(v2, {
-                let a13 = v1;
-                let a14 = 10u64;
-                let a15 = 0u64;
-                nat_quot(a13, a14, a15)
+            let a23 = List::cons(f4(v2, {
+                let a17 = v1;
+                let a18 = 10u64;
+                let a19 = 0u64;
+                nat_quot(a17, a18, a19)
             }), List::cons(f5({
-                let a16 = v1;
-                let a17 = 10u64;
-                let a18 = 0u64;
-                nat_rem(a16, a17, a18)
+                let a20 = v1;
+                let a21 = 10u64;
+                let a22 = 0u64;
+                nat_rem(a20, a21, a22)
             }), List::<Str>::nil()));
-            let a20 = Str::lit("");
-            join(a19, a20)
+            let a24 = Str::lit("");
+            join(a23, a24)
         }
     }
 }
 
 pub fn f5(v0: u64) -> Str {
-    let a21 = v0;
-    let a22 = 0u64;
-    if nat_eq(a21, a22) {
+    let a25 = v0;
+    let a26 = 0u64;
+    if nat_eq(a25, a26) {
         Str::lit("0")
     } else {
-        let a23 = v0;
-        let a24 = 1u64;
-        if nat_eq(a23, a24) {
+        let a27 = v0;
+        let a28 = 1u64;
+        if nat_eq(a27, a28) {
             Str::lit("1")
         } else {
-            let a25 = v0;
-            let a26 = 2u64;
-            if nat_eq(a25, a26) {
+            let a29 = v0;
+            let a30 = 2u64;
+            if nat_eq(a29, a30) {
                 Str::lit("2")
             } else {
-                let a27 = v0;
-                let a28 = 3u64;
-                if nat_eq(a27, a28) {
+                let a31 = v0;
+                let a32 = 3u64;
+                if nat_eq(a31, a32) {
                     Str::lit("3")
                 } else {
-                    let a29 = v0;
-                    let a30 = 4u64;
-                    if nat_eq(a29, a30) {
+                    let a33 = v0;
+                    let a34 = 4u64;
+                    if nat_eq(a33, a34) {
                         Str::lit("4")
                     } else {
-                        let a31 = v0;
-                        let a32 = 5u64;
-                        if nat_eq(a31, a32) {
+                        let a35 = v0;
+                        let a36 = 5u64;
+                        if nat_eq(a35, a36) {
                             Str::lit("5")
                         } else {
-                            let a33 = v0;
-                            let a34 = 6u64;
-                            if nat_eq(a33, a34) {
+                            let a37 = v0;
+                            let a38 = 6u64;
+                            if nat_eq(a37, a38) {
                                 Str::lit("6")
                             } else {
-                                let a35 = v0;
-                                let a36 = 7u64;
-                                if nat_eq(a35, a36) {
+                                let a39 = v0;
+                                let a40 = 7u64;
+                                if nat_eq(a39, a40) {
                                     Str::lit("7")
                                 } else {
-                                    let a37 = v0;
-                                    let a38 = 8u64;
-                                    if nat_eq(a37, a38) {
+                                    let a41 = v0;
+                                    let a42 = 8u64;
+                                    if nat_eq(a41, a42) {
                                         Str::lit("8")
                                     } else {
                                         Str::lit("9")

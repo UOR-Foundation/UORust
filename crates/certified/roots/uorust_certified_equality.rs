@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -895,16 +896,24 @@ pub fn f0(v0: Adt0, v1: Str, v2: Str) -> Option<Str> {
         }
         Adt0::C2(_) => {
             Some({
-                let a2 = List::cons(Str::lit("("), List::cons(v1, List::cons(Str::lit(" =? "), List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil())))));
-                let a3 = Str::lit("");
-                join(a2, a3)
+                let a4 = {
+                    let a2 = List::cons(Str::lit("("), List::cons(v1, List::<Str>::nil()));
+                    let a3 = List::cons(Str::lit(" =? "), List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil())));
+                    append_list(a2, a3)
+                };
+                let a5 = Str::lit("");
+                join(a4, a5)
             })
         }
         Adt0::C3(_) => {
             Some({
-                let a4 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())))));
-                let a5 = Str::lit("");
-                join(a4, a5)
+                let a8 = {
+                    let a6 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::<Str>::nil()));
+                    let a7 = List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())));
+                    append_list(a6, a7)
+                };
+                let a9 = Str::lit("");
+                join(a8, a9)
             })
         }
         Adt0::C4(_) => {
@@ -913,22 +922,30 @@ pub fn f0(v0: Adt0, v1: Str, v2: Str) -> Option<Str> {
         Adt0::C5(_) => {
             None::<Str>
         }
-        Adt0::C6 => {
-            Some({
-                let a6 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())))));
-                let a7 = Str::lit("");
-                join(a6, a7)
-            })
+        Adt0::C6(_) => {
+            None::<Str>
         }
         Adt0::C7 => {
             Some({
-                let a8 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())))));
-                let a9 = Str::lit("");
-                join(a8, a9)
+                let a12 = {
+                    let a10 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::<Str>::nil()));
+                    let a11 = List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())));
+                    append_list(a10, a11)
+                };
+                let a13 = Str::lit("");
+                join(a12, a13)
             })
         }
         Adt0::C8 => {
-            None::<Str>
+            Some({
+                let a16 = {
+                    let a14 = List::cons(Str::lit("(prim equal "), List::cons(v1, List::<Str>::nil()));
+                    let a15 = List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(" : Bool)"), List::<Str>::nil())));
+                    append_list(a14, a15)
+                };
+                let a17 = Str::lit("");
+                join(a16, a17)
+            })
         }
         Adt0::C9 => {
             None::<Str>
@@ -936,16 +953,16 @@ pub fn f0(v0: Adt0, v1: Str, v2: Str) -> Option<Str> {
         Adt0::C10 => {
             None::<Str>
         }
-        Adt0::C11(_) => {
+        Adt0::C11 => {
             None::<Str>
         }
         Adt0::C12(_) => {
             None::<Str>
         }
-        Adt0::C13(_, _) => {
+        Adt0::C13(_) => {
             None::<Str>
         }
-        Adt0::C14(_) => {
+        Adt0::C14(_, _) => {
             None::<Str>
         }
         Adt0::C15(_) => {
@@ -954,13 +971,16 @@ pub fn f0(v0: Adt0, v1: Str, v2: Str) -> Option<Str> {
         Adt0::C16(_) => {
             None::<Str>
         }
-        Adt0::C17(_, _, _) => {
+        Adt0::C17(_) => {
             None::<Str>
         }
-        Adt0::C18(_, _) => {
+        Adt0::C18(_, _, _) => {
             None::<Str>
         }
         Adt0::C19(_, _) => {
+            None::<Str>
+        }
+        Adt0::C20(_, _) => {
             None::<Str>
         }
     }

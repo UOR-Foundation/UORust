@@ -857,39 +857,47 @@ pub fn format_int(p0: i64) -> Str {
 
 pub fn f0(v0: Str, v1: List<Str>, v2: List<Str>, v3: bool) -> Str {
     let v4: Str = {
-        let a3 = List::cons(v0.clone(), List::cons(Str::lit("{"), List::cons({
-            let a1 = v1;
-            let a2 = Str::lit(", ");
-            join(a1, a2)
-        }, List::cons(Str::lit("}"), List::<Str>::nil()))));
-        let a4 = Str::lit("");
-        join(a3, a4)
+        let a5 = {
+            let a3 = List::cons(v0.clone(), List::cons(Str::lit("{"), List::<Str>::nil()));
+            let a4 = List::cons({
+                let a1 = v1;
+                let a2 = Str::lit(", ");
+                join(a1, a2)
+            }, List::cons(Str::lit("}"), List::<Str>::nil()));
+            append_list(a3, a4)
+        };
+        let a6 = Str::lit("");
+        join(a5, a6)
     };
     if if v3 {
-        let a5 = f1(v4.clone());
-        let a6 = f2();
-        nat_le(a5, a6)
+        let a7 = f1(v4.clone());
+        let a8 = f2();
+        nat_le(a7, a8)
     } else {
         false
     } {
         v4
     } else {
-        let a9 = List::cons(v0, List::cons(Str::lit("{\u{a}"), List::cons({
-            let a7 = v2;
-            let a8 = Str::lit(",\u{a}");
-            join(a7, a8)
-        }, List::cons(Str::lit("\u{a}}"), List::<Str>::nil()))));
-        let a10 = Str::lit("");
-        join(a9, a10)
+        let a13 = {
+            let a11 = List::cons(v0, List::cons(Str::lit("{\u{a}"), List::<Str>::nil()));
+            let a12 = List::cons({
+                let a9 = v2;
+                let a10 = Str::lit(",\u{a}");
+                join(a9, a10)
+            }, List::cons(Str::lit("\u{a}}"), List::<Str>::nil()));
+            append_list(a11, a12)
+        };
+        let a14 = Str::lit("");
+        join(a13, a14)
     }
 }
 
 pub fn f1(v0: Str) -> u64 {
-    let a12 = {
-        let a11 = v0;
-        utf8_encode(a11)
+    let a16 = {
+        let a15 = v0;
+        utf8_encode(a15)
     };
-    length_bytes(a12)
+    length_bytes(a16)
 }
 
 pub fn f2() -> u64 {

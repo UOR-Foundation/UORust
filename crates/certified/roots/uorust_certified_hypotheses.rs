@@ -881,18 +881,26 @@ pub fn f2(v0: Adt0) -> Str {
     let m2 = v0;
     match m2 {
         Adt0::C0(v1, v2) => {
-            let a3 = List::cons(Str::lit("("), List::cons(v1, List::cons(Str::lit(" = "), List::cons(if v2 {
-                Str::lit("true")
-            } else {
-                Str::lit("false")
-            }, List::cons(Str::lit(")"), List::<Str>::nil())))));
-            let a4 = Str::lit("");
-            join(a3, a4)
-        }
-        Adt0::C1(v3, v4) => {
-            let a5 = List::cons(Str::lit("("), List::cons(v3, List::cons(Str::lit(" = "), List::cons(v4, List::cons(Str::lit(")"), List::<Str>::nil())))));
+            let a5 = {
+                let a3 = List::cons(Str::lit("("), List::cons(v1, List::<Str>::nil()));
+                let a4 = List::cons(Str::lit(" = "), List::cons(if v2 {
+                    Str::lit("true")
+                } else {
+                    Str::lit("false")
+                }, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a3, a4)
+            };
             let a6 = Str::lit("");
             join(a5, a6)
+        }
+        Adt0::C1(v3, v4) => {
+            let a9 = {
+                let a7 = List::cons(Str::lit("("), List::cons(v3, List::<Str>::nil()));
+                let a8 = List::cons(Str::lit(" = "), List::cons(v4, List::cons(Str::lit(")"), List::<Str>::nil())));
+                append_list(a7, a8)
+            };
+            let a10 = Str::lit("");
+            join(a9, a10)
         }
     }
 }

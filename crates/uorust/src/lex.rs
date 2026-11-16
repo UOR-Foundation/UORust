@@ -565,24 +565,23 @@ pub(crate) fn escape(text: &str) -> String {
     out
 }
 
-/// `(cons "a" (cons "b" (nil String)))`.
+/// The list of the strings `items`: `(cons "a" (cons "b" (nil String)))`,
+/// and a long one as balanced halves ([`crate::embed::term_list`]), since a
+/// feature lists every call and acceptance row of its module and the linker
+/// reads a term to a bounded depth.
 pub(crate) fn string_list(items: &[String]) -> String {
-    let mut out = "(nil String)".to_string();
-    for item in items.iter().rev() {
-        out = format!("(cons {} {out})", string(item));
-    }
-    out
+    let quoted: Vec<String> = items.iter().map(|item| string(item)).collect();
+    crate::embed::term_list(&quoted, "String")
 }
 
 /// `lowerCamel` from any Rust or Cargo name: `thermo-core::should_heat` ->
 /// `thermoCoreShouldHeat`.
 pub(crate) fn camel(parts: &[&str]) -> String {
-    let pascal = pascal(parts);
-    let mut chars = pascal.chars();
-    match chars.next() {
-        Some(first) => first.to_ascii_lowercase().to_string() + chars.as_str(),
-        None => String::new(),
-    }
+    pascal(parts)
+        .chars()
+        .enumerate()
+        .map(|(i, c)| if i == 0 { c.to_ascii_lowercase() } else { c })
+        .collect::<String>()
 }
 
 /// `PascalCase` from any Rust or Cargo name.
@@ -609,9 +608,10 @@ pub(crate) fn pascal(parts: &[&str]) -> String {
         }
     }
     if out.starts_with(|c: char| c.is_ascii_digit()) {
-        out.insert(0, 'N');
+        format!("N{out}")
+    } else {
+        out
     }
-    out
 }
 
 #[cfg(test)]
@@ -658,5 +658,27 @@ mod tests {
         );
         let long = Decl::value("callA", "String", string(&"x".repeat(80)));
         assert!(render_decl(&long).starts_with("definition{\n  name: callA,\n"));
+    }
+
+    // residue: `camel` and `pascal` rewritten inside the fragment the tool
+    // lifts from itself; this pins what the old bodies did.
+
+    #[test]
+    fn residue_names_keep_their_case_rules_at_the_edges() {
+        assert_eq!(camel(&[]), "");
+        assert_eq!(camel(&["--", "_"]), "");
+        assert_eq!(pascal(&[]), "");
+        assert_eq!(pascal(&["--"]), "");
+        // The first character only is lowered, after the digit's prefix.
+        assert_eq!(camel(&["2d"]), "n2d");
+        assert_eq!(camel(&["x"]), "x");
+        assert_eq!(camel(&["Ab", "Cd"]), "abCd");
+        assert_eq!(camel(&["r#type"]), "rType");
+        // A digit after the first part is no prefix.
+        assert_eq!(pascal(&["a", "2"]), "A2");
+        assert_eq!(pascal(&["9", "a"]), "N9A");
+        assert_eq!(camel(&["9", "a"]), "n9A");
+        // Non-ASCII characters are separators.
+        assert_eq!(pascal(&["é9"]), "N9");
     }
 }

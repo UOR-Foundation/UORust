@@ -8,6 +8,14 @@
 # commits (`just ratchet`), and the differential and fixpoint (`just
 # certified-gate`), whose outputs are compared by their κ, never by an exit
 # code. The last job requires both architectures' κ to be equal.
+#
+# On a branch, generate.yml dispatches this with land_branch only when it was
+# itself dispatched there with `export` and the branch's translator has more
+# uncertified functions than main's (no push to a pull request starts it):
+# the export runs on the branch's head, the land takes it onto the branch
+# merged onto main (scripts/ci/merge-main.sh) and pushes that merge to the
+# branch (scripts/ci/push-branch.sh), never to main, then dispatches
+# generate.yml on the branch, which regenerates and gates it.
 name: certified
 
 on:
@@ -23,6 +31,11 @@ on:
       - 'Justfile'
       - '.github/workflows/certified.yml'
   workflow_dispatch:
+    inputs:
+      land_branch:
+        description: On a branch other than main, land the export on that branch as its merge onto main.
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -31,8 +44,9 @@ permissions:
 # One run at a time, never cancelled: an export takes longer than main stays
 # still, so cancelling in progress meant no export ever finished. GitHub keeps
 # the newest waiting run; it runs next, on the newest main (as generate.yml).
-# Each branch is its own queue, so a branch's export (which lands nothing) is
-# never replaced by main's newer runs, nor holds them back.
+# Each branch is its own queue, so a branch's export (which lands nothing
+# unless it was dispatched with land_branch) is never replaced by main's
+# newer runs, nor holds them back.
 concurrency:
   group: certified-${{ github.ref }}
   cancel-in-progress: false
@@ -166,9 +180,11 @@ jobs:
   land:
     name: take the shards in and land the certified translator
     needs: [plan, export]
-    # Only main lands: a dispatch on another branch exports its shards for a
-    # local `just certified-sync` of that branch, and pushes nothing.
-    if: ${{ !cancelled() && needs.plan.result == 'success' && github.ref == 'refs/heads/main' }}
+    # main lands on main. A dispatch on another branch exports its shards for
+    # a local `just certified-sync` of that branch and pushes nothing, unless
+    # it was dispatched with land_branch: then it lands on that branch only
+    # (never a tag, never main).
+    if: ${{ !cancelled() && needs.plan.result == 'success' && (github.ref == 'refs/heads/main' || (inputs.land_branch && startsWith(github.ref, 'refs/heads/'))) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
@@ -192,6 +208,16 @@ jobs:
         with:
           pattern: shard-*
           path: target/uorust-certified
+      - name: Merge the branch onto main's head, where the sync takes the shards
+        if: github.ref != 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          # A conflict in crates/certified takes main's: the sync rewrites it.
+          TAKE_CERTIFIED: '1'
+        # Status 2: the branch holds nothing main lacks, and nothing lands.
+        run: scripts/ci/merge-main.sh || [[ $? == 2 ]]
       - name: Take the shards into crates/certified through the locked SDK
         shell: bash
         run: scripts/ci/sdk.sh 'just certified-sync'
@@ -220,6 +246,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REBASE: '1'
+          BRANCH: ${{ github.ref_name }}
           INPUTS: 'crates/uorust/src/** crates/uorust/assets/** crates/uorust/Cargo.toml frontier.toml lift-verdicts.toml Cargo.lock rust-toolchain.toml prismpm.lock Justfile .github/workflows/certified.yml'
         run: scripts/ci/land-certified.sh "$((STARTED + LAND_BY_MINUTES * 60))"
 
@@ -227,7 +254,9 @@ jobs:
     name: ratchet, differential and fixpoint / ${{ matrix.runner }} / run ${{ matrix.run }}
     needs: land
     # A shard that failed fails only its roots: the gate runs on what landed.
-    if: ${{ !cancelled() && needs.land.result == 'success' }}
+    # main's only: a branch's land is gated by the bootstrap run generate.yml
+    # dispatches on it, and its packages here when they land on main.
+    if: ${{ !cancelled() && needs.land.result == 'success' && github.ref == 'refs/heads/main' }}
     strategy:
       fail-fast: false
       matrix:

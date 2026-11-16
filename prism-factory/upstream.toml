@@ -1,0 +1,114 @@
+# The upstream Prism factory this component is installed from, and how each
+# installed file stands to upstream's there. Written by `graph.py record`;
+# `graph.py check` refuses an installed file whose SHA-256 differs.
+repository = "https://github.com/UOR-Foundation/prismpm"
+revision = "4cc8f8bd4dd733fbe81b83207ef1844f66c2ce2c"
+directory = "prism-factory"
+
+[[file]]
+path = "lexlean-workspace.toml"
+how = "identical"
+upstream_sha256 = "14c9a36c2959281db57948429abfccfdfe531514e0f7829424c61dd7e80201f7"
+sha256 = "14c9a36c2959281db57948429abfccfdfe531514e0f7829424c61dd7e80201f7"
+
+[[file]]
+path = "model/lakefile.toml"
+how = "identical"
+upstream_sha256 = "da1d8789209a5db89ec98f71ca89ac7fb36cc8bddb73eb48b91241ba34b21fec"
+sha256 = "da1d8789209a5db89ec98f71ca89ac7fb36cc8bddb73eb48b91241ba34b21fec"
+
+[[file]]
+path = "model/lean-toolchain"
+how = "identical"
+upstream_sha256 = "8e3538e0ab5f81a3ee04927d8838c8c674e0e112838b4b3ce87ec218143276af"
+sha256 = "8e3538e0ab5f81a3ee04927d8838c8c674e0e112838b4b3ce87ec218143276af"
+
+[[file]]
+path = "model/lake-manifest.json"
+how = "identical"
+upstream_sha256 = "2864a16c47b88fcb29e82d7e1320c55e682859a1e5409fb85ccf0c26c34575c6"
+sha256 = "2864a16c47b88fcb29e82d7e1320c55e682859a1e5409fb85ccf0c26c34575c6"
+
+[[file]]
+path = "model/lexlean.toml"
+how = "identical"
+upstream_sha256 = "8348e39c70a984cff8b442ee3a1c8d73e35e37847826e683e0354395e2276331"
+sha256 = "8348e39c70a984cff8b442ee3a1c8d73e35e37847826e683e0354395e2276331"
+
+[[file]]
+path = "model/lexlean.lock"
+how = "relocked"
+upstream_sha256 = "f5c289bf56153b3659987618d0ce76ddc328fcc39858e490e0e101473ed93490"
+sha256 = "2ea2dc2ee3389df6e0fd027c2a1ffe79817eb8143e9375577a6d54d2b1e37c88"
+
+[[file]]
+path = "model/src/Factory/Engine.lex.tex"
+how = "identical"
+upstream_sha256 = "43056815a98e64c2454a41ea069cc347c5919ad9dd35dfbe74e95e06d597ed55"
+sha256 = "43056815a98e64c2454a41ea069cc347c5919ad9dd35dfbe74e95e06d597ed55"
+
+[[file]]
+path = "model/src/Factory.lex.tex"
+how = "derived"
+upstream_sha256 = "36be1e69d18420678cdf8d2a4d7b67a8f468e554dbee00579a641a9390d25fe9"
+sha256 = "a18e048245734baa9e8d4648d992e44826b52f30e99877a55e17520612875be2"
+
+[[file]]
+path = "std/lakefile.toml"
+how = "identical"
+upstream_sha256 = "0ed43ca31866dc005a09bc7573c78fcabe669050ddab81e20f0f0624f4806074"
+sha256 = "0ed43ca31866dc005a09bc7573c78fcabe669050ddab81e20f0f0624f4806074"
+
+[[file]]
+path = "std/lean-toolchain"
+how = "identical"
+upstream_sha256 = "8e3538e0ab5f81a3ee04927d8838c8c674e0e112838b4b3ce87ec218143276af"
+sha256 = "8e3538e0ab5f81a3ee04927d8838c8c674e0e112838b4b3ce87ec218143276af"
+
+[[file]]
+path = "std/lake-manifest.json"
+how = "identical"
+upstream_sha256 = "56e2ea627849a53364b38bcc31443b42b321167ec74e189ac95ff8edd8c87665"
+sha256 = "56e2ea627849a53364b38bcc31443b42b321167ec74e189ac95ff8edd8c87665"
+
+[[file]]
+path = "std/lexlean.toml"
+how = "identical"
+upstream_sha256 = "945d02157e58026507e00396223deec625183e26bdff8ef57bd36648ca7dc68a"
+sha256 = "945d02157e58026507e00396223deec625183e26bdff8ef57bd36648ca7dc68a"
+
+[[file]]
+path = "std/lexlean.lock"
+how = "relocked"
+upstream_sha256 = "4325d3650b5334e9dafcaafbf1deb296892e9580d85527634bfb7e332d4fcdc5"
+sha256 = "a70a04378370ca2a05737785ef75ccd793fc93ec6125fb6cd5a6c24b01457510"
+
+[[file]]
+path = "std/src/Buffer.lex.tex"
+how = "identical"
+upstream_sha256 = "b972f53125e03eb4b8980545f59ff26f49f6144d7022a08719067fc9926cb0c2"
+sha256 = "b972f53125e03eb4b8980545f59ff26f49f6144d7022a08719067fc9926cb0c2"
+
+[[file]]
+path = "std/src/Sha256.lex.tex"
+how = "identical"
+upstream_sha256 = "bbf85232d3c880bcb4cb33e67b8ebe27fd261140935263c2381cfebf2dd6a995"
+sha256 = "bbf85232d3c880bcb4cb33e67b8ebe27fd261140935263c2381cfebf2dd6a995"
+
+[[file]]
+path = "std/src/Text.lex.tex"
+how = "identical"
+upstream_sha256 = "3e202dfec6e8e288df84126212626d0018a645ec3354b988aa606122e677e0a8"
+sha256 = "3e202dfec6e8e288df84126212626d0018a645ec3354b988aa606122e677e0a8"
+
+[[file]]
+path = "host/src/lib.rs"
+how = "reduced"
+upstream_sha256 = "c3b27d10ff030788cca4d000a9ac92443cb1dcd24ee4cae3f47b795f15546e7d"
+sha256 = "3ec0c611007f45cbe10d0a58ea3ac8199f57bda3d84454daf1ecebb2fceba306"
+
+[[file]]
+path = "host/src/main.rs"
+how = "adapted"
+upstream_sha256 = "6509a4bcfc200cca9e253323243941583594a5220f6e3ca67fd14eb008121ea0"
+sha256 = "bdcb257f591a7823f5b30d3c5db190cfd6fff5955b5c767b8d422a697a19c18c"

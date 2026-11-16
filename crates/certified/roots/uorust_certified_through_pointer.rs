@@ -910,29 +910,37 @@ pub enum Adt5 {
 
 pub fn f0(v0: Str) -> Adt0 {
     f1(f2(Adt5::C0), {
-        let a1 = List::cons(Str::lit("a "), List::cons(v0, List::cons(Str::lit(" through a raw pointer, into memory the value model does not hold"), List::<Str>::nil())));
-        let a2 = Str::lit("");
-        join(a1, a2)
+        let a3 = {
+            let a1 = List::cons(Str::lit("a "), List::<Str>::nil());
+            let a2 = List::cons(v0, List::cons(Str::lit(" through a raw pointer, into memory the value model does not hold"), List::<Str>::nil()));
+            append_list(a1, a2)
+        };
+        let a4 = Str::lit("");
+        join(a3, a4)
     })
 }
 
 pub fn f1(v0: Str, v1: Str) -> Adt0 {
-    let a3 = v1.clone();
-    let a4 = Str::lit("");
-    if equal(a3, a4) {
+    let a5 = v1.clone();
+    let a6 = Str::lit("");
+    if equal(a5, a6) {
         Adt0::C9(v0)
     } else {
         Adt0::C9({
-            let a5 = List::cons(v0, List::cons(Str::lit(": "), List::cons(v1, List::<Str>::nil())));
-            let a6 = Str::lit("");
-            join(a5, a6)
+            let a9 = {
+                let a7 = List::cons(v0, List::<Str>::nil());
+                let a8 = List::cons(Str::lit(": "), List::cons(v1, List::<Str>::nil()));
+                append_list(a7, a8)
+            };
+            let a10 = Str::lit("");
+            join(a9, a10)
         })
     }
 }
 
 pub fn f2(v0: Adt5) -> Str {
-    let m7 = v0;
-    match m7 {
+    let m11 = v0;
+    match m11 {
         Adt5::C0 => {
             Str::lit("ProjectionElem::Deref")
         }

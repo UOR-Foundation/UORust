@@ -927,13 +927,17 @@ pub fn f0(v0: Adt0) -> bool {
             false
         }
         Adt0::C9(v10) => {
-            let a4 = v10;
-            let a5 = {
-                let a2 = List::cons(f1(), List::cons(Str::lit(": "), List::cons(f2(), List::<Str>::nil())));
-                let a3 = Str::lit("");
-                join(a2, a3)
+            let a6 = v10;
+            let a7 = {
+                let a4 = {
+                    let a2 = List::cons(f1(), List::<Str>::nil());
+                    let a3 = List::cons(Str::lit(": "), List::cons(f2(), List::<Str>::nil()));
+                    append_list(a2, a3)
+                };
+                let a5 = Str::lit("");
+                join(a4, a5)
             };
-            equal(a4, a5)
+            equal(a6, a7)
         }
         Adt0::C10(_) => {
             false

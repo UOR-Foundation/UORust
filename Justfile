@@ -202,15 +202,23 @@ certified-project:
     lexlean production targets --diagnostic-format json >crates/certified/targets.json
 
 # One export of the projection's roots, all of them or shard `I-N` (every Nth
-# from the Ith), kept in target/uorust-certified for `certified-sync`.
+# from the Ith), kept in target/uorust-certified for `certified-sync`. A root
+# the prior manifest certified at its identity (the root's closure, the
+# compiler, the descriptor, the project's configuration and linked packages)
+# is carried from crates/certified byte for byte and never built again, once
+# the project verifies: a build of this export that published verified it, or
+# one verification with a single root marked does when none did.
 certified-export shard="" within="":
     rm -rf target/uorust-certify target/uorust-certified
     cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --carry crates/certified {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
 
 # The shards a sharded export builds within `budget` seconds each, and the
-# roots to diagnose, as JSON (certified.yml's plan job).
+# roots to diagnose, as JSON (certified.yml's plan job), with the counts of
+# roots carried, to build and refused. Without the self projection (the plan
+# job has none) no identity is known: `carried` is null and every root not
+# refused is planned as built.
 certified-plan budget:
-    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}}
+    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json || true`
 
 # Build one root alone and keep all lexlean prints of it in
 # target/certified-diagnose/build.log (certified.yml's diagnose job).
@@ -293,6 +301,40 @@ certified-gate out="target/certified-gate":
 # touches the MIR path).
 hooks:
     git config core.hooksPath scripts/hooks
+
+# The factory (prism-factory/, the upstream Prism factory with this tool's
+# graph): every part of the gate, every writer and the certified export is an
+# obligation keyed on its declared inputs, and the certified core decides what
+# is proved, what to run, what is refuted and what waits. These run on the
+# machine that launches the SDK (prism-factory/sdk.sh), never inside it.
+# FACTORY_RECEIPTS names the receipt store, a directory outside the worktree
+# and the target directory, so receipts outlive both.
+
+# The factory-model obligation: the factory checks itself.
+factory-model:
+    bash prism-factory/check.sh
+
+# The factory-upstream obligation: every installed file of prism-factory/ holds
+# to upstream's at the revision prism-factory/upstream.toml names (it fetches it).
+factory-upstream:
+    bash prism-factory/upstream.sh
+
+# Each obligation's route (proved, observe, refuted, blocked) and how many are left.
+factory-plan:
+    prism-factory/factory.sh routes
+
+# Plan and run to the fixed point; a second run on the same tree runs nothing.
+factory *only:
+    prism-factory/factory.sh run {{only}}
+
+# The same, detached: its log and its one-line status are kept beside the receipts.
+factory-start *only:
+    prism-factory/factory.sh start {{only}}
+
+# The status of the last detached run: `running`, then `done <exit code>` or
+# `interrupted <signal>` and the counts; `stale` when its process is gone.
+factory-status:
+    prism-factory/factory.sh status
 
 # The content standard (scripts/content/standard.json) on an assembled site.
 content site="site":

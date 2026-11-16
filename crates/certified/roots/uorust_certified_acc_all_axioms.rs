@@ -868,20 +868,21 @@ pub enum Adt1 {
     C3(u64),
     C4(Adt2),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt1>),
-    C13(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
-    C14(std::rc::Rc<Adt1>),
-    C15(List<Adt1>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt1>),
+    C14(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>),
+    C15(std::rc::Rc<Adt1>),
     C16(List<Adt1>),
-    C17(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
-    C18(std::rc::Rc<Adt1>, bool),
-    C19(List<Adt1>, std::rc::Rc<Adt1>),
+    C17(List<Adt1>),
+    C18(std::rc::Rc<Adt1>, std::rc::Rc<Adt1>, bool),
+    C19(std::rc::Rc<Adt1>, bool),
+    C20(List<Adt1>, std::rc::Rc<Adt1>),
 }
 
 #[derive(Clone)]
@@ -977,18 +978,20 @@ pub fn f2(v0: List<Str>) -> List<Str> {
 }
 
 pub fn f3() -> List<Str> {
-    List::cons(Str::lit("Classical.choice"), List::cons(Str::lit("Quot.sound"), List::cons(Str::lit("propext"), List::<Str>::nil())))
+    let a9 = List::cons(Str::lit("Classical.choice"), List::<Str>::nil());
+    let a10 = List::cons(Str::lit("Quot.sound"), List::cons(Str::lit("propext"), List::<Str>::nil()));
+    append_list(a9, a10)
 }
 
-pub fn f4(p11: List<Str>, p12: List<Str>) -> List<Str> {
-    let m10 = (p11, p12);
+pub fn f4(p13: List<Str>, p14: List<Str>) -> List<Str> {
+    let m12 = (p13, p14);
     {
-        let mut m10 = m10;
+        let mut m12 = m12;
         loop {
             let step = {
-                let (v0, v1) = m10;
-                let m9 = v0;
-                match m9.uncons() {
+                let (v0, v1) = m12;
+                let m11 = v0;
+                match m11.uncons() {
                     None => {
                         Err::<(List<Str>, List<Str>), List<Str>>(v1)
                     }
@@ -998,7 +1001,7 @@ pub fn f4(p11: List<Str>, p12: List<Str>) -> List<Str> {
                 }
             };
             match step {
-                Ok(next) => { m10 = next; }
+                Ok(next) => { m12 = next; }
                 Err(done) => break done,
             }
         }
@@ -1006,23 +1009,23 @@ pub fn f4(p11: List<Str>, p12: List<Str>) -> List<Str> {
 }
 
 pub fn f5(v0: List<Str>, v1: Str) -> List<Str> {
-    let m13 = v0;
-    match m13.uncons() {
+    let m15 = v0;
+    match m15.uncons() {
         None => {
             List::cons(v1, List::<Str>::nil())
         }
         Some((v2, v3)) => {
-            let a14 = v1.clone();
-            let a15 = v2.clone();
-            if equal(a14, a15) {
+            let a16 = v1.clone();
+            let a17 = v2.clone();
+            if equal(a16, a17) {
                 List::cons(v2, v3)
             } else {
-                let m18 = {
-                    let a16 = v1.clone();
-                    let a17 = v2.clone();
-                    compare(a16, a17)
+                let m20 = {
+                    let a18 = v1.clone();
+                    let a19 = v2.clone();
+                    compare(a18, a19)
                 };
-                if match m18 {
+                if match m20 {
                     Ordering::Less => {
                         true
                     }

@@ -138,6 +138,19 @@ pub(crate) fn lift_evidence_proof(p0: &&[std::string::String]) -> Option<std::st
     )
 }
 
+/// `uorust::lift::field_name`, certified as `Behavior::fieldName`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_field_name(p0: &&str) -> Option<std::string::String> {
+    Some(
+        match uorust_certified::field_name::run(uorust_certified::field_name::Str::lit((*p0))) {
+            Ok(v) => v,
+            Err(_) => panic!("uorust::lift::field_name: the certified root overflowed"),
+        }
+        .text()
+        .to_string(),
+    )
+}
+
 /// `uorust::lift::first_free`, certified as `Behavior::firstFree`.
 #[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_first_free(
@@ -163,6 +176,30 @@ pub(crate) fn lift_first_free(
     )
 }
 
+/// `uorust::lift::is_lifetime`, certified as `Behavior::isLifetime`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_is_lifetime(p0: &&str) -> Option<bool> {
+    Some(
+        match uorust_certified::is_lifetime::run(uorust_certified::is_lifetime::Str::lit((*p0))) {
+            Ok(v) => v,
+            Err(_) => panic!("uorust::lift::is_lifetime: the certified root overflowed"),
+        },
+    )
+}
+
+/// `uorust::lift::local_name`, certified as `Behavior::localName`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_local_name(p0: &&str) -> Option<std::string::String> {
+    Some(
+        match uorust_certified::local_name::run(uorust_certified::local_name::Str::lit((*p0))) {
+            Ok(v) => v,
+            Err(_) => panic!("uorust::lift::local_name: the certified root overflowed"),
+        }
+        .text()
+        .to_string(),
+    )
+}
+
 /// `uorust::lift::mentions_word`, certified as `Behavior::mentionsWord`.
 #[allow(clippy::all, non_snake_case, unused_parens)]
 pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
@@ -175,6 +212,15 @@ pub(crate) fn lift_mentions_word(p0: &&str, p1: &&str) -> Option<bool> {
             Err(_) => panic!("uorust::lift::mentions_word: the certified root overflowed"),
         },
     )
+}
+
+/// `uorust::lift::name_taken`, certified as `Behavior::nameTaken`.
+#[allow(clippy::all, non_snake_case, unused_parens)]
+pub(crate) fn lift_name_taken(p0: &&str, p1: &bool) -> Option<bool> {
+    Some(uorust_certified::name_taken::run(
+        uorust_certified::name_taken::Str::lit((*p0)),
+        *p1,
+    ))
 }
 
 /// `uorust::lift::pointer_width`, certified as `Behavior::pointerWidth`.

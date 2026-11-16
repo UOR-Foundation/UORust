@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -905,7 +906,7 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
         Adt0::C5(_) => {
             None::<Str>
         }
-        Adt0::C6 => {
+        Adt0::C6(_) => {
             None::<Str>
         }
         Adt0::C7 => {
@@ -920,16 +921,19 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
         Adt0::C10 => {
             None::<Str>
         }
-        Adt0::C11(v6) => {
-            if f1(v1, v6.clone()) {
-                Some(v6)
+        Adt0::C11 => {
+            None::<Str>
+        }
+        Adt0::C12(v7) => {
+            if f1(v1, v7.clone()) {
+                Some(v7)
             } else {
                 None::<Str>
             }
         }
-        Adt0::C12(r8) => {
-            let v7 = (*r8).clone();
-            let m2 = v7;
+        Adt0::C13(r8) => {
+            let v8 = (*r8).clone();
+            let m2 = v8;
             match m2 {
                 Adt0::C0 => {
                     None::<Str>
@@ -949,7 +953,7 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C5(_) => {
                     None::<Str>
                 }
-                Adt0::C6 => {
+                Adt0::C6(_) => {
                     None::<Str>
                 }
                 Adt0::C7 => {
@@ -964,10 +968,13 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C10 => {
                     None::<Str>
                 }
-                Adt0::C11(v12) => {
-                    if f2(v1, v12.clone()) {
+                Adt0::C11 => {
+                    None::<Str>
+                }
+                Adt0::C12(v14) => {
+                    if f2(v1, v14.clone()) {
                         Some({
-                            let a3 = List::cons(Str::lit("option_"), List::cons(v12, List::<Str>::nil()));
+                            let a3 = List::cons(Str::lit("option_"), List::cons(v14, List::<Str>::nil()));
                             let a4 = Str::lit("");
                             join(a3, a4)
                         })
@@ -975,13 +982,10 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                         None::<Str>
                     }
                 }
-                Adt0::C12(_) => {
+                Adt0::C13(_) => {
                     None::<Str>
                 }
-                Adt0::C13(_, _) => {
-                    None::<Str>
-                }
-                Adt0::C14(_) => {
+                Adt0::C14(_, _) => {
                     None::<Str>
                 }
                 Adt0::C15(_) => {
@@ -990,23 +994,26 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C16(_) => {
                     None::<Str>
                 }
-                Adt0::C17(_, _, _) => {
+                Adt0::C17(_) => {
                     None::<Str>
                 }
-                Adt0::C18(_, _) => {
+                Adt0::C18(_, _, _) => {
                     None::<Str>
                 }
                 Adt0::C19(_, _) => {
                     None::<Str>
                 }
+                Adt0::C20(_, _) => {
+                    None::<Str>
+                }
             }
         }
-        Adt0::C13(_, _) => {
+        Adt0::C14(_, _) => {
             None::<Str>
         }
-        Adt0::C14(r9) => {
-            let v28 = (*r9).clone();
-            let m5 = v28;
+        Adt0::C15(r9) => {
+            let v30 = (*r9).clone();
+            let m5 = v30;
             match m5 {
                 Adt0::C0 => {
                     None::<Str>
@@ -1026,7 +1033,7 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C5(_) => {
                     None::<Str>
                 }
-                Adt0::C6 => {
+                Adt0::C6(_) => {
                     None::<Str>
                 }
                 Adt0::C7 => {
@@ -1041,10 +1048,13 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C10 => {
                     None::<Str>
                 }
-                Adt0::C11(v33) => {
-                    if f3(v1, v33.clone()) {
+                Adt0::C11 => {
+                    None::<Str>
+                }
+                Adt0::C12(v36) => {
+                    if f3(v1, v36.clone()) {
                         Some({
-                            let a6 = List::cons(Str::lit("list_"), List::cons(v33, List::<Str>::nil()));
+                            let a6 = List::cons(Str::lit("list_"), List::cons(v36, List::<Str>::nil()));
                             let a7 = Str::lit("");
                             join(a6, a7)
                         })
@@ -1052,13 +1062,10 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                         None::<Str>
                     }
                 }
-                Adt0::C12(_) => {
+                Adt0::C13(_) => {
                     None::<Str>
                 }
-                Adt0::C13(_, _) => {
-                    None::<Str>
-                }
-                Adt0::C14(_) => {
+                Adt0::C14(_, _) => {
                     None::<Str>
                 }
                 Adt0::C15(_) => {
@@ -1067,30 +1074,33 @@ pub fn f0(v0: Adt0, v1: List<Str>) -> Option<Str> {
                 Adt0::C16(_) => {
                     None::<Str>
                 }
-                Adt0::C17(_, _, _) => {
+                Adt0::C17(_) => {
                     None::<Str>
                 }
-                Adt0::C18(_, _) => {
+                Adt0::C18(_, _, _) => {
                     None::<Str>
                 }
                 Adt0::C19(_, _) => {
                     None::<Str>
                 }
+                Adt0::C20(_, _) => {
+                    None::<Str>
+                }
             }
-        }
-        Adt0::C15(_) => {
-            None::<Str>
         }
         Adt0::C16(_) => {
             None::<Str>
         }
-        Adt0::C17(_, _, _) => {
+        Adt0::C17(_) => {
             None::<Str>
         }
-        Adt0::C18(_, _) => {
+        Adt0::C18(_, _, _) => {
             None::<Str>
         }
         Adt0::C19(_, _) => {
+            None::<Str>
+        }
+        Adt0::C20(_, _) => {
             None::<Str>
         }
     }

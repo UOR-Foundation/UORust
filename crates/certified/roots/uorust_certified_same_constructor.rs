@@ -863,20 +863,21 @@ pub enum Adt0 {
     C3(u64),
     C4(Adt1),
     C5(Option<u64>),
-    C6,
+    C6(Option<u64>),
     C7,
     C8,
     C9,
     C10,
-    C11(Str),
-    C12(std::rc::Rc<Adt0>),
-    C13(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
-    C14(std::rc::Rc<Adt0>),
-    C15(List<Adt0>),
+    C11,
+    C12(Str),
+    C13(std::rc::Rc<Adt0>),
+    C14(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>),
+    C15(std::rc::Rc<Adt0>),
     C16(List<Adt0>),
-    C17(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
-    C18(std::rc::Rc<Adt0>, bool),
-    C19(List<Adt0>, std::rc::Rc<Adt0>),
+    C17(List<Adt0>),
+    C18(std::rc::Rc<Adt0>, std::rc::Rc<Adt0>, bool),
+    C19(std::rc::Rc<Adt0>, bool),
+    C20(List<Adt0>, std::rc::Rc<Adt0>),
 }
 
 #[derive(Clone)]
@@ -888,112 +889,285 @@ pub fn f0(v0: Adt0, v1: Str, v2: Str) -> Str {
     let m1 = v0;
     match m1 {
         Adt0::C0 => {
-            let a2 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a3 = Str::lit("");
-            join(a2, a3)
-        }
-        Adt0::C1 => {
-            let a4 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a5 = Str::lit("");
-            join(a4, a5)
-        }
-        Adt0::C2(_) => {
-            let a6 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
+            let a6 = {
+                let a4 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a5 = {
+                    let a2 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a3 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a2, a3)
+                };
+                append_list(a4, a5)
+            };
             let a7 = Str::lit("");
             join(a6, a7)
         }
-        Adt0::C3(_) => {
-            let a8 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a9 = Str::lit("");
-            join(a8, a9)
-        }
-        Adt0::C4(_) => {
-            let a10 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a11 = Str::lit("");
-            join(a10, a11)
-        }
-        Adt0::C5(_) => {
-            let a12 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
+        Adt0::C1 => {
+            let a12 = {
+                let a10 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a11 = {
+                    let a8 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a9 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a8, a9)
+                };
+                append_list(a10, a11)
+            };
             let a13 = Str::lit("");
             join(a12, a13)
         }
-        Adt0::C6 => {
-            let a14 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a15 = Str::lit("");
-            join(a14, a15)
-        }
-        Adt0::C7 => {
-            let a16 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a17 = Str::lit("");
-            join(a16, a17)
-        }
-        Adt0::C8 => {
-            let a18 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
+        Adt0::C2(_) => {
+            let a18 = {
+                let a16 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a17 = {
+                    let a14 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a15 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a14, a15)
+                };
+                append_list(a16, a17)
+            };
             let a19 = Str::lit("");
             join(a18, a19)
         }
-        Adt0::C9 => {
-            let a20 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a21 = Str::lit("");
-            join(a20, a21)
-        }
-        Adt0::C10 => {
-            let a22 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a23 = Str::lit("");
-            join(a22, a23)
-        }
-        Adt0::C11(v7) => {
-            let a24 = List::cons(Str::lit("("), List::cons(f1(v7), List::cons(Str::lit(" "), List::cons(v1, List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil())))))));
+        Adt0::C3(_) => {
+            let a24 = {
+                let a22 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a23 = {
+                    let a20 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a21 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a20, a21)
+                };
+                append_list(a22, a23)
+            };
             let a25 = Str::lit("");
             join(a24, a25)
         }
-        Adt0::C12(_) => {
-            let a26 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a27 = Str::lit("");
-            join(a26, a27)
-        }
-        Adt0::C13(_, _) => {
-            let a28 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a29 = Str::lit("");
-            join(a28, a29)
-        }
-        Adt0::C14(_) => {
-            let a30 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
+        Adt0::C4(_) => {
+            let a30 = {
+                let a28 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a29 = {
+                    let a26 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a27 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a26, a27)
+                };
+                append_list(a28, a29)
+            };
             let a31 = Str::lit("");
             join(a30, a31)
         }
-        Adt0::C15(_) => {
-            let a32 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a33 = Str::lit("");
-            join(a32, a33)
-        }
-        Adt0::C16(_) => {
-            let a34 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a35 = Str::lit("");
-            join(a34, a35)
-        }
-        Adt0::C17(_, _, _) => {
-            let a36 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
+        Adt0::C5(_) => {
+            let a36 = {
+                let a34 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a35 = {
+                    let a32 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a33 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a32, a33)
+                };
+                append_list(a34, a35)
+            };
             let a37 = Str::lit("");
             join(a36, a37)
         }
-        Adt0::C18(_, _) => {
-            let a38 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a39 = Str::lit("");
-            join(a38, a39)
+        Adt0::C6(_) => {
+            let a42 = {
+                let a40 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a41 = {
+                    let a38 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a39 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a38, a39)
+                };
+                append_list(a40, a41)
+            };
+            let a43 = Str::lit("");
+            join(a42, a43)
+        }
+        Adt0::C7 => {
+            let a48 = {
+                let a46 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a47 = {
+                    let a44 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a45 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a44, a45)
+                };
+                append_list(a46, a47)
+            };
+            let a49 = Str::lit("");
+            join(a48, a49)
+        }
+        Adt0::C8 => {
+            let a54 = {
+                let a52 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a53 = {
+                    let a50 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a51 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a50, a51)
+                };
+                append_list(a52, a53)
+            };
+            let a55 = Str::lit("");
+            join(a54, a55)
+        }
+        Adt0::C9 => {
+            let a60 = {
+                let a58 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a59 = {
+                    let a56 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a57 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a56, a57)
+                };
+                append_list(a58, a59)
+            };
+            let a61 = Str::lit("");
+            join(a60, a61)
+        }
+        Adt0::C10 => {
+            let a66 = {
+                let a64 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a65 = {
+                    let a62 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a63 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a62, a63)
+                };
+                append_list(a64, a65)
+            };
+            let a67 = Str::lit("");
+            join(a66, a67)
+        }
+        Adt0::C11 => {
+            let a72 = {
+                let a70 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a71 = {
+                    let a68 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a69 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a68, a69)
+                };
+                append_list(a70, a71)
+            };
+            let a73 = Str::lit("");
+            join(a72, a73)
+        }
+        Adt0::C12(v8) => {
+            let a78 = {
+                let a76 = List::cons(Str::lit("("), List::cons(f1(v8), List::cons(Str::lit(" "), List::<Str>::nil())));
+                let a77 = {
+                    let a74 = List::cons(v1, List::cons(Str::lit(" "), List::<Str>::nil()));
+                    let a75 = List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil()));
+                    append_list(a74, a75)
+                };
+                append_list(a76, a77)
+            };
+            let a79 = Str::lit("");
+            join(a78, a79)
+        }
+        Adt0::C13(_) => {
+            let a84 = {
+                let a82 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a83 = {
+                    let a80 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a81 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a80, a81)
+                };
+                append_list(a82, a83)
+            };
+            let a85 = Str::lit("");
+            join(a84, a85)
+        }
+        Adt0::C14(_, _) => {
+            let a90 = {
+                let a88 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a89 = {
+                    let a86 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a87 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a86, a87)
+                };
+                append_list(a88, a89)
+            };
+            let a91 = Str::lit("");
+            join(a90, a91)
+        }
+        Adt0::C15(_) => {
+            let a96 = {
+                let a94 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a95 = {
+                    let a92 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a93 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a92, a93)
+                };
+                append_list(a94, a95)
+            };
+            let a97 = Str::lit("");
+            join(a96, a97)
+        }
+        Adt0::C16(_) => {
+            let a102 = {
+                let a100 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a101 = {
+                    let a98 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a99 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a98, a99)
+                };
+                append_list(a100, a101)
+            };
+            let a103 = Str::lit("");
+            join(a102, a103)
+        }
+        Adt0::C17(_) => {
+            let a108 = {
+                let a106 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a107 = {
+                    let a104 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a105 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a104, a105)
+                };
+                append_list(a106, a107)
+            };
+            let a109 = Str::lit("");
+            join(a108, a109)
+        }
+        Adt0::C18(_, _, _) => {
+            let a114 = {
+                let a112 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a113 = {
+                    let a110 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a111 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a110, a111)
+                };
+                append_list(a112, a113)
+            };
+            let a115 = Str::lit("");
+            join(a114, a115)
         }
         Adt0::C19(_, _) => {
-            let a40 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil())))))));
-            let a41 = Str::lit("");
-            join(a40, a41)
+            let a120 = {
+                let a118 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a119 = {
+                    let a116 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a117 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a116, a117)
+                };
+                append_list(a118, a119)
+            };
+            let a121 = Str::lit("");
+            join(a120, a121)
+        }
+        Adt0::C20(_, _) => {
+            let a126 = {
+                let a124 = List::cons(Str::lit("(if "), List::cons(v1, List::cons(Str::lit(" then "), List::<Str>::nil())));
+                let a125 = {
+                    let a122 = List::cons(v2.clone(), List::cons(Str::lit(" else (not "), List::<Str>::nil()));
+                    let a123 = List::cons(v2, List::cons(Str::lit("))"), List::<Str>::nil()));
+                    append_list(a122, a123)
+                };
+                append_list(a124, a125)
+            };
+            let a127 = Str::lit("");
+            join(a126, a127)
         }
     }
 }
 
 pub fn f1(v0: Str) -> Str {
-    let a42 = List::cons(Str::lit("equal"), List::cons(v0, List::<Str>::nil()));
-    let a43 = Str::lit("");
-    join(a42, a43)
+    let a128 = List::cons(Str::lit("equal"), List::cons(v0, List::<Str>::nil()));
+    let a129 = Str::lit("");
+    join(a128, a129)
 }
 
 pub fn run(p0: Adt0, p1: Str, p2: Str) -> Str {

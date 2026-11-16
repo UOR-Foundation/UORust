@@ -861,49 +861,69 @@ pub fn f0(v0: Str) -> Option<Str> {
     if equal(a1, a2) {
         let v1: Str = Str::lit("Alphabetic");
         Some({
-            let a3 = List::cons(Str::lit("char::"), List::cons(v0, List::cons(Str::lit(" tests the Unicode "), List::cons(v1, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())))));
-            let a4 = Str::lit("");
-            join(a3, a4)
+            let a5 = {
+                let a3 = List::cons(Str::lit("char::"), List::cons(v0, List::<Str>::nil()));
+                let a4 = List::cons(Str::lit(" tests the Unicode "), List::cons(v1, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())));
+                append_list(a3, a4)
+            };
+            let a6 = Str::lit("");
+            join(a5, a6)
         })
     } else {
-        let a5 = v0.clone();
-        let a6 = Str::lit("is_alphanumeric");
-        if equal(a5, a6) {
+        let a7 = v0.clone();
+        let a8 = Str::lit("is_alphanumeric");
+        if equal(a7, a8) {
             let v2: Str = Str::lit("Alphabetic or Numeric");
             Some({
-                let a7 = List::cons(Str::lit("char::"), List::cons(v0, List::cons(Str::lit(" tests the Unicode "), List::cons(v2, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())))));
-                let a8 = Str::lit("");
-                join(a7, a8)
+                let a11 = {
+                    let a9 = List::cons(Str::lit("char::"), List::cons(v0, List::<Str>::nil()));
+                    let a10 = List::cons(Str::lit(" tests the Unicode "), List::cons(v2, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())));
+                    append_list(a9, a10)
+                };
+                let a12 = Str::lit("");
+                join(a11, a12)
             })
         } else {
-            let a9 = v0.clone();
-            let a10 = Str::lit("is_numeric");
-            if equal(a9, a10) {
+            let a13 = v0.clone();
+            let a14 = Str::lit("is_numeric");
+            if equal(a13, a14) {
                 let v3: Str = Str::lit("Numeric");
                 Some({
-                    let a11 = List::cons(Str::lit("char::"), List::cons(v0, List::cons(Str::lit(" tests the Unicode "), List::cons(v3, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())))));
-                    let a12 = Str::lit("");
-                    join(a11, a12)
+                    let a17 = {
+                        let a15 = List::cons(Str::lit("char::"), List::cons(v0, List::<Str>::nil()));
+                        let a16 = List::cons(Str::lit(" tests the Unicode "), List::cons(v3, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())));
+                        append_list(a15, a16)
+                    };
+                    let a18 = Str::lit("");
+                    join(a17, a18)
                 })
             } else {
-                let a13 = v0.clone();
-                let a14 = Str::lit("is_uppercase");
-                if equal(a13, a14) {
+                let a19 = v0.clone();
+                let a20 = Str::lit("is_uppercase");
+                if equal(a19, a20) {
                     let v4: Str = Str::lit("Uppercase");
                     Some({
-                        let a15 = List::cons(Str::lit("char::"), List::cons(v0, List::cons(Str::lit(" tests the Unicode "), List::cons(v4, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())))));
-                        let a16 = Str::lit("");
-                        join(a15, a16)
+                        let a23 = {
+                            let a21 = List::cons(Str::lit("char::"), List::cons(v0, List::<Str>::nil()));
+                            let a22 = List::cons(Str::lit(" tests the Unicode "), List::cons(v4, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())));
+                            append_list(a21, a22)
+                        };
+                        let a24 = Str::lit("");
+                        join(a23, a24)
                     })
                 } else {
-                    let a17 = v0.clone();
-                    let a18 = Str::lit("is_lowercase");
-                    if equal(a17, a18) {
+                    let a25 = v0.clone();
+                    let a26 = Str::lit("is_lowercase");
+                    if equal(a25, a26) {
                         let v5: Str = Str::lit("Lowercase");
                         Some({
-                            let a19 = List::cons(Str::lit("char::"), List::cons(v0, List::cons(Str::lit(" tests the Unicode "), List::cons(v5, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())))));
-                            let a20 = Str::lit("");
-                            join(a19, a20)
+                            let a29 = {
+                                let a27 = List::cons(Str::lit("char::"), List::cons(v0, List::<Str>::nil()));
+                                let a28 = List::cons(Str::lit(" tests the Unicode "), List::cons(v5, List::cons(Str::lit(" property, and no Unicode table is bound in LexLean or the SDK"), List::<Str>::nil())));
+                                append_list(a27, a28)
+                            };
+                            let a30 = Str::lit("");
+                            join(a29, a30)
                         })
                     } else {
                         None::<Str>

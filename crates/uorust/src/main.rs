@@ -104,14 +104,16 @@ enum Certify {
         #[arg(long)]
         kept: PathBuf,
         /// The manifest of the last export: the roots it refused at an
-        /// unchanged κ and compiler are refused again without a build.
+        /// unchanged κ and compiler are refused again without a build, and
+        /// the roots it certified at an unchanged identity are carried.
         #[arg(long)]
         prior: PathBuf,
-        /// The certified crate (its manifest and `roots/`): each root it
-        /// certifies at an unchanged κ, closure κ and compiler is carried,
-        /// not built again. Without it every root is built.
+        /// A directory holding the prior export's package sources as a
+        /// certified crate does (`roots/<package>.rs`), searched in order
+        /// (repeatable); the prior manifest's own directory when none is
+        /// given.
         #[arg(long)]
-        carry: Option<PathBuf>,
+        carry: Vec<PathBuf>,
         /// Seconds the export may build for: the builds still running then
         /// are stopped, and the roots not built are refused for this export.
         #[arg(long)]
@@ -123,6 +125,8 @@ enum Certify {
         /// The shards of a sharded export.
         #[arg(long, requires = "shard")]
         shards: Option<usize>,
+        #[command(flatten)]
+        profile: ProfileArgs,
     },
     /// Plan a sharded export: print, as JSON, the shards that build the
     /// roots the prior manifest did not refuse within `budget` seconds, and
@@ -137,6 +141,20 @@ enum Certify {
         /// The seconds each shard may build for.
         #[arg(long)]
         budget: u64,
+        /// The projection, which the roots of a cases export are read from,
+        /// and with `--targets` the roots' identities, so that the plan
+        /// leaves out the roots the prior export carries.
+        #[arg(long)]
+        projection: Option<PathBuf>,
+        /// The output of `lexlean production targets`.
+        #[arg(long, requires = "projection")]
+        targets: Option<PathBuf>,
+        /// Where the prior export's package sources are (as `certify
+        /// production --carry`).
+        #[arg(long)]
+        carry: Vec<PathBuf>,
+        #[command(flatten)]
+        profile: ProfileArgs,
     },
     /// Build one root alone and keep everything lexlean prints of it.
     Diagnose {
@@ -155,37 +173,79 @@ enum Certify {
         /// The production project, with `build.log`.
         #[arg(long)]
         out: PathBuf,
+        #[command(flatten)]
+        profile: ProfileArgs,
+    },
+    /// Decide, without a build, which roots of an export the compiler
+    /// admits: the production project with every root marked is checked
+    /// (`lexlean check`, which runs no Lean), each root it finds ineligible
+    /// is refused with its diagnostic and the rest checked again. Prints the
+    /// counts and each refusal, and writes `refusals.toml` in `out`.
+    Roots {
+        /// The projection (`uorust project <workspace> --out ...`).
+        #[arg(long)]
+        projection: PathBuf,
+        /// The lift register of that projection.
+        #[arg(long)]
+        register: PathBuf,
+        /// The output of `lexlean production targets`.
+        #[arg(long)]
+        targets: PathBuf,
+        /// The directory the production project is written to.
+        #[arg(long)]
+        out: PathBuf,
+        #[command(flatten)]
+        profile: ProfileArgs,
     },
     /// Take a published bundle into the certified crate and write its
-    /// manifest with the bootstrap's share.
+    /// manifest with the bootstrap's share, under the profile the export
+    /// recorded in what it kept.
     Sync {
         /// What `certify production` kept of the bundle.
         #[arg(long)]
         kept: PathBuf,
-        /// The self register, `frontier.toml`.
+        /// The register, `frontier.toml`.
         #[arg(long)]
         register: PathBuf,
-        /// The workspace's MIR dumps (`uorust mir`).
-        #[arg(long)]
-        mir: PathBuf,
-        /// The workspace root.
-        #[arg(long)]
-        workspace: PathBuf,
+        /// The workspace's MIR dumps (`uorust mir`): the adapters' types,
+        /// and the share reachable from the profile's entry.
+        #[arg(long, requires = "workspace")]
+        mir: Option<PathBuf>,
+        /// The workspace root the dumps are of.
+        #[arg(long, requires = "mir")]
+        workspace: Option<PathBuf>,
         /// The certified crate's directory.
         #[arg(long)]
         dir: PathBuf,
-        /// The adapters' module of uorust that is written.
+        /// The adapters' module that is written, of a workspace that runs
+        /// its certified packages in place of its functions.
+        #[arg(long, requires = "mir")]
+        adapters: Option<PathBuf>,
+        /// The projection of the register, which the roots of a cases
+        /// export are read from.
         #[arg(long)]
-        adapters: PathBuf,
+        projection: Option<PathBuf>,
     },
     /// The differential and the fixpoint: every output directory under `dir`
     /// written by the certified translator (`<name>-certified`) has the κ of
     /// the one the hand-written translator wrote (`<name>-hand`); prints each
     /// output's κ, and is refused on any disagreement.
+    ///
+    /// With `--cases`, the agreement of any workspace: every certified case
+    /// taken into that directory (`certify production --cases`, `certify
+    /// sync`) answers true when rustc runs it, and the test of the workspace
+    /// that states it passes; prints each case with the functions it asserts
+    /// on, and is refused on any case that parts.
     Agree {
         /// The directory of the outputs.
-        #[arg(long)]
-        dir: PathBuf,
+        #[arg(long, required_unless_present = "cases")]
+        dir: Option<PathBuf>,
+        /// The certified crate of a cases export.
+        #[arg(long, conflicts_with = "dir", requires = "workspace")]
+        cases: Option<PathBuf>,
+        /// The workspace whose tests state the cases.
+        #[arg(long, requires = "cases")]
+        workspace: Option<PathBuf>,
     },
     /// Refuse a head under which more translator functions are uncertified
     /// than under the base.
@@ -202,7 +262,60 @@ enum Certify {
         /// The base's manifest.
         #[arg(long)]
         base_manifest: PathBuf,
+        #[command(flatten)]
+        profile: ProfileArgs,
     },
+}
+
+/// What an export is of, when it is not the translator's own: each option
+/// given replaces what the workspace declares, and with none of them the
+/// export is the translator's (uorust::mir, lift and lex, from the translate
+/// entry, as `uorust_certified_` packages).
+#[derive(clap::Args, Default)]
+struct ProfileArgs {
+    /// The workspace the export is of: every function of its register is in
+    /// scope and its packages are named after its directory, unless the
+    /// `[workspace.metadata.uorust.certify]` table of its Cargo manifest
+    /// (`scope`, `entry`, `package`, `effects`, `target`) says otherwise.
+    #[arg(long)]
+    workspace: Option<PathBuf>,
+    /// A crate-path prefix of the functions in scope (repeatable).
+    #[arg(long)]
+    scope: Vec<String>,
+    /// The function the share's reachability starts at.
+    #[arg(long)]
+    entry: Option<String>,
+    /// The prefix of every certified package's name.
+    #[arg(long)]
+    package: Option<String>,
+    /// An effect every root admits (repeatable).
+    #[arg(long)]
+    effect: Vec<String>,
+    /// The target every root is exported to.
+    #[arg(long)]
+    target: Option<String>,
+    /// Export the cases: the closed assertions of the workspace's tests
+    /// over the functions in scope, each a root with no parameter.
+    #[arg(long)]
+    cases: bool,
+}
+
+impl ProfileArgs {
+    fn options(&self) -> uorust::certify::Options {
+        uorust::certify::Options {
+            workspace: self.workspace.clone(),
+            scope: self.scope.clone(),
+            entry: self.entry.clone(),
+            package: self.package.clone(),
+            effects: self.effect.clone(),
+            target: self.target.clone(),
+            cases: self.cases,
+        }
+    }
+
+    fn profile(&self) -> Result<uorust::certify::Profile, UorustError> {
+        uorust::certify::Profile::resolve(&self.options())
+    }
 }
 
 #[derive(clap::Args)]
@@ -665,11 +778,30 @@ fn read_register(path: &std::path::Path) -> Result<uorust::register::Register, U
         path: path.to_path_buf(),
         reason: e.to_string(),
     })?;
-    uorust::register::Register::parse(path, &text)
+    uorust::register::Register::read(path, &text)
+}
+
+/// Where an export takes the prior export's package sources from: the
+/// directories given, else the prior manifest's own.
+fn carried_from(prior: &std::path::Path, given: Vec<PathBuf>) -> Vec<PathBuf> {
+    if !given.is_empty() {
+        return given;
+    }
+    prior
+        .parent()
+        .map(std::path::Path::to_path_buf)
+        .into_iter()
+        .collect()
 }
 
 fn certify(step: Certify) -> Result<(), UorustError> {
     use uorust::certify;
+    let read = |path: &PathBuf| {
+        std::fs::read_to_string(path).map_err(|e| UorustError::Io {
+            path: path.clone(),
+            reason: e.to_string(),
+        })
+    };
     match step {
         Certify::Production {
             projection,
@@ -682,25 +814,38 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             within,
             shard,
             shards,
+            profile,
         } => {
-            let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
-                path: targets.clone(),
-                reason: e.to_string(),
-            })?;
-            certify::production_build(
-                &projection,
+            let manifest = certify::Manifest::read(&prior)?;
+            let sources = carried_from(&prior, carry);
+            let done = certify::production_build(
+                &certify::Input {
+                    profile: &profile.profile()?,
+                    projection: &projection,
+                    register: &read_register(&register)?,
+                    targets: &read(&targets)?,
+                },
                 &out,
-                &read_register(&register)?,
-                &targets,
                 &kept,
-                &certify::Manifest::read(&prior)?,
+                &certify::Prior {
+                    manifest: &manifest,
+                    sources: &sources,
+                    verify: certify::verify_project,
+                },
+                &certify::Compiler::installed()?,
                 certify::Scope {
-                    carry: carry.as_deref(),
                     within: within.map(std::time::Duration::from_secs),
                     shard: shard.zip(shards),
                 },
             )?;
-            println!("certified bundle kept in {}", kept.display());
+            println!(
+                "carried {}, built {} in {} builds, refused {}; certified bundle kept in {}",
+                done.carried,
+                done.built,
+                done.builds,
+                done.refused,
+                kept.display()
+            );
         }
         Certify::Sync {
             kept,
@@ -709,40 +854,97 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             workspace,
             dir,
             adapters,
+            projection,
         } => {
-            let m = certify::sync_paths(
-                &kept,
-                &dir,
-                &adapters,
-                &read_register(&register)?,
-                &workspace,
-                &mir,
-            )?;
+            let (profile, m) = certify::sync_paths(&certify::Sync {
+                kept: &kept,
+                dir: &dir,
+                register: &read_register(&register)?,
+                projection: projection.as_deref(),
+                adapters: adapters.as_deref(),
+                mir: workspace.as_deref().zip(mir.as_deref()),
+            })?;
             let s = &m.share;
-            println!(
-                "{} certified roots; {} of {} translator functions certified, {} of {} reachable from {}",
-                m.roots.len(),
-                s.certified,
-                s.translator,
-                s.reachable_certified,
-                s.reachable,
-                certify::ENTRY
-            );
+            match (profile.kind, &profile.entry) {
+                (certify::Kind::Cases, _) => println!(
+                    "{} certified roots; {} of {} cases certified, over {} functions",
+                    m.roots.len(),
+                    s.certified,
+                    s.translator,
+                    certify::cases::covered(&m).len()
+                ),
+                (certify::Kind::Functions, Some(entry)) => println!(
+                    "{} certified roots; {} of {} translator functions certified, {} of {} reachable from {entry}",
+                    m.roots.len(),
+                    s.certified,
+                    s.translator,
+                    s.reachable_certified,
+                    s.reachable
+                ),
+                (certify::Kind::Functions, None) => println!(
+                    "{} certified roots; {} of {} functions in scope certified",
+                    m.roots.len(),
+                    s.certified,
+                    s.translator
+                ),
+            }
         }
         Certify::Plan {
             register,
             prior,
             budget,
+            projection,
+            targets,
+            carry,
+            profile,
         } => {
-            let (shards, diagnose) = certify::plan(
-                &read_register(&register)?,
-                &certify::Manifest::read(&prior)?,
-                budget,
-            );
-            let shards: Vec<String> = (0..shards).map(|i| format!("{i}-{shards}")).collect();
+            let profile = profile.profile()?;
+            let register = read_register(&register)?;
+            let roots = match (profile.kind, &projection) {
+                (certify::Kind::Cases, None) => {
+                    return Err(UorustError::Tool(
+                        "the cases are read from the projection: pass --projection".to_string(),
+                    ))
+                }
+                (certify::Kind::Cases, Some(projection)) => {
+                    profile.export_roots(projection, &register)?
+                }
+                (certify::Kind::Functions, _) => profile.roots(&register),
+            };
+            let manifest = certify::Manifest::read(&prior)?;
+            let carried = match (&projection, &targets) {
+                (Some(projection), Some(targets)) => {
+                    let input = certify::Input {
+                        profile: &profile,
+                        projection,
+                        register: &register,
+                        targets: &read(targets)?,
+                    };
+                    let sources = carried_from(&prior, carry);
+                    let prior = certify::Prior {
+                        manifest: &manifest,
+                        sources: &sources,
+                        verify: certify::verify_project,
+                    };
+                    let decided =
+                        certify::carry(&input, &roots, &certify::Compiler::installed()?, &prior);
+                    Some(decided?)
+                }
+                _ => None,
+            };
+            let plan = certify::plan_keyed(&roots, carried.as_ref(), &manifest, budget);
+            let shards: Vec<String> = (0..plan.shards)
+                .map(|i| format!("{i}-{}", plan.shards))
+                .collect();
             println!(
                 "{}",
-                serde_json::json!({"shards": shards, "diagnose": diagnose})
+                serde_json::json!({
+                    "shards": shards,
+                    "diagnose": plan.diagnose,
+                    "carried": plan.carried,
+                    "build": plan.build,
+                    "refused": plan.refused,
+                })
             );
         }
         Certify::Diagnose {
@@ -751,38 +953,94 @@ fn certify(step: Certify) -> Result<(), UorustError> {
             targets,
             root,
             out,
+            profile,
         } => {
-            let targets = std::fs::read_to_string(&targets).map_err(|e| UorustError::Io {
-                path: targets.clone(),
-                reason: e.to_string(),
-            })?;
             certify::diagnose(
-                &projection,
+                &certify::Input {
+                    profile: &profile.profile()?,
+                    projection: &projection,
+                    register: &read_register(&register)?,
+                    targets: &read(&targets)?,
+                },
                 &out,
-                &read_register(&register)?,
-                &targets,
                 &root,
             )?;
             println!("{}", out.join("build.log").display());
         }
-        Certify::Agree { dir } => {
-            for line in certify::agree(&dir)? {
-                println!("{line}");
+        Certify::Roots {
+            projection,
+            register,
+            targets,
+            out,
+            profile,
+        } => {
+            let admission = certify::admit_roots(
+                &certify::Input {
+                    profile: &profile.profile()?,
+                    projection: &projection,
+                    register: &read_register(&register)?,
+                    targets: &read(&targets)?,
+                },
+                &out,
+            )?;
+            println!(
+                "{} roots: {} admitted, {} refused",
+                admission.roots,
+                admission.admitted.len(),
+                admission.refused.len()
+            );
+            for (cause, count) in admission.causes() {
+                println!("{count}\t{cause}");
             }
         }
+        Certify::Agree {
+            dir,
+            cases,
+            workspace,
+        } => match (dir, cases, workspace) {
+            (_, Some(cases), Some(workspace)) => {
+                let lines = certify::cases::agree(&cases, &workspace)?;
+                for line in &lines {
+                    println!("{line}");
+                }
+                println!("{} cases agree", lines.len());
+            }
+            (Some(dir), ..) => {
+                for line in certify::agree(&dir)? {
+                    println!("{line}");
+                }
+            }
+            _ => {
+                return Err(UorustError::Tool(
+                    "agree needs --dir, or --cases and --workspace".to_string(),
+                ))
+            }
+        },
         Certify::Ratchet {
             register,
             manifest,
             base_register,
             base_manifest,
+            profile,
         } => {
-            let n = certify::ratchet(
+            // The scope the head is measured under: the options', else the
+            // one its manifest states, else the translator's own.
+            let stated = profile.options() != certify::Options::default();
+            let head_profile = match certify::Profile::recorded_at(&manifest)? {
+                Some(recorded) if !stated => recorded,
+                _ => profile.profile()?,
+            };
+            let n = head_profile.ratchet_from(
+                certify::Profile::recorded_at(&base_manifest)?.as_ref(),
                 &read_register(&register)?,
                 &certify::Manifest::read(&manifest)?,
                 &read_register(&base_register)?,
                 &certify::Manifest::read(&base_manifest)?,
             )?;
-            println!("{n} translator functions uncertified, none more than in the base");
+            println!(
+                "{n} {} uncertified, none more than in the base",
+                head_profile.measured()
+            );
         }
     }
     Ok(())
