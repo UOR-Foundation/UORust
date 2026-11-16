@@ -26,6 +26,7 @@ mod facts;
 mod ingest;
 pub mod layouts;
 mod lex;
+pub mod library;
 mod lift;
 pub mod limits;
 pub mod mir;
