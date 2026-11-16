@@ -26,6 +26,10 @@ pub enum UorustError {
         /// What the operating system reported.
         reason: String,
     },
+    /// No `--name` was given and the workspace's root manifest (the path)
+    /// declares no package whose name the projection could take: a virtual
+    /// workspace. The directory's name is never taken instead.
+    NoName(PathBuf),
     /// The control set needs a `lastModified` instant and none was given: no
     /// `--last-modified`, and the workspace is not a git checkout with a commit.
     NoTimestamp,
@@ -49,6 +53,15 @@ pub enum UorustError {
         /// The limit the projection states.
         limit: usize,
     },
+    /// A limits file (`--limits`) the projection cannot take: a table or a
+    /// key the SDK's project schema does not list, a key it requires that
+    /// the file does not state, or a value that is no positive integer.
+    Limits {
+        /// The limits file.
+        path: PathBuf,
+        /// What is wrong, naming the table and the key.
+        reason: String,
+    },
     /// A tool the engine runs could not be run or failed: `cargo rustc`
     /// dumping MIR, or `lexlean verify` deciding the MIR path's theorems.
     Tool(String),
@@ -69,6 +82,12 @@ impl fmt::Display for UorustError {
                 write!(f, "{} does not parse: {reason}", path.display())
             }
             Self::Io { path, reason } => write!(f, "{}: {reason}", path.display()),
+            Self::NoName(manifest) => write!(
+                f,
+                "no project name: pass --name, since {} declares no [package] whose name \
+                 the projection could take",
+                manifest.display()
+            ),
             Self::NoTimestamp => write!(
                 f,
                 "no lastModified instant: pass --last-modified YYYY-MM-DDThh:mm:ssZ or run \
@@ -104,6 +123,9 @@ impl fmt::Display for UorustError {
                 "the module {module} is {bytes} bytes, beyond the max_file_bytes of {limit} the \
                  projection states in lexlean.toml"
             ),
+            Self::Limits { path, reason } => {
+                write!(f, "the limits file {} is refused: {reason}", path.display())
+            }
             Self::Tool(reason) => write!(f, "{reason}"),
             Self::Disagree(rows) => write!(
                 f,

@@ -17,8 +17,6 @@ impl Span {
 
 #[derive(Clone, Debug)]
 pub(crate) struct Workspace {
-    /// The workspace directory name, the project's name.
-    pub(crate) name: String,
     pub(crate) packages: Vec<Package>,
     pub(crate) lock: Vec<LockedPackage>,
     pub(crate) has_deny: bool,
@@ -103,8 +101,8 @@ pub(crate) struct Dep {
     pub(crate) name: String,
     /// `normal`, `dev` or `build`.
     pub(crate) kind: String,
-    /// The path of a path dependency relative to the workspace root, or the
-    /// absolute path when it lies outside it.
+    /// The path of a path dependency relative to the workspace root, with
+    /// `..` steps when it lies outside it.
     pub(crate) path: Option<String>,
     pub(crate) inside: bool,
 }

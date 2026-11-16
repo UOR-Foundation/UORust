@@ -103,3 +103,27 @@ what = "LexLean 0.4.0's bit_and, bit_or, bit_xor, bit_not, shift_left and shift_
 plan = "Admit Nat in bit_and, bit_or and bit_xor (Lean's Nat.land, Nat.lor and Nat.xor), in shift_left and shift_right with a Nat amount and a Nat result (Nat.shiftLeft and Nat.shiftRight), and a Nat power. The MIR path then writes x & y as (prim bit_and x y : Nat) in place of mirBitAnd, and its obligations over bit operations decide."
 residue = "none: the recursive helpers carry every bit operation"
 causes = []
+
+[[gap]]
+id = "prismpm-library-export-recursor"
+repository = "UOR-Foundation/PrismPM"
+what = "prismpm 0.5.0's native-library build refuses a whole library with a PP5004 that names no export root when one root reaches a definition the pinned lean4-prod exporter cannot take. Observed on the thermostat fixture's projection: a definition of a mutual recursion group over a nested inductive compiles to a recursor with a local function (`prod-export failed: unsupported local function in <Prefix>.Behavior.<Type>.brecOn.go: Prod.LocalFunctionError.escaping`), and a call LexLean lowers to its collections runtime (`exportNames: unresolved external call in <Prefix>.Behavior.<def>: [LexLeanCollections.instKeyString, LexLeanCollections.lessThan]`); the code generator then renders no Rust type for a mutual inductive block or a type that names itself through a field (PP4102). UORust's library route (crates/uorust/src/project/library.rs, `admit`) refuses each such root alone as a `library-root` row so the rest of the library verifies."
+plan = "Name the export root (or the definition and the root that reaches it) in PP5004 and PP4102, and let a library build drop that root instead of failing whole; then compile structural recursion over mutual and nested inductives, resolve LexLeanCollections calls in the exporter, and render recursive and mutual types under the library profile."
+residue = "every library-root row whose cause is a mutual recursion group, a mutual inductive block, a recursive type, or a collections primitive"
+causes = ["library-root"]
+
+[[gap]]
+id = "prismpm-library-allocation-free-lists"
+repository = "UOR-Foundation/PrismPM"
+what = "The pinned lean4-prod code generator (prod-codegen) renders a native library allocation-free: a list is a borrowed parameter or flows into the output buffer of a definition whose result is a list, a list with no parameter is a static slice of numerals, Booleans and constructors of them, and Lean's Int has no rendering. A let-bound list, a list read as an operand, or a computed list passed to a call fails the whole library (PP4102 `list value cannot be rendered without allocating`). Most lifted loops carry an accumulator list, so their roots are refused."
+plan = "A library profile whose generated crate may allocate (the crate already depends on alloc for String and nested Vec), so intermediate lists are Vec values; Int as a big integer type of the generated crate."
+residue = "every library-root row whose cause is a list held as an intermediate value, a list with no parameter of non-constant elements, or the type Int"
+causes = ["library-root"]
+
+[[gap]]
+id = "prismpm-library-borrowed-output"
+repository = "UOR-Foundation/PrismPM"
+what = "The pinned prod-codegen writes an element of a borrowed list parameter (or a field read through one) into a definition's output buffer without a clone. For an element type that is not Copy (String, a structure with a String field) the generated crate does not compile, and `cargo package` fails the native-library build (E0308 `expected String, found &String`; E0277 `the trait bound Room: Copy is not satisfied`)."
+plan = "Clone (or to_owned) a borrowed element whose type is not Copy where the Builder mode assigns it into the output buffer."
+residue = "every library-root row whose cause is a list of elements that are not Copy"
+causes = ["library-root"]

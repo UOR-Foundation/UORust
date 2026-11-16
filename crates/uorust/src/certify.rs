@@ -2384,7 +2384,7 @@ impl Profile {
 }
 
 /// Whether a definition's text takes a function: a parameter of a `Fn` type.
-fn higher_order(text: &str) -> bool {
+pub(crate) fn higher_order(text: &str) -> bool {
     let Some(at) = text.find("parameters: [") else {
         return false;
     };

@@ -53,6 +53,14 @@ pub(crate) enum Refusal {
         slot: &'static str,
         reason: String,
     },
+    /// A root proposed for a library package's profile that the native
+    /// library build or verification would refuse the whole library for:
+    /// refused alone, so that the library's other roots are built.
+    LibraryRoot {
+        package: String,
+        root: String,
+        cause: String,
+    },
 }
 
 impl Refusal {
@@ -70,6 +78,7 @@ impl Refusal {
             Self::AdvisoriesUnconsulted => "advisories-unconsulted",
             Self::UnansweredAdvisory { .. } => "unanswered-advisory",
             Self::UndefinedSlot { .. } => "undefined-slot",
+            Self::LibraryRoot { .. } => "library-root",
         }
     }
 
@@ -83,7 +92,7 @@ impl Refusal {
             Self::NoInitialState { .. } | Self::AmbiguousFact { .. } => "UR-R26",
             Self::NoMsrv { .. } => "UR-R24",
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => "UR-R21",
-            Self::UndefinedSlot { .. } => "UR-R29",
+            Self::UndefinedSlot { .. } | Self::LibraryRoot { .. } => "UR-R29",
         }
     }
 
@@ -98,7 +107,8 @@ impl Refusal {
             | Self::AmbiguousFact { span, .. } => span.render(),
             Self::ExternalPath { package, .. }
             | Self::NoMsrv { package }
-            | Self::UndefinedSlot { package, .. } => {
+            | Self::UndefinedSlot { package, .. }
+            | Self::LibraryRoot { package, .. } => {
                 format!("{package}/Cargo.toml")
             }
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => {
@@ -155,6 +165,9 @@ impl Refusal {
             ),
             Self::UndefinedSlot { slot, reason, .. } => {
                 format!("the library profile's {slot} is undefined: {reason}")
+            }
+            Self::LibraryRoot { root, cause, .. } => {
+                format!("the library profile does not take the root {root}: {cause}")
             }
         }
     }
