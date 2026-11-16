@@ -153,9 +153,11 @@ fn a_plan_reads_the_workspaces_profile_and_agree_refuses_a_functions_crate() {
         args.extend(more);
         uorust(&args)
     };
-    // One lifted function in the workspace's scope: one shard. The
-    // translator's own scope holds none of these functions, and plans one
-    // shard of nothing all the same.
+    // One lifted function in the workspace's scope: one shard, and the plan
+    // says what the export will do with its roots: one to build, none
+    // refused, and no carry decided (`carried` is null without the
+    // projection and the targets). The translator's own scope holds none of
+    // these functions, and plans one shard of nothing all the same.
     let planned = plan(&["--workspace", workspace.as_str()]);
     assert!(
         planned.status.success(),
@@ -164,7 +166,7 @@ fn a_plan_reads_the_workspaces_profile_and_agree_refuses_a_functions_crate() {
     );
     assert_eq!(
         String::from_utf8_lossy(&planned.stdout),
-        "{\"diagnose\":[],\"shards\":[\"0-1\"]}\n"
+        "{\"build\":1,\"carried\":null,\"diagnose\":[],\"refused\":0,\"shards\":[\"0-1\"]}\n"
     );
     // A cases plan reads the projection.
     let cases = plan(&["--workspace", workspace.as_str(), "--cases"]);
