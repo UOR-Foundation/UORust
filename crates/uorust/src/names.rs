@@ -1335,6 +1335,65 @@ const INTEGER_FALLBACK: &str = "i32";
 const FLOAT_FALLBACK: &str = "f64";
 
 /// The crates every build has without a manifest naming them.
+/// The type and trait names the standard prelude of some edition binds
+/// (`std::prelude::rust_2015` to `rust_2024`), and the primitive types: a
+/// name a glob may bind in place of the prelude's.
+const PRELUDE_TYPES: &[&str] = &[
+    "AsMut",
+    "AsRef",
+    "Box",
+    "Clone",
+    "Copy",
+    "Default",
+    "DoubleEndedIterator",
+    "Drop",
+    "Eq",
+    "ExactSizeIterator",
+    "Extend",
+    "Fn",
+    "FnMut",
+    "FnOnce",
+    "From",
+    "FromIterator",
+    "Future",
+    "Into",
+    "IntoFuture",
+    "IntoIterator",
+    "Iterator",
+    "Option",
+    "Ord",
+    "PartialEq",
+    "PartialOrd",
+    "Result",
+    "Send",
+    "Sized",
+    "String",
+    "Sync",
+    "ToOwned",
+    "ToString",
+    "TryFrom",
+    "TryInto",
+    "Unpin",
+    "Vec",
+    "bool",
+    "char",
+    "f32",
+    "f64",
+    "i128",
+    "i16",
+    "i32",
+    "i64",
+    "i8",
+    "isize",
+    "str",
+    "u128",
+    "u16",
+    "u32",
+    "u64",
+    "u8",
+    "usize",
+];
+
 const SYSROOT: [&str; 5] = ["std", "core", "alloc", "proc_macro", "test"];
 
 /// What a path names.
@@ -2541,34 +2600,71 @@ impl<'a> Resolver<'a> {
             .collect()
     }
 
-    /// The bare names a file binds to an item of a registry crate, each
-    /// with the full path the binding names: `BigX` of `use big::BigX`
-    /// reads `big::BigX`. A `use` gives the name its meaning in its module,
-    /// so the name is that path wherever the module writes it bare. The
-    /// projection reads an item of an inline module at its file's, so a
-    /// name the file's modules bind to two paths names neither.
-    pub(crate) fn registry_paths(&self, pkg: usize, file: usize) -> BTreeMap<String, String> {
+    /// The bare names an inline module of a file (`""` for the file's
+    /// own) binds by a `use` to an item of a registry crate, each with the
+    /// full path the binding names: `BigX` of `use big::BigX` reads
+    /// `big::BigX`. A `use` gives the name its meaning in its module, so
+    /// the name is that path wherever the module writes it bare.
+    pub(crate) fn registry_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+    ) -> BTreeMap<String, String> {
         let source = &self.ws.packages[pkg].files[file];
-        let inline = self
-            .syntax
-            .names
-            .files
-            .get(&source.rel)
-            .map(|f| f.modules.keys().cloned().collect::<Vec<_>>())
-            .unwrap_or_default();
-        let mut out: BTreeMap<String, Option<String>> = BTreeMap::new();
-        for inner in inline {
-            let module = (pkg, source.target, join(&source.module, &inner));
-            for (name, to) in self.registry_bindings(&module) {
-                let to = to.join("::");
-                let entry = out.entry(name).or_insert_with(|| Some(to.clone()));
-                if entry.as_ref() != Some(&to) {
-                    *entry = None;
-                }
-            }
+        let module = (pkg, source.target, join(&source.module, inline));
+        self.registry_bindings(&module)
+            .into_iter()
+            .map(|(name, to)| (name, to.join("::")))
+            .collect()
+    }
+
+    /// Of `written`, the bare names a file writes, those only a glob of a
+    /// registry crate can bind in its inline module `inline`, each with
+    /// the path the glob gives it: in a module that neither declares nor
+    /// imports the name, whose globs all import one module of one registry
+    /// crate (`use big::prelude::*`), a name the standard prelude does not
+    /// bind is that module's item, the one binding the language leaves it.
+    /// A name the prelude binds may be the glob's or the prelude's, and
+    /// stays unread.
+    pub(crate) fn glob_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+        written: &BTreeSet<String>,
+    ) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let module = (pkg, source.target, join(&source.module, inline));
+        let Some(scope) = self.scope(&module) else {
+            return BTreeMap::new();
+        };
+        let globbed: BTreeSet<Vec<String>> = scope
+            .globs
+            .iter()
+            .map(
+                |g| match self.use_path(&module, &g.path, false, &mut Vec::new()) {
+                    Found::Extern(to) if to.first().is_some_and(|k| self.registry.contains(k)) => {
+                        to
+                    }
+                    _ => Vec::new(),
+                },
+            )
+            .collect();
+        let [from] = globbed.iter().collect::<Vec<_>>()[..] else {
+            return BTreeMap::new();
+        };
+        if from.is_empty() {
+            return BTreeMap::new();
         }
-        out.into_iter()
-            .filter_map(|(name, to)| Some((name, to?)))
+        written
+            .iter()
+            .filter(|n| !PRELUDE_TYPES.contains(&n.as_str()))
+            .filter(|n| {
+                self.path(&module, std::slice::from_ref(*n), false, &mut Vec::new())
+                    == Found::Outside
+            })
+            .map(|n| (n.clone(), format!("{}::{n}", from.join("::"))))
             .collect()
     }
 
