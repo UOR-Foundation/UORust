@@ -10,6 +10,8 @@ use crate::facts::{Capability, FnFact, Package, SourceFile, Span, Syntax, Target
 use crate::ingest::summary;
 use crate::lex::{pascal, string, string_list, Arm, Decl, Expr, Module};
 use crate::lift::{self, Candidate, Residue, Ty, Types};
+use crate::register::{queue_row, ranked, Register};
+use crate::UorustError;
 
 /// What a projection is parameterised by beyond the workspace.
 #[derive(Clone, Debug)]
@@ -27,6 +29,12 @@ pub struct Options {
 
 /// The largest source file the projection's LexLean project admits.
 pub(crate) const MAX_FILE_BYTES: usize = 4_194_304;
+
+/// The projection's own register of what it did not admit or lift.
+const FRONTIER: &str = "frontier.toml";
+
+/// The projection's LexLean project file, which states its limits.
+const LEXLEAN: &str = "lexlean.toml";
 
 const ARCH: &str = "Architecture";
 const IFACE: &str = "Interface";
@@ -228,13 +236,15 @@ fn kebab(name: &str) -> String {
     out
 }
 
-/// The whole projection: path -> bytes.
+/// The whole projection: path -> bytes. There is none where the function
+/// rows it would write are not a lift register, or where a module it would
+/// write is larger than the limit its own `lexlean.toml` states.
 pub(crate) fn project(
     ws: &Workspace,
     syntax: &Syntax,
     options: &Options,
     dumps: Option<&crate::mir::Dumps>,
-) -> BTreeMap<String, Vec<u8>> {
+) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
     for package in &ws.packages {
         for file in &package.files {
@@ -298,12 +308,30 @@ pub(crate) fn project(
         }
     }
     let security = security(&ctx, options);
-    let (quality, refused) = quality(&ctx, iface.feature_count);
-    notes.refusals.extend(refused);
     let mir = dumps.zip(options.mir.as_ref());
     let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
     let supply = supply(&ctx);
     let library = library(ws, &prefix, &behavior, &mut notes);
+    // The κ of every function of product code: the question its row answers.
+    let kappas: BTreeMap<String, String> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.product(r))
+        .map(|r| {
+            let path = ctx.path(r);
+            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
+            (path, kappa)
+        })
+        .collect();
+    // The lift register of this run, read from the function rows the
+    // frontier is about to carry: what the queue ranks and the Quality facet
+    // measures is what a reader of the frontier finds.
+    let rows = function_rows(&notes, &kappas);
+    let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
+    // Quality is written last of the facets: it measures what the others
+    // admitted, refused and lifted.
+    let (quality, refused) = quality(&ctx, iface.feature_count, &lift, &notes.refusals);
+    notes.refusals.extend(refused);
     modules.push(arch);
     modules.push(iface.module);
     modules.push(design);
@@ -387,7 +415,7 @@ pub(crate) fn project(
          build_root = \".prism\"\n\n[limits]\nmax_holo_bytes = 16777216\nmax_entities = 100000\n\
          max_diagnostics = 256\n"
     );
-    files.insert("lexlean.toml".into(), lexlean.into_bytes());
+    files.insert(LEXLEAN.into(), lexlean.into_bytes());
     files.insert("lexlean.lock".into(), lock.into_bytes());
     files.insert("lakefile.toml".into(), lakefile.into_bytes());
     files.insert("lake-manifest.json".into(), manifest.into_bytes());
@@ -405,22 +433,9 @@ pub(crate) fn project(
     if let Some(listing) = candidates {
         files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
     }
-    // The κ of every function of product code: the question its row answers.
-    let kappas: BTreeMap<String, String> = ctx
-        .all_fns()
-        .into_iter()
-        .filter(|&r| ctx.product(r))
-        .map(|r| {
-            let path = ctx.path(r);
-            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
-            (path, kappa)
-        })
-        .collect();
-    files.insert(
-        "frontier.toml".into(),
-        frontier(&notes, &kappas).into_bytes(),
-    );
-    files
+    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
+    within_limit(&files)?;
+    Ok(files)
 }
 
 /// The LexLean compiler semantics a projection locks to: the one UORust's own
@@ -2868,7 +2883,18 @@ fn truncate(text: &str, limit: usize) -> String {
     }
 }
 
-fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
+/// The Quality facet. Beside what it counts in the workspace, it states the
+/// lift and the admission as measures of the model: the functions of product
+/// code and those of them that lifted, from `lift` (the register this run
+/// writes), and the open refusals, `admitted`'s and its own. Each is a
+/// measured count under its own requirement, as every other measure here is;
+/// none is a threshold the tool chose.
+fn quality(
+    ctx: &Model,
+    features: usize,
+    lift: &Register,
+    admitted: &BTreeSet<Refusal>,
+) -> (Module, Vec<Refusal>) {
     let mut refusals = Vec::new();
     let ws = &ctx.ws;
     let q = "Foundation.Qual::";
@@ -2938,6 +2964,14 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
         }
     }
     let crates = ws.packages.len();
+    // The refusals the frontier will count: the other facets' and the ones
+    // found above, each once.
+    let open_refusals = admitted
+        .iter()
+        .chain(&refusals)
+        .collect::<BTreeSet<_>>()
+        .len();
+    let lift = lift.totals();
     // (characteristic, subcharacteristic, measure, threshold)
     let mut measures: Vec<(&str, &str, &str, usize)> = vec![
         (
@@ -2945,6 +2979,24 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
             "FunctionalCompleteness",
             "AdmittedFeatures",
             features,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "OpenRefusals",
+            open_refusals,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "ProductFunctions",
+            lift.functions,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "LiftedFunctions",
+            lift.lifted,
         ),
         (
             "Maintainability",
@@ -5025,13 +5077,17 @@ fn effect_phrase(effect: &str) -> String {
     }
 }
 
-fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
-    let kappa = |path: &str| {
-        kappas
-            .get(path)
-            .map(|k| format!("kappa = \"{k}\"\n"))
-            .unwrap_or_default()
-    };
+/// The table the frontier's count of refusals is written under: the stage
+/// that refused them.
+const ADMISSION: &str = "admission";
+
+/// The unit the frontier's refusal queue counts in.
+const REFUSALS: &str = "refusals";
+
+/// The projection's `frontier.toml`: the counts and the ranked queues, then
+/// every refusal and every function row. `lift` is the register of `rows`,
+/// the function rows ([`function_rows`]).
+fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\
          # A refusal is an open claim: the router proposed it and admission would\n\
@@ -5045,9 +5101,15 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
          # definition parts from the Rust function, its divergence. Every function of\n\
          # product code has exactly one residue, foreign, effect or lifted row, keyed\n\
          # by the κ of its question (crate path and tokens): a lifted κ never turns\n\
-         # unlifted in a later projection.\n\n\
+         # unlifted in a later projection.\n\
+         # The work queue comes first: [admission] counts the refusals and each\n\
+         # [[reason]] row the refusals of one reason; [lift] counts the functions by\n\
+         # table and each [[construct]] row the functions one cause and detail stops.\n\
+         # Both queues are ranked, what stops the most first.\n\n\
          spec = \"uorust/frontier/1\"\n",
     );
+    out.push_str(&refusal_queue(&notes.refusals));
+    out.push_str(&lift.queue_text());
     for r in &notes.refusals {
         out.push_str(&format!(
             "\n[[refusal]]\nstatus = \"open\"\nreason = \"{}\"\nroute = \"{}\"\nspan = {}\ndetail = {}\n",
@@ -5057,6 +5119,42 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&r.detail())
         ));
     }
+    out.push_str(rows);
+    out
+}
+
+/// The refusals as the frontier counts and ranks them: the `[admission]`
+/// table, then one `[[reason]]` row per reason a refusal carries, with the
+/// route that refused it and the refusals of that reason, in the order and
+/// the row shape of the lift's queue ([`ranked`], [`queue_row`]).
+fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
+    let mut reasons: BTreeMap<(&str, &str), usize> = BTreeMap::new();
+    for r in refusals {
+        *reasons.entry((r.code(), r.route())).or_default() += 1;
+    }
+    let mut out = format!("\n[{ADMISSION}]\n{REFUSALS} = {}\n", refusals.len());
+    for ((reason, route), count) in ranked(reasons) {
+        out.push('\n');
+        out.push_str(&queue_row(
+            "reason",
+            &[("reason", reason), ("route", route)],
+            REFUSALS,
+            count,
+        ));
+    }
+    out
+}
+
+/// The frontier's function rows: every function of product code under the
+/// table of what the lift decided for it, keyed by its κ.
+fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
+    let kappa = |path: &str| {
+        kappas
+            .get(path)
+            .map(|k| format!("kappa = \"{k}\"\n"))
+            .unwrap_or_default()
+    };
+    let mut out = String::new();
     for (path, (span, reason)) in &notes.residue {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
@@ -5102,6 +5200,41 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
     }
     out
 }
+
+/// Every module of the projection within the `max_file_bytes` its own
+/// `lexlean.toml` states, which LexLean refuses a source file beyond
+/// (LLS8002): the limit is read back from the project file the same run
+/// writes, so the check and the stated limit cannot part. A module beyond it
+/// is [`UorustError::ModuleTooLarge`], naming the first such module.
+fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
+    let at = std::path::Path::new(LEXLEAN);
+    let bad = |reason: String| UorustError::Malformed {
+        path: at.to_path_buf(),
+        reason,
+    };
+    let text = String::from_utf8_lossy(files.get(LEXLEAN).map_or(&[][..], Vec::as_slice));
+    let config: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let limit = config
+        .get("limits")
+        .and_then(|limits| limits.get("max_file_bytes"))
+        .and_then(toml::Value::as_integer)
+        .and_then(|n| usize::try_from(n).ok())
+        .ok_or_else(|| bad("it states no [limits] max_file_bytes".to_string()))?;
+    match files
+        .iter()
+        .find(|(path, bytes)| path.ends_with(MODULE_SUFFIX) && bytes.len() > limit)
+    {
+        Some((path, bytes)) => Err(UorustError::ModuleTooLarge {
+            module: path.clone(),
+            bytes: bytes.len(),
+            limit,
+        }),
+        None => Ok(()),
+    }
+}
+
+/// What the path of a LexLean module's source ends with.
+const MODULE_SUFFIX: &str = ".lex.tex";
 
 fn spdx(ws: &Workspace, options: &Options) -> String {
     let id = |name: &str, version: &str| {
@@ -5265,5 +5398,334 @@ mod tests {
                 assert_eq!(sha(&msg), md);
             }
         }
+    }
+
+    // The register as the work queue: the frontier's ranked refusals and
+    // lift queue, the lift as Quality measures, and the size of every
+    // module against the limit the projection states.
+
+    use std::collections::{BTreeMap, BTreeSet};
+    use std::path::{Path, PathBuf};
+
+    use super::{
+        frontier, function_rows, refusal_queue, within_limit, Notes, Refusal, Register, Residue,
+        Span, UorustError, FRONTIER, LEXLEAN, MAX_FILE_BYTES,
+    };
+
+    fn at(line: usize) -> Span {
+        Span {
+            file: "src/lib.rs".into(),
+            line,
+        }
+    }
+
+    /// A one-package workspace with no `rust-version`, written fresh: `over`
+    /// lifts, and `next` and `after` stop at the same arithmetic.
+    fn workspace(name: &str) -> PathBuf {
+        let dir = std::env::temp_dir().join(format!("uorust-queue-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(dir.join("src")).expect("a scratch workspace");
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"queue\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+        )
+        .expect("a manifest");
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "//! Q.\n\n/// Over one.\npub fn over(x: u8) -> bool {\n    x > 1\n}\n\n\
+             /// One more.\npub fn next(x: u8) -> u8 {\n    x + 1\n}\n\n\
+             /// One more again.\npub fn after(x: u8) -> u8 {\n    x + 1\n}\n",
+        )
+        .expect("a library");
+        dir
+    }
+
+    fn projected(name: &str) -> BTreeMap<String, Vec<u8>> {
+        let dir = workspace(name);
+        let options = super::Options {
+            name: "queue".into(),
+            last_modified: "2026-11-11T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("projects");
+        let _ = std::fs::remove_dir_all(dir);
+        files
+    }
+
+    fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
+        String::from_utf8_lossy(&files[path])
+            .parse()
+            .expect("the file is TOML")
+    }
+
+    fn count(value: &toml::Value) -> usize {
+        usize::try_from(value.as_integer().expect("a count")).expect("a count")
+    }
+
+    /// The `(requirementIndex, threshold)` of the Quality measure `name`.
+    fn measure(quality: &str, name: &str) -> (usize, usize) {
+        let from = quality
+            .find(&format!("name: measure{name},"))
+            .unwrap_or_else(|| panic!("no measure{name} in:\n{quality}"));
+        let record = &quality[from..from + quality[from..].find("\n}").expect("a record")];
+        let field = |key: &str| {
+            let rest = &record[record.find(&format!("{key} := ")).expect("a field") + key.len()..];
+            rest.trim_start_matches(" := ")
+                .chars()
+                .take_while(char::is_ascii_digit)
+                .collect::<String>()
+                .parse::<usize>()
+                .expect("a number")
+        };
+        (field("requirementIndex"), field("threshold"))
+    }
+
+    /// The `index` of the Quality requirement `name`.
+    fn requirement(quality: &str, name: &str) -> usize {
+        let from = quality
+            .find(&format!("name: requirement{name},"))
+            .unwrap_or_else(|| panic!("no requirement{name} in:\n{quality}"));
+        let rest = &quality[from + quality[from..].find("{index := ").expect("an index")..];
+        rest.trim_start_matches("{index := ")
+            .chars()
+            .take_while(char::is_ascii_digit)
+            .collect::<String>()
+            .parse()
+            .expect("a number")
+    }
+
+    #[test]
+    fn the_frontier_ranks_its_refusals_by_reason() {
+        let collision = |line: usize| Refusal::Collision {
+            span: at(line),
+            name: format!("n{line}"),
+        };
+        let unaccepted = |line: usize| Refusal::Unaccepted {
+            span: at(line),
+            feature: format!("f{line}"),
+        };
+        let refusals: BTreeSet<Refusal> = [
+            Refusal::AdvisoriesUnconsulted,
+            Refusal::NoMsrv {
+                package: "p".into(),
+            },
+            unaccepted(1),
+            unaccepted(2),
+            collision(3),
+            collision(4),
+            collision(5),
+        ]
+        .into_iter()
+        .collect();
+        let doc: toml::Value = refusal_queue(&refusals).parse().expect("TOML");
+        assert_eq!(count(&doc["admission"]["refusals"]), refusals.len());
+        let rows: Vec<(&str, &str, usize)> = doc["reason"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["reason"].as_str().expect("a reason"),
+                    r["route"].as_str().expect("a route"),
+                    count(&r["refusals"]),
+                )
+            })
+            .collect();
+        // The most refusals first; as many, by reason.
+        assert_eq!(
+            rows,
+            [
+                ("name-collision", "UR-R13", 3),
+                ("feature-without-acceptance", "UR-R10", 2),
+                ("advisories-unconsulted", "UR-R21", 1),
+                ("no-msrv", "UR-R24", 1),
+            ]
+        );
+        assert_eq!(rows.iter().map(|r| r.2).sum::<usize>(), refusals.len());
+        // No refusal: the count is stated, and the queue is empty.
+        let none: toml::Value = refusal_queue(&BTreeSet::new()).parse().expect("TOML");
+        assert_eq!(count(&none["admission"]["refusals"]), 0);
+        assert!(none.get("reason").is_none());
+    }
+
+    #[test]
+    fn the_frontier_carries_the_queue_of_its_own_rows() {
+        let mut notes = Notes::default();
+        notes.refusals.insert(Refusal::AdvisoriesUnconsulted);
+        for (i, name) in ["c::t1", "c::t2"].into_iter().enumerate() {
+            let reason = Residue::Type("Wide".into());
+            notes.residue.insert(name.into(), (at(i + 1), reason));
+        }
+        let form = Residue::Form("a\tloop".into());
+        notes.residue.insert("c::g".into(), (at(3), form));
+        notes
+            .effects
+            .insert("c::e".into(), (at(4), "Fs effect: std::fs::read".into()));
+        notes.lifted.insert(
+            "c::f".into(),
+            (at(5), "Behavior::f".into(), vec!["ASCII only".into()]),
+        );
+        let kappas: BTreeMap<String, String> = ["c::t1", "c::t2", "c::g", "c::e", "c::f"]
+            .into_iter()
+            .map(|path| (path.to_string(), crate::register::kappa(path, "fn f () {}")))
+            .collect();
+        let rows = function_rows(&notes, &kappas);
+        let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
+        let text = frontier(&notes, &lift, &rows);
+        let doc: toml::Value = text.parse().expect("the frontier is TOML");
+        let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
+            .iter()
+            .map(|key| count(&doc["lift"][key]))
+            .collect();
+        assert_eq!(totals, [5, 1, 3, 0, 1]);
+        let queue: Vec<(&str, &str, usize)> = doc["construct"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["cause"].as_str().expect("a cause"),
+                    r["construct"].as_str().expect("a construct"),
+                    count(&r["functions"]),
+                )
+            })
+            .collect();
+        // A construct is the detail as a reader of the rows finds it: the
+        // tab the frontier writes as a space is a space in the queue too.
+        assert_eq!(
+            queue,
+            [
+                ("type", "type outside the lift: Wide", 2),
+                ("effect", "Fs effect: std::fs::read", 1),
+                ("form", "expression form outside the lift: a loop", 1),
+            ]
+        );
+        assert_eq!(count(&doc["admission"]["refusals"]), 1);
+        assert_eq!(doc["refusal"].as_array().map(Vec::len), Some(1));
+        // The frontier is the register it was written from, queue and all.
+        assert_eq!(Register::parse(Path::new(FRONTIER), &text), Ok(lift));
+        // Rows that are not a register give no projection: a function with
+        // no κ has no row to key.
+        assert!(matches!(
+            Register::parse(
+                Path::new(FRONTIER),
+                &function_rows(&notes, &BTreeMap::new())
+            ),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    #[test]
+    fn quality_states_the_lift_and_the_open_refusals_as_measures() {
+        let files = projected("quality");
+        let frontier = toml_of(&files, FRONTIER);
+        let quality = String::from_utf8_lossy(&files["src/Quality.lex.tex"]).to_string();
+        // The register the same run writes.
+        let totals = crate::lift_register(&files).expect("a register").totals();
+        assert_eq!((totals.functions, totals.lifted, totals.residue), (3, 1, 2));
+        let refusals = frontier["refusal"].as_array().expect("refusals").len();
+        // Quality's own refusal (no `rust-version`) is one of them.
+        assert!(frontier["refusal"]
+            .as_array()
+            .expect("refusals")
+            .iter()
+            .any(|r| r["reason"].as_str() == Some("no-msrv")));
+        assert_eq!(count(&frontier["admission"]["refusals"]), refusals);
+        assert_eq!(count(&frontier["lift"]["functions"]), totals.functions);
+        assert_eq!(count(&frontier["lift"]["lifted"]), totals.lifted);
+        for (name, measured) in [
+            ("ProductFunctions", totals.functions),
+            ("LiftedFunctions", totals.lifted),
+            ("OpenRefusals", refusals),
+        ] {
+            let (of, threshold) = measure(&quality, name);
+            assert_eq!(threshold, measured, "measure{name}");
+            // Built as every other measure is: under its own requirement.
+            assert_eq!(of, requirement(&quality, name), "measure{name}");
+        }
+        // The measure this one is modelled on is still built the same way.
+        let (of, _) = measure(&quality, "AdmittedFeatures");
+        assert_eq!(of, requirement(&quality, "AdmittedFeatures"));
+        // The queue of the two functions one construct stops.
+        let first = &frontier["construct"].as_array().expect("the queue")[0];
+        assert_eq!(first["cause"].as_str(), Some("arithmetic"));
+        assert_eq!(count(&first["functions"]), 2);
+    }
+
+    #[test]
+    fn a_module_beyond_the_stated_limit_is_a_typed_error() {
+        let project = |limit: usize, module: usize| -> BTreeMap<String, Vec<u8>> {
+            [
+                (
+                    LEXLEAN.to_string(),
+                    format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+                ),
+                ("src/Design.lex.tex".to_string(), vec![b' '; module]),
+                // No module: LexLean does not read it as a source file.
+                (FRONTIER.to_string(), vec![b'#'; limit + 1]),
+            ]
+            .into_iter()
+            .collect()
+        };
+        let limit = 64;
+        // At the limit a module is admitted; one byte beyond it is refused.
+        assert_eq!(within_limit(&project(limit, limit)), Ok(()));
+        let refused = within_limit(&project(limit, limit + 1)).expect_err("beyond the limit");
+        assert_eq!(
+            refused,
+            UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: limit + 1,
+                limit,
+            }
+        );
+        let said = refused.to_string();
+        assert!(
+            said.contains("src/Design.lex.tex") && said.contains("65 bytes") && said.contains("64"),
+            "{said}"
+        );
+        // A project file that states no limit is not one to check against.
+        let mut silent = project(limit, limit);
+        silent.insert(LEXLEAN.to_string(), b"[limits]\n".to_vec());
+        assert!(matches!(
+            within_limit(&silent),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    /// The limit checked is the one the projection's own `lexlean.toml`
+    /// states: a projection is within it, and the same files under a lower
+    /// stated limit are refused at their largest module.
+    #[test]
+    fn a_projection_is_checked_against_the_limit_it_states() {
+        let mut files = projected("limit");
+        let stated = format!("max_file_bytes = {MAX_FILE_BYTES}\n");
+        let config = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        assert!(config.contains(&stated), "{config}");
+        assert_eq!(within_limit(&files), Ok(()));
+        // The first of the largest, in the order the check reads them.
+        let (largest, bytes) = files
+            .iter()
+            .rev()
+            .filter(|(path, _)| path.ends_with(".lex.tex"))
+            .map(|(path, bytes)| (path.clone(), bytes.len()))
+            .max_by_key(|(_, bytes)| *bytes)
+            .expect("a module");
+        let lower = bytes - 1;
+        files.insert(
+            LEXLEAN.to_string(),
+            config
+                .replace(&stated, &format!("max_file_bytes = {lower}\n"))
+                .into_bytes(),
+        );
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: largest,
+                bytes,
+                limit: lower,
+            })
+        );
     }
 }

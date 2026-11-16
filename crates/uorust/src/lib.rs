@@ -58,7 +58,7 @@ pub fn project_workspace(
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
     };
-    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref());
+    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref())?;
     let manifest: String = files
         .iter()
         .map(|(path, bytes)| format!("{}  {path}\n", project::sha(bytes)))
