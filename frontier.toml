@@ -2,8 +2,8 @@
 # the κ of its question (crate path and normalized tokens). A lifted κ is a
 # proved claim; a later projection that decides it unlifted is refused.
 
-# Honesty report: 295 of 1289 functions of product code are lifted; 683
-# are residue, 49 foreign and 262 effect rows.
+# Honesty report: 295 of 1290 functions of product code are lifted; 683
+# are residue, 49 foreign and 263 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
@@ -215,9 +215,9 @@
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:8569:58: 8569:61}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:1819:54: 1819:57}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5241:53: 5241:56}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:8583:58: 8583:61}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:1833:54: 1833:57}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5255:53: 5255:56}>
 #     1 std::iter::Once<&str>
 #     1 std::iter::Rev<std::slice::Iter<'_, std::string::String>>
 #     6 std::num::ParseIntError
@@ -2090,7 +2090,7 @@ detail = "mir::Rvalue::Use"
 kappa = "908d4c720768e46449580df96033e99950a2ab33eb0ff15a285696bf3b9d773d"
 function = "uorust::lift::applied_path"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5241:53: 5241:56}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5255:53: 5255:56}>"
 
 [[residue]]
 kappa = "33ae51eafe7ef753437daaddc58dad9deebbddfdd549653ad643b7ae74a310a4"
@@ -2540,7 +2540,7 @@ detail = "mir::TerminatorKind::Call: uorust::lift::take_try, whose translation i
 kappa = "799816964ea0cdda583eb37dfbb25de865f1303fd7a738ef7c5ceba702b2ff33"
 function = "uorust::lift::try_in_struct"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:8569:58: 8569:61}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:8583:58: 8583:61}>"
 
 [[residue]]
 kappa = "894a892a4f74bbd1fdc2b4458d1ea80d69b3a6fe125cc563393bf9a46ae1b182"
@@ -2612,7 +2612,7 @@ detail = "mir::Ty: core::fmt::rt::Argument<'_>"
 kappa = "7522152482f521a218708678a4f2f6c7afa28c0be41207fdbf53251782322f24"
 function = "uorust::lift::wrapper"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:1819:54: 1819:57}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:1833:54: 1833:57}>"
 
 [[residue]]
 kappa = "6a033770f2cf08cd4c2a71e07e15ddb10f7c43addfbc4c04ee19284bee906bff"
@@ -5874,8 +5874,13 @@ function = "uorust::project::project"
 effect = "calls uorust::project::behavior, which reaches an effect"
 
 [[effect]]
-kappa = "5571e053b10431687fbff2f4a446a7b25329e46ac50e907fc24bd56226a15075"
+kappa = "766f849a92b47a44b68232e0127c0de35e97c2899d447efe58ff8bd9e3ddff1f"
 function = "uorust::project_workspace"
+effect = "calls uorust::project_workspace_here, which reaches an effect"
+
+[[effect]]
+kappa = "3ef288097d379d56e87bb35fc2fb37a6b319529e852aafafe82534be8a2409c4"
+function = "uorust::project_workspace_here"
 effect = "calls uorust::ingest::workspace, which performs a Fs effect: Path::canonicalize"
 
 [[effect]]
@@ -6619,7 +6624,7 @@ function = "uorust::lift::evidence_proof"
 definition = "Behavior::evidenceProof"
 
 [[lifted]]
-kappa = "a8c0b097b30fb8d6ef6d7d667fa707a4a94a7751e59d02f76483de783a24fe47"
+kappa = "a1ecc2fc600eb724defe5f25ffa6245195ac7a1903fa0d3a8272d43d2ff5f1c5"
 function = "uorust::lift::first_free"
 definition = "Behavior::firstFree"
 
