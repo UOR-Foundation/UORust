@@ -313,10 +313,9 @@ impl Register {
                         Status::Foreign(detail)
                     }
                     "effect" => Status::Effect(field("effect")?),
-                    _ => Status::Embedded(
-                        embedded_at(row)
-                            .map_err(|why| bad(format!("an {EMBEDDED} row {why}: {row}")))?,
-                    ),
+                    _ => Status::Embedded(embedded_at(row).ok_or_else(|| {
+                        bad(format!("an {EMBEDDED} row {EMBEDDED_SHAPE}: {row}"))
+                    })?),
                 };
                 if kappa.len() != 64 || !kappa.bytes().all(|b| b.is_ascii_hexdigit()) {
                     return Err(bad(format!("{function}: κ {kappa} is not a SHA-256")));
@@ -671,44 +670,40 @@ pub fn embedded_fields(at: &[EmbeddedAt]) -> String {
     )
 }
 
+/// What an embedded-closed row holds, as a refusal of one that does not
+/// states it.
+const EMBEDDED_SHAPE: &str = "needs configurations, projects and bodies, three lists of \
+     strings of one nonempty length, each project and body a SHA-256";
+
 /// An embedded-closed row's configurations, projects and bodies, read
-/// back: three lists of one length, at least one entry, each digest a
-/// SHA-256; else why not.
-fn embedded_at(row: &toml::Value) -> Result<Vec<EmbeddedAt>, String> {
-    let list = |key: &str| -> Result<Vec<String>, String> {
-        row.get(key)
-            .and_then(toml::Value::as_array)
-            .ok_or_else(|| format!("without {key}"))?
+/// back, where the row holds them as [`EMBEDDED_SHAPE`] says.
+fn embedded_at(row: &toml::Value) -> Option<Vec<EmbeddedAt>> {
+    let list = |key: &str| -> Option<Vec<String>> {
+        row.get(key)?
+            .as_array()?
             .iter()
-            .map(|v| {
-                v.as_str()
-                    .map(str::to_string)
-                    .ok_or_else(|| format!("whose {key} holds a non-string"))
-            })
+            .map(|v| v.as_str().map(str::to_string))
             .collect()
     };
     let (configurations, projects, bodies) =
         (list("configurations")?, list("projects")?, list("bodies")?);
-    if configurations.is_empty()
-        || projects.len() != configurations.len()
-        || bodies.len() != configurations.len()
-    {
-        return Err("whose configurations, projects and bodies are not one nonempty length".into());
-    }
-    let sha = |d: &str| d.len() == 64 && d.bytes().all(|b| b.is_ascii_hexdigit());
-    if !projects.iter().chain(&bodies).all(|d| sha(d)) {
-        return Err("with a digest that is not a SHA-256".into());
-    }
-    Ok(configurations
-        .into_iter()
-        .zip(projects)
-        .zip(bodies)
-        .map(|((configuration, project), body)| EmbeddedAt {
-            configuration,
-            project,
-            body,
-        })
-        .collect())
+    let sha = |d: &String| d.len() == 64 && d.bytes().all(|b| b.is_ascii_hexdigit());
+    let shaped = !configurations.is_empty()
+        && projects.len() == configurations.len()
+        && bodies.len() == configurations.len()
+        && projects.iter().chain(&bodies).all(sha);
+    shaped.then(|| {
+        configurations
+            .into_iter()
+            .zip(projects)
+            .zip(bodies)
+            .map(|((configuration, project), body)| EmbeddedAt {
+                configuration,
+                project,
+                body,
+            })
+            .collect()
+    })
 }
 
 #[cfg(test)]
