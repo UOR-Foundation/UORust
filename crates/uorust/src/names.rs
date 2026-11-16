@@ -578,7 +578,8 @@ fn idents(path: &syn::Path) -> Vec<String> {
     out
 }
 
-fn join(module: &str, name: &str) -> String {
+/// A module's path inside its crate joined with a path below it.
+pub(crate) fn join(module: &str, name: &str) -> String {
     match (module.is_empty(), name.is_empty()) {
         (true, _) => name.to_string(),
         (_, true) => module.to_string(),
@@ -2596,6 +2597,76 @@ impl<'a> Resolver<'a> {
             }
         }
         out
+    }
+}
+
+/// What a bare type name a module writes names, as the language resolves
+/// it: a struct or enum of the workspace, by package, target, module and
+/// declared name; an item outside the workspace, by its path; or nothing
+/// the written code decides (a glob of an outside crate may bind it).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) enum TypeReading {
+    Declared(usize, usize, String, String),
+    Extern(String),
+    Open,
+}
+
+impl Resolver<'_> {
+    /// What the bare type name `name` names in the inline module `inline`
+    /// (`""` for the file's own) of file `fi` of package `pkg`: what the
+    /// module declares, then what its `use` binds, then its globs, as
+    /// [`Resolver::path`] reads every path.
+    pub(crate) fn type_reading(
+        &self,
+        pkg: usize,
+        fi: usize,
+        inline: &str,
+        name: &str,
+    ) -> TypeReading {
+        let file = &self.ws.packages[pkg].files[fi];
+        let module = (pkg, file.target, join(&file.module, inline));
+        if !self.modules.contains_key(&module) {
+            return TypeReading::Open;
+        }
+        match self.path(&module, &[name.to_string()], false, &mut Vec::new()) {
+            Found::Type((p, t, m), n) => TypeReading::Declared(p, t, m, n),
+            Found::Extern(path) => TypeReading::Extern(path.join("::")),
+            _ => TypeReading::Open,
+        }
+    }
+}
+
+impl Names {
+    /// The inline modules of a file, by their path inside it, the file's
+    /// own (`""`) among them.
+    pub(crate) fn inline_modules(&self, rel: &str) -> Vec<String> {
+        let mut out: Vec<String> = self
+            .files
+            .get(rel)
+            .map(|f| f.modules.keys().cloned().collect())
+            .unwrap_or_default();
+        if !out.iter().any(String::is_empty) {
+            out.insert(0, String::new());
+        }
+        out
+    }
+
+    /// The inline module a function stands in, by the line and name of
+    /// its fact: `""` for the file's own.
+    pub(crate) fn fn_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.fns.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
+    }
+
+    /// The inline module an enum or a struct stands in, by the line and
+    /// name of its fact: `""` for the file's own.
+    pub(crate) fn type_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.types.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
     }
 }
 
