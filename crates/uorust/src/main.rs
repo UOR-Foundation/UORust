@@ -392,15 +392,23 @@ struct EmbedArgs {
     /// directory `uorust mir` dumped it into, whose `shards-<crate>` are
     /// embedded, with the crate's declarations and those of the crates it
     /// builds on mounted beside `--library`'s core, alloc and std.
-    #[arg(long, conflicts_with_all = ["link", "harness", "observed", "register", "shallow", "bridge"])]
+    #[arg(long, conflicts_with_all = ["harness", "observed", "register", "shallow", "bridge"])]
     workspace: Option<PathBuf>,
+    /// With `--workspace`: the directory `uorust crate --workspace
+    /// --dumps` kept the build's registry crates in; the crate's program
+    /// links each of them its build links, after every `--link`.
+    #[arg(long, requires = "workspace")]
+    links: Option<PathBuf>,
     /// With `--workspace`: one project per module of the crate,
     /// `<out>/<module>`, smallest module first, each linked against every
     /// module, as one `--only <module>` run each.
     #[arg(long, requires = "workspace", conflicts_with = "only")]
     each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
-    /// `uorust crate --link` links one.
+    /// `uorust crate --link` links one: core, alloc, or with `--workspace`
+    /// another library of the workspace (`<mir>/shards-<lib>`). `<dumps>`
+    /// may be a published archive of them, `<url>#sha256=<hex>`, fetched
+    /// and taken only at that digest.
     #[arg(long = "link")]
     link: Vec<String>,
     /// The module shards: one directory of the crate's dumps per module.
@@ -490,6 +498,10 @@ struct CrateArgs {
     /// workspace build's with `--workspace`).
     #[arg(long)]
     no_default_features: bool,
+    /// With `--workspace`: build the workspace with every feature of its
+    /// members, as `uorust mir --all-features` dumps it.
+    #[arg(long, requires = "workspace", conflicts_with_all = ["features", "no_default_features"])]
+    all_features: bool,
     /// Keep the crate's dumps (one directory per module, `target.toml`,
     /// the layouts, `dump.toml`) in this directory, as `--link
     /// <crate>=<dumps>` reads them; with `--workspace`, one directory per
@@ -697,6 +709,24 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 .workspace
                 .as_deref()
                 .unwrap_or(std::path::Path::new("."));
+            let cache = args
+                .out
+                .parent()
+                .map_or_else(std::env::temp_dir, std::path::Path::to_path_buf)
+                .join("uorust-links");
+            let mut link = args
+                .link
+                .iter()
+                .map(|l| {
+                    let (k, d) = l.split_once('=').ok_or_else(|| {
+                        uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                    })?;
+                    Ok((k.to_string(), uorust::registry::link_dumps(d, &cache)?))
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            if let Some(dir) = &args.links {
+                link.extend(uorust::shard::member_links(dir, &args.krate)?);
+            }
             let done = uorust::shard::embed_workspace_crate(&uorust::shard::WorkspaceEmbed {
                 workspace,
                 krate: &args.krate,
@@ -705,25 +735,30 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 out: &args.out,
                 only: &args.only,
                 each_module: args.each_module,
+                link: &link,
             })?;
             for d in &done {
                 let c = &d.census;
                 match &d.module {
                     Some(m) => println!(
-                        "embed: {} ({} files, {} bytes): {} bodies embedded, {} of them evaluable, {} bound; project in {}",
+                        "embed: {} ({} files, {} bytes): {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
                         m.name,
                         m.files,
                         m.bytes,
                         c.bodies,
                         c.evaluable,
                         c.bound,
+                        c.linked.values().sum::<usize>(),
+                        c.unlinked.values().sum::<usize>(),
                         args.out.join(&m.name).display()
                     ),
                     None => println!(
-                        "embed: {} bodies embedded, {} of them evaluable, {} bound; project in {}",
+                        "embed: {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
                         c.bodies,
                         c.evaluable,
                         c.bound,
+                        c.linked.values().sum::<usize>(),
+                        c.unlinked.values().sum::<usize>(),
                         args.out.display()
                     ),
                 }
@@ -798,6 +833,9 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 }
                 if args.no_default_features {
                     cargo_args.push("--no-default-features".to_string());
+                }
+                if args.all_features {
+                    cargo_args.push("--all-features".to_string());
                 }
                 let (graph, outcomes) =
                     uorust::registry::lift_workspace(&uorust::registry::Workspace {

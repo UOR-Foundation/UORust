@@ -3853,10 +3853,78 @@ pub struct EmbedCensus {
     pub blocked: BTreeMap<String, usize>,
     /// How many bodies leave a callee to a dictionary.
     pub bound: usize,
+    /// The calls (each callee once per body) that name a body of the
+    /// program, by where the body is: [`OWN`] for the crate's own modules,
+    /// else the linked library's name.
+    pub linked: BTreeMap<String, usize>,
+    /// The calls (each callee once per body) left to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, usize>,
+}
+
+/// The key of [`EmbedCensus::linked`] for a call into the crate's own
+/// modules, which no crate name can be.
+pub const OWN: &str = "(the crate's own modules)";
+
+/// Why a callee `name` a body of `krate` leaves to its dictionary is not
+/// linked, read from the path the dump prints, with the libraries
+/// `linked` into the program: the crate the path names (a qualified
+/// path's self type, or its trait where the self type is a primitive), or
+/// a generic parameter the caller's bound abstracts, or the platform (an
+/// intrinsic, inline assembly, a foreign item: a name with no path).
+pub fn unlinked_reason(name: &str, krate: &str, linked: &[&str]) -> String {
+    // A qualified path `<Self as Trait>::item`: its self type, unless that
+    // is a primitive or a parameter, then its trait.
+    let named = match name.strip_prefix('<') {
+        Some(rest) => {
+            let mut depth = 0usize;
+            let mut split = None;
+            for (i, c) in rest.char_indices() {
+                match c {
+                    '<' | '(' | '[' => depth += 1,
+                    '>' | ')' | ']' if depth == 0 => break,
+                    '>' | ')' | ']' => depth -= 1,
+                    _ if depth == 0 && rest[i..].starts_with(" as ") => {
+                        split = Some(i);
+                        break;
+                    }
+                    _ => {}
+                }
+            }
+            let ty = rest[..split.unwrap_or(rest.len())]
+                .trim_start_matches(['&', '*', '(', '['])
+                .trim_start_matches("mut ")
+                .trim_start_matches("const ")
+                .trim_start_matches("dyn ");
+            let head = ty.split("::").next().unwrap_or_default();
+            let head = head.split('<').next().unwrap_or_default();
+            if ty.contains("::") {
+                Some(head.to_string())
+            } else if head.starts_with(char::is_uppercase) {
+                return "a generic parameter's bound".into();
+            } else {
+                // A primitive's impl is its trait's crate's.
+                split
+                    .map(|at| &rest[at + " as ".len()..])
+                    .and_then(|t| t.split("::").next())
+                    .map(|t| t.split('<').next().unwrap_or_default().to_string())
+            }
+        }
+        None => name
+            .contains("::")
+            .then(|| name.split("::").next().unwrap_or_default().to_string()),
+    };
+    match named.as_deref() {
+        None | Some("") => "the platform (an intrinsic, assembly, a foreign item)".into(),
+        Some("core" | "alloc" | "std") => "core, alloc and std are not linked".into(),
+        Some(c) if c == krate => "the crate's own, with no body in the dump".into(),
+        Some(c) if linked.contains(&c) => "a linked library leaves it to a dictionary".into(),
+        Some(c) => format!("crate `{c}` is not linked"),
+    }
 }
 
 impl EmbedCensus {
-    fn add(&mut self, e: &Embedded) {
+    fn add(&mut self, e: &Embedded, krate: &str, linked: &[&str]) {
         self.bodies += 1;
         if e.blocked.is_empty() {
             self.evaluable += 1;
@@ -3869,6 +3937,19 @@ impl EmbedCensus {
         }
         if !e.bound.is_empty() {
             self.bound += 1;
+        }
+        for c in &e.callees {
+            let at = linked
+                .iter()
+                .find(|l| c.starts_with(&format!("{l}::")))
+                .map_or(OWN, |l| l);
+            *self.linked.entry(at.to_string()).or_default() += 1;
+        }
+        for b in &e.bound {
+            *self
+                .unlinked
+                .entry(unlinked_reason(b, krate, linked))
+                .or_default() += 1;
         }
     }
 
@@ -3896,6 +3977,20 @@ impl EmbedCensus {
                 out,
                 "\n[[construct]]\nconstruct = {}\nbodies = {n}\n",
                 census_string(c)
+            );
+        }
+        for (at, n) in &self.linked {
+            let _ = write!(
+                out,
+                "\n[[linked]]\ninto = {}\ncalls = {n}\n",
+                census_string(at)
+            );
+        }
+        for (why, n) in &self.unlinked {
+            let _ = write!(
+                out,
+                "\n[[unlinked]]\nreason = {}\ncalls = {n}\n",
+                census_string(why)
             );
         }
         out
@@ -5969,6 +6064,7 @@ fn embed_linked(
         c => c,
     };
     let mut census = EmbedCensus::default();
+    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
@@ -6100,7 +6196,7 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e);
+                    census.add(&e, krate, &linked_names);
                     signatures.insert(
                         kappa.clone(),
                         (

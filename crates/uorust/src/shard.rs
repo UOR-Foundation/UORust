@@ -36,6 +36,12 @@ pub const MODULES: &str = "modules.toml";
 /// The file of a crate's shards that states the target they were built for.
 pub const TARGET: &str = "target.toml";
 
+/// The file of an embedded project that records what the embedding of one
+/// module (or one set of modules) in one configuration counted
+/// ([`render_record`]): the row a factory obligation keeps per
+/// (configuration, module).
+pub const RECORD: &str = "record.toml";
+
 /// The configuration a crate is built and dumped in: the cargo feature set
 /// and the target, as `cargo rustc` takes them. The default is the
 /// workspace's default features on the host.
@@ -487,6 +493,11 @@ pub struct WorkspaceEmbed<'a> {
     pub only: &'a [String],
     /// One project per module, `out/<module>`, smallest module first.
     pub each_module: bool,
+    /// The libraries linked into the program, `(crate, dumps)`, each
+    /// after those it builds on: another library of the workspace (its
+    /// `shards-<lib>`), a registry crate `uorust crate --workspace` kept
+    /// ([`member_links`]), core or alloc. A call into one names its body.
+    pub link: &'a [(String, PathBuf)],
 }
 
 /// One project's figures: the module it holds (none for the whole crate
@@ -566,6 +577,12 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
     let result = (|| {
         let builds_on = mount(&root, e.library, e.krate, &dir, &deps)?;
         let library = root.join("library");
+        let link: Vec<(&str, &Path)> = e
+            .link
+            .iter()
+            .map(|(k, d)| (k.as_str(), d.as_path()))
+            .collect();
+        let all = modules(&shards)?;
         let run = |only: &[String], out: &Path| {
             let census = crate::embed::embed_with(
                 e.krate,
@@ -574,12 +591,25 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
                 &shards,
                 out,
                 only,
-                &crate::embed::Outputs::default(),
+                &crate::embed::Outputs {
+                    link: &link,
+                    ..crate::embed::Outputs::default()
+                },
             )?;
             if let Some(text) = &configuration {
                 let file = out.join(CONFIGURATION);
                 std::fs::write(&file, text).map_err(|x| io(&file, x))?;
             }
+            let held: Vec<&Module> = all
+                .iter()
+                .filter(|m| only.is_empty() || only.contains(&m.name))
+                .collect();
+            let file = out.join(RECORD);
+            std::fs::write(
+                &file,
+                render_record(e.krate, &config, only, &held, &link, &census),
+            )
+            .map_err(|x| io(&file, x))?;
             Ok::<_, UorustError>(census)
         };
         if !e.each_module {
@@ -589,7 +619,7 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
             }]);
         }
         let mut done = Vec::new();
-        for m in modules(&shards)? {
+        for m in all.iter().cloned() {
             let census = run(std::slice::from_ref(&m.name), &e.out.join(&m.name))?;
             done.push(Embedded {
                 module: Some(m),
@@ -600,6 +630,88 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
     })();
     let _ = std::fs::remove_dir_all(&root);
     result
+}
+
+/// [`RECORD`] of one embedding of the modules `only` (every module when
+/// empty) of `krate`, dumped in `config`: the configuration, the modules
+/// and their dump files, the libraries linked, then the census's counts:
+/// bodies embedded, evaluable, leaving a callee to a dictionary, and the
+/// calls that name a body, by where it is, and those left to a dictionary,
+/// by why ([`crate::embed::unlinked_reason`]).
+pub fn render_record(
+    krate: &str,
+    config: &Configuration,
+    only: &[String],
+    held: &[&Module],
+    link: &[(&str, &Path)],
+    census: &crate::embed::EmbedCensus,
+) -> String {
+    let quote = |s: &str| toml::Value::String(s.to_string()).to_string();
+    let list =
+        |items: &mut dyn Iterator<Item = &str>| items.map(quote).collect::<Vec<_>>().join(", ");
+    let mut out = format!(
+        "# One embedding of a workspace library's modules in one configuration\n\
+         # (written by `uorust embed --workspace`; do not edit).\n\n\
+         crate = {}\nmodules = [{}]\nfeatures = [{}]\ndefault_features = {}\nall_features = {}\n\
+         target = {}\nlinked_libraries = [{}]\ndump_files = {}\ndump_bytes = {}\n\
+         embedded = {}\nevaluable = {}\nbound = {}\ncalls_linked = {}\ncalls_unlinked = {}\n",
+        quote(krate),
+        list(&mut only.iter().map(String::as_str)),
+        list(&mut config.features.iter().map(String::as_str)),
+        !config.no_default_features,
+        config.all_features,
+        quote(config.target.as_deref().unwrap_or_default()),
+        list(&mut link.iter().map(|(k, _)| *k)),
+        held.iter().map(|m| m.files).sum::<usize>(),
+        held.iter().map(|m| m.bytes).sum::<u64>(),
+        census.bodies,
+        census.evaluable,
+        census.bound,
+        census.linked.values().sum::<usize>(),
+        census.unlinked.values().sum::<usize>(),
+    );
+    for (at, n) in &census.linked {
+        out.push_str(&format!(
+            "\n[[linked]]\ninto = {}\ncalls = {n}\n",
+            quote(at)
+        ));
+    }
+    for (why, n) in &census.unlinked {
+        out.push_str(&format!(
+            "\n[[unlinked]]\nreason = {}\ncalls = {n}\n",
+            quote(why)
+        ));
+    }
+    out
+}
+
+/// The `--link` list `uorust crate --workspace` wrote for the member
+/// target `krate` into its index ([`crate::registry::LINKS`]) under
+/// `dumps`, each library's dumps resolved against that directory: the
+/// registry crates its build links, each after those it builds on. A
+/// target the index does not name links none.
+pub fn member_links(dumps: &Path, krate: &str) -> Result<Vec<(String, PathBuf)>, UorustError> {
+    let file = dumps.join(crate::registry::LINKS);
+    let text = std::fs::read_to_string(&file).map_err(|x| io(&file, x))?;
+    let doc: toml::Table = text.parse().map_err(|x| UorustError::Malformed {
+        path: file.clone(),
+        reason: format!("{x}"),
+    })?;
+    let member = doc
+        .get("member")
+        .and_then(toml::Value::as_array)
+        .into_iter()
+        .flatten()
+        .find(|m| m.get("target").and_then(toml::Value::as_str) == Some(krate));
+    Ok(member
+        .and_then(|m| m.get("link"))
+        .and_then(toml::Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(toml::Value::as_str)
+        .filter_map(|l| l.split_once('='))
+        .map(|(k, d)| (k.to_string(), dumps.join(d)))
+        .collect())
 }
 
 /// The configuration [`Configuration::render`] wrote, read back for cargo's
@@ -781,6 +893,7 @@ mod tests {
             out: &out,
             only: &[],
             each_module: true,
+            link: &[],
         };
         let done = embed_workspace_crate(&e).expect("the embedding");
         let modules: Vec<&str> = done
@@ -814,5 +927,218 @@ mod tests {
             "{refused:?}"
         );
         std::fs::remove_dir_all(&work).unwrap();
+    }
+
+    // join: one module's embedding in one configuration, linked against
+    // the crate's other modules and a library its build links, recorded.
+
+    /// A dump of `path(_1: u32, _2: u32) -> u32` whose entry block is
+    /// `entry`, as `uorust mir` lays one out.
+    fn join_body(path: &str, entry: &str) -> String {
+        format!("// MIR for `{path}` before ElaborateBoxDerefs\n\nfn {path}(_1: u32, _2: u32) -> u32 {{\n    let mut _0: u32;\n\n    bb0: {{\n        {entry}\n    }}\n\n    bb1: {{\n        return;\n    }}\n}}\n")
+    }
+
+    fn join_write(dir: &Path, name: &str, text: &str) {
+        std::fs::create_dir_all(dir).unwrap();
+        std::fs::write(dir.join(name), text).unwrap();
+    }
+
+    #[test]
+    fn join_a_module_links_its_crate_and_a_kept_library_and_records_both() {
+        let work = std::env::temp_dir().join(format!("uorust-shard-join-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        // A library outside the workspace that the member builds on, and
+        // its dumps as `uorust crate --dumps` keeps them.
+        join_write(
+            &work.join("dep"),
+            "Cargo.toml",
+            "[package]\nname = \"dep\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+        );
+        join_write(
+            &work.join("dep/src"),
+            "lib.rs",
+            "pub fn max(a: u32, b: u32) -> u32 {\n    a\n}\n",
+        );
+        let kept = work.join("kept");
+        join_write(
+            &kept.join("dep-0.1.0").join(crate::registry::ROOT_MODULE),
+            "dep.max.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body("max", "_0 = copy _1;\n        goto -> bb1;"),
+        );
+        let target = "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n";
+        join_write(&kept.join("dep-0.1.0"), TARGET, target);
+        join_write(
+            &kept,
+            crate::registry::LINKS,
+            "[[member]]\npackage = \"m\"\ntarget = \"m\"\nlink = [\"dep=dep-0.1.0\"]\n",
+        );
+        let ws = work.join("ws");
+        join_write(
+            &ws,
+            "Cargo.toml",
+            "[workspace]\nmembers = [\"m\"]\nresolver = \"2\"\n",
+        );
+        join_write(
+            &ws.join("m"),
+            "Cargo.toml",
+            &format!(
+                "[package]\nname = \"m\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n\
+                 [features]\nwide = []\n\n[dependencies]\ndep = {{ path = \"{}\" }}\n",
+                work.join("dep").display()
+            ),
+        );
+        join_write(
+            &ws.join("m/src"),
+            "lib.rs",
+            "pub mod inner;\npub fn f(a: u32, b: u32) -> u32 {\n    inner::top(a, b)\n}\n",
+        );
+        join_write(
+            &ws.join("m/src"),
+            "inner.rs",
+            "pub fn top(a: u32, b: u32) -> u32 {\n    dep::max(a, b)\n}\n",
+        );
+        let dumps = work.join("dumps");
+        let shards = dumps.join(format!("{SHARDS}m"));
+        join_write(
+            &shards.join(crate::registry::ROOT_MODULE),
+            "m.f.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body(
+                "f",
+                "_0 = inner::top(copy _1, copy _2) -> [return: bb1, unwind continue];",
+            ),
+        );
+        join_write(
+            &shards.join("inner"),
+            "m.inner-top.2-2-009.ElaborateBoxDerefs.before.mir",
+            &join_body(
+                "inner::top",
+                "_0 = dep::max(copy _1, copy _2) -> [return: bb1, unwind continue];",
+            ),
+        );
+        join_write(&shards, TARGET, target);
+        // The second configuration: a feature of the member on.
+        let config = Configuration {
+            features: vec!["wide".into()],
+            ..Configuration::default()
+        };
+        join_write(
+            &shards,
+            CONFIGURATION,
+            &config.render("x86_64-unknown-linux-gnu"),
+        );
+        let library = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core/library");
+        let linked = member_links(&kept, "m").unwrap();
+        assert_eq!(linked, [("dep".to_string(), kept.join("dep-0.1.0"))]);
+        assert!(member_links(&kept, "other").unwrap().is_empty());
+        let embed = |out: &str, link: &[(String, PathBuf)]| {
+            let out = work.join(out);
+            let done = embed_workspace_crate(&WorkspaceEmbed {
+                workspace: &ws,
+                krate: "m",
+                dumps: &dumps,
+                library: &library,
+                out: &out,
+                only: &["inner".to_string()],
+                each_module: false,
+                link,
+            })
+            .expect("the embedding");
+            let record = std::fs::read_to_string(out.join(RECORD)).expect("the record");
+            (done[0].census.clone(), record)
+        };
+        // Unlinked, the call into the library is left to a dictionary,
+        // named by why.
+        let (alone, record) = embed("alone", &[]);
+        assert_eq!((alone.bodies, alone.bound), (1, 1), "{record}");
+        assert_eq!(
+            alone.unlinked.get("crate `dep` is not linked"),
+            Some(&1),
+            "{record}"
+        );
+        assert!(
+            record.contains(
+                "modules = [\"inner\"]\nfeatures = [\"wide\"]\ndefault_features = true\n"
+            ),
+            "{record}"
+        );
+        assert!(record.contains("calls_unlinked = 1\n"), "{record}");
+        // Linked, it names the library's body.
+        let (both, record) = embed("linked", &linked);
+        assert_eq!((both.bodies, both.bound), (1, 0), "{record}");
+        assert_eq!(both.linked.get("dep"), Some(&1), "{record}");
+        assert!(both.unlinked.is_empty(), "{record}");
+        assert!(
+            record.contains("linked_libraries = [\"dep\"]\n")
+                && record.contains("[[linked]]\ninto = \"dep\"\ncalls = 1\n"),
+            "{record}"
+        );
+        // The root module's call into the crate's other module is linked
+        // as the crate's own.
+        let out = work.join("each");
+        let done = embed_workspace_crate(&WorkspaceEmbed {
+            workspace: &ws,
+            krate: "m",
+            dumps: &dumps,
+            library: &library,
+            out: &out,
+            only: &[],
+            each_module: true,
+            link: &linked,
+        })
+        .expect("the embedding");
+        let root = done
+            .iter()
+            .find(|d| d.module.as_ref().unwrap().name == crate::registry::ROOT_MODULE)
+            .unwrap();
+        assert_eq!(
+            root.census.linked.get(crate::embed::OWN),
+            Some(&1),
+            "{:?}",
+            root.census
+        );
+        assert!(out
+            .join(crate::registry::ROOT_MODULE)
+            .join(RECORD)
+            .is_file());
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
+    #[test]
+    fn join_an_unlinked_call_is_named_by_the_crate_its_path_names() {
+        let reason = |n: &str| crate::embed::unlinked_reason(n, "m", &["fnv"]);
+        assert_eq!(
+            reason("core::num::<impl u32>::max"),
+            "core, alloc and std are not linked"
+        );
+        assert_eq!(
+            reason("<alloc::vec::Vec<u8> as core::clone::Clone>::clone"),
+            "core, alloc and std are not linked"
+        );
+        assert_eq!(
+            reason("<u32 as std::ops::Add>::add"),
+            "core, alloc and std are not linked"
+        );
+        assert_eq!(reason("<T as Trait>::go"), "a generic parameter's bound");
+        assert_eq!(reason("<&T as Trait>::go"), "a generic parameter's bound");
+        assert_eq!(
+            reason("bit_set::BitSet::new"),
+            "crate `bit_set` is not linked"
+        );
+        assert_eq!(
+            reason("<fnv::FnvHasher as core::hash::Hasher>::write"),
+            "a linked library leaves it to a dictionary"
+        );
+        assert_eq!(
+            reason("<u8 as other::Trait>::go"),
+            "crate `other` is not linked"
+        );
+        assert_eq!(
+            reason("m::inner::gone"),
+            "the crate's own, with no body in the dump"
+        );
+        assert_eq!(
+            reason("sqrtf64"),
+            "the platform (an intrinsic, assembly, a foreign item)"
+        );
     }
 }
