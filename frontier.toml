@@ -211,7 +211,7 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, (std::string::String, std::string::String)>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     2 std::iter::Enumerate<std::slice::Iter<'_, std::vec::Vec<char>>>
-#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5000:17: 5000:20}>
+#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5012:17: 5012:20}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:757:54: 757:57}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:176:37: 176:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:115:18: 115:21}>
@@ -4190,7 +4190,7 @@ detail = "mir::Ty: std::collections::BTreeSet<lift::Ty>"
 kappa = "dfc0d7cab9d26456c3716f11b6f77193223b923bb050d34e875d8a1b9e8c9a22"
 function = "uorust::project::foreign_crate"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5000:17: 5000:20}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:5012:17: 5012:20}>"
 
 [[residue]]
 kappa = "f18e0862c610f26f1c5e6a5eb382b9dd84675d1ca1d08413e3086b69f8449b6d"
@@ -4223,7 +4223,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
 
 [[residue]]
-kappa = "759c7e598a1e283a341d996e7b2c2955b9101563461bede0ed4ab08d72c8651b"
+kappa = "0e5b375ee3f8afcbc4c017a2853f76ed4e8e389c47ca852e07d195eaff30963a"
 function = "uorust::project::library"
 reason = "mir"
 detail = "mir::AggregateKind::Closure: project::library::{closure#0}: mir::AggregateKind::Closure: project::library::{closure#0}::{closure#0}: mir::TerminatorKind::Call: <facts::TargetKind as std::cmp::PartialEq>::eq"
@@ -5864,7 +5864,7 @@ function = "uorust::options"
 effect = "calls uorust::default_name, which performs a Fs effect: Path::canonicalize"
 
 [[effect]]
-kappa = "474c89d5eb0fdd7f5b36c05e101920b676704c06a77b4ecd19bd7e7e4b8e617c"
+kappa = "2c79d53fb4b45a2d3ff389cafa9cd5b073fc965d45a2fac7e0641f27160aa4f3"
 function = "uorust::project::behavior"
 effect = "calls uorust::lift::lift_all, which reaches an effect"
 
