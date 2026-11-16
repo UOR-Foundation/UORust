@@ -721,6 +721,7 @@ pub fn production_build(
         }
         std::fs::create_dir_all(dir).map_err(|e| io(dir, e))?;
     }
+    let program = compiler.program.clone();
     let decided = self::carry(input, &all, compiler, carry)?;
     let Carry {
         ids,
@@ -807,6 +808,7 @@ pub fn production_build(
         targets,
         prefix: &prefix,
         deadline,
+        program: &program,
     };
     build_all(&source, out, kept, workers, &state);
     // A carried root is published only into a project a build or a
@@ -1067,6 +1069,8 @@ struct Source<'a> {
     targets: &'a str,
     prefix: &'a str,
     deadline: Option<std::time::Instant>,
+    /// The compiler's program ([`Compiler::program`]).
+    program: &'a Path,
 }
 
 /// Build one batch in the production project at `dir`: the roots the request
@@ -1094,8 +1098,10 @@ fn build_batch(
     if named.is_empty() {
         return Ok((named, None));
     }
-    lexlean(dir, &["lock"])?;
+    let program = source.program;
+    run_lexlean(program, dir, &["lock"])?;
     let Some(result) = lexlean_until(
+        program,
         dir,
         &["production", "build", "--request", "request.json"],
         source.deadline,
@@ -1113,7 +1119,7 @@ fn build_batch(
             .and_then(|a| a.as_str())
             .ok_or_else(|| UorustError::Tool("lexlean production build: no bundle".into()))?;
         let bundle = dir.join(artifact);
-        let replay = lexlean(dir, &["production", "verify-artifact", artifact])?;
+        let replay = run_lexlean(program, dir, &["production", "verify-artifact", artifact])?;
         if replay.get("success").and_then(serde_json::Value::as_bool) != Some(true) {
             return Err(UorustError::Tool(format!(
                 "lexlean production verify-artifact: {}",
@@ -1158,22 +1164,39 @@ fn compiler_version() -> Result<String, UorustError> {
 /// can differ in their compiler semantics (the digest `lexlean --version`
 /// states on its own line, which the lock and the result bind, SPEC §21.2,
 /// §24.7) or in the Lean toolchain, and either changes what a build emits.
+///
+/// The program a build runs is part of the compiler too, so that what an
+/// export states it builds with is what it runs: a build never falls back
+/// to whichever `lexlean` the path holds. The program is no input of an
+/// identity: where a compiler is installed does not change what it emits,
+/// and what it states of itself does.
 #[derive(Clone, Debug, PartialEq, Eq)]
-pub struct Compiler(pub String);
+pub struct Compiler {
+    /// Every line `<program> --version` prints.
+    pub stated: String,
+    /// The program every build of the export runs.
+    pub program: PathBuf,
+}
+
+/// The compiler's program on the path.
+pub const LEXLEAN: &str = "lexlean";
 
 impl Compiler {
     /// The compiler on the path.
     pub fn installed() -> Result<Compiler, UorustError> {
-        let run = std::process::Command::new("lexlean")
+        let run = std::process::Command::new(LEXLEAN)
             .arg("--version")
             .output()
             .map_err(|e| UorustError::Tool(format!("lexlean --version: {e}")))?;
-        Ok(Compiler(String::from_utf8_lossy(&run.stdout).into_owned()))
+        Ok(Compiler {
+            stated: String::from_utf8_lossy(&run.stdout).into_owned(),
+            program: PathBuf::from(LEXLEAN),
+        })
     }
 
     /// The version the manifest records: the second word of the first line.
     pub fn version(&self) -> String {
-        self.0
+        self.stated
             .lines()
             .next()
             .and_then(|l| l.split_whitespace().nth(1))
@@ -1506,7 +1529,7 @@ pub fn project_identity(input: &Input<'_>, compiler: &Compiler) -> Result<String
         targets,
     } = *input;
     let mut text = format!("{PROJECT_IDENTITY}\n");
-    for line in compiler.0.lines() {
+    for line in compiler.stated.lines() {
         text.push_str(&format!("compiler {line}\n"));
     }
     let descriptor = profile.descriptor_text(targets)?;
@@ -1604,7 +1627,7 @@ pub fn closure_kappas(
     let prefix = module_prefix(projection)?;
     let modules = modules(projection)?;
     let mut shared = format!("{CLOSURE}\n");
-    for line in compiler.0.lines() {
+    for line in compiler.stated.lines() {
         shared.push_str(&format!("compiler {line}\n"));
     }
     let descriptor = profile.descriptor_text(targets)?;
@@ -2066,7 +2089,16 @@ pub(crate) fn first_root(message: &str, prefix: &str) -> Option<String> {
 /// Run `lexlean <args> --diagnostic-format json` in `dir`: its command
 /// result, whatever its exit.
 fn lexlean(dir: &Path, args: &[&str]) -> Result<serde_json::Value, UorustError> {
-    lexlean_until(dir, args, None)?
+    run_lexlean(Path::new(LEXLEAN), dir, args)
+}
+
+/// [`lexlean`], with the compiler's `program`.
+fn run_lexlean(
+    program: &Path,
+    dir: &Path,
+    args: &[&str],
+) -> Result<serde_json::Value, UorustError> {
+    lexlean_until(program, dir, args, None)?
         .ok_or_else(|| UorustError::Tool(format!("lexlean {}: no result", args.join(" "))))
 }
 
@@ -2076,11 +2108,13 @@ fn lexlean(dir: &Path, args: &[&str]) -> Result<serde_json::Value, UorustError> 
 /// `lean` lexlean runs among it, at the first whole second past `deadline`;
 /// the `lake` and `lean` that left the group are killed by their build root.
 fn lexlean_until(
+    program: &Path,
     dir: &Path,
     args: &[&str],
     deadline: Option<std::time::Instant>,
 ) -> Result<Option<serde_json::Value>, UorustError> {
-    let tool = |e: String| UorustError::Tool(format!("lexlean {}: {e}", args.join(" ")));
+    let tool =
+        |e: String| UorustError::Tool(format!("{} {}: {e}", program.display(), args.join(" ")));
     let mut command = match deadline {
         Some(d) => {
             let left = d.saturating_duration_since(std::time::Instant::now());
@@ -2088,14 +2122,11 @@ fn lexlean_until(
                 return Ok(None);
             }
             let mut c = std::process::Command::new("timeout");
-            c.args([
-                "--signal=KILL",
-                &format!("{}s", left.as_secs() + 1),
-                "lexlean",
-            ]);
+            c.args(["--signal=KILL", &format!("{}s", left.as_secs() + 1)])
+                .arg(program);
             c
         }
-        None => std::process::Command::new("lexlean"),
+        None => std::process::Command::new(program),
     };
     let run = command
         .args(args)
@@ -3882,7 +3913,7 @@ mod tests {
                 register: &register,
                 targets: &targets,
             };
-            let compiler = Compiler(compiler.into());
+            let compiler = keyed_compiler(compiler);
             (
                 closure_kappas(&input, &profile.roots(&register), &compiler).expect("closure κs"),
                 project_identity(&input, &compiler).expect("a project identity"),
@@ -4775,12 +4806,8 @@ mod tests {
             register: &register,
             targets,
         };
-        closure_kappas(
-            &input,
-            &profile.roots(&register),
-            &Compiler(compiler.into()),
-        )
-        .expect("identities")
+        closure_kappas(&input, &profile.roots(&register), &keyed_compiler(compiler))
+            .expect("identities")
     }
 
     /// A prior manifest that certifies each root at its identity, and the
@@ -4849,7 +4876,7 @@ mod tests {
                     sources,
                     verify,
                 },
-                &Compiler(KEYED_COMPILER.into()),
+                &keyed_compiler(KEYED_COMPILER),
                 Scope::default(),
             )
         };
@@ -5052,7 +5079,7 @@ mod tests {
             targets: &targets,
         };
         let decided =
-            carry(&input, &roots, &Compiler(KEYED_COMPILER.into()), &prior).expect("carry");
+            carry(&input, &roots, &keyed_compiler(KEYED_COMPILER), &prior).expect("carry");
         assert_eq!(decided.ids, callee);
         let carried_now: BTreeSet<String> = decided
             .carried
@@ -5109,8 +5136,8 @@ mod tests {
         // One version, another compiler semantics.
         let semantics = KEYED_COMPILER.replace("aaaa", "bbbb");
         assert_eq!(
-            Compiler(semantics.clone()).version(),
-            Compiler(KEYED_COMPILER.into()).version()
+            keyed_compiler(&semantics).version(),
+            keyed_compiler(KEYED_COMPILER).version()
         );
         all_differ(&keyed_ids(
             &tmp,
@@ -5180,7 +5207,7 @@ mod tests {
                 &closure_kappas(
                     &input,
                     &profile.roots(&register),
-                    &Compiler(KEYED_COMPILER.into()),
+                    &keyed_compiler(KEYED_COMPILER),
                 )
                 .expect("identities"),
             );
@@ -5202,7 +5229,7 @@ mod tests {
             &closure_kappas(
                 &input,
                 &profile.roots(&register),
-                &Compiler(KEYED_COMPILER.into()),
+                &keyed_compiler(KEYED_COMPILER),
             )
             .expect("identities"),
         );
@@ -5278,7 +5305,7 @@ mod tests {
         carry(
             &input,
             &profile.roots(register),
-            &Compiler(KEYED_COMPILER.into()),
+            &keyed_compiler(KEYED_COMPILER),
             prior,
         )
         .expect("carry")
@@ -5293,7 +5320,7 @@ mod tests {
             register: &register,
             targets: &targets,
         };
-        project_identity(&input, &Compiler(KEYED_COMPILER.into())).expect("a project identity")
+        project_identity(&input, &keyed_compiler(KEYED_COMPILER)).expect("a project identity")
     }
 
     // The planted defect: an identity without the linked packages' trees
@@ -5343,7 +5370,7 @@ mod tests {
             closure_kappas(
                 &input,
                 &profile.roots(&register),
-                &Compiler(KEYED_COMPILER.into()),
+                &keyed_compiler(KEYED_COMPILER),
             )
             .expect("identities")
         };
@@ -5515,7 +5542,7 @@ mod tests {
                     sources: std::slice::from_ref(&sources),
                     verify,
                 },
-                &Compiler(KEYED_COMPILER.into()),
+                &keyed_compiler(KEYED_COMPILER),
                 Scope::default(),
             )
         };
@@ -5569,7 +5596,7 @@ mod tests {
                 sources: std::slice::from_ref(&sources),
                 verify: keyed_verifies,
             },
-            &Compiler(KEYED_COMPILER.into()),
+            &keyed_compiler(KEYED_COMPILER),
             Scope::default(),
         )
         .expect("an export");
@@ -5673,7 +5700,7 @@ mod tests {
             &tmp.join("out"),
             &tmp.join("kept"),
             &prior,
-            &Compiler(KEYED_COMPILER.into()),
+            &keyed_compiler(KEYED_COMPILER),
             Scope::default(),
         )
         .expect("an export");
@@ -5739,5 +5766,16 @@ mod tests {
         let read = Manifest::parse(&path, &first).expect("a manifest");
         assert_eq!(read.to_text(), written);
         let _ = std::fs::remove_dir_all(tmp);
+    }
+
+    // keyed2 (item 0): a test states its compiler. The stand-in is a
+    // program that exists nowhere, so a build the test does not expect fails
+    // to start wherever the suite runs, whether or not a real `lexlean` is
+    // on the path; what the compiler states of itself is the test's own.
+    fn keyed_compiler(stated: &str) -> Compiler {
+        Compiler {
+            stated: stated.to_string(),
+            program: PathBuf::from("/nonexistent/uorust-test-stand-in/lexlean"),
+        }
     }
 }
