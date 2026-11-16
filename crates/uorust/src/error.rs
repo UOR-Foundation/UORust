@@ -38,6 +38,17 @@ pub enum UorustError {
     /// A function the incumbent lift register records as lifted (a proved
     /// claim, by κ) is decided unlifted by this projection.
     Regressed(Vec<String>),
+    /// A module of the projection is larger than the `max_file_bytes` the
+    /// projection's own `lexlean.toml` states, so LexLean would refuse the
+    /// project it is part of.
+    ModuleTooLarge {
+        /// The module's path in the projection.
+        module: String,
+        /// Its size in bytes.
+        bytes: usize,
+        /// The limit the projection states.
+        limit: usize,
+    },
     /// A tool the engine runs could not be run or failed: `cargo rustc`
     /// dumping MIR, or `lexlean verify` deciding the MIR path's theorems.
     Tool(String),
@@ -83,6 +94,15 @@ impl fmt::Display for UorustError {
                 f,
                 "a lifted function is no longer lifted, and a lifted κ is never re-decided: {}",
                 rows.join("; ")
+            ),
+            Self::ModuleTooLarge {
+                module,
+                bytes,
+                limit,
+            } => write!(
+                f,
+                "the module {module} is {bytes} bytes, beyond the max_file_bytes of {limit} the \
+                 projection states in lexlean.toml"
             ),
             Self::Tool(reason) => write!(f, "{reason}"),
             Self::Disagree(rows) => write!(

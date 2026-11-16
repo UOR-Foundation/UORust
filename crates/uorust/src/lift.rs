@@ -115,6 +115,12 @@ pub(crate) enum Ty {
     /// (a `Nat`): the format's exponent and fraction widths, as core's own
     /// constants give them (see `mir::float`).
     Float(crate::mir::float::Format),
+    /// A signed integer the 64-bit family does not hold: `i128`, of 128
+    /// bits, or `isize` (`None`), as wide as the target's pointer. Held as
+    /// LexLean's mathematical `Int`, as `u128` and `usize` are held as
+    /// `Nat`: the width says what an operation may return, and is no part
+    /// of how a value is held.
+    Integer(Option<u32>),
     /// The MIR path's signed integer of this many bits (`None` for
     /// `isize`), held as its two's-complement bit pattern in `Nat`: LexLean
     /// converts no `Nat` to a signed family, so a cast between the two
@@ -161,6 +167,7 @@ impl Ty {
             Self::Bool => "Bool".into(),
             Self::Nat(_) | Self::Float(_) | Self::Signed(_) | Self::Scalar => "Nat".into(),
             Self::Int(_) => "Int64".into(),
+            Self::Integer(_) => "Int".into(),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => format!("{PRELUDE}::ParseIntError"),
             Self::Path => format!("{PRELUDE}::FilePath"),
@@ -203,6 +210,9 @@ impl Ty {
             Self::Bool => "Bool".into(),
             Self::Nat(_) | Self::Float(_) | Self::Signed(_) | Self::Scalar => "Nat".into(),
             Self::Int(_) => "Int".into(),
+            // `Int` is the tag of `Int64`; a name of the prefix no
+            // workspace type lifts under tells the two apart.
+            Self::Integer(_) => INTEGER_TAG.into(),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => "ParseIntError".into(),
             Self::Path => "FilePath".into(),
@@ -354,7 +364,129 @@ pub(crate) struct Types {
     /// by LexLean name, where they are not the variants' indices alone.
     /// Held as `i64`, the width the lift lifts, and widened where read.
     pub(crate) discriminants: BTreeMap<String, Vec<i64>>,
+    /// The workspace's structs and enums outside the lift, by LexLean name:
+    /// the chain from each down to the leaf that keeps it out
+    /// (`Mid.leaf: Leaf.x: f64`), so that a residue row states its cause
+    /// and not only the nearest type the cause is inside.
+    pub(crate) outside: BTreeMap<String, String>,
 }
+
+/// The tag of the mathematical `Int` in a generated name.
+const INTEGER_TAG: &str = "LexLeanInt";
+
+/// The one constructor of a struct that declares no field (`struct S;`):
+/// LexLean's structure holds at least one field, so such a struct is the
+/// inductive of one constructor, named as Lean names a structure's own.
+const SOLE: &str = "mk";
+
+/// The LexLean name of a struct's field: a tuple struct's, which Rust
+/// names by position, as a generated tuple's item is named.
+fn field_name(rust: &str) -> String {
+    match rust.parse::<usize>() {
+        Ok(position) => format!("item{position}"),
+        Err(_) => local_name(rust),
+    }
+}
+
+/// A type whose name LexLean or the projection writes for a type of its own.
+const TAKEN_NAME: &str = "a type named as LexLean or the projection names one of its own";
+
+/// A variant whose name is a word LexLean or Lean reserves.
+const TAKEN_VARIANT: &str = "a variant named as a word LexLean reserves";
+
+/// A recursive occurrence Lean does not nest an inductive under.
+const NOT_NESTED: &str =
+    "a recursion through a tuple, a map or a set, where Lean nests no inductive";
+
+/// A struct with a type or const parameter: one declaration, a type per
+/// instance.
+pub(crate) const PARAMETRIC_STRUCT: &str = "a struct with type or const parameters";
+
+/// A name two declarations of one module share: one type per build
+/// configuration, or an item of an inline module read at its file's.
+pub(crate) const DECLARED_TWICE: &str = "a type declared twice in one module";
+
+/// A name several types of a crate share, where the file that writes it
+/// neither declares nor imports one of them.
+pub(crate) const SHARED_NAME: &str =
+    "one of several types of this name in its crate, which the file does not tell apart";
+
+/// A struct the reader of structs does not read as fields, or a name that
+/// reads as no one type, registered so that the type side names it: under
+/// no field name, with its shape where a field's type stands. A shape is
+/// no type, so the name stays outside the lift and is itself the leaf of
+/// every chain through it.
+pub(crate) fn unread_shape(shape: &str) -> (String, rs::RustType) {
+    let shape = rs::RustType {
+        text: shape.to_string(),
+        kind: rs::TypeKind::Other,
+    };
+    (String::new(), shape)
+}
+
+/// Where the standard library declares each type the lift reads that a
+/// source may name by its full path: the module, under `std` (or `core`
+/// or `alloc`, which `std` re-exports them from), and the names.
+const LIBRARY: [(&str, &[&str]); 10] = [
+    ("boxed", &["Box"]),
+    (
+        "collections",
+        &["BTreeMap", "BTreeSet", "HashMap", "HashSet", "VecDeque"],
+    ),
+    ("ops", &["Range"]),
+    ("option", &["Option"]),
+    ("path", &["Path", "PathBuf"]),
+    ("rc", &["Rc"]),
+    ("result", &["Result"]),
+    ("string", &["String"]),
+    ("sync", &["Arc"]),
+    ("vec", &["Vec"]),
+];
+
+/// Whether a path is the standard library's own full path of a type the
+/// lift reads: `std::collections::BTreeMap`, `std::rc::Rc`.
+fn std_path(path: &rs::Path) -> bool {
+    let [root, module, last] = path.segments.as_slice() else {
+        return false;
+    };
+    let plain = |s: &rs::PathSegment| s.arguments == rs::PathArguments::None;
+    matches!(root.ident.as_str(), "std" | "core" | "alloc")
+        && plain(root)
+        && plain(module)
+        && LIBRARY
+            .iter()
+            .any(|(m, names)| *m == module.ident && names.contains(&last.ident.as_str()))
+}
+
+/// Whether a generic argument, as written, is a lifetime (`'a`, `'_`): a
+/// character literal, a const argument, closes its quote.
+fn is_lifetime(argument: &str) -> bool {
+    match argument.trim().strip_prefix('\'') {
+        Some(name) => !name.contains('\''),
+        None => false,
+    }
+}
+
+/// A field of a variant as Rust writes its place: `Enum::Variant.name`, or
+/// `Enum::Variant.0` by position.
+fn variant_field(owner: &str, variant: &str, field: Option<&str>, at: usize) -> String {
+    match field {
+        Some(f) => format!("{owner}::{variant}.{f}"),
+        None => format!("{owner}::{variant}.{at}"),
+    }
+}
+
+/// What keeps a field of a type of the workspace outside the lift.
+enum Stop {
+    /// A leaf, by its text: a type no part of the workspace's types.
+    Leaf(String),
+    /// Another type of the workspace that is itself outside, by name.
+    Type(String),
+}
+
+/// Marks, in the text of a type residue, a type of the workspace whose
+/// chain is still to be built: a character no type's text holds.
+const PENDING: char = '\u{1}';
 
 /// The strongly connected components of a graph, each one set.
 fn strong_components(graph: &BTreeMap<String, BTreeSet<String>>) -> Vec<BTreeSet<String>> {
@@ -405,8 +537,11 @@ fn positive(ty: &Ty, family: &BTreeSet<String>) -> bool {
 /// A field of a data-carrying variant: its Rust name, if any, and its type.
 pub(crate) type DataField = (Option<String>, Ty);
 
+/// A variant of a data-carrying enum and its fields, as Rust writes them.
+type RawVariant = (String, Vec<(Option<String>, rs::RustType)>);
+
 /// The fields of each variant of a data-carrying enum, as Rust writes them.
-pub(crate) type RawVariants = Vec<(String, Vec<(Option<String>, rs::RustType)>)>;
+pub(crate) type RawVariants = Vec<RawVariant>;
 
 /// Whether `ty` names `me` only where Lean accepts a nested occurrence:
 /// directly, or inside `Option`, `List` or `Result`.
@@ -457,10 +592,46 @@ fn with_domains(ty: &Ty, family: &BTreeSet<String>, domains: Vec<Ty>) -> Vec<Ty>
     domains
 }
 
+/// Whether LexLean or the projection writes this name for a type of its
+/// own, so that no type of the workspace lifts under it. `declared` is a
+/// struct or a data-carrying enum, whose declaration may not be named as
+/// the tuple structures the projection generates are. The projection lifts
+/// such a type under its crate's name and its own.
+pub(crate) fn name_taken(name: &str, declared: bool) -> bool {
+    let generated = declared && name.starts_with("Tuple");
+    BARE_TYPES.contains(&name) || name.starts_with("LexLean") || generated
+}
+
+/// Why a type is outside the lift whatever it holds, known before any type
+/// is read: the chain that names it, where one does. Its own name, or a
+/// variant's, is one LexLean writes; or the reader of structs did not read
+/// it as fields (see [`unread_shape`]), and the struct is the leaf.
+fn barred(
+    name: &str,
+    declared: bool,
+    variants: &[&str],
+    fields: &[(String, rs::RustType)],
+) -> Option<String> {
+    if let [(unnamed, shape)] = fields {
+        if unnamed.is_empty() {
+            return Some(format!("{name}: {}", shape.text));
+        }
+    }
+    if name_taken(name, declared) {
+        return Some(format!("{name}: {TAKEN_NAME}"));
+    }
+    variants
+        .iter()
+        .find(|v| RESERVED.contains(v))
+        .map(|v| format!("{name}::{v}: {TAKEN_VARIANT}"))
+}
+
 impl Types {
     /// The lifted types with data-carrying enums among them: every type to
     /// the fixpoint where each names only types that lift, and no two name
-    /// each other (a data enum may name itself).
+    /// each other (a data enum may name itself). A type the fixpoint drops
+    /// is recorded in `outside` with the chain down to its leaf (see
+    /// [`Types::chains`]).
     pub(crate) fn with_data(
         enums: BTreeMap<String, Vec<String>>,
         datas: &BTreeMap<String, RawVariants>,
@@ -468,18 +639,35 @@ impl Types {
         aliases: BTreeMap<String, String>,
     ) -> Self {
         let base = Self::new(enums, structs, aliases);
+        // What a name or a variant alone keeps out, whatever the type
+        // holds. The structs' chains of `new` are not taken: it read them
+        // without the data-carrying enums.
+        let mut outside: BTreeMap<String, String> = base
+            .outside
+            .iter()
+            .filter(|(n, _)| !structs.contains_key(*n))
+            .map(|(n, chain)| (n.clone(), chain.clone()))
+            .collect();
+        for (n, variants) in datas {
+            let known = base.enums.contains_key(n) || base.structs.contains_key(n);
+            let named: Vec<&str> = variants.iter().map(|(v, _)| v.as_str()).collect();
+            if let (false, Some(why)) = (known, barred(n, true, &named, &[])) {
+                outside.insert(n.clone(), why);
+            }
+        }
+        for (n, fields) in structs {
+            let barred = barred(n, true, &[], fields);
+            if let (false, Some(why)) = (base.enums.contains_key(n), barred) {
+                outside.insert(n.clone(), why);
+            }
+        }
         let mut names: BTreeSet<String> = datas
             .keys()
             .filter(|n| {
                 !base.enums.contains_key(*n)
                     && !base.structs.contains_key(*n)
-                    && !BARE_TYPES.contains(&n.as_str())
-                    && !n.starts_with("LexLean")
-                    && !n.starts_with("Tuple")
+                    && !outside.contains_key(*n)
                     && !datas[*n].is_empty()
-                    && datas[*n]
-                        .iter()
-                        .all(|(v, _)| !RESERVED.contains(&v.as_str()))
             })
             .cloned()
             .collect();
@@ -487,14 +675,10 @@ impl Types {
         // Lean writes bare or that the projection generates.
         let mut struct_names: BTreeSet<String> = structs
             .keys()
-            .filter(|n| {
-                !base.enums.contains_key(*n)
-                    && !BARE_TYPES.contains(&n.as_str())
-                    && !n.starts_with("LexLean")
-                    && !n.starts_with("Tuple")
-            })
+            .filter(|n| !base.enums.contains_key(*n) && !outside.contains_key(*n))
             .cloned()
             .collect();
+        let candidates: BTreeSet<String> = names.union(&struct_names).cloned().collect();
         loop {
             let probe = Self {
                 datas: names.iter().map(|n| (n.clone(), Vec::new())).collect(),
@@ -503,40 +687,20 @@ impl Types {
                     .filter(|n| !base.enums.contains_key(*n))
                     .map(|n| (n.clone(), Vec::new()))
                     .collect(),
+                outside: outside.clone(),
                 ..base.clone()
             };
+            // The families this round refuses, each member with its chain.
+            let mut refused: BTreeMap<String, String> = BTreeMap::new();
             let mut lifted = BTreeMap::new();
             for name in &names {
-                let mut variants = Vec::new();
-                let mut ok = true;
-                for (variant, fields) in &datas[name] {
-                    let mut tys = Vec::new();
-                    for (field, t) in fields {
-                        match probe.ty(t) {
-                            Ok(ty) if nested_ok(&ty, name) => tys.push((field.clone(), ty)),
-                            _ => ok = false,
-                        }
-                    }
-                    variants.push((variant.clone(), tys));
-                }
-                if ok {
+                if let Some(variants) = probe.variants_read(name, &datas[name]) {
                     lifted.insert(name.clone(), variants);
                 }
             }
             let mut fields_of = BTreeMap::new();
             for name in &struct_names {
-                let Some(raw) = structs.get(name) else {
-                    continue;
-                };
-                let mut fields = Vec::new();
-                let mut ok = !raw.is_empty();
-                for (field, t) in raw {
-                    match probe.ty(t) {
-                        Ok(ty) => fields.push((local_name(field), ty)),
-                        Err(_) => ok = false,
-                    }
-                }
-                if ok {
+                if let Some(fields) = structs.get(name).and_then(|raw| probe.fields_read(raw)) {
                     fields_of.insert(name.clone(), fields);
                 }
             }
@@ -570,41 +734,214 @@ impl Types {
                 if !recursive {
                     continue;
                 }
-                let fields = family.iter().flat_map(|n| {
-                    lifted
+                // Each member's fields: where Rust writes it, as written
+                // and as read, in declaration order.
+                let places = |n: &String| {
+                    let of_variants = lifted
                         .get(n)
                         .into_iter()
                         .flatten()
-                        .flat_map(|(_, fs)| fs.iter().map(|(_, t)| t.clone()))
-                        .chain(
-                            fields_of
-                                .get(n)
-                                .into_iter()
-                                .flatten()
-                                .map(|(_, t)| t.clone()),
-                        )
-                        .collect::<Vec<_>>()
-                });
-                let positive = fields.clone().all(|t| positive(&t, &family));
-                if positive {
-                    families.push(family);
-                } else {
-                    cyclic.extend(family);
+                        .zip(datas.get(n).into_iter().flatten())
+                        .flat_map(|((v, tys), (_, raws))| {
+                            tys.iter()
+                                .zip(raws)
+                                .enumerate()
+                                .map(|(i, ((_, ty), (f, raw)))| {
+                                    (variant_field(n, v, f.as_deref(), i), raw, ty.clone())
+                                })
+                        });
+                    let of_fields = fields_of
+                        .get(n)
+                        .into_iter()
+                        .flatten()
+                        .zip(structs.get(n).into_iter().flatten())
+                        .map(|((_, ty), (f, raw))| (format!("{n}.{f}"), raw, ty.clone()));
+                    of_variants.chain(of_fields).collect::<Vec<_>>()
+                };
+                let held = family
+                    .iter()
+                    .flat_map(places)
+                    .find(|(_, _, ty)| !positive(ty, &family));
+                match held {
+                    None => families.push(family),
+                    Some((at, raw, _)) => {
+                        let chain = format!("{at}: {}: {NOT_NESTED}", raw.text);
+                        for member in &family {
+                            // The member that holds the occurrence states
+                            // it; the others are in its family.
+                            let own = at.starts_with(&format!("{member}."))
+                                || at.starts_with(&format!("{member}::"));
+                            let why = if own {
+                                chain.clone()
+                            } else {
+                                format!("{member}: in one recursive family with {chain}")
+                            };
+                            refused.insert(member.clone(), why);
+                        }
+                        cyclic.extend(family);
+                    }
                 }
             }
             lifted.retain(|n, _| !cyclic.contains(n));
             fields_of.retain(|n, _| !cyclic.contains(n));
             if lifted.len() == names.len() && fields_of.len() == struct_names.len() {
+                // This round's probe names exactly the types that lift.
+                let pending = candidates
+                    .iter()
+                    .filter(|n| !probe.datas.contains_key(*n) && !probe.structs.contains_key(*n))
+                    .filter(|n| !outside.contains_key(*n))
+                    .cloned()
+                    .collect();
+                outside.extend(probe.chains(&pending, datas, structs));
                 return Self {
                     datas: lifted,
                     structs: fields_of,
                     families,
+                    outside,
                     ..base
                 };
             }
+            outside.extend(refused);
             names = lifted.into_keys().collect();
             struct_names = fields_of.into_keys().collect();
         }
+    }
+
+    /// The chain of each type the fixpoint dropped, down to its leaf. From
+    /// the type, the first field in declaration order that is outside the
+    /// lift and under which a leaf lies without passing through a type
+    /// already on the chain; then the same from the type that field names,
+    /// to the leaf. A chain so never leads back into a type it explains:
+    /// of two types each outside through the other, each names what keeps
+    /// it out on its own account. `self` names the types that lift, and
+    /// holds in `outside` the chains already known; `pending` are the
+    /// dropped types.
+    fn chains(
+        &self,
+        pending: &BTreeSet<String>,
+        datas: &BTreeMap<String, RawVariants>,
+        structs: &BTreeMap<String, Vec<(String, rs::RustType)>>,
+    ) -> BTreeMap<String, String> {
+        let mut probe = self.clone();
+        for n in pending {
+            probe.outside.insert(n.clone(), format!("{PENDING}{n}"));
+        }
+        let stop = |at: String, read: Lift<Ty>, written: &rs::RustType, owner: &str| {
+            let stop = match read {
+                Ok(ty) if nested_ok(&ty, owner) => return None,
+                Ok(_) => Stop::Leaf(format!("{}: {NOT_NESTED}", written.text)),
+                Err(Residue::Type(text)) => match text.strip_prefix(PENDING) {
+                    Some(name) => Stop::Type(name.to_string()),
+                    None => Stop::Leaf(text),
+                },
+                Err(other) => Stop::Leaf(other.detail()),
+            };
+            Some((at, stop))
+        };
+        // Each dropped type's fields that are outside, in declaration
+        // order: where Rust writes the field, and what stops it. The type
+        // itself is read as known there: a field that holds it is outside
+        // on the type's own account only where Lean nests no inductive.
+        let stops: BTreeMap<&String, Vec<(String, Stop)>> = pending
+            .iter()
+            .map(|n| {
+                let mut own = probe.clone();
+                own.outside.remove(n);
+                if datas.contains_key(n) {
+                    own.datas.insert(n.clone(), Vec::new());
+                } else {
+                    own.structs.insert(n.clone(), Vec::new());
+                }
+                let of_variants = datas.get(n).into_iter().flatten().flat_map(|(v, fields)| {
+                    let own = &own;
+                    fields.iter().enumerate().filter_map(move |(i, (f, t))| {
+                        stop(variant_field(n, v, f.as_deref(), i), own.ty(t), t, n)
+                    })
+                });
+                let of_fields = structs
+                    .get(n)
+                    .into_iter()
+                    .flatten()
+                    .filter_map(|(f, t)| stop(format!("{n}.{f}"), own.ty(t), t, ""));
+                (n, of_variants.chain(of_fields).collect())
+            })
+            .collect();
+        // Whether a leaf lies under `from` without passing through `on`.
+        let grounded = |from: &String, on: &BTreeSet<&String>| {
+            let mut seen: BTreeSet<&String> = on.clone();
+            let mut next = vec![from];
+            while let Some(n) = next.pop() {
+                if !seen.insert(n) {
+                    continue;
+                }
+                for (_, stop) in stops.get(n).into_iter().flatten() {
+                    match stop {
+                        Stop::Leaf(_) => return true,
+                        Stop::Type(inner) => next.push(inner),
+                    }
+                }
+            }
+            false
+        };
+        let mut chains = BTreeMap::new();
+        for start in pending {
+            let mut on: BTreeSet<&String> = BTreeSet::from([start]);
+            let mut at = start;
+            let mut chain = String::new();
+            loop {
+                let held = stops.get(at).into_iter().flatten().find(|(_, s)| match s {
+                    Stop::Leaf(_) => true,
+                    Stop::Type(inner) => !on.contains(inner) && grounded(inner, &on),
+                });
+                match held {
+                    Some((place, Stop::Leaf(leaf))) => {
+                        chain.push_str(&format!("{place}: {leaf}"));
+                        break;
+                    }
+                    Some((place, Stop::Type(inner))) => {
+                        chain.push_str(&format!("{place}: "));
+                        on.insert(inner);
+                        at = inner;
+                    }
+                    // Every dropped type has a leaf under it: the round
+                    // that dropped it read one, or a type dropped before.
+                    None => {
+                        chain.push_str(at);
+                        break;
+                    }
+                }
+            }
+            chains.insert(start.clone(), chain);
+        }
+        chains
+    }
+
+    /// A struct's fields as the lift names them, where every one lifts. A
+    /// tuple struct's field is named by its position.
+    fn fields_read(&self, raw: &[(String, rs::RustType)]) -> Option<Vec<(String, Ty)>> {
+        raw.iter()
+            .map(|(field, t)| Some((field_name(field), self.ty(t).ok()?)))
+            .collect()
+    }
+
+    /// A data-carrying enum's variants as the lift names them, where every
+    /// field lifts and holds the enum itself only where Lean nests an
+    /// inductive.
+    fn variants_read(
+        &self,
+        name: &str,
+        raw: &[RawVariant],
+    ) -> Option<Vec<(String, Vec<DataField>)>> {
+        let mut variants = Vec::new();
+        for (variant, fields) in raw {
+            let mut tys = Vec::new();
+            for (field, t) in fields {
+                let ty = self.ty(t).ok().filter(|ty| nested_ok(ty, name))?;
+                tys.push((field.clone(), ty));
+            }
+            variants.push((variant.clone(), tys));
+        }
+        Some(variants)
     }
 
     /// The structs whose every field lifts, to the fixpoint where a struct
@@ -616,67 +953,60 @@ impl Types {
         structs: &BTreeMap<String, Vec<(String, rs::RustType)>>,
         aliases: BTreeMap<String, String>,
     ) -> Self {
-        let enums: BTreeMap<String, Vec<String>> = enums
+        let mut outside: BTreeMap<String, String> = enums
+            .iter()
+            .filter_map(|(n, vs)| {
+                let named: Vec<&str> = vs.iter().map(String::as_str).collect();
+                Some((n.clone(), barred(n, false, &named, &[])?))
+            })
+            .collect();
+        let mut enums: BTreeMap<String, Vec<String>> = enums
             .into_iter()
-            .filter(|(n, vs)| {
-                !BARE_TYPES.contains(&n.as_str())
-                    && !n.starts_with("LexLean")
-                    && vs.iter().all(|v| !RESERVED.contains(&v.as_str()))
-            })
+            .filter(|(n, _)| !outside.contains_key(n))
             .collect();
-        let mut names: BTreeSet<String> = structs
-            .keys()
-            .filter(|n| {
-                !enums.contains_key(*n)
-                    && !BARE_TYPES.contains(&n.as_str())
-                    && !n.starts_with("LexLean")
-                    && !n.starts_with("Tuple")
-            })
-            .cloned()
-            .collect();
+        let mut names = BTreeSet::new();
+        for (n, fields) in structs {
+            if enums.contains_key(n) {
+                continue;
+            }
+            match barred(n, true, &[], fields) {
+                Some(why) => {
+                    outside.insert(n.clone(), why);
+                }
+                // A struct of no fields has one value: the inductive of
+                // one constructor.
+                None if fields.is_empty() => {
+                    enums.insert(n.clone(), vec![SOLE.to_string()]);
+                }
+                None => {
+                    names.insert(n.clone());
+                }
+            }
+        }
+        let candidates = names.clone();
         loop {
             let probe = Self {
                 enums: enums.clone(),
                 structs: names.iter().map(|n| (n.clone(), Vec::new())).collect(),
                 aliases: aliases.clone(),
-                datas: BTreeMap::new(),
-                families: Vec::new(),
-                derives: BTreeMap::new(),
-                closures: BTreeMap::new(),
-                core: false,
-                floats: BTreeMap::new(),
-                valid: BTreeMap::new(),
-                borrowing: BTreeMap::new(),
-                discriminants: BTreeMap::new(),
+                outside: outside.clone(),
+                ..Self::default()
             };
             let mut lifted = BTreeMap::new();
             for name in &names {
-                let mut fields = Vec::new();
-                let mut ok = !structs[name].is_empty();
-                for (field, t) in &structs[name] {
-                    match probe.ty(t) {
-                        Ok(ty) => fields.push((local_name(field), ty)),
-                        Err(_) => ok = false,
-                    }
-                }
-                if ok {
+                if let Some(fields) = probe.fields_read(&structs[name]) {
                     lifted.insert(name.clone(), fields);
                 }
             }
             if lifted.len() == names.len() {
+                let pending = candidates.difference(&names).cloned().collect();
+                outside.extend(probe.chains(&pending, &BTreeMap::new(), structs));
                 return Self {
                     enums,
                     structs: lifted,
                     aliases,
-                    datas: BTreeMap::new(),
-                    families: Vec::new(),
-                    derives: BTreeMap::new(),
-                    closures: BTreeMap::new(),
-                    core: false,
-                    floats: BTreeMap::new(),
-                    valid: BTreeMap::new(),
-                    borrowing: BTreeMap::new(),
-                    discriminants: BTreeMap::new(),
+                    outside,
+                    ..Self::default()
                 };
             }
             names = lifted.into_keys().collect();
@@ -777,12 +1107,40 @@ impl Types {
         format!("field_{name}_{field}")
     }
 
-    /// The LexLean name of a Rust type name.
+    /// The LexLean name of a Rust type name. A lifetime argument is erased,
+    /// as where a type is read: the owner `Reader<'a>` of a method names
+    /// the struct `Reader`.
     pub(crate) fn resolve(&self, rust: &str) -> String {
+        let bare = match rust.split_once('<') {
+            Some((head, arguments)) => match arguments.strip_suffix('>') {
+                Some(list) if list.split(',').all(is_lifetime) => head.trim_end(),
+                _ => rust,
+            },
+            None => rust,
+        };
         self.aliases
-            .get(rust)
+            .get(bare)
             .cloned()
-            .unwrap_or_else(|| rust.to_string())
+            .unwrap_or_else(|| bare.to_string())
+    }
+
+    /// Whether the workspace declares a type of this Rust name, inside the
+    /// lift or outside it: a name of the standard library that is not in
+    /// the prelude (`Rc`, `Range`) is the library's only where it does not.
+    fn declares(&self, rust: &str) -> bool {
+        let lex = self.resolve(rust);
+        self.enums.contains_key(&lex)
+            || self.structs.contains_key(&lex)
+            || self.datas.contains_key(&lex)
+            || self.outside.contains_key(&lex)
+    }
+
+    /// The residue of a type the lift does not name, by its Rust name: the
+    /// chain down to its leaf where the workspace declares it, the name as
+    /// written otherwise.
+    pub(crate) fn unnamed(&self, rust: &str) -> Residue {
+        let chain = self.outside.get(&self.resolve(rust));
+        Residue::Type(chain.cloned().unwrap_or_else(|| rust.to_string()))
     }
 
     pub(crate) fn ty(&self, t: &rs::RustType) -> Lift<Ty> {
@@ -815,78 +1173,125 @@ impl Types {
                 }
                 Ok(self.tuple(ts))
             }
-            // `std::path::PathBuf`, written out.
-            rs::TypeKind::Path { qself: false, path }
-                if path.segments.len() == 3
-                    && path.segments[0].ident == "std"
-                    && path.segments[1].ident == "path"
-                    && matches!(path.segments[2].ident.as_str(), "Path" | "PathBuf") =>
-            {
-                Ok(Ty::Path)
+            // A type of the standard library written by its full path
+            // (`std::collections::BTreeMap<K, V>`): the library's, whatever
+            // the workspace declares under the name.
+            rs::TypeKind::Path { qself: false, path } if std_path(path) => {
+                match path.segments.last() {
+                    Some(last) => self.named(t, last, true),
+                    None => bad(),
+                }
             }
             rs::TypeKind::Path { qself: false, path } if path.segments.len() == 1 => {
-                let seg = &path.segments[0];
-                let name = seg.ident.clone();
-                let mut args = Vec::new();
-                match &seg.arguments {
-                    rs::PathArguments::None => {}
-                    rs::PathArguments::AngleBracketed(a) => {
-                        for arg in a {
-                            match arg {
-                                rs::GenericArgument::Type(t) => args.push(self.ty(t)?),
-                                // A lifetime is erased.
-                                rs::GenericArgument::Other(l) if l.starts_with('\'') => {}
-                                rs::GenericArgument::Other(_) => return bad(),
-                            }
-                        }
-                    }
-                    rs::PathArguments::Parenthesized => return bad(),
-                }
-                let ty = match (name.as_str(), args.as_slice()) {
-                    ("bool", []) => Ty::Bool,
-                    ("u8", []) => Ty::Nat(Some(8)),
-                    ("u16", []) => Ty::Nat(Some(16)),
-                    ("u32", []) => Ty::Nat(Some(32)),
-                    ("u64", []) => Ty::Nat(Some(64)),
-                    ("u128", []) => Ty::Nat(Some(128)),
-                    ("usize", []) => Ty::Nat(None),
-                    ("i8", []) => Ty::Int(8),
-                    ("i16", []) => Ty::Int(16),
-                    ("i32", []) => Ty::Int(32),
-                    ("i64", []) => Ty::Int(64),
-                    ("String", []) => Ty::Str,
-                    ("char", []) => Ty::Char,
-                    ("Option", [t]) => Ty::Option(Box::new(t.clone())),
-                    ("Result", [t, e]) => Ty::Outcome(Box::new(t.clone()), Box::new(e.clone())),
-                    ("Vec", [t]) => Ty::List(Box::new(t.clone())),
-                    ("Box", [t]) => t.clone(),
-                    ("BTreeMap", [k, v]) => Ty::Map(Box::new(k.clone()), Box::new(v.clone()), true),
-                    ("HashMap", [k, v]) => Ty::Map(Box::new(k.clone()), Box::new(v.clone()), false),
-                    ("BTreeSet", [t]) => Ty::Set(Box::new(t.clone()), true),
-                    ("HashSet", [t]) => Ty::Set(Box::new(t.clone()), false),
-                    (n, [])
-                        if self.enums.contains_key(&self.resolve(n))
-                            || self.structs.contains_key(&self.resolve(n))
-                            || self.datas.contains_key(&self.resolve(n)) =>
-                    {
-                        Ty::Named(self.resolve(n))
-                    }
-                    // The standard path, where the crate declares no type
-                    // of the name.
-                    ("Path" | "PathBuf", []) => Ty::Path,
-                    _ => return bad(),
-                };
-                Ok(ty)
+                self.named(t, &path.segments[0], false)
             }
             _ => bad(),
         }
     }
 
-    /// The LexLean signature of a candidate, or why it is not one.
+    /// The type one path segment names, with its arguments: a type of the
+    /// standard library the lift reads, or one of the workspace. `library`
+    /// is a segment reached by the library's own full path.
+    fn named(&self, t: &rs::RustType, seg: &rs::PathSegment, library: bool) -> Lift<Ty> {
+        let bad = || Err(Residue::Type(t.text.clone()));
+        let name = seg.ident.clone();
+        // The type arguments as written, a lifetime erased.
+        let mut written = Vec::new();
+        match &seg.arguments {
+            rs::PathArguments::None => {}
+            rs::PathArguments::AngleBracketed(a) => {
+                for arg in a {
+                    match arg {
+                        rs::GenericArgument::Type(t) => written.push(t),
+                        rs::GenericArgument::Other(l) if is_lifetime(l) => {}
+                        rs::GenericArgument::Other(_) => return bad(),
+                    }
+                }
+            }
+            rs::PathArguments::Parenthesized => return bad(),
+        }
+        // A name of the library outside the prelude (`Rc`, `Range`) is the
+        // library's where its full path says so, or where the workspace
+        // declares no type of the name.
+        let imported = library || !self.declares(&name);
+        // The head is read before its arguments: a head the lift does not
+        // read is the leaf whatever it holds (`RefCell<T>` is outside for
+        // every `T`), and only a head it reads passes the question on to
+        // what it holds.
+        let arg = |i: usize| self.ty(written[i]).map(Box::new);
+        let ty = match (name.as_str(), written.len()) {
+            ("bool", 0) => Ty::Bool,
+            ("u8", 0) => Ty::Nat(Some(8)),
+            ("u16", 0) => Ty::Nat(Some(16)),
+            ("u32", 0) => Ty::Nat(Some(32)),
+            ("u64", 0) => Ty::Nat(Some(64)),
+            ("u128", 0) => Ty::Nat(Some(128)),
+            ("usize", 0) => Ty::Nat(None),
+            ("i8", 0) => Ty::Int(8),
+            ("i16", 0) => Ty::Int(16),
+            ("i32", 0) => Ty::Int(32),
+            ("i64", 0) => Ty::Int(64),
+            ("i128", 0) => Ty::Integer(Some(128)),
+            ("isize", 0) => Ty::Integer(None),
+            ("String", 0) => Ty::Str,
+            ("char", 0) => Ty::Char,
+            ("Option", 1) => Ty::Option(arg(0)?),
+            ("Result", 2) => Ty::Outcome(arg(0)?, arg(1)?),
+            ("Vec", 1) => Ty::List(arg(0)?),
+            // An owning pointer reads as what it owns. `Rc` and `Arc`
+            // share that ownership, and through either a function reaches
+            // only `&T`: what it reads is the content, the same from every
+            // owner for as long as any holds it, so a pure function of the
+            // pointer is a function of the content. What tells two owners
+            // of equal content apart (`ptr_eq`, the counts, `Weak`) is no
+            // operation the lift reads. A cell that changes behind a
+            // shared borrow (`RefCell`, `Cell`, `Mutex`, `RwLock`, an
+            // atomic) is not read: it stays outside, the leaf of every
+            // chain through it.
+            ("Box", 1) => *arg(0)?,
+            ("Rc" | "Arc", 1) if imported => *arg(0)?,
+            ("BTreeMap", 2) => Ty::Map(arg(0)?, arg(1)?, true),
+            ("HashMap", 2) => Ty::Map(arg(0)?, arg(1)?, false),
+            ("BTreeSet", 1) => Ty::Set(arg(0)?, true),
+            ("HashSet", 1) => Ty::Set(arg(0)?, false),
+            // A double-ended queue is the sequence of its items, front to
+            // back, as a vector is.
+            ("VecDeque", 1) if imported => Ty::List(arg(0)?),
+            // `a..b` as a value: the struct of its two bounds, which the
+            // language declares with both public.
+            ("Range", 1) if imported => {
+                let bound = *arg(0)?;
+                self.tuple(vec![bound.clone(), bound])
+            }
+            (n, 0)
+                if !library
+                    && (self.enums.contains_key(&self.resolve(n))
+                        || self.structs.contains_key(&self.resolve(n))
+                        || self.datas.contains_key(&self.resolve(n))) =>
+            {
+                Ty::Named(self.resolve(n))
+            }
+            // The standard path, where the crate declares no type of the
+            // name.
+            ("Path" | "PathBuf", 0) => Ty::Path,
+            // A type of the workspace outside the lift: the chain down to
+            // its leaf. Any other name is itself the leaf.
+            (n, _) => {
+                return match self.outside.get(&self.resolve(n)).filter(|_| !library) {
+                    Some(chain) => Err(Residue::Type(chain.clone())),
+                    None => bad(),
+                }
+            }
+        };
+        Ok(ty)
+    }
+
+    /// The LexLean signature of a candidate, or why it is not one. `owner`
+    /// says what its `self` and `Self` name, where it is a method.
     pub(crate) fn signature(
         &self,
         sig: &rs::Signature,
-        owner: Option<&str>,
+        owner: Option<&Owner<'_>>,
     ) -> Lift<(Vec<Param>, Ty)> {
         // A lifetime parameter says how long a borrow lives, which a value
         // of LexLean does not have: it is erased. A type or const parameter
@@ -900,36 +1305,59 @@ impl Types {
                 "generic, async, unsafe or variadic".to_string(),
             ));
         }
+        // The type `Self` names: none in a default method, where it is each
+        // implementing type.
+        let named = match owner {
+            Some(Owner::Type { name, .. }) => Some(*name),
+            Some(Owner::Implementor) | None => None,
+        };
         let mut params = Vec::new();
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
-                    Some(o)
-                        if *plain
-                            && (self.enums.contains_key(o)
-                                || self.structs.contains_key(o)
-                                || self.datas.contains_key(o)) =>
+                    // A default method that lifts reads nothing of `self`,
+                    // which is each implementing type's value: the
+                    // definition does not take it.
+                    Some(Owner::Implementor) => {}
+                    Some(Owner::Type { name, receiver })
+                        if self.enums.contains_key(*name)
+                            || self.structs.contains_key(*name)
+                            || self.datas.contains_key(*name) =>
                     {
+                        if !*plain {
+                            return Err(Residue::Signature(format!(
+                                "takes {} of {name}: the lift reads self and &self as the \
+                                 value, and threads no other receiver",
+                                receiver.unwrap_or("self")
+                            )));
+                        }
                         params.push((
                             "self".to_string(),
                             local_name("self"),
-                            Ty::Named(o.to_string()),
+                            Ty::Named((*name).to_string()),
                         ));
                     }
-                    _ => return Err(Residue::Signature("takes self".to_string())),
+                    Some(Owner::Type { name, .. }) => {
+                        return Err(Residue::Signature(format!(
+                            "takes self of {name}, a type outside the lift"
+                        )));
+                    }
+                    None => {
+                        return Err(Residue::Signature("takes self outside a type".to_string()));
+                    }
                 },
                 rs::FnArg::Typed(pat) => {
                     let rs::Pat::Ident(name) = &*pat.pat else {
                         return Err(Residue::Signature("pattern parameter".to_string()));
                     };
                     let rust = name.ident.clone();
-                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, owner)?));
+                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, named)?));
                 }
             }
         }
         let result = match &sig.output {
             None => Ty::Unit,
-            Some(t) => self.ty_in(t, owner)?,
+            Some(t) => self.ty_in(t, named)?,
         };
         Ok((params, result))
     }
@@ -1105,6 +1533,20 @@ pub(crate) fn local_name(ident: &str) -> String {
 
 /// A parameter: its Rust name, its LexLean name and its type.
 pub(crate) type Param = (String, String, Ty);
+
+/// What `self` and `Self` name in a method's signature.
+#[derive(Clone, Copy, Debug)]
+pub(crate) enum Owner<'a> {
+    /// The type the method is of, by its LexLean name, and the receiver as
+    /// the method writes it (`&mut self`), where it takes one.
+    Type {
+        name: &'a str,
+        receiver: Option<&'a str>,
+    },
+    /// Each type that implements the trait: a default method the trait
+    /// declares.
+    Implementor,
+}
 
 /// A lifted function's signature.
 #[derive(Clone, Debug)]
@@ -1750,8 +2192,10 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 "i16" => Ty::Int(16),
                 "i32" => Ty::Int(32),
                 "i64" => Ty::Int(64),
+                "i128" => Ty::Integer(Some(128)),
+                "isize" => Ty::Integer(None),
                 "" => match want {
-                    Some(t @ (Ty::Nat(_) | Ty::Int(_))) => t.clone(),
+                    Some(t @ (Ty::Nat(_) | Ty::Int(_) | Ty::Integer(_))) => t.clone(),
                     _ if negative => Ty::Int(32),
                     _ => Ty::Nat(Some(32)),
                 },
@@ -1761,6 +2205,12 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 Ty::Int(_) if v <= i64::MAX as u128 + u128::from(negative) => {
                     let sign = if negative { "-" } else { "" };
                     flat(format!("({sign}{v} : Int64)"), ty)
+                }
+                // The widest signed type bounds the literal Rust accepts;
+                // the mathematical `Int` holds every one of them.
+                Ty::Integer(_) if v <= i128::MAX as u128 + u128::from(negative) => {
+                    let sign = if negative { "-" } else { "" };
+                    flat(format!("({sign}{v} : Int)"), ty)
                 }
                 Ty::Nat(_) if !negative => flat(v.to_string(), ty),
                 _ => Err(Residue::Form("integer literal".to_string())),
@@ -1776,11 +2226,11 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
         },
         rs::Lit::Byte(b) if !negative => flat(b.to_string(), Ty::Nat(Some(8))),
         rs::Lit::ByteStr(b) if !negative => {
-            let mut list = "(nil Nat)".to_string();
-            for byte in b.iter().rev() {
-                list = format!("(cons {byte} {list})");
-            }
-            flat(list, Ty::List(Box::new(Ty::Nat(Some(8)))))
+            let bytes: Vec<String> = b.iter().map(u8::to_string).collect();
+            flat(
+                crate::embed::term_list(&bytes, "Nat"),
+                Ty::List(Box::new(Ty::Nat(Some(8)))),
+            )
         }
         _ => Err(Residue::Form("literal".to_string())),
     }
@@ -1788,6 +2238,16 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
 
 fn ctor(path: &rs::Path, types: &Types) -> Option<(String, String)> {
     let n = path.segments.len();
+    // `S` of `struct S;`: the one value of its type. No variant of an
+    // enum lifts under the constructor's name, so the name alone tells.
+    if let [one] = path.segments.as_slice() {
+        let owner = types.resolve(&one.ident);
+        let sole = types
+            .enums
+            .get(&owner)
+            .is_some_and(|vs| vs.iter().map(String::as_str).eq([SOLE]));
+        return sole.then(|| (owner, SOLE.to_string()));
+    }
     if n < 2 {
         return None;
     }
@@ -2158,8 +2618,12 @@ fn match_value(
 fn field_value(f: &rs::ExprField, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty), Acc)> {
     let ((base, bt), acc) = flat_of(&f.base, env, ctx, acc, None)?;
     match (&f.member, &bt) {
-        (rs::Member::Named(field), Ty::Named(s)) => {
-            let name = local_name(field);
+        (member, Ty::Named(s)) => {
+            // A tuple struct's field is named by its position.
+            let name = match member {
+                rs::Member::Named(field) => local_name(field),
+                rs::Member::Unnamed(position) => field_name(&position.to_string()),
+            };
             let Some((_, ty)) = env
                 .types
                 .structs
@@ -2348,6 +2812,8 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
     };
     // `usize` is as wide as the narrowest declared target's pointer.
     let narrowest = env.widths.first().map(|(w, _)| *w);
+    // `isize` is at most as wide as the widest one's.
+    let widest = env.widths.last().map(|(w, _)| *w);
     match (&vt, &target) {
         (Ty::Nat(Some(a)), Ty::Nat(Some(b))) if a <= b => flat_lift(v, target, acc),
         (Ty::Nat(Some(a)), Ty::Nat(None)) if narrowest.is_some_and(|w| *a <= w) => {
@@ -2361,6 +2827,21 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
             acc,
         ),
         (Ty::Int(a), Ty::Int(b)) if a <= b => flat_lift(v, target, acc),
+        // A signed value widens to `i128` as itself; to `isize` where the
+        // narrowest declared pointer holds its type, as `usize` does.
+        (Ty::Int(a), Ty::Integer(wide))
+            if wide.map_or(narrowest, Some).is_some_and(|w| *a <= w) =>
+        {
+            // The conversion of a fixed width to `Int` elaborates through
+            // these two.
+            let acc = acc.axiom("Quot.sound").axiom("propext");
+            flat_lift(format!("(prim to_int {v} : Int)"), target, acc)
+        }
+        (Ty::Integer(a), Ty::Integer(b))
+            if a == b || matches!((a.map_or(widest, Some), b), (Some(w), Some(b)) if w <= *b) =>
+        {
+            flat_lift(v, target, acc)
+        }
         (Ty::Nat(_), Ty::Int(_)) => Err(Residue::Form(
             "a cast from an unsigned to a signed integer, where LexLean binds no \
              conversion from Nat to Int64"
@@ -2458,10 +2939,9 @@ fn list_of(
             "an empty list of an unknown type".to_string(),
         ));
     };
-    let mut list = format!("(nil {})", elem.render());
-    for part in parts.iter().rev() {
-        list = format!("(cons {part} {list})");
-    }
+    // A literal can be as long as its author likes, and the linker reads a
+    // term to a bounded depth: the list is written as balanced halves.
+    let list = crate::embed::term_list(&parts, &elem.render());
     Ok(((Expr::Flat(list), Ty::List(Box::new(elem))), acc))
 }
 
@@ -2616,10 +3096,7 @@ fn format_macro(mac: &rs::ExprMacro, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((E
     }
     // Joining strings elaborates through propositional extensionality.
     let acc = acc.axiom("propext");
-    let mut list = "(nil String)".to_string();
-    for piece in pieces.iter().rev() {
-        list = format!("(cons {piece} {list})");
-    }
+    let list = crate::embed::term_list(&pieces, "String");
     Ok((
         (
             Expr::Flat(format!("(prim join {list} \"\" : String)")),
@@ -2661,6 +3138,21 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         (Ty::Int(_) | Ty::Str | Ty::Char, B::Eq) => (format!("(prim equal {l} {r} : Bool)"), acc),
         (Ty::Int(_) | Ty::Str | Ty::Char, B::Ne) => {
             (format!("(not (prim equal {l} {r} : Bool))"), acc)
+        }
+        // The mathematical `Int` has an order and no `equal`: two values
+        // are the same where neither is below the other.
+        (Ty::Integer(_), _) => {
+            let acc = acc.axiom("propext");
+            let below = |x: &str, y: &str| format!("(prim less_than {x} {y} : Bool)");
+            let text = match b.op {
+                B::Lt => below(&l, &r),
+                B::Gt => below(&r, &l),
+                B::Le => format!("(not {})", below(&r, &l)),
+                B::Ge => format!("(not {})", below(&l, &r)),
+                B::Eq => format!("(not ({} || {}))", below(&l, &r), below(&r, &l)),
+                _ => format!("({} || {})", below(&l, &r), below(&r, &l)),
+            };
+            (text, acc)
         }
         // Strings order by their scalar values, as Rust's `str` and
         // `char` do.
@@ -2980,7 +3472,61 @@ fn call(
     if let Some((owner, variant, fields)) = data_variant(p, &env.types) {
         return variant_call(c, owner, &variant, fields, env, ctx, acc);
     }
+    if let Some((name, fields)) = tuple_struct(p, c.args.len(), env, ctx) {
+        return tuple_struct_value(c, &name, fields, env, ctx, acc);
+    }
     path_call(c, p, env, ctx, acc, want)
+}
+
+/// The tuple struct a call's path names, `S(a, b)` or `Self(a, b)`, with
+/// its fields: a struct of as many fields as the call has arguments, each
+/// named by its position. Rust reads the name as the struct's constructor
+/// before any function, since both live in the one value namespace.
+fn tuple_struct<'e>(
+    p: &rs::Path,
+    arity: usize,
+    env: &'e Env,
+    ctx: &Ctx,
+) -> Option<(String, &'e [(String, Ty)])> {
+    let written = p.get_ident()?;
+    let owner = ctx.current.split_once("::").map(|(o, _)| o);
+    let name = match (written.as_str(), owner) {
+        ("Self", Some(o)) => env.types.resolve(o),
+        _ => env.types.resolve(written),
+    };
+    let fields = env.types.structs.get(&name)?;
+    let positional = fields
+        .iter()
+        .enumerate()
+        .all(|(i, (f, _))| *f == field_name(&i.to_string()));
+    (positional && fields.len() == arity).then_some((name, fields.as_slice()))
+}
+
+/// `S(a, b)`: a value of a tuple struct, its fields in order.
+fn tuple_struct_value(
+    c: &rs::ExprCall,
+    name: &str,
+    fields: &[(String, Ty)],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let mut acc = acc;
+    let mut values = Vec::new();
+    for (arg, (_, ty)) in c.args.iter().zip(fields) {
+        let ((v, vt), next) = flat_of(arg, env, ctx, acc, Some(ty))?;
+        if !vt.same(ty) {
+            return Err(Residue::Form(format!("{name} of another type")));
+        }
+        acc = next;
+        values.push(v);
+    }
+    let parts: Vec<(&String, String)> = fields.iter().map(|(f, _)| f).zip(values).collect();
+    flat_lift(
+        struct_value(name, &parts, &env.types),
+        Ty::Named(name.to_string()),
+        acc,
+    )
 }
 
 /// `f(x)` of a function parameter `f`: its application.
@@ -3187,8 +3733,18 @@ fn std_call(
             let (path, acc) = acc.prelude("pathOf", &[&v]);
             flat_some(path, Ty::Path, acc)
         }
-        ([s, n], [a], _) if s == "Box" && n == "new" => {
+        // An owning pointer is what it owns (see `Types::ty`): building one
+        // is its content, and so is another owner of the same content.
+        ([s, n], [a], _)
+            if matches!(s.as_str(), "Box" | "Rc" | "Arc") && matches!(n.as_str(), "new") =>
+        {
             let ((v, vt), acc) = flat_of(a, env, ctx, acc, want)?;
+            flat_some(v, vt, acc)
+        }
+        ([s, n], [rs::RustExpr::Reference(a)], _)
+            if matches!(s.as_str(), "Rc" | "Arc") && n == "clone" && !a.mutable =>
+        {
+            let ((v, vt), acc) = flat_of(&a.expr, env, ctx, acc, want)?;
             flat_some(v, vt, acc)
         }
         ([s, n], [a], _) if s == "String" && n == "from" => {
@@ -4000,6 +4556,10 @@ fn method_typed(
         (Ty::Int(_), "min" | "max") => {
             method_int_min(name, r, rt, args, env, ctx, acc)
         }
+        (
+            Ty::Integer(bits),
+            "checked_add" | "checked_sub" | "checked_mul" | "checked_div" | "checked_neg",
+        ) => method_integer_checked(bits, name, r, rt, args, env, ctx, acc),
         (Ty::List(_), "len") if args.is_empty() => {
             method_list_len(r, acc)
         }
@@ -4349,6 +4909,72 @@ fn method_int_checked_neg(
     )
 }
 
+/// A checked operation on a receiver of type `Integer`: the mathematical
+/// result where the type's width holds it. `i128` holds `-2^127` to
+/// `2^127 - 1`; what `isize` holds is its target's, so the operation is
+/// residue there, as it is on `usize`.
+#[allow(clippy::too_many_arguments)]
+fn method_integer_checked(
+    bits: &Option<u32>,
+    name: &str,
+    r: &str,
+    rt: &Ty,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let Some(bits) = bits else {
+        return Err(Residue::Width(format!(".{name} on isize")));
+    };
+    let half = 1u128 << (bits - 1);
+    let lowest = format!("(-{half} : Int)");
+    let highest = format!("({} : Int)", half - 1);
+    let below = |x: &str, y: &str| format!("(prim less_than {x} {y} : Bool)");
+    let none = "(ctor Option.none [Int])";
+    let acc = acc.axiom("propext");
+    let (value, zero, acc) = if name == "checked_neg" {
+        if !args.is_empty() {
+            return Err(Residue::Form(format!("method call .{name}")));
+        }
+        (format!("(prim negate {r} : Int)"), None, acc)
+    } else {
+        let (a, acc) = one_arg(args, name, env, ctx, rt, acc)?;
+        match name {
+            // LexLean adds no two of `Int`: a sum is the difference from
+            // the negation.
+            "checked_add" => (
+                format!("(prim subtract {r} (prim negate {a} : Int) : Int)"),
+                None,
+                acc,
+            ),
+            "checked_sub" => (format!("(prim subtract {r} {a} : Int)"), None, acc),
+            "checked_mul" => (format!("(prim multiply {r} {a} : Int)"), None, acc),
+            // `Int`'s quotient truncates toward zero, as Rust's does; a
+            // zero divisor has no quotient.
+            _ => {
+                let zero = "(0 : Int)";
+                let is_zero = format!("(not ({} || {}))", below(&a, zero), below(zero, &a));
+                (
+                    format!("(prim quotient {r} {a} {zero} : Int)"),
+                    Some(is_zero),
+                    acc,
+                )
+            }
+        }
+    };
+    let (held, acc) = ctx.fresh(env, acc, "wide");
+    let out_of_range = format!("({} || {})", below(&held, &lowest), below(&highest, &held));
+    let checked = format!(
+        "(let {held} : Int := {value}; (if {out_of_range} then {none} else (ctor Option.some [Int] {held})))"
+    );
+    let text = match zero {
+        Some(is_zero) => format!("(if {is_zero} then {none} else {checked})"),
+        None => checked,
+    };
+    flat_lift(text, opt_of(rt), acc)
+}
+
 /// `.min` on a receiver of type `Int`.
 fn method_int_min(
     name: &str,
@@ -4688,6 +5314,7 @@ fn default_in(ty: &Ty, types: &Types, depth: usize) -> Option<String> {
         Ty::Bool => "false".into(),
         Ty::Nat(_) | Ty::Float(_) | Ty::Signed(_) | Ty::Scalar => "0".into(),
         Ty::Int(_) => "(0 : Int64)".into(),
+        Ty::Integer(_) => "(0 : Int)".into(),
         Ty::Str | Ty::Char => "\"\"".into(),
         Ty::ParseError => format!("(ctor {PRELUDE}::ParseIntError.InvalidDigit)"),
         Ty::Option(t) => format!("(ctor Option.none [{}])", t.render()),
@@ -6952,7 +7579,13 @@ fn matched_row(
         return Err(Residue::Form("non-boolean guard".to_string()));
     }
     let ((then, tt), acc) = expr(e, env, &scope, acc, want)?;
-    let ((other, ot), acc) = compile(m.cols, m.rest, env, ctx, acc, Some(want.unwrap_or(&tt)))?;
+    // The rows after it are written inside this row's binders, which wrap
+    // the whole conditional: none of them may name one of these again.
+    let mut after = ctx.clone();
+    after
+        .hidden
+        .extend(lets.iter().map(|(name, _, _)| name.clone()));
+    let ((other, ot), acc) = compile(m.cols, m.rest, env, &after, acc, Some(want.unwrap_or(&tt)))?;
     if !tt.same(&ot) {
         return Err(Residue::Form("arms of different types".to_string()));
     }
@@ -11190,9 +11823,83 @@ mod tests {
         )
         .expect("lifts");
         assert!(
-            out.contains("(prim join (cons m (cons \"::\" (cons n (nil String)))) \"\" : String)"),
+            out.contains("(prim join (prim append (cons m (nil String)) (cons \"::\" (cons n (nil String))) : (List String)) \"\" : String)"),
             "{out}"
         );
+    }
+
+    #[test]
+    fn a_long_literal_is_balanced_halves() {
+        // The linker reads a term to a bounded depth, and a literal is as
+        // long as its author likes: no list nests one cell per element.
+        let items: Vec<String> = (0..300).map(|i| (i % 250).to_string()).collect();
+        let array = lift(
+            &format!("fn table() -> [u8; 300] {{ [{}] }}", items.join(", ")),
+            &plain(),
+        )
+        .expect("lifts");
+        let bytes = lift(
+            &format!("fn text() -> &'static [u8] {{ b\"{}\" }}", "ab".repeat(150)),
+            &plain(),
+        )
+        .expect("lifts");
+        let pieces = lift(
+            &format!(
+                "fn row(m: &str) -> String {{ format!(\"{}\") }}",
+                "{m}, ".repeat(150)
+            ),
+            &plain(),
+        )
+        .expect("lifts");
+        for out in [array, bytes, pieces] {
+            assert!(out.contains("(prim append "), "{out}");
+            let mut depth = 0usize;
+            let mut deepest = 0usize;
+            for c in out.chars() {
+                match c {
+                    '(' => {
+                        depth += 1;
+                        deepest = deepest.max(depth);
+                    }
+                    ')' => depth -= 1,
+                    _ => {}
+                }
+            }
+            assert!(deepest < 40, "nests {deepest} deep");
+        }
+    }
+
+    #[test]
+    fn a_guarded_row_and_the_rows_after_it_bind_distinct_names() {
+        // The guarded row's binders wrap the whole conditional, so the row
+        // after it, which binds the same Rust name to another part, is
+        // written inside them: a binder there of the same name shadows.
+        let out = lift(
+            "fn k(p: (u8, u8)) -> u8 { match p { (0, d) | (d, 0) if d > 5 => d, (1, d) if d > 7 => d, _ => 2 } }",
+            &plain(),
+        )
+        .expect("lifts");
+        let lets: Vec<usize> = out.match_indices("(let ").map(|(at, _)| at).collect();
+        assert!(lets.len() >= 2, "{out}");
+        for at in lets {
+            let name = out[at + 5..].split_whitespace().next().expect("a binder");
+            let mut depth = 0usize;
+            let end = out[at..]
+                .char_indices()
+                .find_map(|(i, c)| {
+                    match c {
+                        '(' => depth += 1,
+                        ')' => depth -= 1,
+                        _ => {}
+                    }
+                    (depth == 0).then_some(at + i)
+                })
+                .expect("a closed binder");
+            assert!(
+                !out[at + 5..end].contains(&format!("(let {name} ")),
+                "{name} is bound again inside its own scope: {out}"
+            );
+        }
     }
 
     #[test]
@@ -11373,5 +12080,426 @@ mod tests {
         let out = lift("fn f(xs: &[u32]) -> u32 { xs[2] }", &plain()).expect("lifts");
         assert!(out.contains("(prim index xs 2 : (Option Nat))"), "{out}");
         assert!(out.contains("Option.none => 0"), "{out}");
+    }
+
+    // Types outside the lift.
+
+    /// The types of one library source, registered as the projection
+    /// registers them: every enum and struct of the file, by its own name.
+    fn types_of(src: &str) -> Types {
+        let (file, syntax) = crate::ingest::read_text(src);
+        let mut enums = BTreeMap::new();
+        let mut datas = BTreeMap::new();
+        for (e, payload) in file.enums.iter().zip(&syntax.enums) {
+            if e.variants.iter().all(|v| v.unit) {
+                let variants = e.variants.iter().map(|v| v.name.clone()).collect();
+                enums.insert(e.name.clone(), variants);
+            } else {
+                datas.insert(e.name.clone(), payload.clone());
+            }
+        }
+        let structs = file
+            .structs
+            .iter()
+            .map(|s| s.name.clone())
+            .zip(syntax.structs.iter().cloned())
+            .collect();
+        Types::with_data(enums, &datas, &structs, BTreeMap::new())
+    }
+
+    /// A struct's fields, as the lift names and reads them.
+    fn fields(types: &Types, name: &str) -> Vec<(String, Ty)> {
+        types.structs.get(name).cloned().unwrap_or_default()
+    }
+
+    fn field(name: &str, ty: Ty) -> (String, Ty) {
+        (name.to_string(), ty)
+    }
+
+    #[test]
+    fn a_type_outside_the_lift_names_the_chain_to_its_leaf() {
+        let types = types_of(
+            "struct Leaf { x: f64 } struct Mid { n: u32, leaf: Leaf, other: f32 } \
+             struct Top { mids: Vec<Option<Mid>> }",
+        );
+        // Through the containers the lift reads, down to the first field
+        // in declaration order that is outside.
+        assert_eq!(
+            lift("fn through(t: &Top) -> bool { true }", &types),
+            Err(Residue::Type("Top.mids: Mid.leaf: Leaf.x: f64".to_string()))
+        );
+        // The owner of a method is named the same way; a name the
+        // workspace does not declare is its own leaf.
+        assert_eq!(
+            types.unnamed("Mid"),
+            Residue::Type("Mid.leaf: Leaf.x: f64".to_string())
+        );
+        assert_eq!(
+            types.unnamed("Elsewhere"),
+            Residue::Type("Elsewhere".to_string())
+        );
+        assert_eq!(
+            types.unnamed("Mid").detail(),
+            "type outside the lift: Mid.leaf: Leaf.x: f64"
+        );
+    }
+
+    #[test]
+    fn a_chain_never_leads_back_into_the_type_it_explains() {
+        // `A` holds `B` first, and `B` is outside only because it holds
+        // `A`: the chain of `A` names what kept `A` out on its own.
+        let types = types_of("struct A { b: Vec<B>, x: f64 } struct B { a: Option<A> }");
+        assert_eq!(types.outside["A"], "A.x: f64");
+        assert_eq!(types.outside["B"], "B.a: A.x: f64");
+        // Each of two types outside on its own account names the other
+        // first, as declared, and then what keeps that one out.
+        let types = types_of("struct T { u: Vec<U>, x: f64 } struct U { t: Box<T>, y: f32 }");
+        assert_eq!(types.outside["T"], "T.u: U.y: f32");
+        assert_eq!(types.outside["U"], "U.t: T.x: f64");
+    }
+
+    #[test]
+    fn an_enum_names_the_variant_and_the_field_of_its_leaf() {
+        let types = types_of(
+            "enum Reading { Count(u32), Pair(u8, f64), Level { level: f64 } } \
+             enum Tree { Leaf, Node(BTreeMap<String, Tree>) } \
+             struct Parent { kids: BTreeSet<Child> } struct Child { parent: Vec<Parent> }",
+        );
+        assert_eq!(types.outside["Reading"], "Reading::Pair.1: f64");
+        assert_eq!(
+            types.outside["Tree"],
+            format!("Tree::Node.0: BTreeMap<String, Tree>: {NOT_NESTED}")
+        );
+        // A family that names itself where Lean nests no inductive: the
+        // member that holds the occurrence states it, the other names it.
+        let held = format!("Parent.kids: BTreeSet<Child>: {NOT_NESTED}");
+        assert_eq!(types.outside["Parent"], held);
+        assert_eq!(
+            types.outside["Child"],
+            format!("Child: in one recursive family with {held}")
+        );
+    }
+
+    // Functions refused by their signature: what `self` and `Self` name in
+    // a method's signature, by the type that owns the method.
+
+    fn method_signature(
+        src: &str,
+        owner: Option<&Owner<'_>>,
+        types: &Types,
+    ) -> Lift<(Vec<Param>, Ty)> {
+        let f: syn::ImplItemFn = syn::parse_str(src).expect("parses");
+        types.signature(&crate::convert::signature(&f.sig), owner)
+    }
+
+    fn with_square() -> Types {
+        let mut types = Types::default();
+        types.structs.insert("Square".to_string(), Vec::new());
+        types
+    }
+
+    #[test]
+    fn a_method_takes_the_value_of_its_type_first() {
+        let types = with_square();
+        for (src, receiver) in [
+            ("fn area(&self, by: bool) -> bool { by }", "&self"),
+            ("fn area(self, by: bool) -> bool { by }", "self"),
+        ] {
+            let owner = Owner::Type {
+                name: "Square",
+                receiver: Some(receiver),
+            };
+            let (params, result) = method_signature(src, Some(&owner), &types).expect("lifts");
+            assert_eq!(params.len(), 2, "{src}");
+            assert_eq!(
+                params[0],
+                (
+                    "self".to_string(),
+                    local_name("self"),
+                    Ty::Named("Square".to_string())
+                )
+            );
+            assert_eq!(result, Ty::Bool);
+        }
+        // `Self` is the type the method is of.
+        let owner = Owner::Type {
+            name: "Square",
+            receiver: None,
+        };
+        let (params, result) = method_signature(
+            "fn same(other: Self) -> Self { other }",
+            Some(&owner),
+            &types,
+        )
+        .expect("lifts");
+        assert_eq!(params[0].2, Ty::Named("Square".to_string()));
+        assert_eq!(result, Ty::Named("Square".to_string()));
+    }
+
+    #[test]
+    fn a_receiver_the_lift_does_not_thread_is_named_with_its_type() {
+        let types = with_square();
+        for receiver in ["&mut self", "mut self"] {
+            let owner = Owner::Type {
+                name: "Square",
+                receiver: Some(receiver),
+            };
+            let src = format!("fn grow({receiver}, by: bool) {{}}");
+            assert_eq!(
+                method_signature(&src, Some(&owner), &types).err(),
+                Some(Residue::Signature(format!(
+                    "takes {receiver} of Square: the lift reads self and &self as the value, \
+                     and threads no other receiver"
+                )))
+            );
+        }
+        // A type the scope does not name, and a receiver outside any type.
+        let owner = Owner::Type {
+            name: "Circle",
+            receiver: Some("&self"),
+        };
+        assert_eq!(
+            method_signature("fn area(&self) -> bool { true }", Some(&owner), &types).err(),
+            Some(Residue::Signature(
+                "takes self of Circle, a type outside the lift".to_string()
+            ))
+        );
+        assert_eq!(
+            method_signature("fn area(&self) -> bool { true }", None, &types).err(),
+            Some(Residue::Signature("takes self outside a type".to_string()))
+        );
+    }
+
+    #[test]
+    fn shared_ownership_reads_as_its_content() {
+        let types = types_of(
+            "struct Shared { inner: Arc<u32>, name: Rc<String>, deep: Arc<Vec<Rc<u8>>> } \
+             struct Cellular { inner: Rc<RefCell<u32>> } struct Counted { hits: Cell<u32> } \
+             struct Locked { state: Arc<Mutex<Vec<u8>>> }",
+        );
+        assert_eq!(
+            fields(&types, "Shared"),
+            [
+                field("inner", Ty::Nat(Some(32))),
+                field("name", Ty::Str),
+                field("deep", Ty::List(Box::new(Ty::Nat(Some(8))))),
+            ]
+        );
+        // A cell that changes behind a shared borrow is the leaf, whatever
+        // shares it and whatever it holds.
+        assert_eq!(types.outside["Cellular"], "Cellular.inner: RefCell<u32>");
+        assert_eq!(types.outside["Counted"], "Counted.hits: Cell<u32>");
+        assert_eq!(types.outside["Locked"], "Locked.state: Mutex<Vec<u8>>");
+        // Another owner, and a new one, are the content.
+        let out = lift(
+            "fn again(s: &Shared) -> Arc<u32> { Arc::clone(&s.inner) }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(out.contains("body: (project s inner)"), "{out}");
+        let out = lift("fn build(n: u32) -> Rc<u32> { Rc::new(n) }", &types).expect("lifts");
+        assert!(out.contains("result: Nat, body: n"), "{out}");
+        // A type the workspace declares under the name is not the
+        // library's pointer.
+        let own = types_of("struct Rc<T> { value: T } struct Holder { inner: Rc<u32> }");
+        assert_eq!(
+            own.outside["Holder"],
+            format!("Holder.inner: Rc: {PARAMETRIC_STRUCT}")
+        );
+    }
+
+    #[test]
+    fn the_wide_signed_integers_lift_as_the_mathematical_int() {
+        let types = types_of("struct Wide { n: i128, offset: isize }");
+        assert_eq!(
+            fields(&types, "Wide"),
+            [
+                field("n", Ty::Integer(Some(128))),
+                field("offset", Ty::Integer(None)),
+            ]
+        );
+        let out = lift(
+            "fn below(a: i128, b: isize) -> bool { a < 0 || b >= 1 }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(out.contains("parameters: [a : Int, b : Int]"), "{out}");
+        assert!(out.contains("(prim less_than a (0 : Int) : Bool)"), "{out}");
+        assert!(
+            out.contains("(not (prim less_than b (1 : Int) : Bool))"),
+            "{out}"
+        );
+        // `Int` has no `equal`: neither value is below the other.
+        let out = lift("fn same(a: i128) -> bool { a == -1 }", &types).expect("lifts");
+        assert!(
+            out.contains("(not ((prim less_than a (-1 : Int) : Bool) || (prim less_than (-1 : Int) a : Bool)))"),
+            "{out}"
+        );
+        // A checked operation is the mathematical one where 128 bits hold
+        // its result.
+        let out = lift(
+            "fn sum(a: i128, b: i128) -> Option<i128> { a.checked_add(b) }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(
+            out.contains("(prim subtract a (prim negate b : Int) : Int)"),
+            "{out}"
+        );
+        assert!(out.contains(&format!("(-{} : Int)", 1u128 << 127)), "{out}");
+        assert!(out.contains(&format!("({} : Int)", i128::MAX)), "{out}");
+        let out = lift(
+            "fn quotient(a: i128, b: i128) -> Option<i128> { a.checked_div(b) }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(out.contains("(prim quotient a b (0 : Int) : Int)"), "{out}");
+        // The width of `isize` is the target's, as `usize`'s is.
+        assert_eq!(
+            lift(
+                "fn sum(a: isize, b: isize) -> Option<isize> { a.checked_add(b) }",
+                &types
+            ),
+            Err(Residue::Width(".checked_add on isize".to_string()))
+        );
+        // A signed value widens as itself: to `i128` always, to `isize`
+        // where the narrowest declared pointer holds it.
+        let out = lift("fn widen(a: i64) -> i128 { a as i128 }", &types).expect("lifts");
+        assert!(out.contains("(prim to_int a : Int)"), "{out}");
+        let out = lift("fn widen(a: i8) -> isize { a as isize }", &types).expect("lifts");
+        assert!(out.contains("(prim to_int a : Int)"), "{out}");
+        let narrowing = Err(Residue::Form("narrowing or sign-changing cast".to_string()));
+        assert_eq!(
+            lift("fn widen(a: i32) -> isize { a as isize }", &types),
+            narrowing
+        );
+        assert_eq!(
+            lift("fn narrow(a: i128) -> i64 { a as i64 }", &types),
+            narrowing
+        );
+        assert_eq!(
+            default_of(&Ty::Integer(None), &types),
+            Some("(0 : Int)".to_string())
+        );
+    }
+
+    #[test]
+    fn every_struct_shape_is_a_type_or_names_its_leaf() {
+        let types = types_of(
+            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, f64); \
+             struct Wrapper<T> { value: T } struct Holder { m: Marker, w: Wrapper<u32> }",
+        );
+        // A struct of no fields has one value: one constructor.
+        assert_eq!(types.enums["Marker"], [SOLE]);
+        assert_eq!(types.enums["Empty"], [SOLE]);
+        let out = lift("fn make() -> Marker { Marker }", &types).expect("lifts");
+        assert!(out.contains("body: (ctor Marker.mk)"), "{out}");
+        // A tuple struct's fields are named by position.
+        assert_eq!(
+            fields(&types, "Meters"),
+            [field("item0", Ty::Nat(Some(32)))]
+        );
+        let out = lift("fn first(m: &Meters) -> u32 { m.0 }", &types).expect("lifts");
+        assert!(out.contains("body: (project m item0)"), "{out}");
+        let out = lift("fn make(n: u32) -> Meters { Meters(n) }", &types).expect("lifts");
+        assert!(out.contains("body: (record Meters {item0 := n})"), "{out}");
+        assert_eq!(types.outside["Pair"], "Pair.1: f64");
+        // A struct with a type parameter is the leaf.
+        assert_eq!(
+            types.outside["Wrapper"],
+            format!("Wrapper: {PARAMETRIC_STRUCT}")
+        );
+        assert_eq!(
+            types.outside["Holder"],
+            format!("Holder.w: Wrapper: {PARAMETRIC_STRUCT}")
+        );
+    }
+
+    #[test]
+    fn a_lifetime_is_erased_and_a_taken_name_is_named() {
+        let types = types_of("struct Reader<'a> { text: &'a str } struct Prop { weight: u8 }");
+        // The owner of `impl<'a> Reader<'a>` is the struct.
+        assert!(types.structs.contains_key("Reader"));
+        assert_eq!(types.resolve("Reader<'a>"), "Reader");
+        assert_eq!(types.resolve("Reader<'_, 'b>"), "Reader");
+        // A type or const argument is not erased.
+        assert_eq!(types.resolve("Wrapper<T>"), "Wrapper<T>");
+        assert_eq!(types.resolve("Letter<'a'>"), "Letter<'a'>");
+        // A name LexLean writes for a type of its own does not lift as
+        // itself; the projection lifts it under its crate's name.
+        assert_eq!(types.outside["Prop"], format!("Prop: {TAKEN_NAME}"));
+        assert!(name_taken("Prop", true));
+        assert!(name_taken("TupleNat", true));
+        assert!(!name_taken("TupleNat", false));
+        assert!(!name_taken("Reader", true));
+        let (file, syntax) = crate::ingest::read_text("struct Prop { weight: u8 }");
+        let structs = BTreeMap::from([("StageProp".to_string(), syntax.structs[0].clone())]);
+        let aliases = BTreeMap::from([(file.structs[0].name.clone(), "StageProp".to_string())]);
+        let named = Types::with_data(BTreeMap::new(), &BTreeMap::new(), &structs, aliases);
+        let out = lift("fn weight(p: &Prop) -> u8 { p.weight }", &named).expect("lifts");
+        assert!(out.contains("parameters: [p : StageProp]"), "{out}");
+    }
+
+    #[test]
+    fn library_types_read_by_name_or_by_their_full_path() {
+        let types = types_of(
+            "struct Window { bounds: Range<u32>, queue: VecDeque<u8>, \
+             index: std::collections::BTreeMap<String, u32>, text: std::string::String, \
+             shared: alloc::sync::Arc<core::option::Option<u8>>, at: std::path::PathBuf } \
+             struct Borrowed { cell: std::cell::RefCell<u8> } struct Misplaced { rc: std::fmt::Rc<u8> }",
+        );
+        let nat = |bits: u32| Box::new(Ty::Nat(Some(bits)));
+        assert_eq!(
+            fields(&types, "Window"),
+            [
+                field("bounds", Ty::Tuple(vec![*nat(32), *nat(32)])),
+                field("queue", Ty::List(nat(8))),
+                field("index", Ty::Map(Box::new(Ty::Str), nat(32), true)),
+                field("text", Ty::Str),
+                field("shared", Ty::Option(nat(8))),
+                field("atValue", Ty::Path),
+            ]
+        );
+        // A full path the lift does not read is the leaf, as written.
+        assert_eq!(
+            types.outside["Borrowed"],
+            "Borrowed.cell: std::cell::RefCell<u8>"
+        );
+        assert_eq!(types.outside["Misplaced"], "Misplaced.rc: std::fmt::Rc<u8>");
+    }
+
+    #[test]
+    fn a_default_method_takes_no_value_of_an_implementing_type() {
+        let types = with_square();
+        let (params, result) = method_signature(
+            "fn corners(&self, sharp: bool) -> bool { sharp }",
+            Some(&Owner::Implementor),
+            &types,
+        )
+        .expect("lifts");
+        assert_eq!(
+            params,
+            [("sharp".to_string(), local_name("sharp"), Ty::Bool)]
+        );
+        assert_eq!(result, Ty::Bool);
+        // `Self` there is each implementing type: no one type.
+        assert!(method_signature(
+            "fn same(&self) -> Self { loop {} }",
+            Some(&Owner::Implementor),
+            &types
+        )
+        .is_err());
+        // And a method is generic as a function is.
+        assert_eq!(
+            method_signature(
+                "fn map<T>(&self, t: T) -> T { t }",
+                Some(&Owner::Implementor),
+                &types
+            )
+            .err(),
+            Some(Residue::Signature(
+                "generic, async, unsafe or variadic".to_string()
+            ))
+        );
     }
 }

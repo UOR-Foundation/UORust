@@ -20,6 +20,13 @@ pub(crate) enum Refusal {
     Unaccepted { span: Span, feature: String },
     /// Two facts project to the same LexLean name.
     Collision { span: Span, name: String },
+    /// An item stands under a `cfg` predicate the projected configuration
+    /// compiles out, beside the variant of it the projection states.
+    CfgVariant {
+        span: Span,
+        name: String,
+        predicate: String,
+    },
     /// A state machine has no `#[default]` variant and no unique source state.
     NoInitialState { span: Span, machine: String },
     /// A fact carries two tags the router routes differently.
@@ -56,6 +63,7 @@ impl Refusal {
             Self::ExternalPath { .. } => "external-path-dependency",
             Self::Unaccepted { .. } => "feature-without-acceptance",
             Self::Collision { .. } => "name-collision",
+            Self::CfgVariant { .. } => "cfg-variant",
             Self::NoInitialState { .. } => "no-initial-state",
             Self::NoMsrv { .. } => "no-msrv",
             Self::AmbiguousFact { .. } => "ambiguous-fact",
@@ -71,7 +79,7 @@ impl Refusal {
             Self::AmbiguousCall { .. } => "UR-R27",
             Self::ExternalPath { .. } => "UR-R05",
             Self::Unaccepted { .. } => "UR-R10",
-            Self::Collision { .. } => "UR-R13",
+            Self::Collision { .. } | Self::CfgVariant { .. } => "UR-R13",
             Self::NoInitialState { .. } | Self::AmbiguousFact { .. } => "UR-R26",
             Self::NoMsrv { .. } => "UR-R24",
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => "UR-R21",
@@ -85,6 +93,7 @@ impl Refusal {
             | Self::AmbiguousCall { span, .. }
             | Self::Unaccepted { span, .. }
             | Self::Collision { span, .. }
+            | Self::CfgVariant { span, .. }
             | Self::NoInitialState { span, .. }
             | Self::AmbiguousFact { span, .. } => span.render(),
             Self::ExternalPath { package, .. }
@@ -118,6 +127,12 @@ impl Refusal {
             Self::Collision { name, .. } => {
                 format!("{name} is the projection of more than one fact")
             }
+            Self::CfgVariant {
+                name, predicate, ..
+            } => format!(
+                "{name} has a variant under cfg({predicate}), which the projected \
+                 configuration compiles out; the projection states the variant it compiles"
+            ),
             Self::NoInitialState { machine, .. } => format!(
                 "{machine} has no #[default] variant and no unique state that no transition \
                  enters"

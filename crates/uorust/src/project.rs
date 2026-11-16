@@ -10,6 +10,8 @@ use crate::facts::{Capability, FnFact, Package, SourceFile, Span, Syntax, Target
 use crate::ingest::summary;
 use crate::lex::{pascal, string, string_list, Arm, Decl, Expr, Module};
 use crate::lift::{self, Candidate, Residue, Ty, Types};
+use crate::register::{queue_row, ranked, Register};
+use crate::UorustError;
 
 /// What a projection is parameterised by beyond the workspace.
 #[derive(Clone, Debug)]
@@ -27,6 +29,12 @@ pub struct Options {
 
 /// The largest source file the projection's LexLean project admits.
 pub(crate) const MAX_FILE_BYTES: usize = 4_194_304;
+
+/// The projection's own register of what it did not admit or lift.
+const FRONTIER: &str = "frontier.toml";
+
+/// The projection's LexLean project file, which states its limits.
+const LEXLEAN: &str = "lexlean.toml";
 
 const ARCH: &str = "Architecture";
 const IFACE: &str = "Interface";
@@ -75,6 +83,9 @@ struct Model {
     calls: BTreeMap<FnRef, BTreeSet<FnRef>>,
     /// The route the router admitted for each enum: `(package, file, enum)`.
     enum_routes: BTreeMap<(usize, usize, usize), &'static str>,
+    /// The bare names a function's module binds by a `use` to a type of a
+    /// registry crate, each with the crate.
+    registry: BTreeMap<FnRef, BTreeMap<String, String>>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -120,7 +131,9 @@ impl Model {
         self.package(r).targets[file.target].name.replace('-', "_")
     }
 
-    /// `crate::module::Type::name`.
+    /// `crate::module::Type::name`; and `crate::module::<Type as
+    /// Trait>::name` for a trait implementation's method whose type has
+    /// another method of its name, which is how Rust names the two apart.
     fn path(&self, r: FnRef) -> String {
         let file = self.file(r);
         let f = self.func(r);
@@ -129,10 +142,22 @@ impl Model {
             parts.push(file.module.clone());
         }
         if let Some(owner) = &f.owner {
-            parts.push(owner.clone());
+            match &f.trait_ref {
+                Some(named) if f.apart => parts.push(format!("<{owner} as {named}>")),
+                _ => parts.push(owner.clone()),
+            }
         }
         parts.push(f.name.clone());
         parts.join("::")
+    }
+
+    /// The registry crate a type names through a `use` of the function's
+    /// module: `Value` where `use serde_json::Value;` binds it.
+    fn bound_crate(&self, r: FnRef, ty: &str) -> Option<String> {
+        let bound = self.registry.get(&r)?;
+        ty.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
+            .filter_map(|word| word.split("::").next())
+            .find_map(|head| bound.get(head).cloned())
     }
 
     fn component_of(&self, r: FnRef) -> Option<&String> {
@@ -144,14 +169,19 @@ impl Model {
     fn record_residue(&self, notes: &mut Notes, r: FnRef, span: Span, reason: Residue) {
         let package = &self.ws.packages[r.pkg];
         if let Residue::Type(ty) = &reason {
-            if let Some(dep) = foreign_crate(package, ty) {
+            if let Some(dep) = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty)) {
                 let detail = format!(
                     "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
                 );
-                notes.foreign.insert(self.path(r), (span, detail));
+                // A path two functions project to (a name collision) keeps
+                // one row: residue, wherever one of them is residue.
+                if !notes.residue.contains_key(&self.path(r)) {
+                    notes.foreign.insert(self.path(r), (span, detail));
+                }
                 return;
             }
         }
+        notes.foreign.remove(&self.path(r));
         notes.residue.insert(self.path(r), (span, reason));
     }
 
@@ -228,14 +258,22 @@ fn kebab(name: &str) -> String {
     out
 }
 
-/// The whole projection: path -> bytes.
+/// The whole projection: path -> bytes. There is none where the function
+/// rows it would write are not a lift register, or where a module it would
+/// write is larger than the limit its own `lexlean.toml` states.
 pub(crate) fn project(
     ws: &Workspace,
     syntax: &Syntax,
     options: &Options,
     dumps: Option<&crate::mir::Dumps>,
-) -> BTreeMap<String, Vec<u8>> {
+) -> Result<BTreeMap<String, Vec<u8>>, UorustError> {
     let mut notes = Notes::default();
+    // Items under `cfg` predicates no build holds together are one fact:
+    // the projection states the variant its configuration compiles.
+    let (ws, syntax, variants) = crate::names::stated(ws, syntax);
+    let (ws, syntax) = (&ws, &syntax);
+    notes.refusals.extend(variants);
+    let resolver = crate::names::Resolver::new(ws, syntax);
     for package in &ws.packages {
         for file in &package.files {
             if let Some(reason) = &file.parse_error {
@@ -264,9 +302,16 @@ pub(crate) fn project(
         edges: BTreeMap::new(),
         calls: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
+        registry: BTreeMap::new(),
     };
+    ctx.registry = ctx
+        .all_fns()
+        .into_iter()
+        .map(|r| (r, resolver.registry_types((r.pkg, r.file, r.idx))))
+        .filter(|(_, bound)| !bound.is_empty())
+        .collect();
     ctx.edges = edges(&ctx);
-    let (calls, refused) = resolve(&ctx);
+    let (calls, refused) = resolve(&ctx, &resolver);
     ctx.calls = calls;
     notes.refusals.extend(refused);
     let (enum_routes, refused) = route_enums(&ctx);
@@ -298,12 +343,30 @@ pub(crate) fn project(
         }
     }
     let security = security(&ctx, options);
-    let (quality, refused) = quality(&ctx, iface.feature_count);
-    notes.refusals.extend(refused);
     let mir = dumps.zip(options.mir.as_ref());
     let (behavior, candidates) = behavior(&ctx, syntax, &mut notes, mir);
     let supply = supply(&ctx);
     let library = library(ws, &prefix, &behavior, &mut notes);
+    // The κ of every function of product code: the question its row answers.
+    let kappas: BTreeMap<String, String> = ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.product(r))
+        .map(|r| {
+            let path = ctx.path(r);
+            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
+            (path, kappa)
+        })
+        .collect();
+    // The lift register of this run, read from the function rows the
+    // frontier is about to carry: what the queue ranks and the Quality facet
+    // measures is what a reader of the frontier finds.
+    let rows = function_rows(&notes, &kappas);
+    let lift = Register::parse(std::path::Path::new(FRONTIER), &rows)?;
+    // Quality is written last of the facets: it measures what the others
+    // admitted, refused and lifted.
+    let (quality, refused) = quality(&ctx, iface.feature_count, &lift, &notes.refusals);
+    notes.refusals.extend(refused);
     modules.push(arch);
     modules.push(iface.module);
     modules.push(design);
@@ -322,12 +385,31 @@ pub(crate) fn project(
     }
     let mut entrypoints: Vec<String> = files
         .keys()
-        .filter(|p| p.ends_with(".lex.tex"))
+        .filter(|p| p.ends_with(MODULE_SUFFIX))
         .cloned()
         .collect();
-    for module in &modules {
-        entrypoints.push(module.path());
-        files.insert(module.path(), module.render().into_bytes());
+    // Every file that is no generated module comes first: beside the modules
+    // themselves, these are what can cite a record of one by its ID.
+    for (path, bytes) in register(&iface.register) {
+        files.insert(path, bytes);
+    }
+    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
+    // The prover's trial run lists the translations it admitted on trial.
+    if let Some(listing) = candidates {
+        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
+    }
+    files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
+    let cited = |id: &str| {
+        files
+            .values()
+            .any(|bytes| String::from_utf8_lossy(bytes).contains(id))
+    };
+    // Each module within the limit the project file below states, in parts
+    // where it is beyond it and its declarations can be written apart.
+    let written = sized(&modules, MAX_FILE_BYTES, &cited);
+    for (path, text) in written {
+        entrypoints.push(path.clone());
+        files.insert(path, text.into_bytes());
     }
     entrypoints.sort();
     let toml_name: String = options
@@ -387,7 +469,7 @@ pub(crate) fn project(
          build_root = \".prism\"\n\n[limits]\nmax_holo_bytes = 16777216\nmax_entities = 100000\n\
          max_diagnostics = 256\n"
     );
-    files.insert("lexlean.toml".into(), lexlean.into_bytes());
+    files.insert(LEXLEAN.into(), lexlean.into_bytes());
     files.insert("lexlean.lock".into(), lock.into_bytes());
     files.insert("lakefile.toml".into(), lakefile.into_bytes());
     files.insert("lake-manifest.json".into(), manifest.into_bytes());
@@ -397,30 +479,8 @@ pub(crate) fn project(
         ".gitignore".into(),
         b"/.lexlean/\n/.prism/\n/.lake/\n".to_vec(),
     );
-    for (path, bytes) in register(&iface.register) {
-        files.insert(path, bytes);
-    }
-    files.insert("supply/spdx.json".into(), spdx(ws, options).into_bytes());
-    // The prover's trial run lists the translations it admitted on trial.
-    if let Some(listing) = candidates {
-        files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
-    }
-    // The κ of every function of product code: the question its row answers.
-    let kappas: BTreeMap<String, String> = ctx
-        .all_fns()
-        .into_iter()
-        .filter(|&r| ctx.product(r))
-        .map(|r| {
-            let path = ctx.path(r);
-            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
-            (path, kappa)
-        })
-        .collect();
-    files.insert(
-        "frontier.toml".into(),
-        frontier(&notes, &kappas).into_bytes(),
-    );
-    files
+    within_limit(&files)?;
+    Ok(files)
 }
 
 /// The LexLean compiler semantics a projection locks to: the one UORust's own
@@ -755,9 +815,15 @@ fn edges(ctx: &Model) -> BTreeMap<String, (String, String)> {
     edges
 }
 
-/// Resolve every path call and unique method call to workspace functions.
+/// Resolve every call to workspace functions: by the language's own name
+/// resolution where the written code decides it ([`crate::names`]), and by
+/// name where those rules could not follow the call.
 #[allow(clippy::type_complexity)]
-fn resolve(ctx: &Model) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
+fn resolve(
+    ctx: &Model,
+    resolver: &crate::names::Resolver<'_>,
+) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
+    use crate::names::Outcome;
     let mut calls = BTreeMap::new();
     let mut refusals = Vec::new();
     let all = ctx.all_fns();
@@ -782,10 +848,56 @@ fn resolve(ctx: &Model) -> (BTreeMap<FnRef, BTreeSet<FnRef>>, Vec<Refusal>) {
                 .map(move |t| (t.name.replace('-', "_"), pkg))
         })
         .collect();
+    let fn_ref = |(pkg, file, idx): crate::names::FnId| FnRef { pkg, file, idx };
     for &caller in &all {
         let f = ctx.func(caller);
         let mut out = BTreeSet::new();
-        for call in &f.calls {
+        let ruled: Vec<(String, Option<Outcome>)> =
+            match resolver.calls((caller.pkg, caller.file, caller.idx)) {
+                Some(list) => list.into_iter().map(|(c, o)| (c, Some(o))).collect(),
+                None => f.calls.iter().map(|c| (c.clone(), None)).collect(),
+            };
+        for (call, outcome) in &ruled {
+            // Product code's functions only, as by name below.
+            let product = |fns: &[crate::names::FnId]| -> Vec<FnRef> {
+                let mut v: Vec<FnRef> = fns.iter().map(|g| fn_ref(*g)).collect();
+                v.retain(|r| ctx.product(*r));
+                v
+            };
+            match outcome {
+                // One function, or the variants of one no build holds
+                // together: the call reaches each.
+                Some(Outcome::Resolved(fns)) => {
+                    out.extend(product(fns));
+                    continue;
+                }
+                Some(Outcome::Outside) => continue,
+                // The written code leaves it open between these.
+                Some(Outcome::Open(fns)) => {
+                    match product(fns).as_slice() {
+                        [] => {}
+                        [only] => {
+                            out.insert(*only);
+                        }
+                        many => {
+                            let mut names: Vec<String> = many
+                                .iter()
+                                .map(|r| {
+                                    format!("{} ({})", ctx.path(*r), ctx.func(*r).span.render())
+                                })
+                                .collect();
+                            names.sort();
+                            refusals.push(Refusal::AmbiguousCall {
+                                span: f.span.clone(),
+                                callee: call.clone(),
+                                candidates: names,
+                            });
+                        }
+                    }
+                    continue;
+                }
+                Some(Outcome::Unknown) | None => {}
+            }
             if let Some(method) = call.strip_prefix('.') {
                 let candidates: Vec<FnRef> = by_name
                     .get(method)
@@ -2868,7 +2980,18 @@ fn truncate(text: &str, limit: usize) -> String {
     }
 }
 
-fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
+/// The Quality facet. Beside what it counts in the workspace, it states the
+/// lift and the admission as measures of the model: the functions of product
+/// code and those of them that lifted, from `lift` (the register this run
+/// writes), and the open refusals, `admitted`'s and its own. Each is a
+/// measured count under its own requirement, as every other measure here is;
+/// none is a threshold the tool chose.
+fn quality(
+    ctx: &Model,
+    features: usize,
+    lift: &Register,
+    admitted: &BTreeSet<Refusal>,
+) -> (Module, Vec<Refusal>) {
     let mut refusals = Vec::new();
     let ws = &ctx.ws;
     let q = "Foundation.Qual::";
@@ -2938,6 +3061,14 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
         }
     }
     let crates = ws.packages.len();
+    // The refusals the frontier will count: the other facets' and the ones
+    // found above, each once.
+    let open_refusals = admitted
+        .iter()
+        .chain(&refusals)
+        .collect::<BTreeSet<_>>()
+        .len();
+    let lift = lift.totals();
     // (characteristic, subcharacteristic, measure, threshold)
     let mut measures: Vec<(&str, &str, &str, usize)> = vec![
         (
@@ -2945,6 +3076,24 @@ fn quality(ctx: &Model, features: usize) -> (Module, Vec<Refusal>) {
             "FunctionalCompleteness",
             "AdmittedFeatures",
             features,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "OpenRefusals",
+            open_refusals,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "ProductFunctions",
+            lift.functions,
+        ),
+        (
+            "FunctionalSuitability",
+            "FunctionalCompleteness",
+            "LiftedFunctions",
+            lift.lifted,
         ),
         (
             "Maintainability",
@@ -3161,6 +3310,8 @@ fn behavior(
         structs: BTreeMap<Key, (usize, Vec<(String, crate::ast::RustType)>)>,
         datas: BTreeMap<Key, (usize, lift::RawVariants)>,
         spans: BTreeMap<Key, Span>,
+        /// The names of the keys declared twice, which name no one type.
+        twice: BTreeSet<String>,
     }
     let mut declared: Vec<Declared> = Vec::new();
     for (pkg, package) in ws.packages.iter().enumerate() {
@@ -3237,6 +3388,7 @@ fn behavior(
             d.enums.remove(key);
             d.structs.remove(key);
             d.datas.remove(key);
+            d.twice.insert(key.2.clone());
         }
         declared.push(d);
     }
@@ -3272,7 +3424,10 @@ fn behavior(
             .iter()
             .map(|key| {
                 let (target, module, name) = key;
-                let lex = if everywhere[name] == 1 {
+                // A name LexLean writes for a type of its own (`Prop`) is
+                // shared with it as with another crate's type.
+                let taken = lift::name_taken(name, !d.enums.contains_key(key));
+                let lex = if everywhere[name] == 1 && !taken {
                     name.clone()
                 } else if in_crate[name.as_str()] == 1 {
                     format!("{}{name}", pascal(&[&package.name]))
@@ -3402,7 +3557,7 @@ fn behavior(
                 aliases.insert(rust.to_string(), crate::order::ORDERING.to_string());
             }
             // A field's type is read in the file that declares it.
-            let structs: Fields = d
+            let mut structs: Fields = d
                 .structs
                 .into_iter()
                 .map(|(key, (fi, fs))| {
@@ -3445,6 +3600,21 @@ fn behavior(
                         .collect::<Vec<_>>()
                 })
                 .collect();
+            // A name of the crate that reads as no one type is registered
+            // with the reason, so that a row it stops states it: a key
+            // declared twice, and a name several of the crate's types
+            // share where a file does not say which it means.
+            let unread = d
+                .twice
+                .iter()
+                .map(|n| (n, lift::DECLARED_TWICE))
+                .chain(ambiguous[pkg].iter().map(|n| (n, lift::SHARED_NAME)));
+            for (name, why) in unread {
+                let free = !enums.contains_key(name) && !datas.contains_key(name);
+                if free && !structs.contains_key(name) {
+                    structs.insert(name.clone(), vec![lift::unread_shape(why)]);
+                }
+            }
             Types {
                 derives,
                 ..Types::with_data(enums, &datas, &structs, aliases)
@@ -3563,20 +3733,47 @@ fn behavior(
         .iter()
         .map(|_| (Vec::new(), BTreeMap::new()))
         .collect();
+    // How many functions of product code each path names, and how many
+    // methods each type has of each name over its crate. Rust reads
+    // `Type::name` and `value.name()` as the type's one method of that name,
+    // an inherent one before a trait's.
+    let mut pathed: BTreeMap<String, usize> = BTreeMap::new();
+    let mut methods: BTreeMap<(usize, String, String), usize> = BTreeMap::new();
+    for &r in all.iter().filter(|&&r| ctx.product(r)) {
+        *pathed.entry(ctx.path(r)).or_default() += 1;
+        let f = ctx.func(r);
+        if let (Some(o), false) = (&f.owner, f.in_trait) {
+            let owner = file_scopes[&(r.pkg, r.file)].resolve(o);
+            *methods.entry((r.pkg, owner, f.name.clone())).or_default() += 1;
+        }
+    }
+    // The trait methods a call can mean, each with its crate, the key such a
+    // call reads and its own key; and the candidates that give way.
+    let mut reach: Vec<(usize, String, String, FnRef)> = Vec::new();
+    let mut yielding: BTreeMap<(usize, String), u8> = BTreeMap::new();
     for &r in &all {
         let f = ctx.func(r);
         let types = &file_scopes[&(r.pkg, r.file)];
         if !ctx.product(r) {
             continue;
         }
-        // Inherent methods of a type the lift names lift with `self` as their
-        // first parameter; trait methods and methods of other types stop, each
-        // with a row of its own.
+        // Methods of a type the lift names lift with `self` as their first
+        // parameter, inherent ones and a trait implementation's alike;
+        // methods of other types stop, each with a row of its own that says
+        // why its type is outside the lift.
         let known = |o: &String| {
             types.enums.contains_key(&types.resolve(o))
                 || types.structs.contains_key(&types.resolve(o))
                 || types.datas.contains_key(&types.resolve(o))
         };
+        // A path Rust's own naming leaves to two trait methods (an impl or
+        // a trait declared once per configuration) is one row, and names
+        // neither of them.
+        if (f.implements.is_some() || f.in_trait) && pathed[&ctx.path(r)] > 1 {
+            ctx.stopped(notes, &effectful, r, Residue::Collision(ctx.path(r)));
+            continue;
+        }
+        let fn_syntax = syntax.function(&ctx.file(r).rel, r.idx);
         // `Display::fmt` lifts as the function from the value to the text
         // it writes: `write!` into its formatter is that `format!`.
         let display = matches!(
@@ -3585,45 +3782,76 @@ fn behavior(
         );
         let method = match (&f.owner, &f.implements) {
             (None, _) => None,
-            (Some(o), Some(_)) if display => Some(types.resolve(o)),
-            (Some(_), _) if f.in_trait => {
-                let reason = Residue::Signature("a method a trait declares".to_string());
-                ctx.stopped(notes, &effectful, r, reason);
-                continue;
-            }
-            // A trait method over a registry crate's types, such as a `syn`
-            // visitor, is the converter shell's: a foreign row.
-            (Some(_), Some(t)) => {
-                let sig = &syntax.function(&ctx.file(r).rel, r.idx).signature;
-                let foreign = sig
-                    .inputs
-                    .iter()
-                    .filter_map(|i| match i {
-                        crate::ast::FnArg::Typed(p) => Some(p.ty.text.clone()),
-                        crate::ast::FnArg::Receiver { .. } => None,
-                    })
-                    .chain(sig.output.iter().map(|o| o.text.clone()))
-                    .find(|ty| foreign_crate(&ctx.ws.packages[r.pkg], ty).is_some());
-                let reason = match foreign {
-                    Some(ty) => Residue::Type(ty),
-                    None => Residue::Signature(format!("implements the trait {t}")),
+            // A method a trait declares: its default body, where it is one
+            // function for every implementing type.
+            (Some(declarer), _) if f.in_trait => {
+                let refusal = match &fn_syntax.block {
+                    None => Some(Residue::Signature(format!(
+                        "a method {declarer} declares without a body, which each implementing \
+                         type gives"
+                    ))),
+                    Some(block) => default_refusal(ctx.file(r), f, declarer, block),
                 };
-                ctx.stopped(notes, &effectful, r, reason);
-                continue;
+                if let Some(reason) = refusal {
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
+                None
             }
-            (Some(o), None)
-                if types.enums.contains_key(&types.resolve(o))
-                    || types.structs.contains_key(&types.resolve(o))
-                    || types.datas.contains_key(&types.resolve(o)) =>
-            {
-                Some(types.resolve(o))
-            }
-            (Some(o), None) => {
-                ctx.stopped(notes, &effectful, r, Residue::Type(o.clone()));
-                continue;
+            (Some(o), Some(_)) if display => Some(types.resolve(o)),
+            (Some(o), implements) => {
+                // A trait method over a registry crate's types, such as a
+                // `syn` visitor, is the converter shell's: a foreign row.
+                let foreign = implements.as_ref().and_then(|_| {
+                    let sig = &fn_syntax.signature;
+                    sig.inputs
+                        .iter()
+                        .filter_map(|i| match i {
+                            crate::ast::FnArg::Typed(p) => Some(p.ty.text.clone()),
+                            crate::ast::FnArg::Receiver { .. } => None,
+                        })
+                        .chain(sig.output.iter().map(|o| o.text.clone()))
+                        .find(|ty| foreign_crate(&ctx.ws.packages[r.pkg], ty).is_some())
+                });
+                if let Some(ty) = foreign {
+                    ctx.stopped(notes, &effectful, r, Residue::Type(ty));
+                    continue;
+                }
+                // An impl with parameters of its own is one impl for each
+                // type or constant that takes their place, and its methods
+                // are generic as a function with parameters is.
+                if implements.is_some() && !f.impl_params.is_empty() {
+                    let reason = Residue::Signature(format!(
+                        "a method of an impl generic in {}: one function for each type or \
+                         constant that takes its place",
+                        f.impl_params.join(", ")
+                    ));
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
+                if known(o) {
+                    Some(types.resolve(o))
+                } else if foreign_crate(&ctx.ws.packages[r.pkg], o).is_some() {
+                    ctx.stopped(notes, &effectful, r, Residue::Type(o.clone()));
+                    continue;
+                } else {
+                    // The type and why the lift does not name it: a type
+                    // the workspace registers by the chain down to its
+                    // leaf, as a parameter of the type is, and any other by
+                    // what the crate's source shows. The leaf decides the
+                    // row: a registry crate's type there makes it foreign.
+                    let reason = if types.outside.contains_key(&types.resolve(o)) {
+                        types.unnamed(o)
+                    } else {
+                        let why =
+                            unlifted_type(ctx, syntax, &file_scopes, &expanded, r.pkg, r.file, o);
+                        Residue::Type(format!("{o}, {why}"))
+                    };
+                    ctx.stopped(notes, &effectful, r, reason);
+                    continue;
+                }
             }
         };
-        let fn_syntax = syntax.function(&ctx.file(r).rel, r.idx);
         let mut sig = fn_syntax.signature.clone();
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
@@ -3654,17 +3882,81 @@ fn behavior(
             ctx.file(r).module.clone(),
             f.name.clone(),
         );
-        let (rust, name) = match (&method, homonyms.get(&site)) {
-            (Some(o), _) => (
-                format!("{o}::{}", f.name),
-                lift::local_name(&format!("{o}_{}", f.name)),
+        // The key a call written `Type::name` or `value.name()` reads, where
+        // this is a trait's method such a call can mean.
+        let mut reached = None;
+        let (rust, name) = match (&method, &f.owner, homonyms.get(&site)) {
+            (Some(o), _, _) => {
+                let plain = (
+                    format!("{o}::{}", f.name),
+                    lift::local_name(&format!("{o}_{}", f.name)),
+                );
+                let sole = methods[&(r.pkg, o.clone(), f.name.clone())] == 1;
+                match &f.trait_ref {
+                    None => plain,
+                    // The text a value displays as keeps the key and the
+                    // name it had: no call reads it, `write!` and `format!`
+                    // do.
+                    Some(_) if display && sole => plain,
+                    // A trait's method lifts under a key no call writes,
+                    // and each scope that sees the trait reads the call's
+                    // key as it (`trait_in_scope`). Where its type has
+                    // another method of the name, Rust names this one by
+                    // its trait and no call is read as it. Nor where the
+                    // trait is generic: it is implemented once per argument
+                    // list (`From<A>` beside `From<B>` and core's own
+                    // `From<T> for T`), and Rust picks among them by the
+                    // types at the call. Its definition is named by its
+                    // type and its trait whatever else its type has, so the
+                    // name is one for each trait of a type and each type of
+                    // a trait, and a method the type gains later leaves it.
+                    Some(t) => {
+                        if sole && !t.contains('<') {
+                            reached = Some(plain.0);
+                        }
+                        (
+                            format!("{o}::<{t}>::{}", f.name),
+                            lift::local_name(&format!("{o}_{t}_{}", f.name)),
+                        )
+                    }
+                }
+            }
+            // A default method lifts under its trait's name, and under a
+            // key no call writes: a call means an implementing type's.
+            (None, Some(declarer), _) => (
+                format!("<{declarer}>::{}", f.name),
+                lift::local_name(&format!("{declarer}_{}", f.name)),
             ),
-            (None, Some((rust, lex))) => (rust.clone(), lex.clone()),
-            (None, None) => (f.name.clone(), lift::local_name(&f.name)),
+            (None, None, Some((rust, lex))) => (rust.clone(), lex.clone()),
+            (None, None, None) => (f.name.clone(), lift::local_name(&f.name)),
         };
-        let called = match &method {
-            Some(_) => rust.clone(),
-            None => f.name.clone(),
+        // What a call of the function by itself is written as: a free
+        // function's name, a method's key, and a trait's method as its own
+        // scope reads it.
+        let called = match (&method, &f.owner, &reached) {
+            (None, None, _) => f.name.clone(),
+            (_, _, Some(plain)) if trait_in_scope(ctx, r, r) => plain.clone(),
+            _ => rust.clone(),
+        };
+        if let Some(plain) = reached {
+            reach.push((r.pkg, plain, rust.clone(), r));
+        }
+        // Who keeps a name two functions lift to, whichever the projection
+        // reaches first: a free function before a type's own method
+        // (`sample_cases` beside `Sample::cases`), and that before a
+        // trait's method.
+        let yields: u8 = if f.in_trait || (f.implements.is_some() && !display) {
+            2
+        } else {
+            u8::from(method.is_some())
+        };
+        let owner = match (&method, &f.owner) {
+            (Some(o), _) => Some(lift::Owner::Type {
+                name: o,
+                receiver: f.receiver.as_deref(),
+            }),
+            (None, Some(_)) => Some(lift::Owner::Implementor),
+            (None, None) => None,
         };
         let (candidates, names) = &mut scoped[r.pkg];
         let signature = match (&formatter, &method) {
@@ -3679,11 +3971,28 @@ fn behavior(
             (None, _) if display => Err(Residue::Signature(
                 "a Display impl whose formatter is not a plain parameter".to_string(),
             )),
-            _ => types.signature(sig, method.as_deref()),
+            _ => types.signature(sig, owner.as_ref()),
         };
         match signature {
             Ok((params, result)) => {
-                if names.contains_key(&rust)
+                let holder = candidates
+                    .iter()
+                    .position(|c: &Candidate<'_>| c.name == name)
+                    .filter(|&i| {
+                        !names.contains_key(&rust)
+                            && yielding
+                                .get(&(r.pkg, candidates[i].rust.clone()))
+                                .is_some_and(|held| yields < *held)
+                    });
+                if let Some(held) = holder.and_then(|i| names.remove(&candidates[i].rust)) {
+                    // The name's holder gives way, and keeps its row.
+                    candidates.retain(|c| c.name != name);
+                    notes.refusals.insert(Refusal::Collision {
+                        span: ctx.func(held).span.clone(),
+                        name: qualified(BEHAVIOR, &name),
+                    });
+                    ctx.stopped(notes, &effectful, held, Residue::Collision(name.clone()));
+                } else if names.contains_key(&rust)
                     || candidates.iter().any(|c: &Candidate<'_>| c.name == name)
                 {
                     notes.refusals.insert(Refusal::Collision {
@@ -3694,6 +4003,7 @@ fn behavior(
                     ctx.stopped(notes, &effectful, r, Residue::Collision(name));
                     continue;
                 }
+                yielding.insert((r.pkg, rust.clone()), yields);
                 names.insert(rust.clone(), r);
                 candidates.push(Candidate {
                     rust,
@@ -3753,6 +4063,18 @@ fn behavior(
                     called: rust.clone(),
                     formatter: None,
                 });
+            }
+        }
+    }
+    // Each candidate reads a call's key as the trait's method where its
+    // scope sees the trait, and as no function where it does not. A
+    // constant's value calls no trait's method.
+    for (pkg, (candidates, names)) in scoped.iter_mut().enumerate() {
+        for c in candidates.iter_mut() {
+            let caller = names.get(&c.rust).copied();
+            for (_, plain, key, imp) in reach.iter().filter(|(p, ..)| *p == pkg) {
+                let seen = caller.is_some_and(|caller| trait_in_scope(ctx, caller, *imp));
+                c.homonyms.insert(plain.clone(), seen.then(|| key.clone()));
             }
         }
     }
@@ -3824,8 +4146,21 @@ fn behavior(
                 out.decls.iter().any(|d| d.name() == c.name),
                 names.get(&c.rust),
             ) {
+                // A path has one row and one κ. Two functions share a path
+                // where two traits give one type a method of one name (the
+                // `fmt` of `Display` and of `Debug`): where the other did
+                // not lift, the path's row stays the one that says so,
+                // since the κ the register holds for the path may be
+                // either function's.
+                let path = ctx.path(r);
+                if notes.residue.contains_key(&path)
+                    || notes.foreign.contains_key(&path)
+                    || notes.effects.contains_key(&path)
+                {
+                    continue;
+                }
                 notes.lifted.insert(
-                    ctx.path(r),
+                    path,
                     (
                         ctx.func(r).span.clone(),
                         qualified(BEHAVIOR, &c.name),
@@ -4900,6 +5235,322 @@ fn toml_string(text: &str) -> String {
 /// target, module and name.
 type FnSite = (usize, usize, String, String);
 
+/// Whether the trait a method implements is in scope where `caller` stands:
+/// Rust reads `Type::name` and `value.name()` as a trait's method there
+/// alone. Three rules of the language decide it, and whatever they leave
+/// open counts as out of scope, so a call is refused before it is misread:
+/// the scope that names a trait by one segment has it in scope (it declares
+/// the trait, imports it, or takes it from the prelude); a name the impl's
+/// scope neither declares nor imports, with no glob that could bind it, is
+/// the standard prelude's, in scope everywhere in a crate that keeps its
+/// prelude; and a file's own scope has a trait it declares or imports by a
+/// path that leads to the trait's declaration (`declared_trait`).
+fn trait_in_scope(ctx: &Model, caller: FnRef, imp: FnRef) -> bool {
+    let method = ctx.func(imp);
+    let Some(path) = &method.trait_path else {
+        return false;
+    };
+    let single = !path.contains("::");
+    let from = ctx.func(caller);
+    if single && caller.pkg == imp.pkg && caller.file == imp.file && from.scope == method.scope {
+        return true;
+    }
+    let package = &ctx.ws.packages[imp.pkg];
+    let home = &ctx.file(imp).scopes[method.scope];
+    let bound = home.traits.contains(path) || home.uses.iter().any(|(n, _)| n == path);
+    if single && !bound && !home.glob {
+        return caller.pkg == imp.pkg && !package.files.iter().any(|f| f.no_prelude);
+    }
+    if caller.pkg != imp.pkg || from.scope != 0 || method.scope != 0 {
+        return false;
+    }
+    let Some(named) = declared_trait(ctx, imp.pkg, imp.file, path) else {
+        return false;
+    };
+    let here = ctx.file(caller);
+    let (file, name) = &named;
+    (*file == caller.file && here.scopes[0].traits.contains(name))
+        || here.scopes[0].uses.iter().any(|(_, used)| {
+            declared_trait(ctx, caller.pkg, caller.file, used).as_ref() == Some(&named)
+        })
+}
+
+/// The trait a path names from a file's own scope: the file of the crate
+/// that declares it, and its name there. The path is read as Rust reads it,
+/// through the scope's own `use` bindings, from a module the scope declares
+/// and from `crate`, `self` and `super`, and through each module that only
+/// re-exports the name. A path
+/// into another crate, and one Rust would read from a name this does not
+/// see, names no trait here.
+fn declared_trait(ctx: &Model, pkg: usize, fi: usize, path: &str) -> Option<(usize, String)> {
+    let files = &ctx.ws.packages[pkg].files;
+    let mut at = fi;
+    let mut path = path.to_string();
+    let mut seen: BTreeSet<(usize, String)> = BTreeSet::new();
+    // Each step moves to another module's file or reads another binding, and
+    // no step is taken twice.
+    while seen.insert((at, path.clone())) {
+        let file = &files[at];
+        let scope = file.scopes.first()?;
+        let mut segs: Vec<&str> = path.split("::").collect();
+        let first = *segs.first()?;
+        if first.is_empty() {
+            return None;
+        }
+        if segs.len() == 1 && scope.traits.iter().any(|t| t == first) {
+            return Some((at, first.to_string()));
+        }
+        let own = scope.mods.iter().any(|m| m == first);
+        if !own && !matches!(first, "crate" | "self" | "super") {
+            // The scope's own binding of the first name, read in its place.
+            let (_, bound) = scope
+                .uses
+                .iter()
+                .find(|(n, used)| n == first && *used != path)?;
+            let rest = segs[1..].join("::");
+            path = match rest.is_empty() {
+                true => bound.clone(),
+                false => format!("{bound}::{rest}"),
+            };
+            continue;
+        }
+        let mut module: Vec<&str> = file.module.split("::").filter(|s| !s.is_empty()).collect();
+        match first {
+            "crate" => {
+                module.clear();
+                segs.remove(0);
+            }
+            "self" => {
+                segs.remove(0);
+            }
+            _ => {}
+        }
+        while segs.first() == Some(&"super") {
+            module.pop()?;
+            segs.remove(0);
+        }
+        let name = segs.pop()?;
+        module.extend(segs);
+        let module = module.join("::");
+        at = files
+            .iter()
+            .position(|f| f.target == file.target && f.module == module)?;
+        path = name.to_string();
+    }
+    None
+}
+
+/// Why a default method a trait declares is not one function for every
+/// implementing type, if it is not: it calls a method through `self` or
+/// `Self`, which is each implementing type's (the trait's own body of it is
+/// one an implementation may replace), or reads `self` or names `Self`
+/// otherwise. `None` for a body that does neither: it means the same for
+/// every implementing type, and lifts as written.
+fn default_refusal(
+    file: &SourceFile,
+    f: &FnFact,
+    declarer: &str,
+    block: &crate::ast::Block,
+) -> Option<Residue> {
+    let mut called = Vec::new();
+    calls_through_self(block, &mut called);
+    if let Some(method) = called.first() {
+        let declared = file
+            .fns
+            .iter()
+            .find(|g| g.in_trait && g.owner.as_deref() == Some(declarer) && &g.name == method);
+        let whose = match declared {
+            Some(g) if g.tokens.ends_with('}') => format!(
+                "{declarer}::{method}, whose body in the trait an implementing type may replace"
+            ),
+            Some(_) => format!("{declarer}::{method}, which the trait declares without a body"),
+            None => format!("{method}, which {declarer} does not declare"),
+        };
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that calls {whose}: it means each implementing \
+             type's"
+        )));
+    }
+    let words = |word: &str| {
+        f.tokens
+            .split(|c: char| !(c.is_alphanumeric() || c == '_'))
+            .filter(|w| *w == word)
+            .count()
+    };
+    if words("Self") > 0 {
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that names Self, each implementing type"
+        )));
+    }
+    // The receiver is the one `self` a signature writes.
+    if words("self") > usize::from(f.receiver.is_some()) {
+        return Some(Residue::Signature(format!(
+            "a default method of {declarer} that reads self, each implementing type's value"
+        )));
+    }
+    None
+}
+
+/// The methods a body calls on `self` and the functions it calls as
+/// `Self::name`, in source order.
+fn calls_through_self(block: &crate::ast::Block, out: &mut Vec<String>) {
+    use crate::ast::{RustExpr, Stmt, UnOp};
+    fn is_self(e: &RustExpr) -> bool {
+        match e {
+            RustExpr::Path(p) => p.is_ident("self"),
+            RustExpr::Paren(inner) => is_self(inner),
+            RustExpr::Reference(r) => is_self(&r.expr),
+            RustExpr::Unary(u) => matches!(u.op, UnOp::Deref) && is_self(&u.expr),
+            _ => false,
+        }
+    }
+    fn expr(e: &RustExpr, out: &mut Vec<String>) {
+        match e {
+            RustExpr::MethodCall(m) if is_self(&m.receiver) => out.push(m.method.clone()),
+            RustExpr::Call(c) => {
+                if let RustExpr::Path(p) = &*c.func {
+                    if let [owner, name] = p.segments.as_slice() {
+                        if owner.ident == "Self" {
+                            out.push(name.ident.clone());
+                        }
+                    }
+                }
+            }
+            RustExpr::Macro(m) => {
+                for arg in m.args.iter().flat_map(|a| &a.items) {
+                    expr(arg, out);
+                }
+            }
+            _ => {}
+        }
+        let (exprs, blocks) = e.parts();
+        for inner in exprs {
+            expr(inner, out);
+        }
+        for inner in blocks {
+            calls_through_self(inner, out);
+        }
+    }
+    for stmt in &block.stmts {
+        match stmt {
+            Stmt::Local(l) => {
+                if let Some(init) = &l.init {
+                    expr(&init.expr, out);
+                    if let Some(diverge) = &init.diverge {
+                        expr(diverge, out);
+                    }
+                }
+            }
+            Stmt::Expr(e, _) => expr(e, out),
+            Stmt::Macro(m) => {
+                for arg in m.args.iter().flat_map(|a| &a.items) {
+                    expr(arg, out);
+                }
+            }
+            Stmt::Other => {}
+        }
+    }
+}
+
+/// Why the lift does not name the type a method is of, as the file `fi` of
+/// package `pkg` writes it: the shape it is declared in, or the first of
+/// its fields whose type is outside the lift and, where that is another
+/// type of the crate, why that one is, down to a type the crate does not
+/// declare. Each type is explained once, so a family of types that hold
+/// each other ends.
+fn unlifted_type(
+    ctx: &Model,
+    syntax: &Syntax,
+    scopes: &BTreeMap<(usize, usize), Types>,
+    expanded: &dyn Fn(usize, &crate::ast::RustType) -> crate::ast::RustType,
+    pkg: usize,
+    fi: usize,
+    written: &str,
+) -> String {
+    let package = &ctx.ws.packages[pkg];
+    let mut seen: BTreeSet<String> = BTreeSet::new();
+    let mut out: Vec<String> = Vec::new();
+    let mut next = Some((fi, written.to_string()));
+    while let Some((from, ty)) = next.take() {
+        // The name a declaration would carry: the path's last segment,
+        // without its arguments.
+        let head = ty.split('<').next().unwrap_or(&ty);
+        let name = head.rsplit("::").next().unwrap_or(head).trim().to_string();
+        let plain = name.chars().all(|c| c.is_alphanumeric() || c == '_') && !name.is_empty();
+        if !plain || !seen.insert(name.clone()) {
+            out.push(if plain {
+                "which holds itself where no inductive type can".to_string()
+            } else {
+                "which is not a struct or an enum by name".to_string()
+            });
+            break;
+        }
+        if ty.contains('<') && out.is_empty() {
+            out.push(
+                "written with arguments, where a method's type is read by its name alone"
+                    .to_string(),
+            );
+            break;
+        }
+        // Its declaration: the writing file's own, else the crate's first.
+        let order = std::iter::once(from).chain((0..package.files.len()).filter(|i| *i != from));
+        let mut found = None;
+        for at in order {
+            let file = &package.files[at];
+            let read = &syntax.files[&file.rel];
+            if let Some(shape) = file.unread.iter().find(|(n, _)| *n == name) {
+                found = Some(Err(shape.1.to_string()));
+            } else if let Some(i) = file.structs.iter().position(|st| st.name == name) {
+                let fields = read.structs[i]
+                    .iter()
+                    .map(|(field, t)| (format!("field {field}"), t.clone()))
+                    .collect::<Vec<_>>();
+                found = Some(Ok((at, fields)));
+            } else if let Some(i) = file.enums.iter().position(|e| e.name == name) {
+                let fields = read.enums[i]
+                    .iter()
+                    .flat_map(|(variant, fields)| {
+                        fields
+                            .iter()
+                            .map(move |(_, t)| (format!("variant {variant}"), t.clone()))
+                    })
+                    .collect::<Vec<_>>();
+                found = Some(Ok((at, fields)));
+            }
+            if found.is_some() {
+                break;
+            }
+        }
+        match found {
+            None => out.push("which this crate does not declare".to_string()),
+            Some(Err(shape)) => out.push(format!("{shape}, which the lift does not read")),
+            Some(Ok((at, fields))) => {
+                let scope = &scopes[&(pkg, at)];
+                let imports = &package.files[at].imports;
+                let outside = fields.iter().find_map(|(part, t)| {
+                    match scope.ty(&expanded(pkg, &t.localized(imports))) {
+                        Err(Residue::Type(inner)) => Some((part, inner)),
+                        _ => None,
+                    }
+                });
+                match outside {
+                    Some((part, inner)) => {
+                        out.push(format!("whose {part} holds {inner}"));
+                        next = Some((at, inner));
+                    }
+                    None => out.push(
+                        "which the lift leaves out though each of its parts lifts: it has no \
+                         part, it is declared twice, its name is one the projection keeps, or \
+                         it holds itself where no inductive type can"
+                            .to_string(),
+                    ),
+                }
+            }
+        }
+    }
+    out.join(", ")
+}
+
 /// The free functions of product code whose name two modules (or two
 /// targets) of one crate share, `toml_string` in `project` and in
 /// `certify`, each -> its `rust` key and the LexLean name it lifts under:
@@ -4920,31 +5571,58 @@ fn homonym_fns(ctx: &Model) -> BTreeMap<FnSite, (String, String)> {
             .or_default()
             .insert(site);
     }
+    // A site's key and name by its target and module.
+    let qualified = |site: &FnSite| {
+        let package = &ctx.ws.packages[site.0];
+        let target = &package.targets[site.1];
+        let mut parts: Vec<String> = Vec::new();
+        if !matches!(target.kind, TargetKind::Lib) {
+            parts.push(target.name.replace('-', "_"));
+        }
+        parts.extend(
+            site.2
+                .split("::")
+                .filter(|m| !m.is_empty())
+                .map(str::to_string),
+        );
+        if parts.is_empty() {
+            parts.push(package.name.replace('-', "_"));
+        }
+        parts.push(site.3.clone());
+        let rust = format!("{}#{}", site.1, parts.join("::"));
+        (rust, lift::local_name(&parts.join("_")))
+    };
     let mut out = BTreeMap::new();
-    for ((pkg, name), at) in sites {
+    let mut single: Vec<FnSite> = Vec::new();
+    for at in sites.into_values() {
         if at.len() < 2 {
+            single.extend(at);
             continue;
         }
-        let package = &ctx.ws.packages[pkg];
         for site in at {
-            let target = &package.targets[site.1];
-            let mut parts: Vec<String> = Vec::new();
-            if !matches!(target.kind, TargetKind::Lib) {
-                parts.push(target.name.replace('-', "_"));
-            }
-            parts.extend(
-                site.2
-                    .split("::")
-                    .filter(|m| !m.is_empty())
-                    .map(str::to_string),
-            );
-            if parts.is_empty() {
-                parts.push(package.name.replace('-', "_"));
-            }
-            parts.push(name.clone());
-            let rust = format!("{}#{}", site.1, parts.join("::"));
-            let lex = lift::local_name(&parts.join("_"));
-            out.insert(site, (rust, lex));
+            let names = qualified(&site);
+            out.insert(site, names);
+        }
+    }
+    // A function alone of its name, whose name reads as one a module gave
+    // (`mir_memory_axioms` beside `axioms` of `mir::memory`), takes its
+    // module's too: the names stay one per function whichever of the two
+    // lifts, and whichever the projection reaches first.
+    loop {
+        let given: BTreeSet<(usize, String)> = out
+            .iter()
+            .map(|(site, (_, lex)): (&FnSite, &(String, String))| (site.0, lex.clone()))
+            .collect();
+        let (clashing, rest): (Vec<FnSite>, Vec<FnSite>) = single
+            .into_iter()
+            .partition(|site| given.contains(&(site.0, lift::local_name(&site.3))));
+        single = rest;
+        if clashing.is_empty() {
+            break;
+        }
+        for site in clashing {
+            let names = qualified(&site);
+            out.insert(site, names);
         }
     }
     out
@@ -5025,13 +5703,17 @@ fn effect_phrase(effect: &str) -> String {
     }
 }
 
-fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
-    let kappa = |path: &str| {
-        kappas
-            .get(path)
-            .map(|k| format!("kappa = \"{k}\"\n"))
-            .unwrap_or_default()
-    };
+/// The table the frontier's count of refusals is written under: the stage
+/// that refused them.
+const ADMISSION: &str = "admission";
+
+/// The unit the frontier's refusal queue counts in.
+const REFUSALS: &str = "refusals";
+
+/// The projection's `frontier.toml`: the counts and the ranked queues, then
+/// every refusal and every function row. `lift` is the register of `rows`,
+/// the function rows ([`function_rows`]).
+fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\
          # A refusal is an open claim: the router proposed it and admission would\n\
@@ -5045,9 +5727,15 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
          # definition parts from the Rust function, its divergence. Every function of\n\
          # product code has exactly one residue, foreign, effect or lifted row, keyed\n\
          # by the κ of its question (crate path and tokens): a lifted κ never turns\n\
-         # unlifted in a later projection.\n\n\
+         # unlifted in a later projection.\n\
+         # The work queue comes first: [admission] counts the refusals and each\n\
+         # [[reason]] row the refusals of one reason; [lift] counts the functions by\n\
+         # table and each [[construct]] row the functions one cause and detail stops.\n\
+         # Both queues are ranked, what stops the most first.\n\n\
          spec = \"uorust/frontier/1\"\n",
     );
+    out.push_str(&refusal_queue(&notes.refusals));
+    out.push_str(&lift.queue_text());
     for r in &notes.refusals {
         out.push_str(&format!(
             "\n[[refusal]]\nstatus = \"open\"\nreason = \"{}\"\nroute = \"{}\"\nspan = {}\ndetail = {}\n",
@@ -5057,6 +5745,42 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&r.detail())
         ));
     }
+    out.push_str(rows);
+    out
+}
+
+/// The refusals as the frontier counts and ranks them: the `[admission]`
+/// table, then one `[[reason]]` row per reason a refusal carries, with the
+/// route that refused it and the refusals of that reason, in the order and
+/// the row shape of the lift's queue ([`ranked`], [`queue_row`]).
+fn refusal_queue(refusals: &BTreeSet<Refusal>) -> String {
+    let mut reasons: BTreeMap<(&str, &str), usize> = BTreeMap::new();
+    for r in refusals {
+        *reasons.entry((r.code(), r.route())).or_default() += 1;
+    }
+    let mut out = format!("\n[{ADMISSION}]\n{REFUSALS} = {}\n", refusals.len());
+    for ((reason, route), count) in ranked(reasons) {
+        out.push('\n');
+        out.push_str(&queue_row(
+            "reason",
+            &[("reason", reason), ("route", route)],
+            REFUSALS,
+            count,
+        ));
+    }
+    out
+}
+
+/// The frontier's function rows: every function of product code under the
+/// table of what the lift decided for it, keyed by its κ.
+fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
+    let kappa = |path: &str| {
+        kappas
+            .get(path)
+            .map(|k| format!("kappa = \"{k}\"\n"))
+            .unwrap_or_default()
+    };
+    let mut out = String::new();
     for (path, (span, reason)) in &notes.residue {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
@@ -5101,6 +5825,219 @@ fn frontier(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
         }
     }
     out
+}
+
+/// Every module of the projection within the `max_file_bytes` its own
+/// `lexlean.toml` states, which LexLean refuses a source file beyond
+/// (LLS8002): the limit is read back from the project file the same run
+/// writes, so the check and the stated limit cannot part. A module beyond it
+/// is [`UorustError::ModuleTooLarge`], naming the first such module.
+fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
+    let at = std::path::Path::new(LEXLEAN);
+    let bad = |reason: String| UorustError::Malformed {
+        path: at.to_path_buf(),
+        reason,
+    };
+    let text = String::from_utf8_lossy(files.get(LEXLEAN).map_or(&[][..], Vec::as_slice));
+    let config: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let limit = config
+        .get("limits")
+        .and_then(|limits| limits.get("max_file_bytes"))
+        .and_then(toml::Value::as_integer)
+        .and_then(|n| usize::try_from(n).ok())
+        .ok_or_else(|| bad("it states no [limits] max_file_bytes".to_string()))?;
+    match files
+        .iter()
+        .find(|(path, bytes)| path.ends_with(MODULE_SUFFIX) && bytes.len() > limit)
+    {
+        Some((path, bytes)) => Err(UorustError::ModuleTooLarge {
+            module: path.clone(),
+            bytes: bytes.len(),
+            limit,
+        }),
+        None => Ok(()),
+    }
+}
+
+/// What the path of a LexLean module's source ends with.
+const MODULE_SUFFIX: &str = ".lex.tex";
+
+/// The modules as they are written, each `(path, text)`: a module within
+/// `limit` bytes whole, and a module beyond it as its [`parts`] where its
+/// records can be written apart and nothing but the module itself cites one
+/// (no other module, and no other file, which `cited` answers for the text
+/// `Module::`). A module beyond the limit that cannot be parted is written
+/// whole, and [`within_limit`] refuses the projection by its name and size.
+fn sized(modules: &[Module], limit: usize, cited: &dyn Fn(&str) -> bool) -> Vec<(String, String)> {
+    let texts: Vec<String> = modules.iter().map(Module::render).collect();
+    let taken: BTreeSet<&str> = modules.iter().map(|m| m.name.as_str()).collect();
+    let mut out = Vec::new();
+    for (i, (module, text)) in modules.iter().zip(&texts).enumerate() {
+        if text.len() > limit {
+            let id = format!("{}::", module.name);
+            let elsewhere = cited(&id)
+                || texts
+                    .iter()
+                    .enumerate()
+                    .any(|(j, other)| j != i && other.contains(&id));
+            let parted = (!elsewhere).then(|| parts(module, limit, &taken)).flatten();
+            if let Some(parted) = parted {
+                out.extend(parted.iter().map(|part| (part.path(), part.render())));
+                continue;
+            }
+        }
+        out.push((module.path(), text.clone()));
+    }
+    out
+}
+
+/// The parts a module is written as when it is beyond `limit` bytes: its
+/// declarations in their order, each part the longest run of them that
+/// stays within the limit. The first part keeps the module's name and the
+/// `n`th is named `{Module}{n}`, so a record's ID (`Module::name`, which
+/// PrismPM reads from the module that declares it) names its part, and every
+/// reference to a record of the module is rewritten to the part it is in.
+///
+/// Only a module of separate records is parted: every declaration a closed
+/// value in which no word outside a string is another declaration's name
+/// (the term is not read further, so a field or a constructor spelled like
+/// one counts as naming it), and none carrying a canonical `index`, which
+/// PrismPM derives from the order of the IDs a parting changes. `None` where
+/// the module is not one, where one record alone is beyond the limit, or
+/// where a part's name is `taken`.
+fn parts(module: &Module, limit: usize, taken: &BTreeSet<&str>) -> Option<Vec<Module>> {
+    let names: BTreeSet<&str> = module.decls.iter().map(Decl::name).collect();
+    let mut records = Vec::new();
+    for decl in &module.decls {
+        let Decl::Definition {
+            name,
+            parameters,
+            result,
+            body: Expr::Flat(body),
+            axioms,
+            recursive: None,
+            termination: None,
+            mutual: None,
+        } = decl
+        else {
+            return None;
+        };
+        let indexed = body.contains("{index := ") || body.contains(", index := ");
+        if !parameters.is_empty()
+            || !axioms.is_empty()
+            || indexed
+            || words(body).any(|word| names.contains(word))
+        {
+            return None;
+        }
+        records.push((name, result, body));
+    }
+    let part = |decls: Vec<Decl>, name: String| Module {
+        name,
+        glossaries: module.glossaries.clone(),
+        imports: module.imports.clone(),
+        title: module.title,
+        decls,
+    };
+    // The size of each record under the longest name a part can have: there
+    // are no more parts than records, so no part's number is wider than
+    // their count. A shorter name never prints a record larger, since a
+    // line that fits stays flat.
+    let widest = format!("{}{}", module.name, module.decls.len());
+    let room = limit.checked_sub(part(Vec::new(), widest.clone()).render().len() + "\n".len())?;
+    let between = "\n\n".len();
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    let mut used = 0;
+    for (i, (name, result, body)) in records.iter().enumerate() {
+        let widened = renamed(body, &module.name, &|n| {
+            names.contains(n).then_some(widest.as_str())
+        });
+        let size = crate::lex::render_decl(&Decl::value(*name, *result, widened)).len();
+        match groups.last_mut() {
+            Some(group) if used + between + size <= room => {
+                group.push(i);
+                used += between + size;
+            }
+            _ if size <= room => {
+                groups.push(vec![i]);
+                used = size;
+            }
+            _ => return None,
+        }
+    }
+    let part_names: Vec<String> = (0..groups.len())
+        .map(|k| match k {
+            0 => module.name.clone(),
+            _ => format!("{}{}", module.name, k + 1),
+        })
+        .collect();
+    if part_names[1..].iter().any(|n| taken.contains(n.as_str())) {
+        return None;
+    }
+    let part_of: BTreeMap<&str, &str> = groups
+        .iter()
+        .zip(&part_names)
+        .flat_map(|(group, part)| {
+            group
+                .iter()
+                .map(|&i| (records[i].0.as_str(), part.as_str()))
+        })
+        .collect();
+    Some(
+        groups
+            .iter()
+            .zip(&part_names)
+            .map(|(group, name)| {
+                let decls = group
+                    .iter()
+                    .map(|&i| {
+                        let (record, result, body) = records[i];
+                        let body = renamed(body, &module.name, &|n| part_of.get(n).copied());
+                        Decl::value(record, result, body)
+                    })
+                    .collect();
+                part(decls, name.clone())
+            })
+            .collect(),
+    )
+}
+
+/// `text` with every string that is an ID of `module` (`"Module::name"`)
+/// naming the module `part_of` gives for its `name`; an ID it gives none for
+/// stays as it is.
+fn renamed<'a>(text: &str, module: &str, part_of: &dyn Fn(&str) -> Option<&'a str>) -> String {
+    let opening = format!("\"{module}::");
+    let mut out = String::with_capacity(text.len());
+    let mut rest = text;
+    while let Some(at) = rest.find(&opening) {
+        let after = &rest[at + opening.len()..];
+        let name = &after[..after.find('"').unwrap_or(after.len())];
+        out.push_str(&rest[..at]);
+        match part_of(name) {
+            Some(part) => out.push_str(&format!("\"{part}::")),
+            None => out.push_str(&opening),
+        }
+        rest = after;
+    }
+    out.push_str(rest);
+    out
+}
+
+/// The words of a term outside its string literals: each run of letters,
+/// digits and underscores, the shape of a declaration's name.
+fn words(text: &str) -> impl Iterator<Item = &str> {
+    let (mut quoted, mut escaped) = (false, false);
+    text.split(move |c: char| {
+        let inside = quoted;
+        match c {
+            _ if escaped => escaped = false,
+            '\\' if quoted => escaped = true,
+            '"' => quoted = !quoted,
+            _ => {}
+        }
+        inside || !(c.is_alphanumeric() || c == '_')
+    })
+    .filter(|word| !word.is_empty())
 }
 
 fn spdx(ws: &Workspace, options: &Options) -> String {
@@ -5265,5 +6202,1294 @@ mod tests {
                 assert_eq!(sha(&msg), md);
             }
         }
+    }
+
+    // Types outside the lift.
+
+    /// The frontier of a one-crate workspace of these files, written under
+    /// the system's temporary directory and projected.
+    fn frontier_of(name: &str, files: &[(&str, &str)]) -> String {
+        let dir = std::env::temp_dir().join(format!("uorust-lib-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let manifest =
+            format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n");
+        for (path, body) in [("Cargo.toml", manifest.as_str())].iter().chain(files) {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("a parent")).expect("a directory");
+            std::fs::write(path, body).expect("a file");
+        }
+        let options = super::Options {
+            name: name.to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let projected = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        String::from_utf8(projected["frontier.toml"].clone()).expect("text")
+    }
+
+    /// The rows of a frontier that are of this function: each one's table
+    /// and the line of it that starts with this key.
+    fn rows_of(frontier: &str, function: &str, key: &str) -> Vec<(String, String)> {
+        frontier
+            .split("\n[[")
+            .filter(|row| row.contains(&format!("\nfunction = \"{function}\"\n")))
+            .map(|row| {
+                let table = row.split("]]").next().unwrap_or_default().to_string();
+                let line = row
+                    .lines()
+                    .find_map(|l| l.strip_prefix(&format!("{key} = ")))
+                    .unwrap_or_default()
+                    .trim_matches('"')
+                    .to_string();
+                (table, line)
+            })
+            .collect()
+    }
+
+    const NAMES: &[(&str, &str)] = &[
+        (
+            "src/lib.rs",
+            "//! Names that read as one type, as none, or as a leaf.\n\
+             pub mod first;\npub mod reader;\npub mod second;\npub mod teller;\n\n\
+             /// One type for each build configuration.\n#[cfg(unix)]\n\
+             pub struct Handle {\n    /// A descriptor.\n    pub fd: u32,\n}\n\n\
+             /// One type for each build configuration.\n#[cfg(not(unix))]\n\
+             pub struct Handle {\n    /// A raw handle.\n    pub raw: u64,\n}\n\n\
+             /// Stopped by a name two declarations share.\n\
+             pub fn opened(h: &Handle) -> bool {\n    let _ = h;\n    true\n}\n\n\
+             /// A float.\npub struct Leaf {\n    /// The float.\n    pub x: f64,\n}\n\n\
+             /// Holds the leaf.\npub struct Mid {\n    /// A count.\n    pub n: u32,\n    \
+             /// The leaf.\n    pub leaf: Leaf,\n}\n\n\
+             impl Mid {\n    /// Stopped by the type it is a method of.\n    \
+             pub fn count(&self) -> u32 {\n        self.n\n    }\n}\n\n\
+             /// A type named as LexLean names one of its own.\n\
+             pub struct Prop {\n    /// A power.\n    pub power: u8,\n}\n\n\
+             /// Reads it.\npub fn power(p: &Prop) -> u8 {\n    p.power\n}\n\n\
+             /// Two traits give one type a method of one name.\n\
+             pub struct Label {\n    /// The text.\n    pub text: String,\n}\n\n\
+             impl std::fmt::Display for Label {\n    \
+             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+             write!(f, \"{}\", self.text)\n    }\n}\n\n\
+             impl std::fmt::Debug for Label {\n    \
+             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+             f.write_str(\"label\")\n    }\n}\n\n\
+             /// One function for each build configuration.\n#[cfg(unix)]\n\
+             pub fn width() -> u32 {\n    1\n}\n\n\
+             /// One function for each build configuration.\n#[cfg(not(unix))]\n\
+             pub fn width(scale: f64) -> u32 {\n    let _ = scale;\n    2\n}\n",
+        ),
+        (
+            "src/first.rs",
+            "//! The first of two modules that declare a type of one name.\n\n\
+             /// A shape with sides.\npub struct Shape {\n    /// The sides.\n    pub sides: u32,\n}\n\n\
+             /// Reads the shape its own module declares.\n\
+             pub fn sides(s: &Shape) -> u32 {\n    s.sides\n}\n",
+        ),
+        (
+            "src/second.rs",
+            "//! The second of two modules that declare a type of one name.\n\n\
+             /// A shape with a radius.\npub struct Shape {\n    /// The radius.\n    pub radius: u32,\n}\n\n\
+             /// Reads the shape its own module declares.\n\
+             pub fn radius(s: &Shape) -> u32 {\n    s.radius\n}\n",
+        ),
+        (
+            "src/teller.rs",
+            "//! A file that says which of the two shapes it means.\n\n\
+             use crate::second::Shape;\n\n\
+             /// Reads the shape its import names.\n\
+             pub fn round(s: &Shape) -> u32 {\n    s.radius\n}\n",
+        ),
+        (
+            "src/reader.rs",
+            "//! A file that does not say which of the two shapes it means.\n\n\
+             use crate::first::*;\n\n\
+             /// Stopped by a name the file does not tell apart.\n\
+             pub fn corners(s: &Shape) -> u32 {\n    s.sides\n}\n",
+        ),
+    ];
+
+    #[test]
+    fn a_name_that_reads_as_no_one_type_states_why() {
+        let frontier = frontier_of("names", NAMES);
+        let detail = |function: &str| rows_of(&frontier, function, "detail");
+        let residue = |why: String| vec![("residue".to_string(), why)];
+        // One name, two declarations in one module: neither is the type.
+        assert_eq!(
+            detail("names::opened"),
+            residue(format!(
+                "type outside the lift: Handle: {}",
+                crate::lift::DECLARED_TWICE
+            ))
+        );
+        // One name, two modules: the module that declares one and the file
+        // that imports one read it, and a file that does neither reads none.
+        assert_eq!(
+            detail("names::reader::corners"),
+            residue(format!(
+                "type outside the lift: Shape: {}",
+                crate::lift::SHARED_NAME
+            ))
+        );
+        for told in [
+            "names::first::sides",
+            "names::second::radius",
+            "names::teller::round",
+        ] {
+            let rows = rows_of(&frontier, told, "definition");
+            assert_eq!(rows.len(), 1, "{told}: {rows:?}");
+            assert_eq!(rows[0].0, "lifted", "{told}");
+        }
+    }
+
+    #[test]
+    fn a_method_of_a_type_outside_the_lift_names_the_leaf() {
+        let frontier = frontier_of("owners", NAMES);
+        assert_eq!(
+            rows_of(&frontier, "owners::Mid::count", "detail"),
+            vec![(
+                "residue".to_string(),
+                "type outside the lift: Mid.leaf: Leaf.x: f64".to_string()
+            )]
+        );
+    }
+
+    #[test]
+    fn a_type_named_as_lexlean_names_its_own_lifts_under_its_crate() {
+        let frontier = frontier_of("taken", NAMES);
+        let rows = rows_of(&frontier, "taken::power", "definition");
+        assert_eq!(rows.len(), 1, "{rows:?}");
+        assert_eq!(rows[0].0, "lifted");
+    }
+
+    #[test]
+    fn two_functions_of_one_path_share_one_row() {
+        let frontier = frontier_of("paths", NAMES);
+        let rows = rows_of(&frontier, "paths::width", "detail");
+        assert_eq!(rows.len(), 1, "{rows:?}");
+        // The row is the one that claims least: the function not lifted.
+        assert_eq!(rows[0].0, "residue");
+        // Two traits' methods of one name on one type are two paths, each
+        // with its own row.
+        for path in [
+            "paths::<Label as Display>::fmt",
+            "paths::<Label as Debug>::fmt",
+        ] {
+            let rows = rows_of(&frontier, path, "function");
+            assert_eq!(rows.len(), 1, "{path}: {rows:?}");
+        }
+    }
+
+    // Functions refused by their signature or misread by where they stand:
+    // a trait implementation's method, a default method, a method of a type
+    // outside the lift, and a module declared out of line under a test cfg.
+    // Each projects a crate written for the test.
+
+    /// The frontier and the behaviour module of the crate `name` of `files`.
+    fn projected(name: &str, files: &[(&str, &str)]) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-stand-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let manifest =
+            format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n");
+        let manifest = ("Cargo.toml", manifest.as_str());
+        for (path, body) in std::iter::once(&manifest).chain(files) {
+            let path = dir.join(path);
+            std::fs::create_dir_all(path.parent().expect("parent")).expect("dir");
+            std::fs::write(path, body).expect("write");
+        }
+        let options = crate::Options {
+            name: name.to_string(),
+            last_modified: "2026-11-11T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let out = crate::project_workspace(&dir, &options).expect("projects");
+        let _ = std::fs::remove_dir_all(&dir);
+        // A crate none of whose functions lifts has no behaviour module.
+        let text = |path: &str| {
+            String::from_utf8(out.get(path).cloned().unwrap_or_default()).expect("utf-8")
+        };
+        (text("frontier.toml"), text("src/Behavior.lex.tex"))
+    }
+
+    /// The register row of a function: its kind and its lines.
+    fn row(frontier: &str, function: &str) -> String {
+        let needle = format!("function = \"{function}\"\n");
+        let rows: Vec<&str> = frontier
+            .split("\n\n")
+            .filter(|row| row.contains(&needle))
+            .collect();
+        assert_eq!(rows.len(), 1, "{function} has one row:\n{frontier}");
+        rows[0].to_string()
+    }
+
+    /// One definition of the behaviour module, flattened to a line.
+    fn definition(behavior: &str, name: &str) -> String {
+        let found = behavior
+            .split("definition{")
+            .find(|d| d.trim_start().starts_with(&format!("name: {name},")))
+            .unwrap_or_else(|| panic!("{name} is defined:\n{behavior}"));
+        found.split_whitespace().collect::<Vec<_>>().join(" ")
+    }
+
+    #[test]
+    fn a_trait_implementations_method_lifts_as_a_function_of_its_type_ue_15() {
+        let (frontier, behavior) = projected(
+            "shapes",
+            &[(
+                "src/lib.rs",
+                "//! Shapes.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n}\n\
+                 /// Something with a label.\n\
+                 pub trait Label {\n    /// An area.\n    fn area(&self) -> u32;\n    \
+                 /// The label.\n    fn label(&self) -> String;\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 /// A rectangle.\npub struct Rect {\n    /// Its width.\n    pub w: u32,\n    \
+                 /// Its height.\n    pub h: u32,\n}\n\
+                 impl Shape for Square {\n    fn area(&self) -> u32 {\n        \
+                 self.side.saturating_mul(self.side)\n    }\n}\n\
+                 impl Shape for Rect {\n    fn area(&self) -> u32 {\n        \
+                 self.w.saturating_mul(self.h)\n    }\n}\n\
+                 impl Label for Rect {\n    fn area(&self) -> u32 {\n        0\n    }\n    \
+                 fn label(&self) -> String {\n        \"rect\".to_string()\n    }\n}\n\
+                 impl Default for Square {\n    fn default() -> Self {\n        \
+                 Square { side: 1 }\n    }\n}\n\
+                 impl From<u32> for Rect {\n    fn from(side: u32) -> Self {\n        \
+                 Rect { w: side, h: side }\n    }\n}\n\
+                 impl From<bool> for Rect {\n    fn from(whole: bool) -> Self {\n        \
+                 if whole {\n            Rect { w: 1, h: 1 }\n        } else {\n            \
+                 Rect { w: 0, h: 0 }\n        }\n    }\n}\n\
+                 impl std::fmt::Display for Rect {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"rect\")\n    }\n}\n\
+                 /// The area of a square.\npub fn square_area(s: &Square) -> u32 {\n    \
+                 s.area()\n}\n\
+                 /// The unit square.\npub fn unit() -> Square {\n    Square::default()\n}\n\
+                 /// A rectangle's label.\npub fn label_of(r: &Rect) -> String {\n    \
+                 r.label()\n}\n\
+                 /// A rectangle of a side.\npub fn of_side(side: u32) -> Rect {\n    \
+                 Rect::from(side)\n}\n",
+            )],
+        );
+        // A function of the implementing type, with `self` first; one name
+        // for each type of a trait and each trait of a type.
+        for (name, needle) in [
+            (
+                "squareShapeArea",
+                "parameters: [selfValue : Square], result: Nat",
+            ),
+            (
+                "rectShapeArea",
+                "parameters: [selfValue : Rect], result: Nat",
+            ),
+            (
+                "rectLabelArea",
+                "parameters: [selfValue : Rect], result: Nat, body: 0",
+            ),
+            (
+                "rectLabelLabel",
+                "parameters: [selfValue : Rect], result: String",
+            ),
+            ("squareDefaultDefault", "parameters: [], result: Square"),
+            ("rectFromU32From", "parameters: [side : Nat], result: Rect"),
+            (
+                "rectFromBoolFrom",
+                "parameters: [whole : Bool], result: Rect",
+            ),
+            // The text a value displays as keeps the name it had.
+            ("rectFmt", "parameters: [selfValue : Rect], result: String"),
+            // A call written on the value or the type means the type's one
+            // method of the name.
+            ("squareArea", "body: (squareShapeArea s)"),
+            ("unit", "body: (squareDefaultDefault)"),
+            ("labelOf", "body: (rectLabelLabel r)"),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+        // Rust's own name for each: `Type::name` where the type has one
+        // method of the name, `<Type as Trait>::name` where it has several.
+        for (function, lifted) in [
+            ("shapes::Square::area", "Behavior::squareShapeArea"),
+            ("shapes::<Rect as Shape>::area", "Behavior::rectShapeArea"),
+            ("shapes::<Rect as Label>::area", "Behavior::rectLabelArea"),
+            ("shapes::Rect::label", "Behavior::rectLabelLabel"),
+            ("shapes::Square::default", "Behavior::squareDefaultDefault"),
+            (
+                "shapes::<Rect as From<u32>>::from",
+                "Behavior::rectFromU32From",
+            ),
+            (
+                "shapes::<Rect as From<bool>>::from",
+                "Behavior::rectFromBoolFrom",
+            ),
+            ("shapes::Rect::fmt", "Behavior::rectFmt"),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.starts_with("[[lifted]]")
+                    && found.contains(&format!("definition = \"{lifted}\"")),
+                "{found}"
+            );
+        }
+        // A generic trait is implemented once per argument list, and the
+        // types at the call pick among them: no call is read as one.
+        let found = row(&frontier, "shapes::of_side");
+        assert!(found.contains("reason = \"call\""), "{found}");
+        // A method the trait declares without a body is no one function.
+        let found = row(&frontier, "shapes::Shape::area");
+        assert!(
+            found.contains(
+                "detail = \"signature outside the lift: a method Shape declares without a \
+                 body, which each implementing type gives\""
+            ),
+            "{found}"
+        );
+    }
+
+    #[test]
+    fn a_call_means_a_traits_method_only_where_the_trait_is_in_scope() {
+        let (frontier, behavior) = projected(
+            "scopes",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Scopes.\npub mod far;\npub mod near;\npub mod shapes;\n\
+                     pub use shapes::Label;\n",
+                ),
+                (
+                    "src/shapes.rs",
+                    "//! A square and its traits.\n\
+                     /// A square.\n#[derive(Clone)]\npub struct Square {\n    \
+                     /// Its side.\n    pub side: u32,\n}\n\
+                     /// Something that gives a fresh square.\n\
+                     pub trait Fresh {\n    /// A fresh square.\n    \
+                     fn clone(&self) -> Square;\n}\n\
+                     impl Fresh for Square {\n    fn clone(&self) -> Square {\n        \
+                     Square { side: 0 }\n    }\n}\n\
+                     /// Something with a label.\n\
+                     pub trait Label {\n    /// The label.\n    fn label(&self) -> String;\n}\n\
+                     impl Label for Square {\n    fn label(&self) -> String {\n        \
+                     \"square\".to_string()\n    }\n}\n\
+                     /// The label, where the trait is declared.\n\
+                     pub fn here(s: &Square) -> String {\n    s.label()\n}\n",
+                ),
+                (
+                    "src/far.rs",
+                    "//! Where `Fresh` is not in scope.\nuse crate::shapes::Square;\n\
+                     /// The square again, as `Clone` gives it.\n\
+                     pub fn again(s: &Square) -> Square {\n    s.clone()\n}\n",
+                ),
+                (
+                    "src/near.rs",
+                    "//! Where the traits are imported.\n\
+                     use crate::shapes::{Fresh, Square};\nuse crate::Label as _;\n\
+                     /// A fresh square, named by its trait.\n\
+                     pub fn fresh(s: &Square) -> Square {\n    Fresh::clone(s)\n}\n\
+                     /// The label, through a trait the crate root re-exports.\n\
+                     pub fn label_of(s: &Square) -> String {\n    s.label()\n}\n\
+                     /// A module with a scope of its own.\n\
+                     pub mod inner {\n    use crate::shapes::Square;\n    \
+                     /// The square again: this scope does not import `Fresh`.\n    \
+                     pub fn inner_again(s: &Square) -> Square {\n        s.clone()\n    }\n}\n",
+                ),
+            ],
+        );
+        // The trait's method lifts wherever it is called from.
+        let found = row(&frontier, "scopes::shapes::Square::clone");
+        assert!(
+            found.contains("definition = \"Behavior::squareFreshClone\""),
+            "{found}"
+        );
+        for (name, needle) in [
+            // Out of the trait's scope `.clone()` is `Clone`'s: the value.
+            ("again", "body: s}"),
+            ("innerAgain", "body: s}"),
+            // In its scope a call is the trait's method: where the trait is
+            // declared, and where a `use` leads to its declaration.
+            ("here", "body: (squareLabelLabel s)"),
+            ("labelOf", "body: (squareLabelLabel s)"),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+    }
+
+    #[test]
+    fn a_traits_method_gives_way_to_the_function_that_holds_its_name() {
+        let (frontier, _) = projected(
+            "yields",
+            &[(
+                "src/lib.rs",
+                "//! Names.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 /// A rectangle.\npub struct Rect {\n    /// Its width.\n    pub w: u32,\n}\n\
+                 /// Spelled as the method of `Rect` below lifts.\n\
+                 pub fn rect_shape_area(n: u32) -> u32 {\n    n\n}\n\
+                 impl Shape for Rect {\n    fn area(&self) -> u32 {\n        self.w\n    }\n}\n\
+                 impl Shape for Square {\n    fn area(&self) -> u32 {\n        self.side\n    }\n}\n\
+                 /// Spelled as the method of `Square` above lifts.\n\
+                 pub fn square_shape_area(n: u32) -> u32 {\n    n\n}\n",
+            )],
+        );
+        // Before the method or after it, the function keeps the name.
+        for (function, method) in [
+            ("yields::rect_shape_area", "yields::Rect::area"),
+            ("yields::square_shape_area", "yields::Square::area"),
+        ] {
+            let kept = row(&frontier, function);
+            assert!(kept.starts_with("[[lifted]]"), "{kept}");
+            let gave = row(&frontier, method);
+            assert!(
+                gave.starts_with("[[residue]]") && gave.contains("reason = \"collision\""),
+                "{gave}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_default_method_lifts_where_its_body_is_one_for_every_implementing_type() {
+        let (frontier, behavior) = projected(
+            "defaults",
+            &[(
+                "src/lib.rs",
+                "//! Defaults.\n\
+                 /// Something with an area.\n\
+                 pub trait Shape {\n    /// The area.\n    fn area(&self) -> u32;\n    \
+                 /// The corners of a shape that does not say.\n    \
+                 fn corners(&self) -> u32 {\n        4\n    }\n    \
+                 /// The area doubled.\n    \
+                 fn doubled(&self) -> u32 {\n        self.area().saturating_mul(2)\n    }\n    \
+                 /// The corners doubled.\n    \
+                 fn corners_doubled(&self) -> u32 {\n        \
+                 self.corners().saturating_mul(2)\n    }\n    \
+                 /// The shape itself.\n    fn same(&self) -> &Self {\n        self\n    }\n    \
+                 /// A hook that does nothing.\n    fn visit(&mut self, _n: u32) {}\n}\n\
+                 /// Spelled like a default method.\n\
+                 pub fn corners() -> u32 {\n    3\n}\n\
+                 /// A trait whose default method calls a function of that spelling.\n\
+                 pub trait Count {\n    /// The count.\n    \
+                 fn count(&self) -> u32 {\n        corners()\n    }\n}\n",
+            )],
+        );
+        // One function for every implementing type takes no value of one.
+        for (name, needle) in [
+            ("shapeCorners", "parameters: [], result: Nat, body: 4}"),
+            ("shapeVisit", "parameters: [n : Nat], result: Unit"),
+            // A free function of a method's spelling is the free function.
+            (
+                "countCount",
+                "parameters: [], result: Nat, body: (corners)}",
+            ),
+        ] {
+            let found = definition(&behavior, name);
+            assert!(found.contains(needle), "{name}: {found}");
+        }
+        // What it uses of an implementing type keeps it out, by name.
+        for (function, detail) in [
+            (
+                "defaults::Shape::doubled",
+                "a default method of Shape that calls Shape::area, which the trait declares \
+                 without a body: it means each implementing type's",
+            ),
+            (
+                "defaults::Shape::corners_doubled",
+                "a default method of Shape that calls Shape::corners, whose body in the trait \
+                 an implementing type may replace: it means each implementing type's",
+            ),
+            (
+                "defaults::Shape::same",
+                "a default method of Shape that names Self, each implementing type",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.contains("reason = \"signature\"")
+                    && found.contains(&format!(
+                        "detail = \"signature outside the lift: {detail}\""
+                    )),
+                "{found}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_method_outside_the_lift_names_its_type_and_why() {
+        let (frontier, _) = projected(
+            "reasons",
+            &[(
+                "src/lib.rs",
+                "//! Reasons.\n\
+                 /// A circle.\npub struct Circle(pub u32);\n\
+                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: f64,\n}\n\
+                 /// A bag.\npub struct Bag {\n    /// Its blob.\n    pub blob: Blob,\n}\n\
+                 /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+                 impl Circle {\n    /// The radius.\n    \
+                 pub fn radius(&self) -> u32 {\n        self.0\n    }\n}\n\
+                 impl Bag {\n    /// How many blobs.\n    \
+                 pub fn count(&self) -> u32 {\n        1\n    }\n}\n\
+                 impl Square {\n    /// Grow.\n    pub fn grow(&mut self, by: u32) {\n        \
+                 self.side = self.side.saturating_add(by);\n    }\n}\n\
+                 /// Something that scales by a factor of some type.\n\
+                 pub trait Scale<T> {\n    /// The side scaled.\n    \
+                 fn scale(&self, by: T) -> u32;\n}\n\
+                 impl<T: Into<u32>> Scale<T> for Square {\n    \
+                 fn scale(&self, by: T) -> u32 {\n        \
+                 self.side.saturating_mul(by.into())\n    }\n}\n",
+            )],
+        );
+        // A tuple struct's fields are read by position, so its method
+        // lifts.
+        let radius = row(&frontier, "reasons::Circle::radius");
+        assert!(
+            radius.starts_with("[[lifted]]")
+                && radius.contains("definition = \"Behavior::circleRadius\""),
+            "{radius}"
+        );
+        for (function, reason, detail) in [
+            (
+                "reasons::Bag::count",
+                "type",
+                "type outside the lift: Bag.blob: Blob.weight: f64",
+            ),
+            (
+                "reasons::Square::grow",
+                "signature",
+                "signature outside the lift: takes &mut self of Square: the lift reads self \
+                 and &self as the value, and threads no other receiver",
+            ),
+            (
+                "reasons::Square::scale",
+                "signature",
+                "signature outside the lift: a method of an impl generic in T: one function \
+                 for each type or constant that takes its place",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(
+                found.starts_with("[[residue]]")
+                    && found.contains(&format!("reason = \"{reason}\""))
+                    && found.contains(&format!("detail = \"{detail}\"")),
+                "{found}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_module_declared_out_of_line_under_a_test_cfg_is_no_product_code() {
+        let (frontier, _) = projected(
+            "marks",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Marks.\n#[cfg(test)]\nmod tests;\n\
+                     #[cfg(any(test, feature = \"x\"))]\nmod shared;\n\
+                     /// Twice.\npub fn twice(n: u32) -> u32 {\n    n.saturating_mul(2)\n}\n",
+                ),
+                (
+                    "src/tests.rs",
+                    "mod helpers;\n\nfn four() -> u32 {\n    helpers::helper(super::twice(2))\n}\n",
+                ),
+                (
+                    "src/tests/helpers.rs",
+                    "pub fn helper(n: u32) -> u32 {\n    n\n}\n",
+                ),
+                (
+                    "src/shared.rs",
+                    "/// In a build with the feature too.\n\
+                     pub fn shared_fn(n: u32) -> u32 {\n    n\n}\n",
+                ),
+            ],
+        );
+        // The crate's own function, and the module a build without tests
+        // can hold, have their rows; the test tree has none.
+        row(&frontier, "marks::twice");
+        row(&frontier, "marks::shared::shared_fn");
+        for helper in ["four", "helper"] {
+            assert!(
+                !frontier.contains(&format!("::{helper}\"")),
+                "{helper} is test code:\n{frontier}"
+            );
+        }
+    }
+
+    #[test]
+    fn two_traits_methods_of_one_name_keep_a_row_each() {
+        let (frontier, _) = projected(
+            "texts",
+            &[(
+                "src/lib.rs",
+                "//! Texts.\n\
+                 /// A point.\npub struct Point {\n    /// Its place.\n    pub x: u32,\n}\n\
+                 impl std::fmt::Display for Point {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"point\")\n    }\n}\n\
+                 impl std::fmt::Debug for Point {\n    \
+                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        \
+                 write!(f, \"Point\")\n    }\n}\n",
+            )],
+        );
+        let shown = row(&frontier, "texts::<Point as Display>::fmt");
+        assert!(
+            shown.contains("definition = \"Behavior::pointDisplayFmt\""),
+            "{shown}"
+        );
+        let debugged = row(&frontier, "texts::<Point as Debug>::fmt");
+        assert!(debugged.starts_with("[[residue]]"), "{debugged}");
+        // One row per function and per κ: the frontier is a register.
+        let read =
+            crate::register::Register::parse(std::path::Path::new("frontier.toml"), &frontier);
+        assert!(read.is_ok(), "{:?}", read.err().map(|e| e.to_string()));
+    }
+
+    // The register as the work queue: the frontier's ranked refusals and
+    // lift queue, the lift as Quality measures, and the size of every
+    // module against the limit the projection states.
+
+    use std::collections::{BTreeMap, BTreeSet};
+    use std::path::{Path, PathBuf};
+
+    use super::{
+        frontier, function_rows, refusal_queue, within_limit, Notes, Refusal, Register, Residue,
+        Span, UorustError, FRONTIER, LEXLEAN, MAX_FILE_BYTES,
+    };
+
+    fn at(line: usize) -> Span {
+        Span {
+            file: "src/lib.rs".into(),
+            line,
+        }
+    }
+
+    /// A one-package workspace with no `rust-version`, written fresh: `over`
+    /// lifts, and `next` and `after` stop at the same arithmetic.
+    fn workspace(name: &str) -> PathBuf {
+        let dir = std::env::temp_dir().join(format!("uorust-queue-{name}-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(dir.join("src")).expect("a scratch workspace");
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"queue\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+        )
+        .expect("a manifest");
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "//! Q.\n\n/// Over one.\npub fn over(x: u8) -> bool {\n    x > 1\n}\n\n\
+             /// One more.\npub fn next(x: u8) -> u8 {\n    x + 1\n}\n\n\
+             /// One more again.\npub fn after(x: u8) -> u8 {\n    x + 1\n}\n",
+        )
+        .expect("a library");
+        dir
+    }
+
+    fn projected_files(name: &str) -> BTreeMap<String, Vec<u8>> {
+        let dir = workspace(name);
+        let options = super::Options {
+            name: "queue".into(),
+            last_modified: "2026-11-11T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("projects");
+        let _ = std::fs::remove_dir_all(dir);
+        files
+    }
+
+    fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
+        String::from_utf8_lossy(&files[path])
+            .parse()
+            .expect("the file is TOML")
+    }
+
+    fn count(value: &toml::Value) -> usize {
+        usize::try_from(value.as_integer().expect("a count")).expect("a count")
+    }
+
+    /// The `(requirementIndex, threshold)` of the Quality measure `name`.
+    fn measure(quality: &str, name: &str) -> (usize, usize) {
+        let from = quality
+            .find(&format!("name: measure{name},"))
+            .unwrap_or_else(|| panic!("no measure{name} in:\n{quality}"));
+        let record = &quality[from..from + quality[from..].find("\n}").expect("a record")];
+        let field = |key: &str| {
+            let rest = &record[record.find(&format!("{key} := ")).expect("a field") + key.len()..];
+            rest.trim_start_matches(" := ")
+                .chars()
+                .take_while(char::is_ascii_digit)
+                .collect::<String>()
+                .parse::<usize>()
+                .expect("a number")
+        };
+        (field("requirementIndex"), field("threshold"))
+    }
+
+    /// The `index` of the Quality requirement `name`.
+    fn requirement(quality: &str, name: &str) -> usize {
+        let from = quality
+            .find(&format!("name: requirement{name},"))
+            .unwrap_or_else(|| panic!("no requirement{name} in:\n{quality}"));
+        let rest = &quality[from + quality[from..].find("{index := ").expect("an index")..];
+        rest.trim_start_matches("{index := ")
+            .chars()
+            .take_while(char::is_ascii_digit)
+            .collect::<String>()
+            .parse()
+            .expect("a number")
+    }
+
+    #[test]
+    fn the_frontier_ranks_its_refusals_by_reason() {
+        let collision = |line: usize| Refusal::Collision {
+            span: at(line),
+            name: format!("n{line}"),
+        };
+        let unaccepted = |line: usize| Refusal::Unaccepted {
+            span: at(line),
+            feature: format!("f{line}"),
+        };
+        let refusals: BTreeSet<Refusal> = [
+            Refusal::AdvisoriesUnconsulted,
+            Refusal::NoMsrv {
+                package: "p".into(),
+            },
+            unaccepted(1),
+            unaccepted(2),
+            collision(3),
+            collision(4),
+            collision(5),
+        ]
+        .into_iter()
+        .collect();
+        let doc: toml::Value = refusal_queue(&refusals).parse().expect("TOML");
+        assert_eq!(count(&doc["admission"]["refusals"]), refusals.len());
+        let rows: Vec<(&str, &str, usize)> = doc["reason"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["reason"].as_str().expect("a reason"),
+                    r["route"].as_str().expect("a route"),
+                    count(&r["refusals"]),
+                )
+            })
+            .collect();
+        // The most refusals first; as many, by reason.
+        assert_eq!(
+            rows,
+            [
+                ("name-collision", "UR-R13", 3),
+                ("feature-without-acceptance", "UR-R10", 2),
+                ("advisories-unconsulted", "UR-R21", 1),
+                ("no-msrv", "UR-R24", 1),
+            ]
+        );
+        assert_eq!(rows.iter().map(|r| r.2).sum::<usize>(), refusals.len());
+        // No refusal: the count is stated, and the queue is empty.
+        let none: toml::Value = refusal_queue(&BTreeSet::new()).parse().expect("TOML");
+        assert_eq!(count(&none["admission"]["refusals"]), 0);
+        assert!(none.get("reason").is_none());
+    }
+
+    #[test]
+    fn the_frontier_carries_the_queue_of_its_own_rows() {
+        let mut notes = Notes::default();
+        notes.refusals.insert(Refusal::AdvisoriesUnconsulted);
+        for (i, name) in ["c::t1", "c::t2"].into_iter().enumerate() {
+            let reason = Residue::Type("Wide".into());
+            notes.residue.insert(name.into(), (at(i + 1), reason));
+        }
+        let form = Residue::Form("a\tloop".into());
+        notes.residue.insert("c::g".into(), (at(3), form));
+        notes
+            .effects
+            .insert("c::e".into(), (at(4), "Fs effect: std::fs::read".into()));
+        notes.lifted.insert(
+            "c::f".into(),
+            (at(5), "Behavior::f".into(), vec!["ASCII only".into()]),
+        );
+        let kappas: BTreeMap<String, String> = ["c::t1", "c::t2", "c::g", "c::e", "c::f"]
+            .into_iter()
+            .map(|path| (path.to_string(), crate::register::kappa(path, "fn f () {}")))
+            .collect();
+        let rows = function_rows(&notes, &kappas);
+        let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
+        let text = frontier(&notes, &lift, &rows);
+        let doc: toml::Value = text.parse().expect("the frontier is TOML");
+        let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
+            .iter()
+            .map(|key| count(&doc["lift"][key]))
+            .collect();
+        assert_eq!(totals, [5, 1, 3, 0, 1]);
+        let queue: Vec<(&str, &str, usize)> = doc["construct"]
+            .as_array()
+            .expect("the queue")
+            .iter()
+            .map(|r| {
+                (
+                    r["cause"].as_str().expect("a cause"),
+                    r["construct"].as_str().expect("a construct"),
+                    count(&r["functions"]),
+                )
+            })
+            .collect();
+        // A construct is the detail as a reader of the rows finds it: the
+        // tab the frontier writes as a space is a space in the queue too.
+        assert_eq!(
+            queue,
+            [
+                ("type", "type outside the lift: Wide", 2),
+                ("effect", "Fs effect: std::fs::read", 1),
+                ("form", "expression form outside the lift: a loop", 1),
+            ]
+        );
+        assert_eq!(count(&doc["admission"]["refusals"]), 1);
+        assert_eq!(doc["refusal"].as_array().map(Vec::len), Some(1));
+        // The frontier is the register it was written from, queue and all.
+        assert_eq!(Register::parse(Path::new(FRONTIER), &text), Ok(lift));
+        // Rows that are not a register give no projection: a function with
+        // no κ has no row to key.
+        assert!(matches!(
+            Register::parse(
+                Path::new(FRONTIER),
+                &function_rows(&notes, &BTreeMap::new())
+            ),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    #[test]
+    fn quality_states_the_lift_and_the_open_refusals_as_measures() {
+        let files = projected_files("quality");
+        let frontier = toml_of(&files, FRONTIER);
+        let quality = String::from_utf8_lossy(&files["src/Quality.lex.tex"]).to_string();
+        // The register the same run writes.
+        let totals = crate::lift_register(&files).expect("a register").totals();
+        assert_eq!((totals.functions, totals.lifted, totals.residue), (3, 1, 2));
+        let refusals = frontier["refusal"].as_array().expect("refusals").len();
+        // Quality's own refusal (no `rust-version`) is one of them.
+        assert!(frontier["refusal"]
+            .as_array()
+            .expect("refusals")
+            .iter()
+            .any(|r| r["reason"].as_str() == Some("no-msrv")));
+        assert_eq!(count(&frontier["admission"]["refusals"]), refusals);
+        assert_eq!(count(&frontier["lift"]["functions"]), totals.functions);
+        assert_eq!(count(&frontier["lift"]["lifted"]), totals.lifted);
+        for (name, measured) in [
+            ("ProductFunctions", totals.functions),
+            ("LiftedFunctions", totals.lifted),
+            ("OpenRefusals", refusals),
+        ] {
+            let (of, threshold) = measure(&quality, name);
+            assert_eq!(threshold, measured, "measure{name}");
+            // Built as every other measure is: under its own requirement.
+            assert_eq!(of, requirement(&quality, name), "measure{name}");
+        }
+        // The measure this one is modelled on is still built the same way.
+        let (of, _) = measure(&quality, "AdmittedFeatures");
+        assert_eq!(of, requirement(&quality, "AdmittedFeatures"));
+        // The queue of the two functions one construct stops.
+        let first = &frontier["construct"].as_array().expect("the queue")[0];
+        assert_eq!(first["cause"].as_str(), Some("arithmetic"));
+        assert_eq!(count(&first["functions"]), 2);
+    }
+
+    #[test]
+    fn a_module_beyond_the_stated_limit_is_a_typed_error() {
+        let project = |limit: usize, module: usize| -> BTreeMap<String, Vec<u8>> {
+            [
+                (
+                    LEXLEAN.to_string(),
+                    format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+                ),
+                ("src/Design.lex.tex".to_string(), vec![b' '; module]),
+                // No module: LexLean does not read it as a source file.
+                (FRONTIER.to_string(), vec![b'#'; limit + 1]),
+            ]
+            .into_iter()
+            .collect()
+        };
+        let limit = 64;
+        // At the limit a module is admitted; one byte beyond it is refused.
+        assert_eq!(within_limit(&project(limit, limit)), Ok(()));
+        let refused = within_limit(&project(limit, limit + 1)).expect_err("beyond the limit");
+        assert_eq!(
+            refused,
+            UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: limit + 1,
+                limit,
+            }
+        );
+        let said = refused.to_string();
+        assert!(
+            said.contains("src/Design.lex.tex") && said.contains("65 bytes") && said.contains("64"),
+            "{said}"
+        );
+        // A project file that states no limit is not one to check against.
+        let mut silent = project(limit, limit);
+        silent.insert(LEXLEAN.to_string(), b"[limits]\n".to_vec());
+        assert!(matches!(
+            within_limit(&silent),
+            Err(UorustError::Malformed { .. })
+        ));
+    }
+
+    /// The limit checked is the one the projection's own `lexlean.toml`
+    /// states: a projection is within it, and the same files under a lower
+    /// stated limit are refused at their largest module.
+    #[test]
+    fn a_projection_is_checked_against_the_limit_it_states() {
+        let mut files = projected_files("limit");
+        let stated = format!("max_file_bytes = {MAX_FILE_BYTES}\n");
+        let config = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        assert!(config.contains(&stated), "{config}");
+        assert_eq!(within_limit(&files), Ok(()));
+        // The first of the largest, in the order the check reads them.
+        let (largest, bytes) = files
+            .iter()
+            .rev()
+            .filter(|(path, _)| path.ends_with(".lex.tex"))
+            .map(|(path, bytes)| (path.clone(), bytes.len()))
+            .max_by_key(|(_, bytes)| *bytes)
+            .expect("a module");
+        let lower = bytes - 1;
+        files.insert(
+            LEXLEAN.to_string(),
+            config
+                .replace(&stated, &format!("max_file_bytes = {lower}\n"))
+                .into_bytes(),
+        );
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: largest,
+                bytes,
+                limit: lower,
+            })
+        );
+    }
+
+    use super::{parts, record, sized, string, Decl, Module};
+
+    /// A module of separate records in the shape of a design facet: a view,
+    /// `n` processes, and `n` things that each cite the view and a process.
+    fn design_like(n: usize) -> Module {
+        let t = "Foundation.Arch::";
+        let id = |name: &str| string(&format!("Design::{name}"));
+        let mut decls = vec![Decl::value(
+            "opmView",
+            format!("{t}DesignView"),
+            record(&format!("{t}DesignView"), &[("title", string("Processes"))]),
+        )];
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("process{i}"),
+                format!("{t}SystemProcess"),
+                record(&format!("{t}SystemProcess"), &[("owner", string("c"))]),
+            ));
+        }
+        for i in 0..n {
+            decls.push(Decl::value(
+                format!("thing{i}"),
+                format!("{t}OpmThing"),
+                record(
+                    &format!("{t}OpmThing"),
+                    &[
+                        ("view", id("opmView")),
+                        ("subject", id(&format!("process{i}"))),
+                    ],
+                ),
+            ));
+        }
+        Module {
+            name: "Design".into(),
+            glossaries: vec![super::BOOL],
+            imports: vec!["Foundation.Arch".into()],
+            title: "design view",
+            decls,
+        }
+    }
+
+    /// The names a module text declares, in order.
+    fn declared(text: &str) -> Vec<String> {
+        text.split("name: ")
+            .skip(1)
+            .map(|rest| rest.split(',').next().expect("a name").to_string())
+            .collect()
+    }
+
+    /// Every ID a module text cites: each string of the form `"Design..::name"`.
+    fn cited_ids(text: &str) -> Vec<String> {
+        text.split('"')
+            .filter(|piece| piece.starts_with("Design") && piece.contains("::"))
+            .map(str::to_string)
+            .collect()
+    }
+
+    #[test]
+    fn a_module_of_separate_records_beyond_the_limit_is_written_in_parts() {
+        let module = design_like(40);
+        let whole = module.render();
+        let nothing = |_: &str| false;
+        // Within the limit it is written whole, byte for byte.
+        assert_eq!(
+            sized(std::slice::from_ref(&module), whole.len(), &nothing),
+            [(module.path(), whole.clone())]
+        );
+        // A third of its size holds no more than a third of it.
+        let limit = whole.len() / 3;
+        let written = sized(std::slice::from_ref(&module), limit, &nothing);
+        assert!(written.len() > 3, "{} parts", written.len());
+        let mut ids = BTreeSet::new();
+        let mut order = Vec::new();
+        for (k, (path, text)) in written.iter().enumerate() {
+            // Each part is a module of its own, within the limit, named in turn.
+            let name = match k {
+                0 => "Design".to_string(),
+                _ => format!("Design{}", k + 1),
+            };
+            assert_eq!(path, &format!("src/{name}.lex.tex"));
+            assert!(text.starts_with(&format!("\\begin{{lexlean}}{{{name}}}\n")));
+            assert!(text.len() <= limit, "{path}: {} > {limit}", text.len());
+            for declared in declared(text) {
+                assert!(
+                    ids.insert(format!("{name}::{declared}")),
+                    "{declared} twice"
+                );
+                order.push(declared);
+            }
+        }
+        // Every record is written once, in its order.
+        assert_eq!(order, declared(&whole));
+        // Every reference names the part its record is in, and some reach
+        // back into the first part and some into a later one.
+        let cited: Vec<String> = written.iter().flat_map(|(_, t)| cited_ids(t)).collect();
+        assert_eq!(cited.len(), cited_ids(&whole).len());
+        for id in &cited {
+            assert!(ids.contains(id), "{id} names no record");
+        }
+        let last = &written[written.len() - 1].1;
+        assert!(last.contains("\"Design::opmView\""), "{last}");
+        assert!(cited.iter().any(|id| !id.starts_with("Design::")));
+        // The parts are the same on a second run.
+        assert_eq!(
+            written,
+            sized(std::slice::from_ref(&module), limit, &nothing)
+        );
+    }
+
+    /// What is not a module of separate records, or is cited from outside
+    /// itself, is written whole, and the size check refuses the projection.
+    #[test]
+    fn a_module_that_cannot_be_parted_is_left_to_the_typed_error() {
+        let module = design_like(40);
+        let whole = module.render();
+        let limit = whole.len() / 3;
+        let taken = BTreeSet::new();
+        assert!(parts(&module, limit, &taken).is_some());
+        let unparted = [(module.path(), whole.clone())];
+        // Another file cites one of its records.
+        let elsewhere = |id: &str| id == "Design::";
+        assert_eq!(
+            sized(std::slice::from_ref(&module), limit, &elsewhere),
+            unparted
+        );
+        // Another module does.
+        let citing = Module {
+            name: "Interface".into(),
+            decls: vec![Decl::value("journey", "String", string("Design::opmView"))],
+            ..design_like(0)
+        };
+        let both = [module.clone(), citing];
+        assert_eq!(sized(&both, limit, &|_| false)[0], unparted[0]);
+        // A record with a canonical index, whose order its ID decides.
+        let mut indexed = design_like(40);
+        indexed.decls[0] = Decl::value("opmView", "T", record("T", &[("index", "0".into())]));
+        assert!(parts(&indexed, limit, &taken).is_none());
+        // A declaration that names another outside a string, or takes a
+        // parameter, is no separate record.
+        let mut naming = design_like(40);
+        naming.decls[1] = Decl::value("process0", "T", "opmView".to_string());
+        assert!(parts(&naming, limit, &taken).is_none());
+        let mut taking = design_like(40);
+        if let Decl::Definition { parameters, .. } = &mut taking.decls[1] {
+            parameters.push(("x".into(), "Nat".into()));
+        }
+        assert!(parts(&taking, limit, &taken).is_none());
+        // One record alone beyond the limit, and a part's name already a
+        // module's.
+        let one = crate::lex::render_decl(&module.decls[0]).len();
+        assert!(parts(&module, one, &taken).is_none());
+        assert!(parts(&module, limit, &BTreeSet::from(["Design2"])).is_none());
+        // Left whole, it is the typed error's.
+        let files: BTreeMap<String, Vec<u8>> = [
+            (
+                LEXLEAN.to_string(),
+                format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
+            ),
+            (module.path(), whole.clone().into_bytes()),
+        ]
+        .into_iter()
+        .collect();
+        assert_eq!(
+            within_limit(&files),
+            Err(UorustError::ModuleTooLarge {
+                module: "src/Design.lex.tex".into(),
+                bytes: whole.len(),
+                limit,
+            })
+        );
+    }
+
+    // Name resolution: admission resolves names as the language does.
+
+    /// The frontier of a one-library workspace with `source` as its `lib.rs`.
+    fn resolved_frontier(tag: &str, manifest_extra: &str, source: &str) -> String {
+        let dir = std::env::temp_dir().join(format!("uorust-resolve-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            format!(
+                "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+                 rust-version = \"1.70\"\n{manifest_extra}"
+            ),
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        String::from_utf8(files["frontier.toml"].clone()).unwrap()
+    }
+
+    #[test]
+    fn a_call_resolves_in_its_nearest_module_before_it_is_ambiguous() {
+        let frontier = resolved_frontier(
+            "near",
+            "",
+            "pub mod left {\n pub fn near() -> u8 { 3 }\n pub fn here() -> u8 { near() }\n}\n\
+             pub mod right {\n pub fn near() -> u8 { 4 }\n}\n",
+        );
+        assert!(!frontier.contains("ambiguous-call"), "{frontier}");
+    }
+
+    #[test]
+    fn a_registry_type_a_use_binds_is_a_foreign_row() {
+        let frontier = resolved_frontier(
+            "foreign",
+            "\n[dependencies]\nserde_json = \"1\"\n",
+            "use serde_json::Value;\npub fn null(v: Value) -> bool { v.is_null() }\n",
+        );
+        assert!(
+            frontier.contains("takes or returns Value, a type of the serde_json crate"),
+            "{frontier}"
+        );
+    }
+
+    #[test]
+    fn complementary_cfg_variants_are_one_fact_not_a_collision() {
+        let frontier = resolved_frontier(
+            "variant",
+            "\n[features]\nwide = []\n",
+            "#[cfg(feature = \"wide\")]\npub fn variant() -> u8 { 1 }\n\
+             #[cfg(not(feature = \"wide\"))]\npub fn variant() -> u8 { 2 }\n",
+        );
+        assert!(!frontier.contains("name-collision"), "{frontier}");
+        assert!(frontier.contains("reason = \"cfg-variant\""), "{frontier}");
+        assert!(
+            frontier.contains("w::variant has a variant under cfg(feature = \\\"wide\\\")"),
+            "{frontier}"
+        );
+    }
+
+    // One name per function, whichever lifts and whichever is reached first.
+
+    #[test]
+    fn a_name_a_module_gave_is_not_taken_by_a_function_alone_of_its_name() {
+        // `axioms` of two modules are named by their modules; `mir_memory_axioms`,
+        // alone of its name and in a file read before `mir/memory.rs`, would
+        // read as the second of them.
+        let (frontier, _) = projected(
+            "given",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Given names.\npub mod adapters;\npub mod mir;\npub mod order;\n",
+                ),
+                (
+                    "src/adapters.rs",
+                    "//! Adapters.\n/// Outside the lift by its body.\n\
+                     pub fn mir_memory_axioms(n: u32) -> u32 {\n    let mut m = n;\n    \
+                     while m > 9 {\n        m /= 2;\n    }\n    m\n}\n",
+                ),
+                ("src/mir/mod.rs", "//! Mir.\npub mod memory;\n"),
+                (
+                    "src/mir/memory.rs",
+                    "//! Memory.\n/// Two.\npub fn axioms() -> u32 {\n    2\n}\n",
+                ),
+                (
+                    "src/order.rs",
+                    "//! Order.\n/// One.\npub fn axioms() -> u32 {\n    1\n}\n",
+                ),
+            ],
+        );
+        let kept = row(&frontier, "given::mir::memory::axioms");
+        assert!(
+            kept.starts_with("[[lifted]]")
+                && kept.contains("definition = \"Behavior::mirMemoryAxioms\""),
+            "{kept}"
+        );
+        let other = row(&frontier, "given::adapters::mir_memory_axioms");
+        assert!(
+            !other.contains("reason = \"collision\"") && !other.contains("mirMemoryAxioms\""),
+            "{other}"
+        );
+        assert!(!frontier.contains("more than one fact"), "{frontier}");
+    }
+
+    #[test]
+    fn a_free_function_keeps_the_name_a_method_reached_first_also_lifts_to() {
+        let (frontier, _) = projected(
+            "kept",
+            &[
+                (
+                    "src/lib.rs",
+                    "//! Kept names.\npub mod embed;\npub mod registry;\n",
+                ),
+                (
+                    "src/embed.rs",
+                    "//! Embed.\n/// A sample.\npub struct Sample {\n    /// Its size.\n    \
+                     pub n: u32,\n}\nimpl Sample {\n    /// Its cases.\n    \
+                     pub fn cases(&self) -> u32 {\n        self.n\n    }\n}\n",
+                ),
+                (
+                    "src/registry.rs",
+                    "//! Registry.\n/// The cases of a sample.\n\
+                     pub fn sample_cases(n: u32) -> u32 {\n    n\n}\n",
+                ),
+            ],
+        );
+        let free = row(&frontier, "kept::registry::sample_cases");
+        assert!(
+            free.starts_with("[[lifted]]")
+                && free.contains("definition = \"Behavior::sampleCases\""),
+            "{free}"
+        );
+        let method = row(&frontier, "kept::embed::Sample::cases");
+        assert!(
+            method.starts_with("[[residue]]") && method.contains("reason = \"collision\""),
+            "{method}"
+        );
     }
 }
