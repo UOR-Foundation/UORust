@@ -13,7 +13,9 @@
 //!   is refused with the key named. The SDK's own upper bounds (PrismPM's
 //!   `config.rs`, LexLean's checks) are not copied here: the SDK's checks of
 //!   the written project (`prismpm check`, `lexlean verify`) are their one
-//!   statement, and a value beyond them is refused there, naming the bound.
+//!   statement, and a value beyond them is refused there (`prismpm check`
+//!   answers `PP1003 project limits are outside fixed bounds`, without
+//!   naming which key).
 //! - Without it, the projection takes the limits of the SDK's own scaffold
 //!   (the `text-request` template of the `prism-code` package, byte copies in
 //!   `assets/limits/`), and says so.
