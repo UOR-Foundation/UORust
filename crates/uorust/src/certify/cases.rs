@@ -487,7 +487,7 @@ mod tests {
                     package: format!("meter_certified_{}", d.to_lowercase()),
                     source: "s".into(),
                     certification: "kernel-checked".into(),
-                    identity: None,
+                    closure: None,
                     edition: None,
                 })
                 .collect(),

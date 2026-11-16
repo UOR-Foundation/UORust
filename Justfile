@@ -204,9 +204,10 @@ certified-project:
 # One export of the projection's roots, all of them or shard `I-N` (every Nth
 # from the Ith), kept in target/uorust-certified for `certified-sync`. A root
 # the prior manifest certified at its identity (the root's closure, the
-# compiler, the descriptor, the project's configuration and linked packages),
-# in a project an export verified (or that verifies once now), is carried from
-# crates/certified byte for byte and never built again.
+# compiler, the descriptor, the project's configuration and linked packages)
+# is carried from crates/certified byte for byte and never built again, once
+# the project verifies: a build of this export that published verified it, or
+# one verification with a single root marked does when none did.
 certified-export shard="" within="":
     rm -rf target/uorust-certify target/uorust-certified
     cargo run -q --locked -p uorust -- certify production --projection target/uorust-self --register frontier.toml --targets crates/certified/targets.json --out target/uorust-certify --kept target/uorust-certified --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --carry crates/certified {{ if within == "" { "" } else { "--within " + within } }} {{ if shard == "" { "" } else { "--shard " + replace_regex(shard, "-.*", "") + " --shards " + replace_regex(shard, ".*-", "") } }}
@@ -217,7 +218,7 @@ certified-export shard="" within="":
 # job has none) no identity is known: `carried` is null and every root not
 # refused is planned as built.
 certified-plan budget:
-    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json --out target/uorust-certify || true`
+    cargo run -q --locked -p uorust -- certify plan --register frontier.toml --prior `ls target/certified-prior/manifest.toml 2>/dev/null || echo crates/certified/manifest.toml` --budget {{budget}} --carry crates/certified `test -d target/uorust-self && echo --projection target/uorust-self --targets crates/certified/targets.json || true`
 
 # Build one root alone and keep all lexlean prints of it in
 # target/certified-diagnose/build.log (certified.yml's diagnose job).
