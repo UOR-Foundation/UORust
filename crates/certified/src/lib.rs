@@ -240,12 +240,6 @@ pub mod expr_is_flat;
 #[path = "../roots/uorust_certified_expr_pieces.rs"]
 pub mod expr_pieces;
 
-/// `uorust::lift::first_free`, certified as `Behavior::firstFree`.
-#[rustfmt::skip]
-#[allow(missing_docs, dead_code, clippy::all)]
-#[path = "../roots/uorust_certified_first_free.rs"]
-pub mod first_free;
-
 /// `uorust::mir::lower::fixed`, certified as `Behavior::fixed`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
