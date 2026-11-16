@@ -595,7 +595,11 @@ impl Graph {
 
     /// The `--link` list of a body that calls `deps`: the libraries
     /// `first` names (core, alloc), then those `deps` reach ([`closure`]),
-    /// each by its kept dumps under `dumps`.
+    /// each by its kept dumps under `dumps`. A library name two of them
+    /// share (two versions of one crate) is left out of the list: a call
+    /// names a library by its crate name alone, and the linker takes a
+    /// link by that name, so a call into either would be bound to the first
+    /// one's body; such calls are left to the dictionary instead.
     ///
     /// [`closure`]: Graph::closure
     pub fn links(
@@ -604,7 +608,7 @@ impl Graph {
         first: &[(String, PathBuf)],
         dumps: &Path,
     ) -> Vec<(String, PathBuf)> {
-        first
+        let all: Vec<(String, PathBuf)> = first
             .iter()
             .cloned()
             .chain(
@@ -612,6 +616,18 @@ impl Graph {
                     .into_iter()
                     .map(|d| (self.locked[d].lib.clone(), dumps.join(self.locked[d].dir()))),
             )
+            .collect();
+        let mut named: BTreeMap<&str, usize> = BTreeMap::new();
+        for (lib, _) in &all {
+            *named.entry(lib.as_str()).or_default() += 1;
+        }
+        let shared: BTreeSet<String> = named
+            .into_iter()
+            .filter(|(_, n)| *n > 1)
+            .map(|(lib, _)| lib.to_string())
+            .collect();
+        all.into_iter()
+            .filter(|(lib, _)| !shared.contains(lib))
             .collect()
     }
 }
@@ -1068,12 +1084,15 @@ pub fn render_links(graph: &Graph, done: &[(usize, Outcome)]) -> String {
         .filter(|(_, o)| matches!(o, Outcome::Lifted(_)))
         .map(|(i, _)| *i)
         .collect();
+    // The lists the embedding is given ([`Graph::links`]), of what was
+    // lifted, the dumps named relative to the index.
+    let lifted_dirs: BTreeSet<String> = lifted.iter().map(|&d| graph.locked[d].dir()).collect();
     let link_args = |deps: &[usize]| -> Vec<String> {
         graph
-            .closure(deps)
+            .links(deps, &[], Path::new(""))
             .into_iter()
-            .filter(|d| lifted.contains(d))
-            .map(|d| format!("{}={}", graph.locked[d].lib, graph.locked[d].dir()))
+            .filter(|(_, d)| lifted_dirs.contains(&d.display().to_string()))
+            .map(|(lib, d)| format!("{lib}={}", d.display()))
             .collect()
     };
     let mut out = String::from(
@@ -2151,6 +2170,25 @@ mod tests {
         // libraries every crate links.
         assert_eq!(g.closure(&[1]), [0, 1]);
         let core = [("core".to_string(), PathBuf::from("core-mir"))];
+        // Two versions of one crate under one library name: neither is
+        // linked, the rest are.
+        let mut two = g.clone();
+        two.locked.push(Locked {
+            name: "bit-vec".into(),
+            version: "0.8.0".into(),
+            lib: "bit_vec".into(),
+            features: vec![],
+            checksum: "sum".into(),
+            deps: vec![],
+        });
+        two.locked[1].deps.push(3);
+        assert_eq!(
+            two.links(&[1], &core, Path::new("d")),
+            [
+                ("core".to_string(), PathBuf::from("core-mir")),
+                ("bit_set".to_string(), PathBuf::from("d/bit-set-0.5.3")),
+            ]
+        );
         assert_eq!(
             g.links(&[1], &core, Path::new("d")),
             [
