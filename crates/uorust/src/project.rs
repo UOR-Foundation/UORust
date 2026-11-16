@@ -414,6 +414,11 @@ pub(crate) fn project(
     if let Some(listing) = candidates {
         files.insert(crate::mir::CANDIDATES.into(), listing.into_bytes());
     }
+    // How the program holds each type, where the embedding's records read it.
+    let rows = match &options.embedding {
+        Some(dir) => rows + &holding_rows(&crate::embedding::holdings(dir, &type_keys(&ctx))?),
+        None => rows,
+    };
     files.insert(FRONTIER.into(), frontier(&notes, &lift, &rows).into_bytes());
     let cited = |id: &str| {
         files
@@ -5887,6 +5892,67 @@ fn embedding_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::Key> {
     keys.into_iter()
         .filter_map(|(path, key)| Some((path, key?)))
         .collect()
+}
+
+/// The key of each struct and enum of a library or binary target, as the
+/// compiler's dump prints it ([`crate::embedding::TypeKey`]), by the
+/// type's path `crate::module::Type`.
+fn type_keys(ctx: &Model) -> BTreeMap<String, crate::embedding::TypeKey> {
+    let mut keys = BTreeMap::new();
+    for package in &ctx.ws.packages {
+        for file in &package.files {
+            let target = &package.targets[file.target];
+            if !matches!(target.kind, TargetKind::Lib | TargetKind::Bin) {
+                continue;
+            }
+            let krate = target.name.replace('-', "_");
+            let module: Vec<String> = file
+                .module
+                .split("::")
+                .filter(|m| !m.is_empty())
+                .map(str::to_string)
+                .collect();
+            let names = file
+                .structs
+                .iter()
+                .map(|s| &s.name)
+                .chain(file.enums.iter().map(|e| &e.name));
+            for name in names {
+                let mut path = vec![krate.clone()];
+                path.extend(module.iter().cloned());
+                path.push(name.clone());
+                keys.insert(
+                    path.join("::"),
+                    crate::embedding::TypeKey {
+                        krate: krate.clone(),
+                        module: module.clone(),
+                        name: name.clone(),
+                    },
+                );
+            }
+        }
+    }
+    keys
+}
+
+/// The frontier's `[[holding]]` rows: each type of the workspace the
+/// embedding's records hold, owned, shared or interior-mutable, with the
+/// chains of wrappers it was found in.
+fn holding_rows(holdings: &BTreeMap<String, crate::ownership::Held>) -> String {
+    let mut out = String::new();
+    for (path, held) in holdings {
+        out.push_str(&format!(
+            "\n[[holding]]\ntype = {}\nholding = \"{}\"\nwithin = [{}]\n",
+            toml_string(path),
+            held.holding.word(),
+            held.within
+                .iter()
+                .map(|w| toml_string(w))
+                .collect::<Vec<_>>()
+                .join(", ")
+        ));
+    }
+    out
 }
 
 /// The frontier's function rows: every function of product code under the

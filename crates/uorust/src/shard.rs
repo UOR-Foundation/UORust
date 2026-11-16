@@ -645,14 +645,28 @@ pub fn embed_workspace_crate(e: &WorkspaceEmbed<'_>) -> Result<Vec<Embedded>, Uo
                 .iter()
                 .filter(|m| only.is_empty() || only.contains(&m.name))
                 .collect();
+            // How the embedded modules' bodies hold each type.
+            let mut holdings = std::collections::BTreeMap::new();
+            for m in &held {
+                let dir = shards.join(&m.name);
+                let mut files: Vec<PathBuf> = std::fs::read_dir(&dir)
+                    .map_err(|x| io(&dir, x))?
+                    .filter_map(Result::ok)
+                    .map(|f| f.path())
+                    .filter(|f| f.extension().is_some_and(|x| x == "mir"))
+                    .collect();
+                files.sort();
+                for f in files {
+                    let text = std::fs::read_to_string(&f).map_err(|x| io(&f, x))?;
+                    crate::ownership::read(&text, &mut holdings);
+                }
+            }
             let file = out.join(RECORD);
-            std::fs::write(
-                &file,
-                render_record(
-                    e.krate, &config, only, &held, &all, &link, &census, &project,
-                ),
-            )
-            .map_err(|x| io(&file, x))?;
+            let mut text = render_record(
+                e.krate, &config, only, &held, &all, &link, &census, &project,
+            );
+            text.push_str(&crate::ownership::render(&holdings));
+            std::fs::write(&file, text).map_err(|x| io(&file, x))?;
             Ok::<_, UorustError>(census)
         };
         if !e.each_module {

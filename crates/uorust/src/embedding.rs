@@ -62,6 +62,8 @@ struct Recorded {
     modules: Vec<String>,
     crate_modules: Vec<String>,
     bodies: Vec<Body>,
+    /// How its bodies hold each type, by the path the dump prints it by.
+    holdings: BTreeMap<String, crate::ownership::Held>,
 }
 
 /// The segments of a path the dump prints, split at each `::` outside an
@@ -225,6 +227,7 @@ fn read(dir: &Path) -> Result<Vec<Recorded>, UorustError> {
             project: text_of("project")?,
             modules: list("modules"),
             crate_modules: list("crate_modules"),
+            holdings: crate::ownership::parse(&doc),
             krate,
             bodies,
         });
@@ -269,6 +272,51 @@ pub(crate) fn closed(
         }
         if !at.is_empty() {
             out.insert(path.clone(), at);
+        }
+    }
+    Ok(out)
+}
+
+/// A type of the surface as the dump prints it: its crate, its file's
+/// module path and its name.
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) struct TypeKey {
+    pub(crate) krate: String,
+    pub(crate) module: Vec<String>,
+    pub(crate) name: String,
+}
+
+/// How the records under `dir` hold each type of `types` (each type's
+/// path and its key), in every configuration and module they hold: the
+/// most it is held anywhere. A record names a type of its crate by its
+/// crate-relative path, or, in a signature, by its name alone, which
+/// names the one type of that name in the crate or none. A type no
+/// record holds is not stated.
+pub(crate) fn holdings(
+    dir: &Path,
+    types: &BTreeMap<String, TypeKey>,
+) -> Result<BTreeMap<String, crate::ownership::Held>, UorustError> {
+    let mut out: BTreeMap<String, crate::ownership::Held> = BTreeMap::new();
+    for r in read(dir)? {
+        for (printed, held) in &r.holdings {
+            let segments: Vec<&str> = printed.split("::").collect();
+            let Some((name, module)) = segments.split_last() else {
+                continue;
+            };
+            let found: Vec<&String> = types
+                .iter()
+                .filter(|(_, t)| t.krate == r.krate && t.name == *name)
+                .filter(|(_, t)| segments.len() == 1 || t.module == module)
+                .map(|(path, _)| path)
+                .collect();
+            if let [path] = found.as_slice() {
+                match out.get_mut(*path) {
+                    Some(h) => h.merge(held),
+                    None => {
+                        out.insert((*path).clone(), held.clone());
+                    }
+                }
+            }
         }
     }
     Ok(out)
@@ -446,6 +494,82 @@ mod tests {
             status(&register, "probe::first"),
             Status::Residue(..)
         ));
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
+    #[test]
+    fn lift_the_frontier_states_how_each_type_is_held() {
+        let work = std::env::temp_dir().join(format!("uorust-holding-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let records = work.join("records");
+        let default = "features = []\ndefault_features = true\nall_features = false\n";
+        let all = "features = []\ndefault_features = true\nall_features = true\n";
+        lift_write_record(&records.join("default"), default, &[], &[]);
+        lift_write_record(&records.join("all"), all, &[], &[]);
+        // As the embedding reads a dump of each configuration: `Wrap` is
+        // owned in one and passed as `Rc<RefCell<_>>` in the other (by its
+        // signature's trimmed name), `Pair` shared; a type of no module of
+        // the crate is no type of it.
+        let held = |dir: &str, dump: &str| {
+            let mut read = BTreeMap::new();
+            crate::ownership::read(dump, &mut read);
+            let file = records.join(dir).join(RECORD);
+            let mut text = std::fs::read_to_string(&file).unwrap();
+            text.push_str(&crate::ownership::render(&read));
+            std::fs::write(&file, text).unwrap();
+        };
+        held(
+            "default",
+            "fn f(_1: Wrap<u32>) -> () {\n    let _2: std::sync::Arc<Pair<u8>>;\n}\n",
+        );
+        held(
+            "all",
+            "fn g(_1: &Rc<RefCell<Wrap<u32>>>) -> () {\n    let _2: other::Wrap<u8>;\n}\n",
+        );
+        let ws = work.join("ws");
+        lift_projected(&work, &records);
+        let options = crate::Options {
+            name: "probe".into(),
+            last_modified: "2026-11-15T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+            embedding: Some(records.clone()),
+        };
+        let files = crate::project_workspace(&ws, &options).expect("a projection");
+        let frontier: toml::Table = String::from_utf8(files["frontier.toml"].clone())
+            .unwrap()
+            .parse()
+            .unwrap();
+        let rows: Vec<(String, String, Vec<String>)> = frontier["holding"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|r| {
+                let text = |k: &str| r[k].as_str().unwrap().to_string();
+                let within = r["within"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .map(|w| w.as_str().unwrap().to_string())
+                    .collect();
+                (text("type"), text("holding"), within)
+            })
+            .collect();
+        assert_eq!(
+            rows,
+            [
+                (
+                    "probe::Pair".to_string(),
+                    "shared".to_string(),
+                    vec!["Arc<_>".to_string()]
+                ),
+                (
+                    "probe::Wrap".to_string(),
+                    "interior-mutable".to_string(),
+                    vec!["Rc<RefCell<_>>".to_string()]
+                ),
+            ]
+        );
         std::fs::remove_dir_all(&work).unwrap();
     }
 }

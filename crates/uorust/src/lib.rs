@@ -30,6 +30,7 @@ mod lift;
 pub mod mir;
 mod names;
 mod order;
+mod ownership;
 mod project;
 pub mod queue;
 pub mod register;
