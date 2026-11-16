@@ -22,6 +22,7 @@ pub mod embed;
 mod error;
 mod expand;
 mod facts;
+pub mod figures;
 mod ingest;
 pub mod layouts;
 mod lex;

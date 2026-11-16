@@ -71,6 +71,10 @@ enum Command {
     /// newer head, each row's only while it is the row they were measured
     /// on.
     Carry(CarryArgs),
+    /// Give every numeric literal of a workspace a home in the model: the
+    /// figure register, the generated package, the rewrite and the gate.
+    #[command(subcommand)]
+    Figures(Figures),
     /// Print the route table.
     Routes,
     /// The certified translator: export the lifted translator through
@@ -362,6 +366,62 @@ struct CoreArgs {
     /// embed --shallow` bridges to the evaluator.
     #[arg(long)]
     lexlean: Option<PathBuf>,
+}
+
+/// The steps of the figures (`uorust::figures`).
+#[derive(Subcommand)]
+enum Figures {
+    /// Write the figure register of a workspace: one row per counted
+    /// numeric-literal site, and the figure rows the register already holds.
+    Extract(FigureArgs),
+    /// Write the generated package (and the LexLean module) from the
+    /// register, or with `--check` list each file that differs.
+    Write {
+        #[command(flatten)]
+        register: FigureFiles,
+        /// The generated package's directory.
+        #[arg(long)]
+        out: PathBuf,
+        /// The LexLean module that states the same figures.
+        #[arg(long)]
+        lexlean: Option<PathBuf>,
+        /// Write nothing; fail on each file that differs.
+        #[arg(long)]
+        check: bool,
+    },
+    /// Replace each site that has a figure by its generated name, and list
+    /// each site no rewrite can place with why.
+    Rewrite(FigureArgs),
+    /// The gate: no counted site without a figure, no figure without a
+    /// home, the register and the generated files current.
+    Check {
+        #[command(flatten)]
+        args: FigureArgs,
+        /// The generated package's directory, checked current.
+        #[arg(long)]
+        package: Option<PathBuf>,
+        /// The LexLean module, checked current.
+        #[arg(long, requires = "package")]
+        lexlean: Option<PathBuf>,
+    },
+}
+
+#[derive(clap::Args)]
+struct FigureFiles {
+    /// The rule file (`uorust/figure-rules/1`).
+    #[arg(long)]
+    rules: PathBuf,
+    /// The figure register (`uorust/figures/1`).
+    #[arg(long)]
+    register: PathBuf,
+}
+
+#[derive(clap::Args)]
+struct FigureArgs {
+    /// The workspace root.
+    workspace: PathBuf,
+    #[command(flatten)]
+    files: FigureFiles,
 }
 
 #[derive(clap::Args)]
@@ -939,6 +999,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Certify(step) => certify(step),
+        Command::Figures(step) => figures(step),
         Command::Routes => {
             for route in uorust::ROUTES {
                 println!(
@@ -947,6 +1008,91 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 );
             }
             Ok(())
+        }
+    }
+}
+
+/// A step of the figures.
+fn figures(step: Figures) -> Result<(), UorustError> {
+    use uorust::figures;
+    let counts = |c: &figures::Counts| {
+        println!(
+            "figures: {} counted sites, {} with a figure, {} without; {} rewritten; {} figures, \
+             {} without a home, {} whose home names no check",
+            c.sites, c.figured, c.free, c.rewritten, c.figures, c.unhomed, c.unchecked
+        );
+        for (why, n) in &c.refusals {
+            println!("figures: {n} sites no rewrite can place: {why}");
+        }
+    };
+    match step {
+        Figures::Extract(a) => {
+            let done = figures::extract(&a.workspace, &a.files.rules, &a.files.register)?;
+            counts(&done.counts);
+            for v in &done.vanished {
+                println!("figures: a listed site is gone: {v}");
+            }
+            Ok(())
+        }
+        Figures::Write {
+            register,
+            out,
+            lexlean,
+            check,
+        } => {
+            let w = figures::write(
+                &register.rules,
+                &register.register,
+                &out,
+                lexlean.as_deref(),
+                check,
+            )?;
+            if check {
+                if !w.files.is_empty() {
+                    return Err(UorustError::Figures(
+                        w.files
+                            .iter()
+                            .map(|f| format!("{f} is not what the writer writes now"))
+                            .collect(),
+                    ));
+                }
+                println!("figures: the generated files are current");
+            } else {
+                println!("figures: wrote {}", w.files.join(", "));
+            }
+            Ok(())
+        }
+        Figures::Rewrite(a) => {
+            let r = figures::rewrite(&a.workspace, &a.files.rules, &a.files.register)?;
+            println!(
+                "figures: {} sites replaced in {} files; {} refused",
+                r.replaced,
+                r.files.len(),
+                r.refused.len()
+            );
+            for x in &r.refused {
+                println!("figures: refused {}: {}", x.key, x.why);
+            }
+            Ok(())
+        }
+        Figures::Check {
+            args,
+            package,
+            lexlean,
+        } => {
+            let c = figures::check(
+                &args.workspace,
+                &args.files.rules,
+                &args.files.register,
+                package.as_deref(),
+                lexlean.as_deref(),
+            )?;
+            counts(&c.counts);
+            if c.findings.is_empty() {
+                Ok(())
+            } else {
+                Err(UorustError::Figures(c.findings))
+            }
         }
     }
 }

@@ -258,7 +258,8 @@ fn advisory(
     }))
 }
 
-fn metadata(root: &Path) -> Result<Value, UorustError> {
+/// `cargo metadata` of a workspace, without its dependencies.
+pub(crate) fn metadata(root: &Path) -> Result<Value, UorustError> {
     let cargo = std::env::var_os("CARGO").unwrap_or_else(|| "cargo".into());
     let output = Command::new(cargo)
         .args([
@@ -469,6 +470,7 @@ fn package(
             .get("rust_version")
             .and_then(Value::as_str)
             .map(str::to_string),
+        edition: text(meta, "edition"),
         authors: meta
             .get("authors")
             .and_then(Value::as_array)
@@ -589,15 +591,15 @@ fn lock(path: &Path) -> Result<Vec<LockedPackage>, UorustError> {
 
 /// A file a `mod` declaration names, as the walk over a package's module
 /// tree meets it.
-struct ModFile {
-    file: PathBuf,
+pub(crate) struct ModFile {
+    pub(crate) file: PathBuf,
     /// The directory its own out-of-line modules are found from.
-    dir: PathBuf,
+    pub(crate) dir: PathBuf,
     /// The directory under `dir` that holds them where the file is neither
     /// a `mod.rs` nor named by a `#[path]`: its own name.
-    own: Option<String>,
+    pub(crate) own: Option<String>,
     /// Whether the declaration that names it stands in test code.
-    test: bool,
+    pub(crate) test: bool,
 }
 
 /// The files of a package that are test code as a whole: each file an
@@ -648,7 +650,7 @@ fn test_files(roots: &[PathBuf], trees: &BTreeMap<&Path, &syn::File>) -> BTreeSe
 /// the way; and a `#[path]` names the file itself, or an inline module's
 /// directory. Both files a plain declaration could mean are given: the one
 /// that exists is the module.
-fn declared_files(
+pub(crate) fn declared_files(
     items: &[syn::Item],
     dir: &Path,
     own: Option<&str>,
@@ -714,14 +716,14 @@ fn path_attr(list: &[syn::Attribute]) -> Option<String> {
 }
 
 /// The directory of a file.
-fn parent(file: &Path) -> PathBuf {
+pub(crate) fn parent(file: &Path) -> PathBuf {
     file.parent().map(Path::to_path_buf).unwrap_or_default()
 }
 
 /// A path without its `.` and `..` components, each `..` taking the
 /// component before it: the path a `#[path]` that climbs out of its
 /// directory names.
-fn normal(path: &Path) -> PathBuf {
+pub(crate) fn normal(path: &Path) -> PathBuf {
     let mut out = PathBuf::new();
     for part in path.components() {
         match part {
@@ -828,6 +830,7 @@ fn source(
     let product = matches!(kind, TargetKind::Lib | TargetKind::Bin);
     let lib = matches!(kind, TargetKind::Lib);
     let test_target = matches!(kind, TargetKind::Test);
+    file.test = test_target || test_file;
     items(
         &parsed.items,
         &rel,
@@ -946,6 +949,12 @@ fn named(attr: &Attr, name: &str) -> bool {
 /// several `#[cfg]` attributes hold together, so one such is enough.
 fn is_cfg_test(attrs: &[Attr]) -> bool {
     attrs.iter().any(|a| a.test_only)
+}
+
+/// Whether attributes make their item test code, by the one reading the
+/// facts use.
+pub(crate) fn test_only(list: &[syn::Attribute]) -> bool {
+    is_cfg_test(&attrs(list))
 }
 
 fn doc_of(attrs: &[Attr]) -> String {
