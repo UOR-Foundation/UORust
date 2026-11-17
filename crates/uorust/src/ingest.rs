@@ -22,7 +22,7 @@ use crate::facts::{
 /// `lexlean production` exported it.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
-#[path = "foreign_model.rs"]
+#[path = "../spec/foreign_model.rs"]
 mod foreign_model;
 
 /// The name a model file of a dependency carries after its package's

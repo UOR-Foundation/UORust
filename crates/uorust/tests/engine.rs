@@ -1982,3 +1982,47 @@ fn every_core_body_is_embedded_ue_19() {
     assert!(!harness.exists());
     let _ = std::fs::remove_dir_all(&work);
 }
+
+#[test]
+fn a_method_writing_its_struct_threads_it_ue_21() {
+    let planted = scratch(
+        "ue21-threading",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"mint\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "/// A mint.\npub struct Mint {\n    /// Its supply.\n    pub supply: u64,\n    \
+                 /// Whether it is initialized.\n    pub is_initialized: u8,\n}\n\nimpl Mint {\n    \
+                 /// Marks it initialized.\n    pub fn set_initialized(&mut self) {\n        \
+                 self.is_initialized = 1;\n    }\n\n    /// Writes the supply twice.\n    \
+                 pub fn reset(&mut self, supply: u64) {\n        self.supply = supply;\n        \
+                 self.is_initialized = 0;\n        self.supply = 7;\n    }\n\n    \
+                 /// Reads through a mutable borrow.\n    pub fn take(&mut self) -> u64 {\n        \
+                 self.supply\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "mint");
+    let lifted = lifted_functions(&files);
+    for setter in ["mint::Mint::set_initialized", "mint::Mint::reset"] {
+        assert!(
+            lifted.iter().any(|f| f == setter),
+            "{setter} lifts: {lifted:?}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    // The record the model's threadedRecord gives: the written field holds
+    // the value, every other is projected from the value before the write.
+    assert!(
+        behavior
+            .contains("(record Mint {supply := (project selfValue supply), isInitialized := 1})"),
+        "{behavior}"
+    );
+    // The last write to supply wins: 7 is bound after the parameter.
+    assert!(behavior.contains("supply := 7"), "{behavior}");
+    let detail = residue_detail(&files, "mint::Mint::take").expect("take is a residue row");
+    assert!(detail.contains("takes &mut self of"), "{detail}");
+}

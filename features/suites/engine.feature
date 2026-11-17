@@ -120,3 +120,9 @@ Feature: engine
     Given core's MIR dumps, rust-src at the pinned toolchain and the MIR semantics module
     When the suite exercises UE-19
     Then every body is a value of the MIR datatype whose kinds are rustc's, a long list nests no deeper than its root, the constructs the evaluator does not define are read from its source, each register row records its embedding and what blocks it, and each sampled case is a theorem that the evaluator returns what rustc's build returned
+
+  @UE-21 @build
+  Scenario: A method that writes its own struct threads it
+    Given a planted crate whose struct has setters taking &mut self and one taking &mut self that returns a value
+    When the suite exercises UE-21
+    Then each setter lifts as the function from the struct to its new value, a field write binds the record the model's threadedRecord gives with every other field projected from the value before it, the last write to a field wins, and the method that returns a value is a residue row naming its &mut self receiver

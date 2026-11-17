@@ -290,6 +290,37 @@ fn named_in(types: &BTreeSet<Ty>) -> BTreeSet<String> {
         .collect()
 }
 
+/// `Threading::threadedRecord` of the model (`app/src/Threading.lex.tex`), as
+/// `lexlean production` exported it.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../spec/threaded_record.rs"]
+mod threaded_record_model;
+
+/// The record `whole` of type `ty` with `field` written to `value`, its
+/// `fields` in declaration order: `Threading::threadedRecord` of the model.
+fn threaded_record<'a>(
+    ty: &str,
+    whole: &str,
+    fields: impl DoubleEndedIterator<Item = &'a str>,
+    field: &str,
+    value: &str,
+) -> String {
+    use threaded_record_model::{run, List, Str};
+    let names = fields
+        .rev()
+        .fold(List::nil(), |tail, f| List::cons(Str::lit(f), tail));
+    run(
+        Str::lit(ty),
+        Str::lit(whole),
+        names,
+        Str::lit(field),
+        Str::lit(value),
+    )
+    .text()
+    .to_string()
+}
+
 /// A struct value from its fields in declaration order: a record, or the
 /// constructor `mk` of a struct of a recursive family.
 pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Types) -> String {
@@ -1324,6 +1355,7 @@ impl Types {
             Some(Owner::Implementor) | None => None,
         };
         let mut params = Vec::new();
+        let mut threaded = false;
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
@@ -1336,7 +1368,12 @@ impl Types {
                             || self.structs.contains_key(*name)
                             || self.datas.contains_key(*name) =>
                     {
-                        if !*plain {
+                        // `&mut self` of a method that returns nothing
+                        // threads the value (`Threading` of the model): it
+                        // lifts as the function to the value's new state.
+                        let threads = *receiver == Some("&mut self") && sig.output.is_none();
+                        threaded |= threads;
+                        if !*plain && !threads {
                             return Err(Residue::Signature(format!(
                                 "takes {} of {name}: the lift reads self and &self as the \
                                  value, and threads no other receiver",
@@ -1367,9 +1404,10 @@ impl Types {
                 }
             }
         }
-        let result = match &sig.output {
-            None => Ty::Unit,
-            Some(t) => self.ty_in(t, named)?,
+        let result = match (&sig.output, named) {
+            (None, Some(name)) if threaded => Ty::Named(name.to_string()),
+            (None, _) => Ty::Unit,
+            (Some(t), _) => self.ty_in(t, named)?,
         };
         Ok((params, result))
     }
@@ -8088,24 +8126,26 @@ fn updated(
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
             let target = local_name(member);
-            let mut acc = acc;
-            let mut parts = Vec::new();
-            for (field, fty) in fields {
-                let v = if *field == target {
-                    let (v, after) = value_of(&a.right, fty, acc)?;
-                    acc = after;
-                    v
-                } else if env.types.boxed(name) {
-                    format!("({} {current})", Types::accessor(name, field))
-                } else {
-                    format!("(project {current} {field})")
-                };
-                parts.push((field, v));
-            }
-            if !fields.iter().any(|(f, _)| *f == target) {
+            let Some((_, fty)) = fields.iter().find(|(f, _)| *f == target) else {
                 return Err(Residue::Form(format!("a field update of {name}")));
+            };
+            let (v, acc) = value_of(&a.right, fty, acc)?;
+            if env.types.boxed(name) {
+                let parts: Vec<(&String, String)> = fields
+                    .iter()
+                    .map(|(field, _)| match *field == target {
+                        true => (field, v.clone()),
+                        false => (
+                            field,
+                            format!("({} {current})", Types::accessor(name, field)),
+                        ),
+                    })
+                    .collect();
+                return Ok((struct_value(name, &parts, &env.types), acc));
             }
-            Ok((struct_value(name, &parts, &env.types), acc))
+            // A record: the one `Threading::threadedRecord` of the model gives.
+            let names = fields.iter().map(|(f, _)| f.as_str());
+            Ok((threaded_record(name, current, names, &target, &v), acc))
         }
         (rs::RustExpr::Assign(a), _) => value_of(&a.right, ty, acc),
         // `xs.extend(o)` of an option: the one value it holds, if any.
@@ -10588,6 +10628,9 @@ pub(crate) struct Candidate<'a> {
     pub(crate) params: Vec<Param>,
     pub(crate) result: Ty,
     pub(crate) block: &'a rs::Block,
+    /// Whether it takes `&mut self` and returns nothing: its body ends in
+    /// the value it threads.
+    pub(crate) threads: bool,
     /// The `use` imports of its file: name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
     /// How its file reads the names two of its crate's types share: each
@@ -10716,7 +10759,15 @@ pub(crate) fn lift_all(
                     None => env.fns.remove(key),
                 };
             }
-            let lifted = block(&c.block.stmts, &env, &ctx, Acc::default(), Some(&c.result));
+            let threaded: Vec<rs::Stmt>;
+            let stmts = if c.threads {
+                let tail = rs::Stmt::Expr(rs::RustExpr::Path(rs::Path::ident("self")), false);
+                threaded = c.block.stmts.iter().cloned().chain([tail]).collect();
+                &threaded[..]
+            } else {
+                &c.block.stmts[..]
+            };
+            let lifted = block(stmts, &env, &ctx, Acc::default(), Some(&c.result));
             let outcome = match lifted {
                 Ok(((body, ty), acc)) if ty.same(&c.result) => {
                     let descends = acc.descends.clone();
@@ -11660,6 +11711,7 @@ mod tests {
             params,
             result,
             block: &block,
+            threads: false,
             imports: BTreeMap::from([("Sha256".to_string(), "sha2::Sha256".to_string())]),
             aliases: BTreeMap::new(),
             homonyms: BTreeMap::new(),
@@ -12256,7 +12308,9 @@ mod tests {
                 name: "Square",
                 receiver: Some(receiver),
             };
-            let src = format!("fn grow({receiver}, by: bool) {{}}");
+            // `&mut self` of a method that returns nothing threads the
+            // value (UE-21); one that returns a value does not.
+            let src = format!("fn grow({receiver}, by: bool) -> bool {{ by }}");
             assert_eq!(
                 method_signature(&src, Some(&owner), &types).err(),
                 Some(Residue::Signature(format!(

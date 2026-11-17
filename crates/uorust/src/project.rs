@@ -4040,6 +4040,11 @@ fn behavior(
                     params,
                     result,
                     block,
+                    // A type's own method threads its value; a trait's default
+                    // method has none to thread.
+                    threads: method.is_some()
+                        && f.receiver.as_deref() == Some("&mut self")
+                        && sig.output.is_none(),
                     imports: ctx.file(r).imports.clone(),
                     aliases: overlays[&(r.pkg, r.file)].clone(),
                     homonyms: call_reading(ctx, &homonyms, r),
@@ -4086,6 +4091,7 @@ fn behavior(
                     params: Vec::new(),
                     result,
                     block,
+                    threads: false,
                     imports: file.imports.clone(),
                     aliases: overlays[&(pkg, fi)].clone(),
                     homonyms: homonym_reading(ctx, &homonyms, pkg, fi),
@@ -6796,8 +6802,8 @@ mod tests {
                  pub fn radius(&self) -> u32 {\n        self.0\n    }\n}\n\
                  impl Bag {\n    /// How many blobs.\n    \
                  pub fn count(&self) -> u32 {\n        1\n    }\n}\n\
-                 impl Square {\n    /// Grow.\n    pub fn grow(&mut self, by: u32) {\n        \
-                 self.side = self.side.saturating_add(by);\n    }\n}\n\
+                 impl Square {\n    /// Grow, and say the new side.\n    pub fn grow(&mut self, by: u32) -> u32 {\n        \
+                 self.side = self.side.saturating_add(by);\n        self.side\n    }\n}\n\
                  /// Something that scales by a factor of some type.\n\
                  pub trait Scale<T> {\n    /// The side scaled.\n    \
                  fn scale(&self, by: T) -> u32;\n}\n\
