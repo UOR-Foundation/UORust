@@ -126,3 +126,9 @@ Feature: engine
     Given small synthetic workspaces and figure registers written for them
     When the suite exercises UE-21
     Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, and the gate holds the workspace to its register
+
+  @UE-22 @build
+  Scenario: Unconditional exported numeric parameter macros of workspace libraries preserve the surface lift: an absolute invocation through a declared Cargo dependency alias with no arguments and one empty matcher expanding to one numeric literal is read as that literal, with the source facts and function identities unchanged; conditional, ambiguous, argument-taking and unknown macros remain residue
+    Given a workspace library and its renamed parameter dependency
+    When the suite exercises UE-22
+    Then the direct and constant-mediated literal macros lift and other macro forms stay residue

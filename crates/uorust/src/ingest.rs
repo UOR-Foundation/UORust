@@ -41,6 +41,7 @@ pub(crate) fn workspace(
         syntax.files.extend(files);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
+    crate::literal_macros::expand(&root, &packages, &metadata, &mut syntax);
     let lock = lock(&root.join("Cargo.lock"))?;
     let deny = root.join("deny.toml");
     let deny_ignores = if deny.is_file() {
@@ -823,7 +824,7 @@ fn unparsed(
     (file, FileSyntax::default())
 }
 
-fn source(
+pub(crate) fn source(
     parsed: &syn::File,
     rel: String,
     target: usize,

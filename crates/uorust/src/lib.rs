@@ -30,6 +30,7 @@ mod lex;
 pub mod library;
 mod lift;
 pub mod limits;
+mod literal_macros;
 pub mod mir;
 mod names;
 mod order;

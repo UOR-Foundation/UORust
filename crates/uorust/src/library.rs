@@ -45,7 +45,7 @@ const PROTOCOL: &str = "uorust/library-mir/2";
 /// it reaches would have to follow every call to stay true; the whole
 /// source cannot miss one. A file of the crate this list does not name
 /// fails `stdlink_the_code_digest_names_every_source_file_of_the_tool`.
-const CODE: [(&str, &str); 55] = [
+const CODE: &[(&str, &str)] = &[
     ("src/admit.rs", include_str!("admit.rs")),
     ("src/assets.rs", include_str!("assets.rs")),
     ("src/ast.rs", include_str!("ast.rs")),
@@ -62,6 +62,7 @@ const CODE: [(&str, &str); 55] = [
     ("src/facts.rs", include_str!("facts.rs")),
     ("src/figures.rs", include_str!("figures.rs")),
     ("src/ingest.rs", include_str!("ingest.rs")),
+    ("src/literal_macros.rs", include_str!("literal_macros.rs")),
     ("src/layouts.rs", include_str!("layouts.rs")),
     ("src/lex.rs", include_str!("lex.rs")),
     ("src/lib.rs", include_str!("lib.rs")),
