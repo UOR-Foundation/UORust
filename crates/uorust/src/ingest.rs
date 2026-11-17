@@ -18,6 +18,20 @@ use crate::facts::{
     Workspace,
 };
 
+/// The name a model file of a dependency carries after its package's
+/// directory: `<model of solana_pubkey>.rs`, which no Rust module path spells.
+const MODEL_OF: &str = "<model of ";
+
+/// The text of the model file at `rel`: what `Foreign::foreignModel` of the
+/// model declares for the dependency it names, `None` for any other file or
+/// a dependency the model does not declare.
+pub(crate) fn model_source(rel: &str) -> Option<String> {
+    let (_, tail) = rel.rsplit_once(MODEL_OF)?;
+    let dep = tail.strip_suffix(">.rs")?;
+    let model = uorust_certified::foreign_model::run(uorust_certified::foreign_model::Str::lit(dep));
+    Some(model.text().to_string()).filter(|t| !t.is_empty())
+}
+
 /// Read a workspace from its root directory: its facts, and the syntax the
 /// lift reads.
 pub(crate) fn workspace(
@@ -36,9 +50,33 @@ pub(crate) fn workspace(
     let mut packages = Vec::new();
     let mut syntax = Syntax::default();
     for member in members {
-        let (package, files) = package(&root, member, &workspace_lints)?;
-        packages.push(package);
+        let (mut package, files) = package(&root, member, &workspace_lints)?;
         syntax.files.extend(files);
+        // The types of a registry dependency the model declares
+        // (`Foreign::foreignModel`), read as a source file of the crate's
+        // library: the lift reads them as it reads the crate's own.
+        if let Some(lib) = package.targets.iter().position(|t| t.kind == TargetKind::Lib) {
+            let deps: BTreeSet<String> = package
+                .deps
+                .iter()
+                .filter(|d| d.path.is_none() && d.kind == "normal")
+                .map(|d| d.name.replace('-', "_"))
+                .collect();
+            for dep in deps {
+                let rel = format!("{}/{MODEL_OF}{dep}>.rs", package.dir);
+                let Some(text) = model_source(&rel) else {
+                    continue;
+                };
+                let parsed = syn::parse_file(&text).map_err(|e| {
+                    UorustError::Tool(format!("the model of {dep} does not parse: {e}"))
+                })?;
+                let (file, file_syntax) =
+                    source(&parsed, rel.clone(), lib, String::new(), &TargetKind::Lib, false);
+                package.files.push(file);
+                syntax.files.insert(rel, file_syntax);
+            }
+        }
+        packages.push(package);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
     let name = root

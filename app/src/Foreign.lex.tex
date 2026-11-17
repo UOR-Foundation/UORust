@@ -1,0 +1,96 @@
+\begin{lexlean}{Foreign}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\title{Boolean}
+\begin{semanticmodule}
+structure{
+  name: ForeignModel,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: crateName, type: String}, {name: rust, type: String}]
+}
+
+definition{
+  name: foreignModels,
+  parameters: [],
+  result: (List ForeignModel),
+  body: (cons (record ForeignModel {crateName := "solana_pubkey", rust := "pub struct Pubkey(pub [u8; 32]);"}) (cons (record ForeignModel {crateName := "solana_address", rust := "pub struct Address(pub [u8; 32]);"}) (cons (record ForeignModel {crateName := "solana_program_option", rust := "pub type COption<T> = Option<T>;"}) (cons (record ForeignModel {crateName := "solana_program_error", rust := "pub enum ProgramError { Custom(u32), InvalidArgument, InvalidInstructionData, InvalidAccountData, AccountDataTooSmall, InsufficientFunds, IncorrectProgramId, MissingRequiredSignature, AccountAlreadyInitialized, UninitializedAccount, NotEnoughAccountKeys, AccountBorrowFailed, MaxSeedLengthExceeded, InvalidSeeds, BorshIoError, AccountNotRentExempt, UnsupportedSysvar, IllegalOwner, MaxAccountsDataAllocationsExceeded, InvalidRealloc, MaxInstructionTraceLengthExceeded, BuiltinProgramsMustConsumeComputeUnits, InvalidAccountOwner, ArithmeticOverflow, Immutable, IncorrectAuthority } pub type ProgramResult = Result<(), ProgramError>;"}) (cons (record ForeignModel {crateName := "solana_instruction", rust := "pub struct AccountMeta { pub pubkey: Pubkey, pub is_signer: bool, pub is_writable: bool } pub struct Instruction { pub program_id: Pubkey, pub accounts: Vec<AccountMeta>, pub data: Vec<u8> }"}) (cons (record ForeignModel {crateName := "pinocchio", rust := "pub type Pubkey = [u8; 32]; pub enum ProgramError { Custom(u32), InvalidArgument, InvalidInstructionData, InvalidAccountData, AccountDataTooSmall, InsufficientFunds, IncorrectProgramId, MissingRequiredSignature, AccountAlreadyInitialized, UninitializedAccount, NotEnoughAccountKeys, AccountBorrowFailed, MaxSeedLengthExceeded, InvalidSeeds, BorshIoError, AccountNotRentExempt, UnsupportedSysvar, IllegalOwner, MaxAccountsDataAllocationsExceeded, InvalidRealloc, MaxInstructionTraceLengthExceeded, BuiltinProgramsMustConsumeComputeUnits, InvalidAccountOwner, ArithmeticOverflow, Immutable, IncorrectAuthority } pub type ProgramResult = Result<(), ProgramError>;"}) (nil ForeignModel))))))),
+  executable: true
+}
+
+definition{
+  name: modelIn,
+  parameters: [wanted : String, models : (List ForeignModel)],
+  result: String,
+  body: (match models
+    | List.nil => ""
+    | List.cons head rest => (if (prim equal (project head crateName) wanted : Bool) then (project head rust) else (modelIn wanted rest))),
+  executable: true,
+  recursive_argument: models
+}
+
+definition{
+  name: foreignModel,
+  parameters: [wanted : String],
+  result: String,
+  body: (modelIn wanted (foreignModels)),
+  executable: true,
+  production: {effects: [allocation, recursion], targets: [rust-std]}
+}
+
+definition{
+  name: cratesDistinct,
+  parameters: [models : (List ForeignModel)],
+  result: Bool,
+  body: (match models
+    | List.nil => true
+    | List.cons head rest => (if (prim equal (modelIn (project head crateName) rest) "" : Bool) then (cratesDistinct rest) else false)),
+  recursive_argument: models
+}
+
+definition{
+  name: everyModelDeclares,
+  parameters: [models : (List ForeignModel)],
+  result: Bool,
+  body: (match models
+    | List.nil => true
+    | List.cons head rest => (if (prim equal (project head rust) "" : Bool) then false else (everyModelDeclares rest))),
+  recursive_argument: models
+}
+
+theorem{
+  name: foreignCratesAreDistinct,
+  parameters: [],
+  statement: ((cratesDistinct (foreignModels)) = true),
+  proof: decide{}
+}
+
+theorem{
+  name: everyForeignModelDeclares,
+  parameters: [],
+  statement: ((everyModelDeclares (foreignModels)) = true),
+  proof: decide{}
+}
+
+theorem{
+  name: unmodeledCrateHasNoModel,
+  parameters: [],
+  statement: ((foreignModel "serde_json") = ""),
+  proof: decide{}
+}
+
+theorem{
+  name: solanaPubkeyIsThirtyTwoBytes,
+  parameters: [],
+  statement: ((foreignModel "solana_pubkey") = "pub struct Pubkey(pub [u8; 32]);"),
+  proof: decide{}
+}
+
+theorem{
+  name: pinocchioPubkeyIsThirtyTwoBytes,
+  parameters: [],
+  statement: ((foreignModel "pinocchio") = "pub type Pubkey = [u8; 32]; pub enum ProgramError { Custom(u32), InvalidArgument, InvalidInstructionData, InvalidAccountData, AccountDataTooSmall, InsufficientFunds, IncorrectProgramId, MissingRequiredSignature, AccountAlreadyInitialized, UninitializedAccount, NotEnoughAccountKeys, AccountBorrowFailed, MaxSeedLengthExceeded, InvalidSeeds, BorshIoError, AccountNotRentExempt, UnsupportedSysvar, IllegalOwner, MaxAccountsDataAllocationsExceeded, InvalidRealloc, MaxInstructionTraceLengthExceeded, BuiltinProgramsMustConsumeComputeUnits, InvalidAccountOwner, ArithmeticOverflow, Immutable, IncorrectAuthority } pub type ProgramResult = Result<(), ProgramError>;"),
+  proof: decide{}
+}
+\end{semanticmodule}
+\end{lexlean}

@@ -1007,3 +1007,11 @@ pub mod word_char;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_wrap_lets.rs"]
 pub mod wrap_lets;
+
+/// `Foreign::foreignModel` of the UORust model (`app/src/Foreign.lex.tex`):
+/// a spec definition exported by `lexlean production`, not a lifted
+/// translator function, so no manifest root keys it.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_spec_foreign_model.rs"]
+pub mod foreign_model;
