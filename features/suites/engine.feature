@@ -132,3 +132,21 @@ Feature: engine
     Given a workspace library and its renamed parameter dependency
     When the suite exercises UE-22
     Then the direct and constant-mediated literal macros lift and other macro forms stay residue
+
+  @UE-23 @build
+  Scenario: A library embedding resolves crate-relative implementation spans against the defining crate
+    Given two libraries with different implementation headers at the same relative source path and a conflicting root file
+    When the suite exercises UE-23
+    Then each inherent method resolves only through its own library's source and a missing own source stays unresolved
+
+  @UE-24 @build
+  Scenario: An invalid recursive-descent parameter is refused without a panic
+    Given a caller with two parameters and descent evidence naming parameter index two
+    When the suite exercises UE-24
+    Then the result is typed form residue and valid single-parameter evidence still names its own parameter
+
+  @UE-25 @build
+  Scenario: A cross-file constant is emitted before its caller
+    Given a caller preceding its constant and a mutual group whose member needs a later definition
+    When the suite exercises UE-25
+    Then dependencies precede their callers and the mutual group remains together without treating string contents as calls

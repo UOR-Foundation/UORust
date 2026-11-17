@@ -4503,7 +4503,7 @@ fn behavior(
         decls.push(crate::order::reverse());
         decls.extend(crate::order::decls(&ordered, &types));
     }
-    decls.extend(lifted);
+    decls.extend(surface_dependency_order(lifted));
     decls.extend(translated);
     // Closed assertions of tests over lifted functions are theorems.
     let mut theorems = BTreeSet::new();
@@ -4975,6 +4975,96 @@ fn mir_lift(
     out.decls.extend(body_decls);
     if options.trial != crate::mir::Trial::Off {
         out.listing = Some(listing);
+    }
+    out
+}
+
+/// Expression application heads, excluding strings and their escaped quotes.
+fn expression_calls(text: &str) -> BTreeSet<String> {
+    let mut chars = text.chars().peekable();
+    let mut calls = BTreeSet::new();
+    while let Some(c) = chars.next() {
+        if c == '"' {
+            while let Some(c) = chars.next() {
+                if c == '\\' {
+                    chars.next();
+                } else if c == '"' {
+                    break;
+                }
+            }
+        } else if c == '(' {
+            while chars.peek().is_some_and(|c| c.is_whitespace()) {
+                chars.next();
+            }
+            let mut name = String::new();
+            while chars
+                .peek()
+                .is_some_and(|c| c.is_alphanumeric() || *c == '_' || *c == ':')
+            {
+                name.push(chars.next().expect("peeked character"));
+            }
+            if !name.is_empty() {
+                calls.insert(name);
+            }
+        }
+    }
+    calls
+}
+
+/// The surface lift orders within one source file. Its declarations also
+/// depend on constants and functions from other files; order those groups
+/// globally before emitting them, keeping each mutual group together.
+fn surface_dependency_order(decls: Vec<Decl>) -> Vec<Decl> {
+    let mut groups: BTreeMap<String, Vec<Decl>> = BTreeMap::new();
+    let mut names = BTreeMap::new();
+    let mut pending = Vec::new();
+    for decl in decls {
+        let key = match &decl {
+            Decl::Definition {
+                mutual: Some(group),
+                ..
+            } => format!("mutual:{group}"),
+            _ => format!("definition:{}", decl.name()),
+        };
+        names.insert(decl.name().to_string(), key.clone());
+        if !groups.contains_key(&key) {
+            pending.push(key.clone());
+        }
+        groups.entry(key).or_default().push(decl);
+    }
+    let dependencies: BTreeMap<String, BTreeSet<String>> = groups
+        .iter()
+        .map(|(key, decls)| {
+            let calls = decls
+                .iter()
+                .flat_map(|d| expression_calls(&crate::lex::render_decl(d)))
+                .filter_map(|name| names.get(&name).filter(|group| *group != key).cloned())
+                .collect();
+            (key.clone(), calls)
+        })
+        .collect();
+    let mut placed = BTreeSet::new();
+    let mut out = Vec::new();
+    while !pending.is_empty() {
+        let before = placed.len();
+        let mut rest = Vec::new();
+        for key in pending {
+            if dependencies[&key].is_subset(&placed) {
+                placed.insert(key.clone());
+                out.extend(groups.remove(&key).expect("pending group"));
+            } else {
+                rest.push(key);
+            }
+        }
+        if before == placed.len() {
+            // A non-mutual cycle still reaches the SDK's normal refusal;
+            // ordering cannot turn that cycle into an accepted definition.
+            for key in rest {
+                out.extend(groups.remove(&key).expect("pending group"));
+            }
+            break;
+        }
+        pending = rest;
     }
     out
 }
@@ -6898,6 +6988,44 @@ fn spdx(ws: &Workspace, options: &Options) -> String {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn surface_dependencies_cross_files_without_splitting_mutual_groups_ue_25() {
+        let def = |name: &str, body: &str, mutual: Option<&str>| crate::lex::Decl::Definition {
+            name: name.into(),
+            parameters: Vec::new(),
+            result: "String".into(),
+            body: crate::lex::Expr::Flat(body.into()),
+            axioms: Vec::new(),
+            recursive: None,
+            termination: None,
+            mutual: mutual.map(String::from),
+        };
+        let input = vec![
+            def("consumer", "(later)", None),
+            def("left", "(right)", Some("pair")),
+            def("after", "(left)", None),
+            def("right", "(base)", Some("pair")),
+            def("literal", r#""(consumer) \" (later)""#, None),
+            def("later", "(base)", None),
+            def("base", r#""value""#, None),
+        ];
+        let ordered = super::surface_dependency_order(input);
+        let names: Vec<_> = ordered.iter().map(crate::lex::Decl::name).collect();
+        let position = |name| names.iter().position(|n| *n == name).unwrap();
+        assert!(position("base") < position("later"));
+        assert!(position("later") < position("consumer"));
+        assert!(position("base") < position("right"));
+        assert_eq!(position("left") + 1, position("right"));
+        assert!(position("right") < position("after"));
+        assert!(
+            position("literal") < position("base"),
+            "strings create no dependency"
+        );
+        assert_eq!(
+            super::expression_calls(r#""(fake) \" (alsoFake)" ((real)) (second arg)"#),
+            std::collections::BTreeSet::from(["real".into(), "second".into()])
+        );
+    }
     use super::sha;
 
     /// NIST CAVP SHA-256 short byte-oriented known answers, the response

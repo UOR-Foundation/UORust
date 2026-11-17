@@ -54,13 +54,21 @@ pub(crate) struct CoreLink {
 }
 
 impl CoreLink {
-    /// The link of core's dumps `texts` (one body each), with core's
-    /// declarations.
+    /// Library-qualified spans use `root`; crate-relative spans use only
+    /// `own_root`, never another library's same-named source file.
     pub(crate) fn new<'t>(
         decls: CoreDecls,
         root: &std::path::Path,
+        own_root: &std::path::Path,
         texts: impl IntoIterator<Item = (&'t str, &'t String)>,
     ) -> Self {
+        let source_file = |file: &str| {
+            if std::path::Path::new(file).is_absolute() || file.starts_with("library/") {
+                root.join(file)
+            } else {
+                own_root.join(file)
+            }
+        };
         let mut bodies: BTreeMap<String, Vec<String>> = BTreeMap::new();
         let mut lasts: BTreeMap<String, Vec<String>> = BTreeMap::new();
         // Each body's impl's index among its module's impls, `{impl#N}` in
@@ -120,7 +128,7 @@ impl CoreLink {
                         c2.parse().ok()?,
                     );
                     let lines = sources.entry(file.to_string()).or_insert_with(|| {
-                        std::fs::read_to_string(root.join(file))
+                        std::fs::read_to_string(source_file(file))
                             .map(|t| t.lines().map(str::to_string).collect())
                             .unwrap_or_default()
                     });
@@ -144,7 +152,7 @@ impl CoreLink {
                 }
             }
             if inherent {
-                if let Some(resolved) = super::resolve_impls(root, path) {
+                if let Some(resolved) = super::resolve_impls(root, own_root, path) {
                     aliases.push((resolved, texts.clone()));
                 }
             }
@@ -182,7 +190,7 @@ impl CoreLink {
                     continue;
                 };
                 let lines = sources.entry(file.to_string()).or_insert_with(|| {
-                    std::fs::read_to_string(root.join(file))
+                    std::fs::read_to_string(source_file(file))
                         .unwrap_or_default()
                         .lines()
                         .map(str::to_string)
@@ -1260,5 +1268,68 @@ impl CoreLink {
             text: out,
             bound: generics.into_iter().collect(),
         })
+    }
+}
+
+#[cfg(test)]
+mod source_context_tests {
+    use super::*;
+
+    #[test]
+    fn crate_relative_impl_spans_use_only_the_defining_crate_ue_23() {
+        let root = std::env::temp_dir().join(format!("uorust-impl-context-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        for (folder, ty) in [
+            ("src", "Bad"),
+            ("library/one/src", "One"),
+            ("library/two/src", "Two"),
+        ] {
+            std::fs::create_dir_all(root.join(folder)).unwrap();
+            std::fs::write(
+                root.join(folder).join("item.rs"),
+                format!("struct {ty};\nimpl {ty} {{}}\n"),
+            )
+            .unwrap();
+        }
+        let text = "// MIR for `item::<impl at src/item.rs:2:1: 2:9>::get` before ElaborateBoxDerefs\nfn item::<impl at src/item.rs:2:1: 2:9>::get() -> u8 {\n    let mut _0: u8;\n    bb0: { _0 = const 0_u8; return; }\n}\n".to_string();
+        let link = CoreLink::new(
+            CoreDecls::default(),
+            &root,
+            &root.join("library/one"),
+            [("one.item-{impl#0}-get.mir", &text)],
+        );
+        assert!(link.path("item::One::get").is_some());
+        assert!(link.path("item::Bad::get").is_none());
+        let link = CoreLink::new(
+            CoreDecls::default(),
+            &root,
+            &root.join("library/two"),
+            [("two.item-{impl#0}-get.mir", &text)],
+        );
+        assert!(link.path("item::Two::get").is_some());
+        assert!(link.path("item::One::get").is_none());
+        let link = CoreLink::new(
+            CoreDecls::default(),
+            &root,
+            &root.join("library/missing"),
+            [("missing.item-{impl#0}-get.mir", &text)],
+        );
+        assert!(link.path("item::Bad::get").is_none());
+        let qualified = text.replace("src/item.rs", "library/two/src/item.rs");
+        let link = CoreLink::new(
+            CoreDecls::default(),
+            &root,
+            &root.join("library/one"),
+            [("one.item-{impl#0}-get.mir", &qualified)],
+        );
+        assert!(link.path("item::Two::get").is_some());
+        let flat = CoreLink::new(
+            CoreDecls::default(),
+            &root,
+            &root,
+            [("flat.item-{impl#0}-get.mir", &text)],
+        );
+        assert!(flat.path("item::Bad::get").is_some());
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

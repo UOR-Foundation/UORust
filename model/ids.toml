@@ -189,3 +189,21 @@ id = "UE-22"
 level = "build"
 suite = "engine"
 statement = "Unconditional exported numeric parameter macros of workspace libraries preserve the surface lift: an absolute invocation through a declared Cargo dependency alias with no arguments and one empty matcher expanding to one numeric literal is read as that literal, with the source facts and function identities unchanged; conditional, ambiguous, argument-taking and unknown macros remain residue"
+
+[[id]]
+id = "UE-23"
+level = "build"
+suite = "engine"
+statement = "A library embedding resolves crate-relative MIR implementation spans against that crate's mounted sources and explicitly library-qualified spans against the library tree, preserving body keys and refusing to borrow a same-named source file from another crate"
+
+[[id]]
+id = "UE-24"
+level = "build"
+suite = "engine"
+statement = "The surface lifter refuses a recursive-descent parameter outside the caller's formal parameters with typed form residue, and preserves valid single-parameter descent without panicking or emitting a definition for the invalid case"
+
+[[id]]
+id = "UE-25"
+level = "build"
+suite = "engine"
+statement = "Surface declarations are emitted after the declarations their expression calls name across source files, preserving mutually recursive groups and ignoring apparent calls inside string literals"

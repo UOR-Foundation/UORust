@@ -5069,7 +5069,7 @@ fn sample(
     width: u32,
     floats: &BTreeMap<String, crate::mir::float::Format>,
 ) -> Option<Sample> {
-    let display = crate::mir::resolve_impls(root, &b.path).unwrap_or_else(|| b.path.clone());
+    let display = crate::mir::resolve_impls(root, root, &b.path).unwrap_or_else(|| b.path.clone());
     let [module, ty, name] = crate::mir::parse::split_path(&display)[..] else {
         return None;
     };
@@ -6597,6 +6597,7 @@ fn embed_linked(
             crate::mir::core::library_decls(root, &krates)
         },
         root,
+        &root.join("library").join(krate),
         read.iter()
             .flat_map(|(_, texts)| texts.iter().map(|(n, t)| (n.as_str(), t))),
     );

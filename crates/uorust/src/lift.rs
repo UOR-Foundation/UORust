@@ -3808,7 +3808,13 @@ fn fn_call(
         if !vt.same(ty) {
             return Err(Residue::Form(format!("argument of another type to {name}")));
         }
-        if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
+        if name == ctx.current
+            && ctx
+                .params
+                .get(i)
+                .is_some_and(|parameter| ctx.tails.get(&v) == Some(parameter))
+            && descends.is_none()
+        {
             descends = Some(i);
         }
         parts.push(v);
@@ -10724,12 +10730,15 @@ pub(crate) fn lift_all(
                         Err(Residue::Form(
                             "recursion on more than one parameter".to_string(),
                         ))
+                    } else if let Some(i) = descends.into_iter().next() {
+                        match names.get(i) {
+                            Some(name) => Ok((body, Some(name.clone()), acc)),
+                            None => Err(Residue::Form(
+                                "recursive descent outside the caller's parameters".to_string(),
+                            )),
+                        }
                     } else {
-                        Ok((
-                            body,
-                            descends.into_iter().next().map(|i| names[i].clone()),
-                            acc,
-                        ))
+                        Ok((body, None, acc))
                     }
                 }
                 Ok(_) => Err(Residue::Form("a body of another type".to_string())),
@@ -11648,6 +11657,65 @@ pub(crate) fn acceptance(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn recursive_descent_must_name_a_callers_parameter_ue_24() {
+        let mut env = Env {
+            types: Types::default(),
+            fns: BTreeMap::from([(
+                "again".into(),
+                Sig {
+                    name: "again".into(),
+                    params: vec![Ty::Bool; 3],
+                    result: Ty::Bool,
+                },
+            )]),
+            widths: pointer_widths(&[]),
+            names: BTreeSet::new(),
+        };
+        let mut ctx = Ctx {
+            current: "again".into(),
+            own: "again".into(),
+            params: vec!["first".into(), "second".into()],
+            result: Ty::Bool,
+            locals: BTreeMap::new(),
+            tails: BTreeMap::new(),
+            top: true,
+            looping: None,
+            hidden: Vec::new(),
+            imports: BTreeMap::new(),
+            closures: BTreeMap::new(),
+            elements: None,
+            rebuilt: BTreeMap::new(),
+            bounds: BTreeMap::new(),
+            capped: BTreeMap::new(),
+            exits: None,
+            formatter: None,
+        };
+        let call = |source: &str, env: &Env, ctx: &Ctx| {
+            let parsed: syn::Expr = syn::parse_str(source).unwrap();
+            let rs::RustExpr::Call(call) = crate::convert::expr(&parsed) else {
+                panic!("call")
+            };
+            fn_call(&call, &["again".into()], env, ctx, Acc::default())
+        };
+        // Two absent lookups are not evidence of descent at index two.
+        assert!(matches!(
+            call("again(false, false, false)", &env, &ctx),
+            Err(Residue::Form(_))
+        ));
+        let list = Ty::List(Box::new(Ty::Bool));
+        env.fns.get_mut("again").unwrap().params = vec![Ty::Bool, list.clone()];
+        ctx.locals.insert("tail".into(), ("tail".into(), list));
+        ctx.tails.insert("tail".into(), "second".into());
+        let (_, acc) = call("again(false, tail)", &env, &ctx).unwrap();
+        assert_eq!(acc.descends, BTreeSet::from([1]));
+        ctx.params.clear();
+        assert!(matches!(
+            call("again(false, tail)", &env, &ctx),
+            Err(Residue::Form(_))
+        ));
+    }
 
     fn lift(src: &str, types: &Types) -> Result<String, Residue> {
         let f: syn::ItemFn = syn::parse_str(src).expect("parses");

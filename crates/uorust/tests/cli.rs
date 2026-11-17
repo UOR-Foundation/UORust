@@ -1,6 +1,6 @@
 //! The `uorust` binary end to end: `project`, `check`, `routes`, `mir`,
 //! `prove`, `core`, `std`, `embed`, `merge`, `crate` and `certify`
-//! `production`, `sync` and `agree`.
+//! `production`, `sync`, `agree`, `admit`, `figures` and `library-mir`.
 
 use std::path::PathBuf;
 use std::process::Command;
@@ -15,6 +15,156 @@ fn uorust(args: &[&str]) -> std::process::Output {
         .current_dir(manifest_dir())
         .output()
         .expect("uorust runs")
+}
+
+#[test]
+fn the_cli_admits_a_register_and_refuses_a_missing_one_ue_13() {
+    let register = "tests/fixtures/thermostat-prism/frontier.toml";
+    let accepted = uorust(&["admit", "--parent", register, register]);
+    assert!(
+        accepted.status.success(),
+        "{}",
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let missing = uorust(&[
+        "admit",
+        "--parent",
+        register,
+        "tests/fixtures/absent-register.toml",
+    ]);
+    assert_eq!(missing.status.code(), Some(1));
+    assert!(String::from_utf8_lossy(&missing.stderr).contains("absent-register.toml"));
+}
+
+#[test]
+fn the_cli_library_mir_key_binds_the_selected_modules_ue_13() {
+    let first = uorust(&["library-mir", "core", "--key"]);
+    assert!(
+        first.status.success(),
+        "{}",
+        String::from_utf8_lossy(&first.stderr)
+    );
+    let repeated = uorust(&["library-mir", "core", "--key"]);
+    assert!(repeated.status.success());
+    assert_eq!(first.stdout, repeated.stdout);
+    let key = String::from_utf8_lossy(&first.stdout);
+    assert_eq!(key.trim().len(), 64);
+    assert!(key.trim().chars().all(|c| c.is_ascii_hexdigit()));
+    let selected = uorust(&["library-mir", "core", "--key", "--only", "option"]);
+    assert!(selected.status.success());
+    assert_ne!(first.stdout, selected.stdout);
+}
+
+#[test]
+fn the_cli_figures_extract_and_rewrite_a_real_site_ue_13() {
+    let base = std::env::temp_dir().join(format!("uorust-figures-cli-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&base);
+    std::fs::create_dir_all(base.join("p/src")).unwrap();
+    std::fs::create_dir_all(base.join("figs/src")).unwrap();
+    std::fs::write(
+        base.join("Cargo.toml"),
+        "[workspace]\nmembers = [\"p\", \"figs\"]\nresolver = \"2\"\n",
+    )
+    .unwrap();
+    std::fs::write(base.join("p/Cargo.toml"), "[package]\nname = \"p\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[dependencies]\nfigs = { path = \"../figs\" }\n").unwrap();
+    std::fs::write(
+        base.join("figs/Cargo.toml"),
+        "[package]\nname = \"figs\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+    )
+    .unwrap();
+    std::fs::write(base.join("figs/src/lib.rs"), "").unwrap();
+    std::fs::write(base.join("p/src/lib.rs"), "pub fn value() -> u32 { 7 }\n").unwrap();
+    let rules = base.join("rules.toml");
+    let register = base.join("figures.toml");
+    std::fs::write(&rules, "spec = \"uorust/figure-rules/1\"\nexempt = [\"0\", \"1\"]\ncount_tests = false\n[package]\nname = \"figs\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[[stratum]]\nname = \"values\"\npaths = [\"p/src/\"]\n").unwrap();
+    let (root_arg, rules_arg, register_arg) = (
+        base.display().to_string(),
+        rules.display().to_string(),
+        register.display().to_string(),
+    );
+    let extracted = uorust(&[
+        "figures",
+        "extract",
+        "--rules",
+        &rules_arg,
+        "--register",
+        &register_arg,
+        &root_arg,
+    ]);
+    assert!(
+        extracted.status.success(),
+        "{}",
+        String::from_utf8_lossy(&extracted.stderr)
+    );
+    let text = std::fs::read_to_string(&register).unwrap();
+    let doc: toml::Value = toml::from_str(&text).unwrap();
+    let sites = doc["site"].as_array().unwrap();
+    assert_eq!(sites.len(), 1);
+    let key = sites[0]["key"].as_str().unwrap();
+    std::fs::write(&register, format!("{text}\n[[figure]]\nname = \"seven\"\nvalue = \"7\"\nhome = \"definition\"\ncites = \"The fixture's specified input value\"\ncheck = \"UE-13\"\nsites = [\"{key}\"]\n")).unwrap();
+    let generated = uorust(&[
+        "figures",
+        "write",
+        "--rules",
+        &rules_arg,
+        "--register",
+        &register_arg,
+        "--out",
+        &base.join("figs").display().to_string(),
+        "--lexlean",
+        &base.join("Figures.lex.tex").display().to_string(),
+    ]);
+    assert!(
+        generated.status.success(),
+        "{}",
+        String::from_utf8_lossy(&generated.stderr)
+    );
+    let rewritten = uorust(&[
+        "figures",
+        "rewrite",
+        "--rules",
+        &rules_arg,
+        "--register",
+        &register_arg,
+        &root_arg,
+    ]);
+    assert!(
+        rewritten.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rewritten.stderr)
+    );
+    let source = std::fs::read_to_string(base.join("p/src/lib.rs")).unwrap();
+    assert!(source.contains("::figs::seven!()"), "{source}");
+    let repeated = uorust(&[
+        "figures",
+        "rewrite",
+        "--rules",
+        &rules_arg,
+        "--register",
+        &register_arg,
+        &root_arg,
+    ]);
+    assert!(repeated.status.success());
+    assert_eq!(
+        source,
+        std::fs::read_to_string(base.join("p/src/lib.rs")).unwrap()
+    );
+    let checked = Command::new("cargo")
+        .args([
+            "check",
+            "--offline",
+            "-q",
+            "--manifest-path",
+            &base.join("Cargo.toml").display().to_string(),
+        ])
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(base).unwrap();
 }
 
 /// `project` writes the committed fixture projection, `check` accepts it and

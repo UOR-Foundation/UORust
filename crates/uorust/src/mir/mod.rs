@@ -453,7 +453,7 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
                         .or_default()
                         .insert(t, body.clone());
                 }
-                let Some(path) = resolve_impls(root, &body.path) else {
+                let Some(path) = resolve_impls(root, root, &body.path) else {
                     continue;
                 };
                 body.path.clone_from(&path);
@@ -475,7 +475,7 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
 /// `m::<impl at src/x.rs:3:1: 3:9>::f` with the impl named by the type it
 /// implements, `m::X::f`; `None` for a closure, a promoted constant or an
 /// impl whose source does not read.
-pub(crate) fn resolve_impls(root: &Path, path: &str) -> Option<String> {
+pub(crate) fn resolve_impls(root: &Path, own_root: &Path, path: &str) -> Option<String> {
     if path.contains("{closure") || path.contains("promoted[") || path.contains("{constant") {
         return None;
     }
@@ -485,7 +485,14 @@ pub(crate) fn resolve_impls(root: &Path, path: &str) -> Option<String> {
         out.push_str(&rest[..at]);
         let after = &rest[at + "<impl at ".len()..];
         let end = after.find('>')?;
-        out.push_str(&impl_type(root, &after[..end])?);
+        let (file, range) = after[..end].split_once(':')?;
+        let source = if Path::new(file).is_absolute() || file.starts_with("library/") {
+            root.join(file)
+        } else {
+            own_root.join(file)
+        };
+        let span = format!("{}:{range}", source.display());
+        out.push_str(&impl_type(Path::new(""), &span)?);
         rest = &after[end + 1..];
     }
     out.push_str(rest);
@@ -570,14 +577,14 @@ mod tests {
         )
         .unwrap();
         assert_eq!(
-            resolve_impls(&dir, "a::<impl at src/a.rs:2:1: 2:7>::get").as_deref(),
+            resolve_impls(&dir, &dir, "a::<impl at src/a.rs:2:1: 2:7>::get").as_deref(),
             Some("a::S::get")
         );
         assert_eq!(
-            resolve_impls(&dir, "a::<impl at src/a.rs:3:1: 3:41>::fmt").as_deref(),
+            resolve_impls(&dir, &dir, "a::<impl at src/a.rs:3:1: 3:41>::fmt").as_deref(),
             Some("a::Wrap::fmt")
         );
-        assert_eq!(resolve_impls(&dir, "a::f::{closure#0}"), None);
+        assert_eq!(resolve_impls(&dir, &dir, "a::f::{closure#0}"), None);
         std::fs::remove_dir_all(&dir).unwrap();
     }
 }

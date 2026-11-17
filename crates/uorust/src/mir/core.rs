@@ -195,6 +195,7 @@ pub fn census(
     let link = super::link::CoreLink::new(
         core_decls(root),
         root,
+        root,
         read.iter()
             .flat_map(|(_, dumps)| dumps.iter().map(|(n, t)| (n.as_str(), t))),
     );
@@ -236,7 +237,7 @@ pub(crate) fn shard(
             .and_then(|l| l.strip_prefix("// MIR for `"))
             .and_then(|l| l.split_once('`'))
             .map(|(p, _)| p);
-        let resolved = printed.and_then(|p| super::resolve_impls(root, p));
+        let resolved = printed.and_then(|p| super::resolve_impls(root, root, p));
         // The const parameters of the impls the path names by their spans.
         let impl_consts = printed
             .map(|p| impl_const_types(root, p))
@@ -372,7 +373,8 @@ pub(crate) fn shard(
                 continue;
             }
             // An impl a macro writes has no source of its own to name it by.
-            let path = super::resolve_impls(root, &body.path).unwrap_or_else(|| body.path.clone());
+            let path =
+                super::resolve_impls(root, root, &body.path).unwrap_or_else(|| body.path.clone());
             let kappa = crate::project::sha(
                 format!("{krate}::{}\n{}", original.path, numbered_allocations(text)).as_bytes(),
             );
