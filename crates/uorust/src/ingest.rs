@@ -18,9 +18,21 @@ use crate::facts::{
     Workspace,
 };
 
+/// `Foreign::foreignModel` of the model (`app/src/Foreign.lex.tex`), as
+/// `lexlean production` exported it.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "foreign_model.rs"]
+mod foreign_model;
+
 /// The name a model file of a dependency carries after its package's
 /// directory: `<model of solana_pubkey>.rs`, which no Rust module path spells.
 const MODEL_OF: &str = "<model of ";
+
+/// Whether `rel` is a dependency's model file rather than its crate's own.
+pub(crate) fn is_model(rel: &str) -> bool {
+    rel.contains(MODEL_OF)
+}
 
 /// The text of the model file at `rel`: what `Foreign::foreignModel` of the
 /// model declares for the dependency it names, `None` for any other file or
@@ -28,7 +40,7 @@ const MODEL_OF: &str = "<model of ";
 pub(crate) fn model_source(rel: &str) -> Option<String> {
     let (_, tail) = rel.rsplit_once(MODEL_OF)?;
     let dep = tail.strip_suffix(">.rs")?;
-    let model = uorust_certified::foreign_model::run(uorust_certified::foreign_model::Str::lit(dep));
+    let model = foreign_model::run(foreign_model::Str::lit(dep));
     Some(model.text().to_string()).filter(|t| !t.is_empty())
 }
 
@@ -55,7 +67,11 @@ pub(crate) fn workspace(
         // The types of a registry dependency the model declares
         // (`Foreign::foreignModel`), read as a source file of the crate's
         // library: the lift reads them as it reads the crate's own.
-        if let Some(lib) = package.targets.iter().position(|t| t.kind == TargetKind::Lib) {
+        if let Some(lib) = package
+            .targets
+            .iter()
+            .position(|t| t.kind == TargetKind::Lib)
+        {
             let deps: BTreeSet<String> = package
                 .deps
                 .iter()
@@ -70,8 +86,14 @@ pub(crate) fn workspace(
                 let parsed = syn::parse_file(&text).map_err(|e| {
                     UorustError::Tool(format!("the model of {dep} does not parse: {e}"))
                 })?;
-                let (file, file_syntax) =
-                    source(&parsed, rel.clone(), lib, String::new(), &TargetKind::Lib, false);
+                let (file, file_syntax) = source(
+                    &parsed,
+                    rel.clone(),
+                    lib,
+                    String::new(),
+                    &TargetKind::Lib,
+                    false,
+                );
                 package.files.push(file);
                 syntax.files.insert(rel, file_syntax);
             }

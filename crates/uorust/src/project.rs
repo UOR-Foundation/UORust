@@ -358,7 +358,10 @@ pub(crate) fn project(
     let kappas: BTreeMap<String, String> = ctx
         .all_fns()
         .into_iter()
-        .filter(|&r| ctx.product(r))
+        // A dependency's model (`Foreign::foreignModel`) is read, not product code.
+        .filter(|&r| {
+            ctx.product(r) && !crate::ingest::is_model(&ctx.ws.packages[r.pkg].files[r.file].rel)
+        })
         .map(|r| {
             let path = ctx.path(r);
             let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
@@ -5836,8 +5839,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             .map(|k| format!("kappa = \"{k}\"\n"))
             .unwrap_or_default()
     };
+    // A dependency's model (`Foreign::foreignModel`) is read, not product
+    // code: its functions have no row.
+    let model = |span: &Span| crate::ingest::is_model(&span.render());
     let mut out = String::new();
-    for (path, (span, reason)) in &notes.residue {
+    for (path, (span, reason)) in notes.residue.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
             kappa(path),
@@ -5847,7 +5853,7 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&reason.detail())
         ));
     }
-    for (path, (span, detail)) in &notes.foreign {
+    for (path, (span, detail)) in notes.foreign.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n",
             kappa(path),
@@ -5856,7 +5862,7 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(detail)
         ));
     }
-    for (path, (span, effect)) in &notes.effects {
+    for (path, (span, effect)) in notes.effects.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n",
             kappa(path),
@@ -5865,7 +5871,9 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(effect)
         ));
     }
-    for (path, (span, definition, divergence)) in &notes.lifted {
+    for (path, (span, definition, divergence)) in
+        notes.lifted.iter().filter(|(_, (span, _, _))| !model(span))
+    {
         out.push_str(&format!(
             "\n[[lifted]]\n{}function = {}\nspan = {}\ndefinition = {}\n",
             kappa(path),
