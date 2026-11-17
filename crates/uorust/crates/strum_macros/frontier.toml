@@ -1,0 +1,293 @@
+# The strum_macros register (written by `uorust crate strum_macros@0.28.0`; do not edit): every body of
+# strum_macros's MIR at strum_macros 0.28.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 229
+translated = 23
+residue = 206
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.helpers]
+bodies = 185
+translated = 22
+residue = 163
+
+[module.macros]
+bodies = 25
+translated = 1
+residue = 24
+
+[embedding]
+bodies = 229
+embedded = 229
+evaluable = 229
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: syn::buffer::Cursor<'_>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::ascii_case_insensitive"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::const_into_str"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::default"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::default_with"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::derive"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::detailed_message"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::disabled"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::doc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::message"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::parse_err_fn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::parse_err_ty"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::prefix"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::props"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::serialize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::serialize_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::suffix"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::to_string"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::transparent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::use_phf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::kw::vis"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CaseStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PropertyType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: helpers::case_style::CaseStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: helpers::type_props::StrumTypeProperties"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: helpers::variant_props::StrumVariantProperties"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::LitStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: helpers::inner_variant_props::StrumInnerVariantProperties"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::EnumDiscriminantsMeta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::EnumMeta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::InnerVariantMeta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::VariantMeta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Ident"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <str as ToSnakeCase>::to_snake_case"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeriveInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ascii_case_insensitive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: const_into_str"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: default_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: detailed_message"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: disabled"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: doc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: helpers::metadata::Prop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kw::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kw::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macros::enum_properties::PropertyType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: name"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_err_fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_err_ty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefix"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: props"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serialize_all"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: suffix"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transparent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: use_phf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vis"
+bodies = 1

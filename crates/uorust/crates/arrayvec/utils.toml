@@ -1,0 +1,16 @@
+[[fn]]
+path = "arrayvec::utils::MakeMaybeUninit::ARRAY"
+kappa = "f080bd28f21fc7ad25dee7f535158282ee81c3cc5cce768d7b9540c94a179eef"
+at = "N=#usize_N, T=u32"
+embedded = "ecf8432402a6892e9a13c4a1b640485a27cad90420314a87549136fc076ccdbc"
+status = "residue"
+cause = "mir::Operand::Constant: utils::MakeMaybeUninit::<u32, #usize_N>::VALUE"
+
+[[fn]]
+path = "arrayvec::utils::MakeMaybeUninit::VALUE"
+kappa = "ef73bb96135b550f15734a4a29bbc77c80f374c794987e0824339e760f7a73dc"
+at = "T=u32"
+embedded = "3032f3c2dfa4aeb51fdd52be8e485765ef6d8c244fa76cba56f672db3606a9a3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+

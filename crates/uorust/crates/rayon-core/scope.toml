@@ -1,0 +1,180 @@
+[[fn]]
+path = "rayon-core::do_in_place_scope"
+kappa = "de1a3eb628e15e65a2b6670d8748d83bf6371feaaca46bbbda2332791e3748b1"
+at = "R=u32"
+embedded = "34767ce4add46555a3745a3dd9aa0b09cf6c32a4fb855296e34819e0f7e7e787"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::do_in_place_scope_fifo"
+kappa = "b771b048d15698bf2c70d8fde33b4cc67d23f26075098b40e535971ae8fe29e8"
+at = "R=u32"
+embedded = "d2e8f30e74fc5e254756bf1afef71e89fdb54cf7375656d7079ca1d4b861431a"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::get_in_place_thread_registry"
+kappa = "f986b9bfe16c615b868f462705c9acc02d1f6c1a1a78b0a837eb4d9978156b3b"
+embedded = "a661ddbe343ce5c3209a630eb765782ab6827d4d9ccbf5a46c4fd4340c3bbe25"
+status = "residue"
+cause = "mir::Ty: registry::WorkerThread"
+
+[[fn]]
+path = "rayon-core::in_place_scope"
+kappa = "677a7e976103e0c416b25ee9980460e8833f9a40a94c5e3a21799fb00fdd5e78"
+at = "OP=u32, R=u32"
+embedded = "121a648c5b6c6c4d3923381fc011d790ce677737f197c2f1039d70bf9ead8343"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::in_place_scope_fifo"
+kappa = "35a42e1f7f7595cefcb4a4d9cac16df6597c34b7ba5a64b9dbb746228862564c"
+at = "OP=u32, R=u32"
+embedded = "fc07b1c00a236b77285aac549246aa9a7237d0eb719c42c421df8be00b58d4c0"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::scope::Scope::fmt"
+kappa = "0e9dec7c9c9c629c9e44cf091d7ff9f5597b10efa34e704898c9f43ff113caca"
+embedded = "80c5b4a8c5c8c9679eca518e6fcd9b9940422d198e4e9d1ead95d61fd674d8c6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::scope::Scope::new"
+kappa = "a6510773c946b6eafd375f6355787ab3fe33d02cc7d342f29b363c5c259a7b0e"
+embedded = "9646a7dd8fdebf69ed5c8e4335485ba81a4e55deb91c305e7854bc56a7e5123c"
+status = "residue"
+cause = "mir::Ty: scope::Scope<'_>"
+
+[[fn]]
+path = "rayon-core::scope::Scope::spawn"
+kappa = "7a4886443bcac8893aa54f63bc9861174036c04e704baa2759eea521e7579a62"
+embedded = "751028a31f28032edba882c31c1e1c4e06be409122b82d7f72e1dfb96d77d084"
+status = "residue"
+cause = "mir::Ty: BODY"
+
+[[fn]]
+path = "rayon-core::scope::Scope::spawn_broadcast"
+kappa = "25405d464e6f70af9662ee8423ff9689a8902924521cd66bb471107de98fff6a"
+embedded = "b833c2b8b5dc3cf554164e7988f81aa41969e52022e10c49e2b83306a430483d"
+status = "residue"
+cause = "mir::Ty: BODY"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::complete"
+kappa = "003cf7f7d183b30a60bf786a348b4b3f8e0c81ac3c5aff94eb97a095f9eb38df"
+at = "FUNC=u32, R=u32"
+embedded = "4e47b2335a4f18ef633329ddae495cbf813cdf2a8d695bf9eb075a29d33a5640"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::execute_job"
+kappa = "902175025efc98a17dde1d878e0fae4fdd33e13f67f16101fbde863fbf9351b0"
+at = "FUNC=u32"
+embedded = "6878fb601b5d7f3356c52f0589fc8aae1b3315d4910222d39d54bdb9e0b30da6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scope::ScopeBase::execute_job_closure: rayon-core's MIR stops at type outside the lift: dyn std::any::Any + std::marker::Send"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::execute_job_closure"
+kappa = "2a7e54ecdb0275da3f52c4bce4a1ef2e51715fd2d8c39022bc2bd181fec18c79"
+at = "FUNC=u32, R=u32"
+embedded = "a3a0e61f845f6513f9692be4ac5c6454c40ed405086b4f297b48f5a7f06bcf8b"
+status = "residue"
+cause = "mir::Ty: dyn std::any::Any + std::marker::Send"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::heap_job_ref"
+kappa = "77560a0136aeea7a16170f14e996dc4e8c031048c6d7f76842c6a9b2c52e85e7"
+at = "FUNC=u32"
+embedded = "7f039733eaf03e1bc06c7408442978c7e4aa571a8cac8bb78ff53013bb4f9b32"
+status = "residue"
+cause = "mir::Ty: job::JobRef"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::inject_broadcast"
+kappa = "ab79a01dff47d51dfb19868f2f175445408875a21b4f2500798ff5e149f0b7c0"
+at = "FUNC=u32"
+embedded = "bef3b25e15952e10a8589310ec98974d87426e20c9d4ccc93b24e4162a83eae6"
+status = "residue"
+cause = "mir::Ty: ScopeBase<'_>"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::job_panicked"
+kappa = "6161dc0bd4785cde992a84d56fc5b9f8ece45ea791b4e097323f057eff9c8b13"
+embedded = "2a27a90b48df0286559348ed4d889afbec8f52836ffcbe972e1381fc5ff9d031"
+status = "residue"
+cause = "mir::Ty: ScopeBase<'_>"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::maybe_propagate_panic"
+kappa = "9d31f71de75de9a6e12d35bb3f158079810c5c75df16ae9954ea9eb1e98a3be9"
+embedded = "797e4b58dd66d5170eecd5af3da1170d88492a51658522272ab790df82ad056e"
+status = "residue"
+cause = "mir::Ty: ScopeBase<'_>"
+
+[[fn]]
+path = "rayon-core::scope::ScopeBase::new"
+kappa = "e1b8ba3613a3e2898ef0760f1c8e9a772ed74698583bfc94eb3e0429616bb44d"
+embedded = "0f825c78aff6fb3bc10a17c1d998575c6af9b898b9d11d2b6c94729fcaf62277"
+status = "residue"
+cause = "mir::Ty: scope::ScopeBase<'_>"
+
+[[fn]]
+path = "rayon-core::scope::ScopeFifo::fmt"
+kappa = "3fa9534aa32a7493cb82156a87c244f7f5d7896ccb7e0fe7068ec3fbe678df85"
+embedded = "eaac619340befbec01c31b10aee9e182f4c0e71fe9f7f3e01ad9ea5d1c327e7b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::scope::ScopeFifo::new"
+kappa = "e7a5bbfbef5be1751c1bab28e27f2a793bc3238d26de119c9a9d940e8cd54cef"
+embedded = "89d79e9af18f961ea9bf756fca7d78332dd62eeee8e8cb1de180493cf04c3411"
+status = "residue"
+cause = "mir::Ty: scope::ScopeFifo<'_>"
+
+[[fn]]
+path = "rayon-core::scope::ScopeFifo::spawn_broadcast"
+kappa = "7ca61326eec95b84fb0e8d7907dd47732262a533192454d43bc41eff6b30f501"
+embedded = "9036e3be083845792fcf29053d6e63e2ca02462bf51abc32fc5d2ad2c35622a9"
+status = "residue"
+cause = "mir::Ty: BODY"
+
+[[fn]]
+path = "rayon-core::scope::ScopeFifo::spawn_fifo"
+kappa = "2d2c7a4c1fd03fa3b54c6d3dec68d4ae1d3d1d328e41a8c2f0e798a9421f5c95"
+embedded = "42696f89a3c741b5a3d670fe07e86dfb1da5b40735039e4f529926e85b219275"
+status = "residue"
+cause = "mir::Ty: BODY"
+
+[[fn]]
+path = "rayon-core::scope::ScopePtr::as_ref"
+kappa = "ac25057f52444ac324c465bc61ccee23f6a67a9f8bd82967802b1bd1708ff7b0"
+at = "T=u32"
+embedded = "4d9f1350e69d12f4fc784ad8756baf51a14038768c4a74f6e2dec0d8284a7deb"
+status = "residue"
+cause = "mir::Ty: ScopePtr<u32>"
+
+[[fn]]
+path = "rayon-core::scope::scope"
+kappa = "a2ad77b8b02721f423fd62a520262885e633ec824af47bb69f93289333ef5717"
+at = "R=u32"
+embedded = "4bdfaa20b65d1194cf9f6c0c49b7a7a258eaa942b5210481c134d0637daa8d63"
+status = "residue"
+cause = "mir::Ty: OP"
+
+[[fn]]
+path = "rayon-core::scope_fifo"
+kappa = "fdf5094a297819767d84457c9ab62c461ba89b8159375773a3833f0cb20453e2"
+at = "R=u32"
+embedded = "5714ba1e58b45ed7e8d44491751ef37cac17cc8bc00045fcfbad23a79b1c765d"
+status = "residue"
+cause = "mir::Ty: OP"
+

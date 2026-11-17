@@ -1,0 +1,227 @@
+# The regex register (written by `uorust crate regex@1.13.1`; do not edit): every body of
+# regex's MIR at regex 1.13.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 369
+translated = 0
+residue = 369
+
+[module.builders]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.error]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.find_byte]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.regex]
+bodies = 212
+translated = 0
+residue = 212
+
+[module.regexset]
+bodies = 64
+translated = 0
+residue = 64
+
+[embedding]
+bodies = 369
+embedded = 369
+evaluable = 369
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 47
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::Match<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: regex::string::Match<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: builders::Builder"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: builders::bytes::RegexBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: builders::bytes::RegexSetBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: builders::string::RegexBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: builders::string::RegexSetBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::Captures<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::Regex"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: regex::string::Regex"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: regexset::bytes::RegexSet"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: regexset::string::RegexSet"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: regex::string::Captures<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: regexset::bytes::SetMatches"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: regexset::string::SetMatches"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::CaptureLocations"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: regex::string::CaptureLocations"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: regexset::bytes::SetMatchesIter<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: regexset::string::SetMatchesIter<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::CaptureNames<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: regex::string::CaptureNames<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::SubCaptureMatches<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: regex::string::SubCaptureMatches<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: regexset::bytes::SetMatchesIntoIter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: regexset::string::SetMatchesIntoIter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::SplitN<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: regex::string::SplitN<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::CaptureMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::Matches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::NoExpand<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::ReplacerRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::bytes::Split<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::string::CaptureMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::string::Matches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::string::NoExpand<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::string::ReplacerRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex::string::Split<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: find_byte::find_byte::imp: regex's MIR stops at mir::TerminatorKind::Call: memchr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: memchr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: regex_syntax::escape"
+bodies = 1

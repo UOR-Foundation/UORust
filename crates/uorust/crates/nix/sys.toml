@@ -1,0 +1,635 @@
+[[fn]]
+path = "nix::TS_MAX_SECONDS"
+kappa = "f6e3cc93d94182ec8aa167bf7720cbda39b64eec997fa7ce21baaad054432f92"
+embedded = "7cd3b448582ad8d66dbd41c0528879fe8f6e89c13d944d6ef001079ff2d0ac98"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sys::time::NANOS_PER_SEC"
+
+[[fn]]
+path = "nix::TS_MIN_SECONDS"
+kappa = "835ae85004056ae9bd587eb2e199a85d06e83914ad5d671cf69e337a71694d04"
+embedded = "df555fc20d2d9f2f82d6c6ab03659060490dd0e0326afc2b681eb05d5afe8d99"
+status = "residue"
+cause = "mir::Operand::Constant: sys::time::TS_MAX_SECONDS: mir::Operand::Constant: the constant item sys::time::NANOS_PER_SEC"
+
+[[fn]]
+path = "nix::TV_MAX_SECONDS"
+kappa = "92e7f514da1b4a01320ebda0438442911989562d178eca6ebd182ab8b3a945f1"
+embedded = "355c73d6e2c845944ffe0d94903f0455f0f10f9518cf6d1fbc7962f6de7900f6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sys::time::MICROS_PER_SEC"
+
+[[fn]]
+path = "nix::TV_MIN_SECONDS"
+kappa = "e7c04bd85ae0c93526ea0af2d9d60a27cde2536436f349a6399d41f4914f62c3"
+embedded = "32de994759f2cfc1147459809a9d4564ecde2049309322aab0e6ae4eb46fd545"
+status = "residue"
+cause = "mir::Operand::Constant: sys::time::TV_MAX_SECONDS: mir::Operand::Constant: the constant item sys::time::MICROS_PER_SEC"
+
+[[fn]]
+path = "nix::TimeValLike::hours"
+kappa = "b9707d93fbd6fdc5f1cbec9557d54e724d3245ff45e72cb6e4c4deb61d7d3a46"
+at = "Self=u32"
+embedded = "5678a74c2049a9179e44579ed02457c936f2d47e0e854516f4797174ba3bd78b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sys::time::SECS_PER_HOUR"
+
+[[fn]]
+path = "nix::TimeValLike::minutes"
+kappa = "1732a1299449ff81492d7a23a927166e57d317829e93cf19ddf05272eb62e3d9"
+at = "Self=u32"
+embedded = "5e6462d316be5e48a1cc29663440f013a807a5d7d27f81ac35361d11f68f2957"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sys::time::SECS_PER_MINUTE"
+
+[[fn]]
+path = "nix::TimeValLike::num_hours"
+kappa = "12a79069d5d4a02f5294ad346bf0fc216d3a06e4fa1af89783a59356f52c080a"
+at = "Self=u32"
+embedded = "2789bb010d189c35b9732823ec6ac3a532b7d0b59e253df50ff1bfe3b990e514"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TimeValLike, which u32 does not implement in core"
+
+[[fn]]
+path = "nix::TimeValLike::num_minutes"
+kappa = "886cdab6a3313631cc70247c97ae6c5bd8d3ad34d42d4b8f39edd23fd91d2cb5"
+at = "Self=u32"
+embedded = "004a1a18c2a14e845c2f68ae074a08ab6c00314cce07862687e896225768e7c9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TimeValLike, which u32 does not implement in core"
+
+[[fn]]
+path = "nix::TimeValLike::zero"
+kappa = "19922a529e74ec1b32d642ff690d33a9338c1bbbbf33d392d753769399a490de"
+at = "Self=u32"
+embedded = "12fd2a3c7efb4bd290a062601ce0a147679456744ab1bc40ce980bce14b89af7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TimeValLike, which u32 does not implement in core"
+
+[[fn]]
+path = "nix::div_floor_64"
+kappa = "19029e020cdb7b5a7a6f116f71a5f9bfd23347a9b49bc7659d8d8cc964db9ba3"
+embedded = "8ec664b8b80efa0a261449566a0d57cf0668889116c0635852b1f1826e6dc24f"
+status = "translated"
+digest = "cdb0d6cb757995dcbda6b709f01f02d621dc988478517c1e8cb2ddd1239596d6"
+
+[[fn]]
+path = "nix::div_mod_floor_64"
+kappa = "37f8168e27338472514451816f231c51784023c3cefdad45b4c79791391f09d2"
+embedded = "cc3e4af21b894b46e5a0580bcd9830ac48ad13550eea3b8d7ed1040d1745d0c6"
+status = "translated"
+digest = "f3f0f1d3015a6256df1117935577a878e733bad9eb336a0caa2fedea60815b1b"
+
+[[fn]]
+path = "nix::div_rem_64"
+kappa = "da942269984d1d0b76d5a56aec337b4806f643238f45bf0b4e2a21c54decf55d"
+embedded = "196037c8110af00459e52e995fc309eb0d5f657771eced20c55eb6b792daab75"
+status = "translated"
+digest = "5eeadef941409ef7d2760086baf7a6f6c4432c51c4b3db5452a76c8c4ceb09aa"
+
+[[fn]]
+path = "nix::mod_floor_64"
+kappa = "2b0f306b5aa49a226517059f18d3f6eb8f1a791cd87dfc874f2b94191f883f45"
+embedded = "066c163a93fdaa2fc721095724ec395f855a239e40391a327401f46b6767a0f5"
+status = "translated"
+digest = "61d90d4f2239f8a50eb571ea723b447d8825a3b45f89e1dff401511a33a9b2a9"
+
+[[fn]]
+path = "nix::sys::sysinfo::<impl at src/sys/sysinfo.rs:9:16: 9:21>::clone"
+kappa = "1b588c1bc21069032b0f9ccb7ece929258bc11b2a51a28a1b428fc26bf1a5e42"
+embedded = "a0500bc9ba4f66224cf300a8f9f4cebc7d4332bbdb18092d0463f7a432a3929a"
+status = "residue"
+cause = "mir::Ty: sys::sysinfo::SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::<impl at src/sys/sysinfo.rs:9:23: 9:28>::fmt"
+kappa = "8cf58c0d151de7fe432cf3319ce154d3f1985fac407b7623b7415e3792348a5e"
+embedded = "a03e5366888e60f8305899ecc6a9b9477b10a8af3308af8ee501ccda219f1aa7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::sys::sysinfo::<impl at src/sys/sysinfo.rs:9:30: 9:32>::assert_fields_are_eq"
+kappa = "acb78a32857376828c875ff4fef903879598114d9075f98ffea0a53512ce60b7"
+embedded = "a95684e2cac4c9dd074c4f375989235f7d3826e67807e84a2bc04dda60096278"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::<impl at src/sys/sysinfo.rs:9:34: 9:38>::hash"
+kappa = "96af2098c2ec16bdc26e43f30d8deda0b0e1b2738cc292b2b745a0c5c0048e02"
+embedded = "2d21a4635fec47c64bcaa2194068234448466168f5b3ab589411f5afe2d2ed95"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::<impl at src/sys/sysinfo.rs:9:40: 9:49>::eq"
+kappa = "133f1c9d22c2e6ef7c5c883874df3926e95d2025936c2e95276a431400fb3c01"
+embedded = "1eabae50f2f7a1bdadcd408c938bd7836ffca497e915e76e91b54a0e7077296b"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::load_average"
+kappa = "6f4a1126075255dcb989756110fdcb9686b809ec6f4edb40f38a109e8adf22ac"
+embedded = "f4369d08cd19ace50707368677198dbbe748dd1910204e00a46ff6a13de41cff"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::process_count"
+kappa = "4bbfda08abd1db3594fd886a0d2587789cdf11d38e9b6baadfd6d0a9903947ae"
+embedded = "0e3d8bdc6d2bd3e8fd66ebb1790c424c50e9457c6627910a5cdbec93778f5e22"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::ram_total"
+kappa = "75de02d39a49237f2ed0c3af1e543614850c99dfe936ae05f102eaf0d5d83a4f"
+embedded = "3a926637ef48ad19c87ddc668d629e75e3b1a996d4fde37f3520abb8348813e1"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::ram_unused"
+kappa = "c7457f7e2e9afbf820c16a1160919d5ee829bb30b6a6b0189da545f60915da19"
+embedded = "0bde4f163da5854ffa897041b86655a4de536c8c99d5e328d6819b2c8483e292"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::scale_mem"
+kappa = "e3d38423d0a38f9965dee41e9bd762bed43b143c36fd5a7dbc3a02d9416b737b"
+embedded = "adceb8d7badbd5bc5bba72c2cb04d7f5578f5ac9a064d8c87dabc8542e363c83"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::swap_free"
+kappa = "355aafe78475a26fdb49d817d22758f7f17bc90d253a8ba0db298a23e4195ab2"
+embedded = "3575b453bcbdc853ebb35bb107a64a688cc9d3bdab253c1b84f715c8497af4a1"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::swap_total"
+kappa = "a5b15a6d096ece14bdfc6e112e000515280ce3a7790968a600b4245b51044e9d"
+embedded = "662cba3c19395b0769d0e2e6e3c10677e3dbcc6c6bc1fbf9227d97a3f97946e8"
+status = "residue"
+cause = "mir::Ty: SysInfo"
+
+[[fn]]
+path = "nix::sys::sysinfo::SysInfo::uptime"
+kappa = "3eb13f944ad238db1e764aec6af3257f5b8ae24b81513460ff34f7b6296c0172"
+embedded = "29d1180fba813589c0fc22e86739b9874b9a9e1e3663643a7e871081167e659e"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "nix::sys::sysinfo::sysinfo"
+kappa = "74092376a394ae10c1161727fc486704a250963bc45d7a7ad3a08f591d9e9962"
+embedded = "40a2bb99cac145e1a93348d82e6b636dacec3cd12eb0c5301c45a9d9d9aba2ee"
+status = "residue"
+cause = "mir::Ty: sys::sysinfo::SysInfo"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:188:10: 188:15>::clone"
+kappa = "ab26d395939a735934e7c16da02ad64ca9cf8f3efb2625785978a53a21fc00c7"
+embedded = "ed6008cefe36c50f5d574f3c4310cd85c36d1da56f010dea2b55151996d2aeea"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:188:23: 188:28>::fmt"
+kappa = "c251520317e0a84ee184e9d0e1dfbf3722d9b87fe4f844e7b38f5de46f73cce4"
+embedded = "aba2b90b5c697f57631c205085f7b0a53725560e1aa56aef299e93a9b443920c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:188:30: 188:32>::assert_fields_are_eq"
+kappa = "d443eff9f2a219282fc3c0c05116fe0a09b77021d24cf771e150950350b68f0d"
+embedded = "53df946fe8e2cb7a67190036428fcd5b1fea1e165a37b783ded1d6df594b0453"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:188:34: 188:38>::hash"
+kappa = "5ba81eda71b35d35fc102b9377222a340f7379ff10518409424203d13e763efb"
+embedded = "74bfb944ad6b752d4b6c430885b959247af442dd3033439c6581f1ac2a6b9f18"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:188:40: 188:49>::eq"
+kappa = "7af9ab8c542ea93322b457bbaea048dc39416942d99f8f911e56be0fdcd53e8d"
+embedded = "b910a419ab71901a0952588f0950832f9fa87b18d3880305988445ad56a5f9fb"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:478:10: 478:15>::clone"
+kappa = "368349c9eb1a042a96dd366783b49f70294cf45c9062d2f6f11876b6ca6c8430"
+embedded = "1c2d2e6a815225127c08bda63f1d4f60d9c3050a375bdec72e06362d7289bc23"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:478:23: 478:28>::fmt"
+kappa = "6732fac303c14db2fdd0337de8cedf22f9ff32c63a9c25a9d883035b840e8f8b"
+embedded = "2f3a987cee8d48cfab71503a6339d436cbab79fff7213a4000ae835a8344d1a7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:478:30: 478:32>::assert_fields_are_eq"
+kappa = "cb3bd4a10ddd1bb1cdb2be2e59061ae36a67fac4aec5267ba1f44d042dff4389"
+embedded = "4600184a55b0d8d087a2d861aec1670a14fb4eb67474e9699012fa8c792a324d"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:478:34: 478:38>::hash"
+kappa = "2f01b7d356a8c5f06594f9bf81bb664b716441b0e1cd41fc788478e7e66b0bcc"
+embedded = "3d2932f5937c93793793ac4fe86ea4b014f7175208bda0893f186cd465cfd07a"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::<impl at src/sys/time.rs:478:40: 478:49>::eq"
+kappa = "90ac4decf2afe75175bcd6378e1c5266baaadb8baf2e9425e36e52a67e23dcc7"
+embedded = "88631595a7e968dff6e25b905720cdb10e801c9ebf818173e31ad973a67b6629"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::Duration::from"
+kappa = "ac3ba948955004f3784b7401a3d879bc8ff6a64b0a488f06ddd1b412e1a511b8"
+embedded = "29e027a53069d991f86417d6e7262e1eea04ae4fa5c6679fe9d564d2bd88087c"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::UTIME_NOW"
+kappa = "ea67c01fb30f3042634a0a0185ce144652246000f31a293c325683346b20633c"
+embedded = "7b94b16d44047e57ab8e38758c9405b6faa3d68347eb6794de88233e536ad58f"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::UTIME_OMIT"
+kappa = "9c2931216e9b55b1305a513fa8221ed5970a29e2b25aeb63bba83b6f38a06e22"
+embedded = "dfe849c418c5b602c167b909e60cf98b7bdc71efb1de30976d6ed1f8d8f3c8b4"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::add"
+kappa = "883b85afc3e2e7a9ef22844fca2cc0f21a30bad58b79be07cf7606daea8beec7"
+embedded = "37c087706fc5a40a89215171569a8256b3deec755bd99c413e61efa18f7310c9"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::as_mut"
+kappa = "fbffed90ca76aee4244ba8e62a96e121b76a0147d9a24de71bb902e9a98ceccf"
+embedded = "d32b200b8ea71e12d5eb6ad7cb3dbd973aee30a669b73e395094422e9e00df6e"
+status = "residue"
+cause = "mir::Ty: libc::timespec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::as_ref"
+kappa = "b66a650bd9ad8c0214fc45d0b3ddc681c68aa630e279d4cc4f153ce567e0dd90"
+embedded = "3bae949d9e8f2d71c75dbde7ec6b38d603b860879067c9eeb91c1fb25469db75"
+status = "residue"
+cause = "mir::Ty: libc::timespec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::cmp"
+kappa = "7ae4f084c58a9271954187a2c7d7a81bbd68bf407a80da9ebcaab31f51556dc7"
+embedded = "b390515a7879527c562196569aecb732c77737a8269fc252f847f2b351ac4b02"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::div"
+kappa = "c45ca551d38c7d04b606ddd9c16a07c9a62bb1451b89fc6148db0cedb34bb8f3"
+embedded = "9dc77a33f3db30fac3859b5be087b43ee8ec1a8bd2a23627200dd7da0d56f958"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::fmt"
+kappa = "6d2d031f39ce2d6976726a7d489ef61a57ab8cdb80c637f6606c2a8e6d7c44cf"
+embedded = "cbb96fec17c733e9300d607393fde69c2acddc43a0747882b32a9988b0c1e49f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::from"
+kappa = "ec7c4833f7881ff0a4e73745cf289c515e7a0003589b49eaabaaaf5aed4b8908"
+embedded = "66f5a4755cc655abcb4b6f5bc0bfc1adb987cf6b6b03fc47f46e65591107ddb1"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::from#2"
+kappa = "a265322198d6d2b2cc2ff8811c1f9f8acd0285051e60d34ab6b081768a30f241"
+embedded = "7651562480a784f98eb90f769a0e31e220f25fe29ba8ee46279e25fcf39bc67b"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::from_duration"
+kappa = "df7ae83da6084830ea676b3cb9bd7606192328fe6b1903027d210cf46ab8fac6"
+embedded = "ffc1ff3924f2dd9e43d3148994027fba74d2ca6b526eab9a7534f126761ad9a9"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::from_timespec"
+kappa = "75a257a5d5cb12a4da34f7bc2a0c9e1d51f466a0234163142499c607e9b7d99b"
+embedded = "1f036b9c79f026a73f6a927b2685b345c9b25b24c368998b8da463b0731e7536"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::microseconds"
+kappa = "5187d45826e54544979bb7b6467d9500d6dfc9fa49d3c5522168d571e7a18746"
+embedded = "41622168e6069215209048e47519d6e3f6a3d9476d30c35b254505e69c24ebab"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::milliseconds"
+kappa = "e45246cd9cc6e463be6d7c771ccf9af908b4e1e0129859885a6095d02912a82e"
+embedded = "9f43fcaa5a50e8c1e4bee88156978bd3c71231b50d848305531252110ccef20f"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::mul"
+kappa = "0e29a34390fdd7030a12deec24c9a319da23aafb150ab703005a60c3adf09a67"
+embedded = "f085b09a819ed177e478d0792bce5ecbb1bceb25fa2a5d1edde0e75e8f7a79d4"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::nanos_mod_sec"
+kappa = "f7b227e82d29d8abb38d78c1a07da577633b2f3739b38d47a12c31279ef0a73b"
+embedded = "eedfe85606cda51f04162f18b812892fd4d003b1afdbc44eec2e49f3307e9f75"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::nanoseconds"
+kappa = "1e769191cdd6e17444995c95357cade8f0313b6a5f4915bce1db3ecda742752d"
+embedded = "c6b93805920aea3ced5cc0e00bf60a76dfebf9e15f4bf820686405ecbdd22443"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::neg"
+kappa = "b1f372e9236c7d907b7d3037b0309762b673dddfd1da342cfa57bc83174648e9"
+embedded = "e5a0ea183f60e18d6c714f2a480b13c3e49b07dbcf04c771277c2bfd569154e9"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::new"
+kappa = "131a855a01df2d695b00806eda48a3ac2a400d994714bbad4b9548a36eb14e1a"
+embedded = "85566f80169cf987d821f595ee4a89434f3d4cba15ca2c8aac3a57378a982d34"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::num_microseconds"
+kappa = "6cdc2e69a28523ca4f37848b8c8285f1727d6739f18753ea3b1328abb20b82f7"
+embedded = "bac670420dd636c19dfd8e0d4b34826a06d1ac49393e0b1ff768185a5e3828ef"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::num_milliseconds"
+kappa = "2e72623d7dcb74ac535a086b62f726f87a4b5c8c75160fc4f3c7330f4bf11ce5"
+embedded = "a38062b3218bedc3b8e83baf48ffa762969c5c946be4f5a43ee418ad31746604"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::num_nanoseconds"
+kappa = "c7f2fe529b45f2153fd18a5ca1fce6969df5c294c311ee700f40301ec9886d85"
+embedded = "a0d51e3def1f1640a2278951a96f1ffc728de153c72e4eb4b5a6912b56d92037"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::num_seconds"
+kappa = "86f4613c57a5d341736c83b3f6f200d0d6e1d8fe110be35860832218f159baf4"
+embedded = "cbc37d1b78179a3b72e6a9fa9e82f68a4596772cf72a40cb0c2ac9818ae8fa5b"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::partial_cmp"
+kappa = "9ae607d620185bf4d834b94e04dd92e552ea44769a1a731092f44147d78993ab"
+embedded = "1548cb858ffca019116fa7fa5ef27a0cbde2122498e24ce5c395a9fab6974e78"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::seconds"
+kappa = "1cc0d5741fe3716fc701c310dfc577c86a19f1bb562621a2e1d28fca15df8019"
+embedded = "d8c44209a5e37326fccb0242d3a1faa14a054e56b211bf14603211d86d22a43f"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::sub"
+kappa = "5712345702106955a1fb4057192bbb2c22719dce58639536d3e3da83b2049ae4"
+embedded = "ab86e402af27ccda7d8c06c56277c01e79d7039a4ebc9c8820e53b029e90d9a9"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::tv_nsec"
+kappa = "503d73f24990abe5611688f37711b427be233c4cb6bcd61500363fd35bb5e6bf"
+embedded = "7f738842de598b041d6ff0e6400737a976f9fcc9061c61b6b2f6c49d12504121"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeSpec::tv_sec"
+kappa = "2f33fe783d81d10d2c25ac8e759b7120314c0c788199c169e54ad97e05079734"
+embedded = "682bf5dcf575bc6adcf617a1cc2e04b434b09e1ad3ddd60eaf0bb1c6fc64f44c"
+status = "residue"
+cause = "mir::Ty: TimeSpec"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::add"
+kappa = "c2e5c8a9324bbff457e01634e570fdf82a851ce47df4e5a3c8a1cf4a212f8d2e"
+embedded = "a151e35e70f8be19e523f4ab4a5c7cf50f9353d3d0b50ec32299be7bab0d87ce"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::as_mut"
+kappa = "18bc11128a963ad93406c0164e4fdb5b72db22a53358e3fb18dd1f2b47d34725"
+embedded = "0a0dac9dd19b059121e97694ac3b2c769b1cf7364867efb5e4b527a6129c7a47"
+status = "residue"
+cause = "mir::Ty: libc::timeval"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::as_ref"
+kappa = "7ed5a4aa45ea8ec5ee19649ff59c07fb64a3c38c7f78f4ac80b4c7a8c8bd2489"
+embedded = "4a239f851446db89f16093231717a4a0823ac8ec2d9bfb9d0594bb0d9fabad07"
+status = "residue"
+cause = "mir::Ty: libc::timeval"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::cmp"
+kappa = "b730f77f660f9142596e04b8c2fdd29417d9f1495e06f69bad75b35bb6b53310"
+embedded = "94f2eb40b54b9dc28e1090f6775ba35385ecba5e15061f35f3018c9ce8be1ce2"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::div"
+kappa = "7e5818ee5b3a2c12cfa8b68e65ea0f93a4a2fe509c8faa5ced4eb24708a0d080"
+embedded = "e3ecb93b0414b0e30c30dc69f3da3199326f8554597164696b48200b8a235cc7"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::fmt"
+kappa = "43e460442eaec4ebdc80f4e20113627503324a22c907c4a0d3611b571410bb0d"
+embedded = "2f7d53eaf3f7102286ade5f75dca1864dcec789378849cb2f18728632ffc8c4d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::from"
+kappa = "a3cda2ddedc85eaa7779e455a637161488c709c322b2f76edb7f73c6ac279277"
+embedded = "e7072d2efc896af1aacdc5c69b59d2425bd0a0788344ed4ebe608ef374be5a36"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::micros_mod_sec"
+kappa = "612c6e9241013af2f0264c266931fb93451436877660adff145797f1a5073fc2"
+embedded = "691aee19988fbde2e2c86bd15d07f8d44c6038b2ddf9123a42c61d578dcbdaaa"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::microseconds"
+kappa = "8ca51d4e86ef524ce147b2209b8f6ecd2d25ef345fae2194f92542d798284010"
+embedded = "2365923c654aaa65ab30079bd2ad72414e1481092269d942f44dc003879bc32e"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::milliseconds"
+kappa = "273411ee68c7eee151e99b67bf15e9778d1b7580ed2d9e56f26dc059ecd72fde"
+embedded = "1acdec5b76f8cde465bc51071c65186cb240dc64acc0556ec0dce746be68a1ba"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::mul"
+kappa = "e957a4d250b70e2504a960f2a9c625b0f4e3794a8da0b09192ac7fcf9d0cc91f"
+embedded = "b310c1fd76052555863a7db68ed8ca15dd07ed43aee8f31c288b371b26b4b5af"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::nanoseconds"
+kappa = "9b306e1fc29737e2e3d43158820fae256a109b6591eae9ab912f7edcd1bdff5f"
+embedded = "0a6ad4b25ad37c2aaced2c14fb672c10ca91b74d7124832179f2aeab3105230a"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::neg"
+kappa = "10cda592b7f3ce01452c2d2ec5d4a7778541c83e63986d573801cd55734b8536"
+embedded = "303cf53e0f6eec826f35e70db7b038eafecbdf2d023ee0cf4db364c82a73fcd4"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::new"
+kappa = "0d2e45e90926ace45b382abc51bfab697b52bf1f40c59cd7f41c2af50685a88d"
+embedded = "7c80257b959a95d2832f8bfe73a1392f3584ed7fb8ec71b7d860bd2d30464625"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::num_microseconds"
+kappa = "d0feebb33f332b380ef24041cbfbc10212766cc711d94881506e0ad38c6de81f"
+embedded = "38086cab5e15dc9ad6f4f3b8a60b9ce613227aa97fafd18326bcf7b28f2c66f5"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::num_milliseconds"
+kappa = "aaf6543b3db730967b82194bcd9ed6ec03b388bece527ad6ee1c7bb29b6e6a6d"
+embedded = "60f78d8cfc83812c4b242f42f624148f011f7ba7b771d780d38fafcf6611a17a"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::num_nanoseconds"
+kappa = "076625198a5395ce6c224802308a6af522a6766577758cb9aa6cf35a32dee987"
+embedded = "5b5bd1045708cc670bc422778ef9efd4c9286eb57db0a1867b5985ff4a201f9d"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::num_seconds"
+kappa = "f915a63653ad9a6a8cb158e9106d3cbbc9992a7af149da435ffb283023320502"
+embedded = "5511eeda95f463f6fc2b02643d5323ec1c8087157420deeb0ec1f96e29b4205c"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::partial_cmp"
+kappa = "42c29e787d85c34bb205971a2c13c0b5942acb3866bb26ec0eed4cf9f209888c"
+embedded = "a33cf10578439d46c176e89831680fa0f5594550f27cf3c3fbf1f70a409608d4"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::seconds"
+kappa = "e81f49e093febb5c067e4b3e234f0dee4ee66f1f4a041b797411e8fd746aa8bf"
+embedded = "8b39bd7ff060ae0d66c379e536c05e8df77d55e8273170228cdd6d74ffaf53cf"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::sub"
+kappa = "20ee132561d8ff05b516d07d27542f9ade9a425184b7763fe55db5566a0a8c8b"
+embedded = "5ff92d70be98b120cb08fb2215f2f244295aaadb16ed7705b9a98cdcf074ea00"
+status = "residue"
+cause = "mir::Ty: sys::time::TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::tv_sec"
+kappa = "f420ade06570b77db36ac0e5cf7685fd208a4546040615158d1decb6da42c55d"
+embedded = "0aa1acf196eca4842cf35849c125fabfa227513af591daeb2e1e25079b5f6328"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::sys::time::TimeVal::tv_usec"
+kappa = "1e1e318ba613b534c473bcc2ee91f1a4ef01b48336b2710d1f6ef784ff5d7d92"
+embedded = "f30f6af3fa493984549305b6bd9916ea125923acd8d2a06a7942d6b21109cd04"
+status = "residue"
+cause = "mir::Ty: TimeVal"
+
+[[fn]]
+path = "nix::zero_init_timespec"
+kappa = "8a737e77e83f131fcfad45ef7ade5f22fade68d5b7e1c7a0e9ebd114a1767d06"
+embedded = "3fe36bc1f0fa7b2e0e08ddfa6037716a5c67cf395a92bf5d3c844a341f345274"
+status = "residue"
+cause = "mir::Ty: libc::timespec"
+

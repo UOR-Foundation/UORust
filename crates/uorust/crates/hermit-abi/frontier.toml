@@ -1,0 +1,123 @@
+# The hermit-abi register (written by `uorust crate hermit-abi@0.5.3`; do not edit): every body of
+# hermit-abi's MIR at hermit-abi 0.5.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 66
+translated = 10
+residue = 56
+
+[module.crate]
+bodies = 65
+translated = 9
+residue = 56
+
+[module.errno]
+bodies = 1
+translated = 1
+residue = 0
+
+[embedding]
+bodies = 66
+embedded = 66
+evaluable = 66
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Priority"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: in6_addr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: in_addr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ip_mreq"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ipv6_mreq"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linger"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pollfd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sockaddr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sockaddr_in"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sockaddr_in6"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sockaddr_vm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timespec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Priority::into: hermit-abi's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys_get_priority"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: addrinfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dirent64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iovec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sockaddr_storage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timeval"
+bodies = 1

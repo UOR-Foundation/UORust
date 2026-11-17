@@ -1,0 +1,797 @@
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:1014:1: 1014:35>::LAYOUT"
+kappa = "2b821b674b47500a5a5156ff1c6ead3525b3f38d68c7b18e5829845b41318345"
+embedded = "5dbd92ce74a4db1572929a4422bc53006381570d3aff6707e20e68dcb4beac24"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:1014:1: 1014:35>::only_derive_is_allowed_to_implement_this_trait"
+kappa = "b0cadc4b4b7f8b479aee5ede8b4605c33e86e9eb8e1e5c9e70211603fa8dbb8c"
+embedded = "76fb14a0b6e6ff7201cd2786173764a5ca9aaff54534c3ccf800901544a4f87a"
+status = "translated"
+digest = "5364eb66fe94b12cc4542dd554e772d39d91365f056fc3360f17ef6914e468c7"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:1014:1: 1014:35>::pointer_to_metadata"
+kappa = "48814bb00771b084794077043700e6d121ee2c51189dbef4106d9138513df25b"
+at = "T=u32"
+embedded = "85c135b1f355d3c6a86ab183c7c3a36d8d9dc5a45cbf2184203bd79cba5f11b4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut [u32]>::len"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:1014:1: 1014:35>::raw_from_ptr_len"
+kappa = "9331fe8bcbc461e6e0de4d745ef93c2313a96f7d1509b1bb40cc352cc98c01a2"
+at = "T=u32"
+embedded = "4eae791b1a837136f370ea8fcd3c25d0cb8d887b28530146cf5ec15c8652215f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::cast"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:970:1: 970:28>::from_elem_count"
+kappa = "7db20751395d50537d6d7d8dc368abf4123b7d18f02a399685c9a8cb72b2284e"
+embedded = "acd679237dc85797289659edc47ee94f1619ae2ce77cb54d807056f6e0b06fc0"
+status = "translated"
+digest = "712a83eab20404c6e6a49b1d8a93a50f25abab6776055bf5a708ccd442f8a43a"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:970:1: 970:28>::size_for_metadata"
+kappa = "4b58e9ce9d3e98bd85ad9ef68e17d548f817ade2b32fde656df462ade25fb7a3"
+embedded = "64ed863188791fbd135676288acbdf84284b745045d8028f3806ecf7bbd00467"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::<impl at src/lib.rs:970:1: 970:28>::to_elem_count"
+kappa = "ed51e750634ac7bd961a62d8d5d0612a8005a162263e709f7031a5aec8e03d83"
+embedded = "f3ed6b0c777bc7f72162bd3dde7c1d7d655399770781690085e296c3d1ebf0b1"
+status = "translated"
+digest = "36f9a52732346e2eb836a923ca2c6a53dc900260821a5eb53107646c96b5d376"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from"
+kappa = "40957af05f2c9ed9e0e129ae8efc914bf4240589a80078288286dd14c7b88ba2"
+at = "Self=u32"
+embedded = "9a065a819a2e83376e1e678ec6de5fdf7561a922cacc6776def19aceb7e3ce2e"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_bytes"
+kappa = "6646c02dbc8480903553a5cceccf7218572e8539e248568315b3231ff0a2eb45"
+at = "Self=u32"
+embedded = "262c5be504b602a1880c9b496c97fa5e15d706ab0a6172fb2aec17900397d3e0"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_bytes::T::ASSERT"
+kappa = "5c741afbb8911f5f456664a9f53a1f266920e947c4cf8ebd76305b42fec64280"
+embedded = "2b8ecd274e2f79ad3f8165d5384711b85cf7b37f1fb562ef0010d22446a77fe6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_bytes_with_elems"
+kappa = "876453e7fd50487ea51269b7902d6329c27253a15f6a165695a8dfdb2f88af47"
+at = "Self=u32"
+embedded = "1b10feb2dec177d3d258c2d8e4cfd7e62b20c1c9f9b0e942cf3827ff25ece43a"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_prefix"
+kappa = "805bfc8d158b968022fce902f33b9142d3d35598ff7dc324d618dc8baffda90a"
+at = "Self=u32"
+embedded = "4467bb9f966cbbc7168155acd86ff962b98979f3393f8002dd31a7d2abb6e431"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_prefix::T::ASSERT"
+kappa = "c4b975979c32962f2917e6b5ba31b3405807c4ffd607cbb3c0be2818b51a248b"
+embedded = "39f03c1cf63e275d504898dfce7c90e3a0d34befca26354536e65b7714a9d3c9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_prefix_with_elems"
+kappa = "05249730b57697c05bbcafbb7a62abdaae12d236a07e24504df368402a6f22f2"
+at = "Self=u32"
+embedded = "db77a73bc5958ac4f15f57e01749276d8e93cb6e958931b9cc14bcf265fa23f9"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_suffix"
+kappa = "a99ce2b61e276627cc39f56ab35906140410988c46dad8b6843360ca83eec81a"
+at = "Self=u32"
+embedded = "7de7e7969c1ad6ce9b0da181e19c1e99867906cc73c0192a782def350c1e2f51"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_suffix::T::ASSERT"
+kappa = "e5a8a7fa295ec918f5af54aa99a16c4f3848ffc813c1bb9aa170130cbe8a0be1"
+embedded = "a52b56fde57235d419e8cf1af84a99636a3c886e71ec68b8b97e503ee8c1a47a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_from_suffix_with_elems"
+kappa = "7ad3feb9d376cf6f6bf67949c6fde23695a33d1758ad213af2badd73e5239060"
+at = "Self=u32"
+embedded = "88cb8126eb069d409c2a4e4451ea358964ad6149dfffeaab2a6460d49d8e4b26"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_slice_from_prefix"
+kappa = "db5c5d08de57d235234f2dacf0349038ee2b6678305393127b7f99b451c9aeb3"
+at = "Self=u32"
+embedded = "f240cbe3e2c4355c6ef094b158d1a4c381f8213af9c71589b74df7f5c998abaf"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], [u32]>"
+
+[[fn]]
+path = "zerocopy::FromBytes::mut_slice_from_suffix"
+kappa = "607ac6c2f0f8ae69dc36749a7734c5effbdf063ce3b0b51132f94227b8e4275b"
+at = "Self=u32"
+embedded = "0bd756b30d380873d51f1f62e04eb1c8777eb61d7066b183431d78e4874bea77"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], [u32]>"
+
+[[fn]]
+path = "zerocopy::FromBytes::read_from"
+kappa = "233d92caf1330ab9ba12eb3f668d9424a90d2ba1acce117c4e9b53316523c84f"
+at = "Self=u32"
+embedded = "84a08a0b7e646e3ad71b409c9731a755a46cc4aa51174dfc1af3d517952589df"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::read_from_bytes"
+kappa = "34bf9ed520cd85bc708abc63b9c2112415cd1e93a543e2c702534ece62c444ea"
+at = "Self=u32"
+embedded = "a175686eaf54fd6c6ad4a383409db8e02f935befac6c193ad68755ff56ff83b0"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::read_from_prefix"
+kappa = "d98e5ff64dc2d82a26da82bf8bff0891c5dcc497fe1974a5aa0af1149ad16fc3"
+at = "Self=u32"
+embedded = "ca6952bc4dee166b3850ddd4969a77f5cc3c7bdd48c694e6af531a05f0e3ee10"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::read_from_suffix"
+kappa = "68438fe1891720f389f6a237d3f7bcf258b386dadcc45389ad485b4599910188"
+at = "Self=u32"
+embedded = "af26b082b9c8ab0163ae9ab4e438d8bdcae9d2164677d3fd32a1a831c2c2007b"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from"
+kappa = "bf488cec7819b2ca8472f046d21e1431f86bb84b1151b45f2a4ead9ab79b87de"
+at = "Self=u32"
+embedded = "6e88e94452799ca73e05ff38d8838034ed63bc2a38e96e8fb2be113e0c400cc4"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_bytes"
+kappa = "2315509baacee05c35bcb9fe44d931cda3fc21e0628f7a9abecbc9bae5346a20"
+at = "Self=u32"
+embedded = "b7e979901b308c3ebdb8d23b8d72f0813bab279d902d98132f19418f4e202f46"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_bytes::T::ASSERT"
+kappa = "151a425a08991f8d430d595725f9155b4f5c007656671252875042954c38196e"
+embedded = "c1fe369fe11a3e8cafd4993254640accf7079d9a63a750023547faf3a10c0272"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_bytes_with_elems"
+kappa = "35a4f1f36501c153908a7ea476cc5c8f9fe5e3fde60cbc28d74ac5c7b1aaace1"
+at = "Self=u32"
+embedded = "2416d36d4d3fd36070c7aaa6ab1111ddbbf41cab600c5f833fb7d10f950086de"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_prefix"
+kappa = "779e16cda12379df244e9f108f497f0571d2c1ae2cb43173b564d71acd79b5fc"
+at = "Self=u32"
+embedded = "e34844c05fc15855435282413549f2016ccfb70d9448b1061c0e6cf017e6f11b"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_prefix::T::ASSERT"
+kappa = "8eb2e5c8665a08e12c2f73b5fe5a4e46c5a3e40861ebc021815e21d533c79cc5"
+embedded = "26ede5d9f87ac696a7f0cfe08805e6a5d204d8b6862216c243079b1e01b78066"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_prefix_with_elems"
+kappa = "8248d78fe8cb4d05bf04e34cdf0fffef1c8bc1da7e0f8c8fe50abe2126412b4a"
+at = "Self=u32"
+embedded = "24301e57e700e972eb082a51aa43b7b6570ce0113efcabb05d90a191cf2afb1d"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_suffix"
+kappa = "4f7a11fde12c77abc864bf38fc3d41e63d6772d50bab376a1bf3ac0fd7946863"
+at = "Self=u32"
+embedded = "2b3672935afb39382824347d3c7ccfe6734f81971d331e054de2ba302e54458e"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_suffix::T::ASSERT"
+kappa = "de784ca7ac730bf89e7d253c6857d4a986d1d6a5563ba715f5ddfdf7c221f992"
+embedded = "330d5589c6da631bdc3b99901d3ae86add431838d6bfdf30dae5842c6e4de218"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::FromBytes::ref_from_suffix_with_elems"
+kappa = "5b9e9561057919b66a9cbdbd36dcd5c00bdf5fee5a9ebfea24569896c3b25ddb"
+at = "Self=u32"
+embedded = "f8a85eb96b623ddd06076814716feb2c63e0afdc4a4f34e6778c588fe4a9e693"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::FromBytes::slice_from_prefix"
+kappa = "915e44e1a6f8060cd5fedb03284258d06dc52731deea895e50f2e23a24beee22"
+at = "Self=u32"
+embedded = "d97c1b995e71cf02cf39b9ca7cec1e3995f00927aa00b9e64bf75806dea2fc07"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], [u32]>"
+
+[[fn]]
+path = "zerocopy::FromBytes::slice_from_suffix"
+kappa = "a24f9427034549c9fcf157905e7de36e2e541e776efed243875b876184b6336a"
+at = "Self=u32"
+embedded = "881a1f5f560127efcc7629daf414f76ec9c42bb2896ed0d5d3a672aefc57a10a"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], [u32]>"
+
+[[fn]]
+path = "zerocopy::FromZeros::new_zeroed"
+kappa = "2e12c32db7eae478e9fcb2aefe611165cb8393042e1ee237b1d51ecb273f0b5a"
+at = "Self=u32"
+embedded = "dd8b71f76b691d495052b3b27bcdc1945c9698d67707271d3333d1c7c4eb38a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: zeroed"
+
+[[fn]]
+path = "zerocopy::FromZeros::zero"
+kappa = "b035e817f8efcc281b009cb94e6261670149ae12407abfbe1e389bf74c003ca4"
+at = "Self=u32"
+embedded = "c5cdbc9c6d96089994e68b7684dc9274383589e8388209a2b368ec11db9bd5a8"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::IntoBytes::as_bytes"
+kappa = "ff3b3cdb85bbc05cec7cb81d52e9ee8cb6d96d891bf6f652aa865d6e7781b004"
+at = "Self=u32"
+embedded = "9eabe47c81b66ac38bb9c7f2fe603521e0e938553be2fc84a6a6e51869abbcac"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::IntoBytes::as_bytes_mut"
+kappa = "89e172763eb47db8c4258606febfdafc9c2ae97a6aaf0a58ed96717c50f70b7c"
+at = "Self=u32"
+embedded = "289ac0ea1fda30a1ec5ea5d9b96904727111c6a9f7e2db1e548d13eed17c40fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: IntoBytes::as_mut_bytes: zerocopy's MIR stops at mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::IntoBytes::as_mut_bytes"
+kappa = "5c7760ca55a69556c7decfbfe8258906711625091ce2b48b65c7099976bb37e9"
+at = "Self=u32"
+embedded = "00416425cb075a731ef86cc90d89fcb8324bc5ba5760a889c453663ae1dc3a20"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::IntoBytes::write_to"
+kappa = "14338de13c6fffb3118e704cab333562bbba7e2eaab42701f99249bc2582dfce"
+at = "Self=u32"
+embedded = "8ac3a2348a5d63d1beb569b3401765b4039311c03c80aecdf129578c918da672"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&u32, &mut [u8]>"
+
+[[fn]]
+path = "zerocopy::IntoBytes::write_to_prefix"
+kappa = "2ec940ef0cdc3007ae166b2c11f1123ffd71748390e72a7f7752b5c1d6b74076"
+at = "Self=u32"
+embedded = "91ee28146c5b4fcda5f3113c57458e74c1a831e3ec2b0d920bc4cfa3972fcda9"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&u32, &mut [u8]>"
+
+[[fn]]
+path = "zerocopy::IntoBytes::write_to_suffix"
+kappa = "3c49ac406a6eb6c90d57fb0c340879010b5abb24296f78fbb0cec7228012c961"
+at = "Self=u32"
+embedded = "8734d99a6ed67338b3dc27a5a6f371ed5a38186784bd535a44ace9794fd4aba4"
+status = "residue"
+cause = "mir::Ty: error::SizeError<&u32, &mut [u8]>"
+
+[[fn]]
+path = "zerocopy::KnownLayout::is_valid_metadata"
+kappa = "32630e71e3ede9e53659c6a6480246cbf47e67a3f2706686748ebb89999c71f6"
+at = "Self=u32"
+embedded = "aa043bf7589b85b2238a09ebade35036fe7b0398fa80e88405ac040c1846c11c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by PointerMetadata, which u32 does not implement in core"
+
+[[fn]]
+path = "zerocopy::KnownLayout::raw_dangling"
+kappa = "66cebd102a8f7ebe40370c124eb77ff5d1434c65df9ca75cc4518cc843586891"
+at = "Self=u32"
+embedded = "a56b41e7c8cd840eaa99cc66633112b487b821281d8062e140db8cd4899aa147"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by PointerMetadata, which u32 does not implement in core"
+
+[[fn]]
+path = "zerocopy::KnownLayout::size_for_metadata"
+kappa = "128e080a59946292616c27fdf35e793cae8b847beefc78806e7bef21d4108a50"
+at = "Self=u32"
+embedded = "2238ac068514d96c85dc3754d1870afbdf086c4ec22297d1a4199e6a30630000"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::KnownLayout::size_of_val_raw"
+kappa = "76f1796fdcc13f637689c314e780c80fbcc7c9a6dd41c369007d11d4a90d17ac"
+at = "Self=u32"
+embedded = "a96f87a80573a6f55de042dd9d052640aac19b7e880234416155668759737120"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::as_ptr"
+
+[[fn]]
+path = "zerocopy::ProjectField::is_projectable"
+kappa = "e1640cf167d7abd48f88a273b692eaf5057a7ad732987d288f8bbc3fd48643c7"
+at = "Client=u32, FIELD_ID=u32, Field=u32, I=u32, Self=u32, VARIANT_ID=u32"
+embedded = "20c0a4b618d4367e21d7e6a5a993f2b83893adf963c72d875cb943441552944f"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_bytes"
+kappa = "a9ef0f6caeaf01d38f2ed216ee2bc3f297cf7783291824da415dd5c97b20c3a0"
+at = "Self=u32"
+embedded = "7dd3a7d1050899036bab81e223ffb01683889e5940395630841ee3c7ee9afd62"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_bytes::T::ASSERT"
+kappa = "7cfe1509c04f7855a3013c5f4f7bb5fe0e7e0db43eee820ec8a319f2eea76046"
+embedded = "d96637cfda7afb16e0313909a3581d81d1414ed9f9342d5490538c0a1866ddd7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_bytes_with_elems"
+kappa = "5854e6b6e4a16da17fb24179ee83696cc0f2e862eeb0a985d5783ad0581d8825"
+at = "Self=u32"
+embedded = "f80a7c05cf5751a658029c93029a998b310272ddd2cc8762c354875b9697931f"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_prefix"
+kappa = "c1f92972190d7e1187b46880b57d9c432ec72455d8a4c27555978d582a94681c"
+at = "Self=u32"
+embedded = "9ab03f0216daf035a0c47a9e6fae450936116f082e8c0f53dab915051056a689"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_prefix::T::ASSERT"
+kappa = "602c9de0e948f8968ea56d97454c9b3ab5301d54f1168aabf269f9d55c8736ab"
+embedded = "54e132c06d1029ed711bf7ed6045d50827798ea002c2fb0929b0676aff651b1d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_prefix_with_elems"
+kappa = "f16048583b24fce50002d84a5c09e7a832b48477c7bb76a0a1b17d2e19c906ec"
+at = "Self=u32"
+embedded = "288a2adb005e965226573cdd365aab4d1606d4774729356136a46a8a00a89d2e"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_suffix"
+kappa = "4cf18ed949696de97c1020d812f34b13cad3d60de52b2e749d4690fe87a2c1eb"
+at = "Self=u32"
+embedded = "d89ef3ad4c5431957522a04748a830a141b1e0bad505d92d29e5436237944d9e"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_suffix::T::ASSERT"
+kappa = "ab111b57b37f96f4f18cc546cd1c3b41b8a2373dbad2e90e083142c2e36f9dc0"
+embedded = "827fb4b3112246581f640d0ffda7baf607315ece5895247d9b742fa5dec619d4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_mut_from_suffix_with_elems"
+kappa = "6acfc10e31ab5e02a0fbf681d908684c8438294055fa6d0b70f965fd615592a2"
+at = "Self=u32"
+embedded = "747a63cd6716121c104983231deed6e5f249440bdd037de12130e73d55fb3f90"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_read_from_bytes"
+kappa = "45ef58bac1785f3eef1cbf58db5c252c91afa5e24439c79b0d2e46a4b9813abb"
+at = "Self=u32"
+embedded = "0001b2823b6337ce113c3eee712d23255b1ecc7fe627050cbc639c3c1f03798a"
+status = "residue"
+cause = "mir::Ty: core::convert::Infallible"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_read_from_prefix"
+kappa = "c40e19697df9331bb6d3b35e78e6c992f383f11249351ceb348ac4e1df1ca2cc"
+at = "Self=u32"
+embedded = "18e4929cee49fa3ee4c8f42d3f1aee179072eeb1696931d783efbd5b923c6ec8"
+status = "residue"
+cause = "mir::Ty: core::convert::Infallible"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_read_from_suffix"
+kappa = "22e07f1a5fa83cd4a119a6218f0e3c902c7374e98f222a04a7090334e34493ea"
+at = "Self=u32"
+embedded = "c8befb3f5e41f46c5f82a50377c9e51feb587cbbf930ad7793320b6894d18591"
+status = "residue"
+cause = "mir::Ty: core::convert::Infallible"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_bytes"
+kappa = "b8ca40353aa7a160041df67f8a7ba52992df3a582f64dd2973fc74104b6fa615"
+at = "Self=u32"
+embedded = "4da2ceb4801f25bb87c40c13b24374ef0f1c00e9582f49f6de4a49230362d185"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_bytes::T::ASSERT"
+kappa = "3cd1b162792e7340cad9450ab59e570c953ed16bb95cc98f5a6837fbaa250e6c"
+embedded = "d7872946888714ef508d2d0fcfa7402e717fde1cb00adcac3d87056182c92bf4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_bytes_with_elems"
+kappa = "fc0e210aa386e7532d0f7bcee741d2698c948b1abc3ace8c251eefb185043b9e"
+at = "Self=u32"
+embedded = "c8828ac065a288c3d06e8d14b2db59c0773b18ce91dfc992e22a26662189af12"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_prefix"
+kappa = "1b9b691cb51ee81631ca685a22d8ba88550e13a88a9fde78747aab3ee34aafb9"
+at = "Self=u32"
+embedded = "19abb48750c16306dd97c686a5b6f924765e69455e2f38f86be45d3965f31ad6"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_prefix::T::ASSERT"
+kappa = "2d6e099e4a9a68d140002a3ab41ce5e0427f6a96955c4c577f79270e88c0ff51"
+embedded = "60c696b2b7e0dccb77db12e29cd8a60bcb12441c66976cc9f3a562ca6bebbb65"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_prefix_with_elems"
+kappa = "48792329cfd087736ede9ff81ccb52b50bdd5f87ea77c6972593f830b6af5609"
+at = "Self=u32"
+embedded = "804b70dbddd2f16cd00248adea6c5bb9ffefe60d0d258e767b3e6b24f8929fd6"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_suffix"
+kappa = "21abf77b779d615cd14e6d8a62d90d34b91e7ba1e075bd8ee1278a0cfa58fa82"
+at = "Self=u32"
+embedded = "e47099836e65165a79ff1d962daf818267cf382050e8a62622f6d242b001ab6a"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_suffix::T::ASSERT"
+kappa = "93761bd8016ab8c01c08ba21d6697dc16c6de885e0bbd9ff45a39f4ab69b7b83"
+embedded = "f10114144cd076e1feeee81a2ec087a0b5942a454c5ea2a63bf60f04df3fb520"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::TryFromBytes::try_ref_from_suffix_with_elems"
+kappa = "939f925ac6a8a8de0c443526ece239998b4b95df2e920def4d61c8d6d6374ded"
+at = "Self=u32"
+embedded = "7b217246b5f9307d3df337b12bfab9232cd5270b4602823152ce316949a98f26"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&[u8], u32>"
+
+[[fn]]
+path = "zerocopy::_"
+kappa = "f06fb906b0ac365492191d633e93286a1e6a330dc77f80512adda23ca799dbd5"
+embedded = "cf70297bff66e24f5d136ec358efb0a67999169ff14af07f7f0a7ca822c50c15"
+status = "translated"
+digest = "ea449a212d484fecaaf01260652b7183809835f83625102dc74974fc3c7cb3ac"
+
+[[fn]]
+path = "zerocopy::_#2"
+kappa = "d600379093b6f5762602637c8d5fbd0597b1b8b3d6344be61f3d2c9eb4888828"
+embedded = "12ecf3866b3989757c5624ac6643b701fe1482d0b2af30b368c779d34795b639"
+status = "translated"
+digest = "ea449a212d484fecaaf01260652b7183809835f83625102dc74974fc3c7cb3ac"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::LAYOUT"
+kappa = "5c56ebda619f9bd316eccaa204cdbef45881488a623e4f36eb50421a9738ceb4"
+embedded = "23552433d2e264b715620e7c433d1e058edfe4cb25abaa027d0d82bd425bb23a"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::LAYOUT#2"
+kappa = "6d93c89336033d1f1393c1cd439fcac6a1794d307b15b6eaf4a3c622e1c15bac"
+embedded = "09d310c42bd9ca89b2319b3bec3964469c0bb999bd472d58a776971d7dcb9b6f"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::LAYOUT#3"
+kappa = "6fe15d847899e6ba795a5a730d8b395a8c7c32726560e4122f19c466cb1f8264"
+embedded = "c203b8f1bed4edf4e07a08de6d72fb31ba837faff46a16ea78136e6ff3d15639"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::LAYOUT#4"
+kappa = "6fe15d847899e6ba795a5a730d8b395a8c7c32726560e4122f19c466cb1f8264"
+embedded = "c203b8f1bed4edf4e07a08de6d72fb31ba837faff46a16ea78136e6ff3d15639"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::LAYOUT#5"
+kappa = "6fe15d847899e6ba795a5a730d8b395a8c7c32726560e4122f19c466cb1f8264"
+embedded = "c203b8f1bed4edf4e07a08de6d72fb31ba837faff46a16ea78136e6ff3d15639"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::only_derive_is_allowed_to_implement_this_trait"
+kappa = "9f0133926f283022df503f7442abe0b87249b119ff7a94e94e6bb74efececae5"
+embedded = "365ae4d89ed064164486f7e594c0d98c810069f017b951d072405636d7517e98"
+status = "translated"
+digest = "6899c81496cfb4ec9d43ea2d88c69bee6912d1d287dc45edeabc865c23a5302d"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::only_derive_is_allowed_to_implement_this_trait#2"
+kappa = "9f0133926f283022df503f7442abe0b87249b119ff7a94e94e6bb74efececae5"
+embedded = "365ae4d89ed064164486f7e594c0d98c810069f017b951d072405636d7517e98"
+status = "translated"
+digest = "6899c81496cfb4ec9d43ea2d88c69bee6912d1d287dc45edeabc865c23a5302d"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::only_derive_is_allowed_to_implement_this_trait#3"
+kappa = "9f0133926f283022df503f7442abe0b87249b119ff7a94e94e6bb74efececae5"
+embedded = "365ae4d89ed064164486f7e594c0d98c810069f017b951d072405636d7517e98"
+status = "translated"
+digest = "6899c81496cfb4ec9d43ea2d88c69bee6912d1d287dc45edeabc865c23a5302d"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::only_derive_is_allowed_to_implement_this_trait#4"
+kappa = "9f0133926f283022df503f7442abe0b87249b119ff7a94e94e6bb74efececae5"
+embedded = "365ae4d89ed064164486f7e594c0d98c810069f017b951d072405636d7517e98"
+status = "translated"
+digest = "6899c81496cfb4ec9d43ea2d88c69bee6912d1d287dc45edeabc865c23a5302d"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::only_derive_is_allowed_to_implement_this_trait#5"
+kappa = "9f0133926f283022df503f7442abe0b87249b119ff7a94e94e6bb74efececae5"
+embedded = "365ae4d89ed064164486f7e594c0d98c810069f017b951d072405636d7517e98"
+status = "translated"
+digest = "6899c81496cfb4ec9d43ea2d88c69bee6912d1d287dc45edeabc865c23a5302d"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::pointer_to_metadata"
+kappa = "dd094a4ba962e89c78db425f237c6bae4003b80796db94a7e037c4a3947d69d7"
+at = "T=u32"
+embedded = "adc54d6da2a041f8307c40d03fbe17f689d470a10dd7298e3798316842416d70"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::pointer_to_metadata"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::pointer_to_metadata#2"
+kappa = "b9b4e07273595cffe7904ba0678c1e23a8055c35c635894aed48ca96d3b4314c"
+embedded = "0646ebc287de1bf59607032b17557c9bb316eca4992ee798aa6255c898f476a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:1014:1: 1014:35>::pointer_to_metadata: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut [u8]>::len"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::pointer_to_metadata#3"
+kappa = "1019b26dd1ef9350020517449ed162c99c7bcdf499cc3db40ae903971fdf02ab"
+at = "T=u32"
+embedded = "26f065a721722f6e54d84535d55e5ff3ca2a4bae215e00014432ec835ef26a99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::pointer_to_metadata"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::pointer_to_metadata#4"
+kappa = "cf526761ba5a602dd25e99785c0d12f0112f1dc34fc8f12cacfd02f12dac0d5b"
+at = "T=u32"
+embedded = "51df349acf34f4ba18157eb9e322798645958b2dc596f9b85f96793fb5d273fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::pointer_to_metadata"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::pointer_to_metadata#5"
+kappa = "0a6fc839f8174fdd76830533c5f9819280dd52ce58b26ff06a1bd5ae5409263b"
+at = "T=u32"
+embedded = "ffd0809f87637b009a35c924d81a912b460da24b5730c90f007e4dbf0ff3c4c1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::pointer_to_metadata"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::raw_from_ptr_len"
+kappa = "ec6d36686ed08efefa946f1a219597f09473b7ac501b2cba57f7755323800f09"
+at = "T=u32"
+embedded = "11aadd101dc4158a07c331629122e5a09855c869e718b080b7fe49d7b0383fba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::raw_from_ptr_len"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::raw_from_ptr_len#2"
+kappa = "2ab242daa2c503b890265b1427a755f073a110ab01a3a7916eb6204a746cac7e"
+embedded = "0b05ea32531cc6ccff356a091cc17a5f463e402e08b530e07ed8464803def66c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:1014:1: 1014:35>::raw_from_ptr_len: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::NonNull::cast"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::raw_from_ptr_len#3"
+kappa = "d006ca92bcbdadcf7e10f66879e5370930cf3cb87ccdf589bc1e121ac10c2a45"
+at = "T=u32"
+embedded = "64b79ac1c764444cffd4bb535603d376b44e2f22b47b65432a1bc1a84ae04ee6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::raw_from_ptr_len"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::raw_from_ptr_len#4"
+kappa = "a4d180514a502b65932fc2d9729c63e88efb23892678d337f48e6d9af2593d4f"
+at = "T=u32"
+embedded = "eb3e46b7a76de88d0ec26026cda7bbecfea6f13477170d509460d8788365dc56"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::raw_from_ptr_len"
+
+[[fn]]
+path = "zerocopy::_::<impl at src/util/macros.rs:502:9: 502:74>::raw_from_ptr_len#5"
+kappa = "7f8f147a3b05a898ca539ba109237e6bbb490418c78d2006ad68d79f05f36382"
+at = "T=u32"
+embedded = "e70eaf47dc834b6aefb955c5b21463f13022c7084e626a9b24bafd2f38c04b03"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::raw_from_ptr_len"
+
+[[fn]]
+path = "zerocopy::maximum_trailing_slice_len"
+kappa = "5bf1f9ce3268ebcbb3e7847dbf0689d50eb858a90ffa62e7eea4d267563d932a"
+embedded = "acdf06dba6fe17f02bf42f1cbb15d90910089ba9ab74cabec5dca5a2f1e891c6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as maximum_trailing_slice_len::LayoutFacts>::MAX_LEN"
+
+[[fn]]
+path = "zerocopy::maximum_trailing_slice_len::T::MAX_LEN"
+kappa = "de8e9ac632b383ab1f0cc91aee08e56f5f22af957629cb2909c0cbd28d005f3f"
+embedded = "6082f13abf866992bfd3dbd4b89bf9d01abfd5f93824c4ff31d3530935c533f7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::mut_from_prefix_suffix"
+kappa = "2ebc154ea2c51a0491c292415738dc3a9879cf0032a93d7e5ae621ade5f9952a"
+at = "T=u32"
+embedded = "9874db58de59b22d1e85b5750af8da2e8c4b3ab08d431c6812981ef7e40c9e2c"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::ref_from_prefix_suffix"
+kappa = "2b3e607530df8aa8586a1964199fb255a72ba55e331c1aed5029962e3f43c21b"
+at = "S=u32, T=u32"
+embedded = "181a9e64aa0fe0524b386e4496b749204fcb806af1ccafd1c1db7bbf830c871c"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&u32, u32>"
+
+[[fn]]
+path = "zerocopy::swap"
+kappa = "3995ac3bad088bdc37b4d8f206edf2c0be04a0a636b930b89c5b1d539b9aea8c"
+at = "T=u32, U=u32"
+embedded = "6d6267853e320857f8cd3c66e6d53601227fd1511d97ce3cd524d4854146ebb9"
+status = "translated"
+digest = "9855a34245a9bea97b32cf8a4e3dd3c7d44da94a217993062066af3a15fcc564"
+
+[[fn]]
+path = "zerocopy::trailing_slice_layout"
+kappa = "3298c5844f82113d53d7d7f7e529b4d4f801b06bccadfa29ec1bfdacc1cb7f17"
+embedded = "e1c19c028034568c3e24cd5a90f4eccbbfa1de3e24ebe0a5e71c35c1b0a1dcc0"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::trailing_slice_layout::T::SIZE_INFO"
+kappa = "861d6b87691b51420848f249249e2a1da1b38db8e9349f7662c16ccb34b625eb"
+embedded = "50159463e70366b7eee7246b99134f0e77051cbf59e6df1eb0c921bb4d091739"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::try_mut_from_prefix_suffix"
+kappa = "00ab84db594631b6768e26eaae06b48e4c0e37001cf42bedca3c292fb1784cd4"
+at = "T=u32"
+embedded = "95f0fe06d20853de5754ce92148ea2ee5d75eca622003717cd2d3020ffc251c2"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&mut [u8], u32>"
+
+[[fn]]
+path = "zerocopy::try_read_from"
+kappa = "765421cc9a1122ceea39c44fed5778c8f299dfaca08dfec6db194acbacae370d"
+at = "S=u32, T=u32"
+embedded = "0638f9b801f95c48a2e6689ac51660a2b11504864759faebdb232367bb7576ff"
+status = "residue"
+cause = "mir::Ty: core::convert::Infallible"
+
+[[fn]]
+path = "zerocopy::try_ref_from_prefix_suffix"
+kappa = "8ea10f69866a82df4d3cf893b9b929162deea181635537bffa18ed4e2baeebd3"
+at = "S=u32, T=u32"
+embedded = "fc8705e1b5ca08000d884ef3d8766b50f1ffc14bc5fd685f12137db7e64ffef3"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<&u32, u32>"
+
+[[fn]]
+path = "zerocopy::usize::from_elem_count"
+kappa = "a6cfa840fa782a7cbce7fef6ff208d82c87aa9f0ce5b37492ef3d40f48672f10"
+differential = 7
+embedded = "8b045c5d32538fc512be74b5c43a19e4811d8f61643adbaa7d7cbe9be33233cb"
+status = "translated"
+digest = "6e1cea05904c8d69783e42c3271a39bb1c6b68b5292c3011f5d10d003ecb7e72"
+
+[[fn]]
+path = "zerocopy::usize::size_for_metadata"
+kappa = "319ac792837dd1606a0ccab971336f6d22891577bb11ea692159215efa7b13d2"
+embedded = "dc2fc9f77ea1f5ce93bc2e2bd39e005d4171011eca88b46a997ef4116551cb5f"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::usize::to_elem_count"
+kappa = "8377634d8f9c46fe784ec16eab64738a4c870c5ddda0cb7b58baa2d17f2b946a"
+differential = 7
+embedded = "b0e985a490da184b1aba5b6e1b6258cb623cb8ce0e86a4a36d3444336f04bb77"
+status = "translated"
+digest = "45150b3dacf03a8f03701a1cc21945affbad3ec992caab6cdf7ace57a6917abe"
+

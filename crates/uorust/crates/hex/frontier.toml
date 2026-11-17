@@ -1,0 +1,59 @@
+# The hex register (written by `uorust crate hex@0.4.3`; do not edit): every body of
+# hex's MIR at hex 0.4.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 179
+translated = 1
+residue = 178
+
+[module.crate]
+bodies = 175
+translated = 1
+residue = 174
+
+[module.error]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 179
+embedded = 179
+evaluable = 179
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::FromHexError"
+bodies = 165
+
+[[cause]]
+cause = "mir::Ty: BytesToHexChars<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:137:1: 137:33>::encode_hex: hex's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:137:1: 137:33>::encode_hex_upper: hex's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromHexError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1

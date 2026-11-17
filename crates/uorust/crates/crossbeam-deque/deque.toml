@@ -1,0 +1,456 @@
+[[fn]]
+path = "crossbeam-deque::BLOCK_CAP"
+kappa = "ae6ee5345855fd043c2858179ef9bc5bc6ab05d4973bb45e2b72e09e03823674"
+embedded = "f4a5079fe395aa3ef4c30e2b93c8e29aa659526a600aac177f4e3e6e340e6a8a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deque::LAP"
+
+[[fn]]
+path = "crossbeam-deque::FLUSH_THRESHOLD_BYTES"
+kappa = "d8027649583d40a4c0f11edb7530cf9bdf73b39df89f9aa6aec1d42a6b7627b1"
+embedded = "dba5959fbec0f7b8a09cf47f289dc35be8958ecd336080e7b46e9ad6079d8e70"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:166:10: 166:15>::clone"
+kappa = "be410898d6d70b008b99cc9c557c1d5572f50a1269c8852345568368c1ed02a8"
+embedded = "a58b73bb193e611791fbe2a97a2796762fb195bf144896203ef467ccee31fbe2"
+status = "residue"
+cause = "mir::Ty: deque::Flavor"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:166:23: 166:28>::fmt"
+kappa = "bde80abf1a0000a920bf49aed68237aea877a80c126366336a3fc9ac3af7623b"
+embedded = "dc875720b80801a472f46dd8257914405726f7dcc4d6cce4630fb4968771130e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:166:30: 166:32>::assert_fields_are_eq"
+kappa = "704a2ae684838f880465e56f5a2cf9064aa9f3705c927895d48c676ba61408bb"
+embedded = "3def0a64ee4feed7a138f70ee00fd8bd25ddea7a11566e3950393cef50ae00ba"
+status = "residue"
+cause = "mir::Ty: Flavor"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:166:34: 166:43>::eq"
+kappa = "0d83cc5b554b78ce0f930cbfb4854188db020a5c6735da7bdf8384e4be3ea8de"
+embedded = "88d265fdf48540eccc5452445579184314fe0b38acb8dfa88dec6b8389485546"
+status = "residue"
+cause = "mir::Ty: Flavor"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:2099:10: 2099:19>::eq"
+kappa = "f69d9d79fee04e74f162a752909886650c389248cf13c3b58da7216b444fd804"
+at = "T=u32"
+embedded = "11246a9dd712903c3962ee4381dea0de92f1b92c6e8c73ce4e3b0928f727627c"
+status = "residue"
+cause = "mir::Ty: Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:2099:21: 2099:23>::assert_fields_are_eq"
+kappa = "0499aa5666b981dcc2a9c5e2752d3456df2e0340961c52454602a7a3e7b11f1e"
+embedded = "e283f049ff232d7b1f0cf655ae892c21c4cbe2aa064ab03ae02431745b1ab33e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-deque::deque::<impl at src/deque.rs:2099:31: 2099:36>::clone"
+kappa = "09e79886eaac28f6b8f3c47c153f1a75076c0bc820cb6482c4a72c4e9a567ba8"
+at = "T=u32"
+embedded = "3a2942d86aa3f4ca04137186231a42947a8e7389c00533a03fdea6d449ac69af"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Block::LAYOUT"
+kappa = "01e9b3d8112d3c475c0a4d2d56b3c95f0378603b7dc4ae6e41be252f8978d6ca"
+embedded = "f22fbdfaf0b0d1f62bb2dfcbefcfc2c25c03997d6a955cdadd7a7fff1e1dd429"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "crossbeam-deque::deque::Block::destroy"
+kappa = "c05d38dfcba9ff1e1ea4bd0bad4b84d0dd867c5314792f7464798b4e6007c7ab"
+at = "T=u32"
+embedded = "2494a6a0564fea6f97c3df5176d2c7c3e08aa8d432179d4bdc75ce78058e5e53"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Block::new"
+kappa = "b7563b568978f02dcfc1a5656d9dbe790fa86dfafb2da5bd36194d64cea43094"
+at = "T=u32"
+embedded = "397c88433bbd0b5efc9348982bde025d899bef230fa3ec080697b700edcc3818"
+status = "residue"
+cause = "mir::Ty: deque::Block<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Block::wait_next"
+kappa = "2477fec8a035c5e0e5b9b0fca44d32e1f4f0733e6716451e8d10135f68cfe167"
+at = "T=u32"
+embedded = "75a33c03a8ccb6f3d8ec95ed95ecfad291262935dc4c7a8d072eb28931016233"
+status = "residue"
+cause = "mir::Ty: Block<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::alloc"
+kappa = "c96036fffb1f732b9aacd20dc6a8a84d755bb0b58ee9ff126a8b5fe68776b154"
+at = "T=u32"
+embedded = "7bfdd3e82d0445bac110f66277be4f227955e6ce4d3de41515671d9e7243994d"
+status = "residue"
+cause = "mir::Ty: deque::Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::at"
+kappa = "a826de3523bcecaf802305ba80a228375e5bdb3d790c526ebe433e3703e3ff2c"
+at = "T=u32"
+embedded = "46c5cb8fcd8ec45bb0dd5c6e7dd3c3df9197d52945a35f3b5b48f56c853e4977"
+status = "residue"
+cause = "mir::Ty: Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::clone"
+kappa = "5c9f705a06d386a3cf4a3ae3ce79c7aa918f0c3886120317abfe901e118268f0"
+at = "T=u32"
+embedded = "e2fc91c1652b7d4186987be45193fa92a1d31350b628479b0fe64ee296b22cfa"
+status = "residue"
+cause = "mir::Ty: deque::Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::dealloc"
+kappa = "cf829fcb9d99d49cc4b56a927760165331513876da7834bb8e4a9ae43e2e63e2"
+at = "T=u32"
+embedded = "3d4ec448e0084cc51f9c7d31931a758d8a31823fc448b6054d639a490d77281c"
+status = "residue"
+cause = "mir::Ty: Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::read"
+kappa = "682acaff55edf4a3f017c938ce31eec7d8702b59e658f50c439038cd336ded9c"
+at = "T=u32"
+embedded = "cb7cebcb93df7df8bc9194465a552e8d2d59e5596855fe5002730c464d2e0f2f"
+status = "residue"
+cause = "mir::Ty: Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Buffer::write"
+kappa = "a2e9ef3975fe57a39252f12a8930712c1040f8585ff928ec7a6097b1547855ba"
+at = "T=u32"
+embedded = "8d633d9d503e22e7255eabe42e0de21bf54ebdb98d774dd234fab91f591d823e"
+status = "residue"
+cause = "mir::Ty: Buffer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::default"
+kappa = "c461f110127c330ffd3b788fabfc94787d4d0226a954a50d02484ef53c081358"
+at = "T=u32"
+embedded = "8241adb6ba3ae272da142aabfc519a25ff2e499e3c7d8fdbcf97ca61c4cc0781"
+status = "residue"
+cause = "mir::Ty: deque::Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::drop"
+kappa = "eca83d0815887f7f96b4b243c60bff259c4e2f41431a845a53a375faf15cff19"
+at = "T=u32"
+embedded = "64c3743d7b62767e5d50770920db4042c67308c5bb6f9a071662bdf026e628a6"
+status = "residue"
+cause = "mir::Ty: Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::fmt"
+kappa = "0f76d69c0a74c515696fbda132e77eaa9107eca02fa3146d5c1c77c3d09eb99d"
+embedded = "ffdac75daec7335a7492f6521f1d48134f3035e29b49405371d624fad925cfb4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::is_empty"
+kappa = "90959be63ba46f96d80e65f8ada3172cea24806a1358d16c72a78aa12dee9b57"
+at = "T=u32"
+embedded = "c66a5c432f74f8a8797fc1ab1664cdb59fbfa036fc796b8ddc2c48b95459589e"
+status = "residue"
+cause = "mir::Ty: Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::len"
+kappa = "0181f0f39fec174c50d23b2dbfb6fe6f99a2f89c55c0c5e8944533f3329f3fbe"
+at = "T=u32"
+embedded = "70deb54a198923af78c14e0ec8ebaf74f5397a79674abf71cdc155b58167ff3a"
+status = "residue"
+cause = "mir::Ty: Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::new"
+kappa = "22785e0e2535184703afcfa271d1ff429cb1bda2c05539c727e9be97fe14f99e"
+at = "T=u32"
+embedded = "76fcda3bbf1e804e973055545b662a00f53fe66c531ebb2579c00ab3c4d7699f"
+status = "residue"
+cause = "mir::Ty: deque::Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::push"
+kappa = "dd16f49ffbb1e769ee03e78489ec6bb4bd70857a11860697bf850958e073a049"
+at = "T=u32"
+embedded = "b605e84ecf2985ac7767d93a346298b0d2c102b8f6d7150dda1917211a89b36e"
+status = "residue"
+cause = "mir::Ty: Injector<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::steal"
+kappa = "7b707a991ddeb969b71a54f3d4d816826c8f116707567527575f72f55a4a8942"
+at = "T=u32"
+embedded = "4c00cb16eb54fcf0a42cc3deacf4e0e7c4aff6b60fc4e80864b88d4d7a2e892e"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::steal_batch"
+kappa = "5f2479a03c8fa77c2b1c3f083cdde80f246c115386484786d73ce84697d4ea07"
+at = "T=u32"
+embedded = "21a5b048bd3a74d1e02c96e325a2c0f4d33221173d6f8e28c1b9341bddc798f1"
+status = "residue"
+cause = "mir::Ty: deque::Steal<()>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::steal_batch_and_pop"
+kappa = "2dfb89b59db1baef30f50a2704150cd690cffab7676e6a30969e0ed5dcf5bd8c"
+at = "T=u32"
+embedded = "bfb21627b74d534487f8b40563e352adfe417105b5464e5aef2f2f87e5b24b76"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::steal_batch_with_limit"
+kappa = "e4ee4789ab27542a994d1269ac3b4b0940ee3c68ac796637a491c860924dcab1"
+at = "T=u32"
+embedded = "febc3f06f3ccfb3ea79d676015fcc9c7dd34450c17f74a7a793f992adb8f97fc"
+status = "residue"
+cause = "mir::Ty: deque::Steal<()>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Injector::steal_batch_with_limit_and_pop"
+kappa = "f4a248ff4f66b8aa2592826dedb79b1750a106d2188fed69a36dc39f34add976"
+at = "T=u32"
+embedded = "bf86fc3994350d50d9d238c71004a7290ef20964297fd949a6afdaf11357d9de"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Inner::drop"
+kappa = "31bb001805381959ef1f9eb2f486f5938ec3bb3ece74660792970c4266b467c9"
+at = "T=u32"
+embedded = "04d073b5e6e4667f15ae625c43a753019e5cc81f4c1330a4be7202aba8d667bb"
+status = "residue"
+cause = "mir::Ty: Inner<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Slot::wait_write"
+kappa = "61aeb8e62970f0f33631a8f22c78c29af4bb56001fd4a34804ec408111d7be6e"
+embedded = "d64978bf250e16a7b35264153deab1b26c677e365e3e5a47d7ddd7b15c512e9b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::fmt"
+kappa = "7060448af51d6be4c612d4e75a8ae656d50f2ae84bd2638a110f266a7db9bae2"
+embedded = "bb7bc9c866846bbbee619fdd8e465a0bb8e6d8d8fd448c5a4456383da0f1a980"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::from_iter"
+kappa = "d1c326704206b133e997f0fec80a67852642b14d8515634181d9a21f235c6909"
+at = "I=u32, T=u32"
+embedded = "c3cdec833c755c63e9bd0db4110aed5034b4a1a36d1fecc24e9f3161b68fdbba"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::is_empty"
+kappa = "62278a0c61c9c1ae47e078ded19f1ac65249a89ad358108b184255f79edc5e08"
+embedded = "e69a62f3219a7b8833747b3e982dec8cc9dc279852bf3b6d99a83ff23feb32da"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::is_retry"
+kappa = "d1d4f47e0fbe5df26754082724beb4a330093fb03ee2380eb6854dce6d1ce3ab"
+embedded = "72d728e6c4e7f554bb38b553370e1263c22bb69c729b343f5a11ba099c124071"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::is_success"
+kappa = "acae07a35bc2a60b9cee51e04e40a5cecaff787cbd02b83d4e0c674539e7361a"
+embedded = "a31d83de3fefda122332acf100072fcdbc39397f72dfb5561ae3bb0d37047fb1"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::or_else"
+kappa = "f67135fd7d593ac77ba154113f6df231b7fc5c7df7f7e2992822d74336cf8b1a"
+at = "F=u32, T=u32"
+embedded = "cf2f6e0ec3426574657d47ef2e8d741f13f0e8a8ffdabb444a4b95fb215e4631"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Steal::success"
+kappa = "e8da9e7844892b9edf7d958c9030b3f010c88e6b6f9ff08691423782565381cc"
+at = "T=u32"
+embedded = "859085aff9e1271b8a91df7585bbed05cac65c9633dca097991786f8c75121f4"
+status = "residue"
+cause = "mir::Ty: Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::clone"
+kappa = "8f78deb28424541c77180d569c712e5605d1eda8d775c0afd6f8cfed1e79ef68"
+at = "T=u32"
+embedded = "94f0e4b00dbeb5ae02ed81c8aaa1f4c9e44252fe61d81c4da0e6c863c5c6c22e"
+status = "residue"
+cause = "mir::Ty: deque::Stealer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::fmt"
+kappa = "1d7dab945ef49a1027dd54594d4d2ce430d5e95b82b24127046841c7eadb2f6d"
+embedded = "e2408ef15cd049abb4251f4ba7de507edfdf402634bc7fcde55567ad05479b2e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::is_empty"
+kappa = "3062b9a5c85d32c4292f80f7a5f0c7a0c4c5d6ed0abaf64256f4429a4d852548"
+at = "T=u32"
+embedded = "080e97bc005467d17e24adee0870fda773c71322bef68aa5e4d3ea4bffa92ecf"
+status = "residue"
+cause = "mir::Ty: Stealer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::len"
+kappa = "2979c72daa7859e971007f1618e1d20f39fa6c3f89bc3f790f6147defeed9e4b"
+at = "T=u32"
+embedded = "8445c5eda8514b61a2c2ce8d00f77f4f7e6cfa14797434514fbf50134211512d"
+status = "residue"
+cause = "mir::Ty: Stealer<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::steal"
+kappa = "862a4dab324ec4e7e0eb1c50df4cf95e174eacc7432682ec3af89adc98145340"
+at = "T=u32"
+embedded = "125bebceb34c10d311b46ff60cda3bde8a15bd3678a28074ee40d702062c8942"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::steal_batch"
+kappa = "f98a21334b69715031b7416bcb34e1a7d7a4060735771da28d4951d584d219f7"
+at = "T=u32"
+embedded = "2bb2c89147f4493543459a7c354be0f58018b2b9bd9b1f3ed83bbe5f99933a6d"
+status = "residue"
+cause = "mir::Ty: deque::Steal<()>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::steal_batch_and_pop"
+kappa = "90dc87add0b5a4f97d2562c69c1cef87ce8d02c4cf09951423e34cfde652f365"
+at = "T=u32"
+embedded = "c5314b335974b50e02459eca190f6277f9eadb0f4ab4e71c67ad329f46408b0d"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::steal_batch_with_limit"
+kappa = "5a88f1ced4a1f02131195f5db6574b5a3fdaa4d2130430faf3d7099e7148025a"
+at = "T=u32"
+embedded = "f17dd6eec8aa483204a01ff3a74daada5289ed508f1513af07bb03e6bcb0efcb"
+status = "residue"
+cause = "mir::Ty: deque::Steal<()>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Stealer::steal_batch_with_limit_and_pop"
+kappa = "854563e5a9e4452f5721c0a6d88a80232f3c2dd3d01a1c6d95b2c0ab15f47280"
+at = "T=u32"
+embedded = "96291da074b91a405f34eb65d86f2cb498f48e95cf013e7b6ad6fa5a957ec815"
+status = "residue"
+cause = "mir::Ty: deque::Steal<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::fmt"
+kappa = "1940d4f5de59c3505a6ef58a8dcc5f60c722e2b6db79c70e5c0329a18cd08165"
+embedded = "f56f539425be0066a245e94f6393cacba42b5ac81d78e190a3a1f5e814f10147"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::is_empty"
+kappa = "3efd88b594cf4c3864c8d2357f4ad40ed203a49f6ea647e6089e1b80cc7786a5"
+at = "T=u32"
+embedded = "f708c5094dd1e16c22c46ade2dfdead62ca4b4f608ad171d30b10aed6e4aecd3"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::len"
+kappa = "12a478015e1d5499084f859df23f5d7a4f781a8f44b0f465e9228d260c1eb209"
+at = "T=u32"
+embedded = "d89d3d0982b6c96287cb834c2c49cfc968c810ebdb07976aa3f6dac89dab3d20"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::new_fifo"
+kappa = "f334823ea6fdef130c69a39f5ddbe46cfb39f3d5a5becd4d7977cf1b64927106"
+at = "T=u32"
+embedded = "f8217fb104cce05331b63bf8707ecf40d3836a3aebd47296ccbd153cc0966c21"
+status = "residue"
+cause = "mir::Ty: deque::Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::new_lifo"
+kappa = "89bd15606993761047a429a0683e103606050a6eb472afff8bf05df2fd60a29c"
+at = "T=u32"
+embedded = "c327bb1332b6c451b95e8f478cd5a5a91254dd304cd6182fb5bd747cea17998f"
+status = "residue"
+cause = "mir::Ty: deque::Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::pop"
+kappa = "f0ff36cb5d4858894267a7f1cd78d4df142f2f10c7cdb27d7ee511ca0cae417b"
+at = "T=u32"
+embedded = "12fa33c08851fd76a4006acbe57518ca9337f78a175e341ff63608209fcb50c1"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::push"
+kappa = "6513423b010cf509503050ee13e5f9f0c6dcb11c9b13011fd32628f74909a367"
+at = "T=u32"
+embedded = "f0fae40b572c707275adc66b55c8e5fe5e455e3c18376925a094564b32402675"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::reserve"
+kappa = "8bcaf41b2831858b119ea1387124f3e948be0167de284ec404f584b3eae7f162"
+at = "T=u32"
+embedded = "5c52685d0b2d87a247a4fbc9c12a64adada6fbff2838725961618b3943b1bea9"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::resize"
+kappa = "0f9b1049f58c066237cbf8492a3efd869aac34b6c1ee6c2ab8b5176d36ea5785"
+at = "T=u32"
+embedded = "dfed3c4706082d549c9a69bf001acb9ac0c3ea23fd71878c6b98b30dcf3c66de"
+status = "residue"
+cause = "mir::Ty: Worker<u32>"
+
+[[fn]]
+path = "crossbeam-deque::deque::Worker::stealer"
+kappa = "10887d3c61c40f9a8c88a050d6be8427207bfb1bf7de32a211a6b08b19d570df"
+at = "T=u32"
+embedded = "5c3071152ba7157e0e325644e6e8379f16d0eff10b667f82bd0f0badb4d218e9"
+status = "residue"
+cause = "mir::Ty: deque::Stealer<u32>"
+

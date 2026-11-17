@@ -1,0 +1,174 @@
+[[fn]]
+path = "shlex::UNQUOTED_OK_MASK"
+kappa = "3ea76ad65b7250a77b3d02fa0586e0ddf536da2589c15353a382b3a149b1f6f7"
+embedded = "f34dfc21ab30a1a6a5d0ad66900f3ec2ec3a1c35bc18361cb404d254c6aafcc7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bytes::unquoted_ok: shlex's MIR stops at mir::TerminatorKind::Call: bytes::unquoted_ok, which shlex defines through itself"
+
+[[fn]]
+path = "shlex::append_quoted_chunk"
+kappa = "769427c8753c43409e19cfeed75a9466ae85beafb8f7c169be0fdd8b01d3ad4f"
+embedded = "a44deb2bf906ca4b2eff18efaae237a3e78acb0707f271d01152f9efef778c73"
+status = "residue"
+cause = "mir::Ty: QuotingStrategy"
+
+[[fn]]
+path = "shlex::bytes::<impl at src/bytes.rs:168:10: 168:17>::default"
+kappa = "9e5fa9bbda46fedb6a9e6e08bcc468f30bd069081cdea2248d8fba3b55b4d33d"
+embedded = "b44b7cdfaee1adcd0286293b98e6847a9336a8925e35a969a4f89cbff331c82d"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::<impl at src/bytes.rs:168:19: 168:24>::fmt"
+kappa = "f89804b406aa2e2bd2e06c93f17089b66300d9b039b188cf6a48fc23971c3dca"
+embedded = "c295b6b58f5b029c3fc0bd7161d9326713fd50fc2a72e5cee11e8abb1f9761e5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "shlex::bytes::<impl at src/bytes.rs:168:26: 168:31>::clone"
+kappa = "0b17f6ef8b57ca0c18f228e2e04343df6d2d4b2e19d3bf7ef90afbf065b73eee"
+embedded = "fa22d3efcd2af1aad4ee5266e09a81ba790848bb6f0115ad55419be56fe33c1b"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::<impl at src/bytes.rs:232:10: 232:19>::eq"
+kappa = "28de25b074ad4b9348ff8c75ceaa651d13f8514b91694f7f223bc141001e7a2b"
+embedded = "8077f64a4b5af2f0693aa7d6b8886f9f120de7dfd4f6895cd67a1cea0ca7a8b3"
+status = "residue"
+cause = "mir::Ty: QuotingStrategy"
+
+[[fn]]
+path = "shlex::bytes::Quoter::allow_nul"
+kappa = "c0584734cdccce1d65047b86901093875841549f8cd3e2d7bf04e887c2555fc0"
+embedded = "188665663724d1d2a0dca94f7fab97d77ba64ae577c22aac3d8d80b30fa7c8fe"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::Quoter::join"
+kappa = "b886c91c622d06e85a7d2026e6927ff9c028f21c05be1caae3b923b0eeed5060"
+at = "I=u32, QuoteError=u32"
+embedded = "06f49f9fe10dedea4ce557bda1cc470866fbc267ee58b96c06c3ae9a1bb69e32"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::Quoter::new"
+kappa = "20cbde4c9e7bd7559811ba9d10b34ba5701e89fc59c6becb0a838ed8f469fee0"
+embedded = "1d0f75f94208b8ea026fdc7782b44f4c360664fb217f22e12485b175345251c5"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::Quoter::quote"
+kappa = "f7f8cd72f30a55a595a6fb80931cdc15b6cfe4f591b78da21ab46833d19ae61b"
+at = "QuoteError=u32"
+embedded = "9e41c98730f463209d7e830e606f7b30c3040d13d1279c8ffe01a0ddeeda1b9a"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::new"
+kappa = "16cfbbfc2daf3cabe5afeea1df9669a1bb46ada62eb401b1297a2aa95c2c5592"
+embedded = "ad6794d3f67472f95f125b2537b212faea9b0329ae59e41cc721750f286b0f21"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::next"
+kappa = "54d9cd3431431b43ab7676f9d3b151c0ee919e68b19df2f005b16075667d297e"
+embedded = "8634cbcf294075b6b30bcda52812aabe86f89c94d4f715aa7531877dde55d8ac"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::next_char"
+kappa = "b297dfbdd3f5da9c9ae83564e774ad0191cf20a77a88e3629361697a62929088"
+embedded = "89c0a5241b275c7855267a52538239471f6e36d6371c44d2a89b04bc778dad43"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::parse_double"
+kappa = "5b7be8984e0968af0593273fff45d3386d2e3e0cdb02a3cd4c2b819f7004e878"
+embedded = "29226cb6d9804e4f46dd49ec459564e6f2b5452dfbd68e118bba946bba6760f5"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::parse_single"
+kappa = "8587f6e0bdc24bd5a440dd5d1a255db1633f98d5dab7c2f70e44368e50c89a8a"
+embedded = "d666646b6e430785b9a9e2c04c9dc400f6f0a0e53c376cd2c3411037d3a78628"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::Shlex::parse_word"
+kappa = "1c8bd970595a3fbe383c110497ca925db6bfbbd5aae2baf134341a2c4b5ef5e4"
+embedded = "e560a3cf4640926de462a42f013a47130fddb9e9af867d68f226142de00002c0"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::split"
+kappa = "08f1d5e1cfb620b045a2609049e4679b88bc09f2c7bbc98cdf69d4c07bed1c9e"
+embedded = "0fa9f0859e6477c75830124c154b7e64ad4f54f0a9d70a0c7a3203c0179accfe"
+status = "residue"
+cause = "mir::Ty: bytes::Shlex<'_>"
+
+[[fn]]
+path = "shlex::bytes::try_join"
+kappa = "73c915e125847cdd82e352aa7e942c1fccf78f5dc2229000b76cb2274b19e076"
+at = "I=u32, QuoteError=u32"
+embedded = "ad0e34818a3f2a7e5e763b907ab5ffe122c6e4b0dcff2ba06a087f7d644e7408"
+status = "residue"
+cause = "mir::Ty: bytes::Quoter"
+
+[[fn]]
+path = "shlex::bytes::try_quote"
+kappa = "a41decf214c9b250b02f6b8e22a7dde18ebf58f7fa59db04720d1245dfee4033"
+at = "QuoteError=u32"
+embedded = "6b0fa76bfa4d82113e5c8142b0c89ed95bf4c89bab568eb601fe0b2c26955896"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "shlex::double_quoted_ok"
+kappa = "9db96abd4eee4d0b4dc80f40a43240c91b7d2d5289fd8b6c784db4ff99c19d37"
+differential = 7
+embedded = "9f1575bff25ab767f697afe757a18c24b65fd2e89eb6d00c4dcd38df33c3f1e3"
+status = "translated"
+digest = "967a93cb4ceafceeef65fbd505af46e4ab40553e2d4b9f574a6fa01e2818bc07"
+
+[[fn]]
+path = "shlex::quoting_strategy"
+kappa = "206cc0d15218d9540b3c0f188b13079c71de9526d992b9f37a71e5687604bf10"
+embedded = "6022f54f7498c1b321e74fa735af0fd2526d3e11ac46230e8adea6d3a03a8880"
+status = "residue"
+cause = "mir::Ty: bytes::QuotingStrategy"
+
+[[fn]]
+path = "shlex::single_quoted_ok"
+kappa = "f4c96642b23c97689164a01ad27d825ecaca5644ac09347098e1aa0db02ee8c8"
+differential = 7
+embedded = "08dcef07e59bda6b27507b189c6eae3ca8072e252a02923bb693c73f62d281a0"
+status = "translated"
+digest = "550965b57503287029716a0fe28adc888cfabf5b387bee645a167503e798b86f"
+
+[[fn]]
+path = "shlex::unquoted_ok"
+kappa = "d65faf3d26a7151ac9682ba35ec69a879f119204966c52c4794e449f2fba8b0c"
+embedded = "d7fa37ef69d691d6402231c301b532d9af42c9804df136ca3fccad8b62a706e1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bytes::unquoted_ok: shlex's MIR stops at mir::TerminatorKind::Call: bytes::unquoted_ok, which shlex defines through itself"
+
+[[fn]]
+path = "shlex::unquoted_ok_fast"
+kappa = "466e0886d233493d7db5246874e3cfd7737b2c432f277a128a990e1127c9adc2"
+embedded = "322b5aef41f30782dbbff9caee6f1194e8dbba849875d1c33531f6edb70955d8"
+status = "residue"
+cause = "mir::Operand::Constant: bytes::unquoted_ok_fast::UNQUOTED_OK_MASK: mir::TerminatorKind::Call: bytes::unquoted_ok: shlex's MIR stops at mir::TerminatorKind::Call: bytes::unquoted_ok, which shlex defines through itself"
+

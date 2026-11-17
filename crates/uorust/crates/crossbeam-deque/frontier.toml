@@ -1,0 +1,110 @@
+# The crossbeam-deque register (written by `uorust crate crossbeam-deque@0.8.8`; do not edit): every body of
+# crossbeam-deque's MIR at crossbeam-deque 0.8.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 59
+translated = 0
+residue = 59
+
+[module.deque]
+bodies = 59
+translated = 0
+residue = 59
+
+[embedding]
+bodies = 59
+embedded = 59
+evaluable = 59
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: deque::Steal<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Worker<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Buffer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Injector<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: deque::Steal<"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Flavor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Steal<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Stealer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deque::Buffer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deque::Injector<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deque::Stealer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deque::Worker<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deque::LAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Block<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Inner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deque::Block<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deque::Flavor"
+bodies = 1

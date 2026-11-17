@@ -1,0 +1,45 @@
+[[fn]]
+path = "atomic-waker::AtomicWaker::default"
+kappa = "daeac5daefd1853659c1945fad388e16190878eb122bc2b4ebca186e88c5a647"
+at = "AtomicWaker=u32"
+embedded = "f18130a81263ba812116ec4bf03c9f79a9da691646fdd9873aa8a4b4558ceb38"
+status = "residue"
+cause = "mir::TerminatorKind::Call: AtomicWaker::new: atomic-waker's MIR stops at mir::Operand::Constant: the constant item WAITING"
+
+[[fn]]
+path = "atomic-waker::AtomicWaker::fmt"
+kappa = "9ca04d5401bcb71640401d7e957760f092ad2c03de14d6a8e5e48b54286b940e"
+embedded = "144673825b8a0eceeb36833357f2a5fb6a321465ceaa31e4af2475860c8c80af"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "atomic-waker::AtomicWaker::new"
+kappa = "633d05d3eb9f7ef0bec7f4171b3b1ee15e2e566e9a5070268f8b3d703a1b3d27"
+at = "AtomicWaker=u32"
+embedded = "01b1f6d62fce1ba9f4a68657d4e1e8573ac8454e7c3a9188398773cba2537278"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item WAITING"
+
+[[fn]]
+path = "atomic-waker::AtomicWaker::register"
+kappa = "d41489e0b752b92b0af9e7180f4effc09c1ceefdb680964a360f09009b9aa116"
+embedded = "060e89b85123ceec9f6d8b22d66b7218948a737d6f24f46d04dcf55b3ceb5361"
+status = "residue"
+cause = "mir::Ty: AtomicWaker"
+
+[[fn]]
+path = "atomic-waker::AtomicWaker::take"
+kappa = "37ede35748054875534dfee3851726f575be8382b6be6273b4f1f39fc5f5fae3"
+embedded = "d0014537d367b3a97504d6340025af8766ddfe507cdee864dee4695c7cceed0b"
+status = "residue"
+cause = "mir::Ty: core::task::Waker"
+
+[[fn]]
+path = "atomic-waker::AtomicWaker::wake"
+kappa = "6828d4bdba5cd553134c6bbf9ffe7dcee156a736c428f5d47a6b94c1c798fc41"
+at = "AtomicWaker=u32"
+embedded = "cefb2b00a7e51ac3cb24f0187cb1fc5d34b4b9c1489f6595785a8a2fa66cb4df"
+status = "residue"
+cause = "mir::Ty: core::task::Waker"
+

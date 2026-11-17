@@ -1,0 +1,130 @@
+# The tower-layer register (written by `uorust crate tower-layer@0.3.3`; do not edit): every body of
+# tower-layer's MIR at tower-layer 0.3.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 31
+translated = 1
+residue = 30
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.identity]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.layer_fn]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.stack]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.tuple]
+bodies = 17
+translated = 1
+residue = 16
+
+[embedding]
+bodies = 31
+embedded = 31
+evaluable = 31
+blocked = 0
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Layer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: identity::Identity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: layer_fn::LayerFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stack::Stack<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tuple::layer: tower-layer's MIR stops at type outside the lift: <&u32 as Layer<<&u32 as Layer<u32>>::Service>>::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Identity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LayerFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stack<u32"
+bodies = 1

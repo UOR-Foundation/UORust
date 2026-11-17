@@ -1,0 +1,71 @@
+[[fn]]
+path = "idna::<impl at src/lib.rs:64:10: 64:17>::default"
+kappa = "c1936d3bb8d34a0afc614b1a99758f6b3e869850689168e1ab9d1d4e30002ba7"
+at = "Errors=u32"
+embedded = "7e85dd9cf078533a021ca7bff106d8bc2cc72c0e1df53a194e51a870419a71cd"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "idna::<impl at src/lib.rs:64:19: 64:24>::fmt"
+kappa = "19a7253db72c52fb2f331ccffbf2deac5c3ee1001d0e7cecd4694890cbda10f2"
+embedded = "0d0b7ef23de1482fc8b9e0b0f7c5f37cd2be356ad1a923be7a20322fa51a9b7e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::Errors::fmt"
+kappa = "50188fb91947a23202577d7f41e6e17033adc278a1c2a14ac848c81074d9fa4e"
+at = "Errors=u32"
+embedded = "9a558972411eec687ab8625a7ccbc0bfcb7cf29aa3cbc31f3f33406ed4b1a1fa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::Result::from"
+kappa = "9f8ac1f7dd935112cabc1fc98b4547e98b5f981bd89137363f807510fd694360"
+at = "Errors=u32"
+embedded = "ff5dfe35615fc1aec21875f9cde95a433b9418ff2d4468a843b6f290fded1b3a"
+status = "translated"
+digest = "c26dfd0166d05b9cc2e145795dcf4eeccebb108752c44b11520849bf4fab04d8"
+
+[[fn]]
+path = "idna::domain_to_ascii"
+kappa = "acb9affbf23a69b10da6550bd865d1a0c41e4742b21e45a7d522124c037663c5"
+at = "Errors=u32"
+embedded = "e978c2dbddcff7f1cd03ed4907fe3be77bd0fc0016bc2b00dc3267e5f2f5e7d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "idna::domain_to_ascii_cow"
+kappa = "f7df86787931c8d556f6574c6bd0eafef9064d07ab7d5de6f4eae349ff516b97"
+at = "Errors=u32"
+embedded = "1e0e5831e054a2352f78d8d3aeda3dd8195d2c891ede29d6baafe34b06de31c5"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::domain_to_ascii_from_cow"
+kappa = "f0ede12ae63bb22d8ea650e1b13baf612d0c98093999e8642fdf217cd32d3f16"
+at = "Errors=u32"
+embedded = "77603088ddc696e70fcace6601eee33df81d05ab1e22564b9afd95bcab9d2944"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::domain_to_ascii_strict"
+kappa = "5dc997758f31332d7daef4105e20c179f74594814f6ece4d4ee11be6365ac51a"
+at = "Errors=u32"
+embedded = "b157212552b3c7d1f7480e9caf790b1b92ae9709f856307cdccd3dfb3e76a096"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::domain_to_unicode"
+kappa = "75bc471b811eda706979ea1fb3bff5ebb6b6d1c84abaabcbf2e2db721a4d9864"
+at = "Errors=u32"
+embedded = "3bc48c88a402837cf018b753ba1933423211894b8bc0c387eeebad467c393803"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+

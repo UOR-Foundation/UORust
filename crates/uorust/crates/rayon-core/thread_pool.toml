@@ -1,0 +1,201 @@
+[[fn]]
+path = "rayon-core::current_thread_has_pending_tasks"
+kappa = "24cdb2dda92298b516d516637176df87e71539d6eb5fcdc3f26bb925e1f0e05f"
+embedded = "8b3701b2d10c6b98580616695a63d297164b1de1b8f978a3cd1b7b8cf2fbfce2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::current_thread_index"
+kappa = "b186b5abec3708cf7996881a458ccbed499bacb500993c73e1619d4c1592ca0f"
+embedded = "de772b71d0f2b88d3f0e259f2c3b390baf35fa05f701891d32005bb81665fea0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::thread_pool::<impl at src/thread_pool/mod.rs:496:10: 496:15>::clone"
+kappa = "fe083d9070785c9edb2fe6790d04b6272553c3ad1721f01773344b0ad734d7b9"
+embedded = "9e2ad596f374edd0f71dd1b8cf03a192c323d68fd40bea5494ccdca9b473cda6"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::thread_pool::<impl at src/thread_pool/mod.rs:496:23: 496:28>::fmt"
+kappa = "48bccfe2983e325997fb1b5f6b896d6a0355b92ca3bcefda3e5027b165bc26c3"
+embedded = "98458f53e9c318a63b657385ceb3bc9a502ec40bc71fadeb85639f354857b63d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::thread_pool::<impl at src/thread_pool/mod.rs:496:30: 496:39>::eq"
+kappa = "d0d8527a6e87c2060258643b4922a8ac253f2438f536dd59c12919be93211fda"
+embedded = "7d7f2fc677f2897ac0e58470c330219e3d42d798914fc7e470e5f627b558e542"
+status = "residue"
+cause = "mir::Ty: Yield"
+
+[[fn]]
+path = "rayon-core::thread_pool::<impl at src/thread_pool/mod.rs:496:41: 496:43>::assert_fields_are_eq"
+kappa = "014ca718ded4bf27dc82d563b76de3c2d9fa987a7f8496f6dcb21412c0ce7ece"
+embedded = "c59f9d18184aad37a9a662220c11ec50c29c6f84adb5d2716e1b87d9f36babc7"
+status = "residue"
+cause = "mir::Ty: Yield"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::broadcast"
+kappa = "b49029d882826d7248119e6c8f27f3b5ffe5b3264f6b0ad270d508f7a637f681"
+at = "OP=u32, R=u32"
+embedded = "2a7ef038a749487f04797176ad2d3c01835276dd93af538ae567ec375e4cac0f"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::build"
+kappa = "5b2d192583008e9c2c46e7965c9b00aecf36375ce257b25d5f619ee2732a3282"
+at = "S=u32, ThreadPoolBuildError=u32"
+embedded = "9c163105fdac49e6a5df31656e2208c3d54a707b08b310403516ccb34f6cb0e7"
+status = "residue"
+cause = "mir::Ty: thread_pool::ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::current_num_threads"
+kappa = "2589f630910669c6f6e32709c802fc8029d4a00a1091c81304360cefa5065be2"
+embedded = "7e22801ffe42f371583ea40b1f3e6cc26d650d72520c83e0f9c0b053da2e271d"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::current_thread_has_pending_tasks"
+kappa = "806c1871233052a8a5b8de7b3d740f7d018ec130c058dbc957ed26479da383c6"
+embedded = "3aefbd34752a48fe3d1210c8ad21029817b14219c38b188a52e7e17c59ae1337"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::current_thread_index"
+kappa = "0d165d857ccf1ef722db605b59a62dd1161019e29235e64496b4442cd56bba29"
+embedded = "06736dcc75255ae68b95deb4d24d7e0506666431e6c9e7dfecaeab2aeeea2753"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::drop"
+kappa = "aec71daa88c7f6fed8eee5516e3045c0f54cf142b3337e097694189c17da1e61"
+embedded = "6a6fc28e37aa4bc52fda51e6e545273d1100c30356d5a753cd521da01c568a39"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::fmt"
+kappa = "1d3441b24d4c16fc6f2fee11d995feb945f99f056a76a45d06be9b4847a45480"
+embedded = "82d19b8bd5bb2a9a3f95d02845e34a96766f8299ffcff9281a1f2f928824e99f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::in_place_scope"
+kappa = "ba6e5674637d4fbdc4ad3a224e98ef51070cf39cc88dd11704dd20f4a1cc4212"
+at = "OP=u32, R=u32"
+embedded = "4f6202085c42c60e3b49bb5794c31b252bd5e5410f0b429895a330923f64597e"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::in_place_scope_fifo"
+kappa = "8d8dbb7d7edfa19376405bf8dabc2226b5dce37f064fa005c54a20af49d01b86"
+at = "OP=u32, R=u32"
+embedded = "86727783737668a2bc28412cc94f5c47f456ec69cd12d86985ccdcefce7977b7"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::install"
+kappa = "80de482ebbadf6a033aca8cb16a381274916e3c0b07f76b18f60dcee352882a2"
+at = "R=u32"
+embedded = "9f4d8ae9a058ad60dedac13f408a628540b1957db7aad6dc89d3527a37b0b5ae"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::join"
+kappa = "387dffd802e97ab8d3549efada3b924362dc09715ae65a1d4d87fadcc6569a7e"
+at = "RA=u32, RB=u32"
+embedded = "c2fb1c45097bfaa8e3007a20fa350a7580bbcc7fbf57fd88aff15016aad307d8"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::new"
+kappa = "ea618565c5b260d979ce031ed39a52fa56f37fed022e59a3d8d7e4c426e935d1"
+at = "Configuration=u32, ThreadPoolBuildError=u32, ThreadPoolBuilder=u32"
+embedded = "8fbc38f4d8a53041031415e4903873496ee81f5e8ae8a109218c77321a0890fc"
+status = "residue"
+cause = "mir::Ty: thread_pool::ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::scope"
+kappa = "9a24734f8462dd32ac5afa3a3f4f7a4ca60afe0ba6a06365074994b2b887c8c2"
+at = "R=u32"
+embedded = "d7a93f227c9ef4be878b40565bcd880453eb189ff381dfcf8e4793933ee99310"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::scope_fifo"
+kappa = "0dfd3c6b4dc80e8eb4a9b6fb8b8c7d2bd762e1b6ad35e3d85f7c1d4aa69fe6ee"
+at = "R=u32"
+embedded = "2986c904203f40b8013c2dfffdc0398cb453b3f937fa254e67b8a85a1d82f145"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::spawn"
+kappa = "c19bf5168a1809e86d4a5854be0135af15cbae33b90901f2c08f91a8878d0c1a"
+at = "OP=u32"
+embedded = "45e9067e56567998bd23d891873a89e63baa4967b256b9956f673d9e9c957d95"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::spawn_broadcast"
+kappa = "0fefc164aed96af89434ef17a2d4c7efd97eebfce82bbc86400f220a02517c91"
+at = "OP=u32"
+embedded = "3e26a935f5c75109398439768f9bbbc4ac1cc94cc2dc6345021756825c9905b4"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::spawn_fifo"
+kappa = "cdebfbda727332c07525506181a200b8879fb284a5edfc3d85664151447a55ce"
+at = "OP=u32"
+embedded = "fe9a1846fe5d9d29f28d3501c78f37aa7b7210fb9f670ee42fb18765cdbe4dbc"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::yield_local"
+kappa = "ea1ae67778d7aeadced8392e5fe4f0e6be9086f924da6e8f5c7bde8fb0edc522"
+embedded = "343270072199eddd4572abf8fbb5d52f6ee0ee73e9653770d06a84ed372f633c"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::thread_pool::ThreadPool::yield_now"
+kappa = "ac90a13e96c912fbfae97191235fbe79415879db5f301ac709a4596e146e1ed2"
+embedded = "0d5a2233b158282af1eb8b855780336a1ecec817dea3f355961c54d4641ef4bc"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::thread_pool::yield_now"
+kappa = "b4a544fb4044e05a683f3d9ab55ed180891859a3885c6362c90819f3f31a275e"
+embedded = "d55269e303678fbf1a47eeb647c5a9156921ce6866d2af27bb8052370beee0a8"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::yield_local"
+kappa = "376a871a40a9850f625e220bf6bac302f6be0b651e5167b6ef4ecc4523540106"
+embedded = "6640f6df879877ae7247873119025521e677faedc419be3084f5cc30e62fd932"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+

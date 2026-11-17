@@ -1,0 +1,117 @@
+# The powerfmt register (written by `uorust crate powerfmt@0.2.1`; do not edit): every body of
+# powerfmt's MIR at powerfmt 0.2.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 106
+translated = 0
+residue = 106
+
+[module.buf]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.ext]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.smart_display]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.smart_display_impls]
+bodies = 54
+translated = 0
+residue = 54
+
+[embedding]
+bodies = 106
+embedded = 106
+evaluable = 106
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: smart_display::Metadata<'_"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: smart_display::FormatterOptions"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: FormatterOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: WriteBuffer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: buf::WriteBuffer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteBuffer<#usize_SIZE>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: buf::WriteBuffer<#usize_SIZE>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::Ref<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::RefMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::convert::Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Alignment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1

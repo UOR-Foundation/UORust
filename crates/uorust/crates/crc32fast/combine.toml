@@ -1,0 +1,42 @@
+[[fn]]
+path = "crc32fast::combine"
+kappa = "168778b0b1cb09ff4ceb0fb41faa57d4f42a375b1e99d84c381322d683d9a347"
+embedded = "b28551c90be6411c9814ec67bcf59748a674cfee055e958c5db64cec696e62fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "crc32fast::fold_keys"
+kappa = "ab1d6091d081c012c5bb018f854fac7f007fae61d920da89b6bf1e6992964af2"
+embedded = "caee88e4462c002e28082fc643bee9bfe1c9306e90074012b696b3f07530f19e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: combine::x8n: crc32fast's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "crc32fast::multiply"
+kappa = "06b6cbc219bc911a7a1170894dc9591e4880d9ca22603bf337692c355b42d351"
+embedded = "3df7a879fadde9005876413cb02816ae319f3f0959f15f872fbd4bfe4774c98b"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "crc32fast::shift"
+kappa = "0858a6797a78eea9829ad6fdd032992857092b8d610ed0f8cadb3d81b9679d29"
+embedded = "7277a8f52840d590789002005449deb7c8230fd43de2113a46de6524b2d6d8b8"
+status = "translated"
+digest = "ef30aa7183f4453a1eda1ef374c04c5214e5c22e4c2f4998bea7022b8acfcb36"
+
+[[fn]]
+path = "crc32fast::shift_table"
+kappa = "13a29f47a0122c453159cc1b006879a4344eb9c75483a17f03015fc24d4c3f8a"
+embedded = "500c6a63aac720c16f710a61b6383fbd9b4b19b5cac350f9533f6411d9628e92"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "crc32fast::x8n"
+kappa = "feaaef762d7284dcc4b30605b932113f9f2e36340ec6cde5189a37ce6dae9cf8"
+embedded = "47fdc2a72b7acfda02cd2cbd996175f26ca85bb5812db9c3712cbf12ba793d70"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+

@@ -1,0 +1,28 @@
+[[fn]]
+path = "gimli::case_fold"
+kappa = "224dd30115f488683cca1dab82dab699fcac3d31a2ba5895fe51f3b4dbf53977"
+embedded = "649f0cf4ec4e155a47c349d5cfa05b5a5ccdf3310f0daf1653d049786c872346"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii"
+
+[[fn]]
+path = "gimli::case_fold_data"
+kappa = "f645f6e5fc272bc4d51a007275d57672a85f766125323c13bc65ca3f47c7dec2"
+embedded = "e4e5e6edc9d0edc2a824a1ab3770df58cd71aed4c3b5673504ababe103b729bd"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1814: &&[(char, char); 1488]}"
+
+[[fn]]
+path = "gimli::case_folding_djb_hash"
+kappa = "63100c9c38f711ce1a475c94f9e05ddc92e35b3997913b48da365c7ba3e0ff3a"
+embedded = "18e079d26d0483a7131f24c14c2715cbe978a351cdbc2a7e0b0b1b3ad04ec95a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "gimli::djb_hash_byte"
+kappa = "e0597a950459415b3c821d9d92da55fb55b3127e56cfbee359b396ab6c8504c0"
+embedded = "67401c86f7bd9f3b810eedfb07658e2459a498f30cacf35277b2951d39e32f20"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+

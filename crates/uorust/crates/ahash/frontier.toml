@@ -1,0 +1,189 @@
+# The ahash register (written by `uorust crate ahash@0.8.12`; do not edit): every body of
+# ahash's MIR at ahash 0.8.12, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 154
+translated = 2
+residue = 152
+
+[module.convert]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.fallback_hash]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.hash_map]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.hash_set]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.operations]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.random_state]
+bodies = 18
+translated = 2
+residue = 16
+
+[module.specialize]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 142
+embedded = 142
+evaluable = 142
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: fallback_hash::AHasher"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Src"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::intrinsics::transmute"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: random_state::RandomState"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::array::TryFromSliceError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: AHashMap<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: hash_map::AHashMap<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: hash_set::AHashSet<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hash_set::AHashSet<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AHashSet<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ne_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: random_state::DefaultRandomSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc17: &OnceBox<[[u64; 4]; 2]>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::convert: ahash's MIR stops at mir::TerminatorKind::Call: std::intrinsics::transmute"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::read_u32: ahash's MIR stops at mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: operations::shuffle: ahash's MIR stops at mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn random_state::RandomSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl RandomSource + u32 + u32 + 'static"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::IntoKeys<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::IntoValues<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::IterMut<'_"
+bodies = 1

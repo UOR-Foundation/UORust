@@ -1,0 +1,621 @@
+# The chrono register (written by `uorust crate chrono@0.4.45`; do not edit): every body of
+# chrono's MIR at chrono 0.4.45, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1144
+translated = 19
+residue = 1125
+
+[module.crate]
+bodies = 8
+translated = 2
+residue = 6
+
+[module.date]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.datetime]
+bodies = 113
+translated = 0
+residue = 113
+
+[module.format]
+bodies = 213
+translated = 1
+residue = 212
+
+[module.month]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.naive]
+bodies = 352
+translated = 9
+residue = 343
+
+[module.offset]
+bodies = 222
+translated = 6
+residue = 216
+
+[module.round]
+bodies = 18
+translated = 1
+residue = 17
+
+[module.time_delta]
+bodies = 69
+translated = 0
+residue = 69
+
+[module.traits]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.weekday]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.weekday_set]
+bodies = 34
+translated = 0
+residue = 34
+
+[embedding]
+bodies = 1144
+embedded = 1144
+evaluable = 1142
+blocked = 2
+
+[[construct]]
+construct = "CastKind::IntToFloat"
+bodies = 2
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime<u32>"
+bodies = 90
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 89
+
+[[cause]]
+cause = "mir::Ty: naive::date::NaiveDate"
+bodies = 68
+
+[[cause]]
+cause = "mir::Ty: naive::datetime::NaiveDateTime"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: format::ParseError"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: time_delta::TimeDelta"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: naive::time::NaiveTime"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: offset::fixed::FixedOffset"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: offset::utc::Utc"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: NaiveDateTime"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: date::Date<u32>"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: format::Item<'_>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: NaiveDate"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: Parsed"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: naive::internals::YearFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: weekday::Weekday"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: TimeDelta"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: NaiveTime"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: month::Month"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Tz"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::LocalTimeType"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: weekday_set::WeekdaySet"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: WeekdaySet"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::TimeZone"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Date<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: offset::local::Local"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Weekday"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: format::strftime::StrftimeItems<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: isoweek::IsoWeek"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: format::formatting::DelayedFormat<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: naive::internals::Mdf"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: LocalResult<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Mdf"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Months"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NaiveDateDaysIterator"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NaiveDateWeeksIterator"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: YearFlags"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: naive::isoweek::IsoWeek"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unlocalized::Locale"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Days"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FixedOffset"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TimeZoneName"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::rule::RuleDay"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parser::Cursor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Datelike"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Timelike"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RuleDay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UtcDateTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::rule::TransitionRule"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: round::RoundingError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: timezone::LocalTimeType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item offset::local::tz_info::rule::DAYS_PER_NORMAL_YEAR"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Colons"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Fixed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InternalFixed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InternalInternal"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InternalNumeric"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Item<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LeapSecond"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NaiveWeek"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Numeric"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OffsetFormat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OffsetPrecision"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OutOfRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OutOfRangeError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Pad"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParseErrorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RoundingError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SecondsFormat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Transition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utc"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Void"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::parsed::Parsed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: naive::Days"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: naive::NaiveWeek"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: offset::LocalResult<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: offset::local::inner::Cache"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::TimeZoneRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: offset::local::tz_info::SECONDS_PER_DAY: mir::Operand::Constant: the constant item offset::local::tz_info::SECONDS_PER_HOUR"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::div_euclid"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlternateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseMonthError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseWeekdayError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TimeZoneRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::ParseErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::locales::unlocalized::Locale"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: month::Months"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: naive::date::NaiveDateDaysIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: naive::date::NaiveDateWeeksIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::rule::AlternateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::rule::UtcDateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::LeapSecond"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::TimeZoneName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::timezone::Transition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rule::TransitionRule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timezone::TimeZone"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: weekday_set::WeekdaySetIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: naive::internals::MDL_TO_OL::promoted[0]: mir::Operand::Constant: the constant item naive::internals::XX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item naive::date::LEAP_YEAR_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item naive::date::ORDINAL_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item offset::local::tz_info::SECONDS_PER_HOUR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WeekdaySetIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Colons"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Fixed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::InternalFixed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::InternalInternal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::InternalNumeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Numeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::OffsetFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::OffsetPrecision"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Pad"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Void"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::formatting::SecondsFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: month::ParseMonthError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::local::inner::Source"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::parser::Cursor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::parser::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::parser::State<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::local::tz_info::parser::Version"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time_delta::OutOfRangeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: weekday::ParseWeekdayError"
+bodies = 1

@@ -1,0 +1,136 @@
+# The const-oid register (written by `uorust crate const-oid@0.10.3`; do not edit): every body of
+# const-oid's MIR at const-oid 0.10.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 86
+translated = 1
+residue = 85
+
+[module.arcs]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.buffer]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.crate]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.encoder]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.error]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.parser]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.traits]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 86
+embedded = 86
+evaluable = 86
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: ObjectIdentifier<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ObjectIdentifier<39>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ObjectIdentifierRef"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RootArcs"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Buffer<#_SIZE>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arcs::Arcs<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoder::Encoder<#usize_MAX_SIZE>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arcs::RootArcs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Buffer<#usize_SIZE>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ObjectIdentifier<#usize_MAX_SIZE>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::Parser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ObjectIdentifierRef::as_bytes: const-oid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arcs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buffer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MAX_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: buffer::Buffer<u32>"
+bodies = 1

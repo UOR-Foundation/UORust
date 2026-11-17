@@ -1,0 +1,62 @@
+[[fn]]
+path = "nom::bits"
+kappa = "16b58db3376d03ebd1224647e93c355485b0cf3dc5e817f9c561c45a9067e5bf"
+embedded = "c68e850695f086b2b1b9a89ce152812b0193a10b9176d3ce63172f1fed70f944"
+status = "residue"
+cause = "mir::Ty: P"
+
+[[fn]]
+path = "nom::bits::bytes"
+kappa = "494654a8daadc98c029a4aa372be37cceff869caa71d27da4175b6b100bec5a8"
+embedded = "dd69b1ff8152363bd6db84bdc1d115d577547a0bc3844edd7457aa4e72bd4f7c"
+status = "residue"
+cause = "mir::Ty: P"
+
+[[fn]]
+path = "nom::bits::complete::bool"
+kappa = "9f14ce609928ac2264819030de14257804db3c52eea07614aee36588d3a8d088"
+at = "E=u32, I=u32"
+embedded = "57264a4f8815d18cb9735e6dce59e354c4a266c2eb8b2ab9e09d9c3397c055a8"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::bits::complete::tag"
+kappa = "bbdcf8ab989283cda09082aa0cc431a8d389fa724abae635d31959c4b755bdd9"
+at = "C=u32"
+embedded = "814d5809903a8bd02e74e91ed9b4b883240d871762afa2de0413bf81e8f06197"
+status = "residue"
+cause = "mir::Ty: O"
+
+[[fn]]
+path = "nom::bits::complete::take"
+kappa = "4a5399076ba082ba7a355bfcc3e7152e3baa37aefa7a224ff1c5583d315e1698"
+at = "C=u32"
+embedded = "fef0549ad2a1a63b1c4c3052001682442713bb87cbe419cad4e340fdb5162bf7"
+status = "residue"
+cause = "mir::AggregateKind::Closure: bits::complete::take::{closure#0}: type outside the lift: internal::Err<u32>"
+
+[[fn]]
+path = "nom::bits::streaming::bool"
+kappa = "93095a86d567cfc32a0f9cc08d72216a23c2a6a1447bb7ffc37c7214fee73937"
+at = "E=u32, I=u32"
+embedded = "aa03d1bc40a39932bb84bd20c85ad0cf11d5424a76c1d9c2a5d13a3515199920"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::bits::streaming::tag"
+kappa = "284363cce285b2b6bdaf9dc56baca01bef113974b2c82ecbb29ea357f323e2e5"
+at = "C=u32"
+embedded = "e9900f6d47409ed52973894314073ec0fa13450326562e9a830bd35b60ed33c0"
+status = "residue"
+cause = "mir::Ty: O"
+
+[[fn]]
+path = "nom::bits::streaming::take"
+kappa = "c54487729d100829d9a531bd70efcea652195b48343dbdd4b274e8641a70fb7e"
+at = "C=u32"
+embedded = "7b4f539cf7483ee298a2d989d71ac5a4dd120bfa6a53a07916429413d2a1fea5"
+status = "residue"
+cause = "mir::AggregateKind::Closure: bits::streaming::take::{closure#0}: type outside the lift: internal::Err<u32>"
+

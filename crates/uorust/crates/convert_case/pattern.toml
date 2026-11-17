@@ -1,0 +1,58 @@
+[[fn]]
+path = "convert_case::capital_word"
+kappa = "8bf30d8d3f80f260da86be0e5f87bf4e5ed72c2efbca9d1d40984ae99e4816dd"
+embedded = "9b9baeba350c4fbc942acc99936d056588cd4dd4ad12a7c04f0162e58cb258c6"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+
+[[fn]]
+path = "convert_case::lowercase_word"
+kappa = "460ca56221a9943d42a9a747e627b51d8473ce15f5d7e2b0dc2f105ef02f26c9"
+embedded = "b0ce43ab513157ba2d250a4da8d13abde2707d1272b4d895fed8410b65e96e6b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::str::<impl str>::to_lowercase"
+
+[[fn]]
+path = "convert_case::pattern::<impl at src/pattern.rs:87:10: 87:15>::fmt"
+kappa = "c02908b087b898b6296b4a63b87a117cfea1a0010929a305fe6849a3f77fc64a"
+embedded = "a183e27a1c07327ee70cb7a6333afc0cfe00dbab8f759316340c1a0d419c4247"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "convert_case::pattern::<impl at src/pattern.rs:87:23: 87:28>::clone"
+kappa = "0956d39d8b7c02c32e5a76b5007795fc11c28dad6d5150417ab596c54033ed9d"
+embedded = "41cbd2a9102e102428476d3135976958dae34fbc2297061239de2ae3630e87da"
+status = "residue"
+cause = "mir::Ty: pattern::Pattern"
+
+[[fn]]
+path = "convert_case::pattern::Pattern::eq"
+kappa = "7a9641c05a7aba85a7f5786115e55b21b550c3e08f093b75cc11008065965505"
+embedded = "1e7ccf33c81e108c28aeb43eff4bd29ae580166911fa5f7443b11713ea08ea1f"
+status = "residue"
+cause = "mir::Ty: pattern::Pattern"
+
+[[fn]]
+path = "convert_case::pattern::Pattern::hash"
+kappa = "9b7c16a73097e2cb6f29a1f70774a8a2248aaf3c3106cc65c6d08da83ac103bf"
+at = "H=u32"
+embedded = "46362ea7bfbcdfa6e7ba77fd62b129ca5173d16a747a572acc22bba17934f9bc"
+status = "residue"
+cause = "mir::Ty: pattern::Pattern"
+
+[[fn]]
+path = "convert_case::pattern::Pattern::mutate"
+kappa = "e35f350d2370d36cd4363fcd4f77e35bf7880aab10fab8f6fe2f0489b3649c38"
+at = "S=u32"
+embedded = "78ded3920d4b43116545b88f71e3abc34c28f084f31de179fd3d8341618a96d1"
+status = "residue"
+cause = "mir::Ty: pattern::Pattern"
+
+[[fn]]
+path = "convert_case::uppercase_word"
+kappa = "9874dce1b4cefd92becda2ae99c2cea0fa6c29715db482e50c226282142f955f"
+embedded = "84637d8e77cf17130e57b0f2eb099ca68a477149e10cd2e117c3355da90ff83f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::str::<impl str>::to_uppercase"
+

@@ -1,0 +1,141 @@
+# The parking_lot register (written by `uorust crate parking_lot@0.13.0`; do not edit): every body of
+# parking_lot's MIR at parking_lot 0.13.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 128
+translated = 2
+residue = 126
+
+[module.deadlock]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.once]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.raw_condvar]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.raw_fair_mutex]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.raw_mutex]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.raw_rwlock]
+bodies = 62
+translated = 0
+residue = 62
+
+[module.remutex]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.util]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 128
+embedded = 128
+evaluable = 128
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: lock_api::GuardNoSend"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: raw_mutex::RawMutex"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: once::Once"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: raw_condvar::RawCondvar"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: once::OnceState"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RawFairMutex"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parking_lot_core::ParkToken"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RECURSIVE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parking_lot_core::UnparkToken"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AbortOnDrop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PanicGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: raw_fair_mutex::RawFairMutex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: raw_rwlock::RawRwLock<#bool_RECURSIVE>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: remutex::RawThreadId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::thread::LocalKey<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::abort_on_panic::AbortOnDrop"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

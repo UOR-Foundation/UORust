@@ -1,0 +1,189 @@
+[[fn]]
+path = "sha1::UNINIT"
+kappa = "b542d4e703a3f26ac56992563eecb8cb06930505a27ca7a99cbb311bd404a176"
+embedded = "633a0a2fe28f4da47f8c15ed012ec6331cf18d24202d70770046187c0672eeb2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::max_value"
+
+[[fn]]
+path = "sha1::compress::compress"
+kappa = "9461d9b36f6e959dd6573af4d8d1b1a469cfc68c71c8eefb3cb2ce6d911ef8bd"
+embedded = "887efd3c6ee2697e7104611963f03a2f8cbccaca783a487a4b533274c2a07c17"
+status = "residue"
+cause = "mir::TerminatorKind::Call: compress::shani_cpuid::get: sha1's MIR stops at type outside the lift: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::cpuid"
+kappa = "168390857c80aa6dc4edde398ae22ce1bbf5bfd2591d31bd10b7b62e6a82eac6"
+embedded = "0c7785b76c993d6ecc4be075885e7c349806cf3bdf300c7ac63627c5e1a3e0d2"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "sha1::cpuid_count"
+kappa = "bcdf08ede0cb28ff783a1806386273bf5cdfbb2f94ee85d830dc8c938cd147fd"
+embedded = "e51630da0dd120acb9e83d400f104dbe6b0d45eee6542ccada11e1b7caa2621c"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "sha1::digest_block"
+kappa = "ffeee7b89af23fc320a8a532a40a8aba3c495cfd3a64094e76386ef500d2582a"
+embedded = "732be62ba6f025701202f0642babd310401796cb7ca71e683b46e128dadd159b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: compress::soft::sha1_digest_round_x4: sha1's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+
+[[fn]]
+path = "sha1::init"
+kappa = "19355c69d84272a010966bc3e18cffff0069b5587cf4a230cc659847453fe32b"
+embedded = "3bc92cd9a437fad993cc5868a410ed1ce0dabcdb3d353205b96baf37ac66412e"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::init_get"
+kappa = "ba87f454d53e75dd420432548579548bcefe7aefd19bea7169fbf61b28c8bdfd"
+embedded = "71eb7c5e8b9b8d344f4530ff1621e207d2f5cfdcf8596298645d3ec046244038"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::init_inner"
+kappa = "78aeb8e03b14b4674a3b9703dbec019b511fb1eb652cf59811a6b38880876e1a"
+embedded = "b640108ba010478d60b19421a749cb0e44199b9f4931886f6d452f034bbe083b"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "sha1::sha1_digest_round_x4"
+kappa = "b0c94bfb1515f2334e4dbfc5395a0b3fc1adf3a8117e29f92674eb31ca110ab5"
+embedded = "280dce5235462c7e7d9b3a1fef4b8ae557879d1a57d558b849d5b7fd02266667"
+status = "residue"
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+
+[[fn]]
+path = "sha1::sha1_first_add"
+kappa = "37869e4a315200643a40fa82a6e2e458326c3397d7927fccf1eeafd255c182a1"
+embedded = "deeb2a899c85de9a69017ca062a764491cc547f602186a2c912c8b0720430479"
+status = "translated"
+digest = "04a62c441c524e5b1fc1a419af270760b104b7825072d8bdc1791909f674571e"
+
+[[fn]]
+path = "sha1::sha1_first_half"
+kappa = "02f4a8377a03529cfbe522fdd2eae471c89380b0921c4f460a6af6562fb0ae48"
+embedded = "768ad373c5b90a7e20c963f2e9618f16af9b98e0995206f0a08375341c7502b4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "sha1::sha1msg1"
+kappa = "bc8e921b4f17a3fd58b9028b6fb0970eadae0527436fefd3cf4382c65a8f3750"
+embedded = "481b5f81048e554279ab7312264be00c7ad2f5ce7cb4bd295a26b682f556af14"
+status = "translated"
+digest = "310953d3008738bfb45951adffef5284880766896c9df21c5c2abe59e5844ef6"
+
+[[fn]]
+path = "sha1::sha1msg2"
+kappa = "0d288343af82505fe682241d42cb8c725e8f41e6d2e4e5909b9187c8e755369e"
+embedded = "6821e986eeb6701e505cb08c6886b9d48c6560a14afd399df7d378adb9d81707"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "sha1::sha1rnds4c"
+kappa = "647de8e38e7ef5ccefae00e967375708572899f4d7c5a3c23b97f94298c4268c"
+embedded = "c615ac5ccbd54d4b653ab82a03bcf230f28479c16c00ec8c769bb723d5d05b7d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "sha1::sha1rnds4m"
+kappa = "2ddb6452125cf1fd035865c7d1d62078345154cf6845d5b01d0fbac72f3ebd57"
+embedded = "5f78b63034ca691892337a463c879b0858fe5a8f400c67572e3a6eca0efa1968"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "sha1::sha1rnds4p"
+kappa = "1f8fab97ecfbf52f1065b1c82737d3aa7cd06dd3c1c5122b9825bb3c0b69b1dc"
+embedded = "1c9c53d6a73b15c6c153554b1ecc4a5100f78212534fdc9c70089a4ee6001eaf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "sha1::shani_cpuid::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:28: 44:33>::clone"
+kappa = "cb894cca9f6703f3a554e175014820225358b9aa9bc42d44c2a483f13083ee53"
+embedded = "e3a802491e3f7924db8f090e3885e35945597907755bf948bb72d769e022e96a"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::shani_cpuid::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:35: 44:40>::fmt"
+kappa = "f6264d3c46334884c10ebd05b90222db2e08d162ad0a85bd5a5072bf8b3ea3ac"
+embedded = "6a0ecd25c8f4a7f10250a982b16caf3c13ffe590d5468baf0250f38804cd91ef"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "sha1::shani_cpuid::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::get"
+kappa = "a13a3991a7c126ce43cc08c77a3eab09b85070df44ceb661e826a297241c18ff"
+embedded = "fe190941b0c68fa48f76afde643aa1dac503999a497fe887199acdb7386c85cb"
+status = "residue"
+cause = "mir::Ty: InitToken"
+
+[[fn]]
+path = "sha1::shani_cpuid::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init"
+kappa = "11f7d62e5307fb3b739eaa5a4382db88d10c7056d56fe0328063e1b1457af913"
+embedded = "17744a9809f4ceee42a45410875edc831f4d6d30a3606fcb4a8b22c6a761b3e1"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::shani_cpuid::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init_get"
+kappa = "b66b9b2b204b0c42772c48eb7e8b66108f78dcfca6e1135f682247749cebc674"
+embedded = "33c91dfb4e571173555e6e75fe50be2866ef4ae38a157941341613d6c745251b"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::shani_cpuid::get"
+kappa = "81ef2053d4e0cbce419418872791fea2de7281382af75ef81addb67ed8dc018b"
+embedded = "17cb2aa9af6b5e40e160d5cf1a93d879caee9c366a9771edb4d3b228cd59b02f"
+status = "residue"
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+
+[[fn]]
+path = "sha1::soft::add"
+kappa = "6cd3a3d705724390c021bf89e2632c5df2cb3e60122a9a198714d0879c4b4e50"
+embedded = "6522a766b11c4a0117fea31bd2fd58b61b0bc3edcec5cd56ce591ced2d8fc379"
+status = "translated"
+digest = "2bdd298aac54cefe98ce7f156b2e02491a4d5c6ca7d29b7931f8ff23548b4eda"
+
+[[fn]]
+path = "sha1::soft::compress"
+kappa = "e62038c89181b78825014a1b7b350f220a581abf1c477a3c65db06c086a7ea65"
+embedded = "4c7c2b82f0da4e23f5e690ece0c31b4c4a13bb7bc8cc12de4f65abda7343d811"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item soft::read_block"
+
+[[fn]]
+path = "sha1::soft::read_block"
+kappa = "65a95182423e1460b9b52a801543186cbe0d501de8467a8d907511d8b07b547d"
+embedded = "280565ced521cb5a806d3a927ea2836678a5be2f8fd8f6ce38bd082b0f495f5d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: soft::read_block::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "sha1::x86_sha::compress"
+kappa = "46ec1b214df611efa1a6057a679986324026e83315738c8b6697434d039e8fcb"
+embedded = "cc279f9e660bdf5d38396dbe478b5d2d9ea72a753cc9b6d1edcfbc333bf7242a"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "sha1::xor"
+kappa = "2cda7f24de789c9f0316db326cc534d63b07586f40b28471604aa64e5adcc54b"
+embedded = "063e5c19ab48a6b77e6c2bdad490d1cec032c2777aad3851a45532339ff9e865"
+status = "translated"
+digest = "99aed501dea925922ca7cb5bd91443105e441e261ad37f75938dccc33cdb3408"
+

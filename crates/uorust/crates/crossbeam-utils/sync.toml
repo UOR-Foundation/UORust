@@ -1,0 +1,397 @@
+[[fn]]
+path = "crossbeam-utils::REGISTRATION"
+kappa = "a98ad51e9c735099edf95a62e3678f04edff10d1563d13b68633f0f0998fbe29"
+embedded = "4723d20bb35b7af6107e7ba692d9e155d83a728749c48c06255cb060f0d2a39b"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::Registration"
+
+[[fn]]
+path = "crossbeam-utils::__rust_std_internal_init_fn"
+kappa = "191be6162a0fb1aa50447e76ff6a56a4bcabd7ffb7a2e1dbcc12f134fac7044b"
+embedded = "f6f3664317309abdc75e863ccbe805b9bb0bd299c0f13be2b199ade14ffbe174"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::Registration"
+
+[[fn]]
+path = "crossbeam-utils::current_index"
+kappa = "0a67478da16f29d26fbec71dcacf1f0a0381d323528304833e8ce02b7d9f1146"
+embedded = "f752449c273a2211e1cef440cf03e01508b4cf1c06dfd2cdfbe76a039fb5dd69"
+status = "residue"
+cause = "mir::Operand::Constant: sync::sharded_lock::current_index::promoted[0]: type outside the lift: sync::sharded_lock::Registration"
+
+[[fn]]
+path = "crossbeam-utils::init"
+kappa = "9dfc848ef72d1eea0e12dbfe67c4462e72ab5dc92a9c88e5b41074a50eb4b8f9"
+embedded = "fb39dff3bbf149c7f72a5b13a1387feb1e1ce20a22ca434018488cabdd98520a"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ThreadIndices"
+
+[[fn]]
+path = "crossbeam-utils::once_lock::OnceLock::drop"
+kappa = "ff451907ca35b14ba6dcfa381647d447438a9ddd2ee117e53c62e39b1f26959d"
+at = "T=u32"
+embedded = "f6323ddd5a18c4153330781a79a69cdfd0655a5be6acf26c58ba9c86d726f93f"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::once_lock::OnceLock::get_or_init"
+kappa = "a162e9dcfaa2b592c156bfd6a35dc3fba01bcfebaf9d7f0006ae22c2f7d4b263"
+at = "F=u32, T=u32"
+embedded = "d12b3fc3453a593bd34f73a44b9df381710019dc5abab1740afe764a8098bd3a"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::once_lock::OnceLock::get_unchecked"
+kappa = "536fe145d9ba4543daecea167750fe9513a61bc1a468a472d9e44f85ed4d6fa8"
+at = "T=u32"
+embedded = "89c39ae09bac8b9c963d0483f933c8fea7aeb7af22d762fa0d1ddeded057801a"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::once_lock::OnceLock::initialize"
+kappa = "5d5df8fa61121405ab3b5cd45af9a7d1c00d5dcbd51a38315b43ab51132b64ee"
+at = "T=u32"
+embedded = "ca62ba114cf08afb10ec9bb5d19ef57516b711851078aed9e3b3ff8bfd545b18"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::once_lock::OnceLock::new"
+kappa = "b6480f239152659bc1ba71675ea7e3f4455694d0232f264390c70c523076390b"
+at = "T=u32"
+embedded = "1729f84cf685911f74ed2c055d451885b79e6be8fc64842838718d8796d340bf"
+status = "residue"
+cause = "mir::Ty: sync::once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::parker::Inner::park"
+kappa = "17a3b7f2751a76dc3af3a0e764f4b2c38b4643d280e06dad507a6320dbcabe64"
+embedded = "a4842767feabc4860a3a98b5b5eb595ffb4f49ce2832b39b3f3c1555437c32bd"
+status = "residue"
+cause = "mir::Ty: parker::Inner"
+
+[[fn]]
+path = "crossbeam-utils::parker::Inner::unpark"
+kappa = "9cb4d7f36375d3c9575ce277ec01182fdd8e695e0a0c5d9c5cb165706ea17ce9"
+embedded = "1ffb258ec5e1c33c4146a0ca1977abc6abbc81d61c630b93d0cfe7fd707b09a4"
+status = "residue"
+cause = "mir::Ty: parker::Inner"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::default"
+kappa = "733ac0003310f123b701183de552e9cfedd10442ed39dc423b7e29ca7ee8e59d"
+embedded = "cd4d1151306313a863a51fec60620ef7fbf432ed90d0ef2d01c0aad0de4d22d3"
+status = "residue"
+cause = "mir::Ty: sync::parker::Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::fmt"
+kappa = "7800d0a781d28c8aa8ccaa3392873f4b646e772076e1132f01774b0089c68e89"
+embedded = "d2dc3d93b7d530c4556f261d1e89b34d74829678c353fa451b72d8b0f2213f24"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::from_raw"
+kappa = "d0991505f7ba378bb0e2e60599e8d2388ff2e9370f590ba2aae28c4636aa5076"
+embedded = "09ba57e01c35cbbef3f0242268b01505ed6336ddf965d3bcb23995251495b0eb"
+status = "residue"
+cause = "mir::Ty: sync::parker::Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::into_raw"
+kappa = "93e11c1b2336e27ef21f6e58432cd59d7da8aa306c5fad5279a758eb7bf0104d"
+embedded = "4defa8ee274241e9b15db3a805b48e77e3b81a601f0d884a5438d9ff56ec085f"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::new"
+kappa = "ec031d20a170e1fa26ea9045443610bbcde887d9a71ac98bca284256aa8b8538"
+embedded = "9aab025494befe515f42851102373c6d4d428c447f1623f150540e9162c5140d"
+status = "residue"
+cause = "mir::Ty: sync::parker::Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::park"
+kappa = "f20ae941a216df64250a92c746dc4970d9e13b5373eefb4865a25a119af96480"
+embedded = "d47aa9c44acb34a24a959de0de7dd551d4cefb22ba07bc6758e3b251d8ca40d1"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::park_deadline"
+kappa = "204bb8398e2ea47c12fce2fff86a000cf11d3d56d2a11ae9761bca5914280283"
+embedded = "3fc1949e8e458d72a660b780ca06782d6cc3381fed9567922fdd772a112f3466"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::park_timeout"
+kappa = "f1684d478efa9f396495806ea3df68f9e28f7e80f5dbac8d2d3b24c3ea69b212"
+embedded = "50bc1d5353e2b6a138df1b8c7fbbb1a28913a3eb3c33a9eff4f26a6817ae88eb"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Parker::unparker"
+kappa = "94f54afb371503c3b282b64acb20730725f7daf210f3ce7f0b952473a1ee7271"
+embedded = "a92de0c5b49ff0b0e534bd95395e217db17bd68c1c418ae5064652e073fdc6d9"
+status = "residue"
+cause = "mir::Ty: sync::parker::Unparker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Unparker::clone"
+kappa = "b35fd71767e839173306e20a9a0a03b44c386a53f572ba60745cf926304b65f2"
+embedded = "0a6dfd0bc88075857d22d226f7e0eb3d55d22b61b6c09b07e91457bcc4962f08"
+status = "residue"
+cause = "mir::Ty: sync::parker::Unparker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Unparker::fmt"
+kappa = "6390f087b566b376db6218ab328720b9b1d46950a2a4be905315d11a9464bf8a"
+embedded = "8124fc9fe610c116761d6df0762a363a36c67c33024e616c275748b518af28a9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::parker::Unparker::from_raw"
+kappa = "d0ff84a2374720dd257924b7f9e441fb072389437261fac97862f2661d9e8f4f"
+embedded = "180ca215cefcd3a6770cec2dae46a10d97a3a8e7e4d9f67650cf1a3909639cc5"
+status = "residue"
+cause = "mir::Ty: sync::parker::Unparker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Unparker::into_raw"
+kappa = "1c1160e1c0ac313a76b7357b914a61c142bd52757dc903e81540e670ab3dfe87"
+embedded = "facff8789d50ce1e8cc92d0e833b21838d41f702fe5758e0f244a6d544b6fcc8"
+status = "residue"
+cause = "mir::Ty: Unparker"
+
+[[fn]]
+path = "crossbeam-utils::parker::Unparker::unpark"
+kappa = "ec3edef82cff218b39f38b3225114da5f0502c7c742fd31dfa57d5624d30ec86"
+embedded = "12c4d0806d4f55dce11c8d35a1eecc75a8ee5a602e3920a15df579d09139474b"
+status = "residue"
+cause = "mir::Ty: Unparker"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::Registration::drop"
+kappa = "da4f78e0d9139cec5e88b1070cb6e444f491132abf30ecee4142c4e5a2a4d89a"
+embedded = "adbfe703cbdb9eb304094f62e1136ad81645b54abe29591232d71cd1d3e507fd"
+status = "residue"
+cause = "mir::Ty: Registration"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::default"
+kappa = "7fc563fa14518705918dc8dd952de6cd8bc5b288457cdad7e61e5c73195f9b5f"
+at = "T=u32"
+embedded = "4f9176fd9d5db6d4c9a2dd76b51ec6e8a24aeb332e1b9cab9da358aa06927d59"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::fmt"
+kappa = "26ad1584078cc9ccc9c45f77d50eeec71dd66cf289b53bcc391a2e840460f7d3"
+at = "T=u32"
+embedded = "5a4c06096d91874c6158c90768050819e01bd3d98011253feb3abfa08e9ce98a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::fmt::LockedPlaceholder::fmt"
+kappa = "83ccc2f68e2487f3fbb6db1697515ae217093fcbdee12798be67c4a4c07a2245"
+embedded = "3184b905d77323e46ff5d8dfe710fd2d3c3f59e02bd6a1b326680c61aced1bf6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::from"
+kappa = "738006687127c5e5db9aed01b07874c8f580bd319eb5cb39388552c59200c729"
+at = "T=u32"
+embedded = "4883e4330e699cd80973053e914121d43726e15a7f3a0effdeae2eedb24bfe92"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::get_mut"
+kappa = "c5927ad46118764e3b80e6da354b05656d776dbb7abf2f916ba0fb0b6999439c"
+at = "T=u32"
+embedded = "378e9efe593c6fed2332ba9c68b624680876823194dc0af6bd42fd0dd94244f6"
+status = "residue"
+cause = "mir::Ty: std::sync::PoisonError<&mut u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::into_inner"
+kappa = "dad91032b0b5dfb8e1f60372d1d88c53daa0e63307f50fdb64a6f2fefba241f8"
+at = "T=u32"
+embedded = "451ab6e0f32a86c3d4119d6562b1c051c15c2994a1ccf1470911ac983c764de1"
+status = "residue"
+cause = "mir::Ty: std::sync::PoisonError<u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::is_poisoned"
+kappa = "61601823f786d6aeee3d6be33a6ed898c40abcf7709eab7777914eb07c8db677"
+embedded = "96da838d79dce67619ff3aeb0b30259ab4e309147b7073c9f180688590575fc4"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::new"
+kappa = "ff8f322daebfeff477ef954c71c097426da156f63f752d7f030cfaeb0a2855c4"
+at = "T=u32"
+embedded = "6f6aad3abafd2bf0ceb08fcd1c9f57b4841b2187eb14b603ff8d37944e8d70f2"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLock<u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::read"
+kappa = "94fb1b7a04d3e46b062f4496118a5ea524a027fa6898a306a8e3e70e5cc96852"
+at = "T=u32"
+embedded = "73fce01ca0d89e3175856a5d75fc3b81e7067a706f002e4d2d41f9d2b32597bf"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::try_read"
+kappa = "bf524200aaa483b2c9b865f155b8096c9ebe698b013a30b933f57f661c9ab1c6"
+at = "T=u32"
+embedded = "f5d4407c969750f1b1fa2f646bd71d93e613ec57460002a43a28b67629c1fa93"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::try_write"
+kappa = "4c9a7f7eab3cb9d1eff388b3923eaa8501fbb8d38edbb117d67afac42da87efc"
+at = "T=u32"
+embedded = "7b9d8f85780b1a52fa8ef4c668fcd0ba56f1ffef444e7ecb88aad0aac3992a33"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give", "intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLock::write"
+kappa = "dcbf23d6f16066e4ae289aac66354895cc43f272c4c74bd842548a513fae2cdf"
+at = "T=u32"
+embedded = "a035f0633c38f9e71c0e19d5adc60fae7595e5e63137c6d0bf499924980a9f85"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ShardedLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockReadGuard::deref"
+kappa = "76ce752dffedf3ed61ed550bdb0bbd132165b6bf06f4ecaf8ba08adee94d71b9"
+at = "T=u32"
+embedded = "5ff623a87d0cbf85f66eadd4026b5a7f8b8efe049aa68378cf0159f890bbb8a4"
+status = "residue"
+cause = "mir::Ty: ShardedLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockReadGuard::fmt"
+kappa = "d7dbe535734cdc555cb664ef0dbad3f2396d12738297f8a51b8bcfb36595e10a"
+at = "T=u32"
+embedded = "13851275884de82fe9ea4511a1cc26d811c93847ac628bc448e96532425047a7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockReadGuard::fmt#2"
+kappa = "91d9b00ca7273d6f008a6336dae116d863ab58753de014f2133a8e2ed615c4a5"
+at = "T=u32"
+embedded = "cef6b7fd4ad2b0289d9a76086e83a4246722eaec7aa78010d5a09991322d0ebf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockWriteGuard::deref"
+kappa = "3a4ce5d6b0e86f709c9349ecb613c211774b8efc10452bfc75bdf3b3ed06beed"
+at = "T=u32"
+embedded = "83f6651d31c1df7838151ee11b00dce9eb2187a71f51fccfa1101ed700ca7ea9"
+status = "residue"
+cause = "mir::Ty: ShardedLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockWriteGuard::deref_mut"
+kappa = "40eaf795032102458ffc89c263df293471a71db3557a97d690a5ff5914ba672e"
+at = "T=u32"
+embedded = "54139d1ba3886d4f034bbc4a4a95473ed3cd3c5e408aeb78f76056f7a7c59e6a"
+status = "residue"
+cause = "mir::Ty: ShardedLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockWriteGuard::drop"
+kappa = "510588afb7ef7fa22c868fecefed86598642f8bd17d8fba7dc1f5cf993843bdb"
+at = "T=u32"
+embedded = "8c23ad5fd23972acadf5f71b53112dda927e41ac3c431fb05b58db340740b232"
+status = "residue"
+cause = "mir::Ty: ShardedLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockWriteGuard::fmt"
+kappa = "5724a38d4415d453d1fa51ad976fa01bf993f0f6cd92705c4fdd354d15e21e1a"
+at = "T=u32"
+embedded = "87e6ab265fe88105727f384cc3aa618ff564d15b8e5d08f052412666bc0f9e04"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::sharded_lock::ShardedLockWriteGuard::fmt#2"
+kappa = "7669a1732aff61deee1e9b3f8f1c99e198b665350b017ee5b7f1f3f9227ce059"
+at = "T=u32"
+embedded = "0c0c5aa920adf684b18cf5d1e32f40e6135e995e4f1671b5c55b38fa3c175c14"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::thread_indices"
+kappa = "bf1fce5e20e1982c84c0165a2d57c8d603be52139f2b2763ab669964f1d062e1"
+embedded = "deacd066998da484cd5d51e436f92125c9f99173a830a36ffdde1da99e72ce9b"
+status = "residue"
+cause = "mir::Ty: sync::sharded_lock::ThreadIndices"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::clone"
+kappa = "1c453aeaace7e0a44064e0ee692cf74076029723d2e757dbb1633aac06d223c5"
+embedded = "d25422ab8a74fb36c0ad95d3b95c9a61dcacc832c57aff81009429dca1c0c9f2"
+status = "residue"
+cause = "mir::Ty: sync::wait_group::WaitGroup"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::default"
+kappa = "bee786a5695f496f0379b9a1d3ecdf2523aca9fefaab44f618e8eb018168c0e3"
+embedded = "96f71e5601f21bc293c3f5c4e197ff91c1f043d2c2b3793310c2cb581c780bb3"
+status = "residue"
+cause = "mir::Ty: sync::wait_group::WaitGroup"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::drop"
+kappa = "e60592200984b484ce69fe3590e15d741e237fc77657fd1e69bfd0793d7aafde"
+embedded = "0a0a400437de549618db08d4957db06b31da265753a07ca5ab4e175f19bf4919"
+status = "residue"
+cause = "mir::Ty: WaitGroup"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::fmt"
+kappa = "f4160e471b16afc44323eaff675b0211be6794f7c500adaaeb0d99b0cc92597b"
+embedded = "98f663d2850b6728c052658478ce8e4d265646eba781311226112081ce46ee0c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::new"
+kappa = "2c90a827dd152e92292cc841c00c4f452ece9a91c767f7fbf32a30bc2e200c7b"
+embedded = "9693b968af50c2e0f6d46beb336eef49e5492c0db15572c43edc404095bcc6dc"
+status = "residue"
+cause = "mir::Ty: sync::wait_group::WaitGroup"
+
+[[fn]]
+path = "crossbeam-utils::wait_group::WaitGroup::wait"
+kappa = "04a4c147028f32696c2a9c1af2f53b0e1a6f485ec7a5c7a21c5bb0b14666556e"
+embedded = "c7f4ce76f46a1d601073a09830e81d7ba1d517c5969f629412ec8aaeeca52e0d"
+status = "residue"
+cause = "mir::Ty: WaitGroup"
+

@@ -1,0 +1,128 @@
+[[fn]]
+path = "reqwest::gai::<impl at src/dns/gai.rs:7:10: 7:15>::fmt"
+kappa = "900d2ec5b24e1fa1d0a6b7dc03577cef0301e4bfbcd923d3f660d9c84eb5495c"
+embedded = "c88ce75a1c41f3e3b9efdbc1965325908208c3d048ebccc08df24f83494ee635"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::gai::GaiResolver::default"
+kappa = "f3f39abccc06173ff3b3fd4b09c01243485e6f83a8112040661b993877a4da49"
+embedded = "1d0a612f91652cf0e2c2ca74720d462d8508b02e3c3714cc1391d80c872d2329"
+status = "residue"
+cause = "mir::Ty: dns::gai::GaiResolver"
+
+[[fn]]
+path = "reqwest::gai::GaiResolver::new"
+kappa = "c227997bb8bfbc9a11536df2ac883ba6b2a6eb9697a2c0022d87e6eb3d49e7cb"
+embedded = "cffe43aff8b5260ac0b79931604a0cace12f096a67a6e3acd453244734668c44"
+status = "residue"
+cause = "mir::Ty: dns::gai::GaiResolver"
+
+[[fn]]
+path = "reqwest::gai::GaiResolver::resolve"
+kappa = "5b3bc8ab26caacba908cb78161f86bde7f43986cfa4e35d92724da011ef67a7a"
+embedded = "ed83b6256f6ba3246449cb351c38e0a7afac9f9b89a32d1aa97feeb4a90fd1bb"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::boxed::Box<dyn std::iter::Iterator<Item = std::net::SocketAddr> + std::marker::Send>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "reqwest::resolve::<impl at src/dns/resolve.rs:37:10: 37:15>::fmt"
+kappa = "3753c3b0b70df768862238a573f470daf3e9c5eb95ea64d0af0289881fb832e2"
+embedded = "ea46334fb9c248e2deb7c1ddc9ba13a74ca6e9433e010f0d9159b355796eb47c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::resolve::<impl at src/dns/resolve.rs:65:10: 65:15>::clone"
+kappa = "f4151df249102ee70dea596e7212506296685a79455affb2cf1e45496c811616"
+embedded = "5e871bbe417a90c6e26bb27cc1f98c302878537016133c48170515e8153635f2"
+status = "residue"
+cause = "mir::Ty: dns::resolve::DynResolver"
+
+[[fn]]
+path = "reqwest::resolve::Arc::into_resolve"
+kappa = "430e5feb63420868355a2d62af794e7d74c31211f5dc033910994429b3e26e92"
+embedded = "e612cb3dca8a0db310d12971c4d4ce9026f2591346093e13c8709f638e8e23c7"
+status = "residue"
+cause = "mir::Ty: dyn dns::resolve::Resolve"
+
+[[fn]]
+path = "reqwest::resolve::Arc::into_resolve#2"
+kappa = "84dcd6b7fe73708728977880bbabf04e0aa601b68dd251974f50ceaa28d2847b"
+at = "R=u32"
+embedded = "6e0659c68f7ac24338db8aabcb76552e3924d409f451d968b357c97760142386"
+status = "residue"
+cause = "mir::Ty: dyn dns::resolve::Resolve"
+
+[[fn]]
+path = "reqwest::resolve::DnsResolverWithOverrides::new"
+kappa = "5e60e3538cadff71f1fe9f6a0b39fc2ebd5bb21ac4c4f1190347376b3fec0f13"
+embedded = "8aaa521e0d2e313daeab8d37df2d66522031391f73ba47023e2d4aaccc5adb4d"
+status = "residue"
+cause = "mir::Ty: dns::resolve::DnsResolverWithOverrides"
+
+[[fn]]
+path = "reqwest::resolve::DnsResolverWithOverrides::resolve"
+kappa = "48af282c783b51e5d0c2bbc87d3ff5950faeb181917c58ee4f6c5751cda018e9"
+embedded = "758300b12e37c0311b0eb9214cdcac776e7aef0c5263f4b1df6e5ab1b4f57cc8"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::boxed::Box<dyn std::iter::Iterator<Item = std::net::SocketAddr> + std::marker::Send>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "reqwest::resolve::DynResolver::call"
+kappa = "c1243dce123956cfc62aaf7c6b47adeb0326407721b44f56824c5806e8d10516"
+embedded = "ba47242c7de390197fbda1ac4b0d24dd8d70e5110829cae25674110121fbef48"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::boxed::Box<dyn std::iter::Iterator<Item = std::net::SocketAddr> + std::marker::Send>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "reqwest::resolve::DynResolver::new"
+kappa = "179ff41ab367489d2aeb271516e3375b75c2c90d5e1db025b6a1a83595dca412"
+embedded = "ef3606f49fcbc6c9a1dc13a6f89136927b55f1f2c811191396002d2b509120a8"
+status = "residue"
+cause = "mir::Ty: dns::resolve::DynResolver"
+
+[[fn]]
+path = "reqwest::resolve::DynResolver::poll_ready"
+kappa = "cfcb5b9a4e34a97d122954392727aacc48289a94b83b0445a7f672f20108e2d4"
+embedded = "50223487a071569b3f0d3392a657e3a2f7f87f736374ac13e7fc11df1fd8537d"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "reqwest::resolve::Name::as_str"
+kappa = "3007428d0d80a70970268296a4599e3afe5db62faa44ce295275787480339aa0"
+embedded = "7c4d9ea64ac17b8cd8cf4c638ebb58493c7c3856d174b9f92d9ca358119ca300"
+status = "residue"
+cause = "mir::Ty: resolve::Name"
+
+[[fn]]
+path = "reqwest::resolve::Name::from_str"
+kappa = "d4ff81c4d517ea402937529e59ee951a988c3003e67e86cdf179ec7610d3f92a"
+embedded = "4ca2971ed0d42b71079fe463c17d89aae3e922ea1cb29de1e573d756566cf483"
+status = "residue"
+cause = "mir::Ty: dns::resolve::Name"
+
+[[fn]]
+path = "reqwest::resolve::R::into_resolve"
+kappa = "5db36095c6843bfc6f229c6b842c7b16945ee68c77110154bb1f927637a77968"
+at = "R=u32"
+embedded = "a688c0cffbb816f751a05e5cba4c4fca0a4d2926b807d88afd3efab59caf8586"
+status = "residue"
+cause = "mir::Ty: dyn dns::resolve::Resolve"
+
+[[fn]]
+path = "reqwest::resolve::sealed::<impl at src/dns/resolve.rs:187:14: 187:19>::fmt"
+kappa = "4d85b2598ac35d5656a9ff51ff6d663a28e7e42acf4d843308c8f1867edfff53"
+embedded = "ab494365451aea0d425af34eccff6fa8eec1933867a31f7d2efb21f308d9e67d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::resolve::sealed::InvalidNameError::fmt"
+kappa = "3cc8e03ac77a28845e28520692fad007d021737613c2f38ca4a5f834404cd5b4"
+embedded = "b6cbe576ae7b537794fd00442fee6d33fbc95830ee3c1a3e8d6e9c0190071ae5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+

@@ -1,0 +1,448 @@
+[[fn]]
+path = "zerocopy::__size_of::size_of"
+kappa = "4956347aaf9014b5fa416614bec828eb6296ac7c78b326d009631b1b19af1375"
+embedded = "0ae1eafe0e07d0089d897f0521fb4efd18f01221a437ae006a4ac81fb4d7ba01"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::__unsafe"
+kappa = "b0e38b1af662ad49542d3a5bbe1f2574362ce2ab9e4454a8c498f83fab54f9f7"
+embedded = "2a45ff7c39db7f78da243366fd83fba478d435db54b45d435f34f56f3c30a9b6"
+status = "translated"
+digest = "3f9beafc514964eb607285194a4015a37fc2194a7cbd9bdb50480222aa14fc0d"
+
+[[fn]]
+path = "zerocopy::copy_unchecked"
+kappa = "1d4b42b186f10a5ff79987571c5819bb6b30f07f0a556934b6f0a8f34c0de327"
+embedded = "bc86994518d72b03ac39b20c2b068c023acf1513553614eecd4ceba34bc37bb9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "zerocopy::hash_name"
+kappa = "269d6e9a486530682f6876e9208995e11961770ef2b0179153e32c9e45800042"
+embedded = "f94b7e55d53f711b520ed97e2ea95ef25c64ff40f321f0a1f7e42815e39c5dbb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: str::<impl str>::as_bytes"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::clone"
+kappa = "6137ca2f6db26d3f10702020f557f2ee8832434cab9a68b260d1f1c528311a7f"
+at = "T=u32"
+embedded = "7c69b8605dc1707861ba0baf72ad842bf12c658bb43893da19cf30df180116b8"
+status = "residue"
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::fmt"
+kappa = "ecca363fc77ca0b54cfc49106b8ba678f2d19a5a67ed3d9b937af51953e1595d"
+at = "T=u32"
+embedded = "1ff1dfdc19134c61fab34daa95f473321e1a7ff8e4c2aac7fe613024c8478a5d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::get"
+kappa = "1561f6672e1b9b10fd60053deb8a7c4364744deb145056384ff0c6be395163ad"
+at = "T=u32"
+embedded = "c66608de4b35db72a014912233fed20c5c79128e4711b462d80ca57c40967f44"
+status = "residue"
+cause = "mir::Ty: len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::new_in_bounds"
+kappa = "e9b3551b8006bc21a12b47c0659cf811aca3b7f3867f25e2513e532905d0db25"
+at = "T=u32"
+embedded = "f73f84e2931481aa94ef5c2c13dded2c077debd6e7456d53d87e8bdf01db3e28"
+status = "residue"
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::new_unchecked"
+kappa = "faac6522e8a85ff03bf68526d9e0ed5dcd7268489687c20f023a392b10ea8ad0"
+at = "T=u32"
+embedded = "4f6716547a18f100a7e63389541b38c4e5cf69d938d0deed0b85d54edbe771a6"
+status = "residue"
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::len_of::MetadataOf::validate_cast_and_convert_metadata"
+kappa = "fa113e437a892fbbfcfdf18848b9e92189991a03ae5b55c0caf14b1b0e874270"
+at = "T=u32"
+embedded = "cb64e078321cccb1b095fe4220ace086af84ee0c1c67782d708d1d1736be3225"
+status = "residue"
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::<impl at src/util/macro_util.rs:727:16: 727:21>::clone"
+kappa = "48b3a3a7a75f42919c1b543d6a07fc35649835d1541e6da2d60c1e34552e4bee"
+at = "Dst=u32, Src=u32"
+embedded = "39972bc45b3b17f21b8e824cccecb075e3d62e8aba7b611e47c35d9f11507164"
+status = "residue"
+cause = "mir::Ty: util::macro_util::Wrap<u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::new"
+kappa = "1682f933827d189bfa3dec0b5d82005af4d4ff3fd74002792c938c3243f4bbee"
+at = "Dst=u32, Src=u32"
+embedded = "6f1a10b040dbbfa420c554c1478957a269201c9e811503a448ed5b2e469d8412"
+status = "residue"
+cause = "mir::Ty: util::macro_util::Wrap<u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut"
+kappa = "53b56489ca7f4b4f6665fb4ff4da1ad19641b65adb29cb608ad215166cb636cc"
+at = "Dst=u32, Src=u32"
+embedded = "ec7d3cfba4fdf5fa2c33bd689ffff33bca82add0943c63b22d13ab81e716e114"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Wrap<&mut u32, &mut u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut#2"
+kappa = "80728d93afa998f62d51727ca318bf5805497fe3efb86756e61ca59e3b5d490e"
+at = "Dst=u32, Src=u32"
+embedded = "56ec30ccdcca469ee130615b2583bd29c337f8bde632fc3215afae77a4ca25d7"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Wrap<&mut u32, &mut u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut::PhantomData::ASSERT"
+kappa = "157c1a7f9f115b1774fc7d8cedccb8e80ba7c3656a0fc9160f996a19149d9db1"
+embedded = "9dc61e888035a27ac77e86b9a17530d9a1ffeef93d765fc35a4f2cfec7d781dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut::PhantomData::ASSERT#2"
+kappa = "e58efd3b0ef9cdc904e4698d0cfeb147194f1cae85d329fae95dfc99aba13224"
+embedded = "c542314421a427215f851bb79b669ec7fa6a76ba74fbd1235389752fab62dd34"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut::PhantomData::ASSERT#3"
+kappa = "f115b71896a78923fdad2e3ca70eaf5fb83f9f41ba9e3fa55867a6a225ff9ca3"
+embedded = "82136e495d2eedfe43aa6f359ead7d368e31f24b4be1d5416ce2b27bcfdf347f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_mut_inference_helper"
+kappa = "d5adc549dff1cf95414af58b8f1a6ec3994e5d10b921bb2e2da4d2eb47340967"
+at = "Dst=u32"
+embedded = "c1c18d40ac425cd5c4a6dddd1b1e2144e3a9f2aa851af26b848393705ee3c7cc"
+status = "residue"
+cause = "mir::Ty: Src"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref"
+kappa = "c4fba56698e83b4139b39afce428e8634cf6459d3026cbdd06c529682d02389f"
+at = "Dst=u32, Src=u32"
+embedded = "15a2e1af034676949c306187029af0197850e1b574d8c89c7ef0086a4f9d87bc"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Wrap<&u32, &u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref#2"
+kappa = "dfc727c21529b547b2409e46936d6ba695f591a327ca2873f1702b67a79b7dac"
+at = "Dst=u32, Src=u32"
+embedded = "8e973770f8846bae16388fbc50d1b1b1e96e256df2800ca0732b6434f1ca8b1a"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Wrap<&u32, &u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref::PhantomData::ASSERT"
+kappa = "aa283897648df518c9e77c915b0987f763a23b42d783ef91a51d985c7923c145"
+embedded = "388b273b1fbb96f2732272975bb5298b1b421532ca12d8da1c11f830738c7526"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref::PhantomData::ASSERT#2"
+kappa = "794c93ae9958754ef092756153bfd64fff76e4b9a287fccb05c6ba359fafaaea"
+embedded = "194222c956899d5c8d1471ce65869d3f497c0e70da6bb669a0e7de6252237506"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref::PhantomData::ASSERT#3"
+kappa = "6024a9cad283ea2e58f516ed9bdf63d6f013fed9c68a7f290d494c8e8febded8"
+embedded = "49c996ba2e5ac0aef2012cf2cb19c06589edc620e6547293e3d9ab17cc30637f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::transmute_ref_inference_helper"
+kappa = "466c5c240b8829d2cfa620ca535d0975b233150a748b059dd962ca4dad6e0fee"
+at = "Dst=u32"
+embedded = "2c264a6b008e338415845a20e0169a8b730bf015ceb95751a15de03589765e3f"
+status = "residue"
+cause = "mir::Ty: Src"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_mut"
+kappa = "edcfdf2e2f3d56b7070f06037be3c4497d38d7265c003d1aa492d796d39c4ee0"
+at = "Dst=u32, Src=u32"
+embedded = "617be45562ac2820cb1b681f2ad3efa75cf7da455ccdc38119568bafcef2d4b2"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::ValidityError<&mut u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_mut#2"
+kappa = "02128bf4131f27eff15df4b12e2ab2672a8feac15ca8cd739c0e8a22ed5097fe"
+at = "Dst=u32, Src=u32"
+embedded = "2743ec32e032a33ec773dfd8ab9f73875eaa5ccbbf91af4482e943250a74ab2f"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::ValidityError<&mut u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_mut::PhantomData::ASSERT"
+kappa = "9c38fbdb8c878dd0089c60fa7f3e6626a175c691eef34c15144f712646995552"
+embedded = "7e94a764e9b640c967616fe1cd2ab80fb79b0b34f66391a4140763ac9a241bef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_mut::PhantomData::ASSERT#2"
+kappa = "1e9c5a27d2eb353164b938bcb58945c03b8db9938d49287edd597a46db34385b"
+embedded = "faa94633bcf469ecb38d10a0aec884b2bd39afd4bff68145588d89a004682fc6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_mut::PhantomData::ASSERT#3"
+kappa = "0bdcbad41dde82dc14aacd33785a59b117f59e49e78db6ec36ed38c52693c30e"
+embedded = "5fbb3011a89cdcddd8eed4b2e309901ae23ce48d20a21414ea976c70fe608239"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_ref"
+kappa = "2da853f164b45d48c519bfd976118358f1743842ad491b84aa3039d05a380b3c"
+at = "Dst=u32, Src=u32"
+embedded = "42d79f8ab126b85dca7f360cc1d30c83ad225a1e204e76eef72e791bd796a6ab"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::ValidityError<&u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_ref#2"
+kappa = "bd8e4f57fe269d281b45c3748d35cb144c13a6d7274da75d2607085ea8143625"
+at = "Dst=u32, Src=u32"
+embedded = "b9c0b2c6c325e3f69324563875d5ae79704162e23630776bb30c38d1a9a38f47"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::ValidityError<&u32, u32>"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_ref::PhantomData::ASSERT"
+kappa = "9dcd1518028f8304df04fc384b514ffdc82837fbdf862835052ac13a852e0625"
+embedded = "a885df7a6944b63bae9ef22d2ad3942f4ca7763c249da16920fc06d4448efb22"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_ref::PhantomData::ASSERT#2"
+kappa = "c5a89241107c56e60d76d960fa348bc16a85944ed970503ce8ffb0a59bcee4ea"
+embedded = "1ece032779362c7ed7e0e22dac592e59370ad0fe929d9df6126c2fac7053fc2f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::Wrap::try_transmute_ref::PhantomData::ASSERT#3"
+kappa = "342e8e9a1f6a4eb5669b50e70748fca7abdd0bb79dd424354767e5ab0f52b7a0"
+embedded = "1897c8c0e64ccef732a5063e1ab4b78031a763160f5f7b6cbb4f8cf2e6a852f2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "zerocopy::macro_util::must_use"
+kappa = "a6375326dd0a1c02bccd34632862eaf30a9294134f5497acd02d24d3ffa69619"
+at = "T=u32"
+embedded = "d23dbbca10d8b2109efb676d523f391b72f533b621e652e57bc3154457d53cb9"
+status = "translated"
+digest = "1886060af13be623f3f4cefcfaccd7d08e3c2b8cc5ea7096c182a0b8a6875e7d"
+
+[[fn]]
+path = "zerocopy::padding_needed_for"
+kappa = "b27c7e058e069f231357cc502d4ef3c31bcf800676feaf727a1b85f986d54011"
+embedded = "15111f94f371a77f619ab27ad2c91bfcc856ced93711acfa4d87ed2ad7897b2d"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::polyfills::NonNull::slice_from_raw_parts"
+kappa = "e3af533afbe0c8d7642ce77d067ceb24d610f9631c49f3714aeb03dff6960882"
+at = "T=u32"
+embedded = "4f4d4f641f648e74f1c7d507be051181b8f197330e188f7029b1903846b3d090"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::as_ptr"
+
+[[fn]]
+path = "zerocopy::polyfills::usize::unchecked_add"
+kappa = "e277b94897ab201d37ff0e0d6b69469cd91920ab58bfc855b6459a1abbdaa96a"
+embedded = "5a734fac8f940a7516f9bc11043a168fa7c8b469af8be26c032cb9fb9d03d828"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+
+[[fn]]
+path = "zerocopy::polyfills::usize::unchecked_mul"
+kappa = "645337315f6fdb80098dcaa138321a6f09b195d25665f5f33c0a6b5a382c0fe3"
+embedded = "7c95a002d3a2372bfd1a5deb1df34c50fadcf424b8ad92b28de92d1e3dca74a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_mul"
+
+[[fn]]
+path = "zerocopy::polyfills::usize::unchecked_sub"
+kappa = "fc95b910be4c92fb8a984ac978a7d27edf2df81187581b071667492a3355b056"
+embedded = "3a468cf8d13d48a33526c503f9fdb74c0a43d959624ac4b670456ec98c96246d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_sub"
+
+[[fn]]
+path = "zerocopy::round_down_to_next_multiple_of_alignment"
+kappa = "d5a491176b297ffc1b7d98c8b5fe741e919a7ec945c70348fb5a50724a041223"
+embedded = "a8e5f98645714084d0238abf65c476bc4c789b2ff77190123fa5a53e03d44b24"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::transmute_mut"
+kappa = "c230b25be9d4c936e4314783efe20d2a0fb5a4f9383b9059fb386c2da1283b50"
+at = "Dst=u32, Src=u32"
+embedded = "7b6f5861fb47f9465aca84860552cf5e1540e99614fb3ba0ea0f6e87f68d9556"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Exclusive"
+
+[[fn]]
+path = "zerocopy::transmute_ref"
+kappa = "a05863fc5dcb60a39d1155798b8f85091ecabd30b4817e3f584f3ec4abf1d105"
+at = "Dst=u32, Src=u32"
+embedded = "194339b43ccc6f180d0ff5ec5666f83863c513ff4ea7e9f2b59f018bc96039a7"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::try_transmute"
+kappa = "048d255227f65c9b0e98fd0b4e833aad059bf091ddba0343194afe7b8cfd1c47"
+at = "Dst=u32, Src=u32"
+embedded = "66da077b457f153006c930ee566dfbbe37ecac0ce93afb042bfefedb7437bc21"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::ValidityError<u32, u32>"
+
+[[fn]]
+path = "zerocopy::try_transmute::PhantomData::ASSERT"
+kappa = "a1e3a5a4b3d7c1982b0fdbc9f36e4a235149cc89ef701bfa799a39612f2cd2a9"
+embedded = "76cae23a71ea6a7430cdf68114df6bd93e5da6ca596aee2a128049a90ac3baf6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::util::<impl at src/util/mod.rs:101:1: 101:39>::addr"
+kappa = "2837b34d669548aaa53f0b6850bc7d194028d356c79fcf6d8e564d84d2db8d99"
+at = "T=u32"
+embedded = "b7f91a69c779fe6a16bc743d03206dec1db0b4d10965a116324f8565bb4c2800"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::cast"
+
+[[fn]]
+path = "zerocopy::util::<impl at src/util/mod.rs:117:1: 117:37>::addr"
+kappa = "ae71c735131c1775edf944d8bed10e391fcdd791ee57601b31c27b2ad84933d8"
+at = "T=u32"
+embedded = "d027373ad5ac192849925befb1053acc05a7bed302dce3217a6338ff5cb964f3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: util::<impl at src/util/mod.rs:101:1: 101:39>::addr: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::cast"
+
+[[fn]]
+path = "zerocopy::util::<impl at src/util/mod.rs:78:1: 78:33>::addr"
+kappa = "dbb8392fef4758f080cf6fe873ad81786ebd3184eddbcb1fc3301ccd344e8d7b"
+at = "T=u32"
+embedded = "1daa4348fb9b124f9e7ee95a4aec02f0e45c37b11a26ee9eafa49e1581b028b6"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::util::<impl at src/util/mod.rs:86:1: 86:37>::addr"
+kappa = "53a5610727caa82a4a3cc1d8208180b610f5ca122af1c1cbd458343514d8bf42"
+at = "T=u32"
+embedded = "9423edaa0575c7c811af24ab2ef310c5ea28dccc845af0ab12ca05d41e45e3dd"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zerocopy::util::NonNull::addr"
+kappa = "cf44fd3aabdcf7a0a6b44918d2e8bd8863320f917fa2796ed94d9043cfd9bf17"
+at = "T=u32"
+embedded = "79be7823367627afeec0751923672b5d0e3626f23d7e04759ceb0bd1806ef279"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::as_ptr"
+
+[[fn]]
+path = "zerocopy::util::SendSyncPhantomData::clone"
+kappa = "f04b4f8431ff52b8ad5f320a31165f147351e68d4f0ef1d5a334d85956999ed3"
+at = "T=u32"
+embedded = "b96c8cba5aa51e5c70455cac7e705061c7226997d6b13fd4632e1a1c323945c4"
+status = "residue"
+cause = "mir::Ty: util::SendSyncPhantomData<u32>"
+
+[[fn]]
+path = "zerocopy::util::SendSyncPhantomData::default"
+kappa = "8111100e9f5f41a21d0fc2d43094ba24def94c2babbd02c49c67086652c0af1c"
+at = "T=u32"
+embedded = "ca5be67b79893fc3a706aa4ecc8636e2b22713f3b1532a2358cec6e2df04ffb6"
+status = "residue"
+cause = "mir::Ty: util::SendSyncPhantomData<u32>"
+
+[[fn]]
+path = "zerocopy::util::SendSyncPhantomData::eq"
+kappa = "330b617066618d70757c61b3a24d4dee258486adc60acf27665fafceb7399185"
+embedded = "415b8a2a87d490e4e7ef8d58df9dd4fbb00362a9af842d1431db0ab013a0997d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zerocopy::util::max"
+kappa = "5ca10e5d70920d2d33ef844d9e277df23424cc899319d4cb7629fb5bb0a73240"
+embedded = "ad77b8a1554ce6281c5d16f16d7a8d726d3ba9eaf0e845f6a9d4a20c496c9977"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::util::min"
+kappa = "808bd31288a3baffb33bfd275c175f07f93804d14dcffe18c9614e9e82242e57"
+embedded = "b5a7eb691da83dea62d333758fb2f33ee6f7cbb8a916616dd03e353289ac5aec"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::util::transmute_unchecked"
+kappa = "9c252bd566d61439ceffcce612a29316ce7de1e179eee362a5e6312aa911c796"
+at = "Dst=u32, Src=u32"
+embedded = "8e225ba0bb29f2c3814b4c15ed8fac13a27fee68a30224f76092cefecac930ff"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Operand::Constant: <(core::marker::PhantomData<u32>, core::marker::PhantomData<u32>) as util::transmute_unchecked::StaticAssert>::ASSERT"
+
+[[fn]]
+path = "zerocopy::util::transmute_unchecked::PhantomData::ASSERT"
+kappa = "1ecf5f5bdd35e6f4dd2b936e171bef12d3f5de3368894a748dd210734e73ce21"
+embedded = "0e182e3a48d3281ced995f20e3f881757bdbb8f68f64255466f6c255a0fd025e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::validate_aligned_to"
+kappa = "e517abd2631c9fe7256b27b20781566bf989355b42b938b1be30eddfd01aebd3"
+at = "T=u32, U=u32"
+embedded = "4c254fa2150aa3185a295cdf29988096a7e9e97da83e33d63748ab2bbdd2f3ee"
+status = "residue"
+cause = "mir::Ty: error::AlignmentError<(), u32>"
+

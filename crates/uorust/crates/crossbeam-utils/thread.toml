@@ -1,0 +1,104 @@
+[[fn]]
+path = "crossbeam-utils::thread::<impl at src/thread.rs:335:10: 335:15>::fmt"
+kappa = "4f44dc6914cdb09526265fe6383d2dcb25ebe3544f5ce3df9a0f1b348fef2de3"
+embedded = "a85394181e3c02eb430fcc4b6572a191bc6413f0ac902bb5346e4efd33ed51ef"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::thread::Scope::builder"
+kappa = "9bccb2608decd50c26d2a89d102b599f7b62ffeb4a88515cee575b40a30b10d2"
+embedded = "7e3a772e92ee2e1ed7405b49f4c0f6cc74bc1e735b5308dcae5e44dbdeb80608"
+status = "residue"
+cause = "mir::Ty: thread::ScopedThreadBuilder<'_, '_>"
+
+[[fn]]
+path = "crossbeam-utils::thread::Scope::fmt"
+kappa = "a37f8d2e9e7e2f4302d100057595da4af15007c73c4376c585728b3b657b1aa2"
+embedded = "a0f3ee9dd578a3cf88ef7b78765b9b5a885ff93e5cb6665ac2235e338dbf8453"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::thread::Scope::spawn"
+kappa = "ef7c1771637a5434ef8a1c727ac776da4bcd65aa5e4cee336c13945c04788d9c"
+at = "F=u32, T=u32"
+embedded = "5eb7191dc1182631ab02d1a3eb4f6b98e1f9232498f2ddf434dff3037817e575"
+status = "residue"
+cause = "mir::Ty: thread::ScopedJoinHandle<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedJoinHandle::fmt"
+kappa = "4b4ce0c61c995cb327aa6ebd30ea4db2d0bc7da4d7e67463638d5ec35a74c7e5"
+embedded = "906674ecbca499442b4eed20931b16db4f416d7f1d41728e5ec04b58e83f20fa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedJoinHandle::join"
+kappa = "189c97e90858d7ed0fd9b1ebbbe448faae43fad35c13c024b81d4e5ce61c0203"
+at = "T=u32"
+embedded = "91990dfa9a929cdd19193a6e546b3c269850618f9a0625626ae368b2f5155ef1"
+status = "residue"
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedJoinHandle::thread"
+kappa = "ee7f4c3cbb78178ec7a967c21e0e9670021af44ecdcb4faf7323b855a24f33a3"
+embedded = "078e0054d67d5310a5ddbdc0f04375582bb7458b32bfb2a156a449ab12f0a9a4"
+status = "residue"
+cause = "mir::Ty: std::thread::Thread"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedThreadBuilder::name"
+kappa = "bf823653a3275b30974a8e0ad2098903b73766705c4cfd9aa4d6020a938c373d"
+embedded = "6420a5d0c46ed80480d9ac3d5d9bc4406fe2e768a2f0d13fb5f9c479519554cc"
+status = "residue"
+cause = "mir::Ty: thread::ScopedThreadBuilder<'_, '_>"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedThreadBuilder::spawn"
+kappa = "5c8534de3b7693ee72cffbe596b5a690d4c485e56038871cced7099c42b3b435"
+at = "T=u32"
+embedded = "a2e784a55751990803de92f5cbc9b49a33a9ac24a2c8597cb90514e1bd04e9ec"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: thread::ScopedJoinHandle<'_, u32>"
+
+[[fn]]
+path = "crossbeam-utils::thread::ScopedThreadBuilder::stack_size"
+kappa = "4befd5e857ebaf105040f1adb8f8ebc6f7456aa6cc0afbfb5db51c1c29d3b1e1"
+embedded = "a9137663f3d40979f7971e16ec4307cb59e2cbe9093ad68b280d4b6cbb50f990"
+status = "residue"
+cause = "mir::Ty: thread::ScopedThreadBuilder<'_, '_>"
+
+[[fn]]
+path = "crossbeam-utils::thread::scope"
+kappa = "6133d134ba177bd8a4667e75235754ec2fd19e58d877cbc962131c0142259103"
+at = "R=u32"
+embedded = "f166f42ff6b9925a14302ced744ba8c87177607c2fa603b2668c6c7870308954"
+status = "residue"
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+
+[[fn]]
+path = "crossbeam-utils::thread::scope::AbortOnPanic::drop"
+kappa = "07f3c77b17393528cb3e9fc6ba4e09fc69d9d2c25b3c81dcabe0cb4ce55aadf6"
+embedded = "ec63bd749364660672e0400b1d46f066fff39cddae26d87435f406aad2c1ca5c"
+status = "residue"
+cause = "mir::Ty: AbortOnPanic"
+
+[[fn]]
+path = "crossbeam-utils::thread::unix::ScopedJoinHandle::as_pthread_t"
+kappa = "1397d47fe65d2425ea116e22dba9ae95df265865161b3c03a013b2535d02bb3c"
+embedded = "becefb219891b8990397826044ce200a7f8efafb733385a8b44c1acd91a63451"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-utils::thread::unix::ScopedJoinHandle::into_pthread_t"
+kappa = "7c8cba8f4f0f674afe4b30b7983d0adb7b5efdbc9d3d0cd220c637d8ab5a2413"
+at = "T=u32"
+embedded = "e02596de72a841f2416ca8b90b143bcf49846900d588d4b96be011f8b92a902d"
+status = "residue"
+cause = "mir::Ty: thread::ScopedJoinHandle<'_, u32>"
+

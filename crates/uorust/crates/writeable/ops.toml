@@ -1,0 +1,80 @@
+[[fn]]
+path = "writeable::ops::LengthHint::add"
+kappa = "a74e0b25e44f5f320efc1b71288385257982a42cbf02c9080eebc71a498a6dea"
+at = "LengthHint=u32"
+embedded = "2fb3e0bba5535fe2060abddd4f36f53a12183feb463a2a303035d7bbd155b19b"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "writeable::ops::LengthHint::add#2"
+kappa = "494a32b1b2e6b0c9e0eb38706a63075e2ab1fa0087a3f44bd8f4cf7bf440c2a4"
+at = "LengthHint=u32"
+embedded = "2eeb8fc99ab7853f37fa46e38a860523018bba9d03761a483db566db9729abca"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "writeable::ops::LengthHint::add_assign"
+kappa = "af6d82c83e5c4e258fd6f32d525fb7d7b3f6ceae8aedccef42b67277cb55c49e"
+at = "LengthHint=u32"
+embedded = "fbed2917db582a74a2ef595ea23570c3d5e05407feaf80eff15ffbd76d0f72d4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Add, which u32 does not implement in core"
+
+[[fn]]
+path = "writeable::ops::LengthHint::add_assign#2"
+kappa = "5320a61b772fe62269a45e6fce3eba8cca6a86b5520f9508f06276f719ae56cb"
+at = "LengthHint=u32"
+embedded = "1499c622097d7b2e5b49d168f3f206d43e5c7de6c4c10674fa474993f6431cb6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Add, which u32 does not implement in core"
+
+[[fn]]
+path = "writeable::ops::LengthHint::bitor"
+kappa = "f72393a6a221d06ab0e31387de2d3809ded0a3ae4643c0a6fbf6202385dc08b2"
+at = "LengthHint=u32"
+embedded = "738c040559e6151f8947ffa433224bcb594fecc0cca1bc08db9df7d4d5e168f2"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "writeable::ops::LengthHint::bitor_assign"
+kappa = "33f06349ebc40997cfbf3278d42222ee1f67ccebe9b53f648d8624298dc28501"
+at = "LengthHint=u32"
+embedded = "6dec96b70b482749991009780850c75a800732c1d79ed2fdc11036c1fb8d17ed"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitOr, which u32 does not implement in core"
+
+[[fn]]
+path = "writeable::ops::LengthHint::mul"
+kappa = "ede7c4ca3c199be4f943f3b0166f8fb52d2ea57462f0d42875437699e3968f23"
+at = "LengthHint=u32"
+embedded = "1b220da4e894d6cb47b79b786bf80a32496c4d6a026812b0f6f9e33a41a6e070"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "writeable::ops::LengthHint::mul_assign"
+kappa = "1fe61881c2363e5c4a8446ee651bb994bad484403214c1ee04afb6bd20553ffd"
+at = "LengthHint=u32"
+embedded = "d1fa8ab64c2f2eb943248963f0dccfc52c10cd4bd874f635d5effd858294fb7c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Mul, which u32 does not implement in core"
+
+[[fn]]
+path = "writeable::ops::LengthHint::sum"
+kappa = "cd6513b9227bc44d65e7d3f1a9c0b1d3494221e0e246ba04c9d2c58d6dc6afce"
+at = "I=u32, LengthHint=u32"
+embedded = "efc05a4dcc68e955ac534b8f2fbda9dac99b4ec961decaf4709382ca723ba30d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: LengthHint::exact: writeable's MIR stops at mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::ops::LengthHint::sum#2"
+kappa = "8354dee9371da602bcfe432da2f961bfdf1f283c24850086e33781f730d1a9f0"
+at = "I=u32, LengthHint=u32"
+embedded = "314b9175277ef9380a936c66c7ad116a6b15fbdc65a328a0dd3747cebe0bcce5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+

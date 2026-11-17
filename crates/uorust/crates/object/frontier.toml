@@ -1,0 +1,4061 @@
+# The object register (written by `uorust crate object@0.41.0`; do not edit): every body of
+# object's MIR at object 0.41.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 10291
+translated = 76
+residue = 10215
+
+[module.archive]
+bodies = 14
+translated = 4
+residue = 10
+
+[module.common]
+bodies = 103
+translated = 3
+residue = 100
+
+[module.constants]
+bodies = 16
+translated = 16
+residue = 0
+
+[module.ebcdic]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.elf]
+bodies = 3546
+translated = 38
+residue = 3508
+
+[module.endian]
+bodies = 135
+translated = 0
+residue = 135
+
+[module.goff]
+bodies = 518
+translated = 0
+residue = 518
+
+[module.macho]
+bodies = 1626
+translated = 1
+residue = 1625
+
+[module.pe]
+bodies = 1271
+translated = 2
+residue = 1269
+
+[module.pod]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.read]
+bodies = 2615
+translated = 12
+residue = 2603
+
+[module.xcoff]
+bodies = 415
+translated = 0
+residue = 415
+
+[embedding]
+bodies = 10291
+embedded = 10291
+evaluable = 10290
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[differential]
+bodies = 6
+theorems = 33
+
+[[cause]]
+cause = "mir::Ty: elf::RelocationType"
+bodies = 1964
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1121
+
+[[cause]]
+cause = "mir::Ty: pe::RelocationType"
+bodies = 269
+
+[[cause]]
+cause = "mir::Ty: read::Error"
+bodies = 234
+
+[[cause]]
+cause = "mir::Ty: elf::Machine"
+bodies = 193
+
+[[cause]]
+cause = "mir::Ty: elf::FileFlags"
+bodies = 169
+
+[[cause]]
+cause = "mir::Ty: elf::DynamicTag"
+bodies = 154
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 105
+
+[[cause]]
+cause = "mir::Ty: elf::SectionType"
+bodies = 105
+
+[[cause]]
+cause = "mir::Ty: macho::CpuSubtypeId"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: elf::NoteType"
+bodies = 76
+
+[[cause]]
+cause = "mir::Ty: macho::LoadCommandType"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: macho::RelocationType"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: xcoff::SymbolClass"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: pe::SectionFlags"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: elf::SectionFlags"
+bodies = 56
+
+[[cause]]
+cause = "mir::Ty: macho::FileFlags"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: pe::Machine"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: elf::ProgramType"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: read::SectionIndex"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: macho::CsFlags"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: pe::SymbolClass"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: pe::FileFlags"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: macho::SectionFlags"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: macho::SectionType"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolStab"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: read::SymbolIndex"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: elf::DynamicFlags1"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: xcoff::SectionType"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolFlags"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: xcoff::RelocationType"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolSection"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileFlags"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: macho::Platform"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: AuxHeader32"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: AuxHeader64"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolType"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: ImageOptionalHeader32"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: ImageOptionalHeader64"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationFlags"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: macho::SegmentFlags"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: pe::SymbolType"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: xcoff::SectionFlags"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: elf::ProgramFlags"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: goff::SymbolFlags"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: xcoff::CsectAuxClass"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: xcoff::SymbolType"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: elf::OsAbi"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: macho::CpuType"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: macho::FileType"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolDesc"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: pe::GuardFlags"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: goff::Alignment"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: pe::DebugType"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: goff::FileFlags"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: pe::BaseRelocationType"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: pe::SymbolBaseType"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: pe::DllFlags"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolVisibility"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: macho::BindOpcode"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: macho::CpuSubtype"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: pe::Subsystem"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: elf::FileType"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolOther"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: macho::CsSlot"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrFormat"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: pe::HotPatchChunkFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: common::Permissions"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: goff::BehavioralAttributes"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: macho::ExportSymbolFlags"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: macho::VmProt"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: pe::SymbolSection"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: read::Import<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::Fixup"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: IndirectSymbol"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: VersymIndex"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolType"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: read::CompressedFileRange"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: xcoff::SymbolSection"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Endian"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: common::Architecture"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolBind"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: macho::CsExecSegFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheMappingFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: macho::RebaseOpcode"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: pe::CorFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: read::Relocation"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: xcoff::SymbolVisibility"
+bodies = 15
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Endian"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: CpuSubtype"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ExportSymbolFlags"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: SymbolDesc"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: SymbolOther"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: VersionIndex"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: common::SectionKind"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: endian::LittleEndian"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: endian::U32<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: goff::SymbolType"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbol<'_"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: BindSymbolFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CorFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CorVtableFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CsExecSegFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CsFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DllFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DyldCacheMappingFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DylibUseFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DynamicFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DynamicFlags1"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: DynamicGnuFlags1"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: EnclaveFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: EnclavePolicyFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: GnuPropertyType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: GroupFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: GuardFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: GuardFunctionFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: HotPatchBaseFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: HotPatchChunkFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ImportObjectFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ProgramFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: SyminfoFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: VersionFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: VmProt"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: elf::DynamicFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: elf::VersymIndex"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: macho::DylibUseFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: macho::Tool"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: macho::Version"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: pe::CorVtableFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: pe::HotPatchBaseFlags"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: read::CompressedData<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: read::Export<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: read::any::Symbol<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: util::Bytes<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: xcoff::AuxType"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: DynamicTag"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: elf::GnuPropertyType"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: elf::SyminfoFlags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: macho::IndirectSymbol"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: pe::GuardFunctionFlags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: read::util::StringTable<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: common::ComdatKind"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: common::FileFlags"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: common::SectionFlags"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: common::SegmentFlags"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: pe::ImportObjectFlags"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: pe::ImportObjectNameType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: read::ObjectKind"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::ExportOrdinal"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Elf"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ImageSectionHeader"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: common::SubArchitecture"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: common::SymbolKind"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: common::SymbolScope"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: elf::FileHeader32<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: elf::FileHeader64<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: elf::GroupFlags"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: elf::VersionFlags"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: elf::VersionIndex"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: endian::U64<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: goff::Amode"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: goff::RecordPrefix"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: goff::RecordType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationReferenceType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: macho::BindSymbolFlags"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: macho::CsVersion"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolReference"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: pe::ComdatSelection"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: pe::DynamicRelocationSymbol"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: pe::EnclavePolicyFlags"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSectionHeader"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: pe::SymbolDerivedType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: read::SymbolSection"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: read::macho::symbol::MachOSymbol<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: xcoff::SectionHeader32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: xcoff::SectionHeader64"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: DyldChainedImport32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: DyldChainedImport64"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Section64<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Xcoff"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: elf::DynamicGnuFlags1"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: elf::SectionHeader32<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: elf::SectionHeader64<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: endian::Endianness"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: goff::BindingScope"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: goff::FileEntry"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: goff::SymbolReserveQwords"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: macho::BindDylib"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: pe::EnclaveFlags"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: pe::ImportObjectType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::ImportLibrary<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::RelocationMap"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::elf::section::ElfSection<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: symbol_map::ObjectMapEntry<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: xcoff::CsectAuxType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileAuxType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ArchiveMember<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: BindDylib"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CompressionType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CpuSubtypeId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: DyldCacheSlidePointer3"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: I32<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ProgramType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Section32<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SymbolBind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SymbolLibrary"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SyminfoBoundto"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: elf::Ident"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: elf::SymbolInfo"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: elf::SyminfoBoundto"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: endian::BigEndian"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationReferentType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: goff::Rmode"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: goff::TaskingBehavior"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: macho::DiceKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: macho::ExportSymbolKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: macho::SymbolLibrary"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pe::EnclaveImportMatchType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::any::File<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::elf::symbol::SymbolTable<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::BindIterator<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::section::SectionTable<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: symbol_map::SymbolMapName<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xcoff::CsectAuxSmtyp"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileHeader32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileHeader64"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: BehavioralAttributes"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CsSlot"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CsectAuxSmtyp"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DyldCacheSlidePointer5"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr64KernelCacheRebase"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eSegmentedRebase"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Pe"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Rela64<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: common::SkipDebugList<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicStr"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: elf::AttributeTag"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: elf::CompressionType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: goff::DuplicateSymbolSeverity"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: goff::Executable"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: goff::LoadingBehavior"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: goff::SymbolNamespace"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: goff::TextRecordStyle"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: macho::CsHashType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: pe::FrameType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: pe::WeakExternSearch"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::any::Section<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::coff::section::SectionTable<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::coff::symbol::CoffSymbolIterator<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::Crel"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::CrelIterator<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolInternal<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::macho::file::MachOFile<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::macho::section::MachOSection<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::macho::symbol::SymbolTable<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::ExportTable<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::ObjectMap<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::symbol::XcoffSymbol<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Amode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AttributeTag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AuxType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BaseRelocationType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindOpcode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindSubopcodeThreaded"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindingAlgorithm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindingScope"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindingStrength"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ComdatSelection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CpuType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CsHashType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CsVersion"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CsectAuxClass"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CsectAuxType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DataEncoding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DebugType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DiceKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DuplicateSymbolSeverity"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DyldChainedImportFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DynamicRelocationSymbol"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EbcdicStr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EnclaveImportMatchType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Executable"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportAddressIndex"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportSymbolKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FileAuxType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FileClass"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FileEntry"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FileVersion"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FrameType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: I16<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: I64<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ImportObjectNameType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ImportObjectType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LoadCommandType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LoadingBehavior"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NoteType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: OsAbi"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Platform"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ProgramHeader32<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ProgramHeader64<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RebaseOpcode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RebaseType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RecordType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Rela32<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RelocationAction"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RelocationFetchStore"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RelocationReferenceType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RelocationReferentType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Rmode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SegmentCommand32<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SegmentCommand64<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Subsystem"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolBaseType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolDerivedType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolNamespace"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolReference"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolReserveQwords"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymbolStab"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TaskingBehavior"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TextRecordStyle"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Tool"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: U16<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: WeakExternSearch"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: coff::section::SectionTable<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::AddressSize"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::BinaryFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::RelocationKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: elf::DataEncoding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: elf::FileClass"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: elf::Rel32<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: elf::Rel64<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: endian::I32<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: goff::BindingAlgorithm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: goff::BindingStrength"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: goff::Relocation"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationAction"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationFetchStore"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: macho::BindType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedImportFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: macho::RebaseType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: macho::Relocation<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveMember<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::elf::dynamic::DynamicTable<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::elf::symbol::ElfSymbol<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::BindOperationIterator<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::macho::exports_trie::ExportSymbol<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::ExportTarget<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::pe::relocation::RelocationIterator<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::SymbolMap<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Symbol"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CodeView<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CsectAux32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CsectAux64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ReadCache<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RecordPrefix"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::RelocationEncoding"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::RelocationFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: elf::FileVersion"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: macho::BindSubopcodeThreaded"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDataDirectory"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::any::Segment<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::coff::symbol::CoffSymbol<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::coff::symbol::CoffSymbolTable<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::coff::symbol::SymbolTable<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::elf::file::ElfFile<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::elf::section::SectionTable<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::elf::segment::ElfSegment<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolIterator<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::macho::load_command::LoadCommandIterator<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::macho::segment::MachOSegment<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::macho::symbol::MachOSymbolIterator<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::ImportTable<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::pe::section::PeSection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::ObjectMapEntry<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::SymbolMapName<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::traits::NoDynamicRelocationIterator"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: symbol_map::ObjectMapFile<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xcoff::Rel32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xcoff::Rel64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ProgramHeader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CodeDirectory<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CodeSignatureBlob<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eAuthBind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eAuthBind24"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eAuthRebase"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eSharedCacheAuthRebase"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ImageResourceDirectoryEntry"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ImageThunkData32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ImageThunkData64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LittleEndian"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MachHeader32<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MachHeader64<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elf::Verdaux<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elf::Verdef<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elf::Vernaux<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elf::Verneed<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::I16<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::I64<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::U16<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::U32<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::U64<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: goff::DebugBitFields<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: goff::Record"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: goff::SymbolRecord"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pe::ImageExportDirectory"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pe::ImageFileHeader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::CodeView<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::CompressionFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::ExportTarget<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveFile<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributesSection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributesSubsection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributesSubsubsection<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::hash::GnuHashTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::hash::HashTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::RelocationSections"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::symbol::ElfSymbolIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::VerdefIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::VerneedIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::VersionTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldRelocation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::Bind<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::Rebase"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::RebaseOperationIterator<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedImport<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::function_starts::FunctionStartsIterator<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macho::load_command::LoadCommandData<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::data_directory::DataDirectories<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::ExportAddressIndex"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::file::PeFile<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::DelayLoadImportTable<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::relocation::RelocationBlockIterator<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pe::resource::ResourceDirectoryTable<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::ObjectMapFile<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::traits::NoExportIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::traits::NoImportIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::traits::NoImportLibraryIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::util::Bytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::file::XcoffFile<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::section::XcoffSection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::symbol::SymbolTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: symbol_map::SymbolMap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ReadRef"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Section"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SectionHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Segment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AnonObjectHeaderBigobj"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ArchiveKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AttributesSubsubsection<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64e"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FatArch32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FatArch64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FileKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Guid"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImageFileHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImageNtHeaders32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImageNtHeaders64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImageSymbol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImageSymbolEx"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImportLibrary<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImportObjectData<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ImportType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Mach"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NameOrOrdinal<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RelocationMapEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RelocationTarget"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Sym32<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Sym64<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Symbol32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Symbol64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: coff::symbol::CoffSymbol<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::SymbolFlags<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::iter::Enumerate<core::slice::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::num::TryFromIntError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: elf::GnuHashHeader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: elf::HashHeader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: elf::Versym<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: goff::HeaderRecord"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::BuildVersionCommand<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheImageInfo<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedImport32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedImport64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::LinkeditDataCommand<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::SegmentCommand32<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: macho::SegmentCommand64<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pe::Guid"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDelayloadDescriptor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDosHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pe::ImageImportDescriptor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pe::ImageRelocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::FileKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::NameOrOrdinal<&[u8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::any::SymbolIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveSymbolIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::coff::file::CoffFile<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::coff::section::CoffSection<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::dynamic::DynamicIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::note::GnuProperty<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::note::Note<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::note::NoteIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::RelrIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::symbol::ElfSymbolTable<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::Version<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::goff::relocation::GoffRelocationIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSubsectionIndex"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::codesign::CodeDirectory<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::codesign::CodeSignature<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::codesign::CodeSignatureBlob<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::RebaseIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::exports_trie::ExportsTrieIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedFixups<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedSegment<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::section::MachOSectionInternal<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::macho::symbol::MachOSymbolTable<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::Import<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::ImportThunkList<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::relocation::Relocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::resource::ResourceDirectory<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::resource::ResourceName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::rich::RichHeaderInfo<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pe::section::PeSegment<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::symbol::XcoffSymbolIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::symbol::XcoffSymbolTable<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: version::Version<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Dyn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FileHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: read::archive::parse_u64_digits: object's MIR stops at mir::TerminatorKind::Call: char::methods::to_digit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompressionHeader32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompressionHeader64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr32Bind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr32CacheRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr32FirmwareRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr64Bind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr64Rebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eBind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eBind24"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eSharedCache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtrArm64eSharedCacheRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Dynamic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExportFlags<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExportSymbol<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FixupState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportFile<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportFlags<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportLibraryFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportName<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Nlist32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Nlist64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Note<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoteHeader32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoteHeader64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PtrauthKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadCacheInternal<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadCacheRange<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RebaseOperation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RelocationStateV2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RelocationStateV3"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RelocationStateV5"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: archive::AixHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: archive::Header"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyld_info::BindOperation<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<2>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::CompressionHeader32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::CompressionHeader64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::Rela32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::Rela64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::Sym32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elf::Sym64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: goff::EndRecord"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: goff::LengthDataItem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: goff::TextRecord"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::BuildToolVersion<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::CsBlobIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::CsCodeDirectoryV0"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::CsCodeDirectoryV4"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::CsSuperBlob"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedFixupsHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr32Bind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr32Rebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr64Bind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr64Rebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eAuthBind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eAuthBind24"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eAuthRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eBind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eBind24"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eSharedCacheAuthRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eSharedCacheRebase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedStartsInSegment<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DyldInfoCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DylibCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::DysymtabCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::EntryPointCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::FatHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::RelocationInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::ScatteredRelocationInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::SymtabCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::ThreadCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macho::UuidCommand<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::AnonObjectHeaderBigobj"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolFunction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolWeak"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageOptionalHeader32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageOptionalHeader64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImageResourceDataEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::ImportObjectHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pe::MaskedRichHeaderEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::ExportFlags<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::ImportFlags<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::ImportLibraryFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::RelocationTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::any::SymbolTable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveSymbol<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::comdat::CoffComdat<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::comdat::CoffComdatIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::import::ImportFile<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::import::ImportName<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::import::ImportObjectData<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::coff::import::ImportType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributeIndexIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributeReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributesSubsectionIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::attributes::AttributesSubsubsectionIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::comdat::ElfComdat<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::comdat::ElfComdatIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::dynamic::Dynamic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::export::ElfExportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::import::ElfImportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::import::ElfImportLibraryIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::section::ElfSectionIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::VerdauxIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::elf::version::VernauxIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::goff::file::GoffFile<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::goff::record::LogicalRecord<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSectionInternal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolTableInternal<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::codesign::CodeSignatureBlobIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheMapping<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheMappingSlice<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheSlideInfo<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldSubCacheSlice<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::export::MachOExportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::fat::MachOFatFile<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedFixupIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedImportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::DyldChainedSegmentIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::import::MachOImportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::import::MachOImportLibraryIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::load_command::LoadCommandVariant<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macho::segment::SectionOffsetIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::Export<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::export::PeExportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::DelayLoadDescriptorIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::ImportDescriptorIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::PeImportIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::import::PeImportLibraryIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pe::resource::ResourceDirectoryEntryData<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::read_cache::ReadCacheRange<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::symbol_map::SymbolMapBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::util::ByteString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::symbol::SymbolIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::SeekFrom"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::ByteString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::StringTable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: version::VersionTable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FatArch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FileAux"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MachHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Object"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <&[u8] as read::read_ref::ReadRef<'_>>::read_bytes_at::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: pod::slice_from_all_bytes::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: pod::slice_from_all_bytes_mut::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item elf::STO_PPC64_LOCAL_BIT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item macho::CSSLOT_ALTERNATE_CODEDIRECTORIES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item read::archive::EBCDIC_SPACE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::to_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: read::archive::parse_u64_ebcdic_digits: object's MIR stops at mir::Operand::Constant: the constant item read::archive::EBCDIC_SPACE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArchiveSymbol<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArchiveSymbolIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DyldCache<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DyldCacheHeader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DyldChainedPtr32Rebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DyldFile<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dyn32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dyn64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EbcdicArray<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FileAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FileAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GnuProperty<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I16<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageDataDirectory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageDelayloadDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageDosHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageImportDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MachOFatFile<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MachOImportDyldInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RelocationMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Relr32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Relr64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResourceNameOrId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Section"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SymbolRecord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: U16<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: archive::AixFileHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: archive::AixMemberOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: coff::file::CoffFile<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Once<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: data_directory::DataDirectories<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<1>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<3>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<9>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ebcdic::EbcdicArray<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Dyn32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Dyn64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::NoteHeader32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::NoteHeader64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::ProgramHeader32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::ProgramHeader64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Relr32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Relr64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Syminfo32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elf::Syminfo64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endian::I16<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endian::I32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endian::I64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endian::U16<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: goff::LengthRecord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: goff::RelocationRecord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::CsCodeDirectoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::CsCodeDirectoryV2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::CsCodeDirectoryV3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::CsGenericBlob"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::CsScatter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DataInCodeEntry<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheMappingAndSlideInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheMappingInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheSlideInfo2<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheSlideInfo3<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheSlideInfo5<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheSlidePointer3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheSlidePointer5"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldCacheTproMappingInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr32CacheRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr32FirmwareRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtr64KernelCacheRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64e"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eSegmentedRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedPtrArm64eSharedCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedStartsInImage<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldChainedStartsOffsets<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldSubCacheEntryV1<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DyldSubCacheEntryV2<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Dylib<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylibModule32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylibModule64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylibReference<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylibTableOfContents<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylibUseCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::DylinkerCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::EncryptionInfoCommand32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::EncryptionInfoCommand64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::FatArch32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::FatArch64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::FilesetEntryCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::FvmfileCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Fvmlib<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::FvmlibCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::IdentCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::LcStr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::LinkerOptionCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::LoadCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::MachHeader32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::MachHeader64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Nlist32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Nlist64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::NoteCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::PrebindCksumCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::PreboundDylibCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::PtrauthKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::RoutinesCommand32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::RoutinesCommand64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::RpathCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Section32<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::Section64<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SourceVersionCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SubClientCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SubFrameworkCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SubLibraryCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SubUmbrellaCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::SymsegCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::TargetTripleCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::TwolevelHint<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::TwolevelHintsCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macho::VersionMinCommand<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::AnonObjectHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::AnonObjectHeaderV2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAlpha64RuntimeFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAlphaRuntimeFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageArchitectureEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageArchiveMemberHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageArm64RuntimeFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageArmRuntimeFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolCrc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolFunctionBeginEnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageAuxSymbolTokenDef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageBaseRelocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageBoundForwarderRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageBoundImportDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageCoffSymbolsHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageCor20Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDebugDirectory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDebugMisc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDynamicRelocation32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDynamicRelocation32V2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDynamicRelocation64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDynamicRelocation64V2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageDynamicRelocationTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageEnclaveConfig32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageEnclaveConfig64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageEnclaveImport"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageEpilogueDynamicRelocationHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageFunctionEntry64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageHotPatchBase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageHotPatchHashes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageHotPatchInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageImportByName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageLinenumber"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageLoadConfigCodeIntegrity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageLoadConfigDirectory32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageLoadConfigDirectory64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageNtHeaders32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageNtHeaders64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageOs2Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImagePrologueDynamicRelocationHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageResourceDirStringU"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageResourceDirectory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageResourceDirectoryEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageResourceDirectoryString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageRomHeaders"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageRomOptionalHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageRuntimeFunctionEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSeparateDebugHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSymbol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSymbolBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSymbolEx"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageSymbolExBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageThunkData32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageThunkData64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageTlsDirectory32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageTlsDirectory64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::ImageVxdHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pe::NonPagedDebugInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::NameOrOrdinal<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::RelocationMapEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::Comdat<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::ComdatIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::ComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::DynamicRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::ExportIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::ImportIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::ImportLibraryIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::SectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::SectionRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::any::SegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::archive::ArchiveMemberIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::archive::MemberHeader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::archive::Members<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::archive::SymbolIteratorInternal<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::comdat::CoffComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::relocation::CoffRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::section::CoffSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::section::CoffSegment<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::section::CoffSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::coff::symbol::SymbolIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::comdat::ElfComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::note::GnuPropertyIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::CrelIteratorHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::ElfDynamicRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::relocation::ElfSectionRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::elf::segment::ElfSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::comdat::GoffComdat<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::comdat::GoffComdatIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::comdat::GoffComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::record::LengthIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::relocation::RelocationIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSectionTableInternal<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::section::GoffSubsection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::segment::GoffSegment<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::segment::GoffSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::goff::symbol::GoffSymbolIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCache<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheImage<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheImageIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheMappingIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheMappingVersion<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldCacheRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::DyldFile<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::RelocationStateV2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::RelocationStateV3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_cache::RelocationStateV5"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::BindOperation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::dyld_info::RebaseOperation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::exports_trie::ExportData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::exports_trie::NodeIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::file::MachOComdat<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::file::MachOComdatIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::file::MachOComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupAuth"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupBind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupKernelCacheRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupSegmentedRebase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::fixup::FixupState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::import::MachOImportChainedFixups<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::import::MachOImportDyldInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::import::MachOImportSymbols<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::relocation::MachORelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::section::MachOSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::segment::MachOSegmentInternal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macho::segment::MachOSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::file::PeComdat<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::file::PeComdatIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::file::PeComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::resource::ResourceNameOrId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::rich::RichHeaderEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::section::PeRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::section::PeSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::pe::section::PeSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::read_cache::ReadCache<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::util::StringTableData<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::comdat::XcoffComdat<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::comdat::XcoffComdatIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::comdat::XcoffComdatSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::relocation::XcoffRelocationIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::section::XcoffSectionIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::segment::XcoffSegment<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::xcoff::segment::XcoffSegmentIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::AuxHeader32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::AuxHeader64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::BlockAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::BlockAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::CsectAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::CsectAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::DwarfAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::DwarfAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::ExpAux"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::FileAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::FunAux32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::FunAux64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::StatAux"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::Symbol32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::Symbol64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xcoff::SymbolBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

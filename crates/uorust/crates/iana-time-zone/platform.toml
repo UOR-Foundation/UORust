@@ -1,0 +1,96 @@
+[[fn]]
+path = "iana-time-zone::PREFIXES"
+kappa = "24663bc285ba54a69b47801e0e4b716cd0470d4d3e61bcace6caf070d3b521da"
+embedded = "98ba29a6787f6566933bf569cb7dfe8016b93e459c22423bd1465de859985921"
+status = "translated"
+digest = "f9654ac899cd7fd825feb1a384e78a0392cae9dbd39e1f43b005f83300a62fbb"
+
+[[fn]]
+path = "iana-time-zone::etc_config_system"
+kappa = "4eab94c7d6978d22cd07efc2c86d90612228f04a57250a1a47e025188f073e7d"
+at = "GetTimezoneError=u32"
+embedded = "1f3c51e1b580ddf5742874e538afe033d5c93aad02144b8d8ba890f4867fbcc3"
+status = "residue"
+cause = "mir::Ty: std::fs::OpenOptions"
+
+[[fn]]
+path = "iana-time-zone::etc_localtime"
+kappa = "31e5bf8518dc7857b5eddb3bcba2fa08b22a0126448bf218e3bcc1595ed451b7"
+at = "GetTimezoneError=u32"
+embedded = "44d580620f6c0513f1b29f5850132b54c8ca2eb4ae91749de2153bad18a9831b"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "iana-time-zone::etc_timezone"
+kappa = "38588df36067fdad509da4d8c138e07ff2289fb7bfdf94fd23dc5fe9072d6990"
+at = "GetTimezoneError=u32"
+embedded = "f3fd905ec17f2ffaeb6240de019c13cee9970e1162be249ce265c645617d0aec"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "iana-time-zone::get_timezone_inner"
+kappa = "f286cd1d9c92c752d633e94fa05dfeba6c706d5732fc1f95ff4a609de1fa357e"
+at = "GetTimezoneError=u32"
+embedded = "a582a29a8bf63851ea9c019cbc9d50e93b6d7f55014cf83121fd72a3ed422119"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::etc_localtime: iana-time-zone's MIR stops at type outside the lift: std::path::PathBuf"
+
+[[fn]]
+path = "iana-time-zone::openwrt::<impl at src/tz_linux.rs:95:14: 95:19>::fmt"
+kappa = "792ab68ea01833902f1646473da9febdcd75fff21d1ca3ecdfdcdd47dcdedd28"
+embedded = "53089f58c74b526a6801238e2d7f95c1557fdd52a017c93b639c7d9e1edafad3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "iana-time-zone::openwrt::<impl at src/tz_linux.rs:95:21: 95:28>::default"
+kappa = "549118f216125fdfa8b38b232669f5f69d11a546a9c5f802c91c769c6a1ddf29"
+embedded = "00368d8088275ba9ff1c31fdee8060626ca8619831f32d115412300a155a967e"
+status = "residue"
+cause = "mir::Ty: platform::openwrt::BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::openwrt::<impl at src/tz_linux.rs:95:30: 95:35>::clone"
+kappa = "8eab278b7450d60cdc4d38f4b820438281bcb9b569c42d74a77969fea7416697"
+embedded = "bf93db560b409e4bb00b7acdeb26fb7a0c16324892f4005d1e94179418e7a168"
+status = "residue"
+cause = "mir::Ty: platform::openwrt::BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::openwrt::<impl at src/tz_linux.rs:95:43: 95:52>::eq"
+kappa = "ce0ec9f48d109ecbf431e3557c95541ca22f9462c747af9eaa7c8eb55c77b4e4"
+embedded = "956b156220b0490784fcfc4de4f65ecbef2a0e8e15d037bc4beff43dcd955b80"
+status = "residue"
+cause = "mir::Ty: BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::openwrt::<impl at src/tz_linux.rs:95:54: 95:56>::assert_fields_are_eq"
+kappa = "faac02df58e08fbe5124d491aca9cb25d86f020e6999715449e605c24831c644"
+embedded = "a973d0b0ff08f60385f21a864f71772eae0fbf49abc318224ff2d8b68746211c"
+status = "residue"
+cause = "mir::Ty: BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::openwrt::GetTimezoneError::from"
+kappa = "dc847773e9d20aa1b9b87201b27a47d204220563a4791314e399360a5e6b8a67"
+at = "GetTimezoneError=u32"
+embedded = "88ce5c4a1de5e6b6ab0ec47f6c8eb754bd701f52800a7cb5b149b39c8b32d64c"
+status = "residue"
+cause = "mir::Ty: BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::openwrt::IterWords::next"
+kappa = "557ebdb57c6df71cf3d181eecde03b61b16d34dcce003a85671c51a0a3d09172"
+embedded = "645739a16736c80dc6dea87485035740879a4102c441f3b469b9f86bccb25675"
+status = "residue"
+cause = "mir::Ty: platform::openwrt::BrokenQuote"
+
+[[fn]]
+path = "iana-time-zone::read_word"
+kappa = "cc8bb0208e70777dea427561a667abbaccb0c05f0eb73e1d5adf24f6b809f061"
+embedded = "e74abd7f05da103aeca289dd3146201249d9491f7ef0aefa94f06d2bc98911bf"
+status = "residue"
+cause = "mir::Ty: platform::openwrt::BrokenQuote"
+

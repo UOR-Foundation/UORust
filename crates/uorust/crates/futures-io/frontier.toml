@@ -1,0 +1,42 @@
+# The futures-io register (written by `uorust crate futures-io@0.3.34`; do not edit): every body of
+# futures-io's MIR at futures-io 0.3.34, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 37
+translated = 0
+residue = 37
+
+[module.if_std]
+bodies = 37
+translated = 0
+residue = 37
+
+[embedding]
+bodies = 37
+embedded = 37
+evaluable = 37
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: Pin<&mut &[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<&mut &mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<&mut Box<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<u32>"
+bodies = 1

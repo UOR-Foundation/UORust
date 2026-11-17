@@ -1,0 +1,506 @@
+[[fn]]
+path = "rustls::LABEL_PREFIX"
+kappa = "b1c8df5a26e142c270009ad5a3140df568c7b69bba0180594bd1222d6d408b3b"
+embedded = "86e84a9350e020ef33aea1bfccf4f79eb6760df82c7c4528fc6a4be5553075c1"
+status = "translated"
+digest = "e6ac4d5cedd81af39fd53b21057d4490485d2c3207877f23c1a5f7c2a7c79ede"
+
+[[fn]]
+path = "rustls::MAX_VERIFY_MSG"
+kappa = "cee0cfcf26d9cacaad518f469d3c50575c40714b29d696fc9e511a914ddc8093"
+embedded = "e0a3d02270e7561c3abace43556f49621294e7504076053e874477f0f03654d6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item tls13::CLIENT_CONSTANT"
+
+[[fn]]
+path = "rustls::construct_client_verify_message"
+kappa = "486640c5208e3aaac976440dbe010e70f5db015fdebd95e2c3079a2feebb8235"
+embedded = "3714f82d1fc163356542fa3cef2244c2196ef2aa94b8f77da44045d56be6e97b"
+status = "residue"
+cause = "mir::Ty: tls13::VerifyMessage"
+
+[[fn]]
+path = "rustls::derive_traffic_iv"
+kappa = "8c53c5f0cac4f503c6b38532da5eac5dfdb80ee550d4aaba231e7a3e886696f9"
+embedded = "0310687f9805a55b35fbb1d6de03b1edc76d0363ae6a3f77ee2cd72e0eaf0be3"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::derive_traffic_key"
+kappa = "04a2cdd392a487a3849d76db3d9716d7e448ab823f650001c151657d6fa6d93e"
+embedded = "82c6935ddbe6267e7db56d6abc62aa9188b775a477931acde174a02b7ba3ef67"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::expand_secret"
+kappa = "a08dde689d3eb6bfe4677db68c88dd3457ddefda04b7b5fdbbc0e294baf150b4"
+embedded = "a9463fb52c81407dd90761f14184fc11a000b84d0a60c4f6b24cd81652a028f1"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::hkdf_expand_label"
+kappa = "72505ba9b915c2b8644ed7b133e3e0be36a1636eca68d6389f7b481d0fb30e13"
+at = "T=u32"
+embedded = "29a1619bde6bba8ef3ffc2a1a41d75ffd131c7b9313e6d39d0c1183afc6dd63e"
+status = "residue"
+cause = "mir::Ty: dyn HkdfExpander"
+
+[[fn]]
+path = "rustls::hkdf_expand_label_aead_key"
+kappa = "11f68a5c4161036ae83e0a4767040154ba583605b2cd9a156a167a15f3e71823"
+embedded = "556772d70794946e360a4398a2720893c788687b9259a22d690bafdd8b14ac99"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::hkdf_expand_label_block"
+kappa = "6c3611f9cae1a0e9f7dfbd073c1948bbc339ee23bf929d53efc437c6465b12b2"
+embedded = "8f54b6d2bb841a4b113f53dba1ed399096e2d62eced1e43ca46f50b55f7f1655"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::hkdf_expand_label_inner"
+kappa = "7f5b4b8db747dade5c6cb64d9f7dc1db655cca044d068337adb6d4add9f7e082"
+at = "F=u32, T=u32"
+embedded = "8779ddcb6fbe9c6cab0cca1ddcc8011d47bdf2d256e42ee0530952d4eac2cee1"
+status = "residue"
+cause = "mir::Ty: dyn HkdfExpander"
+
+[[fn]]
+path = "rustls::hkdf_expand_label_slice"
+kappa = "32ce33d4865743867603c3c29d86c2ccfa165c9929c7e6ec4ee70258fcf5c9b5"
+embedded = "23850ed68351c4f317ce989b3fead1b7e60011eeb69396a225de9da29e36485e"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OutputLengthError"
+
+[[fn]]
+path = "rustls::key_schedule::<impl at src/tls13/key_schedule.rs:748:10: 748:15>::clone"
+kappa = "2bc2350d94a59cc625277cadf4e27b832b8272fdf5b6bfec08e0b9498a8888dd"
+embedded = "6c57e72e3c73de4c18b687802841a504ea1d3b0b48c459f70d5145dbb57bc783"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleSuite"
+
+[[fn]]
+path = "rustls::key_schedule::<impl at src/tls13/key_schedule.rs:990:10: 990:15>::fmt"
+kappa = "cec0ff05769c9de3f9c712ddbcda0bba3bb795430493a6aa3d1bfabcca4c7619"
+embedded = "6bc57d60c071ce1d662b6da30db22d01e39314b556c3e407979c7f590e1e6d1a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::key_schedule::<impl at src/tls13/key_schedule.rs:990:17: 990:22>::clone"
+kappa = "779912f018260876fecddcd8233a793c9fe0808b91707f09ed4a5940d56262b1"
+embedded = "0bed00fddb95b23e76253412621460e86ac68d69e8eb823a1ea4d32fb7e3f981"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::SecretKind"
+
+[[fn]]
+path = "rustls::key_schedule::<impl at src/tls13/key_schedule.rs:990:30: 990:39>::eq"
+kappa = "9bfceb219eee9bea1e29b5ba99fca197e3436df393fccc3a7e3ebaac0f6e453d"
+embedded = "4e875ba24f80ddcd522443977d82101f95aa223da4a1c6c3f315b230a0ac3b34"
+status = "residue"
+cause = "mir::Ty: SecretKind"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::deref"
+kappa = "3b747a81046f3e590b6c3cabae3ca567b9d28ad9b917b492192c29eab151434d"
+embedded = "aeb82c9416de0075dd564c8654a53ea5b2c65326a6c516ae92f5f480fdaa6b00"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleSuite"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::derive"
+kappa = "11a7a3e3f747770503a23b820f5c1e751434d95ab3ebde5c9ce1dd7824f7f65d"
+embedded = "6e2808e019a4e3e91e0ecafa8fe8d5914891f507fba0ca5ea64995efecefc1f0"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::derive_for_empty_hash"
+kappa = "41c64ce43b1d300b25177a4c22fa7e17b8842428486a0dfea49967d3374245e1"
+embedded = "b7f6b81a414006020d170841e8ffdaeea5c8dbf493ae428a29313dff3b255f47"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::derive_logged_secret"
+kappa = "c8587631c58fa8671b4966dc0d85464455a108fde0b6a534c23290f1c1c1e7d7"
+embedded = "6170b70d5f54b353c4d83836c5d4495461542a183485398ce2cb5cb11550526e"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::input_empty"
+kappa = "ef0df5f12c1487c8460e1776cf8d934608eb86f55f642cc7d918d31505f63477"
+embedded = "14d08fdd4d189182d096289dfb11c76abe5ba009c895196c265f4539a98efd23"
+status = "residue"
+cause = "mir::Ty: key_schedule::KeySchedule"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::input_secret"
+kappa = "edef1bd9880a3c72075d5218d36017c8b0de40fe2c0adc2e1043fcd1ad45de5d"
+embedded = "a15b9b8cc05c34ce24b62fdbc116fb5df006f8892f92ef7710e8350131ca1899"
+status = "residue"
+cause = "mir::Ty: key_schedule::KeySchedule"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::new"
+kappa = "68ae341f49d2ead06327307343e9de47b7be0672ff41efefe1844df39dceea14"
+embedded = "74eeb0f9e90141d17c2f39de75e742ec3c03646c7e328f445eaf0fcf84e3145b"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeySchedule"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedule::new_with_empty_secret"
+kappa = "e971164e5613fde0bf4dd40bae801169cd72dbb6795e413a278825f2bff11ccc"
+embedded = "e90bbcd9d5075b97d76a40325559b8f6faa7ed04f1282d6aba04514d04c1549a"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeySchedule"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleBeforeFinished::into_traffic"
+kappa = "408f432cffc9110b1c0469d0236835df3de5eb33ffd56b2c55891200a6ddf06e"
+embedded = "27fbfb1cdc8888b793250f023c72799e30ee858d3a8f68382ca70a340a4389fd"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleTraffic"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleBeforeFinished::new"
+kappa = "51a182b090dab408d4e82591dabcc129c428d496c166a0ec8bf5c5614a101565"
+embedded = "9b4d1c93d45ddaaf28af33751c1ce90e751bfa30cb47d37e0377250929a11243"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleBeforeFinished"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleClientBeforeFinished::into_traffic"
+kappa = "0c84a28e01176cb00cc12021a18d262f8c2421d9d2d8ed57e218f0ea884d2a1e"
+embedded = "a357859a4bbd90ba480e65925eabde60a3933ab9d03c2258b93231e057849336"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleTraffic"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleEarly::client_early_traffic_secret"
+kappa = "767f2cf16b8aeb01d85eb09d2ff5ba565a4530ab5e79e3a86130257e65198ec6"
+embedded = "b6b1ec512d669c2969808202c6cbf438e45b128972df31a16b2c75dbf7a9a4d3"
+status = "residue"
+cause = "mir::Ty: KeyScheduleEarly"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleEarly::new"
+kappa = "ff96969a6c7a35650eae1da31b6704c9cc8b303a7170c1b7bf630324026606c6"
+embedded = "04c08d07c92fbe3bc8728161a8d039c745a9d568b257147812e709ca05003fa2"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleEarly"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleEarly::resumption_psk_binder_key_and_sign_verify_data"
+kappa = "b36a55b05c2e8c2f7e68e317f5428d600cb0693d07810e93b838008657fb97be"
+embedded = "e9354c3f5e6e067f5da26e5af05bf2a19db17a4c2f7cf226a543b5a11be55b7f"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshake::into_pre_finished_client_traffic"
+kappa = "8515be9ff31a6e7964efda4a5f4b7dcc982a94a5e9ac1acc6cec071c91f5f597"
+embedded = "6cbd9b92ec3e26ebd4b1d9a54ce211a6399bbd7ddb766bb5b8c02892ac1885e6"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleClientBeforeFinished"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshake::into_traffic_with_client_finished_pending"
+kappa = "9639bd3438e83e6c861d6cd25ae5c73fa592504e48f8f8de9697a4087e2e0b87"
+embedded = "d37a2b5733e61b99c1bb1dcc2ba0b82b902e6b0c395470f1bc5e9102e8afc19b"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleTrafficWithClientFinishedPending"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshake::set_handshake_decrypter"
+kappa = "83a289ac1b06d246099c34971b05d6224d768f49cd6065c5a74d45e3ae447a05"
+embedded = "d6c5e3bbce63e765424aeaa957f477f55ec102b7456da71d977f510ab7edc984"
+status = "residue"
+cause = "mir::Ty: KeyScheduleHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshake::set_handshake_encrypter"
+kappa = "6183638ebf3afc4c29ddd9b1fbdffffbd77e5c63b91d4623cd5f898457942088"
+embedded = "d3991d98bfde1bccf922e1d5f0b428cf2791e275ce66c659cbd049b9a1e9ee36"
+status = "residue"
+cause = "mir::Ty: KeyScheduleHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshake::sign_server_finish"
+kappa = "4c57d50943cfda9acc2191e7d82b65126234c04f6f1e7ee87dc0349628fa82ab"
+embedded = "2cd0a96e7c28385c3d926f37e1243627058e827bd8455521b02742f932beb49b"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshakeStart::derive_client_handshake_secrets"
+kappa = "0247af073a5f7d6d9deb016af0dee5b3264539c9ea5fbe59ae2759cd7b02615a"
+embedded = "1499e3e80bd9603e9b29df13a76a8f867a7eaea4f5af38addb4cca55b4d61e43"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshakeStart::derive_server_handshake_secrets"
+kappa = "0dfc1d059d87bc52a7990c6e2fdf86685e7e03f0913092a56b38cf22f9fe5d56"
+embedded = "2f46e4988aa5546d920b98b20ba1ac505634a2f63bca1ff7deed5bfe86345033"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshakeStart::into_handshake"
+kappa = "32fa787f65cb592633f3edea3a01b2dfe35b653553fb6605ad45406099e4c6d8"
+embedded = "91b7df7e80b9b18ed1e73ea3d7749fc233d29f279f1649a91efc798750dff354"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleHandshakeStart::server_ech_confirmation_secret"
+kappa = "f0e2aabeee3c6059d3b6d56ab45f34975cd6c793f7ee4b50dd287650a5c968b2"
+embedded = "422694e3dcd54489c2290c2d6cb5bdaf513b9c91554a77359ec07f9dbe58af7c"
+status = "residue"
+cause = "mir::Ty: KeyScheduleHandshakeStart"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedulePreHandshake::from"
+kappa = "be6210cbf94d7ccd81ee17145f3295b290465b4ceb17aa9ae9f71d6f4259dbda"
+embedded = "da5e16956e6d044d8fbfdd526a82783da5d2f6a1f8bcfb49af33cb62f777379a"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeySchedulePreHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedulePreHandshake::into_handshake"
+kappa = "6fee5f6b383c0cb578d65ca7a23a96c7e027f72dfc03f7120cadb58b3dcede14"
+embedded = "7e2ed114b40f626c82e272a451b5460d88ec4f510f43a012fcbec7e065dbf6dd"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshakeStart"
+
+[[fn]]
+path = "rustls::key_schedule::KeySchedulePreHandshake::new"
+kappa = "64fb6b99fffcd88877375b025a9bca8a23c34a999014b72e9d3ed08477181f32"
+embedded = "985387970aca905a81cde0cee07c47a0e7ec27f96feefb49f8fce7a8cefad317"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeySchedulePreHandshake"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleResumption::derive_ticket_psk"
+kappa = "186dda4b7f1a980f9344510f8a3e175135b32cae138d784421c74b691c80638f"
+embedded = "cba5c2435bbb1c576b14690a5badcc3f36737fe497f959a3edd37ae133f4eb6f"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::derive_decrypter"
+kappa = "2a33e8c328e1bc74db5fa1a9427040bb05591264b81bf4d84bb37efcdb4e89d4"
+embedded = "c5a38b978dc3997f76d4c8dead1600a8a1b5e67719fa9c89725b1cd6806e405a"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::derive_next"
+kappa = "89e91d0973cf61c58b8f53b231b067b87d7fd2ec302ecd416bc0d9433b5a31bd"
+embedded = "e8b6917150c06d10dcb69c4fca621a784a71878cc6b34085f9bfe56e789dd9f2"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::derive_ticket_psk"
+kappa = "fd080540c575527f893f1ef3caac756bfc06095a1335d94cc9200b27823fd62d"
+embedded = "3030417411a4f0d800529de96001180999d7ea580abf9a7c207075a0bb07f782"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::export_keying_material"
+kappa = "718580bae0b853c009e77d0d39dae7c585e512d34a9c6d158365bb70cd135b08"
+embedded = "266ebb11d7ebed7d8a0d209814e018100ac6254f9b6b5df82abcdbd2ec3c471a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::from"
+kappa = "880d51e272f39b221b84ecb8716f685642ccd2445b1fc726005de0b54c5b55b9"
+embedded = "e8ff1ecf3ce16b97b638a108da6ec6fe56f5a6ba616c7bdf54d4c51a8dfe3d8b"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleSuite"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::set_decrypter"
+kappa = "16fc4c3e481a0e6cc538de47c6f0b56d4750d8a09ce2141007d4fe4e2a7e51ca"
+embedded = "d12606252d8500786a869096853c617f5fb4cf6af4239c527b48dc1bfa4d72b5"
+status = "residue"
+cause = "mir::Ty: KeyScheduleSuite"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::set_encrypter"
+kappa = "a275711396340558bd2f6e96bda9e8b1b00161fa7e0967d75af01f0754b0d899"
+embedded = "090a45590af2ca06feca8deb544d6fd1e36d0999b7aa8f36f2feba7a05a5d11a"
+status = "residue"
+cause = "mir::Ty: KeyScheduleSuite"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::sign_finish"
+kappa = "8c3ae60ce37a3ed5057f9005984a629e240078b390df648fd22433be3c71c152"
+embedded = "c5747082f26ffafc3e8d8ffb222290ab44d59c653f899c3129d06629ef4174d7"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleSuite::sign_verify_data"
+kappa = "fbb160c3bb978f5358d45b0ce4870256e1d24897e627d87a74105f4708446ec5"
+embedded = "64d2fe661c34c63b44359659cfa33188c67c6ad6fb6b9c36288179c0fdf97d9f"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::export_keying_material"
+kappa = "16a54062a14acaaa0fef743ccae3c05b83fca3ec3efe532122f4d1c67383030e"
+embedded = "be62fad6e9af9701c3672362bee78e88d1154035026e6fed009b9816086d54af"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::extract_secrets"
+kappa = "0f341f0e485de725b4dda9993655c311c3d37bf426fbb4bcabc7243b3c6b601f"
+embedded = "89ee095aef9d1e640589b5f90cf0e52e64d1f7949d4af17ca71e9b2c5bfd51f6"
+status = "residue"
+cause = "mir::Ty: suites::PartiallyExtractedSecrets"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::next_application_traffic_secret"
+kappa = "2345152c2b070a5b139329e9a6dc337d0dba71a47854b23404c045d472e439bf"
+embedded = "64b54aa146c76caca6a8931976ba0451d9f1010ac2491fbf335aa736e890c8ff"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::refresh_traffic_secret"
+kappa = "1ac5db6893d134dbaf75be9d656103d51439c2225b01317281820fbfe08b5a96"
+embedded = "b4e6ce8a5fec4b9311b97bc5f122d0d1a6a99debb2c22cf8de1cc98964c9f3fb"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::request_key_update_and_update_encrypter"
+kappa = "8d7f3901d908ac0466382edf7f8dfb91e38f4bac21e24e387f1c0c2571b401d5"
+embedded = "e2731cde07ead07902a0ca2b229280ded0a9a4246e0a085ec7480b55b5a82df4"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::update_decrypter"
+kappa = "81f225c8c142122604cabf4b0ac8eb66756146c339841cc0a81f165eafef0a91"
+embedded = "6844e8165dd3e89d1dafc91c5bddadaa48b2732cf45dce1f924334d2b50e0627"
+status = "residue"
+cause = "mir::Ty: KeyScheduleTraffic"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTraffic::update_encrypter_and_notify"
+kappa = "f8ea597ce416a536fa9ef7719b7899245d43cfefe2c0774fca971e1b1a33ce6a"
+embedded = "de5a2b6fbd16d8a91bc6c5f01699fa2759c83881d5cd951d0f11b4427dd93c8c"
+status = "residue"
+cause = "mir::Ty: KeyScheduleTraffic"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTrafficWithClientFinishedPending::sign_client_finish"
+kappa = "6ad1153967536a307326fb2197e7f648f696f9a34d68ad7e16f2c44fed68b213"
+embedded = "050ecdbd995c10d7125f8447c2191847b797048638c1e82e117e017580eacd17"
+status = "residue"
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleBeforeFinished"
+
+[[fn]]
+path = "rustls::key_schedule::KeyScheduleTrafficWithClientFinishedPending::update_decrypter"
+kappa = "372a27a45e9f76f99ffd46fac0a12a0df5594e1d5b465d374b6029bedee17370"
+embedded = "791e243a6e8e4b46d2a53fe3c49844a3259094d4b74f317e372f1a88cb4d0279"
+status = "residue"
+cause = "mir::Ty: key_schedule::KeyScheduleTrafficWithClientFinishedPending"
+
+[[fn]]
+path = "rustls::key_schedule::SecretKind::log_label"
+kappa = "255a50cfa240b9ff2692ff0d513d9ae9d6de4ff7e3e8e34d1cf9cf9dd3efb164"
+embedded = "ff53f23bd95f144683c6bebbfa535866cc9295b634d96985c44da642b8769160"
+status = "residue"
+cause = "mir::Ty: SecretKind"
+
+[[fn]]
+path = "rustls::key_schedule::SecretKind::to_bytes"
+kappa = "99e46a5cf8bd6d28f2a781770663a0a64deaf4e475cc3ff46756bd0328e2124e"
+embedded = "d05cf268266611ef506b880b5727549b94ec80be7548131820c561877fd2549c"
+status = "residue"
+cause = "mir::Ty: SecretKind"
+
+[[fn]]
+path = "rustls::server_ech_hrr_confirmation_secret"
+kappa = "aa41f0d4407af9689740dcfa32a2f7450e46f646a827523d0eaa80d9e0ce84dc"
+embedded = "ca3aa98907325ed55bae031d8cc66447c1767afc3ed4591993de00aa536a8ff3"
+status = "residue"
+cause = "mir::Ty: dyn Hkdf"
+
+[[fn]]
+path = "rustls::tls13::SupportedCipherSuite::from"
+kappa = "04fc0cc6bcb5a1d319b58d12ab463c0594fbd90d2255c86e5a38dea714a10766"
+embedded = "984fead4fa5290e3febfb828044bb443ea41a5ca6da09d94e551d3199c715ecb"
+status = "residue"
+cause = "mir::Ty: suites::SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::tls13::Tls13CipherSuite::can_resume_from"
+kappa = "7e2808e64028942df0cb6f4c5562085e38adb7e4db0d755f6167311ca3f7f3eb"
+embedded = "478f48379994a330be0d421f760bfde5fafeec8d7ff44d93e484a55fcc80d573"
+status = "residue"
+cause = "mir::Ty: tls13::Tls13CipherSuite"
+
+[[fn]]
+path = "rustls::tls13::Tls13CipherSuite::eq"
+kappa = "0a9e8d7c40d6c7f7f82b0aa708dd849eacd5e2c50df8dfedb36da388b1b5a465"
+embedded = "a688cbeec29c417bfbd518260cf5cd25f0fd9844cf39f9daf5a52da21f574113"
+status = "residue"
+cause = "mir::Ty: tls13::Tls13CipherSuite"
+
+[[fn]]
+path = "rustls::tls13::Tls13CipherSuite::fips"
+kappa = "3eae24323b654a3e4568efbbf11b29ce8f1a5e84af72f3cc70ec7efb41c457a1"
+embedded = "b1606dd0a02008fceef8e74b0f479d80db3fef97bafdc836107338ac7c30939a"
+status = "residue"
+cause = "mir::Ty: tls13::Tls13CipherSuite"
+
+[[fn]]
+path = "rustls::tls13::Tls13CipherSuite::fmt"
+kappa = "27ba604f9c0c8d727784320b6ff6be7ed947ee968db6671e3540698fb1213b61"
+embedded = "ffebde01ac6d8b09ca4bc0752fb7f4444251f38168294880d1f92f08c71645b1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::tls13::Tls13CipherSuite::quic_suite"
+kappa = "3ca3feda82c51fae28e8d45e1678236a48b8753520df51dda39fa42fdaa9f460"
+embedded = "e524b99dafc46fc8ac5646a079699ad1eb7e7a547a94e5056134a9fadbd6507d"
+status = "residue"
+cause = "mir::Ty: quic::Suite"
+
+[[fn]]
+path = "rustls::tls13::VerifyMessage::as_ref"
+kappa = "41b66ea674f28a5a5aab8ef821a6f34ea7cf9e3c9f526e91155bad8b038b7cd1"
+embedded = "a6e52b306703c53ddcdfc9ad78dd013b83ec92fd73d434c5d08c5924c4875547"
+status = "residue"
+cause = "mir::Ty: VerifyMessage"
+
+[[fn]]
+path = "rustls::tls13::VerifyMessage::new"
+kappa = "2b821f3000afb3016535070668d5fb085e4b845ef5cedb9958edb3a2807152ef"
+embedded = "1b1f73aa9f8900d57a678a4f13af6d8b5e4e3225e007973f1bf999b886fde4b7"
+status = "residue"
+cause = "mir::Ty: tls13::VerifyMessage"
+
+[[fn]]
+path = "rustls::tls13::construct_server_verify_message"
+kappa = "995c536ad6e67574c022fbd42f43b710921a0253d135f516eb91993d927b462d"
+embedded = "816314eeab280dcd4d8e87a566889091b7616f237ca23f492b7164de9e7f934a"
+status = "residue"
+cause = "mir::Ty: tls13::VerifyMessage"
+

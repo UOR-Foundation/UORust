@@ -1,0 +1,493 @@
+[[fn]]
+path = "ring::MIN_BITS"
+kappa = "9009e2bcbc5a0e0f1461338ed460a047898be0a24b1ee565ca64c3b1dd56aac0"
+embedded = "f2453309a221c45c32672387917eee23cd047ec41458efe048fa696cdc670968"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::PREFIX_ZEROS"
+kappa = "70f1527d16c253dbeec5453186e4c3f0c9fc9643593dfa737a2ccfaae30410cf"
+embedded = "e1b03d00fd2dc93b403da324798e9874535cdd0a714d95cdc27a80d19377dfc1"
+status = "translated"
+digest = "6f1bc3b0c8859754b4b1375003bce23a51aa6f3e61f90ec25d3f43c04e8214a2"
+
+[[fn]]
+path = "ring::PRIVATE_KEY_PUBLIC_MODULUS_MAX_BITS"
+kappa = "eb460ea17be6109a07e806a1933da28fa9500707bfce6b1de3830e3d06329b88"
+embedded = "a9894115e6f0282656185d78b1dc565c327a57c8ca014afb0f7d015947fb2a76"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::PUBLIC_KEY_PUBLIC_MODULUS_MAX_LEN"
+kappa = "e04c06a83969af3d9f845dfcf58a2eacf57c0b02516b0cabe34e671209209272"
+embedded = "a7cc1ae093560609b4702546c2fb5983a60ac8677c150819636f3e1dd1ee8ea0"
+status = "residue"
+cause = "mir::Operand::Constant: rsa::PUBLIC_KEY_PUBLIC_MODULUS_MAX_LEN::promoted[0]: type outside the lift: bits::BitLength"
+
+[[fn]]
+path = "ring::RSA_ENCRYPTION"
+kappa = "438fed1dc45b6511e35062f319518d6e9071f2e2ef1af179ce3ff98961c37262"
+embedded = "48c655030d1c25eb100867a4554fd906c5bec84ddc97e1104cde2fa012d5b629"
+status = "translated"
+digest = "9b6b5cff6024f7c442ee4dcf1781bfe05953662667f52c116f446ec8fa9e4aa9"
+
+[[fn]]
+path = "ring::encode"
+kappa = "d4e315c70694f95367b09f88697d6c77bb36abb61ac92c476c97537132c6d140"
+embedded = "35fe07e669bbcaac07cda2b73c675d0c0bfa08928affa7c85d6b3b31b630faca"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::fill_be_bytes_n"
+kappa = "8028ecf1d4f04d6e8e03bafea979ec91f0f4c88e06178a4bf61e0e141d70beff"
+embedded = "084fc4abb100ac65bf82f037a66e2d02187d1e90e17b822ecd0524304842046c"
+status = "residue"
+cause = "mir::Ty: rsa::N"
+
+[[fn]]
+path = "ring::keypair::<impl at src/debug.rs:33:9: 33:42>::fmt"
+kappa = "59353fba5a04788b5d11cebcbc5b91a6d6316f01723fc42fc7ce9c05ecec5cb4"
+embedded = "7f90301199f612edd084e58f8f647ffaa208b9f67603d11c1d69ab4d9c9be513"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_components"
+kappa = "b5b8ac6b76371f9ffe7a4702f374ef86933cf1d127a215bd58afd23dc2edb1cf"
+at = "Private=u32, Public=u32"
+embedded = "341d95871eb2400cf44903f9a59ed55a88645fccb43c77591516b8f1bee168be"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_components_"
+kappa = "f9917b3d1ebb1efe7457f10a08060f67834066e111d4664fd9b061ea852574ea"
+embedded = "821ab85f5f721bd75b72b182822230edd0f65edc1bbd3df365e38e588cae24da"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_der"
+kappa = "d09ff1f3a51b217eba3bbec7aeb029c6da91452c5f412a345b22e40e552e4214"
+embedded = "6cd4d234ecb587d7ee040bace503532012ccb97b0c4febeeaded3dde14e9541a"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_der_reader"
+kappa = "d17f413f3116db14c66287e00867fd67f467d680b02dcc0c71f02ada3db54a05"
+embedded = "9e298ab0a1b2384bbc5533476593d0515952a795c448505a6f129a84aef8ca46"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_der_reader::nonnegative_integer"
+kappa = "9fc9754d77b506138c17f2257c787dbdbb295572ee075a6861baf4c25394e303"
+embedded = "25ec2af1417cb8e01195a0f78da686de7d4ae2615450fa173c5cb42bdfd6b492"
+status = "residue"
+cause = "mir::Ty: error::key_rejected::KeyRejected"
+
+[[fn]]
+path = "ring::keypair::KeyPair::from_pkcs8"
+kappa = "e904bf548c2db2e33769c95ab167d8c2ba3dfde5fac36f35ff2cf95565b2bcf8"
+embedded = "0fb8832f6449bd3a0a72428d713e262199b9af90bfbe60a6a786d4203d8145d3"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::private_exponentiate"
+kappa = "e7e0509acee36934dd836fae7cde9c4de5081177099279005a41d5c9e6e0ca3d"
+embedded = "9a63fd6b9564d03908d5053de1b40fe9d17f9381421eee9c954a677f3525e90f"
+status = "residue"
+cause = "mir::Ty: rsa::N"
+
+[[fn]]
+path = "ring::keypair::KeyPair::public"
+kappa = "86dbe9f315a56e383e34981f3a5684aea9849d5e8b4cc765cf4b33d3cc39bdb4"
+embedded = "9726e2536839e2a2af09f862bbf808cbd60aaa5a0b42347cabfa17c7459829d5"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::keypair::KeyPair::public_key"
+kappa = "169d8d8a490c3356a5999e9b406d81891ffbe4b56418453e0c72f1f0a0ac3d23"
+embedded = "b125a460f04f555b7f7836f90a5481afdb3f9c45d983ed7c79bab73372d3cb29"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::keypair::KeyPair::public_modulus_len"
+kappa = "c427d1b4ad65cc6602fa91e27a38b18dc0f8e20af36d66aa8a70d7f4b030818e"
+embedded = "c99231e0d93f47c3eafa313c88f31f68df338966d0528d0aa1b91efd568ee815"
+status = "residue"
+cause = "mir::Ty: keypair::KeyPair"
+
+[[fn]]
+path = "ring::keypair::KeyPair::sign"
+kappa = "83c8ad6c73c2821a7a1a7118983b6ccd4d18fe4019ac832d761493919958d64b"
+embedded = "a21ca9fc295db496ab6c20ffa900a7dfb7d6b6da2d255cf7994b2661accb616a"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::keypair::PrivateCrtPrime::new"
+kappa = "05fe839ffd830a3203beb3778a2b5f26a667f7532654776f4d6e3d26f7f2fd1a"
+at = "M=u32"
+embedded = "6bf1e26c1883577a323a7257989deee4168563dae03a2792770e3558a16e223b"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::PrivateCrtPrime<u32>"
+
+[[fn]]
+path = "ring::keypair::PrivatePrime::new"
+kappa = "e6fdf431ad95e88f0448d5a824077e497f5f0adf0beb45344254ff334744e372"
+at = "M=u32"
+embedded = "d51e5372b5e820ad115237527921761a556ace0a30234081177bb39d43a745f9"
+status = "residue"
+cause = "mir::Ty: rsa::keypair::PrivatePrime<u32>"
+
+[[fn]]
+path = "ring::keypair::elem_exp_consttime"
+kappa = "efe4e16b13e9aae11fa0b2448e1a5a4cc681593970d7a3be0002c0da147c937e"
+at = "M=u32"
+embedded = "33f489cedae297b5b2ca04e9108da4e543fbcc18d1731d9f96df24e312219875"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::keypair_components::<impl at src/rsa/keypair_components.rs:4:10: 4:15>::clone"
+kappa = "b534bec3aceec51da09f344f50a001cd148c6c0e44b129d2f7c5c6d38e27222f"
+at = "Private=u32, Public=u32"
+embedded = "ad3b5864b35d9d9721d01da7561741b09242ffb97e28cc93f3443db014502388"
+status = "residue"
+cause = "mir::Ty: rsa::keypair_components::KeyPairComponents<u32, u32>"
+
+[[fn]]
+path = "ring::keypair_components::KeyPairComponents::fmt"
+kappa = "d6e2e58f441440de067cd0015a620c2efb8323fe0bbb6a71f2553df9f310a824"
+at = "Public=u32"
+embedded = "ab2fe14284697746b0b221e18b8b0544208a5afca53de0fadc69e2c2156d55ea"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::mgf1"
+kappa = "48a6ec27a772d9c08c566cd317dddf4ee7416c768d92e2f95da191463c105a07"
+embedded = "af48edcc7bf5f9734e1a71ad29a9920a764bd07d5954f6ba215e1621476966b3"
+status = "residue"
+cause = "mir::Ty: digest::Algorithm"
+
+[[fn]]
+path = "ring::parse_public_key"
+kappa = "fc68f82c9ba75d7588a30e51f2680f41eee3e36791c5e05ecb0fc9e0b4f2208a"
+embedded = "53519fa012cb4982658fb2cafb91b819b6003632e6086daf03e5e9052fbfa846"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "ring::pkcs1::<impl at src/rsa/padding/pkcs1.rs:24:10: 24:15>::fmt"
+kappa = "f19a022244852f000695c02a115efc83deb68a435be56451d78b22a1bc3e565b"
+embedded = "f126ff35c1b2bea6216e95d55e27a7cc4d14a9832dd4662eb3e22d4df94af1fd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::pkcs1::PKCS1::digest_alg"
+kappa = "a2ee6adba84ce67de1454bea4854f0eaa132719ed4ee7175bb72e0b43e44036e"
+embedded = "75e5a70c4635e0459f718adb14d2404cbb76e08f6300ec56a8eab57e70ddd6cd"
+status = "residue"
+cause = "mir::Ty: digest::Algorithm"
+
+[[fn]]
+path = "ring::pkcs1::PKCS1::encode"
+kappa = "43b61fd797aeae5b8206b6da314e60a7e944135d9801ce0e67dcf202843d10c0"
+embedded = "9afc60884f7c41fba4366ceae3a8ae5cdd16a6e37f9a634b33f8f94f66834904"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::pkcs1::PKCS1::verify"
+kappa = "c14edf488b76a7eeb732aa8d9d8809921e50eae40763007d51fa1235e02ec202"
+embedded = "725b57b351f5795bcce58f7e98540273e4ef4e075f1da220bc96665a0c21856a"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::pkcs1_encode"
+kappa = "f58ac579dffde200103907586bf6be925be856fd373c3e3c2190b5c1903932f0"
+embedded = "6f1cbeb5697c730508e5751d3737f41a5ce71871ed840862f22eba29587b89d6"
+status = "residue"
+cause = "mir::Ty: PKCS1"
+
+[[fn]]
+path = "ring::pss::<impl at src/rsa/padding/pss.rs:25:10: 25:15>::fmt"
+kappa = "00d32c86ddc3eeab0a7f1048cb0478a27481f99a11d19663a3d9bee9a1afd63d"
+embedded = "b0ce27f9cb077ff4b5361f27dc79488fecae483b5613fb3a5dd34013985a0a42"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::pss::PSS::digest_alg"
+kappa = "841b0d10e128312fff4b4c6b7ca7c52bfbf361f4442b1087d4b298123ff1f38d"
+embedded = "86d1f073aaa2ad7e68e21eeb6ec28a8863f69ea6be47bef25d129725a6dc520f"
+status = "residue"
+cause = "mir::Ty: digest::Algorithm"
+
+[[fn]]
+path = "ring::pss::PSS::encode"
+kappa = "7440edf02708a19051aabd58a3bf6ad98b21e4b3aeb4f2d34cbe6b24ced3ecf7"
+embedded = "2e8303f0d12df33bbc2ed700964470eaa7dd8a7063eea9335747c3b13511f461"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::pss::PSS::verify"
+kappa = "0ff97628e29c70261da944f98d7d6d0a8c3cd2dad7b5be71d4b4005c53441394"
+embedded = "2339dc949311970978f0b7c2347e74da903b98d2ba69e4d636f4783135de69b4"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::pss::PSSMetrics::new"
+kappa = "6ab2eb961c6f98f5ee311d05fbff152f842c8655300288fb9d7949ec7219c0c8"
+embedded = "e993caa316a31ad76d76309909d47061dbbb0ecbdec4d92ee9addf58f38941f8"
+status = "residue"
+cause = "mir::Ty: rsa::padding::pss::PSSMetrics"
+
+[[fn]]
+path = "ring::pss_digest"
+kappa = "22da7e78a3b208d0d8949b64f0e66ede7cb17e3fc0cf9b53684042693b228b5e"
+embedded = "6228e088f1e6431d6902cbf65439b3156bde4fafb1fbcae871f911d2d15360c3"
+status = "residue"
+cause = "mir::Ty: digest::Digest"
+
+[[fn]]
+path = "ring::public_exponent::<impl at src/rsa/public_exponent.rs:6:10: 6:15>::clone"
+kappa = "16ed21b9bf28c02110ada3ab3a39f37d8d4d50f35e7aaaf2f02cd5d936c60467"
+embedded = "879e0865f1c0b6d282a8dced5d71a98ef1ebc10ca1c7f43b649f01a44076cb72"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::MAX"
+kappa = "8037cb3bfc2976c03bcba50f7c5477522463a5407d84d97ae5dad71c4ad43ec4"
+embedded = "7cfeda0751489e7912e033a49c42b6af6d6f54827a5fcee6ba787857d005094f"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::_3"
+kappa = "1448301c7d3a96891874e02e794cf8e45421496a5d78d934c6c7cb8f15728f65"
+embedded = "77b902efe88bfa14215162dbb7611fd1d2f5795e090c330a4764a151bd90dec6"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::_65537"
+kappa = "b6e97eed73fc831f34b44117982332b030f72bcc4700e4f4b59a657bdc729e04"
+embedded = "40c4dec083e3cab587b0fff3a8ae039a7ba75075552db7a0e858da60b9992d7e"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::be_bytes"
+kappa = "8f9e7d9b0660e6c0150d881e4554019c63247d091ddfc5c90fd1db65b8b6208b"
+embedded = "4b3d85abce10e8a2a92cc541e9d27d86047c5cc35ad7e5ccf3c8cc4c248ce47e"
+status = "residue"
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Once<u64>, u8, fn(u64) -> [u8; core::::num::{impl#9}::to_be_bytes::{constant#0}] {core::num::<impl u64>::to_be_bytes}, 8>"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::from_be_bytes"
+kappa = "e547475b5eabea4a833e08621f938eee7d37fc951ed65522afb3a42514385aa6"
+embedded = "5f559452f84b6c77411d27539237625100e35fa00c9ed6149d9453c671adbfae"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::public_exponent::PublicExponent::value"
+kappa = "d59203e1c1127b9454a3aefc9605a00a62fa4c879504fd5ed3ac5ea535740aa4"
+embedded = "436346959793264da9e6ab68e691ca9508ba79f7450c0159b919bc84d922b0aa"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u64>"
+
+[[fn]]
+path = "ring::public_key_components::<impl at src/rsa/public_key_components.rs:21:10: 21:15>::clone"
+kappa = "2a37f53d741eb82d0d7b50009a0256864bf0eaebea6e4c2fabe35055cc45ebbf"
+at = "B=u32"
+embedded = "e5300948aa99b06467acaf3bd92afdee0c65ea79d89fee292550745aef3fac9f"
+status = "residue"
+cause = "mir::Ty: rsa::public_key_components::PublicKeyComponents<u32>"
+
+[[fn]]
+path = "ring::public_key_components::PublicKeyComponents::fmt"
+kappa = "e38346afd48352d9611077f924732dcfa3f6b9663e5a4c209915dea5de5faf10"
+at = "B=u32"
+embedded = "e8fdb85496ce71503fcbe7971c48d6ae3ae93fb1a5fb3944b2fba6658de08902"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::public_key_components::PublicKeyComponents::from"
+kappa = "cb4d9abc7ffbf82b79b1de7d415f5f3cf92231486c22d958214ab311a31df568"
+at = "B=u32"
+embedded = "d92aafbb76b36218f089a0f939030b75224ffe921b9b2cf4fb26eb71267574aa"
+status = "residue"
+cause = "mir::Ty: rsa::public_key_components::PublicKeyComponents<u32>"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::be_bytes"
+kappa = "c3a6c8ecb720f9343f520c2b00545f8b21c5024d81799fff958b07bbb8cfc83d"
+embedded = "212b055306053f1f848992aefdaaf9668f00ce94bf9478336777fe5a6e72ff84"
+status = "residue"
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Copied<core::iter::Rev<core::slice::Iter<'_, u64>>>, u8, fn(u64) -> [u8; core::::num::{impl#9}::to_be_bytes::{constant#0}] {core::num::<impl u64>::to_be_bytes}, 8>"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::clone"
+kappa = "c9d8da30baeec5069566402ef589a791247dbac3bd2d332f8ca1d26fc505e22b"
+embedded = "04aac5680a925205eb4e5cd58f08e321b4aea445c1cf96278e8c7c0fa05c2616"
+status = "residue"
+cause = "mir::Ty: rsa::public_modulus::PublicModulus"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::from_be_bytes"
+kappa = "9cd083c8f0072120f0270da7c7d6c8420c9f83299fa04337d0db28f68831ce56"
+embedded = "0266fcdb386185e525f758808c851922dab92f8af95229f95cf84432c2a9f339"
+status = "residue"
+cause = "mir::Ty: rsa::public_modulus::PublicModulus"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::len_bits"
+kappa = "154133427cf906df611c205092c7432d280bfb5fc3ed971c49c17015e34b02bd"
+embedded = "53c7cdd91431b50b8ab608d5a148153a03782f2c9d2ac4cb7d6cc98b14648520"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::oneRR"
+kappa = "48c4f2eead1044109d9cd34b447ee3bc24725b377bbc7287130887444df5c656"
+embedded = "99f9bb34f6f9f5f853723e64db12121c3e42865fda8727b9a7d06e720d6a0660"
+status = "residue"
+cause = "mir::Ty: rsa::N"
+
+[[fn]]
+path = "ring::public_modulus::PublicModulus::value"
+kappa = "1e9bf62a111dce621157b563679dd62490c0f3060b62e0e91e1bc594afe3a3c1"
+embedded = "1c7da6563b1a90259d7467e3a35ec18eb73a2d117a86ed4e6485e3560a9168a5"
+status = "residue"
+cause = "mir::Ty: rsa::N"
+
+[[fn]]
+path = "ring::rsa::<impl at src/rsa.rs:38:10: 38:15>::fmt"
+kappa = "94eb2586eb6f7350dac257e11480dad5864a1173281c858d91179ef415ef1176"
+embedded = "a67370b62522a01f99e4c3b0b51e1ae28ed743eb426a3d97f2600069f091986f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::rsa::public_key::<impl at src/debug.rs:47:9: 47:46>::fmt"
+kappa = "5ff8bdde09a32248513e85a4560a366151b3f40c38d261f4a05c91ccc4e1a19e"
+embedded = "d4394517ab58a94dbe4b6f7ac9338f857ed95e2add42ba5135e45bc6ae8d245a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::rsa::public_key::<impl at src/rsa/public_key.rs:26:10: 26:15>::clone"
+kappa = "1e4399309e91a43a13cef884a8ac410354433c76a402b24ec727da83301ba37b"
+embedded = "c5693f43fe2dd7794893a5533e1dbe0c681a990d0c2d9f883f559d88e2ac4788"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::rsa::public_key::<impl at src/rsa/public_key.rs:87:10: 87:15>::clone"
+kappa = "ac74244b168988c68f8b805fb85b1df14f8d2e199ba19167df0d1546cf936b22"
+embedded = "1372d74ff24eef0b9a0663a2ddb958e0cc9522fad0f0e6356b68adb7f32dcb5c"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::Inner"
+
+[[fn]]
+path = "ring::rsa::public_key::Inner::e"
+kappa = "4dec45af1bd9f4ac15464064654383f74f26e9665576d71f8e8385d6b23f8b16"
+embedded = "fa9e68215fa855ed8bf2c2e49e834851c7b353c4a063cdbc72206c569004ca4a"
+status = "residue"
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+
+[[fn]]
+path = "ring::rsa::public_key::Inner::exponentiate"
+kappa = "4b81ebd00e288f030bba3d09dd650cbae89182f4f9eab502f822cc3ffa2af339"
+embedded = "57c272d8d16308a7476e071c75a38c6d861deb5b1e718776ea2e35478dffb327"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::rsa::public_key::Inner::exponentiate_elem"
+kappa = "734899965842457190033c624231eb0350ccc20639e850d418887b656765bd54"
+embedded = "f491bb2ef13b91c547c51151b83bac28f9cd01e108f67dae2b9b78b5dea706e1"
+status = "residue"
+cause = "mir::Ty: rsa::N"
+
+[[fn]]
+path = "ring::rsa::public_key::Inner::from_modulus_and_exponent"
+kappa = "e60f9c494e50a8c692be54c2f78fec57517589457b6c672272897f14a9f9ca62"
+embedded = "ce097960a2f32ab14fdfdca320584cfb0c6343c7343f4678d33056e18e39b297"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::Inner"
+
+[[fn]]
+path = "ring::rsa::public_key::Inner::n"
+kappa = "458a9c930673edd89dccc4652f9e83fa539024c880fc0712fdc8fb8018d2cb34"
+embedded = "536bc78b33fc28a09884d0e74371a03b68fd7994ef2f522432bd8179c8ad630f"
+status = "residue"
+cause = "mir::Ty: rsa::public_modulus::PublicModulus"
+
+[[fn]]
+path = "ring::rsa::public_key::PublicKey::as_ref"
+kappa = "995e3cc3f0b68082ec140908945ef41d2736cf36ded49193f6dece3f78ac20bb"
+embedded = "35cf5a54d9345a8fea34cbb2d25cb9c18563524f175cb95a965dd3db3f5ca482"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::rsa::public_key::PublicKey::from_modulus_and_exponent"
+kappa = "4a6a43e71db2bda6f9bcc77b56dfa5be5394c372c55433567294ac394f99a28b"
+embedded = "d0953bac3d61d8b2c9fe124a73143743e7e1a89871c6af3119243e0f31f8723b"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::rsa::public_key::PublicKey::inner"
+kappa = "e6e0e3614b88eba0ca6d913e04e3f8adbeb57ac5f6ecd5a267f34903672d579b"
+embedded = "ef75275a90f1f061f1456e7732bad400a4543025a557c0f5fa115673e7226ad5"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::Inner"
+
+[[fn]]
+path = "ring::rsa::public_key::PublicKey::modulus_len"
+kappa = "ebe03e81aa661e4eff57732d6ddda1f409ef13c3b91bf76d3c2f6631ddf23bca"
+embedded = "ff567e26afea7fdd12f1171fd94835be253b9793832d4d967f687982b4de5bbf"
+status = "residue"
+cause = "mir::Ty: rsa::public_key::PublicKey"
+
+[[fn]]
+path = "ring::rsa::verification::PublicKeyComponents::verify"
+kappa = "618139e78a8a64951b900682144f98d55958b1c423866843c8b01dd24de31de6"
+at = "B=u32"
+embedded = "4f2481fce5e4ec296b9785b7c0c86ff83ebe3ee33b2dd519ad269d169993b7b0"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::rsa::verification::RsaParameters::verify"
+kappa = "4b3d0080ce4fa2cd7eb7a66dab59c8e2355a69a50bcb00c565c0a59e6adc18b6"
+embedded = "96be952eb1d4863392b03f8117c1018aca9330e9fb3e84a0ef40f7bd54317ee0"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::verify_rsa_"
+kappa = "3435c74f5b758fe03195fcf4418d1bdac36c72bbe2602aa54f5bfacef92e4665"
+embedded = "279b911b0db0159ee18792ddab934d54fb0daf62810ae254f3270138f450da78"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+

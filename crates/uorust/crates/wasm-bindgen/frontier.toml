@@ -1,0 +1,1345 @@
+# The wasm-bindgen register (written by `uorust crate wasm-bindgen@0.2.130`; do not edit): every body of
+# wasm-bindgen's MIR at wasm-bindgen 0.2.130, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1505
+translated = 123
+residue = 1382
+
+[module._]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.__rt]
+bodies = 89
+translated = 11
+residue = 78
+
+[module.cache]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.cast]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.closure]
+bodies = 70
+translated = 8
+residue = 62
+
+[module.convert]
+bodies = 785
+translated = 79
+residue = 706
+
+[module.crate]
+bodies = 318
+translated = 7
+residue = 311
+
+[module.describe]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.link]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.nullable]
+bodies = 46
+translated = 0
+residue = 46
+
+[module.parent]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.sys]
+bodies = 136
+translated = 14
+residue = 122
+
+[embedding]
+bodies = 1397
+embedded = 1397
+evaluable = 1396
+blocked = 1
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 1
+
+[differential]
+bodies = 1
+theorems = 2
+
+[[cause]]
+cause = "mir::Ty: convert::slices::WasmSlice"
+bodies = 222
+
+[[cause]]
+cause = "mir::Ty: convert::traits::WasmRet<u32>"
+bodies = 111
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: slices::WasmSlice"
+bodies = 83
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: dyn core::ops::FnMut"
+bodies = 36
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::VECTOR"
+bodies = 29
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::FUNCTION"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: closure::ScopedClosure<'_"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Nullable<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: dyn core::ops::Fn"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: nullable::Nullable<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: sys::Null"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: sys::JsNullable<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item convert::impls::U32_ABI_NULL_SENTINEL"
+bodies = 12
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item convert::impls::U32_ABI_OPTION_SENTINEL"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sys::JsOption<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: sys::Undefined"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <dyn Fn"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <dyn FnMut"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: convert::impls::MaybeAbi<i64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as From>::from"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Clamped<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: JsNullable<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: JsOption<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: __rt::RefMut<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: closure::JsClosure"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&JsValue as traits::NullableIntoWasmAbi>::null"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JsValue as traits::NullableIntoWasmAbi>::null"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: to_uint_32: wasm-bindgen's MIR stops at type outside the lift: f64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: JsClosure"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Undefined"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: convert::impls::MaybeAbi<i128>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: convert::impls::MaybeAbi<u128>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: convert::impls::MaybeAbi<u64>"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JsValue as traits::NullableFromWasmAbi>::is_null"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WasmWord"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: __rt::Ref<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: __rt::WasmWord"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialEq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: __rt::JSIDX_NULL: mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::NAMED_EXTERNREF"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::from_str: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <&str as convert::traits::IntoWasmAbi>::Abi"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bigint_get_as_i64: wasm-bindgen's MIR stops at type outside the lift: convert::impls::MaybeAbi<i64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::try_from_js_value: wasm-bindgen's MIR stops at mir::Instantiation: u32 for a parameter bounded by JsCast"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::drop"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RcRefMut<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ScopedClosure<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> core::ops::FnMut"
+bodies = 4
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_UNDEFINED"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:735:1: 735:25>::bitand: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_bit_and: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:749:1: 749:24>::bitor: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_bit_or: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:763:1: 763:25>::bitxor: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_bit_xor: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:777:1: 777:22>::shl: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_shl: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:791:1: 791:22>::shr: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_shr: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:805:1: 805:22>::add: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_add: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:819:1: 819:22>::sub: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_sub: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:833:1: 833:22>::div: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_div: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:847:1: 847:22>::mul: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_mul: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:861:1: 861:22>::rem: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_rem: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::as_string: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_string_get: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::undefined: wasm-bindgen's MIR stops at mir::Operand::Constant: JsValue::UNDEFINED: type outside the lift: JsValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::needs_drop"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::is_null"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: JsValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeAbi<i128>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeAbi<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeAbi<u128>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeAbi<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MutSlice<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: __rt::RcRef<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: __rt::RcRefMut<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parent::Parent<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: JsValue::UNDEFINED: type outside the lift: JsValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::CLOSURE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::EXTERNREF"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::I32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::RAW_POINTER"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::STRING"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::U32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc42: &ThreadLocalWrapper<Cell<[u32; 2]>>}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc54: *mut u32}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JsValue as describe::WasmDescribe>::describe"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as describe::WasmDescribe>::describe"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <str as describe::WasmDescribe>::describe"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::MaybeIntoWasmAbi>::none"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::RefFromWasmAbi>::ref_from_abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::VectorFromWasmAbi>::vector_from_abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::WasmAbi>::split"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::_new: wasm-bindgen's MIR stops at mir::Rvalue::Use"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::as_bool: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_boolean_get: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::is_falsy: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_is_falsy: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_array: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::is_none: wasm-bindgen's MIR stops at type outside the lift: <T as traits::FromWasmAbi>::Abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <nullable::Nullable<&u32> as convert::traits::IntoWasmAbi>::Abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JsError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MainWrapper<Result<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RcRef<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WasmRefCell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __rt::LazyCell<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __rt::WasmPtr<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __rt::WasmRefCell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: convert::impls::MaybeAbi<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::option::IntoIter<&mut u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::option::IntoIter<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::panic::AssertUnwindSafe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> core::ops::Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nullable::Nullable<&mut u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nullable::Nullable<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoJsGeneric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by UnwrapThrowExt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: JsValue::NULL: type outside the lift: JsValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: JsValue::TRUE: type outside the lift: JsValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: __rt::JSIDX_FALSE: mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: __rt::JSIDX_RESERVED: mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: __rt::JSIDX_TRUE: mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: __rt::borrow_fail::promoted[0]: mir::Operand::Constant: the constant item __rt::BORROW_ERROR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as closure::WasmClosure>::IS_MUT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as convert::traits::TryFromJsValue>::NULLABLE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <core::option::Option<u32> as UnwrapThrowExt<u32>>::unwrap_throw::MSG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <core::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as convert::traits::TryFromJsValue>::NULLABLE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item __rt::NULL_ERROR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::BOOLEAN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::CHAR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::CLAMPED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::F32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::F64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::I128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::I16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::I64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::I8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::NONNULL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::NULLABLE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::OPTIONAL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::REF"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::REFMUT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::RESULT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::SEQ_MODE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::SLICE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::U128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::U16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::U64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::U8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::UNIT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Box as describe::WasmDescribe>::describe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as JsCast>::instanceof"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as JsCast>::instanceof"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as JsCast>::is_type_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as WasmClosure>::describe_invoke"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <dyn for Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <dyn for FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:1037:9: 1037:35>::try_from_js_value_ref: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: to_uint_32: wasm-bindgen's MIR stops at type outside the lift: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:677:1: 677:22>::not: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: JsValue::is_falsy: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_is_falsy: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:721:1: 721:22>::neg: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_neg: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as WasmClosureFnOnce>::into_js_function"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::LongRefFromWasmAbi>::long_ref_from_abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::NullableFromWasmAbi>::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::OptionFromWasmAbi>::is_none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::OptionIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::RefMutFromWasmAbi>::ref_mut_from_abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::VectorIntoWasmAbi>::vector_into_abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as traits::WasmAbi>::join"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as traits::MaybeIntoWasmAbi>::none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as traits::NullableIntoWasmAbi>::null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::from_bool: wasm-bindgen's MIR stops at mir::Operand::Constant: JsValue::TRUE: type outside the lift: JsValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsValue::is_undefined: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_is_undefined: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ManuallyDrop::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::expect"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Result::expect"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::into_boxed_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <&str as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <alloc::boxed::Box<[u32]> as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <i128 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <i64 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <u128 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __rt::wbg_cast: wasm-bindgen's MIR stops at type outside the lift: <u64 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_add: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bigint_from_str: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bit_and: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bit_not: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bit_or: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_bit_xor: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_boolean_get: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_checked_div: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_debug_string: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_describe: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_describe_generic_import: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_div: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_error_new: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_exports: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_externref_heap_live_count: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_function_table: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_ge: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_gt: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_in: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_init_externref_table::__wbg___wbindgen_init_externref_table_e321ca21737215cc: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_instance: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_bigint: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_falsy: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_function: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_null: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_null_or_undefined: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_object: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_string: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_symbol: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_is_undefined: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_jsval_eq: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_jsval_loose_eq: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_le: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_lt: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_memory: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_module: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_mul: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_neg: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_pow: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_reinit: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_reinit::__wbg___wbindgen_reinit_2fe0d0b9c1cc3c21: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_reinit::__wbg___wbindgen_reinit_2fe0d0b9c1cc3c21: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_rem: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_rethrow: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_rethrow::__wbg___wbindgen_rethrow_d953c34c2e20677f: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: core::mem::drop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_rethrow::__wbg___wbindgen_rethrow_d953c34c2e20677f: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: core::mem::drop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_shl: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_shr: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_string_from_utf8_lossy: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_string_get: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_sub: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_symbol_new: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_throw: wasm-bindgen's MIR stops at type outside the lift: convert::slices::WasmSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_typeof: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __wbindgen_unsigned_shr: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: closure::_::instanceof::__wbg_instanceof_JsClosure_49a5f9044beefd4b: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::from_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <u32 as traits::FromWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <bool as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <char as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <i16 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <i8 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <u16 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::impls::into_maybe_abi: wasm-bindgen's MIR stops at type outside the lift: <u8 as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::traits::FromWasmAbi::try_from_abi: wasm-bindgen's MIR stops at type outside the lift: <u32 as traits::FromWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: convert::traits::VectorFromWasmAbi::try_vector_from_abi: wasm-bindgen's MIR stops at type outside the lift: <u32 as traits::VectorFromWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::forget"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: describe::describe: wasm-bindgen's MIR stops at mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::REF"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: describe::describe_vector: wasm-bindgen's MIR stops at mir::Operand::Constant: the constant item wasm_bindgen_shared::tys::VECTOR"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: externref_heap_live_count: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_externref_heap_live_count: wasm-bindgen's MIR stops at type outside the lift: convert::traits::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: externref_statics_end: wasm-bindgen's MIR stops at mir::Operand::Constant: __rt::JSIDX_RESERVED: mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_u32_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys::_::instanceof::__wbg_instanceof_JsNullable_832337b1c8c19b3f: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys::_::instanceof::__wbg_instanceof_JsOption_9b7996738c7fe0ea: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys::_::instanceof::__wbg_instanceof_Null_6f34701d8d2b1b6a: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys::_::instanceof::__wbg_instanceof_Undefined_7cb2914c739d52f4: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <core::option::Option<&u32> as convert::traits::IntoWasmAbi>::Abi"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Clamped<Box<[u32]>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Clamped<Vec<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: JsStatic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: JsThreadLocal<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MainWrapper<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeAbi<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WasmMutSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WasmPtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WasmPtr<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __rt::LazyCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<i16>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<i32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<i64>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<i8>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<isize>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<u16>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<u64>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<u8>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<core::mem::MaybeUninit<usize>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::MutSlice<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::slices::WasmMutSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::option::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sys::JsNullable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sys::JsOption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::WasmRet<u32>"
+bodies = 1

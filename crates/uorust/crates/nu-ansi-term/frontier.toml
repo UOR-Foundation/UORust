@@ -1,0 +1,150 @@
+# The nu-ansi-term register (written by `uorust crate nu-ansi-term@0.50.3`; do not edit): every body of
+# nu-ansi-term's MIR at nu-ansi-term 0.50.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 146
+translated = 0
+residue = 146
+
+[module.ansi]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.debug]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.difference]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.display]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.gradient]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.rgb]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.style]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.util]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.write]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 146
+embedded = 146
+evaluable = 146
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: rgb::Rgb"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: style::Style"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: display::AnsiGenericString<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AnsiGenericString<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Style"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AnsiGenericStrings<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Color"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Gradient"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: difference::Difference"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: gradient::Gradient"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: gradient::TargetGround"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Rgb"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ansi::Infix"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ansi::Prefix"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ansi::Suffix"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: display::AnsiGenericStrings<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: style::Color"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OSControl<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: display::OSControl<'_"
+bodies = 1

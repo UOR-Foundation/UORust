@@ -1,0 +1,69 @@
+[[fn]]
+path = "ring::MAX_LEN"
+kappa = "3b333700bf5dc344426a20f688ac3239b4519eaaa9267756c23db37da84d351e"
+embedded = "e23161dc594bd2c73a0caea9a9f333d3770e774eb424e7500409d163efd29937"
+status = "residue"
+cause = "mir::Operand::Constant: ec::SCALAR_MAX_BYTES: mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+
+[[fn]]
+path = "ring::signature::<impl at src/signature.rs:302:10: 302:15>::clone"
+kappa = "c221f3fba41da17f0fd0136e3cd8d735762040e92a5335c432940a83aec50f00"
+embedded = "0041b437880433e8bbf02b57675556c87b3e5ffecdfd5607dde1ed8c9d532c51"
+status = "residue"
+cause = "mir::Ty: signature::Signature"
+
+[[fn]]
+path = "ring::signature::<impl at src/signature.rs:358:10: 358:15>::clone"
+kappa = "7d1274cd94fc31fd5922b22439e4de464ae4aa68cc7d9ed78f122cf0c3d36244"
+at = "B=u32"
+embedded = "de99ffcab14c0b7d521748bb47a8c1dba6f5158fe9ef8bb7f4d964f5d4334586"
+status = "residue"
+cause = "mir::Ty: signature::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "ring::signature::Signature::as_ref"
+kappa = "9eadeb36594b68331cc22f8c329fc951df1092d280fb5d5972cb9cad47545d59"
+embedded = "51a045575ed22de259c48fb66eccc8f701e6738a41c0ba1c689683a264c9ec0f"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ring::signature::Signature::new"
+kappa = "d580dbc3e70a54984be93a9755bb0aef846a4d09f148568ee492bc85b75f965c"
+at = "F=u32"
+embedded = "584e8afaa88d4697b242a48587d8fe32c17427e597bda917cbe9276a70e6f547"
+status = "residue"
+cause = "mir::Ty: signature::Signature"
+
+[[fn]]
+path = "ring::signature::UnparsedPublicKey::as_ref"
+kappa = "38836c78dda9f4e05aec4bcb8d43b191d867d89b75b5fb4e467868b2d5161be5"
+at = "B=u32"
+embedded = "689f77914695bf232f0fee4617e7c4d656c33ebc4791314b32d957a89d4e1700"
+status = "residue"
+cause = "mir::Ty: signature::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "ring::signature::UnparsedPublicKey::fmt"
+kappa = "c663d61582430e2a19f2c458eb138c4d6032e25e9bf73219a76f71b6603fbdf5"
+at = "B=u32"
+embedded = "709fe995170a6f6d0044c2cbf8c617721a6a5d138149172ec410d21a47523bd0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::signature::UnparsedPublicKey::new"
+kappa = "7369c80e4165942daf582956c9ff8fddfe0e47486cf41afa4174c648eda4604f"
+at = "B=u32"
+embedded = "294c23907a2ec4d1deddb19089c2db888a7c67604e8270f68b918d39a480193f"
+status = "residue"
+cause = "mir::Ty: signature::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "ring::signature::UnparsedPublicKey::verify"
+kappa = "dd21512571d234200d548e2d96ecd497fa4c6f64f8b56801dcddb41f91491b21"
+at = "B=u32"
+embedded = "f217ef43aff0a8c3925d35d25b24a4f9390a1654241ee38ab6ed534f9d384e3c"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+

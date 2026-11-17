@@ -1,0 +1,32 @@
+[[fn]]
+path = "tower-layer::stack::<impl at src/stack.rs:5:10: 5:15>::clone"
+kappa = "03b63e306d8d4ad66eab22cec81ca3141f93d46bb3b2dc3951313a0970184638"
+at = "Inner=u32, Outer=u32"
+embedded = "fa201b4da10b3cffc780ec3a72fdaec5345a15b491946eb464e8f0919b3a6f9c"
+status = "residue"
+cause = "mir::Ty: stack::Stack<u32, u32>"
+
+[[fn]]
+path = "tower-layer::stack::Stack::fmt"
+kappa = "be4463ca3c5d3670f8393a5918f93a1f1a6f0a6abe9e8ab0a1701ca41d4018d0"
+at = "Inner=u32, Outer=u32"
+embedded = "77370ed79b911b0086fe851135912498afbdddca0fc31a1b4afa51d96059fe0e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tower-layer::stack::Stack::layer"
+kappa = "f433655ca63b9358ccc747629bdb46f103532cd56ebfa50b1f38224294379dd6"
+at = "Inner=u32, Outer=u32, S=u32"
+embedded = "def1134b7517918ed4c7af3d88b17d2afd2911aff66a4280192a25cc2f6775ef"
+status = "residue"
+cause = "mir::Ty: Stack<u32, u32>"
+
+[[fn]]
+path = "tower-layer::stack::Stack::new"
+kappa = "bebd8ea0defe55fd22a3c72289cffeea5cec3fa190cdfb3c24ea0cc3d422ae24"
+at = "Inner=u32, Outer=u32"
+embedded = "de29cfc7af8cddf691b5d2c4bccc787140d55ad5a7d7406290d98ad6d385a089"
+status = "residue"
+cause = "mir::Ty: stack::Stack<u32, u32>"
+

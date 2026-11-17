@@ -1,0 +1,80 @@
+[[fn]]
+path = "hyper::lock::LockResult::panic_if_poisoned"
+kappa = "99f7438e3a97c90ad168216b371c10c89407227f8ea77b316adf84d3db5bf243"
+at = "T=u32"
+embedded = "19f4db450e58a718693a47e1d18aceb7629faf0af2b3204ffcff3da4139d9805"
+status = "residue"
+cause = "mir::Ty: PoisonError<u32>"
+
+[[fn]]
+path = "hyper::rewind::<impl at src/common/io/rewind.rs:10:10: 10:15>::fmt"
+kappa = "9e9083331688d9163dc73d730db9674706ca0adc16bb24ef146b44ada399d570"
+at = "T=u32"
+embedded = "e2caaeaf375ce3929398577aaa4bc10128dd814d56c7ba3283f0378a5e733f66"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper::rewind::Rewind::into_inner"
+kappa = "6417986be2d5d9f1582ef11a21447d4a5e0581e48b300a14c7dacc82fc885bf8"
+at = "T=u32"
+embedded = "0385d87deba5ff30844607ede3849c27ae6741908a1b2dbb1dba6543e173fdb5"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "hyper::rewind::Rewind::is_write_vectored"
+kappa = "61576eccd874b53b4a229042c6decebb82b6005cac0148cbff9f33179c69fdc7"
+at = "T=u32"
+embedded = "26fcfb8b281b1717250e8518bf2ee9850a7bbde91ee3c39e793a984e24bf7e20"
+status = "residue"
+cause = "mir::Ty: Rewind<u32>"
+
+[[fn]]
+path = "hyper::rewind::Rewind::new_buffered"
+kappa = "6ebad26a5df2a9ee26b3aef2aaa556c07378bfd3b0d83feba3725e77ac2f4815"
+at = "T=u32"
+embedded = "a87cb2212954ffbed042f41328ced7812bde9d3f251143fbcda7d60ba80e1ec9"
+status = "residue"
+cause = "mir::Ty: common::io::rewind::Rewind<u32>"
+
+[[fn]]
+path = "hyper::rewind::Rewind::poll_flush"
+kappa = "9e4ca589b5457171a722b980077994a7f9cb7baf31a94c8f2c44e1d5ab1c27ca"
+at = "T=u32"
+embedded = "1ca76fb9ede90cd2a6be61855dcd7a3a31c0c178b43e2c140f5ae8e9a682247b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rewind::Rewind::poll_read"
+kappa = "7d8798b4c934d14f7321cbae2c5005370cf9e6e7a5d772e96b08127983606ca3"
+at = "T=u32"
+embedded = "9c2bcd4436e2e06dad1b0b6a3de03a7b8e6da695d32cefca8aa3f4cb5ef38943"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rewind::Rewind::poll_shutdown"
+kappa = "f7c97b6a27c9396c1bad886499b5da36ae670918b8fcd9cbe1a2f5ef69ebff8f"
+at = "T=u32"
+embedded = "c5437a0956820025080d3321adabd10423fab8e73932ad28c63407ac1e29653e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rewind::Rewind::poll_write"
+kappa = "14fdf895b3793bf86074ba71c1a7d0ce1304bc8551b074085038408b694b6842"
+at = "T=u32"
+embedded = "2c8d257ed9ef9fa112aff9f6c18407e72c544615e35c23ba6ec0c7385d7867c4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rewind::Rewind::poll_write_vectored"
+kappa = "a13aff55453a215f597d6429c41f7f786e6a185655bce7b4748aab035d521e25"
+at = "T=u32"
+embedded = "85a657d717ae441933826a68d15cbf150b485e706dc9ebd271eb7d8f6fb24172"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

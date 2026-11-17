@@ -1,0 +1,152 @@
+[[fn]]
+path = "writeable::<impl at src/lib.rs:185:10: 185:15>::fmt"
+kappa = "4a25b77f9ab7f229bd102618cb7c6eb775c3a3ec5a08010e787342c63336cf74"
+embedded = "668c4ddd972c66664f7cf102cef2538c5c9251cea50de198f36eb39f60b82e18"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:185:17: 185:26>::eq"
+kappa = "0f85fcbeaffd65366c222df727156ed1273185b3274622425bc5fc134de1d3af"
+embedded = "177cd7134f07bc6b9923ad23bc7dec34df96a46364eabce5d2616a61349c43b0"
+status = "residue"
+cause = "mir::Ty: LengthHint"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:185:28: 185:30>::assert_fields_are_eq"
+kappa = "19a60906223a9c913b71ba3806e41780c76f03638a8f1d6989ab4c9dbf4dbb5f"
+embedded = "96160d426c5b3235ac830c81b871350a2b1e350b97d7151578fb911eb8eb9518"
+status = "residue"
+cause = "mir::Ty: LengthHint"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:185:38: 185:43>::clone"
+kappa = "f184f2963e28fa8017f80204bc55c072e55470e4225e31d158ceaeb09ed14160"
+at = "LengthHint=u32"
+embedded = "7e76cdf20a1387026e6440759529a44ca41a3d6fd7d92dd3355ee80871fa70e7"
+status = "translated"
+digest = "a811d23c66c02f793a8b90efad77ef584d370780f4f47cae19abfa985a55a99a"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:262:10: 262:15>::clone"
+kappa = "5f3d0b11fe64e9a49bf5a2843e99d97543754dbb3ecd2c91840d8e86ce8c0910"
+at = "Part=u32"
+embedded = "447f642c1b62a6598fc743bbbb3db114cb9805844f70b176e0278f86471d68f0"
+status = "translated"
+digest = "f8f9be15646e30c704bbc35be68660c07eab8ee97a93c57246d76638842ff056"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:262:23: 262:28>::fmt"
+kappa = "8bedb358dd181b8b9fbf26f1c0175894145327a6e647cd095d6f3ef18b988c48"
+embedded = "d10972a440626ba10116ae02aabf1ccc51cec4652c2f6867b2ae70e6d033c7dc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::<impl at src/lib.rs:262:30: 262:39>::eq"
+kappa = "3dfc6fcb98a5f96e0d6db8a8b6ab8d266072f35ac8910f2c899ced8156b434bd"
+embedded = "e1b7a04f678a78393a407c845f04d9a65af765d908eca4276d1cba671e9f0c8e"
+status = "residue"
+cause = "mir::Ty: Part"
+
+[[fn]]
+path = "writeable::LengthHint::at_least"
+kappa = "4d4042a43ac74a1b4ea04f433c9c1ee9a6310a5d613c3d570b5ffeb2e869f11d"
+at = "LengthHint=u32"
+embedded = "9a12c67c8b85be046b979aaa56496a8849269b0e860cca42d10ab5eeb68c8a9d"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::LengthHint::at_most"
+kappa = "6ee5f82a2ab588e9ecbf190b3c61997c22e35ba93b7eb3c4f6840415ed18090c"
+at = "LengthHint=u32"
+embedded = "4f72b0906b060f3c9278d70eeee0668f2aee9ee6f32a3a325594c22ff15239e4"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::LengthHint::between"
+kappa = "0ce620814c4e6a54d170371566007d6b73659e3ccb67adb3f0df6d66619edb20"
+at = "LengthHint=u32"
+embedded = "e598a860991f3131c198ceaadd32262c424d065015f7be03bcff55c6358c6ea8"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::LengthHint::capacity"
+kappa = "1b365df246e205f0b94e7857bdee14abf6b289bfcc63b28aeef16eb073bf5bb9"
+embedded = "554edd97eeb96f508d07616b69bc8078625ac23bb064127e27901b677460e399"
+status = "residue"
+cause = "mir::Ty: LengthHint"
+
+[[fn]]
+path = "writeable::LengthHint::exact"
+kappa = "77a01441f6ca62619ce54d6675aadd9721b534a4283f9c9a7cd2528971c47a71"
+at = "LengthHint=u32"
+embedded = "46dfada8190ccb142f4ce1ba68e0de5298da6e77f9c508bcda8ca695de050b1a"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::LengthHint::is_zero"
+kappa = "5e3c99329c88ae098cf23ee3d641cd1ddbb205a061f7536c12ea11967965442c"
+embedded = "a415983c21accca0faa424fd4ce0b18313129eec4a84a9dbafe653f893252e5a"
+status = "residue"
+cause = "mir::Ty: LengthHint"
+
+[[fn]]
+path = "writeable::LengthHint::undefined"
+kappa = "4ef0e23244d0bb113c19122613cd6327b3be7d18f13c3694017aa7974b531ff9"
+at = "LengthHint=u32"
+embedded = "ba765c3eee476c109375213446cf36475c47ac7e511ec1ee7a6c5239148097ad"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::Part::ERROR"
+kappa = "8c4923a7b017fd1ce5cbc0fb8ac40442a3d793066fa0c105cb12699c5339121b"
+at = "Part=u32"
+embedded = "78a9ce8f2a80a881a8c2174682df7cc8d24863c1f96f8eabecbf0799588851b2"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "writeable::Writeable::write_to"
+kappa = "184a389684212dbd915840de796714c3f609b9597dc089bff6b81b861077dd66"
+at = "Self=u32, W=u32"
+embedded = "44d0b92ed1a479efd57f8a9acb76fbbb8c472e9539d9485ce0c1300987573ad6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::Writeable::write_to_parts"
+kappa = "f7ed4ca4aa2b491fb5a17d445b9b74b22cc855b335ec53e572a54c0bc01e291c"
+at = "S=u32, Self=u32"
+embedded = "0b6665228fc9c80a9a33ee3316204b9f7c4ff1186bbbad8b61f13ad1dae670c4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::Writeable::write_to_string"
+kappa = "4850a4fec28a84981995f4ad857a68390818cca1f7b090efe2b9a702abd71eec"
+at = "LengthHint=u32, Self=u32"
+embedded = "14d2d759eaf22f66b6ccb1c67622e58445140bc7b148e0d6e61f0fe6c8195605"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "writeable::Writeable::writeable_borrow"
+kappa = "738dd9f8fbdec62832ea10752a2b6547c27bb95a911c2472b366fc8bc4a2bc07"
+embedded = "0f4f0905aaed9bdb325731c985f65552b5422935c8934d0dc7254881f7f59f74"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "writeable::Writeable::writeable_length_hint"
+kappa = "777d562bbea8bf4cafdd023588eb1efe9496d44e2a5d8b8850bf4cf02355cc50"
+at = "LengthHint=u32"
+embedded = "ff5eee6c2f69db1a49cb9b072710f468e5ea7db540839c3aa9c628af96c46728"
+status = "residue"
+cause = "mir::Ty: Self"
+

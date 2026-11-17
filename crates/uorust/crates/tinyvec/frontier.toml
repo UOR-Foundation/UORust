@@ -1,0 +1,117 @@
+# The tinyvec register (written by `uorust crate tinyvec@1.13.3`; do not edit): every body of
+# tinyvec's MIR at tinyvec 1.13.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 157
+translated = 2
+residue = 155
+
+[module.array]
+bodies = 4
+translated = 2
+residue = 2
+
+[module.arrayvec]
+bodies = 88
+translated = 0
+residue = 88
+
+[module.arrayvec_drain]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.slicevec]
+bodies = 57
+translated = 0
+residue = 57
+
+[embedding]
+bodies = 157
+embedded = 157
+evaluable = 157
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayVec<u32>"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: SliceVec<'_"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: arrayvec_drain::ArrayVecDrain<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ArrayVecIterator<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: slicevec::SliceVec<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ArrayVecSplice<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SliceVecDrain<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: const_generic_impl::default::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SliceVec<'s"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayVec<A>::retain::JoinOnDrop<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayVec<A>::retain_mut::JoinOnDrop<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayVecIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arrayvec::TryFromSliceError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Fuse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slicevec::SliceVecDrain<'_"
+bodies = 1

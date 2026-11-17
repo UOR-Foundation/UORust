@@ -1,0 +1,144 @@
+# The tempfile register (written by `uorust crate tempfile@3.27.0`; do not edit): every body of
+# tempfile's MIR at tempfile 3.27.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 144
+translated = 0
+residue = 144
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.dir]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.env]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.file]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.spooled]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.util]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 144
+embedded = 144
+evaluable = 144
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: Builder<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: dir::TempDir"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: file::NamedTempFile"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: file::TempPath"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NamedTempFile<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: file::NamedTempFile<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: spooled::SpooledTempFile"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TempDir"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TempPath"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: file::PathPersistError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: file::PersistError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SpooledTempFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: spooled::SpooledData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1

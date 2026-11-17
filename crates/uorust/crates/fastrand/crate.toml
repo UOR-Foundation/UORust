@@ -1,0 +1,388 @@
+[[fn]]
+path = "fastrand::<impl at src/lib.rs:130:10: 130:15>::fmt"
+kappa = "acbf7b9ef48469066720080c20a041bc02bd977dc9c0a0d40404f529adcdbf59"
+embedded = "c0ea9d945be0ebb633ca1e01404d0d96c8c7e14c7bccae73587b8ad409df6b7f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "fastrand::<impl at src/lib.rs:130:17: 130:26>::eq"
+kappa = "ce03334db37116dc04d04de8aa736b025d20dc9b75d3c8dc0595ec3820afb0dd"
+embedded = "b7671a9cbae6d6c5731263e309a91e025f3dd7017239d553a16601a11bb0f4a1"
+status = "residue"
+cause = "mir::Ty: Rng"
+
+[[fn]]
+path = "fastrand::<impl at src/lib.rs:130:28: 130:30>::assert_fields_are_eq"
+kappa = "66b4e09d1c353080adee195d2b49808c220275a8db8f3a0c32801253b10aed5d"
+embedded = "6def468b4a6250f1e50cdae4070107757167902720934da90e0d41031f1085c6"
+status = "residue"
+cause = "mir::Ty: Rng"
+
+[[fn]]
+path = "fastrand::Rng::alphabetic"
+kappa = "3723b0bdbf9979b0d9b4d92dae63cffe9177978b1d7e2f6d7ec41a16303c54f3"
+at = "Rng=u32"
+embedded = "a77378f74c597d4c1036ffed1f67870052536ab8477d764f2f811d803e0bd463"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+
+[[fn]]
+path = "fastrand::Rng::alphabetic::CHARS"
+kappa = "18b553c86c5ffbacd70c808a453155df2d98be242dd121e2a0d16ef4f76b5c4e"
+embedded = "afcf2cdd7a890a8cee646b296403d703ed3b16eff21d71a6a47a818f5fff5bb4"
+status = "translated"
+digest = "0046b25f04672e89e5259f103f26c05d73b8798aa3ce62611f3309ae34af0bd8"
+
+[[fn]]
+path = "fastrand::Rng::alphanumeric"
+kappa = "7d5c19891d0f2741374b3624c346b9a10593be7133b11d775b74ec7b005dadba"
+at = "Rng=u32"
+embedded = "16e534d7c76dd2dad56784a9c8fb074d7e126687e0746d85c6df192948fea7fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+
+[[fn]]
+path = "fastrand::Rng::alphanumeric::CHARS"
+kappa = "cbf97346c038143da27931db9a12a40056366081e240f091479308b61839570d"
+embedded = "1dfd7da214f9c03958bc0a59551854750a9338d7059ae8743c7019f22b6218e2"
+status = "translated"
+digest = "489737044e4a49a8fc2ff6fd2b5b641eb3bcb7618bf5043fd0a6f15f0f671bda"
+
+[[fn]]
+path = "fastrand::Rng::bool"
+kappa = "56c68be6071741ffd2cb4e9776b4d7d51434ded9c3e5186787fa30c84ca87ad1"
+at = "Rng=u32"
+embedded = "d5faa40f7befc86597e02f12dd002098a4bcd078cea2df03850909aba8daeac2"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeFull"
+
+[[fn]]
+path = "fastrand::Rng::char"
+kappa = "84cc4819b8a0d5644def4e1ac9ced86e0c6957193846caf26d03539d1c8cb850"
+at = "Rng=u32"
+embedded = "c2229405c33f6dfe863bad2cd5d34565fa7ff4f4cc0e6099392d8b733411e4be"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<char>"
+
+[[fn]]
+path = "fastrand::Rng::choice"
+kappa = "02d579ce843b9ec8bfa84c3efa2da7a47a5e635be1efc33a67c6ec75b41a4a8a"
+at = "I=u32, Rng=u32"
+embedded = "e6c505048e50d6ce1fe3d83f81c8469820e82121dd8430d0dcfa759453838f00"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ExactSizeIterator, which u32 does not implement in core"
+
+[[fn]]
+path = "fastrand::Rng::choose_multiple"
+kappa = "f5244997c94e16565af5cc56aeb06d6637a64b6614bba456786bd31529aaa17a"
+at = "I=u32, Rng=u32"
+embedded = "69ae68c58498b8c069f44e7625855b79053a3e7734f07203b5785f80ebb41c6c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "fastrand::Rng::clone"
+kappa = "b6a6b1346b6c3474b033e2bf3694d8a3a97b904b5238fc9f0638ab7ee8a329fb"
+at = "Rng=u32"
+embedded = "62de6cf2cda3100ae04f565ca23942f6a957d436b03a4377f0e86cf128f5e284"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::digit"
+kappa = "4c1c65fc4aeacbed6bab02a73dc6156633d0142f7b3f97879db9095fc6f297e7"
+at = "Rng=u32"
+embedded = "dc79dd1d3f4b5adf1abf2b93e387ffabab04d4709f83043e3b7aca35e8ad5c89"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<u8>"
+
+[[fn]]
+path = "fastrand::Rng::f32"
+kappa = "d967a8b9c15f137f4f7d47216927a1c452ab60db7c769c5c2b61b1633b74cc70"
+at = "Rng=u32"
+embedded = "d273a62eeac1303b6b15755c0d9631bdbd4cf2fb8c2a44a0a609d10f7392c8e1"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "fastrand::Rng::f32_inclusive"
+kappa = "6d5a76771ded237529c6539e0e7533c1d077e1e8e64dccce6aedd07f70c96e10"
+at = "Rng=u32"
+embedded = "8400b83661d5d45cdf1d7c1cd5ebbd84f8c632f357d7ac6dc5732974459b7e39"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "fastrand::Rng::f32_inclusive::MUL"
+kappa = "91a825741b84550abc8d4aca99a2e22d1e6167d1134439fe198bfe8a96f2d4f4"
+embedded = "10434effc8ee0fdb20b6e04a1bb5dd52bc7957714af45bd643857839e6199a89"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "fastrand::Rng::f64"
+kappa = "bed083b32ee2100aacbc130264a1e76f7a15268564bb3b067d79a7ae3b7d3c38"
+at = "Rng=u32"
+embedded = "fbf6eb52393f3223ffc194fc4bf04f01a150f77cc37862cf344de4ea2086a8ef"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "fastrand::Rng::f64_inclusive"
+kappa = "da0dabd7b1c6bd41f4aed5a3be38bcc3e1988d09118863d627c23875330658c2"
+at = "Rng=u32"
+embedded = "7dd42eb5944afab6ec9ca97ec62a0fbaa11e222063f890058f13e78dff2f1ae4"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "fastrand::Rng::f64_inclusive::MUL"
+kappa = "9a1e892fa6d8c33b197686a5895647e3e8c1b5abd6a7202cf78e385d639e8208"
+embedded = "a09b0d1b06199b637fd9e7678e39f3375ee0cd61480b3faf4831c5b78e0748a9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "fastrand::Rng::fill"
+kappa = "2dd563b69250ea576030a613f0e1c4d1132822781e4f800a8109bb23b9acf9da"
+at = "Rng=u32"
+embedded = "91601f7ae54ff62ae0fcb3a65495f14cdef436498bb6409aee91c8a0b7196d70"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fastrand::Rng::fork"
+kappa = "12dd7605d3a435ee34679d3b31ba134a919d5aba3dd6e0f7a14a7f26e64b3126"
+at = "Rng=u32"
+embedded = "6d05b186ae6cb110fe5fff75cee33669f121f2e38c1038a257d8458326fae4d1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_mod_u128"
+kappa = "5e7b864f3fbc55a1cddd0c964f7a59af84df2795d7d09758480f7eef77141cef"
+at = "Rng=u32"
+embedded = "73f917e8a39ea3e72664f70ec4b416a0e9e140ab789798b43014cb77480c09d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u128: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_mod_u32"
+kappa = "84bd6afc5b613a4b38f487da0fac6450f5172bdac0b9745df2beeb68f2574db1"
+at = "Rng=u32"
+embedded = "977e085d5877ee102ace9ee2e67d9ef18e8403a1cadecf756b8713d8f7091e76"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u32: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_mod_u64"
+kappa = "0b488ce6eead8d77e3df38f9bd99ed7ca11b1c7d62dd060a93ea4a4d8ce4c9e4"
+at = "Rng=u32"
+embedded = "df0ab7010557ae3554e837d3017a77d1e0fb098a5821e114affe9e3199dedd36"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_u128"
+kappa = "8e49a947cd26838acfc71f4116a15d9944d2946915d7a32088d00b12b8107b66"
+at = "Rng=u32"
+embedded = "7d872c1c38a6f65913e8f4b7365e95fdbfb862058b20dce49b363925b46af1f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_u32"
+kappa = "a6a3c9ddc8674bbeba61f7106da1142af5d73171743957c5657e393632ffbfdb"
+at = "Rng=u32"
+embedded = "44694e63c3763ef315ea49daafba4fe9007753238f1afd6b7e7cdf8b36045b41"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fastrand::Rng::gen_u64"
+kappa = "1f8f2c83f850cfb467c2238bb4c51b3179d2b74770ec7af775206f0849ef74e0"
+embedded = "ecc29ec6aa752d3864979000c65f9c7bd0706803a1272b6de83bc44695063326"
+status = "residue"
+cause = "mir::Ty: Rng"
+
+[[fn]]
+path = "fastrand::Rng::get_seed"
+kappa = "9c1db4a759c5c83fb13f41f9b9352d110c409715432dd99b4c05cbff9a6da4f5"
+embedded = "4e19321c03f5dce8fd65e15852c8e43592291c845a7344b30e60bb89e8a8cae2"
+status = "residue"
+cause = "mir::Ty: Rng"
+
+[[fn]]
+path = "fastrand::Rng::i128"
+kappa = "9dc4f19bbef25f40a9ba1cb5427c53746609c3f7c626975784e99944b9117768"
+at = "Rng=u32"
+embedded = "b555bfcd4a3621b811e15307c93336c425824579d1994029639a82faa69dba04"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<i128>"
+
+[[fn]]
+path = "fastrand::Rng::i16"
+kappa = "bb6db791fbb37185f9065609b34d3d6b26a085cdf8ced4fc0430c03fdaa60c11"
+at = "Rng=u32"
+embedded = "504d5e2883c71bbce7e214539d32d6891e279dc9ed3c7d2fcc03a2a93d787cf2"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<i16>"
+
+[[fn]]
+path = "fastrand::Rng::i32"
+kappa = "1ef723a9f22ddcc22d91967a24d772fb3dd025816234fcdca04544eefdd72421"
+at = "Rng=u32"
+embedded = "a2506d39efb3effee9972b6db339633c68c2e3c1f7cdb9f2db5ab9cab6c8f6d5"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<i32>"
+
+[[fn]]
+path = "fastrand::Rng::i64"
+kappa = "aa2918f991ba5521d7a036fbfae4e9a4b5f06676581f296c3606f377238aee8c"
+at = "Rng=u32"
+embedded = "6fa986f194904cd44c7137857662462aa5345c48a697d7de8dadbb9850c0edc8"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<i64>"
+
+[[fn]]
+path = "fastrand::Rng::i8"
+kappa = "50ed0d75cf69c75872dffd972dddb9e6bb406757b9b8caa9b3e887d9ac5e9d2d"
+at = "Rng=u32"
+embedded = "22b9515cf9ca3a8d17568225295c9107f0bdf13d06d8d4d3c3400bab27d9f010"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<i8>"
+
+[[fn]]
+path = "fastrand::Rng::isize"
+kappa = "b0075ea253d9f241c63dcb44a952bf730cc129fef1b33d24aee68d012aacaf1c"
+at = "Rng=u32"
+embedded = "3280dd8e40e9f608f2626b2b3e8ec26a5c32fe3bf958c95142c6fcfca54f2d2f"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<isize>"
+
+[[fn]]
+path = "fastrand::Rng::lowercase"
+kappa = "f6d80346df8785eedbc087d91202007c83e0590c37f59ba88fe18141f7ae82d7"
+at = "Rng=u32"
+embedded = "21b656709adf70efb1d92094aec92d9107f36c474fdcd9db24a2cf9dd5e2c8ad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+
+[[fn]]
+path = "fastrand::Rng::lowercase::CHARS"
+kappa = "0550a5bbee1c8a16525662de5a32ed2303a70652ed07b6ad60aa9d73bdfbedef"
+embedded = "865a1b871097fb5ae81babcebe10b25ac09f1655f28a9fd6fb881dc29bbfea99"
+status = "translated"
+digest = "419bd6f3a74deb6ed7255979af95e51f726c4f03dcae5378194333b62569ca62"
+
+[[fn]]
+path = "fastrand::Rng::seed"
+kappa = "9dfa1c6a5fdde08af65c555340cd2f71b8f5d044f75e3e8c5821f580fcf001d1"
+embedded = "bf83ecfbc761c0351ffdc004e83e2c9a4f0102c390dbc72c83abf9cdd33df784"
+status = "residue"
+cause = "mir::Ty: Rng"
+
+[[fn]]
+path = "fastrand::Rng::shuffle"
+kappa = "8ee74aac25e26e4c590f86231a3b8052387e14e80112d7477430dbd692e63b64"
+at = "Rng=u32, T=u32"
+embedded = "dd1e336399cf57fc7a2192b5394694fc9e6d9709853d559b65a3f19b790395b0"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "fastrand::Rng::u128"
+kappa = "4051ec2e7b09a24fd0102ef1253283f54ae410a9a4c79ff0e73e23aac6099a91"
+at = "Rng=u32"
+embedded = "ef7baffac69f0d54958eccc78a2481e371601b7d69ae26ea545834456a8a4804"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u128>"
+
+[[fn]]
+path = "fastrand::Rng::u16"
+kappa = "07d13984e405f90038791c5644a22e25daaf273a6ad5d66bd3b95ae81d549c17"
+at = "Rng=u32"
+embedded = "4491bef3477ab8a519cb019a86e0fdcd1084a6f5e28748588ddc3e433d5f6508"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u16>"
+
+[[fn]]
+path = "fastrand::Rng::u32"
+kappa = "6e01d07a855f4e223bcc71dd95374b29e5bf2740f27f9a6f4889e108f5f3bc5c"
+at = "Rng=u32"
+embedded = "b7cb61affac175ee35931e65321fab48dbbe7e73f8e6320c6fccaa0f4c19cd6d"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u32>"
+
+[[fn]]
+path = "fastrand::Rng::u64"
+kappa = "a9aff6328b13f8ab0949d3987eeb5c3c147ccf6b29d865657e8706611a899f5d"
+at = "Rng=u32"
+embedded = "4eb60e810a7e84e2a5be4860665bd60701db5aa25dca8b10254d23f75480f1b9"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u64>"
+
+[[fn]]
+path = "fastrand::Rng::u8"
+kappa = "cdd14d7dedca97dd5eeba3f0cda8605373ca502c1282cddf22addba097c54d05"
+at = "Rng=u32"
+embedded = "e29ce286646cdda39d947e4a2bd4ea9e78aff66c05469cf25b99b0dde1f823be"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u8>"
+
+[[fn]]
+path = "fastrand::Rng::uppercase"
+kappa = "4196f01d41efd47cd579a2dda46067406622df25ab3bb5b3266790688ceb9839"
+at = "Rng=u32"
+embedded = "4dd2460943b1b2bb04bad7436cd5c740c0df7e8cab28a40caefc649059c0feec"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+
+[[fn]]
+path = "fastrand::Rng::uppercase::CHARS"
+kappa = "dd4c4299ae76c40a986cd30fdc18c715713cdba80a225f790f756434b73b37c9"
+embedded = "0b74aa84139e8a57d016cceabb5755c7c51b3e167ef1a333320804c15d04c621"
+status = "translated"
+digest = "3975848c3505c1d153ee4427ec5cb16a2764a6211e7667a7fc9043a7471967f0"
+
+[[fn]]
+path = "fastrand::Rng::usize"
+kappa = "e35fdcce8ba4b22c5e6d8ee25c4908c7be167aab988592ffed2b72664816ba51"
+at = "Rng=u32"
+embedded = "0e8197df7a2da1fec6aedd92b87e7692797e1fd65a4e5cd9b5c391352b2c0378"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<usize>"
+
+[[fn]]
+path = "fastrand::Rng::with_seed"
+kappa = "867b6706a79b5c574f30a8adfb6ecfc77a63fc13b373e95027f7190de98101d0"
+at = "Rng=u32"
+embedded = "7de94d7f567cc714ed812b96921d039effcc568c0e32ae481196bc9679a4cfb3"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "fastrand::mul_high_u128"
+kappa = "6e084f354954ce013d90437ce29de76d31c5bdcf7927b05281eed2d31651029f"
+differential = 7
+embedded = "554eadc05db6e154b76446482b3dde474880d744806e1631282b0e110eef536f"
+status = "translated"
+digest = "bff86fd600062c15eeb29251376fab4b5a94c7210851dc4e935544edcfaca5f8"
+
+[[fn]]
+path = "fastrand::mul_high_u32"
+kappa = "c495e002a8eff231499538e4a0437e43a501036ad6d77362f073c1b9856b2edd"
+differential = 7
+embedded = "4ef8549415c8e1e8c12b9420185c387bd2cf1dc1b22864f5335fa0be21622938"
+status = "translated"
+digest = "785a97227cb31996e4dd87807258d46ebd18727bf638df4dc0fe74b022e64aba"
+
+[[fn]]
+path = "fastrand::mul_high_u64"
+kappa = "d0e1bb96c07b2729fa90f75f874b142f333fa788d92739c0babf7ba9fa4e0cc3"
+differential = 7
+embedded = "02797c432865ad831c19d15e5dcde3fdd7c1efcacde43d96d11e853021750e4b"
+status = "translated"
+digest = "a0e89c9522e7ed6f55d128f2821e4976650fe4ea56ef0395a7f54884dc8145aa"
+

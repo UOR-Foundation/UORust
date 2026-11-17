@@ -1,0 +1,69 @@
+[[fn]]
+path = "ring::generate"
+kappa = "3712a4c7316b25522ffbccbf960af5885af0a4dc39a9cfcdc086b19dafa977b3"
+at = "T=u32"
+embedded = "f1e082c16442a31e65bb7325741649713502b990d78cf5a416b2a8f22934fed2"
+status = "residue"
+cause = "mir::Ty: rand::Random<u32>"
+
+[[fn]]
+path = "ring::rand::<impl at src/rand.rs:108:10: 108:15>::clone"
+kappa = "b91197742cb260befdbf66d1f4f40e71df9089470be03ee45027e77e48f1481e"
+embedded = "62906ff1108743bc86205fd0539a68fac498c022acd4e48902f7a3bfec59d9f5"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "ring::rand::<impl at src/rand.rs:108:17: 108:22>::fmt"
+kappa = "b7eacecd3507bbb7ab6037cf10fd802c5362f1ecb804a5bbbb78f5b8cf0f132d"
+embedded = "d6299ca1e9467e4486f784da67e202a75174acc07c5ed95829130e067c67fc8e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::rand::Random::expose"
+kappa = "31540d432e8b80f4ce85527b60d5f2a9a89569680b537c31fc59756ed079e8ac"
+at = "T=u32"
+embedded = "f96065e2b91099d6c0450fb98896fdff157e9e0d08e7f0fd89ee0904d16800de"
+status = "residue"
+cause = "mir::Ty: Random<u32>"
+
+[[fn]]
+path = "ring::rand::SystemRandom::fill_impl"
+kappa = "70e0b3eba7d35740c52d124af111fa596edc77fc1dd69ad9dddbd8dc8b8d1428"
+embedded = "ddf114ee7eadbc99263625a80d180377f0af4fc3d4ded5825252d3312f00ae12"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::rand::SystemRandom::new"
+kappa = "00854a56101036a3157daf4c62eb6cc0811f2529951f2d703c6d1eeaa81b3f7c"
+embedded = "4f344b5ed2f93dbb5b0f2e8b4906b32f83064a95e8e7844e3feebe1a309fa954"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "ring::rand::T::fill"
+kappa = "3e0b33cf0dbbf687dc6a6814c16831dfeac5aa9aeae22bdd1f829c4a79335d0a"
+at = "T=u32"
+embedded = "1441b16bdfea5c5aaa453636e2b5438715067385efef02cd0f38fbf454f0d4ff"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::rand::sealed::<impl at src/rand.rs:75:5: 75:59>::as_mut_bytes"
+kappa = "3b47b5e18b789a4c57c1eedee23bf3d97da8e62c9ab81523c52686c32bc00c7f"
+at = "N=#usize_N"
+embedded = "b9852aa8dea811a97ccc3dd99e2823ffb211700aefd743eb811057ab9305c7e6"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeFull"
+
+[[fn]]
+path = "ring::rand::sealed::<impl at src/rand.rs:75:5: 75:59>::zero"
+kappa = "988ef84f84735ed9d4fb5fc5eb2496cf9fa68205848d873658667559a1b01599"
+at = "N=#usize_N"
+embedded = "66de9d264aec46cc54dc82da14ebebcff3d345481005c9e903dc6db1dc5f5004"
+blocked = ["Rvalue::Repeat"]
+status = "translated"
+digest = "a13af9d9ad7af3901f0cadea605f4aa3966d95d93ad5b71cb205c0de74cab9c8"
+

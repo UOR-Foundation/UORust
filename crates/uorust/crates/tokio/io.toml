@@ -1,0 +1,645 @@
+[[fn]]
+path = "tokio::AsyncWrite::is_write_vectored"
+kappa = "31c4278c417983f2488b06db229e9a0523f70f13a90c7d68835bb5172aa15900"
+embedded = "6e521fe599d61b0afc034cdb9f04ddff6c574189e89be17554b2ec6783674e2e"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "tokio::AsyncWrite::poll_write_vectored"
+kappa = "f58e13c39c694181d9e5b37ab418f6d2d78d09dec38271d7ee033fb4e4e78688"
+at = "Self=u32"
+embedded = "c89b1735e1d278837bc7fe7096a305a6e7f5ea4d0536da640ba3393e916d826c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_buf_read::<impl at src/io/async_buf_read.rs:81:1: 81:63>::consume"
+kappa = "c205f26cf3826d951cd424f6ac9e5ef681ae9eabc6407d8b4ad7e413b260519f"
+at = "T=u32"
+embedded = "324ed7c746d63485c0b2ed33f9c64b9293a7c258af45971707431454a28c8630"
+status = "residue"
+cause = "mir::Ty: Pin<&mut &mut u32>"
+
+[[fn]]
+path = "tokio::async_buf_read::<impl at src/io/async_buf_read.rs:81:1: 81:63>::poll_fill_buf"
+kappa = "d34f0ff0ebb59dc995791009b0fa5b2e074afd24f16b282101e8bb93daf74857"
+at = "T=u32"
+embedded = "469b1b8c1d0c5ed1de5a114c8a2e5cf1e0546d89af23650b34d70ad16ecd9dd1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_buf_read::<impl at src/io/async_buf_read.rs:99:1: 99:28>::consume"
+kappa = "4f452b68b2e0d774e51f5ac03e8c11f41c129470a1990c1acb35250761389d28"
+embedded = "f363d853db0ca0a1f7dc88bffa7e6b9d7914dcc56c06c5ffdf1d61b39894620d"
+status = "residue"
+cause = "mir::Ty: Pin<&mut &[u8]>"
+
+[[fn]]
+path = "tokio::async_buf_read::<impl at src/io/async_buf_read.rs:99:1: 99:28>::poll_fill_buf"
+kappa = "848f64bd1c201a7577b4f67a1e7d30e33eed799d55c240d27a054971e8fa4752"
+embedded = "159c8a53a5c41d3f4b7c3569e207f3eda1538e9cabd696ae7b4653c3b0d2ec92"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_buf_read::Box::consume"
+kappa = "3060f5ac12119b332981761c6ccc91801be43d70bd3e11cee564da7ec1846355"
+at = "T=u32"
+embedded = "7b93f464d152d758c23f19c33964e6d90d676a537a29471814aa7c5c8d513070"
+status = "residue"
+cause = "mir::Ty: Pin<&mut Box<u32>>"
+
+[[fn]]
+path = "tokio::async_buf_read::Box::poll_fill_buf"
+kappa = "e06e30746beeaa7ea79c9b0a7bdbb73ff1f38ec5bd4bf94a586dae6c5e26e6de"
+at = "T=u32"
+embedded = "8cf67a3d3874f51155fcf324c6a7f10ee522bb4be59f92a507a6cc11bce0d37c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_buf_read::Cursor::consume"
+kappa = "f95b424194bca2148a9b41cfa3781f7724214e39aac999e91cacdd81647a2978"
+at = "T=u32"
+embedded = "396e31e59b4ff9d76e079a281ab5937fec9a7157dda0c70e8b9081d908f6e2c6"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<u32>"
+
+[[fn]]
+path = "tokio::async_buf_read::Cursor::poll_fill_buf"
+kappa = "3fbcd0ea8557716c7967b2b225a65279e4c362c4b3040065bdce9c35e30ab49d"
+at = "T=u32"
+embedded = "5c53e2663a7b770cee6fa6f26e4e51cb044f58cb1295187b49265fc44c285377"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_buf_read::Pin::consume"
+kappa = "ff22bb93fe15035a424b60f8f0f41b928f55681fdd27d9543fe8c6c64470190c"
+at = "P=u32"
+embedded = "f1f39b96f505596ff21f1b1fd64d147b7d4feaee871af7e47758a3429a37eadc"
+status = "residue"
+cause = "mir::Ty: Pin<u32>"
+
+[[fn]]
+path = "tokio::async_buf_read::Pin::poll_fill_buf"
+kappa = "b59413be39e6635ddb5a892437e2b14241f7273bef1b18527ebd94235d7b39ed"
+at = "P=u32"
+embedded = "8e926012dca6c10b6ec4ab58b347341ab2d63003b6c728de602511f10cd792c7"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_read::<impl at src/io/async_read.rs:78:1: 78:57>::poll_read"
+kappa = "f9ead488bc9ca00108666ca1b0b0eef028a80e909b3fc3f4a7414d1f386d3786"
+at = "T=u32"
+embedded = "afc547cecea4893cf721ee779bb1028a2c90d11a9d17a79a554eb9f9c2ba9c99"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_read::<impl at src/io/async_read.rs:96:1: 96:25>::poll_read"
+kappa = "79a47d5320e79e1110147e5492099c1a79ba23c8551eb69ed0751cc0b8929724"
+embedded = "90fe25fecb869ed38221c542175782dd4c8ae1b42e6c2df9879d533d82a3fdcd"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_read::Box::poll_read"
+kappa = "04abb626df02cceb4fe8551b65ac42fc47e4000e06b4a66441bd2413fa98eb16"
+at = "T=u32"
+embedded = "e8d42f17dd49c9a4aad51706fcc604e9aa2b6a6c3a6c155152107624b66e7c0c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_read::Cursor::poll_read"
+kappa = "929ceab98ebd3b34fb25ba833924ce78eab4c3993498027b0fd54fb6abd8307b"
+at = "T=u32"
+embedded = "c94490dbc398085b3a1bd4af15d628a01c11aed398c9a737142d7d6effba6aa4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_read::Pin::poll_read"
+kappa = "6b0b00f2cb23d13407b77e1fc6df710987dc91072df34a67bc3337f963636107"
+at = "P=u32"
+embedded = "d84c055f92343781ecd0d4a156496a4afe05ac56468dc6008e486b229ce5c442"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::<impl at src/io/async_seek.rs:71:1: 71:57>::poll_complete"
+kappa = "1aff47fc83db4886bacb8c0603090896d2ae0925677037d142e541a80f022f92"
+at = "T=u32"
+embedded = "38f60aa707546d85d45db69091b53588306e56c88b8aaf9d3c39c4f399cbe938"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::<impl at src/io/async_seek.rs:71:1: 71:57>::start_seek"
+kappa = "1a78b0d545fa29de482321938711aa42dffaf10532f177edd42b2089fb7dc491"
+at = "T=u32"
+embedded = "a1b53a211fec1def7992a4d2f814626ace242a5a61daa4c74fe22b085a663029"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Box::poll_complete"
+kappa = "0d8ff22f16a87993b4b958068361ff72ffe9578bde9aa43faf55ff481151fccc"
+at = "T=u32"
+embedded = "e8df4d2636dc6a1109f6a51e52af8f553ac3d8396d5cd298a6f89361485e7976"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Box::start_seek"
+kappa = "0d6a1f5721733d71a89a74d93064c24741365a018afb5b752582446a4b5ca84f"
+at = "T=u32"
+embedded = "9901768078c8c65e2c2ad2c1722c259a395427730e3d057f648ba41f3bac6c61"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Cursor::poll_complete"
+kappa = "4e16c2f1e5fc21526a1b3713151d50a832086dafeffe9b3e625ca88bb2f04cfe"
+at = "T=u32"
+embedded = "f9eb181d66dd168692d85a7876fa1c2457f391d03f1feb03f1995fe63a1ac3a5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Cursor::start_seek"
+kappa = "0bb8893415b4a67ce3e5c41e8a964b875895716c3054a89ba0e55ca74e24c814"
+at = "T=u32"
+embedded = "de63a35a64d51be652c273220d91de729f232e2ad639f4231bc7930d8b3d9ab9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Pin::poll_complete"
+kappa = "92c18051d7f0eb0b8a8bc0b478d9010a90dc7b70642f897d5cac3ed588e48541"
+at = "P=u32"
+embedded = "4e4e7f7f49518c30131ad6176d5b58105ff8485a629b40b2a288136a6e87eb7f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_seek::Pin::start_seek"
+kappa = "076c2c8ccf6a891c22a96179e82f52e7b4cdd92f3239947d4af2d608c6dc666b"
+at = "P=u32"
+embedded = "8c4054d3e2cace58ee27b4b1a9a7d09903dd9ab08f8834c3626f6566e6262e05"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::<impl at src/io/async_write.rs:215:1: 215:59>::is_write_vectored"
+kappa = "803c7b1a81f8bdd490fa8a72a6e555371e2f03aab2e95518758dae247a395bc7"
+at = "T=u32"
+embedded = "abf1625c1ad0a7bf1800af4b1f13550f9bdb24e4ce89a44b619c1cbc251f035a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsyncWrite, which u32 does not implement in core"
+
+[[fn]]
+path = "tokio::async_write::<impl at src/io/async_write.rs:215:1: 215:59>::poll_flush"
+kappa = "f6f4c4610f67328547131575b93c1142b20c8bc780f1ba4a32cdb3437c662803"
+at = "T=u32"
+embedded = "53e29df7c40d2d4b4512bfdf7bdba08021d3b8c91ea26e5a1dd9e6f0e17da3dc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::<impl at src/io/async_write.rs:215:1: 215:59>::poll_shutdown"
+kappa = "b2a58b021012719fad009f7db2b2903d19d2362a506c7b44350bd623acd6263b"
+at = "T=u32"
+embedded = "978d94486b03bce6c9bf8e2ccbd58182a0da968d1276d1de61a7c44c68a224a2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::<impl at src/io/async_write.rs:215:1: 215:59>::poll_write"
+kappa = "b219932f44a093a25a6e4ad23e3792c527c13c29bc49d08a8651f90bd72838e8"
+at = "T=u32"
+embedded = "d7cfac4986464a417e522a6d051c383a91b74c776efff2165796cf6c503a46db"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::<impl at src/io/async_write.rs:215:1: 215:59>::poll_write_vectored"
+kappa = "b7457c822515889328f60ec2c12cf341d243194c6e198cc6c3ce5fb38fbd5452"
+at = "T=u32"
+embedded = "bb9ab3928e379cbd75dbd14990cdda4261ca609a298e1601c50941d7535e9337"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Box::is_write_vectored"
+kappa = "de7e2c15b71ea9018d3133cc4175e85259885af96347e3e1273002fa96d533ec"
+at = "T=u32"
+embedded = "f98bac270323f0c753d1065489b7a16450f20e7d3322264ffbc8541a47238f06"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsyncWrite, which u32 does not implement in core"
+
+[[fn]]
+path = "tokio::async_write::Box::poll_flush"
+kappa = "c98be289b9b8cb844b2c6cf5122e168f1dcf9958a314c64638b76ae9ff9547dd"
+at = "T=u32"
+embedded = "8cf464c80ea92e79a62385c2d078e7c163debb8840b370d3578339da95618b56"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Box::poll_shutdown"
+kappa = "164712c366715fa8f97f65009c94b33b705d101f330c51f2264cd1cfc7d1d676"
+at = "T=u32"
+embedded = "b424c195d5118469536c5737311bf72bcb0eb2de9d60f84048857e4d5ed49f8f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Box::poll_write"
+kappa = "04e26c674380416435fe78698fb5cdc121786452d6f0bd500938cb36f85e22ae"
+at = "T=u32"
+embedded = "3640bd87ce5a87adb59e63f29713e02fb21b150ceb94da7829f0ed4741f917ca"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Box::poll_write_vectored"
+kappa = "2aef59387229ee964cc15a51679ee63a4ce824df5015a9620267b9e057af8a63"
+at = "T=u32"
+embedded = "0e0def8cc15189b7bf817b232ab4bbe7a03f12e2ae2f11422dbfd72620a56450"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::is_write_vectored"
+kappa = "01e99cd41dee4855da5bba3b860bee7dc910f853db91252ec9bb5a309e4aa671"
+embedded = "f581f820a3282e710cc1ab14a5537774598125e1a06bbe295e2fe0615e52e949"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<&mut [u8]>"
+
+[[fn]]
+path = "tokio::async_write::Cursor::is_write_vectored#2"
+kappa = "454762924778b72803215faf7f75a3c0df2049dbb8a4b6c9c59b50700d126f94"
+embedded = "02a63f8d633b7f3bfc5436cfd327e613c03ca411db3d4bde6311345a6322a85b"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<&mut Vec<u8>>"
+
+[[fn]]
+path = "tokio::async_write::Cursor::is_write_vectored#3"
+kappa = "520c605ee2bc937505068d8d7befbeeaa60a8269d1da9d95a85b6bce8d598a36"
+embedded = "8ca778b99e0765b9731731757a087a9892435943f0ddee202833831d3c96a0c7"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<Vec<u8>>"
+
+[[fn]]
+path = "tokio::async_write::Cursor::is_write_vectored#4"
+kappa = "8ea2576bd9e5ba7975ca999fd7bbc96b667bcc19876b38e11db00a56c5c9f303"
+embedded = "a194097b7a4e1d00426b297020b4e07dd0d58126777a7806c6d3235f4091e2dc"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<Box<[u8]>>"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_flush"
+kappa = "2770be9a335886572e044f95a342fefd86b96c03003811e96d25a5e6869ac812"
+embedded = "9e568499f6c02c51e8a9ebd2249141c4f130ae7562b3f105490d8eda0d31ea32"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_flush#2"
+kappa = "bff0b6a5487776b5b2813a9d47d3f11a72e1675b8ed65cb2153edd146fb9ff24"
+embedded = "531ccdf33baa630505d8c69bfa816ed39716e7ccf4d48fa377552046c48c9d69"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_flush#3"
+kappa = "f503bd8c84d5b24b4ee94e087deb2ce9f9813f4dc22b1b4d5a20b486a8e3e93f"
+embedded = "02ca1346c1320e59529dc21844596250b6ee2d0000356068c10212882c306a1b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_flush#4"
+kappa = "fae5b7077df57c5fe74e2c95f63cbd42750e6cc98fb02eac70ccd2bf6a791874"
+embedded = "5c1bafe64d3e9663472f67f71002d1148be2ab8387a75e55b2d294cdb63b6638"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_shutdown"
+kappa = "3672adb3b9ce9fcef77bdded5a695a6cccfce659bce5938bc89fac4310ec657d"
+embedded = "763863e2a3002fcec42d9f687ab6a23a1961c8cc0658c715a3fd0bc130ee2d4b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_shutdown#2"
+kappa = "6e358fde35f485bc4e07efd8b49702d59270ada912715b9cc255126e3c03269a"
+embedded = "a6299098aed943616ea1515ac42379797b8431c67ef472102fe8c56292269f26"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_shutdown#3"
+kappa = "f940e57e30860a7abdc3ad4fe585a81a1e29f44efaf35bae472643a2c92092ba"
+embedded = "7da8c07fdee330f10de6ebf638c675440cb7e3c7262c1ecf990a5cac71af8fb2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_shutdown#4"
+kappa = "747ac728e1c2dd22d507bd018b3f955cd6948de6e756baa5065e2fa7119cf16c"
+embedded = "449a7c989dea4ad1c31dcc2a0b26d9d4f09a862e4c67dd9d9278c8484b8a7535"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write"
+kappa = "61ceb553ed313f0cb588e772aee73192f897ef53dfb392439f8e2d3d4530679a"
+embedded = "47bf62c841b5e9b3dfb0f5ecc020f469bc51098ce5bac60cff97e811cc86bc6f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write#2"
+kappa = "070d37380e2bbb9e7185d7539cfada0d1cbbde65c08fdab0a16de743e7eb9188"
+embedded = "e2f429b86d9fcf0ea398f064e3d0279c133e43f69a5c09d01d8e9fcd9e92aabc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write#3"
+kappa = "55c664ce57419386430eb5941a0ccff099eae110ef00949f91bd4f98a7013cc8"
+embedded = "2e85075e49ab2dcfc2e2fe2a4221c22282a3bd8adf036c6082ae6a8d280bd755"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write#4"
+kappa = "d063917cde214f9781d3882386a1ea46c97f83678122813328cf1d90a2dd4dd2"
+embedded = "53baca06ba17b84abd58a0552f184b4cc21b6b0cfeacdf5f6cba90692af593b9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write_vectored"
+kappa = "f08c249327b749656c4ada785a6b27fec744b9e7b21c0d32853d260b18d32b99"
+embedded = "8d715891fb1a14619cdd19af5da0f513f11bf1e1efbed792eba7673483075f0e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write_vectored#2"
+kappa = "b102a71731909df36078185edfdb1da7c7466dcac9bb7f5aa61c34c789d9921d"
+embedded = "ad1e5becd98b72e4d196d0a3ba1d5147a90f130d69537434d8f1932d0a2b2d45"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write_vectored#3"
+kappa = "2af6f10a49d3bb75e8602592d57bed834e15191ce43e09e9bab55079db7a13a3"
+embedded = "7bc741c87128caa4d2abafa074f2ce397c826da171d826cee45b9e35a7497d18"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Cursor::poll_write_vectored#4"
+kappa = "3d5d5498ae14a38183d42ac1e41375fa95febe2b55c049098b6bff59c3ead7c4"
+embedded = "8ae6868032cfc5e03b88278edcc1c220f0eb09ee5aa85a48b53013ddb1810140"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Pin::is_write_vectored"
+kappa = "33fff351e4e97251835ccb7fa155e6d996e948b55fc9c659aff19cbda14d453f"
+at = "P=u32"
+embedded = "e92f6a12474fa77add2f0a896fb3746f587d0c2474ebca6f942e8b346d845f6d"
+status = "residue"
+cause = "mir::Ty: Pin<u32>"
+
+[[fn]]
+path = "tokio::async_write::Pin::poll_flush"
+kappa = "9b367157e7f0ef65a3152878fe6c498535af21dda431a1807bbfa259d2479c89"
+at = "P=u32"
+embedded = "557d516f37e37bc9a6487d54199ac9cc1c40a8dd044d13a711625d7c3be7da96"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Pin::poll_shutdown"
+kappa = "2c508b8eb67f76c7a02dd3b7960c8acc2fcdb1539bc19bb67cfa104582ede2cd"
+at = "P=u32"
+embedded = "6b4b4597f93625418fb6f35ef7b306ff1425e4a098c5ef88fc2ed04c865e0070"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Pin::poll_write"
+kappa = "8683ce9d6c1bdc302fdb38d88bbfd48b762a2e2958f68b8682f607971c5e091b"
+at = "P=u32"
+embedded = "d1e7e67527b805b59d219cdd960bb71ba104aa74748f0118b0dbaf3942e546d6"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Pin::poll_write_vectored"
+kappa = "1b72f0a4ea941c9b06b3f729679ec41700a12589b6b44dbb646d350bd258ba2e"
+at = "P=u32"
+embedded = "6302e3efb7ce3683945f9ad4512eee5e4d49c8aa7fa604d2dfc7138b8c19767b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Vec::is_write_vectored"
+kappa = "e11fc62039e05b4a7d7ef173a12f10eb454e09d616b7d4c48b51d29b5251170b"
+embedded = "7ff81b358c41d6934d55c86baf1421441c4109643b826698c59288529f6be979"
+status = "translated"
+digest = "44cd8327850b57f8c9b7700c5ebf0c19ac6526b49f81cacb6dec885a39e8e715"
+
+[[fn]]
+path = "tokio::async_write::Vec::poll_flush"
+kappa = "ff55eeb183df552bfbcdb214ea5a07f9e896e15e5c2960f386f5775017ef3df9"
+embedded = "b26fe674000e509751ea4cc98f5058fbe41216913f6dbfdb0ac9d5962d061c8e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Vec::poll_shutdown"
+kappa = "618a132cba626fd6f99397d5ee88a43cbd6faf4b0513b38865469f6643c814ca"
+embedded = "8232a95e59e69f46039588202f08f78291f63bd4ad48bf6da703897bae36e8f3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Vec::poll_write"
+kappa = "2bd63da5950b6504aaa41bbd6953cf0f216155efb56915009d01cc6b3aca4a96"
+embedded = "4e8104307a4db93bd56dcd97ae776a606e82c658cb880db1ebe398c16d6c36d8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::async_write::Vec::poll_write_vectored"
+kappa = "22e8b43f7b3b07b09568208e407ca28faaab5521ce6929480786605e5c7350dc"
+embedded = "7d032759ee0d1df7168dbb4d97fdeee0e57424982cc09ad22f9cd11241116388"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::advance"
+kappa = "f657640296ffda83b73571968554eaece449c3678d8ef23fd826a77d09f07884"
+embedded = "d4a93adb50f4c15fc0efabc7e6bd44157b84acecda2f3ca3e0b89887bbf942d2"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::assume_init"
+kappa = "d7488cf9f14f42d919390c816c646f71a0e77b3365e67ea0644969bfd5bfe101"
+embedded = "d2edc345ab766b92ab3017315664882c7ad960c217ce5d89d1f7344747d2037c"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::capacity"
+kappa = "c2c012e4e1d16059019a94b8c90e0a0a96c43b417cc1e71e23564001becae335"
+embedded = "166a6bb8c6af82200e6d288c8afffc23c3b6a953ec799ac9fa642f3570db098e"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::clear"
+kappa = "5d4597f90db157b6333da336ac797d0646a44131fd9458081fa584e7574a72e3"
+embedded = "3c260359a14b615cfe1c8c954c56b2e1d39385e193eea583b88a19eb4ae40fa1"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::filled"
+kappa = "d905a285e7b04c9438a1be5a7a15b4f3848993aa27454badc4a8394bbeb8aea1"
+embedded = "cfad8bcfd57c37dae45b9a69ae1ace408a2700b65f0a8121f9d15e50fa295cd2"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::filled_mut"
+kappa = "02016d762ee96e70b29b2c9fdda83103d91b39c41d1e24537f4645cb0f863b66"
+embedded = "b6a2445eb2c9bab97ffd8eb0f77ddb23440e54cc70775abf701c58206692fdbf"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::fmt"
+kappa = "63a260f81a7da9c671a5c757c9b8ab4da874c75a4c88eae1f6dddd41e7d24585"
+embedded = "8cfbdc4c96b1ea9215fc219ee4c2cfa93d3b0ef01a0e20835a94841be8c3f045"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::initialize_unfilled"
+kappa = "68470f1aec3860cd336e7751a561a211fe27f70461b49ecdd3a30576667180df"
+embedded = "b03cccc4befc133dd6a5074353da306713824657108e739837d4a79859cea3d6"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::initialize_unfilled_to"
+kappa = "2eb7d177fedfafed06a37d97f80e8c6fc056438193830b47fa242312d4adec91"
+embedded = "a2e143e1fb79e7511da917618eefceddf827839ac62e5f633072d0b1b5c50351"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::initialized"
+kappa = "8c8de81d531d817cd2391d2c9ed1a9b971c7f6824537ee325ff926688fa0aeac"
+embedded = "ca5fde4dbed6c3b6296f5443ef9ac253f4bdfebf247674ede4749115c96b5c2f"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::initialized_mut"
+kappa = "8698861da64c52fceb904b881c0534aefb3bf5dec7496a1e0826ebc20393c937"
+embedded = "b736b20ba367904f2978b8b7b0c8b850778891aadd1aec6d9f9aeb9e21bb1772"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::inner_mut"
+kappa = "2f11ef1dc9c681962f54cef3251bfd7f728f3641ffe7807d394d1bfb5ac6565d"
+embedded = "749ba72effbd99c0a369bf9c6a78646a1312b330b91e7271fe85d11860d0cfcf"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::new"
+kappa = "bd6b91e9df5913410c243ff075173d7dff0fa2d8a8bf92e4e9f5beb205e9832b"
+embedded = "00ea8919d012f7e4b040fd70dd54d362e3f43be556c43b4f042ab9d746bc0378"
+status = "residue"
+cause = "mir::Ty: io::read_buf::ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::put_slice"
+kappa = "53c9466372be2db8db3bc2855dbd878c6eb07b33c46aea6daf23e6433c6c47e5"
+embedded = "ee0cdf38d7c1f53b46045b2efcdc2ee14bc5fef6d9324c20efcd1ce646608dc1"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::remaining"
+kappa = "ad8b79e15c762c0a7e9c7c39a3d2fc43565d77172e33f86824d680499849a385"
+embedded = "eb2c6001c6f5dda0fce24023b0731f3f0ad3a0722d615ed3b6a58cb1f6f8a9f7"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::set_filled"
+kappa = "144796384325510df89d4d8590a50995e657a5450743f7453ad84e1c6f7a3e39"
+embedded = "f1a94630c73bafcbc2bc35729076d4c91e3a8968000f2889c7fb0a3edc07689f"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::take"
+kappa = "a6b5a27c8698d491d9784e34d8bf23e9f3a8ebecc10a864d99277c1ec9140a04"
+embedded = "4c2f66663efa77fb77547f47110577e5434a9edc497c93f992a11db87bf2f53d"
+status = "residue"
+cause = "mir::Ty: io::read_buf::ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::unfilled_mut"
+kappa = "cd341d6ffb2ad4fc6cd1673a79c4ee4f818fc9950191023a777d8a13b4bf2cd2"
+embedded = "fca51638c757657753e6aa68cbcb60d24d400b99768f10e62ea6a2094b6f8359"
+status = "residue"
+cause = "mir::Ty: ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::read_buf::ReadBuf::uninit"
+kappa = "19e4515bc851f399c5c986062ce3a9a65d9ef12454b731fcd627f05e33cf4713"
+embedded = "c0e3dfe0bdf01a698914938b0b3c1c667d4065ef51d66af04ed7e9e59f98151c"
+status = "residue"
+cause = "mir::Ty: io::read_buf::ReadBuf<'_>"
+
+[[fn]]
+path = "tokio::slice_assume_init"
+kappa = "6d493f8e6d0d90c898e6d2dd38278483efb4e22eb17e66d33996a3564051fa45"
+embedded = "5cd7a04723535f42d84880a365b8efd212d1bbf2f00cda4966ffb562144be9f7"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "tokio::slice_assume_init_mut"
+kappa = "7deee59d49d646f5017f431a6584bbd58af8f83ef61dd85c13f246e9c25502e1"
+embedded = "3c1234aa83b5b0eed11faf12f692ef160daf596a73b0a2edc0d1fc14fd9e562b"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "tokio::slice_to_uninit_mut"
+kappa = "80513a5a7fbbc8bdf7d78b13e930734f8db6b6efaa3b54d5a8a29cb0435cd860"
+embedded = "4339043114f922c07a772960929a86925844cb36a84cbc676ad3708bdde1b488"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+

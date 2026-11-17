@@ -1,0 +1,127 @@
+# The mio register (written by `uorust crate mio@1.2.5`; do not edit): every body of
+# mio's MIR at mio 1.2.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 88
+translated = 0
+residue = 88
+
+[module.event]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.interest]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.poll]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.sys]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.token]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.waker]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 88
+embedded = 88
+evaluable = 88
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: event::event::Event"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Interest"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: interest::Interest"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: events::Events"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: event::events::Iter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: token::Token"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: events::Iter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poll::Registry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sys::shell::selector::Selector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Registry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::events::Events"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poll::Poll"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: selector::Selector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sys::shell::waker::Waker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: waker::Waker"
+bodies = 1

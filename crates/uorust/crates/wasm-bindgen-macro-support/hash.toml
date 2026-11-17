@@ -1,0 +1,37 @@
+[[fn]]
+path = "wasm-bindgen-macro-support::crate_mangled_symbol"
+kappa = "2a184b3639a31c3493ab81d76411fcaf1c068fde5f85b6cea601136e67f6a160"
+embedded = "b3fd2be3b890ce337d0522b646339fde6f1c9413cff4986f82bb61e914eb80c1"
+status = "residue"
+cause = "mir::Operand::Constant: hash::crate_mangled_symbol::promoted[0]: type outside the lift: hash::ShortHash<i32>"
+
+[[fn]]
+path = "wasm-bindgen-macro-support::hash::<impl at src/hash.rs:16:10: 16:15>::fmt"
+kappa = "555afa79aa5cd8d2fa0549eea68df1a846f5d19acc4b897588290d06f9286a62"
+at = "T=u32"
+embedded = "3778e1d7903d280126ca4c6cb7efc794349ac68f6d134333ecb54f40c5a999e1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "wasm-bindgen-macro-support::hash::ShortHash::fmt"
+kappa = "8f622fe3736106895343ea27c3a2a0fcc9b7f45d8e0069cda79e7f0d1664fdd7"
+at = "T=u32"
+embedded = "a6688a7d3b553c9fdf72d8bfea85b3f3bddfa694e2292f1983a173b670a42c66"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "wasm-bindgen-macro-support::module_mangled_symbol_prefix"
+kappa = "b73e7bdecd7ac542aeb47fc9ad2731d549e87ee0de4388ce34e34ef6eeaead2f"
+embedded = "f5a5ab8e5f3f559dea4304a82b465fecfe4d815e9ae0531722e8ee06f8af4839"
+status = "residue"
+cause = "mir::Operand::Constant: hash::module_mangled_symbol_prefix::promoted[0]: type outside the lift: hash::ShortHash<i32>"
+
+[[fn]]
+path = "wasm-bindgen-macro-support::unique_crate_identifier"
+kappa = "0b6196150f3d5245b8ac67159319abb6a38facc37448d400b852848049d9cb52"
+embedded = "7f68673e8896633db8e3456d73da2391984ac85b2dd08bac0b18d4dbcdf74c2a"
+status = "residue"
+cause = "mir::Ty: std::env::VarError"
+

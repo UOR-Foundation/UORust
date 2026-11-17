@@ -1,0 +1,95 @@
+# The find-msvc-tools register (written by `uorust crate find-msvc-tools@0.1.15`; do not edit): every body of
+# find-msvc-tools's MIR at find-msvc-tools 0.1.15, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 41
+translated = 0
+residue = 41
+
+[module.find_tools]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.tool]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 41
+embedded = 41
+evaluable = 41
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: tool::Tool"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: find_tools::Sdk"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TargetArch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VsVers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: find_tools::Env"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: find_tools::TargetArch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: find_tools::VsVers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: find_tools::find_vs_version::has_msbuild_version::promoted[0]: type outside the lift: find_tools::StdEnvGetter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Sdk"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn EnvGetter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1

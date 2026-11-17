@@ -1,0 +1,40 @@
+[[fn]]
+path = "rayon::split_producer::SplitInclusiveProducer::new_incl"
+kappa = "8d060136d82bbd2fa5c0e5da59f4f9275b38d5024d5301f66b51755a2dfb7df8"
+at = "P=u32, V=u32"
+embedded = "613310e9cbdb43e07e27cf63884ca07c7ed6aa4c97837b93d927d8a170334df6"
+status = "residue"
+cause = "mir::Ty: split_producer::SplitProducer<'_, u32, u32, true>"
+
+[[fn]]
+path = "rayon::split_producer::SplitProducer::fold_with"
+kappa = "c4ba5da3264370eb2ae204a0ee2273ea73ead60550c425dd62326fd48c2ce605"
+at = "F=u32, P=u32, V=u32"
+embedded = "0386e760c5f101953596ddceecbcea747c462aee8bebf2edf3eedb99f9385a28"
+status = "residue"
+cause = "mir::Ty: INCL"
+
+[[fn]]
+path = "rayon::split_producer::SplitProducer::fold_with#2"
+kappa = "920054fe10f8789c97885e061aa37de328bab71719bccb399cbd8ae587e6e282"
+at = "F=u32, INCL=u32, P=u32, V=u32"
+embedded = "3002f185930c84212b040f5b6bbee8f6973844e235fc51831de5b3498263d333"
+status = "residue"
+cause = "mir::Ty: split_producer::SplitProducer<'_, u32, u32, u32>"
+
+[[fn]]
+path = "rayon::split_producer::SplitProducer::new"
+kappa = "663bb77b36de48eda0e3254be679ee6b73f03d4b59a2184c351de616c9ee5213"
+at = "P=u32, V=u32"
+embedded = "7a9717cbdd4a61026aa547dc80a3d46bd5ad2725467baec32a167048ee22f8c7"
+status = "residue"
+cause = "mir::Ty: split_producer::SplitProducer<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::split_producer::SplitProducer::split"
+kappa = "75f5ac04fe00987857cd2cf10d429bbff8b061107b6a84c2a0e65cac5a3e5d8a"
+at = "INCL=u32, P=u32, V=u32"
+embedded = "cea268b6d2aebc13113ccdd4921f2fd023e1a80c9dd61b816bf437e026bbedd4"
+status = "residue"
+cause = "mir::Ty: split_producer::SplitProducer<'_, u32, u32, u32>"
+

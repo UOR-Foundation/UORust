@@ -1,0 +1,1118 @@
+[[fn]]
+path = "h2::DECODE_TABLE"
+kappa = "78f2757a23a0e8e6208b5fae5a8271efae5151cf62d94effc81d0ebc3be0927a"
+embedded = "634b1f9feff0fa2e86b81cd2bd43a3beaaa9b45450b3153612393cadcb075819"
+status = "translated"
+digest = "e7155553ddaff1d47e4b5dbb89a05d1571d24dfc2de8f6d015a023021f5a5cd9"
+
+[[fn]]
+path = "h2::DEFAULT_MAX_ALLOWED_SIZE"
+kappa = "ced39f0421d58220cb53a40e3c34e256f94d8637c870d67e69963b5a71777c9c"
+embedded = "1aff1633a2768f46fa9bedd5caef3e7143e12b06496ee81f92175d3b2842d245"
+status = "translated"
+digest = "f1288e4661730a05acb832be9ad67178ae6fabb84b4eee31cd2cc775046375fa"
+
+[[fn]]
+path = "h2::ENCODE_CODES"
+kappa = "7b8312cb71cc302fb9a12a97477a2079fb5b2a22090a3ce36c27ad339bf6d665"
+embedded = "c486d60d119475964d6a47fd3d801f7f777edd1050baeaf6c8ad8a02e69791a5"
+status = "translated"
+digest = "51630b530c5a4facccd0c725e8b3ddc0b583d563d7ba56d9c9873d7fa3da6e62"
+
+[[fn]]
+path = "h2::ENCODE_CODE_LENGTHS"
+kappa = "3e658e7ad1af6f1153760ea77b62a520878215503f8102705ca48a7fa6340e44"
+embedded = "a5b2d0be076273d4ea196704228b9c71f01f44fe47ec3d748f37b59b4ce3cdae"
+status = "translated"
+digest = "fc3fd42f08211a25bb8757ea563736db3d5fb8a278f336a1894ab9fa40e950f9"
+
+[[fn]]
+path = "h2::FAST_DECODE_TABLE"
+kappa = "8810b7549bd4835870f081064458846e1d4add95c495bece1c33f2d634f381ab"
+embedded = "f9baa9ef5fe5888f921f51efd67e5303261cdaaccda6a37467ca7112e5b6a276"
+status = "residue"
+cause = "mir::TerminatorKind::Call: hpack::huffman::decode::build_fast_table: h2's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "h2::MASK"
+kappa = "529ae984f2e9f89d257e376bea70039c034e76175f2a7d3f9d45350b2c65b53a"
+embedded = "ad176106244b88b95d97c9cea72f1794e296665242176c8af3032e49a177e5f5"
+status = "residue"
+cause = "mir::Operand::Constant: hpack::table::MAX_SIZE: mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "h2::MAX_SIZE"
+kappa = "99c7c24609accfc2eced32430635610fa03132a2438d723e566db13ee57bde2e"
+embedded = "8369e478f1ff899f5623b8f0caf9b415c97b4822032e68728c6a4f06c877c3b0"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "h2::build_fast_table"
+kappa = "ba3b75d841ca3655598360e3d05f6e4800d377c567e8ada29e9ede012ff2991f"
+embedded = "adacc7e3c79b587e670da840cfbf9be03dc4f513fb5e92b8df0334993a8ddaa3"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "h2::decode::decode"
+kappa = "9d2275316a1598b52d67565a7715e270e8c8cfe5f56e27b2da454f44ccbcf215"
+embedded = "a4ada972bcafff0d91781e041c99daffbca163833598cc503477a9a9ce376242"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "h2::decode_code_slow"
+kappa = "f59ef736f715459a5ca03a974bbb0fc516504a8e108df89362e29d2e395f4771"
+embedded = "480b69a6291a08f53f627d52023655ed8dea436d38255f7e2574394aca5fe55f"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decode_int"
+kappa = "175e0ce7e551808337b3f55c90e74fbdcbf75cabf855867b84080cb41e8befaa"
+at = "B=u32"
+embedded = "7ea9778924453e21b8229f95f8dc9ee52213368b50c05b0bb04a34b50cb5cd8e"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:139:10: 139:15>::fmt"
+kappa = "86a09f826b8e285d1e1f0f59fbb5852d36caef44b6ed56473bca16fda3d81ecc"
+embedded = "68e583903b5b9003bd4e34f6cbc87be81680e073766854808b1ca0e47d8cf9fa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:16:10: 16:15>::fmt"
+kappa = "913588976cfbf7951dbb91fa76100385fab3debc88b01c9b69e50fbad12e5a01"
+embedded = "4ba458ee66bb2e1c318ca2e3b2cd9d7337cc0ff612716269b5f52f21b9a3c6d0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:27:10: 27:15>::fmt"
+kappa = "aa97a63767b3a9cd88915b907f21e2ce0e16295ad5f0ede060c895a7684010e0"
+embedded = "d23953bb3d254412ade5d9fbc5208ae3864347a0f351701bfadbfa1d3538b335"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:27:23: 27:28>::clone"
+kappa = "9307b70807c75cf716afcfdc95ab5041995f74ed534b091a98b6df8b4e6594c2"
+embedded = "1fc31800807389e02c47077f7d988b68ad0ca47e60d0aea9ce44bc1f1dd0adbb"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:27:30: 27:39>::eq"
+kappa = "160e0cd26f8fd2bdbc3efffe0a8a06d79afb2b6100e3b118b30385cfbe270f45"
+embedded = "24b6a98d1ddac1b3dd2f89ae23938609e24dd0c3c8cbfc87329aa43dc2d38a95"
+status = "residue"
+cause = "mir::Ty: DecoderError"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:27:41: 27:43>::assert_fields_are_eq"
+kappa = "0bbf4ee25e0cb4a6a7b4a8589175af7deaa9ec131cb585ab7fff0c7fd1ddf953"
+embedded = "4760595e7c627ae503fd6297286518d5086143052c1e50ea4d51ef1080b6e38c"
+status = "residue"
+cause = "mir::Ty: DecoderError"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:41:10: 41:15>::fmt"
+kappa = "e554e33574a8118d301668d67f975cf8cb916a6a33bf838f42a16f80295f386f"
+embedded = "b7a846edc9e8e03b16159bd4ebd6bdc8077c5123975814f1cfb9ca754d688730"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:41:23: 41:28>::clone"
+kappa = "ae76773d2a9c89071f022579e6ed1777444b33e9af8076b60b9d4a996ca05839"
+embedded = "f01bc4bd8b6d6b52b0d3a47b82c9dc5481535d0da21a63d7d1cf5d926afa435d"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::NeedMore"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:41:30: 41:39>::eq"
+kappa = "83fa1aba7c05a2f544cc9c0c95dee3a6c31294f9815de4060cdf593ea6f5c438"
+embedded = "6ba432023df5900333a3c33f4998b8795d513477ddfa6dc61a4a1b3022c0afe5"
+status = "residue"
+cause = "mir::Ty: NeedMore"
+
+[[fn]]
+path = "h2::decoder::<impl at src/hpack/decoder.rs:41:41: 41:43>::assert_fields_are_eq"
+kappa = "6fb95c0f91bdd51beda7fb24980c08cce9a2a2b75fd0604bbd880c20c99d57d7"
+embedded = "99086d4dd01393db7053a1f2caff8cad904315f29a0b89434d82ca1bd48c6363"
+status = "residue"
+cause = "mir::Ty: NeedMore"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode"
+kappa = "82e1794fb22af7b033731fc1bf4e5d007938396ff4e32701c0b6e96e2fed4cc2"
+at = "F=u32"
+embedded = "cde349e29290b6277d0d3b1a313c70cbd0e3dc55b0c894f55864b3bc0ea9fcc2"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME"
+kappa = "1acc8db117c3e87b9b694830a0ee699f8792208970d317366ae2038bce4366f5"
+embedded = "8d7714d53355eaffaf189cf8d0c0189acc5047107a6555a8e014a31d78a50b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#10"
+kappa = "072431a02ed391db93a3328ccf1ee5b6968f70a865babf31ad1e376eec53a0d1"
+embedded = "ef747932c3ca4b9e52e41d0d8c5dcee7ff0d9dac2b36187a136725f6ec67b295"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#2"
+kappa = "072431a02ed391db93a3328ccf1ee5b6968f70a865babf31ad1e376eec53a0d1"
+embedded = "ef747932c3ca4b9e52e41d0d8c5dcee7ff0d9dac2b36187a136725f6ec67b295"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#3"
+kappa = "1acc8db117c3e87b9b694830a0ee699f8792208970d317366ae2038bce4366f5"
+embedded = "8d7714d53355eaffaf189cf8d0c0189acc5047107a6555a8e014a31d78a50b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#4"
+kappa = "072431a02ed391db93a3328ccf1ee5b6968f70a865babf31ad1e376eec53a0d1"
+embedded = "ef747932c3ca4b9e52e41d0d8c5dcee7ff0d9dac2b36187a136725f6ec67b295"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#5"
+kappa = "1acc8db117c3e87b9b694830a0ee699f8792208970d317366ae2038bce4366f5"
+embedded = "8d7714d53355eaffaf189cf8d0c0189acc5047107a6555a8e014a31d78a50b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#6"
+kappa = "072431a02ed391db93a3328ccf1ee5b6968f70a865babf31ad1e376eec53a0d1"
+embedded = "ef747932c3ca4b9e52e41d0d8c5dcee7ff0d9dac2b36187a136725f6ec67b295"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#7"
+kappa = "1acc8db117c3e87b9b694830a0ee699f8792208970d317366ae2038bce4366f5"
+embedded = "8d7714d53355eaffaf189cf8d0c0189acc5047107a6555a8e014a31d78a50b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#8"
+kappa = "072431a02ed391db93a3328ccf1ee5b6968f70a865babf31ad1e376eec53a0d1"
+embedded = "ef747932c3ca4b9e52e41d0d8c5dcee7ff0d9dac2b36187a136725f6ec67b295"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode::__CALLSITE::META::NAME#9"
+kappa = "1acc8db117c3e87b9b694830a0ee699f8792208970d317366ae2038bce4366f5"
+embedded = "8d7714d53355eaffaf189cf8d0c0189acc5047107a6555a8e014a31d78a50b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode_indexed"
+kappa = "ecd2b7b3f388ec39ed530093da02b526ed00886e08004f901ca2284b8166269d"
+embedded = "be2d57974a6cff8a80b77214ff2fdfa592d6007af36cc815410b551db2045884"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode_literal"
+kappa = "04c66e88c30bf9158e31ad53912dbc5aed83981235ff34d9af9c552575aef91d"
+embedded = "ad19221e29a1e5bbcc959cbe6795e7ea31c74c4316c0cee6d26731fbadb5ad87"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::decoder::Decoder::decode_string"
+kappa = "11425fb34f4d43b48ad31d8d60010ed1c0f9fbc4cde4d509e858ffa66aa67c0e"
+embedded = "4fdb5fdf2430c05d8be9138c3f340e384148c0cd7f8c1b4abddc98acd030143d"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "h2::decoder::Decoder::default"
+kappa = "96c7ff522d544b2a5526809d91b3a5215dd17740318e40f7aa5155a7071a58fb"
+embedded = "3d0c065fa5d66a3c3d4c3bf6c31d0a2b3e14dea03c53ed4d68a14d6a1ace9c58"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::Decoder"
+
+[[fn]]
+path = "h2::decoder::Decoder::new"
+kappa = "85dd68b6ce41be8be5860af455d5a6824dcb58cf8c82306dc8a7f16daa120f8e"
+embedded = "50543264a541ba8f79a0676176b2748c07c5aba7ffe49c9f70573c4e693ace84"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::Decoder"
+
+[[fn]]
+path = "h2::decoder::Decoder::process_size_update"
+kappa = "9eb93217b42dcc730fe116518cdc8b33674cf1a7a58cf15e0bdd4b154083a44d"
+embedded = "bedb04dd371ff96c423a104b387430e5d7fec1480b839be8d0a43ac8a8d6e5bc"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::Decoder::process_size_update::__CALLSITE::META::NAME"
+kappa = "0690c1b9cbf04ceb581cb780cbd5b93b95b20cc8a3256cb90a7f707143c99c8a"
+embedded = "aa7c4351ef42a042e3b87aac1eed680ff0790829fae45cd6484cf87204f0fc3c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "h2::decoder::Decoder::process_size_update::__CALLSITE::META::NAME#2"
+kappa = "558afc0c36d75c49280cdb4167464b6b8c51dfaa276e90ff29e3d362c95d0e7e"
+embedded = "341f43e7ad174ca4851b9d1e26b63a7639baf7d1e94a02b66a46512bc127dae0"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "h2::decoder::Decoder::queue_size_update"
+kappa = "768e8e2aabcc493b1256a8c1a3c50c91985cedea818be9a2d1084402e3eaf6a7"
+embedded = "a0a19746dfefce599c7a59d5e3662f08cbade325fc6a1ac14bb43c91a2d96161"
+status = "residue"
+cause = "mir::Ty: decoder::Decoder"
+
+[[fn]]
+path = "h2::decoder::Decoder::try_decode_string"
+kappa = "a3b364553b1284d2d96781042e021bca38690c56ceb94a01b738319f514f9587"
+embedded = "e80365936c18d6e022e867c6fd461e02731bf01e83ad954181775464bbd5c07d"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::StringMarker"
+
+[[fn]]
+path = "h2::decoder::Decoder::try_decode_string::__CALLSITE::META::NAME"
+kappa = "cc0263682c981ed9d8bfe1b65cfaf8a847eca1931eb35ff5da479e0a6b3c0739"
+embedded = "82f9ada556dc65249452ed04047ff50e35f8a537b52e82bac56ee54b2d919b02"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+
+[[fn]]
+path = "h2::decoder::Decoder::try_decode_string::__CALLSITE::META::NAME#2"
+kappa = "3b29d808c1373f8efb0745b917224e5c69d5e8b8b851a51ef674585eca6ed58d"
+embedded = "133bc429b9bd8173100d13287b0c2e4de7b9926604a671b412bbef3f8c2ada0f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::decoder::DecoderError::from"
+kappa = "4f0a7547eed73aa79a1858d8c48ea2a708930e0e8c7c5c7254567d581250cfb4"
+embedded = "d9301202ab0e19492827f279a2dc0f6288d4414d15949ce1cc4a47d3cf790fb8"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::DecoderError::from#2"
+kappa = "4323891fe05f2839f9352e9b5588dd87c2eb729d8a3379028ddb3b381bdf7787"
+embedded = "4fc54df0bb6144413b5ee4204fcfe9190361c5bfec579c45ab79e94cc9f7d361"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::DecoderError::from#3"
+kappa = "7d5165ba583b43e8e8e2db0be51b9000e01efb0b9c0a151dffbf1325dff379dd"
+embedded = "986d512fc3f4872076cab390f5251e722f69c54f763f33ae33be824573143861"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::DecoderError::from#4"
+kappa = "32e7b72b2c3624ea9126e6b5874a3931b23b40985802d7e8f4ac26f71bc2bcfc"
+embedded = "ac03bcc2db4d0561b1f73e9f6596bd71431332ab987a3577a893af6ef11d79eb"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::DecoderError::from#5"
+kappa = "8239d6c35430ec6fd0c67f1725b996bff82e7e4400ec355aac93b519484e943a"
+embedded = "37e464a75d006227492b039956d1aab2f1208bd32fcfd6ce1e97ae77337e6beb"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::DecoderError"
+
+[[fn]]
+path = "h2::decoder::Error::from"
+kappa = "0eab9e334da822ed3c423442b4efa4a653e3910b3049bb48998037e44240702f"
+embedded = "5ace511c19770fa60364305064b5eefecc330d773d4e4f3560977d65c1ab763f"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "h2::decoder::Representation::load"
+kappa = "07835663e42102e51c3c340862c0601eb0112c5b105e74275bffb38d3c0d225a"
+embedded = "fbdbddb966bdfb8231f41d15523c3dee986920453d583df4582a566eda8a17b7"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::Representation"
+
+[[fn]]
+path = "h2::decoder::StringMarker::consume"
+kappa = "b4be9c6125b653a58a52ef45fcdbd96198a85105a26bc20ecb6879a2ffe186a0"
+embedded = "62fb89b61bd192889258029134735fece98cb8dce1dbcd6f7adf2a637b23cfed"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "h2::decoder::Table::consolidate"
+kappa = "180db89d40c648f352aced05a55df1fc4ca1e02aa603ec2257e868e654eb2b8b"
+embedded = "f3d82f94531a9e7a15311a4cacae69baf14cb2ba7d176f27923d8b977ef252dd"
+status = "residue"
+cause = "mir::Ty: decoder::Table"
+
+[[fn]]
+path = "h2::decoder::Table::get"
+kappa = "64d5a154409b67a343c3fd9dcc46ebb7663f32b7752369bd0e4bda74aadc70d4"
+embedded = "7ce9e19429ce860347c10d0f60f8dfd29e5673059ab12c744de08fd5fba96adf"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::decoder::Table::insert"
+kappa = "0cda65d21184ddb433d5d6dc0c5d68e13e863b31a8bc46f54a0d253455bc8840"
+embedded = "0a9963203bfb3f7afe4cf09f1f8a9e04f44687b29dee47a999ec0e60e08a4b72"
+status = "residue"
+cause = "mir::Ty: decoder::Table"
+
+[[fn]]
+path = "h2::decoder::Table::new"
+kappa = "d131574084bb8bd2e9cd66b5641dd45c9b1b455d2acd56c75d4100c27a6d3c1f"
+embedded = "0185e2bfa1fad55207b6b545eba3c43d1f319579c499a2e7f88f9ca16b27653f"
+status = "residue"
+cause = "mir::Ty: hpack::decoder::Table"
+
+[[fn]]
+path = "h2::decoder::Table::reserve"
+kappa = "a3a74dbdc77efe12e2810a03e1d12df64b44b881b5fb99d7bf38e7f2f8701640"
+embedded = "e42d6811b557e8cb6068fe8a7a25df95cf67d132b4aab48011ea2bc55a68556f"
+status = "residue"
+cause = "mir::Ty: decoder::Table"
+
+[[fn]]
+path = "h2::decoder::Table::set_max_size"
+kappa = "c716a34c7e77816b20de7b91dddfc2729011403bb26a8cf0615d403982045888"
+embedded = "a92368fc97fc97e3137b5b92199928281d4f5a374cce67503bc3d3ecb878905d"
+status = "residue"
+cause = "mir::Ty: decoder::Table"
+
+[[fn]]
+path = "h2::decoder::Table::size"
+kappa = "4d35253a69db6385d9d33444ae021e4f5069b3a18ff209824661a3f1ac0d7701"
+embedded = "9524dfd3cad30ef08737738072104b504b753267ba84377aeeef8e4f87c7abcd"
+status = "residue"
+cause = "mir::Ty: decoder::Table"
+
+[[fn]]
+path = "h2::decoder::consume"
+kappa = "ada61d7fa2dc43d6071846faeb750b99e8b04d07a94db58d1b76577a839079eb"
+embedded = "a3996b39882833d5b847e1ed0c3b17cb80f58c74ed62ffc1ef7e46c723aa84a8"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::decoder::take"
+kappa = "d6e8611e8226c7a46e404da80feccb78af372b302737e54e62f7b2d8db751e4e"
+embedded = "56fd841aa8189a18069b10b41bddce386ce914b8dc3f93a86fd23c199ad652ab"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "h2::desired_pos"
+kappa = "d6b592c4b3fa6ca42603505f68055abb200cc7efa4c078a05bf2f909e26fc26d"
+embedded = "7e8956e33b9459881a4f03ad0301f50c9a45ca62cf29c02a77fd8e3e3f73f76b"
+status = "residue"
+cause = "mir::Ty: HashValue"
+
+[[fn]]
+path = "h2::encode::encode"
+kappa = "76c54f1ee5f19b81432ff505a640f67c90fdc94db9ec5c282454f5ab7dd4da54"
+embedded = "b4044f31b01f39f4d0542265d65bf2fb4dd6e597cd606457d2b15ebf81f9aae5"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::encode_int"
+kappa = "fbd93fd7e7f20919c5e5a1caac4a5e1e11eb04cd3e771b5d899cda35bafdbdec"
+at = "B=u32"
+embedded = "fb3367e8ad79eeccb935f5cae4c989c81cef60bda90316475761f17005c236e7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: hpack::encoder::encode_int_one_byte: h2's MIR stops at mir::BinOp::Shl: on Nat and Nat"
+
+[[fn]]
+path = "h2::encode_int_one_byte"
+kappa = "7ec3c062f030eab3dc49592ad5dda3d5d8a4b16760d27b9f37b0e04582184975"
+differential = 4
+embedded = "8bea51a543f3630bc5e6c59fe10f4425e56e13a3d78a17ddbf5948fe5ff19f74"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and Nat"
+
+[[fn]]
+path = "h2::encode_not_indexed"
+kappa = "7e549da6668bfa82fcfbf7939658f076e42cc1bf3265fdcb4cc79f6f1adab43e"
+embedded = "bfa23722e2419bd7812e9e6d2faefc22956bade093ef15fff3b139e3be4b2e8e"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::encode_not_indexed2"
+kappa = "6650cde5b8e34463e608731ac4e0c4c8f28481c56871681ade9afda6535ec6b9"
+embedded = "f8c1056ee4d013a2189bb9c8233cb11becc9ce36b22fdf60596099bf92317ff8"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::encode_size_update"
+kappa = "1f741496a4a88ab40e11a853c08175db1a041b0aedca4570487d7b16431c3f98"
+embedded = "f77a364c4540e380ba4b22daeef2d0fff1addec7301b961da562107d76b173c3"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::encode_str"
+kappa = "da7798f52aa346dd9531a3a8f44cef7f22a56d92b88e40b18d8c3c2f6814eb0a"
+embedded = "ae2d568e848789cf90c65897457d919dfc60b7cd540c41047c01741c00217880"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::encoder::<impl at src/hpack/encoder.rs:23:10: 23:15>::fmt"
+kappa = "6a986985d7a0324a56696e88124d38c59bc6e828639419c485b777a2b2e885ca"
+embedded = "739d9526fe89ddbbb20cf8e6691ce1cc31ebf9e9f3428f7ccb8f5775f56ad99a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::encoder::<impl at src/hpack/encoder.rs:23:23: 23:28>::clone"
+kappa = "358b3e6e5cb98d862d613304a5c9d252730cd4a2a204b796be36894448e679e3"
+embedded = "e32bb620f381b08931469565f85d46be35717fa35a6d39cf9ba0b34d535425ba"
+status = "residue"
+cause = "mir::Ty: hpack::encoder::SizeUpdate"
+
+[[fn]]
+path = "h2::encoder::<impl at src/hpack/encoder.rs:23:30: 23:32>::assert_fields_are_eq"
+kappa = "171fe5a559755ce1043f169cfb7ab9cee552de45387af7bb653ea22ed4492ec1"
+embedded = "1475dc88fb502b8139958cf32c91a9dcd08e550ea59282263e5c89e0669d9cab"
+status = "residue"
+cause = "mir::Ty: encoder::SizeUpdate"
+
+[[fn]]
+path = "h2::encoder::<impl at src/hpack/encoder.rs:23:34: 23:43>::eq"
+kappa = "8798ba03380829d37af0efeb51f18d1b626e571e4c6a7d13d68e9cb142b1bab2"
+embedded = "f6251495edb1bc7792ca27ac39c35e0ced47a644051ce2feb10d669c52269b1b"
+status = "residue"
+cause = "mir::Ty: encoder::SizeUpdate"
+
+[[fn]]
+path = "h2::encoder::<impl at src/hpack/encoder.rs:9:10: 9:15>::fmt"
+kappa = "f97de5dc35cc4a24033c45d510a590c88e7083ea76507ab89bc880e11f4c735b"
+embedded = "96fd415d7a8e26c8da6cbc407eaf3ac5e4c438380fde5a96fcf17326a3a0456c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::encoder::Encoder::default"
+kappa = "e370d1f9862509c1325590ba07cbc9d06aa6e7db29a638d620624014c63c5406"
+embedded = "b87eeef3418db6482d12f06c7f5f44d28a7b4dacd144c801982ab6687a4933e3"
+status = "residue"
+cause = "mir::Ty: hpack::encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::encode"
+kappa = "aa62b63ef12c450ef4e8e6d104ec244c76f7ca63bb00d4df5cf417ef02bd87a7"
+at = "I=u32"
+embedded = "95b87302b5f476c8d13596285bf3442de569001578551d7d827e905c5f13aaef"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::encode_header"
+kappa = "022428ed12d024cd61f940f213bf44963c46b5b305277f3a1a6b7b59308463fe"
+embedded = "99a20ef447a6a7cca9ead6ab103704f7121b0ba5bc432f5bf60fb4d8c6fe1dab"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::encode_header_without_name"
+kappa = "12876aa871d7ae1d9011225e857f4d7f3eb3d94acae447ffdf5a505dcf6cf52e"
+embedded = "9f9201aa612e0963773d6c9b37ab987258d34384307211efff45b0b2e20ce9b3"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::encode_size_updates"
+kappa = "92122c3e2f8b0dfd561f8b126af59415ca58423605b0504e366f932ee6e1e113"
+embedded = "0e3e3f9ad4da9df0802206afa10eeb6d9b93d24f7bc87f37ee451a6d23ca5906"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::new"
+kappa = "9f8537284e0a181225488bcc984ca9bf2b8726c05aba6ad3c3530755ed208e17"
+embedded = "bd95234eadef7adf0de48cb437c07fb9c6290690b8cf4cfdda0cce5aa3570a37"
+status = "residue"
+cause = "mir::Ty: hpack::encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::return_scratch"
+kappa = "1ecced177b8d7c0078977edeb43adc45f413c9e01cd086898602e94f0fa9d306"
+embedded = "8fa321406f3f667e85027a9ac4743068407f353452046e57c8b5926c2c409187"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::Encoder::take_scratch"
+kappa = "42b1c5459b2c928d6dd669e6fa8d41e2afe3e3433dbc112514d1c2a30dab5615"
+embedded = "8c9a6abf566872bf888194ff586cd6489b31a93bf1346b22a2ecbff0854b2227"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "h2::encoder::Encoder::update_max_size"
+kappa = "aa9c943701d55442c9ef546acd8e159622c99eb254beb6d9cb856476ccaca5db"
+embedded = "5b511da96960d3caac657d0f31719fb03114ad2db8bcc6b024bef1ed7bb0eb60"
+status = "residue"
+cause = "mir::Ty: encoder::Encoder"
+
+[[fn]]
+path = "h2::encoder::position"
+kappa = "ebb0481014cecb9e506da5beb86a18b319fe3bf7d47640a2b7af85387a26f4d0"
+embedded = "632e5424d16afc99940b78c87def1a2ae333d48704eee85075410d12df64ae0c"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "h2::get_static"
+kappa = "28abb4f9bbc36a78df7bf2de05bb394b1d6b40aca73dad26aac656f727e47975"
+embedded = "3a7492945d64e5435a6cb4b54d1809317d19c91806499dbbb1cf7a22daa852b8"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::hash_header"
+kappa = "3c3d0a5efa22cad376032aa74206ae35d82345a02cebfdd116220d0f22c2a0bf"
+embedded = "c82e0295798973a2542edd8290056028c6a19df0ac8c3cb03afe50a3b02bd302"
+status = "residue"
+cause = "mir::Ty: hpack::table::HashValue"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:10:10: 10:15>::fmt"
+kappa = "4ead2504e98c03c670bae6e22dc4467b9de2d09d10eeb20b3d3c70dfb5322032"
+at = "T=u32"
+embedded = "40f4bfee5cec3429298377d15d75b5358015fc0b5b20630995676a1e0aedc658"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:10:17: 10:22>::clone"
+kappa = "7d2a5d5e35bf76b4c628c466373e92acbdf4933aaf0e155798cf715e1c3d5342"
+at = "T=u32"
+embedded = "e0d97036af1f50a1e083f1c6b245a44a59f18fb04c6a2be93a701cd4efc99aff"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header<u32>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:10:24: 10:26>::assert_fields_are_eq"
+kappa = "e88ee62bee819de99f27004f9d0f2e71098da36ef9ed497349917e7e8e66509a"
+embedded = "5a6ad58408d6541d7b27e9aafc7cc5d938beeaf5986a06ad44c56b86d78bdcfd"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:10:28: 10:37>::eq"
+kappa = "063b8694df52fa871578f572ab84b6241da9371e86c13c100ee201f096e6778a"
+at = "T=u32"
+embedded = "299f3182a289984438a7020a125a30409383bd5a41ec490d60acf31749847559"
+status = "residue"
+cause = "mir::Ty: Header<u32>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:23:10: 23:15>::fmt"
+kappa = "24022b02a7835d11d1100cd7ab1cd62bb7899b12733c5f85140db8b5d92654d1"
+embedded = "c6f21eb2093bdd22b839756919a825ce11966192927894572a511f5e1886caa7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:23:17: 23:22>::clone"
+kappa = "311f59a04ae2383adb365caf97a95f4d4323cd3c3ebcb575f07b8cbaf1405ea0"
+embedded = "af5c9f2ac38f6413902de530c831246dbfe00354adce863f55ab3f30fb2db98f"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:23:24: 23:26>::assert_fields_are_eq"
+kappa = "c5114d2fca9c210b261df6ab3d83d74b9cb21bf3f990ca0539dc8a68b6af3be5"
+embedded = "c29e5bde99a709d05f16acccbce00f134ebd1156f82dcf54b96e472a95c08cbd"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:23:28: 23:37>::eq"
+kappa = "4c76b14fba8553e22e7aaa2a1710a6035af2ef2fbc4d47679856c28c5c972a6f"
+embedded = "a8d0c9b9fd35befd824c40b5e30ddd1a4af0d8806a99bab7e1c23b72e6ba58c4"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:23:39: 23:43>::hash"
+kappa = "d5277b591e936eba8fa5fa7ac2bfe47ab0fcc52be0c10c9b0bb4ecb5b6c40128"
+embedded = "b434ec8bb5dd27590bcc2a282dd968cfa9dc36bbb3e7cab484451e8756cd8ebc"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:35:10: 35:15>::clone"
+kappa = "615f2307c28b3a35add28966636f20ee620340e6fb8fbe3e22bd16d2435bfae3"
+embedded = "c94a4bb5f1d220b89127eb7645276acdaf6ece593002b3c6198d37c35cf21044"
+status = "residue"
+cause = "mir::Ty: hpack::header::BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:35:17: 35:19>::assert_fields_are_eq"
+kappa = "de108b77a0c890d3e20c16c2594f590b14f46e1178d99b875ef59b25837e9b1c"
+embedded = "72a080877796665d625297fb3a30ad32d6a4f9846bc75208ce7fc75cd0cf1e28"
+status = "residue"
+cause = "mir::Ty: BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:35:21: 35:30>::eq"
+kappa = "ab1451d50d388092fd6b41c39a9cef162c456ac40123fd13f18a7d5b900da8dd"
+embedded = "4110711034e3135883f9eb1569896bbca7d93776f84e4cd015eea7325d104da7"
+status = "residue"
+cause = "mir::Ty: BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::<impl at src/hpack/header.rs:35:32: 35:39>::default"
+kappa = "0919624d2fd1f5e5822e564e128614882e1fe68e07143c50834ee050320af543"
+embedded = "66ad1e4aedf01bcdb04e1c48f444af7229cc87621a789e36ec7749323a010d13"
+status = "residue"
+cause = "mir::Ty: hpack::header::BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::as_ref"
+kappa = "d5d9fc6c3926c91f8b8472bc029ab436ba367f7ef548ee24cc66a25684d1f6ae"
+embedded = "88bd8dce580c34e746e2982c44b2833c196e7aebabb57c5858de512161f13809"
+status = "residue"
+cause = "mir::Ty: BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::as_str"
+kappa = "98425d938d9cb11275ef486ebaea8e44f260494c4e173398a2ef2936aab29c60"
+embedded = "cba8706df2c9cbf0606e6d56f54178cef76c53a93914716eae66ab878acc4ca1"
+status = "residue"
+cause = "mir::Ty: BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::deref"
+kappa = "1143188788fb9e9669a8e1daa19de2fc28972ecffb6bf2380dd69bb741ae993f"
+embedded = "e52d38156c0845e1f5cfbe55ba9f8e44a5c6006ccdca2a5145fd8f09bd4391ee"
+status = "residue"
+cause = "mir::Ty: BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::fmt"
+kappa = "0abbaf7a9dd225a36b780add6912126b3a5e878d3079e0dacaf02c5311a8bd46"
+embedded = "c5b6d3dd7cb28f447f6cea878ccc1c11dec960bedeb4a38f2c6fe73762600fe1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::from"
+kappa = "639c25a8654a3ffdc9685dbe57ed938f84c7795c4d24a2b0965a38ee96ce89cd"
+embedded = "e7653d12d81b122b95457e6d59c643ae6f39541ed73f1d48eacfa20026d8900b"
+status = "residue"
+cause = "mir::Ty: hpack::header::BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::from_static"
+kappa = "6e78c008be3aa8a52faea40cd891bdef66adb219e1055372225ec762276606bc"
+embedded = "508e6baf83aee706a732affe9e324783898460aae3a602a94ba57c849cf927e4"
+status = "residue"
+cause = "mir::Ty: hpack::header::BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::into_inner"
+kappa = "dfedd8a82d4c740846d35b5fae555f1598f912a6a6636337a1d7f56bc2174843"
+embedded = "9f1b3c6fdab9320ec3cbcfd8592adbf37a93faba15649fa61075ea89c366b32d"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "h2::hpack::header::BytesStr::try_from"
+kappa = "a0ae2783314678ced89f5a6579e7cae58bfc21de6e09d4f7c5fba3db9a16259c"
+embedded = "dccdec67418008b721abd911fa4eb702f636d7fb89ebd78e724ef138b19701cb"
+status = "residue"
+cause = "mir::Ty: hpack::header::BytesStr"
+
+[[fn]]
+path = "h2::hpack::header::Header::from"
+kappa = "409387bda67901d00251086b541e627e715a385d9814fdb7ff9ca5edad9d26fe"
+embedded = "8a186e105de3becadcd7eeb6d3315d8567aa3af716fcb52120ecb47fb35b5f1e"
+status = "residue"
+cause = "mir::Ty: http::HeaderName"
+
+[[fn]]
+path = "h2::hpack::header::Header::is_sensitive"
+kappa = "c6723f32e9aef093720be7855b9c7f1a96b383129c36acfeb282fb6d8eb4cf87"
+embedded = "917984f666603568527960e7161eede20142abf478fd980b25c19d0f8e8b4450"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::len"
+kappa = "2e24335bc214b536ef8cb2d6bf84e125ec04b65af09e4ac4cdac89c383a2aed8"
+embedded = "209e438187263afab9d64cfd396b37f4e14ced6b50153c403cedff4b620a4f9a"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::name"
+kappa = "69ce3dd000c0576c3eccaba1ade1fafc3e18ef8d1672e92d301a87a6eaf571c1"
+embedded = "cbeefdf5ade63dbd78c6c11f70b02bccaf6913485399bdeee4c0428e2f1fc1bc"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::Header::new"
+kappa = "119f0d56f5f5a8544a1628fa22c5909a64804fd70776d86d579a9d040e7e86d0"
+embedded = "1a1335441f0c906e92a3215dd64d754d8c55c7eeb7b5b8c6df81eb129a29ee33"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::reify"
+kappa = "c375e6e0e5e0bfc2c2639dbee6399236ddc4cc64eb365985393f8f5a3a939868"
+embedded = "59a51647b539ae0848f5a1e5661f5e02deff605a05769ff7015a81087b624cab"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::skip_value_index"
+kappa = "1dfe7bb8a6ee1109eb86a9d2251305b59d84f6932f1893c029657bf9a272c9c0"
+embedded = "49e724b0e99a2275168b06b4bbfa5db13cb4cfed9d587fd8df6a2dabf3e58d28"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::value_eq"
+kappa = "b44325f155476fe7eadc131db0741910a9e7ddc1f376ba66672456cc56715167"
+embedded = "d79de15d778c4d3afdb62338e59e98c27a1b8ca7534a8893f50af6155b2765e9"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::hpack::header::Header::value_slice"
+kappa = "5d8f08bc357c45fee2cc2bb0cc794a290112ec93383ef304ce53e5de8a746627"
+embedded = "d17f1cb823a0a373dbe4b3dc830e1c9d843f9abe4ff975b7d09edfc15620949f"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::hpack::header::Name::as_slice"
+kappa = "8f80dd59cd6fadd14fa4d3392e1db9688726681a03184b3239ad26738e98b522"
+embedded = "8c17eb12bba5cc52b076ad01872077f8ea84ccf0c4660912c6d5c3ca20a5287a"
+status = "residue"
+cause = "mir::Ty: hpack::header::Name<'_>"
+
+[[fn]]
+path = "h2::hpack::header::Name::into_entry"
+kappa = "381127e34f324bc768389a6470dc3ddb6308277979cbb0b1f2a2570939c9e8c7"
+embedded = "c4113b0290e57a31585ce30415f096f0dbdf4034afcaded34dcd4028375b30a1"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::hpack::header::len"
+kappa = "e599f01c1a6e7f82ece4f58290ce57f34340eff70f1d36c5c8c073b719e49029"
+embedded = "e2ebcccd94d98e94976bd44b104ecbf41397975edfdf58dc4abd41618c602719"
+status = "residue"
+cause = "mir::Ty: HeaderName"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:12:10: 12:15>::fmt"
+kappa = "20659b56311b2da1ea364acc38c6978262951f6772246bf49c4d2d557e954c39"
+embedded = "5f531eb7963c4707024267d129c676a062813d83e8ab480a81262cb99399337b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:23:10: 23:15>::fmt"
+kappa = "2ddef06446fb7b915a67e2ffa3295c1041b6c3b97279b7dc64d8c84a7c0b3f85"
+embedded = "028de3f747dbb9867a4115acb703c96a8de1125b8f8a6b361235e9efdc095f3a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:41:10: 41:15>::fmt"
+kappa = "509906bf2bde19032a9cc98681b1e326d54208335693d9936a917257881d5eba"
+embedded = "d482be5dc2e8ddc604a3c6fb78bfcb408aec4695e4b2090e7abca3f6c14adaa0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:48:10: 48:15>::fmt"
+kappa = "3c8543993b88901e7fc794297cf9bb959c8abfa62984d7de4729a469484b697b"
+embedded = "0d6380acf90d4d90d5f33d68df4ef2e585e5673e96e1ca49b4c2869bb8fc10dc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:48:17: 48:22>::clone"
+kappa = "bd421ff88e1e0d2f3b4ec2f1eafb978573795da4279d8f42aefad5f484322618"
+embedded = "5f3effa5afa0734876ae2171fe560ed57e8b88f877a3251c3742f3121a90d4fd"
+status = "residue"
+cause = "mir::Ty: hpack::table::Pos"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:48:30: 48:32>::assert_fields_are_eq"
+kappa = "b4ae32905301c2870dc27a1d33b46eaa1028ac506a88d34fcb663299ef2e817b"
+embedded = "46907e8e175f59fdf9a4627487e5acbae397162ba41c05df809d20da630c4bed"
+status = "residue"
+cause = "mir::Ty: Pos"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:48:34: 48:43>::eq"
+kappa = "cb4251fd00a6776baf7b1c5559da203cef5f024ff0a3b071710d6410069e14ba"
+embedded = "ca269447e4e1e8d252dd1e43c38dd50f56552e8039dc1c422f9892afeeeac420"
+status = "residue"
+cause = "mir::Ty: Pos"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:54:10: 54:15>::fmt"
+kappa = "72311fab0178a31cf927b42cad7b0de705f439b03fb7a43196b04b1e3fbeb09d"
+embedded = "eb8d58fc5c8f8d1ba900c1eed2ca316e3dcefc547cb0ab00c0561254d99a4814"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:54:23: 54:28>::clone"
+kappa = "6c8813dabe71cd500b9791f0502b17c00edc183c1ea034bcfc05ebf187eac942"
+embedded = "ebce1c8d63b83da1c235e50f4c858ed3b41c98f928342e929c26836f466bd661"
+status = "residue"
+cause = "mir::Ty: hpack::table::HashValue"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:54:30: 54:32>::assert_fields_are_eq"
+kappa = "702202c7a40f8928d3b3509689aaa19c8469e757e77402ee7649f5c4fb294b25"
+embedded = "9ae7fbdc37d0e21df085af17d965b88d438b2dd62d8575ae16362098a16ef694"
+status = "residue"
+cause = "mir::Ty: HashValue"
+
+[[fn]]
+path = "h2::hpack::table::<impl at src/hpack/table.rs:54:34: 54:43>::eq"
+kappa = "7f040adab6fd5f115fb3d9a3d572e9241f450e3ea6166f3a9e6d6d86338115ea"
+embedded = "1776696f52bb8de9f4bcf9441517fd30ba151afabf2538ed73b06de15fae5cfc"
+status = "residue"
+cause = "mir::Ty: HashValue"
+
+[[fn]]
+path = "h2::hpack::table::Index::new"
+kappa = "1ce0fba817b746a8879f2614fa2acdce247c28004aca688a44fe3fa51b325cee"
+embedded = "3f0e3a68d8cb6fbc10a242d2af100dd38f090e09c61d529232f9afcbe7aad0b0"
+status = "residue"
+cause = "mir::Ty: hpack::table::Index"
+
+[[fn]]
+path = "h2::hpack::table::Table::assert_valid_state"
+kappa = "c5dd2f8c7eefb0bce46ce1010474b60dd168d1a9ba9d95288c25189ca688e1f9"
+embedded = "cc2d33ba23c452a8bd0986cf554ed222cb69210ed152ce6742ee8eda12e53de1"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::capacity"
+kappa = "08d090091bc0a8f1a8f394643be1c9ec5a242aea8690eefc6158b5bde140be82"
+embedded = "c17e9680785957a9487a51fcb2fe807800ce672bfd6097d85893add3d3750862"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::converge"
+kappa = "e6609699367f4271210d28b77175924a5b50e168de73dd682762ef64b652a9ae"
+embedded = "1fe03b75d16ddea6474b7b9801d0e29da32ef15e1815a88df417a187548b0c84"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::evict"
+kappa = "24ab918d6af5e08645cf7951098a4760dbee54b51c443dec55475b5e3fa321bc"
+embedded = "f96ccc6480be29bcc462f1be4d9ed7b6adac562ea21c24daa614f86cbf1debf9"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::grow"
+kappa = "b5f4bc3cef09a2bfc4274e7c811073129a8a9464a336b55ee72ce78e0c55db44"
+embedded = "3368f3c8a1955c9714636c4f7050bb441cb4b2791727feaf08b72a38c7bf0b05"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::index"
+kappa = "0d661cb505bc38c177fc1c63562563a1df270314145507d4c005ba312433c265"
+embedded = "a64d5192a633c776720ea95a9a8ee2f475af00f7bedca7826e0fa39fbb2c4c5b"
+status = "residue"
+cause = "mir::Ty: hpack::table::Index"
+
+[[fn]]
+path = "h2::hpack::table::Table::index_dynamic"
+kappa = "56eb47d8484115a81bef97ce5f818884279deb3038e6e41dcbaa564d99921061"
+embedded = "b2f7664ac4fbef0a51c9e1d976be4a2857a029f4a1a3ac1b19c6768b562f1c51"
+status = "residue"
+cause = "mir::Ty: hpack::table::Index"
+
+[[fn]]
+path = "h2::hpack::table::Table::index_occupied"
+kappa = "d12f9160325715b1f2979baa34b8b1f7b639e2c74603eb58ec584c41281db88d"
+embedded = "800409fc79002aabaa85bcf51ce907dbb2df68157e9e97b8dfad151c344ecfae"
+status = "residue"
+cause = "mir::Ty: hpack::table::Index"
+
+[[fn]]
+path = "h2::hpack::table::Table::index_vacant"
+kappa = "fc465a56870873bf86cfb8ff0207df6e6294ea94e5687358bac57c2bab1f5623"
+embedded = "f15773b1d9ca8d9f7ccb26f654de56a56d50350f3f2281311d26db4b543adac9"
+status = "residue"
+cause = "mir::Ty: hpack::table::Index"
+
+[[fn]]
+path = "h2::hpack::table::Table::insert"
+kappa = "9a45b96cb8c919035e2467e6272f8f5666b5d20156365b3275d73d1eea67eba8"
+embedded = "707986e855ca2564f580bdfcc12a54a45f9376ee7640de48d04098d450fb7cd5"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::max_size"
+kappa = "db1ac68da6c5a80460a397e84eebb927285a75badf5100f5ba2cf333cd0dba9e"
+embedded = "f5722a5cc550e067965b928870d1d78b7727b4e4a9ae3a0b751de27574c0222a"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::new"
+kappa = "37208e6b70d90847e581dd8a33a6420105c651dfc72d1b5a9fa076ed082bd802"
+embedded = "b8ef263445c6c50a27314a01f3c9a7c183977eae18a682d7e7bb08f0dbc1461e"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::reinsert_entry_in_order"
+kappa = "d42ab16256ef9a102109e6ce96a803a8b094a3318d306f3b67f008e22d5d30a3"
+embedded = "21a778c1b74ee98c062200be7d8cc691a5296b56afaaf71a15a4801a605622d2"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::remove_phase_two"
+kappa = "9975d1366747d735149d377dfb51d7ff6dd4b3811bff437304916924a6377771"
+embedded = "2a687fddafa591c0155390873d96a8980b944cb95fe3bd91f6fff78de91e9bef"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::reserve_one"
+kappa = "6813693ab48d0d27d4e4acfbe056d3b12914fcf6774842b5dcb85fe699823851"
+embedded = "275233833ba5ec84951f57928aa9245f2baf03d4d77be00a8a739b4e5a5bcc0b"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::resize"
+kappa = "dc6bbf45824bf21c94cc5d8df952590af7a75a2c0071f67b41bd982b64b7af9c"
+embedded = "dc33697adf1010edf0c4b398fef0b30fc55203f9884f40666c6d17ad3f011ac3"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::resolve"
+kappa = "f838eb7313057d418a663a9083ece16007ed88826b8f0de1cdf3b88e93a0c18a"
+embedded = "a4a6114ac7fae7bd2fe9ef3d6920cf08a041a02ccd6ea9351a63a6e030291f63"
+status = "residue"
+cause = "mir::Ty: hpack::header::Header"
+
+[[fn]]
+path = "h2::hpack::table::Table::resolve_idx"
+kappa = "41a8102032e2eb2e3b14f01259988be21a2201e2239e760efe90bc719d303072"
+embedded = "755acdae9baaae1cfc9304c20cdc299f1b42a01c73a377ee374eb86a01ec94ab"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::hpack::table::Table::update_size"
+kappa = "8a994677cbd1fbd7cd8cc449d6e7941cc2e86a747c890a09fb50dc9fa10f6fc2"
+embedded = "05adca0e53ea1181633f4022fe893e2d1da4a0b310ff996bf3f6113bd741d117"
+status = "residue"
+cause = "mir::Ty: hpack::table::Table"
+
+[[fn]]
+path = "h2::huffman::table::_"
+kappa = "fb03b8bd93a378b7c21028fc139ad28f43c9aeb7b6d4353721c916fce895a135"
+embedded = "6259a5feb200f2f0ae54df27281d5d180eadc56fc21eb964495d444254288346"
+status = "translated"
+digest = "596b76d296b8be779508c5a5f61b7e0d68511acda83b8e74455475a97ce31050"
+
+[[fn]]
+path = "h2::huffman::table::_#2"
+kappa = "6f3cc410d24b0c77e285980125b2639e9673847898d3b79613fed92cb1af8f6c"
+embedded = "aaa50c24bc79e8ba20bfd8fea43c0074b0615a6b45d97588af7ff303ce8ee8ca"
+status = "translated"
+digest = "eab4b76e8440d9a550ca14ed0fd6f87dccd8bae63351bd2d851827b78cfcfdd0"
+
+[[fn]]
+path = "h2::huffman::table::_#3"
+kappa = "6bbc3a1272933c5f870836d50472678e2fdc714fa8af734a9299249512164a34"
+embedded = "c29a1e6ce3fb762eaae181ce3a5ca5ff45d77e17e7aef97dd801b06f5cb950a7"
+status = "translated"
+digest = "40df36f21173c94a05992dafc4f3e6fd707f90dc11dc162a2c6aedb6750205fd"
+
+[[fn]]
+path = "h2::index_static"
+kappa = "a05f045c9c5fcb55cc4864f61a8e3036ca85ebc6c4463acfb0639be06960badf"
+embedded = "a819f9556ee012113feb9a94631b7cccd665a8d497a75364342fbe05270a5d38"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "h2::peek_u8"
+kappa = "d05c0f1da4d846f60bd44e44d1185c5d9ba6dc24b01b495835ab3cceb2da9f1b"
+at = "B=u32"
+embedded = "4a5c82335d44137699fa3ac5942f30b5a28a7033a809473e0b8e978ca904fe0b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "h2::probe_distance"
+kappa = "4296e4f56235a39d4ff2bb59995df51331d2a115a8214cc2e8c14a5d78760b9b"
+embedded = "2403ab93cb23bbe33acd53a283a830368d47d52e9b402b19974c66e83e282d1c"
+status = "residue"
+cause = "mir::Ty: HashValue"
+
+[[fn]]
+path = "h2::to_raw_capacity"
+kappa = "b10ed2db63436592d5143bc7b8d52a6603ed3453eff2d04cfc80d2f338db6e50"
+differential = 6
+embedded = "a2a29dcf49a29110d85bffac3b3971adb687994aac60449dc429899906309a7d"
+status = "translated"
+digest = "a4910e1f7df3a7c902edb9a9d14320a870b35e81e1b9e19668a04925ede403ca"
+
+[[fn]]
+path = "h2::usable_capacity"
+kappa = "3886bef12f1e5cf97f69accc3e4ae5313a9ccb65c159237253feefb1c6b0976e"
+differential = 7
+embedded = "7ba3e72926751c49d3bdccdd28bd749d85d40a3a96e81a0bfd25e488c58117b4"
+status = "translated"
+digest = "cdde3d46bd2d933b951374a45d5572503f088325a08d8d766c9fdde656789358"
+

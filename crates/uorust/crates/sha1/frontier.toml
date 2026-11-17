@@ -1,0 +1,122 @@
+# The sha1 register (written by `uorust crate sha1@0.11.0`; do not edit): every body of
+# sha1's MIR at sha1 0.11.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 54
+translated = 6
+residue = 48
+
+[module._]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.block_api]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.compress]
+bodies = 27
+translated = 4
+residue = 23
+
+[module.consts]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.crate]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 54
+embedded = 54
+evaluable = 54
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Sha1Core"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: block_api::Sha1Core"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: compress::shani_cpuid::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Sha1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::typenum::UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: soft::read_block::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item soft::read_block"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: compress::compress: sha1's MIR stops at mir::TerminatorKind::Call: compress::shani_cpuid::get: sha1's MIR stops at type outside the lift: compress::shani_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: compress::shani_cpuid::get: sha1's MIR stops at type outside the lift: compress::shani_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: compress::soft::sha1_digest_round_x4: sha1's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: digest::const_oid::ObjectIdentifier<39>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: digest::crypto_common::hazmat::DeserializeStateError"
+bodies = 1

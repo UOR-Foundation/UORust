@@ -1,0 +1,110 @@
+[[fn]]
+path = "anyhow::context::ContextError::fmt"
+kappa = "0b3a020faf5b187c2e48827c3bc2bd2d9e4fb5a45593606954bb1591fdcb66f9"
+at = "C=u32, E=u32"
+embedded = "d7a339cab3683a66a909684d72aa6e54d78d3d102139197d6561a32f2408011f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "anyhow::context::ContextError::fmt#2"
+kappa = "8927c161ec60bc18533452e43126f085fa272f308d30ae3f2d0556ac65e7b772"
+at = "C=u32"
+embedded = "a5aa1c1cd3f98b9cea77976fae44174d71692e54eb5f862460e1afe86f2cdc50"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "anyhow::context::ContextError::provide"
+kappa = "80702eb3fd0424f94f07741aabd9c5e130bbecffca1ef05625fda7a8be0b5b39"
+at = "E=u32"
+embedded = "29a379e7e7f88ac8ffb1b3090b627ab72a98555e414553c8f3e5b271b99a8b2e"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "anyhow::context::ContextError::provide#2"
+kappa = "2d5b226b3e99c6744ee10add6c8a99bab894075e8296ff67f0ad490d6cd74f9b"
+at = "Error=u32"
+embedded = "c1bda2c86dd1a13139fe0dd4e09bfcdc03f25afd2167e8166b9de48571f4d451"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "anyhow::context::ContextError::source"
+kappa = "5c44540569fbb66b8e952cd98bf5d7f011ca3f561d2961b5cb207328a3b250ef"
+at = "E=u32"
+embedded = "e41ef692d81f01a434fbb314e4793130a627f3637773bed4259fe16f49f9a6b0"
+status = "residue"
+cause = "mir::Ty: dyn core::error::Error"
+
+[[fn]]
+path = "anyhow::context::ContextError::source#2"
+kappa = "d77ecc002fa27973cbc9a581c0f77a572857a867aa5fa1020d19d3607720b9e9"
+embedded = "e45a19e35119267cb3ff8904acfe34f220ddad676e660c494a33200f6c2c6edc"
+status = "residue"
+cause = "mir::Ty: dyn core::error::Error"
+
+[[fn]]
+path = "anyhow::context::Option::context"
+kappa = "c51c7959d32dc64a7b2fbdd27e5ca37e7681fc40bbad53e53cf1599c9264eabe"
+at = "C=u32, Error=u32, T=u32"
+embedded = "2ccf229dc5ba644d19323baa17757aaee6a795894bcc4f345c813058741253f8"
+status = "residue"
+cause = "mir::Ty: std::backtrace::Backtrace"
+
+[[fn]]
+path = "anyhow::context::Option::with_context"
+kappa = "e14d69e2e10b00ec88f277fa2864fdbef4aa96871717066d05c2355110c4db6a"
+at = "C=u32, Error=u32, F=u32, T=u32"
+embedded = "98a1a9a1299ffbb3cf593a77efc72d87dc0b5200960e932a2597391a5ab7e91c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+
+[[fn]]
+path = "anyhow::context::Quoted::fmt"
+kappa = "4350457285bbf21670157403afcaef8b3c246ab9c8744c8d0c93ed2bbb28505f"
+at = "C=u32"
+embedded = "c9a9ad4889af04f03b3884067b256a53bb31cdb3ada12c6c910fcb37dd582df4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "anyhow::context::Quoted::write_str"
+kappa = "9a50d116e872acc061ac8489869de1b41919f4d2d9f17a2f0b0a0ba1964e9005"
+embedded = "bb92cf5b583b4df959fe8bac674e57c36871036108c8561f55a1909478b32cf1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "anyhow::context::Result::context"
+kappa = "47c14b4ac34263af362bb24bc0c5780db8c18c1d529a66977c9eecf29db50983"
+at = "C=u32, E=u32, Error=u32, T=u32"
+embedded = "f8ba0da475a0a32b884998def7309bf21b72984a337a096fcaf7eb39517802a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: context::ext::<impl at src/context.rs:19:5: 21:52>::ext_context: anyhow's MIR stops at type outside the lift: dyn core::error::Error"
+
+[[fn]]
+path = "anyhow::context::Result::with_context"
+kappa = "0fcd6b7b07d2052323d2e6091123c9aabafea25c8c85720ec9e6d55798629292"
+at = "C=u32, E=u32, Error=u32, F=u32, T=u32"
+embedded = "47c98fe2b6ae57bda6b1e3194897cb206bc2a2cc59ef251f9a94167257ea7df9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+
+[[fn]]
+path = "anyhow::context::ext::E::ext_context"
+kappa = "7e0aa9eb9ebc075341939ea409388a49f73e3c1d887d9a406f515c8fa465d81d"
+at = "C=u32, E=u32, Error=u32"
+embedded = "244a4d90e6c7570aff2f6e91e30c4d93fff63118f5dbbbc06453918f9b8828b1"
+status = "residue"
+cause = "mir::Ty: dyn core::error::Error"
+
+[[fn]]
+path = "anyhow::context::ext::Error::ext_context"
+kappa = "1f87a881625e4c6e1fee11befcec225c092b76e7cfa26ab15ab6aab8a5a0eec6"
+at = "C=u32, Error=u32"
+embedded = "e4deacd1d93908538ff7dba9a9fe13ed5d06554525432c3bfbf498f9697f21d7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: error::<impl u32>::context"
+

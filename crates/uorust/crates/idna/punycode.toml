@@ -1,0 +1,164 @@
+[[fn]]
+path = "idna::adapt"
+kappa = "d4e9a5c5ef944b22b43b1e97024f276f7e1baadc77065bf7d792b5c177359233"
+embedded = "321629a77b4e1d566a79e6d0d282b42a8f6cd62a9601ae2a0ef19c9c838818f9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item punycode::DAMP"
+
+[[fn]]
+path = "idna::decode"
+kappa = "d2e8d4f5dfc81acd1ff5a2623f6bda61267cf97e153a3e93f304f6f43bf25efb"
+embedded = "410fa01bf51cd7db58d85511942028e74332727e933029bed6ce14303dc65e20"
+status = "residue"
+cause = "mir::Ty: punycode::Decoder"
+
+[[fn]]
+path = "idna::decode_to_string"
+kappa = "9d86dc2c2d660241b71862599441e97ba62125f4cbbcbfc23d64ba7dd826d27b"
+embedded = "e34799e749dd3f9ce49dcee75a4fb3a1b0f56161c79e53d3e2fbd2f25d8bf69b"
+status = "residue"
+cause = "mir::Ty: punycode::Decoder"
+
+[[fn]]
+path = "idna::encode"
+kappa = "ad1fde7af0fc9b8b047e6fc236cfbfb4d63e1806264771bb230e5c7343177174"
+embedded = "1181e6ff9a5a7e5cf67bcad7d21bd9c48e2b56cc88745738e232be1d7615e9b8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "idna::encode_into"
+kappa = "a034324535a4888aeb1b68625aafc915136cf0ca843c2bba12ae2c54201069aa"
+at = "I=u32, W=u32"
+embedded = "2da654ccb1f6f6a78c30e1d9693213ebb5b0fa2a7a53fc78acdc541651047b37"
+status = "residue"
+cause = "mir::Ty: punycode::PunycodeEncodeError"
+
+[[fn]]
+path = "idna::encode_str"
+kappa = "1937868855450d3ae7361cc79270047fa36e4b88f6fa1c55cf3d9be6c422d0a5"
+embedded = "c6ef8b1ab485a9040077b2b6dabf7b683081f719f45eb503c3f1c10c951820cc"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "idna::punycode::<impl at src/punycode.rs:159:10: 159:17>::default"
+kappa = "79ec03720a2b604d9bd3137e01a97212ec949b61b0a316b4fbc601e82aa13135"
+embedded = "a5a64f25062d2b733471c23ca26fdf65bf22ba1e7e892cc75bb236a37b9d2da6"
+status = "residue"
+cause = "mir::Ty: punycode::Decoder"
+
+[[fn]]
+path = "idna::punycode::Decode::len"
+kappa = "062b2f75c57bfcc801dbbfa2499705d4c50cc9d96d5c2bc11fb0e006cdf7ef5f"
+embedded = "ee02df2dd0e53712eeddaec41b4f3af0b3f8677784cfe75411e1c62bbb99f261"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "idna::punycode::Decode::next"
+kappa = "36ee74907ffa18cb834a1131c0e5039d2f2314aafacacfdf00f0c9f685176aef"
+at = "T=u32"
+embedded = "b3bf5c37b223913cdb4505f60834ca48193b5993ef4862c33f67a2774bfd319f"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "idna::punycode::Decode::size_hint"
+kappa = "e81aea160492e24eadada6f9d7697e624124d91f5fb6c82b077561d7edfc89db"
+embedded = "45b76c12d82f4fd8a29ae1307e69a06bdba638a7b86b58887c28f4f70515a68c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "idna::punycode::Decoder::decode"
+kappa = "05d97a58b0a3f78f1b93a5df888631ea75dca65c0a9ae14e73ba3cd1c37be642"
+at = "C=u32, T=u32"
+embedded = "eb20799a2ae46f1d68acaaa35c1c6a95ff549752c6e4c741670a7614d22d8073"
+status = "residue"
+cause = "mir::Ty: punycode::Decode<'_, u32, u32>"
+
+[[fn]]
+path = "idna::punycode::PunycodeEncodeError::from"
+kappa = "d23ca81a36ffc4d2c6566b21851b2683916920b13c9e24d4e24ca0ef52e5fbe7"
+embedded = "fbe64ac5097172ce844d43334d088aacd056197a6e3a0808b812dfa186928643"
+status = "residue"
+cause = "mir::Ty: punycode::PunycodeEncodeError"
+
+[[fn]]
+path = "idna::punycode::char::char"
+kappa = "2adef1aa056fd828d57f9a63f6f7e6e80d15ba3ef43deb0505acd32a88eb47ad"
+embedded = "e7dc451682c7ae90fe5c63190a8dbf4850205cbf277f9d3b925b53ef9987716a"
+status = "translated"
+digest = "2ded16d4cf77cd64706330bdc949805cf5a7ded9133a1600289558a5c62a1e2d"
+
+[[fn]]
+path = "idna::punycode::char::char_ascii_lower_case"
+kappa = "4e94161fffc54dd934eacd699d8b5c5574490e119b101c75f77db2ee1a5bd73b"
+embedded = "88e6c1752781eca184651b1c61e4e646fb31cb57cf92aebe2ad81a01f9086426"
+status = "translated"
+digest = "4f32678134c082e50d8a2f6d44aca1e0968fac5c7d37324375732ff2ca98bfe0"
+
+[[fn]]
+path = "idna::punycode::char::digit"
+kappa = "2712f0dea0daefe8d128749893accf5f02cf62c256cdeed1793d31b98bd94535"
+embedded = "57550481a07c6a1f3abb04b735ef9581d200d4330253f7c42499ec24d620d23d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "idna::punycode::char::is_ascii"
+kappa = "c1a86657314ac1e62805434652c016fb16377ebf48ae74a3ced585bd249406ad"
+embedded = "c9fbc2558e43c828a08f4a3e19837bca0328be58af893a19c00e63c678ea57f8"
+status = "translated"
+digest = "a3ed74b31973a5e022ebec79b869801da70dec7efb35fc8287a55b4c0db893c4"
+
+[[fn]]
+path = "idna::punycode::char::is_delimiter"
+kappa = "6e3f1a81f12b7841206e0188815afc759a0ccd103ff6207c4d5c6f783be51a39"
+embedded = "ddd1f231e5019da451e9154b8ed7e359aeec80ba338f466684e07217cfafa7e1"
+status = "translated"
+digest = "7918f337631a258de90a83a36e6b1398aee0891d26f7e879e961dcd5b4dd78e4"
+
+[[fn]]
+path = "idna::punycode::u8::char"
+kappa = "dad7a4ff34fcb3a5b4b4675f05d4b90fbe624d48cfd8779dae3933c3b3024bee"
+embedded = "aa20564883f112d0818cbfea34ea7b9f6958e48eea563561fd3ea803bb0409b6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <char as From>::from"
+
+[[fn]]
+path = "idna::punycode::u8::char_ascii_lower_case"
+kappa = "fc91e2334f471d27cd26f1a86d231523d1082e06e7d8d8a6bf067be5531efe93"
+embedded = "1f6946ed0989b339ed277f156f19399ca657edffa670ddcae334d8481beface4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::to_ascii_lowercase"
+
+[[fn]]
+path = "idna::punycode::u8::digit"
+kappa = "09d3846febc07490d6464d6a0badfa701b54271b199d4dc6ecbd7e9a50ac94ee"
+embedded = "64c0f0b82a7afbd306ec5978e4bf648ae8d2a1370f04c7e11ccce137234fb3f1"
+status = "translated"
+digest = "9a3cb5a67a413c304c692031538984d22243e408bcaae2e3b944fe1243392985"
+
+[[fn]]
+path = "idna::punycode::u8::is_ascii"
+kappa = "097e47b158685d6aadc1439d3dace564767f831fd558bf2462cc53a82c0cd458"
+embedded = "240fa49c6c173012f1cbae5958f460d31b7de2a5e4c71f9b1f5740f9b875f908"
+status = "translated"
+digest = "42c8c62964a0f0177ef6bc55b2f29890109e9c0451af4e7071c070b88ee9340a"
+
+[[fn]]
+path = "idna::punycode::u8::is_delimiter"
+kappa = "c3eccd33925365969af84bc8c9a3106fac1533eec53959fd50b65641ef4f6111"
+embedded = "85b395d5125780d00173a1cdabe8e172e004be0cda09b14ab1cb82062fb4db47"
+status = "translated"
+digest = "20ccb5e8c3af2e6b95eabd7cc18878c078effa6a682373ef5fd285a99f78dee8"
+
+[[fn]]
+path = "idna::value_to_digit"
+kappa = "3ce698b57400b6fd83ea88740ca01b65927c2f3045c0258c323c4883e2ad117a"
+embedded = "8f1cca32b3b95fd53591f6a3d65cf264ca0f15ffb0f8e17a9e1d40fee652d149"
+status = "translated"
+digest = "8c39d64a60fbe84190ef5f48b12405fd99012d2220943b6a6803fe77418514e0"
+

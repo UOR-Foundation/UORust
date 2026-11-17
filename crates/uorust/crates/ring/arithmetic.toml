@@ -1,0 +1,776 @@
+[[fn]]
+path = "ring::AliasingSlices2::with_non_dangling_non_null_pointers_ra"
+kappa = "a50d7b5007f49e6a73e3eab431498ad1c073016398178fde96d64a415ed8db93"
+at = "R=u32, Self=u32, T=u32"
+embedded = "87f45b19e02fab012b0f4f18f97ea26fffbe57ae16aec5d3807d77b56d64092e"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::AliasingSlices3::with_non_dangling_non_null_pointers_rab"
+kappa = "738e7a263a74ae9e3508d01990f629745bddf874f66808daca7b2e807003fc00"
+at = "R=u32, Self=u32, T=u32"
+embedded = "dacd9e640bdae2019ebcd1f1bc770176654545e634854e6c7ad7ea694db3de27"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::B"
+kappa = "c16236d661d51d69c808799be0d93990199e7bf4a58889895bd8bf992601c188"
+embedded = "6df6489d4ad4bf0d564026a6a12f15d703e8fe42e01f8cd593c161ea1f255e7b"
+status = "translated"
+digest = "3b8b04836dd9453fdc175de4b248e9b091907eb18d878fc7982d58fdcbce708c"
+
+[[fn]]
+path = "ring::BN_MONTGOMERY_MAX_WORDS"
+kappa = "f5f98f32c2bfd929d0160a64a74de234cc5ab162ef419dd31f063b5f14f3d57f"
+embedded = "a2b350cdc6f1545cf289b55ea1ae6d1a4d6845d8c840b0360cfd6a96967c59f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "ring::ELEM_EXP_CONSTTIME_MAX_MODULUS_LIMBS"
+kappa = "6749666fb4ebc8de00fc8b8f3f0f2c422e0fd165e644b073b0164586f5620aff"
+embedded = "32a4c79df23f2a9fb0a12571a24e21f3bed35d2218399e6c2b6216132876b705"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::LIMBS_PER_CHUNK"
+kappa = "18f7df6953c722c4da6141ea1eb5a5bda6f9f74b8c61a7d4fe6a9aa30f0570f7"
+embedded = "6cf17ec204a03e6eeb0b64349a33287997bc591b6a5e4630d05ab6157df72b68"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::MAX_LIMBS"
+kappa = "17ccf6f152b2d6f949d969dccddcef8b6d6d4c26bc0380aac864949b90f14cca"
+embedded = "f90b3ead2521674630f991e0d05a7632792e3d645d83e5003f041ec266b01d97"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::STORAGE_ENTRIES"
+kappa = "a7f61612c5c8cb04b795c1fa00fc83679c64a63a8b16f5bd7e79b5b3c33cc712"
+embedded = "701a0e2ea3fc6b148d3034f50fae30c2c6faf20e819095812c9975de7cf47041"
+status = "residue"
+cause = "mir::Operand::Constant: arithmetic::bigint::TABLE_ENTRIES: mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+
+[[fn]]
+path = "ring::TABLE_ENTRIES"
+kappa = "95cc4747aa1af9fd9140ea644f5c2a25b2f85eacca45370c59369437d645babd"
+embedded = "941bd3feabc421d4f028051d47a48df40add88569829330acc115b13b751ce7f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+
+[[fn]]
+path = "ring::_512_IS_LIMB_BITS_TIMES_8"
+kappa = "8e10b9576f319b1fb8ec8cd809f984c66d89124b05c17e90ee7a9efd38f91cc4"
+embedded = "9e3b409064250d8b4d14c9bdb91666475b5b533001bec47618ce8697ef056f2a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::_LIMBS_PER_CHUNK_DIVIDES_ELEM_EXP_CONSTTIME_MAX_MODULUS_LIMBS"
+kappa = "0f9141f122ecb0a63c7b5e27d5c2de8e2799340ae875e941fddd4bf27c3e2eb6"
+embedded = "cc1d0b03b34d65c1add6b6bccdba2bb270ec0a22392b651277742b5102da9d25"
+status = "residue"
+cause = "mir::Operand::Constant: arithmetic::limbs512::storage::LIMBS_PER_CHUNK: mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::_LIMB_BITS_IS_2_POW_B"
+kappa = "852a29d3294dd7c4586eab2aa6fb447223e28f58a9f72d3bd6a9b82b9e1d1afe"
+embedded = "43e0b86fde41c411f16d1b193bd7c2771757c670f284d8d5118b41b63027fc5d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item arithmetic::bigint::One::<M, arithmetic::montgomery::RR>::newRR::B"
+
+[[fn]]
+path = "ring::_LIMB_SIZE_DIVIDES_ALIGNMENT"
+kappa = "ecce4dbac16af2ab0eb186b049b14430569df1ef2fbd31d1884119f1ceb7c89d"
+embedded = "02e8f3ebecc05d9adc1544263fe6210e8345f9169e52eafdab187e434d214652"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "ring::_MAX_LIMBS_ADDRESSES_MEMORY_SAFETY_ISSUES"
+kappa = "ae210e22ad381ce8e7720b7950769691b84a898b572685bb764098318df9d860"
+embedded = "76aafad52abc2290635391a326acba9ebd71f5339e6e5d78ca1a09d10be7abe9"
+status = "residue"
+cause = "mir::Operand::Constant: arithmetic::MAX_LIMBS: mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::_MIN_LIMBS_AT_LEAST_4"
+kappa = "db548a3f06605a35403574f91c758e5b0ab4e8a2660e7170ed96ab0909a8f64a"
+embedded = "6aba51f204f9fefa679e68a7284f0821b221d233928d837d7653b06add6bfc94"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item arithmetic::MIN_LIMBS"
+
+[[fn]]
+path = "ring::_MODULUS_MIN_LIMBS_AT_LEAST_2"
+kappa = "76c28c25debb48ea30e055acbbf8f4a3ba272020ee0541b52ae7eb6c89f9b9b5"
+embedded = "5b97944403e0b6a18ce098688b67db66e3ca797b791a94f6549275eceeaa4245"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item arithmetic::MIN_LIMBS"
+
+[[fn]]
+path = "ring::_STORAGE_ENTRIES_HAS_3_EXTRA"
+kappa = "0dd05a75718b6962a0b89ad0b1c11f6f0f56b6980b86ae43346cf429c8140c48"
+embedded = "a8cee6e161a8b0d3dbf03a556097d02273d9a25d2c8d7c9d8414e785927e39de"
+status = "residue"
+cause = "mir::Operand::Constant: arithmetic::bigint::TABLE_ENTRIES: mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+
+[[fn]]
+path = "ring::_TABLE_ENTRIES_IS_32"
+kappa = "88a32d52725e74226ae725570b84a9e569b0abab8f5d81f622fba570a691c4e0"
+embedded = "0d356a4ad562e5d8dab3f338674183ea82d33bf00e2b40673b2575a616fa5882"
+status = "residue"
+cause = "mir::Operand::Constant: arithmetic::bigint::TABLE_ENTRIES: mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+
+[[fn]]
+path = "ring::bigint::Elem::clone_into"
+kappa = "ffc32b5f3efd31b3c7ec0a139447efab60f237399975deaf5ece2df654e62dd2"
+at = "E=u32, M=u32"
+embedded = "43f07309d1652485263026fc9f0e89538e6e95cbb74258fcf4ff26e354ee5783"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32, u32>"
+
+[[fn]]
+path = "ring::bigint::Elem::fill_be_bytes"
+kappa = "f984114554172d14f7fc3272a4a8ff374ae1b040873357988ebe1502ac0e703e"
+at = "M=u32"
+embedded = "a0b6f8484e08a562b8dd115e8a69daaab32c4c2be9c1f4e6a73fb30bcf1a7ec6"
+status = "residue"
+cause = "mir::Ty: bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::bigint::Elem::from_be_bytes_padded"
+kappa = "df2c52740db644998b9894a9125fe802d0a33baa913fb17be426f8af7cd0f2cb"
+at = "M=u32"
+embedded = "22da3c9b761ea624aca31a033e37148023388572b27f9af70c4da25851ab5b46"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::bigint::Elem::is_zero"
+kappa = "03be6687c98f18c4b108f5048cabe209f57e54c2a2705b2b26b17b237611bdfe"
+at = "M=u32"
+embedded = "afe994bf3d90f33a31cc11a2dcfd233a4e293a0ed8671ef5590fe8cf355e7236"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "ring::bigint::One::as_ref"
+kappa = "a5a5c76c33ce5350bd8cbe0f512c3239145350506b337a19b83ca43856a371a3"
+at = "E=u32, M=u32"
+embedded = "af551b52c723566a6e027fafcec990e35119ce97cea772939842078626f77539"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32, u32>"
+
+[[fn]]
+path = "ring::bigint::One::clone_into"
+kappa = "90c138de4544d44e23ca9d4fd4f2c7cc5d79a4f58efed7fa9afdc5a6be56eacb"
+at = "E=u32, M=u32"
+embedded = "686307e6dbf1c1f2e67fdf3db291894ded857e21834b3acf5b82caf1cb19110d"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::One<u32, u32>"
+
+[[fn]]
+path = "ring::bigint::One::newRR"
+kappa = "653e71d2fefebb447f31ed221ba8424de688b07271968ede8decaf4998865b0c"
+at = "M=u32"
+embedded = "d221dd94c6ffc0f8169fc6e86bdf13e04717647d0cd4b58bcdd0bb216509926b"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RR"
+
+[[fn]]
+path = "ring::bigint::One::newRRR"
+kappa = "32d51c9757a04f957be6906bf84d51808df98e7d78a65c28f67e2f79b20379fd"
+at = "M=u32"
+embedded = "20dce11ce7762626a44a1beef939249db546f0ebd8e732089574b0f5671c1d1d"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RRR"
+
+[[fn]]
+path = "ring::bigint::Storage::from"
+kappa = "6426863f6fa061eda6a5315071f8c902906508c04281472de4a5d7df94a5eba3"
+at = "M=u32"
+embedded = "5d0e03f05664a2342e97791c7690636842eebedfbae38c9175360a0a4f75191a"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Storage<u32>"
+
+[[fn]]
+path = "ring::bigint::elem_exp_consttime"
+kappa = "68f4685d4b20bf48d47391c929fe0db9f3090c1b29fefafac2c92fa47587561c"
+at = "N=u32, P=u32"
+embedded = "534e3702429a678093117385094a7a8b50c895928715df5fcc25ff6ec5d6773e"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::bigint::unwrap_impossible_len_mismatch_error"
+kappa = "8e4f88eac2219f1ef7b5c537fe8768e4653986f7401d6e42c7026a8246dec322"
+at = "T=u32"
+embedded = "f3879d675cf45abc8d37c62e60aecaf0b0f0bafb58cc74dd5b700d8ccf146fb9"
+status = "residue"
+cause = "mir::Ty: len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::bn_mul_mont_ffi"
+kappa = "2d20b84fd30df7a7cbcba02ecfef26d94051d9aee7149255862eb97d69899b1b"
+at = "C=u32, Limb=u32"
+embedded = "24c218e73fa09daef346dff7b6b1d45a9c99e30f9427a6a48047917c6b8c519c"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::clone"
+kappa = "a0e4cb3f261d62b4e7b35e760207e5c9828fb54dd3359fca3ddd83c4555c4f31"
+at = "M=u32"
+embedded = "28b699fdb2f9374ac88545ac5faf77e89afab0da158fc060137dbcf2b6cb1aa5"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::boxed_limbs::BoxedLimbs<u32>"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::deref"
+kappa = "e2f3855eacbb5b01f1b8f26f9a381732750551864a713f4865c39ae0ec359068"
+embedded = "49e74e2223a0d74d57e47806dfd858fd920d2b828aae68a309d49467691d3a7f"
+status = "residue"
+cause = "mir::Ty: M"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::deref_mut"
+kappa = "126b09f295fc01c4529b7a25c27c1c54f9df255bee937afa33d58eb2aebf3a60"
+embedded = "7b5e10c6d7291b42ca234321388c723311280ce6543d978da1e6b975de8f3bce"
+status = "residue"
+cause = "mir::Ty: M"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::from_be_bytes_padded_less_than"
+kappa = "c72561deed0573fcdbfebdc2e9119562a664393dc96cf07d3df4ffe1cdb3bf1c"
+at = "M=u32"
+embedded = "6241784b7e3eebb200176c14d13c1eb8c183f1474a2b6e0e01774cf0369a9e85"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::boxed_limbs::BoxedLimbs<u32>"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::into_limbs"
+kappa = "66d60632e574029943082bffddde167d93a84cc40be37ac79ffad34b00921959"
+embedded = "4e7da2c8972b308fb3f4d4dc329b645a4313cfff101110d4e97b1ba3ca936fef"
+status = "residue"
+cause = "mir::Ty: M"
+
+[[fn]]
+path = "ring::boxed_limbs::BoxedLimbs::zero"
+kappa = "24f95ef2c03f3bd1b802012d1e5f2714dc6d2ce85f93c54f69e749c4b1034424"
+at = "M=u32"
+embedded = "c6dba7eedde7e296745c0021cf7538a4e90986361a3d3976f7c300db54d8b756"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::boxed_limbs::BoxedLimbs<u32>"
+
+[[fn]]
+path = "ring::check_common"
+kappa = "e089ce239f4ecbc9de2742fec6b50a19956151968de481ce39749b8ae05513cd"
+embedded = "940beedda4674b7686c4352d4a1852318eb13809ca5558c3f0f3f59ded3314ec"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "ring::check_common_with_n"
+kappa = "0a9f874629e11e007a52deebc28fcc30a923940981644504d797bf45fb444253"
+embedded = "14179489a42346f089e1519d27aa58f1083ab1da44dcb7cd23338b23e03a7db9"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "ring::constant::limbs_from_hex"
+kappa = "e7a568373a4e663a9fb1e141ce7cb5e0651e5acd9868940b74ee1319e1e4d589"
+at = "LIMBS=#_LIMBS"
+embedded = "fab04d5891cacc8ffd124046d8aa4c2c5c6ed814929bc8dabff97ac9827fcdd6"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "ring::elem_add"
+kappa = "6a902344455055a1fbdeed8afc98823d43c3cc928953dde234e84db7376b5fbc"
+at = "E=u32, M=u32"
+embedded = "418afd42b09e2be15646ba8a04bec436d99a7c61001f3092c0213c71701f4a81"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32, u32>"
+
+[[fn]]
+path = "ring::elem_double"
+kappa = "6e10dedff48df4853572d35ccfc3b05ada6df7ac7e5398d8948d9f76edd73b54"
+at = "M=u32"
+embedded = "081d12d356116bf7ead7c3b8a7f9f633a134e1c23e3ee6f429b58b09c3674d59"
+status = "residue"
+cause = "mir::Ty: AF"
+
+[[fn]]
+path = "ring::elem_exp_consttime_inner"
+kappa = "ac3e46ba37baeeeaa25e051385e4b5585c748c756732cc877325ad3538553a6c"
+at = "M=u32, N=u32, STORAGE_LIMBS=#_STORAGE_LIMBS"
+embedded = "b3cf77e6b8dbbf8d2f94bc9fb8fd01a643ba1e299aced1e91625e6484b6d12d1"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::elem_exp_vartime"
+kappa = "d97e462c7c6e9a1874c87fbcf13b7f7d348101c1b8371cea7e71912841948c12"
+at = "M=u32"
+embedded = "157c011bb30d90f6071b947342b244fd7809443bc327f8657c80b50d7e5b2e6d"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::R"
+
+[[fn]]
+path = "ring::elem_mul"
+kappa = "f0c4a433aa51ed4b76729066071e48cae2145bc2cdd6360a442535a766afe81f"
+at = "AF=u32, BF=u32, M=u32"
+embedded = "dd1b357884c884cf22efd26db7302562c14e5ec585e3e9c09d1abbb6ea284d3f"
+status = "residue"
+cause = "mir::Ty: <(u32, u32) as arithmetic::montgomery::ProductEncoding>::Output"
+
+[[fn]]
+path = "ring::elem_mul_into"
+kappa = "3dd9a6baf1b10a75b195cbff0920876fe95301bedd2d83c977b332836b733460"
+at = "AF=u32, BF=u32, M=u32"
+embedded = "9198a1f182015394d5a6a98d1ed739904e9b7b362ec2d26d5b404fcf6cef2732"
+status = "residue"
+cause = "mir::Ty: <(u32, u32) as arithmetic::montgomery::ProductEncoding>::Output"
+
+[[fn]]
+path = "ring::elem_reduced"
+kappa = "5aababc81bc12161e770bd772c8e33b48532f01add04053be2346287b68d6a18"
+at = "Larger=u32, Smaller=u32"
+embedded = "23859dfcada498251d8676b12c57a43fa23a9b7b4e70b8e87cb782c6d9ee86ac"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RInverse"
+
+[[fn]]
+path = "ring::elem_reduced_once"
+kappa = "43df2391fb25d7be319dd1735d2ad141107192dd898262e410de739666838e40"
+at = "A=u32, M=u32"
+embedded = "43cf8f7fbd5428b6bcea8db9af9726d63ddd3c5a6199f7b63e2094da62c6bfb4"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::elem_squared"
+kappa = "809b085b674633fb49bd31a3b122cdc692b388277d5e78a574dd966888dd925e"
+at = "E=u32, M=u32"
+embedded = "3673a852f63f74970cf0c7215981f72b0b18dd3b3e407dbb994f8022db7d4fe2"
+status = "residue"
+cause = "mir::Ty: <(u32, u32) as arithmetic::montgomery::ProductEncoding>::Output"
+
+[[fn]]
+path = "ring::elem_sub"
+kappa = "d74b29ceabccdf0fb2ea4c007395a8540aa7c6d259fa3fb378d4d83e7708b10d"
+at = "E=u32, M=u32"
+embedded = "a27f3ae22e3fef0c218d943adb5a62a3d3b91da43ab07ed4d4833ab36b437fe4"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32, u32>"
+
+[[fn]]
+path = "ring::elem_verify_equal_consttime"
+kappa = "505afac0d3e4a1f3f926aa9607f86794b3ff95ae822c9280f169d40f1d04dd62"
+at = "M=u32"
+embedded = "1c315cd41e17dd3dd0c2031cceab36078db5054f08ab9066c1b08cea99d011ba"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::elem_widen"
+kappa = "53e92acecbc3b2a7545d8141b984625b4b4223e38dac12def305f818d066a809"
+at = "Larger=u32, Smaller=u32"
+embedded = "cd7ba532503eab59a6bb570bbc02a19887178962c8d6fccb32069a3b42e18a7f"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::from_montgomery_amm"
+kappa = "04fdcd13597cd3f6726e4e2319d721c54dadbf276d22f10a389d8d1c20679228"
+at = "M=u32"
+embedded = "d26a312f76e3cd93e57a1f4ae8e28c9bb7e7aef47a4a256da974fe98076a52dc"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::gather5"
+kappa = "7f499ca055b86d2f4e134d75ef838049aa7b57f58b0ce2c643e406675b5a454c"
+embedded = "81ad12f57b3a48b124485140af29e782e6c5fd55cf4b924ae0d0e2a37f7666d7"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::inout::<impl at src/arithmetic/inout.rs:137:1: 137:40>::with_potentially_dangling_non_null_pointers_rab"
+kappa = "8da637b2d03c84390f6dfcab7a13aa5b99db2add2731182102dcf27fc6571c6e"
+at = "R=u32, T=u32"
+embedded = "6046792913cce252a09cb7a81d0e6b0386fac9752147c767244e3c985ffc1383"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::inout::<impl at src/arithmetic/inout.rs:151:1: 151:54>::with_potentially_dangling_non_null_pointers_rab"
+kappa = "785dce827ca5d93b9da7734e0d4223b9c2e4a18afb91dcd03da32148db0a4e9f"
+at = "R=u32, T=u32"
+embedded = "374bf5c0c88d93ff05851f6d3ea2d9cc486008a4dfcdf6e9e9a933322eca8ec2"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::inout::<impl at src/arithmetic/inout.rs:162:1: 164:28>::with_potentially_dangling_non_null_pointers_rab"
+kappa = "d72d1a324cd1d7962fff200f771be2c9e5e4a66cd126bae0eed2d928494e4675"
+at = "R=u32, RA=u32, T=u32"
+embedded = "d2d97b89494c85fffa492813276a25faa75989c16c342aa4f2b9a75fb85ac836"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::inout::<impl at src/arithmetic/inout.rs:62:1: 62:40>::with_potentially_dangling_non_null_pointers_ra"
+kappa = "d02a18376b3ee6371ff49f0ebf2cd33d3e520f38714e9df389d624cd13c1e2c5"
+at = "R=u32, T=u32"
+embedded = "45bd75e51831df1cca9f5cde7f044ef7642d12b79ff77df09bff7fc38d3ae1d0"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::inout::<impl at src/arithmetic/inout.rs:76:1: 76:48>::with_potentially_dangling_non_null_pointers_ra"
+kappa = "b6c314746a310f1f4a38cd46abdc7f0540d3531b8aee12cc50196603b4457654"
+at = "R=u32, T=u32"
+embedded = "58fa16613dd21531f2441c75800498afc74d69eaa94fb8281e1884aa3f73ecf8"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::limb_slice_error::<impl at src/polyfill/cold_error.rs:90:13: 90:24>::len_mismatch"
+kappa = "9bcabce792cc848875e31b34ccba6040645fb9ed10cbb1e8b5b7dcac9905d2d4"
+embedded = "e1b47adf133b33ba1266d9d856c09ee5e7f895c6b633e2c56af258d8db01fae4"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::limb_slice_error::<impl at src/polyfill/cold_error.rs:90:13: 90:24>::too_long"
+kappa = "aaff7fc2bc4a00ec258b05da706669b7ff3958f0fb96e3bd05cba5d6b5d5fe72"
+embedded = "65cf3106216db8b004096dce65bba6c7a97fd9e93e6a88f3476aeae0ed15dda5"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::limb_slice_error::<impl at src/polyfill/cold_error.rs:90:13: 90:24>::too_short"
+kappa = "09200a0c5b83909674161ff781554b969cd86f88cd19e378580b7a5794f13dc7"
+embedded = "becd9fd376bbdac97f0882fa59b1cb736fd6a3ef750fc045d6e5fb61ac2fc9f3"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::modulus::Modulus::alloc_zero"
+kappa = "d0bd7b4e0f30a82ea9bcea18cda200687031b2b07c5c67dd3bb2c780825a9dea"
+at = "M=u32"
+embedded = "2606153078588ce2f97d9eca6ef79226ea4d86897a6a6ceb764a078ac471a227"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Storage<u32>"
+
+[[fn]]
+path = "ring::modulus::Modulus::cpu_features"
+kappa = "568955d5a4bb0f5e506a3463f171a84ef59b6f022f41aaca2e1c55d8b0709f70"
+embedded = "8d1aff6c9f7766c1dd78306514e0335a355b5632d19e3f090bb3fdd3e09bab5f"
+status = "residue"
+cause = "mir::Ty: cpu::features::Features"
+
+[[fn]]
+path = "ring::modulus::Modulus::len_bits"
+kappa = "a904023f1033dcf217bfd08e57150728ff7df61cbe299e552b2fc99a7b5a27dc"
+embedded = "f40dd10df58327d59869bb93b8ef3607bb6bb2d608db8f7484da8ef2a114630c"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::modulus::Modulus::limbs"
+kappa = "07eeb7195546922c7c6c2a53887657cd69093422fd92660785d58259efb240ee"
+embedded = "a92b9cf15e79968a49f71767da83e4e823eb5429ec56c9f4900765a897303ab4"
+status = "residue"
+cause = "mir::Ty: M"
+
+[[fn]]
+path = "ring::modulus::Modulus::n0"
+kappa = "88dc962db031c5e03d093c4da8264a353062e6ee57c8d6ded57af3f9d2240f5d"
+embedded = "ec0b53c6314a4330d24e6c885699a9a83ced8d5f89836181d66c34ae6da64e0c"
+status = "residue"
+cause = "mir::Ty: arithmetic::n0::N0"
+
+[[fn]]
+path = "ring::modulus::Modulus::oneR"
+kappa = "bcad35824097440583973e9889f331765396fa2c4911e7156915fffc98d20159"
+at = "M=u32"
+embedded = "dc4c92f08f6e81248789d8ccbaac8a2dd1495228dd4a39308dc35dd5fc95efb4"
+status = "residue"
+cause = "mir::Ty: modulus::Modulus<'_, u32>"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::be_bytes"
+kappa = "9e5e50ff40628acd67983d333dc26d676385cce6b1fde01d404d70bfc4926cae"
+at = "M=u32"
+embedded = "605f07143d99ecc6c57a00eacccfb462e86f87b5cff90024c2046d652e5fad87"
+status = "residue"
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Copied<core::iter::Rev<core::slice::Iter<'_, u64>>>, u8, fn(u64) -> [u8; core::::num::{impl#9}::to_be_bytes::{constant#0}] {core::num::<impl u64>::to_be_bytes}, 8>"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::clone"
+kappa = "b08885b95b2090c4504666b1144514f75256d354b0068836b67d38ea18782e64"
+at = "M=u32"
+embedded = "13c34bec3818346ad0087c304b78a13be8154a965fac6f2096428f7dbc20cb42"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::modulus::OwnedModulus<u32>"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::from"
+kappa = "9e004a2e9f1916f383f8846726245a4fa40931243c78069737ef30ebcd26ce03"
+at = "M=u32"
+embedded = "9b0a1d09323aeaff3bc9299380741f54e5d465b3877f21387ee8a55756d0da36"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::modulus::OwnedModulus<u32>"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::len_bits"
+kappa = "64b8ac2048bc17292a613225335c488ed001c5c4eb5efd87d2842f4d9223f12a"
+at = "M=u32"
+embedded = "cf5e20c65dc9084ffe696c3de7cae8f5f496b77065159bfd15a84136dfe091ed"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::modulus"
+kappa = "85fdd0cae6bc82ad967082bd44566c687a4beb0149ab094386db3a7d73932694"
+at = "M=u32"
+embedded = "ac471c1e7052073e95476d5bc9b631767e0e1fd6f1ebdecdd0b996a5b78df2d9"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::modulus::Modulus<'_, u32>"
+
+[[fn]]
+path = "ring::modulus::OwnedModulus::to_elem"
+kappa = "3054c0584223c00b4375deffdff9d2e0ed71108241183201ddc7ccaa6ac7fd2f"
+at = "L=u32, M=u32"
+embedded = "69b54b8a04e7aa6c0ecc7189da428dc13e85389fbc36151b5103cf6efb14a3c7"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+
+[[fn]]
+path = "ring::modulusvalue::OwnedModulusValue::clone"
+kappa = "ac874d8ca94df252f5a4d4ea826db722116e867480b336e232a92840268976c0"
+at = "M=u32"
+embedded = "0fdeffd44d55ea4117c6c3146bf5d4e62fee0556d0ff501a34d94c1cd627fab7"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::modulusvalue::OwnedModulusValue<u32>"
+
+[[fn]]
+path = "ring::modulusvalue::OwnedModulusValue::from_be_bytes"
+kappa = "597fc82b80db8cc9dca04792d2b616c7ad769b7b88e26d9ddaa8505573bb9999"
+at = "M=u32"
+embedded = "34e940750306f5dfc4dbccf674edeaf09fbc4879992f5c2153d27cab62247141"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::modulusvalue::OwnedModulusValue<u32>"
+
+[[fn]]
+path = "ring::modulusvalue::OwnedModulusValue::len_bits"
+kappa = "78d78c4a09f406225f833f97fa5208457314fcf6b4048c2d3a9e6e87c04d035e"
+embedded = "dd84a1269b47aacb7f2079c1354433ae394500d1e066cf3186448eb83bac6246"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::modulusvalue::OwnedModulusValue::limbs"
+kappa = "a014ea83bce4b9a0cb1a411abdee43805128ef260bd65e9dff361bc2265c8a24"
+at = "M=u32"
+embedded = "66ddb92874c4d40b867fccb1f4e1c7dc32bc3208a143b258d67b8344f854cc41"
+status = "residue"
+cause = "mir::Ty: OwnedModulusValue<u32>"
+
+[[fn]]
+path = "ring::modulusvalue::OwnedModulusValue::verify_less_than"
+kappa = "64040a46d21d17c71fe15d07bf669a676cbd50335cafe79f34f92f7745c606e7"
+at = "L=u32, M=u32"
+embedded = "7ff981150e5dba13da696e441bc8a173d93a4967a785cf49a32a345a84960008"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::montgomery::<impl at src/arithmetic/montgomery.rs:22:16: 22:21>::clone"
+kappa = "3f267472255456e27cc88be836767f7854d2abead5d3cab33c9019921f7cc70f"
+embedded = "8f0e416be801dbc9f8771ab741065aa29cb11ce48c7879be395bc1c8937a31ab"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::Unencoded"
+
+[[fn]]
+path = "ring::montgomery::<impl at src/arithmetic/montgomery.rs:27:16: 27:21>::clone"
+kappa = "4897c75bcce4dffc91ac1b5c625b6cd1c20cf7b99210394e0b5f4b92a53ed791"
+embedded = "ff53bcc1650437d01a9b17df30a24256e725f018f1bb0a8214a34d561196d323"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::R"
+
+[[fn]]
+path = "ring::montgomery::<impl at src/arithmetic/montgomery.rs:33:16: 33:21>::clone"
+kappa = "3710d54ecccbd163ef882163656d9c8cc201ccb419de49beb9eea8587f984462"
+embedded = "fc496f4ab06829e771cd635825080ff8bf858409a8e159dcf7674be524401e2e"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RRR"
+
+[[fn]]
+path = "ring::montgomery::<impl at src/arithmetic/montgomery.rs:38:16: 38:21>::clone"
+kappa = "1b9d10c35677e48a800c8eb1b12cad61b51e6a06cba9988d38d90b0ba55eed55"
+embedded = "5c0d097f4eb1888f832c4ef9f51b7f120378b9e61e4133ecab276a3f5807aea5"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RR"
+
+[[fn]]
+path = "ring::montgomery::<impl at src/arithmetic/montgomery.rs:43:16: 43:21>::clone"
+kappa = "6c3ae929c1662094623b80db4db259a8ee45cc8fd2b3d2326fdcd9fec68c197a"
+embedded = "f58d156008a6341978faa137d6bf9b73eeef59089638fd3a2bfb83934c89e1f6"
+status = "residue"
+cause = "mir::Ty: arithmetic::montgomery::RInverse"
+
+[[fn]]
+path = "ring::montgomery::limbs_from_mont_in_place"
+kappa = "2cdfc75e070da3847bb9397a3c018dad19390f7a55ad7b36b1d48f25bbaa58d7"
+embedded = "9307e160179983a642ecc8084521eb36c1bd59d4a520651e0e7664ee379f791a"
+status = "residue"
+cause = "mir::Ty: n0::N0"
+
+[[fn]]
+path = "ring::montgomery::limbs_mul_mont"
+kappa = "d1434525067c830edc0199ad5dbcc238b6be8ab7e64689f505c973c320e1ec8c"
+at = "C=u32, Limb=u32"
+embedded = "bf70372aff7c130a44c8515c7cf95e690f994744a0b1a3dc5fb515e736444eca"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::montgomery::limbs_square_mont"
+kappa = "0e09eb9b7dd779d8b19a0ec4e26671e35664314b81b064d1abdbe320f76cc885"
+embedded = "e3fdd14e81706d3c6554ccb696912ba93eb0bf0129f2a260371152fada0ff663"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::mul_mont5"
+kappa = "796f599b1731674b05e0a808eec25384e9723b3c70cb07e32ea3acdfab154e5d"
+embedded = "e03c78eaf0b92265fc03144b2d9357141f8315ba2217e2663b8b78a0e5c2f069"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::mul_mont5_4x"
+kappa = "9b30f68c19553e8bd6984273ae5ff7ef2f615a42c0f9a86f0e47d9d90ad9d55d"
+at = "C=u32, Limb=u32"
+embedded = "d2df56b8864b55e4d8b16854410039c60dd17459e47b8ca1f47cb9a2c4b4d41f"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::mul_mont_gather5_amm"
+kappa = "01c86ecf8e6cbfdcb7e498c038c1a30c6de4de42527f344676e658ca79c0c464"
+embedded = "b224def78faf6592d44b9b91226d5473c2b55fcbc66f9d2aea36c898fd03c531"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::n0::<impl at src/arithmetic/n0.rs:17:10: 17:15>::clone"
+kappa = "684f0fc4a02b7a1e89090f5f113c13794d962922492918fabcd833a88f380897"
+embedded = "39bad22d7df8f7b6e1d2d7a1c7dc639319ff67d82e9d320b22a3d2f710d4e605"
+status = "residue"
+cause = "mir::Ty: arithmetic::n0::N0"
+
+[[fn]]
+path = "ring::n0::N0::LIMBS_USED"
+kappa = "17e3b90552ddef8d395a961149e1f377bc59594e4c8464ed3f988a79eb7a9be9"
+embedded = "d5518388456c997ece4cde62f76f3bee3f4c98c2a2c556b9ce6a08b16518cb0e"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::n0::N0::precalculated"
+kappa = "5834ad81d8b85cef109ea5c5e538cfb42ac927f64f47b4e4fc2408dbad072003"
+embedded = "cd9a5de0a19f6d73dce830df332bd4a84ab4a66068106e79615884d46442f764"
+status = "residue"
+cause = "mir::Ty: arithmetic::n0::N0"
+
+[[fn]]
+path = "ring::parse_digit"
+kappa = "400005a8f8e967b5334a4afd75f15c25f43d6ea9bc00411bd0adc8f9bb1761a7"
+embedded = "6ce004aec93219fefe098111877e2932618e0c01f3cd149d0727058687cc0873"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::to_ascii_lowercase"
+
+[[fn]]
+path = "ring::power5_amm"
+kappa = "0fc6d86d1dc0f026498081e97c7df7df152f105f862245167af9c5df34549743"
+embedded = "f298272ead2442c6ca8bf5a4fdce1b65b02e150ebb0ec874c59b43d42f15b00d"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::private_exponent::PrivateExponent::from_be_bytes_padded"
+kappa = "8c9291db3b039303545dd60a20df5175be86ececb276fa1cc5609b3a26b24a76"
+at = "M=u32"
+embedded = "b2034d216fe841a0c20b5da7597110d1f6c9e0d6ed425350de18f8876d59f033"
+status = "residue"
+cause = "mir::Ty: arithmetic::bigint::private_exponent::PrivateExponent"
+
+[[fn]]
+path = "ring::private_exponent::PrivateExponent::limbs"
+kappa = "f1db2aac4b92c26e49df356afb90440cf105dae5d0bbc20269448088b4b14c2c"
+embedded = "d228e3171b638abc126a982f4a5d90e64553e6a250935c68fdbb3afb6a992526"
+status = "residue"
+cause = "mir::Ty: PrivateExponent"
+
+[[fn]]
+path = "ring::scatter5"
+kappa = "3d66c1b73dc78a759bb3ccea8a67b6ba252c42b2115128984810c54d37c4e515"
+embedded = "b893e1e146ddaf5d3db8ebfbb85d39a7a0403ee129dd1d01a7b99bb26647bd62"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::scatter_powers_of_2"
+kappa = "eef334313e163f5638f190a319d23716f849caeae8b89492151795a50a69aa26"
+embedded = "5c7cbfe2fe5ee23b6c37e072fa5ee3c6dd0213f8717f6189361c2b7edb9d1f37"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::sqr_mont5"
+kappa = "49f79c02cf45b7badc090741ffc06e161c38bc6aede6b02b0331f8bdb7971b8e"
+embedded = "6c211c3a4bb7e6926cd1534ce4440f3a96027114a084848c661f78b0d6e47d84"
+status = "residue"
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+
+[[fn]]
+path = "ring::storage::AlignedStorage::aligned_chunks_mut"
+kappa = "dac3a81f4c0df356898f286becc245e0f91e44e5d3a66ff5674796a647d7e776"
+at = "N=#usize_N"
+embedded = "833a2ee57227b2dd121afe0fceb01ef275b561c4dcbd00dff56518bb75318f54"
+status = "residue"
+cause = "mir::Ty: polyfill::slice::as_chunks_mut::AsChunksMut<'_, u64, 8>"
+
+[[fn]]
+path = "ring::storage::AlignedStorage::zeroed"
+kappa = "dd5672944465bbb6097bf606946992e2ff31798fe92b9e26460af397b6a1f504"
+at = "N=#usize_N"
+embedded = "d2cbe091c1478733a0e06efd5b7ea67ac500fada82a6ae154a151e0e8ba0a8b5"
+blocked = ["Rvalue::Repeat"]
+status = "residue"
+cause = "mir::Ty: arithmetic::limbs512::storage::AlignedStorage<#usize_N>"
+
+[[fn]]
+path = "ring::unwrap_impossible_limb_slice_error"
+kappa = "5509bd06337eb2b2912df283e506bfa9b2c5eba2edf9b90eefb6db44da1fbfde"
+embedded = "6d72d2efa7bfd79f5c651cc1ecf103392e2f2cb8e9a681b88b833e2284a8d386"
+status = "residue"
+cause = "mir::Ty: LimbSliceError"
+
+[[fn]]
+path = "ring::verify_inverses_consttime"
+kappa = "f77c39de679be7f08d25133167b1118e3a8e73e20f4ecfe3db4393d1df438c65"
+at = "M=u32"
+embedded = "dc47c62fcd4fee053ce8004b52e1ec1d17d83664d540d9f279d8d9872d4398ac"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+

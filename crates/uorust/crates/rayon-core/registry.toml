@@ -1,0 +1,518 @@
+[[fn]]
+path = "rayon-core::LOCK_LATCH"
+kappa = "f7e01f4a378e0ee318204761158b451ec752bf7d5eda03e313637fe38dc1a1d7"
+embedded = "51836d4651ef4355c8eee7f10327ce5d78d5fb529589526671482f72999b8f00"
+status = "residue"
+cause = "mir::Ty: latch::LockLatch"
+
+[[fn]]
+path = "rayon-core::LOCK_LATCH::__RUST_STD_INTERNAL_INIT"
+kappa = "2c35cccfe513901d0d43bef2c5ae12a0109e89d0e31ac89a7bebef9b4b60c122"
+embedded = "5c0dcbdeb5cd53d1a9bd24f5ba49c115ba36f1e6f871cdb4afbbfcd0788cbf0b"
+status = "residue"
+cause = "mir::Ty: latch::LockLatch"
+
+[[fn]]
+path = "rayon-core::WORKER_THREAD_STATE"
+kappa = "22fdc232d8dfbdd619af06da5e657b52f088b6f841f39a2fa96ffde6b0bb29a6"
+embedded = "7e1c96076be31f05bab874aa23569d95493a04303d77effcfdddf006efc0a54c"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<*const registry::WorkerThread>"
+
+[[fn]]
+path = "rayon-core::WORKER_THREAD_STATE::__RUST_STD_INTERNAL_INIT"
+kappa = "bca83c713c6351049a699277eeeb6ea19fedc71203263397c52d7b3c650feaa6"
+embedded = "693aa6bdebfb3afd047781fce1ace70abcd161dfb6e48b324b05ba2f9cd034f6"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<*const registry::WorkerThread>"
+
+[[fn]]
+path = "rayon-core::default_global_registry"
+kappa = "f82d615eb3d7b73b60658d951ed2a9fb69cb5d69a0cab9d2e7d6048938091093"
+at = "ThreadPoolBuildError=u32, ThreadPoolBuilder=u32"
+embedded = "878ff54cd08e901293f9dd995a4a3049a3f7ba27b3f5443ef9d2a5504ea11920"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::global_registry"
+kappa = "a74cd600c802c7537c9217066d7225d60c4459e5a2f90f5ddf86cb72df206ed5"
+at = "ThreadPoolBuildError=u32"
+embedded = "af4cf4459d36332ba60ce6fa1d2838bf1aeb4e7e3bd0049d7be6f25275c8f82e"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::in_worker"
+kappa = "cdcbef855de1a07615a80cf457fdf213494d44d47e4702568ab12d47d6eb73e4"
+at = "OP=u32, R=u32"
+embedded = "b11d246b7d48c61f995bb1c905b3a92a788cb9c659234b46503b88672f961525"
+status = "residue"
+cause = "mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::init_global_registry"
+kappa = "97b73ec799f06f0faa6f62ee401d215bae93ece3e678440c64dc2b266b864f2b"
+at = "ThreadPoolBuildError=u32"
+embedded = "b7ac0fa10749406d7f8e614b3b5baf017341cbdebc40514134c7a9c8d87991eb"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::main_loop"
+kappa = "e7ab17e445f1c8e2822e4f7ce105b9ecc123f86e021b1591010159954eb4df00"
+embedded = "073fae973de31f76cd2c1c97ad7621f147322aee36cf64abb08cc49a692c7855"
+status = "residue"
+cause = "mir::Ty: ThreadBuilder"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:104:10: 104:15>::fmt"
+kappa = "12da4dec103e34383d84785fee891db698fb8d7c561639f2555b4825ed163ab3"
+at = "F=u32"
+embedded = "0cd5ccbf04af29817f921d6411ab008b9b6ec57bba4919a3d072f6c96e7009be"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:16: 608:21>::clone"
+kappa = "40ee536c9f62aeaecf3eddf48f81826a5ce0bb079ffc0c533206e4f39cc01edc"
+embedded = "47b26af6e4fead010318ebe74a5142cc4baf2b31aaffa6826b78c6754608f94f"
+status = "residue"
+cause = "mir::Ty: registry::RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:23: 608:28>::fmt"
+kappa = "9da46cce282e564ace151baf6381f8eb70bf50f42f8e601be2ca800dd399ff54"
+embedded = "207429dc377c51c8376a4cc2fc7a845457586967594ddd6b7c03a728f30bae17"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:30: 608:39>::eq"
+kappa = "51ac945aad61dcdba155758d1d0de3f5d012849980b7fb5a857a1dec36fd06a1"
+embedded = "72d84a61083c3dcf6cfbc5828020171c433a436e147403bcfa7a4bddd3045276"
+status = "residue"
+cause = "mir::Ty: RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:41: 608:43>::assert_fields_are_eq"
+kappa = "0dd93f9ae26bf12ab7aae18c6f007c2b4f9880d4fbe98b27a177c1a6803e506a"
+embedded = "fd1501b30c96777fb261f0ca7e8c19194365a9a9d6ee7b41582fa11b5a680506"
+status = "residue"
+cause = "mir::Ty: RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:45: 608:55>::partial_cmp"
+kappa = "ad53494e9711b8ad1cb770d5dbdaa39d5d1400d1263a9ea37a6d95371fb397dd"
+embedded = "5c2e37ff9c53a54d6d42ce6e3590fdc59e522df459f146195dfbb334815143fc"
+status = "residue"
+cause = "mir::Ty: RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:608:57: 608:60>::cmp"
+kappa = "ce77762955f3e33669d3f68d690d34aa94b7c67d85193203179b67724c58f1a6"
+embedded = "97cf93dd699b415dc1be83130f4d384857d0011f737f8231fc96ca7e8db82a59"
+status = "residue"
+cause = "mir::Ty: RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:81:10: 81:15>::fmt"
+kappa = "b9fe398ee3cbcb3e199fa6e70444deca00b60e0389dcc2ad289acc3bdcd4b0d4"
+embedded = "9f2c4ad1675efba49a01deaa88cb9d43225094727c10d48defcfde1287cbccf1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::registry::<impl at src/registry.rs:81:17: 81:24>::default"
+kappa = "31fbdda6d999e6e7b48cab0d8589c9c76e1431e72ad3597c90c1abdc2dc7ea6e"
+embedded = "981b74ab1b1fd3406d031376f7caa4bc3a2343c863097992cec13d39480dd493"
+status = "residue"
+cause = "mir::Ty: registry::DefaultSpawn"
+
+[[fn]]
+path = "rayon-core::registry::CustomSpawn::__rayon_private__"
+kappa = "487efe37ba625208a5b344f03921dcac9e53e15f1811be649987de9a19220132"
+embedded = "3c0a2d6c14a234352e6392d613cb36bdb23ca333442e2b3fdd5aee139c58fa58"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon-core::registry::CustomSpawn::new"
+kappa = "8eda3849d869dd3ac14fc074576b398c853cc1c15e05b4caf055c345161d06a7"
+at = "F=u32"
+embedded = "80138e744b87a671ac0988c4c5cb989518b25db7b472ed3bdf1105065e2fc531"
+status = "residue"
+cause = "mir::Ty: registry::CustomSpawn<u32>"
+
+[[fn]]
+path = "rayon-core::registry::CustomSpawn::spawn"
+kappa = "93c3ceafa7b08c338e71dc62640073fe939afbe4915f0420ed850f0362d8e704"
+at = "F=u32"
+embedded = "da631cbefa44e299ba20a6135e958e9e4d3357480a5dc0576ac0e8555adfd9f2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "rayon-core::registry::DefaultSpawn::__rayon_private__"
+kappa = "a9c4dfdb2182f24a66c4f8373ab50543c7cf45247833cec3439f5850ba3173c0"
+embedded = "c8f61f0812eb4815e6150cf6da037c95b70c18b8d4f0179d3afb07b2693bf8a9"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon-core::registry::DefaultSpawn::spawn"
+kappa = "4a9fc3ed849f7c69ad72a9c9be74cdc4ac9397c294495bf26cc1b2c2222de7c6"
+embedded = "7a0b947353294831214fce1eb8f10133a706453d2db797ef2ec56db346a6f8bb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "rayon-core::registry::Registry::catch_unwind"
+kappa = "5ef8c5d157d1cd327b29e4b5d5c49bd955daed7e5d40548758a8562a025f773c"
+embedded = "39d91487f2954d9029296d647a95d4788b982b197c30d6983c8747ec6d8b213e"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::current"
+kappa = "495af54d7632ff16f48e3c6130bb250bd0b2bf1fcee96578c520778efcdd5b8e"
+embedded = "6d28febd98e9964a2c7c82cae5459301d8a8bb6b14875ab71e531ddec757c6af"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::current_num_threads"
+kappa = "a4ddab61a139df2d209e0dad5bd9efbba68f9f5f90a4f7d51421855cdbed39eb"
+embedded = "87274e7682d279c2ae703e6b1d0c36dd61a0271a9d9291af70e07d794096a41a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::registry::Registry::current_thread"
+kappa = "d8d94f682174acea89d089bb6dd7218945e4a9e29de8adf4c4d9e564ce358086"
+embedded = "626caa4755de7aef755b58054a71538a6ab957842749f885bcffd55b678705e0"
+status = "residue"
+cause = "mir::Ty: registry::WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::Registry::has_injected_job"
+kappa = "1b017948fec8b19bdbea702174f6c6e2d33e97a7afbd7cd70464099f12078146"
+embedded = "228ec89b4613e86457ef2fe67b39ea3ffb01241a41f50c7926a240c8b1f9e836"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::id"
+kappa = "23563b29c882ff050ab3f2a58b1d7b2f3ee2bdcd949a2ebf5ec0d1b10c4e06d7"
+embedded = "993019ff0adc3b6efe9191651c1e7667aac39a717ec925c03a682f6a927a4d83"
+status = "residue"
+cause = "mir::Ty: registry::RegistryId"
+
+[[fn]]
+path = "rayon-core::registry::Registry::in_worker"
+kappa = "1d051c8ce9971bccb4e6193cef1a766da3d9934df784d5bf40015ed0b83914c2"
+at = "OP=u32, R=u32"
+embedded = "69f8f2ab9573ad04390eca5dc219cf607b55458452f3d481cb112b4b4b7c539e"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::in_worker_cold"
+kappa = "26888eab1275fc91fedd336fef3c70447ab09fe9a0c7b29fd13c2a4ac35f2441"
+at = "R=u32"
+embedded = "dd2e880e9bd33f3fc7d6368c385c2e795be7caa6bce4d6b736cb87e7349daf63"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::in_worker_cross"
+kappa = "3a032f72d683175fb41352e4447746f6a8ce9f6e316049138f7647f579c1bf9e"
+at = "R=u32"
+embedded = "81bbda21bdbe2ba53036abede5dc9eb8d400b2736c189d319ccd5f94548576ad"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::increment_terminate_count"
+kappa = "85671c7510e6ad923d0e56fcc1ff164103a483b7e8de4e57a049e8185408ee6f"
+embedded = "76c10badc22cc02da3e1e83011ceded6d5c4fe633bd3bb4f994515f6f4864d22"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::inject"
+kappa = "c5e72eeac52a22684db52401e437ad58d735799782a8757e9d5ab9c27221d794"
+embedded = "00c8b42020e575afbeb5a51bf29be92854d44735d9e7a7c1338246ab6feea3dc"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::inject_broadcast"
+kappa = "18e1dad833bda822e2a5f431e2ca9c629f8a1d106c59ba66f4c12144f2fc8441"
+at = "JobRef=u32"
+embedded = "3be4ec8fb1e67811ab3cb52c2ac799ec40280f699f0cf4736a8a400b639b7829"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::inject_or_push"
+kappa = "0ef616f6807af337d4ed8a518104ab70c8e5be4855c9ff70775a10de1b6ce675"
+embedded = "cb7b1d95ebee966663e17968477fc9af527522dc89c1f59aa7f83a7868ed052f"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::new"
+kappa = "1e4f8badc43802e7977d22757265b055ee28cc5ab77bb67fd9dc9b9bb039b778"
+at = "ErrorKind=u32, S=u32, ThreadPoolBuildError=u32"
+embedded = "e67b5cd03622e048277f3e66d487a9900f40ad068b91b71a05575c4df60a6ade"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::notify_worker_latch_is_set"
+kappa = "61b0bb3fcaac34be377eaea3bf8cef52e185613f4720e7d40bc495779ae211c4"
+embedded = "66b80717c38249c667ef5cbce2bb428ca9c24096ed104c772bdaf923202b8434"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::num_threads"
+kappa = "f98fe40dde33a5fa922ebcde5452e03ad00e8316b10eb35c333720c833483789"
+embedded = "ba5f6cd0e5f5711d0b03b29ac33e9dd4429b8e2e2c0546bafd83bf313ecb148b"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::pop_injected_job"
+kappa = "98262d3288b981322f04828b8fd3fdc64a0cbff84db3d1aeefac18bdd74c8211"
+embedded = "1770c28b6c02f6ed20ac5db89fcada9ae95342832385d079380f347731aee206"
+status = "residue"
+cause = "mir::Ty: job::JobRef"
+
+[[fn]]
+path = "rayon-core::registry::Registry::terminate"
+kappa = "58714900777a30e80ed69c0f2d5e3fa6023dd0d8664ab074e2ce2e1d2a22e33c"
+embedded = "6fb3995384b34ec971f3b91b88b9ce30cf7e50080ca38bd35e698b25e1279d7e"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Registry::wait_until_primed"
+kappa = "e0ef0541acd7912f1f47fdc2fbb1e7a4d34d1563eb6c76bf7bedd190435f9b31"
+embedded = "b20a109dc4c3b650b5482817cd6a27f4490d0bd7560a85d545b897cf697ab7ef"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "rayon-core::registry::Terminator::drop"
+kappa = "712bc45c7dfb1c469197f3096ce4d9e021837dcc9d65603951aebefddf152281"
+embedded = "a33007965e92baf478e93e057d13e09f05d1bb7964b847cff28bfcace497074c"
+status = "residue"
+cause = "mir::Ty: Terminator<'_>"
+
+[[fn]]
+path = "rayon-core::registry::ThreadBuilder::fmt"
+kappa = "01bcc488ce85119f2d80a2efefbd37f54570a8d050b250e1f82cbef4abff4340"
+embedded = "a82af0e5c1fcd70959f9e8d3af77e6f634e01d859305e54e2e7e677cf1126512"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::registry::ThreadBuilder::index"
+kappa = "df36de12470f04f4b313e669b1a01a5a4f69d05de67d0688c029adf04d62489e"
+embedded = "c3bd19d1c9b6042c03e95e44b80e952aa87f85b698be3e2c35df58f285aa9c51"
+status = "residue"
+cause = "mir::Ty: ThreadBuilder"
+
+[[fn]]
+path = "rayon-core::registry::ThreadBuilder::name"
+kappa = "2bb59fa0a4fa6551fb9632ce4284aef2ccac04f28fe2e26525efee41e7a752cc"
+embedded = "c05c6ea004b7a6e2cce6033aadb38aac7391b0dbef5a4c385e7275947f2a2166"
+status = "residue"
+cause = "mir::Ty: ThreadBuilder"
+
+[[fn]]
+path = "rayon-core::registry::ThreadBuilder::run"
+kappa = "1a6536f25df6c626c4647fea743f7f896f6d69085423876fb5a7842346d06225"
+embedded = "fca4fc1977837c3664b5a61c1594da4885ee97b92bbb24d3e832188f0f655b52"
+status = "residue"
+cause = "mir::Ty: ThreadBuilder"
+
+[[fn]]
+path = "rayon-core::registry::ThreadBuilder::stack_size"
+kappa = "8bce2ec42d729cbbe93098fcfd141f86373024b3800a68a6aa7658df7d971cb6"
+embedded = "a411e464ef049c28846ccb971beca9f9ff642439a7455b7ec022778c4bd32180"
+status = "residue"
+cause = "mir::Ty: ThreadBuilder"
+
+[[fn]]
+path = "rayon-core::registry::ThreadInfo::new"
+kappa = "84d97d33fd29aad4160212f271c1ca1cfa70352713c296b32a344c3cf77c43f9"
+embedded = "8f073cc8aaf223b95c1a7544cd2c1a2e2b3f95308094b4d6451817a0208a638f"
+status = "residue"
+cause = "mir::Ty: registry::ThreadInfo"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::current"
+kappa = "a5a24f881408e3edf4ceed663291b346589303527b9d2264e5456f6fafd781ab"
+embedded = "8010ef67ba662c81d061f6553892dded1ee4331f8ce8b6e381a281a955aa81a1"
+status = "residue"
+cause = "mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::drop"
+kappa = "6d977dd9b761b8f8f75a7f47c7179f580d68d6c6033eb3d9dd12f9f2ca813389"
+embedded = "364c30663c5c822da03a95babccf9081941d7a9e2274f61a1d597bc3e391d5ae"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::execute"
+kappa = "89f1ee14be17a0f70bcb9483358438bb7e9e6d9ddb36b3dfd6000a27453d90ef"
+embedded = "b7b4a10b58975fc56d0703eb523e693d5a498ba2f540cdcfa8d0643b1180b7a3"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::find_work"
+kappa = "0b28fc4ffd21765edc3bb5d53eedc725f1571fae01ed3243cb030b92358a4bee"
+embedded = "8ca53d7c909e9bd9b2656ff1f1450b5801cbb87cc4a7afa27f8a676436a546ea"
+status = "residue"
+cause = "mir::Ty: job::JobRef"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::from"
+kappa = "04e2f641a1ddd42a346df6e25ec86f5cf89cc3ee5e8ef9f24013ddda556aa919"
+embedded = "4329654ea3db5d4ffa5484102870866950641e6255eb88dda0e2f07e6d3de395"
+status = "residue"
+cause = "mir::Ty: registry::WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::has_injected_job"
+kappa = "4af6c4fed09ff3556d2bca231cb2565dbf1e96046208d1abe0ecf2e373ac7d75"
+embedded = "0cf5b4240835958fd23b5b20c35c2c03ce3bd42c15c98b7f3611f1d8a2bbf9a2"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::index"
+kappa = "3c765af184684cd26eb2e60c80936dd941fe9f5e8b6c08a84a5e910a97d1708c"
+embedded = "453920343e6cd7b835143ba87077cc44789e10745f5accdac10ea2ae5a37dabe"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::local_deque_is_empty"
+kappa = "f4bdf988ab7e1212a6a4ea961368e542a54d6e0489f1a2293172a791d5729880"
+embedded = "43dce954cf7a3bfc0365c13fc42f997a44239abeb7126f5aaa65f96bb0445491"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::push"
+kappa = "a154dd59bd5a7495bada8939376719f3bdee3cb344d41fe9bbcc020eb6f70177"
+embedded = "19e53faa29c1b64c323d3ffb015d190cf243c25a56f27c510a451bfe56f10147"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::push_fifo"
+kappa = "0a012f393a59343ae9bcefe5e91f3169aaca81c2e7da995643792152ab47e65e"
+embedded = "cc24925cace65d9cac2a8f0355e4644db4c126171fe365ae7348b88ae89b6118"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::registry"
+kappa = "d4041c07e5b85fe47cfedbcd43bc3baf18d7837c59f8ae25036cb7adc47de84c"
+embedded = "83aea98335d6f3ad2c53a22f65ea6cd0ae8b72678035ca9d521aaf193223cec7"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::set_current"
+kappa = "4bb9397fc8ef57e8e85080d751a206d3c869866250ec4fe9a46683511ad9c9d5"
+embedded = "d49f166592adefea645fcb4acedafa7f66167a123201192c2bb94c2f896001f3"
+status = "residue"
+cause = "mir::Operand::Constant: registry::WorkerThread::set_current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::steal"
+kappa = "65a94c207e70f14ee03d041230a3fb7b8f9e5a43d3fadf76abdcc231661a09d2"
+embedded = "ab1c94587ad01408435baa3052dbaad2e59223d4d9de86bee95c69660a95f760"
+status = "residue"
+cause = "mir::Ty: job::JobRef"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::take_local_job"
+kappa = "ca18871e4b729e910b95eeaeedf11515b7f9b1240046e3b9e5653d3f09c77b8c"
+embedded = "3921def2a45b694af26228f98c1486a52fc6cc482d40c6e4cfc9d4f04671750d"
+status = "residue"
+cause = "mir::Ty: job::JobRef"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::wait_until"
+kappa = "89d8a50a7e2338ef7f35a16e726c81b32e17a9871c086122d91e1179f929dab3"
+at = "L=u32"
+embedded = "59fd4ccb8e56462a574ba424af1244d176d2a777bbfeb37edfc257b80fd3db98"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::wait_until_cold"
+kappa = "d4b1407ae7a53e49b83dab3ebfec92751a6c7fd2b1b45192e5a2fb6f58da40c3"
+embedded = "b1612648a6bca493b13feb9f2e01bf19fc65aa757ea27079bb0319cf05c3b7ec"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::wait_until_out_of_work"
+kappa = "839701a0958078edd02aac44914f70d98f8275d7a3caee4157274096bbed65c5"
+embedded = "7da77c321de78397c153ed985af5173cc006b1c92033ab29198ff80fd95e36cc"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::yield_local"
+kappa = "ca11eca193c06a0573cc2ee5c8d6f6784b3129135045193ea77f9c01f113af87"
+embedded = "2b882ae069ca510fec9873295fda326f2ad02916e2eb264e4e883b9ac1b76353"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::registry::WorkerThread::yield_now"
+kappa = "76857b0e46eca29c78103d6ed83a7027f585f99d7358ea3fc4db3e0824034043"
+embedded = "9dc6ed042238b3ff6a6fdf4e8e38a694f4e1e7ca29ddd1657e47022691f184a8"
+status = "residue"
+cause = "mir::Ty: thread_pool::Yield"
+
+[[fn]]
+path = "rayon-core::registry::XorShift64Star::new"
+kappa = "2e392a948d70e82b4057c9bca0a605f760496578c16c554f391fa4aeb041d92c"
+embedded = "3afb98c87966dd2f9a07d04307deb578918f2d0e1514b31efe5f0efa5e3ef1fb"
+status = "residue"
+cause = "mir::Ty: registry::XorShift64Star"
+
+[[fn]]
+path = "rayon-core::registry::XorShift64Star::next"
+kappa = "aa1e28f5fc5a7e60670563125b190d5e13584e2755f18f52df754adeed6ba2de"
+embedded = "2ac499712bd679bd9a2dc8a0fec0e151f24cdbe5d099ee4a147ab6f1475f8748"
+status = "residue"
+cause = "mir::Ty: XorShift64Star"
+
+[[fn]]
+path = "rayon-core::registry::XorShift64Star::next_usize"
+kappa = "6c8f5eda84e80ca70d1ccf81eabd41fc841324d18d07c5aa3ace168b612dff26"
+embedded = "63a2d6e4b9c37471d14a058878532455c35b95d61a619b056cccdea751a6bfa9"
+status = "residue"
+cause = "mir::Ty: XorShift64Star"
+
+[[fn]]
+path = "rayon-core::set_global_registry"
+kappa = "740324cc9c550de5ac45a81e8674b9625f703ea0eb93d346bae965bac217e481"
+at = "ErrorKind=u32, ThreadPoolBuildError=u32"
+embedded = "4b237054ea125650aa70bd8309a411aedf661f969c8c85d75d708743e4c68279"
+status = "residue"
+cause = "mir::Ty: registry::Registry"
+

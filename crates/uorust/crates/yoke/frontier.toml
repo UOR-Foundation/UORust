@@ -1,0 +1,181 @@
+# The yoke register (written by `uorust crate yoke@0.8.4`; do not edit): every body of
+# yoke's MIR at yoke 0.8.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 165
+translated = 55
+residue = 110
+
+[module.cartable_ptr]
+bodies = 18
+translated = 2
+residue = 16
+
+[module.either]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.kinda_sorta_dangling]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.macro_impls]
+bodies = 72
+translated = 45
+residue = 27
+
+[module.utils]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.yoke]
+bodies = 47
+translated = 3
+residue = 44
+
+[module.yokeable]
+bodies = 16
+translated = 5
+residue = 11
+
+[module.zero_from]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 163
+embedded = 163
+evaluable = 163
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: yoke::Yoke<u32"
+bodies = 24
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 16
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Yoke<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: cartable_ptr::CartableOptionPointer<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: KindaSortaDangling<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Memory: a value of TupleNatNat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: either::EitherCart<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: utils::transform_mut_yokeable: yoke's MIR stops at mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CartableOptionPointer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EitherCart<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Y"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn erased::ErasedDestructor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &&u8}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Into>::into"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::leak"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: utils::transform_mut_yokeable: yoke's MIR stops at mir::Memory: a value of TupleNatNat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PhantomData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::rc::Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::sync::Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn erased::ErasedDestructor + core::marker::Send + core::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kinda_sorta_dangling::KindaSortaDangling<u32>"
+bodies = 1

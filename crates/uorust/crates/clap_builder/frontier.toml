@@ -1,0 +1,836 @@
+# The clap_builder register (written by `uorust crate clap_builder@4.6.7`; do not edit): every body of
+# clap_builder's MIR at clap_builder 4.6.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1391
+translated = 10
+residue = 1381
+
+[module.builder]
+bodies = 816
+translated = 0
+residue = 816
+
+[module.derive]
+bodies = 38
+translated = 2
+residue = 36
+
+[module.error]
+bodies = 91
+translated = 1
+residue = 90
+
+[module.mkeymap]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.output]
+bodies = 66
+translated = 5
+residue = 61
+
+[module.parser]
+bodies = 235
+translated = 0
+residue = 235
+
+[module.util]
+bodies = 114
+translated = 2
+residue = 112
+
+[embedding]
+bodies = 1391
+embedded = 1391
+evaluable = 1390
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::command::Command"
+bodies = 112
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 96
+
+[[cause]]
+cause = "mir::Ty: builder::arg::Arg"
+bodies = 91
+
+[[cause]]
+cause = "mir::Ty: command::Command"
+bodies = 76
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: Arg"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: builder::styled_str::StyledStr"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: builder::str::Str"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: error::Error<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: HelpTemplate<'_"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: util::id::Id"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: builder::os_str::OsStr"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::ValueParser"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: StyledStr"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: builder::arg_group::ArgGroup"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: builder::range::ValueRange"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Id"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: builder::styling::Styles"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ArgMatcher"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::ArgMatches"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: util::any_value::AnyValue"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ArgMatches"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: FlatSet<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ValueRange"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: builder::possible_value::PossibleValue"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: builder::str::inner::Inner"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = builder::possible_value::PossibleValue>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: parser::matches::matched_arg::MatchedArg"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: KeyType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MatchedArg"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: anstyle::Style"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: flat_map::FlatMap<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: util::any_value::AnyValueId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Usage<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: builder::os_str::inner::Inner"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: parser::error::MatchesError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AppFlags"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArgFlags"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MKeyMap"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PossibleValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: builder::value_hint::ValueHint"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: parser::parser::ParseResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: parser::parser::Parser<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: util::color::ColorChoice"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AnyValueId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Resettable<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ValueSource"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: builder::action::ArgAction"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedU64ValueParser<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::_AnonymousValueParser"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ArgGroup"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ContextKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Extensions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: builder::resettable::Resettable<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::EnumValueParser<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::UnknownArgumentValueParser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::context::ContextValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: kind::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::Occurrences<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::OccurrencesRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::RawOccurrences<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::RawValues<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::Values<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::ValuesRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: util::flat_set::FlatSet<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AnyValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChildGraph<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Indices<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OccurrenceValues<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OccurrenceValuesRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Validator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ValueHint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::app_settings::AppFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::arg_settings::ArgFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::BoolValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::BoolishValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::FalseyValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::MapValueParser<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::NonEmptyStringValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::OsStringValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::PathBufValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::PossibleValuesParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::StringValueParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::TryMapValueParser<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::Message"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mkeymap::MKeyMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: output::fmt::Colorizer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::Indices<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::OccurrenceValues<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::OccurrenceValuesRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::RawOccurrenceValues<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::matches::value_source::ValueSource"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::validator::Conflicts"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::flat_map::FlatMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Parser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AppSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArgPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArgSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContextValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Identifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PendingArg"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Stream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubCommand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ValuesRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arg_matches::Values<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::arg_predicate::ArgPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::command::MaxTermWidth"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::command::TermWidth"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::ext::Extensions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::resettable::Resettable<char>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::resettable::Resettable<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: color::ColorChoice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn builder::value_parser::AnyValueParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::context::ContextKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::kind::ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flat_map::Entry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flat_map::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flat_map::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mkeymap::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: output::fmt::Stream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: output::usage::Usage<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::arg_matcher::ArgMatcher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::IdsRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::matches::arg_matches::SubCommand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::parser::PendingArg"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Chain<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<&usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::graph::Child<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ValueEnum"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item output::TAB"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as Subcommand>::has_subcommand"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::eq_ignore_ascii_case"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArgAction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AutoHelp<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IdsRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchesError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Message"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Occurrences<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OccurrencesRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawOccurrenceValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawOccurrences<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: anstream::adapter::StrippedStr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::app_settings::AppSettings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::arg_settings::ArgSettings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::resettable::Resettable<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedI64ValueParser<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::RangedU64ValueParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::value_parser::_infer_ValueParser_for<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Backtrace"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: escape::Escape<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mkeymap::KeyType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: output::help_template::AutoHelp<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: output::help_template::HelpTemplate<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::parser::Identifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::validator::Validator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Filter<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Once<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::flat_map::Entry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::flat_map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::flat_map::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::graph::ChildGraph<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value_parser::_infer_ValueParser_for<u32>"
+bodies = 1

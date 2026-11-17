@@ -1,0 +1,927 @@
+[[fn]]
+path = "uuid::assume_init_ascii_mut"
+kappa = "9038d5de0fe5b7f0c0b3d8cd07e9ccbf8883bb5c5291d1e1620e4cf00ff04eec"
+embedded = "061d5ea49f7cf1894605e4bedb263d085703d409fab2829d58e3480531d48ad9"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::encode_braced"
+kappa = "0199618c9f347057e9fa3883614e96a550de74991a6d8c66e7b372ea22a868eb"
+embedded = "bbadedfe9233ae2077a85dab7c75ed7e8f64795f9151f01fa713d2bfd742cd3a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item fmt::Hyphenated::LENGTH"
+
+[[fn]]
+path = "uuid::encode_braced_uninit"
+kappa = "b34473236032447238ed1c01633f9a355bf0b8bd223f6a1f0f7dc210ef73b765"
+embedded = "86813b2cf4bf10580061eaffb9fcdf897f68505c503ca02c12c11f248aafcb32"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::encode_hyphenated"
+kappa = "95e3406428937acc5529adb1ec8e69f61e438540a7b551951649d932ac43fc60"
+embedded = "dcaacdea5c45480f98610e3d0c243c6806572ee8eb58f78c04eaed39866e75c5"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "uuid::encode_hyphenated_uninit"
+kappa = "9afa75277936c49036fab1cf092a4b1999ff03fe6a6a9810b3154ad26950c075"
+embedded = "cee3588597a9cd661ca6b584daa18876ddc0b331392b6fd23675cd28ef117b08"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::encode_simple"
+kappa = "b797852780d4886901bcbef409554e71ddd9349b17baba773e455ebbc3c632e6"
+embedded = "604ecf9ba1f373935119456fc0d8f901dfadbc568ead2d5d5d1984143ffad6b9"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "uuid::encode_simple_uninit"
+kappa = "3b0abdc2f2087261b489e95c9375a69801613232aba0f0941439441e4d9ebedb"
+embedded = "22ece89d7d0ba3943184bd0ac063162dadb6b20517b30e8bacd6d4e42c94098d"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::encode_urn"
+kappa = "d41ce53e66a73ff0dd0da560dc4ec5b22545d1264df8f59ad155e27a9ffaf4fa"
+embedded = "092f8df1863bc389df3dc89fca84cdecc93f650d5b874ba06ff1a65babac953b"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "uuid::encode_urn_uninit"
+kappa = "e60f68e5811450278ee9af3fc56a4725d42dbd7515fc46020c3855e422c969f5"
+embedded = "2c625be13c1e7f4e3b99c5c203e6f4c8abf56333a109d0d392b4b9640dcb9619"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:10: 102:15>::clone"
+kappa = "35a65cd5676be221aa8e1adda03f065ad5149c7ba59839796c0f92fba7828379"
+embedded = "3b975b7131dc5cf2175d83e3de28b9775bb830d9d084769999b7c1adadd0a95a"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:23: 102:28>::fmt"
+kappa = "242e48b8d764538253a2fa2aeb08d4043be1f178b111b5991c764bfca22aff55"
+at = "Uuid=u32"
+embedded = "0423f27b1cbb289c43332bc979c98b3b60868233ce49ab7fae0d7ea77e873b55"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:30: 102:37>::default"
+kappa = "cbe304e99ea670082d17192f559a5a8aacf4b982fa478e5a9ce2d868e30cb7d5"
+at = "Uuid=u32"
+embedded = "c3c66d277e92ab67e1347de03f720ef3ac602ff80b7ac78dc6b634c719d479c7"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:39: 102:41>::assert_fields_are_eq"
+kappa = "4f7d203d94220c644e0cc99ba2d4544daf51408eb6432ba2e0fc69771356ce15"
+embedded = "c246aa9564311dc03379c2cd51abc94e45bf40e7932fb62eb0d76b7312a29560"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:43: 102:47>::hash"
+kappa = "0cd97a6ed04f4c91497c7bf5ce05c58b6418c96bc791ccaa24c2639ba07bcd46"
+at = "Uuid=u32"
+embedded = "7af91daa6e78c9425d5f9e1b0aa119b78e9f234153b8afe2f9dd213338d223ae"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:49: 102:52>::cmp"
+kappa = "7c843c90eb728fae9478e6da939a9a548fe59e518ada3962540435f2080096ee"
+at = "Uuid=u32"
+embedded = "7a43a11103d346ffc413a228c184a5d65b82bee541f15b30e732a73e88da9a13"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:54: 102:63>::eq"
+kappa = "1f4a378794c5f97f93c96f2ea5e2c1b3aee28256b6e5070ccbee961a12617c75"
+at = "Uuid=u32"
+embedded = "5c8b3d51dcd0126cc4c44265f97abd1f4243f51225e5776355cb55ee57547742"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:102:65: 102:75>::partial_cmp"
+kappa = "9f137d1bfb8a725d700a285fdb83f6404b15c429f3c331cb5650541ffe1d33b5"
+at = "Uuid=u32"
+embedded = "780604f888b5391b0d781f7eb63d589b2ef4427003c7f80cc5505ae3497efce9"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1147:9: 1147:51>::fmt"
+kappa = "876e1984180330515951aa15c8d12d8f3aec70ad59aca30f6cc76f42810ecc1d"
+embedded = "4867ca41b1dedf6e7d4f545112752f0e20f16f65590c3179ba816a963212f282"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1147:9: 1147:51>::fmt#2"
+kappa = "7dc3c840a386b18540b2376d23bd0bff999e931c5eb55248855e12a5d6efb1b6"
+embedded = "31392bc729f492a5dc15c6b91cb6ba0488092ae9a666431eae8d7ec0b3eabc59"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1147:9: 1147:51>::fmt#3"
+kappa = "99a7fe98d47677f0e7e0eef05db4a5718c97479d422a41389a0c40cf1d0efc6d"
+embedded = "539e06b4d9894d621099c5904b091edd1fe65181d82f6d933f0bb46201a816e6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1147:9: 1147:51>::fmt#4"
+kappa = "c2e89e9e7f4b16d52f331292a49448434a6a9fa39c80f64e8dafddcd50175951"
+embedded = "317dfd98e62cfc5156672f73a3b633317d6ca467ba88b6310f71628b30e491c2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1154:9: 1154:52>::fmt"
+kappa = "95de848d29cce8c35ae24be37c2c8ff0d18fe8d9792c2beb78b7754ae597cbf6"
+embedded = "88498d8ae339eaab4c0d76b5af77869f58c4c183e176b57e20fdbecb8d8b55c3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1154:9: 1154:52>::fmt#2"
+kappa = "5cc82d4f6ea60b0ae445b8de2975bfa1b9bfb7826555d795499efdfe640f6c69"
+embedded = "bc5d2ac7a67ce43514cbfc96c6cb4cea806515e654cfaae1b73aed469604ef0f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1154:9: 1154:52>::fmt#3"
+kappa = "0c4ee68e7023d6f701748ea2215d0bd6469cff05be861a51bb70f6e4fc399b30"
+embedded = "d6cc77375def99235341b89f95e329f3cc8218ab63c7013fb9d7c4dbc40e57ac"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1154:9: 1154:52>::fmt#4"
+kappa = "698cbb4bc8f5e488af84c6639611fe6827fc1030da4e0f705b5327a440e7824a"
+embedded = "28bef4698d2193cbfc5f3c21483a036e5664545a32f5956a16c91e8d23708ffb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1160:9: 1160:52>::fmt"
+kappa = "be3a647499d412da9ba5e33a90b1bf7e5a2dbd00566ff9a041fc3e7157e0a57d"
+embedded = "077c8c3c1c71ec8be492efb3399e05a3481bb11f2ef007c7d6344951e4aacee8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1160:9: 1160:52>::fmt#2"
+kappa = "0eb05edefe211db7d036ffe819e97f0f89d3d5ed457b46090981fa9de7d3410d"
+embedded = "401d64925cfde0802f072aa5fa01b98cd97be19ea6a511b1e99fc6e88b63108e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1160:9: 1160:52>::fmt#3"
+kappa = "99c7cb252b377a3d1f58d09dbaaeaa915d69fb7b9138d3831710163b750233b9"
+embedded = "7a99123dc8042e8cb72ed90220f2126c18d88355099dd4d94df1e1d08cefe559"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1160:9: 1160:52>::fmt#4"
+kappa = "15e33ca1635be3c01e1bd8a0b3c527994a4a36c5c3361249456eafd6795aee20"
+embedded = "dde1ac998a046049dbf0dcc120f8e263e8eb7819eb68ef7ec79c29dd496b9589"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1172:9: 1172:31>::from"
+kappa = "cb8cc2baef5243ce3d10634d5e33ae69e4aec51797aa67fb31c1e13c108f317b"
+at = "Uuid=u32"
+embedded = "f4b4178b48671d7b4f8aa7d83d865e6f5277a953b24009ef8a90cfd78b1986ad"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1172:9: 1172:31>::from#2"
+kappa = "76be231abffa2c3dd6b4eaf7a3f614da36f62166733d3227803fcb0a91afe09b"
+at = "Uuid=u32"
+embedded = "619a8e659a224742141db128759ec90d87a697673cbb176ee2b51d92080f1c46"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1172:9: 1172:31>::from#3"
+kappa = "7d1378c71d7e27296320e3c6a75b68b331b12734f2ffc6885df85c79451137d6"
+at = "Uuid=u32"
+embedded = "71520362b64c848ea1528e7cb9752c916a458e30b0a18b01f76a99dc9ef872c4"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1172:9: 1172:31>::from#4"
+kappa = "14498783d20383821424e6f74088a38ea9ef73b484f5eff19bac558a14a459ac"
+at = "Uuid=u32"
+embedded = "e97fe361dd896a810e215c4bed0d01f5f320608d24a7b1ce9afd374274982b66"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1186:9: 1186:32>::as_ref"
+kappa = "7a1a0d1c02f2162db3d070392259fd3312f23069e0807d6baa2dd9b1bdc36204"
+at = "Uuid=u32"
+embedded = "47e34babda4f1e8c61ef45c48efbb48eccabfe87555978fa74fbd08cbbe90a61"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1186:9: 1186:32>::as_ref#2"
+kappa = "f672119dde8f42306bf46d60cd0f915ed32777c4908ce13acbbef4d0926bcd5c"
+at = "Uuid=u32"
+embedded = "631996572e57e2db1cc87cb6df14a3b121968aae87c37a83c5cfb74914e734d7"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1186:9: 1186:32>::as_ref#3"
+kappa = "1d7a82d1fd34668b4ddf4c549026e6ddcdfb30c2bd4dfaa606fa461da28347fb"
+at = "Uuid=u32"
+embedded = "554ba95772061daf5ea64826970a1a82998e76159e7f08ec83bb81b4c2f30a6c"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1186:9: 1186:32>::as_ref#4"
+kappa = "54c64a40656dbb3e3029dfca2b0c07146f945464438e390d3b0e86f5c3bf38aa"
+at = "Uuid=u32"
+embedded = "5e5d58e5eb9091b0d3acdd811b057a8e7648955b5eb0d6b9ef2b79d4f057bd8d"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:10: 118:15>::clone"
+kappa = "d8166e99ece5cfe1911045564c252cb60f7257e9cc8d954d19969668e623c939"
+embedded = "c64fb25ac36afb4f15d3dcf5cd67a772c3eafdbb4858df7e957b02fc6d1792c8"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:23: 118:28>::fmt"
+kappa = "ffa07020bb606888543a7592392265089dc88f64eb9c9915d04d1b41e288635e"
+at = "Uuid=u32"
+embedded = "26294cba7d98a4e65f3340d0e719fbe7ecce8b1e9dd150c25abf2daa71ae233d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:30: 118:37>::default"
+kappa = "a3e4a60a0c0a4714cb89fb1e3b33008080ae480531b0fbbaa29dbe65dfcf93a4"
+at = "Uuid=u32"
+embedded = "a94b191ce4a26e15fc2348beff35ed4b59e6ad264f1048a596a3fa7ee61e2615"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:39: 118:41>::assert_fields_are_eq"
+kappa = "8aee5387837cb6bbe9a734054a652892a868618855f8b3b47b83a1b967273a93"
+embedded = "d6e51a3ae869371615e246716234b6905aebf3b5ab57560881bc9541bd371fd8"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:43: 118:47>::hash"
+kappa = "3f92966a142df76eaf61e16cc2dcdaabe49c6450923c2fd69479e131ddc07d63"
+at = "Uuid=u32"
+embedded = "eddd5932dc04826c8f8363ef61ef1a166f60e51d74592f03474b9f7b1fa45c98"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:49: 118:52>::cmp"
+kappa = "51bc67969614c56da22e7e3062fe80c1ee02f4002ea28227bcd2eee9eb6985e2"
+at = "Uuid=u32"
+embedded = "81121cdce8c4f595a238dd4b96a48d4c89b4915d3ffface8c749c68bb2505237"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:54: 118:63>::eq"
+kappa = "930ce14fbe4bcbf227dc4e32ef459b13ff79894a1a3616189771f863f63c8237"
+at = "Uuid=u32"
+embedded = "f26f1cd78538450b1b128eebee8def828593c4355a5dead6dd524cb5e092330c"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:118:65: 118:75>::partial_cmp"
+kappa = "084c88bec7766d2667a8d9f0e9ff559946db1bd4d405ce5ce22daebff1a0c045"
+at = "Uuid=u32"
+embedded = "61fc14de0be0575f6548f8fb19712a7e4e24e8e12ba041bacbd43f92382ac1ee"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1193:9: 1193:33>::borrow"
+kappa = "8cdd6c326570a75ed9da66a596dc77393ff49603553c25dbd98c82bbab3bda62"
+at = "Uuid=u32"
+embedded = "57a9e397dcdc53ca1ac80fdd06c127067abc325a139b6b88d220b4e6f3c5ca62"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1193:9: 1193:33>::borrow#2"
+kappa = "506229b2079768acd1eaf59cadccde3e80b9202ad94ee1e81c9efe11a06c2248"
+at = "Uuid=u32"
+embedded = "db2641455fff3fed7f472fd242d267f8da35bdb52398c0fa1a44b16654f80763"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1193:9: 1193:33>::borrow#3"
+kappa = "8d89f639a8c459fd362b5ebdc6e5e5097b4d5a3dd742be1252f6bfa0d69fbea4"
+at = "Uuid=u32"
+embedded = "e675682363489ef9cd605bc88d5987259149f57107317d371fc9c0a9d2d78b80"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:1193:9: 1193:33>::borrow#4"
+kappa = "b9b9c40fc2fb71778b2b67aa31dafc3b043ff9b9a390b9c2b41f3e6d8eb2294f"
+at = "Uuid=u32"
+embedded = "1a610bef9718ceef5a692587595a1877715f5b8d4cbc6aaab7a9e277bcb6f9a7"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:10: 70:15>::clone"
+kappa = "e0536bcdd8867f20ceeb87d9ad33b4cb6e00c5f02d607d7cda24ac08a4f21f0c"
+embedded = "095f38a9cca9a38deef0b5a920e97239533a1bb4332c1d45f98f2a8efb18d034"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:23: 70:28>::fmt"
+kappa = "e88fe44763af5e69b2cc41620f5dfb79e56029f379f25d3f741a535be416f569"
+at = "Uuid=u32"
+embedded = "f8cbf3d5c7440d6e04bb6248e1f76d928508b1effa6757d0237fbf1464921582"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:30: 70:37>::default"
+kappa = "044195c6995db3673e21e8285107a95a07991542d11a11f477469bb3df0db484"
+at = "Uuid=u32"
+embedded = "93ecd232069e404a2d40407dea3cd5989d37c647a257d663fc534e8d5264cd69"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:39: 70:41>::assert_fields_are_eq"
+kappa = "ef8360fc12dc76ce387c0f150b1b44917d8a3533cb6c36e9116fb901924569df"
+embedded = "d9832a77319927cfe8bc38153523fe8be293dfb024f2d9cd3b7b3a8a19011c2f"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:43: 70:47>::hash"
+kappa = "3f08ac39ba3077c6c7cf379da12c3827c4fc28a5f4c9a406bc7602871fed0600"
+at = "Uuid=u32"
+embedded = "1e6ed0cfb3f5b2bcb87832dae224524c41705d346e5c46ae788c2d0101146555"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:49: 70:52>::cmp"
+kappa = "4aa4b57515c0261e50baad14261badb622df74c11f95dbf9532ea4ffc4311a3e"
+at = "Uuid=u32"
+embedded = "ec93e7b47b0e21c51d89930448243c59dc89b67161fd2108f410dae0e32fbf39"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:54: 70:63>::eq"
+kappa = "acfa3c8fb517e0d00d7d3835237fe62f6005682cd92a58bf9c00f2eb57f32c38"
+at = "Uuid=u32"
+embedded = "e8553cb9456456aabf6fd86ee123fb06b49421d6d5e3248572cae9dd002720cd"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:70:65: 70:75>::partial_cmp"
+kappa = "94872f39c414972053d8f60a4a4d35099065a7ef5d261d96edd9aeb1f166edf6"
+at = "Uuid=u32"
+embedded = "22042b514f710ed32cc717283e06fc4a3e985c249b5f5e5c8f2b300f3437ceed"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:10: 86:15>::clone"
+kappa = "27bfea43a3ed8201edb1c1d4b71a6a51855bb64cebea7d6085e4019228caa6bd"
+embedded = "a7023407c89145600317709151c74ce8793de8aa1e585054f06c8fdb7b7cd463"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:23: 86:28>::fmt"
+kappa = "e71713fc8192de607b0e902348c5067ff143225b0638ef976df9dd342062b217"
+at = "Uuid=u32"
+embedded = "d396af36d2da1a9b6b13d394c47ca980dac266a58e339d9966b1577ea22fdba6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:30: 86:37>::default"
+kappa = "423d21030b07c560d08ae679b9c9d6f2a019b24d1cbb5631161929b68da69161"
+at = "Uuid=u32"
+embedded = "8cf7bc94559b34796d167668b04befdf8f7e9c4149448adc1bb62ca069a81f24"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:39: 86:41>::assert_fields_are_eq"
+kappa = "7730483ff4025b42acc9c5be223525809849de217a1ac1f19198a750d62793d9"
+embedded = "f0ee50e9f3fcca9b21d38ee861f75ce81b928d1a09bdedc83eb706331c86e1d4"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:43: 86:47>::hash"
+kappa = "7ddd8965e080afe502f8b227b73cc69732400a44a8b15397625d2f0cb666f478"
+at = "Uuid=u32"
+embedded = "452f3fde8a7332207e70777864ecf369f0f5e3493007edf31fc96d12718fc2e7"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:49: 86:52>::cmp"
+kappa = "b82eccf74290ccdd0851afb3226b3aedf2985a1550c8f33e2b95f5c6eec5b5a4"
+at = "Uuid=u32"
+embedded = "9ec3721b153f8554a1aaa2e799c2ec03db9c3fff204c3eb73d9cedbe1314beab"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:54: 86:63>::eq"
+kappa = "e8c2c153fe52e67cd62778373f602913379aa1483941e76cb6fabbe04c249d4b"
+at = "Uuid=u32"
+embedded = "095a99a82e4a3cad4399b38d4dd0365a3f70e60a5906a73d66320a9e075ce609"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::<impl at src/fmt.rs:86:65: 86:75>::partial_cmp"
+kappa = "b040ebb6553cfd74c65ffd7f784ade9b3a05b08f01a83656d74047146b0a463e"
+at = "Uuid=u32"
+embedded = "2420a76095f96520cdd565dd932e7ad35666f9fec144890b0be51546cf7a61a6"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Braced::as_uuid"
+kappa = "74fb8240958718244820523f5671b2237dbacd7555732c0b0f0d143ed4981342"
+at = "Uuid=u32"
+embedded = "f26cca9cb641f5f0e8c46847001eef04bda88254eb3f84b1e75825a4aa237fe8"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::encode_lower"
+kappa = "d2313c6edce302e1944c1304b52369f82da63ca706e21a9207f286975c51c8f4"
+at = "Uuid=u32"
+embedded = "e9862643d2bd30ac3993a55cc30d2de65bb1d223759df37ea05dfa5b7a62a829"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::encode_lower_uninit"
+kappa = "3aff1481209b1c111141e0272a678ce02af137e4cd6ba4288fc9922802835d57"
+at = "Uuid=u32"
+embedded = "14a29972d5edd57347387e81c60ef7878b0385b8e6ff73869d2b20b04e0fc7b6"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::encode_upper"
+kappa = "bbcd2c607aa4cf3bc9f117c59aaf785b900748c24af7aaa3739fbcaa2f7d5e0d"
+at = "Uuid=u32"
+embedded = "ef9abb6e37cf73844f49fc91dc2545dafc502a534c10fb125ae3b5898e947897"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::encode_upper_uninit"
+kappa = "c778598bb1b487315e7968de7e1b1ddeb7d9804e52f59eab8a1df346a7ab8b0d"
+at = "Uuid=u32"
+embedded = "d6c5c50232f7731e29aead5699ffa1b884f19012b2fe6cd8ea825e79a741d57f"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::from_str"
+kappa = "9fcbacec241b2b8cc74a7740d18777af24c0f36d61fee4dacfb3e79cc36eaca6"
+embedded = "350cded02a020492e5b49e7bd858997da162773a515ed304230ff8adb434af6c"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::from_uuid"
+kappa = "7bc4c6b8646180232f28e3c13e84e3db219fef032b8701cfc73bdc937d25382e"
+at = "Uuid=u32"
+embedded = "3b5356f299c07cfc679fa9e878b662400ba5b1e8067b68a82f5f02c88516570c"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::Braced::into_uuid"
+kappa = "629c1d13697bedb089f10dd358cec617e582ac5a1dd32a103f77bb573d02c0fb"
+at = "Uuid=u32"
+embedded = "88052b3a514c149df7de76034ac7b50fadcfae8ee4b451597ee0605a940b33e6"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::as_uuid"
+kappa = "ff57ddf76eae0e234f85e2d108d394088d5a1f211e71b989a20c9f37210df92f"
+at = "Uuid=u32"
+embedded = "ace74cc468bccff1de4411e0d1d4ceab47b80aa63240f54f7d7aff00f068f028"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::encode_lower"
+kappa = "8dd29cc4b570eeaec58b1b1286a3dbf9890f9502f543006c680cfa11cc161fd3"
+at = "Uuid=u32"
+embedded = "ac32828d822d0bf3b51550176bfc50d873650431048660d103aa620b528bb8c7"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::encode_lower_uninit"
+kappa = "f49826dcd0c4972659e5f748b24727484362ed53a65018cc9475110500595f4a"
+at = "Uuid=u32"
+embedded = "99b2ca951cdbd7bb9d03f82e4b8690a71d107f3bcb28a8a5d6121e0a6bbfb33b"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::encode_upper"
+kappa = "30d8845478be97b4db55faa74351ce9370e3da0866d030766869a8c10c31a977"
+at = "Uuid=u32"
+embedded = "a4b7e391c3abb271c1551598c7d3ba108b91926c52f625df3b1c8a7c1bf06814"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::encode_upper_uninit"
+kappa = "6316ec44f6acda1b49556b85726d0840d924087b0aa2d153c62d46dbfea422a0"
+at = "Uuid=u32"
+embedded = "bc9e35ffba03ff517148d306041099902a9d82982d1dabed3e32dcfef1b14f03"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::from_str"
+kappa = "e37d1acaccd145da9a1337c7a20c52eaafc22d0a717813b455ebf1b8ab6cc3c8"
+embedded = "623fc117e25e9764393e074dbb677a018afc302b5f0ef7d1f227f843786ed467"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::from_uuid"
+kappa = "a9561d3805328aa55534e341bd19493ea1e18c69ad84fcb2f767d1678e6dedea"
+at = "Uuid=u32"
+embedded = "c73331212231b584948d8d7909094564dc2e256bf07b939154059385520c7c16"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Hyphenated::into_uuid"
+kappa = "a348452a4b86f08f83a796ce2c8f530f911b1a2c8bbe0f9fe5148d17e7834fbf"
+at = "Uuid=u32"
+embedded = "9530e9a5ff0b2e7caddd84d3aa8b7f0b39aa271b62284ffabde7b301b34b33bb"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Simple::as_uuid"
+kappa = "f75e31a9a2c88f8e7953a575a4d1e8703a30bb1330fc3ad0a2c0a97f15f23225"
+at = "Uuid=u32"
+embedded = "a110167e14c88e2de2e52cf6c7abbff7bcdf90798fac716c91e5fcb152662df5"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::encode_lower"
+kappa = "96105a2e536ea49b909f0be9aa0aca07755f96715d139502c4bfe711cff72f1d"
+at = "Uuid=u32"
+embedded = "657b77907b17d9ddeb1f4a0016b7de2573d85d788ecd353d82a2473e8da00707"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::encode_lower_uninit"
+kappa = "1dd7108520833aa3eeffdeedec35b56bc40a3de6a8ec1bb9ac90cf205ed62c43"
+at = "Uuid=u32"
+embedded = "4011f3ef13c9e0125c1a5a534a4647bfdee33e537ac152dc351a77a840d549a4"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::encode_upper"
+kappa = "0feb25e4fc324df751fa30da7e29793a09d509b903706a35959aee2b1e58fef0"
+at = "Uuid=u32"
+embedded = "2f40aefdbbe26d9807870dd25500bb37a7089551ca7f14f132040fa9a5b180b2"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::encode_upper_uninit"
+kappa = "afc271598a9dc656ac4d4125edae7384ff2a82cf2aafc8449d1ccb362e757502"
+at = "Uuid=u32"
+embedded = "899f25541748d6b58a9b7b3cee630efa564721471fc65e0ebbe5f221b9dc7026"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::from_str"
+kappa = "5ee3b0a9007caaf3b8adc60446318136f3bda468ea8040cd68abb2df04c44fc6"
+embedded = "80f83f5d397039aa07407eb19609d4a5b6d45954c81b6a8dbb74a4ededb0012a"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::from_uuid"
+kappa = "fe3f653ffc90ff7bccf7a3db530ec2843e4090182ebaec17f9b9291cd98ffa6b"
+at = "Uuid=u32"
+embedded = "f3bf0e036dacddc2b2a02b6aa2bf798add6116093b68897514d6cf0c0c86eb71"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::Simple::into_uuid"
+kappa = "e6523ddb90310defa2f8b258f95e8987ec7ac9ca859199380e080d00aeb29000"
+at = "Uuid=u32"
+embedded = "1ebf16af4dccf59fa566340338dc0f7026a6de3057a631ec2676be42d07797ed"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::String::from"
+kappa = "4eb5a5a28d78e24206096fe6fc00c791600ce64da6621aa9c1c1b546553f1c9e"
+at = "Uuid=u32"
+embedded = "988033972990e9bc4f3d586caddbeab504fb21d514170c911821a692dd5b5f28"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString, which u32 does not implement in core"
+
+[[fn]]
+path = "uuid::fmt::Urn::as_uuid"
+kappa = "3ffec706d8c02312c56e061cd23fe15b4fddbb4c5b8ae2a137afd1a3025ff770"
+at = "Uuid=u32"
+embedded = "1c187cd86da672e704b00e489113b66d373cf6e91ba1be6f7471c65245e7ba59"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::encode_lower"
+kappa = "d86e3874760742918b43f556c58abb59dacd9555bfe21f4f511c2a89e581b281"
+at = "Uuid=u32"
+embedded = "fb27421cde8a95d621dc1220ebe92bdf6efd9c01ded01acbacb1a1f3735101dc"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::encode_lower_uninit"
+kappa = "1145c88b92eb8e8f9a9b29d71b20558b8ebb08c4eadc09c43f6bae674ce2e86d"
+at = "Uuid=u32"
+embedded = "3eabafbb75df1b4a2d0361bc66b52615b73bbaafe94340a93cb0022fe573ce8f"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::encode_upper"
+kappa = "e51d980eccba81821349d56013596b7543c860b2b29f616fa88640343a15ac52"
+at = "Uuid=u32"
+embedded = "c0664278663b23156461d09edcce0b5f673508dc1b7ec282487766090154e5a1"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::encode_upper_uninit"
+kappa = "19c1317b4dd0de836d65abfc0d81a93fb69f096f3dd4dc092f82eb0b133f81a5"
+at = "Uuid=u32"
+embedded = "5605c3419a9ca37fb1a773acbabdd29463fc1375d2583656238f2a80b8de4fc5"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::from_str"
+kappa = "2621ffb83353cb5e9462a20073650c04a7aa929fe83957c0a22167a477215a59"
+embedded = "122b8a6d96cd193eb52b61d006e872bea234edca4c5f31fbc86ec44aac41800c"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::from_uuid"
+kappa = "54e9e40db044caa963375cd2378ed531338027be291a98f274c08a16febfd765"
+at = "Uuid=u32"
+embedded = "abf9de5cae1767c181d8bbce98f4d5fcef7a9de6918b3e8c5e1fcbfd3dc107d2"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::Urn::into_uuid"
+kappa = "03e2f6ed1a975d5f32a72a6e4fd192a910e7fc70d6efffafe340c394cd6a8c94"
+at = "Uuid=u32"
+embedded = "7516a179cfbd28dce98483befc928e30e8dd92558d2d62075e6b7aab59a0cc8b"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Uuid::as_braced"
+kappa = "9cf0f32fab2245cacc3b49e79693ca60c8a6c4700327e2d61c59c96bfe0c3ff5"
+at = "Uuid=u32"
+embedded = "82b3fc417cc8cdb142865d2484a73d849c03dd3a58f340d9980c409b54d1c3b4"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::Uuid::as_hyphenated"
+kappa = "8008c1da0a35f6feb93f51273ad212bb3ff885705bdbc2fa44dbe3efbcac51df"
+at = "Uuid=u32"
+embedded = "5ce110322a6663f29b219dd2d2bc0a737b6b0124c388b476f1d5750dc84a74fb"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Uuid::as_simple"
+kappa = "5c2b32e8a8b9b3ffe5a9bbbd3cbdd1c36d10f905f2165104b464a371b4727e5b"
+at = "Uuid=u32"
+embedded = "e0959e5766c6162b7b1eb42bf93a2bbfff6ba6719268a872fd10acf49c5d3dd9"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::Uuid::as_urn"
+kappa = "834c63a9743b6ee56746a805d30357638ef0e6b645ff1681eaf372bda3c6f2a4"
+at = "Uuid=u32"
+embedded = "16342bee24a1515094244e8f40e7d8ab3865190b8ac7f182382500c328b03051"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::Uuid::braced"
+kappa = "8a22de2aaf342e08ab97060e0828782fc88e18728e653a11b33fb23666f039dd"
+at = "Uuid=u32"
+embedded = "3c2d98ac7971239c65141f2e2d70d79d10b2d24117e35a29b2bf6319d672b5a6"
+status = "residue"
+cause = "mir::Ty: fmt::Braced"
+
+[[fn]]
+path = "uuid::fmt::Uuid::fmt"
+kappa = "527cc3571da7a8646b102d6fc24bb6ac949c4a971c97bce9c74c2c55bf1c4b81"
+at = "Uuid=u32"
+embedded = "e7cbfa418898aacaf8bcacd2a7743d124944bbb717bafe351d87b3ab0803e537"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::Uuid::fmt#2"
+kappa = "21413c44a6eaa6ae93150c688784779860215e68d0c9b819893b80fd0e29adb4"
+at = "Uuid=u32"
+embedded = "4133f4cb322569dd7364d313632be3c7410867f31edd7dc3779fc19ec911a4fd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::Uuid::fmt#3"
+kappa = "3e9c783234fcd355b296c4da9f8486d3ec344cb50bbbbea6e26ebadb051b73f1"
+at = "Uuid=u32"
+embedded = "959bf85f9e81b5c7942e30fccc341e89f09bb4de342a0ee2a537a8d87f039ba4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::Uuid::fmt#4"
+kappa = "c1286fc1bad07d6b675c3583ff7fc30a6ef61d4000dac025f0734834adeeff90"
+at = "Uuid=u32"
+embedded = "287375d3d0921adb206bd0402cb90e9da68bb392d675424b569b2be1e3e38fc5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::Uuid::from"
+kappa = "db8932c3ac45e7ac1ae6b662897518ee3a127f32e73032565c7e0f93b869dc0e"
+at = "Uuid=u32"
+embedded = "7ebd093f2bfd4bfdb18c97df2b8c1415553292e943af11ffd12575cedacd26b3"
+status = "residue"
+cause = "mir::Ty: Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Uuid::from#2"
+kappa = "097a863803fce030ebb40bdd1c4d1016e84495ce8f2b18a7e168cbc22cf6269e"
+at = "Uuid=u32"
+embedded = "238c2cbdbeebba2f8dba234ef9049cbe2b95153a1fb2da066ebf71854be3b43d"
+status = "residue"
+cause = "mir::Ty: Simple"
+
+[[fn]]
+path = "uuid::fmt::Uuid::from#3"
+kappa = "d195703fb24d1bd1c9cdaa2990b35164417b2d8bf338bb176d19636637363f2c"
+at = "Uuid=u32"
+embedded = "c617ea9a815b368dd6f1aa003da4e67f0ec9ec1f4e00b55f18307a80b0aa9427"
+status = "residue"
+cause = "mir::Ty: Urn"
+
+[[fn]]
+path = "uuid::fmt::Uuid::from#4"
+kappa = "d6b9c1a251559aa204d5fea20bef39d9e92b54b59d212b63e95f2dac9a687b3e"
+at = "Uuid=u32"
+embedded = "f01e07a87bfcbd422b8eb9e0120af2bb9d2219c40cf05aad88efaa7865eaf5b2"
+status = "residue"
+cause = "mir::Ty: Braced"
+
+[[fn]]
+path = "uuid::fmt::Uuid::hyphenated"
+kappa = "e052d240a472894d9ec564822549874424dae6055e6e022f53a1857790f8e452"
+at = "Uuid=u32"
+embedded = "10d570f4320a7cc3f071c5f3d73d44cc9a74bbc7a3f5054eacac0c59f27edb28"
+status = "residue"
+cause = "mir::Ty: fmt::Hyphenated"
+
+[[fn]]
+path = "uuid::fmt::Uuid::simple"
+kappa = "fedee58b390471d6172109f23bc36b45cffce6e8ceeff1c78a25be016951d2f7"
+at = "Uuid=u32"
+embedded = "d96dea7ef7110e5dbf07250b31e3d54c49f554a10d56716d329372206aca05c7"
+status = "residue"
+cause = "mir::Ty: fmt::Simple"
+
+[[fn]]
+path = "uuid::fmt::Uuid::urn"
+kappa = "2cb26364d8c6f0d117bf5896abf197353e7dc05d075715aed10f134b72f24a40"
+at = "Uuid=u32"
+embedded = "810fd5b2474d3c68fdc511f625e644ad8bcee865226447fbca6287c07f9de9d1"
+status = "residue"
+cause = "mir::Ty: fmt::Urn"
+
+[[fn]]
+path = "uuid::fmt::Variant::fmt"
+kappa = "15f4cb18dcedde036f1c7684a215dd770929678065de49d54f12ed02771a0d42"
+embedded = "492dbc85268e4d6b0f6c9bf1160859920a9e8fcba4b3d1bd6c180407ad8a4f94"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::fmt::write_bytes"
+kappa = "33fde6a47647aeaa97f3e18524a8e24e490374013832aa60bf72275bb806ccaf"
+embedded = "61706b40a721e1be2dbb7a086b69a2aa96f9d0afffd8fc1b1dc552fb1f359940"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "uuid::format_hyphenated"
+kappa = "f38a41e15d828ffeb486d5cb10feb241c6d026c39c4d783024ac1d1be9a5ddf6"
+embedded = "f2203dde58eb71de53994efa3bc42ffd406308f80cba57ff819c4b2d56cf0994"
+status = "translated"
+digest = "771cb1119830f664fac21e387bd49d2dad454629e735d7757173b1b5dad5d17c"
+
+[[fn]]
+path = "uuid::format_simple"
+kappa = "aef3231634c8ef298a8ab149fc3e5ab16b514525456b0bfa74be2e7bc9156d48"
+embedded = "7f8a496bc6301bb1df47619923a94c8287be9963fa347eea910d98a46e3df18c"
+status = "translated"
+digest = "4b0e304c61f11161c1cb3a32d63cbcf90b2d8b1931ee3c001ae85276cd7dfcbf"
+
+[[fn]]
+path = "uuid::nibble_to_hex"
+kappa = "f7d1df03f21e297b66fb9a2155660298a6dd76161431601527970c43bc5b74bc"
+differential = 4
+embedded = "c3a049955ed199222205461b90eac8607b0a06d96fe741514574a23e97c21748"
+status = "translated"
+digest = "63a75adbc66902272a646fbc4eba52d6d79d580ca5ca194dd98da92593f1b5e7"
+
+[[fn]]
+path = "uuid::slice_as_uninit_mut"
+kappa = "48a2c557c73246ae45b25e6c499f0070356dcd62499c6a0a4df7e6f9713594b6"
+embedded = "85cafe49459256341c8f3282802ea18d553cb4cc920ef804ac5056f0665b82b9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_mut_ptr"
+

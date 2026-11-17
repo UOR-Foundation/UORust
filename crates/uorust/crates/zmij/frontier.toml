@@ -1,0 +1,188 @@
+# The zmij register (written by `uorust crate zmij@1.0.23`; do not edit): every body of
+# zmij's MIR at zmij 1.0.23, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 78
+translated = 14
+residue = 64
+
+[module.crate]
+bodies = 64
+translated = 13
+residue = 51
+
+[module.private]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.stdarch_x86]
+bodies = 8
+translated = 1
+residue = 7
+
+[embedding]
+bodies = 78
+embedded = 78
+evaluable = 74
+blocked = 4
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 4
+
+[differential]
+bodies = 6
+theorems = 42
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: uint128"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: <Self as FloatTraits>::NUM_EXP_BITS: mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: ExpStringTable::MIN_DEC_EXP: mir::Operand::Constant: the constant item <f64 as traits::Float>::MAX_DIGITS10"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FloatTraits"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Sealed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Shl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <Self as FloatTraits>::EXP_BIAS: mir::Operand::Constant: <Self as FloatTraits>::NUM_EXP_BITS: mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <f32 as FloatTraits>::NUM_SIG_BITS: mir::Operand::Constant: the constant item <f32 as traits::Float>::MANTISSA_DIGITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <f64 as FloatTraits>::NUM_SIG_BITS: mir::Operand::Constant: the constant item <f64 as traits::Float>::MANTISSA_DIGITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Pow10SignificandTable::compute::STRIDE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Self as traits::Float>::MANTISSA_DIGITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <f64 as traits::Float>::MAX_DIGITS10"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as FloatTraits>::IMPLICIT_BIT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as FloatTraits>::NUM_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item DIV100_EXP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item DIV10K_EXP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ExpShiftTable::ENABLE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Pow10SignificandTable::COMPRESS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Pow10SignificandTable::NUM_POW10S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item compute_dec_exp::LOG10_2_SIG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item compute_exp_shift::LOG2_POW10_SIG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc53: &u32}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc60: &u32}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Buffer::new: zmij's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AArch64Mem<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExpFloatShuffleTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VALUE"
+bodies = 1

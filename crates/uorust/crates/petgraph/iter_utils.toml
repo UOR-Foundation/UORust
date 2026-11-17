@@ -1,0 +1,16 @@
+[[fn]]
+path = "petgraph::IterUtilsExt::ex_find_map"
+kappa = "aee99beeaa749e773f50e7fabb9eb6ff6349ccce3b156eafaf52bc7781702c74"
+at = "F=u32, R=u32, Self=u32"
+embedded = "4b99721b1bff4bc3393dfc2f3e8b90c19be3f07e1385635c52a0736a379f0ce5"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <&mut u32 as IntoIterator>::into_iter, which has no backward function"
+
+[[fn]]
+path = "petgraph::IterUtilsExt::ex_rfind_map"
+kappa = "492dc3dd561348d250f28a458e4cbb4daa5803b86e130825e1b9457ad735ab5d"
+at = "F=u32, R=u32, Self=u32"
+embedded = "20d5ef52e72d5cb736b4c1c5c956e7dba9b7fa8e2853ad363585e38e3fba23aa"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DoubleEndedIterator, which u32 does not implement in core"
+

@@ -1,0 +1,38 @@
+# The pin-project register (written by `uorust crate pin-project@1.1.13`; do not edit): every body of
+# pin-project's MIR at pin-project 1.1.13, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 4
+translated = 0
+residue = 4
+
+[module.__private]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 4
+embedded = 4
+evaluable = 4
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: UnsafeDropInPlaceGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnsafeOverwriteGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::UnsafeDropInPlaceGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::UnsafeOverwriteGuard<u32>"
+bodies = 1

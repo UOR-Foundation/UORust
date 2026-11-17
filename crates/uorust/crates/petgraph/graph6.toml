@@ -1,0 +1,161 @@
+[[fn]]
+path = "petgraph::bits_to_ascii"
+kappa = "a97ddef95674dc9f35648785874afbfe9225eefdd8addafe214f5f872f942937"
+embedded = "a14db95024666f27ae6c014b7970658d2cf7da91b1be9555eb8e96567036d466"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "petgraph::bytes_vector_to_bits_vector"
+kappa = "aeb1dad0ad54bbf3ed845c2f0917372fe70e12c3618945a17c7bc527f3f0dcf9"
+embedded = "cb46ccf111d77a50e89da2b86e684c1d2b264a3c4d41a6a4c4c3938658e9a465"
+status = "residue"
+cause = "mir::AggregateKind::Closure: bytes_vector_to_bits_vector::{closure#0}: mir::TerminatorKind::Call: graph6::graph6_decoder::get_number_as_bits: petgraph's MIR stops at mir::TerminatorKind::Call: alloc::vec::Vec::new"
+
+[[fn]]
+path = "petgraph::from_graph6_representation"
+kappa = "352b56eaecc34a789c1542a887265ad46db5adddbfef31ca892bda20339e7ea7"
+at = "Ix=u32"
+embedded = "d8a3540b2209107abf62582d1a83b0007c09ed6cc1bffe931bee3aafd25671e1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: graph6::graph6_decoder::get_order_bytes_and_adj_matrix_bytes: petgraph's MIR stops at type outside the lift: core::str::Chars<'_>"
+
+[[fn]]
+path = "petgraph::get_adj_matrix_upper_diagonal_as_bits"
+kappa = "b670a62379e9886106432810d372cc7c294fcf138a25d9640c77217d271fe307"
+at = "G=u32"
+embedded = "6ba1c05c6fca3109ca3b56ad4855a124c8d153de4f401737b096a4dbd9e09b4b"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::get_bits_as_decimal"
+kappa = "ab013725f54877b246561ddbbddd0b7ab78d77adb632b9c48938fe973bc08cfc"
+embedded = "b42b6d4f9799e557acea6b4014d024bb8dd71a80f03c60847fae094eb81c5fd1"
+status = "residue"
+cause = "mir::AggregateKind::Closure: get_bits_as_decimal::{closure#0}: mir::TerminatorKind::Call: <u8 as ToString>::to_string"
+
+[[fn]]
+path = "petgraph::get_edges"
+kappa = "62d24a50899d816738085f9dd41fc081b20efc3655c18163fb87b3fedb8891e3"
+at = "Ix=u32"
+embedded = "5590d7b87d7661b308d96e810242044088fd49a69a4c3fdd4857989f85118b32"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::get_graph6_representation"
+kappa = "1f1702b2a0ab534c1fb152c0e96b3d832260d7a5d287e427bf276900eb6fedad"
+at = "G=u32"
+embedded = "139c85e3239bdfc33a9835023b5911ace42644820ce3a581b038385e11ec5153"
+status = "residue"
+cause = "mir::TerminatorKind::Call: graph6::graph6_encoder::get_adj_matrix_upper_diagonal_as_bits: petgraph's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::get_graph_order_as_bits"
+kappa = "ab236f678bd095f31feb3bdb617d19b9e1855a7169f02afe9ae481620cff5c53"
+embedded = "3ea6428f5ba1327d5a1bc345e107153a3497be0ccd149ee7f5fff8a90604e590"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item graph6::graph6_encoder::N"
+
+[[fn]]
+path = "petgraph::get_order_bytes_and_adj_matrix_bytes"
+kappa = "103fb3d818eeae0e706b07b1f9b957dd70fd359f2c1f3e30e4626b7ad8b29b80"
+embedded = "4bf4d7a555d5322abf8a375c9fca1d4ac7b108aeb39194e8b36b4857684ef01a"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::Csr::from_graph6_string"
+kappa = "afc600f0ef85fe403cf3ba44067420edf74ddf71f983025f85be216199462e79"
+at = "Ix=u32, Undirected=u32"
+embedded = "4df50ecbe061aa991ec406882a6ecd08312150109f941ea9e203dff43387654e"
+status = "residue"
+cause = "mir::Ty: csr::Csr<(), (), u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::Graph::from_graph6_string"
+kappa = "4a992179a6490a7aa40fd12d7f2dbecd47da074d58d141d8f807705de73191b1"
+at = "Ix=u32, Undirected=u32"
+embedded = "4de6e17264df9a0cefbbce7730cd18f764cb87ac79daba5e378ed64fb1ca3187"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<(), (), u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::GraphMap::from_graph6_string"
+kappa = "30a795ac70ceaf4e69009fa0df7d02e3c9d56bb12d297ef2f4533eb72e869673"
+at = "Ix=u32, S=u32, Undirected=u32"
+embedded = "41c807c17319d6fb8fa6d8cd73b949f49a424bec19e390471dab27adb93f99a4"
+status = "residue"
+cause = "mir::Ty: graphmap::GraphMap<u32, (), u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::MatrixGraph::from_graph6_string"
+kappa = "db7c8baf5d879a11aec1763e2c0a7a839bd48b56c272bf504bb406d715d6dc91"
+at = "Ix=u32, Null=u32, S=u32, Undirected=u32"
+embedded = "ff2e42e49443ef2d0a04ad33f3160d17b7579ff8a22f764e7a9c438ab21bf106"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<(), (), u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::StableGraph::from_graph6_string"
+kappa = "391701ea20f18b1e2ea690bb7d86d0f5aee67627074e9ef085969331a3cb85f0"
+at = "Ix=u32, Undirected=u32"
+embedded = "5ee81d2f936d6de1ca643fa59c3ce427b0b51f06da7f69ba0edd0a3478ea89fa"
+status = "residue"
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<(), (), u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_decoder::get_number_as_bits"
+kappa = "fb3b3eeea5d479096809b3176c15bc478bff44a82f90f8f646faedd725c49f91"
+embedded = "69b1915850f9300d9b2cb12bfb87c38bf49d34c036bedf49df6930d7d8da2a15"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::new"
+
+[[fn]]
+path = "petgraph::graph6_encoder::Csr::graph6_string"
+kappa = "11ce5866232c814df32b59495a3c67b8f6fbc103ff9a2dacb0b430b2a77660b1"
+at = "E=u32, Ix=u32, N=u32, Undirected=u32"
+embedded = "af492f5452391e5cb2ee8f1313458c0d3189de9fe08e23910ec277711f981577"
+status = "residue"
+cause = "mir::Ty: Csr<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_encoder::Graph::graph6_string"
+kappa = "f596d29fab96639aaad197df459fa07414bdf9689f55c3091ab87ba4c9af287b"
+at = "E=u32, Ix=u32, N=u32, Undirected=u32"
+embedded = "8b78b5398980648e66208069950d68e9400cc5d0be19ea047df2c0a0bdfddb68"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_encoder::GraphMap::graph6_string"
+kappa = "3581d79fd431e553032d878340c277065cd74ba87f241212f5cc987ef849b234"
+at = "E=u32, N=u32, S=u32, Undirected=u32"
+embedded = "833e6a6f64c59fb58cafe1050686b34ce1460737416928b29d5654f32565dc8e"
+status = "residue"
+cause = "mir::Ty: GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_encoder::MatrixGraph::graph6_string"
+kappa = "ce3b6ae0571779e03c00f117539a66b41a4d9aa497a56a688b031bc9a85bae50"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Undirected=u32"
+embedded = "4b82ab2319e9a9997871a35dd16f99f43c4de9046234e29b7f54139d7df81ebd"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_encoder::StableGraph::graph6_string"
+kappa = "0e364f49b0422524debb157ef917f50348696275116cd253aed793a72ff0d72a"
+at = "E=u32, Ix=u32, N=u32, Undirected=u32"
+embedded = "fb3041a00df581378a0d66bb16d1514484e4cde17f8045d9fa4f5da8ed9e7406"
+status = "residue"
+cause = "mir::Ty: StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::graph6_encoder::get_number_as_bits"
+kappa = "94fc81a6158eb149b93d1976b5da7f7fabcb141fe044ae6e672683797fae441d"
+embedded = "1120add7ce4784825d041b88947f79846205e477c238d910a846ebace8fa4e25"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::new"
+

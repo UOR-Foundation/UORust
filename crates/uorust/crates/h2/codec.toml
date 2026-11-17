@@ -1,0 +1,669 @@
+[[fn]]
+path = "h2::DEFAULT_BUFFER_CAPACITY"
+kappa = "55b2892c85aeefb50d998f4f9a791baf2f634d4c1d28031c709dde2e688bd8ba"
+embedded = "0d1be16019d988db09b4995bb658b1bda333df1e20fab13bc4b8fe9917633e71"
+status = "translated"
+digest = "b11e4d5d03485a04d7350174d3c421efa5f8a5f1018b7405051faf59d10ebf29"
+
+[[fn]]
+path = "h2::DEFAULT_SETTINGS_MAX_HEADER_LIST_SIZE"
+kappa = "23f553e9a7341c8cd25b9f985af657cf99eded4df9c16fce4632b37638f02d60"
+embedded = "113de5b8ff590aa33cf81934df1937d0d713ad9a51b2da2065332152e7948257"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "h2::calc_max_continuation_frames"
+kappa = "89e38d4a20a2918880dd8cd652f335e5a51d0e83d391bb40b0be54da4b278c4f"
+embedded = "e1d6fcf3ed48d6974836e8afbc852ec98bb8d69f4f3e11845f61116f74df1d9e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_add"
+
+[[fn]]
+path = "h2::codec::<impl at src/codec/mod.rs:23:10: 23:15>::fmt"
+kappa = "764396753b84b15cad68ed33ebec96cabeea7a65021fdfa5933d905881ae1bb5"
+at = "B=u32, T=u32"
+embedded = "8d6805002cb71e516e092adbd4e9d5621d8389490b414a11ed6b0ae2e27d1c2d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::codec::Codec::buffer"
+kappa = "c8d33c83764695fe2b5a66fd6ca2834e3c540a53342a00349e596043ce5d6f1d"
+at = "B=u32, T=u32"
+embedded = "fc3edf3fe2c9f70069af667d988158b7c3e5a5a2a7f47ad86166c619ad792bf6"
+status = "residue"
+cause = "mir::Ty: codec::error::UserError"
+
+[[fn]]
+path = "h2::codec::Codec::flush"
+kappa = "5291e60187c6456f3fe8528b5c00b16ae4c3187707644ea3310b718d8cb8acfa"
+at = "B=u32, T=u32"
+embedded = "c1f30be3178c16c0179a5f4e30680111dd3f58985ea524839cec3252405593fa"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::codec::Codec::framed_write"
+kappa = "27f814024cc19177f2ad2e9c0a2f34817490e4de56cffa76fb5887dece59ca90"
+at = "B=u32, T=u32"
+embedded = "cdf5395f0f0a3eee6cfdb670f21ae6f9f9ccb3f92bf2b256ccb4889bf50a1160"
+status = "residue"
+cause = "mir::Ty: codec::framed_write::FramedWrite<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::from"
+kappa = "a18501867bd266de544121a022792eb4e7b6648763d01a34a6c2bb8f9caed270"
+at = "T=u32"
+embedded = "fcf4fec7035f6ea96ef9338f7e1d68eab065110d93aa68c887ba553d1d8f87e2"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "h2::codec::Codec::get_mut"
+kappa = "f1d48b1723e7151484f94a4641a10abffca7d2e4c4f3c85ebb3dfb42d428f6c9"
+at = "B=u32, T=u32"
+embedded = "23a15c4657e9d79bb3fd5a2dc8de2a5db10083be5de5a6b91ac736a13fb8ff0c"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::has_send_capacity"
+kappa = "37d0358411c18f60edf5dc5cc90bb7edbaaf785fcc127e79c2144bae9f01a92c"
+at = "B=u32, T=u32"
+embedded = "bc624c5b008df7a342e74f11d4d1749e821d8a7d703e3c56afafcf01c025af41"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::max_send_frame_size"
+kappa = "4e47d839bb3be0e7839377792469b93c5f1fbe2131a6f622064e1750890e1579"
+at = "B=u32, T=u32"
+embedded = "b9094a1a3356b477434c10d6fd946553cc59ccca51fbc5107fc2ef2ce47a49ba"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::new"
+kappa = "1b9fc36264cc68251a26c0c78cc5e9eda813cc829d3d168d13b0e7fb37500801"
+at = "B=u32, T=u32"
+embedded = "62cc4b6d011087e058a205cf90ff573b42eb7854d1ea2e49a057ed76dd068212"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::poll_close"
+kappa = "68daacbb6ac59ab08743bc45563bdf91088d9d31b99b979c7c736952374a765c"
+at = "B=u32, T=u32"
+embedded = "6a47d9bb1100edb19774b91c727d142d7ee02a984859f666e2f6f62a19237bea"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::Codec::poll_flush"
+kappa = "980a6cb8a6bbb4e518d355ca5aa4be20e05615356d179a40a4abc6f1de5e4d21"
+at = "B=u32, T=u32"
+embedded = "8fac0f2eaba1b75505be69c19a3fc276951b73c8bcd6c15b6178ad37e909cc72"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::Codec::poll_next"
+kappa = "b90032c1282b4de06a91ddfb542a4a904e77429815384ed91566a6630450cc87"
+at = "B=u32, T=u32"
+embedded = "61e85fcfd80cb79f136233dc4534418a6de455174569ee43b6a2ca040ec8f8a5"
+status = "residue"
+cause = "mir::Ty: frame::Frame"
+
+[[fn]]
+path = "h2::codec::Codec::poll_ready"
+kappa = "3ba7a02f61f11c06f8896fd5defa02c9361935f5fffb9d3119e0a0cfec2951fd"
+at = "B=u32, T=u32"
+embedded = "56e09e729d2343cc7a8af629fd6b4136572cc8139b344b32ee0bb9a7286961a9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::codec::Codec::poll_ready#2"
+kappa = "9cd3017f4e281fdae35e1a3c2cc8ca6855e4433fe9bc554ebcd27da7daa9d3b7"
+at = "B=u32, T=u32"
+embedded = "39b76ee794336e7ecc59481c17b64babd44fcb19c87fef1a3c3ed9c411c54d35"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::Codec::set_max_recv_frame_size"
+kappa = "ee9523adf8f1f23ad4ef4fd40ea9129a59f2b56a765e1bd074ef166ed9ef0149"
+at = "B=u32, T=u32"
+embedded = "2ea81c149cb21ed1f39351d53e164b3da785d6c409c821287985e3276dc4bcdb"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::set_max_recv_header_list_size"
+kappa = "e0be88bd8c02d2cb9f76b6838a49a8c7b51ebe4fc68949893fa12475f115274f"
+at = "B=u32, T=u32"
+embedded = "abcbd5e8538894c4ee348a8230284ded0be8f0346e02fb5b3939d8e5874a4461"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::set_max_send_frame_size"
+kappa = "f28aad30d9d50c5982ac3ad380b44087ebe94407c6745727ad8d5d7b6ab73b75"
+at = "B=u32, T=u32"
+embedded = "215f80892ba97634c83d2143ea137d56f9fed6ec4a34d621015f026f36d11d00"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::set_recv_header_table_size"
+kappa = "6671cd43613b3d549e32646655cb6d6186f1e1421d92f7c0fd34139e8fbdf2aa"
+at = "B=u32, T=u32"
+embedded = "ea850d1f31d1d05e710b8db92e36bc168993b31029c1f1bad2d2633bf7315e66"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::set_send_header_table_size"
+kappa = "dcf34c6b2ea260e20fa74ee2475226e532b6ec8e88451f234c9399a3a0f5ca96"
+at = "B=u32, T=u32"
+embedded = "bb14bc55276657b67432969aac23352423c9faa406b148fef16b1d243b8d959e"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::Codec::shutdown"
+kappa = "0d6bdb2d8a722e18ced25fe3b7e05b3f8d4e7f253e04df1d268ae3a220b96974"
+at = "B=u32, T=u32"
+embedded = "a2f0001995f87577eb65a22613db685f644c0e2026be809d81e5c0e0b7dd6257"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::codec::Codec::start_send"
+kappa = "d5ac2f9934a6da876928301ffe73cf018e37c96a83edcdf3f9631a6da5341dd9"
+at = "B=u32, T=u32"
+embedded = "3943ec55024986b86043dc1da88c51ebf02efafef73c96c959ea0337ff8e84ca"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::Codec::take_last_data_frame"
+kappa = "c3e90671478e4c63551657460bd37c47c7d89967109846fd49b784f9733b5933"
+at = "B=u32, T=u32"
+embedded = "2914f8ed87f30e05316666ce8941fa03d00a0d2613695de59ee0b5a126d7f2d6"
+status = "residue"
+cause = "mir::Ty: frame::data::Data<u32>"
+
+[[fn]]
+path = "h2::codec::Codec::with_max_recv_frame_size"
+kappa = "8542da2e0b6c3c0584385413fbade16b3bf0a5e38713cf2a05985da194cbe9a5"
+at = "B=u32, T=u32"
+embedded = "9dc698f9f1ce54f215e0436707cf4341e5af41f9e9b33b8bde4a3143213fa6f5"
+status = "residue"
+cause = "mir::Ty: codec::Codec<u32, u32>"
+
+[[fn]]
+path = "h2::codec::error::<impl at src/codec/error.rs:13:10: 13:15>::fmt"
+kappa = "e9209280287263cf47404bbd6f1f7e4f6873750aa918201822baaf2e82d5b8ba"
+embedded = "eff5290335cd287a5eda32b2eb7ca0f1d4e741686963e0176e71412366cdb6c7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::codec::error::<impl at src/codec/error.rs:6:10: 6:15>::fmt"
+kappa = "0c1db43daa84453e239315a1322b1272aa9c2e7a447a5afff77f0c34af7c4d56"
+embedded = "36039187e1c0dbee9a165d0643f0322bdeadb2d495be3043cef01d44492ee6a6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::codec::error::SendError::fmt"
+kappa = "5e380aa5bf9ff65c20d9690ec8d70ef56e003ecc47203514ff50afa034af0b79"
+embedded = "b70f0c1e6ab65536490dc738e61d4e79e80b2c8b2b7b19a6379795e47b83ba66"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::codec::error::SendError::from"
+kappa = "22726ff17c2af9f4f227cb3f7d3d581ac6380eec4aa45b160c2873aaeb95ee94"
+embedded = "3a3b02c5639fa6b210d4453d04535af02cf5ecd714ac072b120942a378e0402e"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::error::SendError::from#2"
+kappa = "084459f6789db4c17f8e5be3716be885f4bdcffb676b819faa889e93c29f6788"
+embedded = "9d99777cf1d95a10d643b1229e48627e51295acb534857f40396bac3930077c9"
+status = "residue"
+cause = "mir::Ty: codec::error::SendError"
+
+[[fn]]
+path = "h2::codec::error::UserError::fmt"
+kappa = "da4832989654af19e6ee05a65b89278db8f38ad74262c290118ee511fc90e7b0"
+embedded = "45f5454d2d48a693341ced3a0b51d8109e149865737ace79fe862a1f28918c61"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::decode_frame"
+kappa = "3f4951cdee9b548e6c07ba9ac427adbb7fb61d1e5fe14fe2e50bdfb7e4c28bc3"
+embedded = "5075154bbfcffeda44c947c594cd6b4ccbea4409d29ffbf0e08e02bf8463db79"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: frame::Frame"
+
+[[fn]]
+path = "h2::decode_frame::__CALLSITE::META::NAME"
+kappa = "a6d3e2ea794ef3dac076ee5242a2180e0af546e4f800b11a2f7e435dc229776d"
+embedded = "4c77cf124c7234e48116d1ab9c031ca9323ec287327826614c891a84501242c9"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+
+[[fn]]
+path = "h2::decode_frame::__CALLSITE::META::NAME#2"
+kappa = "0a840e94787640641d9c90b7c09747052f58cb3759db2a9d63def28656861c43"
+embedded = "6520e4ae9d604bd7b7fc25b7db6c69b37b6cae5824a90c0e0dd231c6e22678a5"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "h2::framed_read::<impl at src/codec/framed_read.rs:24:10: 24:15>::fmt"
+kappa = "af9e9840974ac9bfb78eed7cee7084c93d28f2e2e7c6dfe5de15b89770252733"
+at = "T=u32"
+embedded = "3a15984a5be26e845d924c8276ffd89e8927c25fe1ee525ce2ccc3828640017b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_read::<impl at src/codec/framed_read.rs:31:10: 31:15>::fmt"
+kappa = "e17609b8fc241663660839deabf74b995c7d76f8889f547cb3877c75a17b4b98"
+embedded = "15a1bc3f934ee1d941204deca3a6987b516d377be8f30c1421297078bfd4d5da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_read::<impl at src/codec/framed_read.rs:44:10: 44:15>::fmt"
+kappa = "82d6d9342ce8c69f8fd0c7d36f675891808dcb7ea0505d1851daad28bfb3788c"
+embedded = "cf552a638e07c07237522fd7da008a81a2671b67949d04c0bc025bbc8f05c215"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_read::<impl at src/codec/framed_read.rs:55:10: 55:15>::fmt"
+kappa = "3c0cb024f8a85805b3df751a8e72c479086b9182ed817acbab5bf8f3d00761cf"
+embedded = "ce30f06c40ca24010655f28781c30a5cba1cb062fad996356188282fcc8e643e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_read::Continuable::is_over_size"
+kappa = "9e76cc38574e68b24df18045e5228797fe1a4a08c8a8365c8588037952b99365"
+embedded = "f886747c8528410bdecc4f4168da5fdf78127c61bfabcf724149d79a9c04373b"
+status = "residue"
+cause = "mir::Ty: Continuable"
+
+[[fn]]
+path = "h2::framed_read::Continuable::load_hpack"
+kappa = "47e87fd0fe0e63b431139d775abe98baf7e44e0914eeec1342d7e8a20b51cd3e"
+embedded = "9750373bdf7c79058cedcc3fce380e1fb33d7d95da0332671751c873d0d1c4e6"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "h2::framed_read::Continuable::stream_id"
+kappa = "b610cc71c2727d257e4aceec6c5cbe1a003cfa6412ba09b4a08a8100f5366377"
+embedded = "726d4ba639c10ecabbdd16b276d3e7e757a7124ad4c3ca8660e48c37d50848c2"
+status = "residue"
+cause = "mir::Ty: frame::stream_id::StreamId"
+
+[[fn]]
+path = "h2::framed_read::Frame::from"
+kappa = "a17b2629961efe5b4c24dd07575112aa856a76929fb5fdf32be46714e0f41b7d"
+at = "T=u32"
+embedded = "0167375a0ec7e9019ca2594200f53a112544b1978e0686e4c8e2e543b7876c32"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "h2::framed_read::FrameDecoder::decode"
+kappa = "387f2b4771b0872419323f9941bc10656ce731477a9955bd328a747238b9560d"
+embedded = "b669e2fe98d1da5aaea341463324786a1f8f25813169c88712a964ceade3a9b0"
+status = "residue"
+cause = "mir::Ty: frame::Frame"
+
+[[fn]]
+path = "h2::framed_read::FrameDecoder::new"
+kappa = "ac6bfdf390fb3813252735402a09fb5b0df9e671ce545514bffd024c7b1c97e6"
+embedded = "f688f55b1185522e30dc67255a1c0624e20bc7a98bde34aabdc812693a4e3a2d"
+status = "residue"
+cause = "mir::Ty: codec::framed_read::FrameDecoder"
+
+[[fn]]
+path = "h2::framed_read::FrameDecoder::set_header_table_size"
+kappa = "9f75df92e60e62bb5ee452cad7fc96e01ed9319ec668294f70e560268c7aa723"
+embedded = "426d5330f441cf3daf46709c09e7e0f875eb5513c37643b546366b7716758b22"
+status = "residue"
+cause = "mir::Ty: FrameDecoder"
+
+[[fn]]
+path = "h2::framed_read::FrameDecoder::set_max_frame_size"
+kappa = "ea03997f07835355b310e2caff0e3c3de15186c297e84e83803af2c2226d681f"
+embedded = "b6436d96e7737213d96e5b8681cba6c4de79dc3c211669ebea3024782a321d6d"
+status = "residue"
+cause = "mir::Ty: FrameDecoder"
+
+[[fn]]
+path = "h2::framed_read::FrameDecoder::set_max_header_list_size"
+kappa = "f289e92cba9fae26669848670798d133633c0f05ac7581a3307e3b8962623a85"
+embedded = "556f99620b58250f3a416651dc91ba578aab4b72b6b97c0b971cc766f56f64bc"
+status = "residue"
+cause = "mir::Ty: FrameDecoder"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::get_mut"
+kappa = "d3acd1fd81bd160051ba1a2bf50582c3785d24d899213ec8dddeb63ee83f8030"
+at = "T=u32"
+embedded = "c09c978116848e619284dc7079e30796d9dd363699172fa9ec62b2e88cd5e616"
+status = "residue"
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::get_ref"
+kappa = "0e4fb4cedeb3e65a13b14fc073c6a783720c74cefa4a4f7618fff9c44b35871f"
+at = "T=u32"
+embedded = "4d5732d983006177c4e69fad521dafc91f4aa4bf9101d56cdfdcefcf8fc54494"
+status = "residue"
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::max_frame_size"
+kappa = "b679e11a9a8bbb8a9328c713e4a971f37f589a89ed8367d65d162d4baa7ae851"
+at = "T=u32"
+embedded = "6af554c5e44acb4344707c4e2807782ee78c9b014895ff2e6b61bcca9d067363"
+status = "residue"
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::new"
+kappa = "932afb46395e55e4758f7773a5a9b5c01fcc2b13a4f977bfc7e6813806432563"
+at = "T=u32"
+embedded = "102bdccf365d73febc21227bb43d23991f773b6467e628600669d516634267bb"
+status = "residue"
+cause = "mir::Ty: codec::framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::poll_next"
+kappa = "5e8c79a43c11ec3e4ae2acab9244b97f521f41519793b4351b2cb4229fe5f784"
+at = "T=u32"
+embedded = "1bf773ee67ac17ef8f6c926ae1c760d46672effbd6b83a84a8ecf2923c3f8ce3"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: frame::Frame"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::poll_next::__CALLSITE::META::NAME"
+kappa = "6c3d1733c74a5caa2b3fae3ba4fa5169cc2d4385f02f2bbdbb7df00e97363ec0"
+embedded = "9de3f5717c6b1cc0726e26d22583f87f6523e163c747fc348e7d0cc43cf79c6a"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::poll_next::__CALLSITE::META::NAME#2"
+kappa = "60d9121220dbe9da9f98083d862af14884fd446dfa814f0cbe79ffa1fe19e3fb"
+embedded = "c217fc820b5df5a77dd267e0308f6fe7a2394fd7323bf65ce01a4ee10570939d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::set_header_table_size"
+kappa = "fbf3383461d6df9cce04cb699a8e9f4256a028024f73d2dfb92307ebbf4599c3"
+embedded = "0b006950669eb7fc7c14f29fff175fae1079198b29db986c913cbcf916087775"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::set_max_frame_size"
+kappa = "0c45ff60e81dcc6c3e512745537edfa8e9a6e15eb8ccbb2abb343bfc81b34422"
+at = "T=u32"
+embedded = "fbf4e6384fc3e783194e54bb5ff86c0c0fb7b1874f4c07912e5dda64ce55bd34"
+status = "residue"
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_read::FramedRead::set_max_header_list_size"
+kappa = "7cb08c9dd3b3b9a697d62a2eface2e59d49579bf9d825387842feca394bbfd46"
+at = "T=u32"
+embedded = "3154d6c0a0ec69d04fe71890197c077fbd16f221db26b5c4311ffa6d30817409"
+status = "residue"
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+
+[[fn]]
+path = "h2::framed_write::<impl at src/codec/framed_write.rs:22:10: 22:15>::fmt"
+kappa = "92c7605cdbaea4504acd2c5337a468012e543b685925688fc63267518bfbb433"
+at = "B=u32, T=u32"
+embedded = "b43a34f301dfd711ca4e7dc488c49751dd338491392d7a3e8a23c945846764b5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_write::<impl at src/codec/framed_write.rs:31:10: 31:15>::fmt"
+kappa = "49be8739c3c40dfe960575b077ed45497904af346a62c0a494268129fad62394"
+at = "B=u32"
+embedded = "3c0a9882645ded193d735d6513ae999e7d339f6df2c1809f32368d43253f36f9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_write::<impl at src/codec/framed_write.rs:57:10: 57:15>::fmt"
+kappa = "d2e5d6e923610c4df105339ff0273cdcd6f91706d9426ab2ffbc12ae50d0519d"
+at = "B=u32"
+embedded = "396542956fc3185806a74851bb6c33e43eeedb9da387ed496095733209c4eeba"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer"
+kappa = "ca4f2e1a8c17678818cf44147afb9b6ff43d865966e7af2d3fabb2d3a1f5ec92"
+at = "B=u32"
+embedded = "b12ea5afc5c901de604b08f7bdf7a424c69c1ca601de65fbdfe50e9f2b1d62a8"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: codec::error::UserError"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME"
+kappa = "d92080bdb03fbe0d45a999b4f9d9736e581dfd0c9f15aeffffa95e5935248445"
+embedded = "b3cfccf5bf4f1b83e1c90b4696404069e1e0ec0688cc3353268c463b9ac87934"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#2"
+kappa = "29a8d02d48abe54458c7477ee0b0b6022a393cd12be5701d60d28c1fbb059816"
+embedded = "fb3d256657bc72cf0b9c419a08374b9bcb03001fe59473cf5ab892bc47a21c6c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#3"
+kappa = "29a8d02d48abe54458c7477ee0b0b6022a393cd12be5701d60d28c1fbb059816"
+embedded = "fb3d256657bc72cf0b9c419a08374b9bcb03001fe59473cf5ab892bc47a21c6c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#4"
+kappa = "29a8d02d48abe54458c7477ee0b0b6022a393cd12be5701d60d28c1fbb059816"
+embedded = "fb3d256657bc72cf0b9c419a08374b9bcb03001fe59473cf5ab892bc47a21c6c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#5"
+kappa = "29a8d02d48abe54458c7477ee0b0b6022a393cd12be5701d60d28c1fbb059816"
+embedded = "fb3d256657bc72cf0b9c419a08374b9bcb03001fe59473cf5ab892bc47a21c6c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#6"
+kappa = "29a8d02d48abe54458c7477ee0b0b6022a393cd12be5701d60d28c1fbb059816"
+embedded = "fb3d256657bc72cf0b9c419a08374b9bcb03001fe59473cf5ab892bc47a21c6c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::buffer::__CALLSITE::META::NAME#7"
+kappa = "d92080bdb03fbe0d45a999b4f9d9736e581dfd0c9f15aeffffa95e5935248445"
+embedded = "b3cfccf5bf4f1b83e1c90b4696404069e1e0ec0688cc3353268c463b9ac87934"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::has_capacity"
+kappa = "2f18e3851954bc5d193ed03b0c84817dce4a8c943bb6936b99f527957c4872cf"
+at = "B=u32"
+embedded = "35b209b9694ae7e0031212ba661c920612a62b9a7f2fd85f391b2c0b5f822ba0"
+status = "residue"
+cause = "mir::Ty: framed_write::Encoder<u32>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::is_empty"
+kappa = "3bc08d2dd5984ad0f162d8c02a5165b879a7da7c7edc22ec15916abb36bd8ea5"
+at = "B=u32"
+embedded = "fb47acbc67e0c1beaa69cdb3326c4ec1f41c2b707f94796b3ba3648cabec4460"
+status = "residue"
+cause = "mir::Ty: framed_write::Encoder<u32>"
+
+[[fn]]
+path = "h2::framed_write::Encoder::max_frame_size"
+kappa = "6dfd7b660ceef73f2787639800772e8937a01c41affe0fc6c13a596cfa89cb36"
+embedded = "835b2cd9190526aa0d0712fb85076457744e06f6c7e3e5bd6f0be3c0c3f98aef"
+status = "residue"
+cause = "mir::Ty: B"
+
+[[fn]]
+path = "h2::framed_write::Encoder::unset_frame"
+kappa = "793e3d3ec02ea4437dd5f6190d1eb5a90777757176c490ced34bcdbc50323fb3"
+at = "B=u32"
+embedded = "9c24b29896579b617db9229f0a47496b9b9e11f122cf4ffb3b53910a4e5851c2"
+status = "residue"
+cause = "mir::Ty: codec::framed_write::ControlFlow"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::buffer"
+kappa = "ebd81ae06d42cc452c801be86b10fe7e731f25d8990ba99459750e0d92370b36"
+at = "B=u32"
+embedded = "b4b1dcb8b9f57ba5244bf3253348ae92fcbb199d9b605fe9e969a9601f1e4c56"
+status = "residue"
+cause = "mir::Ty: codec::error::UserError"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::flush"
+kappa = "d2470171f8585379a7add6b4981bb43069cb1481996c06f688500477c10742f3"
+at = "B=u32, T=u32"
+embedded = "cb6a348be4260ef03503ed0735d48484ab9651850b2bb13d0c334a6aa77d35c3"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::flush::__CALLSITE::META::NAME"
+kappa = "bb6b8be416c192c9c274fec9ace127c38b2227000d39dcb90c685a1cec7b1a34"
+embedded = "e5c89451cc978bb61941c1ca03c056bed277f7f2ef4c17707abfd251e119e7a4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::flush::__CALLSITE::META::NAME#2"
+kappa = "bb6b8be416c192c9c274fec9ace127c38b2227000d39dcb90c685a1cec7b1a34"
+embedded = "e5c89451cc978bb61941c1ca03c056bed277f7f2ef4c17707abfd251e119e7a4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::get_mut"
+kappa = "f0531088d828f0819a2709d54e5115a62f61af9f09e0fbd78fe780718626d718"
+at = "T=u32"
+embedded = "3833efa196a32ce2cf508f104a4ec3db0e197f3d964d3c0c042613f78c8d0311"
+status = "residue"
+cause = "mir::Ty: B"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::has_capacity"
+kappa = "a2c24d9b6f420a7c15e368a48d01ac8e3d6f4cdc1f210c4a919c2390ee173ecd"
+at = "B=u32"
+embedded = "c03e9c00b020ddafced3e7616f5a613a6e3fb77fd61531a2fd5d05e77aee425b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::max_frame_size"
+kappa = "0545bc0a70a5b2f009142ed96b27590879998dde18541b5ab52b578e981aa2f4"
+at = "B=u32"
+embedded = "8361c4f679d892b8e146a78d28456d7390ce4e2a4743371d99d3eb26354c38e9"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::new"
+kappa = "ef91d031d0312dca382d63627c56f55fc35c9d43b6432c8022932a7af14647ba"
+at = "B=u32, T=u32"
+embedded = "945b8754edcb8e13b197cf30ba9d2b295cb445c2d840131c3f61cc51b63199a2"
+status = "residue"
+cause = "mir::Ty: codec::framed_write::FramedWrite<u32, u32>"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::poll_read"
+kappa = "30dab3f678d59278d12b2cd095ea7c3e5519c9b743e2a5fe6ce277d7051f2f9b"
+at = "B=u32, T=u32"
+embedded = "3efd5b244945748b4f03b6a4cb73acfc73d3d18e35118a7be140ec368797ff81"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::poll_ready"
+kappa = "dbbdf849233e5716ef24d6be20797f872293136f6aae2d16d8fffcfd3c057c0e"
+at = "B=u32, T=u32"
+embedded = "e04b23679c4df9bd26b777a1d6661824210d1770bd0ccb6685d8fa217a20d542"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::set_header_table_size"
+kappa = "bff6013f9fd6a0e73a48b2afbcfa00ed71fc46c2f55c76db9b623c3c6ff208e6"
+embedded = "77a757d472ca5e91c11b17278ba6e569ea683cbe62f6224e601c2bd800a63b28"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::set_max_frame_size"
+kappa = "86ff69c36c5716d76df62a33f84574594e0e39d5f0afb74172985a14dd7d5cf5"
+embedded = "6eb717b95d7b42adfbbba7a66950488dd8aa9249064683606cba494a281154ce"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::shutdown"
+kappa = "17b184ccdc9177cb408cb6e3c22395ef2df63fe46d3db75d1ac83319d5fdbdfe"
+at = "B=u32, T=u32"
+embedded = "e4b804e12bfb4a8673a63d84c44b4731c93ed2014bd1012325864abb6153c1cf"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "h2::framed_write::FramedWrite::take_last_data_frame"
+kappa = "8736b8845084925b43536a475df281b0e04ea19368c0fe7c9a3c768f2db699c3"
+at = "B=u32"
+embedded = "9cca95788c5f7dcaf711bd1e16a6933675d546d34ec8f3b6f48c4d1a151d9154"
+status = "residue"
+cause = "mir::Ty: frame::data::Data<u32>"
+
+[[fn]]
+path = "h2::map_err"
+kappa = "51ed8ad862e87741c11244d06c7f525e834d28c6df27d0ee996e092d43a1e862"
+embedded = "898acc61c6cd164d11fd59314b07b413e6ed9d9a8d1d0a673e139aa3cbce1cd1"
+status = "residue"
+cause = "mir::Ty: proto::error::Error"
+

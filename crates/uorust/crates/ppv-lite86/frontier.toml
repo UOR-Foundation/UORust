@@ -1,0 +1,200 @@
+# The ppv-lite86 register (written by `uorust crate ppv-lite86@0.2.21`; do not edit): every body of
+# ppv-lite86's MIR at ppv-lite86 0.2.21, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 394
+translated = 35
+residue = 359
+
+[module.soft]
+bodies = 101
+translated = 10
+residue = 91
+
+[module.types]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.x86_64]
+bodies = 288
+translated = 25
+residue = 263
+
+[embedding]
+bodies = 379
+embedded = 379
+evaluable = 379
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: soft::x4<u32>"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: soft::x2<u32"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: x86_64::YesS3"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::avx2::u32x4x2_avx2<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: x86_64::NoS3"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::u32x4_sse2<u32"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::u128x1_sse2<u32"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::u64x2_sse2<u32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: S3"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: G"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: x86_64::vec128_storage"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: x4<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: u64x2_sse2<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: u32x4_sse2<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: u32x4x2_avx2<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: vec128_storage"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: x86_64::vec256_storage"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: x86_64::NoS4"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: x86_64::YesS4"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: x86_64::vec512_storage"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: u128x1_sse2<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: vec256_storage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: vec512_storage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NI"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Src"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64::Avx2Machine<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64::SseMachine<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MultiLane"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoS4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: YesS4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::NoA1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::NoA2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::NoNI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::YesA1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::YesA2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::YesNI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::G0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64::sse2::G1"
+bodies = 1

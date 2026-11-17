@@ -1,0 +1,988 @@
+# The icu_properties register (written by `uorust crate icu_properties@2.4.0`; do not edit): every body of
+# icu_properties's MIR at icu_properties 2.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 3176
+translated = 7
+residue = 3169
+
+[module.bidi]
+bodies = 15
+translated = 2
+residue = 13
+
+[module.code_point_map]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.code_point_set]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.emoji]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.enum_values]
+bodies = 1531
+translated = 0
+residue = 1531
+
+[module.names]
+bodies = 162
+translated = 0
+residue = 162
+
+[module.props]
+bodies = 629
+translated = 0
+residue = 629
+
+[module.provider]
+bodies = 645
+translated = 5
+residue = 640
+
+[module.runtime]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.script]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.trievalue]
+bodies = 44
+translated = 0
+residue = 44
+
+[embedding]
+bodies = 2980
+embedded = 2980
+evaluable = 2972
+blocked = 8
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: props::Block"
+bodies = 519
+
+[[cause]]
+cause = "mir::Ty: props::Script"
+bodies = 447
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: str::as_bytes"
+bodies = 175
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyCodePointSet<'_>"
+bodies = 149
+
+[[cause]]
+cause = "mir::Ty: icu_provider::DataMarkerInfo"
+bodies = 140
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item provider::_::MUST_USE_MAKE_PROVIDER_MACRO"
+bodies = 139
+
+[[cause]]
+cause = "mir::Ty: props::JoiningGroup"
+bodies = 134
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyEnumToValueNameLinearMap<'_>"
+bodies = 132
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 122
+
+[[cause]]
+cause = "mir::Ty: props::LineBreak"
+bodies = 110
+
+[[cause]]
+cause = "mir::Ty: props::CanonicalCombiningClass"
+bodies = 96
+
+[[cause]]
+cause = "mir::Ty: props::GeneralCategoryGroup"
+bodies = 93
+
+[[cause]]
+cause = "mir::Ty: props::BidiClass"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: props::WordBreak"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: props::IndicSyllabicCategory"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: enum_values::GeneralCategory"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: props::GraphemeClusterBreak"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: props::SentenceBreak"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyValueNameToEnumMap<'_>"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: props::HangulSyllableType"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: props::EastAsianWidth"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: props::JoiningType"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: props::VerticalOrientation"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: props::NumericType"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: props::IndicConjunctBreak"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyUnicodeSet<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyScriptToIcuScriptMap<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyCodePointMap<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: bidi::BidiMirroringGlyph"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: provider::ScriptWithExtensionsProperty<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ScriptWithExt"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: script::ScriptWithExt"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PropertyParserBorrowed<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: code_point_map::CodePointMapDataBorrowed<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: code_point_set::CodePointSetDataBorrowed<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: emoji::EmojiSetDataBorrowed<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: names::PropertyNamesLongBorrowed<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: names::PropertyNamesShortBorrowed<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: names::PropertyParserBorrowed<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: runtime::BinaryProperty"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: runtime::EnumeratedProperty"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: GeneralCategoryOutOfBoundsError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MaskProperty"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MiscProperty"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NumericProperty"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: StringBinaryProperty"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: StringProperty"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: code_point_map::CodePointMapData<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: code_point_set::CodePointSetData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: script::ScriptWithExtensionsBorrowed<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EmojiSetDataBorrowed<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: GeneralCategoryULE"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ScriptExtensionsSet<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: emoji::EmojiSetData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: icu_collections::codepointinvlist::CodePointInversionList<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: icu_collections::codepointinvliststringlist::CodePointInversionListAndStringList<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: icu_collections::codepointtrie::CodePointMapRangeIterator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: icu_collections::codepointtrie::CodePointTrie<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zerovec::ule::RawBytesULE<2>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: script::ScriptExtensionsSet<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: script::ScriptWithExtensions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: zerovec::ule::RawBytesULE<3>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BidiPairedBracketType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CodePointMapDataBorrowed<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CodePointSetDataBorrowed<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ScriptWithExtensionsBorrowed<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bidi::BidiPairedBracketType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<icu_collections::codepointtrie::CodePointMapRangeIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_values::GeneralCategoryULE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: icu_locale_core::subtags::Script"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: names::PropertyNamesLong<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: names::PropertyNamesShort<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: names::PropertyParser<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: props::GeneralCategoryOutOfBoundsError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: enum_values::GeneralCategory::FinalPunctuation::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item script::SCRIPT_VAL_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PropertyNamesLongBorrowed<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PropertyNamesShortBorrowed<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieSimpleAsciiCursor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: icu_provider::marker::NeverMarker<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: names::PropertyParser<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryAlnumV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryAlphabeticV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryAsciiHexDigitV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryBasicEmojiV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryBidiControlV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryBidiMirroredV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryBlankV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryCaseIgnorableV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryCaseSensitiveV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryCasedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenCasefoldedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenCasemappedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenLowercasedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenNfkcCasefoldedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenTitlecasedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryChangesWhenUppercasedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryDashV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryDefaultIgnorableCodePointV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryDeprecatedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryDiacriticV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryEmojiComponentV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryEmojiModifierBaseV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryEmojiModifierV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryEmojiPresentationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryEmojiV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryExtendedPictographicV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryExtenderV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryFullCompositionExclusionV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryGraphV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryGraphemeBaseV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryGraphemeExtendV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryGraphemeLinkV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryHexDigitV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryHyphenV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdCompatMathContinueV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdCompatMathStartV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdContinueV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdStartV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdeographicV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdsBinaryOperatorV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdsTrinaryOperatorV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryIdsUnaryOperatorV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryJoinControlV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryLogicalOrderExceptionV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryLowercaseV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryMathV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryModifierCombiningMarkV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryNfcInertV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryNfdInertV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryNfkcInertV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryNfkdInertV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryNoncharacterCodePointV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryPatternSyntaxV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryPatternWhiteSpaceV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryPrependedConcatenationMarkV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryPrintV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryQuotationMarkV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryRadicalV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryRegionalIndicatorV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinarySegmentStarterV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinarySentenceTerminalV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinarySoftDottedV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryTerminalPunctuationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryUnifiedIdeographV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryUppercaseV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryVariationSelectorV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryWhiteSpaceV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryXdigitV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryXidContinueV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyBinaryXidStartV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumBidiClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumBidiMirroringGlyphV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumBlockV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumCanonicalCombiningClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumEastAsianWidthV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumGeneralCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumGraphemeClusterBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumHangulSyllableTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumIndicConjunctBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumIndicSyllabicCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumJoiningGroupV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumJoiningTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumLineBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumNumericTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumScriptV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumSentenceBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumVerticalOrientationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyEnumWordBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::PropertyScriptWithExtensionsV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongBidiClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongBlockV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongEastAsianWidthV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongGeneralCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongGraphemeClusterBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongHangulSyllableTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongIndicConjunctBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongIndicSyllabicCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongJoiningGroupV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongJoiningTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongLineBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongNumericTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongScriptV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongSentenceBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongVerticalOrientationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameLongWordBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseBidiClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseBlockV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseCanonicalCombiningClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseEastAsianWidthV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseGeneralCategoryMaskV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseGeneralCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseGraphemeClusterBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseHangulSyllableTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseIndicConjunctBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseIndicSyllabicCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseJoiningGroupV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseJoiningTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseLineBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseNumericTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseScriptV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseSentenceBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseVerticalOrientationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameParseWordBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortBidiClassV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortBlockV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortEastAsianWidthV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortGeneralCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortGraphemeClusterBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortHangulSyllableTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortIndicConjunctBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortIndicSyllabicCategoryV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortJoiningGroupV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortJoiningTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortLineBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortNumericTypeV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortScriptV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortSentenceBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortVerticalOrientationV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: provider::names::PropertyNameShortWordBreakV1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::MaskProperty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::MiscProperty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::NumericProperty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::StringBinaryProperty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::StringProperty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::ule::UleError"
+bodies = 1

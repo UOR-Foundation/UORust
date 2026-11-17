@@ -1,0 +1,103 @@
+[[fn]]
+path = "futures-core::stream::<impl at src/stream.rs:110:1: 110:51>::poll_next"
+kappa = "5bf12681f18ab86f9b39d08eb320c2291dd1e61f28d507993c1e68081bc8c204"
+at = "S=u32"
+embedded = "de1f1bc9feb30581b875c9517576bf3fe03bd5d7f453e843688e67fb8d6c54ef"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-core::stream::<impl at src/stream.rs:110:1: 110:51>::size_hint"
+kappa = "e79dcb35bec5823ebe1af760e047424d3fec058914f36fe3538f61a150eae64c"
+at = "S=u32"
+embedded = "50241ae96f86e199e76868ddf373afa11ea16bb2f10e41c6ef329009fb9cb1f4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "futures-core::stream::<impl at src/stream.rs:151:1: 151:61>::is_terminated"
+kappa = "31877f935f3667d1d32f5655f138eef9f88d93e65b2ed55da250440d41be68e5"
+at = "F=u32"
+embedded = "3cb7388c2ac6b5d1f0c7403a7db1a3e9c9c9a96bf589c595d92f86b8e1b141f8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedStream, which u32 does not implement in core"
+
+[[fn]]
+path = "futures-core::stream::Pin::is_terminated"
+kappa = "e3392006eb8ba1622647f448994613d40cee0a8c360c68e353eba79a6f1163de"
+at = "P=u32"
+embedded = "b683d55b097652e3b0f0de51dcee0b993c51ce7a329008d8c0dc558a0c322b0e"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<u32>"
+
+[[fn]]
+path = "futures-core::stream::Pin::poll_next"
+kappa = "bca3f3e740d5f202f07826cd7745c4d1eefce44a592896d120201207473895f5"
+at = "P=u32"
+embedded = "220d972c008de08cd4ff71c3813d61e8c4c7e6d59445af01c475bed84cd80a0c"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-core::stream::Pin::size_hint"
+kappa = "868a3612bd66aa65d2734776940bc7abcce7485a249cb70f0b777cd4efa28549"
+at = "P=u32"
+embedded = "89e05a14651c7bd7471205d529c3a145a7e43a5f78284dc225f53f64b3d81758"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<u32>"
+
+[[fn]]
+path = "futures-core::stream::S::try_poll_next"
+kappa = "93120b3be14cff901e44bc2aeea9c237938952b27e99fc593dd498b5365e9af4"
+at = "E=u32, S=u32, T=u32"
+embedded = "5757de218abfe0abb66926df9c5f03e061506a6225c48293eddefb22e3f7c441"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<core::result::Result<u32, u32>>>"
+
+[[fn]]
+path = "futures-core::stream::Stream::size_hint"
+kappa = "44584493b0d1f0c810432174906607125f892167cf0ea4d04a8d7c7af46cfd50"
+embedded = "2c42945fd03495e52ee3f27c7ae70246accd4b4167b3c52228d9e772ca6c3d47"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "futures-core::stream::if_alloc::AssertUnwindSafe::poll_next"
+kappa = "a90e46173af8741a79b5f12d542dd85f0b46a4d2719012846c70f273e945415d"
+at = "S=u32"
+embedded = "2f61afb75c64d8bf595a41555e8c3e5d8ed7a05457ef16918e34ad1d91997e68"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-core::stream::if_alloc::AssertUnwindSafe::size_hint"
+kappa = "3e134eb22bf316994599a1816e2ba781276bf6213aa9ccc20de5960118837a39"
+at = "S=u32"
+embedded = "1aa0a33028d58fbcde26cc5d02bda2cb598efc0acafa22308edfc6675c183968"
+status = "residue"
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+
+[[fn]]
+path = "futures-core::stream::if_alloc::Box::is_terminated"
+kappa = "305c61a7eb4adf437560e2a70dd7b288af80cc31fd75d5db8fbf529c7c535be7"
+at = "S=u32"
+embedded = "346c1743e9a5bcc9fd86f903a49a56059597c79aaa716ee357c9fbb4b58d5a32"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedStream, which u32 does not implement in core"
+
+[[fn]]
+path = "futures-core::stream::if_alloc::Box::poll_next"
+kappa = "d00582c7d59202814a00f20aba5880a638b6c9e8eae084150ab2e5db6c39c048"
+at = "S=u32"
+embedded = "da39644c46f52e697bb39392ed1e50fe09103d8a6bbfacf670e854ad53cbd5ed"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-core::stream::if_alloc::Box::size_hint"
+kappa = "5af0f2c32d050dc45b6e0c7f2217d48626eb56d2b35cbbed0ecc3b2eeca79200"
+at = "S=u32"
+embedded = "268945bbcf4231c9c03003c6a005a3bec1556f1027ec6e739142ab2d1a0e3c43"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+

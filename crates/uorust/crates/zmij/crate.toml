@@ -1,0 +1,476 @@
+[[fn]]
+path = "zmij::<impl at src/lib.rs:159:16: 159:21>::clone"
+kappa = "8a2707501c5edafbbfa7f9dcdfc9e0f1c036b33087e62d5cb4bea645563d061d"
+embedded = "c400f27e09c566d8ac69f1149e764a154c2badff5640a2ad9e270cee22114b5e"
+status = "residue"
+cause = "mir::Ty: uint128"
+
+[[fn]]
+path = "zmij::AArch64Mem::get"
+kappa = "34534422f4b84bbc8ef68e53aacb3b8a8176446d944211fff82fea3eb4cb39d3"
+embedded = "c683ead46bde8b419ad69bbba44d16d6d975c636cf1e2bfb6545774730224d35"
+status = "residue"
+cause = "mir::Ty: VALUE"
+
+[[fn]]
+path = "zmij::AArch64Mem::new"
+kappa = "44402098052344879679ee618de7e82e551d0682f8fcf9e97c53639b35c300a3"
+at = "VALUE=u32"
+embedded = "2b48e2b30a0439825d9c7f75488f0b8baead1c1aca5ca5a69714dc0bdb35b4f5"
+status = "residue"
+cause = "mir::Ty: AArch64Mem<u32>"
+
+[[fn]]
+path = "zmij::Buffer::default"
+kappa = "e08dfcc5e9a9f09c0cd84ceeed484c124c7fcf985153b1ab12e51477b5621e3c"
+at = "Buffer=u32"
+embedded = "33f40f361e5641cd967487319762828f19e457e33587d5b037a1f9b3e446fda5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Buffer::new: zmij's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "zmij::Buffer::format"
+kappa = "04cacbcca23845b788cad03d61462c54ffc9cd6525b4229e84e05982dd895c63"
+at = "Buffer=u32, F=u32"
+embedded = "81576f32d27ed003c99f29b9cdc62bb2c3bdbc67dd8438a41ebdbf1c5c20ee46"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Sealed, which u32 does not implement in core"
+
+[[fn]]
+path = "zmij::Buffer::format_finite"
+kappa = "67160325ee96489c877ecb2b671b70067d431b7dcdd6b7b19d5d9f244ffb779e"
+at = "F=u32"
+embedded = "3121ad5d355fd45d3b5510bd743c8dbb8ff29743e69d25163cd2180cff013d29"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "zmij::Buffer::new"
+kappa = "3e157df130d0a61c4190c2d2504b0727fd54723ec9bc25ef25b3c6c552082c69"
+at = "Buffer=u32"
+embedded = "d28545f20031fa530769f198b41b8f8fb7f1136c7e77d677f5d9bf5e7163e60c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "zmij::DIV100_SIG"
+kappa = "d3e917aceaa5f4cfe47dcf3137625dbafd08b254288bf52d591bf52ed3bd9f49"
+embedded = "e522f13b760ad33dbe3c13b846211d9768c76341c632330b236badd1edc69c1b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item DIV100_EXP"
+
+[[fn]]
+path = "zmij::DIV10K_SIG"
+kappa = "9d8b0347771eaf8f3120a8b48af9d2eca03585ddc8bdb699cbdc613aeb93aaa8"
+embedded = "63bf606c05eb9f6ed30412cc2288685bb1668ad68fcc13877dad820daab4c075"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item DIV10K_EXP"
+
+[[fn]]
+path = "zmij::DIV10_SIG64"
+kappa = "8d59a03fdecf6c15ad2aad42faf7b44b6d4cfcf780c7d87d4a029a441e196b89"
+embedded = "0151af5c67e9038a4399a174f2c6c9dc38f8eab0c0fe22bdcb9021270109f0b3"
+status = "translated"
+digest = "114dec6a8bffbf08841f313feb96850aec1a2c85d7445680559e6c1b89d367c0"
+
+[[fn]]
+path = "zmij::Data::splat16"
+kappa = "6d8d4542cb3b846a16800d9e2b5a39bdc3fb7bb0d210df272350e48394efa2ac"
+embedded = "b51d1cf9b306f6b75c39482e2504c5733fbe0c41c2b25ef1775ca782979184b1"
+status = "translated"
+digest = "894b94b0d2f3e556ce203d995b92d28275eec5f42d864e749b7648a9cd00ddc4"
+
+[[fn]]
+path = "zmij::Data::splat32"
+kappa = "910cfa829aec3b59cd1a41675452efd3104be40b8b6f194d62a60fefb53bcb9e"
+embedded = "61a86bd10c30944097289c4c46743d070615335bb38d6aa6898b1f0dcbd51841"
+status = "translated"
+digest = "010967406c7aed52cb677166158d0fdb7bf86f1e031c5bf68b899f0121044752"
+
+[[fn]]
+path = "zmij::Data::splat64"
+kappa = "2cdbd00b4b242473448412dba4b998990953c4336724ca5fddebd670bdfbfda7"
+differential = 7
+embedded = "862816fbdee21ff277ba06b482a0865dad033e026da3777ef0b319d8ca60b954"
+status = "translated"
+digest = "c4fa7c82330d6d9c08cbdeecc0d01f7ef6e64e8971920e79cb823f2559851e3b"
+
+[[fn]]
+path = "zmij::ExpFloatShuffleTable::ENABLE"
+kappa = "217339cfdd50e40fbf46bdf3f2b14ebc3c945a5532aa643e715266ed367bfde1"
+embedded = "5b47904b04971da15750116d7c76fe3cff01902750225aa684bdd882b1ed735f"
+status = "translated"
+digest = "1ebfc81a0c30df998df7dd7732444481da8144750c0f70ffe23439f7a2b805a9"
+
+[[fn]]
+path = "zmij::ExpFloatShuffleTable::get_entry"
+kappa = "0b80a0ae25b4c23eccdf25e887c5553e491d307b5944509511a809bfb7aeb598"
+at = "ExpFloatShuffleTableEntry=u32"
+embedded = "d424d40932cfc86d5773e0a85ae148c25ca0103f4072c3e46e072205526ef2ed"
+status = "residue"
+cause = "mir::Ty: ExpFloatShuffleTable"
+
+[[fn]]
+path = "zmij::ExpFloatShuffleTable::new"
+kappa = "2c2154b793eb7cb8d882d5be4f8305d904b52a870fd28702018aff06d854d8c1"
+at = "ExpFloatShuffleTable=u32"
+embedded = "f0e84824ca4d7393fdf28642537ab3250fdc2513b61463d3f194d5681a68d002"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zmij::ExpShiftTable::new"
+kappa = "eb99f83ad62e08de8243f19f5f549332a9509b8bd380c83a3a09e05d15173d63"
+at = "ExpShiftTable=u32"
+embedded = "503b74a9d7601e0dbbe37466a08ed982be17fde0622111730f042f258b77ff4c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item ExpShiftTable::ENABLE"
+
+[[fn]]
+path = "zmij::ExpStringTable::MIN_DEC_EXP"
+kappa = "f7d4d7877f515b63499b2581997a71c68be7929bc02b274852c736e1d8ae00c0"
+embedded = "077c171ab03d2fcc3613e8c2077c990042456faaa6f389acdffc2ed7812a5922"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f64 as traits::Float>::MAX_DIGITS10"
+
+[[fn]]
+path = "zmij::ExpStringTable::OFFSET"
+kappa = "a2f50f406113535b1427b1625cc36c3396028e592166c39c6c447aacc6cae190"
+embedded = "e2265ce3b1066989ae41e27ca10cd519408f149e4b39093fa2c8df7b5d6b77d1"
+status = "residue"
+cause = "mir::Operand::Constant: ExpStringTable::MIN_DEC_EXP: mir::Operand::Constant: the constant item <f64 as traits::Float>::MAX_DIGITS10"
+
+[[fn]]
+path = "zmij::ExpStringTable::new"
+kappa = "316d0d715a3add115b8bfc2877bd625f6cf1810454bd49167525c331f6d8744c"
+at = "ExpStringTable=u32"
+embedded = "4c4e6b92d8fbaebee0b88b7664316ff640e6e47175819f1a10375d4a193cbfc2"
+status = "residue"
+cause = "mir::Operand::Constant: ExpStringTable::MIN_DEC_EXP: mir::Operand::Constant: the constant item <f64 as traits::Float>::MAX_DIGITS10"
+
+[[fn]]
+path = "zmij::FloatTraits::EXP_BIAS"
+kappa = "695c8dc37743f2b346209cb00d6c97ccff703a4f3a7994bdc528ade091ec2733"
+embedded = "cf8d9299ac87025a1ab996ae2c8677b021c39dd4cb5b50a8b20e7b1263949f7c"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as FloatTraits>::NUM_EXP_BITS: mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+
+[[fn]]
+path = "zmij::FloatTraits::EXP_MASK"
+kappa = "34c730fc701f2c3da472e795e1fe40a66ec091397daf568ff9f5d8cf91d18571"
+embedded = "df6428a524f0665bda128c53bd300caff490063797de7dc1c32c0da2067eb41e"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as FloatTraits>::NUM_EXP_BITS: mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+
+[[fn]]
+path = "zmij::FloatTraits::EXP_OFFSET"
+kappa = "266fecc33e8d44e8650ab837148b8814f6d30f0903f08eb58f7fc76073fcba42"
+embedded = "a570fbb4bec67504f39d2104bca1b84d0f374d03a5b6aa93d3271ddc7bae7679"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as FloatTraits>::EXP_BIAS: mir::Operand::Constant: <Self as FloatTraits>::NUM_EXP_BITS: mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+
+[[fn]]
+path = "zmij::FloatTraits::NUM_EXP_BITS"
+kappa = "75b85efd655fb0cff692db5303d3ff0ec630d1116b4a6417337c0686cd0d6ed3"
+embedded = "4d4b65afe4fbb0327f5ae2353c7c70174fd2238dab9bc643cf154a93a8af6c32"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as FloatTraits>::NUM_BITS"
+
+[[fn]]
+path = "zmij::FloatTraits::NUM_SIG_BITS"
+kappa = "b7fc7095a1a604715ede1970adfba5bab7d050090feb257c4f20f6427ecec1a4"
+embedded = "af527b152cbb1e4ed3d1e01f70b6e972294f58a5dd4455f9973a608a27c24ae9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as traits::Float>::MANTISSA_DIGITS"
+
+[[fn]]
+path = "zmij::FloatTraits::get_exp"
+kappa = "7fd43d40b73517e60fd344949d1144b670e3d019181b2ee6756bfb2b711e1b0d"
+at = "Self=u32"
+embedded = "c73e267c8ad3067aa069360de5a10ed06bde5dd1188545aff1c501ff2c979d8c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Shl, which u32 does not implement in core"
+
+[[fn]]
+path = "zmij::FloatTraits::get_sig"
+kappa = "d848fa941651fa4b7456bcaab623f805faeaf4adb9b2086572e399bc592bc866"
+at = "Self=u32"
+embedded = "e6365764f976403d393e2eddc050576e407dfd2faec26244438f2f853fb334fc"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as FloatTraits>::IMPLICIT_BIT"
+
+[[fn]]
+path = "zmij::FloatTraits::is_negative"
+kappa = "e82dd95553286345edc6186c5ea9d58c466ad3f3e472157eba9d2c4ad26f2eb4"
+at = "Self=u32"
+embedded = "ad3ce31825ecbdef19a8dac50b69bac6f1d26a186638ea8b9d91be43c358a21c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as FloatTraits>::NUM_BITS"
+
+[[fn]]
+path = "zmij::NEG10K"
+kappa = "e6a47ccd7f8496705ed2677c025f67429f3fa6516c160157689ed66f20a63ab7"
+embedded = "e332cdec637ec8c805b9dcef99c5c2a3581e6f9e94b905f1553d3e77ac7acb34"
+status = "translated"
+digest = "7c3ce8eb078fe52459653a9c6819159460611b38c2792365e738413358b7ed7c"
+
+[[fn]]
+path = "zmij::POW10_FIXUPS"
+kappa = "4b49d7f447c80475295ebdd3aa482e60ab5d18a5b0fc245f292df4e149a3add8"
+embedded = "456292debd4303b190c36af332fd4be357873525ed34cb8906db619923766a0f"
+status = "translated"
+digest = "868b5aaf6b77292c5982791b065b2750fb0836e580f614e58e7781319382781a"
+
+[[fn]]
+path = "zmij::POW10_MAJOR"
+kappa = "e1d3c415578feb5d87108d27bea1296b82a6701ba17f8eeaac056e43ab2532f9"
+embedded = "836d4b62943e779833beea7cefa853d8350eec442f22a39ae7c303cfd429ef4b"
+status = "residue"
+cause = "mir::Ty: uint128"
+
+[[fn]]
+path = "zmij::POW10_MINOR"
+kappa = "7ce8fd76421b537f48dd5d0c53b737353679dacd2cf03ed2a1ab19b0dc8b9483"
+embedded = "255e77cf6b9c786de98ada32171860d6574033f2ffb8d2821532df966cd1415a"
+status = "translated"
+digest = "137c09ac02ad25b08a330450d17fab747f439a001e9bd98adbaa272b5d9658a1"
+
+[[fn]]
+path = "zmij::Pow10SignificandTable::SPLIT_TABLES"
+kappa = "f956686ee0fdb00898851f60719264ab0837d4690c9de14aa205c3a13152fe4b"
+embedded = "a35ae9174b92ea8e4a474029d8254ccf06c2f7093fb8e94305312d0a58a02067"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item Pow10SignificandTable::COMPRESS"
+
+[[fn]]
+path = "zmij::Pow10SignificandTable::compute"
+kappa = "63035859d454e5df9caf6d1f0f8f12266b40decc990f7a8a7e54669236886e78"
+embedded = "bdb4d8f5207c9bfbef72951287c3550072544caa70a9f17cf857c4c2300991a9"
+status = "residue"
+cause = "mir::Ty: uint128"
+
+[[fn]]
+path = "zmij::Pow10SignificandTable::get_unchecked"
+kappa = "c76833e559553cba29325d8460733c3667dd1455601b4d53e3a7ad3b43335ecb"
+embedded = "9cac4de1bf8cc975ae3c1490eb49f503030870c2eea7d163ccc3c02c528e42d4"
+status = "residue"
+cause = "mir::Ty: uint128"
+
+[[fn]]
+path = "zmij::Pow10SignificandTable::new"
+kappa = "72e41d0e01a08914eeb8b5c2c7ed7ce0a36260e94919e11a42dc8b2a4b936e96"
+at = "Pow10SignificandTable=u32"
+embedded = "0992227191de0a9034737305e1161a4147756b6f23d75315fc499db5e3c64fee"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item Pow10SignificandTable::NUM_POW10S"
+
+[[fn]]
+path = "zmij::STRIDE"
+kappa = "96983471b98903e66326e766cb95fe97bc15a4e9016ddeb96e6f2bde19328521"
+embedded = "341815ccfd51f16e8ffec301e4645ac952dad3ccf1f9d7c14d2ef3513413b989"
+status = "residue"
+cause = "mir::Operand::Constant: Pow10SignificandTable::compute::STRIDE::promoted[0]"
+
+[[fn]]
+path = "zmij::ZEROS"
+kappa = "aabec1b69f04e2db7cd7834c9eb6845c5caceb630037e9144902ea84dd4059c9"
+embedded = "c0e88bf8af8d7972f20be10bef94766758b989e3d99a4c34afcd7e113f917906"
+status = "translated"
+digest = "f2534f3723a5b14dfd8e0c84537dfd9937ebc65ad3a3fc5ec9285dd95adccfa9"
+
+[[fn]]
+path = "zmij::compute_dec_exp"
+kappa = "be367d27347e6701f3d3176404df707d76508f34de52399cb383e70d58ec3ee6"
+embedded = "f98f6b2e0ab7a356b5f8d7798c165314b8dfee4077d2f20a8c9e025b0f97cbdd"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item compute_dec_exp::LOG10_2_SIG"
+
+[[fn]]
+path = "zmij::compute_exp_shift"
+kappa = "926d42aa4fc433a81a04206806020a4569febe4eb840d544126c1a661e490718"
+embedded = "44301a7495d2e3738a0545f77a82c0954fadb32d09e2f6d614b1b8d5ee3908db"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item compute_exp_shift::LOG2_POW10_SIG"
+
+[[fn]]
+path = "zmij::count_trailing_nonzeros"
+kappa = "fe0593231d51cc382005d684b8f4cfb7b7c8c5d4c28e1c5e885151dc2bb9595b"
+differential = 7
+embedded = "cc66bdeb05aea700f868474e920c37a707015249852936c1ec702bb110b40a08"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_le"
+
+[[fn]]
+path = "zmij::digits2"
+kappa = "88adffd9aa82e6cf68ba582dfba8e4470c34457f6652c24373b5c56eba9e209c"
+at = "Digits2=u32"
+embedded = "3a90775a1a0be5447d827d50b1b0c2734cb5a6c346dc1e1324f8276d7563b694"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc53: &u32}"
+
+[[fn]]
+path = "zmij::div10"
+kappa = "14269937fae68e8659d2ce9f72215f9cbeaaf54d906213c489f1dd3fe37a4f90"
+differential = 7
+embedded = "0f1f7b0436a91be0213ee6d55f90f26034ab68ca5191a2cd116fed20690a04ef"
+status = "translated"
+digest = "977732c33eb974a51869864253ac71ddf4377abd4aee51275ba9d16e4d699679"
+
+[[fn]]
+path = "zmij::f32::FIXED_DEC_EXP"
+kappa = "4960497077811761c3373d467b656fe4ea13e69b722fba71f05d598557a84a02"
+embedded = "cfb0b8b7f2b71e83a2a4e97d689aa217188176b846fb592f3bd732f9b18f0b32"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<i32>"
+
+[[fn]]
+path = "zmij::f32::IMPLICIT_BIT"
+kappa = "79e28822ad66d6d61d060053e2f049ea956f30f85ffa5c08604cb7faf8aaa971"
+embedded = "1de14bb3bfa050b0f1ad692fa199256241badc761df748616f7cccdb1689f155"
+status = "residue"
+cause = "mir::Operand::Constant: <f32 as FloatTraits>::NUM_SIG_BITS: mir::Operand::Constant: the constant item <f32 as traits::Float>::MANTISSA_DIGITS"
+
+[[fn]]
+path = "zmij::f32::to_bits"
+kappa = "7501fc70272990fb5de5f6e92a632e446e5e463d158aea52bf747c147e7717f2"
+embedded = "ee6859fae57a4e78da46576b6669e2a0868110e9e004cd73ae58fab5c3b84699"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "zmij::f32::to_digits"
+kappa = "538d32eccb33dfa2550fab872ddbfe761ef97ac16c2a5f1b8f798d75f105275a"
+at = "Data=u32"
+embedded = "75b9a17d3d19e523defdaf553032efb7dda6fc9127f9276b63042f0772c84962"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "zmij::f32::write_exp_float_simd"
+kappa = "0cd8cb84a5d372f2b9efc50c4aefe536a799a40ee4dc52070f460d6aaa2e93e8"
+at = "Data=u32"
+embedded = "df6c13e64a200eb17a91f669b1f1ce085a805c0b19b5ee7ba21be73d7b26086d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "zmij::f64::FIXED_DEC_EXP"
+kappa = "5dbacc323fdf074b6d3e971285a9e506c693d8b580ee9e04296d11510e96956e"
+embedded = "476f501e6bc0a545be946fbb2226ac071ad1ee376fb2d73b40e444992cde29c1"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<i32>"
+
+[[fn]]
+path = "zmij::f64::IMPLICIT_BIT"
+kappa = "64f8a24795cf50a0c9a9178b66152b36a51f15d9e58ffdf79440fa184a404702"
+embedded = "f62a531528bd4148cb3a7ef062de3cffa724b7ada7df49088081a5dee5ae2c4f"
+status = "residue"
+cause = "mir::Operand::Constant: <f64 as FloatTraits>::NUM_SIG_BITS: mir::Operand::Constant: the constant item <f64 as traits::Float>::MANTISSA_DIGITS"
+
+[[fn]]
+path = "zmij::f64::to_bits"
+kappa = "3615acd3c07c3d56c247b330dbd232e5eac0c75b40db0fefb2cd88e55615b036"
+embedded = "4c3777ffaf25d29ba39e1519eeaef376b773ff5989a8a5c79db483969d1e3dc6"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zmij::f64::to_digits"
+kappa = "eeb31f704c329fba6a985e62222f46ac93159f2d8961628c163bac71c083cc4b"
+at = "Data=u32"
+embedded = "1c1b6eb71a540cc5fe622e927549f31cf4aaa641efedb274c856d0838f98f443"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zmij::f64::write_exp_float_simd"
+kappa = "d47bd6af280286a21debad335f0deda10398ea471ffd4bddd89cf9f7981902a3"
+embedded = "1051df0cec0343942ce3cab1cfb781720211407fe8e3957a24d5a4d7ad9bf569"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zmij::to_bcd8"
+kappa = "851bbd6976fe3431debcfbf9f0e5868fd23017ef9f0f3978ce7798078e856ffc"
+at = "BcdResult=u32, Data=u32"
+embedded = "cc6acbad13d24cd28ff9f4c1c7fcadf43ae37674077f19cd00557e0053597aa8"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc60: &u32}"
+
+[[fn]]
+path = "zmij::to_bcd_4x4"
+kappa = "12848811ca6be9c0ce7ae6b9789a9fec9fff973b2feee25af58d8f6d20a63441"
+embedded = "ee1ce8690a7bda9534f2fc9154ff7fd796c52c6c893dd0d47afd24af5489c113"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::to_decimal"
+kappa = "2fb6c10efd01c89eacda32f75bbb073e533325ab1ba43b0a9a9f50bdc669f609"
+at = "Pow10SignificandTable=u32, ToDecimalResult=u32, UInt=u32"
+embedded = "7481c7d4c742223d1aad81f8ff9daf613c031e59983081045d15514caefba375"
+status = "residue"
+cause = "mir::Ty: Data"
+
+[[fn]]
+path = "zmij::to_digits_32"
+kappa = "b448cd94924a67567d26052719c7025b8789d7f3b6a7187965f59e8abc5a651d"
+at = "BcdResult=u32"
+embedded = "2c4c4398d99a4973876a0d5bb94c6a357141e9227930161869d6a303364bfb95"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "zmij::to_digits_64"
+kappa = "aac452a193c43d4db92d08c8111898637c62516def7b46ba36f87b7105835d2f"
+at = "Data=u32"
+embedded = "7ce2705558328915d28e0462ebfc20ccfa179bb8dc88d521885a7710ba76c8cc"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zmij::umul128"
+kappa = "40ac2b738cdc5d7910aaa490d1f4dee576ea34007e81d88bdbf7738e60b81b04"
+differential = 7
+embedded = "6bb3bf8182630a5125a40d373da7c43b6b6d76d1e8a5f19b421f981c784fe91c"
+status = "translated"
+digest = "043c9fd4ba2126bf92aeffa3de5f5b6eb0bea7b67bc7162427ec2fefe811c0b7"
+
+[[fn]]
+path = "zmij::umul128_add_hi64"
+kappa = "de312406cfe7530402162e322a396c1498fa0e04102cb8e9154a56666ef3b8a5"
+embedded = "25602eee033d1169bdd2573d878c0564b480a1300ea9c8921a62090b25298413"
+status = "translated"
+digest = "5a571e69875da9db066d1eb2196019ce5165eb1121343f2c8cbd88b9d33acadd"
+
+[[fn]]
+path = "zmij::umul128_hi64"
+kappa = "5bf4df9990262e1e63b9c116aa6df217e3af65074aa2e5b39e592128854ee1ed"
+differential = 7
+embedded = "0ded336a5e9f17239ae1a83ee033cafaec52202a778a6b8a2f45d0f563b7063c"
+status = "translated"
+digest = "938e99362090e82da80662cb6e5d88c9e82d0165f769ada7b778c5311b083fb1"
+
+[[fn]]
+path = "zmij::umul192_hi128"
+kappa = "1157b4d5a3a920f7a9ae46babfb99d494035fe2561064e87c33494b92dbe15da"
+embedded = "0cba13549f7ec5e27ed257caefe1372d7d59d7ad648d9f5d6628780a9bf04c28"
+status = "residue"
+cause = "mir::Ty: uint128"
+
+[[fn]]
+path = "zmij::write"
+kappa = "21523ea0686a42ad23731f56e90f05a2ab3a434bb5e543bc92a82f7177708e45"
+at = "Data=u32, Float=u32, ToDecimalResult=u32"
+embedded = "602f91baaaa14641db44cb9c3fcb6548b831ecd60937a9ccb0979b66f802947d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FloatTraits, which u32 does not implement in core"
+
+[[fn]]
+path = "zmij::write_exp_float_simd_32"
+kappa = "e43adc166bdc861741a016da6d6aa146c766ba650f3873af2314941814856d84"
+at = "ExpFloatShuffleTable=u32, ExpFloatShuffleTableEntry=u32"
+embedded = "f5b81f916f9cd7edb34dcfe1ee4a09c1f27729ed83573048777ff847bcc804c1"
+status = "residue"
+cause = "mir::Ty: f32"
+

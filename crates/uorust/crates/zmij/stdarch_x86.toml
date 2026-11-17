@@ -1,0 +1,61 @@
+[[fn]]
+path = "zmij::stdarch_x86::_MM_SHUFFLE"
+kappa = "ed7046e8e30f190c97f22277099308f2d0ba17c4e279dd3f1f1d49e3ca299c7c"
+differential = 7
+embedded = "4298d2ca46107e0753160de14870ac7a76446018aafcc24f4cd249d83c17b567"
+status = "translated"
+digest = "81df2abb1fe2b85c5440ab7c2182698b692da38ec71f158d73807d9961842a8f"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set1_epi16"
+kappa = "af5e41c469a183862df392c156bbf20063d75a52f3daa09e2cbd81b0fab6fe84"
+embedded = "29de70ada44b6fedcdc7bd008dc5cb071ad30b729d2d2b43507832fb41820891"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set1_epi32"
+kappa = "238e7d3d71f5376d0fae1b8667ad2f73316a5eb0264fea69796b30340fa8e441"
+embedded = "7a5a68f344a485c2cc5ae6cc058ef19be7063b03376df19574e429b8547af0c0"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set1_epi64x"
+kappa = "caf7b7f418dfd7d4324f3966dab9b5a0a77435c04f6b076dec2b2a93070df358"
+embedded = "6db9af7bcbd895fda13755ac006b866b18c53cfdd635dbe6f3051fbde2f473ff"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set_epi16"
+kappa = "7c804b4f8e09b21d0e675a0a33c6d27ad4be4358bca6190806bcc899a6efe617"
+embedded = "195d03af90718bad0d86d020d06c3f0fa914445894b3ed22eaadf8b359ec23cd"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set_epi32"
+kappa = "1a832b288fec31934ccd9af920cfaaaa6fc08a5c7b8dfff7f70c4cba2511d43c"
+embedded = "67f14218e8f8eff716ddf9e8ca9d0a465963fc32f694863ce3e923a5a06c1a69"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set_epi64x"
+kappa = "e7f3a7cc3f847f58fac415cf7470e489633f9cfb3ac85505b11eb09f85cbf4bc"
+embedded = "e3d13969d1004f59154e133d2f4a9eac090099b3935d8214fdf464bc57b92cee"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zmij::stdarch_x86::_mm_set_epi8"
+kappa = "a9aedc4f85a855ae524edee6dbc184871ba9c1277b5ee4170cb6da0607133cf9"
+embedded = "14549ba939bd2a208945b469da0a54fdc9495a1d39efa380fa601265c0afdcf3"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+

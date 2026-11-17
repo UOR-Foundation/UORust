@@ -1,0 +1,66 @@
+# The want register (written by `uorust crate want@0.3.2`; do not edit): every body of
+# want's MIR at want 0.3.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 25
+translated = 1
+residue = 24
+
+[module.crate]
+bodies = 25
+translated = 1
+residue = 24
+
+[embedding]
+bodies = 25
+embedded = 25
+evaluable = 25
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Giver"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SharedGiver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Taker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Want<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1

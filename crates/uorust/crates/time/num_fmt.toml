@@ -1,0 +1,153 @@
+[[fn]]
+path = "time::SIG"
+kappa = "c1d075bb3574634fb8e4cc435099821ec02e95bc5abb856a581f303314cfb3cc"
+embedded = "3cf9799e2f7881ad91492b3ebf2614fe373dc181e5aabe269f49b74ad9c01e21"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item num_fmt::div_100::EXP"
+
+[[fn]]
+path = "time::div_100"
+kappa = "1a180b26eda22e03459e3a209928fe57b4caaf1540e14bbec7c0cc4902100c76"
+embedded = "3a35a181a9434223d93a5559a79f3d264287e49dc5993cfd9c0e31378b294954"
+status = "residue"
+cause = "mir::Ty: deranged::RangedU8<0, 99>"
+
+[[fn]]
+path = "time::four_digits_zero_padded"
+kappa = "6b7d549b3c6a2e3e742ca0c192ffb2df0ecf363c744c28238dd8615828d930ac"
+embedded = "8361704fb46bb0188d671b3af0f09fe40097cfdce18c33fcf42f891e49d70179"
+status = "residue"
+cause = "mir::Ty: RangedU16<0, 9999>"
+
+[[fn]]
+path = "time::four_to_six_digits"
+kappa = "40ec2c39e7c26f5981d8e77f7dcb186e2a9d2217b429db9e3d629739e35c6895"
+embedded = "8c9640d2783d8a58363d12e3d9531f36469c6e15e9f886c19e3ad6447e38f604"
+status = "residue"
+cause = "mir::Ty: RangedU32<0, 999999>"
+
+[[fn]]
+path = "time::num_fmt::<impl at src/num_fmt.rs:34:10: 34:15>::clone"
+kappa = "84b221cc6c53032a529db5e2c0db52922116eeea7d71d44a20d7da1d0c316eac"
+at = "MAX_LEN=u32"
+embedded = "4e906c13ed4932159c66af148cebba412323f821c01c9def7210c622d8e0aeec"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackStr<u32>"
+
+[[fn]]
+path = "time::num_fmt::<impl at src/num_fmt.rs:67:10: 67:15>::clone"
+kappa = "c8746ca19702e6fb75f9a0e255464170fb71bfe449e42cc97f1d0c367e70c1d3"
+at = "MAX_LEN=u32"
+embedded = "f5563f61b723db62a965a3d6f003f30140efb19411c1cb730c4a55053f3a4546"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackTrailingStr<u32>"
+
+[[fn]]
+path = "time::num_fmt::StackStr::deref"
+kappa = "07a547724863cb07f6df466e1819767a31e7580b1dc2b9d4800217c29abfee05"
+at = "MAX_LEN=#usize_MAX_LEN"
+embedded = "385c829eeb86a97abfe0b015264d307640a656962a027e66b7450da4f6587f6e"
+status = "residue"
+cause = "mir::Ty: StackStr<#usize_MAX_LEN>"
+
+[[fn]]
+path = "time::num_fmt::StackStr::new"
+kappa = "086a5c117cd6971dc783d6911aecc8ea09cc7d5d46365944e1aa66b397f8770e"
+at = "MAX_LEN=#usize_MAX_LEN"
+embedded = "780a03e8148c9501a4291e9f47f9abf6e51493eedcdadff64740fad4c0c3e5aa"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackStr<#usize_MAX_LEN>"
+
+[[fn]]
+path = "time::num_fmt::StackTrailingStr::deref"
+kappa = "a3bc13a35dbddcd813a4889cf1529968beb683df3f67c8ca740fe3091bedab14"
+at = "MAX_LEN=#usize_MAX_LEN"
+embedded = "fca3ef0e887aaf5fdfd5c43434f7a41e648bebefb71a3ac47ddab0c0adfdd41b"
+status = "residue"
+cause = "mir::Ty: StackTrailingStr<#usize_MAX_LEN>"
+
+[[fn]]
+path = "time::num_fmt::StackTrailingStr::len"
+kappa = "8203bfd1efe01a3083e32fb09df6222982942b03f728bb847767ac3384210028"
+embedded = "4e139844dd763688fd5975bfb1e392bf85dded3bd8458848b07f4aad56204025"
+status = "residue"
+cause = "mir::Ty: MAX_LEN"
+
+[[fn]]
+path = "time::num_fmt::StackTrailingStr::new"
+kappa = "002f2ac9cb29c852a974c57e5577e547547dde036b657e5176606c4610891da0"
+at = "MAX_LEN=#usize_MAX_LEN"
+embedded = "66d71fab25d91dbb88a32bd2cf198ee3845a5dcbb102281d9217d7bc44c90e44"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackTrailingStr<#usize_MAX_LEN>"
+
+[[fn]]
+path = "time::one_to_two_digits_no_padding"
+kappa = "88a5a50ec30581a0b41e8e0b7df5d7a8b6186c6a71403850b3a25347ccf06330"
+embedded = "e8160f3de3fcc79373387af4f9b7ad9a8afec63ca4feb2fb841eec7ba6d7008e"
+status = "residue"
+cause = "mir::Ty: RangedU8<0, 99>"
+
+[[fn]]
+path = "time::single_digit"
+kappa = "3d331f25e850bb8e0741866080963dd5ac68a41dafc45852d46023a13425b12e"
+embedded = "925caa88c922390f8cc04c0d37b5aa7cd22ac3a9cdc7a4b6a405cb31635f5bc5"
+status = "residue"
+cause = "mir::Ty: RangedU8<0, 9>"
+
+[[fn]]
+path = "time::str_from_raw_parts"
+kappa = "51091fbd771a324e81d1c2fa98552721f8eb8eb871e9396b69cb89347ae2ce39"
+embedded = "dc2c0e1c3741fa7cd5f8f66658519e7b646f2852e3a8ab6e44eedb9eacaefa7f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::from_raw_parts"
+
+[[fn]]
+path = "time::subsecond_from_nanos"
+kappa = "95f07b4bc33fafa2143a3cb6653f03661340ad12096d9f72f421956ceda58bdd"
+embedded = "57221aedd1af224233e9d7861e07cf2269e2649e3bfc87cb741feec0da5ec5d0"
+status = "residue"
+cause = "mir::Ty: RangedU32<0, 999999999>"
+
+[[fn]]
+path = "time::truncated_subsecond_from_nanos"
+kappa = "0f70b5ea92bec8fa0e4ab6879df4abaadc37af09cd61fd06c40a882910f8a4b2"
+embedded = "5005b64df3e33f83be4dad025c4843dfb047728f78b599b2f0f4b9d5ffd8ca01"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackStr<9>"
+
+[[fn]]
+path = "time::truncated_subsecond_from_nanos::<impl at src/num_fmt.rs:389:14: 389:19>::clone"
+kappa = "82af329629a694f24290369d892734f871c7ddff62e3895b91907d3ad18d2eaf"
+embedded = "aa52134e9b0c604597534d40e5d7a1cf99e7938b3d1a11aafe94f8a7ea05f5d3"
+status = "residue"
+cause = "mir::Ty: num_fmt::truncated_subsecond_from_nanos::Digits"
+
+[[fn]]
+path = "time::two_digits_zero_padded"
+kappa = "75f106a0eeb259ee6628e251926124f7fb5202f6239aa1ea78c6c3a9b1ae7366"
+embedded = "4b0da1138c8c757ea70247399abeaae25649f3c4cc8c1ff69f04f510fc065dcc"
+status = "residue"
+cause = "mir::Ty: RangedU8<0, 99>"
+
+[[fn]]
+path = "time::u64_pad_none"
+kappa = "5c209304e8f08b608f576625237d24e395ebbe8fa1d2f6bb1146327681ed88b1"
+embedded = "d6ce206a2597a1391d508b25c94b1754f020ec4990e181e57d2e322116210289"
+status = "residue"
+cause = "mir::Ty: num_fmt::StackTrailingStr<20>"
+
+[[fn]]
+path = "time::write_one_digit"
+kappa = "2ae5db785032e0e34f05aecf57e758725e5b20ffb2574faab2c15b68b5a7effd"
+embedded = "f9fcc4dc9437ee6cfd214cdeabc54ddb189e7fa278bfad66af99b3bbda383c5a"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "time::write_two_digits"
+kappa = "0f3862d83ab75b871dd58c6bc025647b47e554f8c7d6adcb836c48200543149a"
+embedded = "5e46dfb3e703ec60bd2b0bdd24c8a6cbde71f148174a7f574cc4ea8a4ea104c8"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+

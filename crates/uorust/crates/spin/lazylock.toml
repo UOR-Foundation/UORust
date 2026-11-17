@@ -1,0 +1,48 @@
+[[fn]]
+path = "spin::lazylock::<impl at src/lazylock.rs:85:1: 85:62>::force"
+kappa = "ecc3fcae4fac81202253c78a911d5b27a17e0b057a574a600eed049d1bf05d6f"
+at = "F=u32, R=u32, T=u32"
+embedded = "9d73fe33d8819e5cf14e38afcca47e8ab9a270631941a3718b1dbebfceb8616f"
+status = "residue"
+cause = "mir::Ty: lazylock::LazyLock<u32, u32, u32>"
+
+[[fn]]
+path = "spin::lazylock::LazyLock::as_mut_ptr"
+kappa = "5297a26b9009f5da1fc8a320cd790f091e6c236409330e1fc555b7056244b38c"
+at = "R=u32, T=u32"
+embedded = "b7ecd11a517c831e1f0dfe62c30edfeb21df3e776e73bd9e4710f8cebeaff2fa"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "spin::lazylock::LazyLock::default"
+kappa = "99bca87fc39e337d83a65c96b65146e563fe2de197b70b61882c3b923af0a4bb"
+at = "R=u32, T=u32"
+embedded = "4b93aae66bbfb4ee559db39d7ede1aee5e6d6d3973907f6d24bba672e9077300"
+status = "residue"
+cause = "mir::Ty: fn() -> u32"
+
+[[fn]]
+path = "spin::lazylock::LazyLock::deref"
+kappa = "d0d2df3c66b455fc46e129b92187ebf86ab7f5c0f6d2c2b5d57f4dcdb7faa700"
+at = "F=u32, R=u32, T=u32"
+embedded = "cb06f4459d835adef07cddb7f10d1fa7217a02e2bb1dfac2449c60091836a17f"
+status = "residue"
+cause = "mir::Ty: lazylock::LazyLock<u32, u32, u32>"
+
+[[fn]]
+path = "spin::lazylock::LazyLock::fmt"
+kappa = "05d5ad9a4b81c663ff30142d469dd0312be8b4c08023e2f48da68529b18d534d"
+at = "R=u32, T=u32"
+embedded = "66553f1cf781cb1dd6acc22a8a075d7dc2046c6d1b4f4c45c5c2b9d2fe29423d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::lazylock::LazyLock::new"
+kappa = "ff864d417378bedb76f68b4fc69efc724d7708bc02616cb64be4c0a59b94a24f"
+at = "F=u32, R=u32, T=u32"
+embedded = "7e03e370c3b1fe32191efd551d84ff0f88859ef618fccadedc4df84aba98bc9f"
+status = "residue"
+cause = "mir::Ty: lazylock::LazyLock<u32, u32, u32>"
+

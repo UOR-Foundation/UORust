@@ -1,0 +1,138 @@
+[[fn]]
+path = "lock_api::RawCondvarTimed::wait_for"
+kappa = "53d48e1e28d4c47798e98288328daf66932cea9d67b2b63c635b01313ad407aa"
+at = "Self=u32"
+embedded = "d05c86e4976509799774a76f0b1f3a34c28a5b82d42191ca50bf95669f6a54ea"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by RawCondvarTimed, which u32 does not implement in core"
+
+[[fn]]
+path = "lock_api::condvar::<impl at src/condvar.rs:144:10: 144:15>::fmt"
+kappa = "97a8c846e5a5c6bf222247162d808f05813242b11ced8effdc248b9d630f975b"
+embedded = "c72e6544aa81eac72935c9e63153b6ed2575a1522d53988833df1a587543b577"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::condvar::<impl at src/condvar.rs:144:17: 144:26>::eq"
+kappa = "cd22195ef56cb504c8884accb20c93527fe511ddc34c3537bd6fb4f685d00c4b"
+embedded = "44b1a9bbfa30a45decf5851bd0558aba47ff485d29cb6ff70d75896e80bb2148"
+status = "residue"
+cause = "mir::Ty: WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::<impl at src/condvar.rs:144:28: 144:30>::assert_fields_are_eq"
+kappa = "381c65bd47e93eb100665311e1ded1e45f5f8bf8496e40e4d70ec58f58140d5d"
+embedded = "281bf4d59e8eb9fc66913801ab1b379497a0b7f48c20f7612152781986c40937"
+status = "residue"
+cause = "mir::Ty: WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::<impl at src/condvar.rs:144:38: 144:43>::clone"
+kappa = "34d418174eb59901fe4b0869fb274d924723533439e6f97b95644b2a809c8680"
+embedded = "07c940e0a0dc12b3b1f94689d8553d46de460bc0092f67cf3809f5fd4f2ddf0c"
+status = "residue"
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::default"
+kappa = "983bb02d2947b8d8a04ebc68541109a8f48fa6ce35d89bbd2245aec613e548eb"
+at = "C=u32"
+embedded = "fa58fcfe05eae15c318ea907af9a20173d519d526a77f497f8ea6e4dacc47e47"
+status = "residue"
+cause = "mir::Ty: condvar::Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::fmt"
+kappa = "a207b351143d69d5c0bb62e2b797a4f908c21ad66fc497f56929dffb16831352"
+embedded = "402a6d8c6068bc8f6afb75d7d0261ee1712eb8e7abdd6ee8d4290f0e2e9529aa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::new"
+kappa = "b40be9d454a9d3434f2fccca11bfde781e1e0b265f802292c2285afeb8adf680"
+at = "C=u32"
+embedded = "14272c9911b768452946d8ce5ee733a397f2d8d2da773a2f71d8c45a791337ab"
+status = "residue"
+cause = "mir::Ty: condvar::Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::notify_all"
+kappa = "0990732b6e55c165c4f6b2d9113a6f36a4cb9778e12ad16fa37ec7814d280c02"
+at = "C=u32"
+embedded = "f7d1fb4e4dbac190c0edf57967868e1af60ff50b3526f721d7d1a57d727ec735"
+status = "residue"
+cause = "mir::Ty: Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::notify_one"
+kappa = "ad3eb64f745644f52b94db4017287ab1a6a5c79bc710ebc4cee09566be48f538"
+at = "C=u32"
+embedded = "3c0d6b6bb62ac2ec3a441fb6ea7a0c5e46fb355781c8b8601932e33bd9b73250"
+status = "residue"
+cause = "mir::Ty: Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::raw"
+kappa = "ca70be15b811282bc9c9d165ed84392d2ee461fe5cb68ed9413db58fdf2d8900"
+at = "C=u32"
+embedded = "f4e3e3b420345d201827817b1008dc80d10775e2e1d928cbaae3a73a6374536e"
+status = "residue"
+cause = "mir::Ty: Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait"
+kappa = "4d91a173bbe3e96daf8f1a727ed8416ba96e745ced0b0f413cec6d5a37d781d3"
+at = "C=u32, T=u32"
+embedded = "b5fccd3fe1718a8c08288b78d363e9d4da484eb51df6d34a354c0090516d57c9"
+status = "residue"
+cause = "mir::Ty: Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait_for"
+kappa = "858b343e1961174aecea4174e08c9d1c0a0d1a0eb6cf5c4112f916c37e4c9717"
+at = "C=u32, R=u32, T=u32"
+embedded = "1761ae928d37cf484edc308885c1c7e3084b7b73c34daf573e15f34b0cd5049a"
+status = "residue"
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait_until"
+kappa = "eba2779c44d28e1dc1c5291a51216076b6075cb32a62998c1385d210dea51b85"
+at = "C=u32, R=u32, T=u32"
+embedded = "edc69f4d768dc8e9a11f1b356f12349daa21bd54ebb5fcad09c49c63db98f055"
+status = "residue"
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait_while"
+kappa = "ecd4e699c7d0380e3032f72851d59171ed562cb751e18daa3fec70c1ddee3790"
+at = "C=u32, F=u32, T=u32"
+embedded = "a02f973b44260d4394c80d931e84585419df3f1d755f0a41daa55a3b2ba369de"
+status = "residue"
+cause = "mir::Ty: Condvar<u32>"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait_while_for"
+kappa = "645fa531c63cf94ee4451ff46bf7322cec0c31a6d4b8da12cb55a460a866736a"
+at = "C=u32, F=u32, R=u32, T=u32"
+embedded = "b1a4dd4ffb7b997065d1f2e0841d106c25110c3cf7b7fc2af2e1600a5e7d9cab"
+status = "residue"
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::Condvar::wait_while_until"
+kappa = "6448b9d914e63ae22c35112daf11a66aba4736a3d82264c66a37fd9f2257d35a"
+at = "C=u32, F=u32, R=u32, T=u32"
+embedded = "f12b702a5adb01afd17aae09be512d93ceaac5db4b22ce4740f702c7c0762091"
+status = "residue"
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+
+[[fn]]
+path = "lock_api::condvar::WaitTimeoutResult::timed_out"
+kappa = "bce243fdb08a4ab6ec87bfab06b0076e946159cefbc193759eeef5b7c6d38a12"
+embedded = "aa8067ecaf38290013a2eaa86553bdeb0ae611f1f940b1d7aee919942e9bba3f"
+status = "residue"
+cause = "mir::Ty: WaitTimeoutResult"
+

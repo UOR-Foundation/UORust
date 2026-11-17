@@ -1,0 +1,3823 @@
+[[fn]]
+path = "bytes::Buf::chain"
+kappa = "4cf03e6b8671f57775ba31f12f5ce49cafecca8b7f35b10960e3d6abc6514f5a"
+at = "Self=u32, U=u32"
+embedded = "372683744195583abdea4b0091f07b8d58b03aa6d67d60a351becdc07eabed1c"
+status = "residue"
+cause = "mir::Ty: buf::chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::Buf::chunks_vectored"
+kappa = "20155e6e3fa97b807a0c17c38c20628e20f4d3d94e54e03a93ce79ab452ca5fd"
+at = "Self=u32"
+embedded = "b25d8b004d178d83470b2b6633dc1a9c93aa7bc316057746ac0e690d22615a5f"
+status = "residue"
+cause = "mir::Ty: IoSlice<'_>"
+
+[[fn]]
+path = "bytes::Buf::copy_to_bytes"
+kappa = "72830fd849063f7df00b6e2c02cc6de64a7849dc898cff8ef1aacdce8f82142b"
+at = "Self=u32, TryGetError=u32"
+embedded = "07f9d1c34cd36e426d945c19a3cf740e1e2f28ed9b66c38eb003d891dd7fc54a"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes::Buf::copy_to_slice"
+kappa = "2bbad6a6e0330069e5b9322243653c0b763559874a184af5bca37bcabad2d7ca"
+at = "Self=u32, TryGetError=u32"
+embedded = "736717b67393b43df77c2cc69b436accee18b18ea9d826a61aba2949f4bf2d37"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_f32"
+kappa = "17248c7abaa8d58bbd164734f1a6888391283b4ac71d5971c6b5fbeca83b053c"
+at = "Self=u32"
+embedded = "33c3fc010a521951c233d1aeb56b2144b2265e004e13ad8fc4a1dce348b9e2a8"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::get_f32_le"
+kappa = "08bf0e6357b5a95581d0049e30af08914f405101ab9a0df39a855565d51580e3"
+at = "Self=u32"
+embedded = "0f2f917e0d58702e504bde8d4ee33d81bc391c79ab625067c264261c28a44475"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::get_f32_ne"
+kappa = "2d4ae53dd77efc559713a2f3728f02de3ac36f5e0984f715eeaad0f57f9f15e8"
+at = "Self=u32"
+embedded = "358bd8a66d130189bad2427803d1361a45218db7897ddad754614414063d8642"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::get_f64"
+kappa = "0fb22ce98473459336e9d370f7eb1fdedfdd86545a5e37a7f036a60818ad4c7a"
+at = "Self=u32"
+embedded = "e7793faab0eafac42b4efc922572cd57ce311711370cbdf329c9c4d96795003a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::get_f64_le"
+kappa = "a6c7a941757b49ad7b74ad93281ed303dc2b72855c6ab10002176a9e911dc176"
+at = "Self=u32"
+embedded = "6589c8182a1a4e5ceb4bc7038daa40b2d2e22438563e522dfa25f8f4cee0eb27"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::get_f64_ne"
+kappa = "2389fdd4ffa21fe73a5e6e213a9c881539d1a612f99c5064679a32825179c864"
+at = "Self=u32"
+embedded = "faddbb65936f4cb8bf24e88f13759c9bc32a06f74bf620ba768e674650ad35b6"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::get_i128"
+kappa = "5d2f0d1c52e518585f979c7a2d89232282c8e9d09ca83f49d86a6803f37f408d"
+at = "Self=u32, TryGetError=u32"
+embedded = "f14a1fa3efeb7001916ecceef5d8ae7334eb906760b2731afb6353e99fd3738d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i128_le"
+kappa = "91b630db1e969a8e95bbe4cbbabee2d1303d10be53400630b9676454f7872d9e"
+at = "Self=u32, TryGetError=u32"
+embedded = "605f489b529c65f6529982aa3a4cba9510e2b18ba9270d696228bb490b4820b3"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i128_ne"
+kappa = "97a7f9b7b8904703baf30ebcb174d62e9a1e99f25f3fc678d0d71eafce02a620"
+at = "Self=u32, TryGetError=u32"
+embedded = "6b76c728f2a3609387604f642e27d71ac70e690068f6c6b0be9e86327ec19420"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i16"
+kappa = "4da3cc8bf2b92719dcfc02ce79dee0f5bc702a25b96c82cf73d65e837d0d0775"
+at = "Self=u32, TryGetError=u32"
+embedded = "1f12b31db65bf1922971ea0e5216e621cbd781ae19a5276acdbbc12be27b51cb"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i16_le"
+kappa = "39881266713f3ebb485d42dee6b8f8ad2e3aa07d6e0462ba33c941065f42708f"
+at = "Self=u32, TryGetError=u32"
+embedded = "9e055b946286389c85bca9cbd080fc8cc3f6f33c5557f8a4eb8b980c00f8a17c"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i16_ne"
+kappa = "963de40bdaa65843e9640bbdd006f76635bb52e1ec49847a98b0d892799cba5d"
+at = "Self=u32, TryGetError=u32"
+embedded = "cb86503e10ed78d77c4c5c4fa95eb60ab94367556189c276016403ed7f6bf203"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i32"
+kappa = "499ad1f41ff1a05519ab1aca1ddd709ffb9d8596dc29170ebbfc57363646ed70"
+at = "Self=u32, TryGetError=u32"
+embedded = "83b04e50be5d075feca7ed5a5865b858b6a5e79b7cab071c4e9c4b2a5b6509d5"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i32_le"
+kappa = "341110ae2492e18c2f251cf9b75a3568bcf9edf8bb743822a9ebd00832d85114"
+at = "Self=u32, TryGetError=u32"
+embedded = "d08b84b944cbfa76983ae42a27a0fee7607880f799baf165752a8430354ce8ce"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i32_ne"
+kappa = "cbd8790a41730ac963106003d1a14e1a27009940f0d2bd1110c21bf85320dd17"
+at = "Self=u32, TryGetError=u32"
+embedded = "ba52a1c88a6d4c75fd5328f6d7d356081effcdba934ee6dbec59135ec1823bb6"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i64"
+kappa = "b5c9a40d7317095e35cf163931968a9ff66d74cd223dcfacc0985cf93ff9d88d"
+at = "Self=u32, TryGetError=u32"
+embedded = "2987a1e08382ea6898879a756a393fdb732c6506b61807f9ffdf1e94ea64c6c4"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i64_le"
+kappa = "9e6929e3e6377ea9ed0ce4e9806df763b44017688efc6bed61c9a8e0b639d22a"
+at = "Self=u32, TryGetError=u32"
+embedded = "e329f953b125c1d0a8d8a54fc4b81d7ccecf6b3085a9af93c278ab530321e852"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i64_ne"
+kappa = "e59da187dc1f88f81560d961bbbe2dde5b008652cdb8e3bd42e91b5ff2c04cef"
+at = "Self=u32, TryGetError=u32"
+embedded = "fad5239d05aba3edfe7149dea2540c543741e6ceb0a10df65161ab9637b38510"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_i8"
+kappa = "d3ab79dc76c7a7bfdced131656ea14da19e120ac870ae306c260c46451f051eb"
+at = "Self=u32, TryGetError=u32"
+embedded = "452d0ffe13f05a23e5676aa9e23b6f70e2d08069d3631a7e2a7e8a041f562d86"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_int"
+kappa = "3cab82199867b023d38a302875f5fdc494de752fcee1f584fd29acc77c782ad0"
+at = "Self=u32"
+embedded = "87a45754d6ba9bc95f4266eeace511e0eb7bcda73e1712bd2287afa2ecd53d95"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_int_le"
+kappa = "9b55f952c616acef8e570ca9511493b1bd444e49b74fbf1e4ffb4927d1891646"
+at = "Self=u32"
+embedded = "82bffbe414c8692ce4b39fcdd692dac8af56a37068015d9b7320753b0a1936bd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_int_ne"
+kappa = "cfbabf96c06c7f568381e2f6d5161b2532a5653c9c028f0a7407c87a8a8954da"
+at = "Self=u32"
+embedded = "a74144a8a1d6f5957c8b3c7e6e975eff89508a417c63c747ca9203cbe41e4a63"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u128"
+kappa = "619357361378257afe331a4bdcb38e51edb3ae3d6dfb449ef78cdaef8ba2cd09"
+at = "Self=u32, TryGetError=u32"
+embedded = "97db0cff6c89ed6cea492d3c338a596209b4334b4040dc39a1cba9156c50502f"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u128_le"
+kappa = "01e9e164c4728e8f1f9727161106b3cc71cb0be24fc9506fe2e3add7e808e5c8"
+at = "Self=u32, TryGetError=u32"
+embedded = "1e7d31c0e6fcfbd2442f68bcbecedd3a8632e7ff203e89b5a2d73294847a4c69"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u128_ne"
+kappa = "27e2225e7cb9c38e2000f6e13c8c0648d35b0e1e18e5567ec35f542e170b5177"
+at = "Self=u32, TryGetError=u32"
+embedded = "7af40e5271ec1d814fd9991d065ff47cf65578f3692a020d4b6fba8f0c57c311"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u16"
+kappa = "ee096d6630ab1226ab789b288e417f21b3a86f68da4cd125bac1c69a94cbd16e"
+at = "Self=u32, TryGetError=u32"
+embedded = "75f71b635ff48b50a6ed2ea57b6d2c81796f766f071aa435d9b0ea9b808732b8"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u16_le"
+kappa = "83324b3083b0fa76307afe8882fe29b8d38d8714086f19cd5c01c0cd507726b4"
+at = "Self=u32, TryGetError=u32"
+embedded = "7da1f8870a55b324e29f03523dc499c4d9e7fc0c0a7a7dc1c3be6b32764a2dba"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u16_ne"
+kappa = "9dbe55239820afdc0c040960f544847d8749636081aeaca75083ab9955b0de4e"
+at = "Self=u32, TryGetError=u32"
+embedded = "17bff24d288004627225c4af99bd482f4b393deb5525d5edc0a1b4f592870df1"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u32"
+kappa = "67413cc82b48e68f3c632ce5170db5343d9a33849cdcd29397236c028d5cf276"
+at = "Self=u32, TryGetError=u32"
+embedded = "a64b0fdade55555d3141e9a6a9b927e7a82bef498b8fc35b9c653da98630cdb7"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u32_le"
+kappa = "56ee641211d246344d09cfa07b43c386c6d5a54a179b99c713f8dff10a5c3310"
+at = "Self=u32, TryGetError=u32"
+embedded = "407e0505e438057ed090878f67f9097f3b4978de1fba51ac4a74c1b76b13e065"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u32_ne"
+kappa = "bbeda1460d1d1ade0d7dfd022bd3867d1933c8d1accf1d613c1405d550b1f923"
+at = "Self=u32, TryGetError=u32"
+embedded = "6c1768c6bd5a36485e84fc560d9075b226c42e2b6f0d7eb1d2e75b8f1d17c52b"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u64"
+kappa = "405281a9634901d66dc87b513ee9d0e1ce1fc7e5846ef63f9f4709cdd2524c2c"
+at = "Self=u32, TryGetError=u32"
+embedded = "7707898b3a42f87c405260cf258e349893101ad03fcdb11adc96c7a0f033f40a"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u64_le"
+kappa = "3fb3545c8f86b3e2d0974f9ce96f0c5b342e0ac30c6620cf4471f75327417542"
+at = "Self=u32, TryGetError=u32"
+embedded = "b0ef1c53d022bec3834d8aa67716d0b8a651437377cff2f8a4d1d0c20d30110c"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u64_ne"
+kappa = "bcdd770694ca1400dd633f339226396c150ff8c1d353bb53d4a0700743c3f2d2"
+at = "Self=u32, TryGetError=u32"
+embedded = "6be1c1a80cd983ffa081f7012aaf9f4e97dcf7d431610f0cbca057cd7d1daf1d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_u64_ne::{closure#0}: mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_u8"
+kappa = "7d0717363bf5cd827bf02eb0aa86dbc3f49671d81275f2014d398db9afff5511"
+at = "Self=u32, TryGetError=u32"
+embedded = "853b183efbaa46b60ff2f727814556c1dd14299511182ee66ac0425537c5ea46"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::get_uint"
+kappa = "19b589bbfee52c3934ae34227e1a99187592011dc59c574a9fb3404a1d2f0e0c"
+at = "Self=u32, TryGetError=u32"
+embedded = "a221cf499a4690869cff017e6789091a7b3869039da66f893050ca1b420c1833"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_uint::{closure#0}: mir::Operand::Constant: buf::buf_impl::Buf::get_uint::{closure#0}::SIZE"
+
+[[fn]]
+path = "bytes::Buf::get_uint_le"
+kappa = "b4ebaed52143a1d077614c0b4f8b4ad7f16af595f31bf7528ac97c9b3151d326"
+at = "Self=u32, TryGetError=u32"
+embedded = "ffcef46bd64f88e3957fee6ba7f35f50f809a3a18408e6fa71e2393a55ca0da4"
+status = "residue"
+cause = "mir::AggregateKind::Closure: Buf::get_uint_le::{closure#0}: type outside the lift: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "bytes::Buf::get_uint_ne"
+kappa = "38261735065b410cac84802408833fd56b8ed963cc01389cf431d0dc6b47f4db"
+at = "Self=u32"
+embedded = "ee0288ebabf1cbfc65b9c3adca4f180c943bb5871e2b6fb3f0b986bacd3f0a64"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::has_remaining"
+kappa = "cca5cc77490be4f9308991cc66f13a7a8d50486336c722150fe2d935fde4f37f"
+at = "Self=u32"
+embedded = "f09b11646922f8614623eeb12bad59c879b65d6c5e044622bf95be971eabb763"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::reader"
+kappa = "8aa245ac1b3fbcc842a0606021df50513352fba7b8ae13da6749f2f11aed6be7"
+at = "Self=u32"
+embedded = "763cd162d1f3ba16c83db35304a4747383596693167dc724ac3fca0c43cdf23b"
+status = "residue"
+cause = "mir::Ty: buf::reader::Reader<u32>"
+
+[[fn]]
+path = "bytes::Buf::take"
+kappa = "cb37c510f7e2fc3b5320b9ca9d1efd2aebca59f3c6ff7a8675d6817b12a28dca"
+at = "Self=u32"
+embedded = "79f4c79c44e58da6ddc43fb2d52fc7fa6049bc73839fddca58ce2dee842a9e79"
+status = "residue"
+cause = "mir::Ty: buf::take::Take<u32>"
+
+[[fn]]
+path = "bytes::Buf::try_copy_to_slice"
+kappa = "009e41fec9e878a169db31d294ac3a7a4d44f6cd66ee5ec732c16420b35a3c86"
+at = "Self=u32, TryGetError=u32"
+embedded = "aaf6c074c22f716d6a25cb2f6ed573e77445c262416ba4298d5a498fb74581d3"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "bytes::Buf::try_get_f32"
+kappa = "e556eb00edf14084454f60293cdb8d112ff87684de92eda9453db3b470056d76"
+at = "Self=u32, TryGetError=u32"
+embedded = "ed716179282787f05c9cdeb6f257ad2326dd4ba71fc43794020593bac91b9586"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::try_get_f32_le"
+kappa = "ba7a1e9cafe9b255bfdf753e82152e6c87c02c3d566431e797bad57d72abfaec"
+at = "Self=u32, TryGetError=u32"
+embedded = "9a028086ef6a3fed8d8f7b491062d3d59e77923f6835811ee3a4a06a6a2c673b"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::try_get_f32_ne"
+kappa = "71646efa2625ebb5e18bca8da3feb9528cf36dc9baa07ea53a46e2a24a59d834"
+at = "Self=u32, TryGetError=u32"
+embedded = "cf9b857ef832a5e35e29286b2b1f42c157415c61abd34f77228d57a4d4535e83"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::Buf::try_get_f64"
+kappa = "f5db74353a9d3806b1ab5bfc2de9c4c87eff3e6d87d83eb2fcdafa0401bcdfbe"
+at = "Self=u32, TryGetError=u32"
+embedded = "1523d3c52fe5d55ceb8c6f6eb123a0a61092d72c2f6f96abb8142f21a966daa2"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::try_get_f64_le"
+kappa = "e48fe6d108b6f9dafcb2546b81fb066159a022c4cb535f1d7aa2d0c067d914bb"
+at = "Self=u32, TryGetError=u32"
+embedded = "63b7ea0ba01b52bcbc47e76e042c4b1c6de0ab8aa06ab41c2643c3066d5b30bf"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::try_get_f64_ne"
+kappa = "4e0df0626365723220566ba3ec0a85a180155e7ce19a9506df68270abe25e8f1"
+at = "Self=u32, TryGetError=u32"
+embedded = "a12ffe93a150f52293d3c9951af80a2c8fbbc62c79210d699e1b203be06de5c8"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128"
+kappa = "b1b26ea738b6632122ed95f1df24fba9c0f9503cfb21c6beb7ece389740d6f9b"
+at = "Self=u32, TryGetError=u32"
+embedded = "c8c14d1de246c4272811af1618f18363f535ea0e13b4d3f40d0063c88a6d4ac2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128::SIZE"
+kappa = "6ede5849194b46ce21bfad86a86b84a69c1df3286e6690ffd2deffdd8fcf788a"
+embedded = "8fc779c58280f2646ae6bdeced2277ee16931d479438e58d4472673e6b8fe4d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128_le"
+kappa = "52b40086b408c77c78172031169862fb27a7a1ba066aa403d1e179f39833fbde"
+at = "Self=u32, TryGetError=u32"
+embedded = "35cd7f24aba4021488926537bd4963451cdd01fc8717f3774b074e56f669fd93"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128_le::SIZE"
+kappa = "7a9aa68031e718408dffa385c07b32910e755aa55561c0c15f9505a909f1a114"
+embedded = "f70526dd153b1b82cf9ec57720f78fd8b188357832a0f5f226ffbda43c08332f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128_ne"
+kappa = "8289ebff7125b5070369e5ae6ac50a163cb5dae3d3c9e18b2d038591e20e9211"
+at = "Self=u32, TryGetError=u32"
+embedded = "1024ab1e696d41eb95c40e2f4fc16b2bed3aabd05c3261504c011d989e2180f3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i128_ne::SIZE"
+kappa = "fcce63050fe514af599a1b6339db0f9e243f2072aca85518e7f929126fbdc49f"
+embedded = "77d4a5eeca16e4e31960dbee19aa98dba8ce293331965f31ab05b76109b19a79"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16"
+kappa = "3240e0b8e23b0a4344ff54bf13256e8da0b514f23bf720feab527f5be93afb97"
+at = "Self=u32, TryGetError=u32"
+embedded = "0338790b0a370c84a97b7fe50700b99d0ee5be4c3ed80fd219887c84b39cb96e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16::SIZE"
+kappa = "f88e94f7fe973d35250c4be4fdcb796d6a7f5cc2d6cefdb0fb98eaf953fdab3b"
+embedded = "c7434a6de288334ff6b6878fb58da1e68c4665c0365a06b2068686a9e24a903a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16_le"
+kappa = "58972261235bebd96e736af21dcdf3fcd152cfb5d4abd6eca9b9a171bd86460e"
+at = "Self=u32, TryGetError=u32"
+embedded = "c8535ba92b6378a46b87d2334d03f00bc771645bf4dd31fc31bdbdb119506c39"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16_le::SIZE"
+kappa = "49dfd3b1ad4bf1d028b297f1ae37ad5502edcec58000ea93ae368e9fd5f6a099"
+embedded = "b35b2aa2cba2ddd3262a969e82e3de1ca3b328a938566ad99643a2664118e8c4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16_ne"
+kappa = "368ceb3b2baebf2222242bc0bf9b95bf2ba481fddb91acdc3ebd58b2223d619b"
+at = "Self=u32, TryGetError=u32"
+embedded = "52d3fe659edeebd0751b5b8ae928b751b8ebfbbb28eaf9af80dd249bfeb4a72c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i16_ne::SIZE"
+kappa = "574dd9a129c14a52b2911907d1182e3571991c16507f3b9d8701c17ed710fa6a"
+embedded = "7644df769cf2bbcc5208185213714ecc50abd4e11e240b7bf4c3538dd83466e3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32"
+kappa = "789fef698037d14311f6e3a5e533552dd478b5b954aa41ca18ee303a267f025f"
+at = "Self=u32, TryGetError=u32"
+embedded = "3da549a9d200a6f6ba05fd9953f6b19aae958ffdd15cfa95e2568c36ff179f01"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32::SIZE"
+kappa = "8249315d43f7d8c67e6018252ed1e796394195f995ea93f1bbc4c0a58eafff94"
+embedded = "22ceb873465eb088b413512efde79fdf5ffa16bd5196fe97743abf50345f7fb2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32_le"
+kappa = "507c2e17084cdfa6d844ddf36cdfbdc73baaab730de780e17709334781658e50"
+at = "Self=u32, TryGetError=u32"
+embedded = "defbfe25e3548e5ab95867b9b7d1cd87688c65905f51f4c0949c7bee9f305151"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32_le::SIZE"
+kappa = "702628ae2cf57880736ac0d930bfaea1af269c4b5ad47d5811647457d28eb74a"
+embedded = "50aa00b431cc5f2571f68ce2d91e99c6d18be265596245fe7f37fd9411dcde4b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32_ne"
+kappa = "f1c910f8e12b0de5bc173cc4516c16052fd08ccc4f96c0b9e327bcb2ff4cf3a7"
+at = "Self=u32, TryGetError=u32"
+embedded = "3cf13682ad70e1f3ce440abfec6bd4f5e9ddb0afb55999e4b41534e395a981ba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i32_ne::SIZE"
+kappa = "73150c394a808e3c96468f6be5f130298f752df2b47d0d5b7e432631ed76fbfe"
+embedded = "498ed1a7a158cb0a04330ba0825c7a274d69b0bf60807ae5f4366656a3ec74d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64"
+kappa = "871b6c9d28ad20d7aaa5d5d945edacbcf684877ff2e75b1e74f95a006fe19531"
+at = "Self=u32, TryGetError=u32"
+embedded = "1bd678ebe76ac30974f1bcc4b3fd22c998acc030c85c729727d4c422a13fc172"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64::SIZE"
+kappa = "3489597eb403f72dbd9de2094a42bca4d41424f6cfb789be7c27b501ed51c5c7"
+embedded = "31295f837eb441d231440acb3e17f29297516ca932810e7298783b93c8be1eef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64_le"
+kappa = "e847e95b3190309487be77cfc9a9270479a734840c39c9820914824d86b4a13e"
+at = "Self=u32, TryGetError=u32"
+embedded = "2d75c3362461ee2a8ccc2e3c1de7d62caeb9723a2ca0755e96dfcf3d14213122"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64_le::SIZE"
+kappa = "92052e1a6f4ff2dae493b3f48ee4e55980ffe18d58faa8bbb99454967f08ce3d"
+embedded = "3cb1c1d43a41a505185725be74836c66907d6ce50408a754b6603b873fcec009"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64_ne"
+kappa = "bd9cc3e3e20546c93dda3bbab601711e8980801ecbab97d42f2a3686277ccd71"
+at = "Self=u32, TryGetError=u32"
+embedded = "2e41ee2eabbb1296bd10990ed04d2201ede637ec5cab3dd9ecbd40a804d55ceb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_i64_ne::SIZE"
+kappa = "2fa2cd78156b404c880cf5ebffc41d7e5ac68b3a76087951c31e6a42de84ed5c"
+embedded = "a03f8c1a1aae93bc5d3d365b0579c696c9c3452c89d53f98e9011669958fca41"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_i8"
+kappa = "24a6cdaac7be7ed0898d04623d4d186512a1f92ccad8e979841b054d752c4862"
+at = "Self=u32, TryGetError=u32"
+embedded = "45cc8ca9544f03ef6e1670c79e16247e891280f92d795aacb326dd5e7e16ad9b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_int"
+kappa = "b8bcfead31be30ea89521be891f7f3412c0e44e28dd77a8e3d4852cc68f4906e"
+at = "Self=u32, TryGetError=u32"
+embedded = "7cd3ab805cf01abc9ff0862b29ac381fbc50145bda1adb107efd7ef37a4b510e"
+status = "residue"
+cause = "mir::Operand::Constant: buf::buf_impl::Buf::try_get_int::SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_int::SIZE"
+kappa = "49283d8d093d4626de48c0ec5a53cfe9e7c4168e57403a30d65de899bc96c3e5"
+embedded = "f8f4a0d779394c6b6a9f5f4474ac0f16b28fd0bc8dca3d6a15d7b4ed56ee9ce1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_int_le"
+kappa = "0e21ad3bcb6f8a21e903b9a99b36cc86bc18c35f689ac9e87cf0d3fbd6df9eb7"
+at = "Self=u32, TryGetError=u32"
+embedded = "7867bd2f5bcf786b62fa415b8e1eaad7120c724dce44b98134cb45456a906dc0"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "bytes::Buf::try_get_int_le::SIZE"
+kappa = "ef722ae67b858b81ae8a33b9002d563378fee70ffc3e0f9db3597accaf931f34"
+embedded = "17b35d1d43d86f0a64c1118a39250e3844e2e8196134842a2cfc417bcfa839bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_int_ne"
+kappa = "07c70ea3ddc6aff70cc04ed94afeeab5fd3e6f886f5c20845e1296a0c466b9c6"
+at = "Self=u32, TryGetError=u32"
+embedded = "64b85233897471de946687fa34a7ee835596505c16dd8bdd8fdacde1400a4e82"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128"
+kappa = "e1cbea74f7aaf5cf04cf8ac92d2519c299d4e79869f976bf587877c7b415d1df"
+at = "Self=u32, TryGetError=u32"
+embedded = "84f105cf3278a84a3abd9b20426465bd142418d011acdc7b374842172bf2af6c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128::SIZE"
+kappa = "9e1cc1f930c56322c51fc4ef926bc5ed1e7c880f3876bac35d9deb6fe60140cb"
+embedded = "cc7ef0f2568e5a7372470b42fa3d9e2b670aaf5e6d35bb24eecaff4b9c013817"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128_le"
+kappa = "9f331d2768776df3b9cb8197068b056705b2f3f6d8f1968bf343c6a01493d00e"
+at = "Self=u32, TryGetError=u32"
+embedded = "c5fd14e39f06ee56f78c8ecb6e960d553b7fb9c8b77bd6dbf2ccd91f8ecbc11f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128_le::SIZE"
+kappa = "f52c650075452215ec22c127ab541c57ce59de2f0687fa513facedc6f188afc8"
+embedded = "b3b3903a35ce7099a80e6f237376bbce95ff4421e2214795881784f6df7fa351"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128_ne"
+kappa = "779f153db5151b532cecdd279964daa3e3c5f0078cb525cee6f3eae3d168f544"
+at = "Self=u32, TryGetError=u32"
+embedded = "ca79c8a3089e321c7ef8751285aa912df9fb177f7048887d1a2295ea95dcb3cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u128_ne::SIZE"
+kappa = "e25ea913ce90e3221af9eae7de8cc380a76fb0bfcf5cc0ca1e27d73d44c05a5a"
+embedded = "8f5a0d55bf8f92a48114c3a67927cee88830acc0ac517c05e69c90e423f5d08b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16"
+kappa = "d7647e47bc851e2249a1246954ce7c7ef6bb5b879fcc793cd146062c3a08274c"
+at = "Self=u32, TryGetError=u32"
+embedded = "e5a1a15e8468be5e25fefb5f03a2ae0fc0b6771bb1fd8268a984ae0a186fdd5d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16::SIZE"
+kappa = "10767cae682d8af8390f045f5899aeffc023ca51ad9b37c944f9d821b3763b03"
+embedded = "b3a9d25dc2cb0c79da941d4d53960ad16967680a56a3320a1e61c4a477d9173f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16_le"
+kappa = "2f4248e60204fe8cb069e8a184ef537cc2c922b3788ceba6e3fc2607efc44225"
+at = "Self=u32, TryGetError=u32"
+embedded = "15f5e23da2ae62c087948cb2fcdc2ada804cf0c3938a0394ec365a6f0696454c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16_le::SIZE"
+kappa = "740aa7de1aa58071889820998f3f5f811c9654b65fd6fb5b2b19d4f6d6535189"
+embedded = "1bf54bf347e1c8bbfad9f154440d9735da67ebad693abbdbc94b82bb8926cd97"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16_ne"
+kappa = "7e98903e7dfed552c90cfce0bfc5b8f57566c786ba276a24b4de8533375218de"
+at = "Self=u32, TryGetError=u32"
+embedded = "89237960d55f5a90fba03bb6f66f10382246a68281941990afecef9533f4b59c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u16_ne::SIZE"
+kappa = "24c970e1599a365e2b0a4b20b479d3cb4f27d5e6c5a65f1184fe1c2f5271d9f8"
+embedded = "65b6c2117c18162d255b20dbffc73d08f13675823faea862dd0d25716dcbe44f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32"
+kappa = "e46e89b5b42c93e97354d87e1cb37a687d93613571480e50315271164c686caf"
+at = "Self=u32, TryGetError=u32"
+embedded = "f4cb30d6218316133d32b6d67c4472729b1b980dd24a63572a5938903a2f9055"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32::SIZE"
+kappa = "fe81e7e4693405715cfc4ff96fe7a52646350011e9dd3d06c570769e894a8f77"
+embedded = "7e6df8012ac8c73253c75e016b31a8c80131ec58500024f1a5f04b7ccace5d63"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32_le"
+kappa = "0486ccdfb6b32c9fa44a0f462b9d9caebeede0f0d64d4d70bbaec8ff85f20feb"
+at = "Self=u32, TryGetError=u32"
+embedded = "83ec26d5e3ffb18bc6bb657396d1be8ff0a6415d39c4cbff25bd0656a7cae6f4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32_le::SIZE"
+kappa = "3a06fb2979107284fe87995c3b01d8a77e444d92bc14e401956535f73e84ec5d"
+embedded = "3ecbbf147b66fa14456a2e0ced2dbc050d21228f5162d357ba00a72551cf19dd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32_ne"
+kappa = "19f22eb863cd23e8e05486b8a32be072ad19f99799c857e6e0468576a77a7466"
+at = "Self=u32, TryGetError=u32"
+embedded = "948df198aa6a29ad326449703aad7a8448438dd003e4cabbe5b789fc38feec61"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u32_ne::SIZE"
+kappa = "6cd79e62d0197c3452565fc042dbd978b7a5fe119670af1cfaaa9e9b70c0153c"
+embedded = "b99005a39a06b0ad2a2a4589539ae98ad7ac888259dd7ba14f69eaa5f23fdf4b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64"
+kappa = "5b8095e59cc982de32681597fb0b937a22a7cec0a424b3fe7e0d78c9bbb1066a"
+at = "Self=u32, TryGetError=u32"
+embedded = "91e51f2c32b2e22e86d2dac3d84c9bec246054bc4fb6e10227761d32c15cfd8f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64::SIZE"
+kappa = "21b7d845a2fcc03ce8965ad69633e60a004fc1e28340fb729a74d6515814d80a"
+embedded = "7452c615a87cc469f5fc22c884d4df77294c42f2f0ca8a9eae643d2d64b58016"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64_le"
+kappa = "86d52d375930a805b85bc7bcd9145726af9f79e83876286ef503d88f03584799"
+at = "Self=u32, TryGetError=u32"
+embedded = "f0c6231562d91d8c2e60a56c571096d21a9a408629487b5cf113bc4289bfe890"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64_le::SIZE"
+kappa = "8fb2af8c5c6d20dc2faa9e645ff65411e1f35e0045c44b7bbcb001552bdbfa3c"
+embedded = "02450b10bd87dc77cb22efac5975213a558cd36625fb8e5c362eba63e641fb6e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64_ne"
+kappa = "7ddb28ff39e25621cc5d69eda21295f60daa38b5c05668ef2703016756e7376e"
+at = "Self=u32, TryGetError=u32"
+embedded = "efc0437219b72420a11d42891d199fc478237afa566d314cc39d94ea862c3143"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_u64_ne::SIZE"
+kappa = "5c5094133d95664b34cd98e9b1315781b9bc23fdde0f7172230791b4dd19047c"
+embedded = "1f6ecf0928286e123b72fb48e4e14bc703de1ebd0531602309f5c04bbd8b0456"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_u8"
+kappa = "1305eb018a20ad12827b7c23753f8dc977070a5f18479076a2b8b01446e8fd24"
+at = "Self=u32, TryGetError=u32"
+embedded = "b768bcccdb575c06d4777f1c00cc0c1b9089bd15537177f976e9ccfaa84fe766"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::Buf::try_get_uint"
+kappa = "f9d6d547cdb52472d5b30ebe8e87949c4637aad49287dc9b1242770e5dd73254"
+at = "Self=u32, TryGetError=u32"
+embedded = "c9080053a65d37a2b6c38d767916724e90e6e5d30d0e2b0e8c8e0cf10a2feb88"
+status = "residue"
+cause = "mir::Operand::Constant: buf::buf_impl::Buf::try_get_uint::SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_uint::SIZE"
+kappa = "5c9a55780688068d38f4034055e6e31d8e96cba9111ced3aba432e56ea1b0c1a"
+embedded = "899448b4d8aa0dad813dfb2f18b62c827839b887525675c50cc714318b325e08"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_uint_le"
+kappa = "076f14edb3a31f886f775e6f7ab7d6e1789b66e458d57c01b57ca3726ca8fd31"
+at = "Self=u32, TryGetError=u32"
+embedded = "ffa83c8c36ec05ecfc2c3c1f5ff98fc097b909de3d010ea123fc84476ffab135"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "bytes::Buf::try_get_uint_le::SIZE"
+kappa = "dda4324ce03dba599f760c046e34177ff3260ec523727ecacbb4b6285b0141f3"
+embedded = "6b2064f6ddbc0814150b52096c5d15171fa074baeb2faf1111ecef7500879150"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytes::Buf::try_get_uint_ne"
+kappa = "5a409951c0e06910ac006dd78071af115cc107b94de4ef7bb16c60a95bc2ac4b"
+at = "Self=u32, TryGetError=u32"
+embedded = "5f0ae2c0249cdc763e897bf4d90d0f853c8964e929acdafda694a6c5a0a769e1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::chain_mut"
+kappa = "ee0adde00e6bedff7c81494dfd81ca8f4b864440dabe23ba92799db239f55d79"
+at = "Self=u32, U=u32"
+embedded = "4a73b372740a34b530be2b2659e42b5314153b1e5dc1f2d9e37956e18c3b1f38"
+status = "residue"
+cause = "mir::Ty: buf::chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::BufMut::has_remaining_mut"
+kappa = "bcbe47fdb6ce9b5c3c3d0e728c9a966d220d46d79b5d47f50de3d251dcd2fc84"
+at = "Self=u32"
+embedded = "69ed1b5104df2f6c5447bc1a5466ff4614c077e43f4f6893d56ef8292c1f7ce1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::limit"
+kappa = "a2b7417b8029cdb263f43642435259023e6b433bb29cd2eb22bfe51909d97d68"
+at = "Self=u32"
+embedded = "fdd614325735faa453b443580589eb83c9c2fcf69a9053d50fc709cc1c605dea"
+status = "residue"
+cause = "mir::Ty: buf::limit::Limit<u32>"
+
+[[fn]]
+path = "bytes::BufMut::put"
+kappa = "9ea571b2a9e71403c4259dc13a87e33db6013177a7df4ba7efee232a4da10d4d"
+at = "Self=u32, T=u32, TryGetError=u32"
+embedded = "3fee2f010b12c5e454270d6ea2ce648aeae044432ece77b576a91c7f917bb92e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::remaining_mut: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_bytes"
+kappa = "f20a9dc950919f6754948e861eb99af05ccb7594667c8c09df3f63c9fb150175"
+at = "Self=u32, TryGetError=u32"
+embedded = "d0cb0a0ff3ef1d824d5495375a2d3881c9f4c7cc1b3bdcb401d9378162604b08"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::remaining_mut: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_f32"
+kappa = "4a8985811934fd3a56fe140bd82270e6a631916a9d9288796db9c6d4b2a75e62"
+at = "Self=u32"
+embedded = "9a25fb74a7c9c9715f6e5c1f531dee39d322d9982806cfc7da04ee057f51a1a6"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::BufMut::put_f32_le"
+kappa = "6a36a36077e743d180ee0cbd7d8be0372bcef045d56c57c88bcc50e06acd742c"
+at = "Self=u32"
+embedded = "2784aa9b8cb5052e0ed8520d41d12dc23e6be3f368dfec498655ac25eebc26f2"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::BufMut::put_f32_ne"
+kappa = "e827072ab06e1359bb3ccdc18760513d5f601268a2061a7af92f4b3e5f73cfce"
+at = "Self=u32"
+embedded = "1a07d79961b5c13e8173644b74bc04c3d63ff7a540f8465d0df03548ee648de3"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::BufMut::put_f64"
+kappa = "52a1910272a39292ab55166cada21dd69b2d9b0623139058c3ad3538973c5e03"
+at = "Self=u32"
+embedded = "6ce211a52f4501f4c5f7104da5c69e3c02b12d17ec67b5ce6ca3ff864bf9f833"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::BufMut::put_f64_le"
+kappa = "3076ebc9c9fc488fc25bf7c585d75d7a5aabbebdd6cd4a6cb1037d93541510b7"
+at = "Self=u32"
+embedded = "46b4497fbed33413daf5170fa410c7dba3771b5ab45b19d5da436d1db9258995"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::BufMut::put_f64_ne"
+kappa = "9fe3b71ab7c9119ef518c196bdc64e46c2708c10810b22725d253befe02a34d0"
+at = "Self=u32"
+embedded = "9b161f9cf6bc3004e3b937d65cebd764d9ae79360c627f7f26f3e601dc4e54f0"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::BufMut::put_i128"
+kappa = "1cb40d34c08693c3aff288e74a065a705a813a1a10e4deda96e680de7358af3c"
+at = "Self=u32"
+embedded = "57dec3a7b5ccd8f5417841b7c76d5cf1416d0b668659119793b95591c02e6bdb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i128_le"
+kappa = "bfa4487562a055edf84c614313847c33452f5c48c6cbd6f074ae8d8f30a2f109"
+at = "Self=u32"
+embedded = "09adfd1a003f3093f49512e1142db2089574d0dc8544d88c41130ca5520f7133"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i128_ne"
+kappa = "d2cfbbcbd7ae9b4def1f98df22dd12b8f10d5cda46d4b5c99d87a53a14675e96"
+at = "Self=u32"
+embedded = "319bef47db88b9dbb6f716974fedeaded3d98f1bfba34f54590bef6a543151a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i16"
+kappa = "c6181a413e492f5e0847d94b7c1dfaad9ccb0a881a8c4391194ce7534e81252c"
+at = "Self=u32"
+embedded = "5b3d4ca81b4eadd2116a58d95ef7912dff36a2d838142845284b2067d8f5c843"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i16_le"
+kappa = "f26e55c241d29868abe50968cab90060c0bbef4e5cd2e5bcb7e995359402af0c"
+at = "Self=u32"
+embedded = "43960dc7f3f1f79a2ae6818fb2448ac811c27c6b4307a46ec80336d33df23d6c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i16_ne"
+kappa = "675a7de19848a53aea7b6faba659327f6bd796502a5de57357aca7e15840a675"
+at = "Self=u32"
+embedded = "4d6a57c5f9d198ab5e6edf8103f960b925356c6de69ffeb042f33af82ec176aa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i32"
+kappa = "8d0d7a8e57bef71e6a2969a9009e8f1619812404c1facf015f417d68ebdadf24"
+at = "Self=u32"
+embedded = "df3aef293aef51c60639470c75447d88b8b6bf2aeed65b774f3f3b740fe3aba0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i32_le"
+kappa = "a56b6755f9649fb79b560bf6ceccee40705e8699b10b4553042095b16d01d18b"
+at = "Self=u32"
+embedded = "bae127e4b30bd3cb4be967d9b7e8367c6bb0a3350e7ca7664c7c324d3fe5b3b6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i32_ne"
+kappa = "8feb575dbab897afd2f4ef996dfef3a35f6e5e9077d211aa7ad9d0d2d4964c72"
+at = "Self=u32"
+embedded = "fe0a994ae116fe13b9d0fc741366e642fb4547e80ba4c40abe4048545d276282"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i64"
+kappa = "7851967d9b5c5f1f2bc226ac7a927508a014915f70437b6e7edce858db83e4f5"
+at = "Self=u32"
+embedded = "59c94b790fb07bec042b1f900da88c7bfc85b479149d58a7bfaaff784dcdc744"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i64_le"
+kappa = "a86c7201780b4f8457319754e34ea3773572a716cc74615f63cf46926ee61bf6"
+at = "Self=u32"
+embedded = "deb4a946803c5e09d843c4bc7c0d659435514942d1b935b7d92f2034f6bb8933"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i64_ne"
+kappa = "5708f72384dbf5061b3c748377bd390dd60333a88d8ff0b68b3cf85509eb9065"
+at = "Self=u32"
+embedded = "b073ea559ddc5a5e4c6dac0f8682c9ac85122ee6169df2dcd0e3f99c5540dd90"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_i8"
+kappa = "b956e4da6ed68e0040dd1374c4d578bee4c204bf62f676a3290a11fddc1af760"
+at = "Self=u32"
+embedded = "c02e42c2e7a77dd28459cd3864a24aca23c83527041a78694f6235a722b9af9f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_int"
+kappa = "ea03234d4599371d46af45abe2df4b7e162c380e1888b707c7e3323e3127d5c4"
+at = "Self=u32"
+embedded = "77b851da565eafe6474929d1075686513d7df91c36b50d8f8283a6670460fe79"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "bytes::BufMut::put_int_le"
+kappa = "5a5e73c36d7ec85939dea3e8af5631effacbf697bbcd6c699535b5768c302635"
+at = "Self=u32"
+embedded = "4bc025efc05ca0af672b2128ec0c5f3145a358a0eb70dbda4c347615f39dde0a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_int_ne"
+kappa = "5013dd51a3f769dfb23d7a1b293e4a7da1bc9d5f3bd4c599d042880cb5a1879c"
+at = "Self=u32"
+embedded = "09fd23ab50e1b7614590d4e09ae330a5c0dc43434cb59ea0e5b16319835142b4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_slice"
+kappa = "4a604ae11e278fa86ff01227e8248e4c007619c6c37e8aee286fa5ebe39f9621"
+at = "Self=u32, TryGetError=u32"
+embedded = "bd3078a3722095c7859e7d7f6ca36175cc1fe5e0f29b26fe58ffd060cfece23f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: buf::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::remaining_mut: bytes's MIR stops at mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_u128"
+kappa = "72bc4dc6d1ae65663d4c953b5b4dc2b9e89f3a3f74a7c1e6233427eb02c3b7d6"
+at = "Self=u32"
+embedded = "b941aeb7146c64e5f0b86decc4dc835edd1a9827eb6df312711b94995a055e2b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u128_le"
+kappa = "ee5468e5ac3981ac24d3a5ad8373c9ac5949c6497ae80e45b4ae2336f7dafac1"
+at = "Self=u32"
+embedded = "c938c6a5f8d9a28778344806fa6319f6cd75f5c56be3600f9315df4aba30dddd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u128_ne"
+kappa = "a6b20ff622d15f5d5cab62198c81e669989511c461dfe3d9ca10a09559793623"
+at = "Self=u32"
+embedded = "26033331b046d8f8e31ce317509740d4792e43418a3024227fc9bde398443255"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u16"
+kappa = "95c71794610adcd2ccd15e99e34612b4ae62a392ffccdf294f1b70ab65743975"
+at = "Self=u32"
+embedded = "a9ee0745de2a174a4fc64203033a4383b6a3a02c2f636a0fa7d89577a7b15617"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u16_le"
+kappa = "81677facb260cb85a2e1181e6d45636bfbfc37ab28ff0b3292749bb86de5dfcf"
+at = "Self=u32"
+embedded = "9716e099413bc2cc49a15fdc4c7d5bf0b761fec31c14ce41abc683e239016f0f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u16_ne"
+kappa = "f1153b924ed073fb065cd9df25186631ce14214e38aa373c690b3dee8fc50f3d"
+at = "Self=u32"
+embedded = "8bee5132773a4835ed2188ec7b7d605d9bb6ec9736dc95ff8be69ae65925580f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u32"
+kappa = "a3cef0e662bff985096e33d989516d212e7a8ab3e36473cd3203f06631af7fd3"
+at = "Self=u32"
+embedded = "d2f27eb1477a4028ff4b4d86a9ca125fd07373a721bd5ee7ae9e7c8f7c1fe3d8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u32_le"
+kappa = "128695e6b2781d7e4441c00a6f017a2f57a24b6648f4af88b72743c6ac80ec63"
+at = "Self=u32"
+embedded = "2454fd05b2b32f534c5413dfe3e4c5f957298f37596067b2ebd8719854adc6c6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u32_ne"
+kappa = "91b30691ddf7856156cf919e799fa16b34977856b4f2389a21de7bee963396ee"
+at = "Self=u32"
+embedded = "a9e10676a7a879d7b3f51560f7128d08a1b74a50634b998c0aea1dc668eed0b4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u64"
+kappa = "fb9a6b14564936c6da80195310e4b7ceb3e8704bd85aff829bf0783843b73d31"
+at = "Self=u32"
+embedded = "c7741fb25f80f33200a070f19a1939a24f759b0e9fbd471b483187332419211d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_be_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u64_le"
+kappa = "233a8e7486e4023733e1c9a172edc46d6ab4f9e470d4e4f8d429379b6f97cb69"
+at = "Self=u32"
+embedded = "66d41a64b564704f2bca47f14e90f292b00125400375d3b8dd283359bff78b0d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u64_ne"
+kappa = "a1ed7d6d209eb26a2a565d794e124cd7f32658997bed8314524fe55157b3486b"
+at = "Self=u32"
+embedded = "8dad959a4b67ed820a7c64167e64bf08d7848d8073076ef34589c139757ce34c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_ne_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_u8"
+kappa = "43efb466f9d3b100d75938e62c61eef59a213d2794dcfd8617ba476bcac9b220"
+at = "Self=u32"
+embedded = "92b917f4d7c76d8fa711ff46a49ee01521c0388b8a94476e5f978642340e70ed"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::put_uint"
+kappa = "e2da8cbc23935a5f788aa356bef0e6a0be4134da572f9b8ad118d357ff06448e"
+at = "Self=u32"
+embedded = "13643d6432e21fc53de03f24d17a0cc4dd9e51a1efaebc86cf42928bbddea860"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "bytes::BufMut::put_uint_le"
+kappa = "c1c6eb15308b4bb9b4e0f343245081b803b23e3cca1cc615db06ab34a3d7bb16"
+at = "Self=u32"
+embedded = "5a66dc106c35ae828c35db466abbb594bd00b64469e9987ce2c814c173a7f409"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_le_bytes"
+
+[[fn]]
+path = "bytes::BufMut::put_uint_ne"
+kappa = "d674084bf9ac1d344fbd19c23aa27d5fda96daa459f659d54b94fdad338536c8"
+at = "Self=u32"
+embedded = "1b90eb96a1b5633acfe265f1dd2a9bc9ba14d635bdc7217fd8bafa35beabba5f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::BufMut::writer"
+kappa = "a18d8c730abb363ea0f703c83277fb911a1be6c6cf79340c6bd27e6bfadaf23c"
+at = "Self=u32"
+embedded = "205899d6e0755fac6a40931fbf33a14927325a83a212eabdb18e7a2a06744592"
+status = "residue"
+cause = "mir::Ty: buf::writer::Writer<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::<impl at src/buf/iter.rs:20:10: 20:15>::fmt"
+kappa = "fa8ff797bb2082674d437592c269e8714b0069e1d58915d0e54aa0ace06189bb"
+at = "T=u32"
+embedded = "7afe58311fcfcae9048c5060aeaf398f5b754ef41aba982cf94e88177f45bc63"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::get_mut"
+kappa = "4905f6b373c526f6bd91fcd75b1f525abe23374db92ee29f3addb20398f6ece3"
+at = "T=u32"
+embedded = "5ae6703ed43810d8236d8ea16baca36232ef4037eb645b5a2ebdadad05b92540"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::get_ref"
+kappa = "b8581ef54f7de09bea235b965c30e361064357ed9e10a020eb44bfe0bdb59823"
+at = "T=u32"
+embedded = "0d276de98ea771bdaa7c06abbe7a319f53f3df9a94dacfdc9973db8233489d5a"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::into_inner"
+kappa = "cdff5001be526ec99e6e82cc85e90a668ab6513a5997e40f5784b10bb2cf9b9a"
+at = "T=u32"
+embedded = "7e9dd3dafa893ed70a307f87f66d7ceaf124a489376834bc8b8c42d49acf090d"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::new"
+kappa = "8369babc228197932c147ac2e810cd74bd13f7b4ef7c1689847c11f2c64295eb"
+at = "T=u32"
+embedded = "0671ceb507135f020462c0886c5fbb7b260fb47c5063fdacdf935b2d70629f38"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::next"
+kappa = "8fbafe23ed178e42ebb47c2759fd1ada215caeb39240697c51819a3d9b507695"
+at = "T=u32"
+embedded = "d6c3c4e72cd7dc23faf0a2669b79d6e343edb72d93f30387837467fab054e320"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::iter::IntoIter::size_hint"
+kappa = "3eb06ce061ef44c2cc6d071403985cb1be6e38bd1d45090995f7425aa0c8322d"
+at = "T=u32"
+embedded = "ee89a358a624acfd2e054d095c5407751f944c8bc30203383b126022a73312d9"
+status = "residue"
+cause = "mir::Ty: buf::iter::IntoIter<u32>"
+
+[[fn]]
+path = "bytes::buf::vec_deque::VecDeque::advance"
+kappa = "9353af4f27ace04e879d80841c03b21f056ecbff2c5e1c37552671f10378b904"
+embedded = "a5fc42669d05b50fcfeea368a8ee1aeb717468585b27cc5b5f0a42bea95cd0e6"
+status = "residue"
+cause = "mir::Ty: VecDeque<u8>"
+
+[[fn]]
+path = "bytes::buf::vec_deque::VecDeque::chunk"
+kappa = "6348760ceb6ee60d474fa043994ef02bbe2aeba37c5d2904b8e1d3db0cc1bb0c"
+embedded = "f7bade34829cc81ff809744e8d59c12f2fc1b8969e3a2e32e99d426a346e9a50"
+status = "residue"
+cause = "mir::Ty: VecDeque<u8>"
+
+[[fn]]
+path = "bytes::buf::vec_deque::VecDeque::chunks_vectored"
+kappa = "ac06b1b71c08f22feff5c0e51af16e7e08c2df5ac46119af918e3ae594b1fa82"
+embedded = "d0c143bfc2cb78208880a35e5a44b0485f20975750fab44f4c437dc0c9b9c5d5"
+status = "residue"
+cause = "mir::Ty: VecDeque<u8>"
+
+[[fn]]
+path = "bytes::buf::vec_deque::VecDeque::remaining"
+kappa = "ef24e06585adb6a0cd7e508824c6e0bc4d3fe60c5fd2acecfb4cd39b0e760a26"
+embedded = "c3940810fc760f376944da9943bc148347b152fbd1c5ad5d6aee70168dd61a0f"
+status = "residue"
+cause = "mir::Ty: VecDeque<u8>"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::advance"
+kappa = "c811a5cd9a81765b1474154a76cf73b31a7e41b87b8c2aa4e6d0b6ada70db38a"
+at = "T=u32"
+embedded = "e0bcdb349bb5e7bb283e9833e76b28d799c02beec41065983e8f1f51ce291d9f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::chunk"
+kappa = "7eebc4c3c431cce1bd27ac202b186298f2b8eeae431258f19a623c49d10487d3"
+at = "T=u32"
+embedded = "1d3c612393e298983efe3a8f5f41977c8aef2c24268cef42d19d1ffac277de1d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::chunks_vectored"
+kappa = "bb7d2cacc2781d7813b925449787243e0e94c03fd75ea5ac731e0fa49c507301"
+at = "T=u32"
+embedded = "858f59561c39fa33720fa7fbca31711bb406ae662942919703796608b5bebb78"
+status = "residue"
+cause = "mir::Ty: IoSlice<'_>"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::copy_to_bytes"
+kappa = "bd9ce5c01b3b8b79897b6ee4fa62653d983d7edc12483b0aa2635c1c2444b803"
+at = "T=u32"
+embedded = "a9f6a6d66e12059bbcdb98d1bb75fb90d5967046828192fe658b4b8fd87a2bec"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::copy_to_slice"
+kappa = "7d0b8e8e46d5250adc9701988a85a213fd9ec3a27146216b15e546effbc1176c"
+at = "T=u32"
+embedded = "882f851cae5f3d867a82a30c8c5571f8bf88ad277eee72bc662e85e994d73ec9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f32"
+kappa = "16772ea0d27fb764e7a9d528655e8a1e87aedd6f1a2bdbcb2bfd74dab578d9f8"
+at = "T=u32"
+embedded = "857e65835c178ccb73af303d2e3e95dca01e424705e993a48b83585fc0d592d9"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f32_le"
+kappa = "77a5225ecb9cc9a7460f3e60d11ac8d6c1212105752b63b8b78690fc444a5635"
+at = "T=u32"
+embedded = "4e3884ec8b6f948dc6a8bd77eb05b7aa6a5bd668f3bfc57e9807f41abb2d86bb"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f32_ne"
+kappa = "f990540e6d30b044411d3ff1652e62d85e25e7c215ab2c5085921d77bbfc118a"
+at = "T=u32"
+embedded = "990de8c6440e503fef82e4d23938990348c1f59c2c18bbc22a23ded1afcec560"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f64"
+kappa = "019ffa315ca7c3e74f7ced942c4d5eab6fcfffa7d47190c1a4fdee1717aa5a38"
+at = "T=u32"
+embedded = "96315efc0ad474597ac72a26235dea16ee4edb30e9f92d88f82e4743d3372705"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f64_le"
+kappa = "c34aff09e5868f5e8bf7003f968167f8792bc7c6e1b1b41d6f20f98be68d526d"
+at = "T=u32"
+embedded = "a56d13e087a646775a854dda75db7269cadec75923e5f85651f9a5b4b01223a2"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_f64_ne"
+kappa = "779623ef1113e8e8ddd7db1b3b5a898c8330c4caf9fd19e0442856cbad872398"
+at = "T=u32"
+embedded = "7a94fab87b7ce5065a473dbad7a417913cbda18584f03ae3f18af0bce3dcb10c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i128"
+kappa = "e1499bdd57209271ee547ab9cd8f8ea53c93109b230e47b6d5757f3ebfa67725"
+at = "T=u32"
+embedded = "eb70f3ecf7fec730e306ac7123ba848bee58ad74d9e71225f46dbe8ffba304ea"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i128_le"
+kappa = "6dc63fdeeb4268bb553cfaf285851a7f48fe697aac388e4474f5f523f086851d"
+at = "T=u32"
+embedded = "550bd2427cddb0013f1f1b5a8cdb310f68c18c5e13ddab9b6090ef10abd611a7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i128_ne"
+kappa = "393f1d058ba36c4c5476ffb2f1a5c38bc462a5e74b5c6b160ac0c8664cdb5f0f"
+at = "T=u32"
+embedded = "7adf3a45ae3c83adae841ab22a2cf763919eb85d5e0878abd5ba773dbb78bbb7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i16"
+kappa = "b1fee979c4dce34b252d601cdb93b421cccbc0de8bdaf57bca44dd5f43182b34"
+at = "T=u32"
+embedded = "e9528fcf88385ac6193ee18eb87481b172f7e56cfd8cf5287431888c209ea1b5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i16_le"
+kappa = "c14f71ec97f538fa52c0549f11d88589ca8eacc65ef492a0581e68b096873c94"
+at = "T=u32"
+embedded = "f5a1524bf26a8e2de31116e052764ba4318c42c2e5f2641454ce54a13939eddc"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i16_ne"
+kappa = "ca8a13cf23bd2e07b21dafd40e5d6ff16b823c3dbefcaccfe6297cec9e912106"
+at = "T=u32"
+embedded = "ec9a74f584691630a0fcb7cc59a4700e50d00a9cd77a48d67d9b03b0ead39356"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i32"
+kappa = "6d4a0c801325b303d9624a9c39d8cc54dfd4775b2406d3206c754e5cdf150a77"
+at = "T=u32"
+embedded = "b3911e00f9326ab0afbc4c90e01ca042a8e8165bc6f5301145a70a863fc8e28d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i32_le"
+kappa = "608c28f3215d2deff16575959d51e4d0e2abfe70e77e09051e302fc7c5bb2426"
+at = "T=u32"
+embedded = "2580b4e84b7ad5f68cdac3f042c79af91566e363c739d2ce3b0c42b536281129"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i32_ne"
+kappa = "fed105de81571abb55d99c8dabe4450ccb5b0737f40301254fccf7fc180f458a"
+at = "T=u32"
+embedded = "60ba7f65556fabd28addfc66fdc33a7e683029d320277774de8db66c5e5ec8eb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i64"
+kappa = "4dd11ad2e9e569f32ebad31dee6debd1081ad91d81472fda1951db212e1c73df"
+at = "T=u32"
+embedded = "e177079aa48869b06712a66b4bc081ca395773b3dc8253823a9d95a79dfbb978"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i64_le"
+kappa = "37b115066c3bf76db9ee85a85aca7072c73a34a2284c9e845fb894592c441a06"
+at = "T=u32"
+embedded = "65166091bb872a69adfd7b23d2606f76d17ad5375f6034194357ce20d27f7725"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i64_ne"
+kappa = "dacda957b71cef424ccbd94bd8d45c102c7d0474c65948a49b62be91ed132771"
+at = "T=u32"
+embedded = "5b35a0d193506a30cad768af0c2f49a04d642aba83f558c3614af74d91fdabc1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_i8"
+kappa = "fc0257a4e93b477acfd1214644dd018801b1011c478ad2f5ae899549369d97cb"
+at = "T=u32"
+embedded = "58f61624a09bdf76f5d849907648ff6a93201713a2ba9a7070ae2e67b4981e93"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_int"
+kappa = "820cd7896095e27ca187d53f9b7af4d965521725607e65417e1cca33f42535c5"
+at = "T=u32"
+embedded = "922b70fa206eab160128e438a8aa79901ae7006b484ea661e3cd800bdd0b6a05"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_int_le"
+kappa = "5a7f872ecbe03d3978623b3ee01f39f896d7053333d961bf805ef74fb30944bb"
+at = "T=u32"
+embedded = "a40c44f266766299559736be10da64ff473639f5082cd4810489fcf8edb936e2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_int_ne"
+kappa = "fffc22f30dd6ce3125b55ab1a266b0fe5f3d0628973f95d0abc8a5ae30aad0dd"
+at = "T=u32"
+embedded = "091dc3ef4148934f1cd34ae61ee85b7290881fbd1aed728443ea37b9fc9c1e7b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u128"
+kappa = "7d2b8e887242f825ea6c312f53f328d14ff7d61a368958efe7f24cc90fb2b0f4"
+at = "T=u32"
+embedded = "1329dae689fb97789f406d36d9a38ae38b5f2fde7792143828073639fa661d8f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u128_le"
+kappa = "3cb191ab19c753af6d1ca7bf832eb2698e7555c44b0b5ac217cca75154e3c4d9"
+at = "T=u32"
+embedded = "5dba79fb5755facaa3cfa744b9aeae70a7e4f536c7aa534ec55ae6733d64c22d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u128_ne"
+kappa = "528f28d188a367366d6cf22c4dd30c6ff5319084a420d3e1da205f8fd3a1391b"
+at = "T=u32"
+embedded = "017769fa32f23caaf1b954fe2b9207b3fc558a35e6c5eb471de130e22d6900d4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u16"
+kappa = "517909e291011ca4726c6580c4555398d7e37460a2d0383a13b585509004f2b2"
+at = "T=u32"
+embedded = "902f0f7b0bf5b0c469ad5203b82970811ab3972340625e492543099af1e3af42"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u16_le"
+kappa = "fc05696db8b84ce12db3b122fd4ff2d7649706df7cbd7ce9dea23aee5b8a2015"
+at = "T=u32"
+embedded = "4c57d2b4574444ba1e98c73bf544c347bcb6247fa0c8d157ece8bd7b10639d6e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u16_ne"
+kappa = "9c6f94f62ea35317bc6a3379d7ab0430b5021b22b45f6619c27691fba5a56eb8"
+at = "T=u32"
+embedded = "9fc016bfcc82c5470833f8c2d2e83bb466fbec1547a5b21fb1acf2335b501b95"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u32"
+kappa = "5cbf28831021779b52edda1a9d131bb87af5fd062cb5f6f20900d855f7e1879a"
+at = "T=u32"
+embedded = "e2e67c23ac7ffce44142731e1fe0fd77b9bb795db69d49d5cc269da50256d4bc"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u32_le"
+kappa = "5af70b72f9b6f8cf7277d89baed4ef323f70795b82806f9b4c6c6079776ff3b1"
+at = "T=u32"
+embedded = "84cc4706848ef9bf100e1a69194f4738a96c5d1d57e13e959e7ed524d834df1f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u32_ne"
+kappa = "4cd4da23e548d70182f105c3356d47de067d44ba8b6578dff0a85a26884166da"
+at = "T=u32"
+embedded = "192ef20ed099d9f1ad8daed42171e02335d40dfab2be0d97d0e6220e7f6af831"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u64"
+kappa = "0cce5cf34b18e775f278eb55e3f00305e5713fae6ceeab7195cc9a9c23fa57e7"
+at = "T=u32"
+embedded = "aad81e0ea79fedcb808da989936b4455d43c92da1b5f4369d6303f47eecbf3d7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u64_le"
+kappa = "7f8acb13f41ca47c153cc333eb2ad26cd741a66bc4bcfcc4beee04f87daa6e77"
+at = "T=u32"
+embedded = "ae0f9aa569bb6bf464e36d0048768defd4dd1787de32ceea5737003227afb254"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u64_ne"
+kappa = "765adb8979aa3dee1bb72088514a92ead1b7ff99db8bb70393d93a63e0cf03d5"
+at = "T=u32"
+embedded = "620b8445557be55670e02c27e62a68f87448f61686f6e5f3d88f4b8744d9c409"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_u8"
+kappa = "85959e1addd06e0175f2ead746aa7e4b4b61be4eb4c0dec10a8036559b7f6271"
+at = "T=u32"
+embedded = "a8098c82a596d9329623290bcba2adcf4f60bdf1fcdf7797ce5ae7be974e8d0f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_uint"
+kappa = "bdfb2735df888b45d14e1c4ffd5fa9bd1567af3c458cc1d8c34d0774937728a7"
+at = "T=u32"
+embedded = "443652859b7ca7c27fe9da7624dc26b274108e6973bb5e2dec6c390587bb6036"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_uint_le"
+kappa = "6aaae07f19e1c741d5c9e55176cb9bf5e50f1cee0c3860fe8013a1913a9fffba"
+at = "T=u32"
+embedded = "0307fac0d803baf1da76f33cc6b9e0feb642cd1ed7cc279b7eccce367d89ab57"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::get_uint_ne"
+kappa = "17f5bd8ba60d2b485c56529dcaa74269d662319a0eee2029feb0b78f55976733"
+at = "T=u32"
+embedded = "c93383be2003bbaf43f299a942ab18244e6f66a554c52c0693e2bde1ed8078f9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::has_remaining"
+kappa = "96a2f5e5883c4eabaa45bd9f892741c41ddf2a27bd68d177416f908f41c26b16"
+at = "T=u32"
+embedded = "fa165cd93707b8dbec94ab4cdd1b3bedf7a255bfb388c6aa9408000ce6fb338c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::remaining"
+kappa = "34f290104c0282179c1f79e983a5089434b656c9aa02ae8cc50dd55b469f3f20"
+at = "T=u32"
+embedded = "cc97ba154d76bc9fa303fbff1a390eb4c07d0b873ff238fe753a69a65ffb81b9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_copy_to_slice"
+kappa = "d7be21dff1115a42be7d61280dca2fe75e42d012523fbbb77d067bfc3d6fdcb7"
+at = "T=u32, TryGetError=u32"
+embedded = "db93ed909dd888428ede105b0ebdc0e1782da2158abfc2b0e0d17bc546cc54fa"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f32"
+kappa = "67759eea4d8fc96b8e013f633b686f7f4017dd3770c3b81c26de9dc49d4ae97e"
+at = "T=u32, TryGetError=u32"
+embedded = "9a231230a95b846cade531a6d7047ff9528766db9e1e77eb3856acbe445bf9ae"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f32_le"
+kappa = "fca6f4c97e4bde9b8aeb5542a34824995f325b96929c1a9c83eccf7a806d43d0"
+at = "T=u32, TryGetError=u32"
+embedded = "88efcc0633c9e3fab98b2f83c2c8ce45dd37030cafc37383074e23ebe7777c13"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f32_ne"
+kappa = "0ffb016284a6f986fa8de232a9fd01116270eb2cafc9eec9bcd8ae2b15c17fc3"
+at = "T=u32, TryGetError=u32"
+embedded = "e6762cafa7fc89c6a46e8ed06add33d369493c4155a1983138d9d249bb519d86"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f64"
+kappa = "687653deb53974eddc58da74c9de72f10cd8a205eba319b987fe425176b9f325"
+at = "T=u32, TryGetError=u32"
+embedded = "6fd73b3b1ccb7d55c3b6e36b92861b80f6e7f9a8761d910fa39cb2ce5bffc795"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f64_le"
+kappa = "518967f1983c277e1467156527375b6417e8a477a54d297c451a1ce41fd1eeb2"
+at = "T=u32, TryGetError=u32"
+embedded = "47c22134d3b101b4fd7ef645acdfd0b43a7de1c6b4e3e90cf24343187695de83"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_f64_ne"
+kappa = "7d68aa5c56d6bb5f9f51a4fc7dc6f24b0b59dde2e894815c0f50c30379dbb5be"
+at = "T=u32, TryGetError=u32"
+embedded = "46948a2b58ffdcd2f296c5ff45b47211971c5779174579c3e01834b1cf2eee39"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i128"
+kappa = "ead7256cbfab221273ebfeb814c737ec5690e7dc936e5a9051434e4769c93877"
+at = "T=u32, TryGetError=u32"
+embedded = "698db34a0544d520f7ddb16cd2f55e60cdd0ff84ed5843abb2b256d65c38d36b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i128_le"
+kappa = "3b087f019935142d3dd320b723e21562909888bb149f904b1206c9355e13224d"
+at = "T=u32, TryGetError=u32"
+embedded = "373b109fd766e1aec2d4f20cd9c35e8f8eb331bd7f1e54d7ca004c0c4110f280"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i128_ne"
+kappa = "7ce7de6f109f5acffb5a574c4ec835157e49cdac9e0e12f08480c7a7d21bef73"
+at = "T=u32, TryGetError=u32"
+embedded = "916aa920b48f3fb196302545853683c2f1a5b6e8d9c23e29c855b8246f69f44d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i16"
+kappa = "30189d963016f1c29a0b8d6bc5bad9d787de26f124651288b2bf9e9d988eee04"
+at = "T=u32, TryGetError=u32"
+embedded = "84667cb5228aa5d4491488c27d8155f5a909bdd259a2d2813c3e2bfd39630b22"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i16_le"
+kappa = "602bff0c701def48e8af3f3fea35b73aeb14736ea3c6b9e3d25bc06ae9db18db"
+at = "T=u32, TryGetError=u32"
+embedded = "c12ebcc8f62d75ec21e090771a0c3ec81e0c8d8f18bf5c942e5d4077db9ce262"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i16_ne"
+kappa = "903460f21b4d668be13f39df43bc6b88b0143794c0c4f7f0c6849c7717a67268"
+at = "T=u32, TryGetError=u32"
+embedded = "2dbeeb2073c60703f24ebd40b199698251fabc5f393494adea27cec23671c315"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i32"
+kappa = "6ff3afcb318edf4acbf3d482d08de72f6e0a6411a6d15660f99ff6d8e500c2f0"
+at = "T=u32, TryGetError=u32"
+embedded = "4e6a4b6c387c21655287a2c486cfd84d2f03301de2ad98d3c2dcbd9fd1493870"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i32_le"
+kappa = "374bbbdf92d3d6e01f00aa136f35352ab3ec34da2704156a27c5f9498bb2abf7"
+at = "T=u32, TryGetError=u32"
+embedded = "b2046fbbc40e253e24beb60d41d04ee6cddb85275ed7d4382a8bcdd06a174347"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i32_ne"
+kappa = "8b7f63026bc6492d3ff36d9cddf228820e8f5d3298aa388c9f1835a26401782d"
+at = "T=u32, TryGetError=u32"
+embedded = "33cd4d5dc60586a0c468aa9df684d07f3c3d5ea15c676d62c9052f82b8003e10"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i64"
+kappa = "ed836d2c633a000d6129df0ea4a9a080a7db0782c645536e4c057d5c763fe7ce"
+at = "T=u32, TryGetError=u32"
+embedded = "9920e80b63a3d30d8334fe027780d141d7c2efd192a3e065300ca7306b9b1ccb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i64_le"
+kappa = "a0c1fa98623fc50e9e74d974e6cbbe04c1fdcedebc9f143026099dc228152df4"
+at = "T=u32, TryGetError=u32"
+embedded = "97159127c1b7c040aa908f969fe34aec729fba428c63755dbadc18d99eb8c327"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i64_ne"
+kappa = "2da65fe94c8b676ecd9afb393c439a6312b6953557db85b428e696f06e6ab941"
+at = "T=u32, TryGetError=u32"
+embedded = "edbfacfde3687ca66bf552dfae4520f79704812383be183da97a3846a4a4e4a0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_i8"
+kappa = "fe3b8d3d5e2d591f20e4bd7c7378e4fe3c77b589b31a35447521291d34457001"
+at = "T=u32, TryGetError=u32"
+embedded = "07a9f821594271a4003262f4593c1e6c14fdde666b49226289de37b126fbf995"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_int"
+kappa = "def8957617424ed2b1065fd257fce0b9eb8ff0d5df70987ee2af0ed7ece3c2cc"
+at = "T=u32, TryGetError=u32"
+embedded = "6410675a4328970fafb5a4aee0e2d3d78da8d90629b7a06e36ed0d94a6e3ffd2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_int_le"
+kappa = "a24d49fdf12308af735fabcfd1760d1b0d4e5c79cdf09711096a25ceeba29bb1"
+at = "T=u32, TryGetError=u32"
+embedded = "bf94807f197f417649b19cbfcf4a424842bd8de56656af1f40bd83fca040721a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_int_ne"
+kappa = "bb92c30aee3f4e4dab5549624105936eee90fb7b2597a650b7d374df21da1721"
+at = "T=u32, TryGetError=u32"
+embedded = "ddf2e4ff1d55ed4046479a23ee0df22a55b80da4d8f45dd85f9546490f0e7d09"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u128"
+kappa = "7c53d1676a663e05b18b525880a080d95dfacb36d710cd97fef48a9629b50ff7"
+at = "T=u32, TryGetError=u32"
+embedded = "d28f3a137c55282d1933043204618849b8980af870c4f2804511d1a441970f36"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u128_le"
+kappa = "1df219a9185d61437673dc5e2ef9e51ad827b7c35fa67f9723d17f1183d4a111"
+at = "T=u32, TryGetError=u32"
+embedded = "71af4d9fd3dd33095e412a4e6b6b0f0cb411c210da35fbcbdc9c2b06af27ea9f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u128_ne"
+kappa = "b4484e404badd9546edf9904fb7b5519ccc99aa7e7fc8029efaf918e1699a22e"
+at = "T=u32, TryGetError=u32"
+embedded = "4dfabd57edbae2329a9405cae0bc37cbd1f02feb613ffc0589393052a7ec060f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u16"
+kappa = "bb91830d6330a844b6dc21a766a5ecc8626cfb5e774d8c388a0ce8ea2892b7bf"
+at = "T=u32, TryGetError=u32"
+embedded = "173b9482d78f2a520c9b04a56b2bc4be8aec7db391e00bab2646f501e3f1945b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u16_le"
+kappa = "469abbcd3ef89e18c2df3a48cd2a2a279b95312e017a3098bc7d727ee5dee109"
+at = "T=u32, TryGetError=u32"
+embedded = "ab33281a703e889b47a0b8dc80861ed005cd20ca6c8ef95130603f5dc1f6fdaf"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u16_ne"
+kappa = "d87f01392a61b1558b41640c0068300831aba3e9d2e189f2cf141dd8a81a471a"
+at = "T=u32, TryGetError=u32"
+embedded = "feb955519c84f170c7158c16d046d94a085c6d99d050b29aafb600fa1e37f131"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u32"
+kappa = "dcb10497cd0f52e1081687640d12d82819a22ae2ae6f96797b7677a07b7c234a"
+at = "T=u32, TryGetError=u32"
+embedded = "36c31334df5d1275977e5b1f53834b0cab8038998e140664794836ac540f2353"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u32_le"
+kappa = "26b3d383088fa0f619e2b6613d5669d18eb2a85bf025af607dd3201b50d8255e"
+at = "T=u32, TryGetError=u32"
+embedded = "3f81a0edeca7e0730365878af5ce9f2c27d3239cbc3e9032cefae6ce3b0368c8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u32_ne"
+kappa = "dd3590807f98a0c939257af8600cede28130a39e1a83e86b0c183795e02250e5"
+at = "T=u32, TryGetError=u32"
+embedded = "e20260e69c39758e08d73c73034ec0715fe795cc7046b61c4edc1d531e6e402d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u64"
+kappa = "84bba77526ce0228ffe65544a9914b5695a86956696a1e26d0b35e0445ab0cb8"
+at = "T=u32, TryGetError=u32"
+embedded = "af683e5a924912e00b0ec1d52db27f48b24dd255bc634d0423272af84ad88b4e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u64_le"
+kappa = "4471cfcbb3428ba399434a926c2a7db884b8c67a2e5873eb9f83e34afca6781d"
+at = "T=u32, TryGetError=u32"
+embedded = "00c1ac5d9963ac436750a8218348e637c1c17ba125e1cadf0a3ffc25ea599f42"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u64_ne"
+kappa = "190ce3d72bc7bb188dd657119aecdc99e690465b9149f0bd75171a505b04b4d0"
+at = "T=u32, TryGetError=u32"
+embedded = "f53a1809be22717330282b85e893050b739119f16a7189f1826af8d00651ab97"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_u8"
+kappa = "9158d06bac85ca9d11b033a1aaba70f2384bdd6f735a69f9d1416008c1c61e56"
+at = "T=u32, TryGetError=u32"
+embedded = "71b5c2fa45185f8315d84f8f553faa36fe116966803b4ea4f34846c0a4f03e6b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_uint"
+kappa = "ef63211aaa53118bccff7e9d4261f58b713fff45e276c766b3eaeb22a3867796"
+at = "T=u32, TryGetError=u32"
+embedded = "2f2cc9e5ea5d78409efde8348babbd8ea5b2875434ac17e2d7f594b5697aa87b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_uint_le"
+kappa = "72aeabeebc6b0df120163515562148e0d0e885d5e568505559d662f64d311e31"
+at = "T=u32, TryGetError=u32"
+embedded = "89e2f37bdcb572266a3fdff2d1f55051eea13b0455403d5d74f3c4a73d7b7825"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2886:1: 2886:37>::try_get_uint_ne"
+kappa = "36e02214f2f6aa2b0f3f1671663238728cc64fccb4e187e1f44ff4ee6e875f06"
+at = "T=u32, TryGetError=u32"
+embedded = "fdb0760350adb3b114c6e7358e649f9e59d7b4d997a30d36e264cf29b8fba97c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2894:1: 2894:19>::advance"
+kappa = "2370490ac63a917f16bb830f0146f6fb2b842c95d68438dd73df29d12c8f3c38"
+at = "TryGetError=u32"
+embedded = "c62eb01206b9094559d7c60ef5656438d6f6e3bcdcaa8add7fc15f80f5382089"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2894:1: 2894:19>::chunk"
+kappa = "8fcd068c0f83f38c9fd62e51633b801022f9fdcabfa27093910871e5b6214ac9"
+embedded = "e9884daee16a3d8a29c1bd655cf75c9845ceeaa4412aee4f59e062e61c08ea77"
+status = "translated"
+digest = "8d892f8806f158f1e900505ef967fbe8a45fb3289fdaf6f71b3fd5c810032214"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2894:1: 2894:19>::copy_to_slice"
+kappa = "f295fad0d350c09f7a7931a5ceea1adc7195cdae4b0bfbf46c05907d8780082b"
+at = "TryGetError=u32"
+embedded = "bc75c8c1e1c025b2867c0707c325f1b7fc3d33101c2d40ab08876cdb16d96fee"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bytes::buf_impl::<impl at src/buf/buf_impl.rs:2894:1: 2894:19>::remaining"
+kappa = "ca24ad919be26f9eb244d70ac11217e9c99caccb0f51e2c5cca623d7ac784bff"
+embedded = "1fdd469180002ec6ed78dd89ebfcb44b2fa2a2b53dcb1baf2e764f7dd307267c"
+status = "translated"
+digest = "3b7c104f840f62a6e50235b9ebff1ed9b11b5f9a8061e2acaeb70cd0c7d1fd46"
+
+[[fn]]
+path = "bytes::buf_impl::Box::advance"
+kappa = "eac4d0ee2fca45671f573604be46cab3949c97d62081c547c35cfc87c7a43e67"
+at = "T=u32"
+embedded = "8e024f3b9e3bc002e7d6f97e11c45d539dd1397bbf032c71901f6d1d66d0dcdc"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::chunk"
+kappa = "45e7d548e4a75afc90c739e488dd681e6d56c9eec547e8b45c796775ed7e800a"
+at = "T=u32"
+embedded = "49a38a11b71a9c640a62270f1f27e6f3a155952432c9aecbeee4635e4736fff3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::Box::chunks_vectored"
+kappa = "6a8909f7b2752463eed232aeb77b77983a08009fcdf968179771c732af4fdb0b"
+at = "T=u32"
+embedded = "0cfb5db18b4b3af8b5c4cdade422d2e9f856399713b6a92fa15dc2be9bdb710d"
+status = "residue"
+cause = "mir::Ty: IoSlice<'_>"
+
+[[fn]]
+path = "bytes::buf_impl::Box::copy_to_bytes"
+kappa = "e41839ddb2fd398de2ed9b88e6eae99aef7f81e2dd9c07285b92f7e5c7386033"
+at = "T=u32"
+embedded = "76dfb72d5c82146153c7335e89473e867d6d812f493061d36ff501d93790d411"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes::buf_impl::Box::copy_to_slice"
+kappa = "7230e9b5fce1a3d61c3965ce58f18ad5c4a6d760bbc0549916c2676aae18b51f"
+at = "T=u32"
+embedded = "d1976d3dd22e04bce41b6b997d5edeb28c8bd04f3c3c00efa346b510e04fafaf"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f32"
+kappa = "9043dd750e0f6ea1c8b4856b02a37cdb6955b8be6a1a3b97f3e3b04c40be66a1"
+at = "T=u32"
+embedded = "1492b0524178dc548aba17b6f7d2216e60723f90216e454c9f4e8b4152023991"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f32_le"
+kappa = "8659d37383cceaaf410760c821fefeaabb7442f8bdca93ac0d1f81e59e4ac758"
+at = "T=u32"
+embedded = "adc7acc3a296b31c7c094438f7be9a91c83c04bcaa2242bf0dcd37d861fa7546"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f32_ne"
+kappa = "c1da62938937f0b31042ef0d3f4e3ae2f09749b3d39543ca99f4cfdda7a076b4"
+at = "T=u32"
+embedded = "d4463beb9815a4743c346c7947c8e64d31671e56ebc1e871ce74024a78d584af"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f64"
+kappa = "a2bc45a7693ff07e6ca89d81bcba1f854bff9c44feff2e98c1370ed79290278d"
+at = "T=u32"
+embedded = "5635e2b289670043231a37dc4234a37259b036ba76bc095d3b50a971bffb3894"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f64_le"
+kappa = "ce84786c2052fd93f6bb56962ab2432b83613085f3a6732fa3d07088e2a584d6"
+at = "T=u32"
+embedded = "6df1b5eab32c16a0dee5572919195b6e9aaccbaeef89e7a59601825542fd4e54"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_f64_ne"
+kappa = "3a6c371102481d1c3200a44fdddc1b1911f791e525236df3c003bee115b66c31"
+at = "T=u32"
+embedded = "56b53ac57992467b765d010542228fb531d8f4d12c9995503c315c2839722fac"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i128"
+kappa = "776d06c127e1a50dd53d48c96cf648271e7c122715443395d0022436cc61b7da"
+at = "T=u32"
+embedded = "ff486c168cdf2674cabeaa92c181c7eb979890fc78e129b6009654627cfc28c1"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i128_le"
+kappa = "95b266893891233fd36139bd1c4e914197211881ba9cf61ec5078b5b508fe19f"
+at = "T=u32"
+embedded = "31a9523a6eddee0a9bfbe5c74692df45212004e8143fc5ab4934fae81467f79e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i128_ne"
+kappa = "b707f8e12c9eb73e87f924a2e254126b6b0abbc92f904222b5b7b864855652ce"
+at = "T=u32"
+embedded = "1a080dceb38a99b966b630054a1422090255c84821a9eec1a2bfae94fcfdac15"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i16"
+kappa = "7e708c7da74c3e47e621c5ccc9b3d770601a25f763fcb960e8329f528e7383b6"
+at = "T=u32"
+embedded = "cc48dc035b94ab3653fc97079c920e3e5e679fa48a12a26cb083ab710bbde3cc"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i16_le"
+kappa = "e69512bf8147d1b0b9f20273ae0c007b068c74ac831c5aefe9bb35323d3e519f"
+at = "T=u32"
+embedded = "7ce8d473ce8cad0ef27ff2839ed0b83c634ac0bf91dd5a6a5fd2c49c2f0d78f3"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i16_ne"
+kappa = "197624f00900f876ed89793a877e3e6d77ea55a87c63316cc22ae9dad6a71ee8"
+at = "T=u32"
+embedded = "e7cab8491fddd478c261d03bace69b2a07cd7598f41412e8bb7da86287cb7870"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i32"
+kappa = "e42c63678ccd1b44a73e8a0b6406ba7a6f665e721f3892146d3902e92824a339"
+at = "T=u32"
+embedded = "510569c8f9d7424f4ea5bd1d79f1c267635f6582405626355e67c745cf8943fe"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i32_le"
+kappa = "3c436fdce6c810c03e9d33ba21974f1a8c9b1d9dd7b53f0c93ff73fbb49e6fe6"
+at = "T=u32"
+embedded = "2a448ea4a7de438b7ec497d279e71e76fadb5301202d87d249625c786769d797"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i32_ne"
+kappa = "40d2b168c3b7e5e647e3d926d272a8fa22af06522d2cb21697f537a39b698426"
+at = "T=u32"
+embedded = "f67cba27d3fab031d06555c51873134659aebc5e34fc5069c922d6813b1a4da6"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i64"
+kappa = "9987cffae644c707884323c55a4bbe39d9b93ba7355d36d508e9389c22c0b0dd"
+at = "T=u32"
+embedded = "ba1bbb85ad12b1e0812138fca74b835082a7ddd411c4c3f924766dae6c5edd67"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i64_le"
+kappa = "8682bdd445924f6c80a263194df7a44ae70831fe42d5def86ca8c12b6cf743b2"
+at = "T=u32"
+embedded = "f86955089f89c87c952239bde4fb5c8306f5407882e7bb6feeb5d6cc555fe819"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i64_ne"
+kappa = "25c259315bd7be9c0a6bca8481f868b6d3a8f5afcc8e564e7b4244aeccb17330"
+at = "T=u32"
+embedded = "28330662edec01fc090476f3fdfff7ca15c152d05cd60e307dc3799362315693"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_i8"
+kappa = "65b532daf0886fbe7f96f0166d69e17bee608755415c4f0b1232c97d127def5c"
+at = "T=u32"
+embedded = "e4d93d635c02ccd0e1712d5ad22d13dc707b0ff7210855d2d15996404cb0edd4"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_int"
+kappa = "e3c1961a121e29c16692b3ea3ffea9097796cad0605b4e10146abb196c3c10d5"
+at = "T=u32"
+embedded = "b23632e22f0f878198817b62be9fe2dd4e2d77e290ed9c51c90cb7df9e22cc3b"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_int_le"
+kappa = "79f689b727e6dcc393f42a4a9df2af4f63c2e01878ab4e0b21f1450d320fad9c"
+at = "T=u32"
+embedded = "5f992404e74af82b539a929479d15bc8a318a3dd6166101ffe9324f7561e20ab"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_int_ne"
+kappa = "61cdbfa718338a0d54024fe4d980f441060b1858d4905b51ced2833eb997fcf6"
+at = "T=u32"
+embedded = "749c00397e4c85c952fbf2674d15cd898cec308fffd7d34428c6bb7644d75713"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u128"
+kappa = "6b2d1d62ebdd64ada28e757f133f59ef8dcbac49c6a4a1f47202d45b6d6523ba"
+at = "T=u32"
+embedded = "89e183bb5595e92a73886c49032739535876ea833751b7959fbf16bfa9ce68eb"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u128_le"
+kappa = "ddf760f586748dff23493d3a95299aef9433ec0a15fcac1b886b0bd577998781"
+at = "T=u32"
+embedded = "b1917a95792cb18d8346844479446b0c1a925f917e8f425da1f0f31ccb888943"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u128_ne"
+kappa = "e27be184572f586fb4221622e7354ccac8776f69934ca2cf405677c5f18c64e1"
+at = "T=u32"
+embedded = "94899ad1b5762f9925cfa02a1217716c948eeede27bd48a042d105479d145736"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u16"
+kappa = "60eb4fab9a05837c38c5d220fb5c91ff950de3a98d0b521878ef5f608f7c69ee"
+at = "T=u32"
+embedded = "04b4dd1dc9788d0e55f97303026401fb11902fc1f33a76111ed1a6a112a37983"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u16_le"
+kappa = "2b05ebb3a37647c21a0fc7d7cd992e485e836467ac9b24f91e794fded3d1b729"
+at = "T=u32"
+embedded = "b168bbe3913aba55fc9b9e21b41e060373824c4e6fa33cfc6ca7d68ec94de201"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u16_ne"
+kappa = "1b7843a4316b97edc186c74585d2e0c6730cc16b04ff6e53338df883d3efa853"
+at = "T=u32"
+embedded = "98062dc953b975f097cda053ef4c37c83eb48a3f5794d697dbbba1cbaae4e8b9"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u32"
+kappa = "6d407cb743fe9d04bd5e10cda586a679b7f1eaca6b9e734b6e24036c8a0a7038"
+at = "T=u32"
+embedded = "79f9bea0e3de88dacfdda87a5071790983d604eea1e03021bd30634203355a8a"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u32_le"
+kappa = "13fae1a9c334084aeb34fd0e0d272688e1df5a676bc226432770d613409e0d6b"
+at = "T=u32"
+embedded = "1439aea777e5b14dd99436dea483efca5722a579f77ee42265037d0df9a966fc"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u32_ne"
+kappa = "483bf5f1f08c7433c6a899cbf5b029af506fd8e741326cd216dc35d97fb7a2d9"
+at = "T=u32"
+embedded = "6c790aa922977e066ed55d2096534650760fbeb39e03748cb6868e9b1bf3f34c"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u64"
+kappa = "0c577b5cd9344d3ee44c458752a3afa84159dde598f68dbfb88249f684f61360"
+at = "T=u32"
+embedded = "55eefc14831c6837cd6d3b14b28f5c429133dd8cb1d596bbc4fcf4c32d4a3e1a"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u64_le"
+kappa = "aa0405fa6ad8d74ba0ba11a0fe6b0fc5d5b0d587794beac53fca3e092bcc34f1"
+at = "T=u32"
+embedded = "f10125c983cd8d25a5ddcb3d8e0d275499d769b5c4120233853e851c7ab39bcb"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u64_ne"
+kappa = "ee1611c56b1e22ad1be2f1a34c823e10a230baae525a3d9f0fa3144e3949e1a1"
+at = "T=u32"
+embedded = "4b8156d11d2467886449938509efd0a163153bac7ee23a6f23cc37089b341e58"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_u8"
+kappa = "6cf7f8cd3a38b20509c709dba7d485622d095c6680edb9b466dc37b8997e2f96"
+at = "T=u32"
+embedded = "1cfeedb76996887819a3f66a9ec52c99879f14a4a10981574093e07357eff46e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_uint"
+kappa = "73b9bb82a2b648da5df268fa4672f454ec8e93660a60e94172a63691176d2229"
+at = "T=u32"
+embedded = "be2c973b15727d65112ac1dcbfe0282ea28be74561497eb91d1520a10b20437c"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_uint_le"
+kappa = "c06e8cb3420659f5ef3dac67c46d7a10df35e1bca03ec460b6576a325dd0ca92"
+at = "T=u32"
+embedded = "e51d44685d8fdcdb31576e6bc78786f72710e3eee1d1e573359b4dd324ee82e5"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::get_uint_ne"
+kappa = "45e83330639cbdd77950aa3efc6170b313e6cc2f6e50d58f817ab34c5be573c2"
+at = "T=u32"
+embedded = "4838d8205837620004d3d5f3024015b8b2ceefc6934031c539526063f63e4b17"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::has_remaining"
+kappa = "6185c7cd67ab140e45f31cb326406ea3174b67eaa685744817cd2e74e121af49"
+at = "T=u32"
+embedded = "654c6db6a301a7acd5f5c542b72f1ecf4e403ca29b0690422d0f3a08bcf706eb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::Box::remaining"
+kappa = "f266ca47805a6dcc83b881fde35e4cfb7ce86c81e3f8c033d57a32aa90e38507"
+at = "T=u32"
+embedded = "21348e86f2a6e75bf1960f6d4a5a900f9b2831b342e01b9f5e8271272fcbe5b7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_copy_to_slice"
+kappa = "af2e3d09882df0736416a5fcd1bd35f8214eb224d5a8b7b4a3a0c27ce439e556"
+at = "T=u32, TryGetError=u32"
+embedded = "bc11071e34cd1bcd43b448dcbd076843a5912772104f91cfa2f1a33494ae647e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f32"
+kappa = "46d190eff121e741b92b214624f07c2ff1b7c77a9794aa79fdfd9b6ec1970201"
+at = "T=u32, TryGetError=u32"
+embedded = "e0d7f23ec02b1784d6fbf4fbe1cf1e56f3349ec76fb7628902bf0156d24785d6"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f32_le"
+kappa = "7b052c1195aef888767e8393314234ae080cf257bd1d3263a1388b2bf3165b78"
+at = "T=u32, TryGetError=u32"
+embedded = "c8b41330b1b308c2c1cc6fe9ee56344c6fd8ccde5f37b82958f566f2f6388276"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f32_ne"
+kappa = "56710f0c4b028c5f6221f7fb3a1c8c8ade9a02b7978718acda5498964365286a"
+at = "T=u32, TryGetError=u32"
+embedded = "c1591d88c93fd6f6141533d4905f63622aece281f85660f523bd6afd51136bda"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f64"
+kappa = "3b73bbd44e98d935e8b23f2f16df3e94815b3a16daa0d56947863f98c7e1ecee"
+at = "T=u32, TryGetError=u32"
+embedded = "b35f30776174ff923af6121b5839abde20e9176f2db6160397aa2ba74618d555"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f64_le"
+kappa = "be30fcb2800376447fba9322681fe5b1a7621ab33355ee3774064816682e5e5d"
+at = "T=u32, TryGetError=u32"
+embedded = "e4440eca0ccea495716bd01be9fa134a6694a856ba2998c25ecc0213acf65757"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_f64_ne"
+kappa = "ea499ec0608e92f441da52e812a3612052a50abe45bb2d343d04a31b30f2d039"
+at = "T=u32, TryGetError=u32"
+embedded = "186a3e6b15535c3ddc298d2cfd435c821b7077def61995497aa3ce59c4a5788a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i128"
+kappa = "b032129158088851455ede200e3675779f6a241526c7c1c4a1997fff2f353af1"
+at = "T=u32, TryGetError=u32"
+embedded = "21569da7403c15491f3a0c0a1ef7dc41807c4ed70e1d6c28224aa1ec5c86d0a7"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i128_le"
+kappa = "c017236f73a7f675cbf2c5c52c3bc3e5bc4e3a222fdd594cc89d62102e9da595"
+at = "T=u32, TryGetError=u32"
+embedded = "aeef230b254fd46516f693465b508784236f61c89d62aa52d46e6650e131422e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i128_ne"
+kappa = "18b705150c853e8b347bde593edcc0af4003f681ae6dbf7556c4390bf498686c"
+at = "T=u32, TryGetError=u32"
+embedded = "d2042e2a1b386309959edf1f705ee5228724ca67b2d5deeaf851de050783a3a8"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i16"
+kappa = "c8b60d518fb25f30d98f466adf3ea8cd2fd1751405075bf0dd5d6914d2f6102d"
+at = "T=u32, TryGetError=u32"
+embedded = "6563bd955b2275eb977b12dd9e6e0c668c5e790f0d0a4d30605833eb00b107d6"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i16_le"
+kappa = "59c71e812f4ff48f61b86c2e2b9874e862cc7a9617f0910af2a2b366ca286116"
+at = "T=u32, TryGetError=u32"
+embedded = "736a8b4dafd38fea257f0f4b258ace4ffc82dc4b32bcfdd0718267bd7591a0b8"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i16_ne"
+kappa = "e4abfad9cf2daa5123bb99c44e9b9c5d8ad02014c543c28f0920219a7e170961"
+at = "T=u32, TryGetError=u32"
+embedded = "227d0a93e4ee8508b96f058f716851d26983369e182c6933a34fc4f4e01a3b15"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i32"
+kappa = "e9422bc0e74d41488e1fe47848932944e8df2071dad45b2b50817929a7f5664f"
+at = "T=u32, TryGetError=u32"
+embedded = "5b1209468d015e9aaa588fa234bf59708fb2a5178d203c268006b75d7d54984e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i32_le"
+kappa = "529e0b6efc8a5cefc2c7f4cf6605be77c090a395ddb0d66da2f5f53d0c136067"
+at = "T=u32, TryGetError=u32"
+embedded = "b84d387a97a0f2447d1974345279b6843aabce08662762514ca74f9cb4aeae91"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i32_ne"
+kappa = "55885e6bdb07f6cf211aca462bafff4a4175adbc0fabe85bf90702537167ac7f"
+at = "T=u32, TryGetError=u32"
+embedded = "5c633514b101164120c2e62e1c95ae0baba224a295838bdddf44b2154843ebab"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i64"
+kappa = "751b9953d4e763fdbb7f78e7e557b50fa815556f3549fb2139294077dc236fb7"
+at = "T=u32, TryGetError=u32"
+embedded = "dd537d0409f32f1f4c7f9f9094da8f5a2a14e3c8371f778afd992fc97ea654d6"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i64_le"
+kappa = "6ce9f3c7ca8a00f181dda20333cec100637f5b45bfa556bc668b61e92569598a"
+at = "T=u32, TryGetError=u32"
+embedded = "2e6658f14de1f395a12391f850bc38e49f4dc2b66596b286a3da5873742ef068"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i64_ne"
+kappa = "f4ed7bc462ada5fece016029a51e34d8a192b348cfcab22cd21139da21f519bb"
+at = "T=u32, TryGetError=u32"
+embedded = "4440d63c0603cf7aac3da9098b929efb3339110688ae74496a64a7b693f24749"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_i8"
+kappa = "2f60a246ac4ac2e0396f5568212d4e40e003b480bbee27d43fd30c8557f52e3b"
+at = "T=u32, TryGetError=u32"
+embedded = "84953740878e32523bca8b7daca6599cb7a1f1c92df101ddb02e05e7d49f2ec9"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_int"
+kappa = "9c6a060e335b3844ebafda5c7bd83352e620a12a3a36d56ac03bd0dd93b07caa"
+at = "T=u32, TryGetError=u32"
+embedded = "b9583bcbc488bb8e3d35d86568f7cff323f09cbf351e0a065edbc2d4285e06fb"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_int_le"
+kappa = "d2a0a2de67d157572df0982dbb269c6940116086958e14fc1e25fab2d114b0b6"
+at = "T=u32, TryGetError=u32"
+embedded = "469333dcc1588b16a232a75eaa8a64794455f418baec4ed541f925edd480872a"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_int_ne"
+kappa = "987e808bc8a63a1247e093ffc2bf64e27fa1072f40804d4737b759ffe89f6a28"
+at = "T=u32, TryGetError=u32"
+embedded = "52537bc13b1e462bbd799ea2775122e36d8e7b4c4804978ba318c8ae9aced554"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u128"
+kappa = "a51a449aa136d2a3ac91af96fb6ab10fbcda807dbe7c734b85cee74259b083b2"
+at = "T=u32, TryGetError=u32"
+embedded = "6140663d2eb7c8a140223496abd63a63e5e1b2febbf9c8d5b197e0a2419cef14"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u128_le"
+kappa = "7f42371940ed6bf934340b296880603550f1b1b59069b36bf431758679c430b6"
+at = "T=u32, TryGetError=u32"
+embedded = "0c7e04f60bff653221155eea09039d0d04cc67aa035808c8567cb4cb4fd214a3"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u128_ne"
+kappa = "bb008629cae134952ea5ea15eed66f81b8262b9761adb529dca109b1ef5fac59"
+at = "T=u32, TryGetError=u32"
+embedded = "f63d2d850f22543ca16ef7cda650d456808480e93eeb5618fa7ba169b15cf911"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u16"
+kappa = "08853e64c8531e8f648a5373ea67d88f9c6fdc5bc1d606ee8b4936b90c7d4b77"
+at = "T=u32, TryGetError=u32"
+embedded = "1e69e4a55b043b8cf5866cdaa5799d159f5e4a0ee005193fd5c8be0ffd3876bc"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u16_le"
+kappa = "a025a734b9ac7501cf6431956fd9d52feb855ee9959f1aa1e8e0b17bae4a2ce6"
+at = "T=u32, TryGetError=u32"
+embedded = "ff0757c6beb2fe97fe0cd7f26ad645b035dba12b389d23b3ddd721640e018cc1"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u16_ne"
+kappa = "8d60d0dee377859297962b13584f084d1f0ecc01e230ed09b5aac1244dd89965"
+at = "T=u32, TryGetError=u32"
+embedded = "6b57f68e98fc7ced3559f4de4936d6916f102e68cf8185f81ee2a9f2fa6ec02f"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u32"
+kappa = "dc29cf59f4bbc41c25efc78af0d5ddcb1fe457583e6524245b33765c9c2b91e8"
+at = "T=u32, TryGetError=u32"
+embedded = "bbeb8648182f4080d4e97342e9b7b42c4d3c14fbe74a0bccbc18b7ecba34584d"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u32_le"
+kappa = "b3ec864d277bbf5000f9ed8074b9ec246a158afc13f4e96dee6c0e4676593d4e"
+at = "T=u32, TryGetError=u32"
+embedded = "3e1e5bffbafe41e858a29b4244aa6bd66fc3a0f93f8a5351cb95e9b7322855f6"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u32_ne"
+kappa = "f992e46ada8e3327b449031aa6487f94ae0706ecd2ddaccf8df1a75486150478"
+at = "T=u32, TryGetError=u32"
+embedded = "3b42b7f88fd162a4a9ed97af8659cc378cb5d07db5479af02fc69d4ed2196b18"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u64"
+kappa = "691a807c22fbd03036b73b542f8f2e90c5a17408956b7af58b023770c69928f2"
+at = "T=u32, TryGetError=u32"
+embedded = "503e200963bf594510cd442e6f1615eadaf41460e82ece7aab982e59a4352b28"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u64_le"
+kappa = "9214a9765c277811efaf0f098ccf2255c85c2a41d0125aa32718a25ff4de029a"
+at = "T=u32, TryGetError=u32"
+embedded = "4004b9457a5be5fc6b33f3d6dff4d481c7b4c093368e573cf1bdcaee25045abb"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u64_ne"
+kappa = "557863cd8eb014ca175eedf5dc8023d5df6618b7ce8524c4a0ddd96992525181"
+at = "T=u32, TryGetError=u32"
+embedded = "70cfe7921a328a01ba785790c06ad33114d418653ccaf57e99a0900660c0c19d"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_u8"
+kappa = "e9705d975bf7fe229f9570df3228548002e06ba717cbb0dcdc0b672d3e6006a0"
+at = "T=u32, TryGetError=u32"
+embedded = "8064679232a8889ecfb295f5a40e51cd6381700fc8a714edb77dea3fae3c6797"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_uint"
+kappa = "d0187952a8cac2bca85b082fe53d19d223644acd75954281239e62b905f0069a"
+at = "T=u32, TryGetError=u32"
+embedded = "309b1f0d723865fd65a7c2b859b2208538f347809d62b84bcf3fdf367291b35c"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_uint_le"
+kappa = "0ea3f1107cacc38b68847b7331fdaaed50eb038092491a6ab0b03f0d6a7b78cc"
+at = "T=u32, TryGetError=u32"
+embedded = "5506879d3a94f96b32df5f7b2d2598ae3fbe1b34f86f31d56243c23558cc231b"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Box::try_get_uint_ne"
+kappa = "0af4518a19e0db44095ad29d415af4a006e41cb18010f3f37ea9b6681b54a4b5"
+at = "T=u32, TryGetError=u32"
+embedded = "720d6d7ed171354315874ae12c63b5a68aeee04f57b48f2f02b535d13690e9d2"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_impl::Cursor::advance"
+kappa = "524c13b5dbfda7910bf65fbf1beeb1eb88171aa30339c5d3d11833cf4fc7319d"
+at = "T=u32, TryGetError=u32"
+embedded = "d6847637eaf78a1067e6aae2af0c820d752899b88951d4c8eb522bd566e7a377"
+status = "residue"
+cause = "mir::Ty: core::io::Cursor<u32>"
+
+[[fn]]
+path = "bytes::buf_impl::Cursor::chunk"
+kappa = "08c2924edb975c47a52bbcb1def80c489234c1875e34d8f11cd1e8d6ad712c1e"
+at = "T=u32"
+embedded = "b02ee147c3455a76eaafd53fd5b5e168a47b0a8e642d73b841d207c9823016cf"
+status = "residue"
+cause = "mir::Ty: core::io::Cursor<u32>"
+
+[[fn]]
+path = "bytes::buf_impl::Cursor::remaining"
+kappa = "ae71e814f1f0de42bee88dc97559bf4b8231b97f44e11e9f03e8ca6a1060d0cb"
+at = "T=u32"
+embedded = "8266f2d88330e5a4288fe1fccd142651c15d35d94695fc77336b5fe27e1df51c"
+status = "residue"
+cause = "mir::Ty: core::io::Cursor<u32>"
+
+[[fn]]
+path = "bytes::buf_impl::_assert_trait_object"
+kappa = "6675f76a43599987e7532c61a75ea5059adafe41c72d428bfdef3bf0b792471a"
+embedded = "7284ceac9b184166b0979b6a032c43c9d2c23776e2a1a07c65fec090902b5f8b"
+status = "residue"
+cause = "mir::Ty: dyn Buf"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::advance_mut"
+kappa = "04ef06f6815f96ac08e27d0b0f64e861dfad1495003c0cbd04826bb93983d39d"
+at = "T=u32"
+embedded = "5c3d5319198ab195ed135d9b20ddfffa400fc7814b87a307069bde3c46b85d56"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::chunk_mut"
+kappa = "6325bcfaf0993434b6157b50a6057f990c5d727276333bdaaee4a78ce26ef800"
+at = "T=u32"
+embedded = "a0a89ff0fa16f7309064f303e4e75ba30cf67bc004309302e95a9abbc760ebff"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i16"
+kappa = "930b9b38f7852d9850cbe30a8264ad806d68fe420dff9b5c190ac01db21172ba"
+at = "T=u32"
+embedded = "3bebe0e37be8ebb03fd296a09990adc90fa8f20239f2dc4fecc3b8b51cb0bd27"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i16_le"
+kappa = "c041c892983f2c3efee4147d3ac35a26d8a29671e6990785118356668ce0ecef"
+at = "T=u32"
+embedded = "626129420c4a0d5fff49fb4a23f13d18223f1c38703496a6d55573b81a7581ac"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i16_ne"
+kappa = "b83dd59bdc64768e59e7c1a68f838790ae8a39cabbfd81767d6e5125b29897b4"
+at = "T=u32"
+embedded = "fee7aa18b8d12b2fe943c57e28cf7c6e2ad8b080fed3cb6eab73c09e3f4ba338"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i32"
+kappa = "d17a4c3564736b668c25508e3a294e0b4b1e6d31fd2592b423a6b21c81ace05a"
+at = "T=u32"
+embedded = "ebe8a613694955aabbda039777b8de4d7d49e92daf275159b3ad1dca684e011e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i32_le"
+kappa = "15da25d120070efd7d6345c465769ba0796af4376ac3a5154fdb7ca80d4a8fa1"
+at = "T=u32"
+embedded = "7356a0eee6a51a95c7a79b05ed8e41ddd7b13ce152ecd2b7872c1ede322edbcb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i32_ne"
+kappa = "89baf676dce846ae9e33a3ae0452f9fc1271a42b7000d8a97a1bedc3af3652b8"
+at = "T=u32"
+embedded = "bfb15b40dfb5c9ebbdb200f47e6598802fcea7f130d231404ec267f3209106f2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i64"
+kappa = "e0e807d1d13e826e01a43d60bea0443eda40b334b906a455f5927ec8191febfd"
+at = "T=u32"
+embedded = "3600d6cd48bc2ea1131bdc88a5e12f3e71a25eac31bc3b0cf0f0e957448e519c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i64_le"
+kappa = "c60f91e6e388e68ffee958f6d145450f9f3c7905341d19f2f5e5269449aeefdf"
+at = "T=u32"
+embedded = "c1d1ca5911d78b0720e94bae730bc8c62ce0d65f7f95c678a117b1257c0ed2cb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i64_ne"
+kappa = "628b3550e784d592071e2fe4ec4def9e4a72cad468d550d442162727b9b80195"
+at = "T=u32"
+embedded = "10a2dab7b16e5fbee3b7bddf1f76e275f208d1025365e5546132b823a2a72c8d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_i8"
+kappa = "8ad53639d980063c0bcf1ca3ef63e8e4cb838673b87e26c7d76bdddd9c93251e"
+at = "T=u32"
+embedded = "8a1263b97bfb9b260c7bc9b56a37a543f9fa85d74f176b61873a3497b758e58e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_slice"
+kappa = "2bcdff7400b65b2a88a445c325af655caefdbae0cc2a426b1b7afefcf031e12b"
+at = "T=u32"
+embedded = "e4763562027d3bdef6b762dc35c4b34335dd156117a673a669f948862246e14a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u16"
+kappa = "bc97b2328b5ea0a4b29f9b7bc1992f20c1d650a0a477872ed97abe63ed43db8f"
+at = "T=u32"
+embedded = "bfa0030b2f7d2c9004ea56ead6f6837e9d3b66be74f41f583041b4262dc1de75"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u16_le"
+kappa = "cb20588270291a605eeccbdb1b0c487831028adb22dd6304804401048ad77c18"
+at = "T=u32"
+embedded = "0ff299105dfdb279db0dffc4c16ee8c816e4fb962aaf3ec59b5b5e42c3e5ed3e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u16_ne"
+kappa = "74a5c81739fd18e1b739cf2fbff15a8d8ab34c0044e3cfdcb45a906a3f1842ba"
+at = "T=u32"
+embedded = "699a079aab2fa8154ff9564afb7c0106a29fd7c0fa27c41f9bfe582926a43804"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u32"
+kappa = "1e318e9ed7405fc19b6314d8332f1b3e8fbcd2976ee38cc281c990500fbbcb7c"
+at = "T=u32"
+embedded = "0886ba496d94b1eaf143962d3c321d6db4cff064856bf1503f82f35746ef35f1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u32_le"
+kappa = "f9e163bdcd6ce96d7f128d9b2943cef8756ce2a09d24caa4c2add3763a6cb44f"
+at = "T=u32"
+embedded = "2459d81ce8fc2e3822175d9aa20b561983e3723df4b138e85bdae0008215e530"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u32_ne"
+kappa = "73bb48836ea537a97f7dd84b784d04f17112999f1cfa37a9fbabd8cd4f0ff77c"
+at = "T=u32"
+embedded = "65e09e81b7aa484b19fb7f459fe32ca252897b45bdffdd9c343b194206d288d9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u64"
+kappa = "3984ccb306de7ef64951c451c1f91479f32aa61466442f8b11aae2e1265bb88d"
+at = "T=u32"
+embedded = "9a377da4355657e99cab8ea5e136536328d8d3afab8dde130147a7b561119f75"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u64_le"
+kappa = "bbdccce2a2e0a9e4342ae6180b37b6ac4077541bac5086ab2f0fb74e813db422"
+at = "T=u32"
+embedded = "3b88718a382fc8fb38504178bb758f7a543c02f32d01d61504a9b6f539201c43"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u64_ne"
+kappa = "4ab9cc324423b629ce808611f96e7c5a51a2c45cb420671606a9c1e681428684"
+at = "T=u32"
+embedded = "f40d4929116a16af5922dbc79d9feef0720f32942694eed5b84539bbf85a84ae"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::put_u8"
+kappa = "0310de3cbec26af528acbb71a83e448c0a7334ad2680336a8e6e3e3213f3ab47"
+at = "T=u32"
+embedded = "214e5481db9ceff11d0c6da0b0788175eded4f97e3eca6528d13b472227ec490"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1477:1: 1477:50>::remaining_mut"
+kappa = "6a4680ad7a3341dea3d745c7694e8bb5251ccb26e1d18fc14528703bc0449fa8"
+at = "T=u32"
+embedded = "d2a7c2bcfa7b7cce06fa741ad6a73c43df61816c08457d9a26acafbbc75c7a7f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::advance_mut"
+kappa = "4909a8cf451e2b178be6c0f1b5c00fee765e6f78026624d6ee7ed2522e59b148"
+at = "T=u32"
+embedded = "66a17208ff909a97df2a0dcd8949125073438629cc7b31e445d6a523918b49d9"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::chunk_mut"
+kappa = "4bd02ec4d8101c3a33986ce60c5200c26284071162d48a76a0304f08bb2ebd38"
+at = "T=u32"
+embedded = "eb3cdc9362c43ac3e0a9cc05a42a25f4c5189b34cd1f1479b85fd24bcd2e66b5"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i16"
+kappa = "449ce1d18218b53ae65aa9f02aa956fcbfee39edfb5ed770086320a58efe3d5f"
+at = "T=u32"
+embedded = "b04d669ae90fc31b32338cef7e6f50f37b4b619cefd9950858259826b5024844"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i16_le"
+kappa = "09628d2d1d8385650c6d62d917177caeeac70a70479aa974a7055d7533e3246b"
+at = "T=u32"
+embedded = "2c2529a6916ef50b186688259f8c3ed59687a1022ca30241148becb6ab234371"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i16_ne"
+kappa = "da0ee1188e9f9f55450ee7f7760586eba24c707a3a78d4a5c03aaf8f9eecfc14"
+at = "T=u32"
+embedded = "eb9ed28843281fcf484796d71e0b2ec56cfe42deeb248463aa89a6e09b6c7326"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i32"
+kappa = "16610de06edacfae4844efd45006335627448920416f97a3ab7faacb3ecc64fd"
+at = "T=u32"
+embedded = "027d7e2c936baa6712984e56ee8091911a348d94fcb843d54434d231187ab75b"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i32_le"
+kappa = "2195780ac9632db4900b64e1384639f747071fea7947122b8341c1ef49448ac0"
+at = "T=u32"
+embedded = "c40e2d8f5a900b35eb8445410aef7a4912bac644f4de304180242bddd6a2149c"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i32_ne"
+kappa = "55af6cc7d8b81bc3bd6257af312af87160b2858c3ca738c8f908441f41c83a1b"
+at = "T=u32"
+embedded = "9be9ce58ba4d9e647dc6f5214b4aa4c1229f6bf0d866c9df1cffe3619dc264f2"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i64"
+kappa = "5b894bbec8a6d3e0c7d6458b4522442eaa6f37571f2cb4ef5569d06d351949ed"
+at = "T=u32"
+embedded = "7118d9a7fde29a6d001b024fe212d6f47cd15c584043507ef1da818100d9b51f"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i64_le"
+kappa = "a2dea0233cab8bb35237623f141a2d625101bf8208086e619bb63678a3d4802e"
+at = "T=u32"
+embedded = "632fd0d49c9f455fe979714ffb5cf4e210c6950401a21a53085cd6cb351dd1a2"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i64_ne"
+kappa = "2641bea18271cc32c7f20dd49acf0709a5b0c6667d671d4936364dd72986ca34"
+at = "T=u32"
+embedded = "144f170893c9b9403a516a1cf2effe3ae8736f0e38e2f5bb1f14d87ce8c98a7b"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_i8"
+kappa = "ecf27df8d21cf70f1c59d6e49171fcf271463a90090f4fc773f3aca15daf454b"
+at = "T=u32"
+embedded = "643cb07ed3321b7e5732856daf75c04b5b2356252cdb04a51b1979f4fe06ac21"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_slice"
+kappa = "8e960c571c34920b1b16ebe46f414db25294d815043d6b0bd2a4098461a9f0ca"
+at = "T=u32"
+embedded = "6737aa9f88f60620d7b11acd86f783331715978ad4b7a29906f2691a7d255a08"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u16"
+kappa = "bc1da5613935b6d367bd8fad3ce4507c601bcaf0b57a8d62773c1d1ab1c353a5"
+at = "T=u32"
+embedded = "76f0884489230a3813999eddc17b3ed4a22097c826c33a259eadb2baa54bbc13"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u16_le"
+kappa = "d49774fd0507d629c31f4c6ba0fda961a04e8284ba9a4e93927317508d52e35f"
+at = "T=u32"
+embedded = "420cf802918ed2b2896e97d484c0c71e9a645483d417ddcfa9d86f2c27cc51f6"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u16_ne"
+kappa = "aa4e1376088dbd0cf6fdc756a2c366afb5353d6862c82a0c9928c23d71c3829c"
+at = "T=u32"
+embedded = "04c0dee5bbd87fc96b93f5ac4971f8d61bb8450656ea7f7ca1ddbc3edc1b5032"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u32"
+kappa = "e95739a2fc38cac5922f975edff7fc2a4b7f01711ca9301688732c52cd5cd73a"
+at = "T=u32"
+embedded = "b2792cf1d6298566e93c7cb855f5bdb12f6fdd193c9c8afdcbae1642c4736553"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u32_le"
+kappa = "d4c4d5763371a2d1e21c4aa6ca30795d0013ddd00b08a57be1de92e0f68c23a2"
+at = "T=u32"
+embedded = "dcfcb9f2ae67e59b01fc11d5dd707c5dc6a5422599250eaaf1030f58249670f8"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u32_ne"
+kappa = "46db149e902ceb51520de40cf59f1d48ccfa653238033d99231f3c730029d143"
+at = "T=u32"
+embedded = "a9910ccf8f9edc7f4aa219ab8cd089cd9ee4195dbd17f75107222bcea0c13379"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u64"
+kappa = "62cde1fbee9869985cd34fc73789315af74983cba4030765014109e49b9c032d"
+at = "T=u32"
+embedded = "251b8a70f63c372fa5cb1ed9d6bc222ce9140c974d651218f21f6ea395872da9"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u64_le"
+kappa = "aba7b271c471ae54d14f8a40e6c8f74169840e58626137e0990ec9d2180d0326"
+at = "T=u32"
+embedded = "fea6209bf6412191433247af16f6e47c33dff6c7e00f24f981e9d7655206dc6f"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u64_ne"
+kappa = "8d3ad86d4950216faafc1206eac0b77f1dfb2fb08edb13834156136fdca865e4"
+at = "T=u32"
+embedded = "a45405b2eb57c9b9ffd604284576d54895a2741a4d049123640efb3b71f2ab46"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::put_u8"
+kappa = "0894f895ebd8daa613cc2d3a34ade449d8f64fc5c3402114817c1d825ba24d55"
+at = "T=u32"
+embedded = "1d3b81a003ea2ca487404b24ac38ff7d09fca38299af90f39f5c4d4764134856"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1481:1: 1481:50>::remaining_mut"
+kappa = "798130a10fa40693c5410962983bb1794c75b153b349e4938aeed2c9fd13b38c"
+at = "T=u32"
+embedded = "543b5b5a79c8d468adf53ab83a68dc3bc9fc7c0a417c3831bd04acecdbf3038f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1485:1: 1485:33>::advance_mut"
+kappa = "1aa9fdade34260b63d944068b46b87debda1ef95a64912bed763865177da2dcd"
+at = "TryGetError=u32"
+embedded = "2f684833fccaebff4f4dcd2f7bb2db3ba5f46ff1a18af73d2887ab08b67c20e4"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1485:1: 1485:33>::chunk_mut"
+kappa = "dbbc05e128b8a79a402ad297f36217d4bc3800158b6ca7545121da9dc5656315"
+embedded = "29004393bae4650e49fb0347022655b124b4a6ad72db7e7d7e17526d7b8b5b17"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1485:1: 1485:33>::put_bytes"
+kappa = "d7f326ddd57d2d19ffe971a4d38d596109bb16d2352003161cdd7a8f61788d2f"
+at = "TryGetError=u32"
+embedded = "5390be0dab44d71b70e218c3b3e9bc1a741486beff67de0654242a02f5c8b641"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1485:1: 1485:33>::put_slice"
+kappa = "8f368ec28ebfe552d17b7a205dfa44fe389c94d376cb5b7c0f89364eb689ccb5"
+at = "TryGetError=u32"
+embedded = "400f54a74cbd2f69177c454336ca9eb1653ed6eca28db9e45bad6976339236f2"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1485:1: 1485:33>::remaining_mut"
+kappa = "b20eebe06b74fe4a9f322b8e9129268a0c521818f6125f4319e3fe20d474d1bc"
+embedded = "f16a8c15477b91b5390d059edb9f5e7a0ae6b152099aa1ba0afd1056c44b3060"
+status = "translated"
+digest = "48d5a42fea2c6596f91264eaa514d274c8200d861b42116d111cd038d6fa46a4"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1541:1: 1541:57>::advance_mut"
+kappa = "760bfd171ed770226d6e35e0bc805d9e0ccd5e31561815ddcb88dc21f66051ce"
+at = "TryGetError=u32"
+embedded = "9e7fe7e0c5653ac19d2289a65e905d0708b160fee53f7027288a5c7f16215f8e"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1541:1: 1541:57>::chunk_mut"
+kappa = "b9128236cdc541745e5c5da0e9d686a65d09a67065c25c340e63a44ab1932a0b"
+embedded = "4f4af1ae25abe059fd8c9b5629d80b74cc38e8aca3c6a571c558aec13b9f9bfc"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1541:1: 1541:57>::put_bytes"
+kappa = "e92a6f7cb74f9e880d7c6488a33fcd5f58587d97ea5546e7cb2c82b5e1ba4791"
+at = "TryGetError=u32"
+embedded = "35726f744fb46fa8fff498e9d60386ec081659153e10b1212e6176d7cf24baa1"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1541:1: 1541:57>::put_slice"
+kappa = "d53fa5418e805b9af7aa02e0c106580b65eaadfbe9dfdeef20bd604c1ea5aeb4"
+at = "TryGetError=u32"
+embedded = "2f10acdc0baaca198fb2a53df83fead5a0ef15db10b02cc9d32d71fd4ef47241"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1541:1: 1541:57>::remaining_mut"
+kappa = "53a03d6f7f13370a020934dde7daf0c0bf6ff01d6a07600150da0bc76b06a080"
+embedded = "13dfeb490a2354e75ec059605d5a2fb6ea3b75aae36a470e741702c42f0165e0"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::advance_mut"
+kappa = "c89bb701abd18a05cb4116b57a6b9f61af69baf63df50da1518b3b9552ea9d37"
+at = "TryGetError=u32"
+embedded = "f88fc04b68ffd5cfa6810e01fa1db677e4efc1a2599b45af95a425c5d5d5165e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::capacity"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::chunk_mut"
+kappa = "3317f04d80fc20e696f77fd736ac264956d52bb7c761d4d6c51674a563e1291f"
+embedded = "c405c51d3b2918fadd29d1c5613dfe30659adc39e4541d5cb6bb1cccded44333"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::put"
+kappa = "5c46d8fe655da1860501a32224845eae3137ffe3e79d24b50189280eea3b4973"
+at = "T=u32"
+embedded = "c43d81dfa54c602e3906fd15ab4960f66ccda1be7b4bd931a73d603d5be1b8fe"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::put_bytes"
+kappa = "8558e81e205ae999b14879db674a523768eedebaadf71e5c12c5e782bb2996c6"
+embedded = "8c839bf8993f04ab70de7df3816ee177a52ebc551f908e5741c89b710e10a63e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_add"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::put_slice"
+kappa = "793c65c5e8054d9391537872dee31a27254d542d181fc1d18b53bd28e46712d6"
+embedded = "6082f880ddabc9106ff927eb3598dba2087ba91a1751e7414761b593b0c9d9fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+
+[[fn]]
+path = "bytes::buf_mut::<impl at src/buf/buf_mut.rs:1599:1: 1599:31>::remaining_mut"
+kappa = "4eec587c98a34ef6f12a3141f99da20361778031af0983335e9f3a421a5005fa"
+embedded = "6f1f2c807b73771fea2fa21bbedbc91865976820582745e3b3eaa5b885180174"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MAX"
+
+[[fn]]
+path = "bytes::buf_mut::_assert_trait_object"
+kappa = "b7d004ec25f3c819c4a0ae4dd8de4db3f9f0b3d1d7b8ed928edb0a2b6aeb5390"
+embedded = "9c19c0b09487334d98c255b64f70a13ce62ba7fea1ed4a7ca843c46886f003b8"
+status = "residue"
+cause = "mir::Ty: dyn BufMut"
+
+[[fn]]
+path = "bytes::chain::<impl at src/buf/chain.rs:191:1: 194:15>::advance_mut"
+kappa = "0bd1bac2f10f3fef4efbee0abc8ed5f1fd69e4eb01fafed273ab67d8c92238dd"
+at = "T=u32, U=u32"
+embedded = "d2bb68d93124ef38c12a5aac600d14ea3fbe466db2d29deb8fb9f76a9a23b477"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::<impl at src/buf/chain.rs:191:1: 194:15>::chunk_mut"
+kappa = "f198772b94d8e48f912ddfeab7eac3a2538b8471c64dd5f65c13b209eeca94c1"
+at = "T=u32, U=u32"
+embedded = "3cc1087546181f615785186921a0aa8019b6dfd22640b597d084aea79cc5ffa7"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::chain::<impl at src/buf/chain.rs:191:1: 194:15>::remaining_mut"
+kappa = "3273200af7edfae9a7536ee476aeffe6db1ec02d49fe9642613edde4466cc857"
+at = "T=u32, U=u32"
+embedded = "4c7c1181404e3adc66d8dfa03a5ff54aec4d1c624562bd6b28f7c4c9b8fed355"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::<impl at src/buf/chain.rs:29:10: 29:15>::fmt"
+kappa = "8b8c2b21674e653789c49f2bd1d2457fe2bfd92f1be110296b7d5c8ece9b6e4c"
+at = "T=u32, U=u32"
+embedded = "19036c1f7137f42f42ec41cad3135280773ecd30587a57d5905d20c78977082e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::chain::Chain::advance"
+kappa = "aa9ee274c6194816069530e8e5ffbf82ca963cd28b7dbfc477bb1f1225a3e773"
+at = "T=u32, U=u32"
+embedded = "89aa144245d571bcd384c86ab6ed56f6f8e99a5104fe8da2a42838180573f622"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::chunk"
+kappa = "972545d54e263130011ab54d5a48744c16f91da6c6297c78af8a2a9dca04b461"
+at = "T=u32, U=u32"
+embedded = "2eff4da4171a9326c459e9741132ff597c70ca9b4da16f71641844677a617e31"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::chunks_vectored"
+kappa = "bf5de9deffd8d398f7323b706e8be1e01067b18164c22ef0a5b40e478cccbbf7"
+at = "T=u32, U=u32"
+embedded = "ea78e4230c85ad0d85e138a8f03edf6cdf6c5904538dbeb80057b92337d7d712"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::copy_to_bytes"
+kappa = "d8e221c0f113b8e2a93654446552e37b4338868d59f8790f24c6427c8723cde8"
+at = "T=u32, U=u32"
+embedded = "27f63cb2f4b59471d5a30b31d14d431c4776c44bbcb64340b67a2ce2948952c6"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes::chain::Chain::first_mut"
+kappa = "db70d002845cf8875383e1e5b2ffc4ccd8cad8859a1c76e30853198ca2c2574a"
+at = "T=u32"
+embedded = "13a3fcb2ea51f906fb95ee5e2126e96d9c6971da65b33de541d43a8b6bbad727"
+status = "residue"
+cause = "mir::Ty: U"
+
+[[fn]]
+path = "bytes::chain::Chain::first_ref"
+kappa = "de6b67200a99e01068eab649c2ec4e7ac8d1de415107e8de8f2aafe8b76dd590"
+at = "T=u32"
+embedded = "0e0e33088438fe52562ee6f85f98f93a2207b44ce9bf2f1825faf2cea0f36ebe"
+status = "residue"
+cause = "mir::Ty: U"
+
+[[fn]]
+path = "bytes::chain::Chain::into_inner"
+kappa = "1f6257f77ad8812ef1d9c82466580ab3be693eb5df48a9f3f6c5315b75ab1503"
+at = "T=u32, U=u32"
+embedded = "e821752cde335962f5340b492e5348a1439e5ce41e611151a6f0e776e332029d"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::into_iter"
+kappa = "170aa64aeaf930a73cf65193897e1314b62c8569ce2b23d7eb4bcbe77378f90c"
+at = "T=u32, U=u32"
+embedded = "e9dd25cc5586110019464ed12d09af25b0dcfe553c4fe089e49d85e9dcb9c8be"
+status = "residue"
+cause = "mir::Ty: buf::chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::last_mut"
+kappa = "1fba97a9abe0f486d9cdbf4a0b60f631fca4eac542af1a2ebcd698f238ec7d5b"
+at = "U=u32"
+embedded = "25594d9a7d18752bf359b5329731b67ef9b33257d3532951729b51ae82b1b421"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::chain::Chain::last_ref"
+kappa = "293c1b1da6696699831f2f69fdf9b54a5bdbe82ad0302bbb6eb739264118f226"
+at = "U=u32"
+embedded = "b4ba0db75062ea1a59b5351362e95c9e4e67d0e3160d5e2d6cc45a4d2a18cbdd"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::chain::Chain::new"
+kappa = "4b092295b8e893e6d855d843ab6b365e6cb324d240490060daf9164414db2fde"
+at = "T=u32, U=u32"
+embedded = "67a4c978bf1fc074aea06c61d9efe1135cb747366388785280aaa7692b25f31c"
+status = "residue"
+cause = "mir::Ty: buf::chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::chain::Chain::remaining"
+kappa = "bc192f79489947b33c6bfa20f397f673b1b1925998438ed8dc412433a8f51157"
+at = "T=u32, U=u32"
+embedded = "16cb22b1423b08a57c7563e29c94e2786c58117da7d7c8c4c720cdb80b7acf73"
+status = "residue"
+cause = "mir::Ty: chain::Chain<u32, u32>"
+
+[[fn]]
+path = "bytes::limit::<impl at src/buf/limit.rs:59:1: 59:43>::advance_mut"
+kappa = "593194d5b060d1b394b265c749f5080160ca12d8698de5982cc19c067733320c"
+at = "T=u32"
+embedded = "c9df64cefb75e6b85050d2726bd23aa5b889d7b8029adceb701f39f903e22dcc"
+status = "residue"
+cause = "mir::Ty: Limit<u32>"
+
+[[fn]]
+path = "bytes::limit::<impl at src/buf/limit.rs:59:1: 59:43>::chunk_mut"
+kappa = "7d57b923f2394e079d556fdb95c9bfcbeae2ca0dd9a8bfde075ece21865ce4b1"
+at = "T=u32"
+embedded = "730555f924fb63aa96977022ae7340407d6d070d550fc1b86048f02bd695ee79"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::limit::<impl at src/buf/limit.rs:59:1: 59:43>::remaining_mut"
+kappa = "5b41be733d2e217988714de4c5fd70e35147a23d549aaa6da2a0bde963de0e87"
+at = "T=u32"
+embedded = "d5e0d56126eda012ca668727bc8ee143d7a6f61e7e2632f86527c2d39cb59ff0"
+status = "residue"
+cause = "mir::Ty: Limit<u32>"
+
+[[fn]]
+path = "bytes::limit::<impl at src/buf/limit.rs:8:10: 8:15>::fmt"
+kappa = "29beebce62ca73843b60415440899371eb0c2da34009b49b369a788f91415131"
+at = "T=u32"
+embedded = "038edc73843017f3a705367aa347055b0fc4a1fb0c0cbf05c3a17d21b8185bb6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::limit::Limit::get_mut"
+kappa = "4f0ad37141e18d9c0cfd8d74e664b88432d2961c6103b3ee535bdc10b3aa3d64"
+at = "T=u32"
+embedded = "c23451dd47ef8ff4110448246417ff1020e1b5f4d9009a99ba5439a7fa3febf2"
+status = "residue"
+cause = "mir::Ty: Limit<u32>"
+
+[[fn]]
+path = "bytes::limit::Limit::get_ref"
+kappa = "d57b20f5c94b891557387810274154f774a4bf6ba852f2032520acd5642b4ab8"
+at = "T=u32"
+embedded = "723e6fec4b7636eb566ef5e5cf48267c3b4c97bde462d3f6f8b1cf608eb76b9f"
+status = "residue"
+cause = "mir::Ty: Limit<u32>"
+
+[[fn]]
+path = "bytes::limit::Limit::into_inner"
+kappa = "c8e2ed0c1bcaf3fa8be2fdaec6fd10b7275bbf12597ff2c1d186255895bcf2ba"
+at = "T=u32"
+embedded = "dfc024da8325adec6eabc5d7217e90e9cbb5a2769d5a01fa550c9b01b1557504"
+status = "residue"
+cause = "mir::Ty: Limit<u32>"
+
+[[fn]]
+path = "bytes::limit::Limit::limit"
+kappa = "5d6d05de281e400b675f07bf4142f2f7d9eec62398dbd3e1246fc36e603fbb48"
+embedded = "36432b3ced57ba3defdc7671fdd4b2ee55674600a635fc69d1cbd34135017e07"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::limit::Limit::set_limit"
+kappa = "dc7e63688b7d2511784f68ee94e1e35f58f34670182d31298e11ebb53e177bd8"
+embedded = "970bae52c0aa43a0f730e9a14c174eacc4232843fc3c22104ce0dd167d6dd9db"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::limit::new"
+kappa = "d8a03095912d1826044f0dbef8aa83ef282fe8e7e6744b32169d30ce1ed3688a"
+at = "T=u32"
+embedded = "03730ea2b760440dd8b00881b87505fafa0dfd4c88143eb74b6d04344e68257a"
+status = "residue"
+cause = "mir::Ty: buf::limit::Limit<u32>"
+
+[[fn]]
+path = "bytes::reader::<impl at src/buf/reader.rs:10:10: 10:15>::fmt"
+kappa = "2f3152b4048cbb990fee7388dcc20c53d39313a6d9953b877b306714f18d8b79"
+at = "B=u32"
+embedded = "75bc2085f3dd769c26634b2ab5b5de2a1d675a2faced6ea299aebe3d5642c696"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::reader::Reader::consume"
+kappa = "443ccfd99c2a30ae9198153bd2780924be575540313061967482c598a3c8a830"
+at = "B=u32"
+embedded = "8a78acfabccc75a89b132bde3baad16ffe162d01e695aed6b5fe35f56664220c"
+status = "residue"
+cause = "mir::Ty: Reader<u32>"
+
+[[fn]]
+path = "bytes::reader::Reader::fill_buf"
+kappa = "96915dec63b8f27f2dc87fceaa7ee34f07145d556fcea98a47b9104f05cfbecb"
+at = "B=u32"
+embedded = "fc39bde34310496dddc90d0016fe6916dfadc4c66d5cad4e8d6260da1d7e42ed"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bytes::reader::Reader::get_mut"
+kappa = "abf6c2a2b5cbde23c9f186944c0514e8ef0de6ffc88169061cc784e67936bb52"
+at = "B=u32"
+embedded = "9b88172033b758b356c58b6b3270a802c73afd71db6ee89a4986c4e1436708af"
+status = "residue"
+cause = "mir::Ty: Reader<u32>"
+
+[[fn]]
+path = "bytes::reader::Reader::get_ref"
+kappa = "a5b546bf219ceab6561d1407d5f2d49b8bd3a23203e9b7cb60ae9a6c818864e6"
+at = "B=u32"
+embedded = "aa287aa5a91f36959f0fadb54a34ffcd8e9c76c30afdfcab6c750339204b4a73"
+status = "residue"
+cause = "mir::Ty: Reader<u32>"
+
+[[fn]]
+path = "bytes::reader::Reader::into_inner"
+kappa = "b7169c17aac4fd4a302cfe9825dd45ad52ddd1a51c35c180176f75e7713dc1e8"
+at = "B=u32"
+embedded = "f454b29a281ed495a31a637e24483f6b0f123e24ef5baad168e8c1f236892607"
+status = "residue"
+cause = "mir::Ty: Reader<u32>"
+
+[[fn]]
+path = "bytes::reader::Reader::read"
+kappa = "b2a0c533ad3788205b91a840d604144a30635faa8ae8aabbe32cf13c0f2e4d0a"
+at = "B=u32"
+embedded = "1c8f5e4908aedeb019b6f7b4473693cbc7de25f92e0d7f1e0f2b992a1eea8d6f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bytes::reader::new"
+kappa = "bbda6d895c6998aa059fa29958fa4c5bed9f1e5852bbc75fc5688fcf6a9f0a79"
+at = "B=u32"
+embedded = "efc11b5143b36b4bd9f7b8c85b650548debe934cff5cc738ea5821c620e42cf9"
+status = "residue"
+cause = "mir::Ty: buf::reader::Reader<u32>"
+
+[[fn]]
+path = "bytes::sign_extend"
+kappa = "34b8f2f6a3a92edbfd6e3fe0f6da18726e4c1761475bebb6680a55b5cee1daef"
+differential = 3
+embedded = "92a9d6a07a29d7652c55ae745d48cf5d9c92d3023b1f054cb6a13fc182b8c41d"
+status = "translated"
+digest = "ffa2072ac5a0985a997f8c60822a15e98557ea1ad8d7a670243ad6a9d058f393"
+
+[[fn]]
+path = "bytes::take::<impl at src/buf/take.rs:12:10: 12:15>::fmt"
+kappa = "e1bf5f014eff9d43f667c17f7426cb341d58bea300a6b7be654177bf2ab53350"
+at = "T=u32"
+embedded = "4a396964307b6bf6fb582588c841f2d27ab864a0624f60e7fa0a655e90b0e2f7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::take::Take::advance"
+kappa = "9fcc9955a210294a5733ca4f8ab0c36e95c8f265a0e39828e125eae326e1f3dc"
+at = "T=u32"
+embedded = "d29e12afedc0fd7bf5b1c04e9de8ff8177bf2c255951b5a74a7d70aab4e5e36b"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::chunk"
+kappa = "952ee2ee33f8d1afc803afa6952b2bff47bf92ea19a2ea4fd5123a9f83845fec"
+at = "T=u32"
+embedded = "66039e8a51ffcd2d793055d7862be1c51b9536dceecdd3ec2da9fbad836d1c88"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::chunks_vectored"
+kappa = "13d6ffbcb3c1b4732cfbaef6dcc45c5deecd8217416e7c5f80b0c1bc53396689"
+at = "T=u32"
+embedded = "c1d3e05ef08ad4867df7c31045f528d5ef91c482f8e4ce9f31ed53a83949a684"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::copy_to_bytes"
+kappa = "7076073da96756078badb82c12e1207b40929222059376ffa106261e64671215"
+at = "T=u32"
+embedded = "43c0b77cd37e0e0e36505a78365445b49e910e525d3963e8347470ebf0b55748"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes::take::Take::get_mut"
+kappa = "e58c0657b3f7b5a60806a9f6098026db7d13030c4ec55929e823ef4e54b9d5f7"
+at = "T=u32"
+embedded = "b66246f1f9b8c67e6592f427a4857253eb632e6c83a199e745e4a66a7b77d1c0"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::get_ref"
+kappa = "99066b1ef823a88468adcbc377afc261cb265531b4f47e61ea88823c309b76fb"
+at = "T=u32"
+embedded = "4bb6437e00254e90583f7fd530534f30c7e96837331c5603fcb247509baf8b92"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::into_inner"
+kappa = "7e0a51eef2bfb0768b3b62105dcf1836b632daec2f07b0e2d721ab9f3110c4f7"
+at = "T=u32"
+embedded = "14b803378ea1a3d94ba90088527604b4aebf53de72f128809f401f9e088ba17c"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::limit"
+kappa = "2d7da3bc436878269727ed29503965835d1e5a5b612bdbc19516284f1612acb7"
+embedded = "833a243b73c1fb1d2fdee81244a9934f39a415e77a42ce9c7b91dcd1c687cb7f"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::take::Take::remaining"
+kappa = "10880ffbd436a5a0c084eb9350c7fcc290ad6e0d6ffeaba2f5b7066d26fa3e2c"
+at = "T=u32"
+embedded = "d90d5d54d9b9c895276084bcf0765bd4f60cbfb02afb2b8991dcc2a116ac2fad"
+status = "residue"
+cause = "mir::Ty: take::Take<u32>"
+
+[[fn]]
+path = "bytes::take::Take::set_limit"
+kappa = "faa84b57373c817ea819fa524353cec01e44d19c272098598a75601a10b061a8"
+embedded = "d08b944202bba12196c25b7a2b5ec6e7b67be1b12347ae845374dd2f1a817231"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bytes::take::new"
+kappa = "8c3651d068a00c8be9bd53ea88177b87c39b67dd384cd9b51e9e123e17eb148c"
+at = "T=u32"
+embedded = "381ee5910075ff7c43df13c1fa84276a7d69d572cf3c26225a62453007afc612"
+status = "residue"
+cause = "mir::Ty: buf::take::Take<u32>"
+
+[[fn]]
+path = "bytes::uninit_slice::<impl at src/buf/uninit_slice.rs:216:1: 216:52>::from"
+kappa = "49ff2bb3adc41fdea24e29d44dc73026689f2d37cb24f88fb6636af05bd93195"
+embedded = "96efa578aa74a3ee1757d88997d0de4cc6ffca040903903a2a00205a33b66660"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::<impl at src/buf/uninit_slice.rs:222:1: 222:65>::from"
+kappa = "06152a143c36814b8c8a73d349b40b62d68b6ceb2cdef428266d6f9a23b4cc17"
+embedded = "cbbde122cf08f6ca1c6e70b3eecc839cb86dee65ea8cf71e02b550f5af1b811c"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::as_mut_ptr"
+kappa = "0470d285f36481de60f13a947083eee693f53635e0d8ea505dce44b0a577bb14"
+embedded = "17f86c2c11815f6b009f3757849c02285f8d24a277f0bc9a58b6807a2bf94764"
+status = "residue"
+cause = "mir::Ty: UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::as_uninit_slice_mut"
+kappa = "0e2e62c6d93b56ff6558b21e9acb3f805520c422e69e377c22ecc94c62a837b4"
+embedded = "6bf0a1c3e1b5cf520463d5ceb928f2bc613abb801d88391d3660758355260264"
+status = "residue"
+cause = "mir::Ty: UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::copy_from_slice"
+kappa = "d49ff74cdc7e379f3442f5e77e235e33e3315d9bac54197c2da8ef6f64aad83a"
+embedded = "cdb454ad52c217f563b2edb724ff7690fb1b4f0e138107e9746c6688908c6478"
+status = "residue"
+cause = "mir::Ty: UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::fmt"
+kappa = "a8edbf62d82f9547af9ba4ee218236dd41b865a31acc0ccdd0a7d0ec97e73732"
+embedded = "5616255d62d48b28f17af2acf2bb6700bc998f6677b44edf9ac5cb2534b2a48e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::from_raw_parts_mut"
+kappa = "3b38f1411442dd4ec7bb5e62d1cd4773a54cbe3d3a30f1fddc4ce3e7beca5f12"
+embedded = "ec9f8305183fb580ec921969adc3c0210280289e07c09dae91c3dfeaf9dc2da8"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index"
+kappa = "d6e886753d8a62c7e4533b6a3aa4471dcc8325f2ce6722e9e5c8a0baca014979"
+embedded = "08f59b6116053781d37d67fdcf285a90846660a0f7028ee8540018008e68a5d7"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index#2"
+kappa = "12f51b388a93377f6528693df110b0d7911804ec199e1cf9571f60d1c96a6654"
+embedded = "ee352cba904198fa8dd7e98701f58b3c3a0f6b1d2d6574532a2068d73e7efa34"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index#3"
+kappa = "d68c17446eef48571f3c21b03323991f920f9630d6b3cf680ddb417ca8ed6227"
+embedded = "7705ed09294a687b97c060fc365881346cef9694f7c51f88996d114c35c2061b"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index#4"
+kappa = "c51965734803ef6136545b9ee7ff4953844210c037c1a2bde366cf35810c91db"
+embedded = "22400e79e04ba7e6b3e1de1d10b6c0d739ceb569f6355a349672047834dee2f6"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index#5"
+kappa = "0b673ca5a7b920521de78e5e9891b905a403a76c3e643c5cee61b65b0f13c407"
+embedded = "26f032585995c9d7724f86adeea0d00942d9600767f28167573f901029c2bf8c"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index#6"
+kappa = "5940d24799424f8782b706bedeb1f3d568be67909a333f0d3374e88a24276697"
+embedded = "04442c07ddc8b941299f9430e9db9f3bc8d0769c6cb488afdb39e647c690588e"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut"
+kappa = "6d855760090a272278f374913fafc7290069927c9a0055f4f3b3c1fc3afa93e8"
+embedded = "77f9dec0a2c604ff12987ad70eb1a76ad2ec6ae38ffd9ed37daef27855f24f31"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut#2"
+kappa = "71a2e8cc17ba7c860f880df021e5edf4d4d78ab1465dd313b6fdcdb3393e4e26"
+embedded = "3de8cd27be2be3d74118dcc4190d52141df3edb3f1dd710e0989f044bd4036db"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut#3"
+kappa = "1e3a5086fd04dc60714898ed6274cfc60ab05a9a9033ad6350cfe7424bbb7e1a"
+embedded = "fccb506917720549019645b3331e8de767ac9980a9ee8aee869ec2101ead2ac1"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut#4"
+kappa = "1f239032a84c1bc48153dee118ea87529fc3a0acaa455eabfef19bd89fa75d03"
+embedded = "a26af1d19e66326779846af74919d9f094b81cc680986ea471c374dc0b120cbf"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut#5"
+kappa = "1c1ff0f9fa70c3059e49664431a4d5cec1bbd2953f139721797be454846fc2ac"
+embedded = "389d99d03ddb0cf5fb4ac1b61c07c8022e890b88a7456fb42e9762668363f9c3"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::index_mut#6"
+kappa = "66b30bb0b2fa262a2cd24063c6844fb4bc73f38504dc635c5ccf5cef1ec19083"
+embedded = "8fd9c569fde1b4182ea7f42f3fa92949917408b6315c25d3803cdfa671513cef"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::len"
+kappa = "4ad2019525e1566e196301e423725e809841b1c869d8fb6bcfbbf0915a360d43"
+embedded = "442e62ea1b9ddf82853d37205cff9aa42f1833b40f7f977ce35da582211c61b0"
+status = "residue"
+cause = "mir::Ty: UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::new"
+kappa = "228563c50c584dc9680dbffd0e2b84b719bf3c0131e7d55f11c87c398c679062"
+embedded = "ca20f147364c94f1c6a4f56858af66b98075a5825a333f5b71706afbb81ae0e9"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::uninit"
+kappa = "d4064bdb60b06bc4ee8eb29ed63d7567650f6d928306162497b11c119d5e9acf"
+embedded = "ce056c335f3c160a3e975bc80a5dc6133e9a4a90ecceb4b9bc5b0be9ecc0dd5d"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::uninit_ref"
+kappa = "d9e0167b451fe2fd3438b230f39f7c883dcbd093e29ed4dfb217b5f100badda4"
+embedded = "29d0f5952b534f7752498c0fcb6c5027a7418f0519616df8f037b821d8690744"
+status = "residue"
+cause = "mir::Ty: buf::uninit_slice::UninitSlice"
+
+[[fn]]
+path = "bytes::uninit_slice::UninitSlice::write_byte"
+kappa = "a0dd23b009dde6a377fd2f7c4999dd2ddd98506a180652813da3e2af2cd4242f"
+embedded = "2260eef3763186d26284cb32766064cfbdc9eda4ecdb5e6d3cc095bd49f6070f"
+status = "residue"
+cause = "mir::Ty: UninitSlice"
+
+[[fn]]
+path = "bytes::writer::<impl at src/buf/writer.rs:10:10: 10:15>::fmt"
+kappa = "97204c33e57d10ca8d3caed380adb711c752716c76670afe9391fdde82293942"
+at = "B=u32"
+embedded = "8234fb9562c243a6a5638b8b1f82aa745bce7d3b5531cb3a7c9aad11a457f50f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::writer::Writer::flush"
+kappa = "7f88d282297e9b8134397bcdfc7db6b398745a6499e60ee1fbf86b61a679ce9f"
+embedded = "4f78eb5e55ca72c4bdf8f0ad12e25006e3c704950913ab61711aee25ebcd8e40"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bytes::writer::Writer::get_mut"
+kappa = "16b800773171027835286adb06aa85a882131e66aeab160f9e0903c7f4fc9863"
+at = "B=u32"
+embedded = "167de458f21be763d0be39233b565bcc941333c3f3e61f3705e55f2296e297cc"
+status = "residue"
+cause = "mir::Ty: Writer<u32>"
+
+[[fn]]
+path = "bytes::writer::Writer::get_ref"
+kappa = "963c1c8205d177328c3aff59900a5d822c6feaf56d20d2c374e0465853b2be56"
+at = "B=u32"
+embedded = "5a5402ffcc6ece624247368d4927dad0c3f0257f019914e2050a035456c52adf"
+status = "residue"
+cause = "mir::Ty: Writer<u32>"
+
+[[fn]]
+path = "bytes::writer::Writer::into_inner"
+kappa = "dd96d2ea4d417cfec89515a4a029d6603ec2d7f8f1e8ab114f3649f97a6fde2c"
+at = "B=u32"
+embedded = "34fe4342711bb6bf5b4b825caaf717ba7a7743ef5412ed733d03d82ed96bfac6"
+status = "residue"
+cause = "mir::Ty: Writer<u32>"
+
+[[fn]]
+path = "bytes::writer::Writer::write"
+kappa = "a0877ba39850ec1324c7d82beaac859e440609ab791f477ee9a5de29ca805c05"
+at = "B=u32"
+embedded = "6fc7b2051a8819e1c76b1d5e808f9741094c2572ba27eab4f1579f3abceba566"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bytes::writer::new"
+kappa = "e088aec613611e5a99e0a01f5155294221619131b3377227fcd5116265d3a027"
+at = "B=u32"
+embedded = "22213f5d2790c5d4eebcb7a04c239740eb8984550fcd91b7c90b7828e1b878e0"
+status = "residue"
+cause = "mir::Ty: buf::writer::Writer<u32>"
+

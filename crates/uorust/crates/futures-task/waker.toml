@@ -1,0 +1,54 @@
+[[fn]]
+path = "futures-task::clone_arc_raw"
+kappa = "cfdc74901276821afdeecddffba758ec6297b2504a6d142dbbb32d4cb708f9d7"
+embedded = "c39ddf96974302acbfbe3eff773bea5245dae7f62abbd820af300082434a1460"
+status = "residue"
+cause = "mir::Ty: core::task::RawWaker"
+
+[[fn]]
+path = "futures-task::drop_arc_raw"
+kappa = "66967c970613dde2ffee18e71d38d6103f2c4f767d8054164355ed40f5c41307"
+at = "T=u32"
+embedded = "58d3eb974005d5cfee1bff0d7ca234846794ab9415e441d353d15a7d7d84e5f0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const ()>::cast"
+
+[[fn]]
+path = "futures-task::increase_refcount"
+kappa = "4c078a19753737583852471e0c1eab43fd251a471902508055e10c969a524023"
+at = "T=u32"
+embedded = "885167083528a8297eee327bb714d52b9713a524fa5d1a3ab1a65f07d1e5eed9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const ()>::cast"
+
+[[fn]]
+path = "futures-task::wake_arc_raw"
+kappa = "f507d3d8256c007fef9ae7944dd133c3bdee5c6350720c4e1c1137ec985147e7"
+at = "T=u32"
+embedded = "7a77bbaabe63dfa4e1da87dd649126854b5020d7efe62511094ba30f4dc3bdd4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const ()>::cast"
+
+[[fn]]
+path = "futures-task::wake_by_ref_arc_raw"
+kappa = "da3499cbee5bfc48a823ddd896632efb42460dc2ea9d88d8bfe1b458c8264057"
+at = "T=u32"
+embedded = "d3580e01fa4140b6aa59c94a05301015af218d0a5f871a6035c170ad75f80ad6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const ()>::cast"
+
+[[fn]]
+path = "futures-task::waker"
+kappa = "385b41299c2e538c5a684a7050f047d004f3c04989176cc643374e9bf27714de"
+at = "W=u32"
+embedded = "b183a6a4b015f4ee90beca77512721436a7a88c51fdc26728d72a519eb39ca59"
+status = "residue"
+cause = "mir::Ty: core::task::Waker"
+
+[[fn]]
+path = "futures-task::waker_vtable"
+kappa = "33c7d92518edf09da52cd85ee7a64656d6976105656cdf49109bb4e08cd21696"
+embedded = "a34b086023bcb501314b5e06876c3df34058ea89761a3a1194a5f133af117eca"
+status = "residue"
+cause = "mir::Ty: core::task::RawWakerVTable"
+

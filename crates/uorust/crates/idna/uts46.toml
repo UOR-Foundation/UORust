@@ -1,0 +1,477 @@
+[[fn]]
+path = "idna::DOT_MASK"
+kappa = "fe03daae851ba6fa55b381825a7f04af2d9a918837bd73a0e203c3888f5f1b90"
+embedded = "b3619fb98c898c806a7a3d75915f1a7fe671038c72e80166e37ca0c017d48f25"
+status = "translated"
+digest = "0e8df4a24bab787a6cedd3e4dee103a3f86e2ee5f2727d9c1a4c6565c78c5142"
+
+[[fn]]
+path = "idna::GLYPHLESS_MASK"
+kappa = "c15c4466f23f3cad73ba732f5fc649e4102d7c1a4f9de4264ae45530fd1c789f"
+embedded = "baf3388cc2ff3736dcd609bdbb81602f6b8e498bf485f17b5355acc324676a39"
+status = "translated"
+digest = "5ebbb6b01b62ba6939d6eae955cbe6747fa915ac5542e8d8a04d9a6d6b94961d"
+
+[[fn]]
+path = "idna::PUNYCODE_PREFIX"
+kappa = "8bcba4b1dc1490cd58200e5c40c31508165c75ce9bfd269065c8b85a980c4aa7"
+embedded = "6204bcb675b1bc9ab5cda814a01b61ae8af9c7ff763f647e6c4f09f4fcce1d2e"
+status = "translated"
+digest = "d1b18afda1b17aaa33c2a886569b289306c9f7d05980335cd83f1ecf5312ad1c"
+
+[[fn]]
+path = "idna::PUNYCODE_PREFIX_MASK"
+kappa = "56d0a0df88cc4ff644bd45c8bf3f98a42c2fa5dd6d80142c872b7b1b6960f382"
+embedded = "aee9a6c057f1759888ae9c6c3abd8daf26d78f98d1a1f9ace612b92ca9b570bc"
+status = "translated"
+digest = "6af8cad93df20360371ff359096649123360ed473e0fea2c6119ddd55b8baecc"
+
+[[fn]]
+path = "idna::UPPER_CASE_MASK"
+kappa = "ebda4c91550d86a9629239a5278afbf43387c6f7155961458759d4e9347defb4"
+embedded = "2c93a67375376fd6507f7e62fc1a6577ef481f3fd133c33ac07a4bf0fce0d8b0"
+status = "translated"
+digest = "f18cb2971446205055ac36c709fc31504f535b434e568a17b53f16e95e3c1c4a"
+
+[[fn]]
+path = "idna::apply_ascii_deny_list_to_lower_cased_unicode"
+kappa = "ed93e5ecb4d0d982012192bda884f3d1e45d9cc55212e8726aac391ad3fc9619"
+embedded = "c2c1455ee77cc9bb251f4c760556de14684f177c0d27223b3177d7a4131d83af"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "idna::apply_ascii_deny_list_to_potentially_upper_case_ascii"
+kappa = "80c824598cb137c11e2150dbd5d237c5ec53bdc31f88c911d7d03c13c36e4de4"
+embedded = "ae77b79317c6f636fdb59268f756db598430d9d1abc358a3a469ed1b32580af1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <char as From>::from"
+
+[[fn]]
+path = "idna::check_hyphens"
+kappa = "e3d911e3d3a2d4ec998a65089712d19baf1e54344bb076a0df29cc8d450fd97d"
+embedded = "139cc858618068e66987f58b16274fb163934454751b69d939fa4e31273adfa4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [char]>::first_mut"
+
+[[fn]]
+path = "idna::classify_for_punycode"
+kappa = "c618412a28c2840680b608a3bcdc271635a711f9bbcaf5c42a2359ee4635a47e"
+embedded = "014fad9b0cfcb74186725d99a94b709b8e5ab638b8386f70522d807e2b641c61"
+status = "residue"
+cause = "mir::Ty: uts46::PunycodeClassification"
+
+[[fn]]
+path = "idna::glyphless_mask"
+kappa = "ea5b80663598bcb8541b977c7172591996f46313fde4d766520ae69b2604a328"
+embedded = "bfa9e1c8e70eb0ca2ddfec304b4bad3efc98a9bf34ced629addb195b61fc81b9"
+status = "translated"
+digest = "f24268a27960251f97df86d896be66d2a506dd8358b560e94fbe310ddfd9af9b"
+
+[[fn]]
+path = "idna::has_punycode_prefix"
+kappa = "9192db4b28e4f5ba0be1d2c66ffc1b5488c9ab322a5f36c55d868f024e69eef8"
+embedded = "e2c5114d1ac0256c390adc3dde6030f0f86531c5c3ef0243312cb4adc4f51986"
+status = "translated"
+digest = "0df9e49fb67d29f1d6112a402126094010e4d6f1ec518a941c96420f3d97d4d5"
+
+[[fn]]
+path = "idna::in_inclusive_range8"
+kappa = "aec09a12932fbc5266cc432e6c1cfd159f47a3faddb8928326f513ee4af6290e"
+differential = 6
+embedded = "d4cd4df03ba68fe6dad6745d601a3e2f08d20f7512de516d3fe3ca044aa86ab5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_sub"
+
+[[fn]]
+path = "idna::in_inclusive_range_char"
+kappa = "8efc65a03c23202da5b72aedd746664a0f4a6cda4fd18e71ab980d3db6e0f9b7"
+embedded = "1f169f0b48b9536beea91f88b6228fa974a46045c2924688cca049b948bed595"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "idna::is_passthrough_ascii_label"
+kappa = "05966895d136fc6a6286df5e6e0330e276c7372d379d1de7f63f27b1a4a44455"
+embedded = "e7d5ce6bc3ad140f162ede28d4d8390b9f7fd158b8095f2e1ca412272ec794a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_first"
+
+[[fn]]
+path = "idna::ldh_mask"
+kappa = "fdb9e65122f2cd4ab98713540eb7bb7c3c89e88876f98af5a40a1c63374b9f30"
+embedded = "e1ea43d7bdcd3539b4641d365230fe39eeeb39815f7522b7ec07d937c4076559"
+status = "translated"
+digest = "223447061d702a734eeffaca4f0255ec3ed69c2910198031480bfe70be744589"
+
+[[fn]]
+path = "idna::split_ascii_fast_path_prefix"
+kappa = "70fd0a0e8f1f493143644c50e17c41e68cfd78d6fb7956ecf221ba47baecd19f"
+embedded = "76ad032d0ededa084fea21f92487975863992205aa19bf8ed8573a23ddf8c225"
+status = "residue"
+cause = "mir::AggregateKind::Closure: split_ascii_fast_path_prefix::{closure#0}: mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii"
+
+[[fn]]
+path = "idna::upper_case_mask"
+kappa = "8dee301d93402b089ec5c753fc7c57d17f8c9a5478fb7d66bda81733bec629ba"
+embedded = "e99674c2b62bdd636c78fc3ec4a7ba1006e37aaf81f66315ebf99765fb60df9f"
+status = "translated"
+digest = "4ddfccaae07e489c867f580a3a27efebd42d0787ce2bcd3378142891b28f0d53"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:240:10: 240:19>::eq"
+kappa = "a6e628621633b20a63e1b049d5569ad0d5f8b4ace07546fd1900a9ed63681222"
+embedded = "c7db8d6ba7a8b153cea64b694614f78853d0ba9156117d7f8e60538d56eb683f"
+status = "residue"
+cause = "mir::Ty: PunycodeClassification"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:240:21: 240:23>::assert_fields_are_eq"
+kappa = "41d8329eb2bbda332e65a551b66c3a0c53ff6c4250b618c5ce41d6d9c4bd75ff"
+embedded = "fdbca12df4993b193a99a573891f12da50af02bee376a09e9fa56a2e696e1e8c"
+status = "residue"
+cause = "mir::Ty: PunycodeClassification"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:240:31: 240:36>::clone"
+kappa = "0741b3e3747b15662e145bd65d0ac4f9e76b305c4ba90617c2e091432c628785"
+embedded = "ca0e35c48a220a09c6c7f42c6f406052ff529729f814b6bfedd0ceee8ee01e0b"
+status = "residue"
+cause = "mir::Ty: uts46::PunycodeClassification"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:270:10: 270:19>::eq"
+kappa = "abd89de1c52c5b80d4fb704a5b467af8443289c9627eb4a12f50b1c8e2fff78b"
+embedded = "3ab34b01c6a9882ec057927ac96deadc1a4a5be0a5c2b44441ea5537550d7628"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:270:21: 270:23>::assert_fields_are_eq"
+kappa = "a7042b1afc1aa93a37cc1ea09c189cf3ca1c0b087684b078f9e53ade280463bc"
+embedded = "004fb986a3c385f82085e8d841795f82f44cd41dd7c62ad9710b55cbe8b68dba"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:270:31: 270:36>::clone"
+kappa = "3d69b2143828ac0e230be3fdeb3be8cb9f8923aa8867f8a1f03ae1a1437efefa"
+embedded = "6024a7c089b1ab514c5acd15587a359d885d1c70f80bb7b5f798e67a9aa9eee7"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:355:10: 355:19>::eq"
+kappa = "3f6416ac09f5eea789daf91607181d52d2fa30e1db6afdff01747a5c914c4526"
+embedded = "735c38f25bc1a1b7bc04d3f878cb54ffb61f27924fd07694cb6dd07d60b213a8"
+status = "residue"
+cause = "mir::Ty: uts46::Hyphens"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:355:21: 355:23>::assert_fields_are_eq"
+kappa = "710e1a791fb4810a7230a028758c1856c2064ad01c43671fc924adb988cbdc7e"
+embedded = "cecb1ca260c5add0205a7521ebaaa446baf7da87424aee5a6718d6e334aa7f5d"
+status = "residue"
+cause = "mir::Ty: uts46::Hyphens"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:355:31: 355:36>::clone"
+kappa = "d16270405ac039e773a5ed919d7670abc20b3205da04d628d847574d02a64840"
+embedded = "045cedd1600b9e5659fa88d692004a84ad6117bbc8e7c7cd418d7177a5cb2838"
+status = "residue"
+cause = "mir::Ty: uts46::Hyphens"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:379:10: 379:19>::eq"
+kappa = "7527e4df90854cc7663c8c5a7f8ecb30f972864514163ca5f2b3c6e41ab84161"
+embedded = "6c422eff587ed347152f686cecc4daf5664c23e1f68c1fd8150ac5390883e1b6"
+status = "residue"
+cause = "mir::Ty: DnsLength"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:379:21: 379:23>::assert_fields_are_eq"
+kappa = "0e361f5c7b01dec7bf2cd326426107acfd74c013c6a3d7c3464bb1e1fe1e8154"
+embedded = "c948480a7bd2394c538c5729c90de93e8f1d33b8e381056cb975dd6b3ff6445a"
+status = "residue"
+cause = "mir::Ty: DnsLength"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:379:31: 379:36>::clone"
+kappa = "fc0248b51790ccc20cc3144d67b83ec958a1757dec6c3008a4656c0e92aeb855"
+embedded = "32fa09f2485cd07e037678e481d0bcf829e621c51ea16defe055311c57fe676c"
+status = "residue"
+cause = "mir::Ty: uts46::DnsLength"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:392:10: 392:19>::eq"
+kappa = "d448ae9ff912c2e209fe836363e22579f9315ec790da13893fc009e8c922d080"
+embedded = "e85767fa84a83c88e581e42941c9405bb95c80358aebc47a726dfdc617a3e06c"
+status = "residue"
+cause = "mir::Ty: uts46::ErrorPolicy"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:392:21: 392:23>::assert_fields_are_eq"
+kappa = "bb1a2aa60d2836ea1b98777e6c22dbefbe9862880cc7daf5701f2a7e77b80ea5"
+embedded = "72df1689402db4e424648a40e8eafc8f5dffca1b1e0b195e20d2b325e6a5620f"
+status = "residue"
+cause = "mir::Ty: uts46::ErrorPolicy"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:392:31: 392:36>::clone"
+kappa = "bc2011353427d0f7e18b34172f91722935262eeb88097cdc93092bcc92934ed1"
+embedded = "571b5643baf31eef0e210340ec6b771d01300ec2aa4b4c3d15f3b15a7ac64d80"
+status = "residue"
+cause = "mir::Ty: uts46::ErrorPolicy"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:404:10: 404:19>::eq"
+kappa = "0d8c30c673f35d981739550d2f721f729c72897a975c6ff549ce98cebe1f5903"
+embedded = "038580dcdeab5f2ded8aa37bceff9f0fc66dee830fbb75bb92079ef1315f05d6"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingSuccess"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:404:21: 404:23>::assert_fields_are_eq"
+kappa = "ed7b7f7e63b18bd46e8e147c7bf6014d5b7412bf21847e6b8af0c286d99c47a6"
+embedded = "8746b68638c59efbac8fb4448fa05e5056dae3bd71ad1bf78bff7e84fa4f3b39"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingSuccess"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:404:31: 404:36>::clone"
+kappa = "6c94eb935e03fb1114945f6009c784cfc2fea64c3bfd1ef996289cdd865b819a"
+embedded = "60548071b3ba5eeb58a6f81556d666ba9cc64339156e8962561789e7987901a0"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingSuccess"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:404:38: 404:43>::fmt"
+kappa = "a692909204515aac1ca2cb952271323df72ca053d2b8b14582476a2aadbbb631"
+embedded = "1f6281eaefbcbff09da696f62e243329d01610b032ff66b4b7e7fb5160157572"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:422:10: 422:19>::eq"
+kappa = "641bc519535ec17041dd3df2f429974601f04269d560004995e9c6b7d6e1b14b"
+embedded = "adf84be27e152924e3d91eb2be7007779d025068b26a1dd4871d710df398d491"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:422:21: 422:23>::assert_fields_are_eq"
+kappa = "706f3816c08120dfade05da7ea66cb2cd750d280ffa40cd07f7c6eaf8a2c3108"
+embedded = "5635e5c9ccb68f6b216880d8820a237a0b98337d6518550e4ed19dceab29295c"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:422:31: 422:36>::clone"
+kappa = "60a7d69510cbb5c9e880e9233dcc5bf9ae5bfdd32778b27d5cb770040c09c0f9"
+embedded = "f9fdff009525da37d4a8bc66b020c372621400e43873f5a47d2304bf5b7e858a"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:422:38: 422:43>::fmt"
+kappa = "ab0bc988038054d906455f71e1e8d89a1df4341377578284d17d6a4f813a25ab"
+embedded = "12f8852d92fc37cd0d9fcd533f4d82114a17129ac3d648bc42970e6bec0a4e66"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:449:10: 449:15>::fmt"
+kappa = "dbdb57a17cdf89eac0a574c313cab07efd63f3d415bfd0411677dc6ea39385cb"
+embedded = "bfe734a3319c1882f4403a21a007092fad1a201248c4c196c115e9af6f461c3d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:449:17: 449:22>::clone"
+kappa = "36c6f519ac0714a605be842a65fc451350482dc626d525e4ef37b8a84918297a"
+embedded = "e8a83e3d87f784b2ee084281846c7ddf6254522a26d1bf6cd056d13e5f835a04"
+status = "residue"
+cause = "mir::Ty: uts46::AlreadyAsciiLabel<'_>"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:48:10: 48:15>::fmt"
+kappa = "b3f097ac612d7bb11e169763749ee22b51c809fba33ee7a5bbbafbc0f05159a0"
+embedded = "feec44f47eac3ee76045e27387c00bd004bb88f18b14bd465f2450829f1eb2cb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:48:17: 48:26>::eq"
+kappa = "31e7d02edbdf514ecc970930f46cca42f3df9ef820c6f592807851e435fc3311"
+embedded = "e85bb072ffb2dbd200686c0894afe690bb548e2644089a9d198fda2ec1f8ce5f"
+status = "residue"
+cause = "mir::Ty: RtlNumeralState"
+
+[[fn]]
+path = "idna::uts46::<impl at src/uts46.rs:48:28: 48:30>::assert_fields_are_eq"
+kappa = "80f5d71d379a813f0ddce8a090a02af1167dbb4447d5688b919692edd53e0c03"
+embedded = "0572f4eee402d78f31a795f38366ba6aa64052d0f61b9088ccb3f4d13c4f087b"
+status = "residue"
+cause = "mir::Ty: RtlNumeralState"
+
+[[fn]]
+path = "idna::uts46::AsciiDenyList::EMPTY"
+kappa = "e3b30ef3f916a1a3b0606337afa56303f3c0a837677c07ac8738c25b7e96dfd3"
+embedded = "0c9379b00d6a009953c2f29595544765cd35d92f768cdcc4b1d8fef026fef3d8"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::AsciiDenyList::STD3"
+kappa = "7feb9aee4e6a5513836e8c062cdba82c0849eeb92ef45c3df91106b4d8ae2c79"
+embedded = "37ee8bbd1abd380482d089a14e4bef31232addbd71a7998d9842f5551b3b4c14"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::AsciiDenyList::URL"
+kappa = "99f98267e3143df69fd0165afaf35844e899d5d888c7fddff6d26562a119c94b"
+embedded = "575c01cc149ef198c179e4116600a2029a1fa36f6dbd7b12fba9e8092a09c5b4"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::AsciiDenyList::new"
+kappa = "3e843796a7c843d924f050e901148fefa790dbc91f1fb308321f68a257a58dff"
+embedded = "933cecf99926ffec113dd6d647aeda2991071454c945f255720323f249aa66e4"
+status = "residue"
+cause = "mir::Ty: uts46::AsciiDenyList"
+
+[[fn]]
+path = "idna::uts46::ProcessingError::from"
+kappa = "74bd9f21427d4d89906b046aa07455f54f068edd20a49eb8ef536f3346566c13"
+embedded = "6f63ce56f7e3a3d69baa5f3dfe4ac8c33a7b9021afa0f1482e45c9610f318e02"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+
+[[fn]]
+path = "idna::uts46::ProcessingError::from#2"
+kappa = "e3f075d93cd984443b9837711c0893952ede0d9d90161c4b00d3d8d92a417c4f"
+embedded = "db6dd7fbdc291d5bbabece89144491e8bf9907cfa841f59a8272d86ffa051a3a"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+
+[[fn]]
+path = "idna::uts46::Uts46::after_punycode_decode"
+kappa = "c8acaefb595123cdb09d6da7fc769cb0bafc6476245d461c980a90f88625c69f"
+embedded = "a9d89dc146de64b796ea2672d6a1f97faae484709609a93ed26e9afee26b9564"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::check_label"
+kappa = "ee4ac0a3e2b578e4540cbb4e6cc1789f8902e361b32a50a47dbf5c025626d815"
+embedded = "33512572119d3f3c8bacc19abe2999aeb134ecf71bedc6ba0b25cedb78d4decd"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::default"
+kappa = "f02fb3de8a0749bba28faef145d9e8e059a69613557fcc2feea03342c572ec2f"
+embedded = "63d3b06be47036fafef26dfe81754ec55cdac0c2e5d4a4dd31e1b10ab1ea19f3"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::has_appropriately_joining_char"
+kappa = "b66240aa3a1a564e9449ff30e277a7655c6a4418ed90d878ab78c68571cd23ac"
+at = "I=u32"
+embedded = "754e55752553e39a4a9d2bb63d51fde6dd6c2d54dcbaab0e1839755359194a34"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::is_bidi"
+kappa = "d20ea322412420a49ae83353e9c10f69747edb7c0cfbaad90b7ee1604a1c0d7a"
+embedded = "e95576255c60f871a7a06dcf570954a769f75e8860ef1fdd63d35839945049f5"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::new"
+kappa = "6eaaf95ebd2a7bd60d1ce8c91d47df95a6eee9f0d9a0dd0204443a58cd1029d1"
+embedded = "1f685fdf5464dcb568304cbb4d402d7782cde198aaa3c8aa6c8a0d27a077afb8"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::process"
+kappa = "007dc167a3b2141d87c70f7cf7481968a6602b92b553746ae6ffb8b06f6719a5"
+at = "OutputUnicode=u32, W=u32"
+embedded = "90a43551ed23a0e45f714db9ff21eb04b4f113b8a5a5494ad68ff839a042da61"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingSuccess"
+
+[[fn]]
+path = "idna::uts46::Uts46::process_inner"
+kappa = "9fea9d28374eb7745e9ec593672e391d12aec18a4b4bbc0126cff17d306ae767"
+embedded = "fa5f439fff55648ae840330425596f1a94736b41a19b2f3464f5da2eb69121e7"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::process_innermost"
+kappa = "b4d7823c737a21f81d5facbdd1ede0d2efb3e2325f227460bc591e73054b2842"
+embedded = "0b1b53f39bcc0975ba54fad513238028406f1d66f82606bd15b72d6faf7ace9f"
+status = "residue"
+cause = "mir::Ty: uts46::Uts46"
+
+[[fn]]
+path = "idna::uts46::Uts46::to_ascii"
+kappa = "17eee32e2d49c9bb780066f4cfcc9e78c0df01e999739fdf80b93cfb9de5b387"
+at = "Errors=u32"
+embedded = "fc15f5b0693e3fbcded5cdee155ec90c2e53eee02c45d139410854b4d06c625f"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::uts46::Uts46::to_ascii_from_cow"
+kappa = "aec17c56b33f1891af990235a28472fa6b43ae7337071d295af5c9eb2d3b2ad8"
+at = "Errors=u32"
+embedded = "1d301df2b84ffaf5919d629da3ad304ba22b58d62daa514018b4d1cf15c6a36b"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::uts46::Uts46::to_unicode"
+kappa = "d3a8aaf9d3f5af980a8fa8044f4cd702d3b297abc7d696ab072aa68f6549d32d"
+at = "Errors=u32"
+embedded = "26cae4262245cb039627b16c2ee3b705078fd20c3a757942d2dbde539bcd68dc"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::uts46::Uts46::to_user_interface"
+kappa = "4dfc8e5c80e1b631f3eb3d5afefec2401e6b059dc7ea2f0c5bbd963fa247fd2c"
+at = "Errors=u32, OutputUnicode=u32"
+embedded = "6bb5b5a242b9d0cf44f06a8ae1b40c12fe7a9e316f77d5b0eacd104a0e30e9a8"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "idna::uts46::is_ascii"
+kappa = "d396d0f5bb7a26514cdd00b7b2a91483aa9b1cc320cb4c0de65f5937c5453deb"
+embedded = "3669a22fdfa6f003b0109515386c14258b7e10199cc9a3b99c880b7790500dc8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii"
+
+[[fn]]
+path = "idna::uts46::verify_dns_length"
+kappa = "1bf2ea631d821339ca17c8d1637e93742f1d8ac9ffbfc7066764857ef8829fd1"
+embedded = "6e8cb9c5f624bc0f3f65f551cfd222fd10ca666075bc6d832e2ee9d41f362bb7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "idna::write_punycode_label"
+kappa = "2082be242eaa8d778215eaee75d9a8f0235e1fdc5a4455ead5924f4dcd6ccced"
+at = "W=u32"
+embedded = "f648eaa981f318c5f2c1270ff16dcc78e4e53dbda556e537da64655e7585ba48"
+status = "residue"
+cause = "mir::Ty: uts46::ProcessingError"
+

@@ -1,0 +1,350 @@
+# The flate2 register (written by `uorust crate flate2@1.1.11`; do not edit): every body of
+# flate2's MIR at flate2 1.1.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 439
+translated = 4
+residue = 435
+
+[module.bufreader]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.crate]
+bodies = 12
+translated = 3
+residue = 9
+
+[module.crc]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.deflate]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.ffi]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.gz]
+bodies = 129
+translated = 1
+residue = 128
+
+[module.mem]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.zio]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.zlib]
+bodies = 79
+translated = 0
+residue = 79
+
+[embedding]
+bodies = 439
+embedded = 439
+evaluable = 439
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 106
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: mem::Status"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: gz::GzHeader"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: zlib::read::ZlibDecoder<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: crc::Crc"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: deflate::read::DeflateDecoder<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: zlib::read::ZlibEncoder<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: deflate::read::DeflateEncoder<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: gz::GzBuilder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: gz::bufread::GzDecoder<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: GzHeader"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: bufreader::BufReader<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: deflate::bufread::DeflateDecoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: gz::bufread::GzEncoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: gz::read::GzEncoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: gz::write::GzEncoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: zlib::bufread::ZlibDecoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: zlib::bufread::ZlibEncoder<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Compress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Decompress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: deflate::bufread::DeflateEncoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: gz::read::GzDecoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: inner::Crc"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mem::DecompressError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mem::FlushCompress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mem::FlushDecompress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CrcReader<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: gz::bufread::MultiGzDecoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: gz::read::MultiGzDecoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zlib::write::ZlibDecoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zlib::write::ZlibEncoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Compression"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CrcWriter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::write::DeflateDecoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::write::DeflateEncoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gz::write::GzDecoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gz::write::MultiGzDecoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mem::CompressError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::Deflate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::Inflate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Writer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ffi::miniz_oxide::ErrorMessage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gz::GzHeaderParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::MZFlush"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: miniz_oxide::MZFlush::Finish::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: miniz_oxide::MZFlush::Full::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: miniz_oxide::MZFlush::None::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: miniz_oxide::MZFlush::Partial::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: miniz_oxide::MZFlush::Sync::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GzBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crc::CrcReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crc::CrcWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crc::inner::Crc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ffi::miniz_oxide::Deflate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ffi::miniz_oxide::Inflate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: gz::GzHeaderState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::Compress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::Decompress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::DecompressErrorInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::DataFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::ErrorMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zio::Writer<u32"
+bodies = 1

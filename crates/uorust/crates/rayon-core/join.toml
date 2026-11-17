@@ -1,0 +1,44 @@
+[[fn]]
+path = "rayon-core::call_a"
+kappa = "029fd5cad689d7da0a7782225236fdd8ba7eab7f4af40d5d74cbb5bf219bde9c"
+embedded = "30dd0d3706b61cdfd46801cb957957a635d501d4a8729323b9178ca02c178ad2"
+status = "residue"
+cause = "mir::Ty: FnContext"
+
+[[fn]]
+path = "rayon-core::call_b"
+kappa = "d695f59afdb6588c247a9ae03dfc45cff3ab9a729a5a089a1a34180665c439cb"
+embedded = "3a5cae5ae8592ae5b24a71203dba3230e997e4d3632ac759e097f0913ca48006"
+status = "residue"
+cause = "mir::Ty: FnContext"
+
+[[fn]]
+path = "rayon-core::join::join"
+kappa = "b6134d5a760676e3e881a55a39f4de5a81c313fa9bc6d0fdd69cf83c4620035d"
+at = "A=u32, B=u32, RA=u32, RB=u32"
+embedded = "2d3df6ce25ba2afe9f458f15b1446747c58f01396558ed0d5256c637e67b3d6c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: join::join::call: rayon-core's MIR stops at type outside the lift: R"
+
+[[fn]]
+path = "rayon-core::join::join::call"
+kappa = "a664a6fdf499ec50ecf564b9efc9f1f62ee11c849ca35fd16049c1bbd2b3234a"
+embedded = "7d69334d91c327a40e7ba564d32ef3e4e5c2bcc4f8e6e2959926796848b1f0a0"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "rayon-core::join_context"
+kappa = "e0742ae1f6e52f05fe152231ec83c382f16ab8b4f2ba1c8cc7dac50bdab080a5"
+at = "RA=u32, RB=u32"
+embedded = "9a28a4c211dc2aab301a6e4376d391f0b88180cd9b631583ad49ea18909ee399"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "rayon-core::join_recover_from_panic"
+kappa = "d35f877132c417113b48f5a5545710afb47f6c15be1878981e591fd43d9f92c9"
+embedded = "88b1a4ed7a3ca125a361307fbc167cf6af6df1f16eaeb7471f496030c1caf4af"
+status = "residue"
+cause = "mir::Ty: WorkerThread"
+

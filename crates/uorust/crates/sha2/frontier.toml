@@ -1,0 +1,228 @@
+# The sha2 register (written by `uorust crate sha2@0.11.1`; do not edit): every body of
+# sha2's MIR at sha2 0.11.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 170
+translated = 7
+residue = 163
+
+[module."_#1"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#2"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#3"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#4"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#5"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module._]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.block_api]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.consts]
+bodies = 7
+translated = 7
+residue = 0
+
+[module.crate]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.sha256]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.sha512]
+bodies = 35
+translated = 0
+residue = 35
+
+[embedding]
+bodies = 170
+embedded = 170
+evaluable = 170
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: block_api::Sha512VarCore"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Sha512VarCore"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: block_api::Sha256VarCore"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: digest::typenum::UTerm"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Sha256VarCore"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: digest::const_oid::ObjectIdentifier<39>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: digest::crypto_common::hazmat::DeserializeStateError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sha256::shani_cpuid::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sha512::avx2_cpuid::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha224"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha256"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha384"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha512"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha512_224"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sha512_256"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::block_api::TruncSide"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: to_u32s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: to_u64s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc32: &[u32; 64]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha256::compress: sha2's MIR stops at mir::TerminatorKind::Call: sha256::shani_cpuid::get: sha2's MIR stops at type outside the lift: sha256::shani_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha256::shani_cpuid::get: sha2's MIR stops at type outside the lift: sha256::shani_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha256::soft::to_u32s: sha2's MIR stops at mir::AggregateKind::Closure: to_u32s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha256::soft::unroll::compress_block: sha2's MIR stops at mir::TerminatorKind::Call: sha256::soft::to_u32s: sha2's MIR stops at mir::AggregateKind::Closure: to_u32s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha512::avx2_cpuid::get: sha2's MIR stops at type outside the lift: sha512::avx2_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha512::compress: sha2's MIR stops at mir::TerminatorKind::Call: sha512::avx2_cpuid::get: sha2's MIR stops at type outside the lift: sha512::avx2_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha512::soft::to_u64s: sha2's MIR stops at mir::AggregateKind::Closure: to_u64s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sha512::soft::unroll::compress_block: sha2's MIR stops at mir::TerminatorKind::Call: sha512::soft::to_u64s: sha2's MIR stops at mir::AggregateKind::Closure: to_u64s::{closure#0}: type outside the lift: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: avx2_cpuid::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shani_cpuid::InitToken"
+bodies = 1

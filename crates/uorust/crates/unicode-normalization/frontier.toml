@@ -1,0 +1,208 @@
+# The unicode-normalization register (written by `uorust crate unicode-normalization@0.1.26`; do not edit): every body of
+# unicode-normalization's MIR at unicode-normalization 0.1.26, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 117
+translated = 25
+residue = 92
+
+[module.__test_api]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.decompose]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.lookups]
+bodies = 13
+translated = 5
+residue = 8
+
+[module.normalize]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.perfect_hash]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.quick_check]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.recompose]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.replace]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.stream_safe]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.tables]
+bodies = 25
+translated = 20
+residue = 5
+
+[embedding]
+bodies = 117
+embedded = 117
+evaluable = 117
+blocked = 0
+
+[differential]
+bodies = 5
+theorems = 32
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: quick_check::IsNormalized"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as Into>::into"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::option::IntoIter<char>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: decompose::Decompositions<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: recompose::Recompositions<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::S_BASE"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Decompositions<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: replace::Replacements<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::L_BASE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::T_BASE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IsNormalized"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Replacements<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_safe::StreamSafe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: decompose_compatible::{closure#0}: mir::TerminatorKind::Call: lookups::compatibility_fully_decomposed: unicode-normalization's MIR stops at mir::TerminatorKind::Call: <char as Into>::into"
+bodies = 1
+
+[[cause]]
+cause = "mir::IrBody: the translation exceeds the projection's file limit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: tables::COMPOSITION_TABLE_SALT: mir::Operand::Constant: tables::COMPOSITION_TABLE_SALT::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item canonical_fully_decomposed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::L_COUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::V_BASE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item normalize::V_COUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: normalize::compose_hangul: unicode-normalization's MIR stops at mir::Operand::Constant: the constant item normalize::L_BASE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: perfect_hash::my_hash: unicode-normalization's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Recompositions<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StreamSafe<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decompose::DecompositionType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recompose::RecompositionState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_safe::Decomposition"
+bodies = 1

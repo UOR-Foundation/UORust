@@ -1,0 +1,63 @@
+[[fn]]
+path = "time-core::days_in_month_leap"
+kappa = "c2af7b01f74c7c383c9e416f166da845fe8e310d5976fab7d3c4684e0b0596f3"
+differential = 7
+embedded = "770649ea58cf72b1dac52bc23bdec444af16b4dd05cb0bc41afe856953d99432"
+status = "translated"
+digest = "ed9c876e30c142260aa29002e9ea9c3b97e3b196b36e0082dedc124f850a59b0"
+
+[[fn]]
+path = "time-core::range_validated::days_in_month"
+kappa = "81e6564b1435521e6ab3571a5071de252b3d526ce851fe5101ec9eb1bcf5966f"
+differential = 7
+embedded = "0035f3e84c08173c8a6169a2f8d446f4927d57c5fc9f481b77c39dd66c563cd8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: util::range_validated::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::<impl i32>::unsigned_abs"
+
+[[fn]]
+path = "time-core::range_validated::days_in_year"
+kappa = "0814af28f5424501d0d63490d1a5ebb631e57b0c25b48be7e2490ce2b0b62211"
+differential = 6
+embedded = "b4fc9ae0a5e9b966832ddbe21c93ddd3166c17a986a85f496815aef75495bbfb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: util::range_validated::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::<impl i32>::unsigned_abs"
+
+[[fn]]
+path = "time-core::range_validated::is_leap_year"
+kappa = "c8f043f6ca5ae438be4092f81f28e5c7cc81bce7b4676372bd126c80be14ba9a"
+differential = 6
+embedded = "f66e871b3a6a58c190495615c802b6579d156d3af59f46ab0a548830b0c0bf86"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::unsigned_abs"
+
+[[fn]]
+path = "time-core::util::days_in_month"
+kappa = "165cafc9b928dfc2183a9e2d6cd142f35401aa199ccfaa08a15171a81a35a991"
+differential = 7
+embedded = "5440c464ce373fa84c04569dfa6b6f4f6efc2be2008a03cbe360833d8e8ef97b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: util::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::<impl i64>::unsigned_abs"
+
+[[fn]]
+path = "time-core::util::days_in_year"
+kappa = "43481ca61e9e7573cc3122a8763fdda685dea2d94865f6357bcd9791f1749da2"
+differential = 6
+embedded = "93fb622d793e322a0402efca3a6b9f896305cb25370f7fda4f9c69c5827ebfaf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: util::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::<impl i64>::unsigned_abs"
+
+[[fn]]
+path = "time-core::util::is_leap_year"
+kappa = "984c2f04ab7d7c55681c73fdf60d191029c876b25064a5fb982564fa963f45c4"
+differential = 6
+embedded = "7e0434cccbb34eae016cf576012bfd9a5241e71bf53be672909faa03bd51c84f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::unsigned_abs"
+
+[[fn]]
+path = "time-core::weeks_in_year"
+kappa = "ff08368e392cd344bb30322031f4d9fbfc978af26b364214a3a0401d539f01e5"
+embedded = "4c698854223ae9294a8780a4d05131cdfa806d2a323252689e2d4e9a75dc06e4"
+status = "translated"
+digest = "72d31743cb8bfc6ee2652e28ee6d229220116fde7e81e5efaab0a08231cfd882"
+

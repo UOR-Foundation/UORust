@@ -1,0 +1,179 @@
+# The bumpalo register (written by `uorust crate bumpalo@3.20.4`; do not edit): every body of
+# bumpalo's MIR at bumpalo 3.20.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 128
+translated = 1
+residue = 127
+
+[module.alloc]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.crate]
+bodies = 98
+translated = 1
+residue = 97
+
+[embedding]
+bodies = 128
+embedded = 128
+evaluable = 128
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 6
+
+[[cause]]
+cause = "mir::Ty: alloc::AllocErr"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: Bump<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: MIN_ALIGN"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AllocOrInitError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RewindGuard<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Bump<#usize_MIN_ALIGN>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CannotReallocInPlace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Layout"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: alloc::CannotReallocInPlace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 2
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AllocErr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ChunkIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NewChunkMemoryDetails"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alloc::Excess"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: FIRST_ALLOCATION_GOAL: mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item MALLOC_OVERHEAD"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Bump::with_capacity: bumpalo's MIR stops at type outside the lift: alloc::AllocErr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: round_down_to: bumpalo's MIR stops at mir::UnOp::Not: on Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: round_up_to: bumpalo's MIR stops at mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: round_up_to_unchecked: bumpalo's MIR stops at mir::TerminatorKind::Call: round_up_to: bumpalo's MIR stops at mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChunkRawIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EmptyChunkFooter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::alloc::LayoutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

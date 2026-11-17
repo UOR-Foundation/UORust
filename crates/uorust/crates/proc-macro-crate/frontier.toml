@@ -1,0 +1,82 @@
+# The proc-macro-crate register (written by `uorust crate proc-macro-crate@3.5.0`; do not edit): every body of
+# proc-macro-crate's MIR at proc-macro-crate 3.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 19
+translated = 0
+residue = 19
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[embedding]
+bodies = 19
+embedded = 19
+evaluable = 19
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: DocumentMut"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FoundCrate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn toml_edit::TableLike"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FilterMap<std::iter::Chain<std::option::IntoIter<&toml_edit::Item>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FlatMap<std::iter::FilterMap<std::option::IntoIter<&toml_edit::Item>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: toml_edit::DocumentMut"
+bodies = 1

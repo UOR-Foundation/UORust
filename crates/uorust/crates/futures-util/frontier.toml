@@ -1,0 +1,2281 @@
+# The futures-util register (written by `uorust crate futures-util@0.3.34`; do not edit): every body of
+# futures-util's MIR at futures-util 0.3.34, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1598
+translated = 4
+residue = 1594
+
+[module.abortable]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.async_await]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.fns]
+bodies = 72
+translated = 0
+residue = 72
+
+[module.future]
+bodies = 412
+translated = 2
+residue = 410
+
+[module.lock]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.stream]
+bodies = 1032
+translated = 2
+residue = 1030
+
+[module.task]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.unfold_state]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 1598
+embedded = 1598
+evaluable = 1583
+blocked = 15
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 182
+
+[[cause]]
+cause = "mir::Ty: Fut"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<u32>>"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: future::try_future::_::Projection<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: future::try_future::_::ProjectionRef<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<core::result::Result<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: FuturesUnordered<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: St"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: stream::select_all::SelectAll<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: FuturesOrdered<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: future::future::_::Projection<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: future::future::_::ProjectionRef<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::result::Result<"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::stream::FlatMap<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::stream::Flatten<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::stream::Inspect<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::stream::catch_unwind::CatchUnwind<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Shared<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TryChunks<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: chunks::Chunks<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: future::either::Either<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::result::Result<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fuse::Fuse<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BufferUnordered<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Buffered<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ReadyChunks<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TryFlattenUnordered<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TryReadyChunks<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: enumerate::Enumerate<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: into_stream::IntoStream<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: peek::Peekable<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: skip::Skip<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: stream::iter::Iter<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: stream::select::Select<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: take::Take<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: try_stream::ErrInto<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: try_stream::InspectErr<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: try_stream::InspectOk<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: try_stream::MapErr<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: try_stream::MapOk<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: zip::Zip<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NestedTryStreamIntoEitherTryStream<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: future::future::IntoStream<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: future::future::fuse::Fuse<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::poll_immediate::PollImmediate<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::select_with_strategy::PollNext"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::_::Projection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::_::ProjectionRef<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::_::Projection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::_::ProjectionRef<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: try_stream::try_flatten::TryFlatten<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <future::future::Map<future::try_future::into_future::IntoFuture<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Fc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StreamFuture<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TryBufferUnordered<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TryBuffered<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: abortable::Abortable<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fns::MapOkFn<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::future::Flatten<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::future::Inspect<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::future::Map<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::future::Then<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::future::shared::Shared<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::join::_::Projection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::join::_::ProjectionRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::poll_immediate::PollImmediate<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::try_join::_::Projection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::try_join::_::ProjectionRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: futures_task::SpawnError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::select_all::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::select_all::IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::stream::_::Projection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::stream::_::ProjectionRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::PollStateBomb<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::into_stream::IntoStream<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <future::future::Map<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChainFn<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Clos"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FlattenStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InspectErrFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InspectFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InspectOkFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapErrFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapOkFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OwnedMutexGuard<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PollNext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReadyToRunQueue<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SharedPollState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TakeUntil<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Task<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TryFlattenStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: abortable::AbortHandle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: abortable::Aborted"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: chain::Chain<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cycle::Cycle<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::ChainFn<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::InspectFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::IntoFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::MapErrFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::MergeResultFn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::OkFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fns::UnwrapOrElseFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future::future::catch_unwind::CatchUnwind<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future::option::OptionFuture<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future::select_all::SelectAll<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::Mutex<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mutex::MutexGuard<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: once::Once<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: scan::Scan<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::futures_ordered::FuturesOrdered<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::FuturesUnordered<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::task::waker_ref::WakerRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::select_all::IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::stream::any::Any<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten::Flatten<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::stream::map::Map<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <fns::IntoFn<u32> as fns::FnOnce1<u32>>::Output"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <fns::MergeResultFn as fns::FnOnce1<u32>>::Output"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <fns::OkFn<u32> as fns::FnOnce1<u32>>::Output"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <future::future::Inspect<future::try_future::into_future::IntoFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <future::future::flatten::Flatten<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <future::future::map::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::try_flatten::TryFlatten<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::Inspect<stream::try_stream::into_stream::IntoStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::map::Map<stream::try_stream::into_stream::IntoStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AbortHandle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aborted"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Collect<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Count<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Inner<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Join3<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Join4<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Join5<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MapInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MapOkOrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeDone<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MutexLockFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NeverError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NextIf<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NextIfEq<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OkInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OptionFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OrderWrapper<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OwnedMutexLockFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Peek<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PollStateBomb<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Single<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryMaybeDone<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnitError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnwrapOrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnwrapOrElseFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Unzip<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Waiter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WrappedWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: concat::Concat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fns::InspectErrFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fns::InspectOkFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::always_ready::AlwaysReady<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::either::Either<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::future::FlattenStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::future::MapInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::future::NeverError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::future::UnitError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::future::shared::WeakShared<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::join::Join3<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::join::Join4<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::join::Join5<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::join::Join<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::join_all::JoinAll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::pending::Pending<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::ready::Ready<core::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::ready::Ready<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::select::Select<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::select_ok::SelectOk<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::AndThen<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::ErrInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::InspectErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::InspectOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::MapErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::MapOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::MapOkOrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::OkInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::OrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::TryFlatten<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::TryFlattenStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::UnwrapOrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_future::into_future::IntoFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_join::TryJoin3<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_join::TryJoin4<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_join::TryJoin5<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_join::TryJoin<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::try_join_all::TryJoinAll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<&mut u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<&u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::option::Option<alloc::vec::Vec<u32>>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::result::Result<bool"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_task::Waker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_unordered::iter::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures_unordered::iter::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: join::Join<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::MappedMutexGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::MutexGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::OwnedMutexGuard<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mutex::Mutex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: peek::PeekMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ready::Ready<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::empty::Empty<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::iter::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::iter::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::once::Once<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::pending::Pending<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::repeat::Repeat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::repeat_with::RepeatWith<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::FlatMapUnordered<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::all::All<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffer_unordered::BufferUnordered<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffered::Buffered<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chain::Chain<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chunks::Chunks<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::collect::Collect<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::concat::Concat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::count::Count<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::cycle::Cycle<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::enumerate::Enumerate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter::Filter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter_map::FilterMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::FlattenUnorderedWithFlowController<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::FlowStep<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::PollStreamFut<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::SharedPollState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fold::Fold<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each::ForEach<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each_concurrent::ForEachConcurrent<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::into_future::StreamFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::next::Next<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::Peekable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::ready_chunks::ReadyChunks<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::scan::Scan<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::select_next_some::SelectNextSome<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip::Skip<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip_while::SkipWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take::Take<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_until::TakeUntil<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_while::TakeWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::then::Then<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::unzip::Unzip<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::stream::zip::Zip<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::ErrInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::InspectErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::InspectOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::MapErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::MapOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::and_then::AndThen<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::or_else::OrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_all::TryAll<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_any::TryAny<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffer_unordered::TryBufferUnordered<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffered::TryBuffered<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_chunks::TryChunks<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_collect::TryCollect<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_concat::TryConcat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter::TryFilter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter_map::TryFilterMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten::TryFlatten<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::Single<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::TryFlattenUnordered<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_fold::TryFold<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each::TryForEach<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each_concurrent::TryForEachConcurrent<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_next::TryNext<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_ready_chunks::TryReadyChunks<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_skip_while::TrySkipWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_take_while::TryTakeWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::AndThen<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::ErrInto<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::InspectErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::InspectOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::MapErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::MapOk<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::OrElse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::TryFlatten<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::TryFlattenErr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: try_future::into_future::IntoFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: async_await::random::random::promoted[0]: type outside the lift: core::num::Wrapping<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item stream::stream::flatten_unordered::NEED_TO_POLL_INNER_STREAMS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: async_await::random::random: futures-util's MIR stops at mir::Operand::Constant: async_await::random::random::promoted[0]: type outside the lift: core::num::Wrapping<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::future::flatten::Flatten<future::future::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::MapErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::MapOk<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::TryFlatten<future::try_future::MapOk<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::TryFlattenErr<future::try_future::MapErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <future::try_future::try_flatten_err::TryFlattenErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::once::Once<u32> as futures_core::Stream>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::flatten::Flatten<stream::stream::map::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::flatten::Flatten<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::flatten_unordered::FlattenUnorderedWithFlowController<stream::stream::map::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::flatten_unordered::FlattenUnorderedWithFlowController<stream::try_stream::try_flatten_unordered::NestedTryStreamIntoEitherTryStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::stream::map::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::try_stream::MapErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Abortable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: All<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Bomb<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DoublePanic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenUnorderedWithFlowController<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenUnorderedWithFlowControllerProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Fold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ForEach<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ForEachConcurrent<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromA"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InternalState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Lazy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LeakQueueOnDrop<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MergeResultFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Next<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NextIfEqFn<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Notifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OkFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollStreamFut<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Reset<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SelectNextSome<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SelectWithStrategy<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: St1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryAll<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryAny<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryChunksError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryCollect<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryConcat<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryFilter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryFilterMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryFold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryForEach<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryForEachConcurrent<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryJoin3<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryJoin4<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryJoin5<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryJoin<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryNext<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryReadyChunksError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrySkipWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryTakeWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryUnfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnfoldState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: abortable::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: abortable::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: and_then::AndThen<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: async_await::pending::PendingOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: async_await::poll::PollOnce<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = u32> + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32> + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filter::Filter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filter_map::FilterMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::catch_unwind::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::catch_unwind::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::flatten::Flatten<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::flatten::FlattenProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::fuse::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::fuse::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::map::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::map::MapProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::future::map::MapProjReplace<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::lazy::Lazy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::maybe_done::MaybeDone<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::option::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::option::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::poll_fn::PollFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::poll_immediate::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::poll_immediate::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::TryFlattenErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::into_future::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::into_future::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::try_flatten::TryFlatten<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::try_flatten::TryFlattenProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::try_flatten_err::TryFlattenErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_future::try_flatten_err::TryFlattenErrProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_maybe_done::TryMaybeDone<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::try_select::TrySelect<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<alloc::vec::Vec<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::result::Result<alloc::vec::Vec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<core::result::Result<core::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::Poll<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::RawWaker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_task::RawWakerVTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_unordered::iter::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::MutexLockFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lock::mutex::OwnedMutexLockFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: or_else::OrElse<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: skip_while::SkipWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_ordered::OrderWrapper<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_ordered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_ordered::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::abort::abort::DoublePanic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::iter::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::iter::IterPinMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::iter::IterPinRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::ready_to_run_queue::Dequeue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::futures_unordered::task::Task<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::once::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::once::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::poll_fn::PollFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::poll_immediate::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::poll_immediate::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::select::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::select::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::select_with_strategy::SelectWithStrategy<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::select_with_strategy::SelectWithStrategyProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::select_with_strategy::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::all::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::all::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::any::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::any::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffer_unordered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffer_unordered::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::buffered::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::catch_unwind::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::catch_unwind::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chain::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chain::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chunks::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::chunks::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::collect::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::collect::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::concat::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::concat::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::count::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::count::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::cycle::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::cycle::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::enumerate::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::enumerate::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter_map::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::filter_map::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::FlattenUnorderedWithFlowControllerProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::flatten_unordered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fold::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fold::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each_concurrent::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::for_each_concurrent::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fuse::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::fuse::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::map::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::map::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::NextIf<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::NextIfEq<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::Peek<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::peek::PeekMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::ready_chunks::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::ready_chunks::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::scan::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::scan::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::skip_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_until::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_until::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::take_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::then::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::then::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::unzip::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::unzip::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::zip::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::stream::zip::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::and_then::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::and_then::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::into_stream::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::into_stream::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::or_else::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::or_else::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_all::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_all::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_any::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_any::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffer_unordered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffer_unordered::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffered::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_buffered::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_chunks::TryChunksError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_chunks::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_chunks::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_collect::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_collect::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_concat::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_concat::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter_map::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_filter_map::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::NestedTryStreamIntoEitherTryStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_flatten_unordered::PropagateBaseStreamError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_fold::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_fold::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each_concurrent::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_for_each_concurrent::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_ready_chunks::TryReadyChunksError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_ready_chunks::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_ready_chunks::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_skip_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_skip_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_take_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_take_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_unfold::TryUnfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_unfold::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::try_stream::try_unfold::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::unfold::Unfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::unfold::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::unfold::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: take_while::TakeWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: then::Then<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unfold_state::UnfoldStateProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unfold_state::UnfoldStateProjReplace<u32"
+bodies = 1

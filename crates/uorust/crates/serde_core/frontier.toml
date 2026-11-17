@@ -1,0 +1,1305 @@
+# The serde_core register (written by `uorust crate serde_core@1.0.229`; do not edit): every body of
+# serde_core's MIR at serde_core 1.0.229, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2284
+translated = 10
+residue = 2274
+
+[module.de]
+bodies = 2078
+translated = 4
+residue = 2074
+
+[module.format]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.private]
+bodies = 10
+translated = 2
+residue = 8
+
+[module.ser]
+bodies = 193
+translated = 4
+residue = 189
+
+[embedding]
+bodies = 2284
+embedded = 2284
+evaluable = 2268
+blocked = 16
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 260
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::PrimitiveVisitor"
+bodies = 112
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer"
+bodies = 71
+
+[[cause]]
+cause = "mir::Ty: MapDeserializer<'_"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: SeqDeserializer<u32"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: ArrayInPlaceVisitor<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayInPlaceVisitor<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_in_place::TupleInPlaceVisitor<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: BoolDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: BorrowedBytesDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: BorrowedStrDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: BytesDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: CharDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: CowStrDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: EnumAccessDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: F32Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: F64Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: I128Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: I16Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: I32Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: I64Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: I8Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: IsizeDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: MapAccessDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: PairDeserializer<u32"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: SeqAccessDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: StrDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: StringDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: U128Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: U16Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: U32Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: U64Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: U8Deserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: UnitDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: UsizeDeserializer<u32>"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: de::ignored_any::IgnoredAny"
+bodies = 18
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::TupleVisitor<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::Field"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: de::Unexpected<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i128>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u128>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<i128>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<u128>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Visitor"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<isize>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<i16>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<i32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<i64>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<i8>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<isize>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<u16>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<u64>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<u8>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<usize>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MapAccess"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Ok"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Impossible<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_in_place::SeqInPlaceVisitor<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: de::value::private::UnitOnly<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: de::impls::deserialize: serde_core's MIR stops at type outside the lift: <u32 as de::Deserializer<'_>>::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MapAsEnum<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OptionVisitor<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StringInPlaceVisitor<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StringVisitor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UnitOnly<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::impls::OsStringKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::IpAddrKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::SocketAddrKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::BoolDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::BytesDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::CharDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::CowStrDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::F32Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::F64Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::I128Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::I16Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::I32Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::I64Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::I8Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::IsizeDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::StrDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::StringDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::U128Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::U16Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::U32Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::U64Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::U8Deserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::UnitDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::value::UsizeDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::BinaryHeap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SeqAccess"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ser::impls::serialize: serde_core's MIR stops at type outside the lift: <u32 as ser::Serializer>::Ok"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Unexpected<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::impls::range::Field"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::impls::range_from::Field"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::impls::range_to::Field"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::BorrowedBytesDeserializer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::BorrowedStrDeserializer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::EnumAccessDeserializer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::MapAccessDeserializer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::MapDeserializer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::SeqAccessDeserializer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::value::SeqDeserializer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::Buf<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: de::impls::deserialize::FIELDS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: de::impls::deserialize::VARIANTS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ser::iterator_len_hint: serde_core's MIR stops at mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BytesVisitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CharVisitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeFromVisitor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeToVisitor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeVisitor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StrVisitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::value::private::MapAsEnum<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::RefCell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cmp::Reverse<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::Wrapping<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::RwLock<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SerializeMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc104: &u32}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc98: &u32}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::encode_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 0]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 10]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 11]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 12]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 14]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 15]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 16]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 17]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 18]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 19]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 1]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 20]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 21]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 22]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 23]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 24]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 25]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 26]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 27]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 28]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 29]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 2]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 30]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 31]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 3]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 6]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVisitor<[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoolVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buf<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromStrVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IgnoredAny"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InPlaceSeed<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PairVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResultVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeedStructVariant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeedTupleVariant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SocketAddrV4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SocketAddrV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecInPlaceVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 0]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 10]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 11]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 12]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 14]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 15]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 16]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 17]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 18]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 19]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 1]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 20]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 21]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 22]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 23]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 24]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 25]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 26]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 27]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 28]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 29]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 2]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 30]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 31]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 3]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 6]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::ArrayVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::BoolVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::BytesVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::CharVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::FromStrVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::StrVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::StringInPlaceVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::StringVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::UnitVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::MapVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::SeqVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize::TupleVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_in_place::VecInPlaceVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::value::SeqDeserializer<std::collections::btree_set::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::value::SeqDeserializer<std::collections::hash_set::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::value::SeqDeserializer<std::vec::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: doc::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Expected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::content::Content<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private::doc::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::btree_map::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::hash_map::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<std::collections::BTreeMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<std::collections::BTreeSet<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 1

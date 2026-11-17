@@ -1,0 +1,70 @@
+[[fn]]
+path = "rustls-webpki::signed_data::<impl at src/signed_data.rs:31:10: 31:15>::clone"
+kappa = "acb4a73fbeac74d7bcfb4254e5d3ec1e0649108624e17245fa40c77f11a3e3a9"
+embedded = "f9c3b17b4a697ed70ae45ee4628c8e036e1b8cfc66aecbcbb70d3d691b21068b"
+status = "residue"
+cause = "mir::Ty: signed_data::OwnedSignedData"
+
+[[fn]]
+path = "rustls-webpki::signed_data::<impl at src/signed_data.rs:31:17: 31:22>::fmt"
+kappa = "9da8c0d69d2e6840ecfc7e96078511ea6a300af8570715cae6b0e7ff8f312d0c"
+embedded = "bccf27b3987126c065cb33ef26feac6ddfc4a2b2e670378ee7595eb88bcb169d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::signed_data::<impl at src/signed_data.rs:66:10: 66:15>::fmt"
+kappa = "9b9eb7919455ef9cebf16cc0d7eb9ead7006686c7f2c99ff2216b137f799da0f"
+embedded = "e68009149233cf9152baa521339b2e5611397a8e51b3cce8e339c52fd2d0cd7d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::signed_data::OwnedSignedData::borrow"
+kappa = "d0f7359bcaee9df4e59b2a9c1b74f581a12489106ed4f309295d88f0aec5b6e6"
+embedded = "8f9bbac1f484dd2fff0d818571da13ad0c1e3706969fd9956822adfba2d976f6"
+status = "residue"
+cause = "mir::Ty: signed_data::SignedData<'_>"
+
+[[fn]]
+path = "rustls-webpki::signed_data::SignedData::from_der"
+kappa = "463bc61a1b7546b7928c5a1185965763e238e8f793af2aca970485b454872a6e"
+embedded = "c805f66ce5139ea22c0c849c334008792e48ccb800e7e703cb2bdf5cd01cde63"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "rustls-webpki::signed_data::SignedData::to_owned"
+kappa = "2f8a565b6721995bdc51582a6f738da5c4494e4fc00d97c797b24d6aeac3d3ed"
+embedded = "422ea50c44230d656f31fff0d55576d77cbe24f60e15ef24426491dd150209a3"
+status = "residue"
+cause = "mir::Ty: signed_data::OwnedSignedData"
+
+[[fn]]
+path = "rustls-webpki::signed_data::SubjectPublicKeyInfo::TYPE_ID"
+kappa = "aeb426c45b01955de4af0c82a470897506d6a17476232e955eca85a7daff977f"
+embedded = "78f81059e26fe466ff87b6d0d6cb51e75a6df65d4b2002d683075b22f5a7e8f9"
+status = "residue"
+cause = "mir::Ty: error::DerTypeId"
+
+[[fn]]
+path = "rustls-webpki::signed_data::SubjectPublicKeyInfo::from_der"
+kappa = "6ee77c7f8e841e3aba9ae0812f357610e61a66e8182847a155bf4ef7e16faea7"
+embedded = "c8ad1df0ca8c3e5e5a73f0a6c9719a8eefeb50953dff0ad4d23bbe1d679c5241"
+status = "residue"
+cause = "mir::Ty: signed_data::SubjectPublicKeyInfo<'_>"
+
+[[fn]]
+path = "rustls-webpki::signed_data::verify_signature"
+kappa = "eabd94d2519611313f52e5dfde9d4baa95c22028e861820f4440d7f10761adc3"
+embedded = "2327c39a021e5e41a9d75ab246573111b45f8cd20f3d4050f3bda97e5de178bc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_signed_data"
+kappa = "edb1369d2579475ed7b8c082a8c7abc064448b8cd3796058cd414822613f2e45"
+embedded = "c1da23c199f9eb65b63abbe2c2d30241cb72839dd35b8b041b851a1158b50f92"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

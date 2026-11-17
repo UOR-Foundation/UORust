@@ -1,0 +1,638 @@
+[[fn]]
+path = "url::FRAGMENT"
+kappa = "8c685013c2757193f1e1f9467b59a004060d01de77059a49e098f823b8d73757"
+embedded = "9846b5865b896e203bd3de6cf9bfd6590bc5b837ca890a314140cb808975fb1b"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::PATH"
+kappa = "6624c3f82cc1fede2f08ad455356985b88f2275c733ad44dc0c0f0d4eb7397dd"
+embedded = "76e863181893b5f68d753040786600f9d7b8ddca082fca6cf07f1779b80c38ca"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::PATH_SEGMENT"
+kappa = "613becb4fe05077aabe8bdff3abbeed1ae49bdd6e787944f79cb15b5288cdec5"
+embedded = "728e00bba33ce7365de289d81b37c248fe97f2dbdbef576771175b9d58c00545"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::QUERY"
+kappa = "57e0582ee63b58682493090732e1747542118f87df2e36052a8ed04bd10af4f7"
+embedded = "640a34b2f1085c1fe71c208ab2f52a4409f4bb3b209fc66b706270660f2be94c"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::SPECIAL_PATH_SEGMENT"
+kappa = "f62ca9f973dc02f7433824e1fa94beb133beba36d32dafa7f14f94bab6a9b93c"
+embedded = "cb44df0712e0071452591422733c7b2b760074f654dd349917d0981b0496d79c"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::SPECIAL_QUERY"
+kappa = "e66f3f4b546776cb05d141fa5a0ae408480a1972f246724341e3bd23f4a341da"
+embedded = "51824a40446aa4239556f6c400f66509860d6ef5213dda58dd952ac8bc8c927d"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::USERINFO"
+kappa = "739f4783fdd81c9739e8904f84118d744f091c665ab4b640a49da6202f9e74f6"
+embedded = "1aa5fe4e498e400ff7a34ec5511ca27332625291343b705a11512ae93116b729"
+status = "residue"
+cause = "mir::Ty: percent_encoding::AsciiSet"
+
+[[fn]]
+path = "url::ascii_alpha"
+kappa = "dddf0fa98b3a017e559c4c49166bd360a1287500a7616d4124e465134a8103b0"
+embedded = "15fa9214162447ef2493079b858da44aea7a3d27bc062745c21121997e0ee943"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_alphabetic"
+
+[[fn]]
+path = "url::ascii_tab_or_new_line"
+kappa = "d48fcf0bfda4409a9741dc5b7e3f73652036baaacb5421251d20f4a157b11ba8"
+embedded = "f8bd291791b3d4d127b92203c31c97dcaddcbd7c0a446b0de0bd6d8c885fe50c"
+status = "translated"
+digest = "f32243abbff9204744b8bca28d3bfa61d567c1bfa8599bda7a2d154a6c4788c9"
+
+[[fn]]
+path = "url::c0_control_or_space"
+kappa = "394c6464138bea560fb27a775fa103118fbcb38ab6b9d8bc849cea0b8cd59075"
+embedded = "9b0c5d9b80b098678ba2abd8a0f47944060e891f28761bacd89d0032bde1970f"
+status = "translated"
+digest = "0e1ffd3474e192b5ccd4e9f03a6e45f5976b4f82dc8735f58ba972ac920d2ec3"
+
+[[fn]]
+path = "url::check_url_code_point"
+kappa = "3f8fd7b5fcfc606dce71376a6d09d8f8e7d6e4827e08192318d92d367388a2ec"
+embedded = "46d73ec9d07de7767d419067c0ff1316f3e5fcb2b3bb3b05db1e4f9ec353d575"
+status = "residue"
+cause = "mir::Ty: dyn Fn(SyntaxViolation)"
+
+[[fn]]
+path = "url::default_port"
+kappa = "1535126ca124e479ec10c9104f3bd37532837c8976bdd053099943833c71e912"
+embedded = "9392599943423e002b7228c6bcd1446089acab89a0706b829508df82c60f6f63"
+status = "translated"
+digest = "a906309ebc58555d941938dde5206c0e1b8fdcdf52e6568a15bd2fc05d07d5d3"
+
+[[fn]]
+path = "url::fast_u16_to_str"
+kappa = "e0ff8bad388a80e5f0942b12802a77a57cae3c6945b1658fe90b5d7f22cb1f9b"
+embedded = "482ec884fbef632c8941e4694e18982f0402eb904225323ffa8ba819dbd0fd70"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "url::is_normalized_windows_drive_letter"
+kappa = "b3a8e525195f5eaf98ed5cacc478ab079cfc81820337be1eeacdf0f4b01d7b1a"
+embedded = "a71b2b4b0a01291b3171e7aa78638cf7ef2c29325bea56bade8046cc43de6557"
+status = "residue"
+cause = "mir::TerminatorKind::Call: parser::is_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: parser::starts_with_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "url::is_url_code_point"
+kappa = "1315e447ddc9cc52d4188e5d1a836df960089695da90edb625291a44815b3450"
+embedded = "6f4d998a580ca0e836d08cb2684b9eb710398f844f9397f3388b0c2d75c06671"
+status = "residue"
+cause = "mir::IrBody: the translation exceeds the projection's file limit"
+
+[[fn]]
+path = "url::is_windows_drive_letter"
+kappa = "d13afe4838bc4faaaa78374c4167f653b23e8c3b6f5c5822aaef655514a1a197"
+embedded = "fa8797c9c909a1ed50a20c47dca6c2e2b1193aea55b9d2ec91c692e1f6a2412c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: parser::starts_with_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:113:18: 113:27>::eq"
+kappa = "03d0dfd142ee799dead10c23c163571045f4a469eaf6ea938015de7938e33017"
+embedded = "213528700535953e48a42623b3b4996de92672319fc96c3de239482d765ddeaf"
+status = "residue"
+cause = "mir::Ty: SyntaxViolation"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:113:29: 113:31>::assert_fields_are_eq"
+kappa = "58584d24b738034b25ae405a39b65647f25cda89cd7c3d4d9cc928a16eaf291b"
+embedded = "f291131817e50c72956374df828a485299b475aa4be622e898023de3163b4fe6"
+status = "residue"
+cause = "mir::Ty: SyntaxViolation"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:113:33: 113:38>::clone"
+kappa = "b5b8b0ce400ae409af27bf3dde162bb24c8c056fc5cb143b666f033d1fb685f7"
+embedded = "2f40b2dc92b87ea08438be19668529da749df1414ebf724d31c32968a0f6515e"
+status = "residue"
+cause = "mir::Ty: parser::SyntaxViolation"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:113:46: 113:51>::fmt"
+kappa = "c6ee3941a55791bcb6bf68a232f81d6349af206ba92f220f7ad72308ad682a58"
+embedded = "5a593cf509fd3bd601a59f556663ee59286cdfdd701f08f2f5eeb40782937589"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:159:16: 159:21>::clone"
+kappa = "975699b71bb89af52c69a7ed15b520da4e1b487b006df1857f2dc4204d9423b6"
+embedded = "23cb965808d08548fad8cdb67504b05725642ff0e59938b907d68e58a33d880f"
+status = "residue"
+cause = "mir::Ty: parser::SchemeType"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:159:23: 159:32>::eq"
+kappa = "225652f5b5a15106bf74202b34ee37915ede2e92b7a496052a511bcda32b67f5"
+embedded = "df8f64eca2a748bbd274aea6a3ee145b3c9c76b6bde15112cea6d1d72c5286c0"
+status = "residue"
+cause = "mir::Ty: SchemeType"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:159:34: 159:36>::assert_fields_are_eq"
+kappa = "55f452f0958580740c6e2e4422d4840f33156d575a48394614c3474d06edc12b"
+embedded = "72c87f6109caeca0f3b5494d43130a9e8b35bad1fad917e41134d047b1e270a6"
+status = "residue"
+cause = "mir::Ty: SchemeType"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:195:10: 195:15>::clone"
+kappa = "6ccf9b859691b994587ebf0f90cd36749438896cfda1959cb1b2b3b084ee0fee"
+embedded = "48aafe8f44d21182ec71198d164c1406bf7a9d8a4ddabf37f34249469dad22b4"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:195:17: 195:22>::fmt"
+kappa = "c91bd13033a304bdd3c5a2dc5fc8927c43410a5ebb345af22710a59f1997e038"
+embedded = "d76ad4be1ed8127769cddde57324f72f8712f48c63960e1b286dd30a42fc5e4c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:310:1: 310:22>::split_prefix"
+kappa = "696ca7ffcb2b6b54ee49c9021f01d2ca7308932fb48015142532d63308f93552"
+embedded = "a824d6387237792264864b2d4f5c7061adb699c0c3397f73908cab16e477975f"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:346:10: 346:19>::eq"
+kappa = "878b9dfcbf1c85aaf097fa0204d973479e818c7a9361385e1fd73a4039bf143c"
+embedded = "414f40d0babd2e77669ccf5b99f9c544ee35b268d6bf6c583ecf170c70628742"
+status = "residue"
+cause = "mir::Ty: parser::Context"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:346:21: 346:23>::assert_fields_are_eq"
+kappa = "c16c414cef522fe9e3229c8465ac353f820f4e829aa63d50de6b12a82b58d813"
+embedded = "8c26539276ebdc313c5da9308ff5a1871958ce5d20e03bfee3963012047fc327"
+status = "residue"
+cause = "mir::Ty: parser::Context"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:346:31: 346:36>::clone"
+kappa = "daae2883e55e07e45e0f1a368e049a70d93c26cd5f91627b936fcf907c229383"
+embedded = "3c65febf801552e96df8775c32439d150e7c5dcf6b3bde194f93cc0170a92c4a"
+status = "residue"
+cause = "mir::Ty: parser::Context"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:56:18: 56:27>::eq"
+kappa = "3abb9f159a61a77ab81902f85fc99468d6ad8bbae0be17b0bb7b80eb0304d4cd"
+embedded = "fbdd8d3b4cbbbe7b08daf9053da8373eb203e1e87f906d60ef30e60b95d74929"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:56:29: 56:31>::assert_fields_are_eq"
+kappa = "ed04639a3de2596804a7d700f38d81a379e6ec31e563ce78d4cfe0c790e09b68"
+embedded = "b04be48aa2a0ed5f70835c9388fc08fbc8291c6688bcd4aa995b1ec160d3bf7e"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:56:33: 56:38>::clone"
+kappa = "4e7fe42ba5544a05be972a4ec34be174f5e1a1f92001d09d581dff7687d0b9d0"
+embedded = "9704bdb58c04a903664162827ce20cff7664b0a282f02ccb15646a40b315b398"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::<impl at src/parser.rs:56:46: 56:51>::fmt"
+kappa = "15b40b2bce9837fe3d9cea323196ab7128b7fb468b28dfee82d24c0fd5994079"
+embedded = "0b7c496e8aa16134376c7bf5900e1b45d1485435f11257eb5f2d4a8d4ed96c24"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "url::parser::F::split_prefix"
+kappa = "ef4ef1653402978b910b6f52b8c775daea26e6f4df72181492b3e1c83f80dae2"
+at = "F=u32"
+embedded = "43e9b5b8209f78a42500cee421b0afd668788f80006324418378a03d751a0e71"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::count_matching"
+kappa = "ba1102d8ab78b658930c83ffe02b32efcb5a41b30674671ebca44e678edd2485"
+at = "F=u32"
+embedded = "cf9e56ecbe76ad2e604a0d61dfc2681d4fdb81c7dc182086c8cc6b1719f8df05"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::is_empty"
+kappa = "ae4d5684b5a972992935b142f63d07780a60b77a84642219aaeb42a5d0804f88"
+embedded = "30b580f7f094f5e3e4a4a5805bbded6e402ce85cd088b426819b47c96c2703b8"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::new_no_trim"
+kappa = "ef9ef5b45f1e4e50e8456290f897b504b83836567141cdbebe520f0b4cf38086"
+embedded = "36c3db0b2328d0e1b9a9d7d45b39017add0750a8567123e7f43ca892646264fc"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::new_trim_c0_control_and_space"
+kappa = "8424b8303288b21a8bdd274999eb81cc2921e52aae77e826e479c4f1e5de6153"
+embedded = "209506c659f589ae0e9100a33e31df664dbc9b2c9080f6994c0a1925976aef37"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::new_trim_tab_and_newlines"
+kappa = "5a404ac7835bc6efaa06ef90af9ace004a9ece409f2fbcdb5627285fae4620e7"
+embedded = "60292ab2a57bb354f40a8b51d479a9db56c4f026b4a076d92b2eae2a94a92a40"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::next"
+kappa = "8de4bb8ddbb71e22af2b65d4c5a2e6a617aa15d00cfe4c05205209fee0a01322"
+embedded = "44ebd3d2dd22dfc1f4195f6c6369ceb613687f521e5695eae69fe628c039d492"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::next_utf8"
+kappa = "97dcb3857f4da7023a6925732ad7e102d810e576bbdb269eceb9ab6b5565f396"
+embedded = "960d7a81b86a94ecc95e4259cb9a900aaade981bded16c7608d988c41b5cdb3f"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::size_hint"
+kappa = "0ae096470b4c94b48548c511d7fe12fc0d448b5fd05042699e648aa8c7258598"
+embedded = "3c3c54fde5a2d624dba7668ee6116d9e257198f97689ac2b99780530b9884a09"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::split_first"
+kappa = "2a164a35c6c05a04ac6cecd4e1dcea33064c2980864b7a9ada981394af96f543"
+embedded = "096822e1b5748e8dadd11550ab2935176adce5374592a5b22e7d9c234449e177"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::split_prefix"
+kappa = "182edd5c572b983cdf744d464e505a3e52c809ffabe2ec7509aa04b83da446e7"
+at = "P=u32"
+embedded = "d355dd438f2ae1310b2e2e0ad5fedccb248fe1ae069ccfde75330a34b0be0639"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Input::starts_with"
+kappa = "630fe28b3a8872bc700856447bc9cba533584f9c30c917d235ab02e1fb723cad"
+at = "P=u32"
+embedded = "d9640f502e49e547767e49c6e0c66ba9b8509b182e0688859ff46f37de91627d"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::parser::ParseError::fmt"
+kappa = "87f698d8d040ee6a049a200d4353afec78a776647c31fb383a1fb95d615f50d7"
+embedded = "27aca21ca33f1078351c0393107e82f0377423822c2237cf439000024033371a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "url::parser::ParseError::from"
+kappa = "44fa1f3b34cb8e9434d3983c46e58dccba2b2e47ac88b2d5d6188e789d5ba929"
+embedded = "b2095b92375dd7adaa2ac59a3e030daab04465f4f52a4fd37d7d714ce99a7cb4"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::after_double_slash"
+kappa = "c25e21a4e01f2ba4b177048131baca923a91a12381d670bc675a4dc7923281fb"
+at = "Url=u32"
+embedded = "a1c5cca854abf6ed010714df6f8f3e7e61aee058a3fddac102f1d5aa06c6c2a7"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::check_url_code_point"
+kappa = "97f98f4f5e257c3535d975da098d11abdc58ee07f1543d3c2e10c033443a2b26"
+embedded = "82a6c063ed4e5bc753fc28666a8eb7f410f398cb945916db4cab08d9576595d4"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::file_host"
+kappa = "7a7f0db568af5911d84eae93a723a2db9133f33b97fcbc8e89a01d645ac88667"
+embedded = "3b24909966b9906c4951bc19fcf08b9570342a1fe6f2fb0ecc689b1005c896e2"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "url::parser::Parser::for_setter"
+kappa = "90bb2025b0e59aafd4c13ab72fe9d141ac8b1675fba9383662e05b27d99eeae5"
+at = "Url=u32"
+embedded = "120422ad18c014acee3f8ec09d3256f8583b19a8a53b135027c038cfe519203e"
+status = "residue"
+cause = "mir::Ty: parser::Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::fragment_only"
+kappa = "65001137c0c9e18c2ce7bf9a066659f8267a96e1fce1e95c1155effdd1526745"
+at = "Url=u32"
+embedded = "67039687eb115f4145f586abf9f0ca57fd5475b69b76d30d3bcbe875d05b9453"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::get_file_host"
+kappa = "bbf313bedc1017a62e63080b1ff56845b78fc17fe2a1aadbfc5dc2b938714c5b"
+embedded = "f0926663ea49d10fa07a08f2d7c2026b43f87ecd28e503f456f5b7fba635fbe8"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "url::parser::Parser::last_slash_can_be_removed"
+kappa = "399dd8c76fae5d538ba2658e0a7a075d3cc4ed03b9a341dc31051b5a88f08e93"
+embedded = "87e143c3c1d480f72d42202e2b12200f808a10cfae44e2297efd878d3ecd73c1"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "url::parser::Parser::log_violation"
+kappa = "87f9721807b56cc480908937a45fa9848ea471729b29f51f32a562aeed4492e1"
+embedded = "4ca6158192dc6a05367f65c4f87c79e148137f3847cefa8cd48ebc0cef01d649"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::log_violation_if"
+kappa = "b441d948d45b93190c838cf123e006d5be08f16c5be3fba2e87e2faf16410dee"
+embedded = "314bf2883a31ebfaf8dd3924d16d3b73604960f9bed289239562b3759e100da3"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_cannot_be_a_base_path"
+kappa = "80de3eeed60731f362cee48a9d0ef89d13da07c9dbd378b11e5e1a08b6e2f54b"
+embedded = "4ee4c123225476ab35999e522d3087f1af1ddc425897ae30ddee5a725c1e795e"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_file"
+kappa = "3f37f05c0af2cb835cb79f62976f908a5df42d268e3a2e32a7b21239c1fdffc2"
+at = "Url=u32"
+embedded = "2699eb2bb8c94f90cb6d8d71586b01f924afa6cfbff39c8fe7cd71df1172b84f"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::parse_file_host"
+kappa = "b3122e1934fc143b42157b38d4a7807bf7dc282c73291f5a1f7254341d588117"
+embedded = "55c790226628c5248d7b1a4432d9c5364a0ffd5f92cb1ef49144f3b6e48b49e0"
+status = "residue"
+cause = "mir::Ty: host::HostInternal"
+
+[[fn]]
+path = "url::parser::Parser::parse_fragment"
+kappa = "9cc59171fde47b71818aad187c96ca738d12acd546cf1080f7bfcb24100f5c03"
+embedded = "4ad3264c3d9014f573a2c4565ac503161cf1246fcc0b619e94a1e28015fd9607"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_fragment::FragmentPartIter::next"
+kappa = "37685407ce03106930cb29710b61fd2d1562505e17265898d91e7dc4a3489d2b"
+embedded = "59e003abfdaf475b93cd2a4723c7137aaecb85eae881f67e1baf8abb13eb801a"
+status = "residue"
+cause = "mir::Ty: FragmentPartIter<'_, '_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_host"
+kappa = "86835f9353d73bfd2244285e251677b1d0bf04ae122d2519debebf7824552c58"
+embedded = "08bf6964adbeaaf31e13d5cbde779d25e4d71b46bd7f2df6fbe177a885bbbf99"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "url::parser::Parser::parse_host_and_port"
+kappa = "18e10293b66389721960e8da303af6fc27d83b1c06a1a3bb25529fd02bd42008"
+embedded = "23deb55c5e6787d419d927fece829070a524b324a4d18cc2eea33995e14a86f8"
+status = "residue"
+cause = "mir::Ty: host::HostInternal"
+
+[[fn]]
+path = "url::parser::Parser::parse_non_special"
+kappa = "ff77781300af782e35917cab0ee8282e9eb0d0c994cb67b6881547342124c6c8"
+at = "Url=u32"
+embedded = "f611a5e351dae8125e2442da168bd036fc513f7d54dc8c96b8ec859504d5a3ff"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::parse_path"
+kappa = "0a5de7bb18255fc8cee995d7120051eb02f8a2dfeef7e91c9a2760d93d9326db"
+embedded = "092b1201e6f86e9e9375bfcaa5a0a25ee9e2fa4954621018c1fad0f3c1579d04"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_path_start"
+kappa = "9c378b477cbc1c3656951b150fa728f32706236479296e9e32a09266ac0df1ef"
+embedded = "387aa73c06a2675526cb8c30ebd4fa6681e912329d541fa71fb2e41dd1878dc5"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_port"
+kappa = "297107a91e36aaecd0b33da2256aa078f4988d1ba92f5f2bbb65f349c2b72620"
+at = "P=u32"
+embedded = "ed371fc77946db86d915507c33a924bc188599bc5b329875c43a6b598c72f75e"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_query"
+kappa = "1959efbbe8a328e9bacde89373b0ff490d4ac486419f4ce81af11f9f5eee74a5"
+embedded = "4d25cee54c7b41d4992893cbadc7f46d1e0b9d1043bb55c9f808180118d882fa"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_query::QueryPartIter::next"
+kappa = "a6a9f2659d32bffc0f1bfb247a5f2ded4e3143bbd4227c2183413e51afc13360"
+embedded = "01a17a052bfb6e7da4677347781eb670f42578ca738fe7204f786b6f267322bc"
+status = "residue"
+cause = "mir::Ty: QueryPartIter<'_, '_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_query_and_fragment"
+kappa = "6efc947c989a75c547c610f5966f71db46dc41597ff6e4725a6802f31044f9ef"
+embedded = "142fc719e98fd5930b5b5b715cc2f63c7af80f8fa68885f00749735118457c43"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::parse_relative"
+kappa = "22ee7efbdb3eced17487cececbd114801c7e6a1b20ac819901ba6b8c6eef8d07"
+at = "Url=u32"
+embedded = "dd4bfe555d3949504d594be73806bda709d11659bc6b481857e7987a3fca64ef"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::parse_scheme"
+kappa = "78ad80226fe6b927cceb1e158819ad02fb31ecebe186c561b74a53ab621ba5aa"
+embedded = "93a6f16207e76dea1199903dfe1682007f598f8b9fc1637a4ae346d3ef8460d8"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_url"
+kappa = "d3a92241c81c74b72f3c8fc3c20a4b1fd2a2c6193ec1869d0489380f1541f8f1"
+at = "Url=u32"
+embedded = "a529f24e306e7787779817f3ec44c40683e611f22e9618bd2f296ad5e9313759"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::parse_userinfo"
+kappa = "88ece1ef455aba7447371c93ed8bfd488140cdfb60984828abb5de6bdc921fe0"
+embedded = "18ef510992b666ac939222c60bac6635626384174dc90ea4647d5547e5a5260a"
+status = "residue"
+cause = "mir::Ty: parser::Input<'_>"
+
+[[fn]]
+path = "url::parser::Parser::parse_with_scheme"
+kappa = "ece0454ed2909b58f84f48d1220be2cafa34318268f8487f543a3dae631872f1"
+at = "Url=u32"
+embedded = "320b2afe93f133d24a00b85e28712516560a7b232b7687236097a27567e95c15"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::Parser::pop_path"
+kappa = "693dcfd473b7ef8ba20cc3cb3c4f9997e64b085e1bacbe5cd1ad53835ab57fba"
+embedded = "ca626f6ecfadd1fe5ae2430566b2d7250b2733d630f775ade61e356aa81102db"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::shorten_path"
+kappa = "140a57d4f9faa4ef48d78a97913e1da834b0988d64e0445a48345c0c10ebe675"
+embedded = "0da266fb594689979d15fa44b538a3d31b7d7b2920cbe8bd087a6e191cc645b3"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "url::parser::Parser::with_query_and_fragment"
+kappa = "7c25d4264d6425528f398f094ff73da86852ad1ce9f4fe13a84b8d5dfd0aed63"
+at = "Url=u32"
+embedded = "3831514f31d9f34b5010bfe4c3dd66a3c91f4b00b8fab20e8a2a8e2cbbb3fa70"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+
+[[fn]]
+path = "url::parser::SchemeType::from"
+kappa = "65f44ff1f6946245dbc3db7a8f929577b3ad74e962083421ae56485fed343a65"
+at = "T=u32"
+embedded = "0ec6def573fb7c1488f1f81cda81639ff31e0d9c9996a8d9afb13a804ecbe5c4"
+status = "residue"
+cause = "mir::Ty: parser::SchemeType"
+
+[[fn]]
+path = "url::parser::SchemeType::is_file"
+kappa = "ecf8f5184d37ba25d8b3cb68db2eca13bbac954f6f331c283b264bc87ab9d8ba"
+embedded = "10b3a782a343d1ae89ed5f6c322ce268c05f6a124ea40b2accba0ce9457577a3"
+status = "residue"
+cause = "mir::Ty: SchemeType"
+
+[[fn]]
+path = "url::parser::SchemeType::is_special"
+kappa = "5a3e3bc545acdc6699189c3860b666fa7a5c83fab530243e7d549119870a6666"
+embedded = "7b993d6651ac80cb0ffa358548ec2c0755a7351f29b9d3a3e6ea0110faef6723"
+status = "residue"
+cause = "mir::Ty: SchemeType"
+
+[[fn]]
+path = "url::parser::SyntaxViolation::description"
+kappa = "e0ef9ac9eb7942447f4a3120744719b5627fa8962b2dd9482d4962f4b98bbb27"
+embedded = "b3b93c1ddea23670a9e1a7a2fd2abb2e545303f0a46363ddef42e0f18afad54c"
+status = "residue"
+cause = "mir::Ty: SyntaxViolation"
+
+[[fn]]
+path = "url::parser::SyntaxViolation::fmt"
+kappa = "889039ef6d5305f08deeb7aa3c604927d8ffe5232f595f296d47f06ad756e989"
+embedded = "78a0ac1572581056b909ca1b194432127f486a9c07f53d0122d33e8edce822f0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "url::parser::char::split_prefix"
+kappa = "fb2a34fb6b35e2ee3bd5427361b281ad86c17d10ec54aedba38d4a5a82b65907"
+embedded = "d6433fa0bbb95b57ca11a570d0f7141baef7d0ea5b308fd6bfbe10c97a0be8d8"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::path_starts_with_windows_drive_letter"
+kappa = "8a69fb76dd3227bcf3993823aa8a16089489ced71f1d97147b12ed33bc10e03e"
+embedded = "9388aca053f9f42cdf695651dc0f39b20529dfb2cc24c343ab5200478a6edbc6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "url::push_pending"
+kappa = "2c507fb7d0fd345c83f340cd955d401f693951d411f6d764b11a439e813810b0"
+embedded = "103a9be68e6eadf5761842d0f9c9498da1b52bbb5898109a768a2f90e2d78a37"
+status = "residue"
+cause = "mir::Ty: parser::Context"
+
+[[fn]]
+path = "url::starts_with_windows_drive_letter"
+kappa = "8e8e33cfaa6bd19646bbd9d2263844ae363c55e0ab912eae1ed87b63cedd5b52"
+embedded = "6392295697535ab2150aa73503c890a575ab108348baa7fb02305c0a380c34a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "url::starts_with_windows_drive_letter_segment"
+kappa = "edb32694fa8d9b664c32eb3fbf1ebb45383a7fb1d88dbd93c4b81e76691dda3d"
+embedded = "c5fe0a482b98820fb131242ee5f3271c70362205abd558845c86653d2370750d"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "url::to_u32"
+kappa = "edc8aef9d4772e8e7f2cc40b2d859e2c53ca4e5c244d47d38c0a0d746cba097f"
+embedded = "6456c0c96bb38b699f403c307cbb0a218c3a1c12f7b2c5afd09ded0263461acb"
+status = "residue"
+cause = "mir::Ty: parser::ParseError"
+

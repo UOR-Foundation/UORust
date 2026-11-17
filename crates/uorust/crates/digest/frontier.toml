@@ -1,0 +1,117 @@
+# The digest register (written by `uorust crate digest@0.11.3`; do not edit): every body of
+# digest's MIR at digest 0.11.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 58
+translated = 2
+residue = 56
+
+[module.block_api]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.digest]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.xof_fixed]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 58
+embedded = 58
+evaluable = 58
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<[u8]>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xof_fixed::XofFixedWrapper<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: block_api::ct_variable::CtOutWrapper<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Reset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CtOutWrapper<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidBufferSize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: XofFixedWrapper<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by CustomizedInit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ExtendableOutput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ExtendableOutputReset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Update"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <::OutputSize as Unsigned>::to_usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: block_api::TruncSide"
+bodies = 1

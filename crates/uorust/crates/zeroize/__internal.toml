@@ -1,0 +1,15 @@
+[[fn]]
+path = "zeroize::__internal::<impl at src/lib.rs:836:5: 836:68>::zeroize_or_on_drop"
+kappa = "598730ff484ad06a69ce6c448277e7670ab370fea537db2157ff96bd95475dd1"
+embedded = "6ee23fd77c449f9252ef435aded23d9853de4a9a5b3618d062c21bc745b1a03b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zeroize::__internal::T::zeroize_or_on_drop"
+kappa = "29373f5808b0c9a53c6efd689ce7ded03467e854a3702d7848f50d744afaaa36"
+at = "T=u32"
+embedded = "7bcd25db6b40bc8b2c2b0384e7622caac5c1798f8afb979b4efd6d2014230d86"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:270:1: 272:24>::zeroize: zeroize's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+

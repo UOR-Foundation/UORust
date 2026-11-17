@@ -1,0 +1,526 @@
+[[fn]]
+path = "reqwest::OFF"
+kappa = "2ccec05e6c40ddf6ba6db2f71d07a2df2c48c8c655167dc0d310a436f1d3342b"
+embedded = "7a40b326a9039b1c1dedb966a9f125fe18ac7bcbcefc438c16824e10914b5e80"
+status = "residue"
+cause = "mir::Ty: connect::verbose::Wrapper"
+
+[[fn]]
+path = "reqwest::connect::<impl at src/connect.rs:36:10: 36:15>::clone"
+kappa = "79bc497a67521c8c94f03197b225b49657754378f04639434c0477c8f7a0b6e2"
+embedded = "b213b3c3f77e7baaf9d9ba1a162777220c2f40c78e83e3ba4f4f9ddd749fdc55"
+status = "residue"
+cause = "mir::Ty: connect::Connector"
+
+[[fn]]
+path = "reqwest::connect::<impl at src/connect.rs:483:10: 483:15>::clone"
+kappa = "b4129075f4d49939bc3f0572ee3b818b47b56f54b4a27a2b6552c9df18b8e407"
+embedded = "89de4ebb0825b60c88b75d77d36d9dd46132eb37e4d4c68c832f5b6b3723c1c2"
+status = "residue"
+cause = "mir::Ty: connect::ConnectorService"
+
+[[fn]]
+path = "reqwest::connect::<impl at src/connect.rs:508:10: 508:15>::clone"
+kappa = "6bdf0bd3f34a099f243c01bb3c2a7b0b5c1b254a77c3e917d4b4366c97053e51"
+embedded = "7cd9e577548384b735c08369393d6e1d36c324c2d55d1cebb686a6b2a0b501e3"
+status = "residue"
+cause = "mir::Ty: connect::Inner"
+
+[[fn]]
+path = "reqwest::connect::Connector::call"
+kappa = "10ee08dc368f99692a71d011c83c45a94796b9fd1ff846fe716150ebafa02c01"
+embedded = "3d16020a6652108711d960e61b5df72f61cc38c1d9410eb80802cab9bcb22c56"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<connect::sealed::Conn, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "reqwest::connect::Connector::poll_ready"
+kappa = "7fbf857a9f3ea1dd4c1fed8f3846c3183145bbf4dc3d7573f4e81d25ca293670"
+embedded = "0b7b4e5476adea25b928f5d67b89697b4b9440fc54bc2dfb1ea0a8d6620c35e4"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::build"
+kappa = "ffd3483d1c8a590d0fee1b84936220b563688c8c0d0393176ab47847d6b4fe10"
+embedded = "75ba4d941bced6f2d1a1a061e08bcb78352385faebdc1d7a376d0e72e9d89eed"
+status = "residue"
+cause = "mir::Ty: connect::Connector"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::new_rustls_tls"
+kappa = "91308a481ba24b2c0ca5b5564f4c2a6d8ef108a41f6563009d104dfe305cd9bb"
+at = "T=u32"
+embedded = "c149e283ef87a8a5532fbc3f65bd41090fda90b1f4413a25de5c8868facb6500"
+status = "residue"
+cause = "mir::Ty: connect::ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_keepalive"
+kappa = "3f212de13eba131ea0bf6a1b366261f8a83628227a41ffd376dcb137e1ac1606"
+embedded = "9d47a225c9f6a0d7c6eef63ef7a0efcef1321dd5481fde2c927fab4956b97dab"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_keepalive_interval"
+kappa = "12d1fc8c3a3f6556385d321df38d8f8fc03bd8104981a33740e326b64c6919b1"
+embedded = "a21c19312fdf265d99f25020a7b8fc374ad0a520a3b9eb53b64b6fb657b3fb99"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_keepalive_retries"
+kappa = "7ee345f3d4f20152b9190ae1f28ff21a1d3202cd54e2edfb4616efe80b44f1dd"
+embedded = "569258055e3033e686c8df7f57ceaefb17e3b874d79bbebfe87b610efdfba0bc"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_tcp_user_timeout"
+kappa = "7002d82f3f35e2986eab2b046d80b3a4e7373d4a3c0363797bcd7fd5636b3c19"
+embedded = "a17d3b9f127de6cb6c771efba3c7231a477766425ed6b9236e57ccd21b4e3220"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_timeout"
+kappa = "e1edef4e90ddf13e2467b49b11622607ab74a8c917be08f0d842687c87ac2527"
+embedded = "a5913b885a575238025c6cddd0439d595b400cb97312c6967b281c6cc3e9383a"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_unix_socket"
+kappa = "4ae490397387d77d8f0342b4230190a72125f8121d495f572944a2c39c5af358"
+embedded = "3d8263568ce85be11c723e4014b2e646d22d0d9fe98400c78c661d2e1c6876df"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorBuilder::set_verbose"
+kappa = "ea67af66bdad0e700bbb5db4ca3aef82e289f33d25d8910427e1491d2647a0c0"
+embedded = "0a3504fe14dfb1e0b6790408407433526da668eb0c333a545e66326689773b12"
+status = "residue"
+cause = "mir::Ty: ConnectorBuilder"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::call"
+kappa = "4999eb7a7bf10103a9a81d818e6ea4ced0498ad9d51c55a690179b0f060c90a4"
+embedded = "aa1b4cabfc7c3f02cc6e673980ca0e7ba0175336c13849986297d1d0f0778a1f"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<connect::sealed::Conn, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::connect_local_transport"
+kappa = "20db0a882463a21ea5b3026ab55b1475ddc94928b378ebc64393659085e051f7"
+embedded = "045a7986b7674224a3cb92f3755cd5813222ae4a0e9181bc9a609905e3179252"
+status = "residue"
+cause = "mir::Ty: {async fn body of connect::ConnectorService::connect_local_transport()}"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::connect_via_proxy"
+kappa = "6758912ebbb15d14a275262a01a5905d8105e5e73fffcd0ff51567b2728d8e73"
+embedded = "0b19cf162290b27d459d861b85fc5ea327293dc77f2c9c8545a02cefb33b3854"
+status = "residue"
+cause = "mir::Ty: {async fn body of connect::ConnectorService::connect_via_proxy()}"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::connect_with_maybe_proxy"
+kappa = "71c5ff3dfb5968269ca02fabdb7818e8a773226abee2e823dd0942c9caa295ee"
+embedded = "a3b23ec259b6a32754c9fa9338915313d688c46f6986cd3e708a779349c592a6"
+status = "residue"
+cause = "mir::Ty: {async fn body of connect::ConnectorService::connect_with_maybe_proxy()}"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::poll_ready"
+kappa = "6a55b446593d3ec0301d71e7683447d9c096bb96928e12eec1c8d2862b7b5633"
+embedded = "9c275f2a95461de9474818fcc1ea6df9ba4134e8d640ee4ddb65f6c6dbabfd5e"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "reqwest::connect::ConnectorService::should_use_local_transport"
+kappa = "df7c0bce7484df042a12b065e021481ecd079501a7f55dc9340cc5d42f8764c5"
+embedded = "e0d663ff5542f8e61ea8512fbec1355fc7ee6e7bb1472487f10d3281786383a3"
+status = "residue"
+cause = "mir::Ty: ConnectorService"
+
+[[fn]]
+path = "reqwest::connect::MaybeHttpsStream::tls_info"
+kappa = "8f9ad5fe5994f35f75c678c9b8c1277f0049b70c55a2fd7610c3bb24fa490078"
+embedded = "774bd0b9f93e11e4bde7a66be5d4034ba3995778edb44326d78f0c8deb90ba12"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::MaybeHttpsStream::tls_info#2"
+kappa = "4cd26dad4280241987361d406808d1ec84f95e5fe15db8848a5092648634383c"
+embedded = "c5900ccd12ba08c3442df2e21c03f2027b84d54ab8106a945c1a682fde7b030b"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TcpStream::tls_info"
+kappa = "7030693ff09315e7575ccc15aae1114502fab058a849801fe8d1daeb8c574afc"
+embedded = "4f45a96cc69ef4e80344f74fca95d4043a41ae6f74392478db846aee311f0dfa"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TlsStream::tls_info"
+kappa = "ba9339785d2c58995f3443ec63af585e7ab4a8bb4b7674d4f8d342c3991aa965"
+embedded = "034391a02d1d7c40f2b46841436c0212a370583fce809a917a390e1f76acb0b5"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TlsStream::tls_info#2"
+kappa = "6b4f548dfb0e6994d4c78bc0ece29b516f8d5f145b2d95321e8d8dbfcf570e23"
+embedded = "13e62fc2e4df6c47db286f8d3a64967454b3906e2917e23e3682e6b9fe89cae2"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TlsStream::tls_info#3"
+kappa = "b3bea73ca0844ef4a728d5cde5aa7cf7de9040843997280b4ca00bc3004c6bd0"
+embedded = "9e972243bfa17ae3eb3abcc0f1bd4ed198ebe41cf31b508b44656cf132ec091a"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TlsStream::tls_info#4"
+kappa = "123bdd36d7e786e1cd94ce4de8ca5189636714ae141bf084dfbfb1fb9fcbafff"
+embedded = "246a33b53ebc22e3755d21463b09ea9ce1bd2f2408ba6090c820edb4ea0904fa"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::TokioIo::tls_info"
+kappa = "18f573dedc4179696ec15759182fd286a0bb624686c18b230ae82c94303964d6"
+at = "T=u32"
+embedded = "9d2cfb93e8e3db113de323244c65f8ab1bedd4b0eb3aac06dccf4308f011f740"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::UnixStream::tls_info"
+kappa = "f35adbeb70dc7872c3cbd1abea2de91d4ab798728805d86d90a0565d592bc10b"
+embedded = "2c93db025d200ee2ed92b1b38adab310f88450438e55b8ed85d810faaf9b9efe"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::connect::sealed::<impl at src/connect.rs:1337:14: 1337:19>::fmt"
+kappa = "7d6a3f0619d441c858cc979d04fc914a9d1d147fe12913e14279038580df6b84"
+embedded = "444c238746c0587ee3e3edb954a3745bc058a93b7b7f88bd4c62a014a7cdb27d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::connected"
+kappa = "0ed4f8e539e6391717be16d7c4bfac43aea90e90f21b72c6f451be4dccf10d06"
+embedded = "443e06a782985cdb39777266335e6dc5d69cb82e2ac6537ae9ad7afce8c8c639"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::is_write_vectored"
+kappa = "31dd6280430c1c88a8f507b1f517f31a5d99d38309912d5a5fb9c0adfc9131d3"
+embedded = "0f433492a8129ad430664a054f0e2b9b7a873365ca84122461d5894bd034f321"
+status = "residue"
+cause = "mir::Ty: Conn"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::poll_flush"
+kappa = "86fb589fd54fbedf8efcb7ebd9dda8b25b49637394d8e5fd1a03d77ab49d5679"
+embedded = "5938922f5383863f8823ae8ffc5d0def0cf599b24d16a8ce2e478a7c584e8085"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::poll_read"
+kappa = "b28d2aa87a4c5fdb18cd78d0850b91d5f44bbdc47df1e0c725568038c2456bdc"
+embedded = "8000aabc67ed506afe32c7c0c2d1d23ef3b645ca3c537bd83a33d23a415beaf3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::poll_shutdown"
+kappa = "5b6a6d72ac3d3e0011af05bbab0970d36ce1d186443062bf7957ab96329a919f"
+embedded = "36869d88f630d156581f17ea5a494d5202e4e0dfc9eea31315611e63a1898c8f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::poll_write"
+kappa = "97c04428f23ecf7a9ca7e0e7ff19fd3169ad74526ecbf16eabc56e785894daa4"
+embedded = "df63eb987f018b42c04189bf54a7aaa6bf0eb96e5fd544478c6688661eea0029"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::Conn::poll_write_vectored"
+kappa = "ef1fe553def08de674f5a8160c93ac74dbd01efb52147d3aadec82cfc3da3ae9"
+embedded = "d43ad91fb4c99426c46de76e2f58f1ab320a70ba61ecc3a82669e4f9fdb8864b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::connect::sealed::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "9096a67b2fd6e3c3668062c24fa628a35aa208f4965852bd220452f8a6cedf35"
+embedded = "f75d757783372afaa79ccbf053a9be1fdd62f852243ce8f549e3ecfb03bd3ff1"
+status = "residue"
+cause = "mir::Ty: connect::sealed::_::Projection<'_>"
+
+[[fn]]
+path = "reqwest::connect::sealed::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "e81d2f0798c927426db9b193e3b1006bee4c63c811786d1a0f543f5dba8aa45a"
+embedded = "cb8e12ba6ad19ab8afca76d1eea63abc3dc2911c9cd64b8f6111115e0d23751b"
+status = "residue"
+cause = "mir::Ty: connect::sealed::_::ProjectionRef<'_>"
+
+[[fn]]
+path = "reqwest::connect::sealed::_::__assert_not_repr_packed"
+kappa = "4aeef60d70a29b9c595b1d8686a80f26c51d0717a08517b75904ed15d8f407fb"
+embedded = "8329427f79dd12bf1812e784e489ce12d48661ff183e7dd6521f24ab6647d0d3"
+status = "residue"
+cause = "mir::Ty: Conn"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::connected"
+kappa = "36301248c878910c913c2c163b67244300f90de34204e556117674c3908ff4ff"
+embedded = "ac2222035f5f3f384c3211a680834c04cfce5c46f5877205f7b90b96e1c12501"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::connected#2"
+kappa = "9adc37b236fa4bd025458ac638a921d24c086af591d94cb296f05cf889dfb49a"
+embedded = "a4f9d2e66a01b80a032333b73e57f3124aa09382b46676e6bcca2e74117166b8"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::connected#3"
+kappa = "80de2a8ca27be4b3a4382feda257705268fe357add91191686207fe4c1ca7b37"
+embedded = "093cc90cce1c43a6262bc1c0d723bc58184480d3c4f074c733d86b06ac8cc5df"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::connected#4"
+kappa = "3810dfdc577a5dd29b8faa2a0f0f2fe14d20886160627aacd510a451fc07f295"
+embedded = "9fbef00eedc20f6e638281ec0f70dc6826ed3c022e5d9ae43d41f9b6c1a12005"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::is_write_vectored"
+kappa = "5f854c025954a3028463e4176fc7146759885e19305e3ae84015a888d676ae6c"
+at = "T=u32"
+embedded = "0daeae498d10dfe7301ade22ba2903a1a9e56c83743b637c10aa6029cffabc3c"
+status = "residue"
+cause = "mir::Ty: RustlsTlsConn<u32>"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::poll_flush"
+kappa = "afbdd8ef5283090937ccb941cf6dfb0978baf38d8ec2d3038e0255f9cb311642"
+at = "T=u32"
+embedded = "1f7c635ef55c79f936d70bf044f6a97ad6c2b2f2c4847d169e237ee4a9fc83a4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::poll_read"
+kappa = "5d6e13dc23e4d9069c9ba2f6c0e57842ad7f5476760842a75b9ab41ce464c54d"
+at = "T=u32"
+embedded = "fb08f27af1d9fa27d77344701338c2ed2bd7ad825524b160fa03a68552bc8fe0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::poll_shutdown"
+kappa = "80c5f08b6253abd842724323d15c13eed3e02f514ad15add6d546d29d394e8f0"
+at = "T=u32"
+embedded = "57ff7e0d0d952c30a03536c0cc8dbc9ef25ce0d458850b3c7eb975c018c75847"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::poll_write"
+kappa = "ff67633520d0399e647125cd8a39fecddbb0ebe405a395d5de8b8551fa39fa7b"
+at = "T=u32"
+embedded = "d09a83b50ec12c7d77a9e127391d175e9efc149b27a9ac7962b92582f7a0044f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::poll_write_vectored"
+kappa = "7839a36fd8063d3a2291104830b9c625aebcf99205dff556c45395d9c15a6d8a"
+at = "T=u32"
+embedded = "039892163b86db5ea8e1a41c4f345414b1ea541aec9598d3bced922e16dad213"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::RustlsTlsConn::tls_info"
+kappa = "479362c0150aaf65f528d9949fb550582116bd958f2cd40a5a98152795c1372a"
+at = "T=u32"
+embedded = "6877e930004f019540bf6269c2b7d42134520decd122691986ac28af51e5eb05"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "fd8b7fdab1887ecba2aa88d7408ad6f1fb177175741bf561d85cfb8ecc1db051"
+at = "T=u32"
+embedded = "f91b7a61cdb63b64f46f0ddbee110b5e9ba28fffa502adeb8ea8bb5162ff8a4b"
+status = "residue"
+cause = "mir::Ty: connect::rustls_tls_conn::_::Projection<'_, u32>"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "31fd6a590644daaa1869e7ec66acd9efc8e88a922e865043f479c41bd313ad4a"
+at = "T=u32"
+embedded = "bdf921decd36b7cd2d6692c386d99697feb6c1bb521ad3b0ab51042bfde93081"
+status = "residue"
+cause = "mir::Ty: connect::rustls_tls_conn::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "reqwest::rustls_tls_conn::_::__assert_not_repr_packed"
+kappa = "64ab7d1f24bccf5a960e4c674f6d83e51b96a3155d3abf936b764931743ee857"
+at = "T=u32"
+embedded = "518d0fee545bcff5bdef416e2d0d3ca96a4ad1844e410c151a5567abcbb8fcbf"
+status = "residue"
+cause = "mir::Ty: RustlsTlsConn<u32>"
+
+[[fn]]
+path = "reqwest::uds::<impl at src/connect.rs:1442:17: 1442:47>::reqwest_uds_path"
+kappa = "c3a7cd8198e3452a7a234d868f1a9bc582f8b72a12f1533128858df2e9bedd8e"
+embedded = "3e8bd3a9cfa043c75e4e0958d3199c294a992bdf3fa834469b225001d3b03dad"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "reqwest::uds::<impl at src/connect.rs:1442:17: 1442:47>::reqwest_uds_path#2"
+kappa = "ed9a7bdb84da8b22e860b40fb2d97f8b62867a77c762119a163fc06ef60a9073"
+embedded = "229605221253a99f4defd0f90082e49f1b1ec1aac1564533b9eedd20c50b0ed8"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "reqwest::uds::<impl at src/connect.rs:1442:17: 1442:47>::reqwest_uds_path#3"
+kappa = "8a0f4fe98c910a7d3b907cca94876ba3006f1195ec20d4a59276c825d61f8076"
+embedded = "e6fcd0d2c4a36d448e4fb64657c59a7e4cc1aa515d5515b4508d95c0c8320005"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "reqwest::uds::<impl at src/connect.rs:1442:17: 1442:47>::reqwest_uds_path#4"
+kappa = "5dd0dd4758b5d4880a672fa222edf92e3d0b9e813e67d451c0b2b98b4a6940ae"
+embedded = "95b6186f214ce1353057ea2c4fb733001b31a255bbe835984fc9044095fbdf77"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "reqwest::uds::<impl at src/connect.rs:1442:17: 1442:47>::reqwest_uds_path#5"
+kappa = "eaf521575d2108ce938dbe956c93d94aa4a168ad7afa6ea101e3537864b77c14"
+embedded = "75c0411d0149e9ea6fa18d38143a9e78103ac5c61536bd4f13f5929034fa582e"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "reqwest::verbose::<impl at src/connect.rs:2004:14: 2004:19>::clone"
+kappa = "508984e66a99c9e9abc40e503f9ff4418295b33a96ee18e56129f50b12824515"
+embedded = "05f147a41d9d56f776ecb32e8562de10054ac8b026897b863d7daf330ecd4c19"
+status = "residue"
+cause = "mir::Ty: connect::verbose::Wrapper"
+
+[[fn]]
+path = "reqwest::verbose::Vectored::fmt"
+kappa = "c43bf6f675724ceba61673b72ec623e4803cb9249d45e1682b0eaa6abb34d68d"
+embedded = "041f5865c3caef3b79689f9420edfce64db5e30c53e2ef6b855992b91ab75c95"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::connected"
+kappa = "67d172365cea027aad5fb34240a834cca6e0816ae7297c60aa16f3609af57a5c"
+at = "T=u32"
+embedded = "419f76fabe6a152c5389e585da805a09eae6616c85a9f3a797d2eb360358ac54"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::is_write_vectored"
+kappa = "1226966afd28262e65a81a087ae1e372e7385c46112a8ce02021ce1214f51e93"
+at = "T=u32"
+embedded = "d8a308602c58d821143b3e7455f32bea2a9ffc2753b1ac080fbe6a249b808e7b"
+status = "residue"
+cause = "mir::Ty: Verbose<u32>"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::poll_flush"
+kappa = "3655f2aef060399c8f3d0e6301384bb36f0fbf409d6faa09155bde961f989e3f"
+at = "T=u32"
+embedded = "13616d08c48a16dd869a2fedcfc0531e87d68a4c51606de42a895b26f3bac879"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::poll_read"
+kappa = "337c81a5c1f591a18b85e11cf2a4c060a4d61e82bffc7f35e7dae2328e9ca157"
+at = "T=u32"
+embedded = "ed54e0d5c08ec7c5e0a2be5099e8f2d0313ddd7df3521caf7114d6a09f8c4342"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::poll_shutdown"
+kappa = "c28b5169cb5b28b615de059be4d876513ad68160346f5218c7a93236fd5c421c"
+at = "T=u32"
+embedded = "80489d5f8f302e30c98a5d0d8f01f136839c5499e7fb4fcf395d0750f819ea8e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::poll_write"
+kappa = "7f58173b7c73e6269e7a9d524286ad7cd04696e985a89dce9552678d2be27553"
+at = "T=u32"
+embedded = "5b64e33e7a7b510bcf7d266b8b0e5f06bb37e155a247effbd9191e44c38995d0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::poll_write_vectored"
+kappa = "ab13996260e50ac0efb0ef67e72359667cb0b02ac37a3650085f025bbde5df86"
+at = "T=u32"
+embedded = "a86e9b63db901dc2b4b1eeffe3a6b0949b255fd14f591df066757ef99c74154b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "reqwest::verbose::Verbose::tls_info"
+kappa = "94da78c80749539947be103512444d04866d0718e828eeb4e59f96b1618c0a05"
+at = "T=u32"
+embedded = "788216adad5a0b484ee89b92dcb329f3af45d01926e433061d88de7577663ab5"
+status = "residue"
+cause = "mir::Ty: tls::TlsInfo"
+
+[[fn]]
+path = "reqwest::verbose::Wrapper::wrap"
+kappa = "86d78c919d741166a0e68b82419607140e8af3787f931cb60283819cfa42ee42"
+at = "T=u32"
+embedded = "691ae003bab685d3cf53bab7edfe700f9dbe45c5e1750f27d488054cb49e5c65"
+status = "residue"
+cause = "mir::Ty: dyn connect::AsyncConnWithInfo"
+
+[[fn]]
+path = "reqwest::with_timeout"
+kappa = "778b9a7c81e13695b25349b467a9a03650abb5525e426e539035f49d9fb6c73f"
+at = "F=u32, T=u32"
+embedded = "7bb43d131bdd6eea71f7570b6848f488d50370e2eccc27cb75646fb756b1a3ff"
+status = "residue"
+cause = "mir::Ty: {async fn body of connect::with_timeout<u32, u32>()}"
+

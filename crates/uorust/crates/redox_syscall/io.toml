@@ -1,0 +1,293 @@
+[[fn]]
+path = "redox_syscall::Io::readf"
+kappa = "c9dc6df5ff74b6a751cd41318e79f9a324c9d2bec3e29ec87898c47c66e3e9b3"
+at = "Self=u32"
+embedded = "bda4c52690ee8a58828cb3b8fb9c1bbfe8eafe2f757d896a76e13178b6c9cb26"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Io, which u32 does not implement in core"
+
+[[fn]]
+path = "redox_syscall::Io::writef"
+kappa = "99b8dd600a8ecbfb7bacf2675e100b3255f03d51e9631575de12ebfe4af1cb44"
+at = "Self=u32"
+embedded = "cb926779148178298ddb98c5671e8812b0dc72287c893353a3f4e2da8c375e6e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Io, which u32 does not implement in core"
+
+[[fn]]
+path = "redox_syscall::io::ReadOnly::new"
+kappa = "b41fee7135f5a2c33716c05ddf57d2731691f9fed437d45aa932ccc17d07097b"
+at = "I=u32"
+embedded = "7d8f16fc66f78fd3aacd0745f72674e082e1003b4212bdb650ebba41339c9255"
+status = "residue"
+cause = "mir::Ty: io::ReadOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::io::ReadOnly::read"
+kappa = "9741d748ba5dd8c19157d48ae61465a8a19d71f4acc22e1b34136e1ec516d8cb"
+at = "I=u32"
+embedded = "bcd0dee436728a362901ce4cff05f32955faa60dc837e62237c3447ae362b8d1"
+status = "residue"
+cause = "mir::Ty: ReadOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::io::ReadOnly::readf"
+kappa = "a7f5e2c8cf1513056c59b6b02a57e133bb23517f1e006a4c487629fc17b9b925"
+at = "I=u32"
+embedded = "13e12880336ef8579e8eb9bfaa2ee41acf127561f5093c8dd1d9ec3396471af4"
+status = "residue"
+cause = "mir::Ty: ReadOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::io::WriteOnly::new"
+kappa = "89d591d3a3cd80ef5f75a35e1381c01b7f8b1cebb6e567d9f9c60725a76e6470"
+at = "I=u32"
+embedded = "bcdb7186f3f328272a0b8267e7bbd325a3999499e8e0bc3b50b52723d4036c0a"
+status = "residue"
+cause = "mir::Ty: io::WriteOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::io::WriteOnly::write"
+kappa = "dfe84beb8780432676febe2d9f39e8091a9fda4fb4c9c2985334826814c34930"
+at = "I=u32"
+embedded = "1ba5f82bcf9b4a79c5aa93b7edc962b6cc1ba2486b89655da4f072b65ff6cac9"
+status = "residue"
+cause = "mir::Ty: WriteOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::io::WriteOnly::writef"
+kappa = "3f430f1da2167f73856731de03f6fbd41ce58a985a7794b9b1d2bcff74b9b515"
+at = "I=u32"
+embedded = "19c47a15c2b640dcaf7c92ed7a817756886c53c29a7ccbf7ce5fb6ce4ff77029"
+status = "residue"
+cause = "mir::Ty: WriteOnly<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::from"
+kappa = "ac0dadb0e9638069b50c1e7116192f31230e748d3990e1005f1b1e8d7bccf256"
+at = "T=u32"
+embedded = "f9c66fd37d4f75ded82f92211bf2023f7865e336f8b183c8d7aa145fd458ded4"
+status = "residue"
+cause = "mir::Ty: io::mmio::Mmio<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::read"
+kappa = "84d1832f9ce9754a3786079a5e9c2b05cd152f1ef90fdc9d6f7852a96411fdd2"
+embedded = "8c5ec1e2a8f633239d593c91c23757223317008e7123881370ab41218b57f464"
+status = "residue"
+cause = "mir::Ty: Mmio<u8>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::read#2"
+kappa = "8f30f177b3c119dbd5e018807c1bb7f26fb6eb4dc4d854a5289cc3d8231a8950"
+embedded = "3513334a54a625ab519323a2a08af2cc11527b8fc70eb84ec816c263a7f66e29"
+status = "residue"
+cause = "mir::Ty: Mmio<u16>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::read#3"
+kappa = "965d562a458ed34a4a2fa7bc83b9c24e18d89d205dc98d7b3373c997f58a245a"
+embedded = "27161c649ed4fd0ae2871dfba4a8e76a7e225a5028605bde7c9e7090575c05a5"
+status = "residue"
+cause = "mir::Ty: Mmio<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::read#4"
+kappa = "030cd3214195769b463dfcf85f7d16d611c36f442c209021fd57072a91f0771f"
+embedded = "493f4ea64cc6facbaf62f3090415d3428421bc741d050a63afe695b9ef69a0cf"
+status = "residue"
+cause = "mir::Ty: Mmio<u64>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::uninit"
+kappa = "43ac7c0d4d0aaef134f0eb884f6165887480a11ebe0aadf197dab84c2e535c94"
+at = "T=u32"
+embedded = "e1a588a6e5ff5a0441bd68fa4e02a797ebbf147418f7284203b78adf8cdf0410"
+status = "residue"
+cause = "mir::Ty: io::mmio::Mmio<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::write"
+kappa = "7bc14ac2d8f61a6feb31ddb4b453c97146d29cf3c5d89e1e1b4bfc1bbcca4914"
+embedded = "6880322ff5adddf7a2446c854945fd38354ba1f7fa58819d71b5cfb57e28fb93"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Mmio<u8>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::write#2"
+kappa = "edf57d9b8250ef816ce6823f70fde251907a002acfab46cc55cfe06d34eca214"
+embedded = "1f881348c1ac7775839273c082da02b937b38a7f012e670ebbc874ca5e97d4fa"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Mmio<u16>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::write#3"
+kappa = "b771beb44d8bb1496e39cefc2933d83a31ee3060f72a061e7432fd9d68a54533"
+embedded = "3b62e062229dca33c6c03d49af59fcc30f934f94bb5c4f756ff5be92f1bceb80"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Mmio<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::write#4"
+kappa = "1c1050cfc209ff7b93fea50088d975fe6138184cf05cec8960c68c8ae5e34cd1"
+embedded = "07fbd823fa0e19569d2affb0610f182c8e9b1ed754b74bcf37282cb25ddaec50"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Mmio<u64>"
+
+[[fn]]
+path = "redox_syscall::mmio::Mmio::zeroed"
+kappa = "260155756e2ee7d78b61d338e5e49f478ac8b1c7fe5cdff825676362723a229d"
+at = "T=u32"
+embedded = "f6821275f8a13e619f00e989e0c0f3771ac76d80422d96fea0efc120fe7f0f52"
+status = "residue"
+cause = "mir::Ty: io::mmio::Mmio<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::as_mut_ptr"
+kappa = "db3026f83a7be06afee8cb72d282b6c8213a572dc181aaf6b69bfea1246ff6e7"
+at = "T=u32"
+embedded = "1ac77cf124118e2a3b799ba10f84e3a9396942dae071decfe42ee39424b01ff8"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::as_ptr"
+kappa = "ba4724b51e4ecb474a089abf58d048fb8c89ace27e22c7e927a6a5a8c6796e0c"
+at = "T=u32"
+embedded = "5927808b29e7a15c784d97e4709cfa42659dc5357efbd039cfc2ba956d03b2a1"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::new"
+kappa = "9b608752af48ba3c8a00f8f95649b99ba5c1bb9d30a8495e4c27ad766e83269d"
+at = "T=u32"
+embedded = "91d4a25c299dc74c5087624d6dd330f7c3b10549c5b1f367885dd792c81d4447"
+status = "residue"
+cause = "mir::Ty: io::mmio_ptr::MmioPtr<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::read"
+kappa = "7aff15c2275b28d233975a004a214140e433fa340bd0e4b21c137f99a4832cf1"
+embedded = "61899b890472625d498e6f10bcc44d0ed4e0677ed7e3e77bc721ec91ae9f4bd0"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u8>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::read#2"
+kappa = "9185af5331c6d96a5c5f5ea9f780236f02e320585b65499bfb0ac8f0563c7bae"
+embedded = "c2896c5a9ff890cbf44b307be06e0242a66a00ffb2b93242d978f1f006abb264"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u16>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::read#3"
+kappa = "b38281ee0de16cbf361f110119f6ed18976561b3cfa7f4dab0dbf6957686a744"
+embedded = "9d3369a03bbe0b40b053c389291e9e14a71bf9d5283b76ebbe3d5af638aa90a3"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::read#4"
+kappa = "7d01b86cd85e3009065c1656e22c9c76b3ab04e7d16d3087b144606e7f74c55e"
+embedded = "d819abcd50e8e253902064ab183470c34d37112d46b2dcc1dc90295652442ab6"
+status = "residue"
+cause = "mir::Ty: MmioPtr<u64>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::write"
+kappa = "d06438425ca533e526403a7d8cd192b34218c853b442715554831422f9ce7423"
+embedded = "4ed0fce5d542d6264efe9d9cca9eba9838f07fd80477a9c6e45c938c9083471e"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: MmioPtr<u8>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::write#2"
+kappa = "d4f08d470e52f78642c136bdfa85392870decacf25b9f6622406bcfb1fd68acf"
+embedded = "6be9b4ded83b4951a0c5d6c8562a1fbcbe37630bc531ccee999ff7305ff73f27"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: MmioPtr<u16>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::write#3"
+kappa = "61409eb01e5a14c77cc8b83647ffb6b8d563a0152689608689dd69ca16e1cb59"
+embedded = "2e7c30b3687d73e0bfa41f04b816c44f1674484818483cc459a5c198efea4a57"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: MmioPtr<u32>"
+
+[[fn]]
+path = "redox_syscall::mmio_ptr::MmioPtr::write#4"
+kappa = "ed8bfd52277fd952934a54da7e57ca39718e9df942df57dbd6c29b2d8e88c89f"
+embedded = "73e6d006595408317ec48cbb4a42005bc09d177c491d2c9f03b0dc4524044ef3"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: MmioPtr<u64>"
+
+[[fn]]
+path = "redox_syscall::pio::<impl at src/io/pio.rs:6:16: 6:21>::clone"
+kappa = "35560e177a5f2d64dbc48e7d9151d3c995832b9e67ca9e3d2ee6ac85364d74fa"
+at = "T=u32"
+embedded = "fecbf9bc7541cf57b06abbe2b52db7779bc71902ef1df8618a1fc1c07ec6de2e"
+status = "residue"
+cause = "mir::Ty: io::pio::Pio<u32>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::new"
+kappa = "10a900c01493003bf96888d3d5ddfcfc5db90ee6965edc56a64b177a071281fd"
+at = "T=u32"
+embedded = "c2299492086148976507e867a0c2dd3a6ab4fccf2f3d392656486b196df42e50"
+status = "residue"
+cause = "mir::Ty: io::pio::Pio<u32>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::read"
+kappa = "a5188797c0647ab14de77486bac004cb90320a858a66ac4350886e039bd7f7ca"
+embedded = "7bc7a1430f983dc77ef86ca7c66d388f197b8e91a7fbcc74ad51076c9e9941e4"
+status = "residue"
+cause = "mir::Ty: Pio<u8>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::read#2"
+kappa = "fa0b39373ad0b5057d11cd7039aad27033baf25d77e5b9d0cd6a135e46add4d7"
+embedded = "417de4c2526be98c5531f9131d2c88cb7693823c0df693a4c9c32936e8faaf4b"
+status = "residue"
+cause = "mir::Ty: Pio<u16>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::read#3"
+kappa = "31dbfdcbe5640ffbe0653e5fcecca48e78ff6090861d4a1c4b804be1321cf01d"
+embedded = "1a014aa83312cf175047c779ba0accbbe138053ab0047330985e9feab64e42c7"
+status = "residue"
+cause = "mir::Ty: Pio<u32>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::write"
+kappa = "b9612fdf86388ef017b6bbe287cffce4e243be2554c0b6553723e3ddd1a00142"
+embedded = "c881ba61526acf0e44e34b44678511cab9b96bc9e9f4b65a9e5e0e6afb1165cf"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Pio<u8>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::write#2"
+kappa = "18ec808a6fb671eb5587857f340b39acc8b9e32852d97515f2a143f0842e3339"
+embedded = "bcab09a9a2d517bc73fed52fe3a36da84c0205e6bc01ccfdb433387cf4917023"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Pio<u16>"
+
+[[fn]]
+path = "redox_syscall::pio::Pio::write#3"
+kappa = "9e8343e20882420137d45cba0f60c28fdbacf27986ab7c9baf8a3a8915966ca7"
+embedded = "dda0a55f84cb2bc63b67417e37a1c07cecf1200839a3b625233b9c268daaeded"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: Pio<u32>"
+

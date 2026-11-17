@@ -1,0 +1,84 @@
+[[fn]]
+path = "version_check::get_version_and_date"
+kappa = "e10c85c8544b4cd158224cdb8d05a2db62c9ea61cc2c1282cf13175ff4d9152b"
+embedded = "14d2343a2eb59e9badbc98d0ca1a838b65c3f6149398d47f9a42a0f40db2514a"
+status = "residue"
+cause = "mir::Ty: std::env::VarError"
+
+[[fn]]
+path = "version_check::is_exact_date"
+kappa = "ab18c466ce4c2964e57016901e4f3318add54284594e3bbb1213f5f2b7c87f59"
+embedded = "3508f84a8895420edbe2bfef8f0eeaa7b4a3f833f6e4580be1c214c8c218ade5"
+status = "residue"
+cause = "mir::Ty: date::Date"
+
+[[fn]]
+path = "version_check::is_exact_version"
+kappa = "c26211a3e764c9b4a817708adaf3b52393420de962451d786b1e7c12532d73f0"
+embedded = "0088c63bb31460095d5ab78b3f6c3956503d7554745d6b89d6fcaf230e47abae"
+status = "residue"
+cause = "mir::Ty: version::Version"
+
+[[fn]]
+path = "version_check::is_feature_flaggable"
+kappa = "010c8a788d4a4c8fc2ea60503c4d118effff7dde787ffaf4555568d461d94ec9"
+embedded = "6883263543bddfc65664521260df4ec0fa10eafd630f0dade09ff48d7e54a769"
+status = "residue"
+cause = "mir::Ty: channel::Channel"
+
+[[fn]]
+path = "version_check::is_max_date"
+kappa = "7f9ffef147fd91611a031c70fc36619d38b05df28387b8f5812dec65aa51246f"
+embedded = "eb3e028639671f292cc0c5b356461cdc70977a5bdde81ea24644e4a1971a0a6c"
+status = "residue"
+cause = "mir::Ty: date::Date"
+
+[[fn]]
+path = "version_check::is_max_version"
+kappa = "f36d61665f7854ee57f3a0aab277eb5e35998bba13fec0547aaf0e08c331fec1"
+embedded = "380da67b7514a2b0c256dbff1dc1173bdfeb6a0d7b02ca9333b059fb99de90a3"
+status = "residue"
+cause = "mir::Ty: version::Version"
+
+[[fn]]
+path = "version_check::is_min_date"
+kappa = "000af2454be4ff16f575135f4eadd3f978f427e85548ef033f79313a4b6cc7ae"
+embedded = "07714b55ba01326f64adf31695f64ab78b50125f4a275dc43aefc3c50626eacb"
+status = "residue"
+cause = "mir::Ty: date::Date"
+
+[[fn]]
+path = "version_check::is_min_version"
+kappa = "f2693aa40679d46d615fc3cc897c65946b5b887fa454706d2254e3b1c9405ab1"
+embedded = "fa3e2a3364ad70aa9fc41b82a65611c92739595f577f6e90d81eee94da0b87c3"
+status = "residue"
+cause = "mir::Ty: version::Version"
+
+[[fn]]
+path = "version_check::supports_feature"
+kappa = "f6e29a7be24e108495626a2bc4c57ce154b5875682d183ca74948c9399216c3b"
+embedded = "d8fadbb16f4cfa868e962f7cecb8e3b7f6c1c0ea3fce04e5a3d65a75b17a4759"
+status = "residue"
+cause = "mir::TerminatorKind::Call: is_feature_flaggable: version_check's MIR stops at type outside the lift: channel::Channel"
+
+[[fn]]
+path = "version_check::triple"
+kappa = "576938f72c2783d97216456cd1aaaefe503dfe13966d7e708086572faf753e57"
+embedded = "d2691f7f969aca597efb04ea4cd43447d9b270caba45a4a8a92577f37e79f8e7"
+status = "residue"
+cause = "mir::Ty: version::Version"
+
+[[fn]]
+path = "version_check::version_and_date_from_rustc_verbose_version"
+kappa = "728c609f739cae5ca82ff94a1ce597c0bdafbab8e14a5a73b0671c41510d748e"
+embedded = "15e163cdeaa3132f382b6d1b93d656b85aec12739dc7c1e36268108c2fbbb254"
+status = "residue"
+cause = "mir::Ty: std::str::Lines<'_>"
+
+[[fn]]
+path = "version_check::version_and_date_from_rustc_version"
+kappa = "2c30fd8ede1f9e3d767c02e9e037cabe835e52cc360a720854c86c0382b85f3f"
+embedded = "d83111cec74235ac0cd99b974841d95fcd3570de376e825bf27daf55fa24d6b7"
+status = "residue"
+cause = "mir::Ty: std::str::Lines<'_>"
+

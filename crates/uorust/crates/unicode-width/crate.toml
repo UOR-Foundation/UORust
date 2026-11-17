@@ -1,0 +1,44 @@
+[[fn]]
+path = "unicode-width::char::width"
+kappa = "d3f195aa2b3e6105e1c78a2904ddfc33541fd5a97d54823c3a41aedf049140c7"
+embedded = "31a6fcbb0a942f3fd61929cdd2dbe35173050e7e2b1d8306ec175b0553758aa5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: lookup::single_char_width: unicode-width's MIR stops at mir::TerminatorKind::Call: lookup::single_char_width_generic: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+
+[[fn]]
+path = "unicode-width::char::width_cjk"
+kappa = "bac475d606ac08b299dad5da814bd5a748ab41a057d3951ed356ed4807041086"
+embedded = "88684dc8bdc66d98722a23b0034433134f04f582d52ac5668bca2ed762b3bc30"
+status = "residue"
+cause = "mir::TerminatorKind::Call: lookup::single_char_width_cjk: unicode-width's MIR stops at mir::TerminatorKind::Call: lookup::single_char_width_generic: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+
+[[fn]]
+path = "unicode-width::char_iter_width"
+kappa = "d4d4830b1cdc9b6020078f7695d7ab25d0fd9e058052aeeb985d8df25198507f"
+at = "S=u32"
+embedded = "d48ecab53f7b289e860fc1230af456258a498e9a5eed57f72bd408012af0130c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: lookup::str_width: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+
+[[fn]]
+path = "unicode-width::char_iter_width_cjk"
+kappa = "1b5d29334ed8bc311a2b1ba154757d83c79a667fdfba0cbe15b34f32fa0b2d00"
+at = "S=u32"
+embedded = "f5d557be4282137b039559e599d77de2c4a769441bb7c85c0d0ed6996d20c71d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: lookup::str_width_cjk: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+
+[[fn]]
+path = "unicode-width::str::width"
+kappa = "1a0bd2ce47fadf0ce3257b991148f738cfe06daceb97ce70055e76780aee9f90"
+embedded = "0015f0547a0b7852f0607f98f6666064f50b269aa68adf0682d196cc1d319d5c"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+
+[[fn]]
+path = "unicode-width::str::width_cjk"
+kappa = "eb20d7a1fea2dd43e2b89c00eeb7d4f743b518dbe0a05f8f207c328ddd99c5f6"
+embedded = "28b72d6f006787db42b6730e3935db8cbc1c6818b3297d878268b6487edf14b3"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+

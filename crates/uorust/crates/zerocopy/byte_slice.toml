@@ -1,0 +1,57 @@
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:212:1: 212:37>::split_at_unchecked"
+kappa = "dabf6a66dc960b8da80bc97ba80033abdea6441dfd19defbe9f9c07f204aed6d"
+embedded = "402716dd96d5709d519f487c33ced029a8139cb5491b215bed5baaccb82cfc03"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:225:1: 225:47>::into_byte_slice"
+kappa = "48eeab9ac9d91103b80a6d2fea5e873827cca8b91ac33044128adc47d03c45a0"
+embedded = "142d726c5528216630e15c981c6ba775d3c00957ea202959bdcc352dd2ec9d30"
+status = "translated"
+digest = "703d957458584870ac2421e9d1359a05f7aa6a61b415d5bad50ed1f8f22e9528"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:243:1: 243:41>::split_at_unchecked"
+kappa = "cd752c3641cedaf7d1b6896ab4a34d78d2d10abe75b3d5130d512ef7fa8bd701"
+embedded = "10900a3c4a22c4221ca715f9257e4365649060045e16ab5bc931b60e8267d63b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::as_mut_ptr"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:301:1: 301:51>::into_byte_slice"
+kappa = "48cfc45d598eab4782bd379da9e3ca186366109b1081e238aed18ea9e344f246"
+embedded = "d7806ec970d987da3e881a32392cd394eb85e370496a1d6b61e5c20d0676856e"
+status = "translated"
+digest = "2e639eaa887c0601eb2fe3906f749456abf207407c0ba6e05b6ad0f55f485f21"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:313:1: 313:54>::into_byte_slice_mut"
+kappa = "55f5cbfa5a8775157285e1bfbcc16bd75e4f36b92a8dd2d27bea51249f4b2533"
+embedded = "9b70150618a8fa7838cc7dfe923a68b7d06c9b60cc0e0d081b2ee75b40024332"
+status = "translated"
+digest = "aef1e62cddcbbe96ba817265f1f2ce37a95d16061aeeb42fd5127b215c0e65be"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:332:1: 332:51>::split_at_unchecked"
+kappa = "e9ad7f6529f92c1c83445d41f396b348a29f5b89bf85ce93bcd82dc6de95bd5d"
+embedded = "4346ef17b1be95d588a054f1f67ade642f2a14393fedff2a21a37b8746690fc3"
+status = "residue"
+cause = "mir::Ty: core::cell::Ref<'_, [u8]>"
+
+[[fn]]
+path = "zerocopy::byte_slice::<impl at src/byte_slice.rs:352:1: 352:54>::split_at_unchecked"
+kappa = "c4795deb0874bfbe669c66ad8e24ca656818308c602d27c889e2b3e69bd6129e"
+embedded = "b203e546f2f541776c61f6031fd9d153451da9dba168f3fdb6bf7544f92e07e6"
+status = "residue"
+cause = "mir::Ty: core::cell::RefMut<'_, [u8]>"
+
+[[fn]]
+path = "zerocopy::byte_slice::SplitByteSlice::split_at"
+kappa = "b21cd75b79019a197f3c99b3326f67a8f559375218789ba35f1023953c688f39"
+at = "Self=u32"
+embedded = "717adab5a2d902429c0da9ef38a08bef66cb434244fb95e9175f434cab8dd59b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref, which u32 does not implement in core"
+

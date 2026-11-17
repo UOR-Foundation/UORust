@@ -1,0 +1,105 @@
+[[fn]]
+path = "parking_lot_core::SYS_FUTEX_TIME32"
+kappa = "b8e822c05df50ef2c8c772313862bcecabb4c110e52060400f39c7aedd9612a4"
+embedded = "d5bee3cc45aec5330c01f8aac516fe4bd660ae9c6a9c191672d5ab8de49e0e57"
+status = "translated"
+digest = "c7e6f1dcbdb91a671dc9813e648f775d4e2e7e6ff2a2bda59912e521938a193b"
+
+[[fn]]
+path = "parking_lot_core::SYS_FUTEX_TIME64"
+kappa = "adc8aaa36081b1aad9155f3c9b2ebd9970f6af4e3efd9e51507d6737ac483fac"
+embedded = "9c29df1ff2bd1b07773f7f76a19363896c62b0edcdcb58ea2109527c01bea688"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::SYS_futex"
+
+[[fn]]
+path = "parking_lot_core::_"
+kappa = "0a3300b0f952a3e190b9a785df057b993b06d391c65fd9487f5d802476d755f3"
+embedded = "9fd98cd04d0080ed8ee5ffd427b4fbf0ad493b491a2f49024be039d26975dbe0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::is_some"
+
+[[fn]]
+path = "parking_lot_core::errno"
+kappa = "e64271a6abac8d353c56ac5ced2181811635880b7cdae306a398baf9bf62fadb"
+embedded = "dd4e9523c617d50711fdd06c0b1e4b57419919c8b8abdf2b977135efb8a241db"
+status = "residue"
+cause = "mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "parking_lot_core::futex_syscall"
+kappa = "46b4732ec7b8b246ebcde9186618874fa0589c9c4c66b1ed8ece1f73a9da4274"
+embedded = "7282105ff4cb5ad645e680745831d90ea09ecf360e00814d31e87e332dd8efc2"
+status = "residue"
+cause = "mir::Operand::Constant: thread_parker::imp::SYS_FUTEX_TIME64: mir::Operand::Constant: the constant item libc::SYS_futex"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::futex_wait"
+kappa = "ef776ff4a2d4fa21a024691d5a6e6f3547768d107a7af29c941acef7f552839a"
+embedded = "c61eb74e53809bb3c3ff76c6208827926443d2037a512a1398c740193dc555df"
+status = "residue"
+cause = "mir::Ty: ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::new"
+kappa = "d48e96d4b7e8da1a9d397f662d30305d6f5aa0b188246ff4aa93cae74511747f"
+embedded = "40089cade33369e3885ef3bf837872aec027fccb931b81a73e70145234b3a1b6"
+status = "residue"
+cause = "mir::Ty: thread_parker::imp::ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::park"
+kappa = "f9bde7b27e29738689cd58020348c67ad17ab1a927c18cd9d8b5dff4b9c807b0"
+embedded = "88fd0b9f26ea5bcb1d045e133119a446a06db9a07ab128bad7d29b8c8344c12a"
+status = "residue"
+cause = "mir::Ty: ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::park_until"
+kappa = "29d31952bd90f01757bc670721c3e2832c953991ac8096a9ecac1c1460170255"
+embedded = "c767fd53eeb09905e64335a6183907118070ab21c7138dc097ebf02a53e41d42"
+status = "residue"
+cause = "mir::Ty: ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::prepare_park"
+kappa = "d62f2030aefe1a83ffe0322e8706ee39bac19520e75bb10fd3fd03aeeac99f1e"
+embedded = "391215a79967b2d715d014a1496b4d4f37eb3209a940593389e7d546b88b1dcf"
+status = "residue"
+cause = "mir::Ty: ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::timed_out"
+kappa = "cde7f582ca05489a631456a94ac7a144d0cd8bc9c6ddca2a981e180a0163b479"
+embedded = "5e0720f3bff3d96a1bb8e28d8c3401d5c5033a0220f8c606b430fd4380ef47da"
+status = "residue"
+cause = "mir::Ty: ThreadParker"
+
+[[fn]]
+path = "parking_lot_core::imp::ThreadParker::unpark_lock"
+kappa = "148e0c343a49f0c973c036a6254d065718e2019c6821663fc2a0a9b08395ff26"
+embedded = "69be8fc00828b8733d6c31e3d7e2a34ed25fbe4712914a8a4fb59e04d1d888b5"
+status = "residue"
+cause = "mir::Ty: thread_parker::imp::UnparkHandle"
+
+[[fn]]
+path = "parking_lot_core::imp::UnparkHandle::unpark"
+kappa = "c0ec91863b7d23dab3d1e8a60d45b88ad3145091fe6fdb710500e78f1c0b1e90"
+embedded = "ae31347c05c85fc05e663dd7d5828e37a9e9a4af1f2231b7eaf541e93d1ea049"
+status = "residue"
+cause = "mir::Ty: UnparkHandle"
+
+[[fn]]
+path = "parking_lot_core::raw_futex_syscall"
+kappa = "42f5ebad24b1f6de9feb66931ad081bed900366ca1f42efcd46e7f52bb248691"
+embedded = "51bf81a2519b4f78ec5459c4b22a1742b9a5cca85d39e5330defff27c4cdc679"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const Atomic>::cast_mut"
+
+[[fn]]
+path = "parking_lot_core::thread_yield"
+kappa = "a15c8bdf26f881931b703c885bca4ddadd3568d88a484f0338a75dc260e6d14e"
+embedded = "08d61c874303f7bcfc72f85a2356b671ccc5fd4ef352d9d6f360e9d4d957d748"
+status = "residue"
+cause = "mir::TerminatorKind::Call: yield_now"
+

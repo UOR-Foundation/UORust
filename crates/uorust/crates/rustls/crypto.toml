@@ -1,0 +1,2337 @@
+[[fn]]
+path = "rustls::GCM_OVERHEAD"
+kappa = "0b32e2b69a6b5fa7ac92518d5e461038d6d349a21a368bc9538f36ec905690c6"
+embedded = "69807524e18f8007e810da1d4d226875b8cd85f55bc644fc92d8c6db7c781127"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item crypto::aws_lc_rs::tls12::GCM_EXPLICIT_NONCE_LEN"
+
+[[fn]]
+path = "rustls::Hkdf::extract_from_kx_shared_secret"
+kappa = "1d2f588581a835fff923d6e9eea0418cd593c4201001973500359b8e0ec7d7dc"
+at = "Self=u32"
+embedded = "c1cb327a9664edbdd6566b21119de8ea188c51af4eebf6eb5c9d8ca50a8bc51b"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::Hkdf::fips"
+kappa = "4de2bc2904e4f0a26ba0d78902d3125d18a0c86b54d19253ea809c88bfebd604"
+embedded = "b5420e1f8c1f9f952d3309bcb48626d6dc94806ff936260e3b63361104004e84"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::Hpke::fips"
+kappa = "847a948f0b99a20757ce047f0ea225aa07d855749012efa87646eec63bcc77d0"
+embedded = "31b60aeb9268d78b604a8cf4a7bfd05ec4e340d23ca61df8019173d8656d7d76"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::INVALID_KEY_SHARE"
+kappa = "2ca39db6f2ae4329263e585d6fad619efaa2a674f5e2b0070ea95f268dded22d"
+embedded = "246382d261951cf0608939690e65a8155ac03e62964ab1ca8871c169b5fe2498"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::KeyProvider::fips"
+kappa = "23abcfc3656defd75739c1ed8438f45c807362bd089b247a67ec71eadca97217"
+embedded = "5e2795355bd632e1a6a45755b068bd39b63b0a375b75da9e704a0266e65ae842"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::Prf::fips"
+kappa = "f64b27d302bf5fa9b3d4a77903d36da4cfb13b864a8286df8a9c6c7fbc38c774"
+embedded = "66d0ca0e0b8c9288e0e3b966b82a8d97afdf257d2bf2b9baff7e80d2856b2d42"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::SigningKey::public_key"
+kappa = "f6168a7a7d60776ab2b209e887fc971fda8fee5e074333efef3c831d9081bfec"
+embedded = "eada30486d494c14c78b3468c70abc6feaa4a3f4b1bc7425c40f07dc8fadbcb0"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::SupportedKxGroup::ffdhe_group"
+kappa = "9d57678f3efb26b9c51d6a3f8ddb2b58e91b3f3ff9ab56517e45d4f313b0e36d"
+at = "Self=u32"
+embedded = "5e75788f585285db1e788e0c5a55558a3fd2456d3ca56dad22db78862dcc0fc2"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::SupportedKxGroup::fips"
+kappa = "07fe2a9efea7359d3c5fa770a03619b3f8dc8a24a7be1931c07326ab5e869509"
+embedded = "b52d90a613b2cab439e37085f1b56333a02a91bfc3039544085ca748a0acfb5b"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::SupportedKxGroup::start_and_complete"
+kappa = "0821fcaad198bffab21949889b6b1436a7156ff59fe0f404390bfb3a3919010f"
+at = "Self=u32"
+embedded = "4a643adf9b72c3b755744babd5bebe86976af9ae7b09d445dbbd2df53f01f982"
+status = "residue"
+cause = "mir::Ty: crypto::CompletedKeyExchange"
+
+[[fn]]
+path = "rustls::SupportedKxGroup::usable_for_version"
+kappa = "23a77184a6ad90f2d5920314cd8154ed2e0d2bf33b4d7a62daf28db941bd760c"
+embedded = "afe5796f1253bf377b79256d36610629b985f65ad4f7f5f1006a5658e59e652d"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::TLS12_AAD_SIZE"
+kappa = "91025486dd8f70fb3fbd867fedc49306bd9f20f2d157946c7defc5776fec419a"
+embedded = "212490e9354f62ec936b874c58e7cba8d3a9caaead034f4cf1de044c245717c2"
+status = "translated"
+digest = "44135676827263032dc5550671e548b73654a864af5f9ccf4b8d4b0fd2ec50fb"
+
+[[fn]]
+path = "rustls::Tls12AeadAlgorithm::fips"
+kappa = "b23b55288fc333d97b5591736f6a029ae0219b29073682351858495ae5dbfede"
+embedded = "15c4e7e3633927087182dc68257960e4dd268123dad8a99654012cfb013f7e50"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::Tls13AeadAlgorithm::fips"
+kappa = "2a51851e75909d00abf8c041ab58d0c755c22bd0f7b0a490bd867c37b0627ec2"
+embedded = "ce9c2b08610dcf296c0558f2d435405ce5abff20afde4c9a3c8024b8914699ae"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::any_ecdsa_type"
+kappa = "89880ad4eec27c845346c8c21b8e04b582c1f06ac6b683e38dfcc7ab54b60afb"
+embedded = "7e080bd8d4e536bfa0bd4ac2c715191e55588acba68caebab82a4c0c94d926e0"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::SigningKey"
+
+[[fn]]
+path = "rustls::any_eddsa_type"
+kappa = "9e4dbe6f70f20c599a39194e4d32ae1877af2dad4667a0516131ef041d171a41"
+embedded = "00d41a69ba196f3533e3427d874020ec8220fca648f17b615fa4703e1fc8e436"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::SigningKey"
+
+[[fn]]
+path = "rustls::any_supported_type"
+kappa = "9952ca964c689a124d34f16e6825d1e9bb011285f20b99c9dd846f35dd1e4997"
+embedded = "edc3f5ce983bddd9db36443c30609646054b0c94619dda706c1cd3522288c029"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::SigningKey"
+
+[[fn]]
+path = "rustls::convert"
+kappa = "261c94505e8ec435170b24253abc23b7b51761b428f7b6c1c09049a7257b3780"
+embedded = "3e4ba768e4b9c292adefcda20be442dd14dbe31edb7595ce35ba61b5a4d5a39d"
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::<impl at src/crypto/mod.rs:183:10: 183:15>::fmt"
+kappa = "c7a1e1fcbb547b51e064267ef903b944943cd0890e4f10ec838a73632dd61687"
+embedded = "9c3b8d09babae66b4e9abd2b36b9774db8a5a29d7321e0eebca38d4719c5bdcf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::<impl at src/crypto/mod.rs:183:17: 183:22>::clone"
+kappa = "265eba721709f29d9107006e2069fea22a44b13d4b58ef543f91cbf0d382ebfb"
+embedded = "1663539ad699b71a933705fcc280bf0ad3a8e98a2610933037cf7a0fa36d75e8"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::ActiveKeyExchange::complete_for_tls_version"
+kappa = "fd57f8f9bc5000766ea1969c9cef7c2ad1297ab850142a4f6a67e215649bee66"
+at = "Self=u32"
+embedded = "8f87c7bb9fc893dba1fa0684b6db875235133d544c7a393aacd7acbd2681c95e"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::ActiveKeyExchange::complete_hybrid_component"
+kappa = "e77c9fc409adeb0f40f070ff76f2a1b918a5e97dd59867392ef21a600fb488a4"
+embedded = "569ae268a59b3d2c149ab8b8393667af558076443ef14de53bd8f2473cb4db07"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::ActiveKeyExchange::ffdhe_group"
+kappa = "69da857b7cc16db448014ed90d640a7e896970f56602da0bdf964171a4ed4f4d"
+at = "Self=u32"
+embedded = "ecb9d314a7ff4c4de2364af606f0e24b4720334ab944ea6ffe5b84aba443b0e2"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::crypto::ActiveKeyExchange::hybrid_component"
+kappa = "54807981982c5992465a96731e8632090f0cfcb67e811088ac8f045eb208eb34"
+embedded = "dfcf681b7d8b4f2851dc12fb6f350f4d1755b8a55c5c2b6aa18b9d8c37395706"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::crypto::CryptoProvider::fips"
+kappa = "4cf56b1fcf7a7064e9bf20275359add2f0925c6be180d359e7e0aba393a31159"
+embedded = "682afa57b3d801947c0a98ef8278a7b518c930319482ad163b06ededa2957e65"
+status = "residue"
+cause = "mir::Ty: CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::CryptoProvider::from_crate_features"
+kappa = "38ac50b71b6384edd8da1a1144fce85fb119b01acd2b4cd1a05f7f812af48e2e"
+embedded = "85d512831db69fe106e0b614b8c40abdcaf5cbf073a269da908be0ec6e71e170"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::CryptoProvider::get_default"
+kappa = "5fec7f4e5a64fa08057b8e89cc05678765465d17a7d3ebee1f2be4976632f354"
+embedded = "c722984282ef32074b76dfd65d26aac323c2e2bca622fa97e9194c125f7d6338"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::CryptoProvider::get_default_or_install_from_crate_features"
+kappa = "97d4d92177d2013e48ce9ce370371b5fd5f8e9e3259f3fce7883088845fe3b45"
+embedded = "2fb0d4a10a9e530d2f969e32560266b21f196e7b522b2648d67d6701fa3f8a71"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::CryptoProvider::install_default"
+kappa = "d228991e294ef017e072c978fa5d5d274b31a4f989480864dbde51ae2b209bce"
+embedded = "e54cbfd38386324415475f7e45323d14b5b9956674a6ed56141454a4e505091c"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::crypto::SecureRandom::fips"
+kappa = "21a03f4f4cc9ee84f60f021f1aed8eb1591e755dc15b813d9e71f8c5b9844fe1"
+embedded = "6d7fca03411ccb2a7e96b7b2077b500666cf8d911f92706ff29d8f6e21fa718f"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::crypto::SharedSecret::drop"
+kappa = "3e6612903c2b68ba5b296a28b28a205f8fd17c181c42895caee9ab22a3fbe7c2"
+embedded = "04c91306d922e341e759f1a6b005d7760c5084de702bb8a130120dde27086a7e"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::SharedSecret::from"
+kappa = "42df1f3238dafa368ea2f0360bcc61f107ce86b15c841de8970eeddba5a82007"
+embedded = "8a313a1424adc3244b8a7e41e8313a914e1fa3fbee5854ebc12a03ae3c745f4a"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::SharedSecret::from#2"
+kappa = "8c5cf148bc947cb6c37d77ec7c04b025d10f266f343ca2b6e673ea2e91e3b0c8"
+embedded = "e7dfbdd9f7284490465d3fba3719209fede2e7592547c02aac59a4819599eee8"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::SharedSecret::secret_bytes"
+kappa = "c474b3e2e4861dfede193e65efcc9cf578a71a40fd0ac9657d2246eaa5d3bac1"
+embedded = "ce901ba202d2a93b4d1822afc5a8eaa14f2f7888cce8963628c8beace669f0e6"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::SharedSecret::strip_leading_zeros"
+kappa = "b570ff29f647f0a169ed8bc7330a1be7a1ce5293fce9a45049f12dbcfd021524"
+embedded = "13bfcc5b947b8ad9e47aa41511a420f97c12024bdccf0841c503a4719e031adf"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::<impl at src/crypto/aws_lc_rs/mod.rs:68:10: 68:15>::fmt"
+kappa = "991ff2f3d1e883f8345042abeca735f5a6a6f1af813c30d4d4c07c741b704893"
+embedded = "f11c46f696b652a91b1817525d047edb27090ba43dc14dd27caee5781ece8d90"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::AwsLcRs::fill"
+kappa = "c665d642f0354aa4f7ca3b90cea85749c5ff2291e5794c99489cb658ca1c4233"
+embedded = "11417432e5064d8809a05a869023a9610cbb994b084aad48c9d2d2cac868b2a3"
+status = "residue"
+cause = "mir::Ty: rand::GetRandomFailed"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::AwsLcRs::fips"
+kappa = "4a3a478bb6019e01d797e8e482c23c97142a91d89b3555e688b1191fa435c8fd"
+embedded = "edeb4c0273a2c763cc3cf0e2db7912a07b0ccf1978e63c0be1f823b89fb59c57"
+status = "residue"
+cause = "mir::Ty: AwsLcRs"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::AwsLcRs::fips#2"
+kappa = "fb21d46bf975be998cc1605966c6414684e5ab11cf4bd303a31d9daaadf2394b"
+embedded = "2bafb028398a11e4d40020b8f0935ff9a5f336fc1bf426451fddca92c4a4e3d0"
+status = "residue"
+cause = "mir::Ty: AwsLcRs"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::AwsLcRs::load_private_key"
+kappa = "22bf33bdcda3343c38cc22b36f0222a80417113a4035018d07a40e7db1e2cd0b"
+embedded = "7eaefced1b29b93d7828efb5bb4373467da55ac449aed76bd3ba1a4afab6f81d"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::SigningKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::fips"
+kappa = "db08caa5114038448387d5b84caa7171bdf1a7dc3ac0372e5612a1ba48425b8b"
+embedded = "2b3247d97ab7d31a1993f764c7213a2ee1eaa3c87980ecc9b67f5f042356285d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: try_fips_mode"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Context::finish"
+kappa = "183b1c79918a666e0909525eda68a70864f5c91422320f35d157798512952561"
+embedded = "2308e96d71f5c0da53cdb5f6d783e04b2b8e3e81795c998ff364a9fe6ae4f6b2"
+blocked = ["CastKind::Transmute"]
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Context::fork"
+kappa = "bd7d2a28805085c7358b844792543383be68ae146fa979d8c90c910284c57c2d"
+embedded = "b3ca317445434afbfd70d2068e2dd0a6b6fa6d4853ee04a495e8b7cd8cc4d1af"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hash::Context"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Context::fork_finish"
+kappa = "dcd677f6bda89483cc5d7f19096d51e1466eedf4991f40865510499d91e0b982"
+embedded = "ee6c8977334c45febc709a52fa3b74ff6490ce0ee54dc2d1d7a123ab32123516"
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Context::update"
+kappa = "813c00ee959cfbf8c3b76137fcbabb4db719163b85e7325dcaffb3d5a78808c0"
+embedded = "b4f06d2fd455eb7ca893a5d8fe77c38517bdf1d6db769241e18561090ad0757f"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hash::Context"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Hash::algorithm"
+kappa = "a004fc399771b0267022f089f02d9d795d263001373cbf28f6554a5c14466265"
+embedded = "aa977adb932d77db40fcd51898e31433378d1cdf6a6498d83505e2b040eb15cf"
+status = "residue"
+cause = "mir::Ty: msgs::enums::HashAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Hash::fips"
+kappa = "ddc350999ec2ef44c2af0696e09869e3f66703f5ab8f2009669877a1862d0ba2"
+embedded = "b83de615dc139bfdc1a1b6f3574b7342b982559c35674d5e4397579e429af757"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hash::Hash"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Hash::hash"
+kappa = "7d176ec5f496e735ddd89029754bda071edea34b6e4f44b65dcd236040070572"
+embedded = "afedba7b8802784e52f30c7beb6a07d76f0c8a25226827f0e4f17be66fae4280"
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Hash::output_len"
+kappa = "794242c90cd74819f8efbb7255f1ab0558b43236bcaf69cce5a020e77c8636ff"
+embedded = "a7dde082c9a57912294c9c2ef1522f4c082314eb8701a9b2386250fc4dbf8381"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hash::Hash"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hash::Hash::start"
+kappa = "969b763aba38e0474991ac0c5051ee4ccdbf5e6d8362380eef358b185ab7da20"
+embedded = "34631cd062f699b8a9192eee544587f1546a955e362ea1e3661df3944014be6d"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hash::Context"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hmac::Hmac::fips"
+kappa = "56c198e8d0bf020be3044adcf3254913f4b6bbc8e85ed2b0fc47741e42fb11e9"
+embedded = "f85ae5a1e64bc305ec26c69ed1d6d115972d70584f2d70d87f5d6cde609224b2"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hmac::Hmac"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hmac::Hmac::hash_output_len"
+kappa = "c2b9162d7556535f938365f086d7afc0c8082580070b6d35f787686d5e69e6e7"
+embedded = "9fba5bf31189a16d5ffaff7f0c909ae6b74302d93b7d7e6959ea8d6657a586ae"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hmac::Hmac"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hmac::Hmac::with_key"
+kappa = "f264a9ccb9c4099d9e7c187b359bfc0c5f12a7d86d1b4f813fddaab58202a1f9"
+embedded = "802c59ae9cea5903f57f2c5afd132c0b432b2d8ea90a635013f340f8b2e8570f"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hmac::Key"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hmac::Key::sign_concat"
+kappa = "55eacae4c1a5c99e514a87dfcabd58dabcbd5c45c2f7f8a03fcbaa85b8b5152f"
+embedded = "d6195816d82e395604d124ebdb159dfc932d14a51dd513f4704f981a3d3cb2e9"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hmac::Key::tag_len"
+kappa = "3e43a2156de9f172e62879a9b2b305133a9c605d286e856e3fdcbefacf19cf6c"
+embedded = "32822981ab20a6ef62d7b52b25534260d04773d3460d12619f2c3fb48de6e509"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hmac::Key"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::<impl at src/crypto/aws_lc_rs/hpke.rs:858:10: 858:15>::fmt"
+kappa = "861ec1782a4c719b62d179e8810ff02087ad3d3ec7baead0673f1c233995538b"
+embedded = "6e4f6ecc04e2f014fc09f662b72dc13a9d7e1fd218097c190fd49f2182f92f99"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::<impl at src/crypto/aws_lc_rs/hpke.rs:885:10: 885:15>::fmt"
+kappa = "7dbaacd47db0e8bb48fe14b31c14d366aa2fccc01a4968bc61e8a1c7f7e6ea1b"
+embedded = "559fe6a266ec7977d208ddb2494ea33745cb1a8530f85699f32eefe0ea183129"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::<impl at src/crypto/aws_lc_rs/hpke.rs:885:23: 885:28>::clone"
+kappa = "0047c5749ecc296e2d8fc40ff3d22b7106d8499808c98966b1cf72fd843b8516"
+embedded = "f6495b71a10e3471f0f9183fcfc8da19ee3960c0cda6a17230fbc457cf7fca5f"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::LabeledSuiteId"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::AeadKey::drop"
+kappa = "e3f3663362825a2746d518f915e97cc73f3038217054086c5db0b533776b1d58"
+at = "KEY_LEN=#usize_KEY_LEN"
+embedded = "9c651c7af79f00e1079a128449262f6e2d2352d7e70257fd0d22fe3b16ee0a40"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::AeadKey<#usize_KEY_LEN>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::DhKem::decap"
+kappa = "ec4787bc238cc4a12e38dbb0de053515cd25f3c0c919d2ce52aafa7362f4fcfd"
+at = "KDF_SIZE=#usize_KDF_SIZE"
+embedded = "cdfd1f583172c74fcf054d7c5113755faf49ead28f95be79fe5a91e712a2f0d8"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KemSharedSecret<#usize_KDF_SIZE>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::DhKem::encap"
+kappa = "2224306b0ce762b7753cb49906f5c12215c4b103b3ef5c896b15739a01fba766"
+at = "KDF_SIZE=u32"
+embedded = "4dbab9b5444c95f452b93850506ded34447440b440e2bacb44fac8a312a7906f"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KemSharedSecret<u32>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::DhKem::encap_impl"
+kappa = "0b65bccf0f62e39e9b589bdd62c3c3c4d87c001b89822d958f593d991488c86b"
+at = "KDF_SIZE=#usize_KDF_SIZE"
+embedded = "d6aae6e6006d3cd99f8b937f9401b3ffffec29cc6081e0c6d263c07b36ddbc84"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KemSharedSecret<#usize_KDF_SIZE>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::DhKem::extract_and_expand"
+kappa = "3e3cc32f92d5f1d0367ae5a91da42ef8d43ab0618986be8397ea710bac0c297b"
+at = "KDF_SIZE=#usize_KDF_SIZE"
+embedded = "c7ae3e93b240e4fab6bd5b8e54743d28548eaded5023ee9de9f8fea0914234e7"
+status = "residue"
+cause = "mir::Ty: DhKem<#usize_KDF_SIZE>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::fips"
+kappa = "0282a6fbf66d2472e3ad3fb1354a6cc80abe940ce53466d0748ad2f7c57bfc48"
+embedded = "19a062c6812675105d8f1c75a9b4c31d583b757e7f74026c64f1bdb9c1c98f88"
+status = "residue"
+cause = "mir::Ty: KEY_SIZE"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::fmt"
+kappa = "4e61ed64dd5e83ed236669d470c4f6680736759579aa32df95395a74805d4b08"
+embedded = "a99d8c3c6a0b5799215271dadc4d7e71218c5a34142c06b1eabf559aa07f4f29"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::generate_key_pair"
+kappa = "f1de8b9bf9723d4123124f1445f0a2dc57a2001441dec1eb089dc6a1717902d1"
+at = "KDF_SIZE=u32"
+embedded = "47a7b2401795cd7e8d220f312ce740077ceee50dff78733747cd5840a04a9fa1"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::key_schedule"
+kappa = "39b6643cae5460d7faf4bd2efa1bd1147daa11d2a4c4d406232ee2b2935c3e1c"
+at = "KDF_SIZE=u32, KEY_SIZE=#usize_KEY_SIZE"
+embedded = "9f3f83ba35ba1892898b3143a23afb79c22a00033e690a6fb3b6c3bb12e201c7"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KeySchedule<#usize_KEY_SIZE>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::key_schedule_labeled_expand"
+kappa = "2c53d353cd3e8628303dadc9e46fc3566bb7fa0838e3087720375046d6dbd18e"
+at = "KDF_SIZE=#usize_KDF_SIZE, L=#_L"
+embedded = "a01d844749b6ef912491d16718f677377c851d779496eb76c85fb46e32acf928"
+status = "residue"
+cause = "mir::Ty: KEY_SIZE"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::open"
+kappa = "007274e0f7a01c60a874d38771bed77c72b2db43111c8cfbce2fd00448e3b4ae"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "58ee1b69cf54aa5d38a27d7d238c7027e1bec81bfa498f72c9f725f0f9f72933"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::seal"
+kappa = "a44b07fba85bd08f2add61c32b779a2d3a93bd7279040f7e8beab44e5b5ff0be"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "99bfe094f348acde07bd95c5e9568f1e42f075da50cf7387aa51b6d27eb3a268"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::EncapsulatedSecret"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::setup_opener"
+kappa = "ff534b233162475b33b18add8bbd51c6310c9aaf5ea5e10cc2887388dac16bce"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "db10e5911709e84216cd225cfb7fb797c3e122a96e9b407f57ab535c06135b1c"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hpke::HpkeOpener"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::setup_sealer"
+kappa = "7ee6105d154272408a2aa559e6e6f3a63eb9f19f150ae38de10d4e3b1fafaae6"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "62d07959eed935a00976439d03fee323841a6970fb35d7ff14fd0a022f7bd3e2"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::EncapsulatedSecret"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::HpkeAwsLcRs::suite"
+kappa = "ef9f31374a10efe3ffb6b6c61587cc0dd77c4134c9a8ea5b62d1a852cdce6f26"
+embedded = "1d19e3cbda413e75389e4a7a9c56cb4f0cece09296dcca00ceb34c7beccbbb26"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkeSuite"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::KemSharedSecret::drop"
+kappa = "45a10a0ab777d2fb5bd51c1eaa8ef62336daf432fa2e4f6c53743c4476719ed7"
+at = "KDF_LEN=#usize_KDF_LEN"
+embedded = "8427733dc171f5dfbb1f627793ba60549a47262b787ca4408081c57d2ac3d3a7"
+status = "residue"
+cause = "mir::Ty: KemSharedSecret<#usize_KDF_LEN>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::KeySchedule::compute_nonce"
+kappa = "7fc37a2ce6b24ef468cef1aae2a839407ae5a879120ef1d3ebdf86f2f06ee315"
+embedded = "d9bd4835e52978d767f9d7849beddb777f1cc4f61baf5d0958e5ae5648305331"
+status = "residue"
+cause = "mir::Ty: aws_lc_rs::aead::Nonce"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::KeySchedule::increment_seq_num"
+kappa = "114eff929e58147aced6eebd302de88b1db5d78eba1bbac1439b1e9a9b3b5662"
+embedded = "b605deed1ce746e2e459d94005d3f93883b763ea2b487617bb3d3d4dbc609c36"
+status = "residue"
+cause = "mir::Ty: aws_lc_rs::error::Unspecified"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Label::as_ref"
+kappa = "c97d8f15146b7c6c7f8d5e2a33426f2713c0f7b2d044db01d1871fb7257f4470"
+embedded = "ae29fa5510ec24df24229a66cc7a5a13742472ab3df48ca41f9f1fc64d3e6b9a"
+status = "residue"
+cause = "mir::Ty: Label"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::LabeledSuiteId::encoded"
+kappa = "ac7ce88735ca91e502a3b81c7a5495b9b0869aa15720178bd0dcc55d5a0b3303"
+embedded = "9c6e64712aada14177e9a9aa08512382228d05ab2177cab5eb341cab3605c494"
+status = "residue"
+cause = "mir::Ty: LabeledSuiteId"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Opener::fmt"
+kappa = "824443c3f7122cfde9e22fad8868493c47e6cfcc7e5be427ad7256a121ca22d3"
+embedded = "4c87305ea54d500ae26f3ab9ef32a43793828edadb37f7c40476679b460e10b1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Opener::new"
+kappa = "54616d49b0f1af8ab1b8758e0ecc3f22bf5f52fd83df834da871d8ef8dfccdbb"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "3814276843a30ffdda61d38437e8caf8819deb8342d7fed7765cc0ef97482999"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::Opener<u32, u32>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Opener::open"
+kappa = "0511aa04cf151009cceaeef93972e2707766bddbcf83d64752cdbfb2fecda7b3"
+at = "KEY_SIZE=#usize_KEY_SIZE"
+embedded = "48c7eec7c8b6b5e816298cd64fc1cd0606bb512ba77dfd7e631af554675a1267"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Sealer::fmt"
+kappa = "51e7a228f41a1367497000882277bd2468681f6ebbf5d0dfbdb5bcac4b594d79"
+embedded = "bf3998b9ce877a6c5db0f3a692ff5d488d7c12d1228a3d5caf45adfba77e3ae0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Sealer::new"
+kappa = "3cb3304cabc06a106778b264c124336fde6e801f679df6f4307bc4077730df17"
+at = "KDF_SIZE=u32, KEY_SIZE=u32"
+embedded = "a41a12a5054111942ce58c8be982656145bb42615db184dd6bcc2ec43e8f03e9"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::EncapsulatedSecret"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::hpke::Sealer::seal"
+kappa = "212549b718d7117fd9acba92bee57a2f77cad42a804f2ff1f40285d0c0b35f5e"
+at = "KEY_SIZE=#usize_KEY_SIZE"
+embedded = "a239195f70db62d71060b7757ad0a04c0b50acc83824e9283b02a937b7b1f0b9"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::HeaderProtectionKey::decrypt_in_place"
+kappa = "3395570b9bffee72c3c2fe0fa65fbb3574ed55d99f24267a000260641a21d368"
+embedded = "152bc8ec9899edbf4600a6faec40944aae81cef64f0b4d0ae08ed5a823b2724c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::HeaderProtectionKey::encrypt_in_place"
+kappa = "7b4ff098fcf00087641c9f763257bf292041f1983a7c2ac8df791939f651952c"
+embedded = "7e64abb9df0eaad7ca9d02e01df1c59a22ce5e705859275a05e5bc6ca2b7d421"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::HeaderProtectionKey::new"
+kappa = "22d146c183800654138ba69bb38107a51a326115b8084f3b00069158d1cc9de0"
+embedded = "f09d00d3976ae1fd0da728d7adfb9c8e275de954bfa4e1d0a881f2ba38529844"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::HeaderProtectionKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::HeaderProtectionKey::sample_len"
+kappa = "bc9fa94dcd27c0dd0d154a47c4db6e81269182718b5a97b5cff4b50116c6f37a"
+embedded = "8e505b9762670cdbdc5513bd88fe957723152bbb5c9f3298caac806d0be8af7c"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::HeaderProtectionKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::HeaderProtectionKey::xor_in_place"
+kappa = "13d8fb2aab1b03d176150e3f45d666f3e360890b8d64af9124bceb418494b01b"
+embedded = "1c61cc1bf2ed8d27f9a89d5c3e845e88d17bf4911dd16db182ac29111476dee5"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::KeyBuilder::aead_key_len"
+kappa = "56010fcfa608c6db63d2072741aff4819c06588e9977c36b470eafe92f64c00e"
+embedded = "a11261eb374f6f4d9b5ea3bcec281c2cc206df8631da73c55e1fdd3ba9427112"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::KeyBuilder"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::KeyBuilder::fips"
+kappa = "7a445389b1cad6172c8d89ca21da6af0c4d2e5eca93e7f88702b01cc6453a2d1"
+embedded = "2dcd0081261760653e2d345bd80dcacbea2bb08be165fd53c50ea647c1df935f"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::KeyBuilder"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::KeyBuilder::header_protection_key"
+kappa = "da5e7f1e07cb59a19c29cc96ac6097db17cef270bebe0b43c42c56c5b201bef1"
+embedded = "6e64107c44a64d6f47aebe5fd70a9311db4633ccacae77e17bc6e0247f3b9b1e"
+status = "residue"
+cause = "mir::Ty: dyn quic::HeaderProtectionKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::KeyBuilder::packet_key"
+kappa = "ebef14991bf38a6f93e4764fc6c299f5be940877393e9730a7dc4db47e7851e8"
+embedded = "db0f2dc3f7d1f7f9dacb22e1302cc18464784e8fe4994037c1c3f6386ee3f22c"
+status = "residue"
+cause = "mir::Ty: dyn quic::PacketKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::confidentiality_limit"
+kappa = "565885507a6dfc934cd9786947110fc0b1b62d21e2756c4241c1e0fc8039c03f"
+embedded = "0018fa58a91f544fb938b15ee7ff11b8966f948afcea3ee5e81a33480fe980e7"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::PacketKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::decrypt_in_place"
+kappa = "4dc7bf52aacb3a2b216478aebbe1fc3533b8a27f2c153260d9e6db9be8187a87"
+embedded = "b2cdec164f092d6ac6b2a5f64c358010dbb3382efeea1a840d5603d7a20c1d0e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::decrypt_in_place_for_path"
+kappa = "d9d537b65cb223cd690eb0131256e77a3ce3d6d9134cf5ac01fd1327f475d547"
+embedded = "6da53a761c87905e5fc6e6bd92d963dd7aa18bca3391f546b9d3decb5e9690eb"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::encrypt_in_place"
+kappa = "2066fc01b807055f18d67b3319179dc1203447f4f93b51f7d3cf69be5f750f80"
+embedded = "be34b7f11413953531925878448c3e78361d882319443ab2dde53d27eb7dcfee"
+status = "residue"
+cause = "mir::Ty: quic::Tag"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::encrypt_in_place_for_path"
+kappa = "6153bf42a3d377750666190c294adf6f4dbceeafb9e95b2b0a9b7717a9849267"
+embedded = "159410986accb6e5644a1f961d7533f9f23e4159d34926e922708b34960e30e1"
+status = "residue"
+cause = "mir::Ty: quic::Tag"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::integrity_limit"
+kappa = "d4b77bbf7efcddc129c703049f4611e832ae1582d5d53ff297ae623583352fab"
+embedded = "0fba46073a2334508a49173d9b0745c93903bea1fff5bcc86e6fc98532487b6f"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::PacketKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::new"
+kappa = "cda98a879c40c4be1f12c4c6701e88c17623aa08abd474125d81a17e3350a26e"
+embedded = "64509715d942f082f507894e9aeb41d95ece2e08ab2afacac7fedd4d44995bcf"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::PacketKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::quic::PacketKey::tag_len"
+kappa = "3cd79fd620a6e60a6e3bf14aa102245a65eefb2beda59510838157e8a892495f"
+embedded = "6b29b4e1d23a4dec70e81c25908fff7df2c58da4a99050e53ffd86cbabce4607"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::quic::PacketKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::<impl at src/crypto/aws_lc_rs/sign.rs:413:10: 413:15>::clone"
+kappa = "daa7c5d591f5cb175f6a7bd81335f11fde882dd78fd74004e4716f714274bdda"
+embedded = "1dd0ebbfe479ff35b2edb028cf28eba5965e9742f2d993d6567bf96559b0b69b"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::PqdsaKeyKind"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigner::fmt"
+kappa = "321fc9ddaf17d805d2dc7dbcf9e99c703a866f0853a97853b611205ecdd5a624"
+embedded = "150d2113ce9ccae23426e5559e5cd2d254b03a87ecf84f5b8f1b7883824c3f67"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigner::scheme"
+kappa = "f975669abcdf0f3c2aedd9e503d8368aa76f2e3bd35f0c7680ec49a2af882d4c"
+embedded = "7d84f60bd5cfd1cc48237660bc9d025352eb38683968973102cce452a6668c77"
+status = "residue"
+cause = "mir::Ty: enums::SignatureScheme"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigner::sign"
+kappa = "aaa41155e947ab4c08e970c689431d88116cbd46027fa8a64b275bbd1ba24a11"
+embedded = "870f6d4f64bd950ec5f8ec795d42b75296601af100695c50380f7014ab065fa2"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigningKey::algorithm"
+kappa = "a3cfaf364a433d2f47e8f22a4708b1fd38e1f1b7f05a94ae95f8a8bc9edf897c"
+embedded = "edccdf47fbc0661269ca6cf9977b90f66f53d42ced779d0b36ac7081c11834cd"
+status = "residue"
+cause = "mir::Ty: enums::SignatureAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigningKey::choose_scheme"
+kappa = "87caefa9be8188af53e4d89c6d4da1cdbfea71e181926073e0347879060de2d2"
+embedded = "f27bfb792479a6ddc8fa020f03dba0bed2b74c62ae57b9ff187f901d41573208"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::Signer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigningKey::fmt"
+kappa = "9e15e11b388cbc210c2606c9c59782f45497ff47672734434bbc86e68451d520"
+embedded = "3071569bdfb3cd896be17cc6f73d9a1eb6d5ac3804661cb21a24444803bdc492"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigningKey::new"
+kappa = "10011dd42bd67218e70a51c28b59a985f48e875801e27a181bd2255eda94c1a2"
+embedded = "375a48106ee32db57a2dee2f541882ec82b19a04b5e7d2ddcb8411fb6b41e398"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::EcdsaSigningKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::EcdsaSigningKey::public_key"
+kappa = "1b535a82b67e370c72c4b50cd7c3f9411302806da9787cdb5520e60dba53c83e"
+embedded = "23a0910864136a1c5fde9eca6ddbc0b649d63ebfd14d7c70e60463058ebd6aae"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519Signer::fmt"
+kappa = "9ad4fd66111132946251668e7a4065fcd22f00e1df2a76045022d6973d311f09"
+embedded = "36408187442b2d61a8bb75c02e3aadd9eed29be7011d3a8f4ab35c2a76e0603f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519Signer::scheme"
+kappa = "b4c8cb84c7eebc886d02e1534abd11477595349089dca410a71f6c21f826f3e8"
+embedded = "6964e104120ee4c4bd6cfae3b7fd4933d4c24762c383352a369d54ea7853764a"
+status = "residue"
+cause = "mir::Ty: enums::SignatureScheme"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519Signer::sign"
+kappa = "1c53bb4c687553b51d845b1a8a4b83daaaa4a3b9737ccd50684613039873bd4a"
+embedded = "171b0c3595b27203dc71dbb6d5f9133b8e20e88ac3d6d01373323c8e2deb5037"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519SigningKey::algorithm"
+kappa = "829e1ab36f886b246a257f133766249dd45e59600b1cc040a19be88471181944"
+embedded = "b80582db884b1f5fdb514eac31f342988b88949e297328213e012100dc33cb31"
+status = "residue"
+cause = "mir::Ty: enums::SignatureAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519SigningKey::choose_scheme"
+kappa = "07c45e1f23cb442407045d4576777ec8f0f6dc9abe4d86e508869918fa00d64a"
+embedded = "0081d0eea95a42418c4d3e6cd74e824c34a4e36073453753f4244c47f9af2b63"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::Signer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519SigningKey::fmt"
+kappa = "f952cf5e29c48fadc35d1fc798ea8f9e200617b9b77dd09ec0cef20203ad5e91"
+embedded = "b3b4728b65d119e70a72162354200a4d37baf169e5056a47d93fa6b38c87ccde"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519SigningKey::new"
+kappa = "6add306b49aa886ba7a2cd790a42a88d06a5fc2d62f06553b8450cac995b7908"
+embedded = "77ad04a813f8e1e7529e007e2b43a6191ab1d5659ee20d634753d7018a7c0f3a"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::Ed25519SigningKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::Ed25519SigningKey::public_key"
+kappa = "9af33672d6de7d4995387d91bb20385df4d56dde9bb7c402b03de96ab1799d1b"
+embedded = "c17460666dffd5c51456beaa17247703b64b24870e0f8131a8a2c6869235e067"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaKeyKind::alg_id"
+kappa = "3d7c31f21f9a71a4a2ebc30c82cf1951c06140b440eff46e5b2772d7af7dfc62"
+embedded = "c925c0e42448f205922f1f2905c99973b20ac154061f73d140f218aba37e7707"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::AlgorithmIdentifier"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaKeyKind::iter"
+kappa = "5e9616b42108f0257332c6955523cc4e0dc7a18dc9b08ac5757f628edaca1a12"
+embedded = "517cd63f496c654469541b8fa6f3de345f01581c1cfb1f9de3199b973fd4dbfa"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::PqdsaKeyKind"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaKeyKind::scheme"
+kappa = "2188cc69641421d12fd3935b68def508a728fbaf049e23d938100c1d07fde848"
+embedded = "61b9c2f18443e06f8032f893ff6340c9323c3691f809283171c457d852f04aaf"
+status = "residue"
+cause = "mir::Ty: enums::SignatureScheme"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaKeyKind::to_alg"
+kappa = "3ac4a08184e8ed5ef0cead51b04d745a62f8a908968d208ffb741cd811df5f1a"
+embedded = "93da5ba9a7ff8fc306059c6374da0a6af0757c56032608f4bcdc54b120d58234"
+status = "residue"
+cause = "mir::Ty: aws_lc_rs::signature::PqdsaSigningAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigner::fmt"
+kappa = "e48e82c5702ee26ddca6800b1b5c4107f88e01faa1025221a32b86a5836d98a2"
+embedded = "4db4004e3ccfdbcf1d35eb14ce1cea105bae7fd6db1403eebe79d8a462c16bac"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigner::scheme"
+kappa = "6c41f98a054a38fc9d52df7bcfe62107a938f0a1a773729a8fc055433c6a80ee"
+embedded = "297e582742aeaca650951679eab6bab50178cf99ce6638c21d4dda610213b518"
+status = "residue"
+cause = "mir::Ty: enums::SignatureScheme"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigner::sign"
+kappa = "bb8cf3ee6172bf0bab1c2e582810b9b00798ceb47238e131e58d16c4d46e4b7f"
+embedded = "827a6b18a8fef447881727ddcefea3113bdb9e7592582833a6fec38d84ff61fb"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigningKey::algorithm"
+kappa = "bd5512ea789018e6b34cbf62683b9fa067512eba221eb00e5ea19181f510ed7e"
+embedded = "df47d9aba268fe879176f18ec80973cb47e417da020872af03a6cac03b39baeb"
+status = "residue"
+cause = "mir::Ty: enums::SignatureAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigningKey::choose_scheme"
+kappa = "a67e6c21a0b57f696ee220c913cfc75ec4a5c7ee6ddb0660b438bedd83bea24c"
+embedded = "d21195583a44f1c433af75fdaafe00622ac1a133adeff77c73eefdfc773487db"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::Signer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigningKey::fmt"
+kappa = "0993812fb52aae84bc6b0b2f4092081a5c50808a2d8cd5a881c83a70267d70e7"
+embedded = "6dedc13ff749651af781ee844e912561343b8e21861e79468834485f0153fa8e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigningKey::from_pkcs8"
+kappa = "9094be2aa7f21a15a7706a0aaacfee1b241ce96e783fe8d08d9849d0389c5500"
+embedded = "263f79de9b5751b4dc808b4bab41bf705deae69f4200d61dba79a4ad8dd0c14d"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::PqdsaSigningKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::PqdsaSigningKey::public_key"
+kappa = "ef89b98f462fdcc1bf8f912ac6dcb561f1dffa93bd574970515eabfe0e61f6fe"
+embedded = "c6b7a6a6b1525931016fe799344667b891e0400da20ebc218a036632fb314de3"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigner::fmt"
+kappa = "d5032d65a8043c29b931723e8c31e34557e553ca55ce0ed4211ccdf3c4965748"
+embedded = "67605a5c810ea98f6c5037a2c1ee19a4316f60eb4787bc0d4d321b226638e145"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigner::new"
+kappa = "17aba98f3fff1a8fbe625cab4e1f06b55aaad21c1ab4e37c5e20ed29ee47eb85"
+embedded = "363e6c60847ac81611be21fc4108456eeb90925872bc2f357daa65939f204059"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::Signer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigner::scheme"
+kappa = "2889b67653cab80a9ea8ea0224592517413561328be914e07b6f76b3877fdb6c"
+embedded = "2e920683ab450205a358fead2affba20dd935d5a62719b53d467d8cc5ae0fc2b"
+status = "residue"
+cause = "mir::Ty: enums::SignatureScheme"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigner::sign"
+kappa = "80cba486cb7355d8bd91ddfea3a3146b2082a06732342a6d76a6f9e7b1a95267"
+embedded = "e27f298ddb5f7a790b9327bd1d8173326f2156d3c940605054543d5e38a4e3e1"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigningKey::algorithm"
+kappa = "2b345b97643ba99d91b4c4a58c121165f8175ebdd80d3d4ca0e0d4afb8015796"
+embedded = "b49ce45b95095adf871d1466c4ce5ab01015a027c768f18f978b06ba97ae7cf5"
+status = "residue"
+cause = "mir::Ty: enums::SignatureAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigningKey::choose_scheme"
+kappa = "31c7ed567d72ae9157369b6c8d584cb40865bf06109b211137b27dfb6b6fb56d"
+embedded = "4ac371001a2d9e91e43fae4a3a7e7014d0abd9b19c9e976765a1d7848baa661f"
+status = "residue"
+cause = "mir::Ty: dyn crypto::signer::Signer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigningKey::fmt"
+kappa = "1ae553a24a7f59a37e2e5b5c3363a332a92b3392b1a31a9919ba818dee0b58e4"
+embedded = "e7e038625bec7fb14e2c1e6e9d42c17ed99d286f3553ac0cb7182ea5a7477da7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigningKey::new"
+kappa = "325792b3e2043d34e56d93466f2ad29a7cf68404646bf29b67b80ed768edf6da"
+embedded = "2d0bf4aa4d7d2010a86b048922bef66dc8c48812fbe877917af9bb8f79aed229"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::sign::RsaSigningKey"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::sign::RsaSigningKey::public_key"
+kappa = "8d5ae28932efa6ac5fb188f226b762800207990a3c76b5ad0a8306f3d2fc268f"
+embedded = "02334fc46892049ba2a99f5f51ec8fd7be15ba1a6f66d58d60b827b7363e3336"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::decrypt"
+kappa = "f5b9e053c05b5294460040edd1dc9f054fd33e2078bdb37688390eaed71a3f11"
+embedded = "a9f3b67b5c17f4f134266e86036a6c611fff45135e04017626b428b65c4ec355"
+status = "residue"
+cause = "mir::Ty: Rfc5077Ticketer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::enabled"
+kappa = "e374a1c78f7257a0a407f4e5fcdfa11a22b84590bc83e7f72e84a356738d8f85"
+embedded = "037dbaefe79ce863d7b5563b4b84ae0030916046f413a820920d9a7162f6966d"
+status = "residue"
+cause = "mir::Ty: Rfc5077Ticketer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::encrypt"
+kappa = "23b23d385771cd241ee032164261eaa5ec177923cebc0a6a8fbd67590cb131fb"
+embedded = "51381f24819e20f783732b0bc40af5db857177f235b0a8d745d8bc5bdfacc065"
+status = "residue"
+cause = "mir::Ty: Rfc5077Ticketer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::fmt"
+kappa = "07633040328f0fb3b05bc88ed4316430064823519616e6a8b1dfc500d8cf1599"
+embedded = "99764a48a794653b57ee23e7a9544140b36e53c7f2bc759fde47f58900c4db2f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::lifetime"
+kappa = "b2bf6063ac2ddd72be9f9e8c6ace3ff489b54be5c5d8f7d98e974a020da04e54"
+embedded = "3be81c9ffb9b058fc0f8f58a28006f552004b195dcc42419cc840a90d6555806"
+status = "residue"
+cause = "mir::Ty: Rfc5077Ticketer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Rfc5077Ticketer::new"
+kappa = "5f376c408fa2ebe4bfd0637f195cf2b4282a5864d6b11cc6f6868a08a1581bf5"
+embedded = "994e86d48e5d60a526efc60d9cfcbb3c735efd7fc1c98041245b0b6d82ef5190"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::ticketer::Rfc5077Ticketer"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::ticketer::Ticketer::new"
+kappa = "d04d106cd42cd3e5858494dc1d32d861d0ad4baa9e452b75073cbd1122d5fe7e"
+embedded = "a240b0a38293d0cc9d32d1957c92af1dbff998d625c75cae528f1e5f869645cc"
+status = "residue"
+cause = "mir::Ty: dyn server::server_conn::ProducesTickets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305::decrypter"
+kappa = "4aabc52d8123dea9b2a6f02ddc21e67218207e51f8278593e0e8801505f3459a"
+embedded = "1f0538dbf1601f61ccf6c41943f7549de1cd557ea9e811ea3a6133a5b4da91a7"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305::encrypter"
+kappa = "0e8eec3a25263ef36b8ae5f95659c60db7c29aab4a15a9d2e627e065962983c8"
+embedded = "2f5fa686664bd96ca4d9e428db9b007565be7835150bb95f3f63a4788daed8a6"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305::extract_keys"
+kappa = "c453b12661f99672635d235f718edcc1a9b140cda305a22a351675219ea44da8"
+embedded = "0ba40c4964ba53d4093fa621693891cb174e5d6c9ed3e8dbeadeafcd603de5fc"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305::fips"
+kappa = "9f1eabb728269af21c9c32d247f33914b4b576bd5b820ffd2a03c1a2786cd9ee"
+embedded = "fe2348b3c5d18c18fe6c6989172b07931df07bc319bd9774dcf44af5da7d41e6"
+status = "residue"
+cause = "mir::Ty: ChaCha20Poly1305"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305::key_block_shape"
+kappa = "39a635406486bb3e7d31642815fea30f585b034d5caded8511796ac75bd50167"
+embedded = "1b016780a1d794760fa80f6794009b02e3d585613dd77ac39120884da2139a85"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::KeyBlockShape"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305MessageDecrypter::decrypt"
+kappa = "e97971a6e11ba89e587e6a09439928cd3bb2d1718e78c2b0fd44858c1aa1e2ca"
+embedded = "53619f446ea2a28618594996a8fbd552f6bf370fd533c2a260bf37595b0eab2c"
+status = "residue"
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305MessageEncrypter::encrypt"
+kappa = "0b798a46dff433b4f07c6f028d88fccbc3246f039b3e1293cde48b37c2d10ad1"
+embedded = "16f43cad175d9a3c1160dd817b136aa7e151f9182c572f201acabfb5dad53f71"
+status = "residue"
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::ChaCha20Poly1305MessageEncrypter::encrypted_payload_len"
+kappa = "1e4d8db0b5eae467f3d49cbe8a0199874a3969f1c43bafeb88e304e7430e0a8f"
+embedded = "e61b216c071e549c653fdd0e7d173e0a8d1fe085a7db7eab6ece63d25ac7dfd8"
+status = "residue"
+cause = "mir::Ty: ChaCha20Poly1305MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmAlgorithm::decrypter"
+kappa = "60e8e8f8e8f5dcd6eb867d72227b4c4ce8a3a8b64e668fb310bd934308f956a5"
+embedded = "ca96f4de3c7ab0589e6ef4f28b733f2e096444e07b7354e733730c5acb71dcaa"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmAlgorithm::encrypter"
+kappa = "6a5926725d85547f2ea2697ce549e5254ba3e6ea5e133ebfaad8a3dbc3bbf0b8"
+embedded = "70cab355ef9a3264c10760ac91823e2066cf9667826f507037f74a07b0ef2ce1"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmAlgorithm::extract_keys"
+kappa = "0e52968fec76e4d263fae771a8ce0439233eee4ebb66910fb9309d0f7a3141d1"
+embedded = "35134e79666fbd0cff3d81d1586baa88ecaaba77a712392ab248e0e5ae8f10aa"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmAlgorithm::fips"
+kappa = "9db0cbb410fac346be6e1ba85da77f3c5a72b0a26b07aaa14d075ac0c903c4c6"
+embedded = "b282bef537c14aa73c5c385a3484e15db5fc2018d69aecf9937b324a18e86d83"
+status = "residue"
+cause = "mir::Ty: GcmAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmAlgorithm::key_block_shape"
+kappa = "34af3220670819266f4ce12209f52980a3ba2607c3575d6a4c0843017a82bd9a"
+embedded = "140d2d99511e42eb2e9680a4581ca08a8f7d54d69b1439a3be8128a3ca10c542"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::KeyBlockShape"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmMessageDecrypter::decrypt"
+kappa = "ac00a81db090a56e17356dc32699931bc3a041470bb15be2eb6e479c0d78d2b9"
+embedded = "dc53081cf0d01e89d8ce7df33576a929c81966245f9a632742b08007e66889db"
+status = "residue"
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmMessageEncrypter::encrypt"
+kappa = "2703412f4b78a1a66cb8db940cffe44d5a1b4a74182502aa63d3e60d2d0a4d73"
+embedded = "41e98b92f514ab8cd298eee7f2b9e59e3a934e86119fb27fa4cafb313dc32e89"
+status = "residue"
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::GcmMessageEncrypter::encrypted_payload_len"
+kappa = "c8e4dbbda368655c94b425338715a69a5ad6afc9bd3049cd02fd4a2808ac0490"
+embedded = "9e325d05de27e6a48f36b2faeacad717f20032fe27421d6217b0ce48172245d8"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::tls12::GcmMessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::Tls12Prf::fips"
+kappa = "314ad87a86beedabcce43e78bd00be5a18a392c55bf064943c4fa7354bec918f"
+embedded = "bed03ed7109cdfb837d0e107e1601fcc6b7fa49ab17eb802e2f17a6b99151d9c"
+status = "residue"
+cause = "mir::Ty: Tls12Prf"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::Tls12Prf::for_key_exchange"
+kappa = "b299b93b4c0289f324f30092171671fc2aaa261898b39845d7c7abc3b41c8cc1"
+embedded = "9281599f9b665ce4a64899b77b37b0a0a5ad126291767cd2a24f49e6f5c540fb"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls12::Tls12Prf::for_secret"
+kappa = "989f876ad6dc5e8c59a3f84288394368b5fe6694503634d8c2cdc207dc8ca095"
+embedded = "be21b2766a09234118844bf75037daf16cd643b4089cdcaaade3b4e057303ca1"
+status = "residue"
+cause = "mir::Ty: Tls12Prf"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadAlgorithm::decrypter"
+kappa = "4048101dfcf83b8c63d5fa999b4a8276637260cd3594ca3aa8a698a707712898"
+embedded = "9cbb6f31677a49872b73d10ddff158ef5e009e70adcbf22455158d520c26492a"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadAlgorithm::encrypter"
+kappa = "ee75183adc3691d7655f39e38a856c7a16b342691c5b59302da9a8bd41dc1465"
+embedded = "a05a22724d9fc670df6a92a67cdda8047d3a7e982e7c15fcbb3e3888409d92be"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadAlgorithm::key_len"
+kappa = "cd99ff24427478599349c26822e405e45581ea2ca08dfcb8298d7ba7f4324883"
+embedded = "0a6db483bac93a907db7df5b4b842540dfe7461a3e0c2fe2ad2108355a3abdc8"
+status = "residue"
+cause = "mir::Ty: AeadAlgorithm"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadMessageDecrypter::decrypt"
+kappa = "cb86e82f0aef57e3527562f2b576cd3f44065090d45b29a98d52643d62f0b06c"
+embedded = "f3ea11231f764774c50e405a6e3d8dd34afad6f64f363740f54e42156a2914b4"
+status = "residue"
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadMessageEncrypter::encrypt"
+kappa = "d8718c677c5d5bfca5f168b22c3dbf07fa521a5ae21a20ef957c29ce67f98465"
+embedded = "22afefe2c59974cdf783fb3539637d45d06f21ff3afdc5d27c74bfb4168ce218"
+status = "residue"
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AeadMessageEncrypter::encrypted_payload_len"
+kappa = "2356551203c37f16e4c11a1715faf0a911b4bc6007ba02c4b767019fa0448e27"
+embedded = "b9090a634482d2812785b1bb1290d96614f5b15f3bfa71d5c831b6399377b1ea"
+status = "residue"
+cause = "mir::Ty: AeadMessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes128GcmAead::decrypter"
+kappa = "12209d8327a20968d7978e8cfcf413722c3a1f0f418456a299e51cd63888b942"
+embedded = "920f17d76d826f1b1e336d00dc3c559e6190955e22210176a863b0a970cb1dd9"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes128GcmAead::encrypter"
+kappa = "f687331aa0ad4ecc4e8773d4d23b714bd7102e08113ce13ad9f97074b8c18998"
+embedded = "5bc145a6876ceeb531932b066053a974b9d11e693cb7a760b5aa90a0f383c16c"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes128GcmAead::extract_keys"
+kappa = "663c3f0ced5378701993cd6c01c3d9ff49c5b7c1caf3051e0b7ff17b89f7231e"
+embedded = "6bd467718b9fb35bf1afd8cc70b513c6ead724740dd46975fa09157584ed4edd"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes128GcmAead::fips"
+kappa = "3a194b467d4277c425d2bc8ad3cfab945b3e5290e7bf8d79da91547ba256a8b3"
+embedded = "64489844003958476e0f1f223ebc2183ba609ac3c7a9054ed6bce9124e2ef537"
+status = "residue"
+cause = "mir::Ty: Aes128GcmAead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes128GcmAead::key_len"
+kappa = "dfb8ce65e96ac589b15c12cb7b33e01eb4a555b8a89b0736c41de5b55129b82d"
+embedded = "1cf9a429e8dc7e9190c75df6cc2314ff4c33b0951c2d314eac546aa3d1fc6bb4"
+status = "residue"
+cause = "mir::Ty: Aes128GcmAead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes256GcmAead::decrypter"
+kappa = "b61d2a599b84c6f977ce1277cea2077393f37587db2735fdee9a38ac51df1e53"
+embedded = "30ddbc69387b82805e7562efd8da51932ef078fbc3b0cc47febcae67432496a0"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes256GcmAead::encrypter"
+kappa = "99bc370e44fb11aa3ab402d44815f6d05a713a512a81ed7b3983ea256a6b3f51"
+embedded = "0543f2457a2d76500731faeb7177959dc80e559e4060a887d57e9f484e317a8d"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes256GcmAead::extract_keys"
+kappa = "8980f44bfa1c179b487288d3ca7d40d8a14137bb4fe0ddb6e0f29558b2c11eb2"
+embedded = "43efacd00e241e63e106874216be5bdb73bc8b8f6a799ad7914364b611a4612b"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes256GcmAead::fips"
+kappa = "81c9d75c69dde4afe745f47068c7e74074411783560e12c09e425c73f9031cec"
+embedded = "66aa8d28a32690e2c3be38f6ec3f46b710042c9833b1929847ed52bd317b885b"
+status = "residue"
+cause = "mir::Ty: Aes256GcmAead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Aes256GcmAead::key_len"
+kappa = "707c81a3729e329b3f542f860436632a9bca8570e942fe4231ae46ff899e04e6"
+embedded = "54b5e2fb003d05df0fcea58aa8c5b581808b025c2c8f54bd917844311b7aa2de"
+status = "residue"
+cause = "mir::Ty: Aes256GcmAead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdf::expander_for_okm"
+kappa = "fddeacef7459c2162bb563d869ee580ae6282d613269b45ecbb5e9f832e559fb"
+embedded = "7a8c7bad75e4c0e787db80d9633c5349241e8d3b107e7fd5e3f9782c573815bf"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdf::extract_from_secret"
+kappa = "e4d91aef1c0f75de82b70cf5e900ac0bfacde6b2e79bc3088c796ef803473344"
+embedded = "8c3c7314bb1746c2bcb936e037bc712f431c5c18c93e2bcf725d9d707a9dfedc"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdf::extract_from_zero_ikm"
+kappa = "0c3c463c87a4a31d4da97b940d10c17f231639bfb6c7d919368925983ec4e9da"
+embedded = "d13eb2d1d8e49a7b43b2fe2f6092f7b34c4a90cfce057aaa310519466a2de9d9"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdf::fips"
+kappa = "facb29088945c4a5200c5f6b0d5e38ec5f8710b5363bfadf57c851c4336e02d0"
+embedded = "3ac4da1abb4c1ac6c3c5595fed57cfebde459b1dcd3e9e20b430a357b1311b04"
+status = "residue"
+cause = "mir::Ty: AwsLcHkdf"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdf::hmac_sign"
+kappa = "dafb7209aa362b2f41a8bb26ac2744dfe95e74e7d461dac0465510a1c42df742"
+embedded = "24b36f3d1ab04a815a22e3e95eaa158da06038659a9a50fd893e5bd2784ad5b9"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdfExpander::expand_block"
+kappa = "e2b9286fcc9c1283b3a2d5e57ef85df7b9647a3b6bbd1270a7a7f00c1925abab"
+embedded = "fb93be9c9541cda3a755a33fb27c31ea5a96e1b80686e3a0f907323ca7b03508"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdfExpander::expand_slice"
+kappa = "38f037f18cc7cd6babcf2d13c5327505a4d1c3cb6f11a8934f4ed5c67da6377e"
+embedded = "bc96a6029c55d527087f37cb640774373724f57c9f3a8bbb77b1766d376c8d3b"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OutputLengthError"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::AwsLcHkdfExpander::hash_len"
+kappa = "96ee4147092bf026454e96677ee36d24da796260b547715aa91bf2ecaa4c2ad2"
+embedded = "ac8ccb87d36972b24a8907175010f939ad5d0f46e2424bccfb64b9910c4ccba3"
+status = "residue"
+cause = "mir::Ty: AwsLcHkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Chacha20Poly1305Aead::decrypter"
+kappa = "44950fc74295c0928aff6a5a7cd50672f371c93195632ab8a9c7153e29eb4acb"
+embedded = "fb6c5392bfa1db8de6c7e3db7c1ca49865faf6066f52f7d02e03be8f4ecf0b27"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Chacha20Poly1305Aead::encrypter"
+kappa = "d1000c0da2a7cd2dd526060c79aff3cd463144c306708eec7f8dd344b7afaab3"
+embedded = "9831157c409ae032b135913d44b3358c93b16b973499f91be3dc96f9f42562dc"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Chacha20Poly1305Aead::extract_keys"
+kappa = "a7536ab14242f770724a8508d751df568bc18d3e630f300eecad4d66bf0298ac"
+embedded = "99345eb885b8244b13242d0b11fa1f8631e376c0618e0f7c319e42cd27665ded"
+status = "residue"
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Chacha20Poly1305Aead::fips"
+kappa = "49143c3074ec2c597eacaf18cefdbe14cc73a8773c2589ed39a3d222cfe1d90e"
+embedded = "1f22e19b1cb9283f43b93ddd772bd8dbe6dee412a1ff377638f448db436ea18c"
+status = "residue"
+cause = "mir::Ty: Chacha20Poly1305Aead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Chacha20Poly1305Aead::key_len"
+kappa = "92dd9c7ee2483f0c271820fb3937097181e4f39289c370f590f26de69fad8d78"
+embedded = "94aede506606b40e69e1a59d0cd952c293ba66f9d4b19d39096de48c639ba294"
+status = "residue"
+cause = "mir::Ty: Chacha20Poly1305Aead"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::GcmMessageDecrypter::decrypt"
+kappa = "683e848237c56b5547a0d91f62c94a6273d54bbba2f4a57373f5fa78e0d79410"
+embedded = "1dfeeb453b0790065032f38b66350aa5a55d93d038e08259edc142aaebeb11f3"
+status = "residue"
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::GcmMessageEncrypter::encrypt"
+kappa = "621e94d2c984640354af0343a4f888a8b132c5962602865f4d9ebe46653c1e47"
+embedded = "cd5a65700e83fd817d7de49d8b83913153f4db58ef0140e5edd8d530029e90c7"
+status = "residue"
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::GcmMessageEncrypter::encrypted_payload_len"
+kappa = "4fbf5eecaf8633e3cd4d11329d13916282a1cdf557675c9f191cd3776d98bad3"
+embedded = "51932d8dc02352d734a2bceb512b9fd9a0096e29ea58be6427ed9f27ee6f9574"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::tls13::GcmMessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::aws_lc_rs::tls13::Len::len"
+kappa = "524c2d299e7259743dfcbc8f35c78d82793f72f6e6366c45e824a87207b71c3b"
+embedded = "59037f587ca679ede1a091d96c43e7f766d07d3d0e0ae8ca49c7887b01ccd3d8"
+status = "residue"
+cause = "mir::Ty: Len"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:162:1: 162:26>::invalid"
+kappa = "ca0357e953340f740b7ee09e82ff159e1f62ddf2303be0cfa089517d11e31122"
+embedded = "70b38e6e9335f2e0be848cede988d1fba7f0340e3a8b213f0bbe2de11b8e5d9d"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:168:1: 168:26>::invalid"
+kappa = "3667e180a5c4235b11ff460210931c5dff9337a9726c7fea04bf9842c1cf292d"
+embedded = "e45c5334fd91a4251a7736d33ac134b2c314ce7cc3867c5b375e927220ef20e1"
+status = "residue"
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:175:10: 175:17>::default"
+kappa = "e38acc1b41d616155c44b1fa5b69f97db2ec55e215e6a81fec1d8203c6d9c8d6"
+embedded = "1ba65da876540d1dc1d125fcf7dcea07c6677aa6ec76eac7057821791c50b2d8"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:90:10: 90:15>::fmt"
+kappa = "ce838d2d9356b88bb33c986d07c77d53a035a1ef867c743d00de49f0629e18ed"
+embedded = "0392012794c509d962a9eff6e116fe18f521cbb7010d7afbc63311d14a3d9233"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:90:17: 90:19>::assert_fields_are_eq"
+kappa = "d8f74ceae22577fb61ee7e03e905f45c5692f367c8a9ee0955d41262f61b01e4"
+embedded = "2ae557e81959c347c7bb222bb3dee2fc9c141013825369416604c3746632bebe"
+status = "residue"
+cause = "mir::Ty: UnsupportedOperationError"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:90:21: 90:30>::eq"
+kappa = "19424d09b601db43eb1756310ea8fe18e596c84a20ff5bb7e4a820785f4d1ea6"
+embedded = "7a72534e45f656795b926620584f42c2b1f6494f77893ce10da0218cc1d65512"
+status = "residue"
+cause = "mir::Ty: UnsupportedOperationError"
+
+[[fn]]
+path = "rustls::crypto::cipher::<impl at src/crypto/cipher.rs:90:32: 90:37>::clone"
+kappa = "0ec41fe41b329973fb4206b2c9c97e39dded575adca26238d7b46c19a8a88b87"
+embedded = "08bde02235785c01b18fbdd6ba66af7e89f1ae4d343e53d3ee7648967834af6b"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::UnsupportedOperationError"
+
+[[fn]]
+path = "rustls::crypto::cipher::AeadKey::as_ref"
+kappa = "130975878a1dccb9b1939fbf9ba5ab945b37aa72c35a7dfb343bdd2f2a63aa00"
+embedded = "35c92e3dd7533c5116e4bd0dfc0da77baec00499aa239e5ad76596c4eca9da23"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::crypto::cipher::AeadKey::drop"
+kappa = "18b083ea2c70486082044407d42841ab20bd26aace74eeb64c127006ebdbbd3b"
+embedded = "64cd3c18f434a8e3aabc45c910605a98e40e7a0d4ee4a619cc27c2b0fa2dcd11"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::crypto::cipher::AeadKey::from"
+kappa = "9172c8876e2e68690594c5a82ea24ddcc6ca4402226e8262095947cab877a7ed"
+embedded = "de927782ec3908e67b0b2b57185ae036e9f64b2340d2b98929e070be450dcf4c"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::crypto::cipher::AeadKey::new"
+kappa = "83db292c1dac040636bf8b72640e87872d8c03aa172be7c8e36a89a2cc4e52bd"
+embedded = "00e7f3936369ac9bbba53afd4b647c5cbef5a8f55da1f87dd4a8501966370689"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::crypto::cipher::AeadKey::with_length"
+kappa = "afcc9d1f4463c11f80da6bdeb03133af2e5498f9cbd71d86c3869a6c31aaf9b8"
+embedded = "381e947cce9c692f85f1bc76ae04f76b9c24312d42c9b75697751f67ba43798b"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::AeadKey"
+
+[[fn]]
+path = "rustls::crypto::cipher::Error::from"
+kappa = "f3978f75407fb25951c85075936ae96c2237ff1a02c9d685f1afb8769a6a3ab8"
+embedded = "e9ac23be87f7a5993252112dbf2d4a298965eebc1d94ba356426b32401836fca"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::cipher::InvalidMessageDecrypter::decrypt"
+kappa = "22b8290d659444aeac0377f33555ce0a9cf80e7211752cbc75c96be235a526de"
+embedded = "11098609e96c9f43137c605752d294177c9a8ddd56231355a871c3a033c97113"
+status = "residue"
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+
+[[fn]]
+path = "rustls::crypto::cipher::InvalidMessageEncrypter::encrypt"
+kappa = "81abf07a8bc7d38f01ebca453239fff2e6611ac7a8a27c3512f6b6e2408b95e0"
+embedded = "655a12300076956535a0985e45404bc94c007dd2de89186ffbb7df834f14f30a"
+status = "residue"
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+
+[[fn]]
+path = "rustls::crypto::cipher::InvalidMessageEncrypter::encrypted_payload_len"
+kappa = "28bcf0a27f579058ca904a1921bc69df1c43f1bfb41871a71c24ac063ad2093a"
+embedded = "72a95b5d3b9e6ad87583d7957ef60a0a7403a5a8c0fcf6f1fc90de14ed9c86f1"
+status = "residue"
+cause = "mir::Ty: InvalidMessageEncrypter"
+
+[[fn]]
+path = "rustls::crypto::cipher::Iv::as_ref"
+kappa = "cd711a80786cc27bb7a7ee3b5a48fd5fd0b7cb6e10da79f240ee14acb926476f"
+embedded = "a486a5b90f7741c22977241bde13cc34f7677eb92425aa87ab00d80a09c7b231"
+status = "residue"
+cause = "mir::Ty: Iv"
+
+[[fn]]
+path = "rustls::crypto::cipher::Iv::copy"
+kappa = "299183bd981e6b84919f9550ef122f9638a653c999455c3bc2c2dee78066c0e7"
+embedded = "6cd56c22bdd5aa427270c541f919b98c8c172e622a29994fdd818747cb225fa0"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::crypto::cipher::Iv::from"
+kappa = "3e788e4d93c5d52e07db0b88cc0d3085ae49f6b101f9ccd942251f05a2fda0b0"
+embedded = "a91d09194dcf1b2c934dab2f8787c5aa6cfc67d26dc270f3d126c5f876027f4c"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::crypto::cipher::Iv::new"
+kappa = "48919e85a0cc092d1554e84b6d0c21db8f6fcde8420065d0df964e9808edcdd3"
+embedded = "256556e0cf906262548a53473b9698f4d1d85543fb67a5a26e21fc73fa11145d"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::crypto::cipher::Nonce::for_path"
+kappa = "a3b35b60e3eab3176dede40693cfa5198588912fba93a57f2201a348c2472dad"
+embedded = "ee5b64a3afb5c2845abc6ec8e530d3e4b479d0bb1db6adbda85f1f8125dc5673"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Nonce"
+
+[[fn]]
+path = "rustls::crypto::cipher::Nonce::new"
+kappa = "3d36eed4a98dfa275cbdc9c30c2313b4a8e37583e9a79c5fdfe392c8bce2d0ea"
+embedded = "aca81bd8e34f052bc97aeca05ad9950111ea2da0b3bb5513086ea351d0fe089b"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Nonce"
+
+[[fn]]
+path = "rustls::crypto::cipher::Nonce::new_from_seq"
+kappa = "a867c9f77bbf2094f1e392879e4586f518024cf54b053f3f1bdc8894fb06866b"
+embedded = "20c40ea3a366f4c4f93c5996af33cc76cd4a972894048510f92d3b789bc79474"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Nonce"
+
+[[fn]]
+path = "rustls::crypto::cipher::UnsupportedOperationError::fmt"
+kappa = "539fa25a5ba24d9292ba9d07185896a2eb55eb0689238d128a6c636b607b51e5"
+embedded = "c9506a2475178d14fed0859ddc5e55b9ab25ae0fcc8bc45828246216eeb593a5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::hash::Hash::fips"
+kappa = "01ee5e0bf1056df88397267b912e13dbf2c0b7ca06472d1a16312b27d2232e2c"
+embedded = "10a0046348db381728723c38a416c8d82fccae6c98db6aecef6576f3f90244fd"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::crypto::hash::Output::as_ref"
+kappa = "123a5d857d110cb207faced7c30f2d6bd09b6c88f2c225a457727f7504ec2bf6"
+embedded = "3f882fec2bd58f5b453c520fe5044a53660e91c6f67d3dea3100ad1cc6a100bb"
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::hash::Output::new"
+kappa = "a162484f8a5dc24e2cde1d5a67fbd63f2e8502ed6767a0a073269eb9048fa91f"
+embedded = "b3b85731f56c1ffde86964067fe7400b81bf7563ddd81c2fca077952710d2540"
+status = "residue"
+cause = "mir::Ty: crypto::hash::Output"
+
+[[fn]]
+path = "rustls::crypto::hmac::<impl at src/crypto/hmac.rs:23:10: 23:15>::clone"
+kappa = "a7830f65f754b2f9c8b00c515131dbd0b77159fab65296db1c0ef9a78f705a16"
+embedded = "74a3fbc03d741f9d6fbe24c886e24a451d1dbc7b796c7d506decedcc3c2408b0"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::hmac::Hmac::fips"
+kappa = "0d615e3cc73474209fa478db608e8444ae6b1039423b0c5ed986ec4fbb66fdc6"
+embedded = "02b8d3baed891951e5c65a9d1a1d18a8d83b67515c296e971611b74eca1586e8"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "rustls::crypto::hmac::Key::sign"
+kappa = "535659bd9e6ee15d5f710160fb73853610421d76f7d6c598d3986cc965fee133"
+at = "Self=u32"
+embedded = "ce857a91872c4af3f9e8c3eaaf57a153438120ff544c4918bf09ef4c3bae4c7d"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::hmac::Tag::as_ref"
+kappa = "41fca5794b7b8d4707296258b922f85b3160fb46dae72400cacb2dbc0f8e885d"
+embedded = "4d42142badd053961b3d4fab9be1dc1075dc73a882a5de9d185139d98cd9d78d"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::hmac::Tag::drop"
+kappa = "f233be3ce408c531935d8d1649ef698ad71c8d9a40ad8023e3a89af0cf68a4db"
+embedded = "d5f11db500ae031b30b8f15066d001cc19cb8a97654a690048b23143db3d2e73"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::hmac::Tag::new"
+kappa = "2f98e27480ee91a7d64cd9b20c54d11c0a01c7d76f068df19139d22669f6d953"
+embedded = "b5cfc42142c4ecfecd458f866db1073a3415781670bcfd4b641b16b83e654241"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:110:10: 110:15>::clone"
+kappa = "0243456de144fde3deae38ded6fa796d42b0bbe56ba80d293b062ded1aabe1f0"
+embedded = "81e5c8d6947a6c0be8c701241e74ffe4a7c04840eb55054b62de8ba88b442bcb"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:110:17: 110:22>::fmt"
+kappa = "db91d94a94bb5bb08e682f1f37b48a21463bc2c22eca2e8a8f0a897da10b523c"
+embedded = "05e40a23f909ddebdae10be3ed6615a4939b2d6bf97c4819f7d96f8856c7ddca"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:12:10: 12:15>::clone"
+kappa = "37f5d25ad7a37e53f0901813b2e032538e4a521446a922610089bb947b044ff4"
+embedded = "ac2b3210d6dc9659aa441cf9864c96fc62bf784bdfbeb31b4675eb6b59f4be5f"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkeSuite"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:12:23: 12:28>::fmt"
+kappa = "98f39fab1ab7f9d8d5d397edbbaa2112acf73f26c45b9bd6e3aa400d99419536"
+embedded = "32b2e801e6b92ae969902ab0a6beaae892cd0932814665c53f878b6765b6083b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:12:30: 12:32>::assert_fields_are_eq"
+kappa = "4ff3612dce6adde1e8b225f8b018a383070932076932531778a42da5f952f255"
+embedded = "1496f39278d9bb2cc2e19c17949f9bb97df7fe2fdccacd5e13b2c2306fa8da21"
+status = "residue"
+cause = "mir::Ty: HpkeSuite"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:12:34: 12:43>::eq"
+kappa = "29f1bbe223d33e8ff2cf2c863663ce19e243ed47d51d090948762ac47b91ce58"
+embedded = "ff5bc641e9bc9567ef82c5e803198fc0ae6068bbdd6b9de947fc004af06172cd"
+status = "residue"
+cause = "mir::Ty: HpkeSuite"
+
+[[fn]]
+path = "rustls::crypto::hpke::<impl at src/crypto/hpke.rs:144:10: 144:15>::fmt"
+kappa = "ebc6ea314389eb82d0dbe359c88a39542b336adba5f07ccf89a6ead95fa25ab8"
+embedded = "805eedeef3eff85cc0f18fd73d0975e87a889be4db398fe70210e20465597a50"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::hpke::HpkePrivateKey::drop"
+kappa = "3958814d2d371400a26266800b52815d7c9456cf3dffefdee54f88df2516c3b2"
+embedded = "7d8e88d1ade2ed9cf4593f599ff3404bd5e5c2f266f470e2f986d83a6e07a22d"
+status = "residue"
+cause = "mir::Ty: HpkePrivateKey"
+
+[[fn]]
+path = "rustls::crypto::hpke::HpkePrivateKey::from"
+kappa = "872ed9456102f767e59f77256fb6200ce138d75f4fc40c2571d8286c6c592784"
+embedded = "9159e0d91689c745643d9beee0f28b3dba430cef20d3cf9d2cfd8e7f679958ec"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePrivateKey"
+
+[[fn]]
+path = "rustls::crypto::hpke::HpkePrivateKey::secret_bytes"
+kappa = "bbdcb3ff7c613a7d03dea3aac8dbe00359b65f2b2934010fbe006e462e18d3d2"
+embedded = "4dbcf9e4fd4f56c1176c9ccb5e63d29656d518050d3b5f16c0b33ffc05eef99e"
+status = "residue"
+cause = "mir::Ty: HpkePrivateKey"
+
+[[fn]]
+path = "rustls::crypto::tls12::PrfUsingHmac::for_key_exchange"
+kappa = "39b12d29ca3dbf73844938087d2f41f3c42819d1eb8ea3284b135b788b3f2d5b"
+embedded = "169df4b6ed189f59e14080e1d09e9ddd1daf25100056290f5a9067f6bd2864f7"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::crypto::tls12::PrfUsingHmac::for_secret"
+kappa = "7f78b41f1a0abea7bba5a29a69038cf5831180bbcb8f02c8906ce67773845061"
+embedded = "81e7cf9383563ee8e365534dec39c89f446b352c49ed410f9600c3f083dca288"
+status = "residue"
+cause = "mir::Ty: PrfUsingHmac<'_>"
+
+[[fn]]
+path = "rustls::crypto::tls13::<impl at src/crypto/tls13.rs:225:10: 225:15>::clone"
+kappa = "29d18134aceb2a1551edaf1c7324273c3c7d6d5f06a093a1621929b0b5e9e84a"
+embedded = "d8e9d5cd01a19cd0a8b2b17e5ef3a54748056058915eb7d742874a5e140fb84d"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::crypto::tls13::<impl at src/crypto/tls13.rs:262:10: 262:15>::fmt"
+kappa = "6f2e30db4e306f27ff5d79e414d8e473ee5982cdbbb519c742bf9bfad14d05af"
+embedded = "10a22587d4fe46651d0acd02bec99a4aa08049960f49850274227c9822d045dd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfExpanderUsingHmac::expand_block"
+kappa = "552ab2d203dba54a476ef6093b7ae6ee401c1077b1271a3fcfe7b4dba15b3d16"
+embedded = "b6474dc230caa20135d2aa00abe1946c143c1fe161bede9b1352380bdf696255"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfExpanderUsingHmac::expand_slice"
+kappa = "859354e4394eb9cdc4751d2561b08f1ea1ec1a9f6bb375d6253512da2c467808"
+embedded = "a315ef26a25a8afd383d1b9bc6bb463a14ca762a27d9db681d30dea0ec5345b6"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OutputLengthError"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfExpanderUsingHmac::expand_unchecked"
+kappa = "70767a95cee4b4f1debac40cdf33ec1d09cd3986fa42e55543f6b4df9892a05a"
+embedded = "afed2b269ea29e06dff15c26f68191f216d14dc7780afe67d568d13e38fea8f5"
+status = "residue"
+cause = "mir::Ty: HkdfExpanderUsingHmac"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfExpanderUsingHmac::hash_len"
+kappa = "8c0b9d90b039596172d3d03ea34357dad38c0b0235e0a05d4b4b91b16fd3e324"
+embedded = "78b603f858cf9f678aee5127e5eb8eef3899141c09dbd85c16eecb0e4a65a8bd"
+status = "residue"
+cause = "mir::Ty: HkdfExpanderUsingHmac"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfUsingHmac::expander_for_okm"
+kappa = "24861fe352a1fe831207c048f6495dcd6f6f45e631c5a0ead7c24546a2a662cf"
+embedded = "bd6ea567fd897575774f4256751c424d7a56351114e6d1778520dc0594cfb6d5"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfUsingHmac::extract_from_secret"
+kappa = "1139a3a8c1ba4c03a9c5f192e1fe23a4263c2605b4bfcaf3e1060ef9d1cea1a6"
+embedded = "1c1ccef611b329618ec3275d80494ab0ef53fd370344c4b4154527e016b3ca1f"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfUsingHmac::extract_from_zero_ikm"
+kappa = "8db9190eb77e5abd1d1850dd47f90d8f164468a376063f2bf0f59a6d56343af4"
+embedded = "29b8c7375a3ccd0dd17c5ee2da3031344a8180b86702d42335b609fc9b474292"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfUsingHmac::extract_prk_from_secret"
+kappa = "99f7cfe61da2b668e1ebdf5b11763cb64e01ae2bcc3c350a163d5ecc79a5376c"
+embedded = "8a232b0dc11b51457b148262416946738a80e25ea7985b5e9d1a1ec8c7a0a082"
+status = "residue"
+cause = "mir::Ty: HkdfUsingHmac<'_>"
+
+[[fn]]
+path = "rustls::crypto::tls13::HkdfUsingHmac::hmac_sign"
+kappa = "8afcf1c49baeae6bf2dda3e424a628f02adf1822305a91cecc08339bbe2d54c0"
+embedded = "0d80ca68fd4175d3af973448e787ab27b364d46c9d60589851f65d2d7bf52f19"
+status = "residue"
+cause = "mir::Ty: crypto::hmac::Tag"
+
+[[fn]]
+path = "rustls::crypto::tls13::OkmBlock::as_ref"
+kappa = "c019413ffabd11996853279dce6fabbcb06b4e0f0089c96bcb093367cd3ac759"
+embedded = "12225d81ec736295067ef7db8f8abd1aeaca6c3d3c932cc1aa8a8018bbcd4c93"
+status = "residue"
+cause = "mir::Ty: OkmBlock"
+
+[[fn]]
+path = "rustls::crypto::tls13::OkmBlock::drop"
+kappa = "bb16b0868b3d956a7e11dfe5af414b896b214be0dcfacdf87793b93530ac69b1"
+embedded = "f0643c027e684f1f82c8dc0f5ac19b2760a3830057a28f42a11503732f1886b5"
+status = "residue"
+cause = "mir::Ty: OkmBlock"
+
+[[fn]]
+path = "rustls::crypto::tls13::OkmBlock::new"
+kappa = "25f469b430642df2e516a3c261f9e2fad02721970893bb48a1d40cef6e88398a"
+embedded = "5e171a65c5cbb0d2b997253d7d1734184c8ce4c13036f057f69bbc8b0e2cb83d"
+status = "residue"
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+
+[[fn]]
+path = "rustls::default_kx_groups"
+kappa = "104aa9f55148aa1f1faad3d202447ceadb7f39095784223e8e45ea52931f682f"
+embedded = "6c493304f7faaaccf128a87c7ddfe0437ce007a4f343a48615b292b7477d8a18"
+status = "residue"
+cause = "mir::Ty: dyn crypto::SupportedKxGroup"
+
+[[fn]]
+path = "rustls::default_provider"
+kappa = "2083d8916e68f70fda1d04e6ca231072d0bfae064a4cd367371746d1126fc902"
+embedded = "0dc3d2dafd02a26be435ff0fc66684e5fb73ea9521edec80ba2a01f183ad203b"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::expand"
+kappa = "09f556868532331b04520c3a27128d6dc6ff746b396a1d88fc981131ca317cee"
+at = "N=#_N, T=u32"
+embedded = "64ec85aac6e12b3b9f49e1368be7b778c8a90c986571aeaa298b584488f5ce07"
+blocked = ["Rvalue::Repeat"]
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "rustls::gcm_iv"
+kappa = "de6c2d99ca92a840d10e7a8cecab7b36e1ae38a4e9d73979b34d707eeb8defa2"
+embedded = "00680479f06deddee68c5dd7cf08e4a44aaa7f94fd16989e44a84b9cadc3086c"
+status = "residue"
+cause = "mir::Ty: crypto::cipher::Iv"
+
+[[fn]]
+path = "rustls::generate_key_pair"
+kappa = "0870997b30b2001ea6b5395787e060eb7ef2184dab45f03c29aa9c8d9f65ed74"
+embedded = "031b95f6f610a93a5a1e23afed9bf3436e83ebca47e00efbd9e3db5d687086cc"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+
+[[fn]]
+path = "rustls::generate_p_curve_key_pair"
+kappa = "43413414d300e637f035da35a1415a1e5e7c4d89a99fe687eb539f668b7da7d8"
+embedded = "03c2250636ccc81b65339c325c264d260649669ba15ecdd6a6622abb43b05fe4"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+
+[[fn]]
+path = "rustls::generate_x25519_key_pair"
+kappa = "dc2eef5f3ab4fd7b0a2cb43e17afda91d3e5ef54e3e0928c909f01d377634549"
+embedded = "c0ad1835956e0202115b0239a3777a9358ce747b898b98bbd1b4f60c08e78d83"
+status = "residue"
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+
+[[fn]]
+path = "rustls::get_default"
+kappa = "794897f73aa80407cf834cf82a98727d41d0bdec900d969b93eaf039795ff10b"
+embedded = "3d08ca63a7c2d2ad17e5827d55da53323095af6ec45e186429b7bf9bb73f4c90"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::hybrid::<impl at src/crypto/aws_lc_rs/pq/hybrid.rs:10:10: 10:15>::fmt"
+kappa = "a4743bc54b5454ffe7f15e7606b224a4721aa3c923e0b3cbf77ed1fbdc55cf2a"
+embedded = "86125d5aab1aaa68f5b35c5592c0813bb83e4d932b60396919065fa672d751a9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::hybrid::<impl at src/crypto/aws_lc_rs/pq/hybrid.rs:150:10: 150:15>::clone"
+kappa = "5de8b5d7b8d6ebc567fe0321d29884dbcd3fd62b719f2c34c63603a23b4f6870"
+embedded = "776eff5c86555359d2a3822a9c96d3d055c69fcf28712984171d7fb1cb1ac086"
+status = "residue"
+cause = "mir::Ty: crypto::aws_lc_rs::pq::hybrid::Layout"
+
+[[fn]]
+path = "rustls::hybrid::<impl at src/crypto/aws_lc_rs/pq/hybrid.rs:150:23: 150:28>::fmt"
+kappa = "e12234592204bf3bba32172ea2c7ba497681e743a480c4a5dbef89f888678fdc"
+embedded = "3557d52d400680da342dc9e57008f1a0230a749efecfcd6fa545679cef6cbaf1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::complete"
+kappa = "ecc2c8bc57e302d2d072cf3b003fd40e80089c0309dd0a34d45372737312ea44"
+embedded = "0ec4861919c53c2bbdcd2cc01ec066463ab5bbb038b8d406dd8f3f32547e07fb"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::complete_hybrid_component"
+kappa = "d3b06770b5440d4b699af76f1139aa68a8427a6b838ee50c18e506a6bd3d2bd0"
+embedded = "948c8f5c08b728b481228ab7298ecc960d4cb07267d36250ed3518a5cf4c1a53"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::ffdhe_group"
+kappa = "ed10e944058d370762939f33dcc3196066fda8547065a4f77cb559bccdb40546"
+embedded = "e5c1b3e256fa460d54ba080f7b4ebe5a995ae17f5c7d1c5efbabf571b71cc7e0"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::group"
+kappa = "54fca1da18f8e49a4f7c3803865a2200196aa21d5f6d15b03fd1e19f74e86ec2"
+embedded = "09db65d1de921dfb2d27cfd032cfa5660f687dfa645ec20401aaec0a93626d37"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::hybrid_component"
+kappa = "51c219d1c740d9a8810a2244796044e1e538bdfc775de787c06e95e35321d81e"
+embedded = "38d759cfffd06402632a03826d3b61eb1afa2fb64714dd420039a1e117ef3342"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::hybrid::ActiveHybrid::pub_key"
+kappa = "d4cbcf449229056f1769e3f25cebd0230c82ab1cad972e862a42cf07b8bed99e"
+embedded = "606cca466c3c9f1796d583b68f73036831566a543470802078f2ee7a9272f95c"
+status = "residue"
+cause = "mir::Ty: ActiveHybrid"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::ffdhe_group"
+kappa = "be559f0be35774c8c62ca9f3d23af5193246f273c27cbd0223852e0e55479ef6"
+embedded = "8127c960f783518c6c9cd5bd195682742fee316599ab859208459e99946309bc"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::fips"
+kappa = "97ff5a8924b5fb34329cfac4c376f60e1f6f71e42d6f7a35f28ce7a643d19229"
+embedded = "b1ea6bc017a9fe5fd79a0ae2530bde3b38a9e614b7c08c8f1b147032c62718d0"
+status = "residue"
+cause = "mir::Ty: hybrid::Hybrid"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::name"
+kappa = "6b36378f386fbf422117a5bfa8e34eac8714b3c29014918d5d05d3e129547f98"
+embedded = "c431e626d525249e7fe581b9c7db0abbf2ef27f4ba29cf13a3a16a57f5df6c87"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::start"
+kappa = "2718276e7e3f532fc2d57de9f49e39b5550cdeab80680f5808fa2ef876aac3b8"
+embedded = "ac1db252ed31a02ce2939ca9da6a3b7850c58fcf6405a38bc5158a52c76ffc11"
+status = "residue"
+cause = "mir::Ty: dyn crypto::ActiveKeyExchange"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::start_and_complete"
+kappa = "efe0f155a051c0ffa5972bb82b9d5acdd0fbd925c3e2fde7d06fc207a7b242df"
+embedded = "fdda0c289ef7017753777f7916170650f23b0b854368affae369b83a54315aec"
+status = "residue"
+cause = "mir::Ty: crypto::CompletedKeyExchange"
+
+[[fn]]
+path = "rustls::hybrid::Hybrid::usable_for_version"
+kappa = "500dd8b0ad37ac36338f4f62bc95e89209b66dd786c900f36d39cc93ea1c22b0"
+embedded = "0a29bf3a2aa992ef2307a7b000bc8dae22d6bdb91878b89ae046f04f92e431a3"
+status = "residue"
+cause = "mir::Ty: hybrid::Hybrid"
+
+[[fn]]
+path = "rustls::hybrid::Layout::concat"
+kappa = "911662348509a62dfc317ab0ff9b7d6e87e221ba2338bc7612bf41fff20b2229"
+embedded = "535f675f3c1ed75de7cd7b28f21274cf8337de0e1503555c0995f356782a0b29"
+status = "residue"
+cause = "mir::Ty: hybrid::Layout"
+
+[[fn]]
+path = "rustls::hybrid::Layout::split"
+kappa = "ec005c139701a19077a41fa004d4b4484d71be513bb278b031b73af661771c68"
+embedded = "146baf29c1e1a07cab4d72a92ebe54c1eec59623a7aff20dd9c5f5ea9db37632"
+status = "residue"
+cause = "mir::Ty: hybrid::Layout"
+
+[[fn]]
+path = "rustls::hybrid::Layout::split_received_client_share"
+kappa = "9c3c44b4063dea4efe7bc7c8a1cb5b1f0e8829a8c47e89760a2698bd0d9de128"
+embedded = "bcd7c74e6fcc0f05ad9b67fb00a2f0f94ec5bdb54a08c5381a9233968407c819"
+status = "residue"
+cause = "mir::Ty: hybrid::Layout"
+
+[[fn]]
+path = "rustls::hybrid::Layout::split_received_server_share"
+kappa = "e1677b256c0c8f95c9e3a422131ff8c54cb6d083f84244dd3ce06d999d4d4841"
+embedded = "f3f4d233e01f1cb76bc7c9b449b33f7751ad7b7b8223befefa6d695ca6cab9f8"
+status = "residue"
+cause = "mir::Ty: hybrid::Layout"
+
+[[fn]]
+path = "rustls::install_default"
+kappa = "1a9e0b5becabecc4f66181fef3f08fb33718078fe5fa04ef8aae9c2d7ed68537"
+embedded = "d05c515f7c5aea6d36db2554c4642f93678a4b6c47f8a67eea58d91959beeaae"
+status = "residue"
+cause = "mir::Ty: crypto::CryptoProvider"
+
+[[fn]]
+path = "rustls::key_rejected_err"
+kappa = "b87451a5884b91548cce100a92ed996eebc96e1cc171f2f37fae4db89f50e282"
+embedded = "069c5f4bd7f71b115a59db5dca4a9ad09059c329dad61c02a65bcea2ec5e2d5a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::kx::KeyExchange::complete"
+kappa = "141aec24a4068b254e46defc134e04c5f7254e65e5a234be2807ad5a2e425022"
+embedded = "0bd780f8171dfa2f0769b209b8080b770210ddafdce2d30fd1d9f69eddceaac3"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::kx::KeyExchange::ffdhe_group"
+kappa = "988517ec41e47c58fa5b68c30744a2329c050ca6ed9fdf4cb3a52937f5796a4f"
+embedded = "663980835c5dbc491bfd2c6555a08395cf876d953138292d98129dae6bf68793"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::kx::KeyExchange::group"
+kappa = "947ab8ac481ccc40e2e640752864737c335d83163470ecff375253a68d18037b"
+embedded = "e9a961efb6613a0fd7552456e70b5067f27213f77167a39fb26baf1a3bae4cdc"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::kx::KeyExchange::pub_key"
+kappa = "98bce9e19e7dfa1d5d0dd34145ebd21559cc872fc68073be5997b4b672a0c2bf"
+embedded = "cd1689a9dcc0694f16b0060349806894170a801cb92c624c47ae8bae2935b887"
+status = "residue"
+cause = "mir::Ty: KeyExchange"
+
+[[fn]]
+path = "rustls::kx::KxGroup::ffdhe_group"
+kappa = "a1a10d605da9b93eeff8294a7001387fd1c609e664dd139278db6d9d6830a7df"
+embedded = "36e951a08d90ada623df2ec60237804a3b22ad306d8580f2c34e66f70dc1e075"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::kx::KxGroup::fips"
+kappa = "67bdca3298bd97d65df156a780a76a2419dc0f16f4a70953df8df248dec273cf"
+embedded = "db77fa836fb9ab835a4ac09e5f2e6580d82529085ae693acfd9701d9f5b58201"
+status = "residue"
+cause = "mir::Ty: KxGroup"
+
+[[fn]]
+path = "rustls::kx::KxGroup::fmt"
+kappa = "51236dda1cba6b6a806dd722a927aca4e3619cb1ec07f3834f35b5fdf951948d"
+embedded = "d3043535178ea0e64eaa2b2a3fdbaf67d07e755326ea692eb0f98adbe9e13df2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::kx::KxGroup::name"
+kappa = "1717178e9166e215639b2dc9e585fe90a4716cc64f16cc354378693db62ae2b1"
+embedded = "1a16b140e2d2bd3c62d8346b447e980f57fb26a3162f24291b7ad2a10740e1e9"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::kx::KxGroup::start"
+kappa = "558882540c7e213180ef8804c1989b1c7dc7122fe9e9d018c3786c0042482137"
+embedded = "e2bbb1bc720dff0e19dd7485ad0930eaf9630b57207429ca7a60bf4e4eca7a81"
+status = "residue"
+cause = "mir::Ty: dyn crypto::ActiveKeyExchange"
+
+[[fn]]
+path = "rustls::labeled_expand"
+kappa = "1087e016e224f59bc214238c6e255255adf68e28683e6f1aee71eadff04a2560"
+at = "L=#_L"
+embedded = "b48f11032d4702312e5f4a6bbfd68c5d185fec6df6bba4be7a1f50bf7d1f2a14"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "rustls::labeled_extract_for_expand"
+kappa = "9dd4931fd98d2a0aa20f72396c1dbbe5202669d9e4aafd1df9d20b353534113f"
+embedded = "f3f0e0c59d1b7c8f9d9e044c0bb146e4fb217a2e313699ba00eef2ed666499aa"
+status = "residue"
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+
+[[fn]]
+path = "rustls::labeled_extract_for_prk"
+kappa = "9df8b41e092141d369bb71a566f3c60d5ed169758b31c07105418d5b4f5a543a"
+embedded = "bdc3467c2553ddc4b6e0bf1baa5b75fb6e27fe7c009830589b58cf10981798c1"
+status = "residue"
+cause = "mir::Ty: dyn HkdfPrkExtract"
+
+[[fn]]
+path = "rustls::make_ticket_generator"
+kappa = "88cf2fc98dad292ccebf004cc28db8b04a8100227e2f7befe1b13da4c474cf79"
+embedded = "a874bdd8d84193cc561ec287764d02e6cfd28e5d6dfffa7b15fb228d10eb4c32"
+status = "residue"
+cause = "mir::Ty: dyn server::server_conn::ProducesTickets"
+
+[[fn]]
+path = "rustls::make_tls12_aad"
+kappa = "397ec0161bf91d954fd982f5b8416759948e4c2444a45ea7c28c710d136b73a3"
+embedded = "817b39c88033d082b4286a7ff7632f2ac98aa9d4369b250785b6a10b2ab955c5"
+status = "residue"
+cause = "mir::Ty: ContentType"
+
+[[fn]]
+path = "rustls::make_tls13_aad"
+kappa = "6adae2b0943b071ec40bf020183e75cc3a93951f9fa876b3f20620f38778a128"
+embedded = "f6b6d4a0793720a27eda6cfb536c096d90b29449cf02f9d3a3e8040c58168202"
+status = "residue"
+cause = "mir::Ty: enums::ProtocolVersion"
+
+[[fn]]
+path = "rustls::mlkem::<impl at src/crypto/aws_lc_rs/pq/mlkem.rs:11:10: 11:15>::fmt"
+kappa = "8e8e09fb05cdc31ce9aa6d7010519b01dcc840230ebc630b51c2aff25df539e3"
+embedded = "24c4e3490076a4b944f61481529140b2fb4f3c4cacdbe38baa3c67d878d5be39"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::mlkem::Active::complete"
+kappa = "a2ac59aa87fef674149293f316f6c80a55bfc8f0774929e0f05e8ea389cb9365"
+embedded = "fe5d0bdea75571d4b5300aa9fb6ce1e6ade68c1794da55feac1aea162cc596a3"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::mlkem::Active::ffdhe_group"
+kappa = "d232f11c8cdb3377c7d7bf0d543338d4bc5cda12f82390bc6872d90c85bf86bd"
+embedded = "fc5328c52c96c49ece4241b875d9283a1a1a528ec9143b1f535e144f051b5add"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::mlkem::Active::group"
+kappa = "60eeb7f1b1b6e1d248cc1f27c54cc01501f92e98e8cf43de65d0ff5b2ed0ca74"
+embedded = "aaa014f067b3db8a95514fed7aaa54df44b6b0c7d54a29c7ee1184ca8ecfd0f1"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::mlkem::Active::pub_key"
+kappa = "7ba0f8cb10cce2c240d07577c4648269476ff917b0109d2b184034f75f37010f"
+embedded = "a612c1ac3ab8db35527a7f2d3445b6321944860aaabb116667e7b28ebb34bece"
+status = "residue"
+cause = "mir::Ty: Active"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::ffdhe_group"
+kappa = "0c42a1396f68f0df184fa9810f23df99e6321c4b792d6ec7582fd8faaeb60ee1"
+embedded = "082d127452bd6890008f9c311f072037e0804b9048f1d5a54f0053d3d933f2db"
+status = "residue"
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::fips"
+kappa = "59f27de4264ac63d0e5d41e8c10df9bc2e3bd4c5e7f178f9af21226218cbf59e"
+embedded = "d1b14245c0e28a693e19d524004341a37fac9d006122be8b5c28705a2d845a60"
+status = "residue"
+cause = "mir::Ty: MlKem"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::name"
+kappa = "88d51ec74a2880175bea3cdcb2f7465facccc79b50f5b6aa2996b1aa1d5670ce"
+embedded = "692b0e687ee1f3bd50687fa8b236ab6dc408fb57880d506787f81aec7410f5f5"
+status = "residue"
+cause = "mir::Ty: msgs::enums::NamedGroup"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::start"
+kappa = "eb95340e8e8d8ba0c9668d70e316a432655252bbad26aa96a6dd20137d260602"
+embedded = "a46e581948a39c33ee42b8608f78ff07a6650152a03cb39604ea34cc1f910b0b"
+status = "residue"
+cause = "mir::Ty: dyn crypto::ActiveKeyExchange"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::start_and_complete"
+kappa = "a45c5d44df4da6ad3f5dd628fd82cac74e835efada7a69cd7668562c98ce132f"
+embedded = "a2cbe2bf3d1f4189e8ec2125d8bdb5c5d6b410d5aded3173a8e73219e2eb105a"
+status = "residue"
+cause = "mir::Ty: crypto::CompletedKeyExchange"
+
+[[fn]]
+path = "rustls::mlkem::MlKem::usable_for_version"
+kappa = "527e1d540e20d26c6cd7e0606fd28babcc16cedddc11b971713738b414323a80"
+embedded = "1a1a95f546496c9ac68fb4492b7ecd52459b03b745b3d2daa81515dc6ea5cfcc"
+status = "residue"
+cause = "mir::Ty: MlKem"
+
+[[fn]]
+path = "rustls::prf"
+kappa = "2704cc68ef43b8c2814396755d1e08ca2ef7bda5cfb1532ec52e2f96689d29fd"
+embedded = "33df3c86c06169b47903e9802c95ad3145659a056bdfc7ca20e2403ede9851f6"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hmac::Key"
+
+[[fn]]
+path = "rustls::public_key_to_spki"
+kappa = "b3f9608ba6384f7c51eebd8c016b99017eb1dcdbbc73420acb578a32e9effea4"
+embedded = "d72b12e7601c3afea0e10ac2a6c0079ae7005d66c128aef5429e26d0d4127402"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls::ring_shim::agree_ephemeral"
+kappa = "389d9584fa3a997ad15dfe21fc6ca3ecca4bc7db003129683e452137c759b14e"
+embedded = "2693ee4d4530c2ab177d1827e6c627a0149b1395e2960e78f8c7bacb63d95f83"
+status = "residue"
+cause = "mir::Ty: crypto::SharedSecret"
+
+[[fn]]
+path = "rustls::signer::<impl at src/crypto/signer.rs:138:10: 138:15>::clone"
+kappa = "150c058ce7796ec0e1efda724bab9c44822e7fa47eae72b780c932b92fa93161"
+embedded = "66b8fe0a63dd27f71bb92a07befcad5c42dcd4bb44163464b274f4762e845e9c"
+status = "residue"
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+
+[[fn]]
+path = "rustls::signer::<impl at src/crypto/signer.rs:138:17: 138:22>::fmt"
+kappa = "ee21d31635a99a2df83c6651901166f3890ae12b9a780911c4f1d63ac8431000"
+embedded = "efdd486f9351c1988bd0ddd91cf877a693822933c1ba8dc34a38dc5649f7fc21"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::signer::<impl at src/crypto/signer.rs:95:10: 95:15>::fmt"
+kappa = "32d95f1f3642d864a907517717ba80275ef0e9a7d2595b5942c1e1d27a2fcc2e"
+embedded = "fdcd43cd1244ca091b58eddc7749c84380ab61efa03c5484d63fc512fdc99f1c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::signer::CertifiedKey::end_entity_cert"
+kappa = "98fbeff132245503f04cfba57a76550ee14b492a2d77de5c23543d6b2d9e6dc1"
+embedded = "617ab0641f008dd0e75cd5e7234a671a6b57442102c4b39e326386583dfd4dbc"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::CertificateDer<'_>"
+
+[[fn]]
+path = "rustls::signer::CertifiedKey::from_der"
+kappa = "f4a46250c8012b9314205194a7217dfe719833a7cea5713d6f6b5ff35f7a4c6b"
+embedded = "ae45426912fc7b029e384c5296cb2aa60aaf26e790a6700bd8b72ecaf1c8f585"
+status = "residue"
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+
+[[fn]]
+path = "rustls::signer::CertifiedKey::keys_match"
+kappa = "59e9f07d78a6815452a37bce94f9b8a738ab56ec303dbb46c249004feb24b957"
+embedded = "0c3308dee7d4038ee4a5a8858b960e06143b8c39e59337a0efddaacb225bc889"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls::signer::CertifiedKey::new"
+kappa = "bd8b68d99d2893b0f837afc657846d5730dcaa1122749b2c53fadc3c3fef01b5"
+embedded = "0edc264abc9b7600f30457bf60f489fbb6ee029c984a2b672094b428b333e0d0"
+status = "residue"
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+
+[[fn]]
+path = "rustls::signer::SingleCertAndKey::from"
+kappa = "f9978efe38db55a6b667c181464ad04d481645c05f6c865322717356a4ded521"
+embedded = "ce42eb45872b303a338bed2f6cfa65693b3f53c641826c60a36ffe2042bc71bc"
+status = "residue"
+cause = "mir::Ty: crypto::signer::SingleCertAndKey"
+
+[[fn]]
+path = "rustls::signer::SingleCertAndKey::from#2"
+kappa = "fd0a1871b090bd2726481cbdd57b7dcc60dcc80dae831da65bdad1b884962c5b"
+embedded = "b8935988ef1efba4edf1fe4bdcdb3af1788cbb05c37da58cfb97df8d67989bb6"
+status = "residue"
+cause = "mir::Ty: crypto::signer::SingleCertAndKey"
+
+[[fn]]
+path = "rustls::signer::SingleCertAndKey::has_certs"
+kappa = "bc1e91f00ba4acf6a7ea72cddea01b165c11dd1445b0263444187409157d779f"
+embedded = "de608367095ee60069d4c66478bdfc159f460a292b96102411d0e6ac44bd81ad"
+status = "residue"
+cause = "mir::Ty: SingleCertAndKey"
+
+[[fn]]
+path = "rustls::signer::SingleCertAndKey::resolve"
+kappa = "8aed5a0828ca8d9e0dc456d769a3156ed24294b410fc3e0ef9a66881262d3200"
+embedded = "42d325385114b398e3fb8ff2ef9de77841ee7ab265c5014dadecb4800a04f0b8"
+status = "residue"
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+
+[[fn]]
+path = "rustls::signer::SingleCertAndKey::resolve#2"
+kappa = "9cdf6b0f570219954ad7d753f94ce583cf3ed881b89868eb86e2297e97d001fa"
+embedded = "cc92971efc2f6d562787e23fa9b0a7dbaaacbe3ed473e268eb4c915f26cd0225"
+status = "residue"
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+
+[[fn]]
+path = "rustls::uncompressed_point"
+kappa = "b33b42de572c6cc982900695e56b59581dca22dc8eee75088a3a317d73de87f4"
+embedded = "87751565b1c007db878e0201c8302d62edc007d6b86e982eb99eb85c9f7dbfe2"
+status = "translated"
+digest = "9e4e6d9aee4cba62daf9f912edcc19a5534caeadfcdedf86cc9447ce435ab8e8"
+
+[[fn]]
+path = "rustls::unspecified_err"
+kappa = "e04689512840a23d52e5921cabb159fec1860e40fb2c7979cb6fd5d82e0fc078"
+embedded = "a9b2f860bf145e011c33177b027774136487fe25459e6cd591aacc0568ebf313"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

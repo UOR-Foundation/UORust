@@ -1,0 +1,96 @@
+[[fn]]
+path = "http-body-util::BodyExt::boxed"
+kappa = "0ee533f54a0c3e4b2cc3d0567a36200d2a7fdf5f72ae5cd84ccd2e9f0bb5b19b"
+at = "Self=u32"
+embedded = "312a4f3c11b7f9e129fa3e29eac519d05dcd45d2abd28174937a5c4fcac29552"
+status = "residue"
+cause = "mir::Ty: combinators::box_body::BoxBody<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::boxed_unsync"
+kappa = "185a667ce47d60c09ef9f6cdd993d62e03b5e4dc983c46952ce1ac91d9e1023f"
+at = "Self=u32"
+embedded = "3cc611cb3f12ea5c377834d479badea643c209980bda81ef4a163b40e58bae6c"
+status = "residue"
+cause = "mir::Ty: combinators::box_body::UnsyncBoxBody<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::collect"
+kappa = "9a273976785a75e8766c38b0f1dad04b185794f2fe2c9cc6a3ea1e690071e05b"
+at = "Self=u32"
+embedded = "f751bdb9e7c498c26e588cf03615df283a74eaf75a45f1dbd658f15d2aacc014"
+status = "residue"
+cause = "mir::Ty: combinators::collect::Collect<u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::frame"
+kappa = "595037693fa776cde7f91f492f2e80b6c6e3fb6ace0abed29408019c12bf696b"
+at = "Self=u32"
+embedded = "3a5979148ef2dce7eb2b9d52730114bc60be61b928a804c6706029ded22dc3d8"
+status = "residue"
+cause = "mir::Ty: combinators::frame::Frame<'_, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::fuse"
+kappa = "e79c92239f64b7b9d15abe1af3e3853a5e3b6e6cc573345fd83b53457bea77a5"
+at = "Self=u32"
+embedded = "e42b650f9c49484f0d284f6d79dfb46c8bd6dd8bb98b3601348a42976dc591bf"
+status = "residue"
+cause = "mir::Ty: combinators::fuse::Fuse<u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::inspect_err"
+kappa = "f72d817f3de443adce762a7c93a9ed5c13759c273647e54595fe91f48a01bc4c"
+at = "F=u32, Self=u32"
+embedded = "2d7a2678bc4868a4e27cc93aa94688b3e2e65f43507c95400c855724a9fb0c64"
+status = "residue"
+cause = "mir::Ty: combinators::inspect_err::InspectErr<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::inspect_frame"
+kappa = "b3995353b196771a01f719400d7ff999322bb48a98c90c9dd48dd67e2a12c428"
+at = "F=u32, Self=u32"
+embedded = "6131327e83bd20154484dc1b3414bb6dd3237680459facea0b3254efbe5a3ec8"
+status = "residue"
+cause = "mir::Ty: combinators::inspect_frame::InspectFrame<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::into_data_stream"
+kappa = "66041f8a67d62b7782201d94a6416e50e635810f9d34da18eb1ffaa69faf05c0"
+at = "Self=u32"
+embedded = "fd9632ff9fbca09d6d907a2b7b602d4592459f004f7cd3c6b73fe43fa264c7d9"
+status = "residue"
+cause = "mir::Ty: stream::BodyDataStream<u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::into_stream"
+kappa = "5e2332eed79a4924e2918d3a089ac50cb501e56dd0814571db1ea2fe0bccdd3b"
+at = "Self=u32"
+embedded = "37378d26fa8a935f2de576d95370b5a01eb4d9e35035dff5765beec46964973d"
+status = "residue"
+cause = "mir::Ty: stream::BodyStream<u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::map_err"
+kappa = "755e87769872e73e8d6fa6c2f0fde8c48191286e4c4beb9c23cc4f09e21a7ba2"
+at = "F=u32, Self=u32"
+embedded = "91c2a4f819eed8dd825dcf97b9f7330bb84f2f95675f6154be80377a99940684"
+status = "residue"
+cause = "mir::Ty: combinators::map_err::MapErr<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::map_frame"
+kappa = "d1c06f6fa4faa48556f4a59ee3fad36117c0ecc259c1bbfacaa8180d85548e90"
+at = "F=u32, Self=u32"
+embedded = "87cad00d39edb6612d8ac81190bcbfb75c13e1a191199b7564999d6641fe14d0"
+status = "residue"
+cause = "mir::Ty: combinators::map_frame::MapFrame<u32, u32>"
+
+[[fn]]
+path = "http-body-util::BodyExt::with_trailers"
+kappa = "5a77d79fbe1e46802ac390e06f9db302f14cf85b4cdc05a62e379dbee692293d"
+at = "F=u32, Self=u32"
+embedded = "0cec7bd7cb962dd87853bb9eb100ed195f09aa653e66f79e2db2a6fcb41b4833"
+status = "residue"
+cause = "mir::Ty: combinators::with_trailers::WithTrailers<u32, u32>"
+

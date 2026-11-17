@@ -1,0 +1,144 @@
+# The env_logger register (written by `uorust crate env_logger@0.11.11`; do not edit): every body of
+# env_logger's MIR at env_logger 0.11.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 148
+translated = 0
+residue = 148
+
+[module.fmt]
+bodies = 46
+translated = 0
+residue = 46
+
+[module.logger]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.writer]
+bodies = 37
+translated = 0
+residue = 37
+
+[embedding]
+bodies = 148
+embedded = 148
+evaluable = 148
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: logger::Builder"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: fmt::ConfigurableFormat"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: logger::Env<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: writer::WriteStyle"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: writer::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fmt::humantime::Timestamp"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: log::SetLoggerError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Logger"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fmt::Formatter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WriteStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logger::Logger"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: writer::buffer::BufferWriter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Env<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::TimestampPrecision"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logger::Var<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::buffer::Buffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Var<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: anstream::ColorChoice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: anstyle::Style"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn fmt::RecordFormat + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::StyledValue<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::LevelFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::Writer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::target::Target"
+bodies = 1

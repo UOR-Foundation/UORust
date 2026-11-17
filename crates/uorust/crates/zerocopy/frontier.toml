@@ -1,0 +1,971 @@
+# The zerocopy register (written by `uorust crate zerocopy@0.8.63`; do not edit): every body of
+# zerocopy's MIR at zerocopy 0.8.63, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 4630
+translated = 2333
+residue = 2297
+
+[module."_#10"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#11"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#12"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#13"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#14"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#15"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#16"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#17"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#18"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#19"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#2"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#20"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#21"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#22"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#23"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#24"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#25"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#26"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#27"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#28"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#29"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#3"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#30"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#31"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#32"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#33"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#34"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#35"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#36"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#37"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#38"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#39"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#4"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#5"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#6"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#7"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#8"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module."_#9"]
+bodies = 4
+translated = 2
+residue = 2
+
+[module.byte_slice]
+bodies = 8
+translated = 3
+residue = 5
+
+[module.byteorder]
+bodies = 1261
+translated = 108
+residue = 1153
+
+[module.crate]
+bodies = 104
+translated = 13
+residue = 91
+
+[module.deprecated]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.error]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.impls]
+bodies = 2681
+translated = 2100
+residue = 581
+
+[module.layout]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.pointer]
+bodies = 99
+translated = 7
+residue = 92
+
+[module.ref]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.split_at]
+bodies = 30
+translated = 2
+residue = 28
+
+[module.util]
+bodies = 58
+translated = 2
+residue = 56
+
+[module.wrappers]
+bodies = 84
+translated = 22
+residue = 62
+
+[embedding]
+bodies = 2439
+embedded = 2439
+evaluable = 2413
+blocked = 26
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 25
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: _def::PtrInner<'_"
+bodies = 371
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 106
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 99
+
+[[cause]]
+cause = "mir::Ty: byteorder::I16<u32>"
+bodies = 89
+
+[[cause]]
+cause = "mir::Ty: byteorder::U16<u32>"
+bodies = 89
+
+[[cause]]
+cause = "mir::Ty: byteorder::I32<u32>"
+bodies = 84
+
+[[cause]]
+cause = "mir::Ty: byteorder::U32<u32>"
+bodies = 84
+
+[[cause]]
+cause = "mir::Ty: layout::DstLayout"
+bodies = 84
+
+[[cause]]
+cause = "mir::Ty: byteorder::I64<u32>"
+bodies = 82
+
+[[cause]]
+cause = "mir::Ty: byteorder::U64<u32>"
+bodies = 82
+
+[[cause]]
+cause = "mir::Ty: byteorder::I128<u32>"
+bodies = 80
+
+[[cause]]
+cause = "mir::Ty: byteorder::U128<u32>"
+bodies = 80
+
+[[cause]]
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_"
+bodies = 78
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::cast"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: byteorder::Isize<u32>"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: byteorder::Usize<u32>"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: byteorder::F64<u32>"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: Isize<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: Usize<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: byteorder::F32<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: r#ref::def::Ref<u32"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<"
+bodies = 27
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: wrappers::Unalign<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: error::AlignmentError<&mut [u8]"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: impls::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: error::AlignmentError<&[u8]"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: error::AlignmentError<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic_8::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic_ptr::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Src"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: split_at::Split<&u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic_16::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic_32::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic_64::_::only_derive_is_allowed_to_implement_this_trait::is_trait"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: error::SizeError<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Shared"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: split_at::Split<&mut u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::convert::Infallible"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: error::ValidityError<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: layout::TrailingSliceLayout"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Unaligned"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Dst"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::pointer_to_metadata"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as KnownLayout>::raw_from_ptr_len"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BigEndian"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LittleEndian"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Order"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Aligned"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: wrappers::read_only_def::ReadOnly<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: <layout::cast_from::CastFrom<u32> as pointer::cast::Project<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::SizeError<&[u8]"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Exclusive"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::ValidityKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::NonNull::as_ptr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnsafeCell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: byteorder::Order"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::AllocError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::SizeError<&u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: wrappers::MaybeUninit<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PointerMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Wrap<&mut u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Wrap<&u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::AlignmentError<&u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ValidityError<&mut u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ValidityError<&u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: layout::RoundingAlignAndPhase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pointer::cast::IdCast"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Safe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::SendSyncPhantomData<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::macro_util::Wrap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as maximum_trailing_slice_len::LayoutFacts>::MAX_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as KnownLayout>::LAYOUT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:1014:1: 1014:35>::pointer_to_metadata: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::mut_ptr::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:1014:1: 1014:35>::raw_from_ptr_len: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::NonNull::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: IntoBytes::as_mut_bytes: zerocopy's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::unchecked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_mut_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::addr: zerocopy's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: zeroed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CastParams<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConvertError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteBackOnDrop<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: byteorder::BigEndian"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: byteorder::LittleEndian"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::cell::Ref<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::cell::RefMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::AlignmentError<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ConvertError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layout::CastType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layout::MetadataCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layout::SizeInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layout::TrailingSliceLayout<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: len_of::MetadataOf<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::BecauseExclusive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::BecauseImmutable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pointer::invariant::Initialized"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<*const u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<Option<&mut u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<Option<&u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<Option<core::ptr::NonNull<u32>>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<[u32; #_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<[u32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<core::mem::ManuallyDrop<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read_only_def::ReadOnly<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: split_at::Split<u32>"
+bodies = 1

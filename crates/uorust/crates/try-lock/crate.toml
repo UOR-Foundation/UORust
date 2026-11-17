@@ -1,0 +1,103 @@
+[[fn]]
+path = "try-lock::<impl at src/lib.rs:62:10: 62:17>::default"
+kappa = "30eb32039836f9f27cb224ace43f847558fffdded1eafced86856effb2436d93"
+at = "T=u32"
+embedded = "3189bfa66d9a14a8963467cc4d3b68ba24efc70af3045727fb75e669af2199fa"
+status = "residue"
+cause = "mir::Ty: TryLock<u32>"
+
+[[fn]]
+path = "try-lock::Locked::deref"
+kappa = "58c6fd3b5176c4ebb30df74d8b052ea2e60db25385a2d1c8637c49de733e91fc"
+at = "T=u32"
+embedded = "2a6c3e24213afcc040049e3b4c55a07b945ec4a166422af8f6acf8c0c50c0670"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::Locked::deref_mut"
+kappa = "af4afbf7c857bafdce76f630976d1222e6232783887a4a2a1813312e370266ca"
+at = "T=u32"
+embedded = "697227068a52743ac688ad1f983d6a90f28762d2ce71998fd03a23c6548cbf66"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::Locked::drop"
+kappa = "5754a92c5f51093c77c0f36ae33425c35c396de22e9ae539d84268670d233efd"
+at = "T=u32"
+embedded = "989da5d5d1168506ad7062261dfce2a52b030d9e0afa26396a451daba4cf26d2"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::Locked::fmt"
+kappa = "dbade597b2dfa40939bc775c997c94db18d67c8204310920c44342fcd4ee8eea"
+at = "T=u32"
+embedded = "4cb97ec09d3fbf7582834aab68939a7323453c62698546ec3c26686b6fe2fdeb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "try-lock::TryLock::fmt"
+kappa = "059570cafd214102542d547de71482ce69ab562bd3784e9e9bd59cf514292fa1"
+at = "T=u32"
+embedded = "b2be5891b426140297cc32701f3c5586c022049c2d011b25b3ad0d7cfac11afd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "try-lock::TryLock::fmt::LockedPlaceholder::fmt"
+kappa = "9a77415209f9929beff44f80b88596ac56acf28be6ac6c6594a2e5277f00b565"
+embedded = "6fd4ba4f2ff83d6a53e65af9d9cd9ee2fdd78511832ed860418931eca1f2d741"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "try-lock::TryLock::into_inner"
+kappa = "9f1774fdf18395892b31d5494b212e361c5c15b59f88912c73862c66d1a4b330"
+at = "T=u32"
+embedded = "af238a23f74cbaae6e9aaa42b21424a928abaca605c0ff20983eef675e7cf264"
+status = "residue"
+cause = "mir::Ty: TryLock<u32>"
+
+[[fn]]
+path = "try-lock::TryLock::new"
+kappa = "9344c8ec799e31f016910f4e6b71a3079fc77ea5bed762768e7fecfcaa5a25ec"
+at = "T=u32"
+embedded = "32dff5fe29901edff974d6cf21db8103b92b78bc28c256c8b5a4e3d660993c49"
+status = "residue"
+cause = "mir::Ty: TryLock<u32>"
+
+[[fn]]
+path = "try-lock::TryLock::try_lock"
+kappa = "bf4d6b98029cd3e24d2fbb927e9af712209e9157caa0ba84926afaac66591421"
+at = "T=u32"
+embedded = "d2e3b0b04dc4f3e60284e1d7367682a6e14918e8bf2cb7b3823d3e181133d4a4"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::TryLock::try_lock_explicit"
+kappa = "67dfd2d3c27667ba0578c38bea2cec0f8c85a1edbe6db45076d083dfbba801c0"
+at = "T=u32"
+embedded = "b95aadfcf6a86e77be4a91c23ecfef32a0f6cfb2a48364fbd4aa35d4717d1191"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::TryLock::try_lock_explicit_unchecked"
+kappa = "23c7d97eac4d0a92be0fe80a123c898980b7dc5540aa6babe25c2f6cfe14e26d"
+at = "T=u32"
+embedded = "c4babc62618d05dc7693fb7b7dd88ab31a270a2f0bbaf12fecf6b21ac387ed9f"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+
+[[fn]]
+path = "try-lock::TryLock::try_lock_order"
+kappa = "25dccf228284ebfc0ddef019a981f5355fbb872bada7da4a6759e651ee77a4fc"
+at = "T=u32"
+embedded = "1f7a35ca9c276d562a88cb4e74eb1e4ae0daa8913bc6144616f4dea23f372971"
+status = "residue"
+cause = "mir::Ty: Locked<'_, u32>"
+

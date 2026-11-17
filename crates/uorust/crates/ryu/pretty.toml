@@ -1,0 +1,42 @@
+[[fn]]
+path = "ryu::format32"
+kappa = "f582b7fddcd0196b01e28afe5af7e1bbbe387f24f1276527e545a752ab6e42bc"
+embedded = "09dc0fb3635168da8f31550ac5557ecd2378ac626195c275884d5780303491ab"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "ryu::format64"
+kappa = "0528c7057789e8a1a6367a4d2baa943955aec7735e34ab566247234f3e42b89b"
+embedded = "1a0731b1deb4e97854d2ea9e0051b3a7671d4a2058b9a0391e6d0a0587e46790"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "ryu::write_exponent2"
+kappa = "1c72a4e8d62b5317b39d50cebec158c2b3630d31b975ae28723b09b3349e6321"
+embedded = "7af685a6f5837498f2b25d92e8d122f45cec251d2e4b4f3717fbbbdb24432bd9"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "ryu::write_exponent3"
+kappa = "7aff24c400c4085fa088b2e22f718d99dd983597689f708003d6c7f24a6ac8e2"
+embedded = "e17ff2b5debb170e21d19e4f581773bd37baa30d427c40e55781ee4f53cc3143"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "ryu::write_mantissa"
+kappa = "c1acf4f4d5b4035ed8e59d1241a549391bca030890a203975b4e3575a19919ea"
+embedded = "e02cfccb73691116e4021e224f9e6010b08c0e9cec72521bfbe713ff059dfcaf"
+status = "residue"
+cause = "mir::Operand::Constant: <static(DefId(0:101 ~ ryu[e5ef]::digit_table::DIGIT_TABLE))>"
+
+[[fn]]
+path = "ryu::write_mantissa_long"
+kappa = "f9c58a3f649052c05c6afcb1c4288543088b0d4b6baf90bbc06d82fa7e46967a"
+embedded = "23187eddbe36eb0f2c0d97738bf5462788f8335bce271e0ec2edcdb375b3cbb9"
+status = "residue"
+cause = "mir::Operand::Constant: <static(DefId(0:101 ~ ryu[e5ef]::digit_table::DIGIT_TABLE))>"
+

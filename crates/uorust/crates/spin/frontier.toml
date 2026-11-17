@@ -1,0 +1,179 @@
+# The spin register (written by `uorust crate spin@0.12.3`; do not edit): every body of
+# spin's MIR at spin 0.12.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 156
+translated = 1
+residue = 155
+
+[module.barrier]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.lazylock]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.mutex]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.once]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.relax]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.rwlock]
+bodies = 63
+translated = 0
+residue = 63
+
+[embedding]
+bodies = 156
+embedded = 156
+evaluable = 156
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: once::Once<u32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLock<"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: mutex::Mutex<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: mutex::Mutex<"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mutex::MutexGuard<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: once::status::Status"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SpinMutex<"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpinMutexGuard<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lazylock::LazyLock<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mutex::spin::SpinMutex<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mutex::spin::SpinMutexGuard<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLock<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: once::BeginInit<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: rwlock::READER: mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: spin_loop_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AtomicStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BarrierWaitResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Finish<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Status"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: barrier::Barrier<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: barrier::BarrierWaitResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::spin::SpinMutex<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: once::status::AtomicStatus"
+bodies = 1

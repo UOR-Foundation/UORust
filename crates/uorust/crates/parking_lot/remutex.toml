@@ -1,0 +1,21 @@
+[[fn]]
+path = "parking_lot::KEY"
+kappa = "0682c50e2fe1166d2eb1b37ceebaa5581a0ad41d9a9aeed5419c910542021692"
+embedded = "7cf4145d0e3e3dbccb569a3aa647292d52a2fc15deee52fa410440e59e706769"
+status = "residue"
+cause = "mir::Ty: std::thread::LocalKey<u8>"
+
+[[fn]]
+path = "parking_lot::remutex::<impl at src/remutex.rs:8:1: 8:40>::INIT"
+kappa = "251ab0e49807a5b4790d3cc23efbf546690953fee1ef89582d5d95eb766ded81"
+embedded = "88338fe1c29d45ef8b037fa76c7eaed7fd796ed6ff18d18b9b99585fed3d984a"
+status = "residue"
+cause = "mir::Ty: remutex::RawThreadId"
+
+[[fn]]
+path = "parking_lot::remutex::<impl at src/remutex.rs:8:1: 8:40>::nonzero_thread_id"
+kappa = "f7f470f0568121b5d643cd184812843861224c4733167c6045cee5ebbcba9d88"
+embedded = "fd085735e9f4b57ebdecc61751dba44afe4553eefa6e10baec5a6f922c7f95f6"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+

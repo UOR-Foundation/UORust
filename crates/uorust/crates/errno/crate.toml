@@ -1,0 +1,96 @@
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:16: 42:21>::clone"
+kappa = "0f15e7fec52302c233cf62bb8966f1c24d53d4165cf18e4ad6c8e3262ab9c9c6"
+at = "Errno=u32"
+embedded = "458b3105756a2d7ac57a2dd9040efcf837d9ff3c86f9c2cd3f3b6dd56412b48a"
+status = "translated"
+digest = "ed6f15cb439627a8573b350a26dbdd5ce32969ec7eac9cb88c4b78746f1bb6fa"
+
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:23: 42:25>::assert_fields_are_eq"
+kappa = "ffcc96e882043f34151e7108fb3999f230d79c31e36728ecfddc66b4627cd688"
+embedded = "4bace759f0adb182e89346f265e76d19eb00ffac754d9d56d7947ac72f1002b6"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:27: 42:30>::cmp"
+kappa = "696eca1f2b4411750638effac3216f897aa2367810ec57d5a9b5254aff3ce6d9"
+embedded = "783771091c07ce880d83d3ac3bd1b634af6b62f1a0d5df4dea89dfe1a44d30d9"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:32: 42:41>::eq"
+kappa = "a1202419eb7e2021693e65f557711ae12cd6d729111e8bf2df0a33feb3086241"
+embedded = "62f5eb7d34cbc81db37ef76e34e6feb21d3364efcf1ac6aeb3e3ddb1d1571023"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:43: 42:53>::partial_cmp"
+kappa = "2e78e1e29a54e637ce3bf63c428706751f1683055ae849a25ff08565092b84d3"
+embedded = "a3051e42d47d8b0826296d0a103dd8d3c484deffdb41547e2a58c8d748c9f036"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::<impl at src/lib.rs:42:55: 42:59>::hash"
+kappa = "558c2bba5df360d4fae9db29d30b0924d90fb1c63111b46e7edf26e7fb6d6857"
+embedded = "ce08e12b4c27d0060aee0660361ef8563d7b616eb91313d722baffec250dc76e"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::Errno::description"
+kappa = "649265d6a1468f60b036c16ef757df5d59be3f700f0432303f6bf6f6f53270f3"
+embedded = "2609e076406f70a01082523f3331186070d378e9c3648e9053581b9205cd4090"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::Errno::fmt"
+kappa = "02e94ff42ec7716b8e436716fa043e9bb2c6998d2e96dc45010981bf5bf924aa"
+at = "Errno=u32"
+embedded = "2f9d34cddc8c191c4a2755a0821e60b9bdcb4f0351a377284a6bd9c7ce6c1a8c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "errno::Errno::fmt#2"
+kappa = "c9b8a70a5f0c18c6c5ef1cc01249b16a1c052ca1f30513748add611ca02a9605"
+at = "Errno=u32"
+embedded = "78af85a87af478597b59b5ea7e0f28fc275b975e28d822ab0865a40a2098d415"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "errno::Error::from"
+kappa = "8d4943e4ade022c78f47da4e52b1c3b842190d041cbdc624fdd71b5fc263ee2a"
+embedded = "0c98981657ef3f964bda2276b164e4b57ac5717feef5c0dcfe20d6a492766aa2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "errno::errno"
+kappa = "0ec71326b53edcc48877b308f1b78083b9c16d0b1fc6bbdb6d62840a457c98f9"
+at = "Errno=u32"
+embedded = "b71e1538498f9fcb2e7794d2c5c708c9307dac6f866699df6d113f5fdf696d7b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sys::errno: errno's MIR stops at mir::TerminatorKind::Call: sys::errno_location"
+
+[[fn]]
+path = "errno::i32::from"
+kappa = "e041235c4474c6327792b4d6ee1bbdc894e37fa79ab432385303b12e487ccdb9"
+embedded = "d0c765116110b25f9a3454ac6be6a7bca4504fab1ea3e50dd0ecf5319136248e"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::set_errno"
+kappa = "25d6bcedfd967bdd96d74a62282735fb87c12dbcf23a5df66e9115bd9eabeffe"
+at = "Errno=u32"
+embedded = "e64484854dae25b35114005f3887385ea20568c1db09cde7c638e8661a061e8f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sys::set_errno: errno's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+

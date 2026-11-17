@@ -1,0 +1,296 @@
+[[fn]]
+path = "zerocopy::POINTER_WIDTH_BITS"
+kappa = "cf15ad4d22fe4dfcc47f15a1578dc391d7406e78d41836d5bab0385c80840d22"
+embedded = "0e9f44a075e3fb219bf2bbdf627328fe72e42c71c144c3204c38322ca718165d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::add_scaled_metadata"
+kappa = "b0548c08b865a550cfb256d7ceb05085f6424181e95153c333d1444c742188c2"
+embedded = "a4ccfb0a9ccac1950c62d1c2f147c8b069336a78a80281aa6bc3287ac72e867b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::unchecked_mul"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project"
+kappa = "6f280215b09c3d7ef0ed8cd850cd730e5d2d4c130e0f2f565b7175da88e6cff9"
+at = "Dst=u32, Src=u32"
+embedded = "5542654a8ce9702ff2ad89f49c3718dbd1e4afa4413c7d623ba3d0a2402d5fdf"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:1947:28: 1947:33>::clone"
+kappa = "e91e8efbcc977ed068532663f8ffff356362b84cf3054c49d249a26464884a7e"
+at = "Dst=u32, Src=u32"
+embedded = "70daebd3cdb99f7734e8c36a68c6d02f617178f04d0edba5f171bccdfb891c67"
+status = "residue"
+cause = "mir::Ty: <layout::cast_from::CastFrom<u32> as pointer::cast::Project<u32, u32>>::project::CastParamsInner"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:2005:13: 2005:74>::clone"
+kappa = "893358579699f278fa816b036c48ecb2d4f530bc1bf98d58a1d95415fa5c4c8e"
+at = "Dst=u32, Src=u32"
+embedded = "33174f7c6e05e57a33757ace22cfb131805756ba1ff936eac56ada18285708ef"
+status = "residue"
+cause = "mir::Ty: <layout::cast_from::CastFrom<u32> as pointer::cast::Project<u32, u32>>::project::CastParams<u32, u32>"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:2011:13: 2011:64>::size_sequences_match"
+kappa = "b933b6a80b6dfc51d5b4dc49fc68feec28c51bca79efa44ad0eb6da8e21bfe8e"
+embedded = "6da669aad33e17b82b49b076693f7f9645c66b93b90db497d6a7668ca0feadd0"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:2011:13: 2011:64>::try_compute"
+kappa = "d8ede0e998105cff7b83795edc17bfa3b7d898f9c64d1e98349492e89ae06b77"
+at = "Dst=u32, Src=u32"
+embedded = "99d5d50e864965193746f7509c5f5a89356cece53d71091a075c19882c415adc"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: <layout::cast_from::CastFrom<u32> as pointer::cast::Project<u32, u32>>::project::CastParams<u32, u32>"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:2162:13: 2162:92>::cast_metadata"
+kappa = "9874f7cc536ba284e89109f89489416baf5d849efd4640ee83eddfe46126275f"
+at = "Dst=u32, Src=u32"
+embedded = "d9ecf84da7cef55c063dde1e06c2eab4eb5bf54d3c8e6d7bf1de841c0a70f30f"
+status = "residue"
+cause = "mir::Ty: CastParams<u32, u32>"
+
+[[fn]]
+path = "zerocopy::cast_from::<impl at src/layout.rs:1920:5: 1923:35>::project::<impl at src/layout.rs:2247:13: 2250:43>::CAST_PARAMS"
+kappa = "1eea8011da0af5e2efdd5d3b887f24a5e9002d2c249567a80ec6fac10ab4dfdd"
+at = "Dst=u32, Src=u32"
+embedded = "050cf822cae6fdf2c86453b4a2935aee4c9e492075769d2e00f9c4365fb0f490"
+status = "residue"
+cause = "mir::Ty: <layout::cast_from::CastFrom<u32> as pointer::cast::Project<u32, u32>>::project::CastParams<u32, u32>"
+
+[[fn]]
+path = "zerocopy::layout::<impl at src/layout.rs:151:16: 151:21>::clone"
+kappa = "1d4289aac517487e8be41783f5d199cec5907bf8eaeb6fd88e176bf50c950ecc"
+at = "E=u32"
+embedded = "0862d20c6e9692b642535b7831cc1351da55f33a28bb84fd6112c2222d01fe6a"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout<u32>"
+
+[[fn]]
+path = "zerocopy::layout::<impl at src/layout.rs:32:16: 32:21>::clone"
+kappa = "4f9096b3ead82d13eac66675004aa01d631ae0fa21157675a733f2949967cb4c"
+embedded = "f611b88f9b19dba4b6b862f5d647377f719f6cbf3788474d5540aafaec2f8e0d"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::<impl at src/layout.rs:45:16: 45:21>::clone"
+kappa = "a4b8d74fb1fe695116544866f5c1826f7861e1d6fd3fe3b44c9f5eb916d8c3a0"
+at = "E=u32"
+embedded = "2e1ec6073834910a2c5e87708dda2fd33b32e25f3854ab4ed7894a010e453516"
+status = "residue"
+cause = "mir::Ty: layout::SizeInfo<u32>"
+
+[[fn]]
+path = "zerocopy::layout::<impl at src/layout.rs:63:16: 63:21>::clone"
+kappa = "7b09bf1b2e5abe9102cf11cfc044d1cc5ead17b0d43ff56fa6a5a7870c71e12b"
+embedded = "1e501f8fca764b4797467cb79d778b1d0479f7aeb0705bd373c9c4a3b4cf2b7b"
+status = "residue"
+cause = "mir::Ty: layout::RoundingAlignAndPhase"
+
+[[fn]]
+path = "zerocopy::layout::<impl at src/layout.rs:807:16: 807:21>::clone"
+kappa = "c36aa65fbc0a3d616f0edeee994c5f1f8b0b7938a4843a24b335aeeac3a6ec8f"
+embedded = "8ff61f01bc067a6bf070c1115a1e3a87a1ce7fca6df5c6460106f254a85c4860"
+status = "residue"
+cause = "mir::Ty: layout::CastType"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::CURRENT_MAX_ALIGN"
+kappa = "e4ca4b9209f552ef7ff406575bfc177070622b4352b7aff9e4ead6e7a57d94aa"
+embedded = "21f048fbed53781281b666ddd8cc98f68068b1babdca487a1b0ffe895e5ae4c6"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::MAX_SIZE"
+kappa = "233800145ec7c934d0c8889f0d0d9270b34f6b4301e573e1dc3256ff5c8a14fc"
+embedded = "c9c2dfc0cd943eefbdc9f7303c90ae4035d6eade47dffc4cb0e7fd6549caaf8b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MAX"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::MIN_ALIGN"
+kappa = "62ac932b2c56d536c1c28556a03b53f3db4f5017b81d93ec04ccf8e737b78e2e"
+embedded = "86918bbaba465ce6de1c5b6172190f17ec591d22fffd9c138fc510df5a2669ae"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::THEORETICAL_MAX_ALIGN"
+kappa = "8515aa96a23171fd174ad85b95547d6bf7bf77d2364cb274fefcc8bf7449e29a"
+embedded = "c6e52f658ab11aa69ddb9e27dcbda73c19db357c7bf20940ecc3f03f9a2fe31f"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::assume_shallow_unpadded"
+kappa = "bcea802303922ef559a531de3b1dd96b6551536dc5d429e24f5ba4109e20206a"
+embedded = "ed4ed09b5be785aefada6e8a573a628c929bfe5b1ff413afbe124b8049eb36e2"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::extend"
+kappa = "c972e731e3ceb355ca9e5c40baadc323b16ef24de31d49eedb22e2d95a7ef24f"
+embedded = "a347626d94fdb72f6d934ef016f1d8a5042216c1da9a14f2e14b98b15acb06b2"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::for_repr_c_struct"
+kappa = "9a21c3f8614cafe52103e2b88f9523b94c353d702d4f3de6b93589af10bbb031"
+embedded = "a7cf2bc9f1e17b0c659c9f97e230b2db3bdfaa729cb17a7959e93834ebb63f69"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::for_slice"
+kappa = "5b610d6696087e4f681841f5995e157d3621ac389e20e7a10032f0d14577b478"
+embedded = "c1089222b993f1c60487b7aed01b7ef5e38993adc5e3e2d3f015e0aef6e442cb"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::for_type"
+kappa = "f971859f8de8442386eea6b3cb4f22f557502c6d1e3ea53b0b9df11cf33ef04a"
+embedded = "1d2423a1c58a752abc8c7a53ad6b6441e817041d5a2729d0279bdb477b1b90c3"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::for_unpadded_type"
+kappa = "50de3366e38913162295a7b8fd677fd8952b1788b5b3579c797b92db55ed0416"
+embedded = "1b7929a7bd8afc58ef6867d70ba3dc39d773501daae86f3f51a5b5641714178d"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::metadata_for_exact_size"
+kappa = "d77c7e420085e033c7537ac8fdc2e4cf881bb1d520010f7e933edda3673d6039"
+embedded = "a3b4bd6a5decb74e0ba3df838d155219aad33eedf09a7c311da39900fb944729"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::new_zst"
+kappa = "ccd88fd04ddc9430803ce0fc5be8c3bece2d99d8128503c4e2a577b0800b4cdf"
+embedded = "2a2399667310b290776e25481fa57f3d7a7bbb31c3260f8b92132dd5fc354f43"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::pad_to_align"
+kappa = "14e1e25e8438414ef6e6947132c60cf0941126c29991fe619a2f676f90a556d0"
+embedded = "d8abe8f6904fcdd63adbe3baf30bb7952c4cc2a4476565817e56bdd91d087568"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::requires_dynamic_padding"
+kappa = "e381a82053dea2b08db6dea329064b93b7e6767ae27f42df9954b76550b4810c"
+embedded = "d9c2e23b6faed52448e66fc0fca0155b537b20ed147545f0abd8f0eef7682b81"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::requires_static_padding"
+kappa = "063f073113ecf1b6c107ad46f3985724a7e6226d6f1db49f049f2bceed74fbc2"
+embedded = "f4993b5aba97763d8f05c4428c0c0edad5621508c6266b29654f6d233afe9bfa"
+status = "residue"
+cause = "mir::Ty: layout::DstLayout"
+
+[[fn]]
+path = "zerocopy::layout::DstLayout::validate_cast_and_convert_metadata"
+kappa = "6b86411d3e799024a3754dfbbf7defb48d1e74f77b34a067bd63b003f03f1153"
+embedded = "d212fb8dd88d753131c302573e7c29b44bde9f9b016e645ea711b878124683f9"
+status = "residue"
+cause = "mir::Ty: layout::MetadataCastError"
+
+[[fn]]
+path = "zerocopy::layout::RoundingAlignAndPhase::align"
+kappa = "e54ff524b890077086dee8a6be183cd940bc2536a4a2c305bf672d507834183c"
+embedded = "4fd2a2de5266e1a0153ceb1940aeae33fb985328df34bfe6eb85b3874212f737"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::RoundingAlignAndPhase::components"
+kappa = "ec50ba6e5f6dd82cb6b1785f3a282c1d754817df41574383462c0deb7908f53e"
+embedded = "5659a6c6ba801e5fa6e9e4f44a6282aee5b674fb4cbaeb7112baa3430381e167"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::RoundingAlignAndPhase::new"
+kappa = "1fa1148026275e465877e5c2084e82cdbadde38a3a8ca9825bc4defb5345ba9b"
+embedded = "531f253a8ae9e1c3c6000cc1589c88e01157860da442ca38efe7a99749eb7a18"
+status = "residue"
+cause = "mir::Ty: layout::RoundingAlignAndPhase"
+
+[[fn]]
+path = "zerocopy::layout::SizeInfo::try_to_nonzero_elem_size"
+kappa = "a182421db3c5c75a4e7f51f16c048befd81dbec09188e4f7da8458a97de38072"
+embedded = "3bfa69a222e94ecc5aa9fe523bed45072b3b0fb2c9f3eda00e40c131ad395b8e"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<usize>"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::advance"
+kappa = "26f762e96f1a6c4a932bf09d6b3aac7936ecdb3cfcdb5071f3e905b87b910ecb"
+embedded = "832b5b29cf7c52e87af21a503134417aa6f4e02367e8f25686a123a6814a7f0c"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::has_same_size_sequence"
+kappa = "f6f706088160f76c07bc444110a82483cda42849f2a0e36c3dfe9d57374af0a2"
+embedded = "1b193c132873aab5acee8263f919ed9eaad4d0c4fb7f84d398d8b6ed706cce70"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::max_trailing_bytes"
+kappa = "240b7dddfc9169ad243444ad00889e649d80ed0a863956ad62348c0dc190578c"
+embedded = "b2be7b336d13866ed678d6c33bf277ce621d12996be0d8ba95c6ec729df9710f"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::padding_for_elems"
+kappa = "75bb6cc2daf0a8ee863101ccbde4a8866a1e784cab8e23ec100dddc839fdfa07"
+embedded = "a8456b72cc26164f3f4f721f4dce2f21e933dacf5304e1ab1ac1218eb84189f7"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::size_for_elems"
+kappa = "d2752681bb64d54cec8d3b9a2cf67cd6abd81567f9a4553e1b9175bef0104199"
+embedded = "e345c4b5c81657bf8cb3f1617037a663d0b9298ef4c89d0678668c5ef3b1c34e"
+status = "residue"
+cause = "mir::Ty: layout::TrailingSliceLayout"
+
+[[fn]]
+path = "zerocopy::layout::TrailingSliceLayout::size_offset"
+kappa = "dd2d9a6083d1c131657882f6a2eabd8ac7648394e359d5bac6905cf496662ef4"
+embedded = "2ad3663c8763f9b55dd75b1b0baa64d7f731d05fb6d9a2ca97d324cab2475362"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "zerocopy::max_elems_for_bytes"
+kappa = "cb98b9d24a09824a51056e04b2f0313b3fbadb0e08170e04cd940e7546d80b08"
+embedded = "3eca00c54b9bdadbb1d34564a96b260815afc3330d19786ba37aad8ad4ef18a2"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+

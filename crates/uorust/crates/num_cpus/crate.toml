@@ -1,0 +1,14 @@
+[[fn]]
+path = "num_cpus::get"
+kappa = "43d567a0388d3050930d4348f654128baa0ac0d8a05e9f64020a1fce38acfef2"
+embedded = "28a32859af6409734b6598e31a7d1056afc037d3549d2065562185a0bb614683"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linux::get_num_cpus: num_cpus's MIR stops at mir::TerminatorKind::Call: linux::cgroups_num_cpus: num_cpus's MIR stops at mir::Operand::Constant: {alloc6: &std::sync::Once}"
+
+[[fn]]
+path = "num_cpus::get_physical"
+kappa = "147ef0e2a175dd88320b27c29f3325cf717cb75b335ba7bb5511755f2fbed928"
+embedded = "d36599317a96b4d0a7cd07dfe0aede01828ed955ba99e80ac9176fa7441080f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linux::get_num_physical_cpus: num_cpus's MIR stops at type outside the lift: std::fs::File"
+

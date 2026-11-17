@@ -1,0 +1,23 @@
+[[fn]]
+path = "spin::barrier::Barrier::new"
+kappa = "6e80f0ad781c9c9921bf0880aff0843d03caa1ab5d4e341bde6b14268192b037"
+at = "R=u32"
+embedded = "6257c4f1e657da0aeb0e6515776890fbc1203ae7a4d5794ce070143a997cb54d"
+status = "residue"
+cause = "mir::Ty: barrier::Barrier<u32>"
+
+[[fn]]
+path = "spin::barrier::Barrier::wait"
+kappa = "e83b63f732bd10bcfedbf13e203168644b4b571bb99ed7411f88ddc7aab21ef7"
+at = "R=u32"
+embedded = "034204c013fd810b5cc50a8f54878ce716f50d159f032cef96126358594fbf8f"
+status = "residue"
+cause = "mir::Ty: barrier::BarrierWaitResult"
+
+[[fn]]
+path = "spin::barrier::BarrierWaitResult::is_leader"
+kappa = "194cf48be9aab21a8ff5986886e617757067d69f269bb60acea5defd76d7d9ad"
+embedded = "dbc5ecac0c29ed6e00985424d20274d4da7813a64634786fe8196de1950a7238"
+status = "residue"
+cause = "mir::Ty: BarrierWaitResult"
+

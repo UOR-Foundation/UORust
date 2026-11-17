@@ -1,0 +1,108 @@
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:13:16: 13:21>::clone"
+kappa = "cc8d106a79f7e39fc0034ddc0871baa7246f56967e9b76485e7bb083c9a0b2ea"
+at = "ColorChoice=u32"
+embedded = "5021703194da0f0911d903aea35b918658eb7f8f0cd610693da91e46073e33a2"
+status = "translated"
+digest = "8aff5091b160dcc649b1a7da478e766a9e5fcad44459ef5cd5951468df13f258"
+
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:13:23: 13:28>::fmt"
+kappa = "51b6e344f6e37a4b18a8298ba2267cc429d61faa747beef786ad93868b2223f3"
+embedded = "b277e19c7ecc31a4870849854d9fa347d7540da8c9e55c5058c86bd17fbc8aeb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:13:30: 13:39>::eq"
+kappa = "26ec614f3e9429e64940acbe1b9c54756ddf299667bb8a10c7385eb36fa8fd0d"
+at = "ColorChoice=u32"
+embedded = "78e2468f7afae95a40fb745b82de1b1e8ae38a608f02b2052c0dd402f384f498"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:13:41: 13:43>::assert_fields_are_eq"
+kappa = "406b86bde98bb2b90ecb34db7bb88aaeab0daccfecb2110db0fefcb8bd0426aa"
+embedded = "332a4eaec3a4b6c0552db3080cffa3c1f04e2378a70b72da6aa404ff2064b011"
+status = "residue"
+cause = "mir::Ty: ColorChoice"
+
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:13:45: 13:52>::default"
+kappa = "8947bb6cbf0dab859c2444fa5af174f8e66ddf3c8925419eb8e3a707fe52ffff"
+at = "ColorChoice=u32"
+embedded = "bc32ea92bf4e3e8cce54d44b28bc7be23931075b7b8fc99f2d5db494754c6636"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "colorchoice::<impl at src/lib.rs:43:10: 43:15>::fmt"
+kappa = "f7c2026c748d690871e6c9b145575d7e21d0f485cd391875259a258c95d3b231"
+embedded = "167ac2a6499e18936d1552e98a0f9c8c0ad87205becc96dc72d7f2fb980f37fe"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::default"
+kappa = "c8ed3ded7291fd09912752b4c66b0b5d139c49676e21020cd7067cecc7db34b8"
+at = "AtomicChoice=u32"
+embedded = "f15b452252f2a41e42473bd8f253e4f56dd9501aee54867c0a07c6894658bd26"
+status = "residue"
+cause = "mir::TerminatorKind::Call: AtomicChoice::new: colorchoice's MIR stops at type outside the lift: ColorChoice"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::from_choice"
+kappa = "a40fc976c1156b0605262f9117adc9326607a938771aca0fa1037e845a8a10b0"
+embedded = "8d6eb3e389728dc0264de984d358a74c7726c81460dae2db8c610809233562da"
+status = "residue"
+cause = "mir::Ty: ColorChoice"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::get"
+kappa = "70cb51ec82feba8c61ac5c0c7f5d037656e77449f082e980bc639be4558b3ba4"
+at = "ColorChoice=u32"
+embedded = "5146f037e025f525247bac1d8e35f746572cf0fb06f81ea9ceb27ebe1ac4b223"
+status = "residue"
+cause = "mir::Ty: AtomicChoice"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::new"
+kappa = "dc465d6c267aee5d1ecac008fb8003915f7bf131efb7fff5158b1c6f5f742660"
+at = "AtomicChoice=u32, ColorChoice=u32"
+embedded = "5efbf7540af9f891947650070e19be9e163656397e12e9c8dfca50f0f22fcd0c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::set"
+kappa = "9ceccb5edb3f13490e807d67c4b6bebe561b97e771dd933dfbaf4e3622dfc1bf"
+at = "ColorChoice=u32"
+embedded = "f92ebb98b87d7f786acb2e204ab0c2331fc68cca4e51157c1dc4e67cf78241cd"
+status = "residue"
+cause = "mir::Ty: AtomicChoice"
+
+[[fn]]
+path = "colorchoice::AtomicChoice::to_choice"
+kappa = "ee57dd64c55147ff8d4647b897a138eb6339a2b2b154c52b535f838887168670"
+at = "ColorChoice=u32"
+embedded = "a9a0f07c7142256932a9dac661c1a2dd3b8fae4cb0f6acf8a3ddfac903b367c9"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "colorchoice::ColorChoice::global"
+kappa = "b1302e604b4700f27ea8c16c78e0c3179399a9dd951f2e326f461550851515b2"
+at = "AtomicChoice=u32, ColorChoice=u32"
+embedded = "9fe0fe8d869a485f738a65fa067d018559e07a5d3c0ceaceb1b623e882fc1687"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1: &u32}"
+
+[[fn]]
+path = "colorchoice::ColorChoice::write_global"
+kappa = "2b57bf53605f1135528d550323bd4f3a71d5fdbed382cbe0079730016ddda9f6"
+at = "AtomicChoice=u32, ColorChoice=u32"
+embedded = "f54475593ae7d8e16d037d2df0df170c887dd26d77b739867555f854b6d0d9ba"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1: &u32}"
+

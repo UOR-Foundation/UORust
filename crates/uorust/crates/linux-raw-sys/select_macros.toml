@@ -1,0 +1,28 @@
+[[fn]]
+path = "linux-raw-sys::FD_CLR"
+kappa = "436ca9373b1f88386282233a1fbf9e3694d36d477e303e7f64402ff6ada5b009"
+embedded = "f7b2cbe7499ef0e7710e37ac4293a6fd79c55eb52d7bbb47990deaa0c9d50c58"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut u8>::add"
+
+[[fn]]
+path = "linux-raw-sys::FD_ISSET"
+kappa = "ea5a5e8079878393f0fae131c85152c75d0ba7d0c236295c59e922f49ef4a55c"
+embedded = "689c94220fa68d9a1a17c740f6ce660306c3704babc02f5c48715d9f5dcb83c2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::add"
+
+[[fn]]
+path = "linux-raw-sys::FD_SET"
+kappa = "26e846343b7d9b889b1c31291fb111734cdc9e63b9a8f7606c648e036be0e329"
+embedded = "79a87c8ea754df0609548c66db641fd40ee0ba0db20a62b343eeeef6641c0a3d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut u8>::add"
+
+[[fn]]
+path = "linux-raw-sys::FD_ZERO"
+kappa = "db5e353b316c6dd5a24107b19d0c6c0f90c3a6bd9a0ffe71bfa873d8ccdbadb5"
+embedded = "98bb36d2f1012e509b1af6fa88b21c1e16b30a6765d9882224c9ba052f2ed745"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+

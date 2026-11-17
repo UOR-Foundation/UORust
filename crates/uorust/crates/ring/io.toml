@@ -1,0 +1,233 @@
+[[fn]]
+path = "ring::CONSTRUCTED"
+kappa = "6eca0090b46d7bc1d91a2e7460ad8abebbd4be8f5173f8d74141a2e64c19bdeb"
+embedded = "939976e1f3d0ccc2881d819e45814229d5bee3f24e2859d0aa11b2f9a73c9c91"
+status = "translated"
+digest = "018ae05eeb88d3d8a7f39c533a373212baf548627cf94c4dec90700e819ed1f4"
+
+[[fn]]
+path = "ring::CONTEXT_SPECIFIC"
+kappa = "63d83c377fbd277dce3858e47849a85b9dc85bba11119d798ce2676ffeaa45a7"
+embedded = "9f29c226605262aafd4efee6f6565a9edb12e5a2cb68726956f00ba3b062fd5f"
+status = "translated"
+digest = "134b750fb5e3a0dbea3a72bd153153b18cccd53a2e3080038424f73732a8b3cb"
+
+[[fn]]
+path = "ring::bit_string_tagged_with_no_unused_bits"
+kappa = "b7f99215b65e1d2c362f2eaff44b2d6ac0e116c87317f00d913cfb8fdc815720"
+embedded = "1cfafe306e9ac301efb5ecc67102a32a4c108589d9170a2c5f12740e106fbbe7"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::bit_string_with_no_unused_bits"
+kappa = "d79a3651b01819ed8a73cac0028a55d600fb92350839cf04a1c1b40d30cd2941"
+embedded = "81fb67464a45f41766817d0733e5939f02c1644a51f4f6a8b5c3d983c1c23ebc"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::der::<impl at src/io/der.rs:25:10: 25:15>::clone"
+kappa = "d06b95dc608d4d646105a01737b614fbd49775e5a494e695028d7e77c7123f18"
+embedded = "aee60753d2fdd25cc99af51d9ffb04d595df8ac32297fbc38cf68c165c8b9a16"
+status = "residue"
+cause = "mir::Ty: io::der::Tag"
+
+[[fn]]
+path = "ring::der::<impl at src/io/der.rs:25:23: 25:32>::eq"
+kappa = "2b78c6dff17cb455134793b0bac33c943f9a2016901bb993dc2df87109a8c6b8"
+embedded = "e3d3db342d5dc951d37401399521d2c962b09b421c81d913573739678ea07edd"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "ring::der::Tag::into"
+kappa = "2ddebd556f943449a06ab8d102d295000a188a71b739bb4b7be3bbde5ece6950"
+embedded = "98161f88aaddb1bd8b48b4da7190d269f9947bbf0bdda31a1e43707ce317b105"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "ring::der::nonnegative_integer"
+kappa = "031e5809bbdf37ce9eea5768f99d6cd79b2c94735d6f6fa59fbdd1c8f87163ff"
+embedded = "79eeb247399f53ab1cebc8d3728c4590ab420dcb91e9508d21a4f5134db99512"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::der::u8::from"
+kappa = "b33684fe740e3459607facd482ff4517f98941ae2af02a4a64061e538995edc0"
+embedded = "bd2e492ca170b9f3e00b5612e61c32fa10bbb03a796c1a17a8c99589581ef050"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "ring::der::usize::from"
+kappa = "1363652f9503251ade357787e2d686fb967baa2f225a11ca9ec786044c2bfa81"
+embedded = "8cad51f72325846e214a960bca1d629dbfc9bbb6ce401375796308497261ed13"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "ring::expect_tag_and_get_value"
+kappa = "340ccb5abe0a30548ed00fe2314ed0d94f6e4be0fb1a7bd0c3846da1f145f43c"
+embedded = "e6daf4e675f902b84f7f1abb9075103b5346137d764077e92adf45d8e77ae0f6"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::nested"
+kappa = "0137395bbdefcb0d1de17931c774b5e3d73192f3e7c939efcef2b318e5d40257"
+at = "E=u32, F=u32, R=u32"
+embedded = "53b23bdca28eeb1a0c697d31f52efdfda318b1bc2a0b22a29c7af1b4b510498e"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "ring::positive::<impl at src/io/positive.rs:20:16: 20:21>::clone"
+kappa = "601ee5fb26b84efbb6953fd8565cb91773cc04233f8fc2495fb589beda38880b"
+embedded = "e162a104e5bd5d37db09505a52c34de7de00b5758ca6f73ccfa68092bd275a21"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "ring::positive::Positive::big_endian_without_leading_zero"
+kappa = "872a96fcd81388fb329fa2890901249a75249bd963532221db30a85b4127184b"
+embedded = "e714b516f3107491d004dda917c5be3ae6d5b2c043341d6e4d6598ed5f771bbf"
+status = "residue"
+cause = "mir::Ty: positive::Positive<'_>"
+
+[[fn]]
+path = "ring::positive::Positive::big_endian_without_leading_zero_as_input"
+kappa = "d7d45727c6bea1f0d870da22705563a8171efc736a5a0a35fffbd66a6f7b00b5"
+embedded = "6d092a25ea8950fce774228fbae87d359f4f97dc1ca60810ecd49bf5e8b1bd37"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::positive::Positive::first_byte"
+kappa = "9c5cf892b15c67df1bfc8822a93432a18e689a7fe596715391898e67121bd18e"
+embedded = "058f3abae07575359c55c75c3e5e9cfa4b1dba59ac1e03e2487f663dee2d5d7c"
+status = "residue"
+cause = "mir::Ty: positive::Positive<'_>"
+
+[[fn]]
+path = "ring::positive::Positive::from_be_bytes"
+kappa = "8e45ceef67503a66470f7dc51b6615c8ec8bf00f9418dbf208c9acb8eb220655"
+embedded = "a3e329ec7ff08944ca10cc7dd3a232c9881c501a02e8ed9a21a50af6d94590b0"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "ring::positive_integer"
+kappa = "9ac6bb46eb21f28fbed78857ada280779fedfe50c3832518380ce323643c029e"
+embedded = "6490cb98bbfc8c7273d1903533a5cbd7e8705fd5c8c33af16da89782fe693a29"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "ring::read_tag_and_get_value"
+kappa = "ad0f337392e6d19839dc0c5cbe95a8bdf6e49a0b65a7a631534eee42dfa8c847"
+embedded = "cfb6e22fd4aaaf4f0bd601c3b9974844ee43a8dd3768298be7cbc2c9aa9248b4"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "ring::small_nonnegative_integer"
+kappa = "20e51a7ec4dc41186ec6f6fe9cb8b855f3645672b5d49df3a2bc056b074462ff"
+embedded = "e208dd8051be1bfc307d42abb93c3beed1a77886218ce3e1149b31f8d8c37721"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::write_all"
+kappa = "9282c2e5bff662709b6dbdd70dca552e91fd4e12f2dc9146e88df45e09a83d79"
+embedded = "978ae6a7d5b7be23d2663a84eba01a8e0e66573caac5cf572a5548a52b9a229c"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::write_positive_integer"
+kappa = "124d0a0a2d29bcd26a1943ddf3d4ed478dbe873a6b52b2eefdac606a687418de"
+embedded = "f87ffa40127b0b6c52c61dec0084d1cb7d8011ddbf4ec1a7e5058d6ad3cc49df"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::write_tlv"
+kappa = "ce342f2b53bed57e44ebc3949172cfb267c42c75f4af366e1172e3f891104eb3"
+at = "F=u32"
+embedded = "08fc002c300654789ae427e231e2b0d06a20deac0bac68737e5ce9558633babe"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::Box::from"
+kappa = "fdbd2264ca07541e97cd63e7c1fd617836c738f351e5ef537eafa593b3c0605f"
+embedded = "9011f293b5659872956009a10da5e364ae382fe664ff5b25da6984023b669034"
+status = "residue"
+cause = "mir::Ty: writer::Writer"
+
+[[fn]]
+path = "ring::writer::LengthMeasurement::write_byte"
+kappa = "25ba5f4b8dc31547dcee206c54734dbab514e8295aa5a4259329202841745f4e"
+embedded = "44d1f6c3528f05ef434e472389f63ab4c2c2394fa9a439f21fcf766ff25b22ed"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::LengthMeasurement::write_bytes"
+kappa = "dc4d918460495f77eb39d7d89d418b5ba98fc1382a73a321244eb78774dac8ea"
+embedded = "9d541a57d2842c5406bbe129e73122858263ae56a302f00444bcd55707cf75b0"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::LengthMeasurement::zero"
+kappa = "72fb3d17009acff6b5dae7627e54f801768ed424a5dae1f493cc8c49fe729ffd"
+embedded = "7c07e8bc5efd4ef8c45263cff94a90e38fa031177a02827b845f4335d3fa5aae"
+status = "residue"
+cause = "mir::Ty: io::writer::LengthMeasurement"
+
+[[fn]]
+path = "ring::writer::TooLongError::new"
+kappa = "a2ddda380b7e97903fa83ff15427f5b10fb28e65b5966672b14d948d49703542"
+embedded = "db6e4a1bfae9bc88adeaa959c9f36d28e9a16ca791905b141f4c1e46d7ade5e1"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::Writer::with_capacity"
+kappa = "b4f2d8054552a17af36a0382915b420915af025909321d87b7700e71c7cda2ea"
+embedded = "d11842997af9caf053bdcd11e906eec2b403cd4b91c55bfeafda135c85043af4"
+status = "residue"
+cause = "mir::Ty: io::writer::Writer"
+
+[[fn]]
+path = "ring::writer::Writer::write_byte"
+kappa = "7e39781e0b5e5aeb498f16a6e3770e04aad7f23d157a9cd0ab52205474023fff"
+embedded = "791f80fbe5279755616321aeff18cde263064aff890723bbc2ec3fe6bd293bca"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::Writer::write_bytes"
+kappa = "f366a7c604386b01b8dc3a281508016b20924be322ad6c373d5deb7750f03703"
+embedded = "8101d510a28b398976d3b83e01d7bf94799c7b1b7b59af43ea6bc57ee262db3e"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+
+[[fn]]
+path = "ring::writer::usize::from"
+kappa = "b824b4a149af21b7f194569073ce12205e8ef88d5684215cc8089e92d51d4357"
+embedded = "68a2049419d9eacb46d5c8185af98e9f6d009377659f30b6ee0a541e4b59780c"
+status = "residue"
+cause = "mir::Ty: writer::LengthMeasurement"
+
+[[fn]]
+path = "ring::writer::write_copy"
+kappa = "bdfd27f79836c545525f939b4c306c776ee8bda4fed75e834b83d6d1d05985cd"
+embedded = "8f3b933b36ba4713633953d8dc7c7306d1eb74c24ce1ff1b80b3c3bac242d89f"
+status = "residue"
+cause = "mir::Ty: io::writer::TooLongError"
+

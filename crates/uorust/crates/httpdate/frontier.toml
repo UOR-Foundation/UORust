@@ -1,0 +1,63 @@
+# The httpdate register (written by `uorust crate httpdate@1.0.3`; do not edit): every body of
+# httpdate's MIR at httpdate 1.0.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 28
+translated = 4
+residue = 24
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.date]
+bodies = 23
+translated = 4
+residue = 19
+
+[embedding]
+bodies = 28
+embedded = 28
+evaluable = 28
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: HttpDate"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: date::HttpDate"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1

@@ -1,0 +1,112 @@
+[[fn]]
+path = "foldhash::FIXED_GLOBAL_SEED"
+kappa = "43512107012a1441cbdacb3fd127dc3dbc46e17fc829a00f6b519c76e84df59f"
+embedded = "d09996b5e1b72e3c9e79d41363c13ead8543f647c8852be09b46df93a17312bb"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::FORCED_ONES"
+kappa = "e2bc6e58c641be92d7f17293f47926e0bba0b85fca6e189a2c6f6adf87452359"
+embedded = "5dfae7283014055724ab035db7070f6b7b05ed6e72db190730411de367a1e7d1"
+status = "translated"
+digest = "20a69432080e6b1cceb026efa2fd1d0c535e1a3219694b41945c3485f136d2d6"
+
+[[fn]]
+path = "foldhash::PER_HASHER_NONDETERMINISM"
+kappa = "f39ba509bcc57daad26f55fa8c893877b7d3694dc5b31bfeb30fe8dfc220cbb4"
+embedded = "b39183b50ebb81d13be794d06264fe1e64b42cd37e16c95d5cb32e701f95040a"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u64>"
+
+[[fn]]
+path = "foldhash::__RUST_STD_INTERNAL_INIT"
+kappa = "128d90d78e04f2eca40d088ae05391328ad56c122ebdc48b7e2f95ab8588e6e4"
+embedded = "59f4ef9a63bf511b69baab86af92c32eec14f3586191c41a905ebeadea07cd70"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u64>"
+
+[[fn]]
+path = "foldhash::gen_per_hasher_seed"
+kappa = "e6b52c62edffff888e5d69287a66fc070cba778ba27982983b0c47a038d2a1ab"
+embedded = "929560b7eeade9a9dc08d13b6c4b8adbe9a3148930482f829ce043704ea47b7d"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "foldhash::generate_global_seed"
+kappa = "a6b77026a3ebb21bbbe5f790ba84a2aec6ec76a067d1bd7ae3c0bbd9d4b7641f"
+embedded = "778aee3e0a18bfcbac2f8cd4e40948fa43df9abbd9b7dfd566a5c1c97bd0679d"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::global::<impl at src/seed.rs:204:20: 204:25>::clone"
+kappa = "f398ca9951e4b8bdea80f9d2ce8040169c5352bf81f962713ebae60310345cf3"
+embedded = "1856b0ba553c6d7e5229aac07bbd11ee303836572d0bd23b85e102c222b95c6d"
+status = "residue"
+cause = "mir::Ty: seed::global::GlobalSeed"
+
+[[fn]]
+path = "foldhash::global::<impl at src/seed.rs:204:27: 204:32>::fmt"
+kappa = "d31ab5ea94d2d399a2e71b0e6d83053bec451eb17d63dd291ee1ee24d4b8517b"
+embedded = "84b75a44978bb0b34706799cca4544a327125eaabb2be6f0de4b7db9715bfbe2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "foldhash::global::GlobalSeed::get"
+kappa = "bbb5600ffd0e8a658aed91b9bf34ee0b0260495c7aec7d02a8e45016bead713d"
+embedded = "adbd078e7bc0c0337a1b793686f30729f38226043c568f600162b0e735d70295"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::global::GlobalSeed::init_slow"
+kappa = "40cbafb080466fdda5f2c3c4a0ecee82e84bf91db157fedd27d6a4bb4306100a"
+embedded = "9b89fc43a24e0ee04fb44ac677d27c2cad7505d6ee55c91de359e727af154065"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::global::GlobalSeed::new"
+kappa = "e7c807e6e869aee0324efbc38d672c2970637f2c75986f871b99964a5f56ca9a"
+embedded = "e7e0a8f49204997a1a85c6af5b56832ea79b8b104e83483726f1086441b272ab"
+status = "residue"
+cause = "mir::Ty: seed::global::GlobalSeed"
+
+[[fn]]
+path = "foldhash::seed::<impl at src/seed.rs:77:10: 77:15>::clone"
+kappa = "b72c2d337665e018f1660bc4f4d1484d987dff67946e1f0cd13c5bf1b1b36a3b"
+embedded = "b2ec356fe4e514149b0a4d797a2fd70a84659f20482381bab82505cfbb4f9e2b"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::seed::<impl at src/seed.rs:77:17: 77:22>::fmt"
+kappa = "5939c9516c2cb24938952630e82afa754224651200220b6cf2a7229b92323cfc"
+embedded = "3fdafc47041cfab04afd201a52fd477d0ba1bb815c0ab14fec14448b1b53ad74"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "foldhash::seed::SharedSeed::from_u64"
+kappa = "2ed98dad691d2383ab4fc6ec1cbf75fb1263f8fecbead93adee07edb2c972233"
+embedded = "ec174e17a03d5bcf9ac9398debb49d01703fb1f2ca48d879b0dd3d8e82a063ac"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::seed::SharedSeed::global_fixed"
+kappa = "8a77059ac75ac2fca01c8c771b6898fbe9b208d0c483b3e0a762bcc727925a69"
+embedded = "c6f77c7e288ab34a883c426dd5609c3f36a6ae53ee841cbe77788e00616f83bb"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+
+[[fn]]
+path = "foldhash::seed::SharedSeed::global_random"
+kappa = "abf67ab5a4e4565b9ca8d824177542f92c445f96b44f17653fa176d8c5b18918"
+embedded = "9929bb5194b37a43854dd71e2a7aeda05143d323b5ddea9f23ff97ef979e393f"
+status = "residue"
+cause = "mir::Ty: seed::SharedSeed"
+

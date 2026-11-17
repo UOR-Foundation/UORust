@@ -1,0 +1,258 @@
+# The rustls-pki-types register (written by `uorust crate rustls-pki-types@1.16.0`; do not edit): every body of
+# rustls-pki-types's MIR at rustls-pki-types 1.16.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 293
+translated = 6
+residue = 287
+
+[module.alg_id]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.base64]
+bodies = 23
+translated = 2
+residue = 21
+
+[module.crate]
+bodies = 138
+translated = 3
+residue = 135
+
+[module.pem]
+bodies = 21
+translated = 1
+residue = 20
+
+[module.server_name]
+bodies = 85
+translated = 0
+residue = 85
+
+[embedding]
+bodies = 293
+embedded = 293
+evaluable = 292
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[differential]
+bodies = 5
+theorems = 34
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: alg_id::AlgorithmIdentifier"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: pem::SectionKind"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: PrivateKeyDer<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: CertificateDer<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: EchConfigListBytes<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: server_name::DnsName<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Der<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: SubjectPublicKeyInfoDer<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: server_name::ServerName<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: CertificateRevocationListDer<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CertificateSigningRequestDer<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: server_name::Ipv4Addr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: server_name::Ipv6Addr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PrivatePkcs1KeyDer<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PrivatePkcs8KeyDer<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PrivateSec1KeyDer<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: base64::CodePoint"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BytesInner<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: UnixTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TrustAnchor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: server_name::IpAddr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AlgorithmIdentifier"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DnsName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SectionKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: base64::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::num::TryFromIntError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: server_name::AddrParseError"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DnsNameInner<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ServerName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AddrKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CodePoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SectionLabel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pem::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pem::SliceIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SignatureVerificationAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: base64::u8_is_zero: rustls-pki-types's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FipsStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pem::SectionLabel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server_name::DnsNameInner<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server_name::InvalidDnsNameError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server_name::parser::AddrKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server_name::parser::Parser<'_>"
+bodies = 1

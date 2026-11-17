@@ -1,0 +1,123 @@
+[[fn]]
+path = "semver::build_identifier"
+kappa = "d8c054ffacdbbe1228a963b2cdce857311d66878ed792d29f2bb5a2315333c14"
+at = "BuildMetadata=u32"
+embedded = "9d480d22e33729b9d6ef68c64a1e5d8be9b3845ad0181c8c2025184abef7edde"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::comparator"
+kappa = "84bf525f11c47627cef88688956ab4a2b6de69053a27363a7b08e43035de3b8a"
+at = "BuildMetadata=u32, Comparator=u32, Op=u32, Prerelease=u32"
+embedded = "1f1fcef08d00153ec92620a885ab14e4fee110872d8c0735c1c81861a4f79543"
+status = "residue"
+cause = "mir::Ty: error::Position"
+
+[[fn]]
+path = "semver::dot"
+kappa = "c79e5005de9ba1b859f2f43158210f9dff0455b9b5cf89a80b222591cbd94af5"
+embedded = "1cd614011952e7e92a13debf4cecd9173162b56120c6d1c89d4845ff531a4fff"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::identifier"
+kappa = "85ee315f8388195dbc586976afcc6aecfd939d9b2b76e717af9f9a6d96b140cb"
+embedded = "f228543caa93684b63973162828b86b41a302962a161f7e9d6ea5f0b95a9b770"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::numeric_identifier"
+kappa = "1d842512bf746c471772c9dd783b3b2204356a134352a3c9f2917b62b01484cb"
+embedded = "dce328a56849c075a18a3b127dae0716fb5f2c53dd1adcd22a1d4b3b3f138d55"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::op"
+kappa = "d4e8f5bc287d002eeb7d363d54188f1e905b446e8d35450bdc175d759e96bba5"
+at = "Op=u32"
+embedded = "39277526fdcd992c7efd54525e0146d8ac7a42f9be01ab41442c068996d49a7d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "semver::parse::BuildMetadata::from_str"
+kappa = "2fde04c17989deea421a86ef918157968f010512f324f7d91cdb1db287c40b2c"
+at = "BuildMetadata=u32"
+embedded = "d5e72a7d57ee174b98504b88befad0168624eaf3c5cdeb9cd538f144176b9900"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::parse::Comparator::from_str"
+kappa = "e9cb20fd09c01a115e3554e5c02111eddd1837cfe870a128463ae8f862df48b8"
+at = "Comparator=u32"
+embedded = "96cefaf199a9d10a8fc91e2aac2677ce6e97599b153b346684d29f177149ba9a"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::parse::Error::new"
+kappa = "9f7b8510ff34e5af935071ea3272cb279b6f121fae3cab981cb96835585da49d"
+embedded = "4c0680ff90dc86cc2a9b4605cfbfb9247652e5b3d374d69d60903d64ad9971fc"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::parse::Op::DEFAULT"
+kappa = "7815a2af06cbf5bb0b5e60b1e663cb6c6f5d4bf107f6f6267860e5740f7edf86"
+at = "Op=u32"
+embedded = "f434629e5c9ac5c87491458c2e1218c03aa770ac723b7fdb505dcca5802f9fb8"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "semver::parse::Prerelease::from_str"
+kappa = "6dbc76cd7d7d285dad62eae0437f34016b8f4512a0939c7c3e6476789c1bdb71"
+at = "Prerelease=u32"
+embedded = "63e316cc9941fbd2088c4d60b93c0b2fc8a0a29fced423bd1f027880e11f2b67"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::parse::Version::from_str"
+kappa = "31c0ff386cd6258bd74e408eda9b4c9f6c2a3a4d26bdeaf507282ddcfbce2e7e"
+at = "BuildMetadata=u32, Prerelease=u32, Version=u32"
+embedded = "a655612dc38d96dae7b40ecaf5837bdfc86928b74a907dc867cae5fd64e8b499"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::parse::VersionReq::from_str"
+kappa = "e5255fda100e32fab3e8515bec1bd74837f23238cdebc1f8cd2914f3abe7f2e0"
+at = "Comparator=u32, VersionReq=u32"
+embedded = "e62cf5b24bbfd8309bad4e4ec5d102f54e455afbf6d0232c1a6963221ff1ca7f"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::prerelease_identifier"
+kappa = "5d6d90b196c63832f112094a0fa7c41d18941667b1dd6a9634f95bd3376aac8d"
+at = "Prerelease=u32"
+embedded = "3b7624bdcef9dfed108eb1670a8eb1207a0e32cd87aae47d02b34f12d2fb6012"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::version_req"
+kappa = "d34086cebf77cf718818fab8ad25e3b413904f976bfc499a611c7617ab93d8da"
+at = "Comparator=u32"
+embedded = "7c01a05f5d54ca80ed00b9e9692eed09fc0befbdad98e8d4edeab02ed3f7aea9"
+status = "residue"
+cause = "mir::Ty: parse::Error"
+
+[[fn]]
+path = "semver::wildcard"
+kappa = "968f282d67f30edb5594805a5d19ab6f7806bd3a5d5d0c2587932789aa5696d7"
+embedded = "d237cd8ed4ae850261145fb51a866683a43ab1bfdc77a3291e22cf5291b9a61b"
+status = "residue"
+cause = "mir::Rvalue::Use"
+

@@ -1,0 +1,1055 @@
+# The h2 register (written by `uorust crate h2@0.4.20`; do not edit): every body of
+# h2's MIR at h2 0.4.20, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1325
+translated = 21
+residue = 1304
+
+[module.client]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.codec]
+bodies = 88
+translated = 1
+residue = 87
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.ext]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.frame]
+bodies = 296
+translated = 8
+residue = 288
+
+[module.hpack]
+bodies = 158
+translated = 9
+residue = 149
+
+[module.proto]
+bodies = 591
+translated = 2
+residue = 589
+
+[module.server]
+bodies = 64
+translated = 1
+residue = 63
+
+[module.share]
+bodies = 43
+translated = 0
+residue = 43
+
+[embedding]
+bodies = 1295
+embedded = 1295
+evaluable = 1253
+blocked = 42
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 42
+
+[differential]
+bodies = 4
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 153
+
+[[cause]]
+cause = "mir::Ty: proto::error::Error"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: frame::reason::Reason"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: proto::streams::stream::Stream"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: frame::stream_id::StreamId"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: counts::Counts"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: frame::settings::Settings"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: codec::error::UserError"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Prioritize"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: client::Builder"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Key"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: state::State"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Recv"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: server::Builder"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: hpack::table::Table"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: share::StreamId"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: codec::Codec<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: frame::Frame<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: send::Send"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::DecoderError"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: stream_id::StreamId"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: HeadersFlag"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: frame::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: DataFlags"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Window"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ext::Protocol"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: headers::Headers"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: hpack::header::Header"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: http::Request<"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::go_away::GoAway"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::streams::BufferStatus"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: BytesMut"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: codec::error::SendError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: frame::go_away::GoAway"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: frame::head::Head"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Ptr<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: server::Connection<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PushPromiseFlag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: encoder::Encoder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: frame::headers::Pseudo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: hpack::header::Name<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: http::HeaderMap"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: http::Response<"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ping::Ping"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::StreamRef<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BytesStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DynConnection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OpaqueStreamRef"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Pseudo"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: data::Data<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: decoder::Table"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: frame::headers::Headers"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: frame::settings::SettingsFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: framed_read::FramedRead<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: head::Head"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: headers::PushPromise"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hpack::header::BytesStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hpack::table::Index"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::error::Initiator"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: share::FlowControl"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Deque"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Dyn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Reason"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SettingsFlags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::Frame"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::data::Data<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::headers::Continuation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::headers::HeadersFlag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::headers::PushPromiseFlag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: prioritize::Prioritized<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::peer::Dyn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Store"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::Inner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::RecvOutcome"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: share::RecvStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: window_update::WindowUpdate"
+bodies = 4
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FrameDecoder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HeaderBlock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SendRequest<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SendStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: client::Connection<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: flow_control::FlowControl"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::data::DataFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::head::Kind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::headers::PushPromise"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::ping::Ping"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::reset::Reset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::window_update::WindowUpdate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proto::error::GoAway"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proto::streams::flow_control::Window"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::DynStreams<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::OpaqueStreamRef"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::Streams<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reset::Reset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: share::PingPong"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: share::SendStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::DebugStruct<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Actions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Budget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecoderError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InFlightData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NeedMore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseU64Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pos"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ptr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RecvStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SlabIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamDependency"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UserPingsRx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytes::BytesMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::SendRequest<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codec::framed_write::FramedWrite<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::DataFrameBudget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::SizeUpdate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::priority::StreamDependency"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::settings::Setting"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::util::DebugFlags<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: framed_write::Encoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: head::Kind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::Decoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hpack::encoder::Encoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hpack::table::HashValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::HeaderName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: priority::Priority"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::ping_pong::UserPings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::settings::Settings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::buffer::Buffer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::buffer::Indices"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::counts::BudgetExhausted"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::flow_control::FlowControl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::recv::RecvHeaderBlockError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::state::Peer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::state::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Queue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::Handshake<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<11>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::Connection<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Buf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: hpack::table::MAX_SIZE: mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item frame::data::END_STREAM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item frame::headers::END_STREAM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item proto::DEFAULT_DATA_FRAME_OVERHEAD_THRESHOLD"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hpack::encoder::encode_int_one_byte: h2's MIR stops at mir::BinOp::Shl: on Nat and Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hpack::huffman::decode::build_fast_table: h2's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ContentLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Continuable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Header<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadPreface<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReceivedPing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendBuffer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendPushedResponse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendResponse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Setting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::Peer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::PushPromise"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::PushPromises"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::ReadySendRequest<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::ResponseFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::framed_read::FrameDecoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::framed_read::FramedRead<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::framed_write::ControlFlow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: data::Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::Decoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::data::Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::headers::EncodingHeaderBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::headers::ParseU64Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::headers::PushPromiseHeaderError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::priority::Priority"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::stream_id::StreamIdOverflow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::NeedMore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::Representation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::StringMarker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::decoder::Table"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::encoder::SizeUpdate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::header::Header<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hpack::table::Pos"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Method"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ping_pong::PingPong"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::connection::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::connection::Connection<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::connection::DataFrameBudget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::connection::DynConnection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::connection::ReceivedFrame"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::go_away::GoingAway"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::peer::PollMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::ping_pong::PingPong"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::ping_pong::ReceivedPing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::buffer::Deque"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::counts::Budget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::counts::Counts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::prioritize::Prioritize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::prioritize::Prioritized<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::recv::DataEvent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::recv::Recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::send::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::state::Cause"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::state::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Entry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::Indices"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::store::SlabIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::streams::streams::SendBuffer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recv::Open"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::Flush<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::Handshake<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::ReadPreface<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::SendPushedResponse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: share::Ping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: share::Pong"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<15>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::PushPromises::push_promise"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::bind_connection<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::handshake<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::Connection<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of share::PingPong::ping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of share::RecvStream::data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of share::RecvStream::trailers"
+bodies = 1

@@ -1,0 +1,381 @@
+# The toml_edit register (written by `uorust crate toml_edit@0.25.19+spec-1.1.0`; do not edit): every body of
+# toml_edit's MIR at toml_edit 0.25.19+spec-1.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 634
+translated = 8
+residue = 626
+
+[module.array]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.array_of_tables]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.document]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.encode]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.error]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.index]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.inline_table]
+bodies = 82
+translated = 1
+residue = 81
+
+[module.item]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.key]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.parser]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.raw_string]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.repr]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.table]
+bodies = 89
+translated = 4
+residue = 85
+
+[module.value]
+bodies = 44
+translated = 3
+residue = 41
+
+[module.visit]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.visit_mut]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+bodies = 634
+embedded = 634
+evaluable = 634
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: value::Value"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: item::Item"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: Table"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: array::Array"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: InlineTable"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: key::Key"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: Item"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: repr::Decor"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: table::Table"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: raw_string::RawString"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item ="
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: KeyMut<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: repr::Repr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ArrayOfTables"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: key::KeyMut<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: inline_table::InlineTable"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: parser::inline_table::State"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: RawString"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: parser::array::State"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Decor"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: array_of_tables::ArrayOfTables"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: table::Entry<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TomlError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: document::DocumentMut"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DocumentMut"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parser::document::State"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Formatted<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Repr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: document::Document<&str>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn TableLike"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: toml_datetime::Datetime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RawStringInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::key::State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: toml_parser::Span"
+bodies = 3
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Document<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Formatted<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Formatted<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Formatted<std::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: document::Document<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = &table::Table>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = &value::Value>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn table::TableLike"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::TomlError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inline_table::InlineEntry<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: repr::Formatted<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TableLike"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Event"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InlineEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InlineOccupiedEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InlineVacantEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TomlSink<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: document::Document<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = &mut table::Table>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = &mut value::Value>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = table::Table>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = value::Value>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::TomlSink<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::document::TableHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: raw_string::RawStringInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: table::OccupiedEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: table::VacantEntry<'_>"
+bodies = 1

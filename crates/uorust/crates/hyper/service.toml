@@ -1,0 +1,79 @@
+[[fn]]
+path = "hyper::http::T::call"
+kappa = "6d3a8d06e97e692a36421aee12c6ba5b81cebba6fa291e122e1d9cb30dfdf736"
+at = "B1=u32, T=u32"
+embedded = "7f3989385dd519dd99e9a0bcb086249da392671105b985f170e453c1d67f32e1"
+status = "residue"
+cause = "mir::Ty: http::Request<u32>"
+
+[[fn]]
+path = "hyper::service::service::<impl at src/service/service.rs:59:1: 59:71>::call"
+kappa = "e054d0c5ed146a2ec72b7aa88357c4a65efc016574e19f85790ecb946b6b555e"
+at = "Request=u32, S=u32"
+embedded = "243760cfb7b3333ed486bcc808c95524f32d32f6f9d7b6a1d947fd66cfa32f24"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "hyper::service::service::<impl at src/service/service.rs:70:1: 70:75>::call"
+kappa = "d62662391c5137c81aa7380c9488c4e71cecb8be5aa860d03a4c67b4c058781d"
+at = "Request=u32, S=u32"
+embedded = "b6a5b228f9bad5df2e561fc9e503f6e5e25159589c3c84ba940330de3af38ea5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "hyper::service::service::Arc::call"
+kappa = "d4397c6f609e16b1e551b838e1d8d9f4e9848e0b2a51be4f5dc6255794701945"
+at = "Request=u32, S=u32"
+embedded = "610abb055e2582d9a3b8c8f4a923b626f2ca86f884362df226932b6208abe090"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "hyper::service::service::Box::call"
+kappa = "f215c886a118891c8b36742a326874e70bcae4da3cad007be7e908786b30b2d3"
+at = "Request=u32, S=u32"
+embedded = "7d15ca550d80045e1dc3395ebcd50dea408f78ead0479cbb78bbb54e9bd7321f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "hyper::service::service::Rc::call"
+kappa = "d550f4f7705a34622b9ce5a4fc8b8233421a642a60d53a77488927a30b224734"
+at = "Request=u32, S=u32"
+embedded = "cc458570a10d40822da4282fcdf715ba859a95d7205057c46f1351d2164a9fe2"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "hyper::service_fn"
+kappa = "99cd8d0e4a8b6ed619c0c4d23ee3144d341674e82e8e373283dedad6ebf6b580"
+at = "F=u32, R=u32"
+embedded = "595318347fe07c72b749f04b2431ff466de4e10c7888ab5343ee3812e5420371"
+status = "residue"
+cause = "mir::Ty: service::util::ServiceFn<u32, u32>"
+
+[[fn]]
+path = "hyper::util::ServiceFn::call"
+kappa = "4fa9d0940b5173a0b0029d5fd2c4d7d56d7e1c69977d562a80c031b9c17ded98"
+at = "F=u32, ReqBody=u32, Ret=u32"
+embedded = "3ac5059f729b483cbbf7aa071794bc0e0550e27c80fc06474abe2375fa3d9097"
+status = "residue"
+cause = "mir::Ty: ServiceFn<u32, u32>"
+
+[[fn]]
+path = "hyper::util::ServiceFn::clone"
+kappa = "ea3bd6e38e95866f83764b9075530c3e4c030da97ca49e15ff7d6ffc1ccafde6"
+at = "F=u32, R=u32"
+embedded = "2476d144721042076ebfda505979b592e7af294531348a36c6c2471d8fa4a3fe"
+status = "residue"
+cause = "mir::Ty: service::util::ServiceFn<u32, u32>"
+
+[[fn]]
+path = "hyper::util::ServiceFn::fmt"
+kappa = "1ff7904dd6ff82181ff89ca2618a59cf5ac535dc05308c6edb5c3150c3da89a7"
+embedded = "d01e3fe0da8ff1be253d4cd72b4969e0bb1ef5d59255a940f66e819c4133b7a6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+

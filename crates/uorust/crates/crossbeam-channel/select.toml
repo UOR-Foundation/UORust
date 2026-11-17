@@ -1,0 +1,370 @@
+[[fn]]
+path = "crossbeam-channel::run_ready"
+kappa = "c1e7db62f832c43bef1f2f30e55c33e75ce560c0e9b8d3be11b9b0a369e505c8"
+embedded = "b0bcf4fca5e4133f6cb9f25c90d7ce2b47ad2c6a490741d0f9e94bec4ff19501"
+status = "residue"
+cause = "mir::Ty: dyn SelectHandle"
+
+[[fn]]
+path = "crossbeam-channel::run_select"
+kappa = "11e560acc343635b6dec290ae8f065f824272188c722c7f915b8b68e6e4a93f7"
+embedded = "87527f7312ba40f93342fcec5ce9d34c64c3c4872cddcdc372f44c6d5ff451e2"
+status = "residue"
+cause = "mir::Ty: select::Token"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::accept"
+kappa = "8146538199591e138525913fe6056dc1a9f2dfddf64255a2c8ab28e93fccd05d"
+at = "T=u32"
+embedded = "6c69ae3b90d9f4ed9c139c5508b0b29a9e040b410d5792c7f83f723035e1952b"
+status = "residue"
+cause = "mir::Ty: Token"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::deadline"
+kappa = "586cb6cb289010a29c5b3abac7e64d4ec0a9a91016c23b5355ba35d2bef76312"
+at = "T=u32"
+embedded = "a82d5386f47357a7fcc2cf655dd6968197772c77a5b9af777701e93d5173687f"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::is_ready"
+kappa = "f9cb4df447c861081c4ed91f97b8d033fa2fd222b86fb20107baa709409e2a99"
+at = "T=u32"
+embedded = "bb4aa171e4616d07747ce13262d1a6cbacecdc78b64d60a9d6bb504b33b23d3b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by SelectHandle, which u32 does not implement in core"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::register"
+kappa = "75c2d327fb0a3fbc658af05f521e8b8061c2c18c7240afdb080afcce3f032fb2"
+at = "T=u32"
+embedded = "3220b42b2be6d8484ac6061bc5d4768b3080aa3dd8f587a462801704441abfeb"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::try_select"
+kappa = "4a1a86e0fb995645dd3c77623f0052d1f4faa38625f56441d0c3835cc29bea88"
+at = "T=u32"
+embedded = "595f7d70edc4171dd33b78fc8f1f800d059e35a31700ddce1ca5e8bfcb748d47"
+status = "residue"
+cause = "mir::Ty: Token"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::unregister"
+kappa = "d8e3011ce9313c7f5761dd7695fd8dec77eb48a12edc6d15e735a23795694355"
+at = "T=u32"
+embedded = "3e746c6442d63ba9d4e0ef99d8acab427d87e47a23b4c04af41777aafd2aa4e3"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::unwatch"
+kappa = "8410569c2b9f16814e151da12faf1a235c0e8781c8efb28e7fa1ac7c0cb9eb3f"
+at = "T=u32"
+embedded = "0b02e27232b7ab077182ad04745fb8273dfbf85437b925601156016fee463ff8"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:126:1: 126:42>::watch"
+kappa = "24110058cb288119210980e2de856cae362e0e42ba63451028827faad4b8547d"
+at = "T=u32"
+embedded = "03962ebc4ae38321f771e91766b66dd7c608bfc9fb3e018ee320c733f86c240b"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:161:10: 161:15>::clone"
+kappa = "e61c62178c687209b827f1b09eb7531cc80f129fb6fce2b1a60f504622da58c0"
+embedded = "92113cdb7f1d9125914f189f004bcda2e994bd7b191d17440a9d9a332b62df6b"
+status = "residue"
+cause = "mir::Ty: select::Timeout"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:161:23: 161:25>::assert_fields_are_eq"
+kappa = "7567c88945b11282a43021f1618afbe46fd8b9b0ac6a178a45aa3292885b7cdc"
+embedded = "1ba67a61ef2d119d578063dfbdd86dbf68c20f99003ba4927d4ec398817ab0cb"
+status = "residue"
+cause = "mir::Ty: select::Timeout"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:161:27: 161:36>::eq"
+kappa = "aae089e2eefd23d2b0cf416488b352f06c6acee20f38299c93fbf7425d635523"
+embedded = "965c7595ee3bfd547760ec142810fdce4bbf25edf24cd44c4bef28d942d39cfa"
+status = "residue"
+cause = "mir::Ty: select::Timeout"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:24:10: 24:15>::fmt"
+kappa = "bf5586b8b2f5fef4432cb948284b690e0dbb69a1bae9941469975850b44fc9a3"
+embedded = "9d6c2d6b624f09c93cb3e7f1394d908f7b7a3fe597768693d0bd5457b0d1b67e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:24:17: 24:24>::default"
+kappa = "c5dffe72c0035dc290dcca6f317c2a086372ff77a6c46ee80c9eb1e87f4e27f8"
+embedded = "d02289e3b2a8374d0d7d72b27579518dfc1ab03868019320d5c49b7bf2ac4f70"
+status = "residue"
+cause = "mir::Ty: select::Token"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:36:10: 36:15>::fmt"
+kappa = "028a08a2fe2d982d8710f3adbbab5ec982e5975700da61e9961e071f41ecff2a"
+embedded = "55b6ab5210b25633a9fd07ca93b6f37e41ff6ae94d911de9732e4b8f5fb726f7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:36:17: 36:22>::clone"
+kappa = "98ed56ca4fe4c7d0f5fddd1aab70d70d807ee2fe6f4edef7f4e6af40306d7764"
+embedded = "959b4bc90a8f411e81fd7de4911865af5a0371889d82940f5e8599b8c38ba52e"
+status = "residue"
+cause = "mir::Ty: select::Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:36:30: 36:39>::eq"
+kappa = "db730dfc6271e5a5fbd43f028177d71c2cdc3c11e834b9b4fe23638f5af5e64b"
+embedded = "52bb820216bc693834c36cf42505756b424faac9b287519c6b720e9d0ff2999d"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:36:41: 36:43>::assert_fields_are_eq"
+kappa = "32556e7c2c987afd76ba5ed00f48ef9f23034d639b5a50f57c9caa546c4369be"
+embedded = "82bd9fd2a0bde43f7578cf536e2224dad383729f502d0ea57be42afa71853c79"
+status = "residue"
+cause = "mir::Ty: Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:56:10: 56:15>::fmt"
+kappa = "f6a424ccdc259dc0df925a2808734de9e52ad73af2275591f3638e3041709d47"
+embedded = "d274f56125d0aa05d7f2aed3cb120480eb95f464c46eae36e9e6005c00cb8b10"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:56:17: 56:22>::clone"
+kappa = "f37ef18ca47c708b8d738cb6cf18d4de726fba3b3fd915b434ce8ed3a93db35e"
+embedded = "6fda68f241ad66e614e8ad6c4d45b10aa1a9667f029a83eb4fbc515cddfd6f0f"
+status = "residue"
+cause = "mir::Ty: select::Selected"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:56:30: 56:39>::eq"
+kappa = "0549cd1044bf81b710e9ecee02464be8ac378189397a6c5c04b06685abc7e64f"
+embedded = "c47d31aeb0614115248b4703f3a8a7debb6f9a284f788222274b5d69698b97b6"
+status = "residue"
+cause = "mir::Ty: Selected"
+
+[[fn]]
+path = "crossbeam-channel::select::<impl at src/select.rs:56:41: 56:43>::assert_fields_are_eq"
+kappa = "8de38c7ca1d3a95f016da021617e987875f9dfee0e0d73cfdaa51eb0510602bc"
+embedded = "7270aefa376dfe3402ab1fe62eb7ef15224ef4789892a3c1f785a0d502330067"
+status = "residue"
+cause = "mir::Ty: Selected"
+
+[[fn]]
+path = "crossbeam-channel::select::Operation::hook"
+kappa = "db11a31120ac1c49f92be4074948e07eff3be85e2bebad447f3c4d01750906ed"
+at = "T=u32"
+embedded = "e48bb0d769b0ba11f41f19dcd3ee4a905d18dcc3ffc3719b8d39acb04c4a6a70"
+status = "residue"
+cause = "mir::Ty: select::Operation"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::clone"
+kappa = "e5eeb543adfeb2fa9f237f5891f63cfd34bff2112ca8bb453efeac2ed41f7ea2"
+embedded = "8dd193fd55142283a9478f7b03aff4fa9aa61c0421195efaf5e26b9fc42d9943"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::default"
+kappa = "98a059ffc46e6c0e6f632935d3763e2286f3e27a0162c9ea417f850d2aca2a7e"
+embedded = "15a67d5edb145a339377d12ecb5103bf2b5a058c06d15cc5c5719455f335839b"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::fmt"
+kappa = "b662cb7ffe35665a7b4272dc6c2a74a9bfa72a589aa9602a7bde550c008dbfac"
+embedded = "64edcd6c94d4a5f91300e26c3e19f73833607eab7b750b0c82a98b75908c4382"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::new"
+kappa = "df91c99911e4cf5bbb4d23f49243ee08e4cea01d9b1fd0dea0879fe75418118d"
+embedded = "ce4b6916034c02739320b0c19536c300adeab431704bea6b55fbeccc61be5cb3"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::new_biased"
+kappa = "2dc11a8d8c41720c0588b52739412b2d4b045941864f0139c29f5498865f8610"
+embedded = "53011353531c2829cd2fb08afaeb4f28811c69145004abaf7f0d278b52153b97"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::ready"
+kappa = "d7c4bbf2f8ec44cd380c656ec425caea584922e0c0afe0e354c3e229044eab6e"
+embedded = "feb0561a5c6f775c25d2e067084ea7b4abe8151c7272526fca9ece6a723c35fc"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::ready_deadline"
+kappa = "a60abc1b93714ba1739c3028239ff46a8da46a1de92bf4a5cfcb330babb937a4"
+embedded = "6b8e64cdd74f04c05864b31b11af307526c061afff7bb5b2c93ef68cd6e6996d"
+status = "residue"
+cause = "mir::Ty: err::ReadyTimeoutError"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::ready_timeout"
+kappa = "eb8d8357733baa364f33a3b1a88c90f1d8210fd3af8f59097c63c7a545e43e3e"
+embedded = "05a7ff4d3b18abfb8c8c09c21d0df40e98605cf4229feba6401b0743e4ad9428"
+status = "residue"
+cause = "mir::Ty: err::ReadyTimeoutError"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::recv"
+kappa = "0b8d80872b72abda906e44e41e3e2774dcf15fab082cacc003c1ea4ac5382c7e"
+at = "T=u32"
+embedded = "76ab209d93e4995b4cf334de22db7bd89d12646a087c4156f1f92770708eb4b8"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::remove"
+kappa = "07409b204890178fee8723cfd2698ce0641286570897ec669196c3ce0fdfb59e"
+embedded = "460f50c7c99bcbad99d2a85016a921dd4df9d746866d4d6f76baf6061d2226b7"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::select"
+kappa = "5b2b4f80b2ebe0a7f2a5559d258328bc641b059c8403bb49267b18549ec5defa"
+embedded = "0a4520ac9784221c01058ecd3fef2b0324d14bde098b34e5ecd4884b2561f680"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::select_deadline"
+kappa = "cec93657e64506466e8fd9195aa5d31f767dbf4b14b2ddb967ba7fed7e89ee59"
+embedded = "9e939108ef898eea8ff65086ed2c699dbdd50e22f098d14c77ad545175904c27"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::select_timeout"
+kappa = "4d517c1f528caa241667f9879bbcb9b7aa63d99e93b9d192b7d2b25c4fd3932f"
+embedded = "0c7dd6d594b2203bf4adfca465f9f5ea949b42f304eec003a30fd2102c5a776a"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::send"
+kappa = "fa1abf820c4a23d5d6bf73a5ddfb70f22bb36bcfd2fa510e47bec7cb29a1d770"
+at = "T=u32"
+embedded = "e03ca1664968a68dca9fbd08851a6f5092ad6e6955a765e5ab9a4047d795d469"
+status = "residue"
+cause = "mir::Ty: select::Select<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::try_ready"
+kappa = "af97f698fb7752e10fc4bea08b94f835c4b8fd054f013f5668fb80ba7198131f"
+embedded = "ed95611ca8d6aafd3ba4d04bb7298296284e177387a57532836f4d87b65f4aa8"
+status = "residue"
+cause = "mir::Ty: err::TryReadyError"
+
+[[fn]]
+path = "crossbeam-channel::select::Select::try_select"
+kappa = "052ddbf4cb3a34e9846e743a3c5ea57b7c5f051201173895c14df5c46b10c99a"
+embedded = "8795b64de4679bf3f37b8230406490afacd99df98235be1ce47ada1f4e23ccb4"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::Selected::from"
+kappa = "8f0527a8559e9e301ca2c697d66dc754077e7994487c0c6df9505a311dca8a7c"
+embedded = "9ce421765bde09eb78009449c2774a16bff2ce755d54de06accc2d830317c8eb"
+status = "residue"
+cause = "mir::Ty: select::Selected"
+
+[[fn]]
+path = "crossbeam-channel::select::Selected::into"
+kappa = "80f71ae15d56589f41e39273cddffa0773e81f8b9569a629948eea67251801f0"
+embedded = "232ad3ad2446b4e2112c0bc8ff583722e371710327a2a1147ca4038a0d53b327"
+status = "residue"
+cause = "mir::Ty: Selected"
+
+[[fn]]
+path = "crossbeam-channel::select::SelectedOperation::drop"
+kappa = "6c1aa667cca9c908f14a42605796cfab7d8a9b5301d75e39192d374e468db98e"
+embedded = "309da072eb962133f1fda9c1021855ebde4691d7e52207c459b8e8840f3b7cf9"
+status = "residue"
+cause = "mir::Ty: SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::SelectedOperation::fmt"
+kappa = "cc9074a7257c63056d2f2795265f93f55b75dc3e90a228b8f5f36bfd99e32fc1"
+embedded = "5c9f2cf97d5c10c6ba2ee74812f8068c2765f167135551eb494d02c09b7e227b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-channel::select::SelectedOperation::index"
+kappa = "09206c4cabc606d068f6bf1bee9a1aac219e8d58926d301e5fd50a122ef4fd6b"
+embedded = "7270a59e88934b5f0ec4577f03e1b22625c51c349724f156a02c50e7fb7dc66f"
+status = "residue"
+cause = "mir::Ty: SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select::SelectedOperation::recv"
+kappa = "f122223644a02ebe4fde0488f782935c416a2da90ff43b3446c2f68112c1d8e2"
+at = "T=u32"
+embedded = "cd94d16cd5384e4b86ff8f4711d0545a9f366c71ba216c9d7c20445fc89f3039"
+status = "residue"
+cause = "mir::Ty: err::RecvError"
+
+[[fn]]
+path = "crossbeam-channel::select::SelectedOperation::send"
+kappa = "d222fdcbd084fe40672d90dde7bb5814b9f04004f352103b3a89e176971afbeb"
+at = "T=u32"
+embedded = "110b126653fcf4f6feefa5b19195c5f8db466c4b75e4f3a572031ed7aa6cc838"
+status = "residue"
+cause = "mir::Ty: err::SendError<u32>"
+
+[[fn]]
+path = "crossbeam-channel::select::select"
+kappa = "d45f9b9728d833519589a3c796c2a73bd9b216f3217ce1fe057da3cdf470d957"
+embedded = "6c3f9305f58b89a02c3a662bf689fe77166b4ff88f19b213a4f885add0e0539b"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select_deadline"
+kappa = "f94b7f9e96f3fc9a7abb026414477878d9e588a17f5233ffbfa65a47c1a0caf7"
+embedded = "89bb16976e1de3673dd1dd7daf2ff8f99c284c37526304301bd221b3b7098f08"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::select_timeout"
+kappa = "e5bb726f705206582d1001b9f337889cb0e7587bded058343c984314f5e82620"
+embedded = "902222b4fce76cf4b945241158a825429b308979a34eba57bd6500f07c00c0e6"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+
+[[fn]]
+path = "crossbeam-channel::try_select"
+kappa = "6aa5007fe4941b1b1aeafa0033495197a65be257341f1a688ea67807d7e1969b"
+embedded = "eca97ccd20a72026a75bf596b7371f85e00bbb30684f8281ec98d7ee0e321842"
+status = "residue"
+cause = "mir::Ty: select::SelectedOperation<'_>"
+

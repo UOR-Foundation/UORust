@@ -1,0 +1,207 @@
+[[fn]]
+path = "ipnet::ipv6_addr_from_head_tail"
+kappa = "9149ee0182001120ef4e0500df8b325644107140171f9029418600bbe5e00217"
+embedded = "79bc0af4a8892d2f6884ac40e8ebae2d4a64bca58560735aaa71089a27b031d7"
+status = "residue"
+cause = "mir::Ty: core::net::Ipv6Addr"
+
+[[fn]]
+path = "ipnet::parse_digit"
+kappa = "691f2487d6c48ced2aeeb5e70b0d64a440b6609630a120614fa346067af3c1c1"
+embedded = "dc820e796625d19f72f7ffb2214db685128cf8e8bb30894f4a6c075d860aa845"
+status = "translated"
+digest = "b16e913ac833608311ce64e44c0dd9706b6f4df978d02c0541007135528adc5b"
+
+[[fn]]
+path = "ipnet::parser::<impl at src/parser.rs:342:10: 342:15>::fmt"
+kappa = "489a77ff7369388bdbc7b0b01d4cccad548271974e0e4666fd7ca378c449979c"
+embedded = "143122efa2a1661518826091df147a73de6673d78732aaa288ceef7a6f07aea3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ipnet::parser::<impl at src/parser.rs:342:17: 342:22>::clone"
+kappa = "94a81d00193a8d1f9acf0713dbf6f1f1280879853621de61bc27e6228abc1de0"
+embedded = "316f9ac1454eb71d0f1ecd7e5e16f8267a779c0d289fd2dec73f55749b5c87fb"
+status = "residue"
+cause = "mir::Ty: parser::AddrParseError"
+
+[[fn]]
+path = "ipnet::parser::<impl at src/parser.rs:342:24: 342:33>::eq"
+kappa = "c1978679ef93f6f61e5eca5fb9f993220d6820095fcb9824a7ce9edfd4d64736"
+embedded = "d7d95ef4fac8da52960c942ac112b2069378f265ae0d1a0873c59744765413d9"
+status = "residue"
+cause = "mir::Ty: parser::AddrParseError"
+
+[[fn]]
+path = "ipnet::parser::<impl at src/parser.rs:342:35: 342:37>::assert_fields_are_eq"
+kappa = "1097297ed989d250d31d4c7975cfd28206e6a7b5ca0e670669bafbd4160be664"
+embedded = "a7aa6666d2e3e36a9dd2d1556f344ee4fd985cd6ce1e53fda334de18dc86f56a"
+status = "residue"
+cause = "mir::Ty: parser::AddrParseError"
+
+[[fn]]
+path = "ipnet::parser::AddrParseError::fmt"
+kappa = "878a4624fbdf7407ec86a3469d9cf6358459af20fa9daadbde2ff06622b08ff2"
+embedded = "62593bc9c63afa7191351308b3eb347bb889a332a05cf9b16d36c9eb83fa359e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ipnet::parser::IpNet::from_str"
+kappa = "c8a4b135523729deb035dcef540bd836c6dcb4c98b2b66c89abd4a899d6f10e3"
+embedded = "5df52c168fe61b826dff140b45f70aff22a244f2b0377db78c504f9d32c91e85"
+status = "residue"
+cause = "mir::Ty: ipnet::IpNet"
+
+[[fn]]
+path = "ipnet::parser::Ipv4Net::from_str"
+kappa = "5c8d4390cb66c1dae50c83a81ab4c43d960aa56196d521b097323bbcaefabed4"
+embedded = "be57550a7ca3b44d7351a473f7b1c91440177878df31dfdd505dee5137da9990"
+status = "residue"
+cause = "mir::Ty: ipnet::Ipv4Net"
+
+[[fn]]
+path = "ipnet::parser::Ipv6Net::from_str"
+kappa = "387501c4338d6ecdd0ecd428d23f9b3c705cac0ced20f3285fa1d4d5b67b20c3"
+embedded = "d257c524d7dfb0563f5bc8c8af3ae6896d9bc64a873f898df0852c5f87451cc6"
+status = "residue"
+cause = "mir::Ty: ipnet::Ipv6Net"
+
+[[fn]]
+path = "ipnet::parser::Parser::is_eof"
+kappa = "173de4beaa4f06d9201cccd377e29cea5fb63e1c2fe3a1de9a408b1d0857bd40"
+embedded = "25671fb44746e0c33f4fb3231908ec3b71636ebc4617d8b6679490539ad91274"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::new"
+kappa = "b2b9ba6655a5eb711255eabedda8d176aab0c588c6ab71d1786dd511a5403693"
+embedded = "ee60bf11632a4c7e8419ecbbe791c8c603153bb34df4f42e62177263d86c8447"
+status = "residue"
+cause = "mir::Ty: parser::Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_atomically"
+kappa = "76213d60edcbd1491dbb53b1373f40cc4073d03a3084f024a8261699dd4daf5e"
+at = "F=u32, T=u32"
+embedded = "89a671c4573ecf2ceb08e5996f0ccdad42335d3c008cd971c6196854dae17ec9"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_char"
+kappa = "1120f4cedc44f94908ca3d50bab90df7a0086f09e32ce62dac7b9105d96e9383"
+embedded = "4b8e174496e8c8031add45ea239c29b2231877113a14440403d77df80eea7eba"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_digit"
+kappa = "d93cb1e2ed6cf989c4db44baa2c2ae82af2e6f2e7980e56d6600a1ea9f89ee5c"
+embedded = "5620d8e451c2027542d66d88c1a63a822eb8af9c4f73386e323e7f47d20d178d"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_given_char"
+kappa = "3dd27888bc8a03c2956ff58914a6b48beb55a1e0d7f06077cefaac4f9b3282ff"
+embedded = "15331d731953f60fc9d3fe7eacf4ff1116495af944b2850a3570e9e6a528530b"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ip_net"
+kappa = "4189edb82928d32275aae096a7325646866dc6af649337e65b1b6e2082851d1f"
+embedded = "c51ea3e975cf876a6ed85ed7e252c0569d1972418359516a030fbaee103703e5"
+status = "residue"
+cause = "mir::Ty: ipnet::IpNet"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv4_addr"
+kappa = "94a0ae5ae7f1ff0e34f08ed02b7b86e0974c2ca7834c156488c2845eb6b39c28"
+embedded = "fbd32ea5f1bc00de04c476c4b203e4702057cfcd174232aad38434269a703604"
+status = "residue"
+cause = "mir::Ty: core::net::Ipv4Addr"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv4_addr_impl"
+kappa = "f6d18d22206a7f14ae5d30a01ab66cacd0b32a9f54292dd9a120d7a42e62da94"
+embedded = "13b072338cc71f9aedef695e80869da04e17b55104dca808f3bbf67592cc8c29"
+status = "residue"
+cause = "mir::Ty: core::net::Ipv4Addr"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv4_net"
+kappa = "6ebf08419d4861edff2bc1c2aaebf42a20fd274933e9f084612e3d314f6ee0cf"
+embedded = "dfce3b1bd13d1e3fdfc9be96971de236dcc081792d5329ff550035e4da666194"
+status = "residue"
+cause = "mir::Ty: ipnet::Ipv4Net"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv6_addr"
+kappa = "08aeeaa225ff67c12898bc9e7676b4d2dedb85191e8ea6249fb837bb3cc27530"
+embedded = "527d0234481af481473299ab216329a137286f0357ad1635df887956bf5ec3bf"
+status = "residue"
+cause = "mir::Ty: core::net::Ipv6Addr"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv6_addr_impl"
+kappa = "01c0fe63b115e379eece01273499f77cda165d03bdc06958eaec5b2292dc0d56"
+embedded = "f0f6973cd12af046c70a5bdcd0eed0723ffb09bad9665641b031e75d91793e2a"
+status = "residue"
+cause = "mir::Ty: core::net::Ipv6Addr"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_ipv6_net"
+kappa = "7f588484d8ac7bb88d02e94b36b93276497935f554689a384c00f2b9769960de"
+embedded = "fbd953831e89b465beda57a4d5d5c4637199bb6527a8e3da0e0f34bfe08d51cf"
+status = "residue"
+cause = "mir::Ty: ipnet::Ipv6Net"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_number"
+kappa = "173d04f52e237474829da51a29b01a41689dc2bf0f17039b4a83619e61bcc607"
+embedded = "36e487b00f4fea27dec3bbbd39a540b891611f4b641ff66d2bb7b7481144f917"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_number_impl"
+kappa = "aa75c251b143b32d93628ec0e82da08a4c12c8a13927bf537a15a605e6faec79"
+embedded = "998a14f52ab447bda7dd5444f2d10ac91916bcfc63059953316ac717150ecd10"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_or"
+kappa = "fe3c94f4b750a782b4ae0852f376e771e6b7f0d846c037c35c16046a20ac4aad"
+at = "T=u32"
+embedded = "fc793da30811164daf543bb49880f116b0dd2b1a2d24e612fde1e9ca76eef1fd"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_seq_3"
+kappa = "c06f73275d4007eefc6f7dd51968ca18bfe1c61ddd1ccafb3162a1b9cd70f3a3"
+at = "A=u32, B=u32, C=u32"
+embedded = "9c67e87f308ccd4b4848d9376d111b4f989a514e3a5fe255dee95fa6dcde63b3"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::parser::Parser::read_till_eof"
+kappa = "086139f13f427cb51e8fab38858c2540444ce714461fd196be9703daa32ea0fe"
+at = "T=u32"
+embedded = "ba9c64fcdd4d1a7a3060d98a18579317593f15193d3320e3b1cd58950d5f8d33"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "ipnet::read_groups"
+kappa = "a6eb156239aeba1cc407786e141c9f29da4d77e94bd58acf707da454ffdbc2c2"
+embedded = "3f4d004b759b6d2e4c88c13b8c82dd480a6dc63b9de70fb3e79db662a20e1e0a"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+

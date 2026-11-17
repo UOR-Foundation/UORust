@@ -1,0 +1,679 @@
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:252:1: 252:39>::ALIGN"
+kappa = "95a6fa52b987f25b277f043f38f7fd36909aab03295dee46b58a02c55b1b1beb"
+embedded = "a2513fb3aa95dbfbd75d95a4b512467ee1dfc39cc6b437e73fdd802fa5d6861e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:252:1: 252:39>::deref"
+kappa = "6946a2df22e04237678d1272de989a901e5d10194c296dbb664951c1daf217f0"
+at = "T=u32"
+embedded = "575f19ca3cd871c1422e0a4a079bfb6e584fb65b220252f0a5b3a15ae060acc9"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:252:1: 252:39>::deref_mut"
+kappa = "6f76966de347a4a5a374dcd45f6527b4d7e0b79d411a6b52db5cb133cc55f95a"
+at = "T=u32"
+embedded = "e52e48a5f70557dc4923264dbae53f3c782c9e6761d46da8a264ec62061911d3"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:252:1: 252:39>::drop"
+kappa = "0d0fc82fb8d6e4c707db75b3e3bb381a4638fdce319d6a42f7cda9d92062ca29"
+at = "T=u32"
+embedded = "2122d222583bb8bdd760adba5384f4942800f29c16232e8ad4ab5f12baa2faef"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:252:1: 252:39>::init"
+kappa = "0cd393161488aec4888c6540da36ed325110613fb3922b6227015c99fcc349d6"
+at = "T=u32"
+embedded = "4d8313e16fd7c75f3167a2c570923f8517604063dddf2ce6dd2183c40a485aca"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:92:1: 92:52>::failure"
+kappa = "0c71c3344d68646047c052c6c4f948a62af945c95280ca220ff2a71fbec89dd9"
+embedded = "509ff836c16a95f9ce55dcd76b73afabbc6bbc2ffa10321dfb95ae1259e23bd2"
+status = "translated"
+digest = "19f63a261a1e26e9a1d4f20f4813c3221154658d7aa23e3d23fc998f1474a82c"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::<impl at src/atomic.rs:92:1: 92:52>::success"
+kappa = "111b2d08a9da9ab31f8a29b3793d10c0a3811fa4523e12054980485ae853f719"
+embedded = "9f693a950ec052da5563d4833783822292de8bb9ac9ee49e1fdec05df703a5e7"
+status = "translated"
+digest = "305ca975f32f07713a74875bfe3a1ce2777b73a2366ac29fe6479c47a986bfe9"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Array::layout"
+kappa = "4769db7d22e20696ea0af449300887bd58205983938a3fddefe1338658270303"
+embedded = "384fceab7d279b60e8c75769daa5728160443c379f2a4585961918a856bea97c"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::clone"
+kappa = "1b238da42d71be7ce2f2ceb130100ea5b8a78961a58ee8f70963df73b8483b02"
+at = "T=u32"
+embedded = "73ce2b56d06a1d26df3871c8031b1d2ee6f238316d9938b114fdb73aea388ead"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::compare_and_set"
+kappa = "be21dca7a705b1620e66a6139f9a72a668929aa2700f034b5aabd09d2816dad5"
+at = "O=u32, P=u32, T=u32"
+embedded = "cf17e32cea5bf97caab8c43f398056931a46f0d5ba0069e17924ae7c18b45be2"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::compare_and_set_weak"
+kappa = "b0654febe4c3ece59e6f05d8ee7dc7f36b427a89fd4419ab3c02826155375c74"
+at = "O=u32, P=u32, T=u32"
+embedded = "0453f1866d4b4279b29dc1e0c82e946ea77acde1746629649e72ec650c33f777"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::compare_exchange"
+kappa = "81966892fc243398bbe1dfcf9be9dd26fdd703d4ceba43100bcc16e623e4761e"
+at = "P=u32, T=u32"
+embedded = "91ee3919ec304b25832c1fc982a182469d092e08eca29dc14b5708af9d8619ad"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::compare_exchange_weak"
+kappa = "134ff60f020b20e268b39511b1fcec1282261a9cbccfdaf82c69ca6d4edad87d"
+at = "P=u32, T=u32"
+embedded = "8b5eeff70a00c52e1400a445ad1289e33acfe1a5cd298c950d0ead13ac8fd42f"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::default"
+kappa = "99dc43d110b7446f0888222e9e3ab08c71b81ecf6b70e389dc5a2e5a74c314e5"
+at = "T=u32"
+embedded = "eb100bbefccc27128521aa069890f80c0d8e3f78334979dd7095450c1dea859d"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fetch_and"
+kappa = "37565c30213d68c342759396eb9fdbfa664fc24e738376e424e68ca830b2b46e"
+at = "T=u32"
+embedded = "db48772a58cfc78db59996b6d55846fb35425503e7eec9be5aca19d2f6aa44d2"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fetch_or"
+kappa = "51dcf9920b75b1dc3065999c521f2a124352f755c0a0ba1b47c7148903ce7eee"
+at = "T=u32"
+embedded = "2b2722491cdd96128f15cb9f03aa85c8ce0b713cc5aea8242a331fea262747b4"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fetch_update"
+kappa = "ad52ce7ab9bb55ade7136acc8ec3b5a241221831d61329e81310ad517be8100f"
+at = "F=u32, T=u32"
+embedded = "de298a81abfa573807815433dd8eee28c54cd4a14455eee1b87ab40e1d8d91ea"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fetch_xor"
+kappa = "3f3501092e28fea31b8a71fb227785dd79681c6c82de1e3dea7726739886e081"
+at = "T=u32"
+embedded = "046fef3308bb037b0faf76c25e181bd206a8fcde967fd7ab989be9f6124df85f"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fmt"
+kappa = "9b60b10b0e9c8fbb976bf9c94b3d2e78cf97a695f1644abdcf7ca4f20e04c271"
+embedded = "0b8ad927825b0c5cd488eded34c495d8effc7f946c70d31b3b5fee34beff21f4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::fmt#2"
+kappa = "36f77a296241020b56f933abf7493d6afac651edb7e047b7418095628936107f"
+embedded = "9b7645fd1868ce5aa3dd300d8b3ccaa719efb979d6deb3976ad46cf6d98e60c8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from"
+kappa = "b0f35f33fd7e412339b694985a3bc3516d091a34674a2569acc298ff974ba408"
+at = "T=u32"
+embedded = "e59ad9b450f068e5b49bc00294f2b1e43fd366ae32a110466da5c5c2e3ac66e0"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from#2"
+kappa = "009f9de2625e30628610bf98d2bc5315665bc8b70bbadfa8ef832c56a6291cc7"
+at = "T=u32"
+embedded = "4f16534487f24e1932364482b265abedf5d5f9d9099630fc32a83c59d05d8146"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from#3"
+kappa = "4e3fa8af1e551cf66a08fdadfc28e35ef4ac6cda241606771bb72d9c8184bfb3"
+at = "T=u32"
+embedded = "1c28d21387ff143c93d2a71a6d3eee51fa3ec34b61e28018b1c367e3ea4e1580"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from#4"
+kappa = "bab55c7e71f02d4540adea14645ee8f516b2f4d609e4ad5f45048a5d75bace94"
+at = "T=u32"
+embedded = "f8ddfe48c4fb0e6b89fe960f2bf020be78b27ebf5d0ad9e6f24cc7bd607a4ad4"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from#5"
+kappa = "9f65de4154d60501cc699c518dc36885b3c4fac5d0a15f62e38d1f3e76ce4db1"
+at = "T=u32"
+embedded = "28731ca04ca27cbf756b3fff5dd041c1e75a2a482ca50b6e14549b5d2af40aae"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::from_usize"
+kappa = "029e5216c130d44f101280224312a0f5e31c00fdfdcfc33aa9e3f2701c529b00"
+at = "T=u32"
+embedded = "8e96838080d0cffa8d329b08da91b00fe5d5346ea307910839f3c49322c988eb"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::init"
+kappa = "fb9df14e48a64685052ccc23efcec47c5dc132e6bcc57c623288f80f1318b389"
+at = "T=u32"
+embedded = "10994f39c248bfbf6c733c6f6e7e07e764835af7a302254135823408e512c558"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::into_owned"
+kappa = "8cad2e1221d086e97b3f410b6f03b7cd9722521ae09f5df00371dcf3c0560a04"
+at = "T=u32"
+embedded = "73fd0faa32e9ff74656353d09d02772735371e8463cfd48ae418393fd41200a9"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::load"
+kappa = "37d43383838318645aa1f44b387f7933120fe3f7a664d27bb7fef2ff10f68ecd"
+at = "T=u32"
+embedded = "f403b22d4725551b1ecbcb88dfeaf3ed9613a97a2388dadc298ce09a997d9ff4"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::load_consume"
+kappa = "3ab50cd183ac149aa4d173161f71ca480a24d8c3fb96881475505785aaf095b5"
+at = "T=u32"
+embedded = "d68f6797e2de16b44d10a2fb3026e497dcd146f4a0d76c1620be43ef1609429e"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::new"
+kappa = "df5ff9b7da329ee6d01d68bdc3be4a52caf5610faf6a1303f0bae2fe5e3c2757"
+at = "T=u32"
+embedded = "c6877c71ce1a787c73a934c585e5d2d5c4e6979d08039b4312eefdad5828b016"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::null"
+kappa = "3d5c61b9369ba87547181ff52b8e9e53bae0fd18f73be8f878c5c1c1c5a7d450"
+at = "T=u32"
+embedded = "23c1ed5442a19a10f926e9c7acbde9317f6226637300d8c6793b42dc427988ca"
+status = "residue"
+cause = "mir::Ty: atomic::Atomic<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::store"
+kappa = "1c57b8743beaa05b88b7ac8e2a0a822c969e94f09a253af2e9aa3328cf2d8cb1"
+at = "P=u32"
+embedded = "60939da95b43495b74515e0ed3f487389c39b4ca1a58e59311b7624d998b03c8"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::swap"
+kappa = "f753a2d43bc0dc1ea5c2fc0662f4b1ad337647dd9ecc0308658ecf2b47e4c1ce"
+at = "P=u32, T=u32"
+embedded = "1508efbe48b0cd31062fec0caf268d6adf969d7125cf7f9c096a217822ffb40f"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Atomic::try_into_owned"
+kappa = "e77a63d935fe950c42ac0c47b3d7950cd86d4acd41200b2c5213ccc449da1e33"
+at = "T=u32"
+embedded = "75ca883c029814047baa6133ed5528249d8d9da312e3f44321907d7fbdc6944c"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::CompareExchangeError::fmt"
+kappa = "401febeafc7866901726a1f8a0e87fad7007819bb58cbb6b015c875cdabd1bd3"
+at = "P=u32, T=u32"
+embedded = "c31526eab5d8df354cfd982b6c0de9ac1042dd35364cee83ffa8a68902d011ec"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Ordering::failure"
+kappa = "a7b531d6087f3ccc42df7491248690f3ed48c03df0e784549964b39a8fd657fe"
+embedded = "0a0c48cc45952329047ba4371e9e191c56ebc235a8f86b57a045b376ad5e469c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: atomic::strongest_failure_ordering: crossbeam-epoch's MIR stops at mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Ordering::success"
+kappa = "7e22f2d107a421fce1e1a0a42eca185fe6934e5263a467c76bcce6574f9903b1"
+embedded = "8524c8912ac138148dcc6913ea653ededda466c41566efd47c0adfc3c817cb96"
+status = "translated"
+digest = "d678a90b6af94e9f971f818c8930755964919ec2e4bfac47ba2daa05d299661e"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::as_mut"
+kappa = "ab65f229e5ef3e2a3fdfa0b23634fe72fbc74d671338a96f37ec0ac4b1724f75"
+at = "T=u32"
+embedded = "e702ab846a134d446f412554f99767c29b839858e0ebd91010c2061295f6af31"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::as_ref"
+kappa = "6affc4027efaa0b707f0f1435cd7ef57cc4f4de787e6ed03d3f349b391785803"
+at = "T=u32"
+embedded = "6b72592b30f7a05a06894d218574f955f6c0b9532da5e626975d7d35f1ae42fb"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::borrow"
+kappa = "8a72846b6cd7d4c2ddd80fb22c673f8e92a6fd088efee0a8d20e9639a9f0cd50"
+at = "T=u32"
+embedded = "28fff4bb9965775a5c79298f49c0702138290f8d176017aaf2d141e7e619b981"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::borrow_mut"
+kappa = "471be8b7fb394f97e931a0481dc450e4bddf4fb50db42c5dc83cbf05f4392018"
+at = "T=u32"
+embedded = "14689d0fe0ae6324c46856ee4b44514381a7dffbd3bafe55becdd2c7a6f710cb"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::clone"
+kappa = "8fff1352087f14f67409b3d4987590c7a54f44b45e360dcdb5bbaf0bb36d3fdf"
+at = "T=u32"
+embedded = "7e971247326172af997bc5b794c60de11115d9c50fef620af93b834de2ad0b94"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::deref"
+kappa = "f0a211fdeb955157c55ef35e7ef2d410f47fe77ae16c3ad09aa611e781119bbd"
+at = "T=u32"
+embedded = "b33b94c7f2d21abacbd93e5511971bd63353a7f99b572ad520ea4c9a1c7eb866"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::deref_mut"
+kappa = "e76649fa3306b6d77bd1da786eb1e262601eb4be8da4326433ef4595495626b7"
+at = "T=u32"
+embedded = "8b098e6bc76b2e31ed1a4f17186944303b075583ecb95ed49cb20ddc69c203bc"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::drop"
+kappa = "d20c13ffa392ebe34395f049adfb29ab0334a997fc4408cb3a7b90bdc2238a4d"
+embedded = "4f5f3fbc4cab4471c89786796a79a79add1207b5250c41ef73bc45b7a04a3528"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::fmt"
+kappa = "c4af434652c1ef1d271e8439cff4381f1d14bf643e64bca68a48a072df66fec8"
+embedded = "6ce76fd30c6087ced832c5647fbb5994521a6eb355ddb352e3b1a94b83000555"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::from"
+kappa = "a3147eec0304813a70d1b9320d511ac377f6280287f9b91af42e7287fdd15750"
+at = "T=u32"
+embedded = "975316515c2aedad53508850909617843aec3902b2f0665260edcf255ee8363b"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::from#2"
+kappa = "accd8e2071a6d3823e3ba44a438194fbc728fcfc7220e166bd0a71f6de8ef75c"
+at = "T=u32"
+embedded = "291a46208f7588d3bcdfd1d0a63d952faea5d225dc3469a849905a862f562ed9"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::from_raw"
+kappa = "dafa37cd17d1f875846b650cdd26265a822798f793ca22870f938b35444b8617"
+at = "T=u32"
+embedded = "f30ff0e48fc925110a6cdb89f8ec3dc7d0ec4ab979418e84b38127cf72e6f69d"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::from_usize"
+kappa = "97b18797f30f6b3ea96bc3b6bcce2b6fc0cd0794cd3f193b0681d06463d517d6"
+at = "T=u32"
+embedded = "725cef2958b3b41b1d29a6ea70d1f185e9204d9e1090c779b1aba9b6b928ebd0"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::init"
+kappa = "ac85151c26ccbc1548489fdaec75361927eb3fbd22bed3143e92f8f33f9ef94c"
+at = "T=u32"
+embedded = "6ebe02f58b7e3a77608ec1f9d498b22e03e7eb1d53b1eadce29deeab40da80d8"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::into_box"
+kappa = "a9c78f267e430f9515d9088d72123cf1cb41b20b561ef50f7f74b95193975d7a"
+at = "T=u32"
+embedded = "fa290ad4de730e21444dde1fe1c7dedd3c15f19e0da1d328549c3a0c738c4e93"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::into_shared"
+kappa = "96cce82da4b0d5efc195e760f7a3d4ea6c4f55e3058b91b68fd5ece796efb569"
+at = "T=u32"
+embedded = "4e11326828aeccdba16712080d2eadedebf860cfcfc63b32f23b46a961764332"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::into_usize"
+kappa = "66d9e4c3ca2341543e78c82bbf0620dc15d6a794b07bd401a25138c15eb66fc4"
+at = "T=u32"
+embedded = "aaf8232f2c1c72220b8e67c518d9880a6d550873966acc43c06f7c07536ee8a1"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::new"
+kappa = "e2a72c16bc3f62a84918347122108faadca5393c4a69d2d22717d051e4133022"
+at = "T=u32"
+embedded = "2ae95f8ccca3ecb1b9e32277bf42c4b0656576fbc0f0d9fd5e841707f7a70429"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::tag"
+kappa = "a6ad0626b45b2c445e96f98c5aa04ac4c32f836e9021453073220edf2603aa00"
+embedded = "767ac8a503928f0d24fbc020809a536643e56e66a0e142e9a87c0256365d9555"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Owned::with_tag"
+kappa = "a033d6394f9a9dc1aef447f02cdf8d441c167562c5999039d070c694deade9d4"
+at = "T=u32"
+embedded = "3bbb45cfb507f0fca9baa4cd7ca727f872aa12297c5081c7e32b570ad8f017da"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::as_raw"
+kappa = "04a134be224ffd982fd80642c0a17d18596581f250d853ba59119471cdb149b4"
+at = "T=u32"
+embedded = "ab7b8a4e3323aea33b94e51b49b194e08381adb482f9d0cd027acf626635868b"
+status = "residue"
+cause = "mir::Ty: Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::as_ref"
+kappa = "ccc40b7482be5abc1e4face9c43a38c7da91a6f4cce8a1de582b309b71962e6e"
+at = "T=u32"
+embedded = "652c91b83851082c3fa33b5f2327f481fc539bb0580a4920f26ec81fb1dd6284"
+status = "residue"
+cause = "mir::Ty: Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::clone"
+kappa = "77f4d957dea6856b36b80b862d605ddba277ec1736a68d4456b509b4076c0015"
+at = "T=u32"
+embedded = "d76c21b4bf6d2cb19106f0ad4c2261988c653468989a4d01392ac4ca74c1dc76"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::cmp"
+kappa = "d34beb2dffa21fa01a82e491951e0b82ebbaa87657fc2bd3334f8213237b9e08"
+embedded = "07d9c28ace038fd85b199fcc130d110426a84d46d63310c7a78f916840a7bdd6"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::default"
+kappa = "7e1dabae6dfe168223b755e50b7e441245de60b6629f700abe2fa4d3b1c8ee93"
+at = "T=u32"
+embedded = "fe1af2dbd8e844b98888d4ee6209fe78a6db58ae7cba8f005a707a7bee9abda0"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::deref"
+kappa = "b2ce0abac55143dcb7399c422932d6253a1fb15561220c7b2f3dbee34be5a3bb"
+at = "T=u32"
+embedded = "a919583dfb859263ef8c3771737c71ce57e382037ffb54e82d38e1520921ea79"
+status = "residue"
+cause = "mir::Ty: Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::deref_mut"
+kappa = "6346f643f5e67f7740a36b1025f213a66eb40518dedae5e9c4f23492a4bfd158"
+at = "T=u32"
+embedded = "fa93c8dbe06cfd02c8211abb41056fdd0b27b4eae8fb0643c0b90cfc37e33191"
+status = "residue"
+cause = "mir::Ty: Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::eq"
+kappa = "21588a6080761d44aa5185beef29af8c339c2c7ac3c086fd456ca016ee3ccf9b"
+embedded = "fff5a28c8d52ab8dbee89d9827b0eacb774d571d9ce523968c2a2d58c724e4d7"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::fmt"
+kappa = "13404caf0dba37536bb25de1ba785a2951ce16742fa55319747487c1ed858d57"
+embedded = "39cfc14fc23283b4f414eb491e4179a4286294fbc12b101785c246c3e6369db1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::fmt#2"
+kappa = "b22eeeccb04297cf918b959c83aa9bbe843eb32c3a724345bfefbb4cf7817d9a"
+embedded = "a2b542c1ae4b38d1f2e1781fb8dce3ab8d1f38bb80a5fb06efb8b2ec47830c7d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::from"
+kappa = "2c46f72796b906d25e9c4581beefa94dd294dedd8d796c9c1d36e21f2c23abc3"
+at = "T=u32"
+embedded = "bfd62036e84223ae1eb74f07dbc103e76b1925f2d1dab4968a92c8fff5f1226e"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::from_usize"
+kappa = "6e7e7ebf5cb3893d9452a11b10897b349abadb8dac0f3eb7aaf959a0cf5f5170"
+at = "T=u32"
+embedded = "2f97265afde6e1b247df1ff4535044df351453a81b16f5421a3d4c31d00ef04c"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::into_owned"
+kappa = "87f515bb459d94b802ee806224101e396bc847abce3dcf06125c0fdc417d3a0d"
+at = "T=u32"
+embedded = "d78594aa673566b81fef59edfa284b1b579781f29ce62acba325e9407d0ecb9b"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::into_usize"
+kappa = "e7f035839fc17e980f90fdd35a40c3e89292b2b0017281f0c569b60a2ced5b5a"
+embedded = "f29a4f3527a35ab156fcb1568e43884645492b4139aa0bd1378d055e9110f7d3"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::is_null"
+kappa = "6e3db0424dfafc8deda414652c9c12258d97578b32881fad76cedcfc7f023f66"
+embedded = "462645e0bcb1a5c356511a9588254fc1cae3d3ea4e731399a2fc5d243d444f75"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::null"
+kappa = "a71357deb1fc1996c58892c7b75dec4cbec3318ddb3630fbbf534b5da7dd77c2"
+at = "T=u32"
+embedded = "0986fa00fff41c62a4fbb3fd6f6b08f87fc9314d3b44f686be26d730cd07f448"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::partial_cmp"
+kappa = "173d5fbc2fab6d09f315646e46eb1e597e8a5599e11fdb937db800cb484005a0"
+embedded = "cb1ed2f3862fcefce1112bf6581baf2f04cce50d422b8a2eed1bb5f34537695b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::tag"
+kappa = "0a47323a01f80205f633247cdbc323557294e51c01721d1d0cf29ec8aa2e627c"
+embedded = "0e175df6b6a3047b039c3c305ef68f77e4072e5850d68621b451d2be226e7e83"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::try_into_owned"
+kappa = "b4844967fa4849ed511a50edad602a8b6c9a89ba57775c604cb4730aa217f8e0"
+at = "T=u32"
+embedded = "edc2e0baf1ff58ecffa7b5adf435894108810b3fada79a0893a6ebf02d39cee5"
+status = "residue"
+cause = "mir::Ty: atomic::Owned<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::Shared::with_tag"
+kappa = "fa7bbe35a0c51e607c81c397e01958819dfa740abd278de43dffb46690750996"
+at = "T=u32"
+embedded = "27b6e0615bea368373200a95b1eeefb2c7be0afb3d95e706f447ab068868a327"
+status = "residue"
+cause = "mir::Ty: atomic::Shared<'_, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::T::ALIGN"
+kappa = "b49785e58e2a8d1bf06b303e4e96a15305fd2bf2e2f212b0c917f045780730ba"
+embedded = "74752ef41c0ea81e888603c00a73320e3b8a288e94f306272603464f8d3099fd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::T::deref"
+kappa = "fde80204ca993b458f96894f8fe181821ea261ce97dff8c73a3a1f6a8bba924e"
+at = "T=u32"
+embedded = "34998f0df8a40eb8fe9d2069a5c0a8300e77ea909ed39a2a2e6537ab94f26f2f"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::T::deref_mut"
+kappa = "0f5aac31b48c41f24fa6f390cca7c6598414c2830c88da193ef426ae5a9b44f6"
+at = "T=u32"
+embedded = "19fc0c9c13c91638ff0b8460104d686c4de4deeb28c4e841f363c035c7de6a70"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::T::drop"
+kappa = "e668c194c9499a0ef706e2f2599eea3dcb10736073444ebe41c3a2d93956903c"
+at = "T=u32"
+embedded = "c2c79abf0fa7900273988af7624f5bc780ab7f9ea72252cbbf3d4daccd13f4e9"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "crossbeam-epoch::atomic::T::init"
+kappa = "3804e06674f1193dfe0bf553ae318af88a20aea6702a5ce83cfa2638667d2ce7"
+at = "T=u32"
+embedded = "7a8e7f20b5fbf02d495d116f29de145e6f4e2130fee5ae39f129017fbeb44a55"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Box::new"
+
+[[fn]]
+path = "crossbeam-epoch::compose_tag"
+kappa = "00df4a08cd19304f5ef26388445084190e8d75ed60e3fa1441ecaab88b867678"
+embedded = "477ec43e6b4df5e7f831d5ed24437805bfd6f572abe48121d9b97e8169d0b154"
+status = "residue"
+cause = "mir::TerminatorKind::Call: atomic::low_bits: crossbeam-epoch's MIR stops at mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+
+[[fn]]
+path = "crossbeam-epoch::decompose_tag"
+kappa = "ba179430d597d86e75a49f546bdd6409d85e401beee13b325d663e1f60879ead"
+embedded = "6386666b1617ca7e03e441bb23f7c07ced03c2baf972c544f45a92db64b0cd24"
+status = "residue"
+cause = "mir::TerminatorKind::Call: atomic::low_bits: crossbeam-epoch's MIR stops at mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+
+[[fn]]
+path = "crossbeam-epoch::ensure_aligned"
+kappa = "a82dfa9145c2174e109538f0ed277f819fbfd60e2d9cd84d8b82956c4ccd94cc"
+embedded = "95c04d6e0b0d5f297eecc7f2cd2624a1d374044ad985e229978bbd3bb637f45c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: atomic::low_bits: crossbeam-epoch's MIR stops at mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+
+[[fn]]
+path = "crossbeam-epoch::low_bits"
+kappa = "73533fdf52807610ac1a23f0ec84a7d60419db0ecef73db8e8729ece6fdd62cc"
+embedded = "ef22ba056792081e97a563e63a72e67ec9f72ac558665fe7e3ad17e9ad54197e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+
+[[fn]]
+path = "crossbeam-epoch::strongest_failure_ordering"
+kappa = "59f88c33d58460127e66dd7e3bb330dfc6fbccadded125343bb7c8019c7b593c"
+embedded = "265af0de3c7e20b83e47d3e92be8d07f9778810287ff2fca128ee052d42b6547"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+

@@ -1,0 +1,257 @@
+# The tracing-attributes register (written by `uorust crate tracing-attributes@0.1.31`; do not edit): every body of
+# tracing-attributes's MIR at tracing-attributes 0.1.31, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 168
+translated = 10
+residue = 158
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.attr]
+bodies = 146
+translated = 10
+residue = 136
+
+[module.crate]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.expand]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 168
+embedded = 168
+evaluable = 166
+blocked = 2
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: syn::buffer::Cursor<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: attr::Level"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: attr::kw::err"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::fields"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::follows_from"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::level"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::parent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::ret"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::skip"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::skip_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attr::kw::target"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FieldKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FormatMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attr::EventArgs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attr::Field"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attr::Fields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attr::InstrumentArgs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: err"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: follows_from"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: level"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: name"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parent"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ret"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: skip"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: skip_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: target"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdentAndTypesRenamer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attr::FormatMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attr::LitStrOrIdent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: expand::RecordType::TYPES_FOR_VALUE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImplTraitEraser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ItemFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LitInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LitStrOrIdent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeItemFnRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::ExprArg<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::FieldKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::FieldName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Skips"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::StrArg<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item ="
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expand::AsyncInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: expand::RecordType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 1

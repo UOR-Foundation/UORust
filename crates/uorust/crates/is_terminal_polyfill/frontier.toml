@@ -1,0 +1,50 @@
+# The is_terminal_polyfill register (written by `uorust crate is_terminal_polyfill@1.70.2`; do not edit): every body of
+# is_terminal_polyfill's MIR at is_terminal_polyfill 1.70.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 7
+translated = 0
+residue = 7
+
+[module.crate]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 7
+embedded = 7
+evaluable = 7
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stderr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StderrLock<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stdin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StdinLock<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stdout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StdoutLock<'_>"
+bodies = 1

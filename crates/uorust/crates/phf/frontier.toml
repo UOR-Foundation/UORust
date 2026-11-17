@@ -1,0 +1,89 @@
+# The phf register (written by `uorust crate phf@0.14.0`; do not edit): every body of
+# phf's MIR at phf 0.14.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 95
+translated = 0
+residue = 95
+
+[module.map]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.ordered_map]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.ordered_set]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.set]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 95
+embedded = 95
+evaluable = 95
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: OrderedMap<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: OrderedSet<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: map::Map<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Set<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: map::Entries<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ordered_map::Entries<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ordered_set::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: set::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: map::Keys<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: map::Values<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ordered_map::Keys<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ordered_map::Values<'_"
+bodies = 5

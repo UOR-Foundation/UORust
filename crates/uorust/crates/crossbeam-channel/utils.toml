@@ -1,0 +1,45 @@
+[[fn]]
+path = "crossbeam-channel::RNG"
+kappa = "96340b6c7c418f9f7e16a07f78fe7c4761539fcabefa1ba7a7c8921313cbf8d6"
+embedded = "064305e8122addaa35c568cf8f5e09f9286fb9abf81b36d4cd0e8723edae6993"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u32>"
+
+[[fn]]
+path = "crossbeam-channel::__RUST_STD_INTERNAL_INIT"
+kappa = "ac6d1e7d66bfb52cba63ac3a3cce50ca2f96b1b8eb08cf64e105129ce86ed518"
+embedded = "bbcc24ee8286a1af6219f68357db1162b6b6b48fd3103654016f8c78f028eb84"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u32>"
+
+[[fn]]
+path = "crossbeam-channel::shuffle"
+kappa = "5f3202531348e36869383508264b40c2544b740cd47c6dbb6dee1992d7ce6d67"
+at = "T=u32"
+embedded = "0f35f3157306e99d882e19086eb1b8d02b410b559e305e0fd08f2d5f1b5008b0"
+status = "residue"
+cause = "mir::Operand::Constant: utils::shuffle::<u32>::promoted[0]"
+
+[[fn]]
+path = "crossbeam-channel::utils::Mutex::lock"
+kappa = "6a52d4208823ae9e1f40ea9b4350a50605bc8b52a850a1ed19a39b67e1e48e71"
+at = "T=u32"
+embedded = "afc74de2964fdc776db95eade1c72c77babb4562db3f2a8510df7cd66aa053ea"
+status = "residue"
+cause = "mir::Ty: std::sync::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "crossbeam-channel::utils::Mutex::new"
+kappa = "95fa962bc0778efdc57182eb90de0ec8ee0aab434deb610ad83c1c6186c7f984"
+at = "T=u32"
+embedded = "0f0ff55dffb50f05fc07835e67f5055534946ad5af5d8bfb271a79de5800aeef"
+status = "residue"
+cause = "mir::Ty: utils::Mutex<u32>"
+
+[[fn]]
+path = "crossbeam-channel::utils::sleep_until"
+kappa = "75a8c8523b9e0c368b960ffab159e2dba9e4991507ec8356eec732258a6107d1"
+embedded = "7acca2d895b8dd6c8c527e8ad70be2614e3cdc62955973674fde9607292f7dc5"
+status = "residue"
+cause = "mir::Ty: Instant"
+

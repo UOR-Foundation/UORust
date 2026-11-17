@@ -1,0 +1,459 @@
+# The rustls-webpki register (written by `uorust crate rustls-webpki@0.103.17`; do not edit): every body of
+# rustls-webpki's MIR at rustls-webpki 0.103.17, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 319
+translated = 9
+residue = 310
+
+[module.cert]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crl]
+bodies = 75
+translated = 0
+residue = 75
+
+[module.der]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.end_entity]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.error]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.rpk_entity]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.sct]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.signed_data]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.subject_name]
+bodies = 40
+translated = 1
+residue = 39
+
+[module.time]
+bodies = 11
+translated = 4
+residue = 7
+
+[module.trust_anchor]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.verify_cert]
+bodies = 67
+translated = 3
+residue = 64
+
+[module.x509]
+bodies = 13
+translated = 1
+residue = 12
+
+[embedding]
+bodies = 319
+embedded = 319
+evaluable = 319
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 35
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item der::CONTEXT_SPECIFIC"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: error::DerTypeId"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: untrusted::Input<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: cert::Cert<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: crl::types::BorrowedRevokedCert<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::TrustAnchor<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sct::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: crl::RevocationOptionsBuilder<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: verify_cert::KeyUsage"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WildcardDnsNameRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crl::types::RevocationReason"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: subject_name::GeneralName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: verify_cert::KeyPurposeId<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Cert<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CertRevocationList<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Input<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crl::types::OwnedCertRevocationList"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: subject_name::NameIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: verify_cert::VerifiedPath<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: x509::DistributionPointName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DerTypeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExpirationPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedKeyUsage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidNameContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyPurposeId<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyUsage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RequiredEkuNotFoundContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RevocationCheckDepth"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RevocationReason"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnknownStatusPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnsupportedSignatureAlgorithmContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnsupportedSignatureAlgorithmForPublicKeyContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cert::CrlDistributionPoint<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crl::CertNotRevoked"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crl::RevocationOptions<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crl::types::BorrowedCertRevocationList<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crl::types::CertRevocationList<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crl::types::OwnedRevokedCert"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: end_entity::EndEntityCert<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::UnixTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sct::LogIdAndTimestamp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sct::SctParser<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sct::SignedCertificateTimestamp<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: signed_data::OwnedSignedData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: subject_name::dns_name::WildcardDnsNameRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: verify_cert::OidDecoder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: verify_cert::PathNode<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: verify_cert::Role"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x509::UnknownExtensionPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: verify_cert::KeyUsage::CLIENT_AUTH_REPR::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: verify_cert::KeyUsage::SERVER_AUTH_REPR::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BitStringFlags<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IdRole"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IssuingDistributionPoint<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyPurposeIdIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LogIdAndTimestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OidDecoder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PartialPath<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Role"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SignedCertificateTimestamp<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Subtrees"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wildcards"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::CrlsRequired"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::ExpirationPolicy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::KeyUsageMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::RevocationCheckDepth"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::UnknownStatusPolicy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crl::types::IssuingDistributionPoint<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: der::BitStringFlags<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: der::DerIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: der::Tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::InvalidNameContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::UnsupportedSignatureAlgorithmContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::UnsupportedSignatureAlgorithmForPublicKeyContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rpk_entity::RawPublicKeyEntity<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::CertificateDer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signed_data::SignedData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signed_data::SubjectPublicKeyInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subject_name::Subtrees"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subject_name::dns_name::IdRole"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subject_name::dns_name::Wildcards"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::Budget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::ExtendedKeyUsage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::IntermediateIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::PartialPath<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::PathIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify_cert::RequiredEkuNotFoundContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x509::Extension<'_>"
+bodies = 1

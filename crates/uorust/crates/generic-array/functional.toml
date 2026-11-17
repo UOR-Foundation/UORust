@@ -1,0 +1,40 @@
+[[fn]]
+path = "generic-array::functional::FunctionalSequence::fold"
+kappa = "1cb729bba97e88a3ec945f9354d0f5039d32ba2e6c4547af434772e9478f6dc2"
+at = "F=u32, Self=u32, U=u32"
+embedded = "0dc485c069609acf270b35d2831a26ba1b3dcae243feee7b9601c939407b0847"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "generic-array::functional::FunctionalSequence::map"
+kappa = "c59c073944c1bd9ed157eecd341914999ad34a0a0ed36635899f899149a9d94a"
+at = "F=u32, Self=u32, T=u32, U=u32"
+embedded = "7ffc04e88c0ef5b873a3924519c7c5e95949cf634ab599a8c45b4e1855130020"
+status = "residue"
+cause = "mir::Ty: core::iter::Map<u32, u32>"
+
+[[fn]]
+path = "generic-array::functional::FunctionalSequence::try_fold"
+kappa = "abedd09dfaa3ff3d3537bbe863f88de6854d89578ed7de9eb0e584958137e9ad"
+at = "E=u32, F=u32, Self=u32, U=u32"
+embedded = "d5208e2c1663eb933fd40d44b50a7affae4e3b819acfb01d25ed0776d17e6585"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "generic-array::functional::FunctionalSequence::try_map"
+kappa = "a52d6a5fd90433f165f00e3dd09df6eb41d74d2a74aae2e548e9fbf7e42532ec"
+at = "E=u32, F=u32, Self=u32, T=u32, U=u32"
+embedded = "8b6beebcc3e843c4d573475309a216ecc6a3c7ab7767db118626767f1da50631"
+status = "residue"
+cause = "mir::Ty: core::iter::Map<u32, u32>"
+
+[[fn]]
+path = "generic-array::functional::FunctionalSequence::zip"
+kappa = "ec800c87cf14c6e27fd94b090008ec158b03e8a6a262b1add52db233534e09b0"
+at = "F=u32, Rhs=u32, Self=u32, T=u32, U=u32"
+embedded = "94b602130541a9d0feb47e8dc9d3480070e9c6d499b3a29d5aa2dfba663c3b6e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by GenericSequence, which u32 does not implement in core"
+

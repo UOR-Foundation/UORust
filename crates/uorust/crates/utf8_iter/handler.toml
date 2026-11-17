@@ -1,0 +1,109 @@
+[[fn]]
+path = "utf8_iter::SEQUENCE_FOR_REPLACEMENT_CHARACTER"
+kappa = "e1eefd8286e35118e0daa56a6f64751b7bbb0d461e934dabce14c4728e6e8e51"
+embedded = "754c5d0275f32e3c229b40143c5760ad4ece9f0f7b0dc0e13d1e9a2d2f029583"
+status = "residue"
+cause = "mir::Ty: utf_types::utf8::ThreeByteSequence"
+
+[[fn]]
+path = "utf8_iter::Utf8Handler::error"
+kappa = "23fca3b979b01902a6bc0acd953dc5e6a60e96a54c31819148ab3c2c20fb5fb2"
+at = "Self=u32"
+embedded = "63ed93b681a49cb49bf15c1834f573c82c3b7c28db638103097f880fc04035fa"
+status = "residue"
+cause = "mir::Operand::Constant: handler::SEQUENCE_FOR_REPLACEMENT_CHARACTER: type outside the lift: utf_types::utf8::ThreeByteSequence"
+
+[[fn]]
+path = "utf8_iter::handler::<impl at src/handler.rs:108:10: 108:15>::fmt"
+kappa = "6f75fe0a27c454a825a8f5f8a00ee0c34bc7a8d2131f8b32c1118b1e546e87c2"
+at = "H=u32"
+embedded = "6f13ef37d71aace1c40d48f59849f1e591556ebc12d1919d0be8385b49202b0e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::as_slice"
+kappa = "c8b37e4edad30e6b28eb3fdd065b3dc7e8f281b370c448f00d2f52dedf1230ed"
+embedded = "73d0969a2dc5b1fb0bd6b440ea491f775cacc9852aeecc05000a2807c3b3a61f"
+status = "residue"
+cause = "mir::Ty: H"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::clone"
+kappa = "3ce8655e56eaada8f4dc96ca5bb98f373a3809ee03f7d01bde40c2fdfa466fc5"
+at = "H=u32"
+embedded = "10eb4e247b6ef18d05b4a6ee4217be53b092520f0bb14895b40d0c5ea4198ea6"
+status = "residue"
+cause = "mir::Ty: handler::Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::error"
+kappa = "0af372b043f64dec0bc761fe6cb42a9fb47da1f072c825d91b0cccb16d7d4913"
+at = "H=u32"
+embedded = "e46aff4b8e8d6a7f8598804d27e8dd2500c1fdc5bfc843143ac9cbc8650c4c75"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::handler"
+kappa = "278d0666adb31f8975a65722fa574c5c411c3e75eb5a1182800f3bd9a98d6131"
+at = "H=u32"
+embedded = "0c617da9d18828dc137a427d46a51f82099266e32132a6dfa70f8551f96038db"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::last"
+kappa = "2e7ec7e7b13c339cce115938414a09685f2c9319480eb55ccc73ec60eb40b3d3"
+at = "H=u32"
+embedded = "3c6ecd10c2ed579b4e706535a8b4d446864e639b08a5f84da72c06f06fd845aa"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::new"
+kappa = "127eb8245e289a346429b46add35351229b4b507540c349b6d5f4d4aa51b5e55"
+at = "H=u32"
+embedded = "e3ed0f0ae2aaff89e06d9edd9a3c20aeafa381ce4809ab865c29ba2eb55fd71c"
+status = "residue"
+cause = "mir::Ty: handler::Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::next"
+kappa = "e0bf02ee67f5dbbe1d0ba9644125bcfe54d6fb37c5f1052fe918adc5e41fbc8b"
+at = "H=u32"
+embedded = "aacba7104fb9cf2776db3e2d49692c3a5ea341cc997a27a9f23746efcda3b4d9"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::next_back"
+kappa = "ccd0f2ee297d2230463419acec6a97af318b0fd8d51e9ffdb541aad13149e950"
+at = "H=u32"
+embedded = "1845fb8b435d154f4d2cb3ae0f48bcdb98411551c7505a185097c939c8c3b898"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::next_back_fallback"
+kappa = "3ffd8eac1b3b230d0cba0ea3095bafa5bad572add92f09eb937b9222623c3398"
+at = "H=u32"
+embedded = "3b031155881d448c59138b3bc3e82a202ba5c000c95d56863aff9a713f05b40f"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::next_fallback"
+kappa = "b3d7c5b11e03cdfd7db40c29ed4a0f42b0a8003d299ce3eef8854e42b4f6d56b"
+at = "H=u32"
+embedded = "5d84c3526c0609355d72f5fdbce7361b78d9e0a0ff637c023d37714d2e18ada6"
+status = "residue"
+cause = "mir::Ty: Utf8CharsWithHandler<'_, u32>"
+
+[[fn]]
+path = "utf8_iter::handler::Utf8CharsWithHandler::size_hint"
+kappa = "1e89bd6646164c4bbeb8c8e6c2826af3a6a2a1f94dda22172cde190810a5c476"
+embedded = "225f82fec043f7348107c32378b359173284b15353f1f5da8479762d77fbb542"
+status = "residue"
+cause = "mir::Ty: H"
+

@@ -1,0 +1,14 @@
+[[fn]]
+path = "tokio::async_trace_leaf"
+kappa = "6e1280e208e74ebf974563904b389f599efb8e2fa25098930efda920fa595fb9"
+embedded = "c53fd1770de8224b179ffc69c3cd637934c2aaa05a4091fc37a27594584057ae"
+status = "residue"
+cause = "mir::Ty: {async fn body of trace::async_trace_leaf()}"
+
+[[fn]]
+path = "tokio::trace_leaf"
+kappa = "b27067836928bda22776eb873a4b2314626370c65d5158f628cd86797936ef16"
+embedded = "eb4bd30ff0db42cac6282a2b06def9cfff2d13d9b986cf8157d65dec8a253278"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+

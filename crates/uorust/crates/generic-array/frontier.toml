@@ -1,0 +1,200 @@
+# The generic-array register (written by `uorust crate generic-array@1.4.5`; do not edit): every body of
+# generic-array's MIR at generic-array 1.4.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 165
+translated = 1
+residue = 164
+
+[module.crate]
+bodies = 50
+translated = 1
+residue = 49
+
+[module.functional]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.hex]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.impls]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.internal]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.iter]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.sequence]
+bodies = 25
+translated = 0
+residue = 25
+
+[embedding]
+bodies = 165
+embedded = 165
+evaluable = 165
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: GenericArray<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: GenericArrayIter<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: typenum::UTerm"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: <typenum::Const<#usize_N> as IntoArrayLength>::ArrayLength"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: <<GenericArray<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IntrusiveArrayBuilder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by GenericSequence"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: internal::IntrusiveArrayConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FallibleGenericSequence"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as typenum::Unsigned>::USIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArrayBuilder<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArrayConsumer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::IntrusiveArrayBuilder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::GenericArrayIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: sequence::GenericSequence::repeat::{closure#0}: mir::Operand::Constant: the constant item <<Self as sequence::GenericSequence<u32>>::Length as typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <N as typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item UPPER"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item const_transmute::SizeAsserter::ASSERT_SIZE_EQUALITY"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hex::hex_encode_fallback: generic-array's MIR stops at mir::Operand::Constant: the constant item UPPER"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: transmute_copy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArray<&mut u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArray<&u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArray<core::mem::MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArrayImplEven<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArrayImplOdd<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::cell::Cell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Zip<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::ArrayBuilder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::ArrayConsumer<u32"
+bodies = 1

@@ -1,0 +1,639 @@
+# The num-traits register (written by `uorust crate num-traits@0.2.19`; do not edit): every body of
+# num-traits's MIR at num-traits 0.2.19, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2286
+translated = 354
+residue = 1932
+
+[module.bounds]
+bodies = 74
+translated = 2
+residue = 72
+
+[module.cast]
+bodies = 754
+translated = 170
+residue = 584
+
+[module.crate]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.float]
+bodies = 252
+translated = 1
+residue = 251
+
+[module.identities]
+bodies = 68
+translated = 53
+residue = 15
+
+[module.int]
+bodies = 233
+translated = 46
+residue = 187
+
+[module.ops]
+bodies = 442
+translated = 50
+residue = 392
+
+[module.pow]
+bodies = 342
+translated = 0
+residue = 342
+
+[module.real]
+bodies = 47
+translated = 3
+residue = 44
+
+[module.sign]
+bodies = 48
+translated = 29
+residue = 19
+
+[embedding]
+bodies = 2285
+embedded = 2285
+evaluable = 2213
+blocked = 72
+
+[[construct]]
+construct = "CastKind::IntToFloat"
+bodies = 72
+
+[differential]
+bodies = 20
+theorems = 240
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 281
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 277
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::pow"
+bodies = 156
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as From>::from"
+bodies = 48
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Float"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 39
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bounds::max_value: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u32::MAX"
+bodies = 21
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bounds::min_value: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u32::MIN"
+bodies = 21
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_u64: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u64::MAX"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 14
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u128::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u16::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u32::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u64::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u8::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::usize::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_u128: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u128::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_u16: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u16::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_u32: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u32::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_u8: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u8::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_usize: num-traits's MIR stops at mir::Operand::Constant: the constant item core::usize::MAX"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_neg"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i64: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i64::MAX"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_div"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_neg"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_rem"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_shl"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_shr"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_be"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_be_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::reverse_bits"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ne_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shl"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shr"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: core::num::ParseIntError"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i64: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i64::MIN"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<i128>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<i16>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<i32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<i64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<i8>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<isize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u128>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u16>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u8>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<usize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i128::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i128::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i16::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i16::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i32::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i32::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i64::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i64::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i8::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::i8::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::isize::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::isize::MIN"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i128: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i128::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i16: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i16::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i32: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i32::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i8: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i8::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_isize: num-traits's MIR stops at mir::Operand::Constant: the constant item core::isize::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::num::FpCategory"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i128: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i128::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i16: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i16::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i32: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i32::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_i8: num-traits's MIR stops at mir::Operand::Constant: the constant item core::i8::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::to_isize: num-traits's MIR stops at mir::Operand::Constant: the constant item core::isize::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FloatConst"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FloatCore"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Signed"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as From>::from"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::from_u64: num-traits's MIR stops at mir::TerminatorKind::Call: cast::to_u32: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u32::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::FloatCore::fract: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by Rem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Not"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: clamp: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Div"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Rem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: 0.5f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: isize::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::f32::EPSILON"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u128::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u16::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u32::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u64::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::u8::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::usize::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as FromBytes>::from_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as bytes::ToBytes>::to_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cast::from: num-traits's MIR stops at mir::TerminatorKind::Call: cast::to_u32: num-traits's MIR stops at mir::Operand::Constant: the constant item core::u32::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::Float::epsilon: num-traits's MIR stops at mir::Operand::Constant: the constant item core::f32::EPSILON"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::Float::to_degrees: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by Float"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::Float::to_radians: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by Float"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::FloatCore::is_infinite: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by FloatCore"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::FloatCore::is_sign_negative: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by FloatCore"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: float::FloatCore::is_sign_positive: num-traits's MIR stops at mir::TerminatorKind::Call: float::FloatCore::is_sign_negative: num-traits's MIR stops at mir::Instantiation: u32 for a parameter bounded by FloatCore"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: int::count_zeros: num-traits's MIR stops at mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: int::one_per_byte: num-traits's MIR stops at mir::TerminatorKind::Call: int::count_zeros: num-traits's MIR stops at mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: int::reverse_bits_fallback: num-traits's MIR stops at mir::TerminatorKind::Call: int::one_per_byte: num-traits's MIR stops at mir::TerminatorKind::Call: int::count_zeros: num-traits's MIR stops at mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ops::euclid::checked_div_euclid: num-traits's MIR stops at mir::TerminatorKind::Call: core::num::checked_div_euclid"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ops::euclid::div_euclid: num-traits's MIR stops at mir::TerminatorKind::Call: core::num::div_euclid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Bytes<'_>"
+bodies = 1

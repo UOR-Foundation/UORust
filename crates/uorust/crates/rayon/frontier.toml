@@ -1,0 +1,2612 @@
+# The rayon register (written by `uorust crate rayon@1.12.0`; do not edit): every body of
+# rayon's MIR at rayon 1.12.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1988
+translated = 66
+residue = 1922
+
+[module.array]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.collections]
+bodies = 124
+translated = 12
+residue = 112
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.iter]
+bodies = 1237
+translated = 37
+residue = 1200
+
+[module.math]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.option]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.par_either]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.range]
+bodies = 114
+translated = 0
+residue = 114
+
+[module.range_inclusive]
+bodies = 66
+translated = 0
+residue = 66
+
+[module.result]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.slice]
+bodies = 217
+translated = 7
+residue = 210
+
+[module.split_producer]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.str]
+bodies = 120
+translated = 8
+residue = 112
+
+[module.string]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.vec]
+bodies = 30
+translated = 2
+residue = 28
+
+[embedding]
+bodies = 1983
+embedded = 1983
+evaluable = 1959
+blocked = 24
+
+[[construct]]
+construct = "Rvalue::Use"
+bodies = 24
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: MultiZip<"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: private::PrivateMarker"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: iter::multizip::MultiZip<"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 27
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: iter::map::Map<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: range::Iter<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: iter::copied::Copied<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksExactMut<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IndexedParallelIterator"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: slice::IterMut<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksExact<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: iter::chain::Chain<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::chunks::Chunks<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::cloned::Cloned<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::enumerate::Enumerate<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::interleave::Interleave<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::intersperse::Intersperse<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::rev::Rev<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::skip::Skip<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::step_by::StepBy<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iter::zip::Zip<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: rchunks::RChunksExactMut<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::Chunks<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ID"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: collections::binary_heap::Drain<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: iter::filter_map::FilterMap<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: iter::noop::NoopConsumer"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: iter::take::Take<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: option::Iter<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: result::IntoIter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: result::Iter<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksMut<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: vec::Drain<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ParallelSliceMut"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item INCL"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <String as iter::FromParallelIterator>::from_par_iter"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::from_par_iter::collect_extended: rayon's MIR stops at mir::TerminatorKind::Call: <std::string::String as Default>::default"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: INIT"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SliceDrain<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: collections::vec_deque::Drain<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: collections::vec_deque::IterMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: either::Either<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: iter::for_each::ForEachConsumer<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: iter::inspect::Inspect<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: option::IntoIter<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: option::IterMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rchunks::RChunksExact<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: result::IterMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InterleaveShortest<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MaxLen<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MinLen<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PanicFuse<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RepeatNProducer<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ZipEq<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: array::IntoIter<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::empty::Empty<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapInit<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapWith<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::once::Once<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::product::ProductConsumer<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::reduce::ReduceConsumer<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::repeat::RepeatN<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::sum::SumConsumer<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<char>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<i16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<i32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<i8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<isize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range::Iter<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<char>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<i16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<i8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rchunks::RChunks<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rchunks::RChunksMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: repeat::RepeatN<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::str::MatchIndices<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::str::Matches<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::str::SplitInclusive<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: windows::Windows<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: range::drive_unindexed::offset::{closure#0}: mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::ends_with"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::find"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::rfind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BTreeSet<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BinaryHeap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FoldChunks<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FoldChunksWith<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashSet<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InterleaveSeq<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IntersperseIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LinkedList<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MaxLenProducer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MinLenProducer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OP"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PanicFuseIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UpdateSeq<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VecDeque<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::btree_map::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::hash_map::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::collect::consumer::CollectConsumer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::collect::consumer::CollectResult<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::filter::Filter<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map::FlatMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::flatten::Flatten<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::fold::FoldFolder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapWithFolder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::Fuse<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::try_reduce::TryReduceConsumer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::try_reduce_with::TryReduceWithConsumer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: split_producer::SplitProducer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: str::Split<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: str::SplitInclusive<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: str::SplitTerminator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: windows::ArrayWindows<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Try"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_mut_ptr"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChainProducer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChainSeq<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChunkSeq<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClonedProducer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CopiedProducer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Infallible"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IntersperseProducer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LinkedList<Vec<u32>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapInit<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapWith<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NoopConsumer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PanicFuseProducer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Update<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::btree_map::IntoIter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::btree_map::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::hash_map::Drain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::hash_map::IntoIter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::hash_map::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::hash_set::Drain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::linked_list::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::blocks::ExponentialBlocks<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::blocks::UniformBlocks<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::cloned::ClonedConsumer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::cloned::ClonedFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::copied::CopiedConsumer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::copied::CopiedFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListReducer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListStringConsumer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListStringFolder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListVecFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::filter::FilterConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::filter_map::FilterMapConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::find::FindConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::find::FindFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::find_first_last::FindConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map::FlatMapConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map_iter::FlatMapIter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map_iter::FlatMapIterConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map_iter::FlatMapIterFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flatten::FlattenConsumer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flatten_iter::FlattenIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flatten_iter::FlattenIterConsumer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::flatten_iter::FlattenIterFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::fold::Fold<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::fold::FoldWith<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::fold_chunks::FoldChunks<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::fold_chunks_with::FoldChunksWith<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::inspect::InspectConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::inspect::InspectFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::interleave_shortest::InterleaveShortest<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::intersperse::IntersperseConsumer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::intersperse::IntersperseFolder<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::len::MaxLen<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::len::MinLen<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::map::MapConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::map::MapFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapInitConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapWithConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuse<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuseFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::plumbing::Splitter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::positions::Positions<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::product::ProductFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::reduce::ReduceFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::repeat::RepeatNProducer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any::SkipAny<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any::SkipAnyFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any_while::SkipAnyWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any_while::SkipAnyWhileFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::sum::SumFolder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::take_any::TakeAny<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::take_any::TakeAnyFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::take_any_while::TakeAnyWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::take_any_while::TakeAnyWhileFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::try_fold::TryFold<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::try_fold::TryFoldFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::try_fold::TryFoldWith<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::update::Update<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::update::UpdateConsumer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::update::UpdateFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::while_some::WhileSome<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::while_some::WhileSomeFolder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::zip_eq::ZipEq<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::IterProducer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::Split<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::SplitInclusive<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::chunk_by::ChunkBy<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunks<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksExact<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::windows::ArrayWindows<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::windows::Windows<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<std::vec::Vec<u32>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::Bytes<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::CharIndices<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::Chars<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::EncodeUtf16<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::Lines<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::MatchIndices<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::Matches<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::SplitAsciiWhitespace<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: str::SplitWhitespace<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: string::Drain<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vec::DrainProducer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ParallelIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Producer"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::truncate"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::get_unchecked"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::plumbing::bridge: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<<slice::Iter<u32> as iter::ParallelIterator>::Item>>::Result"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::plumbing::bridge: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<<vec::IntoIter<u32> as iter::ParallelIterator>::Item>>::Result"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::into_par_iter: rayon's MIR stops at mir::Rvalue::Aggregate: of TupleListNatNatNat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::drive: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::with_producer: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::ProducerCallback<u32>>::Output"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <iter::chain::Chain<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <iter::zip::Zip<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClonedConsumer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClonedFolder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CopiedConsumer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CopiedFolder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnumerateProducer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlattenConsumer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlattenFolder<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlattenIterConsumer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlattenIterFolder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InterleaveProducer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LengthSplitter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MapWithIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MergeSortResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PanicFuseFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RevProducer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SendPtr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipAnyConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipAnyFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Splitter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StepByProducer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TakeAnyConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TakeAnyFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WhileSomeConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WhileSomeFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZipProducer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::chain::ChainProducer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::chain::ChainSeq<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::chunks::ChunkProducer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListConsumer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::extend::ListVecConsumer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::filter::FilterFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::filter_map::FilterMapFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::find_first_last::FindFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::flat_map::FlatMapFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::flatten::FlattenFolder<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::fold::FoldConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::fold::FoldWithConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::interleave::InterleaveProducer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::intersperse::IntersperseProducer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapWithIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::noop::NoopReducer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuseConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::par_bridge::IterBridge<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::plumbing::LengthSplitter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::positions::PositionsConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::positions::PositionsFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::repeat::Repeat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any::SkipAnyConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::skip_any_while::SkipAnyWhileConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::splitter::Split<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::take_any::TakeAnyConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::take_any_while::TakeAnyWhileConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::try_fold::TryFoldConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::try_fold::TryFoldWithConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::try_reduce::TryReduceFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::try_reduce_with::TryReduceWithFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::Collector<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::Unzip"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::UnzipConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::UnzipFolder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::update::UpdateSeq<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::while_some::WhileSomeConsumer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::Iter<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::Iter<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::Iter<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::Iter<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<isize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_inclusive::Iter<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::SplitInclusiveMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::SplitMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::chunk_by::ChunkByMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksExactMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::sort::MergeSortResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::array::IntoIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<std::option::Option<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<std::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::SplitTerminatorProducer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: break_patterns::{closure#0}: mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: choose_pivot::{closure#0}: mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: heapsort::{closure#0}: mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FromParallelIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: iter::IndexedParallelIterator::cmp::inequal::promoted[0]: mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: iter::IndexedParallelIterator::partial_cmp::inequal::promoted[0]: mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: iter::unzip::unzip_indexed::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as Ord>::max"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as Ord>::min"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item one"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item slice::sort::provide_sorted_batch::MIN_INSERTION_RUN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unzip::from_par_iter::identity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Unit"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&bool as Not>::not"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Box as Into>::into"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::reserve"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::split_off"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_whitespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: collect_into_vec"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::swap"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: find_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: find_last"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::ParallelIterator::max_by::max: rayon's MIR stops at type outside the lift: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::ParallelIterator::max_by_key::key: rayon's MIR stops at type outside the lift: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::ParallelIterator::min_by::min: rayon's MIR stops at type outside the lift: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::ParallelIterator::min_by_key::key: rayon's MIR stops at type outside the lift: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::ParallelIterator::reduce_with::opt_fold: rayon's MIR stops at type outside the lift: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::find::find: rayon's MIR stops at type outside the lift: <u32 as iter::ParallelIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::for_each::for_each: rayon's MIR stops at type outside the lift: iter::for_each::ForEachConsumer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::from_par_iter::collect_extended: rayon's MIR stops at mir::TerminatorKind::Call: <std::collections::BTreeMap as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::from_par_iter::collect_extended: rayon's MIR stops at mir::TerminatorKind::Call: <std::collections::BTreeSet as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::from_par_iter::collect_extended: rayon's MIR stops at mir::TerminatorKind::Call: <std::vec::Vec as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::from_par_iter::from_par_iter: rayon's MIR stops at mir::TerminatorKind::Call: iter::from_par_iter::collect_extended: rayon's MIR stops at mir::TerminatorKind::Call: <std::vec::Vec as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::product::product: rayon's MIR stops at type outside the lift: iter::product::ProductConsumer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::reduce::reduce: rayon's MIR stops at type outside the lift: iter::reduce::ReduceConsumer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::sum::sum: rayon's MIR stops at type outside the lift: iter::sum::SumConsumer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::try_reduce::try_reduce: rayon's MIR stops at type outside the lift: std::sync::atomic::Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::unzip::partition: rayon's MIR stops at type outside the lift: iter::unzip::Partition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: iter::unzip::unzip: rayon's MIR stops at type outside the lift: iter::unzip::Unzip"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: partition_map"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::drive: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::with_producer: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::ProducerCallback<&u32>>::Output"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: str::find_char_midpoint: rayon's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: try_reduce_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unzip_into_vecs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <&mut u32 as iter::IntoParallelIterator>::Iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <&u32 as iter::IntoParallelIterator>::Iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <FoldChunks<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <FoldChunksWith<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <MapInit<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <MapWith<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <MaxLen<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <MinLen<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <PanicFuse<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <Update<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::chunks::Chunks<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::cloned::Cloned<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::copied::Copied<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::enumerate::Enumerate<u32> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::inspect::Inspect<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::intersperse::Intersperse<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::map::Map<I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::rev::Rev<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::skip::Skip<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::step_by::StepBy<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <iter::take::Take<I> as iter::IndexedParallelIterator>::with_producer::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BlocksCallback<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BytesProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CallbackI<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CallbackJ<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CharIndicesProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CharsProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChunkByProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CollectResult<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Collector<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DrainGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DrainProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodeUtf16Producer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExponentialBlocks<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlatMapIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Fold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FoldWith<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: INCL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InsertionHole<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InspectProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntersperseConsumer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntersperseFolder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterBridge<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterParallelProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListConsumer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListStringConsumer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListStringFolder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListVecConsumer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapInitProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapWithProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchIndicesProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchesProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MergeHole<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PanicFuseConsumer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PanicFuseReducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Partition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PartitionMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Positions<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProductConsumer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProductFolder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RepeatProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SkipAny<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SkipAnyWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SplitTerminatorProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SumConsumer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SumFolder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TakeAny<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TakeAnyWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimSortRun"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryFold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryFoldWith<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryReduceWithConsumer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnEither"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UniformBlocks<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unzip"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnzipA<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnzipB<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnzipFolder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnzipReducer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpdateProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkTree<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkTreePostfix<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkTreePostfixProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkTreePrefix<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkTreePrefixProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhileSome<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chunk_by::ChunkBy<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chunk_by::ChunkByMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::drain_guard::DrainGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: find::FindReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: find_first_last::FindConsumer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: find_first_last::FindReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::chunks::ChunkSeq<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::cloned::ClonedProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::collect::consumer::CollectReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::copied::CopiedProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::empty::EmptyProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::enumerate::EnumerateProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::find::FindReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::find_first_last::FindReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::find_first_last::MatchPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::inspect::InspectProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::interleave::InterleaveSeq<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::intersperse::IntersperseIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::len::MaxLenProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::len::MinLenProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::map::MapProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapInitProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::map_with::MapWithProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::multizip::MultiZip<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuseIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuseProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::panic_fuse::PanicFuseReducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::par_bridge::IterParallelProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::repeat::RepeatProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::rev::RevProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::splitter::SplitProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::step_by::StepByProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::Partition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::PartitionMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::UnEither"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::UnzipA<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::unzip::UnzipReducer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::update::UpdateProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::walk_tree::WalkTree<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::walk_tree::WalkTreePostfix<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::walk_tree::WalkTreePostfixProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::walk_tree::WalkTreePrefix<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::walk_tree::WalkTreePrefixProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::zip::ZipProducer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: noop::NoopReducer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: option::OptionProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: plumbing::bridge::Callback<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range::IterProducer<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repeat::Repeat<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::IterMutProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::chunk_by::ChunkByProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksExactMutProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksExactProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksMutProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::chunks::ChunksProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksExactMutProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksExactProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksMutProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::rchunks::RChunksProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::sort::TimSortRun"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::windows::WindowsProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: splitter::Split<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::BinaryHeap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<std::vec::Vec<&str>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<std::vec::Vec<std::boxed::Box<str>>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<std::vec::Vec<std::string::String>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::convert::Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Empty<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Inspect<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Rev<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::StepBy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Zip<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::option::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<[u32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunkBy<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunkByMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::Chunks<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunksExact<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunksExactMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunksMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::RChunks<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::RChunksExact<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::RChunksExactMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::RChunksMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::Windows<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<[u32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::BytesProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::CharIndicesProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::CharsProducer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::EncodeUtf16Producer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::MatchIndicesProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: str::MatchesProducer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: u32 + 'f"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::SliceDrain<'_"
+bodies = 1

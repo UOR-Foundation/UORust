@@ -1,0 +1,130 @@
+[[fn]]
+path = "digest::<impl at src/lib.rs:240:10: 240:15>::clone"
+kappa = "948940aaa19587d6da2520f576b5245bf5dd9a391acf21654fa99b2ad3554559"
+at = "InvalidOutputSize=u32"
+embedded = "e23983ed11c56d2677766b350f90e27485e34d2a7fe7bd3d7ce9d9f755e19204"
+status = "translated"
+digest = "63deceb1b5a970a7d1e711ca77a67fb50acf00e60cbdf8d09f38fb794d045097"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:240:23: 240:28>::fmt"
+kappa = "c938529cdbde27c14d10e25743ba9d6754f9649a5f5e2e5354ef2dff4d8f3224"
+embedded = "7e20fea5697dae7e95915e7e43b2f3db8097018fd43e8723bbc06b7f9ed29140"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:240:30: 240:37>::default"
+kappa = "1a08be6061b81c120d696440244c66d4a5f6457669e2ceb57b376e959845529b"
+at = "InvalidOutputSize=u32"
+embedded = "1ddba31a3e8db46f922133c2a33d07a27908a494a511721eb53ccacaf821b9f7"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:252:10: 252:17>::default"
+kappa = "b15cab93f5d9db9e7a2c8d17231dd145af08003dc7a4ae2b9601510b08b0ebd7"
+at = "InvalidBufferSize=u32"
+embedded = "6f9bba13e00561a786149ebf0685c78d7951675a4f357503c3ab93fe3f3d8637"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:252:19: 252:24>::fmt"
+kappa = "732dedd6c6a054b646761968948e299293723badbdde683c8b099a5cceb3f6a7"
+embedded = "fc0324ff09214f850c53c2b6b28fa780084bc562de83cb7c3edbbbebafa7e613"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:252:32: 252:37>::clone"
+kappa = "68118ed4151f2cea0454180b239bc57e51fe3026c9511ae437772d58f6a9bec3"
+at = "InvalidBufferSize=u32"
+embedded = "1e332e69abeb8136463833fce954b52122383f5b076870d9cd47a905f662741d"
+status = "translated"
+digest = "bd7846eb8b0387b0a4bb48d128f8425a8d78e81a982360fa94c3a09383861d7d"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:252:39: 252:41>::assert_fields_are_eq"
+kappa = "52e915ae8777235b67a46c660bfa98b32e7d0b759d391b79dd0e61719c0a3e5c"
+embedded = "672d5b0020aa0f36618ca64e838bd592b8a4b2f460317ade353845ca46ae6310"
+status = "residue"
+cause = "mir::Ty: InvalidBufferSize"
+
+[[fn]]
+path = "digest::<impl at src/lib.rs:252:43: 252:52>::eq"
+kappa = "7112cbdc2d583d5f6832ce6221c9e33fa808c45be7ceb2dc331ef3bbc64db0ff"
+embedded = "fa24d66e25989c91b29dfc7eecbeda9690dfb442e24597c4ec24dd7bd0ad15fb"
+status = "residue"
+cause = "mir::Ty: InvalidBufferSize"
+
+[[fn]]
+path = "digest::ExtendableOutput::digest_xof"
+kappa = "813519f28220cab0195a5504f5a48f5158955618f6731ca788dad6621e3b38c2"
+at = "Self=u32"
+embedded = "cf33fcd8cb92577b9c94ecd1108bf77083a1ae775c813277128bf0c401d297bc"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "digest::ExtendableOutput::finalize_xof_into"
+kappa = "6942c68aac57233392b1df685d0c06c9c95897f3b068ac45d8495c078473a7f2"
+at = "Self=u32"
+embedded = "355cbd7d06646082c97a23ec560225f3faa901dc3eb17558806a2fd0b43ef04b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ExtendableOutput, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::ExtendableOutputReset::finalize_xof_reset_into"
+kappa = "73ea8aefb5de5987b5234ac14823190872b816b964960f2d1a657db9d41bb8f7"
+at = "Self=u32"
+embedded = "d66eb55d902de4dff99cd7c30cfce9bfd9e9da1063303632a819cc715b4012b7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ExtendableOutputReset, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::FixedOutput::finalize_fixed"
+kappa = "0f3419c7e4f8b6e68593fbcd7ccffd57955a884d344c134927f3a5e43050cb1c"
+at = "Self=u32"
+embedded = "8c3db0becdc9fc9e8a4c7339bd05dd8224063e1c1064b98bff15f4105935e6f5"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::FixedOutputReset::finalize_fixed_reset"
+kappa = "eb6dd646dcef8b56d92c3d1c983fa7065a94d57541ef2a0f642927f8f84d99b0"
+at = "Self=u32"
+embedded = "fc9ccb9ffb77d86014f12c6772258f3d1b3205d8dbdd79a17b0940bf2ef12837"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::InvalidBufferSize::fmt"
+kappa = "20f662e912dcb003050f14c61c896ccd3281511a5dae4478a44b497f00970536"
+embedded = "80535a597330a9b0f9aa5224a831ddbb5e6bfac9016d9254d5a4ba798687d628"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "digest::InvalidOutputSize::fmt"
+kappa = "bdf2518405fceeb647fc14038a451c1dbe556a248e1d86c5b5af62a086686ad5"
+embedded = "d2a95dd50480787ad9f6a1eb62db4eb2da654ff72681ee13ddbf7a105aeaa3cc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "digest::T::try_new_customized"
+kappa = "a30d8d400189be96e9065b1f0107202cc3e1c911216bf410dda85b6f46543c89"
+at = "T=u32"
+embedded = "4d4f27f0b753e643b6f98d2f2f80b9ac20d7c30ab26ec6eafdf0f04dfcddcfa8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by CustomizedInit, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::Update::chain"
+kappa = "3e6c95d4bb9ed955f0eabb8a157c171199a9b4f63e1ec3249655b0ab4db5b93c"
+at = "Self=u32"
+embedded = "5822954185f8a0038101353dfc1d8f4f317e469ba93aa3d7dc8bcf607c089e17"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+

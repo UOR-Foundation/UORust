@@ -1,0 +1,589 @@
+# The wasm-bindgen-macro-support register (written by `uorust crate wasm-bindgen-macro-support@0.2.130`; do not edit): every body of
+# wasm-bindgen-macro-support's MIR at wasm-bindgen-macro-support 0.2.130, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 391
+translated = 0
+residue = 391
+
+[module.ast]
+bodies = 60
+translated = 0
+residue = 60
+
+[module.codegen]
+bodies = 66
+translated = 0
+residue = 66
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.encode]
+bodies = 64
+translated = 0
+residue = 64
+
+[module.error]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.generics]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.hash]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.parser]
+bodies = 133
+translated = 0
+residue = 133
+
+[embedding]
+bodies = 391
+embedded = 391
+evaluable = 388
+blocked = 3
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: error::Diagnostic"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Encoder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: LifetimeVisitor<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ast::ImportKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: syn::Lifetime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BindgenAttrs"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Interner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::Function"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::OperationKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::Program"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::StartKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GenericNameVisitor<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SeqKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SeqMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SeqValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WherePredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::ImportModule"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Struct"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encode::ImportModule<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::AttributeParseState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::BindgenAttrs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::FnArgAttrs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::JsNamespace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClassGenericSubstituter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Diagnostic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FnClassGenerics<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportCallStyle<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OwnedLifetimeStaticizer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ThreadLocal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TokioMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::DynamicUnion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Enum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Export"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Import"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportStatic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::LinkToModule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::MethodKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::MethodSelf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Operation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::SeqKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::SeqValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::StringEnum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::StructField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ThreadLocal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: class_argument_has_elided_lifetime::Visitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::DynamicUnion<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::EncodeChunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Enum<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Export<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Function<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Import<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportFunction<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportStatic<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportType<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::LitOrExpr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::MethodKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Program<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::StringEnum<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Struct<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::StructField<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::NumericValue<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<std::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Expr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: hash::crate_mangled_symbol::promoted[0]: type outside the lift: hash::ShortHash<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: hash::module_mangled_symbol_prefix::promoted[0]: type outside the lift: hash::ShortHash<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: parser::reset_attrs_used::promoted[0]: type outside the lift: parser::AttributeParseState"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Descriptor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnumVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericArgument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericRenameVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Generics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImplTraitDesugar<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImplTraitPresenceVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LifetimeStaticizer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LinkedModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LocalModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MethodData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NumericValue<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefToGenericVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReplacementVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FunctionArgumentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FunctionReturnData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ImportFunction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ImportFunctionKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ImportType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::LitOrExpr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::SeqMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::TokioMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Variant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: class_argument_has_impl_trait::Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: class_argument_has_inferred_type::Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::ClassGenericSubstituter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::FnClassGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::SliceArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::EncodeResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Encoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::EnumVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::FunctionArgumentData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Interner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::LinkedModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Operation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::OperationKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::StartKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::GenericNameVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::LifetimeVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::AnyIdent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::BindgenAttr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: predicate_binds_replacement_lifetime::Visitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::GenericArgument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Generics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::TypeParamBound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::TypePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::WherePredicate"
+bodies = 1

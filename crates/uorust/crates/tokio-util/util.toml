@@ -1,0 +1,38 @@
+[[fn]]
+path = "tokio-util::maybe_dangling::MaybeDangling::drop"
+kappa = "1395413974c247557b524221b64308e54f6b0ac8784acb129f03ee8213136bf8"
+at = "T=u32"
+embedded = "7e0bc3d2d420b02dd158c601a52cf54b2bdea5babcaab6178c20da6049fcf720"
+status = "residue"
+cause = "mir::Ty: maybe_dangling::MaybeDangling<u32>"
+
+[[fn]]
+path = "tokio-util::maybe_dangling::MaybeDangling::new"
+kappa = "e1ebdbfc1d207d3bc588161b23dab9a22dff15d6b26f192909cb4fb557c5b6b3"
+at = "T=u32"
+embedded = "841e5cb224d2240d5fdbe0cba4791eff43d13dff21384e37d7bd151329bddd0e"
+status = "residue"
+cause = "mir::Ty: util::maybe_dangling::MaybeDangling<u32>"
+
+[[fn]]
+path = "tokio-util::maybe_dangling::MaybeDangling::poll"
+kappa = "2a8a2e7159e628ec8bf5477741cffaf27a19602be6e3dfba381486e0dd5af1dd"
+at = "F=u32"
+embedded = "3e493034c19d125a7f5eb900297962d6fb95757273735a88c9bd27811bee1158"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "tokio-util::poll_proceed"
+kappa = "5ea2909f3d854e7fe47719734e7628028e4cd01ff3ef695ca5343ad24d979e61"
+embedded = "a00c0cfc629440c7f90546f23bfaeb790ebaaf63e131f23063989b709ecae8b7"
+status = "residue"
+cause = "mir::Ty: util::RestoreOnPending"
+
+[[fn]]
+path = "tokio-util::util::RestoreOnPending::made_progress"
+kappa = "ed9f56ea85c94ea7b2c9c6b963899860bc592bbf6ee7d70dbc295a294aacf98c"
+embedded = "c927f2fccb2f62e346e7767c4f0f04d34cdcb1276f9009fa96470a4026500a49"
+status = "residue"
+cause = "mir::Ty: RestoreOnPending"
+

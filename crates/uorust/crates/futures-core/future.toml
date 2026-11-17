@@ -1,0 +1,40 @@
+[[fn]]
+path = "futures-core::future::<impl at src/future.rs:42:1: 42:61>::is_terminated"
+kappa = "4ef7c228dc1f0b8168be514d4b16409716f7bffac62e96553f9fb41d43e2d1a8"
+at = "F=u32"
+embedded = "1798e42924e5bf030b589f6ee05e38b25544cba5e7cdefa8d1f3632095ae3e3c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedFuture, which u32 does not implement in core"
+
+[[fn]]
+path = "futures-core::future::F::try_poll"
+kappa = "565966ca0a3033ebdba4db8e060d1df9aff584a84710099ba128e162cd6dbeda"
+at = "E=u32, F=u32, T=u32"
+embedded = "e959a061d22718e9e2d8ffa95187204375727b9859c3e23c58e95ce77f720d42"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::result::Result<u32, u32>>"
+
+[[fn]]
+path = "futures-core::future::Pin::is_terminated"
+kappa = "7799cad964b0eb5cb6ee6f2888195e9b2021e0efe28adf424dd8245341aa7aed"
+at = "P=u32"
+embedded = "d70c2f67171acd6779e36e35c2e10dcec078f65ebd155c094cfedb193eba823d"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<u32>"
+
+[[fn]]
+path = "futures-core::future::if_alloc::AssertUnwindSafe::is_terminated"
+kappa = "708845abcf9e6e87d29bbbfa503c9fc8b879b9ab6da308e9ee4af698d5077040"
+at = "F=u32"
+embedded = "81e4b5c7a15bca01a78ad66ce28f7bb79e1052c83174bff87afae8b94b05e134"
+status = "residue"
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+
+[[fn]]
+path = "futures-core::future::if_alloc::Box::is_terminated"
+kappa = "0e895c9374862a592ba4f70f91e274348450ad3cb79905a1672c0ee073470b03"
+at = "F=u32"
+embedded = "545fbeefcbd8b1b20f8d2dc56817da72644ec13e1a4fd38a538ea9ab0efc029c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedFuture, which u32 does not implement in core"
+

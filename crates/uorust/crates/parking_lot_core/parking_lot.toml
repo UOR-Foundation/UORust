@@ -1,0 +1,390 @@
+[[fn]]
+path = "parking_lot_core::DEFAULT_PARK_TOKEN"
+kappa = "7fe01f5f8075882e18af9d0b91db3e3100e9f11cdad023e3b0266940f75aba5c"
+embedded = "c7d4c5a5bd695e13b086c5b07f994d4fe73dd825bba571d9f0c64d91d6ecfb49"
+status = "residue"
+cause = "mir::Ty: parking_lot::ParkToken"
+
+[[fn]]
+path = "parking_lot_core::DEFAULT_UNPARK_TOKEN"
+kappa = "04ba59291b04f5bcae0aad7841754869cdc05e865b0629a7770fe573c11a185a"
+embedded = "b853aed796e009436ba7a30decd740937e1a988f21096116e58f2ffcc1206006"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkToken"
+
+[[fn]]
+path = "parking_lot_core::acquire_resource"
+kappa = "0686cfbbb454cdb78cf092625df3684b7b6900977ab8f7ca346899b78f2bc68c"
+embedded = "0bcf4108aa6edbfb2e6975e204a677eb12dd24f26f250462d5eaa27706c44aac"
+status = "residue"
+cause = "mir::Ty: parking_lot::AbortOnPanic"
+
+[[fn]]
+path = "parking_lot_core::create_hashtable"
+kappa = "7f8efaa819a67cddbc01388ab136623be1e8e6804c2dbdc063331894636b7069"
+embedded = "44a7c61fef96d92360a043b2529f919afdfda419d341135dffddbaa32af25e61"
+status = "residue"
+cause = "mir::Ty: parking_lot::HashTable"
+
+[[fn]]
+path = "parking_lot_core::get_hashtable"
+kappa = "35c58acf79757d1a6bd409a3a6e92e5a36348008773d0da30d3cdefcaf4f426b"
+embedded = "108de121e1bdbea1e91d2ba4a138fd747de66993c7b5971dc660a217b1b603cd"
+status = "residue"
+cause = "mir::Ty: parking_lot::HashTable"
+
+[[fn]]
+path = "parking_lot_core::grow_hashtable"
+kappa = "ae9b834faa21faefb73706ecd082cb25835e4509fe7d44d98817d52885a51852"
+embedded = "f5a202e2a9586f890e769862e45e51bc3c9e987547a81f71f5f39ef0bbcd1a4d"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "parking_lot_core::lock_bucket"
+kappa = "4939460b0e211d86823664370b5e50535099c85a56eca5cad3a26a3c353ba60a"
+embedded = "7ae93a72fa40e1cf876c5992586ad0330c58cd29484130b6190297b1d00490f2"
+status = "residue"
+cause = "mir::Ty: parking_lot::Bucket"
+
+[[fn]]
+path = "parking_lot_core::lock_bucket_checked"
+kappa = "3777bbbddf1eec7dd34650019f9c685bac61b18b574f2b9a2a0f52f574e388bd"
+embedded = "f979d4a5017e407995c8c99dc55efc6f83ccbae747780893ac83afdfa850a5f3"
+status = "residue"
+cause = "mir::Ty: parking_lot::Bucket"
+
+[[fn]]
+path = "parking_lot_core::lock_bucket_pair"
+kappa = "0cdfb52f16880095b294b96b95371b52f208b002807185d5aa58ba6b329a5bd8"
+embedded = "eb5182a98ed1ed1ee9c9ab5a911115565c7ad1e76c27bd1411857fc6dac3b8f0"
+status = "residue"
+cause = "mir::Ty: parking_lot::Bucket"
+
+[[fn]]
+path = "parking_lot_core::on_unpark"
+kappa = "0a225c9f4dbb6f37ae63121c27b5063218667775d78c05b2dda69245dd6354e9"
+embedded = "3b649279398b54b3e7430afb1deefdd5b26aba4a439b9e2c2f88921df63921f4"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:463:16: 463:21>::clone"
+kappa = "a030cd6186dc49601d4ba3732ebceeee15fc5d0eeb80a018e1b0943c8b9173e6"
+embedded = "4375ee0ccb41d0013add82e25ed259e2ff2af55e323c8d759f99b071e47ba3e5"
+status = "residue"
+cause = "mir::Ty: parking_lot::ParkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:463:23: 463:25>::assert_fields_are_eq"
+kappa = "ee40904e6dcb4c71098af8e9798f27788fcb22a561b4811ed37c9cbc9d92bb83"
+embedded = "9f002418feec3d252986c592729525406f61961369da4e3f8f701d715d015f7d"
+status = "residue"
+cause = "mir::Ty: ParkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:463:27: 463:36>::eq"
+kappa = "5a2daf9bf949c94acc6d3997fa058a22812b4f62a467659e02fc9317643adfd3"
+embedded = "fa3c326e62bb3adf2938f2dc7c4b363bfe42ae8d31e42a16f8d9cbadfa81ef11"
+status = "residue"
+cause = "mir::Ty: ParkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:463:38: 463:43>::fmt"
+kappa = "f6c06806fdfd1c5c895ad280b49ff5f068b70c39fde13af8c0d07bedc40e9027"
+embedded = "9542f4c7904a2e0d00cd6f10e3d8cf3847fc0951d24c77ec34fb055969b2174e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:484:16: 484:21>::clone"
+kappa = "b2e49e74f122b5e4b6d247cd938680252015f70f707ab5eeea179835f267b18e"
+embedded = "35083694cb2436170d510d2c48111bd4b069455fb50f6bdb9c520bb9004d8f59"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:484:23: 484:30>::default"
+kappa = "42ca157e9e71e47cbd9e4f99a43a5c8ae9f8bec692c33adb943797a9d6e9591f"
+embedded = "ca8293a2088713823776c9313c20d2399406cb70d9a29ec785f86e708eba1d4e"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:484:32: 484:34>::assert_fields_are_eq"
+kappa = "105bb0ba2dac72d5650c3cb3c560d525ff6f003b898b8608481e5d40091af6cb"
+embedded = "9f323c9d250514b542772aa5e96e456f139113b182180ae781248d30f7471570"
+status = "residue"
+cause = "mir::Ty: UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:484:36: 484:45>::eq"
+kappa = "0a461a52a0ad5c9b52d5e5f89e8fd211862ccd6e8130a236b3f843be5d7a2c42"
+embedded = "7fe8313c76cb5bb20953f8afb1ed7067b98bd44af9e254c33fb78c43a4f34747"
+status = "residue"
+cause = "mir::Ty: UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:484:47: 484:52>::fmt"
+kappa = "4237d2b9caad6bd9f26ceaff8ca4a98a3b353b2945b02869fb5bbf75e2975779"
+embedded = "0575ce8a4dc233f8335e16622e341ae222964af947d08c833fd327bb87d02e33"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:502:16: 502:21>::clone"
+kappa = "7757a8ec0e52c8c6b0453c150f4153c16539ff32051a110282aa644141435687"
+embedded = "1bb4470bb30d273117b02c34959b30948d0787e88f8406b73bbc24f7decbfb17"
+status = "residue"
+cause = "mir::Ty: parking_lot::RequeueOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:502:23: 502:25>::assert_fields_are_eq"
+kappa = "fa30f187e59cf42bd4ef5614e76c3068cb97f1c71b385a0267181f97ca14477f"
+embedded = "a759085cab042fb6ad2e8c4d0bf3b87c95161755d8498ad59992a0c1b09fce68"
+status = "residue"
+cause = "mir::Ty: RequeueOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:502:27: 502:36>::eq"
+kappa = "0591188d5d6ce1b25199614e332871de805fa561f47437a5788208016fce6d33"
+embedded = "c0803104e0d41aa6d483b07644073ec966e4870dda3d1e3f2ded020a321fb048"
+status = "residue"
+cause = "mir::Ty: RequeueOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:502:38: 502:43>::fmt"
+kappa = "ae430f0f21e59800dc6d3b8d5a30d1414e8066780942edf8b05bf90f7dcbfddf"
+embedded = "1328ea8826d9fc69207f9d7143387e98699040fd07aadd11766314e13bfecaa1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:521:16: 521:21>::clone"
+kappa = "7505198e2cda15701d002d68db91142c16c548f855d0aa6edc47a937dc872b09"
+embedded = "37f54f4e50d2f6a821dc40809313dab99175fd18912483254f9f1f516fc7147d"
+status = "residue"
+cause = "mir::Ty: parking_lot::FilterOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:521:23: 521:25>::assert_fields_are_eq"
+kappa = "7798b001964f793698acc65707717bd8f6b6caf457f098bcef6b39a28cfff5bb"
+embedded = "dda42cc896965fb0ba75d97f6b4a2e5b5f3ad7abbc91bf9b4d1a58f5745b4177"
+status = "residue"
+cause = "mir::Ty: FilterOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:521:27: 521:36>::eq"
+kappa = "a335370a07cd1171463e770ee4822d1c3239aa7d78f005998b8ef4467a48c1ce"
+embedded = "b6a6e69fa50f8b83ab45c8245233472d821b1ce1a96d1037281e2077037cd10d"
+status = "residue"
+cause = "mir::Ty: FilterOp"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:521:38: 521:43>::fmt"
+kappa = "a3822fc53219610f77453d29da9a951572ca1052b347f0d0625e34d3098b6071"
+embedded = "6a27f2af6b71d09c13a159ec9cb268e399b32112a68729af45019e02516f5b1f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:534:16: 534:21>::clone"
+kappa = "2236b82e56ac28f824edb52ec21e71b29e1ea0821c7a384c63e46833376bef69"
+embedded = "e14c9b0577756f19670cf3b3e3a2387225cf728d52e83a1711bb585cc85e5f77"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:534:23: 534:25>::assert_fields_are_eq"
+kappa = "894404638804b18cc165d321fd02960f720c47eea60b00e7035d6f7afa5cb3af"
+embedded = "3b2dcbdbdd85fbc4d02b3940c23671cfcabf303cf418795828f478ae9bf16a2a"
+status = "residue"
+cause = "mir::Ty: UnparkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:534:27: 534:36>::eq"
+kappa = "594cb6fe378e6da78a284dd601dd3f6299be371f5c2eb456d67046b589e30954"
+embedded = "26f8bbd185fc39a946a7e9a8556cf023c9680261593f71104e4e37011fa2cb1c"
+status = "residue"
+cause = "mir::Ty: UnparkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:534:38: 534:43>::fmt"
+kappa = "2ff5bbec34648dcf40beaacf8f274a08abb31ebb45375bd79f25cafa50d3b754"
+embedded = "392f9a1f0d4758da312dec6f02958dfe3e6d38374b10a97ff1b2cac1fcd4de77"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:538:16: 538:21>::clone"
+kappa = "63513e3acd2dbd2c6c52faa7d2b4cd0b3f9699762e4ab636f4f2552c01942d94"
+embedded = "a1e8b7f48cdf2cf0cbd97a4c363fc173c17ae7b8316db2284f50d39d62f5fd6d"
+status = "residue"
+cause = "mir::Ty: parking_lot::ParkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:538:23: 538:25>::assert_fields_are_eq"
+kappa = "d814160b4d592d6fbff56ffce740b4877b94d709d921165f5961af74acaae8d5"
+embedded = "8fa9059a384adc0487bd7da9c3730b0fa45699af04bcaccbf4ecf0b28ec696e7"
+status = "residue"
+cause = "mir::Ty: ParkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:538:27: 538:36>::eq"
+kappa = "8f5463e205742100fef755af2c77514f373dba872928c22fb732f8bc97a409f1"
+embedded = "589f4d080c66c523a8de774d3437a9ca65b87a7a8ef8a7b741433b85ba4e90e2"
+status = "residue"
+cause = "mir::Ty: ParkToken"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::<impl at src/parking_lot.rs:538:38: 538:43>::fmt"
+kappa = "e4709b092aaf264d6322d72aac59aad464aac698b74dc5d5ccc9988b3e3aedf8"
+embedded = "47662db8e73419aca0de007816eb2521752e9f49864fc2b7e61e3dd46a329901"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::AbortOnPanic::disarm"
+kappa = "e6689ac6c058a5732ca01054ab8be60e432865c711780576243fe37f4f96d898"
+embedded = "48d5bb8d48e7410f734c0370373603434f9fad332b48965056b1ff4492d5c582"
+status = "residue"
+cause = "mir::Ty: AbortOnPanic"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::AbortOnPanic::drop"
+kappa = "e0186f102956ff1a6dc252337792453e2fe61e4f02ea96432fdd69d2bf9b598a"
+embedded = "c5a2093dd604e4e3b503f3d9d589be23dd430c8f15126f21fec363cd58c20a58"
+status = "residue"
+cause = "mir::Ty: AbortOnPanic"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::Bucket::new"
+kappa = "17120f33aadbe1891bd132886d8ac91195944c18a24b9b26a30602350b221192"
+embedded = "9122bcbc6b6d14b1122c2f58097634a1fb73bfff84de9785af034bbe3b979928"
+status = "residue"
+cause = "mir::Ty: parking_lot::Bucket"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::HashTable::new"
+kappa = "7a855d0f9ee4efd0a95d2e44cd930a955597e4f6a516d3f7a212e8b905a36fd1"
+embedded = "9b267a13bb30d07a91968c6b44471ed6cb479fffc7e74a210266758596d7ba64"
+status = "residue"
+cause = "mir::Ty: parking_lot::HashTable"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::ParkResult::is_unparked"
+kappa = "1a48c0db8127b614da548032751cdfd79feff93df7fd76d8f8f6c3e0d9910b27"
+embedded = "a674ccead333361c1056d6009c12ddc309ebcc4deaafee0d16e4a64b7193c0d1"
+status = "residue"
+cause = "mir::Ty: ParkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::ThreadData::drop"
+kappa = "1a6ed20641a15c4cd688ea915cfcbdc764b364be9ee7fb4e60038a8bcfe2a61c"
+embedded = "5f992d11e867345d6837f5446db40a3dcd11a28fbbbb07acfc212c25382a041c"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::ThreadData::new"
+kappa = "a50cb6871d8ffa76bbb2e07e01940112c2c5f88221d1a8df46333206d7461d8c"
+embedded = "05a0309450d7b71495ee9ddc1d4a0193164daff9a9c4176e7698c498835b41db"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::ThreadData::state"
+kappa = "f9101ef23e29b8dac33c869243b606ce943c579a51c968b6c80e27246ea49adb"
+embedded = "f1b60be469836628762c392a673b4a7422694dc6ddac68c9a406ed83e2b9f996"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadDataState"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::hash"
+kappa = "d0436408aaa29ba643fe1a351d423d16945a3214a37f2180920061c42fdf4336"
+differential = 3
+embedded = "1afa453023e5bf2d090e7e059422ffe92931ae5e2a0eca37b0680a4d515a4f1c"
+status = "residue"
+cause = "mir::Operand::Constant: a usize literal"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::park"
+kappa = "cbff1206d9aee42cc3fc4ca6f7f2eb5052c236af0f0b5880ef135c4afc600dca"
+embedded = "b5e034b67c272d238702120984177817e2c0899f0a12080be0b97c80d2423f91"
+status = "residue"
+cause = "mir::Ty: parking_lot::ParkResult"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::with_thread_data"
+kappa = "e4004aaa3d9d1819264982e73503499795011fe93c29a2be79f4b379fd384986"
+at = "T=u32, ThreadData=u32"
+embedded = "6ec2d09f52691cf37c6ae674b51fed7b1bb650b2421ce1b81a74f82499ac6f16"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::with_thread_data::THREAD_DATA"
+kappa = "0a61798e53191d8ac08f19b7224ded3ea0d0440dffd65f361a2f52a2ae5d4b76"
+embedded = "2d458fd66c478b8924be254de9f0bd05618fd33cb7bf535d1d633e9f97e021c0"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::parking_lot::with_thread_data::THREAD_DATA::__rust_std_internal_init_fn"
+kappa = "b4563df7d26220506f2894f3fd68f278ef1b689c81f50b6d6f941195d0c18fb8"
+embedded = "2447ee52300d296359bc074d72eb6f994dc3683086c5390fbc91976d2c9ffdce"
+status = "residue"
+cause = "mir::Ty: parking_lot::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::rehash_bucket_into"
+kappa = "365488316a8296760d74e5b32af368c758f626357714ee9844f0c5367c777edf"
+embedded = "e79e590af962e224393c2d72ac3af17eb2fb0aee86fadf8b2ef31a83567f4378"
+status = "residue"
+cause = "mir::Ty: Bucket"
+
+[[fn]]
+path = "parking_lot_core::release_resource"
+kappa = "3b3b8431ce89df47a7223d7546b321c4a5bba15a7bbc4749f6d84719b82d43b5"
+embedded = "f9796cae7aa92241a704d6d15068b495b4619067dab59762f54f8cf876f48c0a"
+status = "residue"
+cause = "mir::Ty: parking_lot::AbortOnPanic"
+
+[[fn]]
+path = "parking_lot_core::unlock_bucket_pair"
+kappa = "dc5952db5a30f4495d684a1ab19461ea0233a3d263c8b3c403b93fc3a7d4143b"
+embedded = "9165db71212a914b9aabc8bb61fe58b4f659d5e96ca5313159abc0f71af1f83e"
+status = "residue"
+cause = "mir::Ty: Bucket"
+
+[[fn]]
+path = "parking_lot_core::unpark_all"
+kappa = "d493a3a2be7b410ef05b6ad9784f88c3bba8ddab17d42e6f7ea45f743be123e0"
+embedded = "ffda3912c2e0465f8311fcabee9e5a8af7ad719097e6e04aa1f33bde4bb01a63"
+status = "residue"
+cause = "mir::Ty: UnparkToken"
+
+[[fn]]
+path = "parking_lot_core::unpark_filter"
+kappa = "e801a20f7c4cbe30f3b84c5009e0c8d0169e0eb3ad5684e8d10d026dcad0b92a"
+at = "FilterOp=u32, ParkToken=u32, UnparkResult=u32, UnparkToken=u32"
+embedded = "1ef46af19a0ecda768e3c8e08fcec1d4c10a7d5bcd5a1b3a5b6ae8e09e4b5552"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::unpark_one"
+kappa = "3d679c3d9089330bb71085aa2409a38276392e79dd44e6d54570f9e096f508c7"
+at = "UnparkResult=u32, UnparkToken=u32"
+embedded = "2abb3e316f32d2237b68c569a84ed0004bef89ba1bcff07ba50ea7370ede673b"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkResult"
+
+[[fn]]
+path = "parking_lot_core::unpark_requeue"
+kappa = "b9adb1f76777610160439f98c708b6400850b2d8103583468424cc7fecc0faeb"
+at = "RequeueOp=u32, UnparkResult=u32, UnparkToken=u32"
+embedded = "7a9d8e332c0b7781bf4af0d1612c75fae4fb0197fbe6930313f91ee036b81ed6"
+status = "residue"
+cause = "mir::Ty: parking_lot::UnparkResult"
+

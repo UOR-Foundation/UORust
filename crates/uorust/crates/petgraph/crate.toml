@@ -1,0 +1,154 @@
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:10: 542:15>::clone"
+kappa = "91e9a3433bdb51feaeae105e975df26c9f6d5c2709cb15af5706d74989e786a9"
+at = "Direction=u32"
+embedded = "0fb812b8f25ed5b2618fd4f9d44b2c73c89d122301f3b45f80e7e4c54953afd3"
+status = "translated"
+digest = "260ce742edf16e2c9c687d0d7e154369be5ed6ff92da9b1d35c86a4bbe6b741e"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:23: 542:28>::fmt"
+kappa = "d9664dec9c8c48632586c7fbb34606ed40c4ca30460cbdc0c6ca237eeb936eb9"
+embedded = "164db00fc85035b0e7670fecafdc815aa729e99e6d4cb94c1af02d2929bc6e2c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:30: 542:39>::eq"
+kappa = "49628220e7dd03592de2f4a563080896b5114d4ef12714c6a1f6dc97a4b59fbc"
+at = "Direction=u32"
+embedded = "c589ae05b06c932945ec233589311bddd533f928cb4db681c8bb5fe0c18e86a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:41: 542:51>::partial_cmp"
+kappa = "7153bbbf51005f137a03d5a18cb35588eb41cb0ae7987b7f019aad358de464e1"
+at = "Direction=u32"
+embedded = "c759bec1babbc22942c114c6b4e5781232849b5e3e20ff195e4b4065cb24e987"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:53: 542:56>::cmp"
+kappa = "5d8f04a6d52beb5af82d6802ea347e93888eb4862285fda80cead0e928aee7ea"
+at = "Direction=u32"
+embedded = "24e9e924ee99dc5f068cce0b2cc26ffa1e39506d0a207348903eb786a0a68883"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:58: 542:60>::assert_fields_are_eq"
+kappa = "4630d60aff8d09a659df499c4002b43fba8c47526d42bc98b4d8559fc13115d0"
+embedded = "adf251ebd298181caad6f1ef1b6c56121bc0867becd2716d79615467d769fb3e"
+status = "residue"
+cause = "mir::Ty: Direction"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:542:62: 542:66>::hash"
+kappa = "5e709ce8680d3cb2b937bf8975554c753f5228082d9a67348e63856d1121e585"
+at = "Direction=u32"
+embedded = "26af079c0c41ea832c0eba362dbb0a24c1cfa4334de291a10ebe0839f5ea9c2e"
+status = "residue"
+cause = "mir::Ty: __H"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:576:10: 576:15>::clone"
+kappa = "4a4f28b89a72029059da64361ec3c32146de7370b2b88e4f21e6a33bde2952b4"
+at = "Directed=u32"
+embedded = "4a94c18258cfaf00ec5d453b9362318690255829a2f566de93d81a125e2196c7"
+status = "translated"
+digest = "53c1035170d505e07de9b9278da6256ed05ba999eedae9e69d154a95c3560eb4"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:576:23: 576:28>::fmt"
+kappa = "a72740de89ac44fdf596eed0139535afefc7114f65dcffa8ff8d221f969824af"
+embedded = "5821ff4e325e8398f896a6e9c4a3f0bfe124343c0ed08152da5ea7c314978381"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:584:10: 584:15>::clone"
+kappa = "373e334919b48844cc22244a1263bb97d95d9ed8dc3c9e90a52d4664442ae98e"
+at = "Undirected=u32"
+embedded = "1005a6e91c592de53543e686464332470f796883a9fdee1496970261a4a4b93a"
+status = "translated"
+digest = "7b5994a827fe867d382ff6b4b60cd86a8926a93d1afc160bec84ccf7df47e79f"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:584:23: 584:28>::fmt"
+kappa = "60c2a3285e68ad307f8e61f84d801ef14904f115c34d80c4a026b984f5b85c47"
+embedded = "2b8b629f85639bfad8275f99f7c91beb0a446c32dd9c57101658e1ffa073b36f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:619:1: 621:16>::into_weighted_edge"
+kappa = "173da83b3de766954a276afa84713ad53485a7cf50c8947cb50589fc8525c5ac"
+at = "E=u32, Ix=u32"
+embedded = "b9a770aa3dc58f2ec2cab79386b10f70a15b49bb262a80b51541c4d3a7f51b3e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:631:1: 631:48>::into_weighted_edge"
+kappa = "620a85d02cabbb8e97fc29e9346b831693b5d2dcb5891360399f48a279a11682"
+at = "E=u32, Ix=u32"
+embedded = "b27192180499ea321bfbe16b24660457026691eb33f18d95b25367c2fd6b5399"
+status = "translated"
+digest = "a4aff2e024c8b7945199bf6a4b9a92d5cf5d172b3076e022cd829130caba03cb"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:638:1: 640:14>::into_weighted_edge"
+kappa = "77bc7923d0bacf673a462d5d31a50ef3815d5f5e136ce04a60a7240c0cf71939"
+at = "E=u32, Ix=u32"
+embedded = "d85f8478f817edde45690678c59a2cf3b11a15a61f25e70c5cad79b1166d84a9"
+status = "translated"
+digest = "ffa7abd67ae7452763f2ec34e863fc8ef43cf278e9d584c6f33ec9b43abde1dc"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:649:1: 652:16>::into_weighted_edge"
+kappa = "a723e15df81c90c9b4085fa621409b447ef31dd10fcf626258bc1d3917479413"
+at = "E=u32, Ix=u32"
+embedded = "3f66f2211b9f4e9cce127af22db802fdaa0750fe207448feb42a804a6a577fc9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::<impl at src/lib.rs:661:1: 664:14>::into_weighted_edge"
+kappa = "035abec2d14623949040b815a9f28b4ae384f7c7e6b8a3380d9b40a5ece4e092"
+at = "E=u32, Ix=u32"
+embedded = "b71503df78eef6583e16357a305dcc019ce39726c5696647610678daabad4317"
+status = "translated"
+digest = "ec68e71b3a7b230f2552d95dbef7efbb516c6cf8297f29ca78142a8b26ae38ed"
+
+[[fn]]
+path = "petgraph::Directed::is_directed"
+kappa = "774875bb4647b89329b1e4250efe6b98b7ad2fa6f4bf3168bcd6b9af47e9b339"
+embedded = "4b45b8c153411a22b1bc31ad481029739359dee9e762d8a8bbfcf8cd720f8c3f"
+status = "translated"
+digest = "bedc88df20ee52db2fb69330a30089f85238bd1bb664baf34294ff00605e5c03"
+
+[[fn]]
+path = "petgraph::Direction::index"
+kappa = "bbc3590f235c1fb7320d558cf43bd7b7d86b84a22a76ac4a7aec6b236687d5f6"
+at = "Direction=u32"
+embedded = "69ef9d89c340164aa3c924a3635923987d51be988345bd5a2d0265bdb43303a0"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "petgraph::Direction::opposite"
+kappa = "3d5cbff61498b692ebf36ec0cc08608179c43c987ac9e6b89b06d8538b3617f0"
+at = "Direction=u32"
+embedded = "cf4b3039e936a7803a8ec0649e6143e4e7f44948b813807b7d37a38ab7e6e4aa"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "petgraph::Undirected::is_directed"
+kappa = "8a032aed28f2538fa519b5cf73e67d6bc57ea5cdfd484ab23cc3bb934b8082c1"
+embedded = "1d001aeb38e9fdcb5d1dcc99da9e695b77e6c9f5f77a12b6287817295dba24e4"
+status = "translated"
+digest = "4de4903ac47285caa6606d7131d95269c6e9a6af077ac860b1d8eef2b48e7305"
+

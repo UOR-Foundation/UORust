@@ -1,0 +1,63 @@
+# The iana-time-zone register (written by `uorust crate iana-time-zone@0.1.65`; do not edit): every body of
+# iana-time-zone's MIR at iana-time-zone 0.1.65, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 18
+translated = 1
+residue = 17
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.platform]
+bodies = 13
+translated = 1
+residue = 12
+
+[embedding]
+bodies = 18
+embedded = 18
+evaluable = 18
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: platform::openwrt::BrokenQuote"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BrokenQuote"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::etc_localtime: iana-time-zone's MIR stops at type outside the lift: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::get_timezone_inner: iana-time-zone's MIR stops at mir::TerminatorKind::Call: platform::etc_localtime: iana-time-zone's MIR stops at type outside the lift: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::OpenOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1

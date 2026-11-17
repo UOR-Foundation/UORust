@@ -1,0 +1,87 @@
+[[fn]]
+path = "mio::poll::Poll::as_raw_fd"
+kappa = "68e8a77083dc8210aa80363f05be02459568a93317024bdc080c8a9ed3bad458"
+embedded = "4574d181d697d67a785b8f3ef9521acb23ce3faaae93af2e7d6c1526cb76dc57"
+status = "residue"
+cause = "mir::Ty: poll::Poll"
+
+[[fn]]
+path = "mio::poll::Poll::fmt"
+kappa = "08b95bdd1a08ff4b7b9723c0526a0b987da6988c5cf4a073891ba2bf8fa0ed3c"
+embedded = "af75571ae9f292c47842dd61a4d78fc4b4094f4cb63e0ee62448d7fc65876197"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mio::poll::Poll::poll"
+kappa = "4cd08ee5e1594d4a112c00a0aed8ab942537bb3f9059fced29b4f33d987de473"
+embedded = "ac4d114944ef75591d5485792d8ee7c9123fe51c6bb16b572def610588e5a640"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "mio::poll::Poll::registry"
+kappa = "783074f971f94f9678c305662ef343c242735a63a3238786f749890802018ca9"
+embedded = "10a6d45ca153556101b94dce6dcfb415aad3599824294b5c17be6f1f680748f9"
+status = "residue"
+cause = "mir::Ty: poll::Registry"
+
+[[fn]]
+path = "mio::poll::Registry::as_fd"
+kappa = "e59dee0a31b6929b40afcfeddc4bd7b64748650ea37b0482f9fc50a41b2cf024"
+embedded = "a659eeb207d7bd4fa0c1be1ff7dabe2f16e00ba9927e0ed4257a34e74c31b2f4"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "mio::poll::Registry::as_raw_fd"
+kappa = "d9e727641b040cbe437e06e43006633bc8523dc5934dcc7f7c8ea189595e4a69"
+embedded = "61ebeddeea83926b093231a861444a092087c9b73c4baa23e656a46d106fb323"
+status = "residue"
+cause = "mir::Ty: Registry"
+
+[[fn]]
+path = "mio::poll::Registry::deregister"
+kappa = "23de22f0fa52edb2ec6a8ed56f5bd45168c554da73f7a81f957972a48e2788a0"
+at = "S=u32"
+embedded = "ff7523ca52b687d377af2a1876fc5b872a28d3184dbcb3ed6aad34bc89776150"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "mio::poll::Registry::fmt"
+kappa = "7818ea17ffe6d2ecfb8a1157e34431d6dc64edf5ff8739c694e49332e05eef19"
+embedded = "f913d9b80d105025345419c4f8a905598963b29954f8907ee95fd10ba726dc4e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mio::poll::Registry::register"
+kappa = "26320a5555fcbf016228e4f92497bcd239df819af6a70a5cc8af41b8becc3394"
+at = "S=u32"
+embedded = "511415adfc749f0726ab5444d4e574e78f2e776f3b5ae81f9efef859bbb04576"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "mio::poll::Registry::reregister"
+kappa = "ca81527365e0435a8789d70a6dba10ab367d78b5172c5db42f0bec8f96adb038"
+at = "S=u32"
+embedded = "07b16c84083861e2e4d475fc5a8e85b58ff1e5eb9a009a10c0e8f61a097af953"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "mio::poll::Registry::selector"
+kappa = "247f0097da9bc71f591dc4f83f0b022421c4b35f10f487d11d51365a35a0242f"
+embedded = "ffe120dc7f92370b386e5ba4074fec08f0cc70f6fb6e6bbf657a747b5b77fe98"
+status = "residue"
+cause = "mir::Ty: sys::shell::selector::Selector"
+
+[[fn]]
+path = "mio::poll::Registry::try_clone"
+kappa = "4bf1f34a2036f20c9837f5b4c79e4d8630485cd780a96ff113ad47e4e2a7df46"
+embedded = "69e640ace7c65c9d0a0a879049343c824f1cb2605b88fe7d3aed0649da03e731"
+status = "residue"
+cause = "mir::Ty: poll::Registry"
+

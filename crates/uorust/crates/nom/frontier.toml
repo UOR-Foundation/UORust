@@ -1,0 +1,712 @@
+# The nom register (written by `uorust crate nom@8.0.0`; do not edit): every body of
+# nom's MIR at nom 8.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 744
+translated = 59
+residue = 685
+
+[module.bits]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.branch]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.bytes]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.character]
+bodies = 98
+translated = 8
+residue = 90
+
+[module.combinator]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.error]
+bodies = 36
+translated = 1
+residue = 35
+
+[module.internal]
+bodies = 73
+translated = 2
+residue = 71
+
+[module.multi]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.number]
+bodies = 155
+translated = 0
+residue = 155
+
+[module.sequence]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.traits]
+bodies = 175
+translated = 48
+residue = 127
+
+[embedding]
+bodies = 744
+embedded = 744
+evaluable = 742
+blocked = 2
+
+[[construct]]
+construct = "Rvalue::Aggregate"
+bodies = 2
+
+[differential]
+bodies = 16
+theorems = 112
+
+[[cause]]
+cause = "mir::Ty: internal::Err<u32>"
+bodies = 182
+
+[[cause]]
+cause = "mir::Ty: u32<u32>"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: u32<"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: number::Endianness"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: error::Error<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: traits::CompareResult"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: number::BeUint<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: internal::Needed"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<usize>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: u32<std::vec::Vec<u32>>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: character::Char<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: number::LeUint<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_digit"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: number::BeUint<u128"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: number::BeUint<u16"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: number::BeUint<u64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: number::BeUint<u8"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::Escaped<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::EscapedTransform<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition1<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition1<{closure@src/bytes/mod.rs:235:16: 235:24}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition1<{closure@src/bytes/mod.rs:268:16: 268:24}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition1<{closure@src/bytes/mod.rs:334:16: 334:24}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::SplitPosition<{closure@src/bytes/mod.rs:298:16: 298:24}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::Take<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::TakeUntil1<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::TakeUntil<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::TakeWhileMN<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: character::Satisfy<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: character::Satisfy<{closure@src/character/mod.rs:226:16: 226:30}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: character::Satisfy<{closure@src/character/mod.rs:249:16: 249:30}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: internal::FlatMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: internal::Map<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: u32<char>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_digit"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_hexdigit"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::len_utf8"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::as_bytes: nom's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::is_alpha: nom's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompareResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Endianness"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeFull"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeTo<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Error<std::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Error<std::vec::Vec<u8>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::And<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::AndThen<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::Err<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::Into<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::MapOpt<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::MapRes<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: number::LeUint<u128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: number::LeUint<u16"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: number::LeUint<u64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: number::LeUint<u8"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sequence::Preceded<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sequence::Terminated<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeToInclusive<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: traits::SaturatingIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32<&[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32<&str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32<std::option::Option<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bits::complete::take::{closure#0}: type outside the lift: internal::Err<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bits::streaming::take::{closure#0}: type outside the lift: internal::Err<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: traits::position::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::find"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::parse"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: memchr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::as_bytes: nom's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::find_token: nom's MIR stops at mir::TerminatorKind::Call: memchr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::find_token: nom's MIR stops at type outside the lift: std::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::to_hex_from: nom's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::to_hex_from: nom's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: List"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParserIterator<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SaturatingIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: branch::Choice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: branch::Permutation<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::Tag<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::TagNoCase<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: character::Digit1<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: character::MultiSpace0<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::AllConsuming<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Cond<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Consumed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Cut<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Fail<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::MakeComplete<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Not<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Opt<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::ParserIterator<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Peek<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Recognize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Success<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::Verify<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Context<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Error<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Either<internal::Map<number::BeUint<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Either<internal::Map<number::BeUint<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Map<number::BeUint<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Map<number::BeUint<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Map<number::LeUint<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Map<number::LeUint<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Or<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Count<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Fill<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Fold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::FoldMany0<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::FoldMany1<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::FoldManyMN<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::LengthCount<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::LengthValue<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Many0<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Many0Count<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Many1<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Many1Count<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::Many<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::ManyMN<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::ManyTill<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::SeparatedList0<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::SeparatedList1<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::CharIndices<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1

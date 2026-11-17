@@ -1,0 +1,38 @@
+# The num-conv register (written by `uorust crate num-conv@0.2.2`; do not edit): every body of
+# num-conv's MIR at num-conv 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 257
+translated = 111
+residue = 146
+
+[module.crate]
+bodies = 257
+translated = 111
+residue = 146
+
+[embedding]
+bodies = 257
+embedded = 257
+evaluable = 257
+blocked = 0
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 72
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 72
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:293:9: 293:57>::checked_truncate: num-conv's MIR stops at mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:293:9: 293:57>::saturating_truncate: num-conv's MIR stops at mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1

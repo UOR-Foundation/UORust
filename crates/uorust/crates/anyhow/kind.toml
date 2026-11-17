@@ -1,0 +1,45 @@
+[[fn]]
+path = "anyhow::AdhocKind::anyhow_kind"
+kappa = "be09007e73d4aee5315f9a4864c16367db88050fcf20329c5b77e8b996eac34a"
+embedded = "d98fff90bfe63b59ba033c61d1acce9993d1ca36610edaec133f423136ddc66d"
+status = "residue"
+cause = "mir::Ty: kind::Adhoc"
+
+[[fn]]
+path = "anyhow::BoxedKind::anyhow_kind"
+kappa = "3bb13ace9adacf6232cd65848a1165496242959e80061fcda3d2be10679ab6f6"
+embedded = "aaba55d5a6ba0ed75d63d0e6f362e017ec4ec2b185bc832af3f3012ae52a3197"
+status = "residue"
+cause = "mir::Ty: kind::Boxed"
+
+[[fn]]
+path = "anyhow::TraitKind::anyhow_kind"
+kappa = "c287d121ccc1323c6a541a2d70dab28359a00138a4f049c094c7107d3e7e77d5"
+embedded = "32fcb80b8b9959ff19c87824a0b056f661e1cda302e05d44c102cda054bd9e3b"
+status = "residue"
+cause = "mir::Ty: kind::Trait"
+
+[[fn]]
+path = "anyhow::kind::Adhoc::new"
+kappa = "e8dc6cb0f11c239222ba2a1b195f4d6a1fb1e63c28f6776855c2a686b1a1cce5"
+at = "Error=u32, M=u32"
+embedded = "c7844ba7b9e75159f59bf693872ea2dc84f35e578d4e025d625ab6dac2bdc581"
+status = "residue"
+cause = "mir::Ty: Adhoc"
+
+[[fn]]
+path = "anyhow::kind::Boxed::new"
+kappa = "bec14fd3a9a4b8690931ff4b667fa186b76fe76622a6147b1a754d331d00720c"
+at = "Error=u32"
+embedded = "8e98db9b21eb13a2097ba016d70595d9538564f7ca8e06d0845392ac77bcf35c"
+status = "residue"
+cause = "mir::Ty: Boxed"
+
+[[fn]]
+path = "anyhow::kind::Trait::new"
+kappa = "482e5aac2f551ed3ccde546f8ddf3890a9deac208b9fd01815826349ba2bde60"
+at = "E=u32, Error=u32"
+embedded = "6a933d4ea13b99da06941bd1eb587903cd9f0d91e5e7061fcc86ae3c55bd59ad"
+status = "residue"
+cause = "mir::Ty: kind::Trait"
+

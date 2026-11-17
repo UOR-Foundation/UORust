@@ -1,0 +1,94 @@
+[[fn]]
+path = "futures-util::RNG"
+kappa = "74aec9ca0374b57c8b34e27fec065af2054c20a3b61b32915fe5d0bd8cf09547"
+embedded = "537ae86ccdbfbb74c7c005138fd73d0188fc54ec02bc986a7ddfb6ddc1ed2a24"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u64>"
+
+[[fn]]
+path = "futures-util::__rust_std_internal_init_fn"
+kappa = "3f7c87834ac9d2995a60f5e2ab67bab923fde14aadec70abe6348c7a8652dcb2"
+embedded = "8a77fa42f6e280d7bbb387223d79cc713fa34211ee1986f8907653193a91aed2"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u64>"
+
+[[fn]]
+path = "futures-util::assert_fused_future"
+kappa = "1cdbf575a867e91a5f5bb2aacd1b63dc1d0309d8c518af0376b9bc3662e0aca9"
+embedded = "7abdf327e81a8f87a4adfae993b752a9a9ae2aa8a09108948123cd7be7251c3d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::assert_fused_stream"
+kappa = "c2a924bbb61d466f7796aadcaf83edec06802f399cf134fbe527582b5dda7d13"
+embedded = "b0282b3d256ed4becd57df4ebf1b2c74271f306f77c80d7cba9067b74fc1ae96"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::assert_unpin"
+kappa = "9f981af5d9f0411973f70ee3f19ffd554050e7e9eb22de26082194f6ac8d8fd2"
+embedded = "3b3cc6a42b946a65bb5f676dcc9a0d0fcc7212501e2df08259ffc8193c21b7c9"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::async_await::pending::PendingOnce::poll"
+kappa = "02824694b2a630366189aafeced0677fd31250ba758fb5652e8720af9a73dda5"
+embedded = "4349081ac258647f8a6bdfc088d5def21788a44658de54c9101f28bcc97304d6"
+status = "residue"
+cause = "mir::Ty: futures_task::Poll<()>"
+
+[[fn]]
+path = "futures-util::async_await::random::random"
+kappa = "c82f3db5f5a80b7b2816d708a65b76993e125f44a1b059ed2f192e23bba5bdad"
+embedded = "c7abf7b2045b33e2ed58047ced8085a5ac08e211590c3925d448c2e5228cc863"
+status = "residue"
+cause = "mir::Operand::Constant: async_await::random::random::promoted[0]: type outside the lift: core::num::Wrapping<u64>"
+
+[[fn]]
+path = "futures-util::gen_index"
+kappa = "112463c2e36bc1e6bcc3db48cfd3db6150a2d944b612a81274d93d6e59187fb1"
+embedded = "670c372dc6e63e19cf19d19b91dfe832e2c06c7548f526e038837d61fc8d284f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: async_await::random::random: futures-util's MIR stops at mir::Operand::Constant: async_await::random::random::promoted[0]: type outside the lift: core::num::Wrapping<u64>"
+
+[[fn]]
+path = "futures-util::pending_once"
+kappa = "f841f84fda8e3b64173252158e892f462a5b999034c4c7435f00c864c14e2505"
+embedded = "c2fae32d23afe4251b83fb27a90f42374a6eca4ae2f0335ed824081340178709"
+status = "residue"
+cause = "mir::Ty: async_await::pending::PendingOnce"
+
+[[fn]]
+path = "futures-util::poll::PollOnce::poll"
+kappa = "de9cf5d59270cf22a08fb4299c74e0a47bb952f90d340b96124eb6cb8fe06b1c"
+at = "F=u32"
+embedded = "f88fde540171e4e4795ddc932c385bfa6b6c6be43b301aaabc3168934057ac16"
+status = "residue"
+cause = "mir::Ty: futures_task::Poll<u32>"
+
+[[fn]]
+path = "futures-util::poll::poll"
+kappa = "0576fae05d876f5962544f905a52f59e09b4c8d2cbf4c6682b114c0fb1d9bde4"
+at = "F=u32"
+embedded = "00b0c530277d6cbc9d6d654857d3c7e57ea63eeccc06ca6820b95a22984acd72"
+status = "residue"
+cause = "mir::Ty: async_await::poll::PollOnce<u32>"
+
+[[fn]]
+path = "futures-util::prng_seed"
+kappa = "2121db069a8f00b7009dde9480d8567e272c6abd4b25e4ad2bb2d800bb2ca960"
+embedded = "e9d8e1fa51ba6462bbf041e18291c1f6b6e66af8e84ff3c1a06570b85f677085"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "futures-util::shuffle"
+kappa = "08554018dcb920805a95252ce45a54a1b56e96077505cd48a5a2ca0a4a3cb43c"
+at = "T=u32"
+embedded = "7d09780881f488dcd13e358ea788fe64ace12d42a224f66247c460ef5942d2f0"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+

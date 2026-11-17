@@ -1,0 +1,991 @@
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:14:10: 14:15>::fmt"
+kappa = "be9c8b793e9fee52ae19117bf376dbb41541dbcfca42888d0f10150eacdb5143"
+at = "T=u32"
+embedded = "5db099e89c440c7461f541ce0ce4ccf44dbd9a8b6c437d29da83c9aec2d8cf90"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:14:17: 14:22>::clone"
+kappa = "1fa7e5c1bb1ab1827a99990bcdb65a6998f3f6c6c87f3c345b55612a41a7dd45"
+at = "T=u32"
+embedded = "b6bf35c81cafd03b00f1a569ffb6c44b8d13e3c5a1d4d311203b79bbfd472346"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:36:10: 36:15>::fmt"
+kappa = "ce2147ff209302919e70d5a8424403765055f0c1276bb8fb92a4bee06efd840f"
+at = "T=u32"
+embedded = "e4f06b72b1312d436c9827e6de8ed97ba59501f6a084f09897b62f42832b1bad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:49:1: 49:61>::into_par_iter"
+kappa = "d4b195219ec38092f2f42a300f6ab892967030e3cb686e67135ea8ca2ba69749"
+at = "T=u32"
+embedded = "815fffe53f1e376b6eb98f4fa585b957a040e2db80f6c13d160eb854c2763909"
+status = "residue"
+cause = "mir::Ty: BinaryHeap<u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:69:10: 69:15>::fmt"
+kappa = "cdc5b56644805a49f52ebaa0c48f878c51d5acf7bc6e0767fdc7edb2339fb278"
+at = "T=u32"
+embedded = "f0b1f11629da50956f0c0d267b22b68278b5a7a259347978a38ed5ff420e5307"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/collections/binary_heap.rs:76:1: 76:68>::par_drain"
+kappa = "e6cac4bb480d8c2a6e9443dc38a5a40de027fa3f6f0e2d0a36adbd7d4304790b"
+at = "T=u32"
+embedded = "6cf7df05e2c8ef5ffebff6f877a8c61ba6aab402c98a1538fa8edb78f1c965b6"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "9837cf07c0d3aa89d32c410b98f84ed45b1ebdf00263bbbd53a23563be29e2dd"
+at = "C=u32, T=u32"
+embedded = "39e0259c1c0caff1f17f5b7dd4061148df291a1f299b4b5702eae164d515fa14"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "3f640f0f6954d53823d720911c6ecba8ef16a63d8e087c988efc6b89f78b29a0"
+at = "C=u32, T=u32"
+embedded = "51a853005d7a69e2e53130aaf5e308d41803985a60503551d343c9ef4f61e533"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl at src/slice/mod.rs:824:1: 824:57>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "f8815abb9ec028757f422d804dee1bf0f3e0815ed381e63080141a955c56be7d"
+at = "T=u32"
+embedded = "e617a2d030f3009db5e82d429d483bd45e871257404f9b79da5bd21d991b76d2"
+status = "translated"
+digest = "f918d564723e28f949d534ddf5af2bccae7e81f7c0c9d370792d686dbbdae89e"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "8c30d23a39e9f481c9a4a2c1568f211b96bf481d5fd781c7ff5bb8253d7c6b25"
+at = "T=u32"
+embedded = "62b369473b4c4c2648eca536912ccbc23e5b0b8af83017c615c7a8bea4bf5f12"
+status = "translated"
+digest = "5bdbbcbf11be14318f2cb8da45aa87d5d7e95edeef2cd35ef5d401dcd40c4176"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::drive"
+kappa = "ea9687fdac4d2bac9c5bbc82f17e59f4009c55c15c4d79d6a7efd2c3eb6c7595"
+at = "C=u32, T=u32"
+embedded = "ea28a5cd5fd70ac30a47063638ddf189bb7f8d47a1200439eec70c828d1bdf52"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl at src/slice/mod.rs:839:1: 839:54>::drive: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::drive#2"
+kappa = "6d563287e3aed00495bf95b7324de5b460ad25703b36e16c05b5bbe72202dc8d"
+at = "C=u32, T=u32"
+embedded = "b82433b1bd8f60f5a6873fab14c214fa2e18bf373902e336189c6d0fe7e46d3e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:75:1: 75:54>::drive: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::len"
+kappa = "8865cc0a6b785a10b29e29ea7a3ce1885e991555d503048d88371a32b2178532"
+at = "T=u32"
+embedded = "0edec653827665593dec19e12fdcafd2f54b31ac23fd429854c8dd2a1f5dd442"
+status = "translated"
+digest = "884afdd690ad7d550636f8a217b31b907ffd18a733cff69b348f0e84954127e9"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::len#2"
+kappa = "af00cb9e2083723a5a314af1214e9ad9e4a16917bfac5aa5b410a4d7e282ad78"
+at = "T=u32"
+embedded = "f5d0b8d47a6581e79eacd60dff59ff4777958233f04359bb590b4bc0908b6a26"
+status = "translated"
+digest = "d3172bbf8db87667407128d843d2c5fcf7ddd170b8a8cd50888149696edba244"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::with_producer"
+kappa = "ac7c4115640c1e11a1ad40ba8ba4426c3a4920b70eaefaefda31ad81672937ec"
+at = "CB=u32, T=u32"
+embedded = "d4b6228c587a985f0399a3c076c69174e06522efe1f738e30d3a2733b110223d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl at src/slice/mod.rs:839:1: 839:54>::with_producer: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::ProducerCallback<&u32>>::Output"
+
+[[fn]]
+path = "rayon::collections::binary_heap::<impl at src/delegate.rs:43:9: 43:59>::with_producer#2"
+kappa = "d9b00376445efcd8f826502d19eb07f8a7ccba2bc25b8201898228cbe3e7a8fe"
+at = "CB=u32, T=u32"
+embedded = "00fe1879aca210fc77572eb958b14cb1ccd5fc172f9cc26f7d78cceac9d2433f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:75:1: 75:54>::with_producer: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::ProducerCallback<u32>>::Output"
+
+[[fn]]
+path = "rayon::collections::binary_heap::BinaryHeap::into_par_iter"
+kappa = "56c376006baab6ab9eb32af89575258266b780f94ffbc3dc295d2a447189579e"
+at = "T=u32"
+embedded = "9209585a87c9c7a6b4817684e89398220a3c478a21ccfb2917636d903a588ce5"
+status = "residue"
+cause = "mir::Ty: BinaryHeap<u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::drive"
+kappa = "ac878c9aa863a7a3d0ec319af9242521fb7512c398c15bb9a872bbe51ba80d4c"
+at = "C=u32, T=u32"
+embedded = "bcadc5e074ff0b5ae4313bf61c8237bfc97b5cfea71c580e638e0aac5a089528"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::drive_unindexed"
+kappa = "c5af0e5f754d3a6563df698c6b44c772881d8ec1659433a4598eed91a5242b01"
+at = "C=u32, T=u32"
+embedded = "20713e72e247aaddc80d63c43807402f4208dcac5949a02a91a013c76d9fcd0f"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::drop"
+kappa = "3e509146316e23c2263739c5be14eeb90790dd8f986bd2e6020ea09ba42e13a5"
+at = "T=u32"
+embedded = "1aa9cb9597a3d64fc46ff06b03b55c39b0659946f0a5e4a09a9874b08a1bf8f0"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::len"
+kappa = "fe6b3d7559521c76e6f4c12cfb63e0e4d3b21ac4858f595a6a48147cf837e637"
+at = "T=u32"
+embedded = "0e6b30879d820a292b89f15c7843ce095c39729328045fbd280a681c99742a98"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::opt_len"
+kappa = "4b80c25e58477ae9af3e78d0de4264e87e2d6b643d7d31811d8b527477f5c6f5"
+at = "T=u32"
+embedded = "c327f612198ebfba1e94c4eca78175d9b80f3d5c7b4874ea660aa525c564770e"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Drain::with_producer"
+kappa = "aa809003043ddb9fc16f66f9c04e5c31c61f285b01276d42ca816fda1ff1bc7b"
+at = "CB=u32, T=u32"
+embedded = "daba85c65f0b9a03052e865a9e798e412dfa2b820a902a2cedb73d6adf6d26e7"
+status = "residue"
+cause = "mir::Ty: collections::binary_heap::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::binary_heap::Iter::clone"
+kappa = "5398a6efed0a8d5ddb37389bcadfcba5be4a497940bbaa8100ca023e98ea3da9"
+at = "T=u32"
+embedded = "7b28e176ba9310d0e80f0bdd6af0359eb335a2a001b45639bb8fd1866b0be8a9"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/btree_map.rs:13:10: 13:15>::fmt"
+kappa = "15f181ddf0d067fed858361ad19890b9aedea23c067e16d442a38cba8f1d9e27"
+at = "K=u32, V=u32"
+embedded = "3faa3bfe6651ef69494214475e1388de001d8ce50018fa5a3fa2bde1f657baf3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/btree_map.rs:29:10: 29:15>::fmt"
+kappa = "5ae60d221c53c2a8058e6f9ea490ac65edb708965ebcc5a116b831a0a52a05e7"
+at = "K=u32, V=u32"
+embedded = "90e53b7f94bd252b554f02e5284aa5c40e8e2f3eb899fcf44eedaf5fd374d2df"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/btree_map.rs:53:10: 53:15>::fmt"
+kappa = "af700f569f3e256e37a6673a5679bd85ba1088a6809812db53417c23be971e5a"
+at = "K=u32, V=u32"
+embedded = "44d00bf93eeeaf5b5a06d489e3bb517673d91c1862fd3dffba1c649aa0017e58"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter"
+kappa = "c962e17489fb5a14d4d911ca611571e5d5a067d4975474e1d1936d82c14df4d6"
+at = "K=u32, V=u32"
+embedded = "deba6324f00859c8e94fd777fd0a8eb8ba1bba8b2fbfcdac90aa44108e9ad9ba"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#2"
+kappa = "7fdba8058a8790b9a106128e4a3a29fd2ac88c0d44e38de87fc0e9035fd36f66"
+at = "K=u32, V=u32"
+embedded = "4b20c8f94720ec7f5802dcdff39a56d9ed722c070871db161c5acc80d888e14c"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#3"
+kappa = "a2dd9a94da587c9d56412a95eb829b0801b55b548d9fcc93d217a550460dfda5"
+at = "K=u32, V=u32"
+embedded = "f0203842283f1dafbd542fb90050bccf844dd5f0392f81fc0964d24521d8e4dd"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "c26b397b13af5202e81a7458a0f102da77de61a69f81a3bb05936bddfdba10f9"
+at = "C=u32, K=u32, V=u32"
+embedded = "5720a5dc0dbd3e35aeafff1f7ca719a9447a876fb487c7f614bf8719859f53fb"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "7a2fb08666f66e6e538cf1d70c48e8ebab0a5b7ae1d8c1fd9ef579cd7542ae35"
+at = "C=u32, K=u32, V=u32"
+embedded = "6d0c93ffa4b526efa6bf4abbd1a74b9e670f124dd4ba266cfe51c9d5000fcbf0"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#3"
+kappa = "0e48a1d3fff3431142c5cc06ae100f3885a27f459b9d131e2fc7db2a1c403a96"
+at = "C=u32, K=u32, V=u32"
+embedded = "3a1f80f8ee1cd9407735f5984e894016dc26c4c820c5323492769a0311dc236e"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "8aea61dc7a0101d96b4f16d656eba12c98d3e19898047dfbe40c4dc1990f6700"
+at = "K=u32, V=u32"
+embedded = "976502ae5cffd741696cde055e55efa935198a3f53aa155b49a866f40588ccfd"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "de28f5e97f77e4dcb7cc6ee52a0b395b1ce00912f5108f4cafdbad5e631e988c"
+at = "K=u32, V=u32"
+embedded = "ea46cc3fdeb49ef8b21c9d22349e428b5f6fb6812f0d0cc9593c277f5a22054b"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len#3"
+kappa = "711d4e01ea58716425af14c68af2a37f7a1a0d817bee0f33afd7dbd0517c86eb"
+at = "K=u32, V=u32"
+embedded = "7354dc30c253a5cd3e1334b9f4da5612e458224bb1e2df5769776dfc297a2406"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_map::Iter::clone"
+kappa = "747f5b6610833d6d2f913a081e875e31dd4ce7b358cddd3c7fd16d34a4fa75b1"
+at = "K=u32, V=u32"
+embedded = "b921b38d44dc49f3cadf8fc27bd9016b350df6f1103e95e5c62ac53f7a5d6c63"
+status = "residue"
+cause = "mir::Ty: collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/collections/btree_set.rs:13:10: 13:15>::fmt"
+kappa = "204ed625b507bd2d2a10ce9bee11de97b502f297f31c733a9a8a581b9ebab830"
+at = "T=u32"
+embedded = "3b21b79c8b3f3ad5577fe4768cee8a842df6bee887f984f9469fefb1dd1987e1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/collections/btree_set.rs:29:10: 29:15>::fmt"
+kappa = "e2f43a691da20bdd8772e305b9de984d9dfb9f7cb532baa946d4dbf84d6b2ee7"
+at = "T=u32"
+embedded = "38193dc10c7c4a559a6e9885658be367186f9a51e176e1998d2ec3e8ce7f14f8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter"
+kappa = "1a523e34662dcefe2045dbdc4b5d2b382785b5175096f25dd0cfee83a8ec4723"
+at = "T=u32"
+embedded = "6638495a9c23cad282311513f3c3ff13826a9270812abb67a02c9994fa156263"
+status = "residue"
+cause = "mir::Ty: BTreeSet<u32>"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#2"
+kappa = "6be75f0b24ca362da02624f0b3d9990498a0238a9d95ab0dd6b6518e1eb3796d"
+at = "T=u32"
+embedded = "5794603809a36e6a3131148fd368ff372217ad9f3346c88eb23787ba2d2361b8"
+status = "residue"
+cause = "mir::Ty: BTreeSet<u32>"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "bf4f07e3e16a6e1a9bf713e029643596f698cef989513341e72932fbe075bc5b"
+at = "C=u32, T=u32"
+embedded = "7a49a1ed8f6f2decd3834be8ed0f0a9d61599bb7eab81825a7b7e2d1ef2c044e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "33af2d75a2c669151b832927cdc1f04aab74757934e04cfa742853a1d4fc9d6a"
+at = "C=u32, T=u32"
+embedded = "d0f5dc3b4f01c3e9f5da8476843ba153083d8b4681fa6d588e9587a6baa90585"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "1b8ca17cfa755263caa8657b8ae1f65fd71ab438a4501054abac350cecbe42ce"
+at = "T=u32"
+embedded = "51a41046a5a98c653bc52fae274b871aaba2a2ac122dd16ee8b022c936f5f91e"
+status = "translated"
+digest = "8f8d081134386e7128d3050d2c5349a03868430cdcd3c8bc20c9052a4bf5938e"
+
+[[fn]]
+path = "rayon::collections::btree_set::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "6974bbe7bc5800b4ca62359d5732e5af4f242e1ec269be3613187beeac073ce7"
+at = "T=u32"
+embedded = "3fce2910be392a569e1718df637cf1d1727a201f66dca113c91533a1b3d0fcea"
+status = "translated"
+digest = "8f8d081134386e7128d3050d2c5349a03868430cdcd3c8bc20c9052a4bf5938e"
+
+[[fn]]
+path = "rayon::collections::btree_set::Iter::clone"
+kappa = "121fa831ddeab91293267adc089d3bf326cf0e808aabcbd1db0edd964f4d28a1"
+at = "T=u32"
+embedded = "b8d796577c596b756486c0f64b238253bfe3d46ad41facf0e9a979967e21aa54"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/hash_map.rs:14:10: 14:15>::fmt"
+kappa = "b80ffc3a178d736dda8e4dd8cc32917db62a4db8765c3e137539e00625e3c060"
+at = "K=u32, V=u32"
+embedded = "1a94cfa444b2a87563d60e86884eaab793067eb645e47ba0bd81581de9940949"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/hash_map.rs:30:10: 30:15>::fmt"
+kappa = "5e6dae93f58b5911aef10ebacd694075c34ea26dbeb1ce19afaa52ce347502d9"
+at = "K=u32, V=u32"
+embedded = "83c13032a6a33d5c8051c38b60f16b4cd8cb85110d7383a6421828c2ffcf95c9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/hash_map.rs:54:10: 54:15>::fmt"
+kappa = "ade8651215cbe4b30e1b3245525bd41f20269056e8a922bf5043f9b5c58cf55b"
+at = "K=u32, V=u32"
+embedded = "9f8ec90c57f836f17d558a74c31a1fa3de76a7c774c837f4a54588e8a03a59af"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/hash_map.rs:71:10: 71:15>::fmt"
+kappa = "5505f825fefa2cbdfcb8215b8cabdabad76016431312242be6b5c8ee1833b248"
+at = "K=u32, V=u32"
+embedded = "ccd3a2c4d2ceca6058daf1233c1aa49f7a91874239d50e87ee2ce54d08dbda00"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/hash_map.rs:77:1: 77:77>::par_drain"
+kappa = "6c3b460f514c28d2561aedf209ac51c765873200f8eb96c7a8e7cb5ee2b0c626"
+at = "K=u32, S=u32, V=u32"
+embedded = "6e8bd83bdca94a6bb5a640935dcbab9c9b8487490f79cc1f90428b72ee49f6fd"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter"
+kappa = "41b87d37e612062c1da4ea8da2c2e19a44c166ed6bd3eabdf32e91146c093a71"
+at = "K=u32, S=u32, V=u32"
+embedded = "316bd9247e3d42d8c111a91993bfa91058d644fbea06233914cb73ea12f20371"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#2"
+kappa = "c284b9bdd75d01669ac444718242280fbec66ad7730af6cc5340377020e3d804"
+at = "K=u32, S=u32, V=u32"
+embedded = "f3b508ae320a614b9d363c8f00d37250fbfec36697a2793c6c2980a228cb2de4"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#3"
+kappa = "0aeaff4084bcf3520bf6ba5d8cdd00e9d2566b743de8db814deeeab6bd577e33"
+at = "K=u32, S=u32, V=u32"
+embedded = "51f97ae8903b2d39c30b2407f0011d50028ec110460ac5948d265dc3800da834"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "39144db8704a66ffdb4b43bd5a06e5b19991cf8143bc31be38e96abe53d15472"
+at = "C=u32, K=u32, V=u32"
+embedded = "c4f274ffa93129f6d9dff16ecc4c66c44d9846f655436048321c31902bd5bdf1"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "3f962e090a8f0817fbbe17fb40378285f24b2b9405459b6dda7a10e003fc3130"
+at = "C=u32, K=u32, V=u32"
+embedded = "b406f9395f11b61f37b025cbb98a05cb334c9bce8e4ac3e28b3e7061704ef1c0"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#3"
+kappa = "9409e86593d4df11de3034b1d6300339c6dc0867c216439affd4f9f54e1340af"
+at = "C=u32, K=u32, V=u32"
+embedded = "4c50f1b2d505ddcd2d1232c194d50b556887aa1febbcca7e9f037a7f1698aa2a"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#4"
+kappa = "2ebe6d8b241c300e6f993aafdcee96271892d279b36c1e23156b1cbd3c7416ec"
+at = "C=u32, K=u32, V=u32"
+embedded = "643315bfe214069f8d2722ec33116d06f1e4b75fc198356f333d3e605be4ac43"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "3b9c7f0aeb9d7e79bb43a848e672b55996cdf48bd714ac966d253e3c724f2cbe"
+at = "K=u32, V=u32"
+embedded = "f943177304b19019c73505d7177bba41f16272a2f1d766926aa1ef4296ac44a0"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "aa51f251488e77892129e36a158acc74952c003994b64717fa368256061661d4"
+at = "K=u32, V=u32"
+embedded = "626cfb0ad49edc954d4ac87a4a7d3ea828a76773719b0cc6ab8044d5ed8bce2b"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len#3"
+kappa = "d65732a31159808b46fd13ee0ab8634725d71c579b96399f603475784e96217b"
+at = "K=u32, V=u32"
+embedded = "ac007b969f9e9772fc1990c2fd9d32db15a1cbb0ffc8e1ed631891a9a004324a"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::<impl at src/delegate.rs:15:9: 15:52>::opt_len#4"
+kappa = "d073fd3229317fd81aead951c9b6a0b22f0baf9a352e322ef124f1e33c006107"
+at = "K=u32, V=u32"
+embedded = "c16e2503599ea87ae5a55b0e2e220f6fafdcf0cbbf1356d8c6f071f3a922465b"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_map::Iter::clone"
+kappa = "9f0b9644a876d44976d2a68328a21fcf2edd33a79b89bdfe50b00d5e76ecea33"
+at = "K=u32, V=u32"
+embedded = "4f3b0cfeece312b47dae9f129c1e34bfc90ef4fff6ecba0495a5478f1229a5d1"
+status = "residue"
+cause = "mir::Ty: collections::hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/hash_set.rs:14:10: 14:15>::fmt"
+kappa = "58556866136c9a915bb1b1b9fbc07df4316253cfcb17aabe7786ac5015ed2f09"
+at = "T=u32"
+embedded = "13d5dd2e505f95272808e7670e865bf1c0cfbe847ea80208e0cfd998ea1acee5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/hash_set.rs:30:10: 30:15>::fmt"
+kappa = "18f60bf439bffb18be9d7eb9bdb1c7acb2f1ee8c39d135e5b0480bf041705c28"
+at = "T=u32"
+embedded = "e9beb65990f0d3b7a125430d382a133a5da31e5fd9878f6276513ee375e267dc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/hash_set.rs:57:10: 57:15>::fmt"
+kappa = "52b993f761b0565ca31e0a029487ad1b1b830c7d626874932035ed0519101f79"
+at = "T=u32"
+embedded = "4a2bafa4b5c406dbfef28cab09908295b429138b444f90050064e21674400ffa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/hash_set.rs:63:1: 63:65>::par_drain"
+kappa = "f5a8fdfdedee5a20212e961b58d1b8ba16f877cba5ff3aa29db0744d8027ca0d"
+at = "S=u32, T=u32"
+embedded = "72ee6e50e9b5edac28ba42cd4f11b71afac5a9a54b8b7745b7e29e0a826c582b"
+status = "residue"
+cause = "mir::Ty: collections::hash_set::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter"
+kappa = "bccf8f649eee47e47eb770f89e31d58e3b171516a0b7a96a7c40da94db42f2e0"
+at = "S=u32, T=u32"
+embedded = "2038f90eef988b871709d1664641b05eb01dc1da6839db6b5ec0179d8c4b05ee"
+status = "residue"
+cause = "mir::Ty: HashSet<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#2"
+kappa = "a051cb6831ed29d92d691b2220680b788d07a26e16fe3b7660073a8a2fac49c1"
+at = "S=u32, T=u32"
+embedded = "25ef7315565f31ef02627acc1d49dcd4ec351185c4de13d73be5010fec98f49c"
+status = "residue"
+cause = "mir::Ty: HashSet<u32, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "e55905cc74b6f235d80fb6bf6da32520a13bc62f4fb72e7bdc4599cfadc8112d"
+at = "C=u32, T=u32"
+embedded = "f4f599decf4a17d8d5d88e9c540c95fb8c36145909a81f0700392735fb85d7e0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "647f821ef0bf14e99d3c0774cf47b17ccbcb826d79a9c717a6cbaecf9df863c3"
+at = "C=u32, T=u32"
+embedded = "4e86e6add6f33cdc0d49eab2580a4e4f5f7b7bdce7934734030750f0b1b368f5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#3"
+kappa = "0dff48a0082339f8bf229f2d938b3c33be8d5a04570e071cc8097ee88c819c7b"
+at = "C=u32, T=u32"
+embedded = "12a66256f746e67093c79017a457bfe408af7feb30468cbc02ab75ed750f408a"
+status = "residue"
+cause = "mir::Ty: collections::hash_set::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "1ed2f9375984bfcadcb5d9ceae00bbda3e3fa803e54fdef5641d65b318c128f0"
+at = "T=u32"
+embedded = "0d036a6d62b5d584b3d94a43b7c2cf5f2cfe4a7da1c4cd0be8715153b25c875f"
+status = "translated"
+digest = "164430cf93bedcf63e83e74a5a5572f0b69425e58382398ded38bde402e0b869"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "81f8427e13b03c452938657de9840b2bcb0a308005a550e0c9ca240c4cb5db57"
+at = "T=u32"
+embedded = "1a3be996d221cc377f90e62e4040a947829c7da42cc6cfc2a9256433f3cfe59b"
+status = "translated"
+digest = "164430cf93bedcf63e83e74a5a5572f0b69425e58382398ded38bde402e0b869"
+
+[[fn]]
+path = "rayon::collections::hash_set::<impl at src/delegate.rs:15:9: 15:52>::opt_len#3"
+kappa = "cc83aa8c354f34d52aadef483a2c0e33af08a296011574df3cfc19a13e7de891"
+at = "T=u32"
+embedded = "6f0f58ce30f872d4b6659c4ec25ef4a588063d3dc66b7767e0c036ef317c7189"
+status = "residue"
+cause = "mir::Ty: collections::hash_set::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::hash_set::Iter::clone"
+kappa = "70c659c50aa59b42c7030eedaaa6313b3c354d6160f8f04ed040b6c6b4cde701"
+at = "T=u32"
+embedded = "8b38e752eb4f94e37f71983988f441e4fcda561ed2e406ba91f0fc73764f868f"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/linked_list.rs:13:10: 13:15>::fmt"
+kappa = "4119a8fa4128c2000ba4c0d108da9dc08b6ccf9516259c6a819cc93ccac465b5"
+at = "T=u32"
+embedded = "e41cf609e56a16c4712221fc828284888f1243b9fcc15cb6ba78c39d745cc925"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/linked_list.rs:13:17: 13:22>::clone"
+kappa = "a4211e3cebdcb80d2997653926dd013bb880696a2535239f86998285d49aa693"
+at = "T=u32"
+embedded = "db4d6f82daba1b510cd2aa23e21fc559a51a05db035e858310072ed0dc89607a"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/linked_list.rs:29:10: 29:15>::fmt"
+kappa = "27b6d5a5afac557cb6b5ff3755677ebdf259bd38d8084310121be82a6f803394"
+at = "T=u32"
+embedded = "5a4e4886bc1690a6f24bc9cf3ecdde36d969fe04e7dc9071b7877a417767c3b6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/linked_list.rs:53:10: 53:15>::fmt"
+kappa = "c2eb97a70c3b5d334c6c6f83440d1134c016062bb5a6be9fda541d76572b0933"
+at = "T=u32"
+embedded = "9d1b630a863d30e173a169e020a6ade83694e1f2262b151473c4a6d7e5900559"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter"
+kappa = "e1584ce94b078349900bebfe23f93519d8dccc981f2d98c54a9b0b24d91dca3d"
+at = "T=u32"
+embedded = "1f3fe5b1b24b2c30601f5e8552dede4b474197e82bd5feeffa19189eda15486c"
+status = "residue"
+cause = "mir::Ty: LinkedList<u32>"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#2"
+kappa = "fc272ee90acee2113791fc77d1017cb08b00913e86af436112057e51cc943146"
+at = "T=u32"
+embedded = "f1d8e9032b0726a1bd8ec9581cb856d85aac323a5c9da6a50420a44eaed915a0"
+status = "residue"
+cause = "mir::Ty: LinkedList<u32>"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/collections/mod.rs:12:9: 12:51>::into_par_iter#3"
+kappa = "caa268a912d0131fe3d1e8e7e1f4a75f87db6dbe7762a1bc068e923982d12a8e"
+at = "T=u32"
+embedded = "f0cd3293e4c453c48aef770d3a94027e451ae320e3888eacb81c4ebcc2255672"
+status = "residue"
+cause = "mir::Ty: collections::linked_list::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "1041f25109bc28a5491b17b8c4f80674b2bf816c20504172e3beb4fe9dc9518d"
+at = "C=u32, T=u32"
+embedded = "78d1d461d237c8b2c8562cd90ec558ca8a77a9d2c024260cc24cea5bc95b9ce2"
+status = "residue"
+cause = "mir::Ty: collections::linked_list::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "238209e45341bd06a169a63d6268fe48860e0c6b459e64556c4385d29bc00253"
+at = "C=u32, T=u32"
+embedded = "92f2def1c44bbbb558c437f214222de75dfc076780601009f2fb7e92c4751656"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#3"
+kappa = "87f7d713b3f57ef2f02f541d7613e5930f694f7b302c2f2d418a6ff55749f510"
+at = "C=u32, T=u32"
+embedded = "7d5e4692c2c3dc5bbee6280011aa06c84da7e96d87d8e08ede6f4fad93bce896"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<&u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "3076f406099e9cc1cd8e2b507484d7989c1d0a9a43689787c996e1a3b29f56d3"
+at = "T=u32"
+embedded = "9ce096d5e26b9fe914d5a7a7018cd60504b8f9ffebc8348cbbb087aa4f023e67"
+status = "residue"
+cause = "mir::Ty: collections::linked_list::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "4ed8f0581163fda6001b977950001bd4a9fcb0659980b1e648a7028e36226132"
+at = "T=u32"
+embedded = "cf2855d5f6e01c9351351ec545e539ee95994e5fb4d385fb21f3cc38bd408c1a"
+status = "translated"
+digest = "249f1016628e182a44f5ab606cc1af168ea13de2e03f1818b8b699f287506dc2"
+
+[[fn]]
+path = "rayon::collections::linked_list::<impl at src/delegate.rs:15:9: 15:52>::opt_len#3"
+kappa = "3daca70daed9a92b05c960156affbf984cf9156f2ceb940c129303c68a829d37"
+at = "T=u32"
+embedded = "bd0cf301128725fd5855ab051317c49f344a57f4ecf4bc3e9ab786b74be2a380"
+status = "translated"
+digest = "249f1016628e182a44f5ab606cc1af168ea13de2e03f1818b8b699f287506dc2"
+
+[[fn]]
+path = "rayon::collections::linked_list::Iter::clone"
+kappa = "b507d8531f7abbca389abf59774846a1b4a78d52340ca41f6e501943e3efb2b2"
+at = "T=u32"
+embedded = "a72e7107fc333f8bfc151200f4bcd0b8e1669a1ede5dbf005016dcc8692dd1b9"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:100:1: 100:68>::par_drain"
+kappa = "fef78012942e8759a5c8e73e30f396bedbe1bdc1f7db91dab7ab490fa6ef003d"
+at = "R=u32, T=u32"
+embedded = "e2bff1b97cdb0b59bc3c536fa301ccee612610221929ee9a4f034f0326208f50"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:16:10: 16:15>::fmt"
+kappa = "5530ff691d76446e30a50d72ceed9fb928b7176f341067ddd74d70476f876c82"
+at = "T=u32"
+embedded = "856d8dfa210249c079a40246afd542456f16378a495e67c9ede50f4400d9daa9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:16:17: 16:22>::clone"
+kappa = "1de7ed1182d37bef345db373b179933c0fd258f6a99e5631d4e77cd1f7e74875"
+at = "T=u32"
+embedded = "dade45f724e7dcd3d6a4d696231e37a10673e479435e840e6cd36580895ec7bc"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:38:10: 38:15>::fmt"
+kappa = "369de4e896783653e6e2479d17f42001a47d9d7e4d97844419fcd313de32cb53"
+at = "T=u32"
+embedded = "66739813d55a22dd388c9247e1ca40fb196e9a26de13f8322cf00d68d3d9209d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:51:1: 51:59>::into_par_iter"
+kappa = "fadbf6d6c4a1a3af9ce1c1995e01abff205587ffccb335327433fb034164caa2"
+at = "T=u32"
+embedded = "1af49dd4b627f55a84ec7262dd5eafd3166cd98683b11b0da0f8a0eb04463e58"
+status = "residue"
+cause = "mir::Ty: VecDeque<u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:69:10: 69:15>::fmt"
+kappa = "7539ecaf1af0245a535fb98af311dacec9096491f7e46433d5dee94c5a345c31"
+at = "T=u32"
+embedded = "7268029b6d388149cde493db78c2d4c8ec139239cbd3a73a864e553f96631d10"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:74:1: 74:63>::into_par_iter"
+kappa = "96f3aa7299ebaeb5636d7494be008f0af275e20b02e6c4dfbc144370dbf92143"
+at = "T=u32"
+embedded = "fa4b26fddb915e2f8e15b7fa82ed5470e728bff365a65332fd2dab4242180a85"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/collections/vec_deque.rs:93:10: 93:15>::fmt"
+kappa = "892597fcc6dbe6ab6dcf2cd9cdfd06baed74f5eafdfde52900b6b0bc46c7007b"
+at = "T=u32"
+embedded = "315ab97bf4ebecc07553279a06f2f1a3970b07265a1c332a2b94721036ac5def"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed"
+kappa = "c097e07444f46b5cebc87067045b33fba13becb4c06fda8be0bdd3664b16b44e"
+at = "C=u32, T=u32"
+embedded = "5652fd3d1f49fa48797b7257a0dd31823ad748e53961a440e42791ff3b5f6592"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:60:1: 60:47>::drive_unindexed: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#2"
+kappa = "94d8f9296f629fc3df3c3b37702a9154f9508ec7ebf49af946067da5dcb93f36"
+at = "C=u32, T=u32"
+embedded = "2f67a6d5ffcb50e0d0d94923914da207d42cab14d110dd6ed0a67a4815337686"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::drive_unindexed#3"
+kappa = "cdc432e16b7d4da5153769131ce6b8ff97468f21065e7f4bbd9f3cf9c784a91d"
+at = "C=u32, T=u32"
+embedded = "c8836888b848bdcef9e7ad47777f045df9e9129098d40cff85ec4ee2fa8195fd"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::opt_len"
+kappa = "172016f608582c480a0a98f4523c48b43c9bd4fd3c2080467c4a5fc4d69fbf8d"
+at = "T=u32"
+embedded = "a1ad80679e35e06ed9e3c13e8cd4cb28b87b53ba2991cefe94b6cdd21e5a4c7a"
+status = "translated"
+digest = "9c868bb39c8fbf31beb655e8ee53466d5b2f431c0372848ff227577392f62d65"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::opt_len#2"
+kappa = "332f23407bfdd746b985724084b16a827e25d2dfe7d2916d06ae7a596751b760"
+at = "T=u32"
+embedded = "5c52132dac634baefaa004574424def02ad87f8aabbc6f832619c781b39cf77d"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:15:9: 15:52>::opt_len#3"
+kappa = "97c74f435c602374f61e3243aeb383a37ed67089795b0f69a14f4f1f6af59225"
+at = "T=u32"
+embedded = "9c473ce965cd02513d922f8711b33737ab83df45b3283f5448427f6e551ce3a8"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::drive"
+kappa = "56b7dfbde8aea9328af29f2ae7070e11aeff1b4ec2b15e703e72e03540e3027f"
+at = "C=u32, T=u32"
+embedded = "bf9354f16f9385c37ef38d89e9a610e71ae11060506294d05d7dfdc53c12d04f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:75:1: 75:54>::drive: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<u32>>::Result"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::drive#2"
+kappa = "e2360b60c7ac2913c7354b9b411e61dead3395cc182f40c2498300e440b1cb5e"
+at = "C=u32, T=u32"
+embedded = "a3e6cd42543bd48a347e82cde5148ae737dbc2d4c0d53df9cd6e334882d1a5df"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::drive#3"
+kappa = "3a52d1b4c82bd9cc0d0ebd3fef27738080b8f9f48c2895b7de6cfe2a4c52c05e"
+at = "C=u32, T=u32"
+embedded = "c0f24a7c01f82c6cd420c4a3b61bb6fa1ff34335c4242464992b0aa736aa6199"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::len"
+kappa = "81228aa1a967fd1cfe446c5a7d0ce0b30fc59ea51d0f9eda2321d233f5e3242f"
+at = "T=u32"
+embedded = "afd1a25f9b96d618396224d612c34dc76ea6b570a203e1ae1d08e35cc9ff56a0"
+status = "translated"
+digest = "de8425a2347ac1464566cdcfb5828ee58c00c851fd05e73b9cc9e5b55832c2d6"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::len#2"
+kappa = "b38be4604aafdfd98bf2dffc8ff44bbfeb1d92a05c81b9151cfd498086786709"
+at = "T=u32"
+embedded = "ecb18f8748d1ade3d3db4f05df1b6f26e60d0e7296c4ea3c47c1cc32701e5073"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::len#3"
+kappa = "4f4574360743c8f5f7f39382a3005e6243671b127965cb0597dcd4e1a8f1c71e"
+at = "T=u32"
+embedded = "5bf0e8ae9941d49c22067b15137578ca8a72f5e8b84f217b1455b9a3830eca0b"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::with_producer"
+kappa = "5705ce5a37725f19e008bfd2bb798b74b1454262b19cf9640e23759f3c41efc8"
+at = "CB=u32, T=u32"
+embedded = "1d3b7e749e6cc88f162bd6c02fec8db3cf771f234fd600a3fd384353c3fe7eef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::<impl at src/vec.rs:75:1: 75:54>::with_producer: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::ProducerCallback<u32>>::Output"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::with_producer#2"
+kappa = "1697ef669e59de6d5192fb60c9583e40082d729f933a53989af296cb7a3cc16c"
+at = "CB=u32, T=u32"
+embedded = "6af72c67f3c84f564fcfe3161ab0acf0b9b231c4ee9ac6602375bf66fab2778e"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::<impl at src/delegate.rs:43:9: 43:59>::with_producer#3"
+kappa = "d5529f7605b80db607891e71dda08778e9f6c5c956571d3b83a5eeeab1a29d64"
+at = "CB=u32, T=u32"
+embedded = "f619c823e45dac83a71d4a79f81ca50328cff8165e1e63e00da40c171b6387d7"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::drive"
+kappa = "56901114453b16f726c6eb712640e7729d5fc8fa09dfa845798d6b10cc057380"
+at = "C=u32, T=u32"
+embedded = "6f864fe0727421e7b660c1da251fb9d0fd9a815d60d8ee3d9eb1c8624208958c"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::drive_unindexed"
+kappa = "da6bf72900ed2bbcdf616510131d866e89feb3bf2d62ea9af043e0a1263c547b"
+at = "C=u32, T=u32"
+embedded = "c99880d9c54b4ea9b985e62cdbf42af51f44995b5bde483a90689260de16e8ae"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::drop"
+kappa = "e95852d2d5eb8b917bf7c81be3a4965a37f86a0decdce757c6fe9e9c11a97672"
+at = "T=u32"
+embedded = "c7a2b1a7fd2462b63d74234de013f7b2e0211196c4c8893b9d92034515a51c24"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::len"
+kappa = "c6dba02f5146e33564659f1eb0f4b34eaa734807014ef6f0b4b8d75b02e696a1"
+embedded = "18211d976b52680a75f46f1a0357976ee9857866f6a30e7e43ff6d9e92fe2dd6"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::opt_len"
+kappa = "62516e4e61c6a3fe6fd3be5b9aabb01b8b07f09b189afb8cc9dd6c4b13cb36b0"
+at = "T=u32"
+embedded = "11036707be8aeccb04dbbd405c6f8c1ffb1b091211c4d41461329e7bcd770dc1"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Drain::with_producer"
+kappa = "207a83dce120a2fc0891272d44f9c2572383cfa245e1345253e2a1dc293540ff"
+at = "CB=u32, T=u32"
+embedded = "157b4bf5ab4511d578f726330a346d51454e6746b97fe9e907a383cd4346c799"
+status = "residue"
+cause = "mir::Ty: collections::vec_deque::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::Iter::clone"
+kappa = "3c4b7c8e7a6687fead6fd186ba9deedd9668e1f7f54cdbf1857cfd87d10e0060"
+at = "T=u32"
+embedded = "4e5cafb5331353d0ca7c7edea3fe8c32d0433968abe0673b7aaf46c9e2be875f"
+status = "residue"
+cause = "mir::Ty: iter::chain::Chain<slice::Iter<'_, u32>, slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "rayon::collections::vec_deque::VecDeque::into_par_iter"
+kappa = "a2ed87d7b87d3fd8becbe8ece2a99b85a948b983da4f6a72dbcb8e91fb203554"
+at = "T=u32"
+embedded = "824897f0c9f2fc979381a8c658812b20f22a14eb45ef285dc8a6c06c0e6535e1"
+status = "residue"
+cause = "mir::Ty: VecDeque<u32>"
+
+[[fn]]
+path = "rayon::drain_guard::<impl at src/collections/mod.rs:72:5: 75:25>::par_drain"
+kappa = "1e0d57ee0771dae8e10ac8e43ed3a79984b8b6f2dee8b65e46234d67064b87a8"
+at = "R=u32, T=u32"
+embedded = "0c3e6e9c3d3208b90eb39283d872ce15da19678ecdbc79856e605cc48dd8d58a"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::drain_guard::DrainGuard::drop"
+kappa = "6218b6e8e67448cf9a9e238170291b4796322bcc9738487629804558aaeb0cca"
+at = "C=u32, T=u32"
+embedded = "0775e6c41471bed59484611a4b400625587e249c1b1bee3ed1ab2f46eca667a1"
+status = "residue"
+cause = "mir::Ty: DrainGuard<'_, u32, u32>"
+
+[[fn]]
+path = "rayon::drain_guard::DrainGuard::new"
+kappa = "905ae68935f99f1b145468cc01eff2ffdca5bbe4e10e9ba42f26f10984767eb8"
+at = "C=u32, T=u32"
+embedded = "c0f163fe5461dab7bedcba61265aa63f9f5b59ac6608b65d4504b08ef049da13"
+status = "residue"
+cause = "mir::Ty: collections::drain_guard::DrainGuard<'_, u32, u32>"
+

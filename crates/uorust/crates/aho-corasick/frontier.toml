@@ -1,0 +1,755 @@
+# The aho-corasick register (written by `uorust crate aho-corasick@1.1.5`; do not edit): every body of
+# aho-corasick's MIR at aho-corasick 1.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 931
+translated = 31
+residue = 900
+
+[module.ahocorasick]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.automaton]
+bodies = 55
+translated = 0
+residue = 55
+
+[module.dfa]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.nfa]
+bodies = 130
+translated = 1
+residue = 129
+
+[module.packed]
+bodies = 239
+translated = 1
+residue = 238
+
+[module.util]
+bodies = 399
+translated = 29
+residue = 370
+
+[embedding]
+bodies = 929
+embedded = 929
+evaluable = 928
+blocked = 1
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 1
+
+[differential]
+bodies = 26
+theorems = 176
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 102
+
+[[cause]]
+cause = "mir::Ty: util::primitives::StateID"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Match"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::builder::Searcher"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: util::primitives::PatternID"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: util::search::Match"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: util::error::MatchError"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: StateID"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: util::primitives::SmallIndex"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: util::error::BuildError"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: PatternID"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: noncontiguous::NFA"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: SmallIndex"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::Prefilter"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: DFA"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Input<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::AhoCorasickBuilder"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: dfa::Builder"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::Candidate"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AhoCorasick"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Span"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: contiguous::NFA"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: dyn AcAutomaton"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: packed::api::Config"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: nfa::contiguous::Builder"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: packed::api::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: packed::pattern::Pattern<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: util::search::MatchKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Patterns"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: search::Match"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: util::search::Input<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ByteClasses"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::builder::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: packed::api::MatchKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Mask<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: search::MatchKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteClasses"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::search::Span"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Automaton"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ByteSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Fat<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RareBytesBuilder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Slim<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dfa::DFA"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generic::Mask<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: nfa::contiguous::NFA"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::NFA"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Anchored"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Compiler<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PatternIDError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RabinKarp"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SmallIndexError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StateIDError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::AhoCorasick"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: nfa::contiguous::State<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::QueuedSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: packed::api::Searcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteClassSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareByteOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareBytesBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::StartBytesBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::primitives::PatternIDIter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::primitives::StateIDIter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::primitives::WithPatternIDIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::primitives::WithStateIDIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::search::StartKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::special::Special"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item nfa::contiguous::State::KIND"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: util::primitives::SmallIndex::LIMIT: mir::Operand::Constant: util::primitives::SmallIndex::LIMIT::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: util::primitives::SmallIndex::SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: nfa::contiguous::State::kind: aho-corasick's MIR stops at mir::Operand::Constant: the constant item nfa::contiguous::State::KIND"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AhoCorasickKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BUCKETS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BitSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MatchError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MatchErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: QueuedSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Remapper"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StartBytesBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StartKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::AhoCorasickKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::FindIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::FindOverlappingIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ahocorasick::StreamFindIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: api::Builder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: api::MatchKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: api::Searcher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: automaton::FindIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: automaton::OverlappingState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::Searcher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: generic::Match"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::Match"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::Transition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::pattern::Patterns"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::rabinkarp::RabinKarp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Fat<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::FatMaskBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Slim<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::SlimMaskBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::BitSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::error::MatchErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::Builder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareByteOffsets"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::search::Anchored"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: util::primitives::SmallIndex::LIMIT::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const u32 as ext::Pointer>::as_usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ascii_lowercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::offset_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::read"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: packed::ext::distance: aho-corasick's MIR stops at mir::TerminatorKind::Call: core::ptr::const_ptr::offset_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx2"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::ssse3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByteClassElementRanges<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByteClassElements<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByteClassIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByteClassSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Candidate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FatMaskBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IndexMapper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MemmemBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RareByteOffsets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SearchKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SlimMaskBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Transition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: automaton::FindOverlappingIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: automaton::StreamChunk<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: automaton::StreamChunkIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: automaton::StreamFindIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ahocorasick::AcAutomaton"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item ="
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: nfa::contiguous::StateTrans<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: nfa::noncontiguous::Compiler<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: noncontiguous::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::api::FindIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::api::ForceAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::api::SearchKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::pattern::PatternIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::builder::x86_64::FatAVX2<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::builder::x86_64::SlimAVX2<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::builder::x86_64::SlimSSSE3<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Teddy<#_BUCKETS>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packed::teddy::generic::Teddy<#usize_BUCKETS>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefilter::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefilter::Prefilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteClassElementRanges<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteClassElements<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::alphabet::ByteClassIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::buffer::Buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::Memmem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::MemmemBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::Packed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareBytesOne"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareBytesThree"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::RareBytesTwo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::StartBytesOne"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::StartBytesThree"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::prefilter::StartBytesTwo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::primitives::PatternIDError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::primitives::SmallIndexError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::primitives::SmallIndexIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::primitives::StateIDError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::remapper::Remapper"
+bodies = 1

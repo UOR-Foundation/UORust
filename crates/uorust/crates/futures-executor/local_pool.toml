@@ -1,0 +1,213 @@
+[[fn]]
+path = "futures-executor::CURRENT_THREAD_NOTIFY"
+kappa = "fb71dbca6c212e184e0e476202c95fc5870d4901c406e7d123eda38608924f31"
+embedded = "451611ebef23b998b658dfbfcaac72654ca8ac48ffc4bfc34f3b9423cc516359"
+status = "residue"
+cause = "mir::Ty: local_pool::ThreadNotify"
+
+[[fn]]
+path = "futures-executor::__rust_std_internal_init_fn"
+kappa = "06cd0261ce518725fee5d3f766755bf8abb9c92f676e4ad737f74491ce3d5fd0"
+embedded = "af94d2cbec5445fc3dbb2b0f55ab8c0dff1ee71302096cd3a613fb47f6ad2b34"
+status = "residue"
+cause = "mir::Ty: local_pool::ThreadNotify"
+
+[[fn]]
+path = "futures-executor::block_on"
+kappa = "55bb60bd20d4569e2afdb11347f6abe75dd117cc3c44397c7bbb4c8414b342ae"
+at = "F=u32"
+embedded = "e0a7a0cb048825d688383cf41b2a4f5c20e190284971505d717c0497958266e3"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+
+[[fn]]
+path = "futures-executor::block_on_stream"
+kappa = "05e751f973d7ae022539caf4f9157444e1277f29b171d29eb3f8ac7a1125963c"
+at = "S=u32"
+embedded = "3aab540584ee337dd48e7930b0e716d95708d7f922de0cd55dcca7e615363579"
+status = "residue"
+cause = "mir::Ty: local_pool::BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::<impl at src/local_pool.rs:30:10: 30:15>::fmt"
+kappa = "78105627823f82dee70b296fb9b2d81b16af8e16ccd7a5bc4d34b5e7360a14f8"
+embedded = "d8d023ad74ea390d74b2150cd4dab0efc87f712988c089b0141028f922581750"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-executor::local_pool::<impl at src/local_pool.rs:327:10: 327:15>::fmt"
+kappa = "65ed53564903b5991c82a5a0220a2274d036922ef29b10b42c22671216416c37"
+at = "S=u32"
+embedded = "897dc9ed5456a1f0684b117c15539acd719ae1ed9c603648c897f0ef106c9f9b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-executor::local_pool::<impl at src/local_pool.rs:37:10: 37:15>::clone"
+kappa = "6469f468f7bccc45530b1172544f08f0bf7b5ae811c138e80aece7cdd2d7b46f"
+embedded = "31b412010a034c3bb2d0daadd93e8c20e6144b6f1051ab2353c67a14318c6971"
+status = "residue"
+cause = "mir::Ty: local_pool::LocalSpawner"
+
+[[fn]]
+path = "futures-executor::local_pool::<impl at src/local_pool.rs:37:17: 37:22>::fmt"
+kappa = "eeeed611faf357f4b2bfc322e62f92f75157eb2530a81d0d98fba88081a2cc5e"
+embedded = "032854fd048a5e683d9398d84bb408a5f37070f7a7f264df9c1009b5ffc9bd23"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-executor::local_pool::BlockingStream::deref"
+kappa = "e58a8821b32b3ecf32ddc7e10d9435dc909fea75b810e818e22d4b458776dece"
+at = "S=u32"
+embedded = "6430dc57ed8b6cd68397d65e35199c861aed9880d83a71e0ff5a8c8a28efcd9a"
+status = "residue"
+cause = "mir::Ty: BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::BlockingStream::deref_mut"
+kappa = "8826134a7f6464a876d4181a67396f5b5211ccf58e76c3eaf388d59e20676d13"
+at = "S=u32"
+embedded = "68b86ead66a1d750cf06deddd944a121bb29746676ef7c42a8cbb6bffff4d535"
+status = "residue"
+cause = "mir::Ty: BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::BlockingStream::into_inner"
+kappa = "168ed626585b192c95e7bff0cbd1b5146399096da34dac6c46b2ded73e228252"
+at = "S=u32"
+embedded = "2ac42314d6b081e5c846a3a92cec35b7aae96b219accf0f992972aaedb539108"
+status = "residue"
+cause = "mir::Ty: BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::BlockingStream::next"
+kappa = "bf7718d0e1fe483570fb848eeafd8cf3cf31672676edd91322565e9c7613c8f0"
+at = "S=u32"
+embedded = "1c0943695aa2262824bab63a652eee43efecf20748b032dc8f9a77a1cd697010"
+status = "residue"
+cause = "mir::Ty: BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::BlockingStream::size_hint"
+kappa = "9d00ea0657b8ccde33dbfcad486ca8395ccf8b4874dd07c135a418a93ef3d1c1"
+at = "S=u32"
+embedded = "4d2590012eb15eb2dc7c4f8e962e735085b3dc3d0bd714d80367cb24dfea26dc"
+status = "residue"
+cause = "mir::Ty: BlockingStream<u32>"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::default"
+kappa = "ebc47a3b3aa7de256b2aec497ef59445acc38d011f20d2ad73e4abffddf13331"
+embedded = "f359a2603732b0d9c4f693f418a43e2e3061749a564ebdea6a7340c9d33c7f52"
+status = "residue"
+cause = "mir::Ty: local_pool::LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::drain_incoming"
+kappa = "537c926fe96d0c56589e099f26d9acf23740dc9cf425086d0fc81dd495da8783"
+embedded = "4656ad880e83e8c9adb9113897c88341aa3b6639df875840b9db32a274a1fac4"
+status = "residue"
+cause = "mir::Ty: LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::new"
+kappa = "0adec2b7bd5c3df1b9ad31502cd586f9ad17bbf6e9573d44db40a3b21045df9e"
+embedded = "72920175611e3193da64c60cea3742cb2d4574d9c8a6754037918575bcddf3c7"
+status = "residue"
+cause = "mir::Ty: local_pool::LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::poll_pool"
+kappa = "dde67845a917b7495df7cd20084b6f1a211665f9ec71f641729db11bd7641226"
+embedded = "686c27738c3f8795b3a83b0db6fea3725e91332ad4b67a573657c5fa4591dbb1"
+status = "residue"
+cause = "mir::Ty: futures_task::Poll<()>"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::run"
+kappa = "ce91a526c20c9664b67e9e15d36f26d4a341c6f27fdd839b7a2c8af9ecc02f2e"
+embedded = "401d4cd9ad8a61facdd4b36027545ed14b18a1b89008ca2346e071a585c86d26"
+status = "residue"
+cause = "mir::Ty: LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::run_until"
+kappa = "c9cab927f94e5a0e30d91066133c0a4a684b4fd68829a4f3e8afd1181b975322"
+at = "F=u32"
+embedded = "34cdcc3bcbc95f8c6cffa3c4fb182f834308454575c359d5d18b59e83381e7a3"
+status = "residue"
+cause = "mir::Ty: LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::run_until_stalled"
+kappa = "0d685cc8edcf41485beab04a3011e28a12b6385277b43a6a1b60cadefe4c1710"
+embedded = "a1c0e3f0d4a046d1e753b4b91241de6e0067a1abd7a0a32bfd17472988fc4b8c"
+status = "residue"
+cause = "mir::Ty: LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::spawner"
+kappa = "696e5766f8312def56dae88563c3ac5ce431c935dcc66706c87743734903b724"
+embedded = "9330569b3d2cd9ad5eeda16cd13d754363ac8ebf0a0bcbe8017b015d8961dfdf"
+status = "residue"
+cause = "mir::Ty: local_pool::LocalSpawner"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalPool::try_run_one"
+kappa = "b208a1e540757b74d9275a6d51debcd4c03c63fa2ddc64e046669b00a4899065"
+embedded = "95986eebad620f9c6447dd2c9917f400f602c8018eae0ade25d68b4a048d17fb"
+status = "residue"
+cause = "mir::Ty: LocalPool"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalSpawner::spawn_local_obj"
+kappa = "da8b3cefe6ef7c0dc7eec307a7609509757d199ae4d231d3c0d9551677132030"
+embedded = "f44ad5fa974e7c3fb7e5f5343e4fa6f1f5a11750cc4d844619fd8f95dd03e753"
+status = "residue"
+cause = "mir::Ty: futures_task::SpawnError"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalSpawner::spawn_obj"
+kappa = "cb7f0ead36872c48f02235901646d48a4edfc21518ccc09f7587a86e00c65fa2"
+embedded = "830682187de767b645964691956be005968b946ece75e77185583eb118adfdb4"
+status = "residue"
+cause = "mir::Ty: futures_task::SpawnError"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalSpawner::status"
+kappa = "6353bfb9a75aad199ba21681d53c5b0a9c10d31109596667dd3be7ae9832d7cf"
+embedded = "d9efd5b6c1f035a0c2e7aafd3c302155606f6411ec08b5cc2f5957f68cf8aea1"
+status = "residue"
+cause = "mir::Ty: futures_task::SpawnError"
+
+[[fn]]
+path = "futures-executor::local_pool::LocalSpawner::status_local"
+kappa = "9a247a658be13dccbdbf4862c2a022f9e709861eeaa37f364b54d76fd9b1b7ed"
+embedded = "da959404116a7909f5ddea464da13d7ff53245c4108710edb8da6da9155c5a0d"
+status = "residue"
+cause = "mir::Ty: futures_task::SpawnError"
+
+[[fn]]
+path = "futures-executor::local_pool::ThreadNotify::wake_by_ref"
+kappa = "f431e97bd5796181f462380e2cb554033b5d33763a04c865a468dc6f92a74844"
+embedded = "804565c9a7e4db5fa2181bc722cce3ee8e953d058b934251a4d33027d669bb01"
+status = "residue"
+cause = "mir::Ty: ThreadNotify"
+
+[[fn]]
+path = "futures-executor::run_executor"
+kappa = "aee4c2d4d5f4ac21a3017024d9fe561b72600117af99ee976622fe652a148336"
+at = "F=u32, T=u32"
+embedded = "01af5f89cf62eed68b068cf3768918da7ccabb7fb0d785ed35b41d401c1b35bc"
+status = "residue"
+cause = "mir::Ty: enter::Enter"
+
+[[fn]]
+path = "futures-executor::woken"
+kappa = "145ef180da5abc58297e9cac69f2db4db91a5e2e198af369980b1a636c7afc9b"
+embedded = "f74dc8d49f093892616051ffb19e59f9baf41fce73ff8a6284fec1067e3a9d1a"
+status = "residue"
+cause = "mir::Operand::Constant: local_pool::woken::promoted[0]: type outside the lift: local_pool::ThreadNotify"
+

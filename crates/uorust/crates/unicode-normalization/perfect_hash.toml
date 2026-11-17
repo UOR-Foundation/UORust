@@ -1,0 +1,16 @@
+[[fn]]
+path = "unicode-normalization::mph_lookup"
+kappa = "fce469e7a0811b52ff529de7a61b3ff647a471cb3987f2a218b674e896fd0981"
+at = "FK=u32, FV=u32, KV=u32, V=u32"
+embedded = "2504bb3d4eb45fec1c36b97ca1d20f280a79e5cdcf946eca8387da62eb5d381c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: perfect_hash::my_hash: unicode-normalization's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+
+[[fn]]
+path = "unicode-normalization::my_hash"
+kappa = "8b8b8f11ffd0a4cb8403a3c7bce62b870215d350675f3e67b4e91694db4f25fd"
+differential = 4
+embedded = "4dbd1a5f7f25f917cbe518b4dfa1b549da51fd2c4783390162df7966617f6412"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+

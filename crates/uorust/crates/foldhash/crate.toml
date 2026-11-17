@@ -1,0 +1,43 @@
+[[fn]]
+path = "foldhash::cold_path"
+kappa = "4968d844962524a276fcb1f76611532f925a084265b195b8c4ebd2b32c218043"
+embedded = "22009ce93f10e8c9a6a72e12edb44dda46dfd8267aea55a2ab316f7a809ac594"
+status = "translated"
+digest = "5a51c805d055d42fdec01eac82787cff4399486799b77168a5f329872e9557dc"
+
+[[fn]]
+path = "foldhash::folded_multiply"
+kappa = "bf37252dfabb837fe77e0e36d119b244f45215d6fbf79317ba813bb8d9ab0ce9"
+differential = 7
+embedded = "5753e1e97439101605e2762ccf13df9695522d76941c857df04447d0caf039da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_mul"
+
+[[fn]]
+path = "foldhash::hash_bytes_long"
+kappa = "1a71b9ace60bdaf6b1a465fed9b9816b11222f9cb0b6ccf31b0d3bcd2cd7eff1"
+embedded = "3c21cca54d65ebcd4bf0de996ea826a539dc75985d735ae1934bb1b6ed0ad96b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: load: foldhash's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "foldhash::hash_bytes_short"
+kappa = "a3cc7aa9b3f1021ed0c9ccdc8e0d874350a4ca00d938d56622052db5978ab4d5"
+embedded = "97025241fa4314e3b0fc4e725fe83d8365c4721771b9b168c2f104c8a638228a"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "foldhash::load"
+kappa = "28e64cd232a1f3fd2a9a691091520ff2c10a0296ba96607dd05711b9f8890ad2"
+embedded = "4da8d204f4d26b1361d234252ae83dad62ad8ca727a2f6d1a7422f210b65dd1c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "foldhash::rotate_right"
+kappa = "c48bb9d244115b980bd31bf24cd66299c87302d7af8db79f63063aba12e25f97"
+embedded = "9d26a9209aaa59b9977fe854ed4246067f8f0a1e9db79a74e02836438aedb8ad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::rotate_right"
+

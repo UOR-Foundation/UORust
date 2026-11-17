@@ -1,0 +1,192 @@
+[[fn]]
+path = "jobserver::BUFFER"
+kappa = "5f2b05cbf5e8ebe9e990aaf8dd312385b916d1910838240eafa43a5a46aa1908"
+embedded = "7f7088b178cfba43bc3ad07d48192855d435f7bc4027954be5935f27e39a0ecb"
+status = "translated"
+digest = "4e614c86462ada54c0d37b56b70d6acac15aeb3446192e2872b319d35c207ab3"
+
+[[fn]]
+path = "jobserver::clone_fd_and_set_cloexec"
+kappa = "43e4ca31ff81db2f31b8225f1c2def6997af7d67c9ae2580b9d93e7099b0490f"
+embedded = "ae0cfd49d942febd0952e09657922a77d057c343784c3eccf70ae2c645e7d534"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "jobserver::cvt"
+kappa = "f953489ada8646698b1c87d9b3bf5005b46a177bb0e127acda4f6e80874305f2"
+embedded = "dfc5f9f2ce7add498e2057fe3c7fe0ce494365de2a3d02e84ec901c1a0de463e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "jobserver::fcntl_check"
+kappa = "51fbcd0dd303df3ec424fba9f2e69ff958bbde1da677b6d5fd68b8622fd646db"
+embedded = "1e8753047c33902ba59f46db78567f301c5dbc1fc12b2c4d055cafcdf8bf9306"
+status = "residue"
+cause = "mir::Ty: error::FromEnvErrorInner"
+
+[[fn]]
+path = "jobserver::fd_check"
+kappa = "2a3ba81d43e3cdba7e52cf466441f89f07eef93dfe693a84b31ec3aaae4ef629"
+embedded = "4523228a17cb54db410850dc1f2eb3f8afce3ba8b679e3a3fe1b1d93c51f51ee"
+status = "residue"
+cause = "mir::Ty: error::FromEnvErrorInner"
+
+[[fn]]
+path = "jobserver::imp::<impl at src/unix.rs:18:10: 18:15>::fmt"
+kappa = "33655932ac210e542542ea7dc4056b7f8f0c92f55255f419bbcd0692d810d877"
+embedded = "8384d37e87083266716d03c1c1cd5bf285130bedc6b7feb5ba7c3c8dba023e57"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jobserver::imp::<impl at src/unix.rs:28:10: 28:15>::fmt"
+kappa = "c0e300dad34386b1799a88a1db3a52fdc04699a4864052bf286057854e2b059c"
+embedded = "3213d40b8d4234f71ed76f2b9d8eac16ac730796cbec5811025dd546a04b70fa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jobserver::imp::<impl at src/unix.rs:370:10: 370:15>::fmt"
+kappa = "4af0f953ebdb2ad468bfa09566f5301ef604e633fd472adf4bfb18e521c2247e"
+at = "HelperState=u32"
+embedded = "4aedb5733faef09abf1ace3e6fee80b0e5ffdabd130cbe02e4f884d8f66bb70b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jobserver::imp::<impl at src/unix.rs:42:10: 42:15>::fmt"
+kappa = "76d131e75aaa1349ee664d3c1058cd106730b27f55c2da9d36d39a120cd87a23"
+embedded = "4766fac415d4448aafa0831ac81096c9c95e755cee7d1f025c407daf0231b311"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jobserver::imp::Client::acquire"
+kappa = "e12d07fd9c90bb560b2202ca5c4f6e5aa82eedbe0570f2ce89bae89072d21927"
+embedded = "fc3ef6e79c3ec66b1100c1c9f1caa8ba420bfae17564186a72678a25877ca801"
+status = "residue"
+cause = "mir::Ty: imp::Acquired"
+
+[[fn]]
+path = "jobserver::imp::Client::acquire_allow_interrupts"
+kappa = "3c9409fac14c1558bdb3dbbdbadac955cba516abd6cab59f911648c24d9372b3"
+embedded = "fc846664bfd51b81a79d273f9c0b76ceb0a98600e7cf738fd300a9e4963d8e08"
+status = "residue"
+cause = "mir::Ty: imp::Acquired"
+
+[[fn]]
+path = "jobserver::imp::Client::available"
+kappa = "4619d6e5a956826f1a812fb8fe485767336665ce350417f26b856bd0308ecc8e"
+embedded = "5b1e0093f41837de6a11692cff018689d22910d7b0700e87e1bc52fcdc7f7f68"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "jobserver::imp::Client::configure"
+kappa = "9ed7ff7a8425e81d05cb2ee86d00bcc58e2b8cbd1b8e6eca72c968597549cc2d"
+embedded = "59aba711ef4403b5175528f3272a7a6776381afdc5e59a0a06081eba1417d9b7"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::from_fds"
+kappa = "07ff3de9e1486cb24fd02e4fd0b2dfe35a3a1124b8cfef4871a41c937b4977dd"
+embedded = "1d863095f18d348f1da30ea99aff00b62488f5b7fe519fb71873e954e58679ba"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::from_fifo"
+kappa = "48ca6102bfae58acca1aa19adead5ca209a8bf1c02b6724530b4dd6e91e1fde5"
+embedded = "c20cf0823ea7cc6fde87188090c8979f80b623b382a7cb2360e9f613772066d4"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::from_pipe"
+kappa = "caafa6464d62fc1e1d3f6793543f3726b442c55c7477b9f1a18c247e34153943"
+embedded = "775f9b8f7364b47fccf9e29cc20547f93043b902f429f411048db1a305ef8238"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::mk"
+kappa = "301e56788bf2d8fe96e55a2fc6ecce60e0423daccecc129a11f88b6ac658e392"
+embedded = "88f45ea61edf7ffdda36b46ebbac2aeb953405071ac80cd391e3cc1eaf165449"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::new"
+kappa = "27de1223ce6239a538e11b02ebae14bd6cbcad981b9c7d0fa6efc872e01714d3"
+embedded = "1da9abe66ef526b518d099e5a6d4d027c4a076e31ad8eebacec1239a2824dd2c"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::open"
+kappa = "d66ef8d4d8d0f03601766b4c59f2f89a43364bcbfe2bec4421ea5d9de27686aa"
+embedded = "b6521fdb77d5bbeedb8b2efdd9ede9133e41e559ea20afdda7ec0821478edea1"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::release"
+kappa = "27a1de4cc0b5b960dbbf88e59f3d243d5ae96a7f2405531aa4094abccf32fc14"
+embedded = "dfe67d31bf9e91481709ebffc68b8921439fd6066afa30af3bc5c76ee77c56c2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "jobserver::imp::Client::string_arg"
+kappa = "af7f440d0a399416f4afea83cce1c0aa4df92df2578ac00c1a0477ca87e10ffa"
+embedded = "25cca9a47813ffdda239516025014203bbe59c8b4585356efe325fd7c71b291e"
+status = "residue"
+cause = "mir::Ty: imp::Client"
+
+[[fn]]
+path = "jobserver::imp::Client::try_acquire"
+kappa = "46db999e189692bc08b8aa222f177c1d8e25ce7e4ba72469ae3b448a32431963"
+embedded = "8fb995c0d640ee684cce8c246512135770c31d00490ed393461e89a11fc0bcb3"
+status = "residue"
+cause = "mir::Ty: imp::Acquired"
+
+[[fn]]
+path = "jobserver::imp::Helper::join"
+kappa = "8818a26e5dc931a19a26497c479da6d80fe6180dfaba048d57c590f37b6298c8"
+at = "HelperInner=u32, HelperState=u32"
+embedded = "24f33292fbbbca9b92f59182ddd6602b3d2f40a19617cb30d7de8e31dc6cab4f"
+status = "residue"
+cause = "mir::Ty: Helper"
+
+[[fn]]
+path = "jobserver::set_cloexec"
+kappa = "6c13421fc3538d00efd1c68e33d6a1bacc7e6468b979e198eef28b0df2a4a42b"
+embedded = "5b9aa33895a37569de3101f46f13154930b714e7a9646a8f7a5bab59d316123e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "jobserver::set_nonblocking"
+kappa = "a9927b6622db7d168e6141b0583d7ccc195067fdca57c388195a6396b90601e2"
+embedded = "21a7165c9016ba2aa79f0d1f35be9ba6de6f710460e57bfe0f7bce165bc84afe"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "jobserver::sigusr1_handler"
+kappa = "2b498c07e20cd3b3295d8c342d14cdfb5e105c06b1b7eab38aee80ac65665247"
+embedded = "129acc94d06e012dd56f13ae600a14080179131e43b3f85aa7b363bc6590a9bb"
+status = "translated"
+digest = "879f805c34790476c1041ea2a50f63e243a4df8c015e6a0b1eb52f3d250fabf9"
+
+[[fn]]
+path = "jobserver::spawn_helper"
+kappa = "01dd65b34c4364970ce6fe72f1ca0d7aa2cde9efd3424f9ee98e2ee7443802ce"
+at = "HelperState=u32"
+embedded = "42a28a1408cacc33609c8d93f67e54cbc66e9d6217162336d6ec8c55f6c1c527"
+status = "residue"
+cause = "mir::Ty: imp::Helper"
+

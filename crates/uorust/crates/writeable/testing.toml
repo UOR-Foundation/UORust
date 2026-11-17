@@ -1,0 +1,46 @@
+[[fn]]
+path = "writeable::testing::TestWriter::finish"
+kappa = "6ba7ab9f11c6beb64d3d403964ea869cfa5b4f8ab178d13901ae146bdef4e6e7"
+at = "Part=u32"
+embedded = "57a948c9627d4e40f398b1a46ff51d871fe4435f4eef6e3ea970f1842b0e20ca"
+status = "residue"
+cause = "mir::Ty: TestWriter"
+
+[[fn]]
+path = "writeable::testing::TestWriter::with_part"
+kappa = "bb04a0c973874d3f8fee01e36a6eebdf5b33cd528075607cfd642b4df4c385e4"
+at = "Part=u32"
+embedded = "e61adc6c8c11b28a54c0550d98ab8e4e7d907d67155bd7118a993cdc412e2d46"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::testing::TestWriter::write_char"
+kappa = "e187451ce955503d7e02dde1105b4d01a4d35e5c20fc13d3fbf42f85d68b0e95"
+embedded = "a9f28a0fa031055e038f6042b6c91d616301e9500950ea8b65f1c92c76698c87"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::testing::TestWriter::write_str"
+kappa = "431ed1fbedaef8894339f44ba65b5f229f5e12fbb799a043f9de3c2f46ab284a"
+embedded = "d8b36f8ff6cceaf5588e7679331a2aaf2f12a1c394b1f61703a20720ef9d23bf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::try_writeable_to_parts_for_test"
+kappa = "49e28f4472e250fefb32590c8aef7e20ee7439a9e8c0d1c21b56e1ee4ec17e2a"
+at = "Part=u32, W=u32"
+embedded = "e277dea9b3d024c19ee12d32d51aa427d2d48753aa232bdcd5983ceabf7efb8e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::string::String::new"
+
+[[fn]]
+path = "writeable::writeable_to_parts_for_test"
+kappa = "04806989fcc49512e822000d515b1f1b59ab22fb4cba90b8a6efcb3360022c18"
+at = "Part=u32, W=u32"
+embedded = "b8cea901f71f05081a34c0dd9eeb544f9283c52d280d441691e25e0a80fa43ea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::string::String::new"
+

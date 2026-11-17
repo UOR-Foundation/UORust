@@ -1,0 +1,84 @@
+# The futures-core register (written by `uorust crate futures-core@0.3.34`; do not edit): every body of
+# futures-core's MIR at futures-core 0.3.34, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 24
+translated = 0
+residue = 24
+
+[module.future]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.stream]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.task]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 24
+embedded = 24
+evaluable = 24
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedFuture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FusedStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: task::__internal::atomic_waker::AtomicWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<core::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Waker"
+bodies = 1

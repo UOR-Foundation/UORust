@@ -1,0 +1,158 @@
+# The crc32fast register (written by `uorust crate crc32fast@1.5.5`; do not edit): every body of
+# crc32fast's MIR at crc32fast 1.5.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 47
+translated = 2
+residue = 45
+
+[module.baseline]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.combine]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.crate]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.specialized]
+bodies = 17
+translated = 1
+residue = 16
+
+[module.table]
+bodies = 0
+translated = 0
+residue = 0
+
+[embedding]
+bodies = 47
+embedded = 47
+evaluable = 47
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Hasher"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: specialized::pclmulqdq::State"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::new: crc32fast's MIR stops at mir::Operand::Constant: the constant item DEFAULT_INIT_STATE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: specialized::pclmulqdq::Kind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m512i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item DEFAULT_INIT_STATE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item baseline::update_fast_16::UNROLL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::finalize: crc32fast's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::internal_new_specialized: crc32fast's MIR stops at type outside the lift: specialized::pclmulqdq::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::new_with_initial_len: crc32fast's MIR stops at mir::TerminatorKind::Call: Hasher::internal_new_specialized: crc32fast's MIR stops at type outside the lift: specialized::pclmulqdq::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::update: crc32fast's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: baseline::fold_8: crc32fast's MIR stops at mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: combine::x8n: crc32fast's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: specialized::pclmulqdq::calculate: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: specialized::pclmulqdq::calculate_avx2: crc32fast's MIR stops at mir::TerminatorKind::Call: specialized::pclmulqdq::calculate: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __m128i"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1

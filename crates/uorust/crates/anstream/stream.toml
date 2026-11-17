@@ -1,0 +1,180 @@
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:105:1: 105:53>::is_terminal"
+kappa = "9a92095792baf00b5727b0341173f3255af8fdb083aca651a0ab434372544a3f"
+embedded = "60542741025cbd20c8f5b75eed7311eb81e2936a21ac23d7b7a9f126966b8e45"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write + Send + Sync"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:145:1: 145:57>::as_locked_write"
+kappa = "c37e94b97a5a16ca8987ebfe00278036fb3de640e3d73b8223e0ab7c326f3c42"
+at = "T=u32"
+embedded = "ba34577cdaa12723933f7ceca69a130be83555bf31131379bce835497cda35c1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsLockedWrite, which u32 does not implement in core"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:214:1: 214:49>::as_locked_write"
+kappa = "6476ab68450683a6878633cd929f5b1c2e5503110f4ae2b3cd898838c2beedf7"
+embedded = "dd4db01fb99cfc9fff6eefd98b64fe19a6245ddaa1a12d39226230a826db3e1f"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write + std::marker::Send"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:223:1: 223:56>::as_locked_write"
+kappa = "29695095674937912f5798a061a9111481ca71ee71b883fd2962599eb286dea9"
+embedded = "aec696993546ffbe57015ff988ed31efa18c535e4172a98ea2cb0fc61e2a8275"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:42:1: 42:47>::is_terminal"
+kappa = "acfac69d5a41ff75f1438d727d7da1a2e44324a06d2bc14b44e44647351e232b"
+at = "T=u32"
+embedded = "7123dc27531a0f6bf551acc9f886014e8b5aec6a697c6f050800d1e1e75e6e8a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IsTerminal, which u32 does not implement in core"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:49:1: 49:51>::is_terminal"
+kappa = "c317307e851dfc289f30d5cba0102ed662647ec69e61d774be6d4663b1c3c924"
+at = "T=u32"
+embedded = "46c68a586d0f46b5bd53167b150221e12d8401da16bf0e469a6c0f70b4c5d038"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IsTerminal, which u32 does not implement in core"
+
+[[fn]]
+path = "anstream::stream::<impl at src/stream.rs:98:1: 98:46>::is_terminal"
+kappa = "cf414dcf6955f97a061d01c510c048fb2db4a12849b41122fe29f8aba85ec9cc"
+embedded = "d34db643aec57b633aa7eaa98e93e3cefd8b712932bf733166c3fc8012de61ea"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write + Send"
+
+[[fn]]
+path = "anstream::stream::Box::as_locked_write"
+kappa = "b46c884d0e4c10cf93749c11b7295e5036bc675f3999937f0a5b850aeb445940"
+at = "T=u32"
+embedded = "1349199f16d52daa6ed13148d85abfece95c5f546efca1f59530d7bf922514e4"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "anstream::stream::Box::is_terminal"
+kappa = "9225e05b99b32cda9918b97778ef62fbe5fea235bbaf6b82e886353e0e320ebe"
+at = "T=u32"
+embedded = "95528c145b5c0b1e164b0feb3d7ad03bb4a2765deafcb371b53f9d70282f0854"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IsTerminal, which u32 does not implement in core"
+
+[[fn]]
+path = "anstream::stream::Buffer::as_locked_write"
+kappa = "dc3cbe3905c93c0cb918db7aaa90fa5c5ac831418b8c14505828873bd39ea2f4"
+embedded = "ee7a3440f8967f98711fc27b6472111e27197d4d55037f4f627429f7d3312a93"
+status = "residue"
+cause = "mir::Ty: buffer::Buffer"
+
+[[fn]]
+path = "anstream::stream::Buffer::is_terminal"
+kappa = "b3042b9749124de3524c2e38338a559b0b149244a06335a1c91b003ddb8c3a4c"
+embedded = "0b270d16b945373deeedd347b7480fda295da606c00059baf1ff2f2e542d24bf"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "anstream::stream::File::as_locked_write"
+kappa = "350d00476525b44aef0989e3f8d8b9df63d8cd0baa370f3696438f6da48466af"
+embedded = "673c6d460642af560f7cbbf7e114fa04715468c55b75434a59afea3a36342909"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "anstream::stream::File::is_terminal"
+kappa = "84fd19f76d97f7a5057a06e6519576df3cf7c90e0cdb6bfce21bf17cf373aef1"
+embedded = "b9be2967df1a593b2dd4be14e7537817a57c1cfe5bda9c0b91e082d33e06e6e5"
+status = "residue"
+cause = "mir::Ty: File"
+
+[[fn]]
+path = "anstream::stream::Stderr::as_locked_write"
+kappa = "1ad1add34d5f63cd8836b7152644e22add5d479f108a8838f43c28469fb7434e"
+embedded = "81888aa7846418ea5b4081e8c5942d3b3ed61d77175a61ca453129f072525d43"
+status = "residue"
+cause = "mir::Ty: std::io::StderrLock<'_>"
+
+[[fn]]
+path = "anstream::stream::Stderr::is_terminal"
+kappa = "fc83b6999a5b855281ca6ed406de9d2487809894a2446bc23f2636391a44f83b"
+embedded = "95564825032223ba3d60debd29b7c74a73b8a2ab66eeb29dfe4c93e93a647a80"
+status = "residue"
+cause = "mir::Ty: std::io::Stderr"
+
+[[fn]]
+path = "anstream::stream::StderrLock::as_locked_write"
+kappa = "4264837dd514b3b1fe7f3878b93f32a3444548fc9b857faa78ee3a2412507078"
+embedded = "e0f0b900e29178823b7d0c9818dc60649172e35bcdc5caa859dd34177a933a32"
+status = "residue"
+cause = "mir::Ty: std::io::StderrLock<'_>"
+
+[[fn]]
+path = "anstream::stream::StderrLock::is_terminal"
+kappa = "2df82620366752dfaa9f461b118c0e9d14f93e89852f668273b2995253001a5d"
+embedded = "c1439838f5b74dd9d4cd839800fff59e01c259efb2d63f7e99aae5439e79aefd"
+status = "residue"
+cause = "mir::Ty: StderrLock<'_>"
+
+[[fn]]
+path = "anstream::stream::Stdout::as_locked_write"
+kappa = "54fc735fc001d3168597329e3ec70b53bc7afc6c7736d8b50b66c87a80f8006a"
+embedded = "166bdc103023e5156949884b8bf95b1b6e8de48fac1b5290c14776bc0e254e1e"
+status = "residue"
+cause = "mir::Ty: std::io::StdoutLock<'_>"
+
+[[fn]]
+path = "anstream::stream::Stdout::is_terminal"
+kappa = "22908b59e8035f60e2a5a3fc95d91d10618fce20e985618bef7c5e7a55720e17"
+embedded = "70193842d985848f5e089427d524908f6fd26797e9e05b6afe4b3a0e1b1ffbfe"
+status = "residue"
+cause = "mir::Ty: std::io::Stdout"
+
+[[fn]]
+path = "anstream::stream::StdoutLock::as_locked_write"
+kappa = "69038d12e237f69799623b26a0fe4832ff93928bd489778145e361e5af148764"
+embedded = "3e3ccefc69e095fc9f846cb8e6d5b432deaffa8c809d770dc68377c60208209c"
+status = "residue"
+cause = "mir::Ty: std::io::StdoutLock<'_>"
+
+[[fn]]
+path = "anstream::stream::StdoutLock::is_terminal"
+kappa = "2d90b4d94066a5f73bf1f3205672d21bdb704099044ece68e12038206c92e903"
+embedded = "0cd811ff23510e18d5dc40eca702ef04897821da7d0b89103933f012d97338ad"
+status = "residue"
+cause = "mir::Ty: StdoutLock<'_>"
+
+[[fn]]
+path = "anstream::stream::Vec::as_locked_write"
+kappa = "bd684eaef347a7e6915021b5e8552098fca46421bf73fca85b89054da1c8488d"
+embedded = "99973b2b5814489f46d9b5f1f686d70833e95368530221c63ff543fcb954041d"
+status = "translated"
+digest = "6d713265ad7f05af5d80346023941de914ae4c6ab4ffa2451c15db2e636e2336"
+
+[[fn]]
+path = "anstream::stream::Vec::is_terminal"
+kappa = "5bff9367cc0f3c28a29b975cf51433757c32ea4c011b32f71fd75c2e8e9e603b"
+embedded = "64a1835ee5c86fcdfc333fb80b25d684f553ebabdbfda2ba62b9dc448b73ba76"
+status = "translated"
+digest = "d03fa0441cfac4464de4a88af79b1068da5684635e656190e1bbface0fd540d5"
+
+[[fn]]
+path = "anstream::stream::Write::as_locked_write"
+kappa = "ba75a4a60d105881250229e11e294b89c1bd935857aecf70fba0157f124ad0ce"
+embedded = "7fca3f912a1cea26bde4bc72e41f8f51a08f484ae5f2f815447e83720b773d97"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write"
+
+[[fn]]
+path = "anstream::stream::Write::is_terminal"
+kappa = "97a2d83057e51fb4d8d37b95e9b1ca79deef02bd06ccb94bd8db29588190319e"
+embedded = "4cdf1d2b43642a0468fbc1a3e889e283d38eb660aad34a5fce4afe63b3243e0b"
+status = "residue"
+cause = "mir::Ty: dyn std::io::Write"
+

@@ -1,0 +1,32 @@
+[[fn]]
+path = "num-integer::average::I::average_ceil"
+kappa = "cef5fb7bbf65eb413b4a42f1cc49aaff8d6ed370f43ea7602816089d663bb67a"
+at = "I=u32"
+embedded = "92b31a61966117356549066757a197939cb74591b33a921bf89f3a8ba1aa8698"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u32 as BitOr>::bitor"
+
+[[fn]]
+path = "num-integer::average::I::average_floor"
+kappa = "5abd50a8c4e6ac80ed65775380b0c59f215e1dd030a2ca276f04c82357a40547"
+at = "I=u32"
+embedded = "fb5b5047e96d67f90c73c429a771b3948483bf35a38ffa58f6ec11ed991db95e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u32 as BitAnd>::bitand"
+
+[[fn]]
+path = "num-integer::average_ceil"
+kappa = "d16d4e852e4dc1a2eddd45d7d0ad50a46dd7d39fabb9aca962d0a2812907f541"
+at = "T=u32"
+embedded = "dae3e7610d5ddd05478148dd72b8a7f6dbcdc56f9ddd9dc5c7fee81b9d2bb4fc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: average::<impl at src/average.rs:45:1: 49:90>::average_ceil: num-integer's MIR stops at mir::TerminatorKind::Call: <&u32 as BitOr>::bitor"
+
+[[fn]]
+path = "num-integer::average_floor"
+kappa = "7f342fa547c4eb2ce89414d4917c5fd0b02b28ea888c404f29e1edde10b8dd92"
+at = "T=u32"
+embedded = "8515ade3bfda0953c2081395d479b190a2a3d59a41a4c8fee7dd4da8e0fff41f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: average::<impl at src/average.rs:45:1: 49:90>::average_floor: num-integer's MIR stops at mir::TerminatorKind::Call: <&u32 as BitAnd>::bitand"
+

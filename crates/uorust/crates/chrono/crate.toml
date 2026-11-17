@@ -1,0 +1,59 @@
+[[fn]]
+path = "chrono::<impl at src/lib.rs:665:10: 665:15>::clone"
+kappa = "bf122964f81fa21e821df9f51d6b0bcdd498d42715bcaabe57510ab1623f86fd"
+at = "OutOfRange=u32"
+embedded = "950940769bf2e4d1b98e6817c94a7c0659f0d98a5914cff596be6c55b7417d4d"
+status = "translated"
+digest = "3efde59779ae56da00c457960245ba818d339fd32677ef5a27ee9c516712dd35"
+
+[[fn]]
+path = "chrono::<impl at src/lib.rs:665:23: 665:27>::hash"
+kappa = "25c5ada0f1b84f63eb895fea45f62bc8811f0be76e826622435d5fa23ac12110"
+embedded = "ebdcc78097447ae3a242e857af61de905de9beacb2e298b5969fb6946645c5a6"
+status = "residue"
+cause = "mir::Ty: OutOfRange"
+
+[[fn]]
+path = "chrono::<impl at src/lib.rs:665:29: 665:38>::eq"
+kappa = "d77ba4e7faf9c85b56117228cf554f12ed28ef759bcdf8a5c2fe550dc2ef3335"
+embedded = "919cef2d8b068515510ea392cd40666193e69287464b50f0d0be1e144eec18fe"
+status = "residue"
+cause = "mir::Ty: OutOfRange"
+
+[[fn]]
+path = "chrono::<impl at src/lib.rs:665:40: 665:42>::assert_fields_are_eq"
+kappa = "665125c65189b5b8d354e56aa0e3fd9ed6a3cad78445e0c06a6facb3c9341f9c"
+embedded = "b6f43da1226c61e70c2913094c2607418ef79e390728be652f81df98e8331608"
+status = "residue"
+cause = "mir::Ty: OutOfRange"
+
+[[fn]]
+path = "chrono::OutOfRange::fmt"
+kappa = "422be5f341a64338908ce9f3941e07d4fd88925a431adb832fbbeca6de554829"
+embedded = "1ee36f869c05b06d89ddf4afef22a3653423d1673583fbe740094fa730034725"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "chrono::OutOfRange::fmt#2"
+kappa = "86bdb6ea7291b8fb1c372bb3b07fdf496274dbb63facf35a8f32676c95c7af42"
+embedded = "8129c85e3cea33cdda254875e99ff746dc309e3ce6f26653f05ae77d00cbaf4e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "chrono::OutOfRange::new"
+kappa = "cb42bf14e990b6a0f40e89d84611f12e39be0277701d3174dfea361a725f8e47"
+at = "OutOfRange=u32"
+embedded = "b0dff00ea9b2e706df4901485fb8db386cd28f3dc62596f9a1b8f7aa12d31314"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "chrono::expect"
+kappa = "c63f74dc944de858b22421db5fb9eaccd135e776a19fb4b2dd4c36a4a6723b35"
+at = "T=u32"
+embedded = "683b4beb5dfaa35fc3a55d4d67b9e6716f7031cb5d3facd5f1a14885efc2dda2"
+status = "translated"
+digest = "ba89055b6061633db1bcf81b39555ca6c95363686f72236f643d77867aacb2fd"
+

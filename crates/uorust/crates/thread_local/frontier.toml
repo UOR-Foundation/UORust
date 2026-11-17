@@ -1,0 +1,124 @@
+# The thread_local register (written by `uorust crate thread_local@1.1.10`; do not edit): every body of
+# thread_local's MIR at thread_local 1.1.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 71
+translated = 0
+residue = 71
+
+[module.cached]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.crate]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.thread_id]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 71
+embedded = 71
+evaluable = 71
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ThreadLocal<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: thread_id::Thread"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CachedThreadLocal<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Entry<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RawIter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CachedIntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CachedIterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ThreadIdManager"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cached::CachedIterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cached::CachedThreadLocal<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<*mut Entry<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: thread_id::ThreadGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ThreadGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cached::CachedIntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::UnsafeCell<std::mem::MaybeUninit<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: thread_id::ThreadIdManager"
+bodies = 1

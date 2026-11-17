@@ -1,0 +1,39 @@
+# The zerofrom register (written by `uorust crate zerofrom@0.1.8`; do not edit): every body of
+# zerofrom's MIR at zerofrom 0.1.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 48
+translated = 43
+residue = 5
+
+[module.macro_impls]
+bodies = 39
+translated = 39
+residue = 0
+
+[module.zero_from]
+bodies = 9
+translated = 4
+residue = 5
+
+[embedding]
+bodies = 48
+embedded = 48
+evaluable = 48
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::map"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+bodies = 1

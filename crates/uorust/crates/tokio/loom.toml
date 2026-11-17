@@ -1,0 +1,290 @@
+[[fn]]
+path = "tokio::atomic_u16::AtomicU16::deref"
+kappa = "bec60544892e1bb08da8d4099a0efc96d8bea030cf7cf4536a0ab2edc504d6a5"
+embedded = "0e58f25d95e2e33a737a6b13607679f5ebd37aa15bffe44811bdc60c55633087"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u16>"
+
+[[fn]]
+path = "tokio::atomic_u16::AtomicU16::fmt"
+kappa = "ea9fc6b57751594c74c305207e4c62407847d0d6150b802f40bab4169678b921"
+embedded = "b1b9d38e57e6f0308c10879c9268ee1cb74ce3ef9e8d8df60125f839d85a55bf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::atomic_u16::AtomicU16::new"
+kappa = "cabe07b1e5a71def8d72d2b2dde095be65120370d10acdb31e4c670d992996e8"
+embedded = "1beb2e17b5f87dd49b28778aea0fc3f51546a83701a506647a9d8f0ed0a76e4f"
+status = "residue"
+cause = "mir::Ty: loom::std::atomic_u16::AtomicU16"
+
+[[fn]]
+path = "tokio::atomic_u16::AtomicU16::unsync_load"
+kappa = "1ff5ecbca99292cd09b4eaa0f26fb77fe2fd242dad6382c418a3c7f43abdd23c"
+embedded = "34f0ad82f5db6685a7628540ffa80386e39a2f0c075c936a7018012fe81be9ce"
+status = "residue"
+cause = "mir::Ty: AtomicU16"
+
+[[fn]]
+path = "tokio::atomic_u32::AtomicU32::deref"
+kappa = "86a70031e326f3ca4f70dad0c415c2a8410a7aea4f5b2e9eea3de761ac0dfe86"
+embedded = "a587923e4e937c3b8cb1392da5bc5b903aa21088049f419a0d868a294df32ea5"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u32>"
+
+[[fn]]
+path = "tokio::atomic_u32::AtomicU32::fmt"
+kappa = "791bc365bdbf1c3e64681fcfbf69d66ee3f483a8160e3f685f2b151fcb06940b"
+embedded = "a0167ad37fcdda142e46b00f9d8fc1b445f9a67df622457d55f2379dbb9d0ae2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::atomic_u32::AtomicU32::new"
+kappa = "eedf30c156c677c96819e2b1dc383302e8de52c8a60a44b2488357f7c56802ef"
+embedded = "b44378369950a3cd7990dbd802476bae459ea19a8297081d76c02e15ee58957a"
+status = "residue"
+cause = "mir::Ty: loom::std::atomic_u32::AtomicU32"
+
+[[fn]]
+path = "tokio::atomic_u32::AtomicU32::unsync_load"
+kappa = "d017a725f11983df1973700ba81bfa86b527babdf6a2218d443723a78f0c36df"
+embedded = "2b5abcd779b62d4b4bed067e98bb171b0c68e5130ed70089dae58ea6484e72f6"
+status = "residue"
+cause = "mir::Ty: AtomicU32"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::deref"
+kappa = "e00b441974c68bc8b4837c1e228dfa6e91676e00a805eb7722a0c2a00cd7d00d"
+embedded = "68a21cff1c9283d20c020fe13be71699d6c2276da545c8f34286bb429dccaa17"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::deref_mut"
+kappa = "7add32e432cea257c23c74ce2996c75a54cf6cd9c83dc6741e124f141b49538c"
+embedded = "f39fc87f21739ca52eb4dd3a297d8e346d5e9b583a6fdc6596d41983a71fb236"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::fetch_update"
+kappa = "63baefed9382c4e4cde6f3647e615953b28c53d227ff42865bda0b301627ccfc"
+at = "F=u32"
+embedded = "a583e41f5589e351eb105e9a9d7295cb8c739ed8f64b0a02878a30e47de859a2"
+status = "residue"
+cause = "mir::Ty: AtomicUsize"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::fmt"
+kappa = "adfdae35fe19a18dbc7d9543fcd81542564b2086adbea5b5b8dbded7159cb662"
+embedded = "8742d64d374053b5a860e74cf0d188a8869a226f3314d0ff81db8376132297ee"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::new"
+kappa = "c088ba28261018a289ae562c2de49f0061d152ada5fb56ad4c6164e0387d03d2"
+embedded = "eda91d7d74f034cdecf12426ebfb133fb58ba574a84401cc9f9008133f7fab3c"
+status = "residue"
+cause = "mir::Ty: loom::std::atomic_usize::AtomicUsize"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::unsync_load"
+kappa = "d01890ec0ed88acf57e39c3195be9a3f1f92c6a32c461ac55af87a13b538f73b"
+embedded = "1dd470c6f596b586639c79a499e5664ebe2c7911092c1fd2bf6f62ab62fb4d9c"
+status = "residue"
+cause = "mir::Ty: AtomicUsize"
+
+[[fn]]
+path = "tokio::atomic_usize::AtomicUsize::with_mut"
+kappa = "0bd237ae2a5b8754c54636349da87965fc9bc5cf4a97fb02d36c69f8b6f62d69"
+at = "R=u32"
+embedded = "9796feec3e24e10d9181ade4919e86ec910aead48bf5f4d2f4a8ac90cebf78ae"
+status = "residue"
+cause = "mir::Ty: AtomicUsize"
+
+[[fn]]
+path = "tokio::barrier::Barrier::fmt"
+kappa = "1e3e1427f495625d10425764278b152953fe912dd8bf0e6e3a0e405ccc7ce288"
+embedded = "8085a8b5acc71b526ba5578f30cebaf069ac52a5db1afb7f53b6f90b60604328"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::barrier::Barrier::new"
+kappa = "7fb03133f2d0fbd7d5aca0554770f28ae16b5377d0a2df8f08654f397d4e41d8"
+embedded = "413a59d30ae5880a324be58584e46c1178a5f8f3fbb10bf129ea8e8332e10f17"
+status = "residue"
+cause = "mir::Ty: loom::std::barrier::Barrier"
+
+[[fn]]
+path = "tokio::barrier::Barrier::wait"
+kappa = "38ded4bce055fdb8f9f355803ec2ff44eb6c2baf8b37c5622429f4fed2aa54d0"
+embedded = "80f21b50a7063377c3b2bd28d9307536bc6ec9a073b3a8ffed203e986da76885"
+status = "residue"
+cause = "mir::Ty: loom::std::barrier::BarrierWaitResult"
+
+[[fn]]
+path = "tokio::barrier::Barrier::wait_timeout"
+kappa = "830520399ed4a103657a821a5d1d9bea10cea3f60913e130cdddb6ef02b8d18e"
+embedded = "7b92673612ac40f55ffc14c3a253d190ec8db7f7c9b48d6769566227319a15b1"
+status = "residue"
+cause = "mir::Ty: loom::std::barrier::BarrierWaitResult"
+
+[[fn]]
+path = "tokio::barrier::BarrierWaitResult::fmt"
+kappa = "4f27739c538dd107673a464a3cf9c4b1da62c18c0a0920bb884007e3d01867f7"
+embedded = "564fb5691fb4f81d8d8097d5e0202c61e51b35336c4203e81de897249e247a21"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::barrier::BarrierWaitResult::is_leader"
+kappa = "959f61f279d8c081705a6a6711176eaec383633ade2e0cd10249108c9282a53c"
+embedded = "4ce47e32c071427f6168139be532a6ee2d4cf802b4ea6c4f403bf76c7feada50"
+status = "residue"
+cause = "mir::Ty: barrier::BarrierWaitResult"
+
+[[fn]]
+path = "tokio::loom::std::thread::yield_now"
+kappa = "1a7e6b8510f4fa224a180ce8bb1d11d489d47c9ca549efd4bd23ee01fa6c2cc7"
+embedded = "24690abfa295acc2dc0e31bd5e4051c90d4bb2d8360cff82d5d6c8cfef31f2fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: spin_loop"
+
+[[fn]]
+path = "tokio::mutex::<impl at src/loom/std/mutex.rs:5:10: 5:15>::fmt"
+kappa = "d0a4b7e2ccb1edf3390d65ea29879e6c6090e892072728ef0233be660d1f5133"
+at = "T=u32"
+embedded = "5872741f5b9985b77885f01135b0beb3a0532a1d5749f078d145545b931a9e63"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::mutex::Mutex::const_new"
+kappa = "41032b05f2177727af272e8defa05babc240290ad8634ed1c162f6f0ab85beeb"
+at = "T=u32"
+embedded = "e53d1c3fb0b426ec5205810600e2378b43c53bf4d4dfb1c9ed6c5cf69063b321"
+status = "residue"
+cause = "mir::Ty: loom::std::mutex::Mutex<u32>"
+
+[[fn]]
+path = "tokio::mutex::Mutex::lock"
+kappa = "c62cb0a9660c0cb657789d74c9c1b9294ecbeccac7e978117f2ed48233db320e"
+at = "T=u32"
+embedded = "1d04bf5dc82ff7994921ee0148e8facb68c008426e1e0ad3ce99a605034e04cd"
+status = "residue"
+cause = "mir::Ty: std::sync::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::mutex::Mutex::new"
+kappa = "cff0bfe5ac447d5b2b462fd451b538445f05c38d63a9f135fe69bc4bfa3413bb"
+at = "T=u32"
+embedded = "a3a60bb2c3d28827ebacb49e2065b1645edbe9d290842f7eed17aa7b60f7e947"
+status = "residue"
+cause = "mir::Ty: loom::std::mutex::Mutex<u32>"
+
+[[fn]]
+path = "tokio::mutex::Mutex::try_lock"
+kappa = "f81e05468e8652511f0d7a63e3d9c8a785f4e8e16921c07747c5376ea08a88d0"
+at = "T=u32"
+embedded = "814af8182b13fe5c17c539518596c97e22b16e396bd11986ba5eabd58d64752d"
+status = "residue"
+cause = "mir::Ty: std::sync::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::num_cpus"
+kappa = "7e5e436023c500e1a27f54c2adb243abca9cf955c499510007ffb2b0b6ec75a0"
+embedded = "8b17fd0fbe67deea6ebd63a704f7582c7d3b130e9255a623940683f80a856c7c"
+status = "translated"
+digest = "9fe40541a947317936b5739d2a3dda774bd2375daeccb47567c8b991856e24ac"
+
+[[fn]]
+path = "tokio::rwlock::<impl at src/loom/std/rwlock.rs:5:10: 5:15>::fmt"
+kappa = "56d5a1a40a68b2f76b4273576006e3691d96b79cbbb2fe58b88e64db8dd6ae26"
+at = "T=u32"
+embedded = "b5f2afbfa018db813d1bf70df459a44c39e923c9b4c1b3306dd16e5b9adf648d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::rwlock::RwLock::new"
+kappa = "84439ad3f00f82cc19840b908289662c48375c2591c800a7d3faa627b076a261"
+at = "T=u32"
+embedded = "0aa4393bf27676718960a8993a59b54686ba052c2b499f81ff4868a4ac3af2de"
+status = "residue"
+cause = "mir::Ty: loom::std::rwlock::RwLock<u32>"
+
+[[fn]]
+path = "tokio::rwlock::RwLock::read"
+kappa = "3067960a20593c35a816005a12dedaec45c0557a6875be0eeca2cb9120a1d4cd"
+at = "T=u32"
+embedded = "06a305b1c2e1bcfe7dd754a918cd869643b7e73d13ac01783ff642848b4e9dfb"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::rwlock::RwLock::try_read"
+kappa = "9584bfbed8b44b98f04413935fb66212b924829a0ac4ada06126940cf9d221fc"
+at = "T=u32"
+embedded = "8f4f5dc522b596a62105c7d284be482e7b3c5f2cf327927ab4fcaed9e692f448"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::rwlock::RwLock::try_write"
+kappa = "7d959732f34616e502cc8a02f316c257335db27f30445167eab7dc882e30ba77"
+at = "T=u32"
+embedded = "053c9dc927007393417c69b8ea2552ee077cd8d11cac08b55af83376e5c1862d"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::rwlock::RwLock::write"
+kappa = "03b5b49b5354e03e31d65c91e978622a3f6d660600be6e6ac283e39304e6d1c0"
+at = "T=u32"
+embedded = "0bbf093727148f42009f93c90facc16fcfb152b3f3a064df76929d6e255660f5"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "tokio::seed"
+kappa = "66a76d831b448e20f4e8d409d64b981c67187a67381501136ef4319133107d1d"
+embedded = "aecee49f8d005ce43b2014b5265fac9185e363975850bba63e33f296bb63261f"
+status = "residue"
+cause = "mir::Ty: std::hash::RandomState"
+
+[[fn]]
+path = "tokio::unsafe_cell::<impl at src/loom/std/unsafe_cell.rs:1:10: 1:15>::fmt"
+kappa = "42bc877eb4d0561634d48503665aeda2c5f8602d8800ed78bb2e8ad0a3d8fd1b"
+at = "T=u32"
+embedded = "6ec19c0eae1d9a9f661cec0e4d994e8a2fc9bada488e918fe49ad30fab181f52"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::unsafe_cell::UnsafeCell::new"
+kappa = "b6316789063d2e3927ab09bdc4e083f72757930ad2934935aa0b18e256c2ca0b"
+at = "T=u32"
+embedded = "34d11a2a2f80a194900c8839a73c4009035fe90924521b4b693084b4e589a182"
+status = "residue"
+cause = "mir::Ty: loom::std::unsafe_cell::UnsafeCell<u32>"
+
+[[fn]]
+path = "tokio::unsafe_cell::UnsafeCell::with"
+kappa = "8acd190831130caa6350db78278c69465cbcad460ba370c69c5e51c304343620"
+at = "R=u32, T=u32"
+embedded = "ff77250a116a97ddb54808a025647d66f0a81f7616f612afa8b1a74db715f61b"
+status = "residue"
+cause = "mir::Ty: unsafe_cell::UnsafeCell<u32>"
+
+[[fn]]
+path = "tokio::unsafe_cell::UnsafeCell::with_mut"
+kappa = "eecd02bf7c994dae2d5994502a2c29be0f287f34ca6ccf68ee36befc55082010"
+at = "R=u32, T=u32"
+embedded = "a3ef4ad3b92885276728946cadc9c6033b7f0902183f38381b25433b80c77457"
+status = "residue"
+cause = "mir::Ty: unsafe_cell::UnsafeCell<u32>"
+

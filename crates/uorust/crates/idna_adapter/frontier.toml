@@ -1,0 +1,78 @@
+# The idna_adapter register (written by `uorust crate idna_adapter@1.2.2`; do not edit): every body of
+# idna_adapter's MIR at idna_adapter 1.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 31
+translated = 4
+residue = 27
+
+[module.crate]
+bodies = 31
+translated = 4
+residue = 27
+
+[embedding]
+bodies = 31
+embedded = 31
+evaluable = 31
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: BidiClass"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Adapter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item icu_properties::props::BidiClass::LeftToRight"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item icu_properties::props::BidiClass::RightToLeft"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: JoiningType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: icu_normalizer::Composition<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item icu_properties::props::JoiningType::LeftJoining"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item icu_properties::props::JoiningType::RightJoining"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BidiClassMask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GeneralCategory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: JoiningTypeMask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: icu_properties::props::BidiClass"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: icu_properties::props::GeneralCategory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: icu_properties::props::JoiningType"
+bodies = 1
