@@ -253,6 +253,15 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
                     .filter_map(|t| types.get(t).map(|(_, x)| x.as_str())),
             )
             .any(|text| words(text).any(|w| w == "Int"));
+        let unit = own
+            .iter()
+            .filter_map(|d| definitions.text(d))
+            .chain(
+                reached
+                    .iter()
+                    .filter_map(|t| types.get(t).map(|(_, x)| x.as_str())),
+            )
+            .any(|text| words(text).any(|w| w == "Unit"));
         let cause = match (mutual, recursive) {
             (Some((ty, group)), _) => Some(format!(
                 "it reaches the type {ty} of the mutual inductive block {group}, for which \
@@ -266,6 +275,10 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
             (None, None) if unbounded => Some(
                 "it reaches the type Int, which has no fixed-width Rust type the pinned \
                  code generator renders"
+                    .to_string(),
+            ),
+            (None, None) if unit => Some(
+                "it reaches the type Unit, for which the pinned library code generator renders no Rust type"
                     .to_string(),
             ),
             (None, None) => refusal(&own, &definitions, &decls, &types, &taken),
@@ -1312,6 +1325,23 @@ mod tests {
             admission.refused["rooms"].contains("type Zone, which is defined in terms of itself")
         );
         assert!(admission.refused["signed"].contains("the type Int"));
+    }
+
+    #[test]
+    fn library_a_unit_root_is_refused_without_losing_supported_roots() {
+        let mut unit = library_def("noop", "(ctor Unit.unit)");
+        if let Decl::Definition {
+            parameters, result, ..
+        } = &mut unit
+        {
+            parameters.clear();
+            *result = "Unit".into();
+        }
+        let behavior = library_module(vec![unit, library_def("count", "n")]);
+        let admission = admit(&behavior, &library_names(&["count", "noop"]));
+        assert_eq!(admission.roots, ["count".to_string()].into_iter().collect());
+        assert!(admission.refused["noop"].contains("the type Unit"));
+        assert!(!admission.closure.contains("Behavior::noop"));
     }
 
     #[test]

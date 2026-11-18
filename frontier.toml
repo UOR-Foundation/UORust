@@ -5,7 +5,7 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 379 of 1814 functions of product code are lifted; 1009
+# Honesty report: 378 of 1814 functions of product code are lifted; 1010
 # are residue, 187 foreign and 239 effect rows.
 # Residue by cause:
 #   arithmetic: 1
@@ -313,10 +313,10 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, std::string::String>>
 #     2 std::iter::Enumerate<std::slice::Iter<'_, std::vec::Vec<char>>>
 #     1 std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1508:17: 1508:25}>
-#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6424:17: 6424:20}>
+#     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6450:17: 6450:20}>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:766:32: 766:35}>
-#     1 std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6516:47: 6516:51}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>
+#     1 std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6542:47: 6542:51}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4238:21: 4238:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:1099:54: 1099:57}>
 #     1 std::iter::FlatMap<std::slice::Iter<'_, &embedding::Recorded>, &std::vec::Vec<std::string::String>, {closure@crates/uorust/src/embedding.rs:405:60: 405:63}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:182:37: 182:40}>
@@ -370,7 +370,7 @@
 #     1 std::str::Split<'_, [char; 2]>
 #     2 std::str::Split<'_, char>
 #     1 std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2890:16: 2890:25}>
-#     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6916:16: 6916:30}>
+#     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6942:16: 6942:30}>
 #     1 std::str::SplitWhitespace<'_>
 #     1 std::str::Utf8Error
 #     1 syn::Error
@@ -408,7 +408,7 @@
 #     3 LLV7002: Lean rejected `Uorust.Behavior` (error): omega could not prove the goal:
 #   signature: 18
 #   statements: 4
-#   type: 132
+#   type: 133
 # MIR kinds at toolchain 1.97.1: 81 of 118 lowered; every other kind is a
 # residue row that names it.
 #   StatementKind::Assign: lowered: the local holds the rvalue's value; a write through a projection is residue
@@ -534,8 +534,8 @@ spec = "uorust/register/1"
 
 [lift]
 functions = 1814
-lifted = 379
-residue = 1009
+lifted = 378
+residue = 1010
 foreign = 187
 effect = 239
 
@@ -3090,7 +3090,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6424:17: 6424:20}>"
+construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6450:17: 6450:20}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3100,12 +3100,12 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6516:47: 6516:51}>"
+construct = "mir::Ty: std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6542:47: 6542:51}>"
 cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>"
+construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4238:21: 4238:24}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3275,7 +3275,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6916:16: 6916:30}>"
+construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6942:16: 6942:30}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3466,6 +3466,11 @@ functions = 1
 
 [[construct]]
 construct = "type outside the lift: UorustMirLowerCx.consts: IrBody.blocks: IrBlock.statements: IrStatement::Assign.0: IrPlace.projection: IrProjection::Other.0: spec::MirProjectionElem"
+cause = "type"
+functions = 1
+
+[[construct]]
+construct = "type outside the lift: _"
 cause = "type"
 functions = 1
 
@@ -5559,7 +5564,7 @@ stops = []
 kappa = "0911faa500b0587215283c0a8fb3cff9f55a6dd0991397c13040aa756a81e9d8"
 function = "uorust::figures::placeable"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4238:21: 4238:24}>"
 stops = []
 
 [[residue]]
@@ -6172,7 +6177,7 @@ detail = "mir::Rvalue::Aggregate: Expr, which is not a struct"
 stops = []
 
 [[residue]]
-kappa = "24f2558e5d21c7dc26e3d2fa13851a2e75755b21c4d9b33c328c5d516cac823a"
+kappa = "cfe2cf9bb96f96250321b6e89c53dc7a666e80b16f5a181c13738323364eb64b"
 function = "uorust::lift::applied"
 reason = "mir"
 detail = "mir::Rvalue::Use"
@@ -9238,6 +9243,13 @@ detail = "expression form outside the lift: expr::closure"
 stops = []
 
 [[residue]]
+kappa = "f8742baab607013d5d29d5def49f839c405003f8a138ba86ba7460866a918c7e"
+function = "uorust::names::Resolver<'a>::krate"
+reason = "type"
+detail = "type outside the lift: _"
+stops = []
+
+[[residue]]
 kappa = "569ab106b7ed4e42925fdf19e87275dfb665af79aa70864c97e8baceea5b35a7"
 function = "uorust::names::Resolver<'a>::method_call"
 reason = "form"
@@ -9259,7 +9271,7 @@ detail = "type outside the lift: &mut Vec<((usize, usize, String), String, bool)
 stops = [["type", "type outside the lift: &mut Vec<((usize, usize, String), String, bool)>"]]
 
 [[residue]]
-kappa = "a2c04353f2f84a558d25f87dd86c84422a92ab2a74b8ff6b88553e4f3edd70b7"
+kappa = "1d60396209424dcca496abd1bd57691251dd0bdc70264cf37a8939d21dd1a126"
 function = "uorust::names::Resolver<'a>::new"
 reason = "statements"
 detail = "the body has statements other than let"
@@ -9287,7 +9299,7 @@ detail = "expression form outside the lift: method call .ty"
 stops = []
 
 [[residue]]
-kappa = "c71c439ede56416e39beae9660af0419b1d1875be7fcd22e561d2c50db8d29f9"
+kappa = "0efef4a7f0d000934a850f232d335ac499145788327a3040905516902c8b625a"
 function = "uorust::names::Resolver<'a>::path"
 reason = "type"
 detail = "type outside the lift: &mut Vec<((usize, usize, String), String, bool)>"
@@ -9728,7 +9740,7 @@ detail = "mir::TerminatorKind::Call: project::indexed"
 stops = []
 
 [[residue]]
-kappa = "85e3307f39e50bbd312ed7f788560901190c68366706f42f5becfc064ddbf490"
+kappa = "157a9cdf89d6613fd97495de44a7617f84c68b229d5edd00458dac28594a8938"
 function = "uorust::project::behavior"
 reason = "mir"
 detail = "mir::Ty: mir::Dumps"
@@ -9808,7 +9820,7 @@ stops = []
 kappa = "739d48d847057500e34c1d6c823dbd5a0bb7f876620e84cc72b670dd7caf05f6"
 function = "uorust::project::embedding_keys"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6516:47: 6516:51}>"
+detail = "mir::Ty: std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6542:47: 6542:51}>"
 stops = []
 
 [[residue]]
@@ -9836,7 +9848,7 @@ stops = [["type", "type outside the lift: &mut BTreeSet<Ty>"], ["type", "type ou
 kappa = "dfc0d7cab9d26456c3716f11b6f77193223b923bb050d34e875d8a1b9e8c9a22"
 function = "uorust::project::foreign_crate"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6424:17: 6424:20}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6450:17: 6450:20}>"
 stops = []
 
 [[residue]]
@@ -9896,7 +9908,7 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 stops = []
 
 [[residue]]
-kappa = "86366684c11d6c33764a3cbbf7a671b71628676178c0ee1a4028161430467099"
+kappa = "ccda751a9e0d9fc4d3df59bc43c143d127c133ae3acaace11acb8d75899ab400"
 function = "uorust::project::library::admit"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -10151,7 +10163,7 @@ stops = []
 kappa = "8dc88bd771106676e5f7cbff4fe0272c5aabb6ba15e27545959fdb18979e67cd"
 function = "uorust::project::words"
 reason = "mir"
-detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6916:16: 6916:30}>"
+detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/project.rs:6942:16: 6942:30}>"
 stops = [["type", "type outside the lift: impl Iterator<Item = &str>"]]
 
 [[residue]]
@@ -12303,7 +12315,7 @@ effect = "calls uorust::figures::load, which performs a Fs effect: std::fs::read
 stops = []
 
 [[effect]]
-kappa = "5cb83fec1a4a4e523d9a58524f4f358252999623d1bc9b6ec575b4ef130237fc"
+kappa = "ba06ed6a1ea20961d32487dc9ab6c4ce827eae30de9b33c3e1f8f23a31faed46"
 function = "uorust::figures::read_dependencies"
 effect = "Fs effect: std::fs::read_dir"
 stops = [["type", "type outside the lift: &mut Locating"]]
@@ -14487,11 +14499,6 @@ definition = "Behavior::resolverFact"
 kappa = "2d7bf5973fa4b00f6c4eb78ad82239787c423c9418fac1a5fa06e38bd3d1d6d9"
 function = "uorust::names::Resolver<'a>::file"
 definition = "Behavior::resolverFile"
-
-[[lifted]]
-kappa = "04e856fd01b9bddb960bc2fd6387623d3f770c099f0546e2aa6f036673e057f2"
-function = "uorust::names::Resolver<'a>::krate"
-definition = "Behavior::resolverKrate"
 
 [[lifted]]
 kappa = "e6cd5b8a0a5fa74f2ff6f9105dd2edb4e9ee11249694b01305ea7dfc7a7f487a"

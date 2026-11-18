@@ -24,12 +24,12 @@ lexlean_sha256 = "9380aa150ab1b531ccd3c8781102b23ccaf3c617bbfec0736e35c9938eb779
 prismpm_sha256 = "873c23f7e0c039504a791069979aef229a6d98ddc2134c6704e337e0b47e90d3"
 
 [admission]
-refusals = 83
+refusals = 86
 
 [[reason]]
 reason = "library-root"
 route = "UR-R29"
-refusals = 82
+refusals = 85
 
 [[reason]]
 reason = "advisories-unconsulted"
@@ -182,6 +182,13 @@ reason = "library-root"
 route = "UR-R29"
 span = "thermo-core/Cargo.toml"
 detail = "the library profile does not take the root acceptThermoCoreTheRosterFoldsAndClamps6Root: it reaches Behavior::acceptThermoCoreTheRosterFoldsAndClamps6Root, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root allBooked: it reaches the type Unit, for which the pinned library code generator renders no Rust type"
 
 [[refusal]]
 status = "open"
@@ -426,6 +433,13 @@ status = "open"
 reason = "library-root"
 route = "UR-R29"
 span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root noneTaken: it reaches the type Unit, for which the pinned library code generator renders no Rust type"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
 detail = "the library profile does not take the root numbered: it reaches Behavior::numbered, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
 
 [[refusal]]
@@ -560,6 +574,13 @@ reason = "library-root"
 route = "UR-R29"
 span = "thermo-core/Cargo.toml"
 detail = "the library profile does not take the root roomsUntilStop: it reaches Behavior::roomsUntilStop, which holds a list as an intermediate value, and the pinned code generator stores a list only in a parameter or the output buffer"
+
+[[refusal]]
+status = "open"
+reason = "library-root"
+route = "UR-R29"
+span = "thermo-core/Cargo.toml"
+detail = "the library profile does not take the root rosterChecks: it reaches the type Unit, for which the pinned library code generator renders no Rust type"
 
 [[refusal]]
 status = "open"

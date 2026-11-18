@@ -150,3 +150,15 @@ Feature: engine
     Given a caller preceding its constant and a mutual group whose member needs a later definition
     When the suite exercises UE-25
     Then dependencies precede their callers and the mutual group remains together without treating string contents as calls
+
+  @UE-26 @build
+  Scenario: Inert dependency string data does not taint figure rewrites
+    Given a dependency resource that is one string literal and mentions a tracked callee
+    When the suite exercises UE-26
+    Then inert data introduces no location reader while malformed source remains unknown and real readers remain detected
+
+  @UE-27 @build
+  Scenario: Qualified associated functions retain their acceptance roots
+    Given two owners with an associated function of the same short name
+    When the suite exercises UE-27
+    Then each qualified assertion binds its own lifted function and an unknown owner is refused

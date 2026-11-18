@@ -3665,6 +3665,10 @@ fn read_dependencies(
                     locating.read(&tree, &origin, true);
                     locating.generator = false;
                 }
+                // Some crates ship an expression resource with a .rs suffix
+                // for include!/include_str!. A lone string literal cannot
+                // define a tracked function, rename one, or invoke a macro.
+                Err(_) if syn::parse_str::<syn::LitStr>(&text).is_ok() => {}
                 Err(_) => {
                     locating
                         .unknown
@@ -5948,6 +5952,45 @@ mod tests {
     /// dependency outside the workspace, a macro called through a
     /// metavariable), each with its site refused, beside the two the rule
     /// already named and a plain call that stays placed.
+    #[test]
+    fn figures_dependency_string_resource_does_not_taint_calls_ue_26() {
+        let dir = std::env::temp_dir().join(format!("uorust-ue26-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).expect("fixture directory");
+        let resource = dir.join("resource.rs");
+        let source = "#[track_caller] pub fn entry() -> u32 { probe() }";
+        let check = |text: &str| {
+            std::fs::write(&resource, text).expect("fixture resource");
+            let mut locating = Locating::default();
+            locating.read(
+                &syn::parse_file(source).expect("caller source"),
+                "caller.rs",
+                false,
+            );
+            read_dependencies(
+                &mut locating,
+                Some(&[(dir.clone(), false)]),
+                &BTreeSet::new(),
+            );
+            locating.close(&BTreeSet::new())
+        };
+        for text in [
+            "\"probe requires a feature\"",
+            "r#\"probe: #[track_caller] fn fake() {}\"#",
+        ] {
+            assert!(
+                check(text).calls.is_none(),
+                "a literal resource is inert: {text}"
+            );
+        }
+        assert!(check("#[track_caller] pub fn probe(").calls.is_some());
+        let tracked = check(
+            "#[track_caller] pub fn probe() -> u32 { core::panic::Location::caller().column() }",
+        );
+        assert!(tracked.reading.contains("probe"));
+        assert!(tracked.reading.contains("entry"));
+        std::fs::remove_dir_all(dir).expect("clean fixture");
+    }
+
     const FIGURES_TRACKED_LIB: &str = "use core::panic::Location;\nuse far::col;\n\n\
         #[cfg_attr(all(), track_caller)]\npub fn loc1() -> u32 {\n    Location::caller().column()\n}\n\
         pub fn col1() -> u32 {\n    500 + loc1()\n}\n\n\

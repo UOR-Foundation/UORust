@@ -11533,7 +11533,14 @@ fn applied(
     let rs::RustExpr::Path(p) = &*c.func else {
         return None;
     };
-    let name = p.segments.last()?.ident.to_string();
+    // Associated functions are keyed by their owner too. A short-name
+    // lookup loses their acceptance root or binds an unrelated function.
+    let name = p
+        .segments
+        .iter()
+        .map(|s| s.ident.as_str())
+        .collect::<Vec<_>>()
+        .join("::");
     let sig = lifted.get(&name)?;
     if sig.params.len() != c.args.len() {
         return None;
@@ -11657,6 +11664,43 @@ pub(crate) fn acceptance(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn qualified_acceptance_retains_its_owner_ue_27() {
+        let lifted = BTreeMap::from([
+            (
+                "One::empty".into(),
+                Sig {
+                    name: "oneEmpty".into(),
+                    params: vec![Ty::Bool],
+                    result: Ty::Bool,
+                },
+            ),
+            (
+                "Two::empty".into(),
+                Sig {
+                    name: "twoEmpty".into(),
+                    params: vec![Ty::Bool],
+                    result: Ty::Bool,
+                },
+            ),
+        ]);
+        let check = |source: &str| {
+            let expression: syn::Expr = syn::parse_str(source).unwrap();
+            acceptance(
+                "assert",
+                &[crate::convert::expr(&expression)],
+                &lifted,
+                &Types::default(),
+            )
+        };
+        assert_eq!(check("One::empty(true)").unwrap().check, "(oneEmpty true)");
+        assert_eq!(
+            check("Two::empty(false)").unwrap().check,
+            "(twoEmpty false)"
+        );
+        assert!(check("Other::empty(true)").is_none());
+    }
 
     #[test]
     fn recursive_descent_must_name_a_callers_parameter_ue_24() {

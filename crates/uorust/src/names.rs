@@ -1424,7 +1424,7 @@ pub(crate) struct Resolver<'a> {
     /// Each trait a type implements: the type, and the trait's name.
     implemented: BTreeSet<(TypeId, String)>,
     /// The workspace's libraries by crate name: package and target.
-    libs: BTreeMap<String, (usize, usize)>,
+    libs: BTreeMap<String, Vec<(usize, usize)>>,
     /// The crates outside the workspace a path can start with.
     outside: BTreeSet<String>,
     /// The registry crates among them.
@@ -1582,7 +1582,9 @@ impl<'a> Resolver<'a> {
                 if target.kind == TargetKind::Lib {
                     resolver
                         .libs
-                        .insert(target.name.replace('-', "_"), (pkg, t));
+                        .entry(target.name.replace('-', "_"))
+                        .or_default()
+                        .push((pkg, t));
                 }
             }
             for dep in package.deps.iter().filter(|d| d.path.is_none()) {
@@ -1779,9 +1781,18 @@ impl<'a> Resolver<'a> {
     }
 
     /// A crate a path names by its first segment.
-    fn krate(&self, name: &str) -> Found {
-        if let Some(&(pkg, target)) = self.libs.get(name) {
-            return Found::Module((pkg, target, String::new()));
+    fn krate(&self, from: usize, name: &str) -> Found {
+        if let Some(libraries) = self.libs.get(name) {
+            let own: Vec<_> = libraries.iter().filter(|(pkg, _)| *pkg == from).collect();
+            let selected = match own.as_slice() {
+                [only] => Some(**only),
+                [] if libraries.len() == 1 => Some(libraries[0]),
+                _ => None,
+            };
+            return match selected {
+                Some((pkg, target)) => Found::Module((pkg, target, String::new())),
+                None => Found::Unknown,
+            };
         }
         if self.outside.contains(name) {
             return Found::Extern(vec![name.to_string()]);
@@ -1978,7 +1989,7 @@ impl<'a> Resolver<'a> {
                     return Found::Unknown;
                 };
                 rest = tail;
-                self.krate(krate)
+                self.krate(m.0, krate)
             }
             "crate" => Found::Module((m.0, m.1, String::new())),
             "self" => Found::Module(m.clone()),
@@ -2003,7 +2014,7 @@ impl<'a> Resolver<'a> {
                 Some(found) => found,
                 // Nothing the module binds: a crate, or a name of the
                 // prelude.
-                None => match self.krate(name) {
+                None => match self.krate(m.0, name) {
                     Found::Unknown => Found::Prelude(name.to_string()),
                     krate => krate,
                 },

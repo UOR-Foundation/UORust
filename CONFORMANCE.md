@@ -46,6 +46,8 @@ model does not sanction.
 | `UE-23` | `build` | A library embedding resolves crate-relative MIR implementation spans against that crate's mounted sources and explicitly library-qualified spans against the library tree, preserving body keys and refusing to borrow a same-named source file from another crate |
 | `UE-24` | `build` | The surface lifter refuses a recursive-descent parameter outside the caller's formal parameters with typed form residue, and preserves valid single-parameter descent without panicking or emitting a definition for the invalid case |
 | `UE-25` | `build` | Surface declarations are emitted after the declarations their expression calls name across source files, preserving mutually recursive groups and ignoring apparent calls inside string literals |
+| `UE-26` | `build` | A dependency resource containing only one string literal cannot define a caller-location reader and does not taint unrelated figure rewrites; malformed dependency code remains unknown and real tracked readers remain detected |
+| `UE-27` | `build` | A closed assertion calling an explicitly qualified associated function uses that function's lifted signature, preserving its owner and refusing a different owner rather than losing or misattributing the library acceptance root |
 
 ## factory
 

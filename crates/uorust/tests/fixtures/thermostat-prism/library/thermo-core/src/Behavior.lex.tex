@@ -61,13 +61,6 @@ structure{
   fields: [{name: name, type: String}, {name: reading, type: Nat}]
 }
 
-inductive{
-  name: RosterError,
-  type_parameters: [],
-  parameters: [],
-  constructors: [{name: Twice, fields: [String]}, {name: Missing, fields: [Prelude::FilePath]}]
-}
-
 structure{
   name: TupleBoolNat,
   type_parameters: [],
@@ -714,67 +707,6 @@ definition{
   parameters: [totalArg : Nat, rooms : Nat],
   result: (Option Nat),
   body: (if (rooms =? 0) then (ctor Option.none [Nat]) else (ctor Option.some [Nat] (prim remainder totalArg rooms 0 : Nat)))
-}
-
-definition{
-  name: noneTakenContains1,
-  parameters: [items1 : (List String), needle1 : String],
-  result: Bool,
-  body: (match items1
-    | List.nil => false
-    | List.cons item1 rest1 => (if (prim equal item1 needle1 : Bool) then true else (noneTakenContains1 rest1 needle1))),
-  recursive_argument: items1
-}
-
-definition{
-  name: noneTakenLoop1,
-  parameters: [items2 : (List String), state1 : Unit, taken : (List String)],
-  result: (Result Unit (Result Unit RosterError)),
-  body: (match items2
-    | List.nil => (ctor Result.ok [Unit, (Result Unit RosterError)] state1)
-    | List.cons room rest2 => (if (noneTakenContains1 taken room) then (ctor Result.error [Unit, (Result Unit RosterError)] (ctor Result.error [Unit, RosterError] (ctor RosterError.Twice room))) else (noneTakenLoop1 rest2 () taken))),
-  recursive_argument: items2
-}
-
-definition{
-  name: noneTaken,
-  parameters: [rooms : (List String), taken : (List String)],
-  result: (Result Unit RosterError),
-  body: (match (noneTakenLoop1 rooms () taken)
-    | Result.ok state2 => (ctor Result.ok [Unit, RosterError] ())
-    | Result.error value1 => value1)
-}
-
-definition{
-  name: allBookedLoop1,
-  parameters: [items1 : (List (Option String)), state1 : Unit],
-  result: (Result Unit (Result Unit RosterError)),
-  body: (match items1
-    | List.nil => (ctor Result.ok [Unit, (Result Unit RosterError)] state1)
-    | List.cons booking rest1 => (match booking
-      | Option.none => (ctor Result.error [Unit, (Result Unit RosterError)] (ctor Result.error [Unit, RosterError] (ctor RosterError.Twice "nobody")))
-      | Option.some who => (if (prim equal who "" : Bool) then (ctor Result.error [Unit, (Result Unit RosterError)] (ctor Result.error [Unit, RosterError] (ctor RosterError.Twice who))) else (allBookedLoop1 rest1 ())))),
-  recursive_argument: items1
-}
-
-definition{
-  name: allBooked,
-  parameters: [bookings : (List (Option String))],
-  result: (Result Unit RosterError),
-  body: (match (allBookedLoop1 bookings ())
-    | Result.ok state2 => (ctor Result.ok [Unit, RosterError] ())
-    | Result.error value1 => value1)
-}
-
-definition{
-  name: rosterChecks,
-  parameters: [rooms : (List String), taken : (List String), bookings : (List (Option String))],
-  result: (Result Unit RosterError),
-  body: (match (noneTaken rooms taken)
-    | Result.ok tried1 => (match (allBooked bookings)
-      | Result.ok tried3 => (ctor Result.ok [Unit, RosterError] ())
-      | Result.error error2 => (ctor Result.error [Unit, RosterError] error2))
-    | Result.error error1 => (ctor Result.error [Unit, RosterError] error1))
 }
 
 definition{

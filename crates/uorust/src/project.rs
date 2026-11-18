@@ -4512,17 +4512,43 @@ fn behavior(
         if !f.test {
             continue;
         }
-        let (sigs, axioms) = &results[r.pkg];
+        // Assertions use the same resolved callees as their Rust scope.
+        // Preserve the written path as the lookup key, including associated
+        // owners and dependency aliases, and carry that callee's axioms.
+        let mut accepted_sigs = BTreeMap::new();
+        let mut accepted_axioms = BTreeMap::new();
+        for (written, meant) in ctx.named.get(&r).into_iter().flatten() {
+            let Meant::Fn(callee) = meant else {
+                continue;
+            };
+            let Some((_, definition, _)) = notes.lifted.get(&ctx.path(*callee)) else {
+                continue;
+            };
+            let Some(name) = definition.strip_prefix(&qualified(BEHAVIOR, "")) else {
+                continue;
+            };
+            let (sigs, axioms) = &results[callee.pkg];
+            if let Some((key, sig)) = sigs.iter().find(|(_, sig)| sig.name == name) {
+                accepted_sigs.insert(written.clone(), sig.clone());
+                accepted_axioms.insert(
+                    written.clone(),
+                    axioms.get(key).cloned().unwrap_or_default(),
+                );
+            }
+        }
         for (i, (kind, args)) in syntax
             .function(&ctx.file(r).rel, r.idx)
             .asserts
             .iter()
             .enumerate()
         {
-            if let Some(accepted) = lift::acceptance(kind, args, sigs, types_of(r)) {
+            if let Some(accepted) = lift::acceptance(kind, args, &accepted_sigs, types_of(r)) {
                 let name = format!("accept{}{}", pascal(&[&ctx.package(r).name, &f.name]), i);
                 if theorems.insert(name.clone()) {
-                    let axioms = axioms.get(&accepted.callee).cloned().unwrap_or_default();
+                    let axioms = accepted_axioms
+                        .get(&accepted.callee)
+                        .cloned()
+                        .unwrap_or_default();
                     // The acceptance root: the claim as a closed Boolean
                     // definition, which a native library lists and its
                     // generated package executes (SPEC 12.6).
