@@ -291,3 +291,17 @@ Feature: engine
     When the prover generates its decrease evidence
     Then its live values share one changing loop-state parameter
     And the actual SDK proves the loop without an unbound invariant argument
+
+  @UE-45 @build
+  Scenario: Native hash collections reuse unordered carriers
+    Given standard maps and sets with default and explicit hasher types
+    When compiler-derived countdown loops transport their values
+    Then the SDK proves their unordered collection models and a workspace homonym retains its own type
+    But hasher inspection, iteration order and unsupported element types stay unlifted
+
+  @UE-46 @build
+  Scenario: Compiler-input selection preserves proof history
+    Given an SDK-decided register with proved and refused translations
+    When the prover replays one compiler body and then all compiler bodies
+    Then it retains the other selection's actual verdicts and performs zero verifier runs
+    But a live translation with a stale digest still needs actual verification

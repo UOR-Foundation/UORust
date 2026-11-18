@@ -65,6 +65,8 @@ model does not sanction.
 | `UE-42` | `build` | Native type lowering reuses lock-admitted registry carrier readings for passive values, including BigInt, BigRational, JSON and default BitVec; incorrect archive checksums and unmodeled operations remain refused |
 | `UE-43` | `build` | Native proof trials verify Behavior and its actual dependency closure through the pinned SDK, persist the SDK's structured result for machine feedback, and reuse unchanged proved and refused translation digests without new verifier calls; full-project acceptance remains a separate complete gate |
 | `UE-44` | `build` | Native loops with directly derived natural measures bundle multiple live values into one changing state argument, preserving invariant payloads in the termination context and the SDK-exact decrease obligation; the SDK still decides every decrease and overflow obligation |
+| `UE-45` | `build` | Native standard HashMap and HashSet transport reuses the source lift's unordered collection carriers without requiring a value model for the hasher parameter; hasher inspection, iteration-order observations and unsupported element types remain refused, while workspace homonyms retain their own types |
+| `UE-46` | `build` | Selecting a subset of compiler bodies preserves historical proved and refused verdicts for other selections, so returning to the full selection reuses matching digests with zero verification; a stale digest for a live translation still requires actual SDK verification, and only the frontier states current lifting eligibility |
 
 ## factory
 

@@ -352,11 +352,14 @@ pub fn prove_bounded(
         },
     )?;
     let all = candidates(&catalogue)?;
-    let live: BTreeSet<(&String, &String)> =
-        all.iter().map(|row| (&row.kappa, &row.digest)).collect();
-    register
-        .rows
-        .retain(|key, value| live.contains(&(key, &value.digest)));
+    let live: BTreeMap<&str, &str> = all
+        .iter()
+        .map(|row| (row.kappa.as_str(), row.digest.as_str()))
+        .collect();
+    register.rows.retain(|key, value| {
+        live.get(key.as_str())
+            .is_none_or(|digest| *digest == value.digest.as_str())
+    });
     let mut groups: VecDeque<Trial> = proof_batches(&trial_graph(&all), maximum)?
         .into_iter()
         .map(Trial::Only)
@@ -375,10 +378,16 @@ pub fn prove_bounded(
         };
         let mut files = crate::project_workspace(root, &opts)?;
         let all = candidates(&files)?;
-        // Rows of translations that no longer exist are dropped.
-        let live: BTreeSet<(&String, &String)> =
-            all.iter().map(|c| (&c.kappa, &c.digest)).collect();
-        register.rows.retain(|k, v| live.contains(&(k, &v.digest)));
+        // Keep decisions outside this input selection; only a different
+        // digest of a live translation invalidates its previous decision.
+        let live: BTreeMap<&str, &str> = all
+            .iter()
+            .map(|c| (c.kappa.as_str(), c.digest.as_str()))
+            .collect();
+        register.rows.retain(|key, value| {
+            live.get(key.as_str())
+                .is_none_or(|digest| *digest == value.digest.as_str())
+        });
         let on_trial: Vec<&Trialled> = all.iter().filter(|c| c.trial).collect();
         if on_trial.is_empty() {
             continue;

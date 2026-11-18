@@ -2708,6 +2708,118 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-46: narrowing the compiler view must not destroy reusable SDK decisions.
+#[test]
+fn native_verdicts_survive_compiler_input_selections_ue_46() {
+    let source = mir_fixture();
+    let all = dumped(&source, "walk");
+    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("native-selection-history");
+    let _ = std::fs::remove_dir_all(&work);
+    let selected = work.join("selected");
+    std::fs::create_dir_all(selected.join("lib-walk")).expect("selected input");
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(all.join(name), selected.join(name)).expect("compiler metadata");
+    }
+    let mut count = 0;
+    for entry in std::fs::read_dir(all.join("lib-walk")).expect("actual compiler bodies") {
+        let path = entry.expect("entry").path();
+        if path.extension().is_some_and(|x| x == "mir")
+            && std::fs::read_to_string(&path)
+                .expect("body")
+                .contains("fn through_raw(")
+        {
+            std::fs::copy(
+                &path,
+                selected
+                    .join("lib-walk")
+                    .join(path.file_name().expect("name")),
+            )
+            .expect("exact compiler bytes");
+            count += 1;
+        }
+    }
+    assert_eq!(count, 1);
+    let register = work.join("verdicts.toml");
+    std::fs::copy(source.join("lift-verdicts.toml"), &register)
+        .expect("actual committed SDK verdicts");
+    let before = verdicts(&register);
+    assert!(before
+        .rows
+        .values()
+        .any(|r| matches!(r.status, uorust::mir::verdict::Decision::Refused(_))));
+    for inputs in [&all, &selected, &all] {
+        let replay = uorust::mir::prove_bounded(
+            &source,
+            &options("walk"),
+            inputs,
+            &register,
+            &work.join("trial"),
+            16,
+        )
+        .expect("cached selection replay");
+        assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+        assert_eq!(
+            verdicts(&register).rows,
+            before.rows,
+            "selection discarded reusable proof history"
+        );
+    }
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-45: transport does not inspect a hash builder or invent iteration order.
+#[test]
+fn native_hash_collections_reuse_unordered_carriers_ue_45() {
+    let dir = scratch("native-hash-carriers", &[
+        ("Cargo.toml", "[package]\nname = \"hash_carriers\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "use std::collections::{HashMap, HashSet};\npub struct Seed { pub state: u64 }\npub fn map(mut n: u8, x: HashMap<u8, u16>) -> HashMap<u8, u16> { while n > 0 { n -= 1; } x }\npub fn set(mut n: u8, x: HashSet<u8>) -> HashSet<u8> { while n > 0 { n -= 1; } x }\npub fn custom_map(mut n: u8, x: HashMap<u8, u16, Seed>) -> HashMap<u8, u16, Seed> { while n > 0 { n -= 1; } x }\npub fn custom_set(mut n: u8, x: HashSet<u8, Seed>) -> HashSet<u8, Seed> { while n > 0 { n -= 1; } x }\npub fn inspect(mut n: u8, x: HashMap<u8, u16, Seed>) -> u64 { while n > 0 { n -= 1; } x.hasher().state }\npub fn ordered(mut n: u8, x: HashSet<u8>) -> Vec<u8> { while n > 0 { n -= 1; } x.into_iter().collect() }\npub fn unread(mut n: u8, x: HashMap<u8, std::cell::UnsafeCell<u8>, Seed>) -> HashMap<u8, std::cell::UnsafeCell<u8>, Seed> { while n > 0 { n -= 1; } x }\npub mod shadow { pub struct HashSet { pub flag: bool } pub fn transport(mut n: u8, x: HashSet) -> HashSet { while n > 0 { n -= 1; } x } }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock source");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-hash-carriers");
+    let mut opts = options("hash_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("collection projection");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in [
+        "map",
+        "set",
+        "custom_map",
+        "custom_set",
+        "shadow::transport",
+    ] {
+        assert!(
+            listing.contains(&format!("hash_carriers::{name}\"")),
+            "missing native collection {name}: {listing}"
+        );
+    }
+    for name in ["inspect", "ordered", "unread"] {
+        assert!(
+            !listing.contains(&format!("hash_carriers::{name}\"")),
+            "unmodeled observation was admitted: {name}"
+        );
+    }
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("hash_carriers"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        5,
+    )
+    .expect("actual collection proofs");
+    assert_eq!((proof.proved, proof.refused), (5, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-44: one changing state keeps loop invariants in the termination context.
 #[test]
 fn native_loop_state_preserves_invariants_in_evidence_ue_44() {

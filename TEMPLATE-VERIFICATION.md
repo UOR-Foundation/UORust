@@ -32,6 +32,24 @@ The complete gate is not represented as passed by these checks. The prior full
 run's self-lift alias regression was repaired separately, and the translator's
 UE-18 certification boundary still requires complete release acceptance.
 
+## Collection transport and proof-history reuse (UE-45 and UE-46)
+
+`native_hash_collections_reuse_unordered_carriers_ue_45` initially found no
+native standard-map candidate. Its repair proves five compiler-derived
+functions through the SDK: default and custom-hasher maps and sets, plus a
+workspace homonym. Hasher inspection, iteration order and an unsupported
+element type remain refused. This adds passive carriers, without a model for
+hash-builder operations.
+
+`native_verdicts_survive_compiler_input_selections_ue_46` initially reduced
+the actual eleven-row fixture register to one row when given one compiler
+body. It now retains all proved and refused rows across full, single-body and
+full selections, with zero verifier runs throughout. A different digest for a
+live translation still invalidates its previous decision; the policy-hint
+regression requires actual SDK verification after that change. Historical
+cache size is not a count of currently lifted functions: the current frontier
+remains the authority for eligibility.
+
 This repository's `just vv` instantiates the universal verification policy in
 `VERIFICATION.md` for the template itself, which is a Prism application: the
 template contract checker in `app/`.

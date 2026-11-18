@@ -45,7 +45,9 @@ pub struct Verdict {
 /// Every verdict, by the κ of its function.
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct Verdicts {
-    /// Rows by κ.
+    /// Recorded decisions by κ, including currently unselected functions.
+    /// Admission always matches the translation digest; the frontier, not
+    /// this historical cache's row count, states current lifting eligibility.
     pub rows: BTreeMap<String, Verdict>,
 }
 

@@ -321,3 +321,15 @@ id = "UE-44"
 level = "build"
 suite = "engine"
 statement = "Native loops with directly derived natural measures bundle multiple live values into one changing state argument, preserving invariant payloads in the termination context and the SDK-exact decrease obligation; the SDK still decides every decrease and overflow obligation"
+
+[[id]]
+id = "UE-45"
+level = "build"
+suite = "engine"
+statement = "Native standard HashMap and HashSet transport reuses the source lift's unordered collection carriers without requiring a value model for the hasher parameter; hasher inspection, iteration-order observations and unsupported element types remain refused, while workspace homonyms retain their own types"
+
+[[id]]
+id = "UE-46"
+level = "build"
+suite = "engine"
+statement = "Selecting a subset of compiler bodies preserves historical proved and refused verdicts for other selections, so returning to the full selection reuses matching digests with zero verification; a stale digest for a live translation still requires actual SDK verification, and only the frontier states current lifting eligibility"

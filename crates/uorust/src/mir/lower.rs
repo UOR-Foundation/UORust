@@ -7601,6 +7601,18 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
     // core's paths there without the crate.
     let std = segs.len() > 1 && (matches!(segs[0], "std" | "core" | "alloc") || types.core);
     match (name, raw.as_slice()) {
+        // The source lift's unordered carriers do not expose the hash
+        // builder, its storage layout or an iteration-order operation.
+        ("HashMap", [key, value] | [key, value, _]) if std => {
+            return Ok(Ty::Map(
+                Box::new(ty(key, types)?),
+                Box::new(ty(value, types)?),
+                false,
+            ));
+        }
+        ("HashSet", [element] | [element, _]) if std => {
+            return Ok(Ty::Set(Box::new(ty(element, types)?), false));
+        }
         // In core's scope a signature prints it by its name alone.
         ("ControlFlow", [b, c]) if std || types.core => {
             return Ok(Ty::Outcome(
