@@ -175,3 +175,10 @@ Feature: engine
     When the prover plans and executes its trials
     Then every eligible translation is scheduled once after its dependencies, recursive components remain together, and unchanged proved verdicts need no verifier rerun
     But zero budgets, dangling dependencies and a recursive component larger than the budget are refused before verification
+
+  @UE-30 @build
+  Scenario: An admitted registered alias keeps its model through registry expansion
+    Given a package using the locked BigRational alias and its registered BigInt dependency
+    When its source is projected with registry aliases available
+    Then its identity function lifts as the stored integer pair
+    And a mismatched rational archive checksum leaves that function unlifted

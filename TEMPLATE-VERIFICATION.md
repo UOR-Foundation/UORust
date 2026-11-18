@@ -318,3 +318,27 @@ commits and against mirrors served with `PRISM_TEMPLATE_RAW`:
 | a mirror's lock names a file its frame does not | refused: the lock's list against the frame's; nothing written |
 | a mirror's frame and lock both add `.github/workflows/x.yml` | refused: `names files outside the page`; nothing written |
 | an untouched mirror | pinned |
+
+## Stable MIR identities and bounded proof work
+
+UE-28 uses actual compiler MIR for three modules declaring the same method
+name. The earlier allocator retained only two candidates; the repaired
+allocator retains all three and preserves the last method's declaration when
+only that method's dump is selected.
+
+UE-29 plans trials by dependency components. The negative cases reject a zero
+budget, an absent dependency, and a recursive component larger than the budget.
+Its SDK regression verifies three countdown methods in single-function trials;
+each first discovers its actual axiom set and then verifies that declaration.
+A second run must reuse the unchanged proved digests without a verifier run.
+
+UE-30 combines locked-source number readings with generic registry aliases.
+Before the repair, expansion of `BigRational` to `Ratio<BigInt>` erased its
+registered model and the identity-function assertion failed. The repaired
+projection lifts that identity as the stored integer pair. Replacing the
+locked rational archive checksum with zeros must leave it unlifted.
+
+The development profile optimizes the projector itself, as it already does
+its certified translator. The SDK gate still runs every check with debug
+assertions and overflow checking enabled. This removes repeated unoptimized
+whole-workspace traversals from proof and integration tests.

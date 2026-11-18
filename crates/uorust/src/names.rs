@@ -313,6 +313,78 @@ pub(crate) struct TypeDecl {
     /// How many type parameters it takes.
     generics: usize,
     vis: Vis,
+    /// What a struct or enum declares of its values.
+    shape: Shape,
+}
+
+/// Whether an item of visibility `vis` declared in module `at` may be
+/// named from module `from`: `pub` and `pub(crate)` anywhere in the crate,
+/// a private item in its own module and the modules inside it. Any other
+/// restriction (`pub(super)`, `pub(in ..)`), and an unknown visibility,
+/// is read as not visible, which keeps what depends on it open.
+fn visible_from(vis: Option<&Vis>, at: &ModKey, from: &ModKey) -> bool {
+    let same_crate = at.0 == from.0 && at.1 == from.1;
+    match vis {
+        Some(Vis::Public) => true,
+        Some(Vis::Crate) => same_crate,
+        Some(Vis::Private) => {
+            same_crate
+                && (at.2.is_empty() || from.2 == at.2 || from.2.starts_with(&format!("{}::", at.2)))
+        }
+        _ => false,
+    }
+}
+
+/// What a struct or enum declaration writes of its values beyond its name:
+/// the names of its type parameters, a struct's fields (a tuple struct's
+/// by position, `0` first) and the derives its attributes name.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Shape {
+    params: Vec<String>,
+    fields: Vec<(String, RustType)>,
+    /// Who may name each field, by position in `fields`.
+    field_vis: Vec<Vis>,
+    derives: Vec<String>,
+}
+
+impl Shape {
+    fn of(
+        generics: &syn::Generics,
+        fields: Option<&syn::Fields>,
+        attrs: &[syn::Attribute],
+    ) -> Shape {
+        let field_vis = fields
+            .into_iter()
+            .flatten()
+            .map(|f| Vis::read(&f.vis))
+            .collect();
+        let fields: Vec<(String, RustType)> = fields
+            .into_iter()
+            .flatten()
+            .enumerate()
+            .map(|(i, f)| {
+                let name = f
+                    .ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string);
+                (name, crate::convert::ty(&f.ty))
+            })
+            .collect();
+        let mut derives = Vec::new();
+        for attr in attrs.iter().filter(|a| a.path().is_ident("derive")) {
+            let list =
+                attr.parse_args_with(Punctuated::<syn::Path, syn::Token![,]>::parse_terminated);
+            for path in list.into_iter().flatten() {
+                derives.push(idents(&path).join("::"));
+            }
+        }
+        Shape {
+            params: type_params(generics),
+            fields,
+            field_vis,
+            derives,
+        }
+    }
 }
 
 /// An `impl` block: its self type, the trait it implements by its last
@@ -385,6 +457,8 @@ pub(crate) enum Hint {
     /// variant.
     Ctor(Vec<String>),
     Tuple(Vec<Hint>),
+    /// `e.name`, or `e.0` by its position.
+    Field(Box<Hint>, String),
 }
 
 /// What a call calls.
@@ -588,7 +662,8 @@ fn idents(path: &syn::Path) -> Vec<String> {
     out
 }
 
-fn join(module: &str, name: &str) -> String {
+/// A module's path inside its crate joined with a path below it.
+pub(crate) fn join(module: &str, name: &str) -> String {
     match (module.is_empty(), name.is_empty()) {
         (true, _) => name.to_string(),
         (_, true) => module.to_string(),
@@ -686,7 +761,18 @@ impl FileNames {
                     kind,
                     generics,
                     vis: Vis::read(vis),
+                    shape: Shape::default(),
                 });
+        };
+        // The shape of the declaration `declare` pushed last.
+        let shaped = |scope: &mut Scope, name: &syn::Ident, shape: Shape| {
+            if let Some(decl) = scope
+                .types
+                .get_mut(&name.to_string())
+                .and_then(|d| d.last_mut())
+            {
+                decl.shape = shape;
+            }
         };
         for item in list {
             match item {
@@ -754,11 +840,14 @@ impl FileNames {
                     let variants = e.variants.iter().map(|v| v.ident.to_string()).collect();
                     let generics = type_params(&e.generics).len();
                     declare(&mut scope, &e.ident, Kind::Enum(variants), generics, &e.vis);
+                    shaped(&mut scope, &e.ident, Shape::of(&e.generics, None, &e.attrs));
                     self.site(&e.ident, module, under(&e.attrs));
                 }
                 syn::Item::Struct(s) => {
                     let generics = type_params(&s.generics).len();
                     declare(&mut scope, &s.ident, Kind::Struct, generics, &s.vis);
+                    let shape = Shape::of(&s.generics, Some(&s.fields), &s.attrs);
+                    shaped(&mut scope, &s.ident, shape);
                     self.site(&s.ident, module, under(&s.attrs));
                 }
                 syn::Item::Union(u) => {
@@ -1237,6 +1326,13 @@ impl Walker {
                 }
             }
             syn::Expr::Try(t) => Hint::Try(Box::new(self.expr(&t.expr))),
+            syn::Expr::Field(f) => {
+                let base = Box::new(self.expr(&f.base));
+                match &f.member {
+                    syn::Member::Named(name) => Hint::Field(base, name.to_string()),
+                    syn::Member::Unnamed(index) => Hint::Field(base, index.index.to_string()),
+                }
+            }
             syn::Expr::Tuple(t) => Hint::Tuple(t.elems.iter().map(|x| self.expr(x)).collect()),
             syn::Expr::Block(b) => self.block(&b.block),
             syn::Expr::Unsafe(u) => self.block(&u.block),
@@ -1374,6 +1470,65 @@ const INTEGER_FALLBACK: &str = "i32";
 const FLOAT_FALLBACK: &str = "f64";
 
 /// The crates every build has without a manifest naming them.
+/// The type and trait names the standard prelude of some edition binds
+/// (`std::prelude::rust_2015` to `rust_2024`), and the primitive types: a
+/// name a glob may bind in place of the prelude's.
+const PRELUDE_TYPES: &[&str] = &[
+    "AsMut",
+    "AsRef",
+    "Box",
+    "Clone",
+    "Copy",
+    "Default",
+    "DoubleEndedIterator",
+    "Drop",
+    "Eq",
+    "ExactSizeIterator",
+    "Extend",
+    "Fn",
+    "FnMut",
+    "FnOnce",
+    "From",
+    "FromIterator",
+    "Future",
+    "Into",
+    "IntoFuture",
+    "IntoIterator",
+    "Iterator",
+    "Option",
+    "Ord",
+    "PartialEq",
+    "PartialOrd",
+    "Result",
+    "Send",
+    "Sized",
+    "String",
+    "Sync",
+    "ToOwned",
+    "ToString",
+    "TryFrom",
+    "TryInto",
+    "Unpin",
+    "Vec",
+    "bool",
+    "char",
+    "f32",
+    "f64",
+    "i128",
+    "i16",
+    "i32",
+    "i64",
+    "i8",
+    "isize",
+    "str",
+    "u128",
+    "u16",
+    "u32",
+    "u64",
+    "u8",
+    "usize",
+];
+
 const SYSROOT: [&str; 5] = ["std", "core", "alloc", "proc_macro", "test"];
 
 /// What a path names.
@@ -1673,6 +1828,13 @@ impl<'a> Resolver<'a> {
         read.fns.get(&(fact.span.line, fact.name.clone()))
     }
 
+    /// The module a function stands in, inside its target: its file's
+    /// module and the inline modules around it (`a::b` of `mod b` inside
+    /// `mod a` of the crate root).
+    pub(crate) fn module_path(&self, f: FnId) -> String {
+        self.module(f).2
+    }
+
     /// The module a function stands in.
     fn module(&self, f: FnId) -> ModKey {
         let file = self.file(f);
@@ -1897,7 +2059,7 @@ impl<'a> Resolver<'a> {
             .filter(|u| hold(&u.cfg, config) != Some(false))
             .collect();
         for binding in if live.is_empty() { &bound } else { &live } {
-            match self.path(x, &binding.path, value, seen) {
+            match self.use_path(x, &binding.path, value, seen) {
                 // The binding names nothing in this namespace.
                 Found::Absent => {}
                 one => add(one),
@@ -1968,6 +2130,36 @@ impl<'a> Resolver<'a> {
             Found::Fn((p, t, declared), item) if (p, t) == (pkg, target) => Some((declared, item)),
             _ => None,
         }
+    }
+
+    /// What a `use` path names, read in module `x`. Its first segment,
+    /// where nothing the module declares or binds by a `use` has the name,
+    /// is the crate of that name where there is one, whatever the module's
+    /// globs import: a glob that bound the name too would make the `use`
+    /// ambiguous, which rustc rejects (E0659, a glob import against the
+    /// extern prelude during import resolution), so in a program that
+    /// compiles no glob changes what the path names.
+    fn use_path(
+        &self,
+        x: &ModKey,
+        segments: &[String],
+        value: bool,
+        seen: &mut Vec<(ModKey, String, bool)>,
+    ) -> Found {
+        if let (Some(first), Some(scope)) = (segments.first(), self.scope(x)) {
+            let special = matches!(first.as_str(), "" | "crate" | "self" | "super" | "Self");
+            let bound = scope.types.contains_key(first)
+                || scope.values.contains_key(first)
+                || scope.mods.contains(first)
+                || scope.uses.iter().any(|u| &u.name == first);
+            if !special && !bound && !matches!(self.krate(x.0, first), Found::Unknown) {
+                let rooted: Vec<String> = std::iter::once(String::new())
+                    .chain(segments.iter().cloned())
+                    .collect();
+                return self.path(x, &rooted, value, seen);
+            }
+        }
+        self.path(x, segments, value, seen)
     }
 
     /// What a path names, read in module `m`: the last segment as a value
@@ -2492,6 +2684,9 @@ impl<'a> Resolver<'a> {
 
     /// What a method call calls, by the type its receiver is written with.
     fn method_call(&self, caller: FnId, name: &str, receiver: &Ty, args: &[Ty]) -> Outcome {
+        if payload(name, receiver).is_some() {
+            return Outcome::Outside;
+        }
         let mut of = receiver;
         while let Ty::Ref(_, inner) = of {
             of = inner;
@@ -2537,6 +2732,12 @@ impl<'a> Resolver<'a> {
             Hint::Ref(mutable, inner) => Ty::Ref(*mutable, Box::new(of(inner))),
             Hint::Deref(inner) => match of(inner) {
                 Ty::Ref(_, to) => *to,
+                // `*` of a `Box<T>` is the box's `T`: the language's own
+                // dereference of a box (the Rust reference, "The
+                // dereference operator"), which no `Deref` impl changes.
+                Ty::Named(id, mut args) if boxes(&id) && args.len() == 1 => {
+                    args.pop().unwrap_or(Ty::Open)
+                }
                 _ => Ty::Open,
             },
             Hint::This => reading.this.clone().unwrap_or(Ty::Open),
@@ -2546,8 +2747,131 @@ impl<'a> Resolver<'a> {
                 Ty::Named(id, args) if unwraps(&id) => args.first().cloned().unwrap_or(Ty::Open),
                 _ => Ty::Open,
             },
+            // A struct literal or value path whose head the body itself
+            // declares (`struct W { .. }` inside the function) names the
+            // body's item, which shadows the module's: it stays open.
+            Hint::Ctor(segments)
+                if segments.first().is_some_and(|head| {
+                    self.names(caller).is_some_and(|n| n.rebound.contains(head))
+                }) =>
+            {
+                Ty::Open
+            }
             Hint::Ctor(segments) => self.constructed(reading, segments),
             Hint::Tuple(items) => Ty::Tuple(items.iter().map(of).collect()),
+            Hint::Field(base, name) => self.field(&of(base), name, &reading.module),
+        }
+    }
+
+    /// The type a method call outside the workspace returns, where the
+    /// standard library's definition decides it from the receiver's type:
+    /// a payload method of `Option` or `Result` (see [`payload`]), and
+    /// `clone` of a reference to a type of the workspace that derives the
+    /// standard `Clone`. For `r.clone()` with `r: &T`, method lookup tries
+    /// the receiver type `&T` first, where `<T as Clone>::clone(&self)` is
+    /// found; a method of another trait with that receiver type would make
+    /// the call ambiguous, which rustc rejects (E0034), and the workspace
+    /// declares no `clone` of `T` (the call is outside it). `Clone` of
+    /// `&T` itself (`&&T` receivers) is not this rule's.
+    fn outside_result(&self, name: &str, receiver: &Ty, args: &[Ty]) -> Ty {
+        if let Some(ty) = payload(name, receiver) {
+            return ty;
+        }
+        let Ty::Ref(_, of) = receiver else {
+            return Ty::Open;
+        };
+        match (name, args, of.as_ref()) {
+            ("clone", [], Ty::Named(TypeId::Local(module, ty), _))
+                if self.derives_clone(module, ty) =>
+            {
+                (**of).clone()
+            }
+            _ => Ty::Open,
+        }
+    }
+
+    /// Whether the one declaration of `ty` in `module` derives the standard
+    /// library's `Clone`: by the prelude's name, which nothing the module
+    /// binds may shadow, or by its path. The declaration takes no type
+    /// parameter: `derive(Clone)` of `C<T>` implements `Clone` only where
+    /// `T: Clone` (the standard library's documentation of the derive),
+    /// so `C<D>` with `D` not `Clone` is not `Clone` and `c.clone()` of a
+    /// `&C<D>` is `<&C<D> as Clone>::clone`, a reference.
+    fn derives_clone(&self, module: &ModKey, ty: &str) -> bool {
+        let decls = self
+            .scope(module)
+            .and_then(|s| s.types.get(ty))
+            .map(Vec::as_slice)
+            .unwrap_or(&[]);
+        let [decl] = decls else {
+            return false;
+        };
+        if decl.generics != 0 || !decl.shape.params.is_empty() {
+            return false;
+        }
+        decl.shape.derives.iter().any(|d| {
+            let segments: Vec<String> = d.split("::").map(str::to_string).collect();
+            match self.path(module, &segments, false, &mut Vec::new()) {
+                Found::Prelude(name) => name == "Clone",
+                Found::Extern(path) => {
+                    matches!(path.as_slice(), [k, m, n] if (k == "std" || k == "core") && m == "clone" && n == "Clone")
+                }
+                _ => false,
+            }
+        })
+    }
+
+    /// The type of field `name` of a value of type `of`. A field
+    /// expression dereferences its operand's references until it reaches a
+    /// type with the field (the Rust reference, "Field access
+    /// expressions"); a reference has no fields, so the first type that is
+    /// not one decides it. A tuple's field is its element; a struct of the
+    /// workspace declared once has the field's type as it is written in the
+    /// declaration, with the struct's arguments for its parameters. A type
+    /// without the field (reached through a `Deref` impl) stays open, and
+    /// so does a field the expression's module may not name: field lookup
+    /// skips a field that is not visible there and goes on through
+    /// `Deref` (the Rust reference, "Field access expressions"), so a
+    /// private field read from outside its module is another field.
+    fn field(&self, of: &Ty, name: &str, from: &ModKey) -> Ty {
+        let mut of = of;
+        while let Ty::Ref(_, inner) = of {
+            of = inner;
+        }
+        match of {
+            Ty::Tuple(items) => name
+                .parse::<usize>()
+                .ok()
+                .and_then(|i| items.get(i).cloned())
+                .unwrap_or(Ty::Open),
+            Ty::Named(TypeId::Local(module, ty), args) => {
+                let decls = self
+                    .scope(module)
+                    .and_then(|s| s.types.get(ty))
+                    .map(Vec::as_slice)
+                    .unwrap_or(&[]);
+                let [decl] = decls else {
+                    return Ty::Open;
+                };
+                if !matches!(decl.kind, Kind::Struct) || decl.shape.params.len() != args.len() {
+                    return Ty::Open;
+                }
+                let Some(at) = decl.shape.fields.iter().position(|(n, _)| n == name) else {
+                    return Ty::Open;
+                };
+                let written = &decl.shape.fields[at].1;
+                if !visible_from(decl.shape.field_vis.get(at), module, from) {
+                    return Ty::Open;
+                }
+                let reading = Reading {
+                    module: module.clone(),
+                    generics: &decl.shape.params,
+                    this: None,
+                };
+                let ty = self.ty(&reading, written, self.aliases);
+                substituted(&ty, &decl.shape.params, args)
+            }
+            _ => Ty::Open,
         }
     }
 
@@ -2572,7 +2896,12 @@ impl<'a> Resolver<'a> {
                 } => self.path_call(f, &reading, segments, qself, &args),
                 Callee::Method { name, receiver } => {
                     let receiver = self.hint(f, &reading, receiver, &done);
-                    (self.method_call(f, name, &receiver, &args), Ty::Open)
+                    let outcome = self.method_call(f, name, &receiver, &args);
+                    let ty = match outcome {
+                        Outcome::Outside => self.outside_result(name, &receiver, &args),
+                        _ => Ty::Open,
+                    };
+                    (outcome, ty)
                 }
                 // A closure or a body-local function: no fact of the
                 // workspace, and nothing admission resolves by name.
@@ -2602,18 +2931,264 @@ impl<'a> Resolver<'a> {
         )
     }
 
+    /// What a function's own module scope binds itself, and whether it may
+    /// bring a trait of a crate outside the workspace into scope: the names
+    /// its module declares (modules, types, functions) or a `use` of it
+    /// binds, with those the body binds anew; and whether a `use` or a glob
+    /// of the module names a path that starts neither at the standard
+    /// library, nor in the crate (`crate`, `self`, `super`, a module or type
+    /// of the module), nor at a package of the workspace, and is not a
+    /// registered crate's type path. A path of a workspace package is
+    /// inside: its traits are the workspace's own.
+    pub(crate) fn scope_binding(&self, f: FnId) -> (BTreeSet<String>, bool) {
+        let module = self.module(f);
+        let mut local = BTreeSet::new();
+        let mut outside = false;
+        let packages: BTreeSet<String> = self
+            .ws
+            .packages
+            .iter()
+            .map(|p| p.name.replace('-', "_"))
+            .collect();
+        if let Some(scope) = self.scope(&module) {
+            local.extend(scope.mods.iter().cloned());
+            local.extend(scope.types.keys().cloned());
+            local.extend(scope.values.keys().cloned());
+            local.extend(scope.uses.iter().map(|u| u.name.clone()));
+            let inside = |path: &[String]| {
+                let path = match path.first() {
+                    Some(first) if first.is_empty() => &path[1..],
+                    _ => path,
+                };
+                // A registered crate's type (`num_bigint::BigInt`) is a
+                // type its crate's own source declares, not a trait.
+                let registered = crate::registered::reading(&path.join("::")).is_some();
+                registered
+                    || path.first().is_some_and(|head| {
+                        ["std", "core", "alloc", "crate", "self", "super"].contains(&head.as_str())
+                            || scope.mods.contains(head)
+                            || scope.types.contains_key(head)
+                            || packages.contains(head)
+                    })
+            };
+            outside = scope.uses.iter().any(|u| !inside(&u.path))
+                || scope.globs.iter().any(|g| !inside(&g.path));
+        }
+        if let Some(names) = self.names(f) {
+            local.extend(names.rebound.iter().cloned());
+        }
+        (local, outside)
+    }
+
+    /// The traits, by the last segment of their path, that some `impl` of
+    /// the workspace implements for a type other than a struct, enum or
+    /// union the workspace declares under that name: a type parameter, a
+    /// reference, an alias, a primitive, a type of another crate. Only such
+    /// a trait can give a method to a float, a ratio or a type of the
+    /// standard library; every `impl` of a trait the workspace declares
+    /// is in the workspace (an `impl` may stand only where its trait or
+    /// its type is local, and no crate the workspace depends on depends on
+    /// it). An `impl` inside a function body is not read here.
+    pub(crate) fn foreign_impl_traits(&self) -> BTreeSet<String> {
+        let mut declared: BTreeSet<&str> = BTreeSet::new();
+        for key in self.modules.keys() {
+            if let Some(scope) = self.scope(key) {
+                for (name, decls) in &scope.types {
+                    if decls
+                        .iter()
+                        .all(|d| matches!(d.kind, Kind::Struct | Kind::Enum(_) | Kind::Union))
+                    {
+                        declared.insert(name.as_str());
+                    }
+                }
+            }
+        }
+        let mut out = BTreeSet::new();
+        for key in self.modules.keys() {
+            let Some(scope) = self.scope(key) else {
+                continue;
+            };
+            for imp in &scope.impls {
+                let Some(name) = &imp.trait_name else {
+                    continue;
+                };
+                let local = match &imp.self_ty.kind {
+                    crate::ast::TypeKind::Path { qself: false, path } => {
+                        path.segments.last().is_some_and(|last| {
+                            let ident = last.ident.as_str();
+                            declared.contains(ident)
+                                && !imp.generics.iter().any(|g| g == ident)
+                                && !crate::lift::PRIMITIVE_TYPES.contains(&ident)
+                        })
+                    }
+                    _ => false,
+                };
+                if !local {
+                    out.insert(name.clone());
+                }
+            }
+        }
+        out
+    }
+
+    /// Whether any module of a package binds `name` itself: declares a
+    /// module, type or function of it, or a `use` of it or of a function
+    /// body binds it. A relative path whose head is such a name may start
+    /// there rather than at the crate of that name.
+    pub(crate) fn package_binds(&self, pkg: usize, name: &str) -> bool {
+        let in_scopes = self.modules.keys().filter(|k| k.0 == pkg).any(|m| {
+            self.scope(m).is_some_and(|s| {
+                s.mods.contains(name)
+                    || s.types.contains_key(name)
+                    || s.values.contains_key(name)
+                    || s.uses.iter().any(|u| u.name == name)
+            })
+        });
+        let in_bodies = self.ws.packages[pkg].files.iter().any(|file| {
+            self.syntax
+                .names
+                .files
+                .get(&file.rel)
+                .is_some_and(|names| names.fns.values().any(|n| n.rebound.contains(name)))
+        });
+        in_scopes || in_bodies
+    }
+
     /// The bare type names a function's module binds to a type of a
     /// registry crate, each with the crate: `Value` of `use serde_json::Value`.
     pub(crate) fn registry_types(&self, f: FnId) -> BTreeMap<String, String> {
-        let module = self.module(f);
+        self.registry_paths(&self.module(f))
+            .into_iter()
+            .filter_map(|(name, to)| Some((name, to.first()?.clone())))
+            .collect()
+    }
+
+    /// The bare names a source file binds to one of `paths` (each a path
+    /// through a registry crate, `num_bigint::BigInt`), each with its path,
+    /// for a reading that holds across the whole file.
+    ///
+    /// A name is kept only where every module of the file (its own and each
+    /// inline `mod`) either resolves the bare name to that same path or
+    /// binds nothing of it (`Prelude`, `Absent`: the name, not being of the
+    /// prelude, cannot be written there to mean a type). A module that
+    /// declares a type of the name, binds it to another path, or may bind it
+    /// through a glob of an outside crate (`Outside`) drops the name: Rust
+    /// resolves a bare name per module, and the binding read file-wide must
+    /// be the one every module of the file would give.
+    pub(crate) fn registry_bindings(
+        &self,
+        pkg: usize,
+        fi: usize,
+        paths: &[String],
+    ) -> BTreeMap<String, String> {
+        let modules: Vec<&ModKey> = self
+            .modules
+            .iter()
+            .filter(|(key, (file, _))| key.0 == pkg && *file == fi)
+            .map(|(key, _)| key)
+            .collect();
+        let mut candidates = BTreeMap::new();
+        for m in &modules {
+            for (name, to) in self.registry_paths(m) {
+                let to = to.join("::");
+                if paths.contains(&to) {
+                    candidates.insert(name, to);
+                }
+            }
+        }
+        candidates.retain(|name, to| {
+            modules.iter().all(|m| {
+                match self.path(m, std::slice::from_ref(name), false, &mut Vec::new()) {
+                    Found::Extern(at) => at.join("::") == *to,
+                    Found::Prelude(_) | Found::Absent => true,
+                    _ => false,
+                }
+            })
+        });
+        candidates
+    }
+
+    /// The bare names an inline module of a file (`""` for the file's
+    /// own) binds by a `use` to an item of a registry crate, each with the
+    /// full path the binding names: `BigX` of `use big::BigX` reads
+    /// `big::BigX`. A `use` gives the name its meaning in its module, so
+    /// the name is that path wherever the module writes it bare.
+    pub(crate) fn inline_registry_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+    ) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let module = (pkg, source.target, join(&source.module, inline));
+        self.registry_paths(&module)
+            .into_iter()
+            .map(|(name, to)| (name, to.join("::")))
+            .collect()
+    }
+
+    /// Of `written`, the bare names a file writes, those only a glob of a
+    /// registry crate can bind in its inline module `inline`, each with
+    /// the path the glob gives it: in a module that neither declares nor
+    /// imports the name, whose globs all import one module of one registry
+    /// crate (`use big::prelude::*`), a name the standard prelude does not
+    /// bind is that module's item, the one binding the language leaves it.
+    /// A name the prelude binds may be the glob's or the prelude's, and
+    /// stays unread.
+    pub(crate) fn glob_paths(
+        &self,
+        pkg: usize,
+        file: usize,
+        inline: &str,
+        written: &BTreeSet<String>,
+    ) -> BTreeMap<String, String> {
+        let source = &self.ws.packages[pkg].files[file];
+        let module = (pkg, source.target, join(&source.module, inline));
         let Some(scope) = self.scope(&module) else {
             return BTreeMap::new();
         };
-        // The names the module's own `use` binds, and those of the modules
-        // of the workspace it imports whole.
+        let globbed: BTreeSet<Vec<String>> = scope
+            .globs
+            .iter()
+            .map(
+                |g| match self.use_path(&module, &g.path, false, &mut Vec::new()) {
+                    Found::Extern(to) if to.first().is_some_and(|k| self.registry.contains(k)) => {
+                        to
+                    }
+                    _ => Vec::new(),
+                },
+            )
+            .collect();
+        let [from] = globbed.iter().collect::<Vec<_>>()[..] else {
+            return BTreeMap::new();
+        };
+        if from.is_empty() {
+            return BTreeMap::new();
+        }
+        written
+            .iter()
+            .filter(|n| !PRELUDE_TYPES.contains(&n.as_str()))
+            .filter(|n| {
+                self.path(&module, std::slice::from_ref(*n), false, &mut Vec::new())
+                    == Found::Outside
+            })
+            .map(|n| (n.clone(), format!("{}::{n}", from.join("::"))))
+            .collect()
+    }
+
+    /// The bare names a module's `use` binds to an item of a registry
+    /// crate, and those of the modules of the workspace it imports whole,
+    /// each with the path it names, crate first, as the resolver follows
+    /// it: one reading of a module's `use` bindings for
+    /// [`Self::registry_types`], [`Self::registry_bindings`] (file-wide)
+    /// and [`Self::inline_registry_paths`] (one inline module).
+    fn registry_paths(&self, module: &ModKey) -> BTreeMap<String, Vec<String>> {
+        let Some(scope) = self.scope(module) else {
+            return BTreeMap::new();
+        };
         let mut names: BTreeSet<&str> = scope.uses.iter().map(|u| u.name.as_str()).collect();
         for glob in &scope.globs {
-            if let Found::Module(y) = self.path(&module, &glob.path, false, &mut Vec::new()) {
+            if let Found::Module(y) = self.path(module, &glob.path, false, &mut Vec::new()) {
                 if let Some(imported) = self.scope(&y) {
                     names.extend(imported.uses.iter().map(|u| u.name.as_str()));
                 }
@@ -2622,14 +3197,154 @@ impl<'a> Resolver<'a> {
         let mut out = BTreeMap::new();
         for name in names {
             let path = [name.to_string()];
-            if let Found::Extern(to) = self.path(&module, &path, false, &mut Vec::new()) {
-                if let Some(krate) = to.first().filter(|k| self.registry.contains(*k)) {
-                    out.insert(name.to_string(), krate.clone());
+            if let Found::Extern(to) = self.path(module, &path, false, &mut Vec::new()) {
+                if to.first().is_some_and(|k| self.registry.contains(k)) {
+                    out.insert(name.to_string(), to);
                 }
             }
         }
         out
     }
+}
+
+/// The inherent methods of the standard library's `Option<T>` and
+/// `Result<T, E>` that take `self` by value and return one of the type's
+/// arguments, each with that argument's position (core's `option.rs` and
+/// `result.rs`; the tool's core register records each as an inherent
+/// `core::option::Option::name` or `core::result::Result::name`).
+const PAYLOAD_METHODS: [(&str, usize); 7] = [
+    ("unwrap", 0),
+    ("expect", 0),
+    ("unwrap_or", 0),
+    ("unwrap_or_else", 0),
+    ("unwrap_or_default", 0),
+    ("unwrap_err", 1),
+    ("expect_err", 1),
+];
+
+/// The type `receiver.name(..)` returns when `name` is a payload method of
+/// [`PAYLOAD_METHODS`] and the receiver is an `Option` or a `Result` by
+/// value. Method lookup tries the receiver's own type first and, at each
+/// type, inherent methods before trait methods (the Rust reference,
+/// "Method-call expressions"), so the inherent method with a by-value
+/// `self` is the one called, whatever trait is in scope. A receiver behind
+/// a reference is first looked up at the reference type, where a trait's
+/// method could be found, so it is not this rule's.
+fn payload(name: &str, receiver: &Ty) -> Option<Ty> {
+    let Ty::Named(id, args) = receiver else {
+        return None;
+    };
+    if !unwraps(id) {
+        return None;
+    }
+    let (_, i) = PAYLOAD_METHODS.iter().find(|(m, _)| *m == name)?;
+    Some(args.get(*i).cloned().unwrap_or(Ty::Open))
+}
+
+/// Whether the type is the standard library's `Box`, by the prelude's name
+/// or by path.
+fn boxes(id: &TypeId) -> bool {
+    match id {
+        TypeId::Prelude(name) => name == "Box",
+        TypeId::Extern(path) => match path.as_slice() {
+            [krate, module, name] => {
+                (krate == "std" || krate == "alloc") && module == "boxed" && name == "Box"
+            }
+            _ => false,
+        },
+        _ => false,
+    }
+}
+
+/// What a bare type name a module writes names, as the language resolves
+/// it: a struct or enum of the workspace, by package, target, module and
+/// declared name; an item outside the workspace, by its path; or nothing
+/// the written code decides (a glob of an outside crate may bind it).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) enum TypeReading {
+    Declared(usize, usize, String, String),
+    Extern(String),
+    Open,
+}
+
+impl Resolver<'_> {
+    /// What the type name `name` (bare, or a path such as `super::T`)
+    /// names in the inline module `inline` (`""` for the file's own) of
+    /// file `fi` of package `pkg`: what the module declares, then what its
+    /// `use` binds, then its globs, as [`Resolver::path`] reads every path.
+    pub(crate) fn type_reading(
+        &self,
+        pkg: usize,
+        fi: usize,
+        inline: &str,
+        name: &str,
+    ) -> TypeReading {
+        let file = &self.ws.packages[pkg].files[fi];
+        let module = (pkg, file.target, join(&file.module, inline));
+        if !self.modules.contains_key(&module) {
+            return TypeReading::Open;
+        }
+        let segments: Vec<String> = name.split("::").map(str::to_string).collect();
+        match self.path(&module, &segments, false, &mut Vec::new()) {
+            Found::Type((p, t, m), n) => TypeReading::Declared(p, t, m, n),
+            Found::Extern(path) => TypeReading::Extern(path.join("::")),
+            _ => TypeReading::Open,
+        }
+    }
+}
+
+impl Names {
+    /// The inline modules of a file, by their path inside it, the file's
+    /// own (`""`) among them.
+    pub(crate) fn inline_modules(&self, rel: &str) -> Vec<String> {
+        let mut out: Vec<String> = self
+            .files
+            .get(rel)
+            .map(|f| f.modules.keys().cloned().collect())
+            .unwrap_or_default();
+        if !out.iter().any(String::is_empty) {
+            out.insert(0, String::new());
+        }
+        out
+    }
+
+    /// The inline module a function stands in, by the line and name of
+    /// its fact: `""` for the file's own.
+    pub(crate) fn fn_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.fns.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
+    }
+
+    /// The inline module an enum or a struct stands in, by the line and
+    /// name of its fact: `""` for the file's own.
+    pub(crate) fn type_module(&self, rel: &str, line: usize, name: &str) -> &str {
+        self.files
+            .get(rel)
+            .and_then(|f| f.types.get(&(line, name.to_string())))
+            .map_or("", |n| n.module.as_str())
+    }
+}
+
+/// What the root module of a crate outside the workspace names bare, read
+/// from its library root: each name a `use` binds, with every path a
+/// binding of it names (a name under several `cfg` predicates may have
+/// more than one), and the types the root declares.
+pub(crate) fn root_names(
+    file: &syn::File,
+) -> (BTreeMap<String, BTreeSet<Vec<String>>>, BTreeSet<String>) {
+    let names = FileNames::of(file);
+    let Some(root) = names.modules.get("") else {
+        return (BTreeMap::new(), BTreeSet::new());
+    };
+    let mut uses: BTreeMap<String, BTreeSet<Vec<String>>> = BTreeMap::new();
+    for u in &root.uses {
+        uses.entry(u.name.clone())
+            .or_default()
+            .insert(u.path.clone());
+    }
+    (uses, root.types.keys().cloned().collect())
 }
 
 /// What a type is named by, without its references.
@@ -3099,6 +3814,348 @@ mod tests {
             got.iter()
                 .any(|g| g.starts_with("unknown: A::from -> open ")),
             "{got:#?}"
+        );
+    }
+
+    // Registry number types (merge): what a file's `use` binds to a
+    // registered crate's type is the resolver's reading, module by module.
+
+    /// The bare names `source` (a library `lib.rs` of a package depending
+    /// on the registry crates `num-bigint` and `other`) binds to
+    /// `num_bigint::BigInt` in every module of the file.
+    fn registered_bindings_of(tag: &str, source: &str) -> BTreeMap<String, String> {
+        let dir = std::env::temp_dir().join(format!("uorust-names-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let (mut ws, syntax) = crate::ingest::workspace(&dir, None).expect("a workspace");
+        let syntax = read(&dir, &ws, syntax).expect("its names");
+        let _ = std::fs::remove_dir_all(&dir);
+        for name in ["num-bigint", "other"] {
+            ws.packages[0].deps.push(crate::facts::Dep {
+                name: name.into(),
+                rename: None,
+                kind: "normal".into(),
+                path: None,
+                inside: false,
+                platform: None,
+            });
+        }
+        let resolver = Resolver::new(&ws, &syntax);
+        resolver.registry_bindings(0, 0, &["num_bigint::BigInt".to_string()])
+    }
+
+    #[test]
+    fn registered_bindings_hold_only_where_every_module_of_the_file_agrees() {
+        let big = |names: &[&str]| -> BTreeMap<String, String> {
+            names
+                .iter()
+                .map(|n| (n.to_string(), "num_bigint::BigInt".to_string()))
+                .collect()
+        };
+        // A `use`, a renaming one from the crate graph's root, and an inline
+        // module that imports its parent whole.
+        assert_eq!(
+            registered_bindings_of(
+                "reg-use",
+                "use num_bigint::BigInt;\nuse ::num_bigint::BigInt as Big;\n\
+                 mod inner { use super::*; }\nmod empty {}\n"
+            ),
+            big(&["Big", "BigInt"])
+        );
+        // An inline module binding the name to a type of the workspace, or
+        // importing an outside crate whole (which may bind it): the file
+        // does not read the name as the crate's.
+        assert_eq!(
+            registered_bindings_of(
+                "reg-other",
+                "use num_bigint::BigInt;\nuse num_bigint::BigInt as Big;\n\
+                 mod inner { use crate::mine::BigInt; }\n\
+                 mod mine { pub struct BigInt(pub u8); }\n"
+            ),
+            big(&["Big"])
+        );
+        assert_eq!(
+            registered_bindings_of(
+                "reg-glob",
+                "use num_bigint::BigInt;\nmod inner { use other::*; }\n"
+            ),
+            big(&[])
+        );
+        // A path to another item of the crate is not the read type.
+        assert_eq!(
+            registered_bindings_of("reg-path", "use num_bigint::BigUint as BigInt;\n"),
+            big(&[])
+        );
+    }
+    // Class: calls the language resolves by type (kai, round 3).
+
+    /// The resolutions of `source`'s calls whose caller is `caller`.
+    fn typed_call_of(tag: &str, source: &str, caller: &str) -> Vec<String> {
+        let prefix = format!("{caller}: ");
+        resolutions(tag, "", source)
+            .into_iter()
+            .filter(|g| g.starts_with(&prefix))
+            .collect()
+    }
+
+    /// Three `From` impls of one type, each told apart only by its
+    /// argument's type: `From<u8>` on line 2, `From<u16>` on 3, `From<C>`
+    /// on 4.
+    const TYPED_CALL_IMPLS: &str = "pub struct A(u16);\n\
+         impl From<u8> for A { fn from(x: u8) -> A { A(x as u16) } }\n\
+         impl From<u16> for A { fn from(x: u16) -> A { A(x) } }\n\
+         impl From<C> for A { fn from(_: C) -> A { A(0) } }\n\
+         #[derive(Clone)]\npub struct C;\n\
+         pub struct D;\n";
+
+    #[test]
+    fn a_payload_method_of_an_option_or_a_result_by_value_gives_its_argument() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             pub fn small() -> Option<u8> {{ Some(1) }}\n\
+             pub fn wide() -> Result<u16, u8> {{ Ok(1) }}\n\
+             pub fn first() -> A {{ A::from(small().unwrap()) }}\n\
+             pub fn second() -> A {{ A::from(wide().expect(\"x\")) }}\n\
+             pub fn error() -> A {{ A::from(wide().unwrap_err()) }}\n\
+             pub fn behind(o: &Option<u8>) -> A {{ A::from(o.unwrap()) }}\n"
+        );
+        let got = resolutions("typed-payload", "", &source);
+        for want in [
+            "first: A::from -> A::from@2",
+            "second: A::from -> A::from@3",
+            "error: A::from -> A::from@2",
+            // A payload method is the standard library's, not a workspace
+            // method of the name.
+            "first: .unwrap -> outside",
+        ] {
+            assert!(got.iter().any(|g| g == want), "{want} not in {got:#?}");
+        }
+        // Behind a reference a trait's method of the reference type would
+        // come first: the receiver's payload is not read.
+        let behind = typed_call_of("typed-behind", &source, "behind");
+        assert!(
+            behind
+                .iter()
+                .any(|g| g.starts_with("behind: A::from -> open ")),
+            "{behind:#?}"
+        );
+    }
+
+    #[test]
+    fn a_field_has_the_type_its_struct_declares() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             pub struct W {{ pub x: u16, pub b: Box<u8> }}\n\
+             pub struct T(pub u8, pub u16);\n\
+             pub struct G<P> {{ pub v: P }}\n\
+             pub fn named(w: &W) -> A {{ A::from(w.x) }}\n\
+             pub fn boxed(w: &W) -> A {{ A::from(*w.b) }}\n\
+             pub fn place(t: T) -> A {{ A::from(t.1) }}\n\
+             pub fn pair(p: (u16, u8)) -> A {{ A::from(p.1) }}\n\
+             pub fn generic(g: G<u8>) -> A {{ A::from(g.v) }}\n\
+             pub fn missing(w: &W) -> A {{ A::from(w.y) }}\n"
+        );
+        let got = resolutions("typed-field", "", &source);
+        for want in [
+            "named: A::from -> A::from@3",
+            "boxed: A::from -> A::from@2",
+            "place: A::from -> A::from@3",
+            "pair: A::from -> A::from@2",
+            "generic: A::from -> A::from@2",
+        ] {
+            assert!(got.iter().any(|g| g == want), "{want} not in {got:#?}");
+        }
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("missing: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_clone_of_a_reference_to_a_type_deriving_clone_is_that_type() {
+        let source = format!(
+            "{TYPED_CALL_IMPLS}\
+             impl From<&D> for A {{ fn from(_: &D) -> A {{ A(1) }} }}\n\
+             pub fn derived(c: &C) -> A {{ A::from(c.clone()) }}\n\
+             pub fn underived(d: &D) -> A {{ A::from(d.clone()) }}\n"
+        );
+        let got = resolutions("typed-clone", "", &source);
+        assert!(
+            got.iter().any(|g| g == "derived: A::from -> A::from@4"),
+            "{got:#?}"
+        );
+        // `D` is not `Clone`: `d.clone()` is `Clone` of `&D`, which this
+        // rule does not read.
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("underived: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    /// `TYPED_CALL_IMPLS` and a type `G<T>` deriving `Clone`, with a `From`
+    /// of `G<D>` (line 9) and of `&G<D>` (line 10).
+    fn refuted_source(rest: &str) -> String {
+        format!(
+            "{TYPED_CALL_IMPLS}\
+             #[derive(Clone)]\npub struct G<T>(pub T);\n\
+             impl From<G<D>> for A {{ fn from(_: G<D>) -> A {{ A(2) }} }}\n\
+             impl<'a> From<&'a G<D>> for A {{ fn from(_: &'a G<D>) -> A {{ A(3) }} }}\n\
+             {rest}"
+        )
+    }
+
+    #[test]
+    fn a_private_field_read_from_outside_its_module_stays_open() {
+        let source = refuted_source(
+            "pub mod wrap {\n\
+             pub struct Inner { pub x: u16 }\n\
+             pub struct W { x: u8, pub inner: Inner }\n\
+             impl core::ops::Deref for W { type Target = Inner; fn deref(&self) -> &Inner { &self.inner } }\n\
+             pub fn inside(w: &W) -> super::A { super::A::from(w.x) }\n\
+             }\n\
+             pub fn outside(w: &wrap::W) -> A { A::from(w.x) }\n",
+        );
+        let got = resolutions("refuted-private", "", &source);
+        // Inside `wrap` the private `u8` field is the field read.
+        assert!(
+            got.iter()
+                .any(|g| g == "inside: super::A::from -> A::from@2"),
+            "{got:#?}"
+        );
+        // Outside it field lookup skips it and goes on through `Deref`.
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("outside: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_clone_of_a_reference_to_a_generic_type_deriving_clone_stays_open() {
+        // `derive(Clone)` of `G<T>` requires `T: Clone`; `D` is not, so
+        // `g.clone()` is `Clone` of `&G<D>`.
+        let source = refuted_source("pub fn generic(g: &G<D>) -> A { A::from(g.clone()) }\n");
+        let got = resolutions("refuted-clone", "", &source);
+        assert!(
+            got.iter()
+                .any(|g| g.starts_with("generic: A::from -> open ")),
+            "{got:#?}"
+        );
+        assert!(
+            !got.iter().any(|g| g == "generic: A::from -> A::from@9"),
+            "{got:#?}"
+        );
+    }
+
+    #[test]
+    fn a_struct_the_body_declares_shadows_the_modules_of_its_name() {
+        let source = refuted_source(
+            "pub struct W { pub x: u8 }\n\
+             pub fn outer(w: W) -> A { A::from(w.x) }\n\
+             pub fn local() -> A { struct W { x: u16 } let w = W { x: 300 }; A::from(w.x) }\n",
+        );
+        let got = resolutions("refuted-local", "", &source);
+        assert!(
+            got.iter().any(|g| g == "outer: A::from -> A::from@2"),
+            "{got:#?}"
+        );
+        assert!(
+            got.iter().any(|g| g.starts_with("local: A::from -> open ")),
+            "{got:#?}"
+        );
+    }
+
+    /// The resolver of a one-file package of `source`.
+    fn refuted_resolved(tag: &str, source: &str, check: impl Fn(&Workspace, &Resolver<'_>)) {
+        let dir = std::env::temp_dir().join(format!("uorust-names-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let (ws, syntax) = crate::ingest::workspace(&dir, None).expect("a workspace");
+        let syntax = read(&dir, &ws, syntax).expect("its names");
+        let _ = std::fs::remove_dir_all(&dir);
+        let resolver = Resolver::new(&ws, &syntax);
+        check(&ws, &resolver);
+    }
+
+    #[test]
+    fn a_crate_name_a_module_of_the_package_binds_is_the_modules() {
+        refuted_resolved(
+            "refuted-binds",
+            "mod num_bigint { pub type BigInt = i64; }\n\
+             pub fn sq(a: num_bigint::BigInt) -> num_bigint::BigInt { a * a }\n",
+            |_, resolver| {
+                assert!(resolver.package_binds(0, "num_bigint"));
+                assert!(!resolver.package_binds(0, "num_rational"));
+            },
+        );
+    }
+
+    #[test]
+    fn a_scope_that_imports_from_outside_the_workspace_may_see_its_traits() {
+        refuted_resolved(
+            "refuted-scope",
+            "use num_bigint::BigInt;\n\
+             pub fn plain(x: f64) -> f64 { x }\n\
+             pub mod far { use other::Odd; pub fn far(x: f64) -> f64 { x } }\n\
+             pub mod wide { use other::*; pub fn wide(x: f64) -> f64 { x } }\n\
+             pub mod near { use crate::plain; pub fn near(x: f64) -> f64 { plain(x) } }\n",
+            |ws, resolver| {
+                let of = |name: &str| {
+                    let idx = ws.packages[0].files[0]
+                        .fns
+                        .iter()
+                        .position(|f| f.name == name)
+                        .expect("the function");
+                    resolver.scope_binding((0, 0, idx)).1
+                };
+                // A registered crate's type is no trait; another crate's
+                // name, or a glob of it, may be.
+                assert!(!of("plain"));
+                assert!(of("far"));
+                assert!(of("wide"));
+                assert!(!of("near"));
+            },
+        );
+    }
+
+    #[test]
+    fn only_a_trait_implemented_for_a_type_outside_the_workspace_reaches_a_float() {
+        refuted_resolved(
+            "refuted-impls",
+            "pub struct Mine;\n\
+             pub type Alias = f64;\n\
+             pub trait Own { fn len(&self) -> u8; }\n\
+             impl Own for Mine { fn len(&self) -> u8 { 1 } }\n\
+             pub trait Odd { fn abs(&self) -> u8; }\n\
+             impl Odd for f64 { fn abs(&self) -> u8 { 7 } }\n\
+             pub trait Any { fn any(&self) -> u8 { 0 } }\n\
+             impl<T> Any for T {}\n\
+             pub trait Named { fn named(&self) -> u8 { 0 } }\n\
+             impl Named for Alias {}\n",
+            |_, resolver| {
+                let got = resolver.foreign_impl_traits();
+                assert_eq!(
+                    got,
+                    ["Any", "Named", "Odd"]
+                        .iter()
+                        .map(|s| s.to_string())
+                        .collect::<BTreeSet<String>>()
+                );
+            },
         );
     }
 }

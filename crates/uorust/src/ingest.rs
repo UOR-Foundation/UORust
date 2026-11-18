@@ -67,9 +67,39 @@ pub(crate) fn workspace(
             advisories,
             packages,
             targets,
+            replaced: replaced_sources(&root),
         },
         syntax,
     ))
+}
+
+/// The Cargo configuration files that apply to a build in `root` (Cargo's
+/// documentation, "Configuration": `.cargo/config.toml` or `.cargo/config`
+/// in the directory and each of its ancestors, then in `$CARGO_HOME`) and
+/// replace a source (`[source]`) or override a package's path (`paths`).
+/// A file that does not parse is listed too: what it says is not known.
+fn replaced_sources(root: &Path) -> Vec<String> {
+    let home = std::env::var_os("CARGO_HOME")
+        .map(PathBuf::from)
+        .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".cargo")));
+    let dirs = root.ancestors().map(|d| d.join(".cargo")).chain(home);
+    let mut out = Vec::new();
+    for dir in dirs {
+        for name in ["config.toml", "config"] {
+            let file = dir.join(name);
+            let Ok(text) = std::fs::read_to_string(&file) else {
+                continue;
+            };
+            let replaces = text.parse::<toml::Value>().map_or(true, |v| {
+                v.get("source").is_some() || v.get("paths").is_some()
+            });
+            if replaces {
+                let shown = file.strip_prefix(root).unwrap_or(&file);
+                out.push(shown.to_string_lossy().replace('\\', "/"));
+            }
+        }
+    }
+    out
 }
 
 /// Whether an item's generics are lifetimes alone, which say how long a
@@ -426,6 +456,10 @@ fn package(
         let inside = path.as_ref().is_some_and(|p| p.starts_with(root));
         deps.push(Dep {
             name: text(dep, "name"),
+            rename: dep
+                .get("rename")
+                .and_then(Value::as_str)
+                .map(str::to_string),
             kind: dep
                 .get("kind")
                 .and_then(Value::as_str)
@@ -433,6 +467,10 @@ fn package(
                 .to_string(),
             path: path.map(|p| rel(&root_text, &path_text(&p))),
             inside,
+            platform: dep
+                .get("target")
+                .and_then(Value::as_str)
+                .map(str::to_string),
         });
     }
     deps.sort_by(|a, b| {
@@ -1211,7 +1249,10 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
             out.uses
                 .push((r.rename.to_string(), printed(with(&r.ident))));
         }
-        syn::UseTree::Glob(_) => out.glob = true,
+        syn::UseTree::Glob(_) => {
+            out.glob = true;
+            out.globs.push(printed(prefix.to_vec()));
+        }
         syn::UseTree::Group(g) => {
             for item in &g.items {
                 scope_uses(item, prefix, rooted, out);
@@ -1326,6 +1367,19 @@ fn items(
             }
             syn::Item::Trait(t) => {
                 let public = matches!(t.vis, syn::Visibility::Public(_));
+                if !in_test
+                    && t.items
+                        .iter()
+                        .any(|m| matches!(m, syn::TraitItem::Macro(_)))
+                {
+                    file.item_macros
+                        .extend(t.items.iter().filter_map(|m| match m {
+                            syn::TraitItem::Macro(m) => {
+                                m.mac.path.segments.last().map(|s| s.ident.to_string())
+                            }
+                            _ => None,
+                        }));
+                }
                 for member in &t.items {
                     if let syn::TraitItem::Fn(f) = member {
                         let (mut fact, fn_syntax) = function(
@@ -1477,6 +1531,14 @@ fn items(
                     items(inner, rel, &inner_module, test, product, lib, file, syntax);
                 }
             }
+            // `macro_rules! name { .. }` defines a macro; any other macro in
+            // item position is an invocation.
+            syn::Item::Macro(m) if !in_test => match &m.ident {
+                Some(defined) => file.macro_defs.push(defined.to_string()),
+                None => file
+                    .item_macros
+                    .extend(m.mac.path.segments.last().map(|s| s.ident.to_string())),
+            },
             _ => {}
         }
         if product && !in_test && !matches!(item, syn::Item::Mod(_)) {
@@ -2000,6 +2062,34 @@ mod tests {
         assert_eq!(
             under(Path::new("/w/root"), "src/lib.rs"),
             Path::new("/w/root/src/lib.rs")
+        );
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    #[test]
+    fn a_configuration_that_replaces_a_source_is_found() {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-refuted-config-{}", std::process::id()));
+        let at = |sub: &str| dir.join(sub);
+        std::fs::create_dir_all(at("vendored/.cargo")).unwrap();
+        std::fs::create_dir_all(at("plain/.cargo")).unwrap();
+        std::fs::write(
+            at("vendored/.cargo/config.toml"),
+            "[source.crates-io]\nreplace-with = \"vendor\"\n[source.vendor]\ndirectory = \"vendor\"\n",
+        )
+        .unwrap();
+        std::fs::write(at("plain/.cargo/config.toml"), "[build]\njobs = 1\n").unwrap();
+        let vendored = replaced_sources(&at("vendored"));
+        let plain = replaced_sources(&at("plain"));
+        let _ = std::fs::remove_dir_all(&dir);
+        assert!(
+            vendored.iter().any(|f| f == ".cargo/config.toml"),
+            "{vendored:?}"
+        );
+        assert!(
+            !plain.iter().any(|f| f == ".cargo/config.toml"),
+            "{plain:?}"
         );
     }
 }

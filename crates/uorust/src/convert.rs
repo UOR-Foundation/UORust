@@ -139,6 +139,10 @@ pub(crate) fn lit(l: &syn::Lit) -> Lit {
         syn::Lit::Char(c) => Lit::Char(c.value()),
         syn::Lit::Byte(b) => Lit::Byte(b.value()),
         syn::Lit::ByteStr(b) => Lit::ByteStr(b.value()),
+        syn::Lit::Float(f) => Lit::Float {
+            digits: f.base10_digits().to_string(),
+            suffix: f.suffix().to_string(),
+        },
         _ => Lit::Other,
     }
 }

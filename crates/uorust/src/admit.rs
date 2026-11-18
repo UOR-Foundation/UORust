@@ -61,6 +61,10 @@ pub(crate) enum Refusal {
         root: String,
         cause: String,
     },
+    /// A Cargo configuration file replaces a registry source or overrides a
+    /// package's path, so the locked checksum does not identify the source
+    /// Cargo builds: no registered crate's reading holds.
+    SourceReplaced { config: String },
 }
 
 impl Refusal {
@@ -79,6 +83,7 @@ impl Refusal {
             Self::UnansweredAdvisory { .. } => "unanswered-advisory",
             Self::UndefinedSlot { .. } => "undefined-slot",
             Self::LibraryRoot { .. } => "library-root",
+            Self::SourceReplaced { .. } => "source-replaced",
         }
     }
 
@@ -91,7 +96,9 @@ impl Refusal {
             Self::Collision { .. } | Self::CfgVariant { .. } => "UR-R13",
             Self::NoInitialState { .. } | Self::AmbiguousFact { .. } => "UR-R26",
             Self::NoMsrv { .. } => "UR-R24",
-            Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => "UR-R21",
+            Self::AdvisoriesUnconsulted
+            | Self::UnansweredAdvisory { .. }
+            | Self::SourceReplaced { .. } => "UR-R21",
             Self::UndefinedSlot { .. } | Self::LibraryRoot { .. } => "UR-R29",
         }
     }
@@ -114,6 +121,7 @@ impl Refusal {
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => {
                 "Cargo.lock".to_string()
             }
+            Self::SourceReplaced { config } => config.clone(),
         }
     }
 
@@ -169,6 +177,10 @@ impl Refusal {
             Self::LibraryRoot { root, cause, .. } => {
                 format!("the library profile does not take the root {root}: {cause}")
             }
+            Self::SourceReplaced { .. } => "the Cargo configuration replaces a registry source \
+                 or overrides a package's path, so Cargo builds a source the locked checksum \
+                 does not identify; no registered crate's type is read from its archive"
+                .to_string(),
         }
     }
 }

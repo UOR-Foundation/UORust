@@ -38,6 +38,7 @@ mod ownership;
 mod project;
 pub mod queue;
 pub mod register;
+mod registered;
 pub mod registry;
 mod route;
 pub mod shard;

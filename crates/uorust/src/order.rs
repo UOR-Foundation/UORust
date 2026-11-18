@@ -83,6 +83,8 @@ fn derived_in(ty: &Ty, types: &Types, assumed: &BTreeSet<String>) -> bool {
         // its value, not as the natural: no derived total order holds.
         Ty::Int(_)
         | Ty::Integer(_)
+        | Ty::Unbounded
+        | Ty::Ratio
         | Ty::Float(_)
         | Ty::Signed(_)
         | Ty::ParseError
@@ -422,6 +424,8 @@ fn body(ty: &Ty, types: &Types) -> Expr {
         },
         Ty::Int(_)
         | Ty::Integer(_)
+        | Ty::Unbounded
+        | Ty::Ratio
         | Ty::Float(_)
         | Ty::Signed(_)
         | Ty::ParseError

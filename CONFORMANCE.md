@@ -50,6 +50,7 @@ model does not sanction.
 | `UE-27` | `build` | A closed assertion calling an explicitly qualified associated function uses that function's lifted signature, preserving its owner and refusing a different owner rather than losing or misattributing the library acceptance root |
 | `UE-28` | `build` | MIR translations of methods with the same owner and short name receive stable source-qualified names, independent of which compiler bodies are selected, without dropping a homonym as a collision |
 | `UE-29` | `build` | MIR proof trials are partitioned by their dependency graph into bounded batches that keep recursive components together, reject zero budgets, dangling dependencies and oversized recursive components, and reuse actual SDK verdicts without omitting eligible translations |
+| `UE-30` | `build` | A locked registered number alias retains its admitted type reading before generic registry alias expansion, while an incorrect archive checksum keeps it unlifted |
 
 ## factory
 

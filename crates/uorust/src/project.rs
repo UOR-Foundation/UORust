@@ -140,6 +140,36 @@ struct Model {
     /// The bare names a function's module binds by a `use` to a type of a
     /// registry crate, each with the crate.
     registry: BTreeMap<FnRef, BTreeMap<String, String>>,
+    /// The bare names each source file `(package, file)` binds, in every
+    /// one of its modules, to a registered crate's type whose reading the
+    /// package's lock admits, each with the type's path.
+    registered: BTreeMap<(usize, usize), BTreeMap<String, String>>,
+    /// The module each function stands in (`Model::module_of`).
+    modules: BTreeMap<FnRef, String>,
+    /// Per package, the registered crates' type paths it reads
+    /// (`registered_paths`).
+    readable: BTreeMap<usize, Vec<String>>,
+    /// What each function's own module scope binds itself, and whether it
+    /// may bring a trait from outside the workspace into scope
+    /// (`names::Resolver::scope_binding`).
+    scoped: BTreeMap<FnRef, (BTreeSet<String>, bool)>,
+    /// Each trait of the workspace that may give a method to a type outside
+    /// the workspace (`names::Resolver::foreign_impl_traits`), by name, with
+    /// the names of the methods and associated functions it declares.
+    trait_decls: BTreeMap<String, BTreeSet<String>>,
+    /// The bare names each module, by package, file and inline module,
+    /// binds by a `use` or a glob to an item of a registry crate, each with
+    /// the path it names: the module that declares a type names its
+    /// fields' types so, and the module of a function its signature's.
+    registry_paths: BTreeMap<(usize, usize, String), BTreeMap<String, String>>,
+    /// What each name several of a crate's types share names in each
+    /// module that may write it, by package, file and inline module, as
+    /// the language resolves it.
+    type_readings: BTreeMap<(usize, usize, String), BTreeMap<String, crate::names::TypeReading>>,
+    /// The public type aliases the registry crates the packages depend on
+    /// declare at their roots, by path (`krate::Alias`), read from each
+    /// crate's source at the version Cargo.lock pins.
+    crate_aliases: BTreeMap<String, crate::ast::Alias>,
 }
 
 /// What the frontier records, as the facets find it.
@@ -195,14 +225,71 @@ impl Model {
         self.package(r).targets[file.target].name.replace('-', "_")
     }
 
-    /// The module a function stands in inside its target: its file's
-    /// module joined with the inline modules around it in the file
-    /// (`SourceFile::item_module`). Rust names a function through both, so
-    /// this, not the file's module, is what tells two functions of one
-    /// name apart: `go` of the crate root and `go` of an inline
-    /// `mod inner` beside it are two items.
+    /// What the lift may read of a function's own module scope
+    /// (`lift::Seen`): the names its `use` items bind (scope `scope` of its
+    /// file), the names the module and the body bind themselves, whether a
+    /// trait from outside the workspace may be in scope, and whether the
+    /// package invokes a macro in item position.
+    fn seen(&self, r: FnRef, scope: usize) -> lift::Seen {
+        let file = self.file(r);
+        let (local, outside_traits) = self
+            .scoped
+            .get(&r)
+            .cloned()
+            .unwrap_or_else(|| (BTreeSet::new(), true));
+        let empty = crate::facts::ScopeFact::default();
+        let at = file.scopes.get(scope).unwrap_or(&empty);
+        // A trait is in scope where the scope declares it or a `use` binds
+        // it; a `use` is matched by the last segment of its path, which
+        // also covers `use path::Trait as _`, and a glob may bind any.
+        let trait_methods = self
+            .trait_decls
+            .iter()
+            .filter(|(t, _)| {
+                at.glob
+                    || at.traits.contains(t)
+                    || at
+                        .uses
+                        .iter()
+                        .any(|(n, p)| n == *t || p.rsplit("::").next() == Some(t.as_str()))
+            })
+            .flat_map(|(_, methods)| methods.iter().cloned())
+            .collect();
+        // A macro in item position makes items in the module it is invoked
+        // in, which a glob or a `use` of a path inside the crate may bring
+        // to another module.
+        let internal = |p: &str| {
+            let head = p.split("::").next().unwrap_or(p);
+            matches!(head, "crate" | "self" | "super") || local.contains(head)
+        };
+        let package = &self.ws.packages[r.pkg];
+        let package_macros = package.makes_items(r.file);
+        let macro_items = package.file_makes_items(r.file)
+            || (package_macros
+                && (at.outward_glob(scope) || at.uses.iter().any(|(_, p)| internal(p))));
+        lift::Seen {
+            paths_open: macro_reachable(&self.ws.packages[r.pkg], r.file),
+            trait_methods,
+            uses: file
+                .scopes
+                .get(scope)
+                .map(|s| s.uses.iter().cloned().collect())
+                .unwrap_or_default(),
+            local,
+            outside_traits,
+            macro_items,
+        }
+    }
+
+    /// The module a function stands in, inside its target: its file's
+    /// module and the inline modules around it in the file. Rust's path of
+    /// the function runs through both. It is the name resolver's reading
+    /// (`names::Resolver::module_path`), the one the calls are resolved in.
     fn module_of(&self, r: FnRef) -> String {
-        self.file(r).item_module(self.func(r).scope)
+        self.modules
+            .get(&r)
+            .cloned()
+            .unwrap_or_else(|| self.file(r).module.clone())
     }
 
     /// `crate::module::Type::name`; and `crate::module::<Type as
@@ -237,6 +324,23 @@ impl Model {
             .find_map(|head| bound.get(head).cloned())
     }
 
+    /// The registry crate whose item a leaf's head path names, among the
+    /// registry dependencies of every package (the package that declares
+    /// the type the leaf is a field of is the one that depends on it):
+    /// `big` for `big::BigX` and `big::Ratio<i64>`. A borrow reads as what
+    /// it borrows; a head the lift does not read (`RefCell<big::BigX>`) is
+    /// the leaf whatever it holds.
+    fn registry_crate(&self, leaf: &str) -> Option<String> {
+        let (krate, _) = leaf_head(leaf).split_once("::")?;
+        self.ws
+            .packages
+            .iter()
+            .flat_map(|p| &p.deps)
+            .filter(|d| d.path.is_none())
+            .map(|d| d.name.replace('-', "_"))
+            .find(|dep| dep == krate)
+    }
+
     fn component_of(&self, r: FnRef) -> Option<&String> {
         self.targets.get(&(r.pkg, self.file(r).target))
     }
@@ -247,8 +351,12 @@ impl Model {
         let Residue::Type(ty) = reason else {
             return None;
         };
-        let package = &self.ws.packages[r.pkg];
-        let dep = foreign_crate(package, ty).or_else(|| self.bound_crate(r, ty))?;
+        let dep = match chain_leaf(ty) {
+            Some(leaf) => self.registry_crate(leaf),
+            None => self
+                .registry_crate(ty)
+                .or_else(|| self.bound_crate(r, leaf_head(ty))),
+        }?;
         Some(format!(
             "takes or returns {ty}, a type of the {dep} crate with no LexLean model"
         ))
@@ -405,13 +513,157 @@ pub(crate) fn project(
         named: BTreeMap::new(),
         enum_routes: BTreeMap::new(),
         registry: BTreeMap::new(),
+        registered: BTreeMap::new(),
+        modules: BTreeMap::new(),
+        readable: BTreeMap::new(),
+        scoped: BTreeMap::new(),
+        trait_decls: BTreeMap::new(),
+        registry_paths: BTreeMap::new(),
+        type_readings: BTreeMap::new(),
+        crate_aliases: BTreeMap::new(),
     };
+    // A trait counts only where some `impl` may give its methods to a type
+    // the lift reads as the standard library's or a registered crate's;
+    // where a macro of a library or binary of the workspace may write an
+    // `impl`, every trait (a test, bench or example target is a crate of
+    // its own that nothing depends on).
+    let foreign = resolver.foreign_impl_traits();
+    let macros = ws.packages.iter().any(|p| {
+        (0..p.files.len()).any(|i| {
+            matches!(
+                p.targets[p.files[i].target].kind,
+                TargetKind::Lib | TargetKind::Bin
+            ) && p.file_makes_items(i)
+        })
+    });
+    for f in ws
+        .packages
+        .iter()
+        .flat_map(|p| &p.files)
+        .flat_map(|f| &f.fns)
+    {
+        if let (true, Some(owner)) = (f.in_trait, &f.owner) {
+            if !macros && !foreign.contains(owner) {
+                continue;
+            }
+            ctx.trait_decls
+                .entry(owner.clone())
+                .or_default()
+                .insert(f.name.clone());
+        }
+    }
+    ctx.scoped = ctx
+        .all_fns()
+        .into_iter()
+        .map(|r| (r, resolver.scope_binding((r.pkg, r.file, r.idx))))
+        .collect();
+    ctx.modules = ctx
+        .all_fns()
+        .into_iter()
+        .map(|r| (r, resolver.module_path((r.pkg, r.file, r.idx))))
+        .collect();
+    let registry_deps: BTreeSet<String> = ws
+        .packages
+        .iter()
+        .flat_map(|p| &p.deps)
+        .filter(|d| d.path.is_none())
+        .map(|d| d.name.replace('-', "_"))
+        .collect();
+    let cargo_home = crate::registry::cargo_home();
+    for krate in &registry_deps {
+        // A crate whose source is not read declares no alias the lift
+        // reads: a type it names stays a type of that crate.
+        if let Some(aliases) = crate::registry::crate_aliases(&cargo_home, krate, &ws.lock) {
+            ctx.crate_aliases.extend(aliases);
+        }
+    }
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        let mut declared: BTreeMap<&str, usize> = BTreeMap::new();
+        for file in &package.files {
+            let names = file.enums.iter().map(|e| e.name.as_str());
+            for name in names.chain(file.structs.iter().map(|st| st.name.as_str())) {
+                *declared.entry(name).or_default() += 1;
+            }
+        }
+        let shared: Vec<&str> = declared
+            .into_iter()
+            .filter(|(_, n)| *n > 1)
+            .map(|(name, _)| name)
+            .collect();
+        for (fi, file) in package.files.iter().enumerate() {
+            for inline in syntax.names.inline_modules(&file.rel) {
+                // The shared names, and each method's self type written by
+                // a path (`super::T`), which only the module reads.
+                let pathed = file
+                    .fns
+                    .iter()
+                    .filter(|f| syntax.names.fn_module(&file.rel, f.span.line, &f.name) == inline)
+                    .filter_map(|f| f.owner.as_deref())
+                    .map(|o| o.split('<').next().unwrap_or(o).trim())
+                    .filter(|o| o.contains("::"));
+                let read: BTreeMap<String, crate::names::TypeReading> = shared
+                    .iter()
+                    .copied()
+                    .chain(pathed)
+                    .map(|n| (n.to_string(), resolver.type_reading(pkg, fi, &inline, n)))
+                    .collect();
+                if !read.is_empty() {
+                    ctx.type_readings.insert((pkg, fi, inline), read);
+                }
+            }
+        }
+    }
+    ctx.registry_paths = ws
+        .packages
+        .iter()
+        .enumerate()
+        .flat_map(|(pkg, package)| (0..package.files.len()).map(move |fi| (pkg, fi)))
+        .flat_map(|(pkg, fi)| {
+            let file = &ws.packages[pkg].files[fi];
+            let written = bare_names(&syntax.files[&file.rel], file);
+            let resolver = &resolver;
+            syntax
+                .names
+                .inline_modules(&file.rel)
+                .into_iter()
+                .map(move |inline| {
+                    // A `use` binds a name before a glob does.
+                    let mut bound = resolver.inline_registry_paths(pkg, fi, &inline);
+                    for (name, path) in resolver.glob_paths(pkg, fi, &inline, &written) {
+                        bound.entry(name).or_insert(path);
+                    }
+                    ((pkg, fi, inline), bound)
+                })
+        })
+        .filter(|(_, bound)| !bound.is_empty())
+        .collect();
     ctx.registry = ctx
         .all_fns()
         .into_iter()
         .map(|r| (r, resolver.registry_types((r.pkg, r.file, r.idx))))
         .filter(|(_, bound)| !bound.is_empty())
         .collect();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        let read = registered_paths(ws, &resolver, pkg);
+        if !ws.replaced.is_empty()
+            && !crate::registered::of_package(package, &ws.lock, &[]).is_empty()
+        {
+            notes.refusals.insert(Refusal::SourceReplaced {
+                config: ws.replaced.join(", "),
+            });
+        }
+        if read.is_empty() {
+            continue;
+        }
+        ctx.readable.insert(pkg, read.clone());
+        for fi in 0..package.files.len() {
+            let bound = resolver.registry_bindings(pkg, fi, &read);
+            let bound = crate::registered::bindings(package, fi, bound);
+            if !bound.is_empty() {
+                ctx.registered.insert((pkg, fi), bound);
+            }
+        }
+    }
     ctx.edges = edges(&ctx);
     let (calls, named, refused) = resolve(&ctx, &resolver);
     ctx.calls = calls;
@@ -3376,14 +3628,38 @@ fn behavior(
             package
                 .files
                 .iter()
-                .flat_map(|file| {
+                .enumerate()
+                .flat_map(|(fi, file)| {
+                    let bound = ctx.registry_paths.get(&(pkg, fi, String::new()));
                     syntax.files[&file.rel]
                         .aliases
                         .iter()
                         .filter(|(n, _)| !declared.contains(n.as_str()))
-                        .filter(|(_, a)| written_through_paths(&a.to.text, &shared[pkg]).is_empty())
-                        .map(|(n, a)| {
+                        .filter(|(n, a)| {
+                            lift::PRIMITIVE_TYPES.contains(&n.as_str())
+                                || written_through_paths(&a.to.text, &shared[pkg]).is_empty()
+                        })
+                        .map(move |(n, a)| {
+                            // An alias that takes a primitive type's name
+                            // (`type f64 = f32;`) names its body in its own
+                            // module and the primitive everywhere else: the
+                            // crate-wide table reads the name as neither.
+                            if lift::PRIMITIVE_TYPES.contains(&n.as_str()) {
+                                let to = crate::ast::RustType {
+                                    text: format!("{n}, a primitive type's name an alias takes"),
+                                    kind: crate::ast::TypeKind::Other,
+                                };
+                                return (
+                                    n.clone(),
+                                    crate::ast::Alias {
+                                        params: Vec::new(),
+                                        to,
+                                    },
+                                );
+                            }
+
                             let to = a.to.localized(&file.imports);
+                            let to = bound.map_or_else(|| to.clone(), |b| to.renamed(b));
                             let alias = crate::ast::Alias {
                                 params: a.params.clone(),
                                 to,
@@ -3391,6 +3667,14 @@ fn behavior(
                             (n.clone(), alias)
                         })
                 })
+                // A registered alias already has a lock-admitted semantic
+                // reading. Expanding it to an otherwise unread generic body
+                // would erase that reading (BigRational -> Ratio<BigInt>).
+                .chain(ctx.crate_aliases.clone().into_iter().filter(|(name, _)| {
+                    !ctx.readable
+                        .get(&pkg)
+                        .is_some_and(|paths| paths.contains(name))
+                }))
                 .collect()
         })
         .collect();
@@ -3399,19 +3683,43 @@ fn behavior(
     let expanded = |pkg: usize, ty: &crate::ast::RustType| {
         ty.expanded(&type_aliases[pkg], type_aliases[pkg].len())
     };
+    // A type as the file that writes it names it, a field's or a
+    // signature's: a bare name its `use` binds to a registry crate's item
+    // is that item's path, so the chain through a field ends at the
+    // crate's type, by its crate, and an alias the crate declares reads as
+    // what it stands for.
+    let inline_of = |r: FnRef| {
+        ctx.file(r)
+            .scopes
+            .get(ctx.func(r).scope)
+            .map(|scope| scope.module.clone())
+            .unwrap_or_default()
+    };
+    let declared_in = |pkg: usize, fi: usize, inline: &str, ty: &crate::ast::RustType| {
+        let file = &ws.packages[pkg].files[fi];
+        let ty = ty.localized(&file.imports);
+        match ctx.registry_paths.get(&(pkg, fi, inline.to_string())) {
+            Some(bound) => expanded(pkg, &ty.renamed(bound)),
+            None => expanded(pkg, &ty),
+        }
+    };
     // A type of product code is keyed by its full path in its crate: its
-    // target, its module and its name. A key declared twice (once per
-    // configuration) is refused; one name in two modules or two crates is
-    // two types, each lifting under the shortest name that tells it apart.
+    // target, its module (an inline module among them) and its name. A key
+    // declared twice (once per configuration) is refused; one name in two
+    // modules or two crates is two types, each lifting under the shortest
+    // name that tells it apart.
     type Key = (usize, String, String);
     /// A file and one of its module scopes.
     type Scope = (usize, usize);
+    /// A struct's fields as its declaration writes them.
+    type Written = Vec<(String, crate::ast::RustType)>;
     /// The lifted kinds of one crate's types, by key, each struct and data
-    /// enum with the file that declares it, which its fields are read in.
+    /// enum with the file and the inline module that declare it, which its
+    /// fields are read in.
     #[derive(Default)]
     struct Declared {
         enums: BTreeMap<Key, Vec<String>>,
-        structs: BTreeMap<Key, (Scope, Vec<(String, crate::ast::RustType)>)>,
+        structs: BTreeMap<Key, (Scope, Written)>,
         datas: BTreeMap<Key, (Scope, lift::RawVariants)>,
         spans: BTreeMap<Key, Span>,
         /// The shared names a type's fields write through a path, which
@@ -3441,7 +3749,12 @@ fn behavior(
                 if e.variants.is_empty() || (data && payload.is_empty()) {
                     continue;
                 }
-                let key = (file.target, file.item_module(e.scope), e.name.clone());
+                let inline = syntax.names.type_module(&file.rel, e.span.line, &e.name);
+                let key = (
+                    file.target,
+                    crate::names::join(&file.module, inline),
+                    e.name.clone(),
+                );
                 if d.spans.insert(key.clone(), e.span.clone()).is_some() {
                     clashing.insert(key);
                     notes.refusals.insert(Refusal::Collision {
@@ -3457,7 +3770,15 @@ fn behavior(
                             let fs = fs
                                 .iter()
                                 .map(|(n, t)| {
-                                    (n.clone(), expanded(pkg, &t.localized(&file.imports)))
+                                    (
+                                        n.clone(),
+                                        declared_in(
+                                            pkg,
+                                            fi,
+                                            file.scopes[e.scope].module.as_str(),
+                                            t,
+                                        ),
+                                    )
                                 })
                                 .collect();
                             (v.clone(), fs)
@@ -3481,7 +3802,12 @@ fn behavior(
                 continue;
             }
             for (st, fields) in file.structs.iter().zip(&syntax.files[&file.rel].structs) {
-                let key = (file.target, file.item_module(st.scope), st.name.clone());
+                let inline = syntax.names.type_module(&file.rel, st.span.line, &st.name);
+                let key = (
+                    file.target,
+                    crate::names::join(&file.module, inline),
+                    st.name.clone(),
+                );
                 if d.spans.insert(key.clone(), st.span.clone()).is_some() {
                     clashing.insert(key);
                     notes.refusals.insert(Refusal::Collision {
@@ -3497,7 +3823,12 @@ fn behavior(
                 d.blind.insert(key.clone(), blind);
                 let fields = fields
                     .iter()
-                    .map(|(n, t)| (n.clone(), expanded(pkg, &t.localized(&file.imports))))
+                    .map(|(n, t)| {
+                        (
+                            n.clone(),
+                            declared_in(pkg, fi, file.scopes[st.scope].module.as_str(), t),
+                        )
+                    })
                     .collect();
                 d.structs.insert(key, ((fi, st.scope), fields));
             }
@@ -3609,48 +3940,34 @@ fn behavior(
     for (pkg, package) in ws.packages.iter().enumerate() {
         for (fi, file) in package.files.iter().enumerate() {
             for scope in 0..file.scopes.len().max(1) {
-                let reader = file.item_module(scope);
+                let inline = file
+                    .scopes
+                    .get(scope)
+                    .map(|s| s.module.clone())
+                    .unwrap_or_default();
+                let readings = ctx.type_readings.get(&(pkg, fi, inline));
+                let paths = readings
+                    .into_iter()
+                    .flatten()
+                    .filter(|(n, _)| n.contains("::"))
+                    .map(|(n, _)| n);
                 let mut names: BTreeMap<String, String> = ambiguous[pkg]
                     .iter()
-                    .map(|n| (n.clone(), n.clone()))
+                    .chain(paths)
+                    .map(|n| {
+                        let read = match readings.and_then(|r| r.get(n)) {
+                            Some(crate::names::TypeReading::Declared(p, t, m, name)) => lexes
+                                .get(*p)
+                                .and_then(|l| l.get(&(*t, m.clone(), name.clone())))
+                                .cloned(),
+                            Some(crate::names::TypeReading::Extern(path)) => Some(path.clone()),
+                            _ => None,
+                        };
+                        (n.clone(), read.unwrap_or_else(|| n.clone()))
+                    })
                     .collect();
-                let module: Vec<&str> = reader.split("::").filter(|s| !s.is_empty()).collect();
-                let uses = file.scopes.get(scope).map(|s| s.uses.as_slice());
-                for (local, path) in uses.unwrap_or_default() {
-                    if !names.contains_key(local) {
-                        continue;
-                    }
-                    // `crate::`, `self::` and `super::` as Rust reads them,
-                    // any other path from the scope's module.
-                    let mut at = module.clone();
-                    let mut segs: Vec<&str> = path.split("::").collect();
-                    match segs.first() {
-                        Some(&"crate") => {
-                            at.clear();
-                            segs.remove(0);
-                        }
-                        Some(&"self") => {
-                            segs.remove(0);
-                        }
-                        _ => {}
-                    }
-                    while segs.first() == Some(&"super") {
-                        at.pop();
-                        segs.remove(0);
-                    }
-                    let Some((name, prefix)) = segs.split_last() else {
-                        continue;
-                    };
-                    at.extend(prefix);
-                    let key = (file.target, at.join("::"), name.to_string());
-                    if let Some(lex) = lexes[pkg].get(&key) {
-                        names.insert(local.clone(), lex.clone());
-                    }
-                }
-                for ((target, m, name), lex) in &lexes[pkg] {
-                    if *target == file.target && *m == reader && names.contains_key(name) {
-                        names.insert(name.clone(), lex.clone());
-                    }
+                if let Some(bound) = ctx.registered.get(&(pkg, fi)) {
+                    names.extend(bound.clone());
                 }
                 overlays.insert((pkg, fi, scope), names);
             }
@@ -3669,6 +3986,11 @@ fn behavior(
                 .filter(|((_, _, name), lex)| *lex != name && !ambiguous[pkg].contains(name))
                 .map(|((_, _, name), lex)| (name.clone(), lex.clone()))
                 .collect();
+            // The registered crates' types whose reading the package's lock
+            // admits, each naming itself (`Types::registered`).
+            for path in ctx.readable.get(&pkg).into_iter().flatten().cloned() {
+                aliases.insert(path.clone(), path);
+            }
             let mut enums: Variants = d
                 .enums
                 .into_iter()
@@ -4049,11 +4371,11 @@ fn behavior(
         let mut sig = fn_syntax.signature.clone();
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
-                t.ty = expanded(r.pkg, &t.ty.localized(&ctx.file(r).imports));
+                t.ty = declared_in(r.pkg, r.file, &inline_of(r), &t.ty);
             }
         }
         if let Some(t) = &mut sig.output {
-            *t = expanded(r.pkg, &t.localized(&ctx.file(r).imports));
+            *t = declared_in(r.pkg, r.file, &inline_of(r), t);
         }
         let formatter = match sig.inputs.as_slice() {
             [crate::ast::FnArg::Receiver { plain: true }, crate::ast::FnArg::Typed(t)]
@@ -4201,6 +4523,7 @@ fn behavior(
                     result,
                     block,
                     imports: ctx.file(r).imports.clone(),
+                    seen: ctx.seen(r, f.scope),
                     aliases: fn_aliases(r),
                     homonyms: reads.call_reading(r),
                     called,
@@ -4285,6 +4608,14 @@ fn behavior(
                     result,
                     block,
                     imports: file.imports.clone(),
+                    // A constant's scope is read as one that may see any
+                    // trait: no method of its value is read as inherent.
+                    seen: lift::Seen {
+                        outside_traits: true,
+                        macro_items: true,
+                        paths_open: true,
+                        ..lift::Seen::default()
+                    },
                     aliases,
                     homonyms: reads.scope_reading(
                         (pkg, file.target, &file.item_module(*scope)),
@@ -6314,6 +6645,47 @@ fn homonym_fns(
     out
 }
 
+/// Whether an item a macro of the package makes in item position may be
+/// what a name of file `fi` means: the file invokes such a macro (an
+/// item's name is not hygienic, so it lands in the invoking module), or
+/// the package does and a module of the file imports by a glob.
+fn macro_reachable(package: &Package, fi: usize) -> bool {
+    let file = &package.files[fi];
+    package.file_makes_items(fi)
+        || (package.makes_items(fi)
+            && file
+                .scopes
+                .iter()
+                .enumerate()
+                .any(|(i, s)| s.outward_glob(i)))
+}
+
+/// The registered crates' type paths a package reads
+/// ([`crate::registered::of_package`]), less those it cannot: a path whose
+/// head (`num_bigint` of `num_bigint::BigInt`) a module, type, function or
+/// `use` of the package binds itself, since a path written relative to a
+/// module starts at what that module binds before it reaches a crate. (A
+/// macro of the package may declare a module of the crate's name: where
+/// it can be reached the lift reads no type by its path,
+/// `Types::paths_open`.)
+fn registered_paths(
+    ws: &Workspace,
+    resolver: &crate::names::Resolver<'_>,
+    pkg: usize,
+) -> Vec<String> {
+    let package = &ws.packages[pkg];
+    let mut read = crate::registered::of_package(package, &ws.lock, &ws.replaced);
+    read.retain(|path| {
+        let head = path.split("::").next().unwrap_or(path);
+        !resolver.package_binds(pkg, head)
+    });
+    read
+}
+
+/// How a module of a file (its own, or an inline module inside it) reads
+/// each name its crate's free functions share: the function the module
+/// declares, else the one the file's `use` names, else none.
+
 /// The identifiers of Rust tokens, string literals included (a format
 /// string names its inline arguments): every name a body can write.
 fn identifiers(tokens: &str) -> BTreeSet<String> {
@@ -6473,6 +6845,127 @@ fn foreign_crate(package: &Package, ty: &str) -> Option<String> {
     ty.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
         .filter_map(|word| word.split_once("::").map(|(head, _)| head.to_string()))
         .find(|head| deps.contains(head))
+}
+
+/// The bare type names a file writes in its declarations and signatures,
+/// less every name a parameter of an item of the file takes: a type
+/// parameter is bound by its item, not by its module.
+fn bare_names(file: &crate::facts::FileSyntax, facts: &SourceFile) -> BTreeSet<String> {
+    fn walk(t: &crate::ast::RustType, out: &mut BTreeSet<String>) {
+        use crate::ast::{GenericArgument, PathArguments, TypeKind};
+        match &t.kind {
+            TypeKind::Reference { elem, .. } => walk(elem, out),
+            TypeKind::Slice(t) | TypeKind::Array(t, _) | TypeKind::Paren(t) => walk(t, out),
+            TypeKind::Fn(ins, ret) => {
+                ins.iter().for_each(|t| walk(t, out));
+                walk(ret, out);
+            }
+            TypeKind::Tuple(ts) => ts.iter().for_each(|t| walk(t, out)),
+            TypeKind::Path { qself, path } => {
+                if let ([one], false) = (path.segments.as_slice(), qself) {
+                    out.insert(one.ident.clone());
+                }
+                for segment in &path.segments {
+                    if let PathArguments::AngleBracketed(args) = &segment.arguments {
+                        for a in args {
+                            if let GenericArgument::Type(t) = a {
+                                walk(t, out);
+                            }
+                        }
+                    }
+                }
+            }
+            TypeKind::Other => {}
+        }
+    }
+    let mut out = BTreeSet::new();
+    let fields = file.structs.iter().flatten().map(|(_, t)| t);
+    let variants = file
+        .enums
+        .iter()
+        .flatten()
+        .flat_map(|(_, fs)| fs.iter().map(|(_, t)| t));
+    let aliases = file.aliases.iter().map(|(_, a)| &a.to);
+    let signatures = file.fns.iter().flat_map(|f| {
+        let sig = &f.signature;
+        sig.inputs
+            .iter()
+            .filter_map(|i| match i {
+                crate::ast::FnArg::Typed(p) => Some(&p.ty),
+                crate::ast::FnArg::Receiver { .. } => None,
+            })
+            .chain(sig.output.iter())
+    });
+    for t in fields.chain(variants).chain(aliases).chain(signatures) {
+        walk(t, &mut out);
+    }
+    for (_, alias) in &file.aliases {
+        alias.params.iter().for_each(|p| {
+            out.remove(p);
+        });
+    }
+    for f in &file.fns {
+        for p in &f.signature.generics {
+            if let crate::ast::GenericParam::Type(n) | crate::ast::GenericParam::Const(n) = p {
+                out.remove(n);
+            }
+        }
+    }
+    for f in &facts.fns {
+        f.impl_params.iter().for_each(|p| {
+            out.remove(p);
+        });
+    }
+    out
+}
+
+/// The path a leaf's text is headed by, without its arguments: what the
+/// lift read first and did not read. A borrow reads as what it borrows.
+fn leaf_head(leaf: &str) -> &str {
+    let mut head = leaf.trim_start();
+    while let Some(rest) = head.strip_prefix('&') {
+        let rest = rest.trim_start();
+        head = rest.strip_prefix("mut ").unwrap_or(rest).trim_start();
+    }
+    let end = head
+        .find(|c: char| !(c.is_ascii_alphanumeric() || c == '_' || c == ':'))
+        .unwrap_or(head.len());
+    &head[..end]
+}
+
+/// The leaf of a type residue that is a chain through the fields of the
+/// workspace's types (`Outer.inner: Inner::Some.0: big::BigX`): what follows
+/// the last place, `Type.field` or `Type::Variant.field`, the chain passes
+/// through. A residue that passes through no place has none.
+fn chain_leaf(detail: &str) -> Option<&str> {
+    let ident = |s: &str| {
+        s.chars()
+            .next()
+            .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+            && s.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+    };
+    let place = |s: &str| {
+        let Some((owner, field)) = s.split_once('.') else {
+            return false;
+        };
+        let owner_ok = match owner.split_once("::") {
+            Some((ty, variant)) => ident(ty) && ident(variant),
+            None => ident(owner),
+        };
+        owner_ok
+            && !field.is_empty()
+            && field.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+    };
+    let mut rest = detail;
+    let mut through = false;
+    while let Some((head, tail)) = rest.split_once(": ") {
+        if !place(head) {
+            break;
+        }
+        through = true;
+        rest = tail;
+    }
+    through.then_some(rest)
 }
 
 /// How an effect reads after "which": `performs a Fs effect: std::fs::read`.
@@ -7924,7 +8417,7 @@ pub fn fb(n: &Node) -> u8 {
              pub struct Handle {\n    /// A raw handle.\n    pub raw: u64,\n}\n\n\
              /// Stopped by a name two declarations share.\n\
              pub fn opened(h: &Handle) -> bool {\n    let _ = h;\n    true\n}\n\n\
-             /// A float.\npub struct Leaf {\n    /// The float.\n    pub x: f64,\n}\n\n\
+             /// A cell.\npub struct Leaf {\n    /// The cell.\n    pub x: Cell<u8>,\n}\n\n\
              /// Holds the leaf.\npub struct Mid {\n    /// A count.\n    pub n: u32,\n    \
              /// The leaf.\n    pub leaf: Leaf,\n}\n\n\
              impl Mid {\n    /// Stopped by the type it is a method of.\n    \
@@ -7943,7 +8436,7 @@ pub fn fb(n: &Node) -> u8 {
              /// One function for each build configuration.\n#[cfg(unix)]\n\
              pub fn width() -> u32 {\n    1\n}\n\n\
              /// One function for each build configuration.\n#[cfg(not(unix))]\n\
-             pub fn width(scale: f64) -> u32 {\n    let _ = scale;\n    2\n}\n",
+             pub fn width(scale: Cell<u8>) -> u32 {\n    let _ = scale;\n    2\n}\n",
         ),
         (
             "src/first.rs",
@@ -7968,9 +8461,9 @@ pub fn fb(n: &Node) -> u8 {
         ),
         (
             "src/reader.rs",
-            "//! A file that does not say which of the two shapes it means.\n\n\
+            "//! A file that imports one of the two shapes by a glob.\n\n\
              use crate::first::*;\n\n\
-             /// Stopped by a name the file does not tell apart.\n\
+             /// Reads the shape its glob imports.\n\
              pub fn corners(s: &Shape) -> u32 {\n    s.sides\n}\n",
         ),
     ];
@@ -7988,19 +8481,13 @@ pub fn fb(n: &Node) -> u8 {
                 crate::lift::DECLARED_TWICE
             ))
         );
-        // One name, two modules: the module that declares one and the file
-        // that imports one read it, and a file that does neither reads none.
-        assert_eq!(
-            detail("names::reader::corners"),
-            residue(format!(
-                "type outside the lift: Shape: {}",
-                crate::lift::SHARED_NAME
-            ))
-        );
+        // One name, two modules: the module that declares one, the file
+        // that imports one and the file whose glob imports one read it.
         for told in [
             "names::first::sides",
             "names::second::radius",
             "names::teller::round",
+            "names::reader::corners",
         ] {
             let rows = rows_of(&frontier, told, "definition");
             assert_eq!(rows.len(), 1, "{told}: {rows:?}");
@@ -8015,7 +8502,7 @@ pub fn fb(n: &Node) -> u8 {
             rows_of(&frontier, "owners::Mid::count", "detail"),
             vec![(
                 "residue".to_string(),
-                "type outside the lift: Mid.leaf: Leaf.x: f64".to_string()
+                "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>".to_string()
             )]
         );
     }
@@ -8392,7 +8879,7 @@ pub fn fb(n: &Node) -> u8 {
                 "src/lib.rs",
                 "//! Reasons.\n\
                  /// A circle.\npub struct Circle(pub u32);\n\
-                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: f64,\n}\n\
+                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: Cell<u8>,\n}\n\
                  /// A bag.\npub struct Bag {\n    /// Its blob.\n    pub blob: Blob,\n}\n\
                  /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
                  impl Circle {\n    /// The radius.\n    \
@@ -8421,7 +8908,7 @@ pub fn fb(n: &Node) -> u8 {
             (
                 "reasons::Bag::count",
                 "type",
-                "type outside the lift: Bag.blob: Blob.weight: f64",
+                "type outside the lift: Bag.blob: Blob.weight: Cell<u8>",
             ),
             (
                 "reasons::Square::grow",
@@ -9202,7 +9689,7 @@ pub fn fb(n: &Node) -> u8 {
             "use serde_json::Value;\npub fn null(v: Value) -> bool { v.is_null() }\n",
         );
         assert!(
-            frontier.contains("takes or returns Value, a type of the serde_json crate"),
+            frontier.contains("takes or returns serde_json::Value, a type of the serde_json crate"),
             "{frontier}"
         );
     }
@@ -10239,5 +10726,312 @@ pub fn fb(n: &Node) -> u8 {
             frontier.contains("\"../member/src/lib.rs:4\""),
             "{frontier}"
         );
+    }
+    // Class: calls the language resolves by type (kai, round 3): a
+    // function's inline module is part of its path.
+
+    /// The projection of a one-library workspace with `source` as its
+    /// `lib.rs`: its frontier and its interface module.
+    fn typed_call_projection(tag: &str, source: &str) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-typed-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+            embedding: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        let text = |suffix: &str| {
+            files
+                .iter()
+                .find(|(k, _)| k.ends_with(suffix))
+                .map(|(_, v)| String::from_utf8(v.clone()).unwrap())
+                .unwrap_or_default()
+        };
+        (text("frontier.toml"), text("Interface.lex.tex"))
+    }
+
+    #[test]
+    fn functions_of_one_name_in_two_inline_modules_have_two_paths() {
+        let (frontier, interface) = typed_call_projection(
+            "inline",
+            "pub mod outer {\n pub mod left {\n  pub fn pick() -> u8 { 1 }\n }\n \
+             pub mod right {\n  pub fn pick() -> u8 { 2 }\n }\n}\n",
+        );
+        assert!(!frontier.contains("name-collision"), "{frontier}");
+        for want in ["callWOuterLeftPick", "callWOuterRightPick"] {
+            assert!(interface.contains(want), "{want} not in {interface}");
+        }
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    /// The frontier and the behavior module of a one-file package.
+    fn refuted_projection(tag: &str, source: &str) -> (String, String) {
+        let dir = std::env::temp_dir().join(format!("uorust-refuted-{tag}-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname = \"w\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+             rust-version = \"1.70\"\n",
+        )
+        .unwrap();
+        std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+        let options = super::Options {
+            name: "w".to_string(),
+            last_modified: "2026-11-15T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+            embedding: None,
+        };
+        let files = crate::project_workspace(&dir, &options).expect("a projection");
+        let _ = std::fs::remove_dir_all(&dir);
+        let text = |suffix: &str| {
+            files
+                .iter()
+                .find(|(k, _)| k.ends_with(suffix))
+                .map(|(_, v)| String::from_utf8(v.clone()).unwrap())
+                .unwrap_or_default()
+        };
+        (text("frontier.toml"), text("Behavior.lex.tex"))
+    }
+
+    #[test]
+    fn an_inline_module_reads_a_shared_name_by_its_own_use_alone() {
+        let (_, behavior) = refuted_projection(
+            "homonym-use",
+            "mod left {\n pub fn pick() -> u8 { 1 }\n}\n\
+             mod right {\n pub fn pick() -> u8 { 2 }\n}\n\
+             use right::pick;\n\
+             pub fn top() -> u8 { pick() }\n\
+             pub mod inner {\n use crate::left::pick;\n pub fn caller() -> u8 { pick() }\n}\n",
+        );
+        let top = behavior
+            .lines()
+            .find(|l| l.contains("name: top,"))
+            .unwrap_or_default();
+        assert!(top.contains("(rightPick)"), "{behavior}");
+        let caller = behavior
+            .lines()
+            .find(|l| l.contains("name: caller,"))
+            .unwrap_or_default();
+        assert!(caller.contains("(leftPick)"), "{behavior}");
+    }
+
+    #[test]
+    fn an_alias_that_takes_a_primitive_name_is_read_nowhere() {
+        let (frontier, behavior) = refuted_projection(
+            "primitive-alias",
+            "pub mod narrow {\n #[allow(non_camel_case_types)]\n pub type f64 = f32;\n \
+             pub fn small(x: f64) -> bool { x > 0.5 }\n}\n\
+             pub fn wide(x: f64) -> bool { x > 0.5 }\n",
+        );
+        assert!(!behavior.contains("8 23"), "{behavior}");
+        assert!(
+            frontier.contains("a primitive type's name an alias takes"),
+            "{frontier}"
+        );
+    }
+
+    #[test]
+    fn only_a_glob_that_may_leave_its_file_brings_a_macros_items() {
+        let scope = |globs: &[&str]| crate::facts::ScopeFact {
+            glob: !globs.is_empty(),
+            globs: globs.iter().map(|g| g.to_string()).collect(),
+            ..crate::facts::ScopeFact::default()
+        };
+        assert!(!scope(&["super"]).outward_glob(1));
+        assert!(!scope(&[]).outward_glob(0));
+        // The file's own scope: `super` is another file's module.
+        assert!(scope(&["super"]).outward_glob(0));
+        assert!(scope(&["crate::other"]).outward_glob(1));
+        assert!(scope(&["super", "other"]).outward_glob(1));
+    }
+
+    // What a type name means: the leaf of a chain is named as the file
+    // that declares the last type of the chain writes it.
+
+    /// The row the frontier writes for `function`: its table and detail.
+    fn type_names_row(frontier: &str, function: &str) -> String {
+        let at = frontier
+            .find(&format!("function = \"{function}\""))
+            .unwrap_or_else(|| panic!("no row of {function}: {frontier}"));
+        let start = frontier[..at].rfind("[[").unwrap();
+        let end = frontier[at..]
+            .find("\n\n")
+            .map_or(frontier.len(), |e| at + e);
+        frontier[start..end].to_string()
+    }
+
+    #[test]
+    fn type_names_a_chain_ending_at_a_registry_type_is_a_foreign_row() {
+        let frontier = resolved_frontier(
+            "leaf-foreign",
+            "\n[dependencies]\nbignum = \"1\"\nwide = \"1\"\n",
+            "pub mod num {\n use wide::prelude::*;\n use bignum::BigX;\n\
+             pub struct Ratio { pub q: BigX }\n}\n\
+             pub mod calc {\n use crate::num::Ratio;\n\
+             pub fn keep(r: Ratio) -> Ratio { r }\n}\n",
+        );
+        let row = type_names_row(&frontier, "w::calc::keep");
+        assert!(row.starts_with("[[foreign]]"), "{row}");
+        assert!(
+            row.contains("Ratio.q: bignum::BigX, a type of the bignum crate"),
+            "{row}"
+        );
+    }
+
+    #[test]
+    fn type_names_a_head_the_lift_does_not_read_is_the_leaf() {
+        let frontier = resolved_frontier(
+            "leaf-head",
+            "\n[dependencies]\nbignum = \"1\"\n",
+            "use std::cell::RefCell;\nuse bignum::BigX;\n\
+             pub struct Held { pub c: RefCell<BigX> }\n\
+             pub fn keep(h: Held) -> Held { h }\n",
+        );
+        let row = type_names_row(&frontier, "w::keep");
+        assert!(row.starts_with("[[residue]]"), "{row}");
+        assert!(row.contains("Held.c: RefCell<bignum::BigX>"), "{row}");
+    }
+
+    #[test]
+    fn type_names_a_registry_map_a_use_binds_is_not_the_standard_one() {
+        let frontier = resolved_frontier(
+            "leaf-map",
+            "\n[dependencies]\nfastmap = \"1\"\n",
+            "use fastmap::HashMap;\n\
+             pub struct Index { pub at: HashMap<u8, u8> }\n\
+             pub fn size(i: &Index) -> usize { i.at.len() }\n",
+        );
+        let row = type_names_row(&frontier, "w::size");
+        assert!(row.starts_with("[[foreign]]"), "{row}");
+        assert!(row.contains("a type of the fastmap crate"), "{row}");
+    }
+
+    #[test]
+    fn type_names_types_of_two_inline_modules_of_a_file_are_two_types() {
+        let frontier = resolved_frontier(
+            "inline-types",
+            "",
+            "pub struct Shape { pub w: u8 }\npub fn wide(s: Shape) -> u8 { s.w }\n\
+             pub mod ext {\n pub struct Shape { pub h: u8 }\n\
+             pub fn tall(s: Shape) -> u8 { s.h }\n}\n",
+        );
+        assert!(!frontier.contains("declared twice"), "{frontier}");
+        assert!(type_names_row(&frontier, "w::wide").starts_with("[[lifted]]"));
+        assert!(type_names_row(&frontier, "w::ext::tall").starts_with("[[lifted]]"));
+    }
+
+    #[test]
+    fn type_names_a_shared_name_reads_as_what_the_module_binds() {
+        let frontier = resolved_frontier(
+            "shared-glob",
+            "",
+            "pub mod a {\n pub struct Op { pub k: u8 }\n}\n\
+             pub mod b {\n pub struct Op { pub j: u8 }\n}\n\
+             pub mod c {\n use crate::b::*;\n pub fn j(o: Op) -> u8 { o.j }\n}\n\
+             pub mod d {\n use std::cell::Cell;\n\
+             pub struct Count { pub n: Cell<u8> }\n\
+             pub fn keep(c: Count) -> Count { c }\n}\n\
+             pub mod e {\n pub struct Cell { pub v: u8 }\n}\n\
+             pub mod f {\n pub struct Cell { pub u: u8 }\n}\n",
+        );
+        assert!(
+            type_names_row(&frontier, "w::c::j").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        let row = type_names_row(&frontier, "w::d::keep");
+        assert!(row.contains("Count.n: std::cell::Cell<u8>"), "{row}");
+        assert!(!frontier.contains("one of several types"), "{frontier}");
+    }
+
+    #[test]
+    fn type_names_a_name_two_globs_of_outside_crates_may_bind_stays_open() {
+        let frontier = resolved_frontier(
+            "shared-open",
+            "\n[dependencies]\nwide = \"1\"\nthin = \"1\"\n",
+            "pub mod a {\n pub struct Op { pub k: u8 }\n}\n\
+             pub mod b {\n pub struct Op { pub j: u8 }\n}\n\
+             pub mod c {\n use wide::*;\n use thin::*;\n pub struct Holder { pub o: Op }\n\
+             pub fn keep(h: Holder) -> Holder { h }\n}\n",
+        );
+        let row = type_names_row(&frontier, "w::c::keep");
+        assert!(row.contains(crate::lift::SHARED_NAME), "{row}");
+    }
+
+    #[test]
+    fn type_names_a_standard_map_with_a_hasher_reads_as_the_unordered_map() {
+        let frontier = resolved_frontier(
+            "hasher-map",
+            "",
+            "use std::collections::{HashMap, HashSet};\nuse std::hash::BuildHasherDefault;\n\
+             pub struct Mix { pub state: u64 }\n\
+             pub struct Index {\n pub at: HashMap<u8, u8, BuildHasherDefault<Mix>>,\n\
+             pub seen: HashSet<u8, BuildHasherDefault<Mix>>,\n}\n\
+             pub fn has(i: &Index, k: u8) -> bool { i.at.contains_key(&k) }\n\
+             pub fn saw(i: &Index, k: u8) -> bool { i.seen.contains(&k) }\n\
+             pub fn keys(i: &Index) -> Vec<u8> { i.at.keys().cloned().collect() }\n",
+        );
+        assert!(
+            type_names_row(&frontier, "w::has").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        assert!(
+            type_names_row(&frontier, "w::saw").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        let keys = type_names_row(&frontier, "w::keys");
+        assert!(keys.contains("whose order is unspecified"), "{keys}");
+    }
+
+    #[test]
+    fn type_names_a_name_only_a_registry_glob_binds_is_that_crates() {
+        let frontier = resolved_frontier(
+            "glob-leaf",
+            "\n[dependencies]\nbits = \"1\"\n",
+            "pub mod store {\n use bits::prelude::*;\n\
+             pub struct Map { pub bits: BitBox, pub n: Vec<u8> }\n}\n\
+             pub mod read {\n use crate::store::Map;\n pub fn keep(m: Map) -> Map { m }\n}\n\
+             pub struct Shape { pub w: u8 }\npub struct Holder { pub s: Shape }\n\
+             pub fn width(h: &Holder) -> u8 { h.s.w }\n\
+             pub mod ext {\n use bits::prelude::*;\n pub fn lone(b: BitBox) -> BitBox { b }\n}\n",
+        );
+        let row = type_names_row(&frontier, "w::read::keep");
+        assert!(
+            row.contains("Map.bits: bits::prelude::BitBox, a type of the bits crate"),
+            "{row}"
+        );
+        // The glob of an inline module binds names in that module only.
+        assert!(
+            type_names_row(&frontier, "w::width").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        assert!(type_names_row(&frontier, "w::ext::lone").contains("a type of the bits crate"));
+    }
+
+    #[test]
+    fn type_names_a_self_type_written_by_a_path_reads_as_the_type_it_names() {
+        let frontier = resolved_frontier(
+            "owner-path",
+            "",
+            "pub struct Shape { pub w: u8 }\n\
+             pub mod ext {\n impl super::Shape {\n  pub fn width(&self) -> u8 { self.w }\n }\n}\n",
+        );
+        let at = frontier.find("::width\"").expect("a row of width");
+        let start = frontier[..at].rfind("[[").unwrap();
+        assert!(frontier[start..].starts_with("[[lifted]]"), "{frontier}");
     }
 }

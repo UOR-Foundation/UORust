@@ -97,6 +97,7 @@ const CODE: &[(&str, &str)] = &[
     ("src/project/library.rs", include_str!("project/library.rs")),
     ("src/queue.rs", include_str!("queue.rs")),
     ("src/register.rs", include_str!("register.rs")),
+    ("src/registered.rs", include_str!("registered.rs")),
     ("src/registry.rs", include_str!("registry.rs")),
     ("src/route.rs", include_str!("route.rs")),
     ("src/shard.rs", include_str!("shard.rs")),

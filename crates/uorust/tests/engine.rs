@@ -2077,10 +2077,10 @@ fn every_core_body_is_embedded_ue_19() {
     let _ = std::fs::remove_dir_all(&work);
 }
 
-/// UE-28: adding another MIR method must not steal an existing method's name.
-#[test]
-fn mir_method_homonyms_have_stable_names_ue_28() {
-    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("mir-method-homonyms");
+/// Compiler inputs shared by the method-identity and bounded-proof regressions.
+fn mir_method_fixture(case: &str) -> (PathBuf, PathBuf, PathBuf) {
+    let work =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join(format!("mir-method-homonyms-{case}"));
     let _ = std::fs::remove_dir_all(&work);
     let source = work.join("source");
     std::fs::create_dir_all(source.join("src")).expect("source");
@@ -2111,6 +2111,13 @@ edition = "2021"
     );
     let dumps = work.join("all");
     uorust::mir::dump(&source, &dumps, &Default::default()).expect("actual compiler MIR");
+    (work, source, dumps)
+}
+
+/// UE-28: every homonym retains its source-qualified name.
+#[test]
+fn mir_method_homonyms_have_stable_names_ue_28() {
+    let (work, source, dumps) = mir_method_fixture("names");
     let candidates = |at: &Path| {
         let mut opts = options("owners");
         opts.mir = Some(mir_options(
@@ -2230,4 +2237,64 @@ fn mir_proof_batches_keep_dependencies_and_refuse_invalid_budgets_ue_29() {
     assert!(uorust::mir::proof_batches(&BTreeMap::new(), 2)
         .expect("no translations")
         .is_empty());
+    let (work, source, dumps) = mir_method_fixture("batches");
+    let verdicts = work.join("verdicts.toml");
+    let scratch = work.join("trial");
+    let proved =
+        uorust::mir::prove_bounded(&source, &options("owners"), &dumps, &verdicts, &scratch, 1)
+            .expect("actual SDK proofs");
+    assert_eq!(proved.proved, 3);
+    assert_eq!(proved.refused, 0);
+    // Each single-function trial discovers its actual axiom set, then verifies it.
+    assert_eq!(proved.runs, 6);
+    let reused =
+        uorust::mir::prove_bounded(&source, &options("owners"), &dumps, &verdicts, &scratch, 1)
+            .expect("reuse verified digests");
+    assert_eq!(reused.runs, 0, "unchanged proofs were repeated");
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-30: registry alias discovery cannot erase an admitted number model.
+#[test]
+fn registered_number_alias_keeps_its_admitted_model_ue_30() {
+    let dir = scratch("registered-number-alias", &[
+        ("Cargo.toml", "[package]\nname = \"number_alias\"\nversion = \"0.1.0\"\nedition = \"2021\"\nrust-version = \"1.97\"\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\n"),
+        ("src/lib.rs", "use num_rational::BigRational;\npub fn keep(r: BigRational) -> BigRational { r }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Cargo lock");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let lifted = |files: &BTreeMap<String, Vec<u8>>| {
+        frontier_rows(files, "lifted")
+            .iter()
+            .any(|row| row["function"].as_str() == Some("number_alias::keep"))
+    };
+    assert!(
+        lifted(&project(&dir, "number_alias")),
+        "the registered alias lost its type model"
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    let checksum = "f83d14da390562dca69fc84082e73e548e1ad308d24accdedd2720017cb37824";
+    assert!(
+        original.contains(checksum),
+        "the fixture did not lock the registered archive"
+    );
+    std::fs::write(
+        &lock,
+        original.replace(checksum, &"0".repeat(checksum.len())),
+    )
+    .expect("planted wrong checksum");
+    assert!(
+        !lifted(&project(&dir, "number_alias")),
+        "a different archive acquired the registered model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
 }
