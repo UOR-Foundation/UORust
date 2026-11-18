@@ -272,6 +272,19 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
                     .get(t)
                     .is_some_and(|(decl, _)| fields(decl).contains("Prelude::JsonValue"))
             });
+        let shared_cell = own
+            .iter()
+            .filter_map(|d| definitions.text(d))
+            .filter_map(|text| text.split_once("body: ").map(|(head, _)| head))
+            .any(|text| {
+                text.contains("Prelude::RcCellRef") || text.contains("Prelude::ArcCellRef")
+            })
+            || reached.iter().any(|t| {
+                types.get(t).is_some_and(|(decl, _)| {
+                    let text = fields(decl);
+                    text.contains("Prelude::RcCellRef") || text.contains("Prelude::ArcCellRef")
+                })
+            });
         let cause = match (mutual, recursive) {
             (Some((ty, group)), _) => Some(format!(
                 "it reaches the type {ty} of the mutual inductive block {group}, for which \
@@ -293,6 +306,10 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
             ),
             (None, None) if json => Some(
                 "it reaches the recursive carrier Prelude::JsonValue, which requires another memory profile than the pinned native library's"
+                    .to_string(),
+            ),
+            (None, None) if shared_cell => Some(
+                "it reaches a shared cell reference, whose native export requires a heap and ownership model"
                     .to_string(),
             ),
             (None, None) => refusal(&own, &definitions, &decls, &types, &taken),
@@ -1212,6 +1229,24 @@ mod tests {
         let admission = admit(&behavior, &library_names(&["json", "plain"]));
         assert_eq!(admission.roots, ["plain".to_string()].into_iter().collect());
         assert!(admission.refused["json"].contains("recursive carrier Prelude::JsonValue"));
+    }
+
+    #[test]
+    fn library_shared_references_require_a_native_heap_model_ue_34() {
+        for carrier in ["Prelude::RcCellRef", "Prelude::ArcCellRef"] {
+            let mut reference = library_def("reference", "v");
+            if let Decl::Definition {
+                parameters, result, ..
+            } = &mut reference
+            {
+                *parameters = vec![("v".into(), carrier.into())];
+                *result = carrier.into();
+            }
+            let behavior = library_module(vec![reference, library_def("plain", "(n + 1)")]);
+            let admission = admit(&behavior, &library_names(&["reference", "plain"]));
+            assert_eq!(admission.roots, ["plain".to_string()].into_iter().collect());
+            assert!(admission.refused["reference"].contains("requires a heap and ownership model"));
+        }
     }
 
     #[test]

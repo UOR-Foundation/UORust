@@ -2413,3 +2413,72 @@ fn locked_json_carriers_preserve_data_and_refuse_unmodeled_equality_ue_33() {
     );
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
+
+/// UE-34: an alias transports its reference, never a frozen cell value.
+#[test]
+fn shared_cell_references_transport_without_snapshotting_contents_ue_34() {
+    let dir = scratch("shared-cell-references", &[
+        ("Cargo.toml", "[package]\nname = \"shared_cells\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "use std::{cell::{Cell, RefCell}, rc::Rc, sync::Arc};\n#[derive(PartialEq)] pub struct Held { pub first: Rc<RefCell<u8>>, pub second: Rc<RefCell<u8>>, pub id: u8 }\npub fn keep(x: Rc<RefCell<u8>>) -> Rc<RefCell<u8>> { x }\npub fn cloned(x: &Rc<RefCell<u8>>) -> Rc<RefCell<u8>> { Rc::clone(x) }\npub fn pair(x: Rc<RefCell<u8>>) -> (Rc<RefCell<u8>>, Rc<RefCell<u8>>) { (x.clone(), x) }\npub fn field(h: &Held) -> Rc<RefCell<u8>> { h.first.clone() }\npub fn id(h: &Held) -> u8 { h.id }\npub fn arc_keep(x: Arc<Cell<u8>>) -> Arc<Cell<u8>> { x }\npub fn read(x: &Rc<RefCell<u8>>) -> u8 { *x.borrow() }\npub fn write(x: &Rc<RefCell<u8>>, value: u8) { *x.borrow_mut() = value; }\npub fn make(value: u8) -> Rc<RefCell<u8>> { Rc::new(RefCell::new(value)) }\npub fn counts(x: &Rc<RefCell<u8>>) -> usize { Rc::strong_count(x) }\npub fn equal(x: Rc<RefCell<u8>>, y: Rc<RefCell<u8>>) -> bool { x == y }\npub fn held_equal(x: Held, y: Held) -> bool { x == y }\n"),
+    ]);
+    let files = project(&dir, "shared_cells");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|row| row["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "cloned", "pair", "field", "id", "arc_keep"] {
+        assert!(
+            lifted.contains(&format!("shared_cells::{name}")),
+            "reference transport did not lift: {name}"
+        );
+    }
+    for name in ["read", "write", "make", "counts", "equal", "held_equal"] {
+        assert!(
+            !lifted.contains(&format!("shared_cells::{name}")),
+            "unmodeled shared heap operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write reference projection");
+    let kernel = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK verifier");
+    assert!(
+        kernel.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&kernel.stdout),
+        String::from_utf8_lossy(&kernel.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-35: wide field and recursive-proof records must survive SDK formatting.
+#[test]
+fn long_type_declarations_are_canonical_without_rewriting_ue_35() {
+    let dir = scratch("wide-type-layout", &[
+        ("Cargo.toml", "[package]\nname = \"wide_types\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "pub struct PayloadWithAnIntentionallyLongQualifiedNameForCanonicalLayout { pub value: u8 }\npub struct Holder { pub overridesWithAnIntentionallyWideFieldName: Vec<PayloadWithAnIntentionallyLongQualifiedNameForCanonicalLayout> }\npub enum RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout { End, Next(Box<RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout>) }\npub fn keep(h: Holder) -> Holder { h }\npub fn depth(t: &RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout) -> u32 { match t { RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout::End => 0, RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout::Next(rest) => depth(rest).saturating_add(1) } }\n"),
+    ]);
+    let files = project(&dir, "wide_types");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write wide declarations");
+    let check = std::process::Command::new("lexlean")
+        .args(["fmt", "--check"])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK formatter");
+    assert!(
+        check.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&check.stdout),
+        String::from_utf8_lossy(&check.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}

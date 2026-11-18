@@ -1554,8 +1554,18 @@ impl Types {
             // atomic) is not read: it stays outside, the leaf of every
             // chain through it.
             ("Box", 1) => *arg(0)?,
-            // A cell another owner shares is changed through any owner,
-            // and every other sees the change: the alias is the leaf.
+            // A shared cell is an allocation reference, never its current
+            // contents. Transport and owner clones preserve this identity;
+            // no heap read, write, allocation or equality is read here.
+            ("Rc" | "Arc", 1)
+                if imported
+                    && self.cell_of(written[0]).is_some_and(|(kind, _)| {
+                        matches!(kind, CellKind::RefCell | CellKind::Cell)
+                    }) =>
+            {
+                Ty::Named(format!("Prelude::{name}CellRef"))
+            }
+            // Concurrent locks still require a synchronization model.
             ("Rc" | "Arc", 1) if imported && self.cell_of(written[0]).is_some() => {
                 let kind = self.cell_of(written[0]).map_or("cell", |(k, _)| k.name());
                 return Err(Residue::Type(format!(
@@ -4666,10 +4676,10 @@ fn std_call(
             let ((v, vt), acc) = flat_of(a, env, ctx, acc, want)?;
             flat_some(v, vt, acc)
         }
-        ([s, n], [rs::RustExpr::Reference(a)], _)
-            if matches!(s.as_str(), "Rc" | "Arc") && n == "clone" && !a.mutable =>
+        ([s, n], [a], _)
+            if matches!(s.as_str(), "Rc" | "Arc") && n == "clone" && !env.types.declares(s) =>
         {
-            let ((v, vt), acc) = flat_of(&a.expr, env, ctx, acc, want)?;
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, want)?;
             flat_some(v, vt, acc)
         }
         ([s, n], [a], _) if s == "String" && n == "from" => {
@@ -14977,13 +14987,10 @@ mod tests {
                 field("deep", Ty::List(Box::new(Ty::Nat(Some(8))))),
             ]
         );
-        // A cell that changes behind a shared borrow is the leaf where
-        // another owner shares it; a field that is a cell holds its content
-        // (see `CellKind`).
+        // Shared cells carry the allocation reference, not a snapshot.
         assert_eq!(
-            types.outside["Cellular"],
-            "Cellular.inner: Rc<RefCell<u32>>: a RefCell that another owner shares, which sees \
-             every change"
+            fields(&types, "Cellular"),
+            [field("inner", Ty::Named("Prelude::RcCellRef".into()))]
         );
         assert_eq!(
             fields(&types, "Counted"),
@@ -16054,12 +16061,17 @@ mod tests {
                 field("label", Ty::Str),
             ]
         );
-        // Another owner of the cell may change it: the alias is the leaf.
+        // Another owner may change the cell: only the reference is held.
         assert_eq!(
-            types.outside["Shared"],
-            "Shared.inner: Rc<RefCell<u32>>: a RefCell that another owner shares, which sees \
-             every change"
+            fields(&types, "Shared"),
+            [field("inner", Ty::Named("Prelude::RcCellRef".into()))]
         );
+        assert!(lift("fn read(m: &Shared) -> u32 { *m.inner.borrow() }", &types).is_err());
+        assert!(lift(
+            "fn write(m: &Shared) { *m.inner.borrow_mut() = 1; }",
+            &types
+        )
+        .is_err());
         let out = lift(
             "fn size(m: &Shelf) -> usize { m.books.borrow().len() }",
             &types,

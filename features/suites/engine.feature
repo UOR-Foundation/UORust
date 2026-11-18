@@ -208,3 +208,18 @@ Feature: engine
     And the actual SDK verifies the carrier definitions and their function bodies
     And recursive JSON native exports are refused individually under the pinned library profile
     And replacing the archive checksum refuses the carrier reading
+
+  @UE-34 @build
+  Scenario: Shared mutable owners retain references instead of frozen contents
+    Given Rc and Arc owners of RefCell and Cell, including two fields that may alias
+    When identity, owner cloning, tuple and enclosing-field functions are projected
+    Then their models transport the same allocation references
+    And the actual SDK verifies their carrier definitions and function bodies
+    But heap allocation, reads, writes, owner counts and value equality stay unlifted
+    And native roots requiring these reference carriers are refused individually
+
+  @UE-35 @build
+  Scenario: Long type names generate canonical declarations
+    Given a structure field and recursive tree with long qualified type names
+    When their functions are projected
+    Then the pinned SDK accepts the generated modules without rewriting their layout

@@ -255,3 +255,15 @@ id = "UE-33"
 level = "build"
 suite = "engine"
 statement = "Locked serde_json values and numbers have explicit recursive carrier models for passive transport, preserving numeric storage variants and object iteration order across feature representations; unmodeled comparisons, representation-dependent operations and wrong-checksum readings stay refused"
+
+[[id]]
+id = "UE-34"
+level = "build"
+suite = "engine"
+statement = "Passive Rc and Arc ownership of RefCell and Cell retains allocation identity in explicit reference carriers rather than snapshotting mutable contents; transport and cloning lift, while allocation, content reads and writes, owner counts, value equality and native export without a heap model remain refused"
+
+[[id]]
+id = "UE-35"
+level = "build"
+suite = "engine"
+statement = "Generated structure fields and recursive size-proof records retain the pinned LexLean canonical layout when qualified and nested type names exceed an inline line's width"

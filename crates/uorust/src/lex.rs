@@ -350,6 +350,18 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 .iter()
                 .map(|(field, ty)| format!("{{name: {field}, type: {ty}}}"))
                 .collect();
+            let lines: Vec<String> = fields
+                .iter()
+                .zip(&items)
+                .enumerate()
+                .map(|(i, ((field, ty), item))| {
+                    if 4 + item.len() + usize::from(i + 1 < items.len()) <= WIDTH {
+                        item.clone()
+                    } else {
+                        format!("{{\n      name: {field},\n      type: {ty}\n    }}")
+                    }
+                })
+                .collect();
             let head = [
                 format!("name: {name}"),
                 "type_parameters: []".to_string(),
@@ -358,7 +370,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
             let mut flat = head.to_vec();
             flat.push(format!("fields: [{}]", items.join(", ")));
             let mut broken: Vec<String> = head.iter().map(|m| format!("  {m}")).collect();
-            broken.push(list("fields", &items, 2, false));
+            broken.push(list("fields", &lines, 2, false));
             members("structure", &flat, &broken, true)
         }
         Decl::Inductive { name, constructors } => {
@@ -498,6 +510,20 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
             axioms,
         } => {
             let ps = params(parameters);
+            let mut broken_proof = format!("  proof: {proof}");
+            if broken_proof.len() + usize::from(!axioms.is_empty()) > WIDTH {
+                if let Some(definitions) = proof
+                    .strip_prefix("linear_arithmetic{definitions: [")
+                    .and_then(|text| text.strip_suffix("]}"))
+                {
+                    let definitions: Vec<String> =
+                        definitions.split(", ").map(str::to_string).collect();
+                    broken_proof = format!(
+                        "  proof: linear_arithmetic{{\n{}\n  }}",
+                        list("definitions", &definitions, 4, false)
+                    );
+                }
+            }
             let mut flat = vec![
                 format!("name: {name}"),
                 format!("parameters: [{}]", ps.join(", ")),
@@ -508,7 +534,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 format!("  name: {name}"),
                 list("parameters", &ps, 2, true),
                 format!("  statement: {statement}"),
-                format!("  proof: {proof}"),
+                broken_proof,
             ];
             if !axioms.is_empty() {
                 flat.push(format!("axioms: [{}]", axioms.join(", ")));

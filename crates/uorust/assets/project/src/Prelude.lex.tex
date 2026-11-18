@@ -5,6 +5,20 @@
 \title{Lifted text prelude}
 \begin{semanticmodule}
 inductive{
+  name: RcCellRef,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Allocation, fields: [Nat]}]
+}
+
+inductive{
+  name: ArcCellRef,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Allocation, fields: [Nat]}]
+}
+
+inductive{
   name: JsonNumber,
   type_parameters: [],
   parameters: [],
