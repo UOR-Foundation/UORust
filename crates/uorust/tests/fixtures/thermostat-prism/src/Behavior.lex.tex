@@ -1432,13 +1432,11 @@ definition{
   name: firstIs,
   parameters: [rooms : (List Room), name : String],
   result: Bool,
-  body: (match (firstIsPart1 name rooms)
-    | Option.none => (match (ctor Option.some [String] name)
-      | Option.none => true
-      | Option.some right1 => false)
-    | Option.some left1 => (match (ctor Option.some [String] name)
+  body: (let leftOption1 : (Option String) := (firstIsPart1 name rooms); (let rightOption1 : (Option String) := (ctor Option.some [String] name); (match leftOption1
+    | Option.none => (match rightOption1 | Option.none => true | Option.some right1 => false)
+    | Option.some left1 => (match rightOption1
       | Option.none => false
-      | Option.some right1 => (prim equal left1 right1 : Bool)))
+      | Option.some right1 => (prim equal left1 right1 : Bool)))))
 }
 
 definition{

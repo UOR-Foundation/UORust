@@ -313,3 +313,10 @@ Feature: engine
     Then the actual SDK proves their existing IEEE models including negative zero
     And a workspace declaration under a primitive name retains its own type
     But an operation outside the IEEE model stays unlifted
+
+  @UE-48 @build
+  Scenario: Early failure preserves mutable state
+    Given functions that update mutable parameters before Result or Option propagation
+    When propagation succeeds or exits early, including after a state-changing callee
+    Then the SDK proves the returned values and every resulting state against executable Rust vectors
+    But a mutable alias still refuses the lift

@@ -2066,6 +2066,8 @@ struct Ctx {
     params: Vec<String>,
     /// Its result type.
     result: Ty,
+    /// Mutable Rust parameters whose current values accompany an early result.
+    return_states: Vec<String>,
     /// The LexLean name of the function being lifted, which its helpers extend.
     own: String,
     /// Rust local -> (LexLean name, type).
@@ -3792,6 +3794,8 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         (Ty::Option(inner), B::Eq | B::Ne) => {
             let (x, acc) = ctx.fresh(env, acc, "left");
             let (y, acc) = ctx.fresh(env, acc, "right");
+            let (left, acc) = ctx.fresh(env, acc, "leftOption");
+            let (right, acc) = ctx.fresh(env, acc, "rightOption");
             let Some((same, acc)) = same_value(inner, &x, &y, env, acc) else {
                 return Err(Residue::Form(format!(
                     "comparison {} of {}",
@@ -3807,7 +3811,7 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             };
             let same = if eq { same } else { format!("(not {same})") };
             let none_r = Expr::Match {
-                scrutinee: r.clone(),
+                scrutinee: right.clone(),
                 arms: vec![
                     Arm {
                         pattern: "Option.none".into(),
@@ -3820,7 +3824,7 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
                 ],
             };
             let some_r = Expr::Match {
-                scrutinee: r.clone(),
+                scrutinee: right.clone(),
                 arms: vec![
                     Arm {
                         pattern: "Option.none".into(),
@@ -3834,19 +3838,22 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             };
             return Ok((
                 (
-                    Expr::Match {
-                        scrutinee: l.clone(),
-                        arms: vec![
-                            Arm {
-                                pattern: "Option.none".into(),
-                                body: none_r,
-                            },
-                            Arm {
-                                pattern: format!("Option.some {x}"),
-                                body: some_r,
-                            },
-                        ],
-                    },
+                    wrap_lets(
+                        vec![(left.clone(), lt.render(), l), (right, lt.render(), r)],
+                        Expr::Match {
+                            scrutinee: left,
+                            arms: vec![
+                                Arm {
+                                    pattern: "Option.none".into(),
+                                    body: none_r,
+                                },
+                                Arm {
+                                    pattern: format!("Option.some {x}"),
+                                    body: some_r,
+                                },
+                            ],
+                        },
+                    ),
                     Ty::Bool,
                 ),
                 acc,
@@ -10825,7 +10832,7 @@ fn block(
         _ => {}
     }
     if let Some((first, rest)) = stmts.split_first() {
-        if let Some(rewritten) = rewritten(first, ctx, &acc) {
+        if let Some(rewritten) = rewritten(first, env, ctx, &acc) {
             return block_rewritten(rewritten, rest, env, ctx, acc, want);
         }
     }
@@ -10975,13 +10982,48 @@ fn block(
 /// as the entry read, updated and written back, and, among the function's
 /// own statements, a `?` hoisted to a binding of its own. With them, the
 /// fresh binder the rewrite takes.
-fn rewritten(first: &rs::Stmt, ctx: &Ctx, acc: &Acc) -> Option<(Vec<rs::Stmt>, String)> {
+fn rewritten(first: &rs::Stmt, env: &Env, ctx: &Ctx, acc: &Acc) -> Option<(Vec<rs::Stmt>, String)> {
     let n = acc.given.len() + 1;
     if let Some(written) = entry_update(first, n) {
         return Some((written, format!("entry{n}")));
     }
     if !ctx.top {
         return None;
+    }
+    // Unpack the callee's state before matching its fallible return value.
+    // Otherwise the failure branch would return the caller's old state.
+    if let rs::Stmt::Local(local) = first {
+        if let Some(init) = &local.init {
+            if let rs::RustExpr::Try(inner) = &*init.expr {
+                if init.diverge.is_none() && threaded_call(inner, env, ctx).is_some() {
+                    let mut name = format!("propagated{n}");
+                    while ctx.locals.contains_key(&name)
+                        || env.fns.contains_key(&name)
+                        || ctx.taken(env, &name)
+                        || acc.given.contains(&name)
+                    {
+                        name.push('_');
+                    }
+                    let binding = rs::Stmt::Local(rs::Local {
+                        pat: rs::Pat::Ident(rs::PatIdent {
+                            ident: name.clone(),
+                            by_ref: false,
+                            subpat: None,
+                        }),
+                        init: Some(rs::LocalInit {
+                            expr: inner.clone(),
+                            diverge: None,
+                        }),
+                    });
+                    let mut next = local.clone();
+                    if let Some(init) = &mut next.init {
+                        *init.expr =
+                            rs::RustExpr::Try(Box::new(rs::RustExpr::Path(rs::Path::ident(&name))));
+                    }
+                    return Some((vec![binding, rs::Stmt::Local(next)], name));
+                }
+            }
+        }
     }
     let (binding, stmt) = hoist_try(first, n)?;
     Some((vec![binding, stmt], format!("tried{n}")))
@@ -12047,12 +12089,6 @@ impl StateScan<'_> {
         if let Some(s) = self.state(e) {
             return Err(self.escapes(s));
         }
-        // A failed `?` leaves with the error alone, not the states with it.
-        if matches!(e, rs::RustExpr::Try(_)) {
-            return Err(Residue::Form(
-                "? in a body that threads its &mut parameters".to_string(),
-            ));
-        }
         self.within(e)
     }
 
@@ -12433,7 +12469,9 @@ fn let_stmt(
         Some(d) => Some(d.clone()),
         None if is_empty_vec(&init.expr) => returned_type(&ident.ident.clone(), rest, ctx, want)
             .or_else(|| used_type(&ident.ident, &init.expr, rest, env, ctx)),
-        None => None,
+        None => {
+            returned_type(&ident.ident, rest, ctx, want).filter(|t| matches!(t, Ty::Outcome(..)))
+        }
     };
     let ((value, vt), acc) = flat_of(&init.expr, env, &ctx.below(), acc, hint.as_ref())?;
     if declared.as_ref().is_some_and(|d| !d.same(&vt)) {
@@ -12833,11 +12871,13 @@ fn tail_type(e: &rs::RustExpr, ident: &str, want: &Ty) -> Option<Ty> {
     };
     match (e, want) {
         (rs::RustExpr::Path(p), _) if p.is_ident(ident) => Some(want.clone()),
-        (rs::RustExpr::Tuple(items), Ty::Tuple(ts)) if items.len() == ts.len() => items
-            .iter()
-            .zip(ts)
-            .find(|(item, _)| is_local(item))
-            .map(|(_, t)| t.clone()),
+        (rs::RustExpr::Tuple(items), Ty::Tuple(ts) | Ty::Pair(ts)) if items.len() == ts.len() => {
+            items
+                .iter()
+                .zip(ts)
+                .find(|(item, _)| is_local(item))
+                .map(|(_, t)| t.clone())
+        }
         (rs::RustExpr::Call(c), _) => match (&*c.func, c.args.as_slice()) {
             (rs::RustExpr::Path(p), [arg])
                 if is_local(arg) && (p.is_ident("Some") || p.is_ident("Ok")) =>
@@ -12897,7 +12937,21 @@ fn question(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     let ((s, st), mut acc) = flat_of(e, env, &ctx.below(), acc, None)?;
-    let (inner, early) = match (&st, &ctx.result) {
+    let result = if ctx.return_states.is_empty() {
+        &ctx.result
+    } else {
+        match &ctx.result {
+            Ty::Tuple(items) | Ty::Pair(items) if items.len() == ctx.return_states.len() + 1 => {
+                &items[0]
+            }
+            _ => {
+                return Err(Residue::Form(
+                    "? with an incomplete threaded result".to_string(),
+                ))
+            }
+        }
+    };
+    let (inner, early) = match (&st, result) {
         (Ty::Option(inner), Ty::Option(r)) => (
             (**inner).clone(),
             (
@@ -12932,7 +12986,20 @@ fn question(
     } else {
         format!("Result.ok {name}")
     };
-    let (failed, _) = ctx.returning((Expr::Flat(early.1), ctx.result.clone()));
+    let failure = if ctx.return_states.is_empty() {
+        early.1
+    } else {
+        let mut items = vec![early.1];
+        for state in &ctx.return_states {
+            let (value, _) = ctx
+                .locals
+                .get(state)
+                .ok_or_else(|| Residue::Form(format!("? without the current value of {state}")))?;
+            items.push(value.clone());
+        }
+        tuple_value(&ctx.result, &items)
+    };
+    let (failed, _) = ctx.returning((Expr::Flat(failure), ctx.result.clone()));
     let arms = if matches!(st, Ty::Option(_)) {
         vec![
             Arm {
@@ -13116,6 +13183,7 @@ pub(crate) fn lift_all(
                 current: c.called.clone(),
                 params: names.clone(),
                 result: c.result.clone(),
+                return_states: c.threads.iter().map(|&i| c.params[i].0.clone()).collect(),
                 locals: c
                     .params
                     .iter()
@@ -14297,6 +14365,7 @@ mod tests {
             own: "again".into(),
             params: vec!["first".into(), "second".into()],
             result: Ty::Bool,
+            return_states: Vec::new(),
             locals: BTreeMap::new(),
             tails: BTreeMap::new(),
             top: true,
@@ -16012,15 +16081,15 @@ mod tests {
                 "an update of v, which a ref pattern binds to the place it borrows".to_string()
             ))
         );
-        // A failed `?` would leave without the places' values.
-        assert_eq!(
-            lift(
-                "fn f(a: &mut u32, s: Option<u32>) -> Option<u32> { let x = s?; *a = x; Some(x) }",
-                &plain()
-            ),
-            Err(Residue::Form(
-                "? in a body that threads its &mut parameters".to_string()
-            ))
+        // Propagation returns the current place on both exits.
+        let out = lift(
+            "fn f(a: &mut u32, s: Option<u32>) -> Option<u32> { let x = s?; *a = x; Some(x) }",
+            &plain(),
+        )
+        .expect("threaded propagation");
+        assert!(
+            out.contains("item1 := a") && out.contains("Option.none"),
+            "{out}"
         );
     }
 

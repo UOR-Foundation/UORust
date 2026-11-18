@@ -2708,6 +2708,153 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-48: early exits retain the updates already performed through mutable parameters.
+#[test]
+fn source_propagation_preserves_mutable_state_ue_48() {
+    let dir = scratch("threaded-propagation", &[
+        ("Cargo.toml", "[package]\nname = \"propagate\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub struct State { pub flag: bool }
+pub fn option(s: &mut State, x: Option<bool>) -> Option<bool> {
+    s.flag = true; let y = x?; s.flag = y; Some(y)
+}
+pub fn result(s: &mut State, x: Result<bool, bool>) -> Result<bool, bool> {
+    s.flag = true; let y = x?; s.flag = y; Ok(y)
+}
+pub fn callee(s: &mut State) -> Result<bool, bool> { s.flag = true; Err(false) }
+pub fn caller(s: &mut State) -> Result<bool, bool> {
+    let y = callee(s)?; s.flag = y; Ok(y)
+}
+pub fn both(a: &mut State, b: &mut State, x: Option<bool>) -> Option<bool> {
+    a.flag = true; b.flag = true; let y = x?; a.flag = y; Some(y)
+}
+pub fn alias(s: &mut State, x: Option<bool>) -> Option<bool> {
+    let other = s; other.flag = true; let y = x?; Some(y)
+}
+pub fn conversion(s: &mut State, x: Result<bool, bool>) -> Result<bool, u8> {
+    s.flag = true; let y = x?; Ok(y)
+}
+pub fn option_failure() -> bool {
+    let mut s = State { flag: false }; let r = option(&mut s, None); r == None && s.flag
+}
+pub fn option_success() -> bool {
+    let mut s = State { flag: true }; let r = option(&mut s, Some(false)); r == Some(false) && !s.flag
+}
+pub fn result_failure() -> bool {
+    let mut s = State { flag: false }; let r = result(&mut s, Err(false)); r == Err(false) && s.flag
+}
+pub fn result_success() -> bool {
+    let mut s = State { flag: true }; let r = result(&mut s, Ok(false)); r == Ok(false) && !s.flag
+}
+pub fn callee_failure() -> bool {
+    let mut s = State { flag: false }; let r = caller(&mut s); r == Err(false) && s.flag
+}
+pub fn two_states() -> bool {
+    let mut a = State { flag: false }; let mut b = State { flag: false };
+    let r = both(&mut a, &mut b, None); r == None && a.flag && b.flag
+}
+#[test] fn option_failure_vector() { assert!(option_failure()); }
+#[test] fn option_success_vector() { assert!(option_success()); }
+#[test] fn result_failure_vector() { assert!(result_failure()); }
+#[test] fn result_success_vector() { assert!(result_success()); }
+#[test] fn callee_failure_vector() { assert!(callee_failure()); }
+#[test] fn two_states_vector() { assert!(two_states()); }
+"#),
+    ]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("reference Rust vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let files = uorust::project_workspace(&dir, &options("propagate")).expect("source projection");
+    let rows = frontier_rows(&files, "lifted");
+    for name in [
+        "option",
+        "result",
+        "callee",
+        "caller",
+        "both",
+        "option_failure",
+        "option_success",
+        "result_failure",
+        "result_success",
+        "callee_failure",
+        "two_states",
+    ] {
+        assert!(
+            rows.iter()
+                .any(|r| r["function"].as_str() == Some(&format!("propagate::{name}"))),
+            "missing threaded propagation {name}: {}",
+            text(&files, "frontier.toml")
+        );
+    }
+    assert!(!rows
+        .iter()
+        .any(|r| r["function"].as_str() == Some("propagate::alias")));
+    assert!(!rows
+        .iter()
+        .any(|r| r["function"].as_str() == Some("propagate::conversion")));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(
+        behavior.matches("proof: decide").count() >= 6,
+        "missing executable acceptance roots: {behavior}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write propagation projection");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK propagation proof");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    // Plant loss of the update on the failure path. The same acceptance
+    // roots must reject it; a merely well-typed tuple is not evidence.
+    let marker = "item0 := (ctor Option.none [Bool]), item1 := s1";
+    assert!(behavior.contains(marker), "missing failure-state boundary");
+    let mut wrong = files.clone();
+    wrong.insert(
+        "src/Behavior.lex.tex".into(),
+        behavior
+            .replacen(marker, "item0 := (ctor Option.none [Bool]), item1 := s", 1)
+            .into_bytes(),
+    );
+    let mutant = dir.join("lost-state");
+    uorust::write(&mutant, &wrong).expect("write planted state-loss defect");
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&mutant)
+        .output()
+        .expect("SDK rejects lost state");
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("optionFailure")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-47: native workspaces use the same core-derived IEEE formats as source lifting.
 #[test]
 fn native_workspace_floats_preserve_root_names_ue_47() {

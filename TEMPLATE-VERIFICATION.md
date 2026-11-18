@@ -444,3 +444,24 @@ generic, closure and impl bodies are present, and the production target
 emits metadata without a native archive. Dropping forced MIR encoding gives
 an incomplete inventory and is detected. Independent Cargo library and
 binary probes also succeed with these flags.
+
+
+## Early propagation with mutable state (UE-48)
+
+The registered source fixture first failed because every `?` in a body with
+threaded mutable parameters was refused. The repaired projection returns the
+current parameter values on both success and early failure. A fallible lifted
+callee is unpacked before its result is matched, so its updates survive failure.
+Result constructors use the return context without broadening float inference.
+Option comparisons bind both operands at their concrete type before matching;
+this prevents an untyped `None` in the generated Lean match.
+
+Six reference Rust tests exercise Option and Result success and failure, a
+state-changing fallible callee, and two mutable parameters. The actual pinned
+SDK verifies all generated acceptance roots. A planted defect replaces the
+updated state by the original parameter on the Option failure path: the same
+SDK proves the option-failure acceptance proposition false and rejects it.
+The fixture also confirms mutable aliases and an unmodeled bool-to-u8 error
+conversion remain unlifted. All 421 library tests pass, including the existing
+float inference and borrow-escape refusals. Complete release acceptance remains
+separate from these focused checks.
