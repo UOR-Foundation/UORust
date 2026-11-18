@@ -926,6 +926,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         f.mention(&t);
     }
     let main = Decl::Definition {
+        type_parameters: Vec::new(),
         name: name.to_string(),
         parameters: f
             .params
@@ -1548,6 +1549,7 @@ impl Fun<'_, '_> {
             .collect();
         self.decls.extend(evidence);
         self.decls.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.clone(),
             parameters,
             result: result.render(),
@@ -3867,6 +3869,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 name.clone(),
                 Decl::Definition {
+                    type_parameters: Vec::new(),
                     name: name.clone(),
                     parameters: parameters.clone(),
                     result: format!("(List {e})"),
@@ -3921,7 +3924,7 @@ impl Fun<'_, '_> {
                 let e = elem.render();
                 self.aux.insert(
                     name.clone(),
-                    Decl::Definition {
+                    Decl::Definition { type_parameters: Vec::new(),
                         name: name.clone(),
                         parameters: vec![
                             ("items".into(), format!("(List {e})")),
@@ -3971,6 +3974,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 name.clone(),
                 Decl::Definition {
+                    type_parameters: Vec::new(),
                     name: name.clone(),
                     parameters: vec![
                         ("items".into(), format!("(List {e})")),
@@ -4562,6 +4566,7 @@ impl Fun<'_, '_> {
         self.aux.insert(
             name.to_string(),
             Decl::Definition {
+                type_parameters: Vec::new(),
                 name: name.to_string(),
                 parameters,
                 result: "Nat".into(),

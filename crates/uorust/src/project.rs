@@ -4221,6 +4221,10 @@ fn behavior(
         homonyms: &homonyms,
         sites: &sites,
     };
+    // The method each type's impl of a trait of its crate gives, per crate:
+    // what a call of a generic function passes for the trait's dictionary.
+    let mut impl_index: Vec<BTreeMap<(String, String, String), String>> =
+        ws.packages.iter().map(|_| BTreeMap::new()).collect();
     let mut scoped: Vec<(Vec<Candidate<'_>>, BTreeMap<String, FnRef>)> = ws
         .packages
         .iter()
@@ -4302,9 +4306,13 @@ fn behavior(
             // function for every implementing type.
             (Some(declarer), _) if f.in_trait => {
                 let refusal = match &fn_syntax.block {
+                    // No definition of its own: each implementing type's
+                    // method is one, and a generic function over the trait
+                    // takes it in its dictionary.
                     None => Some(Residue::Signature(format!(
                         "a method {declarer} declares without a body, which each implementing \
-                         type gives"
+                         type gives: an entry of {declarer}'s dictionary, with no definition of \
+                         its own"
                     ))),
                     Some(block) => default_refusal(ctx.file(r), f, declarer, block),
                 };
@@ -4469,6 +4477,30 @@ fn behavior(
             (None, Some(_)) => Some(lift::Owner::Implementor),
             (None, None) => None,
         };
+        // A generic function reads its type parameters first.
+        let generic = match generic_reading(ctx, syntax, &file_scopes, types, r, sig) {
+            Ok(generic) => generic,
+            Err(reason) => {
+                ctx.stopped(notes, &effectful, r, reason);
+                continue;
+            }
+        };
+        let generic_scope = generic.as_ref().map(|g| {
+            let mut scope = types.clone();
+            scope.generic = g.reads.clone();
+            scope
+        });
+        let read_sig = generic.as_ref().map(|g| {
+            let mut read = sig.clone();
+            read.generics.retain(
+                |p| !matches!(p, crate::ast::GenericParam::Type(n) if g.reads.contains_key(n)),
+            );
+            read
+        });
+        let (types, sig) = match (&generic_scope, &read_sig) {
+            (Some(t), Some(s)) => (t, s),
+            _ => (types, sig),
+        };
         let (candidates, names) = &mut scoped[r.pkg];
         let signature = match (&formatter, &method) {
             (Some(_), Some(o)) => Ok((
@@ -4516,7 +4548,16 @@ fn behavior(
                 }
                 yielding.insert((r.pkg, rust.clone()), yields);
                 names.insert(rust.clone(), r);
+                // The trait an impl at its file's own scope implements, as
+                // that scope reads the trait's path.
+                if let (Some(o), Some(path), 0) = (&method, &f.trait_path, f.scope) {
+                    if let Some((_, declarer)) = declared_trait(ctx, r.pkg, r.file, path) {
+                        impl_index[r.pkg]
+                            .insert((declarer, o.clone(), f.name.clone()), rust.clone());
+                    }
+                }
                 candidates.push(Candidate {
+                    generic,
                     rust,
                     name,
                     params,
@@ -4602,6 +4643,7 @@ fn behavior(
                     continue;
                 }
                 candidates.push(Candidate {
+                    generic: None,
                     rust: key,
                     name,
                     params: Vec::new(),
@@ -4678,6 +4720,16 @@ fn behavior(
                     *n = renamed;
                 }
             }
+            // A dictionary's parameter likewise.
+            for e in c.generic.iter_mut().flat_map(|g| g.dictionary.iter_mut()) {
+                let base = e.name.clone();
+                let mut k = 1;
+                while defined.contains(&e.name) || taken.contains(&e.name) {
+                    k += 1;
+                    e.name = format!("{base}Method{k}");
+                }
+                taken.insert(e.name.clone());
+            }
         }
     }
     let mut lifted = Vec::new();
@@ -4691,8 +4743,11 @@ fn behavior(
         .iter()
         .flat_map(|(candidates, _)| candidates.iter().map(|c| c.name.clone()))
         .collect();
-    for ((candidates, names), types) in scoped.iter().zip(&scopes) {
+    for (((candidates, names), types), impls) in scoped.iter().zip(&scopes).zip(&impl_index) {
         let widths = lift::pointer_widths(&ctx.ws.targets);
+        let mut types = types.clone();
+        types.impls = impls.clone();
+        let types = &types;
         let out = lift::lift_all(candidates, types, &widths, &every_name);
         for (rust, reason) in out.failed {
             if let Some(&r) = names.get(&rust) {
@@ -4748,11 +4803,14 @@ fn behavior(
                         name: c.name.clone(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         result: c.result.clone(),
+                        generic: c.generic.clone(),
                     },
                 )
             })
             .collect();
-        for c in candidates {
+        // The MIR path calls no generic definition: it passes no type
+        // argument or dictionary.
+        for c in candidates.iter().filter(|c| c.generic.is_none()) {
             if let (true, Some(&r)) = (
                 out.decls.iter().any(|d| d.name() == c.name),
                 names.get(&c.rust),
@@ -4890,6 +4948,7 @@ fn behavior(
                         .or_default()
                         .push(root.clone());
                     decls.push(Decl::Definition {
+                        type_parameters: Vec::new(),
                         name: root.clone(),
                         parameters: Vec::new(),
                         result: "Bool".to_string(),
@@ -5515,6 +5574,7 @@ fn with_axioms(decl: Decl, learned: &BTreeMap<String, Vec<String>>) -> Decl {
             mutual,
             ..
         } => Decl::Definition {
+            type_parameters: Vec::new(),
             name,
             parameters,
             result,
@@ -5573,6 +5633,7 @@ fn enum_equality(name: &str, variants: &[String]) -> Decl {
             .collect()
     };
     Decl::Definition {
+        type_parameters: Vec::new(),
         name: lift::equality_name(name),
         parameters: vec![("left".into(), name.into()), ("right".into(), name.into())],
         result: "Bool".into(),
@@ -5660,6 +5721,7 @@ fn family_decls(
         let binders: Vec<String> = (0..fields.len()).map(|i| format!("x{i}")).collect();
         for (i, (f, t)) in fields.iter().enumerate() {
             decls.push(Decl::Definition {
+                type_parameters: Vec::new(),
                 name: Types::accessor(m, f),
                 parameters: vec![("value".into(), m.clone())],
                 result: t.render(),
@@ -5739,6 +5801,7 @@ fn family_decls(
             _ => continue,
         };
         decls.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: types.size_name(d, family).unwrap_or_default(),
             parameters: vec![("value".into(), d.render())],
             result: "Nat".into(),
@@ -6095,6 +6158,327 @@ fn default_refusal(
         )));
     }
     None
+}
+
+/// Bounds that ask nothing a body can call through a type parameter
+/// beyond what the lift refuses anyway: the auto traits, which declare no
+/// method, `Sized`, and `Copy` and `Clone`, whose one method a value of a
+/// type parameter has only through its dictionary, and a dictionary holds
+/// no method of them (`x.clone()` there stops the lift). Each is read so
+/// only where the crate declares no trait of the name.
+const MARKER_BOUNDS: [&str; 6] = ["Send", "Sync", "Sized", "Unpin", "Copy", "Clone"];
+
+/// Names of methods that a trait of the prelude gives every type by a
+/// blanket impl through a receiver taken by value (`Into` by `From<T> for
+/// T`, and `TryInto` after it): on a receiver `x: &T`, Rust finds that
+/// method at `&T` itself, before a bound's method of the name that takes
+/// `self` one dereference further. The lift does not tell the receivers
+/// apart here, so a call of such a name is refused whatever its receiver.
+const BLANKET_METHODS: [&str; 2] = ["into", "try_into"];
+
+/// How a function's type parameters read, or why they do not: `None`
+/// where it has none (or is a trait's method, or has const parameters,
+/// which keep the rows they have).
+///
+/// A type parameter reads as
+/// - the function type of its one `Fn(A, ..) -> R` bound, as `impl Fn(A,
+///   ..) -> R` in argument position is read (which is a type parameter by
+///   another syntax): a call of it is that bound's `Fn::call`;
+/// - otherwise a LexLean type parameter `'T`, with a dictionary of the
+///   methods its body calls of each trait of the crate that bounds it (see
+///   `lift::Generic`), where each such trait has no parameters,
+///   supertraits, associated items or `unsafe`, is the one trait of its
+///   name in the crate, is implemented only for types of the crate named
+///   as themselves (`wrapped_impl`: no impl for a reference, a box or by a
+///   blanket impl, which the lift would read as the type they wrap), and
+///   the scope of the function brings no trait in by a glob or from
+///   another crate, a path dependency of the workspace included
+///   (`leaves_crate`: such a trait could give a method of the name at an
+///   earlier step of Rust's method lookup than the bound's);
+/// - with no bound but [`MARKER_BOUNDS`], a type parameter with no
+///   dictionary: the body can only move its values.
+///
+/// Any other bound stops the function with a row that names it: a
+/// registry crate's trait a foreign row of that crate, any other a
+/// signature row.
+fn generic_reading(
+    ctx: &Model,
+    syntax: &Syntax,
+    file_scopes: &BTreeMap<(usize, usize, usize), Types>,
+    types: &Types,
+    r: FnRef,
+    sig: &crate::ast::Signature,
+) -> Result<Option<lift::Generic>, Residue> {
+    use crate::ast::GenericParam;
+    let f = ctx.func(r);
+    let params: Vec<&String> = sig
+        .generics
+        .iter()
+        .filter_map(|p| match p {
+            GenericParam::Type(n) => Some(n),
+            _ => None,
+        })
+        .collect();
+    let constant = sig
+        .generics
+        .iter()
+        .any(|p| matches!(p, GenericParam::Const(_)));
+    if params.is_empty() || constant || f.in_trait || f.implements.is_some() {
+        return Ok(None);
+    }
+    if sig.asyncness || sig.unsafety || sig.variadic {
+        return Ok(None);
+    }
+    let named = |what: String| Residue::Signature(format!("generic over {what}"));
+    if let Some(clause) = sig.unread_where.first() {
+        return Err(named(format!(
+            "a where clause that bounds no type parameter of its own: {clause}"
+        )));
+    }
+    let package = &ctx.ws.packages[r.pkg];
+    let crate_traits: Vec<(usize, &crate::facts::TraitFact)> = package
+        .files
+        .iter()
+        .enumerate()
+        .flat_map(|(fi, file)| file.trait_decls.iter().map(move |t| (fi, t)))
+        .collect();
+    let declared = |name: &str| crate_traits.iter().filter(|(_, t)| t.name == name).count();
+    let value_names: BTreeSet<String> = sig
+        .inputs
+        .iter()
+        .filter_map(|i| match i {
+            crate::ast::FnArg::Typed(p) => match &*p.pat {
+                crate::ast::Pat::Ident(id) => Some(lift::local_name(&id.ident)),
+                _ => None,
+            },
+            crate::ast::FnArg::Receiver { .. } => Some(lift::local_name("self")),
+        })
+        .collect();
+    // Each type parameter's LexLean name: its own, unless a type, a word
+    // the notation reserves or a parameter is spelled so.
+    let lex_name = |n: &str| {
+        let taken = types.structs.contains_key(n)
+            || types.enums.contains_key(n)
+            || types.datas.contains_key(n)
+            || lift::BARE_TYPES.contains(&n)
+            || value_names.contains(n)
+            || n == lift::PRELUDE
+            || n == BEHAVIOR;
+        if taken {
+            format!("{n}Param")
+        } else {
+            n.to_string()
+        }
+    };
+    let mut reads: BTreeMap<String, Ty> = BTreeMap::new();
+    let mut functions: Vec<(&String, &crate::ast::RustType)> = Vec::new();
+    let mut traits: Vec<(&String, String)> = Vec::new();
+    let mut order = Vec::new();
+    for p in &params {
+        let bounds: Vec<&crate::ast::Bound> = sig
+            .bounds
+            .iter()
+            .filter(|b| &b.param == *p && !b.maybe)
+            .collect();
+        let mut function = None;
+        let mut bounded = Vec::new();
+        for b in &bounds {
+            let path = &b.path;
+            if let Some(f) = &b.function {
+                if function.replace(f).is_some() {
+                    return Err(named(format!("{p}: two Fn bounds")));
+                }
+                continue;
+            }
+            let plain = path.segments.len() == 1
+                && matches!(path.segments[0].arguments, crate::ast::PathArguments::None);
+            if plain && MARKER_BOUNDS.contains(&path.text.as_str()) && declared(&path.text) == 0 {
+                continue;
+            }
+            let last_plain = path
+                .segments
+                .last()
+                .is_some_and(|s| matches!(s.arguments, crate::ast::PathArguments::None));
+            match declared_trait(ctx, r.pkg, r.file, &path.text) {
+                Some((_, name)) if last_plain => bounded.push(name),
+                Some(_) => {
+                    return Err(named(format!(
+                    "{p}: {}, a trait of the crate with parameters, one trait per argument list",
+                    b.text
+                )))
+                }
+                None if foreign_crate(package, &b.text).is_some()
+                    || ctx.bound_crate(r, &b.text).is_some() =>
+                {
+                    return Err(Residue::Type(b.text.clone()))
+                }
+                None => {
+                    return Err(named(format!(
+                        "{p}: {}, a bound the lift reads no dictionary of",
+                        b.text
+                    )))
+                }
+            }
+        }
+        match (function, bounded.is_empty()) {
+            (Some(f), true) => functions.push((p, f)),
+            (Some(_), false) => {
+                return Err(named(format!(
+                    "{p}: an Fn bound beside a trait of the crate"
+                )))
+            }
+            (None, _) => {
+                let lex = lex_name(p);
+                reads.insert((*p).clone(), Ty::Param(lex.clone()));
+                order.push(lex);
+                traits.extend(bounded.into_iter().map(|t| (*p, t)));
+            }
+        }
+    }
+    // A function type may name the other type parameters.
+    let mut scope = types.clone();
+    scope.generic = reads.clone();
+    for (p, f) in functions {
+        let t = scope.ty(f)?;
+        reads.insert(p.clone(), t);
+    }
+    scope.generic = reads.clone();
+    let mut dictionary = Vec::new();
+    if !traits.is_empty() {
+        // A bound is read as its file's own scope reads it
+        // (`declared_trait`): an inline module's names are its own.
+        if f.scope != 0 {
+            return Err(named(format!(
+                "{} in an inline module, whose names the bound's reading does not follow",
+                params
+                    .iter()
+                    .map(|p| p.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            )));
+        }
+        let here = &ctx.file(r).scopes[f.scope];
+        let outside = here.glob
+            || here
+                .uses
+                .iter()
+                .any(|(_, path)| leaves_crate(package, path));
+        if outside {
+            return Err(named(format!(
+                "{} in a scope that brings in names by a glob or from another crate: a trait \
+                 among them could give a method of a bound's name first",
+                params
+                    .iter()
+                    .map(|p| p.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            )));
+        }
+    }
+    let mut taken: BTreeSet<String> = value_names.clone();
+    for (p, name) in &traits {
+        let Some(&(tf, fact)) = crate_traits.iter().find(|(_, t)| &t.name == name) else {
+            return Err(named(format!(
+                "{p}: {name}, which the crate does not declare"
+            )));
+        };
+        let stop = if declared(name) > 1 {
+            Some("a name two traits of the crate share")
+        } else if !fact.params.is_empty() {
+            Some("a trait with parameters, one trait per argument list")
+        } else if !fact.supertraits.is_empty() {
+            Some("a trait with supertraits, whose methods the dictionary does not hold")
+        } else if !fact.associated.is_empty() {
+            Some("a trait with associated types or constants")
+        } else if fact.marked {
+            Some("an unsafe trait")
+        } else {
+            None
+        };
+        if let Some(why) = stop {
+            return Err(named(format!("{p}: {name}, {why}")));
+        }
+        if let Some(wrapped) = wrapped_impl(package, r.pkg, file_scopes, name) {
+            return Err(named(format!(
+                "{p}: {name}, which the crate implements for {wrapped}, a type the lift does \
+                 not read as itself: a call through the bound could select that impl"
+            )));
+        }
+        let file = &package.files[tf];
+        let Ty::Param(lex) = &reads[*p] else {
+            continue;
+        };
+        // A trait's method is read in the trait's scope, where the
+        // function's type parameters name nothing, and `Self` is the one
+        // the dictionary is of.
+        let mut own = file_scopes
+            .get(&(r.pkg, tf, fact.scope))
+            .unwrap_or(types)
+            .clone();
+        own.generic = BTreeMap::from([("Self".to_string(), Ty::Param(lex.clone()))]);
+        for (idx, m) in file.fns.iter().enumerate() {
+            if !(m.in_trait && m.owner.as_deref() == Some(name.as_str()) && m.scope == fact.scope) {
+                continue;
+            }
+            // The dictionary holds every method of the trait it can type,
+            // so that a generic function passes on to a generic callee
+            // what the callee's body calls; a method the body calls by
+            // name must be one, and must mean the bound's.
+            let called = f
+                .calls
+                .iter()
+                .any(|c| c == &format!(".{}", m.name) || c.ends_with(&format!("::{}", m.name)));
+            let msig = &syntax.function(&file.rel, idx).signature;
+            let ty = match lift::entry_ty(&own, msig, &Ty::Param(lex.clone())) {
+                Ok(ty) => ty,
+                Err(Residue::Signature(what)) if called => {
+                    return Err(named(format!("{p}: {name}::{}, {what}", m.name)))
+                }
+                Err(other) if called => return Err(other),
+                Err(_) => continue,
+            };
+            if called && BLANKET_METHODS.contains(&m.name.as_str()) {
+                return Err(named(format!(
+                    "{p}: {name}::{}, a name the prelude's blanket impls give every type first",
+                    m.name
+                )));
+            }
+            let shared = crate_traits.iter().any(|(fi, t)| {
+                t.name != *name
+                    && package.files[*fi].fns.iter().any(|g| {
+                        g.in_trait
+                            && g.owner.as_deref() == Some(t.name.as_str())
+                            && g.name == m.name
+                    })
+            });
+            if called && shared {
+                return Err(named(format!(
+                    "{p}: {name}::{}, a method name another trait of the crate declares too",
+                    m.name
+                )));
+            }
+            let base = lift::local_name(&format!("{p}_{}", m.name));
+            let mut entry_name = base.clone();
+            let mut k = 1;
+            while taken.contains(&entry_name) {
+                k += 1;
+                entry_name = format!("{base}{k}");
+            }
+            taken.insert(entry_name.clone());
+            dictionary.push(lift::Entry {
+                param: lex.clone(),
+                declarer: name.clone(),
+                method: m.name.clone(),
+                name: entry_name,
+                ty,
+            });
+        }
+    }
+    Ok(Some(lift::Generic {
+        types: order,
+        reads,
+        dictionary,
+    }))
 }
 
 /// The methods a body calls on `self` and the functions it calls as
@@ -6833,6 +7217,63 @@ fn blinded(
     out
 }
 
+/// Whether a `use` path leaves the crate: its first segment names a
+/// dependency of the package, a registry crate or a path one alike, or the
+/// path starts at the extern prelude (`::`). The standard library's crates
+/// are read by `BLANKET_METHODS`: no trait of theirs has a blanket impl
+/// over every type with a by-value method beside `Into` and `TryInto`.
+fn leaves_crate(package: &Package, path: &str) -> bool {
+    if path.starts_with("::") {
+        return true;
+    }
+    let head = path.split("::").next().unwrap_or(path);
+    package
+        .deps
+        .iter()
+        .any(|d| d.name.replace('-', "_") == head)
+}
+
+/// The first impl of the crate's trait `name` (matched by the trait path's
+/// last segment, so that any trait of that name counts) whose self type is
+/// not a type of the crate named by its own plain path at its file's own
+/// scope: a reference, a `Box`, `Rc` or `Arc`, an alias, or a type
+/// parameter of a blanket impl. The lift reads `&X`, `Box<X>`, `Rc<X>` and
+/// `Arc<X>` as `X` and keys impls by the named type, so where such an impl
+/// exists Rust's method probe (which tries the receiver's own type, then
+/// its autoref, before it dereferences) and its trait selection at a call
+/// (`T = &Square` with `impl Area for &Square`) can choose an impl the
+/// dictionary does not hold. Where none exists, `X: Tr` is the only impl
+/// a call or a probe through the wrapper can reach, since an impl of the
+/// crate's trait for a wrapper can only be written in this crate or in a
+/// dependent one, whose impls a body of this crate does not see.
+fn wrapped_impl(
+    package: &Package,
+    pkg: usize,
+    file_scopes: &BTreeMap<(usize, usize, usize), Types>,
+    name: &str,
+) -> Option<String> {
+    package.files.iter().enumerate().find_map(|(fi, file)| {
+        file.trait_impls
+            .iter()
+            .filter(|i| i.trait_path.rsplit("::").next() == Some(name))
+            .find(|i| {
+                let named = |types: &Types, plain: &str| {
+                    let key = types.resolve(plain);
+                    types.structs.contains_key(&key)
+                        || types.enums.contains_key(&key)
+                        || types.datas.contains_key(&key)
+                };
+                match (&i.plain, i.scope) {
+                    (Some(plain), 0) => !file_scopes
+                        .get(&(pkg, fi, 0))
+                        .is_some_and(|t| named(t, plain)),
+                    _ => true,
+                }
+            })
+            .map(|i| i.self_ty.clone())
+    })
+}
+
 /// The registry dependency a type the lift refused belongs to: `syn` for
 /// `syn::Expr`, `&mut toml::Value` or `Option<serde_json::Value>`.
 fn foreign_crate(package: &Package, ty: &str) -> Option<String> {
@@ -7335,6 +7776,7 @@ fn parts(module: &Module, limit: usize, taken: &BTreeSet<&str>) -> Option<Vec<Mo
     let mut records = Vec::new();
     for decl in &module.decls {
         let Decl::Definition {
+            type_parameters,
             name,
             parameters,
             result,
@@ -7349,6 +7791,7 @@ fn parts(module: &Module, limit: usize, taken: &BTreeSet<&str>) -> Option<Vec<Mo
         };
         let indexed = body.contains("{index := ") || body.contains(", index := ");
         if !parameters.is_empty()
+            || !type_parameters.is_empty()
             || !axioms.is_empty()
             || indexed
             || words(body).any(|word| names.contains(word))
@@ -7530,6 +7973,7 @@ mod tests {
     #[test]
     fn surface_dependencies_cross_files_without_splitting_mutual_groups_ue_25() {
         let def = |name: &str, body: &str, mutual: Option<&str>| crate::lex::Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.into(),
             parameters: Vec::new(),
             result: "String".into(),
@@ -8697,7 +9141,8 @@ pub fn fb(n: &Node) -> u8 {
         assert!(
             found.contains(
                 "detail = \"signature outside the lift: a method Shape declares without a \
-                 body, which each implementing type gives\""
+                 body, which each implementing type gives: an entry of Shape's dictionary, with \
+                 no definition of its own\""
             ),
             "{found}"
         );
@@ -10845,6 +11290,220 @@ pub fn fb(n: &Node) -> u8 {
         );
     }
 
+    // Class: a trait is a dictionary (kai, round 4): a function generic
+    // over `T: Trait` takes the methods the impl for `T` gives, and each
+    // call passes the impl's methods of the type its arguments fix.
+
+    const DICTIONARY_CRATE: &str = "//! Areas through a trait.\n\
+        /// Something with an area.\n\
+        pub trait Area {\n    /// The area.\n    fn area(&self) -> u32;\n    \
+        /// The area scaled.\n    fn scaled(&self, k: u32) -> u32;\n}\n\
+        /// Something with a name and an area.\n\
+        pub trait Named: Area {\n    /// The name.\n    fn name(&self) -> u32;\n}\n\
+        /// Something that counts.\n\
+        pub trait Counter {\n    /// One more.\n    fn bump(&mut self) -> u32;\n    \
+        /// Into a number.\n    fn into(self) -> u32;\n}\n\
+        /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
+        /// A rectangle.\npub struct Rect {\n    /// Its width.\n    pub w: u32,\n    \
+        /// Its height.\n    pub h: u32,\n}\n\
+        impl Area for Square {\n    fn area(&self) -> u32 {\n        \
+        self.side.saturating_mul(self.side)\n    }\n    \
+        fn scaled(&self, k: u32) -> u32 {\n        k.saturating_mul(self.side)\n    }\n}\n\
+        impl Area for Rect {\n    fn area(&self) -> u32 {\n        \
+        self.w.saturating_mul(self.h)\n    }\n    \
+        fn scaled(&self, k: u32) -> u32 {\n        k.saturating_mul(self.w)\n    }\n}\n\
+        /// Twice the area.\npub fn twice<T: Area>(s: &T) -> u32 {\n    \
+        s.area().saturating_add(s.area())\n}\n\
+        /// One area and another scaled.\n\
+        pub fn summed<T>(a: &T, b: &T) -> u32\nwhere\n    T: Area,\n{\n    \
+        T::area(a).saturating_add(b.scaled(2))\n}\n\
+        /// Twice, passed on.\npub fn passed<U: Area>(u: &U) -> u32 {\n    twice(u)\n}\n\
+        /// Twice a square.\npub fn square_twice(s: &Square) -> u32 {\n    twice(s)\n}\n\
+        /// Twice a rectangle, passed on.\npub fn rect_passed(r: &Rect) -> u32 {\n    \
+        passed(r)\n}\n\
+        /// Two rectangles.\npub fn rects_summed(a: &Rect, b: &Rect) -> u32 {\n    \
+        summed(a, b)\n}\n\
+        /// The value itself.\npub fn keep<T>(x: T) -> T {\n    x\n}\n\
+        /// A number kept.\npub fn kept(n: u32) -> u32 {\n    keep(n)\n}\n\
+        /// A function applied.\n\
+        pub fn apply<F: Fn(u32) -> u32>(f: F, x: u32) -> u32 {\n    f(x)\n}\n\
+        /// One more.\npub fn applied(x: u32) -> u32 {\n    \
+        apply(|y| y.saturating_add(1), x)\n}\n\
+        /// A boxed function that may cross threads.\n\
+        pub fn boxed(f: &(dyn Fn(u32) -> u32 + Send + Sync), x: u32) -> u32 {\n    f(x)\n}\n\
+        /// A clone through a marker bound.\n\
+        pub fn copied<T: Clone>(x: &T) -> T {\n    x.clone()\n}\n\
+        /// A name through a supertrait.\n\
+        pub fn named<N: Named>(n: &N) -> u32 {\n    n.name()\n}\n\
+        /// Text the standard library shows.\n\
+        pub fn shown<D: std::fmt::Display>(d: D) -> String {\n    d.to_string()\n}\n\
+        /// A count that changes its counter.\n\
+        pub fn bumped<C: Counter>(c: C) -> u32 {\n    let mut c = c;\n    c.bump()\n}\n\
+        /// A counter as a number.\n\
+        pub fn number<C: Counter>(c: C) -> u32 {\n    c.into()\n}\n\
+        /// An inline module.\npub mod inner {\n    use super::Area;\n    \
+        /// Twice, inside.\n    pub fn twice_inner<T: Area>(s: &T) -> u32 {\n        \
+        s.area()\n    }\n}\n";
+
+    /// The frontier and behaviour module of [`DICTIONARY_CRATE`], with
+    /// `glob` written after its inner doc line.
+    fn dictionary_projected(name: &str, glob: &str) -> (String, String) {
+        let (head, rest) = DICTIONARY_CRATE.split_once('\n').expect("a doc line");
+        let source = format!("{head}\n{glob}{rest}");
+        projected(name, &[("src/lib.rs", source.as_str())])
+    }
+
+    #[test]
+    fn a_generic_function_takes_the_dictionary_of_its_bound() {
+        let (frontier, behavior) = dictionary_projected("dict", "");
+        for (name, needle) in [
+            (
+                "twice",
+                "type_parameters: [T], parameters: [tArea : (Fn ('T) Nat), \
+                 tScaled : (Fn ('T Nat) Nat), s : 'T], result: Nat",
+            ),
+            ("twice", "((apply tArea s) + (apply tArea s))"),
+            ("summed", "((apply tArea a) + (apply tScaled b 2))"),
+            // A type parameter of the caller passes on its own dictionary.
+            ("passed", "body: (twice ['U] uArea uScaled u)"),
+            // A type of the crate passes its impl's methods.
+            (
+                "squareTwice",
+                "body: (twice [Square] (ref squareAreaArea) (ref squareAreaScaled) s)",
+            ),
+            (
+                "rectPassed",
+                "body: (passed [Rect] (ref rectAreaArea) (ref rectAreaScaled) r)",
+            ),
+            (
+                "rectsSummed",
+                "body: (summed [Rect] (ref rectAreaArea) (ref rectAreaScaled) a b)",
+            ),
+            // No bound: the body can only move the value.
+            (
+                "keep",
+                "type_parameters: [T], parameters: [x : 'T], result: 'T, body: x",
+            ),
+            ("kept", "body: (keep [Nat] n)"),
+            // An `Fn` bound is the function type it names.
+            ("applyValue", "parameters: [f : (Fn (Nat) Nat), x : Nat]"),
+            ("applied", "body: (applyValue (fun (y : Nat) =>"),
+            // Auto traits beside `Fn` in a trait object declare nothing.
+            ("boxed", "parameters: [f : (Fn (Nat) Nat), x : Nat]"),
+        ] {
+            assert!(
+                definition(&behavior, name).contains(needle),
+                "{name} lacks {needle}:\n{}\n{frontier}",
+                definition(&behavior, name)
+            );
+        }
+    }
+
+    #[test]
+    fn a_bound_no_dictionary_reads_keeps_a_row_naming_it() {
+        let (frontier, _) = dictionary_projected("rows", "");
+        for (function, detail) in [
+            (
+                "rows::copied",
+                "a method clone of a value of a type parameter, which its dictionary does not give",
+            ),
+            (
+                "rows::named",
+                "generic over N: Named, a trait with supertraits",
+            ),
+            (
+                "rows::shown",
+                "generic over D: std::fmt::Display, a bound the lift reads no dictionary of",
+            ),
+            (
+                "rows::bumped",
+                "generic over C: Counter::bump, a trait method that takes &mut self",
+            ),
+            (
+                "rows::inner::twice_inner",
+                "generic over T in an inline module",
+            ),
+            (
+                "rows::number",
+                "generic over C: Counter::into, a name the prelude's blanket impls give every \
+                 type first",
+            ),
+        ] {
+            let found = row(&frontier, function);
+            assert!(found.contains(detail), "{function}: {found}");
+        }
+        // A glob import could bring in a trait whose method of the name
+        // Rust finds first.
+        let (frontier, _) = dictionary_projected("globbed", "use std::collections::*;\n");
+        let found = row(&frontier, "globbed::twice");
+        assert!(
+            found.contains("generic over T in a scope that brings in names by a glob"),
+            "{found}"
+        );
+    }
+
+    // Class: a trait is a dictionary (kai, round 4, repair): what Rust's
+    // method probe and trait selection can reach beside the bound's impl
+    // for the named type stops the reading.
+
+    /// A crate with a trait `Area`, a `Square` that implements it, a
+    /// function generic over `T: Area`, and `extra` written after them.
+    fn dictionary_repair_crate(extra: &str) -> String {
+        format!(
+            "//! Areas.\n\
+             /// Something with an area.\n\
+             pub trait Area {{\n    /// The area.\n    fn area(&self) -> u32;\n}}\n\
+             /// A square.\npub struct Square {{\n    /// Its side.\n    pub side: u32,\n}}\n\
+             impl Area for Square {{\n    fn area(&self) -> u32 {{\n        self.side\n    }}\n}}\n\
+             /// The area of a value.\n\
+             pub fn by_val<T: Area>(x: T) -> u32 {{\n    x.area()\n}}\n\
+             /// A square's area.\npub fn square(s: Square) -> u32 {{\n    by_val(s)\n}}\n\
+             {extra}"
+        )
+    }
+
+    #[test]
+    fn dictionary_repair_an_impl_for_a_wrapper_stops_the_bound() {
+        // Each impl makes Rust select another impl than `Square`'s at a
+        // call or a probe the lift reads as `Square`.
+        for (name, extra) in [
+            (
+                "boxed",
+                "impl<X: Area> Area for Box<X> {\n    fn area(&self) -> u32 {\n        1000\n    \
+                 }\n}\n/// Boxed.\npub fn boxed_area<T: Area>(b: Box<T>) -> u32 {\n    \
+                 b.area()\n}\n",
+            ),
+            (
+                "byref",
+                "impl Area for &Square {\n    fn area(&self) -> u32 {\n        77\n    }\n}\n\
+                 /// Through a reference.\npub fn via_ref(s: &Square) -> u32 {\n    \
+                 by_val(s)\n}\n",
+            ),
+            (
+                "blanket",
+                "impl<X: Area> Area for &X {\n    fn area(&self) -> u32 {\n        500\n    \
+                 }\n}\n/// Through a reference.\npub fn via_ref(s: &Square) -> u32 {\n    \
+                 by_val(s)\n}\n",
+            ),
+        ] {
+            let source = dictionary_repair_crate(extra);
+            let (frontier, behavior) = projected(name, &[("src/lib.rs", source.as_str())]);
+            let found = row(&frontier, &format!("{name}::by_val"));
+            assert!(
+                found.contains("generic over T: Area, which the crate implements for"),
+                "{name}: {found}"
+            );
+            assert!(!behavior.contains("(byVal [Square]"), "{name}:\n{behavior}");
+        }
+        // Without such an impl the reading holds.
+        let source = dictionary_repair_crate("");
+        let (frontier, behavior) = projected("plain", &[("src/lib.rs", source.as_str())]);
+        assert!(
+            definition(&behavior, "square").contains("(byVal [Square] (ref squareAreaArea) s)"),
+            "{frontier}\n{behavior}"
+        );
+    }
+
     #[test]
     fn only_a_glob_that_may_leave_its_file_brings_a_macros_items() {
         let scope = |globs: &[&str]| crate::facts::ScopeFact {
@@ -11033,5 +11692,72 @@ pub fn fb(n: &Node) -> u8 {
         let at = frontier.find("::width\"").expect("a row of width");
         let start = frontier[..at].rfind("[[").unwrap();
         assert!(frontier[start..].starts_with("[[lifted]]"), "{frontier}");
+    }
+
+    #[test]
+    fn dictionary_repair_a_path_dependency_trait_in_scope_stops_the_bound() {
+        // `loud` gives every type a by-value `area`, which Rust finds on
+        // `x: T` before the bound's `area(&self)`.
+        let source = dictionary_repair_crate("");
+        let (head, rest) = source.split_once('\n').expect("a doc line");
+        let sib = format!("{head}\nuse loud::Loud;\n{rest}");
+        let (frontier, behavior) = projected(
+            "sib",
+            &[
+                (
+                    "Cargo.toml",
+                    "[package]\nname = \"sib\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n\
+                     [dependencies]\nloud = { path = \"loud\" }\n\n[workspace]\n\
+                     members = [\".\", \"loud\"]\n",
+                ),
+                ("src/lib.rs", sib.as_str()),
+                (
+                    "loud/Cargo.toml",
+                    "[package]\nname = \"loud\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+                ),
+                (
+                    "loud/src/lib.rs",
+                    "//! Loud.\n/// Loud.\npub trait Loud {\n    /// A number.\n    \
+                     fn area(self) -> u32;\n}\n\
+                     impl<X> Loud for X {\n    fn area(self) -> u32 {\n        999\n    }\n}\n",
+                ),
+            ],
+        );
+        let found = row(&frontier, "sib::by_val");
+        assert!(
+            found.contains(
+                "generic over T in a scope that brings in names by a glob or from another crate"
+            ),
+            "{found}"
+        );
+        assert!(
+            !behavior.contains("(sibByVal [") && !behavior.contains("(byVal ["),
+            "{behavior}"
+        );
+    }
+
+    #[test]
+    fn dictionary_repair_a_literal_takes_the_width_the_other_argument_fixes() {
+        let source = "//! Widths.\n/// The first of two.\n\
+             pub fn first<T>(a: T, b: T) -> T {\n    let _ = b;\n    a\n}\n\
+             /// A literal first, a byte second.\n\
+             pub fn literal_first(x: u8) -> u8 {\n    first(200, x).wrapping_add(100)\n}\n\
+             /// A byte first.\n\
+             pub fn byte_first(x: u8) -> u8 {\n    first(x, 7).wrapping_add(100)\n}\n\
+             /// Literals alone.\n\
+             pub fn literals() -> u8 {\n    first(200, 7)\n}\n";
+        let (frontier, behavior) = projected("wid", &[("src/lib.rs", source)]);
+        let byte = definition(&behavior, "byteFirst");
+        // Rust makes `200` a `u8`: the sum wraps at 2^8, as `byte_first`'s.
+        let literal = definition(&behavior, "literalFirst");
+        assert!(literal.contains(" 256 "), "{literal}\n{byte}\n{frontier}");
+        assert!(!literal.contains("4294967296"), "{literal}");
+        assert!(literal.contains("[Nat] 200 x"), "{literal}");
+        // A type parameter only literals fix takes the type of the context.
+        let found = row(&frontier, "wid::literals");
+        assert!(
+            found.contains("whose type parameter only an unsuffixed number literal fixes"),
+            "{found}"
+        );
     }
 }

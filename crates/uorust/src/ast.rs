@@ -1038,12 +1038,31 @@ pub(crate) struct PatGuard {
 pub(crate) struct Signature {
     pub(crate) ident: String,
     pub(crate) generics: Vec<GenericParam>,
+    /// The trait bounds of its type parameters, `where` clause included.
+    pub(crate) bounds: Vec<Bound>,
+    /// Each `where` predicate that bounds no type parameter of its own
+    /// (`Vec<T>: Clone`, `for<'a> F: ..`), as written.
+    pub(crate) unread_where: Vec<String>,
     pub(crate) asyncness: bool,
     pub(crate) unsafety: bool,
     pub(crate) variadic: bool,
     pub(crate) inputs: Vec<FnArg>,
     /// The result type; `None` for `()` left unwritten.
     pub(crate) output: Option<RustType>,
+}
+
+/// A trait bound on a type parameter: `T: Shape`, `F: Fn(u8) -> u8`.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Bound {
+    /// The type parameter it bounds.
+    pub(crate) param: String,
+    /// The bound as written.
+    pub(crate) text: String,
+    pub(crate) path: Path,
+    /// `?Sized`: a relaxed bound, which asks nothing of the type.
+    pub(crate) maybe: bool,
+    /// For `Fn(A, ..) -> R`: the function type it names.
+    pub(crate) function: Option<RustType>,
 }
 
 /// A generic parameter, by name.

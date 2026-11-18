@@ -1341,6 +1341,35 @@ fn items(
                         syn::GenericParam::Lifetime(_) => None,
                     })
                     .collect();
+                if let Some(trait_path) = &trait_path {
+                    let plain =
+                        match &*imp.self_ty {
+                            syn::Type::Path(tp)
+                                if tp.qself.is_none()
+                                    && tp.path.segments.iter().all(|s| {
+                                        matches!(s.arguments, syn::PathArguments::None)
+                                    })
+                                    && !(tp.path.segments.len() == 1
+                                        && impl_params
+                                            .contains(&tp.path.segments[0].ident.to_string())) =>
+                            {
+                                let written: Vec<String> = tp
+                                    .path
+                                    .segments
+                                    .iter()
+                                    .map(|s| s.ident.to_string())
+                                    .collect();
+                                Some(written.join("::"))
+                            }
+                            _ => None,
+                        };
+                    file.trait_impls.push(crate::facts::TraitImpl {
+                        trait_path: trait_path.clone(),
+                        self_ty: self_ty.clone(),
+                        plain,
+                        scope,
+                    });
+                }
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -1380,6 +1409,7 @@ fn items(
                             _ => None,
                         }));
                 }
+                file.trait_decls.push(trait_fact(t, scope));
                 for member in &t.items {
                     if let syn::TraitItem::Fn(f) = member {
                         let (mut fact, fn_syntax) = function(
@@ -1793,6 +1823,46 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
         &mut syntax,
     );
     (file, syntax)
+}
+
+/// What a trait declares besides its methods.
+fn trait_fact(t: &syn::ItemTrait, scope: usize) -> crate::facts::TraitFact {
+    use quote::ToTokens;
+    let text = |tokens: &dyn ToTokens| tidy(&tokens.to_token_stream().to_string());
+    let mut supertraits: Vec<String> = t
+        .supertraits
+        .iter()
+        .filter(|b| matches!(b, syn::TypeParamBound::Trait(_)))
+        .map(|b| text(b))
+        .collect();
+    if let Some(clause) = &t.generics.where_clause {
+        supertraits.extend(clause.predicates.iter().map(|p| text(p)));
+    }
+    crate::facts::TraitFact {
+        name: t.ident.unraw().to_string(),
+        scope,
+        params: t
+            .generics
+            .params
+            .iter()
+            .filter_map(|p| match p {
+                syn::GenericParam::Type(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Const(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Lifetime(_) => None,
+            })
+            .collect(),
+        supertraits,
+        associated: t
+            .items
+            .iter()
+            .filter_map(|i| match i {
+                syn::TraitItem::Type(a) => Some(a.ident.to_string()),
+                syn::TraitItem::Const(c) => Some(c.ident.to_string()),
+                _ => None,
+            })
+            .collect(),
+        marked: t.unsafety.is_some(),
+    }
 }
 
 #[cfg(test)]

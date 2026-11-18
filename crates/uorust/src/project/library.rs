@@ -1158,6 +1158,7 @@ mod tests {
 
     fn library_def(name: &str, body: &str) -> Decl {
         Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.into(),
             parameters: vec![("n".into(), "Nat".into())],
             result: "Nat".into(),
@@ -1382,6 +1383,7 @@ mod tests {
     #[test]
     fn library_a_list_with_no_parameter_is_admitted_only_as_constants() {
         let constant = |name: &str, body: &str| Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.into(),
             parameters: Vec::new(),
             result: "(List Nat)".into(),

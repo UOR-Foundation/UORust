@@ -509,7 +509,7 @@ pub(crate) fn scalar_text() -> Decl {
         cat(vec![byte(format!("(224 + {})", q(4096))), tail(64), tail(1)]),
         cat(vec![byte(format!("(240 + {})", q(262144))), tail(4096), tail(64), tail(1)]),
     );
-    Decl::Definition {
+    Decl::Definition { type_parameters: Vec::new(),
         name: SCALAR_TEXT.into(),
         parameters: vec![("c".into(), "Nat".into())],
         result: "String".into(),
@@ -759,6 +759,7 @@ impl Renderer<'_> {
         let result = own.render(&a.result, Some(&name), None, aux)?;
         let body = own.render(&a.body, Some(&name), None, aux)?;
         aux.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.clone(),
             parameters: params,
             result,

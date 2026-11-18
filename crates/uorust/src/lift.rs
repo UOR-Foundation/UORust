@@ -168,6 +168,10 @@ pub(crate) enum Ty {
     Set(Box<Ty>, bool),
     /// A pure function of its inputs: `&dyn Fn(A) -> R`, `impl Fn(A) -> R`.
     Fn(Vec<Ty>, Box<Ty>),
+    /// A type parameter of the definition being lifted, by its LexLean
+    /// name: LexLean's `'T`, which the definition binds and each call
+    /// instantiates explicitly.
+    Param(String),
 }
 
 impl Ty {
@@ -205,6 +209,7 @@ impl Ty {
                     .join(" "),
                 out.render()
             ),
+            Self::Param(n) => format!("'{n}"),
         }
     }
 
@@ -242,6 +247,7 @@ impl Ty {
                 ins.iter().map(Ty::tag).collect::<String>(),
                 out.tag()
             ),
+            Self::Param(n) => n.clone(),
         }
     }
 
@@ -414,6 +420,15 @@ pub(crate) struct Types {
     /// macro the package invokes in item position may declare a module of
     /// the crate's name that a relative path here names first.
     pub(crate) paths_open: bool,
+    /// The type parameters of the signature in hand, by Rust name: each
+    /// the type it is read as (a LexLean type parameter, or the function
+    /// type its one `Fn` bound names). A type parameter's name shadows a
+    /// type of the same name, as Rust's own scoping has it.
+    pub(crate) generic: BTreeMap<String, Ty>,
+    /// The method each type's impl of a trait of the crate gives: (the
+    /// trait, as a dictionary entry names it; the type, by LexLean name;
+    /// the method) -> the key the impl's method lifts under.
+    pub(crate) impls: BTreeMap<(String, String, String), String>,
 }
 
 /// What a function's own module scope lets a name of its body mean, beyond
@@ -1376,6 +1391,9 @@ impl Types {
         // every `T`), and only a head it reads passes the question on to
         // what it holds.
         let arg = |i: usize| self.ty(written[i]).map(Box::new);
+        if let (Some(t), 0, false) = (self.generic.get(&name), written.len(), library) {
+            return Ok(t.clone());
+        }
         let ty = match (name.as_str(), written.len()) {
             ("bool", 0) => Ty::Bool,
             ("u8", 0) => Ty::Nat(Some(8)),
@@ -1728,6 +1746,51 @@ pub(crate) struct Sig {
     pub(crate) name: String,
     pub(crate) params: Vec<Ty>,
     pub(crate) result: Ty,
+    /// Its type parameters and its dictionary, where it is generic.
+    pub(crate) generic: Option<Generic>,
+}
+
+/// What a function generic over type parameters takes besides its own
+/// parameters: each type parameter, and for each method of a trait that
+/// bounds one and that its body calls, the function the implementing
+/// type supplies (its dictionary).
+///
+/// Rust compiles a generic function once per instantiation, and in each
+/// a call `x.m(..)` on a value of a type parameter `T: Tr` is the method
+/// `m` of the one impl of `Tr` for the type that takes `T`'s place
+/// (coherence admits no second impl of a trait without parameters for a
+/// type). The function of the method's receiver and arguments that impl
+/// gives is therefore an argument the instantiation fixes: the lifted
+/// definition takes it as a parameter and applies it where the body calls
+/// `m`, and each call passes the impl's method of the type its arguments
+/// fix. A body that reaches a value of `T` other than through the
+/// dictionary can only move it, since `T` has no other bound (other
+/// bounds keep their row): a definition over `'T` does the same for every
+/// type.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Generic {
+    /// The type parameters, by LexLean name, in order.
+    pub(crate) types: Vec<String>,
+    /// Each type parameter by its Rust name -> what the body reads it as:
+    /// its LexLean type parameter, or the function type of its `Fn` bound.
+    pub(crate) reads: BTreeMap<String, Ty>,
+    /// The dictionary, in the order the definition takes it.
+    pub(crate) dictionary: Vec<Entry>,
+}
+
+/// One method in a dictionary.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Entry {
+    /// The type parameter it is the method of, by LexLean name.
+    pub(crate) param: String,
+    /// The trait that declares it, by its name in its crate.
+    pub(crate) declarer: String,
+    pub(crate) method: String,
+    /// The LexLean parameter that holds it.
+    pub(crate) name: String,
+    /// Its function type: the receiver first, `Self` read as the type
+    /// parameter.
+    pub(crate) ty: Ty,
 }
 
 /// What the lift reads and does not change while it lifts a crate: the
@@ -1795,6 +1858,8 @@ struct Ctx {
     /// The formatter parameter of a `Display` impl's `fmt`, which `write!`
     /// writes the function's text into.
     formatter: Option<String>,
+    /// The dictionary of the generic function being lifted.
+    dictionary: Vec<Entry>,
 }
 
 /// A closure a `let` binds: its parameters, its body, and the locals in
@@ -2311,6 +2376,35 @@ fn int_literal(e: &rs::RustExpr) -> Option<u128> {
         rs::RustExpr::Lit(rs::Lit::Int { value, .. }) => *value,
         rs::RustExpr::Paren(p) => int_literal(p),
         _ => None,
+    }
+}
+
+/// A number literal without a suffix, negated, in parentheses or in
+/// arithmetic with others of its kind: its type is whatever inference
+/// gives it.
+fn untyped_number(e: &rs::RustExpr) -> bool {
+    match e {
+        rs::RustExpr::Lit(rs::Lit::Int { suffix, .. }) => suffix.is_empty(),
+        rs::RustExpr::Lit(rs::Lit::Other) => true,
+        rs::RustExpr::Unary(u) => {
+            matches!(u.op, rs::UnOp::Neg | rs::UnOp::Not) && untyped_number(&u.expr)
+        }
+        rs::RustExpr::Paren(p) => untyped_number(p),
+        // Arithmetic of such literals has their one inferred type; a shift
+        // has its left operand's.
+        rs::RustExpr::Binary(b) => match b.op {
+            rs::BinOp::Add
+            | rs::BinOp::Sub
+            | rs::BinOp::Mul
+            | rs::BinOp::Div
+            | rs::BinOp::Rem
+            | rs::BinOp::BitXor
+            | rs::BinOp::BitAnd
+            | rs::BinOp::BitOr => untyped_number(&b.left) && untyped_number(&b.right),
+            rs::BinOp::Shl | rs::BinOp::Shr => untyped_number(&b.left),
+            _ => false,
+        },
+        _ => false,
     }
 }
 
@@ -4315,6 +4409,20 @@ fn fn_call(
     ctx: &Ctx,
     acc: Acc,
 ) -> Lift<((Expr, Ty), Acc)> {
+    // `T::m(x, ..)` of a type parameter `T`: the dictionary's method.
+    if let [owner, method] = segments {
+        let held = match env.types.generic.get(owner) {
+            Some(Ty::Param(p)) => ctx
+                .dictionary
+                .iter()
+                .find(|e| &e.param == p && e.method == *method),
+            _ => None,
+        };
+        if let Some(entry) = held {
+            let args: Vec<&rs::RustExpr> = c.args.iter().collect();
+            return dictionary_call(entry, None, &args, env, ctx, acc);
+        }
+    }
     let mut name = segments.last().cloned().unwrap_or_default();
     if let [.., owner, method] = segments {
         let owner = if owner == "Self" {
@@ -4334,6 +4442,9 @@ fn fn_call(
     };
     if sig.params.len() != c.args.len() {
         return Err(Residue::Call(name));
+    }
+    if let Some(generic) = &sig.generic {
+        return generic_call(c, &name, sig, generic, env, ctx, acc);
     }
     let mut parts = vec![sig.name.clone()];
     let mut descends = None;
@@ -4366,6 +4477,233 @@ fn fn_call(
         acc.called(name)
     };
     flat_lift(format!("({})", parts.join(" ")), sig.result.clone(), acc)
+}
+
+/// A dictionary's method applied: to the receiver and the arguments of a
+/// method call, or to the arguments of a path call `T::m(x, ..)`, which
+/// pass the receiver first.
+fn dictionary_call(
+    entry: &Entry,
+    receiver: Option<String>,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let Ty::Fn(inputs, output) = &entry.ty else {
+        return Err(Residue::Form(
+            "a dictionary method of no function type".to_string(),
+        ));
+    };
+    let mut parts = vec!["apply".to_string(), entry.name.clone()];
+    let rest = match &receiver {
+        Some(r) => {
+            parts.push(r.clone());
+            &inputs[1..]
+        }
+        None => &inputs[..],
+    };
+    if rest.len() != args.len() {
+        return Err(Residue::Form(
+            "a dictionary method applied to another arity".to_string(),
+        ));
+    }
+    let mut acc = acc;
+    for (arg, ty) in args.iter().zip(rest) {
+        let ((v, vt), next) = flat_of(arg, env, &ctx.below(), acc, Some(ty))?;
+        if !vt.same(ty) {
+            return Err(Residue::Form(
+                "a dictionary method applied to another type".to_string(),
+            ));
+        }
+        acc = next;
+        parts.push(v);
+    }
+    flat_lift(format!("({})", parts.join(" ")), (**output).clone(), acc)
+}
+
+/// The instantiation `bind` extends so that `pattern` (a type that may
+/// name type parameters) is `actual`, or `false` where none does.
+fn instantiate(pattern: &Ty, actual: &Ty, bind: &mut BTreeMap<String, Ty>) -> bool {
+    match (pattern, actual) {
+        // One type argument is one Rust type: widths and orders count,
+        // though `Nat` renders every unsigned width alike.
+        (Ty::Param(p), _) => match bind.get(p) {
+            Some(held) => held == actual,
+            None => {
+                bind.insert(p.clone(), actual.clone());
+                true
+            }
+        },
+        (Ty::Option(a), Ty::Option(b))
+        | (Ty::List(a), Ty::List(b))
+        | (Ty::Set(a, _), Ty::Set(b, _)) => instantiate(a, b, bind),
+        (Ty::Outcome(a, e), Ty::Outcome(b, f)) | (Ty::Map(a, e, _), Ty::Map(b, f, _)) => {
+            instantiate(a, b, bind) && instantiate(e, f, bind)
+        }
+        (Ty::Fn(xs, r), Ty::Fn(ys, s)) => {
+            xs.len() == ys.len()
+                && xs.iter().zip(ys).all(|(x, y)| instantiate(x, y, bind))
+                && instantiate(r, s, bind)
+        }
+        _ => pattern.same(actual) && !pattern.render().contains('\''),
+    }
+}
+
+/// `pattern` with each type parameter `bind` fixes put in its place.
+fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
+    let go = |t: &Ty| Box::new(instantiated(t, bind));
+    match pattern {
+        Ty::Param(p) => bind.get(p).cloned().unwrap_or_else(|| pattern.clone()),
+        Ty::Option(t) => Ty::Option(go(t)),
+        Ty::List(t) => Ty::List(go(t)),
+        Ty::Set(t, o) => Ty::Set(go(t), *o),
+        Ty::Outcome(t, e) => Ty::Outcome(go(t), go(e)),
+        Ty::Map(k, v, o) => Ty::Map(go(k), go(v), *o),
+        Ty::Fn(ins, out) => Ty::Fn(ins.iter().map(|t| instantiated(t, bind)).collect(), go(out)),
+        other => other.clone(),
+    }
+}
+
+/// A call of a generic function: the type arguments its arguments fix, in
+/// the order of its type parameters, then for each method of its
+/// dictionary the one the instantiating type supplies, then its own
+/// arguments. A type parameter of the caller passes on the caller's own
+/// dictionary method; a type of the crate passes the method its impl of
+/// the trait gives, the one impl coherence admits. Any other type, a
+/// method an impl leaves to the trait's default body, and a type
+/// parameter no argument fixes stop the call.
+///
+/// An unsuffixed number literal has no type of its own: Rust gives it the
+/// type the call's other arguments fix (`first(200, x)` with `x: u8` makes
+/// `200` a `u8`). Such arguments are therefore lifted after the others,
+/// against the type those fixed; a type parameter only such literals fix
+/// takes its type from the call's context, which the lift does not read,
+/// and stops the call.
+fn generic_call(
+    c: &rs::ExprCall,
+    name: &str,
+    sig: &Sig,
+    generic: &Generic,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let mut bind: BTreeMap<String, Ty> = BTreeMap::new();
+    let mut lifted: Vec<Option<String>> = vec![None; c.args.len().min(sig.params.len())];
+    let mut descends = None;
+    let mut acc = acc;
+    let pairs: Vec<(usize, (&rs::RustExpr, &Ty))> =
+        c.args.iter().zip(&sig.params).enumerate().collect();
+    let (inferred, fixed): (Vec<_>, Vec<_>) = pairs
+        .into_iter()
+        .partition(|(_, (arg, ty))| untyped_number(arg) && ty.render().contains('\''));
+    for (i, (arg, ty)) in fixed.into_iter().chain(inferred) {
+        let wanted = instantiated(ty, &bind);
+        let typed = !wanted.render().contains('\'');
+        if !typed && untyped_number(arg) {
+            return Err(Residue::Form(format!(
+                "a call of {name} whose type parameter only an unsuffixed number literal fixes"
+            )));
+        }
+        let want = typed.then_some(&wanted);
+        let ((v, vt), next) = flat_of(arg, env, ctx, acc, want)?;
+        acc = next;
+        if !instantiate(ty, &vt, &mut bind) {
+            return Err(Residue::Form(format!("argument of another type to {name}")));
+        }
+        if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
+            descends = Some(i);
+        }
+        lifted[i] = Some(v);
+    }
+    let args: Vec<String> = lifted.into_iter().flatten().collect();
+    let mut types = Vec::new();
+    for p in &generic.types {
+        let Some(t) = bind.get(p) else {
+            return Err(Residue::Form(format!(
+                "a call of {name} whose arguments do not fix its type parameter {p}"
+            )));
+        };
+        types.push(t.render());
+    }
+    if name == ctx.current {
+        // No polymorphic recursion: a recursive call passes the
+        // definition's own type parameters and dictionary.
+        let own = generic
+            .types
+            .iter()
+            .all(|p| bind.get(p) == Some(&Ty::Param(p.clone())));
+        let Some(i) = descends.filter(|_| own) else {
+            return Err(Residue::Form(
+                "recursion that does not descend on a slice".to_string(),
+            ));
+        };
+        acc = acc.descended(i);
+    } else {
+        acc = acc.called(name.to_string());
+    }
+    let mut dictionary = Vec::new();
+    for e in &generic.dictionary {
+        let wanted = instantiated(&e.ty, &bind);
+        match &bind[&e.param] {
+            Ty::Param(q) => {
+                let Some(own) = ctx
+                    .dictionary
+                    .iter()
+                    .find(|d| &d.param == q && d.declarer == e.declarer && d.method == e.method)
+                else {
+                    return Err(Residue::Call(format!(
+                        "{}::{} of a type parameter whose dictionary does not give it",
+                        e.declarer, e.method
+                    )));
+                };
+                dictionary.push(own.name.clone());
+            }
+            Ty::Named(o) => {
+                let key = (e.declarer.clone(), o.clone(), e.method.clone());
+                let Some((rust, method)) = env
+                    .types
+                    .impls
+                    .get(&key)
+                    .and_then(|k| env.fns.get(k).map(|s| (k, s)))
+                else {
+                    return Err(Residue::Call(format!(
+                        "{}::{} of {o}, which no impl method of {o} that lifts gives",
+                        e.declarer, e.method
+                    )));
+                };
+                let given = Ty::Fn(method.params.clone(), Box::new(method.result.clone()));
+                if method.generic.is_some() || !given.same(&wanted) {
+                    return Err(Residue::Form(format!(
+                        "{}::{} of {o} of another type",
+                        e.declarer, e.method
+                    )));
+                }
+                acc = acc.called(rust.clone());
+                dictionary.push(format!("(ref {})", method.name));
+            }
+            other => {
+                return Err(Residue::Call(format!(
+                    "{}::{} of {}, a type no impl of the crate is read for",
+                    e.declarer,
+                    e.method,
+                    other.render()
+                )))
+            }
+        }
+    }
+    let mut parts = vec![sig.name.clone()];
+    if !types.is_empty() {
+        parts.push(format!("[{}]", types.join(", ")));
+    }
+    parts.extend(dictionary);
+    parts.extend(args);
+    flat_lift(
+        format!("({})", parts.join(" ")),
+        instantiated(&sig.result, &bind),
+        acc,
+    )
 }
 
 /// The module of the byte-level text prelude every projection carries.
@@ -4828,6 +5166,22 @@ fn method_on(
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut acc = acc;
     let args: Vec<&rs::RustExpr> = m.args.iter().collect();
+    // A value of a type parameter has the methods of its dictionary and
+    // no other: Rust finds a method of a bound before any trait's that
+    // needs more than the bound gives.
+    if let Ty::Param(p) = &rt {
+        let Some(entry) = ctx
+            .dictionary
+            .iter()
+            .find(|e| &e.param == p && e.method == name)
+        else {
+            return Err(Residue::Form(format!(
+                "a method {name} of a value of a type parameter, which its dictionary does not \
+                 give"
+            )));
+        };
+        return dictionary_call(entry, Some(r), &args, env, ctx, acc);
+    }
     // A path's text, and the path itself where Rust borrows or copies it.
     if rt == Ty::Path && args.is_empty() {
         match name {
@@ -6041,7 +6395,8 @@ fn default_in(ty: &Ty, types: &Types, depth: usize) -> Option<String> {
                 default_in(err, types, depth + 1)?
             ),
         },
-        Ty::Path => return None,
+        // A type parameter has no default its definition could name.
+        Ty::Path | Ty::Param(_) => return None,
         // A function: the one that gives every input its result's default.
         Ty::Fn(ins, out) => {
             let params: Vec<String> = ins
@@ -6718,11 +7073,18 @@ fn closure_tries(body: &rs::RustExpr, n: usize) -> rs::RustExpr {
 
 /// The outer locals a helper's body names: they become its parameters.
 fn captures(ctx: &Ctx, texts: &[String], bound: &[String]) -> Vec<(String, Ty)> {
+    // A dictionary's method is a parameter of the definition, captured
+    // as a local is.
+    let dictionary = ctx
+        .dictionary
+        .iter()
+        .map(|e| (e.name.clone(), e.ty.clone()));
     let found: BTreeSet<(String, Ty)> = ctx
         .locals
         .values()
-        .filter(|(n, _)| !bound.contains(n) && texts.iter().any(|t| mentions_word(t, n)))
         .cloned()
+        .chain(dictionary)
+        .filter(|(n, _)| !bound.contains(n) && texts.iter().any(|t| mentions_word(t, n)))
         .collect();
     found.into_iter().collect()
 }
@@ -11286,6 +11648,9 @@ fn question(
 pub(crate) struct Candidate<'a> {
     pub(crate) rust: String,
     pub(crate) name: String,
+    /// Its type parameters and dictionary, where it is generic: the
+    /// dictionary's parameters come before `params`.
+    pub(crate) generic: Option<Generic>,
     pub(crate) params: Vec<Param>,
     pub(crate) result: Ty,
     pub(crate) block: &'a rs::Block,
@@ -11330,6 +11695,39 @@ pub(crate) struct Lifted {
     pub(crate) divergences: BTreeMap<String, Vec<String>>,
 }
 
+/// What a generic definition's lift produced that it does not write, if
+/// anything: a helper or theorem the lift generates takes no type
+/// parameter or dictionary of its own, and a tuple over a type parameter
+/// is a generated structure that would need one.
+fn generic_unread(acc: &Acc, well_founded: bool, c: &Candidate<'_>) -> Option<Residue> {
+    let over_param = |t: &Ty| matches!(t, Ty::Param(_));
+    let tuple = acc
+        .seen
+        .iter()
+        .chain(c.params.iter().map(|(_, _, t)| t))
+        .any(|t| {
+            t.mentions().iter().any(|m| match m {
+                Ty::Tuple(ts) => ts
+                    .iter()
+                    .any(|x| over_param(x) || x.render().contains('\'')),
+                _ => false,
+            })
+        });
+    if !acc.helpers.is_empty() {
+        Some(Residue::Form(
+            "a generic function whose lift needs a helper definition".to_string(),
+        ))
+    } else if well_founded {
+        Some(Residue::Form(
+            "a generic function whose recursion needs termination evidence".to_string(),
+        ))
+    } else if tuple {
+        Some(Residue::Form("a tuple over a type parameter".to_string()))
+    } else {
+        None
+    }
+}
+
 /// The primitives whose Lean definitions the kernel does not unfold.
 const KERNEL_OPAQUE: [&str; 6] = [
     "prim split_exact",
@@ -11360,6 +11758,7 @@ pub(crate) fn lift_all(
                         name: c.name.clone(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         result: c.result.clone(),
+                        generic: c.generic.clone(),
                     },
                 )
             })
@@ -11406,8 +11805,19 @@ pub(crate) fn lift_all(
                 imports: c.imports.clone(),
                 seen: c.seen.clone(),
                 formatter: c.formatter.clone(),
+                dictionary: c
+                    .generic
+                    .as_ref()
+                    .map(|g| g.dictionary.clone())
+                    .unwrap_or_default(),
             };
             env.types.paths_open = c.seen.paths_open;
+            // A type parameter is the candidate's own.
+            env.types.generic = c
+                .generic
+                .as_ref()
+                .map(|g| g.reads.clone())
+                .unwrap_or_default();
             // Every candidate's file reads each shared name, so one file's
             // reading never outlives its candidates.
             env.types
@@ -11456,6 +11866,12 @@ pub(crate) fn lift_all(
                 }
                 Ok((body, None, acc)) => Ok((body, None, None, Vec::new(), acc)),
                 Err(r) => Err(r),
+            };
+            let outcome = match (outcome, &c.generic) {
+                (Ok(lifted), Some(_)) => {
+                    generic_unread(&lifted.4, lifted.2.is_some(), c).map_or(Ok(lifted), Err)
+                }
+                (outcome, _) => outcome,
             };
             match outcome {
                 Ok((body, recursive, termination, theorems, acc)) => {
@@ -11516,6 +11932,7 @@ pub(crate) fn lift_all(
                         decls.push((
                             key,
                             Decl::Definition {
+                                type_parameters: Vec::new(),
                                 recursive: if h.recursive {
                                     h.params.first().map(|(n, _)| n.clone())
                                 } else {
@@ -11534,11 +11951,18 @@ pub(crate) fn lift_all(
                     decls.push((
                         c.rust.clone(),
                         Decl::Definition {
+                            type_parameters: c
+                                .generic
+                                .as_ref()
+                                .map(|g| g.types.clone())
+                                .unwrap_or_default(),
                             name: c.name.clone(),
                             parameters: c
-                                .params
+                                .generic
                                 .iter()
-                                .map(|(_, n, t)| (n.clone(), t.render()))
+                                .flat_map(|g| &g.dictionary)
+                                .map(|e| (e.name.clone(), e.ty.render()))
+                                .chain(c.params.iter().map(|(_, n, t)| (n.clone(), t.render())))
                                 .collect(),
                             result: c.result.render(),
                             body,
@@ -11560,7 +11984,19 @@ pub(crate) fn lift_all(
         let mut mutual_of: BTreeMap<String, String> = BTreeMap::new();
         if !changed {
             for component in call_cycles(&graph) {
-                match mutual_group(&component, candidates, &mut decls, types) {
+                // A mutual group's members share no type parameter or
+                // dictionary: a generic member stops the group.
+                let generic = candidates
+                    .iter()
+                    .any(|c| c.generic.is_some() && component.contains(&c.rust));
+                let grouped = if generic {
+                    Err(Residue::Form(
+                        "a generic function in a cycle of calls".to_string(),
+                    ))
+                } else {
+                    mutual_group(&component, candidates, &mut decls, types)
+                };
+                match grouped {
                     Ok(label) => {
                         for m in &component {
                             if let Some(axioms) = own.get_mut(m) {
@@ -12360,6 +12796,41 @@ pub(crate) fn acceptance(
     }
 }
 
+/// The function type of a trait's method in a dictionary over the type
+/// parameter `param`, whose reading `types.generic` holds under `Self`
+/// too: the receiver (`self` or `&self`, both the value) first, then the
+/// parameters. A method of type or const parameters of its own, of a
+/// receiver it changes or of no parameter at all is no entry.
+pub(crate) fn entry_ty(types: &Types, sig: &rs::Signature, param: &Ty) -> Lift<Ty> {
+    if let Some(what) = unread_signature(sig) {
+        return Err(Residue::Signature(format!("a trait method {what}")));
+    }
+    let mut inputs = Vec::new();
+    for input in &sig.inputs {
+        match input {
+            rs::FnArg::Receiver { plain: true } => inputs.push(param.clone()),
+            rs::FnArg::Receiver { plain: false } => {
+                return Err(Residue::Signature(
+                    "a trait method that takes &mut self, mut self or a typed self: a dictionary \
+                     holds functions of the value, and threads no changed receiver"
+                        .to_string(),
+                ))
+            }
+            rs::FnArg::Typed(pat) => inputs.push(types.ty(&pat.ty)?),
+        }
+    }
+    if inputs.is_empty() {
+        return Err(Residue::Signature(
+            "a trait method of no parameter, which a dictionary holds as no function".to_string(),
+        ));
+    }
+    let result = match &sig.output {
+        None => Ty::Unit,
+        Some(t) => types.ty(t)?,
+    };
+    Ok(Ty::Fn(inputs, Box::new(result)))
+}
+
 /// What of a signature the lift does not read, each part named, or `None`
 /// when it reads all of it. A type or const parameter makes the function
 /// one per instantiation, and an `async`, `unsafe` or variadic function
@@ -12416,6 +12887,7 @@ mod tests {
             (
                 "One::empty".into(),
                 Sig {
+                    generic: None,
                     name: "oneEmpty".into(),
                     params: vec![Ty::Bool],
                     result: Ty::Bool,
@@ -12424,6 +12896,7 @@ mod tests {
             (
                 "Two::empty".into(),
                 Sig {
+                    generic: None,
                     name: "twoEmpty".into(),
                     params: vec![Ty::Bool],
                     result: Ty::Bool,
@@ -12454,6 +12927,7 @@ mod tests {
             fns: BTreeMap::from([(
                 "again".into(),
                 Sig {
+                    generic: None,
                     name: "again".into(),
                     params: vec![Ty::Bool; 3],
                     result: Ty::Bool,
@@ -12463,6 +12937,7 @@ mod tests {
             names: BTreeSet::new(),
         };
         let mut ctx = Ctx {
+            dictionary: Vec::new(),
             current: "again".into(),
             own: "again".into(),
             params: vec!["first".into(), "second".into()],
@@ -12513,6 +12988,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),
             params,
@@ -13552,6 +14028,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),
             params,
@@ -13692,6 +14169,7 @@ mod tests {
             let block = crate::convert::block(&f.block);
             let (params, result) = types.signature(&sig, None)?;
             let c = Candidate {
+                generic: None,
                 rust: sig.ident.clone(),
                 name: camel(&[&sig.ident]),
                 params,
@@ -13838,6 +14316,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),
             params,
