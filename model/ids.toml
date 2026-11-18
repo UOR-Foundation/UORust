@@ -201,3 +201,9 @@ id = "UE-24"
 level = "build"
 suite = "engine"
 statement = "A crate of the workspace reads the types of the workspace crates it depends on by path: its scope holds their enums, structs and data-carrying enums under the names the projection gives them, and a `use` or a written path that starts with such a crate names the type that crate declares there, so a function that takes, returns or builds one lifts as a function of the crate's own types does; a type of a crate it does not depend on stays outside its scope"
+
+[[id]]
+id = "UE-25"
+level = "build"
+suite = "engine"
+statement = "An error converts as Rust converts it: `e?` of a `Result<T, E1>` in a function returning `Result<U, E2>` returns, on an error, the `Err` of the lifted `from` of `impl From<E1> for E2` applied to it, and `v.into()` where an `E2` is wanted is that `from` of `v`; a `?` or an `into` with no lifted conversion between the two types stays a residue row naming it"

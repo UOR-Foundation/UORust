@@ -144,3 +144,9 @@ Feature: engine
     Given a planted workspace whose second crate imports the first crate's error enum through a nested use group and names it by its full path, and whose third crate does not depend on the first
     When the suite exercises UE-24
     Then the second crate's functions that return or build the enum lift, and the third crate's function that names it is a residue row naming the type
+
+  @UE-25 @build
+  Scenario: An error converts by its From implementation
+    Given a planted crate whose function returning a program error applies `?` to a result of a token error, whose other function returns a token error `into` a program error, an implementation of From of the token error for the program error, and a function applying `?` where no conversion exists
+    When the suite exercises UE-25
+    Then the first two functions lift, each error path applying the lifted from, and the third is a residue row naming the `?` of another type

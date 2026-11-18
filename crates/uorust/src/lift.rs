@@ -2984,6 +2984,21 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
     }
 }
 
+/// The lifted conversion of `impl From<T> for U` from `from` to `to`: the
+/// key of the `from` whose one parameter is `from` and whose result is `to`,
+/// and its LexLean name.
+fn conversion(env: &Env, from: &Ty, to: &Ty) -> Option<(String, String)> {
+    env.fns
+        .iter()
+        .find(|(key, sig)| {
+            key.rsplit("::").next() == Some("from")
+                && sig.params.len() == 1
+                && sig.params[0].same(from)
+                && sig.result.same(to)
+        })
+        .map(|(key, sig)| (key.clone(), sig.name.clone()))
+}
+
 /// The width of an unsigned integer type of a fixed width, by its name.
 fn unsigned_bits(name: &str) -> Option<u32> {
     match name {
@@ -4674,6 +4689,18 @@ fn method_typed(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     match (rt, name) {
+        // `v.into()` where a type is wanted: `v` itself, or the lifted `from`
+        // of `impl From<T> for U` (UE-25).
+        (_, "into") if args.is_empty() && want.is_some_and(|w| w.same(rt)) => {
+            flat_lift(r.to_string(), rt.clone(), acc)
+        }
+        (_, "into") if args.is_empty() && want.is_some_and(|w| conversion(env, rt, w).is_some()) => {
+            let Some((key, from)) = want.and_then(|w| conversion(env, rt, w)) else {
+                return Err(Residue::Form("method call .into".to_string()));
+            };
+            let result = env.fns[&key].result.clone();
+            flat_lift(format!("({from} {r})"), result, acc.called(key))
+        }
         // `a.checked_div(b)`, `a.checked_rem(b)`: none for a zero divisor.
         (Ty::Nat(_), "checked_div" | "checked_rem") if args.len() == 1 => {
             method_nat_checked_div(name, r, rt, args, env, ctx, acc)
@@ -10760,6 +10787,28 @@ fn question(
                     format!("Result.error {e}"),
                     format!(
                         "(ctor Result.error [{}, {}] {e})",
+                        ok.render(),
+                        rerr.render()
+                    ),
+                ),
+            )
+        }
+        // `?` of another error type: Rust returns `Err(From::from(e))`, the
+        // lifted `from` of `impl From<E1> for E2` (UE-25).
+        (Ty::Outcome(inner, err), Ty::Outcome(ok, rerr))
+            if conversion(env, err, rerr).is_some() =>
+        {
+            let Some((key, from)) = conversion(env, err, rerr) else {
+                return Err(Residue::Form("? of another type".to_string()));
+            };
+            let (e, after) = ctx.fresh(env, acc, "error");
+            acc = after.called(key);
+            (
+                (**inner).clone(),
+                (
+                    format!("Result.error {e}"),
+                    format!(
+                        "(ctor Result.error [{}, {}] ({from} {e}))",
                         ok.render(),
                         rerr.render()
                     ),

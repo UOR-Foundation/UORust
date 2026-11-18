@@ -2163,3 +2163,40 @@ fn a_crate_reads_the_types_of_the_crates_it_depends_on_ue_24() {
     let detail = residue_detail(&files, "other::apart").expect("apart is a residue row");
     assert!(detail.contains("TokenError"), "{detail}");
 }
+
+#[test]
+fn an_error_converts_by_its_from_implementation_ue_25() {
+    let planted = scratch(
+        "ue25-from",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"errors\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Errors.\n/// A token error.\npub enum TokenError {\n    /// Bad.\n    InvalidInstruction,\n    /// Worse.\n    Other,\n}\n\n\
+                 /// A program error.\npub enum ProgramError {\n    /// A custom code.\n    Custom(u32),\n    /// Bad input.\n    InvalidArgument,\n}\n\n\
+                 impl From<TokenError> for ProgramError {\n    fn from(e: TokenError) -> Self {\n        ProgramError::Custom(e as u32)\n    }\n}\n\n\
+                 /// Unpacks.\npub fn unpack(x: u64) -> Result<u64, TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(TokenError::InvalidInstruction)\n    }\n}\n\n\
+                 /// Through `?`.\npub fn process(x: u64) -> Result<u64, ProgramError> {\n    let a = unpack(x)?;\n    Ok(a)\n}\n\n\
+                 /// Through `into`.\npub fn reject() -> Result<u64, ProgramError> {\n    Err(TokenError::Other.into())\n}\n\n\
+                 /// No conversion.\npub fn mismatch(x: u64) -> Result<u64, u32> {\n    let a = unpack(x)?;\n    Ok(a)\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "errors");
+    let lifted = lifted_functions(&files);
+    for f in ["errors::process", "errors::reject"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(
+        behavior
+            .contains("(ctor Result.error [Nat, ProgramError] (programErrorFromTokenErrorFrom "),
+        "{behavior}"
+    );
+    let detail = residue_detail(&files, "errors::mismatch").expect("mismatch is a residue row");
+    assert!(detail.contains("? of another type"), "{detail}");
+}
