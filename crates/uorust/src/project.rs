@@ -3660,6 +3660,20 @@ fn behavior(
                         .collect::<Vec<_>>()
                 })
                 .collect();
+            let discriminants = package
+                .files
+                .iter()
+                .flat_map(|file| {
+                    file.enums
+                        .iter()
+                        .filter_map(|e| {
+                            let lex =
+                                named.get(&(file.target, file.module.clone(), e.name.clone()))?;
+                            Some((lex.clone(), e.discriminants.clone()?))
+                        })
+                        .collect::<Vec<_>>()
+                })
+                .collect();
             Scope {
                 enums,
                 datas,
@@ -3667,6 +3681,7 @@ fn behavior(
                 aliases,
                 derives,
                 explicit,
+                discriminants,
             }
         })
         .collect();
@@ -3703,6 +3718,12 @@ fn behavior(
                 scope
                     .explicit
                     .extend(other.explicit.iter().filter(|n| lifted(n)).cloned());
+                for (n, v) in other.discriminants.iter().filter(|(n, _)| lifted(n)) {
+                    scope
+                        .discriminants
+                        .entry(n.clone())
+                        .or_insert_with(|| v.clone());
+                }
                 // A type of the library written by its full path:
                 // `iface::error::TokenError`.
                 let package = &ws.packages[dep];
@@ -3728,6 +3749,7 @@ fn behavior(
             Types {
                 derives: scope.derives,
                 explicit: scope.explicit,
+                discriminants: scope.discriminants,
                 ..Types::with_data(scope.enums, &scope.datas, &scope.structs, scope.aliases)
             }
         })
@@ -5862,7 +5884,8 @@ const REFUSALS: &str = "refusals";
 /// the function rows ([`function_rows`]).
 /// A crate's own types before its scope is read: its enums, data-carrying
 /// enums and structs by LexLean name, its aliases, the traits each derives,
-/// and the enums whose source sets a discriminant.
+/// the enums whose source sets a discriminant, and the discriminants of
+/// those whose every value the source writes as an integer.
 #[derive(Clone)]
 struct Scope {
     enums: Variants,
@@ -5871,6 +5894,7 @@ struct Scope {
     aliases: BTreeMap<String, String>,
     derives: BTreeMap<String, BTreeSet<String>>,
     explicit: BTreeSet<String>,
+    discriminants: BTreeMap<String, Vec<i64>>,
 }
 
 /// Each package's normal dependencies on other packages of the workspace,
@@ -6716,9 +6740,13 @@ mod tests {
             );
         }
         // A generic trait is implemented once per argument list, and the
-        // types at the call pick among them: no call is read as one.
+        // type of the argument picks among them, as Rust's does (UE-26).
         let found = row(&frontier, "shapes::of_side");
-        assert!(found.contains("reason = \"call\""), "{found}");
+        assert!(found.starts_with("[[lifted]]"), "{found}");
+        assert!(
+            definition(&behavior, "ofSide").contains("(rectFromU32From side)"),
+            "{behavior}"
+        );
         // A method the trait declares without a body is no one function.
         let found = row(&frontier, "shapes::Shape::area");
         assert!(

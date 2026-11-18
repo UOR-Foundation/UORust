@@ -1090,6 +1090,55 @@ pub(crate) fn tidy(text: &str) -> String {
     out.trim().to_string()
 }
 
+/// The discriminants of an enum whose source sets one and writes each as
+/// an integer literal (`A = 5`, `B` then 6), or none.
+fn written_discriminants(e: &syn::ItemEnum) -> Option<Vec<i64>> {
+    if e.variants.iter().all(|v| v.discriminant.is_none()) {
+        return None;
+    }
+    let mut next = 0i64;
+    let mut out = Vec::new();
+    for v in &e.variants {
+        let value = match &v.discriminant {
+            None => next,
+            Some((
+                _,
+                syn::Expr::Lit(syn::ExprLit {
+                    lit: syn::Lit::Int(i),
+                    ..
+                }),
+            )) => i.base10_parse::<i64>().ok()?,
+            Some(_) => return None,
+        };
+        out.push(value);
+        next = value.checked_add(1)?;
+    }
+    Some(out)
+}
+
+/// An impl's associated types by name: `Self::Error` in one of its
+/// signatures is the type the impl binds to `Error`.
+struct SelfAssoc(Vec<(String, syn::Type)>);
+
+impl syn::visit_mut::VisitMut for SelfAssoc {
+    fn visit_type_mut(&mut self, t: &mut syn::Type) {
+        let named = match &*t {
+            syn::Type::Path(p) if p.qself.is_none() && p.path.segments.len() == 2 => {
+                let (first, second) = (&p.path.segments[0], &p.path.segments[1]);
+                (first.ident == "Self" && second.arguments.is_none())
+                    .then(|| self.0.iter().find(|(n, _)| second.ident == n))
+                    .flatten()
+                    .map(|(_, to)| to.clone())
+            }
+            _ => None,
+        };
+        match named {
+            Some(to) => *t = to,
+            None => syn::visit_mut::visit_type_mut(self, t),
+        }
+    }
+}
+
 #[allow(clippy::too_many_arguments)]
 fn function(
     sig: &syn::Signature,
@@ -1266,10 +1315,21 @@ fn items(
                         syn::GenericParam::Lifetime(_) => None,
                     })
                     .collect();
+                // `Self::Error` in a signature is the type the impl binds
+                // to it (`type Error = ProgramError;`).
+                let mut bound = SelfAssoc(
+                    imp.items
+                        .iter()
+                        .filter_map(|m| match m {
+                            syn::ImplItem::Type(t) => Some((t.ident.to_string(), t.ty.clone())),
+                            _ => None,
+                        })
+                        .collect(),
+                );
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
-                        let (mut fact, fn_syntax) = function(
+                        let (mut fact, mut fn_syntax) = function(
                             &f.sig,
                             Some(&f.block),
                             &attrs(&f.attrs),
@@ -1284,6 +1344,11 @@ fn items(
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
                         fact.scope = scope;
+                        if !bound.0.is_empty() {
+                            let mut sig = f.sig.clone();
+                            syn::visit_mut::VisitMut::visit_signature_mut(&mut bound, &mut sig);
+                            fn_syntax.signature = crate::convert::signature(&sig);
+                        }
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
                     }
@@ -1339,6 +1404,7 @@ fn items(
                     },
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    discriminants: written_discriminants(e),
                     variants: e
                         .variants
                         .iter()

@@ -1481,6 +1481,22 @@ impl Types {
             (rs::TypeKind::Path { qself: false, path }, Some(o)) if path.is_ident("Self") => {
                 Ok(Ty::Named(o.to_string()))
             }
+            // `Self` inside another type (`Result<Self, E>`) names the
+            // owner there too.
+            (_, Some(o)) => {
+                let path = rs::Path {
+                    segments: vec![rs::PathSegment {
+                        ident: o.to_string(),
+                        arguments: rs::PathArguments::None,
+                    }],
+                    text: o.to_string(),
+                };
+                let owner = rs::RustType {
+                    text: o.to_string(),
+                    kind: rs::TypeKind::Path { qself: false, path },
+                };
+                self.ty(&t.substituted(&BTreeMap::from([("Self".to_string(), owner)])))
+            }
             _ => self.ty(t),
         }
     }
@@ -2709,6 +2725,8 @@ fn match_value(
     acc: Acc,
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
+    let read = transmuted(m, env);
+    let m = read.as_ref().unwrap_or(m);
     let arms: Vec<(&rs::Pat, Body<'_>)> = m
         .arms
         .iter()
@@ -2718,6 +2736,156 @@ fn match_value(
         })
         .collect();
     matching(&m.expr, &arms, env, ctx, acc, want)
+}
+
+/// `match x { 0..=2 | 7 => Ok(unsafe { transmute::<u8, E>(x) }), .. }`: an
+/// arm that reads the integer it matched as a fieldless enum, one arm per
+/// value its pattern admits, each the variant whose discriminant is that
+/// value. Where a value names no variant the arm is not read this way.
+fn transmuted(m: &rs::ExprMatch, env: &Env) -> Option<rs::ExprMatch> {
+    let rs::RustExpr::Path(scrutinee) = &*m.expr else {
+        return None;
+    };
+    let [x] = scrutinee.segments.as_slice() else {
+        return None;
+    };
+    let mut arms = Vec::new();
+    let mut changed = false;
+    for arm in &m.arms {
+        let Some((target, variants)) = transmute_in(&arm.body, &x.ident, env) else {
+            arms.push(arm.clone());
+            continue;
+        };
+        let values = pattern_values(&arm.pat)?;
+        for v in values {
+            let variant = variants.iter().find(|(d, _)| *d == v).map(|(_, n)| n)?;
+            let mut path = target.clone();
+            path.segments.push(rs::PathSegment {
+                ident: variant.clone(),
+                arguments: rs::PathArguments::None,
+            });
+            path.text = format!("{}::{variant}", target.text);
+            arms.push(rs::MatchArm {
+                pat: rs::Pat::Lit(rs::Lit::Int {
+                    value: Some(v),
+                    suffix: String::new(),
+                }),
+                body: Box::new(without_transmute(&arm.body, &rs::RustExpr::Path(path))?),
+            });
+        }
+        changed = true;
+    }
+    changed.then(|| rs::ExprMatch {
+        expr: m.expr.clone(),
+        arms,
+    })
+}
+
+/// The `unsafe { transmute::<uN, E>(x) }` an arm's value holds, alone or as
+/// the one argument of a call (`Ok(..)`): `E`'s path, and its variants with
+/// their discriminants.
+fn transmute_in(e: &rs::RustExpr, x: &str, env: &Env) -> Option<(rs::Path, Vec<(u128, String)>)> {
+    match e {
+        rs::RustExpr::Call(c) if c.args.len() == 1 => transmute_in(&c.args[0], x, env),
+        rs::RustExpr::Paren(p) => transmute_in(p, x, env),
+        rs::RustExpr::Block(b) => match b.block.stmts.as_slice() {
+            [rs::Stmt::Expr(e, false)] if !b.label => transmute_in(e, x, env),
+            _ => None,
+        },
+        rs::RustExpr::Other(o) if o.kind == "expr::unsafe" => {
+            let [b] = o.blocks.as_slice() else {
+                return None;
+            };
+            let [rs::Stmt::Expr(rs::RustExpr::Call(c), false)] = b.stmts.as_slice() else {
+                return None;
+            };
+            let rs::RustExpr::Path(f) = &*c.func else {
+                return None;
+            };
+            let last = f.segments.last()?;
+            let ([rs::RustExpr::Path(arg)], true) = (c.args.as_slice(), last.ident == "transmute")
+            else {
+                return None;
+            };
+            if !arg.is_ident(x) {
+                return None;
+            }
+            let rs::PathArguments::AngleBracketed(ga) = &last.arguments else {
+                return None;
+            };
+            let [rs::GenericArgument::Type(from), rs::GenericArgument::Type(to)] = ga.as_slice()
+            else {
+                return None;
+            };
+            unsigned_bits(&from.text)?;
+            let rs::TypeKind::Path { qself: false, path } = &to.kind else {
+                return None;
+            };
+            let lex = env.types.resolve(&to.text);
+            let names = env.types.enums.get(&lex)?;
+            let values: Vec<u128> = match env.types.discriminants.get(&lex) {
+                Some(ds) => ds
+                    .iter()
+                    .map(|d| u128::try_from(*d).ok())
+                    .collect::<Option<_>>()?,
+                None if !env.types.explicit.contains(&lex) => (0..names.len() as u128).collect(),
+                None => return None,
+            };
+            Some((
+                path.clone(),
+                values.into_iter().zip(names.iter().cloned()).collect(),
+            ))
+        }
+        _ => None,
+    }
+}
+
+/// The arm's value with its `unsafe { transmute(..) }` replaced by `by`.
+fn without_transmute(e: &rs::RustExpr, by: &rs::RustExpr) -> Option<rs::RustExpr> {
+    match e {
+        rs::RustExpr::Call(c) if c.args.len() == 1 => {
+            let mut c = c.clone();
+            c.args[0] = without_transmute(&c.args[0], by)?;
+            Some(rs::RustExpr::Call(c))
+        }
+        rs::RustExpr::Paren(p) => without_transmute(p, by),
+        rs::RustExpr::Block(b) => match b.block.stmts.as_slice() {
+            [rs::Stmt::Expr(e, false)] if !b.label => without_transmute(e, by),
+            _ => None,
+        },
+        rs::RustExpr::Other(o) if o.kind == "expr::unsafe" => Some(by.clone()),
+        _ => None,
+    }
+}
+
+/// The integers a pattern of literals, closed or half-open ranges and `|`
+/// admits, at most 4096 of them.
+fn pattern_values(p: &rs::Pat) -> Option<Vec<u128>> {
+    let int = |e: &rs::RustExpr| match e {
+        rs::RustExpr::Lit(rs::Lit::Int { value, .. }) => *value,
+        _ => None,
+    };
+    let out = match p {
+        rs::Pat::Lit(rs::Lit::Int { value, .. }) => vec![(*value)?],
+        rs::Pat::Range(r) => {
+            let start = int(r.start.as_deref()?)?;
+            let end = int(r.end.as_deref()?)?;
+            let end = if r.closed { end } else { end.checked_sub(1)? };
+            if end < start || end - start >= 4096 {
+                return None;
+            }
+            (start..=end).collect()
+        }
+        rs::Pat::Or(ps) => {
+            let mut all = Vec::new();
+            for q in ps {
+                all.extend(pattern_values(q)?);
+            }
+            all
+        }
+        _ => return None,
+    };
+    (out.len() <= 4096).then_some(out)
 }
 
 /// `e.f` and `e.0`: a field of a structure or an item of a tuple.
@@ -2958,19 +3126,24 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
             let (bit, acc) = acc.prelude("bitOf", &[&v]);
             flat_lift(bit, target, acc)
         }
-        // `e as uN` of an enum whose source sets no discriminant: the
-        // variant's index, modulo 2^N.
+        // `e as uN` of a fieldless enum: the variant's discriminant, its
+        // index where the source sets none, modulo 2^N. A negative one, or
+        // one the source does not write as a literal, is not read.
         (Ty::Named(name), Ty::Nat(width)) if env.types.enums.contains_key(name) => {
-            if env.types.explicit.contains(name) {
+            let set: Option<Vec<u128>> = match env.types.discriminants.get(name) {
+                Some(ds) => ds.iter().map(|d| u128::try_from(*d).ok()).collect(),
+                None if env.types.explicit.contains(name) => None,
+                None => Some((0..env.types.enums[name].len() as u128).collect()),
+            };
+            let Some(set) = set else {
                 return Err(Residue::Form(format!(
                     "a cast of {name}, whose source sets its discriminants"
                 )));
-            }
+            };
             let arms: String = env.types.enums[name]
                 .iter()
-                .enumerate()
-                .map(|(i, variant)| {
-                    let index = u128::try_from(i).unwrap_or(u128::MAX);
+                .zip(set)
+                .map(|(variant, index)| {
                     let value = match width {
                         Some(b) if *b < 128 => index % (1u128 << b),
                         _ => index,
@@ -3949,9 +4122,35 @@ fn fn_call(
         } else {
             owner.as_str()
         };
-        let key = format!("{}::{method}", env.types.resolve(owner));
+        let lex = env.types.resolve(owner);
+        let key = format!("{lex}::{method}");
         if env.fns.contains_key(&key) {
             name = key;
+        } else if let [arg] = c.args.as_slice() {
+            // `T::try_from(x)` of a generic trait's method, which lifts
+            // under its trait (`T::<TryFrom<u8>>::try_from`): Rust picks the
+            // impl by the argument's type, and so does the lift. Core's
+            // blanket impls stand only where no impl of the workspace for
+            // that type does, so a match is the method the call means.
+            let head = format!("{lex}::<");
+            let tail = format!(">::{method}");
+            let typed = flat_of(arg, env, ctx, acc.clone(), None)
+                .ok()
+                .map(|((_, t), _)| t);
+            let found: Vec<&String> = env
+                .fns
+                .iter()
+                .filter(|(k, s)| {
+                    k.starts_with(&head)
+                        && k.ends_with(&tail)
+                        && s.params.len() == 1
+                        && typed.as_ref().is_some_and(|t| s.params[0].same(t))
+                })
+                .map(|(k, _)| k)
+                .collect();
+            if let [one] = found.as_slice() {
+                name = (*one).clone();
+            }
         }
     }
     let Some(sig) = env.fns.get(&name) else {

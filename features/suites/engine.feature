@@ -135,9 +135,9 @@ Feature: engine
 
   @UE-23 @build
   Scenario: Bytes, flags and unit enums convert by the prelude's definitions
-    Given a planted crate whose struct holds an amount as eight little-endian bytes, a flag and a state byte, with a getter and setters converting them, and an enum whose source sets its discriminants
+    Given a planted crate whose struct holds an amount as eight little-endian bytes, a flag and a state byte, with a getter and setters converting them, and an enum whose source sets a discriminant as an expression
     When the suite exercises UE-23
-    Then the getter and the setters lift to the prelude's fromLeBytes, leBytes and bitOf and to the match from each variant to its index, and the cast of the enum that sets its discriminants is a residue row naming them
+    Then the getter and the setters lift to the prelude's fromLeBytes, leBytes and bitOf and to the match from each variant to its index, and the cast of the enum whose discriminant is an expression is a residue row naming them
 
   @UE-24 @build
   Scenario: A crate reads the types of the workspace crates it depends on
@@ -150,3 +150,15 @@ Feature: engine
     Given a planted crate whose function returning a program error applies `?` to a result of a token error, whose other function returns a token error `into` a program error, an implementation of From of the token error for the program error, and a function applying `?` where no conversion exists
     When the suite exercises UE-25
     Then the first two functions lift, each error path applying the lifted from, and the third is a residue row naming the `?` of another type
+
+  @UE-26 @build
+  Scenario: Self and its associated types name the impl
+    Given a planted crate whose enum implements TryFrom of a byte returning Result of Self and Self::Error, a struct method calling that try_from on its byte field, and another calling it on a flag
+    When the suite exercises UE-26
+    Then the try_from and the method calling it on the byte lift, and the method calling it on a flag is a residue row naming try_from
+
+  @UE-27 @build
+  Scenario: An integer read as a fieldless enum is its variant
+    Given a planted crate whose enum sets discriminants 5 and 9 and leaves the next unset, a function transmuting a byte matched by 5 or 9..=10 into it, another transmuting a byte matched by 5..=6, and a cast of the enum to a byte
+    When the suite exercises UE-27
+    Then the first transmuting function and the cast lift, the cast giving each variant its discriminant, and the second transmuting function is a residue row naming the unsafe block

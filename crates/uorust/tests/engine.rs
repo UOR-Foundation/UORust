@@ -2085,7 +2085,7 @@ fn bytes_flags_and_unit_enums_convert_by_the_prelude_ue_23() {
                 "src/lib.rs",
                 "//! Bytes.\n/// A state.\n#[repr(u8)]\npub enum State {\n    /// Not yet.\n    Uninitialized,\n    \
                  /// Ready.\n    Initialized,\n    /// Stopped.\n    Frozen,\n}\n\n\
-                 /// A code whose source sets its values.\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Nine.\n    B = 9,\n}\n\n\
+                 /// A code whose source sets its values.\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Eight, as an expression.\n    B = 1 << 3,\n}\n\n\
                  /// A mint.\npub struct Mint {\n    /// Its supply.\n    pub supply: [u8; 8],\n    \
                  /// Its state.\n    pub state: u8,\n    /// Whether it is native.\n    pub native: u8,\n}\n\n\
                  impl Mint {\n    /// The supply.\n    pub fn supply(&self) -> u64 {\n        u64::from_le_bytes(self.supply)\n    }\n\n    \
@@ -2199,4 +2199,69 @@ fn an_error_converts_by_its_from_implementation_ue_25() {
     );
     let detail = residue_detail(&files, "errors::mismatch").expect("mismatch is a residue row");
     assert!(detail.contains("? of another type"), "{detail}");
+}
+
+#[test]
+fn self_and_its_associated_types_name_the_impl_ue_26() {
+    let planted = scratch(
+        "ue26-self",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"states\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! States.\n/// A state.\npub enum State {\n    /// Not yet.\n    Uninitialized,\n    /// Ready.\n    Initialized,\n}\n\n\
+                 /// An error.\npub enum Error {\n    /// Bad.\n    Invalid,\n}\n\n\
+                 impl TryFrom<u8> for State {\n    type Error = Error;\n\n    \
+                 fn try_from(value: u8) -> Result<Self, Self::Error> {\n        match value {\n            \
+                 0 => Ok(State::Uninitialized),\n            1 => Ok(State::Initialized),\n            _ => Err(Error::Invalid),\n        }\n    }\n}\n\n\
+                 /// A holder.\npub struct Holder {\n    /// Its state byte.\n    pub state: u8,\n}\n\n\
+                 impl Holder {\n    /// Its state.\n    pub fn state(&self) -> Result<State, Error> {\n        State::try_from(self.state)\n    }\n\n    \
+                 /// Its state from a flag, which no impl takes.\n    pub fn flagged(&self, f: bool) -> Result<State, Error> {\n        State::try_from(f)\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "states");
+    let lifted = lifted_functions(&files);
+    for f in ["states::State::try_from", "states::Holder::state"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let detail =
+        residue_detail(&files, "states::Holder::flagged").expect("flagged is a residue row");
+    assert!(detail.contains("try_from"), "{detail}");
+}
+
+#[test]
+fn an_integer_read_as_a_fieldless_enum_is_its_variant_ue_27() {
+    let planted = scratch(
+        "ue27-transmute",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"codes\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Codes.\n/// A code whose source sets its values.\n#[repr(u8)]\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Nine.\n    B = 9,\n    /// Ten.\n    C,\n}\n\n\
+                 /// The code of a byte.\npub fn code(v: u8) -> Option<Code> {\n    match v {\n        \
+                 5 | 9..=10 => Some(unsafe { core::mem::transmute::<u8, Code>(v) }),\n        _ => None,\n    }\n}\n\n\
+                 /// A byte no variant has.\npub fn wide(v: u8) -> Option<Code> {\n    match v {\n        \
+                 5..=6 => Some(unsafe { core::mem::transmute::<u8, Code>(v) }),\n        _ => None,\n    }\n}\n\n\
+                 /// A code's value.\npub fn value(c: Code) -> u8 {\n    c as u8\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "codes");
+    let lifted = lifted_functions(&files);
+    for f in ["codes::code", "codes::value"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    for needle in ["| Code.B => 9", "| Code.C => 10"] {
+        assert!(behavior.contains(needle), "{needle}: {behavior}");
+    }
+    let detail = residue_detail(&files, "codes::wide").expect("wide is a residue row");
+    assert!(detail.contains("unsafe"), "{detail}");
 }
