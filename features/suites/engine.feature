@@ -305,3 +305,11 @@ Feature: engine
     When the prover replays one compiler body and then all compiler bodies
     Then it retains the other selection's actual verdicts and performs zero verifier runs
     But a live translation with a stale digest still needs actual verification
+
+  @UE-47 @build
+  Scenario: Workspace native bodies share primitive IEEE models
+    Given ordinary f32 and f64 functions without a core-library scope
+    When compiler-derived loops transport floats, compute supported operations and convert their bits
+    Then the actual SDK proves their existing IEEE models including negative zero
+    And a workspace declaration under a primitive name retains its own type
+    But an operation outside the IEEE model stays unlifted

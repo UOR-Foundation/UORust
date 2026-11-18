@@ -4216,6 +4216,18 @@ fn behavior(
     for (pkg, package) in ws.packages.iter().enumerate() {
         for target in 0..package.targets.len() {
             let mut scope = scopes[pkg].clone();
+            // Ordinary workspaces read the same primitive IEEE formats as
+            // source lifting; core-library scopes already carry their own.
+            for primitive in ["f32", "f64"] {
+                let declared = lexes[pkg].keys().any(|(t, module, name)| {
+                    *t == target && module.is_empty() && name == primitive
+                });
+                if !declared {
+                    if let Some(format) = scope.float(primitive) {
+                        scope.floats.insert(primitive.to_string(), format);
+                    }
+                }
+            }
             for ((t, module, name), lex) in &lexes[pkg] {
                 if *t == target {
                     let printed = if module.is_empty() {

@@ -5549,7 +5549,11 @@ impl Fun<'_, '_> {
                         m.to_string(),
                     ))
                 }),
-                None => match segs.as_slice() {
+                None => match segs
+                    .strip_prefix(&["core"])
+                    .or_else(|| segs.strip_prefix(&["std"]))
+                    .unwrap_or(&segs)
+                {
                     [on, m] => Some((on.to_string(), String::new(), m.to_string())),
                     [on, imp, m] if *imp == format!("<impl {on}>") => {
                         Some((on.to_string(), String::new(), m.to_string()))

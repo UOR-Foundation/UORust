@@ -2708,6 +2708,120 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-47: native workspaces use the same core-derived IEEE formats as source lifting.
+#[test]
+fn native_workspace_floats_preserve_root_names_ue_47() {
+    let dir = scratch("native-root-float-name", &[
+        ("Cargo.toml", "[package]\nname = \"float_shadow\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "#[allow(non_camel_case_types)] pub struct f64 { pub flag: bool }\npub fn flag(mut n: u8, x: f64) -> bool { while n > 0 { n -= 1; } x.flag }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let mut opts = options("float_shadow");
+    opts.mir = Some(mir_options(
+        dumped(&dir, "native-root-float-name"),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("root primitive-name declaration");
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("float_shadow::flag\""),
+        "the root declaration was replaced by a primitive"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write root declaration");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK type check");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-47: native workspaces use the same core-derived IEEE formats as source lifting.
+#[test]
+fn native_workspace_floats_share_source_readings_ue_47() {
+    let dir = scratch("native-workspace-floats", &[
+        ("Cargo.toml", "[package]\nname = \"native_floats\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn id32(mut n: u8, x: f32) -> f32 { while n > 0 { n -= 1; } x }\npub fn id64(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x }\npub fn bits32(mut n: u8, x: f32) -> u32 { while n > 0 { n -= 1; } x.to_bits() }\npub fn arithmetic64(mut n: u8, x: f64, y: f64) -> f64 { while n > 0 { n -= 1; } (x + y).abs() }\npub fn rebuilt64(mut n: u8, x: u64) -> f64 { while n > 0 { n -= 1; } f64::from_bits(x) }\npub fn negative_zero(mut n: u8) -> u64 { while n > 0 { n -= 1; } (-0.0f64).to_bits() }\npub fn finite64(mut n: u8, x: f64) -> bool { while n > 0 { n -= 1; } x.is_finite() }\npub fn unmodeled(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x.sin() }\npub mod shadow { #[allow(non_camel_case_types)] pub struct f64 { pub flag: bool } pub fn transport(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x } }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-workspace-floats");
+    let mut opts = options("native_floats");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native float projection");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in [
+        "id32",
+        "id64",
+        "bits32",
+        "arithmetic64",
+        "rebuilt64",
+        "negative_zero",
+        "finite64",
+        "shadow::transport",
+    ] {
+        assert!(
+            listing.contains(&format!("native_floats::{name}\"")),
+            "missing native float {name}: {listing}"
+        );
+    }
+    assert!(!listing.contains("native_floats::unmodeled\""));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    let rows = frontier_rows(&files, "lifted");
+    for function in ["native_floats::id32", "native_floats::id64"] {
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(function))
+            .and_then(|r| r["definition"].as_str())
+            .and_then(|d| d.strip_prefix("Behavior::"))
+            .expect("primitive definition");
+        let start = behavior
+            .find(&format!("name: {definition},"))
+            .expect("primitive header");
+        let header = behavior[start..].split("body:").next().expect("header");
+        assert!(
+            header.contains("x : Nat") && header.contains("result: Nat"),
+            "primitive was read as a workspace homonym: {header}"
+        );
+    }
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("native_floats"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual IEEE proofs");
+    assert_eq!((proof.proved, proof.refused), (8, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-46: narrowing the compiler view must not destroy reusable SDK decisions.
 #[test]
 fn native_verdicts_survive_compiler_input_selections_ue_46() {

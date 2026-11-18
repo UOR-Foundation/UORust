@@ -333,3 +333,9 @@ id = "UE-46"
 level = "build"
 suite = "engine"
 statement = "Selecting a subset of compiler bodies preserves historical proved and refused verdicts for other selections, so returning to the full selection reuses matching digests with zero verification; a stale digest for a live translation still requires actual SDK verification, and only the frontier states current lifting eligibility"
+
+[[id]]
+id = "UE-47"
+level = "build"
+suite = "engine"
+statement = "Ordinary workspace MIR scopes share the source lift's primitive f32 and f64 readings from pinned core constants for transport, literals, bit conversions and supported IEEE operations, without replacing workspace declarations under primitive names; unsupported float operations remain refused"

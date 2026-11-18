@@ -67,6 +67,7 @@ model does not sanction.
 | `UE-44` | `build` | Native loops with directly derived natural measures bundle multiple live values into one changing state argument, preserving invariant payloads in the termination context and the SDK-exact decrease obligation; the SDK still decides every decrease and overflow obligation |
 | `UE-45` | `build` | Native standard HashMap and HashSet transport reuses the source lift's unordered collection carriers without requiring a value model for the hasher parameter; hasher inspection, iteration-order observations and unsupported element types remain refused, while workspace homonyms retain their own types |
 | `UE-46` | `build` | Selecting a subset of compiler bodies preserves historical proved and refused verdicts for other selections, so returning to the full selection reuses matching digests with zero verification; a stale digest for a live translation still requires actual SDK verification, and only the frontier states current lifting eligibility |
+| `UE-47` | `build` | Ordinary workspace MIR scopes share the source lift's primitive f32 and f64 readings from pinned core constants for transport, literals, bit conversions and supported IEEE operations, without replacing workspace declarations under primitive names; unsupported float operations remain refused |
 
 ## factory
 

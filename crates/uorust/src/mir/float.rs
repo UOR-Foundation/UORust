@@ -1089,6 +1089,8 @@ mod tests {
                 assert_eq!(ev.term(&literal(F32, text).unwrap()), bits(host), "{text}");
             }
             for text in [
+                "0",
+                "-0",
                 "1.0E+22",
                 "1.0E-4",
                 "2.2250738585072014E-308",

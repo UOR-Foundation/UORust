@@ -50,6 +50,20 @@ regression requires actual SDK verification after that change. Historical
 cache size is not a count of currently lifted functions: the current frontier
 remains the authority for eligibility.
 
+## Ordinary native float scopes (UE-47)
+
+The initial `native_workspace_floats_share_source_readings_ue_47` run lacked
+the ordinary f32 transport candidate. MIR target scopes now receive the same
+core-derived primitive formats as source lifting, and core/std facade paths
+resolve their supported inherent methods. Eight actual-SDK proofs cover float
+transport, arithmetic, finite tests, bit conversions and a negative-zero
+literal. Primitive headers retain their bit carriers despite a qualified
+workspace homonym. `native_workspace_floats_preserve_root_names_ue_47` checks
+a root declaration named f64 through its own Boolean field and SDK type
+checking. Unsupported trigonometry remains unlifted. The existing literal
+conformance test compares f64 positive and negative zero with Rust's actual
+bit patterns; it does not assume a particular printed form of the model.
+
 This repository's `just vv` instantiates the universal verification policy in
 `VERIFICATION.md` for the template itself, which is a Prism application: the
 template contract checker in `app/`.
