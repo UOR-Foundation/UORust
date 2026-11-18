@@ -1521,5 +1521,76 @@ definition{
   result: Nat,
   body: (let num : Nat := (prim multiply digits (floatPowTen up) : Nat); (let den : Nat := (floatPowTen down); (let shift : Nat := ((floatBits den den) + (m + 3)); (let wide : Nat := (prim multiply num (floatPow2 shift) : Nat); (floatRound e m s (prim quotient wide den 0 : Nat) (floatBm e m) shift (0 <? (prim remainder wide den 0 : Nat)))))))
 }
+definition{
+  name: leBytes,
+  parameters: [count : Nat, value : Nat],
+  result: (List Nat),
+  body: (match count
+    | Nat.zero => (nil Nat)
+    | Nat.succ rest => (cons (prim remainder value 256 0 : Nat) (leBytes rest (prim quotient value 256 0 : Nat)))),
+  axioms: [],
+  recursive_argument: count
+}
+
+definition{
+  name: fromLeBytes,
+  parameters: [bytes : (List Nat)],
+  result: Nat,
+  body: (match bytes
+    | List.nil => 0
+    | List.cons byte rest => (byte + (prim multiply 256 (fromLeBytes rest) : Nat))),
+  axioms: [],
+  recursive_argument: bytes
+}
+
+definition{
+  name: byteCount,
+  parameters: [bytes : (List Nat)],
+  result: Nat,
+  body: (match bytes
+    | List.nil => 0
+    | List.cons byte rest => ((byteCount rest) + 1)),
+  axioms: [],
+  recursive_argument: bytes
+}
+
+definition{
+  name: bitOf,
+  parameters: [flag : Bool],
+  result: Nat,
+  body: (match flag
+    | Bool.true => 1
+    | Bool.false => 0),
+  axioms: []
+}
+
+theorem{
+  name: eightBytesRoundTrip,
+  parameters: [value : Nat],
+  statement: ((fromLeBytes (leBytes 8 value)) = (prim remainder value 18446744073709551616 0 : Nat)),
+  proof: linear_arithmetic{definitions: [fromLeBytes, leBytes]},
+  axioms: [Quot.sound, propext]
+}
+
+theorem{
+  name: eightBytesAreEight,
+  parameters: [value : Nat],
+  statement: ((byteCount (leBytes 8 value)) = 8),
+  proof: simplify{definitions: [byteCount, leBytes]},
+  axioms: [propext]
+}
+
+theorem{
+  name: aBitIsZeroOrOne,
+  parameters: [flag : Bool],
+  statement: ((bitOf flag) < 2),
+  proof: cases{
+    branches: [
+      {proof: decide{}, binders: [], constructor: "false"},
+      {proof: decide{}, binders: [], constructor: "true"}
+    ],
+    scrutinee: flag
+  }
+}
 \end{semanticmodule}
 \end{lexlean}

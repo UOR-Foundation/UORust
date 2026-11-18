@@ -132,3 +132,9 @@ Feature: engine
     Given a planted crate whose struct holds a tuple of a fixed array and a key, with setters writing an item of the tuple and a literal index of the array, and one writing an index it computes
     When the suite exercises UE-22
     Then each setter lifts, its index write rebuilds the array with the written element and every other kept, its item write is the model's record write of the tuple, and the setter with a computed index is a residue row naming the place
+
+  @UE-23 @build
+  Scenario: Bytes, flags and unit enums convert by the prelude's definitions
+    Given a planted crate whose struct holds an amount as eight little-endian bytes, a flag and a state byte, with a getter and setters converting them, and an enum whose source sets its discriminants
+    When the suite exercises UE-23
+    Then the getter and the setters lift to the prelude's fromLeBytes, leBytes and bitOf and to the match from each variant to its index, and the cast of the enum that sets its discriminants is a residue row naming them

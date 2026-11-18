@@ -2071,3 +2071,50 @@ fn a_write_through_a_nested_place_threads_it_ue_22() {
     let detail = residue_detail(&files, "places::Account::set_flag").expect("set_flag is residue");
     assert!(detail.contains("place"), "{detail}");
 }
+
+#[test]
+fn bytes_flags_and_unit_enums_convert_by_the_prelude_ue_23() {
+    let planted = scratch(
+        "ue23-conversions",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"bytes\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Bytes.\n/// A state.\n#[repr(u8)]\npub enum State {\n    /// Not yet.\n    Uninitialized,\n    \
+                 /// Ready.\n    Initialized,\n    /// Stopped.\n    Frozen,\n}\n\n\
+                 /// A code whose source sets its values.\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Nine.\n    B = 9,\n}\n\n\
+                 /// A mint.\npub struct Mint {\n    /// Its supply.\n    pub supply: [u8; 8],\n    \
+                 /// Its state.\n    pub state: u8,\n    /// Whether it is native.\n    pub native: u8,\n}\n\n\
+                 impl Mint {\n    /// The supply.\n    pub fn supply(&self) -> u64 {\n        u64::from_le_bytes(self.supply)\n    }\n\n    \
+                 /// Sets the supply.\n    pub fn set_supply(&mut self, supply: u64) {\n        self.supply = supply.to_le_bytes();\n    }\n\n    \
+                 /// Sets the state.\n    pub fn set_state(&mut self, state: State) {\n        self.state = state as u8;\n    }\n\n    \
+                 /// Sets the flag.\n    pub fn set_native(&mut self, value: bool) {\n        self.native = value as u8;\n    }\n}\n\n\
+                 /// A code's value.\npub fn code(c: Code) -> u8 {\n    c as u8\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "bytes");
+    let lifted = lifted_functions(&files);
+    for f in [
+        "bytes::Mint::supply",
+        "bytes::Mint::set_supply",
+        "bytes::Mint::set_state",
+        "bytes::Mint::set_native",
+    ] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    for needle in [
+        "(Prelude::fromLeBytes (project selfValue supply))",
+        "(Prelude::leBytes 8 supply)",
+        "(Prelude::bitOf value)",
+        "| State.Frozen => 2",
+    ] {
+        assert!(behavior.contains(needle), "{needle}: {behavior}");
+    }
+    let detail = residue_detail(&files, "bytes::code").expect("code is a residue row");
+    assert!(detail.contains("discriminant"), "{detail}");
+}

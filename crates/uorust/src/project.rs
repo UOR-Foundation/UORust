@@ -3644,8 +3644,24 @@ fn behavior(
                     structs.insert(name.clone(), vec![lift::unread_shape(why)]);
                 }
             }
+            // The enums whose source sets a discriminant.
+            let explicit = package
+                .files
+                .iter()
+                .flat_map(|file| {
+                    file.enums
+                        .iter()
+                        .filter(|e| e.explicit)
+                        .filter_map(|e| {
+                            named.get(&(file.target, file.module.clone(), e.name.clone()))
+                        })
+                        .cloned()
+                        .collect::<Vec<_>>()
+                })
+                .collect();
             Types {
                 derives,
+                explicit,
                 ..Types::with_data(enums, &datas, &structs, aliases)
             }
         })

@@ -413,6 +413,9 @@ pub(crate) struct Types {
     /// by LexLean name, where they are not the variants' indices alone.
     /// Held as `i64`, the width the lift lifts, and widened where read.
     pub(crate) discriminants: BTreeMap<String, Vec<i64>>,
+    /// The enums whose source sets a discriminant (`A = 5`), by LexLean
+    /// name: a cast of one is not its variant's index.
+    pub(crate) explicit: BTreeSet<String>,
     /// The workspace's structs and enums outside the lift, by LexLean name:
     /// the chain from each down to the leaf that keeps it out
     /// (`Mid.leaf: Leaf.x: f64`), so that a residue row states its cause
@@ -2912,7 +2915,46 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
              conversion from Nat to Int64"
                 .to_string(),
         )),
+        // `b as uN`: the flag's bit, `Prelude::bitOf`.
+        (Ty::Bool, Ty::Nat(_)) => {
+            let (bit, acc) = acc.prelude("bitOf", &[&v]);
+            flat_lift(bit, target, acc)
+        }
+        // `e as uN` of an enum whose source sets no discriminant: the
+        // variant's index, modulo 2^N.
+        (Ty::Named(name), Ty::Nat(width)) if env.types.enums.contains_key(name) => {
+            if env.types.explicit.contains(name) {
+                return Err(Residue::Form(format!(
+                    "a cast of {name}, whose source sets its discriminants"
+                )));
+            }
+            let arms: String = env.types.enums[name]
+                .iter()
+                .enumerate()
+                .map(|(i, variant)| {
+                    let index = u128::try_from(i).unwrap_or(u128::MAX);
+                    let value = match width {
+                        Some(b) if *b < 128 => index % (1u128 << b),
+                        _ => index,
+                    };
+                    format!(" | {name}.{variant} => {value}")
+                })
+                .collect();
+            flat_lift(format!("(match {v}{arms})"), target, acc)
+        }
         _ => Err(Residue::Form("narrowing or sign-changing cast".to_string())),
+    }
+}
+
+/// The width of an unsigned integer type of a fixed width, by its name.
+fn unsigned_bits(name: &str) -> Option<u32> {
+    match name {
+        "u8" => Some(8),
+        "u16" => Some(16),
+        "u32" => Some(32),
+        "u64" => Some(64),
+        "u128" => Some(128),
+        _ => None,
     }
 }
 
@@ -3769,6 +3811,19 @@ fn std_call(
             let list = Ty::List(Box::new(vt.clone()));
             flat_some(format!("(cons {v} (nil {}))", vt.render()), list, acc)
         }
+        // `u64::from_le_bytes(bytes)`: the value of little-endian bytes,
+        // `Prelude::fromLeBytes`.
+        ([s, n], [a], _) if n == "from_le_bytes" && unsigned_bits(s).is_some() => {
+            let bytes = Ty::List(Box::new(Ty::Nat(Some(8))));
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, Some(&bytes))?;
+            if vt != bytes {
+                return Err(Residue::Form(
+                    "from_le_bytes of something other than bytes".into(),
+                ));
+            }
+            let (value, acc) = acc.prelude("fromLeBytes", &[&v]);
+            flat_some(value, Ty::Nat(unsigned_bits(s)), acc)
+        }
         // A capacity is a hint to the allocator: the value is the empty list.
         ([s, n], [_], Some(t @ Ty::List(inner))) if s == "Vec" && n == "with_capacity" => {
             flat_some(format!("(nil {})", inner.render()), t.clone(), acc)
@@ -4596,6 +4651,12 @@ fn method_typed(
         }
         (Ty::Nat(w), "wrapping_add" | "wrapping_mul" | "wrapping_sub") => {
             method_nat_wrapping_add(w, name, r, rt, args, env, ctx, acc)
+        }
+        // `n.to_le_bytes()`: its little-endian bytes, `Prelude::leBytes`.
+        (Ty::Nat(Some(bits)), "to_le_bytes") if args.is_empty() && bits % 8 == 0 => {
+            let count = (bits / 8).to_string();
+            let (bytes, acc) = acc.prelude("leBytes", &[&count, r]);
+            flat_lift(bytes, Ty::List(Box::new(Ty::Nat(Some(8)))), acc)
         }
         (Ty::Nat(w), "saturating_add" | "saturating_mul") => {
             method_nat_saturating_add(w, name, r, rt, args, env, ctx, acc)
