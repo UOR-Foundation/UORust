@@ -343,6 +343,90 @@ fn the_cli_dumps_mir_and_proves_on_the_verdicts_ue_17() {
     let _ = std::fs::remove_dir_all(tmp);
 }
 
+/// UE-50: the tool, rather than its caller, measures the final proof frontier.
+#[test]
+fn proof_campaign_reports_the_actual_frontier_ue_50() {
+    use sha2::{Digest, Sha256};
+    let tmp = std::env::temp_dir().join(format!("uorust-proof-report-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    std::fs::create_dir_all(&tmp).expect("scratch");
+    let dumps = tmp.join("mir");
+    let dumped = uorust(&[
+        "mir",
+        "tests/fixtures/mir-path",
+        "--out",
+        &dumps.to_string_lossy(),
+    ]);
+    assert!(dumped.status.success(), "{dumped:?}");
+    let verdicts = tmp.join("verdicts.toml");
+    std::fs::copy(
+        manifest_dir().join("tests/fixtures/mir-path/lift-verdicts.toml"),
+        &verdicts,
+    )
+    .expect("actual SDK decisions");
+    let out = tmp.join("projection");
+    let scratch = tmp.join("trial");
+    let invoke = |out: &std::path::Path| {
+        uorust(&[
+            "prove",
+            "tests/fixtures/mir-path",
+            "--name",
+            "walk",
+            "--last-modified",
+            "2026-11-11T00:00:00Z",
+            "--out",
+            &out.to_string_lossy(),
+            "--scratch",
+            &scratch.to_string_lossy(),
+            "--mir",
+            &dumps.to_string_lossy(),
+            "--verdicts",
+            &verdicts.to_string_lossy(),
+            "--json",
+        ])
+    };
+    let result = invoke(&out);
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    let data: serde_json::Value = serde_json::from_slice(&result.stdout).expect("JSON");
+    assert_eq!(data["spec"], "uorust/proof-campaign/1");
+    assert_eq!(data["proof"]["verifier_runs"], 0);
+    let text = std::fs::read_to_string(out.join("frontier.toml")).expect("final projection");
+    let frontier = uorust::register::Register::read(&out.join("frontier.toml"), &text)
+        .expect("actual frontier");
+    let totals = frontier.totals();
+    assert_eq!(data["census"]["lifted"], totals.lifted);
+    assert_eq!(data["remaining"], totals.functions - totals.lifted);
+    assert_eq!(data["translation_closed"], false);
+    assert_eq!(data["full_project_sdk_verified"], false);
+    assert!(!data["blockers"].as_array().expect("blockers").is_empty());
+    assert_eq!(
+        data["bindings"]["frontier_sha256"],
+        format!("{:x}", Sha256::digest(text.as_bytes()))
+    );
+    assert_eq!(
+        data["bindings"]["verdicts_sha256"],
+        format!(
+            "{:x}",
+            Sha256::digest(std::fs::read(&verdicts).expect("verdicts"))
+        )
+    );
+    let blocked = tmp.join("foreign-projection");
+    std::fs::create_dir(&blocked).expect("foreign output directory");
+    std::fs::write(blocked.join("keep"), "unowned").expect("unowned file");
+    let refused = invoke(&blocked);
+    assert!(!refused.status.success());
+    assert!(String::from_utf8_lossy(&refused.stderr).contains("foreign-projection"));
+    assert_eq!(
+        std::fs::read_to_string(blocked.join("keep")).expect("unowned preserved"),
+        "unowned"
+    );
+    std::fs::remove_dir_all(tmp).expect("cleanup");
+}
+
 /// `certify agree` states each pair's κ when the certified and the
 /// hand-written translator wrote the same bytes, and refuses a pair one byte
 /// apart (UE-18).

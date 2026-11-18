@@ -17,6 +17,83 @@ use crate::lift::Ty;
 /// The registry index whose packages a reading's checksums are of.
 const CRATES_IO: &str = "registry+https://github.com/rust-lang/crates.io-index";
 
+/// Unary observations of the stored values in the admitted numeric readings.
+/// BigInt's identities and sign methods are in bigint.rs; Ratio's Zero,
+/// One and Signed impls and inherent accessors are in lib.rs. In particular
+/// Ratio::new_raw admits zero or negative denominators: is_one compares the
+/// stored components, and abs negates only the numerator when signs differ.
+pub(crate) fn numeric_observation(ty: &Ty, method: &str, value: &str) -> Option<(String, Ty)> {
+    let below = |a: &str, b: &str| format!("(prim less_than {a} {b} : Bool)");
+    let equal = |a: &str, b: &str| format!("(not ({} || {}))", below(a, b), below(b, a));
+    let zero = "(0 : Int)";
+    let one = "(1 : Int)";
+    let neg = |v: &str| format!("(prim negate {v} : Int)");
+    let (numer, denom) = match ty {
+        Ty::Unbounded => (value.to_string(), one.to_string()),
+        Ty::Ratio => (format!("(first {value})"), format!("(second {value})")),
+        _ => return None,
+    };
+    let negative = if *ty == Ty::Ratio {
+        format!(
+            "(({} && {}) || ({} && {}))",
+            below(&numer, zero),
+            below(zero, &denom),
+            below(zero, &numer),
+            below(&denom, zero)
+        )
+    } else {
+        below(&numer, zero)
+    };
+    let positive = if *ty == Ty::Ratio {
+        format!(
+            "(({} && {}) || ({} && {}))",
+            below(zero, &numer),
+            below(zero, &denom),
+            below(&numer, zero),
+            below(&denom, zero)
+        )
+    } else {
+        below(zero, &numer)
+    };
+    let literal = |v: &str| {
+        if *ty == Ty::Ratio {
+            format!("({v}, {one})")
+        } else {
+            v.to_string()
+        }
+    };
+    Some(match method {
+        "zero" => (literal(zero), ty.clone()),
+        "one" => (literal(one), ty.clone()),
+        "is_zero" => (equal(&numer, zero), Ty::Bool),
+        "is_one" => (equal(&numer, &denom), Ty::Bool),
+        "is_negative" => (negative, Ty::Bool),
+        "is_positive" => (positive, Ty::Bool),
+        "signum" if *ty == Ty::Unbounded => (
+            format!(
+                "(if {negative} then {} else (if {positive} then {one} else {zero}))",
+                neg(one)
+            ),
+            Ty::Unbounded,
+        ),
+        "abs" => {
+            let flipped = if *ty == Ty::Ratio {
+                format!("({}, {denom})", neg(&numer))
+            } else {
+                neg(&numer)
+            };
+            (
+                format!("(if {negative} then {flipped} else {value})"),
+                ty.clone(),
+            )
+        }
+        "numer" if *ty == Ty::Ratio => (numer, Ty::Unbounded),
+        "denom" if *ty == Ty::Ratio => (denom, Ty::Unbounded),
+        "is_integer" if *ty == Ty::Ratio => (equal(&denom, one), Ty::Bool),
+        _ => return None,
+    })
+}
+
 /// A registry crate's type and what the lift reads it as.
 pub(crate) struct Reading {
     /// The package, as `Cargo.lock` names it.

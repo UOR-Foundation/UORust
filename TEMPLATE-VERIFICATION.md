@@ -465,3 +465,32 @@ The fixture also confirms mutable aliases and an unmodeled bool-to-u8 error
 conversion remain unlifted. All 421 library tests pass, including the existing
 float inference and borrow-escape refusals. Complete release acceptance remains
 separate from these focused checks.
+
+
+## Locked numeric observations and machine proof campaigns (UE-49, UE-50)
+
+UE-49 first failed on the absent native integer zero observation. The numeric
+readings now share stored-ratio accessor terms between source and MIR lowering.
+The exact checksum-admitted num-bigint 0.4.8 and num-rational 0.4.2 sources define
+the predicates, signs, absolute values, accessors and identity constructors.
+The compiler must resolve the declared crate and trait; a spelling alone does
+not select a reading. Unsupported operations and wrong checksums stay refused.
+
+The actual SDK proved 18 compiler-derived numeric functions. Nineteen closed
+acceptance vectors over the emitted functions also pass the SDK. Rust reference
+vectors confirm that a raw ratio 0/0 is both zero and one, and that absolute
+value can preserve a negative denominator while negating only the numerator.
+These representation-sensitive cases prevent replacing stored pairs with an
+assumed normalized rational. Axiom policies come from the actual verifier's
+observations; the tests reuse UORust's digest-bound native decisions rather than
+repeating completed proof batches when acceptance vectors change.
+
+UE-50 first failed because prove accepted no machine-output option. With
+`prove --json`, UORust runs the proof campaign, writes its final verdict-backed
+projection, then measures the register itself. Its JSON binds the frontier,
+verdict register, projection manifest and LexLean lock to exact bytes and records
+the running executable's digest. The report distinguishes an open frontier,
+translation closure, and full-project SDK acceptance. A cached fixture campaign
+uses zero verifier calls; an unowned output directory is refused and its planted
+file is preserved. The caller need not parse prose, reconstruct the function
+counts, or rerun a separate projection to obtain the final work queue.

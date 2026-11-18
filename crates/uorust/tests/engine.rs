@@ -2708,6 +2708,187 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-49: numeric predicates and accessors retain the locked crates' stored-value semantics.
+#[test]
+fn native_numeric_observations_follow_locked_values_ue_49() {
+    let dir = scratch("native-numeric-observations", &[
+        ("Cargo.toml", "[package]\nname = \"numeric_observations\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\nnum-traits = \"=0.2.19\"\n"),
+        ("src/lib.rs", r#"
+use num_bigint::BigInt;
+use num_rational::BigRational;
+use num_traits::{Zero, One, Signed};
+pub fn iz(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_zero() }
+pub fn io(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_one() }
+pub fn ip(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_positive() }
+pub fn ine(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_negative() }
+pub fn ia(mut n:u8,x:&BigInt)->BigInt { while n>0 {n-=1;} x.abs() }
+pub fn isig(mut n:u8,x:&BigInt)->BigInt { while n>0 {n-=1;} x.signum() }
+pub fn rz(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_zero() }
+pub fn ro(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_one() }
+pub fn rp(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_positive() }
+pub fn rn(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_negative() }
+pub fn ra(mut n:u8,x:&BigRational)->BigRational { while n>0 {n-=1;} x.abs() }
+pub fn ri(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_integer() }
+pub fn numer(mut n:u8,x:&BigRational)->&BigInt { while n>0 {n-=1;} x.numer() }
+pub fn denom(mut n:u8,x:&BigRational)->&BigInt { while n>0 {n-=1;} x.denom() }
+pub fn izero(mut n:u8)->BigInt { while n>0 {n-=1;} BigInt::zero() }
+pub fn ione(mut n:u8)->BigInt { while n>0 {n-=1;} BigInt::one() }
+pub fn rzero(mut n:u8)->BigRational { while n>0 {n-=1;} BigRational::zero() }
+pub fn rone(mut n:u8)->BigRational { while n>0 {n-=1;} BigRational::one() }
+pub fn unsupported(mut n:u8,x:&BigInt)->u64 { while n>0 {n-=1;} x.bits() }
+#[test] fn reference_raw_ratios() {
+    let raw=BigRational::new_raw(BigInt::zero(),BigInt::zero()); assert!(raw.is_zero() && raw.is_one());
+    let q=BigRational::new_raw(BigInt::from(2),BigInt::from(-2)); assert!(q.is_negative());
+    assert_eq!((q.abs().numer().clone(),q.abs().denom().clone()),(BigInt::from(-2),BigInt::from(-2)));
+}
+"#),
+    ]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("locked Rust numeric vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-numeric-observations");
+    let mut opts = options("numeric_observations");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("numeric observations");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    let names = [
+        "iz", "io", "ip", "ine", "ia", "isig", "rz", "ro", "rp", "rn", "ra", "ri", "numer",
+        "denom", "izero", "ione", "rzero", "rone",
+    ];
+    for name in names {
+        assert!(
+            listing.contains(&format!("numeric_observations::{name}\"")),
+            "missing numeric observation {name}: {listing}"
+        );
+    }
+    assert!(!listing.contains("numeric_observations::unsupported\""));
+    // Reuse actual digest-bound SDK decisions when only the surrounding
+    // acceptance vectors change. UORust invalidates changed translations.
+    let register =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("numeric-observation-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("numeric_observations"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual numeric SDK proofs");
+    assert_eq!(proof.refused, 0);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        verdicts(&register),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved observations");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write observations");
+    let rows = frontier_rows(&files, "lifted");
+    let named = |function: &str| {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(&format!("numeric_observations::{function}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("proved definition")
+            .to_string()
+    };
+    let vectors = [
+        ("iz", "0 (0 : Int)", "true"),
+        ("iz", "0 (2 : Int)", "false"),
+        ("io", "0 (1 : Int)", "true"),
+        ("ip", "0 (0 : Int)", "false"),
+        ("ine", "0 (prim negate (2 : Int) : Int)", "true"),
+        ("ia", "0 (prim negate (2 : Int) : Int)", "(2 : Int)"),
+        (
+            "isig",
+            "0 (prim negate (2 : Int) : Int)",
+            "(prim negate (1 : Int) : Int)",
+        ),
+        ("rz", "0 ((0 : Int), (0 : Int))", "true"),
+        ("ro", "0 ((0 : Int), (0 : Int))", "true"),
+        ("rn", "0 ((2 : Int), (prim negate (2 : Int) : Int))", "true"),
+        (
+            "rp",
+            "0 ((prim negate (2 : Int) : Int), (prim negate (2 : Int) : Int))",
+            "true",
+        ),
+        (
+            "ra",
+            "0 ((2 : Int), (prim negate (2 : Int) : Int))",
+            "((prim negate (2 : Int) : Int), (prim negate (2 : Int) : Int))",
+        ),
+        ("ri", "0 ((2 : Int), (1 : Int))", "true"),
+        ("numer", "0 ((2 : Int), (0 : Int))", "(2 : Int)"),
+        ("denom", "0 ((2 : Int), (0 : Int))", "(0 : Int)"),
+        ("izero", "0", "(0 : Int)"),
+        ("ione", "0", "(1 : Int)"),
+        ("rzero", "0", "((0 : Int), (1 : Int))"),
+        ("rone", "0", "((1 : Int), (1 : Int))"),
+    ];
+    let mut model =
+        "\\begin{lexlean}{NumericVectors}\n\\useglossary{uorust.titles@1.0.0}\n\\importmodule{Behavior}\n\\title{Lifted Rust behavior}\n\\begin{semanticmodule}\n"
+            .to_string();
+    let decisions = verdicts(&register);
+    for (i, (f, args, expected)) in vectors.iter().enumerate() {
+        let definition = named(f);
+        let declaration = definition
+            .strip_prefix("Behavior::")
+            .expect("native namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("numeric_observations::{f}"))
+            .and_then(|r| r.axioms.get(declaration))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{ name: vector{i}, parameters: [], statement: (({definition} {args}) = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+    }
+    model.push_str("\\end{semanticmodule}\n\\end{lexlean}\n");
+    std::fs::write(out.join("src/NumericVectors.lex.tex"), model).expect("closed numeric vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/NumericVectors.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK numeric vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    std::fs::write(
+        &lock,
+        original.replace(
+            "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367",
+            &"0".repeat(64),
+        ),
+    )
+    .expect("wrong checksum");
+    let refused = uorust::project_workspace(&dir, &opts).expect("checksum refusal");
+    assert!(!frontier_rows(&refused, "lifted")
+        .iter()
+        .any(|r| r["function"].as_str() == Some("numeric_observations::iz")));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-48: early exits retain the updates already performed through mutable parameters.
 #[test]
 fn source_propagation_preserves_mutable_state_ue_48() {

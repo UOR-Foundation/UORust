@@ -320,3 +320,19 @@ Feature: engine
     When propagation succeeds or exits early, including after a state-changing callee
     Then the SDK proves the returned values and every resulting state against executable Rust vectors
     But a mutable alias still refuses the lift
+
+  @UE-49 @build
+  Scenario: Native numeric observations use locked stored values
+    Given checksum-admitted BigInt and BigRational values
+    When compiler-derived bodies observe their signs, identities and stored ratio components
+    Then the actual SDK verifies the translations and closed numeric acceptance vectors
+    And raw negative or zero denominators retain the locked implementation's behavior
+    But a wrong archive checksum and an unsupported operation stay unlifted
+
+  @UE-50 @build
+  Scenario: Proof campaigns publish their own measured completion position
+    Given compiler inputs and an existing actual SDK verdict register
+    When prove writes a requested machine report
+    Then it writes the final projection and reports its census, remaining functions and blockers with exact byte bindings
+    And unchanged proofs require zero verifier calls without claiming full-project SDK acceptance
+    But a foreign projection directory is a typed refusal and its files are preserved

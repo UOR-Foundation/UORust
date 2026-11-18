@@ -5807,23 +5807,12 @@ fn method_typed(
         (Ty::Ratio, "recip") if args.is_empty() => Err(Residue::Form(
             "recip of a ratio whose numerator may be zero, where Rust panics".to_string(),
         )),
-        (Ty::Ratio, "numer") if args.is_empty() => {
-            flat_lift(format!("(first {r})"), Ty::Unbounded, acc)
-        }
-        (Ty::Ratio, "denom") if args.is_empty() => {
-            flat_lift(format!("(second {r})"), Ty::Unbounded, acc)
-        }
-        (Ty::Ratio, "is_integer") if args.is_empty() => {
-            let acc = acc.axiom("propext");
-            let d = format!("(second {r})");
-            flat_lift(
-                format!(
-                    "(not ((prim less_than {d} (1 : Int) : Bool) || \
-                     (prim less_than (1 : Int) {d} : Bool)))"
-                ),
-                Ty::Bool,
-                acc,
-            )
+        (Ty::Ratio, "numer" | "denom" | "is_integer") if args.is_empty() => {
+            let Some((term, result))=crate::registered::numeric_observation(rt,name,r) else {
+                return Err(Residue::Form(format!("unmodeled ratio observation {name}")));
+            };
+            let acc=if name=="is_integer" {acc.axiom("propext")} else {acc};
+            flat_lift(term,result,acc)
         }
         (Ty::List(_), "len") if args.is_empty() => {
             method_list_len(r, acc)

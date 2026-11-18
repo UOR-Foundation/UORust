@@ -684,6 +684,11 @@ struct ProveArgs {
     /// remain together and exceeding this positive budget is a typed refusal.
     #[arg(long, default_value_t = uorust::mir::DEFAULT_PROOF_BATCH_SIZE)]
     proof_batch_size: usize,
+    /// Write the final verdict-backed projection to --out and print its
+    /// measured frontier and exact artifact bindings as one JSON report.
+    /// Full-project SDK acceptance remains a separate gate.
+    #[arg(long)]
+    json: bool,
 }
 
 #[derive(clap::Args)]
@@ -776,6 +781,61 @@ fn options(args: &Args) -> Result<Options, UorustError> {
     })
 }
 
+/// Measurements of the final projection, never a claim of release acceptance.
+fn campaign_report(
+    args: &Args,
+    verdicts: &std::path::Path,
+    proof: &uorust::mir::Summary,
+) -> Result<serde_json::Value, UorustError> {
+    use sha2::{Digest, Sha256};
+    let read = |path: &std::path::Path| -> Result<Vec<u8>, UorustError> {
+        std::fs::read(path).map_err(|e| UorustError::Io {
+            path: path.to_path_buf(),
+            reason: e.to_string(),
+        })
+    };
+    let hash = |bytes: &[u8]| format!("{:x}", Sha256::digest(bytes));
+    let path = args.out.join("frontier.toml");
+    let bytes = read(&path)?;
+    let text = std::str::from_utf8(&bytes).map_err(|e| UorustError::Malformed {
+        path: path.clone(),
+        reason: e.to_string(),
+    })?;
+    let frontier = uorust::register::Register::read(&path, text)?;
+    let totals = frontier.totals();
+    let census: std::collections::BTreeMap<_, _> = totals.fields().into_iter().collect();
+    let blockers: Vec<_> = frontier
+        .queue()
+        .into_iter()
+        .map(|r| {
+            serde_json::json!({
+                "cause":r.cause,"construct":r.construct,"functions":r.functions,
+            })
+        })
+        .collect();
+    let executable = std::env::current_exe().map_err(|e| UorustError::Io {
+        path: PathBuf::from("current-executable"),
+        reason: e.to_string(),
+    })?;
+    let closed = totals.functions > 0 && totals.functions == totals.lifted;
+    Ok(serde_json::json!({
+        "spec":"uorust/proof-campaign/1",
+        "status":if closed {"translation-closed"} else {"frontier-open"},
+        "translation_closed":closed,
+        "full_project_sdk_verified":false,
+        "proof":{"new_proved":proof.proved,"new_refused":proof.refused,"verifier_runs":proof.runs},
+        "census":census,"remaining":totals.functions-totals.lifted,
+        "blockers":blockers,
+        "bindings":{
+            "tool_sha256":hash(&read(&executable)?),
+            "frontier_sha256":hash(&bytes),
+            "verdicts_sha256":hash(&read(verdicts)?),
+            "projection_manifest_sha256":hash(&read(&args.out.join(uorust::MANIFEST))?),
+            "lexlean_lock_sha256":hash(&read(&args.out.join("lexlean.lock"))?),
+        }
+    }))
+}
+
 fn run(cli: Cli) -> Result<(), UorustError> {
     uorust::certified::use_hand(cli.translator == Translator::Hand);
     match cli.command {
@@ -837,13 +897,22 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 &prove.scratch,
                 prove.proof_batch_size,
             )?;
-            println!(
-                "proved {}, refused {} in {} verifier runs; verdicts in {}",
-                summary.proved,
-                summary.refused,
-                summary.runs,
-                verdicts.display()
-            );
+            if prove.json {
+                let files = uorust::project_workspace(&args.workspace, &options(args)?)?;
+                if let Some(parent) = &args.register {
+                    uorust::admit(parent, &files)?;
+                }
+                uorust::write(&args.out, &files)?;
+                println!("{}", campaign_report(args, verdicts, &summary)?);
+            } else {
+                println!(
+                    "proved {}, refused {} in {} verifier runs; verdicts in {}",
+                    summary.proved,
+                    summary.refused,
+                    summary.runs,
+                    verdicts.display()
+                );
+            }
             Ok(())
         }
         Command::Core(args) => library("core", &args),

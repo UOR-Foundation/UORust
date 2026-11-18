@@ -5505,6 +5505,56 @@ impl Fun<'_, '_> {
                 ..Called::value(term)
             });
         }
+        // The compiler has resolved the trait, so an unrelated method of
+        // the same spelling cannot select these locked numeric readings.
+        let numeric = erased
+            .strip_prefix('<')
+            .and_then(|s| s.rsplit_once(">::"))
+            .and_then(|(owner, method)| {
+                let (on, tr) = owner.split_once(" as ")?;
+                let allowed = match tr {
+                    "num_traits::Zero" | "num_traits::identities::Zero" => {
+                        matches!(method, "zero" | "is_zero")
+                    }
+                    "num_traits::One" | "num_traits::identities::One" => {
+                        matches!(method, "one" | "is_one")
+                    }
+                    "num_traits::Signed" | "num_traits::sign::Signed" => {
+                        matches!(method, "abs" | "signum" | "is_positive" | "is_negative")
+                    }
+                    _ => false,
+                };
+                allowed.then_some((on, method))
+            })
+            .or_else(|| {
+                erased
+                    .strip_prefix("num_rational::Ratio::")
+                    .filter(|m| matches!(*m, "numer" | "denom" | "is_integer"))
+                    .map(|m| ("num_rational::Ratio", m))
+            });
+        if let Some((owner, method)) = numeric {
+            let carrier = match owner {
+                "num_bigint::BigInt" => self.cx.types.registered(owner),
+                "num_rational::Ratio" => self.cx.types.registered("num_rational::BigRational"),
+                _ => None,
+            };
+            if let Some(carrier) = carrier {
+                let value = match args.as_slice() {
+                    [] if matches!(method, "zero" | "one") => Some(""),
+                    [(v, t)] if *t == carrier && !matches!(method, "zero" | "one") => {
+                        Some(v.as_str())
+                    }
+                    _ => None,
+                };
+                if let Some((term, result)) =
+                    value.and_then(|v| crate::registered::numeric_observation(&carrier, method, v))
+                {
+                    if result.same(dt) {
+                        return Ok(Called::value(term));
+                    }
+                }
+            }
+        }
         // Core's float intrinsics (which core's own bodies call by their
         // bare name), and the methods and operator impls of a float type,
         // which core writes as the operators themselves: the prelude's
