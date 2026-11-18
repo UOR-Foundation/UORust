@@ -3554,7 +3554,8 @@ fn behavior(
             overlays.insert((pkg, fi), names);
         }
     }
-    let scopes: Vec<Types> = declared
+    // Each crate's own types, aliases, derives and explicit discriminants.
+    let parts: Vec<Scope> = declared
         .into_iter()
         .enumerate()
         .map(|(pkg, d)| {
@@ -3659,10 +3660,75 @@ fn behavior(
                         .collect::<Vec<_>>()
                 })
                 .collect();
-            Types {
+            Scope {
+                enums,
+                datas,
+                structs,
+                aliases,
                 derives,
                 explicit,
-                ..Types::with_data(enums, &datas, &structs, aliases)
+            }
+        })
+        .collect();
+    // A crate reads its own types and those of the workspace crates it
+    // depends on by path, its own first where a name meets (UE-24).
+    let deps = workspace_deps(ws);
+    let scopes: Vec<Types> = parts
+        .iter()
+        .enumerate()
+        .map(|(pkg, own)| {
+            let mut scope = own.clone();
+            for &dep in &deps[pkg] {
+                let theirs: BTreeSet<&String> = lexes[dep].values().collect();
+                let other = &parts[dep];
+                let lifted = |n: &String| theirs.contains(n);
+                for (n, v) in other.enums.iter().filter(|(n, _)| lifted(n)) {
+                    scope.enums.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.datas.iter().filter(|(n, _)| lifted(n)) {
+                    scope.datas.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.structs.iter().filter(|(n, _)| lifted(n)) {
+                    scope.structs.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.derives.iter().filter(|(n, _)| lifted(n)) {
+                    scope.derives.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, lex) in other.aliases.iter().filter(|(_, lex)| lifted(lex)) {
+                    scope
+                        .aliases
+                        .entry(n.clone())
+                        .or_insert_with(|| lex.clone());
+                }
+                scope
+                    .explicit
+                    .extend(other.explicit.iter().filter(|n| lifted(n)).cloned());
+                // A type of the library written by its full path:
+                // `iface::error::TokenError`.
+                let package = &ws.packages[dep];
+                let lib = package
+                    .targets
+                    .iter()
+                    .position(|t| t.kind == TargetKind::Lib);
+                if let Some(lib) = lib {
+                    let ident = package.targets[lib].name.replace('-', "_");
+                    for ((target, module, name), lex) in &lexes[dep] {
+                        if *target == lib {
+                            let path = [ident.as_str(), module.as_str(), name.as_str()]
+                                .iter()
+                                .filter(|s| !s.is_empty())
+                                .copied()
+                                .collect::<Vec<_>>()
+                                .join("::");
+                            scope.aliases.entry(path).or_insert_with(|| lex.clone());
+                        }
+                    }
+                }
+            }
+            Types {
+                derives: scope.derives,
+                explicit: scope.explicit,
+                ..Types::with_data(scope.enums, &scope.datas, &scope.structs, scope.aliases)
             }
         })
         .collect();
@@ -5794,6 +5860,35 @@ const REFUSALS: &str = "refusals";
 /// The projection's `frontier.toml`: the counts and the ranked queues, then
 /// every refusal and every function row. `lift` is the register of `rows`,
 /// the function rows ([`function_rows`]).
+/// A crate's own types before its scope is read: its enums, data-carrying
+/// enums and structs by LexLean name, its aliases, the traits each derives,
+/// and the enums whose source sets a discriminant.
+#[derive(Clone)]
+struct Scope {
+    enums: Variants,
+    datas: Datas,
+    structs: Fields,
+    aliases: BTreeMap<String, String>,
+    derives: BTreeMap<String, BTreeSet<String>>,
+    explicit: BTreeSet<String>,
+}
+
+/// Each package's normal dependencies on other packages of the workspace,
+/// by path, as indices of `ws.packages`.
+fn workspace_deps(ws: &Workspace) -> Vec<Vec<usize>> {
+    ws.packages
+        .iter()
+        .map(|package| {
+            package
+                .deps
+                .iter()
+                .filter(|d| d.path.is_some() && d.kind == "normal")
+                .filter_map(|d| ws.packages.iter().position(|q| q.name == d.name))
+                .collect()
+        })
+        .collect()
+}
+
 fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\

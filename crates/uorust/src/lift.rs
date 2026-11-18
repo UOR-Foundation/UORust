@@ -500,6 +500,28 @@ const LIBRARY: [(&str, &[&str]); 10] = [
 
 /// Whether a path is the standard library's own full path of a type the
 /// lift reads: `std::collections::BTreeMap`, `std::rc::Rc`.
+/// A path as written, its segments joined by `::`, where no segment but the
+/// last carries arguments; empty otherwise.
+fn written_path(path: &rs::Path) -> String {
+    let (last, prefix) = match path.segments.split_last() {
+        Some(split) => split,
+        None => return String::new(),
+    };
+    if prefix.is_empty()
+        || prefix
+            .iter()
+            .any(|s| !matches!(s.arguments, rs::PathArguments::None))
+    {
+        return String::new();
+    }
+    prefix
+        .iter()
+        .chain([last])
+        .map(|s| s.ident.as_str())
+        .collect::<Vec<_>>()
+        .join("::")
+}
+
 fn std_path(path: &rs::Path) -> bool {
     let [root, module, last] = path.segments.as_slice() else {
         return false;
@@ -1245,6 +1267,22 @@ impl Types {
             }
             rs::TypeKind::Path { qself: false, path } if path.segments.len() == 1 => {
                 self.named(t, &path.segments[0], false)
+            }
+            // A type of a workspace crate written by its full path
+            // (`iface::error::TokenError`), which the scope names (UE-24).
+            rs::TypeKind::Path { qself: false, path }
+                if self.aliases.contains_key(&written_path(path)) =>
+            {
+                match path.segments.last() {
+                    Some(last) => {
+                        let seg = rs::PathSegment {
+                            ident: written_path(path),
+                            ..last.clone()
+                        };
+                        self.named(t, &seg, false)
+                    }
+                    None => bad(),
+                }
             }
             _ => bad(),
         }

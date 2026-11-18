@@ -2118,3 +2118,48 @@ fn bytes_flags_and_unit_enums_convert_by_the_prelude_ue_23() {
     let detail = residue_detail(&files, "bytes::code").expect("code is a residue row");
     assert!(detail.contains("discriminant"), "{detail}");
 }
+
+#[test]
+fn a_crate_reads_the_types_of_the_crates_it_depends_on_ue_24() {
+    let package = |name: &str, deps: &str| {
+        format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\n{deps}")
+    };
+    let planted = scratch(
+        "ue24-crates",
+        &[
+            (
+                "Cargo.toml",
+                "[workspace]\nmembers = [\"iface\", \"prog\", \"other\"]\nresolver = \"2\"\n",
+            ),
+            ("iface/Cargo.toml", &package("iface", "")),
+            ("iface/src/lib.rs", "//! Iface.\n/// Errors.\npub mod error;\n"),
+            (
+                "iface/src/error.rs",
+                "//! Errors.\n/// An error.\n#[derive(Clone, Debug, Eq, PartialEq)]\npub enum TokenError {\n    \
+                 /// Bad.\n    InvalidInstruction,\n    /// Worse.\n    Other,\n}\n",
+            ),
+            ("prog/Cargo.toml", &package("prog", "iface = { path = \"../iface\" }\n")),
+            (
+                "prog/src/lib.rs",
+                "//! Prog.\nuse {\n    iface::{\n        error::TokenError,\n    },\n};\n\n\
+                 /// Through the import.\npub fn grouped(x: u64) -> Result<u64, TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(TokenError::InvalidInstruction)\n    }\n}\n\n\
+                 /// Through the full path.\npub fn pathed(x: u64) -> Result<u64, iface::error::TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(iface::error::TokenError::Other)\n    }\n}\n",
+            ),
+            ("other/Cargo.toml", &package("other", "")),
+            (
+                "other/src/lib.rs",
+                "//! Other.\n/// A crate that does not depend on iface.\npub fn apart(x: u64) -> Result<u64, TokenError> {\n    \
+                 Ok(x)\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "crates");
+    let lifted = lifted_functions(&files);
+    for f in ["prog::grouped", "prog::pathed"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let detail = residue_detail(&files, "other::apart").expect("apart is a residue row");
+    assert!(detail.contains("TokenError"), "{detail}");
+}

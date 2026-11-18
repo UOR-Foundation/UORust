@@ -138,3 +138,9 @@ Feature: engine
     Given a planted crate whose struct holds an amount as eight little-endian bytes, a flag and a state byte, with a getter and setters converting them, and an enum whose source sets its discriminants
     When the suite exercises UE-23
     Then the getter and the setters lift to the prelude's fromLeBytes, leBytes and bitOf and to the match from each variant to its index, and the cast of the enum that sets its discriminants is a residue row naming them
+
+  @UE-24 @build
+  Scenario: A crate reads the types of the workspace crates it depends on
+    Given a planted workspace whose second crate imports the first crate's error enum through a nested use group and names it by its full path, and whose third crate does not depend on the first
+    When the suite exercises UE-24
+    Then the second crate's functions that return or build the enum lift, and the third crate's function that names it is a residue row naming the type
