@@ -14216,6 +14216,7 @@ mod tests {
             (
                 "One::empty".into(),
                 Sig {
+                    threads: Vec::new(),
                     generic: None,
                     name: "oneEmpty".into(),
                     params: vec![Ty::Bool],
@@ -14225,6 +14226,7 @@ mod tests {
             (
                 "Two::empty".into(),
                 Sig {
+                    threads: Vec::new(),
                     generic: None,
                     name: "twoEmpty".into(),
                     params: vec![Ty::Bool],
@@ -14256,6 +14258,7 @@ mod tests {
             fns: BTreeMap::from([(
                 "again".into(),
                 Sig {
+                    threads: Vec::new(),
                     generic: None,
                     name: "again".into(),
                     params: vec![Ty::Bool; 3],
@@ -14266,6 +14269,8 @@ mod tests {
             names: BTreeSet::new(),
         };
         let mut ctx = Ctx {
+            sealed: BTreeSet::new(),
+            borrowed: BTreeSet::new(),
             dictionary: Vec::new(),
             current: "again".into(),
             own: "again".into(),
@@ -14796,7 +14801,7 @@ mod tests {
     #[test]
     fn a_type_outside_the_lift_names_the_chain_to_its_leaf() {
         let types = types_of(
-            "struct Leaf { x: Cell<u8> } struct Mid { n: u32, leaf: Leaf, other: Cell<u16> } \
+            "struct Leaf { x: UnsafeCell<u8> } struct Mid { n: u32, leaf: Leaf, other: UnsafeCell<u16> } \
              struct Top { mids: Vec<Option<Mid>> }",
         );
         // Through the containers the lift reads, down to the first field
@@ -14804,14 +14809,14 @@ mod tests {
         assert_eq!(
             lift("fn through(t: &Top) -> bool { true }", &types),
             Err(Residue::Type(
-                "Top.mids: Mid.leaf: Leaf.x: Cell<u8>".to_string()
+                "Top.mids: Mid.leaf: Leaf.x: UnsafeCell<u8>".to_string()
             ))
         );
         // The owner of a method is named the same way; a name the
         // workspace does not declare is its own leaf.
         assert_eq!(
             types.unnamed("Mid"),
-            Residue::Type("Mid.leaf: Leaf.x: Cell<u8>".to_string())
+            Residue::Type("Mid.leaf: Leaf.x: UnsafeCell<u8>".to_string())
         );
         assert_eq!(
             types.unnamed("Elsewhere"),
@@ -14819,7 +14824,7 @@ mod tests {
         );
         assert_eq!(
             types.unnamed("Mid").detail(),
-            "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>"
+            "type outside the lift: Mid.leaf: Leaf.x: UnsafeCell<u8>"
         );
     }
 
@@ -14827,15 +14832,16 @@ mod tests {
     fn a_chain_never_leads_back_into_the_type_it_explains() {
         // `A` holds `B` first, and `B` is outside only because it holds
         // `A`: the chain of `A` names what kept `A` out on its own.
-        let types = types_of("struct A { b: Vec<B>, x: Cell<u8> } struct B { a: Option<A> }");
-        assert_eq!(types.outside["A"], "A.x: Cell<u8>");
-        assert_eq!(types.outside["B"], "B.a: A.x: Cell<u8>");
+        let types = types_of("struct A { b: Vec<B>, x: UnsafeCell<u8> } struct B { a: Option<A> }");
+        assert_eq!(types.outside["A"], "A.x: UnsafeCell<u8>");
+        assert_eq!(types.outside["B"], "B.a: A.x: UnsafeCell<u8>");
         // Each of two types outside on its own account names the other
         // first, as declared, and then what keeps that one out.
-        let types =
-            types_of("struct T { u: Vec<U>, x: Cell<u8> } struct U { t: Box<T>, y: Cell<u16> }");
-        assert_eq!(types.outside["T"], "T.u: U.y: Cell<u16>");
-        assert_eq!(types.outside["U"], "U.t: T.x: Cell<u8>");
+        let types = types_of(
+            "struct T { u: Vec<U>, x: UnsafeCell<u8> } struct U { t: Box<T>, y: UnsafeCell<u16> }",
+        );
+        assert_eq!(types.outside["T"], "T.u: U.y: UnsafeCell<u16>");
+        assert_eq!(types.outside["U"], "U.t: T.x: UnsafeCell<u8>");
     }
 
     #[test]
@@ -15077,7 +15083,7 @@ mod tests {
     #[test]
     fn every_struct_shape_is_a_type_or_names_its_leaf() {
         let types = types_of(
-            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, Cell<u8>); \
+            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, UnsafeCell<u8>); \
              struct Wrapper<T> { value: T } struct Holder { m: Marker, w: Wrapper<u32> }",
         );
         // A struct of no fields has one value: one constructor.
@@ -15094,7 +15100,7 @@ mod tests {
         assert!(out.contains("body: (project m item0)"), "{out}");
         let out = lift("fn make(n: u32) -> Meters { Meters(n) }", &types).expect("lifts");
         assert!(out.contains("body: (record Meters {item0 := n})"), "{out}");
-        assert_eq!(types.outside["Pair"], "Pair.1: Cell<u8>");
+        assert_eq!(types.outside["Pair"], "Pair.1: UnsafeCell<u8>");
         // A struct with a type parameter is the leaf.
         assert_eq!(
             types.outside["Wrapper"],
@@ -15305,11 +15311,11 @@ mod tests {
         assert_eq!(types.fields_read(&[]), Some(Vec::new()));
         // One field outside, first or last, keeps the whole out.
         assert_eq!(
-            types.fields_read(&raw(&[("a", "std::cell::RefCell<u8>"), ("b", "u8")])),
+            types.fields_read(&raw(&[("a", "std::cell::UnsafeCell<u8>"), ("b", "u8")])),
             None
         );
         assert_eq!(
-            types.fields_read(&raw(&[("a", "u8"), ("b", "std::cell::RefCell<u8>")])),
+            types.fields_read(&raw(&[("a", "u8"), ("b", "std::cell::UnsafeCell<u8>")])),
             None
         );
         let variant = |v: &str, fields: &[(Option<&str>, &str)]| -> RawVariant {
@@ -15344,7 +15350,7 @@ mod tests {
         assert_eq!(own.variants_read("Tree", &[]), Some(Vec::new()));
         // A field outside the lift, or the enum inside a map where Lean
         // nests no inductive, keeps the whole out.
-        for bad in ["std::cell::RefCell<u8>", "BTreeMap<u8, Tree>"] {
+        for bad in ["std::cell::UnsafeCell<u8>", "BTreeMap<u8, Tree>"] {
             let raw = [variant("Leaf", &[]), variant("Node", &[(None, bad)])];
             assert_eq!(own.variants_read("Tree", &raw), None, "{bad}");
         }
@@ -15369,6 +15375,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            threads: threads(&sig, None),
             generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),
@@ -15555,6 +15562,7 @@ mod tests {
             let block = crate::convert::block(&f.block);
             let (params, result) = types.signature(&sig, None)?;
             let c = Candidate {
+                threads: threads(&sig, None),
                 generic: None,
                 rust: sig.ident.clone(),
                 name: camel(&[&sig.ident]),
@@ -15702,6 +15710,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            threads: threads(&sig, None),
             generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),

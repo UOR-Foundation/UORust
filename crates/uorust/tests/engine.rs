@@ -8,6 +8,8 @@ use uorust::{Options, UorustError};
 
 const STAMP: &str = "2026-11-11T00:00:00Z";
 
+type Projection = BTreeMap<String, Vec<u8>>;
+
 fn root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .ancestors()
@@ -38,6 +40,23 @@ fn options(name: &str) -> Options {
 /// A projection; this workspace's runs the MIR path on its committed verdict
 /// register, as `just register` and `just uorust` do.
 fn project(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
+    // The acceptance run reads an immutable checkout. Share that expensive
+    // self projection across independent assertions; determinism stays fresh.
+    static SELF: std::sync::Mutex<BTreeMap<String, Projection>> =
+        std::sync::Mutex::new(BTreeMap::new());
+    if root != self::root() {
+        return project_fresh(root, name);
+    }
+    let mut cache = SELF
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    cache
+        .entry(name.to_string())
+        .or_insert_with(|| project_fresh(root, name))
+        .clone()
+}
+
+fn project_fresh(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
     let mut options = options(name);
     if root == self::root() {
         options.mir = Some(mir_options(
@@ -172,8 +191,8 @@ fn the_fixture_projects_to_the_committed_project_ue_01() {
 #[test]
 fn projections_are_byte_identical_ue_02() {
     for (root, name) in [(fixture(), "thermostat"), (root(), "uorust")] {
-        let first = project(&root, name);
-        let second = project(&root, name);
+        let first = project_fresh(&root, name);
+        let second = project_fresh(&root, name);
         assert_eq!(first, second, "{name} projects differently twice");
         assert!(first.contains_key("src/Architecture.lex.tex"));
     }
@@ -190,7 +209,7 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
             ),
             (
                 "src/lib.rs",
-                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n\n/// Picks an implementation by its argument's type.\npub fn pick(p: a::Pair) -> a::Wide {\n    a::Wide::from(p.0)\n}\n",
+                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n\n/// Picks an implementation by its argument's type.\npub fn pick(make: impl FnOnce() -> u8) -> a::Wide {\n    a::Wide::from(make())\n}\n",
             ),
             (
                 "src/a.rs",
@@ -221,9 +240,9 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
             "{reason} missing:\n{frontier}"
         );
     }
-    // The ambiguous call is the one the written code leaves open: `p.0` is
-    // a field, whose type the resolution does not read, and both `From`
-    // implementations of the workspace can take it.
+    // The resolver now reads tuple fields. A callback's result keeps this
+    // valid Rust call outside its type-reading floor, with both `From`
+    // implementations still possible to the resolver.
     let ambiguous = refusals
         .iter()
         .find(|row| row.contains("reason = \"ambiguous-call\""))
@@ -1629,17 +1648,38 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
     // obligation; the prover reads the listing of candidates.
     let trial = walk(Default::default(), Trial::All);
     let behavior = text(&trial, "src/Behavior.lex.tex");
+    let rows = frontier_rows(&trial, "lifted");
+    let name = |function: &str| -> String {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(function))
+            .and_then(|r| r["definition"].as_str())
+            .and_then(|d| d.strip_prefix("Behavior::"))
+            .unwrap_or_else(|| panic!("no lifted trial declaration for {function}"))
+            .to_string()
+    };
+    let capped = name("walk::capped_sum");
+    let count = name("walk::count");
+    let above = name("walk::above");
+    let rise = name("walk::first_rise");
     for decl in [
-        "name: walkCappedSumLoop1,",
-        "name: decreases_walkCappedSumLoop1_0,",
-        "name: holds_walkCappedSum_0,",
-        "name: walkCappedSum,",
-        "name: walkCount,",
+        format!("name: {capped}Loop1,"),
+        format!("name: decreases_{capped}Loop1_0,"),
+        format!("name: holds_{capped}_0,"),
+        format!("name: {capped},"),
+        format!("name: {count},"),
+        format!("name: {above},"),
+        format!("name: {rise}Loop2,"),
+    ] {
+        assert!(
+            behavior.contains(&decl),
+            "the trial projection lacks {decl}"
+        );
+    }
+    for decl in [
         "termination: {",
         // std's own `Option::unwrap_or`, lifted from its vendored MIR at
         // `u32`, and a promoted constant lowered from its own body.
         "name: stdOptionOptionUnwrapOrU32,",
-        "name: walkAbove,",
         // `BTreeSet::insert` by its model, a backward function of the
         // mutable borrow; `str::trim` by its model over the prelude.
         "name: stdInsertString,",
@@ -1648,7 +1688,6 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
         // A `for` loop over a slice: its iterator a cursor, the loop's
         // measure the distance between the cursor's positions, which its
         // guarded `next` is `Some` within.
-        "name: walkFirstRiseLoop2,",
         "measure: (prim subtract (project iter item2) (project iter item1) : Nat)",
         "name: stdAtNat,",
         // A closure: a definition over the value of its captures, called
@@ -1695,7 +1734,7 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
             "{f} does not lift"
         );
     }
-    assert!(text(&decided, "src/Behavior.lex.tex").contains("name: walkCappedSumLoop1,"));
+    assert!(text(&decided, "src/Behavior.lex.tex").contains(&format!("name: {capped}Loop1,")));
     assert!(!decided.contains_key(uorust::mir::CANDIDATES));
     let count = residue_detail(&decided, "walk::count").expect("count is residue");
     assert!(count.starts_with("mir::Verdict: LLV"), "{count}");

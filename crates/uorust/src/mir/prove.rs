@@ -82,7 +82,7 @@ fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, Uorust
                         .map(str::to_string)
                         .ok_or_else(|| bad("a dependency is not a source identity".into()))
                 })
-                .collect::<Result<_, _>>()?,
+                .collect::<Result<_, UorustError>>()?,
             decls: row
                 .get("decls")
                 .and_then(toml::Value::as_array)
@@ -145,6 +145,12 @@ fn verify(dir: &Path) -> Result<Option<Vec<Diagnostic>>, UorustError> {
                 .unwrap_or(0),
         });
     }
+    for diagnostic in &out {
+        eprintln!(
+            "{}: {}:{}: {}",
+            diagnostic.code, diagnostic.path, diagnostic.line, diagnostic.message
+        );
+    }
     Ok(Some(out))
 }
 
@@ -160,18 +166,24 @@ fn named(d: &Diagnostic, behavior: &str) -> Vec<String> {
         .filter_map(|q| q.rsplit('.').next().map(str::to_string))
         .collect();
     if out.is_empty() && d.path.ends_with("Behavior.lex.tex") && d.line > 0 {
+        let lines: Vec<&str> = behavior.lines().collect();
         let mut current = None;
-        for (i, line) in behavior.lines().enumerate() {
+        for (i, line) in lines.iter().enumerate() {
             if let Some(n) = line.strip_prefix("  name: ") {
-                if behavior
-                    .lines()
-                    .nth(i.wrapping_sub(1))
+                if lines
+                    .get(i.wrapping_sub(1))
                     .is_some_and(|p| p.ends_with('{'))
                 {
                     current = Some(n.trim_end_matches(',').to_string());
                 }
             }
             if i + 1 >= d.line {
+                if !line.starts_with(' ') && line.ends_with('{') {
+                    current = lines.get(i + 1).and_then(|next| {
+                        next.strip_prefix("  name: ")
+                            .map(|name| name.trim_end_matches(',').to_string())
+                    });
+                }
                 break;
             }
         }
@@ -514,5 +526,8 @@ mod tests {
         };
         assert_eq!(named(&at, behavior), ["b"]);
         assert_eq!(observed(&at), None);
+        // The SDK's Lean diagnostic points at the opening declaration,
+        // before its name. It must never blame the preceding definition.
+        assert_eq!(named(&Diagnostic { line: 7, ..at }, behavior), ["b"]);
     }
 }

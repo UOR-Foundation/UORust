@@ -174,6 +174,7 @@ Feature: engine
     Given dependent translations, mutually recursive translations and a positive batch budget
     When the prover plans and executes its trials
     Then every eligible translation is scheduled once after its dependencies, recursive components remain together, and unchanged proved verdicts need no verifier rerun
+    And a verifier diagnostic on a theorem opening names that theorem, never the preceding function
     But zero budgets, dangling dependencies and a recursive component larger than the budget are refused before verification
 
   @UE-30 @build

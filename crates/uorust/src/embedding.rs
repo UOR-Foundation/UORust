@@ -444,7 +444,7 @@ mod tests {
         impl<T: Copy> Wrap<T> { pub fn get(&self) -> T { self.0 } }\n\
         pub struct Pair<T>(pub T, pub T);\n\
         impl<T: Copy> Pair<T> { pub fn get(&self) -> T { self.1 } }\n\
-        pub mod inner {\n    pub fn first<T: Copy>(x: T, _y: T) -> T { x }\n}\n";
+        pub mod inner {\n    pub fn first<T: Copy + std::fmt::Display>(x: T, _y: T) -> T { x }\n}\n";
 
     /// A record of the crate `probe` in `configuration`, embedding
     /// `modules` (every one when empty), with these bodies (path, reach).
@@ -627,7 +627,7 @@ mod tests {
     const LIFT_ONE_LINE: &str = "pub struct A<T>(pub T);\npub struct B<T>(pub T);\n\
         #[cfg(not(feature = \"x\"))] impl<T: Copy> A<T> { pub fn get(&self) -> T { self.0 } } \
         #[cfg(feature = \"x\")] impl<T: Copy> B<T> { pub fn get(&self) -> T { self.0 } }\n\
-        pub mod outer {\n    pub fn helper<T: Copy>(x: T, _y: T) -> T { x }\n}\n";
+        pub mod outer {\n    pub fn helper<T: Copy + std::fmt::Display>(x: T, _y: T) -> T { x }\n}\n";
 
     #[test]
     fn lift_two_impls_on_one_line_and_a_nested_function_are_told_apart() {

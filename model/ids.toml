@@ -230,7 +230,7 @@ statement = "MIR translations of methods with the same owner and short name rece
 id = "UE-29"
 level = "build"
 suite = "engine"
-statement = "MIR proof trials are partitioned by their dependency graph into bounded batches that keep recursive components together, reject zero budgets, dangling dependencies and oversized recursive components, and reuse actual SDK verdicts without omitting eligible translations"
+statement = "MIR proof trials are partitioned by their dependency graph into bounded batches that keep recursive components together, reject zero budgets, dangling dependencies and oversized recursive components, reuse actual SDK verdicts without omitting eligible translations, and attribute opening-line diagnostics to the declaration that opens there rather than its predecessor"
 
 [[id]]
 id = "UE-30"

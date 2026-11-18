@@ -342,3 +342,23 @@ The development profile optimizes the projector itself, as it already does
 its certified translator. The SDK gate still runs every check with debug
 assertions and overflow checking enabled. This removes repeated unoptimized
 whole-workspace traversals from proof and integration tests.
+
+Saved state-threading, cell-field and trait-dictionary changes retain their
+positive and counterexample tests. Unsupported-type fixtures use `UnsafeCell`
+instead of newly readable cells. Embedding join fixtures use a display-trait
+bound instead of newly readable marker bounds, so they still exercise the
+embedding fallback. Their closure, source-site and per-function regression
+assertions remain in place.
+
+
+The UE-29 diagnostic regression also places a failure on a theorem's opening
+line, before its `name` field. The previous lookup blamed the preceding
+definition (`a` instead of `b`); the repaired lookup names the declaration
+that opens on that line. Actual SDK failures on adjacent native obligations
+exposed this case. The prover prints the full SDK diagnostics while retaining
+compact refusal causes in the verdict register.
+
+Engine assertions share the immutable checkout's self projection. The
+byte-determinism regression explicitly takes two fresh projections, and
+mutated fixture checkouts always project afresh, so sharing cannot mask those
+negative cases.

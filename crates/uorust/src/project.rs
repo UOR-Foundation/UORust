@@ -7079,10 +7079,6 @@ fn registered_paths(
     read
 }
 
-/// How a module of a file (its own, or an inline module inside it) reads
-/// each name its crate's free functions share: the function the module
-/// declares, else the one the file's `use` names, else none.
-
 /// The identifiers of Rust tokens, string literals included (a format
 /// string names its inline arguments): every name a body can write.
 fn identifiers(tokens: &str) -> BTreeSet<String> {
@@ -8138,11 +8134,11 @@ mod tests {
             &[
                 (
                     "src/lib.rs",
-                    "//! D.\n\npub mod holder;\n\nuse holder::Holder;\n\n/// Holds a holder.\npub struct Outer {\n    /// The holder.\n    pub held: Holder,\n}\n\n/// Reads it.\npub fn read(o: &Outer) -> u8 {\n    *o.held.cell.borrow()\n}\n\n/// Reads one by its path.\npub fn read_at(h: &holder::Holder) -> u8 {\n    *h.cell.borrow()\n}\n",
+                    "//! D.\n\npub mod holder;\n\nuse holder::Holder;\n\n/// Holds a holder.\npub struct Outer {\n    /// The holder.\n    pub held: Holder,\n}\n\n/// Reads it.\npub fn read(o: &Outer) -> u8 {\n    unsafe { *o.held.cell.get() }\n}\n\n/// Reads one by its path.\npub fn read_at(h: &holder::Holder) -> u8 {\n    unsafe { *h.cell.get() }\n}\n",
                 ),
                 (
                     "src/holder.rs",
-                    "//! H.\n\n/// Holds a cell.\npub struct Holder {\n    /// The cell.\n    pub cell: std::cell::RefCell<u8>,\n}\n",
+                    "//! H.\n\n/// Holds a cell.\npub struct Holder {\n    /// The cell.\n    pub cell: std::cell::UnsafeCell<u8>,\n}\n",
                 ),
             ],
         );
@@ -8199,7 +8195,8 @@ mod tests {
         let refused = crate::register::admit_parent(&parent, &candidate);
         assert_eq!(refused.len(), 1, "{refused:?}");
         assert!(
-            refused[0].starts_with("kaitwo::uses_pq ") && refused[0].contains("Q.c: RefCell<u8>"),
+            refused[0].starts_with("kaitwo::uses_pq ")
+                && refused[0].contains("Q.c: UnsafeCell<u8>"),
             "{refused:?}"
         );
         let row = candidate
@@ -8216,8 +8213,8 @@ mod tests {
         assert_eq!(
             stops,
             [
-                "type outside the lift: P.v: RefCell<u8>",
-                "type outside the lift: Q.c: RefCell<u8>"
+                "type outside the lift: P.v: UnsafeCell<u8>",
+                "type outside the lift: Q.c: UnsafeCell<u8>"
             ]
         );
     }
@@ -8286,8 +8283,8 @@ mod tests {
 
     /// The refuter's sites: each type construct names the declarations its
     /// chain means, read where the chain writes each name. Two homonyms of
-    /// two inline modules each have their own; std's `RefCell` has none,
-    /// though the workspace declares a `RefCell` elsewhere; a renaming
+    /// two inline modules each have their own; std's `UnsafeCell` has none,
+    /// though the workspace declares a `UnsafeCell` elsewhere; a renaming
     /// `use` leads to the type it renames; a type a macro invocation writes
     /// is sited at the invocation; a type the projection renamed is sited
     /// by its new name.
@@ -8320,7 +8317,7 @@ mod tests {
         assert_eq!(at("a::Node"), ("[\"src/lib.rs:25\"]".into(), none.clone()));
         assert_eq!(at("b::Node"), ("[\"src/lib.rs:34\"]".into(), none.clone()));
         assert_eq!(
-            at("Q.c: RefCell<u8>"),
+            at("Q.c: UnsafeCell<u8>"),
             ("[\"src/lib.rs:11\"]".into(), none.clone())
         );
         assert_eq!(at("Alias"), ("[\"src/lib.rs:75\"]".into(), none.clone()));
@@ -8347,7 +8344,7 @@ mod tests {
 
     /// A synthetic crate of the refuter of the register lane.
     const W2P: &str = r##"//! Synthetic two.
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 /// P.
 pub struct P {
@@ -8358,7 +8355,7 @@ pub struct P {
 /// Q: outside the lift.
 pub struct Q {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 
 /// Uses P then Q.
@@ -8370,16 +8367,16 @@ pub fn uses_pq(p: &P, q: &Q) -> u8 {
 /// Other: outside.
 pub struct Other {
     /// c.
-    pub c: RefCell<i8>,
+    pub c: UnsafeCell<i8>,
 }
 
 /// a.
 pub mod a {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node a.
     pub struct Node {
         /// c.
-        pub c: RefCell<u8>,
+        pub c: UnsafeCell<u8>,
     }
     /// Uses Node, then Other.
     pub fn fa(n: &Node, o: &super::Other) -> u8 {
@@ -8389,11 +8386,11 @@ pub mod a {
 }
 /// b.
 pub mod b {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node b.
     pub struct Node {
         /// c.
-        pub c: RefCell<u8>,
+        pub c: UnsafeCell<u8>,
     }
     /// Uses Node.
     pub fn fb(n: &Node) -> u8 {
@@ -8409,18 +8406,18 @@ pub fn ident(x: u64) -> u64 {
 
     /// A synthetic crate of the refuter of the register lane.
     const W2C: &str = r##"//! Synthetic two.
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 /// P.
 pub struct P {
     /// v.
-    pub v: RefCell<u8>,
+    pub v: UnsafeCell<u8>,
 }
 
 /// Q: outside the lift.
 pub struct Q {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 
 /// Uses P then Q.
@@ -8432,12 +8429,12 @@ pub fn uses_pq(p: &P, q: &Q) -> u8 {
 /// Other: outside.
 pub struct Other {
     /// c.
-    pub c: RefCell<i8>,
+    pub c: UnsafeCell<i8>,
 }
 
 /// a.
 pub mod a {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node a.
     pub struct Node {
         /// c.
@@ -8451,11 +8448,11 @@ pub mod a {
 }
 /// b.
 pub mod b {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node b.
     pub struct Node {
         /// c.
-        pub c: RefCell<u8>,
+        pub c: UnsafeCell<u8>,
     }
     /// Uses Node.
     pub fn fb(n: &Node) -> u8 {
@@ -8643,7 +8640,7 @@ pub fn calls_root(x: u8) -> u8 {
 
     /// A synthetic crate of the refuter of the register lane.
     const W1: &str = r##"//! Synthetic.
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 /// P: liftable in v1.
 pub struct P {
@@ -8654,7 +8651,7 @@ pub struct P {
 /// Q: outside the lift.
 pub struct Q {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 
 /// Uses P then Q.
@@ -8664,27 +8661,27 @@ pub fn uses_pq(p: &P, q: &Q) -> u8 {
 
 /// Inline modules with homonym types.
 pub mod a {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node a.
     pub struct Node {
         /// c.
-        pub c: RefCell<u8>,
+        pub c: UnsafeCell<u8>,
     }
 }
 /// b.
 pub mod b {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Node b.
     pub struct Node {
         /// c.
-        pub c: RefCell<u8>,
+        pub c: UnsafeCell<u8>,
     }
 }
 
 /// Other: outside.
 pub struct Other {
     /// c.
-    pub c: RefCell<i8>,
+    pub c: UnsafeCell<i8>,
 }
 
 /// Uses a::Node, then Other.
@@ -8702,7 +8699,7 @@ macro_rules! mk {
         /// made.
         pub struct $n {
             /// c.
-            pub c: RefCell<u8>,
+            pub c: UnsafeCell<u8>,
         }
     };
 }
@@ -8714,11 +8711,11 @@ pub fn fm(m: &Made) -> u8 {
 }
 
 mod inner {
-    use std::cell::RefCell;
+    use std::cell::UnsafeCell;
     /// Deep.
     pub struct Deep {
         /// c.
-        pub c: RefCell<u16>,
+        pub c: UnsafeCell<u16>,
     }
 }
 pub use inner::Deep as Alias;
@@ -8743,7 +8740,7 @@ pub fn fw(w: &Wrap<u8>) -> u8 {
 #[cfg(feature = "x")]
 pub struct Twin {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 /// Twin otherwise.
 #[cfg(not(feature = "x"))]
@@ -8760,10 +8757,10 @@ pub fn ft(t: &Twin) -> u8 {
     return t.c.get();
 }
 
-/// Unrelated module that declares its own RefCell.
+/// Unrelated module that declares its own UnsafeCell.
 pub mod mine {
     /// A homonym of std's.
-    pub struct RefCell {
+    pub struct UnsafeCell {
         /// v.
         pub v: u8,
     }
@@ -8773,7 +8770,7 @@ pub mod mine {
 
     /// A synthetic crate of the refuter of the register lane.
     const W4L: &str = r##"//! Synthetic four.
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 pub mod a;
 pub mod b;
@@ -8781,19 +8778,19 @@ pub mod b;
 /// Other: outside.
 pub struct Other {
     /// c.
-    pub c: RefCell<i8>,
+    pub c: UnsafeCell<i8>,
 }
 "##;
 
     /// A synthetic crate of the refuter of the register lane.
     const W4A: &str = r##"//! a.
 #[allow(unused_imports)]
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 /// Node of a.
 pub struct Node {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 
 /// Uses Node, then Other.
@@ -8805,12 +8802,12 @@ pub fn fa(n: &Node, o: &crate::Other) -> u8 {
 
     /// A synthetic crate of the refuter of the register lane.
     const W4B: &str = r##"//! b.
-use std::cell::RefCell;
+use std::cell::UnsafeCell;
 
 /// Node of b.
 pub struct Node {
     /// c.
-    pub c: RefCell<u8>,
+    pub c: UnsafeCell<u8>,
 }
 
 /// Uses Node.
@@ -8874,7 +8871,7 @@ pub fn fb(n: &Node) -> u8 {
              pub struct Handle {\n    /// A raw handle.\n    pub raw: u64,\n}\n\n\
              /// Stopped by a name two declarations share.\n\
              pub fn opened(h: &Handle) -> bool {\n    let _ = h;\n    true\n}\n\n\
-             /// A cell.\npub struct Leaf {\n    /// The cell.\n    pub x: Cell<u8>,\n}\n\n\
+             /// A cell.\npub struct Leaf {\n    /// The cell.\n    pub x: UnsafeCell<u8>,\n}\n\n\
              /// Holds the leaf.\npub struct Mid {\n    /// A count.\n    pub n: u32,\n    \
              /// The leaf.\n    pub leaf: Leaf,\n}\n\n\
              impl Mid {\n    /// Stopped by the type it is a method of.\n    \
@@ -8893,7 +8890,7 @@ pub fn fb(n: &Node) -> u8 {
              /// One function for each build configuration.\n#[cfg(unix)]\n\
              pub fn width() -> u32 {\n    1\n}\n\n\
              /// One function for each build configuration.\n#[cfg(not(unix))]\n\
-             pub fn width(scale: Cell<u8>) -> u32 {\n    let _ = scale;\n    2\n}\n",
+             pub fn width(scale: UnsafeCell<u8>) -> u32 {\n    let _ = scale;\n    2\n}\n",
         ),
         (
             "src/first.rs",
@@ -8959,7 +8956,7 @@ pub fn fb(n: &Node) -> u8 {
             rows_of(&frontier, "owners::Mid::count", "detail"),
             vec![(
                 "residue".to_string(),
-                "type outside the lift: Mid.leaf: Leaf.x: Cell<u8>".to_string()
+                "type outside the lift: Mid.leaf: Leaf.x: UnsafeCell<u8>".to_string()
             )]
         );
     }
@@ -9337,7 +9334,7 @@ pub fn fb(n: &Node) -> u8 {
                 "src/lib.rs",
                 "//! Reasons.\n\
                  /// A circle.\npub struct Circle(pub u32);\n\
-                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: Cell<u8>,\n}\n\
+                 /// A blob.\npub struct Blob {\n    /// Its weight.\n    pub weight: UnsafeCell<u8>,\n}\n\
                  /// A bag.\npub struct Bag {\n    /// Its blob.\n    pub blob: Blob,\n}\n\
                  /// A square.\npub struct Square {\n    /// Its side.\n    pub side: u32,\n}\n\
                  impl Circle {\n    /// The radius.\n    \
@@ -9369,7 +9366,7 @@ pub fn fb(n: &Node) -> u8 {
             (
                 "reasons::Bag::count",
                 "type",
-                "type outside the lift: Bag.blob: Blob.weight: Cell<u8>",
+                "type outside the lift: Bag.blob: Blob.weight: UnsafeCell<u8>",
             ),
             (
                 "reasons::Square::scale",
@@ -11567,13 +11564,13 @@ pub fn fb(n: &Node) -> u8 {
         let frontier = resolved_frontier(
             "leaf-head",
             "\n[dependencies]\nbignum = \"1\"\n",
-            "use std::cell::RefCell;\nuse bignum::BigX;\n\
-             pub struct Held { pub c: RefCell<BigX> }\n\
+            "use std::cell::UnsafeCell;\nuse bignum::BigX;\n\
+             pub struct Held { pub c: UnsafeCell<BigX> }\n\
              pub fn keep(h: Held) -> Held { h }\n",
         );
         let row = type_names_row(&frontier, "w::keep");
         assert!(row.starts_with("[[residue]]"), "{row}");
-        assert!(row.contains("Held.c: RefCell<bignum::BigX>"), "{row}");
+        assert!(row.contains("Held.c: UnsafeCell<bignum::BigX>"), "{row}");
     }
 
     #[test]
@@ -11612,18 +11609,18 @@ pub fn fb(n: &Node) -> u8 {
             "pub mod a {\n pub struct Op { pub k: u8 }\n}\n\
              pub mod b {\n pub struct Op { pub j: u8 }\n}\n\
              pub mod c {\n use crate::b::*;\n pub fn j(o: Op) -> u8 { o.j }\n}\n\
-             pub mod d {\n use std::cell::Cell;\n\
-             pub struct Count { pub n: Cell<u8> }\n\
+             pub mod d {\n use std::cell::UnsafeCell;\n\
+             pub struct Count { pub n: UnsafeCell<u8> }\n\
              pub fn keep(c: Count) -> Count { c }\n}\n\
-             pub mod e {\n pub struct Cell { pub v: u8 }\n}\n\
-             pub mod f {\n pub struct Cell { pub u: u8 }\n}\n",
+             pub mod e {\n pub struct UnsafeCell { pub v: u8 }\n}\n\
+             pub mod f {\n pub struct UnsafeCell { pub u: u8 }\n}\n",
         );
         assert!(
             type_names_row(&frontier, "w::c::j").starts_with("[[lifted]]"),
             "{frontier}"
         );
         let row = type_names_row(&frontier, "w::d::keep");
-        assert!(row.contains("Count.n: std::cell::Cell<u8>"), "{row}");
+        assert!(row.contains("Count.n: std::cell::UnsafeCell<u8>"), "{row}");
         assert!(!frontier.contains("one of several types"), "{frontier}");
     }
 
