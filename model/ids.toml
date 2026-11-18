@@ -183,3 +183,9 @@ id = "UE-21"
 level = "build"
 suite = "engine"
 statement = "A method that writes its own struct lifts as state threading, by the model's own rule: a method taking `&mut self` of a struct the lift names and returning nothing lifts as the function from the struct's value to its new value, each `self.f = v;` rebinding the value to the record that `Threading::threadedRecord` of the model gives (every field in declaration order, the written one holding `v` and every other its own value), whose laws Lean proves (a write keeps the fields, the written field reads its value, the last write wins), and the lift calls the definition `lexlean production` exported from that model; a `&mut self` method that returns a value stays a residue row naming its receiver"
+
+[[id]]
+id = "UE-22"
+level = "build"
+suite = "engine"
+statement = "A write through a nested place threads by the model's own rule: `x.f.0[k] = v`, through named fields of structs the lift names, items of tuples and a last index that is an integer literal into a fixed array or vector, rebinds `x` to the value `Threading::placeWrite` of the model gives, a record write at each field or item step and, at an index, the write of the list's first k+1 elements as entries, so the laws Lean proves of a write (it keeps the entries, the written one reads its value, the last write wins) hold of it; an index the lift does not read as a literal, or a step through any other type, is a residue row naming the place"

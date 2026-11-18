@@ -104,8 +104,117 @@ definition{
     | Bool.true => (prim join (cons "(record " (cons ty (cons " {" (cons (render (write (unchanged whole fields) field value)) (cons "})" (nil String)))))) "" : String)
     | Bool.false => ""),
   axioms: [propext],
+  executable: true
+}
+
+structure{
+  name: Step,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: ty, type: String},
+    {name: fields, type: (List String)},
+    {name: field, type: String}
+  ]
+}
+
+definition{
+  name: mark,
+  parameters: [position : Nat],
+  result: String,
+  body: (match position
+    | Nat.zero => ""
+    | Nat.succ before => (prim join (cons "i" (cons (mark before) (nil String))) "" : String)),
+  axioms: [propext],
   executable: true,
-  production: {effects: [allocation, recursion], targets: [rust-std]}
+  recursive_argument: position
+}
+
+definition{
+  name: headAt,
+  parameters: [binder : String, position : Nat],
+  result: String,
+  body: (prim join (cons binder (cons "Head" (cons (mark position) (nil String)))) "" : String),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: tailAt,
+  parameters: [whole : String, binder : String, position : Nat],
+  result: String,
+  body: (match position
+    | Nat.zero => whole
+    | Nat.succ before => (prim join (cons binder (cons "Tail" (cons (mark position) (nil String)))) "" : String)),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: positions,
+  parameters: [binder : String, count : Nat],
+  result: (List Entry),
+  body: (match count
+    | Nat.zero => (nil Entry)
+    | Nat.succ before => (prim append (positions binder before) (cons (record Entry {name := (mark before), value := (headAt binder before)}) (nil Entry)) : (List Entry))),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: count
+}
+
+definition{
+  name: consed,
+  parameters: [entries : (List Entry), tail : String],
+  result: String,
+  body: (match entries
+    | List.nil => tail
+    | List.cons head rest => (prim join (cons "(cons " (cons (project head value) (cons " " (cons (consed rest tail) (cons ")" (nil String)))))) "" : String)),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: opening,
+  parameters: [whole : String, binder : String, position : Nat, remaining : Nat, inner : String],
+  result: String,
+  body: (match remaining
+    | Nat.zero => inner
+    | Nat.succ rest => (prim join (cons "(match " (cons (tailAt whole binder position) (cons " | List.nil => " (cons whole (cons " | List.cons " (cons (headAt binder position) (cons " " (cons (tailAt whole binder (position + 1)) (cons " => " (cons (opening whole binder (position + 1) rest inner) (cons ")" (nil String)))))))))))) "" : String)),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: remaining
+}
+
+definition{
+  name: listWrite,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  result: String,
+  body: (opening whole binder 0 (index + 1) (consed (write (positions binder (index + 1)) (mark index) value) (tailAt whole binder (index + 1)))),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: placeWrite,
+  parameters: [
+    steps : (List Step),
+    whole : String,
+    binder : String,
+    index : Nat,
+    indexed : Bool,
+    value : String
+  ],
+  result: String,
+  body: (match steps
+    | List.nil => (match indexed
+      | Bool.true => (listWrite whole binder index value)
+      | Bool.false => value)
+    | List.cons step rest => (threadedRecord (project step ty) whole (project step fields) (project step field) (placeWrite rest (prim join (cons "(project " (cons whole (cons " " (cons (project step field) (cons ")" (nil String)))))) "" : String) binder index indexed value))),
+  axioms: [propext],
+  executable: true,
+  production: {effects: [allocation, overflow, recursion], targets: [rust-std]},
+  recursive_argument: steps
 }
 
 theorem{
@@ -210,6 +319,22 @@ theorem{
     ],
     scrutinee: entries
   },
+  axioms: [propext]
+}
+
+theorem{
+  name: aWriteThroughNoPlaceIsTheValue,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  statement: ((placeWrite (nil Step) whole binder index false value) = value),
+  proof: simplify{definitions: [placeWrite]},
+  axioms: [propext]
+}
+
+theorem{
+  name: aListWriteIsAWriteOfItsPositions,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  statement: ((listWrite whole binder index value) = (opening whole binder 0 (index + 1) (consed (write (positions binder (index + 1)) (mark index) value) (tailAt whole binder (index + 1))))),
+  proof: simplify{definitions: [listWrite]},
   axioms: [propext]
 }
 \end{semanticmodule}

@@ -126,3 +126,9 @@ Feature: engine
     Given a planted crate whose struct has setters taking &mut self and one taking &mut self that returns a value
     When the suite exercises UE-21
     Then each setter lifts as the function from the struct to its new value, a field write binds the record the model's threadedRecord gives with every other field projected from the value before it, the last write to a field wins, and the method that returns a value is a residue row naming its &mut self receiver
+
+  @UE-22 @build
+  Scenario: A write through a nested place threads it
+    Given a planted crate whose struct holds a tuple of a fixed array and a key, with setters writing an item of the tuple and a literal index of the array, and one writing an index it computes
+    When the suite exercises UE-22
+    Then each setter lifts, its index write rebuilds the array with the written element and every other kept, its item write is the model's record write of the tuple, and the setter with a computed index is a residue row naming the place

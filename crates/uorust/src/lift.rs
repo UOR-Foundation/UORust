@@ -290,35 +290,50 @@ fn named_in(types: &BTreeSet<Ty>) -> BTreeSet<String> {
         .collect()
 }
 
-/// `Threading::threadedRecord` of the model (`app/src/Threading.lex.tex`), as
+/// `Threading::placeWrite` of the model (`app/src/Threading.lex.tex`), as
 /// `lexlean production` exported it.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
-#[path = "../spec/threaded_record.rs"]
-mod threaded_record_model;
+#[path = "../spec/place_write.rs"]
+mod place_write_model;
 
-/// The record `whole` of type `ty` with `field` written to `value`, its
-/// `fields` in declaration order: `Threading::threadedRecord` of the model.
-fn threaded_record<'a>(
-    ty: &str,
+/// The value `whole` with the place `steps` (each a record type, its fields
+/// in declaration order and the one written) and, last, the literal `index`
+/// written to `value`: `Threading::placeWrite` of the model, its list
+/// binders named from `binder`.
+fn place_write(
+    steps: &[(String, Vec<String>, String)],
     whole: &str,
-    fields: impl DoubleEndedIterator<Item = &'a str>,
-    field: &str,
+    binder: &str,
+    index: Option<u64>,
     value: &str,
-) -> String {
-    use threaded_record_model::{run, List, Str};
-    let names = fields
+) -> Lift<String> {
+    use place_write_model::{run, Adt0, List, Str};
+    let list = |items: &[String]| {
+        items
+            .iter()
+            .rev()
+            .fold(List::nil(), |tail, s| List::cons(Str::lit(s), tail))
+    };
+    let path = steps
+        .iter()
         .rev()
-        .fold(List::nil(), |tail, f| List::cons(Str::lit(f), tail));
-    run(
-        Str::lit(ty),
+        .fold(List::nil(), |tail, (ty, fields, field)| {
+            List::cons(Adt0::C0(Str::lit(ty), list(fields), Str::lit(field)), tail)
+        });
+    let outside = || Residue::Form("a write to a place outside the lift".to_string());
+    let written = run(
+        path,
         Str::lit(whole),
-        names,
-        Str::lit(field),
+        Str::lit(binder),
+        index.unwrap_or(0),
+        index.is_some(),
         Str::lit(value),
     )
-    .text()
-    .to_string()
+    .map_err(|_| outside())?;
+    Some(written.text().to_string())
+        .filter(|w| !w.is_empty())
+        .ok_or_else(outside)
 }
 
 /// A struct value from its fields in declaration order: a record, or the
@@ -7995,6 +8010,45 @@ fn returned(b: &rs::Block) -> Option<&rs::RustExpr> {
 
 /// The local a statement updates in place, and how: `x = e`, `x += e` on a
 /// string, `x.push(e)` on a list or string, `x.push_str(e)`.
+/// A step of a place a write goes through.
+enum Place {
+    /// A named field of a struct.
+    Field(String),
+    /// An item of a tuple.
+    Item(usize),
+    /// An index written as an integer literal.
+    Index(u64),
+    /// An index the lift does not read as a literal.
+    Computed,
+}
+
+/// The local a write's place starts from and its steps, outermost first:
+/// `x.f.0[2]` is `x` and field `f`, item 0, index 2; `None` for any other
+/// expression.
+fn place(e: &rs::RustExpr) -> Option<(String, Vec<Place>)> {
+    let (base, step) = match e {
+        rs::RustExpr::Path(p) => return Some((p.get_ident()?.clone(), Vec::new())),
+        rs::RustExpr::Paren(inner) => return place(inner),
+        rs::RustExpr::Field(f) => (
+            &f.base,
+            match &f.member {
+                rs::Member::Named(n) => Place::Field(n.clone()),
+                rs::Member::Unnamed(i) => Place::Item(usize::try_from(*i).ok()?),
+            },
+        ),
+        rs::RustExpr::Index(ix) => match &*ix.index {
+            rs::RustExpr::Lit(rs::Lit::Int { value: Some(k), .. }) => {
+                (&ix.expr, Place::Index(u64::try_from(*k).ok()?))
+            }
+            _ => (&ix.expr, Place::Computed),
+        },
+        _ => return None,
+    };
+    let (root, mut steps) = place(base)?;
+    steps.push(step);
+    Some((root, steps))
+}
+
 fn update_target(e: &rs::RustExpr) -> Option<String> {
     let ident = |e: &rs::RustExpr| match e {
         rs::RustExpr::Path(p) => p.get_ident().cloned(),
@@ -8002,10 +8056,7 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
     };
     match e {
         // `x.f = v`: the structure `x` with its field `f` replaced.
-        rs::RustExpr::Assign(a) => match &*a.left {
-            rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
-            left => ident(left),
-        },
+        rs::RustExpr::Assign(a) => place(&a.left).map(|(root, _)| root),
         // `*m.entry(k).or_default() += v` and `m.entry(k).or_default().push(v)`
         // update the map.
         rs::RustExpr::Binary(b) if b.op == rs::BinOp::AddAssign => match &*b.left {
@@ -8113,8 +8164,9 @@ fn updated(
                 .collect();
             Ok((struct_value(name, &parts, &env.types), acc))
         }
+        // `x.f = v` of a boxed struct: its constructor with the field replaced.
         (rs::RustExpr::Assign(a), Ty::Named(name))
-            if matches!(&*a.left, rs::RustExpr::Field(_)) =>
+            if env.types.boxed(name) && matches!(&*a.left, rs::RustExpr::Field(_)) =>
         {
             let rs::RustExpr::Field(f) = &*a.left else {
                 return Err(Residue::Form("an update outside the lift".to_string()));
@@ -8130,22 +8182,55 @@ fn updated(
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
             let (v, acc) = value_of(&a.right, fty, acc)?;
-            if env.types.boxed(name) {
-                let parts: Vec<(&String, String)> = fields
-                    .iter()
-                    .map(|(field, _)| match *field == target {
-                        true => (field, v.clone()),
-                        false => (
-                            field,
-                            format!("({} {current})", Types::accessor(name, field)),
-                        ),
-                    })
-                    .collect();
-                return Ok((struct_value(name, &parts, &env.types), acc));
+            let parts: Vec<(&String, String)> = fields
+                .iter()
+                .map(|(field, _)| match *field == target {
+                    true => (field, v.clone()),
+                    false => (
+                        field,
+                        format!("({} {current})", Types::accessor(name, field)),
+                    ),
+                })
+                .collect();
+            Ok((struct_value(name, &parts, &env.types), acc))
+        }
+        // `x.f.0[k] = v`: a write through fields, tuple items and a last
+        // literal index, by `Threading::placeWrite` of the model.
+        (rs::RustExpr::Assign(a), _) if place(&a.left).is_some_and(|(_, s)| !s.is_empty()) => {
+            let Some((_, path)) = place(&a.left) else {
+                return Err(Residue::Form("an update outside the lift".to_string()));
+            };
+            let outside = || Residue::Form("a write to a place outside the lift".to_string());
+            let mut steps: Vec<(String, Vec<String>, String)> = Vec::new();
+            let (mut at, mut index) = (ty.clone(), None);
+            for (n, step) in path.iter().enumerate() {
+                at = match (step, &at) {
+                    (Place::Field(member), Ty::Named(name)) if !env.types.boxed(name) => {
+                        let fields = env.types.structs.get(name).ok_or_else(outside)?;
+                        let target = local_name(member);
+                        let (_, fty) = fields
+                            .iter()
+                            .find(|(f, _)| *f == target)
+                            .ok_or_else(outside)?;
+                        let names = fields.iter().map(|(f, _)| f.clone()).collect();
+                        steps.push((name.clone(), names, target));
+                        fty.clone()
+                    }
+                    (Place::Item(i), Ty::Tuple(items)) if *i < items.len() => {
+                        let names = (0..items.len()).map(|k| format!("item{k}")).collect();
+                        steps.push((at.render(), names, format!("item{i}")));
+                        items[*i].clone()
+                    }
+                    (Place::Index(k), Ty::List(elem)) if n + 1 == path.len() => {
+                        index = Some(*k);
+                        (**elem).clone()
+                    }
+                    _ => return Err(outside()),
+                };
             }
-            // A record: the one `Threading::threadedRecord` of the model gives.
-            let names = fields.iter().map(|(f, _)| f.as_str());
-            Ok((threaded_record(name, current, names, &target, &v), acc))
+            let (v, acc) = value_of(&a.right, &at, acc)?;
+            let (binder, acc) = ctx.fresh(env, acc, "written");
+            Ok((place_write(&steps, current, &binder, index, &v)?, acc))
         }
         (rs::RustExpr::Assign(a), _) => value_of(&a.right, ty, acc),
         // `xs.extend(o)` of an option: the one value it holds, if any.

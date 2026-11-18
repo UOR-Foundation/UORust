@@ -857,142 +857,279 @@ pub fn format_int(p0: i64) -> Str {
 
 #[derive(Clone)]
 pub enum Adt0 {
+    C0(Str, List<Str>, Str),
+}
+
+#[derive(Clone)]
+pub enum Adt1 {
     C0(Str, Str),
 }
 
-pub fn f0(v0: Str, v1: Str, v2: List<Str>, v3: Str, v4: Str) -> Str {
-    let m1 = f1(f2(v1.clone(), v2.clone()), v3.clone());
-    if m1 {
-        let a2 = List::cons(Str::lit("(record "), List::cons(v0, List::cons(Str::lit(" {"), List::cons(f3(f4(f2(v1, v2), v3, v4)), List::cons(Str::lit("})"), List::<Str>::nil())))));
-        let a3 = Str::lit("");
-        join(a2, a3)
+pub fn f0(v0: List<Adt0>, v1: Str, v2: Str, v3: u64, v4: bool, v5: Str) -> R<Str> {
+    let m1 = v0;
+    match m1.uncons() {
+        None => {
+            let m2 = v4;
+            if m2 {
+                f1(v1, v2, v3, v5)
+            } else {
+                Ok(v5)
+            }
+        }
+        Some((v6, v7)) => {
+            Ok(f2(match v6.clone() {
+                Adt0::C0(h3, _, _) => {
+                    h3
+                }
+            }, v1.clone(), match v6.clone() {
+                Adt0::C0(_, h4, _) => {
+                    h4
+                }
+            }, match v6.clone() {
+                Adt0::C0(_, _, h5) => {
+                    h5
+                }
+            }, f0(v7, {
+                let a7 = List::cons(Str::lit("(project "), List::cons(v1, List::cons(Str::lit(" "), List::cons(match v6 {
+                    Adt0::C0(_, _, h6) => {
+                        h6
+                    }
+                }, List::cons(Str::lit(")"), List::<Str>::nil())))));
+                let a8 = Str::lit("");
+                join(a7, a8)
+            }, v2, v3, v4, v5)?))
+        }
+    }
+}
+
+pub fn f1(v0: Str, v1: Str, v2: u64, v3: Str) -> R<Str> {
+    f3(v0.clone(), v1.clone(), 0u64, {
+        let a9 = v2;
+        let a10 = 1u64;
+        nat_add(a9, a10)?
+    }, f4(f5(f6(v1.clone(), {
+        let a11 = v2;
+        let a12 = 1u64;
+        nat_add(a11, a12)?
+    }), f7(v2), v3), f8(v0, v1, {
+        let a13 = v2;
+        let a14 = 1u64;
+        nat_add(a13, a14)?
+    })))
+}
+
+pub fn f2(v0: Str, v1: Str, v2: List<Str>, v3: Str, v4: Str) -> Str {
+    let m15 = f9(f10(v1.clone(), v2.clone()), v3.clone());
+    if m15 {
+        let a16 = List::cons(Str::lit("(record "), List::cons(v0, List::cons(Str::lit(" {"), List::cons(f11(f5(f10(v1, v2), v3, v4)), List::cons(Str::lit("})"), List::<Str>::nil())))));
+        let a17 = Str::lit("");
+        join(a16, a17)
     } else {
         Str::lit("")
     }
 }
 
-pub fn f1(v0: List<Adt0>, v1: Str) -> bool {
-    let m4 = v0;
-    match m4.uncons() {
+pub fn f3(v0: Str, v1: Str, v2: u64, v3: u64, v4: Str) -> R<Str> {
+    let m18 = v3;
+    if m18 == 0 {
+        Ok(v4)
+    } else {
+        let v5 = m18 - 1;
+        let a23 = List::cons(Str::lit("(match "), List::cons(f8(v0.clone(), v1.clone(), v2), List::cons(Str::lit(" | List.nil => "), List::cons(v0.clone(), List::cons(Str::lit(" | List.cons "), List::cons(f12(v1.clone(), v2), List::cons(Str::lit(" "), List::cons(f8(v0.clone(), v1.clone(), {
+            let a19 = v2;
+            let a20 = 1u64;
+            nat_add(a19, a20)?
+        }), List::cons(Str::lit(" => "), List::cons(f3(v0, v1, {
+            let a21 = v2;
+            let a22 = 1u64;
+            nat_add(a21, a22)?
+        }, v5, v4)?, List::cons(Str::lit(")"), List::<Str>::nil())))))))))));
+        let a24 = Str::lit("");
+        Ok(join(a23, a24))
+    }
+}
+
+pub fn f4(v0: List<Adt1>, v1: Str) -> Str {
+    let m25 = v0;
+    match m25.uncons() {
+        None => {
+            v1
+        }
+        Some((v2, v3)) => {
+            let a27 = List::cons(Str::lit("(cons "), List::cons(match v2 {
+                Adt1::C0(_, h26) => {
+                    h26
+                }
+            }, List::cons(Str::lit(" "), List::cons(f4(v3, v1), List::cons(Str::lit(")"), List::<Str>::nil())))));
+            let a28 = Str::lit("");
+            join(a27, a28)
+        }
+    }
+}
+
+pub fn f5(v0: List<Adt1>, v1: Str, v2: Str) -> List<Adt1> {
+    let m29 = v0;
+    match m29.uncons() {
+        None => {
+            List::<Adt1>::nil()
+        }
+        Some((v3, v4)) => {
+            List::cons(Adt1::C0(match v3.clone() {
+                Adt1::C0(h30, _) => {
+                    h30
+                }
+            }, f13({
+                let a32 = match v3.clone() {
+                    Adt1::C0(h31, _) => {
+                        h31
+                    }
+                };
+                let a33 = v1.clone();
+                equal(a32, a33)
+            }, v2.clone(), match v3 {
+                Adt1::C0(_, h34) => {
+                    h34
+                }
+            })), f5(v4, v1, v2))
+        }
+    }
+}
+
+pub fn f6(v0: Str, v1: u64) -> List<Adt1> {
+    let m35 = v1;
+    if m35 == 0 {
+        List::<Adt1>::nil()
+    } else {
+        let v2 = m35 - 1;
+        let a36 = f6(v0.clone(), v2);
+        let a37 = List::cons(Adt1::C0(f7(v2), f12(v0, v2)), List::<Adt1>::nil());
+        append_list(a36, a37)
+    }
+}
+
+pub fn f7(v0: u64) -> Str {
+    let m38 = v0;
+    if m38 == 0 {
+        Str::lit("")
+    } else {
+        let v1 = m38 - 1;
+        let a39 = List::cons(Str::lit("i"), List::cons(f7(v1), List::<Str>::nil()));
+        let a40 = Str::lit("");
+        join(a39, a40)
+    }
+}
+
+pub fn f8(v0: Str, v1: Str, v2: u64) -> Str {
+    let m41 = v2;
+    if m41 == 0 {
+        v0
+    } else {
+        let a42 = List::cons(v1, List::cons(Str::lit("Tail"), List::cons(f7(v2), List::<Str>::nil())));
+        let a43 = Str::lit("");
+        join(a42, a43)
+    }
+}
+
+pub fn f9(v0: List<Adt1>, v1: Str) -> bool {
+    let m44 = v0;
+    match m44.uncons() {
         None => {
             false
         }
         Some((v2, v3)) => {
-            f5({
-                let a6 = match v2 {
-                    Adt0::C0(h5, _) => {
-                        h5
+            f14({
+                let a46 = match v2 {
+                    Adt1::C0(h45, _) => {
+                        h45
                     }
                 };
-                let a7 = v1.clone();
-                equal(a6, a7)
-            }, f1(v3, v1))
+                let a47 = v1.clone();
+                equal(a46, a47)
+            }, f9(v3, v1))
         }
     }
 }
 
-pub fn f2(v0: Str, v1: List<Str>) -> List<Adt0> {
-    let m8 = v1;
-    match m8.uncons() {
+pub fn f10(v0: Str, v1: List<Str>) -> List<Adt1> {
+    let m48 = v1;
+    match m48.uncons() {
         None => {
-            List::<Adt0>::nil()
+            List::<Adt1>::nil()
         }
         Some((v2, v3)) => {
-            List::cons(Adt0::C0(v2.clone(), {
-                let a9 = List::cons(Str::lit("(project "), List::cons(v0.clone(), List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil())))));
-                let a10 = Str::lit("");
-                join(a9, a10)
-            }), f2(v0, v3))
+            List::cons(Adt1::C0(v2.clone(), {
+                let a49 = List::cons(Str::lit("(project "), List::cons(v0.clone(), List::cons(Str::lit(" "), List::cons(v2, List::cons(Str::lit(")"), List::<Str>::nil())))));
+                let a50 = Str::lit("");
+                join(a49, a50)
+            }), f10(v0, v3))
         }
     }
 }
 
-pub fn f3(v0: List<Adt0>) -> Str {
-    let m11 = v0;
-    match m11.uncons() {
+pub fn f11(v0: List<Adt1>) -> Str {
+    let m51 = v0;
+    match m51.uncons() {
         None => {
             Str::lit("")
         }
         Some((v1, v2)) => {
-            let m12 = v2.clone();
-            match m12.uncons() {
+            let m52 = v2.clone();
+            match m52.uncons() {
                 None => {
-                    let a15 = List::cons(match v1.clone() {
-                        Adt0::C0(h13, _) => {
-                            h13
+                    let a55 = List::cons(match v1.clone() {
+                        Adt1::C0(h53, _) => {
+                            h53
                         }
                     }, List::cons(Str::lit(" := "), List::cons(match v1 {
-                        Adt0::C0(_, h14) => {
-                            h14
+                        Adt1::C0(_, h54) => {
+                            h54
                         }
                     }, List::<Str>::nil())));
-                    let a16 = Str::lit("");
-                    join(a15, a16)
+                    let a56 = Str::lit("");
+                    join(a55, a56)
                 }
                 Some((_, _)) => {
-                    let a19 = List::cons(match v1.clone() {
-                        Adt0::C0(h17, _) => {
-                            h17
+                    let a59 = List::cons(match v1.clone() {
+                        Adt1::C0(h57, _) => {
+                            h57
                         }
                     }, List::cons(Str::lit(" := "), List::cons(match v1 {
-                        Adt0::C0(_, h18) => {
-                            h18
+                        Adt1::C0(_, h58) => {
+                            h58
                         }
-                    }, List::cons(Str::lit(", "), List::cons(f3(v2), List::<Str>::nil())))));
-                    let a20 = Str::lit("");
-                    join(a19, a20)
+                    }, List::cons(Str::lit(", "), List::cons(f11(v2), List::<Str>::nil())))));
+                    let a60 = Str::lit("");
+                    join(a59, a60)
                 }
             }
         }
     }
 }
 
-pub fn f4(v0: List<Adt0>, v1: Str, v2: Str) -> List<Adt0> {
-    let m21 = v0;
-    match m21.uncons() {
-        None => {
-            List::<Adt0>::nil()
-        }
-        Some((v3, v4)) => {
-            List::cons(Adt0::C0(match v3.clone() {
-                Adt0::C0(h22, _) => {
-                    h22
-                }
-            }, f6({
-                let a24 = match v3.clone() {
-                    Adt0::C0(h23, _) => {
-                        h23
-                    }
-                };
-                let a25 = v1.clone();
-                equal(a24, a25)
-            }, v2.clone(), match v3 {
-                Adt0::C0(_, h26) => {
-                    h26
-                }
-            })), f4(v4, v1, v2))
-        }
-    }
+pub fn f12(v0: Str, v1: u64) -> Str {
+    let a61 = List::cons(v0, List::cons(Str::lit("Head"), List::cons(f7(v1), List::<Str>::nil())));
+    let a62 = Str::lit("");
+    join(a61, a62)
 }
 
-pub fn f5(v0: bool, v1: bool) -> bool {
-    let m27 = v0;
-    if m27 {
-        true
-    } else {
-        v1
-    }
-}
-
-pub fn f6(v0: bool, v1: Str, v2: Str) -> Str {
-    let m28 = v0;
-    if m28 {
+pub fn f13(v0: bool, v1: Str, v2: Str) -> Str {
+    let m63 = v0;
+    if m63 {
         v1
     } else {
         v2
     }
 }
 
-pub fn run(p0: Str, p1: Str, p2: List<Str>, p3: Str, p4: Str) -> Str {
-    f0(p0, p1, p2, p3, p4)
+pub fn f14(v0: bool, v1: bool) -> bool {
+    let m64 = v0;
+    if m64 {
+        true
+    } else {
+        v1
+    }
+}
+
+pub fn run(p0: List<Adt0>, p1: Str, p2: Str, p3: u64, p4: bool, p5: Str) -> R<Str> {
+    f0(p0, p1, p2, p3, p4, p5)
 }

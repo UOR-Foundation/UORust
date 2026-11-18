@@ -2026,3 +2026,48 @@ fn a_method_writing_its_struct_threads_it_ue_21() {
     let detail = residue_detail(&files, "mint::Mint::take").expect("take is a residue row");
     assert!(detail.contains("takes &mut self of"), "{detail}");
 }
+
+#[test]
+fn a_write_through_a_nested_place_threads_it_ue_22() {
+    let planted = scratch(
+        "ue22-places",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"places\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "/// An optional value: a tag and the value.\npub type COption<T> = ([u8; 4], T);\n\n\
+                 /// An account.\npub struct Account {\n    /// Its mint.\n    pub mint: [u8; 32],\n    \
+                 /// Its delegate.\n    pub delegate: COption<[u8; 32]>,\n    \
+                 /// Its flags.\n    pub flags: [u8; 4],\n}\n\nimpl Account {\n    \
+                 /// Clears the delegate.\n    pub fn clear_delegate(&mut self) {\n        \
+                 self.delegate.0[0] = 0;\n    }\n\n    /// Sets the delegate.\n    \
+                 pub fn set_delegate(&mut self, delegate: &[u8; 32]) {\n        \
+                 self.delegate.0[0] = 1;\n        self.delegate.1 = *delegate;\n    }\n\n    \
+                 /// Sets a flag it computes.\n    pub fn set_flag(&mut self, at: usize) {\n        \
+                 self.flags[at] = 1;\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "places");
+    let lifted = lifted_functions(&files);
+    for setter in [
+        "places::Account::clear_delegate",
+        "places::Account::set_delegate",
+    ] {
+        assert!(
+            lifted.iter().any(|f| f == setter),
+            "{setter} lifts: {lifted:?}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    // The index write keeps the tail and writes the head; the item write
+    // projects the other item from the tuple before the write.
+    assert!(behavior.contains("=> (cons 0 "), "{behavior}");
+    assert!(behavior.contains("=> (cons 1 "), "{behavior}");
+    assert!(behavior.contains("item1 := delegate"), "{behavior}");
+    let detail = residue_detail(&files, "places::Account::set_flag").expect("set_flag is residue");
+    assert!(detail.contains("place"), "{detail}");
+}
