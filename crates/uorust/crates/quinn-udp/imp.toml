@@ -1,0 +1,188 @@
+[[fn]]
+path = "quinn-udp::decode_recv"
+kappa = "a2d918ba6e67ed0f1336c249e4e7684dfed9322d37c5a281cbe4e1707407a582"
+at = "EcnCodepoint=u32, M=u32, RecvMeta=u32"
+embedded = "ac36991e10da788fd57206977fa083bb90ab7e519abaf1f19249678f46ecc426"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::decode_socket_addr"
+kappa = "7be469a8b07e437a76e8b4d26408b21c12995bb20f7c2c454b5aae8a42ca4157"
+embedded = "0076124797caca21d94c8d589f72b48d1850ed6968b880b5107ac1a406d09c05"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn-udp::imp::<impl at src/unix.rs:31:10: 31:15>::fmt"
+kappa = "356bc9086270c363cf193b5b18c26a704e4d4a12e5db6063e960afe8987182aa"
+embedded = "dea7d2e774867e5dcc0a9013e2297cf4dc36766e2f7ed61722922e969d56f2b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-udp::imp::ControlMetadata::decode"
+kappa = "a8c54e1857af219bb94e2a55b9ce31af203b3eb6552bf5bc8c170ec6582de500"
+embedded = "0071eaf9f14ea10fb46b195900077eb9617c35ef49e2e6e7aca9c28bc530d0fe"
+status = "residue"
+cause = "mir::Ty: ControlMetadata"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::enable_transport_errors"
+kappa = "3533bcf878daec2682aeb1fe6a0618f35d7429962e13f89cb735c2c7949d035d"
+embedded = "7cf2c65e4f1b72dfa1757a017109ba9fdde7dff62bbd86535b23628262f82a9b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::gro_segments"
+kappa = "569dc5dcbbff9e3f9b765f8db2f26098dfc5ce6e026d566d2afed27bc55c9450"
+embedded = "cdfd90b4e51bb3c02bb09f41ea1f60d2b19ce24b6b8ef2d796de58e74e370d33"
+status = "residue"
+cause = "mir::Ty: UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::max_gso_segments"
+kappa = "28ea53e0b81158dbc3860429f984fff20ffb6eedd4a96ff411a676c889ebcdc5"
+embedded = "b6e8a40b8ecd7daca55bbc25e898d8228ebdc54b0f52fef3e5e35f5e7effd55a"
+status = "residue"
+cause = "mir::Ty: UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::may_fragment"
+kappa = "a55069ab945d8be9b7d99257c59a7fa13ff0462ff6c5397c5ca9ece0864c8f4a"
+embedded = "7524b79c4d49ac49a268cc65edaa261d36e4312e795bd38839603301bfc37640"
+status = "residue"
+cause = "mir::Ty: UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::new"
+kappa = "4ca4026736f73d9a9301b2fe30e38d776af24ee13f88840a933d8c909d29a235"
+embedded = "1ce9b9f8cb28ce5f97504514b43781861ac48fab8c1e7fdfcc4575fe8ec4cc3e"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: imp::UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::recv"
+kappa = "778b1e1ba0a05122cfc118476a0e1aa020bdb88ac1d7404579550534aeb540cd"
+at = "RecvMeta=u32"
+embedded = "45b4ea74dacacca0dfcbb62cad12c181803f552ae067bf3235c1f54d19e1b126"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::recv_buffer_size"
+kappa = "7a39dd491a56af03b57beafe0863f94961367aff43650428b403963c69ca7bfe"
+embedded = "f9ee6e5df9174345082addb7eb17aebb72d9dc9b0cde0144e55364f6897fc80b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::recv_transport_error"
+kappa = "79ee2d66147f1fe999d1262e0ac7a3ac3a0eb057800a05d8e71fd3408553e152"
+at = "TransportError=u32"
+embedded = "fb501f1d80a3a57ea0f334bbaa2059869b4bf9e550d4f6f783e0e87ab659488e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::send"
+kappa = "e80783a7664be5605344615f80be1023468a83d49463004113882cda9f9f4b66"
+embedded = "9b25a579e2a6d0ac9cc1ad191ce80e220809a2cdaf241854747c26413522b9af"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::send_buffer_size"
+kappa = "0870296039e801923849f03b1fb4d2b3eafde05bbcb7ce4a11eb8a2a45f95213"
+embedded = "c7cf88a327f2425cb374568837cd8ea6a56cc5c92c76b89443c7ac7607263994"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::sendmsg_einval"
+kappa = "9a2d1dee17969b8e6ed0e4156226bea85d0bbc7148c4f53f9ca0c16e897d3bff"
+embedded = "6acdf67056dd53603e6d32d665953ee43e53a3d1c82714c8938c2355029dce2f"
+status = "residue"
+cause = "mir::Ty: UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::set_recv_buffer_size"
+kappa = "a5d6053ccc8c33aa3c1a4e420dd67115f0b89541de268fa6ba72efd164f479c0"
+embedded = "a9e0603131676a2de76743a4dafaf94774232ad3a5d20445adb94ba7edf2a793"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::set_send_buffer_size"
+kappa = "be05e0b41a737597ce9d34cd51d5b7ccb757155c2f93194b3f10e23562fecb8c"
+embedded = "f2f9a300688235026daf977fb56bb4df4579751c4c5912ebdb11e2a6d6281c6d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::set_sendmsg_einval"
+kappa = "9c26fd8feeebeb636f3dc2b626e12cad62b61fc22458e038aecd143afe8eccdd"
+embedded = "c06a56f7310fdc40700c4985442f4eed099218921bf65b52c371b2f6159e7416"
+status = "residue"
+cause = "mir::Ty: UdpSocketState"
+
+[[fn]]
+path = "quinn-udp::imp::UdpSocketState::try_send"
+kappa = "0e098920642b96f3a0c26489972b0765253ba843bd3c8be62176f3cc5e6aed9c"
+embedded = "f8540ab65a28e9a739b1bf947d0d59e68bea4817edb57bd3a7defb5afe41e93c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::send"
+kappa = "dde797b66f0b556d4d109a33d8d6be53499b168f3cd8cbb7e444336cad84a1d5"
+embedded = "f5a13e7029ec2a27abda30986bd64c1ff19ce7d00840a4a9d1ba5759b6ce7dc0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::imp::set_socket_option"
+kappa = "86a6d8058854d301bf2bab1899e8a492e23c66d90329c409bf27b8823d4193d2"
+embedded = "f99aa39e6352b4903f7309d4fc07592b20bf10bece661e2687d0e41901764d82"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::prepare_msg"
+kappa = "179b6c4c4743320a5a63186ed0e08c2f0c6bad65a814ecdafb24b1b317e9edd5"
+at = "EcnCodepoint=u32"
+embedded = "a593f57351be61327a1b2d1c7497cc29eccc09bdfe0ac1ef056d36edbd80a804"
+status = "residue"
+cause = "mir::Ty: Transmit<'_>"
+
+[[fn]]
+path = "quinn-udp::prepare_recv"
+kappa = "346a88a1c6594f64196cb458d54c718221aaa42ff15ef6d05ab8923db7d1a0ea"
+embedded = "9bb136e1c0be80c3c360ddf769d20be2d612e4fd464b9e72635e0a63ff5f59d3"
+status = "residue"
+cause = "mir::Ty: sockaddr_storage"
+
+[[fn]]
+path = "quinn-udp::recv_via_recvmmsg"
+kappa = "0ea8aec9a2a8a02fb1c57d2d877b6c4404af80f7d9894a73ee3eea8420dcd297"
+at = "RecvMeta=u32"
+embedded = "4b4391de688904cee673757fe1220a0568b4748f2e2b46f5ff72f42d007bb5d7"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::retry_if_interrupted"
+kappa = "2a6e1821fd3fbadc594cd30aeaf8eb47739061f9c07b4444ea06c299dbb392d7"
+embedded = "9d44cbaaebdc3c43564975f4d9aeaf1b297f594a4213ae979b8b2442d5148ab3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::set_socket_option_supported"
+kappa = "39d70d898386992889ebdcf0565efbcc37b4a968b96104908f9dbcfeb5e49550"
+embedded = "1ff454e391227fd055965dea547b3aeda6bfd2fd502e32d045e1e64790d2b481"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

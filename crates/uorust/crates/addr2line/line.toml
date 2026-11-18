@@ -1,0 +1,94 @@
+[[fn]]
+path = "addr2line::has_backward_slash_root"
+kappa = "6d7dd1249c559beeb7ad249add3e7257837cf3f884e3213f752f9c5bf318f096"
+embedded = "cf2dd3e04bc4bc2af4a1d41535591fef29eae25324aa8a79c75a80454998983b"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "addr2line::has_forward_slash_root"
+kappa = "263c32ea1ad198d33ebc8f0d9e62e0a67cc342826aaca020db4379d9999707e7"
+embedded = "7e1ac6f530d7602a605e342d7aa9d3b0f64ef26dc1b24461327e18d4e520c05e"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "addr2line::line::LazyLines::borrow"
+kappa = "6d4351e5de6c1e42a3aa4f82c97efc2ca572380ceead0dfe66c6156d0db5f1c7"
+at = "R=u32"
+embedded = "93306369ff346d301b0d765c1d9faaf809d37e0d2a161563340c66fb84f0e3f9"
+status = "residue"
+cause = "mir::Ty: line::Lines"
+
+[[fn]]
+path = "addr2line::line::LazyLines::new"
+kappa = "b06393085c3ce65920dc02d00fc9f769f0f518bb1fd14ee7c8bb2fec7b46cbce"
+embedded = "6debaf91680787a6a7ffb265ddb3f15e3d406499036673ecfb471c4e91b290a7"
+status = "residue"
+cause = "mir::Ty: line::LazyLines"
+
+[[fn]]
+path = "addr2line::line::LineLocationRangeIter::next"
+kappa = "6f754e5d4e981ed239c8b3a3e45d4526c1344c5e00b1caa072b90e6867e1f237"
+embedded = "bf25c6db67d8104d62735c1c3877842f5ce27113ec0fe71df9d4e2e1e31ce744"
+status = "residue"
+cause = "mir::Ty: frame::Location<'_>"
+
+[[fn]]
+path = "addr2line::line::Lines::file"
+kappa = "5b9eb6a29925ddeb6e9a004bc137b5ff31d18d90ef8eb7af5efa19c1286eab40"
+embedded = "95dd49102e56e1d8a270fa5ce230004a12c4ad1c89391a6dd1452a6db800e55c"
+status = "residue"
+cause = "mir::Ty: line::Lines"
+
+[[fn]]
+path = "addr2line::line::Lines::find_location"
+kappa = "0b644c998c2c49e85d3ee9d83ba98f550a682e2866300ff14ec94c93fcb946a3"
+embedded = "61e37b31d98f2214eaff28c96ddaf98f404792bf7599f3d122b7d7cec307ebc7"
+status = "residue"
+cause = "mir::Ty: frame::Location<'_>"
+
+[[fn]]
+path = "addr2line::line::Lines::find_location_range"
+kappa = "47a73763fc58a857be274b0787d69b264559ae9c7601438d2240d8066281e30e"
+embedded = "0e88bf313a20936e8b1218a5280fd9742bd572efdffd73bfb9dcdc8a59316269"
+status = "residue"
+cause = "mir::Ty: line::LineLocationRangeIter<'_>"
+
+[[fn]]
+path = "addr2line::line::Lines::parse"
+kappa = "cb54e2ab0ac2af43b8c384180a2e6ea90df24a8ba407a0a22b85da47ef0dc678"
+at = "R=u32"
+embedded = "307543b3e0c976fcfcba1b3dc5e4c82cf496527b707dd11e94cec320de8c2e7a"
+status = "residue"
+cause = "mir::Ty: line::Lines"
+
+[[fn]]
+path = "addr2line::line::Lines::ranges"
+kappa = "a313ac9fd01e29e3d6ed8a69d7db99ad4ff8d73d393a33bad7f43f1bf17ad394"
+embedded = "479d3b79d9b9572b0441a5fbb517d22efdeec2f99e5df7ce3fc3f55b402e048b"
+status = "residue"
+cause = "mir::Ty: line::LineSequence"
+
+[[fn]]
+path = "addr2line::line::Lines::row_location"
+kappa = "bcb070514e1689056fa5258606deb64a1e954b3f0dc05620a7f9194cfff14a5e"
+embedded = "78a0a2f29687e6d24f314d6fca1bc2a0cc258e1faa82c8ff4c9ffcb7f6dd82a3"
+status = "residue"
+cause = "mir::Ty: frame::Location<'_>"
+
+[[fn]]
+path = "addr2line::path_push"
+kappa = "8fad3aa690e5027ec91b7d72ac2e744767881b5e328110613663f8288c37137a"
+embedded = "8132ef69104d2b721bb2a5ecc7a31e5b4524d283f3b97e3f5f0fb033094bca24"
+status = "residue"
+cause = "mir::TerminatorKind::Call: line::has_forward_slash_root: addr2line's MIR stops at type outside the lift: core::ops::Range<usize>"
+
+[[fn]]
+path = "addr2line::render_file"
+kappa = "4287ca20be69df6080db3df0b08238506465c05d9ecd2c4a66bc1c0285edc697"
+at = "R=u32"
+embedded = "596776d848216b114e22d1be7d20cb2f9e9b382b3866d9f576c32d62365fcf67"
+status = "residue"
+cause = "mir::Ty: gimli::Error"
+

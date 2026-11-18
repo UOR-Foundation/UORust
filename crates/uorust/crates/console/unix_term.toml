@@ -1,0 +1,150 @@
+[[fn]]
+path = "console::c_result"
+kappa = "ec1c484b29e45873f5e0c6634d02fdae49e4cd83e176ceac5299646a274206b6"
+at = "F=u32"
+embedded = "a45aedc9290bee4f08f784d80cfebb2e69140a21baedde83ca06be30578dc06d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::key_from_utf8"
+kappa = "542dac49007de8b97f21f681f62cbe4810702e0aff3a908bce5164b731a78646"
+embedded = "2d8a733d46e02905ca8c975605a157c17a47bedcfc79ef0b1e87bf1f884c2f17"
+status = "residue"
+cause = "mir::Ty: kb::Key"
+
+[[fn]]
+path = "console::make_raw"
+kappa = "6dc4f164c54aa08833fdb1a930611cbcb8f93a39af085957a593056004fbbe76"
+embedded = "96d4fd6ec42c7606d75e65b685d1b63f33cd40640153cc6bc0ee9025c493e84b"
+status = "residue"
+cause = "mir::Ty: termios"
+
+[[fn]]
+path = "console::poll_fd"
+kappa = "7fb6f4085c21ce4d1fa3bc3adafa36ee74568512f3c5537327f00f32feef858c"
+embedded = "04472b5a6b95ffe780836a8e3dd19f743106963d8e94817a94771cf5813ba576"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::read_bytes"
+kappa = "00e23a78b48e1311ace3122350fa2bc16d8d655fde6f83e4687b40c4e82c64e3"
+embedded = "132854cf195484afbdb100bf107ba2188ed69f45389688f136ea6f39a912ab67"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::read_single_char"
+kappa = "c6e8af6ccb317cb2e9a99deafd284a260586f05bd9405e41d6de69bc2f08e0f2"
+embedded = "b76258ff2774bf30b137dbc4a8e481048baa965c9a32eeba165a71a70b9a3742"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::read_single_key_impl"
+kappa = "6b1cb0a71db82142ed6833d76ecbc935cdaa1c5807a8e6971a9a39bb2596770b"
+embedded = "a91123042e92281c921c9fbde8571ec38194d2055fa9ffa75e4d8fbcc0694870"
+status = "residue"
+cause = "mir::Ty: kb::Key"
+
+[[fn]]
+path = "console::select_or_poll_term_fd"
+kappa = "952f16b4cd1770ecec9e8e7533af01c36f8c29b270265c26468685db3981139b"
+embedded = "44b5534827ee2617654501bea0d642db1e14357b57b314ff75b101d7db9ea416"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::unix_term::Input::as_raw_fd"
+kappa = "ebb9c554d25a02592ac0fe4a26a998137fddac0ec6992afdcd01aae64b689445"
+embedded = "22ce392c981253229fc44dcc97ef5ab3ade883f57115af020cd972bbfe1e98e7"
+status = "residue"
+cause = "mir::Ty: File"
+
+[[fn]]
+path = "console::unix_term::Input::as_raw_fd#2"
+kappa = "c2befb1448ef0041d044dde469972847bab5cc22bde575f92acc17b7921ac1db"
+embedded = "0d897feaa75eec4697668316dbe346b96424f357b58ee0629fa2cb4ce34de0ad"
+status = "residue"
+cause = "mir::Ty: File"
+
+[[fn]]
+path = "console::unix_term::Input::buffered"
+kappa = "cc38d9971d2e6581a9d736d0f9f11efb6d15ec1c5939b307dd5d43091385c1c9"
+embedded = "d89060cfe084dcc8e1551e8a35e429dcb54058e9361d47453c8c093af3e515ad"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "console::unix_term::Input::read_line"
+kappa = "4716463737f3377a1ec9c1c341800ba1081a2bbdd392747c419761c51add2401"
+at = "T=u32"
+embedded = "c5b111c2464198d3816cddd02f9ce06b92ad43513f8dbc70ec82500a2ca9c784"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::unix_term::Input::unbuffered"
+kappa = "1ce774fecfdcbdd72667d1da3595a3d42cf4c632c4bef6efae8dd8ae5911e3c1"
+embedded = "8d2286547317ce0a473886199743683a3b51961e55abc308c8bf20a57789a1b7"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "console::unix_term::is_a_color_terminal"
+kappa = "650e335cffc720b4c7d77f9e193dac1fc8442ef436cdd50d6ab8f966aa1dac85"
+embedded = "948ef51432153607bf392d6d61288bc6a28a1119f003a09fad429ff61347fb36"
+status = "residue"
+cause = "mir::Ty: Term"
+
+[[fn]]
+path = "console::unix_term::is_a_terminal"
+kappa = "744820feefdd546971f8cad5cca723cb12ad35664e63a435c779f4ba13f2f0b4"
+embedded = "c683ec72c5ce30fa144258e3999ea86158ba060ddeda88b9a70d44ff131727cc"
+status = "residue"
+cause = "mir::Ty: impl AsRawFd"
+
+[[fn]]
+path = "console::unix_term::is_a_true_color_terminal"
+kappa = "ef0abcd48fcffc78212059f5e69cc189eba0f955d4fcfde8e27eb3d0826da3b8"
+embedded = "3ed3ea060acfa854f586a41ad2c7ea42d500a4269a7c864fa99b714fddbfaff7"
+status = "residue"
+cause = "mir::Ty: Term"
+
+[[fn]]
+path = "console::unix_term::read_secure"
+kappa = "eda39da889bbfb43a5c3e52d7cf30a357702fb9bcd64aaffca5c57ae97282ed1"
+embedded = "2a33f874853baef73cc884ef61cd1bce08b1d6439fffbbb9cc30f4791e0dbdd2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "console::unix_term::read_single_key"
+kappa = "913b8531c97d5d4af687fecd10a301dbe34f8270cee7abdcd295c9958ef34ef3"
+embedded = "85eb7e5b863b1941bc135c5061559b5ed99ee0413f06c5e3530405ea51343e59"
+status = "residue"
+cause = "mir::Ty: kb::Key"
+
+[[fn]]
+path = "console::unix_term::set_title"
+kappa = "26663f0e028e6cce07c10e737735ae35933dafeee335594804f66dd87d2e5aa4"
+at = "T=u32"
+embedded = "1bc7b41a82843f04ddceff296f02a3d842a0b4c51c8ce7cc0bbe07b311545c6a"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "console::unix_term::terminal_size"
+kappa = "372685f3c6e5faef8a450e3bec8ea38009c109b747c085e775995b81228d859c"
+embedded = "fc9788cd68268f28c2f2d20d677a3c3cdaa54ec1be40d64d2db4e82a2bc47772"
+status = "residue"
+cause = "mir::Ty: Term"
+
+[[fn]]
+path = "console::unix_term::wants_emoji"
+kappa = "950e40ac4f468906f4af3b63fe58d48773908c2023b2afd65a3543be7c1a44f3"
+embedded = "df6fbe646d6fdcc6e16b88cce9cb310745182d8b33c919ad101ba73bc948d46b"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1: &OnceLock<bool>}"
+

@@ -1,0 +1,70 @@
+[[fn]]
+path = "dashmap::map_in_place_2"
+kappa = "e70baa59d3ba71b4e495f316753c402c4cc9ca9a500368de574808210b5348e7"
+at = "F=u32, T=u32, U=u32"
+embedded = "f9ac15681c998b9997ffc792510fbbba41a5efa5424b9027fa87c4f211259d5e"
+status = "residue"
+cause = "mir::Ty: util::AbortOnPanic"
+
+[[fn]]
+path = "dashmap::ptr_size_bits"
+kappa = "13a7bbd9bfa21b1df1e44c946601d32131616f19de2b64fd83dbb6c884f833f4"
+embedded = "355835420a0ec599ecd12e5cfa23069161c8ae5f4bdc99067dc75e8a409aeb14"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "dashmap::util::AbortOnPanic::drop"
+kappa = "ed0f471378a475d9e612e0925472b946d352d1604d7c11b96696cb9149b9c590"
+embedded = "3c1d08f074518ddf2d448980253f560cfcee1b865e0a75981f4e313ad74c121a"
+status = "residue"
+cause = "mir::Ty: AbortOnPanic"
+
+[[fn]]
+path = "dashmap::util::SharedValue::as_ptr"
+kappa = "23d6c981df786f9c4676659998ce4c0bf3e72e53215a7b6500e5c984a4879ee6"
+at = "T=u32"
+embedded = "835bb72bb42d546c630136bd35b00925ce97dd35d0efe53966dc1b5cc9055966"
+status = "residue"
+cause = "mir::Ty: SharedValue<u32>"
+
+[[fn]]
+path = "dashmap::util::SharedValue::clone"
+kappa = "6fd871e2f8d73e4e6cf4ba275a008243e0870fb562024159534036f3a359d5f9"
+at = "T=u32"
+embedded = "c3766d9ab1ff58740376b2c545f97f712fed8b9037cc507bc690ee50a944cb96"
+status = "residue"
+cause = "mir::Ty: util::SharedValue<u32>"
+
+[[fn]]
+path = "dashmap::util::SharedValue::get"
+kappa = "4cbadc370c62f83ac00097194e6eab0d82a5754b8d58a0a1044beb2169dd5799"
+at = "T=u32"
+embedded = "667d122a5cffdf8921d37ad88027d0710d36505993c30429d0bbe6979077e382"
+status = "residue"
+cause = "mir::Ty: SharedValue<u32>"
+
+[[fn]]
+path = "dashmap::util::SharedValue::get_mut"
+kappa = "4fcc7dc53d138c051198fd6473d3b1d2fce47118208279723614ef8b3dcc5e56"
+at = "T=u32"
+embedded = "23b8620f78942ab440e0769de1e9bb70b5f5363dfb907fd8f0d34633b1671a54"
+status = "residue"
+cause = "mir::Ty: SharedValue<u32>"
+
+[[fn]]
+path = "dashmap::util::SharedValue::into_inner"
+kappa = "1eae35a19ddee8641eeace2430e593a8340837426ce2d750d4499859a8319d8f"
+at = "T=u32"
+embedded = "4292258bd8c11ff1b8bcedb32830c007b03de9f49ee5379b106164f6c7a13158"
+status = "residue"
+cause = "mir::Ty: SharedValue<u32>"
+
+[[fn]]
+path = "dashmap::util::SharedValue::new"
+kappa = "8b6796b84de0a48d1da9f30998048338a0099c22611db7460a669b9aeb5e87c6"
+at = "T=u32"
+embedded = "ac654eb72d4baffd0c1dd9dd88156754bc314efbe0a7be185925a01b286b4052"
+status = "residue"
+cause = "mir::Ty: util::SharedValue<u32>"
+

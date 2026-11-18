@@ -1,0 +1,116 @@
+# The pem register (written by `uorust crate pem@4.0.0`; do not edit): every body of
+# pem's MIR at pem 4.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 56
+translated = 3
+residue = 53
+
+[module.crate]
+bodies = 41
+translated = 3
+residue = 38
+
+[module.errors]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.parser]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 56
+embedded = 56
+evaluable = 56
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: errors::PemError"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Pem"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::read_until: pem's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HeadersIter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::Captures<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PemError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item encode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: EncodeConfig::new: pem's MIR stops at type outside the lift: LineEnding"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::split_once"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LineEnding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::CaptureMatches<'_>"
+bodies = 1

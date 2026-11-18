@@ -1,0 +1,38 @@
+# The num_enum register (written by `uorust crate num_enum@0.7.6`; do not edit): every body of
+# num_enum's MIR at num_enum 0.7.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 7
+translated = 0
+residue = 7
+
+[module.crate]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 7
+embedded = 7
+evaluable = 7
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: TryFromPrimitiveError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by UnsafeFromPrimitive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Enum"
+bodies = 1

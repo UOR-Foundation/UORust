@@ -1,0 +1,461 @@
+# The der register (written by `uorust crate der@0.8.3`; do not edit): every body of
+# der's MIR at der 0.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 778
+translated = 5
+residue = 773
+
+[module.asn1]
+bodies = 481
+translated = 1
+residue = 480
+
+[module.bytes]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.datetime]
+bodies = 27
+translated = 3
+residue = 24
+
+[module.decode]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.encode]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.encode_ref]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.encoding_rules]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.error]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.header]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.length]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.ord]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.reader]
+bodies = 44
+translated = 0
+residue = 44
+
+[module.referenced]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.string]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.tag]
+bodies = 65
+translated = 1
+residue = 64
+
+[module.writer]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 770
+embedded = 770
+evaluable = 770
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 154
+
+[[cause]]
+cause = "mir::Ty: length::Length"
+bodies = 91
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: tag::Tag"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: asn1::any::AnyRef<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: BitStringRef<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: asn1::bit_string::BitStringRef<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AnyRef<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: DateTime"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: OctetStringRef"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: StringRef"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: BytesRef"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: asn1::generalized_time::GeneralizedTime"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: header::Header"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: string::StringRef"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Length"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: TagNumber"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: asn1::utc_time::UtcTime"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: bytes::BytesRef"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: asn1::octet_string::OctetStringRef"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ia5_string::Ia5StringRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: printable_string::PrintableStringRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: teletex_string::TeletexStringRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: utf8_string::Utf8StringRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: videotex_string::VideotexStringRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IntRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SequenceRef"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: UintRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1::integer::int::IntRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1::integer::uint::UintRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1::utf8_string::Utf8StringRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Class"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EncodingRules"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UnusedBits"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::application::Application<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::context_specific::ContextSpecific<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::ia5_string::Ia5StringRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::printable_string::PrintableStringRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::private::Private<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::teletex_string::TeletexStringRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1::videotex_string::VideotexStringRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reader::slice::SliceReader<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tag::number::TagNumber"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: GeneralizedTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TagMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UtcTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::time::Duration"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoding_rules::EncodingRules"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: null::Null"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tag::class::Class"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Application<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ApplicationRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BitStringIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ContextSpecific<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GeneralStringRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Private<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PrivateRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SliceReader<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: asn1::null::Null"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: asn1::sequence::SequenceRef"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: context_specific::ContextSpecificRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encode_ref::EncodeValueRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tag::mode::TagMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: asn1::bit_string::unused_bits::UnusedBits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: asn1::general_string::GeneralStringRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::position::Position"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_highest_bit_set::{closure#0}: mir::TerminatorKind::Call: <&u8 as BitAnd>::bitand"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: referenced::owned_to_ref::{closure#0}: mir::Instantiation: u32 for a parameter bounded by OwnedToRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: referenced::ref_to_owned::{closure#0}: mir::Instantiation: u32 for a parameter bounded by RefToOwned"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Reader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as tag::FixedTag>::TAG"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: decode::decode: der's MIR stops at type outside the lift: <u32 as decode::DecodeValue<'_>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodeRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodeValueRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SliceWriter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1::application::ApplicationRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1::bit_string::BitStringIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1::context_specific::ContextSpecificRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1::private::PrivateRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::position::Resumption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::slice::SliceWriter<'_>"
+bodies = 1

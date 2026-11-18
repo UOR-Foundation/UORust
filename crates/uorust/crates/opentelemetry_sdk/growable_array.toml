@@ -1,0 +1,112 @@
+[[fn]]
+path = "opentelemetry_sdk::growable_array::<impl at src/growable_array.rs:124:10: 124:15>::fmt"
+kappa = "0e7dcccc336c13f06a27def027d32091333aee7cb04e77d0c3540a6f24aed6a9"
+at = "INLINE_CAPACITY=u32, T=u32"
+embedded = "c4dc76a90cb08020ef8fa9effdeb97a2d70c6ec8232debd419065b5ff85a01a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::<impl at src/growable_array.rs:6:10: 6:15>::fmt"
+kappa = "b97c01096de6c6e714663f35be9c246621b42ec94488131475227c4a2a944d41"
+at = "MAX_INLINE_CAPACITY=#_MAX_INLINE_CAPACITY, T=u32"
+embedded = "9d45d1df6d551a3e1feb49f9f7ced466fc67d8717aa6f77c8429feb284a6df88"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::<impl at src/growable_array.rs:6:17: 6:22>::clone"
+kappa = "36e330e1154dc8f4fe0cc97ecd9264c603ee175d1ea6934f5234d29e81825792"
+at = "INITIAL_OVERFLOW_CAPACITY=u32, MAX_INLINE_CAPACITY=#_MAX_INLINE_CAPACITY, T=u32"
+embedded = "1062309a1d8ea8d26f896caa5e471f4eaaa18d14ef49e3fcd9bf25a9478ecbb8"
+status = "residue"
+cause = "mir::Ty: growable_array::GrowableArray<u32, #_MAX_INLINE_CAPACITY, u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::<impl at src/growable_array.rs:6:24: 6:33>::eq"
+kappa = "ae7e5ca5c0c9314c024eeebbe5b1b5d4ef9eaaee762b3dbde2e27a1233b1e32a"
+at = "MAX_INLINE_CAPACITY=#_MAX_INLINE_CAPACITY, T=u32"
+embedded = "72b3a600d24d934023bba5ffb09eb37549e1fbb0093993868124cce5b48b3f28"
+status = "residue"
+cause = "mir::Ty: INITIAL_OVERFLOW_CAPACITY"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::default"
+kappa = "9e1b1453afcd57cd771c83820cae2b3fe514c00423bea3685531d51636ca0a16"
+at = "INITIAL_OVERFLOW_CAPACITY=u32, MAX_INLINE_CAPACITY=#usize_MAX_INLINE_CAPACITY, T=u32"
+embedded = "e23ab7ff5d38e8a8a4df23a2352fe88024941058d2ec9aea2c76c8d4666720ea"
+status = "residue"
+cause = "mir::Ty: growable_array::GrowableArray<u32, #usize_MAX_INLINE_CAPACITY, u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::get"
+kappa = "320e31ffb0db2a6bbe0f6d20f48ec7574be52ecbd57d0683780156e3db64f41a"
+at = "T=u32"
+embedded = "a781df1865719430cfac6689d488ea55f5cf6560788d6401e3c5f060010843be"
+status = "residue"
+cause = "mir::Ty: MAX_INLINE_CAPACITY"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::into_iter"
+kappa = "c7ab8a331ec6e28723d63fea9588e0dbeec6b47ac7b2b6052fd56ace4971a083"
+at = "INLINE_CAPACITY=u32, T=u32"
+embedded = "6212308fd834778359b3d3e858c447fcfdfb264a6b3ae81cbb15dfcfe766259d"
+status = "residue"
+cause = "mir::Ty: growable_array::GrowableArrayIntoIter<u32, u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::iter"
+kappa = "e595f4334cab6b749e19819bc98e913299fbafea653ea712dadf17147b26cf4f"
+at = "MAX_INLINE_CAPACITY=#usize_MAX_INLINE_CAPACITY, T=u32"
+embedded = "e36a25eced453839ae3d9ba52218d3589dd7c33041bd9e860f9af595ef64864c"
+status = "residue"
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::len"
+kappa = "6581c014b0e08de475a25784ffcf26f1bfeb3397b57306b04f1af860cdb253be"
+at = "T=u32"
+embedded = "20b279898ce9a1b8aacf6990b8f3b8cabc60f8215d6c9b2dfb1b670166821cca"
+status = "residue"
+cause = "mir::Ty: MAX_INLINE_CAPACITY"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::new"
+kappa = "57166a981ef01634d46ad1ca9488d0189fc075f747f00c0131c80e12d933fcc3"
+at = "INITIAL_OVERFLOW_CAPACITY=u32, MAX_INLINE_CAPACITY=u32, T=u32"
+embedded = "89c7c7440af931099a54bdf3e3a2eb93bccc5ba5a0d40976d92ad1b4a66dc87f"
+status = "residue"
+cause = "mir::Ty: growable_array::GrowableArray<u32, u32, u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArray::push"
+kappa = "d3ba236c188d5d42e38b7adb208bd68584a14fdc670251b293cbec0a8987d8c6"
+at = "T=u32"
+embedded = "81f8af65c1d8bbfca3c39fbf4dbf89f6e953cc67280bdd4b5faf696a307f29ea"
+status = "residue"
+cause = "mir::Ty: MAX_INLINE_CAPACITY"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArrayIntoIter::get_iterator"
+kappa = "2718372080caa56330663f7b8dcc43d4be0a136815729ac2b10defd1285f6fa7"
+at = "INLINE_CAPACITY=#usize_INLINE_CAPACITY, T=u32"
+embedded = "caf0da66028218ecbe3818699affffd140eb277426fd7f5334a21f644bd5c05f"
+status = "residue"
+cause = "mir::Ty: std::array::IntoIter<u32, #usize_INLINE_CAPACITY>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArrayIntoIter::new"
+kappa = "30f9ad6be43cf4b3da809c957add304cd422a9605453776b573af1d0c3158d39"
+at = "INLINE_CAPACITY=u32, T=u32"
+embedded = "d49d08794beac5658361762869569e3545cfe7e5ca7da9a8ff0c836477419c70"
+status = "residue"
+cause = "mir::Ty: growable_array::GrowableArrayIntoIter<u32, u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::growable_array::GrowableArrayIntoIter::next"
+kappa = "71c032f3b1c59503a8d14adf1ca0ad1f3094ab7d75f32bacd53f73653f211478"
+at = "INITIAL_CAPACITY=u32, T=u32"
+embedded = "e90178138708a28db4fce8a9f5f06dcf828846e42dea5deb7fff7a85102657a6"
+status = "residue"
+cause = "mir::Ty: GrowableArrayIntoIter<u32, u32>"
+

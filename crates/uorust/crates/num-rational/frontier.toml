@@ -1,0 +1,129 @@
+# The num-rational register (written by `uorust crate num-rational@0.4.2`; do not edit): every body of
+# num-rational's MIR at num-rational 0.4.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 287
+translated = 3
+residue = 284
+
+[module.crate]
+bodies = 207
+translated = 3
+residue = 204
+
+[module.iter_sum_product]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.opassign]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.pow]
+bodies = 56
+translated = 0
+residue = 56
+
+[embedding]
+bodies = 287
+embedded = 287
+evaluable = 287
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Ratio<u32>"
+bodies = 186
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: num_bigint::BigInt"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Ratio<i128>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<i16>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<i32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<i64>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<i8>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<isize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<u128>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<u16>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<u64>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<u8>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ratio<usize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::f64::MANTISSA_DIGITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseRatioError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: ratio_to_f64::MAX_EXACT_INT: mir::Operand::Constant: the constant item core::f64::MANTISSA_DIGITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_abs"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BigInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RatioErrorKind"
+bodies = 1

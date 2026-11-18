@@ -1,0 +1,450 @@
+[[fn]]
+path = "aws-lc-rs::ECDH_P256"
+kappa = "9b61d41ae8f29a83c8a1cf08e240815514bd10542be37b0dc1a5cd5a439eb69d"
+embedded = "1b60e08d0301b85c7b9c28e1831c05083d123e7bee9243a27355e02c7ed3d8bd"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::ECDH_P384"
+kappa = "8187792cc20070c0e01ac8579d1dca7396515f93509f8ecb4a1d60fc7a9fc416"
+embedded = "c6c7c2994761092527e7aadf646f7a051c1f49cbef3a3e24d693a5477d75f11b"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::ECDH_P521"
+kappa = "12c272e6edcc8c628a16376206a70149357a944de56a9b555d39162c79916fb7"
+embedded = "04b2549c2541b261352312256585d64c0bf64bfd19481e590c15e2adcf2b58dc"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::MAX_PUBLIC_KEY_LEN"
+kappa = "468bce40f6cc880a5cd2c3461565ae5225d716378c4bae6e5ef6385784491441"
+embedded = "10bae69d46c25912708323c66fcae94792e4dead4738d14d54a3b1fd2f4ac8f4"
+status = "residue"
+cause = "mir::Operand::Constant: ec::PUBLIC_KEY_MAX_LEN: mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+
+[[fn]]
+path = "aws-lc-rs::agree"
+kappa = "2c81371e94fbddf7c7910c4efc9bfe464cb5bea1dcdf2c2ff195228dc24d05a6"
+at = "B=u32, E=u32, F=u32, R=u32"
+embedded = "6ccdbd77230b909a5cfce2a7e5eeb5b4e6fbdd7f521bf77d61c6fb8d7150fe30"
+status = "residue"
+cause = "mir::Ty: agreement::PrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agree_ephemeral"
+kappa = "39900a9dd431461cd73e42b4d3913956aeb33a5c76dc60b0fea2b0dfcfa8ce06"
+at = "B=u32, E=u32, F=u32, R=u32"
+embedded = "367aa9e8fb16ae76c9a48f11a47f0ef482a562628c30b7aa1edbac9b1fb83e35"
+status = "residue"
+cause = "mir::Ty: EphemeralPrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:138:10: 138:19>::eq"
+kappa = "8a19659bb0c56581360581b1a3d107deaa471d2801f7210897dea1497a502af1"
+embedded = "1e4b30b32c81dbf8f5f9517aa4dfd6f06f72cbfd94e847d8a459ae33ca7a2a05"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:138:21: 138:23>::assert_fields_are_eq"
+kappa = "923f79c244a70ac62b3bd6f5021c6eed2c8b74313b3ca815d1306d75df5cc600"
+embedded = "5905834dd0fa46c4556f5f888d1d67070d47c2cc82996756365b952d51b7a61f"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:633:10: 633:15>::clone"
+kappa = "1e1eddd41b86a10b242144d9a31294dfd6cc53f86588c4537ef038cbcbc57a58"
+at = "B=u32"
+embedded = "bf873246cec6c2ea94f9681e4749a5f7d13c8c4c93bdfc69fba1c5987f7e8d40"
+status = "residue"
+cause = "mir::Ty: agreement::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:676:10: 676:15>::fmt"
+kappa = "8276ad2c0c5d88ea3407b815cd1eade0fae5a0cdfe34a4f3156e4b82433378f5"
+embedded = "80ff7c9af908c3e678770375720cad03e01ac32ace6ceed339e5cf1380e05565"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:676:17: 676:22>::clone"
+kappa = "260900323b88da793d732480dc54507e8662148844985bde5a411b101670195d"
+embedded = "a7e446d1077b744228adad9b87e320ea3c1a483b846fc7a28b591da031450e60"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:694:10: 694:15>::clone"
+kappa = "0e703d71f9a5880bd674ed8513c0937bdf61db6dead2b8a4d93ba62277dfb66a"
+embedded = "57683400b3695713031dedd2d08f87fdc2f63bd6caaa492e76f683b0c0d381b7"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKeyFormat"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:694:23: 694:32>::eq"
+kappa = "94830aaaac9a22153ce0bc9e673aaed9e67affeaa23b85e6efe0313edb6bd3b6"
+embedded = "c695bf6e64366d561194467433cb7f7f63cb008b8d2fb0e61531500f533375f1"
+status = "residue"
+cause = "mir::Ty: ParsedPublicKeyFormat"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:694:34: 694:36>::assert_fields_are_eq"
+kappa = "ee8933d5fd396b3a078264f0713154efac79a3ea9f857b300ef1d769bfe1f957"
+embedded = "b03971084314a1a0e16a578c438f49f773a6fc67520264643326271123e87b0b"
+status = "residue"
+cause = "mir::Ty: ParsedPublicKeyFormat"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:694:38: 694:43>::fmt"
+kappa = "c24a83c2b7c96a015541fcc60b73a8ae1d5617f3cff3a076ae589ea7eebe7b03"
+embedded = "8703bd52a99e507b138a11a8142852715b4c7cab77d79546fa60c9eeb50b3409"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:85:10: 85:19>::eq"
+kappa = "097de0e590ddbe26e24fc1033f7806a5a31fbed03361941ee32171a81247e39d"
+embedded = "f507f5de4811c269d60818d39220b025091e79ad1912c0db09993c4f36d93ec9"
+status = "residue"
+cause = "mir::Ty: agreement::AlgorithmID"
+
+[[fn]]
+path = "aws-lc-rs::agreement::<impl at src/agreement.rs:85:21: 85:23>::assert_fields_are_eq"
+kappa = "6effa01333110ed348bff1fd83eebe84728fb7b8caec08c575b21d119dae7fc7"
+embedded = "cf67df3b09c946eac10308b2724c4695e6e4d11b1010f623efa94d29030c4282"
+status = "residue"
+cause = "mir::Ty: agreement::AlgorithmID"
+
+[[fn]]
+path = "aws-lc-rs::agreement::Algorithm::fmt"
+kappa = "e3176ec5de83fb642d1beb16c4551a66ed487c70fb3d146cbda9990bc7dfee7f"
+embedded = "49a7279dc15ff494759d425706e306c323e161f0af72c172cbb782db7371f85b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::AlgorithmID::fmt"
+kappa = "ebc284675b50631fa7f430365671806e0388d073c5edf169f57c1e9590894d42"
+embedded = "d240548b697cf6dfb47fb4c3296ab62bfbec9e16c4f5ad85a1cb1747f72239e3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::AlgorithmID::nid"
+kappa = "6af81a24d3b0ac54c9294c0c16207e99c71e401579d181cf033ec3df73caa522"
+embedded = "1e79c5801ef2ba8ea73ed734b334a9e0032c05220f450e1039c5f5cae2a000ef"
+status = "residue"
+cause = "mir::Ty: agreement::AlgorithmID"
+
+[[fn]]
+path = "aws-lc-rs::agreement::AlgorithmID::private_key_len"
+kappa = "6648214bcfcf7b8ae67cc738bda750c34cdd2e29269d2b78b0514ff6b0e913a2"
+embedded = "44cd326fa0721eb16b12b3792a5dd524e4733b61d05d66f6fab292086071e587"
+status = "residue"
+cause = "mir::Ty: agreement::AlgorithmID"
+
+[[fn]]
+path = "aws-lc-rs::agreement::AlgorithmID::pub_key_len"
+kappa = "716569b0ba28a4eddaa62047f0e0d5996c7448b5001e51700c425bfb55c6c59b"
+embedded = "5330e9b6c1af07d33bab9c7cd141a1effba67351ec51fd39652a3926bf2c7c97"
+status = "residue"
+cause = "mir::Ty: agreement::AlgorithmID"
+
+[[fn]]
+path = "aws-lc-rs::agreement::KeyInner::algorithm"
+kappa = "89dbba379e5f28f981c8f021783cf935a8821a8c896946b7d1d82e273bf78caa"
+embedded = "c16e0d58e1ac1ae55091be52fee53fe9dc9be59dce36045bc1a0d3f00091a81e"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::KeyInner::clone"
+kappa = "f76feba711dc264b741ded1053c44c17734596baa4a41926de7288de15313ec7"
+embedded = "ed756d6389c01ffb7d2e4ee7a24eaf49a6f8cec64ee28f85d19f3f76be40bbb7"
+status = "residue"
+cause = "mir::Ty: agreement::KeyInner"
+
+[[fn]]
+path = "aws-lc-rs::agreement::KeyInner::get_evp_pkey"
+kappa = "8c15ec153e4896ea11210bc7f8c03dc10768b0f86320f0fc33df5aeb3ece8262"
+embedded = "1ddcf5759048cb542540697da469aee124b4e02df539987d52998ac85c8c577c"
+status = "residue"
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_st>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::alg"
+kappa = "e1d8d8cc66d8dffe04ffe25e70008ffa1cd0c57311bee64800cd1329c6695db6"
+embedded = "ce7ad1b12184c1206bf29c76a639e7c7f3da650ab0ec2b8e5b62c6c74c9f6838"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::as_ref"
+kappa = "95a77df54495b307613a7234e374c779a6270408648bbad2443dec24213b741b"
+embedded = "e012ed73d3f1389b11aa3e9563812b5ccd3482f645706346fbf56b3e80361808"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::format"
+kappa = "e88a04c131ddafe43363fdd134eb11ed204293bd8c8dd85a724e6cc135adc234"
+embedded = "e49e1e2802e1e3c8f6d2c2644a2a77acfc305cff39511b50a75473f90b20144d"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKeyFormat"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::mut_key"
+kappa = "bcb299faf317d3521fd17478638fe2f0b691e1fba46d832023c07e52fd4b5684"
+embedded = "8bc6b92065e32f7f506828d7fbd59616630b91d78fff137e07b048b7c517b41f"
+status = "residue"
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_st>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::new"
+kappa = "7268b3415d1a94a9e42ba16d7ed2ff5c6c4938b3956dd49d74cef499936b8d24"
+embedded = "cb478eabfb08601eed807702801d68b69d95c2255d3a3a36e4be754c7fb428e2"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::nid"
+kappa = "1c63e66d2a29cfda8188b3b8d500944e7fe66219e0cba2de1f5ad8caf9222cda"
+embedded = "980c0c20926b244fded700d5b54b1de23073c4fff1a18185523ff5e1db83d9e9"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::try_from"
+kappa = "4e0efd6929afe46d5a31673011fd6864cee5d8998229284c7b8b6ef75a12ce82"
+at = "B=u32"
+embedded = "ae6b307e1e4fbad4e22892c0f096c803e068b3d40817ae074cd60efcd0561b53"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::ParsedPublicKey::try_from#2"
+kappa = "d76b572f447c58cf8c67a470bd0131d8264924d8c7d55c31836c6c0cb0d04aa3"
+at = "B=u32"
+embedded = "0fa63bf0475fb9ac812a68e9965292c7e39b89f02bf2bc8c92d0a02390d72a71"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::algorithm"
+kappa = "21a38e706cded890e04d49690dbe874e9633a722cc44b29dca14ca7267a8896e"
+embedded = "563381d817e404eff1f087d2cc566b2f824a75466b5d8d1723d61c48873cad37"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::as_be_bytes"
+kappa = "55b9d1617f6f3352c05f9da5aa0f3ade74042cc2cba703affd442c6d910ffbef"
+embedded = "13f3acdfea9922dfdc513c021cf67ec70e7c34d91f054dfd635014b9128910b0"
+status = "residue"
+cause = "mir::Ty: encoding::EcPrivateKeyBin<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::as_be_bytes#2"
+kappa = "8c522e4c3e39e9c854830bd226f870ecac978cce79ecbe74b3884ca72e1569cc"
+embedded = "e63a82e7bfc955c35e0a7b037f5f81e6a7bcc306393cbd0556985e528a12a0f4"
+status = "residue"
+cause = "mir::Ty: encoding::Curve25519SeedBin<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::as_der"
+kappa = "6283ee3c07d5d120e3b5a7a0ddb04e16ed973da2590b78ffab8499b1c6a599b0"
+embedded = "1643b78921ea811ce34aa7b5172d91d55f8f883410376fd8d9f8fe9fabdc02a2"
+status = "residue"
+cause = "mir::Ty: encoding::Pkcs8V1Der<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::as_der#2"
+kappa = "ca3ca477140ef56dd54b65814ff29a79a85b22a10846545bc19fe9169487f008"
+embedded = "d3c86d8ffaef97669539c5ad1c79d5da1e57bd5ba529353813aa41952a6e260d"
+status = "residue"
+cause = "mir::Ty: encoding::EcPrivateKeyRfc5915Der<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::compute_public_key"
+kappa = "a511855a420f2df50dd869fc6df5f1b47c68e14ce968e99608b3595c2fa84ec4"
+embedded = "84d2130146c16f1f336d8fa15fa23018b580d6038f09098fe8885b775a8d44a6"
+status = "residue"
+cause = "mir::Ty: agreement::PublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::fmt"
+kappa = "0f4993e7461391d29c87e63e3215ae06eda26115f3ec6df2df4620d519f1148e"
+embedded = "bf0e7081cdc7425290b0dd4076f7900bcbdc8a05e937dcfa92ddd7b6a63ea814"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::from_private_key"
+kappa = "b36cb045d10385003243ee9f790985efc652097946ab987dd848a0dcc1b88d0d"
+embedded = "921255e7ff65d6919bf8717680164cceb39b38963a2217bc7d0297f7bed16640"
+status = "residue"
+cause = "mir::Ty: agreement::PrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::from_private_key_der"
+kappa = "7e6a70f5f2dea929e138f85a0db5d0670adc48aaa4acf36a641eafd262dbf203"
+embedded = "cbf42f15be3f5043bd9364d704089326ddf691a32d132f47700a5107467cd8e3"
+status = "residue"
+cause = "mir::Ty: agreement::PrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::generate"
+kappa = "d7c0af489c915b74261935b552fbc642046bdc0e89c1c97294a7b3e582ed7066"
+embedded = "1bf23c17acbc6d70e5597cb743b507af568310c098134d7c00c09d366221ede8"
+status = "residue"
+cause = "mir::Ty: agreement::PrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PrivateKey::new"
+kappa = "f13af740ed23c40edfa5714e4172bd0aff879246412574a87043421f48cf0c78"
+embedded = "0d8bf5255de6af4709da32340fbf909b0adb3b01c5bc06a0eb7e296081481360"
+status = "residue"
+cause = "mir::Ty: agreement::PrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::algorithm"
+kappa = "c3b4ffa7b87ef3ec6cb10a31466adf4f3037b5ca3c538535a34daecd29ab02cf"
+embedded = "d9b7b154e43f2fba095de3af12ecbfaa05d824cd61bdcd3f6465cd3a68cf8fda"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::as_be_bytes"
+kappa = "48c39ab54fe7d8f615103bda88a0681f1e1a3ee6b1f136a5de11d30a82604cf2"
+embedded = "9a974a414abf5c943ce1b9908b7e85fd24010030c9a2cab82b28dccf2681a730"
+status = "residue"
+cause = "mir::Ty: encoding::EcPublicKeyCompressedBin<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::as_be_bytes#2"
+kappa = "7832fdf004d8e48e74655c0da422eab7b661ceb2141f8bc2cc6a5590abeebae8"
+embedded = "dfce54770aab3978b3b10f88a517defcac854250f8f6f0e0ac6664931221ed8f"
+status = "residue"
+cause = "mir::Ty: encoding::EcPublicKeyUncompressedBin<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::as_der"
+kappa = "c8de0490bca8f8cbf76a08ae451810a5990d7e02bc41e303e4f0b954b676c2dc"
+embedded = "91f3c38a640388a8b059b7d76ac07c4faa13945c5123cfa5267630fae67d45d7"
+status = "residue"
+cause = "mir::Ty: encoding::PublicKeyX509Der<'_>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::as_ref"
+kappa = "ca2e396bd955477872d639ef8e2782522dc9a9a9e552a45b177b71bcae56b7dc"
+embedded = "c81426d6903a420d3b02a309e3c3bbfd0e9297025835a7efad582b92b1428f42"
+status = "residue"
+cause = "mir::Ty: agreement::PublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::clone"
+kappa = "6ac445ed121d586df46331f3cc85c7deeba416fc1f889ae1822c7045db4fb7fb"
+embedded = "3a1b1a2e49dbe65906c8b4dade9db65fd732a68ce333743b1da8d83349840e42"
+status = "residue"
+cause = "mir::Ty: agreement::PublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::PublicKey::fmt"
+kappa = "9f20f48375b8522ccb6b1b48354461454486007e44ddaf8656d110a1ced26cc4"
+embedded = "b85da0a6ba8f1e144e4642d2c70fd76b240a01341e78642c0543b460c2a558f7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::UnparsedPublicKey::algorithm"
+kappa = "8ad110cb463703d00ca9425f27a717ed96917b15f8893a1c993519ab9defd70c"
+embedded = "abc348885c2730ab8585dc08a60f71eb2f1ed33e3d7d8c8be4510e23b622c4d6"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::agreement::UnparsedPublicKey::bytes"
+kappa = "6ce84bbcdcd60e9dcec39ee05d21e021d65c50af63372d4ee84fb8cbb5291535"
+at = "B=u32"
+embedded = "dc68236918de27fdee2e667a30ea0f9195a513d6b20e17db399c9ef09e578ea0"
+status = "residue"
+cause = "mir::Ty: agreement::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::UnparsedPublicKey::fmt"
+kappa = "742c7c75738dbd55e7d42d456465e648449d8237ad93d9a4709d46366f5a2db8"
+at = "B=u32"
+embedded = "a39256a97a290a0636a0bc76753f0e5ac6d5d8bc17696aeb95e365367ad10b59"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::agreement::UnparsedPublicKey::new"
+kappa = "c058526e7b742af9de5cbcce5945fb8f81d537b4abb783a7914a0c830a169ff5"
+at = "B=u32"
+embedded = "1dde1c6c98c2bae190f322323d18debbb740cddddf645b94cd0466f32b09c51a"
+status = "residue"
+cause = "mir::Ty: agreement::UnparsedPublicKey<u32>"
+
+[[fn]]
+path = "aws-lc-rs::agreement::UnparsedPublicKey::parse"
+kappa = "8941e8d19bdcb8fc9e9d10de3977e7c5450c24013fbf08e6ac361b84cbfd8186"
+at = "B=u32"
+embedded = "9f935aa65a7b1f9663e5f347ab0cee6ac47b26faddf096e0d50f909edc1a02a6"
+status = "residue"
+cause = "mir::Ty: agreement::ParsedPublicKey"
+
+[[fn]]
+path = "aws-lc-rs::agreement::X25519"
+kappa = "513e1a0b71d2daf21d43786464dfc816b1034061bd6b36f0ce942af2a3112098"
+embedded = "3b2f0a05cd4c7b4d03a51fd8189c1ce64a80af15138464a39ed52ec0c29e527c"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::ephemeral::EphemeralPrivateKey::algorithm"
+kappa = "bbdadaf4974d14bef753ecacfd667a880873416fe08663c1d43cfdd16cb44cc9"
+embedded = "af909b0108a5a1ad88b228461d69af3ded8174673cbbe5ac07b9848fd35104d7"
+status = "residue"
+cause = "mir::Ty: agreement::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::ephemeral::EphemeralPrivateKey::compute_public_key"
+kappa = "25fa7b21433c0d8b6d91f12296318500561aad9436a443f7bd57641f50dc8ca1"
+embedded = "5381a434bd9473d69c81610ca4bc94d49d164a1ad35cbdff5f81cd6891c19c24"
+status = "residue"
+cause = "mir::Ty: agreement::PublicKey"
+
+[[fn]]
+path = "aws-lc-rs::ephemeral::EphemeralPrivateKey::fmt"
+kappa = "ccd6b36673038718807970870fb703278155f460741d085eba4d9889f83c97d8"
+embedded = "828d9354eb1ac13db278acdb76719849bed39a7354ebf4fae7aca324853094bc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::ephemeral::EphemeralPrivateKey::generate"
+kappa = "c11cd6d59a9740ae7a83ee804bedfe9f6d7a4169bb4c18b255d2d393cb7b5f6e"
+embedded = "527c9e9cb3c4b1735d1f20e7d3f5044ca9338f7028e7074c984d646158d042e1"
+status = "residue"
+cause = "mir::Ty: agreement::ephemeral::EphemeralPrivateKey"
+
+[[fn]]
+path = "aws-lc-rs::generate_x25519"
+kappa = "bc86ee5d4ff4857b8978c1109c8bc7ea620a28d6daa490860150b1c6d1b660f4"
+embedded = "5516a5f472728f35372ab79ca0e1c109c9aca52f060e824be856299faf5a7f99"
+status = "residue"
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_st>"
+
+[[fn]]
+path = "aws-lc-rs::try_parse_x25519_public_key_raw_bytes"
+kappa = "fc052e8d19819f8bfd5bc9919da9727e6bf09a679a463ce17ad195f4f8c1aca7"
+embedded = "2d756d891c9b68a52c804a29568d77523b8ac9e77dc92da5c993650ada0f58c9"
+status = "residue"
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_st>"
+

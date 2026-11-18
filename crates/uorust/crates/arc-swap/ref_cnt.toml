@@ -1,0 +1,151 @@
+[[fn]]
+path = "arc-swap::check_tag"
+kappa = "89307079bd3fe855524d3d5213aa3a555e9269bd7b1b72f4d33adb6e22903cbe"
+at = "T=u32"
+embedded = "cd9161fa184ed24e0882cd85400ecff6a3b7f6c2f3d403e0d71f609eaef39a26"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:117:1: 117:33>::as_ptr"
+kappa = "266b7200f02d5ee89da33857d02bdcc737036fcaa31695de9e355483156da0da"
+at = "T=u32"
+embedded = "35cf7611d5b8161c976971f3869be0de1ac347d19a684b1df32236cc3676fb6d"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:117:1: 117:33>::from_ptr"
+kappa = "36f1e3a49446e7daba8ed7a6737fe49715e16cd62f980d56aee2b1dc8b1a55ec"
+at = "T=u32"
+embedded = "790967bb7b41c45f435b06e16d424c189800b23cd40cbcc257fc26c2011217d1"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:117:1: 117:33>::into_ptr"
+kappa = "937d73cc5d03d165eddaf0c627b8dafb209f0903b5c3d5c2188fc458873a896e"
+at = "T=u32"
+embedded = "7aa04a80854299ab9e5b2a1728c75a69f73dc3dabdb10495826ed80b4300dc38"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:152:1: 152:32>::as_ptr"
+kappa = "7619490c188dd46ff827399199fa2e4d60ad47812d0f7b599c859ff995a1d990"
+at = "T=u32"
+embedded = "76ad021a4183b0ab71765566369d374fbbb1ec7003214d9c0b6082d24e006ed9"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:152:1: 152:32>::from_ptr"
+kappa = "94505dd7022813746dc0b8f9d5821071747ccaa1224aa3c7e3d2c9e40968da70"
+at = "T=u32"
+embedded = "99d9908db44ac5050027b115f9f0ba7de6da9fba3204f4a1deaff02371057436"
+status = "residue"
+cause = "mir::Ty: std::rc::Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:152:1: 152:32>::into_ptr"
+kappa = "eeb44a7f4047e9dc678b23b7d7b989ea842cc341d0153be408003d20303ea7d7"
+at = "T=u32"
+embedded = "58d1ab91b780c5672cdcbec8b4d4d14fde96d400f0f20091e45a4ea1823269b7"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:187:1: 187:44>::TAG"
+kappa = "453edd3f81a8fb4c87f2cfb258d1fafd801d17f3f3697c2dcffadb86092462fd"
+embedded = "ac4bf05518cefbc3be954acc873bb3faf97e07c825eb3d52322d149e86be1586"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as ref_cnt::RefCnt>::TAG"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:187:1: 187:44>::as_ptr"
+kappa = "104582e473cf16e342aecaa3e67b5cfc308611260cd392ada161dc3478af7539"
+at = "T=u32"
+embedded = "201812356e7d2a83ae222f57ffbe75a1e81f63b425c2044ea4197b2d3f152d36"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as ref_cnt::RefCnt>::as_ptr"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:187:1: 187:44>::from_ptr"
+kappa = "bfd846ca84a718a8258231d75e9fc7f5cedfec1b40ceaf11c5fe9f81938aea07"
+at = "T=u32"
+embedded = "e540ad199b4bd3d6af6d02169cd653247e974d34eaea3d1961e4d01ef8094286"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u32>::is_null"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:187:1: 187:44>::into_ptr"
+kappa = "cfdbfb98d7f91a77a88739e3522bba2eb60c7017a25bf7bc161dcec42f683231"
+at = "T=u32"
+embedded = "935a78dfd2454c84507ce592cfb838f81891187e39537419c5d0b419e8a65f75"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as ref_cnt::RefCnt>::into_ptr"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:207:1: 207:38>::as_ptr"
+kappa = "46c09899c7f41e2596d26424f62879f9e9f0b260d0c59f6a55026127272cabf6"
+at = "T=u32"
+embedded = "e9c5e90b44972fc72878f8dc215fde498cad43a4fdce4b369823c7cd6ffad86b"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:207:1: 207:38>::from_ptr"
+kappa = "0b03a261c2d2349ff0e014ea5c7da2582cafa21b64c02d6a3ef61e9cd4717851"
+at = "T=u32"
+embedded = "ae0f1763856616f2296df4d6cd072f476ac1dc011da758bf0983ff6bdbfcf046"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:207:1: 207:38>::into_ptr"
+kappa = "047833466c9ffedd8e0790a0937de043af7070d9e4b7d98479f7a7377e2438f4"
+at = "T=u32"
+embedded = "f753aefefa482b57743d7311e934531679e0c640a9ecceba6c79dfa158604c24"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:250:1: 250:37>::as_ptr"
+kappa = "3fa4cbe286559f2842be64b9fe01288029e84abecdecc1100d85b622f9c4937d"
+at = "T=u32"
+embedded = "8cfe4b9b6065c07d723ace5384116b1ac8755172309070d695cbdc95771a2e85"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:250:1: 250:37>::from_ptr"
+kappa = "8e08f7c128ea3db4a2a7dd5d28d21021eb169029c2e5294a69e8fdf4d485e43e"
+at = "T=u32"
+embedded = "cfb4341b195f73fcea2f71a44a1bd66d8662d14bd86555b90b2cd634beaec562"
+status = "residue"
+cause = "mir::Ty: std::rc::Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::<impl at src/ref_cnt.rs:250:1: 250:37>::into_ptr"
+kappa = "8cb0911690a90b070de94dcc6ca92d30cd87846997d5329ec7b380ed67cdf0f1"
+at = "T=u32"
+embedded = "8424323a8956cf685dc61a8febaf886e16059b8ed75de3886ca6a88658030a0b"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "arc-swap::ref_cnt::RefCnt::dec"
+kappa = "8cdaa2063ddb2fd9e6d014e2cd3bed7d223f0db5f13546f3689c6853e48d8dce"
+at = "Self=u32"
+embedded = "d1b39ceae0536710ae1acf9c9fcda7966cab4afc34736dcb90e665732faa1251"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by RefCnt, which u32 does not implement in core"
+
+[[fn]]
+path = "arc-swap::ref_cnt::RefCnt::inc"
+kappa = "06f2b0d0b57cf3442d111d2cb43d670374615a6da8fa369306dd4d3be462be84"
+at = "Self=u32"
+embedded = "df6e5298646e4326881d977012365495408f9c9a28206a2c1d6e7ab5e1f18bf6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by RefCnt, which u32 does not implement in core"
+

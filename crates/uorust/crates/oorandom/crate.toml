@@ -1,0 +1,196 @@
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:163:16: 163:21>::clone"
+kappa = "01220ffd44f07d9c326b75db1acbe055ea3446f79279587e7ba0cb66f7f798cd"
+at = "Rand64=u32"
+embedded = "824d581ee49da8bff73575782080ff8b458f8b8fece5090dc9b03f4e36fc531c"
+status = "translated"
+digest = "aa54ccf40ed285d3ad7db5d2bce15eb669eec817ecdbf44c827052ea5fb11ec7"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:163:23: 163:28>::fmt"
+kappa = "587dadfd74aea7cfb4c49b8e6c0db2f84229670d7681e4037365443a8651c20f"
+embedded = "24cd468a6b63ff6e3513744dce4ed2f05f859f534fa11756d735eda23cba493b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:163:30: 163:39>::eq"
+kappa = "c3c04f9ab33b04a38819caec51c8f2cd34dc1603131e075d3d8d0ac50290b413"
+embedded = "4a57a544536801810470a82e49ccb0fe53c4b72629428264b93e6583aeb4833a"
+status = "residue"
+cause = "mir::Ty: Rand64"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:163:41: 163:43>::assert_fields_are_eq"
+kappa = "85ac8b96166d843fec645667cd124fa7944869c29607e1608a0a0f29b19333af"
+embedded = "7eb207fb61305f04aba6457f31000e19db21681c71eec94ad3b57972022f396e"
+status = "residue"
+cause = "mir::Ty: Rand64"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:28:16: 28:21>::clone"
+kappa = "f5606fdc2d716be2875feb895fcbf4e4c786b96f985c5e15dadfc1970a504c48"
+at = "Rand32=u32"
+embedded = "5d05ff8ef9cca30cf52c8a5c2e527193a51fa6d535f421db26693a577d4270e8"
+status = "translated"
+digest = "5bd63508d5372ade2d1d52297fb50140c0c6bccafd168ba8bff93905b1348b74"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:28:23: 28:28>::fmt"
+kappa = "5a2f0b2281ae2d2588c58e49ccac34139ca64d8b443da488196db8c10d5c2e0a"
+embedded = "1d3a164fd96cfecc03d624ef0946d91fcfe6569441a20eef9d1927b69ba8d15d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:28:30: 28:39>::eq"
+kappa = "24746e41e47bdf8e327aff463c896c91de3107845b4ddaba5b15be81a6c98f2f"
+embedded = "f24d66587746142cd793a7af563f4961912e37050fc9f291e1e3d3a49b66e6be"
+status = "residue"
+cause = "mir::Ty: Rand32"
+
+[[fn]]
+path = "oorandom::<impl at src/lib.rs:28:41: 28:43>::assert_fields_are_eq"
+kappa = "4c5f0e3ddd4e3e6f3ebab25446724e0b7efba5cc08bfac60bea486e62edc72bf"
+embedded = "414add8dd81318c5ff1dd87e43bf49b2961bafb53f9036ff2481ed02438ada2e"
+status = "residue"
+cause = "mir::Ty: Rand32"
+
+[[fn]]
+path = "oorandom::Rand32::from_state"
+kappa = "57a24d97d90534c4205605643128d1a04316174c09e6d70c251b1a9c00673fb0"
+at = "Rand32=u32"
+embedded = "ff5eb2f0f4f3ae414969a098d0dc2e3001c91be05118fbf9f0062e4088d99c63"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "oorandom::Rand32::new"
+kappa = "5d2fbff954bd15abaf5b19d2623d1441b9a60bb98c951cae9499283a62e9fbae"
+at = "Rand32=u32"
+embedded = "cb2f8802ce0583554c47b9c27027309f7778e27f182bd3415195112ee39eea2b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item Rand32::DEFAULT_INC"
+
+[[fn]]
+path = "oorandom::Rand32::new_inc"
+kappa = "cfc1889373a4b0688a720bf5d9e7d2e15acf15e1898b97a5643651dc51cdbff7"
+at = "Rand32=u32"
+embedded = "902cc942acc82b1a714e52986935d97b1a40ec32dc2c82a70f88e419ff578512"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_shl"
+
+[[fn]]
+path = "oorandom::Rand32::rand_float"
+kappa = "834651aff294acee17c2a8383d41c4f13e371f5f2871497bb1e7b738e020febb"
+at = "Rand32=u32"
+embedded = "74e38cab3a649213db073d1fb17a6b80927814111999d29323b10058647ae387"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "oorandom::Rand32::rand_float::MANTISSA_SCALE"
+kappa = "0581037bf61ce1b1d6ae0e4a179e9e48605b52c5b94beb7ba7145ff469a5aa32"
+embedded = "be7702c431cff95b8e8736531167d8691b0d43debd652eceef439eb97c0b2e76"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "oorandom::Rand32::rand_i32"
+kappa = "e47571090813e3fbbafeb9082b78c714aae7305925a5e0b5de8dd332348d506c"
+at = "Rand32=u32"
+embedded = "411c1a9dd8297df25ee20b838b599123581563287cb14c64556d06af847f924e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rand32::rand_u32: oorandom's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "oorandom::Rand32::rand_range"
+kappa = "a44a65d0722ecbb9893d768d1a8766113494a6b96e6d357cd7a63915b3832e4a"
+at = "Rand32=u32"
+embedded = "21b4530057ce36dcd4559eb4978a4abfe2e74b99c3cc4d3a5ee85398c5f85acf"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<u32>"
+
+[[fn]]
+path = "oorandom::Rand32::rand_u32"
+kappa = "fc51f2eb32892bbfd3e6a4145f4d169e8fe97ae70ffa8c7a6632c60fcc8adba1"
+embedded = "daec5cc8036f05a521662a8f620db1812604b57ad41fd475014bc005547a45e4"
+status = "residue"
+cause = "mir::Ty: Rand32"
+
+[[fn]]
+path = "oorandom::Rand32::state"
+kappa = "94f3347d25d3015963a0564ee89414fb926b6cc0aa2f634d51a247550c77b6d9"
+embedded = "51446a2d0cecd6dddbdff557d5f2c1ddef06fbb4fe1e9d32a298ddc06a592cc0"
+status = "residue"
+cause = "mir::Ty: Rand32"
+
+[[fn]]
+path = "oorandom::Rand64::from_state"
+kappa = "8028b3e0c6ec0b2fed5720c870f0734b1f53b3cab95d30cca832fd2bcee2be87"
+at = "Rand64=u32"
+embedded = "b7d4924e1c5165107dfd2b8a3ac955d2b935fdc7fbd948ab0a28466458944e09"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "oorandom::Rand64::new"
+kappa = "14d7bc65a8dfbe5f1a6a20abfd14d480d7396fbde8b6bd72b943226114806f09"
+at = "Rand64=u32"
+embedded = "178065e49be90f57dfb9879ca79f0f26e5d07acca5516b053629b363f449ee83"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item Rand64::DEFAULT_INC"
+
+[[fn]]
+path = "oorandom::Rand64::new_inc"
+kappa = "8b055bb711ca256337cb022115691b207da11068e6a99a81c6ce5eae649a3d7a"
+at = "Rand64=u32"
+embedded = "122d7867165dbc82878228955a2e5765f30fe60eee7806eaf9778a090b85b567"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_shl"
+
+[[fn]]
+path = "oorandom::Rand64::rand_float"
+kappa = "41dde00e15ae0f15b8ff852071a7fce2f6884d2e7729dfce2251861d0f7b4ef3"
+at = "Rand64=u32"
+embedded = "6d99595b2a6e0b5cd9e02399ce234d1e8ba730ab7a627787018980e45af4c1fd"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "oorandom::Rand64::rand_float::MANTISSA_SCALE"
+kappa = "60bc25acbc6aa288143a63eacd6347ddbf27767dc326c7f9b44600e2944b8a60"
+embedded = "e022080f5756abcca628cdc495bf4550905f6d47f02eb140d5dd0a15357d8096"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "oorandom::Rand64::rand_i64"
+kappa = "041a6820401cc9989eba4fd90efbf8323122db8557f80030de84aa905be91801"
+at = "Rand64=u32"
+embedded = "ba5bcfe0a9550d9a1ab99a3a4d0fc2eb1a561651dbd300fec61ecbd6edeb9d8c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Rand64::rand_u64: oorandom's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "oorandom::Rand64::rand_range"
+kappa = "992f9a2476b8d4fb6c1df652f6c53085467591c6b80c5136c06bef21ab2db9d5"
+at = "Rand64=u32"
+embedded = "c79003339d2e3d0b670ec6a748960b3fa6ae1752ff397f9011f0a76034be96f1"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<u64>"
+
+[[fn]]
+path = "oorandom::Rand64::rand_u64"
+kappa = "01e7aa6db8efe663fd7475a204aa04e621b44d951f0ac615b9cfacff986067aa"
+embedded = "122b08b0ba7174935fdaa3681fd46c69762db3f9afd67b1659c766aa9661e8c3"
+status = "residue"
+cause = "mir::Ty: Rand64"
+
+[[fn]]
+path = "oorandom::Rand64::state"
+kappa = "0881d6e7f39bde30c7e4813ac075c5afe9e3331b485a9626815d88aebc528be0"
+embedded = "6e91c9c31d0c739a3927caf3fa5ef9bdc763ecce6e7c9ca7b757e8f2ed5ec10e"
+status = "residue"
+cause = "mir::Ty: Rand64"
+

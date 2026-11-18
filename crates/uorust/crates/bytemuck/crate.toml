@@ -1,0 +1,230 @@
+[[fn]]
+path = "bytemuck::<impl at src/lib.rs:241:10: 241:15>::fmt"
+kappa = "7ae7cddfbeb0e8917cd2af629241b90db86b5865f9665f2d5777a9cece427ff1"
+embedded = "11299df179b9de9edda13355aa51cc4f4a98c8675603d5274b5861be4e6faf60"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytemuck::<impl at src/lib.rs:241:17: 241:22>::clone"
+kappa = "1603272c9a92a3e1fd46309221a903e49a7440319ab32047b749bc92e563158d"
+at = "PodCastError=u32"
+embedded = "2188bc85bcff60502372e69f5c668745678ada71fc0f93cbe57463dada8d0405"
+status = "translated"
+digest = "c7f192d3a32dc3897c5acb32301ea781067ad96590278c78ff5daab4176b2ccb"
+
+[[fn]]
+path = "bytemuck::<impl at src/lib.rs:241:30: 241:39>::eq"
+kappa = "a33ae2d77cf243bd909295479a31b4937fec16ec0d4473c8e5d549e1ff24758d"
+at = "PodCastError=u32"
+embedded = "dbbb6e0f85d7d333a82d0547b6290848356f371f8554e1ecf170b6a6e39c9549"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "bytemuck::<impl at src/lib.rs:241:41: 241:43>::assert_fields_are_eq"
+kappa = "cdceb1db291ea07e439ebb839c50430b25f94b867893ab924c2554c95ad8410a"
+embedded = "bc663b7f673912d89aca65fe1899be3633535bc775c2977561d0b5447b7bea78"
+status = "residue"
+cause = "mir::Ty: PodCastError"
+
+[[fn]]
+path = "bytemuck::<impl at src/lib.rs:241:45: 241:49>::hash"
+kappa = "3f698aeb6b59413bc1e216edc749ed0a7559127db232ba50851405571be57fda"
+at = "PodCastError=u32"
+embedded = "47b7722147c695ff112ec036843d11822c4b6a2b053375467b65e85ebd81226c"
+status = "residue"
+cause = "mir::Ty: __H"
+
+[[fn]]
+path = "bytemuck::PodCastError::fmt"
+kappa = "c0803d8e09791f23752c7dbbc7d35d2caed6fa5f4d6d61720d411e9923f28f71"
+at = "PodCastError=u32"
+embedded = "ca11771e48dc2bf29924f1c49f2ff10d4a4f41c894889642152c812f770b30f4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytemuck::bytes_of"
+kappa = "6e63f6f2aca6d96e264dd3a74635ebe938f1b062f92b80e838ad76d025320edd"
+at = "T=u32"
+embedded = "27facee162e0cc269689e7faa4b510af6093018712cfddda200c7755cefe969e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::bytes_of: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::bytes_of_mut"
+kappa = "a9141145030f20830c9e82842ccf4bc4494119fadee6ef9eca7e6235fefe1ee0"
+at = "T=u32"
+embedded = "2a74264bad88eed8c0800a1c9e67b7c13bd468e0f7198c8e69d90a7010741d38"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::bytes_of_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::slice::from_mut"
+
+[[fn]]
+path = "bytemuck::cast"
+kappa = "39ee3cd80789617846e12ac039b81cf7ee902ddd463fdc6e822b54a41fbedbbc"
+at = "A=u32, B=u32"
+embedded = "751e7c2d3d1b86944f165298b30f0402616f16a206a679b3fed831518cc68828"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::cast: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::cast_mut"
+kappa = "8a5f8848ef208c4fd0ed2eeb159ef266f12059e0848d5ee8fe2332ef46b3782b"
+at = "A=u32, B=u32"
+embedded = "dd2548c72b4f3939f6106a8d0da94a31be6309429f0fca7a9e0bdad59a515ff9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::cast_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::cast_ref"
+kappa = "6c3ec8e3225c4ebba87b9ad836aa6b0fdd70ce9c71ff24283ee13881407f28aa"
+at = "A=u32, B=u32"
+embedded = "19dffd326648ff3800e195592e06adc6b01133f1cd3017c97f39ff876c57360d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::cast_ref: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::cast_slice"
+kappa = "cdccdc4fe343a8a8f91f0954163f2f42f951d9d3c03a7054ef7d880fdf588bd2"
+at = "A=u32, B=u32"
+embedded = "408356191bf57023b9f2b0a9e67f15eb49713285ecd10be19272822ef7cdd092"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::cast_slice: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::cast_slice_mut"
+kappa = "d39601d9c3f9c06945e5018af7dde388d64f56595e4b897dd8ce817fc9e1002f"
+at = "A=u32, B=u32"
+embedded = "52dce12fdaeaacf8e39908db2e912291dd7e72f12a428a4872107e5fe3c5450d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::cast_slice_mut: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::fill_zeroes"
+kappa = "772278a5725377c2ad3e028704d7cf28669974a9eef5d6a164a3c46f1b5e79f6"
+at = "T=u32"
+embedded = "30e3deb728ccec3f63e544df7c3f0492fe897cae783e9e3105f9d64222aa90da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::needs_drop"
+
+[[fn]]
+path = "bytemuck::from_bytes"
+kappa = "3ce78a0aa74b4e79923c8a248c8086b2aecaed8e94f7e8767d1b06b7b853bf89"
+at = "T=u32"
+embedded = "8c5c2d3ec6487a282fb4197f4dc0fa910553ca1e33ea6a79a9c2b93a317c1720"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::from_bytes: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::from_bytes_mut"
+kappa = "8930711dd9c1dadb4631be505df5a6d81a7e877a46bc52c0c1b0822141c187ae"
+at = "T=u32"
+embedded = "ccc9001a226c576fe0814265f669ae0225f51a29b372426e81a10b2df468c5fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::from_bytes_mut: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::pod_align_to"
+kappa = "2df41a1b162e3b65505acb00e8ddfc4c2b664a25af512709b8feab778bdc88cb"
+at = "T=u32, U=u32"
+embedded = "060de3447058da33ff365b9622ef7d58d459cc13a775c3f0bef89c63734c7555"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u32]>::align_to"
+
+[[fn]]
+path = "bytemuck::pod_align_to_mut"
+kappa = "8eb0073286459077a8acb3288ed5feb7065a75a6910b08c833bf0d29d84f6b79"
+at = "T=u32, U=u32"
+embedded = "c0b075588df2cb5058900aa3dfdb15718867c409540e85eca6874627b97afc9c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u32]>::align_to_mut"
+
+[[fn]]
+path = "bytemuck::pod_read_unaligned"
+kappa = "b2e866426c00fe8bf3973ea7607df382287ccd0952f1bda781e3597c4023a3e9"
+at = "T=u32"
+embedded = "1f5696560b00ef9637407be038494f32efe97adb8a0b5a33f9325668ac38e26a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::pod_read_unaligned: bytemuck's MIR stops at type outside the lift: PodCastError"
+
+[[fn]]
+path = "bytemuck::try_cast"
+kappa = "1271e257e4bf47b07391228b60fd1b90c8a802b2d2b4767bd96b7bb5c3f88245"
+at = "A=u32, B=u32, PodCastError=u32"
+embedded = "51a6034bf1597a329f6c0cb2943ac77044653bfded764095da5d522ff23b64f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_cast: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::try_cast_mut"
+kappa = "781cc223a53be4fd38e13905a87a83e6ed81114fd13a2e5292d28ee9a0457f3b"
+at = "A=u32, B=u32, PodCastError=u32"
+embedded = "02512df9e2206098d8338561fdf8f66dd2eac41ce2bbd9a68e6c5735bd121d23"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_cast_mut: bytemuck's MIR stops at mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "bytemuck::try_cast_ref"
+kappa = "e4331372e65d5c621c8d5200b9b770ded8bea9281ad53207e1cf4b3943e516f2"
+at = "A=u32, B=u32, PodCastError=u32"
+embedded = "e3ddea73993d17bba4c65f206d32d92d87b773080294eb34b400a5e429a46d4c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_cast_ref: bytemuck's MIR stops at mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "bytemuck::try_cast_slice"
+kappa = "58444b0a7f3cbe27981376b7d4070d180590e70c06087339ceb842ace191db1d"
+at = "A=u32, B=u32, PodCastError=u32"
+embedded = "e2fa0337856a0ef7b248b66056c421eae9c6551209253c64e1660418df2acbc0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_cast_slice: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "bytemuck::try_cast_slice_mut"
+kappa = "dfd54d956d91a6ae5e6f6c4e296d1b5dbff7c4bf8bdf5b35a8e1772ec96ac1dc"
+at = "A=u32, B=u32, PodCastError=u32"
+embedded = "ef1e71e164c205b2d080b5959898bd6dc4501035ee4ed1207f93873e63c76531"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_cast_slice_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "bytemuck::try_from_bytes"
+kappa = "bd04e12adf52e3c1d8b39780fd127878f42178b5deffd8351e0e46bb3e42ac21"
+at = "PodCastError=u32, T=u32"
+embedded = "0fc0ceeb43f4c06624c66b1fedb333525a393ab96ee7ad35ecfbf8958e4c38b2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_from_bytes: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::try_from_bytes_mut"
+kappa = "f5b46f09b4e8e9f5f00560e440f71170f1d5d2ebcdac86bd94d048bbb19815dd"
+at = "PodCastError=u32, T=u32"
+embedded = "57e80a2b51c69fbaca50e7e281c61914cf08b5519b907f5d767c6a5a3cb1591c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_from_bytes_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::try_pod_read_unaligned"
+kappa = "404e31ca9e5f657188e6a9b85036728fc04345beb34fefabec1b8a438622eda4"
+at = "PodCastError=u32, T=u32"
+embedded = "b5a434f97b1e1fa2eec2441fac023798279fce2976e748378b22a6422f1051d2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: internal::try_pod_read_unaligned: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bytemuck::write_zeroes"
+kappa = "ccb808212f8672d7f1e2c991dbc8d99a9b9502a3ff461905280af18ac1b158ea"
+at = "T=u32"
+embedded = "f9ce2843cb1cd30b61c732f6177d318bb69512b0ccf64600832861d14b2445cc"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "bytemuck::write_zeroes::EnsureZeroWrite::drop"
+kappa = "5accda22c1130e595acc09262755694e442b2b34a0ade216aa216eb55b82fe9f"
+at = "T=u32"
+embedded = "9cb10b5f7eed54953b3d068271421abdc8bffc5b96fe9ce00f96c5d908144c57"
+status = "residue"
+cause = "mir::Ty: EnsureZeroWrite<u32>"
+

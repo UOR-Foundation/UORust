@@ -1,0 +1,30 @@
+[[fn]]
+path = "aws-lc-rs::decode"
+kappa = "82254f5d1efa5c8da554951fc5c5835484b7c441a93f84c3d4d17e80f4e1c698"
+embedded = "daa23f3f5aca9e83459d16f6d1e8bac1197e04a502a5e580687383f9bd0f4bf1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "aws-lc-rs::decode_dirty"
+kappa = "74f70d302aaa9bb1cc26c7ddf86756170471f91d974ae61453d81cb50ea4fc32"
+embedded = "d91be47afb82345cb7073a8c7fe6e50609b87e93f2da672996b26c2ad6db006f"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "aws-lc-rs::encode"
+kappa = "4b054c22d717537c6378aab580a7cad9dd238b566cbb4f4f17410ffa80024c36"
+at = "T=u32"
+embedded = "8271d02624af8840a5ab8d9af2c488d26522afc5404cf2ace4d3ea8de18204ed"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "aws-lc-rs::encode_upper"
+kappa = "21332f3d733353e1cb733b9ee0a4f776e71a15a0f0ef0a8d5a9925fd29639046"
+at = "T=u32"
+embedded = "40ab6ad1eaf46223ada58846ae8c41d5192ad46fb8260c25b1b872f6a0f3c9c7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: hex::encode: aws-lc-rs's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+

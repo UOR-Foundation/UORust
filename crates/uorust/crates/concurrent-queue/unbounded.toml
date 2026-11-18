@@ -1,0 +1,125 @@
+[[fn]]
+path = "concurrent-queue::BLOCK_CAP"
+kappa = "5e4dbe6b55dc9e9ffdd40003c4ef770bfcb424d174e951dd495f89dc96c254e0"
+embedded = "5f3687d0abad5287a09bf2504bb1ca3e19aacebb3aa549a581b02ef4440a64e9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item unbounded::LAP"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Block::destroy"
+kappa = "5c9b9070a02a0ab2d229dc247e17042344dae58c3651739500f58f300bd4b293"
+at = "T=u32"
+embedded = "d5ab3aae4257e9595b3b583158832032c9cd5dc429451cec1d4c279124a3976c"
+status = "residue"
+cause = "mir::Operand::Constant: unbounded::BLOCK_CAP: mir::Operand::Constant: the constant item unbounded::LAP"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Block::new"
+kappa = "37e8e92012970b19789917b3beff2cd83f61848ec28b997a71992b8133a3eb6f"
+at = "T=u32"
+embedded = "d8762bc0b9d324e8833a45037c6e5fee3f8869f0ead53bdb6056f195ace8d0a4"
+status = "residue"
+cause = "mir::Ty: unbounded::Block<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Block::wait_next"
+kappa = "3b271fdc9b8edf926bd419c884bbf5c1b78c14e6075951b03185e2d5c5d38d01"
+at = "T=u32"
+embedded = "928bbbbd6e1dc62ccf3bd6afee50eba746570bf5ae1a58151fcffd4e40eec3b0"
+status = "residue"
+cause = "mir::Ty: Block<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Slot::UNINIT"
+kappa = "4e6929b2ae4e995b4738d568634ac236eb5ea302bb3d8f89d6689fdd0e760020"
+at = "T=u32"
+embedded = "0dc36121cdb41ecec70ea4cd8d497b9e01f97f2ac72515c14da6e820853d3d11"
+status = "residue"
+cause = "mir::Ty: unbounded::Slot<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Slot::uninit_block"
+kappa = "bfc2cf21f93dc51c42bc491bbb83f0f8c3838d5ffb5cf08e2d0c3c5f84ed4bcb"
+at = "T=u32"
+embedded = "8702c92ad49f34fe1361b3cce5917991fe1ad4bf90cdd5af8b767b8ab118e319"
+status = "residue"
+cause = "mir::Ty: unbounded::Slot<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Slot::wait_write"
+kappa = "c6cb1c6ba98d1a822f7f8b70dbe1d9dbff621d9986b7144e1369444dee9614f5"
+embedded = "823d12504eecfd4c8d9c67ac8fe1b5144d12bce96751718443b60d4523e08d33"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::close"
+kappa = "642b7c2bed622ae8da22eca7e1ac600bb72b06bb6085bc7892c1a2d97317b5b8"
+at = "T=u32"
+embedded = "981d5ed0da8ac6fdf4a9ce192dd0ad8a4d6c9ae85aa3b34a622de33cf4b54406"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::drop"
+kappa = "0e91f748bf475a5e808e6cd9312ef1f79feb58fa02e0b14d8f6d0f132987ce44"
+at = "T=u32"
+embedded = "d49f4e30e99ba9a83b3ec9bbba6c2e284972a03167d2570904f5e6759d7cf215"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::is_closed"
+kappa = "ff5057c4a3c35a2df3923d9129654b6180357a510f5c23ff80136dffae0c38d3"
+at = "T=u32"
+embedded = "af03e1a8341d921137904e8021b8bd28d4902f4c191830c736de9e632e1172a8"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::is_empty"
+kappa = "f7986d14e0e9a0c4704a9f9aca9534b6f60d0dafa0e13d57ed1f57458fe95014"
+at = "T=u32"
+embedded = "55ff0e86313ce0be802482431257f1538c337e9ff5a3f9ad7612350f87404667"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::is_full"
+kappa = "12f69f2f8d2a8e58e18559c9137e8fcd39aeeb485924f38e2a54100cc2ab12d2"
+embedded = "13f532c884ea1d709e35a4ba3a533891c417f97c65c5288742cbfb4c0e522541"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::len"
+kappa = "7e74e97e7fdf5260a2b21a3394a5c86e96a8cdef9803cd36dd7da9b64221ecc6"
+at = "T=u32"
+embedded = "7167e726c0043e35e79cc39dc652b748fdf46acd3ba6b1ada1e41ca1d2b54f34"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::new"
+kappa = "3510103582c638f0b50d465e310f5989dcf85111cd0042a2f4d4216ec7339df5"
+at = "T=u32"
+embedded = "44d00f11d67407a973254ae9100cecffda8bbd1e78737cc3e2581b7250a26e79"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::pop"
+kappa = "a986972780d4c0da45fcd913a1e230943a9a9083862e7e4489942a07c6e38d9b"
+at = "PopError=u32, T=u32"
+embedded = "3113ffaa942185f2bdcf704182db9929d125f9e18dace9dae1905e9efeb69b8e"
+status = "residue"
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+
+[[fn]]
+path = "concurrent-queue::unbounded::Unbounded::push"
+kappa = "183486071e33b4d05c8242c1000716095aa5d42a87c5685cda6219aec4339d9c"
+at = "T=u32"
+embedded = "1e328eaf1aec92b4bf6ea299ba3f8dbf71e98d360f8cfbaaf8b0ae1b5bda83b6"
+status = "residue"
+cause = "mir::Ty: PushError<u32>"
+

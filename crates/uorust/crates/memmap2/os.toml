@@ -1,0 +1,221 @@
+[[fn]]
+path = "memmap2::file_len"
+kappa = "e084df889a79ddd2862b7324d52a7aaf5a0542b6448ea8596c33c85f4aa3dc85"
+embedded = "ebbe09d730a250a8b206fae45f80d5db1a182b8d1f63fdbcca0d6d35331938ff"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::adjust_mmap_params"
+kappa = "c1c8622d3d241191781dd3840409096da4ae14cfe025d3ede18296da7f311da8"
+embedded = "7dc71c5f0103cd8117a54b49ef62cd86cf2180a07e752e7122e7ca2f588549e5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::advise"
+kappa = "9bd110ead150bbe905a383b1da8275c98725960fd761d077ff1f253fb0bb0e07"
+embedded = "193484fd4ccfdff1827ca8e072ba09219f07ca8517881c6d525b7811ddcae483"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::as_mmap_params"
+kappa = "cdc25be2a3120a120b57023ea22458d518e707a1a5ea6854a075dc4ade244078"
+embedded = "cf4d161646271087e7d77b5617053fb888e54b630c1fddffa4735caa5c4996fc"
+status = "residue"
+cause = "mir::Ty: MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::check_fd_safe_to_map"
+kappa = "39ee6aef2f8a96e2c17610b2f5ccde4f8fc26ca9ce9d943ae8063f7c5e1d7f54"
+at = "MapIfSafeError=u32"
+embedded = "e9b6fa5616670f682bff88b5d6561760a78c646bbf2456b8bc92045da6df5ed9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: os::MmapInner::get_memfd_seals: memmap2's MIR stops at mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+
+[[fn]]
+path = "memmap2::os::MmapInner::check_memfd_seals"
+kappa = "cc773cc9bc67d83aa42e9f667d6dbd852349339d5694ca5b4f5a62328af48d38"
+at = "MapIfSafeError=u32"
+embedded = "bc2efeda3959371542d1dae81f570535c08136bfd47e34654eace5a7c0b9019f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::F_SEAL_SHRINK"
+
+[[fn]]
+path = "memmap2::os::MmapInner::check_safe_to_map"
+kappa = "cf8befacfa2cac1d6950023c72bbfbb0c15f65c361df8d139e37f08afb2facb4"
+at = "MapIfSafeError=u32"
+embedded = "2f8d2483835a3a383c686293b12c6ec42339bceb9068d8d091b955e934bbc6d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: os::MmapInner::check_fd_safe_to_map: memmap2's MIR stops at mir::TerminatorKind::Call: os::MmapInner::get_memfd_seals: memmap2's MIR stops at mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+
+[[fn]]
+path = "memmap2::os::MmapInner::drop"
+kappa = "b2be5875c4d025e0e51bbf50030bc304feb95ddabfb684e6bbb83e01e1b3824e"
+embedded = "35c18f0ce5785d431a8215d29f9dbb8d2ab1852f2252a0d33f1f0a758c9679bb"
+status = "residue"
+cause = "mir::Ty: MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::flush"
+kappa = "c81ae8d75715fc50494840363b256f3c2bd8e2ff81229781ced40c511b361bd6"
+embedded = "7392fa2d42c64d2cbf47bc07ad692d187ad82db238d77e8213e4cdcea6714863"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::flush_async"
+kappa = "a9c86f0dc3808df5ddad0e9aa0be3a515ddffffa4cbf31eff968fd4036dcbeaa"
+embedded = "cd715665b22f10bc4e10d43fbd35adb4c5df9c0c3e40963b444aa8e3e7e760e3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::from_raw_parts"
+kappa = "e58fc9372af06c436641ca3063d210f5d4a5963bc42b6a82967e6a87d6619fe5"
+embedded = "3eeaecdc56d72787ef5e720bec5e999439382249cb327b58753ae87455d8e9c6"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::get_memfd_seals"
+kappa = "3ea89c4a5f853f388626a3fd4737c34a3b681686905de4a54736262d1a61bb64"
+embedded = "403c26c1720bcdbd1466feadde6d5252fce9167adfef928405cd32ca0ab7bb55"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+
+[[fn]]
+path = "memmap2::os::MmapInner::has_fs_verity"
+kappa = "04b7e60c0a2cefd0393c907173c420502469afd86551f957c9e41df878cd8558"
+embedded = "b63f4fb68bb29df1e0f544ace917ed3ea2d51dd969f71569148c59e0812dc5e9"
+status = "residue"
+cause = "mir::Ty: os::MmapInner::has_fs_verity::FsVerityDigest"
+
+[[fn]]
+path = "memmap2::os::MmapInner::len"
+kappa = "a78243b7f715c2d2901475db7563466f9b729ba40a3f3d3c60f9b6361619c94d"
+embedded = "9ac8472ae22d3ed7e7664c4bed1310ce3b34108493dac7b1ab0dc5b750752259"
+status = "residue"
+cause = "mir::Ty: MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::lock"
+kappa = "857afadc22c3f6a6416bcfc1a7fa2754ba5e6a62a4171da3c6b6df76ff06cb20"
+embedded = "ab8b32ee52a538d5e79a108fe77f75432d35104e2b4b12200a341737c8deb2b8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::make_exec"
+kappa = "58c2027eded6944af87595da619fa235cc6eb5b57a7f2df1cc5a5377f54ded6f"
+embedded = "38a5db88cdeacdf9b04cb33f1b03d624ca63b63d5b4581485ed2ce0c9ee15345"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::make_mut"
+kappa = "6042d35c36530cb93dbdd96b63f620efef22c5f8920f46054413b4dc45c22ded"
+embedded = "78e5e25d3969020034ea915b4697ef91946f126776b235b78cb2ed77a3ded89b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::make_read_only"
+kappa = "542aa641620311f9a9fa7df84bbef2970bf415b254edd8306839cb61d4ebe0fb"
+embedded = "8cd6a0736964075a05088d7aeaac56f973702797b9cd7083fdc490936bd37be3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map"
+kappa = "e7d7080f7c9f3aeffe9ba3db5149ffcca5cb0fa4437227de5f8517a376980c31"
+embedded = "95fa7531b7ffe6bebdbb23e6640760037fc6535fb5b9593b3dff7539b30ec8dc"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map_anon"
+kappa = "b3465c1ae2900f68418b5f08f37c78116c777b80c97689288b980a57bf56f2e1"
+embedded = "65a8f0756e03422988e2a2232cc682d3caa7062f01e19dd69ef0ef16f0f9e15c"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map_copy"
+kappa = "57e7e44e927746bab645e850c76b83f8af544e42437b7b68e7877b6ee8f7180c"
+embedded = "0b70c767e49ce661d5c2e8cecbac38807f35dd37dea6c39a4c3dd209416574f5"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map_copy_read_only"
+kappa = "71dead37aff6a781021199e3456978884b87ab001ab3e726acda81e8a95c1f7b"
+embedded = "07596ed8bdfb47bc10b04393a5f2c51117ac244ed8a206fbdf23e63cf73040f6"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map_exec"
+kappa = "48e7f1cdba632a0f31b5b6cf64baec68dd38fadf5993b8aa0342a3d3d79b062e"
+embedded = "7cf51009d2a2bfa25f195f3ae72a174d14ff08d80d883b4e90951881045a1614"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::map_mut"
+kappa = "edd10ac17c9ab64ea6a805638ac2ede255c730f1cc95adcac35e73ad95c75cca"
+embedded = "2b2a6f1a0bbfc59cbbd2237e9298548777d2bfccf4dafa7d9cd07890dbf5896b"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::mprotect"
+kappa = "513a1ce71b557036f19b135dfa1c7967a0c4025ef61abd383570e894e2b34f54"
+embedded = "a6fb42adf496fb951d6753ecce1175822f64dbaa9daaa157dfb71c2122006cde"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::mut_ptr"
+kappa = "18e1faaadd73590c93d1e9a9bba1c91dc4a926f7b5621be65df5f8cf98e85a12"
+embedded = "a2c4321fcb444896cb41cfdbfcd5f2f49eac94462c71a7cf2779ca1ccfa10a16"
+status = "residue"
+cause = "mir::Ty: MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::new"
+kappa = "d60fd19c00b29c65f7dabc4a199e48225cd8a35278a08330a94c02b7f86182b6"
+embedded = "bfaa3d39d90c6827ebb4b5fdff5107013c8e247f2b61576eb62bfd3268b80eff"
+status = "residue"
+cause = "mir::Ty: os::MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::ptr"
+kappa = "da41d5aadfd92182bb8bf227140ece65fedfb737b59d6a690803fe72403b7131"
+embedded = "d3afcedacbcb26c78d6502a80311efe8323da69af0c7df6d89862ebab6ceeb55"
+status = "residue"
+cause = "mir::Ty: MmapInner"
+
+[[fn]]
+path = "memmap2::os::MmapInner::remap"
+kappa = "6c2373371e73aa7d06d5323eaeb6611f1adf669d1aab2fff290b51bc2430d222"
+at = "RemapOptions=u32"
+embedded = "d3ca11863a51a45260d3b8ea89008dcfaccf86db087c7d814a14050acb30c92a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::os::MmapInner::unlock"
+kappa = "ffeb7c77da600c87145993dcd3c9f51bb1a1b84fd738027cdaaf7d633e430968"
+embedded = "dc73e6d0cd6d53f301c7bf4f1f880c67669fd2f05dd9d0f0d2692d6f99132e03"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::page_size"
+kappa = "24f211c9c20cb1f6dd9afae37060cbff3ce5486f5ab26744787aa513c05551de"
+embedded = "98691e6e0d1fc7c9528c45e7b8cc70e3d840bdbb4d803d04121eb108ea7769ba"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1: &Atomic<usize>}"
+

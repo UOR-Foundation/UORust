@@ -1,0 +1,321 @@
+# The criterion-plot register (written by `uorust crate criterion-plot@0.8.2`; do not edit): every body of
+# criterion-plot's MIR at criterion-plot 0.8.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 194
+translated = 21
+residue = 173
+
+[module.axis]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.candlestick]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.crate]
+bodies = 48
+translated = 17
+residue = 31
+
+[module.curve]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.data]
+bodies = 38
+translated = 4
+residue = 34
+
+[module.display]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.errorbar]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.filledcurve]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.grid]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.key]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.map]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.proxy]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 194
+embedded = 194
+evaluable = 194
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: axis::Properties"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: key::Properties"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: curve::Properties"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: errorbar::Properties"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: map::axis::Map<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: map::grid::Map<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: candlestick::Properties"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: filledcurve::Properties"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: grid::Properties"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Matrix"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: data::Matrix"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: curve::Style"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: errorbar::Style"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::axis::Items<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::grid::Items<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Figure::new: criterion-plot's MIR stops at type outside the lift: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Axes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Axis"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoxWidth"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Candlesticks<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Curve<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorBar<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Figure"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FilledCurve<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Font"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FontSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Grid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Horizontal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Justification"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LineType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Order"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Output"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Plot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PointType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Size"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Stacked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Terminal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Title"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VersionError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Vertical"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Boxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Horizontal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Justification"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Order"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Position"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Stacked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key::Vertical"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::ParseIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::Child"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1

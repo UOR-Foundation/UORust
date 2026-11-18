@@ -1,0 +1,35 @@
+[[fn]]
+path = "ref-cast::LayoutUnsized::ALIGN"
+kappa = "a73fe674f73c2d64e1102329a92f243fcb234c65350dc0b972c678d48a24fa80"
+embedded = "81523b82ba7a8c341b7c30024c98af9f7654164d47a8b8ef83de34915a566b91"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ref-cast::LayoutUnsized::SIZE"
+kappa = "4e9eccdff71d57b88b8b48320751d82092edfb6d30f7359325e0646075afb161"
+embedded = "33b9804f4c5760d35b38b95c44b6bad0663500b0d9a4a1ef09dea8fddef7fce6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ref-cast::assert_layout"
+kappa = "89310332ac890488d156a6ca9ecbe79c0ba31b5299c72b87f1417e95e6c252e3"
+embedded = "5d04016f1657a683ac72524ae7058f2015797327be94170e96e91a4d2d72397d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::any::type_name"
+
+[[fn]]
+path = "ref-cast::layout::Layout::ALIGN"
+kappa = "58f5c6dfdac101fb6bd73ebf9798621f454cf87d6d308ff168cf7cab26e5c556"
+embedded = "37d11470743ad8862b18662442313c7ed468c7eceb50dc7159b9a0f39458ab17"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "ref-cast::layout::Layout::SIZE"
+kappa = "87a8edb2a8c4e87dfd2f5880786a2eb6e5740940ee76d4c5be4bfbb47b797e28"
+embedded = "4ff67e2141c124b71b3d2e58524e2659ea5c77d9e8cb7729aa6d8abff7b2adc8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+

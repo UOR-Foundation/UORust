@@ -1,0 +1,57 @@
+[[fn]]
+path = "constant_time_eq::LANES"
+kappa = "10bb342a498e6dce744e8ee26d489a70844b7ca6e3bf7a1df55fb1a358334e3b"
+embedded = "49991d845d0ddafb1a3505f808b3978f4b609949af7f16cc8a2edf9d7e85f2b1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "constant_time_eq::and_si128"
+kappa = "397f6b3bbb6a4dd34e5ff4792c9a2a951293bdd1b1044b1db8c7f1d7dfcbe714"
+embedded = "70bfac01156287ebd31650bee273a9e0660b870bdc79f305193680a83a304dae"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "constant_time_eq::cmpeq_epi8"
+kappa = "dd3291c370df354a6e2127399f395bd13b3c9df4848b0ef56e47ad26fa15e157"
+embedded = "8dae5307332fe4ce64fcab275fecaa1f28d9e281d3ee5a1f6445d05e94d2c908"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_sse2"
+kappa = "cb608568606ef1c095bb4694cc4d5ff4a27110b504b8cc50c506fe5c8884b170"
+embedded = "5b23b877e909b855dd60ac4d921aebd0daed8ba34b0fe7818086bdf8bb806ba8"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "constant_time_eq::loadu_si128"
+kappa = "ebab0d83b6670f61f68ea993dfde0e0e8f281f9245206c5ae3d0df81014a933f"
+embedded = "6a06cce70ab0c4b25dcc13cd60062826f745081d6f28d77e8422dbc5be52a0f8"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "constant_time_eq::movemask_epi8"
+kappa = "046576b6d16505a81ed91d332a2ee64c57844a80457d6b4b912bb75c2a152789"
+embedded = "ed5b82e6752dda8ee114fa7420d6304c02fdd9d295d487f0888cd17763c0c3af"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "constant_time_eq::sse2::constant_time_eq"
+kappa = "52732fb4cfc8a350ad7245e4db6d9e105154ecefe3a8e3e50d7d3381a97f00dc"
+embedded = "b3f6431da6657b25978f641ced186b5df6122cee53b5493b2c7bb4680da8dc70"
+status = "residue"
+cause = "mir::AggregateKind::Closure: sse2::constant_time_eq::{closure#0}: mir::TerminatorKind::Call: sse2::constant_time_eq_sse2: constant_time_eq's MIR stops at type outside the lift: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "constant_time_eq::sse2::constant_time_eq_n"
+kappa = "29c2dce220056eeec7a6a7547c6bc3619220652057b277f4bc1a3c0eab30793a"
+at = "N=#_N"
+embedded = "dacbf706fd64468fce56a6d1902e31f41635942f55153ca1e58a65e713e56334"
+status = "residue"
+cause = "mir::AggregateKind::Closure: sse2::constant_time_eq_n::{closure#0}: type outside the lift: std::ops::RangeFull"
+

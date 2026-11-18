@@ -1,0 +1,183 @@
+# The tokio-tungstenite register (written by `uorust crate tokio-tungstenite@0.30.0`; do not edit): every body of
+# tokio-tungstenite's MIR at tokio-tungstenite 0.30.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 57
+translated = 0
+residue = 57
+
+[module.compat]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.connect]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.handshake]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.stream]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.tls]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 57
+embedded = 57
+evaluable = 57
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tungstenite::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: WebSocketStream<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AllowStd<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: compat::AllowStd<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WakerProxy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compat::WakerProxy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::StartedHandshake<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::MaybeTlsStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls::Connector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tungstenite::HandshakeError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tungstenite::Message"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tungstenite::protocol::WebSocketConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of WebSocketStream<u32>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of WebSocketStream<u32>::from_partially_read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of WebSocketStream<u32>::from_raw_socket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of accept_async<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of accept_async_with_config<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of accept_hdr_async<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of accept_hdr_async_with_config<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client_async<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client_async_with_config<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connect::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connect::connect_async<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connect::connect_async_with_config<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of handshake::client_handshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of handshake::handshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of handshake::server_handshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of handshake::without_handshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of tls::client_async_tls_with_config<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of tls::encryption::plain::wrap_stream<u32>"
+bodies = 1

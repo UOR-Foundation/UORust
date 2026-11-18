@@ -1,0 +1,245 @@
+[[fn]]
+path = "aws-lc-rs::HKDF_SHA1_FOR_LEGACY_USE_ONLY"
+kappa = "784a7059245bc162ee849236ecf8ecbdb2bfe55a71a6c3df13ca1b204c50bfb0"
+embedded = "f97c3a80ec4e84495eda8ea1b360fb750d70054731926ca90c6e0a9f7e9e8799"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::HKDF_SHA256"
+kappa = "888bf1e405126d2d0a4503b872d1bb0c1f78d8febee83b37c311115da625d279"
+embedded = "86486a1dded99ab685029f9fbb512c3421bd4d6cbce785fb60e9da86aae24dac"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::HKDF_SHA384"
+kappa = "3dc67df6dada403bf1eb6289303679af4ba9cd4fc5086012978d6b9bd9c596e1"
+embedded = "c0e16b1c52fd553a71a46fdf61efab240866ee9460720aa88ad58ad3b84edf45"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::HKDF_SHA512"
+kappa = "ad44458a57c2946ba2e82a2421a64da58d5ae691b3f0d64137d34ceecdde2838"
+embedded = "0487faf1ebe23d4a3903cfb21dde923f833b7ed5ce531872b319a34d882f20ff"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::MAX_HKDF_PRK_LEN"
+kappa = "c37ddb500cdaa1295888da4434ee51e6bf6580624df32863bf09852cb4e1ae2b"
+embedded = "254fa7b1b606fa23ef6e32f8f94d5a7f880ee04388ed3553b68d8bb77eed39ae"
+status = "translated"
+digest = "317b84fecf19726e46215311a44a881ede006015257d547dae1aafe6eb18a47a"
+
+[[fn]]
+path = "aws-lc-rs::concatenate_info"
+kappa = "239b212533c7f747aac98ae25de71fec42f4a496198fbb62703a5379f59bdcc1"
+at = "F=u32, R=u32"
+embedded = "613415f37f4a5c79035c4f3d3b86b67da8ff1480a99ffcee8497d09d9fe28747"
+status = "residue"
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_, &[u8]>, {closure@src/hkdf.rs:444:43: 444:46}>"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:215:10: 215:15>::clone"
+kappa = "53fb7d5f67297a47d81122d297448798cda41a73ff5dda941f06e7a6f4f6ebd8"
+embedded = "2fd0093da844a64df7c6155bec7ecbf351886e0704e9136419d16b7af12129b6"
+status = "residue"
+cause = "mir::Ty: hkdf::PrkMode"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:300:10: 300:15>::clone"
+kappa = "a6fc033de759efc1fdc1e4586f60097b875c0e180062491e5a5e1af442659cab"
+embedded = "1be5ecd2850d83362bff2632473c7c73f6cf3fa2bdc83a87cc37f052e562f347"
+status = "residue"
+cause = "mir::Ty: hkdf::Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:56:10: 56:15>::clone"
+kappa = "2b30063e68115fe830262a022f0c292868f284f1cbb1ffa6ae2e80582e614683"
+embedded = "3ed0a3d62005b04d0d6efdd16ab72ac90503dde4f370b309069f74d57d0f8e59"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:56:23: 56:28>::fmt"
+kappa = "5fb21820ed7e28cd039787d4f21f7e69572e3698750a19a0a9bdc2522e794862"
+embedded = "7457f61fc3a8b959fb86c5894b9b780f39433164545d070d636c7475afe7911a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:56:30: 56:32>::assert_fields_are_eq"
+kappa = "46094c72557705b4f8fb8abe801363d5eaaa287821aa997039bc48a0e1d98ed5"
+embedded = "ed91d9f8b1552b34b141d7bc38d5912fec5ab44fc3cde35dbd5f802f41147893"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::<impl at src/hkdf.rs:56:34: 56:43>::eq"
+kappa = "33e9b9a7991eca30afc91630af36532ba78163b012278bc1c263bba6a340ecc5"
+embedded = "91d67eb1b47d38a408b257f598f5c10912a37f9288b9e5047a435a6afd7576e6"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Algorithm::hmac_algorithm"
+kappa = "fff7a81f1682351ab64250308813ea754c4fc8fb4c4067cbc811d54ce25c3b7e"
+embedded = "bc8e5a9624ea37a4e26d71bafdaaf38803dcf630618605134bbfbfaa36ffffa8"
+status = "residue"
+cause = "mir::Ty: hmac::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Algorithm::len"
+kappa = "5481ba33f3178ab69025d4ec274a8d572f1178b6b31e6250c2ca3e9914df0e86"
+embedded = "e98f2af73b4ddf575f0e34e9273e7a6e218275e95f5c8e4f6a1d6f6c70ddfaac"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Okm::fill"
+kappa = "fae7228d913b6b52741223187e9910f0119964040cdc5d4fc070725f00a68dc4"
+at = "L=u32"
+embedded = "bb6f988298f416e10ce1b8f1a59283888bb4bba84aac85ef31d7df32537b6992"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Okm::fmt"
+kappa = "2c8bdfb393ba05f80a37b7e0b3495b420e14df892b71e7f25d2b2fe280e54d1f"
+embedded = "88ca535fad374b0c2508c79d15a60b8d05e18acafbba6c68370694581f5d52d3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Okm::len"
+kappa = "5a7df0cf60a384b84f595f223f85256ad91758c2da76475472bad5a45e014eb1"
+at = "L=u32"
+embedded = "932ae03bb67f65d354703daeb41f608d516c4d21c229c217053ec2dffc535e10"
+status = "residue"
+cause = "mir::Ty: Okm<'_, u32>"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::drop"
+kappa = "0cf34e48d6cbbbf0d72103f5d1a0d7a09d925eeb3ad090076711c66e1a1690b7"
+embedded = "709437b24d9eabbb2e033f434cf8810947c6258e4d6ebf6a06d95331eaed9874"
+status = "residue"
+cause = "mir::Ty: Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::expand"
+kappa = "c52f61d69058142778224b624ee75f053f48ca0dc12e3e3cbcd4273650111655"
+at = "L=u32"
+embedded = "9ecca40f296db9a0ffdbd7045fbff056e33903787be6cdf8284c3a540fd40140"
+status = "residue"
+cause = "mir::Ty: hkdf::Okm<'_, u32>"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::fmt"
+kappa = "19cda851eca3eb71fe469217970353af86e18e5b30062b87e293ac38db486b70"
+embedded = "969a333531eadcc3cbe25f810a719fe6ca9561a889ccd1896b4f33bf5a63011d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::from"
+kappa = "c167107beb45a662c8a16c0edaab2da1019f8d9324ddbbce3b3e78369c6d3307"
+embedded = "6205bbd6d2d8c5a720bc2e6662f86698b372f4ae1fa091cd04ba0fae54c9f980"
+status = "residue"
+cause = "mir::Ty: hkdf::Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::new_less_safe"
+kappa = "6f50c205ee636decc7e204e0d1d5c6a0bce5153b986f9528c3f44dc023c8334e"
+embedded = "5061d1eadfce7100cbcc87eb802d79dc21e2c3c09c41d9d42642c036ca5b8043"
+status = "residue"
+cause = "mir::Ty: hkdf::Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Prk::try_new_less_safe"
+kappa = "8563784e64cb9bb5e5efd73d6c0aec4682834a0dfe11a3737ebc929c1485267b"
+embedded = "7b8fa32bc5fc0420865db18d1b806a439839af920bda9ed21d4620568f50c0a8"
+status = "residue"
+cause = "mir::Ty: hkdf::Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::PrkMode::fill"
+kappa = "36a9f588415b137b6d74f7d67c3822873191b71b43567d6c67e045ea3c6eef00"
+embedded = "419ece62f954f79acb4b4de2e22830f20cc3afe0e53328c61617a76cb20d9c4e"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::PrkMode::fmt"
+kappa = "2706bb8aa3094e46505ee16d523ab50d3e875b0a55b37ce1a6d7574c54fb4f69"
+embedded = "88952a16ad0d32cd0657b046e0fefdc37ea9d94b6bdc67257496797556987e69"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::algorithm"
+kappa = "9c86e87d420cb63d91799c839bc7968c6ee5f94da0dab020d11f4b6d238243f6"
+embedded = "358c715064fffae8947314d61cbab3848eb68de732eca315bd0195bb727c3752"
+status = "residue"
+cause = "mir::Ty: hkdf::Algorithm"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::extract"
+kappa = "46e812f5cae155efb337e0dafcc08bfba721ea6d7f9b97dde9206674fa977369"
+embedded = "915c1204f1791d110acb784ed2b9e3a7edb52f20f76db252ba8aef7b5ba5ae38"
+status = "residue"
+cause = "mir::Ty: hkdf::Prk"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::fmt"
+kappa = "136fb0145da620752f9a38d5b97600b7d6e6e8593c2a6a098dfd62c4041d0b1f"
+embedded = "f7b3e7ab318255d3c697f3717ad2053d46f299be1c4962f0e12df8d28dac3551"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::from"
+kappa = "bba6763cd6b76b516e709d2adc506f441034cf8e160ea94dd384531c0752d51f"
+embedded = "f7a5aa2d36064bef7b552da94bcd36db697695ab5177c9d265669921ec287a7e"
+status = "residue"
+cause = "mir::Ty: hkdf::Salt"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::new"
+kappa = "489102f2b516a8d23a6811cf0e945bcdafa9164a90ca136935ebb09eebbaa513"
+embedded = "ae5d3ffaf49881a4a7441ccad00efe53f4ce3f6f6cf0161147d0b74f8f07f22e"
+status = "residue"
+cause = "mir::Ty: hkdf::Salt"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::Salt::none"
+kappa = "dd58082523a9e3fbe09a2d19115b9c9a8ca0b5148924035ea27e45ed6fcb4f6b"
+embedded = "33646656ea3b524891032f1fc78c5b2360d116c70efd0642867a89d1a8538556"
+status = "residue"
+cause = "mir::Ty: hkdf::Salt"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::ZeroizeBoxSlice::deref"
+kappa = "2b095f80c43722839e0376a22bc8a9d69e7ba585531e337f90676ce5503deaea"
+at = "T=u32"
+embedded = "4ae39bcaa6d219445012e337f83153071076f8249d6c3ba5f25606ebc8260950"
+status = "residue"
+cause = "mir::Ty: ZeroizeBoxSlice<u32>"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::ZeroizeBoxSlice::drop"
+kappa = "54c3a2213ee543aa717cad9e858e6b11d8bc8dd39900c966c984d143ce15bb9c"
+at = "T=u32"
+embedded = "e76d263438572235a83589ef60bdd7f9e243d7d6f0745a0cdaa1ffbb1ed881a7"
+status = "residue"
+cause = "mir::Ty: ZeroizeBoxSlice<u32>"
+
+[[fn]]
+path = "aws-lc-rs::hkdf::ZeroizeBoxSlice::from"
+kappa = "1efb3e6b1067534c7d9038575762c53002c5bdeb0d4f2bc30751d5d39855b4e8"
+at = "T=u32"
+embedded = "e029f1819fc3c45cdd8b413514e799276cef9cb2cb18507d1d90eb7e9705f6ad"
+status = "residue"
+cause = "mir::Ty: hkdf::ZeroizeBoxSlice<u32>"
+

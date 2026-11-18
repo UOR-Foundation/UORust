@@ -1,0 +1,48 @@
+[[fn]]
+path = "allocator-api2::unique::Unique::as_mut"
+kappa = "f2aea4ed4b5fedc83fca472e779ecf03d4c9eeaaa168cf5033d3cf0aff399671"
+at = "T=u32"
+embedded = "e896b0fc2add179f17bb77b363b92714501a1a490cb6cd515512e7882761a2df"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::as_mut"
+
+[[fn]]
+path = "allocator-api2::unique::Unique::as_non_null_ptr"
+kappa = "f15150382b3efbeaae282aae1d4c3dd56f9b54e015601ae1b66c2a06284376fe"
+at = "T=u32"
+embedded = "a75088d692172cf190982c7ebc8183b1aa81b2818cbd8ab5e0449f9deca6e264"
+status = "translated"
+digest = "ce9338a346dafbf06cd4c164d1fc5d598d82fe203823b5edfc65d010de687400"
+
+[[fn]]
+path = "allocator-api2::unique::Unique::as_ptr"
+kappa = "f0a697f35848012a1f932c239177277c19d17bbfaa04978a5aa8ed20c26ebc8f"
+at = "T=u32"
+embedded = "98a2a2f04ca346fc55c63ba62d4bfbb7619027dbe201c77f20aecbbf0652f5d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+
+[[fn]]
+path = "allocator-api2::unique::Unique::as_ref"
+kappa = "6d081550d12685c2dbfaf4dc7696d4846307e1b015fe8c24f21f95b754ddebd9"
+at = "T=u32"
+embedded = "95a7fbaa845e066dec812b171c2f1f566b9a476a09b57c781de7b68b65872474"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unique::Unique::as_ptr: allocator-api2's MIR stops at mir::TerminatorKind::Call: NonNull::as_ptr"
+
+[[fn]]
+path = "allocator-api2::unique::Unique::clone"
+kappa = "f15effd9cd69431dc22662e4b89c30c1ea6537c52a202c61a40eb67181e02ecc"
+at = "T=u32"
+embedded = "18e118a57fd957b5939dccfe70cb6a2ab1ff4c47ac474b75266021ced9eb1bbb"
+status = "translated"
+digest = "531063d2407ce8681610062c0c3d9dd1ab6b538358fd4c38a7c38e139699f120"
+
+[[fn]]
+path = "allocator-api2::unique::Unique::new_unchecked"
+kappa = "e44193e44fe73b6497cc51e094e9b57e4bc952e09dc3aa64277a93a38fcab9ef"
+at = "T=u32"
+embedded = "28807cd163be99590fc2e13da9d93997acdbfb389d23616f7f76f41307590cce"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::new_unchecked"
+

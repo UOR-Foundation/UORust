@@ -1,0 +1,157 @@
+[[fn]]
+path = "fixedbitset::block::Block::ALL"
+kappa = "6d691ef5d6c01f9e1acdaab881304062fd1ca071ce9ad634cc8c8d5947c17754"
+embedded = "e38dcd6e14da38f9f60503006db48dad433d0227da105b350db4b8dc924e2773"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::BITS"
+kappa = "ee1cae8070c0eb44717833dfdace3bbd337355da14fe40d391671e4688db8367"
+embedded = "88d0e675a32bba4c6b7acac8c3b80b4a714772368f351bf55ba6b4f19f9f9d22"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::block::Block::NONE"
+kappa = "1170d6795b90b3a0c963c6ff36d81b62b5b5c230cfb1f6c1b6d030aa0eca65f7"
+embedded = "d39475da13ca1d716fb1dbb666178bf195f8d2f92ba9460ddafa6dec6101ac91"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::USIZE_COUNT"
+kappa = "db1d23a2f0dbe85862df2fd9ba5dc9dfaa27210c5bc3e1895dbaaa728ed2d4c8"
+embedded = "37a535552bd7ef5eb4b1934a8b2d4f26c733875c2e2e68ab3ef9025eefea3985"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::block::Block::cmp"
+kappa = "ec30ff4dbc02e0c4da92203f0310a720963adc504c58ea86e5bcf61e268dee86"
+embedded = "17eb9af0751c733ed1841d56ca74f4258da341b01b346bf0b453577d6487acfb"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::default"
+kappa = "d53fb219b5b73e3bc9e7ac166f7a786e0069813ef8f7f231a025f2702e7ccec1"
+embedded = "d65664540c021e14081de2afa2be4ac2cdf289cb55ed57c15f4305fd182e16f1"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::from_usize_array"
+kappa = "f540a94578be87b7e0c2ff71d288afd3b328cdaae6efb32e97a794dbc9aba2ca"
+embedded = "44f319580a92ce43f7de32e16875fb53c0ad944239923425279c61221c8f47ec"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::hash"
+kappa = "54fd3b8875ff290b2ebec12bc944e8aa974378a250b19078b673d00c4bc77e54"
+at = "H=u32"
+embedded = "65d1d14ffe0d9958c148f6ec899bd5ba7786035c63430f9a4a1602c7b1d6e6dc"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::into_usize_array"
+kappa = "83dfd6e1d6c3d00d8e7de295028eac4f55c29126cc6b3f3e7d4d53111cfa4a90"
+embedded = "5606b848896992bd473b4a4b564e928b9677dd609352a47d59b60821ab53189a"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::block::Block::partial_cmp"
+kappa = "014be2f69c933d07d11d36a541a96c4a7391b122f36f728194d5a3882e22e73d"
+embedded = "ecfb685966b54f58fc48df31fc52553c01f1a29e9c00658f211844c15bd35dd9"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::<impl at src/block/sse2.rs:9:16: 9:21>::clone"
+kappa = "0e3896fb4f6f8fee1f78eaf149696dc70d1ad4e78a433101dfa7b5e65a24145d"
+embedded = "463e13756c22426a023c1d4d08a6b6f34dcceef9ed40222290126b00a59fd6ec"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::<impl at src/block/sse2.rs:9:23: 9:28>::fmt"
+kappa = "f7a2383e1be309ad0575e76d4a0812d279fac072573844b476b606fc06a734ff"
+embedded = "1b96218090a0a09e4f4e3385fc2b903170995f0f866d0752d0c3ece667a1a79d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::andnot"
+kappa = "1ef1e149509fb0cab8cbae3980a9d3d9aad154167f21d2232edf1ff318bcaeaf"
+embedded = "719671d8af76bf55eb4be4fa9a8e9de3d37fd198549776a39444389c742a9818"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitand"
+kappa = "621b74c858d36110d1d6968392afe5f9e88a3bb907fe77fcee004445dca1875e"
+embedded = "64c5253cff74b8d9f9d69bf67d3cfdaf0ce3b245634fc50527e0ab30f3fc849d"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitand_assign"
+kappa = "9c7637002b75990dd7e2f0953f34392ac5edb4ec7364f1ee13bfda774157b8b1"
+embedded = "04ac54c50e0a8e314ed825488dba3b382e68c4fe60c1aaccf5da99a53a62c4be"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitor"
+kappa = "2aec3aec3ea423281c8a20b7a4bb21294c8cc58f9699c3cb8859f1474694144b"
+embedded = "d3198df9814a8ab84344ff8964f62d420f8bf0bad03af90bded770e251d29e9c"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitor_assign"
+kappa = "3e260ed22f0e2ca9e08221314ac007b5dd440ac9a61fc1c5f9551267928e6eea"
+embedded = "61069eaafc69b9c7e07ec1e198688bc1c64dcce972d6fc0e41e1379bc4d1cc87"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitxor"
+kappa = "6a396137a7d73ea154c9013771e36ae10bc320c43e42fe183de3111090771071"
+embedded = "53c8ed3a9e12d1140f60a024cbeec8fa5e493fcd73ead0cbb23b4782dc71ea7b"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::bitxor_assign"
+kappa = "9f1b2d60f65d069f4ff7019b402a5486763dbe39c780458ec66c456dcd3662ec"
+embedded = "ee2f2e3a9709f6ab8094a2d4140b73098e89ce7111f67414d8190a2b758674af"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::eq"
+kappa = "805bc05c01d34dc7d53af4dce11bf9758d6a42dbb557f50102e57664d48e0b44"
+embedded = "32bc47418dc55e9adcabde0f4f4dd1e9375f4a8bad53917c48e49882371265f0"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::is_empty"
+kappa = "998cfda1806e2863212eec3bda4d67afe65c4ea763cb107f58191f454e5ff3d9"
+embedded = "8503950c65036731907e9080a7124cb1404701b3ed3fd9d17b876fd9e07096c7"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::sse2::Block::not"
+kappa = "a05e6afb50f51f549c1f471162cbc59f64459959049925b8d318d23762d5793d"
+embedded = "cd7859a4e5c6df81424db79cb3923d353330be81948813bcb2f20d70281c4e81"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+

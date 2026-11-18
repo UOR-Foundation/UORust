@@ -1,0 +1,187 @@
+[[fn]]
+path = "quinn::AsyncUdpSocket::max_receive_segments"
+kappa = "182e066552eec05132d0a0fea517a3a0e0eb51119747fe5db32c3f00bba2f714"
+embedded = "ed9680972331e6d6e93a5e4bc7fd549a52396dbc2b29d992aba1c404cf337cbc"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "quinn::AsyncUdpSocket::max_transmit_segments"
+kappa = "6a0af123fcc2b0381c2a3e48dd8feb664d35acd3d817f7cf4d9dbdc6944bc765"
+embedded = "7560d7b49abd29c802c615cabfbcee4f125507af721af98a3ebfb8b78d206a18"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "quinn::AsyncUdpSocket::may_fragment"
+kappa = "fea5dc0626d75e442b7009a563a5eab6cbe53cae5a37deb0cb5d001799277652"
+embedded = "fba8d9030d5795280272d0035227fb14b036c5f8a0e555b2ec8e45490459393c"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "quinn::default_runtime"
+kappa = "1f2092fbadda95c9b2b4c87bd8c8bb148ec0137d3cac233a969ae6458b851e53"
+embedded = "12ac5d6bb265754759a55c7733ec0f62989392042a90229f23efa7ee46aaec9c"
+status = "residue"
+cause = "mir::Ty: dyn runtime::Runtime"
+
+[[fn]]
+path = "quinn::runtime::Runtime::now"
+kappa = "8aa314401ca334056951b50833188fc6be769798c3506f937dcdf4f46fa03705"
+embedded = "5f7f3a76a33b452baf18e71c23aa20180476437375ff7e7e52ba4da3bbf65b22"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn::runtime::UdpPollHelper::fmt"
+kappa = "df911466285063c06c4bcea33ef9ea3e97eee9de26b64cd0f478a1edf4f7c7b2"
+embedded = "a3c2196af1ed9f5c0fd3fc910d7c85d48a22e0ff25813f4cfb9f02d6c73aae40"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn::runtime::UdpPollHelper::new"
+kappa = "0e6de0e4cdc37e4192a55b9acb474a66c06df5df029ef82e89bfe3f87a710a98"
+at = "Fut=u32, MakeFut=u32"
+embedded = "912d72566d7e47e8e7d3ab7b8dd9f97d1238e57c7fcaebb1477743fdf1bcea53"
+status = "residue"
+cause = "mir::Ty: runtime::UdpPollHelper<u32, u32>"
+
+[[fn]]
+path = "quinn::runtime::UdpPollHelper::poll_writable"
+kappa = "d6b02d24dc7c7191a357e1da751c47c2603ea6671b6191d1a46147abf6d9ea28"
+at = "Fut=u32, MakeFut=u32"
+embedded = "cc71ff8f5eb922e30591c090bd325aa294f78b22db4f31997fbd210db666bc8a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn::runtime::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "403e1a15bf95fb0398f66f37be4a93d319e738cbe01453d7af812c0ee39dcefb"
+at = "Fut=u32, MakeFut=u32"
+embedded = "b4ed124859546498ee532b8321b5fdef7af3eb70f6518542d6ea500c3b8c982a"
+status = "residue"
+cause = "mir::Ty: runtime::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "quinn::runtime::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "61c37b37efcef715f0664095a1ea62f4fbd158ee0471d217ff43ce74a0027f47"
+at = "Fut=u32, MakeFut=u32"
+embedded = "23cfcd330c2a82fca8d1bfd62a4be2e4ea4e4a4b1edbe4e021571d0ba87a763e"
+status = "residue"
+cause = "mir::Ty: runtime::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "quinn::runtime::_::__assert_not_repr_packed"
+kappa = "e53ac1c2ec141387b46bb9875f4fca71a0dc6350607fad2674da96b603173c8c"
+at = "Fut=u32, MakeFut=u32"
+embedded = "100fc384201bfdcad2f42a5ea61fce6f3943d2454369f6c3693463634586bc40"
+status = "residue"
+cause = "mir::Ty: UdpPollHelper<u32, u32>"
+
+[[fn]]
+path = "quinn::tokio::<impl at src/runtime/tokio.rs:18:10: 18:15>::fmt"
+kappa = "f49a4f26d0b5915fbaeb4ecd39b3fbd8cff9086c97bb3be2dd65cc5a2121ef54"
+embedded = "67c0192e86b17e1b1e09ad4318e46b30011c5e3405d85c8c2543e9eacff09c60"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn::tokio::<impl at src/runtime/tokio.rs:51:10: 51:15>::fmt"
+kappa = "36234652f3a78f876a910ce5fd044aeacd2cc3154615b3094354890bfabf6974"
+embedded = "d62397927600b54ebd4d866b50d8233c55dbfcb744dfc95a64d393e100d7b699"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn::tokio::Sleep::poll"
+kappa = "ac6785f5f08a179400f99239586b258af95754d23e7c2e32d1b877af24a535c2"
+embedded = "e5a407124e1d3963aac1fa4dcba5a985468abca2d64b0b1cdfef33146b5199c4"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "quinn::tokio::Sleep::reset"
+kappa = "14cf003ab42d1f10ca3aef49a545658d513e3bd4145fd2a6536bc743c423e00a"
+embedded = "8744a28fd5c4ce7aa004f5075e031ebc430422bd16cc93552e7a97518205abe2"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "quinn::tokio::TokioRuntime::new_timer"
+kappa = "12bc74296d78a85d1fce1d33099e072056fec3dd8836179caea14583a5c34cee"
+embedded = "33c7311c7c01f66546111368ad764e40e86654f8a0d7e5a9c25cb1de05f8cfe4"
+status = "residue"
+cause = "mir::Ty: dyn runtime::AsyncTimer"
+
+[[fn]]
+path = "quinn::tokio::TokioRuntime::now"
+kappa = "f67bf9fbc11eac521a6226704bd40cf2787991c9838f5b795fcba871d017d136"
+embedded = "f41502e24bce0613d9e9dce832c61923e6c32170eab056497b1f19d4c65e3fd1"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn::tokio::TokioRuntime::spawn"
+kappa = "83c9443fd9332fee1d79f2999cf27c41f534a668f1562c83393ff166bc1cf98d"
+embedded = "5c7f518d7d87cdab4de1268ebbed4de129e9b6ffa43b28be9169c8328bf6ca27"
+status = "residue"
+cause = "mir::Ty: TokioRuntime"
+
+[[fn]]
+path = "quinn::tokio::TokioRuntime::wrap_udp_socket"
+kappa = "e80dce67c78bb8d1b93f73031998cfc55ff50056662dc685b6cd64f83f63ee7e"
+embedded = "b00fa5f8ada0ceed04d881d7231aba333e38cdd3bec843a7302cbcca0bee654b"
+status = "residue"
+cause = "mir::Ty: dyn runtime::AsyncUdpSocket"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::create_io_poller"
+kappa = "58d7e8436fe2aa7198e6c6c55e68b7f10cd91ae8e94734f451e3f8081b57befa"
+embedded = "59d03ffbc1921080c49cc9aa947789721bdfa7589f683e60c936c576597eae81"
+status = "residue"
+cause = "mir::Ty: dyn runtime::UdpPoller"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::local_addr"
+kappa = "8ad3c7173992573fa971bcb0830df19d2c872f7c182e57ddd389bdabfc1768e4"
+embedded = "81695d4a8db85916119a425228aa79c909430bb05f310a144fb1aba216463387"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::max_receive_segments"
+kappa = "7569a8f6d66451684f9d2c503b711aef98baafce1a6a160a28b1b4371fd87267"
+embedded = "cd305408cd4f2e140d254b5ec7c56cf7db9cf0f539b848fae2dd0915d8adca39"
+status = "residue"
+cause = "mir::Ty: tokio::UdpSocket"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::max_transmit_segments"
+kappa = "7905989041bbd4b65fbb9e2833dba5d3bae520b566d2107f6b3df7ba63adf2a9"
+embedded = "32ccbb9ae759836c29e33fdf86720a5d4b166122445819e176be1b09ce9138c2"
+status = "residue"
+cause = "mir::Ty: tokio::UdpSocket"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::may_fragment"
+kappa = "8848f83226a36ae84406bec5213aaccd74c571c706b19138d6a939a00a9fcd12"
+embedded = "dded657625a3ae7aba9b60353b21969f6ba51caede5b27675eda1a54740a92ca"
+status = "residue"
+cause = "mir::Ty: tokio::UdpSocket"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::poll_recv"
+kappa = "f0cd3c2987c2207decf13e8161a453bd925dfd15464f9a6675e93e97b764bbe9"
+embedded = "c270254bf93300e5d2ff12cbd70aa9a99d7fcc1feb6a6d36a775e3863485c9ff"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn::tokio::UdpSocket::try_send"
+kappa = "8196977e3ac2874b6579a8b687b3fc75f66b2d1491acad128aa2b92d2951f6f0"
+embedded = "10a2540c5ddeb25299ec4e55e976a0abb171b0f25d4d982c943fcfe1c3d6d2f8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

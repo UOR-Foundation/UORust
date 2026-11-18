@@ -1,0 +1,114 @@
+[[fn]]
+path = "textwrap::ANSI_FINAL_BYTE"
+kappa = "e961936d7d8ef1bc360081fc3e29f816df2c248c3bfd8fab29d2a3f54c7b6714"
+embedded = "f9940d89f425880a1fc8966153c65ee643bf2d91e725e7b1c92d3c8b2d70edc6"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeInclusive<char>"
+
+[[fn]]
+path = "textwrap::CSI"
+kappa = "e9fdb24b2bffe587700422657150402474f4c717d1989796413cf7e81609269d"
+embedded = "401fe6b649ca6515fbb5179d9b30acea07daf1bdadbe8a17d1425858d782bf18"
+status = "translated"
+digest = "be3d4d7ad0a18e7b0b9b182d23af82ce5303965d318d96885c43d2072b5bb588"
+
+[[fn]]
+path = "textwrap::break_words"
+kappa = "abcca77b1695395f1bd65cc686da1bf3108be375f7da2366de4be9fafbcf0a17"
+at = "I=u32"
+embedded = "17f4941305cfd23c5da39d21d4ff9b4d84f7ff50a4f261df38357f054bf673a8"
+status = "residue"
+cause = "mir::Ty: core::Word<'_>"
+
+[[fn]]
+path = "textwrap::ch_width"
+kappa = "08b97d5ecd4f398dc98b5ea84a2915e02a2eb626630994171d73be3628590d5f"
+embedded = "3a3f9e119e179095e785dfc798770a3fe60b23ed555ce7bc50cb0b22f1b95919"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <char as UnicodeWidthChar>::width"
+
+[[fn]]
+path = "textwrap::core::<impl at src/core.rs:236:10: 236:15>::fmt"
+kappa = "46cdccb4b1c88d9477ec0e9e959817539a5d69568832dfe404f0083f56af3aef"
+embedded = "727b97c10bc7e592ee97bbf86fda2023837083772fb475e8fb0258e0baa962d4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "textwrap::core::<impl at src/core.rs:236:23: 236:28>::clone"
+kappa = "28c42a1f1c2bfa631a4de55b76b53ef8c36bc2e01666c0e89f4905fd4701c37f"
+embedded = "a34867661b113df60b558a8754d3ff2dccb2bfbf64b9cfded6ab449fbcd71dc4"
+status = "residue"
+cause = "mir::Ty: core::Word<'_>"
+
+[[fn]]
+path = "textwrap::core::<impl at src/core.rs:236:30: 236:39>::eq"
+kappa = "cc3a072b8ea6cc440120b4b3dd7bc25fa749082a782a331a57cc5df97f95ca9b"
+embedded = "a9f1feb3439e296f49275abfc2eefe74c3e3fd2d685354ecd9b32816a2b48cc7"
+status = "residue"
+cause = "mir::Ty: Word<'_>"
+
+[[fn]]
+path = "textwrap::core::<impl at src/core.rs:236:41: 236:43>::assert_fields_are_eq"
+kappa = "8edff95cde2c7c0ba6cbea05d082bec4b439e5df09a85fc1a422d4fe101aab76"
+embedded = "b9e2b57ae80b9392d078f5dda4c97cd59a9b8fd3b09fd5517194099d4a1e87b2"
+status = "residue"
+cause = "mir::Ty: Word<'_>"
+
+[[fn]]
+path = "textwrap::core::Word::break_apart"
+kappa = "4fa33951355fddc3ead110db96bf1b8916ed26a326ef268b98fcd3f69335ac00"
+embedded = "fc9d994aa61ca05dcf7dd7f9e312b591194c00c3297a16a71f925fe10ea427c9"
+status = "residue"
+cause = "mir::Ty: std::str::CharIndices<'_>"
+
+[[fn]]
+path = "textwrap::core::Word::deref"
+kappa = "fe4cc80daedc59682a4892b0e509716b793b6f0ce191e843d65e0851842b6f51"
+embedded = "583a2675eb9595fbf2d50d0618445a7a7f2dac54936949a558444548742e85ca"
+status = "residue"
+cause = "mir::Ty: Word<'_>"
+
+[[fn]]
+path = "textwrap::core::Word::from"
+kappa = "7a5b6af56e2803fe66c887c8e5616c9c65a15408c3eea95d89fce125c8828f77"
+embedded = "077f9cab80fbb4130c4bbc0da98e32e5cc658e71e60ae254a311832bf3bf17a3"
+status = "residue"
+cause = "mir::Ty: core::Word<'_>"
+
+[[fn]]
+path = "textwrap::core::Word::penalty_width"
+kappa = "83fdbbebaa6f0688bc94b6da6bacbad3886e92927f17a4e5d130b40a9ba6bde9"
+embedded = "4ffc334b252e8ca587bccabe1289945d2e0b60d2df1fc5fe684acb7eebffff6e"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "textwrap::core::Word::whitespace_width"
+kappa = "58554f3b007b572779636564cd115454cb4b2fe51f03f7ddfb4a3bad109e6dea"
+embedded = "578a7ba55c5d1481336e63efd1d956e23b4880c4662eac10b6da31a1627fa2fe"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "textwrap::core::Word::width"
+kappa = "7252890f25f624c7fba098ee9ecf7e869250d8a109c456df913ec27864f401ab"
+embedded = "569f3d1d000facc27dfae802ee017185813dbd0af73dd70ea7056af004623a39"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "textwrap::display_width"
+kappa = "9b052319ebd8447ad372d8bb11fd63c7591bb37a74787d41b312f699c0225f2a"
+embedded = "602088c8218e7769930efd14ebafaea9c68a0b346861108e7d656fef29f56131"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "textwrap::skip_ansi_escape_sequence"
+kappa = "119146fecd9150f3f535027999a8c3c5e6d180e6573451fbb24eb1d7cdd7a4ac"
+at = "I=u32"
+embedded = "a4ce3f35699eec66d3b10cc37ab2799874940fadaa62a1885169349cf9791aa3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+

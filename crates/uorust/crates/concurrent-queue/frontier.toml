@@ -1,0 +1,142 @@
+# The concurrent-queue register (written by `uorust crate concurrent-queue@2.5.0`; do not edit): every body of
+# concurrent-queue's MIR at concurrent-queue 2.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 83
+translated = 1
+residue = 82
+
+[module.bounded]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 38
+translated = 1
+residue = 37
+
+[module.single]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.sync]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.unbounded]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 83
+embedded = 83
+evaluable = 82
+blocked = 1
+
+[[construct]]
+construct = "TerminatorKind::InlineAsm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ConcurrentQueue<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: PushError<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unbounded::Unbounded<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ForcePushError<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Bounded<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Single<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PopError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TryIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unbounded::Slot<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unbounded::LAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unbounded::BLOCK_CAP: mir::Operand::Constant: the constant item unbounded::LAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::thread::yield_now"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Block<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnsafeCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bounded::Bounded<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::cell::UnsafeCell<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: single::Single<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unbounded::Block<u32>"
+bodies = 1

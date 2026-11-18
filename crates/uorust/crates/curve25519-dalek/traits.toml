@@ -1,0 +1,40 @@
+[[fn]]
+path = "curve25519-dalek::BasepointTable::mul_base_clamped"
+kappa = "34d4c2602c6fca9af78db24aa0a555530b2f8b667a86f80e9bec190a84b60f44"
+at = "Self=u32"
+embedded = "7a3a4152a50f42e9561c9917c8cc4a466bf9b35c4ffc5e7b38bef18a77d6462f"
+status = "residue"
+cause = "mir::Ty: scalar::Scalar"
+
+[[fn]]
+path = "curve25519-dalek::VartimeMultiscalarMul::vartime_multiscalar_mul"
+kappa = "3f353eb955e5331cde4564a7234bed09671e8906eccb533f67e4ceb9826b2d3b"
+at = "I=u32, J=u32, Self=u32"
+embedded = "97ca16a1d4d9f9343807878e7fedf63457eaa66c5e0aec8321c3dae582b346cc"
+status = "residue"
+cause = "mir::Ty: core::iter::Map<u32, {closure@src/traits.rs:259:36: 259:39}>"
+
+[[fn]]
+path = "curve25519-dalek::VartimePrecomputedMultiscalarMul::vartime_mixed_multiscalar_mul"
+kappa = "def37826a401d6ea935f07314ce2358d471a406b0a09682493fe6ca67fbe94da"
+at = "I=u32, J=u32, K=u32, Self=u32"
+embedded = "16cd7ef34446d7ca00b45d21d9c8bd88faace78efe59c36e1465ee41a3d289e9"
+status = "residue"
+cause = "mir::Ty: core::iter::Map<u32, {closure@src/traits.rs:376:44: 376:47}>"
+
+[[fn]]
+path = "curve25519-dalek::VartimePrecomputedMultiscalarMul::vartime_multiscalar_mul"
+kappa = "92555e211cb1663974fe9129516eb59ed06b178747703a4999b9b038161fa51e"
+at = "I=u32, Self=u32"
+embedded = "21a62e893a0752afbfedd7f9025a398d14fe7bf207f0aa897ba29fd0ca348d4c"
+status = "residue"
+cause = "mir::Ty: scalar::Scalar"
+
+[[fn]]
+path = "curve25519-dalek::traits::T::is_identity"
+kappa = "1b1197db0b420c8d2aefcf6149c40fa6baa6607b91a278436cd6212d516d5065"
+at = "T=u32"
+embedded = "34ccc9133dba254df0e45566cf2b267a35c99c17d615f272cbf9ed871d1a728c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Identity, which u32 does not implement in core"
+

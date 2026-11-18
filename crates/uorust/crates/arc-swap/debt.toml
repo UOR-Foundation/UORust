@@ -1,0 +1,260 @@
+[[fn]]
+path = "arc-swap::THREAD_HEAD"
+kappa = "8c57a94b1063432869bb74a48f9bcbc20ea448a5c4a0059f403cd8153210ff62"
+embedded = "f14ec8c5311968e0fea74e0fd9bd3f009b0d5728ec0b65f637927f91fb466c92"
+status = "residue"
+cause = "mir::Ty: debt::list::LocalNode"
+
+[[fn]]
+path = "arc-swap::__rust_std_internal_init_fn"
+kappa = "cca623b0273bbf4b6bd50de2f769f32a308a83a5259d6ab86d2a49ffd525af6d"
+embedded = "630c0cdd8d4e9a713f5d9d21818ade8687e4406b2761b7bae32a0e95b8cc45c4"
+status = "residue"
+cause = "mir::Ty: debt::list::LocalNode"
+
+[[fn]]
+path = "arc-swap::debt::<impl at src/debt/mod.rs:30:10: 30:15>::fmt"
+kappa = "9d260fa8d86da7d202295765d90331577d5b06f74a41746de81a43226be3ff9a"
+embedded = "27cce29f755f11cc129f26167895d19b8c0ca03263e3d6a6e419afcd0e7b389f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "arc-swap::debt::Debt::default"
+kappa = "1ccc65fc34037b4da0c6a714dcb15175b9fe7294c1dd3c9188e0e2e946f857e5"
+embedded = "0c560091ca74a852b5fdb79d8f37f9aec9e53ca564fa33da794fea9ae8330741"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::debt::Debt::encode"
+kappa = "0d928cde722b204e67152a07fcef954554d65f367727bf875e48b3331266f93a"
+at = "T=u32"
+embedded = "50b59aac28ebf04579a7c9509acdcd3785ef115194059d0dafccd0adcdda33ac"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u32>::is_null"
+
+[[fn]]
+path = "arc-swap::debt::Debt::mark_confirmed"
+kappa = "05af098421f33c79852e6e7b709c9db5e1b479b4a7e5affb8260ff83530ed046"
+embedded = "f1f6846b1cea52a7c2bf9aacb02f866f080c87c773df163d954435409fb57e10"
+status = "residue"
+cause = "mir::Ty: Debt"
+
+[[fn]]
+path = "arc-swap::debt::Debt::pay"
+kappa = "0c694f3505514978500b31a5eea5ca1ab962c653bdc4bc12c07e8fbb50d3a29c"
+at = "T=u32"
+embedded = "b317843ec02146f9e0a0f47991d609617fb55fdaa96a8b5be8d3aa8b977eafde"
+status = "residue"
+cause = "mir::Ty: Debt"
+
+[[fn]]
+path = "arc-swap::debt::Debt::pay_all"
+kappa = "041d299f60180b228c3aaa7deb98626e448b8476188a4a5a9b1f9b0d5f8425aa"
+at = "R=u32, T=u32"
+embedded = "2c0c2ada0d66842bbc806d47a2ab9010480ad71f59db9a83f7773cbf1cfb3127"
+status = "residue"
+cause = "mir::AggregateKind::Closure: debt::<impl at src/debt/mod.rs:76:1: 76:10>::pay_all::{closure#0}: type outside the lift: LocalNode"
+
+[[fn]]
+path = "arc-swap::debt::Debt::pay_for_storage"
+kappa = "9c4610e6065f5bff8d7bbcecce8438a3b05077876c1f379b87240694a6982a2c"
+at = "T=u32"
+embedded = "e9914ffa48ff72d274c1b7c3732bebdbdf89ac433d086fc9334f1a95791dc255"
+status = "residue"
+cause = "mir::Ty: Debt"
+
+[[fn]]
+path = "arc-swap::fast::<impl at src/debt/fast.rs:28:10: 28:17>::default"
+kappa = "99b814c83ef0d87c931b9770ec5dae5db7f97b4b65009c11e7d965fa42165f88"
+embedded = "589c93cd30b0d1fb29fdaa6d9123bd865cef9cbbaf943385a394073af5c4cfcd"
+status = "residue"
+cause = "mir::Ty: debt::fast::Local"
+
+[[fn]]
+path = "arc-swap::fast::<impl at src/debt/fast.rs:37:10: 37:17>::default"
+kappa = "4518b5c2883743a64a60920e80149f17f7927a7578a6ef1cae35cb12691d9def"
+embedded = "8e84d78efec3ca82c741bd7a4488b6c0d9e02a0cd60ed01c47fb54ae739d4775"
+status = "residue"
+cause = "mir::Ty: debt::fast::Slots"
+
+[[fn]]
+path = "arc-swap::fast::<impl at src/debt/fast.rs:73:1: 73:36>::into_iter"
+kappa = "3a4cb398d361eda778eb783863c35a760c1b2a84fdfd0fa7ebb804cb7ef06a89"
+embedded = "ad475567d59389b128d347d22433505948e60f32ecf08f05eec5c7df5a6fcbae"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::fast::Slots::get_debt"
+kappa = "f62883daf3b7d6611d41adc1e3f86352e62132ac0c1c3316bc6f3a201b5ae989"
+embedded = "99584b7c8eb556e698cd76b81d81f51a0f9d90bd1b6cfd35a1298f9a0686607e"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::helping::<impl at src/debt/helping.rs:124:10: 124:17>::default"
+kappa = "e8a51b604a59831e21a389f57a81b88bab74df26672612d993eca2ee252db335"
+embedded = "9e153e234c327f499d7162aa140dddd4e5e24149179712aebbc35b8abf5db702"
+status = "residue"
+cause = "mir::Ty: debt::helping::Local"
+
+[[fn]]
+path = "arc-swap::helping::<impl at src/debt/helping.rs:131:10: 131:17>::default"
+kappa = "b461156e682606e2eee9ffe43343ced7001f3d378206a4c1dd9a47c450393a78"
+embedded = "fe934b0e662ba4b5166ac554de6ec6963f766684dff563ea86c2b55fc74bf091"
+status = "residue"
+cause = "mir::Ty: debt::helping::Handover"
+
+[[fn]]
+path = "arc-swap::helping::Slots::confirm"
+kappa = "75d90106f90a73ca804d23cbf8dcccf7a0932cb33ce9ce5684d5b5ed0ff14807"
+embedded = "764bdfe9136ac3c31367002db24f6cd7eecb079fa41fc2347c2b9707921228a5"
+status = "residue"
+cause = "mir::Ty: helping::Slots"
+
+[[fn]]
+path = "arc-swap::helping::Slots::default"
+kappa = "1076ef32a951369d94d8c43a6783971b9f33218922fa278a7a4e660806c2659c"
+embedded = "9dd3b95d21613f03cded6d412f5addbaa2a6d287d3c9010041230ed4eb891363"
+status = "residue"
+cause = "mir::Ty: debt::helping::Slots"
+
+[[fn]]
+path = "arc-swap::helping::Slots::get_debt"
+kappa = "7b5bac51a506c5ce5b583a15988bf1227ec58061330e2c27d75ec0d79361f7a5"
+embedded = "36b93e01c01ee96320a7e54939964f72a5bc85eb481ee3c27813507d3f6100df"
+status = "residue"
+cause = "mir::Ty: helping::Slots"
+
+[[fn]]
+path = "arc-swap::helping::Slots::help"
+kappa = "209a5d08aebeadae05a5b1188981e886c1992be9942eca0769485296752ddd6e"
+at = "R=u32, T=u32"
+embedded = "be59ac62fc68635b77dabad92dd8e938938f9c518908c76d0f17b9a10543e5d5"
+status = "residue"
+cause = "mir::Ty: helping::Slots"
+
+[[fn]]
+path = "arc-swap::helping::Slots::init"
+kappa = "1078da4dca8c3897e2571d072bf0bffcc0893b11211d5a8f80664c2268b2d6bb"
+embedded = "73a151cffc00216b63c872196f309a0d3d5ff6e7284098fd19e506b5a4163ca0"
+status = "residue"
+cause = "mir::Ty: helping::Slots"
+
+[[fn]]
+path = "arc-swap::helping::Slots::slot"
+kappa = "98b3b8f1973ba15f8d570bec3d7fa5a423b826af4aaea7d5fb5963b439f73be2"
+embedded = "4ffbc6db4718859e8994261a64894ce6837b12a15ea95aaa701a42a571765f79"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::confirm_helping"
+kappa = "dfe75631abf2e2fa758f82291e325006c12320f6ca138e92b0c94a6442911044"
+embedded = "3f3745facfbdce8705195fcc19bc02f15c46a0ff451899e58d0a92d86ec05ca3"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::drop"
+kappa = "3734902fe7035497a7eb9b8bee4fd4a088499b6a52516f9ce5f10026b8fb3877"
+embedded = "651f74cb527e57dc236de0001335eb7acb32c1352a208c62e27171358d7d15d0"
+status = "residue"
+cause = "mir::Ty: LocalNode"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::help"
+kappa = "bb79bbe5f06066b86f9d328d2695c736e667f23d335717d0d14a1d6880c55e92"
+at = "R=u32"
+embedded = "b9e9ed89d13bf2676cb8d936e44a2a7a80cf94020568f69c310be11114873782"
+status = "residue"
+cause = "mir::Ty: LocalNode"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::new_fast"
+kappa = "91689a8f34c7105f60e0521ce87ad593dce984ef3a86ce9d259dcddc6905cd39"
+embedded = "9d78d3d4496396bf6fc92ee77ae16c5f5f0052449a6482c6296c0d8a665e07aa"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::new_helping"
+kappa = "7596e3d74167f0056d7bda849d2c47cdf25e073f0aef75f98f2e3b245d27add2"
+embedded = "b4790810e6a162c76f0f15e4a15eb0f981fe5aba973f6e3a6672ed0705c6eaab"
+status = "residue"
+cause = "mir::Ty: LocalNode"
+
+[[fn]]
+path = "arc-swap::list::LocalNode::with"
+kappa = "7591362484cacbd0c974ad09651667296bbf0fb22c1249aa07e12265e69ccde9"
+at = "F=u32, R=u32"
+embedded = "7c73d49afc4e80f8fb57b4d4aa4cad1d135fe35c9f927bea3d6746ac07bd5566"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<std::option::Option<u32>>"
+
+[[fn]]
+path = "arc-swap::list::Node::check_cooldown"
+kappa = "11b5c554e7c02d56f067cecae3f8c81e31fc6934ed3f15bd9c2f24941fa245dc"
+embedded = "3dc045360bb852d3683f98b68df11d46bb64eddd374e9d0e99d348f5797da9d9"
+status = "residue"
+cause = "mir::Ty: Node"
+
+[[fn]]
+path = "arc-swap::list::Node::default"
+kappa = "9813fc113948f7004935e7ce4b4872314b8aa771e0195ff710786942bb3613a5"
+embedded = "6cdf2007df5dc5388d7bac0b37b3d0eb5a74b73d5db3944d354ed842dae5e9f7"
+status = "residue"
+cause = "mir::Ty: debt::list::Node"
+
+[[fn]]
+path = "arc-swap::list::Node::fast_slots"
+kappa = "ae665861ebdd7940a54ce9670116b0356bc4dcf8165b61769ccb143e6e871f56"
+embedded = "e431a3db44f20a1feb524b0fc104f1b9b072f0a816794f630efabb1329750f79"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::list::Node::get"
+kappa = "dd6b6cb0734363c2cfac23f48ad9cab8fb8c56135b19dfa2527d016493613e5a"
+embedded = "82be92c31c7d0a2085819c8558959a6758e6ff38f472ed3c2dae33b0566efcf1"
+status = "residue"
+cause = "mir::Ty: debt::list::Node"
+
+[[fn]]
+path = "arc-swap::list::Node::helping_slot"
+kappa = "860918231b64f7cd0947790201810a99d2b7815681411f54634b1f8cde350cd2"
+embedded = "7c6f84b457ff6e4b0ae594df1df2139e622c92dcaf571f420a0e57519a1aed26"
+status = "residue"
+cause = "mir::Ty: debt::Debt"
+
+[[fn]]
+path = "arc-swap::list::Node::reserve_writer"
+kappa = "651c54960e31ecdffdd99212ef286e323b7abf986189702768d6a26541413e40"
+embedded = "6bab5fd5052e785a9a6f2d79ccef7a91968ad975f0eb44db7caaa21d38f5086f"
+status = "residue"
+cause = "mir::Ty: debt::list::NodeReservation<'_>"
+
+[[fn]]
+path = "arc-swap::list::Node::start_cooldown"
+kappa = "f785ac60a5ae96f93eff87b837d57f6b584e1805d11498378ea83dd76c3ba120"
+embedded = "cc776f58268b507090a4594a147010ae761b9f875e3791a2168c168e82112f70"
+status = "residue"
+cause = "mir::Ty: Node"
+
+[[fn]]
+path = "arc-swap::list::Node::traverse"
+kappa = "fcb6c03fc8a8b6d5fa0bd2c6f1a139fcc4170dcf5e71a244750d7f505a00df97"
+at = "F=u32, R=u32"
+embedded = "71198548917a0a943523c0ac8b7b78e10dc3d1708bea2aa19e8fb66a8325d985"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc34: &Atomic<*mut Node>}"
+
+[[fn]]
+path = "arc-swap::list::NodeReservation::drop"
+kappa = "b063d8ad5be0d678d37e65166f97ad8a867ff979cb85d7a90f0a9e51d4cdb9eb"
+embedded = "f2ee4c9aed632d8196354f9b593484b7f35ff465c558f98589086eeb8351e93f"
+status = "residue"
+cause = "mir::Ty: NodeReservation<'_>"
+

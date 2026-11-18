@@ -1,0 +1,665 @@
+[[fn]]
+path = "base64ct::Alphabet::decode_3bytes"
+kappa = "e141c9226f64def907d5a579fe83e4d841eb85467c8710a7ec9ed0b2a2b49a42"
+embedded = "401240773cc76513f099d3030b3d2f0c18ba4d374700ee8962316dc0d63c3572"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as Alphabet>::decode_6bits"
+
+[[fn]]
+path = "base64ct::Alphabet::decode_6bits"
+kappa = "61bb060208b8116ef6426655b91e020ab67aff06e90ab0b42f3fa92f8a90d64e"
+embedded = "0d4ee1f0dcf4ab50f810018a4ce11acce8971f192f15295e0abe75e464c5181e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::DECODER"
+
+[[fn]]
+path = "base64ct::Alphabet::encode_3bytes"
+kappa = "17c74c363afb4dc15e12dbcd3e09412f3ac88a65add342e3ea95dea260d37fae"
+embedded = "c43c861ab6da05eaabbe3ac59470eaa0267cb798c30b2523d46cc15f8d188287"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as Alphabet>::encode_6bits"
+
+[[fn]]
+path = "base64ct::Alphabet::encode_6bits"
+kappa = "40d980270df31ad8bcea3afc227cb77bd6f63698ec9e8160964cb7c772c79020"
+embedded = "e4e4ff4b89dbc5a65b1ce6ebfdd5634adb6d79aa9a34d6885357fea07472912f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::BASE"
+
+[[fn]]
+path = "base64ct::alphabet::<impl at src/alphabet.rs:108:10: 108:15>::fmt"
+kappa = "3a4a4c657ed64e684b6a95f2e57d29772cb1cfb984a4c06f59043ba8ba1f787c"
+embedded = "96c79e8215b674a3c5419f6bb765d0801b3fb3e7d10c6fdf95a991bb9c8d74cf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::alphabet::<impl at src/alphabet.rs:118:16: 118:21>::clone"
+kappa = "f39e0a7382a1c881e7ca4492e4806f1d6d2d8ee3de872722b4b909ce7d9cf8c8"
+embedded = "cf03e67892084e77cb2d1004f5accac751ac87649b201bee34a762d4dfd9cbe4"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::alphabet::<impl at src/alphabet.rs:118:23: 118:28>::fmt"
+kappa = "673b2bfca8854f27968915bca36e7332ddb1d37fd8f559b5c1c0744d71447d12"
+embedded = "fd4b8cbcb445cc1c267845d9626a778b6e412ea0767332b7a8a654b70f9b2bd5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:10: 11:15>::clone"
+kappa = "35ef757b5e0df31d22a6a503ee2df2096ca51f8b79a1aebc6375f81600e8150b"
+embedded = "d288c5713cbb7953f1874cf0a91a40733edd4f684251489b37ea6c2049dfc511"
+status = "residue"
+cause = "mir::Ty: alphabet::bcrypt::Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:23: 11:28>::fmt"
+kappa = "436e23471a5c46f72cb2938f6ba7c59f48ef93047edb161811d7546a092ce7bc"
+embedded = "ede4ab2f83373a4ef33c11584678528672651aaa532a870fde8390aa6c857fe8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:30: 11:37>::default"
+kappa = "5b5afb27b2cce1ad10243f39f882d97c700025b22856bfa4449c8408348263de"
+embedded = "6c10e4035e9a6d9e62b4c8230ddbba11f318a849be0e33fec1ed9bbcf18238e4"
+status = "residue"
+cause = "mir::Ty: alphabet::bcrypt::Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:39: 11:41>::assert_fields_are_eq"
+kappa = "a799763ed8a868cb581f997e6a428b791915ac3358d53d276d545f2eb61d1270"
+embedded = "0809d98c13c0f438607f5f869fa1d15a767b5169c51ad306ebe877971632ec90"
+status = "residue"
+cause = "mir::Ty: Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:43: 11:47>::hash"
+kappa = "27ec1e3c0ffa5ae6ddf74cf68941120f8bd5811aaa3fdbc3590dfa1e5c2823c7"
+embedded = "60534a90774cbdcad58a4387f0556860e5a9169156a84f268f212f5b78b47c9b"
+status = "residue"
+cause = "mir::Ty: Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:49: 11:52>::cmp"
+kappa = "f159281753923247f1b58e9aa36b0147a6f7e663b6a66ac1fab69267e61b8c6d"
+embedded = "4e31dec5a79133be32a34d64806da0b7419052f6cd6bc4f01efb32c1d0faf07b"
+status = "residue"
+cause = "mir::Ty: Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:54: 11:63>::eq"
+kappa = "6bc804eb59c6786d93ab58cf64f93e3e4626c3e7e0d98188c06924480b1e821d"
+embedded = "12b3ee68bbe6e061cc0d37e7a9de64200899ed1aca5a073af705aa3c8c7ea12a"
+status = "residue"
+cause = "mir::Ty: Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::<impl at src/alphabet/bcrypt.rs:11:65: 11:75>::partial_cmp"
+kappa = "616b488a2450ffd6216c2b3d67cae7835c0075164d20e0de803b2942de480b75"
+embedded = "cbef409a6df5fa616d7bb4d8d3dd8e05132a5cec222b5ccf78fd97ce39b1b9cf"
+status = "residue"
+cause = "mir::Ty: Base64Bcrypt"
+
+[[fn]]
+path = "base64ct::bcrypt::Base64Bcrypt::DECODER"
+kappa = "f96469a18c4a5c6b86cff8828bcbc543000b9827861f3f88d8b7dec79c3306c0"
+embedded = "146f7b5b3282e868da377c5c5b5b53c16144457ffebc4ed4d22d1aad6ff9c928"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::bcrypt::Base64Bcrypt::ENCODER"
+kappa = "2e51e2f6a353c3865fe1b2d6da7f396d0dc79deb265142701fc6a3755c88caaa"
+embedded = "e6174c55f7431a5f61132fa5c0af912251e33ecd490b03e72d18deb33b490ccb"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:10: 22:15>::clone"
+kappa = "2ee07c623b5f4cad66b5f0e477bebc2925ca539d54c42e9201e3423d40df8ef5"
+embedded = "8891ff2ce8c70a7400416ff4b5615b68b0d0c0987732d7db957e569b678a0f81"
+status = "residue"
+cause = "mir::Ty: alphabet::crypt::Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:23: 22:28>::fmt"
+kappa = "410d0b008777e90d9ffe41efc4d331b7e69061263fd96d7b2356b33a8b6762e9"
+embedded = "0fa57c7eda965bc446ef85ed276945217d2c3211a3bdd5eecdd3d1825c605873"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:30: 22:37>::default"
+kappa = "23a9f76f73ea8aa763e1f5f59b235104b04a9973a9c064fef63335ca42dd1514"
+embedded = "06c72f2da5a492acc44a02f1df70cf16e2016afa2e64961848bbfd35b652543c"
+status = "residue"
+cause = "mir::Ty: alphabet::crypt::Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:39: 22:41>::assert_fields_are_eq"
+kappa = "4e460f461a3c495cd7d32c7af3c72b99c1354841f91aeefa1b7d7b4e0d00f041"
+embedded = "0bbcb951a392dea43c8f3a49ee8d9d520c6b3780c67c464bf8e55593b63d6361"
+status = "residue"
+cause = "mir::Ty: Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:43: 22:47>::hash"
+kappa = "a275178dd9a388a9dc49bf758383955e033d032a5632e8fefd7d19c9b7384006"
+embedded = "8cc35967a99014608351732271a368e93f5a12665ed6c3dccbd3445e437a3f68"
+status = "residue"
+cause = "mir::Ty: Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:49: 22:52>::cmp"
+kappa = "005defb96b706a166d6e8c0b2f56c99a3b329418836ffb2f1bf4fb05f0027577"
+embedded = "da1007cdf16930044f99115da2a23ea53f6c0e1379d4b3877d7e9e362e406ec6"
+status = "residue"
+cause = "mir::Ty: Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:54: 22:63>::eq"
+kappa = "f2eede56203c5ea9cf1b54e4a4401028338983c4ccf4980bf0a60c2deb2695bf"
+embedded = "91b1ebe3fca08e1d070e6de9384be34a68153714d3691b6ec71321a30752881d"
+status = "residue"
+cause = "mir::Ty: Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::<impl at src/alphabet/crypt.rs:22:65: 22:75>::partial_cmp"
+kappa = "3f172604d5ffacaca3a65e900235b4a80addfeeda9ad4cc410b0f149cec86703"
+embedded = "b6003f3b34b6d0dc27fdeca9e760cdd1c910246d07f64626c2b3860b52d1ace0"
+status = "residue"
+cause = "mir::Ty: Base64Crypt"
+
+[[fn]]
+path = "base64ct::crypt::Base64Crypt::DECODER"
+kappa = "449d05d7eca38b43366bf09e76f5a57c92ffc889651747149c02590124837df0"
+embedded = "abbfc2011b12d56de939a62faf0e9c893db6e08d5005805f56aa2a343c1cb711"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::crypt::Base64Crypt::ENCODER"
+kappa = "07f9565b0728ab960e8ca6dad95ade2b40ee766e0d116ff2f6ec3c0d0ee20e58"
+embedded = "65ab3e0599074c6e23ffad4e1311f043951855fead78990e87639abf50b9882c"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:10: 9:15>::clone"
+kappa = "28c5fe0aeb5422a29a9c7f1a6ca887827259583764321aa20741de1df7dadabb"
+embedded = "34d8189c8b6c2ece44de807e9d5212cad21eb6350423e334a8bc025367e3149f"
+status = "residue"
+cause = "mir::Ty: alphabet::pbkdf2::Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:23: 9:28>::fmt"
+kappa = "1327520db8b1a06c803fc5c94e9a18f4599c26db787f2e6b5107396e6fe02770"
+embedded = "5c46d23c3fc70f63711beb5b48d816bd667faf64398f61f92deecf946064ab20"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:30: 9:37>::default"
+kappa = "4d9827a0b97c9e62f3916117bde81afd348b5bcd06a34c12987ff48f641d5002"
+embedded = "1d28467dff7e7050dabea9645e7a00899e50bcbc73f79572bbf8ba34d12ed62f"
+status = "residue"
+cause = "mir::Ty: alphabet::pbkdf2::Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:39: 9:41>::assert_fields_are_eq"
+kappa = "465a4019313a123d7c7b7cd441e0ed835a5636c2c3948fb1d3d274f4d9b319d7"
+embedded = "760fa8ff8787596190bea6c0821c7fc220f2e0df90054c71f7547e445513fb6b"
+status = "residue"
+cause = "mir::Ty: Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:43: 9:47>::hash"
+kappa = "dba10a41d6d57920ef60a16e73b486c587f19cc00f5060c95fc41df1255b11b4"
+embedded = "35821e4fcc7f0f3301de797b29e486ffd4e7abed127aa045bb7380f2702153bd"
+status = "residue"
+cause = "mir::Ty: Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:49: 9:52>::cmp"
+kappa = "ba225f349fe338b947331a16471abae3758eaffa3814af86343f5a6b71d92db3"
+embedded = "1ea55cc4eba16c06044b5c5606fcc86524df1075be3ab0bb3403e16dafe5472b"
+status = "residue"
+cause = "mir::Ty: Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:54: 9:63>::eq"
+kappa = "920833d2fe32dbf1fb3d2d6ba052e06ec8e6e48768d192c5549d70292b63a289"
+embedded = "d900141d4107ccfc3544873b6cd0b6baefd8201895d01d2de8a2cdc5fe9b4856"
+status = "residue"
+cause = "mir::Ty: Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::<impl at src/alphabet/pbkdf2.rs:9:65: 9:75>::partial_cmp"
+kappa = "007f1160f8d2af38b6b167c810a5a91e866a99c78af7a3e1bec55e3d3b6925f0"
+embedded = "fed93d2bc1e34ad1ad5bd820d089bdec8852182988d485c0f8bd06cad6b2f2c7"
+status = "residue"
+cause = "mir::Ty: Base64Pbkdf2"
+
+[[fn]]
+path = "base64ct::pbkdf2::Base64Pbkdf2::DECODER"
+kappa = "2a573fac806457bbf972e7dbd114c876eb8efd16e8a468e4c6a35faaed840ffd"
+embedded = "07244d658dd374bfdd85fde41b70b058c7a7d1e090c16088dd877104cd59dc3f"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::pbkdf2::Base64Pbkdf2::ENCODER"
+kappa = "4e40337af21044ca50df78e3641bafd10b1bac9859ba0f008dcdc473a659e4f9"
+embedded = "f1593b955d99ef50129a6f43215bdb4e874f3a2b325c08251d4b05fb7a3bca69"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::pbkdf2::DECODER"
+kappa = "58992caf93fabc06032af6dd1956838541b53d6686e218980d1b8fa6d684a8f5"
+embedded = "8465099083be502bebe2ac4e77e32511fb680d2399f12a914d0db0227da19268"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::pbkdf2::ENCODER"
+kappa = "7e5052bbb3c63773529d52ce9cce85f1485a0b24de465b5f6d3587ce06eebe39"
+embedded = "056c68f936281d155e0c205a83bb11c14377534eac0a5ff59b3fd73cfc9a68a7"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:10: 19:15>::clone"
+kappa = "ee2ed6b3a9487aa22487c7b7d99cc98bf64f7d4664e310d483dfb9c838b9defa"
+embedded = "cbe0de498a525454a09f4f1f2f1723f3d6cea0bfb0e4022722c9ff01f6f99e9c"
+status = "residue"
+cause = "mir::Ty: alphabet::shacrypt::Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:23: 19:28>::fmt"
+kappa = "0c64bdbe4121f82d284180d169560e387ec41378bac14d50afba258bce6b6c5c"
+embedded = "1980d4640ac0f05d905de0a22b6c22e43b1b899c679edabcdb643d65f13d32bb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:30: 19:37>::default"
+kappa = "cf3e192d263c2b4630287d4831d7fb3e46cc7da0c8460c9ada32ccc2a6c994c3"
+embedded = "b34571e86cbb88dd18035feb63937c24c351b8a85fae18c8698b3c628336fdd9"
+status = "residue"
+cause = "mir::Ty: alphabet::shacrypt::Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:39: 19:41>::assert_fields_are_eq"
+kappa = "2be8ceb7266922268fab932af151b5b12e3b131a8bf84e661812511b9e747ffc"
+embedded = "643092a6bbfbc82e33599b61ac388785a0280ae27e58b9d440efa8b473c07226"
+status = "residue"
+cause = "mir::Ty: Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:43: 19:47>::hash"
+kappa = "ec8a84a4e96d2e6b71cc0b426b2d68266475abe440384f4eba3e4e8dda43e979"
+embedded = "069601bf4ac74c4341c67483ed01b2d005d54dff577ab9cfe30d0fd73dead865"
+status = "residue"
+cause = "mir::Ty: Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:49: 19:52>::cmp"
+kappa = "1e525b1d4d88b0802c66b5330cb2cbb8f31f00128063e25cd825ab6806493e22"
+embedded = "09b04a6abaab3dcf4c74a07c07137b2ceded33f4243c83beaeca61f504d3cbf5"
+status = "residue"
+cause = "mir::Ty: Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:54: 19:63>::eq"
+kappa = "431bb41fa1f8acefbca4756240bc100ee9894bf0f95b58074e3eb81c12da5336"
+embedded = "a9aa6efb8f6d32b92ce61ebe87d90025bdcfcc0f910f043ff4f589c5198056f1"
+status = "residue"
+cause = "mir::Ty: Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::<impl at src/alphabet/shacrypt.rs:19:65: 19:75>::partial_cmp"
+kappa = "4112f6a8097fc6b200162b9ad7ff2a224b97945b8c139934beb9140c6dec63d0"
+embedded = "1f93c3d2f7425940e27dd03ad5d7e67a855729c07e123c742339def82191d4ee"
+status = "residue"
+cause = "mir::Ty: Base64ShaCrypt"
+
+[[fn]]
+path = "base64ct::shacrypt::Base64ShaCrypt::DECODER"
+kappa = "ab87b9140e79b9fdd84e625602d7ab65270e9ccc417c1f4a35da267b40be9974"
+embedded = "d2c290b943b4c3626421107bcba6150caa7aba1daf052601cd838dbf2db2dca8"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::shacrypt::Base64ShaCrypt::ENCODER"
+kappa = "3392f171f48d818e5685c5b60cfc0c3d23d2266ca5b567235809224d49346d4d"
+embedded = "2bfca8eea88adc8ab87fcd2ee5b3023bf958b08ff9a4283c7fa2bf471e1c99e0"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::shacrypt::Base64ShaCrypt::decode_3bytes"
+kappa = "f4bc557661c57d8b847ab2d1a33043f88d820005c007f08ac08f19c71f8c0a67"
+embedded = "52321f6e6f09517ea09b1ee1a3ccf0b05778cfedd47b805104003263e6908dae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alphabet::Alphabet::decode_6bits: base64ct's MIR stops at mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::DECODER"
+
+[[fn]]
+path = "base64ct::shacrypt::Base64ShaCrypt::encode_3bytes"
+kappa = "8cab9e2e4735f9c9be7002aa27b23a76bb90581a2a7981984f428ea62e80c5db"
+embedded = "f1ac25fa87caaabe580d9930f890313abd86ddccada58a8d1b3bdb16e9982788"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alphabet::Alphabet::encode_6bits: base64ct's MIR stops at mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::BASE"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:10: 11:15>::clone"
+kappa = "48ab15c61f9e52359b28980211e84c1e7502f5ce3f9d8cb5da97b18674fac338"
+embedded = "cffc98fba610521ebfa9ac8bf056572fd48a641b8b1cb32fa06d3c541fc7e791"
+status = "residue"
+cause = "mir::Ty: alphabet::standard::Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:23: 11:28>::fmt"
+kappa = "54ea32839dfd269fa88b69bb69f17c7fa4c12e0aef97f746f57fb06458b0e932"
+embedded = "26cf0a22b180fb0800146a96049323c63b8d5a3b32ce8039450377c8740a4267"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:30: 11:37>::default"
+kappa = "e9d6b34c2bcdc20ad3a3c12d01825faacb617c9b134716027c09d5d5ed80a0e9"
+embedded = "1c30dbbfea88d1c9b0178097a0a1ddb08240ce73b0ba8b89cc806cdbb129ca66"
+status = "residue"
+cause = "mir::Ty: alphabet::standard::Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:39: 11:41>::assert_fields_are_eq"
+kappa = "c08503378ad7a8ccbefac07ad587d7a52d1adb519e7b7248dcef28265eecefd9"
+embedded = "a7df9ad75d4f0712fae9be5fbfa2eed739e59c99e91b522dc27a82a0d2a48937"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:43: 11:47>::hash"
+kappa = "1f962ef4ddbbd5628c0b53692736a8a1ff171730f6c7a997c5f4a0aa18ef0a5e"
+embedded = "fb37ed21f9344f35c81fcc1d964fff5a816cb831a2292323dc73641390c00ff9"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:49: 11:52>::cmp"
+kappa = "8a66ef90a9099ecac84add8fe91dae3b495ecb34eac7c51373db095e1426bbec"
+embedded = "88d6cc3936cc13ba4678f77cb5b3709dd6acf159a64a26b024b65865429efa4a"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:54: 11:63>::eq"
+kappa = "86324fa230aa395e0b9310f9d47e48126338e9825e0aac041ae0d234f7db08de"
+embedded = "bba2996109cdabd2e30102675d8dfc4cd5b928d5cf97b7a90b25d0422459b7f7"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:11:65: 11:75>::partial_cmp"
+kappa = "0fda76bc10814023ed2a2fa346a8ffa5f292dcf2c550d5ae40b99706f1114b96"
+embedded = "1a892b4f69b04426db66a9cf2025a54c15bfcce6c6173e1f5b22369ba3fbf621"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:10: 28:15>::clone"
+kappa = "93fb0f88f5d27f3163d7eb64cb410c4e994e5e134d91f04d003e659ef0d02413"
+embedded = "e1eb938419f39a0b722e2f25e1b720373a2021621d926d6a8fe0a124cdc394e6"
+status = "residue"
+cause = "mir::Ty: alphabet::standard::Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:23: 28:28>::fmt"
+kappa = "2a0b92a5b71eaab0399f3932e362428654ad0b59a19da08594847c938f1158af"
+embedded = "1674b35518a44c334d683e08ca7a245ec6582cb2a96d74c1ae5fe938c98ce494"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:30: 28:37>::default"
+kappa = "adc77106ce90185b97980bde5f2f62108567270ca18a0e71f6a3614c931ad065"
+embedded = "10f46c96554ffb6a288058590fb9fbb9c2211d3585f121d69f0a26bf341bf37a"
+status = "residue"
+cause = "mir::Ty: alphabet::standard::Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:39: 28:41>::assert_fields_are_eq"
+kappa = "e5c04eef473c809541d34fa2c4321d63f95e3c3d894a7575e82a0f3016db3875"
+embedded = "65b67c2816d499ab94911d28ccfa1e827502e8aa965ee3d8e9463006bd51f6a6"
+status = "residue"
+cause = "mir::Ty: Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:43: 28:47>::hash"
+kappa = "346b20c4fbb82f3c2ba6b45247bdc9327adff9e2d8969c03a1644b4d6d6a2157"
+embedded = "0bcaab87effb3aa4b1a5f2382dceeff1e3668b26fd3e261ec125927cc72c891d"
+status = "residue"
+cause = "mir::Ty: Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:49: 28:52>::cmp"
+kappa = "7ef334dd8eb9d8124f501a22155e9716fe104457fde81956a8ecc7de16b8a1c1"
+embedded = "95b93b5e4d211d29a20f7dfc432a3e181867b8c33732c6d6bbfcf26ec3b0f761"
+status = "residue"
+cause = "mir::Ty: Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:54: 28:63>::eq"
+kappa = "562740283cae7c54570b3b73dabb728eb09103ff9e270deb644a07ecd1d2d768"
+embedded = "bbd6706da7d0f67ec5bafc2a08edf6186318f251ae0a083b5510247105922dec"
+status = "residue"
+cause = "mir::Ty: Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::<impl at src/alphabet/standard.rs:28:65: 28:75>::partial_cmp"
+kappa = "63e489b89e6ed6cc79dd009a31aed3f1ab2853db1d63a88273422709950f190e"
+embedded = "87d4743e25c3f27fde94fdd0f78a4e25ad8d600b794c02c813188d5b3e82059c"
+status = "residue"
+cause = "mir::Ty: Base64Unpadded"
+
+[[fn]]
+path = "base64ct::standard::Base64::DECODER"
+kappa = "4dee12aa94c2d1375e0a6f43606b3efb621031cc390193e052deba1086add30f"
+embedded = "b42537150e3bf1e416a8e1ab35ab1e1bcc053f1e29191fb0a971f040a3d5466c"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::standard::Base64::ENCODER"
+kappa = "2fa8dfdd77b0d0c58c9cad66c2a91d4081205e561611c0d3ae1be5649ad98f02"
+embedded = "e0492e8d76034430bef8655b51d1e9c438e5b6b62b6b3d3f89561313781f2aac"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::standard::Base64Unpadded::DECODER"
+kappa = "987016b6f830557e816773c195077bc4e4530b234890040d77303d7da2e9a285"
+embedded = "9ec1bd3eac70578b7853cb71aee4a124da575215bbcea68c027f764e2775d224"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::standard::Base64Unpadded::ENCODER"
+kappa = "94520d0c033b55157039474595fa34ad27e8939b80e09985f7e462dfcc80d546"
+embedded = "19d4f0252c29aea9414ec26ccd2f5225ab13e1ab5f8dea6583f5b80b1ab86691"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::standard::DECODER"
+kappa = "5dfca6a07e189c6b5aceb10119bc3a49362713e48a87d6fdaeed06753d713c79"
+embedded = "d63db5adcee76cfd0485519ce8d0bb3cc476b45afc0e24e46ed17c8c30c8f450"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::standard::ENCODER"
+kappa = "09858f2ad3a6940d8afcb772527c5104c84af77aa0da391e3f0f6148a545a45f"
+embedded = "a3cbf133c5c0a9e3d48ab19a7b3fac770e296416b09cf9a48ed22c03992456db"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:10: 11:15>::clone"
+kappa = "6ae4953d29216b831bf3bfbcfeb74e386a8b12e2afa50b9695e209934d55495e"
+embedded = "c07a07b1ce0019bbd4e63310242659992bd352b127bde8500f6d714f34ed9dc6"
+status = "residue"
+cause = "mir::Ty: alphabet::url::Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:23: 11:28>::fmt"
+kappa = "8b11889dd7f0be0f194809028bc637e849131c3f7a3be3d9b38a64fe5fb11c69"
+embedded = "7b06c78008f6f437cdf972995e1e903093ed033e540155cbfb34925c3b68b0b5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:30: 11:37>::default"
+kappa = "fa61d3dca24f431cd536af62489e7d2242f5f99dae6026d5f539855fca5143c6"
+embedded = "80fa3441346a7ef62e393550f46323ca6badabe99711da33c394bdbd50782e3e"
+status = "residue"
+cause = "mir::Ty: alphabet::url::Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:39: 11:41>::assert_fields_are_eq"
+kappa = "4c37b7e1b30d812c477dedfd2a7c4ff0bbd867494f752d1b0e6d86ad6946a8fb"
+embedded = "161245f3dc8e666d8278c82dfa906a664293e85d004cbfa293453fba860340f3"
+status = "residue"
+cause = "mir::Ty: Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:43: 11:47>::hash"
+kappa = "43b6038a5a321330f17af07613369c6749ef05fa45d75d245a94ca22507b7e1c"
+embedded = "1d4184279312df6f78318b9fc5ad923336bac7526a421b56709012e67fcc3906"
+status = "residue"
+cause = "mir::Ty: Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:49: 11:52>::cmp"
+kappa = "d6658d1228adbdaf1778feb5a626c559ede660913f380f7f82962a60413f2aae"
+embedded = "e1100b70aa383e04f34b1db7bdf4a8b3de70fb9740f7a5beeda022999043ec47"
+status = "residue"
+cause = "mir::Ty: Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:54: 11:63>::eq"
+kappa = "2757e81304b84c36623d974c7e3f577d2f4e9b14d19e542958857ee046135558"
+embedded = "ea3d867668860b95aa32f1b8c949f3e026dc6bf9523a1ac1418667f4f9cace77"
+status = "residue"
+cause = "mir::Ty: Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:11:65: 11:75>::partial_cmp"
+kappa = "f5f2113d2bf06f1ace13d7cad3c691a651176439aee99329a785932f9254d81a"
+embedded = "6837137ba9a74ec634151dc3257f6bb81ec233206370ede28f6121c9e27923fa"
+status = "residue"
+cause = "mir::Ty: Base64Url"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:10: 28:15>::clone"
+kappa = "f5ff27ba624ab23a831a99e674d2839a0fd9627d222554ba22016a22d1ecedd8"
+embedded = "a6ca1161c26a301ff6fd323abedb22c0c139f285785267f91ea530020098d35f"
+status = "residue"
+cause = "mir::Ty: alphabet::url::Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:23: 28:28>::fmt"
+kappa = "311fd05d70dece291b8b5fdc42da1cec052271c2ee0fa63b911c54eaa08c543f"
+embedded = "60f22c261423a07f70e3f8b40918ab3ca84cf139a4bb2a78ab95809ee49596a9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:30: 28:37>::default"
+kappa = "985becefb893bd45dbe58ee63fa7cd574c8d0fb8d5247b34ef346e6da7f92c2e"
+embedded = "d36b995bf1114b21437c26d9e3ae23fea2072448c2f052becd448be119930bb4"
+status = "residue"
+cause = "mir::Ty: alphabet::url::Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:39: 28:41>::assert_fields_are_eq"
+kappa = "c482de37d320f32a7b9dba879316f5a7377af1f2b4f2b1997c5296d45b048816"
+embedded = "1f4eef216effaf5b8e13d4f2552efa93680549ea5e8bce902ba9543f01c761b0"
+status = "residue"
+cause = "mir::Ty: Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:43: 28:47>::hash"
+kappa = "98bf959f7d8647d819edf5394485f596f4b41abeb29c0db96b8757925274f2cf"
+embedded = "22e1d8ac3dd637adaf550bfc5ffb7cfc62d5b3ca6a8c1c80b34d821ab7f55f4e"
+status = "residue"
+cause = "mir::Ty: Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:49: 28:52>::cmp"
+kappa = "fa1ae5de9b1d96247e7962885d4a12daa98f284c33d77c26bd205c884c483d09"
+embedded = "6042a2f8e4d01e58871de1da375e6e7d83da78ec878b1b1371e6635d6119f57b"
+status = "residue"
+cause = "mir::Ty: Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:54: 28:63>::eq"
+kappa = "dbaed17a76131524b952c37f6991692b761956aa33658c7aa5bcf3758f25ded8"
+embedded = "2a6b2828aae650c01b60fa6578b2c596bd3a7cd0c6533547b97b62a452a9c563"
+status = "residue"
+cause = "mir::Ty: Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::<impl at src/alphabet/url.rs:28:65: 28:75>::partial_cmp"
+kappa = "6e36299e30733562a35c5a0b9bb8009531411b2600cda6e399478a1d2ae6902e"
+embedded = "546b7e1dbc33b7e18945d2ea92578e7e66f71f6517478dda0f0a570305bff404"
+status = "residue"
+cause = "mir::Ty: Base64UrlUnpadded"
+
+[[fn]]
+path = "base64ct::url::Base64Url::DECODER"
+kappa = "d48586d2adec9f77d70d3e5b034b8ce1cf603c723c590b5019d58a997ca72a1f"
+embedded = "b131a978da17667611c810ae39e853b1d460501eba13c42c48c9656b02c231b4"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::url::Base64Url::ENCODER"
+kappa = "3c988086ee56e785016c5ecb54292cc76a7fd534d1bf542b3f117d27f983aeae"
+embedded = "d259a7d3d3060e8b1f7134727af8d2c808f4356fe01087cdccd47d2f6c139d81"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::url::Base64UrlUnpadded::DECODER"
+kappa = "473b019688b171a7ed1e91ee89c02581b21f11c0a6ad030e4fac0920a69d4934"
+embedded = "6caff9c2f8c00171f3df067ad85240734455f8aaf0e764c1c278b9964d8e7b86"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::url::Base64UrlUnpadded::ENCODER"
+kappa = "9d6eb54f18ad51b95d7ef4620a67362f05a20822a6a454d2c8af75119314cb70"
+embedded = "be5de61fc83bf4c1be2014844423b58eb18dcdf2086e331fd0c0ce8a420ca084"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+
+[[fn]]
+path = "base64ct::url::DECODER"
+kappa = "e9988b941d40f09b9d5e5b740c22643bc336128ecc15162f27c3574aa395b4ca"
+embedded = "acb83fd1ff553946717c14a8a63a6d2e1956869811d4a5d5a4aec2ab0409f0d4"
+status = "residue"
+cause = "mir::Ty: alphabet::DecodeStep"
+
+[[fn]]
+path = "base64ct::url::ENCODER"
+kappa = "4a17eb5242010b54f31a9f006fdf6e11971143ac21e71396b2da8c8d6ec2d07e"
+embedded = "21cad16e0a8b4b50e8823efe06b814d76a573499631b618f70d5f2a741d1eb2f"
+status = "residue"
+cause = "mir::Ty: alphabet::EncodeStep"
+

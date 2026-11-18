@@ -1,0 +1,386 @@
+# The curve25519-dalek register (written by `uorust crate curve25519-dalek@5.0.0`; do not edit): every body of
+# curve25519-dalek's MIR at curve25519-dalek 5.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 691
+translated = 11
+residue = 680
+
+[module.backend]
+bodies = 316
+translated = 8
+residue = 308
+
+[module.constants]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.edwards]
+bodies = 139
+translated = 0
+residue = 139
+
+[module.field]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.montgomery]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.ristretto]
+bodies = 71
+translated = 0
+residue = 71
+
+[module.scalar]
+bodies = 64
+translated = 3
+residue = 61
+
+[module.traits]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.window]
+bodies = 45
+translated = 0
+residue = 45
+
+[embedding]
+bodies = 691
+embedded = 691
+evaluable = 689
+blocked = 2
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 2
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsPoint"
+bodies = 102
+
+[[cause]]
+cause = "mir::Ty: ristretto::RistrettoPoint"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: scalar::Scalar"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: backend::serial::u64::field::FieldElement51"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: backend::vector::packed_simd::u32x8"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: backend::vector::avx2::field::FieldElement2625x4"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: backend::vector::packed_simd::u64x4"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: montgomery::MontgomeryPoint"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: backend::serial::u64::scalar::Scalar52"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: backend::vector::avx2::edwards::CachedPoint"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: backend::vector::avx2::edwards::ExtendedPoint"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: subtle::Choice"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Scalar"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: edwards::CompressedEdwardsY"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: backend::serial::curve_models::AffineNielsPoint"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: backend::serial::curve_models::ProjectiveNielsPoint"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ristretto::CompressedRistretto"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: FieldElement51"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: u32x8"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: u64x4"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Scalar52"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MontgomeryPoint"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: backend::get_selected_backend::cpuid_avx2::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: backend::serial::curve_models::CompletedPoint"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsBasepointTable"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsBasepointTableRadix128"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsBasepointTableRadix256"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsBasepointTableRadix32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::EdwardsBasepointTableRadix64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: edwards::affine::AffinePoint"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: montgomery::ProjectivePoint"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AffineNielsPoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: backend::serial::curve_models::ProjectivePoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: vector::scalar_mul::precomputed_straus::spec_avx2::VartimePrecomputedStraus"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: backend::VartimePrecomputedStraus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CachedPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FieldElement2625x4"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LookupTable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LookupTableRadix128<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LookupTableRadix256<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LookupTableRadix32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LookupTableRadix64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProjectiveNielsPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VartimeEdwardsPrecomputation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VartimeRistrettoPrecomputation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backend::BackendKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backend::vector::scalar_mul::precomputed_straus::spec_avx2::VartimePrecomputedStraus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ristretto::RistrettoBasepointTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ristretto::RistrettoPoint::double_and_compress_batch::BatchCompressState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serial::scalar_mul::precomputed_straus::VartimePrecomputedStraus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: window::LookupTable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: window::LookupTableRadix128<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: window::LookupTableRadix256<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: window::LookupTableRadix32<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: window::LookupTableRadix64<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Identity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item backend::serial::u64::constants::LFACTOR"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::div_ceil"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AffinePoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NafLookupTable5<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NafLookupTable8<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backend::serial::scalar_mul::precomputed_straus::VartimePrecomputedStraus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backend::vector::avx2::field::Lanes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backend::vector::avx2::field::Shuffle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::Chunks<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve_models::ProjectivePoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: edwards::VartimeEdwardsPrecomputation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ristretto::VartimeRistrettoPrecomputation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: window::NafLookupTable5<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: window::NafLookupTable8<u32>"
+bodies = 1

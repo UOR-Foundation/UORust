@@ -1,0 +1,63 @@
+# The zeroize_derive register (written by `uorust crate zeroize_derive@1.5.0`; do not edit): every body of
+# zeroize_derive's MIR at zeroize_derive 1.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 14
+translated = 0
+residue = 14
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 14
+embedded = 14
+evaluable = 14
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as std::default::Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoundAccumulator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeriveInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZeroizeAttrs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1

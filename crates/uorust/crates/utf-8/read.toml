@@ -1,0 +1,61 @@
+[[fn]]
+path = "utf-8::read::<impl at src/read.rs:14:10: 14:15>::fmt"
+kappa = "8cc8b50f0d4a5e726d4314b7c020a7f254a05a61415b02056b2aa7b15f886674"
+embedded = "6cbd74e099150d8f218507c2340b315ff85a924f2f84a0e3a5e90743f6672f18"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoder::new"
+kappa = "c0537d16505af257c88dea541016fa8e29df341b9a9257a4e0731aa33da7b404"
+at = "B=u32, Incomplete=u32"
+embedded = "7a5bd0211e8c841416ff6991f13e76351538ac88022a3a0371e63b621c0ee6ba"
+status = "residue"
+cause = "mir::Ty: read::BufReadDecoder<u32>"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoder::next_lossy"
+kappa = "cdc32264128ed267ec600d908bb802ff536f84bcf895de52699100a6c24b5b12"
+at = "B=u32"
+embedded = "9e27d0f7c22438dcbadebdca32be310ba9cd8f3a0d800ed02b8713a5fb3e84ec"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoder::next_strict"
+kappa = "896b03cbde513fd607637eb8d34c6fa971cca2df5d00d1b40aa37a03c0ade30a"
+at = "B=u32, Incomplete=u32"
+embedded = "49257aacefe0afbfdc6e0ce2be5187306223f45d2a2213cc32c772a4427da32c"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: read::BufReadDecoderError<'_>"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoder::read_to_string_lossy"
+kappa = "d846b31ccae95f1d9d5630755a68362f537edf13b52a2a623395eb413ef4b39b"
+at = "B=u32"
+embedded = "99bd9ccd5af6b667100ad72a8a9672aca9a9088ce421eb2e11fcb0a7f24293a7"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoderError::fmt"
+kappa = "5b49fbaa212c8eebf28b75e68cfbfc35f2fc652bfb1ac43f68b942c67f8aea0c"
+embedded = "13e55147c266e740f9c68f5c38cd98b71db060da48da2fd50a4d1de1176b5bed"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoderError::lossy"
+kappa = "1422f48d5dd1d4c4241d169a1f5e35f69b3784d6d75821b0f96626c9982036c0"
+embedded = "d025f70a1618cd1fc7abc1961c5fa2332b97ef6f2eb312e980ae29572871aa3a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "utf-8::read::BufReadDecoderError::source"
+kappa = "2ab7e1f98be4f1750548a2c84de55728ba731a0b02e54e87e94eca485f785bbb"
+embedded = "12b242d205ceb74062083a5d31742307685f0330dfeb98dc4a5605c38c7827c3"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+

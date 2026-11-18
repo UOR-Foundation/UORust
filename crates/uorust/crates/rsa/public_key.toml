@@ -1,0 +1,136 @@
+[[fn]]
+path = "rsa::check_public"
+kappa = "2a906512e71c47801383e53f76881d0c638dadcefd0d910dae5a63c727d85364"
+embedded = "3af45384995abf2f845ff6d81b119b4504ebcfc4167a3a1d08d534e9e8abebfd"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::check_public_skip_exponent_size"
+kappa = "06a8ded5d122a988be6af7cca6cc2f776cd49284199d78e121612310918bcf11"
+embedded = "60d6f627f1bd1a186fe38e4f641e842d772b51d99f3bc569b5fc179b19943140"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::check_public_with_max_size"
+kappa = "773069bd7605a4bcde626c15bb25a461d02ca5e90aeb9fa1f49c0c1286490a5a"
+embedded = "804eb4ea6fa3a633e41308203502dd2e0d3158342691f4556cafbc14d6fda55c"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::public_key::<impl at src/public_key.rs:19:10: 19:15>::fmt"
+kappa = "42612a786ed0f41cb64f05eae8995ee9c17b0406e5337225263d2ee120550fd3"
+embedded = "723221afb890ea48c6495435834b1a445fc6bd6879582f9d823bbc87880bf4f7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rsa::public_key::<impl at src/public_key.rs:19:17: 19:22>::clone"
+kappa = "5a59bcf97621a5357cdb9b2073f9f10fdc0efcf373ff7a56ba89c724ad34c2d1"
+embedded = "897d60b0dcdc4ae4b6d1e6afa2b14dca63b21899c64d49379bab859c288fcd63"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::MAX_PUB_EXPONENT"
+kappa = "d11945c6471965000ab4e8f853de83759c5b064f2dbbd760b8e6dcd56b0137d9"
+embedded = "d1e0aeffa3798b716c8422837aa31120b920584008197cb4d054e62b93a94def"
+status = "translated"
+digest = "713f8aa9e670603037fe3629c8f2439180283169c7fb8499a4528b848b79e55f"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::e"
+kappa = "ea090fcdd3fd4abc08a8bd26ce159085b8087ef678af3847205fcea39482d156"
+embedded = "e80de6172c37d1dfbf45c623d61370aed070e045b0f718bc0a2cfce35b085d64"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::encrypt"
+kappa = "68e3c06a942930d4cd30adf5035b185e6431e1f62133b8374783774c1ff75e9c"
+at = "P=u32, R=u32"
+embedded = "fcadd13243f386bdff1fbc6f3edee779e409c00dc213c8671e61359f89098dac"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::eq"
+kappa = "fb47eed25ef1a14306e7ab8eee657130ae010b8c3e24bf6fd7967aa0bea0172d"
+embedded = "14913ceabaf2fc61725e10da839afb8c52c448ef7807efd3cc159cd17ef6833b"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::from"
+kappa = "0c559a57a820d39ab14803b537bf166494f42f0a5082cba2de7b19a81df0c9f2"
+embedded = "c5dafd329da0bd53f4e5d5fd9e9b7968e52c93feb265e1544acc093fbfd18e63"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::from#2"
+kappa = "262c244fb7824a1fc1389dcaebb2b61e41c4a6b4ca3829f2e38ffcd1f25d1c00"
+embedded = "6fffd4b706fa4c709feee34d528495e9dc3ab9f06dc1023e0c56b1d14a9b6ee4"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::hash"
+kappa = "4224fe554bbb1291ba081bfd0bb350354abc32676ecfedb673a79072f3247ba7"
+at = "H=u32"
+embedded = "12816d066f2fadd0de27e50173f77c7f6fcac71c554afba1f77bdcd6b9511de0"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::n"
+kappa = "3f70f042bead71c3b589cf8c2fa4516a0dc7e33a8c2ff4c983076d156e521524"
+embedded = "01af45af7ed3029d5a3a464ee87c9813ebd6566ba04b01d677adb5246e5dd9e5"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::n_params"
+kappa = "2ef562bc1e2b49af79ea1d385c9267739f09e8b2fd6de0229e48a55a2e375485"
+embedded = "6708daec43018484fb81ca4bcd5ced260fe5fd5797d22c4916f0e4c812a7a2db"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::modular::BoxedMontyParams"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::new"
+kappa = "98d97fcc5d0fd7d564e23be6689004b9934210a1f97af7c3e6a87ee24b3be1cb"
+embedded = "818f5d0881699f37e06b9d3ac0ace2402e37fd10efbdf59fa86433735a92496b"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::new_unchecked"
+kappa = "26b420a135b92aaafc99d5ca03f489dc1291a4042f7771d177af4500dd124647"
+embedded = "d6f5e8689c0ed979484cf09571dff19026a8bbe2624911203da561e7095941b8"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::new_with_max_size"
+kappa = "38caa2840b99e23a49f03e0bdeb016cc102d34bfd4238e84097a2575c9c4d654"
+embedded = "2644689b9f79939b3ed414d6e88d7533b1619ae19e507d8b9d94b4ae08b560f2"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::new_with_size_limits"
+kappa = "bd8bff2f70418d78a84294d07211b785188cd512b1096d915e1cd954b87a02cc"
+embedded = "c20f481a8575918702e802d766678415d8cd5fccfc19ff97fd0b6ff56a841c69"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::public_key::PublicKey::verify"
+kappa = "a51c65276dc38fbba628bdd49cf097753fb457fdc52b7a7afb4dd352abc9859d"
+at = "S=u32"
+embedded = "7f05198b73bc30465af632d313ddfbd31ca0dee4a2093aa4b3b784684bac49e0"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+

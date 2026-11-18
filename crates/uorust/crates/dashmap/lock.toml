@@ -1,0 +1,105 @@
+[[fn]]
+path = "dashmap::ONE_WRITER"
+kappa = "d65ae5726f52f90c86b7959219bf84adf9eb1b98d2f13339a27b8461e6cf4240"
+embedded = "fe8ae5840b7072369aa642bf51df8b8ea9b2aa2709135243a065a25cb848c91e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item lock::READERS_PARKED"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::INIT"
+kappa = "61ef2e3833c1e23e60b54ebadaf9d0aee8005e108b5c6f665f35f0c12b2692b8"
+embedded = "cec6a8586a066c916e17756d217a9e0ac9373a210d898bd330a2c666cc57e53d"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::lock_exclusive"
+kappa = "09c572a5cd06ada5af1c6788e3b2f97a41c980da8bafa6af4e17b4de914bacdd"
+embedded = "92c362f6884d75bf6639dbee5b4ff01e27d99e4f8c27b9849cf932eb708d384a"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::lock_shared"
+kappa = "99ac05fa9e83b9e964ccb3ecb9cf8f835d623aa3ca32703a28a24d18b542c7ae"
+embedded = "f578b492e1080463c2cf180a954e4de020e79ae59ef59e2ed07d8a684e4eefe9"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::try_lock_exclusive"
+kappa = "ee96c2810698ddbc4b3ccec6d9be23fe23e944843f58e4a85ad00480d84045e3"
+embedded = "5501abdefd5db4fa4ae177b5cdca4ae7b07d86fbaec11b14a5ad97e2467e8644"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::try_lock_shared"
+kappa = "9174a8aa837fd8844562c42b4c0891651588d2d47e798ef4e465f451a2136486"
+embedded = "f9e43da27f58b372f9cbf0a415fa430edc37e83d474471745b1422cef9055ef3"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::unlock_exclusive"
+kappa = "41948f51b0c7d37d6c55efa24276078d3966c0260b32c7835d4610f4ed1423ab"
+embedded = "dca2eeda73a928c0cb9f4a5e393416881424298781c4bd8837ef793a7ae8e19d"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:17:1: 17:46>::unlock_shared"
+kappa = "be83d0e041b25bfca16056fbcae7a6bcf4eb5b32504d6204b30c538d2f99b2c0"
+embedded = "c7976b2bb96e13b5539567da177dbfb6e461079fc18ff17138d99ccac6868877"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::<impl at src/lock.rs:76:1: 76:55>::downgrade"
+kappa = "adccb89a941e6da4b1ce5d382fb9edab3b399e3d64f246f030c7c2ce9fd545db"
+embedded = "c4e734659bd090890e57aad142345ee7ea231d9e263873aacf083d916273af1f"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::lock_exclusive_slow"
+kappa = "f6245aae2b45cb1865d19d14b800694e136a4021737ad8435ea3cfb899c154e0"
+embedded = "01b6c81216b56c3109b479cf700223fc5fea3d7bc048b809d8022499302386a6"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::lock_shared_slow"
+kappa = "29cf4282fd66577717f2aef41c48ab3d641bf870b23fff6daae6f428bae880e3"
+embedded = "cba6631fcddb45c9ff8fd3af7ca38c53e96eeffd5c005f42e1b6236e45c48f41"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::try_lock_shared_fast"
+kappa = "a5732fdb0596507ea10c16221dacb20c7f4690c6d3818078df9a0688bd934b4f"
+embedded = "029f9d34015d82cb1f7e92935c2d6d3853aabea476f50dc8d9f97b82432f1c76"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::try_lock_shared_slow"
+kappa = "633c8a44ea16122b1c2c59c80ef938e6ff70d1f2b877200f9bc0ab7f95051d7f"
+embedded = "cd6194a221c8fd6d5ddb2923f72ea11c72eb8b60ad3da51f8c5f74fdd3f5968d"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::unlock_exclusive_slow"
+kappa = "dd0995ba03d7aa46553ba5fcff3158ab504df304413b4b0a3bb62bca06a68050"
+embedded = "9826d2ef1d73e54a4c89bd4f3a0da084c7994347b61ec58bbb8fbbc65a56cc41"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+
+[[fn]]
+path = "dashmap::lock::RawRwLock::unlock_shared_slow"
+kappa = "82dc130aed2467ba56c27efdd08a674834008298092bb04aa2dbc0236e29a1af"
+embedded = "d9ac2bb41dce70f56276699e949de1287953823ae2409c0ccf966c4d343e8c90"
+status = "residue"
+cause = "mir::Ty: lock::RawRwLock"
+

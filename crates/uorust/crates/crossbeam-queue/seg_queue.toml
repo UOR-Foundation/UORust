@@ -1,0 +1,156 @@
+[[fn]]
+path = "crossbeam-queue::BLOCK_CAP"
+kappa = "cb0dd4c4e325de7dc009838c48a839b10ba872a28dd71661e816f158617aaa4b"
+embedded = "03ae7bc4f9f045391be7f23160366abc08c9efadbc8a634a968668f349a9375c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item seg_queue::LAP"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::<impl at src/seg_queue.rs:667:10: 667:15>::fmt"
+kappa = "56aa4e70e62872eb09fcdfd4e0237e019c4acd43c192e28d3597621a3673e554"
+at = "T=u32"
+embedded = "dd184efbf9a01b1de1e655d514be1800274fa690ebe8c1f819320f4cf39b04d9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Block::LAYOUT"
+kappa = "17ff8e8609b7ba408c1fdb316657436cb8dc2fa892c6c84a9632d2b487576f63"
+embedded = "bd1ecd8cfdae4a5c706300517bd6bb6cabc833ca84202027589c7a38e709ab62"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Block::destroy"
+kappa = "05027a63c8e62d0e8bcabda2c1f0a8fd196956e21bad56dbea15c6e8c0fd83d1"
+at = "T=u32"
+embedded = "02b9cf96f9570ef6853b4f7d6b22909093e77fcc3f9923e14aea19ef9b788c74"
+status = "residue"
+cause = "mir::Operand::Constant: seg_queue::BLOCK_CAP: mir::Operand::Constant: the constant item seg_queue::LAP"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Block::destroy_mut"
+kappa = "70bde85036715e9b97c5a00b7ea6fe3b0ee935020e12f1d66ea14dbc94eae819"
+at = "T=u32"
+embedded = "ba1d8873872c486f320a2f68a8f68042a0d8cc47eedc455bd2f8f1254d27efd6"
+status = "residue"
+cause = "mir::Ty: seg_queue::Block<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Block::new"
+kappa = "b8b060063619c8d592728e061823329476c4fe179e1535317908ee16580077bd"
+at = "T=u32"
+embedded = "1a4ee912ca31046b482ea4144b43a3bed91cc91b36af0e2a13525e05e9b2b38e"
+status = "residue"
+cause = "mir::Ty: seg_queue::Block<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Block::wait_next"
+kappa = "9a2badfa2536df71626000b81f67579f4d9ec38330b969cd8295767d5534cd2b"
+at = "T=u32"
+embedded = "e992e944b493c4b0bf0895a8f911603b0c67b683843d5f325d95734e72fb6737"
+status = "residue"
+cause = "mir::Ty: Block<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::IntoIter::next"
+kappa = "7e8e9f734bb3e681e686497d84f305fd79a67666b8d6330796251d11c50f51d1"
+at = "T=u32"
+embedded = "17e6292332d2da2953e85644e385cb3ed064d4043f05db5e81da94c5446f9111"
+status = "residue"
+cause = "mir::Ty: seg_queue::IntoIter<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::default"
+kappa = "87c1d3ea28b21158272b50661f522fc60923bc2d3a5f4318c855e3ab7d2aed1f"
+at = "T=u32"
+embedded = "a099895618df5c37327645f5d5f2a0949cf6bc9b50fe2b9bb70f2a5c759592f8"
+status = "residue"
+cause = "mir::Ty: seg_queue::SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::drop"
+kappa = "6a20e6dc0ea9de541fcb4e561a450a384cbec540d7c4bd4a09b8e32f9b12f68e"
+at = "T=u32"
+embedded = "88225bbe84e139ead034e8b0ef40995a64ec57778d40206bc813aa50a5b16805"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::fmt"
+kappa = "1e8b9a9e39f0d09092aa4f492dee0862498dab946650752ed1a26dd69eb5aa5c"
+embedded = "16a879db9801aaf64979509ffb419ef4cfd0afa4ebf18bdd92b6d1d9e3bbe6bc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::into_iter"
+kappa = "af2ec2d3fda3e813351a666634deb8092ac08ac50add7cf00bb1f8f8bb8ca361"
+at = "T=u32"
+embedded = "ad64e4366836bc9da99d7589bbe06d495fbaac8b9295adece0d24e5e13644b0b"
+status = "residue"
+cause = "mir::Ty: seg_queue::IntoIter<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::is_empty"
+kappa = "37a467d3c5121fa945b9a9a6c4921a7549710f875353a578c1f13c208ed7a901"
+at = "T=u32"
+embedded = "3b435f31d9f99de46074b936d2b33b14d59d047d7140dad9f426ecefba470497"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::len"
+kappa = "5227fced303baae4d88fa76072570f3cbb6cee67106c72e44a33da928d9d0423"
+at = "T=u32"
+embedded = "aef7e9ec975aea9bd5089fe2c45ca4ab6c9bfd182b2abbda53421cdbbfe90f1c"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::new"
+kappa = "a148639981c125991e03c32f6636de31026a50aa1db03497bffda213c69ca20d"
+at = "T=u32"
+embedded = "f878cc7d352a74980cea6c1c1b08ad3652410473d2ce9cdab512d54ba83258f4"
+status = "residue"
+cause = "mir::Ty: seg_queue::SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::pop"
+kappa = "ca3d231ba9e9d596e74b2d47da4bfd37ba37cc2be9f37312494bc38ddb65966c"
+at = "T=u32"
+embedded = "632b8412bf065fb5534cacb7e44e2b5a6ecd83e865efd1399dcf66c941c43d21"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::pop_mut"
+kappa = "aad45edc962bc8ea17ba7b4b99259509a7f01071a52e7087f55f6734f5787699"
+at = "T=u32"
+embedded = "0ad3d8b25cc740f70c8c3f9b46431511a01239b359fc54261222740d9b79ac2b"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::push"
+kappa = "f6029e76bfa21945f381403af8f4845fa54d37f1b7a3c0845ea4bc46576f043c"
+at = "T=u32"
+embedded = "c38de614624de50f8b3ecb1d0b374c8951e65652d9edd5c8afa601334a9aab65"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::SegQueue::push_mut"
+kappa = "ab73fea9269547056c61615231ff66ff689ac708a965d50aa2efed0caa72fe64"
+at = "T=u32"
+embedded = "439aa945b94cfa079060fbda8453a6f9bee4a2d7ab9bb0449b7286e67eeb4507"
+status = "residue"
+cause = "mir::Ty: SegQueue<u32>"
+
+[[fn]]
+path = "crossbeam-queue::seg_queue::Slot::wait_write"
+kappa = "d84e8d6b549602d9fb588dff3a5d8cf023c64cf02d20f48b3042012298c673eb"
+embedded = "a90769e2fe9a114e890518e383ff78bc94196db84b936a7fca7fd74a1c023916"
+status = "residue"
+cause = "mir::Ty: T"
+

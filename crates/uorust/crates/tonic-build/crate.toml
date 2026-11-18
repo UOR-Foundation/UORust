@@ -1,0 +1,144 @@
+[[fn]]
+path = "tonic-build::<impl at src/lib.rs:109:10: 109:15>::fmt"
+kappa = "1efc05e0622763d9ebdc7ec434231384395a70057cefb1fa3133494a3270f2ea"
+embedded = "63c26d18c303b3aa641db36b0a3805045e84c41099a226dc3f2a9386cca1ba43"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic-build::<impl at src/lib.rs:109:17: 109:24>::default"
+kappa = "b8dfae226e0dfb7bba75a515a4719198c9c293a98eb47edc9b3418c5d440e627"
+at = "Attributes=u32"
+embedded = "74fd309416de269941cf63ed6ae9621dc643da9a94c4ea8bfb8cc3b3dcaec731"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as std::default::Default>::default"
+
+[[fn]]
+path = "tonic-build::<impl at src/lib.rs:109:26: 109:31>::clone"
+kappa = "08118fc52c1fb06d975e4bbef7871213d7423cee749df413251dd363be54f9b1"
+at = "Attributes=u32"
+embedded = "75b9c57ed2123173a7d40cff268e2226e573949dbdfb270f9b0a64c764136d08"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "tonic-build::Attributes::for_mod"
+kappa = "491e96c2ec7227367b2bb903a4c88064d617d9ee755e9a2a102dd36e0572f8e7"
+embedded = "bb8250bfeb04fadbed01addcfed3a0bc088d7ee41ad8c573968ed241bc656030"
+status = "residue"
+cause = "mir::Ty: syn::Attribute"
+
+[[fn]]
+path = "tonic-build::Attributes::for_struct"
+kappa = "24907f5da421c9663f3e7675376343678dd8c3126701bb0275501ec903f531e5"
+embedded = "2f6fa03383ff8a0c0a1e4eae91918ff55ad9f4b4f43564c33abf1d5a9cf0160b"
+status = "residue"
+cause = "mir::Ty: syn::Attribute"
+
+[[fn]]
+path = "tonic-build::Attributes::for_trait"
+kappa = "5d0ec64d89fd7b629b55cd3988470bcc32882715d3ff2f16168f5aeee8b5c5bb"
+embedded = "23d5bf19f77ca7c185e467a17d39556b3987239df7fd8a845898ba9faef0819d"
+status = "residue"
+cause = "mir::Ty: syn::Attribute"
+
+[[fn]]
+path = "tonic-build::Attributes::push_mod"
+kappa = "1a8ff827582968ed2d10b2207561f12ac7d5758369513179717a4cc1ff4bd743"
+at = "String=u32"
+embedded = "4686ae1caa1a3428445d42bb3ab7152c8a504447189299941efefe268f6c291c"
+status = "residue"
+cause = "mir::Ty: Attributes"
+
+[[fn]]
+path = "tonic-build::Attributes::push_struct"
+kappa = "e63515d2dfe04193302482f2ea217961a99f36d55a9ed8e4ecd3938852c707a1"
+at = "String=u32"
+embedded = "8ac6b2f07449e237e47c302406bf44f440345d34b634dfbabb7a2a57422f63a5"
+status = "residue"
+cause = "mir::Ty: Attributes"
+
+[[fn]]
+path = "tonic-build::Attributes::push_trait"
+kappa = "e59ad3471b7f62ebba96d0e2f2b7637e1831fe8409b0c3d883d548c4be958267"
+at = "String=u32"
+embedded = "9deaac071ad8f732a4ab12531f063afcaacfdd956c16c88b506b69fb16ece698"
+status = "residue"
+cause = "mir::Ty: Attributes"
+
+[[fn]]
+path = "tonic-build::Method::deprecated"
+kappa = "d80a815b31c0cab0fcdeff6dd5299d2b860de8eaada00156ba9ec59ca456af18"
+embedded = "fcf37b10acf518cebb843c0107dc086912c0b0cb7c6664eb7f36b46b23bdcb11"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "tonic-build::format_method_name"
+kappa = "a451d519450e27d00d2fdf5c544664cd5461158d1c93c955ca049eb8010dd10c"
+at = "T=u32"
+embedded = "31c5d39f927773c08ac3f7c18857d003fba2938e491838b41372403f147b4d53"
+status = "residue"
+cause = "mir::TerminatorKind::Call: format_service_name: tonic-build's MIR stops at mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "tonic-build::format_method_path"
+kappa = "0743b59d5cdc38a15274c45bfad8bf1eb037f5e884145ef5844d1f7eab66a6a5"
+at = "T=u32"
+embedded = "99446ed5c424ab5b5927ed1d2f2b93952598de3d44c7063d4aa7f20c8db78c31"
+status = "residue"
+cause = "mir::TerminatorKind::Call: format_service_name: tonic-build's MIR stops at mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "tonic-build::format_service_name"
+kappa = "69babdc8312aa5fc8d03bbdc454f5bb3c183e70f974d7c69e70380000c176f24"
+at = "T=u32"
+embedded = "a34f40559b6006b8b741b4fd2e8b87bf685d5edd2e73d014743fcd00fad1da29"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Service, which u32 does not implement in core"
+
+[[fn]]
+path = "tonic-build::generate_attributes"
+kappa = "372e094aca4d81f1e66f0941b75f176f9543661f134b43c120cab3a24fcfaf43"
+at = "String=u32"
+embedded = "69e7dd9d9eea032977c3cd026c72910fc91e73761296f9fc0ccbb8a09a6f84ae"
+status = "residue"
+cause = "mir::Ty: syn::Attribute"
+
+[[fn]]
+path = "tonic-build::generate_deprecated"
+kappa = "a7e65e16d0b3c4201eef3280d84224e713ae066967c35949533647632b64accf"
+embedded = "b5abde36b0b485bdd87be2d07c8a0241fef8eab83928bf5ac495cdd2cc865d48"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tonic-build::generate_doc_comment"
+kappa = "b9c6ab447867f4e88284e8b128749d0af7ccdc87c0cd0b51b6e62417949ccbdc"
+at = "S=u32"
+embedded = "37b291b271dbe39e6ef26e8f0302bd0d1b63ef5e65a00e213bd80681007dee9d"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tonic-build::generate_doc_comments"
+kappa = "ac23fc51c8dfc8ed92b41bef1f2cc349fed8191626c72af6dba96675b3407ac4"
+at = "T=u32"
+embedded = "bf781a4413de51694605075e546cc183dbb7553f156a312b473102ec75be40e5"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tonic-build::match_name"
+kappa = "4d0c409e3a4a0071e217bf9eaf918d96f5b485de11fd668a7e802c517d8f7e0c"
+embedded = "c96be8eb1df045c000ada340db4ea525f8da6f2e4352f8999e6195d10b88d150"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, char>"
+
+[[fn]]
+path = "tonic-build::naive_snake_case"
+kappa = "abdb6f53db9bc7908553014f36c2b444a2e79a8fbec2eb192f724e22b609d8bb"
+embedded = "a851b613912fd50af673de4d0fe56632263fad8cbfb88ecf148f30faae46fae2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::new"
+

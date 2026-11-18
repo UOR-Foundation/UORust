@@ -1,0 +1,149 @@
+# The async-channel register (written by `uorust crate async-channel@2.5.0`; do not edit): every body of
+# async-channel's MIR at async-channel 2.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 115
+translated = 3
+residue = 112
+
+[module."_#1"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#2"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#3"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#4"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#5"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#6"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module._]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.crate]
+bodies = 91
+translated = 2
+residue = 89
+
+[embedding]
+bodies = 115
+embedded = 115
+evaluable = 115
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Receiver<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Sender<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: SendError<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: _::Projection<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: _::ProjectionRef<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Closed<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Recv<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TrySendError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Send<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TryRecvError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RecvError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WeakReceiver<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WeakSender<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Channel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClosedInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RecvInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 1

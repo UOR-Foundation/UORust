@@ -1,0 +1,234 @@
+# The fallible-iterator register (written by `uorust crate fallible-iterator@0.3.0`; do not edit): every body of
+# fallible-iterator's MIR at fallible-iterator 0.3.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 251
+translated = 2
+residue = 249
+
+[module.crate]
+bodies = 251
+translated = 2
+residue = 249
+
+[embedding]
+bodies = 251
+embedded = 251
+evaluable = 251
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 31
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FallibleIterator"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: Chain<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: MapErr<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Convert<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Fuse<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: IntoFallible<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Peekable<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Rev<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Cloned<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Enumerate<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Filter<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FilterMap<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Inspect<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Iterator<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Map<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FlatMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Flatten<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Skip<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StepBy<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Take<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Unwrap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Zip<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DoubleEndedFallibleIterator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Cycle<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Empty<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FromFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Once<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OnceErr<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Repeat<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RepeatErr<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Scan<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SkipWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TakeWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FoldStop<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::all::{closure#0}: type outside the lift: FoldStop<bool"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::any::{closure#0}: type outside the lift: FoldStop<bool"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::find::{closure#0}: type outside the lift: FoldStop<core::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::max::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::min::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: FallibleIterator::position::{closure#0}: type outside the lift: FoldStop<core::option::Option<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FilterMap<&mut u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MappedErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: St"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn DoubleEndedFallibleIterator<Error ="
+bodies = 1

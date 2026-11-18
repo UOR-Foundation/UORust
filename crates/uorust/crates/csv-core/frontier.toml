@@ -1,0 +1,164 @@
+# The csv-core register (written by `uorust crate csv-core@0.1.13`; do not edit): every body of
+# csv-core's MIR at csv-core 0.1.13, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 136
+translated = 3
+residue = 133
+
+[module.crate]
+bodies = 8
+translated = 2
+residue = 6
+
+[module.reader]
+bodies = 87
+translated = 0
+residue = 87
+
+[module.writer]
+bodies = 41
+translated = 1
+residue = 40
+
+[embedding]
+bodies = 136
+embedded = 136
+evaluable = 136
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: reader::ReaderBuilder"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Writer"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: writer::WriterBuilder"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: reader::DfaState"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: reader::ReadFieldResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reader::ReadRecordResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DfaState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Reader"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NfaState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reader::NfaState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reader::Reader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writer::WriteResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writer::Writer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DfaClasses"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReadRecordResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Dfa"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NfaInputAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadFieldNoCopyResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadFieldResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadRecordNoCopyResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Terminator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WriteResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::Dfa"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::DfaClasses"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::WriterState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item reader::TRANS_CLASSES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::NfaInputAction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::ReadFieldNoCopyResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::ReadRecordNoCopyResult"
+bodies = 1

@@ -1,0 +1,1308 @@
+# The bindgen register (written by `uorust crate bindgen@0.73.2`; do not edit): every body of
+# bindgen's MIR at bindgen 0.73.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1801
+translated = 5
+residue = 1796
+
+[module._]
+bodies = 101
+translated = 0
+residue = 101
+
+[module.callbacks]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.clang]
+bodies = 191
+translated = 0
+residue = 191
+
+[module.codegen]
+bodies = 321
+translated = 1
+residue = 320
+
+[module.crate]
+bodies = 75
+translated = 3
+residue = 72
+
+[module.deps]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.features]
+bodies = 62
+translated = 0
+residue = 62
+
+[module.ir]
+bodies = 829
+translated = 0
+residue = 829
+
+[module.options]
+bodies = 129
+translated = 1
+residue = 128
+
+[module.regex_set]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.time]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 1801
+embedded = 1801
+evaluable = 1674
+blocked = 127
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 127
+
+[differential]
+bodies = 1
+theorems = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 154
+
+[[cause]]
+cause = "mir::Ty: BindgenContext"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: clang::Cursor"
+bodies = 77
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: _::InternalBitFlags"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: ir::context::TypeId"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: ir::context::ItemId"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: codegen::_::InternalBitFlags"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: item::Item"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: codegen::DerivableTraits"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: clang::Type"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: options::BindgenOptions"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: DerivableTraits"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: ty::Type"
+bodies = 21
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Into"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: CompInfo"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::ConstrainResult"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: features::RustTarget"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ir::layout::Layout"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: CodegenConfig"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Annotations"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ir::derive::CanDerive"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ir::ty::Type"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CodegenResult<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: EdgeKind"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ItemId"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Bitfield"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: DeriveTrait"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ir::context::ItemResolver"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: BindgenOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: codegen::CodegenError"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: regex_set::RegexSet"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ObjCInterface"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RustTarget"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: StructLayoutTracker<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: clang::LayoutError"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::from_bits_retain"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: FieldData"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IntKind"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: RustEdition"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::sizedness::SizednessResult"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ir::annotations::Annotations"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ir::context::ModuleId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: FunctionSig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Method"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: clang::EvalResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: features::Version"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ir::annotations::FieldVisibilityKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ir::context::FunctionId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ir::function::Function"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ir::item::Item"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ir::module::Module"
+bodies = 6
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CanDerive"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DiscoveredItem"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DiscoveredItemId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Edge"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumVariant"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumVariantValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumVariation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FieldVisibilityKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FunctionId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: HasVtableResult"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ModuleId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RawField"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SizednessResult"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Var"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: VarId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: clang::SourceLocation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: clang_sys::CXString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: context::TypeId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: features::RustEdition"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: features::RustFeatures"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: function::Abi"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::has_vtable::HasVtableResult"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ir::context::VarId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: item_kind::ItemKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CompFields"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Function"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MethodKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UsedTemplateParameters<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::Iter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: clang::Comment"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codegen::AliasVariation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codegen::EnumVariation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ir::context::PartialType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ir::int::IntKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ir::item::NameOptions<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AliasVariation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Base"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BitfieldUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CargoCallbacks"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClangAbi"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CodegenError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConstrainResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Diagnostic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InvalidRustTarget"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MacroTypeVariation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Module"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonCopyUnionStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PartialType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RustFeatures"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TemplateInstantiation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TranslationUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TypeKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: callbacks::ItemKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: callbacks::MacroParsingBehavior"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: callbacks::SourceLocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: callbacks::TypeKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cexpr::expr::EvalResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: clang::Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: clang::TranslationUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::MacroTypeVariation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::NonCopyUnionStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::dyngen::DynamicItems"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn ParseCallbacks"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::annotations::FieldAccessorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::comp::CompInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::comp::CompKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::comp::MethodKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::function::ClangAbi"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::function::FunctionKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::item::ItemAncestorsIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::objc::ObjCMethod"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::template::TemplateInstantiation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ir::var::Var"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: time::Timer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::bits"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::slice::iter"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ABIKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AttributeInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BaseKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Builder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CanonicalTypeDeclaration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClangToken"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugOnlyItemSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeriveInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DynamicItems"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnumVariantCustomBehavior"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FallbackTranslationUnit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FieldAccessorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FieldAttributeInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FieldInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FloatKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FunctionKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ItemInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MacroParsingBehavior"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ModuleKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ObjCMethod"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Timer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Vtable<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::IterNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: callbacks::DiscoveredItemId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cexpr::token::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::ABIKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::CanonicalTypeDeclaration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::FallbackTranslationUnit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::Index"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clang::RawTokens<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::EnumBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: comment::Kind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: comp::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_ty::Enum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::derive::CannotDerive<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::has_destructor::HasDestructorAnalysis<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::has_float::HasFloat<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::has_type_param_in_array::HasTypeParameterInArray<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::has_vtable::HasVtableAnalysis<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::template_params::UsedTemplateParameters<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::comment::Kind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::comp::Base"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::comp::Bitfield"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::comp::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::comp::Method"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::enum_ty::Enum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::enum_ty::EnumVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::enum_ty::EnumVariantCustomBehavior"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::enum_ty::EnumVariantValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::function::Abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::function::FunctionSig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::function::Linkage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::item_kind::ItemKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::module::ModuleKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::objc::ObjCInterface"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::traversal::Edge"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::traversal::Paths<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ir::ty::TypeKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: layout::Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: merge_extern_blocks::Visitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sort_semantically::Visitor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Item"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MonotoneFramework"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u16 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as Into<String>>::into"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::CONSTRUCTORS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::DESTRUCTORS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::FUNCTIONS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::METHODS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::TYPES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::VARS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item _::all_named::ALL_NAMED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc92: &OnceLock<regex::Regex>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CargoCallbacks::new: bindgen's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::all"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::complement"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::difference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::empty"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::insert"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::intersection"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::remove"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::symmetric_difference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::toggle"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::union"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::str::trim_start_matches"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: clang_sys::is_loaded"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ensure_libclang_is_loaded: bindgen's MIR stops at mir::TerminatorKind::Call: clang_sys::is_loaded"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BindgenError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CannotDerive<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DepfileSpec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnumBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Formatter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HasDestructorAnalysis<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HasFloat<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HasTypeParameterInArray<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HasVtableAnalysis<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ItemTraversal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameOptions<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Paths<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Permissions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawTokens<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SizednessAnalysis<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeTemplateArgIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UserMangled"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bitflags::Flag<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::AttributeInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::DeriveInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::DiscoveredItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::FieldAttributeInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::FieldInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callbacks::ItemInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::ClangToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::ClangTokenIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::CommentAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::CommentAttributesIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::CommentChildrenIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::Diagnostic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::TargetInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::TypeTemplateArgIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang::UnsavedFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang_sys::CXCursor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang_sys::CXSourceRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clang_sys::CXToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::CodegenResult<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::Vtable<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::WrapAsVariadic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::postprocessing::PostProcessingPass"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::struct_layout::StructLayoutTracker<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deps::DepfileSpec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::derive::DeriveTrait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::analysis::sizedness::SizednessAnalysis<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::comp::BaseKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::comp::CompFields"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::comp::FieldData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::comp::RawField"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::context::AllowlistedItemsTraversal<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::context::BindgenContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::item::DebugOnlyItemSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::item::UserMangled"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::traversal::EdgeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::traversal::ItemTraversal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::ty::FloatKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ir::var::VarType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::Windows<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Lines<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::SplitTerminator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ty::TypeKind"
+bodies = 1

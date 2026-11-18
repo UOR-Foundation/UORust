@@ -1,0 +1,753 @@
+# The portable-atomic register (written by `uorust crate portable-atomic@1.15.0`; do not edit): every body of
+# portable-atomic's MIR at portable-atomic 1.15.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 951
+translated = 9
+residue = 942
+
+[module.crate]
+bodies = 485
+translated = 0
+residue = 485
+
+[module.hint]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.imp]
+bodies = 455
+translated = 2
+residue = 453
+
+[module.utils]
+bodies = 10
+translated = 7
+residue = 3
+
+[embedding]
+bodies = 950
+embedded = 950
+evaluable = 913
+blocked = 37
+
+[[construct]]
+construct = "TerminatorKind::InlineAsm"
+bodies = 21
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 13
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 3
+
+[differential]
+bodies = 2
+theorems = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::AtomicU128"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: AtomicI128"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicI16"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicI32"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicI64"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicI8"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicIsize"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicU128"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicU16"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicU32"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicU64"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicU8"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicUsize"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: AtomicPtr<u32>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicI16"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicI32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicI64"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicI8"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicIsize"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicU16"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicU32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicU64"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicU8"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicUsize"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::AtomicI128"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicU8"
+bodies = 14
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::intrinsics::transmute"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CpuInfo"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU8::IS_ALWAYS_LOCK_FREE"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SeqLockWriteGuard<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI16::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI32::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI64::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI8::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicIsize::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicPtr::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU16::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU32::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU64::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicUsize::IS_ALWAYS_LOCK_FREE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Release"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicBool::fetch_xor: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicBool::new: portable-atomic's MIR stops at type outside the lift: core::cell::UnsafeCell<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicU8::is_lock_free"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: is_lock_free"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SeqLock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::atomic128::x86_64::AtomicI128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::atomic128::x86_64::AtomicU128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicI16"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicI32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicI64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicI8"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicIsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicU16"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicU32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicU64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: imp::x86::fence::promoted[0]: mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::atomic128::x86_64::AtomicI128::IS_ALWAYS_LOCK_FREE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::atomic128::x86_64::AtomicU128::IS_ALWAYS_LOCK_FREE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc12: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc16: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc24: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc28: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc32: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc36: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc40: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc44: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc48: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc52: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc56: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc60: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc64: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc68: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc72: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc76: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Acquire"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i128 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicI128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicU128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicIsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::as_ptr: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicUsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicI128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicU128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicIsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicUsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicI128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::atomic128::x86_64::AtomicU128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicI8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicIsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:2797:9: 2797:26>::new: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicUsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <isize as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u128 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicBool::as_ptr: portable-atomic's MIR stops at type outside the lift: core::cell::UnsafeCell<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicBool::load: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicBool::xor: portable-atomic's MIR stops at type outside the lift: imp::core_atomic::AtomicU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic128::x86_64::AtomicI128::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic128::x86_64::AtomicU128::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicI16::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicI32::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicI64::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicI8::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicIsize::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicU16::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicU32::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicU64::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_atomic::AtomicUsize::is_lock_free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::core_atomic::AtomicPtr::is_lock_free: portable-atomic's MIR stops at mir::Operand::Constant: the constant item imp::core_atomic::AtomicPtr::IS_ALWAYS_LOCK_FREE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: spin_loop_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::InlineAsm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AtomicBool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Backoff"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CachePadded<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ScFenceGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::cell::UnsafeCell<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfoFlag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::core_atomic::AtomicPtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::ScFenceGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLockWriteGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::utils::Backoff"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::fallback::utils::CachePadded<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::Pair<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::U128"
+bodies = 1

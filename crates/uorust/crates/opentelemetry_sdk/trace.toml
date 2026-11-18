@@ -1,0 +1,1362 @@
+[[fn]]
+path = "opentelemetry_sdk::CURRENT_RNG"
+kappa = "7235a30d47a926935e302c37c7cf5729264a1f1517c2688aca258a7653aa7a6f"
+embedded = "a4662fef73182312e2ef2736319e14783a06994f0911c1088ca649ee39b09a0c"
+status = "residue"
+cause = "mir::Ty: rand::prelude::SmallRng"
+
+[[fn]]
+path = "opentelemetry_sdk::OTEL_BSP_EXPORT_TIMEOUT_DEFAULT"
+kappa = "d295d57aff0135351c21a7fe7331d617f879118efbe10c7e6cf181f38c86c8d6"
+embedded = "79d262ce9a28524449dcd7706d8d6e9458505acf28b781374ac4b8986658c293"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "opentelemetry_sdk::OTEL_BSP_SCHEDULE_DELAY_DEFAULT"
+kappa = "e4e442884ae776b7720ce971d7a628df95541ff5a88eb7f15572310a0041268e"
+embedded = "1941fdf95bfc9f79efa08c18179f13c7fd936a086b5e77b9814df96564ae6e18"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanExporter::force_flush"
+kappa = "c7127ac2b2913c2b550cc6be9e5cb5ce0a19cfb60da5532fcaada5cdf20ca379"
+embedded = "f8df3a07db6c8948fe98e94712fad54e3269868184bd65f506fa434604b8f83b"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanExporter::set_resource"
+kappa = "35ed8f3e0d3aed3b3c9a55d15699ec82b72afa4df0a331d6851e8c3c4da78813"
+embedded = "3442c0005d67887a1d1aeb0e204f17f07ecdc2ad110c27d0d6dce64ac56260f2"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanExporter::shutdown"
+kappa = "ea417e9a315256b2c8d1430b06cfc43313fd156fdef99dc0f03827daa71d4306"
+at = "Self=u32"
+embedded = "a7a171112e078fc64e108102ae5ce2b03bd17ce0ef4e1e41ab2b53000ae80ee5"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanExporter::shutdown_with_timeout"
+kappa = "f62c5f2031160a8b082f41addce1a07723576e689ecde60b4071a165aabced93"
+embedded = "033a554506547ffab0a158d14799dd02a429a5a5c0964885f918855f501e9f5b"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanProcessor::set_resource"
+kappa = "290589d60561de12c49ce6b7358811ee0611b15cfbb20034610435e082080c2c"
+embedded = "3af591bd29fffdd4e26bddec340c9d380413a39a3780a3cc3d086e333830564c"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "opentelemetry_sdk::SpanProcessor::shutdown"
+kappa = "9aa34e795c1b320fa169db1729dd7e5ef61f6096949deb300f681d67c0e5ae3d"
+at = "Self=u32"
+embedded = "c6affe0024b7d754359ff52b952c550eb2fd3289b0cd813a58c373ef796f1f79"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::__rust_std_internal_init_fn"
+kappa = "14362540869e8c2434c6c32ee34f3418afa493c1a72045bb9a488deb2ab4d70b"
+embedded = "6194a91044be75ab26e1f2fc9d58d827eb944c05b6806df7a30095d73a1fcea9"
+status = "residue"
+cause = "mir::Ty: rand::prelude::SmallRng"
+
+[[fn]]
+path = "opentelemetry_sdk::build_export_data"
+kappa = "28043fa5283ba7db00ee7b60f063abdb64b3ddbb1dd300923f3030404580d1e1"
+embedded = "96ca689e6a3ba36ef738f5ff0da4b065e076b9391b0f58373f6a084389431130"
+status = "residue"
+cause = "mir::Ty: trace::export::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::config::<impl at src/trace/config.rs:13:10: 13:15>::fmt"
+kappa = "f7de533b2a1422ecc3cc617f1d8efc848fc76d3a38e584069eb09e55e985c30f"
+embedded = "ef816fb31a925919b014e2bd3ccbb8e80c2be0bb84ccc59e41d393d42f998387"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default"
+kappa = "b68335bf30201dd024cb04e23c7ec520df9f7c6934664d46145243b4e87773e3"
+embedded = "d20aedc27f136babcaaf1b46a46410f51d8e0461d9d052bcb3dbf77d59c189a4"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: trace::config::Config"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#10"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#11"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#12"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#13"
+kappa = "75eb9834afbc5c2c78a41e9c220e9a7a851bd43d2036f8a3ba9639666b7f2451"
+embedded = "0e8aed11d395e9231b8b4ad0dfcc685463f321c81b78490e71f66ba0ba1c7830"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<23>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#14"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#2"
+kappa = "75eb9834afbc5c2c78a41e9c220e9a7a851bd43d2036f8a3ba9639666b7f2451"
+embedded = "0e8aed11d395e9231b8b4ad0dfcc685463f321c81b78490e71f66ba0ba1c7830"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<23>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#3"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#4"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#5"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#6"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#7"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#8"
+kappa = "143b5caa0d14aef95b2789d6eb069a5d9036c6f2cf5172cd2aa17aa6851ace71"
+embedded = "59bc4d596b9553e95f142346ad9a140107088adf9b1259e2de24ce8329c7c482"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::config::Config::default::__CALLSITE::META::NAME#9"
+kappa = "4751b85e41935f3d5cfbb08da4e57d7b1e6a23d76053e8b03e3fe640c1dacbdc"
+embedded = "8eea45bad1a14b3192e0ec36f32742ec0ceda4f7aa5360b7490025d19e6b1a46"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::events::<impl at src/trace/events.rs:7:10: 7:15>::clone"
+kappa = "7c474b205b8384a552f5fec0a3ac4bab487da17b33791414c9282b66004d713f"
+embedded = "b89e04e3acd19fd732477abfc29c43fa705229d6075b7f195ddf17f8d7a3efe6"
+status = "residue"
+cause = "mir::Ty: trace::events::SpanEvents"
+
+[[fn]]
+path = "opentelemetry_sdk::events::<impl at src/trace/events.rs:7:17: 7:22>::fmt"
+kappa = "c94526bfc18323a68b6eae61c35da7af6d41137ab373533702bc896661966f85"
+embedded = "76bcf12d99099b527e6a988067f671f389c876bdc0ffa0557bcc595a625e9eb9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::events::<impl at src/trace/events.rs:7:24: 7:31>::default"
+kappa = "9bda179800d32e97e03d847b874b6bdd1fd65b624cc78fa997b476b940a0a767"
+embedded = "b15b143ea7158956ca0858b2e0a263764fa2afe81e04045857394257dad7cd55"
+status = "residue"
+cause = "mir::Ty: trace::events::SpanEvents"
+
+[[fn]]
+path = "opentelemetry_sdk::events::<impl at src/trace/events.rs:7:33: 7:42>::eq"
+kappa = "02cac850198d71af6722b0b0abd4e764f3c91f431edda80582e15d747fb446f3"
+embedded = "0bba5bc3d9dfe969b084419d205e4cdf5e31ff4c672c254fcfd747c1fdf5fe5a"
+status = "residue"
+cause = "mir::Ty: SpanEvents"
+
+[[fn]]
+path = "opentelemetry_sdk::events::SpanEvents::add_event"
+kappa = "847a7e09bf6ffc3a24da191bf2067766977ac801218bcbc7e5091e903820e8b8"
+embedded = "ecc18405d641a8fd368c0d3ae485cf24e841c07f250dfd1dd25ec6140b974b31"
+status = "residue"
+cause = "mir::Ty: SpanEvents"
+
+[[fn]]
+path = "opentelemetry_sdk::events::SpanEvents::deref"
+kappa = "30aed473bc439ac94fef5bdc2a4e115e5f8e7808c782bc8b8d5451f07adc1808"
+embedded = "04b3aa60ff9fe05221618bf26b6855bea4062f19161b7f8ae13bcab47941e6e6"
+status = "residue"
+cause = "mir::Ty: opentelemetry::trace::Event"
+
+[[fn]]
+path = "opentelemetry_sdk::events::SpanEvents::into_iter"
+kappa = "ad659ab73da6548622a7d95e1918ce71467162849ed5c7ab68c28aa968f0cfc8"
+embedded = "475125c2971bf965f5c4105f4d12546a4b1b20fd1f3fa60ce6a5b710b4607016"
+status = "residue"
+cause = "mir::Ty: opentelemetry::trace::Event"
+
+[[fn]]
+path = "opentelemetry_sdk::id_generator::<impl at src/trace/id_generator/mod.rs:18:10: 18:15>::clone"
+kappa = "252c14b0f40ec4ee916cc35f571272532f61c2fef940920aba36ac5370534a05"
+embedded = "4c637a1a20dce6fba29c7892a2dbbb6f1ab7723b5642498f0242b5b81f791174"
+status = "residue"
+cause = "mir::Ty: trace::id_generator::RandomIdGenerator"
+
+[[fn]]
+path = "opentelemetry_sdk::id_generator::<impl at src/trace/id_generator/mod.rs:18:17: 18:22>::fmt"
+kappa = "0d72224762f8272e588d35a4a41a4461510f1682677edc71a14c8fdd63c0dc64"
+embedded = "1244885c48258218e5c04c8ab08561dcbb41b33eee377df86a5cca85204b8246"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::id_generator::<impl at src/trace/id_generator/mod.rs:18:24: 18:31>::default"
+kappa = "162b58f630293445993d6727fe8a695b38a4bbecf78477a7c6e14297f7aca4dc"
+embedded = "b1da3856654cc299f3f8f13c41d5dbafcfc57356f73184e4513f6cda910b4845"
+status = "residue"
+cause = "mir::Ty: trace::id_generator::RandomIdGenerator"
+
+[[fn]]
+path = "opentelemetry_sdk::id_generator::RandomIdGenerator::new_span_id"
+kappa = "ad60f22371854b4227e251f62d51ef9716b2bf5c9feedbadaee700ba08e04735"
+embedded = "2fb3982bc1c4f8b1f71097eaef5be8735e9a4b1e45a1ea9140cbecf0b8b80ca0"
+status = "residue"
+cause = "mir::Ty: opentelemetry::SpanId"
+
+[[fn]]
+path = "opentelemetry_sdk::id_generator::RandomIdGenerator::new_trace_id"
+kappa = "d99597f68977ca439ac8c74e49b12dda8e4c1ec312c38ad16f43078c84b396c2"
+embedded = "9b1edbace7023f2ea2b0b91405483b0c7c8118879a452313139b8cd059a5ab39"
+status = "residue"
+cause = "mir::Ty: opentelemetry::TraceId"
+
+[[fn]]
+path = "opentelemetry_sdk::links::<impl at src/trace/links.rs:7:10: 7:15>::clone"
+kappa = "269e24ca57aa7ad30a69ceb2c63727e304c37a57a74f21bb46e372cdd212c5c4"
+embedded = "794a59e6a6616152051740bea8919705f202d10c282af4298f06a9bd9fb13c3c"
+status = "residue"
+cause = "mir::Ty: trace::links::SpanLinks"
+
+[[fn]]
+path = "opentelemetry_sdk::links::<impl at src/trace/links.rs:7:17: 7:22>::fmt"
+kappa = "668b45c65d547743ffd8f17ddcec570b08d17e75797c6d8c837f9040e66ad091"
+embedded = "8eb23d32d7df5be338a7ec9fb0dcdb91b71ec06ca934d36fac77e7d8ff7a4c5d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::links::<impl at src/trace/links.rs:7:24: 7:31>::default"
+kappa = "0acbc4bb134ac54a98c7f9e7d9d6280fb5ccaf41cf4776ad1a01cece60d5c19c"
+embedded = "eccd4c7decf7004d884a6411d08dd54cbc94eed49002b23d86003ac9aa3a7e38"
+status = "residue"
+cause = "mir::Ty: trace::links::SpanLinks"
+
+[[fn]]
+path = "opentelemetry_sdk::links::<impl at src/trace/links.rs:7:33: 7:42>::eq"
+kappa = "67fbc239ee756819e114409b85eb1c230033d2fc93e1ab0adbf8274f2d1c943d"
+embedded = "9a4c3c579199a8cfc84bb5e6eb2ede8a5003fda959048922263634d65756d786"
+status = "residue"
+cause = "mir::Ty: SpanLinks"
+
+[[fn]]
+path = "opentelemetry_sdk::links::SpanLinks::add_link"
+kappa = "658025af85bc2ce880254e8957d6d129d53c24304e054cd35fb9403cbab5586c"
+embedded = "b6337b1cb5a3a2671ec47918d70af4ef1738d50576d3d15ad5f5dda3f755a785"
+status = "residue"
+cause = "mir::Ty: SpanLinks"
+
+[[fn]]
+path = "opentelemetry_sdk::links::SpanLinks::deref"
+kappa = "8a733f69f297024b5fe841c49dc6b0eeae4026d4782a690f0b736870f6bcd91b"
+embedded = "9434c673fb6715f2826d1c33e4febb7c310a05de43a8d08f9e13f11367d851b2"
+status = "residue"
+cause = "mir::Ty: opentelemetry::trace::Link"
+
+[[fn]]
+path = "opentelemetry_sdk::links::SpanLinks::into_iter"
+kappa = "c2bfe3cb1b41922516b8d9d20faec7c0602639d891f0bdc343c7a14cdd88e24c"
+embedded = "d3de8ad44f2d915a21bcde251004cc62085ed62e802d5b6d85a815be25c1a609"
+status = "residue"
+cause = "mir::Ty: opentelemetry::trace::Link"
+
+[[fn]]
+path = "opentelemetry_sdk::noop_tracer_provider"
+kappa = "13c1787930822394e2d4387fc1e1f01636aed732f515a393f19bdeccd182c478"
+embedded = "3790c8c714a724920542f73c407ee1a4dc272f2b1dceba8cd219910c44627fe7"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::<impl at src/trace/provider.rs:105:10: 105:15>::fmt"
+kappa = "8181994462482b11d1c6881538e0b0851d6233676ca62ce5a9f54cd1edb86385"
+embedded = "696da52ca265ddb5ab119ecaa9bcba43e35f1332ae201b7efcad91922ef71fac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::<impl at src/trace/provider.rs:157:10: 157:15>::clone"
+kappa = "908b25d4126af66962ef9fecb2c20909672cfbbfa484c80a9ad465be79778169"
+embedded = "2a50d4206a27098e98d230a621a022504df9ebfac03781f78a120d210359650f"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::<impl at src/trace/provider.rs:157:17: 157:22>::fmt"
+kappa = "ce7e5e05477f6a092eaa25ebb342d38adb7ce2b644802a6f5fbc0d2f3a3e14d8"
+embedded = "bf9346fabf0c63041022b5d6113cf0e4c64d096e1507267abc6155adb1857bd3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::<impl at src/trace/provider.rs:299:10: 299:15>::fmt"
+kappa = "d4ff60a5fd0b6479aab496666aaa05207f5f28b622089bfd4de90fb91ede732b"
+embedded = "43925af7b950d5ddbf20e4b2e5ff9c8ab8c262e2b39d9540386bea092d579c7f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::<impl at src/trace/provider.rs:299:17: 299:24>::default"
+kappa = "76767b7e73eb5fc5a2474b2e4e13ff8b5d9206c97ece3d8a0dab2809a32de760"
+embedded = "fc6509913f25417e56496eb04c0624036affd08097a07e83a87cd3644bd92ede"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::builder"
+kappa = "4c1dcfc8cf65e4df983c4925d0c4cb14670456da20db87643208bd570679236f"
+embedded = "c46bd778e0df43fd6c880fce34f1d47a4c801232b0fe9cf116922426ccd21483"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::config"
+kappa = "bb243215a1edfb9cfc9d57655b3c93a6f665d6ba0527d272ec8b976d44031526"
+embedded = "9c297109f64af196fca681a0a3d2f55155b1d49dd7de8cf1a845e81507aa149e"
+status = "residue"
+cause = "mir::Ty: trace::config::Config"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::default"
+kappa = "176f9ba934e232d30b529c604af799db49fd42e49df260dbf420817bd1f628a0"
+embedded = "43dff7c1b0a4bc811931d7b01d5923a868633f88d848d35e62815905239c2591"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::force_flush"
+kappa = "3548fd301396ad60ea58e8cc88421a41995e2b941fbb705285c385a8ff902605"
+embedded = "3a4c523e3821478b97c671004a6045830c35a4adb5f3791b5a874dfe93142da3"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::is_shutdown"
+kappa = "890266b1a2189b418a64e97b2930184858a504741ad58213573d7492bcb30bb0"
+embedded = "8941e2e7ba25b7dc70167b912c26d9704a52bd2b502be9125c0aa42c13bb6f70"
+status = "residue"
+cause = "mir::Ty: SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::new"
+kappa = "60e15be9865acc542b67dab667bc5b45bb81a347cc2349563270b061d9b25f28"
+embedded = "f7b17c324752a678adce25ef08cdb53bd4511a7d4a0d5494d9abf8b5140fa608"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::shutdown"
+kappa = "49f6267c8a31c2532aba56754d7cffcf12d923c31c92af515a250ab87e8f4dbd"
+embedded = "e6146b3a086d19abe94519eadde19f730dc4552587557fa84057ea969dc8575d"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::shutdown_with_timeout"
+kappa = "0ed2fd1aac4c291772244f5baf56200a7d321e895fce58386e16b3343937fb48"
+embedded = "44f132298ed231b3d1c87f93696e276637ef96f2d0dc2b0c1e3f3e7555a2a319"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::span_processors"
+kappa = "0640db4173b3240eae215191327196b2160617f4cdb826e0e67afa29cb6a7e39"
+embedded = "6fafe4fbeb317c3f4344729a243c68abfdb09541046503f42724d4e18254e547"
+status = "residue"
+cause = "mir::Ty: dyn trace::span_processor::SpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::tracer"
+kappa = "dd558b12a4172c2a99a128c92d208fab07f239d0f99ae52bd253bdb73d002f92"
+embedded = "f7633f51d38f95621aa793746420db94e9b7bc8fbb32cf2debf492b95a781534"
+status = "residue"
+cause = "mir::Ty: trace::tracer::SdkTracer"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::tracer_with_scope"
+kappa = "bb5fdb3b9d084004bebe30c6b78b4ae459555e86e6fb0645d34d26604078d723"
+embedded = "b0c8a694da27166d826fd7432871df2f25f0616e7c45d20bafabd60423996032"
+status = "residue"
+cause = "mir::Ty: trace::tracer::SdkTracer"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::tracer_with_scope::__CALLSITE::META::NAME"
+kappa = "e66878fb2a6cfdddbd8a304f94a851b3d08d60120390c346fcce5be1fb65ace4"
+embedded = "b2da0ea6ece3e9975976d4f4a6af91a0c9337221345c1cd0f024a009981a05cd"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::SdkTracerProvider::tracer_with_scope::__CALLSITE::META::NAME#2"
+kappa = "6bbe5d3da59409a8b838e12423deca627b1e8d49754280a663744081197bd2c1"
+embedded = "c17ae301795befb7750c28224dedf91d19553dcf558dba6016e83656bae0d1f1"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::build"
+kappa = "acbb909776c44a2cf49bc03ebe6c81d1f28562e143406d39a31b4367fd66c74f"
+embedded = "8be8c10df6c5d6711c61b278422bc95b58200c6923a6f86ac29ee6d536595f4c"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_batch_exporter"
+kappa = "838293217271b4c3b99a1f4b1cfec0e9a65ad002edfcf39b478d957ad56c734b"
+at = "T=u32"
+embedded = "900b57f832dd5b2691f3b45a8cab0e11a3d61cd4f5feb456dab6ab48db314fda"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_id_generator"
+kappa = "9513f7bbb9bf4258c79b1f0e05220bfdca762fb6325fb0eff0a9a4cbb5d6c136"
+at = "T=u32"
+embedded = "5130552e51ecb95bbbfa5eb3eee758d94adebfc9a608790026c28496288c9f7e"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_max_attributes_per_event"
+kappa = "fd10789cef930356ca8692dda63c770200c448834f5ca134b21f66625756e584"
+embedded = "66c9b17b351bd7342553169c344ec3349ab8b851f23f959b5cdbae0a2800f69b"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_max_attributes_per_link"
+kappa = "6e35536862403cf14fe5cb5714ca5c12231f718306419a83637be24473c2ba3b"
+embedded = "7d70666cede57f23eb714394261822eb061edc3ca71b5a2f4ce4dd9840ce19f5"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_max_attributes_per_span"
+kappa = "c4e48e320d05f928819f55e4d6ed476c29114e729666f15e5e9b646eacb1489d"
+embedded = "a975af3b2fccd44ca85cfdeb2232d1e8068de84df20292147ff66208da2e72db"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_max_events_per_span"
+kappa = "17c6fd12a5b358bda6781dadd28f922ddcda9f80ee4f1ddc51af649109aa11cb"
+embedded = "2eb7a44c35b296d7bbac77c1d367fa670f477f8b60d485593652f7848371b6a5"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_max_links_per_span"
+kappa = "40707eb7ccb2aea50eafbc4ff64632b5819f33fb12e7515aa6553d62f2e3fa36"
+embedded = "7523737cedee50cda98f3059161288b5b7343d8d3ceddaea6b4d6a8d205635cb"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_resource"
+kappa = "505a06dc55df2d54937c80c93af3ca56dcfb3a6132910805c8e9a6e7fa81c384"
+embedded = "6c36096593e1a346643291fe47b158c7833f4c4ddf94d5750516e53df93e5fc4"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_sampler"
+kappa = "90a23e13e2ff8d674dd4320bc6f0e79ed53411bb311ef25e4af65e4dce88a214"
+embedded = "0077e34ca729d4cf4c947dade82f7584fbae8fffabfa2ce792b26b78b6bedd4d"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_simple_exporter"
+kappa = "e46af1b43c314a2d17327637a716ccc1dd71c7ffc0472f2720588e6e7d69fd98"
+at = "T=u32"
+embedded = "4209bbe1767de4c61c09a0d76ae9a6e1a7190b8682ce8cd5057662b895b12e4a"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_span_limits"
+kappa = "be9977da4f6d4f7cbd8c6b6a78b6d579eea54dafa1b9aa7c6fcddbec32f63762"
+embedded = "5fd31f8c730210271cab7ed6f3504cc56f28aff014d72b5c86b95aad9248564d"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderBuilder::with_span_processor"
+kappa = "752367796b989b04882c14326d8abd55f8b78f17f730ba037c7bce749666ea48"
+at = "T=u32"
+embedded = "3823d3110a07197590571412b3d07f301bff01abb8a085e4c091947173a5d39f"
+status = "residue"
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::drop"
+kappa = "9fd31f19c9a7685fa3159104c9122abf328b7348e3eaf295f05417d1be1768ca"
+embedded = "7155977ac9b40dbfca75c2c413091fa7023feedca3cb5996275dc3e732016a8e"
+status = "residue"
+cause = "mir::Ty: TracerProviderInner"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::drop::__CALLSITE::META::NAME"
+kappa = "9ab31092430e610444bb698b3d48ed384e1e319861ca68c1dfd69738ccc2f283"
+embedded = "17d8c2bf05cd0d6baf9621dd7197bb82cf9d9767f755b06ff92457abb87b8770"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::drop::__CALLSITE::META::NAME#2"
+kappa = "f3bdeac6a505e97ccedda3ee3bc663c68fa9d46b2b19e3640366f737969c004c"
+embedded = "a315eb4749eb23e3bba3bce7ad5808e4f48dc90ed7a31dff642b8762ef32070f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::shutdown"
+kappa = "8eaf5f6ebeab8101b58675ccbda76d124437a880a7d8d7dbe3639a2e6059c4b9"
+embedded = "77b4b3f13f98355896951c61fcbfddb98e6ffd3293044a05c38a22bf5223bd2e"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::shutdown_with_timeout"
+kappa = "166dc5b4928cf8c31cc0eba1ffe633e5668de32746c04167f8e4e47da30e271d"
+embedded = "84650640ff1ef436f29900c2a6fa5c9f14366f8c3b4cd595bd39ad83c6e0a27f"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::shutdown_with_timeout::__CALLSITE::META::NAME"
+kappa = "746e255588f8542ce825ee582ae91442a7c8cb01fe2a8e6f4ae8a8b8e1cbd529"
+embedded = "64dde644eb7cf2fc10ec3f7faa753ace388c0cf88c1c0fd264760eab1d55af77"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "opentelemetry_sdk::provider::TracerProviderInner::shutdown_with_timeout::__CALLSITE::META::NAME#2"
+kappa = "592bb08c5f48ef2929fd742dc8ca77226ece837afa1733d4df3dbb5d56b541e0"
+embedded = "cbbc82b15c2819d075d1b1d79733f7a46be5b173340f0af93274725cc4718785"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::sample_based_on_probability"
+kappa = "f18352f8b8f5d5d1e8d59be05d72c7b2e367ee10d453fd436271bd14e666695f"
+embedded = "6c62e532f42b2ad961f350039e643dd9dfff2ce54df21fef316fc12f802cbbca"
+status = "residue"
+cause = "mir::Ty: trace::sampler::SamplingDecision"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:10:10: 10:15>::clone"
+kappa = "007a6b1b5041dfe4ea55462f7f40e08842c29aacfe2841fb9f58de6bc5d1cd5e"
+embedded = "c197b14d823a20c913f7b965fd854b660fe1d728435e310ec8aff156c364672c"
+status = "residue"
+cause = "mir::Ty: trace::sampler::SamplingResult"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:10:17: 10:22>::fmt"
+kappa = "dca0cc23918a902b22e82014a787ae6f4072304e00de15f10c82a89c6441f1a1"
+embedded = "5bc210eab41fc6c77928670ec1d6266349ef1b68a98a93bb6589da3464838485"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:10:24: 10:33>::eq"
+kappa = "8848b4a455075053861f02279c699d6fccaf67bcc66a8df94b6c39127f1b98b4"
+embedded = "cea5561fb21ff60b1ec299bb25a20de8a04be470cad616ed7d4c20fbc9f849c9"
+status = "residue"
+cause = "mir::Ty: SamplingResult"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:142:10: 142:15>::clone"
+kappa = "7cbbbcf9b5404fcfa0b2d1a9f05b88ce8087b6463673161cc5e68fa34556fee1"
+embedded = "7e992682510e6350c1698425852781b3d90bb2d5e1ba3ce8ff30a45eda57922f"
+status = "residue"
+cause = "mir::Ty: trace::sampler::Sampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:142:17: 142:22>::fmt"
+kappa = "5b3ce391ca678ab65b3bab5c684ec0d2c079bb22874b61fe4831e4b90ea528e6"
+embedded = "fdc88717e7757867ca13f752a5697ec89f5820c8b012e7bbd7424a3e79560800"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:225:10: 225:15>::clone"
+kappa = "2b4c2588428e6029ecd5b5c0276a75594f94a16831eb1422ee22a21f9a776b13"
+embedded = "8f99c62d11ca8e880d1bf261945efd3695bc12124da34c05c4cadf5148c58faf"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:225:17: 225:22>::fmt"
+kappa = "5fa0ddeff4c6f9488dc89b68f894c0b6fc3f5581d83f26ee4bf2d8d3d54241b8"
+embedded = "c1531645d8b7cfdd8d663b30f3c77dfd0bba642dcf75f572879ddecd3a7e05ef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:23:10: 23:15>::clone"
+kappa = "a9be2bac08729229046387bd689cdab21b9c7dba1a9935061d9156671f8c6d8c"
+embedded = "9aba10909a71749791ca2b14f16dee393164142ba8bad065222483637bb59c6b"
+status = "residue"
+cause = "mir::Ty: trace::sampler::SamplingDecision"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:23:17: 23:22>::fmt"
+kappa = "c70eed87d81ac5c5bdd43b100720587ffc343892bfdd58255f44a9fc4117a383"
+embedded = "5d8b19198c120dd43c6248a53062f2dcc465d61a57f832bc01d2599a5377f5a1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:23:24: 23:33>::eq"
+kappa = "2a19e28e2e99de3ca2a975ab03fe980f75a3168a54adceb80b03411882db4c44"
+embedded = "2dc698db02f89b00b92f321d0def9d1c7becbfe6b3ff1ad461994787cdf31981"
+status = "residue"
+cause = "mir::Ty: SamplingDecision"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::<impl at src/trace/sampler.rs:23:35: 23:37>::assert_fields_are_eq"
+kappa = "0bce65fb4055355af64882f7986bb1844fb4387e0485ed3d37662d0a26ab1a53"
+embedded = "0fe0249648ddcb19dbc674567b9721950afa9ac5460baa0af45fef0e150a2f81"
+status = "residue"
+cause = "mir::Ty: SamplingDecision"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::Box::clone"
+kappa = "b811283193bda80d7a3eb9dd65cc27c3a39c4909c1a44673efd20c8c9f508df8"
+embedded = "d3681c4802c5aa9186cabe5f0e5607f6056053870c07ef4e87d893bbd4c73124"
+status = "residue"
+cause = "mir::Ty: dyn trace::sampler::ShouldSample"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::Box::from"
+kappa = "413b924d1dbbade28b8f2585dd77a2aa220ebbc388e7a3b4d895a4f0a11bf321"
+at = "T=u32"
+embedded = "5be39a246a4f305463ec8b81e57d476da52ed17f8aac002d0b00abce1b22d684"
+status = "residue"
+cause = "mir::Ty: dyn trace::sampler::ShouldSample"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::new"
+kappa = "8220b21981c4649bdea466f5f0166863691e43fd03f067d5cce2a4189a21e2a9"
+embedded = "8e51c85868079bddbea2e27e42782058169ae687976ac3aa91ec921843419bd8"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::should_sample"
+kappa = "080f4568a65cd622b5792b4772c5c3ef89d373c45099fa01a4996a05cca98a0e"
+embedded = "24451bb5c0bb808a3f1eab66e543093f3a981d65563226d6ff07ee016fa4d077"
+status = "residue"
+cause = "mir::Ty: trace::sampler::SamplingResult"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::with_local_parent_not_sampled"
+kappa = "7654cf7aaebfa255939cf4749466dc59eeaf4a54ddbe6927afcc933631ddfa92"
+embedded = "f6f7c1b044c6e9c6875c57d7b03ac1ab31fb0fe29d074ad0e7572ba8ac7e0061"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::with_local_parent_sampled"
+kappa = "fe7689432d915baecf4ebdd49316dd9c3922b398955a32acafb67dfeae9a4563"
+embedded = "4b39d362f81885e131d848bd56ddeb56f1493c4a7cc152187d1b3fbb4c02b36d"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::with_remote_parent_not_sampled"
+kappa = "5929d411e44e19291de4b699bdd143313b1ec750762e014582b0b23cf943c960"
+embedded = "e0105648f4875233c6bd805557cb346c5592843104d0cff439d57a1062444dc5"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::ParentBasedSampler::with_remote_parent_sampled"
+kappa = "f3f2e4488794fee2935e457fa9896d52bc8544891295c5dcd7991f8854b92162"
+embedded = "7732f38990ee819a5e5ad284d72184bc9a7ada6f826de1cd85e7de17f1eedf9f"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::Sampler::parent_based"
+kappa = "2ececce300e4642b25b5aed166a2a0faa7f35ca71a68c1c7e88186655b9cc832"
+embedded = "40bbde5a7e96f76580633151ea18a6de65e08d9214ad256ef31b30a45d0d087d"
+status = "residue"
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::Sampler::should_sample"
+kappa = "3b92ca1ac8c9a9272edb2faeeedb185f14a0093749fabd0966b7d056f0c56463"
+embedded = "79cc22dc2c1af0bb97ff02f4456856e47599a3d81c659f91a6160114a488d5c2"
+status = "residue"
+cause = "mir::Ty: trace::sampler::SamplingResult"
+
+[[fn]]
+path = "opentelemetry_sdk::sampler::T::box_clone"
+kappa = "c14adf869d0762aee750c8a2f3dd438522955b1c5c45ee2a85fe58e6ecc1d484"
+at = "T=u32"
+embedded = "4ba25e9739ed1651658fd703187a88b8f36764f2dc894f575542649bded2b0eb"
+status = "residue"
+cause = "mir::Ty: dyn trace::sampler::ShouldSample"
+
+[[fn]]
+path = "opentelemetry_sdk::span::<impl at src/trace/span.rs:18:10: 18:15>::fmt"
+kappa = "766d20bfd98f3f8d31c52ef5b783f558fd78d32ae1f13bf8675750464da05057"
+embedded = "6886ac66eb52cdc2e80042ce081d82b17d7b6795062044cdb9c0cfb6ef04a418"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span::<impl at src/trace/span.rs:26:10: 26:15>::clone"
+kappa = "afab6af066b07cca3d873b0454c99163391a26ea5dcd216b615e2e8b3353b046"
+embedded = "e067b52a1bc3a77b888d3345231ab101cbdb3a4f46a7c00da3d448bc093088b0"
+status = "residue"
+cause = "mir::Ty: trace::span::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::span::<impl at src/trace/span.rs:26:17: 26:22>::fmt"
+kappa = "9b961595a489a00596d08bdb3d0809b1616c3c4337b837ab11f0f73483afe0fa"
+embedded = "6a3b34eedffb6b5165de92c5b2bc658eea2cc2444f4772b3d0ebca113178af85"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span::<impl at src/trace/span.rs:26:24: 26:33>::eq"
+kappa = "4f0cb2a94a15e5dc5399a68180258a00fe9634a2f1929a222b9403769e8dc312"
+embedded = "56b9fa3999ee4a307fef86ac32360845c0341249b7e5f12ee6808c1abf544e2c"
+status = "residue"
+cause = "mir::Ty: span::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::add_event_with_timestamp"
+kappa = "3a9a9afb1c8e8f8daa007d83ff5bfca2aab9ebf328b1050f3cab67304a39c166"
+embedded = "abea07302807b4d7a3088269f6dddfc2a267e1b1a93f25a9bbd18ab9b3ef7848"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::add_link"
+kappa = "3ce192d91e9c0a777ad2211716b5e8d1dbb5d03e22794a0c5ecf34bbeebcc868"
+embedded = "8deff906bda7fb1d05c136354241c8a0da63f6e36a26e80987201b9417acd86f"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::drop"
+kappa = "4cdf0cdaf1bc2fd93b307ffae48c376735d31c2bbdcf74a23e0ffe77f78ad949"
+embedded = "cd8d563a40402d6e3848a3d495027bbec841add67776f44b1cf82f22721ae63c"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::end_with_timestamp"
+kappa = "21b5f95f7ac21411389d43b3b125152b55125726cb7f022640e3d2ff94241b66"
+embedded = "9d4b212c0e3804b4e30103bb1175c4fc848ebaa09c8c7a197c4e4b7fde064a33"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::ensure_ended_and_exported"
+kappa = "7bf63433264f8ee6582fe24c3452b741b268a780864d20c106dc78898def53a4"
+embedded = "734440716fcea8b7823d927924243e0e8059a2c7f76693b4a61dd81d1a6ba289"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::exported_data"
+kappa = "053e506c8f6877d69fd3941a6ec7303f8178f441bfd52b2d2efea1ee509de412"
+embedded = "073b94000da1a29c32c032c9dd690eeccac2414e277aba19cdd8ed6e1180bed0"
+status = "residue"
+cause = "mir::Ty: trace::export::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::is_recording"
+kappa = "337465fac88f4d961220984798292d8ce7053c937bd928ef405ae011c3d75eb7"
+embedded = "b63391370c4c48b5f1b921921c03622ad1cccae370ab7409187387c7acef5d32"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::new"
+kappa = "2ad54f46c3223a49528ecb671ac73f35dc6b5bf2469355a974c1abcc21610a0a"
+embedded = "e397c6adc54b1c66dfab55c23318ec00983532a0871585243839d4c9f9e98b5c"
+status = "residue"
+cause = "mir::Ty: trace::span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::set_attribute"
+kappa = "a1c8454fcfd6a2740db286974474b33abcc112b9a71f0c54de5f55a608e3ac9d"
+embedded = "fb7af2f68be9541ae51049ae6d177bfc4f2b3ae9eb898bdcfe3a55007b89c7d1"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::set_status"
+kappa = "f01a22b885a70e45fad696b7bdffe352821f9190327df9a23dc137ababe7f4bd"
+embedded = "6ab951d9adb9ef28c3d256185c3222e29a6b48a5995d34d59d7b9a40e79c0f62"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::span_context"
+kappa = "f18b2a23c9569949471477891b85244089080dfbc720241e1bd02f30f6e45838"
+embedded = "3b632b24a0c172edb189128fae9941696b12dbe22009a65a4c44a33fd973dbab"
+status = "residue"
+cause = "mir::Ty: opentelemetry::trace::SpanContext"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::update_name"
+kappa = "0c87ee1d4ebb33df930bf5ba5dcf59ad9f98cfdb3cf80897f9871058d3daa34a"
+embedded = "24b1e18252095217dc7654386980b665559f738fbf4b18ace2f0f240310fb892"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span::Span::with_data"
+kappa = "642ea8f8df7debc7183e7a30fcff1f38fd31fe984b757f9771ad9143e84e0161"
+at = "F=u32, T=u32"
+embedded = "25e3dce410af613584230a93ea77a65d76c45be1eef8daad228c417eb7f8a978"
+status = "residue"
+cause = "mir::Ty: span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::span_limit::<impl at src/trace/span_limit.rs:22:16: 22:21>::clone"
+kappa = "d30a5aa606d5f1957fe541a880634229421e2b28379c5ce7e6dfbf2b5c19498a"
+embedded = "62195f6411a1a69f237053bacfe343fd5a64bc02c67d452791b4c83fe385ec20"
+status = "residue"
+cause = "mir::Ty: trace::span_limit::SpanLimits"
+
+[[fn]]
+path = "opentelemetry_sdk::span_limit::<impl at src/trace/span_limit.rs:22:23: 22:28>::fmt"
+kappa = "8288b04e58a7882a15e16d072a668c5b3d942a1457a461bbac4c5206047df3fd"
+embedded = "a443c29f30b2a861f64f057c02b8207268b905c71ffeebb874b5160ec874b683"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_limit::SpanLimits::default"
+kappa = "523a43f1166e0defe4c5d225ff5dfaf693689fdca56ed5766eb84c357f446dce"
+embedded = "8415ab4c8c39729ecd8a0cf3cfb54eb0fe7f12f164978c3bc3f296fc8a1e6a4f"
+status = "residue"
+cause = "mir::Ty: trace::span_limit::SpanLimits"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:1002:10: 1002:15>::fmt"
+kappa = "c6ee1e00814110aeefb7d349d9b391879e318831485354225859177084ca092b"
+at = "E=u32"
+embedded = "bd543fd53079f499229b87783b047ac5839a09e582aa8560584f4e162b1cc8ed"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:1002:17: 1002:24>::default"
+kappa = "3502c9572cb9070c05e6f601df285e8d46924ef40380ffb9b68c247239f401ae"
+at = "E=u32"
+embedded = "1b38a8d6bace4d1efb3599b7e2df77bf4b4746e34511902e05ba547bec003f65"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessorBuilder<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:1028:10: 1028:15>::fmt"
+kappa = "8a9529f7ae14310099873a8c6def2d7b3e34e1b985e5efe6335fce0133c72c61"
+embedded = "89b72d1611e696393d7b4230a3fa026c569f1d3e53f61ef2c1b78e7543da7f37"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:1060:10: 1060:15>::fmt"
+kappa = "bf28a8a0386c4ec54dcebd2230462d91c28f7290124f54fefb15a20eb52eb5ca"
+embedded = "d18a7b6c1e485b4c25daef2ee691bd7b5d14c37e0d809eac87fb5ef4f510554d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:238:10: 238:15>::fmt"
+kappa = "101c5ec9d6e67fa77bd615aaccacc6c1ec421b595bf564c21924c8605c1cfb89"
+at = "T=u32"
+embedded = "3bb533d69729ed434decd3c5d4a4f24a695dc2e41b107106ad439e4c9ece7560"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:441:10: 441:15>::fmt"
+kappa = "07781c587e2413de3de75777e2e9c4feced7946bc109ad476ca7bda88c863770"
+embedded = "d20c090cc444ff1deebc00f3ca4b1d8778a0e03f69beea9d8bc6ec21bef985d0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::<impl at src/trace/span_processor.rs:485:10: 485:15>::fmt"
+kappa = "ccc41a4e6d769df15eb8505ce24271e59132780b32b4614776d3a2855987272e"
+embedded = "b068aed400a38a623c5ddb0420d0530420d541a72f89b54e433f1ce034aa9a80"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfig::default"
+kappa = "f020c7596ce19565ee4939e32d33540f8d9facf1ca2ee6ba400e014d80943b06"
+embedded = "22eac07dce6d968669c753fe3902d8f560e4a29bb0e8119fc5ab816f9f4baddd"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfig"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::build"
+kappa = "81d5adf9b0354678def3216ba17fab9cac7a90704732fb42fa80941e21db633c"
+embedded = "f158e7bb352e4aeb2a173780ddcdd716ecea945e6e17cc3fc3ad40117998e713"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfig"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::default"
+kappa = "ac6f9deb3c61fb0b81861402765a3b4ce7bd56fc2671f0191b4746d0acaab951"
+embedded = "bf5c617e787237185b4d12fe0cddf092f7bad8977b82bcc8ae19d7bcc6b73a7b"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::init_from_env_vars"
+kappa = "89cbb3749797cdb23e5cf604f1ffff81f8e8bb7b533b6ba31eef7419e9691089"
+embedded = "9f5171265d370887ae99139522af417363e4cc09daf917ec2c9961b8b9e709fe"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::with_max_export_batch_size"
+kappa = "b33a1230e9532f53f1bc7edf46967d0bea8f49fd163f65a4ce869bb301e12e34"
+embedded = "d37f2128afeaee54a997b1365fc8eb32778c33547dad7c2654c5e05bae2a5c88"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::with_max_queue_size"
+kappa = "8cb38b03f15572a3f92b50120c8e63e9fd5d6356d211df1318c1f21cd3a2a0a4"
+embedded = "883094b2e013ebcb25d67a1e02211adf1d5b66ee34285421ef4694551828a836"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchConfigBuilder::with_scheduled_delay"
+kappa = "0aa5cda786b8690ae7137d8ef36e26d6b95c794ebf7b4445c884f02783ad36c0"
+embedded = "550ff839843081ecb19f3998350118f5ae286de76efda3a181111e72cc9f2130"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::builder"
+kappa = "553621105da816f8ae5031698b7139626e7ac07072abe20a1685947da2873f13"
+at = "E=u32"
+embedded = "67580bc95530034dccd6d1f12b2c9a53e4bc8227ab8e0b04ede5357416754ed1"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessorBuilder<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::export_batch_sync"
+kappa = "92a188c029b8f64ea9a212a1cc2e7b0513636780623a48ccb7df545c1b5450da"
+at = "E=u32"
+embedded = "4c9bb832a9a837a0e639feafc231412a1c76d02a71ee99a77c107886e7911b7a"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::export_batch_sync::__CALLSITE::META::NAME"
+kappa = "dcc224efa9bdc550d45fb1c25de44b3b3d716a06ce23eb20f78207801c57bf19"
+embedded = "e22f7f7f407997a753b900143db522558b3a88d9b23a8823d92572b574f10f85"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::export_batch_sync::__CALLSITE::META::NAME#2"
+kappa = "0ebcff5343c03a4478d31312cc98aa1108b24ea8bb3af99f82f5638e04256698"
+embedded = "ffb973840eed06f8b75a97e0e4edaaf4a61ec34fcc80c983fb76ab050e5edaa6"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::force_flush"
+kappa = "702761842ddcb7acfce895733aa450974bcba0057d916da705389c306758c037"
+embedded = "1b2c20a81ed0d43957844e085e5dc0e0e0654193276278e42a390dc26a21e314"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::force_flush::__CALLSITE::META::NAME"
+kappa = "a2704b7970207bd08f17bcdda551fe20f2bf6abf17217b67c01dba6656b5d3a2"
+embedded = "73dfb2203257f83d07b682c493827f9f5ed8ac77b16ab68cacd879fd857e844c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::force_flush::__CALLSITE::META::NAME#2"
+kappa = "04a7310e17b93b7d87029a5969c656ddd695f22e1843dd7fc94306d20d986e4d"
+embedded = "e10af6a4507e29a02d12bc892504631c0f7dd8d6e455fd05955f4cd7cc4e7694"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::force_flush::__CALLSITE::META::NAME#3"
+kappa = "a2704b7970207bd08f17bcdda551fe20f2bf6abf17217b67c01dba6656b5d3a2"
+embedded = "73dfb2203257f83d07b682c493827f9f5ed8ac77b16ab68cacd879fd857e844c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::force_flush::__CALLSITE::META::NAME#4"
+kappa = "04a7310e17b93b7d87029a5969c656ddd695f22e1843dd7fc94306d20d986e4d"
+embedded = "e10af6a4507e29a02d12bc892504631c0f7dd8d6e455fd05955f4cd7cc4e7694"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::get_spans_and_export"
+kappa = "d6044440b0b5d689f900aa48792ee641e5e01b54f682a31f3f744d419720758c"
+at = "E=u32, F=u32"
+embedded = "84d26fb2113d7565958568d50db2140b1a386718c01ebe124eaf1755403276cd"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::new"
+kappa = "35f6514c95e3aa233ae2245fcaae14057b899d3f4d90811d6be3ab65a7ba17f9"
+embedded = "d6e6ef571b817599fae896d28c379a7d61f70a13f744ea5e0f800bd99e85a9d7"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_end"
+kappa = "a2c3219b46e1a3c7d7a55a7eeae2a632a12c713ba0f62dc3c6179dc163e53977"
+embedded = "f2fdda404bdf54a831c3ef54deab46ba478e9cf026f5cd3697a1d4b122bfa7fc"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: BatchSpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_end::__CALLSITE::META::NAME"
+kappa = "ba9252d482b59696a0d34717a1d4b210627307a5fb3967af9c77f5048dca0810"
+embedded = "0f2b5bf61d7030619ae23ea9946f736cc5fd5fd842a8441a4130971daff7dc14"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_end::__CALLSITE::META::NAME#2"
+kappa = "5c8bdbebe7f7b9199a90de9d3d79b6dacf0cfd921e8a28aefe59a1a5826880a8"
+embedded = "9ebf2eea2f4004ebdac0274cf6d032a4a45de9ad7fc10f4d133c357507bb664e"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_end::__CALLSITE::META::NAME#3"
+kappa = "ba9252d482b59696a0d34717a1d4b210627307a5fb3967af9c77f5048dca0810"
+embedded = "0f2b5bf61d7030619ae23ea9946f736cc5fd5fd842a8441a4130971daff7dc14"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_end::__CALLSITE::META::NAME#4"
+kappa = "5c8bdbebe7f7b9199a90de9d3d79b6dacf0cfd921e8a28aefe59a1a5826880a8"
+embedded = "9ebf2eea2f4004ebdac0274cf6d032a4a45de9ad7fc10f4d133c357507bb664e"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::on_start"
+kappa = "923eea3145231f1c91444134a55a9a41b59de06ed2872a5de72398a9b737a865"
+embedded = "a89c77a2b1876a72342f92d15771659e40a4c9a8c9e6fb524332c02acffb580e"
+status = "residue"
+cause = "mir::Ty: BatchSpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::set_resource"
+kappa = "ae87717de2e8424889598bd667d8336fd393a1a3fb24253e6af7c23d02426613"
+embedded = "4786f77566cb13b297affe2f43bea91fb4e04025cb00c2c56bc03baa40134218"
+status = "residue"
+cause = "mir::Ty: BatchSpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout"
+kappa = "0614b934af3bdf934b15e649fe2594100abf1ea5cf63d17f581826b167baa8ca"
+embedded = "e4c001016426d6c0126b625980b28136a998741f1f7d9f2308721aec9daeac27"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME"
+kappa = "ac52248a60387e127b17b3e82693328595db49a74ed4eeb41acc1a95645b9ec8"
+embedded = "7f69fd86fa2acf508c457de04d7cb1593dafeec3f491a0c06b108f6265ced338"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#2"
+kappa = "3befd24e79d87bbb6bb81edc3dc41623490d7d876ad87c74b7d4889db03a4bb7"
+embedded = "c60391b130a3d81b345cacc6c5456786f66d212ccaf920b624ddab2a73d0f18f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#3"
+kappa = "ac52248a60387e127b17b3e82693328595db49a74ed4eeb41acc1a95645b9ec8"
+embedded = "7f69fd86fa2acf508c457de04d7cb1593dafeec3f491a0c06b108f6265ced338"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#4"
+kappa = "3befd24e79d87bbb6bb81edc3dc41623490d7d876ad87c74b7d4889db03a4bb7"
+embedded = "c60391b130a3d81b345cacc6c5456786f66d212ccaf920b624ddab2a73d0f18f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#5"
+kappa = "38ee4dd4dddd5726e9e7277c789de42d33817c2aecd618d7d2bc579b8a38613c"
+embedded = "abcd537428c8e1428a716b5ad7fc0b890bf9b9139f85b21df6753da5cf4dbb90"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<18>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#6"
+kappa = "46f5b029fa246675593486bf79c810d4e1f75a330c8ebf9296e84a59b355a566"
+embedded = "3cc67dd770f3e8f725072f71f5c7c3815ee64c261f8abecb3ff7ad8d0bed138d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<14>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#7"
+kappa = "ac52248a60387e127b17b3e82693328595db49a74ed4eeb41acc1a95645b9ec8"
+embedded = "7f69fd86fa2acf508c457de04d7cb1593dafeec3f491a0c06b108f6265ced338"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessor::shutdown_with_timeout::__CALLSITE::META::NAME#8"
+kappa = "3befd24e79d87bbb6bb81edc3dc41623490d7d876ad87c74b7d4889db03a4bb7"
+embedded = "c60391b130a3d81b345cacc6c5456786f66d212ccaf920b624ddab2a73d0f18f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessorBuilder::build"
+kappa = "f54f989be1a64434ba1f6e6ad0566b995c47acb8675b902fc953205e45f6e0ef"
+at = "E=u32"
+embedded = "e903396704b16d3e4b09379616cfa8f4352a3ae4f4469e7f5183302472b75e7a"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessor"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::BatchSpanProcessorBuilder::with_batch_config"
+kappa = "6242cbbe9824b7b4264657069812e2b7f0acc44a7e75cb5e55518a9287af1b88"
+at = "E=u32"
+embedded = "91d2e8e4563d6e50e59e8886f21413b5a7aae1c4ea4559fd989bdba7dba939b3"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessorBuilder<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::force_flush"
+kappa = "9702bd7ee2b3032e66499880052df5c529620290bf51db8b6a77d0affa464c93"
+embedded = "13ea139dade1927594568ffcdf4fe9b3eeabf5f7d1da11b05c7e1aa01c4b0929"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::new"
+kappa = "4fd91853efb662c79ec8c408698ce2b24c523a7c3fd56ee3613a9174d6ffe301"
+at = "T=u32"
+embedded = "85615a40938c89d6b07b792a7cd8240becae32c372c44f8d8a095a4d172ce562"
+status = "residue"
+cause = "mir::Ty: trace::span_processor::SimpleSpanProcessor<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_end"
+kappa = "a6744c61916e656e3b2d648126e91cd3872c84b5e7bc062f2e1f97ce83d9e151"
+at = "T=u32"
+embedded = "1039911a1a93bc02500f26514964d6ba033d95e99f3d8d391d771e12bc389f97"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: SimpleSpanProcessor<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_end::__CALLSITE::META::NAME"
+kappa = "e3845ead0c720a7be3097c176dd34f46d847ecd5ea5ba5861760faafd7302403"
+embedded = "d226f7bbf85353e289916929928afdbd50b0eba6b0d43bd7fa01029bc81116c0"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_end::__CALLSITE::META::NAME#2"
+kappa = "d0acbbc7e86424068e66cd456c85f12db99fb158eedd6d87634c98c261b35c9c"
+embedded = "8a86394403540065f841a68f204657f68e58ad68fe773e31c698cd9412723343"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_end::__CALLSITE::META::NAME#3"
+kappa = "50c73dfc6d40da656f09d674b80f5f80103c806b40d8aac217e87f7fd340e45c"
+embedded = "a00f2376eed2932cd16f09dd6201c0f7e5bf7dbee303cb7c77b164e302b97a49"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_end::__CALLSITE::META::NAME#4"
+kappa = "d0acbbc7e86424068e66cd456c85f12db99fb158eedd6d87634c98c261b35c9c"
+embedded = "8a86394403540065f841a68f204657f68e58ad68fe773e31c698cd9412723343"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::on_start"
+kappa = "9aa2c18664418e5ad2e765863244235fed1795a243fa900edf8502ff617203f8"
+embedded = "c88b1d0a0b586c249c0ba5ff600c84ab495f045eb8ae2e9ee4b99f85de126122"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::set_resource"
+kappa = "84a36aab86582f50092d37edc022b2bb59b2d785416843fda0e6bacd6566c395"
+at = "T=u32"
+embedded = "00a68e1af9abe82c6a482d399ff0b98168e9d42d63caa61b8ed8171bcf6f96e3"
+status = "residue"
+cause = "mir::Ty: SimpleSpanProcessor<u32>"
+
+[[fn]]
+path = "opentelemetry_sdk::span_processor::SimpleSpanProcessor::shutdown_with_timeout"
+kappa = "127894443b54241772a86b58f14ba304d69cf7b6be9865159d34a9fb1fe81764"
+at = "T=u32"
+embedded = "72195f26b9fda77d40d14e64cfa754c1324e33cef93b72bc7ccadecbd6d24976"
+status = "residue"
+cause = "mir::Ty: error::OTelSdkError"
+
+[[fn]]
+path = "opentelemetry_sdk::trace::export::<impl at src/trace/export.rs:79:10: 79:15>::clone"
+kappa = "6b1ea412f33858e7d5b9affb041285a7fa49e54ecf1a1b064f80c35820b7cc01"
+embedded = "fa4b46b6da09e56b16f1740a8b3552fd7fe6c8eeefe371b56532f3035b69629b"
+status = "residue"
+cause = "mir::Ty: trace::export::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::trace::export::<impl at src/trace/export.rs:79:17: 79:22>::fmt"
+kappa = "44c59e1c2e494864f52952240b1bcd311f162e8280af19770c663415f5e0022e"
+embedded = "13e9d0f846f788011325722c26150146821545ae76fee8ef1527922cc333db4c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::trace::export::<impl at src/trace/export.rs:79:24: 79:33>::eq"
+kappa = "eb4486fe904b31c4137eb4aa3a6289aa5af7d5e9597ed43a64371f4b31632173"
+embedded = "2a7feb16216c396f56aa8c28fa87809c73c4c7ab15c9cf2fa2359e43f55b8d4c"
+status = "residue"
+cause = "mir::Ty: trace::export::SpanData"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::<impl at src/trace/tracer.rs:23:10: 23:15>::clone"
+kappa = "a0b198bec0dec7b9e349e5cd2fcef13b1f6d157d5b09bcadad38239670f36c60"
+embedded = "15ceea73f202d57e69193b4baf128a37fd4c4856b408e26c55239e43866b2408"
+status = "residue"
+cause = "mir::Ty: trace::tracer::SdkTracer"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::build_recording_span"
+kappa = "667fa72a8dc4aae64b47d2c817a19a66a524899c9360914a9d55e077ce6d6c59"
+embedded = "c8b01954f3a9b1232b36e2ab559b20b25827d504d5f244694798b754f9055448"
+status = "residue"
+cause = "mir::Ty: trace::span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::build_with_context"
+kappa = "cfbfeabf695d4ac14aa41e351f1ba59c7840488df32f1765cf6840513795f20a"
+embedded = "a941527e882ea0ea83a56a3d6939fc986e159d3f6ea357f4a361a59ed1984e0c"
+status = "residue"
+cause = "mir::Ty: trace::span::Span"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::fmt"
+kappa = "7508ab665d2d533ddc24be150674ad7b23068ff9f5e8b9d1523ac5c9ac485621"
+embedded = "628d6b35df6ae7acfd336f0164be01d02cae513a454a3024424874bad7b6f4dd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::instrumentation_scope"
+kappa = "0ec543f1c0a51b650e16d56f4fde885389dafd88cbdc7057b8889e78831943fb"
+embedded = "b7d2ccbd692543d5d7eacbabcfa8cd46597d80250f6484725d15fc3a0582e54f"
+status = "residue"
+cause = "mir::Ty: opentelemetry::InstrumentationScope"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::new"
+kappa = "be469dbdc02ee68434dcf022086673e142ec7eb6d4220b2a669a550127720150"
+embedded = "11f1552bab759b52f6926aab1140dade3a94fbec71dc2283e0cb5792877096be"
+status = "residue"
+cause = "mir::Ty: trace::tracer::SdkTracer"
+
+[[fn]]
+path = "opentelemetry_sdk::tracer::SdkTracer::provider"
+kappa = "df2db23f7f5a304fc8626542b8a602a48f4364ed5896fac1dca2054659319b61"
+embedded = "817660e0d0bfa258f6d33394ee6d8fa28429428ea1f3b18c499a7ae56f172e81"
+status = "residue"
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+

@@ -1,0 +1,691 @@
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:109:1: 111:16>::as_raw_desc"
+kappa = "16c970e1db28621209c3ecdca9707b99d2b34b02d93c8004f9b4f816613b7f5a"
+at = "MmapRawDescriptor=u32, T=u32"
+embedded = "f57ab0a7f91e4f098e5a37acd1516ae3a5e8c128690bb5546b099435ce45a0fc"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:148:10: 148:15>::fmt"
+kappa = "526ff077fcf8966044a3f5c71c1c12f2493063f9cf16c6add924325fa7163b6a"
+embedded = "346dab7e3f18e138a2ac7d356c6078966947335adf92fa87a146999b142807a0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:1733:16: 1733:21>::clone"
+kappa = "ee4f285e20872457fe601de0418b808476c9cf1fe801857f8a31934a3d36f14f"
+at = "RemapOptions=u32"
+embedded = "a8001a3d967405e2e16cdbdfdc74f5c074927da1559f27303ed9fda3c66d543d"
+status = "translated"
+digest = "d26a1c504e901886ee4f80b3a8869719a563b58b72cca0a5fe51bccb5ea2a8fc"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:1733:23: 1733:30>::default"
+kappa = "7a4f38c0c42c15389cea0a4ea1c9b694bf517576d4bce5da1bd3528cd0e5e793"
+at = "RemapOptions=u32"
+embedded = "deaa16f520fc162b5a4747cbaf16e74e911bc6176195b45304540f7dd853b6c9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <bool as Default>::default"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:1733:32: 1733:37>::fmt"
+kappa = "821cffc55a40e2556861a0e72add18b5fcb905a1e7c7c4f3fb3872f336ca18aa"
+embedded = "9bd2845b33cca7f12823ef21269824c8de0bb7b72413d16e854cb75c0e8fb435"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:243:10: 243:15>::clone"
+kappa = "976e61a86269912d1460b379151f38813c5f184c6b0c149c30befd13e6cd1bc4"
+at = "MmapOptions=u32"
+embedded = "70e2e2dd677ecf1b5c95898ed22eedc580410dc1d88088576a0a38f142c21d1d"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:243:17: 243:22>::fmt"
+kappa = "965abbb6ab86eabd82a8a08b823e57bbaf01872d81bd14def259535211caa940"
+embedded = "b8aba7d1df61e0646f81738a2f7c70232505df13598c0e8a004d86e5fbbb98bd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::<impl at src/lib.rs:243:24: 243:31>::default"
+kappa = "43d692db7d05da6331f507a6e145b77bfd2096d082627c4ba86eaa0cf15e2359"
+at = "MmapOptions=u32"
+embedded = "d19a91a4f098fa0c785ee1bf72d3989e6b0539d39df37cac382cd5044cd55faa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u64 as Default>::default"
+
+[[fn]]
+path = "memmap2::Error::from"
+kappa = "cfb5e549a3d7a9df47cd4af7c553e40edb9b0cc9d6870c2c11c84673c070002f"
+embedded = "fae7db38e2038b0abcc72da7c9cfb49dcce08d3c7b9f810d83f49fffb5e59b2d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::fmt"
+kappa = "a5180b9ca5e256db4b5a725532f3f6020d02c5b0151d0975ac141047a8767845"
+at = "MapIfSafeErrorInner=u32"
+embedded = "5423b154b3c73ab2d5798b4d274408d6a22659f5fa26670b6711e83e05bc7607"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::fmt#2"
+kappa = "e67f06106a205ac4ad3293b354ddf696906c752aaf86eba54fb11f4a46e18927"
+at = "MapIfSafeErrorInner=u32"
+embedded = "6de2fc036c8b27cfd3e1bb2062118034f28d124ef2e4c6b94a9afab1ce9a73f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::map_failed"
+kappa = "65400956a1ce2430087d5aa838f6459cc22a0f6e7233d08882d10dca0fd1766c"
+embedded = "6ef65628b003a621be8eb8c52343ff0bc9f7d03e2205e4c610ffadd6ff46ec13"
+status = "residue"
+cause = "mir::Ty: MapIfSafeError"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::new_map_failed"
+kappa = "f5328512f5866574ee1b72010fc85f2440d244c416c8da2da5394cdf788fb171"
+at = "MapIfSafeError=u32, MapIfSafeErrorInner=u32"
+embedded = "27a1d37513e8b0a0e8b68b896f3d04327295e55614aff1e9281923d5482fc353"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::new_not_safe"
+kappa = "7ee1072c17b56a1c1a66949a81af1ca2e127f2757a20dec23936bb7273ef8338"
+at = "MapIfSafeError=u32, MapIfSafeErrorInner=u32"
+embedded = "7b465bbf31b3394ae575c843955c6f000cad283287c16404d754b0155b4927c8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::new_not_supported"
+kappa = "67e81793175c689d2055109bb3cd7f2eda75df319a2c3915e6f00dcf464ae5ff"
+at = "MapIfSafeError=u32, MapIfSafeErrorInner=u32"
+embedded = "908ec94e67c302993c2cfa1a409c4901115f91a4e49512fb02b26a1b6e0dbbf3"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::not_safe"
+kappa = "0e7ab1765ad7df8d563c0971714f44fe77fcb618cdf29041990c0b6bc8d18452"
+embedded = "edd15ba7e95d9e9dec5a40fe4109511c7c4123e33c2b78e8f382f5a34b2e7732"
+status = "residue"
+cause = "mir::Ty: MapIfSafeError"
+
+[[fn]]
+path = "memmap2::MapIfSafeError::not_supported"
+kappa = "52c9aeeff6a7943f2d66eeb986a824179662cd261d54b19805c61d0fa53c56fb"
+embedded = "5c243f4e366a46319c9c3db7ea860361a8c599845b04aea14f952f000b09ca05"
+status = "residue"
+cause = "mir::Ty: MapIfSafeError"
+
+[[fn]]
+path = "memmap2::Mmap::advise"
+kappa = "8a40fc8e47e34c4dac8cb3d3dbda882d8044d949e61aae67ed4fd8e5421df4f6"
+embedded = "f887124ba6f06ec4cea002c34f6222073895a8991b4e27cdf345828e5097926a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::advise_range"
+kappa = "61da7a6c64fcd40bf1ee8199db6e735f0c09a1859faaa0f1dd3cd53997a1573d"
+embedded = "2564b487958e639cd169d37d70e4ae8ec7e92a1de0253d5b635b811634c4d5c1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::as_ref"
+kappa = "f2cd72275908f1c6d54b7f6888150b98d32fb68015b2d675c3be0a427514b9d0"
+at = "Mmap=u32"
+embedded = "c7eab69253fb7b7ed5b9705af19628a6f815bd43b50be3c4221f22eaaade0c8c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::Mmap::deref"
+kappa = "7c87bfcc7f7b7f43f4638bc7739e952b42bf21eaf131c621c150ad3fe32329be"
+embedded = "7ec44610f3e0b649ee71c73d0230d5edb1fa60fa3dd6316f762835c095bd34b3"
+status = "residue"
+cause = "mir::Ty: Mmap"
+
+[[fn]]
+path = "memmap2::Mmap::fmt"
+kappa = "5ef745bee5c3cb538760cd835d477033d73edbd8736cd22ff70b44a438c71e3e"
+at = "Mmap=u32"
+embedded = "cacc24c5bb8e463b7fa6c8d52cb285defb59db0a5d2852143f28c619a896eecc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::Mmap::lock"
+kappa = "b1c6958b96ce91e7f56e369b3e04b84df5a453d84c3e4bdfdd0ba9b50725330e"
+embedded = "36254b1c380293a173fa09dd4d61ff1d1a36d5faddbe65da9bec3d25451cf219"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::make_mut"
+kappa = "544be5b9521b71a75c4a5695d08b28ae9e44b0cb2c77a77b1f997ad0430e31c6"
+at = "MmapMut=u32"
+embedded = "cbfcb19035377c8e4429622503e905a64ac12a84d4d7180da0493a044577f01a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::map"
+kappa = "75cefbaa36469049755aaac9932729ad7c716ecfdd152aeaf5685cac1566bba0"
+at = "Mmap=u32, MmapOptions=u32, T=u32"
+embedded = "06bc31a18701cc57d296cbfada5bffb42450642f8a1305b68f70d82424e4deb0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::map_if_safe"
+kappa = "6383c250725958fd40204129b47bd27133c60f3efaaff65b0857211c8ce54f5b"
+at = "MapIfSafeError=u32, Mmap=u32, MmapOptions=u32, T=u32"
+embedded = "e80923b725658ec707cecc0ccfed7f16fda2ffbef33ae27427d66b50852f6498"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MmapOptions::new: memmap2's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::Mmap::remap"
+kappa = "8c2d0e1b8bd161355009b93a03eaf17f18a2a3d04558040c88f65c2801400f40"
+at = "RemapOptions=u32"
+embedded = "46d7f15d35083b6844e6de3c14e3df3fdca8f50f64f0bda28104a162c06fcab1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::unchecked_advise"
+kappa = "c75f52c526fded15db412a9b86230973b406b237fd122efe1ad67abd4a16f801"
+embedded = "af599a7383c72b6397621c9d36a563317b626a5ba4dbeba695acabb790a820e0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::unchecked_advise_range"
+kappa = "ee65236cb6ffe8e07c958738e186311b7e455a181e0de324f8e7769298d21656"
+embedded = "fc24407852a62b670dcb89a864841da8a7107e5dff97d948e1357bce3f163589"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::Mmap::unlock"
+kappa = "bffaa568492f47204818ae218a2690061ba5f16ef01b926d63120080cb517668"
+embedded = "ebcd73601aa46f7b8815b997f1de8248f966e411cfe3af00f16cb713d1dccffd"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::advise"
+kappa = "364140266f1c8a27036df85252bdca4bf01b4352478e683ffe193153ffa19e76"
+embedded = "40dc4f2bf080a256ccd6364164b40e4f4ae90e5c11d2770d555f831a6eef177c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::advise_range"
+kappa = "94116084e148b2a57e1a2ba9112076f16b47f19dd12c354fb522ed7abdeb3366"
+embedded = "66f9c32d33a9a38ea3160879383d4f13d6520d87ecefff4822df03de5c3c2947"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::as_mut"
+kappa = "e566402e721fefd5f82e5c057bb77ff96068140be0aefc7fd0f7b6ec2823aff3"
+at = "MmapMut=u32"
+embedded = "66759feffdf501364a6c6fff81ea27016eb6fdde034c88b78912a32d65403ff1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::MmapMut::as_ref"
+kappa = "f20c48e28f75b50672a41ed8b2ae3a2ee6bb1e4a31eb362ed390415f5caeab6d"
+at = "MmapMut=u32"
+embedded = "2cbbaf600aae7d08dd183dd04eb221bbc700e6a51c868a013891db8319d5aac5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::MmapMut::deref"
+kappa = "84d1957e43d7d26f6abf3fed0b0a24c7e62f512688b7503b86eed353dcdd0ab4"
+embedded = "5c43cf4d113e5bcd5422344fde10c1e1d6f129aeff5ad1f9846eb0fa79bc79f4"
+status = "residue"
+cause = "mir::Ty: MmapMut"
+
+[[fn]]
+path = "memmap2::MmapMut::deref_mut"
+kappa = "8aaffa93b9307db4279d5781a2ff3f339407e7efa4def3243cfeb184aaa4610a"
+embedded = "6737e011d0bb203f5cb9ffb86ab92116083e3b02e2c95a8670e47eaa97cdae59"
+status = "residue"
+cause = "mir::Ty: MmapMut"
+
+[[fn]]
+path = "memmap2::MmapMut::flush"
+kappa = "379f9217d7a7840f2c36eccf9f43b8491ffd490d63f32979d23b5d94be43332d"
+at = "MmapMut=u32"
+embedded = "f2bffde78cc69af26a07204c3e16e485af26d3eac5a1f2aafe3e79c8de03e744"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::flush_async"
+kappa = "f12af008f3ac79a0a50fcea2fd3628696ecaa1b597f6bf6c8aab46373043c344"
+at = "MmapMut=u32"
+embedded = "7cd4cecdfc5fc3b1341597028a56377858e8dafadc29c18ff92b7696abba5be4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::flush_async_range"
+kappa = "5dd1e47312d768f3309069adad9685413575828d01c58396814dfd86dbc712e8"
+embedded = "267ea4eb274df45fb1e8a6f05c139b84b12272a06858000ade234b5d5f37764f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::flush_range"
+kappa = "4d9c50c20ee77fa3a11bf608808ef3536224a5d01ee4322568536d87eac791a8"
+embedded = "19b9c199d7a9d06e0282ca52b0a428b35fc5425b52048caf774bb12cbec88a88"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::fmt"
+kappa = "d07e8a3d468ebf1e125d9eb99aead682026d6211f4b791af3504a1b0d59e1e06"
+at = "MmapMut=u32"
+embedded = "9b29b03527caf018e3edfbf16d39e3aab3762d7f4a92c937d49c5ef467382444"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::lock"
+kappa = "66522f4bd467ad01dae1ffe730c208c9d32a12f2f5e7c655c08902332ae56fe6"
+embedded = "02bb2f086cac64153d453b8ee30478d994693e4abd31053839b349953ebc4f93"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::make_exec"
+kappa = "2ba6497bc4a712c895cd94971f3e93759bf5626e422bcffb1ee9b6f374ef4d98"
+at = "Mmap=u32"
+embedded = "eef3427fbd2cc83f7b3e429c91ca1307e866550b67e0909b5494fdea8c2b900e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::make_read_only"
+kappa = "2cb3e6136e12c2ea81d3a121a570efe1a513cadefe4011b68606cf3182a359bb"
+at = "Mmap=u32"
+embedded = "a9a3420125454c33ff145694fd97582ca8c666dae50ac28ac2871cd9ca932b70"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::map_anon"
+kappa = "6c33b2bb3398c7c8c7f2437deeec3f06d0654521ff480e5579d93af4c7452147"
+at = "MmapMut=u32, MmapOptions=u32"
+embedded = "de81308fe56631ea322d2b3c443c4015356ec14afc2734f7376844eac4c61735"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::map_mut"
+kappa = "c4e4a562f50bdf9781e641ff73f79e31fad91eea6f146a0ea2d79d9ef49ca4ae"
+at = "MmapMut=u32, MmapOptions=u32, T=u32"
+embedded = "61211025098aa324cc843f1ff01830605c4937e4447e28e782d7954cb91a1abc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::remap"
+kappa = "3bcee2090842f4b164747457eeb7b09c823e56289b5f7a29e43be508d454eb8d"
+at = "RemapOptions=u32"
+embedded = "ab8bba5411747a32d5e254889447d9afe6eb3a2d2e68dfd03c7c8674a2b95aa5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::unchecked_advise"
+kappa = "c7cd232f66e1511fcff0fcbcbb8d635a637d8dfdeed78a1d2d0ff0e8e3326797"
+embedded = "28d8f586f6c45e7402d9474cb574434ae8ede7f4241269fd208f06af9b9966eb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::unchecked_advise_range"
+kappa = "abc5e826d491216b0cefbefd46886c9e164f839346d32727f06686a364544b4f"
+embedded = "c2d14f69e8d219969d8a107a0673c0e0fda512717a90c879754db3e01562c5e2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapMut::unlock"
+kappa = "f1b32133a2bcb15b5f41b86fbef2be8ad07f11cb25c8b2341a828cf7e83cc9c1"
+embedded = "1cc249ac86e5b797a23d5809b98cc491b84becfaa0fce4182623be1041607d05"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::get_len"
+kappa = "4430f8513c1d782dbbd81b2c1130c48e6c8546fbfb0667f28420e2b5bc1f38c3"
+at = "MmapRawDescriptor=u32, T=u32"
+embedded = "e3e54a35bcd0610249e0ced7b847a1eef2734fd900e8169765509f84de394fe1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::huge"
+kappa = "30eb75bc4673b79b35b68f7c49ce3dc5ceccf3b1f181c4b5d9c3131f03836689"
+at = "MmapOptions=u32"
+embedded = "51b6d5b5f48b29389424d2f4664f6f4cc713ce7846a9f714d6a085ac613902a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+
+[[fn]]
+path = "memmap2::MmapOptions::len"
+kappa = "a1ef966592b6aeb88fc1f2c8cd5ecdac769cd3e5137de9fdcbc0e3cd7a8dc2ac"
+at = "MmapOptions=u32"
+embedded = "b7e8264a26da6cf3484c15c7abe21d2286918cf93b2d0dac88ef9327e044334a"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::map"
+kappa = "d24ce9bb3a50124b82db28d13b38aa2105779b25f65d0925ae772718ad583058"
+at = "Mmap=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "b37a6725da092c45b18d73b4652100082f25882d170ca04ea0058e9fdc125429"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_anon"
+kappa = "4aadcaffb2d20911670f9e22caead6737b5803a7983b6230a3351cf3ae5f09d3"
+at = "MmapMut=u32"
+embedded = "bdf137a23edc6e5d1516f5464c207649aad9e28f90fbf89eedbb1de8259f8a1a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_copy"
+kappa = "d29428ec013f96454110c4e2ce87ae9514d611cb57e1a411ce52e3b2dc2d6e88"
+at = "MmapMut=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "14e5b10179ea88662ffca935eac6d62aa414c2080ab3d7117af5bd3155fd32c6"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_copy_read_only"
+kappa = "9170d5d2fd1d8966fa9a1d892e16960ef994d2c86fdc409a334d13aa7e6d71b7"
+at = "Mmap=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "1ad44a4b7fb495e12776cf03ec09b5c7fa17dbc3b21ce42f0b78ee14534f4b96"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_exec"
+kappa = "1fd900d257243116776717d3bfbaea0b53f8ef1e6f02b002af586b08644299c1"
+at = "Mmap=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "ecc819264cea2228452b30c69e16712a617c049f27ca1255a9d5af89013ecc8e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_if_safe"
+kappa = "fc2be46a94b7ba418c6a38c67c3fa1a47b956484e8791cb8547e49322bc056ff"
+at = "MapIfSafeError=u32, Mmap=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "8ab4313523b4510f34c01cfa7059d4d96f852c94c13198a75b612e75d66e44b4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by MmapAsRawDesc, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_mut"
+kappa = "895830f2ed8136b928c79855b995d948fee799e856931172fed45b5b3b5b6ef9"
+at = "MmapMut=u32, MmapOptions=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "eae470148bec99283995554c354e239befacd2e8ba0f2fcf16eee62616e98ecd"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_raw"
+kappa = "2df142b1c14499c889fc6506393317c4627926f495a88813b79d0e4ce8c998f9"
+at = "MmapOptions=u32, MmapRaw=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "574606e1a83f5e6865c01950709de6303fced79a56ed6ad1b9480366dcec73a3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::map_raw_read_only"
+kappa = "1b1b6fe3b17ca45f383cfe6539a043ec037ab5539aa6a0688f64c10e0bc44bf0"
+at = "MmapOptions=u32, MmapRaw=u32, MmapRawDescriptor=u32, T=u32"
+embedded = "446a90a67b264ce70ac14fdf42ddcd09bdb9339c779e6829c7ff30f1166df6f5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapOptions::new"
+kappa = "2f2cdc897d3bbbe6051dd0e9fe8197db8995c8e13a830c3143dfcf49a8c608b7"
+at = "MmapOptions=u32"
+embedded = "60b9fdff6295edbc8ae60d0cd48945614b8ccfa3a6f9cfa2f8621e2c90ff3d1b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "memmap2::MmapOptions::no_probe_handle"
+kappa = "f2f4eb288bde5ef00bddbfb57094fabbe53f4ac2e31e38d8149f25233ff49e36"
+at = "MmapOptions=u32"
+embedded = "142dd26de9dc4ed9c8f0e76893f4cd26276501a454db417c09e0b71423b1960c"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::no_reserve_swap"
+kappa = "9214b281e170fd734a7f2aa8f8af94ddb34615531675d7285bbd1d850f95a28b"
+at = "MmapOptions=u32"
+embedded = "277ed8bcb305ea8335a5804906a88b05022a3d9c7c45383bd0a57070301f721c"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::offset"
+kappa = "0b8496a8644402df3d646e353bd077c15ed19307a11c7fc4f4d8b994f2359aa7"
+at = "MmapOptions=u32"
+embedded = "880d60b377146fe9bb109d413d810c5e06cc694422d32f17102af33943bb5b9c"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::populate"
+kappa = "84006c7611be344f6a1ce7e4b50dc38f0cb5563af7f925a4a8c21f51d91c3cf6"
+at = "MmapOptions=u32"
+embedded = "c382be2c41a81d203a70e8faed677fb1d389d333b6a2580bff15d10a6a1111df"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::stack"
+kappa = "ed042856be55153efcbf1562cff739fe60a73bd07deaf6ea222937dc4405d11d"
+at = "MmapOptions=u32"
+embedded = "29b17c4114e81f2fe0fc3a8d9205e6aeb5a5578f226e9692a9a367a0ad10cb7b"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::MmapOptions::validate_len"
+kappa = "214b8f4588fdd1e785f0e329c3b1471f8e81791a50264ed93f7a705c3eab9b15"
+embedded = "41152d365df27ffe1f8c92eb53dd0f62e14473a7a21d2f2af0e8b1bb06c34c5a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::advise"
+kappa = "a1d73482513fd0c1145776587589184c02d34708940bbafa8ad96c66a2f0a785"
+embedded = "f00c4e0f6bb531009a2a9124a05d6da03be8a880e6d895c44415f0d2bb24d2c1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::advise_range"
+kappa = "5b6ce4ec63b22b5c7d6faafab35d2944ab5e6ced630347e4262a2725aeebc248"
+embedded = "2a8ed355796355d73a3d234b4226d29d8671bcc08402a9011f8755ccfa886e93"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::as_mut_ptr"
+kappa = "9c2ef04c31c969c8d61ca2d36e58c145fc40ef543fa6b791a32460a43ce65f27"
+embedded = "0a8e1296732c60bdb394e86d7e6c0c3a664823875c4de70de47da78bbfc4cf42"
+status = "residue"
+cause = "mir::Ty: MmapRaw"
+
+[[fn]]
+path = "memmap2::MmapRaw::as_ptr"
+kappa = "fee5e321f79b97fff1db3fbef469865d079e20e40391b01e1a22dd3e9cbf2ead"
+embedded = "b476525d5e89fe0421e6da75ecd62e8ee75f94de62617f0a697e417b5c1e24db"
+status = "residue"
+cause = "mir::Ty: MmapRaw"
+
+[[fn]]
+path = "memmap2::MmapRaw::flush"
+kappa = "8531d1ae38f8a744c9e372f85172c790083f1c2e31b4f293d64d14b87058d075"
+at = "MmapRaw=u32"
+embedded = "ea5f0deec69af743be3063ed9bf186f5505c7f3cf94ef0710253964a0a5dfccc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::flush_async"
+kappa = "e30de5dc18b658481a615813db3a06db4d378d2db20f8f69b5fcae9ed0407380"
+at = "MmapRaw=u32"
+embedded = "4cf986333856221f4b3e2568dbfb87655e7d564d2ba664a75f01d971f352210b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::flush_async_range"
+kappa = "c5e34d44110a2ee68cf13b438160189b26b80115c150aa43fc03e1ca749fe7ac"
+embedded = "f941dda1acee3184a762060ab0078194b9f7f46f1e41744fbaff8a40b48ba04c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::flush_range"
+kappa = "849a0d4a1e315b0c184f9b4eae892f5baf799ef83618943246ac1e75dc4700a0"
+embedded = "4c80a63d51ef1b9afafefdc3dee0779ca8489ecb8888fd33d21e94422fae6d18"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::fmt"
+kappa = "228698fb21e9a4edb1e79cdc5e08815fb98c6f06d6356765ae2b55cf1f883875"
+at = "MmapRaw=u32"
+embedded = "d3d44c8c798c7d15c51c0fe67afc520800344f4b0f3f47c9272096cafea99b6d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::from"
+kappa = "a822b6b318bb4a226c10b1a66922bf7b566c572fb5d9fdef77b75224534735a6"
+at = "MmapRaw=u32"
+embedded = "03844d91b8d8dfd98cd36c44c36ea52084a113d3573ffd233cbe7ebbc85bee73"
+status = "residue"
+cause = "mir::Ty: Mmap"
+
+[[fn]]
+path = "memmap2::MmapRaw::from#2"
+kappa = "d94eefcd1fb3c2f1d37d98baa0ed4dd7548abf078eff3a356df72c1c6774309c"
+at = "MmapRaw=u32"
+embedded = "2486404442fc59c43f3032127912ebcca3464ebdd8a41c77c28409d517734f11"
+status = "residue"
+cause = "mir::Ty: MmapMut"
+
+[[fn]]
+path = "memmap2::MmapRaw::len"
+kappa = "2d4665f25a86974e6165ed01d0b9e9d9e10cf5435fa30234fc95a8648a5c7a33"
+embedded = "3813784ab3ab0eaf6e4161ed1bc772ff9d3dc45e3f6feb872f90c78f37beb423"
+status = "residue"
+cause = "mir::Ty: MmapRaw"
+
+[[fn]]
+path = "memmap2::MmapRaw::lock"
+kappa = "4f115fac91b692548c67fd272341f5015598e2b96c9d77f28e3b06a11ae49c6f"
+embedded = "0a8da8ca860901ccccd4f9e74852734322ea14d80dc1c6c5c7eff45a5ee1deea"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::map_raw"
+kappa = "6ea84956c68757766f8615ff7e68c4a4ddbd2399aae004240b49cba1d51c3582"
+at = "MmapOptions=u32, MmapRaw=u32, T=u32"
+embedded = "b7acb5203b466729733d2dea3103947d75740844682b8b59546b21dea7d93bf4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::remap"
+kappa = "ed1c93eb5286881f502221e06e07904e0fa339967b5e185c82732bb233ce5c77"
+at = "RemapOptions=u32"
+embedded = "08501805ef5327849bf04bd75182d485c59cc7616144a6f5f05e772735c74a99"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::unchecked_advise"
+kappa = "dde79d927b1ca0e4b53c5961a70b6f8f180b2c044314d60e27a0b7b616892107"
+embedded = "9375b3ba83bce30b1e363b4b189ef2a98bbe75bce64ae475432c0018fad3d5c6"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::unchecked_advise_range"
+kappa = "cd2f1abc2c05b8753118853d34ca555530a174d4dbe7a354898e274d4c5aa203"
+embedded = "da5c25b319868a14a4f1f6f51e80e63c77bcfdf0bb2b8ae5aac05c8d490d3955"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::MmapRaw::unlock"
+kappa = "a3e14df9c3ad9bb50ef2a14b99ca42799ce6f6c7d003b1c8cdcd7c50f67ab8f4"
+embedded = "e1964fc80521b0155739d30069f6b820358d544bc7a1c92797058ddf4f16a002"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "memmap2::RawFd::as_raw_desc"
+kappa = "747891b6cc40222eab09794ee491b0d350b55ec7d19d0158a82f35198ead7d16"
+at = "MmapRawDescriptor=u32"
+embedded = "b8c6676a33b9b7b4840fba04d2540be0244eb20803e329b6f81be1c6d4a3b13a"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "memmap2::RemapOptions::into_flags"
+kappa = "7c6ab7c8e13d1ff6e613482d2e37854f3d599ab66a36c27518941cea7455b9f5"
+embedded = "f99f576ce855d1a2b0e42e91a162fcc3d2099cc873d5e3fbd7c53f96a0e5bbb3"
+status = "residue"
+cause = "mir::Ty: RemapOptions"
+
+[[fn]]
+path = "memmap2::RemapOptions::may_move"
+kappa = "cfec76d1ef8ec5d1d9ff907b04f5cd22e933b07d79ef5a13a1af449c3a10972a"
+at = "RemapOptions=u32"
+embedded = "3abd1fbb1e84556b82ec03d507b5af4a3401ca0000c3af9f115438d84056ab97"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "memmap2::RemapOptions::new"
+kappa = "05bfd84ed8537c973735d3ec8095c8b983fe722e70761ca91894cd7127c92908"
+at = "RemapOptions=u32"
+embedded = "3878265d2254b572ba7bf4bee0e00132a8b73a46937c77e517ae0b167782f85f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+

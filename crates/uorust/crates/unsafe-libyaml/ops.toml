@@ -1,0 +1,86 @@
+[[fn]]
+path = "unsafe-libyaml::die"
+kappa = "69c2508340a50b324dd44a34636c9c51ea5cae7a05bb3e3b318f7bcaf637980a"
+at = "T=u32"
+embedded = "c9eefdecf48abd5270eb968bc397117199d987ce682bb993b44fa99071d2e64a"
+status = "translated"
+digest = "32a4b128212756830f7d2c283b3ec501d572602ed2b787d19b3d8fad9c57d273"
+
+[[fn]]
+path = "unsafe-libyaml::die::PanicAgain::drop"
+kappa = "367f4f7eb8efbdd19149d38aacd93dcf5f28f54f6e1ce8343b78c6ea65ca8d27"
+embedded = "43a1fcf18c2afd3b8d6ce891fbd0deac2f862a896aa900544e3328954921da64"
+status = "residue"
+cause = "mir::Ty: PanicAgain"
+
+[[fn]]
+path = "unsafe-libyaml::do_die"
+kappa = "e659773bc09c1b467e9b1c9ba23afad93db617c696408f02af01990d8e39c4a5"
+embedded = "eb12e850702608eb05e5945fc5b6fcaffd9540b8f8c9944029e90727244b7ad9"
+status = "residue"
+cause = "mir::Ty: ops::die::PanicAgain"
+
+[[fn]]
+path = "unsafe-libyaml::ops::T::force_into"
+kappa = "d691cc4cde41e02b8fd761ea154722f8f95f6935b033ea7844dc2039968bbda3"
+at = "T=u32, U=u32"
+embedded = "dd72095dd1b2a027c51d14f2aef2818731377d31daafbd810ffaf465c9ef40c4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto, which u32 does not implement in core"
+
+[[fn]]
+path = "unsafe-libyaml::ops::i32::force_add"
+kappa = "cd833a4c344668e7c5865fa02fdde1528bb9934b76ddbf424968f68416830600"
+embedded = "d9f7a9f78a6ccac5938f3d81825428aff8a5b4b19f88b1443f3cea52aeb86b3f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_add"
+
+[[fn]]
+path = "unsafe-libyaml::ops::i32::force_mul"
+kappa = "44e5fe3cbf776efee3a7e0712674d381c066185ce536cf4dd84abb73ed5d0a56"
+embedded = "0439b7f2c40d935fa5e12acb870262748fd21a5b79a668fc255c6680030bb48b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_mul"
+
+[[fn]]
+path = "unsafe-libyaml::ops::i64::force_mul"
+kappa = "f99f6960844cf688b01f040b44ca6346f8ccf95734a6908215f6e2a71297cbd3"
+embedded = "d98212db73ed0bdc0588bd0ec7dc309205c97219742d9fdf3e9e57db8eb661dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_mul"
+
+[[fn]]
+path = "unsafe-libyaml::ops::u32::force_add"
+kappa = "0d352fc2d092bfd068216da029e959bd24d0cbc09aa8d15ac4ec77161abd58e8"
+embedded = "146033f78e964fd60a396e36666abef9a6540088f558e9e9680b8bcbe0a1c702"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_add"
+
+[[fn]]
+path = "unsafe-libyaml::ops::u64::force_add"
+kappa = "162b4f17192137b136140dd0ff652fc25fd487bd445617f018bc364d2b40a5b2"
+embedded = "19079eee127b0ab85cccedbdab2be4f128948bc119fbf1d23655ccc7d511c4cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_add"
+
+[[fn]]
+path = "unsafe-libyaml::ops::u64::force_mul"
+kappa = "efe3c4c1661cc63562e3a9bfb9dbab20f92268a5ba70a994afd22b03d3a51654"
+embedded = "cc201b9250bd55c965ba79746020cf605ab1405826c77e6b252b791f73909899"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_mul"
+
+[[fn]]
+path = "unsafe-libyaml::ops::u8::force_add"
+kappa = "1698e313965fa485e7337e018fbc112abd2422f79f247869a908ba1177842eeb"
+embedded = "1696b82fca3bf9fe40f4b2b49322fdb9a18cbf5356009562148e6d4d66906884"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_add"
+
+[[fn]]
+path = "unsafe-libyaml::ops::usize::force_add"
+kappa = "7c95e17b379c9a8d96a352d5bca7be49760059d7c65c6731d4a45853b6810a76"
+embedded = "06f403c134a888135997f2695a450d23604de69798de7ea9dc3dd0f1d404a31c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+

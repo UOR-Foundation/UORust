@@ -1,0 +1,46 @@
+[[fn]]
+path = "android_system_properties::<impl at src/lib.rs:68:10: 68:15>::fmt"
+kappa = "ea5b33e3de8e81b05fe68e023f721c485ec9af38c4c40363df0449a0c1109a32"
+at = "C=u32"
+embedded = "ed8ceefe0b8673a0af638e37296ab42948111127e35a6af05a88890bcc7d0cc4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "android_system_properties::AndroidSystemProperties::drop"
+kappa = "1228cb27dbec8922c4356ed04ea8288ffcf8ccd4ba6a4edd5367d82cbda1bc06"
+embedded = "2c4e0ec45e0d1b3ca6d9ec609defceb185c1abe96b851ea749cd99c70a6bc28b"
+status = "residue"
+cause = "mir::Ty: AndroidSystemProperties"
+
+[[fn]]
+path = "android_system_properties::AndroidSystemProperties::get"
+kappa = "6f8c0a926f89f4f9c50a6f458e8fe762710ce82cb7f30710a0ec23c59942e6cb"
+at = "AndroidSystemProperties=u32"
+embedded = "5ed165740ffb92fab92417c600429b9ae784c75acfee0410d5c26a710bdad6af"
+status = "residue"
+cause = "mir::Ty: std::ffi::CString"
+
+[[fn]]
+path = "android_system_properties::AndroidSystemProperties::get_from_cstr"
+kappa = "9297022d7201fd43dd0f83610e74e9493e2b6e538b2bb629b22ca1f4a4493626"
+at = "C=u32"
+embedded = "798fbeb77ef83532367020ff92bdb17628ec2d0009004532d5b41859079cf5af"
+status = "residue"
+cause = "mir::Ty: AndroidSystemProperties"
+
+[[fn]]
+path = "android_system_properties::AndroidSystemProperties::new"
+kappa = "1acdd6cb2411048a2552ee359074d2c51583b39714d9b531b146441661db3b16"
+at = "AndroidSystemProperties=u32, C=u32"
+embedded = "0f4cc0cef4e22ae0b17cc2b622220b2d500bfbf593219c62fd60452d7ae8db86"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "android_system_properties::property_callback"
+kappa = "067a316145ddb8ae27b48bd056dafd9dd26b5c881c7337bfaf6a4ba26931e43b"
+embedded = "f25193ad4d4e238c9e7b033fd2000f18bd57facd71fef6662a39812b1d1c9b7f"
+status = "residue"
+cause = "mir::Ty: std::ffi::CStr"
+

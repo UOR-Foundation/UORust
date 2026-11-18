@@ -1,0 +1,165 @@
+[[fn]]
+path = "aead::<impl at src/lib.rs:109:10: 109:15>::fmt"
+kappa = "dbf92f9fcf48537a82b81bf7f9efef839ed5333dcd1ff11ef2837cd7f2f124b7"
+embedded = "631f48f3bc17bc7b5c6611263d55261fe7c29c794a6b11ed2f7eb8282d2d2934"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:109:17: 109:22>::clone"
+kappa = "96c88749b6a9f74523c04d63233cba3756afa304a69988fc295733a95b34cc5c"
+at = "TagPosition=u32"
+embedded = "095834f3acd69fa31a6bddd895d8150186e94177f515ae9fa565c9d7005e6fb6"
+status = "translated"
+digest = "0adc07bd38f5be7fc7ab87933cc8d5d6f3668304df02b32bbfc48c7fe56f5375"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:109:30: 109:32>::assert_fields_are_eq"
+kappa = "ec5bbc1a31a3dfbde7a59fb7d2c93ccd6eb10c9ce008acf8062338d28fbc5f41"
+embedded = "5785eec2ae1ef2b8ebb7c12ab096356d86e74eb4a0905d105f6287f261ce99ff"
+status = "residue"
+cause = "mir::Ty: TagPosition"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:109:34: 109:43>::eq"
+kappa = "f3cd32c5d447bba7df96ed1b6b1526072ed5c028522f2b44a2dc784e2d1d655f"
+at = "TagPosition=u32"
+embedded = "fa129ff3b2a11c023376e63f4bc7e78146036b42329d2b833212274b3775d397"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:420:10: 420:15>::fmt"
+kappa = "8b09dfa7557e2a915e562fb1b8ec61015694299af2d42a15ab4c2426aca1470f"
+embedded = "8d7fea0e60e2b01c94587ca6180e10948dc91118622e7f8a53a2d3a53954689f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:10: 42:15>::clone"
+kappa = "25b40a9695f83ca051e9ac709fd59f17b46a9ff186b1342d73274ef098559ce1"
+at = "Error=u32"
+embedded = "5ec1019e13cac761d6b2886c2e6d934eea567960555d6b9c7ebf4a3920908d5f"
+status = "translated"
+digest = "98241458ebf83b3f8719d0e6f700953711928fc67f949e8a441d0f92c40f2e84"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:23: 42:28>::fmt"
+kappa = "a96062320e6187f8854c2e1d5c75da66652f9607af589fc37032ead10b798dfb"
+embedded = "8a14f6abafefe291bab52c49a8bfea20ba8dcff80a060cf5f79219c5eba8d79b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:30: 42:32>::assert_fields_are_eq"
+kappa = "01a6c2f55ab2d7fccde793e9ef3f3db920ea13e011dd01d03e9020aa78f56730"
+embedded = "1fbd8561211316da1b0fec61eb59743a0323abcf5a83d152d7039df23686711e"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:34: 42:38>::hash"
+kappa = "ef5e59eba1fbd04a8ab73b31b5c4a74451de5b44f8202460e4c12d8e039e2bdb"
+embedded = "6fadebcbb3f228394417a544c846601992d1e74031e1ba9cf787f2b3e2a23c65"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:40: 42:43>::cmp"
+kappa = "876cf100ac7a089c34ea1b0aae6f615f3309d9f5767ef52b41ff3d5718d6d04a"
+embedded = "dabdd1f635a5b12f777b76cf30c66adfa7dc49f762fa554586c09a445f1d039f"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:45: 42:54>::eq"
+kappa = "54b51d75205cb30174fba2a121eeb60b2090a85648c5ea43e54df9a2f2affc10"
+embedded = "0b029e4be86f2419eda846f46b54beb441a11dfe88229913e047cf87ec7f3385"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "aead::<impl at src/lib.rs:42:56: 42:66>::partial_cmp"
+kappa = "c181024d48a68a94ff49a84cc085144fdd7ece970fd56c9c8e206d900ac96cef"
+embedded = "57e1813b0dfdb0b2e4596689c5032655534d97825891dcd83b1cea76dcbc6c3a"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "aead::AeadInOut::decrypt_in_place"
+kappa = "e162c1a9871d08e6218cb491ffd3913f7b2d894d7394fcb0948d017d77c17cbc"
+at = "Error=u32, Self=u32, TagPosition=u32"
+embedded = "15a0fc7af172f5e42842c0f5084cc85112a067e83993c62520a1f40092a4c221"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "aead::AeadInOut::encrypt_in_place"
+kappa = "0bbbecb44e23e2da74ac5f61d76f30f81e9bf338aced5401b5232dfb1fe10790"
+at = "Error=u32, Self=u32, TagPosition=u32"
+embedded = "29e63e547f7b640b5d9417ea8d0c60291be55f98e8ce3149416578f4dfaa1901"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "aead::Buffer::is_empty"
+kappa = "2d08567c74621cbe8b0809095b5ebd255adce6ff93a41a5653307b1d6187c112"
+at = "Self=u32"
+embedded = "964c93f9bf618ff94bc58447bafd5f00c95b3cc6051b1b6c95e893acb37ae0a9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "aead::Buffer::len"
+kappa = "5978ec24c557a4baa91ee7790d3c59af213526d0f879f97430ab83fb608c86ee"
+at = "Self=u32"
+embedded = "df36df38e6e96fd7de452e0c12b54c8f9da7baecb4f0918d7d480faf36cd5fc5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "aead::Error::fmt"
+kappa = "b255bb08cab282f2c6bd28f5c1bdc1abc165f8804ac4ecac9edf09538c4429c6"
+embedded = "9823ea6bedb144732357a2e1477ddc7ede7b1dce213967ad6f41343cd13598fb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "aead::Payload::from"
+kappa = "74fb0cc57f6e69c3d5bbd6b453ad3393e1250ebb6cbc418147fbd0b4e14bdee8"
+embedded = "88bf947987d71da164cefc12a2a1f9b86ac0b4359be62c36b6009cd61ea7414c"
+status = "residue"
+cause = "mir::Ty: Payload<'_, '_>"
+
+[[fn]]
+path = "aead::T::decrypt_in_place"
+kappa = "7e12588c3fb214cb8b476a061f0c6f0a3218b3dc6b4a2bf496138d8513c62b6f"
+at = "Error=u32, T=u32"
+embedded = "6c719e46a3573ac25c79dc8a507596f5e69441abfffeb4de7d0a6b15560f0e91"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "aead::T::decrypt_in_place_detached"
+kappa = "ffadd55c3937934ccf98c6bf07c4544c56d7e5f47e8e8e20e4e29b43aa5f1d50"
+at = "Error=u32, T=u32"
+embedded = "29fcafb852f64c5c30f6890a00f28f3d4f08f705a25059965a906f92f0ab0848"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "aead::T::encrypt_in_place"
+kappa = "645305a64a7c499169114fde73e156d5d6042e9d0655e825d5932f247b4aae21"
+at = "Error=u32, T=u32"
+embedded = "869b0e3732dc30f91a3c37a44fd54668563b2e03c4e6c797cfdfca238b861c13"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "aead::T::encrypt_in_place_detached"
+kappa = "a3c89bec55ec2b29723663038229418fb88d84f47b53fcdf2f75a27e422ac61c"
+at = "Error=u32, T=u32"
+embedded = "40d7e6a4f674a6174bce543fbf621d6324ffe745fd2718ca8422f701386e85b9"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+

@@ -1,0 +1,30 @@
+[[fn]]
+path = "atty::<impl at src/lib.rs:31:10: 31:15>::clone"
+kappa = "a355bbdea4b8190dba31017845157d4d772f592ce25c4d5e025af685619671d8"
+at = "Stream=u32"
+embedded = "15f55c0eb8fd4203eddfbb0abd91ed055a19d97f2352286bbbc1dda6ca770722"
+status = "translated"
+digest = "712fb1fdba18f7d9b288171125eff6b96042fd92d91d66abb8f3efc7408d3e7c"
+
+[[fn]]
+path = "atty::<impl at src/lib.rs:31:23: 31:28>::fmt"
+kappa = "dea5a9b00ef14bbfba9f7518a8191289c76aa47d5901a2a328837db8ffae48b3"
+embedded = "94bf4824fd62ef34f21bda37154a6a9b840770314af43c1d330388518c748a70"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "atty::is"
+kappa = "2a67b1899f266309774c8d2bdec3bd0c201a81421c5de877c8b085a45a552abd"
+embedded = "9e49f2966322e9db06bbd244fa55439c057a03945161bc4af4de1e766e4dc957"
+status = "residue"
+cause = "mir::Ty: Stream"
+
+[[fn]]
+path = "atty::isnt"
+kappa = "1fe7d10d16f98bc06946c573d08778d35d08e3b2be03f1ee28f45978b6d99d16"
+at = "Stream=u32"
+embedded = "33593e86adf5f3af60b478d634008790ad6d8a300eeda808988a6f49b96ce826"
+status = "residue"
+cause = "mir::TerminatorKind::Call: is: atty's MIR stops at mir::Rvalue::Discriminant: of Nat"
+

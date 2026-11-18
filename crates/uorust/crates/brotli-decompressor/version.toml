@@ -1,0 +1,21 @@
+[[fn]]
+path = "brotli-decompressor::cargo_package_version"
+kappa = "476f282d23584c3e73be0e2eff3953f08200696f231d9c61bdd8a24fba221194"
+embedded = "8863df74e8800361ccd37fe0de1c76689104f3a846704fce0fd2faadbf3ffe75"
+status = "residue"
+cause = "mir::TerminatorKind::Call: version::parse_version_component: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "brotli-decompressor::parse_version_component"
+kappa = "3a367dd0d8b3323aef1032d652a98e05d456e30c44f948d6ab9efe2829ab214c"
+embedded = "71afc34537e3d6b2ffaaf851ed93444e2c7f552c586be4e1b3fb7af81749e4cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "brotli-decompressor::version::_"
+kappa = "71890ac41df7b0daae430444baf1ba0802e6d3c1b309e54afbc546215f1cb23b"
+embedded = "7b9e1634cb4a4a9b25610d72b7a077bd377d57faa292298dd3528be1a63b6934"
+status = "residue"
+cause = "mir::TerminatorKind::Call: version::cargo_package_version: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: version::parse_version_component: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+

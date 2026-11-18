@@ -1,0 +1,127 @@
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:10: 25:12>::assert_fields_are_eq"
+kappa = "a9c789e70dae5846fc8bf15d4766b313939e1d4b196fe64dd96a410bbef71fb3"
+embedded = "ddff1abf7d83264984db90c92a52888c72137dc68f51e0f11b7a92f6e09a07b3"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:14: 25:23>::eq"
+kappa = "d035c9744280b2da8de988f6aaed14f9c2d79b77b5beb3e9562034296bc7ee31"
+at = "Platform=u32"
+embedded = "488debea6509cbcee91dd1c0db98433d71fdcaaa80351d6227759e3fa9cf73a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:25: 25:29>::hash"
+kappa = "e4374819d06054d1153d61c61d9b96562c75dba2e0297fe0a313b4dac8ba3dc3"
+at = "Platform=u32"
+embedded = "89e86ec1159c6417344ca1a87c15208a3027a1e2eb75f167cf4ae17f82e07175"
+status = "residue"
+cause = "mir::Ty: __H"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:31: 25:34>::cmp"
+kappa = "46e6b6679ecc3a536b2be6b6cc2ce7cd4ca799b0d4162e9ff616039f9371c038"
+at = "Platform=u32"
+embedded = "dd25ec8b12931178256e66008ee8ddea4b1eab80f5940b8be658ff8ad4ccd7b9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:36: 25:46>::partial_cmp"
+kappa = "a9344a5f4a0fa15fb6a9d74af9b5eab2ab6bdfb5784fb2c98ecbc071b10b3c8f"
+at = "Platform=u32"
+embedded = "9bc96f864a43ec29846245c2eae58b507e945c816ad4f247e90f0277a4452583"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:48: 25:53>::clone"
+kappa = "72c7a5d34e786fab2daa93a911f2896c2177cd632bb764eaafaa8d04d2c7cd87"
+at = "Platform=u32"
+embedded = "5e92dc3148594fd255304e622f3802863a4dd8a55c39f6581285581328b9b02e"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "cargo-platform::<impl at src/lib.rs:25:55: 25:60>::fmt"
+kappa = "d73e5013e57c5fc999ff093d5a3950f478f04a5f8d2460315d3eb75151cc8a91"
+embedded = "2ef3f693cf297f1e525222d54bbf575f9a7e25c5de4fcaefd8c68f870e3f3e13"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "cargo-platform::Platform::check_cfg_attributes"
+kappa = "bf9bd023873f6d3b2527735e39fc7cc3946ecabb6112b00ceadf98d1826049fd"
+embedded = "92e5e9c55124f8b15ab830e6c793bdd38120250651625c3968ff8626ff8a59c7"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "cargo-platform::Platform::check_cfg_attributes::check_cfg_expr"
+kappa = "335a38d1b512ff5f4906ba395ed378c6bf72402a5cb7b941ec3ba73eec6a6e3f"
+embedded = "1eef77e56adc7987d47cd802f7294c6edc3099e7f4fc9e2e17d0c39224ad9141"
+status = "residue"
+cause = "mir::Ty: CfgExpr"
+
+[[fn]]
+path = "cargo-platform::Platform::check_cfg_keywords"
+kappa = "31edd7d4ca872d2df989dbc5f4aba8056353512b3f967536e5586b33587f02be"
+embedded = "8088ab34b2c845c963972ada644fc812e0ad6dcf8484216a6420eb76a04cfc2c"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "cargo-platform::Platform::check_cfg_keywords::check_cfg_expr"
+kappa = "d49790f269d2073ee7fb3771f53cc1e48c0af0862e7440934c89c9e37710e63e"
+embedded = "5a0a43b82dc0ed28bad6d68b483d6c74e1e3a787605a622861c9b0e41dc0a8ee"
+status = "residue"
+cause = "mir::Ty: CfgExpr"
+
+[[fn]]
+path = "cargo-platform::Platform::deserialize"
+kappa = "c4b3c35eb56648fdf3938991eec3513a8c18b94e7d80b859ba076c8755431451"
+at = "D=u32, Platform=u32"
+embedded = "fcabf1926127d038ca20dddb051ea5163d1cd1a9dfe427e8b1a0e1996e031448"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <String as Deserialize>::deserialize"
+
+[[fn]]
+path = "cargo-platform::Platform::fmt"
+kappa = "d10ebf7aea94c492af0f7ef1cf9ea20aa6b558a6a83b9504c6f23b62260448df"
+embedded = "23c9d04bd4d5bd5d5c45965aa69c4d7298e90d97b53183b991027e485c2db2ec"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "cargo-platform::Platform::from_str"
+kappa = "629adf5a115c8a245a0f3a5eb05b3db10b976c63a11aef461b1c182cc02f3e29"
+at = "Platform=u32"
+embedded = "18c55ea073228d88957307cdbcc7968dac1be187534153ac07e874a4eafec3bb"
+status = "residue"
+cause = "mir::Ty: error::ParseError"
+
+[[fn]]
+path = "cargo-platform::Platform::matches"
+kappa = "0a28f86b5f6318dbeaa9929b5fab8e7e41da6a38cab69e0db74dd326edeb95a1"
+embedded = "6e42a98adf883e76906b789fcebd7a8e81784cbcba932ed53ef6458b6696cf7c"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "cargo-platform::Platform::serialize"
+kappa = "94a3fa76dbb0eec25ae7d1f738f9807a82219fca3aec0e4eb75d804c1fd3829a"
+at = "Platform=u32, S=u32"
+embedded = "2e5d1f3d8dba13455e3f94393ffd4c3f6165387b787a8d29a757bb8a6d4873a7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString, which u32 does not implement in core"
+
+[[fn]]
+path = "cargo-platform::Platform::validate_named_platform"
+kappa = "a3cfac664755b93cfbab2f23837f643865c81e20f3b013d02cd1299ef163488d"
+embedded = "8cdcad7a86ffc9e1b318a3c8aed98dbfdaebcd315a43bd7f8b671acf77508371"
+status = "residue"
+cause = "mir::Ty: error::ParseError"
+

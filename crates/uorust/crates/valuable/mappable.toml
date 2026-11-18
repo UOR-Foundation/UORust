@@ -1,0 +1,109 @@
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:110:13: 110:56>::size_hint"
+kappa = "2e457bff14c9c274154e48233a2c5add6d688451728adde54b0a923fffbfea55"
+at = "T=u32"
+embedded = "0a4c36c29297657cb3c903598c6d3e7d488ddcdedf9a31d967b550c129acfe64"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Mappable, which u32 does not implement in core"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:110:13: 110:56>::size_hint#2"
+kappa = "8aac5b89c77fe085a943fec4b90699922ace45f0768900f4bd5f25771c4a01ca"
+at = "T=u32"
+embedded = "b95bed017b43169f0caae051aa998a1ffbf81b9530abda81ca886a21e5ccce9a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Mappable, which u32 does not implement in core"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:110:13: 110:56>::size_hint#3"
+kappa = "b8c7a190d3e730e2355435489709a996eb6f130357c63f2001f7c6762509a4fb"
+at = "T=u32"
+embedded = "f53c04e6b360c5f9347ffbacd11ec96253656b62a26705f986d25cb00ac095a1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Mappable, which u32 does not implement in core"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:110:13: 110:56>::size_hint#4"
+kappa = "967014755202ba3a2e2ecdd5d25575421424a0c9f337d9e9068f0e970138fabe"
+at = "T=u32"
+embedded = "64f60cd17892f92e90f0e91be7cc5a6433bc86eff8dacec40cc03fe1baf46339"
+status = "residue"
+cause = "mir::Ty: Rc<u32>"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:110:13: 110:56>::size_hint#5"
+kappa = "4c9ede9350928863b48890167d5aebaf0352b0d902a22f39ca37d720b1fc478a"
+at = "T=u32"
+embedded = "606241b02189eb571d71651e366df2b19a99bce6baf8b3b7d1f024f0cb4d2d57"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:171:1: 171:38>::fmt"
+kappa = "e867b413954ced3d6d411defcb3249b53aa52d6428deb4981f02dbb5ac84633a"
+embedded = "db30a0213ea163ae3b131b05a576b64f10c4be42fa73438b04032a271b1c8330"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:171:1: 171:38>::fmt::<impl at src/mappable.rs:177:9: 177:45>::visit_entry"
+kappa = "28feb8c0a335579e8827fb11ee0b96d4399f8ad75572217cb621dccb12633705"
+embedded = "b24548dccdef56fd7afae2504e538f33dd77f54b8b1dcee5b4d843892998a171"
+status = "residue"
+cause = "mir::Ty: DebugMappable<'_, '_>"
+
+[[fn]]
+path = "valuable::mappable::<impl at src/mappable.rs:171:1: 171:38>::fmt::<impl at src/mappable.rs:177:9: 177:45>::visit_value"
+kappa = "a6bd3e1a6ba377053638bbc0a11846b802038f5a4cae58bf52cafce93384462f"
+embedded = "3eebff31dcc4ad36db6ab78c6b041528e64785db56434b033d6d69f72444300e"
+status = "residue"
+cause = "mir::Ty: DebugMappable<'_, '_>"
+
+[[fn]]
+path = "valuable::mappable::BTreeMap::as_value"
+kappa = "9937dcb64f1c5c9b7264908cde899d176c287aa6e3ae66795d89d2678ac52ecc"
+at = "K=u32, V=u32"
+embedded = "eb9be0bd9042ca3abfe05449e8e0126390c6011b4a09fea4bac5f007b352f5c4"
+status = "residue"
+cause = "mir::Ty: value::Value<'_>"
+
+[[fn]]
+path = "valuable::mappable::BTreeMap::size_hint"
+kappa = "95f86a32972fa131759c261c6d37715c16754ab7c6f7cac452ab2b1c4040868c"
+at = "K=u32, V=u32"
+embedded = "e677311e4dfc84bfcae6d07451cb61a1ecefc8d57ecf6b5faf976d1b72a5cf26"
+status = "residue"
+cause = "mir::Ty: BTreeMap<u32, u32>"
+
+[[fn]]
+path = "valuable::mappable::BTreeMap::visit"
+kappa = "a22be56957d4cc069db065e0c13c5be784d23a27037f4a9abb08173a021ac45f"
+at = "K=u32, V=u32"
+embedded = "45b356aae52354646201b860cd5a986011db69b0d0ac56e73d832c560f250831"
+status = "residue"
+cause = "mir::Ty: BTreeMap<u32, u32>"
+
+[[fn]]
+path = "valuable::mappable::HashMap::as_value"
+kappa = "9a7f303c602f1c4c748386566b1d2c2107f6dab2020f5ff7adfccc154185dfee"
+at = "K=u32, S=u32, V=u32"
+embedded = "0cf16a2c252e0a443586fa8c36eb00b3dcb798c8d1213d9bd0aa0176570149da"
+status = "residue"
+cause = "mir::Ty: value::Value<'_>"
+
+[[fn]]
+path = "valuable::mappable::HashMap::size_hint"
+kappa = "b9eb3d3ac17ed380a3e0a11b65231d682c296dd15140b899b82de03fd7f867e0"
+at = "K=u32, S=u32, V=u32"
+embedded = "16f9858a734da641fd56d36291f27fb9a5c33e7e563b644b07719b93faf36660"
+status = "residue"
+cause = "mir::Ty: HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "valuable::mappable::HashMap::visit"
+kappa = "bbb41afe9c6995038f9b7d19376c5462d883259262d7f345f5b2cbca2ea1287c"
+at = "K=u32, S=u32, V=u32"
+embedded = "286b60973f23a10e301cea23332c6e5e82a923d36c6b3eed9f9559392d9adbf0"
+status = "residue"
+cause = "mir::Ty: HashMap<u32, u32, u32>"
+

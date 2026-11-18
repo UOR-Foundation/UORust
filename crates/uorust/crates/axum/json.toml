@@ -1,0 +1,101 @@
+[[fn]]
+path = "axum::json::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/macros.rs:282:9: 282:46>::deref"
+kappa = "26a1b48bdfced4493d2f719488869a44895326ac1ee86d627102969f257bf4e4"
+at = "T=u32"
+embedded = "924b6b0992a4c9bc19692aa24ae6e9d493a992d01413aba5689423ccb2c452bd"
+status = "residue"
+cause = "mir::Ty: Json<u32>"
+
+[[fn]]
+path = "axum::json::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/macros.rs:291:9: 291:49>::deref_mut"
+kappa = "83d37afc402dc1d20cad353c1ee1e498ee269ad823da7bd9e5bb775e9c23be30"
+at = "T=u32"
+embedded = "2a8b4636561b702b44cf1f2bd26ca661aba8caaa4e6a2db604b9d7c36962e43c"
+status = "residue"
+cause = "mir::Ty: Json<u32>"
+
+[[fn]]
+path = "axum::json::<impl at src/json.rs:94:10: 94:15>::fmt"
+kappa = "521840d23350259fe7a8a740d05cf3dbd4e43f3372583d700c03457e1e78ce7b"
+at = "T=u32"
+embedded = "504ddca09a4994be96e0ddffff773b19cf4c11e4faae67a5ba9a9f50edd0204f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::json::<impl at src/json.rs:94:17: 94:22>::clone"
+kappa = "dc156dbd6ce88ccda215ce88b5603f5258734c4016992f7af84e8fe968ee1339"
+at = "T=u32"
+embedded = "d58df7d7c197a90c5f4497c4c1d64dabe57550a4bf138b383e96a7f1ad7bc352"
+status = "residue"
+cause = "mir::Ty: json::Json<u32>"
+
+[[fn]]
+path = "axum::json::<impl at src/json.rs:94:30: 94:37>::default"
+kappa = "799788610ce9951700b46333b325ddd86fbe68f51d6e7e5bd8939eb3d2ecc401"
+at = "T=u32"
+embedded = "72447b66b84619303a7a279fca5afca6779643703ccb482a198ac1c1be0a9071"
+status = "residue"
+cause = "mir::Ty: json::Json<u32>"
+
+[[fn]]
+path = "axum::json::Json::from"
+kappa = "3110eaedd9a40bb1470ff09c3e3630e1308f0d6e14940a16f8643c5f86974880"
+at = "T=u32"
+embedded = "e75d58c257b22a7cda830328533c20936484545cee7e2ab86002d11e6bb467a3"
+status = "residue"
+cause = "mir::Ty: json::Json<u32>"
+
+[[fn]]
+path = "axum::json::Json::from_bytes"
+kappa = "2f3c682c32f71c10d35703a6ca7d1bac39b0c7915afac59f07b2786af581475e"
+at = "T=u32"
+embedded = "17b35970cbe2e697eed032740034762c136dd8b40f221359e27073ccc0d389cb"
+status = "residue"
+cause = "mir::Ty: json::Json<u32>"
+
+[[fn]]
+path = "axum::json::Json::from_request"
+kappa = "9af7f170e919a4609e66dabfffb74e644d7cea9071d425acfeec010856c1d9db"
+at = "S=u32, T=u32"
+embedded = "0b8142612951321ddf1afd7025078d99123711123a4f5f6d95850b7ac0c73651"
+status = "residue"
+cause = "mir::Ty: {async fn body of <json::Json<u32> as axum_core::extract::FromRequest<u32>>::from_request()}"
+
+[[fn]]
+path = "axum::json::Json::from_request#2"
+kappa = "fc57b02c6e524245ecd69785a095e6e837dfb1be0932e38429f124309e89113c"
+at = "S=u32, T=u32"
+embedded = "120a9f0f3937c64dcb77ffe99a9c338e545e3b6b27051781399a031798be39d3"
+status = "residue"
+cause = "mir::Ty: {async fn body of <json::Json<u32> as axum_core::extract::OptionalFromRequest<u32>>::from_request()}"
+
+[[fn]]
+path = "axum::json::Json::into_response"
+kappa = "28787a5c8c3d858fa63620b51bb18f1addee47df10153a4b92884fc38b570e93"
+at = "T=u32"
+embedded = "9d25b20725294949dd316652a2db57532f3a131771693661888e7034262c18c6"
+status = "residue"
+cause = "mir::Ty: axum_core::body::Body"
+
+[[fn]]
+path = "axum::json::Json::into_response::make_response"
+kappa = "b1586cea6f8de804dd27476faa8dc3b57c730bb14d5db557f32a288abe7486a0"
+embedded = "c220aaaa486ee05e440af70699370ac0082ef538e00e10250ec0c424fb601e10"
+status = "residue"
+cause = "mir::Ty: axum_core::body::Body"
+
+[[fn]]
+path = "axum::json_content_type"
+kappa = "3182534d6e38c3e43a4b3fcea6ddc731eea2df37d20962dcb91a6543339ad583"
+embedded = "c189e8e412e5139a075b96988efffde24bf240f776ed9952d13a9ad678126c11"
+status = "residue"
+cause = "mir::Ty: HeaderMap"
+
+[[fn]]
+path = "axum::make_rejection"
+kappa = "cf2357faa5309c6adaed453a5f778195e192837e9c539e422cc4b82ea0ec4345"
+embedded = "8e4f39f3a5c65a45b85c7b939f524a4ced09bf345a5a8070f3e470e6d6d5d727"
+status = "residue"
+cause = "mir::Ty: extract::rejection::JsonRejection"
+

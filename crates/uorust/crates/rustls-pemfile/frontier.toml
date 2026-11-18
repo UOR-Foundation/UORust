@@ -1,0 +1,59 @@
+# The rustls-pemfile register (written by `uorust crate rustls-pemfile@2.2.0`; do not edit): every body of
+# rustls-pemfile's MIR at rustls-pemfile 2.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 20
+translated = 0
+residue = 20
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.pemfile]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 20
+embedded = 20
+evaluable = 20
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::BufRead"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: pemfile::Item"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pemfile::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::CertificateSigningRequestDer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::PrivateKeyDer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

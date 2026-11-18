@@ -1,0 +1,1421 @@
+# The aws-lc-rs register (written by `uorust crate aws-lc-rs@1.19.0`; do not edit): every body of
+# aws-lc-rs's MIR at aws-lc-rs 1.19.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1413
+translated = 43
+residue = 1370
+
+[module.aead]
+bodies = 189
+translated = 2
+residue = 187
+
+[module.agreement]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.bn]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.buffer]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.cbb]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.cbs]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.cipher]
+bodies = 168
+translated = 1
+residue = 167
+
+[module.cmac]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.constant_time]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.debug]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.digest]
+bodies = 64
+translated = 15
+residue = 49
+
+[module.ec]
+bodies = 72
+translated = 2
+residue = 70
+
+[module.ed25519]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.encoding]
+bodies = 50
+translated = 0
+residue = 50
+
+[module.endian]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.error]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.evp_pkey]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.fips]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.hex]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.hkdf]
+bodies = 34
+translated = 1
+residue = 33
+
+[module.hmac]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.io]
+bodies = 21
+translated = 2
+residue = 19
+
+[module.iv]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.kdf]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.kem]
+bodies = 44
+translated = 0
+residue = 44
+
+[module.key_wrap]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.pbkdf2]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.pkcs8]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.pqdsa]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.ptr]
+bodies = 56
+translated = 12
+residue = 44
+
+[module.rand]
+bodies = 12
+translated = 1
+residue = 11
+
+[module.rsa]
+bodies = 146
+translated = 0
+residue = 146
+
+[module.signature]
+bodies = 92
+translated = 0
+residue = 92
+
+[module.test]
+bodies = 24
+translated = 6
+residue = 18
+
+[module.tls_prf]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 1413
+embedded = 1413
+evaluable = 1413
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 12
+
+[[cause]]
+cause = "mir::Ty: error::Unspecified"
+bodies = 146
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 131
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_st>"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: ec::signature::EcdsaVerificationAlgorithm"
+bodies = 28
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: aead::nonce::Nonce"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: ec::signature::EcdsaSigningAlgorithm"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: error::KeyRejected"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: digest::Algorithm"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: aead::Algorithm"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: aead::aead_ctx::AeadCtx"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: cipher::Algorithm"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: aes_key_st"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: cipher::streaming::StreamingEncryptingKey"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: rsa::signature::RsaParameters"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: agreement::Algorithm"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: cipher::DecryptionContext"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: encoding::PublicKeyX509Der<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: hmac::Algorithm"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: cmac::Algorithm"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: hkdf::Algorithm"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: rsa::signature::RsaSignatureEncoding"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: cipher::DecryptingKey"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: cipher::EncryptingKey"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: cipher::streaming::BufferUpdate<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: cipher::streaming::StreamingDecryptingKey"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: encoding::Pkcs8V1Der<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pbkdf2::Algorithm"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pkcs8::Document"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pqdsa::AlgorithmID"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: signature::Signature"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: aead::Tag"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: agreement::ParsedPublicKey"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: cipher::OperatingMode"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ed25519::Ed25519KeyPair"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hmac::Key"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rsa::key::KeyPair"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rsa::key::PublicKey"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: signature::ParsedPublicKey"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BigEndian<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BigEndian<u64>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LittleEndian<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LittleEndian<u64>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TestCase"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: cipher::block::Block"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ec::key_pair::EcdsaKeyPair"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PqdsaSigningAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: aead::nonce_sequence::counter32::Counter32Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: aead::nonce_sequence::counter64::Counter64Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: agreement::AlgorithmID"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: agreement::PrivateKey"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: cipher::key::SymmetricCipherKey"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: digest::Digest"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ec::signature::AlgorithmID"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoding::Curve25519SeedBin<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoding::EcPrivateKeyBin<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoding::EcPrivateKeyRfc5915Der<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoding::EcPublicKeyCompressedBin<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoding::EcPublicKeyUncompressedBin<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hkdf::Prk"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hmac::Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: io::positive::Positive<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: kdf::kbkdf::KbkdfCtrHmacAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: kdf::sskdf::SskdfDigestAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: kdf::sskdf::SskdfHmacAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pqdsa::key_pair::PqdsaKeyPair"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_aead_ctx_st>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::PublicEncryptingKey"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: untrusted::Input<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Counter32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Counter64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Id"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: KeySize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OaepPublicEncryptingKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Pkcs1PublicEncryptingKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RsaParameters"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RsaPssSaltLength"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Unspecified"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aead::quic::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: agreement::PublicKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aws_lc::env_md_st"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cipher::AlgorithmId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cipher::padded::PaddedBlockDecryptingKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cmac::Tag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: der::Tag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: digest::digest_ctx::DigestContext"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ec::signature::PublicKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoding::Pkcs8V2Der<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoding::PqdsaPrivateKeyRaw<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::BigEndian<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian::LittleEndian<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: evp_pkey_st"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iv::FixedLength<#usize_L>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: kem::Algorithm<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: kem::DecapsulationKeyBytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: kem::EncapsulationKeyBytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pqdsa::signature::PqdsaSigningAlgorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pqdsa::signature::PublicKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: quic::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rand::SystemRandom"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::PrivateDecryptingKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::oaep::OaepAlgorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rsa::signature::RsaPssSaltLength"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls_prf::Secret"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: init: aws-lc-rs's MIR stops at mir::Operand::Constant: {alloc926: &std::sync::Once}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <u32 as ptr::Pointer>::T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BufferUpdate<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChaCha20Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DetachablePointer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DigestContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: KeyRejected"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LcHmacCtx"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ManagedPointer<*mut evp_pkey_st>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ManagedPointer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OaepPrivateDecryptingKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Pkcs1PrivateDecryptingKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::AlgorithmID"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::tls::TlsProtocolId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::unbound_key::UnboundKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: agreement::UnparsedPublicKey<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cipher::padded::PaddedBlockEncryptingKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cmac::AlgorithmId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cmac::Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: digest::AlgorithmID"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: digest::Context"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ed25519::PublicKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encoding::PqdsaSeedRaw<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endian::BigEndian<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endian::LittleEndian<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hkdf::Salt"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hmac::Context"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kem::Algorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kem::AlgorithmId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kem::Ciphertext<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: key_wrap::BlockCipherId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pqdsa::signature::PqdsaVerificationAlgorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ptr::ConstPointer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ptr::DetachablePointer<*mut aws_lc::bignum_st>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: signature::UnparsedPublicKey<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls_prf::Algorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Block"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BlockCipherId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ciphertext<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Document"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EcdsaSignatureFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EcdsaSigningAlgorithm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EcdsaVerificationAlgorithm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EdDSAParameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FixedLength<#usize_L>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KbkdfCtrHmacAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LcCBB<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OperatingMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PaddingStrategy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParsedPublicKeyFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Positive<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PqdsaVerificationAlgorithm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PrivateDecryptingKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PublicEncryptingKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RsaPadding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RsaVerificationAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Secret"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SharedSecret"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SskdfDigestAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SskdfHmacAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TlsProtocolId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZeroizeBoxSlice<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::OpeningKeyPreparedNonce<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::SealingKeyPreparedNonce<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::poly1305::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::quic::HeaderProtectionKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: agreement::ParsedPublicKeyFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_lc::evp_cipher_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::Buffer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cbb::LcCBB<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cipher::EncryptionContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cipher::UnboundCipherKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cmac::Context"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ed25519::Seed<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hmac::LcHmacCtx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kdf::kbkdf::KbkdfCtrHmacAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kdf::sskdf::SskdfDigestAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kdf::sskdf::SskdfHmacAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kem::DecapsulationKey<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kem::EncapsulationKey<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: kem::SharedSecret"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: key_wrap::AesBlockCipher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::AlgorithmID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::EncryptionAlgorithmId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rsa::signature::RsaPadding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: test::File<'_>"
+bodies = 2
+
+[[cause]]
+cause = 'mir::Ty: unsafe extern "u32" fn'
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::sha::sha3_256_digest::promoted[0]: type outside the lift: digest::Algorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::sha::sha3_384_digest::promoted[0]: type outside the lift: digest::Algorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::sha::sha3_512_digest::promoted[0]: type outside the lift: digest::Algorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: ec::PUBLIC_KEY_MAX_LEN: mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aead::MAX_TAG_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aws_lc::ED25519_PUBLIC_KEY_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aws_lc::ED25519_SIGNATURE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item cipher::block::BLOCK_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item cipher::chacha::KEY_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc926: &std::sync::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ERR_get_error"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: aws_lc::fips_version"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hex::encode: aws-lc-rs's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: )>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Aad<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AeadDirection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AesBlockCipher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cipher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConstPointer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Digest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncryptionAlgorithmId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EphemeralPrivateKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FixedSliceSequenceRandom<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KbkdfCtrHmacAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: L"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Nonce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Okm<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Prk"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Random<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Reader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SskdfDigestAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SskdfHmacAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SymmetricCipherKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::Aad<[u8; 0]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::Aad<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::LessSafeKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::OpeningKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::SealingKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::OpeningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::SealingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::nonce_sequence::counter32::Counter32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::nonce_sequence::counter64::Counter64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::poly1305::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::rand_nonce::RandomizedNonceKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::tls::TlsRecordOpeningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::tls::TlsRecordSealingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: agreement::KeyInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: agreement::ephemeral::EphemeralPrivateKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc::aes_key_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc::cbs_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc::ec_group_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc::ec_key_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc::rsa_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bignum_st"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha20_poly1305_openssh::OpeningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha20_poly1305_openssh::SealingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cipher::chacha::ChaCha20Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cipher::padded::PaddingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn signature::VerificationAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::key_pair::PrivateKey<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ed25519::EdDSAParameters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::Curve25519SeedBinType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::EcPrivateKeyBinType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::EcPrivateKeyRfc5915DerType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::EcPublicKeyCompressedBinType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::EcPublicKeyUncompressedBinType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::Pkcs8V1DerType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::Pkcs8V2DerType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::PqdsaPrivateKeyRawType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::PqdsaSeedRawType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::buffer_type::PublicKeyX509DerType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hkdf::Okm<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hkdf::PrkMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hkdf::ZeroizeBoxSlice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::der::Tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kem::buffer_type::DecapsulationKeyBytesType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kem::buffer_type::EncapsulationKeyBytesType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_wrap::KeyEncryptionKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pkcs8::Version"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pqdsa::key_pair::PqdsaPrivateKey<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::DetachablePointer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::bignum_st>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::cmac_ctx_st>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::ecdsa_sig_st>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::evp_pkey_ctx_st>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::ManagedPointer<*mut u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rand::Random<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::oaep::OaepPrivateDecryptingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::oaep::OaepPublicEncryptingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::pkcs1::Pkcs1PrivateDecryptingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::encryption::pkcs1::Pkcs1PublicEncryptingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::key::KeyPairComponents<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::key::KeySize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::key::PublicKeyComponents<std::vec::Vec<u8>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::key::PublicKeyComponents<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: test::TestCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zeroize::Zeroizing<std::vec::Vec<u8>>"
+bodies = 1

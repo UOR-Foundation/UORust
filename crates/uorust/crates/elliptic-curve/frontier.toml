@@ -1,0 +1,185 @@
+# The elliptic-curve register (written by `uorust crate elliptic-curve@0.14.3`; do not edit): every body of
+# elliptic-curve's MIR at elliptic-curve 0.14.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 177
+translated = 0
+residue = 177
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.error]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.field]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.ops]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.point]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.public_key]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.scalar]
+bodies = 95
+translated = 0
+residue = 95
+
+[module.secret_key]
+bodies = 17
+translated = 0
+residue = 17
+
+[embedding]
+bodies = 177
+embedded = 177
+evaluable = 177
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: scalar::value::ScalarValue<u32>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: scalar::nonzero::NonZeroScalar<u32>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ScalarValue<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: subtle::Choice"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: NonIdentity<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: secret_key::SecretKey<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: public_key::PublicKey<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: NonZeroScalar<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::Array<u8"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PublicKey<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::Choice"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: scalar::blinded::BlindedScalar<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BlindedScalar<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SecretKey<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::Limb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BatchInvert"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BatchNormalize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Double"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Group"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by LinearCombination"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MulByGeneratorVartime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<C as Curve>::FieldBytesSize as hybrid_array::typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BatchInverter::invert_with_external_scratch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::ByteOrder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::Odd<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subtle::CtOption<u32>"
+bodies = 1

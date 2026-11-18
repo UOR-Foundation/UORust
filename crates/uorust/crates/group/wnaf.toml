@@ -1,0 +1,173 @@
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:251:10: 251:15>::fmt"
+kappa = "f180375e15ede90b0dbbf2d60b3e3f0d8e7557192c223aca92aa69726985c9de"
+at = "B=u32, S=u32, W=u32"
+embedded = "3fa827c037210298c734ab367624c7887341949cee63cfd654ed8059aa1b0cb6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:407:10: 407:15>::clone"
+kappa = "d1d3b369b83598e28e747af70cc9a027130eb98a8cee5b05883907797bcb2349"
+at = "F=u32, WINDOW_SIZE=u32"
+embedded = "b3161aa4ca67e9b043a9cba21dd399fa6fc88f821228b18dac8b6d47662ed274"
+status = "residue"
+cause = "mir::Ty: wnaf::WnafScalar<u32, u32>"
+
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:407:17: 407:22>::fmt"
+kappa = "91b1dab9ce79bdb50fe4d19eef71bc1a1d89263200df2a4582c33acaabfc5719"
+at = "F=u32"
+embedded = "f06977562d35624fe16188984364e63acdc442180c1c4155b8919580360b970e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:474:10: 474:15>::clone"
+kappa = "1a77ab5a7f782afc286bf97ab8ffc58bb681f3b3d2c585f6e03609c405c1f8c7"
+at = "G=u32, WINDOW_SIZE=u32"
+embedded = "d3885153b85239a10a3b195d7f395d65732ad446687eb92dc238d25d77dd8820"
+status = "residue"
+cause = "mir::Ty: wnaf::WnafBase<u32, u32>"
+
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:474:17: 474:22>::fmt"
+kappa = "0e0319e92c6696d207dcccd13e5dac8524d6efb3fdcc49735a20d2881f5727bf"
+at = "G=u32"
+embedded = "b7ee45bdde2b01a9717563f7578fac142ca684417140bca3c7359d60cc0b727f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "group::wnaf::<impl at src/wnaf.rs:504:1: 505:34>::mul"
+kappa = "8d9769f642683ef848929bb3746d95f68ec1499f0fc319000cd45810370e0d21"
+at = "G=u32"
+embedded = "4fffbfcf714fa301d53a90d31edb6c1ac428580f5086f0743789a72bf9d184b4"
+status = "residue"
+cause = "mir::Ty: WINDOW_SIZE"
+
+[[fn]]
+path = "group::wnaf::LimbBuffer::get"
+kappa = "399a9237645f4861b6a6b773bd50be7f9280b76a7ea47cd173ceca1d2c4480ee"
+embedded = "5832bdeec3742a6c3549c39298cb945aa4f803db4c28c0f91dd9eaad546b5be8"
+status = "residue"
+cause = "mir::Ty: LimbBuffer<'_>"
+
+[[fn]]
+path = "group::wnaf::LimbBuffer::increment_limb"
+kappa = "87f7e907ff6a836ceca09b5e5c4c1eb35be14a6b744b6434c58ddcbddd18f373"
+embedded = "f541d3dc62290347f96458e2dbf0c9b214b171f4bd33788337cd2e7dd90772ce"
+status = "residue"
+cause = "mir::Ty: LimbBuffer<'_>"
+
+[[fn]]
+path = "group::wnaf::LimbBuffer::new"
+kappa = "ac28b53afdeeb270b876b157a6fd595c50be1d5bc914deff01192b8dd7417507"
+embedded = "91644ba7be36732bdc3761d3b9f348ba3b11a1ae2f576977c6e44ccc66f5807e"
+status = "residue"
+cause = "mir::Ty: wnaf::LimbBuffer<'_>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::base"
+kappa = "390294bf6f9d1785e0f2e81e3633ea7f703f2cb62b25bb0ba4dc5854cee3421f"
+at = "G=u32"
+embedded = "810ad3645c64a92b3d3acba40cd8b49fe642d89fbd5d3a0f0ecbcbe9ff9b5034"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<usize, &[u32], &mut alloc::vec::Vec<i64>>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::base#2"
+kappa = "bb46d4f010ef34a678df189efd7710013f64646739c507423308b055dc04a873"
+at = "B=u32, G=u32, S=u32"
+embedded = "6cf147c97a02c7030721adaaf72ade5e296fe126820b297a2c152824bf5a6045"
+status = "residue"
+cause = "mir::Ty: Wnaf<usize, u32, u32>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::default"
+kappa = "a2be768042759bd717b4800d3aaa6f8798883157459575f50c344e0a170009bf"
+at = "G=u32"
+embedded = "a95eb64971b89b57a39e9997d2a7429bc8dc6ca0ba33d3ec1ab3dbf40e3f3a59"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<(), alloc::vec::Vec<u32>, alloc::vec::Vec<i64>>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::new"
+kappa = "2624fc9748773c13c40f5d1f97eedb4161c847ca72ac538644f07e842c64e6d4"
+at = "G=u32"
+embedded = "d4388fe0d56ae4d1f69e9c259e3cac39759a18f5f2a48e8ea1bf7aa7434e9df2"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<(), alloc::vec::Vec<u32>, alloc::vec::Vec<i64>>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::scalar"
+kappa = "29287a559fb17247ed328d71a28e0b726c989bf512c57e3759d9d6cda859bab7"
+at = "G=u32"
+embedded = "4ebbbb32fe5532329aacbc9d68dc09939b5e3e28b24465ef04315b506a814082"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<usize, &mut alloc::vec::Vec<u32>, &[i64]>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::scalar#2"
+kappa = "180b2dd3a613e02ca6a107dd18a30458e6ea02d4b0f3d1fa32970fbf638dc6fe"
+at = "B=u32, G=u32, S=u32"
+embedded = "cf12c6b2d7858a53b481d38ba980dc7feffad7ca07041e1dc7d53e4175be8827"
+status = "residue"
+cause = "mir::Ty: Wnaf<usize, u32, u32>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::shared"
+kappa = "633f00ad8923015e9fd342b63eed8ba4cdda1d473ae5580a23a4fbcd005900a9"
+at = "G=u32"
+embedded = "4d8cb498553630ecf237ed97e65a446c3aaf479e30401fcd473e6d5ea93c86a3"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<usize, &[u32], alloc::vec::Vec<i64>>"
+
+[[fn]]
+path = "group::wnaf::Wnaf::shared#2"
+kappa = "1481c31a35d1cae061ca8e38abcee4f1c06a21fe5253dd9eea5884cc5de063c3"
+at = "G=u32"
+embedded = "0f48c1bcd517dd0c1f07a4dd3f333048b039ce6b6bc3285c04b4138c069f59cc"
+status = "residue"
+cause = "mir::Ty: wnaf::Wnaf<usize, alloc::vec::Vec<u32>, &[i64]>"
+
+[[fn]]
+path = "group::wnaf::WnafBase::new"
+kappa = "99d4f4aa6a0057360621288e1ae0162ed8283476c69797de347da50bf5d878b5"
+at = "G=u32, WINDOW_SIZE=#usize_WINDOW_SIZE"
+embedded = "ba07c4094264a07c07bbf9724830124529c97caef4e00ea3e5e2e02fd14bb6d9"
+status = "residue"
+cause = "mir::Ty: wnaf::WnafBase<u32, #usize_WINDOW_SIZE>"
+
+[[fn]]
+path = "group::wnaf::WnafScalar::new"
+kappa = "fe8a0b5bc0d4535612add168cb973527ff1c8fb84f0d433085ec4a7015d160ca"
+at = "F=u32, WINDOW_SIZE=#usize_WINDOW_SIZE"
+embedded = "a6c2f181eb2beab3708054e07d7b182c3d45b18d3e38f499e997916d089fe69d"
+status = "residue"
+cause = "mir::Ty: wnaf::WnafScalar<u32, #usize_WINDOW_SIZE>"
+
+[[fn]]
+path = "group::wnaf_exp"
+kappa = "8bfa8d291094cc55554bb433d03b5604e524ad5a700069281826eaa89151dfbd"
+at = "G=u32"
+embedded = "5eabbc16eea5b6482dd099c3cecc7c19d8592e0551d501811abdcc93fde757de"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Group, which u32 does not implement in core"
+
+[[fn]]
+path = "group::wnaf_form"
+kappa = "431ecbfebe467f2a94b786bcc18bbf4525c45072b4e7c0dce09453829c250d61"
+at = "S=u32"
+embedded = "c76bcf0bc021bb99bda0293734dd4e313c208659de223b460a4b8a2d3801521c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "group::wnaf_table"
+kappa = "6052c0ee679284a719ad1aad46f64823c8a7df1edebe0b81ba483f95563b4b2e"
+at = "G=u32"
+embedded = "511978e23ac26fc2d444017d2e609004bb95f01cf3d687f433ee3459c2edba06"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::truncate"
+

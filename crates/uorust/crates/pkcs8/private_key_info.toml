@@ -1,0 +1,93 @@
+[[fn]]
+path = "pkcs8::ATTRIBUTES_TAG"
+kappa = "4b9bd5599aedf33742ee24a4fb9a90c253890a14154d223e4eaab8cdc1d10974"
+embedded = "34d97945c2948cb40076532ffe5d5ac6619d75c084fc451951183c6c0c5ff973"
+status = "residue"
+cause = "mir::Ty: der::TagNumber"
+
+[[fn]]
+path = "pkcs8::PUBLIC_KEY_TAG"
+kappa = "5f68a80992019f38e703766f06d536c9b4a79d00a230be0e01d3ec4ea78c370b"
+embedded = "765e5e721f3ce9b0cbc7986c8cf6aecfa3cf3f1dd3e96b8077e72dd371c240f8"
+status = "residue"
+cause = "mir::Ty: der::TagNumber"
+
+[[fn]]
+path = "pkcs8::private_key_info::<impl at src/private_key_info.rs:94:10: 94:15>::clone"
+kappa = "8ac261801cdaab90926c709b9f1f84f000e68c230c1e58212ddbc0081a494fab"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "e79384fbd126dc61981d8d35a589ee489f9594425d12934ab356045de34dae4f"
+status = "residue"
+cause = "mir::Ty: private_key_info::PrivateKeyInfo<u32, u32, u32>"
+
+[[fn]]
+path = "pkcs8::private_key_info::BitStringRef::as_bit_string"
+kappa = "c72a7f1c7605af478764d2cd97726ecf886a2a76bb8b6b1a6e32d603894344d3"
+embedded = "182655cded1e96e8292ab22e57d664b1095212b93caf7a5e27ac576baeb6efc0"
+status = "residue"
+cause = "mir::Ty: der::asn1::BitStringRef<'_>"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::decode_value"
+kappa = "917c29071fbf325790aa0a7b9d41125fe3baf75386c12e5711f61246610e455d"
+at = "Key=u32, Params=u32, PubKey=u32, R=u32"
+embedded = "d1c919afb423e2c3d1bcbc889679e0e62586025e4dfc56fd2400605f9246f77d"
+status = "residue"
+cause = "mir::Ty: private_key_info::PrivateKeyInfo<u32, u32, u32>"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::encode_value"
+kappa = "6175739c8c4ac9502b1ad313556f7746a760a920af1b729f20c762f5cb25900d"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "fbfa538a3ed536e5b5b6afe87c8924f599c2d3c5fade8f3bedac2df3e6465388"
+status = "residue"
+cause = "mir::Ty: der::Error"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::fmt"
+kappa = "6932336b0547579321637336bae86e85d05b33de5591cb5caa21686dc1d2550a"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "94961f075c4119eaa3f967d52d08eaacab2edc85af9de9945d5f5d88dcb2b56b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::new"
+kappa = "e6575de337dd1f7d266bd2981438e7cf870dfe4bc18f85ef6f2c22a150d4e014"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "161e3b04216f92a72073c33c79a2d0ce0709fea0ea924fde28084d3f76b624ad"
+status = "residue"
+cause = "mir::Ty: private_key_info::PrivateKeyInfo<u32, u32, u32>"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::public_key_bit_string"
+kappa = "07b5512f416102a166cf38bb07ecb730a1dcf1f2cbd759f618833a90c2dff59f"
+at = "PubKey=u32"
+embedded = "b586b679917f4624f678625f69ae873e739130a555c03b1ea1baec2ddc6898e7"
+status = "residue"
+cause = "mir::Ty: der::asn1::BitStringRef<'_>"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::try_from"
+kappa = "73ae9a697ebc69d6ea22c4064fcdf26664a7c89dfdbf8c09b53f77ccd55258aa"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "7dd99efdc786aabd9aab655be937b363915ec4cea2bbebf4a3b8bb939d9eb69c"
+status = "residue"
+cause = "mir::Ty: private_key_info::PrivateKeyInfo<u32, u32, u32>"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::value_len"
+kappa = "c2bf618daf7b219f867dfb5855f71c3fef4bdee8346306d22d2d273e693e96b8"
+at = "Key=u32, Params=u32, PubKey=u32"
+embedded = "c35a1ed92a0cafe7b8d57afddd7cf7760f4e2ddf627ec9c9d6e928ab7a43a15a"
+status = "residue"
+cause = "mir::Ty: der::Length"
+
+[[fn]]
+path = "pkcs8::private_key_info::PrivateKeyInfo::version"
+kappa = "3f3c7caad5603c0330ee764ba9912431e770392dbb68516a3e3503e4ad5961a4"
+at = "PubKey=u32"
+embedded = "8f7ef9f47bed7ca107c20c01154e6bce40560bb93519cef3df45169bafbc6d2d"
+status = "residue"
+cause = "mir::Ty: version::Version"
+

@@ -1,0 +1,1237 @@
+# The combine register (written by `uorust crate combine@4.6.9`; do not edit): every body of
+# combine's MIR at combine 4.6.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1569
+translated = 32
+residue = 1537
+
+[module.crate]
+bodies = 4
+translated = 1
+residue = 3
+
+[module.error]
+bodies = 121
+translated = 1
+residue = 120
+
+[module.parser]
+bodies = 1078
+translated = 23
+residue = 1055
+
+[module.stream]
+bodies = 366
+translated = 7
+residue = 359
+
+[embedding]
+bodies = 1569
+embedded = 1569
+evaluable = 1550
+blocked = 19
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<u32"
+bodies = 406
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<"
+bodies = 115
+
+[[cause]]
+cause = "mir::Ty: Tracked<u32>"
+bodies = 106
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: error::UnexpectedParse"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: parser::token::Satisfy<u32"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Error<u32"
+bodies = 23
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Parser"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: error::StringStreamError"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: parser::function::FnParser<u32"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: error::Info<u32"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: StringStreamError"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Errors<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: stream::read::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CompleteStream<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: MaybePartialStream<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: PartialStream<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: SourcePosition"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by StreamError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: easy::Error<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::position::SourcePosition"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: easy::Stream<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::Commit<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<&[u8]"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: position::Stream<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Info<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Errors<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IndexPositioner"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SliceStream<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: buffered::Stream<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: span::Stream<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::position::IndexPositioner"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::span::Span<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Positioner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RangeStreamOnce"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Commit<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Item"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::Commit<"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::error::Expected<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::error::Message<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::range::Recognize<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::token::Token<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::position::Stream<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&mut u32 as ResetStream>::checkpoint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AnyPartialStateParser<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AnySendPartialStateParser<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AnySendSyncPartialStateParser<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Ignore<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LookAhead<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NoPartial<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Span<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: With<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: X"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: buf_reader::BufReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: combinator::Try<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<char"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<std::option::Option<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Or<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AndThen<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::FlatMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Map<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::MapInput<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Spanned<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::error::Silent<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::error::Unexpected<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::Skip<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::Then<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::ThenPartial<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::ThenRef<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::With<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sequence::Skip<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: state::Stream<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::CompleteStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::IteratorStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::PointerOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::decoder::Decoder<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Range"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ResetStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by StreamOnce"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::combinator::from_utf8: combine's MIR stops at type outside the lift: std::str::Utf8Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Between<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bufferless"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Count<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Digit<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ErrorOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FirstMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Lazy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Op"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Opaque<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Optional<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseResult<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PartialMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipCount<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipCountMinMax<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipMany1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipMany<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipRepeatUntil<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SkipUntil<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Spanned<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TakeUntilByte2<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TakeUntilByte3<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TakeUntilByte<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnconsStart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytes<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytes_cmp<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: combinator::FromStr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Info<char"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Info<u8"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Tracked<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: length_prefix<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::FirstMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::PartialMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::byte::TakeUntilByte2<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::byte::TakeUntilByte3<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::byte::TakeUntilByte<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::char::Digit<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Choice<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Optional<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Either<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Factory<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Ignore<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Lazy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::LookAhead<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::NotFollowedBy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Opaque<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Recognize<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::Try<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::function::EnvParser<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::range::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::range::RecognizeWithValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Chainl1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Chainr1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::CountMinMax<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Many1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Many<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::RepeatUntil<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SepBy1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SepBy<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SepEndBy1<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SepEndBy<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Sink"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::TakeUntil<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::Between<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Any<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Eof<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::NoneOf<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::OneOf<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Position<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Produce<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::SatisfyMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Tokens<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::TokensCmp<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::token::Value<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::PartialStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::PointerOffset<[u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::PointerOffset<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::SliceStream<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::buf_reader::BufReader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::buf_reader::Bufferless"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Stream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::span::Stream<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: take_until_bytes<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Positioned"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RangePositioner"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <&[u32] as stream::StreamOnce>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <&str as stream::StreamOnce>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::IteratorStream<u32> as stream::StreamOnce>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <stream::SliceStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Choice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Decoder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Eof<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Factory<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Input"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IteratorStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Many1<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Many<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NotFollowedBy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OneOf<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Or<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PointerOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Q"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RecognizeWithValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Silent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SuggestSizeHint<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TakeRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn parser::Parser<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: easy::Info<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ParseResult<&u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::byte::bytes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::byte::bytes_cmp<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::byte::take_until_bytes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::A<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::B<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::C<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::D<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::E<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::F<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::G<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::H<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::I<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::J<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::K<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::L<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::M<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::N<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::O<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::P<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Q<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::R<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::S<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::T<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::U<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::V<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::X<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Y<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::choice::Z<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnyPartialState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnyPartialStateParser<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnySendPartialState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnySendPartialStateParser<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnySendSyncPartialState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::AnySendSyncPartialStateParser<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::FromStr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::InputConverter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::combinator::NoPartial<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::Take<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::TakeFn<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::TakeRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::TakeUntilRange<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::TakeWhile1<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::TakeWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::range::length_prefix<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Count<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Escaped<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::EscapedState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::Iterate<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipCount<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipCountMinMax<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipMany1<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipMany<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipRepeatUntil<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SkipUntil<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::repeat::SuggestSizeHint<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState10<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState11<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState12<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState13<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState14<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState15<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState16<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState17<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState18<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState19<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState1<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState20<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState2<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState3<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState4<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState5<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState6<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState7<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState8<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::PartialState9<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::sequence::SequenceState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repeat::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repeat::Sink"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::MaybePartialStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::buf_reader::Buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::buffered::Stream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Errors<u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Info<char"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::easy::Info<u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::read::Stream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::state::Stream<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: token::Token<u32>"
+bodies = 1

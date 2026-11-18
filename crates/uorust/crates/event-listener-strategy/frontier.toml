@@ -1,0 +1,79 @@
+# The event-listener-strategy register (written by `uorust crate event-listener-strategy@0.5.4`; do not edit): every body of
+# event-listener-strategy's MIR at event-listener-strategy 0.5.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 37
+translated = 1
+residue = 36
+
+[module._]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 34
+translated = 1
+residue = 33
+
+[embedding]
+bodies = 37
+embedded = 37
+evaluable = 37
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: FutureWrapper<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: NonBlocking<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Blocking"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&mut u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: _::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: _::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event_listener::EventListener"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 1

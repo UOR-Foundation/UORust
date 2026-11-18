@@ -1,0 +1,115 @@
+# The bit-vec register (written by `uorust crate bit-vec@0.10.2`; do not edit): every body of
+# bit-vec's MIR at bit-vec 0.10.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 135
+translated = 19
+residue = 116
+
+[module.crate]
+bodies = 134
+translated = 19
+residue = 115
+
+[module.util]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 135
+embedded = 135
+evaluable = 135
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: BitVec<u32>"
+bodies = 62
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MutBorrowedBit<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_ones"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Blocks<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Not"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <static"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <B as BitBlock>::bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as BitBlock>::bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as BitBlock>::bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BitVec::from_bytes_general"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BitVec::from_elem_general"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BitVec::from_fn_general"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BitVec::with_capacity_general"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeserializeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterMut<'_"
+bodies = 1

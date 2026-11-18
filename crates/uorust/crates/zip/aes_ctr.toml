@@ -1,0 +1,58 @@
+[[fn]]
+path = "zip::aes_ctr::<impl at src/aes_ctr.rs:21:10: 21:15>::fmt"
+kappa = "134491694e88e178b87e6d96b7a9b1e5245f074588f0486e4ae950f976a712f1"
+embedded = "ba4a58f07ae545c52f6e6909b06c4ad72a34206001445076372b18f00c358fa9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::aes_ctr::<impl at src/aes_ctr.rs:24:10: 24:15>::fmt"
+kappa = "031ce1c09b4b5799cb0330702e6211281b6c4add08956a5afa71ad2776bd4d8b"
+embedded = "43a3fa3271a3a77c106ce9e67f5aa9e21920647ad20dbd2455e26d6dd412469e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::aes_ctr::<impl at src/aes_ctr.rs:27:10: 27:15>::fmt"
+kappa = "2310afff4d2c449ffb4133e0b6f0f6c4ea4dfdf22295e597900889de95308c53"
+embedded = "6b09865d65214c0a6e885b68337917f2a5d826858526ecde7a0642dcb9c126ca"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::aes_ctr::AesCtrZipKeyStream::crypt_in_place"
+kappa = "c00b09e30eb32f444f53059d68ae2418882afd757caa0e400ebb2ceb8f2bdc08"
+at = "C=u32"
+embedded = "f0cf06a968ef8a7c6f846f8b8e95bfd3ceebe0524f3d01f8034888df8d9db036"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "zip::aes_ctr::AesCtrZipKeyStream::drop"
+kappa = "e8e7a2fb42c2846d8c900d817ed4e56c19d5644d8de88df19d97970b6e68ccb8"
+embedded = "ab43be681511aff2774c8d5dbc337b465fe70aac5e591c9769cb6bd3889343c3"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "zip::aes_ctr::AesCtrZipKeyStream::fmt"
+kappa = "8eb319b03e62cf6cc3d7da30a683c9cfd30aec1af36a56a814c5373759fd7c44"
+embedded = "4ab8d440b167669fadedd476881c2d314b215b3b61b442b51a170d339207b6cc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::aes_ctr::AesCtrZipKeyStream::new"
+kappa = "52cb07af6554b0f7664f43576b073c1b1450cea44e5497ccf3b8b9e1da9d0c39"
+at = "C=u32"
+embedded = "26c6a38faaae0ea99f5b30eff9cb3988c33bd3ed28dd0eb6af7f9df4fc17f9d7"
+status = "residue"
+cause = "mir::Ty: aes_ctr::AesCtrZipKeyStream<u32>"
+
+[[fn]]
+path = "zip::xor"
+kappa = "fa875601a2768ee796410de8f2a5882655bf5a6d13da2d8ac37c423a79779f38"
+embedded = "2ac86d6753134184ec57b38887a5c2046a154e5f79416901321611a7d8d5b09e"
+status = "residue"
+cause = "mir::Ty: std::slice::IterMut<'_, u8>"
+

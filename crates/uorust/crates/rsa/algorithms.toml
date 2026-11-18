@@ -1,0 +1,315 @@
+[[fn]]
+path = "rsa::MAX_LABEL_LEN"
+kappa = "2257eedb6357df86c9f19b7b2436c7cd54ae5659b414948691a7aab058cc658e"
+embedded = "6a9c5059b4e6ad44cdc1068d841d628b1109bf2f0cd99f034f2900217aa74c72"
+status = "translated"
+digest = "306944aa68b110d98dc1776ddfe34d7768ac05f884b88cda23361953d42c7ffc"
+
+[[fn]]
+path = "rsa::algorithms::oaep::oaep_decrypt"
+kappa = "89e4fb3d562a96787891a6d428b60cc536e64d2cd227f7e85a7f569c9c759b87"
+at = "D=u32, MGD=u32"
+embedded = "9fb52ffdbea0c5d2258528051681cd832c8a86e2857fbb621c736fa0fa962dbc"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::algorithms::oaep::oaep_decrypt_digest"
+kappa = "7912ee53fb239a1671262c042f915d74d57900a1bc5fd1f4eba596e4570eeefa"
+at = "D=u32"
+embedded = "791b6ffb771480a0f2ebc5412c9356d2438ef0fa65561c74b4ac9e0ba18888d4"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::algorithms::oaep::oaep_encrypt"
+kappa = "a7228d642e7749f19952a064e714acbfffd26cb8e9812c5a1bc5ca1b11ab036a"
+at = "D=u32, MGD=u32, R=u32"
+embedded = "bf368993cfc1930e3615cd29aa8d90e19875cbddb4c169bb0cf9e0099a4f2db1"
+status = "residue"
+cause = "mir::Ty: zeroize::Zeroizing<alloc::vec::Vec<u8>>"
+
+[[fn]]
+path = "rsa::algorithms::oaep::oaep_encrypt_digest"
+kappa = "1b9313d4786e494e7760b2fd2899b5b808362559f699cdbe3e383e4c2d3038d8"
+at = "D=u32, R=u32"
+embedded = "7fdcf9999e06fb9d8705d17a87ca9b34c3c5fc7f0ddcb2c12b01877058e4a712"
+status = "residue"
+cause = "mir::Ty: zeroize::Zeroizing<alloc::vec::Vec<u8>>"
+
+[[fn]]
+path = "rsa::algorithms::pss::emsa_pss_encode"
+kappa = "aab17261d77641f2113e50a0b311dbd9e2d074484f956f8e0fe367daa066af6d"
+at = "D=u32"
+embedded = "f3e2bf6d8a75947d540187ec3ef85d4ab1ff6dd0f79e8fc309f5544a859db208"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::algorithms::pss::emsa_pss_encode_digest"
+kappa = "b6a9aaec0ccde172166e169eae958524571a99b41cf72424dde6be12d4c19288"
+at = "D=u32"
+embedded = "0a15e32929f862a9dad62d271777d55d493ed2a248be408dde134bb34d6a9171"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::algorithms::pss::emsa_pss_verify"
+kappa = "f7ebd2d8c22be1dc42f7c58cd3969da2d2de48a08ddb9db70b6da9fcd4a3ff0e"
+at = "D=u32"
+embedded = "aa20224ff26a50ee0d60a3e8151c979960bd46e52946cd63f6e899d10393eeb8"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::algorithms::pss::emsa_pss_verify_digest"
+kappa = "11efcfb85b077531e4308f44cd77d89ba5fa25d1a9d4f03e65bb1c1bed087bc4"
+at = "D=u32"
+embedded = "66bd235ef7d42dbd26fe38731d0b05fe486522194fc0bf19a0c2260f3468e2de"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::be_pad_into"
+kappa = "154cdaeb0693dc956664db5f0b3e87822f232a3bc874d8743bc69857563ab731"
+embedded = "c38838b98a90d95bd7ad5f933842f8c15a84d622f0cbc285f715a49ceae541c5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::fill"
+
+[[fn]]
+path = "rsa::blind"
+kappa = "ee32e70d1023b8dfcf82753fdee622bb087a8ae54636a615b5e3282ad8058df5"
+at = "K=u32, R=u32"
+embedded = "8fe6339e7d57282e012140479e01b7e582be422908b1e587173180d9054f001c"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::blind_exponent"
+kappa = "db037d77a5aa06f3788828bb7681a40546511e29d9ffb344643c187c1b9c20be"
+at = "R=u32"
+embedded = "55a966d8131ed27b1fc8bf8c22e065fd2822872404bd1928acbb37ea4ed0ffc7"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::blind_modulus"
+kappa = "896342fdb7a0f77d94bfc10e7c8b84d6ffacf7d2b74f9e3869ea1c08e40c0f45"
+at = "R=u32"
+embedded = "528e396863e72d46a1465734da4e483f9ffff6e6ef87e86e9d65be02ff1fa2cb"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::compute_modulus"
+kappa = "19dc62c4bb77987833890a9886b5245f750597de0ec42e0b72dd7ad33832e81c"
+embedded = "11667d97549ea7195252ac6eb877f2cd0b5b39d1d4c8c66db1445f4191b57548"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::compute_private_exponent_carmicheal"
+kappa = "c01b149f278409c775b5ef14b3b36f2c634a00d79bdd2d8eeba91363d22b11d4"
+embedded = "a0a9b62b3a4bb48e3ebc93a37fe34e327cd8bd9b99d7325ed1d2b0ee19586745"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::compute_private_exponent_euler_totient"
+kappa = "61f4b9b1549d6be07105ceb4b240f700d905522bab17a87a83f4299c3aa92495"
+embedded = "9b0210aff32cee315bd34b7f02dc1316a07d7ee3a49279352b08851b7eb8d222"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::decrypt_inner"
+kappa = "628b6668af25fb34552414812c685550d7485c69af22859f11b85f9529502540"
+at = "MGF=u32"
+embedded = "4208bffd2e57ef68f7eff47ca8769b3278dd4c7a2d7cfbfdc2aa7e15d2228d87"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::CtOption<u32>"
+
+[[fn]]
+path = "rsa::emsa_pss_get_salt_len"
+kappa = "057d139362ef18938cb35733ab28476ea1d8912cfda75117711a3bd9e0312c77"
+embedded = "dc943730b67dc626ea9546e7d0eea1284110be35e6ac4186985486bc10ce4be9"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::Choice"
+
+[[fn]]
+path = "rsa::emsa_pss_verify_pre"
+kappa = "3dba3b4c1b982b5bc9ebaa640a0330846d057e69b72f4d80d4cee8b90113fe8f"
+embedded = "02778631dafea74aecf05c6e1f49202de6ce2e303b43c73e049f66c220b01304"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "rsa::emsa_pss_verify_salt"
+kappa = "ef42c658ea980669faa70439a88060cbe726e2f72567ae0c61e16d6235a62396"
+embedded = "cd325ee71bb4e5a039f567ccaea94f476e9c687c1f23d1a703c4b4a379eb58a1"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::Choice"
+
+[[fn]]
+path = "rsa::encrypt_internal"
+kappa = "4b8cf057d14bcc415153f9824319083cba577a180414d214b28cd1218f154777"
+at = "MGF=u32, R=u32"
+embedded = "aa4b6d7246250b4704e27476bcae775094e4f1185417e4ff8a25ba71fd564549"
+status = "residue"
+cause = "mir::Ty: zeroize::Zeroizing<alloc::vec::Vec<u8>>"
+
+[[fn]]
+path = "rsa::generate_multi_prime_key_with_exp"
+kappa = "fc5b0bfbaaa04e6f0791c19fa1d539a71ed81c88fc1a61cce80e3701297c49ed"
+at = "R=u32"
+embedded = "919a7225b2f5eafa8146afbcacbaf6412d95a8f98f5a54f80524c5e6523de634"
+status = "residue"
+cause = "mir::Ty: algorithms::generate::RsaPrivateKeyComponents"
+
+[[fn]]
+path = "rsa::generate_prime_with_rng"
+kappa = "b587d3fa21c35b287f2a0c8bcc93c3abdb2fb039dc1fc6136b138dac26fd7180"
+at = "R=u32"
+embedded = "3072b9f2ff5077f50a0917ea0289b610a41a38865abe7547172a64d70d583d22"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::i2osp"
+kappa = "523305a83dc0b0fd322448a17ccbf6a2e1805cdebde262a03e8010bd912e3515"
+embedded = "0fd05414c96c3e517d55b7df85e741558253fd6a4b81c0eb146244ae77cacb05"
+status = "residue"
+cause = "mir::Ty: BoxedUint"
+
+[[fn]]
+path = "rsa::i2osp_zeroizing"
+kappa = "2811e926ceb348d134921e95a523aeab78a53bb565b3cde1009029d638e273c3"
+embedded = "596aaa7cdfb127b270fcb11c8f5adba4099e45e26a1a2a1e55f3e301d5739d87"
+status = "residue"
+cause = "mir::Ty: zeroize::Zeroizing<alloc::vec::Vec<u8>>"
+
+[[fn]]
+path = "rsa::inc_counter"
+kappa = "01f31e0dc7c342fc1d848ac339be9b56a5022f90c2139624dbfe8e91de446a15"
+embedded = "1482b2a6089e3c50c559daa4749050b1276a7c442eee5e7bdad08b06c9d8be9c"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "rsa::mgf1_xor"
+kappa = "899ed7cbb15945ba195f4da8a867ac96d354f2bcfe0cc81865a3a027be95a380"
+at = "D=u32"
+embedded = "71106e1da71ae5d11606d54bb56c516af215400067ad3490b071d7344c1be229"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "rsa::mgf1_xor::MAX_LEN"
+kappa = "e4786fb358dcbc9b9b8112ccfe1e4d765d5f9f0f7dfb2aab015433f15956c855"
+embedded = "2e48437acb7484565b2f433eefccfa5c0cf96333f2d4c2c8ee1ad456bdd65d23"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "rsa::mgf1_xor_digest"
+kappa = "cf4bf995cb4f40a5cbd6ffa211e3df1d149295e259f90bfedeaeedcdb2dc9db7"
+at = "D=u32"
+embedded = "bcabbf30fd767aecc153c7c7dbcbddbe88b5fe6b701752c5e5f3bceaee462bd7"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "rsa::mgf1_xor_digest::MAX_LEN"
+kappa = "b57b0af8c4022fcbc72ae86fe900f1a9aae03002b15190b69f2730aee65bb86e"
+embedded = "0b84b6d5d7c4480413b8a885085abbe596ab1066b8f071cd84f3f83d0ee283ad"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "rsa::os2ip"
+kappa = "1291db6b67e7c90f1b927e2348727f366b43b7c7444d470b9132bb36fc0fe48a"
+embedded = "577dfaa3cdb368a9a367aeea184b9ee796fe1ac5a56329b78f8b5be98eb7356c"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::os2ip_zeroizing"
+kappa = "986242617688a6644fd5a592c1baf9bafe85509e87362dd9ef007213a2fcc288"
+embedded = "a34c399a8a162dc2db578fe33152dfa7a81a7edc876fc1e7aceeb304d6617368"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::pow_mod_blinded"
+kappa = "c6b14e6381988dcd61570a4946d75116650a9f825921b737fb81c814df7059ce"
+at = "R=u32"
+embedded = "8bec6139624646f318902c4da68de9420d9b2d24aa113b2667d7de7762525e42"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::modular::BoxedMontyForm"
+
+[[fn]]
+path = "rsa::pow_mod_params"
+kappa = "4645777efcfec6d7a992c3a92a481b5dbeaa0215b8a39f82a47862104163e7ba"
+embedded = "d8b393c08a2d73f0c3b5ab158a1be376a1ccadba5944e52e94802d1ffc18da0c"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::pow_mod_params_vartime_exp_bits"
+kappa = "4ef47759925c5dccdc3e2d53d7a41906a32b0a32fe42cf3ede8245c0027e0bee"
+embedded = "f97209d58c7590c7e6fb5a35811b6da41cbaa648cc6d37114a641530298bacf3"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::recover_primes"
+kappa = "5e0727ba13c85ecad25f77ded0e688bd5b69bf7e58081828eb8b6dd12e298c92"
+embedded = "a8bfbf2e0b61ab8f5bf17e9b906a1393317852252fd09d01100e36da408936f9"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::rsa_decrypt"
+kappa = "a643ea9cdc4100a971b744c1e974b2209cc1e04c579aeaae9a66ac388311581a"
+at = "R=u32"
+embedded = "66ace2c846a0c69beb1098185d7fd395e7173e8b13d40e2b1b02442c08187293"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::rsa_decrypt_and_check"
+kappa = "c093a00515808c129048b700098aae0aff36fc9b7a8e5c61656874b5e47f9811"
+at = "R=u32"
+embedded = "b0d6abad61900a6307a798ac2c4a24702bca66f08b2995cf927f8e4f3b1a6d62"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::rsa_encrypt"
+kappa = "34f47902d72c144c4388a9ba7fb5dd4dc18c377851148ac4e894dd0774252bef"
+at = "K=u32"
+embedded = "57d206315194f03a0da81528e5db4d0fa783fc1bfa7eb86c2e721926ef3655a9"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::to_monty"
+kappa = "5677af8ad13748b5b0ff872b906b1981ee92f890115aa76767d09f6e7ceab7b0"
+embedded = "3958dc1bb5064289ebb99647538433aed36c5e09705cb5668e7d32652a89dbb3"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::modular::BoxedMontyForm"
+
+[[fn]]
+path = "rsa::totient"
+kappa = "2c3c800da0cfab7ee6ba983fcc636fa52987f3da54d99fba7d92f1ba4be5b6ac"
+embedded = "8eb884d77681e858c4b4475e35c36e8f06335bc9a710b0dc572eb93b273f8d90"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::unblind"
+kappa = "802ab4c6da33b6bcb0f4ac518072cd94686197d76ace773d9c1317214f661d9b"
+embedded = "3cc9d95c7319c0019d0f13f9eae90a3fc585140fccb63a0a44d1e677d60ce343"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+

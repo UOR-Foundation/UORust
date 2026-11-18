@@ -1,0 +1,105 @@
+[[fn]]
+path = "unsafe-libyaml::HEADER"
+kappa = "5a3fbae16c61223527756daedee5868cce51961c52a3fb0cc35aeaa8e2407fe7"
+embedded = "4d37cee2d7bd51b73811b5c097f4738713840a7b7ecdc9dd3d247d82cb904843"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "unsafe-libyaml::MALLOC_ALIGN"
+kappa = "d4d60e3194926c628bfebc9c5b0be34c43de973962da8c1255f940cde9a556ed"
+embedded = "30226c65591102c21bf7d7c9f2a7d6e10563d75a7d9a632a53f6e577123c0063"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "unsafe-libyaml::__assert_fail"
+kappa = "8ad5ee6bbb6982d366eea524fdcd77a17c4086e86e2ea11f02e193a8ff07be38"
+embedded = "3b9873b1d688131837ba6a342dcc2a750f1b1f3aa9afc03b5d0321816d0c5c30"
+status = "residue"
+cause = "mir::Ty: externs::__assert_fail::Abort"
+
+[[fn]]
+path = "unsafe-libyaml::__assert_fail::Abort::drop"
+kappa = "336496445bf786b7011f4df4139f33b93c55980debbdf42aa5d459b0ed3c334e"
+embedded = "a69cb21c17ce886adbf743027e2ead29d8ecfb10f0cae7434b6e88b26f14ba4a"
+status = "residue"
+cause = "mir::Ty: Abort"
+
+[[fn]]
+path = "unsafe-libyaml::externs::realloc"
+kappa = "8bbd58b07ece3775e4fa6ec3d14e72b2b45b5eec397a78bf0641de4780d3f07d"
+embedded = "74c57f304fa5f090471eb8f4afd9440ce0eee7546aeb3be6a460606ebc506905"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::free"
+kappa = "d815071b2982a52090e32fb3c818ab1a3eb53e1263a823610e7c2040be1f24e3"
+embedded = "7d0189cfe4f029e7937e5934b2ba0dc39e9c1fe7f977fce86f70093a59276198"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::malloc"
+kappa = "f922f946e69def690ca20555d9417307f228554cd6baa6aa43f8d5be42ac46a9"
+embedded = "3e0f3b6971dce86153d3043334504c7dd62eaf30c67869616731a7eb73b6ebae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ops::<impl at src/ops.rs:63:1: 63:24>::force_into: unsafe-libyaml's MIR stops at type outside the lift: <u64 as core::convert::TryInto<usize>>::Error"
+
+[[fn]]
+path = "unsafe-libyaml::memcmp"
+kappa = "addc0c847b9166abdfbcdb52a8329f037fb6410b302dee3de453f2b6c83048c2"
+embedded = "a4018054e79fa13401fa81397eaceed66f9c01aa4bd9134d2bf396b30519ba04"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::memcpy"
+kappa = "14310034ac85e46cadc92923779cd1fb7e1f5da8567583247a92ea945326dacb"
+embedded = "20d980105f3cf4d0d5009679060c9b2b747342ba4ec714c8e01ed0dd2433aa0c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::memmove"
+kappa = "ffb4cba3d7689fc113a2dc36799ce56a60bf3485ed41da91e041b1f14021ee67"
+embedded = "b778f8f68ba2fe7d67a8d5626dc0c37d8279d73ae9d19558cc8c96ff619b602f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::memset"
+kappa = "674c199ac34e0f420a10dc38eeeebab167f2ed4a3487dacec1afe8bf1c85e80a"
+embedded = "753a0a157dbb972385c9aa660f506b8bc427c0be08a3133ca8906560a877cc2d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::strcmp"
+kappa = "e98a69625c88d2b61e64add15a9fa8ef13fb23184f7e7514c4e0613032e0e3b1"
+embedded = "c5fd72c3cfcba781e55fbe5559e021acde3f1163294541537e2cf2cabcecf93a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const i8>::cast"
+
+[[fn]]
+path = "unsafe-libyaml::strdup"
+kappa = "b1fc572252fd218177d2d704d87632a820e49f02d11094c4831b37901071db1c"
+embedded = "b171e5b4626177333207d6e29bfccec0b85ae2769a4fbdbcd634206bb0233335"
+status = "residue"
+cause = "mir::TerminatorKind::Call: externs::strlen: unsafe-libyaml's MIR stops at mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "unsafe-libyaml::strlen"
+kappa = "bb24f86020a385c61e6900e8bda8b6d5bbe5ac13aa1eea6e2a1f0ef0601b1d23"
+embedded = "194356dd0a0cd28d48adb0a76738a8103db79b811228692216df8c8335929e99"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "unsafe-libyaml::strncmp"
+kappa = "e10081866302302710091c641f55a03a259133c980efc66a8473f09c8e9a0b45"
+embedded = "25d2df3dca416c523e7e35a0edd857e0be416035376c8008b677924545292d9a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const i8>::cast"
+

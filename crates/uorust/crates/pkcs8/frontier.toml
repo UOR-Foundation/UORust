@@ -1,0 +1,93 @@
+# The pkcs8 register (written by `uorust crate pkcs8@0.11.0`; do not edit): every body of
+# pkcs8's MIR at pkcs8 0.11.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 40
+translated = 0
+residue = 40
+
+[module.error]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.private_key_info]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.traits]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.version]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 40
+embedded = 40
+evaluable = 40
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private_key_info::PrivateKeyInfo<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: version::Version"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: KeyError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::Length"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::TagNumber"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::asn1::BitStringRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::Tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::KeyError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: spki::Error"
+bodies = 1

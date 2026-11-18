@@ -1,0 +1,1657 @@
+# The quinn-proto register (written by `uorust crate quinn-proto@0.11.19`; do not edit): every body of
+# quinn-proto's MIR at quinn-proto 0.11.19, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1513
+translated = 18
+residue = 1495
+
+[module.bloom_token_log]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.cid_generator]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.cid_queue]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.coding]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.config]
+bodies = 102
+translated = 1
+residue = 101
+
+[module.congestion]
+bodies = 119
+translated = 1
+residue = 118
+
+[module.connection]
+bodies = 602
+translated = 0
+residue = 602
+
+[module.constant_time]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.crate]
+bodies = 40
+translated = 5
+residue = 35
+
+[module.crypto]
+bodies = 61
+translated = 4
+residue = 57
+
+[module.endpoint]
+bodies = 77
+translated = 0
+residue = 77
+
+[module.frame]
+bodies = 137
+translated = 6
+residue = 131
+
+[module.packet]
+bodies = 75
+translated = 1
+residue = 74
+
+[module.range_set]
+bodies = 44
+translated = 0
+residue = 44
+
+[module.shared]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.token]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.token_memory_cache]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.transport_error]
+bodies = 49
+translated = 0
+residue = 49
+
+[module.transport_parameters]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.varint]
+bodies = 29
+translated = 0
+residue = 29
+
+[embedding]
+bodies = 1499
+embedded = 1499
+evaluable = 1472
+blocked = 27
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 26
+
+[[construct]]
+construct = "CastKind::FloatToFloat"
+bodies = 1
+
+[differential]
+bodies = 2
+theorems = 11
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 166
+
+[[cause]]
+cause = "mir::Ty: connection::Connection"
+bodies = 59
+
+[[cause]]
+cause = "mir::Ty: transport_error::Error"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: frame::FrameType"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: StreamsState"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: config::transport::TransportConfig"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: varint::VarInt"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: Bbr"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: transport_error::Code"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: config::ServerConfig"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: shared::ConnectionId"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: RangeSet"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: PendingAcks"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: config::EndpointConfig"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ArrayRangeSet"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: SendBuffer"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: StreamId"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: VarInt"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: coding::UnexpectedEnd"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u64>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Endpoint"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MtuDiscovery"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ConnectionId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: send::Send"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: config::ClientConfig"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: dyn congestion::Controller"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: token::ResetToken"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ConnectionHandle"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ConnectionIndex"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Cubic"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NewReno"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PacketNumber"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PathData"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Recv"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: config::transport::MtuDiscoveryConfig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: connection::State"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: connection::streams::ClosedStream"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: frame::Close"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BandwidthEstimation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BlackHoleDetector"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CidState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DatagramBuffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IdleTimeout"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MinMax"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PacketDecodeError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PartialDecode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: QlogSink"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ReadError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ReadableError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SendDatagramError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: StreamInfo"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TransportParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WriteError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: config::ValidationTokenConfig"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: config::transport::AckFrequencyConfig"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: congestion::ControllerMetrics"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::Retransmits"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connection::streams::recv::Recv"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::Written"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: crypto::CryptoError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: packet::PacketNumber"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: transport_parameters::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: transport_parameters::TransportParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Assembler"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Code"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ConnectionSide"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DatagramState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Dedup"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EcnCounts"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EnabledMtuDiscovery"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PacketSpace"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PendingStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PreferredAddress"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpaceId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Streams<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Timer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TlsSession"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cid_generator::HashedConnectionIdGenerator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cid_generator::RandomConnectionIdGenerator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: config::transport::IdleTimeout"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: congestion::new_reno::NewRenoConfig"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::MtuDiscovery"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::SendableFrames"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crypto::Keys"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crypto::rustls::QuicClientConfig"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crypto::rustls::QuicServerConfig"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn rustls::quic::PacketKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endpoint::ConnectionHandle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::AckFrequency"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::AckIter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: frame::Datagram"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: packet::SpaceId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: range_set::array_range_set::ArrayRangeSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AckFrequencyState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ApplicationClose"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConnectionClose"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DatagramInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Datagrams<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EcnCodepoint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FourTuple"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FrameType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LongHeaderType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PacketBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PathResponses"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PendingStreamsQueue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RecoveryState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReservedTransportParameter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Retransmits"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SendableFrames"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ShouldTransmit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TimerTable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TransportParameterId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bloom_token_log::BloomTokenLog"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cid_generator::InvalidCid"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: config::ConfigError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::BbrConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: congestion::cubic::CubicConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::Chunk"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::PacketSpace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::SentPacket"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::stats::ConnectionStats"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::streams::PendingStream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::FinishError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::Session"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn rustls::quic::HeaderProtectionKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endpoint::Incoming"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::Ack"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::NewToken"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frame::StreamMeta"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: packet::ProtectedInitialHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: range_set::btree_range_set::RangeSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: token::TokenReuseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<11>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport_parameters::TransportParameterId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item MAX_CID_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Chunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CidQueue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CidTimestamp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClosedStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConfigError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConnectError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConnectionError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EltIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EndpointEventInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExportKeyingMaterialError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FinishError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IdentityHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InFlight"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IncomingImproperDropWarner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InsertError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LongType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LossState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PacketNumberFilter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RecvState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResetTokenTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SendState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SideArgs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamHalf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VarIntBoundsExceeded"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Written"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bloom_token_log::IdentityHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::AckAggregationState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::Bbr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::LossState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::bw_estimation::BandwidthEstimation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::min_max::MinMax"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::min_max::MinMaxSample"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::cubic::Cubic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::cubic::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: congestion::new_reno::NewReno"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::SentFrames"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::Assembler"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::Buffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::datagrams::SendDatagramError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::BlackHoleDetector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::EnabledMtuDiscovery"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::SearchState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::paths::PathData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::paths::RttEstimator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::qlog::QlogSink"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::send_buffer::SendBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::ThinRetransmits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::stats::FrameStats"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::stats::PathStats"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::stats::UdpStats"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::streams::recv::Chunks<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::streams::recv::ReadableError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::streams::recv::RecvState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::WriteError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::timer::Timer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::timer::TimerTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::ConnectError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::ConnectionMeta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::DatagramEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::RouteDatagramTo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::ConnectionClose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::Crypto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::DatagramInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::EcnCounts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::Frame"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::IterErr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::NewConnectionId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::ResetStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::StopSending"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frame::StreamInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packet::LongHeaderType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packet::Packet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packet::PacketDecodeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: packet::ProtectedHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_set::btree_range_set::Iter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ring::hmac::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shared::ConnectionEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shared::EcnCodepoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shared::EndpointEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token::TokenType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token_memory_cache::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token_memory_cache::TokenMemoryCache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<15>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport_parameters::PreferredAddress"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport_parameters::ReservedTransportParameter"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: get_or_insert_recv::{closure#0}: type outside the lift: connection::streams::recv::Recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Side::is_client::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Side::is_server::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: connection::MAX_HANDSHAKE_OR_0RTT_HEADER_SIZE: mir::Operand::Constant: the constant item MAX_CID_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <config::transport::TransportConfig as std::default::Default>::default::MAX_STREAM_BANDWIDTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item cid_generator::NONCE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item cid_queue::CidQueue::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item connection::assembler::MAX_CHUNKS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item endpoint::Endpoint::stateless_reset::MIN_PADDING_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: coding::encode: quinn-proto's MIR stops at mir::Instantiation: u32 for a parameter bounded by BufMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: constant_time::constant_time_ne: quinn-proto's MIR stops at type outside the lift: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AckAggregationState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dir"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndpointConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndpointEvent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Frame"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FrameStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashedConnectionIdGenerator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterErr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoneTokenStore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pacer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Packet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PartialEncode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProtectedHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QuicServerConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RandomConnectionIdGenerator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Replace<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RttEstimator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SearchState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SentFrames"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Side"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StreamMeta"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ThinRetransmits"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenMemoryCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TransportConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UdpStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: assembler::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bloom_token_log::Filter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bloom_token_log::IdentityBuildHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cid_queue::CidQueue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cid_queue::InsertError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: congestion::bbr::RecoveryState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionSide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::Event"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ack_frequency::AckFrequencyState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::IllegalOrderedRead"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::assembler::TooManyChunks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::cid_state::CidState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::cid_state::CidTimestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::datagrams::DatagramBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::datagrams::DatagramState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::datagrams::Datagrams<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::CurrentLossBurst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::LossBurst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::mtud::Phase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::pacing::Pacer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::packet_builder::PacketBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::packet_crypto::DecryptPacketResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::packet_crypto::UnprotectHeaderResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::paths::InFlight"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::paths::PathResponse"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::paths::PathResponses"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::Dedup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::PacketNumberFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::spaces::PendingAcks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::state::Closed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::state::Handshake"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::PendingStreamsQueue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::RecvStream<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::SendStream<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::StreamEvent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::StreamHalf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::Streams<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::recv::ReadError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::ByteSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::BytesArray<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::send::SendState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::state::StreamRecv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::streams::state::StreamsState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::ExportKeyingMaterialError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::rustls::NoInitialCipherSuite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::AeadKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::HeaderKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::PacketKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::ConnectionIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::Endpoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::FourTuple"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::ResetTokenTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::RetryError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::ApplicationClose"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::Iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frame::Stream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packet::FixedLengthConnectionIdParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packet::InitialHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packet::LongType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packet::PartialDecode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: packet::PartialEncode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range_set::btree_range_set::EltIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: range_set::btree_range_set::Replace<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recv::Chunks<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::ClientConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::ServerConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::Side"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::crypto::CryptoProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::quic::Suite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::quic::Version"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared::EndpointEventInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared::IssuedCid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: token::IncomingToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: token_memory_cache::CacheEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varint::VarIntBoundsExceeded"
+bodies = 1

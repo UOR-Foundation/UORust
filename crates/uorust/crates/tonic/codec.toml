@@ -1,0 +1,683 @@
+[[fn]]
+path = "tonic::DEFAULT_CODEC_BUFFER_SIZE"
+kappa = "6b2d5b75d9e8f11a30286428e2d640c17e1674775e299aef98f13536ecfce300"
+embedded = "346f7c615bbec9c8a22ef05bd1451f5fe99c24544e2d835dbae240b59bea12de"
+status = "translated"
+digest = "ee086de1ab503443959c2632d31ae12715ea923cf9b97b0e74dc1a83a3552589"
+
+[[fn]]
+path = "tonic::DEFAULT_MAX_RECV_MESSAGE_SIZE"
+kappa = "38c761a9db4cc9c94ebc1c468078628f747cf1374e6ed2cb2613b4d61b710f49"
+embedded = "aad08a4af9d94dfa4eb0b2d75269cb5bdb9910ba6fa5649c130e7de9ab574fb3"
+status = "translated"
+digest = "ec8d6b17757fcee3d66ecf96c5b6a2c6da8a28fc0184c75781bda05fd71023fa"
+
+[[fn]]
+path = "tonic::DEFAULT_MAX_SEND_MESSAGE_SIZE"
+kappa = "7db935c4decd6079383d73418e44593c4e4e573c9cbaa271d58a1816558cdc28"
+embedded = "5a0eaf0064a9143f9723648f4b048dfe47236d01c164746bde1cd4a6a23accc3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "tonic::DEFAULT_YIELD_THRESHOLD"
+kappa = "9d63e82aa5e678b4bc42ed266cefd564099b4dbe765a4a2ab25517d10f28266c"
+embedded = "78af842843088d67d2d2e7681e6316fa048869cbdae450e8c40d8f4eb2524567"
+status = "translated"
+digest = "74babe305b9600f037328f81d47ca2ece311e736e87813af1d9aa0da6e7297d7"
+
+[[fn]]
+path = "tonic::HEADER_SIZE"
+kappa = "b437cf58718927f29f62cbfe1284a4e68356230e6aee8b14369ea718429f89fe"
+embedded = "d9ee81490f385fcc9b472c0cd0190e49489add5ab399839627fd79e5c15aa106"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "tonic::codec::<impl at src/codec/mod.rs:90:10: 90:15>::clone"
+kappa = "3783dcd6c78c71f1113a413d518960626f2906a060a130992846e5ddddcff13f"
+embedded = "a615065df84078222091788814eb0a96d0ade9847e76649e600834c27055a0e3"
+status = "residue"
+cause = "mir::Ty: codec::BufferSettings"
+
+[[fn]]
+path = "tonic::codec::<impl at src/codec/mod.rs:90:23: 90:28>::fmt"
+kappa = "433792d7aa42f4b5ed6c371d7193103c47f0763f6547bf4498441fd7928c314a"
+embedded = "fbd8f0fd8cbf54c4710d8aaf1de4c255c0714d7ae4af1ec77c7b4e082623b213"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::codec::BufferSettings::default"
+kappa = "d568c187b46e92e8a732e399f62da4b3306ca5911b6132e64299401711b1b872"
+embedded = "64c8109d12302c2f42c008400fd29fd4e3c820eb222d0d1b2e7ca201634a56c0"
+status = "residue"
+cause = "mir::Ty: codec::BufferSettings"
+
+[[fn]]
+path = "tonic::codec::BufferSettings::new"
+kappa = "cb86f28c5a0157a7a278dd6baee06bedc3a2afa7d1e90d8e98d0dd5cdb4a8300"
+embedded = "7e62cb9ccd1671d629986a94857bfd2ca2e1a61b9349a087913e5750be9d13bb"
+status = "residue"
+cause = "mir::Ty: codec::BufferSettings"
+
+[[fn]]
+path = "tonic::codec::Decoder::buffer_settings"
+kappa = "01d5e01023c56bd71b77fc10c4299a33746fa7b78fb833f63d1cf2d76a869890"
+embedded = "c76642c63c1d61546e6ea61f9d8a4f513d3bca1802f789eb1186b2440167139d"
+status = "residue"
+cause = "mir::Ty: codec::BufferSettings"
+
+[[fn]]
+path = "tonic::codec::Encoder::buffer_settings"
+kappa = "3b624a32dec8f2a7ec63c69b04b0bfa60dad78f11b91b3a6a075429d3270090e"
+embedded = "ecb970546063b84321761ab9498eb2186fbdf16b20cd2e981b3a1f8254abf20e"
+status = "residue"
+cause = "mir::Ty: codec::BufferSettings"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:29:10: 29:15>::fmt"
+kappa = "f6027684158b599a1b199de34f30ab6a154805a22b8ec450ef94fe9ceb12c0bb"
+embedded = "08ad02ff31d78efe53566222d85d035e4604e66aec722486a4575a1c5449e8e0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:36:10: 36:15>::fmt"
+kappa = "2a5fdbf1f64579c26443300ee70a0525b6967adc4a20ab88001b6749278cb346"
+embedded = "9c7e6800315416b6ea76e4ab79d3fdc3b56c3c74e95fd83fcd3639f6f651c4ca"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::advance_mut"
+kappa = "5774cc2731979e460b597e5179e83388cd1cb1b327b2f52b6810822ae4f0f3d9"
+embedded = "51288e25f1cd47dfa0bb73d561f2ab21b60a87fbbff4e446724d0599027f27a7"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::chunk_mut"
+kappa = "ab105ed49196fa0825b36507fb191da2a2b4daf807dc809509d15341df2a92a6"
+embedded = "c3db5074d02d8b84105ff2c67a5702e831fa262e0be04ed00440bb092a1d314c"
+status = "residue"
+cause = "mir::Ty: bytes::buf::UninitSlice"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::put"
+kappa = "3549e3a5ee3f4e3a53ebeb2cf75968e02d273d7012603c5f00b9fb8cc867e053"
+at = "T=u32"
+embedded = "71027e337e6c74ec24deb12e2ff9dc0122460e6dd60a2f9155d157f892dfc3cb"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::put_bytes"
+kappa = "a5ab23748f9114f7999c8c93cc9e488bceebe04cc9b27be7aebaf65d190b3c26"
+embedded = "7c2e54a097b05bc3f36afccb0201080bdef22d35ca29955e2872af3dc8cda064"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::put_slice"
+kappa = "a6b11d996d7c160604955c8ae5bdc35bcbb912df291370d1c40e470273dfa2cc"
+embedded = "dd8957f484e83f9dd3278bf54c224bc75e12e30f43c8eb42fd3a5e0b0ce9c4bb"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::<impl at src/codec/buffer.rs:97:1: 97:37>::remaining_mut"
+kappa = "5c3dea1bf2964f55b75b970b73af7fdb02c9f56c1e62d9845a5cf0f706953131"
+embedded = "394c2d9cafc4cd11c7e3ff1521eac779d16f37bdde7cd08bbd09b6cda5b088fc"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::DecodeBuf::advance"
+kappa = "f9dff6e0c0fad45b944e65d0e0f71ee866500a812221970155f07ecc9f2d2722"
+embedded = "0ea58fb9ba5608d3bb970eba776daf133755b75a849a36436c4531ab9e29dae1"
+status = "residue"
+cause = "mir::Ty: DecodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::DecodeBuf::chunk"
+kappa = "c6272b8f2d931989a753d05a3e9d5d71454cf85ac9d1aa3d3a2d243ba3c26217"
+embedded = "ddaa5e0519c99a9b859549736eb57a43b3190f793d2622ef1f731f8e6327f1a9"
+status = "residue"
+cause = "mir::Ty: DecodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::DecodeBuf::copy_to_bytes"
+kappa = "af8ac6d28eabaf75e482265c62842dd711fa0975c6491fe268d4429541e8baec"
+embedded = "6fff516c60589fd127cd0d6027114af01d6d61de0dbd1cc3318e4f78d028e3f9"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "tonic::codec::buffer::DecodeBuf::new"
+kappa = "12623ce6653dee6fd9c6ee7afcca15a1617a36dca4a27ddcb695bb999c49caaf"
+embedded = "816d1d0d5dbf92c5d6195117f242001c50e99fc8152dae3f0fbefea8bb4a256e"
+status = "residue"
+cause = "mir::Ty: codec::buffer::DecodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::DecodeBuf::remaining"
+kappa = "3b7ef1d3b4ef27c8958ed4975758a826c2815045a4c05b6819adad5ed4b74ab9"
+embedded = "71e81faf8efc675d74b804e519a5176ca06aba1bebe7fbcd061f767b00370ed4"
+status = "residue"
+cause = "mir::Ty: DecodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::EncodeBuf::new"
+kappa = "2e8136847d2934e29843db55e3fb9963346536e7272b33cc7e1d73c31d05d4e3"
+embedded = "d36857b3ec93d03d9b22d2bbfb250f88b88ddc09e98c6850b743ba8e81503ac1"
+status = "residue"
+cause = "mir::Ty: codec::buffer::EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::codec::buffer::EncodeBuf::reserve"
+kappa = "f209bea0445f731e06bccbdbca563d3fef58b96eca43716504324274aa48b341"
+embedded = "df617f6b60480d5c97aa41d59e152467fbcdddb8c2a8e8a47ecc5fbc0c4c1594"
+status = "residue"
+cause = "mir::Ty: EncodeBuf<'_>"
+
+[[fn]]
+path = "tonic::compress"
+kappa = "428ddc2f5f655b5282e34ce925e984ef7f01e1cc590e0aada691562842171273"
+embedded = "10bf3b6019f6d64186441f81f50b7fe43efc4a46ac40933fcfa837f095e9c20f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:107:10: 107:15>::clone"
+kappa = "04cb1e8b742e5b5ecea82cf1462be7651422956916219be8ae75ae2767a79bd3"
+embedded = "906e319c8e47d80848ff487d1fba61f89bb1678515d6978da9bcf3dfa1480015"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:107:23: 107:28>::fmt"
+kappa = "f356c7bec938458e48223b6cdbc63b5ba3f7195cf00dd027447ed81ee5d4bec2"
+embedded = "344186200c13f4ddee5b3f92360a3296742926635bc33231e82fbfe4e9b7470c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:107:30: 107:39>::eq"
+kappa = "52f23e3bf79d8ff736376ddd331f564884a18b5698cca65ac010c643f35854d6"
+embedded = "bfa83671f23f5f52eda23b2af7c2f2f37897a4247d7c9229962394b5feb6086c"
+status = "residue"
+cause = "mir::Ty: CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:107:41: 107:43>::assert_fields_are_eq"
+kappa = "0a567613f48c1504e518535fe886443c1d3e843d89c0b122d84570930cbb9deb"
+embedded = "5575d6c8a4e48c1ebbb70d6682ece47689fe98b619e9f9f64258a5797e61301a"
+status = "residue"
+cause = "mir::Ty: CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:328:10: 328:15>::fmt"
+kappa = "55bfb4ffcb016ecd402440d406e778b98c5c7024875662101c8af62d87296625"
+embedded = "cc6d79b1a7bb22e55183b4ca67e7485e7697016c92b5d1163fbd795ad736b7b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:328:17: 328:24>::default"
+kappa = "dd945705371528e3c158454aa08acdcf311df9b860a285f44fa5a0c22bb9e1f7"
+embedded = "a9cab92fd063229b0f2768530f9029c837d2bbc4519ba6420c16516435de2795"
+status = "residue"
+cause = "mir::Ty: codec::compression::SingleMessageCompressionOverride"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:328:26: 328:31>::clone"
+kappa = "12d5eddfdd9668d3c7ebce03b78a1c9b972c790b6dab663d938a82f56e61451f"
+embedded = "0be5781c224cf1c91bf389b9d596340dc907b67e5804cf25555f8fdcab148190"
+status = "residue"
+cause = "mir::Ty: codec::compression::SingleMessageCompressionOverride"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:328:39: 328:48>::eq"
+kappa = "e391f910f97f24b5f3b1e45e06b81345097642a2a7de39a64dbd720180cb22dd"
+embedded = "b6e8a4e245e5a6c65d94419d89d9fd6b37d2a4896df9fa5e997035bb081bbf8f"
+status = "residue"
+cause = "mir::Ty: SingleMessageCompressionOverride"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:328:50: 328:52>::assert_fields_are_eq"
+kappa = "22150d2d8054426a0d7097189b8158a04817abd3ff37e8111439c11c1c49e8d4"
+embedded = "414d380c14bfcb37e3901097665073e0a0bc7d80fc3eea1a3bc62c27639e77d1"
+status = "residue"
+cause = "mir::Ty: SingleMessageCompressionOverride"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:41:10: 41:15>::fmt"
+kappa = "6e5e882e246c27d9d537921f492078833250c0ab85fb1af57be845baf6b5eb32"
+embedded = "cfda5b28bf0560ed098f968cb0c0bdd808222fcbfd1d68adf23aea418c8b1306"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:41:17: 41:24>::default"
+kappa = "ef88658972e636bda9d46beb363995a9d1e4cc3b41cf11247e685756f55338f8"
+embedded = "091e879149802887311339f8b0b1c7a5dafba7fbcfaadd92792b97319bdbac08"
+status = "residue"
+cause = "mir::Ty: codec::compression::EnabledCompressionEncodings"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:41:26: 41:31>::clone"
+kappa = "c821f736e1aabc534000aabf31deeabd0fb2e465aaa97335df33bab60cd13869"
+embedded = "b7a98543cf2e996fe9b951db3bf1376740fa7e7c705ec87714a41f3916e8e1a2"
+status = "residue"
+cause = "mir::Ty: codec::compression::EnabledCompressionEncodings"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:98:10: 98:15>::clone"
+kappa = "4602b0fe4c2e25b1d45a38567f20bda6175e2902d2f353224d5177b4d0049496"
+embedded = "b3d55b5fae7a637444c7d4ebb3038bb645a030f7436eb0de8b5473b5c957b3d5"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionSettings"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:98:23: 98:28>::fmt"
+kappa = "a4a15561280d7925b726dbb8eb445b7f702e0e2eb7de73053dc02d878a24bbfe"
+embedded = "69679a8e27b2d5698009355be1c9ef4293a516409ba91fa39e46a255ff34566c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:98:30: 98:39>::eq"
+kappa = "22c3b9865ed42581b192e71ea053f8b987ff0d51b2c383a7be1cdeabf8c19ef1"
+embedded = "509c417f241bcab4b1702c871b40dc192e026df0e9f063dcee2d6f30524a7f4b"
+status = "residue"
+cause = "mir::Ty: CompressionSettings"
+
+[[fn]]
+path = "tonic::compression::<impl at src/codec/compression.rs:98:41: 98:43>::assert_fields_are_eq"
+kappa = "f5c3c2486e4a591fe878bdd71ee91970f24e2f5ae3fe970d9425b420c90e61d8"
+embedded = "21e3db8e30667632e1254b89e36853aa2273282ac4443869fee940fbfe718a20"
+status = "residue"
+cause = "mir::Ty: CompressionSettings"
+
+[[fn]]
+path = "tonic::compression::CompressionEncoding::ENCODINGS"
+kappa = "e2c62677411ac3fc8d9ecad91ef9e81f9612ce370d39cf52a4d138a0b24dd1af"
+embedded = "0a1fa5b57827f777d7b0571dc37d9bf605e7cd7f2afe573f091ff9239f87a386"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::CompressionEncoding::as_str"
+kappa = "e6ce1440d361d6d8e110df1638699efb314929b0c472e04ad0429b4900f21ea6"
+embedded = "c9d693f9cbb000e7abd45d89bb08fe95b2f18723b0f9bbb14217df25945bbfb7"
+status = "residue"
+cause = "mir::Ty: CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::CompressionEncoding::fmt"
+kappa = "ad202dafb31d2f5c13f49e6203a10aed52fd7621ef2d056e50209b3b36801926"
+embedded = "46ca2959cd4c4fa98cb641eb67d44c927dd81984182c8e00ddec8b02fb55cf3d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::compression::CompressionEncoding::from_accept_encoding_header"
+kappa = "a6b90faea7d6e629f6199d6c39643c9c331c40712ea53714032666a542f00944"
+embedded = "e6b0f38cd32dcc76a6cbfafdb8469b570c672301609fc38f1dd5f2c285837b25"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::CompressionEncoding::from_encoding_header"
+kappa = "b2101485d9a86e1bf4d63e0f908c8da8c8552e1b4639ac7f74887477be1bd57d"
+embedded = "2acea18d5a7c9c84321b75832d5c00e9b6e8a35f1c267c8110910686c6ae9589"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::compression::EnabledCompressionEncodings::enable"
+kappa = "65e68c9058b4afe09632210e9ef0302ee9e336ac44f5015effe03c30703a9523"
+embedded = "8fe36806594b49a512af483c8fe60bc03864e0671a15a0576e8153baa86c9ddb"
+status = "residue"
+cause = "mir::Ty: EnabledCompressionEncodings"
+
+[[fn]]
+path = "tonic::compression::EnabledCompressionEncodings::into_accept_encoding_header_value"
+kappa = "67b2465971917a59c19b567f5c7442d5ee87fc35b7bf765c5799ddb1d8cafbd0"
+embedded = "1a10488aa7316a18dfe7f382b9dd7cf843a76a01a7c87982bfcbe4301300955b"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "tonic::compression::EnabledCompressionEncodings::is_empty"
+kappa = "e10ccbe986da7dedb63e1cf48bc74a500dfa72479d7eaeb02ddd0ea2d86370cf"
+embedded = "ebc8de10d7d5ebe2d79f469b9c0e886bc6a249276850d4b7cf5fec515de2e0a6"
+status = "residue"
+cause = "mir::Ty: EnabledCompressionEncodings"
+
+[[fn]]
+path = "tonic::compression::EnabledCompressionEncodings::is_enabled"
+kappa = "f8f144847aeac192306c190a44f4d1aa0ba638f1ebaf9bb433ba3c0b933f7699"
+embedded = "afd0a18740c65aa0e6fec8c27adaae8e6f52e7e7a64b658d071a45169e4157f0"
+status = "residue"
+cause = "mir::Ty: EnabledCompressionEncodings"
+
+[[fn]]
+path = "tonic::compression::EnabledCompressionEncodings::pop"
+kappa = "7b99d6d47e06213af554727bdf0236ec64b6db00b8a3d52cfbfd167201359c41"
+embedded = "26ca5c5ffaf8e903dab684c61e52ad85b9e1a6fe5d13c57688613ddca1d4ee05"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::decode::<impl at src/codec/decode.rs:64:10: 64:15>::fmt"
+kappa = "4417a4e5edd4e99b7131f32e9329899e68399c4129a3b9c88934d86c87ee0837"
+embedded = "867361bc543b75f6428b925e61c1b8bb7a437d1bf8c0289eeda1e4fe2d32674a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::decode::<impl at src/codec/decode.rs:64:17: 64:22>::clone"
+kappa = "a800156fce100712422ebd8d386bd3442b1437519ca0b128c7443eb263903a40"
+embedded = "e2207b5df92b0b71df9f5221cd772b51f5fd8e940c1b8954009a66d76d4cea14"
+status = "residue"
+cause = "mir::Ty: codec::decode::State"
+
+[[fn]]
+path = "tonic::decode::<impl at src/codec/decode.rs:74:10: 74:15>::fmt"
+kappa = "ec6a6b3aa4e487784943e9aab005f3d95a0bbc52f0dcd287bab257a8ff204d5e"
+embedded = "72ad543da007be1b387ea81be005debb6268058548df2b8aac5ad830e4f438bd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::decode::<impl at src/codec/decode.rs:74:17: 74:26>::eq"
+kappa = "10cf3228860630209557ce133d3690b8ab65d40b91110ce08a86ecb1d9dc0272"
+embedded = "b5d72a3f1188f65ed5cf03710364b11402a44b4edcedecff6fa4c577d030e834"
+status = "residue"
+cause = "mir::Ty: Direction"
+
+[[fn]]
+path = "tonic::decode::<impl at src/codec/decode.rs:74:28: 74:30>::assert_fields_are_eq"
+kappa = "5050e6bde75e3dc54c7ff45338c0342805139a6c7e066050ff121fa7663d1f9d"
+embedded = "1006f4929dc5d6bd15ba88c61c4e0af114cbdee407c8c2e57b5832cb82fa1634"
+status = "residue"
+cause = "mir::Ty: Direction"
+
+[[fn]]
+path = "tonic::decode::Streaming::decode_chunk"
+kappa = "b8824fe52f56a6933d1b183a7053038554bb8e762a6e894263bc6873998e3dcb"
+at = "T=u32"
+embedded = "03d875d2c76f689e0249ce541e57892ac110cf593589449cd6a205231dd9d405"
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::decode::Streaming::fmt"
+kappa = "7c5524e613cd646d4cef4385e4e2cd27574f7b10c952de0e95c26ac11db4a047"
+embedded = "82197fae1011dbb14c452f023e61204ef74f0a90bacf492bd8ebe084291a32be"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::decode::Streaming::message"
+kappa = "fc1defb9a91cb049840e0110d225238a330133866adb1a86f7e17e6b3a4f0b04"
+at = "T=u32"
+embedded = "75c52bd72edc70307b938954c3e50c27378937fa859f201474b98ddd23e4f9b3"
+status = "residue"
+cause = "mir::Ty: {async fn body of codec::decode::Streaming<u32>::message()}"
+
+[[fn]]
+path = "tonic::decode::Streaming::new"
+kappa = "09e07ed3246dff0aa638a73d1f712ca8233b89c6e6a035c1ddb5b1d1618c99cc"
+at = "B=u32, D=u32, T=u32"
+embedded = "1927242b5cf67b50311020208df8f193bc6f9b68f6379b1e539223186fc743c9"
+status = "residue"
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+
+[[fn]]
+path = "tonic::decode::Streaming::new_empty"
+kappa = "df17dcb529b3169f9d005cc8b9522ea9b4f57130e4cb21bc667d1f7bcb6fe72a"
+at = "B=u32, D=u32, T=u32"
+embedded = "f8fe3d4c7e98b65658cc59540b234372d1bbc03e79c876457ee2403b7b3dcf8e"
+status = "residue"
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+
+[[fn]]
+path = "tonic::decode::Streaming::new_request"
+kappa = "4f0c7c5caa8f6969db3a8e77f90c07096e4183a78e14db79bfb70fd61f043d89"
+at = "B=u32, D=u32, T=u32"
+embedded = "305af75d2024f94c6bc2f02751bfcfa9eed4cef07a283ac801b59588281b7afc"
+status = "residue"
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+
+[[fn]]
+path = "tonic::decode::Streaming::new_response"
+kappa = "d657514e809766a8742979ca16ad3c61aed0c83250bf80ad5cc318b689a1cbdc"
+at = "B=u32, D=u32, T=u32"
+embedded = "e2e1b1aabc6b8a9d7e5f223c474ea61fad565b9e3006343189696182cf32bf47"
+status = "residue"
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+
+[[fn]]
+path = "tonic::decode::Streaming::poll_next"
+kappa = "74533f88c91f2a1f3046bc96decba45f49bf5785115b872df126118573c45fb6"
+at = "T=u32"
+embedded = "ce27b9f149663368c3cd6c60e6c1e75dba507ead28d3f95ceaf989bddb4431eb"
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::decode::Streaming::trailers"
+kappa = "e0e7fca8b25d7fd77f6a207246e4ebd296dc2daaa72c03fda6b295b1828e708f"
+at = "T=u32"
+embedded = "ad94202ed743e9ba0368e5588a36a6e7ffadd28de3a88af7af0dc230c2ac6a9e"
+status = "residue"
+cause = "mir::Ty: {async fn body of codec::decode::Streaming<u32>::trailers()}"
+
+[[fn]]
+path = "tonic::decode::StreamingInner::decode_chunk"
+kappa = "85e73bb6e024eab8a33a5a102394fb15ba64d8f4910f5d950b161c11bf252fba"
+embedded = "e144f14b1f25be3b89eb3c36b49768d568e4df5f08b843167aebdf6856ad3724"
+status = "residue"
+cause = "mir::Ty: codec::buffer::DecodeBuf<'_>"
+
+[[fn]]
+path = "tonic::decode::StreamingInner::poll_frame"
+kappa = "79f8cf91ae852abc7b005abeca0c2e34ceccdc02246b480296f6808017d801bd"
+embedded = "f8e6909a960495b9025cab432037e0c1420264f8f51bdada46c5aa3393cdd518"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::decode::StreamingInner::response"
+kappa = "bb220446ae931007ec80594bde168eda3be6ac8654cba001564b23ca305821f7"
+embedded = "c92e4407e9ab138db247004a43538e67bfdd7875cffaa2cf76495e9009320519"
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::decompress"
+kappa = "4c7baeb8db737d5929afdcab97eede98a03386f2db6c304cd2e6bb84202ca0b4"
+embedded = "283e19f195510950bbed2551fef2b2749561fd7948007e9aca092153af4631dc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::encode::<impl at src/codec/encode.rs:233:10: 233:15>::fmt"
+kappa = "a1000fce5fa6ccb650f2b86dc87c728dfeca5cb5d3ccae6e5377bd5ad9ce9e5c"
+embedded = "4ae6b005e92605c69d05a6c5614983e0b3e8cc8067ed72c707a79b0f8eaf093e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::encode::<impl at src/codec/encode.rs:241:10: 241:15>::fmt"
+kappa = "6537ce1e121d9a630c4eb58c11952a46b541f19ce84a4e45515060963ef21608"
+at = "T=u32, U=u32"
+embedded = "30bac15afca2f7b8618bb099d2523f2aa9d7bd059834d293b2e57b0e60374c08"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::encode::<impl at src/codec/encode.rs:250:10: 250:15>::fmt"
+kappa = "80f063666447ad7066469752a0d5673d13a6c0c4ae4d92989c2d6f33af18c4e0"
+embedded = "58233a6ec12e5d54aef47552aa52eb72708f6626dd05c92a19679f159b912a2a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::encode::<impl at src/codec/encode.rs:49:10: 49:15>::fmt"
+kappa = "ad70cf82e9b81e42d246bbdbcb13326880487af96ac0bbcf5bd2a4d8ed86b260"
+at = "T=u32, U=u32"
+embedded = "81b278e9d6ad27ce2b29cd7d21cf9125658c1c37c8df8f34e75291f81d328f08"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::encode::EncodeBody::is_end_stream"
+kappa = "97715c49fd81b06dd1e751bcb81750f62468a454407b9ddd4663614d78873c4d"
+embedded = "775d69ba8326e8dc0f5d61ae5a08800277956fbcbafd48cdc7d2b103d9007179"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "tonic::encode::EncodeBody::new_client"
+kappa = "271e342453a832525ea019a9c8747064a8e7d6a90cfb2b1eb10f2ab5188fe4b3"
+at = "T=u32, U=u32"
+embedded = "5d0f2a3642f93d7bc7d7dfb4f312d049ebcc40e4c4befa19c85c163929539cbf"
+status = "residue"
+cause = "mir::Ty: codec::encode::EncodeBody<u32, u32>"
+
+[[fn]]
+path = "tonic::encode::EncodeBody::new_client_with_cancellation"
+kappa = "8c18d71748c557a7041c9147d873a6e54f76e932882b0d472ff55366f5bf4e4e"
+at = "T=u32, U=u32"
+embedded = "40206adce5c40acf234ae213f0ceb5dc81f7637a542673d9acc76b26d2913008"
+status = "residue"
+cause = "mir::Ty: codec::encode::EncodeBody<u32, u32>"
+
+[[fn]]
+path = "tonic::encode::EncodeBody::new_server"
+kappa = "028177ef996306cd7c2b14348a7ef3e5944998519185479a3d399a4059be92ec"
+at = "T=u32, U=u32"
+embedded = "410575d7815119875b45073691a6a87c7a87c0e4ec2add62e4a4fe2192100342"
+status = "residue"
+cause = "mir::Ty: codec::encode::EncodeBody<u32, u32>"
+
+[[fn]]
+path = "tonic::encode::EncodeBody::poll_frame"
+kappa = "ebcaca21953c4b30a311472f4be5bbe247bcdafc62e5dfc228cfaca51a38786e"
+at = "T=u32, U=u32"
+embedded = "a5bfbb893be623f46886ad50ead21b4a913968a0b2f8b57ce9e6292139ebbccc"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "tonic::encode::EncodeState::trailers"
+kappa = "7ee039ad876af4f59e2a3b44fe8b251624fa74e74dfd04b22e830c00271f8cf8"
+embedded = "1e234658f6430f30d0124190ed4d9ebe6125dc22672e4792bed4429516a26ce1"
+status = "residue"
+cause = "mir::Ty: http::HeaderMap"
+
+[[fn]]
+path = "tonic::encode::EncodedBytes::new"
+kappa = "81c8b58263e01bf6b3d247e4b5223638b55d0d6584eff320a4fd3218fc0462ca"
+at = "T=u32, U=u32"
+embedded = "0c637eeb875e25ca599c1e10fff501ed946af6aba5276376932af261ebd45ad2"
+status = "residue"
+cause = "mir::Ty: codec::encode::EncodedBytes<u32, u32>"
+
+[[fn]]
+path = "tonic::encode::EncodedBytes::poll_next"
+kappa = "29598dc6cd738eb0aeb1b4f97eac2f73b9e961586ce8c782c9c51e022817135a"
+at = "T=u32, U=u32"
+embedded = "3b1098651e2854bb9cc19c32366e4cdaae8fa78666cde32267c44bf616da856d"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:240:1: 240:15>::drop"
+kappa = "53c1e3bef7f607440437c35d469b0f4172741848678350b6e03667e3a2aaab40"
+embedded = "151af0d2299037d8cbd65118069101a98f686b4ebbde31d5fdf2023aeeddf730"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:240:1: 240:15>::project"
+kappa = "6f974bcddaaa3df9db8a23267bb5a8ad72351348b5c035a67993aaa741a8244a"
+at = "T=u32, U=u32"
+embedded = "9f9e9c00d7f6f983bb8970155c00063baf8e843a2d0d7e24509df2c047eb47bc"
+status = "residue"
+cause = "mir::Ty: codec::encode::_::__EncodeBodyProjection<'_, u32, u32>"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:240:1: 240:15>::project_ref"
+kappa = "a3a83212527129788b1669286eb4c93133434e7e783a23402f2415967f1a08e2"
+at = "T=u32, U=u32"
+embedded = "bb4687ae4890eb8b29e7aa7f7ef2682476f8cd13b96fce7a444d2a545c8e0481"
+status = "residue"
+cause = "mir::Ty: codec::encode::_::__EncodeBodyProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:48:1: 48:43>::drop"
+kappa = "26e4541b3b62fa3625df62601a1bc723c6b420b0a0d4805f7d234b1952db5a2a"
+embedded = "399d40738e5da65998da44189ad3f7063ff85a401afdcc4b60687ca44e5f94bf"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:48:1: 48:43>::project"
+kappa = "bcb0b6fab5b015153daf93f68fc58637a341efdf3601b4df1b50577c896b60ab"
+at = "T=u32, U=u32"
+embedded = "ddbfb69fb3b190135f4c3bb0442a4b478d0b4652c42992bb7a779eedd6962daa"
+status = "residue"
+cause = "mir::Ty: codec::encode::EncodedBytesProj<'_, u32, u32>"
+
+[[fn]]
+path = "tonic::encode::_::<impl at src/codec/encode.rs:48:1: 48:43>::project_ref"
+kappa = "cce301c71d3273f9899c29dbfcd86ec5d6eb4679673f34eab77e4d9101de08e1"
+at = "T=u32, U=u32"
+embedded = "75f8a35c71fe22e44a17e1fea2883223ecc72e5ed40f5db6c9e8a6f3027ff994"
+status = "residue"
+cause = "mir::Ty: codec::encode::_::__EncodedBytesProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "tonic::encode::_::__assert_not_repr_packed"
+kappa = "26a9ff907e8d88c512b099d2a8457b4d5ef28ba4c59a5afc8b6827ee5b093d6f"
+at = "T=u32, U=u32"
+embedded = "9e837bffa6f6cc646f77c852fcb8b20c9d26143960c7a7350e516d34a517a974"
+status = "residue"
+cause = "mir::Ty: EncodeBody<u32, u32>"
+
+[[fn]]
+path = "tonic::encode::_::__assert_not_repr_packed#2"
+kappa = "b42d22b49597ae9de9c7eb5ef17e956888a27e7c4dae2463388ee0c47bd3ed2b"
+at = "T=u32, U=u32"
+embedded = "35a778210268879ac4db29ce5da213e57214871c0277303c1533bd113ffd48b0"
+status = "residue"
+cause = "mir::Ty: EncodedBytes<u32, u32>"
+
+[[fn]]
+path = "tonic::encode_item"
+kappa = "a145422ca528e9acb1c3275d223398288d5a9dd8da2ba955a95fa3dc7d8ec18d"
+at = "T=u32"
+embedded = "70adbde1eb91c4acb2d7ed7de2d49e188c69a9073299cabcc664d11884c12cd8"
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::finish_encoding"
+kappa = "0bc44fc2f19e5fab0902a358ae69b7ad2fd98a80f9f017599997459a43a24808"
+embedded = "c20846dd7aa644722071d02e116912d30b0d6b8f754d3c8736fa415294cacca1"
+status = "residue"
+cause = "mir::Ty: status::Status"
+
+[[fn]]
+path = "tonic::split_by_comma"
+kappa = "b8bce69254e0957fdc7f4cd12f75c4c0681d03428638c6930d6e3239f99f8225"
+embedded = "6d53b2cda00323b558b04dbb85527d11729c8af3b9636cfffc099eeccbcaa68c"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, char>"
+

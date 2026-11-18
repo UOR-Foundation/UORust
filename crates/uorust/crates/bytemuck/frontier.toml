@@ -1,0 +1,199 @@
+# The bytemuck register (written by `uorust crate bytemuck@1.25.2`; do not edit): every body of
+# bytemuck's MIR at bytemuck 1.25.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 124
+translated = 15
+residue = 109
+
+[module.checked]
+bodies = 38
+translated = 13
+residue = 25
+
+[module.contiguous]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.crate]
+bodies = 29
+translated = 1
+residue = 28
+
+[module.internal]
+bodies = 20
+translated = 1
+residue = 19
+
+[module.transparent]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.zeroable]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 118
+embedded = 118
+evaluable = 118
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: checked::CheckedCastError"
+bodies = 18
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 15
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::min_value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_cast_slice: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of_val"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CheckedCastError"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_cast_slice_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of_val"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_from_bytes: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_from_bytes_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_pod_read_unaligned: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::needs_drop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::bytes_of: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::bytes_of_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::slice::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::cast: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::cast_mut: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::cast_ref: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::cast_slice: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::cast_slice_mut: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::from_bytes: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::from_bytes_mut: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::pod_read_unaligned: bytemuck's MIR stops at type outside the lift: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_cast: bytemuck's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_cast_mut: bytemuck's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: internal::try_cast_ref: bytemuck's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::align_to"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::align_to_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: zeroable::Zeroable::zeroed: bytemuck's MIR stops at mir::TerminatorKind::Call: zeroable::Zeroable::zeroed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnsureZeroWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PodCastError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1

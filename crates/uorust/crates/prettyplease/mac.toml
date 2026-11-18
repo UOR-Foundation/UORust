@@ -1,0 +1,44 @@
+[[fn]]
+path = "prettyplease::is_keyword"
+kappa = "bf8ed272664d4d99d2982a94c0cdb9ad1beb6f5ddcdee9022062b8877c865808"
+embedded = "815629b32052bdc483bf6517378d2b148211565feb4c2ff5f7dddd515088a714"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Ident"
+
+[[fn]]
+path = "prettyplease::mac::<impl at src/mac.rs:8:1: 8:13>::macro_rules_tokens::<impl at src/mac.rs:129:18: 129:27>::eq"
+kappa = "25de1ee34a1afa9e6be1a3d121046db6c230c22977eee82988500619485fec3a"
+embedded = "0696208a6f812a95a890ed0024d3e8c55e3f5c24e11286a947eeeba20608cfe0"
+status = "residue"
+cause = "mir::Ty: mac::<impl Printer>::macro_rules_tokens::State"
+
+[[fn]]
+path = "prettyplease::mac::Printer::mac"
+kappa = "91d7388e246d7753a6148814e5a982f5072be62c638b8cad0f72e011734dcce2"
+embedded = "de940ccb100fc29139116cab83659612654ade42a79774676efce03793520b7b"
+status = "residue"
+cause = "mir::Ty: Printer"
+
+[[fn]]
+path = "prettyplease::mac::Printer::macro_rules"
+kappa = "aadeb048d91773107b13eac12262373e52e0491f33b9ba925b0211c46bb7e084"
+embedded = "e01ca333b0d5eb531845f1fb01e91121a60cc0ba2819178a0226045894bc787b"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: Printer"
+
+[[fn]]
+path = "prettyplease::mac::Printer::macro_rules_tokens"
+kappa = "22a561f47660cfdc8e7de15abec0aacafd1e8e4b2c9b248e088b5d2df94c5b61"
+embedded = "ae1134afd84a09485dc81bc30172be7054f317df9be4d8d49468ae399149dae9"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: Printer"
+
+[[fn]]
+path = "prettyplease::requires_semi"
+kappa = "8ab58a11ad1681d2bf2cbb5d1c55347e9c6a46a09f5779ac847b7f3e511c950e"
+embedded = "7f04558982a1261620fd72b1cc24ebb36962df2182ae9ed069cd0938991f78ab"
+status = "residue"
+cause = "mir::Ty: MacroDelimiter"
+

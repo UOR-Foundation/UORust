@@ -1,0 +1,334 @@
+# The zerotrie register (written by `uorust crate zerotrie@0.2.5`; do not edit): every body of
+# zerotrie's MIR at zerotrie 0.2.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 212
+translated = 3
+residue = 209
+
+[module.builder]
+bodies = 53
+translated = 2
+residue = 51
+
+[module.byte_phf]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.cursor]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.error]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.helpers]
+bodies = 4
+translated = 1
+residue = 3
+
+[module.options]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.reader]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.varint]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.zerotrie]
+bodies = 88
+translated = 0
+residue = 88
+
+[embedding]
+bodies = 212
+embedded = 212
+evaluable = 212
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: Store"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ZeroAsciiIgnoreCaseTrie<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieSimpleAscii<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: konst::builder::ZeroTrieBuilderConst<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieExtendedCapacity<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ZeroTriePerfectHash<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: builder::branch_meta::BranchMeta"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::split_first"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PerfectByteHashMap<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ZeroTrie<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstSlice<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: options::ZeroTrieBuilderOptions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroAsciiIgnoreCaseTrie<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrie<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieExtendedCapacity<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTriePerfectHash<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieSimpleAscii<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ByteSliceWithIndices<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cursor::AsciiProbeResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroAsciiIgnoreCaseTrie<[u8]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieExtendedCapacity<[u8]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTriePerfectHash<[u8]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieSimpleAscii<[u8]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ZeroAsciiIgnoreCaseTrieCursor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieSimpleAsciiCursor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<#usize_N"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::slice_indices::ByteSliceWithIndices<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cursor::ZeroAsciiIgnoreCaseTrieCursor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cursor::ZeroTrieSimpleAsciiCursor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AsciiProbeResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieBuildError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::konst::builder::ZeroTrieBuilderConst<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<10"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: byte_phf::PerfectByteHashMap<[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroAsciiIgnoreCaseTrie<&[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieSimpleAscii<&[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieSimpleAscii<[u8; #usize_N]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: helpers::debug_split_at: zerotrie's MIR stops at mir::TerminatorKind::Call: slice::split_at_checked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::split_at_checked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConstArrayBuilder<#usize_N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConstArrayBuilder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConstSlice<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZeroTrieFlavor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::konst::builder::ZeroTrieBuilderConst<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<#_N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<#usize_K"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::konst::store::ConstLengthsStack<#usize_K>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: byte_phf::PerfectByteHashMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ZeroTrieBuildError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: konst::builder::ZeroTrieBuilderConst<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::AsciiMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::CapacityMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::CaseSensitivity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::PhfMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::NodeType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieExtendedCapacity<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTrieFlavor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerotrie::ZeroTriePerfectHash<&[u8]>"
+bodies = 1

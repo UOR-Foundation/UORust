@@ -1,0 +1,164 @@
+[[fn]]
+path = "serde_with::deserialize_ignore_any"
+kappa = "a18c9976a443ecc2e89da9be92971f0d97f061735dae12d64a0427680a415e30"
+at = "D=u32, T=u32"
+embedded = "b36e2c5b58a36d15774680e95e2a8b01519360b78f4096c766628c47da58fd62"
+status = "residue"
+cause = "mir::Ty: serde_core::de::IgnoredAny"
+
+[[fn]]
+path = "serde_with::double_option::deserialize"
+kappa = "ef22eec28fbea23d573b7f78c14fa1f20d28e8543542a55d2f5d5a0dc5dd7a67"
+at = "D=u32, T=u32"
+embedded = "52f10e121a857b3be6ec0aff085808c1b7f2ef24451aa9be2e890db95d7c0646"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <core::option::Option as serde_core::Deserialize>::deserialize"
+
+[[fn]]
+path = "serde_with::double_option::serialize"
+kappa = "c44ffd901257e638e3e29c9b4fc84c37638bf2ae99bd21f86b988ffe0a97207e"
+at = "S=u32, T=u32"
+embedded = "1a725521cba51aaf05bc524a8be823b54f46e20848ddffe78303ebc835f06c39"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::maps_duplicate_key_is_error::deserialize"
+kappa = "7d3ad780a73a07743b0013010f098055c9d4d01828fedbdd7d39899e54ccd926"
+at = "D=u32, K=u32, T=u32, V=u32"
+embedded = "0a1958ddf2f49931153ceedadefc17cb9eb6f5b0247a4ab805e5b304fd2850e7"
+status = "residue"
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+
+[[fn]]
+path = "serde_with::maps_duplicate_key_is_error::deserialize::MapVisitor::expecting"
+kappa = "167051d18a0e7ed41008bf8bff135fb3756380178d89e482d09bc61de3f87a06"
+embedded = "c7d13f442bc7497100b4bb10a8b8616cf57210f567ad50e13e0781562c0fd285"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::maps_duplicate_key_is_error::deserialize::MapVisitor::visit_map"
+kappa = "077e3df214d35eefa7c029c20fcb9fea7d3ca8d61540be25528992df6d61496d"
+at = "A=u32, K=u32, T=u32, V=u32"
+embedded = "4cff19d777aaadfa0135f0eb39e6d686248ace1279d78db3f2827ddcee40850c"
+status = "residue"
+cause = "mir::Ty: maps_duplicate_key_is_error::deserialize::MapVisitor<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::maps_duplicate_key_is_error::serialize"
+kappa = "5cc789110270555de2fa10f06335b9e459386390bc9dc894b78f5eb65ea1d0e3"
+at = "S=u32, T=u32"
+embedded = "fc1a6b0b93e475c05af6c5076e42f6a2eca5f7b5d4a0a7b1b6bf2e86260a23c5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::maps_first_key_wins::deserialize"
+kappa = "1fdbeed3948f8b92d555853d63de42327a5b5a5e0ca8b22cd5e4ca4cca638cad"
+at = "D=u32, K=u32, T=u32, V=u32"
+embedded = "426858c9a24e722c79032b38158febdd5b9831ca482da30f89487447f165ef84"
+status = "residue"
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+
+[[fn]]
+path = "serde_with::maps_first_key_wins::deserialize::MapVisitor::expecting"
+kappa = "7cb9962bcc89ebfdc7dcb14c87025359379dd103995ee70e94e7ab74f5cde10e"
+embedded = "69c4f03a02fa2451793fc3667f4f108ed17972cc8877dd0972f4ba7ca415ffdd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::maps_first_key_wins::deserialize::MapVisitor::visit_map"
+kappa = "3d70e16d071fd62a2b1e3bd26994b6140d2d58bf7d91a392d90d348903664bda"
+at = "A=u32, K=u32, T=u32, V=u32"
+embedded = "175c17686db09eb7ff4b552d2f65d6a433a585ce68291b024914b05c13341e0e"
+status = "residue"
+cause = "mir::Ty: maps_first_key_wins::deserialize::MapVisitor<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::maps_first_key_wins::serialize"
+kappa = "dd249be0b302c0ee6b97619a90a83a10896c82ed71145d035c979ade01986e20"
+at = "S=u32, T=u32"
+embedded = "28f95a3a5809eae76871d57b3eea04716d505f05592c7b8abe7d5c8169c526e6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::sets_duplicate_value_is_error::deserialize"
+kappa = "49e62d968229920997748ae4db2a0a69a56fcca807bc46162fb309284dbd1946"
+at = "D=u32, T=u32, V=u32"
+embedded = "87908becc5ef1e57cfabcf8ea6581887039dcc3bfe145abc3f6a2518c169d94f"
+status = "residue"
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+
+[[fn]]
+path = "serde_with::sets_duplicate_value_is_error::deserialize::SeqVisitor::expecting"
+kappa = "acba76cf176c5e6cb371a616672723422f352afb084ec20cc596fce0cd444d85"
+embedded = "027a9cc5df6b0af8a38314981795cd04d8faf63dc54c406c6342b15d5c9831c2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::sets_duplicate_value_is_error::deserialize::SeqVisitor::visit_seq"
+kappa = "6fedf3f29a824d42ed05d536c493a3562ddc987271a4a5d4314ed97734637b34"
+at = "A=u32, T=u32, V=u32"
+embedded = "75759c54bee8bb03bcf8cd587c1c909f44fcbf0a5a5957bf79c3d050ba3046e3"
+status = "residue"
+cause = "mir::Ty: sets_duplicate_value_is_error::deserialize::SeqVisitor<u32, u32>"
+
+[[fn]]
+path = "serde_with::sets_duplicate_value_is_error::serialize"
+kappa = "a35d2dc80ad25507ad04b7b7ce09753aeed9d259776852831a6977b6d9877245"
+at = "S=u32, T=u32"
+embedded = "a02ef6dc7b634c7dc22d414867285545bbdd5400dfc1f9eecb9d5b372d200beb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::sets_last_value_wins::deserialize"
+kappa = "2477886d4a44f53a32a9870f7c2827dca6cc86382dcb9edcc342c555d96b5013"
+at = "D=u32, T=u32, V=u32"
+embedded = "79ef6c1f650d5e8cf7cc6253fb648ff2f775a091ea1d00a88306df652dccd6e2"
+status = "residue"
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+
+[[fn]]
+path = "serde_with::sets_last_value_wins::deserialize::SeqVisitor::expecting"
+kappa = "1598301190333cd710b3b85c7695caa2ae09f3522271165063d4f3a1dd309671"
+embedded = "38d7e36b4fa7d13fcad2591d9a35c64e90c0ab950fa0771839ea700b7381fc29"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::sets_last_value_wins::deserialize::SeqVisitor::visit_seq"
+kappa = "061dc367fea6ef10b747bc5f5ab17cce91ca8b3853837019cc5ef49d41aece85"
+at = "A=u32, T=u32, V=u32"
+embedded = "075e36af10ec59d555ad54bfd657d0cf8db0a67b4aaf736d00d3f88f1e2aa648"
+status = "residue"
+cause = "mir::Ty: sets_last_value_wins::deserialize::SeqVisitor<u32, u32>"
+
+[[fn]]
+path = "serde_with::sets_last_value_wins::serialize"
+kappa = "0b29bc0dbc0035bb6132012b435b52b308f34b2c7e773f3c6dba93a350daf55e"
+at = "S=u32, T=u32"
+embedded = "a3b80f280db038cdc0979d7cd7a06505743afbe8495f338679d9f16727b86b83"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::unwrap_or_skip::deserialize"
+kappa = "356603c4c60b71e0a91b70829bcad51a2c2e027fd06d73438b2a0cc335dbc6bc"
+at = "D=u32, T=u32"
+embedded = "4626fbb98f76ea1469373315c41ea666c54d20e07b98ebad4f9cd3ceb929c8c6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::unwrap_or_skip::serialize"
+kappa = "2ab947260e68b846fe48598cd79fa35ec5095864cae7b31b42096a5557ba4eeb"
+at = "S=u32, T=u32"
+embedded = "e4ed9939ed7da47cefe7de26c506a666d41fac5d9e131da59d61145b08fc6f78"
+status = "residue"
+cause = "mir::Operand::Constant: rust::unwrap_or_skip::serialize::<u32, u32>::promoted[0]"
+

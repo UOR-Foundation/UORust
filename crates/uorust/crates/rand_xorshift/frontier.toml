@@ -1,0 +1,46 @@
+# The rand_xorshift register (written by `uorust crate rand_xorshift@0.5.0`; do not edit): every body of
+# rand_xorshift's MIR at rand_xorshift 0.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 10
+translated = 0
+residue = 10
+
+[module.crate]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 10
+embedded = 10
+evaluable = 10
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: rand_core::Infallible"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <[u8; 16] as AsMut>::as_mut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: XorShiftRng"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: read_words"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 1

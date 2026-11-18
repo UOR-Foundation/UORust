@@ -1,0 +1,35 @@
+[[fn]]
+path = "brotli-decompressor::ToUpperCase"
+kappa = "c088afeaecc6881de4977f97321a736cd8d16a7ba0e5852c7a094d12000d5b13"
+embedded = "3393a500a8abdd318b0442d75c89a777f3c5f46907b69108161165832e8e6a68"
+status = "translated"
+digest = "876294dc12ecacd77099e188f0d2bbbab0cfc24d8b1956da1e110e63a8f507b9"
+
+[[fn]]
+path = "brotli-decompressor::TransformDictionaryWord"
+kappa = "0ffe15b8e3f569e6723f4675722a46d40de0a64fb66744503030a1aa1b5a0bd2"
+embedded = "6d4cf176c151e97b933a7fe0cfb38d09b503af4dde8dd7bf86cb619bf0d1ae80"
+status = "residue"
+cause = "mir::Operand::Constant: transform::kTransforms: type outside the lift: transform::Transform"
+
+[[fn]]
+path = "brotli-decompressor::copy_bytes"
+kappa = "2a1d420a044af2a35e1ac9764a17b62e03196f81ebea120ca47cec715bcec4c3"
+embedded = "ba8f56d848815f6e15ea490b7c29437412a2ce6cfc1b09c88a91c30701ec7cc9"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+
+[[fn]]
+path = "brotli-decompressor::kPrefixSuffix"
+kappa = "92da0ce3c921d7b6efdb0a6e6eca880a9f71b1fad892a4aed0ac9fe4e7fb54e7"
+embedded = "bee8ad1b686d546103fba7ff44812cbabca413349e7735f1a4f002567fa938b3"
+status = "translated"
+digest = "3f3c79f4688280807f1ca07271a4e3e9dc9bd4ce79ca79f70ea091bf65d3b440"
+
+[[fn]]
+path = "brotli-decompressor::kTransforms"
+kappa = "d54f9cb5b483fa64d4527bf7fef78cd19c7a2310081ce75e535e5ca26e6120c6"
+embedded = "89415d0d2464238fe235be6c358246361fd5f8d336acc520049d0b1e17067085"
+status = "residue"
+cause = "mir::Ty: transform::Transform"
+

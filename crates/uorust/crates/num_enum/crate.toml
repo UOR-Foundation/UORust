@@ -1,0 +1,55 @@
+[[fn]]
+path = "num_enum::<impl at src/lib.rs:55:16: 55:21>::clone"
+kappa = "b91beea90a33e8de9596473e6c253c311349ca57dd23d5ef7d6ca942cca178a9"
+at = "Enum=u32"
+embedded = "6343d739bca1da310fddd17ab4bc534fc8beedf72744f675bf3dd8b39cd63cae"
+status = "residue"
+cause = "mir::Ty: TryFromPrimitiveError<u32>"
+
+[[fn]]
+path = "num_enum::<impl at src/lib.rs:55:23: 55:32>::eq"
+kappa = "ef04a9d9104edddf4203c8c0641782af20d574bfb96e0a6a1986c2150ab19bad"
+at = "Enum=u32"
+embedded = "510cdec55b0e61015c69c31cf33941d003040ea5192b37c417cda4e976c318d7"
+status = "residue"
+cause = "mir::Ty: TryFromPrimitiveError<u32>"
+
+[[fn]]
+path = "num_enum::<impl at src/lib.rs:55:34: 55:36>::assert_fields_are_eq"
+kappa = "c3724f2d5577023e44140a7dad9dee522c687b00ea6810d86f62458335f800c5"
+embedded = "9d263803b55ff62c7f593bf162f9b1149807ecda8ddb68b67ab3bb1ba02a0ec5"
+status = "residue"
+cause = "mir::Ty: Enum"
+
+[[fn]]
+path = "num_enum::TryFromPrimitiveError::fmt"
+kappa = "67ad13aef77b789381f7cb38c65f12763bd2469662339b4ad7ce0ad640340258"
+at = "Enum=u32"
+embedded = "6cbe6c3783cfec698e12a77592bdf4df6d8c1b6ad3dd89e0aa6b9e836cd68463"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "num_enum::TryFromPrimitiveError::fmt#2"
+kappa = "db1d90cfa882b92fae61bd389a6e79a9e7150273f8203d79af8c1a717acf185f"
+at = "Enum=u32"
+embedded = "ff4e9e533f03ed4c90e8d376287f2ae6db62083b459b0b7438b7cfd7cbb84ad4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "num_enum::TryFromPrimitiveError::new"
+kappa = "92124c4a6e58f15a178933e8db9a306fbdc214800cb3a019f36b78bbdf1d38fb"
+at = "Enum=u32"
+embedded = "7838e4c7a44029fb6447bb9ac5ea45eab746fe65b46d529a4b4668ec58ac4256"
+status = "residue"
+cause = "mir::Ty: TryFromPrimitiveError<u32>"
+
+[[fn]]
+path = "num_enum::UnsafeFromPrimitive::from_unchecked"
+kappa = "41134103b6d894f58ce56edf6c684f1f23658d229ea13488c5d99f57dd954fb9"
+at = "Self=u32"
+embedded = "8e54d97f26316a98f2ec346e7300bb2b47126ad90c90867d246a5b061369e452"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by UnsafeFromPrimitive, which u32 does not implement in core"
+

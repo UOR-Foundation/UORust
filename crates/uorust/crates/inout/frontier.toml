@@ -1,0 +1,85 @@
+# The inout register (written by `uorust crate inout@0.2.6`; do not edit): every body of
+# inout's MIR at inout 0.2.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 54
+translated = 0
+residue = 54
+
+[module.errors]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.inout]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.inout_buf]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.reserved]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 54
+embedded = 54
+evaluable = 54
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: inout_buf::InOutBuf<'_"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: inout::InOut<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InOutBufReserved<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::Array<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reserved::InOutBufReserved<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::Array<u8"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: errors::IntoArrayError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::NotEqualError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::OutIsTooSmallError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inout_buf::InOutBufIter<'_"
+bodies = 1

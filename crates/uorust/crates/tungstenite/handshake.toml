@@ -1,0 +1,374 @@
+[[fn]]
+path = "tungstenite::WEBSOCKET_HEADERS"
+kappa = "80b6447cb30573ca02b77a5ce3e6a71aa1f128a557048c0368a388ac86edf098"
+embedded = "e63cd64ccc7f076123888106876cce9f8993dea809d8cb499d8dd5aa0eacc81b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item handshake::client::generate_request::KEY_HEADERNAME"
+
+[[fn]]
+path = "tungstenite::WS_GUID"
+kappa = "9ce9ecbc7283cd39e49756f84b066b92d628555f9c6b61ae1f225c235604e61a"
+embedded = "1778f1a06d2f4c3fd622b35846a0a94e3775fd2fb5453c0339c71309dd2c6439"
+status = "translated"
+digest = "c68d2ae354097908c33526fc9e88486765a8d5d419d1d5a61e917417ad60bab9"
+
+[[fn]]
+path = "tungstenite::create_parts"
+kappa = "965554b8017a91dcdefca0248d885e35cfd041001d161a5a9debfc6d3237665e"
+at = "T=u32"
+embedded = "f082d06f702299062637d791e638f7e6e2d2cae2db07a6f94ee718b35932ecc4"
+status = "residue"
+cause = "mir::Ty: http::response::Builder"
+
+[[fn]]
+path = "tungstenite::create_response"
+kappa = "24405874e6210ae37cbb8f0c1ba926673522c9e8d29cf18b9615348c3b493289"
+embedded = "7fe3a56990a40ca51983f1c501708be4be772c94cc5af0a5b6b4291533f6f24b"
+status = "residue"
+cause = "mir::Ty: http::Response<()>"
+
+[[fn]]
+path = "tungstenite::create_response_with_body"
+kappa = "e2dcc688b83e60b4257fad542e49730f62922e08c3ce8d8454425a0cf9110bd3"
+at = "T1=u32, T2=u32"
+embedded = "4be56ffc6eaa396c29a6a152199312e1a7447bd739d5f5c0e018a48d3c27b2c2"
+status = "residue"
+cause = "mir::Ty: http::Response<u32>"
+
+[[fn]]
+path = "tungstenite::derive_accept_key"
+kappa = "7e20f22fbe663523e617bbcf0fa45caaf9d0f21839a009c3fe54d2372643cf67"
+embedded = "cf454172b66722813531b95504102f3652083b5e711f1e77daed3321385700b5"
+status = "residue"
+cause = "mir::Ty: sha1::Sha1"
+
+[[fn]]
+path = "tungstenite::extract_subprotocols_from_request"
+kappa = "f627afa57898b68df442c25babc949fe3f47422c8e46a913bde90273a819bdd4"
+embedded = "658e1975a10c56ef26a8abb09ab21df15ff8af48827954155c536d12c8c3e440"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "tungstenite::generate_key"
+kappa = "dc87d4b732f6e3c2ab97e484e540ab6c30884fa6ff84e4e5556a60d5eb8b3d28"
+embedded = "7628aba35cf92e6a2ad1eb23e2f3de24bff13cdbc866f994bf20831390e926ef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rand::random"
+
+[[fn]]
+path = "tungstenite::generate_request"
+kappa = "eecf3741868e3577f242e0f0326d5977c926ea33b16fb9bfdee40056fd142fcd"
+embedded = "7714b590cd9406c127e152891b7d9585d85e8b3e58c3ede2e8e3402e8ed6f77a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "tungstenite::handshake::<impl at src/handshake/mod.rs:107:10: 107:15>::fmt"
+kappa = "cbc45e1ece11a46273d3d013c0596d8dbe990030a63d0bc0db164c87497d6293"
+at = "FinalResult=u32, Stream=u32"
+embedded = "3a4972e70a8cd8a6989552762306cbd4d53c074e258e7ab850ad103101b3c1fd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::<impl at src/handshake/mod.rs:21:10: 21:15>::fmt"
+kappa = "02caf69e34930cd50c106c720e43a01871029eb09584e0ea04305e40f960f1b4"
+at = "Role=u32"
+embedded = "1f7b55e5defae6e964eb327f1dadb0b6ea1f2d6c394fc98b5a7474ca0cbe92f2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::HandshakeError::fmt"
+kappa = "aa1af8e0cd4907934eba2a81b10e46952037c6b9d75e9bbf88eb26d50f426d9a"
+embedded = "0311fb87c224884f825ce8896f53be3c5a7ef0cadef988a7bc4d02805a71db6d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::HandshakeError::fmt#2"
+kappa = "112645f376931d9adf8722db2b6cf9d72c87bb1299d35ad66349cc42be494c4e"
+embedded = "5dddf486be3238dda55d2b9a32830a7bc1af0f8fa37876817ded383edf28d6e4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::HandshakeError::from"
+kappa = "66f34ea01df1eb00819420871af154806360b84ddffcbf48012e0b39aca40ec4"
+at = "Role=u32"
+embedded = "8f0e7128e8046c1dc7d4e138bea0446c91c0f627ed3e13c7583db774c2d1f341"
+status = "residue"
+cause = "mir::Ty: handshake::HandshakeError<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::MidHandshake::get_mut"
+kappa = "f0b108951bfdfab10c37ac76f9b9037de289284c2abdd16bb722475938d414bf"
+at = "Role=u32"
+embedded = "03a299fbb41793a480d145dc0968aaa883fd0a03f00ccb4c5a87f83edf944372"
+status = "residue"
+cause = "mir::Ty: handshake::machine::HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::MidHandshake::get_ref"
+kappa = "22c46bf9789deecbdbac3cf8b4a2e32fe2a211d24a7c518f4628891931dd86e4"
+at = "Role=u32"
+embedded = "f32d78b74f795719b37da82b00bbbd1dab5c9c9896074287b819d7edbf3023a9"
+status = "residue"
+cause = "mir::Ty: handshake::machine::HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::MidHandshake::handshake"
+kappa = "59f073c217e4c5e305bc2348bd4d459a592c5290ecb5d15afbda7b403d111c48"
+at = "Role=u32"
+embedded = "9c254c22e31d30511f7a60e5ed8763df714502e0a413a946f5f35b14bfa2d20e"
+status = "residue"
+cause = "mir::Ty: handshake::HandshakeError<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::client::<impl at src/handshake/client.rs:210:10: 210:15>::fmt"
+kappa = "a7bad71cfbe6fe5e58f013c1938f92e1eb988fdfdf7dc32dac95151fc04a11a1"
+embedded = "fd62d7b8eac4ea3f270b2fdd44e452ade8e74a259841f16eb576db2f8f8a0b70"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::client::<impl at src/handshake/client.rs:33:10: 33:15>::fmt"
+kappa = "3dcb85c3cab373e9542e7c1200c4cac28929a2a5474d34312d134c2f4eeedb0e"
+at = "S=u32"
+embedded = "129a62e134969bda6f99c78687aa16497e2e2f34b8c4d48ae64317067f09da17"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::client::ClientHandshake::stage_finished"
+kappa = "9db10cf9009051839f8b4ed9f9bec7b1cf88e5d8addb78d511f0a2df3ea2d79f"
+at = "S=u32"
+embedded = "5cedba867acb0b743adcd22fafadfccfe3e76d4abbdab869a96d282280f3631a"
+status = "residue"
+cause = "mir::Ty: protocol::WebSocket<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::client::ClientHandshake::start"
+kappa = "fb6f4b965b62509001c20573c9976deb6c2f0060e12cdf07b85dbaae8c03ad5d"
+at = "S=u32"
+embedded = "0d9ca6e95e24fefc863144bd29c15b06383c951d5444a36f97dd035eed725fa2"
+status = "residue"
+cause = "mir::Ty: handshake::client::ClientHandshake<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::client::Response::from_httparse"
+kappa = "a89b6eec0820bc2432d09d5982824a61560d18b2f64c5ebf74c3d1d123ffe2a4"
+embedded = "d834d6308266bc5cee7f5d93456493f42d306e1175b6270f21e9fb2e92be475d"
+status = "residue"
+cause = "mir::Ty: http::Response<std::option::Option<std::vec::Vec<u8>>>"
+
+[[fn]]
+path = "tungstenite::handshake::client::Response::try_parse"
+kappa = "a928218aaf8de2b1feb922c324c94f84c6a9474a612adf8807a980009d8452a6"
+embedded = "8f052c2e2dfa65a5c93402e6902b5b5b9942ab1bd40c3c42dbc1fad39835d170"
+status = "residue"
+cause = "mir::Ty: http::Response<std::option::Option<std::vec::Vec<u8>>>"
+
+[[fn]]
+path = "tungstenite::handshake::client::VerifyData::verify_response"
+kappa = "aa16e5cf34718729145df2513c406b4cdec2f72432eea81ec0b4b70a4f87e334"
+embedded = "810a1d2f0ea80d5e0d30740eabae894f99d0438a19deee730668e2efd94b0b69"
+status = "residue"
+cause = "mir::Ty: http::Response<std::option::Option<std::vec::Vec<u8>>>"
+
+[[fn]]
+path = "tungstenite::handshake::server::<impl at src/handshake/server.rs:198:10: 198:15>::clone"
+kappa = "7a86142e5e5e07de898f69f4021971a394702574e1d927d5e0e301741cfc7051"
+embedded = "9dc06cfcd00011cb7a2681965a83e17db3a04cd328454fe6a2687a89281e7c90"
+status = "residue"
+cause = "mir::Ty: handshake::server::NoCallback"
+
+[[fn]]
+path = "tungstenite::handshake::server::<impl at src/handshake/server.rs:198:23: 198:28>::fmt"
+kappa = "273c46497f694e8910b65a3278d8065eeea02109c3d819887d2266a2513b224e"
+embedded = "3ca668f706c15abe467dad31238ba2726bd9d9a75afb137677e85f1811dbf2ff"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::server::<impl at src/handshake/server.rs:213:10: 213:15>::fmt"
+kappa = "97e77579fa73b2eddbc6d681ffff27ec54f1b75f84bcdc1935f34635a2b992a6"
+at = "C=u32, S=u32"
+embedded = "d49faed557037869397aacf96a5d4bc617288e8a7327e93473a52cda70f0038b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::handshake::server::F::on_request"
+kappa = "34bddbbc9ef95623df13e27a2d577a3bbd6713c4a2ccf98ccd45aa8dee46252b"
+at = "F=u32"
+embedded = "1b849d9a67a53f29373ceedc4324c994007807bf20c12d733c0f26bf4223a8b1"
+status = "residue"
+cause = "mir::Ty: http::Response<()>"
+
+[[fn]]
+path = "tungstenite::handshake::server::NoCallback::on_request"
+kappa = "4f69ef9d658472d77d213eebe2841176974144b17618e972ef95beec3a6613a6"
+embedded = "d3b04c339a1c1e8f17d1e418814856b638135272ce556c7110c147d3a5e42bc4"
+status = "residue"
+cause = "mir::Ty: http::Response<()>"
+
+[[fn]]
+path = "tungstenite::handshake::server::Request::from_httparse"
+kappa = "85ab5470280ac7771f6b3ade59df9615a85e22d5eb5951143f2b02dfaae94b2f"
+embedded = "da4c58e5a8a45ec8201cecb83e2ce1435ec1413682a5a0ee8e78a2186cb81abe"
+status = "residue"
+cause = "mir::Ty: http::Request<()>"
+
+[[fn]]
+path = "tungstenite::handshake::server::Request::try_parse"
+kappa = "368fcf411ae9e98139214d20695092248e6017f97db08e1a59d514262889eae3"
+embedded = "20071e39b1c895146e2d5845bb75410cf5b4cd34ca827c3b61b4f105ec471d7b"
+status = "residue"
+cause = "mir::Ty: http::Request<()>"
+
+[[fn]]
+path = "tungstenite::handshake::server::ServerHandshake::stage_finished"
+kappa = "8e3647ae520c978700803b69ea765d77f3b72b9e29ac4ed76984104e7173da76"
+at = "C=u32, S=u32"
+embedded = "19a6e043ef4946b216be528497954ee63191a26900cdad237660e1bdba9cef4f"
+status = "residue"
+cause = "mir::Ty: protocol::WebSocket<u32>"
+
+[[fn]]
+path = "tungstenite::handshake::server::ServerHandshake::start"
+kappa = "5bc45afffe60548cd6e1585392cf99f579c8c4cd543b13651e6d44116ea56b31"
+at = "C=u32, S=u32"
+embedded = "8fdd9fabd1fea828a81cacdb049ad23a735faebb5d514bbdbf2099ac7b7b5d81"
+status = "residue"
+cause = "mir::Ty: handshake::server::ServerHandshake<u32, u32>"
+
+[[fn]]
+path = "tungstenite::headers::HeaderMap::from_httparse"
+kappa = "2765d3ed97bb28a68eeed2a2338e459d3a0ef03f693d36bac80a4f0e01a2bb1f"
+embedded = "3fdf546808ea2df2f77b332787e1095e4f042cc6d1d8a6e86660d05529327fae"
+status = "residue"
+cause = "mir::Ty: http::HeaderMap"
+
+[[fn]]
+path = "tungstenite::headers::HeaderMap::try_parse"
+kappa = "c954e53b9a8c7f6a73a667e7ed7fbc072f3263fde945036eea35604c8bcc8a6f"
+embedded = "f215e0d6ccec911f871eb6407f6983cd879d5f7f9ccde461e903bd8705c67957"
+status = "residue"
+cause = "mir::Ty: http::HeaderMap"
+
+[[fn]]
+path = "tungstenite::is_valid_sec_websocket_key"
+kappa = "9357f1bbc9bc71f8d1b29225dd4949da4c98a6ba484aa20f2dcf39287fedaf29"
+embedded = "95f2763402b541e0e67d671add8d9461b23d9ed46ba74a04b95ff5ed43a47311"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "tungstenite::machine::<impl at src/handshake/machine.rs:108:10: 108:15>::fmt"
+kappa = "16a2b8c92a534c0a358a673a7a004584440eeb1cb6100df375d66736deb7bee9"
+at = "Obj=u32, Stream=u32"
+embedded = "182bad9f9ab8462c8ec2117e7c99bcfe0e16fb880cc3215555380c8615f6f6c2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::machine::<impl at src/handshake/machine.rs:119:10: 119:15>::fmt"
+kappa = "fb8cc104818d88f443d09fad8c24b08c6aac1afe1468b5b0036015987f39ecf8"
+at = "Obj=u32, Stream=u32"
+embedded = "7597a9ed01e13b460cc7240b3a743bfd58254b323c6ce80e9226c1bd24d1a946"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::machine::<impl at src/handshake/machine.rs:135:10: 135:15>::fmt"
+kappa = "96fb212ea720088ba3f49191078ecb73b00444ed6b30b6c5fba80903ebfa1cf3"
+embedded = "1b5c9bdbd005107519addc12d2a72c696f2650ad9395fb58b9bf5178cf5426da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::machine::<impl at src/handshake/machine.rs:147:10: 147:15>::fmt"
+kappa = "2fcc4a5dd874a4ef1a30ea797d70ba23182538552a1e130347d5284edf8c6f8a"
+embedded = "790687ca365d58fe8d75ce1047951f0f6f56a79d4abcc0baafc7c3212fbefc51"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::machine::<impl at src/handshake/machine.rs:14:10: 14:15>::fmt"
+kappa = "63069018ca80edf1721308c438cfe38f198e317f3ae0a868794be9eb285d81af"
+at = "Stream=u32"
+embedded = "949980f369273c0e18762a5fbf9da6a9480ac6b62ebff8c79094e1562b1dc512"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tungstenite::machine::AttackCheck::check_incoming_packet_size"
+kappa = "574b422fa154c16c69c22518c6a4b865f88607bf2babf72e2bbaf92967d969d0"
+embedded = "b8c39b4883e2fb5acee2d8b4a113a38d530c5184b2578ccdbb6885cb2bd7459b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "tungstenite::machine::AttackCheck::new"
+kappa = "5f84d287ef86fd5711a4beda0e6d6d0e9a6ecbe4ccfa3b8b3c0e1981284f6102"
+embedded = "9c25fd08c17a3ca6ad89bef47612ff2728903c2de52d28143a97fd7a208ee2ba"
+status = "residue"
+cause = "mir::Ty: handshake::machine::AttackCheck"
+
+[[fn]]
+path = "tungstenite::machine::HandshakeMachine::get_mut"
+kappa = "d59dd21865426c3636de585d0283e890070ba0ece547e30039d2a7743949a7b8"
+at = "Stream=u32"
+embedded = "e2ce86409b8b25956575c58206374c509e29cd4b6c5175a0e3c1fbd7ceec0f7b"
+status = "residue"
+cause = "mir::Ty: HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::machine::HandshakeMachine::get_ref"
+kappa = "1c51a112db38489b99517d6ea254dc39105016cd722360bfc31be4400dc3a215"
+at = "Stream=u32"
+embedded = "c97dd5c6f067e641a8d7ca7d1f2508a1c005e51dce692cbcb42f820d1919e183"
+status = "residue"
+cause = "mir::Ty: HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::machine::HandshakeMachine::single_round"
+kappa = "a6efdd5a6d2bb4fff266cb6165b36315a622044fa2ca8662aa6f698e4c483d91"
+at = "Obj=u32, Stream=u32"
+embedded = "58180b35bb9a6cb1c764ee63c20854b458094fd19d3d2c9a9a4c8ff0003eb3de"
+status = "residue"
+cause = "mir::Ty: handshake::machine::RoundResult<u32, u32>"
+
+[[fn]]
+path = "tungstenite::machine::HandshakeMachine::start_read"
+kappa = "f4ac9c771615c9878624662ccd2ad230a57fc7a9367144cb984a022498f9d3fc"
+at = "Stream=u32"
+embedded = "665d28d3e12bf9f9c10b80942eb86b8bda9553e67419ad4d97a7516734339dd8"
+status = "residue"
+cause = "mir::Ty: handshake::machine::HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::machine::HandshakeMachine::start_write"
+kappa = "7e483d609ec27e91c27915f393bfb3170c714d2510e497da32cd0e98eb12db95"
+at = "D=u32, Stream=u32"
+embedded = "e8600a1f175c3edbc87f410ad2ad42a660037c1ed1958ec0c5448b1a7120cb8a"
+status = "residue"
+cause = "mir::Ty: handshake::machine::HandshakeMachine<u32>"
+
+[[fn]]
+path = "tungstenite::version_as_str"
+kappa = "a70b71f6b2c5c9de5b8072ea006aeeed01a93be5435e5bc21654f8eda70d79e1"
+embedded = "61ebdbddff6ac4c4eda2133f638b7e13d0f85d2fb76d8ad00dd78bc222a443b3"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "tungstenite::write_response"
+kappa = "c1434b2bb3158cff4585d3c210f183d42069afe6caa43c677c94ff1ecf062c5e"
+at = "T=u32"
+embedded = "66e0fb4a966653c1a5a156a15bb0e740eb165ed1e71db36b96328df9b2b6671d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

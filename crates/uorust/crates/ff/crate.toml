@@ -1,0 +1,96 @@
+[[fn]]
+path = "ff::Field::cube"
+kappa = "ca737eb5f17b99f9af05cc6a53008630a5451838fc13b4c6c4a13edc56a1294e"
+at = "Self=u32"
+embedded = "a3ff3f1ebb1375a7df45bc5d98cbf0568921f8ee652bea6c79119ee8da52a194"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Field, which u32 does not implement in core"
+
+[[fn]]
+path = "ff::Field::is_zero"
+kappa = "de03d9921234010b5b42d076fd3d62a3878d0d2be4566897296f8f0ba91ad571"
+at = "Self=u32"
+embedded = "93566f8ab9b0c7f7db3893b00e6b35e79f5536f819f3b5a7c4e4429b66fd6bd4"
+status = "residue"
+cause = "mir::Ty: subtle::Choice"
+
+[[fn]]
+path = "ff::Field::is_zero_vartime"
+kappa = "008acf2d349f6ba9411370b76a6b237cb8bb52018d34bad3dbac454cc467fe2a"
+at = "Self=u32"
+embedded = "1a2e0d29b71ae5a893737509f5ce58387f3e8c44cb296a7364d5c07de9c4d591"
+status = "residue"
+cause = "mir::Ty: subtle::Choice"
+
+[[fn]]
+path = "ff::Field::pow"
+kappa = "c65b0b966f593625eea011eea7d660f92005b1742635174cf508bf4802ec2964"
+at = "S=u32, Self=u32"
+embedded = "b3c6bb2620b59871d45af2fa9dcebbfba5f02487137034e1c15d560fa676290b"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "ff::Field::pow_vartime"
+kappa = "2640e73200be036b167cda142fdfaadd1e9b5ba5ba76d0781ea8c0f91f154415"
+at = "S=u32, Self=u32"
+embedded = "da98a986859aa947a581da24f230f12e4b8956ac678c2852ceb9d717af61d08e"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "ff::Field::random"
+kappa = "47688c5ac7a2ff883ebc13d0b34bacd9571cc3ab94912a6fe586c81f0118e80f"
+at = "R=u32, Self=u32"
+embedded = "ba1e5c55e71ff7f8febacc6f4bb42d0262cd26384f4838ae36aa60821f4b7b31"
+status = "residue"
+cause = "mir::Ty: rand_core::Infallible"
+
+[[fn]]
+path = "ff::Field::sqrt"
+kappa = "70e32eb37d1b04c4c71de3f2a6fbb3239714b97a2cefa41edf287ba4d4c237fa"
+at = "Self=u32"
+embedded = "37fa191ab8fa0ab65005046a58d7c9bc7ddec3a80cb822028662825ccbcfc400"
+status = "residue"
+cause = "mir::Ty: subtle::CtOption<u32>"
+
+[[fn]]
+path = "ff::Field::sqrt_alt"
+kappa = "60b0e476406a1a667a1886ce43e8aaff94ebf589d3f3e50e80ba934c4cc5ee24"
+at = "Self=u32"
+embedded = "c1bb71adafd99f86f1581814e41e31b0b404b1ad8cf0fc5905d9441a66ee523e"
+status = "residue"
+cause = "mir::Ty: subtle::Choice"
+
+[[fn]]
+path = "ff::PrimeField::from_repr_vartime"
+kappa = "f1a24c428b08e035e83321843299a0f56851396381313213af009a15d0b71847"
+at = "Self=u32"
+embedded = "d4028c79c905e16ed07a74f74e4205c78e23630e86f33fc6054bf9bc2bb6ad8f"
+status = "residue"
+cause = "mir::Ty: subtle::CtOption<u32>"
+
+[[fn]]
+path = "ff::PrimeField::from_str_vartime"
+kappa = "aec15fcd223c77741c1b22950458da89d4c4d6a3bcf1ecae4d807ad1d6ceb316"
+at = "Self=u32"
+embedded = "16687b1dd1a41a6c21473bea3c7f03287eedef24c5d32393a2c3c1f2f19fcc25"
+status = "residue"
+cause = "mir::Operand::Constant: <u32 as PrimeField>::from_str_vartime::promoted[0]"
+
+[[fn]]
+path = "ff::PrimeField::from_u128"
+kappa = "e5d6fd0b1265a25c0ef28ef048646ff2fc465ebf5795fd8044d67b358ce025ae"
+at = "Self=u32"
+embedded = "dca34481539e0c438a36eb75fb3ea2a1bb32454ee60c78fafdd4dcbc902fa1ac"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "ff::PrimeField::is_even"
+kappa = "af2fc5651c670a05449183ec92cb8ea6fbb479e51532cba34095f1232000ecf2"
+at = "Self=u32"
+embedded = "5c0a3b46b5417749ec83243a78adac8b51f2c986c3bf0f82f591a85d131edd14"
+status = "residue"
+cause = "mir::Ty: subtle::Choice"
+

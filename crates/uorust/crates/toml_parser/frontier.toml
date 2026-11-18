@@ -1,0 +1,198 @@
+# The toml_parser register (written by `uorust crate toml_parser@1.1.5+spec-1.1.0`; do not edit): every body of
+# toml_parser's MIR at toml_parser 1.1.5+spec-1.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 321
+translated = 10
+residue = 311
+
+[module.decoder]
+bodies = 82
+translated = 7
+residue = 75
+
+[module.error]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.lexer]
+bodies = 35
+translated = 3
+residue = 32
+
+[module.parser]
+bodies = 137
+translated = 0
+residue = 137
+
+[module.source]
+bodies = 46
+translated = 0
+residue = 46
+
+[embedding]
+bodies = 321
+embedded = 321
+evaluable = 321
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: Span"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: Event"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: Raw<'_>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: RecursionGuard<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ValidateWhitespace<'_"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: lexer::token::Token"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: source::Span"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: decoder::scalar::ScalarKind"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: source::Raw<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: IntegerRadix"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ScalarKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u8>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Encoding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EventKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TokenKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::ParseError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: source::Source<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::Expected"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::Encoding"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Expected"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::scalar::IntegerRadix"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lexer::Lexer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lexer::token::TokenKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::event::Event"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::event::EventKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: decoder::scalar::is_any_integer_digit::promoted[0]: type outside the lift: std::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decoder::scalar::is_dec_integer_digit::promoted[0]: type outside the lift: std::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::or_else"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::event::RecursionGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::event::ValidateWhitespace<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1

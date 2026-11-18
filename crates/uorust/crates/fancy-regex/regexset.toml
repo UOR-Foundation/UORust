@@ -1,0 +1,264 @@
+[[fn]]
+path = "fancy-regex::BYTES_PER_MIB"
+kappa = "d38f2d1c519387199ff2915126345d29053055f70ff679edb1f530d7c6778be2"
+embedded = "ce3eb91e8aecc0c5dcea04b97db6424711219249a707c1852e5becb42792b6f4"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "fancy-regex::DEFAULT_META_HYBRID_CACHE_CAPACITY"
+kappa = "7766a426d995f0d4c3f7470a5088064fd761a26c3107d99b3a3c5992f706bd7c"
+embedded = "958dfb82558e3122000d67caf4b4a7100a96ce35271a831b9ad783fd15177fef"
+status = "residue"
+cause = "mir::Operand::Constant: regexset::BYTES_PER_MIB: mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "fancy-regex::DEFAULT_META_NFA_SIZE_LIMIT"
+kappa = "a218fd95968e6e9cd119a4e9e7597cd0858746c419ccea8d5a2076abbfcc3031"
+embedded = "e82d1252ecd59e2cc5fdd5c2f500149fce0e915a46c1f18ae5c3b8ecbc2ced0c"
+status = "residue"
+cause = "mir::Operand::Constant: regexset::BYTES_PER_MIB: mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "fancy-regex::DEFAULT_OVERLAPPING_DFA_CACHE_CAPACITY"
+kappa = "f07e1814b3727f7efd78310e5c00fa4750c1b7e0d15ce794a0f477ea9dfc5682"
+embedded = "418e4fd9c8583aab4de8820ecb566c3811e8c51cf541f84864651e2efda3cdbf"
+status = "residue"
+cause = "mir::Operand::Constant: regexset::BYTES_PER_MIB: mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:150:10: 150:15>::clone"
+kappa = "4fddebfd71f13bc29fa435176f395ed9379d0f4c390b52f26c2e10619a82552e"
+at = "Regex=u32"
+embedded = "92086440e13d74ee767a94e2634285b72f4f86dd6271bc08e0d55b1e2412397c"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:150:17: 150:22>::fmt"
+kappa = "2b12654d6f6d55b1ca27e3155ac3fbba60b095f460f59c0fcde3d97efcf690a2"
+at = "Regex=u32"
+embedded = "64ef6f479d062ced1bc4d0bc198d39c776030d16db7e7d05f501a5adea97fdfc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:159:10: 159:15>::clone"
+kappa = "3ac24f2cff2b440691ef45d5d2c7442a6f6736c11a73bd33979c5fb075126f7e"
+at = "BytesMode=u32"
+embedded = "b6d00505e6a5b397840351772411d99e55c54b349019fef1c22f071c733ad0c2"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:159:17: 159:22>::fmt"
+kappa = "f9a099e073033e94e6b2607d99bb3075673d7a95b282c3d535a5f6b3b7804a5e"
+at = "BytesMode=u32"
+embedded = "ef8fe756c56002d259a34fc7c5dd3c8cef53c1ccf12eda780454d5ab8ef018ce"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:606:10: 606:15>::fmt"
+kappa = "e8b704478c072bc37c9a8d8bb9f68b43ea0dc058802fde2e3d77f0c2a1488f50"
+at = "S=u32"
+embedded = "7b4f28d2d38e80ed0f5e7baed4cea00942a64e92ead7052656e30076dae827bb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::regexset::<impl at src/regexset.rs:657:10: 657:15>::fmt"
+kappa = "6144030d5b5315023604183c95acdf433910ceb1b78076c9fe7e2573fa8f6138"
+at = "S=u32"
+embedded = "50d48e96e11dfbe1fdb076e8f491463e5755fa96b79c64c76ccb534ba67ec2a8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::find_input"
+kappa = "fe710da49b621b23ddf6bce7f44a249639d69cd13694662c8e797bd662120678"
+at = "Regex=u32, S=u32"
+embedded = "f7b5bcaa1cc0449efde373f1851c815ae4fdb170a0216ca55325e68df234ad24"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetMatchesAt<'_, '_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::from_regexes"
+kappa = "61e4ada782a9908dfe97c635bab05f2bdf12569ba49315b442e1600d3f74416f"
+at = "BytesMode=u32, I=u32, Regex=u32"
+embedded = "0048f4b93e5e84f6a7779f71a8ce5c8729a4ed0b1ca56f6a5e24a4afa20f4fed"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::is_empty"
+kappa = "e9f6b81bcb7314e2154f202ac106deb27c41f9590aefd774b62ff356c8cf9432"
+embedded = "83d281331f3c4f287a134e7a813c5421517a95bdd92fd65c7e6efbe96fd39ebd"
+status = "residue"
+cause = "mir::Ty: RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::len"
+kappa = "cffbf1e2dbafccdd253c825a4bd7bf134c40fe49ff4ad0559d109df3e0d8b5f2"
+at = "Regex=u32"
+embedded = "f08cdf3824055b8344757aeb9036c89d9500a4776166813e93e6eb21e81e719c"
+status = "residue"
+cause = "mir::Ty: RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::match_pattern_at_input_position"
+kappa = "f01b6ff10275a199bbe20d82b191417c650b54784e10c280ae3719087358f716"
+at = "Regex=u32, S=u32"
+embedded = "ac19bdbb3ae40f5ca9bd6e12ef553a49dbcc642026890a530e9787df3c6a77b8"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetMatch<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::new"
+kappa = "c7c1c495b793dc3534554efacce8c21ee4471da055681a24fdaabc82b16f1401"
+at = "I=u32, RegexOptionsBuilder=u32"
+embedded = "0bacf39fc589c8ada8a6fcf0674306bbcc972920a596c02fec10e044b07529da"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSet::new_with_options"
+kappa = "05832e46986c9e6870a2d2039716a3f9f6089aff18ec4ae14e3b946c4b2b2347"
+at = "BytesMode=u32, I=u32, Regex=u32, RegexOptions=u32"
+embedded = "aa1bcf4a972333d636a677e3a06d612c3afac9d91458ade7f31979b49e7b7190"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::as_str"
+kappa = "2a710967dece494ec8ce2d68c1ae60de73b1bfd7753d2adfd72c74fe80c3c7cc"
+embedded = "d87394a3ee31b875d35b64325adc313678b97e3e3d0dbda28c9cd60a63921d27"
+status = "residue"
+cause = "mir::Ty: RegexSetMatch<'_, str>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::captures"
+kappa = "994d22f70cc11bdc259e3aa215a0baa171999b684814bf1786941f11ced32895"
+at = "S=u32"
+embedded = "f1c6c8e17b0f5c843ff73fd6aa297bac89c3904fa4363c5b608e76fe854091b7"
+status = "residue"
+cause = "mir::Ty: Captures<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::end"
+kappa = "08a063b4f6575032c502fdf1f12167bcd28df93181ee8c96f9a1786fba9cafed"
+at = "S=u32"
+embedded = "364feaaea2d64d3f9e7aea48d7daafbec7fad191e1578aef84482083d007140d"
+status = "residue"
+cause = "mir::Ty: RegexSetMatch<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::get"
+kappa = "5e24cc67cc5a8b1dc309da1d3f9dbb7c5c2acaf7f383baafaa8d2a8e2e8ad817"
+at = "S=u32"
+embedded = "865e9ffb4091425e321b74d5c03a87bb1ab3d3c5b88a7353e2c45068cbc5c853"
+status = "residue"
+cause = "mir::Ty: RegexSetMatch<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::pattern"
+kappa = "f51a8023169b6f4caf5daf00b182c33b55abe73f83028ba2b52c15552693310f"
+embedded = "bf15a504ba1a4f38c51200dd6680d27123fa0d4535a28ca2b9d53e68f86f68a3"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatch::start"
+kappa = "0b26425709f09476c459b7823cb17347b85d2d667e2b14f8c5ddd9ea5ad609a3"
+at = "S=u32"
+embedded = "43f5e50011f148bb22023f3f3503e1ecee9e7f728c8ca07089877f83d3f875f7"
+status = "residue"
+cause = "mir::Ty: RegexSetMatch<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatchesAt::haystack"
+kappa = "d5b61c08ba7315e617f3fc57ac5dfaf5e3673e43df270254ec979b5dfe57625f"
+at = "S=u32"
+embedded = "7e073ccb609b4b6f716356e50c31172b157ce44dbb392193320222ae0cec7c60"
+status = "residue"
+cause = "mir::Ty: RegexSetMatchesAt<'_, '_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatchesAt::next"
+kappa = "754cb86e22a820792c21dfdebf817fe5a5b3cbcd2a6bbeae60c1eaf0ec214e44"
+at = "S=u32"
+embedded = "0001303e66ae72708ff79870f3d960f4d649d4c264fac3af5dac1c4ad54d1f49"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetMatch<'_, u32>"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatchesAt::regex_set"
+kappa = "851766dac741be673ecdb2be46cace73ee1b114d03d89e6488876b85f782a6a5"
+embedded = "c46b247918d5647a3ee5991d88cf3b6257c3d2bb004eaadd9ef6109f642f946b"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSet"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetMatchesAt::start"
+kappa = "40efee8e71523f5b9f69d4793bd764881a126043f912bc14e9266ccb90f294dd"
+embedded = "c73118d15d8044911ad62c493de11a434fa126870640bb8513d2638539c6afb1"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::default"
+kappa = "d454f65cb65dedab6627f155dd55c4737184556b44af8666833026c055db10ca"
+at = "BytesMode=u32, RegexOptions=u32"
+embedded = "8e8ccb453dae75a35b2d83715a952734e488529d6a52535723eb3eb3800fb031"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::delegate_dfa_size_limit"
+kappa = "044f2258eb589b3537e2690e84d784904b9865740bf3e69a98e32909b4a5edfe"
+embedded = "61d4cc71ba727e50bbeb213b3bd334ce37cdd46c24abf15e118b4730ed0c4f1f"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::delegate_size_limit"
+kappa = "b19a73e0e6c068e592a2a7f74ccd1a48b2440443441a327eb955cc3702589ad0"
+embedded = "e28d3e297315035707e23d3e6ed091e6aaea3bffa5849fc39394e6e8af7d5b77"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::meta_hybrid_cache_capacity"
+kappa = "61ae0bd9e0c7992d1dbf55be1f4033d991126ff1af6349d3e73623dcf71efb0c"
+embedded = "c4125cd445d356c78ba0f44d46608b008ef19df7b8c5eea3aa9a5a968ca2461c"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::meta_nfa_size_limit"
+kappa = "a56782426ba82f272d68914f741f27272490a75164504f84172983cbf32ab08d"
+embedded = "2c3f026eac7838ef017e5a5da8ffc422b6ab6723ceb69264220678f0b02b1322"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::new"
+kappa = "b177a013a709960f9c208c5483411f7b573a30409e8ac9c103d60d4bb04246f8"
+embedded = "f41587e8ed5999a114417146745d554d17fe218ba7d30f5ac33e75cd24718c73"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::overlapping_dfa_cache_capacity"
+kappa = "4b7164c3e66faeea953885372f14d0416479cc1f868da8c4d353536ae9ec83c9"
+embedded = "1f7ed359588940e15b4e6878b41871e572deac881c116276dcce5debd436f417"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+
+[[fn]]
+path = "fancy-regex::regexset::RegexSetOptions::overlapping_dfa_skip_cache_capacity_check"
+kappa = "0825e1c54128edb32eafba3d155c81c5cbaaec65f0d459a0ff509b7f6c591455"
+embedded = "684eb110170a91753fd4affa34ab2681a8323b8615e5681dd2c8768c9f6fae44"
+status = "residue"
+cause = "mir::Ty: regexset::RegexSetOptions"
+

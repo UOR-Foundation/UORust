@@ -1,0 +1,1039 @@
+# The axum register (written by `uorust crate axum@0.8.9`; do not edit): every body of
+# axum's MIR at axum 0.8.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 993
+translated = 1
+residue = 992
+
+[module.body]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.boxed]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.error_handling]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.extension]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.extract]
+bodies = 341
+translated = 0
+residue = 341
+
+[module.form]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.handler]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.json]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.middleware]
+bodies = 157
+translated = 0
+residue = 157
+
+[module.response]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.routing]
+bodies = 229
+translated = 1
+residue = 228
+
+[module.serve]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.service_ext]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.util]
+bodies = 18
+translated = 0
+residue = 18
+
+[embedding]
+bodies = 993
+embedded = 993
+evaluable = 964
+blocked = 29
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 18
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 123
+
+[[cause]]
+cause = "mir::Ty: extract::path::PathDeserializationError"
+bodies = 105
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 85
+
+[[cause]]
+cause = "mir::Ty: axum_core::body::Body"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: routing::method_routing::MethodRouter<u32"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: routing::method_routing::MethodRouter<u32>"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: http::StatusCode"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: routing::Router<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: dyn futures_util::Future<Output = http::Response<axum_core::body::Body>> + std::marker::Send"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: error_handling::future::HandleErrorFuture"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: middleware::map_response::ResponseFuture"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: middleware::from_fn::ResponseFuture"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: middleware::map_request::ResponseFuture"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: routing::method_filter::MethodFilter"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: response::sse::Event"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: routing::route::RouteFuture<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: handler::service::HandlerService<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::convert::Infallible"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: RouteId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::JsonRejection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: response::sse::EventFlags"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: response::sse::KeepAlive"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: routing::path_router::PathRouter<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PercentDecodedStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::FormRejection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: response::redirect::Redirect"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: routing::route::Route<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EventFlags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error_handling::HandleError<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extract::path::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::PathRejection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: json::Json<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: routing::Fallback<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: routing::method_routing::MethodEndpoint<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MethodFilter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn boxed::ErasedIntoRoute<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extension::Extension<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::IntoMakeServiceWithConnectInfo<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extract::query::Query<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::RawFormRejection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::RawPathParamsRejection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http::Uri"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::FromExtractorLayer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: middleware::from_fn::FromFnLayer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: middleware::map_request::MapRequestLayer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: middleware::map_response::MapResponseLayer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: routing::RouteId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: routing::Router"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: routing::into_make_service::IntoMakeService<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: routing::method_routing::MethodRouter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConnectInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Extension<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Form<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IS_FALLBACK"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IncomingStream<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Json<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeepAliveStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PathRouter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Query<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: boxed::BoxedIntoRoute<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error_handling::HandleErrorLayer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extension::AddExtension<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::MockConnectInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::ResponseFuture<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::path::Path<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::path::RawPathParamsIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::ExtensionRejection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::FailedToDeserializeForm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::FailedToDeserializeFormBody"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::FailedToDeserializeQueryString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::JsonDataError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::JsonSyntaxError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::MatchedPathMissing"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::MatchedPathRejection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::MissingExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::MissingJsonContentType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::MissingPathParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::QueryRejection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extract::state::State<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: form::Form<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handler::Layered<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handler::future::IntoServiceFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handler::future::LayeredFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handler::future::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handler::future::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::Request<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::FromExtractor<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::from_fn::FromFn<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::map_request::MapRequest<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::map_response::MapResponse<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::response_axum_body::ResponseAxumBody<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: response::Html<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: response::sse::KeepAliveStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: response::sse::Sse<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: response::sse::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: response::sse::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::Endpoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::RouterIntoService<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::into_make_service::IntoMakeServiceFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::method_routing::AllowHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::path_router::Node"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::route::InfallibleRouteFuture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: routing::route::Route"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serve::private::ServeFuture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: state::State<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::MapIntoResponse<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::PercentDecodedStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: routing::path_router::validate_v07_paths: axum's MIR stops at type outside the lift: std::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <std::future::Ready<std::result::Result<extension::AddExtension<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <std::future::Ready<std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AddExtension<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AllowHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EventDataWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Extensions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FailedToDeserializePathParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HandleErrorFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InfallibleRouteFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoMakeServiceFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoServiceFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidFormContentType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidUtf8InPathParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyOrIdx<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LayeredFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapIntoResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchedPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MethodEndpoint<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NestedPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NestedPathRejection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawPathParamsIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Redirect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResponseAxumBodyFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RouteFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetNestedPath<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SizeHint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SseBody<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StripPrefix<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TapIo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: axum_core::response::ResponseParts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: boxed::MakeErasedHandler<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: boxed::MakeErasedRouter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::BytesMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connect_info::ResponseFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn boxed::LayerFn<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_util::Future<Output = std::result::Result<http::Response<axum_core::body::Body>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error_handling::future::_::Projection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error_handling::future::_::ProjectionRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::ConnectInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::connect_info::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::matched_path::MatchedNestedPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::matched_path::MatchedPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::nested_path::NestedPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::nested_path::SetNestedPath<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::original_uri::OriginalUri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::path::WrongNumberOfParameters<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::path::WrongNumberOfParameters<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::path::de::KeyOrIdx<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::path::de::PathDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::path::de::UnitVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::InvalidFormContentType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extract::rejection::NestedPathRejection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: from_extractor::ResponseFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::HeaderValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Method"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: matchit::InsertError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::ResponseFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::StateProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::from_extractor::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::from_fn::Next"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::response_axum_body::ResponseAxumBodyFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::response_axum_body::ResponseAxumBodyLayer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::response_axum_body::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::response_axum_body::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: response::NoContent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: response::sse::Buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: response::sse::EventDataWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::RouterAsService<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::RouterInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::into_make_service::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::into_make_service::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::not_found::NotFound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::route::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::route::_::Projection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::route::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::route::_::ProjectionRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::strip_prefix::StripPrefix<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: routing::url_params::UrlParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serve::Serve<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serve::WithGracefulShutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serve::listener::TapIo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sse::Event"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<<futures_util::future::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio::net::unix::SocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::EitherProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::MapIntoResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extension::Extension<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extension::Extension<u32> as axum_core::extract::OptionalFromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::connect_info::ConnectInfo<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::matched_path::MatchedPath as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::matched_path::MatchedPath as axum_core::extract::OptionalFromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::nested_path::NestedPath as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::original_uri::OriginalUri as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::path::Path<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::path::Path<u32> as axum_core::extract::OptionalFromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::path::RawPathParams as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::query::Query<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::raw_form::RawForm as axum_core::extract::FromRequest<u32>>::from_request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::raw_query::RawQuery as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <extract::state::State<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <form::Form<u32> as axum_core::extract::FromRequest<u32>>::from_request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <json::Json<u32> as axum_core::extract::FromRequest<u32>>::from_request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <json::Json<u32> as axum_core::extract::OptionalFromRequest<u32>>::from_request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <serve::listener::TapIo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <tokio::net::TcpListener as serve::listener::Listener>::accept"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <tokio::net::UnixListener as serve::listener::Listener>::accept"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of body::to_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of middleware::from_fn::Next::run"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serve::Serve<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serve::WithGracefulShutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serve::handle_connection<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serve::listener::handle_accept_error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {closure@src/routing/strip_prefix.rs:142:54: 142:56}>>"
+bodies = 1

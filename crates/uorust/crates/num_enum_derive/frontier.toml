@@ -1,0 +1,174 @@
+# The num_enum_derive register (written by `uorust crate num_enum_derive@0.7.6`; do not edit): every body of
+# num_enum_derive's MIR at num_enum_derive 0.7.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 98
+translated = 6
+residue = 92
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.enum_attributes]
+bodies = 43
+translated = 3
+residue = 40
+
+[module.parsing]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.variant_attributes]
+bodies = 35
+translated = 3
+residue = 32
+
+[embedding]
+bodies = 98
+embedded = 98
+evaluable = 98
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::kw::default"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: syn::buffer::Cursor<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::kw::constructor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::kw::error_type"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::kw::name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::kw::alternatives"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::kw::catch_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: alternatives"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: catch_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: constructor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error_type"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: name"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Expr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::Attributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::CrateAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::ErrorTypeAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::ErrorTypeConstructorAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::ErrorTypeNameAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parsing::DiscriminantValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::AttributeItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: enum_attributes::ErrorTypeAttributeNamedArgument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parsing::EnumInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parsing::ErrorType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::NumEnumVariantAttributeItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::NumEnumVariantAttributes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::VariantAlternativesAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::VariantCatchAllAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant_attributes::VariantDefaultAttribute"
+bodies = 1

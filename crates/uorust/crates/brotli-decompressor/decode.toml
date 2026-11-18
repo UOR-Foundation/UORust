@@ -1,0 +1,683 @@
+[[fn]]
+path = "brotli-decompressor::BROTLI_DISTANCE_ALPHABET_SIZE"
+kappa = "c5ca8c3e54d8c4aa9cf814cd265da686e6aa572db3ec4b5010b7f1c0c050d6fc"
+embedded = "0fdc68c0c2204c2e50da85b9d9dbb36a605af34c6ee70591cba7952b991e7d43"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decode::NUM_DISTANCE_SHORT_CODES"
+
+[[fn]]
+path = "brotli-decompressor::BrotliCalculateRingBufferSize"
+kappa = "2c406d0cbba89cf8b523ea08de7a5726a5375d2645cf6bebc79f8b673c30d021"
+at = "AllocU8=u32"
+embedded = "58d5be19f9f43a2e344fcbeb08e9bfc8a6afab7831ea4faab066aa131df54fad"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecoderGetErrorCode"
+kappa = "09b1988774b64410de6adf0f57b65a32d1b5d630903396c3eb2d7fb730ac9544"
+embedded = "9fc679732ae2598858215e86202d1740208465263e637facbe2e3b69f961c5cf"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecoderHasMoreOutput"
+kappa = "f628ccb559fbe7fdaeac2ca9cddd3c9f16437dea555656b3e4f2857b441b9fbb"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "c46df68081ef124b29a7299b26f0ce564f77d88795c8b190a2ff92d2bd7fd7db"
+status = "residue"
+cause = "mir::Ty: BrotliState<u32, u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecoderIsFinished"
+kappa = "847c9969d4ce7e48e45e3df1264de654be26020d41cff00b101609de9f5d08d4"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "ed16bd2f70311f82b4d7eb8f7a728a5fc3412aff77a37e3f25aa88233ae8aa06"
+status = "residue"
+cause = "mir::Ty: BrotliState<u32, u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecoderTakeOutput"
+kappa = "1bd88ae36a060026b910bc6f25ffb7d4580c19aa6b5b2c53a08ab48054dad809"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "bfdfd8db18bfd77a77b3eb6e6cb894fb3573b128caa6efb2ff8165c776a39589"
+status = "residue"
+cause = "mir::Ty: BrotliState<u32, u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecompressStream"
+kappa = "22f0c7d454737185607fc79bbb18541174557c06042a99a847acce4a084f30e1"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "39cc375c06ca6cd1d2ba22ce76ce8db3f81b3e2876ac9080f8eff464b729c0af"
+status = "residue"
+cause = "mir::Ty: decode::BrotliResult"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecompressStreamWithDictionary"
+kappa = "7f2d99fcd5f8dc18b954434458f670017fe77b4f700ecc6b8d66646cb674c7c8"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "94bc3707ca208e353b991b1fd7b5061880abe4515f628cc821b46cbcbf54207a"
+status = "residue"
+cause = "mir::Ty: decode::BrotliResult"
+
+[[fn]]
+path = "brotli-decompressor::BrotliDecompressStreamWithDictionaryAndMetadata"
+kappa = "5bbde4355823de509ec11c4236cd43b31d15b3b438bd107bb1d70883890c31a4"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "1fbb8bc1e88abcfbe7642ec3591d58c749a2a64f3a25f51ebdaaa49461e78aef"
+status = "residue"
+cause = "mir::Ty: decode::BrotliResult"
+
+[[fn]]
+path = "brotli-decompressor::BrotliEnsureRingBuffer"
+kappa = "0de0cbafcba38e456515d8aef3887a40bdba83cbb436bd4ff3a3976e0ef41e68"
+at = "AllocU8=u32"
+embedded = "1b5ebb0a415200f95fa76bc2cb490a2f886cdfdd46e6cd639a49c1d8a7e6034a"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::BrotliMaxDistanceSymbol"
+kappa = "275e4061f5864daebb9b5aee6c4fcc3f3c4d30c69f2eeaae8d748c5cdbca18bd"
+differential = 2
+embedded = "9573abcb107148a72a07279da4469055ecfaa5558103461c669f93a38905dce4"
+status = "translated"
+digest = "388f144141fe2c7e6a78d18636cf5cd4eb1f92f57eb871749e764dfa73a28aa7"
+
+[[fn]]
+path = "brotli-decompressor::CheckInputAmount"
+kappa = "0143f365034fd39940048ee0884084cf51e7950e6fe0b4566d3a3fca31458f58"
+embedded = "0b86e7ac1556fba9bfb2bbcdd943b0905bdc031e97a07ea9ac9a783b10506edb"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::CheckRingBufferConsistency"
+kappa = "a60c7ba7d1440bf5a116a5a33b23daa91181d41e54baaab58888e659f3a058bb"
+at = "AllocU8=u32"
+embedded = "52c0f36cf9102d63c2fb97ca29677ecfdfcdad6603107fead0148d45e80d6354"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::CopyFromCompoundDictionary"
+kappa = "cb64609b6b96cb26b7c9db8798f38397f00b239061ca58931becd2477c91ddc0"
+at = "AllocU8=u32"
+embedded = "25963b747cd82d3aba333c6b8e8758aff5e8e0c2457defe74ddd591cd6e53303"
+status = "residue"
+cause = "mir::Ty: BrotliDecoderCompoundDictionary<u32>"
+
+[[fn]]
+path = "brotli-decompressor::CopyUncompressedBlockToOutput"
+kappa = "cf7c593fab54a9755602628cfd98900de90650bfbf6e1dc817c557cb576ed176"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "dc8f02ea12cd662e7bed9c9f6a23951d99c2c406e8f47c3a3ad271f7543d84ba"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeBlockTypeAndLength"
+kappa = "935e61433a26dca863ae83963c4656870f85ac87e10ebdc4fd5753e871753741"
+at = "AllocHC=u32"
+embedded = "0af3d3007e6a817e81e4df2749b83f3b174a5bcd1738b80c716706190134fdb8"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeContextMap"
+kappa = "4211b0b91bf2cc391ad8f2834cc6cfb08874db02f5d523b9336fc6863aadd5da"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "e39cc334a92a373ffbe92b053556ffb8d8f3cf8221f32bb4250286602ca40e5f"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeContextMapInner"
+kappa = "68e9e9b5554dd3843c52b441c74176733a0bec9f6c1d4d46ffbad68826111e8a"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "5c1fa28b9a03b9cae04c566dd193bbd3f67833a6afa7d9845a55f657b1373787"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeMetaBlockLength"
+kappa = "fd4e154b60e4e34986f9cc7401b0aee2892f70a8bb820b9379aadfcc6d024950"
+embedded = "1ddca867f460da249cc5407e1bae6efc580345ec22a530fb037c2de81e50e6f2"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeSymbol"
+kappa = "5003e38d8529804b3dfdd2eae4e5fe7581ff19aaa01e530ca41cdeb2d4da7868"
+at = "T=u32"
+embedded = "b7cd75923fabb67e3399f14c9c62058f745dc76bdb171ef2e207ec60bccbba29"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::DecodeVarLenUint8"
+kappa = "0e9489440639ba21989d9a3ac03ed7bb0a788bbad81147b62fa98b1ebd2ccdab"
+embedded = "59a30b442daab32ca538534ec3e6fc6f723fb84c43bd7edc3f6ed66d72631578"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DecodeWindowBits"
+kappa = "c1b6c78c9b77dd7037d4812ec9e122232ffeb534700c27cf4b25dd7f0ce8be29"
+embedded = "b0692b109d887933cbc1e45ede88845b45dc0fe0e89417f20c6e78874022d8aa"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::DetectTrivialLiteralBlockTypes"
+kappa = "1ee6350a00a078ed87d7255df602da1eeaeb32103d544f531fd73f62819074c8"
+at = "AllocU8=u32"
+embedded = "6c6138b82b7244e33fa9758513a87e0ed693f1d5595d5d3f06fd458d065af8ff"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::EnsureBlockTrees"
+kappa = "778ecec71a3647ea8f25c00a4e8f52b32a650f1cb2ea9ba0e55199e751e1a6c2"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "616bd5462411cdffe57b4df4726378f2404a98240a493e8da32864eb84628208"
+status = "residue"
+cause = "mir::Ty: BrotliState<u32, u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::EnsureCompoundDictionaryInitialized"
+kappa = "1600602d061da69215cd67df689805cc25506196b36a80415a262f6e3a9feef6"
+embedded = "dd99ddf3813655d02a4b814564f60e5f2c0a914a9a52f42c050fa6361cfe82ac"
+status = "residue"
+cause = "mir::Ty: AllocU8"
+
+[[fn]]
+path = "brotli-decompressor::EnsureContextMapTable"
+kappa = "d2f5a2da5e96ea1bd61ce7aabb0e564c43e0162eb3029392f61beff54b4f2f00"
+at = "AllocHC=u32"
+embedded = "9f41afbbd5afb54e2d339b0d0dc73b24c04a1e6bcb46c1ba4edf2c096cc72836"
+status = "residue"
+cause = "mir::Ty: AllocU8"
+
+[[fn]]
+path = "brotli-decompressor::HuffmanTreeGroupDecode"
+kappa = "1e88086f1c38b8465bdfc191281f11de01131456903e90baa1dafe2dbbdeb249"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "aa33f40671e1827bf661d37ad53de1f1da2b18a0473ee93548f5316954f71fa3"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::InitializeCompoundDictionaryCopy"
+kappa = "5556fd3ef86e8e4d30580008e7169820a90fdeb361cce865487eca16a4eaebb8"
+at = "AllocU8=u32"
+embedded = "5e58e5f850a4dadd5998fe317511197571ff532ec06dc66b09d1b4227f5994cd"
+status = "residue"
+cause = "mir::Ty: BrotliDecoderCompoundDictionary<u32>"
+
+[[fn]]
+path = "brotli-decompressor::InverseMoveToFrontTransform"
+kappa = "9c377f9f2ced65f6e7d098a47a5c988ddb102b55c99f2c02bc379d3ab4cb21e4"
+embedded = "440f4209a89571484e1cd297b1189ec21f25ef6f1e0e8a4f47ebb9255cdf3438"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "brotli-decompressor::Log2Floor"
+kappa = "ea12be26078065daca15d7020eef702b0ac29b4d4b3053d36073e1f6e5ec58be"
+differential = 7
+embedded = "0f91f021262eab8d4deecfa74bd2916d8d0147d1f184f1308b5476abe7148256"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "brotli-decompressor::PrepareLiteralDecoding"
+kappa = "65efdc79fcf673109c54442f699aa61ca695fc6791fcf9a453de8f2835c8b496"
+at = "AllocU8=u32"
+embedded = "5e5fd9a7a5688e27d032efacb6d0650ab931413655ab31b2d15d3ab1ea56043f"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::ProcessCommands"
+kappa = "fc016558cf31cde973a09d985ced7a9479a4c3f074dc88fb7de8bc4b64436657"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "4335b580e5f405ab1d4b7eebdef0fe59c5a0cbe47f45ff34a8714f1de06182fc"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ProcessCommandsInternal"
+kappa = "4d1286e30cc5d4d245610675d982f456f7dde48568d2bddd47018f9fb7ee7cfc"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "ea8d01b7af1035c9e56b5d4fbbfe7cd39bdb1e43833703341789511c657dbafd"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ProcessRepeatedCodeLength"
+kappa = "4c2d22e56bb2208c5b2db587b905116b6ff2473f4bd436354eb118699e585d2c"
+embedded = "26144c2964f2bd4f78a275837ba40bccec037ca1e8342fccec083b6fb70c25c3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decode::kCodeLengthRepeatCode"
+
+[[fn]]
+path = "brotli-decompressor::ProcessSingleCodeLength"
+kappa = "c84fdd2e0d0c30a8eeb3038089bd822b1a3042970c513186adcd3a10ee627982"
+embedded = "0e9d8964150411ae9399fdfbecc04f5d9a8ee1f475625974bb129136efe491e5"
+status = "residue"
+cause = "mir::Operand::Constant: decode::SYMBOL_LISTS_OFFSET: mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::ReadBlockLength"
+kappa = "dffa8fd05609b12ee62d9c6195b85b1809f4dcce547de319e9bf97c04ec4e41d"
+embedded = "9c6eb446796ca4f6a42bbffcb0113c335184382ef90680afb9ac76d1f576988d"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::ReadCodeLengthCodeLengths"
+kappa = "aed0f3f1a2853a7a67758feb7e4e70c26070765b0e991a469776520101c4fbe1"
+embedded = "7a4984a1b29f7001a5e4df345e0854ee2af780277d450158e3727f946513c7ed"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ReadContextModes"
+kappa = "86ae1b4eaa80771b1ea16cf2e1050fa95e685515c348e58137dc90c54df8710f"
+at = "AllocU8=u32"
+embedded = "6a93a1496aeff3ae47845ba071b3cd8d9369be53f29fbe5bb93f45ce2e1a2a1f"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ReadHuffmanCode"
+kappa = "7deb60a72df9739e3c5d50dda6c7ddfe928419ae944f0148d7b522dbbf3c36fd"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "c779d4882d9e2c9713941d1636732f11b3e98bcae1013de8b3e7f7be62aa203c"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ReadSimpleHuffmanSymbols"
+kappa = "3c0cd9576967857a934fcf410e9a76fb2b6577d12de86a057c87faee8f7dc9ce"
+embedded = "a194ae4f80d09c427b36c2cac65ed9573dd3461d6fd5a2b0b8da07e17a9c73af"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::ReadSymbol"
+kappa = "608bf7304f939491327d10759ad68a4036f993d01793b8b579e5380fe3fc87f3"
+at = "T=u32"
+embedded = "180defcb96fd93220db496d54757200f401305f67b706426b070c562aa4d3f02"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::ReadSymbolCodeLengths"
+kappa = "53ad5d7082ac8e3047f90e716db23ec85c26c3beee1f10e14b6e15884692cfbf"
+embedded = "994a4041f99eb8860ad9602bd67990f13745d4f07b06e40c9dc05b4f204a8fdf"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::SYMBOL_LISTS_OFFSET"
+kappa = "57b05cbfc49e0ac29f4b73d43608608ea999253aecfaf399655c70520fbbb16e"
+embedded = "89fb70f772f83211c16608c08f12bb77b081f8986a734e85e6f5434d17c61188"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::SafeDecodeSymbol"
+kappa = "f34f2ecafb58a9d6839664844fe9d873cc9a3741544d2cf4991a491d8bdbed65"
+at = "T=u32"
+embedded = "7b642648cc5700d5d22c22a79a35afc0332856bd2cba50fffcd3c801d202bf03"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::SafeProcessCommands"
+kappa = "f041cff0fef92bbe3c004ff239114ce949f008b921ea686b6ad663465b9f47d4"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "b8d9e8e1f4162f48c6e591e9acbc78887123d5fb0d4ae89d6623d79a8d6601d8"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::SafeProcessCommandsEntry"
+kappa = "483595dff00ab32955b41462d4dfdab6a6d6dfa5015696fc1a8aa289a6430b20"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "d2eef7fdc262120e704c67bd64f3fa39aee56888329c6faf4a8f6f52898a8833"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::SafeReadBits"
+kappa = "ea874aad6d230db2e93a271f72f9d88c1c2de7f3d79af1ab37e3874e7086cfa2"
+embedded = "194adaf14b3db9397340abcedb37c622b6c6052a104a0f4f622f107124bbbe5e"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::SafeReadBlockLengthFromIndex"
+kappa = "b6c0b60df8d2d15c0140104187d196e25139afefb6b5fbd5d77c563a53ed70d8"
+embedded = "16e1ed02171612470899ea8a3e48a38b231088857bf001de9749743987d6efb8"
+status = "residue"
+cause = "mir::Ty: AllocHC"
+
+[[fn]]
+path = "brotli-decompressor::SafeReadBlockLengthIndex"
+kappa = "2285c3ab6e19fa618cb5d7dccb25fd307a592015f7721c2ea145d3f56f453dbc"
+embedded = "98a8af79b71afdab584a5456b28c703d29a93aa47960836dc0416018b0b67f6a"
+status = "residue"
+cause = "mir::Ty: BrotliRunningReadBlockLengthState"
+
+[[fn]]
+path = "brotli-decompressor::SafeReadSymbol"
+kappa = "3cc0e71510d5d5ab54ef0898591a44805df45e530c300db479f3b643a85b8d47"
+at = "T=u32"
+embedded = "fb99bab509562bddff0f2296a8376c652423cdceecbc2b78c8dc990dd078b3b4"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::SafeReadSymbolCodeLengths"
+kappa = "c16dc2e7263084114bc15e5f72755ac83dc5e15baeecdd09d8df0a502dd773da"
+embedded = "b0ee421d617d015c1a4aa3e5766c54956302c03b939173725cee6c5415369176"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::TakeDistanceFromRingBuffer"
+kappa = "eae548924a9282d0ad0034a1920603b03342c4e1fc2bfa0ebaa2b2e78ab7c84e"
+embedded = "6ac9652bdcb82904ecb48c8decd6f3d0cc8505d3bfa373be71f5eee2e499d951"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decode::TakeDistanceFromRingBuffer::kDistanceShortCodeIndexOffset"
+
+[[fn]]
+path = "brotli-decompressor::UnwrittenBytes"
+kappa = "803c89adcfe0add1db338d48b670c9bc2155de4a3c007b38ecdfc15ddb592f7f"
+embedded = "e8224f843d5b299672f1f5834c519769242511ae42dca06111b36775e5186a8b"
+status = "residue"
+cause = "mir::Ty: AllocU8"
+
+[[fn]]
+path = "brotli-decompressor::WarmupBitReader"
+kappa = "a061f31557d128fea731d4fa9bd0c6c5b3cbd69f80eee9442c728833851091b0"
+embedded = "9b2a8d5cf833bd9f871d854f1f6957b4aedd00aa54d4b63f620c221c15a7adc1"
+status = "residue"
+cause = "mir::Ty: BrotliBitReader"
+
+[[fn]]
+path = "brotli-decompressor::WrapRingBuffer"
+kappa = "57c1bfbdbc3cd960c4502cdf844148467b73f3999693beaf7ba9aac497037c43"
+at = "AllocU8=u32"
+embedded = "489c8d1aef35ffcdc3d40f218f00e756420bd901efbffbfd512cf5c2adf218fb"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::WriteRingBuffer"
+kappa = "d9a9129d2308fac77644dc8e20511e292001866adbc2484d6e04f57a0a3409b8"
+at = "AllocHC=u32, AllocU32=u32, AllocU8=u32"
+embedded = "294a1d1ba0e8a70464e992dc10cf8d8f7ef586833c109af78fffc85280edc788"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::_RING_BUFFER_SLACK_MATCHES_C"
+kappa = "df812b1f204e946befb147a49b9589a18a264d38e4cda49fd3fc57488e68d50a"
+embedded = "6bcd6d52fa6d1b24a0a98a88656ad3990c0e64aa57a5916da5c68ced0e730901"
+status = "translated"
+digest = "a31b0d90462da97ab4fad8cb16b84ed04d6ce59ebb2b0a794a0b643395e0e286"
+
+[[fn]]
+path = "brotli-decompressor::assign_error_code"
+kappa = "77cacd7ad172c648e4279e9881a4a44942f39b3144e98f32a889045a456c21e7"
+embedded = "570e709e85ad8cc74f674549fda9900701cd5d8858b7b127f874d1d7ff383eb6"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::copy_overlapping_backreference"
+kappa = "6af37220846dca93d7187c74ed1bf5e3aef3c57fd10649677c33222763d62682"
+embedded = "e85a209be7c3d4779641ae74da48704c9e459380c7d359a5d408d21275e20f21"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "brotli-decompressor::copy_wrap_or_overlapping"
+kappa = "f5b1522fb837a008e8a7e453f15605c20eb90c916452261b7d9258dc7627ae4d"
+embedded = "7e829eb8e8c03c999492d7d3fd907f9bb03ea37ffdd3af59ba7515150d65136d"
+status = "residue"
+cause = "mir::Operand::Constant: a usize literal"
+
+[[fn]]
+path = "brotli-decompressor::decode::<impl at src/decode.rs:3582:10: 3582:15>::clone"
+kappa = "01fd22ef1bc7eed7e7c7e9ede12c58193b5619fb181a2c754926326e44db1ee6"
+embedded = "b085a442b88b2bf66b4bdfc56a2c0e2e6e0d6b027641e99a3ec8de1dc48f7e54"
+status = "residue"
+cause = "mir::Ty: decode::LiteralBatchStatus"
+
+[[fn]]
+path = "brotli-decompressor::decode::<impl at src/decode.rs:39:10: 39:15>::fmt"
+kappa = "50f7eaef6d7ece80c9ec694a50b3b4000e9c16a35b68e6c0f89e1e0cc21dca87"
+embedded = "32de10fe7bda8b1f0a7af131b8a3f9258c769417954451bf2419541722a93d6a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "brotli-decompressor::decode::bzero"
+kappa = "076c4cba2cd7886d5b73e6f49eff422c41e8d5a79deb6ffd270ac098c2d8cf8c"
+embedded = "a91689a7fc94e2a40444e7607c1f3e11cf9d0c3a91edbd6ce7f645722d222816"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u8>"
+
+[[fn]]
+path = "brotli-decompressor::decode_block_type_and_length_slice"
+kappa = "b054f0b9c7acaad7a6721dee6bcc5179ee7fc4fc43b15b6851fa3f869ee037b7"
+at = "AllocHC=u32"
+embedded = "3a40d74a766b93a9f984d141afcb40a51cd8a23f66c617cec9aa878a6de25cad"
+status = "residue"
+cause = "mir::Ty: bit_reader::BitReaderSlice<'_>"
+
+[[fn]]
+path = "brotli-decompressor::decode_distance_subtable"
+kappa = "044aa40142199e2296076498bf057e040ef84efd45090c285267471bbc01b40b"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "07809ed2ef4f8e9ce6975507cb35f16926ff4e5faa4b46f113fdce6b03a76ceb"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::decode_literal_batch"
+kappa = "f67b40e4fd52d27fd41fe6ddd87cdfca1638fd0b001efd9473e493e8ffbb5465"
+embedded = "9ae29a34bc120a6dc551794befcecf5ec452e76469095f3fa5d232b804f972f8"
+status = "residue"
+cause = "mir::Ty: bit_reader::BitReaderSlice<'_>"
+
+[[fn]]
+path = "brotli-decompressor::decode_symbol_bits"
+kappa = "aaf49ee2d0fd99f559374f3c5f0fd342aebc05d4838a949a8744409b6b69242f"
+at = "T=u32"
+embedded = "2657c3e76226962e5d5079d1ed7a0885be835ea70277f4d985dbd7934567b733"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decode::HUFFMAN_TABLE_MASK"
+
+[[fn]]
+path = "brotli-decompressor::decode_symbol_no_fill"
+kappa = "a467de49ebda7f1f1b6e0535b001ebde3ea8d74200b4629b0710f970dd1d3169"
+at = "T=u32"
+embedded = "2faa74f8f39c4f50b72ac342c9e8c8c2a05f3dd1258e4b6b064641abe02cd28a"
+status = "residue"
+cause = "mir::Ty: BitReaderSlice<'_>"
+
+[[fn]]
+path = "brotli-decompressor::execute_custom_shared_dictionary_copy"
+kappa = "c0a6e9884714fdcb8c517ceca39a82c7eb92cf103d93f966d4c43f4f329baa5a"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "0480c51372a8f0d5871c5bb92dcf39eb37e484b739e97dda7bd35a88c269d09b"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::execute_dictionary_copy"
+kappa = "da97ffb83681960e8628eb45d5ec294587ae046ab0acbbac11bfc22ad323621b"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "8aa7900779b69ef20f8ba53097b7a5a73a900abbdae08bc8fdfcec655cb53385"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::fill_context_trees"
+kappa = "c9793bea9336eb3e0df0e1346299c271046fc9875acdc9462c6dde5fa1071f83"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "636271b840558a870c09e3610ebd301a6da5781634ea068ea2ed448f15ffe11e"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman_tree"
+kappa = "e7c327d3b20c2921f0cdb30a6b6788166609e27c07116127f977f77127ff7f0c"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "83df7f936b0a08bb4f36bff7b876408029e7bb6960772e5c1b457a369a924287"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman_window"
+kappa = "0978b130a8cd41d2a9142edc9b8bf60ab66e3515c72245fea354733f9b5882eb"
+at = "AllocHC=u32, AllocU32=u32, T=u32"
+embedded = "6c8e2a503a0514c4897725c3363236985c0188bfacc200a869ab859db6859e16"
+status = "residue"
+cause = "mir::Ty: HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::is_fatal"
+kappa = "8e652cfcd5d4d8225f62c9f93ea6b678d8ae1de4d0ae04018dee3f4112bcc455"
+embedded = "c048fda1fbd457de2ee4a28041db3b22054f27b27f48f6cb0cd2fe9cf037a22f"
+status = "residue"
+cause = "mir::Ty: BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::kCodeLengthCodeOrder"
+kappa = "49e100384670a53313c1a81a495798f038a71be74d2d504f3877e435fd530306"
+embedded = "9e7812312a83d58315555bf96055f9c438a1076d9a0773dcf3f0cbc961c0efb0"
+status = "translated"
+digest = "17b4fe3d2a85c3080e65a635dea5fc425b3fb2141df62e5ae1c78e3f40a736ba"
+
+[[fn]]
+path = "brotli-decompressor::kCodeLengthPrefixLength"
+kappa = "94f68f99971a038f28bc47527a0389d719a1c56356de95fdb3f466c69803abf7"
+embedded = "298caf65ca2983d5d54fd9907d7abdcdd9713f3d4f80efca9b7a1b537dd56d7f"
+status = "translated"
+digest = "a2340171ef648711592c9d177d52e9df1d861b6c0afa40b5a4e84bf3d477c983"
+
+[[fn]]
+path = "brotli-decompressor::kCodeLengthPrefixValue"
+kappa = "e084298a4a77c4e4b936f93dac486cb063ce79a2a460031bd6c4fa0409c69574"
+embedded = "45203c51cd8aa7a914921bb339dfb0c967cc7eee968417cf2482c6fe71acfbfb"
+status = "translated"
+digest = "0a9254bd55e5f78a0ca0561af290d24142629e1a092d99435b9723bccf4c1fd9"
+
+[[fn]]
+path = "brotli-decompressor::kRingBufferAllocationSlack"
+kappa = "da98af5b9a340b0ecc47138c3565da037a5e8ea989a956105336a980b915d914"
+embedded = "b34db7f02603df2768fb4e435b2e5244dd4f4177de5c2eda00d7a5e348cd0ee8"
+status = "residue"
+cause = "mir::Operand::Constant: decode::kRingBufferWriteAheadSlack: mir::Operand::Constant: the constant item shared_dictionary::SHARED_BROTLI_MAX_TRANSFORM_AFFIX_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::kRingBufferWriteAheadSlack"
+kappa = "5bbae8097fa9bbd2664644b0c1b44099680f07ecff4d1fb61346f9bd6145a073"
+embedded = "fd21f4221e3f26ccdd11fe7b650c38f60a168152ce673e604dfd3143dd8306d9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item shared_dictionary::SHARED_BROTLI_MAX_TRANSFORM_AFFIX_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::lg_window_size"
+kappa = "acf8e86ea96041c78685b2010e339c95ace50c8fd697231fd24d6db3b277bbc5"
+embedded = "087ae1ed5a31d3fa0b669a98d14692ae41a4350212d2a942bb0dcc1f00907b4f"
+status = "translated"
+digest = "d24ad7a73957e1ad42fe7fd4361e98b7ce9529b9a2ae21e29e24cf1d229c07bd"
+
+[[fn]]
+path = "brotli-decompressor::load_distance_roots"
+kappa = "144e993d97c7de94fad9224258f6aefc3e78ed96e404d3e000913383220bafcb"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "5bec83693943ef60962b5cc2a08917024930957b674d5a4d123a8f21d87a97d6"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::mark_unlikely"
+kappa = "6f6185640770d40d115be0a5d5df0f799aebcfef055db80d5cc80a64652a8e71"
+embedded = "f24a90e9e54426a2e5754ea4d776698474740ddc3ce6bf2cf71951e235cf0172"
+status = "translated"
+digest = "5d017da3fc0836d817bc591c4aa4088eda0c6e9dfc0394f4526593ae0fb9d575"
+
+[[fn]]
+path = "brotli-decompressor::memcpy_within_slice"
+kappa = "db665c081f822d9e771b12ca546417ed886ed3db7cddc85852040976d63456b0"
+embedded = "d18f41fdd8f90e4bfdcac5c314b499e05d4254ff329c26a0a34ff02907b0e95d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_at_mut"
+
+[[fn]]
+path = "brotli-decompressor::memmove16_from_ringbuffer"
+kappa = "2a8ebb870bfff65ce0e514e1158ae684d9dc6d44e7b433a874d52fe818e78223"
+embedded = "ada61b31d97466a9741cd312402ef9ff61304d62e74a93937d563e6ce956d0f9"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "brotli-decompressor::memmove16_offset16"
+kappa = "6146e32bd8379ce97414811129891e84dbcfdfe33abf28b5c8268d44f343f171"
+embedded = "6c614341fe6e35d4fff8fb3cf0fcb70a5ff67cb277f517addf1aeeed2dd20e7a"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "brotli-decompressor::read_command"
+kappa = "0a5e80f6cf1f72abc92a4c2579f63e3ce53521622ccee787cfa488da5934742a"
+embedded = "105917a6720a7efc55375d261cd94e7f4886bfaddd845059c775425d56c8b5ba"
+status = "residue"
+cause = "mir::Ty: BitReaderSlice<'_>"
+
+[[fn]]
+path = "brotli-decompressor::read_distance"
+kappa = "e2134838c54e3905dd2dfa7e33307c876cbaee00044297c0f0c463c22f8e0c7d"
+embedded = "91fdd5b5c6f386135c514f96561d8344ff90086acf75c0d44b058fdac36f06c5"
+status = "residue"
+cause = "mir::Ty: BrotliBitReaderState"
+
+[[fn]]
+path = "brotli-decompressor::read_metadata_block"
+kappa = "82505bdd8199c017e6c6052f8ab14f9e7264b0ac2a191974396c4a2a62d9f0a2"
+embedded = "13755b508e34052a1a391f7ee787b6dd494357b2956e39998a8b57e5d75c0ca2"
+status = "residue"
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+
+[[fn]]
+path = "brotli-decompressor::read_symbol_slice"
+kappa = "24982c9070f42865368d519d06c1317149a0965a4f663269c2708fd41915aa67"
+at = "T=u32"
+embedded = "55a00732589cb044abce1efe6437940b78c025552eb4bad4df10d4c4431b06ba"
+status = "residue"
+cause = "mir::Ty: BitReaderSlice<'_>"
+
+[[fn]]
+path = "brotli-decompressor::save_mid_command_state"
+kappa = "d504cb89d4598d74ed95221b62806f2e86a2e9453f49efaf88a772b79cb62f1c"
+at = "AllocU8=u32"
+embedded = "4c87a881b2c657a4eb15f0937145097d6aeb22d557a57fbf7b83696b357f651f"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::update_literal_block_state"
+kappa = "2bbabd54b045560aedb5b6325ae9662f83aab101e17c59699dd6ab495e7feec6"
+embedded = "8ab6d4ee59e958752b848ff9634127e0ecf632e2b91828dd60e6b5f42d983863"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item state::kLiteralContextBits"
+

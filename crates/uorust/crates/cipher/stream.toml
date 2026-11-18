@@ -1,0 +1,374 @@
+[[fn]]
+path = "cipher::StreamCipher::apply_keystream"
+kappa = "6a066ec5b1076dd6984a5edd211bfabd3eccefe6d02632d8e840dcdc50873ba8"
+at = "Self=u32"
+embedded = "43c99433f688287dd7a76fe66d52804d476d9cbee6d2a6b4d775a6b0f09fdb41"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipher::apply_keystream_b2b"
+kappa = "a3028dcbf1f074f69495cda07fdbac07f5c5c2ec4f07e3163f27e58e00fa72f0"
+at = "Self=u32"
+embedded = "3c4cddce587ab0320e0e3d4b06a26df149b1fd27c348f173ae9740c1067e755d"
+status = "residue"
+cause = "mir::Ty: inout::InOutBuf<'_, '_, u8>"
+
+[[fn]]
+path = "cipher::StreamCipher::apply_keystream_inout"
+kappa = "b765b1e93634b7b32b4ce73740a5f9a4ee02e04623044243868689b2e26e90d0"
+at = "Self=u32"
+embedded = "9cf0fb995ca1bda1f02926d6275ba91a4a94d5faf4356ccd6a11af6cc037f0c6"
+status = "residue"
+cause = "mir::Ty: InOutBuf<'_, '_, u8>"
+
+[[fn]]
+path = "cipher::StreamCipher::try_apply_keystream"
+kappa = "54c53af5ab2d6b5b1af44c0e0ecb657173ae14aa64e3d979c72af6cc61fe6e93"
+at = "Self=u32"
+embedded = "f3c0cf0df01ce1bc0e8cce7c9376d0a4bde66fd5e231e55f23d7fb26158581d5"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipher::try_apply_keystream_b2b"
+kappa = "488625098761b48fc7ea5f9a979a9b88f126d26754b414ba44e5718cd69c3cbc"
+at = "Self=u32"
+embedded = "e812ac1a41c9da7e8f6aada47b771c923ed66a98f7f6f971c9dabc81e8212291"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipher::try_apply_keystream_inout"
+kappa = "cc1a92a7b5d12f2ae686b0637a1292ab7a7bdeb4e240f47f8e55e5aeca8fdb2d"
+at = "Self=u32"
+embedded = "c26ba8041e591f44f7e8568aaf172f4cffca482b03c40dfd39f09a6fca0e4ad9"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipher::try_write_keystream"
+kappa = "eefd3925b67b6dfa7b7005a2083012dc064cb114a80dd9110342d7f0ff1c2edd"
+at = "Self=u32"
+embedded = "9d346b1e7ee99934422a48310dccfc908c6372bce3ea92343020e7d239e5b222"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipher::unchecked_apply_keystream"
+kappa = "f464ab6b823a1261d6f857e491e541ede6870c28c40480246f5d11b21551af24"
+at = "Self=u32"
+embedded = "01cfa705db27933fbe25968b3b6791ff33e20470d86b11cb8a1f92e6694840af"
+status = "residue"
+cause = "mir::Ty: inout::InOutBuf<'_, '_, u8>"
+
+[[fn]]
+path = "cipher::StreamCipher::unchecked_apply_keystream_b2b"
+kappa = "c8251dc866196461384faa61dfc3128f258faabba5ceeb821eabcd7480362de3"
+at = "Self=u32"
+embedded = "ba8e9c3aa632e3942b98f1af608dc6de91b73fbbb0874ad50d8c0312831b4b59"
+status = "residue"
+cause = "mir::Ty: inout::NotEqualError"
+
+[[fn]]
+path = "cipher::StreamCipher::write_keystream"
+kappa = "9fcc64ad38af1c1dee1dc8ca4563efb57a5d826c05b275f7212b3460ba7d3683"
+at = "Self=u32"
+embedded = "288fbd9ad7de03286d8ac9d73063586ac4a77171f8be37d748b38744144efc87"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipherBackend::gen_par_ks_blocks"
+kappa = "9cbe2750d7d015abd72dc0f0396625d0eca3b9f50e0df745fea55b4edaf81af1"
+at = "Self=u32"
+embedded = "2b1758786ae06b14c2e9fc22ad90e8a6069fdc745cc796ab8cd53d6f493ad385"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherBackend::gen_tail_blocks"
+kappa = "9fab682633ff4c20a77c774e2c88c1243edcf562cb6fec70817d486942091e78"
+at = "Self=u32"
+embedded = "5d00d39bc6eadde776f7493172170357a6df3e5916d5d03b5ff6708e855a9aee"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::apply_keystream_block_inout"
+kappa = "5355ee701a0564094a2b884b5a7c2532fdeee47cb2650b0468e1b9743507d443"
+at = "Self=u32"
+embedded = "7e0f6c8029be7da1713b1c92d28f951e6a0fdafe718e27b98b002fc6c2dc316b"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::apply_keystream_blocks"
+kappa = "64c7767e6b3420e1e9647333013bf965ac598bf5959c13acae6fe61c8d8970f9"
+at = "Self=u32"
+embedded = "9d4a7a6d704bd4bbe5db98c929ebf7ef316de9b33b627ffb4145b30628c01493"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::apply_keystream_blocks_inout"
+kappa = "e2b5d6edd8b97e9eb6988f14a910b5b98bc4c14d95f48e63e418efafd545f023"
+at = "Self=u32"
+embedded = "59207b6761b1e5fdb7ddae5600c3af248be67e5b8ae62aae42f660022432bd16"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::apply_keystream_partial"
+kappa = "f434f1c3c231385a388148081d67b476180d78547169d9b0733f7c6c35b0b4d9"
+at = "Self=u32"
+embedded = "2736d8327d0c8b44c78941a9ff86b00c34d6398050b64e673e8e14d9421c438b"
+status = "residue"
+cause = "mir::Ty: InOutBuf<'_, '_, u8>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::try_apply_keystream_partial"
+kappa = "55270cc744ec1f90a98b277e005092b4d4944d03ce773b4f09279d6efd208b65"
+at = "Self=u32"
+embedded = "fe1a4f546d9045fd48eb0ce13666a32c85043f41de11128ff7f361c445d20d4c"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::StreamCipherCore::write_keystream_block"
+kappa = "2d6ba77471bf020797d119fb7ba806b546b65ae9499435facec4bf37f5d60a98"
+at = "Self=u32"
+embedded = "d941cf5475ca41884c93f3fb1a9aa78ca56e9b35537d9feb85f8d587e9fcf1c1"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherCore::write_keystream_blocks"
+kappa = "0fc9415d5982060004af9719f378de355be474ce83770d6f7e9898651b692db3"
+at = "Self=u32"
+embedded = "b090af28800057967b9eba0038ce1b6c425e15225de04b9fde171631c6011037"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "cipher::StreamCipherSeek::current_pos"
+kappa = "7abbad390feb171d2ce6ea6aadab26fd9362b0685400960d4ea801d52562deb8"
+at = "Self=u32, T=u32"
+embedded = "bc377d371c682c16166560c0652f758bd10679f90a9f18a778cf6fc3f313df6a"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::StreamCipherSeek::seek"
+kappa = "6fbb0a3915d987d0ffc883920b36d4213106cedfb292fcdc811226fb931ae4f8"
+at = "Self=u32, T=u32"
+embedded = "d4056b12be60fdc21cdee3f0ae481b09e56f14b21edf3dcd0c1cd5bc46352f21"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::core_api::<impl at src/stream/core_api.rs:192:13: 192:44>::is_max"
+kappa = "7c1c31ff6353f5a16340c80469d3cccb3e938145de3d7548e0505e6280abc598"
+embedded = "dbf6c105de274ca4d854a13f53549bc6b14f7a3a8fef9f6d99ab987432cd2f3f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::MAX"
+
+[[fn]]
+path = "cipher::core_api::<impl at src/stream/core_api.rs:192:13: 192:44>::is_max#2"
+kappa = "a2652fe7937b39b0da0fea729e47f33a6c289af381226034795d0c605f2bea4b"
+embedded = "f295abde6b94bc3637d8733cbef4b00a5e803ddc03578d9841da4b6312270f26"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "cipher::core_api::<impl at src/stream/core_api.rs:192:13: 192:44>::is_max#3"
+kappa = "850f1ef8acae438c39edb3e052567339d229193735ecdd387a07e08fb9d1e763"
+embedded = "f07eb153c114f30316ef9a91c03c2055165dc86c2b74a820973d232044fed82c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "cipher::core_api::ApplyBlockCtx::call"
+kappa = "ca41c654fdbd4f6ad63954fe89c7681c218b83827b00f461a277012bd349f7bf"
+at = "B=u32, BS=u32"
+embedded = "93e1e7becef9d2886df3e68ae2f146da7a53db305c1f3d732f76427e5958a756"
+status = "residue"
+cause = "mir::Ty: ApplyBlockCtx<'_, '_, u32>"
+
+[[fn]]
+path = "cipher::core_api::ApplyBlocksCtx::call"
+kappa = "0a266c400166780c5d2b9828c4ae6ed0253cbbf00c21e6c2f491964512272cd5"
+at = "B=u32, BS=u32"
+embedded = "ca0547891f41973cf8daf38f559359ff4b4148a64cd6aed3d6128c2b214560b4"
+status = "residue"
+cause = "mir::Ty: ApplyBlocksCtx<'_, '_, u32>"
+
+[[fn]]
+path = "cipher::core_api::WriteBlockCtx::call"
+kappa = "9640ed1267d2f6e2d44c427d45ad708df6be3b02859aea9e051c7edf9daf004a"
+at = "B=u32, BS=u32"
+embedded = "8d49747354fb2eea85a79e55bb0434f01af21d88e45da6b00e558d5c0165688d"
+status = "residue"
+cause = "mir::Ty: WriteBlockCtx<'_, u32>"
+
+[[fn]]
+path = "cipher::core_api::WriteBlocksCtx::call"
+kappa = "52dcfb624524ed6e199d2fd5cdc70f9b3f1ca3788da78d76ea19b5280d7a9023"
+at = "B=u32, BS=u32"
+embedded = "46e09f4972366289dced6b6923415cafed5ab7dca053ae2934bb15e7a7d24385"
+status = "residue"
+cause = "mir::Ty: WriteBlocksCtx<'_, u32>"
+
+[[fn]]
+path = "cipher::errors::<impl at src/stream/errors.rs:11:16: 11:21>::clone"
+kappa = "77acc77f02c0618976aa649ab010ed67c51fcc52a99063d0dbd36d9a5225d3fc"
+embedded = "f029e5dce0e17797d22a1cd38a7ec69d229831d4747cf891b836c6d7e2fca5fd"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::errors::<impl at src/stream/errors.rs:11:23: 11:28>::fmt"
+kappa = "052e6516d4c4e17524e8c15394230bebc9fce1cd37cce91e2992e8b2c11348e4"
+embedded = "39326d07597eadb17b97f6adfc0a1143899d82eb2fdbf6924399850345bb842b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cipher::errors::<impl at src/stream/errors.rs:24:16: 24:21>::clone"
+kappa = "20daf7f712738ae8dbdc968397d1ae1926f04fb06dde351032447d4ae1bdd015"
+embedded = "4c2ed9277a542712c2f7b425f8fe1b6f74aefa1db43a707bd4c3ec415e19f9dd"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::errors::<impl at src/stream/errors.rs:24:23: 24:28>::fmt"
+kappa = "bf41e46612f03315422829d6356d87e31c28008c4c1626134eabe7516e19b8bf"
+embedded = "a39fde24569bf701f10a9555b76133e87b75fab544a59f7df6378d3aed9cb547"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cipher::errors::OverflowError::fmt"
+kappa = "924067ce9d1c29a39f6cde206838bac8a1ede277b06315d9956ca475af64529e"
+embedded = "954389732f98419fa56414dae82a8f33f8972eec55d683e4e200863ac5163c47"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cipher::errors::StreamCipherError::fmt"
+kappa = "58a3aa0d2d792134e45d790aaec17f4b73adf281d068583361c631fb83d79705"
+embedded = "ec877bf4d1b07d117a85497915751ac6ee83aae584982960e40700529bc9786b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cipher::errors::StreamCipherError::from"
+kappa = "d61e68eab4003d6ba4868b5f6eaebe0864aacb5bef268076f46bc737258cf6bb"
+embedded = "e5747a58613610ddec4a5ad05fcf535e9e199df2d012ad9cd2562a5e5f685275"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:253:1: 253:46>::check_remaining"
+kappa = "91f9068e2829593e8809e3a32234b2f0aa3f9941e897b3ed25d498296fc42789"
+at = "C=u32"
+embedded = "50555d1fccf344ddaad501a2cae7ab125df8985bf55ff369035496b8ec1264c6"
+status = "residue"
+cause = "mir::Ty: stream::errors::StreamCipherError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:253:1: 253:46>::unchecked_apply_keystream_inout"
+kappa = "40069b888978346c00b119eee282eea01a681dd299b7ac5bcc89a263842698c6"
+at = "C=u32"
+embedded = "ba8fdf33c4e8ebbe92d4821f17ccc01afe2dd9b14157ed1aeedb044a3be22a7b"
+status = "residue"
+cause = "mir::Ty: InOutBuf<'_, '_, u8>"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:253:1: 253:46>::unchecked_write_keystream"
+kappa = "a9f25fd063492912b2cb759ba17cbb5131c48f9ccecff3a702b09cd03a9e1123"
+at = "C=u32"
+embedded = "37e5bb2ba8e858c9c40d4133885546207dee71d6244e4b6da1d8ed5121c99cfe"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by StreamCipher, which u32 does not implement in core"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::from_block_byte"
+kappa = "df658bccda02b19398b80e3659dfb2a6ade51c9d8c1387968b436a62025f6c33"
+at = "T=u32"
+embedded = "2786fc285a23aa45540c56f170d2024393d4cb6841b75c66b8aded90ddd4b4a6"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::from_block_byte#2"
+kappa = "32603e13b4f0ba6ae28ac00e79b839c03f8f154cf61898d64bdd0bbcf66f5c52"
+at = "T=u32"
+embedded = "fc1b03c0d22ee75c2c611eaa6e8489f6e53c6a303e40c6d4637f02817e313cb0"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::from_block_byte#3"
+kappa = "deee00ba5d74e2f77f971031861b179d20de8106da400950c5c1882b69e3952e"
+at = "T=u32"
+embedded = "e6a658d6414b315e706e758259e0f958d1980041ef549ee81134663321367019"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::from_block_byte#4"
+kappa = "238db55ba75a62dde6a0f28cb147a6bb63e25ce014a77b2d0bd0d49dcdedf135"
+at = "T=u32"
+embedded = "ca738669f6b22e8e8f50cc4a62e03708f2339db31debfc9d682caced0c8996c0"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::from_block_byte#5"
+kappa = "ba181f2d5e5cacf58c5f0128c0f9b8b85ca4e830ae6709009008cac0a4abc33e"
+at = "T=u32"
+embedded = "bf36209e7cddee834ed950e6eee471b683ac8cbc904df792c5f776aaaf6c0f63"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::into_block_byte"
+kappa = "47989d0ee3cfde3e718effc2ce605ee6726302eb70a100ca1bb2bc5af890cc6a"
+at = "T=u32"
+embedded = "9fe0e6462759fc055fb22ff8116df9f9942f352afa24db9ab0b88df8a88a7fb8"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::into_block_byte#2"
+kappa = "a2590aebf1d79c843adb60de7b337468c03f03d6f9123cadf910904d51f20f3b"
+at = "T=u32"
+embedded = "fddedf74ad21401848778d63a05661716fcb4ec9081fcde6c8dbb1216754688c"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::into_block_byte#3"
+kappa = "d4f04b8012293aa6c1a9ae902d51146153f4657fddc19e9d3c8d060e4dc1963c"
+at = "T=u32"
+embedded = "61f9d8c9237ec1946d4263f8ffe1bec967f42b3131ac955c0589aef93eae6e7c"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::into_block_byte#4"
+kappa = "fef8012d6e8f4b7d40bb2528003e5409632436f27c024bee02d8af81ee97d940"
+at = "T=u32"
+embedded = "0419160dd5fad7d050d5abc23b8bf245da9153b55969f6f248e46cfd90f6d62a"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+
+[[fn]]
+path = "cipher::stream::<impl at src/stream.rs:297:13: 297:32>::into_block_byte#5"
+kappa = "821c8983ec1d397c188672a1ef6657f0c542e238ec51c33a89b0517ec314f939"
+at = "T=u32"
+embedded = "cdcf0bafa9a977d43ab932648239d2ce44dc2822495e85792fbc4baccde8d95e"
+status = "residue"
+cause = "mir::Ty: stream::errors::OverflowError"
+

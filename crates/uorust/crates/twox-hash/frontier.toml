@@ -1,0 +1,343 @@
+# The twox-hash register (written by `uorust crate twox-hash@2.1.5`; do not edit): every body of
+# twox-hash's MIR at twox-hash 2.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 288
+translated = 11
+residue = 277
+
+[module.crate]
+bodies = 5
+translated = 5
+residue = 0
+
+[module.xxhash3]
+bodies = 125
+translated = 6
+residue = 119
+
+[module.xxhash32]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.xxhash3_128]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.xxhash3_64]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.xxhash64]
+bodies = 42
+translated = 0
+residue = 42
+
+[embedding]
+bodies = 288
+embedded = 288
+evaluable = 288
+blocked = 0
+
+[differential]
+bodies = 5
+theorems = 35
+
+[[cause]]
+cause = "mir::Ty: xxhash3::secret::Secret"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: xxhash32::Hasher"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Secret128BitView<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: xxhash64::Hasher"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: streaming::RawHasherCore<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: xxhash32::Accumulators"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xxhash3_128::Hasher"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xxhash3_64::Hasher"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: xxhash64::Accumulators"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Secret64BitView<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: large::Algorithm<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: xxhash32::Buffer"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: xxhash64::Buffer"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: xxhash32::BufferData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xxhash3_64::RawHasher<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: xxhash64::BufferData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: impl Vector"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: xxhash3::OneshotWithSecretError"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3::bp_as_chunks: twox-hash's MIR stops at mir::Operand::Constant: <[u8] as xxhash3::SliceBackport<u8>>::bp_as_chunks::promoted[1]"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash32::random_impl::RandomState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash3::X128"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::RawHasherCore<std::boxed::Box<[u8]>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::SecretBuffer<std::boxed::Box<[u8]>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::SecretBuffer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xxhash64::random_impl::RandomState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_mut_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::first_chunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::last_chunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3::to_u64s: twox-hash's MIR stops at mir::TerminatorKind::Call: xxhash3::bp_as_chunks: twox-hash's MIR stops at mir::Operand::Constant: <[u8] as xxhash3::SliceBackport<u8>>::bp_as_chunks::promoted[1]"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot::optimize_for_latency: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot_with_seed::simple_case: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3_64::Hasher::oneshot::optimize_for_latency: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash3_64::Hasher::oneshot_with_seed::simple_case: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: avx2::Impl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: scalar::Impl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sse2::Impl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: streaming::SecretBuffer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash32::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::large::avx2::Impl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::large::sse2::Impl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::secret::Secret128BitView<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::secret::Secret64BitView<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::RawHasherCore<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::StripeAccumulator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3_128::Finalize128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash3_64::Finalize64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: xxhash64::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash32::PRIME32_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::DEFAULT_SEED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::primes::PRIME32_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::primes::PRIME64_1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::primes::PRIME64_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::primes::PRIME_MX1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash3::streaming::STRIPE_BYTES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item xxhash64::PRIME64_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: xxhash3::large::avx2::round_scramble_avx2::promoted[0]: type outside the lift: xxhash3::large::scalar::Impl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: xxhash3::large::sse2::round_scramble_sse2::promoted[0]: type outside the lift: xxhash3::large::scalar::Impl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: xxhash3::streaming::BUFFERED_BYTES: mir::Operand::Constant: the constant item xxhash3::streaming::STRIPE_BYTES"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xxhash64::round: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash64::PRIME64_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::InlineAsm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SecretWithSeedError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StripeAccumulator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: streaming::SecretTooShortError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xxhash3::large::scalar::Impl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: xxhash3::streaming::SecretBuffer<&[u8; 192]>"
+bodies = 1

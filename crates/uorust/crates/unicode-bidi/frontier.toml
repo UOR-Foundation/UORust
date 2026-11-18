@@ -1,0 +1,238 @@
+# The unicode-bidi register (written by `uorust crate unicode-bidi@0.3.18`; do not edit): every body of
+# unicode-bidi's MIR at unicode-bidi 0.3.18, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 180
+translated = 6
+residue = 174
+
+[module.char_data]
+bodies = 12
+translated = 2
+residue = 10
+
+[module.crate]
+bodies = 64
+translated = 1
+residue = 63
+
+[module.data_source]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.deprecated]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.explicit]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.implicit]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.level]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.prepare]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.utf16]
+bodies = 52
+translated = 3
+residue = 49
+
+[embedding]
+bodies = 180
+embedded = 180
+evaluable = 180
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: level::Level"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: BidiClass"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: char_data::tables::BidiClass"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ParagraphBidiInfo<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: utf16::ParagraphBidiInfo<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BidiInfo<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IsolatingRunSequence"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: level::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utf16::BidiInfo<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InitialInfo<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParagraphInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utf8IndexLenIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: data_source::BidiMatchedOpeningBracket"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utf16::InitialInfo<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: get_base_direction_impl: unicode-bidi's MIR stops at type outside the lift: <u32 as TextSource<'_>>::CharIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InitialInfoExt<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Paragraph<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Utf16CharIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf16::InitialInfoExt<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf16::Paragraph<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf16::Utf16CharIndexIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf16::Utf16CharIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf16::Utf16IndexLenIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TextSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: get_base_direction::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: get_base_direction_full::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: level::MAX_IMPLICIT_DEPTH: mir::Operand::Constant: the constant item level::MAX_DEPTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item level::MAX_DEPTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item level::MAX_EXPLICIT_DEPTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::len_utf16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::len_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OverrideStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParagraphInfoFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Utf16CharIndexIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Utf16IndexLenIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::CharIndices<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 1

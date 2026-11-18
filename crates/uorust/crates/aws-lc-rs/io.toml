@@ -1,0 +1,148 @@
+[[fn]]
+path = "aws-lc-rs::CONSTRUCTED"
+kappa = "3d737b46e426e6e3ff7c9755d797f7a02563702e25d25fd27c104ccecee02b43"
+embedded = "939976e1f3d0ccc2881d819e45814229d5bee3f24e2859d0aa11b2f9a73c9c91"
+status = "translated"
+digest = "256cd10024e80b80b30f13677492d5a74a1b4afda347739f080ee80d0a13b3a5"
+
+[[fn]]
+path = "aws-lc-rs::CONTEXT_SPECIFIC"
+kappa = "f41724bdb2300c5e161fd124aba5d44091136c9d01d0d0d9cdb3a203a79fb0df"
+embedded = "9f29c226605262aafd4efee6f6565a9edb12e5a2cb68726956f00ba3b062fd5f"
+status = "translated"
+digest = "4754b1705e217d32ad4591810cd01fbb90ff4cdf92393b5f9361cfac4e60b4ee"
+
+[[fn]]
+path = "aws-lc-rs::bit_string_with_no_unused_bits"
+kappa = "9741dbef31a4e46b294252cffec50d952d6acffac94482dff3e6ff4332962bf7"
+embedded = "ec9b3181668e2eba9a39a8a13953929d888a963dbdb013a622c4e2f6780ad183"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "aws-lc-rs::check_minimum"
+kappa = "472708a83ad94040dcd29e667f841b1610ddc6025c1ad1aa060638fb572b3802"
+embedded = "2461d644637cd1d9b9847f10c481f16e925c9055842646c4e2a8b481d63913c9"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::der::<impl at src/io/der.rs:17:10: 17:15>::clone"
+kappa = "c00aaf2a4aee12b2158b9ced411b2c10fc145e785db5c1a84bff490a6a1d9826"
+embedded = "589c3d94ab249ac523c5f309e7a862fd6d53c12dec58f98c6eb67fc8c5bcda20"
+status = "residue"
+cause = "mir::Ty: io::der::Tag"
+
+[[fn]]
+path = "aws-lc-rs::der::<impl at src/io/der.rs:17:23: 17:32>::eq"
+kappa = "b5180376b6735501f86f0fe5f5eb5df3d26c37ee935803a5b760d671bb02f12f"
+embedded = "aab03f8a888d1dc510580e1c202ba2c48e64da3ea56bcaaa1d0448d795615df8"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "aws-lc-rs::der::<impl at src/io/der.rs:17:34: 17:36>::assert_fields_are_eq"
+kappa = "cbebed147a503a1ca9c453fefe0cb6a45ef30153aeeca96389b736fe0b11ba47"
+embedded = "4e6281b3c327afdfa9d82be5665322685de5f7870870caf3d15dd1f1f68ef35d"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "aws-lc-rs::der::<impl at src/io/der.rs:17:38: 17:43>::fmt"
+kappa = "4fb8a9ab4d3b5a8f4b88c01881d4b00d14f49175cca0ed12be09ecd646ef83a1"
+embedded = "0ae5383aa9fa6e14f4b232bf5e0416733203e06d9967c7a2f8d885841ca359da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::der::u8::from"
+kappa = "4ab0c4092f8f90d15f61f562b5a9c40c34eef2caad7b03e7095b26db5788afd3"
+embedded = "5f7c04f690ace4dc9f00e11591f9f88c7bd6f122ad752cb6e522d1888478b4fc"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "aws-lc-rs::der::usize::from"
+kappa = "b94aba4f26426faf5c027e097dc445bef2b37ac5b4ae2501f9aabbaa2b69307e"
+embedded = "31fed4229f8a2b4702d7980483c330e750dbe748743d2e7ca7a58a5340fb3b36"
+status = "residue"
+cause = "mir::Ty: der::Tag"
+
+[[fn]]
+path = "aws-lc-rs::expect_tag_and_get_value"
+kappa = "ef6399766a8b5d01f72a2f8ae865154f7b22ace6f050acbc7f8034695cb75672"
+embedded = "e20cb62ca6848a0e9eb4748fb3500d030f504fe58e7c06f5c390569cf3cef604"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "aws-lc-rs::nested"
+kappa = "1e67067cb4b37e3c1e300ff2d3a5fc24341f9f2e009ee8a2a143166809e94feb"
+at = "E=u32, F=u32, R=u32"
+embedded = "61ed73b1bf4baccb803775c16499c35450f7030efdb6851a52571c9e8c3a7ed8"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "aws-lc-rs::nonnegative_integer"
+kappa = "082614d40a37c1d8af8d04af00a8aaccee718cb6a8aeea4271fae28cab946982"
+embedded = "1e5fc44f3ef834266baf72810d78741b36e3962cc39f3efe4b47a80fb81b21a2"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive::<impl at src/io/positive.rs:9:16: 9:21>::clone"
+kappa = "d67ec27a5f59bb19b20fa99d1f98662d723d4ab99c648486ddf799c8371db7ce"
+embedded = "f1f00c71a0630feff46b6f624ef69f6cc24b2ce7416ed1f6abfc1696456fb221"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive::Positive::big_endian_without_leading_zero"
+kappa = "0fd3e279b59fab2e1edf90f51ba6616935fff4b246b15ec781618c84e12d9967"
+embedded = "f86a3300e5acb0d515d109072180d98795e0c178924418e1c10979f83c5dcacc"
+status = "residue"
+cause = "mir::Ty: Positive<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive::Positive::big_endian_without_leading_zero_as_input"
+kappa = "e0a46321d7eaeaf97574529bb33cf960ec4696cbe5866b74dc96f14b58f9e275"
+embedded = "42348bcea9c0382062419f050db17dbbc359ea2a2c73e0650cfacee27cea25ef"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive::Positive::first_byte"
+kappa = "e307cb757cae6e690f2a5a0fa5f15607e9c67296a4577db150fcb198e9bc89f0"
+embedded = "437ccabd5132d0e5fc3ac08adfe1a31f07386e847d0466b3bf6653930fece4d0"
+status = "residue"
+cause = "mir::Ty: Positive<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive::Positive::new_non_empty_without_leading_zeros"
+kappa = "e32cc46b3d37b026d3e74c9df3238b3ea7b11b61f9723f1cf253786ca7dd7304"
+embedded = "04808f9a161d9e12168d7c32909a1cbaa8716c2ad8027b608d81630900408675"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "aws-lc-rs::positive_integer"
+kappa = "f645739630528ffe0abdf3ed59b5cb5bb992bd7aca4756c3ab66d190b0281c87"
+embedded = "d2096b662e8152c06cfc1da0bf6a0f7fb91921d03e145b07dfba783740969ebb"
+status = "residue"
+cause = "mir::Ty: io::positive::Positive<'_>"
+
+[[fn]]
+path = "aws-lc-rs::read_tag_and_get_value"
+kappa = "9e7650fa399630dc2bd8359c902504c541e93d476b7c512c59e376ce624ff6e6"
+embedded = "2f36ceb7cddab5825777e21bfe4f34f5a6f1ee717e94d2a050f4097697058220"
+status = "residue"
+cause = "mir::Ty: untrusted::Input<'_>"
+
+[[fn]]
+path = "aws-lc-rs::small_nonnegative_integer"
+kappa = "6332144dcb8649de14ede1c4b5b7edb6b7904402b49f32f9f418ce002373c705"
+embedded = "099269524f79f5c39c7da3b800ea2a3091fab7b0642eb287913fc3147c5e86ba"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+

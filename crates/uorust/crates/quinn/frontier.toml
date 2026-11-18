@@ -1,0 +1,542 @@
+# The quinn register (written by `uorust crate quinn@0.11.12`; do not edit): every body of
+# quinn's MIR at quinn 0.11.12, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 316
+translated = 0
+residue = 316
+
+[module.connection]
+bodies = 100
+translated = 0
+residue = 100
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.endpoint]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.incoming]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.mutex]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.recv_stream]
+bodies = 59
+translated = 0
+residue = 59
+
+[module.runtime]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.send_stream]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.work_limiter]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 316
+embedded = 316
+evaluable = 316
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: connection::Connection"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ReadError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: connection::State"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: endpoint::Endpoint"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: incoming::Incoming"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: send_stream::WriteError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: connection::Connecting"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: connection::SendDatagramError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: connection::_::Projection<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: connection::_::ProjectionRef<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::ClosedStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: send_stream::SendStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: StreamId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WorkLimiter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionRef"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ReadToEndError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: recv_stream::RecvStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endpoint::EndpointStats"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ReadExactError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::UdpSocket"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConnectionRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EndpointInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadExactError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadToEndError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResetError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StoppedError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::EndpointRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::PollProgress"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endpoint::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: non_tracking::MutexGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::Chunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::ConnectionError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::StreamId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ResetError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: send_stream::StoppedError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Accept<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AcceptBi<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AcceptUni<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConnectionSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndpointDriver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndpointRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OpenBi<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OpenUni<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadDatagram<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadToEndBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendDatagram<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Sleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokioRuntime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UdpPollHelper<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::AcceptBi<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::AcceptUni<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionDriver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::OpenBi<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::OpenUni<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ReadDatagram<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::SendDatagram<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::Shared"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn quinn_proto::congestion::Controller"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn runtime::AsyncTimer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn runtime::AsyncUdpSocket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn runtime::Runtime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn runtime::UdpPoller"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::Accept<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::EndpointInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::RecvState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: incoming::IncomingFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: incoming::RetryError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::non_tracking::Mutex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::non_tracking::MutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::ConnectionId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::ConnectionStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::EcnCodepoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::RetryError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::Side"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::Transmit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::VarInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_proto::crypto::ExportKeyingMaterialError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_udp::EcnCodepoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quinn_udp::Transmit<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ReadStatus<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recv_stream::ReadToEndBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::UdpPollHelper<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runtime::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<1>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: work_limiter::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: work_limiter::WorkLimiter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/send_stream.rs:248:9: 248:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::Connecting::handshake_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::Connection::closed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of endpoint::Endpoint::wait_idle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::read_chunk"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::read_chunks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::read_exact"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::read_to_end"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of recv_stream::RecvStream::received_reset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of send_stream::SendStream::write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of send_stream::SendStream::write_all"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of send_stream::SendStream::write_all_chunks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of send_stream::SendStream::write_chunk"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of send_stream::SendStream::write_chunks"
+bodies = 1

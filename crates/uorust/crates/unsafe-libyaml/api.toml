@@ -1,0 +1,343 @@
+[[fn]]
+path = "unsafe-libyaml::INPUT_BUFFER_SIZE"
+kappa = "f7f264f5131b89dcb3da122911589b828e1a22fd39b095ac95a7faa5debff40c"
+embedded = "d06fd464771c9a27c6b0abd822081d67747d23b097eebefc0a87e8245ad400d3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item api::INPUT_RAW_BUFFER_SIZE"
+
+[[fn]]
+path = "unsafe-libyaml::OUTPUT_RAW_BUFFER_SIZE"
+kappa = "d5976dce3dd2149f30057fdf2cb3cc5f4d2b9ec89c77cfd20157fe657b815850"
+embedded = "621ac8098b9d9290a6c8a2a2c6a02de0454681d71ea5b69dd1d606165a0a4583"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item api::OUTPUT_BUFFER_SIZE"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_alias_event_initialize"
+kappa = "daf2eb991736c2d0c780637d8f17caf850f99c478f76fa69fa51e696d821d48b"
+embedded = "cb3939d5179aea1c013fe983e55719fffa6d6b6135a1bcd60bdd895bb92dd0e2"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_check_utf8"
+kappa = "fc4d81ae18cf641efe171cb2047a1dfc18747a6d8a556cfe53f9693b8a020725"
+embedded = "07c7077efff3111556fa6f0009fa2ecf638a98eae3a3b8923f259701cf55193f"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_add_mapping"
+kappa = "f1df7562b79919b58c7b6120060aa136ef6cf620fe86d5143d6e3116c97ae3d9"
+embedded = "3edd48546630d7688b55bef7edab299ca284010a0d97576359ba211fc3afcc8f"
+status = "residue"
+cause = "mir::Ty: yaml_mapping_style_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_add_scalar"
+kappa = "edcec6c23f75f7103c9d28ad4ac8f18dfc257577bd025a54d5f3ee535fb0d525"
+embedded = "d84b8cc33f9ad70dc234e476148505990474196a758d3519da7ce86862336b3f"
+status = "residue"
+cause = "mir::Ty: yaml_scalar_style_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_add_sequence"
+kappa = "dd239197a081c99363eff9eab8af3fe9c335c69951cd51d65d59ae2c2944665b"
+embedded = "c855f228fb82c3470fea30fb245ba78e491794e4e8febbdaf194eef63e1c414f"
+status = "residue"
+cause = "mir::Ty: yaml_sequence_style_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_append_mapping_pair"
+kappa = "258f07ed96ef47a84748034a19fb2c4573bbf84241071abb3866c0ee93c00b5e"
+embedded = "c07b82748318d22f86b9a358574431112a55f64e889820df8583fbe0fce92486"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_append_sequence_item"
+kappa = "01c9583aab0db429fe63d1aca2024a70637a9bf2a30887c548d553d8512eee13"
+embedded = "c145dd176c8543cb961623cf792f0573ad26a386de3e13dca3cf341633acb9a4"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_delete"
+kappa = "21036803efb1d75eebf77b6b19b07689719f8550924a7ae28f9125748089ce04"
+embedded = "254f5896e197537aee75a527684699c2756d63f86168646bec0c74a0270a6c03"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_document_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_end_event_initialize"
+kappa = "4ce9a30ff8190d6893d8909b2260da4f1491b212e739846df47a084ec217453c"
+embedded = "34c8d311fb04923ddaa160da99febaba3ff02c0ad6b53c1314685a80df854c91"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_get_node"
+kappa = "3434357cbc01771c1350f1cb04a21fb245aa4004e1e2e466c9e51cfeddfa95f2"
+embedded = "eddd0a8332845045ccd3e92e47435f4ccec9596aca7d57d1b9219acbf9a5dcbb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_document_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_get_root_node"
+kappa = "1d987cd7dc5c1510fe8aeac2ad22116af35081c9a340f9e4ac54534f50705338"
+embedded = "eb185ddcfaf0267f72f54b087a30df6d79b6a43e0e3ba9136a7d60df64ada860"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_document_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_initialize"
+kappa = "aa96c11ecd0da37846157be7c2afe42a9c6800701042211d2ea1797cc5e9f50e"
+embedded = "7d7922ad3d2bf3d9f8bdd16fb03a96b8a0a19cf6486f254abcff39f95a66e799"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_document_start_event_initialize"
+kappa = "953f78082ea93d8cba5be04e574b8b528c497b94da9c6f0882e1b03e14315d3d"
+embedded = "5df8541a04c07eebfdb32ddbb7dcf004d6e6eddf3cf64af42148bf103f2191d5"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_delete"
+kappa = "ea1e4507687ecee0a44106aef270a2bee72e83032f39cd09868c03d00a2d979f"
+embedded = "ccefe002e26ef10f821350c71f6a82ee9e93fdcf493b6e59e9402bbeb15bc4c7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_initialize"
+kappa = "a5e52e6df0f72aa9f05558ea9b194a4eb050969d35ab1234ca8081a5daf4ba63"
+embedded = "dc3c067b9daa97e8af7a06d9752c7183fe954b23e4ec906d14f7a9d77a586744"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_break"
+kappa = "828b88440230d2f680913945fda0c0888ca7e5c2e8994c4969d792317d70b94d"
+embedded = "b85a5dfa7dfd9053a36841ff5868fa1d1d51a296e35dd1c2dadf5246aa545fbc"
+status = "residue"
+cause = "mir::Ty: yaml_break_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_canonical"
+kappa = "1423ba61c21734fd1bf3f87806f3e1a7cefe16fc13a34a0c7abe4101255db026"
+embedded = "3c79ff1140ef8774462af90af412a19b3abd1c5a3fac47d866aa9706a9a29a8b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_encoding"
+kappa = "548234756fb91c1312e19cb2c755b3c53147312a5262185ed7662edcfcc3c4c2"
+embedded = "77c5aef7071370f39bc2d7466052d1719b5d38e0eb25acd29b3c482883885e16"
+status = "residue"
+cause = "mir::Ty: yaml_encoding_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_indent"
+kappa = "b12546b38a81bc6904246d1ff91c684f1899ee35fff4f3fca458bd220b3c796f"
+embedded = "b77e22958c8b9672056494f47f9259f5ec65d7869c14320bc3c621fb37696a57"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_output"
+kappa = "439517f5f35678185ddac0d91862b71367729eb25a3c462dab27687a193a164f"
+embedded = "eb20d9ff467ac0f14316962dfb98cf3b63380c028c068e00fba8a4bb0c31cf3c"
+status = "residue"
+cause = "mir::Ty: unsafe fn(*mut c_void, *mut u8, u64) -> i32"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_output_string"
+kappa = "4ce53878c78e4b447c98990a79fe50b94e19b3732b1080fefd98b132c1980db5"
+embedded = "84ec5a346b55b19060b49b9f4c0928f098fa8cd42eaaf467ad4b242320f25469"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_unicode"
+kappa = "088752788a5ad5ed91a1129406ccc1ec47f9d421404e026daf8d5ff09c8ffb47"
+embedded = "109636027b9e57d757a65caaefe4211008a2926f466b04021c09c30fcc284597"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_emitter_set_width"
+kappa = "443474cfd847961510d053a3cc10790fb51e3749c82bc012d548c223bc90662d"
+embedded = "aa83c12188ad9b6c4c9c354bc7a9727ac4b2f1b0cedc034aa0123f0ca080a99f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_emitter_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_event_delete"
+kappa = "241611a5c7adb3eb4ba9398c3ca982a97f99de36d27db6946aa2858eb62984f6"
+embedded = "e1ec71d78a1d46af0aa31cd7c39a112a68ba9c6332865f7764f94c98f6684085"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_event_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_free"
+kappa = "66429c43794a16dcd2f99f7aa13f72ee20780f72c49f3a07a12c6e488e18cf60"
+embedded = "5a8b88a397c8aa6ca166c2fb2a9aa0f8b17c3b9bf3871cbb549674528969f583"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut c_void>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_malloc"
+kappa = "619e990530ec8b7e5db55e3d7b249af54bfe57d46fa28c97c8345e5fa91fdcfc"
+embedded = "ab513d45b98d498c62babec6bdc487a855f4918fb5447f92a8146701b5b4745e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: externs::malloc: unsafe-libyaml's MIR stops at mir::TerminatorKind::Call: ops::<impl at src/ops.rs:63:1: 63:24>::force_into: unsafe-libyaml's MIR stops at type outside the lift: <u64 as core::convert::TryInto<usize>>::Error"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_mapping_end_event_initialize"
+kappa = "9e6126f14277f5bbb1fecaa18dc5f15e521c433d39bff30412594f8b3ea88d74"
+embedded = "9de706a323ab1d225e14ee7102103adc203cbf0954f5f432af14a8994c7aee1b"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_mapping_start_event_initialize"
+kappa = "316d3dc9266a9496118d195a8dc9c6941b2f5fb1c5539b5f183ee519fd786440"
+embedded = "6dd6436921c73b147d0f36cd1537c41d2b91eeb5cb36cb5760c23ffc9173d63c"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_parser_delete"
+kappa = "9d8d52897357e913bfbf7d842ff656c9fc09799630775678a1dcbe447f11eed2"
+embedded = "3cdc0c94b1199a9a792cd6da310dc02da936d7c28f8ed40cc90fe5f7a6639293"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_parser_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_parser_initialize"
+kappa = "5b6fe32e8800ace079de744b7e536848d42cf28030b21800e61ad8bd2eab3a80"
+embedded = "91436dc6acd904d246cd3af16dc0fd65300c3bf234a27db80b4b15814566056b"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_parser_set_encoding"
+kappa = "588ebdad99264d61b9f0554b07708e6bb17159c960e8fc0ba2f77e542a4e7971"
+embedded = "e44dab6f5c790bf5e67772dc439f66e0aa2b829169ca7c2417a9724ba7642d1a"
+status = "residue"
+cause = "mir::Ty: yaml_encoding_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_parser_set_input"
+kappa = "7169afd982e0d73c635dc25fb90fa17d263622cd7ca2dd3521e8a0931827e6b1"
+embedded = "8d16196d153f9980a648204b9156175c2ddf9839e06c9b2a2a2b5f8e5717dc86"
+status = "residue"
+cause = "mir::Ty: unsafe fn(*mut c_void, *mut u8, u64, *mut u64) -> i32"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_parser_set_input_string"
+kappa = "13b3d4d4f7374304fa588f245db4aea6d32684423deeb6b6421475f22723da3f"
+embedded = "376f464830f1cbf346293bcdc15c3ce482324061ca2d8a3de30e623483b11352"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_parser_t>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_queue_extend"
+kappa = "7dadec8bf4d811e149286baf0262392321ff777fd0edbb54de6618c170fb7dae"
+embedded = "2d5c97f140b067a998641bf96feed4ad5fb21bea7fb16fd14ba6bdcc133e6c9b"
+status = "residue"
+cause = "mir::Memory: a value of RawPointer, which the memory holds no cells of"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_realloc"
+kappa = "cc0e4c7d26810a09784915974a1f89cdd28d0614a339e39696728b4ded06d93c"
+embedded = "7e970b2b7d5a5b71e04d309e7f4a71c42c65cb552073792f0d95b26f48ed4d8b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut c_void>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_scalar_event_initialize"
+kappa = "6ba62d2a893b367ae8a23e6ee1021f4a1f80f679d940da945f312f190bc99c19"
+embedded = "ed923d4763aff40e48065bebcb2f47f72b6ed00029037886b03326e5bff0073f"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_sequence_end_event_initialize"
+kappa = "157f3fa188b57530b11f2aa8a6f0e251df45bbed56c7634e12d09d84e6a5411b"
+embedded = "2aa209669fe0fc7e64a83d03c731d8dfecf62482114fef9a309fe7ae8f944bb3"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_sequence_start_event_initialize"
+kappa = "a3d3fe5fa72543119961661eee46270d0709a9df2747aa8d705dcfd7d7ca16e7"
+embedded = "515a2bb52ef8ec6c4c231775886ccdab54abfd8c1b1c03901c6313c28cfb3954"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_stack_extend"
+kappa = "f4f06ae5476cb90bb45f9d0604ca9d5720a5d24530020fd11fa39f8f61d9e3b2"
+embedded = "8a87d81ed8094cac64f683e47c0a859e0d06cb771149c778f73a4b6c31f8dca7"
+status = "residue"
+cause = "mir::Memory: a value of RawPointer, which the memory holds no cells of"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_strdup"
+kappa = "40709b62d1dfd4bf48f9f11e37f2f17bac5859723a3c0e1320a6f0217666892e"
+embedded = "dda304be083194b279cfb736604ce1201fd477ecf60dc5f0a97c13f496739cce"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::is_null"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_stream_end_event_initialize"
+kappa = "15302ff5daf2ef9373193f2bc74b32438b6153bd462be61f6ab0f7c1fbca9d71"
+embedded = "dda3970017806a194eb0947a2a4458a940ca31fbe2158626c9838a250672d149"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_stream_start_event_initialize"
+kappa = "38c1624fa2be361c389b3b993fc5ace21892baf4b395fabae80ed81918a27dc6"
+embedded = "0bfd76c3cb01c240db91e48e9459be07a287e4e4140aa742f1fb3c0a8875edb2"
+status = "residue"
+cause = "mir::Ty: success::Success"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_string_extend"
+kappa = "76d13e23364357974f862070ffb80958145f2156dbf5e677b9918a678b0c7921"
+embedded = "e1db4ec73de02ebd2b1e7daf138a4cb224410727b891657922a4ffbe37dac60f"
+status = "residue"
+cause = "mir::Memory: a value of RawPointer, which the memory holds no cells of"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_string_join"
+kappa = "d4f394ed06223e1192d242f3c1ad6b6161990c2f257a04d4c55a9cae09e72213"
+embedded = "10615f3b32c247eb5189828bfcbd19b7f7bf9895073ef3c58b59ce4065aa4e10"
+status = "residue"
+cause = "mir::Memory: a value of RawPointer, which the memory holds no cells of"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_string_read_handler"
+kappa = "b3241f598f9474db43010051d0196867708abe8f013fde07ae2cb718cff351e8"
+embedded = "2dab15a73a56b94922b8b5135585155404ee4f0410ebc9bb5c49110be0de811e"
+status = "residue"
+cause = "mir::Ty: yaml::yaml_parser_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_string_write_handler"
+kappa = "2b8243a03d90ece19661edcb67df7245985f68c6d2954efbe4ccb39a7f411fbf"
+embedded = "072ca61bcc7605a8c0679f6e9d9a2eb4d4403be7d6a39179e8dc667a05f45d35"
+status = "residue"
+cause = "mir::Ty: yaml::yaml_emitter_t"
+
+[[fn]]
+path = "unsafe-libyaml::yaml_token_delete"
+kappa = "b4c9a4f56fa88d65e4681e4910715adb5f1a254f6dc885d8fed48aa7f324e5fa"
+embedded = "de4f2d92f667475c68a308134883a10d44d0fadbba607e6e6e1591e54679ab0d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut yaml_token_t>::is_null"
+

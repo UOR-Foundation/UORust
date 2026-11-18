@@ -1,0 +1,56 @@
+[[fn]]
+path = "elliptic-curve::BatchInvert::batch_invert_in_place"
+kappa = "c01731e051e63a0ee1916205bffe2c926dc5356fd13c7cff1fad21db1930f743"
+at = "Self=u32"
+embedded = "119a766760358d83f39a7020de4c4d8ab5e238b12b7695c223adb4c5e8420a25"
+status = "residue"
+cause = "mir::TerminatorKind::Call: BatchInverter::invert_with_external_scratch"
+
+[[fn]]
+path = "elliptic-curve::BatchInvert::batch_invert_in_place_vartime"
+kappa = "110e72b692f3ca17c4b24aeb6fd3d52818e6abbb9d9b80987608f0c60e757738"
+at = "Self=u32"
+embedded = "de7179b4043191ed47d94767dcb9a1003485a752b2b3a1caefeebd86016b83a8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BatchInvert, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::Double::double_in_place"
+kappa = "8f7e73ebb14c48a024309256c74da47e227ebbb8447e371fa0fc158539c5b9d1"
+at = "Self=u32"
+embedded = "f1c265b7a8e5d49225a721487b5ef759779337b9051b1cad9e2a4e7be80007d9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Double, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::LinearCombination::lincomb"
+kappa = "e4e931fb8548275283d20b76b4546ec0790f01cb8e020ed5f10981cd3f0ba04c"
+at = "PointsAndScalars=u32, Self=u32"
+embedded = "e83d06a5707e8e206e68b46d9ce7c12e80d55ab9c70a491287d3239e61518f4b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::LinearCombination::lincomb_vartime"
+kappa = "f789156e56c0aaa66a931bf3a4f92f243d099d10e6873555d2bfc6571b31219e"
+at = "PointsAndScalars=u32, Self=u32"
+embedded = "367dc2e36459752790168bbff77bf074dc563b6fa8f393c576a1a71c658470c3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by LinearCombination, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::MulByGeneratorVartime::mul_by_generator_and_mul_add_vartime"
+kappa = "d2b19ba8d75966d9a96396c8a8d5b5e0b8773b601b6409aa4234c7d4cdf60eb0"
+at = "Self=u32"
+embedded = "e101c482cf99675d8a2e0fa858b45dda7ec60a39f0f35857b92ea634454fcd79"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by MulByGeneratorVartime, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::MulByGeneratorVartime::mul_by_generator_vartime"
+kappa = "8e11d0f57705a575200358aad531a1bd2c1f2cbb66d3f7c27e5523257ce8dff6"
+at = "Self=u32"
+embedded = "8d9c8e181f725c10501369d2d1b94c9a46f7f98ac2f9a2462957a35ae97917fb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Group, which u32 does not implement in core"
+

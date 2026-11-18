@@ -1,0 +1,1576 @@
+[[fn]]
+path = "serde_with::ser::As::serialize"
+kappa = "fe0ade0d7da0fa805d1f545cdf8fdca5a5d9d0453b2aff01c975de53e5551987"
+at = "I=u32, S=u32"
+embedded = "2d707e38f7bce9f1a1876c2a4453ca174a860240f770c4d27ac2492ad20c3a4f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as ser::SerializeAs>::serialize_as"
+
+[[fn]]
+path = "serde_with::ser::SerializeAsWrap::from"
+kappa = "ab061c0f5b2eeb1b9647020a15e4bc092a9d102841b83179465202178ae8f0c8"
+at = "T=u32, U=u32"
+embedded = "ed06660b8738cb772ea20dc792b06fa6de57b0dffc935571e5fb9f2f0d47d5df"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::SerializeAsWrap::new"
+kappa = "899ae7f6f01b8da81c7d9b2a0a6f20f3be29b7833881c2aa8c4e9d818fd4302d"
+at = "T=u32, U=u32"
+embedded = "3ff951fdfba01bd7cd513cfb1764c00154cf683800be4a4c56a1f3338e032ba9"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::SerializeAsWrap::serialize"
+kappa = "397d6a8fb995694efaf204f6ee7daeec40acef06b52f5817fcd735053c636ef5"
+at = "S=u32, T=u32"
+embedded = "6fa11cc339da131858bdff5da1f2689379e040da9f67bb1dcc779deb52d3b949"
+status = "residue"
+cause = "mir::Ty: U"
+
+[[fn]]
+path = "serde_with::ser::duplicates::MapFirstKeyWins::serialize_as"
+kappa = "f052ddcde023f3ed2a4497e0dbd2d63a72a39f0000ad48d95593eb0e895046db"
+at = "K=u32, S=u32, V=u32"
+embedded = "d9bd1c1de1ea250546e49e02f05f8797705cc39e32c1d394bf26b78b239d0fe1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::collections::BTreeMap as ser::SerializeAs>::serialize_as"
+
+[[fn]]
+path = "serde_with::ser::duplicates::MapFirstKeyWins::serialize_as#2"
+kappa = "9f13bc720bcb21cbac7e60223ce745394dd502d04098fd899928022863c59471"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "bb659a5a61ec80d4849bf8a2f8c516c52a17a309f6be7562cb60071d46954757"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::duplicates::MapPreventDuplicates::serialize_as"
+kappa = "d77beedb5031af3994018e634715a4eae74fe83822389efecd8a870cd9812073"
+at = "K=u32, S=u32, V=u32"
+embedded = "99de0568e7f3a087cd5436b10439b13ab0ce4d30fdb0bdfc92391d26b1156a4a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::collections::BTreeMap as ser::SerializeAs>::serialize_as"
+
+[[fn]]
+path = "serde_with::ser::duplicates::MapPreventDuplicates::serialize_as#2"
+kappa = "a61f2a7a159cac1dd6fad75a5b2b9c8620f139983c3ad0308dcfa7b8af68b5a4"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "0e3adec234d0a85f91b74f7444fb6428dda1dd6289218e2fab60aec31038e7e6"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::duplicates::SetLastValueWins::serialize_as"
+kappa = "11906c7a99b43bc6ff0b0c090e358f062ab6d8864bd2e2717d7f0367045bed7f"
+at = "S=u32, T=u32"
+embedded = "67d0c9e2af26abbd530bef58037ffccdc5c032343ec02633f6ef28c23a277434"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as: serde_with's MIR stops at type outside the lift: <u32 as serde_core::Serializer>::Ok"
+
+[[fn]]
+path = "serde_with::ser::duplicates::SetLastValueWins::serialize_as#2"
+kappa = "fae3f9067caed310b643591a0efb75cdf1594e96be6a6bda4e613a681c59e2e6"
+at = "H=u32, S=u32, T=u32"
+embedded = "c65e7dfb33deedc1930b7e55f1e0987ae9b39885c0fcdbb582e4f5a12bea3548"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::duplicates::SetPreventDuplicates::serialize_as"
+kappa = "bf0c30164725209147b2aa73a07ad690ccaa4ee521be9c4355b0eaeeea4f0425"
+at = "S=u32, T=u32"
+embedded = "cd9e214e0bb04cbc7d0ffae26df3e53ef369249cac969a1b7d780d10b24d4651"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as: serde_with's MIR stops at type outside the lift: <u32 as serde_core::Serializer>::Ok"
+
+[[fn]]
+path = "serde_with::ser::duplicates::SetPreventDuplicates::serialize_as#2"
+kappa = "11886e20ff24ee9947b59b882037db9603559fa85b1a5418aa0f6a3489ec998b"
+at = "H=u32, S=u32, T=u32"
+embedded = "7bbb6bd4644b714bb2bc0d727371968c8cba17c74b420dacae02fe437e98e043"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:126:1: 130:15>::serialize_as"
+kappa = "b8680698acea375d6548750a67063a0ed7a2239c0f7354ff9859d9c531f1afe6"
+at = "S=u32, T=u32, U=u32"
+embedded = "a3452446abb55eddfa8090e432c0aad0cf35ef8fe95540b5ecb47d1fd2cc25ca"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:140:1: 144:15>::serialize_as"
+kappa = "dd3ac5aedd7f7e682db094b7ab2bff349fe72324520ce7cfaa33f97f811548ec"
+at = "S=u32, T=u32, U=u32"
+embedded = "ba61623f28d4359ddfb94e444f46608eb43ff7f8596896934ee9938abeceba80"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:343:1: 345:24>::serialize_as"
+kappa = "9324a88e73f03b09571a10613e33e7b9f7cf61b9311b6317f26b8c584b6c09dd"
+at = "As=u32, N=#usize_N, S=u32, T=u32"
+embedded = "0f77f4e7ed87fdd7709e2103f329bb32b5af2bce46a9ec124f7a7f17bd3a7efb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as"
+kappa = "73f557be8cda6570353454fcf9b151a34b387071af9d82d5af54dd17c737757f"
+at = "S=u32, T=u32"
+embedded = "9c20b047480b23fff12565a7ee560de3cebefb8c7b58a6922f84244ea2109f13"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#2"
+kappa = "ec2a44630022279c30ab25879cf5c333902f581bcb38f43fb17ad760207b58e9"
+at = "S=u32, T=u32"
+embedded = "d912f41ad38d65f88a36953800e75e946dfcb63479b05a5ea988415e68d30d6d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#3"
+kappa = "f8b134ad1eeba42de7ca34f6a6c57c71ddadc309883aa45a1b1b12b7f2ba05bb"
+at = "S=u32, T=u32"
+embedded = "92e15ea0a94ff80f02af19e3a83df0ddf6b3beb5a0eda8bdbd52d3f2a580a316"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#4"
+kappa = "692fd21981043250a697eac53702e9f47fbbde7f4bb0d23555afade42f116c04"
+at = "S=u32, T=u32"
+embedded = "905ea12e382d8a19c5cac016a122c4df5aa758b5febe619bd86a7a034bc93409"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#5"
+kappa = "e1a860a4dda4fc0e9919f518a90befc2aff2ca5a5bb1f68304c2667a66e247a3"
+at = "S=u32, T=u32"
+embedded = "160d0cd7fc896769b9b7ecb93d2443804b1ff1a2f665828d86c4d01ed30813e0"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#6"
+kappa = "c5ba29c9fa4fdd9fc2f1370845c90360cc89dfa8edaba2e23a287ec952b7c0b4"
+at = "S=u32, T=u32"
+embedded = "7ef49bd1f99a6345c310f428ff9496b00bdedd64a9ca90ff93f4ff157354b86e"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as#7"
+kappa = "cdd6d01ebe84fe2a75da132d3df00d6cb581ac4ff655f3db2c4b09a4fbf594e7"
+at = "S=u32, T=u32"
+embedded = "c08e3056f3b70bb235cf884208c234896001fa723456b6888974006ddc7b09b0"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:431:9: 435:41>::serialize_as"
+kappa = "e4fca9e2683a969d5539d8de14e6fe8061739a43c5b41a67311664770b13877c"
+at = "H=u32, S=u32, T=u32"
+embedded = "6f64ac3451e77090e23ff3dcf90bd12dbe910466863696d27305153f435f91be"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:467:9: 470:32>::serialize_as"
+kappa = "db9957ef1fbb39017d5eb18f6abed40e88841981f07e197377213e125ec59775"
+at = "K=u32, S=u32, V=u32"
+embedded = "00d5c27c4cc01cb22a6b8c78324fc3053bf7d66926d926ecc2b4e159362f1b25"
+status = "residue"
+cause = "mir::Ty: alloc::collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:467:9: 471:41>::serialize_as"
+kappa = "9e8330191540a3f1fb2617331bf4bf38dc11c96356948aa9dffcee24f4dcdaca"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "d3a9efc704372f353eace738dc0b26ae82d9a95f94445f2a02b080a74f457565"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as"
+kappa = "838647cbc587c54bf7ef5d2971df3b68ec0bac72f90c40782faa89d74190bb8b"
+at = "As0=u32, S=u32, T0=u32"
+embedded = "b8ee419710232412be1ac49a159f6884522ab905b8f3a24c3cc6e8c5bca76ac3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#10"
+kappa = "3e354007da21875b9ae3976219ad18d71f867fdc76f1fef776fc5fc6d24c83d7"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "4da4e48f60293e1125dd0da49f45cbd47e1658609798017bc54f67cad4b71ec6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#11"
+kappa = "816452412cd959abb2dbfdd04837344ff9273caf9f9b9301373fbf6d0bad6fbf"
+at = "As0=u32, As1=u32, As10=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "42d9341b08410c1e38bf6685adabec67856f713135bc372be08627d2f743de07"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#12"
+kappa = "bda2012c9e321b58198ab0a09fb84b3382fe1f2706ef7142182d1cfc02a71d43"
+at = "As0=u32, As1=u32, As10=u32, As11=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T11=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "9d8396e2ed603efb01ba422256416fb90ef7f851a88bc0c662c3ae6c0b94e476"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#13"
+kappa = "028f6e4975f2ff055fba471caf3f00b33bba3f71e8cb5e1b073b6341b6a50099"
+at = "As0=u32, As1=u32, As10=u32, As11=u32, As12=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T11=u32, T12=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "8e450f94b3dac8bc0130550a89b6ff740773ca8f141c7f1a6c6243290f42f584"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#14"
+kappa = "d515b3dc76ed69caeadfbb7cb62755dc0ff058b41dd209c335ccdedfd4b262cb"
+at = "As0=u32, As1=u32, As10=u32, As11=u32, As12=u32, As13=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T11=u32, T12=u32, T13=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "91026b2672adf154f6656cc6cc5927b6129aabf2be1cc65d89e368cc52c62922"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#15"
+kappa = "08725ece9f9a6e01d1874b7df19aed4b3eca42b068072ff091c0f182e0b8b2c4"
+at = "As0=u32, As1=u32, As10=u32, As11=u32, As12=u32, As13=u32, As14=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T11=u32, T12=u32, T13=u32, T14=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "c5d781f79215cb0fdf38d73f058b8564205fa27d5d5782964a6c1cd358bf7d32"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#16"
+kappa = "d12d2e864f4a6a5122c8fe35eb016a548a2ce734dee440eb39e531a775a48526"
+at = "As0=u32, As1=u32, As10=u32, As11=u32, As12=u32, As13=u32, As14=u32, As15=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, As9=u32, S=u32, T0=u32, T1=u32, T10=u32, T11=u32, T12=u32, T13=u32, T14=u32, T15=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32, T9=u32"
+embedded = "b08f77464027992bf4ad735d219c2da0f20ea4a78f92a14d2ac4c5541bc6c3f8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#2"
+kappa = "625b46ce1e7e70004f13c0035b5c524a2278bc71dad64f0eb99d8b2a5ffca3d0"
+at = "As0=u32, As1=u32, S=u32, T0=u32, T1=u32"
+embedded = "71b20c340111b8e8f28605f5a65e718727d2c75f185b9de10b9405902b281ff0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#3"
+kappa = "88abff48d809ac73d400e3fd70eaa9fd69bae19904d333e6cebea49ac375f267"
+at = "As0=u32, As1=u32, As2=u32, S=u32, T0=u32, T1=u32, T2=u32"
+embedded = "afdd3e5295f15b0d1118e554044ceb9ccf90c6ae7478a8c83dd5312434c7a92c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#4"
+kappa = "7d442b05e9faccb05fae87cfc17b08324e7c705bb60d619cb59b577fc5571cb8"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32"
+embedded = "5d5ba7d852e6f999c7ac637bb7e499f0a4df247fe7a7ae4d5c87fbbbf5a7be02"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#5"
+kappa = "457c1c8ddddeb999147187445dd1ca242dbece343f0953710c8c3fa0e622752e"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32"
+embedded = "4093c697eb98b101f098c6ceb4666dfcd038810d1441fbee42ccdc1c1316bd8a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#6"
+kappa = "e4f0e0bf59669ff898c25360eb79b3fd0d8e335cd3bfe243fb2e653edcbbe22b"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, As5=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32, T5=u32"
+embedded = "216aeb8223417fe724290db77031f78eff4a3be44c0b96db6a31bb254a60df27"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#7"
+kappa = "97a1d4a032e592d68abf28da0094f62de3fe51981cf45feb65bb255a7418f34c"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32"
+embedded = "4daf70343ef547b3cd06a20f081335238811cae0e141b8dacd4c2cde5be7bc07"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#8"
+kappa = "61aea0837f9bebb179389a52a87b6b4efbaa3b7c6e4a9da6195423f62227d169"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32"
+embedded = "27d0974bf9c2a32c8017921db5ec97a711c1ea9be094017013e97a57f95605b9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:486:9: 488:37>::serialize_as#9"
+kappa = "8a5ad902fe3a8ed1ac2145d76984c479de0ff819c1d94dcea927f6a0a424adb3"
+at = "As0=u32, As1=u32, As2=u32, As3=u32, As4=u32, As5=u32, As6=u32, As7=u32, As8=u32, S=u32, T0=u32, T1=u32, T2=u32, T3=u32, T4=u32, T5=u32, T6=u32, T7=u32, T8=u32"
+embedded = "0061bd4238a861bbe9001a59e7a4374ed7226e4b96bc2990e4bcc9393543cd25"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:524:9: 527:33>::serialize_as"
+kappa = "97dbf6a8bc35d2581667ad19ffb7b6c04f3597619baf98cf5d3524cb508718cc"
+at = "K=u32, S=u32, V=u32"
+embedded = "88bda5128dd81288194653c26239b91eab3fee6f5e27851fbac2cf764e668b8d"
+status = "residue"
+cause = "mir::Ty: alloc::collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:524:9: 527:33>::serialize_as#2"
+kappa = "97dbf6a8bc35d2581667ad19ffb7b6c04f3597619baf98cf5d3524cb508718cc"
+at = "K=u32, S=u32, V=u32"
+embedded = "88bda5128dd81288194653c26239b91eab3fee6f5e27851fbac2cf764e668b8d"
+status = "residue"
+cause = "mir::Ty: alloc::collections::btree_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:524:9: 528:41>::serialize_as"
+kappa = "d169c549dedb3150609f1fb021f22acc8e424d44f8b02725627e0ebb146ac07b"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "ce714ca4986a89f3dc2f1640c4ffac82655231f5954321077d5a95982e331d75"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:524:9: 528:41>::serialize_as#2"
+kappa = "d169c549dedb3150609f1fb021f22acc8e424d44f8b02725627e0ebb146ac07b"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "ce714ca4986a89f3dc2f1640c4ffac82655231f5954321077d5a95982e331d75"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as"
+kappa = "dab3570813340c3b30ca1c59b1141502ba1d9eacf3b1493003aa18ccb59e0ca8"
+at = "K=u32, S=u32, V=u32"
+embedded = "8d87feb90713cde109908530b018e2f8ae523dca036804d4c6d0c36c0b8a4db0"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#10"
+kappa = "23813f07058aa0a22fa551d486d72adc52bcc9b61256dbbc73f1071d236dbeef"
+at = "K=u32, S=u32, V=u32"
+embedded = "bc8334236df624c570bb0e51a964dbeda08c6c04e57a17f635c76802deb0cd19"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#11"
+kappa = "23813f07058aa0a22fa551d486d72adc52bcc9b61256dbbc73f1071d236dbeef"
+at = "K=u32, S=u32, V=u32"
+embedded = "bc8334236df624c570bb0e51a964dbeda08c6c04e57a17f635c76802deb0cd19"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#12"
+kappa = "23813f07058aa0a22fa551d486d72adc52bcc9b61256dbbc73f1071d236dbeef"
+at = "K=u32, S=u32, V=u32"
+embedded = "bc8334236df624c570bb0e51a964dbeda08c6c04e57a17f635c76802deb0cd19"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#13"
+kappa = "67d3f50556e7e71c5c55d8787be1ef2f27c885bc69cdef1958dec890e4e08ff3"
+at = "K=u32, S=u32, V=u32"
+embedded = "0c381fa9edf86f3de54a2ae615c560dba3f6a3fb69eb49b39e2b61cb76a856da"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#14"
+kappa = "67d3f50556e7e71c5c55d8787be1ef2f27c885bc69cdef1958dec890e4e08ff3"
+at = "K=u32, S=u32, V=u32"
+embedded = "0c381fa9edf86f3de54a2ae615c560dba3f6a3fb69eb49b39e2b61cb76a856da"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#15"
+kappa = "67d3f50556e7e71c5c55d8787be1ef2f27c885bc69cdef1958dec890e4e08ff3"
+at = "K=u32, S=u32, V=u32"
+embedded = "0c381fa9edf86f3de54a2ae615c560dba3f6a3fb69eb49b39e2b61cb76a856da"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#16"
+kappa = "dbc1db15eccab5ead7c6e3003f760f4336bd4bad5f0dedc2f21da51452a74afe"
+at = "K=u32, S=u32, V=u32"
+embedded = "20d38e27be3addd716093d0e9ab2ba7e8364507d331242245e76f884d0927ee0"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#17"
+kappa = "dbc1db15eccab5ead7c6e3003f760f4336bd4bad5f0dedc2f21da51452a74afe"
+at = "K=u32, S=u32, V=u32"
+embedded = "20d38e27be3addd716093d0e9ab2ba7e8364507d331242245e76f884d0927ee0"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#18"
+kappa = "dbc1db15eccab5ead7c6e3003f760f4336bd4bad5f0dedc2f21da51452a74afe"
+at = "K=u32, S=u32, V=u32"
+embedded = "20d38e27be3addd716093d0e9ab2ba7e8364507d331242245e76f884d0927ee0"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#19"
+kappa = "704e8ea6beb9b394cf9bdceaead7ece047f7d5badf2ffc527c5bb6f8c4b32b10"
+at = "K=u32, S=u32, V=u32"
+embedded = "05927c8cf5de830aecef33b1b6b9bffa63f6e5418a84bd1f66b1b1d8c172cd88"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#2"
+kappa = "dab3570813340c3b30ca1c59b1141502ba1d9eacf3b1493003aa18ccb59e0ca8"
+at = "K=u32, S=u32, V=u32"
+embedded = "8d87feb90713cde109908530b018e2f8ae523dca036804d4c6d0c36c0b8a4db0"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#20"
+kappa = "704e8ea6beb9b394cf9bdceaead7ece047f7d5badf2ffc527c5bb6f8c4b32b10"
+at = "K=u32, S=u32, V=u32"
+embedded = "05927c8cf5de830aecef33b1b6b9bffa63f6e5418a84bd1f66b1b1d8c172cd88"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#21"
+kappa = "704e8ea6beb9b394cf9bdceaead7ece047f7d5badf2ffc527c5bb6f8c4b32b10"
+at = "K=u32, S=u32, V=u32"
+embedded = "05927c8cf5de830aecef33b1b6b9bffa63f6e5418a84bd1f66b1b1d8c172cd88"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#22"
+kappa = "b4bb80c680640a0fa34a9433a5888ac7c2c506430316b11d15e3f20f87913c3a"
+at = "K=u32, S=u32, V=u32"
+embedded = "511f6ffe587bac7308c80bc6a733bdef0e623b06af37c33d949cd44665d23086"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#23"
+kappa = "b4bb80c680640a0fa34a9433a5888ac7c2c506430316b11d15e3f20f87913c3a"
+at = "K=u32, S=u32, V=u32"
+embedded = "511f6ffe587bac7308c80bc6a733bdef0e623b06af37c33d949cd44665d23086"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#24"
+kappa = "b4bb80c680640a0fa34a9433a5888ac7c2c506430316b11d15e3f20f87913c3a"
+at = "K=u32, S=u32, V=u32"
+embedded = "511f6ffe587bac7308c80bc6a733bdef0e623b06af37c33d949cd44665d23086"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#3"
+kappa = "dab3570813340c3b30ca1c59b1141502ba1d9eacf3b1493003aa18ccb59e0ca8"
+at = "K=u32, S=u32, V=u32"
+embedded = "8d87feb90713cde109908530b018e2f8ae523dca036804d4c6d0c36c0b8a4db0"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#4"
+kappa = "5faf3ed3bbb910a90297f8def8e475f049c0907d85da96439d2bd5997350aaea"
+at = "K=u32, S=u32, V=u32"
+embedded = "7d763b39dd65fec7bf37c5ca9233ce606e68c4dcefc349783eeaa6f512987d68"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#5"
+kappa = "5faf3ed3bbb910a90297f8def8e475f049c0907d85da96439d2bd5997350aaea"
+at = "K=u32, S=u32, V=u32"
+embedded = "7d763b39dd65fec7bf37c5ca9233ce606e68c4dcefc349783eeaa6f512987d68"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#6"
+kappa = "5faf3ed3bbb910a90297f8def8e475f049c0907d85da96439d2bd5997350aaea"
+at = "K=u32, S=u32, V=u32"
+embedded = "7d763b39dd65fec7bf37c5ca9233ce606e68c4dcefc349783eeaa6f512987d68"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<(u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#7"
+kappa = "4d091961dd91217a8a29a9671d26ede6c98a9098fa331f7546db8b6f6d72c0be"
+at = "K=u32, S=u32, V=u32"
+embedded = "59be5490959ad097a7bf15a55d329551dab3abade793f463f1298f29022ee1af"
+status = "residue"
+cause = "mir::Ty: core::option::Iter<'_, (u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#8"
+kappa = "4d091961dd91217a8a29a9671d26ede6c98a9098fa331f7546db8b6f6d72c0be"
+at = "K=u32, S=u32, V=u32"
+embedded = "59be5490959ad097a7bf15a55d329551dab3abade793f463f1298f29022ee1af"
+status = "residue"
+cause = "mir::Ty: core::option::Iter<'_, (u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 560:33>::serialize_as#9"
+kappa = "4d091961dd91217a8a29a9671d26ede6c98a9098fa331f7546db8b6f6d72c0be"
+at = "K=u32, S=u32, V=u32"
+embedded = "59be5490959ad097a7bf15a55d329551dab3abade793f463f1298f29022ee1af"
+status = "residue"
+cause = "mir::Ty: core::option::Iter<'_, (u32, u32)>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 561:41>::serialize_as"
+kappa = "55f83e4ba9f53a2ea0a5d77dfb66d0059c9b8c1be96371045f1a9d2dc1fbd25a"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "554580d4ae3ba685f9b7bc8809559023f43eb5745bcffc03bc6dcf08434d6e81"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<(u32, u32), u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 561:41>::serialize_as#2"
+kappa = "55f83e4ba9f53a2ea0a5d77dfb66d0059c9b8c1be96371045f1a9d2dc1fbd25a"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "554580d4ae3ba685f9b7bc8809559023f43eb5745bcffc03bc6dcf08434d6e81"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<(u32, u32), u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:557:9: 561:41>::serialize_as#3"
+kappa = "55f83e4ba9f53a2ea0a5d77dfb66d0059c9b8c1be96371045f1a9d2dc1fbd25a"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "554580d4ae3ba685f9b7bc8809559023f43eb5745bcffc03bc6dcf08434d6e81"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<(u32, u32), u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as"
+kappa = "e5263aef19f193c271427af0f7212e79f3264a867c7a09a610fbf6ee3bc028d3"
+at = "K=u32, N=#_N, S=u32, V=u32"
+embedded = "f4be801fb1c42d3680eb1b7254d9716e66a3e8a0af722cf3cdf36bcbab069e7b"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as#2"
+kappa = "e5263aef19f193c271427af0f7212e79f3264a867c7a09a610fbf6ee3bc028d3"
+at = "K=u32, N=#_N, S=u32, V=u32"
+embedded = "f4be801fb1c42d3680eb1b7254d9716e66a3e8a0af722cf3cdf36bcbab069e7b"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as#3"
+kappa = "e5263aef19f193c271427af0f7212e79f3264a867c7a09a610fbf6ee3bc028d3"
+at = "K=u32, N=#_N, S=u32, V=u32"
+embedded = "f4be801fb1c42d3680eb1b7254d9716e66a3e8a0af722cf3cdf36bcbab069e7b"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:592:9: 595:33>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as"
+kappa = "318abbde72f623a50478ed5966ce8feea4f6d4605d4fb3269968009e3f22af16"
+at = "S=u32"
+embedded = "c75c599b6c1eb947cb8a625c070a4e4c30c89196379853c1b711156883caebba"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#10"
+kappa = "2ee2f6a84e9074e03e0d82d1dae51466bf9ef29e669a371fe5c18a70aa46c74c"
+at = "S=u32"
+embedded = "7d755caed79787b8fec6b5d308ee3be0aecf1bf2af90815dcc33eac2e3c50b3d"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#11"
+kappa = "317a50c58b8dfedba51f5788486f8ed2e1e526cabc9529fc6d04424c91751d39"
+at = "S=u32"
+embedded = "feb0a3d69e729b06f588443988a3aa1e3a1f043a0d8160349eeaa3603a95423d"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#12"
+kappa = "1c70a5c1c25d21b4fd16610cc4b55907feecf95b3c2fe49649b6cc5432077e16"
+at = "S=u32"
+embedded = "81617f1fee0b8634441749ac39af4174a6a28e781e9fe80e3fd8b83ad8693e44"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#13"
+kappa = "b6301e4512f711e76998064e20f044324ff8567a963c03c9549cc76a95723142"
+at = "S=u32"
+embedded = "d8ec37ab3679c37f2c93e81444e3767ecbf32de87ae413e871f57752ebea7227"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#14"
+kappa = "1839056456c1604cbbae5c8e41a1f69f98a3ea0b6e666e09054a1b82ad465388"
+at = "S=u32"
+embedded = "5c9b4d8a83bf23770de9da8269062ba67e402b705cecfae40cac126322f1b014"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#15"
+kappa = "920abe96b970dc75d926757951753076ef0e9f6a4171d5a2e88ca53d5998fb54"
+at = "S=u32"
+embedded = "4f332c4956ee0419b00e6498814b3438bf7df5574c7abf3bd35fe4259d53f1d0"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#16"
+kappa = "375900b950244d092be054f9474f9763d47db46f1811d24ac20f40c5207559c6"
+at = "S=u32"
+embedded = "2388f15931d8ddb30e0fe6e9f0a43bc0fba2e2b931c7ab9d9a65a4614e5f8b08"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#17"
+kappa = "8a4bd1a389f53917b144554f8eee399011d2ac918260d3605e73c50055dc94b3"
+at = "S=u32"
+embedded = "6d0bb1de3401c65b64411cdfa21895e752af6fd4737accbc40be6ddcb4bffdca"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#18"
+kappa = "78c0a482dfdafb42d65896fd5929e8d000d8f1754fa0bf581b6bb4614efe572d"
+at = "S=u32"
+embedded = "f3eb8d6c96d12daf9500ea3711f82c8e2fb04bcb589baf66aba105987a1336d7"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#19"
+kappa = "771db1e92ad077a2a5ef660f809729ecfc36dfca8ff9789dedf7051cb9145f3a"
+at = "S=u32"
+embedded = "efdbfaeaf71de910ee1f4e795f6ae30e5656dbc2f5805c24c057cd18096af089"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#2"
+kappa = "8316754329dc2df33ac4a93dc5524b983f199d9c63c862cb031ebe02f372bbb0"
+at = "S=u32"
+embedded = "57f27b779be6f5fbafd644c25779a72706e0f64ecb5f0e6cf735228fafe44c0e"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#20"
+kappa = "fc516e2eb795ab34b44a18b379ed85c8d82c4f669ad9f6563d420d7125eec339"
+at = "S=u32"
+embedded = "18e1942ca0f58c2e49fec182ab863418a3b7ae84a2bdf4f0f0a8cd481ad0a9e1"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#21"
+kappa = "6f7558b3d4dd1203ae1387efb05db07f713c126de4da1d686e5ab9d0fb14724a"
+at = "S=u32"
+embedded = "add77e77bea2b50e05c7756d7ee7fc289af38454da9bdf647d8eb313e59fe25a"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#22"
+kappa = "23e98e3dd12cc2fb7720bee7a4864481e18ddbdb6164834352863aba8c1ec588"
+at = "S=u32"
+embedded = "36c45e76fb9dbe559b9c42f28c2c1042900c04b819121fbe362b557a5ca15dc2"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#23"
+kappa = "2c417d345b194b2474e80fcd85bf38e4600f1dfb7b56d481536e8b85666a3df0"
+at = "S=u32"
+embedded = "d6c5382bacc543bc143d04206065d8e380e9b7aed454f7b10c5a8ee221724e27"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#24"
+kappa = "0faf5243a8aad24eb9bedb1e79fb1fbd239763c74271b0f816767e9f75215fab"
+at = "S=u32"
+embedded = "7485c5a234a9b5b8385f74633c77044223845ea95114279ad97fc40e1e0b06ec"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#25"
+kappa = "dafd41dd42a9a0f43d2c1c3fedc842e9ba06f74829856af7733980b031541017"
+at = "S=u32"
+embedded = "d0c929b424e6f816ec9807e6b8dc1c5934a7a25a76b9d0c276d0c76ac1d68fdd"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#26"
+kappa = "85c75c9f6f0cd58eec6d6a76242a1147e4a9945bd5dd4d1fc38ff07483b5c452"
+at = "S=u32"
+embedded = "b28317f503cda7efa967c8bf1009c004a14df0e4c7b38e14b2a49db742cc8cb3"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#27"
+kappa = "4698ff46ad5013ca161663599e63a26023939d03e72d9c02458182a5af133cef"
+at = "S=u32"
+embedded = "7d9651f870e7a7463eb8bdc2dee902f44449eacc1d535b6a8f22f69b6b40c6fb"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#28"
+kappa = "50a2ed297c0619004a5cce6d51cc30257e7d95195e331c2abcbb4813112412cb"
+at = "S=u32"
+embedded = "f5f23a9c2651cefadac5a1995fb5777d2b615f4ce8f9f53f2d3f08ee59ecedde"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#29"
+kappa = "4308386e6ead2d20d1448e823425dd2e8f8d2a96981e20ad8b5fa4410f118146"
+at = "S=u32"
+embedded = "6348e6705b39fd9f7a0d9d5cc2e486b3c9efe2a013815aedacc7305cacb8b61f"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#3"
+kappa = "6bc300cb264081ad571b1d7975fa0cb248d9ca27996c5c135b4586d97b74708b"
+at = "S=u32"
+embedded = "8f127b420ef68c36a46badbd6507cea022f8c5e7ce8ecb1d2252aa409757fb5d"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#30"
+kappa = "0a57b204d3e436f0c5203fdb57118cf03ddbecdafc543f053c871f6fc2972dc1"
+at = "S=u32"
+embedded = "ac71abbdafa266238881534f5aaad17fc9974ae5847b517d938b1b67d20eac53"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#31"
+kappa = "3914c15582840dfe97886cc1612140d797ff5507f1d4caedaa98b1c3dd6ee23e"
+at = "S=u32"
+embedded = "60aff09581499f8bf40d6b82837a1c992328253d5f28e0bc06cc3a2d08f7408c"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#32"
+kappa = "119a66f4aad78d41880de86350f54b010287fe1a6e97f71207960bad28df08e9"
+at = "S=u32"
+embedded = "fb4f95c9121e1f7580dc2362077ac57cb4a0c50d7d81d718cfaf7372d2135e93"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#33"
+kappa = "1ce900c355a923832492fc844b01c6129002fccbe5e9b9051affeb20ef6c9aee"
+at = "S=u32"
+embedded = "052e6eb2fd4d45c33cb60abe650cb91ee5ee6c536d9182c7a62fc35b591f155e"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#34"
+kappa = "d0dd04ee60482cdd95ef7118a75961d5e9aedfbbe094a843914f1ae7802c60f8"
+at = "S=u32"
+embedded = "0802e187259f789dd106273a1f8eacea96123acf6401c3eece5575b235b3122d"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#35"
+kappa = "26c385b870410b454f5be16a3c8d5fe7eeeb7536e6203569e9eba8e1fb2f7a50"
+at = "S=u32"
+embedded = "16e1893bc008615fca92c9e1e08bceb0c9e1ca8732943e34536ea83ba5545f65"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#36"
+kappa = "e3fd137b0c88c96d567ade33f0745f3a402edcc8cfefdd8e9d441c41c1580cd1"
+at = "S=u32"
+embedded = "036046c174e8043bbd5483b9c5df85b5d9c23fbafeb868f1a928d72d388b2438"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#37"
+kappa = "771458d2b3320f074b58af9f0b6488fd0b6a716f78c4f225a56b8f3782939f91"
+at = "S=u32"
+embedded = "6d4990fa2bb7a6fa7eb6171215f4db6254b19b14f98e7d39d8c9e1d68797ed71"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#38"
+kappa = "fd0b602636eee319affc6548b2aeea8b5e26444e6548b748ad41ab7b92a55404"
+at = "S=u32"
+embedded = "d958444c59cda2e7d5a244092d380d3ec87112bbbcc5e81f380da9a68c1af4e5"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#39"
+kappa = "c98a250658defd8403e146e44d3602fa47b0dd475f30f480986cb968a2a89b84"
+at = "S=u32"
+embedded = "3320aa98be49154ac4e1442f362784c79efaee7efdabb3218a9261c1f1878b21"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#4"
+kappa = "83146a9db79355e75e108b94e4a4160d833d2c14219179ba8fc3e4c06a00a386"
+at = "S=u32"
+embedded = "186c5600e72f45f0021b54c5d157964cd396db59f93fe97609692125f4a6534c"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#40"
+kappa = "269400f29df708681085a57a64a0801c4fa22031754e6f0bfe198fe7ac7047d1"
+at = "S=u32"
+embedded = "9e97bb7a2f6b0991c6eb54a3a536b46248d516583527c186ac5e6034c21b8bb2"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#5"
+kappa = "0456810d2dc77459808f09f9be6f9b5ec82a683b2f8ac75fb371bd72c41dc21a"
+at = "S=u32"
+embedded = "ae38159969bece06cfadc201e9f94795d189faa8f236fcfb59b4e0277914f5c9"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#6"
+kappa = "046598555f325dfa81ac9356cdc2f3cdd1b6d08e27deefbf5c2f633128cd35ef"
+at = "S=u32"
+embedded = "53f146aac2f70111d8a5ec160d5e6bb70a14d77b4a22cdf6569db4747f8e39d8"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#7"
+kappa = "a5752ab1677082be084796987065e8d9f0a6b61753b0116714d978c563931980"
+at = "S=u32"
+embedded = "fcfdaa1abdbe1f30cc016fb4b36e936d90e3ee9659e91a63e27b6f87ae2d1a4c"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#8"
+kappa = "9f0f7389da6bd2f5f04e86e7427debc5479a64899f1354b0706e0cb190fe2b35"
+at = "S=u32"
+embedded = "0b52fab038d1077ef3d63d8d8cfa8677f39a606fe20d43f045a29837793fbc59"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::<impl at src/ser/impls.rs:796:13: 798:35>::serialize_as#9"
+kappa = "ec99abc31d47773a3cddad678b42fd86a870838696ea206b0e98d0c4f57768a7"
+at = "S=u32"
+embedded = "810aa6e8a87786f9b0214ef2a18ac4bee480801ab2f3a4c825e6645fa1fae383"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::ser::impls::Arc::serialize_as"
+kappa = "1d231fedcab98b2ae00e166d8442de04421e9ce09b93f1ba615a486359be230e"
+at = "S=u32, T=u32, U=u32"
+embedded = "f523cc9486b7e63a7c8fce66ffd101d20fa002cb91deee7e0f38206c84c17edd"
+status = "residue"
+cause = "mir::Ty: alloc::sync::Arc<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::ArcWeak::serialize_as"
+kappa = "17011ef88f0f521dfb34386145f681b2215a2f7496036514895936f60f8616b7"
+at = "S=u32, T=u32, U=u32"
+embedded = "c24b709eec38417886093e282c68644961fdf437512f4c3a7459764e65c0fbea"
+status = "residue"
+cause = "mir::Ty: alloc::sync::Weak<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::BoolFromInt::serialize_as"
+kappa = "38c1994b649c841a8a19c2f5db4a730102c7eb19233fdeef41d72754e04f8726"
+at = "S=u32"
+embedded = "048e0e4f3852a1ecb0c284479d8cb78d8c7a0152c1cff978bd8f3fce49488281"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u8 as From>::from"
+
+[[fn]]
+path = "serde_with::ser::impls::BorrowCow::serialize_as"
+kappa = "f0f19a098b895224b66a6240a1d3a7561d4bba9e8ebd50e0a79ade2ea6dd5c11"
+at = "S=u32"
+embedded = "26b7069bc48d5a7c49190822c1c8a0adca31086a05b9641b3f64442146399cc7"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "serde_with::ser::impls::BorrowCow::serialize_as#2"
+kappa = "ab6160d25e1195eadbfc56c3ff4df2826c7e5b0881ab50faf96f7fef5ca1f6b8"
+at = "S=u32"
+embedded = "7e22b079746015502fbff3d2988fcc062f7c986ceb978c09f35fde215dc14480"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_with::ser::impls::BorrowCow::serialize_as#3"
+kappa = "2ead9ca92d21ed0b2d8c3849f58c7c09e8d11a3e873fb47c091d1186dc7a911d"
+at = "N=#usize_N, S=u32"
+embedded = "073ee6d779e565a232a4b4e5e01a1b4f41919c632591e9cb5d66d8e5d12acf12"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, [u8; #usize_N]>"
+
+[[fn]]
+path = "serde_with::ser::impls::Bound::serialize_as"
+kappa = "765d851b3fb8869093b64556575f8f8dff6ee37a5c6c9c559ea5b2d8c9a6d060"
+at = "S=u32, T=u32, U=u32"
+embedded = "b5977438d51915255325607cfc9a62fadacc2c4b07d3f1bb9f31f2517580a70c"
+status = "residue"
+cause = "mir::Ty: core::ops::Bound<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Box::serialize_as"
+kappa = "7b2f77542ab76346af98ef5cbb95ea783112df8d15d6bdd87b058baaf7c1788b"
+at = "S=u32, T=u32, U=u32"
+embedded = "51cf8ab432c12f68e32b622eb5cf99d3db3281a509222eeb9109e7270c4fb87a"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as"
+kappa = "e7fe287eefe3bae74acc1d65b6137b78b296f31dc8e9ceb039e20a6791276932"
+at = "S=u32"
+embedded = "fc0a49eb5892d97c23364a6729674f9d27abca4ee6544a1fd323b155ad5bcb32"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#2"
+kappa = "267284f2198a0b6033fd3d914b03639d8feffdea0dea7574326118f2afab1d8b"
+at = "S=u32"
+embedded = "188c40969a300878f438af252fe86b44458a21869e7901cf10fdc72293410ad6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#3"
+kappa = "1105b2efa8f0669832486e57e53d2d45e0f86d818a1a502f50efc72cab09c986"
+at = "S=u32"
+embedded = "111496c19f5cdccd90b28fc8e8b4aaafd49fa1499c59cadaf6096fdb78180e97"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#4"
+kappa = "4764ffe8e34f68be2f6685cd09ccd73a6cdb9ae9fa1fd785e198baa9a313fe37"
+at = "S=u32"
+embedded = "bd97a3cf73a4dc9bd90b6acaa9388fdbe58cbf6b6394348fad3851dc0421949a"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#5"
+kappa = "5318435a758c06c682dcd8175272b43d567c2abd64f2f4ddbdf7a41cc4871722"
+at = "N=#usize_N, S=u32"
+embedded = "96c8ef2e2d65b04d91b1f026487ac4b9650f75b5fea46926237cfe893867f82f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#6"
+kappa = "cb8258190042185ecd0e285863d5c7f0acd68c80bfb98e28700ac020eb2171c3"
+at = "N=#usize_N, S=u32"
+embedded = "adfc5aced44885d638c113a806e804ff994e623c25d95f9ff930d1effbaeaded"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#7"
+kappa = "af72e7cdaffde5dfaa1f6b98b19bd49d5e045ef4d2f0be78588a96cfea14aaa2"
+at = "N=#usize_N, S=u32"
+embedded = "60ee226f8687cf23a587514b095e9a15f990375c8a8b7e295053f70c0d399f3e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Bytes::serialize_as#8"
+kappa = "9d00845415ab2ba897d8a5163d4449a980eacba5573ea9c06db50999fd213ad7"
+at = "N=#usize_N, S=u32"
+embedded = "cb92cb415fa69859f8818602798f542eea9778761d261fc063859b0ae8a6acd5"
+status = "residue"
+cause = "mir::Ty: alloc::borrow::Cow<'_, [u8; #usize_N]>"
+
+[[fn]]
+path = "serde_with::ser::impls::BytesOrString::serialize_as"
+kappa = "145b9eb514c399b038aec4bfe84ae48675a0d91d03d43f4768192e21d5b3c0fa"
+at = "S=u32"
+embedded = "d5a84e6da3ca819d9bfd3746a14cab4e00ad644f30e054ed1ad002ce6e576fda"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as serde_core::Serialize>::serialize"
+
+[[fn]]
+path = "serde_with::ser::impls::Cell::serialize_as"
+kappa = "96abdfa35a6e61baaf9930936f006b4f65b73ec651dbc0b58c191b08dfb87d89"
+at = "S=u32, T=u32, U=u32"
+embedded = "61fd24adf027020aab378fe22ce4ac2971dd96f5bbcf38e4ef34737ff24661f9"
+status = "residue"
+cause = "mir::Ty: core::cell::Cell<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::DefaultOnError::serialize_as"
+kappa = "e925b15057a203da025ddef1ce28dbcc65243808a49c29acf5726d578e4da6e5"
+at = "S=u32, T=u32"
+embedded = "975da489dd108cd62f1071ef722db3a15b6fd2bd749d7440da760bbd0fcbe7f0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <TAs as ser::SerializeAs>::serialize_as"
+
+[[fn]]
+path = "serde_with::ser::impls::DefaultOnNull::serialize_as"
+kappa = "7cb8eaf774592dd5e108f7b26d42d7b54b1263f4a498791a77df0b340d20d1b6"
+at = "S=u32, T=u32, U=u32"
+embedded = "429a34756cb3ab1b6ea8c461bbf18c29ff820a57297cc2b39b261cad12205190"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::DisplayFromStr::serialize_as"
+kappa = "c835ad7ce0e65a2042e8d7de6b636fe0e66943120110829795e3b50da58ac335"
+at = "S=u32, T=u32"
+embedded = "1b465b01f4388c9a85a3abedb0a10d415e2a9e23f4df9d3e664bdc8571d55c96"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::FromInto::serialize_as"
+kappa = "dc899c63bbe98938b8193173c5475b2f8de05d525bcb208db7c5e062aeb2a72c"
+at = "S=u32, T=u32, U=u32"
+embedded = "211e081b48ad1f1c7d79000ec4ad9eac25133154935c4da88897681bfc90284a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::FromIntoRef::serialize_as"
+kappa = "5485ab05ffcb0c541ed035581ddf0bf74ee0a88caa2381f92d38290d94085604"
+at = "S=u32, T=u32, U=u32"
+embedded = "3a455875f529e8d5bef587bf7b6998a8b5a1857d598d175e119766dd7222d357"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::IfIsHumanReadable::serialize_as"
+kappa = "74f566ccfffc8cabcd065ad90d54a95b34640ee76e56f09178b9fdde6e6b2937"
+at = "S=u32, T=u32"
+embedded = "14a9113923813b712db1c74670a2ce9d9b4edbfcf05e22a366a7eb23137dea1a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::Mutex::serialize_as"
+kappa = "4cb42ce360006dc22e17d9628168d3c0941e4c0bf55137e5fa289eddf4f5344f"
+at = "S=u32, T=u32, U=u32"
+embedded = "4cb99c7cf16d20193a96755ba00397cb2d02b3f753ecac49c997d8b32d129d5e"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsEmptyString::serialize_as"
+kappa = "a064dea3dcd472309f4fbfefcfedf4682280ff1dd0f769d459d69bcdcc346fcc"
+at = "S=u32, T=u32"
+embedded = "2b0c0f5b51c280f9eb979972bd4101aa652c943a4529299ee13839b470a41bfd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as"
+kappa = "e5702b4d2750b77c1d83dc564b02f8608100da6f274265de7d69592111f82004"
+at = "S=u32"
+embedded = "a12667855c3274d82bbc4a9fa8b463c96fa84a678e0ef048bb1b9a8d375f5df2"
+status = "residue"
+cause = "mir::Ty: NonZero<u8>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#10"
+kappa = "7bef6d88aad9cbd82f8fb18f3e0d32cb777208422fe92f03434590f5a59f37f3"
+at = "S=u32"
+embedded = "714bded43816e3b142bbff10956fc3e52b3dbbc525660216d1235088d26f7ab9"
+status = "residue"
+cause = "mir::Ty: NonZero<i64>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#11"
+kappa = "cc6842ff3eb8a3037d0c59bd1c641f3b1e9a80cc34e4dfaf47637340cda1b1d7"
+at = "S=u32"
+embedded = "18034397f9465abf713a63f4f15ccf7b6dfb8eb2cdfddf3e789a1f9d32befdbd"
+status = "residue"
+cause = "mir::Ty: NonZero<i128>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#12"
+kappa = "103e5162403182c34b2bbfc8dbc4e1de953d9923306502ccb7ce73c75c05a0f3"
+at = "S=u32"
+embedded = "0aadef2155399325ce1aa26e6d96964ea1c737e0057a85485aaf40287d971d86"
+status = "residue"
+cause = "mir::Ty: NonZero<isize>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#2"
+kappa = "122d45f3174939b9ef9f3ebfcbd44d1f824476904b0ae5da97f3f2cb3e21e3e9"
+at = "S=u32"
+embedded = "460b86a64edc653337d7dea9875c802705dc92a05d92819586c1ae2102f0fb01"
+status = "residue"
+cause = "mir::Ty: NonZero<u16>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#3"
+kappa = "419cd2d60271ddca0fcceb576cbbb64a823d5db1e2364c0d59b0f1a655223cda"
+at = "S=u32"
+embedded = "354611403613397941c1f305aee6ef1d091a0c7ec09c314f8ca710bcc5057d7b"
+status = "residue"
+cause = "mir::Ty: NonZero<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#4"
+kappa = "878c989c0a32169f0d3fec326b0432c729f364dac3591343111cac16246f8e06"
+at = "S=u32"
+embedded = "9d239881261a61ef7072fd0e6a9c9b37db63d765d8993a688d94aacb0f3b46d6"
+status = "residue"
+cause = "mir::Ty: NonZero<u64>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#5"
+kappa = "e184071b17246a93c2c83f4ee9f2696dd088d5137d650d6bca523939de94811a"
+at = "S=u32"
+embedded = "28e91b1748149ab4a6ac4c52b833a9c6bf3c27ed73ac3ad1679fdda72640e8d3"
+status = "residue"
+cause = "mir::Ty: NonZero<u128>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#6"
+kappa = "9af90ff49dddb1346c60f26e5ba6f4047babc70a75cd3d12f5acfa7c04200559"
+at = "S=u32"
+embedded = "6a0485712193ff8432473f3220c7e40dc057d9a73af25313fbeaff3d13e64135"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#7"
+kappa = "054ca550fae695d39998a17e88f769199eae25c97260ffef6bf0393848b2164f"
+at = "S=u32"
+embedded = "65a5b2a5bea045b718a9192411e52d303b459e3ec0b221121439c9c664dd81c4"
+status = "residue"
+cause = "mir::Ty: NonZero<i8>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#8"
+kappa = "a7b4d79defcf6a68f3ac410ef113069558082bf5a31b1f2a1bdba0a21e177de6"
+at = "S=u32"
+embedded = "7b470f40c248abf1cb03cdf827a810b36902d63487159868b0b3d82370a4f9e8"
+status = "residue"
+cause = "mir::Ty: NonZero<i16>"
+
+[[fn]]
+path = "serde_with::ser::impls::NoneAsZero::serialize_as#9"
+kappa = "6b3dbd2fa1df37c3b7413e92e2d66b76380b83cd59448faf38eec7fba3b9fa20"
+at = "S=u32"
+embedded = "9b51e233265fb4cf36469e1003e4b97d531434b187a5fdd0888191fd597d424f"
+status = "residue"
+cause = "mir::Ty: NonZero<i32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as"
+kappa = "a8f6e8fee3f7fea0b8f3bd9366f89875ec617f65765ac0e80a20019c7b16729b"
+at = "S=u32, T=u32, U=u32"
+embedded = "ed2ffa500d2ea5102355b338125dd5e0e93d81b8722470e4c6fb763f7a3f190d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:981:9: 983:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#10"
+kappa = "6d0ddd981169adcb9cdd80f5ab52c0e4d6147074ba460543d5a198a57db0a04c"
+at = "S=u32, T=u32"
+embedded = "06297b01b46603252baa2352f42e061c3f56031e98a2b15851ca8b644e1edaba"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:999:9: 1001:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#11"
+kappa = "4b4d65547a7797d58df483436076432dfb32e968020818d0f633a57c9d94c650"
+at = "S=u32, T=u32, U=u32"
+embedded = "cb94e448f839cdcdfcedcced40304ae9c6092be4d75e8055bf768d84f6fc8be8"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#12"
+kappa = "cb0095b20e133fe839f0aa1cd08d00f2af0a25dc7c1f06675a459d0a7aa0de30"
+at = "S=u32, T=u32"
+embedded = "9d7e1c6a99d6956ed9790f38f431faa9fca5445da30a03f93d3b9e11f77dd226"
+status = "residue"
+cause = "mir::Ty: alloc::collections::LinkedList<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#13"
+kappa = "766fb95429361034816382b2e372eecc556bbd0f351ed7f61f7c08015e153d1f"
+at = "S=u32, T=u32, U=u32"
+embedded = "1176458eb876fb28b7de965dfda8b6e4889105282bf188e93e745c30b1693a9e"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:981:9: 983:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#14"
+kappa = "5761cb1ed03cea230219d7d97287f2d36657278ab481117f9dda83b77c97d20c"
+at = "S=u32, T=u32"
+embedded = "66e0e61b6d4dc0dbf36c800e7f722b95222ee4d24ccf9f9ffd5613257fbecf70"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:999:9: 1001:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#15"
+kappa = "4d1dc87cd6bfd7b5fc0d774b191c7f517ce491d6f7a449c5fdb849088d399b60"
+at = "S=u32, T=u32, U=u32"
+embedded = "96efebf118c0584b3d9f4ee93bb37da1fdc37d7442885b3969a3c0ddcfb2735d"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#16"
+kappa = "f74efe4cd3761a57fe285ccd1307a287694ecb8ffa710d0c5b9abeb9ebb21be0"
+at = "S=u32, T=u32"
+embedded = "a412f5ee109d4a689c504d87b2d49602ca85cf4c872d95c68436f03b0fbeb4cf"
+status = "residue"
+cause = "mir::Ty: alloc::collections::VecDeque<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#2"
+kappa = "a78249556a80baaed0697362883050f08859002f2160bf4cc2f7af55ceb4b342"
+at = "S=u32, T=u32"
+embedded = "d0ff1a26a86d3d4df1f30cc01feacebca63b1aca7f292cc6ed4ea8911e77b430"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:999:9: 1001:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#3"
+kappa = "56c8c57c65fbfd90ac9ba498a37b378483b0e57d44c4e14dfb513332c485d5f4"
+at = "H=u32, S=u32, T=u32, U=u32"
+embedded = "8e4fb62d174ab7aa544510eb18889600048928176f1bcecbe563d384f0c21c7a"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#4"
+kappa = "751f8281f173190521ff97cf1e7052aa4c2485c0c572f18edeea462a7d4a0e1c"
+at = "H=u32, S=u32, T=u32"
+embedded = "55c502788fdbd48e2bdc2529c21bf43253124f978a6ac1520f32431e9b644013"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#5"
+kappa = "c290bea01c9d89506fd144bfa8e84cd97bcb6c2a3ba35782e4f9813925077082"
+at = "S=u32, T=u32, U=u32"
+embedded = "e0dafc17259cb59a92465f2622ca43c7d31633c4208b0a977f5e66ddc204be27"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:981:9: 983:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#6"
+kappa = "16bf26e0d219aa02575d545c320bf9dc8daaf71da12733d1c5e0047f9606523f"
+at = "S=u32, T=u32"
+embedded = "e5f22959b71a78c4b2049c15f6bd0dbe46d04d735e3ac4f24335cb3f70296dbf"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:999:9: 1001:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#7"
+kappa = "783e46480c603849e166409fed4a63a6bd45d464013e12bacceefa689e23aec9"
+at = "S=u32, T=u32, U=u32"
+embedded = "5c0210a1569f586d119cd15d638e485d9c2dda75bea71398d6a2eec8d3fc7670"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#8"
+kappa = "4219807575fc43f5c5cb3c8bda0461b7c1c958979ef0c32ec8bc7398881d01df"
+at = "S=u32, T=u32"
+embedded = "1b6b142bbe6b67f5ba58cd8276988f41ea77fb91a13299b0b8f3e537abed83f8"
+status = "residue"
+cause = "mir::Ty: alloc::collections::BinaryHeap<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::OneOrMany::serialize_as#9"
+kappa = "db6fde12572369b2bf6c44203e8df83a5dd2879ed991fd011dc483b6935075a4"
+at = "S=u32, T=u32, U=u32"
+embedded = "38361c3e85dfc4de37593df5cdbb21d464d2f672c1eeab48a7105db6eb7dfa34"
+status = "residue"
+cause = "mir::AggregateKind::Closure: ser::impls::<impl at src/ser/impls.rs:981:9: 983:31>::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Option::serialize_as"
+kappa = "f25762cdb965f9460ef93581dbfb048deb24e590dc8d5c1b7f3d90212289e24e"
+at = "S=u32, T=u32, U=u32"
+embedded = "3ca1c82cf23e7766d5a1950b29dcc8b1b44696a875e51336886dd05bc2eb2c8d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::PickFirst::serialize_as"
+kappa = "3f9976c14de59351a3768c423dd4e545b309683481a7591f27fa4cc1c7b45133"
+at = "S=u32, T=u32, TAs1=u32"
+embedded = "abe7f934ece8640907ee08bbc557f29d402890971afe8f802d169e93e579e0ed"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::PickFirst::serialize_as#2"
+kappa = "51e79f946c51993045014b28284188e4aee47a3fe4c780dd4c24c66ff6cfda63"
+at = "S=u32, T=u32, TAs1=u32"
+embedded = "9adf264aaeec4aa9d45179a4e8972d650cfa265890d1e888ec034fc312e4377d"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::PickFirst::serialize_as#3"
+kappa = "a49ed0c80f1a2ddb749a8b33ca963a44318f43f1f7126bbc3b93b613925860f4"
+at = "S=u32, T=u32, TAs1=u32"
+embedded = "8fe494805385f6bfa054c30558d534a22fd88dd5c1d33dfb68391c82e0747dbd"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::PickFirst::serialize_as#4"
+kappa = "8c298095bf9d921240844e14c135f23a979f1f4684003d6baefc9079fbfbc758"
+at = "S=u32, T=u32, TAs1=u32"
+embedded = "8c5890f9611fb2a0815f679fff39f664503769914006fb1fe442bd0181046cdd"
+status = "residue"
+cause = "mir::Ty: ser::SerializeAsWrap<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Pin::serialize_as"
+kappa = "87894e716334bd04bacca9304468dd56f0753ab95707f137a2200d670e52164b"
+at = "S=u32, T=u32, U=u32"
+embedded = "239d678c162ff2f3891c7433af9001e0d33bb13561a7bf18cffa2dfb4fbed211"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<&u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Pin::serialize_as#2"
+kappa = "82ba45cfd4e3637894c8d3d09560e52c499ae4f16942618452d41ab31ca1f0ba"
+at = "S=u32, T=u32, U=u32"
+embedded = "514381ad18360a0f4c8b4f26b31275a14ea4862ada6ac257410bb940f95f2e1a"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Pin::serialize_as#3"
+kappa = "6314a1c4bdcd22409cfa2c47f867e74459a9f2f3b6a2c299997495ebb54b7f7f"
+at = "S=u32, T=u32, U=u32"
+embedded = "125d22f4fce24bfabac14c0796f60ca783e4de7df0292436d195f94965ece2d4"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<alloc::boxed::Box<u32>>"
+
+[[fn]]
+path = "serde_with::ser::impls::Pin::serialize_as#4"
+kappa = "3ef50ef366d35297e47bdeb685bd46e62c4d5c1035a6ebde8f3b069911577b16"
+at = "S=u32, T=u32, U=u32"
+embedded = "30179acf192e2ad376d097d1b36354c2bf78866738d46470bd9f603930c6b795"
+status = "residue"
+cause = "mir::Ty: alloc::rc::Rc<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Pin::serialize_as#5"
+kappa = "4bbf6da554f76c2473c7b8d8331c551eb16c977447a961a3d27cba73a1c85b01"
+at = "S=u32, T=u32, U=u32"
+embedded = "51b62ada3990b7d7ae9d69300032c582cae3107fcfcc5dae93d1732d39cd7779"
+status = "residue"
+cause = "mir::Ty: alloc::sync::Arc<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Range::serialize_as"
+kappa = "c92f0a02720086694d9b87d304c32ee56b4a5f2c2c77918075bc5d10e7be7811"
+at = "Idx=u32, IdxAs=u32, S=u32"
+embedded = "28e653b89972bf902c0fec2dce8888ad9de5f575a5ade18172c4dad820373876"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::RangeFrom::serialize_as"
+kappa = "5a42b96662acf0a21ac535e75f7cd10907ac468e0f86b4812e3ed05cdcb2b0a9"
+at = "Idx=u32, IdxAs=u32, S=u32"
+embedded = "37a1c2e7f6ad9733b05c4860fe66cd44705354474ac1a82b455443ecd9155e1f"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeFrom<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::RangeInclusive::serialize_as"
+kappa = "ad394c4c208f6e86836d478f95aae13ee456b33e186d9d97023ff11995a0e296"
+at = "Idx=u32, IdxAs=u32, S=u32"
+embedded = "d08ca5a893c771c7d9b4a398a0da4e4f2a9a5521ac896ef4460404cd6649cfdd"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::RangeTo::serialize_as"
+kappa = "936592b40258b186538f1837d6c625c4d16f9c2231404e08e49db2a077ad1038"
+at = "Idx=u32, IdxAs=u32, S=u32"
+embedded = "b09a936a324d1d8f89725eedc390c57b631a1df20885b5868d3566cdd83dd260"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeTo<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Rc::serialize_as"
+kappa = "47d4a1f97ae136887900862428686aaacb490dab1315b9624aafde34a3277ead"
+at = "S=u32, T=u32, U=u32"
+embedded = "adc48273d481f3332d5acc3390f62f4482e68422148a31ca323c02b256a95bb3"
+status = "residue"
+cause = "mir::Ty: alloc::rc::Rc<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::RcWeak::serialize_as"
+kappa = "0e0128f493a4c96cc0f94be6000527551cb4fc3f2d29bde12302ebf28e75e94d"
+at = "S=u32, T=u32, U=u32"
+embedded = "6ab0644eb0a45108a80100a5f78e7fb6234b5448ef89a55fa9d55a8e4060ffd0"
+status = "residue"
+cause = "mir::Ty: alloc::rc::Weak<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::RefCell::serialize_as"
+kappa = "c4d0474723111f034a58e49ff413d3141e96cc238cedff8ad220dfd422294733"
+at = "S=u32, T=u32, U=u32"
+embedded = "d2e5d8c7ff905652ec0701a299b2e7bdfa7cc01c494034c9fb4fe0dc8347418f"
+status = "residue"
+cause = "mir::Ty: core::cell::RefCell<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Result::serialize_as"
+kappa = "5b8f7c1840ca681580f05cd0de058268918595c067122ba59b082f58492d2930"
+at = "E=u32, EAs=u32, S=u32, T=u32, TAs=u32"
+embedded = "40ca02c1c6a4bc7b71f2d9b563bc83ce56e90e6e39d29e8bfbb846b23111a70b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item ser::SerializeAsWrap::<'_, u32, u32>::new"
+
+[[fn]]
+path = "serde_with::ser::impls::RwLock::serialize_as"
+kappa = "f34ba69798f19afbcfa3d278b6a26674c68eddfc51ebffd58a522e63e437c3a0"
+at = "S=u32, T=u32, U=u32"
+embedded = "3e7da66e610a2701f83691f1db71dd95622bc55bbdad642f3292e0858b9bad04"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLock<u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::Same::serialize_as"
+kappa = "0c4eff126ddc4d2a4e7026e025018b9e6664b92e616a01d04549620c64ddae8d"
+at = "S=u32, T=u32"
+embedded = "3a53eac0dc4f271f5aa54a0b290523eab062294288f21560a1faa69591c11261"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::StringWithSeparator::serialize_as"
+kappa = "000e2c1a1b0e164e999f721f8f21c5083aa67fae9d6f7c6ce6220d78217f3433"
+at = "I=u32, S=u32, SEPARATOR=u32, T=u32"
+embedded = "06e7b3c19a570c59ded60548355403b198b5ce9b8c95ebf0a4e21ad57b8509cc"
+status = "residue"
+cause = "mir::Ty: ser::impls::<impl ser::SerializeAs<u32> for StringWithSeparator<u32, u32>>::serialize_as::DisplayWithSeparator<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::StringWithSeparator::serialize_as::DisplayWithSeparator::fmt"
+kappa = "0eb4e82e718c475060bd30b82b0341c84e4c9012d2e526dd7124322a07953ecb"
+at = "I=u32"
+embedded = "93d4724379d5599d333d56199c4a33ea609d34e032c2e23ac82a9bb48008f7b7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::ser::impls::StringWithSeparator::serialize_as::DisplayWithSeparator::new"
+kappa = "60d983fa12398e8d9773dced83a96e17dee007a2316ef51d9f469f06b464045b"
+at = "I=u32, SEPARATOR=u32, T=u32"
+embedded = "43619f3df31cd4a1c2e113459e4eb9e5e11546509414b6afc0909d50deaf1598"
+status = "residue"
+cause = "mir::Ty: ser::impls::<impl ser::SerializeAs<u32> for StringWithSeparator<u32, u32>>::serialize_as::DisplayWithSeparator<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::impls::TryFromInto::serialize_as"
+kappa = "383fabf9bfe9e4a4014a58c5734de8e7fb76541e8c078cba26a3a62e83f2395f"
+at = "S=u32, T=u32, U=u32"
+embedded = "f2d31b1fd6c296aa558b66405a5984ea5f7c661969a18a81044be1b1eb124acf"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::ser::impls::TryFromIntoRef::serialize_as"
+kappa = "efd2ac9529238c5bd05997766e727dee67821772e742f96ca47fa43d73a1015b"
+at = "S=u32, T=u32, U=u32"
+embedded = "52c4517ad14dd9b5c226254163437aae429c4450d16a50becd1defeb03a1df06"
+status = "residue"
+cause = "mir::Ty: <&u32 as core::convert::TryInto<u32>>::Error"
+
+[[fn]]
+path = "serde_with::ser::skip_error::MapSkipError::serialize_as"
+kappa = "bfaed04e9d3d8fae2bb5318ac3f90cc6b9906ed0437bc1d16375586ab7898ec9"
+at = "K=u32, S=u32, V=u32"
+embedded = "5f877df4fc9e5dacd894beb3a59530fe2467f714a216d4642398657e3fc7ee45"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::collections::BTreeMap as ser::SerializeAs>::serialize_as"
+
+[[fn]]
+path = "serde_with::ser::skip_error::MapSkipError::serialize_as#2"
+kappa = "357ccebb51d7a7dd5738baa893074ae1d084784ee1ed58b005d55bdb96068887"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "0fd8976e8a8d3b4bc480f4261b5835add2edf24e4c136b734dd941a05248d476"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::ser::skip_error::VecSkipError::serialize_as"
+kappa = "1edab1706ff6c122d1bb04fd96f7b427613a215964d5b9f0beb273c397132821"
+at = "S=u32, T=u32"
+embedded = "3a3c7751b9e395329613c70abb3217abe4482a2494ec30eef6de6887334ff101"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::impls::<impl at src/ser/impls.rs:431:9: 433:31>::serialize_as: serde_with's MIR stops at type outside the lift: <u32 as serde_core::Serializer>::Ok"
+

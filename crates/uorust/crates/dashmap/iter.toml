@@ -1,0 +1,56 @@
+[[fn]]
+path = "dashmap::iter::Iter::clone"
+kappa = "ad6a7c92deb02b15015e01a1e6f680cdc0965762c2d84361cd033ee1d046f706"
+at = "K=u32, S=u32, V=u32"
+embedded = "5382b963969dda93e653a7c6a63ab15ff3061c56e68be6971818b6905a25ae85"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::Iter::new"
+kappa = "23a4ce588642eb65c149e1ccb1f33d6823642f5dfc0876dfbbdb27d7f6055d33"
+at = "K=u32, M=u32, S=u32, V=u32"
+embedded = "8912e9bcc8e513bb39d264392a83ad61eb7156a7ed55101abd6c98396b8b3b51"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32, u32, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::Iter::next"
+kappa = "5cf81b3aeccd18f8bdcb9fef3cfdad8e70e5a5d4195831338f2b7e8df8e8a8d5"
+at = "K=u32, M=u32, V=u32"
+embedded = "c02d4a4765baeca5a442361d5913703bbbfc1c3d9b3371d3829e43087eb44b8e"
+status = "residue"
+cause = "mir::Ty: mapref::multiple::RefMulti<'_, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::IterMut::new"
+kappa = "2db2ec57b7d3ee9995504e9cdaf68bb52fa2dfc43dd69955a8dd430e16611398"
+at = "K=u32, M=u32, S=u32, V=u32"
+embedded = "19e5c55be3c160d87667ede57442210de3bbfe84ebf0ea8bed59553640053b61"
+status = "residue"
+cause = "mir::Ty: iter::IterMut<'_, u32, u32, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::IterMut::next"
+kappa = "40c7ea871c5f802f7cdf62df8f6afec44542b6b78abd24c6d3c3d9a93293e256"
+at = "K=u32, M=u32, V=u32"
+embedded = "55eb7c2e4d8ab0ca99050ca530afc6e2c7eefc7787215d81b447909845725945"
+status = "residue"
+cause = "mir::Ty: mapref::multiple::RefMutMulti<'_, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::OwningIter::new"
+kappa = "823ff22232d402e08f400d468fb110170e25bf2e551d00dd18394e1ea64d7b71"
+at = "K=u32, S=u32, V=u32"
+embedded = "f80035e4f49aa609d4228ea12f125870c2222aa1fd0a7ef15be92c3b6311a038"
+status = "residue"
+cause = "mir::Ty: iter::OwningIter<u32, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter::OwningIter::next"
+kappa = "1491ff13000e16ce8e35e9a6c48e071f62542df957e7256b640dd41fbd623202"
+at = "K=u32, S=u32, V=u32"
+embedded = "e0b275ebfd0651ab6ccf7ef372f936f51563efb08d9ed0e35fa855582550bc8e"
+status = "residue"
+cause = "mir::Ty: iter::OwningIter<u32, u32, u32>"
+

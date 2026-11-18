@@ -1,0 +1,55 @@
+# The crc-catalog register (written by `uorust crate crc-catalog@2.5.0`; do not edit): every body of
+# crc-catalog's MIR at crc-catalog 2.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 117
+translated = 0
+residue = 117
+
+[module.algorithm]
+bodies = 113
+translated = 0
+residue = 113
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 117
+embedded = 117
+evaluable = 117
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Algorithm<u16>"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: Algorithm<u8>"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: Algorithm<u32>"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Algorithm<u64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Algorithm<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

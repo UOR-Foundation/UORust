@@ -1,0 +1,303 @@
+[[fn]]
+path = "bit-set::diff"
+kappa = "655d9cd51b8a4a1040617e9524cffbfae678414007c318ec7f41435b8b4811a0"
+at = "B=u32"
+embedded = "12a0f76997fa2f549e1aceb5ca7c16e4a3bf0f39e469eed4ebfa394a066217d4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Not, which u32 does not implement in core"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:182:10: 182:15>::clone"
+kappa = "93086f3a9d64ca48432fc86a97b826b30948628f7e8708a7cda58a1a6256da02"
+at = "B=u32"
+embedded = "0584bda5a83108f2a649563f0a9e0f62892a8e97e1e4d4ebe7a779f7fef5628d"
+status = "residue"
+cause = "mir::Ty: iter::TwoBitPositions<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:190:10: 190:15>::clone"
+kappa = "7dece61a9185ebe8fa3abb46eab978ee0879171c1335b61045c811e531eda90e"
+at = "B=u32"
+embedded = "017b395e88815ecb05a6e04ac01aa4f2983da4d4892198e7997f250976694582"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:192:10: 192:15>::clone"
+kappa = "c41baa976e36c2a5e1504192d0b7e499e712477af323199ebe695393a853da06"
+at = "B=u32"
+embedded = "42cc86230088dc84e63b09b48f9361670466a5539f526e5e316aa4121064202f"
+status = "residue"
+cause = "mir::Ty: iter::Union<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:194:10: 194:15>::clone"
+kappa = "80ac1a1f31c10d7f28e32b3103cdba53d6eea88f7c9ecb6d0903263855938879"
+at = "B=u32"
+embedded = "98837c75dca05a052b5471413a4322795ed37fb8ad8a1d08d74c99e777d034e0"
+status = "residue"
+cause = "mir::Ty: iter::Intersection<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:203:10: 203:15>::clone"
+kappa = "5169e2f8291c3f96cd32a2e48732cc035c08c9bf1bd938869210a3ec17ae0a60"
+at = "B=u32"
+embedded = "041760c5ea5a1ed50843022f20d3180f46546344e69ab5f8f69cc2944db0cd06"
+status = "residue"
+cause = "mir::Ty: iter::Difference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:205:10: 205:15>::clone"
+kappa = "081cf4fbca2318dd9f052c792db87c6c84b08ef853d063330119ffc2e7f8dbaf"
+at = "B=u32"
+embedded = "dd2e6e78f35e7538ac25177325c38795c62c0b3bc4e8c2ac0b819384bb13f981"
+status = "residue"
+cause = "mir::Ty: iter::SymmetricDifference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:369:1: 369:53>::into_iter"
+kappa = "d948e23aa987042fd978fc41fdf2cdf07f5dc4237a8575297fc5991308f97be8"
+at = "B=u32"
+embedded = "7cd9f79298993ceb4adf2817533e115385aa38a0039b9ac91ec3ec7a5b8f08d1"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::<impl at src/iter.rs:3:10: 3:15>::clone"
+kappa = "769a350d04bc12e3532e989479ebb3ec4919b5f8da7057cf27930254ecb2bda2"
+at = "B=u32, T=u32"
+embedded = "141a2ba988c9b68000190aba9409753fe13409431a9a95cab781aded0990967f"
+status = "residue"
+cause = "mir::Ty: iter::BlockIter<u32, u32>"
+
+[[fn]]
+path = "bit-set::iter::BitSet::difference"
+kappa = "6f277ba9b44e19f39c1052da298e8ff3a2692b43c1c2273bcda2345f723462cd"
+at = "B=u32"
+embedded = "c4fd4ccea8dd464896e50e8767e3fee166346501f7e4db62c712bc4a1dc35d75"
+status = "residue"
+cause = "mir::Ty: iter::Difference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::BitSet::intersection"
+kappa = "35118f9b471ecb00a9335f38b098ccf0031b3fd06b4a4967bae4a13fe642dc5f"
+at = "B=u32"
+embedded = "cc281397ae35e3de40aa296988ea7c12234b9fdedf7f70de0d5efe0420bf801f"
+status = "residue"
+cause = "mir::Ty: iter::Intersection<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::BitSet::intersection::bitand"
+kappa = "4410e5e730aa373344ab1089e8e2bd3f4a637ee495c14c6002285ec3ecb95412"
+at = "B=u32"
+embedded = "e441bf07d4d2117f6d63860b53cde2cdc1c3bd79375689ece6e66ec6c8098d49"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitAnd, which u32 does not implement in core"
+
+[[fn]]
+path = "bit-set::iter::BitSet::iter"
+kappa = "6a931b8e9fd015c31677b15c1f8ea192bef0e7e57a9488b0db21320ad92e5fb7"
+at = "B=u32"
+embedded = "443aa93c92cad63b659c5de43ae01e2e86300ca031c9685b654c7e2e482880bc"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::BitSet::symmetric_difference"
+kappa = "5bbab9228acfdb352f9e090ad4bbdead4b5c296e43ee895ea628567292cec1d8"
+at = "B=u32"
+embedded = "e080ee87ebbd5a624f870f745b109413ca56ccc3af4fd386a5b78de96677039c"
+status = "residue"
+cause = "mir::Ty: iter::SymmetricDifference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::BitSet::symmetric_difference::bitxor"
+kappa = "4178c5b239bf09860b2878271dde50c66ca7f88c9d0b975310e7bb97254602b9"
+at = "B=u32"
+embedded = "00f971671300aff3a4d75d36790b6bec443e1cdbb32f62be952de284b801f25d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitXor, which u32 does not implement in core"
+
+[[fn]]
+path = "bit-set::iter::BitSet::union"
+kappa = "859411496df01ce00b1c947e543d99208466821ed46cfdbc3f5712c039b46435"
+at = "B=u32"
+embedded = "32a4c85ddf23fc23534803ab7234318c75b799963a3b6ef7e9ad458c6e16bfd8"
+status = "residue"
+cause = "mir::Ty: iter::Union<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::BlockIter::count"
+kappa = "99c7b2043399b36660977658082b0ca4ad8fa5f4f8a6bc98562d67914d529cd0"
+at = "B=u32, T=u32"
+embedded = "e5840353c43d15de33df5ee2f2c63761abe5c10e39b47f046ab82d026059d105"
+status = "residue"
+cause = "mir::Ty: BlockIter<u32, u32>"
+
+[[fn]]
+path = "bit-set::iter::BlockIter::from_blocks"
+kappa = "338fe10e98844bea5cb371f9cb018dba004f81d44878673916c2dc19d14872ad"
+at = "B=u32, T=u32"
+embedded = "ebf4f71c1daa7afb824dcd890916656effa87be661a58eb13e87a116b41404a6"
+status = "residue"
+cause = "mir::Ty: iter::BlockIter<u32, u32>"
+
+[[fn]]
+path = "bit-set::iter::BlockIter::next"
+kappa = "e373c7c379fadef492fcee19b8f6d8e51ef2d97f8a213e57ed9f37d1489536bd"
+at = "B=u32, T=u32"
+embedded = "cebc8b18a50dd7f35d9634a8c48b27ae57017358f1791f686c9f74db098469e3"
+status = "residue"
+cause = "mir::Ty: BlockIter<u32, u32>"
+
+[[fn]]
+path = "bit-set::iter::BlockIter::size_hint"
+kappa = "c9cfc204b67f8aa22e9d415b173a91d5921b3b9cab41869988e168302005bad7"
+at = "T=u32"
+embedded = "105cf733e44a477487d16ed975e7f60edb32fb1e1135e3922ebb8f0ea8d8c419"
+status = "residue"
+cause = "mir::Ty: B"
+
+[[fn]]
+path = "bit-set::iter::Difference::count"
+kappa = "b2153afc3ed3a3f0129c2ad269adb1bca5bc1a2ddf53c397c909cf69ec97e159"
+at = "B=u32"
+embedded = "be0a088311e200c928bf057c8b9d51c688e3aadfe72b847a3a9882ce386df042"
+status = "residue"
+cause = "mir::Ty: iter::Difference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Difference::next"
+kappa = "2d0db91e83137c8c5328dd1fa9fff2dab6f8c1031c6c517465c90a8a3f9865bc"
+at = "B=u32"
+embedded = "d567330115a2610aaee36b1d9a3aa42ee1f9037e767c30a8cad4a0b15262f7ca"
+status = "residue"
+cause = "mir::Ty: iter::Difference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Difference::size_hint"
+kappa = "91949f256ce5f318e5b14cba740385ad15bf6af316f69a829e16aeff388de987"
+at = "B=u32"
+embedded = "19720966008ca5bc5dc164225ea9b268d204cbda7353158aacbd5d3690bbe0f5"
+status = "residue"
+cause = "mir::Ty: iter::Difference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Intersection::count"
+kappa = "5f545a97e432ec33177a979176d161eb1ba332444f40f824534c11fb29c5ce77"
+at = "B=u32"
+embedded = "ae4052914cc3ab92fad8222119522fd2e4d0f1a4ed4263092b717633644586fd"
+status = "residue"
+cause = "mir::Ty: iter::Intersection<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Intersection::next"
+kappa = "e6cf60de8e5642bddc57c1e5fea5b210c581e6f8f3eb465d5982daae7ebbd5b9"
+at = "B=u32"
+embedded = "3823a1c0eacab160d85d18b2cc631233ef60a58b1685e1fb3a1394825903b2da"
+status = "residue"
+cause = "mir::Ty: iter::Intersection<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Intersection::size_hint"
+kappa = "91c8bfec83047fdf09cf68ab8369bb8e28bbb62172453f426b0673595b61ac76"
+embedded = "b023583177a022b5bc0a475f80c47e5ceba78cd05898d7844a9e95ee49e479cd"
+status = "residue"
+cause = "mir::Ty: B"
+
+[[fn]]
+path = "bit-set::iter::Iter::count"
+kappa = "dc0e538d5883eb06efcc51dce7ce662e85e13d43b4dcba50235950a546cc728a"
+at = "B=u32"
+embedded = "65c2be7843cb2e1775b981a19ec76d4c31edcc15da93ace73acfa0d6327ff27e"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Iter::next"
+kappa = "1605fb0ff3412afbfc837adfd7aefb7d27ffc6dcb313e251ca6033f6764728f5"
+at = "B=u32"
+embedded = "cc7cff3f40a4390bc288632a24079a130b51d279408bfdb2ec2578db53f86634"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Iter::size_hint"
+kappa = "c9fd3bf52f0d613d4d6750888e25c19b14cd6ff04562b95efbbd0ce7e70a704d"
+at = "B=u32"
+embedded = "bdadd570468429047b082ee8b8ad6ec5450cf4ae34a748e99e5610c92312334d"
+status = "residue"
+cause = "mir::Ty: iter::Iter<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::SymmetricDifference::count"
+kappa = "8053d81b84c3b51b46d3daa097a2d269141d304bf2227d7bf0972533726f29da"
+at = "B=u32"
+embedded = "fb055f0a2dcd2b27f3b49dc77bd873d765d1a3d64562130f87f4662800c1b772"
+status = "residue"
+cause = "mir::Ty: iter::SymmetricDifference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::SymmetricDifference::next"
+kappa = "b453557fde9adcc59ea882720b98c795dca7fdc09058268c06d930543eb87a3d"
+at = "B=u32"
+embedded = "af1d2e244e793181cef6efb2e46bfbdadbbd2a3fee6fd275a61a76c2dc4c3af2"
+status = "residue"
+cause = "mir::Ty: iter::SymmetricDifference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::SymmetricDifference::size_hint"
+kappa = "196487c4c723187b0a81cadbf9bb8623f74b61951bdd2bda7ce7176cf8272a97"
+at = "B=u32"
+embedded = "f14787c728e75b5fc0a1bd150475e9e08e0d656d1c964ae294d26297ff351ad1"
+status = "residue"
+cause = "mir::Ty: iter::SymmetricDifference<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::TwoBitPositions::next"
+kappa = "2aed4d266a6def537313752343f26c3f22300efd80490c9f45a30ecb2309287a"
+at = "B=u32"
+embedded = "e1671276b2cf248540dad07a13861c9a7642ffff16be8f537520537d193a7c36"
+status = "residue"
+cause = "mir::Ty: TwoBitPositions<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::TwoBitPositions::size_hint"
+kappa = "cd16056e4a2134bc93ae4700e3db13a7a5ab48dae6b16d1284bfbfc3cfc9f9c9"
+at = "B=u32"
+embedded = "b4445e29e7edb1669d21d9abe8b5e3c6d8646c693ca7a83f1f03ebfe9176c62f"
+status = "residue"
+cause = "mir::Ty: TwoBitPositions<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Union::count"
+kappa = "04b012627d663f05e9e6195328c63434b4193864ed7be28bfc6564be8f3456dd"
+at = "B=u32"
+embedded = "61aff256bd9bc83ef66a41628f263b7d86cd58d1e6b1d055e4927b931ba4c99c"
+status = "residue"
+cause = "mir::Ty: iter::Union<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Union::next"
+kappa = "ab61eb32c301b2c805a5955eade8140cc00c4ad8fe076d99526c57adeb241c78"
+at = "B=u32"
+embedded = "15d4dc67f499b54c4d537959e28e21fe5af37cdcdbe681e6ce2875d3106e6dbc"
+status = "residue"
+cause = "mir::Ty: iter::Union<'_, u32>"
+
+[[fn]]
+path = "bit-set::iter::Union::size_hint"
+kappa = "8d9044f136f5553a27361d3429f97b8c347967adcf8239e8bc7a148b2d11aa67"
+at = "B=u32"
+embedded = "7a241e1c4486cbc465facff4ddee9a24298a341d2a347371134e6e6f74bf1ddb"
+status = "residue"
+cause = "mir::Ty: iter::Union<'_, u32>"
+
+[[fn]]
+path = "bit-set::or"
+kappa = "82a984684bd4bbbfe4cd019239b6717b1a4a63811e32d572748e3076ae643fd7"
+at = "B=u32"
+embedded = "d565808afaa1b66e8c7a995227c2b5b17ab7cc12a4255e777dd75dcb5923f813"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitOr, which u32 does not implement in core"
+

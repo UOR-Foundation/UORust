@@ -1,0 +1,245 @@
+[[fn]]
+path = "bitvec::BitRegister::INDX"
+kappa = "739b03190836017868b6ea70d322c7fe155cfb7b664682814ce90bcdf3527aa7"
+embedded = "d863ceb49893436f8f3944e4a6be0e5aa2870cbf9441b15ba2d9bdead6f41665"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::BitRegister::MASK"
+kappa = "c3043d5f4b5328006c32f51fc030731f9ab6dd2819c56f000eae8905714547b3"
+embedded = "1dbfaf6c40e7165870cf7d73f222728a9388bfa5098ce5f510cdafd9bcf933e5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::aligned_to_size"
+kappa = "64f662f7046c67c29fe8376bd423bcff4ea1572865a09ad14712bfefbfe7936b"
+embedded = "139bdd08b9849b1719f4c2ad5e052a3b9fc0a87c968dd65138f2c6154e9a35fd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "bitvec::bits_of"
+kappa = "f6669a4b1d6b1465b21ae41b8959c0eab4ac5e7a975cb95c4af2b111305ffd5f"
+embedded = "f63eb40e7deab455b654348f8ca922ee5fcee139f2e1ac976b33204d0e3ca018"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::elts"
+kappa = "e26d6f3a8ef93ce61cb8abe1c7c52aa64527a1dd88f2acdcdb3ee76083f1f885"
+embedded = "7a028bc9a51ed472029962d51e22dd714f3677c8ba2f827169c8f3fa4d962a8c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::layout_eq"
+kappa = "f78bf4b915e74136754828e66436939130ff758b131f2ac469cca2ee67dd0c88"
+embedded = "03525c3f4cb9576ab84ad8bbadcb8150e390d3270c2a5a8b6ca2faec7b80617b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:25:3: 25:26>::ALL"
+kappa = "0b8d74fc583bb5f691f5628f59356446d513b14f0b30b32c99f3cc565b13f240"
+embedded = "e0f8dd3738d253247b6c3ad2ce4b0b99f96b94c1b938b7d3708fa1a34d9adf25"
+status = "translated"
+digest = "e3b1690cf0f5897524b93ba6207dc2c32c0c6866d0d57bc731a6ee40d590bc8c"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:25:3: 25:26>::ALL#2"
+kappa = "8d05c535f49253bfa6048b6e89abc88fcff19966ee8c00d7f2e966670e5111e8"
+embedded = "56a19307d5d9dbc1073d8db403f423a13c94ff857f4f9638f29776e62f5b8d3f"
+status = "translated"
+digest = "42d98c6da798521ef63cd23fedd17c6b8b045e608fa41bcc2bae54ee3ca1d08c"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:25:3: 25:26>::ALL#3"
+kappa = "b4c68213ca24e0e550922226fc5866e1b945ce0f546e5262203d2b0563e0c6d8"
+embedded = "c0e09ab5bb8b9b75c3ab03f2523e4639dfa16d3981211ec4c81a2f5666ce5629"
+status = "translated"
+digest = "3513c4566957f2a86d9fb9256fc7467a51a53b62857e25b7271041bd4ec93020"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:25:3: 25:26>::ALL#4"
+kappa = "bc4229de51d7844f00128468542802d911fb219f484d17d2261465392e1ee53b"
+embedded = "07d8abbaa9ff1f00842546b417c53bb1a7ddf1c32b06e47f846f15ad69069ba4"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:10: 77:15>::clone"
+kappa = "220be4c930f18cae21fd495c9c72216bfa4d624f129fdb0e880e4e67fa63720b"
+at = "T=u32"
+embedded = "e973ff8cc22fdbcff41eb95d1525bf7c501524336d5b84c978d7e67de2edc98c"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:23: 77:28>::fmt"
+kappa = "e646eaae9f3483824e3db00d4dcb1ece6c9e3a1dac5a556ff745c265fc09b46b"
+at = "T=u32"
+embedded = "5c8fe7517c3eb8b91e5c4235867225fd3d706271d146aff056770df74256e8a7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:30: 77:37>::default"
+kappa = "aa2d3cf97e486fe49ffe98c46e66082016ca3cdb04eff833e1d2cf3fad9ca77b"
+at = "T=u32"
+embedded = "c425ab2d13b187fd3e3d8f104f738f566fd26a05ee99ade2ce173e08bc13a25d"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:39: 77:41>::assert_fields_are_eq"
+kappa = "d454de4ba05e7df304a7e3e33c9ef6cf20ad5dc445ff143e1c36a6401512f65c"
+embedded = "a11b75b86ef633b62eb9d9298797e9172c76eeb55b1de582d3924209b0e3c34e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:43: 77:47>::hash"
+kappa = "7cf7f4d7c42c49ff6909e06948d1b918b09272d8c09b2f4a7442634929133b8c"
+at = "T=u32"
+embedded = "ed35f2d8fd14c4e07c0c58bbc726657b7562aebf47cdb27439978935129d8b61"
+status = "residue"
+cause = "mir::Ty: BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:49: 77:52>::cmp"
+kappa = "24a512c7e9a891c8ede76cc73d1f77a0bda3e91172f04a5d6242500b08b2a844"
+at = "T=u32"
+embedded = "5e992932e09f7bafe55a26b68683f6e259a8163ff97fe851cc9fbfdb61901bee"
+status = "residue"
+cause = "mir::Ty: BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:54: 77:63>::eq"
+kappa = "0785ef23f739acc328026605f29e59c120ff5a302548a1e22a9187851d61c266"
+at = "T=u32"
+embedded = "d7d91f28ae5049684d80589012e83535d064e835e6e7d291b1c0d7f040ea84a8"
+status = "residue"
+cause = "mir::Ty: BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::<impl at src/mem.rs:77:65: 77:75>::partial_cmp"
+kappa = "19a14cb4d3007750a1cb156488ee1e6d021f77c710a9824ee917dda1ecb231f7"
+at = "T=u32"
+embedded = "0e02069fd7c6793219a498f57c1a12f5611521886d054eae934aa9f38c3bcb50"
+status = "residue"
+cause = "mir::Ty: BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new"
+kappa = "38d54d201145a99bb9aebbc25d8605b5456e3d41f048729ea375d4e539ce661f"
+embedded = "6fe894072765ff073e987973c5d9e791af1f2197e93c471c38c023f4c6164a21"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u8>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#10"
+kappa = "a6a0de40cbed5cdceb58a6d36edf7c50666371ced336e20644b0aa9a43d63c73"
+embedded = "df965fb959d8af6be67bad9e0330c75c98911b44058df85c435a942776486bd8"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u64>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#11"
+kappa = "efe6e557d11a4e171fdd910972973b0752ad8db34e29871b06226dda87de8ab1"
+embedded = "d359197373e0f39365464798f91b430a30d49d7c02ec6ef03095d5974d15215d"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u64>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#12"
+kappa = "785c02de945eaab9f1274807030c53f5a45f21c1f9e7f35e8af137d91867db86"
+embedded = "3c6f6c3709124c6053df28655dd5528b8f269ab9be0f216c0f91980d1302b2a5"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u64>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#13"
+kappa = "f22896e959a4c4062bbb9a6b5f0faefad565bfed12419b0bf472663f94c04401"
+embedded = "85d73378de123ceeb0b059981256870b06a9d80cc3bf8a8b5e52becb8b322f90"
+status = "residue"
+cause = "mir::Ty: mem::BitElement"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#14"
+kappa = "cfd6170cf2d5cab881a09bcafc8c74bd07ea2ad1c86cbc9b3ce8f60888c63aa1"
+embedded = "c78adc2a2a3ee8152c255c913a66f2ae777980127dee85d183ce5e18ff7cdee0"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<usize>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#15"
+kappa = "d3755bfbc113a4efae9546af78d45ef0132b4f11c1594076034e82003f179f23"
+embedded = "80c5d57c02883131c6b046c54e6327923db3990276e7259c3933d16c93d47b1e"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#2"
+kappa = "7530df0e28c0fccdff8e28b460fe7089db46c5d8d7c88da32016db145d222d37"
+embedded = "9480c3f046fce55d1bd7fd828307288c4715cfd37876bf572fbf058b015a6a45"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u8>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#3"
+kappa = "ab95f3a11449c2106776f6387416716ef98a867602be1a693b80c401d45b5ff5"
+embedded = "ce374c863f36da5c324723cf89106bb199fa9b825d5dea1fc2795af1f82a11b7"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u16>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#4"
+kappa = "fb2c4f6fabe2f92064fd7777c5f56433f1518c7fffd3cef4c5956f941924fc05"
+embedded = "ee20b1ff6909e01d811736e67b41d35c4cf73e076df47be6f81c6dc072d799f9"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u16>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#5"
+kappa = "84b346cb61cf1224d3d2d93edaecb256b584b23115b522adbeae1cfff8daf683"
+embedded = "a560cb062779382ac0ad5a962b04534a7c658fcc3ef29560577f03be1bcdc419"
+status = "residue"
+cause = "mir::Ty: mem::BitElement<u32>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#6"
+kappa = "1e56580055a3143accef5bd580d0c1659a690c273d7dd3b477dd1c041c7cb170"
+embedded = "58136d8afc88a659ac71cf3fb532879140f731f8e6b96d98e814b9ded530dccb"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u32>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#7"
+kappa = "0c0226bc6a89b3acc95610ecd7ac11b900671cfe3293dcbbc0f32e4242b272ce"
+embedded = "52867b82a1ea5ced9de3954041f6ac09c947ce60dea27457250218174a171f1a"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u8>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#8"
+kappa = "aca039fec266be4ae061df246bd59d087c51aa9693c430d2579ac316beca9aa5"
+embedded = "8f200692c5df873ae78a63c7863296f9c9fda5976d40d1a12c8ed2f524cc7ad6"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u16>"
+
+[[fn]]
+path = "bitvec::mem::BitElement::new#9"
+kappa = "f85bb2d5d2f84cc560745e1bd4a8077df8a8534665788412f02d9e0bfa57051e"
+embedded = "3b0cdd41a5baf5d6572357bae4518246a6f8e9af70b5f3b3b86c1d7f192ecb76"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<u32>"
+
+[[fn]]
+path = "bitvec::mem::u64::ALL"
+kappa = "bc79194574d0c736797be64aa87a96ed09bd2aa119cac37e28220c1e12daf760"
+embedded = "4df75e1d4922697094c96978db24b843962bb9c99957c9fbfcc98c802345dbaf"
+status = "translated"
+digest = "3c19e8b61007b1b35378c73dcdaed35b35a0c304694d35adeb7daa7f11c2a5af"
+

@@ -1,0 +1,130 @@
+[[fn]]
+path = "bstr::char_to_hexdigit"
+kappa = "b9e165bc3826108e2de3e2902b9c73ce538aa7ddf321c9826c3ba71ee1aec6aa"
+embedded = "9ba09fb422fcaa2db019d11bfe4bd620b48640a2d38a31e430211145c75cf3b8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::to_digit"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:131:10: 131:15>::clone"
+kappa = "b5c2073ce0ec1f1ca611b96dd8f9526698919716f5f96a514e1bdd63c9f0642b"
+at = "I=u32"
+embedded = "e4d9f8896bf0ccc2a02571c2e2b5281da85d86a46685339852f041c5e633ae2b"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeBytes<u32>"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:131:17: 131:22>::fmt"
+kappa = "68c7a839d438ecd467ca751179294b9aae7041998e041beaf379a83dba1fba97"
+at = "I=u32"
+embedded = "fd05c81308a9225027fbdb2e8aaa9560d9e6043f7d0bbdb9e7843ed33eb3549f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:270:10: 270:15>::clone"
+kappa = "3d97dd493bf2e927861a356c673f617f677a1d4fc6211fd548acb20307ff236f"
+embedded = "616eb45e1e1c915f0a931b6a689bf15f826d012b8e685ae072b7efcfeb53fd74"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeState"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:270:17: 270:22>::fmt"
+kappa = "f250fa366ee562314f17cb6ab31cc4959d61199d3af78c43b78d6a328b6e83f5"
+embedded = "cd449699e909c1703d2372ca0c4d6e38b4678ae21e0a0832fac7bb32633222d2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:8:10: 8:15>::clone"
+kappa = "ee997ccea5575f24b4a609d69398c063f55bc70cce9e182dc5dba84f930bd726"
+embedded = "cd7f790d8219a7cc7d0021b706b579a08620236329acc74407743db078be0967"
+status = "residue"
+cause = "mir::Ty: escape_bytes::EscapeBytes<'_>"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:8:17: 8:22>::fmt"
+kappa = "7049e583c5ef65f6df253634fe7b2234d9d79980801e09612af441e8b43b4fb6"
+embedded = "acedd4c9ce156649429b2661ea8fbf86f2e2868189b7311001b0693e8cb5ed2f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:93:10: 93:15>::clone"
+kappa = "3bd550096ef693d83e7240d461fa5f6f2fe58b4253525119f78abe17a8ebe582"
+embedded = "804fce0ea5b020a888a3523b556bdfa469ab505001829a1af6f30b62044ae1da"
+status = "residue"
+cause = "mir::Ty: escape_bytes::EscapeState"
+
+[[fn]]
+path = "bstr::escape_bytes::<impl at src/escape_bytes.rs:93:17: 93:22>::fmt"
+kappa = "a72de27f31c8524ae15b5d3d8fcb9c79b904e46742cc2efbf7b19b308443329f"
+embedded = "c3a85b5fe6b47440d7bda76e75d09acab661267593beacb9eee9b979b9d4a1e3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::escape_bytes::EscapeBytes::fmt"
+kappa = "5aca44f34619cc8c532c90ecd56d3bf922d388a06cae26eef161f44a0d879db6"
+embedded = "69115025a1698f82d608cff15dd3448ebf7af089223927e330c8c5689646e0b9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::escape_bytes::EscapeBytes::new"
+kappa = "0179332f22b055a0f12e9d6e3533a4a3e7631c0cb64570692a4806c5eefc9f78"
+embedded = "d378d7c3a3a5fc662b527c1e1ce28a8df616634ec7b966131f0ebe0e23a1c65a"
+status = "residue"
+cause = "mir::Ty: escape_bytes::EscapeBytes<'_>"
+
+[[fn]]
+path = "bstr::escape_bytes::EscapeBytes::next"
+kappa = "f332ebfc10b09146a2139d03e0ee31f56cca83df7ac5290b8cfecaa86670f652"
+embedded = "12a0e6c3cab6b3e22b7e6882af3f4deaa39b4643275c0360a5a7d01968eaf326"
+status = "residue"
+cause = "mir::Ty: EscapeBytes<'_>"
+
+[[fn]]
+path = "bstr::escape_bytes::UnescapeBytes::new"
+kappa = "29637f5215dce641980c24808068f522c0daad0b5c866802dca8132ec2d8a652"
+at = "I=u32, T=u32"
+embedded = "f57f5ef4f8611522458eb5d132be0c87c9722b3429092b4ccb0f3c2d6ac234dc"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeBytes<u32>"
+
+[[fn]]
+path = "bstr::escape_bytes::UnescapeBytes::next"
+kappa = "81a7c09feaa7af91368d913c71b556881a98a4c638bc90387ad86c9c97dc2138"
+at = "I=u32"
+embedded = "a9f9bb6a5ed21e3c9c8f744ee0dcd0c1489da503edd5aeb2877269b63bed460e"
+status = "residue"
+cause = "mir::Ty: UnescapeBytes<u32>"
+
+[[fn]]
+path = "bstr::escape_bytes::UnescapeState::bytes"
+kappa = "9f0fec8a527626e0bbbb4f52d769639da67b1a4efcff441383aab6d6b211b123"
+embedded = "97230dca8a40e848c999552b3dfafbe545cb1daea8c3e66b2b09b98df98ac2c4"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeState"
+
+[[fn]]
+path = "bstr::escape_bytes::UnescapeState::bytes2"
+kappa = "48728c1626410e3ca76c6e4de3f1ca30db4d898f94e1d70a0c0e63f95628bd33"
+embedded = "48f5e69593a73b0347fd815a6fdcdd12d2ec1bab381fad0b261bfcacecac5d8d"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeState"
+
+[[fn]]
+path = "bstr::escape_bytes::UnescapeState::bytes_raw"
+kappa = "571ee74893c1835b08ec119c37568314846bc77836a06d600c80db26594b6f2d"
+embedded = "1bfcf6f37df38965655845821fcb3b3d884a9750bd4747690b3d707174ead966"
+status = "residue"
+cause = "mir::Ty: escape_bytes::UnescapeState"
+
+[[fn]]
+path = "bstr::hexdigit_to_char"
+kappa = "bc0266b07df635f236a94ba430ed1c7c25e423f678c8394c2b460dfcd15a1334"
+embedded = "b193e968b4afabe67e0975e88ed8875d7ba9de101b8158cb3d97af3940d62985"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::from_digit"
+

@@ -1,0 +1,158 @@
+# The serde_path_to_error register (written by `uorust crate serde_path_to_error@0.1.20`; do not edit): every body of
+# serde_path_to_error's MIR at serde_path_to_error 0.1.20, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 260
+translated = 0
+residue = 260
+
+[module.crate]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.de]
+bodies = 138
+translated = 0
+residue = 138
+
+[module.path]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.ser]
+bodies = 91
+translated = 0
+residue = 91
+
+[module.wrap]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 260
+embedded = 260
+evaluable = 260
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: de::CaptureKey<'_"
+bodies = 61
+
+[[cause]]
+cause = "mir::Ty: ser::CaptureKey<'_"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: Wrap<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: de::Deserializer<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<'_"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: WrapSeq<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Error<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: path::Path"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ser::WrapSeq<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WrapVariant<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::MapAccess<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WrapMap<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::SeqAccess<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: path::Segment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: wrap::Wrap<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Chain<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Segments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::Segments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::WrapMap<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wrap::WrapVariant<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Segment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Track"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrackedSeed<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrackedValue<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::TrackedSeed<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::TrackedValue<'_"
+bodies = 1

@@ -1,0 +1,235 @@
+# The base64ct register (written by `uorust crate base64ct@1.8.3`; do not edit): every body of
+# base64ct's MIR at base64ct 1.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 182
+translated = 2
+residue = 180
+
+[module.alphabet]
+bodies = 95
+translated = 0
+residue = 95
+
+[module.decoder]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.encoder]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.encoding]
+bodies = 10
+translated = 2
+residue = 8
+
+[module.errors]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.line_ending]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 182
+embedded = 182
+evaluable = 182
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: alphabet::EncodeStep"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: alphabet::DecodeStep"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: LineEnding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Base64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64Bcrypt"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64Crypt"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64Pbkdf2"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64ShaCrypt"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64Unpadded"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64Url"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Base64UrlUnpadded"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: decoder::Line<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoder::BlockBuffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Line<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::BlockBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::Decoder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::LineReader<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidEncodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidLengthError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::bcrypt::Base64Bcrypt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::crypt::Base64Crypt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::pbkdf2::Base64Pbkdf2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::shacrypt::Base64ShaCrypt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::standard::Base64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::standard::Base64Unpadded"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::url::Base64Url"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alphabet::url::Base64UrlUnpadded"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::Encoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: errors::InvalidEncodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: errors::InvalidLengthError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: line_ending::LineEnding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::BASE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::DECODER"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as alphabet::Alphabet>::PADDED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item encoding::PAD"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as Alphabet>::decode_6bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as Alphabet>::encode_6bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alphabet::Alphabet::decode_6bits: base64ct's MIR stops at mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::DECODER"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alphabet::Alphabet::encode_6bits: base64ct's MIR stops at mir::Operand::Constant: the constant item <Self as alphabet::Alphabet>::BASE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LineReader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::LineWrapper"
+bodies = 1

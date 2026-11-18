@@ -1,0 +1,665 @@
+# The fancy-regex register (written by `uorust crate fancy-regex@0.20.2`; do not edit): every body of
+# fancy-regex's MIR at fancy-regex 0.20.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 614
+translated = 32
+residue = 582
+
+[module.analyze]
+bodies = 23
+translated = 1
+residue = 22
+
+[module.byte_set]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.bytes]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.compile]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.crate]
+bodies = 200
+translated = 10
+residue = 190
+
+[module.error]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.expand]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.input]
+bodies = 57
+translated = 9
+residue = 48
+
+[module.optimize]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.parse]
+bodies = 49
+translated = 0
+residue = 49
+
+[module.parse_flags]
+bodies = 8
+translated = 8
+residue = 0
+
+[module.regexset]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.replacer]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.seek]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.to_hir]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.vm]
+bodies = 62
+translated = 4
+residue = 58
+
+[embedding]
+bodies = 614
+embedded = 614
+evaluable = 614
+blocked = 0
+
+[differential]
+bodies = 5
+theorems = 35
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 76
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 71
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: Captures<'_"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: vm::State"
+bodies = 12
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Input"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ByteSet"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Info<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Match<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: input::RegexInput<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: byte_set::ByteSet"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: regexset::RegexSetOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: byte_set::Start"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: MatchBytes<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: VMBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: regexset::RegexSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CaptureGroupRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExprChildrenIterMut<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: QuantifierKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RegexSetMatch<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bytes::MatchBytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: compile::DelegateUsage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: optimize::QuantifierKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::ExprTree"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::Parser<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: regexset::BYTES_PER_MIB: mir::BinOp::Shl: on Nat and i32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item N"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Analyzer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Assertion"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BytesMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CaptureMatches<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CaseiLiteral"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CharClassMatcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Expander"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExprTree"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Matches<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Regex"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RegexOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: regex_syntax::hir::Hir"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vm::CaseiLiteral"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vm::CharClassMatcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vm::Prog"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: RegexOptionsBuilder::new: fancy-regex's MIR stops at type outside the lift: RegexOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::ascii::is_ascii"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::is_ascii"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::is_char_boundary"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: prev_codepoint_ix: fancy-regex's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CaptureNames<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CapturesImpl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Expr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExprChildrenIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HirCtx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RegexInput<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RegexSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Resolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SplitN<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubCaptureMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: analyze::AnalyzeContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: analyze::Info<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bit_set::BitSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compile::CompileOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compile::Compiler<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compile::DelegateBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expand::Expander"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: optimize::OptimizeOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex_automata::meta::Regex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regex_automata::util::syntax::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: regexset::RegexSetMatch<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: seek::SeekOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Bytes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: to_hir::HirCtx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vm::CaptureGroupRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vm::Delegate"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::case_insensitive::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::crlf::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::dot_matches_new_line::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::ignore_whitespace::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::multi_line::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::unicode_mode::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:698:1: 698:25>::verbose_mode::{closure#0}: type outside the lift: regex_automata::util::syntax::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: range_contains::{closure#0}: mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: remap_unicode_property_if_necessary::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a usize literal"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::and_then"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::encode_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_alphanumeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parse::make_literal_case_insensitive: fancy-regex's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: push_usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: push_usize: fancy-regex's MIR stops at mir::TerminatorKind::Call: push_usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Absent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AstNode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BacktrackingControlVerb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CaptureGroupTarget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DelegateBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LookAround"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoExpand<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParsedId<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RegexSetMatchesAt<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReplacerRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: analyze::SubroutineCallInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compile::VMBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::CompileError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::RuntimeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::ParsedId<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_automata::Input<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_automata::meta::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_automata::meta::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_syntax::hir::ClassUnicode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_syntax::hir::ClassUnicodeRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regexset::RegexSetMatchesAt<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: replacer::NoExpand<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: replacer::ReplacerRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FromFn<{closure@src/byte_set.rs:70:25: 70:32}>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vm::Insn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vm::Scratch"
+bodies = 1

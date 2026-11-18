@@ -1,0 +1,72 @@
+[[fn]]
+path = "tap::Pipe::pipe"
+kappa = "213a47e17baa48e7d7e79f459b49527e0301461ebd946aa5f28a4a55ade2ba83"
+at = "R=u32, Self=u32"
+embedded = "040afe216273a045b60234ee74af3ace0cbbd09ec5f40111284f37e7d8d2d619"
+status = "translated"
+digest = "78d58866ac0b6552cbd194b1852034f3c70e691de190f52c35bbefa38239c1f5"
+
+[[fn]]
+path = "tap::Pipe::pipe_as_mut"
+kappa = "54686d223327b9423f4365a4c87b379fd66856653b3a31175035bb841c6b7e9e"
+at = "R=u32, Self=u32, U=u32"
+embedded = "3ff82a9832f3147d3b504074699891b80d6d9d2a12158591d52dd05e72427c42"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsMut, which u32 does not implement in core"
+
+[[fn]]
+path = "tap::Pipe::pipe_as_ref"
+kappa = "ff38cde96eea4839b8bbc90443490514e225f1b7848a6fdf0d6c0de4d2fad319"
+at = "R=u32, Self=u32, U=u32"
+embedded = "ebee8a1a0ecdfc8118dce907e46a900923575a390fedf76f65e7a1f4b5b2c2bc"
+status = "translated"
+digest = "19a5d4a5df1b52de0433b4a7f01f5e530df19f873961cfdf55913be13d65458a"
+
+[[fn]]
+path = "tap::Pipe::pipe_borrow"
+kappa = "7041d85316ae96921aa051191968802ecb417bcadf880accf89083b499d5f7d2"
+at = "B=u32, R=u32, Self=u32"
+embedded = "4d84d50864733c19e139be19cbe7a2bfbbe1eba53197ffd8b572554cbd3312b5"
+status = "translated"
+digest = "04e78800cdb78ee7cf93d13513c75549f167efcbd85c0a47d97432f6af0c6c19"
+
+[[fn]]
+path = "tap::Pipe::pipe_borrow_mut"
+kappa = "5729892db562ccc69f49699a74f0274e1f2cd801e16066393efa598c9e858b2c"
+at = "B=u32, R=u32, Self=u32"
+embedded = "d063e5bf995149b127ffb6a5277b09e0239388526ce7c2613ddf167d071b7dd3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BorrowMut, which u32 does not implement in core"
+
+[[fn]]
+path = "tap::Pipe::pipe_deref"
+kappa = "02628008a116aa3f1238d136f354825c2db2681d9a66ac790397ee73c0af9b75"
+at = "R=u32, Self=u32, T=u32"
+embedded = "c6a524d7b708783a19ee3f0875c9c013da79b4266dd8533696b5daa016732397"
+status = "translated"
+digest = "86a9f04d96c94c5ff4fdc5f6c42b3941a1ee046baa6f37623e18b66e3c53ea63"
+
+[[fn]]
+path = "tap::Pipe::pipe_deref_mut"
+kappa = "b9474daf8b142d39654e93cec895d96a489bc7f1a68932286a162f2e5e2fe0a6"
+at = "R=u32, Self=u32, T=u32"
+embedded = "67dcbd6427da2e4348fe704175b577164230ebaf0482a4f198dfa10fefb35f14"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut, which u32 does not implement in core"
+
+[[fn]]
+path = "tap::Pipe::pipe_ref"
+kappa = "7029e0d58b6ff1f98b5b3ec30a1ce2b5b9e685a1eb300da018f0b2d746431f5c"
+at = "R=u32, Self=u32"
+embedded = "ef23ca5aa8539e305b8cfbba9fdbe67cea65047dde8952f5b9d3fb391f9466f7"
+status = "translated"
+digest = "466deff3590fa25ffcb1f9d4d8629a2434eefb7574db07ccf3c342f63000d690"
+
+[[fn]]
+path = "tap::Pipe::pipe_ref_mut"
+kappa = "a4362f4f4f4ec3f328526c19c5114e79438767cc8ef06639ccef00c54e933351"
+at = "R=u32, Self=u32"
+embedded = "e76f014e44086b4bca91b18ab2da02cef45371f29b92c17213a4df465f0a38fd"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <impl FnOnce(&'a mut u32) -> u32 as FnOnce>::call_once, which has no backward function"
+

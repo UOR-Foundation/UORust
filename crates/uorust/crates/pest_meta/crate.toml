@@ -1,0 +1,15 @@
+[[fn]]
+path = "pest_meta::parse_and_optimize"
+kappa = "ac51aa9dd8a162c9cbf90f7cf056a30f2e695969a88bc1c33cd642a62325540d"
+embedded = "971dced2daa95168cc2a76103e8af288273ba849977367dc9a4ad0a2fbbef632"
+status = "residue"
+cause = "mir::Ty: optimizer::OptimizedRule"
+
+[[fn]]
+path = "pest_meta::unwrap_or_report"
+kappa = "06ca883d8ed1a59f25147edbc6deb1c3c537adc15d3800959763d0c5f603934a"
+at = "E=u32, T=u32"
+embedded = "d42b5e9fbfe7fe5a45b3c35ff6159158b80a437e9f3d01129a9d6bbff7a0e108"
+status = "residue"
+cause = "mir::AggregateKind::Closure: unwrap_or_report::{closure#0}: mir::AggregateKind::Closure: unwrap_or_report::{closure#0}::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+

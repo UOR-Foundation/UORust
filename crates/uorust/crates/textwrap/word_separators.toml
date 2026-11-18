@@ -1,0 +1,70 @@
+[[fn]]
+path = "textwrap::LINE_SEGMENTER"
+kappa = "9ce70e063676aed02d2da958e914b07611f2cba41099021adfbfa0a071385c53"
+embedded = "6270e8caf0cd0cddaa44a401a343b4796d52843909f5ac5baa0e47551c563c4e"
+status = "residue"
+cause = "mir::Ty: icu_segmenter::LineSegmenterBorrowed<'_>"
+
+[[fn]]
+path = "textwrap::__rust_std_internal_init_fn"
+kappa = "36f1485911fcfbe628ac59d06650acadc0f380a0647438ac8d5a768b1cf4cea5"
+embedded = "e3a2e8d103753b7f78b1c24eab8c79306a50c78d01e6e5270be4550440b4c174"
+status = "residue"
+cause = "mir::Ty: icu_segmenter::LineSegmenterBorrowed<'_>"
+
+[[fn]]
+path = "textwrap::find_words_ascii_space"
+kappa = "5667e4a3db99b22769ba329a5f36e0052f5a45823851ca84e3034183c13de65c"
+embedded = "fbd023aabb28073ba25c48adbeec3d82412532e7ebc8933d6817a44c712bb799"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = core::Word<'_>>"
+
+[[fn]]
+path = "textwrap::find_words_unicode_break_properties"
+kappa = "dfb7ba0d607a65202e5d570aabe362f8a8c9ccbd55d00fcda4b37ef9f23e7640"
+embedded = "8882a1fb5a9270f4426a0af0966a9e37879bf190cca805cf8ee317e03dfbabe7"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = core::Word<'_>>"
+
+[[fn]]
+path = "textwrap::strip_ansi_escape_sequences"
+kappa = "d63da3c38c6b7b660938cb2eba0812bbadfe93a1496d56ce23da99744e4c2084"
+embedded = "25541fac217c7f9a23c05dba964bddd0be9ddf48205ef85020c03a571b46d6e5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+
+[[fn]]
+path = "textwrap::word_separators::<impl at src/word_separators.rs:63:10: 63:15>::fmt"
+kappa = "9eb6beae8e3986fa8ac01aa9d47d80e0187409fdb055f8d43fa0f4bf1830f1d0"
+embedded = "695631736fb0ece4971576b7ec95a26c770fdc0efd40ee844aa99a01afa3a99e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "textwrap::word_separators::<impl at src/word_separators.rs:63:17: 63:22>::clone"
+kappa = "c504b82f9b76c9b6a22ef51fea93a913f46b4fea97311dcee391294483ee3ddd"
+embedded = "16f8164a761e1716cd6adeafd900139493be7428620e0d0dc5a11cf983a5ea67"
+status = "residue"
+cause = "mir::Ty: word_separators::WordSeparator"
+
+[[fn]]
+path = "textwrap::word_separators::WordSeparator::eq"
+kappa = "e79cdd420a253b2b24283b58710057a900ce22a9952a459109960976af143e66"
+embedded = "24b5e7ca1ce930da1cbd9d5252ab3a91a2b03be21d5faadc3907e8705ee396c6"
+status = "residue"
+cause = "mir::Ty: WordSeparator"
+
+[[fn]]
+path = "textwrap::word_separators::WordSeparator::find_words"
+kappa = "225d9737e89cb4db08b3a058f095a6a96c13361cb8b2ec59a5f51ea7f618b19f"
+embedded = "0c79c17745b04a1727c8cc7f717dc72a5d8bd02afbdbf35128ccd4fbff482492"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = core::Word<'_>>"
+
+[[fn]]
+path = "textwrap::word_separators::WordSeparator::new"
+kappa = "a85d2f6e7db31c444e85051a73db653497b0853a9ede9c451abeefff9db00e0e"
+embedded = "bce3eb64b0eadc0491c7a4b931f1bc4c6ed93b0892efda024419a245a07efe8a"
+status = "residue"
+cause = "mir::Ty: word_separators::WordSeparator"
+

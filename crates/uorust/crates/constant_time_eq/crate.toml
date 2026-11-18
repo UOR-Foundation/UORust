@@ -1,0 +1,44 @@
+[[fn]]
+path = "constant_time_eq::constant_time_eq"
+kappa = "b9b161150fe70f213963f9ae7ad38717b54fad42ff24fbfc145c9592559c0282"
+embedded = "15753a901741bcbbfbb69871262ef2f95846b938a45e8149d13147d16f61f0d8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sse2::constant_time_eq: constant_time_eq's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_16"
+kappa = "f0ed53d9dce96dfa4a6c48ae95080e8f2f8e3a7ef8f06d2b8422844c42ccbd22"
+embedded = "f211411c2291ba8b347c4812d860133e2191fbecdc37f211a4003fcf1fa72c74"
+status = "residue"
+cause = "mir::TerminatorKind::Call: constant_time_eq_n: constant_time_eq's MIR stops at mir::TerminatorKind::Call: sse2::constant_time_eq_n: constant_time_eq's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_32"
+kappa = "9a449c958c4ab89d7dabc339eb4fac14c1c8c4df45d695a4dd4f8cc283984a18"
+embedded = "9bf1ede6acf463e9c38b7507e0c6ff01c53e07539e6877994ef334fcf8abe42e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: constant_time_eq_n: constant_time_eq's MIR stops at mir::TerminatorKind::Call: sse2::constant_time_eq_n: constant_time_eq's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_64"
+kappa = "23b43bdc0f8e844835b1354095f5129654912a51733bf103b09560ffe6f7cc8e"
+embedded = "9c5bf5234cd0959d54d01fa848c9172fa0054f2f4ae9a2fe250f6b8914be29fd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: constant_time_eq_n: constant_time_eq's MIR stops at mir::TerminatorKind::Call: sse2::constant_time_eq_n: constant_time_eq's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_n"
+kappa = "1104370975e419e52a1a515407b9d9e9f4a5d19d7b6707ab3023c16259242ba0"
+at = "N=#_N"
+embedded = "019c655f37137e0fae85dbe04fb29d2a9443959d13545edb8ead6ca26d608c5f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sse2::constant_time_eq_n: constant_time_eq's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+
+[[fn]]
+path = "constant_time_eq::with_dit"
+kappa = "cfcd9d29a6f295dc68b859c0725edfafad5ffa0752013ae18986a23814dbbb4e"
+at = "F=u32, T=u32"
+embedded = "8a2f3eccd7d0963d86daa44bc6f34ea0e71341ed65a928b434b4fad6a75e9ac4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+

@@ -1,0 +1,791 @@
+# The aws-lc-sys register (written by `uorust crate aws-lc-sys@0.47.0`; do not edit): every body of
+# aws-lc-sys's MIR at aws-lc-sys 0.47.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 621
+translated = 6
+residue = 615
+
+[module.crate]
+bodies = 6
+translated = 4
+residue = 2
+
+[module.x86_64_unknown_linux_gnu_crypto]
+bodies = 615
+translated = 2
+residue = 613
+
+[embedding]
+bodies = 621
+embedded = 621
+evaluable = 621
+blocked = 0
+
+[differential]
+bodies = 3
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 214
+
+[[cause]]
+cause = "mir::Ty: __BindgenBitfieldUnit<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: cbb_buffer_st"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: cbb_child_st"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: static_assertion_at_line_224_error_is_pointer_size_must_be_8_bytes_for_64_bit"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::intrinsics::transmute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: point_conversion_form_t"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::__BindgenBitfieldUnit<[u8; 1]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::__BindgenBitfieldUnit<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item BIT_WIDTH"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ACCESS_DESCRIPTION_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_ADB_TABLE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_ADB_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_AUX_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_EXTERN_FUNCS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_ITEM_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ASN1_TEMPLATE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AUTHORITY_KEYID_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BASIC_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CRYPTO_dynlock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CRYPTO_dynlock_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DES_cblock_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DES_ks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DIST_POINT_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DSA_SIG_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EC_builtin_curve"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EDIPartyName_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GENERAL_SUBTREE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HRSS_private_key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HRSS_public_key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ISSUING_DIST_POINT_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NAME_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NOTICEREF_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Netscape_spkac_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Netscape_spki_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: POLICYINFO_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: POLICY_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: POLICY_MAPPING_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RIPEMD160state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: USERNOTICE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: X509_algor_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: X509_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: _IO_FILE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __BindgenBitfieldUnit<[u8; N]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __va_list_tag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: asn1_string_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bf_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bignum_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bio_method_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bio_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: blake2b_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bn_mont_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buf_mem_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cbs_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: conf_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: conf_value_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto_ex_data_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ecdsa_sig_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env_md_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: evp_cipher_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: evp_cipher_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: evp_encode_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: evp_hpke_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: md4_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: md5_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: obj_name_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: otherName_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_envelope_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_issuer_and_serial_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_recip_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_sign_envelope_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_signed_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pkcs7_signer_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rand_meth_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rc4_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rsa_pss_params_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sha256_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sha512_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sha_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trust_token_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: v3_ext_ctx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: v3_ext_method"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x509_purpose_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x509_trust_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ACCESS_DESCRIPTION_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_ADB_TABLE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_ADB_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_AUX_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_EXTERN_FUNCS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_ITEM_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ASN1_TEMPLATE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::AUTHORITY_KEYID_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::BASIC_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::CRYPTO_dynlock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::CRYPTO_dynlock_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DES_cblock_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DES_ks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DIST_POINT_NAME_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DIST_POINT_NAME_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DIST_POINT_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::DSA_SIG_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::EC_builtin_curve"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::EDIPartyName_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::GENERAL_NAME_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::GENERAL_NAME_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::GENERAL_SUBTREE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::HRSS_private_key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::HRSS_public_key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ISSUING_DIST_POINT_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::NAME_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::NOTICEREF_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::Netscape_spkac_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::Netscape_spki_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::POLICYINFO_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::POLICYQUALINFO_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::POLICYQUALINFO_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::POLICY_CONSTRAINTS_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::POLICY_MAPPING_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::RIPEMD160state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::USERNOTICE_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::X509_algor_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::X509_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::_IO_FILE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::__va_list_tag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::aes_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::asn1_string_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::asn1_type_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::asn1_type_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bf_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bignum_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bio_method_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bio_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::blake2b_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bn_gencb_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bn_gencb_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::bn_mont_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::buf_mem_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::cbb_buffer_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::cbb_child_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::cbb_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::cbb_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::cbs_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::conf_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::conf_value_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::crypto_ex_data_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::crypto_mutex_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::ecdsa_sig_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::env_md_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_aead_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_aead_ctx_st_state"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_cipher_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_cipher_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_encode_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_hpke_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::evp_hpke_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::hmac_ctx_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::md4_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::md5_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::md_ctx_union"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::obj_name_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::otherName_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_envelope_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_issuer_and_serial_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_recip_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_sign_envelope_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_signed_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_signer_info_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::pkcs7_st__bindgen_ty_1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::private_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::rand_meth_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::rc4_key_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::rsa_pss_params_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::sha256_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::sha512_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::sha_state_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::static_assertion_at_line_224_error_is_pointer_size_must_be_8_bytes_for_64_bit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::tm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::trust_token_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::v3_ext_ctx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::v3_ext_method"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::x509_purpose_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::x509_trust_st"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: x86_64_unknown_linux_gnu_crypto::CRYPTO_library_init"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Storage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: x86_64_unknown_linux_gnu_crypto::point_conversion_form_t"
+bodies = 1

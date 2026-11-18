@@ -1,0 +1,127 @@
+# The ed25519-dalek register (written by `uorust crate ed25519-dalek@3.0.0`; do not edit): every body of
+# ed25519-dalek's MIR at ed25519-dalek 3.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 79
+translated = 0
+residue = 79
+
+[module.constants]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.errors]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.hazmat]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.signature]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.signing]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.verifying]
+bodies = 26
+translated = 0
+residue = 26
+
+[embedding]
+bodies = 79
+embedded = 79
+evaluable = 79
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: verifying::VerifyingKey"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ed25519::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ed25519::Signature"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SigningKey"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: signing::SigningKey"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: errors::InternalError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hazmat::ExpandedSecretKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: signature::InternalSignature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExpandedSecretKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InternalSignature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: curve25519_dalek::EdwardsPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: curve25519_dalek::Scalar"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: curve25519_dalek::edwards::CompressedEdwardsY"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: subtle::Choice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item constants::EXPANDED_SECRET_KEY_KEY_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item constants::SECRET_KEY_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RCompute<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_dalek::MontgomeryPoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verifying::RCompute<u32>"
+bodies = 1

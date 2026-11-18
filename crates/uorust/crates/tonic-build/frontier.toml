@@ -1,0 +1,114 @@
+# The tonic-build register (written by `uorust crate tonic-build@0.14.9`; do not edit): every body of
+# tonic-build's MIR at tonic-build 0.14.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 92
+translated = 0
+residue = 92
+
+[module.client]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.code_gen]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.manual]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.server]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 92
+embedded = 92
+evaluable = 92
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: manual::MethodBuilder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: code_gen::CodeGenBuilder"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: manual::Method"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: manual::Builder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: manual::ServiceBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: manual::Service"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Attributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: format_service_name: tonic-build's MIR stops at mir::Instantiation: u32 for a parameter bounded by Service"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ServiceGenerator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as std::default::Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1

@@ -1,0 +1,73 @@
+[[fn]]
+path = "portable-atomic::assert_compare_exchange_ordering"
+kappa = "c407e706f58303e535b375880aaad1188dcdc83b22925517d07299718ba84feb"
+embedded = "a82425af4cb405e20ad1e7791af230344ddf010a70178533ccf68228d5335ed8"
+status = "translated"
+digest = "03276e0b9ec74e84ca950c97599484228c3618068018a3727bbbfec0cc4777e3"
+
+[[fn]]
+path = "portable-atomic::assert_load_ordering"
+kappa = "135d35295cd9215ecfa9fc4ec5c199a32af416849b7c500fb4c2b6ea1764a5f1"
+embedded = "03d7dbd7ed4b56db599dda27709678d654f2b393be806eebb8c43ed76ef47f97"
+status = "translated"
+digest = "c7457e1f9aee35350adb4d94f30c5195ba4f1a7d367cac10c9b458bbf73b0a4f"
+
+[[fn]]
+path = "portable-atomic::assert_store_ordering"
+kappa = "1d6945578b20038457861a557f189bd98910f3c3ad30224c58f8c53dd6928344"
+embedded = "3ce42f21cdadd7854d5d9248efadf5e2d79f2b002977578a3fca0235d8951a1a"
+status = "translated"
+digest = "9503bca29ab891cb1c2ae6927fc0767a73e59ce86dc1f07e6643b709f4c1d614"
+
+[[fn]]
+path = "portable-atomic::upgrade_success_ordering"
+kappa = "421151e28d446aface64913d6bf59d38e8e064d78f4d35d3328eceda0cc25936"
+embedded = "2c088eda4226ff836023fd7c68a7e5484ef412494a0ac600cd3e34b66087984b"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Acquire"
+
+[[fn]]
+path = "portable-atomic::utils::<impl at src/utils.rs:485:10: 485:15>::clone"
+kappa = "3bdf00117dc008739d983e42f7e7802cb19b14126d924eba9cf8fabcc120f23e"
+embedded = "1ade8f8783cb243345ed86d356e0d61834730e5764e845fc38d5afddf4ff1b8e"
+status = "residue"
+cause = "mir::Ty: utils::U128"
+
+[[fn]]
+path = "portable-atomic::utils::<impl at src/utils.rs:504:10: 504:15>::clone"
+kappa = "065ed3f9dda6feadc84c37875b9b081260582c9c994af4a4376841cb1b9b7b07"
+at = "T=u32"
+embedded = "e11e241d54c5234674d6ec6ee9420dd35c0ab7678a14e8584f823706bfa75973"
+status = "residue"
+cause = "mir::Ty: utils::Pair<u32>"
+
+[[fn]]
+path = "portable-atomic::utils::assert_unchecked"
+kappa = "2672619234964b94b5b5476da65540b849f7e875acc93e76acef316a374b73f2"
+embedded = "250bf860513c7e635baa7388ac0e6bea728356369dd94d748d6128ad90f0e94d"
+status = "translated"
+digest = "04cf5e25a6d75c7344f778eea58134d4c137c4451542364859aa0470da080116"
+
+[[fn]]
+path = "portable-atomic::utils::cold_path"
+kappa = "5cef9325044dfaa5aebb78f7e96124564caf1fa2a6818054c5f6ce43da482c18"
+embedded = "67160f38c006e365b552738873040f3fe31f47ab429f57123a7a3de723e7e634"
+status = "translated"
+digest = "1069b775b217bae25b92705600aa7d8e57f286de59dab7ed7a6f83e597c45a9d"
+
+[[fn]]
+path = "portable-atomic::utils::likely"
+kappa = "27ece7cfc08c0acb096221c5951a3a2c7c25e00e42edcc4849384e21cc20e1cb"
+differential = 2
+embedded = "1cdb0620a7a9f1354752dbb7aed9392132863ea0f43e0816174dba99955cfe0f"
+status = "translated"
+digest = "b8c9a8dcd21ed34daa5f741f0800fd90b42dae6b2ed6a3a1fe35451834400686"
+
+[[fn]]
+path = "portable-atomic::utils::unlikely"
+kappa = "9308e14a395c3fe3ff5317d0511f5591260a26fe74719588f4704f17d859e390"
+differential = 2
+embedded = "a0ad5f9a8fec4066a1f3c8d9c52a042ba34206fa56070fc3f6c60b34554a8797"
+status = "translated"
+digest = "a71be9e1f3b59a919a9bba8ab40368d6de5c9560f953a1baa75e50e80599e8c8"
+

@@ -1,0 +1,264 @@
+# The arc-swap register (written by `uorust crate arc-swap@1.9.5`; do not edit): every body of
+# arc-swap's MIR at arc-swap 1.9.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 151
+translated = 2
+residue = 149
+
+[module.access]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.as_raw]
+bodies = 5
+translated = 2
+residue = 3
+
+[module.cache]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.crate]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.debt]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.ref_cnt]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.strategy]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 151
+embedded = 151
+evaluable = 151
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ArcSwapAny<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Guard<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: debt::Debt"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: strategy::hybrid::HybridProtection<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ConstantDeref<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: access::DynGuard<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Constant<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HybridProtection<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: helping::Slots"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RefCnt"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Cache<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Debt"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LocalNode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cache::Cache<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::is_null"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Guard<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Node"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: access::ConstantDeref<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: access::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: access::MapGuard<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cache::MapCache<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: debt::list::LocalNode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: debt::list::Node"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: strategy::hybrid::DefaultConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: strategy::hybrid::HybridStrategy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: debt::pay_all::{closure#0}: type outside the lift: LocalNode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRaw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as ref_cnt::RefCnt>::TAG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as ref_cnt::RefCnt>::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as ref_cnt::RefCnt>::into_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc34: &Atomic<*mut Node>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: access::load: arc-swap's MIR stops at type outside the lift: <A as access::Access<T>>::Guard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DynGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HybridStrategy<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapCache<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapGuard<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeReservation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: access::Constant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::fast::Local"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::fast::Slots"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::helping::Handover"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::helping::Local"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::helping::Slots"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: debt::list::NodeReservation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

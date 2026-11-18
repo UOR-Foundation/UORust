@@ -1,0 +1,353 @@
+[[fn]]
+path = "bstr::ByteVec::as_bstring"
+kappa = "90f59dca1e1df2802a78adcbbeafc3ba8f8e8900b0b9d510ab63fccf080e3d34"
+at = "Self=u32"
+embedded = "7e9153c9bc12d0a0339df407bb92cc96160311d1a088b9f0230e2788b53547e2"
+status = "residue"
+cause = "mir::Ty: bstring::BString"
+
+[[fn]]
+path = "bstr::ByteVec::as_bstring_mut"
+kappa = "cd820cfb5e1dc86321aba38a45f3dd19298e09802c0ad9839e4a1156652150c2"
+at = "Self=u32"
+embedded = "5e7f499a932a5cc71a1815a34de0f44f963506b136709d230de2943da6347f97"
+status = "residue"
+cause = "mir::Ty: bstring::BString"
+
+[[fn]]
+path = "bstr::ByteVec::drain_bytes"
+kappa = "31b9a160aa460fdf03031a4350b879aa9b477006d6796541cf13c3964a89d92d"
+at = "R=u32, Self=u32"
+embedded = "f288f395aae755109cdff96c5cf38659380daca2573ecf908c39bc95a33d788c"
+status = "residue"
+cause = "mir::Ty: ext_vec::DrainBytes<'_>"
+
+[[fn]]
+path = "bstr::ByteVec::from_os_str_lossy"
+kappa = "b51dd61e1d29780301a9f9e17ceb713ea79f521e3c1ba3634334e73d741d8c40"
+embedded = "458dd6436e59172d36aed65eda8354a3896744b108d45ab19e5193078e6e40ee"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "bstr::ByteVec::from_os_str_lossy::imp"
+kappa = "deb7c7a0761bfab6f045d0740953c72d2b46a2b39de9ee9b62a6fb394d7766d8"
+embedded = "f85f8735b4db82d9bd43a5c5b0c994db134cdd1a86c3f5bc1606e6e81af855da"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "bstr::ByteVec::from_os_string"
+kappa = "aa81f7fdd8da59989fee38385c7f95456ac16b602fc3546b2fbd8439c6f1f40d"
+embedded = "4952075cde90e038b59361151c2b90b62fa71278d4ae2ff1e25340fc3e72d207"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::from_os_string::imp"
+kappa = "ece61ab45f526139bd3dec85da1d258eddc674a989e44fbfcd1aa2f560b28cc7"
+embedded = "6dc925abafbe5629b3e024b602a36f41dabc7313d7531ce8e808eb6cc330b049"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::from_path_buf"
+kappa = "d5173070b2d08517d7dc3a91f2e82da4e069fa1f627e426e7c3c4bcc45b3d2a3"
+embedded = "c00103698825abc9b74c88590b0605f8c5fdfd7b1d01f6c7afc83aa467fa5577"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "bstr::ByteVec::from_path_lossy"
+kappa = "1a510e0be3b4eaf2cfe28a73e739bc230928666673dae5eed2bf42c410fcb9e2"
+embedded = "2d8a9eb2fceb2c8cb858432cddbbd1349e75ba39216388fef36b0101c52599f0"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "bstr::ByteVec::from_slice"
+kappa = "d7f9c584587aac0455f12ce319182ab2da3b8e9b1c411eed803f9f1f4ef90da5"
+at = "B=u32"
+embedded = "850cc1676cc11e84529629f7b4b7a115db42d1ddcabe0fb13e7a3eec6dc1c085"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::insert_char"
+kappa = "1b3377fc2c3e34f4b5a638ed9dbc2decdab23538e64cdab6e25702bee4ee2015"
+at = "Self=u32"
+embedded = "508834a1b91373d5cad63d167d04242b0bdca81f558c56b4dd1601d82ba97fad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::encode_utf8"
+
+[[fn]]
+path = "bstr::ByteVec::insert_str"
+kappa = "72193a6a2ce66044457d7d37fc2c506634f493ff1085e186509271d2022c0f53"
+at = "B=u32, Self=u32"
+embedded = "720832cb4a635f3026e9782afaaa1d1a2f475763b82cd173194c819eedbc405c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::into_os_string"
+kappa = "5753e8e6d6c261d46b1ec2fccef457199d42074ea03e2f0e035d26f45df0199c"
+at = "Self=u32"
+embedded = "6bde81d28d8dacf6eba217017790364bdad386ae5a2f7375bd4ed5ca795f0315"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::into_os_string::imp"
+kappa = "8e619d8579cb79afa53d4e0ccdcd3ffbca800f302c8da7d9b191c5eac1c28379"
+embedded = "7eace015d5be237db8962600469a9ea12c47cd3ddfb8b2bdb3a8d21877b2b4f2"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::into_os_string_lossy"
+kappa = "6ded69a15a85cc9df1d15d4a2212b8952c48b41e2e18b544de141601632ea59a"
+at = "Self=u32"
+embedded = "c469a4a10d90139a3f6ae9122283d91b687a2d91057a1465c07f50d67586aaea"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::into_os_string_lossy::imp"
+kappa = "bbf7dc8bffb2923d9f322a90b7d45410d4efff18d83d70544873e8ccd162ec69"
+embedded = "63a05162812740293ce307622b28721ebe4bbaf3ac9f22b6995b74f59d04c60d"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsString"
+
+[[fn]]
+path = "bstr::ByteVec::into_path_buf"
+kappa = "1de249bb597fca66dc7fa71223521782318e1a6910b2a531406b7111e0ec6494"
+at = "Self=u32"
+embedded = "d066766b4bd39103fe1d053f0e07f778094f1e7359f2dcbba8d069e38ee27fb8"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "bstr::ByteVec::into_path_buf_lossy"
+kappa = "da66a099ca3ce7d14c8f509cd16e76f5a0338cb0c1e9c74c4fd5b6456ff9ee94"
+at = "Self=u32"
+embedded = "f719062f42464fe5a88eeb2aff6c67c87e01d9113a858b96d2c0924a6ce3e7d6"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "bstr::ByteVec::into_string"
+kappa = "06ee305c94dcbc3d7c261f233271f3d050eff1a79ba3255a7a1ec69d752d60b0"
+at = "Self=u32"
+embedded = "2c717cef6a668e1938f0a50cc5a88648980cdd20e657fc001f6788ecd878fcfb"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ByteVec::into_string_lossy"
+kappa = "e77b14563a778609cfc122441375ba11fa7720551a4f24c56667e779148d699a"
+at = "Self=u32"
+embedded = "26721ddd036e59b851c57001eabf5a1bc4a7270ae99276eaae4fdade9abb700d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::into_string_unchecked"
+kappa = "31748cfe64709e6e36767512af23260f9b4d29ed57237616ff86860f46134c26"
+at = "Self=u32"
+embedded = "86c6f32ab05fa6d460030cd177ee2e73b6a974026f674f6eb974df01235d8d64"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::pop_byte"
+kappa = "c30c616f2e756f0c913d9aa86110c85acf0637847cf3dd85e0388de806e6edad"
+at = "Self=u32"
+embedded = "9a70060eeb8edca24b21b394771650400f29afa6e7016c0c1b9e76b2bc82aa15"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::pop_char"
+kappa = "0c4e6e69010820c50424069e51eb04613c916cd410ca22b9585f0f462721e365"
+at = "Self=u32"
+embedded = "166210af6793ed6a066df086cc0bcd24cc4f2d2c93c9f6598b8f400e951e6719"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::push_byte"
+kappa = "740486ce7f6b2c97944f0266d6a01f6a320900b466f9b81ead8a69ef80aa331a"
+at = "Self=u32"
+embedded = "df34ab11942414c2a2431d99115c8930b495597b359ec7017b7f548d0cce6ce5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::push_char"
+kappa = "5952b06a73d2b5cddd8e154f8de2ccacb31b9b559463de6b810f7b643d44707f"
+at = "Self=u32"
+embedded = "70dbded141b0bc35d78ee994a67e39b4a11119dc445d9e459cb7bbf4cbb9ceb4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::len_utf8"
+
+[[fn]]
+path = "bstr::ByteVec::push_str"
+kappa = "e9892195b7179308f84459cde4d229780ca09a96c817c2beeb52cede11a87009"
+at = "B=u32, Self=u32"
+embedded = "6986d3937c2967471a44a8e748a54ce5557acb513174e47bd43ceeeffcfc7a96"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::remove_char"
+kappa = "d7058398821a42a4dcb0f5ee936d1409c4292b4fb0d1285a5f13b82d813c3e1a"
+at = "Self=u32"
+embedded = "38161c63f99eabc0c9c94cb6877a22da97b2eab43b156fa246a1d29c9b082161"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::replace_range"
+kappa = "a308e51189bf10b549aef5227440bac52ce34e1a50516a0295e65e0d1394ea29"
+at = "B=u32, R=u32, Self=u32"
+embedded = "6cd1812b287a3229905d569cc506363fcc86503a0907efee8ef568db992cd262"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteVec, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteVec::to_bstring"
+kappa = "8658648f3553c94706add054670ad7a83e7a43e381457a6ce31244bef4931958"
+at = "Self=u32"
+embedded = "52d00042614d501cc355d852b5bb877a3af9dc3b7629896dfc183a90deb4a5d3"
+status = "residue"
+cause = "mir::Ty: bstring::BString"
+
+[[fn]]
+path = "bstr::ByteVec::unescape_bytes"
+kappa = "a489b674a9fbb1cea999dea2f524b052ed38d7e54d5bc2111762fad70c90a610"
+at = "S=u32"
+embedded = "08b93e435e30d0f0499986b66170a87f5ad9793fe96e2e3fb4e6fa8778239e38"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ext_vec::<impl at src/ext_vec.rs:1106:10: 1106:15>::fmt"
+kappa = "1976c9f42a0c4e3c9f2631441522d6b28a83dccb0198b895b8392790937f0d71"
+embedded = "1e7dfc5bdf33037f42762b78f86064f7424f1702967011e0b7d39080a38cd07e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_vec::<impl at src/ext_vec.rs:1159:10: 1159:15>::fmt"
+kappa = "e24c533a00fcc8f3ab036da9369414269ca1fac447267b40b59e0306ecbf78aa"
+embedded = "d73f63fe424dee35ce13152ba6180fc2e7e7531415ba8eea9bed48cf7a21cc8c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_vec::<impl at src/ext_vec.rs:1159:17: 1159:19>::assert_fields_are_eq"
+kappa = "15102066a4307d073497733b9396ab438bf1eae93d17308bc69c5dfd23f4fafd"
+embedded = "0b539f51de28850feef5f78f2fc744b804241a54b0f2c31042b159c9ad66d5b3"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::<impl at src/ext_vec.rs:1159:21: 1159:30>::eq"
+kappa = "b42c84844dd28350345811eb61f5f0cd9c1a92941bb1fbba7563f1286375ea98"
+embedded = "31c64e466a74d1a2fc52cfc72d0fa4d7c9376f0bb88bdc619f2f37529e2aa679"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::DrainBytes::len"
+kappa = "7028912c994d5955e580dfedb38eb03b01725dc332d964bfb04d72a9478b6af1"
+embedded = "3cc03ca38562c862ca7184175774bb5cdf40e77254b8f222a11f38a5638a8d50"
+status = "residue"
+cause = "mir::Ty: DrainBytes<'_>"
+
+[[fn]]
+path = "bstr::ext_vec::DrainBytes::next"
+kappa = "665135f5779a3ba41537f8760e3a81300e411fc9e0f44a29986e1c3fe1ebe743"
+embedded = "cea914335b4b14a12a1dfb4fb2c7b199f2f5af5017a3f0fc65e6aef4f2d81d15"
+status = "residue"
+cause = "mir::Ty: DrainBytes<'_>"
+
+[[fn]]
+path = "bstr::ext_vec::DrainBytes::next_back"
+kappa = "64654051863a33009ed1983fd8f1988fa2e46b65483ff8d8b05bab7ed28f1716"
+embedded = "c43498d119372ca9918ed75424886d2a56b43266c1a04614cc0f5f2904048796"
+status = "residue"
+cause = "mir::Ty: DrainBytes<'_>"
+
+[[fn]]
+path = "bstr::ext_vec::FromUtf8Error::as_bytes"
+kappa = "a972c494ef8bbc81f04d34eda98b1f7307771bd74b77bf9d68a167ebdc0a7f40"
+embedded = "31f259b21c799f4451d13b91d9063911a273662e382ee9341e2d43fb0f7f1710"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::FromUtf8Error::description"
+kappa = "e5f49a2f3994c271039fa5a78612e5dbc6652f199f02c407554b8a692c2d5293"
+embedded = "216f317c9912d41c9f06bf823d8f95a5eaa53ece82a4b44d24a2b0cdd69754d2"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::FromUtf8Error::fmt"
+kappa = "2703fb9eb7fcc5149f43dbed14ef6c303f029796d5c6ba6e97686b8ebdbbf6ca"
+embedded = "cbefd5ab26ee1abeaae07921dcf0f6042a581c09854f559b46b0864fcd81534b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_vec::FromUtf8Error::into_vec"
+kappa = "36e9ca42a1c3cf6c4c7afb27d2817a26abedd97aa60885c23cf31511326cdc50"
+embedded = "981969f14c1e668a99a4a85c317e8e7cd2a76bbfc8fe7e17b571197db2b4f185"
+status = "residue"
+cause = "mir::Ty: ext_vec::FromUtf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::FromUtf8Error::utf8_error"
+kappa = "2250c4fe2a228649c2555d7fe2ff2a9736e1c039786da1d6f906149743a1cc30"
+embedded = "bc251c3af4832c39ee3ad1ca67ad4efaaf35e964986de3378b4aad0c03c2ff82"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::ext_vec::Vec::as_vec"
+kappa = "5c0acf16eade521410fa332ca422a26a9f34700599080d1a761e750c322682f5"
+embedded = "a3436f0e15b6ad0f2e7f9c1692232c1f9944f0a7fb5ce39c9bd81f40b070cb22"
+status = "translated"
+digest = "1d3e03de6f35c061735c72d7f82ab877f502c04edf1bb9d6a98754b75044f8a8"
+
+[[fn]]
+path = "bstr::ext_vec::Vec::as_vec_mut"
+kappa = "aafaec14ba8ce1a4d89fb7309dbd437750d0130330dd13b282ee4ec1fb2fd200"
+embedded = "adfd7ec5debdb5f05fe2cb318211d6d7897e2f24ec644f90617af4527ee9a444"
+status = "translated"
+digest = "5d5e0dbf9af45ee7fb75da27e5997aee93e6c517297c1140c3df4a0bd053f848"
+
+[[fn]]
+path = "bstr::ext_vec::Vec::into_vec"
+kappa = "77b6f290e11c1606b421501b28ab8f835b0fd20c8973a2b73499642df0b031b9"
+embedded = "b7047c4c518b992270c0ea23e2fa6e08ba9699ca5b68e8d57b25954ea9223945"
+status = "translated"
+digest = "2ce3d38c191e4b6378fc391ed77487fc6185586df361d6481562490e67828cb8"
+
+[[fn]]
+path = "bstr::ext_vec::concat"
+kappa = "7aab1d2c45823f08ff98251d0a9d3a75e1289e647069d4c281415720adbd6660"
+at = "I=u32, T=u32"
+embedded = "3ccaef93897daa9ccb8a00d4e848401d306e25326ff7744bea6cbce78680034a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "bstr::ext_vec::join"
+kappa = "6dfc892adea255c33ed24dd2c57fa203163acf94589bac738050194d36ad044b"
+at = "B=u32, I=u32, T=u32"
+embedded = "47bc97f881703d94ecd50eafd2265aa0df6bc5d32f6f20c1f178b1258c1ed2e8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+

@@ -1,0 +1,328 @@
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:189:1: 189:40>::into_iter"
+kappa = "627175e62a5e78fdace564774c324adf9eed85f75f884da5955f66dfdbdb6a85"
+at = "Iter=u32, MimeGuess=u32"
+embedded = "d3b97cfd775c70f563930a73c77c6b05fe60c4daf1139d154c4c5340571a3be1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MimeGuess::iter: mime_guess's MIR stops at type outside the lift: IterRaw"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:201:10: 201:15>::clone"
+kappa = "bf70164c0bf93b76244c6b4fe9fa5d3574967117e7eeafd954c1ad10bcf70df6"
+at = "Iter=u32, IterRaw=u32"
+embedded = "bff16906123baf4771cef5bc7f60ab709623ae067f20e785c977ac31cec4291e"
+status = "translated"
+digest = "dafbb299ccc5443ff0a8ee37a4ae8aa8e5033a06855454b215623013808b6823"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:201:17: 201:22>::fmt"
+kappa = "c53aa1ef7f412755c5244f93c2c3e825271207e8b5b60235602714628e3c5527"
+at = "IterRaw=u32"
+embedded = "9a62fa73db9fe84a0d52b9271e637c77a7eddb57525ba290567c69973b8786b0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:233:10: 233:15>::clone"
+kappa = "b3b4d936b89154568cfa83c5fa166d1575b70951b26a916a85f73a368af7bc44"
+at = "IterRaw=u32"
+embedded = "60f789ede550f8a2cea76e5b932c7288b27df3da93f9950daf174a3fffa544db"
+status = "residue"
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_, &str>>"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:233:17: 233:22>::fmt"
+kappa = "5991a9991ce8a2d441e798052b190a4eb20b1939109443332406fd66ab310c0b"
+embedded = "42668846022d47f8cd4fa1be2af5ed68b9531779b9c0850333738f97611bc5c9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:52:16: 52:21>::clone"
+kappa = "0ceac180440bdead4572e491a6499587455aa9d5f0640d0a11247018aa3799cc"
+at = "MimeGuess=u32"
+embedded = "3877881318313730e2a28936a00a5b5310b15ebd1d55031977e1787fa92ec95d"
+status = "translated"
+digest = "81f6f3d4444b545ce4bb1ae2b2b570728744e4789d0361aa2f4ae09816665e2a"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:52:23: 52:28>::fmt"
+kappa = "27833c67a047c9ce7274b4ca3f79d0931f952905237e6e2af9e8986edffd6705"
+embedded = "b9a592afc70e8a5d92091f945456af86f028240cdc5e38c953be741521b0aeef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:52:30: 52:39>::eq"
+kappa = "814f3235937d354240f37429cffc483d89fd4f5c24dbc1c513e52cc9604df091"
+embedded = "37290b2f31770fa0af4cb75dfc518ea8fe367d6c5c35af1cfae6ba04a1c7868f"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::<impl at src/lib.rs:52:41: 52:43>::assert_fields_are_eq"
+kappa = "f6a55f2851b8edb3894ded70490f63e2d6cfd7b05bdf8edda0d34cd724b26940"
+embedded = "d01644e2b307532b7106bcc07e041ff7b8b80e37d8ba6546d4cceec7596dc707"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::Iter::len"
+kappa = "d19380540d11f830db94dc8a4d4d84e5f120d07c45facc2fe212a92e35b77bc7"
+at = "IterRaw=u32"
+embedded = "3519c39a1e4e48cd2a3376d75ee9d0affa452bc1b3f6e85c9142940f528beeb0"
+status = "residue"
+cause = "mir::Ty: Iter"
+
+[[fn]]
+path = "mime_guess::Iter::next"
+kappa = "fdc62a8b6646c8a03ae70b6d53be93d482d8b2b44a4afea5bcde61519d336880"
+at = "IterRaw=u32"
+embedded = "0411eb8d9fdbc4559a8c0e12457c161e8e1acd7635c82ae74e38ec31aa45b4f4"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::Iter::next_back"
+kappa = "fb211b0fab985001bc735478ee2b65b8a6708755b9bf59db4d921f494aa10f27"
+at = "IterRaw=u32"
+embedded = "21a1829cbf6afa13d6902a99300195ff051f6f2d17d65ef328580a3085addce0"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::Iter::size_hint"
+kappa = "e440d77a0a4d3bc1b985d49a4d3de09d2c9f43a8a85ef696a913d13712aeac44"
+at = "IterRaw=u32"
+embedded = "4ca4776875e4c4252dcdfc15639a01a44e82ec19fd6a7780046814bbdf4c44a1"
+status = "residue"
+cause = "mir::Ty: Iter"
+
+[[fn]]
+path = "mime_guess::IterRaw::len"
+kappa = "afd0d66364a69185cd816411518bdddfd076c96ef5de295d86748b6a5893eef1"
+embedded = "1ea323584961fa230c00ebe88cdc43896203a10f24c90c8142f7b1a5c6a2279f"
+status = "residue"
+cause = "mir::Ty: IterRaw"
+
+[[fn]]
+path = "mime_guess::IterRaw::next"
+kappa = "06b1590401a7b526dca9c14c24464476860fa88b9c4615ab4f923c7d99e7ce1b"
+embedded = "45fa0f0f61ed4de9a1ce1715d3a5a40dc3ae2ea7c809d2334db2dbdd22549566"
+status = "residue"
+cause = "mir::Ty: IterRaw"
+
+[[fn]]
+path = "mime_guess::IterRaw::next_back"
+kappa = "27c97422fbd55b9cad5b8c31d78c33b369cf9ef3f3517830825552fbcbb4c785"
+embedded = "deeda29f4a9e3836c5f7c1eb81007dabdebef2eb03e9fd70b171f8e8261bcf2a"
+status = "residue"
+cause = "mir::Ty: IterRaw"
+
+[[fn]]
+path = "mime_guess::IterRaw::size_hint"
+kappa = "94728c68d80eb85ad0a237833715e3fc08f0378fbc8611ca553618f7be8af195"
+embedded = "368521be89571fe0434efca59d07d0e59b2330d4985ac8534cc7305a216044be"
+status = "residue"
+cause = "mir::Ty: IterRaw"
+
+[[fn]]
+path = "mime_guess::MimeGuess::count"
+kappa = "8c1368c0fe9d404a9002c0d20837b0966c3f438dc7070b443cc1951ce056318f"
+embedded = "e2853ba81c93ae2f7b4a1546b7ae79b37b2ed95ac48466fb514be67e7dd26d34"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first"
+kappa = "f6e0cbd1b2c9b67e2bf85336bdf64d5bb8e79752f3a02a211a7a49a71d3a146f"
+at = "MimeGuess=u32"
+embedded = "3f463f1ffed2d1b90cffd8ea2249920c828a4356f15e162ea37375bf9f09f851"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first_or"
+kappa = "080fe0f08ca22517991cfcdb59e9833a295a78236156673c034afb6759eea4c1"
+at = "MimeGuess=u32"
+embedded = "c11571d36f254900687b74f2fd13bb0108c411644bafd5af706cc5bb3493a0f9"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first_or_else"
+kappa = "430a58c8d791806d2c291749a39b6cb6ab91a7d722b34ca147c526627fef0e80"
+at = "F=u32, MimeGuess=u32"
+embedded = "efc86bcd553461b0beea87c643c23ee4e64ab627ecb514db24900eb535d9f47c"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first_or_octet_stream"
+kappa = "b3b6d6a7425d856438431a47f5aba161d157848301e946a3017e64f36506d604"
+at = "MimeGuess=u32"
+embedded = "233423931314a1335366439eb8b9c3e8acdc0b2c3ac79502832d962ca19e9213"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first_or_text_plain"
+kappa = "f1fa208169bbc529a837d0d45613662c90073330e4ef815ec0751eec9b935545"
+at = "MimeGuess=u32"
+embedded = "c811b0eac1f129259ad6a6395250880c4a84f04148c3367ec2c2d848cbb678c8"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::MimeGuess::first_raw"
+kappa = "7574e9620dc97b1731866bc84daa515a314fc114c672432a15b5faeb0524f337"
+embedded = "0c029c5c14cbdb33e1f335745819bb0372874cfeaa7f8e08a4bb2d24b2ec70ca"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::MimeGuess::from_ext"
+kappa = "e4a040489ed740a4adb785571d85b3aeee66e1ed783355440a0cbb45f6a1b532"
+at = "MimeGuess=u32"
+embedded = "1024a215b0820b6d8b2882c0b1df63c1a95af9b66b100b01eb827774b9ffbd5a"
+status = "residue"
+cause = "mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+
+[[fn]]
+path = "mime_guess::MimeGuess::from_path"
+kappa = "0807a7eb18005f6870a3c15c0dee76ada8c9e3ad68902a563f6dc1f9e7b708a8"
+at = "MimeGuess=u32, P=u32"
+embedded = "4eecaab9ae2468b9f9c001fc50efca50ff529ac814111558214f5991993c64eb"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "mime_guess::MimeGuess::into_iter"
+kappa = "ef6ca43435d61c5cd888f20790df14df3f199149461de78e45e8864b30d20add"
+at = "Iter=u32, MimeGuess=u32"
+embedded = "57dceb017256f74d33c22017a66442c7cf8ab1c77ab80b15214bb1d276a9dc33"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MimeGuess::iter: mime_guess's MIR stops at type outside the lift: IterRaw"
+
+[[fn]]
+path = "mime_guess::MimeGuess::is_empty"
+kappa = "b8121473956d16db0508ad372ee01032fd7414e16cc2249a9014cca0f7b7e189"
+embedded = "7ced99beebf6d52f298f133c7e260127dbfc2513af56c1afa69762b3445a4e3d"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::MimeGuess::iter"
+kappa = "4d0f73ba2c7f55b96529083b9de04083a45d21da09266f44e6f05f7605f2358e"
+at = "Iter=u32, IterRaw=u32, MimeGuess=u32"
+embedded = "bc2875a5b2b11973f59704a13d68e4f75aafe72a080f432f2b63a0ed2def48f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MimeGuess::iter_raw: mime_guess's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "mime_guess::MimeGuess::iter_raw"
+kappa = "d0a48cb5fc7d1e7d03bfea410b78218e653a8dfd5e71e3ddcba72a824caf639c"
+at = "IterRaw=u32"
+embedded = "9fe1aa0beee63a485a9550d5e6da9f5d0d18c1d7943ea0843df4f1392d4a4cfa"
+status = "residue"
+cause = "mir::Ty: MimeGuess"
+
+[[fn]]
+path = "mime_guess::expect_mime"
+kappa = "e51913dec9b86b2802dae88f90eddd10a2227973702abc223955931362898bb0"
+embedded = "e5bea01b1c823fda385f980c19e3dc949ac9da7db62191d77c7eaeabb85ef130"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::from_ext"
+kappa = "69a4c93095f7ccfe7a44bf04851ad127189380c66442ed8e6be8d5286c7b6633"
+at = "MimeGuess=u32"
+embedded = "19f364309feec5a4f26aa5574018ff09d8cfb376cd03de63b0256823a9c3da57"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MimeGuess::from_ext: mime_guess's MIR stops at mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+
+[[fn]]
+path = "mime_guess::from_path"
+kappa = "7c8e55f1c34a26e39c19e202d2a74774888f29cb7294adc32b2a1e1ac2ecadd0"
+at = "MimeGuess=u32, P=u32"
+embedded = "d4bdffcd9fa19358c2c18f1fd0e85e8b595c056d3b9ba6349139a7c630956e20"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MimeGuess::from_path: mime_guess's MIR stops at type outside the lift: std::path::Path"
+
+[[fn]]
+path = "mime_guess::get_extensions"
+kappa = "003034c265698f1d2a2e6402fe2313924a141d55c141ffd1b23013ca5e53ac27"
+embedded = "66556805f6bf921cef18246012e861cd0c676cb9ca9ae0959d10352481b3a6c0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: impl_::get_extensions: mime_guess's MIR stops at mir::Operand::Constant: impl_::get_extensions::promoted[1]"
+
+[[fn]]
+path = "mime_guess::get_mime_extensions"
+kappa = "d77e6a5328e04d70fa691bef68a5b67cec1fac84fcb4fbf4479ce71ae05cd5d3"
+embedded = "68b6796a86094f24220b6672618a7881c27dbbb733179a65536eb42f9bc73791"
+status = "residue"
+cause = "mir::Ty: Mime"
+
+[[fn]]
+path = "mime_guess::get_mime_extensions_str"
+kappa = "349abd0d9a9d7adf789e96750427dede1e8dd3b40b94a80acefce2412aa534e4"
+embedded = "a27451973c39f996f5e895eb137b1c6371754e136557a59a78543d592a4589c4"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "mime_guess::get_mime_type"
+kappa = "142d70dbf85e7c4b7d77ba0b02264c04f81785d885ab324750039ee52d95ac19"
+at = "MimeGuess=u32"
+embedded = "faf6e8a1e42874f456095bd84d23670277768de8b608df0591f1b34dc8aa549e"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::get_mime_type_opt"
+kappa = "55d7824df812fdb33f9bc342bfbc02ab294690014d338a4db81cd56601d53ee5"
+at = "MimeGuess=u32"
+embedded = "6f4214a8309932a84231055e5f97a5a5af16b773543e95dc228c92c47d8fcfdc"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::get_mime_type_str"
+kappa = "d5a1f98fcdc0ecb896c81991abc58809b179785dda070889213eaccdbfb01295"
+at = "MimeGuess=u32"
+embedded = "206afa9eb37682bf623f4dbb7b6063f2758a0c409aeee815e84dee6b816466d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_ext: mime_guess's MIR stops at mir::TerminatorKind::Call: MimeGuess::from_ext: mime_guess's MIR stops at mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+
+[[fn]]
+path = "mime_guess::guess_mime_type"
+kappa = "db70bbb0387c4057b2a857fe7bba6fc4b153571ce9e56c12655ed6d6cb74e5d0"
+at = "MimeGuess=u32, P=u32"
+embedded = "b43fd2266f2e92043705119a2e706949209a4ec1d1d1e0d9e63a372f82b68b06"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::guess_mime_type_opt"
+kappa = "8973f61073d892a63540d4e61157a069c060d178b332201c7e3f9e03d34e6cde"
+at = "MimeGuess=u32, P=u32"
+embedded = "96cd412ac2f176073faed9032e9d05bf955bc38fc9afa6d14d7542c728c539fa"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+
+[[fn]]
+path = "mime_guess::mime_str_for_path_ext"
+kappa = "18700450bc6e822d6b021c2539b2c0e89342a21eba4cd72d9f224c96dd61d07f"
+at = "MimeGuess=u32, P=u32"
+embedded = "04b8f843bef09f2bb2adcb4633f87763f1e423d08caf61cf4fa5fa9807c034bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_path: mime_guess's MIR stops at mir::TerminatorKind::Call: MimeGuess::from_path: mime_guess's MIR stops at type outside the lift: std::path::Path"
+
+[[fn]]
+path = "mime_guess::octet_stream"
+kappa = "b28d0b7bfcde3fb74432146145aee3be62a52488b2901c676f433ce7b91748ec"
+embedded = "a0797f9122381849b4174ad3eca44cc12927d4ec645d8f1b534bb121ee415fcb"
+status = "residue"
+cause = "mir::Ty: mime::Mime"
+

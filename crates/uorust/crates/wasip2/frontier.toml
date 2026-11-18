@@ -1,0 +1,409 @@
+# The wasip2 register (written by `uorust crate wasip2@2.0.1+wasi-0.2.12`; do not edit): every body of
+# wasip2's MIR at wasip2 2.0.1+wasi-0.2.12, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 951
+translated = 253
+residue = 698
+
+[module.command]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.ext]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.imports]
+bodies = 734
+translated = 168
+residue = 566
+
+[module.proxy]
+bodies = 211
+translated = 85
+residue = 126
+
+[embedding]
+bodies = 863
+embedded = 863
+evaluable = 863
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::_::InternalBitFlags"
+bodies = 126
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 91
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::DescriptorFlags"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::ErrorCode"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::OpenFlags"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::PathFlags"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::ErrorCode"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: DescriptorFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: OpenFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: PathFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::io::streams::StreamError"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::io::poll::Pollable"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::Descriptor"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::io::streams::OutputStream"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: network::ErrorCode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Fields"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::cli::terminal_output::TerminalOutput"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::io::streams::InputStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::IpSocketAddress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: poll::Pollable"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsI64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Advice"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DescriptorType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OutgoingResponse"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ShutdownType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::cli::terminal_input::TerminalInput"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::io::error::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::IpAddressFamily"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: network::IpAddressFamily"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::FutureIncomingResponse"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::HeaderError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::ResponseOutparam"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: wit_bindgen::rt::maybe_link_cabi_realloc"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IncomingResponse"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::clocks::wall_clock::Datetime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::DescriptorStat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::DescriptorType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::MetadataHashValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::tcp::TcpSocket"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::ErrorCode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::IncomingBody"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::Method"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingBody"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::Scheme"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tcp::TcpSocket"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as imports::_rt::AsI32>::as_i32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as proxy::_rt::AsI32>::as_i32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::from_utf8_unchecked"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DirectoryEntryStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FutureTrailers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IncomingBody"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IncomingDatagramStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OutgoingBody"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OutgoingDatagramStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResolveAddressStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::Advice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::DirectoryEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::DirectoryEntryStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::ip_name_lookup::ResolveAddressStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::IpAddress"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::Network"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::tcp::ShutdownType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::udp::IncomingDatagram"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::udp::IncomingDatagramStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::udp::UdpSocket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: network::Network"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::FutureTrailers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::IncomingResponse"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingResponse"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: streams::InputStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: streams::OutputStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: udp::UdpSocket"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T_ as run::Guest>::run"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imports::_rt::as_i32: wasip2's MIR stops at mir::TerminatorKind::Call: <&u8 as imports::_rt::AsI32>::as_i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::_rt::Resource<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::filesystem::types::NewTimestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::Ipv4SocketAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::network::Ipv6SocketAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::udp::OutgoingDatagram"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imports::wasi::sockets::udp::OutgoingDatagramStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proxy::_rt::Resource<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::DnsErrorPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::FieldSizePayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proxy::wasi::http::types::TlsAlertReceivedPayload"
+bodies = 1

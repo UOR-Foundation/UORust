@@ -1,0 +1,147 @@
+# The redox_users register (written by `uorust crate redox_users@0.5.3`; do not edit): every body of
+# redox_users's MIR at redox_users 0.5.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 94
+translated = 2
+residue = 92
+
+[module.auth]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 82
+translated = 2
+residue = 80
+
+[embedding]
+bodies = 94
+embedded = 94
+evaluable = 94
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: auth::Full"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 9
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: libredox::error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AllGroups"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AllInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Group"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: User<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auth::Basic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by All"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item GROUP_FILE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item USERNAME_LEN_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AllUsers<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GroupBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Lock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: argon2::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: getrandom::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

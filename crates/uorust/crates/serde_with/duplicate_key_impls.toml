@@ -1,0 +1,128 @@
+[[fn]]
+path = "serde_with::error_on_duplicate::BTreeMap::insert"
+kappa = "bbc194f354d67be219e7e664a6675c8c07307f6447343b4daf3c957a97c880c4"
+at = "K=u32, V=u32"
+embedded = "d3c99865cc632d8287286d1f47ece9922ac5265250edf3fc492e6ed22187f5eb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: option::Option::is_none: std's MIR stops at mir::TerminatorKind::Call: Option::is_some"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::BTreeMap::new"
+kappa = "bb4e8b7d744a663321f294f2656b9509b6ef0e0b2318bef806aabd5c75031753"
+at = "K=u32, V=u32"
+embedded = "d0e77ed7de28d1b5a2016b4f96a744bef739a8d2e95c6b178618ade034f83d01"
+status = "translated"
+digest = "85a3cc865f84464890918cfc88f7b4fb205861cfe005c165e2838e78e094f5ec"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::BTreeSet::insert"
+kappa = "634049411f5d09f1d6bde1dd3bef0b03f5b0e0f655f82e09576d360f506acd42"
+at = "T=u32"
+embedded = "33b9028be51cfd2842b4b4ffcdf69f6ff06662c83ae3505c4b90ce26f263a0e9"
+status = "translated"
+digest = "614208f86b7379c2bc0770e754023206197275c8a4688b86e4cdefbdf4f350c5"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::BTreeSet::new"
+kappa = "c95ac587b92063fa83ddf0f03aa010a736e1e4243facda6ff88bbd22a62d9069"
+at = "T=u32"
+embedded = "351c2a8cf61ec8ce076333f977cb541510d150d988cbe7f03ce15c128322ce39"
+status = "translated"
+digest = "e04b01099f15c591d4d6907415ea35e6f5b9470418b8c66f94a30ebd63eb7551"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::HashMap::insert"
+kappa = "4ced9c24530650cb0e23cf2e7d1782d3dd22b46d3be6e8ec3e34359d16d17f25"
+at = "K=u32, S=u32, V=u32"
+embedded = "1774ed985cdabf50d8fabcdc6ebbd5103d64128f209baf18196584e3bb94b616"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::HashMap::new"
+kappa = "5b4be8581a6c5202f0a168e66c4eb5e53c611d99c71dcf0013061063c29052f5"
+at = "K=u32, S=u32, V=u32"
+embedded = "a3b0563f4f0adc6d0f86626933f2493f2e8d7d795972c6b2c9386b3e32dcaf87"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::HashSet::insert"
+kappa = "9718f8d1c6ec2bcfb34b27c836fa6b7caab0fc268c68d01539e603b3ed762b07"
+at = "S=u32, T=u32"
+embedded = "f797ba5e869fbd77573780b579a125870d3f46fcc16704f35baff6de614703dc"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::error_on_duplicate::HashSet::new"
+kappa = "4559b6e798f0ba81f0d658db277e0c7884075b4ee34d5667fa112a1c56653c45"
+at = "S=u32, T=u32"
+embedded = "fcbeedebd70bf8d6f008a10684130c1985f90649056d67e54d8d41da17653b6a"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::first_value_wins::BTreeMap::insert"
+kappa = "85d9c1e178ffb774a67e16ac25052643ae47491df7410c30201963cd92878046"
+at = "K=u32, V=u32"
+embedded = "7f49207f6b588c49c35e6b104518e74b00c437df18af6885454c279f2e66659e"
+status = "residue"
+cause = "mir::Ty: alloc::collections::btree_map::Entry<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::first_value_wins::BTreeMap::new"
+kappa = "363aa012edf3c44b61077baea13f88350c44133b4fe147a3d1694ae3f696d8f0"
+at = "K=u32, V=u32"
+embedded = "76fe03eb02fe423643e0f99c208603fc62dd36032fcbe0fc70be6742e6bc07a9"
+status = "translated"
+digest = "4646ab6c8d929868d4aa3707e97e4f40cad1a27d082709250d1db44eb1dc8809"
+
+[[fn]]
+path = "serde_with::first_value_wins::HashMap::insert"
+kappa = "fd09b9b4521175b688931d56ff9c92ac9293b1aeabb49fc73bd818b8c7ae932c"
+at = "K=u32, S=u32, V=u32"
+embedded = "403856a32a307dca83011369920efc25be5b245daa8deeab49bc40f22c07385d"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::first_value_wins::HashMap::new"
+kappa = "9e08e4008ef3c23d481e21be0ed6068d69c42ed42edfe1c4baf642c761c9fa61"
+at = "K=u32, S=u32, V=u32"
+embedded = "1ede7c143c470edc66aa62cfb6089ec8b2fcf4c7dae9c4aba81f4786df3af4fd"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::last_value_wins::BTreeSet::new"
+kappa = "a068149f59453195d9f1b214434740fc815e7c32bdcc09084f043bf28976a78e"
+at = "T=u32"
+embedded = "b0ceeb7f4552fb4be31dbacdc2689b249634704d03f820c33a363f942d29429b"
+status = "translated"
+digest = "73ee829933086508383318ac18e2d77f28893c6ca978c3422f6ef48b435d2a96"
+
+[[fn]]
+path = "serde_with::last_value_wins::BTreeSet::replace"
+kappa = "12de7436096ca90b64a8abb2757e99763287d8ff7d78da0e91c40a0d6de704a8"
+at = "T=u32"
+embedded = "266845c7433d5397e533b6273ccc384406c1b580cb3c0520bd37bb3b818c91f9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::collections::BTreeSet::replace"
+
+[[fn]]
+path = "serde_with::last_value_wins::HashSet::new"
+kappa = "7d9297b042ba353834853fcd51c50eaa3f230eaf08faed2ff8404219b224ce20"
+at = "S=u32, T=u32"
+embedded = "5f5cca38018e87c99891aceeb4da93cd0a6cc854c68d8ecd68b9c9d401599977"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "serde_with::last_value_wins::HashSet::replace"
+kappa = "f7e1cd800d243da1466f3a9e695c79eb87581aeb41ee0d8d14dd4ff4b1d29229"
+at = "S=u32, T=u32"
+embedded = "8cc89d49e80b79b2dd3587dc5998fa6028ea9cc5677744d6ebb80dd26eb8e5b2"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+

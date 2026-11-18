@@ -1,0 +1,31 @@
+[[fn]]
+path = "tokio-stream::empty::<impl at src/empty.rs:8:10: 8:15>::fmt"
+kappa = "33758468e9c035d2954fa7152f6a504463588a6233aa3ecc4b47a811a2f11e3e"
+at = "T=u32"
+embedded = "52fe2621a3787386679ef67637972ce0e0e5b3f9a980f1c0676046eb271e418a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio-stream::empty::Empty::poll_next"
+kappa = "1641f971e3bd74868df7a203aa78cb2d79aa149c015598888d7fa7babf29cbff"
+at = "T=u32"
+embedded = "7599a881a3604dfb0683e2ecf1540e065952acdefb38de7d439f6b178eb17fa0"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "tokio-stream::empty::Empty::size_hint"
+kappa = "e22a2e53c79a04bd862302f74a2cf715c1decd7f6f7904e9038738f7ddb1f63a"
+embedded = "963007563781d49f2a5ea14f00fca5b97cc1d03bcf27853b38b214e8a9d8337c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "tokio-stream::empty::empty"
+kappa = "3f04d3866cf534e100840e7f9e762acf87305743a47e82b4c0a1265ba253ae71"
+at = "T=u32"
+embedded = "f0b8db2c119f2c980bf9e82036a1aeaabbb2cffa311cc74b9302d9424c1e5f18"
+status = "residue"
+cause = "mir::Ty: empty::Empty<u32>"
+

@@ -1,0 +1,23 @@
+[[fn]]
+path = "prost-types::any::Any::from_msg"
+kappa = "f5630dc4c5e6bd9a1724260560adf1f5088bc66ab915107776ce48cb0a8fc0db"
+at = "M=u32"
+embedded = "2a7c452619635f10a0e0b7393df67eed6763d0dd6ea95a80be35d0381a5b0dde"
+status = "residue"
+cause = "mir::Ty: protobuf::Any"
+
+[[fn]]
+path = "prost-types::any::Any::to_msg"
+kappa = "4327d0f92f3cdbc819ddfc4237c29928455c21b73e6b42c32be5f2a2d73b683f"
+at = "M=u32"
+embedded = "e93ace193f2cdd284efb2a45f8521cb5479b120ef52a8f0602fea2dfed082143"
+status = "residue"
+cause = "mir::Ty: prost::DecodeError"
+
+[[fn]]
+path = "prost-types::any::Any::type_url"
+kappa = "f8253e81d9b462264743a43d954f4b9b3edce82fedcb054083d0a2e3eb078166"
+embedded = "b49d7ca334aac0bee141fb936faca36a0c3ce1a3da7b073a3456732e1b9048a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: type_url::type_url_for: prost-types's MIR stops at mir::Operand::Constant: type_url::type_url_for::<T>::promoted[1]"
+

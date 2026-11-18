@@ -1,0 +1,390 @@
+# The funty register (written by `uorust crate funty@2.0.0`; do not edit): every body of
+# funty's MIR at funty 2.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1230
+translated = 183
+residue = 1047
+
+[module.crate]
+bodies = 1230
+translated = 183
+residue = 1047
+
+[embedding]
+bodies = 1230
+embedded = 1230
+evaluable = 1230
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 90
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 90
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 24
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::min_value"
+bodies = 24
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_div"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_neg"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_rem"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_shl"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_shr"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::count_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_be"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_be_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_div"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_neg"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_rem"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_shl"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_shr"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::reverse_bits"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ne_bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_ones"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_div"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_div_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_neg"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_rem"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_rem_euclid"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shl"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shr"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::num::ParseIntError"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::abs"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_abs"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_next_power_of_two"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_negative"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_positive"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_power_of_two"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::next_power_of_two"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_abs"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_sub"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::signum"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_abs"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::num::FpCategory"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <bool as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <char as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <i128 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <i16 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <i32 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <i64 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <i8 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <isize as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u128 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u16 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u32 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u64 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u8 as Fundamental>::as_bool::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <usize as Fundamental>::as_bool::promoted[0]"
+bodies = 1

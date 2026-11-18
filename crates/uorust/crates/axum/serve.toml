@@ -1,0 +1,198 @@
+[[fn]]
+path = "axum::ListenerExt::tap_io"
+kappa = "471ecc65b38fbfc1355a6accd269f9afc3da86da670bacb7217b610463f68d7f"
+at = "F=u32, Self=u32"
+embedded = "5e579b4431b2e08fcddfb0cbd97ce024fa81e5ef3c1f4db5f6ed61c2e14cce6e"
+status = "residue"
+cause = "mir::Ty: serve::listener::TapIo<u32, u32>"
+
+[[fn]]
+path = "axum::handle_accept_error"
+kappa = "4fe26c6f3d89a63ca962ad3df8e8314ee3698db4c9c1eb991518efea1088444a"
+embedded = "bd56219425e124c324fbe4c606b5e9c0e10326789f115ec8ae7a724ad6b656a3"
+status = "residue"
+cause = "mir::Ty: {async fn body of serve::listener::handle_accept_error()}"
+
+[[fn]]
+path = "axum::handle_connection"
+kappa = "02bb1bd1979cb5b0a46b9494da962ef0856c2e70df56a648d1a51dee88ccc8a6"
+at = "L=u32, M=u32, S=u32"
+embedded = "995bc155def62364a54ae39bf43c0d1e5f8133bd10815552e0e99e75091ac16f"
+status = "residue"
+cause = "mir::Ty: {async fn body of serve::handle_connection<u32, u32, u32>()}"
+
+[[fn]]
+path = "axum::is_connection_error"
+kappa = "7c750dc36d486f2b638998becec3ade6991f8b5473f408ab0ec090129b32f278"
+embedded = "82319cc44c5055d7eb5735b0c1db2a56cfc5b9e64e1b29f0b6fcc4e5eed83859"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "axum::listener::TapIo::accept"
+kappa = "a9201e89625b9ed679365e507b4e4156e46e9c805e029ba27d0bc0aeb628396e"
+at = "F=u32, L=u32"
+embedded = "08f422e20bb00940fd51df140deef4d5c8a493e0b1d9f3d00cddbfeaea31e61c"
+status = "residue"
+cause = "mir::Ty: {async fn body of <serve::listener::TapIo<u32, u32> as serve::listener::Listener>::accept()}"
+
+[[fn]]
+path = "axum::listener::TapIo::fmt"
+kappa = "efbbbe11cce80d5d00ef91386cf1a9251a8c78ebadd82e5fbad1a0ba908116cd"
+at = "L=u32"
+embedded = "c38de42514fe3062b27350e8c4829c7787c07fa89f493d62912a11bda921389e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::listener::TapIo::local_addr"
+kappa = "5134cb0e9b02b8528eec357e0f49b5ad6bcc8255905450a7560503e3c6355c40"
+at = "L=u32"
+embedded = "70451167c1b2655a660e0b43ddc1d1f6bbe7e0103ef8ae4890435163ebc1e0ce"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "axum::listener::TcpListener::accept"
+kappa = "37089f0f54df60870b41d7f0accc83cbfe3d1070cdc7afe6df6ecb3e0de4a003"
+embedded = "88312eaaa21d554adc92bd5171fc34a56fbe2e679b9796167968e10d34ef7fba"
+status = "residue"
+cause = "mir::Ty: {async fn body of <tokio::net::TcpListener as serve::listener::Listener>::accept()}"
+
+[[fn]]
+path = "axum::listener::TcpListener::local_addr"
+kappa = "4fac89dc1545b49b3e69ced34de7dc916cd5e7b05aa63792c41b8b0a758d2c5d"
+embedded = "58186d73a3b89c9a43b2d20ade11fa831f83790e4fe8964565cf4ab7d7f0536d"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "axum::listener::UnixListener::accept"
+kappa = "a0ce3bea1071fdc3cabdefce980e73214dc53fc404051d1a8fc48ed5c80cfb03"
+embedded = "07678b813594c6ea48907bbc072bc079b2989748881b639515cc962fce68aa66"
+status = "residue"
+cause = "mir::Ty: {async fn body of <tokio::net::UnixListener as serve::listener::Listener>::accept()}"
+
+[[fn]]
+path = "axum::listener::UnixListener::local_addr"
+kappa = "ec71d4c740215d6d609bb9d1cd9a0c6879950acaa23f505c4974f70589a42a64"
+embedded = "da352013f22ee1c5109a12654a1e857e729cb78a5c5c14d745b9cfc7a8bb3694"
+status = "residue"
+cause = "mir::Ty: tokio::net::unix::SocketAddr"
+
+[[fn]]
+path = "axum::serve"
+kappa = "d45f33c33e770e25bc1985e192f0f2ed8703a43d5a027f677fa35a2f526b07d2"
+at = "L=u32, M=u32, S=u32"
+embedded = "076bffd93f8480606fd39e9d9984a6e7c5a0d41b56c533c1e443ea656d011a21"
+status = "residue"
+cause = "mir::Ty: serve::Serve<u32, u32, u32>"
+
+[[fn]]
+path = "axum::serve::<impl at src/serve/mod.rs:423:10: 423:15>::fmt"
+kappa = "e00aa40a0e72c9a4f24d0005a293fcf057535be7dc7cc4e01902885bad62ddf7"
+at = "L=u32"
+embedded = "66f9e8c1f220e36287cca85e8de39d55dfb7bc1c62be0e3bcf086c516d4a82ab"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::serve::IncomingStream::io"
+kappa = "f218a4668eafd872a9855b1bda6c857039c68b9576c9ec2e8efc41a885d2a189"
+at = "L=u32"
+embedded = "2f364886237c693c6187ea7826179bf535d9b08a7cd3934c4feef65303973ab4"
+status = "residue"
+cause = "mir::Ty: IncomingStream<'_, u32>"
+
+[[fn]]
+path = "axum::serve::IncomingStream::remote_addr"
+kappa = "e8ef821b5ed60bee3b86656a1e5285527c8f689b728c0be20ede13dbbc7b87b9"
+at = "L=u32"
+embedded = "ed53ad09643099697422ae8a8e0eda67ec70601b6c601002e140bbd67c67e815"
+status = "residue"
+cause = "mir::Ty: IncomingStream<'_, u32>"
+
+[[fn]]
+path = "axum::serve::Serve::fmt"
+kappa = "4f8e37b7829bca542179fe2dc9693579743521f1e310fb45d2c578132ea7e5d2"
+at = "L=u32, M=u32"
+embedded = "f928a632de49ed09465cef60179002eb84adbcd5c6070d427620e39e5b51feac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::serve::Serve::into_future"
+kappa = "2f460a8e53cd1538cc956892515c721292782deb2d146e8482e02c024efcddd0"
+embedded = "3c88eab440763e0a53ab7fef8333a7088ce62a24bed2a97e792e36150c1f0849"
+status = "residue"
+cause = "mir::Ty: serve::private::ServeFuture"
+
+[[fn]]
+path = "axum::serve::Serve::local_addr"
+kappa = "fea9358f6c8e250c15cfd45a9a9276c7a6211c49e967760112e5c4a000912ce8"
+at = "L=u32"
+embedded = "ab420cd047b80b6fa0bb76965694677cae6547ba78f94d21e3d91df970ef6899"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "axum::serve::Serve::run"
+kappa = "c61106f86da9130c566f019aecf8434e821e5b348d06c729aea638be52114f10"
+at = "L=u32, M=u32, S=u32"
+embedded = "c687bc33e5c666d621c5e272d5fee20c6ecc60d7e1d1b8ba72d9b8373a0cde3e"
+status = "residue"
+cause = "mir::Ty: {async fn body of serve::Serve<u32, u32, u32>::run()}"
+
+[[fn]]
+path = "axum::serve::Serve::with_graceful_shutdown"
+kappa = "29319beeb41f566dfefc223deb79fc5fe2df52ff1baced227d84e893fbe1bdaa"
+at = "F=u32, L=u32, M=u32, S=u32"
+embedded = "af74375ee45c6bc887ec29148fbe3794e85fed116ae4206f4185a7ec03e061a1"
+status = "residue"
+cause = "mir::Ty: serve::WithGracefulShutdown<u32, u32, u32, u32>"
+
+[[fn]]
+path = "axum::serve::WithGracefulShutdown::fmt"
+kappa = "dc2ce6f97a03228e0b0d93fc1e0e13646a53fdd050b7899683c005b7bd21a898"
+at = "F=u32, L=u32, M=u32"
+embedded = "522dd36cbd6818a2eccbdb56d6eeadec171785984b5e79538346182fefae68fe"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::serve::WithGracefulShutdown::into_future"
+kappa = "efa181afc5ade40fdb29e592ff75fd57438f12e4a44a49611100d01e71e1e552"
+embedded = "aeee61d4135a19511a251a72c221ede8c0c439516b59f6b8c75b602e45a5e290"
+status = "residue"
+cause = "mir::Ty: serve::private::ServeFuture"
+
+[[fn]]
+path = "axum::serve::WithGracefulShutdown::local_addr"
+kappa = "a23175ed8337f60ea2b631e968001fae2693f1afe464b8df507f665b03cd3713"
+at = "L=u32"
+embedded = "7b9742731d8fd8552cbcf97081f0cb47f214e4e1d5c200a611c2604958ecb9ab"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "axum::serve::WithGracefulShutdown::run"
+kappa = "50395fa8ca42e61967feab98a04615b6f633b8da39f2c25a8624cb68f7e79b1f"
+at = "F=u32, L=u32, M=u32, S=u32"
+embedded = "e6cf7086a14075ddedd57d47b76106e6ec406b9ab2451c9f7bae6e2fe47efba5"
+status = "residue"
+cause = "mir::Ty: {async fn body of serve::WithGracefulShutdown<u32, u32, u32, u32>::run()}"
+
+[[fn]]
+path = "axum::serve::private::ServeFuture::fmt"
+kappa = "dc07fd5e5616c896d0d369cedb19415484af8345b5db61594321042388ee6d60"
+embedded = "d56b2abf36013b0e4749d1ee5dc212165dd1e6af563eb40bd572e07d0c919740"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::serve::private::ServeFuture::poll"
+kappa = "e00aef5a77f221763256e64ebe2ba4038365e175637fbb7505b3bfdfa0f03a7a"
+embedded = "cd0856f966516b09cf653d9135363a2db60847cc88c2b840f1cd1db85127b157"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

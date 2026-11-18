@@ -1,0 +1,86 @@
+[[fn]]
+path = "adler::<impl at src/lib.rs:86:10: 86:15>::fmt"
+kappa = "0d03c6b7801ffb2e4196eecd0f504775c6bd5de395ada89a56f127bccd9e58b3"
+embedded = "74c870600530e2dfa3126565e1082d8d0bb8e17970c6022839da05b760c712fe"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "adler::<impl at src/lib.rs:86:23: 86:28>::clone"
+kappa = "6926b7dab68ddbd94fde668cc959c9f0c4cbb654712cbfd3adf663b7ab71430b"
+at = "Adler32=u32"
+embedded = "b6190739e22a48d8231fe7df624864507fde2260c187c1216072c7055a314c33"
+status = "translated"
+digest = "3ec7411ffd23aa49f6f9c844d27e1371ad0a84e4483c4309fe83c5097d596d61"
+
+[[fn]]
+path = "adler::Adler32::checksum"
+kappa = "9d7454d15ca96f7f6632f45886eb0348a3662c6049ce1c1bdcf84c24be510fc2"
+embedded = "f33335ba368daecc5292ac5c9a2dd2df65084ddd0057141feb53039ca591de7a"
+status = "residue"
+cause = "mir::Ty: Adler32"
+
+[[fn]]
+path = "adler::Adler32::default"
+kappa = "8938203119198d24acc085cd26d44a3d8de54741991f7973dca780f6ead4e4d6"
+at = "Adler32=u32"
+embedded = "4aa32390fa9c4cabd446d5f198900d140bb49b3cd36edcd30035853a8bc9ad22"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "adler::Adler32::finish"
+kappa = "107a9367319301c5fa4a3df3387e003919bfb99ba4e0ca6556299335c1b80963"
+at = "Adler32=u32"
+embedded = "53fbe8382a5ee2c4ed8c81b1a21e59dc1c8cd47ea4514ad5defbc368c31fe5d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Adler32::checksum: adler's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "adler::Adler32::from_checksum"
+kappa = "0bf2153415ef31eecbb37f409d8266bc50f589084ba45f0c2abdaa29886f438f"
+at = "Adler32=u32"
+embedded = "e1de62a19f51786049eae32b3c1658a072635696c4c47e49d7239a6024eca631"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "adler::Adler32::new"
+kappa = "fbdf37f4b3e7c6620cea5b30779097552d787ef76bfa04f95414c88a44ac0ab0"
+at = "Adler32=u32"
+embedded = "4778a68c20a9e67d0c724d985704d84a080ad424a3ac6fd394a5046a8e9cd461"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "adler::Adler32::write"
+kappa = "542a5e48ed581cf05cbcd8690cda2957543a1251e2ab855ae5b732fd746cd4e4"
+at = "Adler32=u32"
+embedded = "3ddd2e02feb3cf1588b6724926c22efee35fb0592266f3c8342760d661d605bd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Adler32::write_slice: adler's MIR stops at mir::TerminatorKind::Call: algo::<impl u32>::compute"
+
+[[fn]]
+path = "adler::Adler32::write_slice"
+kappa = "72aaf87da749cf29b65c95fc417fb575eea7464e6b1540af85a3717403d1a212"
+at = "Adler32=u32"
+embedded = "bf5439e65eb1abcdaeb24794c77fe6e491c77b86ab0f10e035c13976269c2c32"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algo::<impl u32>::compute"
+
+[[fn]]
+path = "adler::adler32"
+kappa = "5911c4b0414613e8c571789e66dc7ca225075662fe24ba3b9435e1622260b046"
+at = "Adler32=u32, R=u32"
+embedded = "038cecb5eedf556f3e85492934d6ffbfe16f35a4e12937fddda1bee454675dc9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "adler::adler32_slice"
+kappa = "8240c1685708576a4eb46c4ca7b4b91efadf881377e4500fd60f9934633cde3c"
+at = "Adler32=u32"
+embedded = "aa47bd6ffbc8eb033053a00721b57f68c3d54adc30cf4226bd913ff06dffbfcb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Adler32::new: adler's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+

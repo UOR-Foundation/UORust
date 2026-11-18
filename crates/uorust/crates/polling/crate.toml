@@ -1,0 +1,422 @@
+[[fn]]
+path = "polling::<impl at src/lib.rs:1060:9: 1060:44>::raw"
+kappa = "bcf23ed174fdbdcae2910d28bc1f2b90903dbea542488267c09eb0232bb18495"
+at = "T=u32"
+embedded = "18dd974c81dd038eaecc07e933515c62d5f26e5fe9e2a5289f49762652e3a2fb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:128:10: 128:15>::fmt"
+kappa = "c34dc961269030da79d5515d5941eda06339263ab76b17be0e62134097da253c"
+embedded = "34c0224b34c7400b5bf55b9e99cb6c7f1395aa6615a76306d06e52a56144c1e9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:128:17: 128:22>::clone"
+kappa = "7ef4acab75776d92feed7054da41f804336b22292854eeae2552364546071ec3"
+at = "Event=u32"
+embedded = "47f84728ca289bbdae4b39ec6d3ccd6283720e1f99e466dfaa9f523faece3f29"
+status = "translated"
+digest = "75529afd230425bd665673c635ce6133ce9ad26a1057ea0536636f54a5e1f821"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:128:30: 128:39>::eq"
+kappa = "fce76e3c3a1add3df2c5424f7aaef71b76079d828362cc714ebbdb8e99f08d19"
+embedded = "ae964be4989d72e185749c8f84056e4e70594eafb2aca0c7a28114acb03e1285"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:128:41: 128:43>::assert_fields_are_eq"
+kappa = "2dc518775f1ff6e618edb86a8e14e1901622b6826d778792349d8f0a4750ce74"
+embedded = "74edd07ca8fcef1939006ada1dbb1514562dde0d708690d462186a4d1e098192"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:10: 141:15>::fmt"
+kappa = "a218157d2ba0d6e2320e804f3e33a7ca02a4d19e3cc9d7a2d986ef34d1f73f8d"
+embedded = "7be241796ece0af02d1fdd6c73c313a002ef35240d0d9b83233ac1a96fbb4928"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:17: 141:22>::clone"
+kappa = "ea12e4a27ff3c53bef586cfcf96c6e01d03c788e46788fecfe0e73cc1c95f07e"
+at = "PollMode=u32"
+embedded = "a9c009af0007d949ca41f54821af3c533384277f238b38a6040749095f89bf62"
+status = "translated"
+digest = "1fb496a87f7a99cf318aec8f6ab762bc0a04a2f517d91448d1899c7442f757ad"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:30: 141:39>::eq"
+kappa = "0e983e848d8e5ab71b45db207eaac3b16f0ed571280bda8a992f235312afd47b"
+at = "PollMode=u32"
+embedded = "f11b093aa04927e5b52a066563c3e72a31d0a9b9c02b666e5409949eb925703b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:41: 141:43>::assert_fields_are_eq"
+kappa = "3c5ed8fa8ebb0e9d0c785686a8a7579fca47b05bddbbb5685fdfc4fe9161946e"
+embedded = "c574772fecf83c003529895ad29b86b611b5f4df4fc5f19889898fd783778eb0"
+status = "residue"
+cause = "mir::Ty: PollMode"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:45: 141:55>::partial_cmp"
+kappa = "793856e661dff13cef4c58807138e3588c4cf416c57364e63f80872e16e39505"
+at = "PollMode=u32"
+embedded = "fd0f65690c26552a1e1060bc54d6177f88b336be5d8234d810b302cd5fcdacfc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:57: 141:60>::cmp"
+kappa = "ed0087b86ea3e980a8caa0e3d9fe4a3c9313d18c521e0b14e9a8557d3d2b665e"
+at = "PollMode=u32"
+embedded = "c6c6337fccf678313ad7732e889e83598be5f56f7ceadf94f1297c1782de8359"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "polling::<impl at src/lib.rs:141:62: 141:66>::hash"
+kappa = "c314136f795266f7d0183490e05e152031c5dd20bdfebc4ad4f6396e35e684ef"
+at = "PollMode=u32"
+embedded = "6b0dd0e71938b09ba023aea6e8c7468f7c214594bf1a91982dd1692397bab405"
+status = "residue"
+cause = "mir::Ty: __H"
+
+[[fn]]
+path = "polling::AsSource::source"
+kappa = "04fa3186fae2477bc291a351f97dba1be08508e93fed8f63ad89f2f2c47ea2a1"
+at = "Self=u32"
+embedded = "eeee9db459512892b199bde80e23b71065bd6735c36a43c60033b1792b105588"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "polling::Event::all"
+kappa = "6524d44d1e9734d5671115848e925c68e83299b003c19d50d111e15fb6b59aca"
+at = "Event=u32"
+embedded = "8e85f35dc967013467ddcd03c0254586f029ad85a38d7d17a554efee86a88981"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::new: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::clear_extra"
+kappa = "2ee9f5b238a4b515e4e7cf76f96baafc7a1277ca0c58e16428a26e877ce011c6"
+embedded = "8b83ebe7df4681dbfaf3f1358c2a392f11a78cece80ea7f783c3294511fbff62"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::is_connect_failed"
+kappa = "23b6ba769abc17fc7b9e590b44eafedb134e692ce13735755f1a8c80e7cc0f0d"
+embedded = "51403ffeedda2ceea0adf21d6eaa106bb01502c93e6d8e6482638886a6ae80a7"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::is_err"
+kappa = "899ee924d29671093c0cb535e7d3c0970daae9ccf7c1385cedca939171e17da0"
+embedded = "c22c0aa6dcb20cc9170d53b02b8da06470dd1742671464608537b26a2baeaca5"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::is_interrupt"
+kappa = "8fc648d08c2e122fbad94af864b6d1636ffb7ea2d7ef3237597a7ab1644ea6b1"
+embedded = "6481409f7bec677eabbc344bfeb107f7fad2c7d297539ec0ad4269d7cd3b5dce"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::is_priority"
+kappa = "d653f7ec37c4291fd67a95e91073880fe313a5e324fec5fae91e640c77356de6"
+embedded = "430a0ad34f479893b16b77b943e682a79fc533fa5bd3b478cb663a74713fbbaa"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::new"
+kappa = "d6b9c3fa11a685fa31a8c92ddd60616961a883c35823b7c1fe9a92e361917c83"
+at = "Event=u32"
+embedded = "503d7670b7346a8820391f8035f75694c27378b9fccb93eb94114088365ff5a4"
+status = "residue"
+cause = "mir::Ty: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::none"
+kappa = "01b84fc6c7a6f8d6d695d797e73a9e8b402906032784452435a13a0c4a00741d"
+at = "Event=u32"
+embedded = "3c59aa327b554685ae57a0778533c4394a620f48dd98d604cd27ecd129de4e6d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::new: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::readable"
+kappa = "b2403a655c46cef901cd06d6f6dc7f1fe99fe8eb378d9d4fff67f3a1186c8f84"
+at = "Event=u32"
+embedded = "a28c7b32d3c3795741b0412ed84ae11b0d4ddcd3cd7a124db20734a433003ef6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::new: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::set_interrupt"
+kappa = "4ed41718f05c46e98dc2a6cc2b43b070c67f6876c799dde47bed2e4912e7d8c6"
+embedded = "0979a134f833343369d2d2bf6d9071b614c0f9ff08cd031823fd23735a9f0fc6"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::set_priority"
+kappa = "b6ce4fe3269cc0135cafaa3cb427afd5eb51a2a1cb4456fb855b143b964f6107"
+embedded = "7d6a6d71f38a137af9d3f2c8cb17d24b19fe6cde298a7749540c01cf0e8768d9"
+status = "residue"
+cause = "mir::Ty: Event"
+
+[[fn]]
+path = "polling::Event::with_interrupt"
+kappa = "245fe972f2614ac2ebeaf0733bff284b37e90a142d159b7cfa95f0d153116a7e"
+at = "Event=u32"
+embedded = "55ac442fe76880e23cc4f047d575b389dbf16d4f07285a39a7df7c6008ad4548"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::set_interrupt: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::with_no_extra"
+kappa = "a2fbb500ed0422e7e8a4ebfac15b20cf17e8243d88ff9fc8aad75055869ff3d2"
+at = "Event=u32"
+embedded = "4d729c0b07af0187758d454babbfa4d1e075988a8801c03b0dcbaed3af39f4d8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::clear_extra: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::with_priority"
+kappa = "a6f306f3ada84d49c93918f7fd3ab045863bff68d3f073e8676cb0ff21c78a06"
+at = "Event=u32"
+embedded = "96f09f4a86ee86dca10cb19ff38f16e693074567a1d55a2e44a275cb76c9de18"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::set_priority: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Event::writable"
+kappa = "00dfa66228ab7c2b6f7aae50dd28e760c44550105bf452231d2fc68a1e673425"
+at = "Event=u32"
+embedded = "9a663fe935728824dc4bb018d847c97d362e9467913b065858c320da1614e89a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Event::new: polling's MIR stops at type outside the lift: epoll::EventExtra"
+
+[[fn]]
+path = "polling::Events::capacity"
+kappa = "cb4e50ef7a81f204f5dee31bb5c843aacaf45f2e099d8f1c5953b7aaaf1fb1e0"
+embedded = "bfd1113ffdce89b6b117c31215073b451b3060185e6c959f951026cae6d5f0a7"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "polling::Events::clear"
+kappa = "a213659bda2292b27db26d49ab3c6caccbe9c56a8e8c394184a0fa957a07bb37"
+embedded = "4e5befbbc62f9bb6141aad92d19921ef3a8419617b4847d6642efaea370c4b2c"
+status = "residue"
+cause = "mir::Ty: Events"
+
+[[fn]]
+path = "polling::Events::default"
+kappa = "9eac0822b3c4c52e4e38e0844bc47623f4c89aceaa871f384893781a255a173a"
+at = "Events=u32"
+embedded = "a67b79749ef936bed6a9f053460294412250f11bb65d7ccc41e1aa38b1820b46"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Events::new: polling's MIR stops at mir::Operand::Constant: the constant item Events::new::DEFAULT_CAPACITY"
+
+[[fn]]
+path = "polling::Events::fmt"
+kappa = "8ce9c8bf14a16e1d28bf591d1f76c57839841f8244b0462c94339697deb4fbb1"
+embedded = "0c707c9c07d4df0564f264b7275fb31684a76283dc6f05e0769e02696356a89d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "polling::Events::is_empty"
+kappa = "b9a75af5726175bf158ab5a0fec1479f3a4637470feb6783770ec1ee17633b72"
+at = "Events=u32"
+embedded = "ae5d798dec802c8837fc70d3f6407b6a216ec4771e61fb5cdbce68069d5d3403"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Events::len: polling's MIR stops at type outside the lift: rustix::event::epoll::Event"
+
+[[fn]]
+path = "polling::Events::iter"
+kappa = "bec520574ec7d26eac7bee30d7f4610e8601c1b9de89fb0af8c9cc60707fe05a"
+embedded = "20aa5e297a78e9cb719ef75d9b74166591e574ed294e4add6b8a6d7dab9d281b"
+status = "residue"
+cause = "mir::Ty: rustix::event::epoll::Event"
+
+[[fn]]
+path = "polling::Events::len"
+kappa = "ff4df2f2214b822183495112cf7a048a8a0620e72e52102c377074e516baf3d1"
+at = "Events=u32"
+embedded = "74f7ed1b04cfb4ecd45a19ace3e64ff4bac47672556a74ae9b701ad86ee9ed6b"
+status = "residue"
+cause = "mir::Ty: rustix::event::epoll::Event"
+
+[[fn]]
+path = "polling::Events::new"
+kappa = "6688ef31034d4f0eab157bdddd50646fbd5a8660c9469485e1aec731c9cc6674"
+at = "Events=u32"
+embedded = "d24fc90b05d717a6a0a71dc5d2104e3aed45913dd6e1313e7d32d6524ab75165"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item Events::new::DEFAULT_CAPACITY"
+
+[[fn]]
+path = "polling::Events::with_capacity"
+kappa = "7f866e501159e6b797af096c79efeb95fd753ad8413841c78e481d079f262b1a"
+at = "Events=u32"
+embedded = "c28b7d467a4af199df1ac8f547e2957d1b2052b102d2089b2d3d2e00b783ab3f"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "polling::NOTIFY_KEY"
+kappa = "752490701615c836aef3bc791f1a2c058490b1728329f196cf06627faab5ab83"
+embedded = "30300ddea97c6624cc1bdf833622508b44da5087e0634c4ead908c0a2687a91a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "polling::Poller::add"
+kappa = "eafc10885affe66287ed9b98142f0a31ee1e7357d00a055e20236f602d7dc3d2"
+at = "Event=u32, PollMode=u32, Poller=u32"
+embedded = "2bb95cf0b6157d43de318f4b0fc4689b988eac71cad8ae4c748a30d280726400"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::add_with_mode"
+kappa = "f23870519caf1d1251cca812df00ae4ed982f1eaf853818d2b85c917e1ecf6e9"
+at = "Event=u32, PollMode=u32"
+embedded = "b3005776ef7f7b78f0774a6ba16596d458902edb6cdb6928b78141525b4da6b0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::delete"
+kappa = "8af5c7ad2c6903b6a1998e46508ecb30af38641edab4a1653e3bd543751b50c5"
+embedded = "89f0ea8626d25392a5a722bb24c57c725b7aadf63745d4e109cf8f366e724aa9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::fmt"
+kappa = "e5e1b331db7cb4a0a371a2983ee4a5a8ffbf668f867ba01fc3ec0ab64d9515b9"
+embedded = "e1c246d88d3d29060c9b4d235e9fac21e2f790c32a784ca79246a7b314a0fbd6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "polling::Poller::modify"
+kappa = "45d586730dbeb2238a2ba7459f85aa19360843539e15bd128d1432dea6869013"
+at = "Event=u32, PollMode=u32, Poller=u32"
+embedded = "9454a5725e86be0dee564228da5b11c4fcafb03cb7d0bcf45b3aadc35623703e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::modify_with_mode"
+kappa = "9c9dec0e6a48ea945ee6de64821cd0bc536c3a9f5bb5beebee5a57c1cd92e931"
+at = "Event=u32, PollMode=u32"
+embedded = "110d2f6bbbe7370a93f202c60a7c68098ff3c960762ecfcdf4892b2fc16d885b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::new"
+kappa = "41d4d687bc4e7c85f4fe15422e3979a068215a9247e98db4b90604846c413632"
+at = "Poller=u32"
+embedded = "646dc7caf8d94d78514d244692a4de74e42da5d8cab7bc17cb65fdead48ee69f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::notify"
+kappa = "7d2956e319c4cb9307aedd13c847777b873d5f4b993eabb581fc293b856ce586"
+embedded = "e73343eeff99a371f41ff8f23cb1cf8400efb84fb737cd153de47e61a18341e9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::supports_edge"
+kappa = "d138b8a2a4f03503473f364aa7e5ea3fbbf1542a0d8cbe51ee128c2c43b6dfa8"
+embedded = "1111de6e3b495c7025bb9b21fb9c1110a90459552210ac184fd694c5eabae664"
+status = "residue"
+cause = "mir::Ty: Poller"
+
+[[fn]]
+path = "polling::Poller::supports_level"
+kappa = "cf2d19c60c1da8eef4a49160215206c4e6b431b3114ddcf6cd65e1fb52ecdb62"
+embedded = "bc2f0b79a942874481c8fa949252cab00fbbd0105ab875ff2c70153693b1b860"
+status = "residue"
+cause = "mir::Ty: Poller"
+
+[[fn]]
+path = "polling::Poller::wait"
+kappa = "40763cdb7d51924f65aa8dfcd6852f0ced1cd8963bd971e274b1a369f22762ac"
+at = "Events=u32, Poller=u32"
+embedded = "f2f734447bb203194ffa3ae047936715e33c4aa8880742b2d8ef4284b6f6ba7e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::wait_deadline"
+kappa = "9eab436b03d7c7c0eeed2656a6383e24f25932845c8cc779284838f796a6ef47"
+at = "Events=u32, Poller=u32"
+embedded = "2e4693d99b0f1f2136ca04405f72729b532a785a9b2522f37bcf828b3ee8b80a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::Poller::wait_impl"
+kappa = "9942c0c213e127d91c1f474a053a928ba826e55d371f4852347dab99080a699e"
+at = "Events=u32"
+embedded = "88fef7684ef979ab7e9f57a9c2a149c8164f103b7b53adfa8b6df9f01aee2d6c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "polling::RawFd::raw"
+kappa = "63333d1ce242e359a471efadf9951859f4ade5ac16f76df4e2c1372832c20f67"
+embedded = "1c7a1b86ec9ff2933837b4e89e4cb77652cbfc0011b1a371013df4fd1191f7e8"
+status = "translated"
+digest = "e7cacec5f16ab2cb83bc3134c2d240281b5bf7ae34e8c8924481efaec4ebdd5d"
+
+[[fn]]
+path = "polling::_assert_send_and_sync"
+kappa = "9334f85307ff2de6306e9071760c465f9c74a0ecc74bf89e74a1cdd112627d7f"
+embedded = "d93acda0af46cda8d559be99b2b0d8ae36b32420d1e4757b2a170151f6190826"
+status = "translated"
+digest = "879c8f155f0a9c34bc60220054e94babfbd0103bb1eff9c27917b7c30af04608"
+
+[[fn]]
+path = "polling::assert_send"
+kappa = "f152b011965dd0a5e7a3ae2a3d4bff3a0206353607e560eb415be7961d8e3e60"
+embedded = "d517838c3513daced3023695951147ab52af5d21bb52abe67435179ee3a434fa"
+status = "translated"
+digest = "0beb888f2897c2b4b7d39fe25fc21cacc9ae337835f5f15beca1af99d5a72839"
+
+[[fn]]
+path = "polling::assert_sync"
+kappa = "884515aaf4c8bb41a8bef1007da1eb50fd949023ce7c14372ec1a643ab5d6751"
+embedded = "bee9872e9e24264dd24f5d0b86c6dfd7cca6314077cd5878ff6b9f17436d4c1d"
+status = "translated"
+digest = "a1c4da945f0fe6f0605bbcead871b80af5aff9fbb9e0b1fe3010336123b71adc"
+
+[[fn]]
+path = "polling::unsupported_error"
+kappa = "d385a2b4cfd624f648893597256e7f3d3b97fa483c51dc953780e84456044c12"
+at = "String=u32"
+embedded = "0e7cc6c1958f23bf391069f3d03f2b61b965e89bf039eec76548573a57179276"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

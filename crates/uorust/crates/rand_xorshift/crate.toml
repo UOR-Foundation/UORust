@@ -1,0 +1,76 @@
+[[fn]]
+path = "rand_xorshift::<impl at src/lib.rs:52:10: 52:15>::clone"
+kappa = "6fa6f5511a5afb77c5554352536ab9b8769e69606c695bdf78fc834187a38c4f"
+at = "XorShiftRng=u32"
+embedded = "3ec0f6fb4a24e83845873e33791b4ed2891ed2fafea3c2797750a96c812c2df6"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u32>"
+
+[[fn]]
+path = "rand_xorshift::<impl at src/lib.rs:52:17: 52:26>::eq"
+kappa = "b56009be6e7e12a72a6cac8e2547324e02a4e6f97283dfd89ad4ea77d73010cb"
+embedded = "d79680c77020218819e141aec8cef66b2e1156873ec85bbfd638f8bfe31ac1e5"
+status = "residue"
+cause = "mir::Ty: XorShiftRng"
+
+[[fn]]
+path = "rand_xorshift::<impl at src/lib.rs:52:28: 52:30>::assert_fields_are_eq"
+kappa = "06040713f205c99e2355cea79d9ec0d1f4803b02bb73aae33d7878e47bebbca0"
+embedded = "6856c55e38b80410b8a5cdbdc7873c16301fa38868feca96a29022eabe06c1c0"
+status = "residue"
+cause = "mir::Ty: XorShiftRng"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::fmt"
+kappa = "7061823d9801525b90ea97952edf3db01ad0b679d46edf2efc0dfd3aab422605"
+embedded = "22372a82de2f7fc8c1b040e29b506c249324690727f6d31c37d7d0f6b6f634fc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::from_rng"
+kappa = "78efb77c460cea1958d7ba845fca8dc1afc6a6febe949080c951fadf60e32120"
+at = "R=u32, XorShiftRng=u32"
+embedded = "19bd95312f9f752c9cb35b9233ef787a6760ba541d6928e656e12388f3782d2b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <[u8; 16] as AsMut>::as_mut"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::from_seed"
+kappa = "7d85875847582c6b408940498e97cd97f650f53d43af79b87b20f6a26e45bef4"
+at = "XorShiftRng=u32"
+embedded = "23e80e0e741f084a862e46d924f19569e6fde4bcfb0c2cd255133cab95fbe30a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: read_words"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::try_fill_bytes"
+kappa = "73e9f0ae8a87cbd7064a4bcd5c2ad72a36fe07bb7cfb693b746c5a109d199ae8"
+at = "XorShiftRng=u32"
+embedded = "aad0fc8f2869d7afcf225d61b649ea1f462cb4f0b32e0325db7a03ee931188af"
+status = "residue"
+cause = "mir::Ty: rand_core::Infallible"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::try_from_rng"
+kappa = "a8e35f56525895ba6ec800abe758ebacd8addcc140d712deb0e6dcb1c583f9b9"
+at = "R=u32, XorShiftRng=u32"
+embedded = "569b17e7f37854d61582005640d0993147dd84dd40b80504bc05869f6746e165"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <[u8; 16] as AsMut>::as_mut"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::try_next_u32"
+kappa = "27a5c538dd7554de35bf1f81e4a1631f3954e6454b9be3f59541a1a295c0c64b"
+embedded = "b1b8f541b43689b8d5aebb5252c4cc597886b1a8bda547b3ec88226387c102a5"
+status = "residue"
+cause = "mir::Ty: rand_core::Infallible"
+
+[[fn]]
+path = "rand_xorshift::XorShiftRng::try_next_u64"
+kappa = "919f0639717de8c1338c4b025aa3a6026edb5ab7d0e54d50fe65a18437ad89e0"
+at = "XorShiftRng=u32"
+embedded = "f86571374cf8982df1e57f3a449697d395620b2dc20f38de85e6f0eaf4b3a106"
+status = "residue"
+cause = "mir::Ty: rand_core::Infallible"
+

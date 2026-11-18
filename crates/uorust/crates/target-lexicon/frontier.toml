@@ -1,0 +1,239 @@
+# The target-lexicon register (written by `uorust crate target-lexicon@0.13.6`; do not edit): every body of
+# target-lexicon's MIR at target-lexicon 0.13.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 203
+translated = 0
+residue = 203
+
+[module.crate]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.data_model]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.host]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.parse_error]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.targets]
+bodies = 128
+translated = 0
+residue = 128
+
+[module.triple]
+bodies = 32
+translated = 0
+residue = 32
+
+[embedding]
+bodies = 203
+embedded = 203
+evaluable = 203
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: triple::Triple"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: data_model::Size"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: DeploymentTarget"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PointerWidth"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Size"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: triple::Endianness"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: triple::PointerWidth"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Aarch64Architecture"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Architecture"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArmArchitecture"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CustomVendor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OperatingSystem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Triple"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Vendor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: targets::BinaryFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BinaryFormat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CDataModel"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CallingConvention"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CleverArchitecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DefaultToHost"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DefaultToUnknown"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Endianness"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Environment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Mips32Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Mips64Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Riscv32Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Riscv64Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: X86_32Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: targets::Architecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: targets::Environment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: targets::OperatingSystem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: targets::Vendor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data_model::CDataModel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::Aarch64Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::ArmArchitecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::CleverArchitecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::Mips32Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::Mips64Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::Riscv32Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::Riscv64Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: targets::X86_32Architecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: triple::CallingConvention"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse_error::ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: targets::CustomVendor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: targets::DeploymentTarget"
+bodies = 1

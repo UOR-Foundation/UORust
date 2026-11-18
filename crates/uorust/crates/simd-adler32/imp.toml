@@ -1,0 +1,288 @@
+[[fn]]
+path = "simd-adler32::avx2::get_imp"
+kappa = "d041c27e62e51896527dba0ab6ba48d13aeb38abe12c8ef692a7802066df0d07"
+embedded = "645875fd46c18869e50a1294968201eb2b419a27d7cc6fa88797279549f22712"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::avx2::get_imp_inner"
+kappa = "3733ef6d8e792932c10b60e55d0289e9b3f1ea04e606ae3db539e999bd01b162"
+embedded = "49fec046c2ae0181c48a74a395ba43fb50e61ac4a7fdb5e9abea8658ea095afc"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::CHUNK_SIZE"
+kappa = "e8241e9757c76dc41d252a3b2e1a126f7da235aa584fc5c726da89f8ca85548e"
+embedded = "b90775d55e0f9938cb300cdc6b82782164af4eae107c81537297cf18984d97b8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::reduce_add"
+kappa = "3aa11fd02e47006be7c8736507a6869123f264ca35a66fdac7df6a13ca7c211a"
+embedded = "0842176222a8dab215c52af2bd6978ebd5ba9ffbff9b50ed02d4c2e36932de37"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::reduce_add_blocks"
+kappa = "3f44f25103b449421d9e6fda65083c6cc4bacb70814dffba8bc957d9d8f08f71"
+embedded = "889caf27858cab166b5bd3a4c899ad9825cac778efba6ea82e903ab15564042a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::update"
+kappa = "8e3e2a0b9fc6b9904258f482dae75d1b7657fd82304eec4e95538daa0bb24768"
+embedded = "694634c23120ed4e8436901db1d9e690cde7693154482ff9e3d72a3285cabc26"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::avx2::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::avx2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::update_block"
+kappa = "073a0503b79ed7adadf5343f9c4daa8aa76100ac2d87534a3e4238e55fdd4541"
+embedded = "7f28878328ef0d739d2d4913d3f2b56001a48a4bc1547e80e52dc98e7cd0ff58"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::avx2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::update_chunk_block"
+kappa = "59ab00978ddae9688494da6fb74913e7347e1b3cc81cff23e02a4c6acc912bc8"
+embedded = "7b49c75eaf86d1d52c902622ccafd3f7902c80cbcf39bf671f94735dbc7a30be"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::avx2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx2::imp::update_imp"
+kappa = "c79024a5b7aa974dcf4baf196223785e77330094871c79b61d5497111b153fd1"
+embedded = "bbd92499ca0475b85dfa3813c0d17198d9df7e8e2485c30690833e5fa1754eaf"
+status = "residue"
+cause = "mir::Operand::Constant: imp::avx2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::avx512::get_imp"
+kappa = "dd73fdbdbd3866d8e1613eb259ad6675e46d06f647901f2b43445bf1b449cc83"
+embedded = "8f41933efba11f84201a75e921cacf49e66a9e7bf3fe77a2a396ee1120735d51"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::avx512::get_imp_inner"
+kappa = "f0d8dc790d696dd66bfa9cc391f5c466eecaf2a37b5b91a665d478c226da363b"
+embedded = "b70b44e0968622c69b93a4b45b316d42c64f7854071374fdab871a2d59308dc2"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::get_weights"
+kappa = "edfacff4a8521a3c96aa2caeecd371e3fccdcbd7f257857f1d80a4b1772be2e7"
+embedded = "2359294fc591e9df7625b235a9b3e50bd536de0cfc7ad1ad05b94b577a78ba2a"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "simd-adler32::imp::_MM_SHUFFLE"
+kappa = "bb297afe1818a916f7c3750734a9399e803f49e9f4301e71bdffcb488d606ae9"
+differential = 7
+embedded = "106d60b440efcc5fe787f294d6e14132e0d7b119d18031d397fa02b7a006c482"
+status = "translated"
+digest = "d85342a468a03ecc770bd92b958307541ac457005f39e8545dff927368e3af3c"
+
+[[fn]]
+path = "simd-adler32::imp::get_imp"
+kappa = "118cb1db768da6e294896adbb8c424a9bf4ea7e50dc6a33cae5b99d00a0516c8"
+embedded = "759486aa0598d37e95b59ba23bb8724a1f5d794f788511c6d9c594852da2f9ab"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::maddubs"
+kappa = "b200118c3241de42c73922137990075bf12b6e35f30778071579bfa301052faf"
+embedded = "14d1f15ca3fb4a0f06b3cd77b33a88242ca2ec9aa01c91b548262093775107a1"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::neon::get_imp"
+kappa = "b69a3e48780224b471e38647f3ed4bfb872c0e0763c752eb8a55c8dbdea52c79"
+embedded = "909079df44b87d643395ab1dada466c00e86f770fd248f432267203c3f00105e"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::scalar::update"
+kappa = "593370d1d8c7f7e1695ad1fb8ce26d1fd680c7c260849098d20348a10c968f3d"
+embedded = "97cd01bc48843ad0fdcf6e57868c293842a33006600e0fa669e0a8c4c7e45ee7"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "simd-adler32::sse2::get_imp"
+kappa = "7196735f5699c670ecba4f5773d5f851a8bc859a870e3d099e7e987392b99ab9"
+embedded = "23f6137efb3b39a96ca27eb4fa16d166902c804be372664bf7a04ed027f3ed6f"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::sse2::get_imp_inner"
+kappa = "c15a46bfb45659d41acf963f69039c2ff3140e5a722962907112125f18720b86"
+embedded = "4d5140bb52ee75c9aa6d539c5abfa233d86fdc5b31fb35bdf4f683ade1c1cd8f"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::CHUNK_SIZE"
+kappa = "182e316021d5ff90701a1c0c7be988f920d68cfb172c83c1ded0850dcb5ba02a"
+embedded = "3989138f30ea6c08e4065159684945566d6a5d49fcc76b307504d64ac8c2e143"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::get_weight_hi"
+kappa = "0e747de4cc10a2ef7cdd98bc925dae099990947b734bf6fffdec0285d090a49e"
+embedded = "102dc980ec243250cac6a60a84cef4f0b6b04e8b0092dd50c7fa5b51206341bc"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::get_weight_lo"
+kappa = "cf4fe11fadbf8933ec688770b879b3f5fda9ccac7727298851b678b4e861d4c9"
+embedded = "fdbd9d7c6765a8850fac09dbcd1dd7e1315c4d3cfba8be29a3757387a05f69ec"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::reduce_add"
+kappa = "320d586c510cf4dfe7f5b83d8e9c7a420f26726c6686710d2d841b612ca99544"
+embedded = "1c55974a7de76a03e2cb5baeae62e64ddb4dd34af8422c8417735cac97669f18"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::reduce_add_blocks"
+kappa = "74cdf54248c5eb3ed92d16cc3839a4a349cfd0a5339125ee6f31c21ea8b42017"
+embedded = "e8bef50cc2119145a3e888de424e1ec94453d45f549814fbe8443492ee974ee0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::update"
+kappa = "3e8f6f36182ae693f3ea3524a34c701beee9c34a073ec31a42ee7d2bfef9586d"
+embedded = "2e356396a356eb8a529b7ecc6176ac551bbef34b727cce810898d251d515b5a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::sse2::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::sse2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::update_block"
+kappa = "5065ab5bad39ed71b16f96f3b29c9e4a154218d2e6dd6ea98330d97f33a21868"
+embedded = "735697184084d0c277df88db7853f63677b9846d292b23ce761c370f1928fc83"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::sse2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::update_chunk_block"
+kappa = "dd0e1bf5ec38b9469124e527cd19105d6f8408bb7e29ec99a147558fbd24c5bf"
+embedded = "51e4e8f7f6ccd874428dbc5a61223ff58b522008e62fbdad7c9485ee3f4ec37d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::sse2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::sse2::imp::update_imp"
+kappa = "42b6ecb06435c2c0a6c21e2e143a15f4af342fec1b34e433ea95558607600e66"
+embedded = "3e7b9922bbcdaa1d43f665cfd71fc9775ecbaac90f2b22aa330bb6137f2f996a"
+status = "residue"
+cause = "mir::Operand::Constant: imp::sse2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::get_imp"
+kappa = "f06ae99eafab51c907675d710bd661e5036a067d6b2f28c8d671a796c238d00d"
+embedded = "3115542e82e7a5e7ed126c2a0b0fa5567a2ecd2d586981a2e8a561d7ec4e7e39"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::ssse3::get_imp_inner"
+kappa = "57128af7a665feb493219128f42c582e7adb6ee1efd4fde393e018a019c5b08d"
+embedded = "954e0154bd5752000c8d01e5aee14c4fb4023e24a7454a625d97cd374e7f07c3"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::CHUNK_SIZE"
+kappa = "48fe1fd34db009e1dbe7543ded6fc729caab97619e726ad4a5e6c047e8320a12"
+embedded = "c16dd135723786fb6cb7e3a9ff26cb318d153d8aba0707b603b6b4883aa86ea8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::get_weight_hi"
+kappa = "70d39220b01d6574ee2b8f70f4423696511490f82fdebc29543a61bfd61de3bf"
+embedded = "1564cb64b4a101d82c6f489a8c54e1578d86e162cd4964194e16a1dc9eabcd5d"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::get_weight_lo"
+kappa = "e552fab6d4cad4d39c46dbe869c9bf4281c3e5f417fe81f6d0f46aaeee97ef36"
+embedded = "57c7f236461fd52ddceeeff9316e70532d95517fb2564bdffc47790e2fbef6d3"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::reduce_add"
+kappa = "424dd5be453f441c7e8b7cc1b5a0eb8df9c0d76bf513ef5730ba0e1c86579aca"
+embedded = "915771821f563804877e5abc61a4545b712a50e8f9ea2c5546f00c38586cabdd"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::reduce_add_blocks"
+kappa = "2a7348d86500a3c63dd34d06779dad72500db6c0dac22d780db7d4443629fbca"
+embedded = "b465fff5358b57806cea73fbc5f53d1e35e3a8578ef9363f4058abe431caa7c4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::update"
+kappa = "510ff31e5295a6e823dad5334622b24d64cbdf9baa67bc1b33efa54d31bcde81"
+embedded = "e487bae29ec2c9d61b8b541b0ba39f958a53e78ce43924d60637105c566fdc00"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::ssse3::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::ssse3::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::update_block"
+kappa = "3da194ed36781d150324ca6579e10cd96cfe90a652b393eede3ecf586c07867e"
+embedded = "38077451c06ba82264659eab74f43ccd67254dac8ca1b067ff65ace195bf4365"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::ssse3::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::update_chunk_block"
+kappa = "cfb8a21ab405d851f85c739732276f23d9cae96590824dcd384a53114dad27f2"
+embedded = "320bbf9ad80b0280fe117529f6f81bb7d05a609d28d2da182b64740497711cbb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::ssse3::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::ssse3::imp::update_imp"
+kappa = "dcc5a8ec9764bce32ee47d9a606f1fb09a1f8e4838941b1b0c479a6d950180e0"
+embedded = "25069eb8f984c0cb9b7eda3c18e12381ba21722f9851b53e8fb794e6d3c3b9f4"
+status = "residue"
+cause = "mir::Operand::Constant: imp::ssse3::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+
+[[fn]]
+path = "simd-adler32::wasm::get_imp"
+kappa = "3e238cc962051adb2fdc303bfc0d0890f2e2a3fc7f4112e3c6e19b247cf310d2"
+embedded = "3568f4f5f46c16f1eaf2f775d3395ab6318ddb46441d796c787d2d059f3f1026"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::wasm::get_imp_inner"
+kappa = "9bf1cb45f941eec2252582b9a52d1aa8d254be321412ed076b0f9e892991f8dd"
+embedded = "4c2426562f9a4b23cf5261a664e8ed2028605faa43a761e06cd94c44416f0cff"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+

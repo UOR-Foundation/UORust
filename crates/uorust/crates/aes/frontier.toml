@@ -1,0 +1,409 @@
+# The aes register (written by `uorust crate aes@0.9.4`; do not edit): every body of
+# aes's MIR at aes 0.9.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 289
+translated = 26
+residue = 263
+
+[module.aes128]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.aes192]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.aes256]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.backends]
+bodies = 172
+translated = 19
+residue = 153
+
+[module.crate]
+bodies = 72
+translated = 7
+residue = 65
+
+[module.features_aes]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.features_vaes256]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.features_vaes512]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 289
+embedded = 289
+evaluable = 289
+blocked = 0
+
+[differential]
+bodies = 12
+theorems = 75
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: cipher::typenum::UTerm"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: features_aes::InitToken"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: features_vaes256::InitToken"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: features_vaes512::InitToken"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::word::Word::ror_distance: aes's MIR stops at mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Aes128Backend<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Aes128Enc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Aes192Backend<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Aes192Enc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Aes256Backend<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Aes256Enc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: x86_aes::Aes<#usize_RK>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: x86_vaes256::Aes<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: x86_vaes512::Aes<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Aes128"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Aes192"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Aes256"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BitXor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Shr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::mix_columns::rotate_rows_1: aes's MIR stops at mir::TerminatorKind::Call: backends::soft::fixslice::word::Word::ror_distance: aes's MIR stops at mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::mix_columns::rotate_rows_and_columns_1_1: aes's MIR stops at mir::TerminatorKind::Call: backends::soft::fixslice::word::Word::ror_distance: aes's MIR stops at mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::mix_columns::rotate_rows_and_columns_1_2: aes's MIR stops at mir::TerminatorKind::Call: backends::soft::fixslice::word::Word::ror_distance: aes's MIR stops at mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::mix_columns::rotate_rows_and_columns_1_3: aes's MIR stops at mir::TerminatorKind::Call: backends::soft::fixslice::word::Word::ror_distance: aes's MIR stops at mir::Operand::Constant: <Self as backends::soft::fixslice::word::Word>::ROW_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aes128Dec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aes192Dec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aes256Dec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AesDec<#usize_RK>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AesEnc<#usize_RK>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes128::Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes128::InnerDec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes128::InnerEnc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes192::Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes192::InnerDec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes192::InnerEnc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes256::Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes256::InnerDec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes256::InnerEnc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes192"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes256"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m512i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: soft::Aes128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: soft::Aes192"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: soft::Aes256"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: x86_aes::Aes<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BitXorAssign"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Not"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::utils::delta_swap_2: aes's MIR stops at mir::Instantiation: u32 for a parameter bounded by Shr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::utils::shift_rows_1: aes's MIR stops at type outside the lift: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::utils::shift_rows_2: aes's MIR stops at type outside the lift: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::soft::fixslice::utils::shift_rows_3: aes's MIR stops at type outside the lift: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: features_aes::get: aes's MIR stops at type outside the lift: features_aes::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AesDec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AesEnc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes128Backend<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes192Backend<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::soft::Aes256Backend<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::Aes<#usize_RK>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::Aes<11>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::Aes<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::Aes<15>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::Aes<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesDec<#usize_RK>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesDec<11>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesDec<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesDec<15>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesDec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesEnc<11>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesEnc<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesEnc<15>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_aes::AesEnc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_vaes256::Aes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backends::x86_vaes512::Aes<'_"
+bodies = 1

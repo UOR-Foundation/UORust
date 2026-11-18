@@ -1,0 +1,28 @@
+[[fn]]
+path = "aws-lc-rs::bn::ConstPointer::to_be_bytes"
+kappa = "c24ddd2d1793fd4627a761ca682464ae4615a1a241ccc138b0febcbe9187f6d5"
+embedded = "6a8d4a0ffa3b7caefdddaf8bd00f156014b0b0a686b3f0ab456390baacd08d4c"
+status = "residue"
+cause = "mir::Ty: bignum_st"
+
+[[fn]]
+path = "aws-lc-rs::bn::DetachableLcPtr::try_from"
+kappa = "616f8ec9186affa3c1c21bd5ac01156c8750aaf95c6afd83b1d5be14d1c03e45"
+embedded = "bdc7c9107d374ce80ef57e40686bdf85cd7b43183f587aff9f6aac22ab76d558"
+status = "residue"
+cause = "mir::Ty: ptr::DetachablePointer<*mut aws_lc::bignum_st>"
+
+[[fn]]
+path = "aws-lc-rs::bn::DetachableLcPtr::try_from#2"
+kappa = "efb9624fd68d3d38fb2f36a1e5e14230e945771b2f5aa4f8845d535b2fe1fa75"
+embedded = "de5b072de98c38d63445f68dc2b13e624e330d39b1d42fda6db4cd24b9bbb5b2"
+status = "residue"
+cause = "mir::Ty: ptr::DetachablePointer<*mut aws_lc::bignum_st>"
+
+[[fn]]
+path = "aws-lc-rs::bn::LcPtr::try_from"
+kappa = "d0ee24d800214f5200f448d5d82e9c162ce9ea618704d04c17e38b59abb95ec9"
+embedded = "66aec5dcfd02ca38ea87109524942dd3bc398507348734e68821707b44db9e6b"
+status = "residue"
+cause = "mir::Ty: ptr::ManagedPointer<*mut aws_lc::bignum_st>"
+

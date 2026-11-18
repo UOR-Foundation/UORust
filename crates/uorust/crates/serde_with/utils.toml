@@ -1,0 +1,533 @@
+[[fn]]
+path = "serde_with::MAX_NANOS_F64"
+kappa = "ac18c01e15faa848ce10731960fd2ec1b1c8c77e959469a8af1a8c6c586b7dab"
+embedded = "c1891b3f9c4bc5c1798717e3e81330c0c8b80c4c82359c95910a18d53ba46b3b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "serde_with::MAX_PREALLOC_BYTES"
+kappa = "8b34c73544b3a3774966b36b88cfc4eebad94b7579285134202464498af81623"
+embedded = "065f4288fd8c1c0ad095edeca18755a8daccf7f323448ff5f4eb7f83da247884"
+status = "translated"
+digest = "d965a1968ca692a7785ebd8fd9df13f8f957ee2b06cab42642567afa7bbf4ade"
+
+[[fn]]
+path = "serde_with::U64_MAX"
+kappa = "564b07245e6b0be79ffb9011bae4cdae2a7d7d2793f63e0d7dc3289f23d42183"
+embedded = "7f642cd88662e557fffef4079db7139d7ea802aed5183a2548a8df02c568e978"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "serde_with::_size_hint_from_bounds"
+kappa = "4cc7179c158d298bd969bd680dd5e1cc2b664485412b945cbb2d303ba7450d5c"
+embedded = "76066e893506d0c236edea8a4b35ce0fac97b4767265541f4a89e22aa201b327"
+status = "translated"
+digest = "e29a708cfc86cacf72367c55fcc34074d54c5ff5e5f8250c30a19ce804c898c4"
+
+[[fn]]
+path = "serde_with::array_from_iterator"
+kappa = "32f5539cc31e9626b18fd422449fcc436db251ddcf08a6e1d532f5031127cfd9"
+at = "E=u32, I=u32, N=#_N, T=u32"
+embedded = "e0d464557ce76d65db2c664efe9c68587da3b8ead58906bf19e432179c31cff9"
+status = "residue"
+cause = "mir::Ty: dyn serde_core::de::Expected"
+
+[[fn]]
+path = "serde_with::drop_array_elems"
+kappa = "7f8c6c3444496178e3fd7bd8f8665495e68b44cf25540970bc56a81c0071f124"
+at = "N=#_N, T=u32"
+embedded = "9eefe5f0890fe285e1f25509b101e1a4fe1ed8451a1f79f93987563aaf8b5b17"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:13:16: 13:21>::clone"
+kappa = "96819af08a56563cd7842a564b05f5a566f248a0d3008f4fc05b0921e101d1c8"
+embedded = "79f0587ed4c5b32a18579ef175d4e08b857c383d5d39e60ef627762196bfa90d"
+status = "residue"
+cause = "mir::Ty: utils::duration::Sign"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:13:23: 13:32>::eq"
+kappa = "00be02bc6f4e70c0ce35b0e07d083a5045e4795cf7713e5be5d411665e9c3185"
+embedded = "f8a1b5010e97de6cc5e26455cc11c80dc133631f147c8281a3d21111ee44272e"
+status = "residue"
+cause = "mir::Ty: duration::Sign"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:13:34: 13:36>::assert_fields_are_eq"
+kappa = "912446c760f16d7851f3ccfab26f7082460e93b252dddce6962fd90950d4abfc"
+embedded = "e1bb0921b5accbda79fdd3653ad9358eccbcc1c50ddf00b878ee3de66afd6740"
+status = "residue"
+cause = "mir::Ty: duration::Sign"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as"
+kappa = "55db00a03e8a21da6737f40a0b22a76b7c7b25ca97c1879275a3e7a718a272e4"
+at = "S=u32"
+embedded = "5c054c6bb5d1e4798dd628cb0bb1d27b69f36c1fb6230611297132aee93c6fb8"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as#2"
+kappa = "2d8d8da8ee45de201be3c1af706cd5bd3f2a991a970be603046f4f8da1eecb76"
+at = "S=u32"
+embedded = "23e20faf64680cc3911c5b482a5ef1e17843d586da39440ca02ec32b2591cc70"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as#3"
+kappa = "c67645c79eb03233356db09183f45f428584e3f702b4c3e97e4982bf1236e40e"
+at = "S=u32"
+embedded = "e72eaa6e0e98161ce4966cf4c9d436daeb2fd554e77cc958f9a44613fb65bbdc"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as#4"
+kappa = "2ab98fb4d8901b8e4cea739bfccca91a6ce86363e54a3e154053cf3264fef3b1"
+at = "S=u32"
+embedded = "aaab6db99001cbd3b525eb47a90252ae1cb6be0069dfe1c966fe5dca92074043"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as#5"
+kappa = "13886c64496ef48fe109298d67d5bfb3d2893810265efba9579ea9fe6a61c101"
+at = "S=u32"
+embedded = "b797604a8754bea6b5fcd73e7f3cb1b39e55acf8d382bf0ccff718ccdfa3be5a"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:271:9: 275:68>::serialize_as#6"
+kappa = "c5a8124c2070b5576a8b46473f2f7956814f510828b39800c052de2df585c220"
+at = "S=u32"
+embedded = "315544bd800dd8016c9684e745e5ecbf796ef1685172893f7300e2e8bdea7c9d"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as"
+kappa = "6041b6aabc93915503fccc508846bd87efe3aaafb7e2d4f940cea1ee89838b15"
+at = "D=u32"
+embedded = "4e9ba299442a29cb54a24ad2a74a55f7cd7db3a424fde71a8528a00c332bd014"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as#2"
+kappa = "7cd7cd413010faaa36656642916a0cf908ece97f43404b668534865eeff09ff8"
+at = "D=u32"
+embedded = "0dec7caee79368823c796ddcffcdf5718bce4b6b01d9bb6047fdd7e847af82f9"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as#3"
+kappa = "b94b3801be0d336d6eafac0edb54b41d0e0b3183f18b883c302b69ca72d85bda"
+at = "D=u32"
+embedded = "b3cae9d83c2ae6b98ef9b222752d59941b0497228bf379d36182d8b36ecbb45c"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as#4"
+kappa = "e47bff6c1336f698ecd6292adaff541a205a9a872f7af86f2aaaa42877f08b7e"
+at = "D=u32"
+embedded = "76eef864ee497e870d69ec998a4d07e30a7db2f106a0dfeebba41c8a325d954c"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as#5"
+kappa = "19c28754e1c11b2ebbe273f776b9597179309f1ea8998f3f1749bf03fa2c815d"
+at = "D=u32"
+embedded = "a51da7c5f02d7309c8c567280aba57bf642855c542ddd9e3d43e38fb837d175a"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:286:9: 290:76>::deserialize_as#6"
+kappa = "ab05c80f4fcb34f8fbd2fc16d926d32857059f72a87f52433a2b38766e035818"
+at = "D=u32"
+embedded = "c5024c490a1f6d20071dd8f1dcbd6ffda8d5026e0eac94bb3e65d13b5fb6348e"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::<impl at src/utils/duration.rs:46:16: 46:21>::clone"
+kappa = "8e4992f1ec4ab0f24460117bf61be8912232dffeacfa4bf22303ed383b58b801"
+embedded = "e9767e099838585e4693e895218b24f378bb251b8dd0fb320a1a43139fca32b9"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as"
+kappa = "a7bed89bc63754ce6d8526eeb8e37f5a469bdf62108033f5d65f554bba5583be"
+at = "D=u32"
+embedded = "c5ec0e28bc0d3daca6571e6f233246b696b0d9a6afe34d6cac6bdb6809de8025"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as#2"
+kappa = "0c43550c5eb57c3852b80110dd98956bb81c7d1ac62ecd578a1a171110a82b95"
+at = "D=u32"
+embedded = "f9c1fa7083e292658b4c47c9d124fd4752f92173059999017b1a8e1a7c4196ed"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as#3"
+kappa = "bfb2b2fce943e434f13bc685c61f9f2e5d54c73b68f03735e9dafcb377cfb533"
+at = "D=u32"
+embedded = "aba3da70230599c33a65a2759780218de296fddad11307af1c8d3a90a581ffdb"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as#4"
+kappa = "866c6478b4d46b9695949abbaa6d471eebff99271629a8be21f21367896e283a"
+at = "D=u32"
+embedded = "c3ec55bff016b63a55cb4bc76633aae866a7e3bc7f2d8ed44badc07fc8435fe1"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as#5"
+kappa = "a9e3858636cae3c9f5ab01fb6cd4392907af1012f1146d10c9897b4d13bb16d0"
+at = "D=u32"
+embedded = "d25e5803c7968fe3cc884bf70c8153d9c09518d9aeac69a0cb270aa922832774"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as::DurationDeserializationVisitor::expecting"
+kappa = "1c0bb95f0d00c3661362bd8f343e90820f19abcc50eaf6e790995b09a883dac0"
+embedded = "32e88c55bccdc9e104dcd603a530e3173b88fbeaa713b278a77905dc7c1e93f6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::deserialize_as::DurationDeserializationVisitor::visit_str"
+kappa = "ec66280e35df0608f958565851793345c1f23ce51aeff2afbda5060f74395ac5"
+at = "E=u32"
+embedded = "4a4851295ce9379ae8f34766835e20a7bc27e810a59f80d4a91adc1bbf05144a"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::serialize_as"
+kappa = "8ddd3e005d0eb511a15e0ef4322585f04e8bef65d13f8dfadc24a836577db248"
+at = "S=u32"
+embedded = "843b6c40f40d4d2e40f26b71d09f0f472f97f936be8000b0a20ddc910308720b"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::serialize_as#2"
+kappa = "e3b7ec9b4f5fd9679a51024de157f485048063ed2f0214cc693615c4ee5e0110"
+at = "S=u32"
+embedded = "65a54132769864cc579eca9bc0185ab757e9cad766993a822a6fb784aa0e1d83"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::serialize_as#3"
+kappa = "326cba396f6ffb23da28a6350ebce5e942c09a0a345fa339ecf6e3aec9e14ee7"
+at = "S=u32"
+embedded = "133bf723550dda3a90bedf1064470731fe8da00585f14b2ea4976642840453f4"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSeconds::serialize_as#4"
+kappa = "c0018be2ff6e694f98fc28ddd9a871679fa52648cf55e5e9aeb88622d5336ecd"
+at = "S=u32"
+embedded = "273de3e34c4b6eda720ede82a0c522b0ec0754c093a367e94e6530b16045deb7"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSecondsWithFrac::deserialize_as"
+kappa = "916c2d66e902e4581310b3514ab51f8c4d382abff30871d1d34ee1aa9c2d6d28"
+at = "D=u32"
+embedded = "ea5928ff70fc2cce15198a77f6791f8f42457f9dcdf3a0f029057fc4fbfebcdd"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSecondsWithFrac::deserialize_as#2"
+kappa = "fba5d8ad3d46d07addba83c433f329cdac9e917323c1c011c32c87adcd35821a"
+at = "D=u32"
+embedded = "3ee7a63307fc145419d2c7955e3b895eb38f158eb93fdd9791e6a060fd1f0247"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSecondsWithFrac::deserialize_as#3"
+kappa = "37f0829fd7aa4406e258295f292d82a1d58886445c6d11e3923161c77895ee99"
+at = "D=u32"
+embedded = "fc1c91fc092886f5b7244a0dd74d3dec7f7c06796f2f88660be8ba153ce18b59"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSecondsWithFrac::serialize_as"
+kappa = "6fa005cea8d724f1cb16ac1edaba4e9304a218e57c8ab0f150133c2a3c8b2a7d"
+at = "S=u32"
+embedded = "1bd911cca2b00df848b8c9b3c1ef67e803b6603cc34b237328b8bc543eba688f"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSecondsWithFrac::serialize_as#2"
+kappa = "4dab4d9fb1957ddfb50744a4dab3fa55f38b3b28045a6d1c5a9a976c793db6a4"
+at = "S=u32"
+embedded = "689739e92ed60306fc5c68f89b5f9ecab71631885597a70ce327893e64d36077"
+status = "residue"
+cause = "mir::Ty: duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::checked_div"
+kappa = "05d57146156076fd92edafa55294456d86aeb13276ac9cda7edb8d70db93c90d"
+embedded = "90c32b68dc492689ac6aac3cadc86bdc889823e7920365c9016cf232e30f810f"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::checked_mul"
+kappa = "11d500e1ff8a453e25285cf5a5a5fbbdc39e077f17ba839b05ff92d5ec8b1ae4"
+embedded = "b61b3a9a3029e4faf5314c2f2192df8ca85949543aec3a7aa403afede6eaffcd"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::from"
+kappa = "bd3f38a48e97ae2b2251c7bb6b4020c7099efc424db75a7d1ed43b310a1fc2da"
+embedded = "bfcca4ecefc44fe1335fe93c831abed28030785ff83f48ff2a3e3f713c06f5a7"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::from#2"
+kappa = "283b8d83387b407ab04fc4c4d88dfff93a130b53e5925de96739c394cada4412"
+embedded = "faf8c9063d4c55addda54034e2941f3cc27444a1525bb41345e8d80d19283877"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::new"
+kappa = "815f0007766aabf039603a2d3f7e82e3ecfe5cf68b74675c8ebf8aee17e552d7"
+embedded = "130b96ff1f10de39251c6149517d9882f40a07b2cb0af256820ff4e2ee18a784"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::to_std_duration"
+kappa = "2b5541a505f9c23c6a4b34d5ca4ae81191a29a562cf61cf2451bf66738a917ab"
+at = "D=u32"
+embedded = "697f1af868aec20a7c29679d21a082059de75e5ddc61b28e2487e31f2fcffd9b"
+status = "residue"
+cause = "mir::Ty: core::time::Duration"
+
+[[fn]]
+path = "serde_with::duration::DurationSigned::to_system_time"
+kappa = "800106f1f45d66e5e219d3c48c429aa7de736c7f78578ffc7b7c362883cf60ca"
+at = "D=u32"
+embedded = "e0eaa4cc1f10ab4dbce93d6443de60b3bbf8a4466e6d3a40b8e1f2f1b083e701"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "serde_with::duration::DurationVisitorFlexible::expecting"
+kappa = "3d3bce58bdb26c4865c8e66f69a62d6a0ad7d02a93e49e0226e7376c4085ff4a"
+embedded = "eae4e139f7b3efdf87af32526ebed574571e7bc68e7cbddf3e5adf9c9bf9a9c2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::duration::DurationVisitorFlexible::visit_f64"
+kappa = "a873293b2b29c317611d7657d39841b8659154fd92d56f2c23eab246f4f902cc"
+at = "E=u32"
+embedded = "6847df92b0ae37645c8494d15c0e91d1831b644ca63d190418bf525eac435016"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationVisitorFlexible::visit_i64"
+kappa = "6a61ec2f5065cafa90a3157bc101ee51fb86f305acc95b3a802d8d7c02f41e0d"
+at = "E=u32"
+embedded = "e9bdbf1ca945ce21756cd5d4f9a1d4799832bdbd400cb6f5109473d0b176dec6"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationVisitorFlexible::visit_str"
+kappa = "d95da8ca173df1876caa1e43138bbb491eb1dcb02dca8ffaf534048058def9a9"
+at = "E=u32"
+embedded = "e659eaa098535c0db45db70102cdb8e33d478dd575572c4d19134f786d95cee6"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::DurationVisitorFlexible::visit_u64"
+kappa = "930691761cd63992b24010091fadbc912079584e49bd0473e4f53f96aef67dcf"
+at = "E=u32"
+embedded = "da183463db54262eb6093372967e31f66091d8bb55c3344ca398ac6d9a497d68"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::duration::Sign::apply_f64"
+kappa = "da2167e39fd7a5087083b7208b293eccef46ce2f7e14e542074d9277927374fd"
+embedded = "2e23be904fb71df66bc439ff38194a4a3dfdc78659f5af37031c06a9a547cbe9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "serde_with::duration::Sign::apply_i64"
+kappa = "31a2bf615c2610033a8265c38cedebbdd55816291c0740c41ce01a8d860b170a"
+embedded = "a28e903b19b7bf395d885bbeebf93c60e89b31718b5e6fe44824f87754dda93e"
+status = "residue"
+cause = "mir::Ty: duration::Sign"
+
+[[fn]]
+path = "serde_with::duration::Sign::is_negative"
+kappa = "8777367499d7bd79be38e05547ddbd645488c4c091b6ea4e4a907edcdfabcdf0"
+embedded = "b5f9ad3abe3f4181bb26b73d9b6195b21a92b7f05c88dc61bad2fccc4ea455f2"
+status = "residue"
+cause = "mir::Ty: duration::Sign"
+
+[[fn]]
+path = "serde_with::duration::Sign::is_positive"
+kappa = "3f6669e41826b5d307d9df7d8b524a85255b5f521ce9f40ba617369b1236c7a8"
+embedded = "71c153f01227517ad527b98dd2031b21c557a11e7d098f63cae1aa0e243c4524"
+status = "residue"
+cause = "mir::Ty: duration::Sign"
+
+[[fn]]
+path = "serde_with::duration_signed_from_secs_f64"
+kappa = "42f9a5d9f76ce78383156b880a57d2752ab0023d704ae505dec179a944e53dc7"
+embedded = "af242216fcfdd66efe5656b78b7fefe79a4068c60297a9ac13554f3cfa13f79f"
+status = "residue"
+cause = "mir::Ty: utils::duration::DurationSigned"
+
+[[fn]]
+path = "serde_with::get_unexpected_i128"
+kappa = "1810023db62a24e832e4d6a573c294f53a338f174aca244e1ed1142e8c76b7e7"
+embedded = "b23f26724b2f348c309ddd7cb469d5cf97f122bcc74b6e05b2606e9b1b74229f"
+status = "residue"
+cause = "mir::Ty: serde_core::de::Unexpected<'_>"
+
+[[fn]]
+path = "serde_with::get_unexpected_u128"
+kappa = "4e635c6d01e2a7e59b1379821ac3686e79532efe2beb2628069a27cb2712cd7c"
+embedded = "b5f2d76274f54311afd96fe734388560fadebd23da4658b88ccc082e851198af"
+status = "residue"
+cause = "mir::Ty: serde_core::de::Unexpected<'_>"
+
+[[fn]]
+path = "serde_with::parse_float_into_time_parts"
+kappa = "069a92dab5431195c1c765a47ac162e5a63420307e18f0a30da76d96cecd0e80"
+embedded = "a6120853178208956e0add0e81b5c48662eb9e0d5ef1cf0c26fdd1d8b06087c3"
+status = "residue"
+cause = "mir::Ty: utils::duration::Sign"
+
+[[fn]]
+path = "serde_with::size_hint_cautious"
+kappa = "2e0a77e9a911e39997152ac15cf55baa44622b16d6d6b4969669dec49f215948"
+embedded = "98f7ea7c5d387b7fe9989b697a361a1c5050c0dfb3a877ec772e6d716a4757c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "serde_with::size_hint_from_bounds"
+kappa = "90167beb56eded46fcb8f8b46fdc9f18434f519aa60e628c0ce06d1eb711df8d"
+at = "I=u32"
+embedded = "dac97dc3c31ead3f391fe73b0023e3242778a9180e23f640d003aac3eea058d2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_with::utils::BufWriter::into_str"
+kappa = "8ee587e8f916be646601a9608b579ce5da8b3ab0d2ff6b69d2e09eabbf399625"
+embedded = "49f2f402e2a2768ad95efdfe4ff7260d5fd7b9b7a6d9fe1626311380b777fff1"
+status = "residue"
+cause = "mir::Ty: utils::BufWriter<'_>"
+
+[[fn]]
+path = "serde_with::utils::BufWriter::new"
+kappa = "60e5aaf6287e715df4ba87e0449866ab1177154b0c432abd4a7e42714e6f62cc"
+embedded = "ea3cf7af54ee2426ed31e1f2922ca3adddbe1633d1c44922389335ac04290c7c"
+status = "residue"
+cause = "mir::Ty: utils::BufWriter<'_>"
+
+[[fn]]
+path = "serde_with::utils::BufWriter::write_str"
+kappa = "e09dc82148a761ef939c32d3b348374579aa9f406c2a4d9888ea13796318936e"
+embedded = "f652e6996faa3376c1f485a06a97451795907f0958124fae03106ce1ed7c0c9f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "serde_with::utils::MapIter::new"
+kappa = "c6f9db510bd431ed2229d45f1992b8ac868819bd210eb33f06d6f19dff322f5c"
+at = "A=u32, K=u32, V=u32"
+embedded = "fbc7ab459e78419be53062f3202d21b35bc9e6983520fe82f053a4e075d26a8a"
+status = "residue"
+cause = "mir::Ty: utils::MapIter<'_, u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::utils::MapIter::next"
+kappa = "202f26c002c7848f148d1a275d606dedee169198969fb3b3ce87fde0c281a0ae"
+at = "A=u32, K=u32, V=u32"
+embedded = "fd569617fdadacb0dd203fe41390f33599d5e898ac9e8a86622095583c3b0e49"
+status = "residue"
+cause = "mir::Ty: MapIter<'_, u32, u32, u32>"
+
+[[fn]]
+path = "serde_with::utils::MapIter::size_hint"
+kappa = "19ea598220c5b5d72dab95f5ea23ddd84ec31a0aeb31491712e12ac8014bce18"
+at = "A=u32"
+embedded = "7032b87749ce47db690b8af38b58696e94ffc5c038e68842dc301acdb991eb11"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "serde_with::utils::SeqIter::new"
+kappa = "a2a0d746f349e19aa2fe90da2b91f063e9ece922b1a84d48c42058fa201991c0"
+at = "A=u32, T=u32"
+embedded = "369ca3914b5c39a6939c71b10232144484b8de15b1598b68a811b65ac7f0b913"
+status = "residue"
+cause = "mir::Ty: utils::SeqIter<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::utils::SeqIter::next"
+kappa = "57d3f9c81642c23d053465d170cf7f324a9da52f94630e746867d540a7bba1b3"
+at = "A=u32, T=u32"
+embedded = "1897c4f15fc28f3e6341d05cf632acb67983fa6cc711dc7a4da599c8ec7ade14"
+status = "residue"
+cause = "mir::Ty: SeqIter<'_, u32, u32>"
+
+[[fn]]
+path = "serde_with::utils::SeqIter::size_hint"
+kappa = "99b1d03f3298b2eece18d3adfa6196d2ef906e8fd235d64c3195da6da812d910"
+at = "A=u32"
+embedded = "673a330112af219955628882aa6d655ac139547af07f909175e880624c05860a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "serde_with::vec_with_capacity_cautious"
+kappa = "2877ee84ba9092b5cf11a398c52b129a1a9d73d85917dfb6a2a2ebaabf3df956"
+at = "Element=u32"
+embedded = "1f646b2d54324065ab9ef932233dfdb9ec63f70cc0b17c7192613858562251b1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utils::size_hint_cautious: serde_with's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+

@@ -1,0 +1,268 @@
+# The prost-build register (written by `uorust crate prost-build@0.14.6`; do not edit): every body of
+# prost-build's MIR at prost-build 0.14.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 176
+translated = 0
+residue = 176
+
+[module.ast]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.code_generator]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.collections]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.config]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.context]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.extern_paths]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.ident]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.message_graph]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.module]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.path]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 176
+embedded = 176
+evaluable = 176
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: config::Config"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: CodeGenerator<'_"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: context::Context<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Module"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: path::Iter<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PathMap<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: module::Module"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::Comments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::BytesType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::MapType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BytesType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExternPaths"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MapType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MessageGraph"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OneofField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: code_generator::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::PathMap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Successors<&str"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc6: &LazyLock<regex::Regex>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Comments"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnumValueDescriptorProto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldDescriptorProto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Method"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Service"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code_generator::EnumVariantMapping<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code_generator::OneofField"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code_generator::syntax::Syntax"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ServiceGenerator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extern_paths::ExternPaths"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message_graph::MessageGraph"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: petgraph::prelude::NodeIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prost_types::DescriptorProto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prost_types::FileDescriptorSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prost_types::source_code_info::Location"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Once<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syntax::Syntax"
+bodies = 1

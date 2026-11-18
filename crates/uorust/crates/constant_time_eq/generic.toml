@@ -1,0 +1,45 @@
+[[fn]]
+path = "constant_time_eq::cmp_step"
+kappa = "b6add224ede2215f33d5c039ce301eeff23d6e609da7dd686681ce84ae0051a7"
+at = "T=u32"
+embedded = "f3f7a565f6c1b7c75170162f9d75f7abae4e1daa8360600233a0fc0b4568d02b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "constant_time_eq::constant_time_eq_impl"
+kappa = "544dc19c7dbbbb2af05924b166952c98859a58dfdcf8565278e7ce2b5e59a890"
+embedded = "edeb1cda0d6698dee90c0e4126829843b954f6a66a2a1674281d729e89695089"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "constant_time_eq::generic::constant_time_eq"
+kappa = "3bb37182995c2486357e5aa053e5f48e4f436145dfd6f2812fc382fc85fee36c"
+embedded = "450bea99ba56d17b95593f73453fae7b7195a41b5699ec7ac27c23255bf02790"
+status = "residue"
+cause = "mir::AggregateKind::Closure: generic::constant_time_eq::{closure#0}: mir::TerminatorKind::Call: generic::constant_time_eq_impl: constant_time_eq's MIR stops at type outside the lift: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "constant_time_eq::generic::constant_time_eq_n"
+kappa = "3de77d74f0bfa2fac57ae4812288a3810978e3e232c03d0eb99f52297ccbfb38"
+at = "N=#_N"
+embedded = "f9f5bdd143c3dbbf2ea8836d51e0f626b3bd7acff0b9bb808d9928c83b522c11"
+status = "residue"
+cause = "mir::AggregateKind::Closure: generic::constant_time_eq_n::{closure#0}: type outside the lift: std::ops::RangeFull"
+
+[[fn]]
+path = "constant_time_eq::optimizer_hide"
+kappa = "14d10e40c4bc4027f4bd1169924d67920ce87ede9677b7d5e349e95760799999"
+embedded = "973135845fe58fb4ad9c40adc95b7b8ecb0a13d7a3bf360f6173a43dc004b853"
+status = "residue"
+cause = "mir::TerminatorKind::InlineAsm"
+
+[[fn]]
+path = "constant_time_eq::read_unaligned_from_slice"
+kappa = "b00137a73a8f4c148643324be60281d02df1040bc7fd2f295df465a3489a66f8"
+at = "T=u32"
+embedded = "04a7d16cbde5d46cd57ed6bf66cc3c06615115fff12f9cbd342114681b65d188"
+status = "residue"
+cause = "mir::Operand::Constant: generic::read_unaligned_from_slice::<u32>::promoted[0]"
+

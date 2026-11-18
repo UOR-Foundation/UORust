@@ -1,0 +1,142 @@
+[[fn]]
+path = "addr2line::<impl at src/lib.rs:86:10: 86:15>::fmt"
+kappa = "9e629bd1e8f8137fa645512d7eb5b7ed524a53e8982c36952e57ddc7f6b5dd08"
+embedded = "0469b815f062e47155ba2d93d4af20202dab7ae80e5600ebdb35ae726da5b5be"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "addr2line::<impl at src/lib.rs:86:17: 86:22>::clone"
+kappa = "8b06a6adad3b39b20fe9eb9c4beec5d0ae6e7be27048baef899c696bc2d3979d"
+at = "DebugFile=u32"
+embedded = "fc691bead7589c53ba8ab76b77a061b3817117a7fc9f0d453c4f95ce1258a19c"
+status = "translated"
+digest = "a8bdee9bc6c30b78263b94ff44f983607370da2ca640858c321f642e12efe5a5"
+
+[[fn]]
+path = "addr2line::<impl at src/lib.rs:86:30: 86:39>::eq"
+kappa = "efb8a81c6fc66d511e99cc796eade7427f45295611c20b6421f59a02fcca068b"
+at = "DebugFile=u32"
+embedded = "bc09c21a854e1381b701b4bcabfcd887cc164808d9e2065b08c8b3d436cd77f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "addr2line::<impl at src/lib.rs:86:41: 86:43>::assert_fields_are_eq"
+kappa = "d5d454dfb9f3aa76d0eded643ef7c5d2e0c7bc9f856576cd03230a6a5c2547e8"
+embedded = "b6fa6dd140419054dff2dc3721c8040a4e40e3c841db1d9667ce8d388f505665"
+status = "residue"
+cause = "mir::Ty: DebugFile"
+
+[[fn]]
+path = "addr2line::Context::find_dwarf_and_unit"
+kappa = "f7e63fdcb0a9e254ff7e80d124deb3e263416638658fba5c021251ccb00f8858"
+at = "DebugFile=u32, R=u32"
+embedded = "03ed45785e523666d93b65ded0693bda809224ec2ae0ef85ab4e03872e61b54d"
+status = "residue"
+cause = "mir::Ty: gimli::UnitRef<'_, u32>"
+
+[[fn]]
+path = "addr2line::Context::find_frames"
+kappa = "a34565da71daf23007c8bb9e9cd86781d70a530ed3e92fc25fb541ec639c524b"
+at = "DebugFile=u32, R=u32"
+embedded = "d13a174582670ef4adbcaea6410e52e70019c3b2379acde54eaf7d0f41e96f7f"
+status = "residue"
+cause = "mir::Ty: frame::FrameIter<'_, u32>"
+
+[[fn]]
+path = "addr2line::Context::find_location"
+kappa = "e508bc624242bfd4dcb6d1a1c9cb39c142a8c2a67829f09cf0dee3a49595d958"
+at = "R=u32"
+embedded = "a6c423be1d7f1f33a5a17e9c1387b4d7a593962767b9c70edaccf885bcd8ee3c"
+status = "residue"
+cause = "mir::Ty: frame::Location<'_>"
+
+[[fn]]
+path = "addr2line::Context::find_location_range"
+kappa = "1a43ccf82134079c7622d474b773edd8c31c896c91de7497e805b962416e39fc"
+at = "R=u32"
+embedded = "9fcf07829547ded056e1d25fd7489821f3bbcd6dfb35599b53d97afac73e3e9d"
+status = "residue"
+cause = "mir::Ty: unit::LocationRangeIter<'_, u32>"
+
+[[fn]]
+path = "addr2line::Context::find_unit"
+kappa = "76f9b0f6ca50e21334f906b252d3a74d0bae0c6e53b443d3f9f254261f37631a"
+at = "R=u32"
+embedded = "d62649b8c521aa770d62f970ddd0e463b37fc4e68689d8dc0ebced10f245ffb6"
+status = "residue"
+cause = "mir::Ty: gimli::Unit<u32>"
+
+[[fn]]
+path = "addr2line::Context::from_arc_dwarf"
+kappa = "c8795ea565cc0a177e1e2877aee2e591a883716169329ca76445bc0ef05ad4b6"
+at = "R=u32"
+embedded = "818584f46e2f36b1a51f163e3826374427146bab8406ea5cc5729f28103b0c49"
+status = "residue"
+cause = "mir::Ty: Context<u32>"
+
+[[fn]]
+path = "addr2line::Context::from_dwarf"
+kappa = "e6903682f151f41e33ae731560b5d8a9b53464b179d60b1f0dcabce3939c1276"
+at = "R=u32"
+embedded = "cfe67d9899c8c7f55083cc0aed65d2ea65e2066486d2eac073b4613e0ad7f0dc"
+status = "residue"
+cause = "mir::Ty: Context<u32>"
+
+[[fn]]
+path = "addr2line::Context::from_sections"
+kappa = "dd35ebdd81f3a32bbee281ca0288150add254fd50659f890cad134bc0ce02ea6"
+at = "R=u32"
+embedded = "4908f22c87dc2b960c4e88acb0755ea034094f0aa6ab30965099fb3d58577743"
+status = "residue"
+cause = "mir::Ty: Context<u32>"
+
+[[fn]]
+path = "addr2line::Context::parse_functions"
+kappa = "fb7c62f52e18d3eb2226bfe36cbe736825e5ca00695001f030989bd20b5b23f9"
+at = "DebugFile=u32, R=u32"
+embedded = "292b0cdd2be79da0b110596d7933b789b22d8e1fbb79254e372c3db4ea6a5b74"
+status = "residue"
+cause = "mir::Ty: gimli::Error"
+
+[[fn]]
+path = "addr2line::Context::parse_inlined_functions"
+kappa = "c1aeebedc57ca11be5cbe0ad0128ce8d34f251c52553990a46782ed8252bdbc0"
+at = "DebugFile=u32, R=u32"
+embedded = "a3ee2ac85d0dd944696911843d871e71809fc61090086dab76098d34724de072"
+status = "residue"
+cause = "mir::Ty: gimli::Error"
+
+[[fn]]
+path = "addr2line::Context::parse_lines"
+kappa = "c70de6f09450a7880f09a96f5bec0052ef1aac915d38fd0b2a4e61090b5a0dd8"
+at = "R=u32"
+embedded = "34c2a58570212dfddb5350779cdb1e318850a6b7df427aec720bb20d16714315"
+status = "residue"
+cause = "mir::Ty: gimli::Error"
+
+[[fn]]
+path = "addr2line::Context::preload_units"
+kappa = "339c1145826a253f568f841b5b9d21aca2c4841125c59af4221bf7af46b38ae9"
+at = "R=u32"
+embedded = "f1d481f88cf130aa63d24dcd28b4203d946cb12072f26cef056c73001278c291"
+status = "residue"
+cause = "mir::Ty: unit::UnitRange"
+
+[[fn]]
+path = "addr2line::RangeAttributes::default"
+kappa = "ae354f45336dc5b657ded3002ce95e849fc5a20876796e2a92ba69eb790f97cc"
+at = "R=u32"
+embedded = "365f1477b03a842ae7be334caaf14246dca80393c5943a4993c55452aab043fd"
+status = "residue"
+cause = "mir::Ty: RangeAttributes<u32>"
+
+[[fn]]
+path = "addr2line::RangeAttributes::for_each_range"
+kappa = "951444e162d1ec38658c332595e711e3eaf8c02955251cbcc12f60f0d8f8317a"
+at = "F=u32, R=u32"
+embedded = "33b1291f79bc52af74b368b2feec5323faebdda3dacee670660a5af9e1b88d82"
+status = "residue"
+cause = "mir::Ty: gimli::Error"
+

@@ -1,0 +1,175 @@
+[[fn]]
+path = "windows-core::DYNAMIC_CAST_IID"
+kappa = "fd49b0499a7bd96bd73662b9e9f6713cf4c15952f193d988979c061a729e8db8"
+embedded = "bba29344d63e5f89c3fae748fee10fe5a495dd314b47c7f860b7168e885eee7b"
+status = "residue"
+cause = "mir::Ty: guid::GUID"
+
+[[fn]]
+path = "windows-core::interface::Interface::as_raw"
+kappa = "3bc1d2e9b152c44bc37d06a0946c0af4dc7cc2b3124190121d3d1cdfa5ecefa0"
+at = "Self=u32"
+embedded = "fe1674bddcb9be75a658e51ad0007731068bfe7178af4c3253b78c4cce213d82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: transmute_copy"
+
+[[fn]]
+path = "windows-core::interface::Interface::assume_vtable"
+kappa = "89c94f2d2245c954fb8fc965cc6a4068e87971277e95ccfd98a6523c0c40ca6c"
+at = "Self=u32, T=u32"
+embedded = "d4afcb9ad6de6bb53c8cbd6ca6e4b6ad448e78fa561f4a842cfacae9a700e6a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: interface::Interface::as_raw: windows-core's MIR stops at mir::TerminatorKind::Call: transmute_copy"
+
+[[fn]]
+path = "windows-core::interface::Interface::cast"
+kappa = "5fa7b728d018d7b7346580f4ab6b48f82678aae6b5e5718f6a05d8009039ca47"
+at = "Self=u32, T=u32"
+embedded = "fa1140b62c0dd39bccc4e546da0a4e91509f4d8d18cf922ff119c5b684914326"
+status = "residue"
+cause = "mir::Ty: windows_result::Error"
+
+[[fn]]
+path = "windows-core::interface::Interface::cast_object"
+kappa = "f2c54dff843a7b118fa038f2272efa7c9466fb5ad9fd99b7099a4408add653a0"
+at = "Self=u32, T=u32"
+embedded = "9ff96ec758c0573f65a582baaf19977a6ba0119193c31f0490a8609dd5791fdc"
+status = "residue"
+cause = "mir::Ty: com_object::ComObject<u32>"
+
+[[fn]]
+path = "windows-core::interface::Interface::cast_object_ref"
+kappa = "ffd73a3221a44df53fc0e8f6d1e032887895d207d3878cec49a2a81bcf46a150"
+at = "Self=u32, T=u32"
+embedded = "6b8fde377a37e54d55e4cb71479b2bcc5c05d0f5a6449bf8b648690c9e01bce9"
+status = "residue"
+cause = "mir::Ty: windows_result::Error"
+
+[[fn]]
+path = "windows-core::interface::Interface::cast_to_any"
+kappa = "6240d0e278801f64b8c0dd706d18441591bbaf25dee8d1d14e6d9d5dfe3315c4"
+at = "Self=u32"
+embedded = "ea448308c45f68a0142653aba0d906498f2345bde0c9e05e3e210b10efc937d7"
+status = "residue"
+cause = "mir::Ty: dyn std::any::Any"
+
+[[fn]]
+path = "windows-core::interface::Interface::downgrade"
+kappa = "4311d6f3dec2453f1c7c0625ffb9da6877abd3fbb99f012c14796f8300f09055"
+at = "Self=u32"
+embedded = "4ba7d735a383fe7c4fbd5aa06787941d3af1d9ff5178d719c42cc0355206c9b8"
+status = "residue"
+cause = "mir::Ty: weak::Weak<u32>"
+
+[[fn]]
+path = "windows-core::interface::Interface::from_raw"
+kappa = "c669225c0b6278efdd555bac03aa2f3319ed5591e74d7a7eb3853fd56cd59f0b"
+at = "Self=u32"
+embedded = "76d87f7792a707817e237bfb206fb719a530c99a7f105c5e49c1cf4cb3805838"
+status = "residue"
+cause = "mir::TerminatorKind::Call: transmute_copy"
+
+[[fn]]
+path = "windows-core::interface::Interface::from_raw_borrowed"
+kappa = "4f2bdc8bfa6a3df1542f817139cbd57175d309b68c8602cdb16b53f5937c8b44"
+at = "Self=u32"
+embedded = "08d261f6ec37d4d229dba6ddfe00c20bb4dd51e2921005fc9fa917d5f5112633"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::is_null"
+
+[[fn]]
+path = "windows-core::interface::Interface::into_raw"
+kappa = "3c13ad407125fa20b92818b0607be84bbc3708a84beb76aa24e0dfc98fae7402"
+at = "Self=u32"
+embedded = "9c8d2d8ed0f1f8e91dd111e0d23818fccd4a4df09cef00c12bc807a840f139a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: interface::Interface::as_raw: windows-core's MIR stops at mir::TerminatorKind::Call: transmute_copy"
+
+[[fn]]
+path = "windows-core::interface::Interface::is_object"
+kappa = "00a07f80aba57b85916d5e3835f40dd87b5a04f86ff594965afcfb55d7643a38"
+at = "Self=u32"
+embedded = "13060462bfba37b801b5571231eb1356358e8edcc39d94c91363d8e35f230832"
+status = "residue"
+cause = "mir::Ty: dyn std::any::Any"
+
+[[fn]]
+path = "windows-core::interface::Interface::query"
+kappa = "c4ddfd0333d1b59a403baa279852ea4bf5cce6fdb16486dcdb9a10652568f8be"
+at = "Self=u32"
+embedded = "5cb9d1462c6aa190768abc6f2d28c9a84e6d29c898a4e785e62f3cad264c33be"
+status = "residue"
+cause = "mir::Ty: windows_result::HRESULT"
+
+[[fn]]
+path = "windows-core::interface::Interface::to_ref"
+kappa = "cdb90ea186a36c18942c2f9d55bb05acc9c68388f0016b30fdbfd108a3f2be59"
+at = "Self=u32"
+embedded = "77829518253a2ac004dc9855765aedc595f828e63ba1e34723f4a84a03179549"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::Interface::vtable"
+kappa = "dc8b5927fb6e93087f1a9de418cf50814ec714f687be388c5db1db88fc5b6a01"
+at = "Self=u32"
+embedded = "aad145f23db968993e8515dc8ab950c15d11590f157494f0656e74ddca1a7966"
+status = "residue"
+cause = "mir::TerminatorKind::Call: interface::Interface::assume_vtable: windows-core's MIR stops at type outside the lift: <T as interface::Interface>::Vtable"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::clone"
+kappa = "a3690f5ec985c7ff0dc6bae08bac9e79b23db950882fdafa9a9197cafc3274b3"
+at = "I=u32"
+embedded = "89895ba2fb5ce1dbf93b7fccf5780689e182a21f5f2eb81b5dec1c1d27486ee6"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::deref"
+kappa = "b5e9d7fa85cc870e132e5887187cfddccfcaaa129422055b0f545fb60e393cf4"
+at = "I=u32"
+embedded = "0ba5c4f36ce892f50e5223f49e6ebe5b6f9d9e51e17c13e3d2d6e3f8ffae9ce0"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::fmt"
+kappa = "52fe0125b9ea4cc6c78fd992274d847ca92eb42e7fd833ff90dfe6be62603d63"
+at = "I=u32"
+embedded = "b593c4a47207ce6cfac41d93b9c61528e36610200f3be403a1b931930d8f9709"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::from"
+kappa = "b5d2bbc6ec7976f32a455472ac7852b1155c999e856b6345b8ce99a3434907d6"
+at = "I=u32"
+embedded = "c4a14670312b77adbf47e16afc39708af875fa32d75bbcc8e3eccd0ac12ea5f1"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::from_interface"
+kappa = "466d134c0de9273a7a0e446328bd7b81353467f8e12ba1a7251fde26a6e22b8f"
+at = "I=u32"
+embedded = "d2a13b45fd1a8393e75adc8cba97011cd3c230f1bd86c22d1b02b9b56bb33684"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::from_raw"
+kappa = "25732eb97c59994ef842310c7b062a0f16f7aa42f6f73b28ee001ce105778d9d"
+at = "I=u32"
+embedded = "7e4db3975c72912c12f351242a96b49b563ce3afb9c4ee3b893958e4ed9ba3a3"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::interface::InterfaceRef::to_owned"
+kappa = "45986cc19ecf903fc87d0b1f0b94d512691d7a063840ec83ad7258e61f2b9767"
+at = "I=u32"
+embedded = "a3c9d49a6cc75307e7af6f6fc5c32fac19972becce846ebaadfc320f20d16295"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+

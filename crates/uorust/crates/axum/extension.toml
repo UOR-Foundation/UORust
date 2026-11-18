@@ -1,0 +1,120 @@
+[[fn]]
+path = "axum::extension::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/macros.rs:282:9: 282:46>::deref"
+kappa = "e6a4d46945bf9a620849903b745bddd244f667f31b1754c8c59ed88129b6e832"
+at = "T=u32"
+embedded = "5115d767f4eae309978c0d5ac6443dceed609dd9564fde390c9f051f00d085e8"
+status = "residue"
+cause = "mir::Ty: Extension<u32>"
+
+[[fn]]
+path = "axum::extension::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/macros.rs:291:9: 291:49>::deref_mut"
+kappa = "35803f86c26c4b25c64161733f675dac606fbf74c323f8a2c2ef491c2f67be7f"
+at = "T=u32"
+embedded = "8a75c10d36fe055a3c7820547eeab175c4bbcac318aa2a382caa2f4b052d7441"
+status = "residue"
+cause = "mir::Ty: Extension<u32>"
+
+[[fn]]
+path = "axum::extension::<impl at src/extension.rs:163:10: 163:15>::clone"
+kappa = "e90c0b10aeabb0e4e46b8ba34def18bd6a87251bd4095975c5d413f598918397"
+at = "S=u32, T=u32"
+embedded = "3d384a9b0b7bbbb56bfb05a0ade79dcedab42915c77ba265c04629ca502f20a3"
+status = "residue"
+cause = "mir::Ty: extension::AddExtension<u32, u32>"
+
+[[fn]]
+path = "axum::extension::<impl at src/extension.rs:163:23: 163:28>::fmt"
+kappa = "25dad25ed4a998fee6d1d9599edb37b9c85ca5c05f9608de1f5202e2bcf4f552"
+at = "S=u32, T=u32"
+embedded = "d51b07c927527ce90747ffeeb58a1015e1abb57751612eb0ccc92f0ff2a6b57e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::extension::<impl at src/extension.rs:70:10: 70:15>::fmt"
+kappa = "a82ddddc2320535239648f3eaec8933f5acf212ae0341a1627b17ae9f64de793"
+at = "T=u32"
+embedded = "2d42e526b426760d42ecc1a960fed44211d21bd9717e08f027e6240b48750794"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::extension::<impl at src/extension.rs:70:17: 70:22>::clone"
+kappa = "ddddcf5f9e634a678b8fdea434938bfe87071da72036e057a91df84ca2b73a61"
+at = "T=u32"
+embedded = "62335be5a3b76db3fc64fbf11a42eb2dae8f9b1c45d24fb81070742d1bc7ae00"
+status = "residue"
+cause = "mir::Ty: extension::Extension<u32>"
+
+[[fn]]
+path = "axum::extension::<impl at src/extension.rs:70:30: 70:37>::default"
+kappa = "7520ef8f6da5fe2fc60b69937e85a9757f58b166ac86efd19d3cb9980a31155e"
+at = "T=u32"
+embedded = "a774ccdfee836ddd9b07512b3cdb65210cd417b15a11dd92b2114fa54b05c167"
+status = "residue"
+cause = "mir::Ty: extension::Extension<u32>"
+
+[[fn]]
+path = "axum::extension::AddExtension::call"
+kappa = "e3f2d2cee441a68362ad7a8be7c2626dfdb173cd3c48ccab95c4e0d531dde04a"
+at = "ResBody=u32, S=u32, T=u32"
+embedded = "58cf3b8b8d84c76191b33e035a0b6e0b4122afc63eeb245c400edb8c5422483c"
+status = "residue"
+cause = "mir::Ty: AddExtension<u32, u32>"
+
+[[fn]]
+path = "axum::extension::AddExtension::poll_ready"
+kappa = "ce2ce2f8df482e6b0e12c4e0aec655267125bdacfb6b4b2f25c2cd82a557a87e"
+at = "ResBody=u32, S=u32"
+embedded = "ab9e5777607fe74e04271952e010770216e7656007f7c8602293513c67220255"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<(), u32>>"
+
+[[fn]]
+path = "axum::extension::Extension::from_extensions"
+kappa = "22153c6a16d6649c1d0ca96df1d7563e48ca3d980ce1b203a1f577682f4e1804"
+at = "T=u32"
+embedded = "e28c7ec098f6b5be7e4a59cc9e0c194fa7f52c8f687de64d74b481f7e81ee6e3"
+status = "residue"
+cause = "mir::Ty: extension::Extension<u32>"
+
+[[fn]]
+path = "axum::extension::Extension::from_request_parts"
+kappa = "ece2607182c792bc030800e66f232c7f167faeaf8fa7d28017ab8f50b524030c"
+at = "S=u32, T=u32"
+embedded = "c56e7046f27a733d196fa11247e917eda812edda19f16c6c393847f6898bcd3e"
+status = "residue"
+cause = "mir::Ty: {async fn body of <extension::Extension<u32> as axum_core::extract::FromRequestParts<u32>>::from_request_parts()}"
+
+[[fn]]
+path = "axum::extension::Extension::from_request_parts#2"
+kappa = "9702132764112fab0bdead877ee854f610310038af4c55f97260e63baae5b3a0"
+at = "S=u32, T=u32"
+embedded = "9563450be2a50c69d2ccaf5df244d5816a2ac35f17f535b9ba1f43e9c909dd46"
+status = "residue"
+cause = "mir::Ty: {async fn body of <extension::Extension<u32> as axum_core::extract::OptionalFromRequestParts<u32>>::from_request_parts()}"
+
+[[fn]]
+path = "axum::extension::Extension::into_response"
+kappa = "f9fcc98f41d1d411f4eea35e0fb97c7aa2d737dc136c253496e692026b341ee6"
+at = "T=u32"
+embedded = "b46614aba320dad64766b49d54ae569517fd10f61e504913aa96d80dd55d0840"
+status = "residue"
+cause = "mir::Ty: axum_core::body::Body"
+
+[[fn]]
+path = "axum::extension::Extension::into_response_parts"
+kappa = "05f924ff827193e7bbc70464523b6b26ff775a10d81018183d70ed35f6f3b1e6"
+at = "T=u32"
+embedded = "99ba3d551044ccf68edd6f863eee49fd551839872e463159854d4752460a7f67"
+status = "residue"
+cause = "mir::Ty: axum_core::response::ResponseParts"
+
+[[fn]]
+path = "axum::extension::Extension::layer"
+kappa = "a2a2f85f9e69fc18f42a01e3452da9791b23a8ca61cb7a1a2d8a3d1e1c807ec7"
+at = "S=u32, T=u32"
+embedded = "7377d9dc81d22edd466709ef97b9fc9c83e3da729448ac74e5c06a33dd2960b9"
+status = "residue"
+cause = "mir::Ty: extension::AddExtension<u32, u32>"
+

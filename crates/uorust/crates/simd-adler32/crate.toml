@@ -1,0 +1,61 @@
+[[fn]]
+path = "simd-adler32::<impl at src/lib.rs:106:10: 106:15>::clone"
+kappa = "ad4abec10d84789b7601cdfac05010e2873a58b86879384b570749716ec2c362"
+at = "Adler32=u32"
+embedded = "b4d8a2d2f121e8000730533292f16524cb0806e8d31f43c4ea5a89c4d0901703"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "simd-adler32::Adler32::default"
+kappa = "24a6ecb5aeea7ad7978352564bddc36d0bcf3b5fb271a5581af26acca0283b19"
+at = "Adler32=u32"
+embedded = "e6344dd021ebdb0a8a9a509bfdde5bc2ab085111aa7214a0f999053c92d8f830"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::Adler32::finish"
+kappa = "f86c9937d97217ddb26ce03233df1c3f911734f98ea0c79f8cb96e1885ade871"
+embedded = "2301123b612328be31d9ea47a4aa943ba44ace90093409120099e1c91946925f"
+status = "residue"
+cause = "mir::Ty: Adler32"
+
+[[fn]]
+path = "simd-adler32::Adler32::from_checksum"
+kappa = "3832847c08f6cd96a5afcd8c7d93cc62a5b5303187a60ca24bcfaab0f9c769f3"
+at = "Adler32=u32"
+embedded = "b28f604a3ade79f32217f7fa2d89891945d8245791731a59a24e5c5e65cb5ecb"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(u16, u16, &'a [u8]) -> (u16, u16)"
+
+[[fn]]
+path = "simd-adler32::Adler32::new"
+kappa = "75a6d5ffe125f808f5147ea9a245dfb8845ca965c965879fa6df03d60fe89272"
+at = "Adler32=u32"
+embedded = "d97f1429130604d22287579cad5c2c013573f7ae890f590b231275c02c48b71d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "simd-adler32::Adler32::reset"
+kappa = "e940425be85133109b67b2edb9b8a186df78023e60cb27d27086ff7b8a8bb2e2"
+embedded = "2546fcd41ffccc6fada861ab364ba781f3043cbdd9fc23f33c0b3a09918282c9"
+status = "residue"
+cause = "mir::Ty: Adler32"
+
+[[fn]]
+path = "simd-adler32::Adler32::write"
+kappa = "568f5186cf5ceabb07223d82cdacf9bb14690fa7570adfc2f4e6326943de8831"
+embedded = "300bdf33acb83d2dc6d0773a19cf49da6fdbe4f19ce77c8c074f50d204c41b1e"
+status = "residue"
+cause = "mir::Ty: Adler32"
+
+[[fn]]
+path = "simd-adler32::adler32"
+kappa = "15711d7b9b2d6b08e134148ade50bf48ff5c68de50e40653a9a769a5cbfd7fe7"
+at = "H=u32"
+embedded = "3ca9803dc5b150ffd78f06b7edb5d6dafe1f6540eab57497ee82ede48f8d4ec0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Adler32Hash, which u32 does not implement in core"
+

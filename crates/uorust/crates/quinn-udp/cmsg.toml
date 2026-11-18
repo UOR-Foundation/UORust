@@ -1,0 +1,150 @@
+[[fn]]
+path = "quinn-udp::cmsg::<impl at src/cmsg/mod.rs:141:10: 141:15>::clone"
+kappa = "d466affd0bdc358f3bfbadcdc0b93af81cf2c5f4574b10071f96994a61333bd7"
+at = "C=u32"
+embedded = "4dcbd25fc976ba6d96108bc708deaa6dbab9485e31a1533ee8c6e13664a634a6"
+status = "residue"
+cause = "mir::Ty: cmsg::CMsg<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::CMsg::data"
+kappa = "a61e1c415896eb22cee9f46576e4fcdaef9b98362c385b6f00c9b36116d95a63"
+at = "C=u32"
+embedded = "a408f863bb100e80140ed2b4cc5b50bada227f025738c96af3ab166c3f92ee22"
+status = "residue"
+cause = "mir::Ty: CMsg<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::CMsg::decode"
+kappa = "742695f8e2ee46fa223089c4096dcb9a0be604a1c3f839375ddcb480e88ad10e"
+at = "C=u32, T=u32"
+embedded = "0e17efa496f0a5ff3396f3060f0c707bd180a996d107288f48b256fab02f7214"
+status = "residue"
+cause = "mir::Ty: CMsg<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::CMsg::deref"
+kappa = "371db4303794efe37133b077bf015a4322d2f49f06d704fcbc59b2854a614d9f"
+at = "C=u32"
+embedded = "cf71a1224168d76b65511d5488ce15f6b27c38a4f51067aa6f1709eeccc50a7c"
+status = "residue"
+cause = "mir::Ty: CMsg<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::Encoder::drop"
+kappa = "da61ddd3338e098291a113c1cd4a249209a04827d700acb4a5830b61871305d7"
+at = "M=u32"
+embedded = "0b32118bd888745a78e01ec98bb158e8ffffc3aad4141d941249f9f24266af93"
+status = "residue"
+cause = "mir::Ty: Encoder<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::Encoder::finish"
+kappa = "048209bbd31f69da50f1f061fb32a19e450d539a3585ccbc40d71f576002ee7a"
+embedded = "b6bf7c6748cf347fa6ab12d74bcf9e57c0940bc53cc4e92c2190c55016c15128"
+status = "residue"
+cause = "mir::Ty: M"
+
+[[fn]]
+path = "quinn-udp::cmsg::Encoder::new"
+kappa = "40d28ac993d310b180e0e7d57987b7623b9879d8069e00274b4377b43c2dd02e"
+at = "M=u32"
+embedded = "914226d2264c847ea96096805ec928afed781c95665b661bd74f713d5bcb29f7"
+status = "residue"
+cause = "mir::Ty: cmsg::Encoder<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::Encoder::push"
+kappa = "5b4985aba5a3deae4e4326f85040047b52424254b6dedc9d1d981c9cde3d8687"
+at = "M=u32, T=u32"
+embedded = "ca5d2e574ab91f00b54fefd10057708cc2f6a41c42c824f9f673b024392bc486"
+status = "residue"
+cause = "mir::Ty: Encoder<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::Iter::new"
+kappa = "2c6b4c564c313f231269dd0b636a40b6de50478d5e1bd44be26802f2cfb752e0"
+at = "M=u32"
+embedded = "05177302be7d142db5534d56eaa82221034c905208293fd38892ca205313b597"
+status = "residue"
+cause = "mir::Ty: cmsg::Iter<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::Iter::next"
+kappa = "51b196a2cb6a59c84796bc5fc2b2e48e0cc191c8cc800292934d436303af2e72"
+at = "M=u32"
+embedded = "17f52b38f3fc057e9994cbdb69af9d9edf257393b37bcb5b705e08a8affd2017"
+status = "residue"
+cause = "mir::Ty: cmsg::CMsg<'_, u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::<impl at src/cmsg/unix.rs:5:16: 5:21>::clone"
+kappa = "bd95dfe1b04bc21ee00254f1e20e9e9a7adca6f71f1d8498485a50a4a36fd6df"
+at = "T=u32"
+embedded = "d551ea1098465494e8545a437ee55e6f4dead53928fc235a703e3906c5c0a3f4"
+status = "residue"
+cause = "mir::Ty: cmsg::imp::Aligned<u32>"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::cmsghdr::cmsg_data"
+kappa = "1e9ea586ce3d193447bc5cd2af341971ecb1ca233b472a6490042761b4d85802"
+embedded = "032963b5b08a44c3b04337bd489f1c39940eda0f077eda7e83bfc10d35510d51"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CMSG_DATA"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::cmsghdr::cmsg_len"
+kappa = "5c196fd224e106cd21adc1a9e83a1efee8d6a95fc6fc53e27a0431214166a57f"
+embedded = "c7569c547542a141a6efff23ad6e2462b45f4f5052d7c2259cc106e6be33a80a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CMSG_LEN"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::cmsghdr::cmsg_space"
+kappa = "958f006785ae3af4590c433e026bc40ac5f3a9ac5d3f435a45f7262a3311292f"
+embedded = "0deb9d328aa4f49c09b8d82d6c8d35b90d159219200a653bcaf960c38f36d626"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CMSG_SPACE"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::cmsghdr::len"
+kappa = "673a6e6ec278878dd8cd4c0f4b2fd36b7321b39ac6eb94f0a1821f4eb985f024"
+embedded = "928b7845673d35e330a3ed2a7b00aea588bba0100a3b925fb1dc95cda5b175be"
+status = "residue"
+cause = "mir::Ty: cmsghdr"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::cmsghdr::set"
+kappa = "6d4ab3b3fedb06ad7029b64ca4607218f377895df7eb12b29e0b61c8f7e858f0"
+embedded = "01d1b40e4908212eae5b9bf152f0939d3dd366741ea157e433ece0dc5b41f769"
+status = "residue"
+cause = "mir::Ty: cmsghdr"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::msghdr::cmsg_first_hdr"
+kappa = "debd6cbc082c7e0b5b542850b2a80b5e40e22b394cb6f4393a66bdb0b04650d3"
+embedded = "a31132c381f3d177f7fc5badb93f8f196d31aa01cc0d8399a3e8d00aae589fd0"
+status = "residue"
+cause = "mir::Ty: msghdr"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::msghdr::cmsg_nxt_hdr"
+kappa = "07fcf2e1995e849a2ee31c9d027066031214887ea94fcc51191104a4158a2738"
+embedded = "4c8ad113497821d33cfce6db67214ede2c1c2d2f2e9d3a673527508cafd0f337"
+status = "residue"
+cause = "mir::Ty: msghdr"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::msghdr::control_len"
+kappa = "87829d3e9feee25859e67f3dbd34a0c99cc9941aab73560298c1720b6227608d"
+embedded = "99ff6eb8cbb2d04de4a40ff3d22c8e2f9e6b68c530bcd1d9b7522b5b39a48ddd"
+status = "residue"
+cause = "mir::Ty: msghdr"
+
+[[fn]]
+path = "quinn-udp::cmsg::imp::msghdr::set_control_len"
+kappa = "a5847c00148b197ac307173122b6fb92b3a06d4a028f683fed151e528fd99340"
+embedded = "229e3bde090591b157cc6ab2b077ceb26b014f7d681d77f895dd7481ecbd6059"
+status = "residue"
+cause = "mir::Ty: msghdr"
+

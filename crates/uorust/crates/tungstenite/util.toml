@@ -1,0 +1,22 @@
+[[fn]]
+path = "tungstenite::util::Error::into_non_blocking"
+kappa = "4382c3e22b383b8fd2dfd07cce2c2f594de3ab4aa8a91b3e41b54cd0b3711621"
+embedded = "3318998d8c1269b9e2ee773b3cb8448b77631db43ae750c6c41ab95bd74fea5e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "tungstenite::util::IoError::into_non_blocking"
+kappa = "61f6f5136c08a29877ccb3a487c0bccb701f3990fcbd39109a627da9b92325c5"
+embedded = "0902e7badc113714ec943fbd393932e9023ec0b60f865458e386656578e29c9d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tungstenite::util::StdResult::no_block"
+kappa = "9a32db184299ba82d62bef2b3268bdcb7ce781062add3c668205177949e82e3f"
+at = "E=u32, T=u32"
+embedded = "a5811b153376c0b4f2bc7622afbd5bffe74b2e44579e03039fabe08bfe58efa6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NonBlockingError, which u32 does not implement in core"
+

@@ -1,0 +1,28 @@
+[[fn]]
+path = "dyn-clone::macros::Box::clone"
+kappa = "835ae95fff0cb7c6b0c5e840aa044f9ee34d92e739fb9d272cc71146fa75d001"
+embedded = "643ad5db0ff8e53e6bfd57e0e303f8a4e39156663a17eb6cee3f06914213bdb2"
+status = "residue"
+cause = "mir::Ty: dyn DynClone"
+
+[[fn]]
+path = "dyn-clone::macros::Box::clone#2"
+kappa = "78ed771981d76a4b7b931767a683db2863331d8467bd11ca070e2913c78f40de"
+embedded = "1a8e72da60ed6ef0de4d7f7b2608c47f07e9fb4ee1b6081018250da94041d26b"
+status = "residue"
+cause = "mir::Ty: dyn DynClone + core::marker::Send"
+
+[[fn]]
+path = "dyn-clone::macros::Box::clone#3"
+kappa = "148751183114089614e592b86883c8ead47ec92d1900a16efb53d0dad348a6ad"
+embedded = "c0bf3cc2762fcc66a1fb141eae5796463c638bcc597204cd188bdf5d27698054"
+status = "residue"
+cause = "mir::Ty: dyn DynClone + core::marker::Sync"
+
+[[fn]]
+path = "dyn-clone::macros::Box::clone#4"
+kappa = "dc3fbb3d29c9241cdbfbae2ad4328ca80b93874e605dc00cd1444fe237549e4b"
+embedded = "114207d031279f7f453905bc3dc5cb6538e544ea07e1b29bc5a58172c45d62ff"
+status = "residue"
+cause = "mir::Ty: dyn DynClone + core::marker::Send + core::marker::Sync"
+

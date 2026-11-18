@@ -1,0 +1,46 @@
+[[fn]]
+path = "pbkdf2::pbkdf2"
+kappa = "16de57d0c5776c86653cafb1cfbb81eb41bfe540f811c86e796a2aee1fdc5743"
+at = "PRF=u32"
+embedded = "f6aa4b0d13d116101fcb99eeb4eb0ec8411b275bda9ea87c555c9e4a01ce59b5"
+status = "residue"
+cause = "mir::Ty: digest::InvalidLength"
+
+[[fn]]
+path = "pbkdf2::pbkdf2_array"
+kappa = "a5e62bfab52efc89e2e50e7aa985a20061973739ad49cbaf8585b56d83aa675d"
+at = "N=#_N"
+embedded = "865db745de259a88035b15ea77133182cf7da29673b0fff4122ff4eb23c04416"
+status = "residue"
+cause = "mir::Ty: digest::InvalidLength"
+
+[[fn]]
+path = "pbkdf2::pbkdf2_body"
+kappa = "e8fb1befdd21c647c09828799a3474e845f8f2fddb69f2708aa9f739c71e529a"
+at = "PRF=u32"
+embedded = "9507dd76e4303cfa9d78bfcd1bcb575350709da24ac5d06a13cd250bdf11dcfb"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u8>"
+
+[[fn]]
+path = "pbkdf2::pbkdf2_hmac"
+kappa = "23327f7982b25e54659f39f8ec4d9ccdefb3887bf478bb5ba41ce727776053dd"
+embedded = "d94b4851625e6d87431e13440526fa0cfdab8adfdb557c3769e449675699e6c5"
+status = "residue"
+cause = "mir::Ty: digest::InvalidLength"
+
+[[fn]]
+path = "pbkdf2::pbkdf2_hmac_array"
+kappa = "4ad7ab92809dda0f476d3da027e6e471f1b5e76a621a4fe5c4f15499aad4130f"
+at = "N=#_N"
+embedded = "ef0dc260b5fc83b4784947f964343a587cac5eae4aa69718c4284d0aae87f7a1"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "pbkdf2::xor"
+kappa = "9e8c6596602722ef86ff78b7927ce1fb2a8f332bed9afb78b04e686491be5dfa"
+embedded = "759fcd9cc31e8032be06636020e1ee9993fd782351dc479fc9ac72f3a234e925"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u8>"
+

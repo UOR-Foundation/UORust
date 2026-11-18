@@ -1,0 +1,624 @@
+# The futures-lite register (written by `uorust crate futures-lite@2.6.1`; do not edit): every body of
+# futures-lite's MIR at futures-lite 2.6.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 623
+translated = 1
+residue = 622
+
+[module.future]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.io]
+bodies = 223
+translated = 1
+residue = 222
+
+[module.stream]
+bodies = 337
+translated = 0
+residue = 337
+
+[embedding]
+bodies = 623
+embedded = 623
+evaluable = 623
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 93
+
+[[cause]]
+cause = "mir::Ty: futures_io::Error"
+bodies = 86
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: stream::_::Projection<'_"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: stream::_::ProjectionRef<'_"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: stream::BlockOn<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: io::Cursor<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: future::_::Projection<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: future::_::ProjectionRef<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: io::BufReader<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AssertAsync<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: io::_::Projection<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: io::_::ProjectionRef<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: io::BufWriter<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: io::Chain<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: io::Take<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: io::BlockOn<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::Drain<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::Race<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AsyncAsSync<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: future::Race<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::Once<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::Or<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: St"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future::Fuse<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future::Or<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parking::Parker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Chain<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Cloned<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Copied<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Cycle<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Enumerate<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Filter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::FilterMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::FlatMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Flatten<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Fuse<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Inspect<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Iter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Map<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::MapWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Scan<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Skip<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::SkipWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::StepBy<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Take<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::TakeWhile<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::Zip<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StopAfterFuture<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::result::Result<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::PollFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::Zip<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::AssertAsync<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::Bytes<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::Empty"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::Lines<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::Split<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Empty<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Pending<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::PollFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Repeat<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::RepeatWith<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::StopAfterFuture<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Then<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::TryUnfold<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Unfold<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <core::slice::Iter as Iterator>::position"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CatchUnwind<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CollectFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CountFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FoldFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ForEachFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Guard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LastFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OnceFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PartitionFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollOnce<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Then<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryCollectFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryUnfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryZip<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unfold<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnzipFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<core::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<usize>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::result::Result<core::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = u32> + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32> + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_io::AsyncRead + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_io::AsyncWrite + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::CatchUnwind<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::PollOnce<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::TryZip<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::YieldNow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::AsyncAsSync<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::CloseFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::FillBuf<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::FlushFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadExactFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadHalf<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadLineFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadToEndFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadToStringFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadUntilFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadVectoredFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::Repeat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::SeekFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::Sink"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::WriteAllFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::WriteFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::WriteVectoredFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::AllFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::AnyFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::CollectFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::CountFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::FindFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::FindMapFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::FoldFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::ForEachFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::LastFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::NextFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::NthFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::OnceFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::PartitionFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::PositionFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::TryCollectFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::TryFoldFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::TryForEachFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::TryNextFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::UnzipFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of io::copy<u32"
+bodies = 1

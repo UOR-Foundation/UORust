@@ -1,0 +1,69 @@
+[[fn]]
+path = "async-stream::STORE"
+kappa = "a43c0b56ef5cfc7b28407bce073afd1b8710406ecde21be77def27921ad74aad"
+embedded = "1cda5f521583a38e0205217f5e12bf95aa217367a7bc3b5b22233519a2bca01f"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<*mut ()>"
+
+[[fn]]
+path = "async-stream::__RUST_STD_INTERNAL_INIT"
+kappa = "e44feeb214691626a62a75adca2ba6a4dd5733ec1567bf915e4fae4d2dbc4cd6"
+embedded = "50c43a852661bc34987dcbf1b301bfd6520a35abe094243a0b5a34d3c122731a"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<*mut ()>"
+
+[[fn]]
+path = "async-stream::pair"
+kappa = "2a1ee450f30912bf5c60bd19ee141bfff3141df285f4040edec299b76b6c29bf"
+at = "T=u32"
+embedded = "afed0a5a90a50176289aeac0786debb964e4db2dfd95dd972e6c42cfadae0d2c"
+status = "residue"
+cause = "mir::Ty: yielder::Sender<u32>"
+
+[[fn]]
+path = "async-stream::yielder::<impl at src/yielder.rs:13:10: 13:15>::fmt"
+kappa = "5f48b4bf2db3ae77cea690a295cefac8c42dca84a80facbaea01bad323d81ae6"
+at = "T=u32"
+embedded = "064fdfb54a639380a7241186a6324d9c32975f17719969b0c7294d015a98fd9c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-stream::yielder::<impl at src/yielder.rs:8:10: 8:15>::fmt"
+kappa = "c3445bc09334946b84675058c95e874b4c39af5c4e6876886ec53c58d5e691b7"
+at = "T=u32"
+embedded = "91a5963dd35351be00407d04fdf37d82eb57f6918ca0f7a0b4e7a2dcbd615dd4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-stream::yielder::Enter::drop"
+kappa = "9bd9c81dad4532680ccb5244ea63cc737b0dd0ab655c01b561c7111df473e7ef"
+embedded = "2087ca2ea77f718870b68328b5bef818e0cb6b71ea3f311eb73732cccf05583e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-stream::yielder::Receiver::enter"
+kappa = "11173c8161143f6724fb5aab0f4dc298f539756ab5c41e384625b68bfc2edb9a"
+at = "T=u32"
+embedded = "cd668bf235ee78624be46e13192923e8d18e72daacce36e2456a5140ac804813"
+status = "residue"
+cause = "mir::Ty: yielder::Enter<'_, u32>"
+
+[[fn]]
+path = "async-stream::yielder::Send::poll"
+kappa = "72a1aa2140f356ea3aa128820aa548632319d6c97cfc74750453a08e98ecec18"
+at = "T=u32"
+embedded = "292cfc21b10ebebd46f1bb1ce020c8479393c8f9616edf85602821694676c9b4"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "async-stream::yielder::Sender::send"
+kappa = "58e6b6cdb6638617de521bd0faa16354ee4f83cc68aed5f7003f82b358c307e0"
+at = "T=u32"
+embedded = "ee92503031a8a7d6413dd8d2b0f7513f19509797ab2ab554ce0b93b42e586d41"
+status = "residue"
+cause = "mir::Ty: yielder::Send<u32>"
+

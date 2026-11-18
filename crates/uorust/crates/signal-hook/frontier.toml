@@ -1,0 +1,193 @@
+# The signal-hook register (written by `uorust crate signal-hook@0.4.6`; do not edit): every body of
+# signal-hook's MIR at signal-hook 0.4.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 87
+translated = 3
+residue = 84
+
+[module.consts]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.flag]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.iterator]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.low_level]
+bodies = 24
+translated = 2
+residue = 22
+
+[embedding]
+bodies = 87
+embedded = 87
+evaluable = 87
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: signal_hook_registry::SigId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::Handle"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::Pending<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignalOnly"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WithRawSiginfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item low_level::channel::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Channel<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Handle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iterator::Forever<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iterator::SignalsInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iterator::exfiltrator::SignalOnly"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iterator::exfiltrator::raw::WithRawSiginfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: low_level::channel::Channel<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: consts::TERM_SIGNALS::promoted[0]: mir::Operand::Constant: the constant item libc::SIGTERM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: low_level::signal_details::DETAILS: type outside the lift: low_level::signal_details::Details"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BorrowedFd<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeliveryState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Forever<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SignalsInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Slot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WakeFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backend::Pending<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::DeliveryState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::PendingSignals<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::PollResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::SignalDelivery<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::backend::SignalIterator<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator::exfiltrator::raw::Slot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::siginfo_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: low_level::pipe::WakeMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: low_level::signal_details::DefaultKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: low_level::signal_details::Details"
+bodies = 1

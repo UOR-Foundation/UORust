@@ -1,0 +1,243 @@
+# The console register (written by `uorust crate console@0.16.6`; do not edit): every body of
+# console's MIR at console 0.16.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 280
+translated = 0
+residue = 280
+
+[module.ansi]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.common_term]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.kb]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.term]
+bodies = 70
+translated = 0
+residue = 70
+
+[module.unix_term]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.utils]
+bodies = 144
+translated = 0
+residue = 144
+
+[embedding]
+bodies = 280
+embedded = 280
+evaluable = 280
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: utils::Style"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: utils::StyledObject<u32>"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Term"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: term::Term"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: kb::Key"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TermFeatures<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Color"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ansi::EscAction"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AnsiCodeIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Attributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CharIndices<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: term::TermInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utils::Alignment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utils::Attributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Style"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TermFamily"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ansi::Match<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ansi::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: term::TermFamily"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: term::TermFeatures<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: term::TermTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::Attribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::BitsIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::Emoji<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &OnceLock<bool>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as UnicodeWidthChar>::width"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <str as UnicodeWidthStr>::width"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BitsIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ansi::AnsiCodeIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ansi::DcsSequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ansi::Matches<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ansi::OscSequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ansi::WithoutAnsi<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRawFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: term::ReadWritePair"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: termios"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::Color"
+bodies = 1

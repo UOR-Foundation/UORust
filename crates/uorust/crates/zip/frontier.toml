@@ -1,0 +1,944 @@
+# The zip register (written by `uorust crate zip@9.7.0`; do not edit): every body of
+# zip's MIR at zip 9.7.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1055
+translated = 11
+residue = 1044
+
+[module.aes]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.aes_ctr]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.compression]
+bodies = 50
+translated = 1
+residue = 49
+
+[module.cp437]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.crc32]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.datetime]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.extra_fields]
+bodies = 112
+translated = 0
+residue = 112
+
+[module.format]
+bodies = 179
+translated = 2
+residue = 177
+
+[module.path]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.read]
+bodies = 378
+translated = 4
+residue = 374
+
+[module.result]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.types]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.unstable]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.write]
+bodies = 168
+translated = 3
+residue = 165
+
+[module.zipcrypto]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+bodies = 1055
+embedded = 1055
+evaluable = 1049
+blocked = 6
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 3
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 3
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: result::ZipError"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 92
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: compression::CompressionMethod"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: write::options::FileOptions<'_"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: format::magic::Magic"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: OwnedZipFileEntry"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ZipFileEntry<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ZipFile<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: read::zipfile::ZipFile<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: DateTime"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ZipFileSeek<'_"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: types::ZipFileData"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ZipFileData"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: write::options::ExtendedFileOptions"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ZipCryptoKeys"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: format::system::System"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ZipFileFlags"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: format::compression::Compression"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ExtendedTimestamp"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: format::flags::ZipFileFlags"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DataStreamAlignment"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Magic"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extra_fields::custom_extra_field::CustomExtraField"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extra_fields::extended_timestamp::ExtendedTimestamp"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extra_fields::extra_field::ExtraField"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Take<&mut u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AesMode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AesVendorVersion"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CompressionMethod"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ExtendedFileOptions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Ntfs"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UsedExtraField"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ZipFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extra_fields::data_stream_alignment::DataStreamAlignment"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: format::aes::AesMode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ExtendedTimestampFlags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PreparedZipFile"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ZipArchive<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ZipWriter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extra_fields::UsedExtraField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extra_fields::zip64_extended_information::Zip64ExtendedInformation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip32CDEBlock"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip64CDEBlock"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip64CDELocatorBlock"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: format::blocks::ZipCentralEntryBlock"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: format::blocks::ZipLocalEntryBlock"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::extract::ExtractOptions<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: system::System"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::PreparedZipFile"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::zip_writer::ZipWriter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zipcrypto::ZipCryptoKeys"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AesSalt"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AexEncryption"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ArchiveOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Backwards<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Crc32Reader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CustomExtraField"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExtraFieldId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Forward<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StreamWriter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnicodeExtraField"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Zip64ExtendedInformation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ZipArchiveMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ZipCentralEntryBlock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ZipLocalEntryBlock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extra_fields::extra_field::ExtraFields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extra_fields::ntfs::Ntfs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip64CentralDirectoryEnd"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::data_descriptor::Zip64DataDescriptorBlock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::data_descriptor::ZipDataDescriptor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::data_descriptor::ZipDataDescriptorBlock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format::extra_fields::ExtraFieldId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::ZipArchiveMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: format::magic::Magic::LOCAL_FILE_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: format::magic::Magic::ZIP64_CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AesReaderValid<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AesWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EncryptWith<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtraField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileOptions<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HeaderDataDescriptorMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeEncrypted<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZipCryptoReaderValid<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZipCryptoWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes::AesSalt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compression::InstantiationParameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crc32::Crc32Reader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extra_fields::aex_encryption::AexEncryption"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extra_fields::zipinfo_utf8::UnicodeExtraField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::aes::AesVendorVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::blocks::BlockWithMagic<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip64CentralDirectoryEndLocator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::HeaderDataDescriptorMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::config::ArchiveOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::config::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::extract::SymlinkExtractAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::readers::SeekableTake<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::readers::ZipFileReader<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::stream::ZipStreamReader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::zip_iterable::ZipIterable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::zip_iterable::ZipIterableFiles<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::zip_iterable::ZipIterableFilesWithReader<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::zipfile::ZipFileSeek<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::MaybeEncrypted<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::StreamWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::ZipFileBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format::ffi::S_IFDIR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format::ffi::S_IFLNK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format::ffi::S_IFREG"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as std::cmp::Ord>::clamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_multiple_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::ascii::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::rsplit_once"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: format::blocks::Pod::zeroed: zip's MIR stops at mir::TerminatorKind::Call: format::blocks::Pod::zeroed"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::from_ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CentralDirectoryEndInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cipher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtraFields"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderConsistencyMetadata<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LazyDecompressor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MagicPositionCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnixFileModes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Zip32CentralDirectoryEnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Zip64DataDescriptorBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Zip64Sizes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipDataDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipDataDescriptorBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipIterable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipIterableFiles<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipIterableFilesWithReader<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZipWriterStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::AesInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::AesReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::AesReaderValid<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::AesWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::Cipher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes_ctr::AesCtrZipKeyStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compression::Decompressor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compression::LazyDecompressor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extra_fields::extended_timestamp::ExtendedTimestampFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extra_fields::zip64_extended_information::Zip64Sizes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::blocks::CentralDirectoryEndInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::blocks::DataAndPosition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::blocks::Zip32CentralDirectoryEnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::find_central_directory::MagicPositionCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::flags::ZipFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::CentralDirectoryInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::HeaderConsistencyMetadata<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::HeaderConsistencyMetadata<std::boxed::Box<[u8]>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::HeaderConsistencyMetadata<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::extract::UnixFileModes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::magic_finder::Backwards<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::magic_finder::Forward<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::magic_finder::MagicFinder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::readers::CryptoReader<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::stream::ReadFromStreamResult<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::ArchiveMetadataBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::CentralDirectoryChains"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::FailedRun"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zip_archive::SharedBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zipfile::OwnedZipFileEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::zipfile::ZipFileEntryWithDataDescriptor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: result::DateTimeRangeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::PlainDateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: typed_path::Utf8WindowsComponent<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: typed_path::Utf8WindowsComponents<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: typed_path::Utf8WindowsEncoding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::DeflateCache<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::NextWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::ZipWriterStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::options::EncryptWith<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zipcrypto::ZipCryptoReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zipcrypto::ZipCryptoReaderValid<u32>"
+bodies = 1

@@ -1,0 +1,173 @@
+# The cookie register (written by `uorust crate cookie@0.18.2`; do not edit): every body of
+# cookie's MIR at cookie 0.18.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 173
+translated = 1
+residue = 172
+
+[module.builder]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.crate]
+bodies = 68
+translated = 0
+residue = 68
+
+[module.delta]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.expiration]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.jar]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.parse]
+bodies = 22
+translated = 1
+residue = 21
+
+[module.prefix]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.same_site]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 173
+embedded = 173
+evaluable = 173
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Cookie<'_>"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: builder::CookieBuilder<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: expiration::Expiration"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: same_site::SameSite"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: time::format_description::BorrowedFormatItem<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CookieStr<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CookieJar"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jar::CookieJar"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: time::OffsetDateTime"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DeltaCookie"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Display<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: delta::DeltaCookie"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CookieBuilder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <Self as prefix::Prefix>::prefixed_name::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SplitCookies<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jar::Delta<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jar::Iter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefix::Host"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefix::PrefixedJar<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prefix::Secure"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::Date"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::Time"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::UtcOffset"
+bodies = 1

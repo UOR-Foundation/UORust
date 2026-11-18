@@ -1,0 +1,2001 @@
+# The js-sys register (written by `uorust crate js-sys@0.3.107`; do not edit): every body of
+# js-sys's MIR at js-sys 0.3.107, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 7852
+translated = 590
+residue = 7262
+
+[module."_#1"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#10"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#11"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#12"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#13"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#14"]
+bodies = 23
+translated = 3
+residue = 20
+
+[module."_#15"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#16"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#17"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#18"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#19"]
+bodies = 23
+translated = 3
+residue = 20
+
+[module."_#2"]
+bodies = 23
+translated = 3
+residue = 20
+
+[module."_#20"]
+bodies = 23
+translated = 3
+residue = 20
+
+[module."_#21"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#22"]
+bodies = 23
+translated = 4
+residue = 19
+
+[module."_#23"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#24"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#25"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#26"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#27"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#28"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#29"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#3"]
+bodies = 23
+translated = 3
+residue = 20
+
+[module."_#30"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#31"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#32"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#33"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#34"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#35"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#36"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#37"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#38"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#39"]
+bodies = 23
+translated = 4
+residue = 19
+
+[module."_#4"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#40"]
+bodies = 23
+translated = 4
+residue = 19
+
+[module."_#41"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#42"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#43"]
+bodies = 22
+translated = 3
+residue = 19
+
+[module."_#44"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#45"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#46"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#47"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#48"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#49"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#5"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#50"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#51"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#52"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#53"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#54"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#55"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#56"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#59"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#6"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module."_#7"]
+bodies = 23
+translated = 4
+residue = 19
+
+[module."_#8"]
+bodies = 23
+translated = 4
+residue = 19
+
+[module."_#9"]
+bodies = 22
+translated = 4
+residue = 18
+
+[module._]
+bodies = 22
+translated = 4
+residue = 18
+
+[module.crate]
+bodies = 6489
+translated = 371
+residue = 6118
+
+[module.futures]
+bodies = 77
+translated = 5
+residue = 72
+
+[embedding]
+bodies = 7687
+embedded = 7687
+evaluable = 7687
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::JsValue"
+bodies = 1172
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<u32>"
+bodies = 1120
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as wasm_bindgen::convert::IntoWasmAbi>::into_abi"
+bodies = 337
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmSlice"
+bodies = 264
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::drop"
+bodies = 225
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 220
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 177
+
+[[cause]]
+cause = "mir::Ty: u32<u32>"
+bodies = 169
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 118
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&wasm_bindgen::JsValue as NullableIntoWasmAbi>::null"
+bodies = 115
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as NullableFromWasmAbi>::is_null"
+bodies = 115
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as NullableIntoWasmAbi>::null"
+bodies = 115
+
+[[cause]]
+cause = "mir::Ty: ArrayTuple<"
+bodies = 83
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::NAMED_EXTERNREF"
+bodies = 79
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 61
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::STRING_ENUM"
+bodies = 50
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::VECTOR"
+bodies = 50
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::needs_drop"
+bodies = 50
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: wasm_bindgen::__rt::module_path_hash"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<i32>"
+bodies = 45
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 41
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ManuallyDrop::new"
+bodies = 40
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as wasm_bindgen::describe::WasmDescribe>::describe"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: Function<u32>"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: NumberFormatOptions"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 33
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoWasmAbi"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: DateTimeFormatOptions"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: DurationFormatOptions"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: u32<u32"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: Intl::Duration"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Array<u32>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: PluralRulesOptions"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: PromiseState<u32"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: ArrayTuple<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationUnitDisplay"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Intl::LocaleMatcher"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Locale"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Global"
+bodies = 17
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as From>::from"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: WeakMap<u32"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Intl::CollatorOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeFormatOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNamesOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationFormatOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationUnitStyle"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormatOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormatOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::PluralRulesOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Intl::SegmenterOptions"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Module"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: CollatorOptions"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Intl::Locale"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: WeakSet<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::JsValue::UNDEFINED"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeFormatPart"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormatPart"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: PropertyDescriptor<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Intl::Collator"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::LocaleMatcherOptions"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::PluralRules"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Intl::Segmenter"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Promise<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WeakRef<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::CompileError"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::CompileOptions"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Exception"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Instance"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::InstantiatedSource"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::LinkError"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::RuntimeError"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Table"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Tag"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AsyncGenerator<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: DisplayNamesOptions"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Generator<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeRangeFormatPart"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNames"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationFormatPart"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationTimeUnitStyle"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberRangeFormatPart"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::NumericFormat"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedDurationFormatOptions"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::SegmentData"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::Segments"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::TextInfo"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Intl::WeekInfo"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: IteratorNext<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Map<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Module"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: PromiseWithResolvers<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Set<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Memory"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: WebAssembly::Suspending"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<i64>"
+bodies = 10
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::slice::from_raw_parts_mut"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: wasm_bindgen::__rt::wbg_cast"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeStyle"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormatPart"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::RangeSource"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatPart"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedCollatorOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedDateTimeFormatOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedDisplayNamesOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedListFormatOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedNumberFormatOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedPluralRulesOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedRelativeTimeFormatOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::ResolvedSegmenterOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::RoundingMode"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::RoundingPriority"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Intl::TrailingZeroDisplay"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Iterator::looks_like_iterator::MaybeIterator"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Object<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: SegmentData"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: global::get_global_object::Global"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: AsyncIterator<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CompileOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: DateTimeFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Exception"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CollatorCaseFirst"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CollatorSensitivity"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CollatorUsage"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CompactDisplay"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CurrencyDisplay"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::CurrencySign"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DateTimeFormatPartType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DayFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DayPeriodFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNamesFallback"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNamesLanguageDisplay"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNamesStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DisplayNamesType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationFormatPartType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::DurationFormatStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::EraFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::HourCycle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormatPartType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormatStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::ListFormatType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::MonthFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormatNotation"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormatPartType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::NumberFormatStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::PluralRulesType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatNumeric"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatPartType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::SegmenterGranularity"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::SignDisplay"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::TimeZoneNameFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::UnitDisplay"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::UseGrouping"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::WeekdayFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Intl::YearFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Iterator<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ListFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ListFormatOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: NumberFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: PluralRules"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: futures::queue::Global"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ArrayIntoIter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ArrayIter<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Collator"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DisplayNames"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DurationFormatPart"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Instance"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Intl::PluralCategory"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Intl::RelativeTimeFormatUnit"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Intl::SupportedValuesKey"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Memory"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatPart"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SegmenterOptions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Table"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: WeekInfo"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Add>::add"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as BitAnd>::bitand"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as BitOr>::bitor"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as BitXor>::bitxor"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Div>::div"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Mul>::mul"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Rem>::rem"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Shl>::shl"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Shr>::shr"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Sub>::sub"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CompileError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DateTimeFormatPart"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DurationFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InstantiatedSource"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LinkError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ListFormatPart"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LocaleMatcherOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NumberFormatPart"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RuntimeError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Segmenter"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Suspending"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TextInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: JsString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Segments"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BigInt64Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BigUint64Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int16Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int32Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int8Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint16Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint32Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint8Array::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint8ClampedArray::length"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AggregateError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArrayBuffer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArrayBufferOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AsyncDisposableStack"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Base64Options"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BigInt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Boolean"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollatorCaseFirst"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollatorSensitivity"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollatorUsage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CompactDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CurrencyDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CurrencySign"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DataView"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Date"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DateTimeFormatPartType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DateTimeStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DayFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DayPeriodFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DisplayNamesFallback"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DisplayNamesLanguageDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DisplayNamesStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DisplayNamesType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DisposableStack"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DurationFormatPartType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DurationFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DurationTimeUnitStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DurationUnitDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DurationUnitStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EraFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ErrorOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EvalError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FinalizationRegistry"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HourCycle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ListFormatPartType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ListFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ListFormatType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LocaleMatcher"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MonthFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Number"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumberFormatNotation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumberFormatPartType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumberFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumericFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PluralCategory"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PluralRulesType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RangeError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RangeSource"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ReferenceError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RegExp"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RegExpMatchArray"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatNumeric"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatPartType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RelativeTimeFormatUnit"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ResolvedCollatorOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ResolvedDurationFormatOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ResolvedRelativeTimeFormatOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RoundingMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RoundingPriority"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SegmenterGranularity"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SetFromResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SignDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SupportedValuesKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SuppressedError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SyntaxError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeZoneNameFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TrailingZeroDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TypeError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UnitDisplay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UriError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UseGrouping"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WasmSlice"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WeekdayFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: YearFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: singlethread::Task"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialEq"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Not>::not"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Float16Array::as_uint16_view: js-sys's MIR stops at type outside the lift: ArrayBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Object::new"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BigInt64Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BigUint64Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Float16Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Float32Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Float64Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Function<fn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Int16Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Int32Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Int8Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedDateTimeFormatOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedDisplayNamesOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedListFormatOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedNumberFormatOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedPluralRulesOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolvedSegmenterOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SharedArrayBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SpawnedTask"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Uint16Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Uint32Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Uint8Array"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Uint8ClampedArray"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: futures::jspi::SpawnedTask"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: futures::task::singlethread::Task"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::RawWaker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as Neg>::neg"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as wasm_bindgen::convert::IntoWasmAbi>::into_abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::string::String as From>::from"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as wasm_bindgen::convert::IntoWasmAbi>::into_abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Array::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Boolean::value_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Base64Alphabet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Base64LastChunkHandling"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DateTimeRangeFormatPart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NumberRangeFormatPart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Promise<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Proxy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Queue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Symbol"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryFromIntError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn FnMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: futures::JsFuture<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: get_global_object::Global"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: queue::Global"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::MaybeAbi<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::MaybeAbi<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: future_to_promise::{closure#0}: type outside the lift: fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::JsValue::FALSE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::JsValue::TRUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc270: &wasm_bindgen::__rt::LazyCell<u32>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc297: &JsThreadLocal<Option<u32>>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc357: &wasm_bindgen::__rt::LazyCell<Queue>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AsyncDisposableStack::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Atomics::pause::__wbg_pause_d2df66d31dcd6894: js-sys's MIR stops at type outside the lift: std::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Base64Options::new: js-sys's MIR stops at type outside the lift: Object"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BigInt64Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: BigUint64Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: DisposableStack::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Float16Array::buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Float16Array::new_with_length"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Float32Array::length"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Float64Array::length"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Function::new_no_args"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int16Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int32Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Int8Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: JsString::length"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Map::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Number::new_from_str"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: PropertyDescriptor::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Set::new_typed"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint16Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint32Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint8Array::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uint8ClampedArray::new_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: WeakMap::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: WeakSet::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: futures::jspi::__wbindgen_jspi_in_context: js-sys's MIR stops at type outside the lift: wasm_bindgen::convert::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: futures::jspi::in_context: js-sys's MIR stops at mir::TerminatorKind::Call: futures::jspi::__wbindgen_jspi_in_context: js-sys's MIR stops at type outside the lift: wasm_bindgen::convert::WasmRet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple1>::T1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple2>::T2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple3>::T3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple4>::T4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple5>::T5"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple6>::T6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple7>::T7"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as JsTuple8>::T8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClearOnUnwind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QueueState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures::Inner<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures::jspi::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures::queue::Queue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures::task::singlethread::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: singlethread::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<std::boxed::Box<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Waker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: u32<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::sys::Undefined"
+bodies = 1

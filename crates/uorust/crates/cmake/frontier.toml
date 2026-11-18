@@ -1,0 +1,110 @@
+# The cmake register (written by `uorust crate cmake@0.1.58`; do not edit): every body of
+# cmake's MIR at cmake 0.1.58, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 56
+translated = 0
+residue = 56
+
+[module.crate]
+bodies = 56
+translated = 0
+residue = 56
+
+[embedding]
+bodies = 56
+embedded = 56
+evaluable = 55
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Build"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Config::defined: cmake's MIR stops at type outside the lift: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Version::new: cmake's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Command"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RustProfile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Lines<'_>"
+bodies = 1
