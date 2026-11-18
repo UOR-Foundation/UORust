@@ -4707,6 +4707,22 @@ fn mir_lift(
             }
         }
     }
+    // Reserve method homonyms from the source, independently of which MIR
+    // files this invocation selected. A source identity qualifies every member
+    // of an ambiguous family; adding another dump cannot steal a proved name.
+    let base_name = |r: FnRef| {
+        let f = ctx.func(r);
+        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
+        match (&f.owner, homonyms.get(&site)) {
+            (Some(owner), _) => lift::local_name(&format!("{owner}_{}", f.name)),
+            (None, Some((_, lex))) => lex.clone(),
+            (None, None) => lift::local_name(&f.name),
+        }
+    };
+    let mut name_counts: BTreeMap<String, usize> = BTreeMap::new();
+    for r in ctx.all_fns().into_iter().filter(|&r| ctx.product(r)) {
+        *name_counts.entry(base_name(r)).or_default() += 1;
+    }
     let product: BTreeMap<String, FnRef> = ctx
         .all_fns()
         .into_iter()
@@ -4732,14 +4748,10 @@ fn mir_lift(
             continue;
         };
         let f = ctx.func(r);
-        let site = (r.pkg, ctx.file(r).target, ctx.module_of(r), f.name.clone());
-        let base = match (&f.owner, homonyms.get(&site)) {
-            (Some(o), _) => lift::local_name(&format!("{o}_{}", f.name)),
-            (None, Some((_, lex))) => lex.clone(),
-            (None, None) => lift::local_name(&f.name),
-        };
-        let name = if names.contains(&base) {
-            lift::local_name(&format!("{}_{base}", ctx.package(r).name))
+        let base = base_name(r);
+        let name = if name_counts[&base] > 1 || names.contains(&base) {
+            let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
+            lift::local_name(&format!("{base}_{kappa}"))
         } else {
             base
         };
@@ -4982,13 +4994,21 @@ fn mir_lift(
             .chain(t.lowered.decls.iter().map(|d| d.name().to_string()))
             .map(|d| toml_string(&d))
             .collect();
+        let dependencies: Vec<String> = t
+            .lowered
+            .calls
+            .iter()
+            .filter_map(|name| done.get(name))
+            .map(|callee| toml_string(&callee.kappa))
+            .collect();
         listing.push_str(&format!(
-            "\n[[candidate]]\nkappa = {}\nfunction = {}\ndigest = {}\ntrial = {}\ndecls = [{}]\n",
+            "\n[[candidate]]\nkappa = {}\nfunction = {}\ndigest = {}\ntrial = {}\ndecls = [{}]\ndependencies = [{}]\n",
             toml_string(&t.kappa),
             toml_string(&t.path),
             toml_string(&t.digest),
             on_trial.contains(&t.name),
-            decls.join(", ")
+            decls.join(", "),
+            dependencies.join(", ")
         ));
         if let Some(cause) = causes.get(&t.name) {
             let span = ctx.func(t.r).span.clone();

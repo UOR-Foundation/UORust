@@ -2076,3 +2076,158 @@ fn every_core_body_is_embedded_ue_19() {
     assert!(!harness.exists());
     let _ = std::fs::remove_dir_all(&work);
 }
+
+/// UE-28: adding another MIR method must not steal an existing method's name.
+#[test]
+fn mir_method_homonyms_have_stable_names_ue_28() {
+    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("mir-method-homonyms");
+    let _ = std::fs::remove_dir_all(&work);
+    let source = work.join("source");
+    std::fs::create_dir_all(source.join("src")).expect("source");
+    std::fs::write(
+        source.join("Cargo.toml"),
+        r#"[package]
+name = "owners"
+version = "0.0.0"
+edition = "2021"
+[workspace]
+"#,
+    )
+    .expect("manifest");
+    let mut code = String::new();
+    for module in ["a", "b", "c"] {
+        code.push_str(&format!("pub mod {module} {{ pub struct Token; impl Token {{ pub fn convert(mut value: u32) -> u32 {{ while value > 0 {{ value -= 1; }} value }} }} }}\n"));
+    }
+    std::fs::write(source.join("src/lib.rs"), code).expect("source bytes");
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&source)
+        .output()
+        .expect("lock fixture");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = work.join("all");
+    uorust::mir::dump(&source, &dumps, &Default::default()).expect("actual compiler MIR");
+    let candidates = |at: &Path| {
+        let mut opts = options("owners");
+        opts.mir = Some(mir_options(
+            at.to_path_buf(),
+            Default::default(),
+            uorust::mir::Trial::All,
+        ));
+        let files = uorust::project_workspace(&source, &opts).expect("trial projection");
+        let listing: toml::Value = text(&files, uorust::mir::CANDIDATES)
+            .parse()
+            .expect("candidates");
+        listing
+            .get("candidate")
+            .and_then(toml::Value::as_array)
+            .unwrap_or_else(|| panic!("no MIR candidates: {}", text(&files, "frontier.toml")))
+            .iter()
+            .map(|row| {
+                (
+                    row["function"].as_str().expect("function").to_string(),
+                    row["decls"]
+                        .as_array()
+                        .expect("declarations")
+                        .last()
+                        .expect("body")
+                        .as_str()
+                        .expect("name")
+                        .to_string(),
+                )
+            })
+            .collect::<BTreeMap<_, _>>()
+    };
+    let all = candidates(&dumps);
+    assert_eq!(all.len(), 3, "a conversion method was lost: {all:?}");
+    assert_eq!(
+        all.values()
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        3
+    );
+    let selected = work.join("selected");
+    std::fs::create_dir_all(selected.join("lib-owners")).expect("selected view");
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(dumps.join(name), selected.join(name)).expect("compiler metadata");
+    }
+    for file in std::fs::read_dir(dumps.join("lib-owners")).expect("compiler bodies") {
+        let file = file.expect("file").path();
+        if file.extension().is_some_and(|e| e == "mir")
+            && std::fs::read_to_string(&file)
+                .expect("MIR")
+                .contains("fn c::<impl at ")
+        {
+            std::fs::copy(
+                &file,
+                selected
+                    .join("lib-owners")
+                    .join(file.file_name().expect("name")),
+            )
+            .expect("exact compiler body");
+        }
+    }
+    let one = candidates(&selected);
+    assert_eq!(one.len(), 1, "the selected compiler view: {one:?}");
+    assert_eq!(
+        one["owners::c::Token::convert"],
+        all["owners::c::Token::convert"]
+    );
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-29: bounded plans preserve all work and dependency order.
+#[test]
+fn mir_proof_batches_keep_dependencies_and_refuse_invalid_budgets_ue_29() {
+    use std::collections::BTreeSet;
+    let graph = BTreeMap::from([
+        ("leaf".to_string(), BTreeSet::new()),
+        ("middle".to_string(), BTreeSet::from(["leaf".to_string()])),
+        ("top".to_string(), BTreeSet::from(["middle".to_string()])),
+        (
+            "cycle-a".to_string(),
+            BTreeSet::from(["cycle-b".to_string()]),
+        ),
+        (
+            "cycle-b".to_string(),
+            BTreeSet::from(["cycle-a".to_string()]),
+        ),
+    ]);
+    let plan = uorust::mir::proof_batches(&graph, 2).expect("bounded plan");
+    let mut done = BTreeSet::new();
+    for batch in &plan {
+        assert!(!batch.is_empty() && batch.len() <= 2);
+        assert!(batch.is_disjoint(&done), "work was repeated");
+        for node in batch {
+            assert!(
+                graph[node]
+                    .iter()
+                    .all(|dependency| done.contains(dependency) || batch.contains(dependency)),
+                "a dependency was omitted"
+            );
+        }
+        done.extend(batch.iter().cloned());
+    }
+    assert_eq!(done, graph.keys().cloned().collect());
+    assert!(plan
+        .iter()
+        .any(|batch| batch.contains("cycle-a") && batch.contains("cycle-b")));
+    for maximum in [0, 1] {
+        assert!(matches!(
+            uorust::mir::proof_batches(&graph, maximum),
+            Err(UorustError::Tool(_))
+        ));
+    }
+    let missing = BTreeMap::from([("caller".to_string(), BTreeSet::from(["absent".to_string()]))]);
+    assert!(matches!(
+        uorust::mir::proof_batches(&missing, 2),
+        Err(UorustError::Tool(_))
+    ));
+    assert!(uorust::mir::proof_batches(&BTreeMap::new(), 2)
+        .expect("no translations")
+        .is_empty());
+}

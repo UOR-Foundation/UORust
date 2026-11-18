@@ -162,3 +162,16 @@ Feature: engine
     Given two owners with an associated function of the same short name
     When the suite exercises UE-27
     Then each qualified assertion binds its own lifted function and an unknown owner is refused
+
+  @UE-28 @build
+  Scenario: MIR method homonyms keep stable qualified names
+    Given three modules with equally named conversion methods and their actual compiler MIR
+    When every body or only the last module's method is translated on trial
+    Then every method has its own candidate and the last method keeps the same declaration name in both views
+
+  @UE-29 @build
+  Scenario: Native MIR proof work is bounded by dependency components
+    Given dependent translations, mutually recursive translations and a positive batch budget
+    When the prover plans and executes its trials
+    Then every eligible translation is scheduled once after its dependencies, recursive components remain together, and unchanged proved verdicts need no verifier rerun
+    But zero budgets, dangling dependencies and a recursive component larger than the budget are refused before verification

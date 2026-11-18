@@ -43,7 +43,7 @@ mod std_vectors;
 pub(crate) mod stdlib;
 pub mod verdict;
 
-pub use prove::{prove, Summary};
+pub use prove::{proof_batches, prove, prove_bounded, Summary, DEFAULT_PROOF_BATCH_SIZE};
 
 /// The toolchain the MIR path is pinned to, for the binary's scopes.
 pub const TOOLCHAIN: &str = spec::TOOLCHAIN;

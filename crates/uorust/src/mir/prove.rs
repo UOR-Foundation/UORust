@@ -29,6 +29,7 @@ struct Trialled {
     digest: String,
     trial: bool,
     decls: Vec<String>,
+    dependencies: BTreeSet<String>,
 }
 
 /// What a run decided.
@@ -70,6 +71,18 @@ fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, Uorust
                 .get("trial")
                 .and_then(toml::Value::as_bool)
                 .unwrap_or(false),
+            dependencies: row
+                .get("dependencies")
+                .and_then(toml::Value::as_array)
+                .ok_or_else(|| bad("a candidate without dependencies".into()))?
+                .iter()
+                .map(|value| {
+                    value
+                        .as_str()
+                        .map(str::to_string)
+                        .ok_or_else(|| bad("a dependency is not a source identity".into()))
+                })
+                .collect::<Result<_, _>>()?,
             decls: row
                 .get("decls")
                 .and_then(toml::Value::as_array)
@@ -182,6 +195,88 @@ fn observed(d: &Diagnostic) -> Option<Vec<String>> {
     )
 }
 
+/// Default maximum number of undecided functions in one verifier trial.
+pub const DEFAULT_PROOF_BATCH_SIZE: usize = 8;
+
+/// Partition a closed dependency graph into bounded dependency-ordered trials.
+/// Recursive components stay together. Invalid budgets, missing dependencies,
+/// and components larger than the budget are typed tool refusals.
+pub fn proof_batches(
+    graph: &BTreeMap<String, BTreeSet<String>>,
+    maximum: usize,
+) -> Result<Vec<BTreeSet<String>>, UorustError> {
+    let refuse = |message| UorustError::Tool(format!("proof batch: {message}"));
+    if maximum == 0 {
+        return Err(refuse("the function budget must be positive".to_string()));
+    }
+    for (node, dependencies) in graph {
+        if let Some(missing) = dependencies.iter().find(|name| !graph.contains_key(*name)) {
+            return Err(refuse(format!("{node} names absent dependency {missing}")));
+        }
+    }
+    let mut components = crate::lift::strong_components(graph);
+    components.sort();
+    if let Some(component) = components.iter().find(|group| group.len() > maximum) {
+        return Err(refuse(format!(
+            "recursive component of {} functions exceeds budget {maximum}: {}",
+            component.len(),
+            component.iter().cloned().collect::<Vec<_>>().join(", ")
+        )));
+    }
+    let mut done = BTreeSet::new();
+    let mut result = Vec::new();
+    while !components.is_empty() {
+        let ready: Vec<BTreeSet<String>> = components
+            .iter()
+            .filter(|group| {
+                group.iter().all(|node| {
+                    graph[node]
+                        .iter()
+                        .all(|dependency| done.contains(dependency) || group.contains(dependency))
+                })
+            })
+            .cloned()
+            .collect();
+        assert!(
+            !ready.is_empty(),
+            "a closed SCC graph has a ready component"
+        );
+        let mut batch = BTreeSet::new();
+        for group in &ready {
+            if batch.len() + group.len() > maximum {
+                result.push(std::mem::take(&mut batch));
+            }
+            batch.extend(group.iter().cloned());
+        }
+        if !batch.is_empty() {
+            result.push(batch);
+        }
+        for group in &ready {
+            done.extend(group.iter().cloned());
+        }
+        components.retain(|group| !group.is_subset(&done));
+    }
+    Ok(result)
+}
+
+fn trial_graph(candidates: &[Trialled]) -> BTreeMap<String, BTreeSet<String>> {
+    let pending: BTreeSet<String> = candidates
+        .iter()
+        .filter(|row| row.trial)
+        .map(|row| row.kappa.clone())
+        .collect();
+    candidates
+        .iter()
+        .filter(|row| row.trial)
+        .map(|row| {
+            (
+                row.kappa.clone(),
+                row.dependencies.intersection(&pending).cloned().collect(),
+            )
+        })
+        .collect()
+}
+
 /// Decide every undecided translation of the workspace at `root`, writing
 /// the verdict register to `verdicts` after each decision.
 pub fn prove(
@@ -191,11 +286,54 @@ pub fn prove(
     verdicts: &Path,
     scratch: &Path,
 ) -> Result<Summary, UorustError> {
+    prove_bounded(
+        root,
+        options,
+        dumps,
+        verdicts,
+        scratch,
+        DEFAULT_PROOF_BATCH_SIZE,
+    )
+}
+
+/// Decide MIR translations in dependency-ordered trials bounded by `maximum`.
+/// Every trial is checked by the actual SDK verifier; cached proved digests
+/// are reused and no unverified translation is admitted.
+pub fn prove_bounded(
+    root: &Path,
+    options: &Options,
+    dumps: &Path,
+    verdicts: &Path,
+    scratch: &Path,
+    maximum: usize,
+) -> Result<Summary, UorustError> {
+    proof_batches(&BTreeMap::new(), maximum)?;
     let mut register = Verdicts::read(verdicts)?;
     let mut summary = Summary::default();
     // Axioms learned for declarations of translations still on trial.
     let mut learned: BTreeMap<String, BTreeMap<String, Vec<String>>> = BTreeMap::new();
-    let mut groups: VecDeque<Trial> = VecDeque::from([Trial::All]);
+    let catalogue = crate::project_workspace(
+        root,
+        &Options {
+            mir: Some(MirOptions {
+                dumps: dumps.to_path_buf(),
+                verdicts: register.clone(),
+                trial: Trial::All,
+                learned: BTreeMap::new(),
+            }),
+            ..options.clone()
+        },
+    )?;
+    let all = candidates(&catalogue)?;
+    let live: BTreeSet<(&String, &String)> =
+        all.iter().map(|row| (&row.kappa, &row.digest)).collect();
+    register
+        .rows
+        .retain(|key, value| live.contains(&(key, &value.digest)));
+    let mut groups: VecDeque<Trial> = proof_batches(&trial_graph(&all), maximum)?
+        .into_iter()
+        .map(Trial::Only)
+        .collect();
     while let Some(trial) = groups.pop_front() {
         let current = register.clone();
         let opts = Options {
@@ -283,10 +421,10 @@ pub fn prove(
             groups.push_front(trial);
             continue;
         }
-        // Nothing attributed: split the trial.
-        let kappas: Vec<String> = on_trial.iter().map(|c| c.kappa.clone()).collect();
-        if let [only] = kappas.as_slice() {
-            let c = on_trial[0];
+        // Only independent recursive components may be split. Splitting a
+        // cycle would omit an undecided dependency and silently lose work.
+        let components = crate::lift::strong_components(&trial_graph(&all));
+        if components.len() == 1 {
             let first = diagnostics
                 .first()
                 .map(|d| {
@@ -297,22 +435,28 @@ pub fn prove(
                     )
                 })
                 .unwrap_or_else(|| "the verifier failed without a diagnostic".to_string());
-            register.rows.insert(
-                only.clone(),
-                Verdict {
-                    function: c.function.clone(),
-                    digest: c.digest.clone(),
-                    status: Decision::Refused(first),
-                    axioms: BTreeMap::new(),
-                },
-            );
-            summary.refused += 1;
+            for c in on_trial {
+                register.rows.insert(
+                    c.kappa.clone(),
+                    Verdict {
+                        function: c.function.clone(),
+                        digest: c.digest.clone(),
+                        status: Decision::Refused(first.clone()),
+                        axioms: BTreeMap::new(),
+                    },
+                );
+                summary.refused += 1;
+            }
             std::fs::write(verdicts, register.to_text()).map_err(|e| io(verdicts, e))?;
             continue;
         }
-        let half = kappas.len() / 2;
-        groups.push_front(Trial::Only(kappas[half..].iter().cloned().collect()));
-        groups.push_front(Trial::Only(kappas[..half].iter().cloned().collect()));
+        let half = components.len() / 2;
+        groups.push_front(Trial::Only(
+            components[half..].iter().flatten().cloned().collect(),
+        ));
+        groups.push_front(Trial::Only(
+            components[..half].iter().flatten().cloned().collect(),
+        ));
     }
     std::fs::write(verdicts, register.to_text()).map_err(|e| io(verdicts, e))?;
     Ok(summary)

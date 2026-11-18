@@ -48,6 +48,8 @@ model does not sanction.
 | `UE-25` | `build` | Surface declarations are emitted after the declarations their expression calls name across source files, preserving mutually recursive groups and ignoring apparent calls inside string literals |
 | `UE-26` | `build` | A dependency resource containing only one string literal cannot define a caller-location reader and does not taint unrelated figure rewrites; malformed dependency code remains unknown and real tracked readers remain detected |
 | `UE-27` | `build` | A closed assertion calling an explicitly qualified associated function uses that function's lifted signature, preserving its owner and refusing a different owner rather than losing or misattributing the library acceptance root |
+| `UE-28` | `build` | MIR translations of methods with the same owner and short name receive stable source-qualified names, independent of which compiler bodies are selected, without dropping a homonym as a collision |
+| `UE-29` | `build` | MIR proof trials are partitioned by their dependency graph into bounded batches that keep recursive components together, reject zero budgets, dangling dependencies and oversized recursive components, and reuse actual SDK verdicts without omitting eligible translations |
 
 ## factory
 

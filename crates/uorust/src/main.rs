@@ -680,6 +680,10 @@ struct ProveArgs {
     /// The directory the trial projections are verified in.
     #[arg(long)]
     scratch: PathBuf,
+    /// Maximum undecided functions per verifier trial; recursive components
+    /// remain together and exceeding this positive budget is a typed refusal.
+    #[arg(long, default_value_t = uorust::mir::DEFAULT_PROOF_BATCH_SIZE)]
+    proof_batch_size: usize,
 }
 
 #[derive(clap::Args)]
@@ -825,12 +829,13 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     "prove needs --mir and --verdicts".to_string(),
                 ));
             };
-            let summary = uorust::mir::prove(
+            let summary = uorust::mir::prove_bounded(
                 &args.workspace,
                 &options(args)?,
                 dumps,
                 verdicts,
                 &prove.scratch,
+                prove.proof_batch_size,
             )?;
             println!(
                 "proved {}, refused {} in {} verifier runs; verdicts in {}",

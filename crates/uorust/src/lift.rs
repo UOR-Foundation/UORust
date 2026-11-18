@@ -495,7 +495,9 @@ enum Stop {
 const PENDING: char = '\u{1}';
 
 /// The strongly connected components of a graph, each one set.
-fn strong_components(graph: &BTreeMap<String, BTreeSet<String>>) -> Vec<BTreeSet<String>> {
+pub(crate) fn strong_components(
+    graph: &BTreeMap<String, BTreeSet<String>>,
+) -> Vec<BTreeSet<String>> {
     let reach = |start: &String| {
         let mut seen = BTreeSet::new();
         let mut stack: Vec<&String> = graph.get(start).into_iter().flatten().collect();
