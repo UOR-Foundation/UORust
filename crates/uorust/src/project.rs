@@ -592,20 +592,68 @@ pub(crate) fn project(
             .collect();
         for (fi, file) in package.files.iter().enumerate() {
             for inline in syntax.names.inline_modules(&file.rel) {
-                // The shared names, and each method's self type written by
-                // a path (`super::T`), which only the module reads.
-                let pathed = file
+                // Resolve qualified types before localization can erase the
+                // module that distinguishes two declarations of one name.
+                let mut pathed: BTreeSet<String> = file
                     .fns
                     .iter()
                     .filter(|f| syntax.names.fn_module(&file.rel, f.span.line, &f.name) == inline)
                     .filter_map(|f| f.owner.as_deref())
                     .map(|o| o.split('<').next().unwrap_or(o).trim())
-                    .filter(|o| o.contains("::"));
+                    .filter(|o| o.contains("::"))
+                    .map(str::to_string)
+                    .collect();
+                let written = &syntax.files[&file.rel];
+                for (fact, fields) in file.structs.iter().zip(&written.structs) {
+                    if syntax
+                        .names
+                        .type_module(&file.rel, fact.span.line, &fact.name)
+                        == inline
+                    {
+                        for (_, ty) in fields {
+                            pathed.extend(ty.paths().into_iter().filter(|p| p.contains("::")));
+                        }
+                    }
+                }
+                for (fact, variants) in file.enums.iter().zip(&written.enums) {
+                    if syntax
+                        .names
+                        .type_module(&file.rel, fact.span.line, &fact.name)
+                        == inline
+                    {
+                        for (_, fields) in variants {
+                            for (_, ty) in fields {
+                                pathed.extend(ty.paths().into_iter().filter(|p| p.contains("::")));
+                            }
+                        }
+                    }
+                }
+                for (fact, function) in file.fns.iter().zip(&written.fns) {
+                    if syntax
+                        .names
+                        .fn_module(&file.rel, fact.span.line, &fact.name)
+                        == inline
+                    {
+                        for argument in &function.signature.inputs {
+                            if let crate::ast::FnArg::Typed(argument) = argument {
+                                pathed.extend(
+                                    argument.ty.paths().into_iter().filter(|p| p.contains("::")),
+                                );
+                            }
+                        }
+                        if let Some(result) = &function.signature.output {
+                            pathed.extend(result.paths().into_iter().filter(|p| p.contains("::")));
+                        }
+                    }
+                }
                 let read: BTreeMap<String, crate::names::TypeReading> = shared
                     .iter()
-                    .copied()
+                    .map(|n| (*n).to_string())
                     .chain(pathed)
-                    .map(|n| (n.to_string(), resolver.type_reading(pkg, fi, &inline, n)))
+                    .map(|n| {
+                        let reading = resolver.type_reading(pkg, fi, &inline, &n);
+                        (n, reading)
+                    })
                     .collect();
                 if !read.is_empty() {
                     ctx.type_readings.insert((pkg, fi, inline), read);
@@ -3722,14 +3770,11 @@ fn behavior(
         structs: BTreeMap<Key, (Scope, Written)>,
         datas: BTreeMap<Key, (Scope, lift::RawVariants)>,
         spans: BTreeMap<Key, Span>,
-        /// The shared names a type's fields write through a path, which
-        /// its fields read as no type.
-        blind: BTreeMap<Key, BTreeSet<String>>,
         /// The names of the keys declared twice, which name no one type.
         twice: BTreeSet<String>,
     }
     let mut declared: Vec<Declared> = Vec::new();
-    for (pkg, package) in ws.packages.iter().enumerate() {
+    for package in &ws.packages {
         let mut d = Declared::default();
         let mut clashing: BTreeSet<Key> = BTreeSet::new();
         let product = |file: &crate::facts::SourceFile| {
@@ -3767,29 +3812,10 @@ fn behavior(
                     let variants = payload
                         .iter()
                         .map(|(v, fs)| {
-                            let fs = fs
-                                .iter()
-                                .map(|(n, t)| {
-                                    (
-                                        n.clone(),
-                                        declared_in(
-                                            pkg,
-                                            fi,
-                                            file.scopes[e.scope].module.as_str(),
-                                            t,
-                                        ),
-                                    )
-                                })
-                                .collect();
+                            let fs = fs.iter().map(|(n, t)| (n.clone(), t.clone())).collect();
                             (v.clone(), fs)
                         })
                         .collect();
-                    let blind: BTreeSet<String> = payload
-                        .iter()
-                        .flat_map(|(_, fs)| fs.iter())
-                        .flat_map(|(_, t)| written_through_paths(&t.text, &shared[pkg]))
-                        .collect();
-                    d.blind.insert(key.clone(), blind);
                     d.datas.insert(key, ((fi, e.scope), variants));
                 } else {
                     d.enums
@@ -3816,20 +3842,7 @@ fn behavior(
                     });
                     continue;
                 }
-                let blind: BTreeSet<String> = fields
-                    .iter()
-                    .flat_map(|(_, t)| written_through_paths(&t.text, &shared[pkg]))
-                    .collect();
-                d.blind.insert(key.clone(), blind);
-                let fields = fields
-                    .iter()
-                    .map(|(n, t)| {
-                        (
-                            n.clone(),
-                            declared_in(pkg, fi, file.scopes[st.scope].module.as_str(), t),
-                        )
-                    })
-                    .collect();
+                let fields = fields.iter().map(|(n, t)| (n.clone(), t.clone())).collect();
                 d.structs.insert(key, ((fi, st.scope), fields));
             }
         }
@@ -4014,8 +4027,12 @@ fn behavior(
                 .structs
                 .into_iter()
                 .map(|(key, ((fi, scope), fs))| {
-                    let names = &blinded(&overlays[&(pkg, fi, scope)], d.blind.get(&key));
-                    let fs = fs.into_iter().map(|(n, t)| (n, t.renamed(names))).collect();
+                    let names = &overlays[&(pkg, fi, scope)];
+                    let inline = package.files[fi].scopes[scope].module.as_str();
+                    let fs = fs
+                        .into_iter()
+                        .map(|(n, t)| (n, declared_in(pkg, fi, inline, &t.renamed(names))))
+                        .collect();
                     (named[&key].clone(), fs)
                 })
                 .collect();
@@ -4023,13 +4040,18 @@ fn behavior(
                 .datas
                 .into_iter()
                 .map(|(key, ((fi, scope), vs))| {
-                    let names = &blinded(&overlays[&(pkg, fi, scope)], d.blind.get(&key));
+                    let names = &overlays[&(pkg, fi, scope)];
+                    let inline = package.files[fi].scopes[scope].module.as_str();
                     let vs = vs
                         .into_iter()
                         .map(|(v, fs)| {
                             (
                                 v,
-                                fs.into_iter().map(|(n, t)| (n, t.renamed(names))).collect(),
+                                fs.into_iter()
+                                    .map(|(n, t)| {
+                                        (n, declared_in(pkg, fi, inline, &t.renamed(names)))
+                                    })
+                                    .collect(),
                             )
                         })
                         .collect();
@@ -4377,13 +4399,19 @@ fn behavior(
             }
         };
         let mut sig = fn_syntax.signature.clone();
+        let signature_names = fn_aliases(r);
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
-                t.ty = declared_in(r.pkg, r.file, &inline_of(r), &t.ty);
+                t.ty = declared_in(
+                    r.pkg,
+                    r.file,
+                    &inline_of(r),
+                    &t.ty.renamed(&signature_names),
+                );
             }
         }
         if let Some(t) = &mut sig.output {
-            *t = declared_in(r.pkg, r.file, &inline_of(r), t);
+            *t = declared_in(r.pkg, r.file, &inline_of(r), &t.renamed(&signature_names));
         }
         let formatter = match sig.inputs.as_slice() {
             [crate::ast::FnArg::Receiver { plain: true }, crate::ast::FnArg::Typed(t)]
@@ -8314,8 +8342,14 @@ mod tests {
                 .unwrap_or_else(|| panic!("{construct} in {one:?}"))
         };
         let none = "[]".to_string();
-        assert_eq!(at("a::Node"), ("[\"src/lib.rs:25\"]".into(), none.clone()));
-        assert_eq!(at("b::Node"), ("[\"src/lib.rs:34\"]".into(), none.clone()));
+        assert_eq!(
+            at("KaisitesANode.c: UnsafeCell<u8>"),
+            ("[\"src/lib.rs:25\"]".into(), none.clone())
+        );
+        assert_eq!(
+            at("KaisitesBNode.c: UnsafeCell<u8>"),
+            ("[\"src/lib.rs:34\"]".into(), none.clone())
+        );
         assert_eq!(
             at("Q.c: UnsafeCell<u8>"),
             ("[\"src/lib.rs:11\"]".into(), none.clone())
@@ -9019,6 +9053,59 @@ pub fn fb(n: &Node) -> u8 {
             String::from_utf8(out.get(path).cloned().unwrap_or_default()).expect("utf-8")
         };
         (text("frontier.toml"), text("src/Behavior.lex.tex"))
+    }
+
+    #[test]
+    fn qualified_fields_keep_their_scope_ue_31() {
+        let (frontier, behavior) = projected(
+            "pathed",
+            &[(
+                "src/lib.rs",
+                r#"//! Scoped type paths.
+/// A.
+pub mod a {
+    /// Numeric declaration.
+    pub struct Declared { pub left: u8 }
+}
+/// B.
+pub mod b {
+    /// Boolean declaration.
+    pub struct Declared { pub right: bool }
+}
+/// Holder scope.
+pub mod inner {
+    use crate::b::Declared;
+    /// Both written bindings.
+    pub struct Holder {
+        pub number: crate::a::Declared,
+        pub flag: Declared,
+    }
+    /// Numeric field.
+    pub fn number(h: &Holder) -> u8 { h.number.left }
+    /// Boolean field.
+    pub fn flag(h: &Holder) -> bool { h.flag.right }
+}
+/// Qualified signature.
+pub fn direct(x: &crate::a::Declared) -> u8 { x.left }
+/// Nested qualified type.
+pub fn nested(xs: Vec<crate::a::Declared>) -> Vec<crate::a::Declared> { xs }
+/// An unresolved qualified type must not borrow a bare name.
+pub fn unresolved(x: &crate::missing::Declared) -> u8 { let _ = x; 0 }
+"#,
+            )],
+        );
+        for function in [
+            "pathed::inner::number",
+            "pathed::inner::flag",
+            "pathed::direct",
+            "pathed::nested",
+        ] {
+            let row = row(&frontier, function);
+            assert!(row.starts_with("[[lifted]]"), "{row}");
+        }
+        assert!(!row(&frontier, "pathed::unresolved").starts_with("[[lifted]]"));
+        assert!(behavior.contains("result: Bool"), "{behavior}");
+        assert!(behavior.contains("result: Nat"), "{behavior}");
     }
 
     /// The register row of a function: its kind and its lines.
@@ -10393,11 +10480,9 @@ pub fn fb(n: &Node) -> u8 {
 
     #[test]
     fn inline_a_type_written_through_a_module_path_is_not_the_readers_own() {
-        // `P` is declared by the root and by `inner`. The lift reads a type
-        // path by its last segment, so `crate::inner::P` in the root and
-        // `super::P` in `inner` would read the reader's own `P`: neither
-        // is lifted. `mine` writes the bare name and lifts.
-        let (frontier, _) = projected(
+        // Qualified signature types keep the declaration their path names.
+        // The constructor in the body still requires its separate reading.
+        let (frontier, behavior) = projected(
             "paths",
             &[(
                 "src/lib.rs",
@@ -10412,10 +10497,20 @@ pub fn fb(n: &Node) -> u8 {
         );
         let kept = row(&frontier, "paths::mine");
         assert!(kept.starts_with("[[lifted]]"), "{kept}");
-        for function in ["paths::theirs", "paths::make", "paths::inner::back"] {
+        for (function, declaration, ty) in [
+            ("paths::theirs", "theirs", "PathsInnerP"),
+            ("paths::inner::back", "back", "PathsP"),
+        ] {
             let kept = row(&frontier, function);
-            assert!(!kept.starts_with("[[lifted]]"), "{kept}");
+            assert!(kept.starts_with("[[lifted]]"), "{kept}");
+            let emitted = definition(&behavior, declaration);
+            assert!(
+                emitted.contains(&format!("parameters: [p : {ty}]")),
+                "{emitted}"
+            );
         }
+        let made = row(&frontier, "paths::make");
+        assert!(!made.starts_with("[[lifted]]"), "{made}");
     }
 
     #[test]

@@ -103,6 +103,8 @@ pub const FLAGS: &[&str] = &[
     "-Zdump-mir=ElaborateBoxDerefs",
     "-Coverflow-checks=on",
     "-Cdebug-assertions=off",
+    "--emit=metadata",
+    "-Zalways-encode-mir",
 ];
 
 /// The file a trial projection lists its translations on trial in.
@@ -566,6 +568,86 @@ pub(super) fn impl_header(root: &Path, span: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn metadata_collection_preserves_pre_llvm_bodies_ue_32() {
+        let dir = std::env::temp_dir().join(format!("uorust-metadata-mir-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join("lib.rs"),
+            "pub fn count(mut n:u32)->u32 { let mut x=0; while n>0 { x+=1;n-=1; } x }\n\
+             fn unused(n:u32)->u32 { n.wrapping_add(1) }\n\
+             pub fn generic<T:Copy>(x:T)->T { x }\n\
+             pub fn closure(x:u32)->u32 { (|| x.wrapping_add(1))() }\n\
+             pub struct Item(pub u8); impl Item { pub fn get(&self)->u8 {self.0} }\n",
+        )
+        .unwrap();
+        let common: Vec<&str> = FLAGS
+            .iter()
+            .copied()
+            .filter(|f| !f.starts_with("--emit=") && *f != "-Zalways-encode-mir")
+            .collect();
+        let mut linked = common.clone();
+        linked.push("--emit=link");
+        let omitted: Vec<&str> = FLAGS
+            .iter()
+            .copied()
+            .filter(|f| *f != "-Zalways-encode-mir")
+            .collect();
+        let mut inventories = BTreeMap::new();
+        for (name, flags) in [
+            ("linked", linked),
+            ("production", FLAGS.to_vec()),
+            ("omitted", omitted),
+        ] {
+            let output = dir.join(name);
+            std::fs::create_dir_all(&output).unwrap();
+            let result = Command::new("rustc")
+                .args([
+                    "--crate-name",
+                    "probe",
+                    "--crate-type",
+                    "lib",
+                    "--edition",
+                    "2021",
+                    "lib.rs",
+                ])
+                .args(flags)
+                .arg("--out-dir")
+                .arg(&output)
+                .arg(format!("-Zdump-mir-dir={}", output.display()))
+                .env("RUSTC_BOOTSTRAP", "1")
+                .current_dir(&dir)
+                .output()
+                .unwrap();
+            assert!(
+                result.status.success(),
+                "{}",
+                String::from_utf8_lossy(&result.stderr)
+            );
+            let files: BTreeMap<_, _> = std::fs::read_dir(&output)
+                .unwrap()
+                .map(|e| e.unwrap().path())
+                .filter(|p| p.extension().is_some_and(|e| e == "mir"))
+                .map(|p| (p.file_name().unwrap().to_owned(), std::fs::read(p).unwrap()))
+                .collect();
+            if name == "production" {
+                assert!(output.join("libprobe.rmeta").is_file());
+                assert!(
+                    !output.join("libprobe.rlib").exists(),
+                    "MIR collection emitted a native archive"
+                );
+            }
+            inventories.insert(name, files);
+        }
+        assert!(!inventories["linked"].is_empty());
+        assert_eq!(inventories["linked"], inventories["production"]);
+        assert_ne!(
+            inventories["linked"], inventories["omitted"],
+            "Missing encoding must be detected"
+        );
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
 
     #[test]
     fn impls_are_named_by_the_type_their_source_implements() {

@@ -183,3 +183,18 @@ Feature: engine
     When its source is projected with registry aliases available
     Then its identity function lifts as the stored integer pair
     And a mismatched rational archive checksum leaves that function unlifted
+
+  @UE-31 @build
+  Scenario: Qualified field types retain their declaring scope
+    Given two modules declaring different types with the same short name
+    And a holder that uses a qualified type and a conflicting bare imported type
+    When the workspace is projected
+    Then both field getters lift with the types their written paths identify
+    And unresolved or ambiguous paths remain refused
+
+  @UE-32 @build
+  Scenario: MIR collection avoids native object generation without losing bodies
+    Given private, generic, closure and impl functions compiled by the pinned Rust compiler
+    When native emission and forced metadata MIR emission collect the same lowering pass
+    Then their body inventories and bytes are identical and nonempty
+    But metadata emission without forced MIR encoding is rejected for missing bodies

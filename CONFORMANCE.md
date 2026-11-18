@@ -51,6 +51,8 @@ model does not sanction.
 | `UE-28` | `build` | MIR translations of methods with the same owner and short name receive stable source-qualified names, independent of which compiler bodies are selected, without dropping a homonym as a collision |
 | `UE-29` | `build` | MIR proof trials are partitioned by their dependency graph into bounded batches that keep recursive components together, reject zero budgets, dangling dependencies and oversized recursive components, reuse actual SDK verdicts without omitting eligible translations, and attribute opening-line diagnostics to the declaration that opens there rather than its predecessor |
 | `UE-30` | `build` | A locked registered number alias retains its admitted type reading before generic registry alias expansion, while an incorrect archive checksum keeps it unlifted |
+| `UE-31` | `build` | Qualified type paths in fields and signatures are resolved in their declaring module before localization, distinguishing homonymous declarations and retaining the binding of bare imported types |
+| `UE-32` | `build` | Dumped workspace targets encode every body into metadata without emitting native target objects, retaining the exact pre-LLVM body inventory and bytes, including private, generic, closure and impl bodies; omitting forced MIR encoding is detected |
 
 ## factory
 

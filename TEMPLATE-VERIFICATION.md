@@ -362,3 +362,21 @@ Engine assertions share the immutable checkout's self projection. The
 byte-determinism regression explicitly takes two fresh projections, and
 mutated fixture checkouts always project afresh, so sharing cannot mask those
 negative cases.
+
+
+## Scoped types and metadata MIR collection
+
+UE-31 resolves qualified field and signature types before reducing their
+paths. Its fixture distinguishes numeric and Boolean homonyms, an imported
+bare type, a nested generic argument and an unresolved qualified path.
+The previous projection refused the valid numeric getter. The corrected
+projection lifts the four valid functions and keeps the unresolved one out.
+Existing path diagnostics retain the exact declaration sites; a qualified
+constructor whose body reading remains unsupported stays refused.
+
+UE-32 compares the pinned compiler's complete pre-LLVM MIR inventory and
+bytes under native emission and the production metadata flags. Private,
+generic, closure and impl bodies are present, and the production target
+emits metadata without a native archive. Dropping forced MIR encoding gives
+an incomplete inventory and is detected. Independent Cargo library and
+binary probes also succeed with these flags.

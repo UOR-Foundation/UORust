@@ -237,3 +237,15 @@ id = "UE-30"
 level = "build"
 suite = "engine"
 statement = "A locked registered number alias retains its admitted type reading before generic registry alias expansion, while an incorrect archive checksum keeps it unlifted"
+
+[[id]]
+id = "UE-31"
+level = "build"
+suite = "engine"
+statement = "Qualified type paths in fields and signatures are resolved in their declaring module before localization, distinguishing homonymous declarations and retaining the binding of bare imported types"
+
+[[id]]
+id = "UE-32"
+level = "build"
+suite = "engine"
+statement = "Dumped workspace targets encode every body into metadata without emitting native target objects, retaining the exact pre-LLVM body inventory and bytes, including private, generic, closure and impl bodies; omitting forced MIR encoding is detected"

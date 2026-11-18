@@ -8,7 +8,7 @@
 //! [`TypeKind::Other`], still holding its subexpressions where a scan of
 //! the body looks through it.
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// A path `a::b::C<T>`, and its text as written.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -87,6 +87,48 @@ pub(crate) struct RustType {
 }
 
 impl RustType {
+    /// Written type paths, including paths nested in generic arguments.
+    pub(crate) fn paths(&self) -> BTreeSet<String> {
+        let mut out = BTreeSet::new();
+        match &self.kind {
+            TypeKind::Reference { elem, .. }
+            | TypeKind::Slice(elem)
+            | TypeKind::Array(elem, _)
+            | TypeKind::Paren(elem) => out.extend(elem.paths()),
+            TypeKind::Tuple(types) => {
+                for ty in types {
+                    out.extend(ty.paths());
+                }
+            }
+            TypeKind::Fn(inputs, result) => {
+                for ty in inputs {
+                    out.extend(ty.paths());
+                }
+                out.extend(result.paths());
+            }
+            TypeKind::Path { qself: false, path } => {
+                out.insert(
+                    path.segments
+                        .iter()
+                        .map(|s| s.ident.as_str())
+                        .collect::<Vec<_>>()
+                        .join("::"),
+                );
+                for segment in &path.segments {
+                    if let PathArguments::AngleBracketed(arguments) = &segment.arguments {
+                        for argument in arguments {
+                            if let GenericArgument::Type(ty) = argument {
+                                out.extend(ty.paths());
+                            }
+                        }
+                    }
+                }
+            }
+            _ => {}
+        }
+        out
+    }
+
     /// The type with every alias of `aliases` it names replaced by what the
     /// alias stands for. An alias may name another; each expansion counts
     /// against `depth`, the aliases left to expand along one path, so a
@@ -302,9 +344,27 @@ impl RustType {
             TypeKind::Paren(t) => TypeKind::Paren(inner(t)),
             TypeKind::Tuple(ts) => TypeKind::Tuple(ts.iter().map(|t| t.renamed(names)).collect()),
             TypeKind::Path { qself: false, path } => {
-                let one = path.segments.len() == 1;
-                let segments: Vec<PathSegment> = path
+                let full = path
                     .segments
+                    .iter()
+                    .map(|s| s.ident.as_str())
+                    .collect::<Vec<_>>()
+                    .join("::");
+                let resolved = names.get(&full).filter(|_| {
+                    path.segments
+                        .iter()
+                        .take(path.segments.len().saturating_sub(1))
+                        .all(|s| s.arguments == PathArguments::None)
+                });
+                let input = match (resolved, path.segments.last()) {
+                    (Some(name), Some(last)) => vec![PathSegment {
+                        ident: name.clone(),
+                        arguments: last.arguments.clone(),
+                    }],
+                    _ => path.segments.clone(),
+                };
+                let one = input.len() == 1;
+                let segments: Vec<PathSegment> = input
                     .iter()
                     .flat_map(|s| {
                         let arguments = match &s.arguments {
