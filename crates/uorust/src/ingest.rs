@@ -1528,6 +1528,7 @@ fn items(
                 syntax.aliases.push((
                     t.ident.to_string(),
                     crate::convert::alias(&t.generics, &t.ty),
+                    scope,
                 ));
             }
             syn::Item::Const(c) if !in_test && product && c.generics.params.is_empty() => {

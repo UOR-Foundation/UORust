@@ -2482,3 +2482,230 @@ fn long_type_declarations_are_canonical_without_rewriting_ue_35() {
     );
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
+
+/// UE-36: an immutable slice owner retains the whole ordered sequence.
+#[test]
+fn owned_slices_retain_sequences_without_snapshotting_cells_ue_36() {
+    let dir = scratch("owned-slices", &[
+        ("Cargo.toml", "[package]\nname = \"owned_slices\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "use std::{cell::Cell, rc::Rc, sync::Arc};\npub struct Held { pub order: Rc<[u8]> }\npub fn keep(x: Box<[u8]>) -> Box<[u8]> { x }\npub fn arc_keep(x: Arc<[u8]>) -> Arc<[u8]> { x }\npub fn len(x: &Held) -> usize { x.order.len() }\npub fn cloned(x: &Held) -> Rc<[u8]> { x.order.clone() }\npub fn counts(x: &Held) -> usize { Rc::strong_count(&x.order) }\npub fn cells(x: Rc<[Cell<u8>]>) -> Rc<[Cell<u8>]> { x }\n"),
+    ]);
+    let files = project(&dir, "owned_slices");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "arc_keep", "len", "cloned"] {
+        assert!(
+            lifted.contains(&format!("owned_slices::{name}")),
+            "owned slice did not lift: {name}"
+        );
+    }
+    for name in ["counts", "cells"] {
+        assert!(
+            !lifted.contains(&format!("owned_slices::{name}")),
+            "unmodeled owner operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write owned slices");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-37: default BitVec's logical sequence excludes capacity and dead bits.
+#[test]
+fn locked_bit_vectors_retain_logical_bits_without_raw_storage_ue_37() {
+    let dir=scratch("locked-bit-vector", &[
+        ("Cargo.toml","[package]\nname = \"logical_bits\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[dependencies]\nbitvec = \"=1.0.1\"\n"),
+        ("src/lib.rs","use bitvec::prelude::BitVec;\npub fn keep(x: BitVec) -> BitVec { x }\npub fn len(x: &BitVec) -> usize { x.len() }\npub fn capacity(x: &BitVec) -> usize { x.capacity() }\npub fn raw(x: &BitVec) -> &[usize] { x.as_raw_slice() }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock bitvec");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let files = project(&dir, "logical_bits");
+    let functions = |files: &BTreeMap<String, Vec<u8>>| -> Vec<String> {
+        frontier_rows(files, "lifted")
+            .iter()
+            .filter_map(|r| r["function"].as_str().map(str::to_string))
+            .collect()
+    };
+    let lifted = functions(&files);
+    for name in ["keep", "len"] {
+        assert!(
+            lifted.contains(&format!("logical_bits::{name}")),
+            "bit vector did not lift: {name}"
+        );
+    }
+    for name in ["capacity", "raw"] {
+        assert!(
+            !lifted.contains(&format!("logical_bits::{name}")),
+            "unmodeled storage operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write bit projection");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let source = std::fs::read_to_string(&lock).expect("lock text");
+    let checksum = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c";
+    assert!(source.contains(checksum));
+    std::fs::write(&lock, source.replace(checksum, &"0".repeat(64))).expect("wrong checksum");
+    assert!(
+        functions(&project(&dir, "logical_bits")).is_empty(),
+        "another archive acquired the bit-vector model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-38: stale bytes never inherit proof, while observed policies save discovery.
+#[test]
+fn native_proof_refresh_reuses_policy_hints_but_verifies_new_bytes_ue_38() {
+    let (work, source, dumps) = mir_method_fixture("policy-cache");
+    let verdicts = work.join("verdicts.toml");
+    let scratch = work.join("trial");
+    let opts = options("owners");
+    let first = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("initial SDK proofs");
+    assert_eq!(first.proved, 3);
+    assert_eq!(first.refused, 0);
+    let mut stale = uorust::mir::verdict::Verdicts::read(&verdicts).expect("actual verdicts");
+    let key = stale.rows.keys().next().expect("proved row").clone();
+    let actual = stale.rows[&key].clone();
+    assert!(
+        !actual.axioms.is_empty(),
+        "fixture has no observed policies"
+    );
+    stale.rows.get_mut(&key).expect("row").digest = "0".repeat(64);
+    std::fs::write(&verdicts, stale.to_text()).expect("stale digest");
+    let refreshed = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("SDK refresh");
+    assert_eq!(refreshed.proved, 1);
+    assert_eq!(refreshed.refused, 0);
+    assert_eq!(
+        refreshed.runs, 1,
+        "the observed policies were needlessly rediscovered"
+    );
+    let fresh = uorust::mir::verdict::Verdicts::read(&verdicts).expect("fresh verdict");
+    assert_eq!(fresh.rows[&key], actual);
+    let replay =
+        uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3).expect("replay");
+    assert_eq!(replay.runs, 0);
+    let mut wrong = fresh;
+    let row = wrong.rows.get_mut(&key).expect("row");
+    row.digest = "0".repeat(64);
+    for policy in row.axioms.values_mut() {
+        policy.clear();
+    }
+    std::fs::write(&verdicts, wrong.to_text()).expect("incorrect hints");
+    let corrected = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("SDK correction");
+    assert_eq!(corrected.proved, 1);
+    assert_eq!(corrected.refused, 0);
+    assert_eq!(corrected.runs, 2);
+    let checked = uorust::mir::verdict::Verdicts::read(&verdicts).expect("corrected verdict");
+    assert_eq!(checked.rows[&key], actual);
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-39: expanding an alias must not rebind its element names at the use site.
+#[test]
+fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
+    let dir=scratch("scoped-aliases", &[
+        ("Cargo.toml","[package]\nname = \"scoped_aliases\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs","pub mod left; pub mod right; pub mod holder;\n"),
+        ("src/left.rs","use std::collections::BTreeMap;\npub struct Node { pub value: u8 }\npub type Pool = BTreeMap<String, Vec<(String, Vec<Node>)>>;\npub type Items<Node> = Vec<Node>;\npub type Nested = Pool;\npub struct Local { pub pool: Pool }\npub fn keep(x: Local) -> Local { x }\n"),
+        ("src/right.rs","pub struct Node { pub flag: bool }\npub type Pool = Vec<Node>;\n"),
+        ("src/holder.rs","use crate::left::{Nested as Pool, Items};\nuse crate::right::Node;\npub struct Held { pub pool: Pool, pub flags: Items<Node>, pub others: crate::right::Pool }\npub fn keep(x: Held) -> Held { x }\npub fn retained(x: Held) -> crate::left::Nested { x.pool }\npub fn unread(x: std::cell::UnsafeCell<u8>) -> std::cell::UnsafeCell<u8> { x }\n"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["check", "--offline"])
+        .env("CARGO_TARGET_DIR", dir.join("rust-check"))
+        .current_dir(&dir)
+        .output()
+        .expect("check source fixture");
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let files = project(&dir, "scoped_aliases");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in [
+        "scoped_aliases::left::keep",
+        "scoped_aliases::holder::keep",
+        "scoped_aliases::holder::retained",
+    ] {
+        assert!(
+            lifted.contains(&name.to_string()),
+            "alias scope did not lift: {name}"
+        );
+    }
+    assert!(!lifted.contains(&"scoped_aliases::holder::unread".to_string()));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(behavior.contains("LeftNode"), "{behavior}");
+    assert!(behavior.contains("RightNode"), "{behavior}");
+    assert!(
+        behavior.contains("{name: flags, type: (List ScopedAliasesRightNode)}"),
+        "generic alias parameter was rebound: {behavior}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write aliases");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}

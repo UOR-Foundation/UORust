@@ -56,6 +56,10 @@ model does not sanction.
 | `UE-33` | `build` | Locked serde_json values and numbers have explicit recursive carrier models for passive transport, preserving numeric storage variants and object iteration order across feature representations; unmodeled comparisons, representation-dependent operations and wrong-checksum readings stay refused |
 | `UE-34` | `build` | Passive Rc and Arc ownership of RefCell and Cell retains allocation identity in explicit reference carriers rather than snapshotting mutable contents; transport and cloning lift, while allocation, content reads and writes, owner counts, value equality and native export without a heap model remain refused |
 | `UE-35` | `build` | Generated structure fields and recursive size-proof records retain the pinned LexLean canonical layout when qualified and nested type names exceed an inline line's width |
+| `UE-36` | `build` | Owned Box, Rc and Arc slice pointers retain their ordered element sequences for transport, reads and cloning, while pointer counts and mutable cell elements without a heap model remain refused |
+| `UE-37` | `build` | The locked default bitvec 1.0.1 BitVec model retains its logical Boolean sequence for transport and logical length; raw backing storage, allocation capacity and wrong archive checksums remain refused |
+| `UE-38` | `build` | A changed native translation may reuse prior SDK-observed axiom policies as trial hints, but its new digest always requires actual SDK verification; incorrect hints are corrected by verifier diagnostics and never confer proof status |
+| `UE-39` | `build` | Workspace type aliases retain the scope of their defining module when expanded inside fields and signatures, including nested tuple arguments, generic parameter shadowing and homonymous types at the use site; unresolved alias targets remain refused |
 
 ## factory
 

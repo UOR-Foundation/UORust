@@ -419,7 +419,7 @@ pub(crate) struct FileSyntax {
     /// line of its name.
     pub(crate) consts: Vec<ConstSyntax>,
     /// The type aliases: `type Name<P, ..> = Type;`.
-    pub(crate) aliases: Vec<(String, crate::ast::Alias)>,
+    pub(crate) aliases: Vec<(String, crate::ast::Alias, usize)>,
 }
 
 /// One function's syntax.

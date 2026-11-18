@@ -322,8 +322,15 @@ pub fn prove_bounded(
     proof_batches(&BTreeMap::new(), maximum)?;
     let mut register = Verdicts::read(verdicts)?;
     let mut summary = Summary::default();
-    // Axioms learned for declarations of translations still on trial.
-    let mut learned: BTreeMap<String, BTreeMap<String, Vec<String>>> = BTreeMap::new();
+    // Prior observations are policy hints, never proof of changed bytes.
+    // A stale digest is still removed below and must pass the actual SDK.
+    // The SDK's exact-policy diagnostics correct any obsolete hint.
+    let mut learned: BTreeMap<String, BTreeMap<String, Vec<String>>> = register
+        .rows
+        .iter()
+        .filter(|(_, row)| matches!(row.status, Decision::Proved))
+        .map(|(key, row)| (key.clone(), row.axioms.clone()))
+        .collect();
     let catalogue = crate::project_workspace(
         root,
         &Options {
@@ -331,7 +338,7 @@ pub fn prove_bounded(
                 dumps: dumps.to_path_buf(),
                 verdicts: register.clone(),
                 trial: Trial::All,
-                learned: BTreeMap::new(),
+                learned: learned.clone(),
             }),
             ..options.clone()
         },

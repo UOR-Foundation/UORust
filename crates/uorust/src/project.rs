@@ -611,7 +611,7 @@ pub(crate) fn project(
                         == inline
                     {
                         for (_, ty) in fields {
-                            pathed.extend(ty.paths().into_iter().filter(|p| p.contains("::")));
+                            pathed.extend(ty.paths());
                         }
                     }
                 }
@@ -623,7 +623,7 @@ pub(crate) fn project(
                     {
                         for (_, fields) in variants {
                             for (_, ty) in fields {
-                                pathed.extend(ty.paths().into_iter().filter(|p| p.contains("::")));
+                                pathed.extend(ty.paths());
                             }
                         }
                     }
@@ -636,14 +636,27 @@ pub(crate) fn project(
                     {
                         for argument in &function.signature.inputs {
                             if let crate::ast::FnArg::Typed(argument) = argument {
-                                pathed.extend(
-                                    argument.ty.paths().into_iter().filter(|p| p.contains("::")),
-                                );
+                                pathed.extend(argument.ty.paths());
                             }
                         }
                         if let Some(result) = &function.signature.output {
-                            pathed.extend(result.paths().into_iter().filter(|p| p.contains("::")));
+                            pathed.extend(result.paths());
                         }
+                    }
+                }
+                for (_, alias, scope) in &written.aliases {
+                    if file
+                        .scopes
+                        .get(*scope)
+                        .is_some_and(|at| at.module == inline)
+                    {
+                        pathed.extend(
+                            alias
+                                .to
+                                .paths()
+                                .into_iter()
+                                .filter(|p| !alias.params.contains(p)),
+                        );
                     }
                 }
                 let read: BTreeMap<String, crate::names::TypeReading> = shared
@@ -3654,103 +3667,6 @@ fn behavior(
                 .collect()
         })
         .collect();
-    // Each crate's type aliases, which its types and signatures are read
-    // through. An alias spelled like a type the crate declares names one
-    // thing in its module and another elsewhere: it is not read; nor is one
-    // whose target writes a path to a shared name.
-    let type_aliases: Vec<BTreeMap<String, crate::ast::Alias>> = ws
-        .packages
-        .iter()
-        .enumerate()
-        .map(|(pkg, package)| {
-            let declared: BTreeSet<&str> = package
-                .files
-                .iter()
-                .flat_map(|file| {
-                    file.enums
-                        .iter()
-                        .map(|e| e.name.as_str())
-                        .chain(file.structs.iter().map(|s| s.name.as_str()))
-                })
-                .collect();
-            package
-                .files
-                .iter()
-                .enumerate()
-                .flat_map(|(fi, file)| {
-                    let bound = ctx.registry_paths.get(&(pkg, fi, String::new()));
-                    syntax.files[&file.rel]
-                        .aliases
-                        .iter()
-                        .filter(|(n, _)| !declared.contains(n.as_str()))
-                        .filter(|(n, a)| {
-                            lift::PRIMITIVE_TYPES.contains(&n.as_str())
-                                || written_through_paths(&a.to.text, &shared[pkg]).is_empty()
-                        })
-                        .map(move |(n, a)| {
-                            // An alias that takes a primitive type's name
-                            // (`type f64 = f32;`) names its body in its own
-                            // module and the primitive everywhere else: the
-                            // crate-wide table reads the name as neither.
-                            if lift::PRIMITIVE_TYPES.contains(&n.as_str()) {
-                                let to = crate::ast::RustType {
-                                    text: format!("{n}, a primitive type's name an alias takes"),
-                                    kind: crate::ast::TypeKind::Other,
-                                };
-                                return (
-                                    n.clone(),
-                                    crate::ast::Alias {
-                                        params: Vec::new(),
-                                        to,
-                                    },
-                                );
-                            }
-
-                            let to = a.to.localized(&file.imports);
-                            let to = bound.map_or_else(|| to.clone(), |b| to.renamed(b));
-                            let alias = crate::ast::Alias {
-                                params: a.params.clone(),
-                                to,
-                            };
-                            (n.clone(), alias)
-                        })
-                })
-                // A registered alias already has a lock-admitted semantic
-                // reading. Expanding it to an otherwise unread generic body
-                // would erase that reading (BigRational -> Ratio<BigInt>).
-                .chain(ctx.crate_aliases.clone().into_iter().filter(|(name, _)| {
-                    !ctx.readable
-                        .get(&pkg)
-                        .is_some_and(|paths| paths.contains(name))
-                }))
-                .collect()
-        })
-        .collect();
-    // A chain of aliases that does not repeat one is at most as long as
-    // the crate has aliases.
-    let expanded = |pkg: usize, ty: &crate::ast::RustType| {
-        ty.expanded(&type_aliases[pkg], type_aliases[pkg].len())
-    };
-    // A type as the file that writes it names it, a field's or a
-    // signature's: a bare name its `use` binds to a registry crate's item
-    // is that item's path, so the chain through a field ends at the
-    // crate's type, by its crate, and an alias the crate declares reads as
-    // what it stands for.
-    let inline_of = |r: FnRef| {
-        ctx.file(r)
-            .scopes
-            .get(ctx.func(r).scope)
-            .map(|scope| scope.module.clone())
-            .unwrap_or_default()
-    };
-    let declared_in = |pkg: usize, fi: usize, inline: &str, ty: &crate::ast::RustType| {
-        let file = &ws.packages[pkg].files[fi];
-        let ty = ty.localized(&file.imports);
-        match ctx.registry_paths.get(&(pkg, fi, inline.to_string())) {
-            Some(bound) => expanded(pkg, &ty.renamed(bound)),
-            None => expanded(pkg, &ty),
-        }
-    };
     // A type of product code is keyed by its full path in its crate: its
     // target, its module (an inline module among them) and its name. A key
     // declared twice (once per configuration) is refused; one name in two
@@ -3944,6 +3860,157 @@ fn behavior(
             }
         }
     }
+    // Alias identities include their declaration scope. Their bodies are
+    // normalized before expansion, so importing another homonym at a use
+    // site cannot rebind an element introduced by the alias.
+    let hex = |text: &str| {
+        text.as_bytes()
+            .iter()
+            .map(|byte| format!("{byte:02x}"))
+            .collect::<String>()
+    };
+    let alias_key = |pkg: usize, target: usize, module: &str, name: &str| {
+        format!("@alias_{pkg}_{target}_{}_{}", hex(module), hex(name))
+    };
+    let frozen = |lex: &str| format!("@type_{}", hex(lex));
+    let frozen_names: BTreeMap<String, String> = lexes
+        .iter()
+        .flat_map(|named| named.values().map(|lex| (frozen(lex), lex.clone())))
+        .collect();
+    let mut alias_definitions = BTreeMap::new();
+    let mut ambiguous_aliases = BTreeSet::new();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        for (fi, file) in package.files.iter().enumerate() {
+            for (name, alias, scope) in &syntax.files[&file.rel].aliases {
+                let key = alias_key(pkg, file.target, &file.item_module(*scope), name);
+                if alias_definitions
+                    .insert(key.clone(), (pkg, fi, *scope, name.clone(), alias.clone()))
+                    .is_some()
+                {
+                    ambiguous_aliases.insert(key);
+                }
+            }
+        }
+    }
+    let declared_name = |reading: &crate::names::TypeReading| -> Option<String> {
+        match reading {
+            crate::names::TypeReading::Declared(pkg, target, module, name) => lexes
+                .get(*pkg)
+                .and_then(|named| named.get(&(*target, module.clone(), name.clone())))
+                .cloned()
+                .or_else(|| {
+                    let key = alias_key(*pkg, *target, module, name);
+                    alias_definitions.contains_key(&key).then_some(key)
+                }),
+            crate::names::TypeReading::Extern(path) => Some(path.clone()),
+            crate::names::TypeReading::Open => None,
+        }
+    };
+    let resolved_aliases: BTreeMap<String, crate::ast::Alias> = alias_definitions
+        .iter()
+        .map(|(key, (pkg, fi, scope, name, alias))| {
+            let file = &ws.packages[*pkg].files[*fi];
+            let inline = file
+                .scopes
+                .get(*scope)
+                .map(|at| at.module.clone())
+                .unwrap_or_default();
+            let names: BTreeMap<String, String> = ctx
+                .type_readings
+                .get(&(*pkg, *fi, inline.clone()))
+                .into_iter()
+                .flatten()
+                .filter(|(written, _)| !alias.params.contains(written))
+                .filter_map(|(written, reading)| {
+                    let to = match reading {
+                        crate::names::TypeReading::Declared(p, t, m, n) => lexes
+                            .get(*p)
+                            .and_then(|named| named.get(&(*t, m.clone(), n.clone())))
+                            .map(|lex| frozen(lex))
+                            .or_else(|| declared_name(reading)),
+                        _ => None,
+                    };
+                    to.map(|to| (written.clone(), to))
+                })
+                .collect();
+            let to = alias.to.renamed(&names).localized(&file.imports);
+            let to = ctx
+                .registry_paths
+                .get(&(*pkg, *fi, inline))
+                .map_or_else(|| to.clone(), |bound| to.renamed(bound));
+            let to = if lift::PRIMITIVE_TYPES.contains(&name.as_str())
+                || ambiguous_aliases.contains(key)
+            {
+                crate::ast::RustType {
+                    text: if lift::PRIMITIVE_TYPES.contains(&name.as_str()) {
+                        format!("{name}, a primitive type's name an alias takes")
+                    } else {
+                        format!("{name}, an alias declared more than once")
+                    },
+                    kind: crate::ast::TypeKind::Other,
+                }
+            } else {
+                to
+            };
+            (
+                key.clone(),
+                crate::ast::Alias {
+                    params: alias.params.clone(),
+                    to,
+                },
+            )
+        })
+        .collect();
+    let type_aliases: Vec<BTreeMap<String, crate::ast::Alias>> = ws
+        .packages
+        .iter()
+        .enumerate()
+        .map(|(pkg, _)| {
+            let mut aliases = resolved_aliases.clone();
+            // Preserve the existing conservative rule for primitive-name aliases.
+            for (key, (owner, _, _, name, _)) in &alias_definitions {
+                if *owner == pkg && lift::PRIMITIVE_TYPES.contains(&name.as_str()) {
+                    aliases.insert(name.clone(), resolved_aliases[key].clone());
+                }
+            }
+            aliases.extend(
+                ctx.crate_aliases
+                    .iter()
+                    .filter(|(name, _)| {
+                        !ctx.readable
+                            .get(&pkg)
+                            .is_some_and(|paths| paths.contains(*name))
+                    })
+                    .map(|(name, alias)| (name.clone(), alias.clone())),
+            );
+            aliases
+        })
+        .collect();
+    // A chain of aliases that does not repeat one is at most as long as
+    // the crate has aliases.
+    let expanded = |pkg: usize, ty: &crate::ast::RustType| {
+        ty.expanded(&type_aliases[pkg], type_aliases[pkg].len())
+    };
+    // A type as the file that writes it names it, a field's or a
+    // signature's: a bare name its `use` binds to a registry crate's item
+    // is that item's path, so the chain through a field ends at the
+    // crate's type, by its crate, and an alias the crate declares reads as
+    // what it stands for.
+    let inline_of = |r: FnRef| {
+        ctx.file(r)
+            .scopes
+            .get(ctx.func(r).scope)
+            .map(|scope| scope.module.clone())
+            .unwrap_or_default()
+    };
+    let declared_in = |pkg: usize, fi: usize, inline: &str, ty: &crate::ast::RustType| {
+        let file = &ws.packages[pkg].files[fi];
+        let ty = ty.localized(&file.imports);
+        match ctx.registry_paths.get(&(pkg, fi, inline.to_string())) {
+            Some(bound) => expanded(pkg, &ty.renamed(bound)),
+            None => expanded(pkg, &ty),
+        }
+    };
     // Each module scope's reading of its crate's shared names: the type
     // its module declares or one of its own `use` items names, and
     // otherwise none. An inline module is a scope of its own: Rust gives it
@@ -3962,20 +4029,17 @@ fn behavior(
                 let paths = readings
                     .into_iter()
                     .flatten()
-                    .filter(|(n, _)| n.contains("::"))
+                    .filter(|(n, reading)| {
+                        n.contains("::")
+                            || declared_name(reading)
+                                .is_some_and(|to| alias_definitions.contains_key(&to))
+                    })
                     .map(|(n, _)| n);
                 let mut names: BTreeMap<String, String> = ambiguous[pkg]
                     .iter()
                     .chain(paths)
                     .map(|n| {
-                        let read = match readings.and_then(|r| r.get(n)) {
-                            Some(crate::names::TypeReading::Declared(p, t, m, name)) => lexes
-                                .get(*p)
-                                .and_then(|l| l.get(&(*t, m.clone(), name.clone())))
-                                .cloned(),
-                            Some(crate::names::TypeReading::Extern(path)) => Some(path.clone()),
-                            _ => None,
-                        };
+                        let read = readings.and_then(|r| r.get(n)).and_then(declared_name);
                         (n.clone(), read.unwrap_or_else(|| n.clone()))
                     })
                     .collect();
@@ -3999,6 +4063,7 @@ fn behavior(
                 .filter(|((_, _, name), lex)| *lex != name && !ambiguous[pkg].contains(name))
                 .map(|((_, _, name), lex)| (name.clone(), lex.clone()))
                 .collect();
+            aliases.extend(frozen_names.clone());
             // The registered crates' types whose reading the package's lock
             // admits, each naming itself (`Types::registered`).
             for path in ctx.readable.get(&pkg).into_iter().flatten().cloned() {
@@ -7363,7 +7428,7 @@ fn bare_names(file: &crate::facts::FileSyntax, facts: &SourceFile) -> BTreeSet<S
         .iter()
         .flatten()
         .flat_map(|(_, fs)| fs.iter().map(|(_, t)| t));
-    let aliases = file.aliases.iter().map(|(_, a)| &a.to);
+    let aliases = file.aliases.iter().map(|(_, a, _)| &a.to);
     let signatures = file.fns.iter().flat_map(|f| {
         let sig = &f.signature;
         sig.inputs
@@ -7377,7 +7442,7 @@ fn bare_names(file: &crate::facts::FileSyntax, facts: &SourceFile) -> BTreeSet<S
     for t in fields.chain(variants).chain(aliases).chain(signatures) {
         walk(t, &mut out);
     }
-    for (_, alias) in &file.aliases {
+    for (_, alias, _) in &file.aliases {
         alias.params.iter().for_each(|p| {
             out.remove(p);
         });

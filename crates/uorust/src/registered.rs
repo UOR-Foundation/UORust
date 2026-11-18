@@ -73,6 +73,12 @@ pub(crate) struct Reading {
 /// Only passive transport is read: these named carriers have no derived
 /// equality, ordering or representation-dependent operations. In particular,
 /// bit equality must not replace Number's floating-point equality at zero.
+///
+/// Default `bitvec::vec::BitVec` (1.0.1, `src/vec.rs`, `src/vec/api.rs`
+/// and `src/vec/traits.rs`) is read as its logical Boolean sequence, in
+/// indexing order. Backing words, dead bits and capacity are not that
+/// sequence and no operation exposing them is read. The default storage
+/// and ordering parameters are the source's `usize` and `Lsb0`.
 pub(crate) fn readings() -> Vec<Reading> {
     vec![
         Reading {
@@ -113,6 +119,26 @@ pub(crate) fn readings() -> Vec<Reading> {
                 "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0",
             )],
             ty: Ty::Named("Prelude::JsonNumber".into()),
+            within: &[],
+        },
+        Reading {
+            package: "bitvec",
+            path: "bitvec::vec::BitVec",
+            locked: &[(
+                "1.0.1",
+                "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c",
+            )],
+            ty: Ty::List(Box::new(Ty::Bool)),
+            within: &[],
+        },
+        Reading {
+            package: "bitvec",
+            path: "bitvec::prelude::BitVec",
+            locked: &[(
+                "1.0.1",
+                "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c",
+            )],
+            ty: Ty::List(Box::new(Ty::Bool)),
             within: &[],
         },
     ]

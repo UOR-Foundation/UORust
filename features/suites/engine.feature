@@ -223,3 +223,34 @@ Feature: engine
     Given a structure field and recursive tree with long qualified type names
     When their functions are projected
     Then the pinned SDK accepts the generated modules without rewriting their layout
+
+  @UE-36 @build
+  Scenario: Owned slices retain their ordered elements
+    Given Box, Rc and Arc slices, including an Rc slice field in a structure
+    When identity, length and owner-clone functions are projected
+    Then the actual SDK verifies their sequence models
+    But reference counts and slices of mutable cells remain unlifted
+
+  @UE-37 @build
+  Scenario: A locked bit vector retains logical bits rather than storage words
+    Given default bitvec 1.0.1 BitVec pinned to its registered checksum
+    When identity and length functions are projected
+    Then the actual SDK verifies their Boolean sequence model
+    But raw storage and allocation capacity remain unlifted
+    And a wrong archive checksum refuses the model
+
+  @UE-38 @build
+  Scenario: Native proof refresh reuses observations without trusting stale proofs
+    Given SDK-proved translations whose prior records contain observed axiom policies
+    When one translation digest is made stale
+    Then the actual SDK verifies its refreshed proof in one run using the prior policies as hints
+    And unchanged replay uses zero verifier calls
+    But incorrect policy hints require corrective SDK diagnostics and another verification
+
+  @UE-39 @build
+  Scenario: An alias expands in its defining scope
+    Given an alias of nested tuples whose element type has homonyms in other modules
+    When the alias is used from a module importing another homonym
+    Then its fields retain the original element type and the SDK verifies the model
+    And alias type parameters retain their own binding
+    But an alias of an unread interior-mutable type stays unlifted

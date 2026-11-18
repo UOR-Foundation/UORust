@@ -267,3 +267,27 @@ id = "UE-35"
 level = "build"
 suite = "engine"
 statement = "Generated structure fields and recursive size-proof records retain the pinned LexLean canonical layout when qualified and nested type names exceed an inline line's width"
+
+[[id]]
+id = "UE-36"
+level = "build"
+suite = "engine"
+statement = "Owned Box, Rc and Arc slice pointers retain their ordered element sequences for transport, reads and cloning, while pointer counts and mutable cell elements without a heap model remain refused"
+
+[[id]]
+id = "UE-37"
+level = "build"
+suite = "engine"
+statement = "The locked default bitvec 1.0.1 BitVec model retains its logical Boolean sequence for transport and logical length; raw backing storage, allocation capacity and wrong archive checksums remain refused"
+
+[[id]]
+id = "UE-38"
+level = "build"
+suite = "engine"
+statement = "A changed native translation may reuse prior SDK-observed axiom policies as trial hints, but its new digest always requires actual SDK verification; incorrect hints are corrected by verifier diagnostics and never confer proof status"
+
+[[id]]
+id = "UE-39"
+level = "build"
+suite = "engine"
+statement = "Workspace type aliases retain the scope of their defining module when expanded inside fields and signatures, including nested tuple arguments, generic parameter shadowing and homonymous types at the use site; unresolved alias targets remain refused"
