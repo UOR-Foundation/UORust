@@ -105,19 +105,27 @@ struct Diagnostic {
     line: usize,
 }
 
-/// Run `lexlean verify` in `dir`: success, or its diagnostics.
+/// Type-check before proving, using only the native behavior's dependency closure.
 fn verify(dir: &Path) -> Result<Option<Vec<Diagnostic>>, UorustError> {
-    let run = Command::new("lexlean")
-        .args(["verify", "--diagnostic-format", "json"])
-        .current_dir(dir)
-        .output()
-        .map_err(|e| UorustError::Tool(format!("lexlean verify: {e}")))?;
-    let doc: serde_json::Value = serde_json::from_slice(&run.stdout).map_err(|e| {
-        UorustError::Tool(format!(
-            "lexlean verify: {e}: {}",
-            String::from_utf8_lossy(&run.stderr)
-        ))
-    })?;
+    let mut doc = serde_json::Value::Null;
+    for phase in ["check", "verify"] {
+        let run = Command::new("lexlean")
+            .args([phase, "src/Behavior.lex.tex", "--diagnostic-format", "json"])
+            .current_dir(dir)
+            .output()
+            .map_err(|e| UorustError::Tool(format!("lexlean {phase}: {e}")))?;
+        let receipt = dir.join("uorust-proof-result.json");
+        std::fs::write(&receipt, &run.stdout).map_err(|e| io(&receipt, e))?;
+        doc = serde_json::from_slice(&run.stdout).map_err(|e| {
+            UorustError::Tool(format!(
+                "lexlean {phase}: {e}: {}",
+                String::from_utf8_lossy(&run.stderr)
+            ))
+        })?;
+        if doc.get("success").and_then(serde_json::Value::as_bool) != Some(true) {
+            break;
+        }
+    }
     if doc.get("success").and_then(serde_json::Value::as_bool) == Some(true) {
         return Ok(None);
     }

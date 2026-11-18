@@ -263,7 +263,7 @@ impl Ty {
     /// so its LexLean type alone does not tell a binary32 from a binary64
     /// or from an integer, and a value of one format where Rust has
     /// another is another number.
-    fn same(&self, other: &Self) -> bool {
+    pub(crate) fn same(&self, other: &Self) -> bool {
         self.render() == other.render() && self.formats() == other.formats()
     }
 

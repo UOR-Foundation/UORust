@@ -4031,8 +4031,7 @@ fn behavior(
                     .flatten()
                     .filter(|(n, reading)| {
                         n.contains("::")
-                            || declared_name(reading)
-                                .is_some_and(|to| alias_definitions.contains_key(&to))
+                            || matches!(reading, crate::names::TypeReading::Declared(..))
                     })
                     .map(|(n, _)| n);
                 let mut names: BTreeMap<String, String> = ambiguous[pkg]
@@ -4187,7 +4186,14 @@ fn behavior(
     };
     let fn_aliases = |r: FnRef| -> BTreeMap<String, String> {
         let at = (r.pkg, r.file, ctx.func(r).scope);
-        blinded(&overlays[&at], Some(&blind_of(r)))
+        let mut names = blinded(&overlays[&at], Some(&blind_of(r)));
+        // A function's own type parameters shadow module-level imports.
+        for parameter in &syntax.function(&ctx.file(r).rel, r.idx).signature.generics {
+            if let crate::ast::GenericParam::Type(name) = parameter {
+                names.remove(name);
+            }
+        }
+        names
     };
     let fn_scopes: BTreeMap<FnRef, Types> = ctx
         .all_fns()
@@ -8419,7 +8425,10 @@ mod tests {
             at("Q.c: UnsafeCell<u8>"),
             ("[\"src/lib.rs:11\"]".into(), none.clone())
         );
-        assert_eq!(at("Alias"), ("[\"src/lib.rs:75\"]".into(), none.clone()));
+        assert_eq!(
+            at("Deep.c: UnsafeCell<u16>"),
+            ("[\"src/lib.rs:75\"]".into(), none.clone())
+        );
         assert_eq!(at("Made"), ("[\"src/lib.rs:65\"]".into(), none.clone()));
         let four = sites(&frontier_of(
             "kaifour",

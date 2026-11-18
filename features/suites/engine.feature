@@ -254,3 +254,40 @@ Feature: engine
     Then its fields retain the original element type and the SDK verifies the model
     And alias type parameters retain their own binding
     But an alias of an unread interior-mutable type stays unlifted
+
+  @UE-40 @build
+  Scenario: A renamed import retains its declared type
+    Given a unique workspace type imported under another name
+    When fields and function signatures use the renamed import
+    Then their functions retain the original data type and the actual SDK verifies them
+    And a generic type parameter shadowing an import remains generic
+
+  @UE-41 @build
+  Scenario: Native aggregates retain their field representations
+    Given source structures and native tuples with different signed integer representations
+    When their compiler bodies are translated together with an unsigned tuple function
+    Then the incompatible aggregates remain typed MIR residue
+    And the compatible tuple is translated and its generated fields pass SDK type checking
+
+  @UE-42 @build
+  Scenario: Native bodies reuse admitted registry carriers
+    Given locked numeric, JSON and default bit-vector dependencies
+    When compiler bodies transport their values through loops
+    Then their native translations retain the registered representations and the SDK verifies them
+    But JSON equality without an operation model is refused
+    And a wrong archive checksum prevents the native carrier reading
+
+  @UE-43 @build
+  Scenario: Native verification produces scoped reusable feedback
+    Given native candidates including an overflowing function
+    When the prover submits their trials to the actual SDK
+    Then compatible candidates are proved and the overflowing candidate is refused
+    And the structured SDK result names only Behavior and its dependency closure
+    And unchanged replay performs no new verification and retains the same verdicts
+
+  @UE-44 @build
+  Scenario: Loop evidence omits unused invariant arguments
+    Given a native countdown loop transporting an invariant Boolean
+    When the prover generates its decrease evidence
+    Then its live values share one changing loop-state parameter
+    And the actual SDK proves the loop without an unbound invariant argument

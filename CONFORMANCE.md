@@ -60,6 +60,11 @@ model does not sanction.
 | `UE-37` | `build` | The locked default bitvec 1.0.1 BitVec model retains its logical Boolean sequence for transport and logical length; raw backing storage, allocation capacity and wrong archive checksums remain refused |
 | `UE-38` | `build` | A changed native translation may reuse prior SDK-observed axiom policies as trial hints, but its new digest always requires actual SDK verification; incorrect hints are corrected by verifier diagnostics and never confer proof status |
 | `UE-39` | `build` | Workspace type aliases retain the scope of their defining module when expanded inside fields and signatures, including nested tuple arguments, generic parameter shadowing and homonymous types at the use site; unresolved alias targets remain refused |
+| `UE-40` | `build` | Renamed imports of unique workspace types retain their declared type in fields and signatures without rebinding a function's own generic type parameters to a module import |
+| `UE-41` | `build` | Native field reads and aggregate construction check each operand against its destination field representation before emitting a tuple, array, variant or structure; unsupported signed integer representation changes are typed residue and cannot poison verification of compatible candidates |
+| `UE-42` | `build` | Native type lowering reuses lock-admitted registry carrier readings for passive values, including BigInt, BigRational, JSON and default BitVec; incorrect archive checksums and unmodeled operations remain refused |
+| `UE-43` | `build` | Native proof trials verify Behavior and its actual dependency closure through the pinned SDK, persist the SDK's structured result for machine feedback, and reuse unchanged proved and refused translation digests without new verifier calls; full-project acceptance remains a separate complete gate |
+| `UE-44` | `build` | Native loops with directly derived natural measures bundle multiple live values into one changing state argument, preserving invariant payloads in the termination context and the SDK-exact decrease obligation; the SDK still decides every decrease and overflow obligation |
 
 ## factory
 

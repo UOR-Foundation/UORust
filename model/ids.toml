@@ -291,3 +291,33 @@ id = "UE-39"
 level = "build"
 suite = "engine"
 statement = "Workspace type aliases retain the scope of their defining module when expanded inside fields and signatures, including nested tuple arguments, generic parameter shadowing and homonymous types at the use site; unresolved alias targets remain refused"
+
+[[id]]
+id = "UE-40"
+level = "build"
+suite = "engine"
+statement = "Renamed imports of unique workspace types retain their declared type in fields and signatures without rebinding a function's own generic type parameters to a module import"
+
+[[id]]
+id = "UE-41"
+level = "build"
+suite = "engine"
+statement = "Native field reads and aggregate construction check each operand against its destination field representation before emitting a tuple, array, variant or structure; unsupported signed integer representation changes are typed residue and cannot poison verification of compatible candidates"
+
+[[id]]
+id = "UE-42"
+level = "build"
+suite = "engine"
+statement = "Native type lowering reuses lock-admitted registry carrier readings for passive values, including BigInt, BigRational, JSON and default BitVec; incorrect archive checksums and unmodeled operations remain refused"
+
+[[id]]
+id = "UE-43"
+level = "build"
+suite = "engine"
+statement = "Native proof trials verify Behavior and its actual dependency closure through the pinned SDK, persist the SDK's structured result for machine feedback, and reuse unchanged proved and refused translation digests without new verifier calls; full-project acceptance remains a separate complete gate"
+
+[[id]]
+id = "UE-44"
+level = "build"
+suite = "engine"
+statement = "Native loops with directly derived natural measures bundle multiple live values into one changing state argument, preserving invariant payloads in the termination context and the SDK-exact decrease obligation; the SDK still decides every decrease and overflow obligation"

@@ -1688,7 +1688,7 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
         // A `for` loop over a slice: its iterator a cursor, the loop's
         // measure the distance between the cursor's positions, which its
         // guarded `next` is `Some` within.
-        "measure: (prim subtract (project iter item2) (project iter item1) : Nat)",
+        "measure: (prim subtract (project (project loopState item1) item2) (project (project loopState item1) item1) : Nat)",
         "name: stdAtNat,",
         // A closure: a definition over the value of its captures, called
         // from std's `find`, which is lifted from std's own MIR.
@@ -1726,6 +1726,8 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
         "walk::second_known",
         // A closure passed to std's `find`.
         "walk::first_named",
+        // Invariant closure captures remain available in the loop state.
+        "walk::any_above",
         // Signed integers compared as their bit patterns.
         "walk::first_negative",
     ] {
@@ -1738,10 +1740,6 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
     assert!(!decided.contains_key(uorust::mir::CANDIDATES));
     let count = residue_detail(&decided, "walk::count").expect("count is residue");
     assert!(count.starts_with("mir::Verdict: LLV"), "{count}");
-    // A loop helper whose fixed parameter only a closure's capture uses:
-    // Lean's `decreasing_by` context drops it, so the verifier refuses.
-    let any = residue_detail(&decided, "walk::any_above").expect("any_above is residue");
-    assert!(any.starts_with("mir::Verdict: LLV"), "{any}");
     // The MIR path only adds: whatever lifts without it lifts with it.
     let surface = project(&mir_fixture(), "walk");
     for f in lifted_functions(&surface) {
@@ -2691,6 +2689,288 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     );
     let out = dir.join("projection");
     uorust::write(&out, &files).expect("write aliases");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-44: one changing state keeps loop invariants in the termination context.
+#[test]
+fn native_loop_state_preserves_invariants_in_evidence_ue_44() {
+    let dir = scratch("loop-evidence-scope", &[
+        ("Cargo.toml", "[package]\nname = \"loop_scope\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn carried(mut n: u8, x: bool) -> bool { while n > 0 { n -= 1; } x }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "loop-evidence-scope");
+    let result = uorust::mir::prove_bounded(
+        &dir,
+        &options("loop_scope"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        1,
+    )
+    .expect("SDK proof");
+    assert_eq!((result.proved, result.refused), (1, 0));
+    let behavior =
+        std::fs::read_to_string(dir.join("trial/src/Behavior.lex.tex")).expect("actual trial");
+    let start = behavior
+        .find("name: decreases_")
+        .expect("decrease evidence");
+    let parameters = behavior[start..]
+        .split("statement:")
+        .next()
+        .expect("evidence header");
+    assert!(
+        !parameters.contains(": Bool"),
+        "invariant was left as a fixed argument: {parameters}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-43: the proof feedback loop checks only its closure and preserves decisions.
+#[test]
+fn native_verification_scopes_feedback_and_reuses_decisions_ue_43() {
+    let (work, source, _) = mir_method_fixture("scoped-feedback");
+    let path = source.join("src/lib.rs");
+    let mut code = std::fs::read_to_string(&path).expect("source");
+    code.push_str(
+        "pub fn overflow(x: u8) -> u8 { let mut n = 1u8; while n > 0 { n -= 1; } x + 1 }\n",
+    );
+    std::fs::write(&path, code).expect("overflow case");
+    let dumps = work.join("with-overflow");
+    uorust::mir::dump(&source, &dumps, &Default::default()).expect("actual compiler");
+    let verdict_path = work.join("verdicts.toml");
+    let trial = work.join("trial");
+    let summary = uorust::mir::prove_bounded(
+        &source,
+        &options("owners"),
+        &dumps,
+        &verdict_path,
+        &trial,
+        4,
+    )
+    .expect("actual SDK decisions");
+    assert_eq!((summary.proved, summary.refused), (3, 1));
+    let result: serde_json::Value = serde_json::from_slice(
+        &std::fs::read(trial.join("uorust-proof-result.json"))
+            .expect("machine-readable SDK feedback"),
+    )
+    .expect("SDK JSON");
+    let modules = result["modules"].as_array().expect("verified modules");
+    assert_eq!(
+        modules.len(),
+        2,
+        "native trial verified unrelated modules: {result}"
+    );
+    let before = std::fs::read(&verdict_path).expect("actual verdicts");
+    let replay = uorust::mir::prove_bounded(
+        &source,
+        &options("owners"),
+        &dumps,
+        &verdict_path,
+        &trial,
+        4,
+    )
+    .expect("unchanged replay");
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    assert_eq!(
+        std::fs::read(&verdict_path).expect("cached verdicts"),
+        before
+    );
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-42: native transport reads the same lock-admitted types as source transport.
+#[test]
+fn native_registry_carriers_require_locked_readings_ue_42() {
+    let dir = scratch("native-registry-carriers", &[
+        ("Cargo.toml", "[package]\nname = \"native_carriers\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\nserde_json = \"=1.0.114\"\nbitvec = \"=1.0.1\"\n"),
+        ("src/lib.rs", "use num_bigint::BigInt;\nuse num_rational::BigRational;\nuse serde_json::{Value, Number};\nuse bitvec::vec::BitVec;\npub fn big(x: BigInt) -> BigInt { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn ratio(x: BigRational) -> BigRational { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn json(x: Value) -> Value { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn number(x: Number) -> Number { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn bits(x: BitVec) -> BitVec { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn equal(a: Value, b: Value) -> bool { let mut n = 1u8; while n > 0 { n -= 1; } a == b }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock native carriers");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = dumped(&dir, "native-registry-carriers");
+    let mut opts = options("native_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native carriers");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in ["big", "ratio", "json", "number", "bits"] {
+        assert!(
+            listing.contains(&format!("native_carriers::{name}\"")),
+            "missing native carrier {name}: {listing}"
+        );
+    }
+    assert!(
+        !listing.contains("native_carriers::equal\""),
+        "unmodeled JSON equality was admitted"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write native carriers");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifies native carriers");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("native_carriers"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("proof"),
+        5,
+    )
+    .expect("actual native carrier proofs");
+    assert_eq!((proof.proved, proof.refused), (5, 0));
+    let lock_path = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock_path).expect("actual lock");
+    let checksum = "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367";
+    assert!(original.contains(checksum));
+    std::fs::write(&lock_path, original.replace(checksum, &"0".repeat(64)))
+        .expect("wrong checksum");
+    let wrong = uorust::project_workspace(&dir, &opts).expect("refused carrier projection");
+    assert!(
+        !text(&wrong, uorust::mir::CANDIDATES).contains("native_carriers::big\""),
+        "wrong checksum admitted native BigInt"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-41: source integer fields cannot silently become native bit patterns.
+#[test]
+fn native_aggregates_check_field_representations_ue_41() {
+    let dir = scratch("aggregate-representations", &[
+        ("Cargo.toml", "[package]\nname = \"aggregate_representations\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub struct Signed { pub x: i32 }\npub enum Payload { Number(i32), Empty }\npub fn variant(n: i32) -> Payload { let mut count = 1u8; while count > 0 { count -= 1; } Payload::Number(n) }\npub fn array(s: Signed) -> [i32; 2] { let mut n = 1u8; while n > 0 { n -= 1; } [s.x, s.x] }\npub fn optional(s: Signed) -> Option<i32> { let mut n = 1u8; while n > 0 { n -= 1; } Some(s.x) }\npub fn unpack(s: Signed) -> (i32, u8, u8) { let mut n = 1u8; while n > 0 { n -= 1; } (s.x, n, 0) }\npub fn pack(n: i32) -> Signed { let mut count = 1u8; while count > 0 { count -= 1; } Signed { x: n } }\npub fn good(mut n: u8) -> (u8, u8, u8) { while n > 0 { n -= 1; } (n, 1, 2) }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock source fixture");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = dumped(&dir, "aggregate-representations");
+    let mut opts = options("aggregate_representations");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native aggregate projection");
+    for name in ["unpack", "pack", "variant", "array", "optional"] {
+        let detail = residue_detail(&files, &format!("aggregate_representations::{name}"))
+            .unwrap_or_else(|| {
+                panic!(
+                    "incompatible aggregate was admitted: {name}: {}",
+                    text(&files, "frontier.toml")
+                )
+            });
+        assert!(detail.contains("field representation"), "{detail}");
+    }
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    assert!(
+        listing.contains("aggregate_representations::good"),
+        "{listing}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write aggregates");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK type checker");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-40: imported names are resolved, while function type parameters shadow them.
+#[test]
+fn renamed_unique_types_preserve_imports_and_generic_shadowing_ue_40() {
+    let dir=scratch("renamed-unique-types", &[
+        ("Cargo.toml","[package]\nname = \"renamed_types\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs","pub mod data; pub mod holder;\n"),
+        ("src/data.rs","pub struct Payload { pub value: u8 }\n"),
+        ("src/holder.rs","use crate::data::Payload as Renamed;\nuse crate::data::Payload as T;\npub struct Held { pub payload: Renamed }\npub fn keep(x: Held) -> Held { x }\npub fn get(x: &Held) -> u8 { x.payload.value }\npub fn direct(x: Renamed) -> Renamed { x }\npub trait Read { fn read(&self) -> u8; }\npub fn hold_generic<T: Read>(x: &T) -> u8 { x.read() }\n"),
+    ]);
+    let files = project(&dir, "renamed_types");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "get", "direct", "hold_generic"] {
+        assert!(
+            lifted.contains(&format!("renamed_types::holder::{name}")),
+            "renamed type function did not lift: {name}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    let start = behavior
+        .find("name: holdGeneric,")
+        .expect("generic definition");
+    let header = behavior[start..].split("body:").next().expect("header");
+    assert!(
+        header.contains("type_parameters: [T]") && header.contains("x : 'T"),
+        "generic parameter was rebound to the imported concrete type: {header}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write renamed types");
     let checked = std::process::Command::new("lexlean")
         .args([
             "verify",

@@ -241,6 +241,8 @@ struct Loop {
     /// In a backward function, the parameter that takes the returned
     /// borrow's new value, last.
     new: Option<String>,
+    /// Multiple live values share one changing recursion argument.
+    packet: Option<Ty>,
 }
 
 struct Fun<'a, 'c> {
@@ -1289,13 +1291,16 @@ impl Fun<'_, '_> {
         if let (Some(_), Some((n, _))) = (&lp.new, &self.backward) {
             args.push(n.clone());
         }
-        let call = if args.is_empty() {
+        let packet = lp.packet.as_ref().map(|ty| lift::tuple_value(ty, &args));
+        let call = if let Some(packet) = &packet {
+            format!("({} {packet})", lp.name)
+        } else if args.is_empty() {
             lp.name.clone()
         } else {
             format!("({} {})", lp.name, args.join(" "))
         };
         if st.inside == Some(b) {
-            self.decreases(b, &lp, &st)?;
+            self.decreases(b, &lp, &st, packet.as_deref())?;
         } else {
             self.calls.insert(lp.name.clone());
         }
@@ -1388,7 +1393,7 @@ impl Fun<'_, '_> {
         // entered under, and keeps, hold (`exp != 0` before `loop { ..
         // exp /= 2 }`): the helper's invariants.
         let mut invariants: Vec<(String, bool)> = Vec::new();
-        let measure = match self.derive_measure(h, &st) {
+        let mut measure = match self.derive_measure(h, &st) {
             Ok(m) => m,
             Err(none) => {
                 let region = self.regions.get(&h).cloned().unwrap_or_default();
@@ -1495,6 +1500,31 @@ impl Fun<'_, '_> {
                 (p, vec![l])
             }
         };
+        // A single changing state argument keeps invariant payloads in the
+        // termination context. Separate fixed arguments may be erased by Lean.
+        let packet = if params.len() > 1
+            && carried.is_empty()
+            && memory.is_none()
+            && new.is_none()
+            && invariants.is_empty()
+            && measure.1.is_empty()
+        {
+            let ty = Ty::Tuple(params.iter().map(|(_, _, t)| t.clone()).collect());
+            let state = self.fresh(Some("loopState"), 0);
+            for (i, (local, old, t)) in params.iter().enumerate() {
+                let value = lift::tuple_item(&ty, &state, i);
+                self.ranged.remove(old);
+                if let Some(bits) = fixed(t) {
+                    self.ranged.insert(value.clone(), bits);
+                }
+                st.env.insert(*local, Val::V(value, t.clone()));
+            }
+            self.scope = vec![(state, ty.clone())];
+            measure = self.derive_measure(h, &st)?;
+            Some(ty)
+        } else {
+            None
+        };
         let lp = Loop {
             name: name.clone(),
             live: params.clone(),
@@ -1502,6 +1532,7 @@ impl Fun<'_, '_> {
             memory: memory.clone(),
             invariants: invariants.clone(),
             new: new.as_ref().map(|(n, _)| n.clone()),
+            packet,
         };
         self.loops.insert(h, Some(lp.clone()));
         self.measure = Some(measure.clone());
@@ -1660,10 +1691,36 @@ impl Fun<'_, '_> {
     /// The theorem that a recursive call of the loop at `h` decreases its
     /// measure: the header's condition, evaluated at the call's arguments,
     /// against the same condition at the parameters.
-    fn decreases(&mut self, h: IrBlockId, lp: &Loop, st: &State) -> Lift<()> {
+    fn decreases(&mut self, h: IrBlockId, lp: &Loop, st: &State, packet: Option<&str>) -> Lift<()> {
         let Some((measure, _)) = self.measure.clone() else {
             return Err(kind("TerminatorKind::Goto", "a loop without a measure"));
         };
+        if let Some(packet) = packet {
+            let state = self
+                .scope
+                .first()
+                .ok_or_else(|| kind("TerminatorKind::Goto", "a loop state without a parameter"))?;
+            // Keep the measure applied to the recursive argument unreduced:
+            // the SDK checks this exact obligation before Lean proves it.
+            let after = stdlib::substitute(
+                &measure,
+                &BTreeMap::from([(state.0.clone(), packet.to_string())]),
+            );
+            let mut parameters: Vec<(String, String)> = self
+                .scope
+                .iter()
+                .map(|(n, t)| (n.clone(), t.render()))
+                .collect();
+            parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
+            self.evidence.push(Decl::Theorem {
+                name: format!("decreases_{}_{}", lp.name, self.evidence.len()),
+                parameters,
+                statement: implication(&hypotheses(&st.path), &format!("({after} < {measure})")),
+                proof: "linear_arithmetic{}".into(),
+                axioms: vec!["Quot.sound".into(), "propext".into()],
+            });
+            return Ok(());
+        }
         // A measure the loop's writes make smaller: its value on the way
         // back, below its value on the way in.
         let shrinking = self
@@ -3720,6 +3777,17 @@ impl Fun<'_, '_> {
                 }
                 IrProjection::Field(i, fty) => {
                     let ft = ty(fty, self.cx.types)?;
+                    let stored = self.field_ty(&t, *i)?;
+                    if !stored.same(&ft) {
+                        return Err(kind(
+                            spec::MirProjectionElem::Field.path(),
+                            &format!(
+                                "field representation {} cannot be read as {}",
+                                stored.render(),
+                                ft.render()
+                            ),
+                        ));
+                    }
                     v = self.field(&v, &t, *i)?;
                     t = ft;
                     text = Some(fty.clone());
@@ -3756,6 +3824,28 @@ impl Fun<'_, '_> {
                     match steps.next() {
                         Some(IrProjection::Field(i, fty)) => {
                             let ft = ty(fty, self.cx.types)?;
+                            if let Ty::Named(n) = &t {
+                                if let Some(stored) = self
+                                    .cx
+                                    .types
+                                    .datas
+                                    .get(n)
+                                    .and_then(|vs| vs.iter().find(|(v, _)| v == &variant))
+                                    .and_then(|(_, fs)| fs.get(*i))
+                                    .map(|(_, t)| t)
+                                {
+                                    if !stored.same(&ft) {
+                                        return Err(kind(
+                                            spec::MirProjectionElem::Field.path(),
+                                            &format!(
+                                                "field representation {} cannot be read as {}",
+                                                stored.render(),
+                                                ft.render()
+                                            ),
+                                        ));
+                                    }
+                                }
+                            }
                             v = names.get(*i).cloned().ok_or_else(|| {
                                 kind(
                                     spec::MirProjectionElem::Field.path(),
@@ -4149,9 +4239,13 @@ impl Fun<'_, '_> {
                 }
                 let t = self.local_ty(dest.local, &dest.projection)?;
                 let mut vals = Vec::new();
+                let mut operand_types = Vec::new();
                 for (_, o) in ops {
-                    vals.push(self.operand(o, st)?.0);
+                    let (value, ty) = self.operand(o, st)?;
+                    vals.push(value);
+                    operand_types.push(ty);
                 }
+                self.check_aggregate_fields(agg, &t, ops, &operand_types)?;
                 let v = self.aggregate(agg, &t, ops, vals)?;
                 self.mention(&t);
                 Ok(Val::V(v, t))
@@ -4943,6 +5037,93 @@ impl Fun<'_, '_> {
             }
             _ => Err(bad()),
         }
+    }
+
+    /// Source fields and native locals may use distinct representations of
+    /// the same Rust integer. Construction cannot silently convert them.
+    fn check_aggregate_fields(
+        &self,
+        agg: &IrAggregate,
+        target: &Ty,
+        ops: &[(Option<String>, IrOperand)],
+        actual: &[Ty],
+    ) -> Lift<()> {
+        let k = spec::MirRvalue::Aggregate.path();
+        if let IrAggregate::Adt(path, None) = agg {
+            let name = wrapper(path)
+                .map(|(n, _)| n)
+                .or_else(|| split_path(path).last().copied());
+            if matches!(
+                name,
+                Some("ManuallyDrop" | "MaybeUninit" | "NonNull" | "Unique")
+            ) {
+                return Ok(());
+            }
+        }
+        let expected: Vec<&Ty> = match (agg, target) {
+            (IrAggregate::Tuple, Ty::Unit) if actual.is_empty() => Vec::new(),
+            (IrAggregate::Tuple, Ty::Tuple(ts) | Ty::Pair(ts)) => ts.iter().collect(),
+            (IrAggregate::Tuple, t) if actual.len() == 1 => vec![t],
+            (IrAggregate::Array, Ty::List(t)) => vec![t.as_ref(); actual.len()],
+            (IrAggregate::Adt(_, Some(v)), Ty::Option(t)) => match v.as_str() {
+                "Some" => vec![t],
+                "None" => Vec::new(),
+                _ => return Ok(()),
+            },
+            (IrAggregate::Adt(_, Some(v)), Ty::Outcome(ok, err)) => match v.as_str() {
+                "Ok" | "Continue" => vec![ok],
+                "Err" | "Break" => vec![err],
+                _ => return Ok(()),
+            },
+            (IrAggregate::Adt(_, Some(v)), Ty::Named(n)) => {
+                if let Some(fields) = self
+                    .cx
+                    .types
+                    .datas
+                    .get(n)
+                    .and_then(|vs| vs.iter().find(|(name, _)| name == v))
+                    .map(|(_, fields)| fields)
+                {
+                    fields.iter().map(|(_, t)| t).collect()
+                } else {
+                    return Ok(());
+                }
+            }
+            (IrAggregate::Adt(_, None), Ty::Named(n)) => {
+                let Some(fields) = self.cx.types.structs.get(n) else {
+                    return Ok(());
+                };
+                ops.iter()
+                    .enumerate()
+                    .map(|(i, (name, _))| {
+                        let field = match name {
+                            Some(name) => fields.iter().find(|(f, _)| *f == lift::local_name(name)),
+                            None => fields.get(i),
+                        };
+                        field
+                            .map(|(_, t)| t)
+                            .ok_or_else(|| kind(k, "an unknown aggregate field"))
+                    })
+                    .collect::<Lift<Vec<_>>>()?
+            }
+            _ => return Ok(()),
+        };
+        if expected.len() != actual.len() {
+            return Err(kind(k, "aggregate field representation arity mismatch"));
+        }
+        for (i, (expected, actual)) in expected.iter().zip(actual).enumerate() {
+            if !expected.same(actual) {
+                return Err(kind(
+                    k,
+                    &format!(
+                        "aggregate field representation {i}: {} cannot be stored as {}",
+                        actual.render(),
+                        expected.render()
+                    ),
+                ));
+            }
+        }
+        Ok(())
     }
 
     fn aggregate(
@@ -7200,6 +7381,9 @@ fn std_printed(segs: &[&str], name: &str, args: &[Ty]) -> Option<Ty> {
 pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
     let t = text.trim();
     let bad = || Err(Residue::Type(t.to_string()));
+    if let Some(reading) = types.registered(t) {
+        return Ok(reading);
+    }
     // `!`, the type of no value: a place of it is never written, so its
     // stand-in is the unit, never observed (a call that returns it does not
     // return, and the path to it is proved unreachable).
@@ -7361,6 +7545,17 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
         .into_iter()
         .filter(|a| !a.is_empty() && !a.starts_with('\'') && !is_const_argument(a))
         .collect();
+    // rustc prints the expanded alias rather than `BigRational`. Both
+    // dependencies must have their exact lock-admitted registry readings.
+    if segs.as_slice() == ["num_rational", last]
+        && name == "Ratio"
+        && raw.as_slice() == ["num_bigint::BigInt"]
+        && types.registered("num_bigint::BigInt") == Some(Ty::Unbounded)
+    {
+        if let Some(reading) = types.registered("num_rational::BigRational") {
+            return Ok(reading);
+        }
+    }
     // A variant whose field is uninhabited never holds a value, so an enum
     // of std is the type of its one inhabited variant: `Result<T, E>` is `T`
     // where `E` is uninhabited and `E` where `T` is, and `Option<T>` holds

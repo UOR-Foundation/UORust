@@ -1,5 +1,37 @@
 # Template repository verification
 
+## Native feedback regressions (UE-40 through UE-44)
+
+These checks use the immutable SDK selected by `prismpm.lock`. Each row was
+registered with its scenario and an executable regression before its repair.
+They are focused development evidence; release acceptance remains `just vv`.
+
+| ID | Reproduced defect | Restored check |
+| --- | --- | --- |
+| UE-40 | A renamed unique workspace type did not lift, while an imported name could bind a function's generic parameter. | `renamed_unique_types_preserve_imports_and_generic_shadowing_ue_40` checks the original type, generic shadowing, and actual SDK verification. |
+| UE-41 | A compiler-derived signed structure field was admitted into a native tuple with a different integer representation. | `native_aggregates_check_field_representations_ue_41` refuses incompatible tuple, structure, variant, array and option cases with typed field diagnostics; the compatible projection passes SDK type checking. |
+| UE-42 | Native loop bodies transporting lock-admitted registry values produced no candidates. | `native_registry_carriers_require_locked_readings_ue_42` proves all five carrier functions through the SDK, rejects unmodeled JSON equality, and rejects a changed archive checksum. |
+| UE-43 | Native trials checked unrelated modules and retained no structured SDK result. | `native_verification_scopes_feedback_and_reuses_decisions_ue_43` proves three candidates, refuses an overflow candidate, records only Behavior and Prelude, and replays identical verdicts with zero verifier runs. |
+| UE-44 | Lean rejected a countdown carrying an invariant Boolean with `Unknown identifier x1`. | `native_loop_state_preserves_invariants_in_evidence_ue_44` proves the compiler-derived function using one changing loop-state parameter. The SDK checks the unreduced decrease obligation exactly before proving it. |
+
+Run these regressions with `cargo test --locked -p uorust --test engine native_`.
+The existing policy-hint regression also exercises corrected hints and unchanged
+replay. Native trials now run SDK type checking before Lean verification and
+write the actual SDK JSON to `uorust-proof-result.json` in their project-owned
+scratch directory. Neither this feedback nor prior axiom hints confer proof
+status: a changed translation digest still requires the SDK's successful verdict.
+
+The MIR fixture was refreshed by the actual prover after loop-state lowering
+changed its translations. Eight translations were proved and one refused in
+three verifier runs; two unchanged proved rows were retained. In particular,
+`walk::any_above`, previously refused for its invariant capture, now proves.
+The fixture's overflow refusal remains a refusal. CLI and engine replay checks
+require zero new verifier runs for the resulting register.
+
+The complete gate is not represented as passed by these checks. The prior full
+run's self-lift alias regression was repaired separately, and the translator's
+UE-18 certification boundary still requires complete release acceptance.
+
 This repository's `just vv` instantiates the universal verification policy in
 `VERIFICATION.md` for the template itself, which is a Prism application: the
 template contract checker in `app/`.
