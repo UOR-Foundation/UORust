@@ -249,3 +249,9 @@ id = "UE-32"
 level = "build"
 suite = "engine"
 statement = "Dumped workspace targets encode every body into metadata without emitting native target objects, retaining the exact pre-LLVM body inventory and bytes, including private, generic, closure and impl bodies; omitting forced MIR encoding is detected"
+
+[[id]]
+id = "UE-33"
+level = "build"
+suite = "engine"
+statement = "Locked serde_json values and numbers have explicit recursive carrier models for passive transport, preserving numeric storage variants and object iteration order across feature representations; unmodeled comparisons, representation-dependent operations and wrong-checksum readings stay refused"

@@ -198,3 +198,13 @@ Feature: engine
     When native emission and forced metadata MIR emission collect the same lowering pass
     Then their body inventories and bytes are identical and nonempty
     But metadata emission without forced MIR encoding is rejected for missing bodies
+
+  @UE-33 @build
+  Scenario: Locked JSON data can pass through a formal function without losing its representation
+    Given serde_json 1.0.114 pinned to its registered archive checksum
+    When identity, tuple and enclosing-field functions are projected
+    Then their JSON values retain the six source variants and numeric storage alternatives
+    And comparisons without a faithful equality model remain unlifted
+    And the actual SDK verifies the carrier definitions and their function bodies
+    And recursive JSON native exports are refused individually under the pinned library profile
+    And replacing the archive checksum refuses the carrier reading

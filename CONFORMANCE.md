@@ -53,6 +53,7 @@ model does not sanction.
 | `UE-30` | `build` | A locked registered number alias retains its admitted type reading before generic registry alias expansion, while an incorrect archive checksum keeps it unlifted |
 | `UE-31` | `build` | Qualified type paths in fields and signatures are resolved in their declaring module before localization, distinguishing homonymous declarations and retaining the binding of bare imported types |
 | `UE-32` | `build` | Dumped workspace targets encode every body into metadata without emitting native target objects, retaining the exact pre-LLVM body inventory and bytes, including private, generic, closure and impl bodies; omitting forced MIR encoding is detected |
+| `UE-33` | `build` | Locked serde_json values and numbers have explicit recursive carrier models for passive transport, preserving numeric storage variants and object iteration order across feature representations; unmodeled comparisons, representation-dependent operations and wrong-checksum readings stay refused |
 
 ## factory
 

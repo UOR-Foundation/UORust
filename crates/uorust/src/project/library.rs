@@ -262,6 +262,16 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
                     .filter_map(|t| types.get(t).map(|(_, x)| x.as_str())),
             )
             .any(|text| words(text).any(|w| w == "Unit"));
+        let json = own
+            .iter()
+            .filter_map(|d| definitions.text(d))
+            .filter_map(|text| text.split_once("body: ").map(|(head, _)| head))
+            .any(|text| text.contains("Prelude::JsonValue"))
+            || reached.iter().any(|t| {
+                types
+                    .get(t)
+                    .is_some_and(|(decl, _)| fields(decl).contains("Prelude::JsonValue"))
+            });
         let cause = match (mutual, recursive) {
             (Some((ty, group)), _) => Some(format!(
                 "it reaches the type {ty} of the mutual inductive block {group}, for which \
@@ -279,6 +289,10 @@ pub(super) fn admit(behavior: &Module, candidates: &[String]) -> Admission {
             ),
             (None, None) if unit => Some(
                 "it reaches the type Unit, for which the pinned library code generator renders no Rust type"
+                    .to_string(),
+            ),
+            (None, None) if json => Some(
+                "it reaches the recursive carrier Prelude::JsonValue, which requires another memory profile than the pinned native library's"
                     .to_string(),
             ),
             (None, None) => refusal(&own, &definitions, &decls, &types, &taken),
@@ -1182,6 +1196,22 @@ mod tests {
 
     fn library_names(names: &[&str]) -> Vec<String> {
         names.iter().map(|n| (*n).to_string()).collect()
+    }
+
+    #[test]
+    fn library_json_carriers_are_refused_individually_ue_33() {
+        let mut json = library_def("json", "v");
+        if let Decl::Definition {
+            parameters, result, ..
+        } = &mut json
+        {
+            *parameters = vec![("v".into(), "Prelude::JsonValue".into())];
+            *result = "Prelude::JsonValue".into();
+        }
+        let behavior = library_module(vec![json, library_def("plain", "(n + 1)")]);
+        let admission = admit(&behavior, &library_names(&["json", "plain"]));
+        assert_eq!(admission.roots, ["plain".to_string()].into_iter().collect());
+        assert!(admission.refused["json"].contains("recursive carrier Prelude::JsonValue"));
     }
 
     #[test]

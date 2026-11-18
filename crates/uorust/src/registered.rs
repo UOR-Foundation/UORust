@@ -62,6 +62,17 @@ pub(crate) struct Reading {
 /// It is held as the pair it stores, `(Int * Int)` of its two `BigInt`s,
 /// which every accessor (`numer`, `denom`) reads exactly; the lift reads no
 /// comparison of it (see [`Ty::Ratio`]).
+///
+/// `serde_json::Value` and `Number` (1.0.114, `src/value/mod.rs`,
+/// `src/number.rs`, `src/map.rs`) retain their owned representation in
+/// Prelude's JSON carriers. Value has its six public variants. Number
+/// stores a positive u64, negative i64 or finite f64, or a String under
+/// arbitrary_precision; the model keeps distinct storage alternatives and
+/// float bits. An object's entries retain the map's iteration order, sorted
+/// under BTreeMap and insertion-ordered under preserve_order's IndexMap.
+/// Only passive transport is read: these named carriers have no derived
+/// equality, ordering or representation-dependent operations. In particular,
+/// bit equality must not replace Number's floating-point equality at zero.
 pub(crate) fn readings() -> Vec<Reading> {
     vec![
         Reading {
@@ -83,6 +94,26 @@ pub(crate) fn readings() -> Vec<Reading> {
             )],
             ty: Ty::Ratio,
             within: &["num-bigint"],
+        },
+        Reading {
+            package: "serde_json",
+            path: "serde_json::Value",
+            locked: &[(
+                "1.0.114",
+                "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0",
+            )],
+            ty: Ty::Named("Prelude::JsonValue".into()),
+            within: &[],
+        },
+        Reading {
+            package: "serde_json",
+            path: "serde_json::Number",
+            locked: &[(
+                "1.0.114",
+                "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0",
+            )],
+            ty: Ty::Named("Prelude::JsonNumber".into()),
+            within: &[],
         },
     ]
 }

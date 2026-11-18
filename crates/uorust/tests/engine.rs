@@ -2337,3 +2337,79 @@ fn registered_number_alias_keeps_its_admitted_model_ue_30() {
     );
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
+
+/// UE-33: transport is modeled without assuming JSON storage equality.
+#[test]
+fn locked_json_carriers_preserve_data_and_refuse_unmodeled_equality_ue_33() {
+    let dir = scratch("registered-json-carrier", &[
+        ("Cargo.toml", "[package]\nname = \"json_carrier\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[dependencies]\nserde_json = \"=1.0.114\"\n"),
+        ("src/lib.rs", "use serde_json::{Value, Number};\n#[derive(PartialEq)] pub struct Held { pub payload: Value, pub id: u8 }\npub fn keep(v: Value) -> Value { v }\npub fn number(n: Number) -> Number { n }\npub fn pair(v: Value, n: u8) -> (Value, u8) { (v, n) }\npub fn id(h: &Held) -> u8 { h.id }\npub fn compared(a: Value, b: Value) -> bool { a == b }\npub fn numbers_equal(a: Number, b: Number) -> bool { a == b }\npub fn held_equal(a: Held, b: Held) -> bool { a == b }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let files = project(&dir, "json_carrier");
+    let functions = |files: &BTreeMap<String, Vec<u8>>| -> Vec<String> {
+        frontier_rows(files, "lifted")
+            .iter()
+            .filter_map(|row| row["function"].as_str().map(str::to_string))
+            .collect()
+    };
+    let lifted = functions(&files);
+    for function in [
+        "json_carrier::keep",
+        "json_carrier::number",
+        "json_carrier::pair",
+        "json_carrier::id",
+    ] {
+        assert!(
+            lifted.iter().any(|name| name == function),
+            "carrier function did not lift: {function}"
+        );
+    }
+    assert!(
+        !lifted.iter().any(|name| name == "json_carrier::compared"),
+        "Storage equality was substituted for JSON equality"
+    );
+    for function in ["json_carrier::numbers_equal", "json_carrier::held_equal"] {
+        assert!(
+            !lifted.iter().any(|name| name == function),
+            "Unmodeled JSON equality lifted: {function}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write JSON projection");
+    let kernel = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK verifier");
+    assert!(
+        kernel.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&kernel.stdout),
+        String::from_utf8_lossy(&kernel.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    let checksum = "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0";
+    assert!(original.contains(checksum));
+    std::fs::write(&lock, original.replace(checksum, &"0".repeat(64))).expect("wrong checksum");
+    assert!(
+        functions(&project(&dir, "json_carrier")).is_empty(),
+        "An unregistered archive acquired the JSON model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}

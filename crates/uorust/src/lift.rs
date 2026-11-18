@@ -235,6 +235,13 @@ impl Ty {
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => "ParseIntError".into(),
             Self::Path => "FilePath".into(),
+            Self::Named(n) if n.contains("::") => format!(
+                "__Qualified{}",
+                n.as_bytes()
+                    .iter()
+                    .map(|byte| format!("{byte:02x}"))
+                    .collect::<String>()
+            ),
             Self::Named(n) => n.clone(),
             Self::Option(t) => format!("Option{}", t.tag()),
             Self::Outcome(t, e) => format!("Result{}{}", t.tag(), e.tag()),
