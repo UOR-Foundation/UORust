@@ -155,6 +155,15 @@ jobs:
             test -f "dist/uorust-$target.tar.gz.sha256" || { echo "missing its sum" >&2; exit 1; }
           done
           (cd dist && cat ./*.sha256 >SHA256SUMS && sha256sum --check SHA256SUMS)
+      - name: Qualify and publish the release platform-availability manifest
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          python3 -I -m unittest discover -s scripts/release -p 'test_platforms.py'
+          python3 -I scripts/release/platforms.py dist "$TAG" --manifest >dist/platforms.json
+          (cd dist && sha256sum platforms.json >>SHA256SUMS && sha256sum --check SHA256SUMS)
       - name: Create the release with the archives, their sums and SHA256SUMS
         shell: bash
         env:
@@ -163,8 +172,10 @@ jobs:
           REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
+          windows_note=$(python3 -I scripts/release/platforms.py dist "$TAG" --windows-note)
           notes="Install: curl -fsSL https://github.com/$REPOSITORY/raw/$TAG/install.sh | UORUST_VERSION=$TAG sh
-          (Windows: install.ps1), cargo binstall uorust, brew install afflom/uorust/uorust, nix run github:$REPOSITORY/$TAG,
+          $windows_note
+          Other installation routes: cargo binstall uorust, brew install afflom/uorust/uorust, nix run github:$REPOSITORY/$TAG,
           or from source: cargo install --locked --git https://github.com/$REPOSITORY --tag $TAG uorust
 
           Or download the archive for your platform, check it with SHA256SUMS, and verify its provenance:
