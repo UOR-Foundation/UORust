@@ -272,7 +272,7 @@ impl Profile {
     /// The profile a manifest's text states it was taken in under: its
     /// `[profile]` table, or the translator's own when it has none.
     pub fn recorded(path: &Path, text: &str) -> Result<Profile, UorustError> {
-        let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
+        let doc: toml::Value = toml::from_str(text).map_err(|e| UorustError::Malformed {
             path: path.to_path_buf(),
             reason: format!("{e}"),
         })?;
