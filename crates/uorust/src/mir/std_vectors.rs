@@ -28,6 +28,8 @@ fn std_agrees_with_every_vector_of_its_models() {
     assert_eq!(str::repeat("x", 0), "", "std::str::<impl str>::repeat");
     assert_eq!(char::to_string(&'é'), "é", "<char as std::string::ToString>::to_string");
     assert_eq!(std::slice::from_ref(&7u32).to_vec(), vec![7u32], "std::slice::from_ref");
+    assert_eq!(Some(true).map(|x: bool| !x), Some(false), "std::option::Option::map");
+    assert_eq!(None::<bool>.map(|x: bool| !x), None, "std::option::Option::map");
     assert_eq!(Some(String::from("a")).as_ref().cloned(), Some(String::from("a")), "std::option::Option::cloned");
     assert_eq!(None::<String>.as_ref().cloned(), None, "std::option::Option::cloned");
     assert_eq!(Some(3u8).as_ref().copied(), Some(3u8), "std::option::Option::copied");

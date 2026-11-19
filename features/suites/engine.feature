@@ -408,3 +408,10 @@ Feature: engine
     When native code searches shuffled entries or queries their size
     Then actual SDK results agree with Rust for present and absent keys in either entry order
     But custom key equality, hasher observations and unordered iteration remain unadmitted
+
+  @UE-61 @build
+  Scenario: Function items reuse their admitted value semantics
+    Given admitted immutable workspace functions and standard Rc or Arc content borrows
+    When native Option mapping passes those functions as values
+    Then SDK-verified results agree with executable Rust for Some and None
+    But mutable signatures, custom owners and incompatible targets remain unadmitted

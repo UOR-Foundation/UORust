@@ -3488,11 +3488,50 @@ impl Fun<'_, '_> {
                     Ok((lit, t))
                 }
                 None => match c {
-                    IrConstant::Path(p) => Err(kind(k, &format!("the constant item {p}"))),
+                    IrConstant::Path(p) => self
+                        .function_item(p)
+                        .ok_or_else(|| kind(k, &format!("the constant item {p}"))),
                     _ => Err(kind(k, p)),
                 },
             },
         }
+    }
+
+    /// A function item carries its admitted signature, including dependencies.
+    /// Mutable functions need an environment/backward function, not a pure value.
+    fn function_item(&mut self, path: &str) -> Option<(String, Ty)> {
+        let key = format!("{}::{path}", self.cx.krate);
+        if let Some(c) = self
+            .cx
+            .callees
+            .get(&key)
+            .or_else(|| self.cx.callees.get(path))
+            .cloned()
+        {
+            if c.threads.is_some() || c.name == self.name || c.params.is_empty() {
+                return None;
+            }
+            self.calls.insert(c.name.clone());
+            let arguments: Vec<String> = (0..c.params.len())
+                .map(|i| self.fresh(Some("argument"), i))
+                .collect();
+            let parameters = arguments
+                .iter()
+                .zip(&c.params)
+                .map(|(name, ty)| format!("({name} : {})", ty.render()))
+                .collect::<Vec<_>>()
+                .join(" ");
+            let term = format!("(fun {parameters} => ({} {}))", c.name, arguments.join(" "));
+            let t = Ty::Fn(c.params, Box::new(c.result));
+            self.mention(&t);
+            return Some((term, t));
+        }
+        let inner = shared_borrow_item(path, self.cx.types)?;
+        let argument = self.fresh(Some("borrowed"), 0);
+        let term = format!("(fun ({argument} : {}) => {argument})", inner.render());
+        let t = Ty::Fn(vec![inner.clone()], Box::new(inner));
+        self.mention(&t);
+        Some((term, t))
     }
 
     /// A constant's own body (a promoted constant or a constant item),
@@ -7002,6 +7041,37 @@ impl Fun<'_, '_> {
     }
 }
 
+/// The exact standard shared-owner adapters whose function values borrow content.
+fn shared_borrow_item(path: &str, types: &Types) -> Option<Ty> {
+    let (owner, rest) = path.strip_prefix('<')?.split_once(" as ")?;
+    if !matches!(
+        erase(owner).as_str(),
+        "std::rc::Rc" | "alloc::rc::Rc" | "std::sync::Arc" | "alloc::sync::Arc"
+    ) {
+        return None;
+    }
+    let (tr, method) = rest.rsplit_once(">::")?;
+    let content = owner.split_once('<')?.1.strip_suffix('>')?;
+    let inner = ty(content, types).ok()?;
+    if ty(owner, types).ok()? != inner {
+        return None;
+    }
+    let (trait_name, target) = match tr.split_once('<') {
+        Some((name, target)) => (name, Some(target.strip_suffix('>')?)),
+        None => (tr, None),
+    };
+    match (trait_name, method, target) {
+        ("std::convert::AsRef" | "core::convert::AsRef", "as_ref", Some(target))
+        | ("std::borrow::Borrow" | "core::borrow::Borrow", "borrow", Some(target))
+            if ty(target, types).ok()? == inner =>
+        {
+            Some(inner)
+        }
+        ("std::ops::Deref" | "core::ops::Deref", "deref", None) => Some(inner),
+        _ => None,
+    }
+}
+
 /// The standard library's operations on values that the lift's types model
 /// exactly. Generic arguments are erased before matching; every other call
 /// is residue naming its callee.
@@ -8951,6 +9021,31 @@ mod tests {
             variant_key("same", &Ty::Nat(Some(8))),
             variant_key("same", &Ty::Nat(Some(32)))
         );
+    }
+
+    #[test]
+    fn shared_borrow_function_items_require_exact_owners_and_targets_ue_61() {
+        let types = Types::default();
+        for path in [
+            "<std::sync::Arc<u32> as std::convert::AsRef<u32>>::as_ref",
+            "<alloc::rc::Rc<u32> as core::borrow::Borrow<u32>>::borrow",
+            "<std::rc::Rc<u32> as std::ops::Deref>::deref",
+        ] {
+            assert_eq!(
+                shared_borrow_item(path, &types),
+                Some(Ty::Nat(Some(32))),
+                "{path}"
+            );
+        }
+        for path in [
+            "<other::Arc<u32> as std::convert::AsRef<u32>>::as_ref",
+            "<std::sync::Arc<u32> as other::AsRef<u32>>::as_ref",
+            "<std::sync::Arc<u32> as std::convert::AsRef<u64>>::as_ref",
+            "<std::sync::Arc<u32> as std::convert::AsMut<u32>>::as_mut",
+            "<std::sync::Arc<std::sync::Mutex<u32>> as std::ops::Deref>::deref",
+        ] {
+            assert_eq!(shared_borrow_item(path, &types), None, "{path}");
+        }
     }
 
     #[test]

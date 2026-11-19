@@ -81,6 +81,7 @@ model does not sanction.
 | `UE-58` | `build` | Native primitive checked negation, wrapping negation, unsigned magnitude and signum derive from width and signedness, and lock-admitted exact integer and rational negation reuse their source carriers; Rust extrema and stored rational denominators are preserved while an unchecked unwrap at the signed minimum is refused |
 | `UE-59` | `build` | A partial compiler selection whose caller is blocked by a missing transitive callee cannot invalidate the caller's reusable SDK verdict; cached history never admits the blocked caller, restoring complete inputs replays without verifier calls, and changed eligible translations still require current SDK decisions |
 | `UE-60` | `build` | Native HashMap get, contains_key, len and is_empty read the existing unordered logical carrier through shared standard-library models, using primitive or already-admitted derived equality without inventing iteration order; custom key equality, hasher observations and unordered iteration remain typed refusals |
+| `UE-61` | `build` | Native first-class calls reuse admitted immutable workspace signatures and exact standard Rc/Arc AsRef, Borrow and Deref content adapters; mutable signatures, custom owners and mismatched targets remain typed residue |
 
 ## factory
 

@@ -239,6 +239,15 @@ rust = "std::slice::from_ref(&{0}).to_vec()"
 vectors = [["7u32", "vec![7u32]"]]
 
 [[model]]
+path = "std::option::Option::map"
+args = ["option<$t>", "fn<$t, $u>"]
+result = "option<$u>"
+term = "(match {0} | Option.none => (ctor Option.none [{ty $u}]) | Option.some item => (ctor Option.some [{ty $u}] (apply {1} item)))"
+floor = "first-class FnOnce callbacks represented by admitted pure function values"
+rust = "{0}.map({1})"
+vectors = [["Some(true)", "|x: bool| !x", "Some(false)"], ["None::<bool>", "|x: bool| !x", "None"]]
+
+[[model]]
 path = "std::option::Option::cloned"
 args = ["option<$t>"]
 result = "option<$t>"

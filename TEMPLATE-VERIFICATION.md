@@ -652,3 +652,21 @@ produces LLV7002 and the SDK diagnostic that the proposition is false. The
 model's Rust vectors are regenerated from std.toml and executed directly.
 These are focused development checks; complete `just vv` remains the release
 gate.
+
+## Native function values and option mapping (UE-61)
+
+The compiler-derived regression first fails on the constant function item
+`flip`. Immutable workspace function items now retain their admitted signatures
+and dependency closure, with explicit lambda parameters for their application.
+Standard Rc/Arc AsRef, Borrow and Deref adapters reuse the admitted content
+representation only for exact owners, traits and targets. A single Option::map
+table row applies these pure function values; mutable callbacks remain residue.
+
+Five mapped native functions pass actual SDK proof trials. Fifteen closed SDK
+vectors agree with executable Rust for None, Boolean negation and shared values
+at zero and u32::MAX. Custom adapter owners, mutable callbacks, incompatible
+targets, unrelated traits and shared Mutex contents remain refused. A planted
+wrong borrow result produces LLV7002 and the diagnostic that the proposition
+is false. Generated Rust table vectors execute the same Option mapping model.
+The interrupted test run retained its bound native decisions for replay. These
+are focused development checks; complete `just vv` remains the release gate.
