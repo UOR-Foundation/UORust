@@ -1982,3 +1982,286 @@ fn every_core_body_is_embedded_ue_19() {
     assert!(!harness.exists());
     let _ = std::fs::remove_dir_all(&work);
 }
+
+#[test]
+fn a_method_writing_its_struct_threads_it_ue_21() {
+    let planted = scratch(
+        "ue21-threading",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"mint\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "/// A mint.\npub struct Mint {\n    /// Its supply.\n    pub supply: u64,\n    \
+                 /// Whether it is initialized.\n    pub is_initialized: u8,\n}\n\nimpl Mint {\n    \
+                 /// Marks it initialized.\n    pub fn set_initialized(&mut self) {\n        \
+                 self.is_initialized = 1;\n    }\n\n    /// Writes the supply twice.\n    \
+                 pub fn reset(&mut self, supply: u64) {\n        self.supply = supply;\n        \
+                 self.is_initialized = 0;\n        self.supply = 7;\n    }\n\n    \
+                 /// Reads through a mutable borrow.\n    pub fn take(&mut self) -> u64 {\n        \
+                 self.supply\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "mint");
+    let lifted = lifted_functions(&files);
+    for setter in ["mint::Mint::set_initialized", "mint::Mint::reset"] {
+        assert!(
+            lifted.iter().any(|f| f == setter),
+            "{setter} lifts: {lifted:?}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    // The record the model's threadedRecord gives: the written field holds
+    // the value, every other is projected from the value before the write.
+    assert!(
+        behavior
+            .contains("(record Mint {supply := (project selfValue supply), isInitialized := 1})"),
+        "{behavior}"
+    );
+    // The last write to supply wins: 7 is bound after the parameter.
+    assert!(behavior.contains("supply := 7"), "{behavior}");
+    let detail = residue_detail(&files, "mint::Mint::take").expect("take is a residue row");
+    assert!(detail.contains("takes &mut self of"), "{detail}");
+}
+
+#[test]
+fn a_write_through_a_nested_place_threads_it_ue_22() {
+    let planted = scratch(
+        "ue22-places",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"places\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "/// An optional value: a tag and the value.\npub type COption<T> = ([u8; 4], T);\n\n\
+                 /// An account.\npub struct Account {\n    /// Its mint.\n    pub mint: [u8; 32],\n    \
+                 /// Its delegate.\n    pub delegate: COption<[u8; 32]>,\n    \
+                 /// Its flags.\n    pub flags: [u8; 4],\n}\n\nimpl Account {\n    \
+                 /// Clears the delegate.\n    pub fn clear_delegate(&mut self) {\n        \
+                 self.delegate.0[0] = 0;\n    }\n\n    /// Sets the delegate.\n    \
+                 pub fn set_delegate(&mut self, delegate: &[u8; 32]) {\n        \
+                 self.delegate.0[0] = 1;\n        self.delegate.1 = *delegate;\n    }\n\n    \
+                 /// Sets a flag it computes.\n    pub fn set_flag(&mut self, at: usize) {\n        \
+                 self.flags[at] = 1;\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "places");
+    let lifted = lifted_functions(&files);
+    for setter in [
+        "places::Account::clear_delegate",
+        "places::Account::set_delegate",
+    ] {
+        assert!(
+            lifted.iter().any(|f| f == setter),
+            "{setter} lifts: {lifted:?}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    // The index write keeps the tail and writes the head; the item write
+    // projects the other item from the tuple before the write.
+    assert!(behavior.contains("=> (cons 0 "), "{behavior}");
+    assert!(behavior.contains("=> (cons 1 "), "{behavior}");
+    assert!(behavior.contains("item1 := delegate"), "{behavior}");
+    let detail = residue_detail(&files, "places::Account::set_flag").expect("set_flag is residue");
+    assert!(detail.contains("place"), "{detail}");
+}
+
+#[test]
+fn bytes_flags_and_unit_enums_convert_by_the_prelude_ue_23() {
+    let planted = scratch(
+        "ue23-conversions",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"bytes\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Bytes.\n/// A state.\n#[repr(u8)]\npub enum State {\n    /// Not yet.\n    Uninitialized,\n    \
+                 /// Ready.\n    Initialized,\n    /// Stopped.\n    Frozen,\n}\n\n\
+                 /// A code whose source sets its values.\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Eight, as an expression.\n    B = 1 << 3,\n}\n\n\
+                 /// A mint.\npub struct Mint {\n    /// Its supply.\n    pub supply: [u8; 8],\n    \
+                 /// Its state.\n    pub state: u8,\n    /// Whether it is native.\n    pub native: u8,\n}\n\n\
+                 impl Mint {\n    /// The supply.\n    pub fn supply(&self) -> u64 {\n        u64::from_le_bytes(self.supply)\n    }\n\n    \
+                 /// Sets the supply.\n    pub fn set_supply(&mut self, supply: u64) {\n        self.supply = supply.to_le_bytes();\n    }\n\n    \
+                 /// Sets the state.\n    pub fn set_state(&mut self, state: State) {\n        self.state = state as u8;\n    }\n\n    \
+                 /// Sets the flag.\n    pub fn set_native(&mut self, value: bool) {\n        self.native = value as u8;\n    }\n}\n\n\
+                 /// A code's value.\npub fn code(c: Code) -> u8 {\n    c as u8\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "bytes");
+    let lifted = lifted_functions(&files);
+    for f in [
+        "bytes::Mint::supply",
+        "bytes::Mint::set_supply",
+        "bytes::Mint::set_state",
+        "bytes::Mint::set_native",
+    ] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    for needle in [
+        "(Prelude::fromLeBytes (project selfValue supply))",
+        "(Prelude::leBytes 8 supply)",
+        "(Prelude::bitOf value)",
+        "| State.Frozen => 2",
+    ] {
+        assert!(behavior.contains(needle), "{needle}: {behavior}");
+    }
+    let detail = residue_detail(&files, "bytes::code").expect("code is a residue row");
+    assert!(detail.contains("discriminant"), "{detail}");
+}
+
+#[test]
+fn a_crate_reads_the_types_of_the_crates_it_depends_on_ue_24() {
+    let package = |name: &str, deps: &str| {
+        format!("[package]\nname = \"{name}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\n{deps}")
+    };
+    let planted = scratch(
+        "ue24-crates",
+        &[
+            (
+                "Cargo.toml",
+                "[workspace]\nmembers = [\"iface\", \"prog\", \"other\"]\nresolver = \"2\"\n",
+            ),
+            ("iface/Cargo.toml", &package("iface", "")),
+            ("iface/src/lib.rs", "//! Iface.\n/// Errors.\npub mod error;\n"),
+            (
+                "iface/src/error.rs",
+                "//! Errors.\n/// An error.\n#[derive(Clone, Debug, Eq, PartialEq)]\npub enum TokenError {\n    \
+                 /// Bad.\n    InvalidInstruction,\n    /// Worse.\n    Other,\n}\n",
+            ),
+            ("prog/Cargo.toml", &package("prog", "iface = { path = \"../iface\" }\n")),
+            (
+                "prog/src/lib.rs",
+                "//! Prog.\nuse {\n    iface::{\n        error::TokenError,\n    },\n};\n\n\
+                 /// Through the import.\npub fn grouped(x: u64) -> Result<u64, TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(TokenError::InvalidInstruction)\n    }\n}\n\n\
+                 /// Through the full path.\npub fn pathed(x: u64) -> Result<u64, iface::error::TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(iface::error::TokenError::Other)\n    }\n}\n",
+            ),
+            ("other/Cargo.toml", &package("other", "")),
+            (
+                "other/src/lib.rs",
+                "//! Other.\n/// A crate that does not depend on iface.\npub fn apart(x: u64) -> Result<u64, TokenError> {\n    \
+                 Ok(x)\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "crates");
+    let lifted = lifted_functions(&files);
+    for f in ["prog::grouped", "prog::pathed"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let detail = residue_detail(&files, "other::apart").expect("apart is a residue row");
+    assert!(detail.contains("TokenError"), "{detail}");
+}
+
+#[test]
+fn an_error_converts_by_its_from_implementation_ue_25() {
+    let planted = scratch(
+        "ue25-from",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"errors\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Errors.\n/// A token error.\npub enum TokenError {\n    /// Bad.\n    InvalidInstruction,\n    /// Worse.\n    Other,\n}\n\n\
+                 /// A program error.\npub enum ProgramError {\n    /// A custom code.\n    Custom(u32),\n    /// Bad input.\n    InvalidArgument,\n}\n\n\
+                 impl From<TokenError> for ProgramError {\n    fn from(e: TokenError) -> Self {\n        ProgramError::Custom(e as u32)\n    }\n}\n\n\
+                 /// Unpacks.\npub fn unpack(x: u64) -> Result<u64, TokenError> {\n    \
+                 if x > 0 {\n        Ok(x)\n    } else {\n        Err(TokenError::InvalidInstruction)\n    }\n}\n\n\
+                 /// Through `?`.\npub fn process(x: u64) -> Result<u64, ProgramError> {\n    let a = unpack(x)?;\n    Ok(a)\n}\n\n\
+                 /// Through `into`.\npub fn reject() -> Result<u64, ProgramError> {\n    Err(TokenError::Other.into())\n}\n\n\
+                 /// No conversion.\npub fn mismatch(x: u64) -> Result<u64, u32> {\n    let a = unpack(x)?;\n    Ok(a)\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "errors");
+    let lifted = lifted_functions(&files);
+    for f in ["errors::process", "errors::reject"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(
+        behavior
+            .contains("(ctor Result.error [Nat, ProgramError] (programErrorFromTokenErrorFrom "),
+        "{behavior}"
+    );
+    let detail = residue_detail(&files, "errors::mismatch").expect("mismatch is a residue row");
+    assert!(detail.contains("? of another type"), "{detail}");
+}
+
+#[test]
+fn self_and_its_associated_types_name_the_impl_ue_26() {
+    let planted = scratch(
+        "ue26-self",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"states\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! States.\n/// A state.\npub enum State {\n    /// Not yet.\n    Uninitialized,\n    /// Ready.\n    Initialized,\n}\n\n\
+                 /// An error.\npub enum Error {\n    /// Bad.\n    Invalid,\n}\n\n\
+                 impl TryFrom<u8> for State {\n    type Error = Error;\n\n    \
+                 fn try_from(value: u8) -> Result<Self, Self::Error> {\n        match value {\n            \
+                 0 => Ok(State::Uninitialized),\n            1 => Ok(State::Initialized),\n            _ => Err(Error::Invalid),\n        }\n    }\n}\n\n\
+                 /// A holder.\npub struct Holder {\n    /// Its state byte.\n    pub state: u8,\n}\n\n\
+                 impl Holder {\n    /// Its state.\n    pub fn state(&self) -> Result<State, Error> {\n        State::try_from(self.state)\n    }\n\n    \
+                 /// Its state from a flag, which no impl takes.\n    pub fn flagged(&self, f: bool) -> Result<State, Error> {\n        State::try_from(f)\n    }\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "states");
+    let lifted = lifted_functions(&files);
+    for f in ["states::State::try_from", "states::Holder::state"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let detail =
+        residue_detail(&files, "states::Holder::flagged").expect("flagged is a residue row");
+    assert!(detail.contains("try_from"), "{detail}");
+}
+
+#[test]
+fn an_integer_read_as_a_fieldless_enum_is_its_variant_ue_27() {
+    let planted = scratch(
+        "ue27-transmute",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname = \"codes\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+            ),
+            (
+                "src/lib.rs",
+                "//! Codes.\n/// A code whose source sets its values.\n#[repr(u8)]\npub enum Code {\n    /// Five.\n    A = 5,\n    /// Nine.\n    B = 9,\n    /// Ten.\n    C,\n}\n\n\
+                 /// The code of a byte.\npub fn code(v: u8) -> Option<Code> {\n    match v {\n        \
+                 5 | 9..=10 => Some(unsafe { core::mem::transmute::<u8, Code>(v) }),\n        _ => None,\n    }\n}\n\n\
+                 /// A byte no variant has.\npub fn wide(v: u8) -> Option<Code> {\n    match v {\n        \
+                 5..=6 => Some(unsafe { core::mem::transmute::<u8, Code>(v) }),\n        _ => None,\n    }\n}\n\n\
+                 /// A code's value.\npub fn value(c: Code) -> u8 {\n    c as u8\n}\n",
+            ),
+        ],
+    );
+    let files = project(&planted, "codes");
+    let lifted = lifted_functions(&files);
+    for f in ["codes::code", "codes::value"] {
+        assert!(lifted.iter().any(|l| l == f), "{f} lifts: {lifted:?}");
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    for needle in ["| Code.B => 9", "| Code.C => 10"] {
+        assert!(behavior.contains(needle), "{needle}: {behavior}");
+    }
+    let detail = residue_detail(&files, "codes::wide").expect("wide is a residue row");
+    assert!(detail.contains("unsafe"), "{detail}");
+}

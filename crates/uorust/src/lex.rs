@@ -189,7 +189,7 @@ impl Expr {
             return flat;
         }
         match self {
-            Self::Flat(text) => text.clone(),
+            Self::Flat(text) => lay_out(text, depth, col, trail),
             Self::Match { scrutinee, arms } => {
                 let indent = 4 + 2 * depth;
                 let mut out = format!("(match {scrutinee}");
@@ -227,6 +227,57 @@ impl Expr {
             }
         }
     }
+}
+
+/// Text too wide for its line with each `(match ...)` inside it laid out as
+/// [`Expr::render_at`] lays out a match, as `lexlean fmt` lays out every
+/// match whatever term holds it; text that holds none, unchanged.
+fn lay_out(text: &str, depth: usize, col: usize, trail: usize) -> String {
+    let Some((start, end)) = first_match(text) else {
+        return text.to_string();
+    };
+    let (head, rest) = (&text[..start], &text[end..]);
+    let mut out = head.to_string();
+    let at = out.rsplit('\n').next().map_or(0, str::len);
+    let column = if out.contains('\n') { at } else { col + at };
+    out.push_str(&Expr::read(&text[start..end]).render_at(depth, column, rest.len() + trail));
+    let at = out.rsplit('\n').next().map_or(0, str::len);
+    let column = if out.contains('\n') { at } else { col + at };
+    out.push_str(&lay_out(rest, depth, column, trail));
+    out
+}
+
+/// Where the first `(match ...)` of `text` outside a string starts and ends.
+fn first_match(text: &str) -> Option<(usize, usize)> {
+    let bytes = text.as_bytes();
+    let (mut quoted, mut escaped, mut start, mut depth) = (false, false, None, 0usize);
+    for (i, &b) in bytes.iter().enumerate() {
+        if quoted {
+            match b {
+                _ if escaped => escaped = false,
+                b'\\' => escaped = true,
+                b'"' => quoted = false,
+                _ => {}
+            }
+            continue;
+        }
+        match b {
+            b'"' => quoted = true,
+            b'(' if start.is_none() && text[i..].starts_with("(match ") => {
+                start = Some(i);
+                depth = 1;
+            }
+            b'(' | b'[' | b'{' if start.is_some() => depth += 1,
+            b')' | b']' | b'}' if start.is_some() => {
+                depth -= 1;
+                if depth == 0 {
+                    return start.map(|s| (s, i + 1));
+                }
+            }
+            _ => {}
+        }
+    }
+    None
 }
 
 /// One top-level declaration.
@@ -647,6 +698,23 @@ mod tests {
         assert!(matches!(arms[1].body, Expr::Match { .. }));
         assert_eq!(Expr::read(text).flat(), text);
         assert_eq!(Expr::read("(f x)"), Expr::Flat("(f x)".into()));
+    }
+
+    #[test]
+    fn a_match_inside_text_too_wide_for_its_line_is_laid_out() {
+        let inner = "(match xs | List.nil => xs | List.cons h t => (cons 0 t))";
+        let text = format!("(record R {{a := {inner}, b := {}}})", "x".repeat(80));
+        let laid = Expr::Flat(text.clone()).render_at(0, 8, 0);
+        assert!(
+            laid.contains(
+                "{a := (match xs\n    | List.nil => xs\n    | List.cons h t => (cons 0 t)), b := "
+            ),
+            "{laid}"
+        );
+        // Text that fits, or holds no match, is unchanged.
+        assert_eq!(Expr::Flat(inner.into()).render_at(0, 8, 0), inner);
+        let plain = format!("(f {})", "y".repeat(120));
+        assert_eq!(Expr::Flat(plain.clone()).render_at(0, 8, 0), plain);
     }
 
     #[test]
