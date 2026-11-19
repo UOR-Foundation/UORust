@@ -37,7 +37,7 @@ fn module_files(dir: &Path) -> Result<Vec<PathBuf>, UorustError> {
 /// The rows of one module file.
 fn rows(file: &Path) -> Result<Vec<toml::Value>, UorustError> {
     let text = std::fs::read_to_string(file).map_err(|e| io(file, e))?;
-    let doc: toml::Table = text.parse().map_err(|e| io(file, e))?;
+    let doc: toml::Table = toml::from_str(&text).map_err(|e| io(file, e))?;
     Ok(doc
         .get("fn")
         .and_then(toml::Value::as_array)
@@ -135,7 +135,7 @@ pub fn retractions(dir: &Path) -> Result<Vec<Retraction>, UorustError> {
         path: file.clone(),
         reason,
     };
-    let doc: toml::Table = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let doc: toml::Table = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
     let mut out = Vec::new();
     for row in doc
         .get("retracted")

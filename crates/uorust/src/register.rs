@@ -244,13 +244,16 @@ impl Register {
         }
     }
 
+    // TOML 1.2's Value::from_str parses an individual value, not a
+    // top-level TOML document. Use toml::from_str for documents, including
+    // commented registers, while retaining the same typed row validation.
     /// The rows of a register and the document they were read from.
     fn rows_of(path: &Path, text: &str) -> Result<(Register, toml::Value), UorustError> {
         let bad = |reason: String| UorustError::Malformed {
             path: path.to_path_buf(),
             reason,
         };
-        let doc: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(text).map_err(|e| bad(format!("{e}")))?;
         let mut register = Register::default();
         let mut functions = BTreeMap::new();
         for table in ["lifted", "residue", "foreign", "effect"] {
@@ -809,7 +812,7 @@ mod tests {
         );
         // The file states both as data, in that order, and reads back.
         let text = register.to_text();
-        let doc: toml::Value = text.parse().expect("the register is TOML");
+        let doc: toml::Value = toml::from_str(&text).expect("the register is TOML");
         for (key, count) in totals.fields() {
             assert_eq!(
                 doc[LIFT].get(key).and_then(toml::Value::as_integer),
@@ -891,7 +894,7 @@ mod tests {
             &text[..text.find("\n[lift]\n").expect("the totals")],
             &text[text.find("\n[[construct]]").expect("a queue")..]
         );
-        let doc: toml::Value = headless.parse().expect("TOML");
+        let doc: toml::Value = toml::from_str(&headless).expect("TOML");
         assert!(doc.get(LIFT).is_none() && doc.get(CONSTRUCT).is_some());
         assert!(Register::read(at, &headless).is_ok());
         let reason = refused(headless.replace("functions = 3\n", "functions = 4\n"));
@@ -983,7 +986,7 @@ mod tests {
     fn a_queue_is_ranked_and_written_as_the_core_registers() {
         let file = Path::new(env!("CARGO_MANIFEST_DIR")).join("core/frontier.toml");
         let text = std::fs::read_to_string(&file).expect("the core register");
-        let doc: toml::Value = text.parse().expect("the core register is TOML");
+        let doc: toml::Value = toml::from_str(&text).expect("the core register is TOML");
         let mut rows = 0;
         for (table, key) in [(CONSTRUCT, CONSTRUCT), ("pending", "shape"), (CAUSE, CAUSE)] {
             let committed: Vec<(String, usize)> = doc

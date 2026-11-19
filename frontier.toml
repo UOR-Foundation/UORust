@@ -20,7 +20,7 @@
 #     1 bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::parse::{closure#2}: type outside the lift: std::num::ParseIntError
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
-#     1 certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor_text::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::plan_keyed::{closure#0}: mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index
@@ -1529,7 +1529,7 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
-construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -3198,7 +3198,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
 
 [[residue]]
-kappa = "63a32d6a5d9a7a95f49c5033b5e3bc65bfee543eb9dff12376265837b3c3f5a9"
+kappa = "acdf50719543bc23d97c9ae236394ec6075707c8b6f8daac0c1735ef3bc1d426"
 function = "uorust::certify::Manifest::parse"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -3225,7 +3225,7 @@ detail = "mir::Ty: mir::ir::IrBody"
 kappa = "a6f0acd7875848fae482fd78593f32df889beb11c75c8554e97a0d49d4c4f89f"
 function = "uorust::certify::Profile::cargo_manifest"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 
 [[residue]]
 kappa = "4524f44ab3599fff8c711259814066946be6a7ec0eff85d1aad10ce449999e4c"
@@ -3402,7 +3402,7 @@ reason = "mir"
 detail = "mir::Ty: std::path::Path"
 
 [[residue]]
-kappa = "d017e0f4be55ad987510d8848a0829be46bb1647f3752274d2b8225f368e2d01"
+kappa = "fd5d1a289fca7ca3dcc6a94515d1789654f2399f74125071754addded3e7d18f"
 function = "uorust::certify::profile::Profile::recorded"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -6930,7 +6930,7 @@ reason = "mir"
 detail = "mir::TerminatorKind::Call: std::option::Option::map"
 
 [[residue]]
-kappa = "13b670770d426cf6f750a797e6194dc9659b384740ba56e9dd529e5c1e0811f6"
+kappa = "ff3f2c7e1072d0c86bfca2a0cbd3ea29fed032ca7f572690e40f627a06d3a99e"
 function = "uorust::mir::prove::candidates"
 reason = "mir"
 detail = "mir::Operand::Constant: the constant item mir::CANDIDATES"
@@ -7092,7 +7092,7 @@ reason = "mir"
 detail = "mir::ProjectionElem::Subslice"
 
 [[residue]]
-kappa = "2b3fdeb5996920ddf570274076cc525ff640993333f719474b8fc11a032421c6"
+kappa = "dbb5128d8e8dd86ef8745f6ed2bacbcfe90a9330a7c4ab6835b3c485b2bc01a6"
 function = "uorust::mir::stdlib::parse_table"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -7176,7 +7176,7 @@ reason = "mir"
 detail = "mir::Ty: std::num::ParseIntError"
 
 [[residue]]
-kappa = "c739e27951bf399bee66ac0ae4cf581d9737f27d5dfb719d168c7a37bd1c0189"
+kappa = "01c757b8a822b5bfdfedc6be49ed9c64e6daf17c9c20fcec31a0b0bb669a02d7"
 function = "uorust::mir::verdict::Verdicts::parse"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -7836,7 +7836,7 @@ reason = "mir"
 detail = "mir::Ty: dyn for<'a> std::ops::Fn(usize, &'a ast::RustType) -> ast::RustType"
 
 [[residue]]
-kappa = "e6c55013f92e01a8cb399ff30a2966b2304830dca6257afb1df354dad7f40d9d"
+kappa = "ee51e63cbd5b776ec826e2165a0c826696613b7331a69e69e8b8b3393586bcfb"
 function = "uorust::project::within_limit"
 reason = "mir"
 detail = "mir::Operand::Constant: the constant item project::LEXLEAN"
@@ -8526,7 +8526,7 @@ function = "uorust::register::Register::misstated"
 detail = "takes or returns toml::Value, a type of the toml crate with no LexLean model"
 
 [[foreign]]
-kappa = "f2a24b67d66fcc0126abee7c6a988d4abb6eba6a698c1913a29172302f809a69"
+kappa = "88c4a358f0fc3e60d1fec7db0cceac81afa24cd0eae409cbf5c6e11cd34da842"
 function = "uorust::register::Register::rows_of"
 detail = "takes or returns toml::Value, a type of the toml crate with no LexLean model"
 
@@ -8616,7 +8616,7 @@ function = "uorust::bridge::elaborate"
 effect = "Process effect: std::process::Command::new"
 
 [[effect]]
-kappa = "8716cece9f6d4b84d10271922edeb43a67b09fbdf153486c7f71682aeccbfd12"
+kappa = "945b9ae956bde176b45ab8be1d3a04e0bd46a1df287c1afb10aad268e857f08d"
 function = "uorust::bridge::project"
 effect = "Fs effect: Path::exists"
 
@@ -8661,7 +8661,7 @@ function = "uorust::certify::Profile::export_roots"
 effect = "calls uorust::certify::modules, which performs a Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "532df9ef8a960ff3b7cc58c521d1b37b9ea0cf663873bcdc8cecdf7acd0b0af6"
+kappa = "dfd58f67c0cd498fb3a10e7ac41ae06e32b3d3443e018c52e35709494eee7108"
 function = "uorust::certify::admit_roots"
 effect = "Fs effect: Path::exists"
 
@@ -8776,12 +8776,12 @@ function = "uorust::certify::modules"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "5177a716da1371557a705d96571ca0bab5dabc3edfe0d8521d0606813e6ec7b2"
+kappa = "a0a21b449eed11ceaff44e2469f3e6fbdb7417cdb935482e5eb3e6268993f569"
 function = "uorust::certify::package_edition"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "800877b4d07cde952a828fb06b887c2e34b521d0befe9923cacbef99cf0e425b"
+kappa = "aca09fedb306c1d18b683f558e2a469ed2ec9a9bb961100e66fd49b6a7cd78b5"
 function = "uorust::certify::package_rows"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -8801,12 +8801,12 @@ function = "uorust::certify::production_build"
 effect = "Fs effect: Path::exists"
 
 [[effect]]
-kappa = "edae880ad5e53692b200a72ac7fb6843521fa7acb319b93e74ae9f79a9bf8af8"
+kappa = "337f694becec063a6f9ca07fd94f0423f0f10130b3df4b0f452a06acd153163a"
 function = "uorust::certify::profile::Profile::kept"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "9c74777feb27cd9270785830106acf5491cbf9a3d18982c4a63e35965e337dba"
+kappa = "942953110ab5347de94bfa52576005d5da7da95dccd1163bac89d3d5b19ad439"
 function = "uorust::certify::profile::Profile::of_workspace"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -8821,12 +8821,12 @@ function = "uorust::certify::profile::Profile::resolve"
 effect = "calls uorust::certify::profile::Profile::of_workspace, which performs a Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "f1d9d4a6a1249d276e499f25e4e0e973db3877786dbc7c02d3877c227b0d8352"
+kappa = "ed967a2ec7a7c813db9281f14ae8fc6b6c1ec0581914be8a2340841ab02b19c3"
 function = "uorust::certify::project_files"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "ad99276ed6c8744cc32436f978852f6cf8653731fd37f647d170b5200a3f4859"
+kappa = "21cc291ffe36c81d6899f6edd21c84f75adfcb079c5206b708a0be14bdd3a9e0"
 function = "uorust::certify::project_identity"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -8841,12 +8841,12 @@ function = "uorust::certify::source_packages"
 effect = "Fs effect: Path::canonicalize"
 
 [[effect]]
-kappa = "2e5bdd2a7026cfd00fe406eaf0c8443748b23f8885fb054da8a8f33bfdebf757"
+kappa = "e163c78a375ae459ebcd5bb2ac4bc68462dc266b41a7cd27da30aa85b8090668"
 function = "uorust::certify::source_roots"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "a3d6bed9ec7d71a5e7f385f6b0d6500e88dcb1810eac34f6f84ac6aebc74ce87"
+kappa = "e2513e99acdf732a47d54c9bb38e1f52390f58df3642c7d94015b18d674bad19"
 function = "uorust::certify::sync"
 effect = "Fs effect: Path::is_file"
 
@@ -8911,7 +8911,7 @@ function = "uorust::embed::dir_paths"
 effect = "Fs effect: std::fs::read_dir"
 
 [[effect]]
-kappa = "d9703b92acc75c1e231987fbffbd0951f4d56cd027962c89bdca402cc96b829b"
+kappa = "646c7ed17786d7f91c59ae8aef16f8620dad81418c7120c483c2c6e2ee481464"
 function = "uorust::embed::dump_target"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 
@@ -9026,7 +9026,7 @@ function = "uorust::ingest::package"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "db02a4198f33a97725b00beb35f4e09beb6b97e62853e27c3272567b3f769ce9"
+kappa = "0918af771636869b1562446b26e5f842c7fcd6a1a01f3f8ac70639962766c9c9"
 function = "uorust::ingest::read_toml"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -9076,7 +9076,7 @@ function = "uorust::main"
 effect = "calls uorust::run, which reaches an effect"
 
 [[effect]]
-kappa = "1d4728416233ca023598f300a07628058aa847ba8b97d499f267998e5aad1449"
+kappa = "adc467e78b44a2d64848bb78abd5c915932abd7416178a36acedcec31919e4db"
 function = "uorust::mir::core::census"
 effect = "Fs effect: Path::is_dir"
 
@@ -9091,7 +9091,7 @@ function = "uorust::mir::core::core_decls"
 effect = "calls uorust::mir::core::library_decls, which performs a Fs effect: Path::is_dir"
 
 [[effect]]
-kappa = "5573a0d8f147d67ae7619ef4af438be9ad293e24dfca683f73643cb3fb6bbf25"
+kappa = "a8844044aedf11cf42262f205a9f7242c94ff0c7915e30e13e3ed2e5a6bd9e70"
 function = "uorust::mir::core::core_regressions"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 
@@ -9116,12 +9116,12 @@ function = "uorust::mir::core::summarize_core_register"
 effect = "calls uorust::mir::core::summarize_register, which performs a Fs effect: std::fs::write"
 
 [[effect]]
-kappa = "685dc2ea1796dfa95ff8326a83a07b91490819ba8102bc44466ca426b11037cd"
+kappa = "3e7e196b5f98c52fb48ece270391a0dcdb1735c1b0da485603ed815633d56d51"
 function = "uorust::mir::core::summarize_register"
 effect = "Fs effect: std::fs::write"
 
 [[effect]]
-kappa = "612a4671b6886ec214f0fdd44372788ad58c08c3bbbf6eef2bb8445ee612444b"
+kappa = "1d5e5a6d5e9ee6e03baa6ac49a53c0d3955679335a61f6e1d0fd2b9e8e45a0e2"
 function = "uorust::mir::core::unembedded"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 
@@ -9176,7 +9176,7 @@ function = "uorust::mir::link::CoreLink::trait_constant_type"
 effect = "Fs effect: Path::is_file"
 
 [[effect]]
-kappa = "6084d59247771ad583d4277b04004099e9a9979c234cd1e22117c220b9ac9a0d"
+kappa = "e10a1235d4d1e03d419a41896edf141bf281f78c64f90afd5d75bc0e3a88e529"
 function = "uorust::mir::load"
 effect = "Fs effect: Path::is_dir"
 
@@ -9196,7 +9196,7 @@ function = "uorust::mir::prove::write_scratch"
 effect = "Fs effect: Path::is_dir"
 
 [[effect]]
-kappa = "b8756c115a08a1884830664a0b4b635830ebb50d335b82b0a55a1c11e3587832"
+kappa = "edbd7359ce07a9e17b4c29ab3dd5836114c4bd83eaab18287b65d95c87df1fc1"
 function = "uorust::mir::record_layouts"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -9221,7 +9221,7 @@ function = "uorust::mir::verdict::Verdicts::read"
 effect = "Fs effect: Path::is_file"
 
 [[effect]]
-kappa = "e834d8e8ffb4055e80a8ebfb7d311ab8cb7c73ff317f0e0abebc54fae07e4ba5"
+kappa = "501eda56ba5ffef0b51ce3f09bda3c7daae4f1d0d1c865136d4cf00fe5ee207b"
 function = "uorust::names::default_features"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -9256,12 +9256,12 @@ function = "uorust::queue::module_files"
 effect = "Fs effect: std::fs::read_dir"
 
 [[effect]]
-kappa = "44de6b8a283ca4477b9ce0aecbe54936f8fec0b359cee4f0f8c4baf6c9cd2eac"
+kappa = "00fea684ab04f9424d6af75612812b71110373c13e0c2db45b97cd811a016d2d"
 function = "uorust::queue::retractions"
 effect = "Fs effect: std::fs::read_to_string"
 
 [[effect]]
-kappa = "651ba8bb5fdeaaf1984f5e384ad7438227898cd39bc72819ed36735e2597edb9"
+kappa = "67ceb115a425263b2393c9cc66524d2bd3bbb3227db809358e9a9542047bc278"
 function = "uorust::queue::rows"
 effect = "Fs effect: std::fs::read_to_string"
 
@@ -9301,7 +9301,7 @@ function = "uorust::registry::layouts"
 effect = "Fs effect: std::fs::create_dir_all"
 
 [[effect]]
-kappa = "558735fee0a0b0c82ed2627191563e87698185de246fe1a31e903060e7b4145e"
+kappa = "f3cb42d28ee05d0dabd48f4c809936e584c52817d7930e5b62c4aef4054b265e"
 function = "uorust::registry::lib_name"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 

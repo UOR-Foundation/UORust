@@ -48,7 +48,7 @@ fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, Uorust
         path: CANDIDATES.into(),
         reason,
     };
-    let doc: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let doc: toml::Value = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
     let mut out = Vec::new();
     for row in doc
         .get("candidate")

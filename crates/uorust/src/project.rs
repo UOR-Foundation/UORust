@@ -5895,7 +5895,7 @@ fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
         reason,
     };
     let text = String::from_utf8_lossy(files.get(LEXLEAN).map_or(&[][..], Vec::as_slice));
-    let config: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let config: toml::Value = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
     let limit = config
         .get("limits")
         .and_then(|limits| limits.get("max_file_bytes"))
@@ -6956,9 +6956,7 @@ mod tests {
     }
 
     fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
-        String::from_utf8_lossy(&files[path])
-            .parse()
-            .expect("the file is TOML")
+        toml::from_str(&String::from_utf8_lossy(&files[path])).expect("the file is TOML")
     }
 
     fn count(value: &toml::Value) -> usize {
@@ -7020,7 +7018,7 @@ mod tests {
         ]
         .into_iter()
         .collect();
-        let doc: toml::Value = refusal_queue(&refusals).parse().expect("TOML");
+        let doc: toml::Value = toml::from_str(&refusal_queue(&refusals)).expect("TOML");
         assert_eq!(count(&doc["admission"]["refusals"]), refusals.len());
         let rows: Vec<(&str, &str, usize)> = doc["reason"]
             .as_array()
@@ -7046,7 +7044,7 @@ mod tests {
         );
         assert_eq!(rows.iter().map(|r| r.2).sum::<usize>(), refusals.len());
         // No refusal: the count is stated, and the queue is empty.
-        let none: toml::Value = refusal_queue(&BTreeSet::new()).parse().expect("TOML");
+        let none: toml::Value = toml::from_str(&refusal_queue(&BTreeSet::new())).expect("TOML");
         assert_eq!(count(&none["admission"]["refusals"]), 0);
         assert!(none.get("reason").is_none());
     }
@@ -7075,7 +7073,7 @@ mod tests {
         let rows = function_rows(&notes, &kappas);
         let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
         let text = frontier(&notes, &lift, &rows);
-        let doc: toml::Value = text.parse().expect("the frontier is TOML");
+        let doc: toml::Value = toml::from_str(&text).expect("the frontier is TOML");
         let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
             .iter()
             .map(|key| count(&doc["lift"][key]))

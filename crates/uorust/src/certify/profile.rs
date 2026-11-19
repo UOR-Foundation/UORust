@@ -141,7 +141,7 @@ impl Profile {
     pub fn of_workspace(workspace: &Path) -> Result<Profile, UorustError> {
         let manifest = workspace.join("Cargo.toml");
         let text = std::fs::read_to_string(&manifest).map_err(|e| io(&manifest, e))?;
-        let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+        let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
             path: manifest.clone(),
             reason: format!("{e}"),
         })?;
@@ -262,7 +262,7 @@ impl Profile {
             Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(Profile::default()),
             Err(e) => return Err(io(&path, e)),
         };
-        let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+        let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
             path: path.clone(),
             reason: format!("{e}"),
         })?;
@@ -272,7 +272,7 @@ impl Profile {
     /// The profile a manifest's text states it was taken in under: its
     /// `[profile]` table, or the translator's own when it has none.
     pub fn recorded(path: &Path, text: &str) -> Result<Profile, UorustError> {
-        let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+        let doc: toml::Value = toml::from_str(text).map_err(|e| UorustError::Malformed {
             path: path.to_path_buf(),
             reason: format!("{e}"),
         })?;

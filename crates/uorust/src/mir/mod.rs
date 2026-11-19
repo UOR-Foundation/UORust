@@ -244,8 +244,7 @@ fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
     let tool = |what: &str, reason: String| UorustError::Tool(format!("{what}: {reason}"));
     let toolchain = root.join("rust-toolchain.toml");
     let targets: Vec<String> = match std::fs::read_to_string(&toolchain) {
-        Ok(text) => text
-            .parse::<toml::Table>()
+        Ok(text) => toml::from_str::<toml::Table>(&text)
             .ok()
             .and_then(|t| t.get("toolchain")?.get("targets")?.as_array().cloned())
             .unwrap_or_default()
@@ -335,9 +334,8 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
             path: recorded.clone(),
             reason,
         };
-        let doc: toml::Table = text
-            .parse()
-            .map_err(|e: toml::de::Error| bad(e.to_string()))?;
+        let doc: toml::Table =
+            toml::from_str(&text).map_err(|e: toml::de::Error| bad(e.to_string()))?;
         for t in doc
             .get("target")
             .and_then(toml::Value::as_array)
