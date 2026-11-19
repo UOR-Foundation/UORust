@@ -411,3 +411,9 @@ id = "UE-59"
 level = "build"
 suite = "engine"
 statement = "A partial compiler selection whose caller is blocked by a missing transitive callee cannot invalidate the caller's reusable SDK verdict; cached history never admits the blocked caller, restoring complete inputs replays without verifier calls, and changed eligible translations still require current SDK decisions"
+
+[[id]]
+id = "UE-60"
+level = "build"
+suite = "engine"
+statement = "Native HashMap get, contains_key, len and is_empty read the existing unordered logical carrier through shared standard-library models, using primitive or already-admitted derived equality without inventing iteration order; custom key equality, hasher observations and unordered iteration remain typed refusals"

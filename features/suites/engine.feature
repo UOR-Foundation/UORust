@@ -401,3 +401,10 @@ Feature: engine
     When a partial compiler selection retains the caller but omits a transitive callee
     Then the caller remains unadmitted without erasing either cached decision
     And restoring complete compiler inputs requires zero verifier calls
+
+  @UE-60 @build
+  Scenario: Readonly hash-map operations reuse model-owned lookup semantics
+    Given unordered maps with primitive keys and keys with admitted derived equality
+    When native code searches shuffled entries or queries their size
+    Then actual SDK results agree with Rust for present and absent keys in either entry order
+    But custom key equality, hasher observations and unordered iteration remain unadmitted

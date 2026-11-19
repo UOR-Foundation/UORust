@@ -5746,7 +5746,8 @@ impl Fun<'_, '_> {
         // A std operation whose body bottoms out below values: its model.
         let types = self.cx.types;
         let defaults = |t: &Ty| lift::default_of(t, types);
-        if let Some(applied) = stdlib::apply(&erase(callee), &args, dt, &defaults) {
+        if let Some(applied) = stdlib::apply_with_types(&erase(callee), &args, dt, &defaults, types)
+        {
             for t in &applied.mentions {
                 self.mention(t);
             }

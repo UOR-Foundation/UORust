@@ -5032,7 +5032,17 @@ fn behavior(
         decls.extend(crate::order::decls(&ordered, &types));
     }
     decls.extend(surface_dependency_order(lifted));
-    decls.extend(translated);
+    // Source and native lowering can require the same shared comparison.
+    // Retain differing declarations so the SDK still rejects a collision.
+    let shared: BTreeMap<_, _> = decls
+        .iter()
+        .map(|d| (d.name().to_string(), crate::lex::render_decl(d)))
+        .collect();
+    decls.extend(
+        translated
+            .into_iter()
+            .filter(|d| shared.get(d.name()) != Some(&crate::lex::render_decl(d))),
+    );
     // Closed assertions of tests over lifted functions are theorems.
     let mut theorems = BTreeSet::new();
     for &r in &all {

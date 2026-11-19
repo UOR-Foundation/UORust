@@ -4039,6 +4039,221 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-60: lookup is independent of a hash map's unmodeled iteration order.
+#[test]
+fn native_hash_map_reads_reuse_logical_lookup_models_ue_60() {
+    let dir=scratch("hash-map-reads",&[("Cargo.toml","[package]\nname=\"hash_reads\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::collections::HashMap;
+use std::hash::{Hash,Hasher,BuildHasher};
+#[derive(Clone,Eq,PartialEq,Ord,PartialOrd,Hash)] pub struct Key {pub id:u32}
+pub fn source_less(a:&Key,b:&Key)->bool {a<b}
+#[derive(Eq)] pub struct Parity(pub u8);
+impl PartialEq for Parity {fn eq(&self,other:&Self)->bool {self.0%2==other.0%2}}
+impl Hash for Parity {fn hash<H:Hasher>(&self,state:&mut H){(self.0%2).hash(state)}}
+pub fn get_num<'a>(mut n:u8,map:&'a HashMap<u32,u8>,key:&u32)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_num(mut n:u8,map:&HashMap<u32,u8>,key:&u32)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn get_text<'a>(mut n:u8,map:&'a HashMap<String,u8>,key:&str)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_text(mut n:u8,map:&HashMap<String,u8>,key:&str)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn get_key<'a>(mut n:u8,map:&'a HashMap<Key,u8>,key:&Key)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_key(mut n:u8,map:&HashMap<Key,u8>,key:&Key)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn sizes(mut n:u8,map:&HashMap<u32,u8>)->bool {while n>0 {n-=1;} map.is_empty()==(map.len()==0)}
+pub fn custom<'a>(mut n:u8,map:&'a HashMap<Parity,u8>,key:&Parity)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn observe(mut n:u8,map:&HashMap<u32,u8>)->u64 {while n>0 {n-=1;} map.hasher().build_hasher().finish()}
+pub fn iteration(mut n:u8,map:&HashMap<u32,u8>)->Option<&u32> {while n>0 {n-=1;} map.keys().next()}
+#[test] fn reference(){for pairs in [[(3,7),(1,4)],[(1,4),(3,7)]] {let map=HashMap::from(pairs);assert_eq!(get_num(2,&map,&3),Some(&7));assert_eq!(get_num(2,&map,&2),None);assert!(has_num(2,&map,&3));assert!(!has_num(2,&map,&2));assert!(sizes(2,&map));let named=map.iter().map(|(k,v)|(Key{id:*k},*v)).collect();assert_eq!(get_key(2,&named,&Key{id:3}),Some(&7));assert!(!has_key(2,&named,&Key{id:2}));} let text=HashMap::from([("z".to_string(),7),("a".to_string(),4)]);assert_eq!(get_text(2,&text,"z"),Some(&7));assert!(!has_text(2,&text,"missing"));assert!(sizes(2,&HashMap::new()));}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust lookup vectors");
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "hash-map-reads");
+    let mut opts = options("hash_reads");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("lookup candidates");
+    let functions = [
+        "get_num", "has_num", "get_text", "has_text", "get_key", "has_key", "sizes",
+    ];
+    for f in functions {
+        let path = format!("hash_reads::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["custom", "observe", "iteration"] {
+        assert!(
+            residue_detail(&proposed, &format!("hash_reads::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("hash-read-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("hash_reads"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("SDK lookup proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved lookup projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in functions {
+        let path = format!("hash_reads::{f}");
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(path.as_str()))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(definition))
+            .cloned()
+            .unwrap_or_default();
+        for swapped in [false, true] {
+            for present in [false, true] {
+                let named = f.ends_with("_key");
+                let text_key = f.ends_with("_text");
+                let entry = if named {
+                    "TupleKeyNat"
+                } else if text_key {
+                    "TupleStringNat"
+                } else {
+                    "TupleNatNat"
+                };
+                let key = |v: u32| {
+                    if named {
+                        format!("(record Key {{idValue := {v}}})")
+                    } else if text_key {
+                        format!(
+                            "\"{}\"",
+                            if v == 3 {
+                                "z"
+                            } else if v == 1 {
+                                "a"
+                            } else {
+                                "missing"
+                            }
+                        )
+                    } else {
+                        v.to_string()
+                    }
+                };
+                let pairs = if swapped {
+                    [(1, 4), (3, 7)]
+                } else {
+                    [(3, 7), (1, 4)]
+                };
+                let mut map = format!("(nil {entry})");
+                for (k, v) in pairs.iter().rev() {
+                    map = format!(
+                        "(cons (record {entry} {{item0 := {}, item1 := {v}}}) {map})",
+                        key(*k)
+                    );
+                }
+                let (term, expected) = if f == "sizes" {
+                    let argument = if present {
+                        map
+                    } else {
+                        format!("(nil {entry})")
+                    };
+                    (format!("({definition} 2 {argument})"), "true".into())
+                } else {
+                    let expected = if f.starts_with("get_") {
+                        if present {
+                            "(ctor Option.some [Nat] 7)"
+                        } else {
+                            "(ctor Option.none [Nat])"
+                        }
+                    } else if present {
+                        "true"
+                    } else {
+                        "false"
+                    };
+                    (
+                        format!(
+                            "({definition} 2 {map} {})",
+                            key(if present { 3 } else { 2 })
+                        ),
+                        expected.to_string(),
+                    )
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{}{}, parameters: [], statement: ({term} = {expected}), proof: decide{{}}, axioms: [{}]}}\n",u8::from(swapped),u8::from(present),policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write vectors");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let sdk = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK lookup vectors");
+    assert!(
+        sdk.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&sdk.stdout),
+        String::from_utf8_lossy(&sdk.stderr)
+    );
+    let defect = body.replace(
+        "= (ctor Option.some [Nat] 7)",
+        "= (ctor Option.some [Nat] 6)",
+    );
+    assert_ne!(defect, body, "planted incorrect lookup result");
+    std::fs::write(out.join("src/Behavior.lex.tex"), defect).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK rejects incorrect lookup vector");
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-59: a missing dependency is not a newly verifiable translation.
 #[test]
 fn blocked_partial_callers_preserve_complete_context_verdicts_ue_59() {

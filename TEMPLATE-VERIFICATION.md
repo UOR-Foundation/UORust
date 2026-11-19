@@ -632,3 +632,23 @@ and negative values. Fixed Int64 representations, unrelated field types and
 mismatched widths remain refused. A planted Bool field in the source schema
 rejects the corresponding native integer read. These are focused development
 checks; complete `just vv` remains the release gate.
+
+## Shared native hash-map reads (UE-60)
+
+The compiler-derived regression initially fails at `HashMap::get`. Four table
+rows now reuse the existing linear lookup, membership and length models on
+the unordered logical carrier. Map patterns retain their ordered/unordered
+flag. Primitive equality and the source's admitted derived comparisons are
+shared; byte-identical source/native comparison declarations emit once while
+the native proof context still binds the complete helper definitions.
+
+Seven native functions pass actual SDK proof trials. Twenty-eight closed SDK
+vectors agree with executable Rust cases for numeric, borrowed string and
+derived keys, both entry orders, hit/miss and empty/nonempty maps. A source
+comparison in the same fixture exercises shared-helper emission. Custom
+equality, hasher observations, iteration, floats and mismatched map kinds
+remain refused. Replacing successful lookup results with a different value
+produces LLV7002 and the SDK diagnostic that the proposition is false. The
+model's Rust vectors are regenerated from std.toml and executed directly.
+These are focused development checks; complete `just vv` remains the release
+gate.
