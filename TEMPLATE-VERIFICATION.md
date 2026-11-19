@@ -1423,3 +1423,12 @@ Repo-conformance and strict all-target Clippy passed. The unchanged model gate
 required an explicit `Residue` collector type; the self-model gate detected
 changed source spans, which the canonical writer regenerated. Model validation,
 template and SDK-lock checks, and generated self-model checks then passed.
+
+Whole-source input admission exposed a compiler graph detail: promoted constants
+carry their parent method's graph label. The real pinned-rustc regression
+initially collected three entries for a type deriving Debug and Default, where
+only two are function definitions. Catalogue capture now uses the existing
+parsed MIR source-definition classifier; collection and loading share the same
+identity check. The three focused controls pass, including this compiler-backed
+negative control. Loader hash/source/configuration checks remain strict, and
+invalid body bindings name the offending MIR path.

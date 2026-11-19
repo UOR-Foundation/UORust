@@ -66,11 +66,38 @@ fn graph_identity(text: &str) -> Option<(String, bool)> {
     None
 }
 
+fn target_crate(target: &str) -> Result<String, UorustError> {
+    target
+        .strip_prefix("lib-")
+        .or_else(|| target.strip_prefix("bin-"))
+        .filter(|s| !s.is_empty())
+        .map(|s| s.replace('-', "_"))
+        .ok_or_else(|| bad("unrecognized MIR target"))
+}
+
+/// Graph labels can name the parent of a constant. Only actual MIR source
+/// definitions supply a method identity, using the common compiler classifier.
+fn definition_key(krate: &str, identity: &str, text: &str) -> Option<crate::embedding::Key> {
+    let name = super::identity::parts(identity)?.0;
+    let mut bodies = super::parse::bodies(text)
+        .into_iter()
+        .filter_map(|body| crate::embedding::body_key(krate, &body.path))
+        .filter(|key| key.name == name && key.impl_at.is_some());
+    let key = bodies.next()?;
+    bodies.next().is_none().then_some(key)
+}
+
 pub(crate) fn collect(
     target: &Path,
     dumps: &Path,
     records: &mut Vec<Definition>,
 ) -> Result<(), UorustError> {
+    let krate = target_crate(
+        target
+            .file_name()
+            .and_then(|n| n.to_str())
+            .ok_or_else(|| bad("missing MIR target"))?,
+    )?;
     let mut files: Vec<_> = std::fs::read_dir(target)
         .map_err(|e| io(target, e))?
         .filter_map(Result::ok)
@@ -91,6 +118,9 @@ pub(crate) fn collect(
         };
         let mir = target.join(format!("{name}{}", super::DUMPED));
         let bytes = std::fs::read(&mir).map_err(|e| io(&mir, e))?;
+        if definition_key(&krate, &identity, &String::from_utf8_lossy(&bytes)).is_none() {
+            continue;
+        }
         let relative = mir
             .strip_prefix(dumps)
             .map_err(|_| bad("MIR outside its capture root"))?;
@@ -159,26 +189,19 @@ pub(crate) fn load(
             .next()
             .and_then(|c| c.as_os_str().to_str())
             .ok_or_else(|| bad("missing target"))?;
-        if !(target.starts_with("lib-") || target.starts_with("bin-")) {
-            return Err(bad("unrecognized MIR target"));
-        }
-        let krate = target[4..].replace('-', "_");
+        let krate = target_crate(target)?;
         let path = dumps.join(path);
         let bytes = std::fs::read(&path).map_err(|e| io(&path, e))?;
         if crate::project::sha(&bytes) != record.body_sha256 {
             return Err(bad("MIR body binding mismatch"));
         }
-        let name = super::identity::parts(&record.identity)
-            .ok_or_else(|| bad("invalid qualified identity"))?
-            .0;
-        let bodies: Vec<_> = super::parse::bodies(&String::from_utf8_lossy(&bytes))
-            .into_iter()
-            .filter_map(|body| crate::embedding::body_key(&krate, &body.path))
-            .filter(|key| key.name == name && key.impl_at.is_some())
-            .collect();
-        let [key] = bodies.as_slice() else {
-            return Err(bad("identity does not name one compiler body"));
-        };
+        let key = definition_key(&krate, &record.identity, &String::from_utf8_lossy(&bytes))
+            .ok_or_else(|| {
+                bad(&format!(
+                    "identity does not name one compiler body: {}",
+                    record.mir
+                ))
+            })?;
         if result.insert(key.clone(), record).is_some() {
             ambiguous.insert(key.clone());
         }
@@ -262,6 +285,48 @@ fn text_bytes(path: &Path) -> Result<Vec<u8>, UorustError> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn graph_parent_labels_cannot_promote_constants_to_methods_ue_85() {
+        let root =
+            std::env::temp_dir().join(format!("uorust-definition-kinds-{}", std::process::id()));
+        let target = root.join("lib-neutral");
+        std::fs::create_dir_all(&target).unwrap();
+        std::fs::write(root.join("lib.rs"), "#[derive(Debug,Default)] pub struct Mark {pub a:bool,pub b:bool,pub c:bool,pub d:bool,pub e:bool,pub f:bool}\n").unwrap();
+        let output = std::process::Command::new("rustc")
+            .args([
+                "lib.rs",
+                "--crate-type=lib",
+                "--crate-name=neutral",
+                "--edition=2021",
+            ])
+            .args(super::super::FLAGS)
+            .arg(format!("-Zdump-mir-dir={}", target.display()))
+            .env("RUSTC_BOOTSTRAP", "1")
+            .current_dir(&root)
+            .output()
+            .unwrap();
+        assert!(
+            output.status.success(),
+            "{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        assert!(
+            std::fs::read_dir(&target)
+                .unwrap()
+                .flatten()
+                .any(|e| e.file_name().to_string_lossy().contains("promoted")),
+            "compiler fixture must contain an actual promoted body"
+        );
+        let mut records = Vec::new();
+        collect(&target, &root, &mut records).unwrap();
+        assert_eq!(
+            records.len(),
+            2,
+            "parent graph labels imported constants as method definitions"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     #[test]
     fn graph_definitions_preserve_qualified_identity_and_open_parameters_ue_85() {
