@@ -6419,6 +6419,139 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-77: parameterless source definitions are invoked, never emitted as locals.
+#[test]
+fn compiler_calls_apply_parameterless_source_models_ue_77() {
+    let code="pub struct Flag{pub value:bool}\npub fn zero()->bool{true}\npub fn seven()->u8{7}\npub fn read(mut n:u8)->bool{while n>0{n-=1;}zero()}\npub fn number(mut n:u8)->u8{while n>0{n-=1;}seven()}\npub fn make(mut n:u8)->Flag{while n>0{n-=1;}Flag{value:zero()}}\npub fn update(mut n:u8,x:&mut Flag)->bool{while n>0{n-=1;}x.value=zero();x.value}\n";
+    let oracle="use applications::*;fn main(){for n in [0,1,2,255]{println!(\"read|{n}|{}\",read(n));println!(\"number|{n}|{}\",number(n));println!(\"make|{n}|{}\",make(n).value);let mut x=Flag{value:false};let out=update(n,&mut x);assert_eq!(out,x.value);println!(\"update|{n}|{}\",x.value);}}\n";
+    let dir=scratch("parameterless-applications",&[("Cargo.toml","[package]\nname=\"applications\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",code),("src/bin/vectors.rs",oracle)]);
+    let dumps = dumped(&dir, "parameterless-applications");
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("parameterless-applications-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("applications"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        4,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let old = verdicts(&cache);
+    let mut opts = options("applications");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        old.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("applications::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = old
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let call=match p[0]{"make"=>format!("(project ({name} {}) value)",p[1]),"update"=>format!("((project ({name} {} (record Flag {{value := false}})) item0) && (project (project ({name} {} (record Flag {{value := false}})) item1) value))",p[1],p[1]),_=>format!("({name} {})",p[1])};
+        let theorem=format!("theorem{{name: applicationVector{i},parameters:[],statement:({call} = {}),proof:decide{{}},axioms:[{}]}}\n",p[2],policy.join(", "));
+        if p[0] == "read" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= true)", "= false)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 16);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("{true}", "{false}", 1),
+    )
+    .unwrap();
+    let changed = uorust::project_workspace(&dir, &opts).unwrap();
+    let changed_rows = frontier_rows(&changed, "lifted");
+    for mode in ["read", "make", "update"] {
+        let path = format!("applications::{mode}");
+        assert!(
+            !changed_rows
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&path)),
+            "changed source reused {path}"
+        );
+    }
+    let refreshed = uorust::mir::prove_bounded(
+        &dir,
+        &options("applications"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        4,
+    )
+    .unwrap();
+    assert_eq!(refreshed.proved, 3, "{refreshed:?}");
+    assert_eq!(refreshed.refused, 0);
+    assert!(refreshed.runs > 0);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-76: one structural boundary composes element codecs throughout containers.
 #[test]
 fn integer_carriers_compose_through_structures_ue_76() {

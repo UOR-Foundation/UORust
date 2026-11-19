@@ -1159,3 +1159,27 @@ checks passed. Generated self-model consistency is checked by the existing gate.
 Consumer coverage is measured separately by the guarded production campaign;
 these fixture results do not add to its lifted count. Full release acceptance,
 translator certification and consumer adoption remain open.
+
+## UE-77: explicit applications at every source signature arity
+
+The expanded carrier campaign stopped with LLT4001: a parameterless source
+callee was emitted as a bare local even though its declaration was present.
+A neutral regression reproduced the same failure before implementation. The
+common compiler call builder now emits an explicit SDK application for the
+empty argument list, as it already did for nonempty argument lists. Dependency
+registration and result/state representation checks remain in the same path.
+
+The actual SDK regression passed four native functions and 16 executable Rust
+comparisons for ordinary results, constructed fields and mutable final state,
+including zero and maximum-u8 loop counts. The SDK rejected a planted wrong
+result. Changing the source boolean definition made the three affected native
+functions unavailable under the old decisions and required three new actual
+SDK decisions; the independent numeric caller retained its original decision.
+The complete regression passed in 134.35 seconds.
+
+All 13 focused lowering tests, 16 CLI tests, conformance checks, strict Clippy,
+model/template/SDK-lock and generated self-model checks passed. Completed native
+decisions from the interrupted consumer run are retained for exact-input reuse.
+Its failed question acquired no verdict and is rerun only after this structural
+cause changes. Consumer coverage, full release acceptance, translator
+certification and consumer adoption remain separately measured and open.

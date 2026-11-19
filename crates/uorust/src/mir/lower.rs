@@ -6279,7 +6279,7 @@ impl Fun<'_, '_> {
                 );
             }
             let term = if passed.is_empty() {
-                c.name.clone()
+                format!("({})", c.name)
             } else {
                 format!("({} {})", c.name, passed.join(" "))
             };

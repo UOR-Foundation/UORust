@@ -97,6 +97,7 @@ model does not sanction.
 | `UE-74` | `build` | Native verification retains intact prior decisions when dependency contexts alternate, admitting a stored decision only at its exact original digest or rooted model binding and retaining its original status and observed axiom policy; changed dependencies and unverified contexts still require actual SDK decisions |
 | `UE-75` | `build` | Native signed word values cross source integer boundaries through balanced, content-bound compositions of pinned SDK bit operations, preserving fixed-width Rust values in source calls, constructors and mutable state; mismatched widths and unrelated carriers remain typed refusals |
 | `UE-76` | `build` | Admitted integer representation boundaries compose through products, lists, options, results and collection entries, preserving container shape, entry order and source state through shared structural helpers; incompatible element types and collection identities remain typed residue |
+| `UE-77` | `build` | Compiler calls materialize explicit SDK applications at every source signature arity, including parameterless dependencies in returned values, constructors and mutable state; original dependency bindings remain mandatory and changed source meanings require new SDK decisions |
 
 ## factory
 

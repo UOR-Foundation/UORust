@@ -536,3 +536,10 @@ Feature: engine
     When UORust composes admitted element codecs through the complete structural type
     Then the SDK agrees with Rust while preserving nested values and entry order
     But incompatible element models and collection identities remain refused
+
+  @UE-77 @build
+  Scenario: Parameterless source models remain applications at every compiler boundary
+    Given compiler calls returning values from admitted parameterless source definitions
+    When UORust materializes their calls through the common application boundary
+    Then the SDK agrees with Rust for returned values, constructed fields and mutable final state
+    But changed source meanings cannot reuse the previous native decisions
