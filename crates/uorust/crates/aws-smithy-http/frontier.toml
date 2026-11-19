@@ -1,0 +1,140 @@
+# The aws-smithy-http register (written by `uorust crate aws-smithy-http@0.64.3`; do not edit): every body of
+# aws-smithy-http's MIR at aws-smithy-http 0.64.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 45
+translated = 0
+residue = 45
+
+[module.endpoint]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.futures_stream_adapter]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.header]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.label]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.query]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.query_writer]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.urlencode]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 45
+embedded = 45
+evaluable = 45
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: QueryWriter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endpoint::error::InvalidEndpointError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EncodingStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endpoint::error::ResolveEndpointError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: query::Writer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::date_time::DateTimeFormatError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::HeaderMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: percent_encoding::AsciiSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: query_writer::QueryWriter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::endpoint::error::InvalidEndpointError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::body::SdkBody"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_stream_adapter::FuturesStreamCompatByteStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::request::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::response::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: label::EncodingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 1

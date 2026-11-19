@@ -1,0 +1,114 @@
+# The mockall register (written by `uorust crate mockall@0.15.0`; do not edit): every body of
+# mockall's MIR at mockall 0.15.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 55
+translated = 3
+residue = 52
+
+[module.crate]
+bodies = 55
+translated = 3
+residue = 52
+
+[embedding]
+bodies = 55
+embedded = 55
+evaluable = 55
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Times"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SeqHandle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SeqInner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: _T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Times::minimum: mockall's MIR stops at type outside the lift: TimesRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugPrint<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultReturner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Sequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn AnyExpectations"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeToInclusive<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1

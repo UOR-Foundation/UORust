@@ -1,0 +1,200 @@
+# The rust_decimal register (written by `uorust crate rust_decimal@1.43.0`; do not edit): every body of
+# rust_decimal's MIR at rust_decimal 1.43.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 334
+translated = 6
+residue = 328
+
+[module.arithmetic_impls]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.constants]
+bodies = 8
+translated = 3
+residue = 5
+
+[module.decimal]
+bodies = 175
+translated = 0
+residue = 175
+
+[module.error]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.ops]
+bodies = 83
+translated = 2
+residue = 81
+
+[module.serde]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.str]
+bodies = 19
+translated = 1
+residue = 18
+
+[embedding]
+bodies = 334
+embedded = 334
+evaluable = 334
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: decimal::Decimal"
+bodies = 149
+
+[[cause]]
+cause = "mir::Ty: Decimal"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Buf12"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: decimal::CalculationResult"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Buf16"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Buf24"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Dec64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ops::div::DivError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ops::div::DivResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: constants::MAX_SCALE_U32: mir::Operand::Constant: the constant item constants::MAX_SCALE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item constants::MAX_I32_SCALE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item constants::MAX_SCALE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ops::array::manage_add_by_internal: rust_decimal's MIR stops at type outside the lift: std::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ops::array::rescale: rust_decimal's MIR stops at mir::Operand::Constant: constants::MAX_SCALE_U32: mir::Operand::Constant: the constant item constants::MAX_SCALE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RoundingStrategy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayString<32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decimal::UnpackedDecimal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::common::Buf12"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: constants::U32_MASK: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: constants::WILL_OVERFLOW_U64: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item POWER"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item constants::SCALE_SHIFT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnpackedDecimal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decimal::RoundingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ops::common::Buf16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ops::common::Buf24"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ops::common::Dec64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 1

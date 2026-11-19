@@ -1,0 +1,263 @@
+[[fn]]
+path = "sqlx-core::query"
+kappa = "f640c3502546ceb817da034699cc1f1e9c19960513a9941220cece9389d61b11"
+at = "DB=u32"
+embedded = "c1305efe626c5d565c5b8f0f8c425c2adffe266468000f741089ff68f1ecef3e"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Map::fetch"
+kappa = "35959db5acdb7d9baabb3ecfb24549e1ca5ffeefbf9ca0c7afe4f20398974efb"
+at = "A=u32, DB=u32, E=u32, F=u32, O=u32"
+embedded = "7fefe9504f687fda9a5b1fa2c00800c38db5ee45ef6eb9604eaa98e5ce67a77a"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query::Map::fetch_all"
+kappa = "9d0104468a0a400eddda084d627f5092696559ab9676c055b72f9ebfaf9db385"
+at = "A=u32, DB=u32, E=u32, F=u32"
+embedded = "556b749c00be8faf617d392bdb45ac691b81d82d79146de65ea14cf38e66a1be"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Map<'_, u32, u32, u32>::fetch_all<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Map::fetch_many"
+kappa = "e7faa019e569d3146a3c4fe3f327ff26bc42315efc0821ffea69610a785cbb44"
+at = "DB=u32, O=u32"
+embedded = "dcdac32dada5c8c158a9ee8738454f4598f9e4000d2f04e2edcf0cea572a10b3"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query::Map::fetch_one"
+kappa = "d91cf137c64d9bff96a9bbaef639c2e09f26d96734ad07396fccd7dceec92491"
+at = "A=u32, DB=u32, E=u32, F=u32"
+embedded = "7be99ef3e1bbef8814fef2d88538de2468703d8da228ad2aeb809dd1b763146c"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Map<'_, u32, u32, u32>::fetch_one<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Map::fetch_optional"
+kappa = "5e99e4ae34a718d14f1b6861a9672e8bd8d5c1f117bfd557cfe86f567c1834db"
+at = "A=u32, DB=u32, E=u32, F=u32"
+embedded = "b56dca66c7d64875ce3c168aff386e5b32202723bbac0e9edc0429e5b51f5ba0"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Map<'_, u32, u32, u32>::fetch_optional<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Map::map"
+kappa = "14ca698726a16e62be70b293165b936e202ccf233efc8658f4fe3817860cd438"
+at = "A=u32, DB=u32, F=u32"
+embedded = "6a3d3a462593418b4b64190092ea6a8a21352f2e4c099399fe3575bff133c64a"
+status = "residue"
+cause = "mir::Ty: query::Map<'_, u32, {closure@src/query.rs:368:21: 368:31}, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Map::persistent"
+kappa = "8bee1cc7c24f9a0152aa416f4818ff8d9987609fb18b42052eaaeeb02c790ec1"
+at = "A=u32"
+embedded = "c1895bf9193d23d67614e8ee13894ef52b60378cac45c1ebe7ff6abdd60db98c"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::query::Map::sql"
+kappa = "3a7ec0dbfb951c94b180d7243641e2ed3edbc38770f818c6f96a7ef14888a05d"
+at = "A=u32, DB=u32"
+embedded = "f804e85df204e92a2c4147bb6ee430d67096a03e8144c4b1081286d83df54432"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::query::Map::statement"
+kappa = "468dca10638521ed715cfe13e74936161b1c510006c09df61b0dcfd9afd7d605"
+at = "A=u32, DB=u32"
+embedded = "0066302d16a8132aee7ae12a587288601a63a2930601be36dea2be91bf5d2146"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "sqlx-core::query::Map::take_arguments"
+kappa = "f7ed754faab6abf1f4ae69f04c7a83109a25890e7ba3eb3627654d9470ac24ef"
+at = "A=u32, DB=u32"
+embedded = "855d816a1d7f8c434694cabd8b3b0a98c359b9f6c8d715936a44340bac30c0f9"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::query::Map::try_map"
+kappa = "c38f390305447cacbf51885eae9a9141a9ac414b970ea1e154370f54a1a15e56"
+at = "A=u32, DB=u32, F=u32"
+embedded = "29c12861e9ae566f04c005bce53bc2ded62e1862348e20cb47e5308c2f2deea6"
+status = "residue"
+cause = "mir::Ty: query::Map<'_, u32, {closure@src/query.rs:368:21: 368:31}, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Query::bind"
+kappa = "51c91ea75518e8756ec001ee0d58a43f85725222bfc9291fff95cb46633d99d1"
+at = "DB=u32, T=u32"
+embedded = "8d0c76ef995af3717bc1913f9f2f7cdc969c693fa5237659e54734e7c95dcd2a"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Query::execute"
+kappa = "176c2e3c24310edbfa698a4e6b34789fda56e2b94dab31c3583691bf2bc5fc7a"
+at = "A=u32, DB=u32, E=u32"
+embedded = "8c71a138db38814b7c9cfe9ad8baf58d99442bde265ef21f3af211542558cd6c"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Query<'_, u32, u32>::execute<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Query::execute_many"
+kappa = "dd32a68582ae651c373f1132ef9bbac079b2326f3e5fb7a927a0340697c9c9a1"
+at = "A=u32, DB=u32, E=u32"
+embedded = "45c20c8c64991e49c0fc3faf59d53117634f0d99957b12815a86756ef5526944"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Query<'_, u32, u32>::execute_many<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Query::fetch"
+kappa = "914e83c8e9db902d727fe56e787d9f5c71d4f74ac0cf57033c0d2a8e798a8ac4"
+at = "A=u32, DB=u32, E=u32"
+embedded = "2572a867907b2f5312b6fe84174ea3677a3777205629940beba9b189d9afd3cf"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query::Query::fetch_all"
+kappa = "29a5017f5a39b96febcd962562f1c2402751afa035d32adf8c9ab6116a0c54e5"
+at = "A=u32, DB=u32, E=u32"
+embedded = "6f66067e0ce93ee1074c04aa4ee054368e5d95b4c0facc3e1660d88e7c24825c"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Query<'_, u32, u32>::fetch_all<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Query::fetch_many"
+kappa = "7838f26b8b481614d3f9fc265b553112fc64796bb10d4c935e4b895f683b1d01"
+at = "A=u32, DB=u32, E=u32"
+embedded = "dbdd562a26e261288d5073e08ed3acfaf7709db83492587ff90515077ae85321"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query::Query::fetch_one"
+kappa = "760f711628f3afefc9dae4c9099ba97766f3f97ed2ee66992c2c32ad8a601f75"
+at = "A=u32, DB=u32, E=u32"
+embedded = "ff881b28cfacb89e4a980922ff6d23928c5ee22b9ec95c1733f68ef5e4097b95"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Query<'_, u32, u32>::fetch_one<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Query::fetch_optional"
+kappa = "7b7c22be477267c7a6803fdaa1486b8ae1a159623e72e0d9d3706b00cc1c3a76"
+at = "A=u32, DB=u32, E=u32"
+embedded = "e29ee19306b419fe1ac9d9e761e3c7ddb020135ad08d97296440e7ef1350deef"
+status = "residue"
+cause = "mir::Ty: {async fn body of query::Query<'_, u32, u32>::fetch_optional<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query::Query::get_arguments"
+kappa = "d29eb72b452a20865ea4670b427c9e645c4e569057b4f8aa7b49408c5f41e5f1"
+at = "DB=u32"
+embedded = "afb7620f48cded25439c07ad324eb453c5d768aff9c88d35ca9e9475782ed73c"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::query::Query::map"
+kappa = "a19bdb81813bdf344127b67e17782005e12ae857b5ea9e1a990712f070125ffe"
+at = "A=u32, DB=u32"
+embedded = "e09349188eebc33de71e4174c728b4462176601c6c15e87be4b14acb7785e2db"
+status = "residue"
+cause = "mir::Ty: query::Map<'_, u32, {closure@src/query.rs:164:22: 164:32}, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Query::persistent"
+kappa = "d1983b402ec3aa71ee12bd9f17d929f1dd619095c7b3a844ac921017ba717674"
+embedded = "6d42eac177dc69285b7f2bbe6b608cddb66882790a2adc691e182be94bf037c6"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::query::Query::persistent#2"
+kappa = "8e22739c1ec741212e9d0db83a07f0432eb20fb21b606e0823a6dabd161fc114"
+at = "A=u32, DB=u32"
+embedded = "d088ad5b889fa15669f936a52ed9e87d76f9ba82a93e5e43cb82aa9d692c5052"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query::Query::sql"
+kappa = "c1ae4df2ae8443fadb38e6978b4ef537e4a1c8fc5f4a54a3103f465e19018d5b"
+at = "DB=u32"
+embedded = "a3c1bdc12cd80966989e24c7a837e8d1936ceb955ff32ac69b2e1ad06ec98fb1"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::query::Query::statement"
+kappa = "8fdbb24c76a8b709ce721c7c476243be611e5cf6b890d33d10d3b980d58520fe"
+at = "DB=u32"
+embedded = "7390cf007ae79ab66d4a1b6438fc885119ac99c350658debb8b6e92f5b237117"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "sqlx-core::query::Query::take_arguments"
+kappa = "8a5f3fa7afee755eddf5bcb542b085c5248699487e704c4627da325ac92792a7"
+at = "A=u32, DB=u32"
+embedded = "4f2816ed033896c04eb4a81828b89e146c3d6c8b6492f35b9c29807d5484aad5"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::query::Query::try_bind"
+kappa = "297dd37bf9d391dc266c24c73fbb18887b912f869ec4c7196eb75cbfe40caa21"
+at = "DB=u32, T=u32"
+embedded = "c2b8f4f65d8dab444da29c0394293d81400b5173c90950a0e23b583ed65bc136"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::query::Query::try_map"
+kappa = "7019bba3cae08d3e1c00a23f55b36ffe57b38dbda24cfc2b1c92ee8156b9b2ae"
+at = "A=u32, DB=u32, F=u32"
+embedded = "e7ec8b7e26ef0130fa3960af70eb995af77cb87277a9ea0e4b1a41825bac9750"
+status = "residue"
+cause = "mir::Ty: query::Map<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_statement"
+kappa = "02565a4fa30e8829d068b0dacfaf37071270b8d1fba84dd4ce170e4d6e6a8c47"
+at = "DB=u32"
+embedded = "7934e07316ff2eef14ed23295d20091d0edad028f97c80b50d2dd0c24ba62edc"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_statement_with"
+kappa = "f9c7d7f3351ac0c0b7ff38849eeaeee296fe87a5b17c060895eb2e2b5e9222f3"
+at = "A=u32, DB=u32"
+embedded = "a8a66e324bcfa205baef7282b84e8e8fb3c10104a0a4843adaaf99ed5b2c2326"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_with"
+kappa = "095d7bdb172d411aca2407284864ce62b946a7388140e231977d696ac228d42d"
+at = "A=u32, DB=u32"
+embedded = "226c1048ef6013987fe57f468a083e4949657029604d3c25b86787022f751004"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_with_result"
+kappa = "377a62d6fe7ec7d8d96629a864bdf4db05c69ba157b03356e6d559d48297a2d1"
+at = "A=u32, DB=u32"
+embedded = "f0499f24acda6cb35e6b3b12db3bd86bc007ff5d0a491264be1e2205beb3c075"
+status = "residue"
+cause = "mir::Ty: query::Query<'_, u32, u32>"
+

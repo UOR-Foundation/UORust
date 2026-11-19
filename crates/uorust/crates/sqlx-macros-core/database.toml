@@ -1,0 +1,38 @@
+[[fn]]
+path = "sqlx-macros-core::DatabaseExt::db_path"
+kappa = "cd4873165f60060ab1122bebcbc80d7d18e5dc17be553f8eac06eae9bbd1576e"
+embedded = "3d9709ae1de2c47125f2022220dec1326f90995edd1b871a86a7700a1e28d2a1"
+status = "residue"
+cause = "mir::Ty: syn::Path"
+
+[[fn]]
+path = "sqlx-macros-core::DatabaseExt::prepare_describe_connection"
+kappa = "9fe082d2340f21927ffbdd0ebe3f490cf6975a1b1a0b3eef9437d80d45412ce7"
+at = "Self=u32"
+embedded = "19a80b91293d11ebc53eabc4680ec5543ef8a7063022e5f909e4a59b7d5798fc"
+status = "residue"
+cause = "mir::Ty: {async fn body of <u32 as database::DatabaseExt>::prepare_describe_connection()}"
+
+[[fn]]
+path = "sqlx-macros-core::DatabaseExt::row_path"
+kappa = "15aa3ce06aa98fd7a104cdf7b982a9829a067bc50a9c702964855842fd1d5021"
+embedded = "a71035098198d39778d26f5b03bf71d9599f5f64d911ac83c31507d0289d940f"
+status = "residue"
+cause = "mir::Ty: syn::Path"
+
+[[fn]]
+path = "sqlx-macros-core::database::CachingDescribeBlocking::describe"
+kappa = "8d50e79b0eb6132263ab9a66570b3ab6571c62669b8cd3e7bd32becd6bba6812"
+at = "DB=u32"
+embedded = "354c3c74b7389d398c607227aa8094ae0f0e5934560157c7d4fd0114226d3de1"
+status = "residue"
+cause = "mir::Ty: sqlx_core::describe::Describe<u32>"
+
+[[fn]]
+path = "sqlx-macros-core::database::CachingDescribeBlocking::new"
+kappa = "86ad700589a7ce4d653f911ac1a44928152e0e5712cbf5724eef343f00331420"
+at = "DB=u32"
+embedded = "04388cc8328f34db8dc37227d55fc09c6c03e9079779c3e7180e13d09acfa0f8"
+status = "residue"
+cause = "mir::Ty: database::CachingDescribeBlocking<u32>"
+

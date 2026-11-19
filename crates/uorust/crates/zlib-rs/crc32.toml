@@ -1,0 +1,326 @@
+[[fn]]
+path = "zlib-rs::CRC_MASK1"
+kappa = "fc3cbc911097933179ea0bdee8016d370cc034e64263250ec7232c1c98421b76"
+embedded = "a21639b5aeabcbbd1c705869a6984fbd2491cf1cc29ff217d2ab5708c736aba2"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::CRC_MASK2"
+kappa = "6df803a1df1bf303ea4ec3b6083aaad29be480aae5c13ecb972637ab360ecb23"
+embedded = "0a86f6a9cc20bcaf6d0a35f487888fbcf22e6a17b5d997c02985bf3c63808779"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::PSHUFB_SHF_TABLE"
+kappa = "da2b9a57f60e3142f54e77f054bc2d8e904108ff8846242ac823dc7c06f1dcdf"
+embedded = "d51170250a21c4072fd485b632d1c9c359b4f99236e458273aae1e0e0e0bb3c9"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::RK1_RK2"
+kappa = "047546cc0d02be416be348c471af8cb9210fa363728764676d669045a5e964a3"
+embedded = "d0322c40787a8c1eb45b410f71c895c7eb1eb8e77fbefa822300b036d6af54f7"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::RK5_RK6"
+kappa = "9652af394169c1a849194f45539f7753c775fd699593c12d1199dd158ed00ce1"
+embedded = "6e15b69782caca3a54d02647bebfe7725d03e2b496abb2d4aa2128da7b093145"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::RK7_RK8"
+kappa = "fafee18ae86c2d554dcaa15563500adf24535662c43c2094ec4c39d191297e82"
+embedded = "21395744f325310b32e2e1d850a9b3d81f2304d3d4941c78d88999356c740284"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::W"
+kappa = "a5723812c70687f95ba411345a5dc61e18dd0b8c4d2743cd902d363f07d1532d"
+embedded = "620d0d0d32d2324b76ea66c3828519707603b2b87991e33002914c7f5043260e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zlib-rs::X2N_TABLE"
+kappa = "8559ac8815e8c3a9c530ea43b3e9aea9a3636cc044bc371b74b7686535a29901"
+embedded = "8ecb4d4b4d0226010e5d5322765350d389c1cb0278e90bd977334c92d24d1715"
+status = "translated"
+digest = "38de835f4e0c3cc29c7823fe3b21c4aa67e7724b3b318efd7ea330c5a65a30f1"
+
+[[fn]]
+path = "zlib-rs::braid::Crc32BraidTable::TABLE"
+kappa = "93fb78e5da136fc9e27716b2d09c9dffd781aeabbe2e2da0766b6aa4979b8692"
+embedded = "f534788383a71c0387f64dfad64d4eb0a28b93dd0c2e022fdc59c6bde9a237b8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::braid::build_crc32_table: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::braid::_"
+kappa = "ce0157851951d29ccf89535ae1c762c1aa7dbdf7eb42422d98f1b84d09846474"
+embedded = "51c2878b37e25a6461399e16931cd92241592af183d2c46fe4e249142b84f1b3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zlib-rs::braid::crc32_braid"
+kappa = "f1a6a487fd335f95c20a6ef7bc5859f91a3a8ddd178a58570d870d97bfb15312"
+at = "N=#_N"
+embedded = "bcca4a167de131d30dcf2ca7db0e9a76775d60ff1d811f7e408b224c7d045024"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::braid::get_crc_table"
+kappa = "7858dff34553e9f060ca88790ca23fb14f1a79449fc6b4225895a9d323e07f8b"
+embedded = "727a4f6cd19163b5e31f777ad9058c8d5023ae101a4702e08102c018820a8a39"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc62: &[[u32; 256]; 1]}"
+
+[[fn]]
+path = "zlib-rs::braid_core"
+kappa = "6f6ad503ddc25674bf702bc6d88e46ff1952b87ac917c35cbe6b54634910cfae"
+embedded = "faa827892157e74f5af1f0cf92a3237562ba2832b97c3243cd786f4a43ce88e8"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "zlib-rs::build_crc32_table"
+kappa = "4288727e41a21579820fc943aaed659995a39437fbe353dc590c1141951f3828"
+at = "A=#_A, W=#_W"
+embedded = "5cac0d130aab4cc5dca414e89c301bd262052eb99aed4e2ffe0fc577be7f6c7d"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::crc32"
+kappa = "255587c8e58085952b8365a571de61f86a6f04cf2e6b734279111bfeaf82beb1"
+embedded = "f8e502f7ef6c0d8248b9d01e6d6b7fcc4ae40fa1d4bc56c33bd981b40fa81f99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::braid::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::crc32::<impl at src/crc32.rs:48:10: 48:15>::fmt"
+kappa = "528b1544dcae83ebbc8168960f87320724b0473c0d4eba86ec74c8be211cb0eb"
+embedded = "c061ee2a5ce141ba98a1a2b4ea8f0b1e38fa10d887e89688dc6bc475df1425ad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::crc32::<impl at src/crc32.rs:48:17: 48:22>::clone"
+kappa = "e094397e9d12ae94e4100befa6f05e24dd1eae375668a3b757d939d1d0b6ee64"
+embedded = "4af77bfcb8c6cc861c11d5b14b2e65c4935f17cd6e24a0d9935fa74c0ae1ff75"
+status = "residue"
+cause = "mir::Ty: crc32::Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::default"
+kappa = "eb628eaeb72b1897678ede2369338d8245597da55903d069502e3baaeb241597"
+embedded = "286b46cd908382fdf8da6089885d4dcbbe31f6d9357f1a6118a5e8c4d497cdc9"
+status = "residue"
+cause = "mir::Ty: crc32::Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::finish"
+kappa = "70774ae2a1a81e908dec3dfdffb699387aac88b03e8bbd582c53d9988f835289"
+embedded = "1200a03069bbde48f73dab8468067c0be39ad2c796c2b944d44a543d0bb8c905"
+status = "residue"
+cause = "mir::Ty: Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::fold"
+kappa = "3655cbe76ea71f741a9a1ac00c854099c63512a5bb2ef070f5157a61f8c0f5c7"
+embedded = "e46e22cc2286e4ef5253ac993273e18d13c6539025f2d5620499940f22eddddb"
+status = "residue"
+cause = "mir::Ty: Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::fold_copy"
+kappa = "d24ae80249004a5b35a6304358936ece9cc79ef13354d7cf2ac2e82c986f5da9"
+embedded = "8cda0d1e7936471a54025ec34cb8e24076baa7a50d312190b26f62834dd43b2a"
+status = "residue"
+cause = "mir::Ty: Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::new"
+kappa = "71de05dbd2176cd1179b3c6a8dc332e6315ba3f6937d547395c230e486b2d47f"
+embedded = "1c4800f6f18779753301a6fd14551adfddd15d662862ab6afd8c5f68293cebb0"
+status = "residue"
+cause = "mir::Ty: crc32::Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::Crc32Fold::new_with_initial"
+kappa = "595f77a02763bd98fa541ac4a1162758bef621b21199fa16e26ac6eb141c1c59"
+embedded = "f0f4fcc29db74b9e1595c927d9606b049e7ceef0d09304b759b764779c742e73"
+status = "residue"
+cause = "mir::Ty: crc32::Crc32Fold"
+
+[[fn]]
+path = "zlib-rs::crc32::crc32_braid"
+kappa = "1a5fdf5be41bf963c8500e91da0232c376a2734e8e912c5c6867d3a7ea8caf28"
+embedded = "bf6612dc1bc631e24bf96ac2938116de25c448ab394a127cc43e349647371e48"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::braid::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::crc32::get_crc_table"
+kappa = "062736c7f342cb61027b4d03c9d7b90d8ee7df26ead50fc9f9d9424b6274fcfc"
+embedded = "1c78361112b7ca2621698dd93d7e8b40251044d2ba8b0c505849b5033ad6c52c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::braid::get_crc_table: zlib-rs's MIR stops at mir::Operand::Constant: {alloc62: &[[u32; 256]; 1]}"
+
+[[fn]]
+path = "zlib-rs::crc32_combine"
+kappa = "f0f5950dfad083bbb80c918a7cd46a9fbbf7a29384013d1d5d635acc41f505ad"
+embedded = "4340ccc1214d73e0b4178ca1c9967cd1860535acdb7fd541c3471b438abc6d98"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::combine::crc32_combine_gen: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::x2nmodp: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "zlib-rs::crc32_combine_gen"
+kappa = "055efad02e9a11db31d81325bbcbb0d73aea318975170904b07479771e100933"
+embedded = "2f66003f61921a54c7353c29e153a72ef5c0e90c0ab3a0743065a1a9df7c1dfc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::combine::x2nmodp: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "zlib-rs::crc32_combine_op"
+kappa = "21083d0b5dbe8e53231b3d246a2e385b54209e156e66c2ec22a95fc049320189"
+embedded = "db267c50a0ea29da7474486c76d1f901eb3e95a64d8a99d76424fa9cf4f39a1b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "zlib-rs::crc32_naive_inner"
+kappa = "66c3371ccd8deb97a191800934d260fc16658a54e39a23051a4782c930d69259"
+embedded = "695d17ead987bd3687410fa88a617c3b3aa40af58b0a97e198cbb4a475a362e5"
+status = "residue"
+cause = "mir::AggregateKind::Closure: crc32_naive_inner::{closure#0}: mir::TerminatorKind::Call: core::num::<impl u32>::to_le_bytes"
+
+[[fn]]
+path = "zlib-rs::crc32_words_inner"
+kappa = "c55ec2bf5cde52eb237db3551942d46b4f0310632ed967b0e65fb2cd6507409d"
+embedded = "0f1541cbf91d613e2cd29f6fe3a64b7c8efc4d4027a0170defbaaa48bcada0e1"
+status = "residue"
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_, usize>>"
+
+[[fn]]
+path = "zlib-rs::multmodp"
+kappa = "7a23152fc45c799851b7efe4fce69468b31580c7d6147108f685b19b75d3e08f"
+embedded = "1550fac6229b2fe18a152c7e7b869ba0267b9e011a2899577572430eb3b6e987"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::<impl at src/crc32/pclmulqdq.rs:23:10: 23:15>::fmt"
+kappa = "31fc5157236d8fdfeeb1fce4002bb83297a46d861789c3bcb1613253a94df092"
+embedded = "17b90e624323084140023f9f007eec25565ec262c04a951704ebe7f524afe8bc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::<impl at src/crc32/pclmulqdq.rs:23:17: 23:22>::clone"
+kappa = "a36b52a1a803dc6a3192d9d1e03855cb17a96c060defef062a0798863e824a4d"
+embedded = "1189b3a00656a288e3e23fe7c6d1806b705662508d416338f97c421b1fb8df0a"
+status = "residue"
+cause = "mir::Ty: crc32::pclmulqdq::Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::<impl at src/crc32/pclmulqdq.rs:9:10: 9:15>::fmt"
+kappa = "53089153af87e71cfb27c3b0b2c78c9b0beba31b844172bef428edc9eedd1085"
+at = "T=u32"
+embedded = "2945c2eadc66263a3cde01c7ff44e22b47b4dfbd2f793de912ef15b7de2c2195"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::XMM_FOLD4"
+kappa = "d85f5ba37c47d4adb57e212bf9d2f657b1256657308ceabdc958f026a9711a1f"
+embedded = "7ea8324b5a32975217e8114fc23f0ae62b01c3e219be66df295f10efb93264a0"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::finish"
+kappa = "0ef1a5ee02a157b34f899f8fc6450464a7ccc9dec1ee8f54fb149914c8ce3875"
+embedded = "106b32d3f06b6976442f3f98ae72cf3d9af977d9d6e41bf0e91122fe77b1827c"
+status = "residue"
+cause = "mir::Ty: Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::fold"
+kappa = "b81eef66d986612996dc0f3808127a8ccadffee8bba09bcfcc47d2d8cb8dcf68"
+embedded = "1cfcb303e318544b6dc3983502d14e8ad61791810a46071ba85b56d15b3965ed"
+status = "residue"
+cause = "mir::Ty: Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::fold_copy"
+kappa = "a4984f31ec6ddb3e9cf9e751a63aeea87378586f46665736bfaefa597d3bb13b"
+embedded = "0160cd9e55f0ecd757a900bd1d519ac20f28a10bf629a6f65dec9c5095d4fa91"
+status = "residue"
+cause = "mir::Ty: Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::fold_help"
+kappa = "9d6e5c888425f4351f0f1093d28043fa3aca65b696fe35c87a988a55ec33f886"
+embedded = "2ea9f297bcc76aa3a9c5c2e10cb53f8549934a39ccc39bed588098496f00402f"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::fold_step"
+kappa = "03b344eac2745724e2a9dbf3b9e8c492f34514f13a54fa72929fd60166b83109"
+embedded = "d30757d3cefe1f997cb930060d8db116521cad4312f8a14b56c62c3105bde2ea"
+status = "residue"
+cause = "mir::Ty: Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::new"
+kappa = "8e5f76e583465792d6a9f96547e26c64033afe58a829da13f93d95a3fd5a4415"
+embedded = "72938394af4400d875c3016484b2e549adeefde197cea545955484219f2f2dce"
+status = "residue"
+cause = "mir::Ty: crc32::pclmulqdq::Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::partial_fold"
+kappa = "6ef7d99d5d29946741c0eed4b22e1d0bfb35590471329af7a0584bb9c33382cc"
+embedded = "14b0517d0d1b9e04d09fcc0a24ceb13c42e34d07c4e1ae422bb79b5b84aca08f"
+status = "residue"
+cause = "mir::Ty: Accumulator"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::progress"
+kappa = "bab5d86356ef3d66367767c2bb815cba90d1f740861b51aec13c61405bc862ee"
+at = "N=#_N"
+embedded = "0bd42f3498135f9923f8bd272a104554aecfa5531bf23f336b167ff97366dd5a"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::pclmulqdq::Accumulator::step"
+kappa = "e78d6ee056bf1572d5a44b9f58885c415b46f69cf00a550e349763c6f16ae31a"
+embedded = "81c11dc85c72bb8b8be384a402fefbc89b7e7185579412f4f1a75c2a40776cdb"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::reg"
+kappa = "ed54528145ab315da198080c808d0d6d46d4d89544007477abe313ebfa28cec6"
+embedded = "227080c700ceebeab4864d6d54ebd188cd15da6e5b13233ebe74b89df74a02a3"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "zlib-rs::x2nmodp"
+kappa = "86aac1017e3417820ae10979cb71d94dfc33b1a12c1bc5421cdfc7950fd0a8a1"
+embedded = "b91dacbd3c09816cbf092cb1d0d6fd0a10615b401d7a4fe68f07adfcc0c87f50"
+status = "residue"
+cause = "mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+

@@ -1,0 +1,130 @@
+# The futures-timer register (written by `uorust crate futures-timer@3.0.4`; do not edit): every body of
+# futures-timer's MIR at futures-timer 3.0.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 67
+translated = 0
+residue = 67
+
+[module.native]
+bodies = 67
+translated = 0
+residue = 67
+
+[embedding]
+bodies = 67
+embedded = 67
+evaluable = 67
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Timer"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Heap<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: native::timer::TimerHandle"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Delay"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HeapTimer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: native::arc_list::ArcList<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::thread::Thread"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ArcList<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HelperThread"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::arc_list::Node<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::atomic_waker::AtomicWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::delay::Delay"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::timer::SetDefaultError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::timer::Timer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Waker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Node<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SlabSlot<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimerHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: native::global::HelperThread"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: native::heap::Heap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: native::heap::Slot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::RawWaker"
+bodies = 1

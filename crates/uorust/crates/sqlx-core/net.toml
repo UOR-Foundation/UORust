@@ -1,0 +1,623 @@
+[[fn]]
+path = "sqlx-core::Socket::flush"
+kappa = "6c8c44a3a405f03435c89381febe1df7008c1f71d91539e0124dad72a1ea95c9"
+at = "Self=u32"
+embedded = "42de99a921c259fc7ee6df33d976e7718a89a8bdbdd152b7fa18ee92a07bbb89"
+status = "residue"
+cause = "mir::Ty: net::socket::Flush<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::Socket::poll_flush"
+kappa = "6b186c9c8ee356739b1507757a53c2ebe71bb16ac365bb3f8de7c5c242c80c3d"
+embedded = "5ad0f05b80bb83f2413fe478832349b4f34d64344994ffdf5ff36003fd4a5a2a"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::Socket::read"
+kappa = "300e463ba0195d7c882800e2a21b5fb99a7412b00f44320e1d31b375fa4a1fb2"
+at = "B=u32, Self=u32"
+embedded = "501655d3901f83b4f301fe776301da9f12a211a403deaf9b476f61c3f41cff9b"
+status = "residue"
+cause = "mir::Ty: net::socket::Read<'_, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::Socket::shutdown"
+kappa = "39452f68385619a55bd821a98f4151f74919cc6c76e96ac2702f3e831c62c971"
+at = "Self=u32"
+embedded = "109df2bdaec3cdfb4a8ca09304ec55dced89cf6cb71e8c86627aea16e72b70ec"
+status = "residue"
+cause = "mir::Ty: net::socket::Shutdown<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::Socket::write"
+kappa = "2a57840822b60643e5ce4a2a077c34097c844e22e9eb26750d9351f3765b831a"
+at = "Self=u32"
+embedded = "3916d6fa149d750aa84ce5f4ce805c01cb4b8a0a63e8a1dc97ac2382992bf7a2"
+status = "residue"
+cause = "mir::Ty: net::socket::Write<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::available"
+kappa = "fdf0c304f5f1617137d9c885300a2d8c7c853a06e20c7edd49acf822d061965c"
+embedded = "a32b4add310e66ce30e9dc86b807a363108d9e5f4f51c19c174a84cab8252471"
+status = "translated"
+digest = "207270a602ca1ecccf92d22dca6aa2ca2873464a1b2b8195005ca6385a2d153d"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::boxed"
+kappa = "5148115330deea6f617872c87b28744e985686653312ecd826ceafab9d4f52da"
+at = "S=u32"
+embedded = "8af200d55f983cb0082584334892ae45f783bbb792c2cf85c82ed659c16b8fb7"
+status = "residue"
+cause = "mir::Ty: dyn net::socket::Socket"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::flush"
+kappa = "277af59b007ab09a4e36f823df403364df65aa25bb8fd0a4f9221a3a4914abba"
+at = "S=u32"
+embedded = "8d7a2f8481886f0793c73d98352a62fdf71a48aad0692b4728b613400155f4a4"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::flush()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::into_inner"
+kappa = "37208050583251165fb16668519824d193910fe605c0d8f10bd20baee572cb8e"
+at = "S=u32"
+embedded = "4d49a4e0bf4d2b2031b3743c36c1861c1ba924b3658c78ba496ce2fc500af5f0"
+status = "residue"
+cause = "mir::Ty: BufferedSocket<u32>"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::new"
+kappa = "1385378042661e30b5bba29fc627d6c96e81874d31d5950791d9afcfc1c7b0aa"
+at = "S=u32"
+embedded = "47550dd1cbabcd5f33ebd8a27ae17184a0c81e0d8556aed0c8297ab73f652145"
+status = "residue"
+cause = "mir::Ty: net::socket::buffered::BufferedSocket<u32>"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::read"
+kappa = "ebc7a087ebfc6410509c300fc7a8d120a64a4f4b1ef739596a70313d2dbd7696"
+at = "S=u32, T=u32"
+embedded = "e948b0735c16a23fa511cde53972870bb25c610c48e4de8ae38d7e5d3aab2f30"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read<'_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::read_buffered"
+kappa = "43ef86e95a17cd8bd2b57fe57df6beebea857dbcec235ee48ccc9ce364845ea6"
+at = "S=u32"
+embedded = "4118682a45e2c347b4b4659cc6b386638dd781ace8d1e7ab02a468f7ec89fd95"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read_buffered()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::read_with"
+kappa = "2ac9b633ca5602319399d05406fdeae81d526b5c7acf0610a5ed86683b3efc29"
+at = "C=u32, S=u32, T=u32"
+embedded = "b0e9bd9e676ac9dc8dfe1679d9a83a4417f4fa19a23f3a4f435a50c97c38becb"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read_with<'_, u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::shrink_buffers"
+kappa = "4ec0be8fa28d48323b62ede7facd941d2b834fecbe5f9ae1f96693fbeb74a73b"
+embedded = "168d6abd3e4b45cf416900124d26326a237edb20650d4121fa1ef3b30ce021f3"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::shutdown"
+kappa = "c678d9333e82822d00b032d65fde56b580778c342956a8c9da49ec8d680e61b5"
+at = "S=u32"
+embedded = "8e3b8010ffbd70ca6e8f9895429f8ddd34c481fc4ba44057eacea9d08650d639"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::shutdown()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::try_read"
+kappa = "fc5cc25d2a866eaab5ed515ea0feb31beca4a27f5134d4cd2c4264dce47a204f"
+at = "F=u32, R=u32, S=u32"
+embedded = "b1f6f5d51f863be7a0e01884dc4c2493823667aba38aeefb33a2d0f0b9467ae7"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::try_read<u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::write"
+kappa = "c7dc4f6d5482bd32f4ca807312b2c6d7358124446c771b9b1071b77ac58d90a7"
+at = "S=u32, T=u32"
+embedded = "b7d50c54dba90d645bfcc94ec0c100239bae2c4699b0f970678eb681f0eac528"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::write_buffer"
+kappa = "643acd67c3549933a88e4d31edc7a34aec0a9bc9862ef45ecb8a6cc878fe4e6c"
+embedded = "a6a80bf0b322e1fcd8ff7dc36a92b80ea42a2eb62b91a6ce1598efe98a7775cf"
+status = "residue"
+cause = "mir::Ty: net::socket::buffered::WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::write_buffer_mut"
+kappa = "52efdb8d5ce5604fc42912341da26fb1c470060847848c3c69eb00072526f929"
+embedded = "877ddf94244eaeaa8acc8098993161c81c1003bef8c671a206db70309c8b35c5"
+status = "residue"
+cause = "mir::Ty: net::socket::buffered::WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::BufferedSocket::write_with"
+kappa = "b65439c27a08bacbecabd8ba725718576570f8b583ed561cb4db7de76dc60c11"
+at = "C=u32, T=u32"
+embedded = "cac889c773fcb57eda7b268f7320878f5778f76080851aa770e0f9429ebef1a3"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "sqlx-core::buffered::ReadBuffer::advance"
+kappa = "00b686a396ee11897d21a1c47f92b0660a50a8b4324b58da04c63390fa60f388"
+embedded = "3559db35fe876e9808197bf9c65bfa8b09a98330d7f0f56f96e00dfda772798c"
+status = "residue"
+cause = "mir::Ty: ReadBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::ReadBuffer::read"
+kappa = "5869523d3553313648645f8e72d5a6992aefdc45470e604cb221aa96f885acdf"
+embedded = "0db9f95e634c7cc4221aac06818a7d09f3943459a47827878c75cc6214828f52"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::ReadBuffer::read<impl Socket>()}"
+
+[[fn]]
+path = "sqlx-core::buffered::ReadBuffer::reserve"
+kappa = "36178a06af803d2347414936f1ab8601411a971bcef74d97ec6dc625fd3e7752"
+embedded = "5b6742f8935efef84669f280653c182696cff0a37a134f13af30723f3870c629"
+status = "residue"
+cause = "mir::Ty: ReadBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::ReadBuffer::shrink"
+kappa = "ffb86cddfdb32d3e13e9668eda34134d7e5174ebbc8e3e3c2138cf3bf250219a"
+embedded = "4c7e60838425e14ef27730e6bef2109f4f09deadf6f4da052633247af6e4e14f"
+status = "residue"
+cause = "mir::Ty: ReadBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::advance"
+kappa = "79d47296347d80fff41000efd86a86f5f778235a029c81c1daf849beda84168c"
+embedded = "409d1edae51b71960dc60286608dc0d54fc43beca81ffc618a88f96df6383972"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::buf_mut"
+kappa = "6a96f37c8294079c6fad2623e8ce0656d104067d9b7fcdebec25b905710b6f60"
+embedded = "b5377afe78499111cec4bc065f7a267de456b11ab5554529fc06a744d4e3c8f7"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::consume"
+kappa = "f290c9ab1dff0776eacb167f91023a54354b09342e4701e07e869a20e23229e5"
+embedded = "a9fb1811fb3efb2af55e921d9a216f169f8b9158f0da486e3595af7c4d485993"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::get"
+kappa = "511d374c2e8f15ef4ecf05aec7b449b0e6a1e2f41823059de4857e30746c9322"
+embedded = "74397b97df79347dc3a1571b94aa04e38ea304e2604398211cdf53d2229a37c3"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::get_mut"
+kappa = "150d5ee3a0a64317c8ef52708b5dfa22c8f73dabca9f591af5b18be25ba109fa"
+embedded = "58381557476663711156dcf1b4e6323c4f6bf32cc6a26ee59aaa40abadda7d40"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::init_remaining_mut"
+kappa = "5124ca015a545cb12985b0ac8ea723f71d883ca7c33a2b7f494d8749d6c42f64"
+embedded = "72b5ebf4760354db3a06bf25ea84b36f6188eaeca4f62ce8c48842e844cdd856"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::is_empty"
+kappa = "6ca4da755a3e81e771a0336e5ddb81c5242518cd1b94a586ac2eb3d7216f1b8b"
+embedded = "39a5e1e7db9530013075caa849961f81f4d49a2277300753f3d86f1f85ec5c4d"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::is_full"
+kappa = "35730c22514c258aebf013bde84986b7c8906cc34e19eb1d4ba0e60b010c2c59"
+embedded = "db7d0be7a2ff9323d6e74246edf7a9af98ecb718d4ab9770e93d79dc9b97b3ac"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::put_slice"
+kappa = "774fdfda353351c1a9b525214e70129f69b495066f2dbfc17941312b9d84da04"
+embedded = "64170c0b5bdaece664885a22049e31e78e5f3e9c979b0fbacc4caacd60f8e968"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::read_from"
+kappa = "6afa40b71122f0966c074c4cd4dbc1b016582bb1d65801ed46a94e23f6d5316f"
+at = "Unpin=u32"
+embedded = "ea8f7c91db45deba75685e649d4bb8d119b457810560582d2c8f6a47ab01619c"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::buffered::WriteBuffer::read_from<impl AsyncRead + u32>()}"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::sanity_check"
+kappa = "e468dd3e7486e38ce9187a3c2e6f868da00a33a47865fee16084fa625a6c6fec"
+embedded = "b483ba73eec523c7f8977826940c073021566db148a9cca5aa7c3c24e416f743"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::buffered::WriteBuffer::shrink"
+kappa = "502ff0929138aaaed89ad802c599fd8245d1e03c88ca34915d7059c16513e8b5"
+embedded = "f29aa2613ba876875142f368b7ade62597b12fb0e7cf38164da281e4500f754d"
+status = "residue"
+cause = "mir::Ty: WriteBuffer"
+
+[[fn]]
+path = "sqlx-core::connect_tcp"
+kappa = "741632e76edb094c890d1399ecd3ae17e0baab7dfaabb04cc0af949456d2763c"
+at = "Ws=u32"
+embedded = "003a5f8d81b60256eb0402bdfad77104a290f1d832c1de39331a15f1c73f7211"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::connect_tcp<u32>()}"
+
+[[fn]]
+path = "sqlx-core::connect_uds"
+kappa = "5a1e41caff6abb34f8c5c3ddcf3fab23218086fa23549b36f6427678da791ada"
+at = "P=u32, Ws=u32"
+embedded = "695c1f46ab74a4fd89b88313a343bc7968c3d1a00575f46d6d6849100902cccf"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::socket::connect_uds<u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::connector"
+kappa = "c55c4a2b414f035b149a93269300c23296b6e0cbb18bae873cadc8db9649db50"
+embedded = "1289354c7b8943f12327c28e3e74839b8f7b2f901f97c897fc7d94452a4fbf17"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::tls::connector()}"
+
+[[fn]]
+path = "sqlx-core::error_if_unavailable"
+kappa = "ff1302c782d6b412c3a7fa88359fc6d51b2ba7aca43de392ac74d30e83452685"
+embedded = "903cc3d5bb882823df901ee1b1761ef0f7bc32f4b4c2ccf6a6e7a8e5b2f20a0a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "sqlx-core::handshake"
+kappa = "452e62ead84162b6b2753321e85f83a60f6bff652d96b5dba1067a3764ffba26"
+at = "S=u32, Ws=u32"
+embedded = "f56c48073390adb72ab4044db231f85e4b119647c5e1b652ce1ca76e59c5d59d"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::tls::handshake<u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:10:10: 10:15>::clone"
+kappa = "898a421ba953a2f18aa8aeb3baa66b20b711e7cb2c09391cbb261b8c7ea5c15d"
+embedded = "831f007849f8b028d958e3db9f71c3077169e91de210a533a4f159a3121b8b74"
+status = "residue"
+cause = "mir::Ty: net::UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:10:17: 10:26>::eq"
+kappa = "03a9484e47f5ae6503b863c80a056788a123c5eeca261dbcfd33cd73a62d6824"
+embedded = "7da503d90e6986e39d51a669d3783e1a8fb606a368f13f92905abdaa5eaab410"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:10:28: 10:30>::assert_fields_are_eq"
+kappa = "1b3a2d9286e350f4236e063e4f9cc388e19f51e7e0ce58dacb2481c5f72a2da5"
+embedded = "d4b80d94ffefc76d940c20495d14db2833b95787da3b51a2d67694d087393c1d"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:16:10: 16:15>::clone"
+kappa = "46a818d7fec9cc38770d8f0f8e43e1c103e86fe2b45ce2ddaae51b6efcf8dc88"
+embedded = "dc16e94f5e3c70f81fc4507bcdfe10af31f4409c3fc52f204d9eaa8e53ff1430"
+status = "residue"
+cause = "mir::Ty: net::Brackets"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:16:17: 16:26>::eq"
+kappa = "a5ffc2fbcc0a64fba32b4f1b666b5b6fc059f9f2c5df44701972b58783f9ee55"
+embedded = "c0c27ace30bfe0bed3b177e8ae53f246305526619aa2e49646cbe36cef239737"
+status = "residue"
+cause = "mir::Ty: Brackets"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:16:28: 16:30>::assert_fields_are_eq"
+kappa = "7e3e4d4a6bf18259470eae5be8ea668b0c3bdc04366bc622c38891cea6115db3"
+embedded = "d3c46d55ef5a787d1f1ad0b21c9fff60af64c297a299a0188115d50b769c7734"
+status = "residue"
+cause = "mir::Ty: Brackets"
+
+[[fn]]
+path = "sqlx-core::net::<impl at src/net/mod.rs:96:10: 96:15>::clone"
+kappa = "dcbe9af869b42c95d718dc00fad4a0272104a17750a959293dc37e1080d8df66"
+embedded = "929a532fbc722a0d250ee0df2c5cd267035a88a2c6e5d4e3059f6b30f31369c3"
+status = "residue"
+cause = "mir::Ty: net::SocketHost<'_>"
+
+[[fn]]
+path = "sqlx-core::net::SocketHost::from"
+kappa = "37f15b506f8277e5bd9b66a34ba63fd8538e3821e23cc2b197e70fc332918287"
+embedded = "c091c91c8135eacfd32f93c0d616f4e536224280e0006bb2d1aa836dff2b3320"
+status = "residue"
+cause = "mir::Ty: net::SocketHost<'_>"
+
+[[fn]]
+path = "sqlx-core::net::SocketHost::from#2"
+kappa = "ffd6f7e9baabb798fb865f89b8dfa9bb7b6bf5fd2153f7ed51c612a03ff9971d"
+embedded = "5bf594cd8ad6b93324a4cd1f5b0a87f7a1cef704cdac6f2e9c9acad566942681"
+status = "residue"
+cause = "mir::Ty: net::SocketHost<'_>"
+
+[[fn]]
+path = "sqlx-core::net::SocketHost::try_as_ip"
+kappa = "1ace68ed20935daf19b02e739a42cad4c3e67561a94f3592847975bd0c7438e4"
+embedded = "9ef24c35753db505ff3acf4e60ba899e60367e01d14b396364185ba2fc51dcbf"
+status = "residue"
+cause = "mir::Ty: std::net::IpAddr"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::check_brackets"
+kappa = "7362f013820ae627a67f80d6633621ad5ff33fd798e2226d347a4ee4b62b6f73"
+embedded = "16121c74c7eded2bd1e5337e7e855d937b10696d43be42a005bd323d27604aee"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::empty"
+kappa = "4057833bfe3e5b508a3d429ae76195c449dc2e864fb69402972b82d4182e34e1"
+embedded = "163ba4ef5cc67a55825c4d54bf76cbadc44ce097a99a778666ef0a4ef51aa870"
+status = "residue"
+cause = "mir::Ty: net::UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::fmt"
+kappa = "69f0d1889682e0fb1eef64ef74b4db245c7a09fc95037049ab95d3a57cf8e607"
+embedded = "b248c2e9891dc3d9900a416b44361869eb29ca9056d63aa7a9aa11d5255f2eb1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::fmt#2"
+kappa = "29c1830029030850d82e63149c315b77c71654925797aac08e9f41c3eae93b96"
+embedded = "f6a73a51315bb056952d2bf5ad22a50a341f65378d160051004317487f3bf8d4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::from"
+kappa = "b5e98428ef13c7a88014ae8827a1d26ed48caa51a00dec97242ed6482dd147b6"
+embedded = "ba9d691fe4000ff7989fa5d0242141b5306cd3e6eb973f0d64e5dfeeb49845df"
+status = "residue"
+cause = "mir::Ty: net::UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::localhost"
+kappa = "e1ea3677c4047c0694479a6beb0ee6af772cbaf6176af29a74eea548195ecdf8"
+embedded = "08510aa365db53c52f2260414ea92826e3c5f40b8f09a021c4a5416b32cb3a87"
+status = "residue"
+cause = "mir::Ty: net::UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::original"
+kappa = "864317ffc8fd718c1ea5dab817eb4ee4232fcd41a33787d0648a46753b453d9c"
+embedded = "f1d8c86af6e4f480a8b48ae20625126253d4218813486260749a26cbab501bea"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::set"
+kappa = "a4ecd5bd2dbde471cb85c3635935b33b0838f2d879759a635249ec3704defe55"
+embedded = "385f693c20d70b92732b99c4a09c430cfa300645c32078f750b39156fa092e4b"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::net::UrlHost::stripped"
+kappa = "8928cc126f653b5da129b5c05f5048d1a85530e96edc442fb274b52e06b1160c"
+embedded = "a64e7d5bfedb42c6bdb9576847f0a794d0c10b2631c365bb6a9f33200d819982"
+status = "residue"
+cause = "mir::Ty: UrlHost"
+
+[[fn]]
+path = "sqlx-core::socket::Box::poll_flush"
+kappa = "c959a4065e923654a744ab05c65c2ba3c1c2272b212cc283b1c916703cdbfb03"
+at = "S=u32"
+embedded = "8eb7cc7d28c94fb2da1728811b2571d6d94675d3ad44c82a0e1904578be153b2"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Box::poll_read_ready"
+kappa = "4fc74926cfe340791b91f7ce3afc3dfd0845f07f646ede9ab4431e356bfc36e5"
+at = "S=u32"
+embedded = "ec2e30e6ade1f36878f58a628ef3797e17a919475aae313d9e993979593b9288"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Box::poll_shutdown"
+kappa = "da77d4fd7387bd2cc9f64d589fd95e288398e6fa881c100da3273f48d45b11f1"
+at = "S=u32"
+embedded = "91508ee8843d80f7e88680acd678a8f518f1ccd8c52abc6e4afebcbbb4c6a7cf"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Box::poll_write_ready"
+kappa = "dbdb8bd16cc943560f6a02d47015e7ba555d56e4ac775b3f86a722ede63a1685"
+at = "S=u32"
+embedded = "5f53d8809308226da16985afbaf00f91cb6acbcde34fc011fb8c92cef95e1f6d"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Box::try_read"
+kappa = "18dc101800f3d63987b8528586659b000f85b2f653f2d6da10b49bcfc90d20af"
+at = "S=u32"
+embedded = "8b2854c421b453ef3fc89b8e2fc9bdfc5c60b0cbe7a465c41631a4fa22642148"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Box::try_write"
+kappa = "a18933a51ae909577cfe238ecb73faec6530c7bf8d6af877318b721a9886e18b"
+at = "S=u32"
+embedded = "06cd7abf20b1a5e99d0d10dfed65aa711c1968b1514813081ea62e5f99399133"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Flush::poll"
+kappa = "27afe9a7c786daf45d771a91b46fd5303ec9076425fbc8a2451c2936789dd4a5"
+at = "S=u32"
+embedded = "5b426cb4905d3e08a5a482a56a877a75c57ec96bca830006f9b8187acf908f37"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Read::poll"
+kappa = "897f50a4ecb03fb39704c06b36a8955d939938f77ca5ee50b4af746f2e296b90"
+at = "B=u32, S=u32"
+embedded = "11158e50fae536cb1e2835e2e72fac9ab42ebdf17546f2ed6277280665553a09"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::Shutdown::poll"
+kappa = "355c91619ddc5f5e32470431f3049910f49534aff8872d34c77d17b013d10ca8"
+at = "S=u32"
+embedded = "bb465db4ed9d841fcf61121e18c01c4cea15a739aea6e554e62d9d901864656a"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::socket::SocketIntoBox::with_socket"
+kappa = "5f912cdda8e35a181854fb999dcc96c8ec81098a36928c151830bd7639e8a722"
+at = "S=u32"
+embedded = "3efa78f40319b18a8ed93f6cbfa361de6cc79f7d015828dbb70343f26feda3aa"
+status = "residue"
+cause = "mir::Ty: {async fn body of <net::socket::SocketIntoBox as net::socket::WithSocket>::with_socket<u32>()}"
+
+[[fn]]
+path = "sqlx-core::socket::Write::poll"
+kappa = "8f8eb7b8f0f70beba1e7b0ecb6fe10c489d2ed1600456115e585a2eca4f92438"
+at = "S=u32"
+embedded = "9eb2fb2f93d7abe76fd796d772b75f2b569d228ffe17866402b4ce20cdc5845d"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::tls::<impl at src/net/tls/mod.rs:18:10: 18:15>::clone"
+kappa = "93b11aaf510a05eda44e0ac24c4be688ec70a04ac116ca02502f7e4ee4fe12dc"
+embedded = "f04bba45f3d5e6b704db4e8d9752292fa5728059a0f462b732a5cf5cd208c20f"
+status = "residue"
+cause = "mir::Ty: net::tls::CertificateInput"
+
+[[fn]]
+path = "sqlx-core::tls::<impl at src/net/tls/mod.rs:18:17: 18:22>::fmt"
+kappa = "e0efacc1991367ba672e988c43212e82e5ac08ff3fa8a1b62bff3dde9b865668"
+embedded = "2b4f88206be87b6e8634acdb829fc1d0806692d8aaed32cad353c6956e23a7bf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::tls::<impl at src/net/tls/mod.rs:73:10: 73:15>::fmt"
+kappa = "c9953b85be6f6ca96a36f3474620bb74caec9819a32a62b99229dad4f1831aab"
+embedded = "361b6d18f14d4f34a5a0828c3e2a60f8eca035afc13093558e3ac7cf51cc8958"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::tls::<impl at src/net/tls/mod.rs:73:17: 73:22>::clone"
+kappa = "8ba2fb3095d21f43798a1dbf1bf390bc1946bbec9c636b249c0f2c3774ee57c0"
+embedded = "86e7e9d0f474bacb9a37902a39ab0f9912b33598601fe0af3e4e747ae74d04d3"
+status = "residue"
+cause = "mir::Ty: net::tls::TlsConnector"
+
+[[fn]]
+path = "sqlx-core::tls::CertificateInput::data"
+kappa = "209a7f8cbb472b9a827cd633de77e4cf859d6cc45bdf524785d8536c3e505cb6"
+embedded = "41d17b35b99adabaa81ace2bd484929ef9aa28382466fc8772875bdc87ffaf1f"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::tls::CertificateInput::data()}"
+
+[[fn]]
+path = "sqlx-core::tls::CertificateInput::fmt"
+kappa = "3bc78daa27d72392b94c4731b392eca65461b506526b713b858fa401aeb17a5a"
+embedded = "8d0c5c9cc28a4880a5e8188b011fade10beeb9d02b53481d81de2e8c48dabd3e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::tls::CertificateInput::from"
+kappa = "d196c8cf0e4e97760d8c337b4fce60a543800123dc68fbdd03521ee4d164ab06"
+embedded = "cb7a9c84b30da9999eecc4f6db54ac04ab2bbf41ea1375c6b07fd1caa3a572d4"
+status = "residue"
+cause = "mir::Ty: net::tls::CertificateInput"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::flush"
+kappa = "3cd132c1b7caf9515495d0985e75fd8e534f040c8ace6a07796e11e55ed4ff16"
+embedded = "7b888d6a4ee0e0bb24ddecced15a73596c8ff73e4d83c97c2d1e3025e2b2a2f8"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::new"
+kappa = "b16e4920e6701112318d00fc4caaf5abafd2f2b42f52bd4ccd9f3a0ebac3a681"
+at = "S=u32"
+embedded = "fa4fc96737fe92e13343a1b6e1edd5dabf33265f542fa167f2df58cf11745564"
+status = "residue"
+cause = "mir::Ty: net::tls::util::StdSocket<u32>"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::poll_ready"
+kappa = "2d46659bbea8093bb198b9b0e24f366e42825e79620779678991a7e1c7d21ddd"
+at = "S=u32"
+embedded = "25cc7b406d87b51c9c0a7abf1bffd2420ec5fa09767ac1ce1d3204cce833d2cf"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::read"
+kappa = "9dcd6ae01f70df4791dfd6928f681aa6a3e52082516de81803d47b99c8ab86d2"
+at = "S=u32"
+embedded = "622d44ef4793cd0f58c31b67e6c93eea3bedaf586462ecea80d9dbd0f179cfcd"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::ready"
+kappa = "9105856167b5ff62073900adbb0d87b9e64af1568e918470210a0a2772490ff4"
+at = "S=u32"
+embedded = "6f37cd91e6a6cb6a7a1be9d70bd7978e7ad1dbef91aed93e1175563ac583d6c0"
+status = "residue"
+cause = "mir::Ty: {async fn body of net::tls::util::StdSocket<u32>::ready()}"
+
+[[fn]]
+path = "sqlx-core::util::StdSocket::write"
+kappa = "d18f89bef04bc43593b4721ede2dbd059fc982ff8fb6b4e8d7b214b64058fe94"
+at = "S=u32"
+embedded = "06f0e31335b66118f55370ef18550a95bb6e60ac4ea8d58ce9ac223c83b9eca1"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+

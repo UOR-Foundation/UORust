@@ -1,0 +1,67 @@
+[[fn]]
+path = "tracing-appender::worker::<impl at src/worker.rs:13:10: 13:15>::fmt"
+kappa = "125eee673f8eb01a0b31b831ba282598716b0535f931da579d5b045929ff1621"
+embedded = "3103d7a767f25a36294ac999ca1b078f041ddcc9effc5931f696bdf00e3bcf39"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-appender::worker::<impl at src/worker.rs:13:17: 13:22>::clone"
+kappa = "9df927b8f0befdcf1e7a7eb1f4d5e8e6b2acd4decb3fd295e4e0de6859c32519"
+embedded = "ebf3eb42c04181c3595c894e6e0391c39bc5e073aef0228ddf578f81ae739970"
+status = "residue"
+cause = "mir::Ty: worker::WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::<impl at src/worker.rs:13:30: 13:32>::assert_fields_are_eq"
+kappa = "bab8e1e05f7914154f0ac1d3a39f68f93a4f38840255ecb619087c53e0efb736"
+embedded = "bc0395d8b1fa967bc56be38c2d9ded796ba18f905254506ec313ed8ba9fa7c04"
+status = "residue"
+cause = "mir::Ty: WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::<impl at src/worker.rs:13:34: 13:43>::eq"
+kappa = "df139feb0b00da5de503fcb364eccb5c234476a9a57695422130d969c72b6717"
+embedded = "750fbd899768e018f7353c3386174d08e4c36b8b971a78dcb2a999e0bbfb58b4"
+status = "residue"
+cause = "mir::Ty: WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::Worker::handle_recv"
+kappa = "c94658ecd5e5d82397dc50e24a905ee33f0781f1f28ad4f25dfe89cb6b13e5f8"
+at = "T=u32"
+embedded = "aa7bfb9d44ccc0a7b1732b3e3e0e1172790795ba28aaa754e6bc5bf39611040d"
+status = "residue"
+cause = "mir::Ty: worker::WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::Worker::handle_try_recv"
+kappa = "e068072dd864f3f850cea8fa5a9d96dc1af379e6c2b0096156995d1887c37119"
+at = "T=u32"
+embedded = "649553bd969a8b421245ca663d785f3abffdc447f4fb9029f3c86c76c141ee60"
+status = "residue"
+cause = "mir::Ty: worker::WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::Worker::new"
+kappa = "323c2325223bd2b30b6f64c8530ebdc765d1f702034caa508ad2666734394f70"
+at = "Msg=u32, T=u32"
+embedded = "89e91b1ab32612be13b1b2fff4609515ba1970eac5807d000c35cd2d05026936"
+status = "residue"
+cause = "mir::Ty: worker::Worker<u32>"
+
+[[fn]]
+path = "tracing-appender::worker::Worker::work"
+kappa = "7c984423d67805faa8a6210f6ba5fbfecf99001e8de15f509d014f569a4a9f44"
+at = "Msg=u32, T=u32"
+embedded = "f1179f35d357121da1e22d60f33f5efc2411844d1e85bc9315d14a6ac6af0076"
+status = "residue"
+cause = "mir::Ty: worker::WorkerState"
+
+[[fn]]
+path = "tracing-appender::worker::Worker::worker_thread"
+kappa = "3f29e98d4cb691fd3f93dd5a14e4a0f5684ab8d325ca509eac481465e2ff6f09"
+embedded = "34742690289a6eb74fdd56198e95bc39c71e24653a5884f6147f8173044c0510"
+status = "residue"
+cause = "mir::Ty: std::thread::JoinHandle<()>"
+

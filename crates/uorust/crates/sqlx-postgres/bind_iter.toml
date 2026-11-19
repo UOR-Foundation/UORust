@@ -1,0 +1,60 @@
+[[fn]]
+path = "sqlx-postgres::OVERFLOW"
+kappa = "b787b88098508bfa6ab811aa89709f8f0cddf5564ba5998525621090b3eb55cb"
+embedded = "762c8aca4069ebe5af09b8017371463750f4ac3e7954a40fe41f588638d6c7d5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MAX"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::I::bind_iter"
+kappa = "3143be3c3028847c853446f861fe7e1738500e3c629c4e670279401fb96b79f6"
+at = "I=u32"
+embedded = "27b1440178bcfdbcd7c677432e40755ddb96c9e11883354d49c68c62c16bbdb2"
+status = "residue"
+cause = "mir::Ty: bind_iter::PgBindIter<u32>"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::compatible"
+kappa = "fb66859cab329eba0764b0918b1b592340d5702c6548932c77efc25c3201041d"
+embedded = "b7af3bc69d92eb15db7534a961869508616e0ac734c8cf70d3a7ca3b4a883f1d"
+status = "residue"
+cause = "mir::Ty: PgTypeInfo"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::encode"
+kappa = "d22550b42279c9196afedcfa6a440be3e0c8be845684fc9561ce01b0555c536c"
+at = "I=u32"
+embedded = "206fd2784da8536741f00f2ce41db50253bf668ef36f05348e890bd8e9b25e1c"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::encode_by_ref"
+kappa = "0dcf97ec27747f65409d960515b65b08e627a313a18017e1d15e5aa10d1b32fb"
+at = "I=u32"
+embedded = "32160320cb073b5b812bd84f6d124cc9b638df7528cb0b3d35104b12f61d8b10"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::encode_inner"
+kappa = "d77b8078e1541ba2a715ce8b00de6b2e5cb1af40078c95735e971b135aacf335"
+at = "I=u32"
+embedded = "66c0e207ad88ff3988b7c2aa920625b5edff3da29de4ae72b8ef9e697d552012"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::encode_inner::MAX"
+kappa = "0010a99b53c5cd062fcfc3af37a0625e6062f6beced2cda94db1f1d33cb65de6"
+embedded = "d2e1ae88b4889fe2788b3528d41da27c2aaeb3708a4179a4c612478ec952e021"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MAX"
+
+[[fn]]
+path = "sqlx-postgres::bind_iter::PgBindIter::type_info"
+kappa = "15460144650dfcaca152fc57bc71c9f34ab1e2403a42ae356ef34b83d39f3c9d"
+embedded = "c2907c5e746f9cd4582e0397c59d58404a3cd7f7ae7f8f08e112fd1809fb1736"
+status = "residue"
+cause = "mir::Ty: type_info::PgTypeInfo"
+

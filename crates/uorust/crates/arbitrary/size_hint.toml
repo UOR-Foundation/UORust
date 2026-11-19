@@ -1,0 +1,43 @@
+[[fn]]
+path = "arbitrary::and"
+kappa = "08ae4f5730bb923fa744a37315db5968e592b593d5dcdb72569f5db37040c036"
+embedded = "1ea456573feccd262ad3aee0cfdbaa8160ac99684012811360315215ae39e449"
+status = "residue"
+cause = "mir::AggregateKind::Closure: and::{closure#0}: mir::TerminatorKind::Call: Option::map"
+
+[[fn]]
+path = "arbitrary::and_all"
+kappa = "eec1c39b7c7ef5b661020a0cae47f68ba2db839b547f788619938f4c7f430c5b"
+embedded = "02e49ed93c8fd9a8c048099618f5047fbc3bcf47c8c620306e69404f0119dd1a"
+status = "residue"
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_, (usize, std::option::Option<usize>)>>"
+
+[[fn]]
+path = "arbitrary::or"
+kappa = "2348145a352f8c777c122e3a95f00b99f4378a1e6bec93594535815f17a17cbf"
+embedded = "8c92f012d12fb6f5f7d77a995510274c5b0eb60304be8b46b5d74738e60f99eb"
+status = "residue"
+cause = "mir::AggregateKind::Closure: or::{closure#0}: mir::TerminatorKind::Call: Option::map"
+
+[[fn]]
+path = "arbitrary::or_all"
+kappa = "90ce4d902441b0c327b42e233abcefe639cb7b6ddc94dd9dc8c04d6a670c0639"
+embedded = "af470a2ff4743d60eb1040824d7f6b103fa9858da245f178ac9c79fb67fc1ec4"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "arbitrary::recursion_guard"
+kappa = "66fdae15344e417c6a41f2959957885e3eb1eef261f03e1f2a646658526b4836"
+embedded = "eb9140d3ed1571b5cdbd8120144aaa876a126f3fc37b445a2ed570c7b20be64d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item size_hint::MAX_DEPTH"
+
+[[fn]]
+path = "arbitrary::try_recursion_guard"
+kappa = "ce382fcdbe115f6628bfe9fdb51af4349d0d45c81c245ec62378851b998f14f8"
+at = "MaxRecursionReached=u32"
+embedded = "494f73fd6fdddcde62d9ae61f1d433315a08ecbe03c4136348670630ca4f44b6"
+status = "residue"
+cause = "mir::Ty: crate::MaxRecursionReached"
+

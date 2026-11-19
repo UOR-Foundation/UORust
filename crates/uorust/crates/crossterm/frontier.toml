@@ -1,0 +1,723 @@
+# The crossterm register (written by `uorust crate crossterm@0.29.0`; do not edit): every body of
+# crossterm's MIR at crossterm 0.29.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 947
+translated = 1
+residue = 946
+
+[module.command]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.cursor]
+bodies = 100
+translated = 0
+residue = 100
+
+[module.event]
+bodies = 535
+translated = 0
+residue = 535
+
+[module.style]
+bodies = 212
+translated = 0
+residue = 212
+
+[module.terminal]
+bodies = 92
+translated = 1
+residue = 91
+
+[module.tty]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 859
+embedded = 859
+evaluable = 859
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 186
+
+[[cause]]
+cause = "mir::Ty: event::_::InternalBitFlags"
+bodies = 126
+
+[[cause]]
+cause = "mir::Ty: style::types::color::Color"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: event::KeyModifiers"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: event::KeyboardEnhancementFlags"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: KeyCode"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: event::KeyEventState"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: KeyEventState"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: KeyModifiers"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: KeyboardEnhancementFlags"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: event::Event"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: event::InternalEvent"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: style::attributes::Attributes"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: style::types::attribute::Attribute"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: MouseEventKind"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: event::KeyEvent"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: style::content_style::ContentStyle"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Attributes"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Color"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: KeyEventKind"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: MouseButton"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: KeyEvent"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ClearType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Colored"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: style::styled_content::StyledContent<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InternalEvent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MediaKeyCode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ModifierKeyCode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MouseEvent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: style::types::colors::Colors"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SetCursorStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: terminal::WindowSize"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BeginSynchronizedUpdate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Clear"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Colors"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContentStyle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisableBlinking"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisableBracketedPaste"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisableFocusChange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisableLineWrap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisableMouseCapture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnableBlinking"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnableBracketedPaste"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnableFocusChange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnableLineWrap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnableMouseCapture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EndSynchronizedUpdate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnterAlternateScreen"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileDesc<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Hide"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LeaveAlternateScreen"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveDown"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveLeft"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveRight"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveTo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveToColumn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveToNextLine"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveToPreviousLine"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveToRow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MoveUp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PopKeyboardEnhancementFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PushKeyboardEnhancementFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResetColor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RestorePosition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SavePosition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ScrollDown"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ScrollUp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetAttributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetBackgroundColor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetColors"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetForegroundColor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetSize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetStyle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetUnderlineColor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Show"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StyledContent<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::KeyCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::KeyEventKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::MouseEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::MouseEventKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::source::unix::mio::UnixInternalEventSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::timeout::PollTimeout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mio::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parking_lot::RawMutex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: style::types::colored::Colored"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc55: &parking_lot::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc60: &parking_lot::lock_api::Mutex<parking_lot::RawMutex"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: style::types::colored::Colored::ansi_color_disabled_memoized: crossterm's MIR stops at mir::Operand::Constant: {alloc55: &parking_lot::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: style::types::colored::Colored::set_ansi_color_disabled: crossterm's MIR stops at mir::TerminatorKind::Call: style::types::colored::Colored::ansi_color_disabled_memoized: crossterm's MIR stops at mir::Operand::Constant: {alloc55: &parking_lot::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: terminal::sys::unix::tput_value: crossterm's MIR stops at type outside the lift: std::process::Command"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CursorPositionFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EventFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyboardEnhancementFlagsFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Parser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollTimeout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrimaryDeviceAttributesFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Print<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetTitle<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::DisableBlinking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::EnableBlinking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::Hide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveDown"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveLeft"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveRight"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveTo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveToColumn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveToNextLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveToPreviousLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveToRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::MoveUp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::RestorePosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::SavePosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::SetCursorStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cursor::Show"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::DisableBracketedPaste"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::DisableFocusChange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::DisableMouseCapture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::EnableBracketedPaste"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::EnableFocusChange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::EnableMouseCapture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::MediaKeyCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::ModifierKeyCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::MouseButton"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::PopKeyboardEnhancementFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::PushKeyboardEnhancementFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::filter::CursorPositionFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::filter::EventFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::filter::KeyboardEnhancementFlagsFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::filter::PrimaryDeviceAttributesFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::read::InternalEventReader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event::source::unix::mio::Parser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = &'a str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::termios::Termios"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::Print<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::PrintStyledContent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::ResetColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetAttributes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetBackgroundColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetColors"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetForegroundColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::SetUnderlineColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::styled_content::StyledContent<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::styled_content::StyledContent<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::styled_content::StyledContent<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::BeginSynchronizedUpdate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::Clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::ClearType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::DisableLineWrap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::EnableLineWrap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::EndSynchronizedUpdate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::EnterAlternateScreen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::LeaveAlternateScreen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::ScrollDown"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::ScrollUp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::SetSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::SetTitle<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminal::sys::file_descriptor::FileDesc<'_>"
+bodies = 1

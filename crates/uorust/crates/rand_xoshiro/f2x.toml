@@ -1,0 +1,35 @@
+[[fn]]
+path = "rand_xoshiro::bit"
+kappa = "6b834072cdeae148e3e633fc6fe3de0dc10a8299a0ad4a39b050651289e54601"
+embedded = "25c1bcc020ce327929ad3cdfd96c9310ea09083e2501659579e3ec82850b5dcd"
+status = "translated"
+digest = "18ee31ae1281083f3f0649efcc830517062458908db248df54076455de3c4ba3"
+
+[[fn]]
+path = "rand_xoshiro::jump_poly_ce"
+kappa = "41b17ef868c85c3bebdfd0255ba8e0c45e9df967592fa5d51e865d79f4ba70bb"
+embedded = "8b88a199ee829971e5be661383aba81e54e74ded45f56f2d6ed4a2ee3c5cceb7"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "rand_xoshiro::jump_poly_n"
+kappa = "2fcb7d66f588952e595a599b90cbed07a961de6270e6588b2a618b03356a56f9"
+embedded = "63dfacf6a05a7a75f908246f19a40342ec89d724a69aaa7e19ec1a2d796a96ca"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "rand_xoshiro::mul_mod"
+kappa = "831cd2e756bde69f4f097d9061991d5e40b9c01343438d47b94cae9221cf5133"
+embedded = "361a10c4a170b2b857a50ab8a9f279692dad0c0fa2dfc237ee7e8b96c277f265"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "rand_xoshiro::mul_x"
+kappa = "1fbaa0e2bf2c7ad9e7561266ef6884df94d5f770c4899e77a15315ff9f3e95f7"
+embedded = "55190934b72ac734dae0801f761e2fce2d17327cbcbaf6cbc3879cbaaf8981d8"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+

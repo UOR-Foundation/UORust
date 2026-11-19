@@ -1,0 +1,656 @@
+# The headers register (written by `uorust crate headers@0.4.2`; do not edit): every body of
+# headers's MIR at headers 0.4.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 723
+translated = 3
+residue = 720
+
+[module.common]
+bodies = 622
+translated = 2
+residue = 620
+
+[module.map_ext]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.util]
+bodies = 96
+translated = 1
+residue = 95
+
+[embedding]
+bodies = 723
+embedded = 723
+evaluable = 723
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 101
+
+[[cause]]
+cause = "mir::Ty: headers_core::HeaderName"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: headers_core::HeaderValue"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: common::cache_control::CacheControl"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: common::content_type::ContentType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: common::cache_control::Flags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: CacheControl"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: common::referrer_policy::ReferrerPolicy"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Origin"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::option::IntoIter<&str>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Age"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Host"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IfModifiedSince"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IfUnmodifiedSince"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Server"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: UserAgent"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AccessControlMaxAge"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Date"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Expires"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HeaderValueString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LastModified"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Seconds"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::connection::Connection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::origin::Origin"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: util::value_string::HeaderValueString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Basic"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ContentDisposition"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EntityTag<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::access_control_allow_origin::AccessControlAllowOrigin"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::content_encoding::ContentEncoding"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::range::Range"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::strict_transport_security::StrictTransportSecurity"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::vary::Vary"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: http_date::HttpDate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::http_date::HttpDate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::seconds::Seconds"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AcceptRanges"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AccessControlAllowOrigin"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AccessControlRequestMethod"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ContentRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ETag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EntityTagRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IfMatch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ReferrerPolicy"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SecWebsocketAccept"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SecWebsocketKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SecWebsocketVersion"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::accept_ranges::AcceptRanges"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::age::Age"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::content_range::ContentRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::if_match::IfMatch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::if_none_match::IfNoneMatch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::if_range::IfRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::referer::Referer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::retry_after::RetryAfter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::sec_websocket_accept::SecWebsocketAccept"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::server::Server"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::user_agent::UserAgent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AccessControlAllowCredentials"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Bearer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Cookie"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Flags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IfNoneMatch"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IfRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OriginOrAny"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OriginOrNull"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Policy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Pragma"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RetryAfter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SemiColon"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StrictTransportSecurity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Vary"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_allow_headers::AccessControlAllowHeaders"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_allow_methods::AccessControlAllowMethods"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_allow_origin::OriginOrAny"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_expose_headers::AccessControlExposeHeaders"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_max_age::AccessControlMaxAge"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_request_headers::AccessControlRequestHeaders"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::access_control_request_method::AccessControlRequestMethod"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::allow::Allow"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::authorization::Basic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::authorization::Bearer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::content_disposition::ContentDisposition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::date::Date"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::etag::ETag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::expect::Expect"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::expires::Expires"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::host::Host"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::if_modified_since::IfModifiedSince"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::if_unmodified_since::IfUnmodifiedSince"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::last_modified::LastModified"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::origin::OriginOrNull"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::pragma::Pragma"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::sec_websocket_key::SecWebsocketKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::sec_websocket_version::SecWebsocketVersion"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::te::Te"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::transfer_encoding::TransferEncoding"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::upgrade::Upgrade"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: flat_csv::Comma"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::entity::EntityTag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AccessControlAllowHeaders"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AccessControlAllowMethods"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: After"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Allow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Authorization<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Connection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContentEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContentLength"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContentLocation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContentType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Expect"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatCsv<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HeaderName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProxyAuthorization<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Referer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Te"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TransferEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Upgrade"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::access_control_allow_credentials::AccessControlAllowCredentials"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::authorization::Authorization<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::cache_control::KnownDirective"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::content_length::ContentLength"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::content_location::ContentLocation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::cookie::Cookie"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::if_range::IfRange_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::location::Location"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::proxy_authorization::ProxyAuthorization<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::referrer_policy::Policy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::retry_after::After"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::set_cookie::SetCookie"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: headers_core::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: location::Location"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::entity::EntityTag<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::entity::EntityTagRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AccessControlExposeHeaders"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AccessControlRequestHeaders"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IfRange_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Sep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetCookie"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ToValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::cache_control::Directive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::cache_control::FromIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Method"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mime::Mime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::result::IntoIter<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::SplitN<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::flat_csv::Comma"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::flat_csv::SemiColon"
+bodies = 1

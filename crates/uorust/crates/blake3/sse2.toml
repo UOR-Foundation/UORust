@@ -1,0 +1,22 @@
+[[fn]]
+path = "blake3::sse2::compress_in_place"
+kappa = "1e9fa9324285cf2aab4f963102d91fd98a646e1fe2c30bf89e77dba986445485"
+embedded = "0ad590eed9dfc10840fdc17fc159db88084f2f804dee2654428adc29b21bfaed"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u32]>::as_mut_ptr"
+
+[[fn]]
+path = "blake3::sse2::compress_xof"
+kappa = "84dd75b0ff7a8be65309aa294b0bd69496e8a920440af5b3747d55c899aa5997"
+embedded = "dcb0750e3501910b47e9cfb8dc9d3932a560f5245eadc6b9beac5eb7ace93763"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u32]>::as_ptr"
+
+[[fn]]
+path = "blake3::sse2::hash_many"
+kappa = "602932edaf30555da20e21ec555a305a26e56689b3be684a6a4e6b71355755ad"
+at = "IncrementCounter=u32, N=#_N"
+embedded = "84e9af9cd35a1a0572aace0e6abd489d6f2ed33dda54cca72225a06a536bc267"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+

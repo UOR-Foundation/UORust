@@ -1,0 +1,147 @@
+# The pkcs1 register (written by `uorust crate pkcs1@0.8.0`; do not edit): every body of
+# pkcs1's MIR at pkcs1 0.8.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 89
+translated = 0
+residue = 89
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.params]
+bodies = 44
+translated = 0
+residue = 44
+
+[module.private_key]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.public_key]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.version]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 89
+embedded = 89
+evaluable = 89
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: der::AnyRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: der::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: der::Length"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: spki::AlgorithmIdentifier<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: params::RsaOaepParams<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: params::RsaPssParams<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: params::TrailerField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: private_key::RsaPrivateKey<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: spki::ObjectIdentifier<39>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: version::Version"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: der::Tag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: public_key::RsaPublicKey<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Params"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TrailerField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: der::asn1::UintRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private_key::OtherPrimeInfos<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RsaOaepParams<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RsaPssParams<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RsaPublicKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: der::asn1::ContextSpecificRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1

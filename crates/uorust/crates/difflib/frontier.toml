@@ -1,0 +1,93 @@
+# The difflib register (written by `uorust crate difflib@0.4.0`; do not edit): every body of
+# difflib's MIR at difflib 0.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 39
+translated = 0
+residue = 39
+
+[module.crate]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.differ]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.sequencematcher]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.utils]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 39
+embedded = 39
+evaluable = 39
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: sequencematcher::Match"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Differ"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SequenceMatcher<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: sequencematcher::Opcode"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as ToString>::to_string"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: differ::Differ"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Opcode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequencematcher::SequenceMatcher<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1

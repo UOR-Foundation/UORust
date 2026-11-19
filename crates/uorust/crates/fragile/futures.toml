@@ -1,0 +1,72 @@
+[[fn]]
+path = "fragile::futures::Fragile::poll"
+kappa = "c59c3f14d4edc88697c9413a7c134227dbb23e0e002f238e47bfdcfe8530b494"
+at = "F=u32"
+embedded = "968042b2e8dbfefdf1fa726ce050a194d1882167a07e0ca1ff5b6dfca68e2189"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "fragile::futures::SemiSticky::poll"
+kappa = "b6d76a9e0f9923b4bb03d5387b56a043ed48bc3c710f34baaa1c6dbb01e87bbf"
+at = "F=u32"
+embedded = "28d7d523808e4ee640a80fe902eb076fe1577106df4287eb840bf81da6f728e0"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "fragile::futures::Sticky::poll"
+kappa = "5a88ba3755f6a4b4c071f3e8684798722722c26a2a7513a8ee3f0a1d75b36f94"
+at = "F=u32"
+embedded = "25463681b806969b1da256c3a56574046f28acdba21d447f9f553fbf02ae9de6"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "fragile::futures::stream::Fragile::poll_next"
+kappa = "f3f0b370f61e3c9598bc231e3926e9306c01a6702d0ed1c015686b13ecc0507d"
+at = "S=u32"
+embedded = "632593518e15a4943f6e5f5d42d24ca166e4fd43750a45e0d918ced78dab72ce"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "fragile::futures::stream::Fragile::size_hint"
+kappa = "d6f909d8a25e72a6cbd5aa29ff272213fc5eed39597adf73f0804ea5ca4e15cf"
+at = "S=u32"
+embedded = "80a3a569408ae0246607fdc85d63fd3fc6aa9295377bc6d5e6862222eb3eb387"
+status = "residue"
+cause = "mir::Ty: fragile::Fragile<u32>"
+
+[[fn]]
+path = "fragile::futures::stream::SemiSticky::poll_next"
+kappa = "76e950ba26f5b8a60a9dfbafa225ef6bd88897d3f322ad044ec201597bd83394"
+at = "S=u32"
+embedded = "60d22f57001c599072038f7ef2d9835b732baec8828a7b95e5db686ea2573acf"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "fragile::futures::stream::SemiSticky::size_hint"
+kappa = "1bb61c7cb1fe44e6bfba9c6c55eb54f6becbf7f6c3f168bf5307fb702266df1b"
+at = "S=u32"
+embedded = "c4fecbfe077bbe7901796042980f5e77a34c23c062cbf32d22b8c4057c18f7df"
+status = "residue"
+cause = "mir::Ty: semisticky::SemiSticky<u32>"
+
+[[fn]]
+path = "fragile::futures::stream::Sticky::poll_next"
+kappa = "c27122ca1f519ebe455d48687c271b868c906f3e2ca60b1ab9ce5c41b45f069a"
+at = "S=u32"
+embedded = "e25b92ac24eec1489e496926d219a76a463043288eba79149a45f24d91056315"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "fragile::futures::stream::Sticky::size_hint"
+kappa = "857d14e648557d154222266affdee69c83491b28639d65cdf06c3f93b44d713f"
+at = "S=u32"
+embedded = "6bdc455b939abb6f8d76e6ee37d350442523345e95fc121a21d219c8b88434e8"
+status = "residue"
+cause = "mir::Ty: sticky::Sticky<u32>"
+

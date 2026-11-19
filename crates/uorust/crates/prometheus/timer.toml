@@ -1,0 +1,91 @@
+[[fn]]
+path = "prometheus::CHECK_UPDATE_INTERVAL"
+kappa = "d2dd9c61e55fae5f35b359d621427923ef4ad77fea4d6f9dee35934a95d573ff"
+embedded = "b66fda0474b2c117a1dbb0ce17ee2d8cbe1269b96936bdef76fe8975a3ca98cb"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "prometheus::duration_to_millis"
+kappa = "58363c6212a6ecb0ded617e90f2299856b54d6436b14af3ec80740731a9dbfa2"
+embedded = "c6ad92ab5d4f81700d001b12da2548bc10de3fce1d758d48324ae3f34fc1c0d6"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "prometheus::ensure_updater"
+kappa = "3f78689fa8084fa0fa7f24b5639efadca2b0728c9c1190909e50b236f61e3e69"
+embedded = "e35cbcb64f8db9752cb5d3abc784867be1a9680e30b124cc2bb7cb089291864f"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc557: &UPDATER_IS_RUNNING}"
+
+[[fn]]
+path = "prometheus::now_millis"
+kappa = "7f9fd69a39dfeb31a7a7f40c80b8323f4e01042352bd845f797b43b2a996c02c"
+embedded = "c3a649c72f9d5dcd3b6dcccfa58d047847a1076aa24dcc2b6a95206ebc990a43"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "prometheus::recent_millis"
+kappa = "e2e240c2044b01f0b28ffb38f87e6242c2f384fbce8b311defad5c6902c63988"
+embedded = "bf97a4acc77967bb5e1d35aedac648cd0dc6cb9f817f3d4f955135a19b164dfd"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc538: &std::sync::atomic::Atomic<u64>}"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref"
+kappa = "112855f28f6b087b6b2a5e6d7cf6192707e0d842ed95f2b443e5d7c97ce98a33"
+embedded = "f1f41fd7f35326dbb301c853a8eab58a2d7ef449911eee9ae41e3cbacfad236d"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref#2"
+kappa = "cff0071f4046e3bf32767ad2ea8d09552cb958031d2ec7890914d30dda1e0031"
+embedded = "5506a86927349ea419d6c452f9a250001a51e6d235ec6ee7e812e353ec21cd7f"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref::__stability"
+kappa = "ee741096feec76c1bd0ef5fe458af62809f514e25d6f74c0897ce5d14b4c5114"
+embedded = "ed5fda39e12bb25aa5b71d5ab66de668a98995bce5a007a1884542aae1063589"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref::__stability#2"
+kappa = "8c85e99f5933e21996ec0e8ca5aa95b7cd26b6ebf308e75957c9eae9ab0de08a"
+embedded = "9426a0fa605f0095ab3bb1aabc9bf39359eef41f5c38aae6896ec8636b2b3339"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref::__static_ref_initialize"
+kappa = "d1bcadc53104f8ae0e0df10fc64973afee62a28cc94d47c9a042ce9ec559e35f"
+embedded = "c6d5839db827568ff02715884c7a40f9951a256c8df5da25f0c28fbccb06233f"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:126:9: 126:36>::deref::__static_ref_initialize#2"
+kappa = "6f8e9fb56c0bb5a5a87c2ff5f09870985af68100ccd671a8992dca7b275f038d"
+embedded = "9c2c16230f0ec3e51ad4383d4aa6e69ffc9e2f5aa4edd668f88770bfa6748de1"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:140:9: 140:39>::initialize"
+kappa = "d7feaf0a958902ec7e81b24e75b59c83e01dd4c2c1975989ef4e08c443489807"
+embedded = "5c1e8557fbff03f346cbb43138792869da99eb8b94800892d1bca9c4d09f3efe"
+status = "residue"
+cause = "mir::Ty: ANCHOR"
+
+[[fn]]
+path = "prometheus::timer::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/lazy_static-1.5.0/src/lib.rs:140:9: 140:39>::initialize#2"
+kappa = "bef5f019e152b361e9d4a5c3ca051d3f9f672d4e5f57c13e0d118b45a749e49f"
+embedded = "f2c024efa4587f041e8a59e671acc6b1eebf1c7e6f086fc8ac73fecc1cf2a018"
+status = "residue"
+cause = "mir::Ty: UPDATER_IS_RUNNING"
+

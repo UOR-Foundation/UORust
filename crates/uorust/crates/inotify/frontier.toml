@@ -1,0 +1,187 @@
+# The inotify register (written by `uorust crate inotify@0.11.5`; do not edit): every body of
+# inotify's MIR at inotify 0.11.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 327
+translated = 0
+residue = 327
+
+[module.events]
+bodies = 155
+translated = 0
+residue = 155
+
+[module.fd_guard]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.inotify]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.stream]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.util]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.watches]
+bodies = 133
+translated = 0
+residue = 133
+
+[embedding]
+bodies = 327
+embedded = 327
+evaluable = 327
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: watches::WatchMask"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: events::EventMask"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: events::_::InternalBitFlags"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: watches::_::InternalBitFlags"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: EventMask"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: WatchMask"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: FdGuard"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: WatchDescriptor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: events::ParsedEventMask"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: inotify::Inotify"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: events::EventAuxiliaryFlags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: watches::Watches"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EventAuxiliaryFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EventKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParsedEventMask"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: events::EventKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: events::Events<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::EventStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: watches::WatchDescriptor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EventMaskParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Inotify"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::SYS_kcmp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::slice::as_mut_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: fd_guard::kcmp_file: inotify's MIR stops at mir::Operand::Constant: the constant item libc::SYS_kcmp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: events::Event<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: events::EventMaskParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fd_guard::FdGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::OwnedFd"
+bodies = 1

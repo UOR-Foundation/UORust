@@ -1,0 +1,36 @@
+[[fn]]
+path = "difflib::calculate_ratio"
+kappa = "37f01abf00b57fa278e36c823d046e026fdad0ea3fe2163fd2ce23bfe9a8b048"
+differential = 7
+embedded = "5a6f47e5a31544a81f1de2f9df8467e8b3aae35db830c7a4a3c46610b617eadd"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "difflib::count_leading"
+kappa = "b4558f104ed631508ead98e92c6b1bc10ae77c2adee8789546d070abe86bf8c5"
+embedded = "1e3c9e3caf7ec155d3356a006c00870cb5e4c191cdc831c87612d181e6b848ee"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "difflib::format_range_context"
+kappa = "a42e8b566e1a77548e694a54e85c9ab172874270c2b0bbe2c6b68a34020e5be7"
+embedded = "8c96cf8efad242d847d893ffbf7bf89c02de76fd6dd2a3f1f87eac15fbbc5fe6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <usize as ToString>::to_string"
+
+[[fn]]
+path = "difflib::format_range_unified"
+kappa = "21e573d99f9f6ed72258b1312985caeb84fc9e8e9ddbbe5ecac0f104e8f76c5f"
+embedded = "e5fe6526b98e7924e88793825e798ffdb88639defd73d89ff3c29c83ce406e55"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <usize as ToString>::to_string"
+
+[[fn]]
+path = "difflib::str_with_similar_chars"
+kappa = "ac91c61da4060601bf2b6467e8842a9c070752296d41b229173ed1d31d385263"
+embedded = "c2933570ec999150d94490e9c4475148a84d82eb9a9fb1d62049e37d93a367bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::new"
+

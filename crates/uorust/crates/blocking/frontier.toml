@@ -1,0 +1,78 @@
+# The blocking register (written by `uorust crate blocking@1.7.0`; do not edit): every body of
+# blocking's MIR at blocking 1.7.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 24
+translated = 0
+residue = 24
+
+[module.crate]
+bodies = 24
+translated = 0
+residue = 24
+
+[embedding]
+bodies = 24
+embedded = 24
+evaluable = 24
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: futures_io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Unblock<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: async_task::Task<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc13: &u32}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Executor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Runnable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Unblock<u32>::get_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Unblock<u32>::into_inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Unblock<u32>::with_mut<u32"
+bodies = 1

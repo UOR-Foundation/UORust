@@ -1,0 +1,172 @@
+[[fn]]
+path = "md5::<impl at src/lib.rs:36:10: 36:15>::clone"
+kappa = "264eb6a160cc80cf8953b65135e8740c3e31b3d1b20a50483d457aed4018f320"
+at = "Digest=u32"
+embedded = "0c75cd3acbb5b88ceaf1f986c163251fbe9c36e0d27ab45136b0e3a155b241c2"
+status = "translated"
+digest = "06fcac0e9d0e1d6212bd604d44431a9ee9312dcac9c55832b5261555ea1e1bbc"
+
+[[fn]]
+path = "md5::<impl at src/lib.rs:36:23: 36:25>::assert_fields_are_eq"
+kappa = "484e0c6bc3392b096971a2457e602ae501b03e05dc70ebbc137336dcd5b7d1d7"
+embedded = "020418b3ee3a7618d6bf1572cba948c9708ac67803da42b4f317c8f5d6f7c1ec"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::<impl at src/lib.rs:36:27: 36:31>::hash"
+kappa = "6498f79baea3a16aa71272de802029797eae4fd03ce704fccc7e6656356c5051"
+embedded = "2c32da03876b51bffe1c35f7c029ab0bd3eb9c912ff3c250b4d6a1559961a8d4"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::<impl at src/lib.rs:36:33: 36:42>::eq"
+kappa = "33a2507896e32a843d55a449331e1ab2630bb46220e044237d7d632ff152e449"
+embedded = "13d61722f5366c79c6fab9829a78dabc01ae405cc7bd7b32aa8ca5fd5ffaed73"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::<impl at src/lib.rs:39:1: 39:46>::from"
+kappa = "b6fd8ecdcf59f32a504bb3225fc49e4deb89a6a2a1d514296c945945861466de"
+embedded = "6f5a1d3b59f81600d508fc70fc0bbd3219385fdd4b8a155ce34e8a95c76aef09"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::<impl at src/lib.rs:86:10: 86:15>::clone"
+kappa = "82f524aace18248229c9c2ac616242e2a486edae8295697f35f46eea9d275921"
+at = "Context=u32"
+embedded = "9336df16b8e3597fd1ca07712ea6e5e8cfb453560882a36cd44dbb6c01007e6a"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "md5::Context::compute"
+kappa = "7a18e06739a06f67941f4fa3deaafad49f784531758dba5ce080c92c8721ddd5"
+at = "Context=u32, Digest=u32"
+embedded = "e95a0a4b03468ee060b1734d91d84c82e1290dc171f9e932550e1f0a358fca43"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Context::finalize: md5's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "md5::Context::consume"
+kappa = "ecfc4d8547358d0de16fab541701da5753c1a63b66371d711d15f10cfc16d6ae"
+at = "Context=u32, T=u32"
+embedded = "f5e1d440bc8e284305900d0b3b12147e3b496492fde6a74985f21c4d627bdb63"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "md5::Context::default"
+kappa = "2077eee2bddd8d38aa0d5092b5569637bb3824d5634eca0c3805371bfad0dd0c"
+at = "Context=u32"
+embedded = "adfefcbb361762bc08a6e4e140afe358bf7b62d05a89663d0bfc6423d4061722"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Context::new: md5's MIR stops at mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "md5::Context::finalize"
+kappa = "23bb8f75112420ed65fb6a6e4661b0a56de47d3288a41b1995c547a128df698f"
+at = "Context=u32, Digest=u32"
+embedded = "5105bca08017d9fff9b4f6169dd6056d65c10ffb67cd9ccb38e5839a6bf30484"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "md5::Context::flush"
+kappa = "2db5d7f831f204439cfb6d0f8c55c12f5658c84273ca2d7436e927bc25f2f088"
+embedded = "bcad47b9e12f7f7b1e72c9e69d64ebbc984208b2507b8b69a39d455c50ffa300"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "md5::Context::new"
+kappa = "aac5fcf8cde551ac6e3516fd32b1ccd896f2ea016dc20d2ae202038f7d0083c6"
+at = "Context=u32"
+embedded = "9efcd3928426dd27744a483688d44f08ea81ed0ba4ec0dc22cb2093e12e83b00"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "md5::Context::write"
+kappa = "11d6562b444302c11e46ad74283a77e0be768aaec68cd082e410385d471d254c"
+at = "Context=u32"
+embedded = "91627e551ba3878d9462eb3c3b924fdcb51ae810d941d089ef55ad0fc527668b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "md5::Digest::deref"
+kappa = "af7714e7cd32832e49fbf35b3f19bd13df4c2623fd5e1e8645fb427562563a64"
+embedded = "c4981ea50198fe74e350e1e60fcce63acf9876641d68a315872e6f399b4bc611"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::Digest::deref_mut"
+kappa = "7e2e2034f6e4627da88a36572bb66c842f723e7b98eb2f59ef1f5b1afff0aa20"
+embedded = "72a76598165ec85de498e4a048c6deeb1ef286a2c59f0655efa57f7c3ee7416f"
+status = "residue"
+cause = "mir::Ty: Digest"
+
+[[fn]]
+path = "md5::Digest::fmt"
+kappa = "3fcdc5623b8424c37a71bb3845ece192b0700f2aa93cca7f1da361080075ba14"
+embedded = "ef3ee4b69e680a6c6eeab01dbc56ebb312b5fc8a0d1a80ab9d13533bcd43eb6b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "md5::Digest::fmt#2"
+kappa = "781fde41d787db76e07e4ae667892e42d869b7d14b642d9cfa46df50e65f8bf3"
+embedded = "053b84ce9cf67535925763b8a8fb98622af00e893b9c089e8abcc235d7d9dabe"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "md5::Digest::fmt#3"
+kappa = "c202c0e218a3b8c967462be5df414a4fceda5dae6d0b8389a15c1e25b4eb6cf7"
+at = "Digest=u32"
+embedded = "fce39cccdb9fdfca333b9f9547662960bb0b9a007bee89eca0b0cc6469309fd4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "md5::Digest::from"
+kappa = "bb6933bdc4b9fc870f91df8f40e442e932b931b34ddfa666e0df5cee48b89804"
+at = "Context=u32, Digest=u32"
+embedded = "a488f2ad2661fc5220d28f3ca1a7886812b087dc18399c3ae4d5d1d91c46c144"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Context::finalize: md5's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "md5::PADDING"
+kappa = "4220eccdf0731c6ef494382d416ea9a7ce05886d0d61e8edd3861ba2d4c5b79a"
+embedded = "ec6bbf9ce07de71716d88d5c1bea953f9b5e1906fe76429ec5c8345f8d2c3f4f"
+status = "translated"
+digest = "5d0d56334c4d43c286af82df141ffe4874caee775e7c9248cee04bc07dab33df"
+
+[[fn]]
+path = "md5::compute"
+kappa = "c530a7747a161694b02b4e096df558590e9dc13e0074a2a7360db20e845dea50"
+at = "Context=u32, Digest=u32, T=u32"
+embedded = "88d1824d017dba7c7fe411b59ff32e624458a5c532f1037ebe0b75819fcb97cb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Context::new: md5's MIR stops at mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "md5::consume"
+kappa = "a923ac41368065d2f4320768ae6a1feee0c9571fe56b0b078bbc9cf63a96f40f"
+embedded = "8250feb25dcd501e551c000160c566dae3594c8fdbf2f585e5c8ecd12bae4a0a"
+status = "residue"
+cause = "mir::Ty: Context"
+
+[[fn]]
+path = "md5::transform"
+kappa = "f6637579fc5e796f5a2f03eea5434fc9b124fdc09dc68fe2d2ec73c431d020e9"
+embedded = "762dba21f5d9fd47f2e920b0a702aa855637b66b45e0289e9f972ab52729ff37"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::from_le_bytes"
+

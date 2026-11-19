@@ -1,0 +1,225 @@
+# The gif register (written by `uorust crate gif@0.14.2`; do not edit): every body of
+# gif's MIR at gif 0.14.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 182
+translated = 3
+residue = 179
+
+[module.common]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.encoder]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.reader]
+bodies = 106
+translated = 3
+residue = 103
+
+[module.traits]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 182
+embedded = 182
+evaluable = 182
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::DecodingError"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: common::Frame<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: encoder::EncodingError"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DecodeOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: encoder::Encoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoder::Repeat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PixelConverter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StreamingDecoder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reader::DecodeOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reader::Decoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AnyExtension"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::AnyExtension"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::Extension"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::Decoded"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::BufReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Block"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisposalMethod"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Extension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FrameDecoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::Block"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DisposalMethod"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::StreamingDecoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::Version"
+bodies = 2
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Ord>::clamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::next_power_of_two"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ColorOutput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Frame<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InterlaceIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LzwReader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MemoryLimit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::Buf<#_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::ExtensionData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::DecoderIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::MemoryLimit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::converter::ColorOutput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::converter::PixelConverter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::FrameDataType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::FrameDecoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::LzwReader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::decoder::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: weezl::LzwStatus"
+bodies = 1

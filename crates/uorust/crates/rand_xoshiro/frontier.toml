@@ -1,0 +1,254 @@
+# The rand_xoshiro register (written by `uorust crate rand_xoshiro@0.8.2`; do not edit): every body of
+# rand_xoshiro's MIR at rand_xoshiro 0.8.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 245
+translated = 25
+residue = 220
+
+[module.common]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.f2x]
+bodies = 5
+translated = 1
+residue = 4
+
+[module.splitmix64]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.xoroshiro128plus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoroshiro128plusplus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoroshiro128starstar]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoroshiro64star]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.xoroshiro64starstar]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.xoshiro128plus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro128plusplus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro128starstar]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro256plus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro256plusplus]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro256starstar]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.xoshiro512plus]
+bodies = 16
+translated = 2
+residue = 14
+
+[module.xoshiro512plusplus]
+bodies = 16
+translated = 2
+residue = 14
+
+[module.xoshiro512starstar]
+bodies = 16
+translated = 2
+residue = 14
+
+[embedding]
+bodies = 245
+embedded = 245
+evaluable = 245
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: rand_core::Infallible"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Xoroshiro128Plus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoroshiro128PlusPlus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoroshiro128StarStar"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro128Plus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro128PlusPlus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro128StarStar"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro256Plus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro256PlusPlus"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro256StarStar"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Xoshiro512Plus"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Xoshiro512PlusPlus"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Xoshiro512StarStar"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::Seed512"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Seed512"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SplitMix64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Xoroshiro64Star"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Xoroshiro64StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: splitmix64::SplitMix64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoroshiro128plus::Xoroshiro128Plus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoroshiro128plusplus::Xoroshiro128PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoroshiro128starstar::Xoroshiro128StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoroshiro64star::Xoroshiro64Star"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoroshiro64starstar::Xoroshiro64StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro128plus::Xoshiro128Plus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro128plusplus::Xoshiro128PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro128starstar::Xoshiro128StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro256plus::Xoshiro256Plus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro256plusplus::Xoshiro256PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro256starstar::Xoshiro256StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro512plus::Xoshiro512Plus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro512plusplus::Xoshiro512PlusPlus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: xoshiro512starstar::Xoshiro512StarStar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: common::zero_seed_fallback::{constant#2}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1

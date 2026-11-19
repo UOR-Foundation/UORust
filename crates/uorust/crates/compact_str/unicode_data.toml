@@ -1,0 +1,38 @@
+[[fn]]
+path = "compact_str::case_ignorable::lookup"
+kappa = "9ada766ff6769f07000084954c9713da2aea513f44cbb8ea52a5122aa34d63e6"
+embedded = "7887fb745acd483adf7f545cc3fdc235d801855d6a5010f8653c30e82efb0ee1"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc96: &[u32; 35]}"
+
+[[fn]]
+path = "compact_str::cased::lookup"
+kappa = "06e8d2a535f88cd8cff5a06f8dc8e017f5223344879130ec94982116656bf7f7"
+embedded = "68c9dc400367a232b0ffdc6039de879bf150d1664c2013fb996aaa50337dd7d8"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc100: &[u32; 22]}"
+
+[[fn]]
+path = "compact_str::decode_length"
+kappa = "11b26bb93580f1535fe184e7a3800adc8568a4104fca20ed158fa1d79d35b341"
+differential = 7
+embedded = "4f8bd15e6578657ff759dca4b7965edc010bf8e17aa3c55c3d4d859b2f36ccde"
+status = "translated"
+digest = "f7675bf2307781e1cdc44ffc47407c8bcf39c1bce532e9aeeb921b43edd2a0ea"
+
+[[fn]]
+path = "compact_str::decode_prefix_sum"
+kappa = "873893e5da018e5de9e2e9613f476df4113c83ca49720688db412c29993e535c"
+differential = 7
+embedded = "e8f1cb4f058f8acdf2fce382e45c0994de44b74e62947b46ab5ea27e74b009e7"
+status = "translated"
+digest = "6059f90e1b72f06417dfaaafcf72fb907dac6d0c07d2e0190996789102c3c130"
+
+[[fn]]
+path = "compact_str::skip_search"
+kappa = "3bc47deeebc87862e052fc0f5c41dc274f01055573bbc0978ec661d416f005a7"
+at = "OFFSETS=#_OFFSETS, SOR=#_SOR"
+embedded = "d86554a67fa067d82371eaf89d60cb6a9f52ad7828e46875d4e17d9817e9ecb1"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+

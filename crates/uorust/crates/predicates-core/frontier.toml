@@ -1,0 +1,83 @@
+# The predicates-core register (written by `uorust crate predicates-core@1.0.10`; do not edit): every body of
+# predicates-core's MIR at predicates-core 1.0.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 36
+translated = 0
+residue = 36
+
+[module.core]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.reflection]
+bodies = 35
+translated = 0
+residue = 35
+
+[embedding]
+bodies = 36
+embedded = 36
+evaluable = 36
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: reflection::Case<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflection::Product"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CaseChildren<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CaseProducts<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Parameter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn reflection::PredicateReflection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflection::CaseChildren<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflection::CaseProducts<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflection::Child<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Case<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = reflection::Child<'_>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = reflection::Parameter<'_>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflection::Parameter<'_>"
+bodies = 1

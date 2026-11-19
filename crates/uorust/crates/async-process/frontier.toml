@@ -1,0 +1,236 @@
+# The async-process register (written by `uorust crate async-process@2.5.0`; do not edit): every body of
+# async-process's MIR at async-process 2.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 93
+translated = 0
+residue = 93
+
+[module.crate]
+bodies = 59
+translated = 0
+residue = 59
+
+[module.reaper]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.unix]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 93
+embedded = 93
+evaluable = 93
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::process::Command"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::process::Child"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reaper::ChildGuard"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::OwnedFd"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reaper::Reaper"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::process::ExitStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc19: &OnceLock<u32>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CallOnDrop<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Child"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChildStderr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChildStdin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChildStdout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Reaper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: async_io::Async<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::signal::ChildGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::signal::Pipe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::signal::Reaper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::wait::ChildGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::wait::Reaper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reaper::wait::WaitableChild"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::process::Pid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signal::ChildGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signal::Reaper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::CommandArgs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::process::CommandEnvs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wait::ChildGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wait::Reaper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/lib.rs:1115:9: 1115:14}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/lib.rs:1147:9: 1147:14}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/lib.rs:369:9: 369:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/lib.rs:419:9: 419:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/lib.rs:717:5: 717:10}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ChildStderr::into_stdio"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ChildStdin::into_stdio"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ChildStdout::into_stdio"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::Reaper::lock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::Reaper::reap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::Reaper::status"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::signal::Pipe::wait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::lock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::reap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::status"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::wait::Reaper::reap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of reaper::wait::Reaper::status"
+bodies = 1

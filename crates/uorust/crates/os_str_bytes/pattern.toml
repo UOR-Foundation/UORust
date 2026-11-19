@@ -1,0 +1,57 @@
+[[fn]]
+path = "os_str_bytes::Encoded::__as_bytes"
+kappa = "bf66efe62edfaaaad2342d15bee990e668c11c72e83aaaaf500cb9b67318a5f6"
+at = "Self=u32"
+embedded = "58a4b17195151205d2eba859ef5bf974fd9da7b7865525d15c77bb564714f37d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Encoded, which u32 does not implement in core"
+
+[[fn]]
+path = "os_str_bytes::pattern::<impl at src/pattern.rs:15:10: 15:15>::clone"
+kappa = "f09b3c151ee544a6b1e9746b591f217e636f74efa9f2518334e045a3daa27a15"
+embedded = "790a9e6d093555b313c3057c2a1bcef29073c27e1a12b7a810ccc3b30549645c"
+status = "residue"
+cause = "mir::Ty: pattern::EncodedChar"
+
+[[fn]]
+path = "os_str_bytes::pattern::<impl at src/pattern.rs:15:17: 15:22>::fmt"
+kappa = "63b90934c9e1a19d9625fbfe99152935ef71e3347df803a339ff578e70b51b08"
+embedded = "05bf7d3495a0885a0816e0d46ebc27525379eaacd27cce3c007116979c74f738"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "os_str_bytes::pattern::<impl at src/pattern.rs:28:1: 28:22>::__as_str"
+kappa = "f4355debb6f01fcf419a8baadbc7c1e5616eb6fb9b8d902f297fd7a01f59fc32"
+embedded = "e27793f1ed4c0679b680700e417138e4fb13f14d0eea85dc360a520f7a2992c9"
+status = "translated"
+digest = "29b975255ed80ae2deba9244058334cbbdf7513f2bb2325f230620d3caf34e8b"
+
+[[fn]]
+path = "os_str_bytes::pattern::<impl at src/pattern.rs:63:1: 63:22>::__encode"
+kappa = "856be2972f598818cddaaa33b54f8520edca72c84f83c2117fd3bfd65146f8a0"
+embedded = "85936d0ede0dcd443059d108d17bc90548ea912715bbaac0a32cc86e95aaab7c"
+status = "translated"
+digest = "9749d98e7b2c113342d4ea9bf7d36acd6f8b20f6af61499b6865fbff6ff01dfa"
+
+[[fn]]
+path = "os_str_bytes::pattern::<impl at src/pattern.rs:71:1: 71:32>::__encode"
+kappa = "b059cfbc416bb20e2d519c75f6c679d64d8b427f181953b74e09e32aa3f68e1d"
+embedded = "47af7a17498b19608427ae4fba5b4e95f2ee48274247e487bf0ce003c2acd678"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&str as pattern::Pattern>::__encode"
+
+[[fn]]
+path = "os_str_bytes::pattern::EncodedChar::__as_str"
+kappa = "f4bf82e3cd374007f6a99d31081c13d29bbd8084430373014657f602ba3e5add"
+embedded = "22c8c397c9af2037e32be54deb967875382f72ab5e9946d5ecd7adb4dba1ad31"
+status = "residue"
+cause = "mir::Ty: EncodedChar"
+
+[[fn]]
+path = "os_str_bytes::pattern::char::__encode"
+kappa = "1fccf97de53b9465f2d7518d28a9ccae481ffe02edfea3836f9d34b3c02d23f0"
+embedded = "101b6801867f20922dd1980c1c180c4063e01aa281bb466dfb6673c0778da572"
+status = "residue"
+cause = "mir::Ty: pattern::EncodedChar"
+

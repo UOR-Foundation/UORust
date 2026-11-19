@@ -1,0 +1,554 @@
+# The prometheus register (written by `uorust crate prometheus@0.14.0`; do not edit): every body of
+# prometheus's MIR at prometheus 0.14.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 652
+translated = 2
+residue = 650
+
+[module.atomic64]
+bodies = 30
+translated = 2
+residue = 28
+
+[module.auto_flush]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.counter]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.desc]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.encoder]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.errors]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.gauge]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.histogram]
+bodies = 102
+translated = 0
+residue = 102
+
+[module.metrics]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.nohash]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.proto]
+bodies = 272
+translated = 0
+residue = 272
+
+[module.proto_ext]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.pulling_gauge]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.registry]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.timer]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.value]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.vec]
+bodies = 23
+translated = 0
+residue = 23
+
+[embedding]
+bodies = 652
+embedded = 652
+evaluable = 652
+blocked = 0
+
+[differential]
+bodies = 8
+theorems = 62
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 59
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: proto::Metric"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: MetricFamily"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: proto::Histogram"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: LabelPair"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: protobuf::Error"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: protobuf::SpecialFields"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: proto::MetricFamily"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: proto::Counter"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proto::Gauge"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Summary"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Bucket"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Quantile"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: histogram::HistogramOpts"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::GeneratedMessageDescriptorData"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::MessageDescriptor"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: desc::Desc"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::LabelPair"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::MetricType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: histogram::ShardIndex"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: metrics::Opts"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::Summary"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: registry::Registry"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: <u32 as vec::MetricVecBuilder>::M"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AtomicU64"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: LocalHistogram"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Untyped"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: histogram::Histogram"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::Bucket"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::Quantile"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::Untyped"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: value::Value<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: <u32 as atomic64::Atomic>::T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AFLocalHistogram<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: GenericGauge<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: GenericLocalCounter<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: counter::GenericCounter<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: counter::GenericLocalCounter<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: gauge::GenericGauge<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AFLocalCounter<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AtomicI64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LocalHistogramCore"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MetricType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: histogram::LocalHistogram"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AtomicF64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GenericCounter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NoHashHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: counter::CounterVecBuilder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: counter::GenericLocalCounterVec<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gauge::GaugeVecBuilder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: histogram::LocalHistogramVec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GenericLocalCounterVec<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HistogramCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HistogramTimer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocalHistogramTimer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocalHistogramVec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ValueType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::pb::ProtobufEncoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::text::TextEncoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: histogram::HistogramTimer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: histogram::HistogramVecBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: histogram::LocalHistogramCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: histogram::LocalHistogramTimer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nohash::NoHashHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pulling_gauge::PullingGauge"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vec::MetricVec<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item matches_charset_with_colon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item matches_charset_without_colon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item protobuf::VERSION_3_7_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc538: &std::sync::atomic::Atomic<u64>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc557: &UPDATER_IS_RUNNING}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: desc::matches_charset_without_colon: prometheus's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ANCHOR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cell<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DEFAULT_REGISTRY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HistogramOpts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MetricVec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MetricVecCore<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Opts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProtobufEncoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ShardIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TextEncoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UPDATER_IS_RUNNING"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: atomic64::AtomicF64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: atomic64::AtomicI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: atomic64::AtomicU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auto_flush::AFLocalCounter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auto_flush::AFLocalHistogram<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: histogram::HistogramCore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: histogram::Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: histogram::Shard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: histogram::ShardAndCount"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protobuf::descriptor::FileDescriptorProto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::EnumDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::EnumValueDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::FileDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protobuf::reflect::GeneratedEnumDescriptorData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::RegistryCore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::thread::LocalKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::ValueType"
+bodies = 1

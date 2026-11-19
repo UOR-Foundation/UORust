@@ -121,9 +121,11 @@ def clap_call(module, record, sub):
                 long = False
     return " ".join(words)
 
-def source_list(module):
+def source_list(module, records=None):
+    if records is None:
+        records = SOURCES.get(module, [])
     o = "(nil Architecture::Source)"
-    for rec, path, first, last, k in reversed(SOURCES.get(module, [])):
+    for rec, path, first, last, k in reversed(records):
         o = (f"(cons (record Architecture::Source {{record := {q(rec)}, path := {q(path)}, firstLine := {first}, "
              f"lastLine := {last}, kappa := {q(k)}}}) {o})")
     return o
@@ -134,6 +136,47 @@ def q(s):
 
 def defn(name, result, body):
     return f"definition{{\n  name: {name},\n  parameters: [],\n  result: {result},\n  body: {body}\n}}\n"
+
+# The LexLean reader intentionally refuses semantic notation past depth 256.
+# A large provenance inventory must remain fully cited but not be represented
+# as one deeply nested literal. Chunks and pairwise appends preserve list order
+# while bounding every individual term's parsing depth.
+SOURCE_LIST_TYPE = "(List Architecture::Source)"
+SOURCE_LIST_RUN_SIZE = 16
+
+def bounded_source_definitions(module, name):
+    """Emit ordered source-citation lists with bounded closed declarations.
+
+    Each part holds at most 16 source records. Adjacent parts are merged in
+    pairs, with every referenced definition emitted before its consumer.
+    No source record, span, or kappa is synthesized or omitted by this step.
+    """
+    sources = SOURCES.get(module, [])
+    if len(sources) <= SOURCE_LIST_RUN_SIZE:
+        return defn(name, SOURCE_LIST_TYPE, source_list(module, sources))
+    definitions = []
+    level = []
+    for start in range(0, len(sources), SOURCE_LIST_RUN_SIZE):
+        part = f"{name}Part{len(level)}"
+        definitions.append(defn(part, SOURCE_LIST_TYPE,
+                                source_list(module, sources[start:start + SOURCE_LIST_RUN_SIZE])))
+        level.append(part)
+    stage = 0
+    while len(level) > 1:
+        parents = []
+        for i in range(0, len(level), 2):
+            if i + 1 == len(level):
+                parents.append(level[i])
+                continue
+            parent = f"{name}Join{stage}Part{i // 2}"
+            value = f"(prim append ({level[i]}) ({level[i+1]}) : {SOURCE_LIST_TYPE})"
+            definitions.append(defn(parent, SOURCE_LIST_TYPE, value))
+            parents.append(parent)
+        level = parents
+        stage += 1
+    definitions.append(defn(name, SOURCE_LIST_TYPE, f"({level[0]})"))
+    return "\n".join(definitions)
+
 
 def strlist(items):
     out = "(nil String)"
@@ -783,7 +826,7 @@ theorem{{
   proof: decide{{}}
 }}
 """
-out += "\n" + defn("sourcesOfMeasures", "(List Architecture::Source)", source_list(Qm))
+out += "\n" + bounded_source_definitions(Qm, "sourcesOfMeasures")
 out = out.rstrip("\n") + "\n" + FOOT
 open(f"{OUT}/Quality.lex.tex", "w").write(out)
 

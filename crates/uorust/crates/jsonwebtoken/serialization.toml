@@ -1,0 +1,39 @@
+[[fn]]
+path = "jsonwebtoken::b64_decode"
+kappa = "be841e0f0632270ccbb6d1731f5e394cf3225744e096ab7ee9c473b923ce149a"
+at = "T=u32"
+embedded = "9dfbb4e2442e835a61af60615a1a1eb28129562b12c9e3305d62451c916177ce"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jsonwebtoken::b64_encode"
+kappa = "8244743ceb2581e70315024f67a98f59bea3b4acae4fad03392b55f606144a84"
+at = "T=u32"
+embedded = "0c9d4ae5cc08d054a0efcd2a05b72aa712fd5c9ad89edfaa80b79d02dfb1fde8"
+status = "residue"
+cause = "mir::Operand::Constant: serialization::b64_encode::<u32>::promoted[0]"
+
+[[fn]]
+path = "jsonwebtoken::b64_encode_part"
+kappa = "444a6f41483713a83ac4b5cef73890778bcffd4c8ebb75c52d211e41b27a7853"
+at = "T=u32"
+embedded = "55fa64f15dcb69562173f768c2ae409eb803b849efd8de8d45a7d610d6927c5a"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jsonwebtoken::serialization::DecodedJwtPartClaims::deserialize"
+kappa = "e8b8fe275152716dd5c35610a34fcbbd20d3e2f13463f49017bd9c0673da7a69"
+at = "T=u32"
+embedded = "298376c4212d1a3074578dd5a875023038adfb78a6433279f387d936ae8f9f35"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jsonwebtoken::serialization::DecodedJwtPartClaims::from_jwt_part_claims"
+kappa = "00da12aee639874936dde8a8e0b91de321759c0cbe53056f2bd06faff93598e7"
+embedded = "117b1b27d7551979a0d31636f0e533c6522d6b3c39497d3ece9c054cec42bf1e"
+status = "residue"
+cause = "mir::Ty: serialization::DecodedJwtPartClaims"
+

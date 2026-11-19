@@ -1,0 +1,1101 @@
+[[fn]]
+path = "image::bc_cubic_spline"
+kappa = "cbed53201e0df255b034d077bd540854a17532b93c1fe32fd847db9301c7685c"
+embedded = "0691eedea3414ffd97d2b0b47d2d8a36cbce738eaa78e4fc3b29fbb1232843f7"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::blur"
+kappa = "3e482e7f8d48ee7015db5a19c60bed12ac3b6308b813f82d53d6caf411ce0e07"
+at = "I=u32"
+embedded = "7a48c2a11b1f2daa4c1811343a8b8a74f106ab6ab60dd4aca5df8558865bdb6c"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::blur_advanced"
+kappa = "ba895bc68974271071c5380977f6e412963a144ccc23a8f123391b52ec82a5fb"
+at = "I=u32"
+embedded = "15f6653140034a87f5e1e54d2c784dd7b1675909b201bda6c984e7e972cfc7a7"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::box_blur_horizontal_pass_impl"
+kappa = "22cb44afe82b2945882c6f92dd2915cf59a2aa7ce3b361c05dfca2ca8d21193b"
+at = "CN=#_CN, T=u32"
+embedded = "2e0c963c9f6159d1bfb94a5723c1d43cfe366f8b015eb8d4c867f3978ae9d10e"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "image::box_blur_horizontal_pass_strategy"
+kappa = "831bb9f3e49e6e8001268fb284a172610ee01e375b51c1e844f6b0b8d1799828"
+at = "P=u32"
+embedded = "eb5bd45aaddc57dc5bfd7c166a258066c6488385b7f02369eaece5800370e541"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as traits::Pixel>::CHANNEL_COUNT"
+
+[[fn]]
+path = "image::box_blur_vertical_pass_impl"
+kappa = "8da84e7a1c4309e77ace7897f81a9664f4cb4585f6ca591d4adb6f68d2981d6d"
+at = "T=u32"
+embedded = "a9ad0eb40504c4b127450b04ec72a039363c892b6bfc552375ee3db765201b16"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::box_blur_vertical_pass_strategy"
+kappa = "ff77b5cdaf3ac76e6aef17956b5079906e38b34b8939cc32df0ff1d931d28217"
+at = "P=u32"
+embedded = "f8689c6a78622f92a997434c3855b8a9615d11ea71a634167d78c599c2aea430"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as traits::Pixel>::CHANNEL_COUNT"
+
+[[fn]]
+path = "image::box_kernel"
+kappa = "c10c0692287ae17ffea5bbecb8ca71fd1fc1cf22fdc288919407865047a6ede2"
+differential = 12
+embedded = "5a4583f2c11136744e7dea6a8e0bc8d13673a2f16c955629ba1686a91d543a02"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::boxes_for_gauss"
+kappa = "18ad92f3d8cd5479bf8c92501ffbbbac37839f93711e209f6b923cd80cad544c"
+embedded = "93b473f9eb476c83c1e23cd9c65560c980b42efed35c7dfd78e00ae8c660eb16"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::brighten"
+kappa = "caaba725eacc6c544823a47f6308c919228bd6199f6be7c1500dd761e5c84ab9"
+at = "I=u32, P=u32, S=u32"
+embedded = "158ef7c6966fdc6905f31392b29ebcb2ea9fa1c3d8d11de2e8af67b7b2514fa5"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::brighten_in_place"
+kappa = "2e17ee2d614f999bab2d653a8c4bbb1184dc87c1055723c85ab7feeaf0b0b294"
+at = "I=u32"
+embedded = "5a6ae26c1a158a0e4e5586996a3c1726ba8e631a65db835adb1379108c1d4a6d"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::catmullrom_kernel"
+kappa = "7451c3557f375d547de78f93e47e5d9ab650863006c151f0d8f05317e409acce"
+embedded = "aaa17977da793aab6e8217537ab8e0d76097637469b3c92826b8a9eb1317c04a"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::ceil_to_odd"
+kappa = "f472ed32838cd32a1ce98b3710ba18e4dcf8e9f2bd508860918c354da74ed865"
+differential = 7
+embedded = "503199115cac2625e8c71bb552a451c9a32965106cd278aaee686d5132c9c651"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::is_multiple_of"
+
+[[fn]]
+path = "image::colorops::<impl at src/imageops/colorops.rs:399:10: 399:15>::clone"
+kappa = "f1052f8b8d78bb4958491ca3b275ff871184e83721e86749943729375f2d2f52"
+embedded = "14a0e87eead177031b2a11c163ae6e4f66a9cfd8e638ba1f8f97a90dcbbffbd0"
+status = "residue"
+cause = "mir::Ty: imageops::colorops::BiLevel"
+
+[[fn]]
+path = "image::colorops::BiLevel::has_lookup"
+kappa = "eb9891708b8af7a8803e3e7dc14686bedcbcc68287e5472b4701b7b095f720f9"
+embedded = "da0713c5a0862bf2300a841ac7cb4adc85c4f6086d95e485309c14d7cac0786d"
+status = "residue"
+cause = "mir::Ty: BiLevel"
+
+[[fn]]
+path = "image::colorops::BiLevel::index_of"
+kappa = "1742775505ac22c88d45ca75e6624367215a72746ca4fa12de7b04269cb97188"
+embedded = "c7425f2bd105cd778aab323c1d0d4912a3ba9802029ec680aa59e3cdf74418b8"
+status = "residue"
+cause = "mir::Ty: BiLevel"
+
+[[fn]]
+path = "image::colorops::BiLevel::lookup"
+kappa = "c07978638eb9cf24ded3bedd6fbaf89e78de00dd834c8c17de1067273a1fbd98"
+embedded = "15d3ebbc915bea1e3f9c989949aa7f8691b45afd47a3ca7858569e421fa00d91"
+status = "residue"
+cause = "mir::Ty: color::Luma<u8>"
+
+[[fn]]
+path = "image::colorops::BiLevel::map_color"
+kappa = "959831d4f6ccbd340aec7e330989039b6671d729cc1d3fe42eaabaacf0e00cdb"
+embedded = "c51523974e3ac7988cf71b0b3a70126018093aa261e6cb548890bac3fe6c59f1"
+status = "residue"
+cause = "mir::Ty: BiLevel"
+
+[[fn]]
+path = "image::colorops::ColorMap::has_lookup"
+kappa = "cdcecd047d7d2b46ae766a940e351c236b31037a63386818127527096f707e32"
+embedded = "48a9d04832b2eb9d9250f2a5b232b0878daf8970587c02b6fe8eb70abee6541c"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "image::colorops::ColorMap::lookup"
+kappa = "af96a454dee6b63e751e16d4eec872ddd9e95f20ca10e09b388fdb1c3cf065f8"
+at = "Self=u32"
+embedded = "026e317299154def648dcb751b36144707e49933201d9ee40fe2740c757d072d"
+status = "translated"
+digest = "71e2d75f3917cdf67b69e5454bf1a4ceb999a95c219cb8f853864261d8b1f3c3"
+
+[[fn]]
+path = "image::contrast"
+kappa = "66406caa0eba67319dc9e288621004ac4b55d4aaeaa2fb1945b71aa42f92b142"
+at = "I=u32, P=u32, S=u32"
+embedded = "f8acab04e1e00008de2641dd4c08bd228ee30a05e1fe03ebc0561831054ceede"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::contrast_in_place"
+kappa = "5bea4c8727599ad7e7f98f13504a7cb3d5243d8cd1dd4d6380e182fe1d901f67"
+at = "I=u32"
+embedded = "f8631b654db62fe38d0b2d34c625936c1c49c1e0e7cc2345e0676480acd61740"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::crop_dimms"
+kappa = "4da8fef9a0c790019d296fc98a0dbd53e0fc40ee8dc4b96de9377f5b8579064a"
+at = "I=u32"
+embedded = "2d0b88f230a2205f7b8a8889e0decb2f43e824a895af48ea51532113400d8ac9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by GenericImageView, which u32 does not implement in core"
+
+[[fn]]
+path = "image::crop_imm"
+kappa = "624343ced391eee26374a6e52a8478f0a6479219e96df72af28c5f24f0c1fcc2"
+at = "I=u32"
+embedded = "6730f8541403574c2f2f584d01186bdf6f364195c70ec16be2735446ef9d57ee"
+status = "residue"
+cause = "mir::Ty: images::sub_image::SubImage<&u32>"
+
+[[fn]]
+path = "image::diffuse_err"
+kappa = "bd07001285a40f2619f3c782a09cd631f9ca6c43603b26f70f5e136c532e768c"
+at = "P=u32"
+embedded = "2f301b340212f63bbd4f233a0c7f705d0a1c2cbffbc38402f6465402b880c024"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Pixel, which u32 does not implement in core"
+
+[[fn]]
+path = "image::dither"
+kappa = "2ccfd22f3bc7e0795c99bec6ffadd7f5419c3fc608332a8276b59a410f315cce"
+at = "Map=u32, Pix=u32"
+embedded = "6c87f7394e6a9aad7e67f2c14ed6c3fc52861da59cfed82e956f7a2f41059296"
+status = "residue"
+cause = "mir::Ty: ImageBuffer<u32, std::vec::Vec<u8>>"
+
+[[fn]]
+path = "image::fast_blur"
+kappa = "90a3af95116f2d305a405feaddab1003e086d68bdfe13ee88c174ceca370ae08"
+at = "P=u32"
+embedded = "7fc1179ec5136c437bc6fd9cc5e3ad0b112dc379b4a82c1569c92704920d7723"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::filter3x3"
+kappa = "0f4333b9a6c5caf3af45f70f94e7f05f9e7b58e23c8c8218d617def894ac38c4"
+at = "I=u32, P=u32, S=u32"
+embedded = "4c2a2b1f826b6a60abd7db1fc9e4d72d2d961dd5d4023a7724683e93a7c1f982"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::filter_1d::<impl at src/imageops/filter_1d.rs:113:10: 113:15>::clone"
+kappa = "3815b08eadae98cb37bc4cbe3c763aec999a025c3706124864c51e8c23142ffa"
+at = "T=u32"
+embedded = "a665cd76ac31aba733dd47f47aa4de81b32cf233e0af0bff2a773834ec03f499"
+status = "residue"
+cause = "mir::Ty: imageops::filter_1d::ArenaColumns<u32>"
+
+[[fn]]
+path = "image::filter_1d::<impl at src/imageops/filter_1d.rs:44:10: 44:15>::fmt"
+kappa = "bbca5bdcb3abe51d00e5f68d8ddfbbfa20676c8ef80f75eb407a01c237d27e8a"
+embedded = "07f3202ed5a3116e9b03584f6378877d93c05c39039ddc328a7ee8bc373a831b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::filter_1d::<impl at src/imageops/filter_1d.rs:44:17: 44:22>::clone"
+kappa = "e867bb21c2232792854b053dab89c789bc88c5a22e399aa557c0b6e1fd964131"
+embedded = "0506e48e11274b22c667bf1f82241816692570a16dac510dadce214464cd9d94"
+status = "residue"
+cause = "mir::Ty: imageops::filter_1d::KernelShape"
+
+[[fn]]
+path = "image::filter_1d::<impl at src/imageops/filter_1d.rs:50:10: 50:15>::fmt"
+kappa = "62db9ffb0dee5148fa098495c0eb2253279ac120a355fbcdce9059500ab5c383"
+embedded = "5a8aaff91da289e73a493d2b2eabb0871ddc8a51c7afc2a49cb075777dc20e0f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::filter_1d::<impl at src/imageops/filter_1d.rs:50:17: 50:22>::clone"
+kappa = "2f6896a08392e626d5bb349e550e4423ad5cf581b47c870811642489c3bef67e"
+embedded = "c94c19fcb7eb0fe5c9d40adc24fe77bbb7137a763ae2786a6936ffc05bd68096"
+status = "residue"
+cause = "mir::Ty: imageops::filter_1d::FilterImageSize"
+
+[[fn]]
+path = "image::filter_1d::f32::to_"
+kappa = "36c1a2077e72837b3430d817542858994c9b8e50434cfef5ef54aaa01bd5c6e5"
+embedded = "23eb6c83369adab5b440fdddd7ca95d79922426a1c2ff8a4f015fb717131a216"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::f32::to_#2"
+kappa = "95d1e8447e3719531f7e22ddae4d33aaca0be2f5eca49b644ce5e934098ac5f5"
+differential = 12
+embedded = "e877ec90ab0bccfe3e9a5363096ef61c7f9ab0a6a3b8c86f47ecd02515d40535"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::f32::transform"
+kappa = "16c9982b7424c447673f6c58bac73fc5843920f9a88eb12d2353a7ac89951e53"
+differential = 12
+embedded = "589d5c42224077f75a12f70152574f0a72f889343e7d77ad623560f066278863"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::u16::transform"
+kappa = "4fdc94619aca5cbb560ac4d26824e0e0aa2d8ca32bc3d773d77a5712b95623ad"
+embedded = "0fb708f913306b372ec2b5a16e66e03b90b6e9ade730904a386dd2b634ea393b"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::u16::transform#2"
+kappa = "232b9af7de769dfe5ca4038d3dac1a50a61f5b3085603a4ea19277e5e6a7da4d"
+differential = 12
+embedded = "d1d290b7e4f45783364aa13e6d8809b43d4703acde2953519e0ffa901a875914"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::u16::transform::SCALE"
+kappa = "eca8582fe8340e568433e4aa839ba2379d540b2604068f294db7e5054c7ffcf5"
+embedded = "f7c2ae2f14dde069533e79c2a614535d4a9e50000312d2bc82a6cf51dd86757c"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::u32::to_"
+kappa = "2983c49049c5f59bee84d38ec296bac85e3af964b890836da772cebf75e15e25"
+embedded = "737113ae78fa5cf8b2a8af7146dd66fe7113e67cee70e70a41fd0b9cc51d2ce2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imageops::filter_1d::Q0_15"
+
+[[fn]]
+path = "image::filter_1d::u32::to_#2"
+kappa = "67976dd639b36baeba75fb6aca0849eab76e5424acd83f7487f8dd45402b157b"
+embedded = "10065a449997ccf08435f61200ed495cc0a9434be5c27c15943afdadc1a465fc"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imageops::filter_1d::Q0_15"
+
+[[fn]]
+path = "image::filter_1d::u8::transform"
+kappa = "b0c5f9a1d5e52c6eec5014b6bbc8eede19f8ab7488e2e111380f7060b225a36b"
+embedded = "7346b33a723acfcfdc5b71895eff1b223e5480ffa439d173a405950c1cf15a07"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::u8::transform::SCALE"
+kappa = "2fe71abd9796abf1e2cd8904642605556256e7ad0f2af0431489eb26f9539261"
+embedded = "4f31ccbf40e18fae37beb0285eb9c2be61701ab42f14baa4a6bb18535fa23354"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::filter_1d::usize::safe_add"
+kappa = "9997fe4fed18612c1bf67f230afb807cad5e2559e4c6096d3f6b39fc785f32ac"
+embedded = "5db5ee6d29b0ac27e6565647448f9245dcaf6090ad39ebc78009e2322f902d61"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_1d::usize::safe_mul"
+kappa = "c63ffbe0771989744417ed8ea0d9ddf5bc15649b808730291b8200166be99736"
+embedded = "b405208cca89a23b65e65e8b69dfb9f9def950908d9f19072444c87e99fdaaba"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_la"
+kappa = "1bce8c54e8545c52cd0658acd1726abde5b06f7f546a5c6bb0cfee15604bd107"
+embedded = "f8a730806388022793439cc669e0effb82995503b5696d63febde26750f8e9f8"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_la_f32"
+kappa = "b3e7e93e1cffdb93f8d664128fadc2047fe9de918792a7d23d2b879cd18d1eb2"
+embedded = "61e35c36a845c0c3a1f6a83905366a82d0e75b94832d314dbb21ab0daa38dad2"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_la_u16"
+kappa = "6ce6edeb8076a484e9ca676f4da930b75bd3d104b76391706d0b7450dfc49cf3"
+embedded = "4d53ab79b8312ee65c2b9bff3bdfe90115e68ab9848ff78a2e8d8b52c7862999"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_plane"
+kappa = "f2c822665fee331a64d767d9598f6ab53a8da720e37a3e8284aebc2a3d32160e"
+embedded = "d4174262ab3ead79739348deb718e943c394093b9d31816fed73e682dfd0d0c1"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_plane_f32"
+kappa = "f446778916da0c716ef6606de4de683556bfd812613740e8751dfe7de3fb3218"
+embedded = "c07ff93650de5bd9b2ec572687932c3f629500599853fb0c17c338ecd78aec35"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_plane_u16"
+kappa = "3ca2b408885d9552781277c7c36533b7229a5f02daca1cd8a0b6ee8d8411eef0"
+embedded = "b8cfec246cda7087d24fdc1d8efcebb60f24c55bc633a08a96355a08fe68b0d0"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgb"
+kappa = "306edd88a347d9828b4f67dde2b9f98855d23cf3aa1b0feb74679f55bbf418f7"
+embedded = "ea3a325d763fb28d146bf6962b0cd560c2da1e7e185248e1fc395666a655832e"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgb_f32"
+kappa = "c83055a951844d8fea9b0ffcf6e484141b9ebc453fd01bec237ce254bddd8686"
+embedded = "06061d6ba2eeccd1357de89f810fc053cc3cc9598c5fe55b1196e40a96fca053"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgb_u16"
+kappa = "30dc20a8886844329372cbf5f0b6b8b061f26f371d063317cabfbe44eed69494"
+embedded = "d4c739295179d553cf41acfbb4417d8c29bac9d16a46072a85617e9a5d98c849"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgba"
+kappa = "df698a297e105ce86a0ecaba3f6a62365dc3c12d4aee9edceefac2410f3b5202"
+embedded = "0e4b68eab20cd5e7568deec4adbf7ff84d8994c4d54726c4c3772469ed4b7725"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgba_f32"
+kappa = "a6eecebf08cb2853bd23f091c3c333dd81e01f42c42e243df6b156c8c3f19e69"
+embedded = "1fe3f2eb5cfe20b21a5fa920751126f5e6ac6b332249201c1af5e0aaf8d107fc"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_sep_rgba_u16"
+kappa = "829a581c2452defe666e87b3c63d42858f3109d45e874365b812382e2a4c7a50"
+embedded = "6da89ad53fe0a6eab6218430f984bf832e9f5b2e37e3ff15f12f1f5446a2ef46"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_separable"
+kappa = "bbcc4840233a6813c100de2bc5977613a2579a5202777ad9f8454b5dea708f6a"
+at = "F=u32, I=u32, T=u32"
+embedded = "f3db6b09f964d223a44d8e7ff9f4b0cfd0b69c26241eadcbaa0de4e960dc3297"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_2d_separable_ring_queue"
+kappa = "0a966a9c614baa09baa3b0aaa180a1fd48f46ae091d0149b1e739bfbb9f9a6ab"
+at = "I=u32, T=u32"
+embedded = "715aadd75c888608e9879554cb2e6084ef0383717463c3bd73aa15c484a14e72"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::filter_symmetric_column"
+kappa = "fc8de4fb9d9d4fa21bf80607a4ae975f02d4426f1f9af60c068d81f0dfd109a2"
+at = "F=u32, T=u32"
+embedded = "0789ba87a123682d970e43a6a76284db8a4fed19f83fce16a48eda79ceb7f57b"
+status = "residue"
+cause = "mir::Ty: FilterImageSize"
+
+[[fn]]
+path = "image::filter_symmetric_row"
+kappa = "4bd074d9100e337651e883babb1a69158bb7e3a54448a6f73f47f33a0f3dda4f"
+at = "F=u32, T=u32"
+embedded = "efd9417b5d3d1913a0a3b30201901d97b075f761dd818f75bc848410697508bc"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::flip_horizontal"
+kappa = "159071fddffa49d8e56dd26d1e90de0467a9712948f1f3f9004aa713711c0006"
+at = "I=u32"
+embedded = "5c1336fb51d3018f4ecb1dd80e59f5b539cfcae7b14137b9d236eb48d49da257"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::flip_horizontal_in"
+kappa = "48ab6d68999ff08e50930faffad5fbbf356e4b94e00f0a1804f6a446dd5a3b64"
+at = "Container=u32, I=u32"
+embedded = "888b34bccb29ee46d571ef86a294f8b4100fc5dfda4b08e0d08a79f56857e336"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::flip_horizontal_in_place"
+kappa = "05f5ceebf24dc6168e24779f2fd2f3f8de9f282cf777d4394751b687ca6d182d"
+at = "I=u32"
+embedded = "86ad798283dc917c85c2fa46152f14da41d47156caed7799b3759848f043e95a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::flip_vertical"
+kappa = "b13f0797203829e6cd25d8b6332e664db1732e2a82314627a43057db305159c4"
+at = "I=u32"
+embedded = "c65ddf3de070850cc348ccf7b0fd7cda3d213c4c7b1940d8b5b60d3ef56136e3"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::flip_vertical_in"
+kappa = "b54c44c5ee32ce8f917404d187c48674c1b62038afd1f91bc95fafab170b463b"
+at = "Container=u32, I=u32"
+embedded = "ae1ffb0b0a94ef687de86ac7e8b2d5d4f90dce7fb962fbcf6d783e11b01dae4d"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::flip_vertical_in_place"
+kappa = "581571156b6daac6e0e3ad01e8383368c195da748d9c4579310acabfe10a9a42"
+at = "I=u32"
+embedded = "4a4458ff29baf58509a322711950ed5e8aa4b62dfa8f2178efb86c479519165e"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::gaussian"
+kappa = "6beeb8492cce32419ce1c219502b44f6c975c59962db16e9276ae7d0cb2601dd"
+embedded = "e2756757b9006d0e0884d5bc5ca7fcefb9f2f1a2d3b61b4c4caa660aceba2c20"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::gaussian_blur_dyn_image"
+kappa = "35f87bd255216abe7664b530b55b3ae71a246e8d3f390d47e154573ec5416d48"
+embedded = "19048d8666b5c6ec50eda28ad9a3128958afe436e161834964f40d2a6119fcde"
+status = "residue"
+cause = "mir::Ty: images::dynimage::DynamicImage"
+
+[[fn]]
+path = "image::gaussian_blur_indirect"
+kappa = "cdc465dc74f48ed1eadeb4850763d92105c41e65fdf88b8c559ea156899f576d"
+at = "I=u32"
+embedded = "033f2d99cc8d9fb80e896cb7d5bb0f70512a9336619f34da45d8d49e7c1d30bd"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::gaussian_blur_indirect_impl"
+kappa = "0b5dd998c8cbfc7329e3ac43b2a01902d8109a32782849a1da1d12472540ff18"
+at = "CN=#_CN, I=u32"
+embedded = "2031c63baba8618cbbf386911b181f63ba6cefb8171ef838f8a893efce8ff65b"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::gaussian_kernel"
+kappa = "057033ff832227ff8ba85bd40bca653d510c913be1b373a4c57acd05c654358b"
+embedded = "21ee5b73d28aa820fb9331e1cc69ca1d016a50980c7699604359d9e386b2e93d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::get_gaussian_kernel_1d"
+kappa = "c0d7013b0d41cd424693c0b8ceec50a9d548f4b0f7f3b211b28ff8ccb915c1f5"
+embedded = "87eebb1030eb8d6d5116917a71ec5d74178b1f5986a3f9c77ffb31d9853fb647"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::grayscale"
+kappa = "d3c16977e0e27999887e8f3e833253c9c9a265a83029adc66a25e9b2b902472f"
+at = "I=u32"
+embedded = "eb7e728f88eb63c2b3b8b353e0295ee579b51ca3ff5690c5ccd2062c1ac32584"
+status = "residue"
+cause = "mir::Ty: color::Luma<u32>"
+
+[[fn]]
+path = "image::grayscale_alpha"
+kappa = "e9df4c26d73d2db96a238355b9b9eb2f2852e2a50a98383c6e58e37e96836d62"
+at = "I=u32"
+embedded = "eb5639599368c40ae8e06a3e17f36062d41db9a7401fd22b1c27671c4ed09f83"
+status = "residue"
+cause = "mir::Ty: color::LumaA<u32>"
+
+[[fn]]
+path = "image::grayscale_with_type"
+kappa = "52b9d2360a22e761911d3772ebb915d55353c9bfb33ee6d6a0cdecf5c0c41f20"
+at = "I=u32, NewPixel=u32"
+embedded = "2cfcabdbd40294c56657c0f4d174b88ab8027edb733cfe1ab031b121beca1c19"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::grayscale_with_type_alpha"
+kappa = "07feffdd9c0b409a8987a2ee0f14167dfd13a9ac55cc4784d05d98b8966f33c6"
+at = "I=u32, NewPixel=u32"
+embedded = "1ded7ae3462993fcd0374e9107e0c151099d1dbc58748128b66116d76d4a3f5d"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::horizontal_gradient"
+kappa = "f58e49a7b3102f022984f32cff89572a46eb23e4d69b00c17f4c54541d81a441"
+at = "I=u32, P=u32"
+embedded = "dce407c12dd0d5fb734f313cbb375afd96c98b0ab9111cc3be76c90716b5e0da"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::horizontal_sample"
+kappa = "ce7f6da254ebbf41769a29e234653d188ba7bec9ee0fcafd7b4d75dc08103e01"
+at = "P=u32, S=u32"
+embedded = "1544b04f7b70a51ac833b4102e79b9721c14d8945833fcbf3c334d7a0961a085"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::huerotate"
+kappa = "c960517e0e7996b19eacd2b48ffe2859b54aa03d5e27d913483a60d97fff61f3"
+at = "I=u32, P=u32, S=u32"
+embedded = "2e80dc15796f46ed43fc8723e663eff55ece9ce0b0246d0adf2c89cb99c37801"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::huerotate_in_place"
+kappa = "fd7f046bf2aace500364ca084c8d13209c67556e48132c95e01dc14466a6d30c"
+at = "I=u32"
+embedded = "45ea8d3a41abfdc755d809de16c7f84e3b5806f1ec98ba484f67b1d7ebd355c1"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::imageops::crop"
+kappa = "b7a767c650137e7cbf097950a84a1ffb5d3b3503a4e2a42aa6ccd1c066b7a57b"
+at = "I=u32"
+embedded = "8ef8b0690c3a27597e892b14d3d102f3d4347f6368dbc063c552aee6d2cf01fb"
+status = "residue"
+cause = "mir::Ty: images::sub_image::SubImage<&mut u32>"
+
+[[fn]]
+path = "image::imageops::replace"
+kappa = "2513f6b86c4cafa2b7cdc982c36b3ba3c687a13bd07d646933696014a4280cc8"
+at = "I=u32, J=u32"
+embedded = "8f814680696aae714150bcb7cfdbabc41a9b84f914940b159600c7823fe061b9"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::index_colors"
+kappa = "31a8657682a2a7e257a1a6448ea3b1457b3fb65d2bf1c12a92012c4fb4ce49a7"
+at = "Map=u32, Pix=u32"
+embedded = "1b6dddd7ff3d982528d7e1086d43252ae2786559d61712c6a74e08affe49ca24"
+status = "residue"
+cause = "mir::Ty: color::Luma<u8>"
+
+[[fn]]
+path = "image::interpolate_bilinear"
+kappa = "32d4e16c6c26854a775fe72085ccb5037ee915fb742815bfefea89405aef8007"
+at = "P=u32"
+embedded = "d2ef68c9f268a98c963f8a7baaca8096eec9282c66cd8dd6c546dd1b8a64297f"
+status = "residue"
+cause = "mir::Ty: impl GenericImageView<Pixel = u32>"
+
+[[fn]]
+path = "image::interpolate_nearest"
+kappa = "ab59b59940b3642db08748d68e98db6a622dcbd77083c2976f0c8b9ea2d482e3"
+at = "P=u32"
+embedded = "47bc45b8bbe4175d28f9f0ef2c931fbac5090d3ff4107f05f078aee70e2732a8"
+status = "residue"
+cause = "mir::Ty: impl GenericImageView<Pixel = u32>"
+
+[[fn]]
+path = "image::invert"
+kappa = "84d24326f7b582b89e2f597413b94589994adc1494b4ff644017d80ddbfdd916"
+at = "I=u32"
+embedded = "b8e779aaa4f7ff456f512201ae20c3049a443047cd9cf584e4bca56a759dda7c"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::lanczos"
+kappa = "cc7d517ab5eeeefe8fb40908b2d98478cacb388cab0b189186ac7eee53f3c596"
+embedded = "859517f2b9206c9bf15f67ed79fd54e270fc920357fe6587385bdeba03b5d858"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::lanczos3_kernel"
+kappa = "74800ae9c9421ffc91297f930e3b2e0f2651503a1c8eda068613a138e02051b7"
+embedded = "821134430496845f615450014b5a000cefba9c082b7eeac2a001d8a7e6736e7b"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::make_arena_row"
+kappa = "625c604fd0d75b0c6b394203a075a880dd68c283aed5e4f3c3d29491386602f4"
+at = "N=#_N, T=u32"
+embedded = "20816a28527babe7afefbad2a155ad549947cc7f62e5e8541dcfaa67d514ca9b"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::make_columns_arenas"
+kappa = "af771a5c153c5b0464d0e38ad1a5291cc7fc37f8b535014d5cb637ad56b15714"
+at = "N=#_N, T=u32"
+embedded = "5eff232de1cf3adb8323b2191654e926a93b550c2df7f9fbb271a9d9d82ab5ea"
+status = "residue"
+cause = "mir::Ty: imageops::filter_1d::ArenaColumns<u32>"
+
+[[fn]]
+path = "image::overlay"
+kappa = "1d64aec8c5028ff04e9c6d44250151e18125fdb0f8fbfcb8101a819fa4c09d23"
+at = "I=u32, J=u32"
+embedded = "1f70814c51fd9f7ce02ae454fed329fbe8aee12ff7c5a9b2cb00f1b50437c656"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::overlay_bounds"
+kappa = "86c065d8192915a730d49bc0491f7dc1447b4bb07e7a142ede3fb235e4c64e10"
+embedded = "44ae055c0e69c84b708e597123a5da7ad417f345f29447266d5d0395dfa785f7"
+status = "translated"
+digest = "4b10abd55376b39d117603798cea3d0d6d78b589a917804340804e5b744d2612"
+
+[[fn]]
+path = "image::overlay_bounds_ext"
+kappa = "2729d49cda5c6727432ee227c9fc53695d3a711c714f51bee4175fa1da613c37"
+embedded = "475568bcff0cf8caf4ef88d54e6924590d62251fe41a93facb5be305309623d6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i64 as From>::from"
+
+[[fn]]
+path = "image::prepare_symmetric_kernel"
+kappa = "174f53745e40271f06910fca2f0982c6ff5b3f14fb24392dcb90106d2f12ff38"
+at = "I=u32"
+embedded = "596039343704bf541ce84f2a0320b96cf9e2802a2a826b4351ede73f4bdcc166"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i32 as AsPrimitive>::as_"
+
+[[fn]]
+path = "image::resize"
+kappa = "dec6d9adc7ef5d0153b6e911a9815b2e78a7161b6be2eb72a2af981c5995d922"
+at = "I=u32"
+embedded = "41c5ec2b245174fe0044b60bce14a654322dd18dd0f75802be3789edb9a34fc7"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::rotate180"
+kappa = "e85b3c2fe7c43296311495f7364ad47c1ae3ff8af3a960a22591a87325aef2c8"
+at = "I=u32"
+embedded = "46daccc5472b8987037fe1f0e768df4ea93734e1fbb68fe5371aa2a5bb8161ff"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::rotate180_in"
+kappa = "ced53316631fe630445ebfbfb06dab99b3a520713e97ffd758ef1fe05cb994f2"
+at = "Container=u32, I=u32"
+embedded = "41c9f57fab6f9d990ad34ca0529fa01b500caf3e451ec4666b09177abd716f66"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::rotate180_in_place"
+kappa = "a1a4738444c23df8386e84f79cd67b36d01970c969177b9b490aad00d356d9e8"
+at = "I=u32"
+embedded = "1abe5707cd0ab4453a14c9a376db0a95fe7d0d958ec718c70818a04a3e8c90af"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::rotate270"
+kappa = "767d886e9bda32a9fecdce9742db35c56fada3b8b552354d1e64c73ff0db4f0d"
+at = "I=u32"
+embedded = "c41af33cb420d4dcc16e1af146c909ee9121a541b24ccf5dcebbb568d7d01b67"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::rotate270_in"
+kappa = "34859fd5da2bab4b559888119ecc86c059daf7274584514e15de0108cd3b96a2"
+at = "Container=u32, I=u32"
+embedded = "4a993e2ac871219980db6d7d83513d0a0f9724e7a42ef950042a9f0e585c5921"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::rotate90"
+kappa = "a768822372c7538ccb73d3d3c88f1ffc7023b0087cc5271ced9efbb13ffcbaf6"
+at = "I=u32"
+embedded = "82e26c4c0a281cdf6201c6bd9914fb90e5a812987d5c9133abd8a027dc2e5dff"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::rotate90_in"
+kappa = "668dd3e77928bb32aec6cff5be93a3ee7170f649d34cf2b83609ac4b1f182d5a"
+at = "Container=u32, I=u32"
+embedded = "4ad63164d0c79ec430fb06bddb0474400cab2bf5e42e3db1616488119419101c"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::rounding_saturating_mul"
+kappa = "c45e10eb03f6a94b8c0f1d4439a69689a46b2402972fd6ce24b6d1a35a5690be"
+at = "T=u32"
+embedded = "b010fc7300f4815da32b112e51cfc5f6ee4c8eb4291fbb81407840f219bff514"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:1085:16: 1085:21>::clone"
+kappa = "91c57d445dbb7f1fbcad2ddeac025a276fbc2c0b497337fb335fabda409b274c"
+embedded = "55fe687971ea42f382e89efec8ab40fe81051f823801c9dc9659f335f5e079c0"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:1085:23: 1085:33>::partial_cmp"
+kappa = "6849e17b6ded96f039e3763d44ba405884c439ce83b1cb48c805ab748f24d27e"
+embedded = "dd583176a2644d31b84935a4555ac8856ff623d03c6b68b69e021939eb6bde9c"
+status = "residue"
+cause = "mir::Ty: GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:1085:35: 1085:44>::eq"
+kappa = "1b6af76f9ad198dcf445918cecbfdadfa221c73b00f474136387337271f8b2da"
+embedded = "c2434ad0680d312d3312ca7f90cb8f6c96b6bd19a42167784773fd932410cd4b"
+status = "residue"
+cause = "mir::Ty: GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:90:10: 90:15>::clone"
+kappa = "236e063cf48cf1ce04688ff28bdef245fa3847500f8a7167f0252e580926763b"
+embedded = "19a50e1ac351272c7b01c9de3db66a3e1529894ada00e9f9fccba98f8f6d24f7"
+status = "residue"
+cause = "mir::Ty: imageops::sample::FilterType"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:90:23: 90:28>::fmt"
+kappa = "4510c1c26c03a63ad463751c5a574e4171f58570f3be086103ed8b483ee84870"
+embedded = "d73ac49ef5fe0d9efbabaef78a0670856c1576e3693684ef048d19d94eb5a2d0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:90:30: 90:39>::eq"
+kappa = "1fd3852003e3a54a067a0dc5ad1a9c2a5c5677a7e9fc0a71d954430bd0b7ec05"
+embedded = "94432330263f3070350384bb71031ecb473c20feebb26accc032129715ceb060"
+status = "residue"
+cause = "mir::Ty: sample::FilterType"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:90:41: 90:43>::assert_fields_are_eq"
+kappa = "efc8ce0dfc0f5fbd63ec5e615652ca4427971ffa1f01f1ce268b196ecbf57b56"
+embedded = "3703b362a662a770be35bda908f9b49d131dfb7430a5a9b3c3660d5c125e6c5b"
+status = "residue"
+cause = "mir::Ty: sample::FilterType"
+
+[[fn]]
+path = "image::sample::<impl at src/imageops/sample.rs:90:45: 90:49>::hash"
+kappa = "9cf28a155cbd4dbf18238499a357bf690495aa7c623ebeb10018e6e08e3ac542"
+embedded = "652414df712ec6a0a21c213d4b522eacc5ce770215d5f24b99ff178d38716432"
+status = "residue"
+cause = "mir::Ty: sample::FilterType"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_f64"
+kappa = "248a0bf2f21d9daf50e59227b380cc92dc22062500f2d4f15a5eedac9bc1241c"
+embedded = "1a19ba9e96eb92cbeddb59e08031f19fa9fba826371c51ed5e987d5ea7f159b9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_i16"
+kappa = "579f9903bc15ddccb20d8345ddaecff7712f9af485c6657439e37bbe588505c1"
+embedded = "70e7b3a85e6d4a5e0e11c50ba95d1c7c9a3c73927d33a88cfb3d3287f1c899a4"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_i64"
+kappa = "3b3e4a49436cf383bcb92d279c323565760bc431e0240a93487707e205f772bb"
+embedded = "c365c02fd8784fcaff104bdd2b332438c9c1445da6aeda5ed8fa7f1816f98bef"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_i8"
+kappa = "56e550b5084ac1ef65ea807a0fd26b79da747d4288baf1559b8dd19c1d2a4e10"
+embedded = "a5d9a06ea37bad812d4b6e6f65cd9acda8ba913012c4e662cf335fff6a5a4d31"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_u16"
+kappa = "f6e2c5b3544c2a75703e9f25adf3d91986fd4525c2e6c66ac366695d8018a8a8"
+embedded = "4b41fb44f2dd4251e46ab4238b34be4aa28a5050bb60bde135b3fec8b00325a7"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_u64"
+kappa = "e16b26b36bfdc3d47266cd443a394f84a90164ceea61a928f92ec20feacd279c"
+embedded = "a9fe06e313d55d9842210543e4b52d42042fa5fa7ec82ab668a6724727d002c1"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::FloatNearest::to_u8"
+kappa = "b49a3c5e30f13fbc6534399eca7e3e408d57e15badb3f08505d5763bc6f9aa43"
+embedded = "a4390ad46646828e165ef9d6e120b2d2382fd0d7df10c58e6b0642f601f3d2f4"
+status = "residue"
+cause = "mir::Ty: FloatNearest"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::SMOOTHING_3"
+kappa = "53c1f97f8a9816f30db28fa092ac46d68cc033806b6a53b59601bc525c8a9d5e"
+embedded = "031dd8e10d5aa6951dcb71f1335a3057bd86401ea1f45ef35d53bdb9f9394305"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::SMOOTHING_5"
+kappa = "f0a745102f2a78f5c9d69d509645f2cdb6d75cb9bce02f1433bbf9724a0ec25b"
+embedded = "8542e28657e00168b3c00f2527c91da61f9c67e0ba1d6f3e9d998d609e95dc03"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::SMOOTHING_7"
+kappa = "a099162402a721ccf85a9d4bcd1bed454ff8c04820789702c88b8b426e2008bc"
+embedded = "1d14566a18e59312f5b4206a199b96632f18d92e2aa2e0a2e205678bf2ad056a"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::kernel_size_from_sigma"
+kappa = "484d12699b906f17747551edac527340c912625cade9cd53df83cb5566d92a96"
+differential = 12
+embedded = "d5327e8672527747a1923bc06f0dc4d71f046bbc9f4061af86a822e1d0b1da22"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::new_anisotropic_kernel_size"
+kappa = "ea39bd191732ff2ba23ca9cbffa916f7211e9be37ac074e23a77035ab63d8bb4"
+embedded = "038721b0e33f05b506d3f4bbe265723b41358ea251b06088c08433254939946c"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::new_from_kernel_size"
+kappa = "2fdcba599587f961220878cea2f11d5feeab4f982ae8ba0ec663ea3106370852"
+embedded = "1e168b07f9189b627fa2c0c9a1907e7e85f0520b44f1b79410f623ccfaf47fdb"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::new_from_radius"
+kappa = "8bfcb67bb65bbbb238653751a77d3ab5d4c03bf9ff480b58ca719a3d95e66b47"
+embedded = "83d0e1f8aa5372ea121ba68ca9b88f46161d33ec258914b9591920fe76f6fa32"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::new_from_sigma"
+kappa = "035f0bcc881b47315bea0a4894088d8954beae1855610c073de6952569349444"
+embedded = "7c0d81e85537d5a5f863cc0f8cec5be6bd64154c16f75c7ab364cdf6b5e3393c"
+status = "residue"
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::round_to_nearest_odd"
+kappa = "bc702fbb15a0d8622c895718b4ce2e9037aa8ee8eaba97157039dc046feb59fb"
+embedded = "4a53426a059bfc6dccc1747a9ff27d68d59e0d4ece71ce2a2304fabffae733d8"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::sample::GaussianBlurParameters::sigma_size"
+kappa = "8bf04ed598b2d26a2a9426856c5e89f1a57aeb6ef9a03e518d88ea44a2fd11dd"
+differential = 12
+embedded = "547c90c6a04479dabdaf1d3861212ba5cb081bcd5d7aa282ef6e7d6397bc7605"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::sample::ThumbnailSum::add_pixel"
+kappa = "70027be1bc40a89bdde2854a85937bfbf9acb1bdca8a2d5e74a11a3725b05884"
+at = "P=u32, S=u32"
+embedded = "81005b962131ab445af373b5a26e350d8efb75f6fccae984c0e7ea6a4336c14b"
+status = "residue"
+cause = "mir::Ty: ThumbnailSum<u32>"
+
+[[fn]]
+path = "image::sample::ThumbnailSum::sample_val"
+kappa = "d63826d98873bb2a754c8044ceb8c09bf6941ae1ddc124d0fb03502439841406"
+at = "S=u32"
+embedded = "c529946aa2173a76821c1d4cb5bbffcfedbf0d6b28dc1aea0c2fc6250adbb871"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NumCast, which u32 does not implement in core"
+
+[[fn]]
+path = "image::sample::ThumbnailSum::zeroed"
+kappa = "917481ee9221eb8a58efeb9452e45e4a4ebffbf0e533555a2a9f95151ac02864"
+at = "S=u32"
+embedded = "88c0d31866c2f67b47d47f108a3e1ffe895960dc70e5081c147d66f4e23c0d1d"
+status = "residue"
+cause = "mir::Ty: imageops::sample::ThumbnailSum<u32>"
+
+[[fn]]
+path = "image::sample_bilinear"
+kappa = "f06a83beb8e0ea38c5e1ca33b2a07550d1d7a26cf5968af4e12f032c35df5e37"
+at = "P=u32"
+embedded = "031c7ce189124b7505ab084559bdfea1e7a5bbdcfe051a8544fd14915bc2dd52"
+status = "residue"
+cause = "mir::Ty: impl GenericImageView<Pixel = u32>"
+
+[[fn]]
+path = "image::sample_nearest"
+kappa = "b614c4fbc4b3d0c776cbc7fbbbfd014cb4271434b5ae2ff6fa15b962f0d5ab65"
+at = "P=u32"
+embedded = "9ff2f958bd088ed687f4c63c7118aef88caf5c8120c40958c9c569d53c8e0899"
+status = "residue"
+cause = "mir::Ty: impl GenericImageView<Pixel = u32>"
+
+[[fn]]
+path = "image::sinc"
+kappa = "108fd38ae510c1fb6ccddcfda519bbcb2b329ec980929681ec897a3586208757"
+embedded = "1319681bd190630daf0ed50c5d3a2bc9f393119083d71f59bfc476fe39fa62be"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::test_radius_size"
+kappa = "9152f10825ca06e295bf908145ff594d6608166da0b395603e323f122d3f491f"
+embedded = "5da3f8dc9cad78bff9c909a716cdf3c21d5045c43ae1bcf425012657d26be78d"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::thumbnail"
+kappa = "d94654ba261dd624f9284bc6aac4b2bd230a91a83999bfa8bfb5c307ea36c3b2"
+at = "I=u32, P=u32, S=u32"
+embedded = "22861299c8a99e5511a9807dd3323eee2cdd4ad1585a7ee91c9be803f9eeaaed"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::thumbnail_sample_block"
+kappa = "575297c4cb57c19742d0619be3d79b7d58b41b01bb75e1074f3800bd63bb7b71"
+at = "I=u32, P=u32, S=u32"
+embedded = "a1f00539b78e5e52ffd3e00467a01dbc27b75627161b7a7a5549a229fe758de2"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::thumbnail_sample_fraction_both"
+kappa = "98ca4d1d57b148c75f5978ffde447e8bd19e1f9a9fb5f77cb5c0027acd547d20"
+at = "I=u32, P=u32, S=u32"
+embedded = "90138c387c9fe6a58731100cb32bb3d18e2f73f1b51e99d1a10f9fd356f0904a"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::thumbnail_sample_fraction_horizontal"
+kappa = "8a819743544437c2f5029627b0eb9a581a0dfb837fa216b48a5cbcad92f2d32e"
+at = "I=u32, P=u32, S=u32"
+embedded = "42ea4cb0464691f447e02076aafb027a4591de01c5d9ad394266ff00880648d3"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::thumbnail_sample_fraction_vertical"
+kappa = "ea36ce3eb6837b0819d8784d58afc451711f33ce548189a4fc339008be1ff1dd"
+at = "I=u32, P=u32, S=u32"
+embedded = "e0a6ff5102b120405a5eaf70b2968c96e7365b121704599a10fe25bcbb534ec4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::tile"
+kappa = "8828aa34c27994602864d03dde1064c1107bab016f9260fee354048bb315ebcb"
+at = "I=u32, J=u32"
+embedded = "ea86051fa7b2f7fae801c5fa2bd7bdf67ef7963b7a8113592d48f726ec636d73"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::triangle_kernel"
+kappa = "bca593dcc754dad760f4baf71b46687c172d90bd674f8faec422fedbaa20eac3"
+differential = 12
+embedded = "71ac027a9c1dd04fe19972be07fb2c2c5f874cc5eab2016796ce06f99c8e95cf"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::unsharpen"
+kappa = "e5df16385cb7e2ed5e6950d290a23a4eeb608ac84dc5f27b1462b45e5f33b576"
+at = "I=u32, P=u32, S=u32"
+embedded = "ea7be3b156a015e6518b12524287b7f26965a02ef125f842df6b65eada693d49"
+status = "residue"
+cause = "mir::Ty: images::buffer::ImageBuffer<u32, std::vec::Vec<u32>>"
+
+[[fn]]
+path = "image::vertical_gradient"
+kappa = "234841453f10ff03b848e7ed8d926db3bdf44ca26cdd5a90a646fe8aa0e8455b"
+at = "I=u32, P=u32"
+embedded = "f80cd8b685f126c5c939650261b04e387345d1141198e6b6c30bbff2efa9797e"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::vertical_sample"
+kappa = "5b8c078b9717ba2fc43100c0f718c726f9015d264710eefdb713f0665191ea06"
+at = "I=u32, P=u32, S=u32"
+embedded = "616f123b3b01c8da9d0d660437df88222e2830c25eb41f6da24d248a37adf940"
+status = "residue"
+cause = "mir::Ty: f32"
+

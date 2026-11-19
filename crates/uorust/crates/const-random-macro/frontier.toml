@@ -1,0 +1,52 @@
+# The const-random-macro register (written by `uorust crate const-random-macro@0.1.16`; do not edit): every body of
+# const-random-macro's MIR at const-random-macro 0.1.16, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 16
+translated = 0
+residue = 16
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.span]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 16
+embedded = 16
+evaluable = 16
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: span::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: span::random: const-random-macro's MIR stops at mir::TerminatorKind::Call: span::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tiny_keccak::Shake"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc6: &OnceBox<Vec<u8>>}"
+bodies = 1

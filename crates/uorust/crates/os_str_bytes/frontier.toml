@@ -1,0 +1,176 @@
+# The os_str_bytes register (written by `uorust crate os_str_bytes@7.2.1`; do not edit): every body of
+# os_str_bytes's MIR at os_str_bytes 7.2.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 217
+translated = 2
+residue = 215
+
+[module.crate]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.ext]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.imp]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.iter]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.pattern]
+bodies = 8
+translated = 2
+residue = 6
+
+[module.raw_str]
+bodies = 108
+translated = 0
+residue = 108
+
+[module.util]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 217
+embedded = 217
+evaluable = 217
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: raw_str::RawOsStr"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: RawOsStr"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: RawOsString"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: raw_str::RawOsString"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: OsUnit"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iter::Utf8Chunks<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonUnicodeOsStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::OsUnits<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::RSplit<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::RawRSplit<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::RawSplit<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::Split<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::item::NonUnicodeOsStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: iter::item::OsUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pattern::EncodedChar"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Encoded"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::BYTE_SHIFT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: util::CONT_MASK: mir::Operand::Constant: the constant item util::BYTE_SHIFT"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&str as pattern::Pattern>::__encode"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::into_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodedChar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1

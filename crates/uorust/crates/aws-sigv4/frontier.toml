@@ -1,0 +1,313 @@
+# The aws-sigv4 register (written by `uorust crate aws-sigv4@1.6.6`; do not edit): every body of
+# aws-sigv4's MIR at aws-sigv4 1.6.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 177
+translated = 3
+residue = 174
+
+[module.crate]
+bodies = 10
+translated = 1
+residue = 9
+
+[module.date_time]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.http_request]
+bodies = 136
+translated = 2
+residue = 134
+
+[module.sign]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+bodies = 177
+embedded = 177
+evaluable = 177
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: CanonicalHeaderName"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: http_request::SigningParams<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CanonicalRequest<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http_request::error::CanonicalRequestError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::SigningSettings"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SigningOutput<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SigningOutput<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http::HeaderValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::SignedHeaders"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http_request::sign::Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http_request::sign::SignableBody<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PayloadChecksumKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PercentEncodingMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SessionTokenMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SignableBody<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SignableRequest<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SignatureLocation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SignatureValues<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SignedHeaders"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SigningScope<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UriPathNormalizationMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::CanonicalHeaderName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::StringToSign<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_request::error::SigningError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::UriPathNormalizationMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_request::sign::SigningInstructions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_sensitive_sigv4::{closure#0}: mir::TerminatorKind::Call: core::str::eq_ignore_ascii_case"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Headers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QueryParamValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Scheme"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SignatureVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SigningInstructions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SigningSettings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringToSign<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::Credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_http::label::EncodingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hmac::digest::typenum::UTerm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::CanonicalRequest<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::HeaderValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::QueryParamValues<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::RedactedCanonicalRequest<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::canonical_request::SigningScope<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::PayloadChecksumKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::PercentEncodingMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::SessionTokenMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::settings::SignatureLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_request::sign::SignableRequest<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sign::v4::SigningParams<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sign::v4::signing_params::BuildError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Matches<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<14>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 1

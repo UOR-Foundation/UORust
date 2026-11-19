@@ -1,0 +1,69 @@
+[[fn]]
+path = "image::check_dimension_overflow"
+kappa = "9c626a78ceba3fad8f68503a01251fd89452d5e7d42ffa97e696613bb7992c87"
+embedded = "8ec9f781821417aaffdc4988f2a9830dab60930b7e4fce7d5a625318b6045053"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "image::expand_bits"
+kappa = "bd3cf711d400b3eb7ab23b0c5f23b5a065bb5062806476b0f3e69057c2b0592c"
+embedded = "146ac3482f82daf6442d2482556c3b19b13f0147506918423d25aad20d164072"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "image::expand_packed"
+kappa = "dbe279b87c25c1204fc4ea4cfb0a2a77d569054d67a6094bc6e14407e5562145"
+at = "F=u32"
+embedded = "16b37f67127026ab068ff42cb868d5371e4a590d1a3430137eb3f50e01efa879"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "image::interleave_planes"
+kappa = "96da9c4268ea4b5c54202938fef0f9390b8b14c478b79ae40e311679499c6c69"
+embedded = "055f4d899ed8b17b1cbaa13bfb481b353f65e515d4845310003ec95b8a6eecb4"
+status = "residue"
+cause = "mir::Ty: color::ColorType"
+
+[[fn]]
+path = "image::interleave_planes_inner"
+kappa = "2f747fba08e874de1eb92de9492296ad8292f7aa1a4f76a827bd808db7145dfe"
+at = "N=#_N, PLANES=#_PLANES"
+embedded = "a8094fdefcf1db3bcab9bf119ebb1b2f913eb1d42a4f15c4d4ffe99417d895c7"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "image::trampoline"
+kappa = "db111f87c88d6d953c4ebc440718ee4831231843df26f62d2a0f82158b4bac29"
+at = "N=#_N, PLANES=#_PLANES"
+embedded = "2c9f0bc990e719f4e142d62a09118023cc932fc7e80649f3996d15c1b3ec8cfa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_chunks_mut"
+
+[[fn]]
+path = "image::utils::clamp"
+kappa = "4e6c7666a065bc9843e9b014f88e0893740633dfdd8293487d4d959ee97e2e8a"
+at = "N=u32"
+embedded = "90c6c728184ce0001c2acb09c8cc8cdff74164c7643c4b8c1d72949f7d5432cf"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd, which u32 does not implement in core"
+
+[[fn]]
+path = "image::vec_copy_to_u8"
+kappa = "d04af272dc5652998e8919bb48725000d73d957adf771651104f1434d5d10d37"
+at = "T=u32"
+embedded = "d44ce3d4a34cd5c121e261ce67de219b2b070a0beb57c6baa87fd4e5069af15d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bytemuck::cast_slice"
+
+[[fn]]
+path = "image::vec_try_with_capacity"
+kappa = "20c388dbbd2ffeea4c0fb4ce0c20ad65f4acf93475d24aed12afde510aea0305"
+at = "T=u32"
+embedded = "ba378533fcaf7dc3ff2bd16944ca1e8b9729f8ab1133054b9916a5ba55522b2f"
+status = "residue"
+cause = "mir::Ty: std::collections::TryReserveError"
+

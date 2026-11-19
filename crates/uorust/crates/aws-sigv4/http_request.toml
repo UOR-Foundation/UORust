@@ -1,0 +1,959 @@
+[[fn]]
+path = "aws-sigv4::SIGV4_SENSITIVE_HEADERS"
+kappa = "c6e1fffbf0e8962c837db5f1d0ee7a9a2629fec7dc09a1c0d155200f0ea154cf"
+embedded = "1ffbe3b03b6d5883c2f33a1c1736e10bbf91acd98cdc60389752edeafc5640f8"
+status = "translated"
+digest = "ce1ad236b6821bbaf62d9bd854f8e2695daf851410e60528f0958ecb86f01219"
+
+[[fn]]
+path = "aws-sigv4::add_header"
+kappa = "17c7b39395aab5aea5064d0127c669f846a9718367611c86690d025774c4ded0"
+embedded = "67e74ed50eff907fc8b1188cbee833c51b965f7a9f2d0829a3a52bc0868cf01f"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "aws-sigv4::add_param"
+kappa = "bae11c2d33749e5b02bc317e9ffe93fecd3c6a8cafdf42ab523587b2c8faf2bb"
+embedded = "f3ddb44b061f0b33b928b6258babb9465e44fedaab137ffe0b85ac78441475a8"
+status = "residue"
+cause = "mir::Ty: Cow<'_, str>"
+
+[[fn]]
+path = "aws-sigv4::build_authorization_header"
+kappa = "26128fb6bc5098ce3999894f122e2e4948e5c0ac33f6b2199f11a1ecc3a2d01e"
+embedded = "13163bfb2e766ba5366ade58f3150a56584f26c8cbe48bbff6f194b1cc569225"
+status = "residue"
+cause = "mir::Ty: CanonicalRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::calculate_signing_headers"
+kappa = "e198e18bd6193cb02f499705c9c1e6c59a51fe29e7bf93e5ca86469213e9df3a"
+at = "SignatureVersion=u32"
+embedded = "f89fc6de8d3ae59661fa382064b0a900d6144f93d0afafd373d8c7794e2163da"
+status = "residue"
+cause = "mir::Ty: http_request::sign::Header"
+
+[[fn]]
+path = "aws-sigv4::calculate_signing_headers::__CALLSITE::META::NAME"
+kappa = "96454100dd62eecea8e9e1126ba76afa0a5bf3dd40bd281f2a7ee9533bc03030"
+embedded = "fd51dd051cb2a1a37108ee0fd83b7c0ec295f4a6bb5e60ed9b4ea771c3889de1"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+
+[[fn]]
+path = "aws-sigv4::calculate_signing_params"
+kappa = "93b81723a18c57f3689ef55477c6bf0591114de08b14fa13437d643ac449cbd3"
+embedded = "3be5cc5248facb641d76fa450818057e2ad54180cc92533afc80676c7203de63"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-sigv4::calculate_signing_params::__CALLSITE::META::NAME"
+kappa = "2c21eecddbbd429ea9404534868b52eb122a44b37dedeb8038e173097f3745e7"
+embedded = "ac9e09b28769e9c079977a6ce0497caaf9c3a119dd8a0d19590bee8a0a330e6b"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<14>"
+
+[[fn]]
+path = "aws-sigv4::calculate_signing_params::__CALLSITE::META::NAME#2"
+kappa = "1c587858f5c20b558c89da2d720cea1f5c0938be7915f4b5fd17efe8344eae31"
+embedded = "16952e5230c4571e99551c3b93c9fb3105f9b288e231e2a0367a41a873b845ee"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<17>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:136:10: 136:15>::fmt"
+kappa = "7691ead7f91e943cb475c9da9d6c34ac6dd1480859fe46f241aa683cfca3bb52"
+embedded = "b3127f181835b04f446c99e1109690ff9e594fcd7cd06fd28448bc8bb1a0258f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:136:17: 136:26>::eq"
+kappa = "b4abfa3e261db1afe80105d0ea7c1f9335f5a4dafc5a36cfdeff238c2ff474b6"
+embedded = "1b001d1da7caa6a51cdf1cda3198c6690fa792cc787c817b8e1bcdf314c43c8a"
+status = "residue"
+cause = "mir::Ty: CanonicalRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:591:10: 591:15>::fmt"
+kappa = "f74eeb90dd782838dc3fb30d132d5b348343c3276f717de6aa9436e53420ef4f"
+embedded = "297d0f4919850b1dc8f7b142ed9117df98cde7fd0b9131f972c96a58404f2dc0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:591:17: 591:26>::eq"
+kappa = "e7cd550805108f441fe3d6e7dc5d7328e2708c483bd9a8d753404c1178df3638"
+embedded = "90e52d95ccb5285c6cc6b13e4194487b7b35a7567d38329df35627c510b14ffb"
+status = "residue"
+cause = "mir::Ty: SignedHeaders"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:591:28: 591:35>::default"
+kappa = "7e53702da5b86ad54f79083a24e80de7cf368a015b5a1655037806a588cd11f4"
+embedded = "fae7926f38e724a4e0f0bc0aeab2945654472f2ec51cbd4f7ec1cba2f1f893c0"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::SignedHeaders"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:627:10: 627:15>::fmt"
+kappa = "41ad0d385c0a9d492bc383a23bf8762de3fc9428f5d3937b17b4c7bfc4533cfe"
+embedded = "efbaf5b05dadfd099fe6210b4f55d36a92ce4dbb9a4d843f77ed768fd506b1c3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:627:17: 627:26>::eq"
+kappa = "61748d7163d5646c1af3daa50a2bf3ab169dbc4a1e457abf0c14c6adc7b42f20"
+embedded = "30f5f7f3b83b8007cea37fd3aadddfb67a3efba09acf4ff99b35e8d23f7c8f45"
+status = "residue"
+cause = "mir::Ty: CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:627:28: 627:30>::assert_fields_are_eq"
+kappa = "ef56484c842a19eed6995e12d8bfcee51dcd54e9f98d10b69bcd31a4e98fd345"
+embedded = "f7bbc9de72e9598a6c2e148e77a43bff00051c79b0142424759d03b4b24c7128"
+status = "residue"
+cause = "mir::Ty: CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:627:32: 627:37>::clone"
+kappa = "7da4fc7a8217ef3e8c88262e365376921f4cd6c95d563bfc9753fa6f2909a142"
+embedded = "cdd2c4d593a8cd7de5551575e6f10b806e21dafa5a3370a8c39cd83b1b2a3a77"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:642:10: 642:19>::eq"
+kappa = "6ec4a4671342856cf3f578f45b92981a6eac0e764af52c96fa640025b1dfdff8"
+embedded = "248f18d33ab3836ca84a1578411ebeb47a067470be5650e3d3f91d3614383b02"
+status = "residue"
+cause = "mir::Ty: SigningScope<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:642:21: 642:26>::fmt"
+kappa = "953abfb0e4189445445de7e0f4416fdb97a643dd35e3964544e98085b1b74478"
+embedded = "66f3f990b89f7ad9794699a44859bf1b8d3ec77477d95407a94c7ba5653b7b58"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:642:28: 642:33>::clone"
+kappa = "89aaec399f3c7cad03680aa635ea512a559da842583981d706f3b1894f28b46c"
+embedded = "f5eae4a3b5ec7bf70534a6506fb4a53d3e635d77678987fc883246ba524d399f"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::SigningScope<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:667:10: 667:19>::eq"
+kappa = "a437d7072ea8026dd65cb4b394e83bbe86e03bcd54346c0559c8c61440cffb7d"
+at = "SignatureVersion=u32"
+embedded = "24421265af0fadf1f253c98723e5e188e56ac8637fa7d9a460c3282aded3d47b"
+status = "residue"
+cause = "mir::Ty: StringToSign<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:667:21: 667:26>::fmt"
+kappa = "4faa2014057f2975bd51f79d1b98335378a74924955c831881cc2063476d7826"
+at = "SignatureVersion=u32"
+embedded = "21e488780725158e710c845ad3a357dbc8b52a325893444ea652bb56a3f2bf61"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:667:28: 667:33>::clone"
+kappa = "c86ec4bcf756a4b299ab660f52cfb948fd59c0a793e58be7bfdf8df118b4ba29"
+at = "SignatureVersion=u32"
+embedded = "72a43414ffff63ac23cd72edc93649ade78f711ec9fcb67070cc303d97def738"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::StringToSign<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:70:10: 70:15>::fmt"
+kappa = "b5d8a4ff371061166eb7549fb0e7aa300c7d39c91e0001be03f13a4154f21b72"
+embedded = "fb356fa2f4a0ceea01ee727464feafd828b2b31f50374aee19873abf7c9ea05c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:70:17: 70:26>::eq"
+kappa = "d83b80ad2d6c0e4798712a10c3183295dda38bbdb1a63d8d9cd799bb978b50c6"
+embedded = "3ad096f60d3bf413ff31d014e1e0f5b3826b0746c257d779ce02237c03fecd13"
+status = "residue"
+cause = "mir::Ty: HeaderValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:80:10: 80:15>::fmt"
+kappa = "8e1be136ecd10e634d4e690776832e224aef6423677a7785d3832b8f8b4bdf3d"
+embedded = "3a570cdae6c825c409d7748a013d2327421333e76cd2ccf83047d9006badcaba"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:80:17: 80:26>::eq"
+kappa = "7018e0b19540926577808377b61239adb1d2bd122561eae4c592b4bb9478e334"
+embedded = "7f1a0f384af5dfd4381671b8b2529ad751d585f2d37ddc92fedb1bf38475e9bd"
+status = "residue"
+cause = "mir::Ty: QueryParamValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:93:10: 93:15>::fmt"
+kappa = "81bca0d4d7e9d3c85d05690f085292e62febc43fb465f5d3a33705713f3e6243"
+embedded = "0b90459c08d6ae39fb85aabfc414e34fd1be032aa87bd4dcf32190670e228742"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::<impl at src/http_request/canonical_request.rs:93:17: 93:26>::eq"
+kappa = "70d6defa2e6460909c2c8cb1fb95a9d67f7d39e180726580681dcba0376da763"
+embedded = "38e9cc58a8d412bd4a0f09e7e6e1f95321576ad1516c1ad5d5ab278d578c9cee"
+status = "residue"
+cause = "mir::Ty: SignatureValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalHeaderName::cmp"
+kappa = "6a4cee956988101662a3a88705ba375397d77f4fdf2850c1200d556c8aa5fab5"
+embedded = "ec342cf5afcc85156f6851948bcb2ebf61b49d7e28168ae48cd5fbe2ae017037"
+status = "residue"
+cause = "mir::Ty: CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalHeaderName::partial_cmp"
+kappa = "c16287f813ece844b04a344d1357901f8b71d95a747a13e7ba87b0c76aa28aab"
+embedded = "a96e0de6285f760b5463b0d055255881196aa0658f82df3b8eab1b8060e08fc4"
+status = "residue"
+cause = "mir::Ty: CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::fmt"
+kappa = "b50d3f96cc1ae6de809ce14a258936241022dbf1b54a8c19f39c59da51223192"
+embedded = "3b2a5216d5dade54548b8e6a75fe7d118a5ee0dde2234121ac6c442abb2a95a9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::from"
+kappa = "10db62b2b9e65b34b780dec0e508f53fa4843102013fe50695f6e5f84e6dd242"
+embedded = "3bd7cac8eabc7e1153458fd70b6253381ee15d94e22186bedfc9833856046ff1"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::CanonicalRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::header_values_for"
+kappa = "62d94994bdd1fdcf92127881207ea2123c027641dd75b6862c7fd3c6c12ee81e"
+embedded = "0384c5fa965298410820c38d268a046a5545153bdef2e0402ffe9b4b2828a574"
+status = "residue"
+cause = "mir::Ty: CanonicalRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::headers"
+kappa = "5ca26bf98408aea2e6a19203fe72b6bdbfe83b5a76ff02e984a46b818eea1757"
+embedded = "7b74d57124df0deabdb67a1c87971543cda66552f2806d4375957770166b70c4"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::insert_date_header"
+kappa = "46f89faa10c30158b20278458000f6309b3c8190319902b450ad6ec97d80c6c1"
+embedded = "5a6e7043b46c6b7e774f691c1c804b9e0e61e0f94dfb71f254711a9aa58f4ceb"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::insert_host_header"
+kappa = "c58ca7b9223306e3b2062134061a1122805c8450d874630efb7b616c81b0256d"
+embedded = "e5fd849ae6fdffe49e972d7d58fea4d073be2b78fe31b4a41bdacc0a183f5716"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::params"
+kappa = "0c59ce43f776508ea562e7236a286015fcf14f4756b6c49bf7830f0ec8c00843"
+embedded = "587d96cc76b4fe27c8223a0c4656d28f9342e0f477c541c19aae3147b2b119d0"
+status = "residue"
+cause = "mir::Ty: Uri"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::payload_hash"
+kappa = "58b69a085fed32ec84d242aef10910cf8b626de23dfa3bb3688e02f8ee4c6080"
+embedded = "9175e89eaff9f29fb1d8777dca28710350fce02d185bda13a3802413b877fe48"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::redacted"
+kappa = "d10b0a06714346a81b04fa5701cbec11ea59f29be334c08782e32cdecbafac0e"
+embedded = "e999de28ca4b6e62dde863e6ee96dc94d53e73bb8c5d680e2437fb6520ac086f"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::RedactedCanonicalRequest<'_, '_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::CanonicalRequest::redacted_header_values_for"
+kappa = "50533798d5172ed32b6303cdca2ee34517a9a864a771bb38247a66b4d15665aa"
+embedded = "ca35226d4aa8cd95bc9a53aa8dae4380181c9b2e75c8b1e34a31afa6346bf710"
+status = "residue"
+cause = "mir::Ty: CanonicalRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::RedactedCanonicalRequest::fmt"
+kappa = "ebe8e9ff8ecac8029163016bb69d07a2e6fdcb630b333e74a3e531e7c59d2930"
+embedded = "0489d9e0d3061243fca8f86f0146166587acb7c60446e2ee4ef0b4e3b54b1f41"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignatureValues::as_headers"
+kappa = "a07915a9b622496210b84fd42f3a4f6c1da36f76d239c07b41ac40d633a7d9c1"
+embedded = "d2ada2abe992733b568d65715a253ae1b61ac3a043d134e2eada9245f29faf96"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::HeaderValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignatureValues::content_sha256"
+kappa = "1391f9ee69131a4aa45a439a572c715806e2b43a7df8a9dce47360632f9a60b4"
+embedded = "af4a512ff96a9817c1716c208292ad91264648e611ec38eae17bd0125f8b1322"
+status = "residue"
+cause = "mir::Ty: SignatureValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignatureValues::into_query_params"
+kappa = "9a6f8e63cd0b55e6f16f682ddd469be2a5f76438a65c2f0211c125f3af934b59"
+embedded = "19ece852bbd09c210b7e6de5c567cbc779165996e67d0e9e514bd936b1fa313b"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::QueryParamValues<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignatureValues::signed_headers"
+kappa = "ebec90b7ecb703edd877b2ff66cfa459bbcf93e57c6e6e345b1462ef9ddb7e7a"
+embedded = "1aaeb0877bf85865b4ab997acf741347cb631f42b4ca47f1326fde30600750ea"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::SignedHeaders"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignedHeaders::as_str"
+kappa = "8905c18a050cc33ba9a630256aa8dec610dbe7bbb410668aa67a3d9cd11dda7f"
+embedded = "4025f302307d1b3505d9e6456bc0073bc945c198a69c66f68bf51bdcd4e0e16e"
+status = "residue"
+cause = "mir::Ty: SignedHeaders"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignedHeaders::fmt"
+kappa = "ebe3be2797d8f377199a0db966f9cb4c260596a64c41b4abc9cf29d281e53738"
+embedded = "67816920e78bca5e8355c2268e1020449446ea77038e1d18e83343e3dec32a5a"
+status = "residue"
+cause = "mir::Ty: CanonicalHeaderName"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignedHeaders::fmt#2"
+kappa = "c4dd6d539b9ca8b29b0edb4997e912f198c4d671b5f6ece903abb8f675030807"
+embedded = "2f0ca1eba24573f2ed5906dbba319276dc77a00fa31b5141a8144895356817e4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SignedHeaders::new"
+kappa = "f3bd9fee86f8d91d1a3dbb540fd3d313386cbdf806e5a95c1a96ca6d8daa2382"
+embedded = "ee2911fefb72d9f17e69562e2d2858a5d53171d1a1baa17d45dcff2d17905713"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::SignedHeaders"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SigningScope::fmt"
+kappa = "6debc599fed959947730ced045c24cbd129f1884f51cf6322572b037ee1fd41d"
+embedded = "7dda7c5cfecd73bca57a8e86cb702d77f7d805a4d0f4ac153aa7403967c187c0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::SigningScope::v4a_display"
+kappa = "3c06a78d920d9725ac38a7ada0465eb932b00d2f2d941b007c84a34d0f4b3563"
+embedded = "dd1992bf4cff76998379f874b7934f2152401e019343f09083071d2b20ec1eca"
+status = "residue"
+cause = "mir::Ty: SigningScope<'_>"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::StringToSign::fmt"
+kappa = "75da9e64515bf7b6d00a3b7e5f5cfaef340d2b31fe5a88ce63ebf8d7dd7eafe9"
+embedded = "3bf72dd03e22ee807a905c3e77686bfc830a32af669e447726dab34d1efd5087"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::canonical_request::StringToSign::new_v4"
+kappa = "546dc4682d831afc1884e6061b8e84ecf63e01aa4579b7d4793ed34df8c389a8"
+at = "SignatureVersion=u32"
+embedded = "9a0528d0621d1032c1310290ef8f11cb2e1aa1f8f81ee836643b25c37fca0bd6"
+status = "residue"
+cause = "mir::Ty: http_request::canonical_request::StringToSign<'_>"
+
+[[fn]]
+path = "aws-sigv4::ends_with_slash"
+kappa = "d5505b8cc69c7e0375a87f54e2b18302afe9ffe92e32d9504a86a354449909ab"
+embedded = "d045c82c7e7b3ea769d49a324b10752e473421073573a46e53a2bfe4bf015c0e"
+status = "translated"
+digest = "0e2b40803fe9f938afe547f6e718a9bb9e885bcf2bb35824984d3974e9e8a592"
+
+[[fn]]
+path = "aws-sigv4::http_request::<impl at src/http_request.rs:85:10: 85:15>::fmt"
+kappa = "2fa9bb3609d85f09e8bb39b1aa565b5364bd1f16884e6b1ebc6cb95c1d354379"
+embedded = "82f725695741b2335c7206dbf75ea8751413abcb453f75c1785a976fe9e9a706"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::algorithm"
+kappa = "f55bfaa31ded9062afd93f6a8943f0bc9bb095116d89edca937bc7239aec3f10"
+embedded = "5899fb97fc077cb61aa245f4262d7bba73ab1304a362957455cf4c555d7afde3"
+status = "residue"
+cause = "mir::Ty: http_request::SigningParams<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::credentials"
+kappa = "f4021a05a7c99427691b71bdc8590b5212046071ad195ea9d0968abf016e0ba4"
+embedded = "b562fe0b18e35430cef036b490cc4fbfc231990adfe637571ccee9371c547951"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::Credentials"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::from"
+kappa = "f8136c303440dfb1a4f089108c7bc8da0605a2e7e711577b6f789d0f295292d9"
+embedded = "a6d8c9884d871b53e39d7d24b6aadfcba4aa896bbac91f4db6f44a677156eeb7"
+status = "residue"
+cause = "mir::Ty: http_request::SigningParams<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::name"
+kappa = "78b717108f8cdebf13a81f6cf31d2f5ab7d62e89c15bda4e178405c5a6597364"
+embedded = "8721fd3ccdb77abbf56d25964863a6148ac534d0c37d969c95a9fc0909730cc5"
+status = "residue"
+cause = "mir::Ty: http_request::SigningParams<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::region"
+kappa = "293103a68500980655c8d3ca24dd27d8378e5adb91694ce8af07ddf70f99590c"
+embedded = "a502c027664be8395d69826c681f7613de2eb5f0d187f07ab60c3ed0ba85b6fc"
+status = "residue"
+cause = "mir::Ty: http_request::SigningParams<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::settings"
+kappa = "7221ad5c01bad4f633385ec2d426897144ddd88cac35bf66b87c413285c265ce"
+embedded = "fa060e0cbe57f5e8009829a6423cc7898bbcd8ac3a9f850407f280b1e8c4a936"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SigningSettings"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::settings_mut"
+kappa = "57bcd56c771ed414ef990007d3e9da1816ef84af1bf277f93926b8bd585688d9"
+embedded = "63b27b818727b048663046e6843c39a72c30e47421294f205eeb59d394e9066f"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SigningSettings"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::signature_version"
+kappa = "d9aa843dc9b2d69a3796b16e8b78f507446a87c99b0410c01162d85a21aed726"
+at = "SignatureVersion=u32"
+embedded = "68a97d99354a687c8e336ee27cc09a373cf90e305197acf660fdc8fbc49a6660"
+status = "residue"
+cause = "mir::Ty: http_request::SigningParams<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::SigningParams::time"
+kappa = "be8ecb276d48e4859dc5c98901176a5317e4ccb76536573cc791d562d37c0c07"
+embedded = "983e90e43e11c635b450548b2d7903d578427d1327224ebd385e7e6f2c1ae987"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::<impl at src/http_request/error.rs:11:10: 11:15>::fmt"
+kappa = "e45a82e2e39c0d7d95ddf465026b1c71ba16c3e7df4bd18a73c8c5bb3ddc98f7"
+embedded = "3bec47eb967b991857fc8c953a5d885471d3a4260db1ad3b6ae6dba2cca72a1b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::<impl at src/http_request/error.rs:24:10: 24:15>::fmt"
+kappa = "9ffcd7c9a3548306866ff04a9b995c6359e9e0c60030756a58843adf64a428ca"
+embedded = "682da0c9ec82cee2f0bfe4af940fcec4a128e889946e03872608db7b48002f7e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::<impl at src/http_request/error.rs:80:10: 80:15>::fmt"
+kappa = "d827a51c0806d6c56f0383b4adf23944ba9a6d686745baf21508eb017a85b70d"
+embedded = "98928dd7b541aab3e76d6a6d1170c0c1ea4e191a1fd67b674d35261c21803a7b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::<impl at src/http_request/error.rs:88:10: 88:15>::fmt"
+kappa = "87938c30646003ea4572e7ca55bad54b128b36186586fbfe655cd2080f454e17"
+embedded = "f61eb9113087d9ff3712a40ddd2e482f7b0f7e4cd01d6073dbf2e82920402ca7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::fmt"
+kappa = "53e1c4f9a82ca2d0ef5c5af2ee7b40553a6e254f8109d57f2ddbe280fd250f46"
+embedded = "cf1454d61910c94519de411785377148512ec081bca37e41b34b99b1b9242430"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::from"
+kappa = "e12feb226a1931a8251667d92e128cce11a8d785863bd68a7e1dc4826fe4da57"
+embedded = "b9e97af27c5e061af06b29c22e98cfcff3edf4924196be7eb46014e2f04dcd08"
+status = "residue"
+cause = "mir::Ty: http_request::error::CanonicalRequestError"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::from#2"
+kappa = "8a90cd681b3907e58398866098f0d94a98ac00f648a66457fa569a06adc5ee75"
+embedded = "85af1842209c220881d3632feb627711c19d0949b98908fe682d1440cfe72803"
+status = "residue"
+cause = "mir::Ty: http_request::error::CanonicalRequestError"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::from#3"
+kappa = "d3aafa87b1ad8322559c425248f578ca5a99d460b1c6c3f66869de3e0fc339b2"
+embedded = "f4b908df374f22e85be0b4f77de191b51070fd0101168c333785590490240d02"
+status = "residue"
+cause = "mir::Ty: http_request::error::CanonicalRequestError"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::source"
+kappa = "0a731252900ed221a74a1f20f7416c9c73bfb35093767f840ff886f0208fbd3d"
+embedded = "791036b7df5515cd17d9ce4ed8562257e8b73ec5cd4e25368ea4eac67573c08e"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::CanonicalRequestError::unsupported_identity_type"
+kappa = "7b5712c70e71eb27b766c1712f635207fd258ba6f4ffcf43f6fa222e1f3e9f1e"
+embedded = "99dae905a1a739d144fdb1f24bddf681be392e0008e680be9324ceba3705ee7e"
+status = "residue"
+cause = "mir::Ty: http_request::error::CanonicalRequestError"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::SigningError::fmt"
+kappa = "213be3ee53a0348e6da8a3ac67b9c879d0167253124de5d60109c2398965adb6"
+embedded = "1bdc3f8a083c1efa01a844272ad60ffdef2ae7b691b8f8132ffb16f99b95fad2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::SigningError::from"
+kappa = "e2b0190ac13dfe0f572562fd50d15c9a2a341e1b830ba13d7c49d4b09ccd49e1"
+embedded = "cb764c6368b1f6b5fd49e3f4d601c93894d43c6c600adeac14595aabf1971693"
+status = "residue"
+cause = "mir::Ty: http_request::error::SigningError"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::SigningError::source"
+kappa = "60478e7ab8af73ba91f69a087c18e00490953f6a1b659a41ec71c80ade6753a7"
+embedded = "4a801ff75a63f3e17b88235b6010abcd57b20c4c0d3380e33e02f5efc37b42a7"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::error::SigningError::unsupported_identity_type"
+kappa = "c7689f62a5dfbeff9106e3eabac074199b69195f05d79ffaaeb6b47c2a4af9aa"
+embedded = "8645221e9c7bc164f839d5fd21e360ed152352ef6d66ccd1bd7c36e2ef51c38f"
+status = "residue"
+cause = "mir::Ty: http_request::error::SigningError"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::<impl at src/http_request/sign.rs:138:10: 138:15>::fmt"
+kappa = "cbd9f1162c0c5c74a16a55a3508611560a76acc40442370a3ec92477868386d0"
+embedded = "ccc86201d6423764eab7852210e7cb5ccc58558ffff0a0aebe51afbcadda09b3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::<impl at src/http_request/sign.rs:25:10: 25:15>::fmt"
+kappa = "3d352ac808992eb4bc501c86475e9de69d04fa4e30106257df04f982f11a40f2"
+embedded = "d9b0ddb73e891aa521660b031b0c3b432207193134ca68b34dc551d254d77e17"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::<impl at src/http_request/sign.rs:79:10: 79:15>::clone"
+kappa = "3bac1fbdefd6733ddad95c31335f0d02c0edbcb84f37c1f40dfe64cab823815b"
+embedded = "9f8bd9ad9f5349a8845f5e701c895372061804480ec49a73525559ebc64c0be4"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SignableBody<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::<impl at src/http_request/sign.rs:79:17: 79:19>::assert_fields_are_eq"
+kappa = "754ae66567f9581c65e06fc865a5894d50013b61b147d07af7f89fa68b115b32"
+embedded = "85fd76c71437b2a78a2e5ec642f4d8f5b064532800f500497803870a99354e32"
+status = "residue"
+cause = "mir::Ty: SignableBody<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::<impl at src/http_request/sign.rs:79:21: 79:30>::eq"
+kappa = "fd0433be6514d0b27cb3c9cdc47229d3ef9837f1fb0093f2294de20bb9acaf30"
+embedded = "214df0aba1daaee70f4d6e66d61064e95d025648349f7d0fe6f2634d157366a9"
+status = "residue"
+cause = "mir::Ty: SignableBody<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::Header::fmt"
+kappa = "622dcf0f0ff8927d1d826fd86bdc6deefe31797b524b12010203630803503d80"
+embedded = "aea6db4924c1f1072f486c4c714b2917ba44c63f803e06f5c416d40e9ca4577d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::Header::name"
+kappa = "be27e829696c8d9d7329c5e368cab89a6d8389d3affee2d38854c9ebd21877ba"
+embedded = "f11fcaf3e1e1dc4e4d6fef17022d2aa5ff43d22dc89c79ba8123f64c32c2002a"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::Header::sensitive"
+kappa = "8c29bfc5c3dc903d5c38e24b515d6a975b8f01145b81afb32f3fb5eccb257beb"
+embedded = "9593a19d3fe6e14a5eb13bbaf7a719a6cdd105d8f6fd8e7349ee294cdace070a"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::Header::value"
+kappa = "cfc054db64f42a5fb9999f958a505e6bbdbfc1c4dc95955a5d2f042f6f81679e"
+embedded = "acf2aca7084d45f46636d683c8d811eaf10735e4012d890634e695b291a04ffe"
+status = "residue"
+cause = "mir::Ty: Header"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableBody::empty"
+kappa = "7a09a8e8d691da884044c7993a63c15adc918af8ce7f26d35250487f5f16f2c2"
+embedded = "941ec01a93af7e2331bb624b36fab06dbef450d717fbf815d86fdd65261c4d30"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SignableBody<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableBody::fmt"
+kappa = "de2761fe59fce349b0a4c65ca7c7f278c03237ae7d99aa337689e1759508a163"
+embedded = "151252c0707a4c25032eee1a77bc4551755cce0d415434dc5fb4494bd870a616"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableRequest::body"
+kappa = "9fd6f1a5cae8c291d914dca8d3cb07a6de4c72d8742629dbb20cc8e10e872bbd"
+embedded = "95bd6ed633baa30a9494412816a2ce5916759378fa9c226f54ec753f229bc680"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SignableBody<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableRequest::headers"
+kappa = "672579eb017ccc03a374db3115f0d73134237163f2fa2542c5f3e3601c92bc95"
+embedded = "a3c1b0a3e8dae6f966c9c1d6d895a0a6240f7318b546219fc472aee2675ded02"
+status = "residue"
+cause = "mir::Ty: SignableRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableRequest::method"
+kappa = "3b4fb7a5bd042d5fcb44b20ea64042ce65c1c6a0d568db4f1cccbdf5c3c461b9"
+embedded = "cc5675a4cc4fc18e16871113933d316dfd630b7217a2c7ac4680e605791357b0"
+status = "residue"
+cause = "mir::Ty: SignableRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableRequest::new"
+kappa = "2be021bd2534ea370bb0ee0024db47b27708e5fc319b2b2254c1e64e8515a9ef"
+embedded = "0e1de234fcecd070c98e39eb220ca3bf864fef622cae5237354e39349efda5bb"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SignableRequest<'_>"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SignableRequest::uri"
+kappa = "1e43c13412f3d3d2a2ede03262b0beef20b7366ab196bd68893aeac9cc47dc17"
+embedded = "dfcb93a693506de5574304c0f2ead245b171e1c5687e0c9cc5624c44ce96534e"
+status = "residue"
+cause = "mir::Ty: http::Uri"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SigningInstructions::apply_to_request_http1x"
+kappa = "871103f969551b284dc8da0f838cd2f3bb2759578502728cdf4bc8b3a7cd2bc9"
+at = "B=u32"
+embedded = "a3cbce74288ef7c0b936081134de78b775bd121edc8d0bab86261cc3ffa11d2b"
+status = "residue"
+cause = "mir::Ty: SigningInstructions"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SigningInstructions::headers"
+kappa = "604262f59f8a5e790ae0b3176e4937565ccdd2044c3cd6ec661b53b466a0a16b"
+embedded = "49aa04ab00fb03f028c2f6864c6a7a21bc8ac1d42ceda05de3e4f13fd596387c"
+status = "residue"
+cause = "mir::Ty: http_request::sign::Header"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SigningInstructions::into_parts"
+kappa = "f2ecc8039104ea3ebc1b15d7b9152b473ebaad722a0fc4727526915c737ccb8a"
+embedded = "b29029a826445192df6c729a533313564a6086333fb2dde3c197b938e9e1ae9e"
+status = "residue"
+cause = "mir::Ty: http_request::sign::Header"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SigningInstructions::new"
+kappa = "1d12eef6043e1ed0c9204502ce66910bb1ee33b807ebec26ff7cde28e1d5d5c1"
+embedded = "61ff0a8ef39cfdf13800fe85ca5464848d30b19f333203d5b5120b1d60413d3c"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SigningInstructions"
+
+[[fn]]
+path = "aws-sigv4::http_request::sign::SigningInstructions::params"
+kappa = "555034be27b790fbc7fa4c607f0f92bc3962e2352835835bb7a4f3ce2c36ef7b"
+embedded = "2d3d236f726a0406159fd3935e0530f5d3b515ab6174854dbd1c02ea4546ad90"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-sigv4::is_port_scheme_default"
+kappa = "df5cf83832aae9fc139800ee316bfe2ba382fb372b1e259f1bc888e9b188ef45"
+embedded = "9e26d3fd52a79957928d9c50cca3abf2046594b90c16ba9dea2a89d15579c9f6"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "aws-sigv4::is_sensitive_sigv4"
+kappa = "4183a5654efeed2800126c8364a75c146bfaf714dcb12b309f9b2e5957f7f790"
+embedded = "d4551d9bb61b892729cdc7a4365ddd6128284524f1de260e306816787c346b47"
+status = "residue"
+cause = "mir::AggregateKind::Closure: is_sensitive_sigv4::{closure#0}: mir::TerminatorKind::Call: core::str::<impl str>::eq_ignore_ascii_case"
+
+[[fn]]
+path = "aws-sigv4::normalize_header_value"
+kappa = "86daf50864c4eee0d0aa8ffe89d3f90348870f9f38c5f0efc7ecc0d8c5ab6227"
+embedded = "244527b38892cc44ad43eb3c3dd26ab09b389c1f5164ee54376bd644198b3a72"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "aws-sigv4::normalize_path_segment"
+kappa = "21b95046002d0a5d0a9ece6f31f655652de54f99de18659084bb8e99e0670281"
+embedded = "13e99dc2b0a18ae8679e3d51b450cdede9ce32ee2a51c5b6b15d4caf119ac8be"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, char>"
+
+[[fn]]
+path = "aws-sigv4::normalize_uri_path"
+kappa = "088ad90836eb302abae2c0ffc810002d5606c9a1dd09526b08af940ef4779a99"
+embedded = "295de508b8cb1e65cac92af8e78143a3b071219567d5b5f73f49944ce8b38d85"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-sigv4::percent_encode_path"
+kappa = "d40eb0652f7a0841d2e57fc5967054e65154564b9b9a39c9fcc30db9ffbe697f"
+embedded = "0deea1e717945d42b2e5b85cd4ba9d24562b1ec12856b2c7732e418aad07b60a"
+status = "residue"
+cause = "mir::Ty: aws_smithy_http::label::EncodingStrategy"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:103:10: 103:15>::clone"
+kappa = "0ef0e3c742bc208fe16dca9a1321a601e11cb1610d3b918dca9df33029e04f2a"
+embedded = "0d5ce112ff6a983ef644f8470b72b0cc401effc9b98735c85111ae270a46f02e"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SessionTokenMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:103:23: 103:28>::fmt"
+kappa = "2f67ec69b58ce0f8e2cca0418927ba7a08bc329900e9b8059e51dda06af6dc00"
+embedded = "b9d582402e38a57da838de92087afffa6586d763925e14143a0ccabb72f077b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:103:30: 103:32>::assert_fields_are_eq"
+kappa = "cbcb01e8847ccc39a2a7aa5cb569448aacca33cdfc578a49891f841d02ff1ad6"
+embedded = "028481238b7aaeff26acc4aac58781460d1a07e36b4600c7580519bcfa03b00d"
+status = "residue"
+cause = "mir::Ty: SessionTokenMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:103:34: 103:43>::eq"
+kappa = "842136187f2a547d5d66dde18e24ce6954d9ebe17de7b5782995e22cc6de054b"
+embedded = "207603b37e5a29dc691e2db140a385776e1afb6b9f77324d283e292a991e2d8c"
+status = "residue"
+cause = "mir::Ty: SessionTokenMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:13:10: 13:15>::clone"
+kappa = "73a4c76a0ed61988992ebc4c9ba284990e748c4a15f1a844ab5b6bfa76790bf8"
+embedded = "e6fffdbe692938663f0964fa12af475f778cfd8891ac7ee18030cfae4507d731"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SigningSettings"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:13:17: 13:22>::fmt"
+kappa = "317a5de9f9a7cfd918bbceb88f6d7c27706d53b0781e2cd6d555e72c9adb706c"
+embedded = "e351dabd1612ff2eda6c0fb32b33538029633fc84d164d05eb83e73dbbb7111a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:13:24: 13:33>::eq"
+kappa = "8f966dc515771837429cada7808ae813f47e2d65f06f333f50328138ad5509b5"
+embedded = "63558e7803552f52a2029e2b49dea783e4452307e5d5dd1c952ab3c46c10af61"
+status = "residue"
+cause = "mir::Ty: SigningSettings"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:149:16: 149:21>::clone"
+kappa = "9280c6175963b5f481c7d3804d1afcd68fd35aeef52fa8aa1009b843204730c0"
+embedded = "57d1b604293459e9d737509e3c6bf386af5c7f54f3914edb12807bfa7bd11ef3"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SignatureLocation"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:149:23: 149:28>::fmt"
+kappa = "5c72dfd3039831d880d193d11c41ecdc1f9ef1c02af3ad5ea0b28179d8ca46d7"
+embedded = "83c02b81a0140694fcf91ab9279c1dbf0a98d8a42ead801a7b5f4f07221dd340"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:149:30: 149:32>::assert_fields_are_eq"
+kappa = "d1b8a4975fed0c6ac51f9b8938324d4e845ba5a1cd0257497333e2c2e3bdb602"
+embedded = "08d9abb2abe39e12761c30ab2e3499f3481afe15fb0ca25e51d91227d9f4e129"
+status = "residue"
+cause = "mir::Ty: SignatureLocation"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:149:34: 149:43>::eq"
+kappa = "ed59c7386e0d36ddcde308d74be2459a994c3aa834bafb659217dd58ac200794"
+embedded = "17685b45b19992031fef6c2b5e5446c802cf33bd422cb987e745bd33c6e9f947"
+status = "residue"
+cause = "mir::Ty: SignatureLocation"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:48:10: 48:15>::clone"
+kappa = "95a7c17c561c1e3c9f2172548f5a0bfd715dd4f42cf82ca8c35e32952acd6437"
+embedded = "9df3b0e345b180687a425d09052fb73044e7f82f3bcce55d332bff40fc32f998"
+status = "residue"
+cause = "mir::Ty: http_request::settings::PayloadChecksumKind"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:48:23: 48:28>::fmt"
+kappa = "9a16b95385679c07bf76e986e0fa4aac79c75a9243a5c182d2676c0076e4a35f"
+embedded = "ac6fc8b54429411933ff5b28f4a5e7c2de57832656bd2374bf67940ab3b3f59c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:48:30: 48:32>::assert_fields_are_eq"
+kappa = "2615b552d21d53f01fe9f275df51d7fbd94997aab74a259b797dd03689f856db"
+embedded = "7e09d6d9d4d9de5533ca3cb94a2a575de007948240dedf783d76df30f1704784"
+status = "residue"
+cause = "mir::Ty: PayloadChecksumKind"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:48:34: 48:43>::eq"
+kappa = "2765241a8ed93708c658adea9393b0560d465d30c862642051d2d83746eac41f"
+embedded = "be1e214ff111f34d7dfecb5110aafa0f7a4d5c51e88c673b7f0175b16d0b3682"
+status = "residue"
+cause = "mir::Ty: PayloadChecksumKind"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:67:10: 67:15>::clone"
+kappa = "6f1ea426bff322babfa6299aac552c3b10010d2f961215864fb8b86f979d72ff"
+embedded = "229579db00a943c667c90ac0f20fd12557bd3407c2daac2dadc03300a6fff9d7"
+status = "residue"
+cause = "mir::Ty: http_request::settings::PercentEncodingMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:67:23: 67:28>::fmt"
+kappa = "3e0cd3ecb8fe10a2b8e900d32c7f82f7a12d966583c625ac9cfc72db7e0d0e8f"
+embedded = "505d98339c066822c4c917390b4ed84fde4758b01ce72342eae780c94275f42f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:67:30: 67:32>::assert_fields_are_eq"
+kappa = "09513df9473f36183e48ffb6d5df9075dced45d34bab6e42e8371fb637343eea"
+embedded = "28a3c24817aadb81e414aa5c79fc9c8e3cde9627bffbefcea664276f696dcdbd"
+status = "residue"
+cause = "mir::Ty: PercentEncodingMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:67:34: 67:43>::eq"
+kappa = "13a08dec79a61fe72871c37310e51b89495a0460172120ca0e48164f15446d26"
+embedded = "a6fa3fe6b63ede26abdd3d4c2d93c0620cc09a303aa4b09ec4169d152509a1e5"
+status = "residue"
+cause = "mir::Ty: PercentEncodingMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:81:10: 81:15>::clone"
+kappa = "c011a24fab2ca5af26773cb47b438d43e0bb024ee20c229ee6cacbf21c0a9813"
+embedded = "63cfdce4d37681298a5fac7f4765d770bb8752701f98ae468eb504462be2df70"
+status = "residue"
+cause = "mir::Ty: http_request::settings::UriPathNormalizationMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:81:23: 81:28>::fmt"
+kappa = "afbb6b79e8af5e5f267c25ed5db2dfd29f9665e42e13c425726d73497b2dbabc"
+embedded = "34ae0e84bbea76d456c063afd6cbfb9cdf47ed7cd4dd86a198d54b3033af802b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:81:30: 81:32>::assert_fields_are_eq"
+kappa = "d5da9b2d574cbe625c85626c387df40c07e8e69d435ae951d351ccd79c76f954"
+embedded = "43066f80fda9c9bb36e84cf65515eb4752105283c667e8c905bd3ac281fc44ba"
+status = "residue"
+cause = "mir::Ty: UriPathNormalizationMode"
+
+[[fn]]
+path = "aws-sigv4::settings::<impl at src/http_request/settings.rs:81:34: 81:43>::eq"
+kappa = "95ea8b54b09df55775575fde5c7a95aabee47c719940868dcf66c23431a3775d"
+embedded = "9eccbacc4a69623427411c339280474b9459c84ab8b8b7e7823b3e59ca0287ce"
+status = "residue"
+cause = "mir::Ty: UriPathNormalizationMode"
+
+[[fn]]
+path = "aws-sigv4::settings::SigningSettings::default"
+kappa = "cadcde2909aff83f03d517e7903c42b8ca0ab42b8d2a5b57d0e7cbddceac4eb8"
+embedded = "474b4ac9710e0894141df6827251ff62eddd653a2140293add4a54d299b905a2"
+status = "residue"
+cause = "mir::Ty: http_request::settings::SigningSettings"
+
+[[fn]]
+path = "aws-sigv4::settings::UriPathNormalizationMode::from"
+kappa = "aaf25888c55563e38afaed67741ca72a2495e041d9f275ff2e14593c09b037ed"
+embedded = "e694b305747e58fc607a1259b3c1d9050488567580ca959ce0054cdc8090873b"
+status = "residue"
+cause = "mir::Ty: http_request::settings::UriPathNormalizationMode"
+
+[[fn]]
+path = "aws-sigv4::sign"
+kappa = "d4485d2e0cd63eaa4f5dbe6fc5ffbebb1e957c3032a10a429ddc41b609827d14"
+embedded = "364d23ec56b446e45032dd686ebc7c3e817b2cefb51c60e26d4ca80665910d9d"
+status = "residue"
+cause = "mir::Ty: http_request::sign::SigningInstructions"
+
+[[fn]]
+path = "aws-sigv4::sign::__CALLSITE::META::NAME"
+kappa = "eab0e6651f3d3236824a41979dbbee08ede3659e28cfd4ba3455d219e717474d"
+embedded = "6ae77c8ad3ee65f0ef20017eb871f54309b2d6411bf21841234a68555520cabc"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "aws-sigv4::sign::__CALLSITE::META::NAME#2"
+kappa = "0f49c7a8544486c580b99c47f6afc5d9ac75f11c6cb13a3cef1d4006945c4755"
+embedded = "40c9a5bdd9a9aae63eaf9f81e42a69c894faa2a3b090a6b652621a46cbb169f4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "aws-sigv4::trim_all"
+kappa = "44d67a7b8b8d0d00d7b16f74d53717767a12d0db77e31fb59ed2efb073091143"
+embedded = "9228ed860c7e560c483ec671440d172eac6e46c90dae03126307413a06f1c0b1"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+

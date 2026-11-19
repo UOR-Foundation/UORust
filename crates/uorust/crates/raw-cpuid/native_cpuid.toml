@@ -1,0 +1,23 @@
+[[fn]]
+path = "raw-cpuid::cpuid_count"
+kappa = "0bba6edd540d0681ec99c020bf1df2f6879a3fe7ae607223ef5846f27fbad805"
+at = "CpuIdResult=u32"
+embedded = "7a26608b35e606b0a5095c7e8cffb6440188d9ec0505b34dadac9b9d38a00916"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "raw-cpuid::native_cpuid::<impl at src/lib.rs:99:14: 99:19>::clone"
+kappa = "e674b8f5b1e4c78cf1f179a87b3cdcda80c675b2407c8f1d8557c1279e9c4e33"
+embedded = "e091f9972bc0aea11699d5eb668fb1abe5768a290e9dfd887cc56155c0e76404"
+status = "residue"
+cause = "mir::Ty: native_cpuid::CpuIdReaderNative"
+
+[[fn]]
+path = "raw-cpuid::native_cpuid::CpuIdReaderNative::cpuid2"
+kappa = "3695dc429fd5ba915c0028805b79c295624968e8b84e0aefa02844ec52037ee7"
+at = "CpuIdResult=u32"
+embedded = "a33e29df977e26804f4379a23c93c7ac54dad30e7ad332ed44285222c7fe0c91"
+status = "residue"
+cause = "mir::Ty: CpuIdReaderNative"
+

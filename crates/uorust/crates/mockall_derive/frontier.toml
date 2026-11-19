@@ -1,0 +1,333 @@
+# The mockall_derive register (written by `uorust crate mockall_derive@0.15.0`; do not edit): every body of
+# mockall_derive's MIR at mockall_derive 0.15.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 164
+translated = 0
+residue = 164
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 60
+translated = 0
+residue = 60
+
+[module.mock_function]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.mock_item]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.mock_item_struct]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.mock_trait]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.mockable_item]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.mockable_struct]
+bodies = 18
+translated = 0
+residue = 18
+
+[embedding]
+bodies = 164
+embedded = 164
+evaluable = 162
+blocked = 2
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: syn::Generics"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: mock_function::Builder<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: automock::Attrs"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AttrFormatter<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MockFunction"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mockable_struct::MockableStruct"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Lifetime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Signature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MockItemTraitImpl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mock_function::MockFunction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mockable_item::MockableItem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::FnArg"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::GenericParam"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItemFn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::ItemImpl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Common<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CommonExpectationMethods<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CommonExpectationsMethods<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConcreteExpectationGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExpectationGuardCommonMethods<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericExpectationGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericExpectations<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Matcher<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Methods"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MockItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MockItemModule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MockItemStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefExpectation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefExpectations<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefMutExpectation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefMutExpectations<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefMutRfunc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RefRfunc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StaticExpectation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StaticExpectations<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StaticGenericExpectations<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StaticRfunc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: automock::Attr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mock_function::Context<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mock_item::MockItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mock_item::MockItemModule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mock_item_struct::MockItemStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mock_trait::MockTrait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mockable_item::MockableModule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mockable_struct::TraitItemVFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::BoundLifetimes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItemConst"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItemType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ItemFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ItemForeignMod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ItemTrait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Pat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::PatType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ReturnType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::TraitItemFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::TypeParamBound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Visibility"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::WhereClause"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::WherePredicate"
+bodies = 1

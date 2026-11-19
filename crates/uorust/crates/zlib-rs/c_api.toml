@@ -1,0 +1,65 @@
+[[fn]]
+path = "zlib-rs::c_api::<impl at src/c_api.rs:172:10: 172:15>::fmt"
+kappa = "23e775a587ef77795cd1c0420b9be17cd80a0104793608ad9186eb10386b026c"
+embedded = "d42f4599621d92201c244d66919e966b5ea68e07b2986eb9910abb4e2a72d3ca"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::c_api::<impl at src/c_api.rs:55:16: 55:21>::clone"
+kappa = "66eee2ab959cf7eaf59693dcc876be8ead5107ad94d1ce4ed7e9478e9a16fec6"
+embedded = "c1dc15c4daa4f9702bb62202660a20fc54909cddfb0c772474dc7dbb722e9a76"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+
+[[fn]]
+path = "zlib-rs::c_api::gz_header::OS_CODE"
+kappa = "a8bbe36958ed3c083441c40d318cc2a43046b9b823afd5d1b3eea4bda78bc8d2"
+embedded = "7fcbfe9a665a605a2a9deca74943ebb1d2c83fb5ea0e5e7c85cdb0f39254f8f6"
+status = "translated"
+digest = "1ae2eb09a48422b74fb225c244d181a40696704a560aa528f3d23a185d4edf34"
+
+[[fn]]
+path = "zlib-rs::c_api::gz_header::default"
+kappa = "52f328751a0e4a8dfc041d0ed125ed6270d770aa02f119a57800b4157e1a5145"
+embedded = "e199e88a46122c2b9f69c4dea0ff149e8853ff213590eaf12410771d1a45dd9e"
+status = "residue"
+cause = "mir::Ty: c_api::gz_header"
+
+[[fn]]
+path = "zlib-rs::c_api::gz_header::flags"
+kappa = "40bf5fd85bd83b1410bd8651275227366cae7588db71d0db3133bbed06808b6a"
+embedded = "3098ba55e1d20b6d25ce5ba7ad9b964bdc93548578bfca16de1bf9f155392a00"
+status = "residue"
+cause = "mir::Ty: gz_header"
+
+[[fn]]
+path = "zlib-rs::c_api::z_stream::configure_allocator"
+kappa = "f9c7b143a3c60aecc86e1e0f8b49a73da8d90e2e07ec85883e4b13be43943e94"
+at = "C=u32"
+embedded = "56ad2d3330d6bba8c04af54c0062dc3b79af3be78edc5a3dc917611520677097"
+status = "residue"
+cause = "mir::Ty: z_stream"
+
+[[fn]]
+path = "zlib-rs::c_api::z_stream::configure_default_c_allocator"
+kappa = "ce91786663e3e1fe7eb4bc837ef54a336634362b781f49015289df233e75c3a1"
+embedded = "9c846be2fcc0b0085e61be55eb33e02f7d6e69b27f3fe92f1f1d8b363530c17b"
+status = "residue"
+cause = "mir::Ty: z_stream"
+
+[[fn]]
+path = "zlib-rs::c_api::z_stream::configure_default_rust_allocator"
+kappa = "e9c9e324c8a715e0c222abccc2f642180f7d53d198418351242a5fa9407e6cba"
+embedded = "a79e2468c80b5bbda43e4bc0f6c854abe15100f4bcc9f961fc16669ef606e4be"
+status = "residue"
+cause = "mir::Ty: z_stream"
+
+[[fn]]
+path = "zlib-rs::c_api::z_stream::default"
+kappa = "34d295e04caa56b608612e3204bdec4e9f186a4117aed5a96a278010786c066b"
+at = "C=u32"
+embedded = "7c92637f5ef5130e960d9de582200d6cc2436f0c909cd8fc990cac1f0f0158d1"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+

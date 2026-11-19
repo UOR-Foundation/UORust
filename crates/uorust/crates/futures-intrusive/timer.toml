@@ -1,0 +1,255 @@
+[[fn]]
+path = "futures-intrusive::clock::MockClock::fmt"
+kappa = "0b02dbeaabedfa2a1fb015efcf30e491e34526ecff1dcf8db8971fab091dead2"
+embedded = "6e4bf5afbce33378ff0265ce12e6e543781c7c0d0a1416eb6688ed739301de87"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "futures-intrusive::clock::MockClock::new"
+kappa = "6cc8489adadc956a764c6f13f9a215ddf8a910eb73b4827f31754b34054b3b03"
+embedded = "0b96651be06d3f469b5e0ec7cc76fa776aa1221b6df8a73db7439ad52f4afb0a"
+status = "residue"
+cause = "mir::Ty: timer::clock::MockClock"
+
+[[fn]]
+path = "futures-intrusive::clock::MockClock::now"
+kappa = "940eeef028f8978eeb163ec7bbba3fbfcd2886e6f4e14b38079d031bfefacf64"
+embedded = "c4433504ebb7560b02cadf9e89cf41a6f234122176f8d2aac52794ce631f133d"
+status = "residue"
+cause = "mir::Ty: MockClock"
+
+[[fn]]
+path = "futures-intrusive::clock::MockClock::set_time"
+kappa = "2e617dba5ebd9c5bdfc80f4bf72674be344cd3e66441f4b5bace463f6343b872"
+embedded = "65dca24798928a9d867c53be5d13a3092ec9f76ef9c402c57e0b8581cd671b63"
+status = "residue"
+cause = "mir::Ty: MockClock"
+
+[[fn]]
+path = "futures-intrusive::clock::if_std::StdClock::fmt"
+kappa = "c76673095fab7fea26b03633f3cdde3cc32925c14477cc1759c14232ccae2cc1"
+embedded = "9466a38e7728fd6b3a61edc6601fec1c983e09e6e23341fe381711044788e22f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "futures-intrusive::clock::if_std::StdClock::new"
+kappa = "c312a49c963bcf932c690df66594c4de35f11985f32851409d8544ba384d9f4a"
+embedded = "e41a81678ef45686a209e18d850e89f22b52ca6b5182042647e98ee6ed2bbafc"
+status = "residue"
+cause = "mir::Ty: timer::clock::if_std::StdClock"
+
+[[fn]]
+path = "futures-intrusive::clock::if_std::StdClock::now"
+kappa = "c3148d2adb63e9ac617053ba7002885960c6b0ab15bde38961f888958d4ab3c6"
+embedded = "5d1bb8dfdbfd1f6272caa61a9a31bd484e0f46de6d71c912c9ce16fc42110de6"
+status = "residue"
+cause = "mir::Ty: clock::if_std::StdClock"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::<impl at src/timer/timer.rs:17:10: 17:19>::eq"
+kappa = "d2af30c133ab850615e381897eb46521db3255f98b996ae0c7f0e8b2832ed6fb"
+embedded = "fa0ba333ec8ae59cc125e8f0bfc954f3b8284db1d389aa1e51bc5abdc5d81b25"
+status = "residue"
+cause = "mir::Ty: timer::timer::PollState"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::check_expirations"
+kappa = "0a5036b30e59ba1d3bbb254c7fa6692cf92ca7b06465431dfd7513b50bf198a8"
+at = "MutexType=u32"
+embedded = "237b8d6732ffb09829d1b2139df275a28a4a0baac03bf28bd3d5d0ec4830f863"
+status = "residue"
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::deadline"
+kappa = "b21701530950ebd99fdf693dbc7841b69f4f759f2753a869a5cdc41a4ce983d7"
+at = "MutexType=u32"
+embedded = "bb97a90d4813deac7dd916d739fa6122f49675aff65421b6f913b293e48c8621"
+status = "residue"
+cause = "mir::Ty: timer::timer::LocalTimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::deadline#2"
+kappa = "f662c490b760f78022ff534d9d954bb6745e26c04dd777ed335901b77e7ba888"
+at = "MutexType=u32"
+embedded = "93267240497c7dfdde684df028dcc60b064824e0a4f74abc6757293e4a832085"
+status = "residue"
+cause = "mir::Ty: timer::timer::TimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::deadline_from_now"
+kappa = "db728aeb9c7e5c6e1b69e8a56a051c5783f0f53f25ced9914fed3b970c5aee57"
+at = "MutexType=u32"
+embedded = "12380bf2760fd3014cc0fb32cda6ff2e5d0e252ef22948f08898518c54420a59"
+status = "residue"
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::delay"
+kappa = "f06f69c6d0f09a00d732a74689aafb771caa932760803ec1718aad5115ca492a"
+at = "MutexType=u32"
+embedded = "e4b694adfb67bd714d1af9eb1ef8d094a3ddf62c2cef028e6f06b04f76b83cbc"
+status = "residue"
+cause = "mir::Ty: timer::timer::LocalTimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::delay#2"
+kappa = "ccf0e8238d32909ed13a781fbd04f9df2b6c0bd5d8b2b7c98bf4b02c781a9700"
+at = "MutexType=u32"
+embedded = "9ca229f6bd0ce13fa16018f48d4d8ba95efdd85dedbc172ec3f04733939b6fd2"
+status = "residue"
+cause = "mir::Ty: timer::timer::TimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::fmt"
+kappa = "3e865d19a5a5914bacc8cb315873ebbdc8577011ed69bff607b97f99ab578480"
+embedded = "47f28bf2091a9f69671a514b0068d0fd2b9c07954cf0c889559323f816c7a0bc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::new"
+kappa = "5d300dd47f15ae1bc1a6edb7775328a7b6333a3ecb7b7038e902b1779e945998"
+at = "MutexType=u32"
+embedded = "dd548ad1380f18ba5e39cbc1814c3fe4edac6f30cbddc5a55fb517430a494278"
+status = "residue"
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::next_expiration"
+kappa = "c281ae2695ae454d821a9d43280dfaf2fc4352003572081624586fcc834c45fc"
+at = "MutexType=u32"
+embedded = "fa3a8b52163d626d1ba0cfa29bb3f66d06ab1bc97c140684e2d76ac0d4fb6196"
+status = "residue"
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::remove_waiter"
+kappa = "d0e5e279e18cee8ae01f6ae76a368ada1e105ddacd7c46c84ae6020b5a41393a"
+at = "MutexType=u32"
+embedded = "1027f1af057fb2de088be71c274a3e24e423cb10e0fa387f0887edfacae63684"
+status = "residue"
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::GenericTimerService::try_wait"
+kappa = "aad6e290fb64fbd557a50109d4e88e82759c48f581fd702fc0932abe3632e284"
+at = "MutexType=u32"
+embedded = "c7e0cce3e5647c11c22658cbb41fafc6c26ea1b087be6e69f3bcfacec3bad4d8"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::LocalTimerFuture::drop"
+kappa = "7ad6fb8e88bd5124ed57665fda0e07b016ec82be4ea5e4ed64f7ca60a9bd4924"
+embedded = "d7217ea369702f7f8731e46f39b7a90825342f34f4e8035fb8e96c119c37067a"
+status = "residue"
+cause = "mir::Ty: LocalTimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::LocalTimerFuture::fmt"
+kappa = "e9a7bbd505aa205e996efd100cd63666b98c6e55512db631cfd11b171e523a9d"
+embedded = "fe32d226df4c86ae88287c7ec165ba1a99c91f20d99c19d5309999597f08e438"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::LocalTimerFuture::is_terminated"
+kappa = "3b5770454a9c6944a9c38cad53c0830009fd65fbf6e5334d12909f78fe31bdcf"
+embedded = "21755a6a4586003992c1729f4684482614234e3bc8a85ac943635f4fe4085359"
+status = "residue"
+cause = "mir::Ty: LocalTimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::LocalTimerFuture::poll"
+kappa = "36fb996c693d5ce032d10b5fe784252a2145ca84211f64d53aa16638aa53dcf6"
+embedded = "1d0e3cf523f89ad66623ce42c3fe7110fc004076c284f3225d2db4313c25866b"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerFuture::fmt"
+kappa = "47d4a6a3b962dd932fab40fb3286b4e670e70c7fb8012afa3d8957f402f226fe"
+embedded = "b1f85d427448bf8e092e75062c41753dd3533a7dfcf4da7768e04c38d271ed86"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerFuture::is_terminated"
+kappa = "6087e0264e223e18cf2489690500209972f33f4aaa00a6b41746bd348667e5e4"
+embedded = "189e98a7af3edbda5756b46abb8daf21a4b97384da943c312292470b5ab6c7c8"
+status = "residue"
+cause = "mir::Ty: TimerFuture<'_>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerFuture::poll"
+kappa = "90e2ff330f87263ff4eec3452eb0623caa243a3285c7f91323712cfdc582782b"
+embedded = "248821fe8d2462569a371fd0b1a910c4ca4a45948d7af7f74cb5fe4f60ddb297"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerQueueEntry::cmp"
+kappa = "f6759767960a24f86db9db76bbaa760b75fa17108039c232e026421b232817e3"
+embedded = "dd88a10ee540dc569d745d3f5bba00e2f79285c4fdabb16e26b8ee322cd97c73"
+status = "residue"
+cause = "mir::Ty: TimerQueueEntry"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerQueueEntry::eq"
+kappa = "de4359fbdd4636631cbe3212284c2622b07b29c0d2af6e7fdf72980661d1d2db"
+embedded = "8316b4a42f96367f869783ba07e570c6eb706b885b89ef8ec3973750d87c5f15"
+status = "residue"
+cause = "mir::Ty: TimerQueueEntry"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerQueueEntry::new"
+kappa = "9be20f975508bbdc378565b0a0d6799d60f27a468ba7081c4b9536eb3e77482d"
+embedded = "5b9faf7fbcfcb55fd6e9ad9fd11cc30fbff2e8678bc3bb96f52fe42f47c5faa8"
+status = "residue"
+cause = "mir::Ty: timer::timer::TimerQueueEntry"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerQueueEntry::partial_cmp"
+kappa = "79307b3c3b73a0003ac97e6659932deed740cbcc10d41a27a791dc73d84ed4a3"
+embedded = "17ab4eda74d11eca35b4f6d1cd2b46520b422ea0d254bc3c1ba341cdd5680e34"
+status = "residue"
+cause = "mir::Ty: TimerQueueEntry"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerState::check_expirations"
+kappa = "4514488b21423d333cff6933a290a2d8748d880ba2ffbc8e9dccecf2dc9b083d"
+embedded = "09e2b50eabc15585f16d244626b86a25ca7411561eec4ccf32722bec52119234"
+status = "residue"
+cause = "mir::Ty: TimerState"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerState::new"
+kappa = "d8651c959a08239c4d45d1b8c95f1300493d7272adafa846f12482b907828c3d"
+embedded = "b7ba2643446b126fe4cc051a3fb447007d90cf93cb2e0b927ed89172f9904146"
+status = "residue"
+cause = "mir::Ty: timer::timer::TimerState"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerState::next_expiration"
+kappa = "cbc93c07c558dcac7e0371f30c32c88e15ec1bda23d218ff65e599a0adf2cd4e"
+embedded = "e0dd59cbbcf8cd9f6325b5db0cbcd3d27c125af3e5163a07d1d0713c30c7b5ac"
+status = "residue"
+cause = "mir::Ty: TimerState"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerState::remove_waiter"
+kappa = "ff72472c13516c9434d5ea9127b98a75f9e47d4028bbd58fb62a35eab1c5e1e4"
+embedded = "a891f92e270536df155f8bfcc09ce24d652da0dbd4d02d2c1a17cfcbbc3936ab"
+status = "residue"
+cause = "mir::Ty: TimerState"
+
+[[fn]]
+path = "futures-intrusive::timer::timer::TimerState::try_wait"
+kappa = "43c8473d4fb5b74ca0c1737e41f5238efbf27ce72b5c55f06026dac25fe0b3e1"
+embedded = "394d4b1858a30cb7457cb322d08b5a68e6d13f57f094e892dfe5979ce1683304"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+

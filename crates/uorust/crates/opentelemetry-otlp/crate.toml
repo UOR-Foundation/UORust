@@ -1,0 +1,83 @@
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:744:10: 744:15>::fmt"
+kappa = "b6082cc7573ad0d4554eec326575de94a65a6d7dde9703fdb87499109866060c"
+embedded = "a63f02a71e9f7d382af982ef5e1f73851785e9e59826c2190beaba002af61181"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:744:17: 744:24>::default"
+kappa = "ce66cdfa35b80a782635546af1328004f0b047577e962d9231db5c41a147ef9d"
+at = "NoExporterBuilderSet=u32"
+embedded = "609127f9c7c71468e3bff8577311de7390dbcc4e9bfcbb414096c304a7e17dbe"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:744:26: 744:31>::clone"
+kappa = "44a25fdb9b5dfdc494e3688105fd95fd8aaa6b810a590f4ab47daa44e9449c17"
+at = "NoExporterBuilderSet=u32"
+embedded = "0641148ad040b18867bc3b39745cc74e6d89922860449ea04729abcdcebf4985"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:756:10: 756:15>::fmt"
+kappa = "c9cd261a9a43d6b0df8f957d3c643cc3cc31df0613b25340ffa39b05ef98d72d"
+embedded = "8492497d5b50a6dfbd4dc6a4dd45cc0537161dc577f8b892de52c6f42576600f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:761:10: 761:15>::clone"
+kappa = "90d15e41319e209be8315181d41b59b6295ba1dac168e434a8e7806d1da9b64f"
+at = "Protocol=u32"
+embedded = "e2e4d66dded9fab318f099b8d1f9e7d7b2768f8e4795492bf0cbeafb0f240b98"
+status = "translated"
+digest = "4937acbe39b5e9572f948fa557acb8462cfb1d096f90142a9714cc70a2bef37b"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:761:23: 761:28>::fmt"
+kappa = "4f5d13e7f270817e0bbdd7d4da296c7d636a4382c947582669fd2e8cdaa66d08"
+embedded = "3d22e579554ddc85baf09be533500e41d99f0a0eecc67583f5fd71ec2ddc200b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:761:30: 761:32>::assert_fields_are_eq"
+kappa = "1f5f204752d1d27c8f9568c576deaea1d2dccdacaae2919e03aba7780c6d9f8a"
+embedded = "ddce83b28317b7c1314e1500d52c92ce3b1d1a7e6555ba89876a16212e717c6a"
+status = "residue"
+cause = "mir::Ty: Protocol"
+
+[[fn]]
+path = "opentelemetry-otlp::<impl at src/lib.rs:761:34: 761:43>::eq"
+kappa = "18372b30f26f62936cab6849ef87b1855183204debc4025d7012133b714e5688"
+embedded = "afbbfc178227c308c7b83089d894343998e6af8dc621a761a14550e2e933d1d5"
+status = "residue"
+cause = "mir::Ty: Protocol"
+
+[[fn]]
+path = "opentelemetry-otlp::Protocol::feature_default"
+kappa = "4f0f49852d0cbcfa08ef104d6b7b4a017e9da9a80d5db6e7b90dbb56b9c89f98"
+at = "Protocol=u32"
+embedded = "77db46d1f1434ceedd6e1c09cdf839e02956141e8f25df616fd642e6b5489117"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "opentelemetry-otlp::Protocol::from_env"
+kappa = "a84fcb59f8f22db3e91667a4603b70316c29cabb94461bec3b5027e31eacbe49"
+at = "Protocol=u32"
+embedded = "52df5b12915577b4b524df26e6a9a3864c693f64fdff560714833071c2585a84"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item exporter::OTEL_EXPORTER_OTLP_PROTOCOL"
+
+[[fn]]
+path = "opentelemetry-otlp::Protocol::parse_from_env_var"
+kappa = "e997c684cbc8b0ae08f19b89cd5c8e2152308290dcae09b935a351cbdc840f2c"
+at = "Protocol=u32"
+embedded = "da70761552cc02760b49d16e5a566b4cdaeb6acdd565027a7afa7cf73761be85"
+status = "residue"
+cause = "mir::TerminatorKind::Call: exporter::read_enum_env_var: opentelemetry-otlp's MIR stops at type outside the lift: std::env::VarError"
+

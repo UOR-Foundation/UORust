@@ -1,0 +1,292 @@
+# The owo-colors register (written by `uorust crate owo-colors@4.4.0`; do not edit): every body of
+# owo-colors's MIR at owo-colors 4.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1094
+translated = 9
+residue = 1085
+
+[module.colors]
+bodies = 646
+translated = 2
+residue = 644
+
+[module.combo]
+bodies = 160
+translated = 4
+residue = 156
+
+[module.crate]
+bodies = 58
+translated = 2
+residue = 56
+
+[module.dyn_colors]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.dyn_styles]
+bodies = 120
+translated = 1
+residue = 119
+
+[module.styled_list]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.styles]
+bodies = 90
+translated = 0
+residue = 90
+
+[embedding]
+bodies = 1090
+embedded = 1090
+evaluable = 1090
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: dyn_colors::DynColors"
+bodies = 290
+
+[[cause]]
+cause = "mir::Ty: colors::xterm::dynamic::XtermColors"
+bodies = 258
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 185
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::Style"
+bodies = 72
+
+[[cause]]
+cause = "mir::Ty: colors::ansi_colors::AnsiColors"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: StyleFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: colors::BrightMagenta"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: colors::Magenta"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::Styled<&u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: combo::ComboDynColorDisplay<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: colors::Black"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::Blue"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightBlack"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightBlue"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightCyan"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightGreen"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightRed"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightWhite"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::BrightYellow"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::Cyan"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::Green"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::Red"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::White"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: colors::Yellow"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: combo::ComboColorDisplay<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: <colors::custom::CustomColor<R"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BgDynColorDisplay<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FgDynColorDisplay<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: colors::custom::Plane"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: colors::dynamic::Rgb"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::Styled<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BgColorDisplay<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FgColorDisplay<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: XtermColors"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::StyleFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AnsiColors"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CssColors"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Plane"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rgb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: colors::Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: colors::custom::CustomColor<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::StylePrefixFormatter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::StyleSuffixFormatter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IsStyled"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StylePrefixFormatter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StyleSuffixFormatter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: colors::css::dynamic::CssColors"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn_styles::Effect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styled_list::StyledList<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styled_list::Transition<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::BlinkDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::BlinkFastDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::BoldDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::DimDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::HiddenDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::ItalicDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::ReversedDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::StrikeThroughDisplay<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: styles::UnderlineDisplay<'_"
+bodies = 1

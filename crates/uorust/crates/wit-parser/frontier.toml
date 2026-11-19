@@ -1,0 +1,869 @@
+# The wit-parser register (written by `uorust crate wit-parser@0.263.0`; do not edit): every body of
+# wit-parser's MIR at wit-parser 0.263.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 913
+translated = 10
+residue = 903
+
+[module."_#1"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#10"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#11"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#12"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#13"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#14"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#15"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#16"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#17"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#18"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#19"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#2"]
+bodies = 2
+translated = 0
+residue = 2
+
+[module."_#20"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#21"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#22"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#23"]
+bodies = 10
+translated = 0
+residue = 10
+
+[module."_#24"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#25"]
+bodies = 33
+translated = 0
+residue = 33
+
+[module."_#26"]
+bodies = 4
+translated = 0
+residue = 4
+
+[module."_#3"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#4"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module."_#5"]
+bodies = 4
+translated = 0
+residue = 4
+
+[module."_#6"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#7"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module."_#8"]
+bodies = 4
+translated = 0
+residue = 4
+
+[module."_#9"]
+bodies = 3
+translated = 0
+residue = 3
+
+[module._]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.abi]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.ast]
+bodies = 218
+translated = 1
+residue = 217
+
+[module.crate]
+bodies = 226
+translated = 9
+residue = 217
+
+[module.decoding]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.live]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.metadata]
+bodies = 77
+translated = 0
+residue = 77
+
+[module.resolve]
+bodies = 163
+translated = 0
+residue = 163
+
+[module.serde_]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.sizealign]
+bodies = 44
+translated = 0
+residue = 44
+
+[embedding]
+bodies = 897
+embedded = 897
+evaluable = 896
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[differential]
+bodies = 1
+theorems = 5
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 91
+
+[[cause]]
+cause = "mir::Ty: <__S as _::_serde::Serializer>::Ok"
+bodies = 65
+
+[[cause]]
+cause = "mir::Ty: resolve::Resolve"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: anyhow::Error"
+bodies = 47
+
+[[cause]]
+cause = "mir::Ty: id_arena::Id<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: ast::error::ParseError"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: resolve::error::ResolveError"
+bodies = 26
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: metadata::_::deserialize::__Field"
+bodies = 20
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ast::lex::Span"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: resolve::Package"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ast::lex::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: sizealign::ArchitectureSize"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ArchitectureSize"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: LiveTypes"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: sizealign::Alignment"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: lex::Span"
+bodies = 9
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: <_::deserialize::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_enum::__Field"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SourceMap"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ast::Source"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: sizealign::ElementInfo"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Cloner<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ItemName"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: semver::Version"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Function"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PackageName"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ast::TypeDef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: metadata::PackageMetadata"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::_::deserialize::FIELDS::promoted[0]"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WasmSignature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WasmType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: abi::AbiVariant"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::Id<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ast::SourceMap"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: resolve::Remap"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AbiVariant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Docs"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Enum"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Flags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Resolver<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Variant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WorldItem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WorldKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: _::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: abi::WasmType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::ItemName"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::error::ParseErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: id_arena::Arena<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lex::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metadata::InterfaceMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metadata::TypeMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metadata::WorldMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <<_::deserialize::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_enum::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <<_::deserialize::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_enum::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Case"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnumCase"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Field"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Flag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FunctionKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IncludeName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LiftLowerAbi"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ManglingAndAbi"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Record"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Result_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Stability"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TypeDef"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnresolvedPackage"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: World"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: abi::WasmSignature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Docs<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::PackageName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::Type<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metadata::FunctionMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: resolve::PackageSources"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: resolve::fs::PackageSourceMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: <_::deserialize::__Visitor<'de> as _::_serde::de::Visitor<'de>>::visit_enum::FIELDS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <__A as _::_serde::de::MapAccess<'_>>::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <__A as _::_serde::de::SeqAccess<'_>>::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FunctionMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Interface"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InterfaceMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Param"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResolveErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanLocation<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Tokenizer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Type"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TypeDefKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TypeMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnresolvedPackageGroup"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WitEncodingVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WorldInclude"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WorldMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::DeclList<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Func<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::InterfaceItem<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::NamedFunc<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::PackageFile<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::SpanLocation<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::WorldItem<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::lex::Tokenizer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::toposort::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoding::DecodedWasm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoding::WitEncodingVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: resolve::clone::CloneMaps"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: resolve::error::ResolveErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str>}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wasmparser::names::ComponentName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: _::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <core::option::Option as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: is_xid_continue"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: is_xid_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <__A as _::_serde::de::EnumAccess<'_>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <__D as _::_serde::Deserializer<'_>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AccessorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AstItem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CrlfFold<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlagsRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlatTypes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Int"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Mangling"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MyVisit<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RandomState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeOwner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WitPackageDecoder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: abi::FlatTypes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::AstItem<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Attribute<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Export<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ExternKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Import<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Include<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Interface<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ParsedUsePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ResourceFunc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ToplevelUse<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Use<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::UsePath<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::World<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::lex::CrlfFold<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::lex::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::resolve::NameScope"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::resolve::Resolver<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoding::ComponentInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoding::WitPackageDecoder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: indexmap::set::IntoIter<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: live::LiveTypes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: resolve::MergeMap<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: resolve::clone::Cloner<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: resolve::fs::ParsedFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sizealign::SizeAlign"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::hash::RandomState"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

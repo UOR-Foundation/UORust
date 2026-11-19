@@ -1,0 +1,132 @@
+[[fn]]
+path = "zune-jpeg::choose_idct_1x1_func"
+kappa = "c41f4f5e87b4847c0b5e53ccec3badf0a83bfd34cc7c5949ee0cdef61b750c84"
+embedded = "057ff92066d43d1246e77770ea5a6236491fb5eba9308b020b15dbdb9001e294"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b> fn(&'a mut [i32; 64], &'b mut [i16], usize)"
+
+[[fn]]
+path = "zune-jpeg::choose_idct_4x4_func"
+kappa = "7a8e50137b7ac8bda23d6576319f81a32a2cf0e5e4a6811c602edc65aaf2c3ee"
+embedded = "06c7bcc52e54cc7e64b93ddf3c89d412958861588ff11df50a447ebd182ee0cf"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b> fn(&'a mut [i32; 64], &'b mut [i16], usize)"
+
+[[fn]]
+path = "zune-jpeg::choose_idct_func"
+kappa = "23a0880fd6e7bb691f08c6fde3dfd6cabc804af3b7478fc1e2bdafe3a1dcfa90"
+embedded = "2160bb81131e46b4c8f41a96ff9b28ba93794857a642aa88514a2cf302b444ae"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b> fn(&'a mut [i32; 64], &'b mut [i16], usize)"
+
+[[fn]]
+path = "zune-jpeg::clamp_avx"
+kappa = "36c167c98f8a7accd49a3d2be31520bb482fdb5f06c5a216164bb5887dfc7417"
+embedded = "ae1021f41a5cb567e5740de76894134a7b8b974d0e106e4066d1464604c9c110"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zune-jpeg::f2f"
+kappa = "4466d4d2c1058891ed380732eb9ffa25ced0cf39e7f8b036ba6b217c865b445f"
+differential = 12
+embedded = "54b8ad42f75ce303825bf62f936cefb4268a05ad652fba552fa2a77819ad012f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "zune-jpeg::fsh"
+kappa = "5b523f1a8c923a50b1e46d289047fd42f24905acfdbb2ffc0ce6ea47f0d5396f"
+differential = 6
+embedded = "49ef0365c4dc3fd4152e41ce0e552704fe04bfccf114d0f193659aabdc4aa6df"
+status = "translated"
+digest = "4ab3a27e7dd936d8b990bf75087d666e54dbeae21f92039d88ebd0844b8e8121"
+
+[[fn]]
+path = "zune-jpeg::idct4x4"
+kappa = "087c065d0f44614ef7e0a647188fabaf1993893bc357a9fc2ed4520c2df46d8e"
+embedded = "80159d04fdfcf345a6d0023095ed938868a78381530a1dc1a24c2ba478dbc544"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "zune-jpeg::idct::avx2::SCALE_BITS"
+kappa = "2fe914165d451bd14594a6e38b39cb2f91e126f69505f0816bf2b48d2b9b0939"
+embedded = "853cf2d0cb8781f04780c9f50bcc1086ba69c6cb577f31ad56420330c1895729"
+status = "translated"
+digest = "45f6eb0bd5661b9fea070d28a4c0966b84bfda7066b9670d718bc91d9481a92f"
+
+[[fn]]
+path = "zune-jpeg::idct::avx2::shuffle"
+kappa = "fbf6d296a38a4cf7377c7e2a6ff51e262a6694c79cb1f10c64ba76632c8bcd68"
+differential = 6
+embedded = "aa1eec3ad436842fcbd65025b8584a7d57bac471342d2bd394c22640b588a751"
+status = "translated"
+digest = "251065ea29fe113cd6b09e2f7301917dd8823c21363ff229b41d6f58216f6869"
+
+[[fn]]
+path = "zune-jpeg::idct::scalar::SCALE_BITS"
+kappa = "09c05e6c32f8eed7b844daaff4fc15ab5d3caa9365c26d1f37dfc5719b7cddff"
+embedded = "6444bd3c92218588ba27b466ca2e9fd28169a2d7d13b28ecd3892994420ee196"
+status = "translated"
+digest = "5465bb84386d4b3bc4b31fc6b757f14fae9a73fc52cb0fb5bd45f62ad2947834"
+
+[[fn]]
+path = "zune-jpeg::idct::scalar::clamp"
+kappa = "be06741e009c26afe11c1fe1bb4e005e6bfd063fb77e9c2bd9d981da3b6a0419"
+embedded = "3cc0200a90b543d99a0d508341b22b6da7d7149a53a03e9b575fb8425d9b5187"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i32 as Ord>::clamp"
+
+[[fn]]
+path = "zune-jpeg::idct_avx2"
+kappa = "e55b85b1e3e2ced4a0355c76801c91f9c2fdb7e64360b16ecba33056f110b214"
+embedded = "af2bbaed8ca84500e48ce13ecc50eca099a15629c61bc68f79623c356c46813a"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zune-jpeg::idct_avx2_4x4"
+kappa = "c302f1da5465e65585e8b5eb5af804cb84a832f66dacfdf28ef92e4f7bf5613d"
+embedded = "7da9384a1d8fd2e0702bb2d3e9465eb09b5c02a642b2d03c523547af04845f7d"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zune-jpeg::idct_int"
+kappa = "3ed573918a6b0d84003e81768a8e087278882547b358d94bb8559fa1853726d8"
+embedded = "df8f1b1f7f21f2e15d45781dbfa24218eaa55c25ef721424cc9a6e9027a3c7d3"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zune-jpeg::idct_int_1x1"
+kappa = "522e39d2aa99f895cc0fc13149987293ec512cd89a7c1404f60e2c8c1aa56878"
+embedded = "86cfb3342f111d5fc358b3ebe1d02269aeb67990842d3bef012114f08f67b1b0"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "zune-jpeg::wa"
+kappa = "71b535aa933ac289a28c76d2bb506fe4180c63180f84c56f088a792e29636e30"
+differential = 6
+embedded = "1578882e86aa1ee0773f97ae0307490addb6b278cab2d58bfbad4c1401657136"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_add"
+
+[[fn]]
+path = "zune-jpeg::wm"
+kappa = "0075d45136f932d7190866599fb6c5d5657dc03dbd99e65b94987c74bf5294a9"
+differential = 6
+embedded = "edd6c6ba2fe4ab09f910620edb727a36d3c8127248db765e1dfa03c4d1b31760"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_mul"
+
+[[fn]]
+path = "zune-jpeg::ws"
+kappa = "65b94e027ef4584f93fe539e4de6965ba9bef38a9033f928a08c6a7742e171fd"
+differential = 6
+embedded = "6aabb836c8f5fe5f15705591cc2b19a556683573fb072679bae70cd26f5f2691"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_sub"
+

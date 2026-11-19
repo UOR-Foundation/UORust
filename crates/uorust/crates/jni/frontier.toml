@@ -1,0 +1,1007 @@
+# The jni register (written by `uorust crate jni@0.22.4`; do not edit): every body of
+# jni's MIR at jni 0.22.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1547
+translated = 23
+residue = 1524
+
+[module.crate]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.descriptors]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.elements]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.env]
+bodies = 144
+translated = 0
+residue = 144
+
+[module.errors]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.exceptions]
+bodies = 445
+translated = 18
+residue = 427
+
+[module.ids]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.jvalue]
+bodies = 96
+translated = 0
+residue = 96
+
+[module.objects]
+bodies = 487
+translated = 3
+residue = 484
+
+[module.refs]
+bodies = 81
+translated = 0
+residue = 81
+
+[module.signature]
+bodies = 59
+translated = 1
+residue = 58
+
+[module.strings]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.version]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.vm]
+bodies = 61
+translated = 0
+residue = 61
+
+[embedding]
+bodies = 1523
+embedded = 1523
+evaluable = 1494
+blocked = 29
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 27
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 203
+
+[[cause]]
+cause = "mir::Ty: objects::jobject::JObject<'_>"
+bodies = 138
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 92
+
+[[cause]]
+cause = "mir::Ty: objects::jthrowable::JThrowable<'_>"
+bodies = 72
+
+[[cause]]
+cause = "mir::Ty: objects::jclass::JClass<'_>"
+bodies = 69
+
+[[cause]]
+cause = "mir::Ty: strings::ffi_str::JNIStr"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArray<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: version::JNIVersion"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: objects::jstring::JString<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: jvalue::JValue<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: env::Env<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: objects::jcollection::JCollection<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Reference"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: exceptions::JIllegalArgumentException<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: exceptions::JSecurityException<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: exceptions::JArrayIndexOutOfBoundsException<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassNotFoundException<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JExceptionInInitializerError<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JLinkageError<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JRuntimeException<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JStringIndexOutOfBoundsException<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: objects::jchar_sequence::JCharSequence<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: objects::jclass_loader::JClassLoader<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: objects::jiterator::JIterator<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: signature::JavaType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: exceptions::JArrayStoreException<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassCircularityError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassFormatError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JIllegalMonitorStateException<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JInstantiationException<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoClassDefFoundError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoSuchFieldError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoSuchMethodError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNumberFormatException<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: exceptions::JOutOfMemoryError<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: objects::jlist::JList<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: objects::jmap::JMap<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: objects::jobject_array::JObjectArray<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: objects::jset::JSet<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ffi_str::JNIStr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: objects::jbytebuffer::JByteBuffer<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: objects::jmap::JMapEntry<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: objects::jstack_trace_element::JStackTraceElement<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: objects::jthread::JThread<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: refs::global::Global<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: vm::java_vm::AttachGuard<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ffi_str::JNIString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ids::jmethodid::JMethodID"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: java_vm::JavaVM"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: refs::cast::Cast<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: strings::ffi_str::JNIString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: vm::java_vm::AttachConfig<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TArrayRef"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: auto::Auto<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: global::Global<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ids::jfieldid::JFieldID"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ids::jstaticfieldid::JStaticFieldID"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ids::jstaticmethodid::JStaticMethodID"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: jprimitive_array::JPrimitiveArray<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: refs::auto::Auto<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: refs::weak::Weak<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: signature::MethodSignature<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: impl std::ops::Deref<Target = refs::global::Global<objects::jclass::JClass<'static>>> + '_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: signature::FieldSignature<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: signature::Primitive"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: vm::java_vm::JavaVM"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: weak::Weak<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: elements::auto_elements::AutoElements<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elements::auto_elements_critical::AutoElementsCritical<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jobject::JObject<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: strings::mutf8_chars::MUTF8Chars<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EnvOutcome<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cast::Cast<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env::EnvOutcome<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env::EnvUnowned<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: jni_sys::jvalue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mutf8_chars::MUTF8Chars<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: transmute_copy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <Self as policy::ErrorPolicy<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <objects::jstring::JString<'local> as std::fmt::Display>::fmt::FmtOrJniError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AttachmentExceptionPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FieldSignature<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JArrayIndexOutOfBoundsException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JArrayStoreException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JClassCircularityError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JClassFormatError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JClassNotFoundException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JExceptionInInitializerError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JIllegalArgumentException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JIllegalMonitorStateException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JInstantiationException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JLinkageError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JMapEntry<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JNoClassDefFoundError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JNoSuchFieldError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JNoSuchMethodError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JNumberFormatException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JOutOfMemoryError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JRuntimeException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JSecurityException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JStringIndexOutOfBoundsException<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: JavaType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MethodSignature<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Primitive"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RuntimeFieldSignature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RuntimeMethodSignature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auto_elements::AutoElements<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auto_elements_critical::AutoElementsCritical<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env::MonitorGuard<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env::NativeMethod<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: java_vm::AttachGuard<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jbytebuffer::JByteBuffer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jchar_sequence::JCharSequence<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jclass::JClass<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jclass_loader::JClassLoader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jcollection::JCollection<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jiterator::JIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jlist::JList<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jmap::JMap<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jset::JSet<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jstack_trace_element::JStackTraceElement<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jstring::JString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jthread::JThread<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jthrowable::JThrowable<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: objects::jobject_array::JObjectArray<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<*mut *const jni_sys::JNINativeInterface_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vm::java_vm::AttachmentExceptionPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vm::tls_attach_guard::TLSAttachGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: vm::java_vm::JavaVM::thread_attach_guard_level::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: vm::java_vm::thread_guard_level_pop::promoted[1]: type outside the lift: std::cell::Cell<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: vm::java_vm::thread_guard_level_push::promoted[0]: type outside the lift: std::cell::Cell<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JArrayIndexOutOfBoundsException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JArrayStoreException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JClassCircularityError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JClassFormatError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JClassNotFoundException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JExceptionInInitializerError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JIllegalArgumentException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JIllegalMonitorStateException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JInstantiationException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JLinkageError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JNoClassDefFoundError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JNoSuchFieldError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JNoSuchMethodError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JNumberFormatException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JOutOfMemoryError as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JRuntimeException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JSecurityException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <JStringIndexOutOfBoundsException as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <jlist::JList as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <jset::JSet as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <jstring::JString as AsRef>::as_ref::assert_is_instance_of_type_is_ffi_safe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MonitorGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TLSAttachGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: elements::release_mode::ReleaseMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env::Outcome<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::CharToJavaError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::policy::LogContextErrorAndDefault"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::policy::LogErrorAndDefault"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::policy::ThrowRuntimeExAndDefault"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JArrayIndexOutOfBoundsExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JArrayStoreExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassCircularityErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassFormatErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JClassNotFoundExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JExceptionInInitializerErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JIllegalArgumentExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JIllegalMonitorStateExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JInstantiationExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JLinkageErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoClassDefFoundErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoSuchFieldErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNoSuchMethodErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JNumberFormatExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JOutOfMemoryErrorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JRuntimeExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JSecurityExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exceptions::JStringIndexOutOfBoundsExceptionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jfieldid::JFieldID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jmethodid::JMethodID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jstaticfieldid::JStaticFieldID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jstaticmethodid::JStaticMethodID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jbytebuffer::JByteBufferAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jchar_sequence::JCharSequenceAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jclass::JClassAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jclass_loader::JClassLoaderAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jcollection::JCollectionAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jiterator::JIteratorAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jlist::JListAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jmap::JMapAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jmap::JMapEntryAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jmap::JMapIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jobject::JObjectAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jobject_array::JObjectArrayAPI<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jboolean"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jbyte"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jchar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jdouble"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jfloat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jlong"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jprimitive_array::JPrimitiveArrayAPI_jshort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jset::JSetAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jstack_trace_element::JStackTraceElementAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jstring::JStringAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jthread::JThreadAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: objects::jthrowable::JThrowableAPI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: refs::loader_context::LoaderContext<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::char::CharTryFromError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::char::DecodeUtf16Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::MutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vm::java_vm::ScopeToken"
+bodies = 1

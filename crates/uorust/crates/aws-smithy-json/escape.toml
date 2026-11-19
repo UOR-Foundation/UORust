@@ -1,0 +1,100 @@
+[[fn]]
+path = "aws-smithy-json::escape::<impl at src/escape.rs:19:10: 19:15>::fmt"
+kappa = "d19a275623d584566ccdf1ed58e32700bd579e0526515c3113c18958bc68fc0c"
+embedded = "0202f31831d5e5101ff274d80406bdab664e27007748ae13b3e3e4f05a4065cb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-json::escape::<impl at src/escape.rs:9:10: 9:15>::fmt"
+kappa = "2b3197e346bbbb512785c5ddbd7f3b3c146fef70804b79e340032449d53341d6"
+embedded = "089811de529b87de4892d2f9672befce54c1a09a92ac8888b752633f5f6c9b9a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-json::escape::<impl at src/escape.rs:9:17: 9:26>::eq"
+kappa = "209d9cdc7a5665b0a9ad7255be4fa0faf5b61db8928685b1996593522c33f1fb"
+embedded = "00db779e696a5c17bede2b34bd7ba1a221bc4575acc171aee4acccb156f0e07b"
+status = "residue"
+cause = "mir::Ty: EscapeErrorKind"
+
+[[fn]]
+path = "aws-smithy-json::escape::<impl at src/escape.rs:9:28: 9:30>::assert_fields_are_eq"
+kappa = "03ab230a1e844f1ce386ef1416d89875e5b04831ee22a451983039707bba6dbf"
+embedded = "b3ffd81eceaeaf8a04c8ec2c724a5670cbe3e3f3c9e513b3da6e77777618ed87"
+status = "residue"
+cause = "mir::Ty: EscapeErrorKind"
+
+[[fn]]
+path = "aws-smithy-json::escape::EscapeError::fmt"
+kappa = "a4c598f3d1878abf7327abcc728f0bb62740892c7198d623c404b53b16665143"
+embedded = "91ff0f114111b1c0438eab84528a33c06e9ea4954e6f2e11d386fc675ea90b05"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-json::escape::EscapeError::from"
+kappa = "6ff0094a3eae9aad9b9aaa8c785683504b53e33550db9437a4a4cbece645acff"
+embedded = "6e1289c85eea41aa6936a837bf0d651c0fddef3141f9b7a9b7db15b4b51db221"
+status = "residue"
+cause = "mir::Ty: escape::EscapeError"
+
+[[fn]]
+path = "aws-smithy-json::escape_string"
+kappa = "0c693c5d8f40322611aa34edfaf7f7c04469ef43acb6284e723100a8544e9d3c"
+embedded = "db4fbbf38e478a8f86b5799d618f59c3185bee13f1e1e31848b901b6f48c4826"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-smithy-json::escape_string_inner"
+kappa = "a38823ecefb64176c966070f5762120ed731c8f88f71689b93e1b149345b0ed8"
+embedded = "4e9ac82dcb3e399ce27d59acad1ec42ab2d310d1a3d8245c69e27d1fd2723a30"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "aws-smithy-json::is_utf16_high_surrogate"
+kappa = "d4a17a06542a3a1206b2201a37cbee348239b8fc0aad39da7d8c04102e1722c6"
+differential = 7
+embedded = "b6c2b9964ab23fde2129ecb9842bbcba0cd9e48f1f0c9103eaa2f16b5a25a232"
+status = "translated"
+digest = "dcfdec10ac8187238f7e1290f8a7ce0b8baf7421c53d03a7e4424568d3e4b691"
+
+[[fn]]
+path = "aws-smithy-json::is_utf16_low_surrogate"
+kappa = "558b59c2cd120ec54b39b4d29387dbeba6f9bee7515a6b6fca1f33bf44d40391"
+differential = 7
+embedded = "5c1bf728cab93cf0fbcccb461b313e61e024dc88814e3b938825c9872ec832de"
+status = "translated"
+digest = "c705335d9ddc2012618ff49f77ce4bb741db3cbc094a99ba6477eebb0ab672e6"
+
+[[fn]]
+path = "aws-smithy-json::read_codepoint"
+kappa = "720797f639e72a5f0d3808f5d872554be2c3f94ca8d2fd02abd340a9c33bd166"
+embedded = "f8c6a0e8a2c6643434bc5910579c035cdf2c37546cf8401b16e72f13eac56ac7"
+status = "residue"
+cause = "mir::Ty: escape::EscapeError"
+
+[[fn]]
+path = "aws-smithy-json::read_unicode_escapes"
+kappa = "dc24523b484844c506e436c6d4d25516d2e883123cd4eb84b3e33f6ebe212046"
+embedded = "8bfecdd642764249504b741e0af9b8ad863b866fefc5df2ad06d4cc28fee166e"
+status = "residue"
+cause = "mir::Ty: escape::EscapeError"
+
+[[fn]]
+path = "aws-smithy-json::unescape_string"
+kappa = "d96f4a350127cc38ce9de8949f6f5c3ae752ef5b34b8a5013ee896db9048f5d4"
+embedded = "d6906574d9d938d2027084a7420a39d1406892adb07fd95e5e923e60eb173053"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-smithy-json::unescape_string_inner"
+kappa = "4f3f27273b141d1a6363caea776832673f2cda5ece814baef31d7fead2345839"
+embedded = "9316e637f2b6a859f92d612e566f0147871400dff18438f94fdc055b55dcd9e6"
+status = "residue"
+cause = "mir::Ty: escape::EscapeError"
+

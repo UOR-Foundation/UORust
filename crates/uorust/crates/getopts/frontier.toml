@@ -1,0 +1,138 @@
+# The getopts register (written by `uorust crate getopts@0.2.24`; do not edit): every body of
+# getopts's MIR at getopts 0.2.24, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 82
+translated = 3
+residue = 79
+
+[module.crate]
+bodies = 82
+translated = 3
+residue = 79
+
+[embedding]
+bodies = 82
+embedded = 82
+evaluable = 82
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: validate_names: getopts's MIR stops at type outside the lift: std::fmt::Arguments<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Matches::opt_vals: getopts's MIR stops at type outside the lift: Opt"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Matches"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Matches::opt_val: getopts's MIR stops at mir::TerminatorKind::Call: Matches::opt_vals: getopts's MIR stops at type outside the lift: Opt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Options"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OptGroup"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Name"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = std::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:153:1: 153:13>::usage::{closure#0}: type outside the lift: dyn Iterator<Item = String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:892:1: 892:13>::opts_present::{closure#0}: mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:892:1: 892:13>::opts_present_any::{closure#0}: mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:892:1: 892:13>::opts_str::{closure#0}: mir::TerminatorKind::Call: Matches::opt_val: getopts's MIR stops at mir::TerminatorKind::Call: Matches::opt_vals: getopts's MIR stops at type outside the lift: Opt"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:892:1: 892:13>::opts_str_first::{closure#0}: mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: find_opt::{closure#0}: type outside the lift: Opt"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Options::new: getopts's MIR stops at type outside the lift: OptGroup"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Fail"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HasArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Occur"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Opt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Optval"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParsingStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 1

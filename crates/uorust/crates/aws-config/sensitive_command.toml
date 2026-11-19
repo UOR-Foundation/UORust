@@ -1,0 +1,48 @@
+[[fn]]
+path = "aws-config::sensitive_command::<impl at src/sensitive_command.rs:8:10: 8:15>::clone"
+kappa = "c210bad436020aeacca0fa1d50d8237e24ceeb2e9e1da4dd6784695c380f3337"
+at = "T=u32"
+embedded = "275a6cddeeb91002db0c66fbb3cda080cc60b4b1c5cef638df49bba92b65a1f8"
+status = "residue"
+cause = "mir::Ty: sensitive_command::CommandWithSensitiveArgs<u32>"
+
+[[fn]]
+path = "aws-config::sensitive_command::CommandWithSensitiveArgs::fmt"
+kappa = "48c4a046cabb639123029902a94a7c73d98a26f0291985304071458ed5627e92"
+at = "T=u32"
+embedded = "d229b07ba620cd3ee74c839504db6c113ccad32ca022b37bc1dbeb3cad05e905"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::sensitive_command::CommandWithSensitiveArgs::fmt#2"
+kappa = "a15a23851815e5e5c409d3af00c1856bb23ad17cd0122a55645b95e217940fc7"
+at = "T=u32"
+embedded = "48f80643e87d8c1c75607184316d8b2c0b4310b9409fdb5cc3dd519fcfc166a6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::sensitive_command::CommandWithSensitiveArgs::new"
+kappa = "2946c310530cb00be703ef202929ebbc174d7bec7961145ce7073ed38d63990e"
+at = "T=u32"
+embedded = "6df43bf5f4b5e8ca993acdf987f613139df12248e845441c0c15fe762ab3b4e8"
+status = "residue"
+cause = "mir::Ty: sensitive_command::CommandWithSensitiveArgs<u32>"
+
+[[fn]]
+path = "aws-config::sensitive_command::CommandWithSensitiveArgs::to_owned_string"
+kappa = "4d3f66bbf28750372669c05918e9542611a697886359f88ebecdaf7f567effc6"
+at = "T=u32"
+embedded = "7cc941e24f07d1f1df5b502ade86c0d71dbcb6d3773b5bcfb21f21d97139380f"
+status = "residue"
+cause = "mir::Ty: sensitive_command::CommandWithSensitiveArgs<std::string::String>"
+
+[[fn]]
+path = "aws-config::sensitive_command::CommandWithSensitiveArgs::unredacted"
+kappa = "4dc96fba5059f979796ae2d65bef56b3436db45c538770570fc4cc22ba0ea44b"
+at = "T=u32"
+embedded = "99683a1b7f4a3326f1f799d7b29ae5ab0c5d0e9aa9132da660bf16d287424721"
+status = "residue"
+cause = "mir::Ty: CommandWithSensitiveArgs<u32>"
+

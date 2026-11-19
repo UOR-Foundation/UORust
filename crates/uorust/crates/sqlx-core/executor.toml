@@ -1,0 +1,110 @@
+[[fn]]
+path = "sqlx-core::Executor::execute"
+kappa = "88b56dd8653d8ae3bfac2bc95b2d50638f6cbc1205c2824e9df491b80165d4dd"
+at = "E=u32, Self=u32"
+embedded = "12b093f8bbb14b79b12b0101bd71c8520bc3ec2d331ab83e8b009db743283202"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Executor::execute_many"
+kappa = "4d8cbd5873e05e19838b9de1df0d42690aaf457b5a2ca3c51b915938940d61d5"
+at = "E=u32, Self=u32"
+embedded = "ea20c69eb4fb86fbbc46ad74310ecc1ea297a26a6e9041ff22b0e9920471ad32"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Executor::fetch"
+kappa = "5125d6d79fdf8e236a24e1229009b1a19de3664e4df28826682bf281af1870e1"
+at = "E=u32, Self=u32"
+embedded = "7eed364df208603a83b4d604b80535f2c3d1ab2573afd5a55a4979a744342112"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Executor::fetch_all"
+kappa = "69b056c348c9070b7d30429ba307230a1bc26b92000004dafae4c8e996f65fce"
+at = "E=u32, Self=u32"
+embedded = "141a3f154a691c0f9a989a589f6bd1035b9fb39dda3185dff22720feb121dcaa"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::vec::Vec<u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Executor::fetch_one"
+kappa = "9a37a38f8856efa8d909dcb725e71f040d8d254fe568420affc7576d3f27e53f"
+at = "E=u32, Self=u32"
+embedded = "3d746c3407dcd9cde01f5aa9b5f412d2c32ee85f7aa6efef381f45b1078e5481"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Executor::prepare"
+kappa = "cfc1d7a7ed9d33f26ef96030986ed48daa7ca5e6df193b0e60e387b534692a46"
+at = "Self=u32"
+embedded = "8b66cdf8a199e308585519fd5417b1da846346a231b36d6d91df2ce50f05bcea"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::executor::<impl at src/executor.rs:261:1: 263:26>::persistent"
+kappa = "0391f4375393f5cc55f6fdfb0f42d141755cab3c38bf5905efd4e4f460ed78b3"
+embedded = "9e28178e381a77bd1f66062b53cf868f4b73080231583a63b5edbfc00b3856b7"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::executor::<impl at src/executor.rs:261:1: 263:26>::sql"
+kappa = "87cf41ebc3ab89c54346bb8b7f8637874cc21264e9348931281770bb004315cb"
+at = "T=u32"
+embedded = "01e4b41788fa4547908f7f167270dbb783ff6e09e5aa1947f4a74626cede3007"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::executor::<impl at src/executor.rs:261:1: 263:26>::statement"
+kappa = "dc162e69baf3736f41d34922c140d6fca85c66a785aa161921b0287383a48c04"
+at = "DB=u32"
+embedded = "290ec0251044b5d51e5773458902d5ae0dca1f0b38cfc4ec0848141512a323b8"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::executor::<impl at src/executor.rs:261:1: 263:26>::take_arguments"
+kappa = "8f38596c3d751549e9bb5dfcf1306ecda915cf9a391511fcd9897023c5c0a6c1"
+at = "DB=u32"
+embedded = "8cf55340d4c4217d95b132c8c210008ea0cd3d46d10fb0c79b64451cb27b4ca7"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::executor::T::persistent"
+kappa = "b95a8692ad7a1d911ddbdad8aca504dc53d0cad08b2978abaaed73ce33fcf806"
+embedded = "58610e7212d290153d13ddf37a61621ef87a1e3fdb16fb1f568ebbf084b087c2"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::executor::T::sql"
+kappa = "74feab325e9f40b5a14b468e600bcc86bb77a6dfd6b2351c53a47ade9173f4a2"
+at = "T=u32"
+embedded = "c31c2fbdbecdd1b8b487b826ca0a3a403588afc5117b8137baaa52c445164ec8"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::executor::T::statement"
+kappa = "6fad1f7c1c07d636b3446a1445cb543f6de392e270c50b0f24bda75f687fd3b0"
+at = "DB=u32"
+embedded = "95cffb1e5d0effc16f8c9ee3c04435f985dd97b4151a87158a49b244ca660083"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::executor::T::take_arguments"
+kappa = "44b0e3892c62b8b74c10e0cecc524ac6de570999788e930d9fd006b37a92bd68"
+at = "DB=u32"
+embedded = "713546ab77860bdbeae51a2b34951b095f66fd2fe88684876bcd44ba7b6327bc"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+

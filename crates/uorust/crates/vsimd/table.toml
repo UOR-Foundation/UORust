@@ -1,0 +1,22 @@
+[[fn]]
+path = "vsimd::u8x16xn_lookup"
+kappa = "ecb4d13d46d00147e9168d189c33a1545125c740d9a358536c65a7e7c457ff39"
+at = "S=u32, V=u32"
+embedded = "80afc0bc6b90ee595fc69cb1b01f6fa712d45f59fbc3f4fff26894d40a76826a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item table::u8x16xn_lookup::MatchesISA::<u32>::VALUE"
+
+[[fn]]
+path = "vsimd::u8x16xn_lookup::MatchesISA::VALUE"
+kappa = "ad22047bcb1d52874546935c562311c4966e6fcf2df75c260386457d321b6070"
+embedded = "085c39f785a0761b10c555e2dc936fef5a3382ba0b876e7fcd8889a22c602e2d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::u8x16xn_lookup::MatchesISA::VALUE#2"
+kappa = "10aa64ceec2c41c2764fcae7758fcbcf4e21cf225b4afc5a35ed94cb96ef91c4"
+embedded = "812d86607566c4e90514e85efdf9051065c97683746512f38ada91429aaf2b89"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+

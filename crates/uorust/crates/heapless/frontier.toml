@@ -1,0 +1,609 @@
+# The heapless register (written by `uorust crate heapless@0.9.4`; do not edit): every body of
+# heapless's MIR at heapless 0.9.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 713
+translated = 5
+residue = 708
+
+[module.binary_heap]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.c_string]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.crate]
+bodies = 4
+translated = 1
+residue = 3
+
+[module.deque]
+bodies = 72
+translated = 0
+residue = 72
+
+[module.history_buf]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.index_map]
+bodies = 108
+translated = 0
+residue = 108
+
+[module.index_set]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.len_type]
+bodies = 27
+translated = 4
+residue = 23
+
+[module.linear_map]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.mpmc]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.slice]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.sorted_linked_list]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.spsc]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.storage]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.string]
+bodies = 71
+translated = 0
+residue = 71
+
+[module.vec]
+bodies = 111
+translated = 0
+residue = 111
+
+[embedding]
+bodies = 713
+embedded = 713
+evaluable = 709
+blocked = 4
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VecInner<u32"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: DequeInner<u32"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: StringInner<u32"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: IndexMap<u32"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: HistoryBufInner<u32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: IndexSet<u32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: sorted_linked_list::Node<u32"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: spsc::QueueInner<u32"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: storage::ViewStorage"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u8>; #usize_N]>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: LinearMapInner<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: LenT"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: BinaryHeapInner<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: SortedLinkedListInner<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: index_map::OccupiedEntry<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u8>; #_N]>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 9
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Consumer<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: index_map::Entry<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: linear_map::OccupiedEntry<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CoreMap<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FindMutView<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Producer<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: deque::IntoIter<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linear_map::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: vec::IntoIter<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u8>]>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CString<#usize_N"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: deque::Iter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: deque::IterMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::IntoIter<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::ValidPos"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_set::Iter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mpmc::QueueInner<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: spsc::Iter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: string::drain::Drain<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Hole<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PeekMutInner<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: c_string::CString<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::ffi::CStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: index_map::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: index_map::Pos"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: len_type::TypeEnum"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: linear_map::IntoIter<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: spsc::IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CString<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OldestOrdered<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: c_string::CString<#usize_N"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::HashValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::IndexMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_set::IndexSet<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: linear_map::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: spsc::Producer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: storage::OwnedStorage<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vec::drain::Drain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item N"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::cast"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BackshiftOnDrop<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pos"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ValidPos"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: binary_heap::PeekMutInner<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: c_string::ExtendError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hash32::BuildHasherDefault<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: history_buf::OldestOrdered<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_map::CoreMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_set::Difference<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: storage::OwnedStorage<#usize_N>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vec::VecInner<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LenT as len_type::Sealed>::MAX_USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as len_type::Sealed>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as len_type::Sealed>::MAX_USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as len_type::Sealed>::TYPE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: vec::VecInner::ELEM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as TryInto>::try_into"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: index_map::CoreMap::capacity: heapless's MIR stops at mir::Operand::Constant: the constant item N"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: len_type::try_to_len_type: heapless's MIR stops at mir::Operand::Constant: the constant item <u32 as len_type::Sealed>::MAX_USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <vec::drain::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CString<#_N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Difference<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Intersection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoStringError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterView<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Keys<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary_heap::Hole<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: c_string::CString<#_N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: c_string::IntoStringError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::Bucket<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::Insert<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::Keys<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_set::Intersection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linear_map::Entry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linear_map::VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpmc::Cell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sorted_linked_list::FindMutView<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sorted_linked_list::IterView<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::FromUtf16Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::VecInner<u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_ND]>"
+bodies = 1

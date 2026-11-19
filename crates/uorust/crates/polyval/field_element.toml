@@ -1,0 +1,155 @@
+[[fn]]
+path = "polyval::bmul"
+kappa = "361daf87b883e628ba63b3687fd101d5033df2c3644bdc353360ab5f33a8cb95"
+at = "T=u32"
+embedded = "f8446dfe53d3fa330cf58e7da606934e363e924bdd8e261ec1e05647a116b031"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Shl, which u32 does not implement in core"
+
+[[fn]]
+path = "polyval::bmul64"
+kappa = "e260d97c575e697ebab3571bec5294106f5b91760e2107cf477e4ede62b2ce8b"
+embedded = "6950a419b7f9a08f8a8b72695846674d1a02a4a50a932dd93c21edb734504cee"
+status = "residue"
+cause = "mir::TerminatorKind::Call: field_element::bmul: polyval's MIR stops at mir::TerminatorKind::Call: <u64 as Shl>::shl"
+
+[[fn]]
+path = "polyval::field_element::<impl at src/field_element.rs:118:1: 118:45>::from"
+kappa = "9e8a223bcab9d8af06b40b48aab2fb9b48fdc462e01e2cf7a75e1c7c2df57cc9"
+embedded = "902de7fd53bb4a291248e4174647f845a9a8fa371b94d5032b002455766044cb"
+status = "residue"
+cause = "mir::Ty: FieldElement"
+
+[[fn]]
+path = "polyval::field_element::<impl at src/field_element.rs:56:10: 56:15>::clone"
+kappa = "9d55d5600fb7c04023c6ce07f2d3cc473303043cb2c32ff0cdc07f9bd2a0dd63"
+embedded = "ea61e33f238fa1929930c703f07a563bcf9fc8b66f93b85e0fa241bed5e15c03"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::<impl at src/field_element.rs:56:23: 56:30>::default"
+kappa = "f33e1768259df002a16b9bdf49518f2c4d1589613fde5e1e64c799c408f882a1"
+embedded = "07e1e098b66de05f8d38bfa2ee3a40bc017fa71926fee4ea8be5a98c55bd06c3"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::Block::from"
+kappa = "09f8dc05cd1bf1822586539a6622332271bb4075166df6d7df6aebb1bb319a86"
+embedded = "66f1ea9fbf08b961f6d2d670343b38faef4d7426ab01623a0658a73a528a9af8"
+status = "residue"
+cause = "mir::Ty: universal_hash::typenum::UTerm"
+
+[[fn]]
+path = "polyval::field_element::Block::from#2"
+kappa = "0cf3648f518091cb6a9e5add082d1a74ad292c541bf6bed492a45ebf6a3c2b06"
+embedded = "1300f7169f73dc0af41ed1afd7ac7158697cafc35e344a2da55e965215af3534"
+status = "residue"
+cause = "mir::Ty: universal_hash::typenum::UTerm"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::add"
+kappa = "d0efe50d8041b5e8fd5fcdf59840495c4fd6244b6c00131fa05a8d6d560d9386"
+embedded = "53871d8cd2c7a1e23814457a4cccc8bc7902459e2a594e3f4c06af53a9b055af"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::fmt"
+kappa = "9580dd050c745d4d0b3caf56efe24499f8498a3ebef4eb9c06b388d05ec489de"
+embedded = "e40a90c89dbf6bcfa7f4ad06fb46b0e9ad6c7fab83d5f8dbd2e17781acbbf068"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::from"
+kappa = "9bb999fa600d4f30a84d4c606168ffa67eb262d8037df9744fc776422591fcff"
+embedded = "c112704bd445e2f41bd049c75d4d48a42f0d16d84b693238fa9ef691f5d5f536"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::from#2"
+kappa = "af0372b3adc43de556f3fff69634eafbc4c4b0123c24fe2b0bbbcea9fc3d3674"
+embedded = "e30034661f977c443b640392fe785a306313f0b2ae77bee5e5548b9807e6c6a5"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::from#3"
+kappa = "41b060bd96a2ef92800f8b635b497e2580d4ac9faecac86a3996abb37893d95d"
+embedded = "b5da5ff8a3074ed1b545e8ebed49e9ce4947c10f7a62392201e2b1e59ac9868d"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::from#4"
+kappa = "4fa4a509093e37b8050ac01765267f9e23b500fa21649498b3d0b3fc75fcb3bd"
+embedded = "2bf5acd75697fdc1b344579206f3c1415d3de51cbd8fbba7e3105b3c95da66d2"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::mul"
+kappa = "360e32ef5fe06ba57d8d7142a5700d1c7a66c824af9420da2b0fdf71692b42cc"
+embedded = "b1fb607187ff7ac3ca8b81819780765bf80a0616a479873470483c916ac154c5"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::mul_assign"
+kappa = "4852d399b02e2ddada5194c629dae5bdd0e4ad388652c3517903dc947dd2e771"
+embedded = "511c701292909e5127d118cc2873ad8dc4231d9187da815fbc8daef0dd3ac0c5"
+status = "residue"
+cause = "mir::Ty: FieldElement"
+
+[[fn]]
+path = "polyval::field_element::FieldElement::reverse"
+kappa = "25694975020bdf8027e6d1bd4570de8331c20cd72306ecbdb65f0a9ffd7bd088"
+embedded = "2f08cb6fcbaf77d3e6889a5b3f00c895ac1c3fffd794cce35283b05c09d9cf45"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::field_element::u128::from"
+kappa = "42be3c335aaf2c5e5053cd10696017b77f035d10d762e453031e102200059f4c"
+embedded = "a47947d3f08dc72fd060fc78400d7bea7e6133d089005410d05db3ec8c3e8343"
+status = "residue"
+cause = "mir::Ty: FieldElement"
+
+[[fn]]
+path = "polyval::mul::FieldElement::karatsuba_mul"
+kappa = "7cecf50b40d3579ca8ca3e7a1fba3a7583ca1135002640123327fb3ece500082"
+embedded = "22ac867ed86cdeaedc34da3181180936bb3b020c2c1ab437a709add3dd4ffb22"
+status = "residue"
+cause = "mir::Ty: field_element::mul::Product"
+
+[[fn]]
+path = "polyval::mul::FieldElement::to_u64x2"
+kappa = "8270f5a2040e45b1e8de25eb7959460358e2f787dec4da9c11587919636cf603"
+embedded = "161e93a454325829ec3a1f325f4848b2d82bf0d9fc23edcc336a7cd640662a8c"
+status = "residue"
+cause = "mir::Ty: FieldElement"
+
+[[fn]]
+path = "polyval::mul::Product::bitxor"
+kappa = "50909c1c8cbb1516e3e906623165ea9952ea542705b8d6e9392627d645aa72b1"
+embedded = "89bb68ab11179982d760c1744489bb6d06e1f7d0002e2506f3c158c87213fa73"
+status = "residue"
+cause = "mir::Ty: field_element::mul::Product"
+
+[[fn]]
+path = "polyval::mul::Product::mont_reduce"
+kappa = "149638bdfa4bc9aeb445f0baf2b8f060357d563b9f525dc8fed462d04f378f59"
+embedded = "5ea2189b9d5e6e225bc7fcd3c17fbe9c41dca84e3d9c91f9d77c3ee94ec30430"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+
+[[fn]]
+path = "polyval::mulx::FieldElement::mulx"
+kappa = "eaf860a6499ca872451de6969c94c94baf23c57e84ae36f07cac1f011e9049b2"
+embedded = "caa3061a5697f26b2f6f22fdebcf97b8226f6143748edb4d944b099d1d342f99"
+status = "residue"
+cause = "mir::Ty: field_element::FieldElement"
+

@@ -1,0 +1,61 @@
+[[fn]]
+path = "hybrid-array::iter::<impl at src/iter.rs:12:10: 12:15>::clone"
+kappa = "8b665128c4fb6b74daf73cc0fdeafcaf13666ecb1359788a761796a131e7cca6"
+embedded = "65283ac58d1f7485025f2ec4dfc55e6ba3b9bf80fc1bcd8ef2db9753edb3b855"
+status = "residue"
+cause = "mir::Ty: iter::TryFromIteratorError"
+
+[[fn]]
+path = "hybrid-array::iter::<impl at src/iter.rs:12:23: 12:28>::fmt"
+kappa = "0dfe42196cad7552a815a26b5d32c6bf2de1cc7d027b8ac8eab6a49e810f51c2"
+embedded = "7923d27fe2cb1afbdbfac10281f3e20f801c230804a1adfc741ab5d557626137"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hybrid-array::iter::<impl at src/iter.rs:83:1: 85:18>::into_iter"
+kappa = "6afb29b2b73d6c1c69d4fa8868528c3ff5ffd11ae226a337b33757a524370485"
+at = "T=u32, U=u32"
+embedded = "cebafefe4f3e6ee48b8fd9c275d335bbc5813c36c9bdd6c61ec1ceaa68694156"
+status = "residue"
+cause = "mir::Ty: Array<u32, u32>"
+
+[[fn]]
+path = "hybrid-array::iter::<impl at src/iter.rs:96:1: 98:18>::into_iter"
+kappa = "f64c945243cd5860fd3907f775bafe1ea6d6a46b0d820ad2586c909da7ab82e0"
+at = "T=u32, U=u32"
+embedded = "c9238749174fe1b80cd0e6a0665848f8698e43e108a9a9caa8195d2f432e6f69"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "hybrid-array::iter::Array::from_iter"
+kappa = "d9131fd2cbbf8c74c535c3e234057ab232c44f8eaac5b5da222ebaceed348b48"
+at = "I=u32, T=u32, U=u32"
+embedded = "ef014ea1e506014756f8513c2462e0e75ae0bd4c7a6588f0e53309996823f271"
+status = "residue"
+cause = "mir::Ty: Array<u32, u32>"
+
+[[fn]]
+path = "hybrid-array::iter::Array::into_iter"
+kappa = "0e266b0808738a8888594e22fcadc3f638031c4d186f77ed9df12448bdad0590"
+at = "T=u32, U=u32"
+embedded = "ec739038d5568ab58ff9a62633d82532727f33da5e64b7ecc9c07d9470351791"
+status = "residue"
+cause = "mir::Ty: <u32<u32> as core::iter::IntoIterator>::IntoIter"
+
+[[fn]]
+path = "hybrid-array::iter::Array::try_from_iter"
+kappa = "0443405018064bc990aa7f05f063448761cf0e7b477f9eeb655262b1286d73aa"
+at = "I=u32, T=u32, U=u32"
+embedded = "9d0e4f6bc0031d568f94b435c09435961efb49787c75e58afa69e62d6a12b224"
+status = "residue"
+cause = "mir::Ty: Array<u32, u32>"
+
+[[fn]]
+path = "hybrid-array::iter::TryFromIteratorError::fmt"
+kappa = "2be969a7640af6bc7283e7159220ffacae094b755f6b01a21b90d775f846993e"
+embedded = "76a7453f91f4b0c2459798446b16488b42720058b05223fd7316ae69d4497784"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

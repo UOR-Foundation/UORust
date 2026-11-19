@@ -1,0 +1,104 @@
+[[fn]]
+path = "base64-simd::decode_append_vec"
+kappa = "e413cae12d9c92119a53c94ffa4ddef35d2a3c62f632442ff79ba6ea3a4b6e69"
+at = "Config=u32"
+embedded = "02a344cd6ca36ff0e9470987d981ec53e2bcfe2decb70d891d543d1076e50c3e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_to_boxed_bytes"
+kappa = "86b7a41a7a82fb3201487c5cf477d713d302ccec32c90248bf2701ec92145d19"
+at = "Config=u32"
+embedded = "1cbd90a41149b90413b14fdf06943882151a138a8ba134d2dc2a46c9cb60a3db"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::encode_append_vec"
+kappa = "d7490638456b6c59813eb5effea96e8c99251d7f6f2ed82b58042ceba76ad177"
+at = "Config=u32"
+embedded = "6267fa21ee422256db031e5d96f72c7e54733088b392ad7373760f59fa29064d"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64-simd::encode_to_boxed_str"
+kappa = "cdc08482b210630e15b075417901bd561d3bc556c332a6b9c7dd43ea436cc831"
+at = "Config=u32"
+embedded = "07f6332cea53f80ffaceb1832321794ad9edb9659bd3f2619243803ce540caaf"
+status = "residue"
+cause = "mir::Ty: Base64"
+
+[[fn]]
+path = "base64-simd::heap::Box::from_base64_decode"
+kappa = "e98e851302205eddb57a156469c802fd26ff58e046b302362412e53eb7c90798"
+at = "Base64=u32"
+embedded = "8283fe33b9673e4a4ec8adbd963f92331899aff890ac103ab0ebc7fa274c3f58"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::heap::Box::from_base64_encode"
+kappa = "04b013f1f03b17ae6d98c97549c6e16237b1bb1b2d80bc3f217c7b214cdaa8e5"
+at = "Base64=u32"
+embedded = "a53148954a00237a61d1a4617bbd8fa64018fc90efd91f60122d35aaef7d481a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: heap::encode_to_boxed_str: base64-simd's MIR stops at type outside the lift: Config"
+
+[[fn]]
+path = "base64-simd::heap::Box::from_base64_encode#2"
+kappa = "71a71fe7199e3884bda1947d5752cb9be8df3abe084c4de0b1410a77334df97e"
+at = "Base64=u32"
+embedded = "1f8f5d2d6a86f35a313896d312b32c07f20c96b467d37fe057fc37eb0c1b9fec"
+status = "residue"
+cause = "mir::TerminatorKind::Call: heap::encode_to_boxed_str: base64-simd's MIR stops at type outside the lift: Config"
+
+[[fn]]
+path = "base64-simd::heap::String::append_base64_encode"
+kappa = "1e46574f347d1d09a173c2e06cb8592ade79d9c79ba3e903d1d3c374f4e0a2a3"
+at = "Base64=u32"
+embedded = "bef2431e4f231605973a2f88b18bc655e47f3eaf23d299d1f1de8404019109bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::as_mut_vec"
+
+[[fn]]
+path = "base64-simd::heap::String::from_base64_encode"
+kappa = "51f411fc3f0b104531d0c1087e7aa4876e499493216a16bff3bb2a18432a4895"
+at = "Base64=u32"
+embedded = "66e9c21990d8b15bb25d0a32948d33b61f8db7b60449414423a38951dbfccfc7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: heap::encode_to_boxed_str: base64-simd's MIR stops at type outside the lift: Config"
+
+[[fn]]
+path = "base64-simd::heap::Vec::append_base64_decode"
+kappa = "a8ba93165e8ea4a1c3b1a9b689ff9d579e3a9f397d5247edaff277d342607a52"
+at = "Base64=u32"
+embedded = "634dafb0e26bf94adb6e0f8c3704a2a0be44787411557d9095c12ef517bdc79a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::heap::Vec::append_base64_encode"
+kappa = "6d35b15ff53ed4511ef9d39dbd9177ccc7a67cf2101873367fae7f2e9f1e1d37"
+at = "Base64=u32"
+embedded = "21c18e366180f5773a2457aba3139ec49d3c2232b97c593d4ae43bec58eb7811"
+status = "residue"
+cause = "mir::TerminatorKind::Call: heap::encode_append_vec: base64-simd's MIR stops at type outside the lift: Config"
+
+[[fn]]
+path = "base64-simd::heap::Vec::from_base64_decode"
+kappa = "71648e4a4b340f53bba09971c710eacc69ec07bdb229a99f80d45091729663f3"
+at = "Base64=u32"
+embedded = "6f7c8e9d7cbef7e7ff3463dd8d2d24b78f19417e57b5afb270d795cb5f813772"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::heap::Vec::from_base64_encode"
+kappa = "72246b7eab77a92d48d773ad73d6147583ac82117715b01c26103c5f1f8e2762"
+at = "Base64=u32"
+embedded = "d3b8009fe69bf3e90037958f56a391c00a8463bb62f819a419b19158e0917190"
+status = "residue"
+cause = "mir::TerminatorKind::Call: heap::encode_to_boxed_str: base64-simd's MIR stops at type outside the lift: Config"
+

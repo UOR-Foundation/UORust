@@ -1,0 +1,115 @@
+# The der-parser register (written by `uorust crate der-parser@10.0.0`; do not edit): every body of
+# der-parser's MIR at der-parser 10.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 273
+translated = 0
+residue = 273
+
+[module.ber]
+bodies = 217
+translated = 0
+residue = 217
+
+[module.der]
+bodies = 56
+translated = 0
+residue = 56
+
+[embedding]
+bodies = 273
+embedded = 273
+evaluable = 273
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ber::ber::BerObject<'_>"
+bodies = 99
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Error"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ber::ber::BitStringObject<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: {closure@nom::combinator::map<&[u8]"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Tag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ber::ber::BerObjectContent<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PrettyBer<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Oid<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: {closure@nom::combinator::cut<&[u8]"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Class"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ber::print::PrettyBer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Header<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: integer::is_highest_bit_set::{closure#0}: mir::TerminatorKind::Call: <&u8 as BitAnd>::bitand"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrettyPrinterFlag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Any<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1_rs::Length"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ber::ber::BerObjectIntoIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ber::ber::BerObjectRefIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ber::print::PrettyPrinterFlag"
+bodies = 1

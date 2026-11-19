@@ -1,0 +1,827 @@
+# The opentelemetry-proto register (written by `uorust crate opentelemetry-proto@0.33.1`; do not edit): every body of
+# opentelemetry-proto's MIR at opentelemetry-proto 0.33.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1599
+translated = 122
+residue = 1477
+
+[module.proto]
+bodies = 1544
+translated = 122
+residue = 1422
+
+[module.transform]
+bodies = 55
+translated = 0
+residue = 55
+
+[embedding]
+bodies = 1472
+embedded = 1472
+evaluable = 1472
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 207
+
+[[cause]]
+cause = "mir::Ty: <__S as proto::serializers::deserialize_from_value::_::_serde::Serializer>::Ok"
+bodies = 92
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::_::deserialize::__Field<'_>"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::_::deserialize::__Field"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: prost::DecodeError"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::_::deserialize::__Field"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::_::deserialize::__Field"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::_::deserialize::__Field"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::_::deserialize::__Field<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::tracez::v1::_::deserialize::__Field"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::_::deserialize::__Field"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::_::deserialize::__Field"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::_::deserialize::__Field"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::Status"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::span::_::deserialize::__Field"
+bodies = 12
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::InstrumentationScope"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::KeyValue"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::LogRecord"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::AggregationTemporality"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::ExponentialHistogram"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Histogram"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Sum"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::Span"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Gauge"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::ScopeMetrics"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::resource::v1::Resource"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::AnyValue"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Exemplar"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::ExponentialHistogramDataPoint"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::HistogramDataPoint"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Metric"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::ResourceMetrics"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::span::SpanKind"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::status::StatusCode"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::logs_service_server::LogsServiceServer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::metrics_service_server::MetricsServiceServer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::trace_service_server::TraceServiceServer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::SeverityNumber"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AggregationTemporality"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DataPointFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: LogRecordFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SeverityNumber"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SpanFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: StatusCode"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::logs_service_client::LogsServiceClient<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::metrics_service_client::MetricsServiceClient<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::trace_service_client::TraceServiceClient<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::LogRecordFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::ResourceLogs"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::DataPointFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::ResourceSpans"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::SpanFlags"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: span::SpanKind"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Buckets"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EntityRef"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportLogsPartialSuccess"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportLogsServiceResponse"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportMetricsPartialSuccess"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportMetricsServiceResponse"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportTracePartialSuccess"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExportTraceServiceResponse"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TracezCounts"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::ExportMetricsServiceRequest"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::ArrayValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::any_value::Value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::exemplar::Value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::number_data_point::Value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::span::Event"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::span::Link"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::tracez::v1::ErrorData"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::tracez::v1::LatencyData"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::tracez::v1::RunningData"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::common::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::trace::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::trace::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::ExportLogsPartialSuccess"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::ExportLogsServiceRequest"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::logs::v1::ExportLogsServiceResponse"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::ExportMetricsPartialSuccess"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::metrics::v1::ExportMetricsServiceResponse"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::ExportTracePartialSuccess"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::ExportTraceServiceRequest"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::collector::trace::v1::ExportTraceServiceResponse"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::EntityRef"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::KeyValueList"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::LogsData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::logs::v1::ScopeLogs"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::MetricsData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::Summary"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::SummaryDataPoint"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::exponential_histogram_data_point::Buckets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::summary_data_point::ValueAtQuantile"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::ScopeSpans"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::TracesData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::tracez::v1::TracezCounts"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::logs::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::tracez::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::logs::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::logs::v1::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArrayValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ErrorData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExportLogsServiceRequest"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExportMetricsServiceRequest"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExportTraceServiceRequest"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: KeyValueList"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LatencyData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LogsData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MetricsData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumberDataPoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ResourceLogs"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ResourceSpans"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RunningData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ScopeLogs"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ScopeSpans"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Summary"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SummaryDataPoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TracesData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ValueAtQuantile"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: any_value::Value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::common::v1::any_value::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::NumberDataPoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::exemplar::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::exponential_histogram_data_point::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::metric::Data"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::metric::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::number_data_point::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::metrics::v1::summary_data_point::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::resource::v1::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proto::tonic::trace::v1::status::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: span::Event"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: span::Link"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: transform::common::tonic::Attributes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::collector::logs::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::collector::metrics::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::collector::trace::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::trace::v1::span::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::trace::v1::span::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Data"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: I64Visitor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: U64ElemVisitor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: U64Visitor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<tonic::codegen::http::response::Response<tonic::body::Body>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: exemplar::Value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: number_data_point::Value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tonic::service::interceptor::InterceptedService<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::logs::v1::_::deserialize::VARIANTS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::_::deserialize::VARIANTS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::span::_::deserialize::FIELDS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::summary_data_point::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::summary_data_point::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<19>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transform::common::tonic::ResourceAttributesWithSchema"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: serialize_vec_u64_to_string::{closure#0}: mir::TerminatorKind::Call: <u64 as ToString>::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::common::v1::any_value::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::exemplar::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::exponential_histogram_data_point::_::deserialize::FIELDS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::metric::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::number_data_point::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::metrics::v1::summary_data_point::_::deserialize::FIELDS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::resource::v1::_::deserialize::FIELDS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::SpanFlags::ContextHasIsRemoteMask::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::span::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proto::tonic::trace::v1::status::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as ToString>::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as ToString>::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: const_hex::encode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::exemplar::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_enum::__DeserializeWith<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::exponential_histogram_data_point::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::exponential_histogram_data_point::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <proto::tonic::metrics::v1::number_data_point::_::deserialize::__Visitor<'de> as proto::serializers::deserialize_from_value::_::_serde::de::Visitor<'de>>::visit_enum::__DeserializeWith<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BytesVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringOrInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: U64ElemSeed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecU64Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<tonic::Response<proto::tonic::collector::logs::v1::ExportLogsServiceResponse>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<tonic::Response<proto::tonic::collector::metrics::v1::ExportMetricsServiceResponse>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<tonic::Response<proto::tonic::collector::trace::v1::ExportTraceServiceResponse>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::serializers::deserialize_from_hex_string::BytesVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::serializers::deserialize_from_value::StringOrInt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::serializers::deserialize_string_to_i64::I64Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::serializers::deserialize_string_to_u64::U64Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proto::serializers::deserialize_vec_string_to_vec_u64::VecU64Visitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::logs::v1::logs_service_client::LogsServiceClient<tonic::transport::Channel>::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::logs::v1::logs_service_client::LogsServiceClient<u32>::export<impl tonic::IntoRequest<super::ExportLogsServiceRequest>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::metrics::v1::metrics_service_client::MetricsServiceClient<tonic::transport::Channel>::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::metrics::v1::metrics_service_client::MetricsServiceClient<u32>::export<impl tonic::IntoRequest<super::ExportMetricsServiceRequest>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::trace::v1::trace_service_client::TraceServiceClient<tonic::transport::Channel>::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of proto::tonic::collector::trace::v1::trace_service_client::TraceServiceClient<u32>::export<impl tonic::IntoRequest<super::ExportTraceServiceRequest>>"
+bodies = 1

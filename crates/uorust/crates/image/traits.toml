@@ -1,0 +1,408 @@
+[[fn]]
+path = "image::Enlargeable::clamp_from"
+kappa = "e16bda413d9ccced6ff1235ef80e6363dc7c1cfb0f9a8c51169cf60302a13c8d"
+at = "Self=u32"
+embedded = "00d1d272f8fed860966e082cefe2f3b80ffa5c4831b1ea0da8c95618d22888ad"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Bounded, which u32 does not implement in core"
+
+[[fn]]
+path = "image::Enlargeable::to_larger"
+kappa = "71da57a63067254879f86466861a794c7a96de372a15999dabb5330218247764"
+at = "Self=u32"
+embedded = "c1effc4fa989fbed23bb731caede5804894bb28601f2d86ba395eadea29dd2c2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NumCast, which u32 does not implement in core"
+
+[[fn]]
+path = "image::Lerp::lerp"
+kappa = "94b0f71ce6874104daf2bced3e5474d70f82404a0fd573c98109b1a1f9239e9b"
+at = "Self=u32"
+embedded = "fc9c08d0d1101e7eb81f2fb366c2740bc05389605c7050fda2a0ff55e29bb50d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NumCast, which u32 does not implement in core"
+
+[[fn]]
+path = "image::Pixel::alpha"
+kappa = "fac696441d9227e9bcc099f7042d17f1be90096d385d5e9b306d886ef969b895"
+at = "Self=u32"
+embedded = "8484da31c09ba38cdf727eb0468258c50529e0d84809a8c1d54ad2f79a80efa1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as traits::Pixel>::HAS_ALPHA"
+
+[[fn]]
+path = "image::Pixel::apply_without_alpha"
+kappa = "f399b97883fb39171bfdf13b7e65ebe3034e8e147312bf864f42caede1a7de11"
+at = "F=u32, Self=u32"
+embedded = "0e4bfd515fe7f39ceda83d7517c891b3230ecc1702f9caca1600b4c6894a6021"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Pixel, which u32 does not implement in core"
+
+[[fn]]
+path = "image::Pixel::map_without_alpha"
+kappa = "d7b3c6f4260278c06cfe53bb2dd3c5b88494c0a0a862e417530c1be17b7d688a"
+at = "F=u32, Self=u32"
+embedded = "6679edb70b9940b3f8ac03a1b311ec3e69746ef139ac76ecc01e23e8eb1baf90"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Pixel, which u32 does not implement in core"
+
+[[fn]]
+path = "image::dispatch_transform_from_sealed"
+kappa = "3ec38a7041e4abc1ac49c7cabe420645362989fe2c79d4f8912598402f9e8e7b"
+at = "P=u32"
+embedded = "a54655fe8cb0dc851fccdcfb4af57f7facaef2f8c306014131df7f9492eef04d"
+status = "residue"
+cause = "mir::Ty: dyn for<'a, 'b> std::ops::Fn(&'a [u32], &'b mut [u32]) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "image::double_dispatch_transform_from_sealed"
+kappa = "415bf152232031fea82caa8902e57068c12abe135b19c91ca66a7fb88888a523"
+at = "P=u32"
+embedded = "0a82d7fd886f6280a177d07c7f63f884be788ae220eaa50cd548f6b9d0fd6927"
+status = "residue"
+cause = "mir::Ty: dyn for<'a, 'b> std::ops::Fn(&'a [u32], &'b mut [u32]) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "image::private::<impl at src/traits.rs:220:14: 220:19>::clone"
+kappa = "94bc33255b8c07a74669e857e8e46f113b85416c42ac023a82046569023ab853"
+embedded = "2f5ae78945784f374d0604007d3fb8f009306cd5fdfc76b2abf8fa51cf75615b"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::<impl at src/traits.rs:220:27: 220:32>::fmt"
+kappa = "7dc813aee842081b35ca186fd7c70acd16abc027a7ad0528113a02e6e55758c2"
+embedded = "06251895d86a6102d72b9a8d79cf08233b2a5d1ea55127e811599a5dfc43ff32"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::private::<impl at src/traits.rs:250:14: 250:19>::clone"
+kappa = "592f0973d2b49e1f775385d7b0b84d33518f29a834426a3419db2763b774dc1b"
+embedded = "0f12ce077e6922fa7aeb8f6a9b94aee322cbea62700408dd115053c3a3fff072"
+status = "residue"
+cause = "mir::Ty: traits::private::PrivateToken"
+
+[[fn]]
+path = "image::private::LayoutWithColor::channels"
+kappa = "9049a301116321d14a2143c94738a407ab7c82fcce594d95b7220f8d9d9e1848"
+embedded = "df436f3c4ea2c3fad0e92a29761301f9e2493dbea49485e55f0bf0f7df185c2a"
+status = "residue"
+cause = "mir::Ty: LayoutWithColor"
+
+[[fn]]
+path = "image::private::LayoutWithColor::from"
+kappa = "1949ba7f1129e511b7cdd6c5604c34d32d827b02d305df5c170b07530cc9fc15"
+embedded = "7924d64e426873ad116adffef457a262f763aa92039c0ce13415a657db1f89dd"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Luma::layout"
+kappa = "250834a627f7185b14c8142923e46764508f88e2c0dfa9480b96506e1ec87ce0"
+embedded = "185dd8313bd1cf5b101dfced9ac78363ee329fe25f195c0cc61fef6725efa217"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Luma::layout#2"
+kappa = "c5438620a30e4dcdd4daee7a8e195aac9fa8d7c9a236f90028571a16666b9004"
+embedded = "4f76a84aab36560f7c828543c3c2e4c1d87dabd30774790eed790022c6d00f0b"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Luma::layout#3"
+kappa = "429df059f955ce2d19ba6561adfcf8dd50f46bda7251fd670b48597fcdd7a305"
+embedded = "fae21e9028decbc680c5bee30e54963ef7a603fc2f61753133f688dbd3333516"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::LumaA::layout"
+kappa = "d26eee5a4c6dd013c29d021780584432f45335aaab4ecc65843b2e72c6f02b3c"
+embedded = "e29a1bb01bb4deb41ee0ce1666469e2fe79eec013235770c978df5502aa3ffa6"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::LumaA::layout#2"
+kappa = "95a940f9aab61cb1839fa8b4b26f06155070e939ed7ba187c8fe33c05e714122"
+embedded = "cd0b36ce3bc47823d00b88e688d9a1e7a6ad0c0dfac9155b05ff519a16f8f563"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::LumaA::layout#3"
+kappa = "de5e503246fdf14ce4aa673e8f1e27112cdedc728be9c2771790247267c5f0c2"
+embedded = "fa91305b9f3781fef6c3ca7ec946717d9471da7312b9f9de5017f1e7029dab55"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgb::layout"
+kappa = "7ab136d0542b3ff379ebd63fb3cafeb775e6343157003585f0c587f3b26d6554"
+embedded = "a00702ce38f78bfe6772a3e07934380c0571d0f7b22ee9cc8754d18a65cf1ff3"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgb::layout#2"
+kappa = "5fb2bee408fefaaa34350a0e4c44f4036f809351cb92f2d95a3b790e58433c34"
+embedded = "5e0aa1bb07c0ad076155a4faaf07c4e3950bdb7a8efe0f47fe8295264d2f260c"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgb::layout#3"
+kappa = "d1edad1c6fee49b77a5035071fbe2a2d8511e361537bc305f5bfb26ef17aca5e"
+embedded = "d781b1bf0f186e136f88450cb8589a6c349ff338cc7ae75992bfc5d2a5584692"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgba::layout"
+kappa = "0b5c9f7b86878094f4586aa85bc5a63a60aeee48874073d68415b2c2e0170854"
+embedded = "3925bc95df9bf50de96081deff5fb3b89124f02ef9ec3b6bbe56cd6651dfdd0c"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgba::layout#2"
+kappa = "a26ef1d0bc414fb431d4ab921a0cb5d390c21b87c707aa97571aa6eab78f2050"
+embedded = "a723a7be5cdd0378c93a4566275fe015a6be2daeacf355fc190fc5192a7d7735"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::Rgba::layout#3"
+kappa = "630ec3b06d8697d265688aad932bfd47693dec415e4b6b6849e9fb5072cdb011"
+embedded = "53dec14699b08719b8bb4a1e8be7f1079feb09cd48b4ed2afa127c19a137f923"
+status = "residue"
+cause = "mir::Ty: traits::private::LayoutWithColor"
+
+[[fn]]
+path = "image::private::f32::transform_on"
+kappa = "c9be6484e73e6749a897732dcb679a0c9ab241357aaf4cd4e5fcf146c2b633fd"
+embedded = "326e2896ff48c94f171c06116e1e11f47bd7c24f64c93545992bcc48e77cc9a9"
+status = "residue"
+cause = "mir::Ty: dyn for<'a, 'b> std::ops::Fn(&'a [f32], &'b mut [f32]) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "image::private::u16::transform_on"
+kappa = "54659a7ce072419ec88f1beda21b7e3b180b32f4e3a1343f66084a2aa41b4718"
+embedded = "3c96b487f4caeb472a6eca476de9a5324c6362283de704551dd8001e3452e672"
+status = "residue"
+cause = "mir::Ty: dyn for<'a, 'b> std::ops::Fn(&'a [u16], &'b mut [u16]) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "image::private::u8::transform_on"
+kappa = "54079fa5b4c296552160162214f40cff513db8b28650c579a6be03b8582cfac2"
+embedded = "401c3e33b28034e990a84c7f41be6210cc4451726e81f2245260b4ab62521f22"
+status = "residue"
+cause = "mir::Ty: dyn for<'a, 'b> std::ops::Fn(&'a [u8], &'b mut [u8]) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:18:1: 18:30>::as_bytes"
+kappa = "7b21dc096e3cb38cc63d40a698920739bfbdd14c8aa3ed2d637735d1aa8405c0"
+embedded = "bde8926fa663975e943c07fa088a7cdd58e2c458db39541e116f47185bff9840"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bytemuck::cast_slice"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:24:1: 24:31>::as_bytes"
+kappa = "fd17e5e7f1c845e99f4a95fdf1f5221cc3b809a8e4fb164d51e043974adeb185"
+embedded = "f0fa4d1f68099ffc74213eaf3c1a0947d7bb135b26dfafc9f97947deca5d1c4d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bytemuck::cast_slice"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:30:1: 30:31>::as_bytes"
+kappa = "477abf7596a5c9db4009db9554b739f38fec5504781a780443bf84d84a65d2b4"
+embedded = "cc17ff9eb99c4934848566be3f425945b8a633eb8d8c8bc295e2da3fcb2f3dd3"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE"
+kappa = "4054aa29f97e63acac256c6bebf78ff8976b67120ca783aa9ff859d44bb31370"
+embedded = "ceed1c1cc8780f2d43617c33960702ea560f536a2ba12eaafc54e9fa214fae66"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#10"
+kappa = "8421985df1f42cabfbc12fafd9d59b7a9261df82df3793a709af6ebc60300bbf"
+embedded = "e56c09104a1217b0056add8a39358e77ac72078a9e2ae4f7372107de2198c085"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#2"
+kappa = "3625146d9813388533e4e6b97a7019e76b2474b67c7df16a1e87c1a89e6d740b"
+embedded = "567d2ab2c8f4a7c9d7fe1b145015c719917ca604b06cdf8c1f49e682bd65c0d4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#3"
+kappa = "8999e67db9694b21c8bdba8d6b9a8511aafda0d19479fea1cea17c0e2e20658b"
+embedded = "72cf4e19bec88681c821eda91390174e9b6eda7deba8a7b5f4d2f79ecd57f93a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#4"
+kappa = "a27641c0a3c194e90cf56c4e5e12f0c78f6d186dfb99aee79d6ae7ff41a0b037"
+embedded = "b7fb6e44c20b5bbae66fa74e175cc89ecf3785f0edaf126e26d80ef619b88642"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#5"
+kappa = "f77a0ee3c7d2677549a5e9475f8fdd33eb13a4cc3009bb613e4aa9cb3b89dc1c"
+embedded = "6297d8e43e0a4c8c16bd1c9f85f8822a0c34af175cbe3a23888fd79f71920427"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#6"
+kappa = "73a016c79832f8b04bb8732b5be0af3c1307221d919cca2a79dcae09d4adb52b"
+embedded = "7d049cd7beee480b2e82d4708edf40cdcbd98799d28112d437403fa35e192852"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#7"
+kappa = "c969f7f0d2b51fd056e853bdc425385fc2cc3ea63eece9642941b82373b5d180"
+embedded = "e640e597ce7b545ba8f6c0c8970e637fc8824ba870ccf9386b3201222f2316ad"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#8"
+kappa = "10df7072932d8406dc10b6fbe243fcfac275e2ef8b6f014b561f36ee5c5e3438"
+embedded = "652a4c8d7582c78b3541db3cb10435aebf108cecaf059c3fac3202cd60839079"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MAX_VALUE#9"
+kappa = "85120fe48a076d54ac238a2327f4433180a86989710f7d6c2feb1b6d98390b8e"
+embedded = "3940177a274020a22b7f99b08af5169d05d9f47787f5c1b0d5531fe6c4c2de94"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MAX"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MIN_VALUE"
+kappa = "51b88180ac68b62fc3adeb4a268ab8a4770d5e06e078b556f53e2cc35f3068e0"
+embedded = "c89742ddbedd39992d7e90e121b689a287df438f40f0c5545cb60d63a96ea4dc"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MIN"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MIN_VALUE#2"
+kappa = "8fddf8c79e0540962023ead0255bd8b2cee1ee7897cd14fc37be0570cccc38fb"
+embedded = "bb1133ca4187491bce5079693aef59868177b190ab06c4607650e6e3af8946cb"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MIN"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MIN_VALUE#3"
+kappa = "a4c862052c908bcac901cf59a0fbbb28d92492efaef8883cff9b2af24dc5230b"
+embedded = "eac99bbbb7ad32c91cde839adaa2b33956a88f197faab8fd47ad634f3c7be684"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MIN"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MIN_VALUE#4"
+kappa = "9a88ae2e3473a6699d28683e3ca9b7d356b6c18336c53eb3c75b501eac9c3e41"
+embedded = "7ac0051a81630b537ffdd7c537f767185cc78c88a649cfc898fb66072acc06d8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MIN"
+
+[[fn]]
+path = "image::traits::<impl at src/traits.rs:50:9: 50:33>::DEFAULT_MIN_VALUE#5"
+kappa = "2c5de05defe774386fa1a1b59da0e9de38bd983b461b4df80d4b63bc0a5fdba0"
+embedded = "1b6b97ba0c4e1c5e98486fddf05128bb4ca8d1e4d7f2109a16a0d797eccac882"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MIN"
+
+[[fn]]
+path = "image::traits::Luma::COLOR_TYPE"
+kappa = "5acbdc58bc2e604fa92a28216f1408780a75da56749d73466d873341c6e87cd9"
+embedded = "ccfd5e4cb8fb6dcad18b6282d05ba5f91c4e1e602c9b63f766d1bc2e36322d48"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Luma::COLOR_TYPE#2"
+kappa = "89f838aaa6dcd8ac5d686e4f8a01f0787bfaeb721c21d0f78918f9648893aa78"
+embedded = "693f793288794638df955612077d02c9ee597773e408628b40e371c90e661ba1"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::LumaA::COLOR_TYPE"
+kappa = "e64d5b35edd50b44fc0da1b303636b3e23d063f1973b761904ffd2b54f93e1ef"
+embedded = "5528211117417c34b5dc0a1d96b27007277e2ed3171e723acb13f045f8899f47"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::LumaA::COLOR_TYPE#2"
+kappa = "59843e17f292cf731ef2abdfb55276385723af385c35058bd1d5796ffadaad78"
+embedded = "13b89a66e32293a750a04b9fb504e7925a19cac3d43dc1e602382c58be59df74"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgb::COLOR_TYPE"
+kappa = "ca70f68ef36191556db8052458f18af206c0075f83effc0b159a9bd2a9b63c1b"
+embedded = "c18ee1688e2f8726e627a5ab341f1aa6b95ecb0527cb348c73b8c1a3a07f9089"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgb::COLOR_TYPE#2"
+kappa = "573b16f341bbb5acc4799f0cf9c5f249514f8281d46db196b9febec0aadf8532"
+embedded = "8240ce4aba431da39ac441ffcc0c49a1f24c62ef3ca8c248fe25d4d41706397c"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgb::COLOR_TYPE#3"
+kappa = "179180122cde65983f32c58017214c911609ccff209c5195d642db74f3282b7c"
+embedded = "9a1670dd3d17763f85fe9c855b737435f53375912ce9df679520eeede37a60ff"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgba::COLOR_TYPE"
+kappa = "c657eca2853e0c595624f4ae9170e96ecbee9b88238b18a232abd3e192715597"
+embedded = "c58681c215921ad18e3df603cd3a952d49d92b6564f4a73105d2101fed8a382c"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgba::COLOR_TYPE#2"
+kappa = "5591a266744fb1edf65e8140eef00bbe6534ba7d358a465a9553bf35b78fbe07"
+embedded = "a70071267526bcca8f7167083fc10599a0c390edd45c4bafabe7408927185507"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::Rgba::COLOR_TYPE#3"
+kappa = "d9706138fa016b970d753d065c6300add213bcb1307610da9f120be8e7481d72"
+embedded = "088a02c0236dd1a686f3f2fa46f7a68467c19e8f785d8bf234d562e9bd5fdb46"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::traits::f32::lerp"
+kappa = "b2bf5da8ab76db2e3f798b47229a794dc3027da96d834fbdd8f0ac3206caefff"
+differential = 12
+embedded = "b6fd5377b13fb75469309e339668111d5500c00170e6256a621ebf06ccab1702"
+status = "residue"
+cause = "mir::Ty: f32"
+

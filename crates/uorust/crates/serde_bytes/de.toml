@@ -1,0 +1,198 @@
+[[fn]]
+path = "serde_bytes::de::<impl at src/de.rs:36:1: 36:48>::deserialize"
+kappa = "1e44f4a5cdc7b2701f4eab292480b41d9d0ae7a779e83d4300f91b9ae0978338"
+at = "D=u32"
+embedded = "b59470b6a1061628c2e0de152be3e13fae1f74d291b91baff10837c7332c0302"
+status = "residue"
+cause = "mir::TerminatorKind::Call: de::<impl at src/de.rs:36:1: 36:48>::deserialize: serde_bytes's MIR stops at type outside the lift: <u32 as serde::Deserializer<'_>>::Error"
+
+[[fn]]
+path = "serde_bytes::de::<impl at src/de.rs:56:1: 56:49>::deserialize"
+kappa = "6ef9d48b63dd018d15e33e5cef1267e1f6c67d447ad2c05ab3dad4b322165090"
+at = "D=u32"
+embedded = "0efef2a0972a5e60e4cfc059823a3487fd3057cc6a19f762d6991ff111b201d5"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "serde_bytes::de::<impl at src/de.rs:66:1: 66:55>::deserialize"
+kappa = "5deb8db5b2ea1a42d19be7f54636612f1b776c3402c5648eed545ff59805a6ce"
+at = "D=u32, N=#usize_N"
+embedded = "a6484d373d59946cdddae2ec786808e0f2f67143cc4bf231a6db0611a4c836df"
+status = "residue"
+cause = "mir::Ty: bytearray::ByteArray<#usize_N>"
+
+[[fn]]
+path = "serde_bytes::de::<impl at src/de.rs:76:1: 76:60>::deserialize"
+kappa = "71420f057159998881e2c5bb41bed9d95d36ac8a0446a8cc9652cb975cbddf50"
+at = "D=u32, N=#usize_N"
+embedded = "870863d5f4fe8cbf0928551a85042495bb1f1013ef6ad0728f6b397ae3c3cfe0"
+status = "residue"
+cause = "mir::Ty: bytearray::ByteArray<#usize_N>"
+
+[[fn]]
+path = "serde_bytes::de::<impl at src/de.rs:96:1: 96:72>::deserialize"
+kappa = "a1da3cb0961dd0850a33f1d47a2f3c22bbf9e6a994c05cf15753b287a42fd927"
+at = "D=u32, N=u32"
+embedded = "e1bbdad77c672ccd43383fbb52f1a935dc17746f380836dc75ddcb1e72bd64bf"
+status = "residue"
+cause = "mir::Ty: bytearray::ByteArray<u32>"
+
+[[fn]]
+path = "serde_bytes::de::Box::deserialize"
+kappa = "abd7b584a8ee2b9698a803831625120b471413b8af62f6247b68d99afbb349f9"
+at = "D=u32"
+embedded = "bb0aabd8a6a56e9da25ade23f1536809070278055b4327a66acf5353c681c4bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: de::<impl at src/de.rs:47:1: 47:39>::deserialize: serde_bytes's MIR stops at type outside the lift: <u32 as serde::Deserializer<'_>>::Error"
+
+[[fn]]
+path = "serde_bytes::de::Box::deserialize#2"
+kappa = "d50bdb6aec6237a0055668fba704abf5b2bcf15556c5958f95ff7c9ee94977d3"
+at = "D=u32"
+embedded = "b699a5b50cb847d974fee5fcdf3c244d6d1ba83836af55b2d8f1f96ddf410dc4"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "serde_bytes::de::ByteArray::deserialize"
+kappa = "45bb7047e119929611dbd6f1096123de59d2b7afac1bd3b29620c3fa87a33310"
+at = "D=u32, N=u32"
+embedded = "2952443ad7270006e2639f39a8a1f38e0f979b48995bdc99c2a07e66bcc0edb2"
+status = "residue"
+cause = "mir::Ty: bytearray::ByteArray<u32>"
+
+[[fn]]
+path = "serde_bytes::de::ByteBuf::deserialize"
+kappa = "85d1fac44517a66f01f620a2d204d07c867dd507e19dd54ad8979c194470f97c"
+at = "D=u32"
+embedded = "d31be827456db79e56dd6b64e2372fa509bb36cf96e9ec761739b3f0db5bd42f"
+status = "residue"
+cause = "mir::Ty: bytebuf::ByteBuf"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize"
+kappa = "20711bddccbbc608cecd4c6c4e8b17b0bf70cd1acf679aa90550ce3eedd0d48e"
+at = "D=u32"
+embedded = "9726bf93b1fbc920dc08d927cac1fc3a6c96e2732020afd53a36bd1435167389"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize#2"
+kappa = "0664d21ec63d5ff9f708cb952c7e555acf857c273d1c0b1b0871f971d3213c68"
+at = "D=u32"
+embedded = "4a2dc605b56a6e6f0101005b6ec7895f1ac6ec28793a150fd556e15fbd11a018"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::expecting"
+kappa = "8e48921e118ca5a6dfaee6bcbdccd3f846e1556d096060b333ed98631908ca49"
+embedded = "e39f782bab8d1b2a287b33cd08229dc454110cce007923e2b9683ce4c5a68490"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_borrowed_bytes"
+kappa = "a88f4a742d9a181aa489e4be3c08de1959f2f7e482d22edfc34a2bf79bc2ecba"
+at = "E=u32"
+embedded = "ab3b0b829107f987fbfcbf4027016e7b65e5ae19f2e432569d44159b2f4cd592"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_borrowed_str"
+kappa = "2f6208aa587574d922a84270a5f005595e076aa2336ac79d634f67ab55c227c6"
+at = "E=u32"
+embedded = "3a324ceef8b30d47003510c5aa332e2f1e36a7e3f7c3d5a570f576282c495109"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_byte_buf"
+kappa = "df5d069ab6a49d06391c052d6cd7f991fed73b0ac4475f0b1b8c64a8fecf260b"
+at = "E=u32"
+embedded = "9264b551ad2cc6af1b5e05744ee4149992610d08d13e0fce8b2aad294bde61a4"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_bytes"
+kappa = "11fdfd25bdf6d247429ffac6fb876f75fc5ca1b37f71db37f871dff006181172"
+at = "E=u32"
+embedded = "8bda6dde37d0a7093825ecd238bd5bfe0ec94a40cbe42c680df697d92cec1d34"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_seq"
+kappa = "295fb4839d1cb42f6d8ef9f6d230b4dcd599d7756a46a5a0ac11eeddf7f96a76"
+at = "V=u32"
+embedded = "789be3fdda17d2ed5ff92ac1dec87dd869df1b58dfd434146c2c26a1de25cbca"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_str"
+kappa = "3ca5ee6e1349666a0c4f6993334b5477471e4fe588777b602ea9ab91cda91e41"
+at = "E=u32"
+embedded = "3524168e454d9015eff0dfe5f6c26039b8d89e5114450536e0f69f0aaf1ed0c0"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Cow::deserialize::CowVisitor::visit_string"
+kappa = "2be1f094d84c079fb20b68fdae16bcb377c15f56145d8283b14ccf19dab2f6e1"
+at = "E=u32"
+embedded = "c6cba73a37b00f89735758833c6d16faf1bd3ef9b8eb38a1286c99dc0c628319"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::de::Option::deserialize"
+kappa = "c463e0c0f0d4696b9b8cc901033e2c9cb74aeec06f61de9d7c3eaea8085638dd"
+at = "D=u32, T=u32"
+embedded = "11f3ac293dcd33a3fc3187513102d891398ba1258366793f14c7b7146c3b8143"
+status = "residue"
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+
+[[fn]]
+path = "serde_bytes::de::Option::deserialize::BytesVisitor::expecting"
+kappa = "f6b91cd9e1de37cc1d36ab2d84e7a2559effc2c077382d0c8ec89a4bf19ec9a8"
+embedded = "8b5e70a1d8519be252857cbec27b40ccfa448b88b4ce968f8abd1fd9d3fd349f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "serde_bytes::de::Option::deserialize::BytesVisitor::visit_none"
+kappa = "3b97439fd6406801a77b64446019e807a0fcb3abe50b773415b7a3f35ad212da"
+at = "E=u32, T=u32"
+embedded = "88e2ac22256d7260154965f2a330f05a56f80d9ceffd4468fb24b886092cf769"
+status = "residue"
+cause = "mir::Ty: BytesVisitor<u32>"
+
+[[fn]]
+path = "serde_bytes::de::Option::deserialize::BytesVisitor::visit_some"
+kappa = "c19454b52d537af0396bd864bc7540bcc27c5aae02ce10f96f640bf99de62aba"
+at = "D=u32, T=u32"
+embedded = "3b87ac9d4d2e1a0ffc471343d4781b69b07149d430912cee4428f75981a173de"
+status = "residue"
+cause = "mir::Ty: BytesVisitor<u32>"
+
+[[fn]]
+path = "serde_bytes::de::Option::deserialize::BytesVisitor::visit_unit"
+kappa = "5fbb03ef2b539ccc31bf40d54b4dde876471d0f137aa798dfaa99b39e3bf5d6f"
+at = "E=u32, T=u32"
+embedded = "48c1547d479b4176c0f4671b1ae7eab062ff62027c4f670c91f11b3d854b0770"
+status = "residue"
+cause = "mir::Ty: BytesVisitor<u32>"
+
+[[fn]]
+path = "serde_bytes::de::Vec::deserialize"
+kappa = "5bae2cbd30d67c563855aef839a2404eec9e9049d306268af2cbd20ae693bfb4"
+at = "D=u32"
+embedded = "b1dee8e8181b81730128f87f828fb221dd2eb4fa6990a09a0c4a82c400458536"
+status = "residue"
+cause = "mir::Ty: bytebuf::ByteBuf"
+

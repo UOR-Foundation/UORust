@@ -1,0 +1,95 @@
+[[fn]]
+path = "wasm-encoder::<impl at src/lib.rs:101:1: 101:42>::encode"
+kappa = "5fb2044ae0898358222c5c0c54893220830eb214dd79b686fd654ecb3bf3a93c"
+at = "T=u32"
+embedded = "5823f62330138e878c19c053229309c04058f00166234064c64a182f48d885e0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:137:1: 137:20>::encode: wasm-encoder's MIR stops at mir::TerminatorKind::Call: encode_u32"
+
+[[fn]]
+path = "wasm-encoder::<impl at src/lib.rs:107:1: 107:31>::encode"
+kappa = "d17d3f5f0f089b2670ff74d27d463df16271e140a5e0b7b1a61e4bd46e913643"
+at = "T=u32"
+embedded = "141dc000f46f06dc487eca12e6f46badbbdc1805c07c4107459b71576b0bb320"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:130:1: 130:22>::encode: wasm-encoder's MIR stops at mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "wasm-encoder::<impl at src/lib.rs:116:1: 116:21>::encode"
+kappa = "ffa2450d5a776272678af78c52b06fec691345d55040b97ceea924f1866144c8"
+embedded = "a8e1717a228df880d7aa7e23c1421c0caaba1d408026d443796b97fafe754467"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:130:1: 130:22>::encode: wasm-encoder's MIR stops at mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "wasm-encoder::Option::encode"
+kappa = "bac0e98ff9d0a564287cb80c5fbed4b64ca15708da58dba335961982a4a9ce04"
+at = "T=u32"
+embedded = "f5715a62c67024e0cf88c6524d23f2a974353cf237d1eb2b72bc470c1e461887"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:137:1: 137:20>::encode: wasm-encoder's MIR stops at mir::TerminatorKind::Call: encode_u32"
+
+[[fn]]
+path = "wasm-encoder::encode_section"
+kappa = "87895bc49e54ee2ebec796b73c77ce7f6b2ee7d2320b26139964aafc187be5ca"
+embedded = "971d23a1599e2bf60407da79a7e7a016e363c40a4d860104d6d96c9b721f7423"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encoding_size: wasm-encoder's MIR stops at mir::TerminatorKind::Call: encode_u32"
+
+[[fn]]
+path = "wasm-encoder::encode_vec"
+kappa = "7ca577f500012a6417bf20b04e465acf3d7b12ac03f85a9f4581ef04e639f92f"
+at = "T=u32, V=u32"
+embedded = "f61c707e20980569794631d505da1d5ff7d8f8b0b269c11e1256cfcaa97c4233"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ExactSizeIterator, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-encoder::encoding_size"
+kappa = "e073f8e6b4540a96e213ec423fa779e7d0d9e3f78d194ed9dbcc25ac6f173cc8"
+embedded = "6a0830c454defd3591906f65f793b1c53324bccdbf810c47e6240ddabacd98bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encode_u32"
+
+[[fn]]
+path = "wasm-encoder::i32::encode"
+kappa = "37079f08ff84e8cf087a7b4f714af23ab3a35d26c83401b5a5044cf7c509d7e6"
+embedded = "38fb30bcfc75b9a067445962cb7f47cf0779dbf890e031c644655a6be09f1036"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encode_s32"
+
+[[fn]]
+path = "wasm-encoder::i64::encode"
+kappa = "da660bba112511f6c2ff8ad760c3749fbc07887bde9f7a7bef7603b5b634631f"
+embedded = "7a732f3d2532234dededb614a02678c8ffdf2f0e8500c71463182d2b14fd56c1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encode_s64"
+
+[[fn]]
+path = "wasm-encoder::str::encode"
+kappa = "92ea93bbc817e5209a7955d76577e4cb47dc3cc47d77b78ab9644b5823aa69e2"
+embedded = "89f2a84145690e4d539645848e9c51b3763122819ae1c73bc4969aa825e67ee0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:130:1: 130:22>::encode: wasm-encoder's MIR stops at mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "wasm-encoder::u32::encode"
+kappa = "ac0838b376e6b6042478183f938d2695c3f6014e800158190d0748f923c2b2d3"
+embedded = "836ab0be392afb43abf4c4b6b5cae4f25c8f96a162ba6d86b4e54521c7257343"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encode_u32"
+
+[[fn]]
+path = "wasm-encoder::u64::encode"
+kappa = "71350c5bced8d142d63c24d4bb7c400361d3e41d2f0c06c6db69790a25e4a5bd"
+embedded = "6aa38eacb9b202f618359f7533b68f81e128fc3221bb61ed8a948feb18c7a940"
+status = "residue"
+cause = "mir::TerminatorKind::Call: encode_u64"
+
+[[fn]]
+path = "wasm-encoder::usize::encode"
+kappa = "0ae905e86c024b7ea9b1270fe23ad94fca4b656866381213e6f8d6f5e788aafc"
+embedded = "a8ee7c8fa1ede12ab25071cb19518323277bc81c6613d8869d0c2952dbef95b3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+

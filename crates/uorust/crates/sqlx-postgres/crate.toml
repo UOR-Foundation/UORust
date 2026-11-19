@@ -1,0 +1,67 @@
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::acquire"
+kappa = "35703a7db4d0f567a351065126888d140579c476e75e596149c93f38889903c9"
+embedded = "437fa12904d9fee0fd5dbd918fc906f91b9eb34739575e913f9101aee32002f6"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::PgConnection, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::begin"
+kappa = "e7d63d82a1514407801a75023188c21a49c0187de13314ef8bc5c60d332df16c"
+embedded = "1f6cc759941dfeea4549a6b506649efeed1329083f13352e2372b49e7f6ee47c"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Postgres>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/arguments.rs:40:9: 42:27>::into_arguments"
+kappa = "eafee977216eeb986d27b29b87539fd6f2044d6fa2ce3ae69c4059fd4e3c3326"
+embedded = "0407b4b0c1560d0cd366731f87ac7c92c27b5bf254c816ffe43486563de953f5"
+status = "residue"
+cause = "mir::Ty: arguments::PgArguments"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:116:9: 116:55>::index"
+kappa = "34b201d89ca4090151f27bf37cd1028919c20c6de54d57e4295683c5ccf19198"
+embedded = "3434f4cf00a076231514cd71e0f16a91b447b17752753f948b9429025d6a3974"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:133:9: 133:55>::index"
+kappa = "671addbd74e597df597bb07bf7f4cb97d1c59c486106016acb4c3d40c23cf55b"
+embedded = "dc6e03677526b1d2e6fb36c8270580c106ab7252c517f4c6c340f6e21ef5949e"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode"
+kappa = "f45315518c06685eeda3c0d5da29bcd4aa33600cfa0f48551aadd8c918fd3b36"
+at = "T=u32"
+embedded = "75f25f25004340a362659f8a5ad5eb7208da3eaa72415b841b88bf0b5d62515a"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode_by_ref"
+kappa = "a52d771c72cd89f2ca47d7f756e9bd663258d040930cd4ff667a6c2d62ebac33"
+at = "T=u32"
+embedded = "c2359a3a33098e15d4ae8f008a7f257267537a66623c3a75cf84e8a546146d88"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::produces"
+kappa = "39b025b659d0a2b6df65cde4dbff9f07778187afcbd18a9c013416b47b5194f2"
+at = "T=u32"
+embedded = "9ad9245ddcf3cb18eaab71a1faf5c541c685b4b724044c530d3b67f68c569788"
+status = "residue"
+cause = "mir::Ty: type_info::PgTypeInfo"
+
+[[fn]]
+path = "sqlx-postgres::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::size_hint"
+kappa = "439a063c8d79366d39b0ad44df1b50dc66bedbdc845af5cf465c4b3b52b628d0"
+at = "T=u32"
+embedded = "f99b23dd90ebc5912a3367a7fbf5b531b390186e70d4b603fb05ebb0f81a7579"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_, Postgres>>::size_hint"
+

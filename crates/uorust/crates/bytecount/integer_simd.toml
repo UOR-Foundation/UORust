@@ -1,0 +1,49 @@
+[[fn]]
+path = "bytecount::bytewise_equal"
+kappa = "38a7cc5ec278d9b572c61a017cd8de5af6413bf70946ca81a71da34a471ae920"
+embedded = "e2e33743b588b76b8f01f6459aba87dd35d0b2026a1a962793e559f2b784f149"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::usize::MAX"
+
+[[fn]]
+path = "bytecount::chunk_count"
+kappa = "0654a5daa0e75fccae892d1424840d54b3beed39ee97502439f3f0a30bed6edb"
+embedded = "14d412c4747900c4b0057b6ac5c6572b60c11cdb53e35b12afd13c46c75c756f"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "bytecount::chunk_num_chars"
+kappa = "678d7d896980d1dc7381a519c77ccb748984922c3a6f7f815c35dfe952a47390"
+embedded = "6e701a7d4f4b3efa4af259dfeb00c0666171d72499dc06b4efb5b4d028df9a05"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "bytecount::is_leading_utf8_byte"
+kappa = "fc3c19578be1c689f326fbd034ff7fc05ac050a38840261f64515c09e67b22f3"
+embedded = "73b1ad50b6a83bb90c7a93764a6397488b53aeb04067a9ff8b3a83690beafd6f"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "bytecount::splat"
+kappa = "13693e18332e22fa5fc822b69314cc365a8f178a4248668adfe2129cf5f4faea"
+embedded = "528ae2bb929b09dabf200e550076f87a8fa1f1299a1866adcae3c9f2d0458e1b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::usize::MAX"
+
+[[fn]]
+path = "bytecount::sum_usize"
+kappa = "91cf629f1ce72273ccfa0aa603c5d57ef67cec1eb08a043ae69b0141cabffb42"
+embedded = "0ff9762808c652065cee883d7b3ea08aa145e8dd5c1bc02ed45433f5c105d2a6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::usize::MAX"
+
+[[fn]]
+path = "bytecount::usize_load_unchecked"
+kappa = "39788ae858e6e313988c7081006952c82a28e0e918d6ff4877ea835d09436f62"
+embedded = "682433e7c040dbc8e8352646fbd4b9817852b8913d7c8b926fdb198d2026b97a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::as_ptr"
+

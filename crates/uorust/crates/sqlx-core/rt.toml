@@ -1,0 +1,82 @@
+[[fn]]
+path = "sqlx-core::missing_rt"
+kappa = "87f685f7ac1af1180ecaf0b11386968dcea41a61e2d65affbff484169fa10086"
+embedded = "e1c62c298562848c478af14f0f6a43f09915249e558760375a0e4fc77fc18694"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::rt::<impl at src/rt/mod.rs:15:10: 15:15>::fmt"
+kappa = "bb6ca5df6f4da957434fd309df238993ceba909b27a39db9249224873d8f3650"
+embedded = "ccf7484de275dc23709c1d6670b92a70875312183e946d72649f6346c50b00ec"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::rt::<impl at src/rt/mod.rs:15:17: 15:33>::fmt"
+kappa = "ca0af0cdad282aadb6b90d297d2ffc000332732c97df41b41328127c54f10cbc"
+embedded = "bbe48284bad6eb2f9908b8b35a5080892688cde2f3965bed0801a322c006646f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::rt::JoinHandle::drop"
+kappa = "21f296b2bd0acbaae1f032c4ffcad2a14cc334a6d33afd35f47d99e4f6bac0b9"
+embedded = "81006bc43c1c51d12d798ae74c5aed282ed675ad9f17768949f19786ece04f98"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx-core::rt::JoinHandle::poll"
+kappa = "97826bdfa59fe9367c6ec918969bcbdf27c24395019fe44d557899f7ab7cac48"
+at = "T=u32"
+embedded = "8a73e10acb8e508fc2f70f2cb3f613b7995b8e630ae817580dda181fafde7e2c"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "sqlx-core::rt::sleep"
+kappa = "532b295d7c8a59c4047e54970763934b8689f10db21d4ba9fba280420893c6ce"
+embedded = "70f4bdaff31e18094db1691d77d0a358f6ab144fd20d3a6008813860b3003449"
+status = "residue"
+cause = "mir::Ty: {async fn body of rt::sleep()}"
+
+[[fn]]
+path = "sqlx-core::rt::spawn"
+kappa = "a4863b22c75727942783ab5ad1b4b2dcbfbc70fbce2669757cf40c2171cc6fd8"
+at = "F=u32"
+embedded = "41343317d7c6153ae7b9eb47e4adb520821569f585daf8f7f9c142a23ce9b354"
+status = "residue"
+cause = "mir::Ty: rt::JoinHandle<u32>"
+
+[[fn]]
+path = "sqlx-core::rt::yield_now"
+kappa = "f1da0327cf6ce4095069d4509cce5e821199f4c5addc734c53a7be95835b3abf"
+embedded = "59790d26c9d9da378b4ea6d63f2f24ba2cbd317d7e36ddc331f8c61f85a2358c"
+status = "residue"
+cause = "mir::Ty: {async fn body of rt::yield_now()}"
+
+[[fn]]
+path = "sqlx-core::spawn_blocking"
+kappa = "f7a43f246cbf93408b33dad1f2e7d44d9a6b2c302c7d55b0be8f7fac66956eac"
+at = "F=u32, R=u32"
+embedded = "7e94e7e9ca1069350271d4b449f9781dc6be0bab3dd05944c45d3df929dc4ca6"
+status = "residue"
+cause = "mir::Ty: rt::JoinHandle<u32>"
+
+[[fn]]
+path = "sqlx-core::test_block_on"
+kappa = "869c8a629eb612d3fe3c86e1b7644e72c7de0495c85606fc1433b17a58a54e39"
+at = "F=u32"
+embedded = "61a36e5bc23852891dc5fdb61c4f06a314fea0e4859cbd9217f93ba385c92d69"
+status = "translated"
+digest = "05e15627d0296365b5483e0c5ada904d6679c4ca35db974f2eebd8c037b6bbdf"
+
+[[fn]]
+path = "sqlx-core::timeout"
+kappa = "cb0995c8cffacbb0897286e682db4bcfb339783b11d86fd15e6cfe5182d9d899"
+at = "F=u32"
+embedded = "1662241e277502f325522720e2657a1cc9b0849acf0071ca7c27bf4b68c42db8"
+status = "residue"
+cause = "mir::Ty: {async fn body of rt::timeout<u32>()}"
+

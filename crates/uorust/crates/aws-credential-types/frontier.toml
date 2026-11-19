@@ -1,0 +1,159 @@
+# The aws-credential-types register (written by `uorust crate aws-credential-types@1.3.1`; do not edit): every body of
+# aws-credential-types's MIR at aws-credential-types 1.3.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 103
+translated = 0
+residue = 103
+
+[module.attributes]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.credential_feature]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.credential_fn]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.credentials_impl]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.provider]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.token_fn]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 103
+embedded = 103
+evaluable = 103
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: credentials_impl::CredentialsBuilder"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Credentials"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: provider::error::CredentialsError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: provider::future::ProvideCredentials<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: credentials_impl::Credentials"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: provider::error::TokenError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: provider::future::ProvideToken<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: provider::token::SharedTokenProvider"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AccountId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CredentialsBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attributes::AccountId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: provider::credentials::SharedCredentialsProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AwsCredentialFeature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::Identity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::IdentityCachePartition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::IdentityFuture<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: credential_fn::ProvideCredentialsFn<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token_fn::ProvideTokenFn<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::http::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: credential_feature::AwsCredentialFeature"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: credentials_impl::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn provider::credentials::ProvideCredentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn provider::token::ProvideToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
