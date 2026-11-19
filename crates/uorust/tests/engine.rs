@@ -6419,6 +6419,134 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-78: compiler implementation sites distinguish overloaded method bodies.
+#[test]
+fn overloaded_methods_keep_compiler_definition_identities_ue_78() {
+    let code="pub struct Mark{pub code:u8}\nimpl From<u8> for Mark{fn from(mut n:u8)->Self{while n>0{n-=1;}Self{code:0}}}\nimpl From<u16> for Mark{fn from(mut n:u16)->Self{while n>0{n-=1;}Self{code:1}}}\nimpl Mark{pub fn from(mut n:u32)->Self{while n>0{n-=1;}Self{code:2}}}\n";
+    let oracle="use definitions::*;fn main(){for n in [0u8,1,3]{println!(\"byte|{n}|{}\",<Mark as From<u8>>::from(n).code);println!(\"short|{n}|{}\",<Mark as From<u16>>::from(n as u16).code);println!(\"inherent|{n}|{}\",Mark::from(n as u32).code);}}\n";
+    let dir=scratch("compiler-definition-identities",&[("Cargo.toml","[package]\nname=\"definitions\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",code),("src/bin/vectors.rs",oracle)]);
+    let dumps = dumped(&dir, "compiler-definition-identities");
+    let mut opts = options("definitions");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    let paths = [
+        "definitions::<Mark as From<u8>>::from",
+        "definitions::<Mark as From<u16>>::from",
+        "definitions::Mark::from",
+    ];
+    for path in paths {
+        assert!(
+            frontier_rows(&proposed, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(path)),
+            "{path}: {:?}",
+            residue_detail(&proposed, path)
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR"))
+        .join("compiler-definition-identities-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("definitions"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        3,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = match p[0] {
+            "byte" => paths[0],
+            "short" => paths[1],
+            _ => paths[2],
+        };
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: definitionVector{i},parameters:[],statement:((project ({name} {}) code) = {}),proof:decide{{}},axioms:[{}]}}\n",p[1],p[2],policy.join(", "));
+        if p[0] == "short" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 1)", "= 0)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 9);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-77: parameterless source definitions are invoked, never emitted as locals.
 #[test]
 fn compiler_calls_apply_parameterless_source_models_ue_77() {

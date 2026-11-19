@@ -519,3 +519,9 @@ id = "UE-77"
 level = "build"
 suite = "engine"
 statement = "Compiler calls materialize explicit SDK applications at every source signature arity, including parameterless dependencies in returned values, constructors and mutable state; original dependency bindings remain mandatory and changed source meanings require new SDK decisions"
+
+[[id]]
+id = "UE-78"
+level = "build"
+suite = "engine"
+statement = "Compiler bodies retain authoritative implementation source sites when erased owner/method paths collide, allowing registered trait and inherent methods to bind to their own unique MIR body without guessing from a shared method name; duplicate compiler source identities remain ambiguous"

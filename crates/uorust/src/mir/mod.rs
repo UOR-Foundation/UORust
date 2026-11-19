@@ -356,6 +356,9 @@ fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
 #[derive(Clone, Debug, Default)]
 pub(crate) struct Dumps {
     pub(crate) crates: BTreeMap<String, BTreeMap<String, IrBody>>,
+    /// Compiler source identities preserve overloaded implementation bodies.
+    /// Repeated source identities are removed rather than guessed.
+    pub(crate) definitions: BTreeMap<crate::embedding::Key, IrBody>,
     /// The constants' bodies (promoted constants and constant items), by
     /// crate and the path MIR prints for them where they are used.
     pub(crate) consts: BTreeMap<String, BTreeMap<String, IrBody>>,
@@ -383,6 +386,7 @@ pub(crate) fn closure_type(body: &IrBody) -> Option<String> {
 pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
     let mut dumps = Dumps::default();
     let mut ambiguous: Vec<(String, String)> = Vec::new();
+    let mut ambiguous_definitions = std::collections::BTreeSet::new();
     if !dir.is_dir() {
         return Ok(dumps);
     }
@@ -443,6 +447,7 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
         for file in files {
             let text = std::fs::read_to_string(&file).map_err(|e| io(&file, e))?;
             for mut body in parse::bodies(&text) {
+                let definition_key = crate::embedding::body_key(&krate, &body.path);
                 if body.arity == 0 && (body.path.contains("promoted[") || !body.path.contains('{'))
                 {
                     dumps
@@ -462,6 +467,15 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
                     continue;
                 };
                 body.path.clone_from(&path);
+                if let Some(key) = definition_key.filter(|key| key.impl_at.is_some()) {
+                    if dumps
+                        .definitions
+                        .insert(key.clone(), body.clone())
+                        .is_some()
+                    {
+                        ambiguous_definitions.insert(key);
+                    }
+                }
                 if entry.insert(path.clone(), body).is_some() {
                     ambiguous.push((krate.clone(), path));
                 }
@@ -473,6 +487,9 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
         if let Some(e) = dumps.crates.get_mut(&k) {
             e.remove(&p);
         }
+    }
+    for key in ambiguous_definitions {
+        dumps.definitions.remove(&key);
     }
     Ok(dumps)
 }
@@ -571,6 +588,32 @@ pub(super) fn impl_header(root: &Path, span: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn repeated_compiler_source_identities_remain_ambiguous_ue_78() {
+        let dir = std::env::temp_dir().join(format!(
+            "uorust-ambiguous-definition-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "pub struct Mark;\nimpl Mark { fn from()->u8 { 0 } }\n",
+        )
+        .unwrap();
+        let target = dir.join("dumps/lib-definitions");
+        std::fs::create_dir_all(&target).unwrap();
+        let body = "fn <impl at src/lib.rs:2:1: 2:10>::from() -> u8 {\n    let mut _0: u8;\n\n    bb0: {\n        _0 = const 0_u8;\n        return;\n    }\n}\n";
+        std::fs::write(target.join(format!("first{DUMPED}")), body).unwrap();
+        let unique = load(&dir, &dir.join("dumps")).unwrap();
+        assert_eq!(unique.definitions.len(), 1);
+        assert!(unique.crates["definitions"].contains_key("Mark::from"));
+        std::fs::write(target.join(format!("duplicate{DUMPED}")), body).unwrap();
+        let ambiguous = load(&dir, &dir.join("dumps")).unwrap();
+        assert!(ambiguous.definitions.is_empty());
+        assert!(!ambiguous.crates["definitions"].contains_key("Mark::from"));
+        std::fs::remove_dir_all(dir).unwrap();
+    }
 
     #[test]
     fn metadata_collection_preserves_pre_llvm_bodies_ue_32() {

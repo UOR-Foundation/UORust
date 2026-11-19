@@ -543,3 +543,10 @@ Feature: engine
     When UORust materializes their calls through the common application boundary
     Then the SDK agrees with Rust for returned values, constructed fields and mutable final state
     But changed source meanings cannot reuse the previous native decisions
+
+  @UE-78 @build
+  Scenario: Overlapping method names retain distinct compiler definition identities
+    Given trait implementations and an inherent method sharing an owner and method name
+    When their compiler bodies are joined to registered source definitions
+    Then each unique implementation source site receives its own SDK-verified behavior
+    But duplicate compiler identities cannot be resolved by choosing the first body

@@ -4952,6 +4952,7 @@ fn behavior(
                     ctx.path(r),
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
+                        trait_method: ctx.func(r).implements.is_some(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         generic: c.generic.clone(),
                         // A definition that threads its `&mut` parameters
@@ -5416,6 +5417,7 @@ fn mir_lift(
     let mut callees = lifted.clone();
     let mut names: BTreeSet<String> = taken.clone();
     let residue: Vec<String> = notes.residue.keys().cloned().collect();
+    let definition_keys = embedding_keys(ctx);
     for path in residue {
         let Some(&r) = product.get(&path) else {
             continue;
@@ -5425,10 +5427,21 @@ fn mir_lift(
             .strip_prefix(&format!("{krate}::"))
             .unwrap_or(&path)
             .to_string();
-        let Some(body) = dumps.crates.get(&krate).and_then(|c| c.get(&local)) else {
+        let f = ctx.func(r);
+        let body = dumps
+            .crates
+            .get(&krate)
+            .and_then(|c| c.get(&local))
+            .or_else(|| {
+                let mut key = definition_keys.get(&path)?.clone();
+                if let Some((file, _, _)) = &mut key.impl_at {
+                    file.clone_from(&ctx.file(r).rel);
+                }
+                dumps.definitions.get(&key)
+            });
+        let Some(body) = body else {
             continue;
         };
-        let f = ctx.func(r);
         let base = base_name(r);
         let name = if name_counts[&base] > 1 || names.contains(&base) {
             let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
@@ -5482,6 +5495,7 @@ fn mir_lift(
                     path.clone(),
                     lower::Callee {
                         name: name.clone(),
+                        trait_method: f.implements.is_some(),
                         params,
                         generic: (!generic.types.is_empty() || !generic.dictionary.is_empty())
                             .then_some(generic),

@@ -1183,3 +1183,27 @@ decisions from the interrupted consumer run are retained for exact-input reuse.
 Its failed question acquired no verdict and is rerun only after this structural
 cause changes. Consumer coverage, full release acceptance, translator
 certification and consumer adoption remain separately measured and open.
+
+## UE-78: preserve compiler definition identities
+
+The registered regression failed before implementation because multiple trait
+and inherent implementations erased to the same owner/method path. MIR loading
+now preserves the existing compiler/source embedding key alongside the ordinary
+path index. Colliding methods bind through their registered implementation file,
+line, column, module and method; the ordinary index remains unchanged for unique
+paths. Duplicate compiler source identities are removed from both indexes.
+Qualified trait fallback also requires a registered trait implementation, so an
+inherent method cannot become a trait provider merely by sharing its name.
+
+The SDK regression passed three native method decisions and nine executable
+Rust comparisons across two `From` argument types and an inherent method. A
+planted incorrect result was rejected with LLV7002. The complete regression ran
+in 94.36 seconds. A separate loader control checks that repeated compiler source
+identities become ambiguous. Consumer gains and full release acceptance are
+measured separately; these fixtures alone do not complete consumer functions.
+
+Focused dependency checks passed: the duplicate-identity loader control, all
+13 lowering tests, all 16 CLI tests, repo-conformance, strict workspace/all-target
+Clippy, generated model validation, immutable template/SDK-lock checks and the
+generated self-model check. Complete `just vv` and UE-18 certification remain
+the release boundary; no release completion is inferred from focused checks.

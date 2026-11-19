@@ -41,6 +41,8 @@ use crate::lift::{self, Lift, Residue, Ty, Types};
 #[derive(Clone, Debug)]
 pub(crate) struct Callee {
     pub(crate) name: String,
+    /// Only a registered trait implementation may satisfy trait fallback.
+    pub(crate) trait_method: bool,
     pub(crate) params: Vec<Ty>,
     pub(crate) generic: Option<lift::Generic>,
     /// The forward result: the type of the body's `_0`.
@@ -6206,7 +6208,11 @@ impl Fun<'_, '_> {
                     .filter(|c| c.generic.is_some())
             })
             .or_else(|| self.cx.callees.get(&erased).filter(|c| c.generic.is_some()))
-            .or_else(|| own.as_ref().and_then(|o| self.cx.callees.get(o)))
+            .or_else(|| {
+                own.as_ref()
+                    .and_then(|o| self.cx.callees.get(o))
+                    .filter(|c| c.trait_method)
+            })
             .cloned()
         {
             if c.name == self.name {
