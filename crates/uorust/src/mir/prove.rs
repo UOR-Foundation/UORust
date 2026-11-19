@@ -96,6 +96,15 @@ fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, Uorust
     Ok(out)
 }
 
+fn trial_behavior(files: &BTreeMap<String, Vec<u8>>) -> String {
+    String::from_utf8_lossy(
+        files
+            .get("src/Behavior.lex.tex")
+            .map_or(&[][..], Vec::as_slice),
+    )
+    .into_owned()
+}
+
 /// A verifier diagnostic.
 #[derive(Clone, Debug)]
 struct Diagnostic {
@@ -420,13 +429,7 @@ pub fn prove_bounded(
             crate::lex::proof_closure(&String::from_utf8_lossy(behavior), &roots)?.into_bytes();
         write_scratch(scratch, &files)?;
         summary.runs += 1;
-        let behavior = String::from_utf8_lossy(
-            files
-                .iter()
-                .find(|(p, _)| p.ends_with("Behavior.lex.tex"))
-                .map_or(&[][..], |(_, b)| b.as_slice()),
-        )
-        .into_owned();
+        let behavior = trial_behavior(&files);
         let Some(diagnostics) = verify(scratch)? else {
             for c in &on_trial {
                 register.rows.insert(
@@ -542,6 +545,28 @@ fn write_scratch(scratch: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<()
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn native_feedback_uses_root_not_library_behavior_ue_54() {
+        let files = BTreeMap::from([
+            (
+                "library/helper/src/Behavior.lex.tex".into(),
+                b"theorem{\n  name: libraryClaim,\n}\n".to_vec(),
+            ),
+            (
+                "src/Behavior.lex.tex".into(),
+                b"theorem{\n  name: holdsNative,\n}\n".to_vec(),
+            ),
+        ]);
+        let diagnostic = Diagnostic {
+            code: "LLV7002".into(),
+            message: "Lean rejected `Workspace.Behavior` (error): omega could not prove the goal"
+                .into(),
+            path: "src/Behavior.lex.tex".into(),
+            line: 1,
+        };
+        assert_eq!(named(&diagnostic, &trial_behavior(&files)), ["holdsNative"]);
+    }
 
     #[test]
     fn a_shared_model_failure_is_not_a_function_verdict_ue_52() {

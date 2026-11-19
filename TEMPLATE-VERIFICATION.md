@@ -542,3 +542,13 @@ The regression was red with zero proved and two refused, then passed with one
 proved and one refused. The lexer regression also covers quoted braces, escaped
 quotes, transitive type references and mutual siblings. These checks are focused
 development evidence; complete release acceptance remains `just vv`.
+
+## Exact native feedback module identity (UE-54)
+
+A consumer projection also contains library projects. Looking up the first path
+ending in Behavior.lex.tex selected an earlier library file for root SDK source
+locations. Concrete overflow diagnostics therefore appeared unattributed and
+triggered repeated batch splitting. The planted regression returned libraryClaim
+instead of holdsNative before the repair. Feedback now reads the exact root
+src/Behavior.lex.tex, the same file the native SDK invocation verifies. Library
+modules remain independent inputs and cannot supply a root declaration's owner.

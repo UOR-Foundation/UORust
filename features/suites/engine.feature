@@ -358,3 +358,9 @@ Feature: engine
     Then the valid function proves and the actual native overflow remains refused
     And full-project SDK verification still rejects its false source acceptance root
     But an unattributed verifier failure is not cached as an individual counterexample
+
+  @UE-54 @build
+  Scenario: Native feedback uses the exact root trial module
+    Given a root proof obligation and a lexicographically earlier library Behavior module
+    When the SDK points to the root obligation's opening line
+    Then UORust attributes the feedback to the root declaration and not the library declaration
