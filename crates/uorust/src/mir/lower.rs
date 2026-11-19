@@ -150,6 +150,8 @@ enum Val {
 /// argument (by position), and the guard of a guarded `Option`.
 struct Called {
     term: String,
+    /// A source result bound before converting it to the native carrier.
+    binding: Option<(String, String, String)>,
     updates: BTreeMap<usize, String>,
     guard: Option<String>,
     /// A callee that threads `&mut` parameters: `term` is its tuple, of
@@ -169,6 +171,7 @@ impl Called {
     fn value(term: String) -> Self {
         Self {
             term,
+            binding: None,
             updates: BTreeMap::new(),
             guard: None,
             threads: None,
@@ -2433,6 +2436,7 @@ impl Fun<'_, '_> {
         };
         let Called {
             term,
+            binding: initial_binding,
             mut updates,
             guard,
             threads,
@@ -2441,7 +2445,7 @@ impl Fun<'_, '_> {
         } = called;
         // A threading callee's tuple, bound once: `_0`'s value first, then
         // each `&mut` argument's new value.
-        let mut binding = None;
+        let mut binding = initial_binding;
         let term = match threads {
             Some((rt, positions)) => {
                 let name = self.fresh(Some("called"), destination.local);
@@ -3764,17 +3768,19 @@ impl Fun<'_, '_> {
                 IrProjection::Field(i, fty) => {
                     let ft = ty(fty, self.cx.types)?;
                     let stored = self.field_ty(&t, *i)?;
-                    if !stored.same(&ft) {
-                        return Err(kind(
-                            spec::MirProjectionElem::Field.path(),
-                            &format!(
-                                "field representation {} cannot be read as {}",
-                                stored.render(),
-                                ft.render()
-                            ),
-                        ));
-                    }
-                    v = self.field(&v, &t, *i)?;
+                    let field = self.field(&v, &t, *i)?;
+                    v = self
+                        .scalar_representation(&field, &stored, &ft, st)
+                        .ok_or_else(|| {
+                            kind(
+                                spec::MirProjectionElem::Field.path(),
+                                &format!(
+                                    "field representation {} cannot be read as {}",
+                                    stored.render(),
+                                    ft.render()
+                                ),
+                            )
+                        })?;
                     t = ft;
                     text = Some(fty.clone());
                 }
@@ -3803,34 +3809,40 @@ impl Fun<'_, '_> {
                     match steps.next() {
                         Some(IrProjection::Field(i, fty)) => {
                             let ft = ty(fty, self.cx.types)?;
-                            if let Ty::Named(n) = &t {
-                                if let Some(stored) = self
-                                    .cx
-                                    .types
-                                    .datas
-                                    .get(n)
-                                    .and_then(|vs| vs.iter().find(|(v, _)| v == &variant))
-                                    .and_then(|(_, fs)| fs.get(*i))
-                                    .map(|(_, t)| t)
-                                {
-                                    if !stored.same(&ft) {
-                                        return Err(kind(
-                                            spec::MirProjectionElem::Field.path(),
-                                            &format!(
-                                                "field representation {} cannot be read as {}",
-                                                stored.render(),
-                                                ft.render()
-                                            ),
-                                        ));
-                                    }
-                                }
-                            }
-                            v = names.get(*i).cloned().ok_or_else(|| {
+                            let field = names.get(*i).cloned().ok_or_else(|| {
                                 kind(
                                     spec::MirProjectionElem::Field.path(),
                                     "a field past the variant's",
                                 )
                             })?;
+                            let stored = if let Ty::Named(n) = &t {
+                                self.cx
+                                    .types
+                                    .datas
+                                    .get(n)
+                                    .and_then(|vs| vs.iter().find(|(v, _)| v == &variant))
+                                    .and_then(|(_, fs)| fs.get(*i))
+                                    .map(|(_, t)| t.clone())
+                            } else {
+                                None
+                            };
+                            v = self
+                                .scalar_representation(
+                                    &field,
+                                    stored.as_ref().unwrap_or(&ft),
+                                    &ft,
+                                    st,
+                                )
+                                .ok_or_else(|| {
+                                    kind(
+                                        spec::MirProjectionElem::Field.path(),
+                                        &format!(
+                                            "field representation {} cannot be read as {}",
+                                            stored.as_ref().unwrap_or(&ft).render(),
+                                            ft.render()
+                                        ),
+                                    )
+                                })?;
                             t = ft;
                             prefix.projection.push(step.clone());
                             prefix.projection.push(IrProjection::Field(*i, fty.clone()));
@@ -4224,7 +4236,7 @@ impl Fun<'_, '_> {
                     vals.push(value);
                     operand_types.push(ty);
                 }
-                self.check_aggregate_fields(agg, &t, ops, &operand_types)?;
+                self.check_aggregate_fields(agg, &t, ops, &operand_types, &mut vals, st)?;
                 let v = self.aggregate(agg, &t, ops, vals)?;
                 self.mention(&t);
                 Ok(Val::V(v, t))
@@ -5020,12 +5032,28 @@ impl Fun<'_, '_> {
 
     /// Source fields and native locals may use distinct representations of
     /// the same Rust integer. Construction cannot silently convert them.
+    fn scalar_representation(
+        &mut self,
+        value: &str,
+        from: &Ty,
+        to: &Ty,
+        st: &State,
+    ) -> Option<String> {
+        let converted = super::codec::scalar(value, from, to, self.cx.widths)?;
+        for valid in converted.valid {
+            self.obligation(st, &valid, "an exact integer representation conversion");
+        }
+        Some(converted.value)
+    }
+
     fn check_aggregate_fields(
-        &self,
+        &mut self,
         agg: &IrAggregate,
         target: &Ty,
         ops: &[(Option<String>, IrOperand)],
         actual: &[Ty],
+        values: &mut [String],
+        st: &State,
     ) -> Lift<()> {
         let k = spec::MirRvalue::Aggregate.path();
         if let IrAggregate::Adt(path, None) = agg {
@@ -5091,16 +5119,18 @@ impl Fun<'_, '_> {
             return Err(kind(k, "aggregate field representation arity mismatch"));
         }
         for (i, (expected, actual)) in expected.iter().zip(actual).enumerate() {
-            if !expected.same(actual) {
-                return Err(kind(
-                    k,
-                    &format!(
-                        "aggregate field representation {i}: {} cannot be stored as {}",
-                        actual.render(),
-                        expected.render()
-                    ),
-                ));
-            }
+            values[i] = self
+                .scalar_representation(&values[i], actual, expected, st)
+                .ok_or_else(|| {
+                    kind(
+                        k,
+                        &format!(
+                            "aggregate field representation {i}: {} cannot be stored as {}",
+                            actual.render(),
+                            expected.render()
+                        ),
+                    )
+                })?;
         }
         Ok(())
     }
@@ -5434,6 +5464,7 @@ impl Fun<'_, '_> {
             return Ok(Called {
                 term,
                 updates: BTreeMap::from([(0, env.clone())]),
+                binding: None,
                 guard: None,
                 threads: None,
                 memory: false,
@@ -5453,6 +5484,7 @@ impl Fun<'_, '_> {
             .get(&key)
             .or_else(|| self.cx.callees.get(callee))
             .or_else(|| own.as_ref().and_then(|o| self.cx.callees.get(o)))
+            .cloned()
         {
             if c.name == self.name {
                 return Err(kind(
@@ -5460,26 +5492,48 @@ impl Fun<'_, '_> {
                     "a call of the function itself, whose measure is not derived",
                 ));
             }
-            if c.params.len() != args.len()
-                || c.params
-                    .iter()
-                    .zip(&args)
-                    .any(|(p, (_, a))| p.render() != a.render())
-                || c.result.render() != dt.render()
-            {
-                return Err(kind(
+            let bad_types = || {
+                kind(
                     k,
                     &format!("{callee}, at other types than the lift gives it"),
-                ));
+                )
+            };
+            if c.params.len() != args.len() {
+                return Err(bad_types());
             }
-            self.calls.insert(c.name.clone());
-            let term = if args.is_empty() {
+            let mut passed = Vec::new();
+            for ((value, ty), expected) in args.iter().zip(&c.params) {
+                if c.threads.is_some() && !ty.same(expected) {
+                    return Err(bad_types());
+                }
+                passed.push(
+                    self.scalar_representation(value, ty, expected, st)
+                        .ok_or_else(bad_types)?,
+                );
+            }
+            let term = if passed.is_empty() {
                 c.name.clone()
             } else {
-                let a: Vec<String> = args.into_iter().map(|(v, _)| v).collect();
-                format!("({} {})", c.name, a.join(" "))
+                format!("({} {})", c.name, passed.join(" "))
             };
+            let mut binding = None;
+            let term = if c.threads.is_none() && !c.result.same(dt) {
+                let name = self.fresh(Some("sourceResult"), 0);
+                st.binders.push((name.clone(), c.result.clone()));
+                let represented = self
+                    .scalar_representation(&name, &c.result, dt, st)
+                    .ok_or_else(bad_types)?;
+                binding = Some((name, c.result.render(), term));
+                represented
+            } else {
+                if !c.result.same(dt) {
+                    return Err(bad_types());
+                }
+                term
+            };
+            self.calls.insert(c.name.clone());
             return Ok(Called {
+                binding,
                 threads: c.threads.clone(),
                 ..Called::value(term)
             });
@@ -5655,6 +5709,7 @@ impl Fun<'_, '_> {
                     return Ok(Called {
                         term: "()".into(),
                         updates: BTreeMap::from([(0, f.term(op, &terms))]),
+                        binding: None,
                         guard: None,
                         threads: None,
                         memory: false,
@@ -5687,6 +5742,7 @@ impl Fun<'_, '_> {
             }
             return Ok(Called {
                 term: applied.term,
+                binding: None,
                 updates: applied.updates,
                 guard: applied.guard,
                 threads: None,

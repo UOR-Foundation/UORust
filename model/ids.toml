@@ -387,3 +387,9 @@ id = "UE-55"
 level = "build"
 suite = "engine"
 statement = "Native enum matches bind fields to their typed immutable values rather than temporary local addresses, so copied references and tuple-pattern aliases retain the established variant while changed values cannot reuse stale bindings and invalid accesses remain refused"
+
+[[id]]
+id = "UE-56"
+level = "build"
+suite = "engine"
+statement = "Matching-width mathematical source integers (i128 and isize) cross native fields, aggregates and nonthreaded calls through width-derived integer codecs; limb conversions carry actual SDK range obligations, signed boundaries agree with Rust, and fixed Int64 or unrelated field types remain refused"

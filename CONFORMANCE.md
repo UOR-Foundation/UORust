@@ -76,6 +76,7 @@ model does not sanction.
 | `UE-53` | `build` | Native trials verify the reachable declaration closure of their complete obligations, including transitive definitions, type schemas and mutual groups, instead of unrelated source acceptance roots; native counterexamples remain refused and full-project acceptance still fails on its own false assertions, while unattributed verifier failures never become fabricated per-function counterexamples |
 | `UE-54` | `build` | Native SDK source locations are attributed against the exact root trial Behavior module even when a projection also contains library Behavior modules, so concrete function refusals are retained instead of repeated as inconclusive batches |
 | `UE-55` | `build` | Native enum matches bind fields to their typed immutable values rather than temporary local addresses, so copied references and tuple-pattern aliases retain the established variant while changed values cannot reuse stale bindings and invalid accesses remain refused |
+| `UE-56` | `build` | Matching-width mathematical source integers (i128 and isize) cross native fields, aggregates and nonthreaded calls through width-derived integer codecs; limb conversions carry actual SDK range obligations, signed boundaries agree with Rust, and fixed Int64 or unrelated field types remain refused |
 
 ## factory
 

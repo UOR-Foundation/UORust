@@ -2708,6 +2708,174 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-56: mathematical signed integers cross native word boundaries explicitly.
+#[test]
+fn native_signed_slots_use_explicit_scalar_codecs_ue_56() {
+    let dir=scratch("native-signed-codecs",&[("Cargo.toml","[package]\nname=\"signed_codecs\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub struct Wide {pub value:i128}
+pub struct Size {pub value:isize}
+pub struct Fixed {pub value:i32}
+pub fn identity128(value:i128)->i128 {value}
+pub fn identity_size(value:isize)->isize {value}
+pub fn read128(mut n:u8,value:&Wide)->i128 {while n>0 {n-=1;} value.value}
+pub fn make128(mut n:u8,value:i128)->Wide {while n>0 {n-=1;} Wide {value}}
+pub fn call128(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} identity128(value)}
+pub fn read_size(mut n:u8,value:&Size)->isize {while n>0 {n-=1;} value.value}
+pub fn make_size(mut n:u8,value:isize)->Size {while n>0 {n-=1;} Size {value}}
+pub fn call_size(mut n:u8,value:isize)->isize {while n>0 {n-=1;} identity_size(value)}
+pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
+#[test] fn reference() {for value in [i128::MIN,-1,0,i128::MAX] {assert_eq!(read128(2,&make128(2,value)),value);assert_eq!(call128(2,value),value);}for value in [isize::MIN,-1,0,isize::MAX] {assert_eq!(read_size(2,&make_size(2,value)),value);assert_eq!(call_size(2,value),value);}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust boundary oracle");
+    assert!(reference.status.success());
+    let dumps = dumped(&dir, "native-signed-codecs");
+    let mut opts = options("signed_codecs");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("proposals");
+    let functions = [
+        "read128",
+        "make128",
+        "call128",
+        "read_size",
+        "make_size",
+        "call_size",
+    ];
+    for f in functions {
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("signed_codecs::{f}\"")),
+            "{f}: {:?}",
+            residue_detail(&proposed, &format!("signed_codecs::{f}"))
+        );
+    }
+    assert!(residue_detail(&proposed, "signed_codecs::fixed")
+        .is_some_and(|s| s.contains("field representation")));
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("signed-slot-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("signed_codecs"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        6,
+    )
+    .expect("SDK proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    for f in functions {
+        assert!(
+            decisions
+                .rows
+                .values()
+                .any(|r| r.function == format!("signed_codecs::{f}")
+                    && matches!(r.status, uorust::mir::verdict::Decision::Proved)),
+            "{f}"
+        );
+    }
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (suffix, bits, record) in [("128", 128, "Wide"), ("_size", usize::BITS, "Size")] {
+        let sign = 1u128 << (bits - 1);
+        let max = sign - 1;
+        let mask = if bits == 128 {
+            u128::MAX
+        } else {
+            (1u128 << bits) - 1
+        };
+        for (j, (raw, signed)) in [
+            (sign, format!("-{sign}")),
+            (mask, "-1".into()),
+            (0, "0".into()),
+            (max, max.to_string()),
+        ]
+        .iter()
+        .enumerate()
+        {
+            for mode in ["read", "make", "call"] {
+                let f = format!("{mode}{suffix}");
+                let definition = rows
+                    .iter()
+                    .find(|r| r["function"].as_str() == Some(&format!("signed_codecs::{f}")))
+                    .and_then(|r| r["definition"].as_str())
+                    .unwrap()
+                    .strip_prefix("Behavior::")
+                    .unwrap();
+                let (term, expected) = match mode {
+                    "read" => (
+                        format!("({definition} 2 (record {record} {{value := ({signed} : Int)}}))"),
+                        raw.to_string(),
+                    ),
+                    "make" => (
+                        format!("(project ({definition} 2 {raw}) value)"),
+                        format!("({signed} : Int)"),
+                    ),
+                    _ => (format!("({definition} 2 {raw})"), raw.to_string()),
+                };
+                let policy = decisions
+                    .rows
+                    .values()
+                    .find(|r| r.function == format!("signed_codecs::{f}"))
+                    .and_then(|r| r.axioms.get(definition))
+                    .cloned()
+                    .unwrap_or_default();
+                vectors.push_str(&format!("theorem{{ name: vector{bits}{mode}{j}, parameters: [], statement: ({term} = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let source = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source).unwrap();
+    std::fs::write(
+        &source,
+        original.replace("pub value:i128", "pub value:bool"),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let bad = uorust::project_workspace(&dir, &opts).expect("typed incompatible source schema");
+    assert!(residue_detail(&bad, "signed_codecs::read128")
+        .is_some_and(|s| s.contains("field representation")));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-55: compiler temporaries preserve matched enum values across reference copies.
 #[test]
 fn native_tuple_reference_matches_preserve_value_identity_ue_55() {

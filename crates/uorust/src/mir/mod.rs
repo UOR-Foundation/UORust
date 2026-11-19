@@ -16,6 +16,7 @@
 //! `RUSTC_BOOTSTRAP=1`: no other toolchain, driver or download is involved,
 //! and the MIR is exactly the one the shipped build compiles.
 
+mod codec;
 pub mod core;
 pub mod coverage;
 pub(crate) mod float;

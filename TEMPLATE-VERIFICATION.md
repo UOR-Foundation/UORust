@@ -570,3 +570,19 @@ because its proposition is false. The regression also requires current native
 candidate eligibility, so historical cached proofs cannot hide a translation
 regression. These are focused development checks; complete `just vv` remains
 the release gate.
+
+## Mathematical integer ABI codecs (UE-56)
+
+The previous frozen producer refuses all six compiler-derived i128 and isize
+field-read, aggregate and source-call fixtures at their representation boundary.
+Width-derived codecs now bridge native words and matching mathematical source
+integers. Conversions split signed magnitudes into checked UInt64 limbs, with
+ordered range obligations proved by the actual SDK. Source-call results bind
+once before conversion so each range check stays independent of the call body.
+
+All six native functions pass actual SDK proof trials. Twenty-four closed SDK
+vectors agree with executable Rust reference cases at minimum, maximum, zero
+and negative values. Fixed Int64 representations, unrelated field types and
+mismatched widths remain refused. A planted Bool field in the source schema
+rejects the corresponding native integer read. These are focused development
+checks; complete `just vv` remains the release gate.

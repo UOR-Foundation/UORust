@@ -372,3 +372,10 @@ Feature: engine
     Then matching aliases reuse the fields of the same typed immutable value
     And executable Rust vectors and SDK theorems agree after replacement
     But a native overflow is still refused
+
+  @UE-56 @build
+  Scenario: Signed source fields and native words share explicit integer codecs
+    Given source records with mathematical signed integer fields and native word operations
+    When the native translator reads, constructs and passes those mathematical signed scalars
+    Then actual SDK proofs and Rust boundary vectors agree on negative values and extrema
+    But an unrelated Boolean field cannot be interpreted as a signed integer
