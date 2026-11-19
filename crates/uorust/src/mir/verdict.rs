@@ -65,7 +65,7 @@ impl Verdicts {
             path: path.to_path_buf(),
             reason,
         };
-        let doc: toml::Value = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(text).map_err(|e| bad(format!("{e}")))?;
         let mut out = Verdicts::default();
         for row in doc
             .get("verdict")
