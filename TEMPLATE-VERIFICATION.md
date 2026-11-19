@@ -769,3 +769,25 @@ one fixture receipt whose declaration changed through source-model import;
 all 16 CLI tests then replayed successfully, and conformance meta-tests and
 strict all-target Clippy passed. The fixture verdict was copied from the actual
 tool-written SDK result. No verdict, digest or axiom policy was fabricated.
+
+### UE-64: compiler callable environments
+
+The extended model/scenario and red compiler fixture preceded implementation.
+A single reifier derives callback signatures and environment applications from
+compiler bodies for the existing source and native standard model interfaces.
+It binds the environment once and declares that exact SDK lambda capture;
+mutable captures, memory signatures and incompatible carriers stay refused.
+No standard-operation formula or executable registry row was added.
+
+The actual SDK proved four fixture functions (captured predicates, mapped
+values, lazy defaults and a function item), and all 21 executable-Rust vectors
+passed. Rust's overflow counterexample panics and the SDK refuses its callback;
+the verdict register contains four proved and one refused function. A planted
+wrong closed callback result is rejected with LLV7002 / `is false`. The SDK also
+rejected the earlier missing capture metadata with LLT4001 before recording any
+function verdict, demonstrating that malformed model transport is fail-closed.
+Evidence: `uorust-model-callables-red.log`,
+`uorust-model-callables-final-sdk.log`, and
+`uorust-model-callables-acceptance.log`. Library, CLI, conformance, strict Clippy,
+model/template and lock checks passed. Consumer lifting gain remains subject to
+the complete guarded campaign. Full release acceptance remains open.

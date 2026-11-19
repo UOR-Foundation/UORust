@@ -4039,6 +4039,143 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-64: callable values come from compiler bodies, with no operation recipes.
+#[test]
+fn immutable_compiler_closures_share_model_callables_ue_64() {
+    let dir=scratch("compiler-model-callables",&[("Cargo.toml","[package]\nname=\"model_callables\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn flip(x:bool)->bool {!x}
+pub fn predicate(mut n:u8,x:Option<bool>,expected:bool)->bool {while n>0 {n-=1;} x.is_some_and(|v|v==expected)}
+pub fn mapped(mut n:u8,x:Option<bool>,negate:bool)->Option<bool> {while n>0 {n-=1;} x.map(|v|if negate {!v} else {v})}
+pub fn lazy(mut n:u8,x:Option<bool>,fallback:bool)->bool {while n>0 {n-=1;} x.unwrap_or_else(||fallback)}
+pub fn item(mut n:u8,x:Option<bool>)->bool {while n>0 {n-=1;} x.is_some_and(flip)}
+pub fn mutable(mut n:u8,x:Option<bool>,state:&mut bool)->Option<bool> {while n>0 {n-=1;} x.map(|v|{*state=v;v})}
+pub fn overflow(mut n:u8,x:Option<u8>)->Option<u8> {while n>0 {n-=1;} x.map(|v|v+1)}
+"#),("src/bin/vectors.rs",r#"
+use model_callables::*;
+fn option(x:Option<bool>)->String {match x {None=>"(ctor Option.none [Bool])".into(),Some(v)=>format!("(ctor Option.some [Bool] {v})")}}
+fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());let mut state=false;assert_eq!(mutable(2,Some(true),&mut state),Some(true));assert!(state);for x in [None,Some(false),Some(true)] {let input=option(x);println!("item|2 {input}|{}",item(2,x));for y in [false,true] {println!("predicate|2 {input} {y}|{}",predicate(2,x,y));println!("mapped|2 {input} {y}|{}",option(mapped(2,x,y)));println!("lazy|2 {input} {y}|{}",lazy(2,x,y));}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 21);
+    let dumps = dumped(&dir, "compiler-model-callables");
+    let mut opts = options("model_callables");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["predicate", "mapped", "lazy", "item"] {
+        let path = format!("model_callables::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    assert!(residue_detail(&proposed, "model_callables::mutable").is_some());
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("model-callable-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("model_callables"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert!(proof.refused <= 1, "{proof:?}");
+    let decisions = verdicts(&cache);
+    assert!(decisions
+        .rows
+        .values()
+        .any(|row| row.function == "model_callables::overflow"
+            && matches!(row.status, uorust::mir::verdict::Decision::Refused(_))));
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&files, "model_callables::overflow").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, input, expected] = parts.as_slice() else {
+            panic!("vector {line}")
+        };
+        let path = format!("model_callables::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: callableVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= false)", "= true)", 1);
+    assert_ne!(vectors, wrong, "planted false callback result");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-64: one model bridge, exercised across unrelated standard receiver types.
 #[test]
 fn native_calls_import_source_semantic_models_ue_64() {

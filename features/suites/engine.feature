@@ -445,3 +445,10 @@ Feature: engine
     When producer bytes change but the SDK build, source, semantic, module and SDK-lock identities agree
     Then the proof stage reuses the original verification with explicit provenance
     But build-only output, changed SDK inputs, modified artifacts or missing proof bundles require actual verification
+
+  @UE-64 @build
+  Scenario: Immutable compiler closure environments share the semantic callable interface
+    Given compiler closure bodies with exact signatures and immutable captured schemas
+    When source and native standard models consume the callback values
+    Then actual SDK results agree with executable Rust for captured predicates, mapped values, lazy defaults and function items
+    But mutable captured state and a callback overflow cannot acquire a proved verdict

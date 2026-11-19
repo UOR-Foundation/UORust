@@ -5633,6 +5633,99 @@ impl Fun<'_, '_> {
         Ok(Val::V(term, t))
     }
 
+    /// Reify compiler closure environments only for value-model interfaces.
+    /// Other lowering paths retain the original environment and Rust type.
+    fn model_callables(
+        &mut self,
+        args: &[(String, Ty)],
+        texts: &[Option<String>],
+    ) -> (Vec<(String, Ty)>, Vec<Option<String>>) {
+        let mut values = args.to_vec();
+        let mut signatures = texts.to_vec();
+        for (position, ((environment, et), text)) in args.iter().zip(texts).enumerate() {
+            let Some(written) = text.as_deref() else {
+                continue;
+            };
+            let closure = written
+                .trim_start_matches('&')
+                .trim_start_matches("mut ")
+                .trim();
+            let Some(body) = self.cx.closures.get(closure).cloned() else {
+                continue;
+            };
+            if body.arity == 0
+                || !threaded(&body.locals, body.arity, true, self.cx.types).is_empty()
+                || !super::source::callable_environment(et, self.cx.types)
+                || reaches_memory(&body)
+            {
+                continue;
+            }
+            let inputs: Lift<Vec<Ty>> = body
+                .locals
+                .iter()
+                .take(body.arity + 1)
+                .skip(2)
+                .map(|t| ty(t, self.cx.types))
+                .collect();
+            let (Ok(mut inputs), Some(Ok(result))) =
+                (inputs, body.locals.first().map(|t| ty(t, self.cx.types)))
+            else {
+                continue;
+            };
+            let Ok((name, _)) = self.closure_def(closure) else {
+                continue;
+            };
+            let Some(Decl::Definition {
+                parameters,
+                result: actual,
+                ..
+            }) = self.aux.get(&name)
+            else {
+                continue;
+            };
+            // Memory and threaded results cannot hide behind a pure Fn carrier.
+            if parameters.len() != body.arity || *actual != result.render() {
+                continue;
+            }
+            let rust_inputs = body
+                .locals
+                .iter()
+                .take(body.arity + 1)
+                .skip(2)
+                .cloned()
+                .collect::<Vec<_>>()
+                .join(", ");
+            if inputs.is_empty() {
+                inputs.push(Ty::Unit);
+            }
+            let binders: Vec<_> = inputs
+                .iter()
+                .enumerate()
+                .map(|(i, t)| (self.fresh(Some("callbackInput"), i), t.clone()))
+                .collect();
+            let params = binders
+                .iter()
+                .map(|(n, t)| format!("({n} : {})", t.render()))
+                .collect::<Vec<_>>()
+                .join(" ");
+            let arguments = binders
+                .iter()
+                .take(body.arity - 1)
+                .map(|(n, _)| n.as_str())
+                .collect::<Vec<_>>()
+                .join(" ");
+            // Bind the complete environment once, so the SDK capture list is
+            // exact without guessing the free variables of its expression.
+            let captured = self.fresh(Some("callbackEnvironment"), usize::MAX);
+            let term = format!("(let {captured} : {} := {environment}; (fun [{captured}] {params} => ({name} {captured} {arguments})))",et.render());
+            let function = Ty::Fn(inputs, Box::new(result));
+            self.mention(&function);
+            values[position] = (term, function);
+            signatures[position] = Some(format!("fn({rust_inputs}) -> {}", body.locals[0]));
+        }
+        (values, signatures)
+    }
+
     /// A call: a function the lift has, or one of the standard library's
     /// operations whose meaning on values is fixed.
     fn call(
@@ -6050,7 +6143,9 @@ impl Fun<'_, '_> {
         // A std operation whose body bottoms out below values: its model.
         let types = self.cx.types;
         let defaults = |t: &Ty| lift::default_of(t, types);
-        if let Some(applied) = stdlib::apply_with_types(&erase(callee), &args, dt, &defaults, types)
+        let (model_args, model_texts) = self.model_callables(&args, texts);
+        if let Some(applied) =
+            stdlib::apply_with_types(&erase(callee), &model_args, dt, &defaults, types)
         {
             for t in &applied.mentions {
                 self.mention(t);
@@ -6075,8 +6170,8 @@ impl Fun<'_, '_> {
         let import_name = self.fresh(Some(&format!("{}SourceModel", self.name)), usize::MAX);
         if let Some(imported) = super::source::apply(
             callee,
-            &args,
-            texts,
+            &model_args,
+            &model_texts,
             dt,
             self.cx.types,
             self.cx.widths,

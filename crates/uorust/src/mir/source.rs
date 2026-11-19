@@ -82,6 +82,11 @@ fn value_interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>) -> bool 
     }
 }
 
+/// Captured values must have an immutable schema in this shared interface.
+pub(super) fn callable_environment(ty: &Ty, types: &Types) -> bool {
+    value_interface(ty, types, &mut BTreeSet::new())
+}
+
 #[allow(clippy::too_many_arguments)]
 pub(super) fn apply(
     callee: &str,
@@ -99,7 +104,7 @@ pub(super) fn apply(
         return None;
     }
     for ((_, native), text) in args.iter().zip(texts) {
-        if source_type(text.as_deref()?, types)? != *native {
+        if !matches!(native, Ty::Fn(..)) && source_type(text.as_deref()?, types)? != *native {
             return None;
         }
     }
@@ -121,11 +126,19 @@ pub(super) fn apply(
         .collect();
     let arguments = params
         .iter()
+        .enumerate()
         .skip(1)
-        .map(|(n, _, t)| match t {
+        .map(|(position, (n, _, t))| match t {
             // A source combinator expects closure syntax. The function carrier
             // is already immutable: eta expansion preserves its value semantics.
             Ty::Fn(ins, _) => {
+                let zero = texts[position]
+                    .as_deref()
+                    .and_then(|text| syn::parse_str::<syn::TypeFnPtr>(text).ok())
+                    .is_some_and(|signature| signature.inputs.is_empty());
+                if zero && ins.as_slice() == [Ty::Unit] {
+                    return format!("|| {n}(())");
+                }
                 let vars = (0..ins.len())
                     .map(|i| format!("input{i}"))
                     .collect::<Vec<_>>()

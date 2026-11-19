@@ -14,7 +14,7 @@ class SdkClosureTests(unittest.TestCase):
   self.lock=guard.digest(lock);self.binding={'sdk':self.lock,'tool':'prior-producer'};self.key=guard.identity(self.binding)
   self.history={self.key:{'binding':self.binding,'status':'verified','report':str(self.report),'report_sha256':guard.digest(self.report),'artifacts':{str(lock):guard.digest(lock),str(self.sdk/'frontier.toml'):guard.digest(self.sdk/'frontier.toml')}}}
   self.lock=guard.digest(lock)
-  self.bundle=self.sdk/'.lexlean/verified'/('e'*64);self.bundle.mkdir(parents=True)
+  self.bundle=self.sdk/'.lexlean/verified'/('e'*64);self.bundle.mkdir(parents=True);(self.bundle/'attestation.json').write_text('cached original SDK witness')
  def select(self):return guard.sdk_receipt(self.build,self.lock,self.history,self.sdk)
  def test_sdk_emitted_identity_reuses_original_receipt(self):
   selected=self.select();self.assertEqual(selected['receipt']['command'],'verify');self.assertEqual(selected['report'],str(self.report))
@@ -28,7 +28,7 @@ class SdkClosureTests(unittest.TestCase):
   self.assertIsNone(self.select())
  def test_changed_report_or_artifact_requires_verification(self):
   (self.sdk/'frontier.toml').write_text('modified');self.assertIsNone(self.select())
- def test_missing_cached_bundle_requires_verification(self):self.bundle.rmdir();self.assertIsNone(self.select())
+ def test_missing_cached_bundle_requires_verification(self):(self.bundle/'attestation.json').unlink();self.assertIsNone(self.select())
  def test_changed_report_requires_verification(self):self.report.write_text(self.report.read_text()+' ');self.assertIsNone(self.select())
  def test_unverified_receipt_requires_verification(self):
   report=json.loads(self.report.read_text());report['sdk_receipt']['success']=False;self.report.write_text(json.dumps(report));self.history[self.key]['report_sha256']=guard.digest(self.report);self.assertIsNone(self.select())

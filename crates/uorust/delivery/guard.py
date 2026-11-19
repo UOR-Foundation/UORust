@@ -130,7 +130,7 @@ def sdk_receipt(build, sdk_lock, history, acceptance):
                 continue
             attestation = receipt.get('attestation_id', '')
             if (len(attestation) != 64 or any(c not in '0123456789abcdef' for c in attestation)
-                    or not (Path(acceptance)/'.lexlean/verified'/attestation).is_dir()):
+                    or not (Path(acceptance)/'.lexlean/verified'/attestation/'attestation.json').is_file()):
                 continue
             if not all(digest(path) == expected for path, expected in row['artifacts'].items()):
                 continue
