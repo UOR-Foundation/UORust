@@ -193,7 +193,7 @@ struct State {
     path: Vec<MirStep>,
     /// Match binders in scope, with their types.
     binders: Vec<(String, Ty)>,
-    /// The binders of each variant a place is known to hold: place text,
+    /// The binders of each variant an immutable value is known to hold: typed value,
     /// variant -> binder names.
     bound: BTreeMap<(String, String), Vec<String>>,
     /// Facts the language guarantees about terms on this path.
@@ -2791,14 +2791,9 @@ impl Fun<'_, '_> {
         };
         let mut yes = st.clone();
         yes.path.push(MirStep::If(guard.to_string(), true));
+        let (scrutinee, ty) = self.read(&place, &st)?;
         yes.bound.insert(
-            (
-                place_key(
-                    &place,
-                    self.mut_params.contains(&place.local) || st.lends.contains_key(&place.local),
-                ),
-                "Some".into(),
-            ),
+            (variant_key(&scrutinee, &ty), "Some".into()),
             vec![value.to_string()],
         );
         let mut no = st;
@@ -2822,10 +2817,7 @@ impl Fun<'_, '_> {
         st: State,
     ) -> Lift<Expr> {
         let (scrutinee, t) = self.read(place, &st)?;
-        let key = place_key(
-            place,
-            self.mut_params.contains(&place.local) || st.lends.contains_key(&place.local),
-        );
+        let key = variant_key(&scrutinee, &t);
         // An enum with one inhabited variant is that variant's field: the
         // switch takes that arm, whose field is the value itself.
         let printed = (place.projection.is_empty())
@@ -3576,14 +3568,8 @@ impl Fun<'_, '_> {
             }
             Val::Guarded { item, .. } => match p.projection.first() {
                 Some(IrProjection::Downcast(variant)) => {
-                    let key = (
-                        place_key(
-                            &prefix,
-                            self.mut_params.contains(&prefix.local)
-                                || st.lends.contains_key(&prefix.local),
-                        ),
-                        variant.clone(),
-                    );
+                    let (whole, option) = self.read(&prefix, st)?;
+                    let key = (variant_key(&whole, &option), variant.clone());
                     let Some(names) = st.bound.get(&key).cloned() else {
                         return Err(kind(
                             spec::MirProjectionElem::Downcast.path(),
@@ -3799,14 +3785,7 @@ impl Fun<'_, '_> {
                         "Break" if matches!(t, Ty::Outcome(..)) => "Err".to_string(),
                         v => v.to_string(),
                     };
-                    let key = (
-                        place_key(
-                            &prefix,
-                            self.mut_params.contains(&prefix.local)
-                                || st.lends.contains_key(&prefix.local),
-                        ),
-                        variant.clone(),
-                    );
+                    let key = (variant_key(&v, &t), variant.clone());
                     // The one inhabited variant of an enum is its value,
                     // matched or not.
                     let only = (prefix.projection.is_empty())
@@ -7261,21 +7240,11 @@ fn implication(hyps: &[String], goal: &str) -> String {
     out
 }
 
-/// The key a match binds a variant's fields under, of the place it
-/// switches on. A local that holds the value a `&mut` borrows (a `&mut` parameter, a
-/// lending local) is that value, so `(*_1)` and `_1` are the one place: a
-/// match on `(*_1)` binds the fields a read through the borrow, of `_1`,
-/// finds.
-fn place_key(p: &IrPlace, held: bool) -> String {
-    if held {
-        let steps: Vec<&IrProjection> = p
-            .projection
-            .iter()
-            .filter(|s| !matches!(s, IrProjection::Deref))
-            .collect();
-        return format!("{:?}{steps:?}", p.local);
-    }
-    format!("{p:?}")
+/// Copying a reference changes its compiler local, not the value matched.
+/// A functional update changes the value term, so it cannot reuse a stale
+/// constructor binder even when it writes the same local or address.
+fn variant_key(value: &str, ty: &Ty) -> String {
+    format!("{ty:?}:{value}")
 }
 
 /// The constructors of a type a discriminant switches over, in the order of
@@ -8895,17 +8864,15 @@ mod tests {
     }
 
     #[test]
-    fn a_held_borrow_and_its_place_share_a_match_key() {
-        let deref = IrPlace {
-            local: 1,
-            projection: vec![IrProjection::Deref],
-        };
-        let whole = IrPlace {
-            local: 1,
-            projection: Vec::new(),
-        };
-        assert_eq!(place_key(&deref, true), place_key(&whole, true));
-        assert_ne!(place_key(&deref, false), place_key(&whole, false));
+    fn variant_bindings_distinguish_updated_values_and_types_ue_55() {
+        assert_ne!(
+            variant_key("before", &Ty::Bool),
+            variant_key("after", &Ty::Bool)
+        );
+        assert_ne!(
+            variant_key("same", &Ty::Nat(Some(8))),
+            variant_key("same", &Ty::Nat(Some(32)))
+        );
     }
 
     #[test]

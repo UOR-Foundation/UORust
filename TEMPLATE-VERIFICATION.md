@@ -552,3 +552,21 @@ triggered repeated batch splitting. The planted regression returned libraryClaim
 instead of holdsNative before the repair. Feedback now reads the exact root
 src/Behavior.lex.tex, the same file the native SDK invocation verifies. Library
 modules remain independent inputs and cannot supply a root declaration's owner.
+
+## Native reference-alias match evidence (UE-55)
+
+The previous frozen producer refuses the paired enum, copied Option and replaced
+enum fixtures with `ProjectionElem::Downcast`: a field read outside a match.
+The compiler uses different temporary references for the discriminant and field
+access even when both read the same immutable value. Native bindings now key by
+the exact value term and its complete type. Copies share match evidence; a
+functional update changes the key and cannot reuse a stale constructor binder.
+
+Three compiler-derived functions pass actual SDK proof trials. Nine closed SDK
+vectors agree with executable Rust reference cases, including replacement after
+a prior match. The overflowing fourth function remains refused. A planted
+assertion that replacement returns its stale value is rejected by the SDK
+because its proposition is false. The regression also requires current native
+candidate eligibility, so historical cached proofs cannot hide a translation
+regression. These are focused development checks; complete `just vv` remains
+the release gate.

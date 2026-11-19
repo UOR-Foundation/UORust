@@ -2708,6 +2708,178 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-55: compiler temporaries preserve matched enum values across reference copies.
+#[test]
+fn native_tuple_reference_matches_preserve_value_identity_ue_55() {
+    let dir=scratch("native-match-aliases",&[("Cargo.toml","[package]\nname=\"match_aliases\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+#[derive(Clone, Copy)] pub enum Choice { A(bool), B }
+pub fn paired(mut n:u8,left:&Choice,right:&Choice)->bool {while n>0 {n-=1;} match(left,right) {(Choice::A(a),Choice::A(b))=>*a==*b,_=>false}}
+pub fn optional(mut n:u8,gate:bool,value:&Option<bool>)->bool {while n>0 {n-=1;} match(gate,value) {(true,Some(flag))=>*flag,_=>false}}
+pub fn updated(mut n:u8,mut value:Choice)->bool {while n>0 {n-=1;} let before=match &value {Choice::A(flag)=>*flag,Choice::B=>false};value=Choice::A(!before);match(&value,&Choice::B) {(Choice::A(flag),_)=>*flag,_=>false}}
+pub fn overflow(mut n:u8,left:&Choice,right:&Choice,x:u8)->u8 {while n>0 {n-=1;} match(left,right) {(Choice::A(_),Choice::A(_))=>x+1,_=>x}}
+#[test] fn reference() {for a in [Choice::A(false),Choice::A(true),Choice::B] {for b in [Choice::A(false),Choice::A(true),Choice::B] {let expected=matches!((a,b),(Choice::A(false),Choice::A(false))|(Choice::A(true),Choice::A(true)));assert_eq!(paired(2,&a,&b),expected);}assert_eq!(updated(2,a),!matches!(a,Choice::A(true)));}assert!(optional(2,true,&Some(true)));assert!(!optional(2,true,&None));assert!(!optional(2,false,&Some(true)));}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-match-aliases");
+    let mut trial = options("match_aliases");
+    trial.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &trial).expect("compiler-derived candidates");
+    for function in ["paired", "optional", "updated"] {
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES)
+                .contains(&format!("match_aliases::{function}\"")),
+            "{function}: {:?}",
+            residue_detail(&proposed, &format!("match_aliases::{function}"))
+        );
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("match-alias-verdicts.toml");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("match_aliases"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        4,
+    )
+    .expect("SDK decisions");
+    let decisions = verdicts(&register);
+    for f in ["paired", "optional", "updated"] {
+        assert!(
+            decisions
+                .rows
+                .values()
+                .any(|r| r.function == format!("match_aliases::{f}")
+                    && matches!(r.status, uorust::mir::verdict::Decision::Proved)),
+            "{f}: {summary:?}"
+        );
+    }
+    assert!(decisions
+        .rows
+        .values()
+        .any(|r| r.function == "match_aliases::overflow"
+            && matches!(r.status, uorust::mir::verdict::Decision::Refused(_))));
+    let mut opts = options("match_aliases");
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut model = String::new();
+    for (i, (f, args, expected)) in [
+        (
+            "paired",
+            "2 (ctor Choice.A true) (ctor Choice.A true)",
+            true,
+        ),
+        (
+            "paired",
+            "2 (ctor Choice.A true) (ctor Choice.A false)",
+            false,
+        ),
+        ("paired", "2 (ctor Choice.B) (ctor Choice.B)", false),
+        ("optional", "2 true (ctor Option.some [Bool] true)", true),
+        ("optional", "2 false (ctor Option.some [Bool] true)", false),
+        ("optional", "2 true (ctor Option.none [Bool])", false),
+        ("updated", "2 (ctor Choice.A true)", false),
+        ("updated", "2 (ctor Choice.A false)", true),
+        ("updated", "2 (ctor Choice.B)", true),
+    ]
+    .iter()
+    .enumerate()
+    {
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&format!("match_aliases::{f}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("definition");
+        let declaration = definition.strip_prefix("Behavior::").expect("namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("match_aliases::{f}"))
+            .and_then(|r| r.axioms.get(declaration))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{ name: vector{i}, parameters: [], statement: (({declaration} {args}) = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+    }
+
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        text(&files, "src/Behavior.lex.tex").replace(
+            "\\end{semanticmodule}",
+            &format!("{model}\\end{{semanticmodule}}"),
+        ),
+    )
+    .expect("vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let updated = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("match_aliases::updated"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let path = out.join("src/Behavior.lex.tex");
+    let valid = std::fs::read_to_string(&path).expect("validated source");
+    let defect=format!("theorem{{ name: plantedStaleBinding, parameters: [], statement: (({updated} 2 (ctor Choice.A true)) = true), proof: decide{{}} }}\n");
+    std::fs::write(
+        &path,
+        valid.replace(
+            "\\end{semanticmodule}",
+            &format!("{defect}\\end{{semanticmodule}}"),
+        ),
+    )
+    .expect("planted stale-value assertion");
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("negative SDK gate");
+    let message = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success() && message.contains("LLV7002") && message.contains("is false"),
+        "{message}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-53: unrelated source assertions do not belong to a native trial's proof closure.
 #[test]
 fn native_trials_keep_only_reachable_obligations_ue_53() {

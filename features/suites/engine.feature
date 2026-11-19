@@ -364,3 +364,11 @@ Feature: engine
     Given a root proof obligation and a lexicographically earlier library Behavior module
     When the SDK points to the root obligation's opening line
     Then UORust attributes the feedback to the root declaration and not the library declaration
+
+  @UE-55 @build
+  Scenario: Compiler-generated enum reference aliases retain match evidence
+    Given enum and option references copied through tuple patterns and an enum replaced after a match
+    When UORust translates the compiler's distinct temporary references
+    Then matching aliases reuse the fields of the same typed immutable value
+    And executable Rust vectors and SDK theorems agree after replacement
+    But a native overflow is still refused

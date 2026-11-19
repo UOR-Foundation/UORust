@@ -381,3 +381,9 @@ id = "UE-54"
 level = "build"
 suite = "engine"
 statement = "Native SDK source locations are attributed against the exact root trial Behavior module even when a projection also contains library Behavior modules, so concrete function refusals are retained instead of repeated as inconclusive batches"
+
+[[id]]
+id = "UE-55"
+level = "build"
+suite = "engine"
+statement = "Native enum matches bind fields to their typed immutable values rather than temporary local addresses, so copied references and tuple-pattern aliases retain the established variant while changed values cannot reuse stale bindings and invalid accesses remain refused"
