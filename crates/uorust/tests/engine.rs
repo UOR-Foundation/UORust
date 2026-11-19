@@ -4039,6 +4039,28 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-62: the delivery policy rejects regressions in the actual automation gate.
+#[test]
+fn factory_delivery_guard_enforces_structural_automation_ue_62() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .to_path_buf();
+    let result = std::process::Command::new("python3")
+        .args(["-I", "crates/uorust/delivery/test_guard.py"])
+        .current_dir(root)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&result.stdout),
+        String::from_utf8_lossy(&result.stderr)
+    );
+}
+
 /// UE-61: function values reuse admitted signatures and standard content borrows.
 #[test]
 fn native_function_items_reuse_admitted_readings_ue_61() {

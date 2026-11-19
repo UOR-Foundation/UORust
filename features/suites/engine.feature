@@ -415,3 +415,11 @@ Feature: engine
     When native Option mapping passes those functions as values
     Then SDK-verified results agree with executable Rust for Some and None
     But mutable signatures, custom owners and incompatible targets remain unadmitted
+
+  @UE-62 @build
+  Scenario: Structural delivery safeguards reject inefficient or unsupported campaigns
+    Given a complete registry and a pinned model runtime authority
+    When a delivery campaign is preflighted against its exact inputs and prior receipts
+    Then leaf plans, partial scopes and unchanged failures are rejected before work
+    And verified identical work reuses its intact receipt
+    But a changed artifact or unsupported completion claim is rejected

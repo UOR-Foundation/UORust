@@ -670,3 +670,25 @@ wrong borrow result produces LLV7002 and the diagnostic that the proposition
 is false. Generated Rust table vectors execute the same Option mapping model.
 The interrupted test run retained its bound native decisions for replay. These
 are focused development checks; complete `just vv` remains the release gate.
+
+## Structural delivery safeguards (UE-62)
+
+The initial regression fails because no delivery preflight exists. The policy
+now requires the complete registry, structural dependency families and an
+authority bound to actual model bytes. The campaign calls this guard before
+proof work. Positive and negative cases cover leaf plans, manual strategies,
+partial scope, wrong authority, missing source bindings, unchanged failures,
+UI work, changed reports and artifacts, baseline loss, and false completion.
+Twenty positive/negative cases pass. A preserved report remains usable after
+the original report path is replaced. An actual planted leaf plan is rejected
+at the consumer entry point without changing native or SDK logs. Identical
+verified work replays in 1.8 seconds without running either verifier. Manual
+semantic-registry changes and reductions of the original source/registry are
+also rejected.
+
+The consumer entry point also binds actual source, compiler MIR, embeddings,
+SDK, producer and verdict bytes. It preserves actual verified receipts and
+checks their manifests before reuse. Workspace instructions persist the user's
+structural delivery requirement without modifying immutable repository policy.
+This guard enforces campaign discipline; it does not create missing Rust
+semantics or change the all-functions finish line. Full `just vv` remains open.
