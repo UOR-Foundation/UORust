@@ -5,14 +5,14 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 341 of 1488 functions of product code are lifted; 881
-# are residue, 92 foreign and 174 effect rows.
+# Honesty report: 344 of 1502 functions of product code are lifted; 882
+# are residue, 95 foreign and 181 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   collision: 1
 #   form: 22
-#   mir::AggregateKind::Closure: 66
+#   mir::AggregateKind::Closure: 67
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
@@ -79,6 +79,7 @@
 #     1 order::tests::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit
 #     1 project::default_refusal::{closure#1}: mir::AggregateKind::Closure: project::default_refusal::{closure#1}::{closure#0}: mir::TerminatorKind::Call: std::char::methods::<impl char>::is_alphanumeric
 #     1 project::enum_equality::{closure#0}: mir::AggregateKind::Closure: project::enum_equality::{closure#0}::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 proof::binds::{closure#0}: type outside the lift: serde_json::Value
 #   mir::Operand::Constant: 35
 #     1 a string LexLean source cannot write
 #     1 certify::<impl certify::profile::Profile>::ratchet_from::promoted[0]
@@ -481,11 +482,11 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1488
-lifted = 341
-residue = 881
-foreign = 92
-effect = 174
+functions = 1502
+lifted = 344
+residue = 882
+foreign = 95
+effect = 181
 
 [[construct]]
 construct = "type outside the lift: Fun.cx: UorustMirLowerCx.consts: IrBody.blocks: IrBlock.statements: IrStatement::Assign.0: IrPlace.projection: IrProjection::Other.0: spec::MirProjectionElem"
@@ -535,7 +536,7 @@ functions = 15
 [[construct]]
 construct = "Fs effect: Path::exists"
 cause = "effect"
-functions = 13
+functions = 14
 
 [[construct]]
 construct = "mir::Ty: std::str::Lines<'_>"
@@ -574,6 +575,11 @@ functions = 10
 
 [[construct]]
 construct = "Fs effect: std::fs::create_dir_all"
+cause = "effect"
+functions = 9
+
+[[construct]]
+construct = "Fs effect: std::fs::read"
 cause = "effect"
 functions = 9
 
@@ -643,7 +649,7 @@ cause = "mir::Ty"
 functions = 7
 
 [[construct]]
-construct = "Fs effect: std::fs::read"
+construct = "Process effect: Command::new"
 cause = "effect"
 functions = 6
 
@@ -661,11 +667,6 @@ functions = 6
 construct = "mir::Ty: std::num::ParseIntError"
 cause = "mir::Ty"
 functions = 6
-
-[[construct]]
-construct = "Process effect: Command::new"
-cause = "effect"
-functions = 5
 
 [[construct]]
 construct = "mir::Rvalue::Discriminant: a discriminant read as a value"
@@ -724,6 +725,11 @@ functions = 4
 
 [[construct]]
 construct = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
+cause = "foreign"
+functions = 4
+
+[[construct]]
+construct = "takes or returns Value, a type of the serde_json crate with no LexLean model"
 cause = "foreign"
 functions = 4
 
@@ -1303,6 +1309,16 @@ cause = "effect"
 functions = 1
 
 [[construct]]
+construct = "calls xtask::proof::check, which reaches an effect"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "calls xtask::proof::observe, which performs a Fs effect: std::fs::read"
+cause = "effect"
+functions = 1
+
+[[construct]]
 construct = "takes or returns &'ast syn::Block, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 1
@@ -1369,11 +1385,6 @@ functions = 1
 
 [[construct]]
 construct = "takes or returns Punctuated<syn::TypeParamBound, syn::Token ! [+]>, a type of the syn crate with no LexLean model"
-cause = "foreign"
-functions = 1
-
-[[construct]]
-construct = "takes or returns Value, a type of the serde_json crate with no LexLean model"
 cause = "foreign"
 functions = 1
 
@@ -1809,6 +1820,11 @@ functions = 1
 
 [[construct]]
 construct = "mir::AggregateKind::Closure: project::enum_equality::{closure#0}: mir::AggregateKind::Closure: project::enum_equality::{closure#0}::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+cause = "mir::AggregateKind::Closure"
+functions = 1
+
+[[construct]]
+construct = "mir::AggregateKind::Closure: proof::binds::{closure#0}: type outside the lift: serde_json::Value"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -8042,6 +8058,12 @@ reason = "mir"
 detail = "mir::Ty: std::iter::Copied<std::slice::Iter<'_, &str>>"
 
 [[residue]]
+kappa = "aa9f2e538cb4e3051647112fdf731e263aa73fa37a70bb0496078673fd9a31f7"
+function = "xtask::proof::binds"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: proof::binds::{closure#0}: type outside the lift: serde_json::Value"
+
+[[residue]]
 kappa = "01d8e4f31fd96bd31df861c2e2e8db7c38a133d5d836e261458235a6bca1b377"
 function = "xtask::scaffold::Capability::parse"
 reason = "mir"
@@ -8512,6 +8534,21 @@ detail = "takes or returns toml::Value, a type of the toml crate with no LexLean
 kappa = "540ca4889f33ed9054727dce400ae758300dab2d48c9c078e5060ebca1967b6a"
 function = "xtask::bootstrap::compare_sdk_inventory"
 detail = "takes or returns serde_json::Value, a type of the serde_json crate with no LexLean model"
+
+[[foreign]]
+kappa = "ed85948bba3898cdd257b8a3f3f45913e7fff3086b02573815c873b0fd9cdf34"
+function = "xtask::proof::acceptance_digest"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
+
+[[foreign]]
+kappa = "ca7d36c763a9ca1ce36e41dfd1d72f0d4c444108626ac3470653b8bef1ae2b97"
+function = "xtask::proof::text"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
+
+[[foreign]]
+kappa = "f996c99c865c15c91814ba724569c89e000f9368c01f0606ac67012165dc4519"
+function = "xtask::proof::workspace_paths"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
 
 [[effect]]
 kappa = "770ac4d9830c9579d0f73a4534fa6afd9f8b4813f06454732d2fbdf69dc26cdc"
@@ -9369,9 +9406,44 @@ function = "xtask::check_model"
 effect = "Fs effect: std::fs::write"
 
 [[effect]]
-kappa = "2a39e42ecb9cab1289762445f968670f7c1494a51249770914ea755955aa9a2b"
+kappa = "d06e88e3f790bb9f6ce95524614086da0a5387bfd51c3637c0ea1ba2573d3ba7"
 function = "xtask::main"
 effect = "Env effect: std::env::args"
+
+[[effect]]
+kappa = "6d5c7898d04bb97d1ec6d3b65b0e6aa44f1cd42bb886ce93d9cf9d74189d32a3"
+function = "xtask::proof::check"
+effect = "calls xtask::proof::observe, which performs a Fs effect: std::fs::read"
+
+[[effect]]
+kappa = "cc7a7c015834ac41a03af3894165119ec1b3c2a60012d0b67814bcac074c341a"
+function = "xtask::proof::inputs"
+effect = "Fs effect: std::fs::read"
+
+[[effect]]
+kappa = "0dbaf98fdb57d67b997889ada05fc778982d93b92e3fe034a105afbd19377d5c"
+function = "xtask::proof::keep"
+effect = "Fs effect: Path::exists"
+
+[[effect]]
+kappa = "0d3e3f3c6dc66c99b80f39406572a4307557c127ffd6b8ea1e3196153783116c"
+function = "xtask::proof::observe"
+effect = "Fs effect: std::fs::read"
+
+[[effect]]
+kappa = "07c8cc1dff40bd9f29e46f249723481f23dffc7eef3843f4442d0245f515dde0"
+function = "xtask::proof::read_kept"
+effect = "Fs effect: std::fs::read"
+
+[[effect]]
+kappa = "80daff23e48bd07127887d37f666dfe124942fe70ae13eec71d19250f64f7ebf"
+function = "xtask::proof::reuse"
+effect = "calls xtask::proof::check, which reaches an effect"
+
+[[effect]]
+kappa = "57a6a12b0378131070dfd4fdaf15276df9ad469585d7379576e79ba435831040"
+function = "xtask::proof::run"
+effect = "Process effect: Command::new"
 
 [[effect]]
 kappa = "630582ab12fcde0d16ee2dd9d552369da07720787c88321b19c3ecdc4cf2783e"
@@ -11052,6 +11124,21 @@ definition = "Behavior::updatePreservesProjectContent"
 kappa = "30497fdb1dad1ab60d11b8b916e1755cd7b9afb0f4302bd74ceff27267db4d3c"
 function = "xtask::bootstrap::workflow_history_is_complete"
 definition = "Behavior::workflowHistoryIsComplete"
+
+[[lifted]]
+kappa = "767665080a8e832189946d379357baf73a8c2b905433fddfe1b9c00a7df9a52f"
+function = "xtask::proof::hex"
+definition = "Behavior::hex"
+
+[[lifted]]
+kappa = "033beba02e07198289969c4b79780b11434a6a1abbd0193d80812ab43520b2ca"
+function = "xtask::proof::is_id"
+definition = "Behavior::isId"
+
+[[lifted]]
+kappa = "e2d0a4cad842282e7677de54d82f8b1e6815ede10303f32e500aab1c5403e95a"
+function = "xtask::proof::same"
+definition = "Behavior::same"
 
 [[lifted]]
 kappa = "8f19c5063aee90357f93316cddddd4883fecfd9d02dfd33e95aa9f5134fe1e35"
