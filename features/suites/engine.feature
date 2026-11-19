@@ -578,3 +578,10 @@ Feature: engine
     When native type resolution checks the model dependency closure
     Then the existing declared types remain available through one lookup
     But a term declaration or undeclared nominal type is not a type authority
+
+  @UE-83 @build
+  Scenario: Recursive regions carry mutable-call results in their lexical frame
+    Given a compiler loop that calls a source-modeled mutable method
+    When its updated state flows into the next recursive region invocation
+    Then one evaluated call result is bound in the recursive evidence scope
+    And SDK value checks and termination evidence accept the whole loop

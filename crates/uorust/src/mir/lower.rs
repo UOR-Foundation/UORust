@@ -202,7 +202,7 @@ enum Val {
 struct Called {
     term: String,
     /// A source result bound before converting it to the native carrier.
-    binding: Option<(String, String, String)>,
+    binding: Option<(String, Ty, String)>,
     updates: BTreeMap<usize, String>,
     guard: Option<String>,
     /// A callee that threads `&mut` parameters: `term` is its tuple, of
@@ -2204,6 +2204,31 @@ impl Fun<'_, '_> {
         });
     }
 
+    /// One transparent, polymorphic frame shares the administrative conversion
+    /// at every call site. Its constructor binder belongs to the SDK's stated
+    /// recursive evidence scope, and the call result is still evaluated once.
+    fn call_binding_schema(&mut self) -> String {
+        let identity = crate::project::sha(b"uorust single-value recursive binding v1");
+        let name = super::codec::binding(&format!("MirBoundValue{identity}"), self.cx.taken);
+        self.used.insert(name.clone());
+        self.aux.entry(name.clone()).or_insert_with(|| Decl::Data {
+            name: name.clone(),
+            type_parameters: vec!["Value".into()],
+            constructors: vec![("Bound".into(), vec!["'Value".into()])],
+            mutual: None,
+        });
+        let proof = format!("{name}Identity");
+        self.aux.entry(proof.clone()).or_insert_with(|| Decl::Theorem {
+            name: proof,
+            type_parameters: vec!["Value".into()],
+            parameters: vec![("value".into(), "'Value".into())],
+            statement: format!("((match (ctor {name}.Bound ['Value] value) | {name}.Bound unbound => unbound) = value)"),
+            proof: "reflexivity{}".into(),
+            axioms: Vec::new(),
+        });
+        name
+    }
+
     fn block(&mut self, b: IrBlockId, mut st: State) -> Lift<Expr> {
         let block = self
             .body
@@ -2344,15 +2369,36 @@ impl Fun<'_, '_> {
                     return self.unreachable(&st, callee);
                 };
                 let binding = self.call_into(destination, callee, args, *target, &mut st)?;
+                let frame =
+                    binding
+                        .as_ref()
+                        .filter(|_| st.inside.is_some())
+                        .map(|(name, ty, value)| {
+                            let schema = self.call_binding_schema();
+                            let scrutinee =
+                                format!("(ctor {schema}.Bound [{}] {value})", ty.render());
+                            st.path.push(MirStep::Match(
+                                scrutinee.clone(),
+                                format!("(ctor {schema}.Bound [{}] {name})", ty.render()),
+                            ));
+                            (scrutinee, format!("{schema}.Bound {name}"))
+                        });
                 let rest = self.goto(*target, st)?;
-                Ok(match binding {
-                    Some((name, ty, value)) => Expr::Let {
+                Ok(match (frame, binding) {
+                    (Some((scrutinee, pattern)), _) => Expr::Match {
+                        scrutinee,
+                        arms: vec![Arm {
+                            pattern,
+                            body: rest,
+                        }],
+                    },
+                    (None, Some((name, ty, value))) => Expr::Let {
                         name,
-                        ty,
+                        ty: ty.render(),
                         value: Box::new(Expr::Flat(value)),
                         body: Box::new(rest),
                     },
-                    None => rest,
+                    (None, None) => rest,
                 })
             }
             IrTerminator::Other(k, _) => Err(kind(k.path(), "")),
@@ -2700,7 +2746,7 @@ impl Fun<'_, '_> {
         args: &[IrOperand],
         target: IrBlockId,
         st: &mut State,
-    ) -> Lift<Option<(String, String, String)>> {
+    ) -> Lift<Option<(String, Ty, String)>> {
         if let Some(g) = self
             .selected(callee, args)
             .filter(|_| destination.projection.is_empty())
@@ -2825,7 +2871,7 @@ impl Fun<'_, '_> {
                 if memory {
                     st.memory = Some(lift::tuple_item(&rt, &name, positions.len() + 1));
                 }
-                binding = Some((name.clone(), rt.render(), term));
+                binding = Some((name.clone(), rt.clone(), term));
                 lift::tuple_item(&rt, &name, 0)
             }
             None => term,
@@ -6293,7 +6339,7 @@ impl Fun<'_, '_> {
                 let represented = self
                     .scalar_representation(&name, &c.result, dt, st)
                     .ok_or_else(bad_types)?;
-                binding = Some((name, c.result.render(), term));
+                binding = Some((name, c.result.clone(), term));
                 represented
             } else {
                 if !c.result.same(dt) {

@@ -103,6 +103,7 @@ model does not sanction.
 | `UE-80` | `build` | Shared auxiliary proof kernels retain exact-input SDK axiom observations independently of their owners’ emission order; current observations transfer only between identical declaration contents; retained observations are policy hints requiring SDK revalidation and never change the kernel’s statement or proof |
 | `UE-81` | `build` | The compiler imports existing source semantics for immutable ABI-compatible receiver and associated call forms, including parameterless standard factories, through a common binder; workspace lookalikes and mutable or incompatible interfaces remain typed residue |
 | `UE-82` | `build` | Imported model type dependencies resolve through actual local algebraic declarations and content-bound qualified prelude type declarations; term declarations, missing names and unrelated namespaces cannot stand for a type |
+| `UE-83` | `build` | Compiler-generated call results inside recursive regions are evaluated once and transported through a shared typed constructor binding; recursive evidence quantifies exactly the enclosing match binders and path hypotheses required by the pinned SDK |
 
 ## factory
 

@@ -1323,3 +1323,30 @@ syntax/proof-slicing tests, four source-import tests, 16 CLI tests,
 repo-conformance, strict workspace/all-target Clippy, generated model,
 immutable template/SDK-lock and self-model checks passed. Full `just vv`,
 translator certification and consumer adoption remain separate open gates.
+
+## UE-83: recursive call bindings
+
+The registered mutable-call loop regression reproduced the consumer's SDK
+LLT4001 in 2.48 seconds before implementation. The pinned SDK recursion planner
+accepts definition parameters and enclosing constructor-match binders, while
+native call lowering introduced an administrative let binder. The change keeps
+the computed call result typed and evaluates it once inside a shared,
+content-bound polymorphic constructor frame. Its identity theorem is proved by
+reflexivity. Recursive path evidence includes the actual constructor match and
+its binder; SDK/template recursion policy remains unchanged.
+
+The actual SDK regression passed 29 Rust comparisons in 108.41 seconds,
+including the formerly rejected mutable-call loop. The existing wrong-result
+control was rejected with LLV7002. The prior consumer campaign remains a stopped
+attempt, not an accepted increase; the last fully accepted count is 656/2,704.
+The next producer must pass the mandatory guarded whole-consumer campaign.
+
+Fourteen lowering tests, eight syntax/proof-slicing tests and four source-import
+controls passed. The strict CLI replay tests detected a changed model whose
+committed fixture still carried the previous binding form. The canonical
+UORust writer imported the newly verified original fixture register and refreshed
+the committed evidence with zero new proofs, zero refusals and zero verifier
+runs. The original pre-change fixture is retained in delivery evidence. All 16
+CLI tests then passed, including byte-identical rooted replay with zero verifier
+runs. Repo-conformance, strict all-target Clippy, generated model, immutable
+template/SDK lock and self-model checks passed. No replay assertion was weakened.

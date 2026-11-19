@@ -4358,7 +4358,7 @@ fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());le
 
 /// UE-64: one model bridge, exercised across unrelated standard receiver types.
 #[test]
-fn native_calls_import_source_semantic_models_ue_64_ue_81_ue_82() {
+fn native_calls_import_source_semantic_models_ue_64_ue_81_ue_82_ue_83() {
     let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
 pub fn fallback(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap_or_default()}
 pub fn error(mut n:u8,x:Result<bool,u8>)->Option<u8> {while n>0 {n-=1;} x.err()}
@@ -4371,6 +4371,10 @@ pub fn empty_map(mut n:u8)->std::collections::BTreeMap<u8,u8> {while n>0 {n-=1;}
 pub enum Payload { Wrapped(u8) }
 pub fn payload_len(mut n:u8,x:&[Payload])->usize {while n>0 {n-=1;} x.iter().len()}
 pub fn reference_len(mut n:u8,x:&[std::rc::Rc<std::cell::RefCell<u8>>])->usize {while n>0 {n-=1;} x.iter().len()}
+pub struct Accumulator { pub flag:bool }
+impl Accumulator {pub fn update(&mut self,x:bool){self.flag=x;}}
+pub fn last(mut n:u8,x:&[bool])->bool {while n>0 {n-=1;} let mut acc=Accumulator{flag:false};for item in x {acc.update(*item);}acc.flag}
+
 
 "#),("src/bin/vectors.rs",r#"
 use source_models::*;
@@ -4382,6 +4386,11 @@ fn main() {
  for x in ["","PRISM","XyZ","PRIΣM"] {println!("ascii|2 {x:?}|{:?}",ascii(2,x));}
  for x in [0,1,64] {assert!(capacity(2,x).is_empty());println!("capacity|2 {x}|(nil Nat)");}
  assert!(empty_map(2).is_empty());println!("empty_map|2|(nil TupleNatNat)");
+ for xs in [vec![],vec![false],vec![true],vec![true,false,true]] {
+  let mut term="(nil Bool)".to_string();
+  for x in xs.iter().rev(){term=format!("(cons {x} {term})");}
+  println!("last|2 {term}|{}",last(2,&xs));
+ }
  for count in [0,1,3] {
   let payloads:Vec<_>=(0..count).map(|i|Payload::Wrapped(i as u8)).collect();
   let references:Vec<_>=(0..count).map(|i|std::rc::Rc::new(std::cell::RefCell::new(i as u8))).collect();
@@ -4408,7 +4417,7 @@ fn main() {
         String::from_utf8_lossy(&rust.stderr)
     );
     let reference = String::from_utf8(rust.stdout).unwrap();
-    assert_eq!(reference.lines().count(), 25);
+    assert_eq!(reference.lines().count(), 29);
     let dumps = dumped(&dir, "source-model-import");
     let mut opts = options("source_models");
     opts.mir = Some(mir_options(
@@ -4426,6 +4435,7 @@ fn main() {
         "empty_map",
         "payload_len",
         "reference_len",
+        "last",
     ] {
         let path = format!("source_models::{f}");
         assert!(
