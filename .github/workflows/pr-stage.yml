@@ -1,0 +1,37 @@
+# Development-stage feedback only. This is NOT MERGE ACCEPTANCE.
+# Foundation-owned bootstrap remains the complete native qualification boundary.
+name: PR development preflight (not acceptance)
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, converted_to_draft, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-stage-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    name: Development readiness (NOT MERGE ACCEPTANCE)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Checkout the exact PR merge candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Reject whitespace errors in the merge candidate
+        shell: bash
+        run: git diff --check HEAD^1 HEAD
+      - name: Test readiness classification and planted refusals
+        run: python3 -I -m unittest discover -s scripts/ci -p 'test_pr_stage.py'
+      - name: Report draft or candidate without declaring acceptance
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 -I scripts/ci/pr_stage.py --event "$GITHUB_EVENT_PATH" \
+            --repo "$REPOSITORY" --output "$GITHUB_OUTPUT" --summary "$GITHUB_STEP_SUMMARY"
