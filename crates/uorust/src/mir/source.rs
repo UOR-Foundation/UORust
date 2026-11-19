@@ -144,8 +144,8 @@ pub(super) fn apply(
     name: &str,
 ) -> Option<Imported> {
     let (owner, method) = inherent(callee)?;
-    let (_, receiver) = args.first()?;
-    if args.len() != texts.len() || source_type(&format!("&{owner}"), types)? != *receiver {
+    let owner_type = source_type(&format!("&{owner}"), types)?;
+    if args.len() != texts.len() {
         return None;
     }
     for ((_, native), text) in args.iter().zip(texts) {
@@ -169,10 +169,9 @@ pub(super) fn apply(
             (name.clone(), name, t.clone())
         })
         .collect();
-    let arguments = params
+    let arguments: Vec<_> = params
         .iter()
         .enumerate()
-        .skip(1)
         .map(|(position, (n, _, t))| match t {
             // A source combinator expects closure syntax. The function carrier
             // is already immutable: eta expansion preserves its value semantics.
@@ -192,48 +191,104 @@ pub(super) fn apply(
             }
             _ => n.clone(),
         })
-        .collect::<Vec<_>>()
-        .join(", ");
-    let syntax: syn::Block =
-        syn::parse_str(&format!("{{ modelArg0.{method}({arguments}) }}")).ok()?;
-    let block = crate::convert::block(&syntax);
-    let candidate = Candidate {
-        rust: name.into(),
-        name: name.into(),
-        called: name.into(),
-        generic: None,
-        params,
-        result: result.clone(),
-        block: &block,
-        imports: BTreeMap::new(),
-        aliases: BTreeMap::new(),
-        homonyms: BTreeMap::new(),
-        formatter: None,
-        seen: Default::default(),
-        threads: Vec::new(),
+        .collect();
+    let owner_syntax: syn::Type = syn::parse_str(&owner.replace("::<", "<")).ok()?;
+    let syn::Type::Path(owner_path) = owner_syntax else {
+        return None;
     };
-    let lifted = lift::lift_models(&[candidate], types, widths, taken);
-    if !lifted.failed.is_empty() || !lifted.divergences.is_empty() || lifted.decls.is_empty() {
+    if owner_path.qself.is_some() {
         return None;
     }
-    let mut decls = crate::order::decls(&lifted.ordered, types);
-    decls.extend(lifted.decls);
-    Some(Imported {
-        term: format!(
-            "({name} {})",
-            args.iter()
-                .map(|(v, _)| v.as_str())
-                .collect::<Vec<_>>()
-                .join(" ")
-        ),
-        decls,
-        types: lifted.types,
+    let owner_name = owner_path.path.segments.last()?.ident.to_string();
+    let mut calls = Vec::new();
+    if args
+        .first()
+        .is_some_and(|(_, receiver)| *receiver == owner_type)
+    {
+        calls.push(format!("modelArg0.{method}({})", arguments[1..].join(", ")));
+    }
+    // The source binder owns the constructor's meaning. This bridge changes
+    // only the invocation form after checking the compiler's owner and ABI.
+    calls.push(format!("{owner_name}::{method}({})", arguments.join(", ")));
+    calls.into_iter().find_map(|call| {
+        let syntax: syn::Block = syn::parse_str(&format!("{{ {call} }}")).ok()?;
+        let block = crate::convert::block(&syntax);
+        let candidate = Candidate {
+            rust: name.into(),
+            name: name.into(),
+            called: name.into(),
+            generic: None,
+            params: params.clone(),
+            result: result.clone(),
+            block: &block,
+            imports: BTreeMap::from([(owner_name.clone(), owner.clone())]),
+            aliases: BTreeMap::new(),
+            homonyms: BTreeMap::new(),
+            formatter: None,
+            seen: Default::default(),
+            threads: Vec::new(),
+        };
+        let lifted = lift::lift_models(&[candidate], types, widths, taken);
+        if !lifted.failed.is_empty() || !lifted.divergences.is_empty() || lifted.decls.is_empty() {
+            return None;
+        }
+        let mut decls = crate::order::decls(&lifted.ordered, types);
+        decls.extend(lifted.decls);
+        Some(Imported {
+            term: format!(
+                "({})",
+                std::iter::once(name)
+                    .chain(args.iter().map(|(v, _)| v.as_str()))
+                    .collect::<Vec<_>>()
+                    .join(" ")
+            ),
+            decls,
+            types: lifted.types,
+        })
     })
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_semantic_calls_include_associated_forms_ue_81() {
+        let types = Types::default();
+        let list = Ty::List(Box::new(Ty::Nat(Some(8))));
+        let map = Ty::Map(Box::new(Ty::Nat(Some(8))), Box::new(Ty::Nat(Some(8))), true);
+        for (path, result) in [
+            ("std::string::String::new", Ty::Str),
+            ("std::vec::Vec::<u8>::new", list),
+            ("std::collections::BTreeMap::<u8,u8>::new", map),
+        ] {
+            let imported = apply(
+                path,
+                &[],
+                &[],
+                &result,
+                &types,
+                &[],
+                &BTreeSet::new(),
+                "importedFactory",
+            );
+            assert!(
+                imported.is_some(),
+                "{path}: existing source meaning was not imported"
+            );
+        }
+        assert!(apply(
+            "workspace::String::new",
+            &[],
+            &[],
+            &Ty::Str,
+            &types,
+            &[],
+            &BTreeSet::new(),
+            "fake"
+        )
+        .is_none());
+    }
 
     #[test]
     fn source_type_readings_keep_native_abi_and_state_boundaries_ue_65() {

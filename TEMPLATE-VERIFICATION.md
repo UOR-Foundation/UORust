@@ -1271,3 +1271,29 @@ The ownership controls, all 16 CLI tests, repo-conformance, strict Clippy,
 generated model, template/SDK-lock and self-model checks passed. The next
 consumer checkpoint retains the completed native decisions and rechecks the
 assembled project through the unchanged SDK acceptance boundary.
+
+## UE-81: shared receiver and associated source imports
+
+The registered regression failed before implementation because the source
+importer required a first receiver argument before consulting existing source
+semantics. The importer now checks the same compiler-owned standard owner,
+argument ABI and immutable schema closure, then submits receiver and associated
+invocations to the existing source binder. Associated invocations retain their
+owner binding, and nullary imported definitions are emitted as explicit calls.
+No standard-operation table, semantic implementation or SDK behavior is added.
+
+The four focused source-import controls pass, including workspace lookalikes,
+incompatible words and recursive mutable payloads. The actual SDK regression
+passed 19 Rust comparisons in 100.00 seconds, including a standard associated
+factory with an argument and a parameterless ordered-map factory. Its planted
+incorrect result was rejected with LLV7002. The proof campaign learned the
+actual SDK axiom observations for the new native decisions rather than changing
+their statements or bypassing exact-policy verification. These fixture results
+do not establish the consumer's lifted count; that requires the mandatory
+whole-consumer campaign. Complete `just vv`, translator certification and
+consumer adoption remain open.
+
+The four source-import controls, all 16 CLI tests, repo-conformance, strict
+workspace/all-target Clippy, generated model, immutable template/SDK lock and
+self-model checks passed with one consistent test optimization override. The
+production executable is built only after these checks and frozen immediately.

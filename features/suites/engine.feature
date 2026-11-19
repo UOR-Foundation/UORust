@@ -564,3 +564,10 @@ Feature: engine
     When one owner carries an exact matched SDK axiom observation
     Then the observation survives either owner emission order
     But a different kernel body cannot inherit that observation
+
+  @UE-81 @build
+  Scenario: Existing semantic models serve receiver and associated compiler calls
+    Given existing source models for immutable standard values
+    When compiler references use either a receiver or an associated call
+    Then the common importer materializes the existing source meaning
+    But unrelated namespaces and incompatible state interfaces remain refused

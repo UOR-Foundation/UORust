@@ -4358,7 +4358,7 @@ fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());le
 
 /// UE-64: one model bridge, exercised across unrelated standard receiver types.
 #[test]
-fn native_calls_import_source_semantic_models_ue_64() {
+fn native_calls_import_source_semantic_models_ue_64_ue_81() {
     let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
 pub fn fallback(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap_or_default()}
 pub fn error(mut n:u8,x:Result<bool,u8>)->Option<u8> {while n>0 {n-=1;} x.err()}
@@ -4366,6 +4366,8 @@ pub fn conditional(mut n:u8,x:bool,y:u8)->Option<u8> {while n>0 {n-=1;} x.then_s
 pub fn ascii(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_ascii_lowercase()}
 pub fn panic_default(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap()}
 pub fn unicode(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_lowercase()}
+pub fn capacity(mut n:u8,x:usize)->Vec<u8> {while n>0 {n-=1;} Vec::with_capacity(x)}
+pub fn empty_map(mut n:u8)->std::collections::BTreeMap<u8,u8> {while n>0 {n-=1;} std::collections::BTreeMap::new()}
 "#),("src/bin/vectors.rs",r#"
 use source_models::*;
 fn option(x:Option<u8>)->String {match x {None=>"(ctor Option.none [Nat])".into(),Some(v)=>format!("(ctor Option.some [Nat] {v})")}}
@@ -4374,6 +4376,8 @@ fn main() {
  for x in [Ok(false),Ok(true),Err(0),Err(255)] {let term=match x {Ok(v)=>format!("(ctor Result.ok [Bool, Nat] {v})"),Err(e)=>format!("(ctor Result.error [Bool, Nat] {e})")};println!("error|2 {term}|{}",option(error(2,x)));}
  for x in [false,true] {for y in [0,255] {println!("conditional|2 {x} {y}|{}",option(conditional(2,x,y)));}}
  for x in ["","PRISM","XyZ","PRIΣM"] {println!("ascii|2 {x:?}|{:?}",ascii(2,x));}
+ for x in [0,1,64] {assert!(capacity(2,x).is_empty());println!("capacity|2 {x}|(nil Nat)");}
+ assert!(empty_map(2).is_empty());println!("empty_map|2|(nil TupleNatNat)");
 }
 "#)]);
     let rust = std::process::Command::new("cargo")
@@ -4387,7 +4391,7 @@ fn main() {
         String::from_utf8_lossy(&rust.stderr)
     );
     let reference = String::from_utf8(rust.stdout).unwrap();
-    assert_eq!(reference.lines().count(), 15);
+    assert_eq!(reference.lines().count(), 19);
     let dumps = dumped(&dir, "source-model-import");
     let mut opts = options("source_models");
     opts.mir = Some(mir_options(
@@ -4396,7 +4400,14 @@ fn main() {
         uorust::mir::Trial::All,
     ));
     let proposed = uorust::project_workspace(&dir, &opts).unwrap();
-    for f in ["fallback", "error", "conditional", "ascii"] {
+    for f in [
+        "fallback",
+        "error",
+        "conditional",
+        "ascii",
+        "capacity",
+        "empty_map",
+    ] {
         let path = format!("source_models::{f}");
         assert!(
             text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),

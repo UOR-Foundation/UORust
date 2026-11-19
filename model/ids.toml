@@ -537,3 +537,9 @@ id = "UE-80"
 level = "build"
 suite = "engine"
 statement = "Shared auxiliary proof kernels retain exact-input SDK axiom observations independently of their owners’ emission order; current observations transfer only between identical declaration contents; retained observations are policy hints requiring SDK revalidation and never change the kernel’s statement or proof"
+
+[[id]]
+id = "UE-81"
+level = "build"
+suite = "engine"
+statement = "The compiler imports existing source semantics for immutable ABI-compatible receiver and associated call forms, including parameterless standard factories, through a common binder; workspace lookalikes and mutable or incompatible interfaces remain typed residue"
