@@ -4049,6 +4049,7 @@ fn behavior(
             }
         }
     }
+    let mut native_shapes = Vec::new();
     let scopes: Vec<Types> = declared
         .into_iter()
         .enumerate()
@@ -4158,6 +4159,7 @@ fn behavior(
                     structs.insert(name.clone(), vec![lift::unread_shape(why)]);
                 }
             }
+            native_shapes.push(structs.clone());
             Types {
                 derives,
                 ..Types::with_data(enums, &datas, &structs, aliases)
@@ -4238,6 +4240,7 @@ fn behavior(
                     scope.aliases.insert(printed, lex.clone());
                 }
             }
+            crate::mir::views::bind(&mut scope, &native_shapes[pkg]);
             mir_scopes.insert((pkg, target), scope);
         }
     }
@@ -5410,12 +5413,27 @@ fn mir_lift(
         })();
         match sig {
             Ok((params, result, positions, full)) => {
+                let mut generic = generics.get(&r).cloned().unwrap_or(lift::Generic {
+                    types: Vec::new(),
+                    reads: BTreeMap::new(),
+                    dictionary: Vec::new(),
+                });
+                for parameter in params
+                    .iter()
+                    .chain(std::iter::once(&result))
+                    .flat_map(Ty::parameters)
+                {
+                    if !generic.types.contains(&parameter) {
+                        generic.types.push(parameter);
+                    }
+                }
                 callees.insert(
                     path.clone(),
                     lower::Callee {
                         name: name.clone(),
                         params,
-                        generic: generics.get(&r).cloned(),
+                        generic: (!generic.types.is_empty() || !generic.dictionary.is_empty())
+                            .then_some(generic),
                         result,
                         threads: (!positions.is_empty()).then_some((full, positions)),
                     },
@@ -5456,7 +5474,7 @@ fn mir_lift(
         };
         match lower::lower(&cx, body, &name) {
             Ok(mut lowered) => {
-                if let Some(generic) = generics.get(&r) {
+                if let Some(generic) = callees.get(&path).and_then(|c| c.generic.as_ref()) {
                     crate::lex::bind_parameters(
                         &mut lowered.decls,
                         &mut lowered.aux,

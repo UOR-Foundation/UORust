@@ -342,14 +342,19 @@ fn the_cli_dumps_mir_and_proves_on_the_verdicts_ue_17() {
     assert!(String::from_utf8_lossy(&proved.stdout).contains("in 0 verifier runs"));
     let migrated = std::fs::read_to_string(&verdicts).expect("verdicts");
     assert!(migrated.contains("model_context_sha256 = "));
-    let original: String = migrated
-        .split_inclusive('\n')
-        .filter(|line| !line.starts_with("model_context_sha256 = "))
-        .collect();
+    let without_observations = |text: &str| -> String {
+        text.split_inclusive('\n')
+            .filter(|line| !line.starts_with("model_context_sha256 = "))
+            .collect()
+    };
     assert_eq!(
-        original, committed,
+        without_observations(&migrated),
+        without_observations(&committed),
         "migration changed original decision evidence"
     );
+    if committed.contains("model_context_sha256 = ") {
+        assert_eq!(migrated, committed, "existing rooted evidence changed");
+    }
     let replayed = prove();
     assert!(
         replayed.status.success(),

@@ -813,7 +813,17 @@ fn through_pointer(what: &str) -> Residue {
 
 /// Translate one body to the definition `name`.
 pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
-    if !cx.types.generic.is_empty() {
+    if !cx.types.generic.is_empty()
+        || body
+            .locals
+            .iter()
+            .any(|t| super::views::touches(t, cx.types))
+        || body
+            .locals
+            .iter()
+            .filter_map(|t| ty(t, cx.types).ok())
+            .any(|t| !t.parameters().is_empty())
+    {
         let mut pending = vec![0];
         let mut visited = BTreeSet::new();
         while let Some(block) = pending.pop() {
@@ -5915,7 +5925,9 @@ impl Fun<'_, '_> {
             .and_then(|q| q.rsplit_once(">::").map(|(q, _)| q))
             .and_then(|q| q.split_once(" as "))
         {
-            if ty(owner, self.cx.types).is_ok_and(|t| !t.parameters().is_empty()) {
+            if super::views::touches(owner, self.cx.types)
+                || ty(owner, self.cx.types).is_ok_and(|t| !t.parameters().is_empty())
+            {
                 return Err(kind(
                     k,
                     "parametric trait dispatch needs an admitted dictionary",
@@ -8078,6 +8090,9 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
 fn native_type(text: &str, types: &Types) -> Lift<Ty> {
     let t = text.trim();
     if let Some(reading) = types.generic.get(t) {
+        return Ok(reading.clone());
+    }
+    if let Some(reading) = types.native_views.get(&types.resolve(t)) {
         return Ok(reading.clone());
     }
     let bad = || Err(Residue::Type(t.to_string()));

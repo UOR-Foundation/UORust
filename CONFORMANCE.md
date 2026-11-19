@@ -89,6 +89,7 @@ model does not sanction.
 | `UE-66` | `build` | Compiler calls compose source-lifted generic dependencies through the existing source generic-call binder, retaining exact type-parameter identities, coherent trait dictionary methods and dependency evidence; missing implementations, incompatible dictionary signatures, mutable interfaces and native ABI mismatches remain typed refusals |
 | `UE-67` | `build` | Compiler bodies reuse declared source type-parameter readings and preserve them through SDK-owned products and generated control-flow declarations with explicit generic dependency bindings; generic drop effects, unresolved dictionary dispatch and unsupported state remain typed residue rather than receiving invented meanings |
 | `UE-68` | `build` | Native proof reuse binds the emitted dependency closure and pinned SDK assets, preserving intact original decisions across unrelated source-context changes while invalidating reached body or schema changes; legacy decision metadata is learned only under its exact original binding, and no proof status is fabricated |
+| `UE-69` | `build` | Compiler struct views preserve every declared field through SDK products, retaining unavailable field meanings as parametric values while compiling known field access and update; incomplete shapes, recursive unfolding, opaque operations, unresolved dispatch and unmodeled drop effects remain typed residue |
 
 ## factory
 

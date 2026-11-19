@@ -465,3 +465,9 @@ id = "UE-68"
 level = "build"
 suite = "engine"
 statement = "Native proof reuse binds the emitted dependency closure and pinned SDK assets, preserving intact original decisions across unrelated source-context changes while invalidating reached body or schema changes; legacy decision metadata is learned only under its exact original binding, and no proof status is fabricated"
+
+[[id]]
+id = "UE-69"
+level = "build"
+suite = "engine"
+statement = "Compiler struct views preserve every declared field through SDK products, retaining unavailable field meanings as parametric values while compiling known field access and update; incomplete shapes, recursive unfolding, opaque operations, unresolved dispatch and unmodeled drop effects remain typed residue"

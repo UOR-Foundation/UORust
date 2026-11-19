@@ -916,3 +916,38 @@ those lines, and the following replay is byte-identical with zero verifier calls
 Clippy, model/template/SDK-lock and generated self-model checks passed. No cached
 proof status, diagnostic or legacy digest was fabricated or manually reassigned.
 Complete `just vv` and translator certification remain separate open gates.
+
+## UE-69: native product views preserve unavailable fields
+
+The initial real-compiler regression failed at `mir::Ty: Holder`: an unknown
+service field prevented access to an independent Boolean field. The common
+reader now retains complete declared field order in SDK products. It composes
+views along the existing source dependency graph and retains unavailable fields
+as abstract values whose identities bind their source readings. Recursive edges
+stay abstract, and incomplete shapes are never guessed. Source admission and
+existing closed nominal schemas retain their prior representation.
+
+Five actual native SDK proofs passed, including a nested field access, a call
+between compiler bodies, and an exclusive update preserving its opaque payload.
+48 executable-Rust comparisons passed; the service implementation panics if
+called, so these field operations cannot obtain a result by invoking it. A
+planted incorrect Boolean result was rejected by the actual SDK. The first
+proof and differential run took 161.79 seconds. Unavailable service operations,
+parametric drop glue, unresolved custom trait dispatch and incomplete generic
+structs stay residue. A separate custom inherent-call check confirms a blocked
+dependency cannot acquire the meaning of a same-named standard adapter.
+
+A unit regression checks nested dependency composition, retained field count
+and order, source-bound opaque identities, mutable-reference detection, cyclic
+edge abstraction and incomplete-shape refusal. The existing code-identity gate
+rejected the new module until it was included in the bound production sources.
+The delivery preflight and frozen standard semantic registry remain intact.
+
+Final focused checks passed: 438 library tests, all 16 CLI tests, conformance
+meta-tests, both struct-view engine regressions, strict all-target Clippy,
+model/template/SDK-lock and generated self-model checks. The CLI register was
+refreshed from actual tool-written SDK decisions, retaining ten proved and one
+refused status and recording rooted observations for all eleven decisions. The
+replay now takes zero verifier calls and keeps existing rooted evidence exactly;
+legacy migration remains covered independently by UE-68. Full `just vv`,
+translator certification and consumer adoption remain open release boundaries.

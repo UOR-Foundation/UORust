@@ -463,6 +463,9 @@ pub(crate) struct Types {
     /// type its one `Fn` bound names). A type parameter's name shadows a
     /// type of the same name, as Rust's own scoping has it.
     pub(crate) generic: BTreeMap<String, Ty>,
+    /// Native-only views of complete source structs. Unread fields remain
+    /// abstract values; this supplies no operation on their contents.
+    pub(crate) native_views: BTreeMap<String, Ty>,
     /// The method each type's impl of a trait of the crate gives: (the
     /// trait, as a dictionary entry names it; the type, by LexLean name;
     /// the method) -> the key the impl's method lifts under.

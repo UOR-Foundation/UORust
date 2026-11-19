@@ -38,6 +38,7 @@ mod intrinsic;
 pub(crate) mod ir;
 mod prove;
 mod source;
+pub(crate) mod views;
 // Generated: its layout is the generator's, which the std test compares.
 #[cfg(test)]
 #[rustfmt::skip]

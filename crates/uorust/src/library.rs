@@ -92,6 +92,7 @@ const CODE: &[(&str, &str)] = &[
     ("src/mir/stdlib.rs", include_str!("mir/stdlib.rs")),
     ("src/mir/trips.rs", include_str!("mir/trips.rs")),
     ("src/mir/verdict.rs", include_str!("mir/verdict.rs")),
+    ("src/mir/views.rs", include_str!("mir/views.rs")),
     ("src/names.rs", include_str!("names.rs")),
     ("src/order.rs", include_str!("order.rs")),
     ("src/ownership.rs", include_str!("ownership.rs")),

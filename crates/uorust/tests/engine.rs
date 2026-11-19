@@ -6071,3 +6071,193 @@ pub fn refused(a:u8)->u8 {a+1}
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-69: field transport does not require invented service semantics.
+#[test]
+fn compiler_struct_views_preserve_opaque_fields_ue_69() {
+    let dir=scratch("native-struct-views",&[("Cargo.toml","[package]\nname=\"struct_views\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Holder {pub ready:bool,pub service:Box<dyn Service>}
+pub fn known(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.ready}
+pub struct Outer {pub inner:Holder,pub tag:u8}
+pub fn nested(mut n:u8,x:&Outer)->u8 {while n>0 {n-=1;}if x.inner.ready {x.tag} else {0}}
+pub fn caller(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}known(n,x)}
+pub fn changed(mut n:u8,x:&mut Holder)->bool {while n>0 {n-=1;}x.ready=!x.ready;x.ready}
+pub fn unknown(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.service.run()}
+pub fn discard(mut n:u8,x:Holder)->bool {while n>0 {n-=1;}x.ready}
+pub trait Mimic {fn clone(&self)->bool;}
+impl Mimic for Holder {fn clone(&self)->bool {!self.ready}}
+pub fn mimic(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.clone()}
+pub struct Generic<T> {pub ready:bool,pub service:T}
+pub fn incomplete(mut n:u8,x:&Generic<Box<dyn Service>>)->bool {while n>0 {n-=1;}x.ready}
+"#),("src/bin/vectors.rs",r#"
+use struct_views::*;
+struct Unused(u8);impl Service for Unused {fn run(&self)->bool {panic!("service was evaluated: {}",self.0)}}
+fn main(){for n in [0,2] {for ready in [false,true] {for payload in [0u8,23,255] {
+ let holder=||Holder{ready,service:Box::new(Unused(payload))};
+ println!("known|{n}|{ready}|{payload}|{}",known(n,&holder()));
+ println!("caller|{n}|{ready}|{payload}|{}",caller(n,&holder()));
+ println!("nested|{n}|{ready}|{payload}|{}",nested(n,&Outer{inner:holder(),tag:payload}));
+ let mut x=holder();let result=changed(n,&mut x);println!("changed|{n}|{ready}|{payload}|({result}, ({}, {payload}))",x.ready);
+}}}}
+"#)]);
+    let checked = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let dumps = dumped(&dir, "native-struct-views");
+    let mut opts = options("struct_views");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("struct_views::known\""),
+        "{:?}",
+        residue_detail(&files, "struct_views::known")
+    );
+    for f in ["known", "nested", "caller", "changed"] {
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("struct_views::{f}\"")),
+            "{f}: {:?}",
+            residue_detail(&files, &format!("struct_views::{f}"))
+        );
+    }
+    for f in ["unknown", "discard", "mimic", "incomplete"] {
+        assert!(
+            residue_detail(&files, &format!("struct_views::{f}")).is_some(),
+            "{f} acquired invented semantics"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("native-struct-view-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("struct_views"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(checked.stdout).unwrap();
+    assert_eq!(output.lines().count(), 48);
+    let mut vectors = String::new();
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("struct_views::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let value = if p[0] == "nested" {
+            format!("(({}, {}), {})", p[2], p[3], p[3])
+        } else {
+            format!("({}, {})", p[2], p[3])
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: structViewVector{i}, parameters: [], statement: (({name} [Nat] {} {value}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[4],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= true)", "= false)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-69: a nominal service call cannot fall through to a same-named adapter.
+#[test]
+fn compiler_struct_views_refuse_unbound_custom_calls_ue_69() {
+    let dir=scratch("native-view-custom-dispatch",&[("Cargo.toml","[package]\nname=\"view_dispatch\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Holder {pub ready:bool,pub service:Box<dyn Service>}
+pub struct Always;impl Service for Always {fn run(&self)->bool {true}}
+impl Holder {pub fn to_owned(&self)->Self {Holder{ready:!self.ready,service:Box::new(Always)}}}
+pub fn impostor(mut n:u8,x:&Holder)->Holder {while n>0 {n-=1;}x.to_owned()}
+"#)]);
+    let checked = std::process::Command::new("cargo")
+        .args(["check", "--offline", "--quiet"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let dumps = dumped(&dir, "native-view-custom-dispatch");
+    let mut opts = options("view_dispatch");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&files, "view_dispatch::impostor").is_some(),
+        "an unbound custom call acquired a standard adapter meaning"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

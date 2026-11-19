@@ -480,3 +480,10 @@ Feature: engine
     When an unrelated source definition changes without changing those dependencies
     Then their rooted model identities and intact original decisions are reused
     But changing a reached definition or schema requires a new actual SDK decision
+
+  @UE-69 @build
+  Scenario: Compiler products preserve opaque fields without inventing their operations
+    Given complete declared structs containing known fields and unavailable service values
+    When native lowering composes their dependency views through SDK products
+    Then known field access and update agree with executable Rust while retaining opaque payloads
+    But opaque methods, incomplete shapes and unmodeled drop effects remain typed refusals
