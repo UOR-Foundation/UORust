@@ -54,9 +54,11 @@ for attempt in $(seq 1 1000000); do
   # the embedding's census stamps each row; the verified columns are
   # carried; an empty merge rewrites the summary over them.
   rm -rf target/embed-head target/no-shards && mkdir -p target/no-shards
-  if ! scripts/ci/sdk.sh "cargo build --locked -p uorust && scripts/mir/dump-lib.sh $crate --modules >/dev/null && target/debug/uorust $crate --mir target/mir --library $library --register $register && target/debug/uorust embed --crate $crate --mir target/mir --library $library --out target/embed-head --register $register && target/debug/uorust carry --from target/measured --register $register --measured $measured && target/debug/uorust merge --crate $crate --shards target/no-shards --register $register"; then
-    echo "land: the census on $(git rev-parse HEAD) refused; its own run regenerates"
-    exit 0
+  census_status=0
+  scripts/ci/sdk.sh "cargo build --locked -p uorust && scripts/mir/dump-lib.sh $crate --modules >/dev/null && target/debug/uorust $crate --mir target/mir --library $library --register $register && target/debug/uorust embed --crate $crate --mir target/mir --library $library --out target/embed-head --register $register && target/debug/uorust carry --from target/measured --register $register --measured $measured && target/debug/uorust merge --crate $crate --shards target/no-shards --register $register" || census_status=$?
+  if (( census_status != 0 )); then
+    echo "land: refreshed census on $(git rev-parse HEAD) failed with exit $census_status; no acceptance can be claimed" >&2
+    exit "$census_status"
   fi
   python3 -I scripts/mir/ledger.py record "$register" target/shards
   took=$(( $(date +%s) - started ))
