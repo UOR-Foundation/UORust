@@ -60,16 +60,17 @@ class StageTest(unittest.TestCase):
             mod.classify(event(False, "converted_to_draft"), REPO)
 
     def test_workflow_is_non_skipping_and_non_authorizing(self):
-        workflow = (SOURCE.parents[2] / ".github/workflows/pr-stage.yml").read_text()
+        workflow = (SOURCE.parents[2] / ".github/workflows/try-page.yml").read_text()
         self.assertIn("  pull_request:", workflow)
         self.assertNotIn("    paths:", workflow)
         self.assertNotIn("    paths-ignore:", workflow)
-        self.assertNotIn("    if:", workflow)
         self.assertIn("fetch-depth: 0", workflow)
         self.assertIn("persist-credentials: false", workflow)
         self.assertIn("git diff --check HEAD^1 HEAD", workflow)
         self.assertIn("NOT MERGE ACCEPTANCE", workflow)
         self.assertIn("scripts/ci/pr_stage.py", workflow)
+        self.assertIn("if: github.event_name == 'pull_request'", workflow)
+        self.assertFalse((SOURCE.parents[2] / ".github/workflows/pr-stage.yml").exists())
 
 
 if __name__ == "__main__":

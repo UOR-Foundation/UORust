@@ -24,6 +24,21 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      # CI development feedback reuses this existing PR job; it is not full acceptance.
+      - name: Check PR merge-candidate diff before browser tests
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: git diff --check HEAD^1 HEAD
+      - name: Reject forged or malformed PR stage events
+        if: github.event_name == 'pull_request'
+        run: python3 -I -m unittest discover -s scripts/ci -p 'test_pr_stage.py'
+      - name: Report development or review candidate (NOT MERGE ACCEPTANCE)
+        if: github.event_name == 'pull_request'
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 -I scripts/ci/pr_stage.py --event "$GITHUB_EVENT_PATH" \
+            --repo "$REPOSITORY" --summary "$GITHUB_STEP_SUMMARY"
       - name: Install Node 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
