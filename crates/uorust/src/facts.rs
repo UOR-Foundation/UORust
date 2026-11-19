@@ -17,8 +17,6 @@ impl Span {
 
 #[derive(Clone, Debug)]
 pub(crate) struct Workspace {
-    /// The workspace directory name, the project's name.
-    pub(crate) name: String,
     pub(crate) packages: Vec<Package>,
     pub(crate) lock: Vec<LockedPackage>,
     pub(crate) has_deny: bool,
@@ -28,6 +26,10 @@ pub(crate) struct Workspace {
     pub(crate) advisories: Option<Advisories>,
     /// The targets `rust-toolchain.toml` declares the workspace is built for.
     pub(crate) targets: Vec<String>,
+    /// The Cargo configuration files that apply to the workspace and
+    /// replace a source or override a package's path (`[source]`,
+    /// `paths`): Cargo then builds what they name, not the locked archive.
+    pub(crate) replaced: Vec<String>,
 }
 
 /// What an advisory database says about the locked packages.
@@ -71,6 +73,8 @@ pub(crate) struct Package {
     pub(crate) homepage: String,
     pub(crate) license: String,
     pub(crate) rust_version: Option<String>,
+    /// The Rust edition the package's manifest states.
+    pub(crate) edition: String,
     pub(crate) authors: Vec<String>,
     /// The package directory relative to the workspace root.
     pub(crate) dir: String,
@@ -101,12 +105,17 @@ pub(crate) struct Target {
 #[derive(Clone, Debug)]
 pub(crate) struct Dep {
     pub(crate) name: String,
+    /// The name the package's code knows the dependency by, where the
+    /// manifest renames it (`big = { package = "num-bigint" }`).
+    pub(crate) rename: Option<String>,
     /// `normal`, `dev` or `build`.
     pub(crate) kind: String,
-    /// The path of a path dependency relative to the workspace root, or the
-    /// absolute path when it lies outside it.
+    /// The path of a path dependency relative to the workspace root, with
+    /// `..` steps when it lies outside it.
     pub(crate) path: Option<String>,
     pub(crate) inside: bool,
+    /// The platform a `[target.'..'.dependencies]` table restricts it to.
+    pub(crate) platform: Option<String>,
 }
 
 /// What one source file holds.
@@ -117,6 +126,9 @@ pub(crate) struct SourceFile {
     pub(crate) target: usize,
     /// The module path inside the target, `""` for the root.
     pub(crate) module: String,
+    /// Whether the whole file is test code: a test target's file, or a
+    /// file only test code declares as a module.
+    pub(crate) test: bool,
     pub(crate) parse_error: Option<String>,
     pub(crate) doc: String,
     pub(crate) forbids_unsafe: bool,
@@ -124,6 +136,18 @@ pub(crate) struct SourceFile {
     pub(crate) enums: Vec<EnumFact>,
     pub(crate) structs: Vec<StructFact>,
     pub(crate) error_impls: Vec<String>,
+    /// Every type the file declares, inline modules included: each struct,
+    /// enum, union, trait, trait alias and type alias, with the module scope
+    /// that declares it (an index into `scopes`), by name, at the line of its
+    /// name. A construct of the lift register names the sites that define
+    /// the types it writes from these.
+    pub(crate) declared: Vec<(usize, String, Span)>,
+    /// The traits the file declares, each with what a dictionary of its
+    /// methods does not read.
+    pub(crate) trait_decls: Vec<TraitFact>,
+    /// The file's impls of a trait, methods or none: which types a call
+    /// through the trait can select an impl of.
+    pub(crate) trait_impls: Vec<TraitImpl>,
     /// The types the file declares in a shape the lift does not read, each
     /// with that shape (`a tuple struct`).
     pub(crate) unread: Vec<(String, &'static str)>,
@@ -136,6 +160,107 @@ pub(crate) struct SourceFile {
     pub(crate) capabilities: Vec<(Capability, Span, String)>,
     /// `use` imports: the imported name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
+    /// The macros product code of the file invokes in item position (or
+    /// among a trait's items), by the last segment of their path: the
+    /// items they expand to are in no fact (see [`Package::makes_items`]).
+    pub(crate) item_macros: Vec<String>,
+    /// The macros the file defines by `macro_rules!`.
+    pub(crate) macro_defs: Vec<String>,
+}
+
+impl ScopeFact {
+    /// Whether the scope (the `i`th of its file, the file's own first) has
+    /// a glob import that may reach outside its file: any but `use
+    /// super::*` of an inline module, which names the module around it in
+    /// the same file.
+    pub(crate) fn outward_glob(&self, i: usize) -> bool {
+        self.globs.iter().any(|g| i == 0 || g != "super")
+    }
+}
+
+/// The standard library's macros whose expansion in item position
+/// declares no type, trait or module: `thread_local!` declares only the
+/// `static` keys it names (`std::thread::LocalKey`, the macro's own
+/// documentation).
+const STATICS_ONLY: [&str; 1] = ["thread_local"];
+
+impl Package {
+    /// Whether file `fi` invokes a macro in item position that may make an
+    /// item (a type, a trait, a module, an `impl`) no fact holds: any but a
+    /// standard macro of [`STATICS_ONLY`], which counts only where nothing
+    /// of the package defines or imports a macro of its name.
+    pub(crate) fn file_makes_items(&self, fi: usize) -> bool {
+        let shadowed = |name: &str| {
+            self.files.iter().any(|f| {
+                f.macro_defs.iter().any(|d| d == name)
+                    || f.scopes
+                        .iter()
+                        .any(|s| s.uses.iter().any(|(n, _)| n == name))
+            })
+        };
+        self.files[fi]
+            .item_macros
+            .iter()
+            .any(|m| !STATICS_ONLY.contains(&m.as_str()) || shadowed(m))
+    }
+
+    /// Whether a file of the same target as file `fi` makes such items: a
+    /// target is one crate, and another target's items are not in its
+    /// scope.
+    pub(crate) fn makes_items(&self, fi: usize) -> bool {
+        let target = self.files[fi].target;
+        (0..self.files.len()).any(|i| self.files[i].target == target && self.file_makes_items(i))
+    }
+}
+
+impl SourceFile {
+    /// The module an item of the scope `scope` (an index of `scopes`)
+    /// stands in, inside its target: the file's module joined with the
+    /// scope's inline modules. It is the module Rust names the item
+    /// through, so two items of one kind and name are one item only where
+    /// this is the same: `go` of the crate root and `go` of an inline
+    /// `mod inner` beside it are two.
+    pub(crate) fn item_module(&self, scope: usize) -> String {
+        let inline = self.scopes.get(scope).map_or("", |s| s.module.as_str());
+        match (self.module.as_str(), inline) {
+            (outer, "") => outer.to_string(),
+            ("", inner) => inner.to_string(),
+            (outer, inner) => format!("{outer}::{inner}"),
+        }
+    }
+}
+
+/// A trait declaration: what, besides its methods, it asks of an
+/// implementing type.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct TraitFact {
+    pub(crate) name: String,
+    /// The index of the module scope it is declared in.
+    pub(crate) scope: usize,
+    /// Its type and const parameters: a trait implemented once per
+    /// argument list.
+    pub(crate) params: Vec<String>,
+    /// Its supertraits as written, and any `where` clause on `Self`.
+    pub(crate) supertraits: Vec<String>,
+    /// Its associated types and constants, by name.
+    pub(crate) associated: Vec<String>,
+    /// `unsafe trait`: an implementation promises what no method states.
+    pub(crate) marked: bool,
+}
+
+/// An `impl Trait for Type`, whatever methods it writes.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct TraitImpl {
+    /// The trait's path as written, without arguments.
+    pub(crate) trait_path: String,
+    /// The self type as written.
+    pub(crate) self_ty: String,
+    /// The self type where it is a path with no arguments that names no
+    /// parameter of the impl: a type by its own name, not a reference, a
+    /// box or any type a blanket impl covers.
+    pub(crate) plain: Option<String>,
+    /// The index of the module scope it is written in.
+    pub(crate) scope: usize,
 }
 
 #[derive(Clone, Debug)]
@@ -167,7 +292,8 @@ pub(crate) struct FnFact {
     /// For a method of `impl Trait for Type`: the trait's last segment.
     pub(crate) implements: Option<String>,
     /// For a method of `impl Trait for Type`: the trait as the impl names
-    /// it, its last segment with its arguments (`From<u8>`).
+    /// it, its last segment with its arguments (`From<u8>`), qualified when
+    /// distinct trait paths would otherwise share a function identity.
     pub(crate) trait_ref: Option<String>,
     /// Whether the method's type has another method of its name in the same
     /// build: an inherent one beside a trait's, two traits', or one generic
@@ -186,6 +312,10 @@ pub(crate) struct FnFact {
     /// Which of its file's module scopes (`SourceFile::scopes`) declares
     /// the function.
     pub(crate) scope: usize,
+    /// For a method of an `impl` block: the line and the column (from 1,
+    /// in characters) its header starts at, by which the compiler's dump
+    /// names the impl (`<impl at file:line:column: ..>`).
+    pub(crate) impl_at: Option<(usize, usize)>,
 }
 
 /// One module scope of a file: the file's own items, or an inline module's.
@@ -193,26 +323,43 @@ pub(crate) struct FnFact {
 /// inherits no name from the module around it.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct ScopeFact {
+    /// The scope's module path inside its file: `""` for the file's own
+    /// items, `a::b` for an inline `mod b` inside an inline `mod a`. Rust
+    /// names every item of the scope through it (`SourceFile::item_module`).
+    pub(crate) module: String,
     /// Each name a `use` of the scope binds, with the path it names.
     pub(crate) uses: Vec<(String, String)>,
     /// Whether a `use` of the scope ends in `*`: it may bind any name.
     pub(crate) glob: bool,
+    /// The path of each glob import of the scope, as written.
+    pub(crate) globs: Vec<String>,
     /// The traits the scope declares.
     pub(crate) traits: Vec<String>,
     /// The modules the scope declares out of line, each a file of its own.
     pub(crate) mods: Vec<String>,
+    /// The macros the scope invokes in item position, each with the
+    /// identifiers its arguments write and where: an item such a macro
+    /// expands to is declared in the scope, though no item of the source
+    /// names it.
+    pub(crate) invoked: Vec<(Vec<String>, Span)>,
 }
 
 #[derive(Clone, Debug)]
 pub(crate) struct EnumFact {
     pub(crate) name: String,
     pub(crate) span: Span,
+    /// Which of its file's module scopes (`SourceFile::scopes`) declares
+    /// the enum.
+    pub(crate) scope: usize,
     pub(crate) derives: Vec<String>,
     /// Whether a variant sets its discriminant (`A = 5`): the values MIR
     /// switches on are then not the variants' positions.
     pub(crate) explicit: bool,
     /// Variant name, whether it is a unit variant, its doc, whether `#[default]`.
     pub(crate) variants: Vec<Variant>,
+    /// Each variant's fields, `Variant.field` (a position for a tuple
+    /// variant's), with its type as the source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// A struct, whatever its shape: its syntax says which fields it has.
@@ -220,8 +367,14 @@ pub(crate) struct EnumFact {
 pub(crate) struct StructFact {
     pub(crate) name: String,
     pub(crate) span: Span,
+    /// Which of its file's module scopes (`SourceFile::scopes`) declares
+    /// the struct.
+    pub(crate) scope: usize,
     /// The traits a `#[derive(...)]` names.
     pub(crate) derives: Vec<String>,
+    /// Each field (a position for a tuple struct's), with its type as the
+    /// source writes it.
+    pub(crate) fields: Vec<(String, String)>,
 }
 
 /// The syntax the lift reads, kept apart from the facts: per source file,
@@ -241,6 +394,16 @@ impl Syntax {
     }
 }
 
+/// A constant as [`FileSyntax::consts`] holds it.
+pub(crate) type ConstSyntax = (
+    String,
+    crate::ast::RustType,
+    crate::ast::Block,
+    usize,
+    String,
+    usize,
+);
+
 /// One file's syntax, in the order of its [`SourceFile`]'s facts.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct FileSyntax {
@@ -251,11 +414,13 @@ pub(crate) struct FileSyntax {
     /// The payload of each variant of each of [`SourceFile::enums`]: its
     /// fields, named or positional, in order. Empty for a generic enum.
     pub(crate) enums: Vec<crate::lift::RawVariants>,
-    /// The constants of product code outside tests: name, type, and the
-    /// value as a block, which lifts like a function of no parameters.
-    pub(crate) consts: Vec<(String, crate::ast::RustType, crate::ast::Block)>,
+    /// The constants of product code outside tests: name, type, the value
+    /// as a block, which lifts like a function of no parameters, the module
+    /// scope (`SourceFile::scopes`) that declares it, its tokens, and the
+    /// line of its name.
+    pub(crate) consts: Vec<ConstSyntax>,
     /// The type aliases: `type Name<P, ..> = Type;`.
-    pub(crate) aliases: Vec<(String, crate::ast::Alias)>,
+    pub(crate) aliases: Vec<(String, crate::ast::Alias, usize)>,
 }
 
 /// One function's syntax.

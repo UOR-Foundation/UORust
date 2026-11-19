@@ -239,6 +239,15 @@ rust = "std::slice::from_ref(&{0}).to_vec()"
 vectors = [["7u32", "vec![7u32]"]]
 
 [[model]]
+path = "std::option::Option::map"
+args = ["option<$t>", "fn<$t, $u>"]
+result = "option<$u>"
+term = "(match {0} | Option.none => (ctor Option.none [{ty $u}]) | Option.some item => (ctor Option.some [{ty $u}] (apply {1} item)))"
+floor = "first-class FnOnce callbacks represented by admitted pure function values"
+rust = "{0}.map({1})"
+vectors = [["Some(true)", "|x: bool| !x", "Some(false)"], ["None::<bool>", "|x: bool| !x", "None"]]
+
+[[model]]
 path = "std::option::Option::cloned"
 args = ["option<$t>"]
 result = "option<$t>"
@@ -462,6 +471,42 @@ update = { 0 = "({aux put} {0} {1} {2})" }
 floor = "the insertion splits NonNull nodes"
 rust = "{{ let mut m = std::collections::BTreeMap::from({0}); let old = m.insert({1}, {2}); (old, m.into_iter().collect::<Vec<_>>()) }}"
 vectors = [['[("a", 1u8), ("c", 3)]', '"b"', "2u8", '(None, vec![("a", 1u8), ("b", 2), ("c", 3)])'], ['[("a", 1u8)]', '"a"', "5u8", '(Some(1u8), vec![("a", 5u8)])']]
+
+[[model]]
+path = "std::collections::HashMap::get"
+args = ["hashmap<$k, $v>", "$k"]
+result = "option<$v>"
+term = "({aux get} {0} {1})"
+floor = "hash-table bucket pointers; readonly lookup uses key equality, not entry order"
+rust = "std::collections::HashMap::from({0}).get(&{1}).copied()"
+vectors = [['[("z", 7u8), ("a", 4)]', '"z"', "Some(7u8)"], ['[("a", 4u8), ("z", 7)]', '"missing"', "None"]]
+
+[[model]]
+path = "std::collections::HashMap::contains_key"
+args = ["hashmap<$k, $v>", "$k"]
+result = "bool"
+term = "({aux has} {0} {1})"
+floor = "hash-table bucket pointers; readonly membership uses key equality"
+rust = "std::collections::HashMap::from({0}).contains_key(&{1})"
+vectors = [['[(3u32, 7u8), (1, 4)]', '3u32', "true"], ['[(1u32, 4u8), (3, 7)]', '2u32', "false"]]
+
+[[model]]
+path = "std::collections::HashMap::len"
+args = ["hashmap<$k, $v>"]
+result = "usize"
+term = "(prim length {0} : Nat)"
+floor = "the stored entry count behind the hash-table allocation"
+rust = "std::collections::HashMap::from({0}).len()"
+vectors = [['[(3u32, 7u8), (1, 4)]', "2"]]
+
+[[model]]
+path = "std::collections::HashMap::is_empty"
+args = ["hashmap<$k, $v>"]
+result = "bool"
+term = "((prim length {0} : Nat) =? 0)"
+floor = "the stored entry count behind the hash-table allocation"
+rust = "std::collections::HashMap::from({0}).is_empty()"
+vectors = [['[] as [(u32, u8); 0]', "true"], ['[(3u32, 7u8)]', "false"]]
 
 [[model]]
 path = "std::collections::BTreeMap::len"

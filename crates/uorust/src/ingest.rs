@@ -41,11 +41,7 @@ pub(crate) fn workspace(
         syntax.files.extend(files);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
-    let name = root
-        .file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("workspace")
-        .to_string();
+    crate::literal_macros::expand(&root, &packages, &metadata, &mut syntax);
     let lock = lock(&root.join("Cargo.lock"))?;
     let deny = root.join("deny.toml");
     let deny_ignores = if deny.is_file() {
@@ -65,16 +61,45 @@ pub(crate) fn workspace(
     };
     Ok((
         Workspace {
-            name,
             lock,
             has_deny: deny.is_file(),
             deny_ignores,
             advisories,
             packages,
             targets,
+            replaced: replaced_sources(&root),
         },
         syntax,
     ))
+}
+
+/// The Cargo configuration files that apply to a build in `root` (Cargo's
+/// documentation, "Configuration": `.cargo/config.toml` or `.cargo/config`
+/// in the directory and each of its ancestors, then in `$CARGO_HOME`) and
+/// replace a source (`[source]`) or override a package's path (`paths`).
+/// A file that does not parse is listed too: what it says is not known.
+fn replaced_sources(root: &Path) -> Vec<String> {
+    let home = std::env::var_os("CARGO_HOME")
+        .map(PathBuf::from)
+        .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".cargo")));
+    let dirs = root.ancestors().map(|d| d.join(".cargo")).chain(home);
+    let mut out = Vec::new();
+    for dir in dirs {
+        for name in ["config.toml", "config"] {
+            let file = dir.join(name);
+            let Ok(text) = std::fs::read_to_string(&file) else {
+                continue;
+            };
+            let replaces = text.parse::<toml::Value>().map_or(true, |v| {
+                v.get("source").is_some() || v.get("paths").is_some()
+            });
+            if replaces {
+                let shown = file.strip_prefix(root).unwrap_or(&file);
+                out.push(shown.to_string_lossy().replace('\\', "/"));
+            }
+        }
+    }
+    out
 }
 
 /// Whether an item's generics are lifetimes alone, which say how long a
@@ -258,7 +283,8 @@ fn advisory(
     }))
 }
 
-fn metadata(root: &Path) -> Result<Value, UorustError> {
+/// `cargo metadata` of a workspace, without its dependencies.
+pub(crate) fn metadata(root: &Path) -> Result<Value, UorustError> {
     let cargo = std::env::var_os("CARGO").unwrap_or_else(|| "cargo".into());
     let output = Command::new(cargo)
         .args([
@@ -317,17 +343,40 @@ fn lints_of(table: Option<&toml::Value>) -> BTreeMap<String, String> {
     out
 }
 
-/// `path` relative to `root`, both as text: the path itself when it is not
-/// inside `root`.
+/// `path` relative to `root`, both absolute and as text with `/`
+/// separators: below `root` the path under it, and elsewhere (a member or
+/// a path dependency Cargo reaches by `..`, as in `members = ["../m"]`) one
+/// `..` for each component of `root` past the two paths' common ancestor,
+/// then the rest of `path`. Never the absolute path, so that nothing of
+/// where the workspace lies on the machine enters a projection.
 fn rel(root: &str, path: &str) -> String {
-    match path.strip_prefix(root) {
-        Some("") => String::new(),
-        Some(rest) => match rest.strip_prefix('/') {
-            Some(inner) => inner.to_string(),
-            None => path.to_string(),
-        },
-        None => path.to_string(),
+    let parts = |text: &str| -> Vec<String> {
+        text.split('/')
+            .filter(|c| !c.is_empty() && *c != ".")
+            .map(str::to_string)
+            .collect()
+    };
+    let (root, path) = (parts(root), parts(path));
+    let common = root.iter().zip(&path).take_while(|(a, b)| a == b).count();
+    let mut out: Vec<String> = vec!["..".to_string(); root.len() - common];
+    out.extend(path[common..].iter().cloned());
+    out.join("/")
+}
+
+/// The file `rel` names under `root` (as [`rel`] writes it), with each `..`
+/// taken lexically, as Cargo forms a member's path from its manifest.
+fn under(root: &Path, rel: &str) -> PathBuf {
+    let mut out = root.to_path_buf();
+    for part in rel.split('/') {
+        match part {
+            "" | "." => {}
+            ".." => {
+                out.pop();
+            }
+            part => out.push(part),
+        }
     }
+    out
 }
 
 fn text(value: &Value, key: &str) -> String {
@@ -407,6 +456,10 @@ fn package(
         let inside = path.as_ref().is_some_and(|p| p.starts_with(root));
         deps.push(Dep {
             name: text(dep, "name"),
+            rename: dep
+                .get("rename")
+                .and_then(Value::as_str)
+                .map(str::to_string),
             kind: dep
                 .get("kind")
                 .and_then(Value::as_str)
@@ -414,6 +467,10 @@ fn package(
                 .to_string(),
             path: path.map(|p| rel(&root_text, &path_text(&p))),
             inside,
+            platform: dep
+                .get("target")
+                .and_then(Value::as_str)
+                .map(str::to_string),
         });
     }
     deps.sort_by(|a, b| {
@@ -437,7 +494,7 @@ fn package(
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
         read.push((path, rel_path, target, module, syn::parse_file(&text)));
     }
-    let roots: Vec<PathBuf> = targets.iter().map(|t| root.join(&t.src)).collect();
+    let roots: Vec<PathBuf> = targets.iter().map(|t| under(root, &t.src)).collect();
     let trees: BTreeMap<&Path, &syn::File> = read
         .iter()
         .filter_map(|(path, _, _, _, parsed)| Some((path.as_path(), parsed.as_ref().ok()?)))
@@ -469,6 +526,7 @@ fn package(
             .get("rust_version")
             .and_then(Value::as_str)
             .map(str::to_string),
+        edition: text(meta, "edition"),
         authors: meta
             .get("authors")
             .and_then(Value::as_array)
@@ -589,15 +647,15 @@ fn lock(path: &Path) -> Result<Vec<LockedPackage>, UorustError> {
 
 /// A file a `mod` declaration names, as the walk over a package's module
 /// tree meets it.
-struct ModFile {
-    file: PathBuf,
+pub(crate) struct ModFile {
+    pub(crate) file: PathBuf,
     /// The directory its own out-of-line modules are found from.
-    dir: PathBuf,
+    pub(crate) dir: PathBuf,
     /// The directory under `dir` that holds them where the file is neither
     /// a `mod.rs` nor named by a `#[path]`: its own name.
-    own: Option<String>,
+    pub(crate) own: Option<String>,
     /// Whether the declaration that names it stands in test code.
-    test: bool,
+    pub(crate) test: bool,
 }
 
 /// The files of a package that are test code as a whole: each file an
@@ -648,7 +706,7 @@ fn test_files(roots: &[PathBuf], trees: &BTreeMap<&Path, &syn::File>) -> BTreeSe
 /// the way; and a `#[path]` names the file itself, or an inline module's
 /// directory. Both files a plain declaration could mean are given: the one
 /// that exists is the module.
-fn declared_files(
+pub(crate) fn declared_files(
     items: &[syn::Item],
     dir: &Path,
     own: Option<&str>,
@@ -714,14 +772,14 @@ fn path_attr(list: &[syn::Attribute]) -> Option<String> {
 }
 
 /// The directory of a file.
-fn parent(file: &Path) -> PathBuf {
+pub(crate) fn parent(file: &Path) -> PathBuf {
     file.parent().map(Path::to_path_buf).unwrap_or_default()
 }
 
 /// A path without its `.` and `..` components, each `..` taking the
 /// component before it: the path a `#[path]` that climbs out of its
 /// directory names.
-fn normal(path: &Path) -> PathBuf {
+pub(crate) fn normal(path: &Path) -> PathBuf {
     let mut out = PathBuf::new();
     for part in path.components() {
         match part {
@@ -742,6 +800,42 @@ fn normal(path: &Path) -> PathBuf {
 /// name with another method of the file, in the same build (with tests or
 /// without), is marked as named apart.
 fn name_apart(fns: &mut [FnFact]) {
+    // Keep an unqualified display stable unless different trait paths would
+    // otherwise acquire the same function identity in this source scope.
+    let mut traits: BTreeMap<_, BTreeSet<String>> = BTreeMap::new();
+    for f in fns.iter() {
+        if let (Some(owner), Some(reference), Some(path)) = (&f.owner, &f.trait_ref, &f.trait_path)
+        {
+            traits
+                .entry((
+                    f.scope,
+                    owner.clone(),
+                    f.name.clone(),
+                    reference.clone(),
+                    f.in_test_module,
+                ))
+                .or_default()
+                .insert(path.clone());
+        }
+    }
+    for f in fns.iter_mut() {
+        if let (Some(owner), Some(reference), Some(path)) =
+            (&f.owner, &mut f.trait_ref, &f.trait_path)
+        {
+            let key = (
+                f.scope,
+                owner.clone(),
+                f.name.clone(),
+                reference.clone(),
+                f.in_test_module,
+            );
+            if traits.get(&key).is_some_and(|paths| paths.len() > 1) {
+                if let Some((prefix, _)) = path.rsplit_once("::") {
+                    *reference = format!("{prefix}::{reference}");
+                }
+            }
+        }
+    }
     let mut sharing: BTreeMap<(String, String, bool), usize> = BTreeMap::new();
     for f in fns.iter().filter(|f| !f.in_trait) {
         if let Some(owner) = &f.owner {
@@ -804,7 +898,7 @@ fn unparsed(
     (file, FileSyntax::default())
 }
 
-fn source(
+pub(crate) fn source(
     parsed: &syn::File,
     rel: String,
     target: usize,
@@ -828,10 +922,11 @@ fn source(
     let product = matches!(kind, TargetKind::Lib | TargetKind::Bin);
     let lib = matches!(kind, TargetKind::Lib);
     let test_target = matches!(kind, TargetKind::Test);
+    file.test = test_target || test_file;
     items(
         &parsed.items,
         &rel,
-        None,
+        "",
         test_target || test_file,
         product,
         lib,
@@ -948,6 +1043,12 @@ fn is_cfg_test(attrs: &[Attr]) -> bool {
     attrs.iter().any(|a| a.test_only)
 }
 
+/// Whether attributes make their item test code, by the one reading the
+/// facts use.
+pub(crate) fn test_only(list: &[syn::Attribute]) -> bool {
+    is_cfg_test(&attrs(list))
+}
+
 fn doc_of(attrs: &[Attr]) -> String {
     let lines: Vec<String> = attrs.iter().filter_map(|a| a.doc.clone()).collect();
     lines.join("\n")
@@ -1001,6 +1102,24 @@ fn derives(attrs: &[Attr]) -> Vec<String> {
 }
 
 /// Collapse the token spacing of printed Rust to the way it is written.
+/// Each field of `fields`, by its name or its position, with its type as
+/// the source writes it: what the ownership reading reads a type's fields
+/// by ([`crate::ownership::Declared`]).
+fn source_fields(fields: &syn::Fields) -> Vec<(String, String)> {
+    fields
+        .iter()
+        .enumerate()
+        .map(|(i, f)| {
+            (
+                f.ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string),
+                tidy(&f.ty.to_token_stream().to_string()),
+            )
+        })
+        .collect()
+}
+
 pub(crate) fn tidy(text: &str) -> String {
     let mut out = text.to_string();
     for (from, to) in [
@@ -1079,6 +1198,7 @@ fn function(
         trait_path: None,
         impl_params: Vec::new(),
         scope: 0,
+        impl_at: None,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -1090,10 +1210,29 @@ fn function(
 
 /// The names one module scope binds for its trait methods: what its `use`
 /// items name, whether one of them is a glob, and the traits it declares.
-fn scope_fact(list: &[syn::Item]) -> ScopeFact {
-    let mut fact = ScopeFact::default();
+fn scope_fact(list: &[syn::Item], rel: &str, module: &str) -> ScopeFact {
+    let mut fact = ScopeFact {
+        module: module.to_string(),
+        ..ScopeFact::default()
+    };
     for item in list {
         match item {
+            // An invocation, not a `macro_rules!` definition (which names
+            // the macro it defines).
+            syn::Item::Macro(m) if m.ident.is_none() => {
+                let mut idents = Vec::new();
+                macro_idents(m.mac.tokens.clone(), &mut idents);
+                let span = Span {
+                    file: rel.to_string(),
+                    line: m
+                        .mac
+                        .path
+                        .segments
+                        .first()
+                        .map_or(0, |s| s.ident.span().start().line),
+                };
+                fact.invoked.push((idents, span));
+            }
             syn::Item::Use(u) => scope_uses(&u.tree, &[], u.leading_colon.is_some(), &mut fact),
             syn::Item::Trait(t) => fact.traits.push(t.ident.unraw().to_string()),
             syn::Item::Mod(m) if m.content.is_none() => {
@@ -1103,6 +1242,17 @@ fn scope_fact(list: &[syn::Item]) -> ScopeFact {
         }
     }
     fact
+}
+
+/// Every identifier a macro's arguments write, groups included.
+fn macro_idents(tokens: proc_macro2::TokenStream, out: &mut Vec<String>) {
+    for tree in tokens {
+        match tree {
+            proc_macro2::TokenTree::Ident(i) => out.push(i.unraw().to_string()),
+            proc_macro2::TokenTree::Group(g) => macro_idents(g.stream(), out),
+            _ => {}
+        }
+    }
 }
 
 /// The bindings of one `use` tree, each with the path it names; a path
@@ -1135,7 +1285,10 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
             out.uses
                 .push((r.rename.to_string(), printed(with(&r.ident))));
         }
-        syn::UseTree::Glob(_) => out.glob = true,
+        syn::UseTree::Glob(_) => {
+            out.glob = true;
+            out.globs.push(printed(prefix.to_vec()));
+        }
         syn::UseTree::Group(g) => {
             for item in &g.items {
                 scope_uses(item, prefix, rooted, out);
@@ -1148,7 +1301,7 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
 fn items(
     list: &[syn::Item],
     rel: &str,
-    _owner: Option<String>,
+    module: &str,
     in_test: bool,
     product: bool,
     lib: bool,
@@ -1156,8 +1309,15 @@ fn items(
     syntax: &mut FileSyntax,
 ) {
     let scope = file.scopes.len();
-    file.scopes.push(scope_fact(list));
+    file.scopes.push(scope_fact(list, rel, module));
     for item in list {
+        if let Some(ident) = declared(item) {
+            let span = Span {
+                file: rel.to_string(),
+                line: ident.span().start().line,
+            };
+            file.declared.push((scope, ident.unraw().to_string(), span));
+        }
         match item {
             syn::Item::Fn(f) => {
                 let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -1196,6 +1356,17 @@ fn items(
                         None => written.join("::"),
                     }
                 });
+                // Where the dump's span of the header starts: its first
+                // token after the attributes (`default`, `unsafe` or
+                // `impl`), its column counted from 1 as rustc prints it.
+                let first = imp
+                    .modifiers
+                    .defaultness
+                    .map(|d| d.span)
+                    .or(imp.unsafety.map(|u| u.span))
+                    .unwrap_or(imp.impl_token.span)
+                    .start();
+                let impl_at = Some((first.line, first.column + 1));
                 let impl_params: Vec<String> = imp
                     .generics
                     .params
@@ -1206,6 +1377,35 @@ fn items(
                         syn::GenericParam::Lifetime(_) => None,
                     })
                     .collect();
+                if let Some(trait_path) = &trait_path {
+                    let plain =
+                        match &*imp.self_ty {
+                            syn::Type::Path(tp)
+                                if tp.qself.is_none()
+                                    && tp.path.segments.iter().all(|s| {
+                                        matches!(s.arguments, syn::PathArguments::None)
+                                    })
+                                    && !(tp.path.segments.len() == 1
+                                        && impl_params
+                                            .contains(&tp.path.segments[0].ident.to_string())) =>
+                            {
+                                let written: Vec<String> = tp
+                                    .path
+                                    .segments
+                                    .iter()
+                                    .map(|s| s.ident.to_string())
+                                    .collect();
+                                Some(written.join("::"))
+                            }
+                            _ => None,
+                        };
+                    file.trait_impls.push(crate::facts::TraitImpl {
+                        trait_path: trait_path.clone(),
+                        self_ty: self_ty.clone(),
+                        plain,
+                        scope,
+                    });
+                }
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -1223,6 +1423,7 @@ fn items(
                         fact.trait_ref.clone_from(&trait_ref);
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
+                        fact.impl_at = impl_at;
                         fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
@@ -1231,6 +1432,20 @@ fn items(
             }
             syn::Item::Trait(t) => {
                 let public = matches!(t.vis, syn::Visibility::Public(_));
+                if !in_test
+                    && t.items
+                        .iter()
+                        .any(|m| matches!(m, syn::TraitItem::Macro(_)))
+                {
+                    file.item_macros
+                        .extend(t.items.iter().filter_map(|m| match m {
+                            syn::TraitItem::Macro(m) => {
+                                m.mac.path.segments.last().map(|s| s.ident.to_string())
+                            }
+                            _ => None,
+                        }));
+                }
+                file.trait_decls.push(trait_fact(t, scope));
                 for member in &t.items {
                     if let syn::TraitItem::Fn(f) = member {
                         let (mut fact, fn_syntax) = function(
@@ -1277,8 +1492,18 @@ fn items(
                         file: rel.to_string(),
                         line: e.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    fields: e
+                        .variants
+                        .iter()
+                        .flat_map(|v| {
+                            source_fields(&v.fields)
+                                .into_iter()
+                                .map(move |(f, t)| (format!("{}.{f}", v.ident), t))
+                        })
+                        .collect(),
                     variants: e
                         .variants
                         .iter()
@@ -1301,7 +1526,9 @@ fn items(
                         file: rel.to_string(),
                         line: st.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&st.attrs)),
+                    fields: source_fields(&st.fields),
                 });
                 syntax.structs.push(match &st.fields {
                     _ if !only_lifetimes(&st.generics) => {
@@ -1337,6 +1564,7 @@ fn items(
                 syntax.aliases.push((
                     t.ident.to_string(),
                     crate::convert::alias(&t.generics, &t.ty),
+                    scope,
                 ));
             }
             syn::Item::Const(c) if !in_test && product && c.generics.params.is_empty() => {
@@ -1346,6 +1574,9 @@ fn items(
                     c.ident.to_string(),
                     crate::convert::ty(&c.ty),
                     crate::convert::block(&value),
+                    scope,
+                    c.to_token_stream().to_string(),
+                    c.ident.span().start().line,
                 ));
             }
             syn::Item::Use(u) => {
@@ -1360,9 +1591,21 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
-                    items(inner, rel, None, test, product, lib, file, syntax);
+                    let inner_module = match module {
+                        "" => m.ident.unraw().to_string(),
+                        outer => format!("{outer}::{}", m.ident.unraw()),
+                    };
+                    items(inner, rel, &inner_module, test, product, lib, file, syntax);
                 }
             }
+            // `macro_rules! name { .. }` defines a macro; any other macro in
+            // item position is an invocation.
+            syn::Item::Macro(m) if !in_test => match &m.ident {
+                Some(defined) => file.macro_defs.push(defined.to_string()),
+                None => file
+                    .item_macros
+                    .extend(m.mac.path.segments.last().map(|s| s.ident.to_string())),
+            },
             _ => {}
         }
         if product && !in_test && !matches!(item, syn::Item::Mod(_)) {
@@ -1373,6 +1616,20 @@ fn items(
             scan.visit_item(item);
             file.capabilities.extend(scan.found);
         }
+    }
+}
+
+/// The name an item declares a type under: a struct, enum, union, trait,
+/// trait alias or type alias.
+fn declared(item: &syn::Item) -> Option<&syn::Ident> {
+    match item {
+        syn::Item::Struct(s) => Some(&s.ident),
+        syn::Item::Enum(e) => Some(&e.ident),
+        syn::Item::Union(u) => Some(&u.ident),
+        syn::Item::Trait(t) => Some(&t.ident),
+        syn::Item::TraitAlias(t) => Some(&t.ident),
+        syn::Item::Type(t) => Some(&t.ident),
+        _ => None,
     }
 }
 
@@ -1595,7 +1852,7 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
     items(
         &parsed.items,
         "lib.rs",
-        None,
+        "",
         false,
         true,
         true,
@@ -1603,6 +1860,46 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
         &mut syntax,
     );
     (file, syntax)
+}
+
+/// What a trait declares besides its methods.
+fn trait_fact(t: &syn::ItemTrait, scope: usize) -> crate::facts::TraitFact {
+    use quote::ToTokens;
+    let text = |tokens: &dyn ToTokens| tidy(&tokens.to_token_stream().to_string());
+    let mut supertraits: Vec<String> = t
+        .supertraits
+        .iter()
+        .filter(|b| matches!(b, syn::TypeParamBound::Trait(_)))
+        .map(|b| text(b))
+        .collect();
+    if let Some(clause) = &t.generics.where_clause {
+        supertraits.extend(clause.predicates.iter().map(|p| text(p)));
+    }
+    crate::facts::TraitFact {
+        name: t.ident.unraw().to_string(),
+        scope,
+        params: t
+            .generics
+            .params
+            .iter()
+            .filter_map(|p| match p {
+                syn::GenericParam::Type(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Const(p) => Some(p.ident.to_string()),
+                syn::GenericParam::Lifetime(_) => None,
+            })
+            .collect(),
+        supertraits,
+        associated: t
+            .items
+            .iter()
+            .filter_map(|i| match i {
+                syn::TraitItem::Type(a) => Some(a.ident.to_string()),
+                syn::TraitItem::Const(c) => Some(c.ident.to_string()),
+                _ => None,
+            })
+            .collect(),
+        marked: t.unsafety.is_some(),
+    }
 }
 
 #[cfg(test)]
@@ -1850,6 +2147,56 @@ mod tests {
                 ("D".to_string(), "an enum with type parameters"),
                 ("E".to_string(), "a union"),
             ]
+        );
+    }
+
+    /// A path outside the root is written with `..` steps, never as the
+    /// absolute path, and [`under`] reads it back to the same file.
+    #[test]
+    fn a_path_outside_the_root_is_relative_by_dot_dot_steps() {
+        assert_eq!(rel("/w/root", "/w/root"), "");
+        assert_eq!(rel("/w/root", "/w/root/src/lib.rs"), "src/lib.rs");
+        assert_eq!(
+            rel("/w/root", "/w/member/src/lib.rs"),
+            "../member/src/lib.rs"
+        );
+        assert_eq!(rel("/w/root", "/w/rootless/a.rs"), "../rootless/a.rs");
+        assert_eq!(rel("/w/a/b", "/x/y.rs"), "../../../x/y.rs");
+        assert_eq!(
+            under(Path::new("/w/root"), "../member/src/lib.rs"),
+            Path::new("/w/member/src/lib.rs")
+        );
+        assert_eq!(
+            under(Path::new("/w/root"), "src/lib.rs"),
+            Path::new("/w/root/src/lib.rs")
+        );
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    #[test]
+    fn a_configuration_that_replaces_a_source_is_found() {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-refuted-config-{}", std::process::id()));
+        let at = |sub: &str| dir.join(sub);
+        std::fs::create_dir_all(at("vendored/.cargo")).unwrap();
+        std::fs::create_dir_all(at("plain/.cargo")).unwrap();
+        std::fs::write(
+            at("vendored/.cargo/config.toml"),
+            "[source.crates-io]\nreplace-with = \"vendor\"\n[source.vendor]\ndirectory = \"vendor\"\n",
+        )
+        .unwrap();
+        std::fs::write(at("plain/.cargo/config.toml"), "[build]\njobs = 1\n").unwrap();
+        let vendored = replaced_sources(&at("vendored"));
+        let plain = replaced_sources(&at("plain"));
+        let _ = std::fs::remove_dir_all(&dir);
+        assert!(
+            vendored.iter().any(|f| f == ".cargo/config.toml"),
+            "{vendored:?}"
+        );
+        assert!(
+            !plain.iter().any(|f| f == ".cargo/config.toml"),
+            "{plain:?}"
         );
     }
 }

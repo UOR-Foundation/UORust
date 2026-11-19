@@ -91,9 +91,9 @@ repin = "frame"
 [[gap]]
 id = "lexlean-nat-to-signed"
 repository = "UOR-Foundation/LexLean"
-what = "LexLean 0.4.0 converts no Nat to another integer family: checked_convert takes Int and the fixed-width families but not Nat, to_int takes only the fixed widths, and Int64 has no arithmetic beyond the checked_* primitives (src/ir/semantic.rs, infer_primitive). So the MIR path holds every Rust integer as Nat, with signed ones as their two's-complement bit patterns (crates/uorust/src/mir/int.rs). An AST-lifted Int64 value can flow into Nat (to_int, then emod, then UInt64 limbs, then to_nat), but a Nat can never flow back: a MIR-path call to an AST-lifted function with an Int64 parameter, or a struct with an Int64 field, stays residue."
+what = "LexLean 0.4.0 does not accept Nat in checked_convert or to_int. UORust now composes pinned SDK integer and bit operations into shared codecs in both directions for i8/i16/i32/i64 (UE-73 and UE-75), including nested structural carriers (UE-76). The absent direct primitive remains an SDK API gap, but it no longer makes those compatible source-call and field boundaries residue. The actual SDK validates the compositions; no SDK semantics or limits are replaced."
 plan = "Admit Nat as checked_convert's input (Option of any fixed width, none outside its range) and as to_int's (exact), with both elaborating in linking as to_nat does. Then the AST path's Int64 and the MIR path's bit patterns meet in a cast, and the boundary residue closes."
-residue = "mir::TerminatorKind::Call and mir::Rvalue::Aggregate rows that pass a signed value to an AST-lifted Int64 parameter or field: the workspace's own register, since core, std and crates have no AST-lifted callee"
+residue = "Direct Nat conversion remains unavailable. Compatible fixed-width source boundaries use the composed codecs; incompatible widths and unrelated element models remain residue."
 causes = []
 
 [[gap]]
@@ -103,3 +103,27 @@ what = "LexLean 0.4.0's bit_and, bit_or, bit_xor, bit_not, shift_left and shift_
 plan = "Admit Nat in bit_and, bit_or and bit_xor (Lean's Nat.land, Nat.lor and Nat.xor), in shift_left and shift_right with a Nat amount and a Nat result (Nat.shiftLeft and Nat.shiftRight), and a Nat power. The MIR path then writes x & y as (prim bit_and x y : Nat) in place of mirBitAnd, and its obligations over bit operations decide."
 residue = "none: the recursive helpers carry every bit operation"
 causes = []
+
+[[gap]]
+id = "prismpm-library-export-recursor"
+repository = "UOR-Foundation/PrismPM"
+what = "prismpm 0.5.0's native-library build refuses a whole library with a PP5004 that names no export root when one root reaches a definition the pinned lean4-prod exporter cannot take. Observed on the thermostat fixture's projection: a definition of a mutual recursion group over a nested inductive compiles to a recursor with a local function (`prod-export failed: unsupported local function in <Prefix>.Behavior.<Type>.brecOn.go: Prod.LocalFunctionError.escaping`), and a call LexLean lowers to its collections runtime (`exportNames: unresolved external call in <Prefix>.Behavior.<def>: [LexLeanCollections.instKeyString, LexLeanCollections.lessThan]`); the code generator then renders no Rust type for a mutual inductive block or a type that names itself through a field (PP4102). UORust's library route (crates/uorust/src/project/library.rs, `admit`) refuses each such root alone as a `library-root` row so the rest of the library verifies."
+plan = "Name the export root (or the definition and the root that reaches it) in PP5004 and PP4102, and let a library build drop that root instead of failing whole; then compile structural recursion over mutual and nested inductives, resolve LexLeanCollections calls in the exporter, and render recursive and mutual types under the library profile."
+residue = "every library-root row whose cause is a mutual recursion group, a mutual inductive block, a recursive type, or a collections primitive"
+causes = ["library-root"]
+
+[[gap]]
+id = "prismpm-library-allocation-free-lists"
+repository = "UOR-Foundation/PrismPM"
+what = "The pinned lean4-prod code generator (prod-codegen) renders a native library allocation-free: a list is a borrowed parameter or flows into the output buffer of a definition whose result is a list, a list with no parameter is a static slice of numerals, Booleans and constructors of them, and Lean's Int has no rendering. A let-bound list, a list read as an operand, or a computed list passed to a call fails the whole library (PP4102 `list value cannot be rendered without allocating`). Most lifted loops carry an accumulator list, so their roots are refused."
+plan = "A library profile whose generated crate may allocate (the crate already depends on alloc for String and nested Vec), so intermediate lists are Vec values; Int as a big integer type of the generated crate."
+residue = "every library-root row whose cause is a list held as an intermediate value, a list with no parameter of non-constant elements, or the type Int"
+causes = ["library-root"]
+
+[[gap]]
+id = "prismpm-library-borrowed-output"
+repository = "UOR-Foundation/PrismPM"
+what = "The pinned prod-codegen writes an element of a borrowed list parameter (or a field read through one) into a definition's output buffer without a clone. For an element type that is not Copy (String, a structure with a String field) the generated crate does not compile, and `cargo package` fails the native-library build (E0308 `expected String, found &String`; E0277 `the trait bound Room: Copy is not satisfied`)."
+plan = "Clone (or to_owned) a borrowed element whose type is not Copy where the Builder mode assigns it into the output buffer."
+residue = "every library-root row whose cause is a list of elements that are not Copy"
+causes = ["library-root"]

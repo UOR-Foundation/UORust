@@ -9,16 +9,16 @@ spec = "uorust/verdicts/1"
 [[verdict]]
 kappa = "0edc2c7010c1e6ea3337e52c4c59c1b3482722d12ff1e46732968a186fdf4d6f"
 function = "uorust::names::Walker::push"
-digest = "af353c6982ffaf71c62015d509631675d30c240b8ffa599fd7df84c6f90b724a"
+digest = "e9b487f178f3159929a774c609a03d8d8880d5aee65fd82181c774611a9033a3"
 status = "refused"
 cause = "LLV7002: Lean rejected `Uorust.Behavior` (error): omega could not prove the goal:"
 
 [[verdict]]
 kappa = "1139af8f4a7b37589a0151e0714c0bb3ed03ed42f2525fe74bdb7a8030dbf095"
 function = "uorust::mir::int::helper"
-digest = "37767cad88cb273b544451ab73ac75fb652ef2d791e5ee9a308a17a4374488a1"
+digest = "dbe1a30de292fbbe2ce0c10c817731276d4003906638d10b5e4519ee781467f8"
 status = "proved"
-axioms = { stdSliceIterIterFindClosureCratesUorustSrcMirIntRs3142531428MirIntHelper = ["Quot.sound", "propext"], uorustHelper = ["Quot.sound", "propext"] }
+axioms = { helper1139af8f4a7b37589a0151e0714c0bb3ed03ed42f2525fe74bdb7a8030dbf095 = ["Quot.sound", "propext"], stdSliceIterIterFindClosureCratesUorustSrcMirIntRs3142531428MirIntHelper = ["Quot.sound", "propext"] }
 
 [[verdict]]
 kappa = "4feab33361b371e47eb831675c36c6c5dbdaa8a3229aad69b870157fb2525228"
@@ -36,12 +36,13 @@ axioms = { assertKind = ["Classical.choice", "Quot.sound", "propext"] }
 [[verdict]]
 kappa = "63b7e9d754ee076b4ed01248d171da96c40faff40e18013f91a7ae48e14cbd6c"
 function = "uorust::embed::Sampled::bits"
-digest = "2acce0072eca7327cdfd5fcf7bece1c75def6ee185041c5e9852d11d200bff89"
+digest = "65912d17b4b567d94186088f2e21110df15d02add198f7fe5afea6add37d2e94"
 status = "refused"
 cause = "LLV7002: Lean rejected `Uorust.Behavior` (error): omega could not prove the goal:"
 
 [[verdict]]
-kappa = "6de4c8ec05979ad95602c832c8f8adc48ad49cb8907800d2fa126bafb9ac19db"
-function = "uorust::lift::refused"
-digest = "862116e3d76cd28bd06737f00a9695b26ca2e4debd89b4334dc05b2d67c8f816"
-status = "proved"
+kappa = "6a56559292cff5e1dad5c61139490c5aa5b1bc4a7ac13b15132aa9baa079599c"
+function = "uorust::ownership::render_chain"
+digest = "348f7234b726d767ed865216532067664cce6a5694e2508ffcbe49244a56754a"
+status = "refused"
+cause = "LLV7002: Lean rejected `Uorust.Behavior` (error): omega could not prove the goal:"

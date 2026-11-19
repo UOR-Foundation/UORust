@@ -8,6 +8,8 @@ use uorust::{Options, UorustError};
 
 const STAMP: &str = "2026-11-11T00:00:00Z";
 
+type Projection = BTreeMap<String, Vec<u8>>;
+
 fn root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .ancestors()
@@ -30,12 +32,31 @@ fn options(name: &str) -> Options {
         last_modified: STAMP.to_string(),
         advisories: None,
         mir: None,
+        limits: None,
+        embedding: None,
     }
 }
 
 /// A projection; this workspace's runs the MIR path on its committed verdict
 /// register, as `just register` and `just uorust` do.
 fn project(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
+    // The acceptance run reads an immutable checkout. Share that expensive
+    // self projection across independent assertions; determinism stays fresh.
+    static SELF: std::sync::Mutex<BTreeMap<String, Projection>> =
+        std::sync::Mutex::new(BTreeMap::new());
+    if root != self::root() {
+        return project_fresh(root, name);
+    }
+    let mut cache = SELF
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    cache
+        .entry(name.to_string())
+        .or_insert_with(|| project_fresh(root, name))
+        .clone()
+}
+
+fn project_fresh(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
     let mut options = options(name);
     if root == self::root() {
         options.mir = Some(mir_options(
@@ -49,6 +70,18 @@ fn project(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
 
 /// The MIR of the workspace at `root`, dumped once per test run.
 fn dumped(root: &Path, name: &str) -> PathBuf {
+    if !root.join("Cargo.lock").is_file() {
+        let locked = std::process::Command::new("cargo")
+            .args(["generate-lockfile", "--offline"])
+            .current_dir(root)
+            .output()
+            .expect("lock the compiler fixture");
+        assert!(
+            locked.status.success(),
+            "{}",
+            String::from_utf8_lossy(&locked.stderr)
+        );
+    }
     static DUMPS: std::sync::Mutex<BTreeMap<String, PathBuf>> =
         std::sync::Mutex::new(BTreeMap::new());
     let mut dumps = DUMPS
@@ -58,7 +91,7 @@ fn dumped(root: &Path, name: &str) -> PathBuf {
         .entry(name.to_string())
         .or_insert_with(|| {
             let out = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join(format!("mir-{name}"));
-            uorust::mir::dump(root, &out).expect("the MIR dumps");
+            uorust::mir::dump(root, &out, &Default::default()).expect("the MIR dumps");
             out
         })
         .clone()
@@ -170,8 +203,8 @@ fn the_fixture_projects_to_the_committed_project_ue_01() {
 #[test]
 fn projections_are_byte_identical_ue_02() {
     for (root, name) in [(fixture(), "thermostat"), (root(), "uorust")] {
-        let first = project(&root, name);
-        let second = project(&root, name);
+        let first = project_fresh(&root, name);
+        let second = project_fresh(&root, name);
         assert_eq!(first, second, "{name} projects differently twice");
         assert!(first.contains_key("src/Architecture.lex.tex"));
     }
@@ -188,7 +221,7 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
             ),
             (
                 "src/lib.rs",
-                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n\n/// Picks an implementation by its argument's type.\npub fn pick(p: a::Pair) -> a::Wide {\n    a::Wide::from(p.0)\n}\n",
+                "//! Planted defects.\npub mod a;\npub mod b;\npub use a::*;\n\n/// Calls go.\npub fn run() -> u8 {\n    go()\n}\n\n/// Picks an implementation by its argument's type.\npub fn pick(make: impl FnOnce() -> u8) -> a::Wide {\n    a::Wide::from(make())\n}\n",
             ),
             (
                 "src/a.rs",
@@ -219,9 +252,9 @@ fn ambiguity_is_refused_with_a_typed_open_claim_ue_03() {
             "{reason} missing:\n{frontier}"
         );
     }
-    // The ambiguous call is the one the written code leaves open: `p.0` is
-    // a field, whose type the resolution does not read, and both `From`
-    // implementations of the workspace can take it.
+    // The resolver now reads tuple fields. A callback's result keeps this
+    // valid Rust call outside its type-reading floor, with both `From`
+    // implementations still possible to the resolver.
     let ambiguous = refusals
         .iter()
         .find(|row| row.contains("reason = \"ambiguous-call\""))
@@ -379,6 +412,8 @@ fn every_failure_is_a_typed_variant_ue_06() {
         last_modified: "yesterday".into(),
         advisories: None,
         mir: None,
+        limits: None,
+        embedding: None,
     };
     assert!(matches!(
         uorust::project_workspace(&fixture(), &bad_stamp),
@@ -426,6 +461,7 @@ fn vv_runs_the_sdk_checks_on_both_projections_ue_07() {
     for needle in [
         "check crates/uorust/tests/fixtures/thermostat",
         "cd crates/uorust/tests/fixtures/thermostat-prism && lexlean fmt --check && lexlean lock --check && lexlean verify && prismpm check",
+        "thermostat-prism/library/*/; do (cd \"$lib\" && lexlean fmt --check && lexlean lock --check && prismpm check && prismpm verify) || exit 1; done",
         "project . --out target/uorust-self",
         "cd target/uorust-self && lexlean fmt --check && lexlean lock --check && lexlean verify && prismpm check",
         "--advisories crates/uorust/tests/fixtures/advised/advisory-db",
@@ -452,7 +488,8 @@ fn pub_trait_methods_are_interface_calls_ue_08() {
     assert!(feature.contains("\"Interface::callThermoCoreSensorSensorRead\""));
     assert!(feature.contains("\"Interface::callThermoCoreSensorSensorCalibrated\""));
     assert!(
-        feature.contains("\"Interface::acThermoCoreThermoCoreSensorAFixedSensorReadsItsValue\""),
+        feature
+            .contains("\"Interface::acThermoCoreThermoCoreSensorTestsAFixedSensorReadsItsValue\""),
         "{feature}"
     );
 }
@@ -1448,6 +1485,94 @@ fn a_lifted_kappa_that_turns_unlifted_is_refused_ue_16() {
     }
 }
 
+/// The law per function, on a register the tool wrote: two functions of a
+/// synthetic workspace stopped by one construct of their signatures, which
+/// the register records among every construct their signatures state. The
+/// planted defect moves one of them, unchanged, under another construct
+/// while the register still records the first for it: `uorust::admit_register`
+/// (the `uorust admit --parent` command) refuses it, naming the function,
+/// whether or not the other moves too. Moving both on where the candidate's
+/// signatures no longer state the construct (its blocker shown gone) raises
+/// the other cause and is admitted.
+#[test]
+fn a_function_stays_under_its_construct_while_it_stops_one_ue_16() {
+    use uorust::register::{Register, Status};
+    let manifest =
+        "[package]\nname = \"moves\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n";
+    let lib = "//! M.\n\nuse std::cell::RefCell;\n\n\
+               /// One.\npub fn one(x: &RefCell<u8>) -> u8 {\n    *x.borrow()\n}\n\n\
+               /// Two.\npub fn two(x: &RefCell<u8>) -> u8 {\n    *x.borrow() + 1\n}\n";
+    let root = scratch(
+        "ue16-moves",
+        &[("Cargo.toml", manifest), ("src/lib.rs", lib)],
+    );
+    let parent = uorust::lift_register(&project(&root, "moves")).expect("a register");
+    let stopped = |name: &str| {
+        parent
+            .rows
+            .iter()
+            .find(|(_, r)| r.function == format!("moves::{name}"))
+            .map(|(k, r)| (k.clone(), r.status.clone()))
+            .expect("a row")
+    };
+    let ((k1, s1), (k2, s2)) = (stopped("one"), stopped("two"));
+    let construct = s1.construct().map(|(c, d)| (c, d.to_string()));
+    assert!(
+        construct.is_some() && construct == s2.construct().map(|(c, d)| (c, d.to_string())),
+        "both functions are stopped by one construct: {s1:?} {s2:?}"
+    );
+    let recorded = |k: &String| {
+        let stops = parent.rows[k].stops.clone().unwrap_or_default();
+        let (cause, detail) = s1.construct().expect("stopped");
+        stops.contains(&(cause, detail.to_string()))
+    };
+    assert!(recorded(&k1) && recorded(&k2), "{parent:?}");
+    let next = Status::Residue("form".into(), "a construct planted as the next".into());
+    let with = |moved: &[&String], gone: bool| {
+        let mut r: Register = parent.clone();
+        for k in moved {
+            let row = r.rows.get_mut(*k).expect("a row");
+            row.status = next.clone();
+            if gone {
+                row.stops = Some(Vec::new());
+            }
+        }
+        r
+    };
+    let dir = scratch("ue16-moves-registers", &[]);
+    std::fs::create_dir_all(&dir).expect("dir");
+    let file = |name: &str, r: &Register| {
+        let path = dir.join(name);
+        std::fs::write(&path, r.to_text()).expect("write");
+        path
+    };
+    let at = file("parent.toml", &parent);
+    // Both moved on, the construct gone from both signatures: the cause
+    // `form` rises, admitted.
+    let moved = with(&[&k1, &k2], true);
+    assert!(uorust::admit_register(&at, &file("moved.toml", &moved)).is_ok());
+    // One moved while its signature still states the construct: refused,
+    // whether the other stays or moves too.
+    for planted in [with(&[&k1], false), {
+        let mut both = with(&[&k1, &k2], false);
+        both.rows.get_mut(&k2).expect("two").stops = Some(Vec::new());
+        both
+    }] {
+        match uorust::admit_register(&at, &file("planted.toml", &planted)) {
+            Err(UorustError::Regressed(rows)) => {
+                assert!(
+                    rows.len() == 1 && rows[0].starts_with("moves::one "),
+                    "{rows:?}"
+                );
+            }
+            other => panic!("expected Regressed, got {other:?}"),
+        }
+    }
+    for dir in [root, dir] {
+        let _ = std::fs::remove_dir_all(dir);
+    }
+}
+
 fn mir_fixture() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/mir-path")
 }
@@ -1525,7 +1650,7 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
     use uorust::mir::Trial;
     // The dump: one file per body of the library.
     let fresh = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("mir-walk-fresh");
-    uorust::mir::dump(&mir_fixture(), &fresh).expect("the MIR dumps");
+    uorust::mir::dump(&mir_fixture(), &fresh, &Default::default()).expect("the MIR dumps");
     assert!(std::fs::read_dir(fresh.join("lib-walk"))
         .expect("the library's dumps")
         .filter_map(|e| e.ok()?.file_name().into_string().ok())
@@ -1535,17 +1660,38 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
     // obligation; the prover reads the listing of candidates.
     let trial = walk(Default::default(), Trial::All);
     let behavior = text(&trial, "src/Behavior.lex.tex");
+    let rows = frontier_rows(&trial, "lifted");
+    let name = |function: &str| -> String {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(function))
+            .and_then(|r| r["definition"].as_str())
+            .and_then(|d| d.strip_prefix("Behavior::"))
+            .unwrap_or_else(|| panic!("no lifted trial declaration for {function}"))
+            .to_string()
+    };
+    let capped = name("walk::capped_sum");
+    let count = name("walk::count");
+    let above = name("walk::above");
+    let rise = name("walk::first_rise");
     for decl in [
-        "name: walkCappedSumLoop1,",
-        "name: decreases_walkCappedSumLoop1_0,",
-        "name: holds_walkCappedSum_0,",
-        "name: walkCappedSum,",
-        "name: walkCount,",
+        format!("name: {capped}Loop1,"),
+        format!("name: decreases_{capped}Loop1_0,"),
+        format!("name: holds_{capped}_0,"),
+        format!("name: {capped},"),
+        format!("name: {count},"),
+        format!("name: {above},"),
+        format!("name: {rise}Loop2,"),
+    ] {
+        assert!(
+            behavior.contains(&decl),
+            "the trial projection lacks {decl}"
+        );
+    }
+    for decl in [
         "termination: {",
         // std's own `Option::unwrap_or`, lifted from its vendored MIR at
         // `u32`, and a promoted constant lowered from its own body.
         "name: stdOptionOptionUnwrapOrU32,",
-        "name: walkAbove,",
         // `BTreeSet::insert` by its model, a backward function of the
         // mutable borrow; `str::trim` by its model over the prelude.
         "name: stdInsertString,",
@@ -1554,8 +1700,7 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
         // A `for` loop over a slice: its iterator a cursor, the loop's
         // measure the distance between the cursor's positions, which its
         // guarded `next` is `Some` within.
-        "name: walkFirstRiseLoop2,",
-        "measure: (prim subtract (project iter item2) (project iter item1) : Nat)",
+        "measure: (prim subtract (project (project loopState item1) item2) (project (project loopState item1) item1) : Nat)",
         "name: stdAtNat,",
         // A closure: a definition over the value of its captures, called
         // from std's `find`, which is lifted from std's own MIR.
@@ -1593,6 +1738,8 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
         "walk::second_known",
         // A closure passed to std's `find`.
         "walk::first_named",
+        // Invariant closure captures remain available in the loop state.
+        "walk::any_above",
         // Signed integers compared as their bit patterns.
         "walk::first_negative",
     ] {
@@ -1601,14 +1748,10 @@ fn the_mir_path_translates_and_admits_on_verdicts_ue_17() {
             "{f} does not lift"
         );
     }
-    assert!(text(&decided, "src/Behavior.lex.tex").contains("name: walkCappedSumLoop1,"));
+    assert!(text(&decided, "src/Behavior.lex.tex").contains(&format!("name: {capped}Loop1,")));
     assert!(!decided.contains_key(uorust::mir::CANDIDATES));
     let count = residue_detail(&decided, "walk::count").expect("count is residue");
     assert!(count.starts_with("mir::Verdict: LLV"), "{count}");
-    // A loop helper whose fixed parameter only a closure's capture uses:
-    // Lean's `decreasing_by` context drops it, so the verifier refuses.
-    let any = residue_detail(&decided, "walk::any_above").expect("any_above is residue");
-    assert!(any.starts_with("mir::Verdict: LLV"), "{any}");
     // The MIR path only adds: whatever lifts without it lifts with it.
     let surface = project(&mir_fixture(), "walk");
     for f in lifted_functions(&surface) {
@@ -1981,4 +2124,5820 @@ fn every_core_body_is_embedded_ue_19() {
     // nothing for a harness to call.
     assert!(!harness.exists());
     let _ = std::fs::remove_dir_all(&work);
+}
+
+/// Compiler inputs shared by the method-identity and bounded-proof regressions.
+fn mir_method_fixture(case: &str) -> (PathBuf, PathBuf, PathBuf) {
+    let work =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join(format!("mir-method-homonyms-{case}"));
+    let _ = std::fs::remove_dir_all(&work);
+    let source = work.join("source");
+    std::fs::create_dir_all(source.join("src")).expect("source");
+    std::fs::write(
+        source.join("Cargo.toml"),
+        r#"[package]
+name = "owners"
+version = "0.0.0"
+edition = "2021"
+[workspace]
+"#,
+    )
+    .expect("manifest");
+    let mut code = String::new();
+    for module in ["a", "b", "c"] {
+        code.push_str(&format!("pub mod {module} {{ pub struct Token; impl Token {{ pub fn convert(mut value: u32) -> u32 {{ while value > 0 {{ value -= 1; }} value }} }} }}\n"));
+    }
+    std::fs::write(source.join("src/lib.rs"), code).expect("source bytes");
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&source)
+        .output()
+        .expect("lock fixture");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = work.join("all");
+    uorust::mir::dump(&source, &dumps, &Default::default()).expect("actual compiler MIR");
+    (work, source, dumps)
+}
+
+/// UE-28: every homonym retains its source-qualified name.
+#[test]
+fn mir_method_homonyms_have_stable_names_ue_28() {
+    let (work, source, dumps) = mir_method_fixture("names");
+    let candidates = |at: &Path| {
+        let mut opts = options("owners");
+        opts.mir = Some(mir_options(
+            at.to_path_buf(),
+            Default::default(),
+            uorust::mir::Trial::All,
+        ));
+        let files = uorust::project_workspace(&source, &opts).expect("trial projection");
+        let listing: toml::Value = text(&files, uorust::mir::CANDIDATES)
+            .parse()
+            .expect("candidates");
+        listing
+            .get("candidate")
+            .and_then(toml::Value::as_array)
+            .unwrap_or_else(|| panic!("no MIR candidates: {}", text(&files, "frontier.toml")))
+            .iter()
+            .map(|row| {
+                (
+                    row["function"].as_str().expect("function").to_string(),
+                    row["decls"]
+                        .as_array()
+                        .expect("declarations")
+                        .last()
+                        .expect("body")
+                        .as_str()
+                        .expect("name")
+                        .to_string(),
+                )
+            })
+            .collect::<BTreeMap<_, _>>()
+    };
+    let all = candidates(&dumps);
+    assert_eq!(all.len(), 3, "a conversion method was lost: {all:?}");
+    assert_eq!(
+        all.values()
+            .collect::<std::collections::BTreeSet<_>>()
+            .len(),
+        3
+    );
+    let selected = work.join("selected");
+    std::fs::create_dir_all(selected.join("lib-owners")).expect("selected view");
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(dumps.join(name), selected.join(name)).expect("compiler metadata");
+    }
+    for file in std::fs::read_dir(dumps.join("lib-owners")).expect("compiler bodies") {
+        let file = file.expect("file").path();
+        if file.extension().is_some_and(|e| e == "mir")
+            && std::fs::read_to_string(&file)
+                .expect("MIR")
+                .contains("fn c::<impl at ")
+        {
+            std::fs::copy(
+                &file,
+                selected
+                    .join("lib-owners")
+                    .join(file.file_name().expect("name")),
+            )
+            .expect("exact compiler body");
+        }
+    }
+    let one = candidates(&selected);
+    assert_eq!(one.len(), 1, "the selected compiler view: {one:?}");
+    assert_eq!(
+        one["owners::c::Token::convert"],
+        all["owners::c::Token::convert"]
+    );
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-29: bounded plans preserve all work and dependency order.
+#[test]
+fn mir_proof_batches_keep_dependencies_and_refuse_invalid_budgets_ue_29() {
+    use std::collections::BTreeSet;
+    let graph = BTreeMap::from([
+        ("leaf".to_string(), BTreeSet::new()),
+        ("middle".to_string(), BTreeSet::from(["leaf".to_string()])),
+        ("top".to_string(), BTreeSet::from(["middle".to_string()])),
+        (
+            "cycle-a".to_string(),
+            BTreeSet::from(["cycle-b".to_string()]),
+        ),
+        (
+            "cycle-b".to_string(),
+            BTreeSet::from(["cycle-a".to_string()]),
+        ),
+    ]);
+    let plan = uorust::mir::proof_batches(&graph, 2).expect("bounded plan");
+    let mut done = BTreeSet::new();
+    for batch in &plan {
+        assert!(!batch.is_empty() && batch.len() <= 2);
+        assert!(batch.is_disjoint(&done), "work was repeated");
+        for node in batch {
+            assert!(
+                graph[node]
+                    .iter()
+                    .all(|dependency| done.contains(dependency) || batch.contains(dependency)),
+                "a dependency was omitted"
+            );
+        }
+        done.extend(batch.iter().cloned());
+    }
+    assert_eq!(done, graph.keys().cloned().collect());
+    assert!(plan
+        .iter()
+        .any(|batch| batch.contains("cycle-a") && batch.contains("cycle-b")));
+    for maximum in [0, 1] {
+        assert!(matches!(
+            uorust::mir::proof_batches(&graph, maximum),
+            Err(UorustError::Tool(_))
+        ));
+    }
+    let missing = BTreeMap::from([("caller".to_string(), BTreeSet::from(["absent".to_string()]))]);
+    assert!(matches!(
+        uorust::mir::proof_batches(&missing, 2),
+        Err(UorustError::Tool(_))
+    ));
+    assert!(uorust::mir::proof_batches(&BTreeMap::new(), 2)
+        .expect("no translations")
+        .is_empty());
+    let (work, source, dumps) = mir_method_fixture("batches");
+    let verdicts = work.join("verdicts.toml");
+    let scratch = work.join("trial");
+    let proved =
+        uorust::mir::prove_bounded(&source, &options("owners"), &dumps, &verdicts, &scratch, 1)
+            .expect("actual SDK proofs");
+    assert_eq!(proved.proved, 3);
+    assert_eq!(proved.refused, 0);
+    // Each single-function trial discovers its actual axiom set, then verifies it.
+    assert_eq!(proved.runs, 6);
+    let reused =
+        uorust::mir::prove_bounded(&source, &options("owners"), &dumps, &verdicts, &scratch, 1)
+            .expect("reuse verified digests");
+    assert_eq!(reused.runs, 0, "unchanged proofs were repeated");
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-30: registry alias discovery cannot erase an admitted number model.
+#[test]
+fn registered_number_alias_keeps_its_admitted_model_ue_30() {
+    let dir = scratch("registered-number-alias", &[
+        ("Cargo.toml", "[package]\nname = \"number_alias\"\nversion = \"0.1.0\"\nedition = \"2021\"\nrust-version = \"1.97\"\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\n"),
+        ("src/lib.rs", "use num_rational::BigRational;\npub fn keep(r: BigRational) -> BigRational { r }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Cargo lock");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let lifted = |files: &BTreeMap<String, Vec<u8>>| {
+        frontier_rows(files, "lifted")
+            .iter()
+            .any(|row| row["function"].as_str() == Some("number_alias::keep"))
+    };
+    assert!(
+        lifted(&project(&dir, "number_alias")),
+        "the registered alias lost its type model"
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    let checksum = "f83d14da390562dca69fc84082e73e548e1ad308d24accdedd2720017cb37824";
+    assert!(
+        original.contains(checksum),
+        "the fixture did not lock the registered archive"
+    );
+    std::fs::write(
+        &lock,
+        original.replace(checksum, &"0".repeat(checksum.len())),
+    )
+    .expect("planted wrong checksum");
+    assert!(
+        !lifted(&project(&dir, "number_alias")),
+        "a different archive acquired the registered model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-33: transport is modeled without assuming JSON storage equality.
+#[test]
+fn locked_json_carriers_preserve_data_and_refuse_unmodeled_equality_ue_33() {
+    let dir = scratch("registered-json-carrier", &[
+        ("Cargo.toml", "[package]\nname = \"json_carrier\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[dependencies]\nserde_json = \"=1.0.114\"\n"),
+        ("src/lib.rs", "use serde_json::{Value, Number};\n#[derive(PartialEq)] pub struct Held { pub payload: Value, pub id: u8 }\npub fn keep(v: Value) -> Value { v }\npub fn number(n: Number) -> Number { n }\npub fn pair(v: Value, n: u8) -> (Value, u8) { (v, n) }\npub fn id(h: &Held) -> u8 { h.id }\npub fn compared(a: Value, b: Value) -> bool { a == b }\npub fn numbers_equal(a: Number, b: Number) -> bool { a == b }\npub fn held_equal(a: Held, b: Held) -> bool { a == b }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let files = project(&dir, "json_carrier");
+    let functions = |files: &BTreeMap<String, Vec<u8>>| -> Vec<String> {
+        frontier_rows(files, "lifted")
+            .iter()
+            .filter_map(|row| row["function"].as_str().map(str::to_string))
+            .collect()
+    };
+    let lifted = functions(&files);
+    for function in [
+        "json_carrier::keep",
+        "json_carrier::number",
+        "json_carrier::pair",
+        "json_carrier::id",
+    ] {
+        assert!(
+            lifted.iter().any(|name| name == function),
+            "carrier function did not lift: {function}"
+        );
+    }
+    assert!(
+        !lifted.iter().any(|name| name == "json_carrier::compared"),
+        "Storage equality was substituted for JSON equality"
+    );
+    for function in ["json_carrier::numbers_equal", "json_carrier::held_equal"] {
+        assert!(
+            !lifted.iter().any(|name| name == function),
+            "Unmodeled JSON equality lifted: {function}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write JSON projection");
+    let kernel = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK verifier");
+    assert!(
+        kernel.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&kernel.stdout),
+        String::from_utf8_lossy(&kernel.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    let checksum = "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0";
+    assert!(original.contains(checksum));
+    std::fs::write(&lock, original.replace(checksum, &"0".repeat(64))).expect("wrong checksum");
+    assert!(
+        functions(&project(&dir, "json_carrier")).is_empty(),
+        "An unregistered archive acquired the JSON model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-34: an alias transports its reference, never a frozen cell value.
+#[test]
+fn shared_cell_references_transport_without_snapshotting_contents_ue_34() {
+    let dir = scratch("shared-cell-references", &[
+        ("Cargo.toml", "[package]\nname = \"shared_cells\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "use std::{cell::{Cell, RefCell}, rc::Rc, sync::Arc};\n#[derive(PartialEq)] pub struct Held { pub first: Rc<RefCell<u8>>, pub second: Rc<RefCell<u8>>, pub id: u8 }\npub fn keep(x: Rc<RefCell<u8>>) -> Rc<RefCell<u8>> { x }\npub fn cloned(x: &Rc<RefCell<u8>>) -> Rc<RefCell<u8>> { Rc::clone(x) }\npub fn pair(x: Rc<RefCell<u8>>) -> (Rc<RefCell<u8>>, Rc<RefCell<u8>>) { (x.clone(), x) }\npub fn field(h: &Held) -> Rc<RefCell<u8>> { h.first.clone() }\npub fn id(h: &Held) -> u8 { h.id }\npub fn arc_keep(x: Arc<Cell<u8>>) -> Arc<Cell<u8>> { x }\npub fn read(x: &Rc<RefCell<u8>>) -> u8 { *x.borrow() }\npub fn write(x: &Rc<RefCell<u8>>, value: u8) { *x.borrow_mut() = value; }\npub fn make(value: u8) -> Rc<RefCell<u8>> { Rc::new(RefCell::new(value)) }\npub fn counts(x: &Rc<RefCell<u8>>) -> usize { Rc::strong_count(x) }\npub fn equal(x: Rc<RefCell<u8>>, y: Rc<RefCell<u8>>) -> bool { x == y }\npub fn held_equal(x: Held, y: Held) -> bool { x == y }\n"),
+    ]);
+    let files = project(&dir, "shared_cells");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|row| row["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "cloned", "pair", "field", "id", "arc_keep"] {
+        assert!(
+            lifted.contains(&format!("shared_cells::{name}")),
+            "reference transport did not lift: {name}"
+        );
+    }
+    for name in ["read", "write", "make", "counts", "equal", "held_equal"] {
+        assert!(
+            !lifted.contains(&format!("shared_cells::{name}")),
+            "unmodeled shared heap operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write reference projection");
+    let kernel = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK verifier");
+    assert!(
+        kernel.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&kernel.stdout),
+        String::from_utf8_lossy(&kernel.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-35: wide field and recursive-proof records must survive SDK formatting.
+#[test]
+fn long_type_declarations_are_canonical_without_rewriting_ue_35() {
+    let dir = scratch("wide-type-layout", &[
+        ("Cargo.toml", "[package]\nname = \"wide_types\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "pub struct PayloadWithAnIntentionallyLongQualifiedNameForCanonicalLayout { pub value: u8 }\npub struct Holder { pub overridesWithAnIntentionallyWideFieldName: Vec<PayloadWithAnIntentionallyLongQualifiedNameForCanonicalLayout> }\npub enum RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout { End, Next(Box<RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout>) }\npub fn keep(h: Holder) -> Holder { h }\npub fn depth(t: &RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout) -> u32 { match t { RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout::End => 0, RecursiveTreeWithAnIntentionallyLongQualifiedNameForCanonicalLayout::Next(rest) => depth(rest).saturating_add(1) } }\n"),
+    ]);
+    let files = project(&dir, "wide_types");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write wide declarations");
+    let check = std::process::Command::new("lexlean")
+        .args(["fmt", "--check"])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK formatter");
+    assert!(
+        check.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&check.stdout),
+        String::from_utf8_lossy(&check.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-36: an immutable slice owner retains the whole ordered sequence.
+#[test]
+fn owned_slices_retain_sequences_without_snapshotting_cells_ue_36() {
+    let dir = scratch("owned-slices", &[
+        ("Cargo.toml", "[package]\nname = \"owned_slices\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs", "use std::{cell::Cell, rc::Rc, sync::Arc};\npub struct Held { pub order: Rc<[u8]> }\npub fn keep(x: Box<[u8]>) -> Box<[u8]> { x }\npub fn arc_keep(x: Arc<[u8]>) -> Arc<[u8]> { x }\npub fn len(x: &Held) -> usize { x.order.len() }\npub fn cloned(x: &Held) -> Rc<[u8]> { x.order.clone() }\npub fn counts(x: &Held) -> usize { Rc::strong_count(&x.order) }\npub fn cells(x: Rc<[Cell<u8>]>) -> Rc<[Cell<u8>]> { x }\n"),
+    ]);
+    let files = project(&dir, "owned_slices");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "arc_keep", "len", "cloned"] {
+        assert!(
+            lifted.contains(&format!("owned_slices::{name}")),
+            "owned slice did not lift: {name}"
+        );
+    }
+    for name in ["counts", "cells"] {
+        assert!(
+            !lifted.contains(&format!("owned_slices::{name}")),
+            "unmodeled owner operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write owned slices");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-37: default BitVec's logical sequence excludes capacity and dead bits.
+#[test]
+fn locked_bit_vectors_retain_logical_bits_without_raw_storage_ue_37() {
+    let dir=scratch("locked-bit-vector", &[
+        ("Cargo.toml","[package]\nname = \"logical_bits\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[dependencies]\nbitvec = \"=1.0.1\"\n"),
+        ("src/lib.rs","use bitvec::prelude::BitVec;\npub fn keep(x: BitVec) -> BitVec { x }\npub fn len(x: &BitVec) -> usize { x.len() }\npub fn capacity(x: &BitVec) -> usize { x.capacity() }\npub fn raw(x: &BitVec) -> &[usize] { x.as_raw_slice() }\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock bitvec");
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let files = project(&dir, "logical_bits");
+    let functions = |files: &BTreeMap<String, Vec<u8>>| -> Vec<String> {
+        frontier_rows(files, "lifted")
+            .iter()
+            .filter_map(|r| r["function"].as_str().map(str::to_string))
+            .collect()
+    };
+    let lifted = functions(&files);
+    for name in ["keep", "len"] {
+        assert!(
+            lifted.contains(&format!("logical_bits::{name}")),
+            "bit vector did not lift: {name}"
+        );
+    }
+    for name in ["capacity", "raw"] {
+        assert!(
+            !lifted.contains(&format!("logical_bits::{name}")),
+            "unmodeled storage operation lifted: {name}"
+        );
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write bit projection");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let source = std::fs::read_to_string(&lock).expect("lock text");
+    let checksum = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c";
+    assert!(source.contains(checksum));
+    std::fs::write(&lock, source.replace(checksum, &"0".repeat(64))).expect("wrong checksum");
+    assert!(
+        functions(&project(&dir, "logical_bits")).is_empty(),
+        "another archive acquired the bit-vector model"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-38: stale bytes never inherit proof, while observed policies save discovery.
+#[test]
+fn native_proof_refresh_reuses_policy_hints_but_verifies_new_bytes_ue_38() {
+    let (work, source, dumps) = mir_method_fixture("policy-cache");
+    let verdicts = work.join("verdicts.toml");
+    let scratch = work.join("trial");
+    let opts = options("owners");
+    let first = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("initial SDK proofs");
+    assert_eq!(first.proved, 3);
+    assert_eq!(first.refused, 0);
+    let mut stale = uorust::mir::verdict::Verdicts::read(&verdicts).expect("actual verdicts");
+    let key = stale.rows.keys().next().expect("proved row").clone();
+    let actual = stale.rows[&key].clone();
+    assert!(
+        !actual.axioms.is_empty(),
+        "fixture has no observed policies"
+    );
+    stale.rows.get_mut(&key).expect("row").digest = "0".repeat(64);
+    std::fs::write(&verdicts, stale.to_text()).expect("stale digest");
+    let refreshed = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("SDK refresh");
+    assert_eq!(refreshed.proved, 1);
+    assert_eq!(refreshed.refused, 0);
+    assert_eq!(
+        refreshed.runs, 1,
+        "the observed policies were needlessly rediscovered"
+    );
+    let fresh = uorust::mir::verdict::Verdicts::read(&verdicts).expect("fresh verdict");
+    assert_eq!(fresh.rows[&key], actual);
+    let replay =
+        uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3).expect("replay");
+    assert_eq!(replay.runs, 0);
+    let mut wrong = fresh;
+    let row = wrong.rows.get_mut(&key).expect("row");
+    row.digest = "0".repeat(64);
+    for policy in row.axioms.values_mut() {
+        policy.clear();
+    }
+    std::fs::write(&verdicts, wrong.to_text()).expect("incorrect hints");
+    let corrected = uorust::mir::prove_bounded(&source, &opts, &dumps, &verdicts, &scratch, 3)
+        .expect("SDK correction");
+    assert_eq!(corrected.proved, 1);
+    assert_eq!(corrected.refused, 0);
+    assert_eq!(corrected.runs, 2);
+    let checked = uorust::mir::verdict::Verdicts::read(&verdicts).expect("corrected verdict");
+    assert_eq!(checked.rows[&key], actual);
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-39: expanding an alias must not rebind its element names at the use site.
+#[test]
+fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
+    let dir=scratch("scoped-aliases", &[
+        ("Cargo.toml","[package]\nname = \"scoped_aliases\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs","pub mod left; pub mod right; pub mod holder;\n"),
+        ("src/left.rs","use std::collections::BTreeMap;\npub struct Node { pub value: u8 }\npub type Pool = BTreeMap<String, Vec<(String, Vec<Node>)>>;\npub type Items<Node> = Vec<Node>;\npub type Nested = Pool;\npub struct Local { pub pool: Pool }\npub fn keep(x: Local) -> Local { x }\n"),
+        ("src/right.rs","pub struct Node { pub flag: bool }\npub type Pool = Vec<Node>;\n"),
+        ("src/holder.rs","use crate::left::{Nested as Pool, Items};\nuse crate::right::Node;\npub struct Held { pub pool: Pool, pub flags: Items<Node>, pub others: crate::right::Pool }\npub fn keep(x: Held) -> Held { x }\npub fn retained(x: Held) -> crate::left::Nested { x.pool }\npub fn unread(x: std::cell::UnsafeCell<u8>) -> std::cell::UnsafeCell<u8> { x }\n"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["check", "--offline"])
+        .env("CARGO_TARGET_DIR", dir.join("rust-check"))
+        .current_dir(&dir)
+        .output()
+        .expect("check source fixture");
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let files = project(&dir, "scoped_aliases");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in [
+        "scoped_aliases::left::keep",
+        "scoped_aliases::holder::keep",
+        "scoped_aliases::holder::retained",
+    ] {
+        assert!(
+            lifted.contains(&name.to_string()),
+            "alias scope did not lift: {name}"
+        );
+    }
+    assert!(!lifted.contains(&"scoped_aliases::holder::unread".to_string()));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(behavior.contains("LeftNode"), "{behavior}");
+    assert!(behavior.contains("RightNode"), "{behavior}");
+    assert!(
+        behavior.contains("{name: flags, type: (List ScopedAliasesRightNode)}"),
+        "generic alias parameter was rebound: {behavior}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write aliases");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-56: mathematical signed integers cross native word boundaries explicitly.
+#[test]
+fn native_signed_slots_use_explicit_scalar_codecs_ue_56() {
+    let dir=scratch("native-signed-codecs",&[("Cargo.toml","[package]\nname=\"signed_codecs\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub struct Wide {pub value:i128}
+pub struct Size {pub value:isize}
+pub struct Fixed {pub value:i32}
+pub fn identity128(value:i128)->i128 {value}
+pub fn identity_size(value:isize)->isize {value}
+pub fn read128(mut n:u8,value:&Wide)->i128 {while n>0 {n-=1;} value.value}
+pub fn make128(mut n:u8,value:i128)->Wide {while n>0 {n-=1;} Wide {value}}
+pub fn call128(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} identity128(value)}
+pub fn read_size(mut n:u8,value:&Size)->isize {while n>0 {n-=1;} value.value}
+pub fn make_size(mut n:u8,value:isize)->Size {while n>0 {n-=1;} Size {value}}
+pub fn call_size(mut n:u8,value:isize)->isize {while n>0 {n-=1;} identity_size(value)}
+pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
+#[test] fn reference() {for value in [i128::MIN,-1,0,i128::MAX] {assert_eq!(read128(2,&make128(2,value)),value);assert_eq!(call128(2,value),value);}for value in [isize::MIN,-1,0,isize::MAX] {assert_eq!(read_size(2,&make_size(2,value)),value);assert_eq!(call_size(2,value),value);}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust boundary oracle");
+    assert!(reference.status.success());
+    let dumps = dumped(&dir, "native-signed-codecs");
+    let mut opts = options("signed_codecs");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("proposals");
+    let functions = [
+        "read128",
+        "make128",
+        "call128",
+        "read_size",
+        "make_size",
+        "call_size",
+        "fixed",
+    ];
+    for f in functions {
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("signed_codecs::{f}\"")),
+            "{f}: {:?}",
+            residue_detail(&proposed, &format!("signed_codecs::{f}"))
+        );
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("signed-slot-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("signed_codecs"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        7,
+    )
+    .expect("SDK proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    for f in functions {
+        assert!(
+            decisions
+                .rows
+                .values()
+                .any(|r| r.function == format!("signed_codecs::{f}")
+                    && matches!(r.status, uorust::mir::verdict::Decision::Proved)),
+            "{f}"
+        );
+    }
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (suffix, bits, record) in [("128", 128, "Wide"), ("_size", usize::BITS, "Size")] {
+        let sign = 1u128 << (bits - 1);
+        let max = sign - 1;
+        let mask = if bits == 128 {
+            u128::MAX
+        } else {
+            (1u128 << bits) - 1
+        };
+        for (j, (raw, signed)) in [
+            (sign, format!("-{sign}")),
+            (mask, "-1".into()),
+            (0, "0".into()),
+            (max, max.to_string()),
+        ]
+        .iter()
+        .enumerate()
+        {
+            for mode in ["read", "make", "call"] {
+                let f = format!("{mode}{suffix}");
+                let definition = rows
+                    .iter()
+                    .find(|r| r["function"].as_str() == Some(&format!("signed_codecs::{f}")))
+                    .and_then(|r| r["definition"].as_str())
+                    .unwrap()
+                    .strip_prefix("Behavior::")
+                    .unwrap();
+                let (term, expected) = match mode {
+                    "read" => (
+                        format!("({definition} 2 (record {record} {{value := ({signed} : Int)}}))"),
+                        raw.to_string(),
+                    ),
+                    "make" => (
+                        format!("(project ({definition} 2 {raw}) value)"),
+                        format!("({signed} : Int)"),
+                    ),
+                    _ => (format!("({definition} 2 {raw})"), raw.to_string()),
+                };
+                let policy = decisions
+                    .rows
+                    .values()
+                    .find(|r| r.function == format!("signed_codecs::{f}"))
+                    .and_then(|r| r.axioms.get(definition))
+                    .cloned()
+                    .unwrap_or_default();
+                vectors.push_str(&format!("theorem{{ name: vector{bits}{mode}{j}, parameters: [], statement: ({term} = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let source = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source).unwrap();
+    std::fs::write(
+        &source,
+        original.replace("pub value:i128", "pub value:bool"),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let bad = uorust::project_workspace(&dir, &opts).expect("typed incompatible source schema");
+    assert!(residue_detail(&bad, "signed_codecs::read128")
+        .is_some_and(|s| s.contains("field representation")));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-58: unary numeric models cover extrema and preserve exact stored values.
+#[test]
+fn native_unary_numbers_share_width_and_registry_models_ue_58() {
+    let dir=scratch("native-unary-numbers",&[("Cargo.toml","[package]\nname=\"unary_numbers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[dependencies]\nnum-bigint=\"=0.4.8\"\nnum-rational=\"=0.4.2\"\n[workspace]\n"),("src/lib.rs",r#"
+use num_bigint::BigInt;
+use num_rational::BigRational;
+pub fn checked(mut n:u8,value:i128)->Option<i128> {while n>0 {n-=1;} value.checked_neg()}
+pub fn magnitude(mut n:u8,value:i128)->u128 {while n>0 {n-=1;} value.unsigned_abs()}
+pub fn wrapping(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.wrapping_neg()}
+pub fn sign(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.signum()}
+pub fn big_neg(mut n:u8,value:&BigInt)->BigInt {while n>0 {n-=1;} -value}
+pub fn ratio_neg(mut n:u8,value:&BigRational)->BigRational {while n>0 {n-=1;} -value}
+pub fn bad(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.checked_neg().unwrap()}
+#[test] fn reference() {for n in [-3,0,3] {let x=BigInt::from(n);assert_eq!(big_neg(2,&x),BigInt::from(-n));let r=BigRational::new_raw(x,BigInt::from(-6));let y=ratio_neg(2,&r);assert_eq!(y.numer(),&BigInt::from(-n));assert_eq!(y.denom(),&BigInt::from(-6));}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust exact unary vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-unary-numbers");
+    let mut opts = options("unary_numbers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("unary candidates");
+    let functions = [
+        "checked",
+        "magnitude",
+        "wrapping",
+        "sign",
+        "big_neg",
+        "ratio_neg",
+    ];
+    for f in functions {
+        let function = format!("unary_numbers::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{function}\"")),
+            "{function}: {:?}",
+            residue_detail(&proposed, &function)
+        );
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("unary-number-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("unary_numbers"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual unary SDK decisions");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved unary projection");
+    assert!(residue_detail(&files, "unary_numbers::bad").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in functions {
+        let function = format!("unary_numbers::{f}");
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(function.as_str()))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == function)
+            .and_then(|r| r.axioms.get(definition))
+            .cloned()
+            .unwrap_or_default();
+        if matches!(f, "big_neg" | "ratio_neg") {
+            for (j, n) in [-3i32, 0, 3].iter().enumerate() {
+                let (argument, expected) = if f == "big_neg" {
+                    (format!("({n} : Int)"), format!("({} : Int)", -n))
+                } else {
+                    (
+                        format!("(({n} : Int), (-6 : Int))"),
+                        format!("(({} : Int), (-6 : Int))", -n),
+                    )
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{j}, parameters: [], statement: (({definition} 2 {argument}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+            }
+        } else {
+            for (j, value) in [i128::MIN, -1, 0, i128::MAX].iter().enumerate() {
+                let expected = match f {
+                    "checked" => value.checked_neg().map_or_else(
+                        || "(ctor Option.none [Nat])".into(),
+                        |v| format!("(ctor Option.some [Nat] {})", v as u128),
+                    ),
+                    "magnitude" => value.unsigned_abs().to_string(),
+                    "wrapping" => (value.wrapping_neg() as u128).to_string(),
+                    _ => (value.signum() as u128).to_string(),
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{j}, parameters: [], statement: (({definition} 2 {}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",*value as u128,policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write unary vectors");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK unary vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let raw = std::fs::read_dir(dumps.join("lib-unary_numbers"))
+        .unwrap()
+        .map(|p| p.unwrap().path())
+        .find(|p| std::fs::read_to_string(p).is_ok_and(|s| s.contains("fn checked(")))
+        .expect("compiler-derived checked-negation body");
+    let original = std::fs::read_to_string(&raw).unwrap();
+    assert!(original.contains("core::num::<impl i128>::checked_neg"));
+    std::fs::write(
+        &raw,
+        original.replace(
+            "core::num::<impl i128>::checked_neg",
+            "core::num::<impl u128>::checked_neg",
+        ),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let bad = uorust::project_workspace(&dir, &opts).expect("typed mismatched primitive owner");
+    assert!(
+        residue_detail(&bad, "unary_numbers::checked").is_some_and(|s| s.contains("checked_neg"))
+    );
+    std::fs::write(raw, original).unwrap();
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-57: readonly owners share the source's content semantics, not identity semantics.
+#[test]
+fn native_readonly_owners_use_content_models_ue_57() {
+    let dir=scratch("native-content-owners",&[("Cargo.toml","[package]\nname=\"content_owners\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::rc::Rc;
+use std::sync::{Arc,Mutex};
+pub struct Wide {pub value:u32}
+pub fn arc_read(mut n:u8,value:&Arc<Wide>)->u32 {while n>0 {n-=1;} value.value}
+pub fn rc_read(mut n:u8,value:&Rc<Wide>)->u32 {while n>0 {n-=1;} value.value}
+pub fn arc_make(mut n:u8,value:u32)->Arc<Wide> {while n>0 {n-=1;} Arc::new(Wide {value})}
+pub fn rc_make(mut n:u8,value:u32)->Rc<Wide> {while n>0 {n-=1;} Rc::new(Wide {value})}
+pub fn arc_copy(mut n:u8,value:&Arc<Wide>)->Arc<Wide> {while n>0 {n-=1;} value.clone()}
+pub fn rc_copy(mut n:u8,value:&Rc<Wide>)->Rc<Wide> {while n>0 {n-=1;} value.clone()}
+pub fn count(mut n:u8,value:&Arc<Wide>)->usize {while n>0 {n-=1;} Arc::strong_count(value)}
+pub fn identity(mut n:u8,left:&Arc<Wide>,right:&Arc<Wide>)->bool {while n>0 {n-=1;} Arc::ptr_eq(left,right)}
+pub fn cell(mut n:u8,value:&Arc<Mutex<u32>>)->u32 {while n>0 {n-=1;} *value.lock().unwrap()}
+#[test] fn reference() {for value in [0,1,127,u32::MAX] {let a=arc_make(2,value);let r=rc_make(2,value);assert_eq!(arc_read(2,&arc_copy(2,&a)),value);assert_eq!(rc_read(2,&rc_copy(2,&r)),value);assert!(identity(2,&a,&a));assert_eq!(count(2,&a),1);}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust owner vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-content-owners");
+    let mut opts = options("content_owners");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("owner candidates");
+    for owner in ["arc", "rc"] {
+        for mode in ["read", "make", "copy"] {
+            let function = format!("content_owners::{owner}_{mode}");
+            assert!(
+                text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{function}\"")),
+                "{function}: {:?}",
+                residue_detail(&proposed, &function)
+            );
+        }
+    }
+    for function in ["count", "identity", "cell"] {
+        assert!(residue_detail(&proposed, &format!("content_owners::{function}")).is_some());
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("content-owner-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("content_owners"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        6,
+    )
+    .expect("SDK owner proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved owner projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for owner in ["arc", "rc"] {
+        for mode in ["read", "make", "copy"] {
+            let function = format!("content_owners::{owner}_{mode}");
+            let definition = rows
+                .iter()
+                .find(|r| r["function"].as_str() == Some(function.as_str()))
+                .and_then(|r| r["definition"].as_str())
+                .unwrap()
+                .strip_prefix("Behavior::")
+                .unwrap();
+            let policy = decisions
+                .rows
+                .values()
+                .find(|r| r.function == function)
+                .and_then(|r| r.axioms.get(definition))
+                .cloned()
+                .unwrap_or_default();
+            for (j, value) in [0u32, 1, 127, u32::MAX].iter().enumerate() {
+                let record = format!("(record Wide {{value := {value}}})");
+                let term = match mode {
+                    "read" => format!("({definition} 2 {record})"),
+                    "make" => format!("(project ({definition} 2 {value}) value)"),
+                    _ => format!("(project ({definition} 2 {record}) value)"),
+                };
+                vectors.push_str(&format!("theorem{{ name: vector{owner}{mode}{j}, parameters: [], statement: ({term} = {value}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write owners");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK owner vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-55: compiler temporaries preserve matched enum values across reference copies.
+#[test]
+fn native_tuple_reference_matches_preserve_value_identity_ue_55() {
+    let dir=scratch("native-match-aliases",&[("Cargo.toml","[package]\nname=\"match_aliases\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+#[derive(Clone, Copy)] pub enum Choice { A(bool), B }
+pub fn paired(mut n:u8,left:&Choice,right:&Choice)->bool {while n>0 {n-=1;} match(left,right) {(Choice::A(a),Choice::A(b))=>*a==*b,_=>false}}
+pub fn optional(mut n:u8,gate:bool,value:&Option<bool>)->bool {while n>0 {n-=1;} match(gate,value) {(true,Some(flag))=>*flag,_=>false}}
+pub fn updated(mut n:u8,mut value:Choice)->bool {while n>0 {n-=1;} let before=match &value {Choice::A(flag)=>*flag,Choice::B=>false};value=Choice::A(!before);match(&value,&Choice::B) {(Choice::A(flag),_)=>*flag,_=>false}}
+pub fn overflow(mut n:u8,left:&Choice,right:&Choice,x:u8)->u8 {while n>0 {n-=1;} match(left,right) {(Choice::A(_),Choice::A(_))=>x+1,_=>x}}
+#[test] fn reference() {for a in [Choice::A(false),Choice::A(true),Choice::B] {for b in [Choice::A(false),Choice::A(true),Choice::B] {let expected=matches!((a,b),(Choice::A(false),Choice::A(false))|(Choice::A(true),Choice::A(true)));assert_eq!(paired(2,&a,&b),expected);}assert_eq!(updated(2,a),!matches!(a,Choice::A(true)));}assert!(optional(2,true,&Some(true)));assert!(!optional(2,true,&None));assert!(!optional(2,false,&Some(true)));}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-match-aliases");
+    let mut trial = options("match_aliases");
+    trial.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &trial).expect("compiler-derived candidates");
+    for function in ["paired", "optional", "updated"] {
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES)
+                .contains(&format!("match_aliases::{function}\"")),
+            "{function}: {:?}",
+            residue_detail(&proposed, &format!("match_aliases::{function}"))
+        );
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("match-alias-verdicts.toml");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("match_aliases"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        4,
+    )
+    .expect("SDK decisions");
+    let decisions = verdicts(&register);
+    for f in ["paired", "optional", "updated"] {
+        assert!(
+            decisions
+                .rows
+                .values()
+                .any(|r| r.function == format!("match_aliases::{f}")
+                    && matches!(r.status, uorust::mir::verdict::Decision::Proved)),
+            "{f}: {summary:?}"
+        );
+    }
+    assert!(decisions
+        .rows
+        .values()
+        .any(|r| r.function == "match_aliases::overflow"
+            && matches!(r.status, uorust::mir::verdict::Decision::Refused(_))));
+    let mut opts = options("match_aliases");
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut model = String::new();
+    for (i, (f, args, expected)) in [
+        (
+            "paired",
+            "2 (ctor Choice.A true) (ctor Choice.A true)",
+            true,
+        ),
+        (
+            "paired",
+            "2 (ctor Choice.A true) (ctor Choice.A false)",
+            false,
+        ),
+        ("paired", "2 (ctor Choice.B) (ctor Choice.B)", false),
+        ("optional", "2 true (ctor Option.some [Bool] true)", true),
+        ("optional", "2 false (ctor Option.some [Bool] true)", false),
+        ("optional", "2 true (ctor Option.none [Bool])", false),
+        ("updated", "2 (ctor Choice.A true)", false),
+        ("updated", "2 (ctor Choice.A false)", true),
+        ("updated", "2 (ctor Choice.B)", true),
+    ]
+    .iter()
+    .enumerate()
+    {
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&format!("match_aliases::{f}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("definition");
+        let declaration = definition.strip_prefix("Behavior::").expect("namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("match_aliases::{f}"))
+            .and_then(|r| r.axioms.get(declaration))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{ name: vector{i}, parameters: [], statement: (({declaration} {args}) = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+    }
+
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        text(&files, "src/Behavior.lex.tex").replace(
+            "\\end{semanticmodule}",
+            &format!("{model}\\end{{semanticmodule}}"),
+        ),
+    )
+    .expect("vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let updated = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("match_aliases::updated"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let path = out.join("src/Behavior.lex.tex");
+    let valid = std::fs::read_to_string(&path).expect("validated source");
+    let defect=format!("theorem{{ name: plantedStaleBinding, parameters: [], statement: (({updated} 2 (ctor Choice.A true)) = true), proof: decide{{}} }}\n");
+    std::fs::write(
+        &path,
+        valid.replace(
+            "\\end{semanticmodule}",
+            &format!("{defect}\\end{{semanticmodule}}"),
+        ),
+    )
+    .expect("planted stale-value assertion");
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("negative SDK gate");
+    let message = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success() && message.contains("LLV7002") && message.contains("is false"),
+        "{message}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-53: unrelated source assertions do not belong to a native trial's proof closure.
+#[test]
+fn native_trials_keep_only_reachable_obligations_ue_53() {
+    let dir=scratch("native-proof-closure",&[("Cargo.toml","[package]\nname=\"proof_closure\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs","pub fn pass(mut n:u8,x:bool)->bool {while n>0 {n-=1;} x}\npub fn overflow(mut n:u8,x:u8)->u8 {while n>0 {n-=1;} x+1}\npub fn unrelated()->bool {false}\n#[test] fn unrelated_claim() {assert!(unrelated());}\n")]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-proof-closure");
+    let register = dir.join("verdicts.toml");
+    let trial = dir.join("trial");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("proof_closure"),
+        &dumps,
+        &register,
+        &trial,
+        2,
+    )
+    .expect("actual scoped decisions");
+    assert_eq!((summary.proved, summary.refused), (1, 1));
+    let scoped =
+        std::fs::read_to_string(trial.join("src/Behavior.lex.tex")).expect("actual proof input");
+    assert!(!scoped.contains("unrelated"));
+    let mut opts = options("proof_closure");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&register),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("full projection");
+    assert!(text(&files, "src/Behavior.lex.tex").contains("unrelated"));
+    let out = dir.join("full");
+    uorust::write(&out, &files).expect("full project");
+    let full = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("full acceptance remains required");
+    assert!(!full.status.success() && String::from_utf8_lossy(&full.stdout).contains("unrelated"));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-52: native callers cannot reuse a proof of a different source callee.
+#[test]
+fn native_proof_cache_binds_source_dependencies_ue_52() {
+    let first="pub fn flag(x:bool)->bool { x }\npub fn caller(mut n:u8,x:bool)->bool {while n>0 {n-=1;} flag(x)}\n";
+    let dir=scratch("native-context-cache",&[("Cargo.toml","[package]\nname=\"context_cache\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",first)]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-context-cache");
+    let register = dir.join("verdicts.toml");
+    let prove = || {
+        uorust::mir::prove_bounded(
+            &dir,
+            &options("context_cache"),
+            &dumps,
+            &register,
+            &dir.join("trial"),
+            1,
+        )
+        .expect("actual context proof")
+    };
+    let before = prove();
+    assert_eq!((before.proved, before.refused), (1, 0));
+    let original = verdicts(&register);
+    std::fs::write(dir.join("src/lib.rs"), first.replace("{ x }", "{ !x }"))
+        .expect("changed callee only");
+    let after = prove();
+    assert!(
+        after.runs > 0,
+        "changed source dependency reused an old SDK decision"
+    );
+    assert_eq!((after.proved, after.refused), (1, 0));
+    assert_ne!(
+        original.rows.values().next().expect("old").digest,
+        verdicts(&register)
+            .rows
+            .values()
+            .next()
+            .expect("fresh")
+            .digest
+    );
+    let replay = prove();
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-51: one binary conversion rule covers all primitive word widths.
+#[test]
+fn numeric_word_constructors_follow_widths_ue_51() {
+    let types = [
+        ("u8", u8::BITS, false),
+        ("u16", u16::BITS, false),
+        ("u32", u32::BITS, false),
+        ("u64", u64::BITS, false),
+        ("u128", u128::BITS, false),
+        ("usize", usize::BITS, false),
+        ("i8", i8::BITS, true),
+        ("i16", i16::BITS, true),
+        ("i32", i32::BITS, true),
+        ("i64", i64::BITS, true),
+        ("i128", i128::BITS, true),
+        ("isize", isize::BITS, true),
+    ];
+    let mut code="use num_bigint::BigInt;\nuse num_rational::BigRational;\npub fn source_unsigned(x:u64)->BigInt {BigInt::from(x)}\n".to_string();
+    for (ty, _, _) in types {
+        code.push_str(&format!(
+            "pub fn from_{ty}(mut n:u8,x:{ty})->BigInt {{while n>0 {{n-=1;}} BigInt::from(x)}}\n"
+        ));
+    }
+    code.push_str("pub fn ratio(mut n:u8,x:BigInt)->BigRational {while n>0 {n-=1;} BigRational::from_integer(x)}\n");
+    code.push_str("#[test] fn reference_boundaries() {\n");
+    for (ty, _, _) in types {
+        code.push_str(&format!("assert_eq!(from_{ty}(0,{ty}::MIN).to_string(),{ty}::MIN.to_string()); assert_eq!(from_{ty}(0,{ty}::MAX).to_string(),{ty}::MAX.to_string());\n"));
+    }
+    code.push_str("}\n");
+    let dir=scratch("word-constructors",&[("Cargo.toml","[package]\nname=\"word_constructors\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n[dependencies]\nnum-bigint=\"=0.4.8\"\nnum-rational=\"=0.4.2\"\n"),("src/lib.rs",&code)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust word boundary vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let files = uorust::project_workspace(&dir, &options("word_constructors"))
+        .expect("source word construction");
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("word_constructors::source_unsigned")),
+        "source unsigned construction is not lifted"
+    );
+    let dumps = dumped(&dir, "word-constructors");
+    let mut opts = options("word_constructors");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native constructors");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for (ty, _, _) in types {
+        assert!(
+            listing.contains(&format!("word_constructors::from_{ty}\"")),
+            "missing width {ty}: {listing}"
+        );
+    }
+    assert!(listing.contains("word_constructors::ratio\""));
+    let register =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("word-constructor-verdicts.toml");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("word_constructors"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual word proofs");
+    assert_eq!(summary.refused, 0);
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved word constructors");
+    let rows = frontier_rows(&files, "lifted");
+    let name = |f: &str| {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(&format!("word_constructors::{f}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("proved constructor")
+            .to_string()
+    };
+    let mut vectors = Vec::new();
+    for (ty, width, signed) in types {
+        let mask = u128::MAX >> (u128::BITS - width);
+        let half = 1u128 << (width - 1);
+        let f = format!("from_{ty}");
+        if signed {
+            vectors.push((
+                f.clone(),
+                format!("0 {half}"),
+                format!("(prim negate ({half} : Int) : Int)"),
+            ));
+            vectors.push((
+                f.clone(),
+                format!("0 {mask}"),
+                "(prim negate (1 : Int) : Int)".to_string(),
+            ));
+            vectors.push((
+                f,
+                format!("0 {}", half - 1),
+                format!("({} : Int)", half - 1),
+            ));
+        } else {
+            vectors.push((f.clone(), "0 0".to_string(), "(0 : Int)".to_string()));
+            vectors.push((f, format!("0 {mask}"), format!("({mask} : Int)")));
+        }
+    }
+    vectors.push((
+        "source_unsigned".into(),
+        u64::MAX.to_string(),
+        format!("({} : Int)", u64::MAX),
+    ));
+    vectors.push((
+        "ratio".into(),
+        "0 (prim negate (2 : Int) : Int)".into(),
+        "((prim negate (2 : Int) : Int), (1 : Int))".into(),
+    ));
+    let mut model="\\begin{lexlean}{WordVectors}\n\\useglossary{uorust.titles@1.0.0}\n\\importmodule{Behavior}\n\\title{Lifted Rust behavior}\n\\begin{semanticmodule}\n".to_string();
+    for (i, (f, args, expected)) in vectors.iter().enumerate() {
+        let def = name(f);
+        let decl = def.strip_prefix("Behavior::").expect("namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("word_constructors::{f}"))
+            .and_then(|r| r.axioms.get(decl))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{name: word{i}, parameters: [], statement: (({def} {args}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    model.push_str("\\end{semanticmodule}\n\\end{lexlean}\n");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write constructors");
+    std::fs::write(out.join("src/WordVectors.lex.tex"), model).expect("word vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/WordVectors.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK word boundary proof");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-49: numeric predicates and accessors retain the locked crates' stored-value semantics.
+#[test]
+fn native_numeric_observations_follow_locked_values_ue_49() {
+    let dir = scratch("native-numeric-observations", &[
+        ("Cargo.toml", "[package]\nname = \"numeric_observations\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\nnum-traits = \"=0.2.19\"\n"),
+        ("src/lib.rs", r#"
+use num_bigint::BigInt;
+use num_rational::BigRational;
+use num_traits::{Zero, One, Signed};
+pub fn iz(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_zero() }
+pub fn io(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_one() }
+pub fn ip(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_positive() }
+pub fn ine(mut n:u8,x:&BigInt)->bool { while n>0 {n-=1;} x.is_negative() }
+pub fn ia(mut n:u8,x:&BigInt)->BigInt { while n>0 {n-=1;} x.abs() }
+pub fn isig(mut n:u8,x:&BigInt)->BigInt { while n>0 {n-=1;} x.signum() }
+pub fn rz(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_zero() }
+pub fn ro(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_one() }
+pub fn rp(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_positive() }
+pub fn rn(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_negative() }
+pub fn ra(mut n:u8,x:&BigRational)->BigRational { while n>0 {n-=1;} x.abs() }
+pub fn ri(mut n:u8,x:&BigRational)->bool { while n>0 {n-=1;} x.is_integer() }
+pub fn numer(mut n:u8,x:&BigRational)->&BigInt { while n>0 {n-=1;} x.numer() }
+pub fn denom(mut n:u8,x:&BigRational)->&BigInt { while n>0 {n-=1;} x.denom() }
+pub fn izero(mut n:u8)->BigInt { while n>0 {n-=1;} BigInt::zero() }
+pub fn ione(mut n:u8)->BigInt { while n>0 {n-=1;} BigInt::one() }
+pub fn rzero(mut n:u8)->BigRational { while n>0 {n-=1;} BigRational::zero() }
+pub fn rone(mut n:u8)->BigRational { while n>0 {n-=1;} BigRational::one() }
+pub fn unsupported(mut n:u8,x:&BigInt)->u64 { while n>0 {n-=1;} x.bits() }
+#[test] fn reference_raw_ratios() {
+    let raw=BigRational::new_raw(BigInt::zero(),BigInt::zero()); assert!(raw.is_zero() && raw.is_one());
+    let q=BigRational::new_raw(BigInt::from(2),BigInt::from(-2)); assert!(q.is_negative());
+    assert_eq!((q.abs().numer().clone(),q.abs().denom().clone()),(BigInt::from(-2),BigInt::from(-2)));
+}
+"#),
+    ]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("locked Rust numeric vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-numeric-observations");
+    let mut opts = options("numeric_observations");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("numeric observations");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    let names = [
+        "iz", "io", "ip", "ine", "ia", "isig", "rz", "ro", "rp", "rn", "ra", "ri", "numer",
+        "denom", "izero", "ione", "rzero", "rone",
+    ];
+    for name in names {
+        assert!(
+            listing.contains(&format!("numeric_observations::{name}\"")),
+            "missing numeric observation {name}: {listing}"
+        );
+    }
+    assert!(!listing.contains("numeric_observations::unsupported\""));
+    // Reuse actual digest-bound SDK decisions when only the surrounding
+    // acceptance vectors change. UORust invalidates changed translations.
+    let register =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("numeric-observation-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("numeric_observations"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual numeric SDK proofs");
+    assert_eq!(proof.refused, 0);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        verdicts(&register),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved observations");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write observations");
+    let rows = frontier_rows(&files, "lifted");
+    let named = |function: &str| {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(&format!("numeric_observations::{function}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("proved definition")
+            .to_string()
+    };
+    let vectors = [
+        ("iz", "0 (0 : Int)", "true"),
+        ("iz", "0 (2 : Int)", "false"),
+        ("io", "0 (1 : Int)", "true"),
+        ("ip", "0 (0 : Int)", "false"),
+        ("ine", "0 (prim negate (2 : Int) : Int)", "true"),
+        ("ia", "0 (prim negate (2 : Int) : Int)", "(2 : Int)"),
+        (
+            "isig",
+            "0 (prim negate (2 : Int) : Int)",
+            "(prim negate (1 : Int) : Int)",
+        ),
+        ("rz", "0 ((0 : Int), (0 : Int))", "true"),
+        ("ro", "0 ((0 : Int), (0 : Int))", "true"),
+        ("rn", "0 ((2 : Int), (prim negate (2 : Int) : Int))", "true"),
+        (
+            "rp",
+            "0 ((prim negate (2 : Int) : Int), (prim negate (2 : Int) : Int))",
+            "true",
+        ),
+        (
+            "ra",
+            "0 ((2 : Int), (prim negate (2 : Int) : Int))",
+            "((prim negate (2 : Int) : Int), (prim negate (2 : Int) : Int))",
+        ),
+        ("ri", "0 ((2 : Int), (1 : Int))", "true"),
+        ("numer", "0 ((2 : Int), (0 : Int))", "(2 : Int)"),
+        ("denom", "0 ((2 : Int), (0 : Int))", "(0 : Int)"),
+        ("izero", "0", "(0 : Int)"),
+        ("ione", "0", "(1 : Int)"),
+        ("rzero", "0", "((0 : Int), (1 : Int))"),
+        ("rone", "0", "((1 : Int), (1 : Int))"),
+    ];
+    let mut model =
+        "\\begin{lexlean}{NumericVectors}\n\\useglossary{uorust.titles@1.0.0}\n\\importmodule{Behavior}\n\\title{Lifted Rust behavior}\n\\begin{semanticmodule}\n"
+            .to_string();
+    let decisions = verdicts(&register);
+    for (i, (f, args, expected)) in vectors.iter().enumerate() {
+        let definition = named(f);
+        let declaration = definition
+            .strip_prefix("Behavior::")
+            .expect("native namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("numeric_observations::{f}"))
+            .and_then(|r| r.axioms.get(declaration))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{ name: vector{i}, parameters: [], statement: (({definition} {args}) = {expected}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+    }
+    model.push_str("\\end{semanticmodule}\n\\end{lexlean}\n");
+    std::fs::write(out.join("src/NumericVectors.lex.tex"), model).expect("closed numeric vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/NumericVectors.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK numeric vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let lock = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock).expect("lock");
+    std::fs::write(
+        &lock,
+        original.replace(
+            "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367",
+            &"0".repeat(64),
+        ),
+    )
+    .expect("wrong checksum");
+    let refused = uorust::project_workspace(&dir, &opts).expect("checksum refusal");
+    assert!(!frontier_rows(&refused, "lifted")
+        .iter()
+        .any(|r| r["function"].as_str() == Some("numeric_observations::iz")));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-48: early exits retain the updates already performed through mutable parameters.
+#[test]
+fn source_propagation_preserves_mutable_state_ue_48() {
+    let dir = scratch("threaded-propagation", &[
+        ("Cargo.toml", "[package]\nname = \"propagate\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub struct State { pub flag: bool }
+pub fn option(s: &mut State, x: Option<bool>) -> Option<bool> {
+    s.flag = true; let y = x?; s.flag = y; Some(y)
+}
+pub fn result(s: &mut State, x: Result<bool, bool>) -> Result<bool, bool> {
+    s.flag = true; let y = x?; s.flag = y; Ok(y)
+}
+pub fn callee(s: &mut State) -> Result<bool, bool> { s.flag = true; Err(false) }
+pub fn caller(s: &mut State) -> Result<bool, bool> {
+    let y = callee(s)?; s.flag = y; Ok(y)
+}
+pub fn both(a: &mut State, b: &mut State, x: Option<bool>) -> Option<bool> {
+    a.flag = true; b.flag = true; let y = x?; a.flag = y; Some(y)
+}
+pub fn alias(s: &mut State, x: Option<bool>) -> Option<bool> {
+    let other = s; other.flag = true; let y = x?; Some(y)
+}
+pub fn conversion(s: &mut State, x: Result<bool, bool>) -> Result<bool, u8> {
+    s.flag = true; let y = x?; Ok(y)
+}
+pub fn option_failure() -> bool {
+    let mut s = State { flag: false }; let r = option(&mut s, None); r == None && s.flag
+}
+pub fn option_success() -> bool {
+    let mut s = State { flag: true }; let r = option(&mut s, Some(false)); r == Some(false) && !s.flag
+}
+pub fn result_failure() -> bool {
+    let mut s = State { flag: false }; let r = result(&mut s, Err(false)); r == Err(false) && s.flag
+}
+pub fn result_success() -> bool {
+    let mut s = State { flag: true }; let r = result(&mut s, Ok(false)); r == Ok(false) && !s.flag
+}
+pub fn callee_failure() -> bool {
+    let mut s = State { flag: false }; let r = caller(&mut s); r == Err(false) && s.flag
+}
+pub fn two_states() -> bool {
+    let mut a = State { flag: false }; let mut b = State { flag: false };
+    let r = both(&mut a, &mut b, None); r == None && a.flag && b.flag
+}
+#[test] fn option_failure_vector() { assert!(option_failure()); }
+#[test] fn option_success_vector() { assert!(option_success()); }
+#[test] fn result_failure_vector() { assert!(result_failure()); }
+#[test] fn result_success_vector() { assert!(result_success()); }
+#[test] fn callee_failure_vector() { assert!(callee_failure()); }
+#[test] fn two_states_vector() { assert!(two_states()); }
+"#),
+    ]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("reference Rust vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let files = uorust::project_workspace(&dir, &options("propagate")).expect("source projection");
+    let rows = frontier_rows(&files, "lifted");
+    for name in [
+        "option",
+        "result",
+        "callee",
+        "caller",
+        "both",
+        "option_failure",
+        "option_success",
+        "result_failure",
+        "result_success",
+        "callee_failure",
+        "two_states",
+    ] {
+        assert!(
+            rows.iter()
+                .any(|r| r["function"].as_str() == Some(&format!("propagate::{name}"))),
+            "missing threaded propagation {name}: {}",
+            text(&files, "frontier.toml")
+        );
+    }
+    assert!(!rows
+        .iter()
+        .any(|r| r["function"].as_str() == Some("propagate::alias")));
+    assert!(!rows
+        .iter()
+        .any(|r| r["function"].as_str() == Some("propagate::conversion")));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    assert!(
+        behavior.matches("proof: decide").count() >= 6,
+        "missing executable acceptance roots: {behavior}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write propagation projection");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("actual SDK propagation proof");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    // Plant loss of the update on the failure path. The same acceptance
+    // roots must reject it; a merely well-typed tuple is not evidence.
+    let marker = "item0 := (ctor Option.none [Bool]), item1 := s1";
+    assert!(behavior.contains(marker), "missing failure-state boundary");
+    let mut wrong = files.clone();
+    wrong.insert(
+        "src/Behavior.lex.tex".into(),
+        behavior
+            .replacen(marker, "item0 := (ctor Option.none [Bool]), item1 := s", 1)
+            .into_bytes(),
+    );
+    let mutant = dir.join("lost-state");
+    uorust::write(&mutant, &wrong).expect("write planted state-loss defect");
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&mutant)
+        .output()
+        .expect("SDK rejects lost state");
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("optionFailure")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-47: native workspaces use the same core-derived IEEE formats as source lifting.
+#[test]
+fn native_workspace_floats_preserve_root_names_ue_47() {
+    let dir = scratch("native-root-float-name", &[
+        ("Cargo.toml", "[package]\nname = \"float_shadow\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "#[allow(non_camel_case_types)] pub struct f64 { pub flag: bool }\npub fn flag(mut n: u8, x: f64) -> bool { while n > 0 { n -= 1; } x.flag }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let mut opts = options("float_shadow");
+    opts.mir = Some(mir_options(
+        dumped(&dir, "native-root-float-name"),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("root primitive-name declaration");
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("float_shadow::flag\""),
+        "the root declaration was replaced by a primitive"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write root declaration");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK type check");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-47: native workspaces use the same core-derived IEEE formats as source lifting.
+#[test]
+fn native_workspace_floats_share_source_readings_ue_47() {
+    let dir = scratch("native-workspace-floats", &[
+        ("Cargo.toml", "[package]\nname = \"native_floats\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn id32(mut n: u8, x: f32) -> f32 { while n > 0 { n -= 1; } x }\npub fn id64(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x }\npub fn bits32(mut n: u8, x: f32) -> u32 { while n > 0 { n -= 1; } x.to_bits() }\npub fn arithmetic64(mut n: u8, x: f64, y: f64) -> f64 { while n > 0 { n -= 1; } (x + y).abs() }\npub fn rebuilt64(mut n: u8, x: u64) -> f64 { while n > 0 { n -= 1; } f64::from_bits(x) }\npub fn negative_zero(mut n: u8) -> u64 { while n > 0 { n -= 1; } (-0.0f64).to_bits() }\npub fn finite64(mut n: u8, x: f64) -> bool { while n > 0 { n -= 1; } x.is_finite() }\npub fn unmodeled(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x.sin() }\npub mod shadow { #[allow(non_camel_case_types)] pub struct f64 { pub flag: bool } pub fn transport(mut n: u8, x: f64) -> f64 { while n > 0 { n -= 1; } x } }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-workspace-floats");
+    let mut opts = options("native_floats");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native float projection");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in [
+        "id32",
+        "id64",
+        "bits32",
+        "arithmetic64",
+        "rebuilt64",
+        "negative_zero",
+        "finite64",
+        "shadow::transport",
+    ] {
+        assert!(
+            listing.contains(&format!("native_floats::{name}\"")),
+            "missing native float {name}: {listing}"
+        );
+    }
+    assert!(!listing.contains("native_floats::unmodeled\""));
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    let rows = frontier_rows(&files, "lifted");
+    for function in ["native_floats::id32", "native_floats::id64"] {
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(function))
+            .and_then(|r| r["definition"].as_str())
+            .and_then(|d| d.strip_prefix("Behavior::"))
+            .expect("primitive definition");
+        let start = behavior
+            .find(&format!("name: {definition},"))
+            .expect("primitive header");
+        let header = behavior[start..].split("body:").next().expect("header");
+        assert!(
+            header.contains("x : Nat") && header.contains("result: Nat"),
+            "primitive was read as a workspace homonym: {header}"
+        );
+    }
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("native_floats"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual IEEE proofs");
+    assert_eq!((proof.proved, proof.refused), (8, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-65: import semantic type readings; never freeze a shared cell.
+#[test]
+fn native_type_models_import_source_readings_ue_65() {
+    let dir=scratch("source-type-readings",&[("Cargo.toml","[package]\nname=\"type_readings\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::rc::Rc;use std::sync::{Arc,Mutex};use std::cell::{RefCell,Cell};
+pub fn rc(mut n:u8,x:Rc<RefCell<u32>>)->Rc<RefCell<u32>> {while n>0 {n-=1;} x}
+pub fn arc(mut n:u8,x:Arc<Cell<u32>>)->Arc<Cell<u32>> {while n>0 {n-=1;} x.clone()}
+pub fn some(mut n:u8,x:Option<Rc<RefCell<u32>>>)->bool {while n>0 {n-=1;} x.is_some()}
+pub fn length(mut n:u8,x:&[Rc<RefCell<u32>>])->usize {while n>0 {n-=1;} x.len()}
+pub fn read(mut n:u8,x:Rc<RefCell<u32>>)->u32 {while n>0 {n-=1;} *x.borrow()}
+pub fn write(mut n:u8,x:Rc<RefCell<u32>>,v:u32) {while n>0 {n-=1;} *x.borrow_mut()=v;}
+pub fn locked(mut n:u8,x:Arc<Mutex<u32>>)->u32 {while n>0 {n-=1;} *x.lock().unwrap()}
+pub fn counts(mut n:u8,x:Rc<RefCell<u32>>)->usize {while n>0 {n-=1;} Rc::strong_count(&x)}
+pub fn pointer_equal(mut n:u8,x:Rc<RefCell<u32>>,y:Rc<RefCell<u32>>)->bool {while n>0 {n-=1;} Rc::ptr_eq(&x,&y)}
+"#),("src/bin/vectors.rs",r#"
+use type_readings::*;use std::rc::Rc;use std::sync::Arc;use std::cell::{RefCell,Cell};
+fn main(){let cell=Rc::new(RefCell::new(19));let _borrow=cell.borrow_mut();let atomic=Arc::new(Cell::new(23));for n in [0,2] {assert!(Rc::ptr_eq(&rc(n,cell.clone()),&cell));assert!(Arc::ptr_eq(&arc(n,atomic.clone()),&atomic));assert!(!some(n,None));assert!(some(n,Some(cell.clone())));assert_eq!(length(n,&[]),0);assert_eq!(length(n,&[cell.clone(),cell.clone()]),2);}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "source-type-readings");
+    let mut opts = options("type_readings");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["rc", "arc", "some", "length"] {
+        let path = format!("type_readings::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    for f in ["read", "write", "locked", "counts", "pointer_equal"] {
+        assert!(
+            residue_detail(&files, &format!("type_readings::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-type-reading-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("type_readings"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in ["rc", "arc", "some", "length"] {
+        let path = format!("type_readings::{f}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let allocation = if f == "arc" {
+            "(ctor Prelude::ArcCellRef.Allocation 9)"
+        } else {
+            "(ctor Prelude::RcCellRef.Allocation 9)"
+        };
+        let examples = match f {
+            "rc" | "arc" => vec![(allocation.to_string(), allocation.to_string())],
+            "some" => vec![
+                (
+                    "(ctor Option.none [Prelude::RcCellRef])".into(),
+                    "false".into(),
+                ),
+                (
+                    format!("(ctor Option.some [Prelude::RcCellRef] {allocation})"),
+                    "true".into(),
+                ),
+            ],
+            _ => vec![
+                ("(nil Prelude::RcCellRef)".into(), "0".into()),
+                (
+                    format!("(cons {allocation} (cons {allocation} (nil Prelude::RcCellRef)))"),
+                    "2".into(),
+                ),
+            ],
+        };
+        for n in [0, 2] {
+            for (i, (input, expected)) in examples.iter().enumerate() {
+                // Opaque allocation references deliberately expose no decidable
+                // equality. Transport is definitional identity, so use rfl.
+                let proof = if matches!(f, "rc" | "arc") {
+                    "reflexivity"
+                } else {
+                    "decide"
+                };
+                vectors.push_str(&format!("theorem{{name: typeModel{f}{n}Vector{i}, parameters: [], statement: (({name} {n} {input}) = {expected}), proof: {proof}{{}}, axioms: [{}]}}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= true)", "= false)", 1);
+    assert_ne!(vectors, wrong, "planted wrong container observation");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-64: callable values come from compiler bodies, with no operation recipes.
+#[test]
+fn immutable_compiler_closures_share_model_callables_ue_64() {
+    let dir=scratch("compiler-model-callables",&[("Cargo.toml","[package]\nname=\"model_callables\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn flip(x:bool)->bool {!x}
+pub fn predicate(mut n:u8,x:Option<bool>,expected:bool)->bool {while n>0 {n-=1;} x.is_some_and(|v|v==expected)}
+pub fn mapped(mut n:u8,x:Option<bool>,negate:bool)->Option<bool> {while n>0 {n-=1;} x.map(|v|if negate {!v} else {v})}
+pub fn lazy(mut n:u8,x:Option<bool>,fallback:bool)->bool {while n>0 {n-=1;} x.unwrap_or_else(||fallback)}
+pub fn item(mut n:u8,x:Option<bool>)->bool {while n>0 {n-=1;} x.is_some_and(flip)}
+pub fn mutable(mut n:u8,x:Option<bool>,state:&mut bool)->Option<bool> {while n>0 {n-=1;} x.map(|v|{*state=v;v})}
+pub fn overflow(mut n:u8,x:Option<u8>)->Option<u8> {while n>0 {n-=1;} x.map(|v|v+1)}
+"#),("src/bin/vectors.rs",r#"
+use model_callables::*;
+fn option(x:Option<bool>)->String {match x {None=>"(ctor Option.none [Bool])".into(),Some(v)=>format!("(ctor Option.some [Bool] {v})")}}
+fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());let mut state=false;assert_eq!(mutable(2,Some(true),&mut state),Some(true));assert!(state);for x in [None,Some(false),Some(true)] {let input=option(x);println!("item|2 {input}|{}",item(2,x));for y in [false,true] {println!("predicate|2 {input} {y}|{}",predicate(2,x,y));println!("mapped|2 {input} {y}|{}",option(mapped(2,x,y)));println!("lazy|2 {input} {y}|{}",lazy(2,x,y));}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 21);
+    let dumps = dumped(&dir, "compiler-model-callables");
+    let mut opts = options("model_callables");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["predicate", "mapped", "lazy", "item"] {
+        let path = format!("model_callables::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    assert!(residue_detail(&proposed, "model_callables::mutable").is_some());
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("model-callable-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("model_callables"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert!(proof.refused <= 1, "{proof:?}");
+    let decisions = verdicts(&cache);
+    assert!(decisions
+        .rows
+        .values()
+        .any(|row| row.function == "model_callables::overflow"
+            && matches!(row.status, uorust::mir::verdict::Decision::Refused(_))));
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&files, "model_callables::overflow").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, input, expected] = parts.as_slice() else {
+            panic!("vector {line}")
+        };
+        let path = format!("model_callables::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: callableVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= false)", "= true)", 1);
+    assert_ne!(vectors, wrong, "planted false callback result");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-64: one model bridge, exercised across unrelated standard receiver types.
+#[test]
+fn native_calls_import_source_semantic_models_ue_64() {
+    let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn fallback(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap_or_default()}
+pub fn error(mut n:u8,x:Result<bool,u8>)->Option<u8> {while n>0 {n-=1;} x.err()}
+pub fn conditional(mut n:u8,x:bool,y:u8)->Option<u8> {while n>0 {n-=1;} x.then_some(y)}
+pub fn ascii(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_ascii_lowercase()}
+pub fn panic_default(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap()}
+pub fn unicode(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_lowercase()}
+"#),("src/bin/vectors.rs",r#"
+use source_models::*;
+fn option(x:Option<u8>)->String {match x {None=>"(ctor Option.none [Nat])".into(),Some(v)=>format!("(ctor Option.some [Nat] {v})")}}
+fn main() {
+ for x in [None,Some(0),Some(255)] {println!("fallback|2 {}|{}",option(x),fallback(2,x));}
+ for x in [Ok(false),Ok(true),Err(0),Err(255)] {let term=match x {Ok(v)=>format!("(ctor Result.ok [Bool, Nat] {v})"),Err(e)=>format!("(ctor Result.error [Bool, Nat] {e})")};println!("error|2 {term}|{}",option(error(2,x)));}
+ for x in [false,true] {for y in [0,255] {println!("conditional|2 {x} {y}|{}",option(conditional(2,x,y)));}}
+ for x in ["","PRISM","XyZ","PRIΣM"] {println!("ascii|2 {x:?}|{:?}",ascii(2,x));}
+}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 15);
+    let dumps = dumped(&dir, "source-model-import");
+    let mut opts = options("source_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["fallback", "error", "conditional", "ascii"] {
+        let path = format!("source_models::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["panic_default", "unicode"] {
+        assert!(
+            residue_detail(&proposed, &format!("source_models::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-model-import-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("source_models"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, input, expected] = parts.as_slice() else {
+            panic!("vector {line}")
+        };
+        let path = format!("source_models::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        if *function == "ascii" {
+            // UTF-8 encoding is opaque to the kernel. Prove the bridge's
+            // definitional equality to the existing source model instead of
+            // pretending `decide` can evaluate that runtime primitive.
+            let text = input.strip_prefix("2 ").unwrap();
+            vectors.push_str(&format!("theorem{{name: importedVector{i}, parameters: [], statement: (({name} {input}) = (Prelude::textAsciiLower {text})), proof: reflexivity{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        } else {
+            vectors.push_str(&format!("theorem{{name: importedVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let incorrect_vectors = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(vectors, incorrect_vectors, "planted false oracle vector");
+    let defect = body.replacen(&vectors, &incorrect_vectors, 1);
+    assert_ne!(body, defect, "incorrect imported-model output planted");
+    std::fs::write(out.join("src/Behavior.lex.tex"), defect).unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-63: region composition is derived from compiler edges, not function names.
+#[test]
+fn compiler_regions_compose_nested_continuations_ue_63() {
+    let dir=scratch("compiler-regions",&[("Cargo.toml","[package]\nname=\"compiler_regions\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn nested(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;v=!v;}}v}
+pub fn triple(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;let mut k=m;while k>0 {k-=1;v=!v;}}}v}
+pub fn early(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;if j==2 && v {return false;}v=!v;}}v}
+pub fn exits(mut n:u8,m:u8,mut v:bool)->bool {'outer:while n>0 {n-=1;let mut j=m;while j>0 {j-=1;if j==1 {continue 'outer;}if j==2 {break;}v=!v;}}v}
+pub fn overflow(mut n:u8,m:u8,mut value:u8)->u8 {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;value+=1;}}value}
+pub fn borrowed(mut n:u8,m:u8,value:&mut bool)->bool {while n>0 {n-=1;let reference=&mut *value;let mut j=m;while j>0 {j-=1;*reference=!*reference;}}*value}
+"#),("src/bin/vectors.rs",r#"
+use compiler_regions::*;
+fn main(){for n in 0..=3 {for m in 0..=3 {for v in [false,true] {for (name,out) in [("nested",nested(n,m,v)),("triple",triple(n,m,v)),("early",early(n,m,v)),("exits",exits(n,m,v))] {println!("{name},{n},{m},{v},{out}");}}}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 128);
+    let dumps = dumped(&dir, "compiler-regions");
+    let mut opts = options("compiler_regions");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["nested", "triple", "early", "exits"] {
+        let path = format!("compiler_regions::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    assert!(
+        residue_detail(&proposed, "compiler_regions::borrowed").is_some(),
+        "borrow state must not be snapshotted"
+    );
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("compiler-region-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_regions"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert!(proof.refused <= 1, "{proof:?}");
+    let decisions = verdicts(&cache);
+    assert!(decisions
+        .rows
+        .values()
+        .any(|row| row.function == "compiler_regions::overflow"
+            && matches!(row.status, uorust::mir::verdict::Decision::Refused(_))));
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&files, "compiler_regions::overflow").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split(',').collect();
+        let [function, n, m, input, expected] = parts.as_slice() else {
+            panic!("oracle vector {line}")
+        };
+        let path = format!("compiler_regions::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: regionVector{i}, parameters: [], statement: (({name} {n} {m} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let sdk = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        sdk.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&sdk.stdout),
+        String::from_utf8_lossy(&sdk.stderr)
+    );
+    let nested = rows
+        .iter()
+        .find(|row| row["function"].as_str() == Some("compiler_regions::nested"))
+        .unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let mut prefix = nested.to_string();
+    prefix.replace_range(..1, &nested[..1].to_uppercase());
+    let ctor = body
+        .find(&format!("(ctor {prefix}Loop"))
+        .expect("generated nested exit");
+    let path_start = ctor + "(ctor ".len();
+    let value_start = path_start + body[path_start..].find(' ').unwrap() + 1;
+    assert!(
+        body[value_start..].starts_with("(project "),
+        "exit transports the Boolean state"
+    );
+    let value_end = value_start + body[value_start..].find(')').unwrap() + 1;
+    let mut broken = body.clone();
+    broken.replace_range(value_start..value_end, "false");
+    assert_ne!(broken, body, "planted lost Boolean exit state");
+    std::fs::write(out.join("src/Behavior.lex.tex"), broken).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-62: the delivery policy rejects regressions in the actual automation gate.
+#[test]
+fn factory_delivery_guard_enforces_structural_automation_ue_62() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .to_path_buf();
+    let result = std::process::Command::new("python3")
+        .args(["-I", "crates/uorust/delivery/test_guard.py"])
+        .current_dir(root)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&result.stdout),
+        String::from_utf8_lossy(&result.stderr)
+    );
+}
+
+/// UE-61: function values reuse admitted signatures and standard content borrows.
+#[test]
+fn native_function_items_reuse_admitted_readings_ue_61() {
+    let dir=scratch("function-items",&[("Cargo.toml","[package]\nname=\"function_items\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::sync::Arc;
+use std::rc::Rc;
+use std::borrow::Borrow;
+use std::ops::Deref;
+pub fn flip(x:bool)->bool {!x}
+pub fn flip_option(mut n:u8,x:Option<bool>)->Option<bool> {while n>0 {n-=1;} x.map(flip)}
+pub fn arc_ref(mut n:u8,x:Option<&Arc<u32>>)->Option<&u32> {while n>0 {n-=1;} x.map(Arc::as_ref)}
+pub fn rc_ref(mut n:u8,x:Option<&Rc<u32>>)->Option<&u32> {while n>0 {n-=1;} x.map(Rc::as_ref)}
+pub fn arc_borrow(mut n:u8,x:Option<&Arc<u32>>)->Option<&u32> {while n>0 {n-=1;} x.map(<Arc<u32> as Borrow<u32>>::borrow)}
+pub fn rc_deref(mut n:u8,x:Option<&Rc<u32>>)->Option<&u32> {while n>0 {n-=1;} x.map(<Rc<u32> as Deref>::deref)}
+pub struct Custom(u32);
+impl AsRef<u32> for Custom {fn as_ref(&self)->&u32 {&self.0}}
+pub fn custom(mut n:u8,x:Option<&Custom>)->Option<&u32> {while n>0 {n-=1;} x.map(Custom::as_ref)}
+pub fn change(x:&mut u32)->u32 {*x=2;*x}
+pub fn mutable(mut n:u8,x:Option<&mut u32>)->Option<u32> {while n>0 {n-=1;} x.map(change)}
+#[test] fn reference(){let arc=Arc::new(7);let rc=Rc::new(7);assert_eq!(arc_ref(2,Some(&arc)),Some(&7));assert_eq!(rc_ref(2,Some(&rc)),Some(&7));assert_eq!(arc_borrow(2,Some(&arc)),Some(&7));assert_eq!(rc_deref(2,Some(&rc)),Some(&7));assert_eq!(flip_option(2,Some(true)),Some(false));assert_eq!(arc_ref(2,None),None);assert_eq!(flip_option(2,None),None);}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "function-items");
+    let mut opts = options("function_items");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    let functions = ["flip_option", "arc_ref", "rc_ref", "arc_borrow", "rc_deref"];
+    for f in functions {
+        let path = format!("function_items::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["custom", "mutable"] {
+        assert!(
+            residue_detail(&proposed, &format!("function_items::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("function-items-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("function_items"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in functions {
+        let path = format!("function_items::{f}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        for (i, (input, expected)) in if f == "flip_option" {
+            vec![
+                ("(ctor Option.none [Bool])", "(ctor Option.none [Bool])"),
+                (
+                    "(ctor Option.some [Bool] false)",
+                    "(ctor Option.some [Bool] true)",
+                ),
+                (
+                    "(ctor Option.some [Bool] true)",
+                    "(ctor Option.some [Bool] false)",
+                ),
+            ]
+        } else {
+            vec![
+                ("(ctor Option.none [Nat])", "(ctor Option.none [Nat])"),
+                ("(ctor Option.some [Nat] 0)", "(ctor Option.some [Nat] 0)"),
+                (
+                    "(ctor Option.some [Nat] 4294967295)",
+                    "(ctor Option.some [Nat] 4294967295)",
+                ),
+            ]
+        }
+        .into_iter()
+        .enumerate()
+        {
+            vectors.push_str(&format!("theorem{{name: vector{f}{i}, parameters: [], statement: (({name} 2 {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let sdk = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        sdk.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&sdk.stdout),
+        String::from_utf8_lossy(&sdk.stderr)
+    );
+    let defect = body.replacen(
+        "= (ctor Option.some [Nat] 4294967295)",
+        "= (ctor Option.some [Nat] 4294967294)",
+        1,
+    );
+    assert_ne!(defect, body, "planted incorrect borrow result");
+    std::fs::write(out.join("src/Behavior.lex.tex"), defect).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-60: lookup is independent of a hash map's unmodeled iteration order.
+#[test]
+fn native_hash_map_reads_reuse_logical_lookup_models_ue_60() {
+    let dir=scratch("hash-map-reads",&[("Cargo.toml","[package]\nname=\"hash_reads\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::collections::HashMap;
+use std::hash::{Hash,Hasher,BuildHasher};
+#[derive(Clone,Eq,PartialEq,Ord,PartialOrd,Hash)] pub struct Key {pub id:u32}
+pub fn source_less(a:&Key,b:&Key)->bool {a<b}
+#[derive(Eq)] pub struct Parity(pub u8);
+impl PartialEq for Parity {fn eq(&self,other:&Self)->bool {self.0%2==other.0%2}}
+impl Hash for Parity {fn hash<H:Hasher>(&self,state:&mut H){(self.0%2).hash(state)}}
+pub fn get_num<'a>(mut n:u8,map:&'a HashMap<u32,u8>,key:&u32)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_num(mut n:u8,map:&HashMap<u32,u8>,key:&u32)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn get_text<'a>(mut n:u8,map:&'a HashMap<String,u8>,key:&str)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_text(mut n:u8,map:&HashMap<String,u8>,key:&str)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn get_key<'a>(mut n:u8,map:&'a HashMap<Key,u8>,key:&Key)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn has_key(mut n:u8,map:&HashMap<Key,u8>,key:&Key)->bool {while n>0 {n-=1;} map.contains_key(key)}
+pub fn sizes(mut n:u8,map:&HashMap<u32,u8>)->bool {while n>0 {n-=1;} map.is_empty()==(map.len()==0)}
+pub fn custom<'a>(mut n:u8,map:&'a HashMap<Parity,u8>,key:&Parity)->Option<&'a u8> {while n>0 {n-=1;} map.get(key)}
+pub fn observe(mut n:u8,map:&HashMap<u32,u8>)->u64 {while n>0 {n-=1;} map.hasher().build_hasher().finish()}
+pub fn iteration(mut n:u8,map:&HashMap<u32,u8>)->Option<&u32> {while n>0 {n-=1;} map.keys().next()}
+#[test] fn reference(){for pairs in [[(3,7),(1,4)],[(1,4),(3,7)]] {let map=HashMap::from(pairs);assert_eq!(get_num(2,&map,&3),Some(&7));assert_eq!(get_num(2,&map,&2),None);assert!(has_num(2,&map,&3));assert!(!has_num(2,&map,&2));assert!(sizes(2,&map));let named=map.iter().map(|(k,v)|(Key{id:*k},*v)).collect();assert_eq!(get_key(2,&named,&Key{id:3}),Some(&7));assert!(!has_key(2,&named,&Key{id:2}));} let text=HashMap::from([("z".to_string(),7),("a".to_string(),4)]);assert_eq!(get_text(2,&text,"z"),Some(&7));assert!(!has_text(2,&text,"missing"));assert!(sizes(2,&HashMap::new()));}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust lookup vectors");
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "hash-map-reads");
+    let mut opts = options("hash_reads");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("lookup candidates");
+    let functions = [
+        "get_num", "has_num", "get_text", "has_text", "get_key", "has_key", "sizes",
+    ];
+    for f in functions {
+        let path = format!("hash_reads::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["custom", "observe", "iteration"] {
+        assert!(
+            residue_detail(&proposed, &format!("hash_reads::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("hash-read-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("hash_reads"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("SDK lookup proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved lookup projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in functions {
+        let path = format!("hash_reads::{f}");
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(path.as_str()))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(definition))
+            .cloned()
+            .unwrap_or_default();
+        for swapped in [false, true] {
+            for present in [false, true] {
+                let named = f.ends_with("_key");
+                let text_key = f.ends_with("_text");
+                let entry = if named {
+                    "TupleKeyNat"
+                } else if text_key {
+                    "TupleStringNat"
+                } else {
+                    "TupleNatNat"
+                };
+                let key = |v: u32| {
+                    if named {
+                        format!("(record Key {{idValue := {v}}})")
+                    } else if text_key {
+                        format!(
+                            "\"{}\"",
+                            if v == 3 {
+                                "z"
+                            } else if v == 1 {
+                                "a"
+                            } else {
+                                "missing"
+                            }
+                        )
+                    } else {
+                        v.to_string()
+                    }
+                };
+                let pairs = if swapped {
+                    [(1, 4), (3, 7)]
+                } else {
+                    [(3, 7), (1, 4)]
+                };
+                let mut map = format!("(nil {entry})");
+                for (k, v) in pairs.iter().rev() {
+                    map = format!(
+                        "(cons (record {entry} {{item0 := {}, item1 := {v}}}) {map})",
+                        key(*k)
+                    );
+                }
+                let (term, expected) = if f == "sizes" {
+                    let argument = if present {
+                        map
+                    } else {
+                        format!("(nil {entry})")
+                    };
+                    (format!("({definition} 2 {argument})"), "true".into())
+                } else {
+                    let expected = if f.starts_with("get_") {
+                        if present {
+                            "(ctor Option.some [Nat] 7)"
+                        } else {
+                            "(ctor Option.none [Nat])"
+                        }
+                    } else if present {
+                        "true"
+                    } else {
+                        "false"
+                    };
+                    (
+                        format!(
+                            "({definition} 2 {map} {})",
+                            key(if present { 3 } else { 2 })
+                        ),
+                        expected.to_string(),
+                    )
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{}{}, parameters: [], statement: ({term} = {expected}), proof: decide{{}}, axioms: [{}]}}\n",u8::from(swapped),u8::from(present),policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write vectors");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let sdk = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK lookup vectors");
+    assert!(
+        sdk.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&sdk.stdout),
+        String::from_utf8_lossy(&sdk.stderr)
+    );
+    let defect = body.replace(
+        "= (ctor Option.some [Nat] 7)",
+        "= (ctor Option.some [Nat] 6)",
+    );
+    assert_ne!(defect, body, "planted incorrect lookup result");
+    std::fs::write(out.join("src/Behavior.lex.tex"), defect).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK rejects incorrect lookup vector");
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-59: a missing dependency is not a newly verifiable translation.
+#[test]
+fn blocked_partial_callers_preserve_complete_context_verdicts_ue_59() {
+    let dir=scratch("blocked-history",&[("Cargo.toml","[package]\nname=\"blocked_history\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs","pub fn leaf(mut n:u8)->u8 {while n>0 {n-=1;} n}\npub fn middle(mut n:u8,value:u8)->u8 {while n>0 {n-=1;} leaf(value)}\npub fn caller(mut n:u8,value:u8)->u8 {while n>0 {n-=1;} middle(n,value)}\n")]);
+    assert!(std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .status()
+        .unwrap()
+        .success());
+    let all = dumped(&dir, "blocked-history-three");
+    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("blocked-history-three");
+    std::fs::create_dir_all(&work).unwrap();
+    let register = work.join("verdicts.toml");
+    let complete = work.join("complete-verdicts.toml");
+    if complete.exists() {
+        std::fs::copy(&complete, &register).unwrap();
+    }
+    let full = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &all,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("actual full-context SDK proofs");
+    assert_eq!(full.refused, 0);
+    let before = verdicts(&register);
+    assert_eq!(before.rows.len(), 3);
+    assert!(before
+        .rows
+        .values()
+        .all(|r| matches!(r.status, uorust::mir::verdict::Decision::Proved)));
+    std::fs::copy(&register, &complete).unwrap();
+    let selected = work.join("selected");
+    if selected.exists() {
+        std::fs::remove_dir_all(&selected).unwrap();
+    }
+    std::fs::create_dir_all(selected.join("lib-blocked_history")).unwrap();
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(all.join(name), selected.join(name)).unwrap();
+    }
+    let mut copied = 0;
+    for entry in std::fs::read_dir(all.join("lib-blocked_history")).unwrap() {
+        let p = entry.unwrap().path();
+        if std::fs::read_to_string(&p)
+            .is_ok_and(|s| s.contains("fn caller(") || s.contains("fn middle("))
+        {
+            std::fs::copy(
+                &p,
+                selected
+                    .join("lib-blocked_history")
+                    .join(p.file_name().unwrap()),
+            )
+            .unwrap();
+            copied += 1;
+        }
+    }
+    assert_eq!(copied, 2);
+    let mut opts = options("blocked_history");
+    opts.mir = Some(mir_options(
+        selected.clone(),
+        before.clone(),
+        uorust::mir::Trial::All,
+    ));
+    let partial = uorust::project_workspace(&dir, &opts).expect("blocked partial projection");
+    let candidates: toml::Value = text(&partial, uorust::mir::CANDIDATES).parse().unwrap();
+    let caller = candidates["candidate"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|r| r["function"].as_str() == Some("blocked_history::caller"))
+        .unwrap();
+    assert_eq!(caller["trial"].as_bool(), Some(false));
+    let kappa = caller["kappa"].as_str().unwrap();
+    assert_ne!(
+        caller["digest"].as_str().unwrap(),
+        before.rows[kappa].digest
+    );
+    assert!(residue_detail(&partial, "blocked_history::caller").is_some());
+    let narrowed = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &selected,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("partial cache replay");
+    assert_eq!(
+        (narrowed.proved, narrowed.refused, narrowed.runs),
+        (0, 0, 0)
+    );
+    assert_eq!(
+        verdicts(&register).rows,
+        before.rows,
+        "blocked context erased a reusable complete-context proof"
+    );
+    let replay = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &all,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("restored complete replay");
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    assert_eq!(verdicts(&register).rows, before.rows);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-46: narrowing the compiler view must not destroy reusable SDK decisions.
+#[test]
+fn native_verdicts_survive_compiler_input_selections_ue_46() {
+    let source = mir_fixture();
+    let all = dumped(&source, "walk");
+    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("native-selection-history");
+    let _ = std::fs::remove_dir_all(&work);
+    let selected = work.join("selected");
+    std::fs::create_dir_all(selected.join("lib-walk")).expect("selected input");
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(all.join(name), selected.join(name)).expect("compiler metadata");
+    }
+    let mut count = 0;
+    for entry in std::fs::read_dir(all.join("lib-walk")).expect("actual compiler bodies") {
+        let path = entry.expect("entry").path();
+        if path.extension().is_some_and(|x| x == "mir")
+            && std::fs::read_to_string(&path)
+                .expect("body")
+                .contains("fn through_raw(")
+        {
+            std::fs::copy(
+                &path,
+                selected
+                    .join("lib-walk")
+                    .join(path.file_name().expect("name")),
+            )
+            .expect("exact compiler bytes");
+            count += 1;
+        }
+    }
+    assert_eq!(count, 1);
+    let register = work.join("verdicts.toml");
+    std::fs::copy(source.join("lift-verdicts.toml"), &register)
+        .expect("actual committed SDK verdicts");
+    let before = verdicts(&register);
+    assert!(before
+        .rows
+        .values()
+        .any(|r| matches!(r.status, uorust::mir::verdict::Decision::Refused(_))));
+    for inputs in [&all, &selected, &all] {
+        let replay = uorust::mir::prove_bounded(
+            &source,
+            &options("walk"),
+            inputs,
+            &register,
+            &work.join("trial"),
+            16,
+        )
+        .expect("cached selection replay");
+        assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+        assert_eq!(
+            verdicts(&register).rows,
+            before.rows,
+            "selection discarded reusable proof history"
+        );
+    }
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-45: transport does not inspect a hash builder or invent iteration order.
+#[test]
+fn native_hash_collections_reuse_unordered_carriers_ue_45() {
+    let dir = scratch("native-hash-carriers", &[
+        ("Cargo.toml", "[package]\nname = \"hash_carriers\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "use std::collections::{HashMap, HashSet};\npub struct Seed { pub state: u64 }\npub fn map(mut n: u8, x: HashMap<u8, u16>) -> HashMap<u8, u16> { while n > 0 { n -= 1; } x }\npub fn set(mut n: u8, x: HashSet<u8>) -> HashSet<u8> { while n > 0 { n -= 1; } x }\npub fn custom_map(mut n: u8, x: HashMap<u8, u16, Seed>) -> HashMap<u8, u16, Seed> { while n > 0 { n -= 1; } x }\npub fn custom_set(mut n: u8, x: HashSet<u8, Seed>) -> HashSet<u8, Seed> { while n > 0 { n -= 1; } x }\npub fn inspect(mut n: u8, x: HashMap<u8, u16, Seed>) -> u64 { while n > 0 { n -= 1; } x.hasher().state }\npub fn ordered(mut n: u8, x: HashSet<u8>) -> Vec<u8> { while n > 0 { n -= 1; } x.into_iter().collect() }\npub fn unread(mut n: u8, x: HashMap<u8, std::cell::UnsafeCell<u8>, Seed>) -> HashMap<u8, std::cell::UnsafeCell<u8>, Seed> { while n > 0 { n -= 1; } x }\npub mod shadow { pub struct HashSet { pub flag: bool } pub fn transport(mut n: u8, x: HashSet) -> HashSet { while n > 0 { n -= 1; } x } }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock source");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-hash-carriers");
+    let mut opts = options("hash_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("collection projection");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in [
+        "map",
+        "set",
+        "custom_map",
+        "custom_set",
+        "shadow::transport",
+    ] {
+        assert!(
+            listing.contains(&format!("hash_carriers::{name}\"")),
+            "missing native collection {name}: {listing}"
+        );
+    }
+    for name in ["inspect", "ordered", "unread"] {
+        assert!(
+            !listing.contains(&format!("hash_carriers::{name}\"")),
+            "unmodeled observation was admitted: {name}"
+        );
+    }
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("hash_carriers"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        5,
+    )
+    .expect("actual collection proofs");
+    assert_eq!((proof.proved, proof.refused), (5, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-44: one changing state keeps loop invariants in the termination context.
+#[test]
+fn native_loop_state_preserves_invariants_in_evidence_ue_44() {
+    let dir = scratch("loop-evidence-scope", &[
+        ("Cargo.toml", "[package]\nname = \"loop_scope\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn carried(mut n: u8, x: bool) -> bool { while n > 0 { n -= 1; } x }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "loop-evidence-scope");
+    let result = uorust::mir::prove_bounded(
+        &dir,
+        &options("loop_scope"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("trial"),
+        1,
+    )
+    .expect("SDK proof");
+    assert_eq!((result.proved, result.refused), (1, 0));
+    let behavior =
+        std::fs::read_to_string(dir.join("trial/src/Behavior.lex.tex")).expect("actual trial");
+    let start = behavior
+        .find("name: decreases_")
+        .expect("decrease evidence");
+    let parameters = behavior[start..]
+        .split("statement:")
+        .next()
+        .expect("evidence header");
+    assert!(
+        !parameters.contains(": Bool"),
+        "invariant was left as a fixed argument: {parameters}"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-43: the proof feedback loop checks only its closure and preserves decisions.
+#[test]
+fn native_verification_scopes_feedback_and_reuses_decisions_ue_43() {
+    let (work, source, _) = mir_method_fixture("scoped-feedback");
+    let path = source.join("src/lib.rs");
+    let mut code = std::fs::read_to_string(&path).expect("source");
+    code.push_str(
+        "pub fn overflow(x: u8) -> u8 { let mut n = 1u8; while n > 0 { n -= 1; } x + 1 }\n",
+    );
+    std::fs::write(&path, code).expect("overflow case");
+    let dumps = work.join("with-overflow");
+    uorust::mir::dump(&source, &dumps, &Default::default()).expect("actual compiler");
+    let verdict_path = work.join("verdicts.toml");
+    let trial = work.join("trial");
+    let summary = uorust::mir::prove_bounded(
+        &source,
+        &options("owners"),
+        &dumps,
+        &verdict_path,
+        &trial,
+        4,
+    )
+    .expect("actual SDK decisions");
+    assert_eq!((summary.proved, summary.refused), (3, 1));
+    let result: serde_json::Value = serde_json::from_slice(
+        &std::fs::read(trial.join("uorust-proof-result.json"))
+            .expect("machine-readable SDK feedback"),
+    )
+    .expect("SDK JSON");
+    let modules = result["modules"].as_array().expect("verified modules");
+    assert_eq!(
+        modules.len(),
+        2,
+        "native trial verified unrelated modules: {result}"
+    );
+    let before = std::fs::read(&verdict_path).expect("actual verdicts");
+    let replay = uorust::mir::prove_bounded(
+        &source,
+        &options("owners"),
+        &dumps,
+        &verdict_path,
+        &trial,
+        4,
+    )
+    .expect("unchanged replay");
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    assert_eq!(
+        std::fs::read(&verdict_path).expect("cached verdicts"),
+        before
+    );
+    std::fs::remove_dir_all(work).expect("cleanup");
+}
+
+/// UE-42: native transport reads the same lock-admitted types as source transport.
+#[test]
+fn native_registry_carriers_require_locked_readings_ue_42() {
+    let dir = scratch("native-registry-carriers", &[
+        ("Cargo.toml", "[package]\nname = \"native_carriers\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n[dependencies]\nnum-bigint = \"=0.4.8\"\nnum-rational = \"=0.4.2\"\nserde_json = \"=1.0.114\"\nbitvec = \"=1.0.1\"\n"),
+        ("src/lib.rs", "use num_bigint::BigInt;\nuse num_rational::BigRational;\nuse serde_json::{Value, Number};\nuse bitvec::vec::BitVec;\npub fn big(x: BigInt) -> BigInt { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn ratio(x: BigRational) -> BigRational { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn json(x: Value) -> Value { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn number(x: Number) -> Number { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn bits(x: BitVec) -> BitVec { let mut n = 1u8; while n > 0 { n -= 1; } x }\npub fn equal(a: Value, b: Value) -> bool { let mut n = 1u8; while n > 0 { n -= 1; } a == b }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock native carriers");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = dumped(&dir, "native-registry-carriers");
+    let mut opts = options("native_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native carriers");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in ["big", "ratio", "json", "number", "bits"] {
+        assert!(
+            listing.contains(&format!("native_carriers::{name}\"")),
+            "missing native carrier {name}: {listing}"
+        );
+    }
+    assert!(
+        !listing.contains("native_carriers::equal\""),
+        "unmodeled JSON equality was admitted"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write native carriers");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifies native carriers");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("native_carriers"),
+        &dumps,
+        &dir.join("verdicts.toml"),
+        &dir.join("proof"),
+        5,
+    )
+    .expect("actual native carrier proofs");
+    assert_eq!((proof.proved, proof.refused), (5, 0));
+    let lock_path = dir.join("Cargo.lock");
+    let original = std::fs::read_to_string(&lock_path).expect("actual lock");
+    let checksum = "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367";
+    assert!(original.contains(checksum));
+    std::fs::write(&lock_path, original.replace(checksum, &"0".repeat(64)))
+        .expect("wrong checksum");
+    let wrong = uorust::project_workspace(&dir, &opts).expect("refused carrier projection");
+    assert!(
+        !text(&wrong, uorust::mir::CANDIDATES).contains("native_carriers::big\""),
+        "wrong checksum admitted native BigInt"
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-41: source integer fields cannot silently become native bit patterns.
+#[test]
+fn native_aggregates_check_field_representations_ue_41() {
+    let dir = scratch("aggregate-representations", &[
+        ("Cargo.toml", "[package]\nname = \"aggregate_representations\"\nversion = \"0.1.0\"\nedition = \"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub struct Signed { pub x: i32 }\npub enum Payload { Number(i32), Empty }\npub fn variant(n: i32) -> Payload { let mut count = 1u8; while count > 0 { count -= 1; } Payload::Number(n) }\npub fn array(s: Signed) -> [i32; 2] { let mut n = 1u8; while n > 0 { n -= 1; } [s.x, s.x] }\npub fn optional(s: Signed) -> Option<i32> { let mut n = 1u8; while n > 0 { n -= 1; } Some(s.x) }\npub fn unpack(s: Signed) -> (i32, u8, u8) { let mut n = 1u8; while n > 0 { n -= 1; } (s.x, n, 0) }\npub fn pack(n: i32) -> Signed { let mut count = 1u8; while count > 0 { count -= 1; } Signed { x: n } }\npub fn good(mut n: u8) -> (u8, u8, u8) { while n > 0 { n -= 1; } (n, 1, 2) }\n"),
+    ]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock source fixture");
+    assert!(
+        lock.status.success(),
+        "{}",
+        String::from_utf8_lossy(&lock.stderr)
+    );
+    let dumps = dumped(&dir, "aggregate-representations");
+    let mut opts = options("aggregate_representations");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native aggregate projection");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in ["unpack", "array", "optional", "pack", "variant"] {
+        assert!(
+            listing.contains(&format!("aggregate_representations::{name}\"")),
+            "source signed read did not use its admitted codec: {name}"
+        );
+    }
+    assert!(
+        listing.contains("aggregate_representations::good"),
+        "{listing}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write aggregates");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK type checker");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let source_path = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source_path).unwrap();
+    let drifted = original
+        .replace("pub x: i32", "pub x: bool")
+        .replace("Number(i32)", "Number(bool)");
+    assert_ne!(original, drifted);
+    std::fs::write(&source_path, drifted).unwrap();
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    for name in ["unpack", "pack", "variant", "array", "optional"] {
+        assert!(
+            residue_detail(&mismatched, &format!("aggregate_representations::{name}"))
+                .is_some_and(|s| s.contains("field representation")),
+            "an incompatible stored schema acquired a signed codec: {name}"
+        );
+    }
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-40: imported names are resolved, while function type parameters shadow them.
+#[test]
+fn renamed_unique_types_preserve_imports_and_generic_shadowing_ue_40() {
+    let dir=scratch("renamed-unique-types", &[
+        ("Cargo.toml","[package]\nname = \"renamed_types\"\nversion = \"0.1.0\"\nedition = \"2021\"\n"),
+        ("src/lib.rs","pub mod data; pub mod holder;\n"),
+        ("src/data.rs","pub struct Payload { pub value: u8 }\n"),
+        ("src/holder.rs","use crate::data::Payload as Renamed;\nuse crate::data::Payload as T;\npub struct Held { pub payload: Renamed }\npub fn keep(x: Held) -> Held { x }\npub fn get(x: &Held) -> u8 { x.payload.value }\npub fn direct(x: Renamed) -> Renamed { x }\npub trait Read { fn read(&self) -> u8; }\npub fn hold_generic<T: Read>(x: &T) -> u8 { x.read() }\n"),
+    ]);
+    let files = project(&dir, "renamed_types");
+    let lifted: Vec<String> = frontier_rows(&files, "lifted")
+        .iter()
+        .filter_map(|r| r["function"].as_str().map(str::to_string))
+        .collect();
+    for name in ["keep", "get", "direct", "hold_generic"] {
+        assert!(
+            lifted.contains(&format!("renamed_types::holder::{name}")),
+            "renamed type function did not lift: {name}"
+        );
+    }
+    let behavior = text(&files, "src/Behavior.lex.tex");
+    let start = behavior
+        .find("name: holdGeneric,")
+        .expect("generic definition");
+    let header = behavior[start..].split("body:").next().expect("header");
+    assert!(
+        header.contains("type_parameters: [T]") && header.contains("x : 'T"),
+        "generic parameter was rebound to the imported concrete type: {header}"
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write renamed types");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK verifier");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-66: import whole generic dependencies through the existing source binder.
+#[test]
+fn compiler_dependencies_reuse_generic_source_bindings_ue_66() {
+    let dir = scratch("generic-compiler-dependencies", &[
+        ("Cargo.toml", "[package]\nname=\"generic_dependencies\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn transport<T>(x:T)->T {x}
+pub fn wrapped<T>(x:Option<T>)->Option<T> {x}
+pub trait Observe {fn observe(&self)->bool;}
+pub struct Flag {pub enabled:bool}
+impl Observe for Flag {fn observe(&self)->bool {self.enabled}}
+pub fn observe<T:Observe>(x:&T)->bool {x.observe()}
+pub fn word(mut n:u8,x:u8)->u8 {while n>0 {n-=1;} transport(x)}
+pub fn signed(mut n:u8,x:i8)->i8 {while n>0 {n-=1;} transport(x)}
+pub fn option(mut n:u8,x:Option<u8>)->Option<u8> {while n>0 {n-=1;} wrapped(x)}
+pub fn dictionary(mut n:u8,x:&Flag)->bool {while n>0 {n-=1;} observe(x)}
+pub fn apply<F:Fn(bool)->bool>(f:F,x:bool)->bool {f(x)}
+pub fn callback(mut n:u8,x:bool,capture:bool)->bool {while n>0 {n-=1;} apply(|b| b!=capture,x)}
+pub struct Unavailable {pub enabled:bool}
+impl Observe for Unavailable {fn observe(&self)->bool {std::process::id()>0}}
+pub fn unavailable(mut n:u8,x:&Unavailable)->bool {while n>0 {n-=1;} observe(x)}
+pub trait SignedRead {fn read(&self)->i8;}
+pub struct SignedFlag {pub value:i8}
+impl SignedRead for SignedFlag {fn read(&self)->i8 {self.value}}
+pub fn signed_read<T:SignedRead>(x:&T)->i8 {x.read()}
+pub fn incompatible(mut n:u8,x:&SignedFlag)->i8 {while n>0 {n-=1;} signed_read(x)}
+pub fn partial<T>(_:T,v:Option<bool>)->bool {v.unwrap()}
+pub fn partial_native(mut n:u8,x:u8,v:Option<bool>)->bool {while n>0 {n-=1;} partial(x,v)}
+pub fn mutable(mut n:u8,x:&mut u8)->&mut u8 {while n>0 {n-=1;} transport(x)}
+pub struct SharedFlag {pub enabled:std::cell::Cell<bool>}
+impl Observe for SharedFlag {fn observe(&self)->bool {self.enabled.get()}}
+pub fn shared(mut n:u8,x:&SharedFlag)->bool {while n>0 {n-=1;} observe(x)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use generic_dependencies::*;
+fn main(){for n in [0,2] {
+ for x in [0,19,255] {println!("word {n} {x} {}",word(n,x));}
+ for x in [-128i8,-1,0,127] {println!("signed {n} {} {}", x as u8,signed(n,x) as u8);}
+ for x in [None,Some(0),Some(255)] {let term=|v:Option<u8>|match v {None=>"(ctor Option.none [Nat])".to_string(),Some(x)=>format!("(ctor Option.some [Nat] {x})")};println!("option|{n}|{}|{}",term(x),term(option(n,x)));}
+ for x in [false,true] {println!("dictionary {n} {x} {}",dictionary(n,&Flag{enabled:x}));for capture in [false,true] {println!("callback {n} {x} {capture} {}",callback(n,x,capture));}}
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "generic-compiler-dependencies");
+    let mut opts = options("generic_dependencies");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["word", "signed", "option", "dictionary", "callback"] {
+        let path = format!("generic_dependencies::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+
+    for f in [
+        "unavailable",
+        "incompatible",
+        "partial_native",
+        "mutable",
+        "shared",
+    ] {
+        let path = format!("generic_dependencies::{f}");
+        assert!(
+            !frontier_rows(&files, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&path)),
+            "{f}"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("generic-dependency-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("generic_dependencies"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let output = String::from_utf8(rust.stdout).unwrap();
+    for (i, line) in output.lines().enumerate() {
+        let parts: Vec<_> = if line.starts_with("option|") {
+            line.split('|').collect()
+        } else {
+            line.split_whitespace().collect()
+        };
+        let path = format!("generic_dependencies::{}", parts[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let input = if parts[0] == "dictionary" {
+            format!("{} (record Flag {{enabled := {}}})", parts[1], parts[2])
+        } else {
+            parts[1..parts.len() - 1].join(" ")
+        };
+        let expected = parts.last().unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: genericDependencyVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    assert_eq!(output.lines().count(), 32);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-67: generic bodies use the same compiler pipeline and SDK products.
+#[test]
+fn compiler_generic_bodies_preserve_product_state_ue_67() {
+    let dir = scratch("generic-compiler-bodies", &[
+        ("Cargo.toml", "[package]\nname=\"generic_bodies\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn transport<T>(mut n:u8,x:T)->T {while n>0 {n-=1;}x}
+pub fn product<T>(mut n:u8,x:T)->(T,bool,u8) {while n>0 {n-=1;}(x,true,n)}
+pub fn tuple<T>(x:T,n:u8,b:bool)->(T,u8,bool) {(x,n,b)}
+pub fn nested<T>(mut n:u8,x:T)->T {while n>0 {let mut m=n;while m>0 {m-=1;}n-=1;}x}
+pub fn discard<T>(mut n:u8,x:T)->bool {while n>0 {n-=1;}true}
+pub trait Read {fn read(&self)->bool;}
+pub fn dispatch<T:Read>(mut n:u8,x:&T)->bool {while n>0 {n-=1;}x.read()}
+pub trait Mimic {fn clone(&self)->Self;}
+pub fn mimic<T:Mimic>(mut n:u8,x:&T)->T {while n>0 {n-=1;}x.clone()}
+pub fn bounded<T:Clone>(mut n:u8,x:T)->T {while n>0 {n-=1;}x}
+pub fn cloned<T:Clone>(mut n:u8,x:&T)->T {while n>0 {n-=1;}x.clone()}
+"#),
+        ("src/bin/vectors.rs", r#"
+use generic_bodies::*;
+fn main(){for n in [0,2] {for x in [false,true] {
+ println!("transport|Bool|{n}|{x}|{}",transport(n,x));println!("nested|Bool|{n}|{x}|{}",nested(n,x));
+ let (a,b,c)=product(n,x);println!("product|Bool|{n}|{x}|({a}, ({b}, {c}))");
+ let (a,b,c)=tuple(x,n,true);println!("tuple|Bool|{n}|{x}|({a}, ({b}, {c}))");
+}for x in [0u8,19,255] {
+ println!("transport|Nat|{n}|{x}|{}",transport(n,x));println!("nested|Nat|{n}|{x}|{}",nested(n,x));
+ let (a,b,c)=product(n,x);println!("product|Nat|{n}|{x}|({a}, ({b}, {c}))");
+ let (a,b,c)=tuple(x,n,false);println!("tuple|Nat|{n}|{x}|({a}, ({b}, {c}))");
+}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "generic-compiler-bodies");
+    let mut opts = options("generic_bodies");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["mimic", "cloned"] {
+        assert!(
+            residue_detail(&files, &format!("generic_bodies::{f}")).is_some(),
+            "{f}: generic dispatch has no admitted dictionary"
+        );
+    }
+    for f in ["transport", "product", "nested", "bounded"] {
+        let path = format!("generic_bodies::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("generic_bodies::tuple")),
+        "generic source product"
+    );
+    for f in ["discard", "dispatch"] {
+        assert!(
+            residue_detail(&files, &format!("generic_bodies::{f}")).is_some(),
+            "{f}"
+        );
+    }
+
+    assert!(residue_detail(&files, "generic_bodies::discard")
+        .unwrap()
+        .contains("drop glue"));
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("generic-body-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("generic_bodies"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 40);
+    let mut vectors = String::new();
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("generic_bodies::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let args = if p[0] == "tuple" {
+            format!(
+                "{} {} {}",
+                p[3],
+                p[2],
+                if p[1] == "Bool" { "true" } else { "false" }
+            )
+        } else {
+            format!("{} {}", p[2], p[3])
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: genericBodyVector{i}, parameters: [], statement: (({name} [{}] {args}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[4],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-68: source context outside the model dependency closure is not new work.
+#[test]
+fn native_proof_identity_tracks_reached_models_ue_68() {
+    let source = r#"
+pub struct Payload {pub flag:bool,pub padding:bool}
+pub fn helper(x:bool)->bool {x}
+pub fn kept(mut n:u8,x:&Payload)->bool {while n>0 {n-=1;}helper(x.flag)}
+pub fn refused(a:u8)->u8 {a+1}
+"#;
+    let dir=scratch("rooted-native-models",&[("Cargo.toml","[package]\nname=\"rooted_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",source)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["check", "--offline", "--quiet"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(rust.status.success());
+    let dumps = dumped(&dir, "rooted-native-models");
+    let mut opts = options("rooted_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let identity = || {
+        let files = uorust::project_workspace(&dir, &opts).unwrap();
+        let doc: toml::Value = toml::from_str(&text(&files, uorust::mir::CANDIDATES)).unwrap();
+        let row = doc["candidate"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|r| r["function"].as_str() == Some("rooted_models::kept"))
+            .unwrap();
+        row.get("model_context_sha256")
+            .unwrap_or(&row["digest"])
+            .as_str()
+            .unwrap()
+            .to_string()
+    };
+    let before = identity();
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        format!("{source}\npub fn unrelated(x:bool)->bool {{!x}}\n"),
+    )
+    .unwrap();
+    assert_eq!(
+        before,
+        identity(),
+        "unrelated source context rescheduled an unchanged model"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        source.replace(
+            "fn helper(x:bool)->bool {x}",
+            "fn helper(x:bool)->bool {!x}",
+        ),
+    )
+    .unwrap();
+    assert_ne!(before, identity(), "reached source meaning changed");
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        source.replace("pub padding:bool", "pub padding:u8"),
+    )
+    .unwrap();
+    assert_ne!(before, identity(), "reached schema changed");
+
+    std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("rooted-model-verdicts.toml");
+    let prove = || {
+        uorust::mir::prove_bounded(
+            &dir,
+            &options("rooted_models"),
+            &dumps,
+            &cache,
+            &dir.join("trial"),
+            8,
+        )
+        .unwrap()
+    };
+    let first = prove();
+    assert_eq!(first.refused, 1, "{first:?}");
+    let original = verdicts(&cache);
+    assert_eq!(
+        original
+            .rows
+            .values()
+            .filter(|v| v.status == uorust::mir::verdict::Decision::Proved)
+            .count(),
+        1
+    );
+    // Reproduce a legacy cache by removing only the new optional observation.
+    let legacy = std::fs::read_to_string(&cache)
+        .unwrap()
+        .lines()
+        .filter(|l| !l.starts_with("model_context_sha256 = "))
+        .collect::<Vec<_>>()
+        .join("\n");
+    std::fs::write(&cache, legacy).unwrap();
+    let legacy_run = prove();
+    assert_eq!(
+        (legacy_run.proved, legacy_run.refused, legacy_run.runs),
+        (0, 0, 0)
+    );
+    let learned = verdicts(&cache);
+    for (key, old) in &original.rows {
+        let new = &learned.rows[key];
+        assert_eq!(
+            (&new.digest, &new.status, &new.axioms),
+            (&old.digest, &old.status, &old.axioms)
+        );
+        assert!(new.model_context_sha256.is_some());
+    }
+    let unrelated = format!("{source}\npub fn unrelated(x:bool)->bool {{!x}}\n");
+    std::fs::write(dir.join("src/lib.rs"), &unrelated).unwrap();
+    let reused = prove();
+    assert_eq!((reused.proved, reused.refused, reused.runs), (0, 0, 0));
+    assert_eq!(
+        verdicts(&cache),
+        learned,
+        "original decision provenance changed on reuse"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        unrelated.replace(
+            "fn helper(x:bool)->bool {x}",
+            "fn helper(x:bool)->bool {!x}",
+        ),
+    )
+    .unwrap();
+    let changed = prove();
+    assert_eq!((changed.proved, changed.refused), (1, 0));
+    assert!(
+        changed.runs > 0,
+        "changed reached meaning skipped the actual SDK"
+    );
+    let good = verdicts(&cache);
+    let mut planted = good.clone();
+    for row in planted
+        .rows
+        .values_mut()
+        .filter(|v| v.status == uorust::mir::verdict::Decision::Proved)
+    {
+        row.model_context_sha256 = Some("0".repeat(64));
+    }
+    let mut bound = options("rooted_models");
+    bound.mir = Some(mir_options(dumps, planted, uorust::mir::Trial::Off));
+    let rejected = uorust::project_workspace(&dir, &bound).unwrap();
+    assert!(
+        residue_detail(&rejected, "rooted_models::kept").is_some(),
+        "a planted wrong model binding was admitted"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-69: field transport does not require invented service semantics.
+#[test]
+fn compiler_struct_views_preserve_opaque_fields_ue_69() {
+    let dir=scratch("native-struct-views",&[("Cargo.toml","[package]\nname=\"struct_views\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Holder {pub ready:bool,pub service:Box<dyn Service>}
+pub fn known(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.ready}
+pub struct Outer {pub inner:Holder,pub tag:u8}
+pub fn nested(mut n:u8,x:&Outer)->u8 {while n>0 {n-=1;}if x.inner.ready {x.tag} else {0}}
+pub fn caller(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}known(n,x)}
+pub fn changed(mut n:u8,x:&mut Holder)->bool {while n>0 {n-=1;}x.ready=!x.ready;x.ready}
+pub fn unknown(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.service.run()}
+pub fn discard(mut n:u8,x:Holder)->bool {while n>0 {n-=1;}x.ready}
+pub trait Mimic {fn clone(&self)->bool;}
+impl Mimic for Holder {fn clone(&self)->bool {!self.ready}}
+pub fn mimic(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;}x.clone()}
+pub struct Generic<T> {pub ready:bool,pub service:T}
+pub fn incomplete(mut n:u8,x:&Generic<Box<dyn Service>>)->bool {while n>0 {n-=1;}x.ready}
+"#),("src/bin/vectors.rs",r#"
+use struct_views::*;
+struct Unused(u8);impl Service for Unused {fn run(&self)->bool {panic!("service was evaluated: {}",self.0)}}
+fn main(){for n in [0,2] {for ready in [false,true] {for payload in [0u8,23,255] {
+ let holder=||Holder{ready,service:Box::new(Unused(payload))};
+ println!("known|{n}|{ready}|{payload}|{}",known(n,&holder()));
+ println!("caller|{n}|{ready}|{payload}|{}",caller(n,&holder()));
+ println!("nested|{n}|{ready}|{payload}|{}",nested(n,&Outer{inner:holder(),tag:payload}));
+ let mut x=holder();let result=changed(n,&mut x);println!("changed|{n}|{ready}|{payload}|({result}, ({}, {payload}))",x.ready);
+}}}}
+"#)]);
+    let checked = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let dumps = dumped(&dir, "native-struct-views");
+    let mut opts = options("struct_views");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("struct_views::known\""),
+        "{:?}",
+        residue_detail(&files, "struct_views::known")
+    );
+    for f in ["known", "nested", "caller", "changed"] {
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("struct_views::{f}\"")),
+            "{f}: {:?}",
+            residue_detail(&files, &format!("struct_views::{f}"))
+        );
+    }
+    for f in ["unknown", "discard", "mimic", "incomplete"] {
+        assert!(
+            residue_detail(&files, &format!("struct_views::{f}")).is_some(),
+            "{f} acquired invented semantics"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("native-struct-view-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("struct_views"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(checked.stdout).unwrap();
+    assert_eq!(output.lines().count(), 48);
+    let mut vectors = String::new();
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("struct_views::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let value = if p[0] == "nested" {
+            format!("(({}, {}), {})", p[2], p[3], p[3])
+        } else {
+            format!("({}, {})", p[2], p[3])
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: structViewVector{i}, parameters: [], statement: (({name} [Nat] {} {value}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[4],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= true)", "= false)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-69: a nominal service call cannot fall through to a same-named adapter.
+#[test]
+fn compiler_struct_views_refuse_unbound_custom_calls_ue_69() {
+    let dir=scratch("native-view-custom-dispatch",&[("Cargo.toml","[package]\nname=\"view_dispatch\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Holder {pub ready:bool,pub service:Box<dyn Service>}
+pub struct Always;impl Service for Always {fn run(&self)->bool {true}}
+impl Holder {pub fn to_owned(&self)->Self {Holder{ready:!self.ready,service:Box::new(Always)}}}
+pub fn impostor(mut n:u8,x:&Holder)->Holder {while n>0 {n-=1;}x.to_owned()}
+"#)]);
+    let checked = std::process::Command::new("cargo")
+        .args(["check", "--offline", "--quiet"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let dumps = dumped(&dir, "native-view-custom-dispatch");
+    let mut opts = options("view_dispatch");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&files, "view_dispatch::impostor").is_some(),
+        "an unbound custom call acquired a standard adapter meaning"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-70: incoming native words retain their type until the storage boundary.
+#[test]
+fn compiler_storage_carriers_preserve_nested_state_ue_70() {
+    let dir=scratch("typed-storage-carriers",&[("Cargo.toml","[package]\nname=\"storage_carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub struct WordPacket {pub value:i128}
+pub struct NestedPacket {pub inner:WordPacket}
+pub fn put(mut n:u8,x:&mut WordPacket,v:i128) {while n>0 {n-=1;}x.value=v;}
+pub fn nested(mut n:u8,x:&mut NestedPacket,v:i128) {while n>0 {n-=1;}x.inner.value=v;}
+"#),("src/bin/vectors.rs",r#"
+use storage_carriers::*;
+fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
+ let mut x=WordPacket{value:0};put(n,&mut x,v);println!("put|{n}|{}|{}",v as u128,x.value);
+ let mut y=NestedPacket{inner:WordPacket{value:0}};nested(n,&mut y,v);println!("nested|{n}|{}|{}",v as u128,y.inner.value);
+}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "typed-storage-carriers");
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("typed-storage-carrier-verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("storage_carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    let mut opts = options("storage_carriers");
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 24);
+    let mut vectors = String::new();
+    let mut first_wrong = None;
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("storage_carriers::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let word = "(record WordPacket {value := (0 : Int)})";
+        let input = if p[0] == "put" {
+            word.to_string()
+        } else {
+            format!("(record NestedPacket {{inner := {word}}})")
+        };
+        let state = format!("(project ({name} {} {input} {}) item1)", p[1], p[2]);
+        let word = if p[0] == "put" {
+            state
+        } else {
+            format!("(project {state} inner)")
+        };
+        let stored = format!("(project {word} value)");
+        let expected = match p[3].strip_prefix('-') {
+            Some(v) => format!("(prim negate ({v} : Int) : Int)"),
+            None => format!("({} : Int)", p[3]),
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: storageVector{i}, parameters: [], statement: ({stored} = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if i == 0 {
+            first_wrong = Some((theorem.clone(), theorem.replacen(&expected, "(0 : Int)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = first_wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-79: compiler trait paths bind to the exact source provider.
+#[test]
+fn compiler_calls_bind_trait_definition_identities_ue_79() {
+    let code="pub mod maps {\npub trait Select<T>{fn pick(x:T)->Self;}\npub trait Other{fn pick(x:u8)->Self;}\npub mod fake{pub trait From<T>{fn from(x:T)->Self;}}\npub struct Mark{pub code:u8}\nimpl Select<u8> for Mark{fn pick(_x:u8)->Self{Self{code:0}}}\nimpl Select<u16> for Mark{fn pick(_x:u16)->Self{Self{code:1}}}\nimpl Other for Mark{fn pick(_x:u8)->Self{Self{code:2}}}\nimpl From<u8> for Mark{fn from(_x:u8)->Self{Self{code:3}}}\nimpl From<u16> for Mark{fn from(_x:u16)->Self{Self{code:4}}}\nimpl Mark{pub fn pick(_x:u8)->Self{Self{code:5}}}\nimpl fake::From<u8> for Mark{fn from(_x:u8)->Self{Self{code:6}}}\n}\npub fn select_byte(mut n:u8)->maps::Mark{while n>0{n-=1;}<maps::Mark as maps::Select<u8>>::pick(n)}\npub fn select_short(mut n:u16)->maps::Mark{while n>0{n-=1;}<maps::Mark as maps::Select<u16>>::pick(n)}\npub fn other(mut n:u8)->maps::Mark{while n>0{n-=1;}<maps::Mark as maps::Other>::pick(n)}\npub fn from_byte(mut n:u8)->maps::Mark{while n>0{n-=1;}<maps::Mark as From<u8>>::from(n)}\npub fn from_short(mut n:u16)->maps::Mark{while n>0{n-=1;}<maps::Mark as From<u16>>::from(n)}\npub fn inherent(mut n:u8)->maps::Mark{while n>0{n-=1;}maps::Mark::pick(n)}\npub fn fake(mut n:u8)->maps::Mark{while n>0{n-=1;}<maps::Mark as maps::fake::From<u8>>::from(n)}\n";
+    let oracle="use trait_calls::*;fn main(){for n in [0u8,1,3]{println!(\"select_byte|{n}|{}\",select_byte(n).code);println!(\"select_short|{n}|{}\",select_short(n as u16).code);println!(\"other|{n}|{}\",other(n).code);println!(\"from_byte|{n}|{}\",from_byte(n).code);println!(\"from_short|{n}|{}\",from_short(n as u16).code);println!(\"inherent|{n}|{}\",inherent(n).code);println!(\"fake|{n}|{}\",fake(n).code);}}\n";
+    let dir=scratch("compiler-trait-call-identities",&[("Cargo.toml","[package]\nname=\"trait_calls\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",code),("src/bin/vectors.rs",oracle)]);
+    let dumps = dumped(&dir, "compiler-trait-call-identities");
+    let mut opts = options("trait_calls");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    let paths = [
+        "trait_calls::select_byte",
+        "trait_calls::select_short",
+        "trait_calls::other",
+        "trait_calls::from_byte",
+        "trait_calls::from_short",
+        "trait_calls::inherent",
+        "trait_calls::fake",
+    ];
+    for path in paths {
+        assert!(
+            frontier_rows(&proposed, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(path)),
+            "{path}: {:?}",
+            residue_detail(&proposed, path)
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR"))
+        .join("compiler-trait-call-identities-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("trait_calls"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        3,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = paths
+            .iter()
+            .find(|path| path.ends_with(&format!("::{}", p[0])))
+            .unwrap();
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(*path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == *path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: definitionVector{i},parameters:[],statement:((project ({name} {}) code) = {}),proof:decide{{}},axioms:[{}]}}\n",p[1],p[2],policy.join(", "));
+        if p[0] == "select_short" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 1)", "= 0)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 21);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-78: compiler implementation sites distinguish overloaded method bodies.
+#[test]
+fn overloaded_methods_keep_compiler_definition_identities_ue_78() {
+    let code="pub struct Mark{pub code:u8}\nimpl From<u8> for Mark{fn from(mut n:u8)->Self{while n>0{n-=1;}Self{code:0}}}\nimpl From<u16> for Mark{fn from(mut n:u16)->Self{while n>0{n-=1;}Self{code:1}}}\nimpl Mark{pub fn from(mut n:u32)->Self{while n>0{n-=1;}Self{code:2}}}\n";
+    let oracle="use definitions::*;fn main(){for n in [0u8,1,3]{println!(\"byte|{n}|{}\",<Mark as From<u8>>::from(n).code);println!(\"short|{n}|{}\",<Mark as From<u16>>::from(n as u16).code);println!(\"inherent|{n}|{}\",Mark::from(n as u32).code);}}\n";
+    let dir=scratch("compiler-definition-identities",&[("Cargo.toml","[package]\nname=\"definitions\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",code),("src/bin/vectors.rs",oracle)]);
+    let dumps = dumped(&dir, "compiler-definition-identities");
+    let mut opts = options("definitions");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    let paths = [
+        "definitions::<Mark as From<u8>>::from",
+        "definitions::<Mark as From<u16>>::from",
+        "definitions::Mark::from",
+    ];
+    for path in paths {
+        assert!(
+            frontier_rows(&proposed, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(path)),
+            "{path}: {:?}",
+            residue_detail(&proposed, path)
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR"))
+        .join("compiler-definition-identities-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("definitions"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        3,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = match p[0] {
+            "byte" => paths[0],
+            "short" => paths[1],
+            _ => paths[2],
+        };
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: definitionVector{i},parameters:[],statement:((project ({name} {}) code) = {}),proof:decide{{}},axioms:[{}]}}\n",p[1],p[2],policy.join(", "));
+        if p[0] == "short" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 1)", "= 0)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 9);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-77: parameterless source definitions are invoked, never emitted as locals.
+#[test]
+fn compiler_calls_apply_parameterless_source_models_ue_77() {
+    let code="pub struct Flag{pub value:bool}\npub fn zero()->bool{true}\npub fn seven()->u8{7}\npub fn read(mut n:u8)->bool{while n>0{n-=1;}zero()}\npub fn number(mut n:u8)->u8{while n>0{n-=1;}seven()}\npub fn make(mut n:u8)->Flag{while n>0{n-=1;}Flag{value:zero()}}\npub fn update(mut n:u8,x:&mut Flag)->bool{while n>0{n-=1;}x.value=zero();x.value}\n";
+    let oracle="use applications::*;fn main(){for n in [0,1,2,255]{println!(\"read|{n}|{}\",read(n));println!(\"number|{n}|{}\",number(n));println!(\"make|{n}|{}\",make(n).value);let mut x=Flag{value:false};let out=update(n,&mut x);assert_eq!(out,x.value);println!(\"update|{n}|{}\",x.value);}}\n";
+    let dir=scratch("parameterless-applications",&[("Cargo.toml","[package]\nname=\"applications\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",code),("src/bin/vectors.rs",oracle)]);
+    let dumps = dumped(&dir, "parameterless-applications");
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("parameterless-applications-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("applications"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        4,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let old = verdicts(&cache);
+    let mut opts = options("applications");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        old.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("applications::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = old
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let call=match p[0]{"make"=>format!("(project ({name} {}) value)",p[1]),"update"=>format!("((project ({name} {} (record Flag {{value := false}})) item0) && (project (project ({name} {} (record Flag {{value := false}})) item1) value))",p[1],p[1]),_=>format!("({name} {})",p[1])};
+        let theorem=format!("theorem{{name: applicationVector{i},parameters:[],statement:({call} = {}),proof:decide{{}},axioms:[{}]}}\n",p[2],policy.join(", "));
+        if p[0] == "read" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= true)", "= false)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 16);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("{true}", "{false}", 1),
+    )
+    .unwrap();
+    let changed = uorust::project_workspace(&dir, &opts).unwrap();
+    let changed_rows = frontier_rows(&changed, "lifted");
+    for mode in ["read", "make", "update"] {
+        let path = format!("applications::{mode}");
+        assert!(
+            !changed_rows
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&path)),
+            "changed source reused {path}"
+        );
+    }
+    let refreshed = uorust::mir::prove_bounded(
+        &dir,
+        &options("applications"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        4,
+    )
+    .unwrap();
+    assert_eq!(refreshed.proved, 3, "{refreshed:?}");
+    assert_eq!(refreshed.refused, 0);
+    assert!(refreshed.runs > 0);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-76: one structural boundary composes element codecs throughout containers.
+#[test]
+fn integer_carriers_compose_through_structures_ue_76() {
+    let mut code=String::from("use std::collections::BTreeMap;\npub fn raw(x:u8)->u8{x}\npub fn codec_word(x:u8)->u8{x}\npub fn codec_integer(x:u8)->u8{x}\npub fn carrier_value(x:u8)->u8{x}\npub fn carrier_head(x:u8)->u8{x}\npub fn carrier_tail(x:u8)->u8{x}\npub fn carrier_some(x:u8)->u8{x}\npub fn carrier_result(x:u8)->u8{x}\n");
+    for (name, ty) in [
+        ("Nested", "Vec<Option<(i8,Result<i16,i32>)>>"),
+        ("Entries", "BTreeMap<i16,i8>"),
+    ] {
+        let tag = name.to_ascii_lowercase();
+        code.push_str(&format!("pub struct {name}{{pub values:{ty}}}\npub fn identity_{tag}(values:{ty})->{ty}{{values}}\npub fn take_{tag}(mut n:u8,x:{name})->{ty}{{while n>0{{n-=1;}}x.values}}\npub fn make_{tag}(mut n:u8,values:{ty})->{name}{{while n>0{{n-=1;}}{name}{{values}}}}\npub fn pass_{tag}(mut n:u8,values:{ty})->{ty}{{while n>0{{n-=1;}}identity_{tag}(values)}}\npub fn update_{tag}(mut n:u8,x:&mut {name},values:{ty}){{while n>0{{n-=1;}}x.values=values;}}\n"));
+    }
+    let oracle = r#"use carriers::*;
+use std::collections::BTreeMap;
+fn nested(x:&[Option<(i8,Result<i16,i32>)>],word:bool)->String {
+ let t=if word {"TupleNatResultNatNat"}else{"TupleIntResultIntInt"};
+ let r=if word {"Nat"}else{"Int64"};
+ let number=|n:i64,raw:u64| if word {raw.to_string()}else{format!("({n} : Int64)")};
+ x.iter().rev().fold(format!("(nil (Option {t}))"),|tail,v|{
+  let head=match v {None=>format!("(ctor Option.none [{t}])"),Some((a,b))=>{
+   let b=match b {Ok(b)=>format!("(ctor Result.ok [{r}, {r}] {})",number(*b as i64,*b as u16 as u64)),Err(c)=>format!("(ctor Result.error [{r}, {r}] {})",number(*c as i64,*c as u32 as u64))};
+   format!("(ctor Option.some [{t}] (record {t} {{item0 := {}, item1 := {b}}}))",number(*a as i64,*a as u8 as u64))
+  }};format!("(cons {head} {tail})")})
+}
+fn entries(x:&BTreeMap<i16,i8>,word:bool)->String {
+ let t=if word {"TupleNatNat"}else{"TupleIntInt"};
+ x.iter().rev().fold(format!("(nil {t})"),|tail,(a,b)|{
+ let a=if word {(*a as u16).to_string()}else{format!("({a} : Int64)")};
+ let b=if word {(*b as u8).to_string()}else{format!("({b} : Int64)")};
+ format!("(cons (record {t} {{item0 := {a}, item1 := {b}}}) {tail})")})
+}
+fn main(){for n in [0,2]{for sample in 0..3 {
+ let x=match sample {0=>vec![],1=>vec![None],_=>vec![Some((i8::MIN,Ok(i16::MIN))),None,Some((i8::MAX,Err(i32::MIN))),Some((-1,Err(i32::MAX)))]};
+ let source=nested(&x,false);let word=nested(&x,true);
+ let out=take_nested(n,Nested{values:x.clone()});println!("nested|take|{n}|{source}|{}",nested(&out,true));
+ let out=make_nested(n,x.clone());println!("nested|make|{n}|{word}|{}",nested(&out.values,false));
+ let out=pass_nested(n,x.clone());println!("nested|pass|{n}|{word}|{}",nested(&out,true));
+ let mut out=Nested{values:vec![Some((1,Ok(2)))]};update_nested(n,&mut out,x);println!("nested|update|{n}|{word}|{}",nested(&out.values,false));
+ let x=match sample {0=>BTreeMap::new(),1=>BTreeMap::from([(0,0)]),_=>BTreeMap::from([(i16::MIN,i8::MAX),(-1,-1),(i16::MAX,i8::MIN)])};
+ let source=entries(&x,false);let word=entries(&x,true);
+ let out=take_entries(n,Entries{values:x.clone()});println!("entries|take|{n}|{source}|{}",entries(&out,true));
+ let out=make_entries(n,x.clone());println!("entries|make|{n}|{word}|{}",entries(&out.values,false));
+ let out=pass_entries(n,x.clone());println!("entries|pass|{n}|{word}|{}",entries(&out,true));
+ let mut out=Entries{values:BTreeMap::new()};update_entries(n,&mut out,x);println!("entries|update|{n}|{word}|{}",entries(&out.values,false));
+}}}
+"#;
+    let dir = scratch(
+        "structural-carriers",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname=\"carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n",
+            ),
+            ("src/lib.rs", &code),
+            ("src/bin/vectors.rs", oracle),
+        ],
+    );
+    let dumps = dumped(&dir, "structural-carriers");
+    let mut opts = options("carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposals = uorust::project_workspace(&dir, &opts).unwrap();
+    uorust::write(&dir.join("proposal"), &proposals).unwrap();
+    let mut candidates = frontier_rows(&proposals, "candidate");
+    candidates.extend(frontier_rows(&proposals, "lifted"));
+    for shape in ["nested", "entries"] {
+        for mode in ["take", "make", "pass", "update"] {
+            let path = format!("carriers::{mode}_{shape}");
+            assert!(
+                candidates
+                    .iter()
+                    .any(|r| r["function"].as_str() == Some(&path)),
+                "{path}: {:?}",
+                residue_detail(&proposals, &path)
+            );
+        }
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("structural-carriers-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("carriers::{}_{}", p[1], p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let record = if p[0] == "nested" {
+            "Nested"
+        } else {
+            "Entries"
+        };
+        let call = match p[1] {
+            "take" => format!("({name} {} (record {record} {{values := {}}}))", p[2], p[3]),
+            "update" => {
+                let empty = if p[0] == "nested" {
+                    "(nil (Option TupleIntResultIntInt))"
+                } else {
+                    "(nil TupleIntInt)"
+                };
+                format!("(project (project ({name} {} (record {record} {{values := {empty}}}) {}) item1) values)",p[2],p[3])
+            }
+            "make" => format!("(project ({name} {} {}) values)", p[2], p[3]),
+            _ => format!("({name} {} {})", p[2], p[3]),
+        };
+        let word = matches!(p[1], "take" | "pass");
+        let comparator = format!(
+            "vector{}{}",
+            if p[0] == "nested" {
+                "Nested"
+            } else {
+                "Entries"
+            },
+            if word { "Word" } else { "Source" }
+        );
+        let theorem=format!("theorem{{name: structuralVector{i}, parameters: [], statement: (({comparator} {call} {}) = true), proof: decide{{}}, axioms: [{}]}}\n",p[4],policy.join(", "));
+        if p[0] == "nested" && p[1] == "take" && p[4].contains("128") && wrong.is_none() {
+            wrong = Some((
+                theorem.clone(),
+                theorem.replacen("item0 := 128", "item0 := 129", 1),
+            ));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 48);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    // SDK records do not promise a synthesized DecidableEq instance. Compare
+    // every element and constructor explicitly, independently of the codec.
+    let mut comparisons = String::new();
+    for word in [false, true] {
+        let kind = if word { "Word" } else { "Source" };
+        let scalar = if word { "Nat" } else { "Int64" };
+        let eq = |a: &str, b: &str| {
+            if word {
+                format!("({a} =? {b})")
+            } else {
+                format!("(prim equal {a} {b} : Bool)")
+            }
+        };
+        for nested in [false, true] {
+            let (label, elem) = if nested {
+                (
+                    "Nested",
+                    format!("(Option Tuple{scalar}Result{scalar}{scalar})").replace("Int64", "Int"),
+                )
+            } else {
+                (
+                    "Entries",
+                    format!("Tuple{scalar}{scalar}").replace("Int64", "Int"),
+                )
+            };
+            let name = format!("vector{label}{kind}");
+            let item = if nested {
+                let first = eq(
+                    "(project vectorLeftTuple item0)",
+                    "(project vectorRightTuple item0)",
+                );
+                let ok = eq("vectorLeftResult", "vectorRightResult");
+                format!("(match vectorLeftItem | Option.none => (match vectorRightItem | Option.none => true | Option.some vectorRightTuple => false) | Option.some vectorLeftTuple => (match vectorRightItem | Option.none => false | Option.some vectorRightTuple => ({first} && (match (project vectorLeftTuple item1) | Result.ok vectorLeftResult => (match (project vectorRightTuple item1) | Result.ok vectorRightResult => {ok} | Result.error vectorRightResult => false) | Result.error vectorLeftResult => (match (project vectorRightTuple item1) | Result.ok vectorRightResult => false | Result.error vectorRightResult => {ok})))) )")
+            } else {
+                format!(
+                    "({} && {})",
+                    eq(
+                        "(project vectorLeftItem item0)",
+                        "(project vectorRightItem item0)"
+                    ),
+                    eq(
+                        "(project vectorLeftItem item1)",
+                        "(project vectorRightItem item1)"
+                    )
+                )
+            };
+            comparisons.push_str(&format!("definition{{name:{name},parameters:[vectorLeftList:(List {elem}),vectorRightList:(List {elem})],result:Bool,body:(match vectorLeftList | List.nil => (match vectorRightList | List.nil => true | List.cons vectorRightItem vectorRightTail => false) | List.cons vectorLeftItem vectorLeftTail => (match vectorRightList | List.nil => false | List.cons vectorRightItem vectorRightTail => ({item} && ({name} vectorLeftTail vectorRightTail)))), recursive_argument:vectorLeftList}}\n"));
+        }
+    }
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{comparisons}{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    for (old, new, path) in [
+        (
+            "pub values:Vec<Option<(i8,Result<i16,i32>)>>",
+            "pub values:Vec<Option<(bool,Result<i16,i32>)>>",
+            "carriers::take_nested",
+        ),
+        (
+            "pub values:BTreeMap<i16,i8>",
+            "pub values:std::collections::HashMap<i16,i8>",
+            "carriers::take_entries",
+        ),
+    ] {
+        let changed = code.replacen(old, new, 1);
+        assert_ne!(changed, code);
+        std::fs::write(dir.join("src/lib.rs"), changed).unwrap();
+        opts.mir = Some(mir_options(
+            dumps.clone(),
+            Default::default(),
+            uorust::mir::Trial::All,
+        ));
+        let drift = uorust::project_workspace(&dir, &opts).unwrap();
+        assert!(
+            residue_detail(&drift, path).is_some_and(|s| s.contains("field representation")),
+            "{path}: {:?}",
+            residue_detail(&drift, path)
+        );
+    }
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-75: constructors, source arguments and state share signed word kernels.
+#[test]
+fn native_words_reuse_signed_source_carriers_ue_75() {
+    let mut code = String::new();
+    let mut oracle = String::from("use signed_boundaries::*;fn main(){\n");
+    for bits in [8, 16, 32, 64] {
+        code.push_str(&format!("pub struct Signed{bits}{{pub value:i{bits}}}\npub fn identity{bits}(value:i{bits})->i{bits}{{value}}\npub fn make{bits}(mut n:u8,value:i{bits})->Signed{bits}{{while n>0{{n-=1;}}Signed{bits}{{value}}}}\npub fn pass{bits}(mut n:u8,value:i{bits})->i{bits}{{while n>0{{n-=1;}}identity{bits}(value)}}\npub fn update{bits}(mut n:u8,x:&mut Signed{bits},value:i{bits})->i{bits}{{while n>0{{n-=1;}}x.value=value;x.value}}\n"));
+        oracle.push_str(&format!("for value in [i{bits}::MIN,-1,0,1,i{bits}::MAX]{{for n in [0,2]{{let raw=value as u{bits};println!(\"make|{bits}|{{n}}|{{raw}}|{{}}\",make{bits}(n,value).value);println!(\"pass|{bits}|{{n}}|{{raw}}|{{}}\",pass{bits}(n,value) as u{bits});let mut x=Signed{bits}{{value:-1}};let out=update{bits}(n,&mut x,value);println!(\"update|{bits}|{{n}}|{{raw}}|{{}}|{{}}\",out as u{bits},x.value);}}}}\n"));
+    }
+    oracle.push_str("}\n");
+    let dir=scratch("signed-source-boundaries",&[
+        ("Cargo.toml","[package]\nname=\"signed_boundaries\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",&code),("src/bin/vectors.rs",&oracle),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "signed-source-boundaries");
+    let mut opts = options("signed_boundaries");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for bits in [8, 16, 32, 64] {
+        for mode in ["make", "pass", "update"] {
+            let path = format!("signed_boundaries::{mode}{bits}");
+            assert!(
+                residue_detail(&proposed, &path).is_none(),
+                "{path}: {:?}",
+                residue_detail(&proposed, &path)
+            );
+        }
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("signed-source-boundary-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("signed_boundaries"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        12,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("signed_boundaries::{}{}", p[0], p[1]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let statement = match p[0] {
+            "make" => format!(
+                "((project ({name} {} {}) value) = ({} : Int64))",
+                p[2], p[3], p[4]
+            ),
+            "pass" => format!("(({name} {} {}) = {})", p[2], p[3], p[4]),
+            _ => {
+                let call = format!(
+                    "({name} {} (record Signed{} {{value := (-1 : Int64)}}) {})",
+                    p[2], p[1], p[3]
+                );
+                format!("(((project {call} item0) =? {}) && (prim equal (project (project {call} item1) value) ({} : Int64) : Bool)) = true",p[4],p[5])
+            }
+        };
+        let statement = if p[0] == "update" {
+            format!("({statement})")
+        } else {
+            statement
+        };
+        let theorem=format!("theorem{{name: signedBoundaryVector{i}, parameters: [], statement: {statement}, proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if p[0] == "pass" && p[4] == "0" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 0)", "= 1)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 120);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("value:i8", "value:bool", 1),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&mismatched, "signed_boundaries::make8")
+        .is_some_and(|s| s.contains("field representation")));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-74: each dependency context retains its original SDK decision.
+#[test]
+fn native_receipts_survive_context_alternation_ue_74() {
+    let original="pub fn source(value:bool)->bool {value}\npub fn query(mut n:u8)->bool {while n>0 {n-=1;}source(true)}\n";
+    let dir=scratch("native-context-alternation",&[
+        ("Cargo.toml","[package]\nname=\"context_receipts\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",original),
+    ]);
+    let dumps = dumped(&dir, "native-context-alternation");
+    let a = options("context_receipts");
+    let scaffolding = uorust::project_workspace(&dir, &a).unwrap();
+    let ll: toml::Value = text(&scaffolding, "lexlean.toml").parse().unwrap();
+    let pm: toml::Value = text(&scaffolding, "prismpm.toml").parse().unwrap();
+    let limits = toml::Value::Table(
+        [
+            ("lexlean".to_string(), ll["limits"].clone()),
+            ("prismpm".to_string(), pm["limits"].clone()),
+        ]
+        .into_iter()
+        .collect(),
+    );
+    let limit_path = dir.join("limits.toml");
+    std::fs::write(&limit_path, toml::to_string(&limits).unwrap()).unwrap();
+    let mut b = a.clone();
+    b.limits = Some(limit_path);
+    let cache = dir.join("decisions.toml");
+    let scratch = dir.join("trial");
+    let first = uorust::mir::prove_bounded(&dir, &a, &dumps, &cache, &scratch, 1).unwrap();
+    assert_eq!(first.refused, 0);
+    let first_register = verdicts(&cache);
+    let (key, first_row) = first_register
+        .rows
+        .iter()
+        .find(|(_, r)| r.function == "context_receipts::query")
+        .unwrap();
+    let first_context = first_row.model_context_sha256.as_ref().unwrap();
+    assert!(matches!(
+        first_row.status,
+        uorust::mir::verdict::Decision::Proved
+    ));
+    let first_snapshot = dir.join("first-verdicts.toml");
+    std::fs::write(&first_snapshot, first_register.to_text()).unwrap();
+    let second = uorust::mir::prove_bounded(&dir, &b, &dumps, &cache, &scratch, 1).unwrap();
+    assert_eq!(second.refused, 0);
+    let second_register = verdicts(&cache);
+    assert_ne!(
+        first_context,
+        second_register.rows[key]
+            .model_context_sha256
+            .as_ref()
+            .unwrap()
+    );
+    let saved = std::fs::read(&cache).unwrap();
+    assert!(
+        String::from_utf8_lossy(&saved).contains(first_context),
+        "the original SDK context was discarded"
+    );
+    assert!(
+        second_register.historical[key].contains(first_row),
+        "the original decision fields changed"
+    );
+    let imported = dir.join("imported-decisions.toml");
+    let mut only_latest = second_register.clone();
+    only_latest.historical.clear();
+    std::fs::write(&imported, only_latest.to_text()).unwrap();
+    uorust::mir::verdict::Verdicts::import_files(&imported, &[first_snapshot]).unwrap();
+    let imported_bytes = std::fs::read(&imported).unwrap();
+    for context in [&a, &b] {
+        let replay =
+            uorust::mir::prove_bounded(&dir, context, &dumps, &imported, &scratch, 1).unwrap();
+        assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+        assert_eq!(std::fs::read(&imported).unwrap(), imported_bytes);
+    }
+    let mut corrupted = second_register.clone();
+    corrupted.historical.get_mut(key).unwrap()[0].model_context_sha256 = Some("0".repeat(64));
+    let mut rejected = a.clone();
+    rejected.mir = Some(mir_options(
+        dumps.clone(),
+        corrupted,
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &rejected).unwrap();
+    assert!(
+        residue_detail(&files, "context_receipts::query").is_some(),
+        "a corrupted historic context acquired a current proof"
+    );
+    for context in [&a, &b, &a, &b] {
+        let replay =
+            uorust::mir::prove_bounded(&dir, context, &dumps, &cache, &scratch, 1).unwrap();
+        assert_eq!(
+            (replay.proved, replay.refused, replay.runs),
+            (0, 0, 0),
+            "an intact context was verified again"
+        );
+        assert_eq!(
+            std::fs::read(&cache).unwrap(),
+            saved,
+            "replay rewrote original decision records"
+        );
+    }
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        original.replace("{value}", "{!value}"),
+    )
+    .unwrap();
+    let changed = uorust::mir::prove_bounded(&dir, &a, &dumps, &cache, &scratch, 1).unwrap();
+    assert!(
+        changed.runs > 0 && changed.proved > 0,
+        "a changed source dependency reused an old decision"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-73: source fixed-width signed fields reuse the common word codec.
+#[test]
+fn fixed_signed_source_fields_share_integer_codec_ue_73() {
+    let mut code = String::new();
+    let mut oracle = String::from("use fixed_fields::*;fn main(){\n");
+    for bits in [8, 16, 32, 64] {
+        code.push_str(&format!("pub struct Signed{bits} {{pub value:i{bits}}}\npub fn read{bits}(mut n:u8,x:&Signed{bits})->i{bits} {{while n>0 {{n-=1;}}x.value}}\npub fn make{bits}(mut n:u8,value:i{bits})->Signed{bits} {{while n>0 {{n-=1;}}Signed{bits}{{value}}}}\npub fn source{bits}(x:&Signed{bits})->i{bits} {{x.value}}\npub fn call{bits}(mut n:u8,x:&Signed{bits})->i{bits} {{while n>0 {{n-=1;}}source{bits}(x)}}\n"));
+        oracle.push_str(&format!("for value in [i{bits}::MIN,-1,0,1,i{bits}::MAX] {{for n in [0,2] {{for (mode,got) in [(\"read\",read{bits}(n,&Signed{bits}{{value}})),(\"call\",call{bits}(n,&Signed{bits}{{value}}))] {{println!(\"{bits}|{{mode}}|{{n}}|{{value}}|{{}}\",got as u{bits});}}}}}}\n"));
+    }
+    oracle.push_str("}\n");
+    let dir=scratch("fixed-source-fields",&[
+        ("Cargo.toml","[package]\nname=\"fixed_fields\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",&code),("src/bin/vectors.rs",&oracle),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "fixed-source-fields");
+    let mut opts = options("fixed_fields");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for bits in [8, 16, 32, 64] {
+        let path = format!("fixed_fields::read{bits}");
+        assert!(
+            residue_detail(&proposed, &path).is_none(),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+        assert!(
+            residue_detail(&proposed, &format!("fixed_fields::call{bits}")).is_none(),
+            "source result codec not shared"
+        );
+        assert!(
+            residue_detail(&proposed, &format!("fixed_fields::make{bits}")).is_none(),
+            "the admitted reverse codec was not reused"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("fixed-source-field-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("fixed_fields"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let bits = p[0];
+        let path = format!("fixed_fields::{}{bits}", p[1]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: fixedFieldVector{i}, parameters: [], statement: (({name} {} (record Signed{bits} {{value := ({} : Int64)}})) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[2],p[3],p[4],policy.join(", "));
+        if p[4] == "0" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 0)", "= 1)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 80);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("value:i8", "value:i16", 1),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&mismatched, "fixed_fields::read8")
+        .is_some_and(|s| s.contains("field representation")));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-72: native constants import admitted source definitions, never guessed values.
+#[test]
+fn compiler_constants_reuse_source_dependencies_ue_72() {
+    let dir = scratch("source-constant-dependencies", &[
+        ("Cargo.toml", "[package]\nname=\"constant_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub mod left { pub const VALUE:u32=7; }
+pub mod right { pub const VALUE:u32=19; }
+pub const FLAG:bool=true;
+pub const SIGNED:i64=-3;
+pub const UNAVAILABLE:usize=std::mem::size_of::<usize>();
+pub fn left_value(mut n:u8)->u32 {while n>0 {n-=1;}left::VALUE}
+pub fn right_value(mut n:u8)->u32 {while n>0 {n-=1;}right::VALUE}
+pub fn flag(mut n:u8)->bool {while n>0 {n-=1;}FLAG}
+pub fn signed(mut n:u8)->i64 {while n>0 {n-=1;}SIGNED}
+pub fn unavailable(mut n:u8)->usize {while n>0 {n-=1;}UNAVAILABLE}
+"#),
+        ("src/bin/vectors.rs", r#"
+use constant_models::*;
+fn main(){for n in [0,1,3,255] {
+println!("left_value|{n}|{}",left_value(n));
+println!("right_value|{n}|{}",right_value(n));
+println!("flag|{n}|{}",flag(n));
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "source-constant-dependencies");
+    let mut opts = options("constant_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["left_value", "right_value", "flag"] {
+        let path = format!("constant_models::{f}");
+        assert!(
+            residue_detail(&proposed, &path).is_none(),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["signed", "unavailable"] {
+        assert!(
+            residue_detail(&proposed, &format!("constant_models::{f}")).is_some(),
+            "{f} acquired an unavailable constant meaning"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-constant-dependency-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("constant_models"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        3,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("constant_models::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: constantVector{i}, parameters: [], statement: (({name} {}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[2],policy.join(", "));
+        if p[0] == "left_value" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 7)", "= 8)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 12);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    let source_path = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source_path).unwrap();
+    let changed = original.replacen("VALUE:u32=7", "VALUE:u32=8", 1);
+    assert_ne!(original, changed);
+    std::fs::write(&source_path, changed).unwrap();
+    let stale = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&stale, "constant_models::left_value").is_some(),
+        "a changed initializer reused its previous native decision"
+    );
+    assert!(
+        residue_detail(&stale, "constant_models::right_value").is_none(),
+        "an unrelated constant invalidated an intact rooted decision"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-71: generic entries cannot create unbound global tuple schemas.
+#[test]
+fn parametric_map_carriers_share_sdk_products_ue_71() {
+    let dir=scratch("parametric-map-carriers",&[("Cargo.toml","[package]\nname=\"map_carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::collections::{HashMap,BTreeMap};
+pub fn keep<K,V>(mut n:u8,m:HashMap<K,V>)->HashMap<K,V> {while n>0 {n-=1;}m}
+pub fn length<K,V>(mut n:u8,m:&HashMap<K,V>)->usize {while n>0 {n-=1;}m.len()}
+pub fn source_length<K,V>(m:&HashMap<K,V>)->usize {m.len()}
+pub fn concrete_keep(m:HashMap<u8,bool>)->HashMap<u8,bool> {keep(0,m)}
+pub fn concrete_natural_keep(m:HashMap<u8,u8>)->HashMap<u8,u8> {keep(0,m)}
+pub fn get<V>(mut n:u8,m:&HashMap<u8,V>,k:u8)->Option<&V> {while n>0 {n-=1;}m.get(&k)}
+pub fn source_get<V>(m:&HashMap<u8,V>,k:u8)->Option<&V> {m.get(&k)}
+pub fn tree_get<V>(m:&BTreeMap<u8,V>,k:u8)->Option<&V> {m.get(&k)}
+pub fn concrete_length(m:&HashMap<u8,bool>)->usize {source_length(m)}
+pub fn native_source_length(mut n:u8,m:&HashMap<u8,bool>)->usize {while n>0 {n-=1;}source_length(m)}
+pub fn unavailable<'a,K:std::cmp::Eq+std::hash::Hash,V>(mut n:u8,m:&'a HashMap<K,V>,k:&K)->Option<&'a V> {while n>0 {n-=1;}m.get(k)}
+pub fn discard<K,V>(mut n:u8,m:HashMap<K,V>)->usize {while n>0 {n-=1;}m.len()}
+"#),("src/bin/vectors.rs",r#"
+use map_carriers::*;use std::collections::{HashMap,BTreeMap};use std::fmt::{Display,Debug};
+fn emit<V:Copy+PartialEq+Display+Debug>(tag:&str,m:HashMap<u8,V>) {
+ for n in [0,2] {
+  let kept=keep(n,m.clone());assert_eq!(kept,m);println!("keep|{tag}|{n}|{}|{}",kept[&1],kept[&3]);
+  println!("length|{tag}|{n}|{}",length(n,&m));
+  for k in [0,1,3] {println!("get|{tag}|{n}|{k}|{}",get(n,&m,k).map(|v|v.to_string()).unwrap_or("none".into()));}
+ }
+ println!("source_length|{tag}|0|{}",source_length(&m));
+ let tree:BTreeMap<u8,V>=m.iter().map(|(&k,&v)|(k,v)).collect();
+ for k in [0,1,3] {
+  println!("source_get|{tag}|0|{k}|{}",source_get(&m,k).map(|v|v.to_string()).unwrap_or("none".into()));
+  println!("tree_get|{tag}|0|{k}|{}",tree_get(&tree,k).map(|v|v.to_string()).unwrap_or("none".into()));
+ }
+}
+fn main(){
+ let b=HashMap::from([(1u8,false),(3,true)]);let n=HashMap::from([(1u8,8u8),(3,23)]);
+ emit("Bool",b.clone());emit("Nat",n.clone());
+ let kept=concrete_keep(b.clone());println!("concrete_keep|Bool|0|{}|{}",kept[&1],kept[&3]);
+ let kept=concrete_natural_keep(n);println!("concrete_natural_keep|Nat|0|{}|{}",kept[&1],kept[&3]);
+ println!("concrete_length|Bool|0|{}",concrete_length(&b));
+ for n in [0,2] {println!("native_source_length|Bool|{n}|{}",native_source_length(n,&b));}
+}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "parametric-map-carriers");
+    let mut opts = options("map_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    for function in ["unavailable", "discard"] {
+        assert!(
+            residue_detail(&files, &format!("map_carriers::{function}")).is_some(),
+            "{function} acquired unavailable semantics"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("parametric-map-carrier-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("map_carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    assert!(
+        !decisions
+            .rows
+            .values()
+            .any(|v| v.function == "map_carriers::concrete_length"),
+        "the source generic-call bridge did not compose"
+    );
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 39);
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("map_carriers::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let (first, last) = if p[1] == "Bool" {
+            ("false", "true")
+        } else {
+            ("8", "23")
+        };
+        let closed = p[0].starts_with("concrete_") || p[0] == "native_source_length";
+        let entry = |key: &str, value: &str| {
+            if closed {
+                format!(
+                    "(record TupleNat{} {{item0 := {key}, item1 := {value}}})",
+                    p[1]
+                )
+            } else {
+                format!("({key}, {value})")
+            }
+        };
+        let entry_type = if closed {
+            format!("TupleNat{}", p[1])
+        } else {
+            format!("(Nat * {})", p[1])
+        };
+        let list = |a: &str, b: &str| {
+            format!(
+                "(cons {} (cons {} (nil {entry_type})))",
+                entry("1", a),
+                entry("3", b)
+            )
+        };
+        let input = list(first, last);
+        let generic = if closed {
+            String::new()
+        } else if ["get", "source_get", "tree_get"].contains(&p[0]) {
+            format!("[{}] ", p[1])
+        } else {
+            format!("[Nat, {}] ", p[1])
+        };
+        let prefix = if ["keep", "length", "get", "native_source_length"].contains(&p[0]) {
+            format!("{} ", p[2])
+        } else {
+            String::new()
+        };
+        let (args, expected) = if ["keep", "concrete_keep", "concrete_natural_keep"].contains(&p[0])
+        {
+            (String::new(), list(p[3], p[4]))
+        } else if ["get", "source_get", "tree_get"].contains(&p[0]) {
+            (
+                format!(" {}", p[3]),
+                if p[4] == "none" {
+                    format!("(ctor Option.none [{}])", p[1])
+                } else {
+                    format!("(ctor Option.some [{}] {})", p[1], p[4])
+                },
+            )
+        } else {
+            (String::new(), p[3].to_string())
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let call = format!("({name} {generic}{prefix}{input}{args})");
+        let statement = if closed && ["concrete_keep", "concrete_natural_keep"].contains(&p[0]) {
+            let eq_value = |item: &str, value: &str| {
+                if p[1] == "Bool" {
+                    format!("(prim equal (project {item} item1) {value} : Bool)")
+                } else {
+                    format!("((project {item} item1) =? {value})")
+                }
+            };
+            let tests = [
+                "((project carrierFirst item0) =? 1)".to_string(),
+                eq_value("carrierFirst", p[3]),
+                "((project carrierSecond item0) =? 3)".to_string(),
+                eq_value("carrierSecond", p[4]),
+                "((prim length carrierTail : Nat) =? 0)".to_string(),
+            ];
+            let test = tests
+                .into_iter()
+                .reduce(|a, b| format!("({a} && {b})"))
+                .unwrap();
+            format!("((match {call} | List.nil => false | List.cons carrierFirst carrierRest => (match carrierRest | List.nil => false | List.cons carrierSecond carrierTail => {test})) = true)")
+        } else {
+            format!("({call} = {expected})")
+        };
+        let theorem = format!("theorem{{name: mapCarrierVector{i}, parameters: [], statement: {statement}, proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if p[0] == "length" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 2)", "= 3)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
 }

@@ -28,6 +28,8 @@ fn std_agrees_with_every_vector_of_its_models() {
     assert_eq!(str::repeat("x", 0), "", "std::str::<impl str>::repeat");
     assert_eq!(char::to_string(&'é'), "é", "<char as std::string::ToString>::to_string");
     assert_eq!(std::slice::from_ref(&7u32).to_vec(), vec![7u32], "std::slice::from_ref");
+    assert_eq!(Some(true).map(|x: bool| !x), Some(false), "std::option::Option::map");
+    assert_eq!(None::<bool>.map(|x: bool| !x), None, "std::option::Option::map");
     assert_eq!(Some(String::from("a")).as_ref().cloned(), Some(String::from("a")), "std::option::Option::cloned");
     assert_eq!(None::<String>.as_ref().cloned(), None, "std::option::Option::cloned");
     assert_eq!(Some(3u8).as_ref().copied(), Some(3u8), "std::option::Option::copied");
@@ -53,6 +55,13 @@ fn std_agrees_with_every_vector_of_its_models() {
     assert!(std::collections::BTreeMap::from([("a", 1u8)]).contains_key(&"a"), "std::collections::BTreeMap::contains_key");
     assert_eq!({ let mut m = std::collections::BTreeMap::from([("a", 1u8), ("c", 3)]); let old = m.insert("b", 2u8); (old, m.into_iter().collect::<Vec<_>>()) }, (None, vec![("a", 1u8), ("b", 2), ("c", 3)]), "std::collections::BTreeMap::insert");
     assert_eq!({ let mut m = std::collections::BTreeMap::from([("a", 1u8)]); let old = m.insert("a", 5u8); (old, m.into_iter().collect::<Vec<_>>()) }, (Some(1u8), vec![("a", 5u8)]), "std::collections::BTreeMap::insert");
+    assert_eq!(std::collections::HashMap::from([("z", 7u8), ("a", 4)]).get(&"z").copied(), Some(7u8), "std::collections::HashMap::get");
+    assert_eq!(std::collections::HashMap::from([("a", 4u8), ("z", 7)]).get(&"missing").copied(), None, "std::collections::HashMap::get");
+    assert!(std::collections::HashMap::from([(3u32, 7u8), (1, 4)]).contains_key(&3u32), "std::collections::HashMap::contains_key");
+    assert!(!std::collections::HashMap::from([(1u32, 4u8), (3, 7)]).contains_key(&2u32), "std::collections::HashMap::contains_key");
+    assert_eq!(std::collections::HashMap::from([(3u32, 7u8), (1, 4)]).len(), 2, "std::collections::HashMap::len");
+    assert!(std::collections::HashMap::from([] as [(u32, u8); 0]).is_empty(), "std::collections::HashMap::is_empty");
+    assert!(!std::collections::HashMap::from([(3u32, 7u8)]).is_empty(), "std::collections::HashMap::is_empty");
     assert_eq!(std::collections::BTreeMap::from([("a", 1u8)]).len(), 1, "std::collections::BTreeMap::len");
     assert!(!std::collections::BTreeMap::from([("a", 1u8)]).is_empty(), "std::collections::BTreeMap::is_empty");
     assert_eq!(std::collections::BTreeSet::<u8>::new().len(), 0, "std::collections::BTreeSet::new");

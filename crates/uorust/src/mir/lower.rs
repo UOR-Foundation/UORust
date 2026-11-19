@@ -41,7 +41,9 @@ use crate::lift::{self, Lift, Residue, Ty, Types};
 #[derive(Clone, Debug)]
 pub(crate) struct Callee {
     pub(crate) name: String,
+    pub(crate) method: Option<super::identity::Method>,
     pub(crate) params: Vec<Ty>,
+    pub(crate) generic: Option<lift::Generic>,
     /// The forward result: the type of the body's `_0`.
     pub(crate) result: Ty,
     /// Where the definition threads `&mut` parameters: its result type and
@@ -49,13 +51,35 @@ pub(crate) struct Callee {
     pub(crate) threads: Option<(Ty, Vec<usize>)>,
 }
 
+/// A source constant's exact admitted value model, distinct from a function item.
+#[derive(Clone, Debug)]
+pub(crate) struct Constant {
+    pub(crate) name: String,
+    pub(crate) result: Ty,
+}
+
+/// Both translators must read this immutable value through the same ABI.
+pub(crate) fn constant_interface(written: &str, result: &Ty, types: &Types) -> bool {
+    super::source::type_model(written, types).as_ref() == Some(result)
+        && ty(written, types).as_ref() == Ok(result)
+        && super::source::callable_environment(result, types)
+}
+
 /// What every function of a crate is translated against.
 pub(crate) struct Cx<'a> {
     pub(crate) types: &'a Types,
+    /// Admitted source signatures in this crate's coherent impl scope.
+    pub(crate) source_sigs: &'a BTreeMap<String, lift::Sig>,
     /// `usize`'s widths on the declared targets, narrowest first.
     pub(crate) widths: &'a [(u32, Vec<String>)],
     /// Functions by the path MIR prints for them, with the crate prefixed.
     pub(crate) callees: &'a BTreeMap<String, Callee>,
+    /// Compiler imports are bound to a registered function question.
+    pub(crate) compiler_scope: String,
+    pub(crate) compiler_bindings: &'a super::identity::Bindings,
+    pub(crate) closure_scopes: &'a BTreeMap<String, String>,
+    /// Actual source constant declarations, never inferred from zero-arity functions.
+    pub(crate) constants: &'a BTreeMap<String, Constant>,
     /// The crate's identifier, which MIR leaves off its own paths.
     pub(crate) krate: String,
     /// Names a parameter or helper may not take.
@@ -84,6 +108,28 @@ pub(crate) struct Cx<'a> {
 }
 
 impl<'a> Cx<'a> {
+    fn callee(&self, path: &str) -> Option<&Callee> {
+        if super::identity::qualified(path) {
+            return self.compiler_bindings.get(&self.compiler_scope)?.get(path);
+        }
+        let key = format!("{}::{path}", self.krate);
+        let erased = erase(path);
+        let generic = format!("{}::{erased}", self.krate);
+        self.callees
+            .get(&key)
+            .or_else(|| self.callees.get(path))
+            .or_else(|| self.callees.get(&generic).filter(|c| c.generic.is_some()))
+            .or_else(|| self.callees.get(&erased).filter(|c| c.generic.is_some()))
+    }
+
+    fn closure_scope(&mut self, closure: &str) {
+        self.compiler_scope = self
+            .closure_scopes
+            .get(closure)
+            .cloned()
+            .unwrap_or_default();
+    }
+
     /// The same context, with `active` the instances being translated.
     fn within<'b>(&'b self, active: &'b [String]) -> Cx<'b>
     where
@@ -91,8 +137,13 @@ impl<'a> Cx<'a> {
     {
         Cx {
             types: self.types,
+            source_sigs: self.source_sigs,
             widths: self.widths,
             callees: self.callees,
+            compiler_scope: self.compiler_scope.clone(),
+            compiler_bindings: self.compiler_bindings,
+            closure_scopes: self.closure_scopes,
+            constants: self.constants,
             krate: self.krate.clone(),
             taken: self.taken,
             explicit: self.explicit,
@@ -150,6 +201,8 @@ enum Val {
 /// argument (by position), and the guard of a guarded `Option`.
 struct Called {
     term: String,
+    /// A source result bound before converting it to the native carrier.
+    binding: Option<(String, String, String)>,
     updates: BTreeMap<usize, String>,
     guard: Option<String>,
     /// A callee that threads `&mut` parameters: `term` is its tuple, of
@@ -169,6 +222,7 @@ impl Called {
     fn value(term: String) -> Self {
         Self {
             term,
+            binding: None,
             updates: BTreeMap::new(),
             guard: None,
             threads: None,
@@ -193,7 +247,7 @@ struct State {
     path: Vec<MirStep>,
     /// Match binders in scope, with their types.
     binders: Vec<(String, Ty)>,
-    /// The binders of each variant a place is known to hold: place text,
+    /// The binders of each variant an immutable value is known to hold: typed value,
     /// variant -> binder names.
     bound: BTreeMap<(String, String), Vec<String>>,
     /// Facts the language guarantees about terms on this path.
@@ -241,6 +295,114 @@ struct Loop {
     /// In a backward function, the parameter that takes the returned
     /// borrow's new value, last.
     new: Option<String>,
+    /// Multiple live values share one changing recursion argument.
+    packet: Option<Ty>,
+    boundary: Option<RegionBoundary>,
+}
+
+/// A nested region returns only state it changes; its caller owns continuation.
+#[derive(Clone, Debug)]
+struct RegionBoundary {
+    name: String,
+    blocks: BTreeSet<IrBlockId>,
+    exits: BTreeMap<IrBlockId, Vec<(IrLocal, Ty)>>,
+}
+
+/// Natural-loop structure derived solely from the compiler control-flow graph.
+fn natural_regions(body: &IrBody) -> Lift<BTreeMap<IrBlockId, BTreeSet<IrBlockId>>> {
+    let mut regions: BTreeMap<IrBlockId, BTreeSet<IrBlockId>> = BTreeMap::new();
+    let n = body.blocks.len();
+    if n == 0 {
+        return Err(kind("IrBody", "a control-flow graph without an entry"));
+    }
+    let succ: Vec<Vec<IrBlockId>> = body
+        .blocks
+        .iter()
+        .map(|b| b.terminator.successors())
+        .collect();
+    if succ.iter().flatten().any(|s| *s >= n) {
+        return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
+    }
+    // Depth-first, iteratively: an edge to a block on the stack is a back
+    // edge.
+    let mut state = vec![0u8; n];
+    let mut back: Vec<(IrBlockId, IrBlockId)> = Vec::new();
+    let mut stack: Vec<(IrBlockId, usize)> = vec![(0, 0)];
+    state[0] = 1;
+    while let Some((b, i)) = stack.pop() {
+        if let Some(&s) = succ[b].get(i) {
+            stack.push((b, i + 1));
+            if s >= n {
+                return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
+            }
+            match state[s] {
+                0 => {
+                    state[s] = 1;
+                    stack.push((s, 0));
+                }
+                1 => back.push((b, s)),
+                _ => {}
+            }
+        } else {
+            state[b] = 2;
+        }
+    }
+    let mut pred: Vec<Vec<IrBlockId>> = vec![Vec::new(); n];
+    for (b, ss) in succ.iter().enumerate() {
+        for &s in ss {
+            pred[s].push(b);
+        }
+    }
+    if back.is_empty() {
+        return Ok(regions);
+    }
+    let mut by_header: BTreeMap<IrBlockId, Vec<IrBlockId>> = BTreeMap::new();
+    for (tail, head) in back {
+        by_header.entry(head).or_default().push(tail);
+    }
+    for (head, tails) in by_header {
+        // A header dominates its latches iff deleting it disconnects every
+        // latch from entry. Keep only one linear-size reachability set.
+        let mut bypass = vec![false; n];
+        let mut work = if head == 0 { Vec::new() } else { vec![0] };
+        while let Some(b) = work.pop() {
+            if b == head || bypass[b] {
+                continue;
+            }
+            bypass[b] = true;
+            work.extend(succ[b].iter().copied());
+        }
+        if tails.iter().any(|tail| bypass[*tail]) {
+            return Err(kind(
+                "TerminatorKind::Goto",
+                "an irreducible region with multiple entries",
+            ));
+        }
+        let region = regions.entry(head).or_default();
+        region.insert(head);
+        let mut work = tails;
+        while let Some(b) = work.pop() {
+            if region.insert(b) {
+                work.extend(pred[b].iter().copied().filter(|p| state[*p] != 0));
+            }
+        }
+    }
+    let heads: Vec<IrBlockId> = regions.keys().copied().collect();
+    for &h in &heads {
+        for &g in &heads {
+            if h != g
+                && !regions[&h].is_disjoint(&regions[&g])
+                && !regions[&h].is_subset(&regions[&g])
+                && !regions[&g].is_subset(&regions[&h])
+            {
+                return Err(kind(
+                    "TerminatorKind::Goto",
+                    "overlapping regions without a natural nesting hierarchy",
+                ));
+            }
+        }
+    }
+    Ok(regions)
 }
 
 struct Fun<'a, 'c> {
@@ -260,6 +422,7 @@ struct Fun<'a, 'c> {
     diverges: bool,
     loops: BTreeMap<IrBlockId, Option<Loop>>,
     regions: BTreeMap<IrBlockId, BTreeSet<IrBlockId>>,
+    boundary: Option<RegionBoundary>,
     decls: Vec<Decl>,
     calls: BTreeSet<String>,
     types: BTreeSet<Ty>,
@@ -697,6 +860,35 @@ fn through_pointer(what: &str) -> Residue {
 
 /// Translate one body to the definition `name`.
 pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
+    if !cx.types.generic.is_empty()
+        || body
+            .locals
+            .iter()
+            .any(|t| super::views::touches(t, cx.types))
+        || body
+            .locals
+            .iter()
+            .filter_map(|t| ty(t, cx.types).ok())
+            .any(|t| !t.parameters().is_empty())
+    {
+        let mut pending = vec![0];
+        let mut visited = BTreeSet::new();
+        while let Some(block) = pending.pop() {
+            if !visited.insert(block) {
+                continue;
+            }
+            let Some(block) = body.blocks.get(block) else {
+                continue;
+            };
+            if matches!(block.terminator, IrTerminator::Drop(_)) {
+                return Err(kind(
+                    "TerminatorKind::Drop",
+                    "a generic body's drop glue needs an admitted effect model",
+                ));
+            }
+            pending.extend(block.terminator.successors());
+        }
+    }
     // A body reaches memory where it takes an address or reads through a
     // pointer, or where a callee does: then the memory is threaded through
     // it.
@@ -722,6 +914,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         diverges: body.locals.first().is_some_and(|t| t.trim() == "!"),
         loops: BTreeMap::new(),
         regions: BTreeMap::new(),
+        boundary: None,
         decls: Vec::new(),
         calls: BTreeSet::new(),
         types: BTreeSet::new(),
@@ -926,6 +1119,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         f.mention(&t);
     }
     let main = Decl::Definition {
+        type_parameters: Vec::new(),
         name: name.to_string(),
         parameters: f
             .params
@@ -1059,68 +1253,9 @@ impl Fun<'_, '_> {
         }
     }
 
-    /// Back edges, loop headers and their regions. A loop inside another
-    /// would make two helpers call each other: that is residue.
     fn find_loops(&mut self) -> Lift<()> {
-        let n = self.body.blocks.len();
-        let succ: Vec<Vec<IrBlockId>> = self
-            .body
-            .blocks
-            .iter()
-            .map(|b| b.terminator.successors())
-            .collect();
-        // Depth-first, iteratively: an edge to a block on the stack is a back
-        // edge.
-        let mut state = vec![0u8; n];
-        let mut back: Vec<(IrBlockId, IrBlockId)> = Vec::new();
-        let mut stack: Vec<(IrBlockId, usize)> = vec![(0, 0)];
-        state[0] = 1;
-        while let Some((b, i)) = stack.pop() {
-            if let Some(&s) = succ[b].get(i) {
-                stack.push((b, i + 1));
-                if s >= n {
-                    return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
-                }
-                match state[s] {
-                    0 => {
-                        state[s] = 1;
-                        stack.push((s, 0));
-                    }
-                    1 => back.push((b, s)),
-                    _ => {}
-                }
-            } else {
-                state[b] = 2;
-            }
-        }
-        let mut pred: Vec<Vec<IrBlockId>> = vec![Vec::new(); n];
-        for (b, ss) in succ.iter().enumerate() {
-            for &s in ss {
-                pred[s].push(b);
-            }
-        }
-        for (tail, head) in back {
-            let region = self.regions.entry(head).or_default();
-            region.insert(head);
-            let mut work = vec![tail];
-            while let Some(b) = work.pop() {
-                if region.insert(b) {
-                    work.extend(pred[b].iter().copied());
-                }
-            }
-        }
-        let heads: Vec<IrBlockId> = self.regions.keys().copied().collect();
-        for &h in &heads {
-            for &g in &heads {
-                if h != g && self.regions[&h].contains(&g) {
-                    return Err(kind(
-                        "TerminatorKind::Goto",
-                        "a loop nested in a loop, whose helpers would call each other",
-                    ));
-                }
-            }
-            self.loops.insert(h, None);
-        }
+        self.regions = natural_regions(self.body)?;
+        self.loops = self.regions.keys().map(|h| (*h, None)).collect();
         Ok(())
     }
 
@@ -1225,6 +1360,37 @@ impl Fun<'_, '_> {
 
     /// Control reaching `b`: a loop header becomes a call of its helper.
     fn goto(&mut self, b: IrBlockId, st: State) -> Lift<Expr> {
+        if let Some(boundary) = self.boundary.clone().filter(|r| !r.blocks.contains(&b)) {
+            if !st.lends.is_empty() {
+                return Err(kind(
+                    "TerminatorKind::Goto",
+                    "a region exit holding mutable borrows",
+                ));
+            }
+            let locals = boundary
+                .exits
+                .get(&b)
+                .ok_or_else(|| kind("TerminatorKind::Goto", "an undeclared region exit"))?;
+            let mut values = Vec::new();
+            for (local, ty) in locals {
+                match st.env.get(local) {
+                    Some(Val::V(value, actual)) if ty.same(actual) => values.push(value.clone()),
+                    _ => {
+                        return Err(kind(
+                            "TerminatorKind::Goto",
+                            "a region exit with an untransportable live value",
+                        ))
+                    }
+                }
+            }
+            let value = format!(
+                "(ctor {}.Exit{b}{})",
+                boundary.name,
+                values.iter().map(|v| format!(" {v}")).collect::<String>()
+            );
+            self.grow(&value)?;
+            return Ok(Expr::Flat(value));
+        }
         if !self.loops.contains_key(&b) {
             return self.block(b, st);
         }
@@ -1288,18 +1454,198 @@ impl Fun<'_, '_> {
         if let (Some(_), Some((n, _))) = (&lp.new, &self.backward) {
             args.push(n.clone());
         }
-        let call = if args.is_empty() {
+        let packet = lp.packet.as_ref().map(|ty| lift::tuple_value(ty, &args));
+        let call = if let Some(packet) = &packet {
+            format!("({} {packet})", lp.name)
+        } else if args.is_empty() {
             lp.name.clone()
         } else {
             format!("({} {})", lp.name, args.join(" "))
         };
         if st.inside == Some(b) {
-            self.decreases(b, &lp, &st)?;
+            self.decreases(b, &lp, &st, packet.as_deref())?;
         } else {
             self.calls.insert(lp.name.clone());
         }
         self.grow(&call)?;
+        if let Some(boundary) = &lp.boundary {
+            if st.inside != Some(b) {
+                return self.continue_region(boundary, call, st);
+            }
+        }
         Ok(Expr::Flat(call))
+    }
+
+    fn returned(&self, value: String) -> String {
+        match &self.boundary {
+            Some(region) => format!("(ctor {}.Return {value})", region.name),
+            None => value,
+        }
+    }
+
+    fn continue_region(
+        &mut self,
+        region: &RegionBoundary,
+        call: String,
+        entry: State,
+    ) -> Lift<Expr> {
+        let mut arms = Vec::new();
+        let returned = self.fresh(Some("returned"), 0);
+        arms.push(Arm {
+            pattern: format!("{}.Return {returned}", region.name),
+            body: Expr::Flat(self.returned(returned)),
+        });
+        for (&target, locals) in &region.exits {
+            let mut state = entry.clone();
+            let mut names = Vec::new();
+            for (local, ty) in locals {
+                let name = self.fresh(
+                    self.body.names.get(*local).cloned().flatten().as_deref(),
+                    *local,
+                );
+                state.env.insert(*local, Val::V(name.clone(), ty.clone()));
+                state.binders.push((name.clone(), ty.clone()));
+                names.push(name);
+            }
+            let suffix = names.iter().map(|n| format!(" {n}")).collect::<String>();
+            state.path.push(MirStep::Match(
+                call.clone(),
+                format!("(ctor {}.Exit{target}{suffix})", region.name),
+            ));
+            arms.push(Arm {
+                pattern: format!("{}.Exit{target}{suffix}", region.name),
+                body: self.goto(target, state)?,
+            });
+        }
+        Ok(Expr::Match {
+            scrutinee: call,
+            arms,
+        })
+    }
+
+    fn region_boundary(
+        &mut self,
+        header: IrBlockId,
+        name: &str,
+        entry: &State,
+    ) -> Lift<Option<RegionBoundary>> {
+        if !self
+            .regions
+            .iter()
+            .any(|(parent, blocks)| *parent != header && blocks.contains(&header))
+        {
+            return Ok(None);
+        }
+        if entry.memory.is_some() || !entry.placed.is_empty() || !entry.lends.is_empty() {
+            return Err(kind(
+                "TerminatorKind::Goto",
+                "a nested region with untransportable memory or borrow state",
+            ));
+        }
+        let blocks = self.regions[&header].clone();
+        let mut written = BTreeSet::new();
+        let mut aliases = Vec::new();
+        for block in &self.body.blocks {
+            for statement in &block.statements {
+                if let IrStatement::Assign(destination, value) = statement {
+                    let reference = self
+                        .body
+                        .locals
+                        .get(destination.local)
+                        .is_some_and(|t| t.starts_with('&') || t.starts_with('*'));
+                    match value {
+                        IrRvalue::Ref(spec::MirBorrowKind::Mut, place) => {
+                            aliases.push((destination.local, place.local))
+                        }
+                        IrRvalue::Use(IrOperand::Copy(place) | IrOperand::Move(place))
+                            if reference =>
+                        {
+                            aliases.push((destination.local, place.local))
+                        }
+                        _ => {}
+                    }
+                }
+            }
+        }
+        for &b in &blocks {
+            let block = &self.body.blocks[b];
+            for statement in &block.statements {
+                if let IrStatement::Assign(destination, value) = statement {
+                    written.insert(destination.local);
+                    if let IrRvalue::Ref(spec::MirBorrowKind::Mut, place) = value {
+                        written.insert(place.local);
+                    }
+                }
+            }
+            if let IrTerminator::Call {
+                destination, args, ..
+            } = &block.terminator
+            {
+                written.insert(destination.local);
+                for arg in args {
+                    if let IrOperand::Copy(place) | IrOperand::Move(place) = arg {
+                        if self
+                            .body
+                            .locals
+                            .get(place.local)
+                            .is_some_and(|t| t.starts_with("&mut "))
+                        {
+                            written.insert(place.local);
+                        }
+                    }
+                }
+            }
+        }
+        loop {
+            let old = written.len();
+            for (alias, origin) in &aliases {
+                if written.contains(alias) {
+                    written.insert(*origin);
+                }
+            }
+            if old == written.len() {
+                break;
+            }
+        }
+        let targets: BTreeSet<_> = blocks
+            .iter()
+            .flat_map(|b| self.body.blocks[*b].terminator.successors())
+            .filter(|b| !blocks.contains(b))
+            .collect();
+        let mut exits = BTreeMap::new();
+        for target in targets {
+            let mut locals = Vec::new();
+            for local in self.live_at(target) {
+                if written.contains(&local) || !entry.env.contains_key(&local) {
+                    let ty = self.local_ty(local, &[])?;
+                    self.mention(&ty);
+                    locals.push((local, ty));
+                }
+            }
+            exits.insert(target, locals);
+        }
+        let mut name = crate::lex::pascal(&[name, "Exit"]);
+        while !self.used.insert(name.clone()) {
+            name.push('_');
+        }
+        let mut constructors = vec![("Return".into(), vec![self.result.render()])];
+        constructors.extend(exits.iter().map(|(target, locals)| {
+            (
+                format!("Exit{target}"),
+                locals.iter().map(|(_, t)| t.render()).collect(),
+            )
+        }));
+        self.decls.push(Decl::Data {
+            type_parameters: Vec::new(),
+            name: name.clone(),
+            constructors,
+            mutual: None,
+        });
+        Ok(Some(RegionBoundary {
+            name,
+            blocks,
+            exits,
+        }))
     }
 
     /// The helper of the loop at `h`, built on first use.
@@ -1387,7 +1733,7 @@ impl Fun<'_, '_> {
         // entered under, and keeps, hold (`exp != 0` before `loop { ..
         // exp /= 2 }`): the helper's invariants.
         let mut invariants: Vec<(String, bool)> = Vec::new();
-        let measure = match self.derive_measure(h, &st) {
+        let mut measure = match self.derive_measure(h, &st) {
             Ok(m) => m,
             Err(none) => {
                 let region = self.regions.get(&h).cloned().unwrap_or_default();
@@ -1494,6 +1840,37 @@ impl Fun<'_, '_> {
                 (p, vec![l])
             }
         };
+        // A single changing state argument keeps invariant payloads in the
+        // termination context. Separate fixed arguments may be erased by Lean.
+        let packet = if params.len() > 1
+            && carried.is_empty()
+            && memory.is_none()
+            && new.is_none()
+            && invariants.is_empty()
+            && measure.1.is_empty()
+        {
+            let ty = self
+                .cx
+                .types
+                .tuple(params.iter().map(|(_, _, t)| t.clone()).collect());
+            let state = self.fresh(Some("loopState"), 0);
+            for (i, (local, old, t)) in params.iter().enumerate() {
+                let value = lift::tuple_item(&ty, &state, i);
+                self.ranged.remove(old);
+                if let Some(bits) = fixed(t) {
+                    self.ranged.insert(value.clone(), bits);
+                }
+                st.env.insert(*local, Val::V(value, t.clone()));
+            }
+            self.scope = vec![(state, ty.clone())];
+            measure = self.derive_measure(h, &st)?;
+            Some(ty)
+        } else {
+            None
+        };
+        let boundary = self.region_boundary(h, &name, entry)?;
+        let parent_boundary = self.boundary.clone();
+        self.boundary = boundary.clone();
         let lp = Loop {
             name: name.clone(),
             live: params.clone(),
@@ -1501,6 +1878,8 @@ impl Fun<'_, '_> {
             memory: memory.clone(),
             invariants: invariants.clone(),
             new: new.as_ref().map(|(n, _)| n.clone()),
+            packet,
+            boundary: boundary.clone(),
         };
         self.loops.insert(h, Some(lp.clone()));
         self.measure = Some(measure.clone());
@@ -1518,9 +1897,9 @@ impl Fun<'_, '_> {
         if let Some(d) = lift::default_of(&self.result, self.cx.types) {
             for (c, holds) in invariants.iter().rev() {
                 let (then, otherwise) = if *holds {
-                    (body, Expr::Flat(d.clone()))
+                    (body, Expr::Flat(self.returned(d.clone())))
                 } else {
-                    (Expr::Flat(d.clone()), body)
+                    (Expr::Flat(self.returned(d.clone())), body)
                 };
                 body = Expr::If {
                     condition: Box::new(Expr::Flat(c.clone())),
@@ -1548,9 +1927,12 @@ impl Fun<'_, '_> {
             .collect();
         self.decls.extend(evidence);
         self.decls.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.clone(),
             parameters,
-            result: result.render(),
+            result: boundary
+                .as_ref()
+                .map_or_else(|| result.render(), |r| r.name.clone()),
             body,
             axioms: vec!["Quot.sound".into(), "propext".into()],
             recursive: None,
@@ -1558,6 +1940,7 @@ impl Fun<'_, '_> {
             mutual: None,
         });
         (self.scope, self.evidence, self.measure) = saved;
+        self.boundary = parent_boundary;
         Ok(lp)
     }
 
@@ -1658,10 +2041,37 @@ impl Fun<'_, '_> {
     /// The theorem that a recursive call of the loop at `h` decreases its
     /// measure: the header's condition, evaluated at the call's arguments,
     /// against the same condition at the parameters.
-    fn decreases(&mut self, h: IrBlockId, lp: &Loop, st: &State) -> Lift<()> {
+    fn decreases(&mut self, h: IrBlockId, lp: &Loop, st: &State, packet: Option<&str>) -> Lift<()> {
         let Some((measure, _)) = self.measure.clone() else {
             return Err(kind("TerminatorKind::Goto", "a loop without a measure"));
         };
+        if let Some(packet) = packet {
+            let state = self
+                .scope
+                .first()
+                .ok_or_else(|| kind("TerminatorKind::Goto", "a loop state without a parameter"))?;
+            // Keep the measure applied to the recursive argument unreduced:
+            // the SDK checks this exact obligation before Lean proves it.
+            let after = stdlib::substitute(
+                &measure,
+                &BTreeMap::from([(state.0.clone(), packet.to_string())]),
+            );
+            let mut parameters: Vec<(String, String)> = self
+                .scope
+                .iter()
+                .map(|(n, t)| (n.clone(), t.render()))
+                .collect();
+            parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
+            self.evidence.push(Decl::Theorem {
+                type_parameters: Vec::new(),
+                name: format!("decreases_{}_{}", lp.name, self.evidence.len()),
+                parameters,
+                statement: implication(&hypotheses(&st.path), &format!("({after} < {measure})")),
+                proof: "linear_arithmetic{}".into(),
+                axioms: vec!["Quot.sound".into(), "propext".into()],
+            });
+            return Ok(());
+        }
         // A measure the loop's writes make smaller: its value on the way
         // back, below its value on the way in.
         let shrinking = self
@@ -1684,6 +2094,7 @@ impl Fun<'_, '_> {
                 .collect();
             parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
             self.evidence.push(Decl::Theorem {
+                type_parameters: Vec::new(),
                 name,
                 parameters,
                 statement,
@@ -1727,6 +2138,7 @@ impl Fun<'_, '_> {
             .collect();
         parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
         self.evidence.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -1783,6 +2195,7 @@ impl Fun<'_, '_> {
             proof
         };
         self.decls.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -1841,12 +2254,15 @@ impl Fun<'_, '_> {
                         [one] => one.clone(),
                         _ => lift::tuple_value(&self.result, &items),
                     };
+                    let v = self.returned(v);
                     self.grow(&v)?;
                     return Ok(Expr::Flat(v));
                 }
                 let v = match st.env.get(&0) {
                     // A returned borrow is the value of the place it borrows.
-                    Some(Val::V(..) | Val::Mut(_)) => self.read(&whole, &st)?.0,
+                    Some(Val::V(..) | Val::Mut(_) | Val::Guarded { .. }) => {
+                        self.read(&whole, &st)?.0
+                    }
                     _ if self.ret == Ty::Unit => "()".into(),
                     _ => {
                         return Err(kind(
@@ -1874,6 +2290,7 @@ impl Fun<'_, '_> {
                     }
                     lift::tuple_value(&self.result, &items)
                 };
+                let v = self.returned(v);
                 self.grow(&v)?;
                 Ok(Expr::Flat(v))
             }
@@ -1922,7 +2339,7 @@ impl Fun<'_, '_> {
                                 "a diverging body whose result has no value to stand for `!`",
                             )
                         })?;
-                        return Ok(Expr::Flat(d));
+                        return Ok(Expr::Flat(self.returned(d)));
                     }
                     return self.unreachable(&st, callee);
                 };
@@ -2026,7 +2443,7 @@ impl Fun<'_, '_> {
         if steps.is_empty() {
             st.env.insert(p.local, v);
         } else {
-            let Val::V(new, _) = v else {
+            let Val::V(new, new_type) = v else {
                 return Err(kind(k, "a pair or a borrow written into a part of a value"));
             };
             let (whole, wt, env) = match st.env.get(&p.local).cloned() {
@@ -2046,7 +2463,7 @@ impl Fun<'_, '_> {
                     ))
                 }
             };
-            let updated = self.replace(&whole, &wt, &steps, &new, st)?;
+            let updated = self.replace(&whole, &wt, &steps, &new, &new_type, st)?;
             self.grow(&updated)?;
             st.env.insert(
                 p.local,
@@ -2119,11 +2536,23 @@ impl Fun<'_, '_> {
         t: &Ty,
         steps: &[IrProjection],
         new: &str,
+        new_type: &Ty,
         st: &State,
     ) -> Lift<String> {
         let k = spec::MirStatementKind::Assign.path();
         let Some((step, rest)) = steps.split_first() else {
-            return Ok(new.to_string());
+            return self
+                .scalar_representation(new, new_type, t, st)
+                .ok_or_else(|| {
+                    kind(
+                        k,
+                        &format!(
+                            "a write of {} into stored {} has no admitted representation codec",
+                            new_type.render(),
+                            t.render()
+                        ),
+                    )
+                });
         };
         // An item of a list: the list with that item replaced, which an
         // `assert` (or a slice pattern's length check) before the write
@@ -2147,7 +2576,7 @@ impl Fun<'_, '_> {
         if let (Some(i), Ty::List(elem)) = (at, t) {
             let read = self.index_aux(elem, false)?;
             let part = format!("({read} {whole} {i})");
-            let inner = self.replace(&part, elem, rest, new, st)?;
+            let inner = self.replace(&part, elem, rest, new, new_type, st)?;
             let update = self.index_aux(elem, true)?;
             return Ok(format!("({update} {whole} {i} {inner})"));
         }
@@ -2161,7 +2590,7 @@ impl Fun<'_, '_> {
         {
             if v == "Some" {
                 let held = self.fresh(Some("held"), 0);
-                let inner = self.replace(&held, item, after, new, st)?;
+                let inner = self.replace(&held, item, after, new, new_type, st)?;
                 let i = item.render();
                 return Ok(format!(
                     "(match {whole} | Option.none => (ctor Option.none [{i}]) | Option.some {held} => (ctor Option.some [{i}] {inner}))"
@@ -2182,7 +2611,7 @@ impl Fun<'_, '_> {
                     .ok_or_else(|| kind(MEMORY_KIND, "a MaybeUninit of a type with no value"))?;
                 let part =
                     format!("(match {whole} | Option.none => {d} | Option.some held => held)");
-                let inner_new = self.replace(&part, inner, rest, new, st)?;
+                let inner_new = self.replace(&part, inner, rest, new, new_type, st)?;
                 return Ok(format!(
                     "(ctor Option.some [{}] {inner_new})",
                     inner.render()
@@ -2193,7 +2622,7 @@ impl Fun<'_, '_> {
             if (is_pointer(t) || !matches!(t, Ty::Named(_) | Ty::Tuple(_) | Ty::Pair(_)))
                 && ty(fty, self.cx.types).ok().as_ref() == Some(t)
             {
-                return self.replace(whole, t, rest, new, st);
+                return self.replace(whole, t, rest, new, new_type, st);
             }
         }
         let IrProjection::Field(i, _) = step else {
@@ -2209,7 +2638,7 @@ impl Fun<'_, '_> {
         };
         let part = self.field(whole, t, *i)?;
         let pt = self.field_ty(t, *i)?;
-        let inner = self.replace(&part, &pt, rest, new, st)?;
+        let inner = self.replace(&part, &pt, rest, new, new_type, st)?;
         match t {
             Ty::Tuple(ts) | Ty::Pair(ts) => {
                 let items: Vec<String> = (0..ts.len())
@@ -2374,6 +2803,7 @@ impl Fun<'_, '_> {
         };
         let Called {
             term,
+            binding: initial_binding,
             mut updates,
             guard,
             threads,
@@ -2382,7 +2812,7 @@ impl Fun<'_, '_> {
         } = called;
         // A threading callee's tuple, bound once: `_0`'s value first, then
         // each `&mut` argument's new value.
-        let mut binding = None;
+        let mut binding = initial_binding;
         let term = match threads {
             Some((rt, positions)) => {
                 let name = self.fresh(Some("called"), destination.local);
@@ -2623,7 +3053,7 @@ impl Fun<'_, '_> {
                 "a result type with no value to stand for a path proved unreachable",
             )
         })?;
-        Ok(Expr::Flat(d))
+        Ok(Expr::Flat(self.returned(d)))
     }
 
     fn switch(
@@ -2732,14 +3162,9 @@ impl Fun<'_, '_> {
         };
         let mut yes = st.clone();
         yes.path.push(MirStep::If(guard.to_string(), true));
+        let (scrutinee, ty) = self.read(&place, &st)?;
         yes.bound.insert(
-            (
-                place_key(
-                    &place,
-                    self.mut_params.contains(&place.local) || st.lends.contains_key(&place.local),
-                ),
-                "Some".into(),
-            ),
+            (variant_key(&scrutinee, &ty), "Some".into()),
             vec![value.to_string()],
         );
         let mut no = st;
@@ -2763,10 +3188,7 @@ impl Fun<'_, '_> {
         st: State,
     ) -> Lift<Expr> {
         let (scrutinee, t) = self.read(place, &st)?;
-        let key = place_key(
-            place,
-            self.mut_params.contains(&place.local) || st.lends.contains_key(&place.local),
-        );
+        let key = variant_key(&scrutinee, &t);
         // An enum with one inhabited variant is that variant's field: the
         // switch takes that arm, whose field is the value itself.
         let printed = (place.projection.is_empty())
@@ -3297,6 +3719,22 @@ impl Fun<'_, '_> {
                     ))
                 }
                 Some(body) => self.const_body(p, body),
+                None if self
+                    .cx
+                    .constants
+                    .contains_key(&format!("{}::{p}", self.cx.krate))
+                    || self.cx.constants.contains_key(p) =>
+                {
+                    let key = format!("{}::{p}", self.cx.krate);
+                    let constant = self
+                        .cx
+                        .constants
+                        .get(&key)
+                        .or_else(|| self.cx.constants.get(p))
+                        .expect("checked");
+                    self.calls.insert(constant.name.clone());
+                    Ok((format!("({})", constant.name), constant.result.clone()))
+                }
                 // In core's scope, a constant a trait of core provides.
                 None if self.cx.core.and_then(|l| l.constant(p)).is_some() => {
                     let inst = self.cx.core.and_then(|l| l.constant(p)).expect("checked");
@@ -3431,11 +3869,47 @@ impl Fun<'_, '_> {
                     Ok((lit, t))
                 }
                 None => match c {
-                    IrConstant::Path(p) => Err(kind(k, &format!("the constant item {p}"))),
+                    IrConstant::Path(p) => self
+                        .function_item(p)
+                        .ok_or_else(|| kind(k, &format!("the constant item {p}"))),
                     _ => Err(kind(k, p)),
                 },
             },
         }
+    }
+
+    /// A function item carries its admitted signature, including dependencies.
+    /// Mutable functions need an environment/backward function, not a pure value.
+    fn function_item(&mut self, path: &str) -> Option<(String, Ty)> {
+        if let Some(c) = self.cx.callee(path).cloned() {
+            if c.generic.is_some()
+                || c.threads.is_some()
+                || c.name == self.name
+                || c.params.is_empty()
+            {
+                return None;
+            }
+            self.calls.insert(c.name.clone());
+            let arguments: Vec<String> = (0..c.params.len())
+                .map(|i| self.fresh(Some("argument"), i))
+                .collect();
+            let parameters = arguments
+                .iter()
+                .zip(&c.params)
+                .map(|(name, ty)| format!("({name} : {})", ty.render()))
+                .collect::<Vec<_>>()
+                .join(" ");
+            let term = format!("(fun {parameters} => ({} {}))", c.name, arguments.join(" "));
+            let t = Ty::Fn(c.params, Box::new(c.result));
+            self.mention(&t);
+            return Some((term, t));
+        }
+        let inner = shared_borrow_item(path, self.cx.types)?;
+        let argument = self.fresh(Some("borrowed"), 0);
+        let term = format!("(fun ({argument} : {}) => {argument})", inner.render());
+        let t = Ty::Fn(vec![inner.clone()], Box::new(inner));
+        self.mention(&t);
+        Some((term, t))
     }
 
     /// A constant's own body (a promoted constant or a constant item),
@@ -3517,14 +3991,8 @@ impl Fun<'_, '_> {
             }
             Val::Guarded { item, .. } => match p.projection.first() {
                 Some(IrProjection::Downcast(variant)) => {
-                    let key = (
-                        place_key(
-                            &prefix,
-                            self.mut_params.contains(&prefix.local)
-                                || st.lends.contains_key(&prefix.local),
-                        ),
-                        variant.clone(),
-                    );
+                    let (whole, option) = self.read(&prefix, st)?;
+                    let key = (variant_key(&whole, &option), variant.clone());
                     let Some(names) = st.bound.get(&key).cloned() else {
                         return Err(kind(
                             spec::MirProjectionElem::Downcast.path(),
@@ -3718,7 +4186,20 @@ impl Fun<'_, '_> {
                 }
                 IrProjection::Field(i, fty) => {
                     let ft = ty(fty, self.cx.types)?;
-                    v = self.field(&v, &t, *i)?;
+                    let stored = self.field_ty(&t, *i)?;
+                    let field = self.field(&v, &t, *i)?;
+                    v = self
+                        .scalar_representation(&field, &stored, &ft, st)
+                        .ok_or_else(|| {
+                            kind(
+                                spec::MirProjectionElem::Field.path(),
+                                &format!(
+                                    "field representation {} cannot be read as {}",
+                                    stored.render(),
+                                    ft.render()
+                                ),
+                            )
+                        })?;
                     t = ft;
                     text = Some(fty.clone());
                 }
@@ -3729,14 +4210,7 @@ impl Fun<'_, '_> {
                         "Break" if matches!(t, Ty::Outcome(..)) => "Err".to_string(),
                         v => v.to_string(),
                     };
-                    let key = (
-                        place_key(
-                            &prefix,
-                            self.mut_params.contains(&prefix.local)
-                                || st.lends.contains_key(&prefix.local),
-                        ),
-                        variant.clone(),
-                    );
+                    let key = (variant_key(&v, &t), variant.clone());
                     // The one inhabited variant of an enum is its value,
                     // matched or not.
                     let only = (prefix.projection.is_empty())
@@ -3754,12 +4228,40 @@ impl Fun<'_, '_> {
                     match steps.next() {
                         Some(IrProjection::Field(i, fty)) => {
                             let ft = ty(fty, self.cx.types)?;
-                            v = names.get(*i).cloned().ok_or_else(|| {
+                            let field = names.get(*i).cloned().ok_or_else(|| {
                                 kind(
                                     spec::MirProjectionElem::Field.path(),
                                     "a field past the variant's",
                                 )
                             })?;
+                            let stored = if let Ty::Named(n) = &t {
+                                self.cx
+                                    .types
+                                    .datas
+                                    .get(n)
+                                    .and_then(|vs| vs.iter().find(|(v, _)| v == &variant))
+                                    .and_then(|(_, fs)| fs.get(*i))
+                                    .map(|(_, t)| t.clone())
+                            } else {
+                                None
+                            };
+                            v = self
+                                .scalar_representation(
+                                    &field,
+                                    stored.as_ref().unwrap_or(&ft),
+                                    &ft,
+                                    st,
+                                )
+                                .ok_or_else(|| {
+                                    kind(
+                                        spec::MirProjectionElem::Field.path(),
+                                        &format!(
+                                            "field representation {} cannot be read as {}",
+                                            stored.as_ref().unwrap_or(&ft).render(),
+                                            ft.render()
+                                        ),
+                                    )
+                                })?;
                             t = ft;
                             prefix.projection.push(step.clone());
                             prefix.projection.push(IrProjection::Field(*i, fty.clone()));
@@ -3867,6 +4369,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 name.clone(),
                 Decl::Definition {
+                    type_parameters: Vec::new(),
                     name: name.clone(),
                     parameters: parameters.clone(),
                     result: format!("(List {e})"),
@@ -3893,6 +4396,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 length.clone(),
                 Decl::Theorem {
+                    type_parameters: Vec::new(),
                     name: length,
                     parameters,
                     statement: format!("((prim length ({name} count value) : Nat) = count)"),
@@ -3921,7 +4425,7 @@ impl Fun<'_, '_> {
                 let e = elem.render();
                 self.aux.insert(
                     name.clone(),
-                    Decl::Definition {
+                    Decl::Definition { type_parameters: Vec::new(),
                         name: name.clone(),
                         parameters: vec![
                             ("items".into(), format!("(List {e})")),
@@ -3971,6 +4475,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 name.clone(),
                 Decl::Definition {
+                    type_parameters: Vec::new(),
                     name: name.clone(),
                     parameters: vec![
                         ("items".into(), format!("(List {e})")),
@@ -4145,9 +4650,13 @@ impl Fun<'_, '_> {
                 }
                 let t = self.local_ty(dest.local, &dest.projection)?;
                 let mut vals = Vec::new();
+                let mut operand_types = Vec::new();
                 for (_, o) in ops {
-                    vals.push(self.operand(o, st)?.0);
+                    let (value, ty) = self.operand(o, st)?;
+                    vals.push(value);
+                    operand_types.push(ty);
                 }
+                self.check_aggregate_fields(agg, &t, ops, &operand_types, &mut vals, st)?;
                 let v = self.aggregate(agg, &t, ops, vals)?;
                 self.mention(&t);
                 Ok(Val::V(v, t))
@@ -4549,6 +5058,7 @@ impl Fun<'_, '_> {
         self.aux.insert(
             evidence.clone(),
             Decl::Theorem {
+                type_parameters: Vec::new(),
                 name: evidence.clone(),
                 parameters: parameters.clone(),
                 statement: implication(
@@ -4562,6 +5072,7 @@ impl Fun<'_, '_> {
         self.aux.insert(
             name.to_string(),
             Decl::Definition {
+                type_parameters: Vec::new(),
                 name: name.to_string(),
                 parameters,
                 result: "Nat".into(),
@@ -4940,6 +5451,318 @@ impl Fun<'_, '_> {
         }
     }
 
+    /// Compose admitted element representations without inspecting or changing
+    /// collection contents. Structural recursion preserves list entry order.
+    fn structural_representation(
+        &mut self,
+        value: &str,
+        from: &Ty,
+        to: &Ty,
+        st: &State,
+    ) -> Option<String> {
+        let (from, to) = match (from, to) {
+            (Ty::Map(_, _, a), Ty::Map(_, _, b)) if a == b => (
+                Ty::List(Box::new(from.entry())),
+                Ty::List(Box::new(to.entry())),
+            ),
+            (Ty::Set(f, a), Ty::Set(t, b)) if a == b => (Ty::List(f.clone()), Ty::List(t.clone())),
+            (Ty::List(_), Ty::List(_))
+            | (Ty::Option(_), Ty::Option(_))
+            | (Ty::Outcome(..), Ty::Outcome(..))
+            | (Ty::Tuple(_) | Ty::Pair(_), Ty::Tuple(_) | Ty::Pair(_)) => {
+                (from.clone(), to.clone())
+            }
+            _ => return None,
+        };
+        let input = super::codec::binding("carrierValue", self.cx.taken);
+        let head = super::codec::binding("carrierHead", self.cx.taken);
+        let tail = super::codec::binding("carrierTail", self.cx.taken);
+        let identity = crate::project::sha(
+            format!("structural-carrier/1\0{from:?}\0{to:?}\0{input}\0{head}\0{tail}").as_bytes(),
+        );
+        let name = format!("mirStructuralCarrier{identity}");
+        if !self.aux.contains_key(&name) {
+            let mut recursive = None;
+            let body = match (&from, &to) {
+                (Ty::Tuple(fs) | Ty::Pair(fs), Ty::Tuple(ts) | Ty::Pair(ts))
+                    if fs.len() == ts.len() =>
+                {
+                    let mut items = Vec::new();
+                    for (i, (f, t)) in fs.iter().zip(ts).enumerate() {
+                        items.push(self.scalar_representation(
+                            &lift::tuple_item(&from, &input, i),
+                            f,
+                            t,
+                            st,
+                        )?);
+                    }
+                    Expr::Flat(lift::tuple_value(&to, &items))
+                }
+                (Ty::List(f), Ty::List(t)) => {
+                    let item = self.scalar_representation(&head, f, t, st)?;
+                    recursive = Some(input.clone());
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: "List.nil".into(),
+                                body: Expr::Flat(format!("(nil {})", t.render())),
+                            },
+                            Arm {
+                                pattern: format!("List.cons {head} {tail}"),
+                                body: Expr::Flat(format!("(cons {item} ({name} {tail}))")),
+                            },
+                        ],
+                    }
+                }
+                (Ty::Option(f), Ty::Option(t)) => {
+                    let item = self.scalar_representation(&head, f, t, st)?;
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: "Option.none".into(),
+                                body: Expr::Flat(format!("(ctor Option.none [{}])", t.render())),
+                            },
+                            Arm {
+                                pattern: format!("Option.some {head}"),
+                                body: Expr::Flat(format!(
+                                    "(ctor Option.some [{}] {item})",
+                                    t.render()
+                                )),
+                            },
+                        ],
+                    }
+                }
+                (Ty::Outcome(f, fe), Ty::Outcome(t, te)) => {
+                    let ok = self.scalar_representation(&head, f, t, st)?;
+                    let err = self.scalar_representation(&head, fe, te, st)?;
+                    let params = format!("[{}, {}]", t.render(), te.render());
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: format!("Result.ok {head}"),
+                                body: Expr::Flat(format!("(ctor Result.ok {params} {ok})")),
+                            },
+                            Arm {
+                                pattern: format!("Result.error {head}"),
+                                body: Expr::Flat(format!("(ctor Result.error {params} {err})")),
+                            },
+                        ],
+                    }
+                }
+                _ => return None,
+            };
+            self.mention(&from);
+            self.mention(&to);
+            self.aux.insert(
+                name.clone(),
+                Decl::Definition {
+                    name: name.clone(),
+                    type_parameters: Vec::new(),
+                    parameters: vec![(input, from.render())],
+                    result: to.render(),
+                    body,
+                    axioms: vec!["Quot.sound".into(), "propext".into()],
+                    recursive,
+                    termination: None,
+                    mutual: None,
+                },
+            );
+        }
+        self.calls.insert(name.clone());
+        Some(format!("({name} {value})"))
+    }
+
+    /// Source fields and native locals may use distinct representations of
+    /// the same Rust integer. Construction cannot silently convert them.
+    fn scalar_representation(
+        &mut self,
+        value: &str,
+        from: &Ty,
+        to: &Ty,
+        st: &State,
+    ) -> Option<String> {
+        if matches!((from,to),(Ty::Map(_,_,a),Ty::Map(_,_,b))|(Ty::Set(_,a),Ty::Set(_,b)) if a!=b) {
+            return None;
+        }
+        if from.same(to) {
+            return Some(value.into());
+        }
+        if matches!(
+            from,
+            Ty::List(_)
+                | Ty::Map(..)
+                | Ty::Set(..)
+                | Ty::Option(_)
+                | Ty::Outcome(..)
+                | Ty::Tuple(_)
+                | Ty::Pair(_)
+        ) {
+            return self.structural_representation(value, from, to, st);
+        }
+        if matches!(from, Ty::Int(_) | Ty::Integer(_)) && matches!(to, Ty::Signed(_)) {
+            // Keep the SDK's Int64 conversion out of generic arithmetic
+            // obligations. One mathematical kernel is certified per width;
+            // every native read merely supplies its converted value.
+            let source = match from {
+                Ty::Int(bits) => Ty::Integer(Some(*bits)),
+                _ => from.clone(),
+            };
+            let parameter = super::codec::binding("codecInteger", self.cx.taken);
+            let converted =
+                super::codec::scalar(&parameter, &source, to, self.cx.widths, self.cx.taken)?;
+            let identity = crate::project::sha(
+                format!(
+                    "{source:?}\0{to:?}\0{}\0{:?}",
+                    converted.value, converted.valid
+                )
+                .as_bytes(),
+            );
+            let name = format!("mirIntegerCodec{identity}");
+            if !self.aux.contains_key(&name) {
+                let parameters = vec![(parameter.to_string(), source.render())];
+                let axioms = vec!["Quot.sound".into(), "propext".into()];
+                for (i, statement) in converted.valid.into_iter().enumerate() {
+                    let proof = format!("{name}Valid{i}");
+                    self.aux.insert(
+                        proof.clone(),
+                        Decl::Theorem {
+                            name: proof,
+                            type_parameters: Vec::new(),
+                            parameters: parameters.clone(),
+                            statement,
+                            proof: "linear_arithmetic{}".into(),
+                            axioms: axioms.clone(),
+                        },
+                    );
+                }
+                self.aux.insert(
+                    name.clone(),
+                    Decl::Definition {
+                        name: name.clone(),
+                        type_parameters: Vec::new(),
+                        parameters,
+                        result: to.render(),
+                        body: Expr::Flat(converted.value),
+                        axioms,
+                        recursive: None,
+                        termination: None,
+                        mutual: None,
+                    },
+                );
+            }
+            self.mention(&source);
+            self.mention(to);
+            self.calls.insert(name.clone());
+            let actual = if matches!(from, Ty::Int(_)) {
+                format!("(prim to_int {value} : Int)")
+            } else {
+                value.into()
+            };
+            return Some(format!("({name} {actual})"));
+        }
+        let converted = super::codec::scalar(value, from, to, self.cx.widths, self.cx.taken)?;
+        for declaration in converted.declarations {
+            self.calls.insert(declaration.name().to_string());
+            self.aux.insert(declaration.name().to_string(), declaration);
+        }
+        for valid in converted.valid {
+            self.obligation(st, &valid, "an exact integer representation conversion");
+        }
+        Some(converted.value)
+    }
+
+    fn check_aggregate_fields(
+        &mut self,
+        agg: &IrAggregate,
+        target: &Ty,
+        ops: &[(Option<String>, IrOperand)],
+        actual: &[Ty],
+        values: &mut [String],
+        st: &State,
+    ) -> Lift<()> {
+        let k = spec::MirRvalue::Aggregate.path();
+        if let IrAggregate::Adt(path, None) = agg {
+            let name = wrapper(path)
+                .map(|(n, _)| n)
+                .or_else(|| split_path(path).last().copied());
+            if matches!(
+                name,
+                Some("ManuallyDrop" | "MaybeUninit" | "NonNull" | "Unique")
+            ) {
+                return Ok(());
+            }
+        }
+        let expected: Vec<&Ty> = match (agg, target) {
+            (IrAggregate::Tuple, Ty::Unit) if actual.is_empty() => Vec::new(),
+            (IrAggregate::Tuple, Ty::Tuple(ts) | Ty::Pair(ts)) => ts.iter().collect(),
+            (IrAggregate::Tuple, t) if actual.len() == 1 => vec![t],
+            (IrAggregate::Array, Ty::List(t)) => vec![t.as_ref(); actual.len()],
+            (IrAggregate::Adt(_, Some(v)), Ty::Option(t)) => match v.as_str() {
+                "Some" => vec![t],
+                "None" => Vec::new(),
+                _ => return Ok(()),
+            },
+            (IrAggregate::Adt(_, Some(v)), Ty::Outcome(ok, err)) => match v.as_str() {
+                "Ok" | "Continue" => vec![ok],
+                "Err" | "Break" => vec![err],
+                _ => return Ok(()),
+            },
+            (IrAggregate::Adt(_, Some(v)), Ty::Named(n)) => {
+                if let Some(fields) = self
+                    .cx
+                    .types
+                    .datas
+                    .get(n)
+                    .and_then(|vs| vs.iter().find(|(name, _)| name == v))
+                    .map(|(_, fields)| fields)
+                {
+                    fields.iter().map(|(_, t)| t).collect()
+                } else {
+                    return Ok(());
+                }
+            }
+            (IrAggregate::Adt(_, None), Ty::Named(n)) => {
+                let Some(fields) = self.cx.types.structs.get(n) else {
+                    return Ok(());
+                };
+                ops.iter()
+                    .enumerate()
+                    .map(|(i, (name, _))| {
+                        let field = match name {
+                            Some(name) => fields.iter().find(|(f, _)| *f == lift::local_name(name)),
+                            None => fields.get(i),
+                        };
+                        field
+                            .map(|(_, t)| t)
+                            .ok_or_else(|| kind(k, "an unknown aggregate field"))
+                    })
+                    .collect::<Lift<Vec<_>>>()?
+            }
+            _ => return Ok(()),
+        };
+        if expected.len() != actual.len() {
+            return Err(kind(k, "aggregate field representation arity mismatch"));
+        }
+        for (i, (expected, actual)) in expected.iter().zip(actual).enumerate() {
+            values[i] = self
+                .scalar_representation(&values[i], actual, expected, st)
+                .ok_or_else(|| {
+                    kind(
+                        k,
+                        &format!(
+                            "aggregate field representation {i}: {} cannot be stored as {}",
+                            actual.render(),
+                            expected.render()
+                        ),
+                    )
+                })?;
+        }
+        Ok(())
+    }
+
     fn aggregate(
         &mut self,
         agg: &IrAggregate,
@@ -5081,7 +5904,8 @@ impl Fun<'_, '_> {
         if !self.aux.contains_key(&name) {
             let mut active = self.cx.active.to_vec();
             active.push(name.clone());
-            let cx = self.cx.within(&active);
+            let mut cx = self.cx.within(&active);
+            cx.closure_scope(closure);
             let lowered = lower(&cx, body, &name)
                 .map_err(|r| kind(k, &format!("{}: {}", body.path, r.detail())))?;
             for d in lowered.decls {
@@ -5130,6 +5954,99 @@ impl Fun<'_, '_> {
             _ => lift::tuple_value(&t, &values),
         };
         Ok(Val::V(term, t))
+    }
+
+    /// Reify compiler closure environments only for value-model interfaces.
+    /// Other lowering paths retain the original environment and Rust type.
+    fn model_callables(
+        &mut self,
+        args: &[(String, Ty)],
+        texts: &[Option<String>],
+    ) -> (Vec<(String, Ty)>, Vec<Option<String>>) {
+        let mut values = args.to_vec();
+        let mut signatures = texts.to_vec();
+        for (position, ((environment, et), text)) in args.iter().zip(texts).enumerate() {
+            let Some(written) = text.as_deref() else {
+                continue;
+            };
+            let closure = written
+                .trim_start_matches('&')
+                .trim_start_matches("mut ")
+                .trim();
+            let Some(body) = self.cx.closures.get(closure).cloned() else {
+                continue;
+            };
+            if body.arity == 0
+                || !threaded(&body.locals, body.arity, true, self.cx.types).is_empty()
+                || !super::source::callable_environment(et, self.cx.types)
+                || reaches_memory(&body)
+            {
+                continue;
+            }
+            let inputs: Lift<Vec<Ty>> = body
+                .locals
+                .iter()
+                .take(body.arity + 1)
+                .skip(2)
+                .map(|t| ty(t, self.cx.types))
+                .collect();
+            let (Ok(mut inputs), Some(Ok(result))) =
+                (inputs, body.locals.first().map(|t| ty(t, self.cx.types)))
+            else {
+                continue;
+            };
+            let Ok((name, _)) = self.closure_def(closure) else {
+                continue;
+            };
+            let Some(Decl::Definition {
+                parameters,
+                result: actual,
+                ..
+            }) = self.aux.get(&name)
+            else {
+                continue;
+            };
+            // Memory and threaded results cannot hide behind a pure Fn carrier.
+            if parameters.len() != body.arity || *actual != result.render() {
+                continue;
+            }
+            let rust_inputs = body
+                .locals
+                .iter()
+                .take(body.arity + 1)
+                .skip(2)
+                .cloned()
+                .collect::<Vec<_>>()
+                .join(", ");
+            if inputs.is_empty() {
+                inputs.push(Ty::Unit);
+            }
+            let binders: Vec<_> = inputs
+                .iter()
+                .enumerate()
+                .map(|(i, t)| (self.fresh(Some("callbackInput"), i), t.clone()))
+                .collect();
+            let params = binders
+                .iter()
+                .map(|(n, t)| format!("({n} : {})", t.render()))
+                .collect::<Vec<_>>()
+                .join(" ");
+            let arguments = binders
+                .iter()
+                .take(body.arity - 1)
+                .map(|(n, _)| n.as_str())
+                .collect::<Vec<_>>()
+                .join(" ");
+            // Bind the complete environment once, so the SDK capture list is
+            // exact without guessing the free variables of its expression.
+            let captured = self.fresh(Some("callbackEnvironment"), usize::MAX);
+            let term = format!("(let {captured} : {} := {environment}; (fun [{captured}] {params} => ({name} {captured} {arguments})))",et.render());
+            let function = Ty::Fn(inputs, Box::new(result));
+            self.mention(&function);
+            values[position] = (term, function);
+            signatures[position] = Some(format!("fn({rust_inputs}) -> {}", body.locals[0]));
+        }
+        (values, signatures)
     }
 
     /// A call: a function the lift has, or one of the standard library's
@@ -5237,6 +6154,7 @@ impl Fun<'_, '_> {
                     let mut active = self.cx.active.to_vec();
                     active.push(back.clone());
                     let mut cx = self.cx.within(&active);
+                    cx.closure_scope(&closure);
                     cx.backward = true;
                     if let Ok(lowered) = lower(&cx, &cb, &back) {
                         for d in lowered.decls {
@@ -5269,55 +6187,221 @@ impl Fun<'_, '_> {
             return Ok(Called {
                 term,
                 updates: BTreeMap::from([(0, env.clone())]),
+                binding: None,
                 guard: None,
                 threads: None,
                 memory: false,
                 backward: None,
             });
         }
-        let key = format!("{}::{callee}", self.cx.krate);
-        // A trait method of one of the crate's types is its impl's method.
-        let own = callee
+        // A bound permits Rust to dispatch here; it does not supply a value
+        // model for the method. In particular, a same-named standard adapter
+        // must never stand in for an arbitrary trait implementation.
+        if let Some((owner, _)) = callee
             .strip_prefix('<')
-            .and_then(|r| r.split_once(" as "))
-            .and_then(|(t, rest)| Some((t, rest.rsplit_once(">::")?.1)))
-            .map(|(t, m)| format!("{}::{}::{m}", self.cx.krate, erase(t)));
-        if let Some(c) = self
-            .cx
-            .callees
-            .get(&key)
-            .or_else(|| self.cx.callees.get(callee))
-            .or_else(|| own.as_ref().and_then(|o| self.cx.callees.get(o)))
+            .and_then(|q| q.rsplit_once(">::").map(|(q, _)| q))
+            .and_then(|q| q.split_once(" as "))
         {
+            if super::views::touches(owner, self.cx.types)
+                || ty(owner, self.cx.types).is_ok_and(|t| !t.parameters().is_empty())
+            {
+                return Err(kind(
+                    k,
+                    "parametric trait dispatch needs an admitted dictionary",
+                ));
+            }
+        }
+        if let Some(c) = self.cx.callee(callee).cloned() {
             if c.name == self.name {
                 return Err(kind(
                     k,
                     "a call of the function itself, whose measure is not derived",
                 ));
             }
-            if c.params.len() != args.len()
-                || c.params
-                    .iter()
-                    .zip(&args)
-                    .any(|(p, (_, a))| p.render() != a.render())
-                || c.result.render() != dt.render()
-            {
-                return Err(kind(
+            let bad_types = || {
+                kind(
                     k,
                     &format!("{callee}, at other types than the lift gives it"),
-                ));
-            }
-            self.calls.insert(c.name.clone());
-            let term = if args.is_empty() {
-                c.name.clone()
-            } else {
-                let a: Vec<String> = args.into_iter().map(|(v, _)| v).collect();
-                format!("({} {})", c.name, a.join(" "))
+                )
             };
+            if c.params.len() != args.len() {
+                return Err(bad_types());
+            }
+            if c.generic.is_some() {
+                if c.threads.is_some()
+                    || texts.iter().flatten().any(|t| t.contains("&mut "))
+                    || dest.contains("&mut ")
+                {
+                    return Err(bad_types());
+                }
+                let (modeled, _) = self.model_callables(&args, texts);
+                if modeled
+                    .iter()
+                    .map(|(_, t)| t)
+                    .chain(std::iter::once(dt))
+                    .any(|t| !super::source::generic_environment(t, self.cx.types))
+                {
+                    return Err(kind(
+                        k,
+                        "a generic dependency whose schema exposes mutable or unregistered state",
+                    ));
+                }
+                let sig = lift::Sig {
+                    name: c.name.clone(),
+                    params: c.params.clone(),
+                    result: c.result.clone(),
+                    generic: c.generic.clone(),
+                    threads: Vec::new(),
+                };
+                let (term, result, calls, declarations) = lift::bind_model_call(
+                    &sig,
+                    &modeled,
+                    self.cx.types,
+                    self.cx.source_sigs,
+                    self.cx.widths,
+                    self.cx.taken,
+                )
+                .map_err(|r| kind(k, &format!("{callee}: {}", r.detail())))?;
+                if !result.same(dt) {
+                    return Err(bad_types());
+                }
+                for declaration in declarations {
+                    self.aux.insert(declaration.name().to_string(), declaration);
+                }
+                self.calls.extend(calls);
+                return Ok(Called::value(term));
+            }
+            let mut passed = Vec::new();
+            for ((value, ty), expected) in args.iter().zip(&c.params) {
+                if c.threads.is_some() && !ty.same(expected) {
+                    return Err(bad_types());
+                }
+                passed.push(
+                    self.scalar_representation(value, ty, expected, st)
+                        .ok_or_else(bad_types)?,
+                );
+            }
+            let term = if passed.is_empty() {
+                format!("({})", c.name)
+            } else {
+                format!("({} {})", c.name, passed.join(" "))
+            };
+            let mut binding = None;
+            let term = if c.threads.is_none() && !c.result.same(dt) {
+                let name = self.fresh(Some("sourceResult"), 0);
+                st.binders.push((name.clone(), c.result.clone()));
+                let represented = self
+                    .scalar_representation(&name, &c.result, dt, st)
+                    .ok_or_else(bad_types)?;
+                binding = Some((name, c.result.render(), term));
+                represented
+            } else {
+                if !c.result.same(dt) {
+                    return Err(bad_types());
+                }
+                term
+            };
+            self.calls.insert(c.name.clone());
             return Ok(Called {
+                binding,
                 threads: c.threads.clone(),
                 ..Called::value(term)
             });
+        }
+        let constructor = erased
+            .strip_prefix('<')
+            .and_then(|s| s.rsplit_once(">::"))
+            .and_then(|(owner, method)| {
+                let (on, tr) = owner.split_once(" as ")?;
+                (method == "from" && matches!(tr, "std::convert::From" | "core::convert::From"))
+                    .then_some((on, method))
+            })
+            .or_else(|| {
+                erased
+                    .strip_prefix("num_rational::Ratio::")
+                    .filter(|m| *m == "from_integer")
+                    .map(|m| ("num_rational::Ratio", m))
+            });
+        if let (Some((owner, _)), [(value, input)]) = (constructor, args.as_slice()) {
+            let target = match owner {
+                "num_bigint::BigInt" => self.cx.types.registered(owner),
+                "num_rational::Ratio" => self.cx.types.registered("num_rational::BigRational"),
+                _ => None,
+            };
+            match target {
+                Some(Ty::Unbounded) if dt.same(&Ty::Unbounded) => {
+                    if *input == Ty::Unbounded {
+                        return Ok(Called::value(value.clone()));
+                    }
+                    if let Some(word) = Int::of(input, self.cx.widths) {
+                        return Ok(Called::value(crate::registered::word_integer(
+                            value,
+                            word.held,
+                            word.signed,
+                        )));
+                    }
+                }
+                Some(Ty::Ratio) if *input == Ty::Unbounded && dt.same(&Ty::Ratio) => {
+                    if let Some((term, _)) =
+                        crate::registered::numeric_observation(&Ty::Ratio, "from_integer", value)
+                    {
+                        return Ok(Called::value(term));
+                    }
+                }
+                _ => {}
+            }
+        }
+        // The compiler has resolved the trait, so an unrelated method of
+        // the same spelling cannot select these locked numeric readings.
+        let numeric = erased
+            .strip_prefix('<')
+            .and_then(|s| s.rsplit_once(">::"))
+            .and_then(|(owner, method)| {
+                let (on, tr) = owner.split_once(" as ")?;
+                let allowed = match tr {
+                    "num_traits::Zero" | "num_traits::identities::Zero" => {
+                        matches!(method, "zero" | "is_zero")
+                    }
+                    "num_traits::One" | "num_traits::identities::One" => {
+                        matches!(method, "one" | "is_one")
+                    }
+                    "num_traits::Signed" | "num_traits::sign::Signed" => {
+                        matches!(method, "abs" | "signum" | "is_positive" | "is_negative")
+                    }
+                    "std::ops::Neg" | "core::ops::Neg" | "core::ops::arith::Neg" => method == "neg",
+                    _ => false,
+                };
+                allowed.then_some((on, method))
+            })
+            .or_else(|| {
+                erased
+                    .strip_prefix("num_rational::Ratio::")
+                    .filter(|m| matches!(*m, "numer" | "denom" | "is_integer"))
+                    .map(|m| ("num_rational::Ratio", m))
+            });
+        if let Some((owner, method)) = numeric {
+            let owner = owner.strip_prefix('&').map(str::trim).unwrap_or(owner);
+            let carrier = match owner {
+                "num_bigint::BigInt" => self.cx.types.registered(owner),
+                "num_rational::Ratio" => self.cx.types.registered("num_rational::BigRational"),
+                _ => None,
+            };
+            if let Some(carrier) = carrier {
+                let value = match args.as_slice() {
+                    [] if matches!(method, "zero" | "one") => Some(""),
+                    [(v, t)] if *t == carrier && !matches!(method, "zero" | "one") => {
+                        Some(v.as_str())
+                    }
+                    _ => None,
+                };
+                if let Some((term, result)) =
+                    value.and_then(|v| crate::registered::numeric_observation(&carrier, method, v))
+                {
+                    if result.same(dt) {
+                        return Ok(Called::value(term));
+                    }
+                }
+            }
         }
         // Core's float intrinsics (which core's own bodies call by their
         // bare name), and the methods and operator impls of a float type,
@@ -5363,7 +6447,11 @@ impl Fun<'_, '_> {
                         m.to_string(),
                     ))
                 }),
-                None => match segs.as_slice() {
+                None => match segs
+                    .strip_prefix(&["core"])
+                    .or_else(|| segs.strip_prefix(&["std"]))
+                    .unwrap_or(&segs)
+                {
                     [on, m] => Some((on.to_string(), String::new(), m.to_string())),
                     [on, imp, m] if *imp == format!("<impl {on}>") => {
                         Some((on.to_string(), String::new(), m.to_string()))
@@ -5393,6 +6481,7 @@ impl Fun<'_, '_> {
                     return Ok(Called {
                         term: "()".into(),
                         updates: BTreeMap::from([(0, f.term(op, &terms))]),
+                        binding: None,
                         guard: None,
                         threads: None,
                         memory: false,
@@ -5409,13 +6498,26 @@ impl Fun<'_, '_> {
                 _ => {}
             }
         }
+        if let [(value, input)] = args.as_slice() {
+            if let Some((term, guard)) =
+                super::int::unary_method(&erased, value, input, dt, self.cx.widths)
+            {
+                return Ok(Called {
+                    guard,
+                    ..Called::value(term)
+                });
+            }
+        }
         if let Some(v) = std_call(callee, &args, dt, self, st) {
             return Ok(Called::value(v));
         }
         // A std operation whose body bottoms out below values: its model.
         let types = self.cx.types;
         let defaults = |t: &Ty| lift::default_of(t, types);
-        if let Some(applied) = stdlib::apply(&erase(callee), &args, dt, &defaults) {
+        let (model_args, model_texts) = self.model_callables(&args, texts);
+        if let Some(applied) =
+            stdlib::apply_with_types(&erase(callee), &model_args, dt, &defaults, types)
+        {
             for t in &applied.mentions {
                 self.mention(t);
             }
@@ -5425,12 +6527,36 @@ impl Fun<'_, '_> {
             }
             return Ok(Called {
                 term: applied.term,
+                binding: None,
                 updates: applied.updates,
                 guard: applied.guard,
                 threads: None,
                 memory: false,
                 backward: None,
             });
+        }
+        // Reuse the source translator's semantics after compiler ownership and
+        // exact immutable carrier bindings have been established. No operation
+        // name acquires a second, handwritten model here.
+        let import_name = self.fresh(Some(&format!("{}SourceModel", self.name)), usize::MAX);
+        if let Some(imported) = super::source::apply(
+            callee,
+            &model_args,
+            &model_texts,
+            dt,
+            self.cx.types,
+            self.cx.widths,
+            self.cx.taken,
+            &import_name,
+        ) {
+            self.types.extend(imported.types);
+            for declaration in imported.decls {
+                self.calls.insert(declaration.name().to_string());
+                self.aux
+                    .entry(declaration.name().to_string())
+                    .or_insert(declaration);
+            }
+            return Ok(Called::value(imported.term));
         }
         // `Arguments::new(template, args)` of `format_args!`, where the
         // table models Arguments as its pieces: the template is the
@@ -6669,6 +7795,37 @@ impl Fun<'_, '_> {
     }
 }
 
+/// The exact standard shared-owner adapters whose function values borrow content.
+fn shared_borrow_item(path: &str, types: &Types) -> Option<Ty> {
+    let (owner, rest) = path.strip_prefix('<')?.split_once(" as ")?;
+    if !matches!(
+        erase(owner).as_str(),
+        "std::rc::Rc" | "alloc::rc::Rc" | "std::sync::Arc" | "alloc::sync::Arc"
+    ) {
+        return None;
+    }
+    let (tr, method) = rest.rsplit_once(">::")?;
+    let content = owner.split_once('<')?.1.strip_suffix('>')?;
+    let inner = ty(content, types).ok()?;
+    if ty(owner, types).ok()? != inner {
+        return None;
+    }
+    let (trait_name, target) = match tr.split_once('<') {
+        Some((name, target)) => (name, Some(target.strip_suffix('>')?)),
+        None => (tr, None),
+    };
+    match (trait_name, method, target) {
+        ("std::convert::AsRef" | "core::convert::AsRef", "as_ref", Some(target))
+        | ("std::borrow::Borrow" | "core::borrow::Borrow", "borrow", Some(target))
+            if ty(target, types).ok()? == inner =>
+        {
+            Some(inner)
+        }
+        ("std::ops::Deref" | "core::ops::Deref", "deref", None) => Some(inner),
+        _ => None,
+    }
+}
+
 /// The standard library's operations on values that the lift's types model
 /// exactly. Generic arguments are erased before matching; every other call
 /// is residue naming its callee.
@@ -6689,7 +7846,9 @@ fn std_call(
         ("clone" | "deref" | "as_str" | "to_string" | "to_owned" | "into" | "from" | "as_ref" | "borrow" | "new"
             | "as_slice" | "to_vec" | "as_deref", [(v, t)])
             if same(t, dt)
-                && (last != "new" || path.starts_with("std::boxed::Box"))
+                && (last != "new"
+                    || path.starts_with("std::boxed::Box")
+                    || matches!(path.as_str(), "std::rc::Rc::new" | "alloc::rc::Rc::new" | "std::sync::Arc::new" | "alloc::sync::Arc::new"))
                 && (last != "to_string" || matches!(t, Ty::Str))
                 && (last != "from" && last != "into" || matches!(t, Ty::Str)) =>
         {
@@ -6978,21 +8137,11 @@ fn implication(hyps: &[String], goal: &str) -> String {
     out
 }
 
-/// The key a match binds a variant's fields under, of the place it
-/// switches on. A local that holds the value a `&mut` borrows (a `&mut` parameter, a
-/// lending local) is that value, so `(*_1)` and `_1` are the one place: a
-/// match on `(*_1)` binds the fields a read through the borrow, of `_1`,
-/// finds.
-fn place_key(p: &IrPlace, held: bool) -> String {
-    if held {
-        let steps: Vec<&IrProjection> = p
-            .projection
-            .iter()
-            .filter(|s| !matches!(s, IrProjection::Deref))
-            .collect();
-        return format!("{:?}{steps:?}", p.local);
-    }
-    format!("{p:?}")
+/// Copying a reference changes its compiler local, not the value matched.
+/// A functional update changes the value term, so it cannot reuse a stale
+/// constructor binder even when it writes the same local or address.
+fn variant_key(value: &str, ty: &Ty) -> String {
+    format!("{ty:?}:{value}")
 }
 
 /// The constructors of a type a discriminant switches over, in the order of
@@ -7193,8 +8342,21 @@ fn std_printed(segs: &[&str], name: &str, args: &[Ty]) -> Option<Ty> {
 
 /// A type as MIR prints it, as the lift names it.
 pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
+    native_type(text, types).or_else(|cause| super::source::type_model(text, types).ok_or(cause))
+}
+
+fn native_type(text: &str, types: &Types) -> Lift<Ty> {
     let t = text.trim();
+    if let Some(reading) = types.generic.get(t) {
+        return Ok(reading.clone());
+    }
+    if let Some(reading) = types.native_views.get(&types.resolve(t)) {
+        return Ok(reading.clone());
+    }
     let bad = || Err(Residue::Type(t.to_string()));
+    if let Some(reading) = types.registered(t) {
+        return Ok(reading);
+    }
     // `!`, the type of no value: a place of it is never written, so its
     // stand-in is the unit, never observed (a call that returns it does not
     // return, and the path to it is proved unreachable).
@@ -7323,7 +8485,7 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
         return Ok(match ts.len() {
             0 => Ty::Unit,
             1 => ts.remove(0),
-            _ => Ty::Tuple(ts),
+            _ => types.tuple(ts),
         });
     }
     if let Some(inner) = t.strip_prefix('(').and_then(|r| r.strip_suffix(')')) {
@@ -7356,6 +8518,17 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
         .into_iter()
         .filter(|a| !a.is_empty() && !a.starts_with('\'') && !is_const_argument(a))
         .collect();
+    // rustc prints the expanded alias rather than `BigRational`. Both
+    // dependencies must have their exact lock-admitted registry readings.
+    if segs.as_slice() == ["num_rational", last]
+        && name == "Ratio"
+        && raw.as_slice() == ["num_bigint::BigInt"]
+        && types.registered("num_bigint::BigInt") == Some(Ty::Unbounded)
+    {
+        if let Some(reading) = types.registered("num_rational::BigRational") {
+            return Ok(reading);
+        }
+    }
     // A variant whose field is uninhabited never holds a value, so an enum
     // of std is the type of its one inhabited variant: `Result<T, E>` is `T`
     // where `E` is uninhabited and `E` where `T` is, and `Option<T>` holds
@@ -7401,6 +8574,18 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
     // core's paths there without the crate.
     let std = segs.len() > 1 && (matches!(segs[0], "std" | "core" | "alloc") || types.core);
     match (name, raw.as_slice()) {
+        // The source lift's unordered carriers do not expose the hash
+        // builder, its storage layout or an iteration-order operation.
+        ("HashMap", [key, value] | [key, value, _]) if std => {
+            return Ok(Ty::Map(
+                Box::new(ty(key, types)?),
+                Box::new(ty(value, types)?),
+                false,
+            ));
+        }
+        ("HashSet", [element] | [element, _]) if std => {
+            return Ok(Ty::Set(Box::new(ty(element, types)?), false));
+        }
         // In core's scope a signature prints it by its name alone.
         ("ControlFlow", [b, c]) if std || types.core => {
             return Ok(Ty::Outcome(
@@ -7460,6 +8645,11 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
         ("Result", [a, e]) => Ty::Outcome(Box::new(a.clone()), Box::new(e.clone())),
         ("Vec", [a]) => Ty::List(Box::new(a.clone())),
         ("Box", [a]) => a.clone(),
+        // The source reads readonly shared owners by their contents. An
+        // interior cell still fails while translating `a`; counts and
+        // pointer identity have no content operation in `std_call`.
+        ("Rc", [a]) if matches!(segs.as_slice(), ["std" | "alloc", "rc", _]) => a.clone(),
+        ("Arc", [a]) if matches!(segs.as_slice(), ["std" | "alloc", "sync", _]) => a.clone(),
         // A std type whose representation bottoms out in raw pointers: the
         // table's model of it.
         // A std type the scope lifts as its own: `cmp::Ordering`.
@@ -8497,6 +9687,51 @@ mod tests {
     use super::*;
 
     #[test]
+    fn writes_cannot_change_an_opaque_storage_carrier_ue_70() {
+        let mut types = Types::default();
+        types
+            .native_views
+            .insert("Holder".into(), Ty::Pair(vec![Ty::Param("Payload".into())]));
+        let body = super::super::parse::bodies(
+            r#"fn store(_1: &mut Holder, _2: bool) -> () {
+    let mut _0: ();
+    bb0: {
+        ((*_1).0: bool) = copy _2;
+        _0 = const ();
+        return;
+    }
+}
+"#,
+        )
+        .remove(0);
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_bindings: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            layouts: &[],
+            backward: false,
+        };
+        let result = lower(&cx, &body, "store");
+        assert!(
+            result.is_err(),
+            "an opaque storage field was overwritten by a concrete carrier"
+        );
+    }
+
+    #[test]
     fn a_tuple_of_one_item_is_told_from_a_wider_one() {
         assert!(one_tuple("(&&std::string::String,)"));
         assert!(one_tuple("(std::collections::BTreeMap<u8, u8>,)"));
@@ -8555,6 +9790,42 @@ mod tests {
     }
 
     #[test]
+    fn natural_regions_refuse_irreducible_or_malformed_graphs_ue_63() {
+        let block = |terminator| super::super::ir::IrBlock {
+            statements: Vec::new(),
+            terminator,
+            span: None,
+        };
+        let condition = IrOperand::Copy(IrPlace {
+            local: 1,
+            projection: Vec::new(),
+        });
+        let body = IrBody {
+            blocks: vec![
+                block(IrTerminator::Switch(condition.clone(), vec![(0, 1)], 2)),
+                block(IrTerminator::Goto(2)),
+                block(IrTerminator::Switch(condition, vec![(0, 1)], 3)),
+                block(IrTerminator::Return),
+            ],
+            ..IrBody::default()
+        };
+        assert!(natural_regions(&body)
+            .unwrap_err()
+            .detail()
+            .contains("irreducible"));
+        let mut broken = body.clone();
+        broken.blocks[3].terminator = IrTerminator::Goto(99);
+        assert!(natural_regions(&broken)
+            .unwrap_err()
+            .detail()
+            .contains("missing block"));
+        assert!(natural_regions(&IrBody::default())
+            .unwrap_err()
+            .detail()
+            .contains("without an entry"));
+    }
+
+    #[test]
     fn generic_arguments_are_erased_from_callees() {
         assert_eq!(erase("std::vec::Vec::<u8>::len"), "std::vec::Vec::len");
         assert_eq!(
@@ -8586,17 +9857,40 @@ mod tests {
     }
 
     #[test]
-    fn a_held_borrow_and_its_place_share_a_match_key() {
-        let deref = IrPlace {
-            local: 1,
-            projection: vec![IrProjection::Deref],
-        };
-        let whole = IrPlace {
-            local: 1,
-            projection: Vec::new(),
-        };
-        assert_eq!(place_key(&deref, true), place_key(&whole, true));
-        assert_ne!(place_key(&deref, false), place_key(&whole, false));
+    fn variant_bindings_distinguish_updated_values_and_types_ue_55() {
+        assert_ne!(
+            variant_key("before", &Ty::Bool),
+            variant_key("after", &Ty::Bool)
+        );
+        assert_ne!(
+            variant_key("same", &Ty::Nat(Some(8))),
+            variant_key("same", &Ty::Nat(Some(32)))
+        );
+    }
+
+    #[test]
+    fn shared_borrow_function_items_require_exact_owners_and_targets_ue_61() {
+        let types = Types::default();
+        for path in [
+            "<std::sync::Arc<u32> as std::convert::AsRef<u32>>::as_ref",
+            "<alloc::rc::Rc<u32> as core::borrow::Borrow<u32>>::borrow",
+            "<std::rc::Rc<u32> as std::ops::Deref>::deref",
+        ] {
+            assert_eq!(
+                shared_borrow_item(path, &types),
+                Some(Ty::Nat(Some(32))),
+                "{path}"
+            );
+        }
+        for path in [
+            "<other::Arc<u32> as std::convert::AsRef<u32>>::as_ref",
+            "<std::sync::Arc<u32> as other::AsRef<u32>>::as_ref",
+            "<std::sync::Arc<u32> as std::convert::AsRef<u64>>::as_ref",
+            "<std::sync::Arc<u32> as std::convert::AsMut<u32>>::as_mut",
+            "<std::sync::Arc<std::sync::Mutex<u32>> as std::ops::Deref>::deref",
+        ] {
+            assert_eq!(shared_borrow_item(path, &types), None, "{path}");
+        }
     }
 
     #[test]
@@ -8620,6 +9914,45 @@ mod tests {
         let types = Types::default();
         assert_eq!(threaded(&locals, 3, false, &types), vec![1, 3]);
         assert_eq!(threaded(&locals, 3, true, &types), vec![3]);
+    }
+
+    #[test]
+    fn readonly_owner_paths_and_registered_contents_stay_scoped_ue_57() {
+        let mut types = Types::default();
+        for path in [
+            "std::sync::Arc<u32>",
+            "alloc::sync::Arc<u32>",
+            "std::rc::Rc<u32>",
+            "alloc::rc::Rc<u32>",
+        ] {
+            assert_eq!(ty(path, &types), Ok(Ty::Nat(Some(32))));
+        }
+        for path in [
+            "other::Arc<u32>",
+            "other::Rc<u32>",
+            "std::other::Arc<u32>",
+            "std::sync::Arc<std::sync::Mutex<u32>>",
+            "std::cell::RefCell<u32>",
+            "std::sync::Arc<num_rational::Ratio<num_bigint::BigInt>>",
+        ] {
+            assert!(ty(path, &types).is_err(), "{path}");
+        }
+        // UE-65 imports the source's allocation identity, never the u32
+        // contents that the readonly owner model would otherwise expose.
+        assert_eq!(
+            ty("std::rc::Rc<std::cell::RefCell<u32>>", &types),
+            Ok(Ty::Named("Prelude::RcCellRef".into()))
+        );
+        for path in ["num_rational::BigRational", "num_bigint::BigInt"] {
+            types.aliases.insert(path.into(), path.into());
+        }
+        assert_eq!(
+            ty(
+                "std::sync::Arc<num_rational::Ratio<num_bigint::BigInt>>",
+                &types
+            ),
+            Ok(Ty::Ratio)
+        );
     }
 
     #[test]

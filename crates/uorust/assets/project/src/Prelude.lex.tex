@@ -4,6 +4,56 @@
 \useglossary{uorust.titles@1.0.0}
 \title{Lifted text prelude}
 \begin{semanticmodule}
+definition{
+  name: wordToInteger,
+  parameters: [bits : Nat, word : Nat],
+  result: Int,
+  body: (match bits
+    | Nat.zero => (0 : Int)
+    | Nat.succ rest => (let upper : Int := (wordToInteger rest (prim quotient word 2 0 : Nat)); (prim subtract (prim multiply upper (2 : Int) : Int) (prim negate (if ((prim remainder word 2 0 : Nat) =? 0) then (0 : Int) else (1 : Int)) : Int) : Int))),
+  recursive_argument: bits
+}
+
+inductive{
+  name: RcCellRef,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Allocation, fields: [Nat]}]
+}
+
+inductive{
+  name: ArcCellRef,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Allocation, fields: [Nat]}]
+}
+
+inductive{
+  name: JsonNumber,
+  type_parameters: [],
+  parameters: [],
+  constructors: [
+    {name: PosInt, fields: [UInt64]},
+    {name: NegInt, fields: [Int64]},
+    {name: FloatBits, fields: [UInt64]},
+    {name: PrecisionText, fields: [String]}
+  ]
+}
+
+inductive{
+  name: JsonValue,
+  type_parameters: [],
+  parameters: [],
+  constructors: [
+    {name: Null, fields: []},
+    {name: Bool, fields: [Bool]},
+    {name: Number, fields: [JsonNumber]},
+    {name: String, fields: [String]},
+    {name: Array, fields: [(List JsonValue)]},
+    {name: Object, fields: [(List (String * JsonValue))]}
+  ]
+}
+
 inductive{
   name: ParseIntError,
   type_parameters: [],

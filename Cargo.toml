@@ -46,3 +46,8 @@ codegen-units = 1
 # has, not unoptimized ones a test thread's stack cannot hold.
 [profile.dev.package.uorust-certified]
 opt-level = 3
+
+# Acceptance repeatedly projects whole workspaces. Optimize the tool in dev
+# and test builds while retaining their debug assertions and overflow checks.
+[profile.dev.package.uorust]
+opt-level = 2

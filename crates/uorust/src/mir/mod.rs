@@ -16,6 +16,7 @@
 //! `RUSTC_BOOTSTRAP=1`: no other toolchain, driver or download is involved,
 //! and the MIR is exactly the one the shipped build compiles.
 
+mod codec;
 pub mod core;
 pub mod coverage;
 pub(crate) mod float;
@@ -32,10 +33,13 @@ pub(crate) mod trips;
 
 #[cfg(test)]
 mod generate;
-mod int;
+pub(crate) mod identity;
+pub(crate) mod int;
 mod intrinsic;
 pub(crate) mod ir;
 mod prove;
+mod source;
+pub(crate) mod views;
 // Generated: its layout is the generator's, which the std test compares.
 #[cfg(test)]
 #[rustfmt::skip]
@@ -43,7 +47,7 @@ mod std_vectors;
 pub(crate) mod stdlib;
 pub mod verdict;
 
-pub use prove::{prove, Summary};
+pub use prove::{proof_batches, prove, prove_bounded, Summary, DEFAULT_PROOF_BATCH_SIZE};
 
 /// The toolchain the MIR path is pinned to, for the binary's scopes.
 pub const TOOLCHAIN: &str = spec::TOOLCHAIN;
@@ -103,6 +107,8 @@ pub const FLAGS: &[&str] = &[
     "-Zdump-mir=ElaborateBoxDerefs",
     "-Coverflow-checks=on",
     "-Cdebug-assertions=off",
+    "--emit=metadata",
+    "-Zalways-encode-mir",
 ];
 
 /// The file a trial projection lists its translations on trial in.
@@ -112,10 +118,17 @@ pub const CANDIDATES: &str = "mir-candidates.toml";
 const DUMPED: &str = ".ElaborateBoxDerefs.before.mir";
 
 /// Dump the MIR of every library and binary target of the workspace at
-/// `root` under `out`, one directory per target, `<kind>-<name>`. This
-/// compiles the workspace, offline: its build scripts and macros run, as in
-/// any build of it.
-pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
+/// `root` under `out`, one directory per target, `<kind>-<name>`, built in
+/// the configuration `config` (its features and target), which is recorded
+/// beside them. Each library's dumps are also laid out as `uorust embed`
+/// reads a crate's, `shards-<name>` ([`crate::shard`]). This compiles the
+/// workspace, offline: its build scripts and macros run, as in any build of
+/// it.
+pub fn dump(
+    root: &Path,
+    out: &Path,
+    config: &crate::shard::Configuration,
+) -> Result<(), UorustError> {
     let tool = |what: &str, reason: String| UorustError::Tool(format!("{what}: {reason}"));
     let meta = Command::new("cargo")
         .args([
@@ -144,6 +157,15 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
         .and_then(serde_json::Value::as_array)
         .cloned()
         .unwrap_or_default();
+    std::fs::create_dir_all(out).map_err(|e| io(out, e))?;
+    let workspace = root.canonicalize().map_err(|e| io(root, e))?;
+    let triple = match &config.target {
+        Some(t) => t.clone(),
+        None => crate::shard::host(root, None)?,
+    };
+    let sysroot = crate::shard::sysroot(root, None)?;
+    let recorded = out.join(crate::shard::CONFIGURATION);
+    std::fs::write(&recorded, config.render(&triple)).map_err(|e| io(&recorded, e))?;
     for package in packages {
         let name = package
             .get("name")
@@ -163,6 +185,14 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 String::from_utf8_lossy(&clean.stderr).into_owned(),
             ));
         }
+        // The configuration this package is built in: the features of
+        // `config` it declares.
+        let declared: std::collections::BTreeSet<String> = package
+            .get("features")
+            .and_then(serde_json::Value::as_object)
+            .map(|f| f.keys().cloned().collect())
+            .unwrap_or_default();
+        let own_config = config.for_package(name, &declared);
         let targets = package
             .get("targets")
             .and_then(serde_json::Value::as_array)
@@ -199,6 +229,7 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 name.to_string(),
             ];
             args.extend(flag);
+            args.extend(own_config.cargo_args(false));
             args.push("--".to_string());
             args.extend(FLAGS.iter().map(|f| (*f).to_string()));
             args.push(format!("-Zdump-mir-dir={}", dir.display()));
@@ -226,6 +257,34 @@ pub fn dump(root: &Path, out: &Path) -> Result<(), UorustError> {
                 if !keep {
                     std::fs::remove_file(&path).map_err(|e| io(&path, e))?;
                 }
+            }
+            if kind == "lib" {
+                // The package's sources as the dump names them: relative to
+                // the workspace root, which cargo runs rustc in.
+                let own = package
+                    .get("manifest_path")
+                    .and_then(serde_json::Value::as_str)
+                    .map(Path::new)
+                    .and_then(Path::parent)
+                    .and_then(|d| d.strip_prefix(&workspace).ok())
+                    .map(|d| d.display().to_string())
+                    .filter(|d| !d.is_empty())
+                    .map_or_else(String::new, |d| format!("{d}/"));
+                let shards = out.join(format!(
+                    "{}{}",
+                    crate::shard::SHARDS,
+                    tname.replace('-', "_")
+                ));
+                if shards.exists() {
+                    std::fs::remove_dir_all(&shards).map_err(|e| io(&shards, e))?;
+                }
+                std::fs::create_dir_all(&shards).map_err(|e| io(&shards, e))?;
+                crate::shard::lay_out(&dir, &shards, &own, &sysroot)?;
+                crate::shard::write_target(&shards, &triple, root, None)?;
+                crate::shard::write_modules(&shards)?;
+                let recorded = shards.join(crate::shard::CONFIGURATION);
+                std::fs::write(&recorded, own_config.render(&triple))
+                    .map_err(|e| io(&recorded, e))?;
             }
         }
     }
@@ -298,6 +357,9 @@ fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
 #[derive(Clone, Debug, Default)]
 pub(crate) struct Dumps {
     pub(crate) crates: BTreeMap<String, BTreeMap<String, IrBody>>,
+    /// Compiler source identities preserve overloaded implementation bodies.
+    /// Repeated source identities are removed rather than guessed.
+    pub(crate) definitions: BTreeMap<crate::embedding::Key, IrBody>,
     /// The constants' bodies (promoted constants and constant items), by
     /// crate and the path MIR prints for them where they are used.
     pub(crate) consts: BTreeMap<String, BTreeMap<String, IrBody>>,
@@ -325,6 +387,7 @@ pub(crate) fn closure_type(body: &IrBody) -> Option<String> {
 pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
     let mut dumps = Dumps::default();
     let mut ambiguous: Vec<(String, String)> = Vec::new();
+    let mut ambiguous_definitions = std::collections::BTreeSet::new();
     if !dir.is_dir() {
         return Ok(dumps);
     }
@@ -385,6 +448,7 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
         for file in files {
             let text = std::fs::read_to_string(&file).map_err(|e| io(&file, e))?;
             for mut body in parse::bodies(&text) {
+                let definition_key = crate::embedding::body_key(&krate, &body.path);
                 if body.arity == 0 && (body.path.contains("promoted[") || !body.path.contains('{'))
                 {
                     dumps
@@ -400,10 +464,19 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
                         .or_default()
                         .insert(t, body.clone());
                 }
-                let Some(path) = resolve_impls(root, &body.path) else {
+                let Some(path) = resolve_impls(root, root, &body.path) else {
                     continue;
                 };
                 body.path.clone_from(&path);
+                if let Some(key) = definition_key.filter(|key| key.impl_at.is_some()) {
+                    if dumps
+                        .definitions
+                        .insert(key.clone(), body.clone())
+                        .is_some()
+                    {
+                        ambiguous_definitions.insert(key);
+                    }
+                }
                 if entry.insert(path.clone(), body).is_some() {
                     ambiguous.push((krate.clone(), path));
                 }
@@ -416,13 +489,16 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
             e.remove(&p);
         }
     }
+    for key in ambiguous_definitions {
+        dumps.definitions.remove(&key);
+    }
     Ok(dumps)
 }
 
 /// `m::<impl at src/x.rs:3:1: 3:9>::f` with the impl named by the type it
 /// implements, `m::X::f`; `None` for a closure, a promoted constant or an
 /// impl whose source does not read.
-pub(crate) fn resolve_impls(root: &Path, path: &str) -> Option<String> {
+pub(crate) fn resolve_impls(root: &Path, own_root: &Path, path: &str) -> Option<String> {
     if path.contains("{closure") || path.contains("promoted[") || path.contains("{constant") {
         return None;
     }
@@ -432,7 +508,14 @@ pub(crate) fn resolve_impls(root: &Path, path: &str) -> Option<String> {
         out.push_str(&rest[..at]);
         let after = &rest[at + "<impl at ".len()..];
         let end = after.find('>')?;
-        out.push_str(&impl_type(root, &after[..end])?);
+        let (file, range) = after[..end].split_once(':')?;
+        let source = if Path::new(file).is_absolute() || file.starts_with("library/") {
+            root.join(file)
+        } else {
+            own_root.join(file)
+        };
+        let span = format!("{}:{range}", source.display());
+        out.push_str(&impl_type(Path::new(""), &span)?);
         rest = &after[end + 1..];
     }
     out.push_str(rest);
@@ -508,6 +591,112 @@ mod tests {
     use super::*;
 
     #[test]
+    fn repeated_compiler_source_identities_remain_ambiguous_ue_78() {
+        let dir = std::env::temp_dir().join(format!(
+            "uorust-ambiguous-definition-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "pub struct Mark;\nimpl Mark { fn from()->u8 { 0 } }\n",
+        )
+        .unwrap();
+        let target = dir.join("dumps/lib-definitions");
+        std::fs::create_dir_all(&target).unwrap();
+        let body = "fn <impl at src/lib.rs:2:1: 2:10>::from() -> u8 {\n    let mut _0: u8;\n\n    bb0: {\n        _0 = const 0_u8;\n        return;\n    }\n}\n";
+        std::fs::write(target.join(format!("first{DUMPED}")), body).unwrap();
+        let unique = load(&dir, &dir.join("dumps")).unwrap();
+        assert_eq!(unique.definitions.len(), 1);
+        assert!(unique.crates["definitions"].contains_key("Mark::from"));
+        std::fs::write(target.join(format!("duplicate{DUMPED}")), body).unwrap();
+        let ambiguous = load(&dir, &dir.join("dumps")).unwrap();
+        assert!(ambiguous.definitions.is_empty());
+        assert!(!ambiguous.crates["definitions"].contains_key("Mark::from"));
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+
+    #[test]
+    fn metadata_collection_preserves_pre_llvm_bodies_ue_32() {
+        let dir = std::env::temp_dir().join(format!("uorust-metadata-mir-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join("lib.rs"),
+            "pub fn count(mut n:u32)->u32 { let mut x=0; while n>0 { x+=1;n-=1; } x }\n\
+             fn unused(n:u32)->u32 { n.wrapping_add(1) }\n\
+             pub fn generic<T:Copy>(x:T)->T { x }\n\
+             pub fn closure(x:u32)->u32 { (|| x.wrapping_add(1))() }\n\
+             pub struct Item(pub u8); impl Item { pub fn get(&self)->u8 {self.0} }\n",
+        )
+        .unwrap();
+        let common: Vec<&str> = FLAGS
+            .iter()
+            .copied()
+            .filter(|f| !f.starts_with("--emit=") && *f != "-Zalways-encode-mir")
+            .collect();
+        let mut linked = common.clone();
+        linked.push("--emit=link");
+        let omitted: Vec<&str> = FLAGS
+            .iter()
+            .copied()
+            .filter(|f| *f != "-Zalways-encode-mir")
+            .collect();
+        let mut inventories = BTreeMap::new();
+        for (name, flags) in [
+            ("linked", linked),
+            ("production", FLAGS.to_vec()),
+            ("omitted", omitted),
+        ] {
+            let output = dir.join(name);
+            std::fs::create_dir_all(&output).unwrap();
+            let result = Command::new("rustc")
+                .args([
+                    "--crate-name",
+                    "probe",
+                    "--crate-type",
+                    "lib",
+                    "--edition",
+                    "2021",
+                    "lib.rs",
+                ])
+                .args(flags)
+                .arg("--out-dir")
+                .arg(&output)
+                .arg(format!("-Zdump-mir-dir={}", output.display()))
+                .env("RUSTC_BOOTSTRAP", "1")
+                .current_dir(&dir)
+                .output()
+                .unwrap();
+            assert!(
+                result.status.success(),
+                "{}",
+                String::from_utf8_lossy(&result.stderr)
+            );
+            let files: BTreeMap<_, _> = std::fs::read_dir(&output)
+                .unwrap()
+                .map(|e| e.unwrap().path())
+                .filter(|p| p.extension().is_some_and(|e| e == "mir"))
+                .map(|p| (p.file_name().unwrap().to_owned(), std::fs::read(p).unwrap()))
+                .collect();
+            if name == "production" {
+                assert!(output.join("libprobe.rmeta").is_file());
+                assert!(
+                    !output.join("libprobe.rlib").exists(),
+                    "MIR collection emitted a native archive"
+                );
+            }
+            inventories.insert(name, files);
+        }
+        assert!(!inventories["linked"].is_empty());
+        assert_eq!(inventories["linked"], inventories["production"]);
+        assert_ne!(
+            inventories["linked"], inventories["omitted"],
+            "Missing encoding must be detected"
+        );
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
+    #[test]
     fn impls_are_named_by_the_type_their_source_implements() {
         let dir = std::env::temp_dir().join(format!("uorust-mir-impl-{}", std::process::id()));
         std::fs::create_dir_all(dir.join("src")).unwrap();
@@ -517,14 +706,14 @@ mod tests {
         )
         .unwrap();
         assert_eq!(
-            resolve_impls(&dir, "a::<impl at src/a.rs:2:1: 2:7>::get").as_deref(),
+            resolve_impls(&dir, &dir, "a::<impl at src/a.rs:2:1: 2:7>::get").as_deref(),
             Some("a::S::get")
         );
         assert_eq!(
-            resolve_impls(&dir, "a::<impl at src/a.rs:3:1: 3:41>::fmt").as_deref(),
+            resolve_impls(&dir, &dir, "a::<impl at src/a.rs:3:1: 3:41>::fmt").as_deref(),
             Some("a::Wrap::fmt")
         );
-        assert_eq!(resolve_impls(&dir, "a::f::{closure#0}"), None);
+        assert_eq!(resolve_impls(&dir, &dir, "a::f::{closure#0}"), None);
         std::fs::remove_dir_all(&dir).unwrap();
     }
 }

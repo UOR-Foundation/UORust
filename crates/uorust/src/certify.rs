@@ -2384,7 +2384,7 @@ impl Profile {
 }
 
 /// Whether a definition's text takes a function: a parameter of a `Fn` type.
-fn higher_order(text: &str) -> bool {
+pub(crate) fn higher_order(text: &str) -> bool {
     let Some(at) = text.find("parameters: [") else {
         return false;
     };
@@ -3770,6 +3770,9 @@ impl Profile {
                     }
                     (Status::Foreign(detail), _) => format!("foreign: {detail}"),
                     (Status::Effect(effect), _) => format!("effect: {effect}"),
+                    (Status::Embedded(at), _) => {
+                        format!("embedded-closed in {} configurations", at.len())
+                    }
                 };
                 (r.function.clone(), cause)
             })
@@ -3864,6 +3867,7 @@ mod tests {
                     function: (*function).to_string(),
                     status: status.clone(),
                     divergence: None,
+                    stops: None,
                 },
             );
         }
@@ -5687,6 +5691,7 @@ mod tests {
                 function: "meter::apply_both".to_string(),
                 status: Status::Lifted("Behavior::applyBoth".into()),
                 divergence: None,
+                stops: None,
             },
         );
         let profile = keyed_profile();

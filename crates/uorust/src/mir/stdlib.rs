@@ -14,7 +14,7 @@ use std::collections::BTreeMap;
 use std::sync::OnceLock;
 
 use crate::lex::{Decl, Expr};
-use crate::lift::{self, Ty};
+use crate::lift::{self, Ty, Types};
 
 /// The table.
 const TABLE: &str = include_str!("../../mir/std.toml");
@@ -36,7 +36,7 @@ enum StdPattern {
     List(Box<StdPattern>),
     Option(Box<StdPattern>),
     Set(Box<StdPattern>),
-    Map(Box<StdPattern>, Box<StdPattern>),
+    Map(Box<StdPattern>, Box<StdPattern>, bool),
     /// `result<P, Q>`: a `Result` of a `P` or a `Q`.
     Outcome(Box<StdPattern>, Box<StdPattern>),
     /// `u8`, `u16`, ..: an unsigned integer of that width.
@@ -138,7 +138,9 @@ fn parse_pat(text: &str) -> Option<StdPattern> {
         ("list", _) => StdPattern::List(one(&args)?),
         ("option", _) => StdPattern::Option(one(&args)?),
         ("set", _) => StdPattern::Set(one(&args)?),
-        ("map", [k, v]) => StdPattern::Map(Box::new(k.clone()), Box::new(v.clone())),
+        ("map" | "hashmap", [k, v]) => {
+            StdPattern::Map(Box::new(k.clone()), Box::new(v.clone()), head == "map")
+        }
         ("result", [t, e]) => StdPattern::Outcome(Box::new(t.clone()), Box::new(e.clone())),
         ("tuple", [_, _, ..]) => StdPattern::Tuple(args),
         ("cursor", [p]) => StdPattern::Tuple(vec![
@@ -364,7 +366,7 @@ fn bind(p: &StdPattern, t: &Ty, binds: &mut PatternBinds) -> bool {
         | (StdPattern::Nat, Ty::Nat(_))
         | (StdPattern::Unit, Ty::Unit) => true,
         (StdPattern::Var(v), t) => match binds.get(v) {
-            Some(b) => b.render() == t.render(),
+            Some(b) => b.same(t),
             None => {
                 binds.insert(v.clone(), t.clone());
                 true
@@ -373,7 +375,9 @@ fn bind(p: &StdPattern, t: &Ty, binds: &mut PatternBinds) -> bool {
         (StdPattern::List(p), Ty::List(t))
         | (StdPattern::Option(p), Ty::Option(t))
         | (StdPattern::Set(p), Ty::Set(t, true)) => bind(p, t, binds),
-        (StdPattern::Map(pk, pv), Ty::Map(k, v, true)) => bind(pk, k, binds) && bind(pv, v, binds),
+        (StdPattern::Map(pk, pv, ordered), Ty::Map(k, v, actual)) if ordered == actual => {
+            bind(pk, k, binds) && bind(pv, v, binds)
+        }
         (StdPattern::Outcome(pt, pe), Ty::Outcome(t, e)) => {
             bind(pt, t, binds) && bind(pe, e, binds)
         }
@@ -402,9 +406,11 @@ fn build(p: &StdPattern, binds: &PatternBinds) -> Option<Ty> {
         StdPattern::List(p) => Ty::List(Box::new(build(p, binds)?)),
         StdPattern::Option(p) => Ty::Option(Box::new(build(p, binds)?)),
         StdPattern::Set(p) => Ty::Set(Box::new(build(p, binds)?), true),
-        StdPattern::Map(k, v) => {
-            Ty::Map(Box::new(build(k, binds)?), Box::new(build(v, binds)?), true)
-        }
+        StdPattern::Map(k, v, ordered) => Ty::Map(
+            Box::new(build(k, binds)?),
+            Box::new(build(v, binds)?),
+            *ordered,
+        ),
         StdPattern::Outcome(t, e) => {
             Ty::Outcome(Box::new(build(t, binds)?), Box::new(build(e, binds)?))
         }
@@ -425,7 +431,7 @@ fn vars(p: &StdPattern, out: &mut Vec<String>) {
     match p {
         StdPattern::Var(v) if !out.contains(v) => out.push(v.clone()),
         StdPattern::List(p) | StdPattern::Option(p) | StdPattern::Set(p) => vars(p, out),
-        StdPattern::Map(k, v) | StdPattern::Outcome(k, v) => {
+        StdPattern::Map(k, v, _) | StdPattern::Outcome(k, v) => {
             vars(k, out);
             vars(v, out);
         }
@@ -509,7 +515,7 @@ pub(crate) fn scalar_text() -> Decl {
         cat(vec![byte(format!("(224 + {})", q(4096))), tail(64), tail(1)]),
         cat(vec![byte(format!("(240 + {})", q(262144))), tail(4096), tail(64), tail(1)]),
     );
-    Decl::Definition {
+    Decl::Definition { type_parameters: Vec::new(),
         name: SCALAR_TEXT.into(),
         parameters: vec![("c".into(), "Nat".into())],
         result: "String".into(),
@@ -525,11 +531,33 @@ pub(crate) fn scalar_text() -> Decl {
 
 /// The model of the std operation `callee` (generic arguments erased) at
 /// these argument and result types.
+#[cfg(test)]
 pub(crate) fn apply(
     callee: &str,
     args: &[(String, Ty)],
     dt: &Ty,
     defaults: Defaults<'_>,
+) -> Option<Applied> {
+    apply_in(callee, args, dt, defaults, None)
+}
+
+/// Apply a model using the workspace's admitted derived equality definitions.
+pub(crate) fn apply_with_types(
+    callee: &str,
+    args: &[(String, Ty)],
+    dt: &Ty,
+    defaults: Defaults<'_>,
+    types: &Types,
+) -> Option<Applied> {
+    apply_in(callee, args, dt, defaults, Some(types))
+}
+
+fn apply_in(
+    callee: &str,
+    args: &[(String, Ty)],
+    dt: &Ty,
+    defaults: Defaults<'_>,
+    types: Option<&Types>,
 ) -> Option<Applied> {
     let k = key(callee);
     // Core prints its own items by their shortest path in scope
@@ -587,6 +615,7 @@ pub(crate) fn apply(
         args: &terms,
         binds: &binds,
         defaults,
+        types,
     };
     out.guard = match &model.guard {
         Some(g) => Some(r.render(g, None, None, &mut out.aux)?),
@@ -609,7 +638,11 @@ pub(crate) fn apply(
         }
     }
     if let (Some(k), Some(v)) = (binds.get("k"), binds.get("v")) {
-        out.mentions.push(Ty::Tuple(vec![k.clone(), v.clone()]));
+        out.mentions
+            .push(Ty::Map(Box::new(k.clone()), Box::new(v.clone()), false).entry());
+    }
+    if out.aux.iter().any(|d| d.name().starts_with("compare_")) {
+        out.mentions.push(Ty::Named(crate::order::ORDERING.into()));
     }
     Some(out)
 }
@@ -658,6 +691,7 @@ struct Renderer<'a> {
     args: &'a [String],
     binds: &'a PatternBinds,
     defaults: Defaults<'a>,
+    types: Option<&'a Types>,
 }
 
 impl Renderer<'_> {
@@ -677,10 +711,14 @@ impl Renderer<'_> {
             let w = words(&inner);
             let ty = |v: &str| binds.get(v.strip_prefix('$')?);
             let entry = || {
-                Some(Ty::Tuple(vec![
-                    binds.get("k")?.clone(),
-                    binds.get("v")?.clone(),
-                ]))
+                Some(
+                    Ty::Map(
+                        Box::new(binds.get("k")?.clone()),
+                        Box::new(binds.get("v")?.clone()),
+                        false,
+                    )
+                    .entry(),
+                )
             };
             let value = match w.iter().map(String::as_str).collect::<Vec<_>>().as_slice() {
                 [n] if n.chars().all(|c| c.is_ascii_digit()) => {
@@ -709,7 +747,20 @@ impl Renderer<'_> {
                 ["item", i, x] => format!("(project {x} item{})", i.parse::<usize>().ok()?),
                 ["eq", v, a, b] => match ty(v)? {
                     Ty::Str | Ty::Char | Ty::Bool => format!("(prim equal {a} {b} : Bool)"),
-                    Ty::Nat(_) | Ty::Scalar => format!("({a} =? {b})"),
+                    Ty::Nat(_) | Ty::Signed(_) | Ty::Scalar => format!("({a} =? {b})"),
+                    t if self
+                        .types
+                        .is_some_and(|types| crate::order::derived(t, types)) =>
+                    {
+                        let types = self.types?;
+                        for d in crate::order::decls(&[t.clone()].into(), types) {
+                            if !aux.iter().any(|old| old.name() == d.name()) {
+                                aux.push(d);
+                            }
+                        }
+                        let call = crate::order::call(t, a, b);
+                        format!("(match {call} | CmpOrdering.Less => false | CmpOrdering.Equal => true | CmpOrdering.Greater => false)")
+                    }
                     _ => return None,
                 },
                 ["lt", v, a, b] => match ty(v)? {
@@ -750,6 +801,7 @@ impl Renderer<'_> {
             args: &[],
             binds,
             defaults: self.defaults,
+            types: self.types,
         };
         let mut params = Vec::new();
         for p in &a.params {
@@ -759,6 +811,7 @@ impl Renderer<'_> {
         let result = own.render(&a.result, Some(&name), None, aux)?;
         let body = own.render(&a.body, Some(&name), None, aux)?;
         aux.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: name.clone(),
             parameters: params,
             result,
@@ -1105,6 +1158,66 @@ mod tests {
             model_type("std::collections::BTreeSet", &[Ty::Str]),
             Some(Ty::Set(Box::new(Ty::Str), true))
         );
+    }
+
+    #[test]
+    fn hash_reads_preserve_map_kind_and_reject_unmodeled_equality() {
+        let key = Ty::Nat(Some(32));
+        let value = Ty::Nat(Some(8));
+        let option = Ty::Option(Box::new(value.clone()));
+        let map = |ordered| Ty::Map(Box::new(key.clone()), Box::new(value.clone()), ordered);
+        let read = |path, ordered| {
+            apply(
+                path,
+                &[("map".into(), map(ordered)), ("key".into(), key.clone())],
+                &option,
+                &|_| None,
+            )
+        };
+        let hash = read("std::collections::HashMap::get", false).expect("hash lookup");
+        let tree = read("std::collections::BTreeMap::get", true).expect("tree lookup");
+        assert_eq!(hash.term, tree.term);
+        assert_eq!(
+            hash.aux
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect::<Vec<_>>(),
+            tree.aux
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect::<Vec<_>>()
+        );
+        assert!(read("std::collections::HashMap::get", true).is_none());
+        assert!(read("std::collections::BTreeMap::get", false).is_none());
+        assert_eq!(
+            build(
+                &parse_pat("hashmap<$k, $v>").unwrap(),
+                &[("k".into(), key.clone()), ("v".into(), value.clone())].into()
+            ),
+            Some(map(false))
+        );
+        for unsupported in [
+            Ty::Named("CustomEquality".into()),
+            Ty::Float(super::super::float::Format { exp: 8, frac: 23 }),
+        ] {
+            assert!(apply(
+                "std::collections::HashMap::get",
+                &[
+                    (
+                        "m".into(),
+                        Ty::Map(
+                            Box::new(unsupported.clone()),
+                            Box::new(value.clone()),
+                            false
+                        )
+                    ),
+                    ("k".into(), unsupported)
+                ],
+                &option,
+                &|_| None
+            )
+            .is_none());
+        }
     }
 
     #[test]

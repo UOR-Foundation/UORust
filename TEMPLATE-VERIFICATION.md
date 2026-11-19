@@ -1,5 +1,69 @@
 # Template repository verification
 
+## Native feedback regressions (UE-40 through UE-44)
+
+These checks use the immutable SDK selected by `prismpm.lock`. Each row was
+registered with its scenario and an executable regression before its repair.
+They are focused development evidence; release acceptance remains `just vv`.
+
+| ID | Reproduced defect | Restored check |
+| --- | --- | --- |
+| UE-40 | A renamed unique workspace type did not lift, while an imported name could bind a function's generic parameter. | `renamed_unique_types_preserve_imports_and_generic_shadowing_ue_40` checks the original type, generic shadowing, and actual SDK verification. |
+| UE-41 | A compiler-derived signed structure field was admitted into a native tuple with a different integer representation. | `native_aggregates_check_field_representations_ue_41` refuses incompatible tuple, structure, variant, array and option cases with typed field diagnostics; the compatible projection passes SDK type checking. |
+| UE-42 | Native loop bodies transporting lock-admitted registry values produced no candidates. | `native_registry_carriers_require_locked_readings_ue_42` proves all five carrier functions through the SDK, rejects unmodeled JSON equality, and rejects a changed archive checksum. |
+| UE-43 | Native trials checked unrelated modules and retained no structured SDK result. | `native_verification_scopes_feedback_and_reuses_decisions_ue_43` proves three candidates, refuses an overflow candidate, records only Behavior and Prelude, and replays identical verdicts with zero verifier runs. |
+| UE-44 | Lean rejected a countdown carrying an invariant Boolean with `Unknown identifier x1`. | `native_loop_state_preserves_invariants_in_evidence_ue_44` proves the compiler-derived function using one changing loop-state parameter. The SDK checks the unreduced decrease obligation exactly before proving it. |
+
+Run these regressions with `cargo test --locked -p uorust --test engine native_`.
+The existing policy-hint regression also exercises corrected hints and unchanged
+replay. Native trials now run SDK type checking before Lean verification and
+write the actual SDK JSON to `uorust-proof-result.json` in their project-owned
+scratch directory. Neither this feedback nor prior axiom hints confer proof
+status: a changed translation digest still requires the SDK's successful verdict.
+
+The MIR fixture was refreshed by the actual prover after loop-state lowering
+changed its translations. Eight translations were proved and one refused in
+three verifier runs; two unchanged proved rows were retained. In particular,
+`walk::any_above`, previously refused for its invariant capture, now proves.
+The fixture's overflow refusal remains a refusal. CLI and engine replay checks
+require zero new verifier runs for the resulting register.
+
+The complete gate is not represented as passed by these checks. The prior full
+run's self-lift alias regression was repaired separately, and the translator's
+UE-18 certification boundary still requires complete release acceptance.
+
+## Collection transport and proof-history reuse (UE-45 and UE-46)
+
+`native_hash_collections_reuse_unordered_carriers_ue_45` initially found no
+native standard-map candidate. Its repair proves five compiler-derived
+functions through the SDK: default and custom-hasher maps and sets, plus a
+workspace homonym. Hasher inspection, iteration order and an unsupported
+element type remain refused. This adds passive carriers, without a model for
+hash-builder operations.
+
+`native_verdicts_survive_compiler_input_selections_ue_46` initially reduced
+the actual eleven-row fixture register to one row when given one compiler
+body. It now retains all proved and refused rows across full, single-body and
+full selections, with zero verifier runs throughout. A different digest for a
+live translation still invalidates its previous decision; the policy-hint
+regression requires actual SDK verification after that change. Historical
+cache size is not a count of currently lifted functions: the current frontier
+remains the authority for eligibility.
+
+## Ordinary native float scopes (UE-47)
+
+The initial `native_workspace_floats_share_source_readings_ue_47` run lacked
+the ordinary f32 transport candidate. MIR target scopes now receive the same
+core-derived primitive formats as source lifting, and core/std facade paths
+resolve their supported inherent methods. Eight actual-SDK proofs cover float
+transport, arithmetic, finite tests, bit conversions and a negative-zero
+literal. Primitive headers retain their bit carriers despite a qualified
+workspace homonym. `native_workspace_floats_preserve_root_names_ue_47` checks
+a root declaration named f64 through its own Boolean field and SDK type
+checking. Unsupported trigonometry remains unlifted. The existing literal
+conformance test compares f64 positive and negative zero with Rust's actual
+bit patterns; it does not assume a particular printed form of the model.
+
 This repository's `just vv` instantiates the universal verification policy in
 `VERIFICATION.md` for the template itself, which is a Prism application: the
 template contract checker in `app/`.
@@ -318,3 +382,892 @@ commits and against mirrors served with `PRISM_TEMPLATE_RAW`:
 | a mirror's lock names a file its frame does not | refused: the lock's list against the frame's; nothing written |
 | a mirror's frame and lock both add `.github/workflows/x.yml` | refused: `names files outside the page`; nothing written |
 | an untouched mirror | pinned |
+
+## Stable MIR identities and bounded proof work
+
+UE-28 uses actual compiler MIR for three modules declaring the same method
+name. The earlier allocator retained only two candidates; the repaired
+allocator retains all three and preserves the last method's declaration when
+only that method's dump is selected.
+
+UE-29 plans trials by dependency components. The negative cases reject a zero
+budget, an absent dependency, and a recursive component larger than the budget.
+Its SDK regression verifies three countdown methods in single-function trials;
+each first discovers its actual axiom set and then verifies that declaration.
+A second run must reuse the unchanged proved digests without a verifier run.
+
+UE-30 combines locked-source number readings with generic registry aliases.
+Before the repair, expansion of `BigRational` to `Ratio<BigInt>` erased its
+registered model and the identity-function assertion failed. The repaired
+projection lifts that identity as the stored integer pair. Replacing the
+locked rational archive checksum with zeros must leave it unlifted.
+
+The development profile optimizes the projector itself, as it already does
+its certified translator. The SDK gate still runs every check with debug
+assertions and overflow checking enabled. This removes repeated unoptimized
+whole-workspace traversals from proof and integration tests.
+
+Saved state-threading, cell-field and trait-dictionary changes retain their
+positive and counterexample tests. Unsupported-type fixtures use `UnsafeCell`
+instead of newly readable cells. Embedding join fixtures use a display-trait
+bound instead of newly readable marker bounds, so they still exercise the
+embedding fallback. Their closure, source-site and per-function regression
+assertions remain in place.
+
+
+The UE-29 diagnostic regression also places a failure on a theorem's opening
+line, before its `name` field. The previous lookup blamed the preceding
+definition (`a` instead of `b`); the repaired lookup names the declaration
+that opens on that line. Actual SDK failures on adjacent native obligations
+exposed this case. The prover prints the full SDK diagnostics while retaining
+compact refusal causes in the verdict register.
+
+Engine assertions share the immutable checkout's self projection. The
+byte-determinism regression explicitly takes two fresh projections, and
+mutated fixture checkouts always project afresh, so sharing cannot mask those
+negative cases.
+
+
+## Scoped types and metadata MIR collection
+
+UE-31 resolves qualified field and signature types before reducing their
+paths. Its fixture distinguishes numeric and Boolean homonyms, an imported
+bare type, a nested generic argument and an unresolved qualified path.
+The previous projection refused the valid numeric getter. The corrected
+projection lifts the four valid functions and keeps the unresolved one out.
+Existing path diagnostics retain the exact declaration sites; a qualified
+constructor whose body reading remains unsupported stays refused.
+
+UE-32 compares the pinned compiler's complete pre-LLVM MIR inventory and
+bytes under native emission and the production metadata flags. Private,
+generic, closure and impl bodies are present, and the production target
+emits metadata without a native archive. Dropping forced MIR encoding gives
+an incomplete inventory and is detected. Independent Cargo library and
+binary probes also succeed with these flags.
+
+
+## Early propagation with mutable state (UE-48)
+
+The registered source fixture first failed because every `?` in a body with
+threaded mutable parameters was refused. The repaired projection returns the
+current parameter values on both success and early failure. A fallible lifted
+callee is unpacked before its result is matched, so its updates survive failure.
+Result constructors use the return context without broadening float inference.
+Option comparisons bind both operands at their concrete type before matching;
+this prevents an untyped `None` in the generated Lean match.
+
+Six reference Rust tests exercise Option and Result success and failure, a
+state-changing fallible callee, and two mutable parameters. The actual pinned
+SDK verifies all generated acceptance roots. A planted defect replaces the
+updated state by the original parameter on the Option failure path: the same
+SDK proves the option-failure acceptance proposition false and rejects it.
+The fixture also confirms mutable aliases and an unmodeled bool-to-u8 error
+conversion remain unlifted. All 421 library tests pass, including the existing
+float inference and borrow-escape refusals. Complete release acceptance remains
+separate from these focused checks.
+
+
+## Locked numeric observations and machine proof campaigns (UE-49, UE-50)
+
+UE-49 first failed on the absent native integer zero observation. The numeric
+readings now share stored-ratio accessor terms between source and MIR lowering.
+The exact checksum-admitted num-bigint 0.4.8 and num-rational 0.4.2 sources define
+the predicates, signs, absolute values, accessors and identity constructors.
+The compiler must resolve the declared crate and trait; a spelling alone does
+not select a reading. Unsupported operations and wrong checksums stay refused.
+
+The actual SDK proved 18 compiler-derived numeric functions. Nineteen closed
+acceptance vectors over the emitted functions also pass the SDK. Rust reference
+vectors confirm that a raw ratio 0/0 is both zero and one, and that absolute
+value can preserve a negative denominator while negating only the numerator.
+These representation-sensitive cases prevent replacing stored pairs with an
+assumed normalized rational. Axiom policies come from the actual verifier's
+observations; the tests reuse UORust's digest-bound native decisions rather than
+repeating completed proof batches when acceptance vectors change.
+
+UE-50 first failed because prove accepted no machine-output option. With
+`prove --json`, UORust runs the proof campaign, writes its final verdict-backed
+projection, then measures the register itself. Its JSON binds the frontier,
+verdict register, projection manifest and LexLean lock to exact bytes and records
+the running executable's digest. The report distinguishes an open frontier,
+translation closure, and full-project SDK acceptance. A cached fixture campaign
+uses zero verifier calls; an unowned output directory is refused and its planted
+file is preserved. The caller need not parse prose, reconstruct the function
+counts, or rerun a separate projection to obtain the final work queue.
+
+
+## Width-derived constructors and semantic proof-cache context (UE-51, UE-52)
+
+UE-51 first refused unsigned BigInt construction. The project-owned Prelude now
+provides a structural binary fold over a declared bit count. Work is bounded by
+the primitive word width, including u128::MAX; it does not count up to the value.
+Unsigned source constructors and signed/unsigned native constructors share this
+reading, with a width-derived two's-complement adjustment. Native rational
+integer construction shares the existing stored-pair reading.
+
+Thirteen native functions and 32 closed SDK boundary vectors pass, covering every
+primitive integer width, pointer-sized integers, signed minima and all-one bit
+patterns. Reference Rust vectors confirm the same boundary values. The SDK
+preflight also checks the shared model directly before expensive proof runs.
+
+UE-52 reproduced a stale-cache defect: changing a source helper from identity to
+negation left its native caller's own tokens unchanged, and the old tool reused
+the caller's decision without SDK work. Native digests now bind the source/type
+context, bundled semantics, the pinned SDK lock and the transitive native
+translation closure. The actual regression verifies the changed context, then
+replays it with zero verifier calls. A planted Bool-as-Nat definition in the
+owned shared module is rejected by the SDK as a typed campaign failure. It is
+not misrecorded as a refusal of each unrelated native function. Existing legacy
+fixture decisions are refreshed through the actual prover under the new binding;
+no cached status or SDK object is edited to make it pass.
+
+
+## Reachable native proof obligations (UE-53)
+
+The planted regression supplied two native loops, one valid and one with an
+unchecked u8 increment, beside an unrelated false source assertion. Before
+the repair, both native functions were refused. The actual SDK now proves
+the valid function and refuses the overflow obligation. The separate full
+projection still contains the source assertion and fails SDK verification.
+
+Native trials retain all candidate declarations and their transitive declaration
+and type dependencies. Mutual groups remain whole; quoted text cannot introduce
+references or delimit declarations. Missing roots and unsupported declaration
+shapes are typed tool failures. This changes only trial inputs, and the proof
+strategy is bound into native cache identities. A module-wide failure is split
+by recursive components; an inconclusive final component returns a tool failure
+with its raw SDK receipt rather than inventing per-function counterexamples.
+
+The regression was red with zero proved and two refused, then passed with one
+proved and one refused. The lexer regression also covers quoted braces, escaped
+quotes, transitive type references and mutual siblings. These checks are focused
+development evidence; complete release acceptance remains `just vv`.
+
+## Exact native feedback module identity (UE-54)
+
+A consumer projection also contains library projects. Looking up the first path
+ending in Behavior.lex.tex selected an earlier library file for root SDK source
+locations. Concrete overflow diagnostics therefore appeared unattributed and
+triggered repeated batch splitting. The planted regression returned libraryClaim
+instead of holdsNative before the repair. Feedback now reads the exact root
+src/Behavior.lex.tex, the same file the native SDK invocation verifies. Library
+modules remain independent inputs and cannot supply a root declaration's owner.
+
+## Native reference-alias match evidence (UE-55)
+
+The previous frozen producer refuses the paired enum, copied Option and replaced
+enum fixtures with `ProjectionElem::Downcast`: a field read outside a match.
+The compiler uses different temporary references for the discriminant and field
+access even when both read the same immutable value. Native bindings now key by
+the exact value term and its complete type. Copies share match evidence; a
+functional update changes the key and cannot reuse a stale constructor binder.
+
+Three compiler-derived functions pass actual SDK proof trials. Nine closed SDK
+vectors agree with executable Rust reference cases, including replacement after
+a prior match. The overflowing fourth function remains refused. A planted
+assertion that replacement returns its stale value is rejected by the SDK
+because its proposition is false. The regression also requires current native
+candidate eligibility, so historical cached proofs cannot hide a translation
+regression. These are focused development checks; complete `just vv` remains
+the release gate.
+
+## Native readonly shared owners (UE-57)
+
+The compiler-derived regression initially fails with `mir::Ty: std::sync::Arc<Wide>`.
+Native lowering now uses the source's existing content representation for the
+standard Rc and Arc paths. Six native functions covering construction, cloning
+and readonly field access pass actual SDK proof trials. Twenty-four closed SDK
+vectors agree with executable Rust cases at zero, one, an intermediate value
+and u32::MAX. Reference counts, pointer identity and shared Mutex contents
+remain typed residue. Type tests reject unrelated same-named owners and RefCell
+contents, and require both lock-admitted numeric readings before accepting an
+expanded Arc<Ratio<BigInt>>. Complete `just vv` remains the release gate.
+
+## Native unary numeric models (UE-58)
+
+The regression initially refuses the compiler's i128 checked_neg call. One
+width-derived rule now handles primitive checked negation, wrapping negation,
+unsigned magnitude and signum. Guarded Option results materialize through the
+existing read operation when returned. Exact BigInt and raw Ratio negation
+reuse the lock-admitted numeric carriers; only the stored numerator is negated.
+
+Six functions pass actual SDK proof trials. Twenty-two closed SDK vectors
+cover primitive minima, maxima, zero and minus one, plus exact integer and raw
+rational cases with a negative denominator. Executable Rust confirms the
+stored rational representation. An unsupported unwrap stays typed residue.
+A planted unsigned owner in the signed checked-negation MIR is rejected,
+and type checks reject mismatched owners, result types, unrelated paths and
+pointer widths that differ across declared targets. Complete `just vv`
+remains the release gate.
+
+## Blocked-context proof history (UE-59)
+
+An actual Factory refresh erased a complete-context proof for a caller whose
+partial compiler view could not translate a transitive callee. The next full
+campaign reproduced the identical proof in two redundant verifier runs.
+The regression obtains SDK proofs for a three-function chain, omits the leaf
+MIR and demonstrates that the still-listed, blocked caller has a different
+partial-context digest. Before repair, that digest erased the caller's proof.
+
+Only a translation currently eligible for verification can invalidate a cached
+decision. The blocked caller remains unadmitted; all original decisions survive,
+and restoring the complete view replays with zero verifier calls. The existing
+selection-history regression also passes, and the source-dependency regression
+confirms that changed eligible meanings still require actual SDK verification.
+No verdict status or digest is rewritten. Complete `just vv` remains the release
+gate.
+
+## Mathematical integer ABI codecs (UE-56)
+
+The previous frozen producer refuses all six compiler-derived i128 and isize
+field-read, aggregate and source-call fixtures at their representation boundary.
+Width-derived codecs now bridge native words and matching mathematical source
+integers. Conversions split signed magnitudes into checked UInt64 limbs, with
+ordered range obligations proved by the actual SDK. Source-call results bind
+once before conversion so each range check stays independent of the call body.
+
+All six native functions pass actual SDK proof trials. Twenty-four closed SDK
+vectors agree with executable Rust reference cases at minimum, maximum, zero
+and negative values. Fixed Int64 representations, unrelated field types and
+mismatched widths remain refused. A planted Bool field in the source schema
+rejects the corresponding native integer read. These are focused development
+checks; complete `just vv` remains the release gate.
+
+## Shared native hash-map reads (UE-60)
+
+The compiler-derived regression initially fails at `HashMap::get`. Four table
+rows now reuse the existing linear lookup, membership and length models on
+the unordered logical carrier. Map patterns retain their ordered/unordered
+flag. Primitive equality and the source's admitted derived comparisons are
+shared; byte-identical source/native comparison declarations emit once while
+the native proof context still binds the complete helper definitions.
+
+Seven native functions pass actual SDK proof trials. Twenty-eight closed SDK
+vectors agree with executable Rust cases for numeric, borrowed string and
+derived keys, both entry orders, hit/miss and empty/nonempty maps. A source
+comparison in the same fixture exercises shared-helper emission. Custom
+equality, hasher observations, iteration, floats and mismatched map kinds
+remain refused. Replacing successful lookup results with a different value
+produces LLV7002 and the SDK diagnostic that the proposition is false. The
+model's Rust vectors are regenerated from std.toml and executed directly.
+These are focused development checks; complete `just vv` remains the release
+gate.
+
+## Native function values and option mapping (UE-61)
+
+The compiler-derived regression first fails on the constant function item
+`flip`. Immutable workspace function items now retain their admitted signatures
+and dependency closure, with explicit lambda parameters for their application.
+Standard Rc/Arc AsRef, Borrow and Deref adapters reuse the admitted content
+representation only for exact owners, traits and targets. A single Option::map
+table row applies these pure function values; mutable callbacks remain residue.
+
+Five mapped native functions pass actual SDK proof trials. Fifteen closed SDK
+vectors agree with executable Rust for None, Boolean negation and shared values
+at zero and u32::MAX. Custom adapter owners, mutable callbacks, incompatible
+targets, unrelated traits and shared Mutex contents remain refused. A planted
+wrong borrow result produces LLV7002 and the diagnostic that the proposition
+is false. Generated Rust table vectors execute the same Option mapping model.
+The interrupted test run retained its bound native decisions for replay. These
+are focused development checks; complete `just vv` remains the release gate.
+
+## Structural delivery safeguards (UE-62)
+
+The initial regression fails because no delivery preflight exists. The policy
+now requires the complete registry, structural dependency families and an
+authority bound to actual model bytes. The campaign calls this guard before
+proof work. Positive and negative cases cover leaf plans, manual strategies,
+partial scope, wrong authority, missing source bindings, unchanged failures,
+UI work, changed reports and artifacts, baseline loss, and false completion.
+Twenty positive/negative cases pass. A preserved report remains usable after
+the original report path is replaced. An actual planted leaf plan is rejected
+at the consumer entry point without changing native or SDK logs. Identical
+verified work replays in 1.8 seconds without running either verifier. Manual
+semantic-registry changes and reductions of the original source/registry are
+also rejected.
+
+The consumer entry point also binds actual source, compiler MIR, embeddings,
+SDK, producer and verdict bytes. It preserves actual verified receipts and
+checks their manifests before reuse. Workspace instructions persist the user's
+structural delivery requirement without modifying immutable repository policy.
+This guard enforces campaign discipline; it does not create missing Rust
+semantics or change the all-functions finish line. Full `just vv` remains open.
+
+## Compositional compiler control-flow regions (UE-63)
+
+The compiler-derived regression initially refuses nested control flow because
+function-sized loop continuations create cyclic helper calls. Natural regions
+now derive from compiler edges and dominating headers. Inner regions return
+explicit exit packets; their callers own continuations. Conservative MIR write
+analysis keeps unchanged frame values in their caller and transports changed
+live state. Region outcomes also preserve early returns and distinct exits.
+
+The structural analysis uses one linear-size reachability set per loop header,
+with an acyclic fast path, rather than a quadratic dominator matrix. Existing
+non-nested lowering retains its emitted representation and proof identities.
+No standard-operation model row changes.
+
+Four nested, triple, early-return and multi-exit functions pass actual SDK
+proofs. All 128 closed SDK results agree with an executable Rust oracle. An
+overflowing fifth function remains refused, and live mutable-borrow transport
+remains typed residue. Independent CFG cases reject irreducible entries, missing
+blocks and an absent entry. A planted lost Boolean exit state is rejected by
+LLV7002 because an oracle proposition is false. Exact match-path evidence is
+retained in every recursive decrease obligation; no termination gate is weakened.
+These are development checks; full `just vv`, translator certification and
+consumer adoption remain separate acceptance requirements.
+
+## UE-64: shared source model import
+
+The model, scenario and regression were registered first. The red compiler
+fixture stopped at `Option::unwrap_or_default`; the native path had no access to
+the source translator's existing model. Native calls now bind compiler-owned
+standard inherent paths and exact immutable source/native carrier types before
+importing the source declarations and their dependencies. Recursive nominal
+schemas are checked for mutable cells. Panic-default and divergent readings
+cannot pass this interface. No executable row of `mir/std.toml` changed.
+
+`native_calls_import_source_semantic_models_ue_64` passed in the pinned SDK:
+four native proofs; eleven executable-Rust differential vectors across Option,
+Result and Boolean receivers; four definitional equalities to the existing opaque
+string model. UTF-8 runtime primitives do not reduce under kernel `decide`, so
+those four equalities establish model transport rather than claiming a computed
+Rust differential. An incorrect oracle result (255 changed to 254 in the vector
+itself) was rejected with LLV7002 / `is false`. Partial unwraps, Unicode-divergent
+readings, mutable inputs, incompatible carriers and custom owners are refused.
+Two unit regressions check exact bindings and recursive schema closure.
+
+The complete library suite detected missing codec/source entries in the tool's
+source-code digest. Both are now included; the source inventory gate remains
+intact. Evidence: `uorust-source-model-import-red.log`,
+`uorust-source-model-import-final-checks.log`, and
+`uorust-source-model-import-acceptance.log` in the delivery runtime. Focused
+acceptance does not replace `just vv`, translator certification or consumer
+adoption. No contract completion is claimed from this capability.
+
+### UE-62: SDK proof dependency closure reuse
+
+The extended model/scenario and failing receipt-selection tests preceded the
+implementation. All 31 guard cases pass. The guard selects an original real
+verification only at equal actual SDK build/source/semantic/module identities,
+with a hash-bound original SDK pin, intact report/artifacts and a cached proof
+bundle. It never calculates SDK semantic identities or converts build success
+into verification. The mandatory complete-campaign preflight remains intact.
+
+The actual consumer SDK emitted unchanged identities after recompiling the
+producer. Its original 12-module verification was reused with explicit
+provenance; the real SDK project check and Factory refresh passed, with zero
+native and kernel verifier calls. An actual SDK build of a planted false
+assertion succeeded but changed all three content identities; it could not
+select the earlier verification. Its proof was not admitted. The SDK acceptance
+resume took 62.9 seconds; this excludes prior native projection and interrupted
+setup and is not a fresh-campaign throughput result. The consumer remains at
+634/2,704 and no additional lifts are claimed.
+
+The earlier complete library suite passed 433 tests. The actual SDK refreshed
+one fixture receipt whose declaration changed through source-model import;
+all 16 CLI tests then replayed successfully, and conformance meta-tests and
+strict all-target Clippy passed. The fixture verdict was copied from the actual
+tool-written SDK result. No verdict, digest or axiom policy was fabricated.
+
+### UE-64: compiler callable environments
+
+The extended model/scenario and red compiler fixture preceded implementation.
+A single reifier derives callback signatures and environment applications from
+compiler bodies for the existing source and native standard model interfaces.
+It binds the environment once and declares that exact SDK lambda capture;
+mutable captures, memory signatures and incompatible carriers stay refused.
+No standard-operation formula or executable registry row was added.
+
+The actual SDK proved four fixture functions (captured predicates, mapped
+values, lazy defaults and a function item), and all 21 executable-Rust vectors
+passed. Rust's overflow counterexample panics and the SDK refuses its callback;
+the verdict register contains four proved and one refused function. A planted
+wrong closed callback result is rejected with LLV7002 / `is false`. The SDK also
+rejected the earlier missing capture metadata with LLT4001 before recording any
+function verdict, demonstrating that malformed model transport is fail-closed.
+Evidence: `uorust-model-callables-red.log`,
+`uorust-model-callables-final-sdk.log`, and
+`uorust-model-callables-acceptance.log`. Library, CLI, conformance, strict Clippy,
+model/template and lock checks passed. Consumer lifting gain remains subject to
+the complete guarded campaign. Full release acceptance remains open.
+
+## UE-65: shared source type readings
+
+The model, scenario and failing compiler test were registered first. Native
+lowering now tries its original ABI reading, then imports a compatible closed
+source reading. The fallback accepts admitted SDK identities and their
+containers; ABI-sensitive integers/characters, callables, type variables and
+unregistered nominal schemas stay out. Shared-cell allocation references retain
+identity rather than exposing their contents. No executable std registry row or
+new standard-operation semantics was added.
+
+The actual SDK proved four fixture functions and twelve transport/container
+properties. Rust checks the same properties while a RefCell's mutable borrow is
+live, demonstrating that transport never reads a snapshot of its contents.
+Identity properties use reflexivity: the opaque SDK reference types deliberately
+provide no decidable equality. Shared contents, writes, locks, counts and pointer
+comparisons remain typed refusals. The SDK rejects a planted wrong container
+observation with LLV7002 / `is false`. The primitive ABI/state-boundary unit test
+passes; the older readonly-owner test now distinguishes opaque allocation
+identity from the still-refused plain RefCell contents.
+
+Evidence: `uorust-type-import-red.log`, `uorust-type-import-final-sdk.log`,
+`uorust-type-import-acceptance.log`, and `uorust-type-import-final-checks.log`.
+The complete library pass checked 433 unaffected tests, and its one changed
+expectation passed on replay (434 total); all 16 CLI tests, conformance tests,
+strict Clippy and model/template/lock gates passed. Consumer gain is measured
+only by the complete guarded campaign; release acceptance remains open.
+
+## UE-66: compiler composition with source generic dependencies
+
+The compiler path now imports complete source-lifted generic definitions through
+`lift::generic_call`, the source binder itself. Type arguments and coherent trait
+methods retain their existing signatures and dependency names. It does not add
+standard-operation models or supply an implementation for an unknown method.
+Native words may pass parametrically without acquiring source integer semantics.
+Source definitions with recorded divergences are excluded from this interface.
+
+The initial regression failed at `generic_dependencies::word` with
+`mir::TerminatorKind::Call: transport`. The restored regression has five actual
+native SDK proofs and 32 computed-Rust comparison vectors covering unsigned and
+signed transport, option payloads, coherent dictionaries and captured callbacks.
+The SDK rejects a planted expected result of 254 for Rust's actual 255 with
+LLV7002 (`is false`). The final focused SDK run passed in 78.72 seconds.
+
+A separate planted schema defect admitted a dictionary call on a struct holding
+`Cell<bool>`. Its negative assertion failed (`shared`) before the shared schema
+check was applied. The final run keeps it unlifted alongside unavailable method
+implementations, incompatible signed return carriers, partial panic conventions
+and mutable references. The common binder's unit test also refuses two different
+word widths bound to one type parameter, a missing coherent dictionary entry and
+a method with a different result type; it retains the accepted method dependency.
+
+435 library tests, all 16 CLI tests, conformance meta-tests, model/template/lock
+checks and strict all-target Clippy passed during focused acceptance. These are
+review evidence, not a claim that the complete `just vv` release gate passed.
+Unused trait implementation entries are kept out of the global native proof
+context: the chosen method and its source meaning are already bound by the
+translated term and dependency identities.
+
+## UE-67: parametric compiler bodies and product state
+
+Native scopes now import the function's declared type parameters, including
+parameters whose bounds its body does not use. Reading that parameter does not
+supply a method implementation. Parametric trait dispatch without an admitted
+dictionary and reachable generic drop glue stay typed residue.
+
+Generic product values use the SDK's built-in, right-nested products. The common
+emitter binds generated definitions, theorems and region-exit types by the type
+variables they and their dependencies use. It supplies explicit function and
+constructor type arguments, preserves literals, and retains generic binders when
+applying the SDK's learned axiom policy. Type-parameter names share the source
+binder's collision rule. This also admits generic source product returns through
+the existing source translator.
+
+The initial compiler regression failed on `mir::Ty: T`. Four compiler-generated
+generic bodies now have actual SDK proved verdicts: transport, product return,
+nested natural loops with an exit-state type, and transport with an unused Clone
+bound. Forty computed-Rust comparison vectors cover the first three and generic
+source products at Boolean and unsigned-word instantiations. A planted expected
+255-to-254 result is rejected by LLV7002 (`is false`). The final focused SDK run
+passed in 125.90 seconds.
+
+A trait method deliberately named `clone` exposed an inadmissible fallback to a
+same-named value adapter: the `mimic` negative failed before the general
+parametric-dispatch guard. The restored run keeps both custom and standard
+unresolved trait calls unlifted, and confirms that implicit generic drop glue is
+reported as a drop-effect gap. No standard-operation registry row was added.
+The binder unit additionally checks that quoted type-variable/function names do
+not add generic dependencies to literal or unrelated declarations.
+
+436 library tests and all 16 CLI tests passed, with conformance meta-tests,
+strict all-target Clippy, model, template, SDK lock and generated self-model
+checks. This remains focused review evidence; complete release acceptance and
+translator certification are separate open gates.
+
+## UE-68: rooted native model identities and original decision retention
+
+A native proof previously bound every source definition and type scope. Adding
+an unrelated source definition changed an unchanged candidate's digest. The
+initial regression failed with two different digests for that one model.
+
+The additional `model_context_sha256` observation now binds the existing emitted
+proof-declaration closure, reached native/type/schema/signature readings, and the
+pinned SDK/assets. It is an internal producer binding, not an SDK semantic ID.
+Legacy records still require their original exact digest before the prover may
+learn this optional observation. Learning it retains the original digest,
+proved/refused status, diagnostic and axiom evidence. Later equal rooted models
+reuse that original record; changed reached meanings still require the SDK.
+
+The actual SDK regression established one proved and one refused decision, then
+removed only the optional observation to reproduce a legacy register. Legacy
+metadata learning and an unrelated source change each took zero verifier calls;
+all original decision fields stayed intact. Changing a reached helper triggered
+a new actual SDK proof. A reached schema change altered the model identity, and
+a planted wrong rooted binding prevented admission even at the original legacy
+digest. Malformed and non-string observations are also refused. The regression
+passed in 116.31 seconds.
+
+The CLI fixture now checks the same transition: only optional observations may
+appear during migration, original evidence remains byte-identical after removing
+those lines, and the following replay is byte-identical with zero verifier calls.
+437 library tests, all 16 CLI tests, conformance meta-tests, strict all-target
+Clippy, model/template/SDK-lock and generated self-model checks passed. No cached
+proof status, diagnostic or legacy digest was fabricated or manually reassigned.
+Complete `just vv` and translator certification remain separate open gates.
+
+## UE-69: native product views preserve unavailable fields
+
+The initial real-compiler regression failed at `mir::Ty: Holder`: an unknown
+service field prevented access to an independent Boolean field. The common
+reader now retains complete declared field order in SDK products. It composes
+views along the existing source dependency graph and retains unavailable fields
+as abstract values whose identities bind their source readings. Recursive edges
+stay abstract, and incomplete shapes are never guessed. Source admission and
+existing closed nominal schemas retain their prior representation.
+
+Five actual native SDK proofs passed, including a nested field access, a call
+between compiler bodies, and an exclusive update preserving its opaque payload.
+48 executable-Rust comparisons passed; the service implementation panics if
+called, so these field operations cannot obtain a result by invoking it. A
+planted incorrect Boolean result was rejected by the actual SDK. The first
+proof and differential run took 161.79 seconds. Unavailable service operations,
+parametric drop glue, unresolved custom trait dispatch and incomplete generic
+structs stay residue. A separate custom inherent-call check confirms a blocked
+dependency cannot acquire the meaning of a same-named standard adapter.
+
+A unit regression checks nested dependency composition, retained field count
+and order, source-bound opaque identities, mutable-reference detection, cyclic
+edge abstraction and incomplete-shape refusal. The existing code-identity gate
+rejected the new module until it was included in the bound production sources.
+The delivery preflight and frozen standard semantic registry remain intact.
+
+Final focused checks passed: 438 library tests, all 16 CLI tests, conformance
+meta-tests, both struct-view engine regressions, strict all-target Clippy,
+model/template/SDK-lock and generated self-model checks. The CLI register was
+refreshed from actual tool-written SDK decisions, retaining ten proved and one
+refused status and recording rooted observations for all eleven decisions. The
+replay now takes zero verifier calls and keeps existing rooted evidence exactly;
+legacy migration remains covered independently by UE-68. Full `just vv`,
+translator certification and consumer adoption remain open release boundaries.
+
+## UE-70: typed storage boundaries for native mutations
+
+The full product-view campaign stopped at an SDK link-type mismatch: a field
+update replaced an abstract stored value with a concrete value. The prior
+636-function consumer checkpoint remains the latest accepted projection; the
+failed run claims no additional lift. Its log and SDK result are retained.
+
+A minimal MIR regression reproduced the cause: place-update recursion discarded
+the incoming value type and accepted overwriting an opaque slot with a Boolean.
+The shared recursion now retains that type through nested field, element and
+option updates. At the storage boundary it reuses the existing representation
+codec, including its actual range obligations, or returns a typed residue before
+SDK scheduling. No standard-operation semantics or SDK behavior was added.
+
+The negative regression now passes. Two actual native SDK proofs and 24
+executable-Rust comparisons passed for direct and nested signed 128-bit stores,
+including minimum, maximum and large positive values. Comparisons inspect the
+stored mathematical integer, rather than only a returned word. A planted wrong
+stored value was rejected by the SDK. The proof and comparison run passed in
+124.67 seconds. Library, CLI and dependency checks are recorded with this
+checkpoint; complete release acceptance and translator certification remain open.
+
+Final focused dependency checks passed: all 439 library tests, all 16 CLI tests,
+conformance meta-tests, both product-view regressions, strict all-target Clippy,
+model/template/SDK-lock and generated self-model checks. The product-view
+regressions replayed with retained native decisions and passed in 47.35 seconds.
+
+## UE-71: parametric map carriers and explicit ABI transport
+
+The real SDK regression first failed at an unbound `K`: generic map entries
+created global tuple schemas without type binders. Entry rendering, dependencies
+and the existing source/standard semantic bindings now share SDK products when
+parameters are present. Closed entries retain their original tuple ABI.
+
+A second actual SDK check rejected a concrete caller passing that closed tuple
+ABI to a generic product ABI. The common generic-call binder now transports
+admitted list, product, option and result carriers through explicit structural
+helpers in both directions. Opaque type arguments retain their own carrier;
+unsupported callable conversions remain typed residue. Compiler bindings import
+those same helper declarations. The transport changes no key, value or ordering
+and supplies no comparison implementation or operation semantics.
+
+Eight actual native SDK decisions and 39 executable-Rust comparisons passed
+across Boolean and natural-valued maps, source and compiler reads, ordered and
+unordered maps, concrete calls of generic functions and both directions of
+transport. Unavailable generic key comparison and generic drop glue stay residue.
+The first comparison used equality of a nominal tuple list, for which the SDK
+provides no decidable-equality instance. Closed outputs are instead checked by
+matching both entries, their primitive fields and the empty tail. No instance,
+axiom or model ABI was added to make the test pass. A planted incorrect length
+is rejected by the actual SDK. The final comparison run passed in 48.14 seconds.
+
+The unit regression checks the exact retained closed rendering/tag, absence of
+unbound nominal generic entries, both transport directions and their explicit
+pure declarations. All 440 library tests, 16 CLI tests, conformance meta-tests,
+strict all-target Clippy, model/template/SDK-lock and generated self-model checks
+passed. Full release acceptance, translator certification and adoption remain
+open; these are supporting checks rather than a completed consumer contract.
+
+## UE-72: shared admitted source constant dependencies
+
+The registered regression first failed on `left::VALUE`: its source definition
+was already admitted, but native constant operands had no binding to that
+meaning. The compiler context now distinguishes actual constant declarations
+from function items and imports exact, nondivergent source definitions through
+their target and module paths. Ambiguous printed identities stay unbound, even
+when only one competing declaration has an admitted model. The existing source
+and native type readers and immutable-value interface must agree; incompatible
+signed carriers and unavailable initializers remain typed operand residue.
+No second initializer evaluator or standard-operation semantics were added.
+
+Three actual native SDK decisions and twelve executable Rust comparisons cover
+Boolean values, unsigned values and equal constant names in distinct modules.
+Changing one initializer rejects its previous native decision while retaining
+the unrelated module's rooted decision. A planted incorrect result is refused
+by the actual SDK with LLV7002. The initial comparison notation omitted the
+outer equality parentheses; the SDK rejected that malformed test, and the
+restored fixture passed in 55.13 seconds using intact native proof receipts.
+This focused evidence does not establish additional consumer lifts, full
+release acceptance, translator certification or final adoption.
+
+The focused dependency checks passed: 440 library tests, all 16 CLI tests,
+conformance meta-tests, strict all-target Clippy, model/template/SDK-lock and
+generated self-model checks. The manual standard semantic registry is unchanged.
+
+## UE-73: shared fixed-width source/native conversion kernels
+
+The registered regression first stopped on an i8 field: its source model stored
+Int64 while the compiler model required the width-bound bit pattern. All four
+fixed-width signed source types now normalize through the SDK's existing to_int
+conversion and the existing mathematical integer/word codec. The same binding
+serves native fields and results of source function calls. Mismatched widths and
+reverse conversions without an admitted codec remain typed residue.
+
+The first implementation repeated the normalized expression in each range
+obligation. Four small read models produced 32 theorems and 1,862,239 bytes of
+generated Lean; compilation was interrupted after observing 191 seconds. This
+attempt is not recorded as a passed or failed proof. Content-bound mathematical
+kernels now carry the universal conversion obligations once per width, while
+native sites call those kernels. The equivalent four-read native proof module
+generated 371,159 Lean bytes, about 80 percent less. These are generated-size
+measurements, not a controlled whole-run speedup claim.
+
+Eight native decisions and 80 executable Rust comparisons passed across direct
+field reads and source calls at i8/i16/i32/i64 extrema, negative values, zero and
+positive values. The shared helper policies are learned from actual SDK reports,
+including Classical.choice on the modular arithmetic proofs; no unsupported
+axiom or proof status is fabricated. The SDK rejected a planted wrong result
+with LLV7002. Changing the declared source width leaves the old MIR read refused.
+The completed corpus took 137.33 seconds with intact native decisions reused.
+
+The existing aggregate regression now admits array, option and tuple reads,
+while incompatible reverse stores remain refused. The signed-slot regression
+adds its formerly refused fixed-width read to the seven actual native decisions
+and retains its existing wide/pointer-width comparisons. Both regressions,
+440 library tests, all 16 CLI tests, conformance meta-tests, strict all-target
+Clippy, model/template/SDK-lock and generated self-model checks passed.
+This is a review checkpoint; full release acceptance, translator certification,
+consumer adoption and complete consumer coverage remain open.
+
+## UE-74: intact native receipts across dependency contexts
+
+Measured full-campaign and Factory registers held 34 common decisions. Eight
+differed only in their rooted context observation; their original digest,
+decision, cause and observed axiom fields were unchanged. Replacing the active
+context discarded a previously verified observation and caused verification
+to repeat when switching views.
+
+The actual SDK regression reproduced that loss using identical Rust code in two
+explicitly bound resource-provenance contexts. It now retains complete prior
+records when a current decision is displaced. Admission and policy selection
+search both stores using the unchanged exact-digest/rooted-context rule. No
+context is synthesized, no proof status is altered, and a wrong rooted binding
+does not fall back to an equal legacy digest.
+
+The regression passed in 108.97 seconds: both contexts were actually decided,
+four subsequent alternations performed zero verifier runs and preserved all
+register bytes, and imports of the original snapshots gave two further zero-run
+replays. A corrupted historical context was refused; changing a reached source
+definition required a new SDK decision. Parser/import tests reject malformed
+contexts, records and axiom policies, and missing or malformed imports leave
+the original target intact. Empty-history registers retain their existing
+serialization, covered by the 16 CLI tests and committed byte comparisons.
+
+The `prove --prior-verdicts` option imports verifier-written registers without
+replacing current observations; imports are parsed before an atomic target
+replacement. The delivery driver binds each imported file's path and digest
+before invoking this interface. Compiler fixture setup uses Cargo's offline
+lock writer when a fixture has no lock; production locked-input checks remain
+intact. Three focused verdict tests, CLI and conformance checks, strict Clippy,
+model/template/SDK-lock checks passed. The normal self-model writer refreshed
+the CLI source anchors and release binding, and its check passed. Full release
+acceptance, translator certification and consumer adoption remain open.
+
+## UE-75: balanced signed source carrier kernels
+
+The registered failing constructor scenario refused a native word stored in an
+SDK signed source field. A single width-driven boundary now composes the pinned
+SDK's Int64 bit operations into shared, content-bound decoding definitions. The
+same conversion serves construction, source-call arguments and mutable field
+updates at i8, i16, i32 and i64. Balanced expressions preserve the SDK's semantic
+nesting limits; no SDK limit, compiler semantics or operation registry changed.
+
+The SDK regression passed 12 native decisions and 120 executable Rust boundary
+comparisons in 145.52 seconds, including returned results and stored state.
+The SDK rejected a planted wrong result with LLV7002. Replacing an authoritative
+signed source field with bool leaves the original compiler input refused.
+The prior aggregate regression now accepts the complete compatible boundary and
+retains its incompatible-field negative test. The fixed-field regression passed
+with the newly admitted constructors and its previous read/call comparisons.
+Focused codec, all 16 CLI, conformance, strict Clippy, model/template/SDK-lock and
+self-model checks passed. These fixture decisions do not establish additional
+consumer coverage; the guarded consumer campaign measures that separately.
+Full release acceptance, translator certification and consumer adoption are open.
+
+## UE-76: hygienic structural carrier composition
+
+The registered red fixture stopped at a nested signed collection field. The
+common boundary now composes admitted scalar codecs through products, lists,
+options, results and collection entries. Each helper preserves constructors,
+list length and entry order by structural recursion. Its identity binds the
+complete carrier types and the selected generated bindings, so an unrelated
+namespace addition does not rename an unaffected helper. Integer obligations
+remain in shared mathematical kernels rather than repeated element expressions.
+
+The preceding consumer attempt exposed a distinct structural hygiene failure:
+the SDK's LLT4001 refused a generated `raw` parameter colliding with a source
+declaration, before recording any function verdict. Shared codec and structural
+bindings now allocate against the existing declaration namespace. The SDK
+regression includes declarations named after the generated bindings, so this
+class of capture is exercised along with the complete transport.
+
+All eight native fixture functions and 48 executable Rust comparisons passed
+in 93.34 seconds, including empty collections, None, both Result constructors,
+signed extrema, entry order, constructors, calls and mutable final state. The
+SDK rejected a planted changed value with LLV7002. Changing the authoritative
+element to bool or the collection identity to HashMap leaves the old MIR
+refused. The comparison checks every element and constructor explicitly because
+the SDK does not promise synthesized DecidableEq instances for generated records.
+
+The coupled aggregate, signed-slot, fixed-field and reverse-carrier regressions
+passed, including the existing i128/pointer-width cases. Focused codec tests,
+all 16 CLI tests, conformance checks, strict Clippy and model/template/SDK-lock
+checks passed. Generated self-model consistency is checked by the existing gate.
+Consumer coverage is measured separately by the guarded production campaign;
+these fixture results do not add to its lifted count. Full release acceptance,
+translator certification and consumer adoption remain open.
+
+## UE-77: explicit applications at every source signature arity
+
+The expanded carrier campaign stopped with LLT4001: a parameterless source
+callee was emitted as a bare local even though its declaration was present.
+A neutral regression reproduced the same failure before implementation. The
+common compiler call builder now emits an explicit SDK application for the
+empty argument list, as it already did for nonempty argument lists. Dependency
+registration and result/state representation checks remain in the same path.
+
+The actual SDK regression passed four native functions and 16 executable Rust
+comparisons for ordinary results, constructed fields and mutable final state,
+including zero and maximum-u8 loop counts. The SDK rejected a planted wrong
+result. Changing the source boolean definition made the three affected native
+functions unavailable under the old decisions and required three new actual
+SDK decisions; the independent numeric caller retained its original decision.
+The complete regression passed in 134.35 seconds.
+
+All 13 focused lowering tests, 16 CLI tests, conformance checks, strict Clippy,
+model/template/SDK-lock and generated self-model checks passed. Completed native
+decisions from the interrupted consumer run are retained for exact-input reuse.
+Its failed question acquired no verdict and is rerun only after this structural
+cause changes. Consumer coverage, full release acceptance, translator
+certification and consumer adoption remain separately measured and open.
+
+## UE-78: preserve compiler definition identities
+
+The registered regression failed before implementation because multiple trait
+and inherent implementations erased to the same owner/method path. MIR loading
+now preserves the existing compiler/source embedding key alongside the ordinary
+path index. Colliding methods bind through their registered implementation file,
+line, column, module and method; the ordinary index remains unchanged for unique
+paths. Duplicate compiler source identities are removed from both indexes.
+Qualified trait fallback also requires a registered trait implementation, so an
+inherent method cannot become a trait provider merely by sharing its name.
+
+The SDK regression passed three native method decisions and nine executable
+Rust comparisons across two `From` argument types and an inherent method. A
+planted incorrect result was rejected with LLV7002. The complete regression ran
+in 94.36 seconds. A separate loader control checks that repeated compiler source
+identities become ambiguous. Consumer gains and full release acceptance are
+measured separately; these fixtures alone do not complete consumer functions.
+
+Focused dependency checks passed: the duplicate-identity loader control, all
+13 lowering tests, all 16 CLI tests, repo-conformance, strict workspace/all-target
+Clippy, generated model validation, immutable template/SDK-lock checks and the
+generated self-model check. Complete `just vv` and UE-18 certification remain
+the release boundary; no release completion is inferred from focused checks.
+
+## UE-79: coherent compiler/source call identities
+
+The registered regression failed before implementation on a compiler-qualified
+trait call whose registered provider existed under source spelling. A shared
+identity import now binds compiler references through the existing Rust name
+resolver before value-carrier erasure. It preserves nominal ownership, trait
+identity, closed arguments, array lengths, tuple shape and reference mutability.
+Direct calls, function-valued operands and captured closure bodies share the
+same dependency binding. Repeated or unresolved identities are refused rather
+than resolved by a same-named inherent method.
+
+The regression also exposed two distinct traits sharing one unqualified trait
+reference in the source register. The common ingestion pass now qualifies only
+those colliding references with their declared paths; existing unambiguous
+function identities remain stable. This adds no operation-specific behavior or
+standard-library semantic entry. Package visibility is computed once per
+immutable resolver and reused across identity imports.
+Compiler imports are indexed by their registered function question, and captured
+closures inherit their original source scope. Generic parameters cannot acquire
+the meaning of a concrete type with the same name in another scope.
+
+The SDK regression passed seven native caller decisions and 21 executable Rust
+comparisons across overloaded local and standard traits, an unrelated trait
+also named `From`, and an inherent method. The SDK rejected a planted incorrect
+result with LLV7002. The full regression took 216.19 seconds. Separate controls
+preserve array lengths and reference mutability, distinguish arrays from vector
+storage, and retain function-valued compiler references. Consumer progress,
+complete `just vv`, UE-18 certification and adoption remain separately measured.
+
+The final scoped SDK regression passed again in 52.18 seconds with the original
+native decision register retained. All 20 name-resolution controls, nine source
+ingestion controls, 13 lowering tests, the compiler-reference control, 16 CLI
+tests, repo-conformance and strict workspace/all-target Clippy passed. Generated
+model, immutable template/SDK-lock and self-model checks passed; the self-model
+writer regenerated the moved source citation. Generic-parameter, nominal-alias,
+value/type namespace and unknown-type controls are included in that boundary.
+
+## UE-80: shared kernel policy ownership
+
+The consumer's native campaign completed 12 successful decisions with no new
+refusals, but full-project verification rejected shared integer codec theorem
+policies with LLV7005. The original SDK observation already existed in the
+native register. The projection selected the first auxiliary owner and dropped
+a later owner's observation; an owner can also move to source lifting while
+its kernel remains needed by native callers.
+
+A registered unit regression reproduced the owner-order failure before the
+fix. Shared auxiliary assembly now preserves current exact-input observations
+for identical declaration text independently of emission order. Retained
+observations also remain available as policy hints when their former owner no
+longer emits a native body. Hints do not admit a function or changed model:
+original digest/context matching and actual SDK exact-policy checks remain
+mandatory. The kernel statements and proofs are not edited to satisfy a policy.
+
+The controls cover both owner orders, retained hints, an explicit empty observed
+policy overriding a hint, and refusal to transfer a current observation between
+different declaration bodies. These controls use synthetic policy metadata;
+the consumer's original SDK receipts supply actual verification evidence.
+
+The ownership controls, all 16 CLI tests, repo-conformance, strict Clippy,
+generated model, template/SDK-lock and self-model checks passed. The next
+consumer checkpoint retains the completed native decisions and rechecks the
+assembled project through the unchanged SDK acceptance boundary.

@@ -1,0 +1,1173 @@
+\begin{lexlean}{Behavior}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{uorust.titles@1.0.0}
+\importmodule{Prelude}
+\title{Lifted Rust behavior}
+\begin{semanticmodule}
+structure{
+  name: Band,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: low, type: Nat}, {name: high, type: Nat}]
+}
+
+inductive{
+  name: CmpOrdering,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Less, fields: []}, {name: Equal, fields: []}, {name: Greater, fields: []}]
+}
+
+inductive{
+  name: ConfigError,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Unreadable, fields: []}, {name: NotANumber, fields: []}]
+}
+
+structure{
+  name: Labelled,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: label, type: String}, {name: band, type: Band}]
+}
+
+inductive{
+  name: Mode,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Idle, fields: []}, {name: Heating, fields: []}, {name: Cooling, fields: []}]
+}
+
+inductive{
+  name: Priority,
+  type_parameters: [],
+  parameters: [],
+  constructors: [{name: Low, fields: []}, {name: Normal, fields: []}, {name: Urgent, fields: []}]
+}
+
+structure{
+  name: Request,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: priority, type: Priority}, {name: room, type: String}]
+}
+
+structure{
+  name: Room,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: name, type: String}, {name: reading, type: Nat}]
+}
+
+structure{
+  name: TupleBoolNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: Bool}, {name: item1, type: Nat}]
+}
+
+structure{
+  name: TupleNatBoolBool,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: Nat}, {name: item1, type: Bool}, {name: item2, type: Bool}]
+}
+
+structure{
+  name: TupleNatNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: Nat}, {name: item1, type: Nat}]
+}
+
+structure{
+  name: TupleStringNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: String}, {name: item1, type: Nat}]
+}
+
+structure{
+  name: TupleStringString,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: String}, {name: item1, type: String}]
+}
+
+structure{
+  name: TupleStringTupleNatNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: String}, {name: item1, type: TupleNatNat}]
+}
+
+structure{
+  name: TupleBandBool,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: Band}, {name: item1, type: Bool}]
+}
+
+structure{
+  name: TuplePriorityNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: Priority}, {name: item1, type: Nat}]
+}
+
+structure{
+  name: TupleTuplePriorityNatNat,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: item0, type: TuplePriorityNat}, {name: item1, type: Nat}]
+}
+
+definition{
+  name: ordering_is_Equal,
+  parameters: [value : CmpOrdering],
+  result: Bool,
+  body: (match value
+    | CmpOrdering.Less => false
+    | CmpOrdering.Equal => true
+    | CmpOrdering.Greater => false)
+}
+
+definition{
+  name: compare_Priority,
+  parameters: [left : Priority, right : Priority],
+  result: CmpOrdering,
+  body: (match left
+    | Priority.Low => (match right
+      | Priority.Low => (ctor CmpOrdering.Equal)
+      | Priority.Normal => (ctor CmpOrdering.Less)
+      | Priority.Urgent => (ctor CmpOrdering.Less))
+    | Priority.Normal => (match right
+      | Priority.Low => (ctor CmpOrdering.Greater)
+      | Priority.Normal => (ctor CmpOrdering.Equal)
+      | Priority.Urgent => (ctor CmpOrdering.Less))
+    | Priority.Urgent => (match right
+      | Priority.Low => (ctor CmpOrdering.Greater)
+      | Priority.Normal => (ctor CmpOrdering.Greater)
+      | Priority.Urgent => (ctor CmpOrdering.Equal)))
+}
+
+definition{
+  name: compare_Nat,
+  parameters: [left : Nat, right : Nat],
+  result: CmpOrdering,
+  body: (if (left <? right) then (ctor CmpOrdering.Less) else (if (left =? right) then (ctor CmpOrdering.Equal) else (ctor CmpOrdering.Greater)))
+}
+
+definition{
+  name: compare_TuplePriorityNat,
+  parameters: [left : TuplePriorityNat, right : TuplePriorityNat],
+  result: CmpOrdering,
+  body: (match (compare_Priority (project left item0) (project right item0))
+    | CmpOrdering.Less => (ctor CmpOrdering.Less)
+    | CmpOrdering.Equal => (match (compare_Nat (project left item1) (project right item1))
+      | CmpOrdering.Less => (ctor CmpOrdering.Less)
+      | CmpOrdering.Equal => (ctor CmpOrdering.Equal)
+      | CmpOrdering.Greater => (ctor CmpOrdering.Greater))
+    | CmpOrdering.Greater => (ctor CmpOrdering.Greater))
+}
+
+definition{
+  name: width,
+  parameters: [band : Band],
+  result: (Option Nat),
+  body: (if ((project band low) <=? (project band high)) then (ctor Option.some [Nat] (prim subtract (project band high) (project band low) : Nat)) else (ctor Option.none [Nat]))
+}
+
+definition{
+  name: checkedMidpoint,
+  parameters: [band : Band],
+  result: (Option Nat),
+  body: (match (if (((project band low) + (project band high)) <? 4294967296) then (ctor Option.some [Nat] ((project band low) + (project band high))) else (ctor Option.none [Nat]))
+    | Option.none => (ctor Option.none [Nat])
+    | Option.some sum => (ctor Option.some [Nat] (prim quotient sum 2 0 : Nat)))
+}
+
+definition{
+  name: tick,
+  parameters: [counter : Nat],
+  result: Nat,
+  body: (prim remainder (counter + 1) 256 0 : Nat)
+}
+
+definition{
+  name: shortfall,
+  parameters: [band : Band, current : Nat],
+  result: Nat,
+  body: (prim subtract (project band low) current : Nat)
+}
+
+definition{
+  name: delta,
+  parameters: [before : Int64, after : Int64],
+  result: (Option Int64),
+  body: (prim checked_subtract after before : (Option Int64))
+}
+
+definition{
+  name: checkedValue,
+  parameters: [band : Band],
+  result: TupleBandBool,
+  body: (record TupleBandBool {item0 := band, item1 := ((project band low) <=? (project band high))})
+}
+
+definition{
+  name: isCelsius,
+  parameters: [unit : String],
+  result: Bool,
+  body: ((prim equal unit "C" : Bool) || (prim equal unit "celsius" : Bool))
+}
+
+definition{
+  name: above,
+  parameters: [readings : (List Nat), target : Nat],
+  result: Nat,
+  body: (match readings
+    | List.nil => 0
+    | List.cons firstValue1 rest => (if (target <? firstValue1) then (if (((above rest target) + 1) <? 4294967296) then ((above rest target) + 1) else 4294967295) else (above rest target))),
+  recursive_argument: readings
+}
+
+definition{
+  name: firstReading,
+  parameters: [readings : (List Nat)],
+  result: (Option Nat),
+  body: (prim index readings 0 : (Option Nat))
+}
+
+definition{
+  name: targetOr,
+  parameters: [setting : (Option Nat), default : Nat],
+  result: Nat,
+  body: (match setting | Option.none => default | Option.some value1 => value1)
+}
+
+definition{
+  name: heatFor,
+  parameters: [band : (Result Band ConfigError), current : Nat],
+  result: (Result Bool ConfigError),
+  body: (match band
+    | Result.ok band1 => (ctor Result.ok [Bool, ConfigError] (current <? (project band1 low)))
+    | Result.error error1 => (ctor Result.error [Bool, ConfigError] error1))
+}
+
+definition{
+  name: fanLabel,
+  parameters: [speed : Nat],
+  result: String,
+  body: (if (speed =? 0) then "off" else (if ((speed =? 1) || (speed =? 2)) then "low" else "high"))
+}
+
+definition{
+  name: lowOf,
+  parameters: [band : (Result Band ConfigError)],
+  result: (Result Nat ConfigError),
+  body: (match band
+    | Result.ok band1 => (ctor Result.ok [Nat, ConfigError] (project band1 low))
+    | Result.error error1 => (ctor Result.error [Nat, ConfigError] error1))
+}
+
+definition{
+  name: notANumber,
+  parameters: [error : ConfigError],
+  result: Bool,
+  body: (match error | ConfigError.Unreadable => false | ConfigError.NotANumber => true)
+}
+
+definition{
+  name: withHigh,
+  parameters: [band : Band, high : Nat],
+  result: Band,
+  body: (record Band {low := (project band low), high := high})
+}
+
+definition{
+  name: withLow,
+  parameters: [band : Band, low : Nat],
+  result: Band,
+  body: (let out : Band := band; (let out1 : Band := (record Band {low := low, high := (project out high)}); out1))
+}
+
+definition{name: labelOf, parameters: [view : Labelled], result: String, body: (project view label)}
+
+definition{
+  name: clamped,
+  parameters: [band : Band, reading : Nat],
+  result: TupleNatBoolBool,
+  body: (let value : Nat := reading; (let moved : Bool := false; (let narrow : Bool := false; (let state1 : TupleBoolNat := (if (value <? (project band low)) then (let value1 : Nat := (project band low); (let moved1 : Bool := true; (record TupleBoolNat {item0 := moved1, item1 := value1}))) else (record TupleBoolNat {item0 := moved, item1 := value})); (let moved2 : Bool := (project state1 item0); (let value2 : Nat := (project state1 item1); (let state2 : TupleBoolNat := (if ((project band high) <? value2) then (let value3 : Nat := (project band high); (let moved3 : Bool := true; (record TupleBoolNat {item0 := moved3, item1 := value3}))) else (record TupleBoolNat {item0 := moved2, item1 := value2})); (let moved4 : Bool := (project state2 item0); (let value4 : Nat := (project state2 item1); (let state4 : Bool := (match (width band)
+    | Option.none => narrow
+    | Option.some w => (let state3 : Bool := (if (w <? 2) then (let narrow1 : Bool := true; narrow1) else narrow); state3)); (let state6 : TupleBoolNat := (if state4 then (let value5 : Nat := (project band low); (record TupleBoolNat {item0 := state4, item1 := value5})) else (let state5 : Bool := (if moved4 then (let narrow2 : Bool := false; narrow2) else state4); (record TupleBoolNat {item0 := state5, item1 := value4}))); (let narrow3 : Bool := (project state6 item0); (let value6 : Nat := (project state6 item1); (record TupleNatBoolBool {item0 := value6, item1 := moved4, item2 := narrow3}))))))))))))))
+}
+
+definition{
+  name: parseTarget,
+  parameters: [text : String],
+  result: (Result Nat ConfigError),
+  body: (match (Prelude::textParseNat (Prelude::textTrim text) 4294967295)
+    | Result.ok value1 => (ctor Result.ok [Nat, ConfigError] value1)
+    | Result.error item1 => (ctor Result.error [Nat, ConfigError] (ctor ConfigError.NotANumber))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: shouldHeat,
+  parameters: [current : Nat, target : Nat],
+  result: Bool,
+  body: (current <? target)
+}
+
+definition{
+  name: withinBand,
+  parameters: [current : Nat, low : Nat, high : Nat],
+  result: Bool,
+  body: ((low <=? current) && (current <=? high))
+}
+
+definition{
+  name: nextMode,
+  parameters: [mode : Mode, coldArg : Bool, hot : Bool],
+  result: Mode,
+  body: (match mode
+    | Mode.Idle => (if coldArg then (ctor Mode.Heating) else (if hot then (ctor Mode.Cooling) else (ctor Mode.Idle)))
+    | Mode.Heating => (if coldArg then (ctor Mode.Heating) else (ctor Mode.Idle))
+    | Mode.Cooling => (if hot then (ctor Mode.Cooling) else (ctor Mode.Idle)))
+}
+
+definition{
+  name: halt,
+  parameters: [mode : Mode],
+  result: Mode,
+  body: (match mode
+    | Mode.Idle => (ctor Mode.Idle)
+    | Mode.Heating => (ctor Mode.Idle)
+    | Mode.Cooling => (ctor Mode.Idle))
+}
+
+definition{
+  name: midpoint,
+  parameters: [low : Nat, high : Nat],
+  result: Nat,
+  body: (prim quotient (low + high) 2 0 : Nat)
+}
+
+definition{
+  name: roomIsCold,
+  parameters: [selfValue : Room, floor : Nat],
+  result: Bool,
+  body: ((project selfValue reading) <? floor)
+}
+
+definition{
+  name: roomReread,
+  parameters: [selfValue : Room, reading : Nat],
+  result: Room,
+  body: (record Room {name := (project selfValue name), reading := reading})
+}
+
+definition{
+  name: roomLabel,
+  parameters: [selfValue : Room],
+  result: String,
+  body: (if (prim equal (project selfValue name) "" : Bool) then "unnamed" else (project selfValue name))
+}
+
+definition{
+  name: anyColdAny1,
+  parameters: [items1 : (List Room), floor : Nat],
+  result: Bool,
+  body: (match items1
+    | List.nil => false
+    | List.cons room rest1 => (if ((project room reading) <? floor) then true else (anyColdAny1 rest1 floor))),
+  recursive_argument: items1
+}
+
+definition{
+  name: anyCold,
+  parameters: [rooms : (List Room), floor : Nat],
+  result: Bool,
+  body: (anyColdAny1 rooms floor)
+}
+
+definition{
+  name: allWithinAll1,
+  parameters: [items1 : (List Nat), high : Nat, low : Nat],
+  result: Bool,
+  body: (match items1
+    | List.nil => true
+    | List.cons r rest1 => (if ((low <=? r) && (r <=? high)) then (allWithinAll1 rest1 high low) else false)),
+  recursive_argument: items1
+}
+
+definition{
+  name: allWithin,
+  parameters: [readings : (List Nat), low : Nat, high : Nat],
+  result: Bool,
+  body: (allWithinAll1 readings high low)
+}
+
+definition{
+  name: firstColdFind1,
+  parameters: [items1 : (List Room), floor : Nat],
+  result: (Option Room),
+  body: (match items1
+    | List.nil => (ctor Option.none [Room])
+    | List.cons room rest1 => (if (roomIsCold room floor) then (ctor Option.some [Room] room) else (firstColdFind1 rest1 floor))),
+  recursive_argument: items1
+}
+
+definition{
+  name: firstCold,
+  parameters: [rooms : (List Room), floor : Nat],
+  result: (Option Room),
+  body: (firstColdFind1 rooms floor)
+}
+
+definition{
+  name: highestFold1,
+  parameters: [items1 : (List Nat), best : Nat],
+  result: Nat,
+  body: (match items1
+    | List.nil => best
+    | List.cons r rest1 => (highestFold1 rest1 (if (best <=? r) then r else best))),
+  recursive_argument: items1
+}
+
+definition{
+  name: highest,
+  parameters: [readings : (List Nat)],
+  result: Nat,
+  body: (highestFold1 readings 0)
+}
+
+definition{
+  name: scheduledContains1,
+  parameters: [items1 : (List String), needle1 : String],
+  result: Bool,
+  body: (match items1
+    | List.nil => false
+    | List.cons item1 rest1 => (if (prim equal item1 needle1 : Bool) then true else (scheduledContains1 rest1 needle1))),
+  recursive_argument: items1
+}
+
+definition{
+  name: scheduled,
+  parameters: [schedule : (List String), room : String],
+  result: Bool,
+  body: (scheduledContains1 schedule room)
+}
+
+definition{
+  name: targetOfGet1,
+  parameters: [items1 : (List TupleStringNat), needle1 : String],
+  result: (Option Nat),
+  body: (match items1
+    | List.nil => (ctor Option.none [Nat])
+    | List.cons item1 rest1 => (if (prim equal (project item1 item0) needle1 : Bool) then (ctor Option.some [Nat] (project item1 item1)) else (targetOfGet1 rest1 needle1))),
+  recursive_argument: items1
+}
+
+definition{
+  name: targetOf,
+  parameters: [targets : (List TupleStringNat), room : String],
+  result: Nat,
+  body: (match (targetOfGet1 targets room) | Option.none => 18 | Option.some target => target)
+}
+
+definition{
+  name: hasTargetHas1,
+  parameters: [items1 : (List TupleStringNat), needle1 : String],
+  result: Bool,
+  body: (match items1
+    | List.nil => false
+    | List.cons item1 rest1 => (if (prim equal (project item1 item0) needle1 : Bool) then true else (hasTargetHas1 rest1 needle1))),
+  recursive_argument: items1
+}
+
+definition{
+  name: hasTarget,
+  parameters: [targets : (List TupleStringNat), room : String],
+  result: Bool,
+  body: (hasTargetHas1 targets room)
+}
+
+definition{
+  name: closedContains1,
+  parameters: [items1 : (List String), needle1 : String],
+  result: Bool,
+  body: (match items1
+    | List.nil => false
+    | List.cons item1 rest1 => (if (prim equal item1 needle1 : Bool) then true else (closedContains1 rest1 needle1))),
+  recursive_argument: items1
+}
+
+definition{
+  name: closed,
+  parameters: [rooms : (List String), room : String],
+  result: Bool,
+  body: (closedContains1 rooms room)
+}
+
+definition{
+  name: labelWidth,
+  parameters: [label : String],
+  result: Nat,
+  body: (prim length label : Nat),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: clamp,
+  parameters: [band : TupleNatNat, reading : Nat],
+  result: Nat,
+  body: (let pair1 : TupleNatNat := band; (let low : Nat := (project pair1 item0); (let high : Nat := (project pair1 item1); (if (high <? low) then reading else (if (reading <? low) then low else (if (reading <=? high) then reading else high))))))
+}
+
+definition{name: blank, parameters: [], result: String, body: ""}
+
+definition{
+  name: lineRoomPart1,
+  parameters: [line : String],
+  result: (Option TupleStringString),
+  body: (match (Prelude::textFirst line "=")
+    | Option.none => (ctor Option.none [TupleStringString])
+    | Option.some at1 => (ctor Option.some [TupleStringString] (record TupleStringString {item0 := (Prelude::textSlice line 0 at1), item1 := (Prelude::textSlice line (at1 + (Prelude::textLength "=")) (Prelude::textLength line))}))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: lineRoom,
+  parameters: [line : String],
+  result: (Option String),
+  body: (match (lineRoomPart1 line)
+    | Option.none => (ctor Option.none [String])
+    | Option.some tried1 => (let pair1 : TupleStringString := tried1; (let name : String := (project pair1 item0); (let item1 : String := (project pair1 item1); (let name1 : String := (Prelude::textTrim name); (if (prim equal name1 "" : Bool) then (ctor Option.none [String]) else (ctor Option.some [String] name1))))))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: lineTargetPart1,
+  parameters: [line : String],
+  result: (Option TupleStringString),
+  body: (match (Prelude::textLast line "=")
+    | Option.none => (ctor Option.none [TupleStringString])
+    | Option.some at1 => (ctor Option.some [TupleStringString] (record TupleStringString {item0 := (Prelude::textSlice line 0 at1), item1 := (Prelude::textSlice line (at1 + (Prelude::textLength "=")) (Prelude::textLength line))}))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: lineTarget,
+  parameters: [line : String],
+  result: (Option Nat),
+  body: (match (lineTargetPart1 line)
+    | Option.none => (ctor Option.none [Nat])
+    | Option.some tried1 => (let pair1 : TupleStringString := tried1; (let item1 : String := (project pair1 item0); (let value : String := (project pair1 item1); (match (Prelude::textParseNat (Prelude::textTrimEnd (Prelude::textTrimStart value)) 4294967295)
+      | Result.ok value1 => (ctor Option.some [Nat] value1)
+      | Result.error error1 => (ctor Option.none [Nat])))))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: tagPart1,
+  parameters: [text : String],
+  result: String,
+  body: (match (Prelude::textStripPrefix text "room:")
+    | Option.none => text
+    | Option.some value1 => value1),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: tagPart2,
+  parameters: [bare : String],
+  result: String,
+  body: (match (Prelude::textStripSuffix bare "!")
+    | Option.none => bare
+    | Option.some value2 => value2),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: tag,
+  parameters: [text : String],
+  result: String,
+  body: (let bare : String := (tagPart1 text); (let bare1 : String := (tagPart2 bare); (Prelude::textAsciiLower bare1))),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: isZone,
+  parameters: [label : String],
+  result: Bool,
+  body: (((Prelude::textEndsWith label "-zone") || (Prelude::textContains label "wing")) || (prim equal (Prelude::textAsciiUpper label) "ZONE" : Bool)),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: firstIsPart1,
+  parameters: [name : String, rooms : (List Room)],
+  result: (Option String),
+  body: (match (prim index rooms 0 : (Option Room))
+    | Option.none => (ctor Option.none [String])
+    | Option.some room => (ctor Option.some [String] (project room name)))
+}
+
+definition{
+  name: firstIs,
+  parameters: [rooms : (List Room), name : String],
+  result: Bool,
+  body: (let leftOption1 : (Option String) := (firstIsPart1 name rooms); (let rightOption1 : (Option String) := (ctor Option.some [String] name); (match leftOption1
+    | Option.none => (match rightOption1 | Option.none => true | Option.some right1 => false)
+    | Option.some left1 => (match rightOption1
+      | Option.none => false
+      | Option.some right1 => (prim equal left1 right1 : Bool)))))
+}
+
+definition{
+  name: slots,
+  parameters: [rooms : (List Room)],
+  result: Nat,
+  body: ((prim length rooms : Nat) + 1)
+}
+
+definition{
+  name: bandWidthsMap1,
+  parameters: [items1 : (List TupleStringTupleNatNat)],
+  result: (List Nat),
+  body: (match items1
+    | List.nil => (nil Nat)
+    | List.cons pair1 rest1 => (let item1 : String := (project pair1 item0); (let pair2 : TupleNatNat := (project pair1 item1); (let low : Nat := (project pair2 item0); (let high : Nat := (project pair2 item1); (cons (prim subtract high low : Nat) (bandWidthsMap1 rest1))))))),
+  recursive_argument: items1
+}
+
+definition{
+  name: bandWidths,
+  parameters: [bands : (List TupleStringTupleNatNat)],
+  result: (List Nat),
+  body: (bandWidthsMap1 bands)
+}
+
+definition{
+  name: saturatedTotal,
+  parameters: [readings : (List Nat)],
+  result: Nat,
+  body: (match readings
+    | List.nil => 0
+    | List.cons firstValue1 rest => (if ((firstValue1 + (saturatedTotal rest)) <? 4294967296) then (firstValue1 + (saturatedTotal rest)) else 4294967295)),
+  recursive_argument: readings
+}
+
+definition{
+  name: urgentAndNamed,
+  parameters: [request : Request],
+  result: Bool,
+  body: (match (project request priority)
+    | Priority.Low => false
+    | Priority.Normal => false
+    | Priority.Urgent => (if (not (prim equal (project request room) "" : Bool)) then true else false))
+}
+
+definition{
+  name: secondLast,
+  parameters: [readings : (List Nat)],
+  result: (Option Nat),
+  body: (let n : Nat := (prim length readings : Nat); (if (n <? 2) then (ctor Option.none [Nat]) else (prim index readings (prim subtract n 2 : Nat) : (Option Nat))))
+}
+
+definition{
+  name: aboveTen,
+  parameters: [reading : Nat],
+  result: Nat,
+  body: (if (10 <=? reading) then (prim subtract reading 10 : Nat) else 0)
+}
+
+definition{
+  name: warm,
+  parameters: [reading : Nat],
+  result: (Option Nat),
+  body: (if (18 <=? reading) then (ctor Option.some [Nat] reading) else (ctor Option.none [Nat]))
+}
+
+definition{
+  name: perRoom,
+  parameters: [totalArg : Nat, rooms : Nat],
+  result: Nat,
+  body: (if (rooms =? 0) then 0 else (if ((prim quotient totalArg rooms 0 : Nat) <=? (prim remainder totalArg rooms 0 : Nat)) then (prim remainder totalArg rooms 0 : Nat) else (prim quotient totalArg rooms 0 : Nat)))
+}
+
+definition{
+  name: leftOver,
+  parameters: [totalArg : Nat, rooms : Nat],
+  result: (Option Nat),
+  body: (if (rooms =? 0) then (ctor Option.none [Nat]) else (ctor Option.some [Nat] (prim remainder totalArg rooms 0 : Nat)))
+}
+
+definition{
+  name: filedName,
+  parameters: [name : String],
+  result: String,
+  body: (Prelude::textAsciiLower name),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: sameFile,
+  parameters: [a : String, b : String],
+  result: Bool,
+  body: (prim equal (filedName a) (filedName b) : Bool),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: countByte,
+  parameters: [rooms : Nat],
+  result: Nat,
+  body: (prim remainder rooms 256 0 : Nat)
+}
+
+definition{name: codeIndex, parameters: [code : Nat], result: Nat, body: code}
+
+definition{
+  name: inComfortBand,
+  parameters: [reading : Nat],
+  result: Bool,
+  body: (let low : Nat := 18; (let high : Nat := 24; ((low <=? reading) && (reading <=? high))))
+}
+
+definition{
+  name: pressing,
+  parameters: [priority : Priority],
+  result: Bool,
+  body: (match priority
+    | Priority.Low => false
+    | Priority.Normal => false
+    | Priority.Urgent => true)
+}
+
+definition{
+  name: floors,
+  parameters: [low : Nat, high : Nat],
+  result: (List Nat),
+  body: (Prelude::natRange low (prim subtract high low : Nat))
+}
+
+definition{
+  name: readingWithin,
+  parameters: [reading : Nat, low : Nat, high : Nat],
+  result: Bool,
+  body: ((low <=? reading) && (reading <=? high))
+}
+
+definition{
+  name: bookedOrFirstPart1,
+  parameters: [fallbacks : (Option (List String))],
+  result: (Option String),
+  body: (match fallbacks
+    | Option.none => (ctor Option.none [String])
+    | Option.some tried2 => (prim index tried2 0 : (Option String)))
+}
+
+definition{
+  name: bookedOrFirst,
+  parameters: [booking : (Option String), fallbacks : (Option (List String))],
+  result: (Option String),
+  body: (match booking
+    | Option.none => (bookedOrFirstPart1 fallbacks)
+    | Option.some value1 => (ctor Option.some [String] value1))
+}
+
+definition{
+  name: namedOrSpare,
+  parameters: [named : (Option String), spare : (Option String)],
+  result: (Option String),
+  body: (match named
+    | Option.none => spare
+    | Option.some value1 => (ctor Option.some [String] value1))
+}
+
+definition{
+  name: startsUnnamedPart1,
+  parameters: [rooms : (List String)],
+  result: Bool,
+  body: (match (prim index rooms 0 : (Option String))
+    | Option.none => true
+    | Option.some value1 => false)
+}
+
+definition{
+  name: startsUnnamedPart2,
+  parameters: [rooms : (List String)],
+  result: String,
+  body: (match (prim index rooms 0 : (Option String))
+    | Option.none => ""
+    | Option.some item1 => item1)
+}
+
+definition{
+  name: startsUnnamed,
+  parameters: [rooms : (List String)],
+  result: Bool,
+  body: (if (startsUnnamedPart1 rooms) then true else (prim equal (startsUnnamedPart2 rooms) "" : Bool))
+}
+
+definition{
+  name: setPointGet1,
+  parameters: [items1 : (List TupleTuplePriorityNatNat), needle1 : TuplePriorityNat],
+  result: (Option Nat),
+  body: (match items1
+    | List.nil => (ctor Option.none [Nat])
+    | List.cons item1 rest1 => (if (ordering_is_Equal (compare_TuplePriorityNat (project item1 item0) needle1)) then (ctor Option.some [Nat] (project item1 item1)) else (setPointGet1 rest1 needle1))),
+  recursive_argument: items1
+}
+
+definition{
+  name: setPoint,
+  parameters: [table : (List TupleTuplePriorityNatNat), priority : Priority, hour : Nat],
+  result: (Option Nat),
+  body: (setPointGet1 table (record TuplePriorityNat {item0 := priority, item1 := hour}))
+}
+
+definition{
+  name: openingBand,
+  parameters: [room : Room, target : Nat],
+  result: Band,
+  body: (record Band {low := (project room reading), high := target})
+}
+
+definition{
+  name: modeFor,
+  parameters: [coldArg : Bool, hot : Bool],
+  result: Mode,
+  body: (if coldArg then (if hot then (ctor Mode.Idle) else (ctor Mode.Heating)) else (if hot then (ctor Mode.Cooling) else (ctor Mode.Idle)))
+}
+
+definition{
+  name: comfortablePart1,
+  parameters: [low : Nat],
+  result: Bool,
+  body: (let t : Nat := low; ((18 <=? t) && (t <=? 24)))
+}
+
+definition{
+  name: comfortablePart2,
+  parameters: [high : Nat],
+  result: Bool,
+  body: (let t : Nat := high; ((18 <=? t) && (t <=? 24)))
+}
+
+definition{
+  name: comfortable,
+  parameters: [band : Band],
+  result: Bool,
+  body: (let low : Nat := (project band low); (let high : Nat := (project band high); ((comfortablePart1 low) && (comfortablePart2 high))))
+}
+
+definition{
+  name: steady,
+  parameters: [coldArg : Bool, hot : Bool, occupied : Bool],
+  result: Bool,
+  body: (if coldArg then (if occupied then false else true) else (if hot then (if occupied then false else true) else true))
+}
+
+definition{name: firstConst, parameters: [], result: String, body: "hall"}
+
+definition{name: firstValue, parameters: [], result: String, body: (firstConst)}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount3Root,
+  parameters: [],
+  result: Bool,
+  body: ((above (cons 17 (cons 19 (cons 23 (nil Nat)))) 18) =? 2)
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount5Root,
+  parameters: [],
+  result: Bool,
+  body: ((targetOr (ctor Option.none [Nat]) 21) =? 21)
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount11Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (labelOf (record Labelled {label := "night", band := (record Band {low := 16, high := 18})})) "night" : Bool)
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount13Root,
+  parameters: [],
+  result: Bool,
+  body: (notANumber (ctor ConfigError.NotANumber))
+}
+
+definition{
+  name: acceptThermoCoreBandsMeasureAndCount14Root,
+  parameters: [],
+  result: Bool,
+  body: (not (notANumber (ctor ConfigError.Unreadable)))
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings0Root,
+  parameters: [],
+  result: Bool,
+  body: ((tick 255) =? 0)
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings4Root,
+  parameters: [],
+  result: Bool,
+  body: (isCelsius "C")
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings5Root,
+  parameters: [],
+  result: Bool,
+  body: (not (isCelsius "F"))
+}
+
+definition{
+  name: acceptThermoCoreCountersAndSignedReadings6Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (fanLabel 2) "low" : Bool)
+}
+
+definition{
+  name: acceptThermoCoreHeatsWhenCold0Root,
+  parameters: [],
+  result: Bool,
+  body: (shouldHeat 18 21)
+}
+
+definition{
+  name: acceptThermoCoreHeatsWhenCold1Root,
+  parameters: [],
+  result: Bool,
+  body: (not (shouldHeat 22 21))
+}
+
+definition{
+  name: acceptThermoCoreBandIsInclusive0Root,
+  parameters: [],
+  result: Bool,
+  body: (withinBand 5 5 9)
+}
+
+definition{
+  name: acceptThermoCoreBandIsInclusive1Root,
+  parameters: [],
+  result: Bool,
+  body: (not (withinBand 10 5 9))
+}
+
+definition{
+  name: acceptThermoCoreMidpointOfABand0Root,
+  parameters: [],
+  result: Bool,
+  body: ((midpoint 4 8) =? 6)
+}
+
+definition{
+  name: acceptThermoCoreTheRosterReadsItsRooms0Root,
+  parameters: [],
+  result: Bool,
+  body: ((slots (nil Room)) =? 1)
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps1Root,
+  parameters: [],
+  result: Bool,
+  body: ((highest (cons 3 (cons 9 (cons 4 (nil Nat))))) =? 9)
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps5Root,
+  parameters: [],
+  result: Bool,
+  body: ((labelWidth "hall") =? 4),
+  axioms: [Classical.choice, Quot.sound, propext]
+}
+
+definition{
+  name: acceptThermoCoreTheRosterFoldsAndClamps8Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (blank) "" : Bool)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom6Root,
+  parameters: [],
+  result: Bool,
+  body: ((saturatedTotal (cons 1 (cons 2 (nil Nat)))) =? 3)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom7Root,
+  parameters: [],
+  result: Bool,
+  body: (not (urgentAndNamed (record Request {priority := (ctor Priority.Low), room := "hall"})))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom9Root,
+  parameters: [],
+  result: Bool,
+  body: ((aboveTen 12) =? 2)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom10Root,
+  parameters: [],
+  result: Bool,
+  body: (match (warm 20) | Option.none => false | Option.some held => (held =? 20))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom22Root,
+  parameters: [],
+  result: Bool,
+  body: (match (bookedOrFirst (ctor Option.none [String]) (ctor Option.none [(List String)]))
+    | Option.none => true
+    | Option.some held => false)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom23Root,
+  parameters: [],
+  result: Bool,
+  body: (match (namedOrSpare (ctor Option.none [String]) (ctor Option.some [String] "den"))
+    | Option.none => false
+    | Option.some held => (prim equal held "den" : Bool))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom27Root,
+  parameters: [],
+  result: Bool,
+  body: (readingWithin 20 18 20)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom28Root,
+  parameters: [],
+  result: Bool,
+  body: (not (readingWithin 21 18 20))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom29Root,
+  parameters: [],
+  result: Bool,
+  body: (inComfortBand 20)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom30Root,
+  parameters: [],
+  result: Bool,
+  body: (not (inComfortBand 30))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom31Root,
+  parameters: [],
+  result: Bool,
+  body: (pressing (ctor Priority.Urgent))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom32Root,
+  parameters: [],
+  result: Bool,
+  body: ((countByte 300) =? 44)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom33Root,
+  parameters: [],
+  result: Bool,
+  body: ((codeIndex 7) =? 7)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom38Root,
+  parameters: [],
+  result: Bool,
+  body: ((perRoom 7 2) =? 3)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom39Root,
+  parameters: [],
+  result: Bool,
+  body: ((perRoom 7 0) =? 0)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom40Root,
+  parameters: [],
+  result: Bool,
+  body: (match (leftOver 7 0) | Option.none => true | Option.some held => false)
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom41Root,
+  parameters: [],
+  result: Bool,
+  body: (match (leftOver 7 3) | Option.none => false | Option.some held => (held =? 1))
+}
+
+definition{
+  name: acceptThermoCoreRequestsSortByPriorityThenRoom43Root,
+  parameters: [],
+  result: Bool,
+  body: (prim equal (firstValue) "hall" : Bool)
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm7Root,
+  parameters: [],
+  result: Bool,
+  body: (comfortable (record Band {low := 18, high := 22}))
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm8Root,
+  parameters: [],
+  result: Bool,
+  body: (not (comfortable (record Band {low := 16, high := 22})))
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm12Root,
+  parameters: [],
+  result: Bool,
+  body: (steady true false false)
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm13Root,
+  parameters: [],
+  result: Bool,
+  body: (steady false false true)
+}
+
+definition{
+  name: acceptThermoCoreNestedPatternsChooseTheArm14Root,
+  parameters: [],
+  result: Bool,
+  body: (not (steady true false true))
+}
+\end{semanticmodule}
+\end{lexlean}

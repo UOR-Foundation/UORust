@@ -83,11 +83,14 @@ fn derived_in(ty: &Ty, types: &Types, assumed: &BTreeSet<String>) -> bool {
         // its value, not as the natural: no derived total order holds.
         Ty::Int(_)
         | Ty::Integer(_)
+        | Ty::Unbounded
+        | Ty::Ratio
         | Ty::Float(_)
         | Ty::Signed(_)
         | Ty::ParseError
         | Ty::Path
-        | Ty::Fn(..) => false,
+        | Ty::Fn(..)
+        | Ty::Param(_) => false,
         Ty::Option(t) | Ty::List(t) | Ty::Set(t, true) => derived_in(t, types, assumed),
         Ty::Set(_, false) | Ty::Map(_, _, false) => false,
         Ty::Map(k, v, true) | Ty::Outcome(k, v) => {
@@ -230,6 +233,7 @@ fn emit(ty: &Ty, types: &Types, state: Emitted) -> Emitted {
             .any(|m| matches!(m, Ty::List(_)) || parts(m, types).contains(m));
     for m in &members {
         decls.push(Decl::Definition {
+            type_parameters: Vec::new(),
             name: name(m),
             parameters: vec![("left".into(), m.render()), ("right".into(), m.render())],
             result: ORDERING.into(),
@@ -422,13 +426,16 @@ fn body(ty: &Ty, types: &Types) -> Expr {
         },
         Ty::Int(_)
         | Ty::Integer(_)
+        | Ty::Unbounded
+        | Ty::Ratio
         | Ty::Float(_)
         | Ty::Signed(_)
         | Ty::ParseError
         | Ty::Path
         | Ty::Set(..)
         | Ty::Map(..)
-        | Ty::Fn(..) => Expr::Flat(ordering_value("Equal")),
+        | Ty::Fn(..)
+        | Ty::Param(_) => Expr::Flat(ordering_value("Equal")),
     }
 }
 
@@ -442,6 +449,7 @@ pub(crate) fn tests() -> Vec<Decl> {
     ORDERINGS
         .iter()
         .map(|v| Decl::Definition {
+            type_parameters: Vec::new(),
             name: is(v),
             parameters: vec![("value".into(), ORDERING.into())],
             result: "Bool".into(),
@@ -486,6 +494,7 @@ pub(crate) const REVERSE: &str = "reverse_Ordering";
 pub(crate) fn reverse() -> Decl {
     let flip = BTreeMap::from([("Less", "Greater"), ("Equal", "Equal"), ("Greater", "Less")]);
     Decl::Definition {
+        type_parameters: Vec::new(),
         name: REVERSE.into(),
         parameters: vec![("value".into(), ORDERING.into())],
         result: ORDERING.into(),
@@ -612,6 +621,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
     let less = is("Less");
     vec![
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_reflexive"),
             parameters: vec![("a".into(), t.clone())],
             statement: format!("(({compare} a a) = {})", ordering_value("Equal")),
@@ -619,6 +629,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
             axioms: Vec::new(),
         },
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_antisymmetric"),
             parameters: vec![("a".into(), t.clone()), ("b".into(), t.clone())],
             statement: format!("(({compare} a b) = ({REVERSE} ({compare} b a)))"),
@@ -626,6 +637,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
             axioms: Vec::new(),
         },
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_transitive"),
             parameters: vec![
                 ("a".into(), t.clone()),

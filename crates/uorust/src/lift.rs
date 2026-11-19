@@ -121,6 +121,17 @@ pub(crate) enum Ty {
     /// `Nat`: the width says what an operation may return, and is no part
     /// of how a value is held.
     Integer(Option<u32>),
+    /// An integer of a registered crate whose values are exactly the
+    /// mathematical integers (`num_bigint::BigInt`, see
+    /// [`crate::registered::readings`]): LexLean's `Int`, with no width
+    /// an operation could overflow.
+    Unbounded,
+    /// A ratio of two integers of no width as a registered crate stores it
+    /// (`num_rational::BigRational`, see [`crate::registered::readings`]):
+    /// the pair of its numerator and denominator, Lean's `(Int * Int)`. The
+    /// pair is the stored one, not a reduced one, so the lift reads no
+    /// equality or order of it: the crate's own compares values.
+    Ratio,
     /// The MIR path's signed integer of this many bits (`None` for
     /// `isize`), held as its two's-complement bit pattern in `Nat`: LexLean
     /// converts no `Nat` to a signed family, so a cast between the two
@@ -157,6 +168,10 @@ pub(crate) enum Ty {
     Set(Box<Ty>, bool),
     /// A pure function of its inputs: `&dyn Fn(A) -> R`, `impl Fn(A) -> R`.
     Fn(Vec<Ty>, Box<Ty>),
+    /// A type parameter of the definition being lifted, by its LexLean
+    /// name: LexLean's `'T`, which the definition binds and each call
+    /// instantiates explicitly.
+    Param(String),
 }
 
 impl Ty {
@@ -167,7 +182,8 @@ impl Ty {
             Self::Bool => "Bool".into(),
             Self::Nat(_) | Self::Float(_) | Self::Signed(_) | Self::Scalar => "Nat".into(),
             Self::Int(_) => "Int64".into(),
-            Self::Integer(_) => "Int".into(),
+            Self::Integer(_) | Self::Unbounded => "Int".into(),
+            Self::Ratio => "(Int * Int)".into(),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => format!("{PRELUDE}::ParseIntError"),
             Self::Path => format!("{PRELUDE}::FilePath"),
@@ -176,15 +192,9 @@ impl Ty {
             Self::Outcome(t, e) => format!("(Result {} {})", t.render(), e.render()),
             Self::List(t) | Self::Set(t, _) => format!("(List {})", t.render()),
             Self::Tuple(ts) => format!("Tuple{}", ts.iter().map(|t| t.tag()).collect::<String>()),
-            Self::Pair(ts) => format!(
-                "({})",
-                ts.iter()
-                    .map(|t| t.render())
-                    .collect::<Vec<String>>()
-                    .join(" * ")
-            ),
+            Self::Pair(ts) => product_types(ts),
             // The list of its entries, each the tuple of a key and a value.
-            Self::Map(k, v, _) => format!("(List Tuple{}{})", k.tag(), v.tag()),
+            Self::Map(..) => format!("(List {})", self.entry().render()),
             Self::Fn(ins, out) => format!(
                 "(Fn ({}) {})",
                 ins.iter()
@@ -193,13 +203,21 @@ impl Ty {
                     .join(" "),
                 out.render()
             ),
+            Self::Param(n) => format!("'{n}"),
         }
     }
 
     /// A map's entry: the tuple of its key and value.
-    fn entry(&self) -> Ty {
+    pub(crate) fn entry(&self) -> Ty {
         match self {
-            Self::Map(k, v, _) => Ty::Tuple(vec![(**k).clone(), (**v).clone()]),
+            Self::Map(k, v, _) => {
+                let fields = vec![(**k).clone(), (**v).clone()];
+                if fields.iter().any(|t| !t.parameters().is_empty()) {
+                    Ty::Pair(fields)
+                } else {
+                    Ty::Tuple(fields)
+                }
+            }
             other => other.clone(),
         }
     }
@@ -212,28 +230,61 @@ impl Ty {
             Self::Int(_) => "Int".into(),
             // `Int` is the tag of `Int64`; a name of the prefix no
             // workspace type lifts under tells the two apart.
-            Self::Integer(_) => INTEGER_TAG.into(),
+            Self::Integer(_) | Self::Unbounded => INTEGER_TAG.into(),
+            // The tag of the pair of two `Int`s, which it is.
+            Self::Ratio => format!("Pair{INTEGER_TAG}{INTEGER_TAG}"),
             Self::Str | Self::Char => "String".into(),
             Self::ParseError => "ParseIntError".into(),
             Self::Path => "FilePath".into(),
+            Self::Named(n) if n.contains("::") => format!(
+                "__Qualified{}",
+                n.as_bytes()
+                    .iter()
+                    .map(|byte| format!("{byte:02x}"))
+                    .collect::<String>()
+            ),
             Self::Named(n) => n.clone(),
             Self::Option(t) => format!("Option{}", t.tag()),
             Self::Outcome(t, e) => format!("Result{}{}", t.tag(), e.tag()),
             Self::List(t) | Self::Set(t, _) => format!("List{}", t.tag()),
             Self::Tuple(ts) => format!("Tuple{}", ts.iter().map(|t| t.tag()).collect::<String>()),
             Self::Pair(ts) => format!("Pair{}", ts.iter().map(|t| t.tag()).collect::<String>()),
-            Self::Map(k, v, _) => format!("ListTuple{}{}", k.tag(), v.tag()),
+            Self::Map(..) => format!("List{}", self.entry().tag()),
             Self::Fn(ins, out) => format!(
                 "Fn{}To{}",
                 ins.iter().map(Ty::tag).collect::<String>(),
                 out.tag()
             ),
+            Self::Param(n) => n.clone(),
         }
     }
 
-    /// The same LexLean type.
-    fn same(&self, other: &Self) -> bool {
-        self.render() == other.render()
+    /// The same LexLean type, and the same IEEE 754 format at every place
+    /// either holds a float: a float is held as its bit pattern, a `Nat`,
+    /// so its LexLean type alone does not tell a binary32 from a binary64
+    /// or from an integer, and a value of one format where Rust has
+    /// another is another number.
+    pub(crate) fn same(&self, other: &Self) -> bool {
+        self.render() == other.render() && self.formats() == other.formats()
+    }
+
+    /// The float format at each place of the type that is held as a `Nat`
+    /// (`None` where that place is an integer), in order.
+    fn formats(&self) -> Vec<Option<crate::mir::float::Format>> {
+        match self {
+            Self::Float(f) => vec![Some(*f)],
+            Self::Nat(_) | Self::Signed(_) | Self::Scalar => vec![None],
+            Self::Option(t) | Self::List(t) | Self::Set(t, _) => t.formats(),
+            Self::Outcome(t, e) => [t.formats(), e.formats()].concat(),
+            Self::Map(k, v, _) => [k.formats(), v.formats()].concat(),
+            Self::Tuple(ts) | Self::Pair(ts) => ts.iter().flat_map(Ty::formats).collect(),
+            Self::Fn(ins, out) => ins
+                .iter()
+                .flat_map(Ty::formats)
+                .chain(out.formats())
+                .collect(),
+            _ => Vec::new(),
+        }
     }
 
     /// Every named type and tuple this type mentions, itself included.
@@ -256,12 +307,7 @@ impl Ty {
             }
             Self::Option(t) | Self::List(t) | Self::Set(t, _) => t.mentions(),
             // Its entry: the tuple of a key and a value.
-            Self::Map(k, v, _) => {
-                let mut out = BTreeSet::from([Ty::Tuple(vec![(**k).clone(), (**v).clone()])]);
-                out.extend(k.mentions());
-                out.extend(v.mentions());
-                out
-            }
+            Self::Map(..) => self.entry().mentions(),
             Self::Outcome(t, e) => {
                 let mut out = t.mentions();
                 out.extend(e.mentions());
@@ -276,6 +322,32 @@ impl Ty {
             }
             _ => BTreeSet::new(),
         }
+    }
+
+    /// Free type parameters, including those inside containers and callbacks.
+    pub(crate) fn parameters(&self) -> BTreeSet<String> {
+        match self {
+            Self::Param(n) => BTreeSet::from([n.clone()]),
+            Self::Option(t) | Self::List(t) | Self::Set(t, _) => t.parameters(),
+            Self::Outcome(a, b) | Self::Map(a, b, _) => {
+                a.parameters().union(&b.parameters()).cloned().collect()
+            }
+            Self::Tuple(ts) | Self::Pair(ts) => ts.iter().flat_map(Self::parameters).collect(),
+            Self::Fn(ins, out) => ins
+                .iter()
+                .chain(std::iter::once(out.as_ref()))
+                .flat_map(Self::parameters)
+                .collect(),
+            _ => BTreeSet::new(),
+        }
+    }
+}
+
+fn product_types(ts: &[Ty]) -> String {
+    match ts {
+        [] => "Unit".into(),
+        [t] => t.render(),
+        [first, rest @ ..] => format!("({} * {})", first.render(), product_types(rest)),
     }
 }
 
@@ -308,8 +380,14 @@ pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Typ
 /// The `i`-th item of a tuple value `whole` of type `ty`.
 pub(crate) fn tuple_item(ty: &Ty, whole: &str, i: usize) -> String {
     match ty {
-        Ty::Pair(_) if i == 0 => format!("(first {whole})"),
-        Ty::Pair(_) => format!("(second {whole})"),
+        Ty::Pair(ts) => {
+            let rest = (0..i).fold(whole.to_string(), |v, _| format!("(second {v})"));
+            if i + 1 == ts.len() {
+                rest
+            } else {
+                format!("(first {rest})")
+            }
+        }
         _ => format!("(project {whole} item{i})"),
     }
 }
@@ -317,7 +395,12 @@ pub(crate) fn tuple_item(ty: &Ty, whole: &str, i: usize) -> String {
 /// A tuple value of type `ty` from its items.
 pub(crate) fn tuple_value(ty: &Ty, items: &[String]) -> String {
     match ty {
-        Ty::Pair(_) => format!("({}, {})", items[0], items[1]),
+        Ty::Pair(_) => items
+            .iter()
+            .rev()
+            .cloned()
+            .reduce(|rest, first| format!("({first}, {rest})"))
+            .unwrap_or_else(|| "()".into()),
         _ => {
             let parts: Vec<String> = items
                 .iter()
@@ -372,7 +455,114 @@ pub(crate) struct Types {
     /// (`Mid.leaf: Leaf.x: f64`), so that a residue row states its cause
     /// and not only the nearest type the cause is inside.
     pub(crate) outside: BTreeMap<String, String>,
+    /// Whether a registered crate's type by its path (`num_bigint::BigInt`,
+    /// or a bare name a `use` binds to it) is not read in this scope: a
+    /// macro the package invokes in item position may declare a module of
+    /// the crate's name that a relative path here names first.
+    pub(crate) paths_open: bool,
+    /// The type parameters of the signature in hand, by Rust name: each
+    /// the type it is read as (a LexLean type parameter, or the function
+    /// type its one `Fn` bound names). A type parameter's name shadows a
+    /// type of the same name, as Rust's own scoping has it.
+    pub(crate) generic: BTreeMap<String, Ty>,
+    /// Native-only views of complete source structs. Unread fields remain
+    /// abstract values; this supplies no operation on their contents.
+    pub(crate) native_views: BTreeMap<String, Ty>,
+    /// The method each type's impl of a trait of the crate gives: (the
+    /// trait, as a dictionary entry names it; the type, by LexLean name;
+    /// the method) -> the key the impl's method lifts under.
+    pub(crate) impls: BTreeMap<(String, String, String), String>,
+    /// The fields of the lifted structs that are cells (see [`CellKind`]),
+    /// by struct and field LexLean name: each holds its content, and is
+    /// read only as [`CellKind`] says.
+    pub(crate) cells: BTreeMap<String, BTreeMap<String, CellKind>>,
 }
+
+/// A standard cell a struct's field may be: a value whose content changes
+/// behind a shared borrow. Each holds one `T` (`RefCell` beside a borrow
+/// flag, `Cell` as `UnsafeCell<T>` alone, `Mutex` and `RwLock` beside a
+/// lock and a poison flag), so the struct's value holds the content. The
+/// flags are not part of what the lift reads: an operation that consults
+/// one panics or blocks where it is set, and the lifted definition agrees
+/// with Rust wherever Rust returns, as `default_of` does for a panic.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) enum CellKind {
+    RefCell,
+    Cell,
+    Mutex,
+    RwLock,
+}
+
+impl CellKind {
+    pub(crate) fn name(self) -> &'static str {
+        match self {
+            Self::RefCell => "RefCell",
+            Self::Cell => "Cell",
+            Self::Mutex => "Mutex",
+            Self::RwLock => "RwLock",
+        }
+    }
+
+    fn named(name: &str) -> Option<CellKind> {
+        [Self::RefCell, Self::Cell, Self::Mutex, Self::RwLock]
+            .into_iter()
+            .find(|k| k.name() == name)
+    }
+
+    /// The method that reads the content where the read is the content as
+    /// the function was called with it: `RefCell::borrow` and `Cell::get`.
+    /// Neither cell is `Sync`, so no other thread reaches it, and no lifted
+    /// code changes a cell (every change is a typed row), so the content
+    /// stays what it was at the call. A `Mutex` or `RwLock` is `Sync`:
+    /// another thread may change it between two locks, so its content is
+    /// not read.
+    fn read(self) -> Option<&'static str> {
+        match self {
+            Self::RefCell => Some("borrow"),
+            Self::Cell => Some("get"),
+            Self::Mutex | Self::RwLock => None,
+        }
+    }
+}
+
+/// What a function's own module scope lets a name of its body mean, beyond
+/// the crate's tables: Rust resolves a `use` and a trait in scope per
+/// module, and an inline module inherits no name of the module around it.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Seen {
+    /// Each name a `use` item of the function's own module scope binds,
+    /// with the path it names.
+    pub(crate) uses: BTreeMap<String, String>,
+    /// The names the scope itself binds (its modules, types, functions and
+    /// `use` names) and those the body binds anew: a path whose head is one
+    /// of them starts there, not at a crate of that name.
+    pub(crate) local: BTreeSet<String>,
+    /// The names of the methods and associated functions declared by the
+    /// workspace's traits that may be in the scope: one it declares, one a
+    /// `use` of it binds or imports by a path ending in the trait's name,
+    /// and every one where it has a glob import. A call of such a name may
+    /// reach the trait's method before the inherent one the lift reads.
+    pub(crate) trait_methods: BTreeSet<String>,
+    /// Whether a trait whose methods the workspace does not declare may be
+    /// in scope: the scope imports a path of a crate outside the workspace
+    /// and the standard library, or has a glob import of anything but the
+    /// standard library.
+    pub(crate) outside_traits: bool,
+    /// Whether an item a macro makes in item position (a type, a trait, a
+    /// module), which no declaration the tool reads shows, may be in the
+    /// scope: the file invokes such a macro, or the package does and the
+    /// scope imports by a glob or by a path inside the crate.
+    pub(crate) macro_items: bool,
+    /// Whether such an item may be what a path of the function's file
+    /// names (`Types::paths_open`).
+    pub(crate) paths_open: bool,
+}
+
+/// The language's primitive types a path of one segment may name.
+pub(crate) const PRIMITIVE_TYPES: [&str; 17] = [
+    "bool", "char", "str", "u8", "u16", "u32", "u64", "u128", "usize", "i8", "i16", "i32", "i64",
+    "i128", "isize", "f32", "f64",
+];
 
 /// The tag of the mathematical `Int` in a generated name.
 const INTEGER_TAG: &str = "LexLeanInt";
@@ -495,7 +685,9 @@ enum Stop {
 const PENDING: char = '\u{1}';
 
 /// The strongly connected components of a graph, each one set.
-fn strong_components(graph: &BTreeMap<String, BTreeSet<String>>) -> Vec<BTreeSet<String>> {
+pub(crate) fn strong_components(
+    graph: &BTreeMap<String, BTreeSet<String>>,
+) -> Vec<BTreeSet<String>> {
     let reach = |start: &String| {
         let mut seen = BTreeSet::new();
         let mut stack: Vec<&String> = graph.get(start).into_iter().flatten().collect();
@@ -799,11 +991,13 @@ impl Types {
                     .cloned()
                     .collect();
                 outside.extend(probe.chains(&pending, datas, structs));
+                let cells = probe.cells_of(&fields_of, structs);
                 return Self {
                     datas: lifted,
                     structs: fields_of,
                     families,
                     outside,
+                    cells,
                     ..base
                 };
             }
@@ -868,7 +1062,7 @@ impl Types {
                     .get(n)
                     .into_iter()
                     .flatten()
-                    .filter_map(|(f, t)| stop(format!("{n}.{f}"), own.ty(t), t, ""));
+                    .filter_map(|(f, t)| stop(format!("{n}.{f}"), own.field_ty(t), t, ""));
                 (n, of_variants.chain(of_fields).collect())
             })
             .collect();
@@ -925,11 +1119,73 @@ impl Types {
     /// A struct's fields as the lift names them, where every one lifts. A
     /// tuple struct's field is named by its position.
     fn fields_read(&self, raw: &[(String, rs::RustType)]) -> Option<Vec<(String, Ty)>> {
-        let read: Vec<(String, Ty)> = raw
-            .iter()
-            .filter_map(|(field, t)| self.ty(t).ok().map(|ty| (field_name(field), ty)))
-            .collect();
-        (read.len() == raw.len()).then_some(read)
+        raw.iter()
+            .map(|(field, t)| Some((field_name(field), self.field_ty(t).ok()?)))
+            .collect()
+    }
+
+    /// The cell a written type is, of the standard library (by its full
+    /// path, or by its name where the workspace declares none), and the
+    /// type it holds.
+    fn cell_of<'t>(&self, t: &'t rs::RustType) -> Option<(CellKind, &'t rs::RustType)> {
+        let rs::TypeKind::Path { qself: false, path } = &t.kind else {
+            return None;
+        };
+        let last = path.segments.last()?;
+        let kind = CellKind::named(&last.ident)?;
+        let module = match kind {
+            CellKind::RefCell | CellKind::Cell => "cell",
+            CellKind::Mutex | CellKind::RwLock => "sync",
+        };
+        let full = match path.segments.as_slice() {
+            [root, m, _] => {
+                matches!(root.ident.as_str(), "std" | "core" | "alloc")
+                    && m.ident == module
+                    && root.arguments == rs::PathArguments::None
+                    && m.arguments == rs::PathArguments::None
+            }
+            _ => false,
+        };
+        let library = full || (path.segments.len() == 1 && !self.declares(&last.ident));
+        let rs::PathArguments::AngleBracketed(args) = &last.arguments else {
+            return None;
+        };
+        match args.as_slice() {
+            [rs::GenericArgument::Type(inner)] if library => Some((kind, inner)),
+            _ => None,
+        }
+    }
+
+    /// The type of a struct's field: a cell's is the content it holds.
+    fn field_ty(&self, t: &rs::RustType) -> Lift<Ty> {
+        match self.cell_of(t) {
+            Some((_, inner)) => self.ty(inner),
+            None => self.ty(t),
+        }
+    }
+
+    /// The cell fields of these lifted structs (see [`Types::cells`]).
+    fn cells_of(
+        &self,
+        lifted: &BTreeMap<String, Vec<(String, Ty)>>,
+        structs: &BTreeMap<String, Vec<(String, rs::RustType)>>,
+    ) -> BTreeMap<String, BTreeMap<String, CellKind>> {
+        lifted
+            .keys()
+            .filter_map(|n| {
+                let cells: BTreeMap<String, CellKind> = structs
+                    .get(n)?
+                    .iter()
+                    .filter_map(|(f, t)| Some((field_name(f), self.cell_of(t)?.0)))
+                    .collect();
+                (!cells.is_empty()).then(|| (n.clone(), cells))
+            })
+            .collect()
+    }
+
+    /// The cell a lifted struct's field is, if any.
+    pub(crate) fn cell(&self, name: &str, field: &str) -> Option<CellKind> {
+        self.cells.get(name)?.get(field).copied()
     }
 
     /// A data-carrying enum's variants as the lift names them, where every
@@ -1013,11 +1269,13 @@ impl Types {
             if lifted.len() == names.len() {
                 let pending = candidates.difference(&names).cloned().collect();
                 outside.extend(probe.chains(&pending, &BTreeMap::new(), structs));
+                let cells = probe.cells_of(&lifted, structs);
                 return Self {
                     enums,
                     structs: lifted,
                     aliases,
                     outside,
+                    cells,
                     ..Self::default()
                 };
             }
@@ -1033,7 +1291,7 @@ impl Types {
             inner.extend(t.mentions());
         }
         let data = named_in(&inner).iter().any(|n| self.datas.contains_key(n));
-        if ts.len() == 2 && data {
+        if (ts.len() == 2 && data) || ts.iter().any(|t| !t.parameters().is_empty()) {
             Ty::Pair(ts)
         } else {
             Ty::Tuple(ts)
@@ -1177,6 +1435,10 @@ impl Types {
             // An array is the list of its items: its length is the
             // literal's, which the value fixes.
             rs::TypeKind::Array(t, _) => Ok(Ty::List(Box::new(self.ty(t)?))),
+            // Slice storage is its ordered sequence, including under an
+            // owning pointer. Mutable cell elements still fail their own
+            // type reading instead of becoming frozen snapshots.
+            rs::TypeKind::Slice(t) => Ok(Ty::List(Box::new(self.ty(t)?))),
             rs::TypeKind::Tuple(elems) if elems.is_empty() => Ok(Ty::Unit),
             rs::TypeKind::Tuple(elems) if elems.len() >= 2 => {
                 let mut ts = Vec::new();
@@ -1197,8 +1459,64 @@ impl Types {
             rs::TypeKind::Path { qself: false, path } if path.segments.len() == 1 => {
                 self.named(t, &path.segments[0], false)
             }
+            // A registered crate's type by its path (`num_bigint::BigInt`).
+            rs::TypeKind::Path { qself: false, path }
+                if path
+                    .segments
+                    .iter()
+                    .all(|s| s.arguments == rs::PathArguments::None) =>
+            {
+                let written: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
+                let joined = written.join("::");
+                if self.paths_open && !joined.starts_with("::") {
+                    return bad();
+                }
+                self.registered(joined.strip_prefix("::").unwrap_or(&joined))
+                    .map_or_else(bad, Ok)
+            }
             _ => bad(),
         }
+    }
+
+    /// The type a registered crate's path reads as, where the scope admits
+    /// the reading: the package's lock pins a version it was read from
+    /// (see [`crate::registered::of_package`]), which puts the path among
+    /// the scope's names.
+    pub(crate) fn float(&self, name: &str) -> Option<crate::mir::float::Format> {
+        use crate::mir::float::Format;
+        // The width of a float is that of the unsigned integer its
+        // `to_bits` returns; its digits and largest exponent are core's
+        // `MANTISSA_DIGITS` and `MAX_EXP`, as the core the tool is built
+        // with states them. The language fixes both types as IEEE 754's
+        // binary32 and binary64, so no build of core states others.
+        let host = |bytes: usize, digits: u32, max_exp: i32| {
+            let bits = u8::BITS * u32::try_from(bytes).ok()?;
+            Format::from_core(bits, digits, i64::from(max_exp))
+        };
+        match self.floats.get(name) {
+            Some(f) => Some(*f),
+            None => match name {
+                "f32" => host(
+                    std::mem::size_of::<f32>(),
+                    f32::MANTISSA_DIGITS,
+                    f32::MAX_EXP,
+                ),
+                "f64" => host(
+                    std::mem::size_of::<f64>(),
+                    f64::MANTISSA_DIGITS,
+                    f64::MAX_EXP,
+                ),
+                _ => None,
+            },
+        }
+    }
+
+    /// The type a registered crate's path reads as (see below).
+    pub(crate) fn registered(&self, path: &str) -> Option<Ty> {
+        self.aliases
+            .get(path)
+            .filter(|named| *named == path)
+            .and_then(|_| crate::registered::reading(path))
     }
 
     /// The type one path segment names, with its arguments: a type of the
@@ -1226,11 +1544,20 @@ impl Types {
         // library's where its full path says so, or where the workspace
         // declares no type of the name.
         let imported = library || !self.declares(&name);
+        // A primitive type's name that a type of the crate also takes
+        // (`struct f32` in one module) names that type in its module and
+        // the primitive elsewhere: the crate-wide tables cannot tell which.
+        if PRIMITIVE_TYPES.contains(&name.as_str()) && written.is_empty() && !imported {
+            return bad();
+        }
         // The head is read before its arguments: a head the lift does not
         // read is the leaf whatever it holds (`RefCell<T>` is outside for
         // every `T`), and only a head it reads passes the question on to
         // what it holds.
         let arg = |i: usize| self.ty(written[i]).map(Box::new);
+        if let (Some(t), 0, false) = (self.generic.get(&name), written.len(), library) {
+            return Ok(t.clone());
+        }
         let ty = match (name.as_str(), written.len()) {
             ("bool", 0) => Ty::Bool,
             ("u8", 0) => Ty::Nat(Some(8)),
@@ -1247,6 +1574,12 @@ impl Types {
             ("isize", 0) => Ty::Integer(None),
             ("String", 0) => Ty::Str,
             ("char", 0) => Ty::Char,
+            // A float of the language: IEEE 754's binary format of the
+            // widths core's own constants state (see `Types::float`).
+            ("f32" | "f64", 0) if imported => match self.float(&name) {
+                Some(f) => Ty::Float(f),
+                None => return bad(),
+            },
             ("Option", 1) => Ty::Option(arg(0)?),
             ("Result", 2) => Ty::Outcome(arg(0)?, arg(1)?),
             ("Vec", 1) => Ty::List(arg(0)?),
@@ -1261,11 +1594,42 @@ impl Types {
             // atomic) is not read: it stays outside, the leaf of every
             // chain through it.
             ("Box", 1) => *arg(0)?,
+            // A shared cell is an allocation reference, never its current
+            // contents. Transport and owner clones preserve this identity;
+            // no heap read, write, allocation or equality is read here.
+            ("Rc" | "Arc", 1)
+                if imported
+                    && self.cell_of(written[0]).is_some_and(|(kind, _)| {
+                        matches!(kind, CellKind::RefCell | CellKind::Cell)
+                    }) =>
+            {
+                Ty::Named(format!("Prelude::{name}CellRef"))
+            }
+            // Concurrent locks still require a synchronization model.
+            ("Rc" | "Arc", 1) if imported && self.cell_of(written[0]).is_some() => {
+                let kind = self.cell_of(written[0]).map_or("cell", |(k, _)| k.name());
+                return Err(Residue::Type(format!(
+                    "{}: a {kind} that another owner shares, which sees every change",
+                    t.text
+                )));
+            }
             ("Rc" | "Arc", 1) if imported => *arg(0)?,
             ("BTreeMap", 2) => Ty::Map(arg(0)?, arg(1)?, true),
             ("HashMap", 2) => Ty::Map(arg(0)?, arg(1)?, false),
+            // `HashMap<K, V, S>` and `HashSet<T, S>`: the standard map and
+            // set with the hasher `S` (the standard library declares both
+            // with `S = RandomState`). Which keys a map holds and the value
+            // at each is fixed by `K`'s `Eq` alone: the library requires of
+            // every `BuildHasher` that the hashers one value builds hash
+            // equal input equally, so the hasher changes where an entry is
+            // stored and the order iteration visits them, never what
+            // `get`, `contains_key`, `contains` or `len` return. The map is
+            // read as the unordered one, whose forms the lift takes only
+            // where they do not depend on that order, whatever `S` is.
+            ("HashMap", 3) => Ty::Map(arg(0)?, arg(1)?, false),
             ("BTreeSet", 1) => Ty::Set(arg(0)?, true),
             ("HashSet", 1) => Ty::Set(arg(0)?, false),
+            ("HashSet", 2) => Ty::Set(arg(0)?, false),
             // A double-ended queue is the sequence of its items, front to
             // back, as a vector is.
             ("VecDeque", 1) if imported => Ty::List(arg(0)?),
@@ -1274,6 +1638,11 @@ impl Types {
             ("Range", 1) if imported => {
                 let bound = *arg(0)?;
                 self.tuple(vec![bound.clone(), bound])
+            }
+            // A registered crate's type, where the package's lock admits
+            // the reading: the scope names its path.
+            (n, 0) if !library && self.registered(&self.resolve(n)).is_some() => {
+                self.registered(&self.resolve(n)).unwrap_or(Ty::Unit)
             }
             (n, 0)
                 if !library
@@ -1308,14 +1677,8 @@ impl Types {
         // A lifetime parameter says how long a borrow lives, which a value
         // of LexLean does not have: it is erased. A type or const parameter
         // is not.
-        let generic = sig
-            .generics
-            .iter()
-            .any(|p| !matches!(p, rs::GenericParam::Lifetime(_)));
-        if generic || sig.asyncness || sig.unsafety || sig.variadic {
-            return Err(Residue::Signature(
-                "generic, async, unsafe or variadic".to_string(),
-            ));
+        if let Some(what) = unread_signature(sig) {
+            return Err(Residue::Signature(what));
         }
         // The type `Self` names: none in a default method, where it is each
         // implementing type.
@@ -1324,6 +1687,9 @@ impl Types {
             Some(Owner::Implementor) | None => None,
         };
         let mut params = Vec::new();
+        // The types of the `&mut` parameters, which the definition gives
+        // back after its result (see [`threads`]).
+        let mut states = Vec::new();
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
@@ -1336,12 +1702,18 @@ impl Types {
                             || self.structs.contains_key(*name)
                             || self.datas.contains_key(*name) =>
                     {
-                        if !*plain {
-                            return Err(Residue::Signature(format!(
-                                "takes {} of {name}: the lift reads self and &self as the \
-                                 value, and threads no other receiver",
-                                receiver.unwrap_or("self")
-                            )));
+                        match (*plain, receiver.map(Receiver::of)) {
+                            (true, _) | (false, Some(Receiver::Owned)) => {}
+                            (false, Some(Receiver::Unique)) => {
+                                states.push(Ty::Named((*name).to_string()));
+                            }
+                            _ => {
+                                return Err(Residue::Signature(format!(
+                                    "takes {} of {name}: the lift reads self, mut self, &self \
+                                     and &mut self, and no other receiver",
+                                    receiver.unwrap_or("self")
+                                )));
+                            }
                         }
                         params.push((
                             "self".to_string(),
@@ -1363,7 +1735,15 @@ impl Types {
                         return Err(Residue::Signature("pattern parameter".to_string()));
                     };
                     let rust = name.ident.clone();
-                    params.push((rust.clone(), local_name(&rust), self.ty_in(&pat.ty, named)?));
+                    let ty = match unique_target(&pat.ty) {
+                        Some(target) => {
+                            let ty = self.ty_in(target, named)?;
+                            states.push(ty.clone());
+                            ty
+                        }
+                        None => self.ty_in(&pat.ty, named)?,
+                    };
+                    params.push((rust.clone(), local_name(&rust), ty));
                 }
             }
         }
@@ -1371,7 +1751,10 @@ impl Types {
             None => Ty::Unit,
             Some(t) => self.ty_in(t, named)?,
         };
-        Ok((params, result))
+        Ok((
+            params,
+            crate::mir::lower::threaded_result(&result, &states, self),
+        ))
     }
 
     /// A type where `Self` names the method's owner.
@@ -1560,17 +1943,147 @@ pub(crate) enum Owner<'a> {
     Implementor,
 }
 
+/// A receiver that is not `self` or `&self`, as the method writes it.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum Receiver {
+    /// `mut self`: the method owns the value, and its binding is mutable.
+    /// Nothing else reaches the value, so a change to it is a new binding
+    /// that the method's own later statements read, as for any local.
+    Owned,
+    /// `&mut self` (`&'a mut self`): a borrow nothing else may use while it
+    /// lives, which Rust's borrow checker guarantees of every program. The
+    /// place it lends holds, when the method returns, the value the
+    /// method's last statement leaves in it, and no one reads the place in
+    /// between: the method is the function from the old value to its
+    /// result and the new value (see [`threads`]).
+    Unique,
+    /// `self: T` and any other written receiver.
+    Other,
+}
+
+impl Receiver {
+    pub(crate) fn of(written: &str) -> Receiver {
+        let words: Vec<&str> = written.split_whitespace().collect();
+        match words.as_slice() {
+            ["mut", "self"] => Receiver::Owned,
+            [borrow, "mut", "self"] if borrow.starts_with('&') => Receiver::Unique,
+            ["&mut", "self"] => Receiver::Unique,
+            _ => Receiver::Other,
+        }
+    }
+}
+
+/// The type a `&mut T` parameter lends, where the lift threads it: any `T`
+/// but a slice or `str`, whose length the borrow fixes and whose items it
+/// changes in place.
+fn unique_target(t: &rs::RustType) -> Option<&rs::RustType> {
+    match &t.kind {
+        rs::TypeKind::Reference {
+            mutable: true,
+            elem,
+        } => match &elem.kind {
+            rs::TypeKind::Slice(_) => None,
+            rs::TypeKind::Path { qself: false, path } if path.is_ident("str") => None,
+            _ => Some(elem),
+        },
+        _ => None,
+    }
+}
+
+/// The positions, among a candidate's parameters, of those the definition
+/// threads: a `&mut self` receiver and each `&mut T` parameter. As
+/// `mir::lower::threaded` does for a body's locals, the definition takes
+/// the borrowed value and returns the tuple of its result and, after it,
+/// the value each such parameter's place holds when the function returns
+/// (`mir::lower::threaded_result`); a caller writes each back into the
+/// place it lent. A `&mut` borrow is the only way to the place while it
+/// lives, so no other reader sees the place between the call and the
+/// write.
+pub(crate) fn threads(sig: &rs::Signature, owner: Option<&Owner<'_>>) -> Vec<usize> {
+    let mut out = Vec::new();
+    let mut at = 0;
+    for input in &sig.inputs {
+        match input {
+            rs::FnArg::Receiver { plain } => {
+                if let Some(Owner::Type { receiver, .. }) = owner {
+                    if !*plain && receiver.map(Receiver::of) == Some(Receiver::Unique) {
+                        out.push(at);
+                    }
+                    at += 1;
+                }
+            }
+            rs::FnArg::Typed(pat) => {
+                if unique_target(&pat.ty).is_some() {
+                    out.push(at);
+                }
+                at += 1;
+            }
+        }
+    }
+    out
+}
+
 /// A lifted function's signature.
 #[derive(Clone, Debug)]
 pub(crate) struct Sig {
     pub(crate) name: String,
     pub(crate) params: Vec<Ty>,
     pub(crate) result: Ty,
+    /// Its type parameters and its dictionary, where it is generic.
+    pub(crate) generic: Option<Generic>,
+    /// The positions of the parameters it threads (see [`threads`]):
+    /// `result` is then the tuple of its own result and their values.
+    pub(crate) threads: Vec<usize>,
+}
+
+/// What a function generic over type parameters takes besides its own
+/// parameters: each type parameter, and for each method of a trait that
+/// bounds one and that its body calls, the function the implementing
+/// type supplies (its dictionary).
+///
+/// Rust compiles a generic function once per instantiation, and in each
+/// a call `x.m(..)` on a value of a type parameter `T: Tr` is the method
+/// `m` of the one impl of `Tr` for the type that takes `T`'s place
+/// (coherence admits no second impl of a trait without parameters for a
+/// type). The function of the method's receiver and arguments that impl
+/// gives is therefore an argument the instantiation fixes: the lifted
+/// definition takes it as a parameter and applies it where the body calls
+/// `m`, and each call passes the impl's method of the type its arguments
+/// fix. A body that reaches a value of `T` other than through the
+/// dictionary can only move it, since `T` has no other bound (other
+/// bounds keep their row): a definition over `'T` does the same for every
+/// type.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Generic {
+    /// The type parameters, by LexLean name, in order.
+    pub(crate) types: Vec<String>,
+    /// Each type parameter by its Rust name -> what the body reads it as:
+    /// its LexLean type parameter, or the function type of its `Fn` bound.
+    pub(crate) reads: BTreeMap<String, Ty>,
+    /// The dictionary, in the order the definition takes it.
+    pub(crate) dictionary: Vec<Entry>,
+}
+
+/// One method in a dictionary.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Entry {
+    /// The type parameter it is the method of, by LexLean name.
+    pub(crate) param: String,
+    /// The trait that declares it, by its name in its crate.
+    pub(crate) declarer: String,
+    pub(crate) method: String,
+    /// The LexLean parameter that holds it.
+    pub(crate) name: String,
+    /// Its function type: the receiver first, `Self` read as the type
+    /// parameter.
+    pub(crate) ty: Ty,
 }
 
 /// What the lift reads and does not change while it lifts a crate: the
 /// types it names and the candidate functions' signatures.
 pub(crate) struct Env {
+    /// Imported compiler models may not replace a Rust panic with a default value.
+    total: bool,
     pub(crate) types: Types,
     /// Candidate functions: Rust name -> signature.
     pub(crate) fns: BTreeMap<String, Sig>,
@@ -1591,6 +2104,8 @@ struct Ctx {
     params: Vec<String>,
     /// Its result type.
     result: Ty,
+    /// Mutable Rust parameters whose current values accompany an early result.
+    return_states: Vec<String>,
     /// The LexLean name of the function being lifted, which its helpers extend.
     own: String,
     /// Rust local -> (LexLean name, type).
@@ -1607,6 +2122,8 @@ struct Ctx {
     hidden: Vec<String>,
     /// The `use` imports of the function's file: name -> the path it names.
     imports: BTreeMap<String, String>,
+    /// What the function's own module scope binds (see [`Seen`]).
+    seen: Seen,
     /// The closures `let` binds, by Rust name: a call of one is its body
     /// with its parameters bound to the arguments.
     closures: BTreeMap<String, Closure>,
@@ -1631,6 +2148,17 @@ struct Ctx {
     /// The formatter parameter of a `Display` impl's `fmt`, which `write!`
     /// writes the function's text into.
     formatter: Option<String>,
+    /// The dictionary of the generic function being lifted.
+    dictionary: Vec<Entry>,
+    /// The Rust locals bound outside the expression in hand where its value
+    /// is an operand (a `let`'s value, an argument, a closure's body): the
+    /// statements after it are not part of it, so an update of one there
+    /// would be lost to them, and is refused.
+    sealed: BTreeSet<String>,
+    /// The Rust names a `ref` or `ref mut` pattern of the body binds: such a
+    /// binder is a borrow of the place it matched, so an update of it is
+    /// one of that place, which no rebinding of the binder writes back.
+    borrowed: BTreeSet<String>,
 }
 
 /// A closure a `let` binds: its parameters, its body, and the locals in
@@ -1867,7 +2395,33 @@ impl Ctx {
         if let Some((old, _)) = next.locals.insert(ident.to_string(), (name.clone(), ty)) {
             next.hidden.push(old);
         }
+        // A local bound inside an operand is the operand's own.
+        next.sealed.remove(ident);
         (next, name, acc)
+    }
+
+    /// The locals an operand of the expression in hand may not update:
+    /// every one bound so far.
+    fn sealing(&self) -> BTreeSet<String> {
+        let mut sealed = self.sealed.clone();
+        sealed.extend(self.locals.keys().cloned());
+        sealed
+    }
+
+    /// Why an update of `target` here is refused, where it is one an
+    /// operand makes of a local bound outside it.
+    fn unsealed(&self, target: &str) -> Lift<()> {
+        if self.borrowed.contains(target) {
+            return Err(Residue::Form(format!(
+                "an update of {target}, which a ref pattern binds to the place it borrows"
+            )));
+        }
+        if self.sealed.contains(target) {
+            return Err(Residue::Form(format!(
+                "an update of {target} inside an operand, which the statements after it do not see"
+            )));
+        }
+        Ok(())
     }
 
     /// A binder no name in scope and no name given before takes: `base`
@@ -1989,6 +2543,7 @@ fn flat_of(
         top: false,
         looping: None,
         hidden: Vec::new(),
+        sealed: ctx.sealing(),
         ..ctx.clone()
     };
     let (inner, before) = acc.apart();
@@ -2150,6 +2705,35 @@ fn int_literal(e: &rs::RustExpr) -> Option<u128> {
     }
 }
 
+/// A number literal without a suffix, negated, in parentheses or in
+/// arithmetic with others of its kind: its type is whatever inference
+/// gives it.
+fn untyped_number(e: &rs::RustExpr) -> bool {
+    match e {
+        rs::RustExpr::Lit(rs::Lit::Int { suffix, .. }) => suffix.is_empty(),
+        rs::RustExpr::Lit(rs::Lit::Other) => true,
+        rs::RustExpr::Unary(u) => {
+            matches!(u.op, rs::UnOp::Neg | rs::UnOp::Not) && untyped_number(&u.expr)
+        }
+        rs::RustExpr::Paren(p) => untyped_number(p),
+        // Arithmetic of such literals has their one inferred type; a shift
+        // has its left operand's.
+        rs::RustExpr::Binary(b) => match b.op {
+            rs::BinOp::Add
+            | rs::BinOp::Sub
+            | rs::BinOp::Mul
+            | rs::BinOp::Div
+            | rs::BinOp::Rem
+            | rs::BinOp::BitXor
+            | rs::BinOp::BitAnd
+            | rs::BinOp::BitOr => untyped_number(&b.left) && untyped_number(&b.right),
+            rs::BinOp::Shl | rs::BinOp::Shr => untyped_number(&b.left),
+            _ => false,
+        },
+        _ => false,
+    }
+}
+
 fn is_literal(e: &rs::RustExpr) -> bool {
     match e {
         rs::RustExpr::Lit(_) => true,
@@ -2207,7 +2791,9 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 "i128" => Ty::Integer(Some(128)),
                 "isize" => Ty::Integer(None),
                 "" => match want {
-                    Some(t @ (Ty::Nat(_) | Ty::Int(_) | Ty::Integer(_))) => t.clone(),
+                    Some(t @ (Ty::Nat(_) | Ty::Int(_) | Ty::Integer(_) | Ty::Unbounded)) => {
+                        t.clone()
+                    }
                     _ if negative => Ty::Int(32),
                     _ => Ty::Nat(Some(32)),
                 },
@@ -2220,7 +2806,7 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
                 }
                 // The widest signed type bounds the literal Rust accepts;
                 // the mathematical `Int` holds every one of them.
-                Ty::Integer(_) if v <= i128::MAX as u128 + u128::from(negative) => {
+                Ty::Integer(_) | Ty::Unbounded if v <= i128::MAX as u128 + u128::from(negative) => {
                     let sign = if negative { "-" } else { "" };
                     flat(format!("({sign}{v} : Int)"), ty)
                 }
@@ -2237,6 +2823,27 @@ fn literal_of(lit: &rs::Lit, want: Option<&Ty>, negative: bool) -> Lift<(Expr, T
             None => Err(Residue::Form(PERCENT.to_string())),
         },
         rs::Lit::Byte(b) if !negative => flat(b.to_string(), Ty::Nat(Some(8))),
+        // A float literal: the format's value nearest the decimal, ties to
+        // even, as Rust rounds one. Unsuffixed, its type is what its use
+        // infers (`f64` only where nothing constrains it, which a later use
+        // the lift has not reached yet may still do), so it is read only
+        // where the use in hand asks for a float of one format.
+        rs::Lit::Float { digits, suffix } => {
+            let named = match (suffix.as_str(), want) {
+                ("f32" | "f64", _) => suffix.as_str(),
+                ("", Some(Ty::Float(f))) => return float_literal(*f, digits, negative),
+                ("", _) => {
+                    return Err(Residue::Form(
+                        "a float literal whose format its use does not fix".to_string(),
+                    ))
+                }
+                _ => return Err(Residue::Form("float literal".to_string())),
+            };
+            match Types::default().float(named) {
+                Some(f) => float_literal(f, digits, negative),
+                None => Err(Residue::Form("float literal".to_string())),
+            }
+        }
         rs::Lit::ByteStr(b) if !negative => {
             let bytes: Vec<String> = b.iter().map(u8::to_string).collect();
             flat(
@@ -2342,7 +2949,7 @@ fn expr_inner(
         rs::RustExpr::Paren(p) => expr(p, env, ctx, acc, want),
         rs::RustExpr::Block(b) if !b.label => block(&b.block.stmts, env, ctx, acc, want),
         rs::RustExpr::Reference(r) if !r.mutable => expr(&r.expr, env, ctx, acc, want),
-        rs::RustExpr::Binary(b) => binary(b, env, ctx, acc),
+        rs::RustExpr::Binary(b) => binary(b, env, ctx, acc, want),
         rs::RustExpr::Call(c) => call(c, env, ctx, acc, want),
         rs::RustExpr::MethodCall(m) => method(m, env, ctx, acc, want),
         rs::RustExpr::Macro(m) if m.path.is_ident("format") => format_macro(m, env, ctx, acc),
@@ -2499,6 +3106,21 @@ fn unary_value(
         }
         rs::UnOp::Neg => match &*u.expr {
             rs::RustExpr::Lit(lit) => literal_of(lit, want, true).map(|v| (v, acc)),
+            // A float negates its sign, a NaN's too.
+            e if float_operand(e, env, ctx, &acc) => {
+                let ((x, xt), acc) = flat_of(e, env, ctx, acc, None)?;
+                let Ty::Float(f) = xt else {
+                    return Err(Residue::Arithmetic("-".to_string()));
+                };
+                let (term, acc) = float_term(f, "Neg", &[&x], acc);
+                flat_lift(term, xt, acc)
+            }
+            // An integer of no width negates exactly (see
+            // `unbounded_arithmetic`).
+            e if unbounded_operand(e, env, ctx, &acc) => {
+                let ((x, _), acc) = flat_of(e, env, ctx, acc, Some(&Ty::Unbounded))?;
+                flat_lift(format!("(prim negate {x} : Int)"), Ty::Unbounded, acc)
+            }
             _ => Err(Residue::Arithmetic("-".to_string())),
         },
         rs::UnOp::Deref => expr(&u.expr, env, ctx, acc, want),
@@ -2644,6 +3266,9 @@ fn field_value(f: &rs::ExprField, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             else {
                 return Err(Residue::Form("field of an unknown struct".to_string()));
             };
+            if let Some(kind) = env.types.cell(s, &name) {
+                return Err(cell_unread(kind, s, &name, None));
+            }
             if env.types.boxed(s) {
                 flat_lift(
                     format!("({} {base})", Types::accessor(s, &name)),
@@ -2744,6 +3369,10 @@ fn struct_literal(s: &rs::ExprStruct, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((
     for (field, ty) in fields {
         let v = match (given.get(field), &base) {
             (Some(value), _) => {
+                let value = match env.types.cell(&name, field) {
+                    Some(kind) => cell_made(value, kind, &name, field)?,
+                    None => *value,
+                };
                 let ((v, vt), next) = flat_of(value, env, ctx, acc, Some(ty))?;
                 acc = next;
                 if !vt.same(ty) {
@@ -3153,7 +3782,19 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         }
         // The mathematical `Int` has an order and no `equal`: two values
         // are the same where neither is below the other.
-        (Ty::Integer(_), _) => {
+        // IEEE 754's comparisons, a NaN unordered: the prelude's model.
+        (Ty::Float(f), _) => {
+            let op = match b.op {
+                B::Eq => "Eq",
+                B::Ne => "Ne",
+                B::Lt => "Lt",
+                B::Le => "Le",
+                B::Gt => "Gt",
+                _ => "Ge",
+            };
+            float_term(*f, op, &[&l, &r], acc)
+        }
+        (Ty::Integer(_) | Ty::Unbounded, _) => {
             let acc = acc.axiom("propext");
             let below = |x: &str, y: &str| format!("(prim less_than {x} {y} : Bool)");
             let text = match b.op {
@@ -3191,6 +3832,8 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
         (Ty::Option(inner), B::Eq | B::Ne) => {
             let (x, acc) = ctx.fresh(env, acc, "left");
             let (y, acc) = ctx.fresh(env, acc, "right");
+            let (left, acc) = ctx.fresh(env, acc, "leftOption");
+            let (right, acc) = ctx.fresh(env, acc, "rightOption");
             let Some((same, acc)) = same_value(inner, &x, &y, env, acc) else {
                 return Err(Residue::Form(format!(
                     "comparison {} of {}",
@@ -3206,7 +3849,7 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             };
             let same = if eq { same } else { format!("(not {same})") };
             let none_r = Expr::Match {
-                scrutinee: r.clone(),
+                scrutinee: right.clone(),
                 arms: vec![
                     Arm {
                         pattern: "Option.none".into(),
@@ -3219,7 +3862,7 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
                 ],
             };
             let some_r = Expr::Match {
-                scrutinee: r.clone(),
+                scrutinee: right.clone(),
                 arms: vec![
                     Arm {
                         pattern: "Option.none".into(),
@@ -3233,19 +3876,22 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
             };
             return Ok((
                 (
-                    Expr::Match {
-                        scrutinee: l.clone(),
-                        arms: vec![
-                            Arm {
-                                pattern: "Option.none".into(),
-                                body: none_r,
-                            },
-                            Arm {
-                                pattern: format!("Option.some {x}"),
-                                body: some_r,
-                            },
-                        ],
-                    },
+                    wrap_lets(
+                        vec![(left.clone(), lt.render(), l), (right, lt.render(), r)],
+                        Expr::Match {
+                            scrutinee: left,
+                            arms: vec![
+                                Arm {
+                                    pattern: "Option.none".into(),
+                                    body: none_r,
+                                },
+                                Arm {
+                                    pattern: format!("Option.some {x}"),
+                                    body: some_r,
+                                },
+                            ],
+                        },
+                    ),
                     Ty::Bool,
                 ),
                 acc,
@@ -3268,12 +3914,32 @@ fn comparison(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr
     flat(text, Ty::Bool, acc)
 }
 
-fn binary(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, Ty), Acc)> {
+fn binary(
+    b: &rs::ExprBinary,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+    want: Option<&Ty>,
+) -> Lift<((Expr, Ty), Acc)> {
     use rs::BinOp as B;
     match b.op {
         B::And | B::Or => logic(b, env, ctx, acc),
         B::Eq | B::Ne | B::Lt | B::Le | B::Gt | B::Ge => comparison(b, env, ctx, acc),
         // `s + t` of a `String` and a `&str`: the two joined.
+        B::Add | B::Sub | B::Mul | B::Div | B::Rem
+            if float_operand(&b.left, env, ctx, &acc)
+                || float_operand(&b.right, env, ctx, &acc)
+                || (matches!(want, Some(Ty::Float(_)))
+                    && (float_literal_operand(&b.left) || float_literal_operand(&b.right))) =>
+        {
+            float_arithmetic(b, env, ctx, acc, want)
+        }
+        B::Add | B::Sub | B::Mul | B::Div | B::Rem
+            if unbounded_operand(&b.left, env, ctx, &acc)
+                || unbounded_operand(&b.right, env, ctx, &acc) =>
+        {
+            unbounded_arithmetic(b, env, ctx, acc)
+        }
         B::Add if text_operand(&b.left, env, ctx, &acc) => text_join(b, env, ctx, acc),
         B::Add => nat_sum(b, env, ctx, acc),
         // `a - k` where the conditions in scope bound `a` below by `k` or
@@ -3339,6 +4005,154 @@ fn nat_difference(b: &rs::ExprBinary, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((
         }
         _ => Err(Residue::Arithmetic(b.op.text().to_string())),
     }
+}
+
+/// Whether an operand is an integer of no width (see [`Ty::Unbounded`]).
+fn unbounded_operand(e: &rs::RustExpr, env: &Env, ctx: &Ctx, acc: &Acc) -> bool {
+    matches!(
+        flat_of(e, env, ctx, acc.clone(), None),
+        Ok(((_, Ty::Unbounded), _))
+    )
+}
+
+/// `a + b`, `a - b`, `a * b`, `a / b` and `a % b` of integers of no width:
+/// the crate's operators are exact (see [`crate::registered::readings`]),
+/// and a literal operand, whichever scalar type Rust infers for it, is
+/// promoted to the same integer. `/` and `%` truncate toward zero, as
+/// LexLean's `Int` quotient and remainder do, and are read only by a
+/// divisor that is a literal other than zero: the crate panics on a zero
+/// divisor (num-bigint 0.4.8, `src/biguint/division.rs`), where LexLean's
+/// total quotient returns its default, so a divisor that may be zero
+/// stays outside.
+fn unbounded_arithmetic(
+    b: &rs::ExprBinary,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    use rs::BinOp as B;
+    let want = Ty::Unbounded;
+    let ((l, lt), acc) = flat_of(&b.left, env, ctx, acc, Some(&want))?;
+    let ((r, rt), acc) = flat_of(&b.right, env, ctx, acc, Some(&want))?;
+    if lt != want || rt != want {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    }
+    if matches!(b.op, B::Div | B::Rem) && !int_literal(&b.right).is_some_and(|k| k > 0) {
+        return Err(Residue::Form(format!(
+            "{} of an integer of no width by a divisor that may be zero, where Rust panics",
+            b.op.text()
+        )));
+    }
+    let text = match b.op {
+        B::Add => format!("(prim subtract {l} (prim negate {r} : Int) : Int)"),
+        B::Sub => format!("(prim subtract {l} {r} : Int)"),
+        B::Mul => format!("(prim multiply {l} {r} : Int)"),
+        B::Div => format!("(prim quotient {l} {r} (0 : Int) : Int)"),
+        _ => format!("(prim remainder {l} {r} (0 : Int) : Int)"),
+    };
+    flat_lift(text, want, acc)
+}
+
+/// Whether an operand is a float literal without a suffix, whose format
+/// its use decides.
+fn float_literal_operand(e: &rs::RustExpr) -> bool {
+    match e {
+        rs::RustExpr::Lit(rs::Lit::Float { suffix, .. }) => suffix.is_empty(),
+        rs::RustExpr::Paren(p) => float_literal_operand(p),
+        rs::RustExpr::Unary(u) => u.op == rs::UnOp::Neg && float_literal_operand(&u.expr),
+        _ => false,
+    }
+}
+
+/// Whether an expression is a float literal whose value is not zero in any
+/// format: its magnitude is at least the least normal binary32, core's
+/// `f32::MIN_POSITIVE`, which every float type of the language holds as a
+/// nonzero value.
+fn nonzero_float_literal(e: &rs::RustExpr) -> bool {
+    match e {
+        rs::RustExpr::Lit(rs::Lit::Float { digits, .. }) => digits
+            .replace('_', "")
+            .parse::<f64>()
+            .is_ok_and(|v| v.abs() >= f64::from(f32::MIN_POSITIVE)),
+        rs::RustExpr::Paren(p) => nonzero_float_literal(p),
+        rs::RustExpr::Unary(u) => u.op == rs::UnOp::Neg && nonzero_float_literal(&u.expr),
+        _ => false,
+    }
+}
+
+/// Whether an operand is a float of the language.
+fn float_operand(e: &rs::RustExpr, env: &Env, ctx: &Ctx, acc: &Acc) -> bool {
+    matches!(
+        flat_of(e, env, ctx, acc.clone(), None),
+        Ok(((_, Ty::Float(_)), _))
+    )
+}
+
+/// The prelude's IEEE 754 operation `op` of a format (see
+/// [`crate::mir::float`]), with the axioms its definition states.
+fn float_term(f: crate::mir::float::Format, op: &str, args: &[&str], acc: Acc) -> (String, Acc) {
+    let axioms = prelude_axioms(&format!("float{op}"));
+    (
+        f.term(op, args),
+        acc.axioms_all(axioms.into_iter().collect()),
+    )
+}
+
+/// A float literal of a format: the prelude's value of its decimal digits
+/// (`crate::mir::float::literal`), negated where written so.
+fn float_literal(f: crate::mir::float::Format, digits: &str, negative: bool) -> Lift<(Expr, Ty)> {
+    let text = if negative {
+        format!("-{digits}")
+    } else {
+        digits.to_string()
+    };
+    match crate::mir::float::literal(f, &text) {
+        Some(term) => Ok((Expr::Flat(term), Ty::Float(f))),
+        None => Err(Residue::Form("float literal".to_string())),
+    }
+}
+
+/// `a + b`, `a - b`, `a * b`, `a / b` and `a % b` of floats of one
+/// format: IEEE 754's correctly rounded operations, to nearest with ties
+/// to even, which Rust's are, and `%` the remainder truncated toward zero
+/// that Rust's `%` on floats is; the prelude's model (see
+/// [`crate::mir::float`]), the MIR path's too. The format is an operand's
+/// that has one, else the one the expression's use asks for (`let y: f32 =
+/// 0.1 + 0.2`): an unsuffixed literal takes its type from where it is
+/// used, as Rust's inference gives it.
+fn float_arithmetic(
+    b: &rs::ExprBinary,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+    used: Option<&Ty>,
+) -> Lift<((Expr, Ty), Acc)> {
+    use rs::BinOp as B;
+    let typed = [&b.left, &b.right]
+        .into_iter()
+        .find(|e| float_operand(e, env, ctx, &acc))
+        .and_then(|e| flat_of(e, env, ctx, acc.clone(), None).ok())
+        .map(|((_, t), _)| t);
+    let Some(want) = typed.or_else(|| used.filter(|t| matches!(t, Ty::Float(_))).cloned()) else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    let ((l, lt), acc) = flat_of(&b.left, env, ctx, acc, Some(&want))?;
+    let ((r, rt), acc) = flat_of(&b.right, env, ctx, acc, Some(&want))?;
+    let Ty::Float(f) = want else {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    };
+    if lt != want || rt != want {
+        return Err(Residue::Arithmetic(b.op.text().to_string()));
+    }
+    let op = match b.op {
+        B::Add => "Add",
+        B::Sub => "Sub",
+        B::Mul => "Mul",
+        B::Div => "Div",
+        _ => "Rem",
+    };
+    let (term, acc) = float_term(f, op, &[&l, &r], acc);
+    flat_lift(term, want, acc)
 }
 
 /// `a / k` and `a % k` by a divisor that is not zero.
@@ -3525,7 +4339,11 @@ fn tuple_struct_value(
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut acc = acc;
     let mut values = Vec::new();
-    for (arg, (_, ty)) in c.args.iter().zip(fields) {
+    for (arg, (field, ty)) in c.args.iter().zip(fields) {
+        let arg = match env.types.cell(name, field) {
+            Some(kind) => cell_made(arg, kind, name, field)?,
+            None => arg,
+        };
         let ((v, vt), next) = flat_of(arg, env, ctx, acc, Some(ty))?;
         if !vt.same(ty) {
             return Err(Residue::Form(format!("{name} of another type")));
@@ -3680,7 +4498,171 @@ fn path_call(
     if let Some(lifted) = known {
         return Ok((lifted, acc));
     }
+    let (known, acc) = unbounded_call(&segments, &call_args, env, ctx, acc)?;
+    if let Some(lifted) = known {
+        return Ok((lifted, acc));
+    }
     fn_call(c, &segments, env, ctx, acc)
+}
+
+/// The traits of `num-traits` whose associated function a call through an
+/// integer of no width names, each with the paths a `use` may bind it by
+/// (the crate's root re-exports its `identities` module's traits).
+const UNBOUNDED_IDENTITIES: &[(&str, &str, &[&str])] = &[
+    (
+        "zero",
+        "(0 : Int)",
+        &["num_traits::Zero", "num_traits::identities::Zero"],
+    ),
+    (
+        "one",
+        "(1 : Int)",
+        &["num_traits::One", "num_traits::identities::One"],
+    ),
+];
+
+/// A constructor of an integer of no width, by the type's path
+/// (`BigInt::from(n)`): the reading's crate defines each (see
+/// [`crate::registered::readings`]). `from` of a signed integer of the
+/// language is that integer, exactly, as the crate's `From` of every
+/// signed width is, and of the type itself is the value; `default` is
+/// zero. `zero` and `one` are the `num-traits` identities, which name the
+/// crate's own implementation where the file's `use` brings the trait into
+/// scope: the type declares no associated function of either name, so a
+/// call that compiles names the trait in scope, and Rust refuses one where
+/// another trait in scope gives the name too.
+fn unbounded_call(
+    segments: &[String],
+    call_args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(Option<(Expr, Ty)>, Acc)> {
+    let [owner, function] = segments else {
+        return Ok((None, acc));
+    };
+    match env.types.registered(&env.types.resolve(owner)) {
+        Some(Ty::Unbounded) => {}
+        Some(Ty::Ratio) => return ratio_call(owner, function, call_args, env, ctx, acc),
+        _ => return Ok((None, acc)),
+    }
+    let want = Ty::Unbounded;
+    match (function.as_str(), call_args) {
+        ("from", [a]) => {
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, None)?;
+            match vt {
+                Ty::Unbounded | Ty::Integer(_) => flat_some(v, want, acc),
+                Ty::Nat(_) => {
+                    let word = crate::mir::int::Int::of(&vt, &env.widths).ok_or_else(|| {
+                        Residue::Form("unsigned constructor without a word width".into())
+                    })?;
+                    flat_some(
+                        crate::registered::word_integer(&v, word.held, false),
+                        want,
+                        acc,
+                    )
+                }
+                // The conversion of a fixed width to `Int` elaborates
+                // through these two.
+                Ty::Int(_) => {
+                    let acc = acc.axiom("Quot.sound").axiom("propext");
+                    flat_some(format!("(prim to_int {v} : Int)"), want, acc)
+                }
+                other => Err(Residue::Form(format!(
+                    "{owner}::from of {}, where LexLean binds no conversion to Int",
+                    other.render()
+                ))),
+            }
+        }
+        ("default", []) => flat_some("(0 : Int)".into(), want, acc),
+        (name, []) => match identity(name, ctx) {
+            Some(value) => flat_some(value.into(), want, acc),
+            None => Ok((None, acc)),
+        },
+        _ => Ok((None, acc)),
+    }
+}
+
+/// The value of a `num-traits` identity (`zero`, `one`) a `use` of the
+/// function's own module scope brings into scope. The path is the crate's
+/// only where the scope binds no item of the path's head itself (a local
+/// `mod num_traits` is what a relative path names first); and the call is
+/// the trait's only where no trait of the workspace declares a function
+/// of the name, which a call of a trait in scope could reach instead, and
+/// no macro of the package makes items the tool does not read.
+fn identity(name: &str, ctx: &Ctx) -> Option<&'static str> {
+    if ctx.seen.trait_methods.contains(name) || ctx.seen.macro_items {
+        return None;
+    }
+    // A path from the crate graph's root (`::num_traits`) names the crate
+    // whatever the scope binds.
+    let crate_path = |p: &str| match p.strip_prefix("::") {
+        Some(rooted) => (rooted.to_string(), true),
+        None => {
+            let head = p.split("::").next().unwrap_or(p);
+            (p.to_string(), !ctx.seen.local.contains(head))
+        }
+    };
+    UNBOUNDED_IDENTITIES
+        .iter()
+        .find(|(n, _, _)| *n == name)
+        .filter(|(_, _, paths)| {
+            ctx.seen.uses.values().any(|p| {
+                let (p, from_crate) = crate_path(p);
+                from_crate && paths.contains(&p.as_str())
+            })
+        })
+        .map(|(_, value, _)| *value)
+}
+
+/// A constructor of a ratio by the type's path, as num-rational 0.4.2's
+/// `src/lib.rs` defines each on the stored pair: `new_raw(n, d)` stores
+/// the pair as given; `from_integer(n)` and `from(n)` of an integer are
+/// `new_raw(n, 1)`; `zero()` is `new_raw(0, 1)`, `one()` is
+/// `new_raw(1, 1)`, and `default()` is `zero()`. `new` and `from` of a pair
+/// reduce by the greatest common divisor, which LexLean's `Int` gives no
+/// operation for: they stay outside.
+fn ratio_call(
+    owner: &str,
+    function: &str,
+    call_args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(Option<(Expr, Ty)>, Acc)> {
+    let integer = Ty::Unbounded;
+    let pair = |n: &str, d: &str| format!("({n}, {d})");
+    match (function, call_args) {
+        ("new_raw", [n, d]) => {
+            let ((n, nt), acc) = flat_of(n, env, ctx, acc, Some(&integer))?;
+            let ((d, dt), acc) = flat_of(d, env, ctx, acc, Some(&integer))?;
+            if nt != integer || dt != integer {
+                return Err(Residue::Form(format!("{owner}::new_raw of another type")));
+            }
+            flat_some(pair(&n, &d), Ty::Ratio, acc)
+        }
+        ("from_integer" | "from", [n]) => {
+            let ((n, nt), acc) = flat_of(n, env, ctx, acc, Some(&integer))?;
+            if nt != integer {
+                return Err(Residue::Form(format!(
+                    "{owner}::{function} of {}, which reduces by a greatest common divisor \
+                     LexLean's Int gives no operation for",
+                    nt.render()
+                )));
+            }
+            flat_some(pair(&n, "(1 : Int)"), Ty::Ratio, acc)
+        }
+        ("default", []) => flat_some(pair("(0 : Int)", "(1 : Int)"), Ty::Ratio, acc),
+        (name, []) => match identity(name, ctx) {
+            Some(value) => flat_some(pair(value, "(1 : Int)"), Ty::Ratio, acc),
+            None => Ok((None, acc)),
+        },
+        ("new", [_, _]) => Err(Residue::Form(format!(
+            "{owner}::new, which reduces by a greatest common divisor LexLean's Int gives \
+             no operation for"
+        ))),
+        _ => Ok((None, acc)),
+    }
 }
 
 /// A constructor of the standard library the lift knows, by its path's
@@ -3753,10 +4735,10 @@ fn std_call(
             let ((v, vt), acc) = flat_of(a, env, ctx, acc, want)?;
             flat_some(v, vt, acc)
         }
-        ([s, n], [rs::RustExpr::Reference(a)], _)
-            if matches!(s.as_str(), "Rc" | "Arc") && n == "clone" && !a.mutable =>
+        ([s, n], [a], _)
+            if matches!(s.as_str(), "Rc" | "Arc") && n == "clone" && !env.types.declares(s) =>
         {
-            let ((v, vt), acc) = flat_of(&a.expr, env, ctx, acc, want)?;
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, want)?;
             flat_some(v, vt, acc)
         }
         ([s, n], [a], _) if s == "String" && n == "from" => {
@@ -3779,6 +4761,20 @@ fn fn_call(
     ctx: &Ctx,
     acc: Acc,
 ) -> Lift<((Expr, Ty), Acc)> {
+    // `T::m(x, ..)` of a type parameter `T`: the dictionary's method.
+    if let [owner, method] = segments {
+        let held = match env.types.generic.get(owner) {
+            Some(Ty::Param(p)) => ctx
+                .dictionary
+                .iter()
+                .find(|e| &e.param == p && e.method == *method),
+            _ => None,
+        };
+        if let Some(entry) = held {
+            let args: Vec<&rs::RustExpr> = c.args.iter().collect();
+            return dictionary_call(entry, None, &args, env, ctx, acc);
+        }
+    }
     let mut name = segments.last().cloned().unwrap_or_default();
     if let [.., owner, method] = segments {
         let owner = if owner == "Self" {
@@ -3796,8 +4792,14 @@ fn fn_call(
     let Some(sig) = env.fns.get(&name) else {
         return Err(Residue::Call(name));
     };
+    if !sig.threads.is_empty() {
+        return Err(threaded_operand(&name));
+    }
     if sig.params.len() != c.args.len() {
         return Err(Residue::Call(name));
+    }
+    if let Some(generic) = &sig.generic {
+        return generic_call(c, &name, sig, generic, env, ctx, acc);
     }
     let mut parts = vec![sig.name.clone()];
     let mut descends = None;
@@ -3808,7 +4810,13 @@ fn fn_call(
         if !vt.same(ty) {
             return Err(Residue::Form(format!("argument of another type to {name}")));
         }
-        if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
+        if name == ctx.current
+            && ctx
+                .params
+                .get(i)
+                .is_some_and(|parameter| ctx.tails.get(&v) == Some(parameter))
+            && descends.is_none()
+        {
             descends = Some(i);
         }
         parts.push(v);
@@ -3824,6 +4832,548 @@ fn fn_call(
         acc.called(name)
     };
     flat_lift(format!("({})", parts.join(" ")), sig.result.clone(), acc)
+}
+
+/// A dictionary's method applied: to the receiver and the arguments of a
+/// method call, or to the arguments of a path call `T::m(x, ..)`, which
+/// pass the receiver first.
+fn dictionary_call(
+    entry: &Entry,
+    receiver: Option<String>,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let Ty::Fn(inputs, output) = &entry.ty else {
+        return Err(Residue::Form(
+            "a dictionary method of no function type".to_string(),
+        ));
+    };
+    let mut parts = vec!["apply".to_string(), entry.name.clone()];
+    let rest = match &receiver {
+        Some(r) => {
+            parts.push(r.clone());
+            &inputs[1..]
+        }
+        None => &inputs[..],
+    };
+    if rest.len() != args.len() {
+        return Err(Residue::Form(
+            "a dictionary method applied to another arity".to_string(),
+        ));
+    }
+    let mut acc = acc;
+    for (arg, ty) in args.iter().zip(rest) {
+        let ((v, vt), next) = flat_of(arg, env, &ctx.below(), acc, Some(ty))?;
+        if !vt.same(ty) {
+            return Err(Residue::Form(
+                "a dictionary method applied to another type".to_string(),
+            ));
+        }
+        acc = next;
+        parts.push(v);
+    }
+    flat_lift(format!("({})", parts.join(" ")), (**output).clone(), acc)
+}
+
+/// The instantiation `bind` extends so that `pattern` (a type that may
+/// name type parameters) is `actual`, or `false` where none does.
+fn instantiate(pattern: &Ty, actual: &Ty, bind: &mut BTreeMap<String, Ty>) -> bool {
+    match (pattern, actual) {
+        // One type argument is one Rust type: widths and orders count,
+        // though `Nat` renders every unsigned width alike.
+        (Ty::Param(p), _) => match bind.get(p) {
+            Some(held) => held == actual,
+            None => {
+                bind.insert(p.clone(), actual.clone());
+                true
+            }
+        },
+        (Ty::Option(a), Ty::Option(b))
+        | (Ty::List(a), Ty::List(b))
+        | (Ty::Set(a, _), Ty::Set(b, _)) => instantiate(a, b, bind),
+        (Ty::Outcome(a, e), Ty::Outcome(b, f)) | (Ty::Map(a, e, _), Ty::Map(b, f, _)) => {
+            instantiate(a, b, bind) && instantiate(e, f, bind)
+        }
+        (Ty::Fn(xs, r), Ty::Fn(ys, s)) => {
+            xs.len() == ys.len()
+                && xs.iter().zip(ys).all(|(x, y)| instantiate(x, y, bind))
+                && instantiate(r, s, bind)
+        }
+        (Ty::Tuple(xs), Ty::Tuple(ys)) | (Ty::Pair(xs), Ty::Pair(ys)) => {
+            xs.len() == ys.len() && xs.iter().zip(ys).all(|(a, b)| instantiate(a, b, bind))
+        }
+        _ => pattern.same(actual) && !pattern.render().contains('\''),
+    }
+}
+
+/// `pattern` with each type parameter `bind` fixes put in its place.
+fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
+    let go = |t: &Ty| Box::new(instantiated(t, bind));
+    match pattern {
+        Ty::Param(p) => bind.get(p).cloned().unwrap_or_else(|| pattern.clone()),
+        Ty::Option(t) => Ty::Option(go(t)),
+        Ty::List(t) => Ty::List(go(t)),
+        Ty::Set(t, o) => Ty::Set(go(t), *o),
+        Ty::Outcome(t, e) => Ty::Outcome(go(t), go(e)),
+        Ty::Map(k, v, o) => Ty::Map(go(k), go(v), *o),
+        Ty::Fn(ins, out) => Ty::Fn(ins.iter().map(|t| instantiated(t, bind)).collect(), go(out)),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| instantiated(t, bind)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| instantiated(t, bind)).collect()),
+        other => other.clone(),
+    }
+}
+
+/// The declared generic carrier after substitution, retaining its product
+/// choices. A bound opaque parameter keeps its own admitted representation.
+fn model_carrier(ty: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
+    match ty {
+        Ty::Map(..) => Ty::List(Box::new(model_carrier(&ty.entry(), bind))),
+        Ty::List(t) => Ty::List(Box::new(model_carrier(t, bind))),
+        Ty::Option(t) => Ty::Option(Box::new(model_carrier(t, bind))),
+        Ty::Outcome(t, e) => Ty::Outcome(
+            Box::new(model_carrier(t, bind)),
+            Box::new(model_carrier(e, bind)),
+        ),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| model_carrier(t, bind)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| model_carrier(t, bind)).collect()),
+        Ty::Fn(ts, r) => Ty::Fn(
+            ts.iter().map(|t| model_carrier(t, bind)).collect(),
+            Box::new(model_carrier(r, bind)),
+        ),
+        _ => instantiated(ty, bind),
+    }
+}
+
+/// A structural transport between admitted carriers. It changes no key, value
+/// or ordering; unsupported callable/state conversions remain residue.
+fn carrier_transport(
+    value: &str,
+    from: &Ty,
+    to: &Ty,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(String, Acc)> {
+    if from.same(to) {
+        return Ok((value.into(), acc));
+    }
+    let from = match from {
+        Ty::Map(..) => Ty::List(Box::new(from.entry())),
+        _ => from.clone(),
+    };
+    let to = match to {
+        Ty::Map(..) => Ty::List(Box::new(to.entry())),
+        _ => to.clone(),
+    };
+    let mut acc = acc.saw(&from).saw(&to);
+    let (input, next) = ctx.fresh(env, acc, "carrierValue");
+    acc = next;
+    let before = acc.helpers.len();
+    let mut recursive = false;
+    let mut list_tail = None;
+    let body = match (&from, &to) {
+        (Ty::Tuple(fs) | Ty::Pair(fs), Ty::Tuple(ts) | Ty::Pair(ts)) if fs.len() == ts.len() => {
+            let mut values = Vec::new();
+            for (i, (f, t)) in fs.iter().zip(ts).enumerate() {
+                let (v, next) =
+                    carrier_transport(&tuple_item(&from, &input, i), f, t, env, ctx, acc)?;
+                acc = next;
+                values.push(v);
+            }
+            Expr::Flat(tuple_value(&to, &values))
+        }
+        (Ty::List(f), Ty::List(t)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierHead");
+            acc = next;
+            let (tail, next) = ctx.fresh(env, acc, "carrierTail");
+            acc = next;
+            let (converted, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            recursive = true;
+            list_tail = Some(tail.clone());
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: "List.nil".into(),
+                        body: Expr::Flat(format!("(nil {})", t.render())),
+                    },
+                    Arm {
+                        pattern: format!("List.cons {head} {tail}"),
+                        body: Expr::Flat(converted),
+                    },
+                ],
+            }
+        }
+        (Ty::Option(f), Ty::Option(t)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierSome");
+            acc = next;
+            let (converted, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: "Option.none".into(),
+                        body: Expr::Flat(format!("(ctor Option.none [{}])", t.render())),
+                    },
+                    Arm {
+                        pattern: format!("Option.some {head}"),
+                        body: Expr::Flat(format!(
+                            "(ctor Option.some [{}] {converted})",
+                            t.render()
+                        )),
+                    },
+                ],
+            }
+        }
+        (Ty::Outcome(f, fe), Ty::Outcome(t, te)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierResult");
+            acc = next;
+            let (ok, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            let (err, next) = carrier_transport(&head, fe, te, env, ctx, acc)?;
+            acc = next;
+            let params = format!("[{}, {}]", t.render(), te.render());
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: format!("Result.ok {head}"),
+                        body: Expr::Flat(format!("(ctor Result.ok {params} {ok})")),
+                    },
+                    Arm {
+                        pattern: format!("Result.error {head}"),
+                        body: Expr::Flat(format!("(ctor Result.error {params} {err})")),
+                    },
+                ],
+            }
+        }
+        _ => {
+            return Err(Residue::Form(format!(
+                "no structural carrier transport from {} to {}",
+                from.render(),
+                to.render()
+            )))
+        }
+    };
+    let identity = crate::project::sha(format!("{from:?}\0{to:?}").as_bytes());
+    let name = ctx.helper_name(env, &acc, &format!("Carrier{identity}"));
+    let body = match (body, list_tail) {
+        (
+            Expr::Match {
+                scrutinee,
+                mut arms,
+            },
+            Some(tail),
+        ) => {
+            let Expr::Flat(head) = &arms[1].body else {
+                return Err(Residue::Form("a non-value carrier element".into()));
+            };
+            arms[1].body = Expr::Flat(format!("(cons {head} ({name} {tail}))"));
+            Expr::Match { scrutinee, arms }
+        }
+        (body, _) => body,
+    };
+    let calls = acc.helpers[before..]
+        .iter()
+        .map(|h| format!("#{}", h.name))
+        .collect();
+    let acc = acc
+        .helper(Helper {
+            name: name.clone(),
+            params: vec![(input, from.render())],
+            result: to.render(),
+            body,
+            calls,
+            axioms: BTreeSet::new(),
+            recursive,
+            entwined: false,
+            termination: None,
+        })
+        .called(format!("#{name}"));
+    Ok((format!("({name} {value})"), acc))
+}
+
+/// A call of a generic function: the type arguments its arguments fix, in
+/// the order of its type parameters, then for each method of its
+/// dictionary the one the instantiating type supplies, then its own
+/// arguments. A type parameter of the caller passes on the caller's own
+/// dictionary method; a type of the crate passes the method its impl of
+/// the trait gives, the one impl coherence admits. Any other type, a
+/// method an impl leaves to the trait's default body, and a type
+/// parameter no argument fixes stop the call.
+///
+/// An unsuffixed number literal has no type of its own: Rust gives it the
+/// type the call's other arguments fix (`first(200, x)` with `x: u8` makes
+/// `200` a `u8`). Such arguments are therefore lifted after the others,
+/// against the type those fixed; a type parameter only such literals fix
+/// takes its type from the call's context, which the lift does not read,
+/// and stops the call.
+fn generic_call(
+    c: &rs::ExprCall,
+    name: &str,
+    sig: &Sig,
+    generic: &Generic,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    let mut bind: BTreeMap<String, Ty> = BTreeMap::new();
+    let mut lifted: Vec<Option<(String, Ty)>> = vec![None; c.args.len().min(sig.params.len())];
+    let mut descends = None;
+    let mut acc = acc;
+    let pairs: Vec<(usize, (&rs::RustExpr, &Ty))> =
+        c.args.iter().zip(&sig.params).enumerate().collect();
+    let (inferred, fixed): (Vec<_>, Vec<_>) = pairs
+        .into_iter()
+        .partition(|(_, (arg, ty))| untyped_number(arg) && ty.render().contains('\''));
+    for (i, (arg, ty)) in fixed.into_iter().chain(inferred) {
+        let wanted = instantiated(ty, &bind);
+        let typed = !wanted.render().contains('\'');
+        if !typed && untyped_number(arg) {
+            return Err(Residue::Form(format!(
+                "a call of {name} whose type parameter only an unsuffixed number literal fixes"
+            )));
+        }
+        let want = typed.then_some(&wanted);
+        let ((v, vt), next) = flat_of(arg, env, ctx, acc, want)?;
+        acc = next;
+        if !instantiate(ty, &vt, &mut bind) {
+            return Err(Residue::Form(format!("argument of another type to {name}")));
+        }
+        if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
+            descends = Some(i);
+        }
+        lifted[i] = Some((v, vt));
+    }
+    let mut args = Vec::new();
+    for ((value, actual), formal) in lifted.into_iter().flatten().zip(&sig.params) {
+        let target = model_carrier(formal, &bind);
+        let (value, next) = carrier_transport(&value, &actual, &target, env, ctx, acc)?;
+        acc = next;
+        args.push(value);
+    }
+    let mut types = Vec::new();
+    for p in &generic.types {
+        let Some(t) = bind.get(p) else {
+            return Err(Residue::Form(format!(
+                "a call of {name} whose arguments do not fix its type parameter {p}"
+            )));
+        };
+        types.push(t.render());
+    }
+    if name == ctx.current {
+        // No polymorphic recursion: a recursive call passes the
+        // definition's own type parameters and dictionary.
+        let own = generic
+            .types
+            .iter()
+            .all(|p| bind.get(p) == Some(&Ty::Param(p.clone())));
+        let Some(i) = descends.filter(|_| own) else {
+            return Err(Residue::Form(
+                "recursion that does not descend on a slice".to_string(),
+            ));
+        };
+        acc = acc.descended(i);
+    } else {
+        acc = acc.called(name.to_string());
+    }
+    let mut dictionary = Vec::new();
+    for e in &generic.dictionary {
+        let wanted = instantiated(&e.ty, &bind);
+        match &bind[&e.param] {
+            Ty::Param(q) => {
+                let Some(own) = ctx
+                    .dictionary
+                    .iter()
+                    .find(|d| &d.param == q && d.declarer == e.declarer && d.method == e.method)
+                else {
+                    return Err(Residue::Call(format!(
+                        "{}::{} of a type parameter whose dictionary does not give it",
+                        e.declarer, e.method
+                    )));
+                };
+                dictionary.push(own.name.clone());
+            }
+            Ty::Named(o) => {
+                let key = (e.declarer.clone(), o.clone(), e.method.clone());
+                let Some((rust, method)) = env
+                    .types
+                    .impls
+                    .get(&key)
+                    .and_then(|k| env.fns.get(k).map(|s| (k, s)))
+                else {
+                    return Err(Residue::Call(format!(
+                        "{}::{} of {o}, which no impl method of {o} that lifts gives",
+                        e.declarer, e.method
+                    )));
+                };
+                let given = Ty::Fn(method.params.clone(), Box::new(method.result.clone()));
+                if method.generic.is_some() || !given.same(&wanted) {
+                    return Err(Residue::Form(format!(
+                        "{}::{} of {o} of another type",
+                        e.declarer, e.method
+                    )));
+                }
+                acc = acc.called(rust.clone());
+                dictionary.push(format!("(ref {})", method.name));
+            }
+            other => {
+                return Err(Residue::Call(format!(
+                    "{}::{} of {}, a type no impl of the crate is read for",
+                    e.declarer,
+                    e.method,
+                    other.render()
+                )))
+            }
+        }
+    }
+    let mut parts = vec![sig.name.clone()];
+    if !types.is_empty() {
+        parts.push(format!("[{}]", types.join(", ")));
+    }
+    parts.extend(dictionary);
+    parts.extend(args);
+    let result = instantiated(&sig.result, &bind);
+    let modeled = model_carrier(&sig.result, &bind);
+    let (term, acc) = carrier_transport(
+        &format!("({})", parts.join(" ")),
+        &modeled,
+        &result,
+        env,
+        ctx,
+        acc,
+    )?;
+    flat_lift(term, result, acc)
+}
+
+/// A generic model term, result, external dependencies and structural declarations.
+pub(crate) type ModelBinding = (String, Ty, BTreeSet<String>, Vec<Decl>);
+
+/// Bind compiler values with the same generic argument and coherent dictionary
+/// mechanism used by source calls. This imports an existing definition; it
+/// neither supplies a missing body nor assumes a trait method's behavior.
+pub(crate) fn bind_model_call(
+    sig: &Sig,
+    args: &[(String, Ty)],
+    types: &Types,
+    fns: &BTreeMap<String, Sig>,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+) -> Lift<ModelBinding> {
+    let generic = sig
+        .generic
+        .as_ref()
+        .ok_or_else(|| Residue::Form("a compiler generic call with no generic signature".into()))?;
+    if !sig.threads.is_empty() || sig.params.len() != args.len() {
+        return Err(Residue::Form(
+            "a compiler generic call of another interface".into(),
+        ));
+    }
+    let locals: BTreeMap<String, (String, Ty)> = args
+        .iter()
+        .enumerate()
+        .map(|(i, arg)| (format!("modelArg{i}"), arg.clone()))
+        .collect();
+    let call: syn::ExprCall = syn::parse_str(&format!(
+        "compilerDependency({})",
+        (0..args.len())
+            .map(|i| format!("modelArg{i}"))
+            .collect::<Vec<_>>()
+            .join(", ")
+    ))
+    .map_err(|_| Residue::Form("a compiler generic call whose arguments cannot be bound".into()))?;
+    let converted = crate::convert::expr(&syn::Expr::Call(call));
+    let rs::RustExpr::Call(call) = &converted else {
+        return Err(Residue::Form(
+            "a compiler generic call of no call expression".into(),
+        ));
+    };
+    let env = Env {
+        total: true,
+        types: types.clone(),
+        fns: fns.clone(),
+        widths: widths.to_vec(),
+        names: names.clone(),
+    };
+    let ctx = Ctx {
+        current: String::new(),
+        params: Vec::new(),
+        result: sig.result.clone(),
+        return_states: Vec::new(),
+        own: "compilerDependency".into(),
+        locals,
+        tails: BTreeMap::new(),
+        top: false,
+        looping: None,
+        hidden: Vec::new(),
+        imports: BTreeMap::new(),
+        seen: Seen::default(),
+        closures: BTreeMap::new(),
+        elements: None,
+        rebuilt: BTreeMap::new(),
+        bounds: BTreeMap::new(),
+        capped: BTreeMap::new(),
+        exits: None,
+        formatter: None,
+        dictionary: Vec::new(),
+        sealed: BTreeSet::new(),
+        borrowed: BTreeSet::new(),
+    };
+    let ((term, result), acc) = generic_call(
+        call,
+        "compilerDependency",
+        sig,
+        generic,
+        &env,
+        &ctx,
+        Acc::default(),
+    )?;
+    if !acc.axioms.is_empty()
+        || acc.helpers.iter().any(|h| {
+            !h.axioms.is_empty()
+                || h.entwined
+                || h.termination.is_some()
+                || h.calls.iter().any(|c| !c.starts_with('#'))
+        })
+    {
+        return Err(Residue::Form(
+            "a compiler generic binding needing additional declarations".into(),
+        ));
+    }
+    let calls = acc
+        .calls
+        .iter()
+        .filter(|key| !key.starts_with('#'))
+        .map(|key| {
+            if key == "compilerDependency" {
+                Ok(sig.name.clone())
+            } else {
+                fns.get(key)
+                    .map(|s| s.name.clone())
+                    .ok_or_else(|| Residue::Call(key.clone()))
+            }
+        })
+        .collect::<Lift<BTreeSet<_>>>()?;
+    let declarations = acc
+        .helpers
+        .into_iter()
+        .map(|h| Decl::Definition {
+            type_parameters: Vec::new(),
+            recursive: h.recursive.then(|| h.params[0].0.clone()),
+            name: h.name,
+            parameters: h.params,
+            result: h.result,
+            body: h.body,
+            axioms: Vec::new(),
+            termination: None,
+            mutual: None,
+        })
+        .collect();
+    Ok((flat_text(term)?, result, calls, declarations))
 }
 
 /// The module of the byte-level text prelude every projection carries.
@@ -4253,6 +5803,9 @@ fn method(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     let name = m.method.to_string();
+    if let Some(read) = cell_method(m, env, ctx, &acc) {
+        return read(acc);
+    }
     let (shaped, acc) = receiver_shape(m, &name, env, ctx, acc, want)?;
     if let Some(lifted) = shaped {
         return Ok((lifted, acc));
@@ -4286,6 +5839,22 @@ fn method_on(
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut acc = acc;
     let args: Vec<&rs::RustExpr> = m.args.iter().collect();
+    // A value of a type parameter has the methods of its dictionary and
+    // no other: Rust finds a method of a bound before any trait's that
+    // needs more than the bound gives.
+    if let Ty::Param(p) = &rt {
+        let Some(entry) = ctx
+            .dictionary
+            .iter()
+            .find(|e| &e.param == p && e.method == name)
+        else {
+            return Err(Residue::Form(format!(
+                "a method {name} of a value of a type parameter, which its dictionary does not \
+                 give"
+            )));
+        };
+        return dictionary_call(entry, Some(r), &args, env, ctx, acc);
+    }
     // A path's text, and the path itself where Rust borrows or copies it.
     if rt == Ty::Path && args.is_empty() {
         match name {
@@ -4316,6 +5885,9 @@ fn method_on(
     if let Ty::Named(owner) = &rt {
         let key = format!("{owner}::{name}");
         if let Some(sig) = env.fns.get(&key) {
+            if !sig.threads.is_empty() {
+                return Err(threaded_operand(&key));
+            }
             if key == ctx.current {
                 // Recursion on a sub-term of `self` descends; any other does not.
                 if ctx.tails.get(&r) != ctx.params.first() {
@@ -4527,6 +6099,13 @@ fn method_typed(
     acc: Acc,
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
+    // A trait of the workspace that declares a method of the name may be
+    // what the call reaches (see `inherent_reached`).
+    if ctx.seen.trait_methods.contains(name) || ctx.seen.macro_items {
+        return Err(Residue::Form(format!(
+            "method call .{name}, which a trait of the workspace in scope may declare"
+        )));
+    }
     match (rt, name) {
         // `a.checked_div(b)`, `a.checked_rem(b)`: none for a zero divisor.
         (Ty::Nat(_), "checked_div" | "checked_rem") if args.len() == 1 => {
@@ -4572,6 +6151,32 @@ fn method_typed(
             Ty::Integer(bits),
             "checked_add" | "checked_sub" | "checked_mul" | "checked_div" | "checked_neg",
         ) => method_integer_checked(bits, name, r, rt, args, env, ctx, acc),
+        // A float's inherent methods, where no trait in scope may take the
+        // name first: the prelude's model, by the table the MIR path reads.
+        (Ty::Float(f), _) if float_method(name, args.len()).is_some() => {
+            inherent_reached(name, ctx)?;
+            method_float(*f, name, r, rt, args, env, ctx, acc)
+        }
+        (Ty::Ratio, "numer" | "denom" | "is_integer")
+            if args.is_empty() && ctx.seen.outside_traits =>
+        {
+            Err(trait_in_scope(name))
+        }
+        // A ratio's inherent accessors (num-rational 0.4.2, `src/lib.rs`),
+        // where no trait in scope may take the name first: the stored
+        // numerator and denominator, and whether the denominator is one.
+        // The reciprocal panics on a zero numerator, which nothing the lift
+        // reads rules out: it stays outside.
+        (Ty::Ratio, "recip") if args.is_empty() => Err(Residue::Form(
+            "recip of a ratio whose numerator may be zero, where Rust panics".to_string(),
+        )),
+        (Ty::Ratio, "numer" | "denom" | "is_integer") if args.is_empty() => {
+            let Some((term, result))=crate::registered::numeric_observation(rt,name,r) else {
+                return Err(Residue::Form(format!("unmodeled ratio observation {name}")));
+            };
+            let acc=if name=="is_integer" {acc.axiom("propext")} else {acc};
+            flat_lift(term,result,acc)
+        }
         (Ty::List(_), "len") if args.is_empty() => {
             method_list_len(r, acc)
         }
@@ -4987,6 +6592,120 @@ fn method_integer_checked(
     flat_lift(text, opt_of(rt), acc)
 }
 
+/// The residue of a method call a trait in scope may take before the
+/// inherent method of the name.
+fn trait_in_scope(name: &str) -> Residue {
+    Residue::Form(format!(
+        "method call .{name}, which a trait in scope from outside the workspace may declare"
+    ))
+}
+
+/// Whether the inherent method `name` of a float or a ratio is what a call
+/// reaches. Method lookup tries each receiver type in turn (the value's,
+/// then `&` and `&mut` of it, then the same after each dereference) and
+/// prefers an inherent method only within one of those steps (the Rust
+/// reference, "Method call expressions"), so a trait method whose receiver
+/// matches an earlier step wins: `Top::numer(self)` on a ratio value over
+/// `Ratio::numer(&self)`, `Odd::abs(&self)` on an `&f64` over
+/// `f64::abs(self)`. A trait's method is a candidate only where the trait
+/// is in scope, so the inherent method is the one reached where no trait of
+/// the workspace in scope declares the name (checked in [`method_typed`],
+/// [`Seen::trait_methods`]) and the
+/// scope brings in no trait from outside the workspace and the standard
+/// library, whose prelude declares none of these names for a float or a
+/// ratio.
+fn inherent_reached(name: &str, ctx: &Ctx) -> Lift<()> {
+    match ctx.seen.outside_traits {
+        true => Err(trait_in_scope(name)),
+        false => Ok(()),
+    }
+}
+
+/// The prelude's operation and kind of a float's inherent method of this
+/// many arguments besides `self`, by the table the MIR path reads
+/// ([`crate::mir::float::METHODS`]).
+fn float_method(name: &str, args: usize) -> Option<(&'static str, crate::mir::float::Kind)> {
+    use crate::mir::float::Kind;
+    crate::mir::float::METHODS
+        .iter()
+        .find(|(t, m, _, n, kind)| {
+            t.is_empty()
+                && *m == name
+                && *n == args + 1
+                && (matches!(kind, Kind::Value | Kind::Test) || *m == "to_bits")
+        })
+        .map(|(_, _, op, _, kind)| (*op, *kind))
+}
+
+/// The float methods whose value depends on the sign or payload of a NaN.
+const NAN_OBSERVERS: [&str; 4] = [
+    "to_bits",
+    "is_sign_negative",
+    "is_sign_positive",
+    "copysign",
+];
+
+/// `x.abs()`, `x.is_nan()`, `x.to_bits()` and the other inherent methods
+/// of a float the prelude models, each on operands of the receiver's
+/// format. `to_bits` is the bit pattern a float is held as.
+#[allow(clippy::too_many_arguments)]
+fn method_float(
+    f: crate::mir::float::Format,
+    name: &str,
+    r: &str,
+    rt: &Ty,
+    args: &[&rs::RustExpr],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<((Expr, Ty), Acc)> {
+    use crate::mir::float::Kind;
+    let Some((op, kind)) = float_method(name, args.len()) else {
+        return Err(Residue::Form(format!("method call .{name}")));
+    };
+    // Rust leaves the sign and payload of a NaN an operation returns
+    // unspecified (the standard library's `f64` documentation, "NaN bit
+    // patterns"), where the prelude's model fixes one: what reads them of
+    // a value that may be such a NaN is not the model's.
+    if NAN_OBSERVERS.contains(&name) {
+        return Err(Residue::Form(format!(
+            ".{name} of a float, which reads the sign or payload of a NaN Rust leaves unspecified"
+        )));
+    }
+    // `min` and `max` of two zeros may return either (the standard
+    // library's `f64::min`: "either may be returned"), so the operands
+    // must not both be zeros: one is a literal that is not zero.
+    if matches!(name, "min" | "max" | "minimum" | "maximum")
+        && !args.iter().any(|a| nonzero_float_literal(a))
+    {
+        return Err(Residue::Form(format!(
+            ".{name} of floats that may both be zeros, whose sign Rust leaves unspecified"
+        )));
+    }
+    if name == "to_bits" {
+        return flat_lift(r.to_string(), Ty::Nat(Some(1 + f.exp + f.frac)), acc);
+    }
+    let mut terms = vec![r.to_string()];
+    let mut acc = acc;
+    for a in args {
+        let ((v, vt), next) = flat_of(a, env, ctx, acc, Some(rt))?;
+        if vt != *rt {
+            return Err(Residue::Form(format!(
+                "method call .{name} of another type"
+            )));
+        }
+        terms.push(v);
+        acc = next;
+    }
+    let refs: Vec<&str> = terms.iter().map(String::as_str).collect();
+    let (term, acc) = float_term(f, op, &refs, acc);
+    let ty = match kind {
+        Kind::Test => Ty::Bool,
+        _ => rt.clone(),
+    };
+    flat_lift(term, ty, acc)
+}
+
 /// `.min` on a receiver of type `Int`.
 fn method_int_min(
     name: &str,
@@ -5326,7 +7045,8 @@ fn default_in(ty: &Ty, types: &Types, depth: usize) -> Option<String> {
         Ty::Bool => "false".into(),
         Ty::Nat(_) | Ty::Float(_) | Ty::Signed(_) | Ty::Scalar => "0".into(),
         Ty::Int(_) => "(0 : Int64)".into(),
-        Ty::Integer(_) => "(0 : Int)".into(),
+        Ty::Integer(_) | Ty::Unbounded => "(0 : Int)".into(),
+        Ty::Ratio => "((0 : Int), (1 : Int))".into(),
         Ty::Str | Ty::Char => "\"\"".into(),
         Ty::ParseError => format!("(ctor {PRELUDE}::ParseIntError.InvalidDigit)"),
         Ty::Option(t) => format!("(ctor Option.none [{}])", t.render()),
@@ -5340,7 +7060,8 @@ fn default_in(ty: &Ty, types: &Types, depth: usize) -> Option<String> {
                 default_in(err, types, depth + 1)?
             ),
         },
-        Ty::Path => return None,
+        // A type parameter has no default its definition could name.
+        Ty::Path | Ty::Param(_) => return None,
         // A function: the one that gives every input its result's default.
         Ty::Fn(ins, out) => {
             let params: Vec<String> = ins
@@ -5664,6 +7385,11 @@ fn wrapped_method(
         }
         ("unwrap_or_default" | "unwrap" | "expect", _) => {
             let rust_default = name == "unwrap_or_default";
+            if env.total && !rust_default {
+                return Err(Residue::Form(
+                    "a partial source model cannot discharge a native panic obligation".into(),
+                ));
+            }
             if rust_default && matches!(value, Ty::Named(_)) {
                 return Err(Residue::Form("unwrap_or_default of a named type".into()));
             }
@@ -5850,6 +7576,11 @@ fn bind_pat(
                 let Some((_, t)) = fields.iter().find(|(name, _)| *name == field) else {
                     return Err(Residue::Form("closure pattern".to_string()));
                 };
+                if let Some(kind) = env.types.cell(n, &field) {
+                    if !matches!(f.pat, rs::Pat::Wild) {
+                        return Err(cell_unread(kind, n, &field, None));
+                    }
+                }
                 parts.push((&f.pat, t.clone(), field));
             }
             bind_parts(&parts, ty, env, ctx, acc, lets)
@@ -5944,6 +7675,7 @@ fn lambda(
         looping: None,
         hidden: Vec::new(),
         elements: None,
+        sealed: ctx.sealing(),
         ..ctx.clone()
     };
     let mut binders = Vec::new();
@@ -6017,11 +7749,18 @@ fn closure_tries(body: &rs::RustExpr, n: usize) -> rs::RustExpr {
 
 /// The outer locals a helper's body names: they become its parameters.
 fn captures(ctx: &Ctx, texts: &[String], bound: &[String]) -> Vec<(String, Ty)> {
+    // A dictionary's method is a parameter of the definition, captured
+    // as a local is.
+    let dictionary = ctx
+        .dictionary
+        .iter()
+        .map(|e| (e.name.clone(), e.ty.clone()));
     let found: BTreeSet<(String, Ty)> = ctx
         .locals
         .values()
-        .filter(|(n, _)| !bound.contains(n) && texts.iter().any(|t| mentions_word(t, n)))
         .cloned()
+        .chain(dictionary)
+        .filter(|(n, _)| !bound.contains(n) && texts.iter().any(|t| mentions_word(t, n)))
         .collect();
     found.into_iter().collect()
 }
@@ -6177,7 +7916,7 @@ fn lookup(
     needle: &rs::RustExpr,
 ) -> Lift<((Expr, Ty), Acc)> {
     let key_ty = match (elem, value) {
-        (Ty::Tuple(kv), Some(_)) => kv[0].clone(),
+        (Ty::Tuple(kv) | Ty::Pair(kv), Some(_)) => kv[0].clone(),
         _ => elem.clone(),
     };
     let ((v, vt), acc) = flat_of(needle, env, ctx, acc, Some(&key_ty))?;
@@ -6187,7 +7926,7 @@ fn lookup(
     let (head, acc) = ctx.fresh(env, acc, "item");
     let (probe, acc) = ctx.fresh(env, acc, "needle");
     let subject = if value.is_some() {
-        format!("(project {head} item0)")
+        tuple_item(elem, &head, 0)
     } else {
         head.clone()
     };
@@ -6213,8 +7952,9 @@ fn lookup(
             Ty::Option(Box::new(vt.clone())),
             format!("(ctor Option.none [{}])", vt.render()),
             format!(
-                "(ctor Option.some [{}] (project {head} item1))",
-                vt.render()
+                "(ctor Option.some [{}] {})",
+                vt.render(),
+                tuple_item(elem, &head, 1)
             ),
         ),
         _ => (Ty::Bool, "false".to_string(), "true".to_string()),
@@ -6354,13 +8094,9 @@ fn collection(
             if !*sorted {
                 return unordered();
             }
-            let (field, ty) = if name == "keys" {
-                ("item0", k)
-            } else {
-                ("item1", v)
-            };
+            let (field, ty) = if name == "keys" { (0, k) } else { (1, v) };
             let (head, acc) = ctx.fresh(env, acc, "entry");
-            let core = format!("(project {head} {field})");
+            let core = tuple_item(&rt.entry(), &head, field);
             let lam = Lambda {
                 binders: vec![head.clone()],
                 lets: Vec::new(),
@@ -7158,6 +8894,9 @@ fn head<'a>(cell: Cell<'a>, ty: &Ty, types: &Types) -> Option<(Vec<String>, Head
 }
 
 fn pat_head<'a>(p: &'a rs::Pat, ty: &Ty, types: &Types) -> Option<(Vec<String>, Head<'a>)> {
+    if binds_cell(p, ty, types) {
+        return None;
+    }
     match p {
         rs::Pat::Wild | rs::Pat::Rest => Some((Vec::new(), Head::Any)),
         rs::Pat::Reference(inner) => pat_head(inner, ty, types),
@@ -7966,6 +9705,8 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
         // `x.f = v`: the structure `x` with its field `f` replaced.
         rs::RustExpr::Assign(a) => match &*a.left {
             rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
+            // `*x = v` through a `&mut` the function threads: its new value.
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => ident(&u.expr),
             left => ident(left),
         },
         // `*m.entry(k).or_default() += v` and `m.entry(k).or_default().push(v)`
@@ -7974,6 +9715,8 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
             rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => {
                 ident(default_entry(&u.expr)?.0)
             }
+            // `x.f += v`: the structure `x` with its field `f` added to.
+            rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
             left => ident(left),
         },
         rs::RustExpr::MethodCall(m) if default_entry(&m.receiver).is_some() => {
@@ -8050,6 +9793,9 @@ fn updated(
             let Some((_, fty)) = fields.iter().find(|(f, _)| *f == target) else {
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
+            if let Some(kind) = env.types.cell(name, &target) {
+                return Err(cell_unread(kind, name, &target, Some(&m.method)));
+            }
             let read = |field: &String| {
                 if env.types.boxed(name) {
                     format!("({} {current})", Types::accessor(name, field))
@@ -8088,6 +9834,9 @@ fn updated(
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
             let target = local_name(member);
+            if let Some(kind) = env.types.cell(name, &target) {
+                return Err(cell_unread(kind, name, &target, None));
+            }
             let mut acc = acc;
             let mut parts = Vec::new();
             for (field, fty) in fields {
@@ -8152,6 +9901,30 @@ fn updated(
             let (insert, acc) = sorted_insert(ty, env, ctx, acc)?;
             let (helper, acc) = insert_all(ty, &items, &insert, env, ctx, acc);
             Ok((format!("({helper} {v} {current})"), acc))
+        }
+        // `x.f += v`: the field's new value, as a local's would be.
+        (rs::RustExpr::Binary(b), Ty::Named(name)) if named_field(&b.left).is_some() => {
+            let Some(rs::Member::Named(member)) = named_field(&b.left).map(|f| &f.member) else {
+                return Err(Residue::Form("an update outside the lift".to_string()));
+            };
+            if let Some(kind) = env.types.cell(name, &local_name(member)) {
+                return Err(cell_unread(kind, name, &local_name(member), None));
+            }
+            let place = Place {
+                local: String::new(),
+                field: Some(member.clone()),
+            };
+            let Some((fty, read)) = place.field_of(name, current, env) else {
+                return Err(Residue::Form(format!("a field update of {name}")));
+            };
+            if matches!(fty, Ty::Named(_)) {
+                return Err(Residue::Form(format!(
+                    "an operator update of a field of {name} of type {}",
+                    fty.render()
+                )));
+            }
+            let (v, acc) = updated(e, &fty, &read, env, ctx, acc)?;
+            Ok((place.replaced(name, current, &v, env)?, acc))
         }
         (rs::RustExpr::Binary(b), Ty::Str) => {
             let (piece, acc) = value_of(&b.right, &Ty::Str, acc)?;
@@ -8417,6 +10190,9 @@ fn loop_state(body: &[rs::Stmt], ctx: &Ctx) -> Lift<Vec<String>> {
         .into_iter()
         .filter(|u| ctx.locals.contains_key(u) && !declared.contains(u))
         .collect();
+    for local in &state {
+        ctx.unsealed(local)?;
+    }
     // A loop of the function's own statements that updates nothing may
     // still leave it: a walk whose state is `()`.
     if state.is_empty() && !ctx.top {
@@ -9010,6 +10786,7 @@ fn while_loop(
     let evidence = format!("decreases_{name}_0");
     let axioms: Vec<String> = ["Quot.sound", "propext"].map(String::from).to_vec();
     let theorem = Decl::Theorem {
+        type_parameters: Vec::new(),
         name: evidence,
         parameters: params.clone(),
         statement: format!(
@@ -9410,13 +11187,43 @@ fn block(
         _ => {}
     }
     if let Some((first, rest)) = stmts.split_first() {
-        if let Some(rewritten) = rewritten(first, ctx, &acc) {
+        if let Some(rewritten) = rewritten(first, env, ctx, &acc) {
             return block_rewritten(rewritten, rest, env, ctx, acc, want);
         }
     }
     match stmts {
         // A block with no value is `()`.
         [] if want == Some(&Ty::Unit) => Ok(((Expr::Flat("()".into()), Ty::Unit), acc)),
+        // `x.m(..);`, `f(&mut x, ..);` and a block's last call: a call of a
+        // function that threads `&mut` parameters, each place it lends
+        // rebound to the value it gives back.
+        [rs::Stmt::Expr(e, semi), rest @ ..]
+            if (*semi || rest.is_empty()) && threaded_call(e, env, ctx).is_some() =>
+        {
+            let Some(call) = threaded_call(e, env, ctx) else {
+                return Err(Residue::Statements);
+            };
+            threaded_stmt(call, None, !*semi, rest, env, ctx, acc, want)
+        }
+        // `let x = x.m(..);`: the same, with `x` bound to the call's result.
+        [rs::Stmt::Local(l), rest @ ..]
+            if threaded_let(l).is_some_and(|(_, _, e)| threaded_call(e, env, ctx).is_some()) =>
+        {
+            let (Some((binder, declared, e)), true) =
+                (threaded_let(l), !rest.is_empty() || want == Some(&Ty::Unit))
+            else {
+                return Err(Residue::Statements);
+            };
+            let Some(call) = threaded_call(e, env, ctx) else {
+                return Err(Residue::Statements);
+            };
+            let declared = match declared {
+                Some(t) => Some(env.types.ty(&t.localized(&ctx.imports))?),
+                None => None,
+            };
+            let bound = binder.map(|b| (b, declared));
+            threaded_stmt(call, bound, false, rest, env, ctx, acc, want)
+        }
         // The arms of a match and the branches of an if in tail position
         // are in tail position too: a `return` there leaves the function.
         [rs::Stmt::Expr(e @ (rs::RustExpr::Match(_) | rs::RustExpr::If(_)), false)] => {
@@ -9508,6 +11315,20 @@ fn block(
         [rs::Stmt::Local(local), rest @ ..] if !rest.is_empty() => {
             let_stmt(local, rest, env, ctx, acc, want)
         }
+        // `x.c.set(v);`, `x.c.borrow_mut().push(v);`: a change of a cell
+        // field, which keeps its own row.
+        [rs::Stmt::Expr(rs::RustExpr::MethodCall(m), true), ..] => {
+            let mut call = m;
+            loop {
+                if let Some(Err(row)) = cell_method(call, env, ctx, &acc).map(|r| r(acc.clone())) {
+                    return Err(row);
+                }
+                match &*call.receiver {
+                    rs::RustExpr::MethodCall(inner) => call = inner,
+                    _ => return Err(Residue::Statements),
+                }
+            }
+        }
         _ => Err(Residue::Statements),
     }
 }
@@ -9516,13 +11337,48 @@ fn block(
 /// as the entry read, updated and written back, and, among the function's
 /// own statements, a `?` hoisted to a binding of its own. With them, the
 /// fresh binder the rewrite takes.
-fn rewritten(first: &rs::Stmt, ctx: &Ctx, acc: &Acc) -> Option<(Vec<rs::Stmt>, String)> {
+fn rewritten(first: &rs::Stmt, env: &Env, ctx: &Ctx, acc: &Acc) -> Option<(Vec<rs::Stmt>, String)> {
     let n = acc.given.len() + 1;
     if let Some(written) = entry_update(first, n) {
         return Some((written, format!("entry{n}")));
     }
     if !ctx.top {
         return None;
+    }
+    // Unpack the callee's state before matching its fallible return value.
+    // Otherwise the failure branch would return the caller's old state.
+    if let rs::Stmt::Local(local) = first {
+        if let Some(init) = &local.init {
+            if let rs::RustExpr::Try(inner) = &*init.expr {
+                if init.diverge.is_none() && threaded_call(inner, env, ctx).is_some() {
+                    let mut name = format!("propagated{n}");
+                    while ctx.locals.contains_key(&name)
+                        || env.fns.contains_key(&name)
+                        || ctx.taken(env, &name)
+                        || acc.given.contains(&name)
+                    {
+                        name.push('_');
+                    }
+                    let binding = rs::Stmt::Local(rs::Local {
+                        pat: rs::Pat::Ident(rs::PatIdent {
+                            ident: name.clone(),
+                            by_ref: false,
+                            subpat: None,
+                        }),
+                        init: Some(rs::LocalInit {
+                            expr: inner.clone(),
+                            diverge: None,
+                        }),
+                    });
+                    let mut next = local.clone();
+                    if let Some(init) = &mut next.init {
+                        *init.expr =
+                            rs::RustExpr::Try(Box::new(rs::RustExpr::Path(rs::Path::ident(&name))));
+                    }
+                    return Some((vec![binding, rs::Stmt::Local(next)], name));
+                }
+            }
+        }
     }
     let (binding, stmt) = hoist_try(first, n)?;
     Some((vec![binding, stmt], format!("tried{n}")))
@@ -9773,6 +11629,7 @@ fn update_stmt(
     let Some((current, ty)) = ctx.locals.get(&target).cloned() else {
         return Err(Residue::Form(format!("an update of {target}")));
     };
+    ctx.unsealed(&target)?;
     let (value, acc) = updated(e, &ty, &current, env, ctx, acc)?;
     let (scope, name, acc) = ctx.bind(env, acc, &target, ty.clone());
     let ((rest, rt), acc) = block(rest, env, &scope, acc, want)?;
@@ -9788,6 +11645,918 @@ fn update_stmt(
         ),
         acc,
     ))
+}
+
+/// The names the `ref` patterns of these statements bind, anywhere in them.
+fn ref_binders(stmts: &[rs::Stmt]) -> BTreeSet<String> {
+    fn pat(p: &rs::Pat, out: &mut BTreeSet<String>) {
+        match p {
+            rs::Pat::Ident(i) => {
+                if i.by_ref {
+                    out.insert(i.ident.clone());
+                }
+                if let Some(sub) = &i.subpat {
+                    pat(sub, out);
+                }
+            }
+            rs::Pat::Reference(inner) => pat(inner, out),
+            rs::Pat::Type(pt) => pat(&pt.pat, out),
+            rs::Pat::Tuple(ps) | rs::Pat::Slice(ps) | rs::Pat::Or(ps) => {
+                ps.iter().for_each(|p| pat(p, out));
+            }
+            rs::Pat::TupleStruct(ts) => ts.elems.iter().for_each(|p| pat(p, out)),
+            rs::Pat::Struct(ps) => ps.fields.iter().for_each(|f| pat(&f.pat, out)),
+            rs::Pat::Guard(g) => pat(&g.pat, out),
+            rs::Pat::Wild | rs::Pat::Rest | rs::Pat::Lit(_) | rs::Pat::Range(_) => {}
+            rs::Pat::Path(_) | rs::Pat::Other => {}
+        }
+    }
+    fn expr(e: &rs::RustExpr, out: &mut BTreeSet<String>) {
+        match e {
+            rs::RustExpr::Match(m) => m.arms.iter().for_each(|a| pat(&a.pat, out)),
+            rs::RustExpr::Let(l) => pat(&l.pat, out),
+            rs::RustExpr::ForLoop(f) => pat(&f.pat, out),
+            rs::RustExpr::Closure(c) => c.inputs.iter().for_each(|p| pat(p, out)),
+            rs::RustExpr::Macro(m) => {
+                if let Some(mm) = &m.matches {
+                    pat(&mm.pat, out);
+                }
+            }
+            _ => {}
+        }
+        let (exprs, blocks) = e.parts();
+        exprs.into_iter().for_each(|e| expr(e, out));
+        blocks.into_iter().for_each(|b| walk(&b.stmts, out));
+    }
+    fn walk(ss: &[rs::Stmt], out: &mut BTreeSet<String>) {
+        for s in ss {
+            match s {
+                rs::Stmt::Local(l) => {
+                    pat(&l.pat, out);
+                    if let Some(init) = &l.init {
+                        expr(&init.expr, out);
+                        if let Some(d) = &init.diverge {
+                            expr(d, out);
+                        }
+                    }
+                }
+                rs::Stmt::Expr(e, _) => expr(e, out),
+                rs::Stmt::Macro(_) | rs::Stmt::Other => {}
+            }
+        }
+    }
+    let mut out = BTreeSet::new();
+    walk(stmts, &mut out);
+    out
+}
+
+/// Why a cell field is not read where it stands: as itself, or by a
+/// method other than the one that reads its content (`method`).
+fn cell_unread(kind: CellKind, owner: &str, field: &str, method: Option<&str>) -> Residue {
+    let what = match method {
+        Some(m) => format!("{}::{m} on {owner}.{field}", kind.name()),
+        None => format!("the {} field {owner}.{field} as itself", kind.name()),
+    };
+    Residue::Form(match kind.read() {
+        Some(read) => format!(
+            "{what}: the lift reads a {} only by {read}, and changes none, since another \
+             borrow of the value would see the change",
+            kind.name()
+        ),
+        None => format!(
+            "{what}: a {} is shared across threads, and another may change it between two \
+             reads",
+            kind.name()
+        ),
+    })
+}
+
+/// The content a cell field is made with: `Kind::new(v)` is `v`.
+fn cell_made<'e>(
+    e: &'e rs::RustExpr,
+    kind: CellKind,
+    owner: &str,
+    field: &str,
+) -> Lift<&'e rs::RustExpr> {
+    if let rs::RustExpr::Call(c) = e {
+        if let (rs::RustExpr::Path(p), [content]) = (&*c.func, c.args.as_slice()) {
+            let names: Vec<&str> = p.segments.iter().map(|s| s.ident.as_str()).collect();
+            if let [.., cell, "new"] = names.as_slice() {
+                if *cell == kind.name() {
+                    return Ok(content);
+                }
+            }
+        }
+    }
+    Err(cell_unread(kind, owner, field, None))
+}
+
+/// `x.c.borrow()` of a `RefCell` field and `x.c.get()` of a `Cell` field:
+/// the content (see [`CellKind::read`]); any other method of a cell field
+/// is a typed row. `None` where the receiver is no cell field.
+#[allow(clippy::type_complexity)]
+fn cell_method<'a>(
+    m: &'a rs::ExprMethodCall,
+    env: &'a Env,
+    ctx: &'a Ctx,
+    acc: &Acc,
+) -> Option<Box<dyn FnOnce(Acc) -> Lift<((Expr, Ty), Acc)> + 'a>> {
+    let mut receiver = &*m.receiver;
+    while let rs::RustExpr::Paren(inner) = receiver {
+        receiver = inner;
+    }
+    let rs::RustExpr::Field(f) = receiver else {
+        return None;
+    };
+    let field = match &f.member {
+        rs::Member::Named(name) => local_name(name),
+        rs::Member::Unnamed(position) => field_name(&position.to_string()),
+    };
+    let ((_, bt), _) = flat_of(&f.base, env, ctx, acc.clone(), None).ok()?;
+    let Ty::Named(owner) = bt else { return None };
+    let kind = env.types.cell(&owner, &field)?;
+    Some(Box::new(move |acc: Acc| {
+        if kind.read() != Some(m.method.as_str()) || !m.args.is_empty() {
+            return Err(cell_unread(kind, &owner, &field, Some(&m.method)));
+        }
+        let ((base, _), acc) = flat_of(&f.base, env, ctx, acc, None)?;
+        let Some((_, ty)) = env
+            .types
+            .structs
+            .get(&owner)
+            .and_then(|fs| fs.iter().find(|(n, _)| *n == field))
+        else {
+            return Err(Residue::Form("field of an unknown struct".to_string()));
+        };
+        let read = if env.types.boxed(&owner) {
+            format!("({} {base})", Types::accessor(&owner, &field))
+        } else {
+            format!("(project {base} {field})")
+        };
+        flat_lift(read, ty.clone(), acc)
+    }))
+}
+
+/// Whether a pattern of a struct binds a field of it that is a cell: the
+/// binder would be the cell, which the lift reads only by its method.
+fn binds_cell(p: &rs::Pat, ty: &Ty, types: &Types) -> bool {
+    let Ty::Named(n) = ty else { return false };
+    let Some(cells) = types.cells.get(n) else {
+        return false;
+    };
+    let bound = |p: &rs::Pat| !matches!(p, rs::Pat::Wild | rs::Pat::Rest);
+    match p {
+        rs::Pat::Struct(ps) => ps.fields.iter().any(|f| {
+            let name = match &f.member {
+                rs::Member::Named(m) => local_name(m),
+                rs::Member::Unnamed(i) => field_name(&i.to_string()),
+            };
+            cells.contains_key(&name) && bound(&f.pat)
+        }),
+        rs::Pat::TupleStruct(ts) => ts.elems.iter().any(bound),
+        _ => false,
+    }
+}
+
+/// Why a call of a function that threads `&mut` parameters is not read
+/// where it stands: as an operand, nothing writes back what it gives back.
+fn threaded_operand(key: &str) -> Residue {
+    Residue::Form(format!(
+        "a call of {key}, which changes what it borrows mutably, as an operand"
+    ))
+}
+
+/// A place a statement lends mutably: a local, or a named field of one.
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct Place {
+    local: String,
+    field: Option<String>,
+}
+
+impl Place {
+    /// The place an expression names, read through `&mut`, `*` and
+    /// parentheses: `x`, `&mut x`, `&mut *x`, `x.f`, `&mut x.f`.
+    fn of(e: &rs::RustExpr) -> Option<Place> {
+        match e {
+            rs::RustExpr::Paren(inner) => Place::of(inner),
+            rs::RustExpr::Reference(r) if r.mutable => Place::of(&r.expr),
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => match &*u.expr {
+                rs::RustExpr::Path(p) => p.get_ident().map(|l| Place {
+                    local: l.clone(),
+                    field: None,
+                }),
+                _ => None,
+            },
+            rs::RustExpr::Path(p) => p.get_ident().map(|l| Place {
+                local: l.clone(),
+                field: None,
+            }),
+            rs::RustExpr::Field(f) => match (&*f.base, &f.member) {
+                (rs::RustExpr::Path(p), rs::Member::Named(m)) => p.get_ident().map(|l| Place {
+                    local: l.clone(),
+                    field: Some(m.clone()),
+                }),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+
+    /// The place as an expression that reads it.
+    fn read(&self) -> rs::RustExpr {
+        let local = rs::RustExpr::Path(rs::Path::ident(&self.local));
+        match &self.field {
+            None => local,
+            Some(m) => rs::RustExpr::Field(rs::ExprField {
+                base: Box::new(local),
+                member: rs::Member::Named(m.clone()),
+            }),
+        }
+    }
+
+    /// The new value of the place's local once the place holds `value`:
+    /// `value` itself, or the structure with that field replaced.
+    fn written(&self, value: &str, env: &Env, ctx: &Ctx) -> Lift<String> {
+        let Some((current, ty)) = ctx.locals.get(&self.local) else {
+            return Err(Residue::Form(format!("an update of {}", self.local)));
+        };
+        if self.field.is_none() {
+            return Ok(value.to_string());
+        }
+        let Ty::Named(name) = ty else {
+            return Err(Residue::Form(format!(
+                "an update of a field of {}",
+                self.local
+            )));
+        };
+        self.replaced(name, current, value, env)
+    }
+
+    /// The type of the place's field in the structure `name`, and its value
+    /// in the structure's value `current`.
+    fn field_of(&self, name: &str, current: &str, env: &Env) -> Option<(Ty, String)> {
+        let target = local_name(self.field.as_ref()?);
+        let fields = env.types.structs.get(name)?;
+        let (_, ty) = fields.iter().find(|(f, _)| *f == target)?;
+        let read = if env.types.boxed(name) {
+            format!("({} {current})", Types::accessor(name, &target))
+        } else {
+            format!("(project {current} {target})")
+        };
+        Some((ty.clone(), read))
+    }
+
+    /// The structure `name` of value `current` with the place's field
+    /// replaced by `value`.
+    fn replaced(&self, name: &str, current: &str, value: &str, env: &Env) -> Lift<String> {
+        let Some(member) = &self.field else {
+            return Ok(value.to_string());
+        };
+        let Some(fields) = env.types.structs.get(name) else {
+            return Err(Residue::Form(format!("a field update of {name}")));
+        };
+        let target = local_name(member);
+        if !fields.iter().any(|(f, _)| *f == target) {
+            return Err(Residue::Form(format!("a field update of {name}")));
+        }
+        let parts: Vec<(&String, String)> = fields
+            .iter()
+            .map(|(field, _)| {
+                let v = if *field == target {
+                    value.to_string()
+                } else if env.types.boxed(name) {
+                    format!("({} {current})", Types::accessor(name, field))
+                } else {
+                    format!("(project {current} {field})")
+                };
+                (field, v)
+            })
+            .collect();
+        Ok(struct_value(name, &parts, &env.types))
+    }
+}
+
+/// A call of a function that threads `&mut` parameters: its key, its
+/// signature, its arguments with the receiver first, and the place each
+/// threaded one lends.
+struct Threaded<'e> {
+    key: String,
+    sig: Sig,
+    args: Vec<&'e rs::RustExpr>,
+    places: Vec<Place>,
+}
+
+/// The call `e` is, where it calls a function that threads `&mut`
+/// parameters and each threaded argument lends a place: the receiver of a
+/// method (which Rust borrows mutably on its own), `&mut p`, or a local
+/// that is itself such a borrow (a threaded parameter, reborrowed).
+fn threaded_call<'e>(e: &'e rs::RustExpr, env: &Env, ctx: &Ctx) -> Option<Threaded<'e>> {
+    let (key, args): (String, Vec<&rs::RustExpr>) = match e {
+        rs::RustExpr::MethodCall(m) => {
+            let place = Place::of(&m.receiver)?;
+            let (_, ty) = ctx.locals.get(&place.local)?;
+            let ty = match &place.field {
+                None => ty.clone(),
+                Some(member) => {
+                    let Ty::Named(name) = ty else { return None };
+                    let target = local_name(member);
+                    // A cell's methods are its own (see `cell_method`).
+                    if env.types.cell(name, &target).is_some() {
+                        return None;
+                    }
+                    let fields = env.types.structs.get(name)?;
+                    fields.iter().find(|(f, _)| *f == target)?.1.clone()
+                }
+            };
+            let Ty::Named(owner) = ty else { return None };
+            let mut args = vec![&*m.receiver];
+            args.extend(&m.args);
+            (format!("{owner}::{}", m.method), args)
+        }
+        rs::RustExpr::Call(c) => {
+            let rs::RustExpr::Path(p) = &*c.func else {
+                return None;
+            };
+            let segments: Vec<String> = p.segments.iter().map(|s| s.ident.clone()).collect();
+            (callee_key(&segments, env, ctx), c.args.iter().collect())
+        }
+        _ => return None,
+    };
+    let sig = env.fns.get(&key)?;
+    if sig.threads.is_empty() || sig.params.len() != args.len() {
+        return None;
+    }
+    let mut places = Vec::new();
+    for &i in &sig.threads {
+        let arg = args[i];
+        // A method's receiver is a place Rust borrows on its own; an
+        // argument lends one by `&mut`, or is a borrow already.
+        let lends = i == 0 && matches!(e, rs::RustExpr::MethodCall(_))
+            || matches!(arg, rs::RustExpr::Reference(r) if r.mutable)
+            || matches!(arg, rs::RustExpr::Path(_));
+        if !lends {
+            return None;
+        }
+        places.push(Place::of(arg)?);
+    }
+    Some(Threaded {
+        key,
+        sig: sig.clone(),
+        args,
+        places,
+    })
+}
+
+/// The key a call by path names: `Type::method` where the crate has one
+/// (`Self` the type of the function in hand), else the last segment.
+fn callee_key(segments: &[String], env: &Env, ctx: &Ctx) -> String {
+    if let [.., owner, method] = segments {
+        let owner = if owner == "Self" {
+            ctx.current
+                .split_once("::")
+                .map_or(owner.as_str(), |(o, _)| o)
+        } else {
+            owner.as_str()
+        };
+        let key = format!("{}::{method}", env.types.resolve(owner));
+        if env.fns.contains_key(&key) {
+            return key;
+        }
+    }
+    segments.last().cloned().unwrap_or_default()
+}
+
+/// A statement that calls a function threading `&mut` parameters: the
+/// call, then each place it lent written back with the value the callee
+/// gives back for it, in the order it gives them, then `bound` (the
+/// `let`'s binder, if any) bound to the call's own result, then `rest`. A
+/// call that ends the block (`tail`) is its own result.
+#[allow(clippy::too_many_arguments)]
+fn threaded_stmt(
+    call: Threaded<'_>,
+    bound: Option<(&str, Option<Ty>)>,
+    tail: bool,
+    rest: &[rs::Stmt],
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+    want: Option<&Ty>,
+) -> Lift<((Expr, Ty), Acc)> {
+    if call.key == ctx.current {
+        return Err(Residue::Form(
+            "a function that threads its &mut parameters and calls itself".to_string(),
+        ));
+    }
+    let full = call.sig.result.clone();
+    let items = match &full {
+        Ty::Tuple(ts) | Ty::Pair(ts) if ts.len() == call.places.len() + 1 => ts.clone(),
+        _ => {
+            return Err(Residue::Form(format!(
+                "a call of {} of another type",
+                call.key
+            )))
+        }
+    };
+    let mut acc = acc;
+    let mut parts = vec![call.sig.name.clone()];
+    for (i, (arg, ty)) in call.args.iter().zip(&call.sig.params).enumerate() {
+        let read = match call.sig.threads.iter().position(|&t| t == i) {
+            Some(j) => call.places[j].read(),
+            None => (*arg).clone(),
+        };
+        let ((v, vt), next) = flat_of(&read, env, ctx, acc, Some(ty))?;
+        acc = next;
+        if !vt.same(ty) {
+            return Err(Residue::Form(format!(
+                "argument of another type to {}",
+                call.key
+            )));
+        }
+        parts.push(v);
+    }
+    let acc = acc.called(call.key.clone());
+    let (whole, acc) = ctx.fresh(env, acc, "threaded");
+    let mut lets: Vec<(String, String, String)> = vec![(
+        whole.clone(),
+        full.render(),
+        format!("({})", parts.join(" ")),
+    )];
+    let mut scope = ctx.clone();
+    let mut acc = acc;
+    for (j, place) in call.places.iter().enumerate() {
+        scope.unsealed(&place.local)?;
+        let value = place.written(&tuple_item(&full, &whole, j + 1), env, &scope)?;
+        let Some((_, ty)) = scope.locals.get(&place.local).cloned() else {
+            return Err(Residue::Form(format!("an update of {}", place.local)));
+        };
+        let (next, name, after) = scope.bind(env, acc, &place.local, ty.clone());
+        lets.push((name, ty.render(), value));
+        scope = next;
+        acc = after;
+    }
+    let result = tuple_item(&full, &whole, 0);
+    let ((body, rt), acc) = if tail {
+        ((Expr::Flat(result), items[0].clone()), acc)
+    } else {
+        match bound {
+            Some((ident, declared)) => {
+                if declared.as_ref().is_some_and(|d| !d.same(&items[0])) {
+                    return Err(Residue::Form("let of another type".to_string()));
+                }
+                let (next, name, acc) = scope.bind(env, acc, ident, items[0].clone());
+                lets.push((name, items[0].render(), result));
+                block(rest, env, &next, acc, want)?
+            }
+            None => block(rest, env, &scope, acc, want)?,
+        }
+    };
+    Ok(((wrap_lets(lets, body), rt), acc))
+}
+
+/// The statements of a body whose `&mut` parameters `states` are threaded,
+/// rewritten so that every way out of it gives the tuple of its value and
+/// their values at that point: each tail `v` and `return v` becomes
+/// `{ let r = v; (r, s1, ..) }`, and a body of no value ends in
+/// `((), s1, ..)`. The rewrite is refused where a state escapes as itself
+/// rather than through its fields or a lifted call (`let s = self;`,
+/// `match self { .. }`, `Some(self)`): there it is a second borrow of the
+/// place, which the lift would read as a copy that changes apart from it.
+fn thread_body(
+    stmts: &[rs::Stmt],
+    states: &[String],
+    full: &Ty,
+    env: &Env,
+    current: &str,
+) -> Lift<Vec<rs::Stmt>> {
+    let unit = matches!(full, Ty::Tuple(ts) | Ty::Pair(ts) if ts.first() == Some(&Ty::Unit));
+    let scan = StateScan {
+        states,
+        env,
+        current,
+    };
+    for stmt in stmts {
+        scan.stmt(stmt)?;
+    }
+    let mut result = "threaded".to_string();
+    while states.contains(&result) {
+        result.push('_');
+    }
+    let path = |n: &str| rs::RustExpr::Path(rs::Path::ident(n));
+    let out = |value: Option<rs::RustExpr>| -> rs::RustExpr {
+        let mut items = vec![path(&result)];
+        items.extend(states.iter().map(|s| path(s)));
+        let stmts = match value {
+            None => {
+                items[0] = rs::RustExpr::Tuple(Vec::new());
+                vec![rs::Stmt::Expr(rs::RustExpr::Tuple(items), false)]
+            }
+            // A value of `()` is a statement, so that what it updates
+            // reaches the tuple after it.
+            Some(v) if unit => vec![
+                rs::Stmt::Expr(v, true),
+                rs::Stmt::Expr(
+                    rs::RustExpr::Tuple({
+                        items[0] = rs::RustExpr::Tuple(Vec::new());
+                        items
+                    }),
+                    false,
+                ),
+            ],
+            Some(v) => vec![
+                rs::Stmt::Local(rs::Local {
+                    pat: rs::Pat::Ident(rs::PatIdent {
+                        ident: result.clone(),
+                        by_ref: false,
+                        subpat: None,
+                    }),
+                    init: Some(rs::LocalInit {
+                        expr: Box::new(v),
+                        diverge: None,
+                    }),
+                }),
+                rs::Stmt::Expr(rs::RustExpr::Tuple(items), false),
+            ],
+        };
+        rs::RustExpr::Block(rs::ExprBlock {
+            label: false,
+            block: rs::Block { stmts },
+        })
+    };
+    let mut body = stmts.to_vec();
+    for stmt in &mut body {
+        returns_threaded(stmt, &out);
+    }
+    Ok(tails_threaded(body, &out))
+}
+
+/// The statements with their value threaded: the tail expression's own
+/// tails, or `out(None)` after statements of no value.
+fn tails_threaded(
+    mut stmts: Vec<rs::Stmt>,
+    out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr,
+) -> Vec<rs::Stmt> {
+    match stmts.pop() {
+        Some(rs::Stmt::Expr(e, false)) => stmts.push(rs::Stmt::Expr(tail_threaded(e, out), false)),
+        Some(other) => {
+            stmts.push(other);
+            stmts.push(rs::Stmt::Expr(out(None), false));
+        }
+        None => stmts.push(rs::Stmt::Expr(out(None), false)),
+    }
+    stmts
+}
+
+/// A tail expression with its value threaded at each of its own tails.
+fn tail_threaded(
+    e: rs::RustExpr,
+    out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr,
+) -> rs::RustExpr {
+    match e {
+        rs::RustExpr::Block(b) if !b.label => rs::RustExpr::Block(rs::ExprBlock {
+            label: false,
+            block: rs::Block {
+                stmts: tails_threaded(b.block.stmts, out),
+            },
+        }),
+        rs::RustExpr::Paren(inner) => tail_threaded(*inner, out),
+        rs::RustExpr::If(i) => {
+            let then_branch = rs::Block {
+                stmts: tails_threaded(i.then_branch.stmts, out),
+            };
+            let else_branch = match i.else_branch {
+                Some(e) => tail_threaded(*e, out),
+                None => out(None),
+            };
+            rs::RustExpr::If(rs::ExprIf {
+                cond: i.cond,
+                then_branch,
+                else_branch: Some(Box::new(else_branch)),
+            })
+        }
+        rs::RustExpr::Match(m) => rs::RustExpr::Match(rs::ExprMatch {
+            expr: m.expr,
+            arms: m
+                .arms
+                .into_iter()
+                .map(|a| rs::MatchArm {
+                    pat: a.pat,
+                    body: Box::new(tail_threaded(*a.body, out)),
+                })
+                .collect(),
+        }),
+        // A `return` already gives the tuple (see `returns_threaded`).
+        rs::RustExpr::Return(r) => rs::RustExpr::Return(r),
+        other => out(Some(other)),
+    }
+}
+
+/// Each `return v` of a statement, outside the closures it holds, as
+/// `return out(v)`.
+fn returns_threaded(stmt: &mut rs::Stmt, out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr) {
+    match stmt {
+        rs::Stmt::Local(l) => {
+            if let Some(init) = &mut l.init {
+                return_threaded(&mut init.expr, out);
+                if let Some(d) = &mut init.diverge {
+                    return_threaded(d, out);
+                }
+            }
+        }
+        rs::Stmt::Expr(e, _) => return_threaded(e, out),
+        rs::Stmt::Macro(_) | rs::Stmt::Other => {}
+    }
+}
+
+fn return_threaded(e: &mut rs::RustExpr, out: &dyn Fn(Option<rs::RustExpr>) -> rs::RustExpr) {
+    if let rs::RustExpr::Return(r) = e {
+        let value = r.take().map(|v| {
+            let mut v = *v;
+            return_threaded(&mut v, out);
+            v
+        });
+        *r = Some(Box::new(out(value)));
+        return;
+    }
+    let each = |e: &mut rs::RustExpr| return_threaded(e, out);
+    let blocks = |b: &mut rs::Block| {
+        for s in &mut b.stmts {
+            returns_threaded(s, out);
+        }
+    };
+    each_part(e, each, blocks);
+}
+
+/// Every expression and block directly inside `e`, as
+/// [`rs::RustExpr::parts`] lists them, outside a closure's body: what a
+/// `return` there leaves is the closure.
+fn each_part(
+    e: &mut rs::RustExpr,
+    mut each: impl FnMut(&mut rs::RustExpr),
+    mut blocks: impl FnMut(&mut rs::Block),
+) {
+    match e {
+        rs::RustExpr::Array(items) | rs::RustExpr::Tuple(items) => items.iter_mut().for_each(each),
+        rs::RustExpr::Assign(a) => {
+            each(&mut a.left);
+            each(&mut a.right);
+        }
+        rs::RustExpr::Binary(b) => {
+            each(&mut b.left);
+            each(&mut b.right);
+        }
+        rs::RustExpr::Block(b) => blocks(&mut b.block),
+        rs::RustExpr::Break(b) => {
+            if let Some(v) = &mut b.expr {
+                each(v);
+            }
+        }
+        rs::RustExpr::Call(c) => {
+            each(&mut c.func);
+            c.args.iter_mut().for_each(each);
+        }
+        rs::RustExpr::Cast(c) => each(&mut c.expr),
+        rs::RustExpr::Closure(_) => {}
+        rs::RustExpr::Field(f) => each(&mut f.base),
+        rs::RustExpr::ForLoop(f) => {
+            each(&mut f.expr);
+            blocks(&mut f.body);
+        }
+        rs::RustExpr::Loop(l) => blocks(&mut l.body),
+        rs::RustExpr::While(w) => {
+            each(&mut w.cond);
+            blocks(&mut w.body);
+        }
+        rs::RustExpr::If(i) => {
+            each(&mut i.cond);
+            blocks(&mut i.then_branch);
+            if let Some(e) = &mut i.else_branch {
+                each(e);
+            }
+        }
+        rs::RustExpr::Index(i) => {
+            each(&mut i.expr);
+            each(&mut i.index);
+        }
+        rs::RustExpr::Let(l) => each(&mut l.expr),
+        rs::RustExpr::Match(m) => {
+            each(&mut m.expr);
+            for arm in &mut m.arms {
+                if let rs::Pat::Guard(g) = &mut arm.pat {
+                    each(&mut g.guard);
+                }
+                each(&mut arm.body);
+            }
+        }
+        rs::RustExpr::MethodCall(m) => {
+            each(&mut m.receiver);
+            m.args.iter_mut().for_each(each);
+        }
+        rs::RustExpr::Paren(e) | rs::RustExpr::Try(e) => each(e),
+        rs::RustExpr::Reference(r) => each(&mut r.expr),
+        rs::RustExpr::Return(r) => {
+            if let Some(v) = r {
+                each(v);
+            }
+        }
+        rs::RustExpr::Struct(s) => {
+            for f in &mut s.fields {
+                each(&mut f.expr);
+            }
+            if let Some(r) = &mut s.rest {
+                each(r);
+            }
+        }
+        rs::RustExpr::Unary(u) => each(&mut u.expr),
+        rs::RustExpr::Other(o) => {
+            o.exprs.iter_mut().for_each(&mut each);
+            o.blocks.iter_mut().for_each(blocks);
+        }
+        rs::RustExpr::Continue(_)
+        | rs::RustExpr::Lit(_)
+        | rs::RustExpr::Macro(_)
+        | rs::RustExpr::Path(_) => {}
+    }
+}
+
+/// The macros whose arguments Rust only reads (each is formatted or
+/// compared through a shared borrow).
+const READING_MACROS: [&str; 12] = [
+    "format",
+    "write",
+    "writeln",
+    "print",
+    "println",
+    "eprint",
+    "eprintln",
+    "panic",
+    "assert",
+    "assert_eq",
+    "assert_ne",
+    "debug_assert",
+];
+
+/// Where a threaded body's states are used as themselves.
+struct StateScan<'a> {
+    states: &'a [String],
+    env: &'a Env,
+    current: &'a str,
+}
+
+impl StateScan<'_> {
+    /// The state `e` is, itself or through `&`, `&mut`, `*` or
+    /// parentheses.
+    fn state<'e>(&self, e: &'e rs::RustExpr) -> Option<&'e String> {
+        match e {
+            rs::RustExpr::Path(p) => p.get_ident().filter(|i| self.states.contains(i)),
+            rs::RustExpr::Paren(inner) => self.state(inner),
+            rs::RustExpr::Reference(r) => self.state(&r.expr),
+            rs::RustExpr::Unary(u) if matches!(u.op, rs::UnOp::Deref) => self.state(&u.expr),
+            _ => None,
+        }
+    }
+
+    fn escapes(&self, state: &str) -> Residue {
+        Residue::Form(format!(
+            "{state} used as itself, a second borrow of the place it lends, which the lift \
+             would read as a copy"
+        ))
+    }
+
+    fn stmt(&self, stmt: &rs::Stmt) -> Lift<()> {
+        match stmt {
+            rs::Stmt::Local(l) => {
+                if let Some(init) = &l.init {
+                    self.operand(&init.expr)?;
+                    if let Some(d) = &init.diverge {
+                        self.operand(d)?;
+                    }
+                }
+                Ok(())
+            }
+            rs::Stmt::Expr(e, _) => self.operand(e),
+            rs::Stmt::Macro(m) => self.mac(m),
+            rs::Stmt::Other => Ok(()),
+        }
+    }
+
+    /// An expression in a position that takes its value.
+    fn operand(&self, e: &rs::RustExpr) -> Lift<()> {
+        if let Some(s) = self.state(e) {
+            return Err(self.escapes(s));
+        }
+        self.within(e)
+    }
+
+    /// What is inside `e`: a state read through (a field's base, a method's
+    /// receiver, an argument of a lifted function) is no escape.
+    fn within(&self, e: &rs::RustExpr) -> Lift<()> {
+        match e {
+            rs::RustExpr::Field(f) if self.state(&f.base).is_some() => Ok(()),
+            // `*s = v` writes the place itself.
+            rs::RustExpr::Assign(a)
+                if matches!(&*a.left, rs::RustExpr::Unary(u)
+                    if matches!(u.op, rs::UnOp::Deref) && self.state(&u.expr).is_some()) =>
+            {
+                self.operand(&a.right)
+            }
+            rs::RustExpr::MethodCall(m) => {
+                if self.state(&m.receiver).is_none() {
+                    self.operand(&m.receiver)?;
+                }
+                m.args.iter().try_for_each(|a| self.operand(a))
+            }
+            rs::RustExpr::Call(c) => {
+                let lifted = match &*c.func {
+                    rs::RustExpr::Path(p) => {
+                        let segments: Vec<String> =
+                            p.segments.iter().map(|s| s.ident.clone()).collect();
+                        self.lifted(&segments)
+                    }
+                    _ => false,
+                };
+                self.operand(&c.func)?;
+                c.args.iter().try_for_each(|a| {
+                    if lifted && self.state(a).is_some() {
+                        Ok(())
+                    } else {
+                        self.operand(a)
+                    }
+                })
+            }
+            rs::RustExpr::Macro(m) => self.mac(m),
+            _ => {
+                let (exprs, blocks) = e.parts();
+                for inner in exprs {
+                    self.operand(inner)?;
+                }
+                for b in blocks {
+                    for s in &b.stmts {
+                        self.stmt(s)?;
+                    }
+                }
+                Ok(())
+            }
+        }
+    }
+
+    /// A macro's arguments: read by a formatting or comparing macro, an
+    /// operand of any other.
+    fn mac(&self, m: &rs::ExprMacro) -> Lift<()> {
+        let reads = READING_MACROS.iter().any(|r| m.path.is_ident(r));
+        for item in m.args.iter().flat_map(|a| &a.items) {
+            if reads && self.state(item).is_some() {
+                continue;
+            }
+            self.operand(item)?;
+        }
+        if let Some(mm) = &m.matches {
+            self.operand(&mm.expr)?;
+        }
+        Ok(())
+    }
+
+    /// Whether a call by these segments names a candidate function, which
+    /// takes a state's value (or threads it) and returns no borrow of it.
+    fn lifted(&self, segments: &[String]) -> bool {
+        if let [.., owner, method] = segments {
+            let owner = if owner == "Self" {
+                self.current
+                    .split_once("::")
+                    .map_or(owner.as_str(), |(o, _)| o)
+            } else {
+                owner.as_str()
+            };
+            if self
+                .env
+                .fns
+                .contains_key(&format!("{}::{method}", self.env.types.resolve(owner)))
+            {
+                return true;
+            }
+        }
+        segments.len() == 1
+            && segments
+                .last()
+                .is_some_and(|s| self.env.fns.contains_key(s))
+    }
+}
+
+/// `let x = call;`, `let x: T = call;` or `let _ = call;` of a call the
+/// block threads: the binder, its declared type and the call.
+fn threaded_let(l: &rs::Local) -> Option<(Option<&str>, Option<&rs::RustType>, &rs::RustExpr)> {
+    let init = l.init.as_ref().filter(|i| i.diverge.is_none())?;
+    fn plain(p: &rs::Pat) -> Option<Option<&str>> {
+        match p {
+            rs::Pat::Ident(i) if i.subpat.is_none() && !i.by_ref => Some(Some(i.ident.as_str())),
+            rs::Pat::Wild => Some(None),
+            _ => None,
+        }
+    }
+    let (binder, declared) = match &l.pat {
+        rs::Pat::Type(pt) => (plain(&pt.pat)?, Some(&pt.ty)),
+        p => (plain(p)?, None),
+    };
+    Some((binder, declared, &init.expr))
 }
 
 /// `match e { p => .. } rest`: the rest after each arm.
@@ -10055,7 +12824,9 @@ fn let_stmt(
         Some(d) => Some(d.clone()),
         None if is_empty_vec(&init.expr) => returned_type(&ident.ident.clone(), rest, ctx, want)
             .or_else(|| used_type(&ident.ident, &init.expr, rest, env, ctx)),
-        None => None,
+        None => {
+            returned_type(&ident.ident, rest, ctx, want).filter(|t| matches!(t, Ty::Outcome(..)))
+        }
     };
     let ((value, vt), acc) = flat_of(&init.expr, env, &ctx.below(), acc, hint.as_ref())?;
     if declared.as_ref().is_some_and(|d| !d.same(&vt)) {
@@ -10455,11 +13226,13 @@ fn tail_type(e: &rs::RustExpr, ident: &str, want: &Ty) -> Option<Ty> {
     };
     match (e, want) {
         (rs::RustExpr::Path(p), _) if p.is_ident(ident) => Some(want.clone()),
-        (rs::RustExpr::Tuple(items), Ty::Tuple(ts)) if items.len() == ts.len() => items
-            .iter()
-            .zip(ts)
-            .find(|(item, _)| is_local(item))
-            .map(|(_, t)| t.clone()),
+        (rs::RustExpr::Tuple(items), Ty::Tuple(ts) | Ty::Pair(ts)) if items.len() == ts.len() => {
+            items
+                .iter()
+                .zip(ts)
+                .find(|(item, _)| is_local(item))
+                .map(|(_, t)| t.clone())
+        }
         (rs::RustExpr::Call(c), _) => match (&*c.func, c.args.as_slice()) {
             (rs::RustExpr::Path(p), [arg])
                 if is_local(arg) && (p.is_ident("Some") || p.is_ident("Ok")) =>
@@ -10519,7 +13292,21 @@ fn question(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     let ((s, st), mut acc) = flat_of(e, env, &ctx.below(), acc, None)?;
-    let (inner, early) = match (&st, &ctx.result) {
+    let result = if ctx.return_states.is_empty() {
+        &ctx.result
+    } else {
+        match &ctx.result {
+            Ty::Tuple(items) | Ty::Pair(items) if items.len() == ctx.return_states.len() + 1 => {
+                &items[0]
+            }
+            _ => {
+                return Err(Residue::Form(
+                    "? with an incomplete threaded result".to_string(),
+                ))
+            }
+        }
+    };
+    let (inner, early) = match (&st, result) {
         (Ty::Option(inner), Ty::Option(r)) => (
             (**inner).clone(),
             (
@@ -10554,7 +13341,20 @@ fn question(
     } else {
         format!("Result.ok {name}")
     };
-    let (failed, _) = ctx.returning((Expr::Flat(early.1), ctx.result.clone()));
+    let failure = if ctx.return_states.is_empty() {
+        early.1
+    } else {
+        let mut items = vec![early.1];
+        for state in &ctx.return_states {
+            let (value, _) = ctx
+                .locals
+                .get(state)
+                .ok_or_else(|| Residue::Form(format!("? without the current value of {state}")))?;
+            items.push(value.clone());
+        }
+        tuple_value(&ctx.result, &items)
+    };
+    let (failed, _) = ctx.returning((Expr::Flat(failure), ctx.result.clone()));
     let arms = if matches!(st, Ty::Option(_)) {
         vec![
             Arm {
@@ -10585,6 +13385,9 @@ fn question(
 pub(crate) struct Candidate<'a> {
     pub(crate) rust: String,
     pub(crate) name: String,
+    /// Its type parameters and dictionary, where it is generic: the
+    /// dictionary's parameters come before `params`.
+    pub(crate) generic: Option<Generic>,
     pub(crate) params: Vec<Param>,
     pub(crate) result: Ty,
     pub(crate) block: &'a rs::Block,
@@ -10604,6 +13407,22 @@ pub(crate) struct Candidate<'a> {
     /// The formatter parameter of a `Display` impl's `fmt`, which lifts as
     /// the function from the value to the text it writes.
     pub(crate) formatter: Option<String>,
+    /// What its own module scope binds (see [`Seen`]).
+    pub(crate) seen: Seen,
+    /// The positions of the parameters it threads (see [`threads`]): its
+    /// `result` is then the tuple of the Rust result and their values.
+    pub(crate) threads: Vec<usize>,
+}
+
+impl Candidate<'_> {
+    /// The Rust result: `result`, or where the definition threads `&mut`
+    /// parameters, the first item of its tuple.
+    pub(crate) fn forward(&self) -> Ty {
+        match (&self.result, self.threads.is_empty()) {
+            (Ty::Tuple(ts) | Ty::Pair(ts), false) if !ts.is_empty() => ts[0].clone(),
+            (t, _) => t.clone(),
+        }
+    }
 }
 
 /// What a lift produced.
@@ -10627,6 +13446,39 @@ pub(crate) struct Lifted {
     pub(crate) divergences: BTreeMap<String, Vec<String>>,
 }
 
+/// What a generic definition's lift produced that it does not write, if
+/// anything: a helper or theorem the lift generates takes no type
+/// parameter or dictionary of its own, and a tuple over a type parameter
+/// is a generated structure that would need one.
+fn generic_unread(acc: &Acc, well_founded: bool, c: &Candidate<'_>) -> Option<Residue> {
+    let over_param = |t: &Ty| matches!(t, Ty::Param(_));
+    let tuple = acc
+        .seen
+        .iter()
+        .chain(c.params.iter().map(|(_, _, t)| t))
+        .any(|t| {
+            t.mentions().iter().any(|m| match m {
+                Ty::Tuple(ts) => ts
+                    .iter()
+                    .any(|x| over_param(x) || x.render().contains('\'')),
+                _ => false,
+            })
+        });
+    if !acc.helpers.is_empty() {
+        Some(Residue::Form(
+            "a generic function whose lift needs a helper definition".to_string(),
+        ))
+    } else if well_founded {
+        Some(Residue::Form(
+            "a generic function whose recursion needs termination evidence".to_string(),
+        ))
+    } else if tuple {
+        Some(Residue::Form("a tuple over a type parameter".to_string()))
+    } else {
+        None
+    }
+}
+
 /// The primitives whose Lean definitions the kernel does not unfold.
 const KERNEL_OPAQUE: [&str; 6] = [
     "prim split_exact",
@@ -10645,6 +13497,26 @@ pub(crate) fn lift_all(
     widths: &[(u32, Vec<String>)],
     names: &BTreeSet<String>,
 ) -> Lifted {
+    lift_candidates(candidates, types, widths, names, false)
+}
+
+/// Import existing source models with totality required by compiler lowering.
+pub(crate) fn lift_models(
+    candidates: &[Candidate<'_>],
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+) -> Lifted {
+    lift_candidates(candidates, types, widths, names, true)
+}
+
+fn lift_candidates(
+    candidates: &[Candidate<'_>],
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+    total: bool,
+) -> Lifted {
     let mut failed: BTreeMap<String, Residue> = BTreeMap::new();
     loop {
         let fns: BTreeMap<String, Sig> = candidates
@@ -10657,11 +13529,14 @@ pub(crate) fn lift_all(
                         name: c.name.clone(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         result: c.result.clone(),
+                        generic: c.generic.clone(),
+                        threads: c.threads.clone(),
                     },
                 )
             })
             .collect();
         let mut env = Env {
+            total,
             types: types.clone(),
             fns: fns.clone(),
             widths: widths.to_vec(),
@@ -10684,6 +13559,7 @@ pub(crate) fn lift_all(
                 current: c.called.clone(),
                 params: names.clone(),
                 result: c.result.clone(),
+                return_states: c.threads.iter().map(|&i| c.params[i].0.clone()).collect(),
                 locals: c
                     .params
                     .iter()
@@ -10701,8 +13577,23 @@ pub(crate) fn lift_all(
                 hidden: Vec::new(),
                 closures: BTreeMap::new(),
                 imports: c.imports.clone(),
+                seen: c.seen.clone(),
                 formatter: c.formatter.clone(),
+                dictionary: c
+                    .generic
+                    .as_ref()
+                    .map(|g| g.dictionary.clone())
+                    .unwrap_or_default(),
+                sealed: BTreeSet::new(),
+                borrowed: ref_binders(&c.block.stmts),
             };
+            env.types.paths_open = c.seen.paths_open;
+            // A type parameter is the candidate's own.
+            env.types.generic = c
+                .generic
+                .as_ref()
+                .map(|g| g.reads.clone())
+                .unwrap_or_default();
             // Every candidate's file reads each shared name, so one file's
             // reading never outlives its candidates.
             env.types
@@ -10716,7 +13607,25 @@ pub(crate) fn lift_all(
                     None => env.fns.remove(key),
                 };
             }
-            let lifted = block(&c.block.stmts, &env, &ctx, Acc::default(), Some(&c.result));
+            let threaded;
+            let stmts = if c.threads.is_empty() {
+                &c.block.stmts
+            } else {
+                let states: Vec<String> =
+                    c.threads.iter().map(|&i| c.params[i].0.clone()).collect();
+                match thread_body(&c.block.stmts, &states, &c.result, &env, &c.called) {
+                    Ok(stmts) => {
+                        threaded = stmts;
+                        &threaded
+                    }
+                    Err(r) => {
+                        failed.insert(c.rust.clone(), r);
+                        changed = true;
+                        continue;
+                    }
+                }
+            };
+            let lifted = block(stmts, &env, &ctx, Acc::default(), Some(&c.result));
             let outcome = match lifted {
                 Ok(((body, ty), acc)) if ty.same(&c.result) => {
                     let descends = acc.descends.clone();
@@ -10724,12 +13633,15 @@ pub(crate) fn lift_all(
                         Err(Residue::Form(
                             "recursion on more than one parameter".to_string(),
                         ))
+                    } else if let Some(i) = descends.into_iter().next() {
+                        match names.get(i) {
+                            Some(name) => Ok((body, Some(name.clone()), acc)),
+                            None => Err(Residue::Form(
+                                "recursive descent outside the caller's parameters".to_string(),
+                            )),
+                        }
                     } else {
-                        Ok((
-                            body,
-                            descends.into_iter().next().map(|i| names[i].clone()),
-                            acc,
-                        ))
+                        Ok((body, None, acc))
                     }
                 }
                 Ok(_) => Err(Residue::Form("a body of another type".to_string())),
@@ -10748,6 +13660,12 @@ pub(crate) fn lift_all(
                 }
                 Ok((body, None, acc)) => Ok((body, None, None, Vec::new(), acc)),
                 Err(r) => Err(r),
+            };
+            let outcome = match (outcome, &c.generic) {
+                (Ok(lifted), Some(_)) => {
+                    generic_unread(&lifted.4, lifted.2.is_some(), c).map_or(Ok(lifted), Err)
+                }
+                (outcome, _) => outcome,
             };
             match outcome {
                 Ok((body, recursive, termination, theorems, acc)) => {
@@ -10808,6 +13726,7 @@ pub(crate) fn lift_all(
                         decls.push((
                             key,
                             Decl::Definition {
+                                type_parameters: Vec::new(),
                                 recursive: if h.recursive {
                                     h.params.first().map(|(n, _)| n.clone())
                                 } else {
@@ -10826,11 +13745,18 @@ pub(crate) fn lift_all(
                     decls.push((
                         c.rust.clone(),
                         Decl::Definition {
+                            type_parameters: c
+                                .generic
+                                .as_ref()
+                                .map(|g| g.types.clone())
+                                .unwrap_or_default(),
                             name: c.name.clone(),
                             parameters: c
-                                .params
+                                .generic
                                 .iter()
-                                .map(|(_, n, t)| (n.clone(), t.render()))
+                                .flat_map(|g| &g.dictionary)
+                                .map(|e| (e.name.clone(), e.ty.render()))
+                                .chain(c.params.iter().map(|(_, n, t)| (n.clone(), t.render())))
                                 .collect(),
                             result: c.result.render(),
                             body,
@@ -10852,7 +13778,19 @@ pub(crate) fn lift_all(
         let mut mutual_of: BTreeMap<String, String> = BTreeMap::new();
         if !changed {
             for component in call_cycles(&graph) {
-                match mutual_group(&component, candidates, &mut decls, types) {
+                // A mutual group's members share no type parameter or
+                // dictionary: a generic member stops the group.
+                let generic = candidates
+                    .iter()
+                    .any(|c| c.generic.is_some() && component.contains(&c.rust));
+                let grouped = if generic {
+                    Err(Residue::Form(
+                        "a generic function in a cycle of calls".to_string(),
+                    ))
+                } else {
+                    mutual_group(&component, candidates, &mut decls, types)
+                };
+                match grouped {
                     Ok(label) => {
                         for m in &component {
                             if let Some(axioms) = own.get_mut(m) {
@@ -11134,6 +14072,7 @@ fn well_founded(
         let name = format!("decreases_{}_{i}", c.name);
         evidence.push(name.clone());
         theorems.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -11371,6 +14310,7 @@ fn mutual_group(
                 (
                     format!("#{name}"),
                     Decl::Theorem {
+                        type_parameters: Vec::new(),
                         name,
                         parameters,
                         statement,
@@ -11524,7 +14464,14 @@ fn applied(
     let rs::RustExpr::Path(p) = &*c.func else {
         return None;
     };
-    let name = p.segments.last()?.ident.to_string();
+    // Associated functions are keyed by their owner too. A short-name
+    // lookup loses their acceptance root or binds an unrelated function.
+    let name = p
+        .segments
+        .iter()
+        .map(|s| s.ident.as_str())
+        .collect::<Vec<_>>()
+        .join("::");
     let sig = lifted.get(&name)?;
     if sig.params.len() != c.args.len() {
         return None;
@@ -11645,9 +14592,312 @@ pub(crate) fn acceptance(
     }
 }
 
+/// The function type of a trait's method in a dictionary over the type
+/// parameter `param`, whose reading `types.generic` holds under `Self`
+/// too: the receiver (`self` or `&self`, both the value) first, then the
+/// parameters. A method of type or const parameters of its own, of a
+/// receiver it changes or of no parameter at all is no entry.
+pub(crate) fn entry_ty(types: &Types, sig: &rs::Signature, param: &Ty) -> Lift<Ty> {
+    if let Some(what) = unread_signature(sig) {
+        return Err(Residue::Signature(format!("a trait method {what}")));
+    }
+    let mut inputs = Vec::new();
+    for input in &sig.inputs {
+        match input {
+            rs::FnArg::Receiver { plain: true } => inputs.push(param.clone()),
+            rs::FnArg::Receiver { plain: false } => {
+                return Err(Residue::Signature(
+                    "a trait method that takes &mut self, mut self or a typed self: a dictionary \
+                     holds functions of the value, and threads no changed receiver"
+                        .to_string(),
+                ))
+            }
+            rs::FnArg::Typed(pat) => inputs.push(types.ty(&pat.ty)?),
+        }
+    }
+    if inputs.is_empty() {
+        return Err(Residue::Signature(
+            "a trait method of no parameter, which a dictionary holds as no function".to_string(),
+        ));
+    }
+    let result = match &sig.output {
+        None => Ty::Unit,
+        Some(t) => types.ty(t)?,
+    };
+    Ok(Ty::Fn(inputs, Box::new(result)))
+}
+
+/// What of a signature the lift does not read, each part named, or `None`
+/// when it reads all of it. A type or const parameter makes the function
+/// one per instantiation, and an `async`, `unsafe` or variadic function
+/// is not a total function of its arguments' values. A lifetime parameter
+/// says how long a borrow lives, which a value of LexLean does not have:
+/// it is erased.
+fn unread_signature(sig: &rs::Signature) -> Option<String> {
+    let mut parts = Vec::new();
+    let named = |kind: &str, names: Vec<&String>| {
+        let names: Vec<&str> = names.iter().map(|n| n.as_str()).collect();
+        format!("generic over {kind} {}", names.join(", "))
+    };
+    let types: Vec<&String> = sig
+        .generics
+        .iter()
+        .filter_map(|p| match p {
+            rs::GenericParam::Type(n) => Some(n),
+            _ => None,
+        })
+        .collect();
+    let consts: Vec<&String> = sig
+        .generics
+        .iter()
+        .filter_map(|p| match p {
+            rs::GenericParam::Const(n) => Some(n),
+            _ => None,
+        })
+        .collect();
+    if !types.is_empty() {
+        parts.push(named("type parameters", types));
+    }
+    if !consts.is_empty() {
+        parts.push(named("const parameters", consts));
+    }
+    for (holds, what) in [
+        (sig.asyncness, "async"),
+        (sig.unsafety, "unsafe"),
+        (sig.variadic, "variadic"),
+    ] {
+        if holds {
+            parts.push(what.to_string());
+        }
+    }
+    (!parts.is_empty()).then(|| parts.join(", "))
+}
+
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn map_carriers_keep_closed_abi_and_transport_generic_instances_ue_71() {
+        let k = Ty::Param("K".into());
+        let v = Ty::Param("V".into());
+        let generic = Ty::Map(Box::new(k), Box::new(v), false);
+        let closed = Ty::Map(Box::new(Ty::Nat(Some(8))), Box::new(Ty::Bool), false);
+        assert_eq!(closed.render(), "(List TupleNatBool)");
+        assert_eq!(closed.tag(), "ListTupleNatBool");
+        assert_eq!(generic.render(), "(List ('K * 'V))");
+        assert!(!generic.mentions().iter().any(|t| matches!(t, Ty::Tuple(_))));
+        let bindings = BTreeMap::from([("K".into(), Ty::Nat(Some(8))), ("V".into(), Ty::Bool)]);
+        assert_eq!(
+            model_carrier(&generic, &bindings).render(),
+            "(List (Nat * Bool))"
+        );
+        let sig = Sig {
+            name: "keep".into(),
+            params: vec![generic.clone()],
+            result: generic,
+            threads: Vec::new(),
+            generic: Some(Generic {
+                types: vec!["K".into(), "V".into()],
+                reads: BTreeMap::new(),
+                dictionary: Vec::new(),
+            }),
+        };
+        let (_, result, calls, decls) = bind_model_call(
+            &sig,
+            &[("m".into(), closed.clone())],
+            &Types::default(),
+            &BTreeMap::new(),
+            &[],
+            &BTreeSet::new(),
+        )
+        .unwrap();
+        assert_eq!(result, closed);
+        assert_eq!(calls, BTreeSet::from(["keep".into()]));
+        assert_eq!(
+            decls.len(),
+            4,
+            "entry and list transports in both directions"
+        );
+        assert!(decls
+            .iter()
+            .all(|d| matches!(d,Decl::Definition {axioms,..} if axioms.is_empty())));
+    }
     use super::*;
+
+    #[test]
+    fn compiler_generic_bindings_keep_type_identity_and_dictionary_evidence_ue_66() {
+        let t = Ty::Param("T".into());
+        let mut sig = Sig {
+            name: "transport".into(),
+            params: vec![t.clone(), t.clone()],
+            result: t.clone(),
+            threads: Vec::new(),
+            generic: Some(Generic {
+                types: vec!["T".into()],
+                reads: BTreeMap::from([("T".into(), t.clone())]),
+                dictionary: Vec::new(),
+            }),
+        };
+        let call =
+            |sig: &Sig, args: &[(String, Ty)], types: &Types, fns: &BTreeMap<String, Sig>| {
+                bind_model_call(sig, args, types, fns, &[], &BTreeSet::new())
+            };
+        let args = [
+            ("a".into(), Ty::Nat(Some(8))),
+            ("b".into(), Ty::Nat(Some(8))),
+        ];
+        let (term, result, calls, declarations) =
+            call(&sig, &args, &Types::default(), &BTreeMap::new()).unwrap();
+        assert!(declarations.is_empty());
+        assert_eq!(term, "(transport [Nat] a b)");
+        assert_eq!(result, Ty::Nat(Some(8)));
+        assert_eq!(calls, BTreeSet::from(["transport".into()]));
+        let mixed = [args[0].clone(), ("b".into(), Ty::Nat(Some(64)))];
+        assert!(call(&sig, &mixed, &Types::default(), &BTreeMap::new()).is_err());
+        sig.generic.as_mut().unwrap().dictionary.push(Entry {
+            param: "T".into(),
+            declarer: "Observe".into(),
+            method: "observe".into(),
+            name: "observe".into(),
+            ty: Ty::Fn(vec![t], Box::new(Ty::Bool)),
+        });
+        let args = [
+            ("a".into(), Ty::Named("Flag".into())),
+            ("b".into(), Ty::Named("Flag".into())),
+        ];
+        assert!(call(&sig, &args, &Types::default(), &BTreeMap::new()).is_err());
+        let mut types = Types::default();
+        types.impls.insert(
+            ("Observe".into(), "Flag".into(), "observe".into()),
+            "FlagObserve".into(),
+        );
+        let mut method = Sig {
+            name: "flagObserve".into(),
+            params: vec![Ty::Named("Flag".into())],
+            result: Ty::Bool,
+            generic: None,
+            threads: Vec::new(),
+        };
+        let fns = BTreeMap::from([("FlagObserve".into(), method.clone())]);
+        let (_, _, calls, _) = call(&sig, &args, &types, &fns).unwrap();
+        assert!(calls.contains("flagObserve"));
+        method.result = Ty::Nat(Some(8));
+        assert!(call(
+            &sig,
+            &args,
+            &types,
+            &BTreeMap::from([("FlagObserve".into(), method)])
+        )
+        .is_err());
+    }
+
+    #[test]
+    fn qualified_acceptance_retains_its_owner_ue_27() {
+        let lifted = BTreeMap::from([
+            (
+                "One::empty".into(),
+                Sig {
+                    threads: Vec::new(),
+                    generic: None,
+                    name: "oneEmpty".into(),
+                    params: vec![Ty::Bool],
+                    result: Ty::Bool,
+                },
+            ),
+            (
+                "Two::empty".into(),
+                Sig {
+                    threads: Vec::new(),
+                    generic: None,
+                    name: "twoEmpty".into(),
+                    params: vec![Ty::Bool],
+                    result: Ty::Bool,
+                },
+            ),
+        ]);
+        let check = |source: &str| {
+            let expression: syn::Expr = syn::parse_str(source).unwrap();
+            acceptance(
+                "assert",
+                &[crate::convert::expr(&expression)],
+                &lifted,
+                &Types::default(),
+            )
+        };
+        assert_eq!(check("One::empty(true)").unwrap().check, "(oneEmpty true)");
+        assert_eq!(
+            check("Two::empty(false)").unwrap().check,
+            "(twoEmpty false)"
+        );
+        assert!(check("Other::empty(true)").is_none());
+    }
+
+    #[test]
+    fn recursive_descent_must_name_a_callers_parameter_ue_24() {
+        let mut env = Env {
+            total: false,
+            types: Types::default(),
+            fns: BTreeMap::from([(
+                "again".into(),
+                Sig {
+                    threads: Vec::new(),
+                    generic: None,
+                    name: "again".into(),
+                    params: vec![Ty::Bool; 3],
+                    result: Ty::Bool,
+                },
+            )]),
+            widths: pointer_widths(&[]),
+            names: BTreeSet::new(),
+        };
+        let mut ctx = Ctx {
+            sealed: BTreeSet::new(),
+            borrowed: BTreeSet::new(),
+            dictionary: Vec::new(),
+            current: "again".into(),
+            own: "again".into(),
+            params: vec!["first".into(), "second".into()],
+            result: Ty::Bool,
+            return_states: Vec::new(),
+            locals: BTreeMap::new(),
+            tails: BTreeMap::new(),
+            top: true,
+            looping: None,
+            hidden: Vec::new(),
+            imports: BTreeMap::new(),
+            closures: BTreeMap::new(),
+            elements: None,
+            rebuilt: BTreeMap::new(),
+            bounds: BTreeMap::new(),
+            capped: BTreeMap::new(),
+            exits: None,
+            formatter: None,
+            seen: Seen::default(),
+        };
+        let call = |source: &str, env: &Env, ctx: &Ctx| {
+            let parsed: syn::Expr = syn::parse_str(source).unwrap();
+            let rs::RustExpr::Call(call) = crate::convert::expr(&parsed) else {
+                panic!("call")
+            };
+            fn_call(&call, &["again".into()], env, ctx, Acc::default())
+        };
+        // Two absent lookups are not evidence of descent at index two.
+        assert!(matches!(
+            call("again(false, false, false)", &env, &ctx),
+            Err(Residue::Form(_))
+        ));
+        let list = Ty::List(Box::new(Ty::Bool));
+        env.fns.get_mut("again").unwrap().params = vec![Ty::Bool, list.clone()];
+        ctx.locals.insert("tail".into(), ("tail".into(), list));
+        ctx.tails.insert("tail".into(), "second".into());
+        let (_, acc) = call("again(false, tail)", &env, &ctx).unwrap();
+        assert_eq!(acc.descends, BTreeSet::from([1]));
+        ctx.params.clear();
+        assert!(matches!(
+            call("again(false, tail)", &env, &ctx),
+            Err(Residue::Form(_))
+        ));
+    }
 
     fn lift(src: &str, types: &Types) -> Result<String, Residue> {
         let f: syn::ItemFn = syn::parse_str(src).expect("parses");
@@ -11655,6 +14905,7 @@ mod tests {
         let block = crate::convert::block(&f.block);
         let (params, result) = types.signature(&sig, None)?;
         let c = Candidate {
+            generic: None,
             rust: sig.ident.clone(),
             name: camel(&[&sig.ident]),
             params,
@@ -11665,6 +14916,8 @@ mod tests {
             homonyms: BTreeMap::new(),
             called: sig.ident.clone(),
             formatter: None,
+            seen: Seen::default(),
+            threads: threads(&sig, None),
         };
         let out = lift_all(&[c], types, &pointer_widths(&[]), &BTreeSet::new());
         match out.failed.into_values().next() {
@@ -12131,20 +15384,22 @@ mod tests {
     #[test]
     fn a_type_outside_the_lift_names_the_chain_to_its_leaf() {
         let types = types_of(
-            "struct Leaf { x: f64 } struct Mid { n: u32, leaf: Leaf, other: f32 } \
+            "struct Leaf { x: UnsafeCell<u8> } struct Mid { n: u32, leaf: Leaf, other: UnsafeCell<u16> } \
              struct Top { mids: Vec<Option<Mid>> }",
         );
         // Through the containers the lift reads, down to the first field
         // in declaration order that is outside.
         assert_eq!(
             lift("fn through(t: &Top) -> bool { true }", &types),
-            Err(Residue::Type("Top.mids: Mid.leaf: Leaf.x: f64".to_string()))
+            Err(Residue::Type(
+                "Top.mids: Mid.leaf: Leaf.x: UnsafeCell<u8>".to_string()
+            ))
         );
         // The owner of a method is named the same way; a name the
         // workspace does not declare is its own leaf.
         assert_eq!(
             types.unnamed("Mid"),
-            Residue::Type("Mid.leaf: Leaf.x: f64".to_string())
+            Residue::Type("Mid.leaf: Leaf.x: UnsafeCell<u8>".to_string())
         );
         assert_eq!(
             types.unnamed("Elsewhere"),
@@ -12152,7 +15407,7 @@ mod tests {
         );
         assert_eq!(
             types.unnamed("Mid").detail(),
-            "type outside the lift: Mid.leaf: Leaf.x: f64"
+            "type outside the lift: Mid.leaf: Leaf.x: UnsafeCell<u8>"
         );
     }
 
@@ -12160,24 +15415,26 @@ mod tests {
     fn a_chain_never_leads_back_into_the_type_it_explains() {
         // `A` holds `B` first, and `B` is outside only because it holds
         // `A`: the chain of `A` names what kept `A` out on its own.
-        let types = types_of("struct A { b: Vec<B>, x: f64 } struct B { a: Option<A> }");
-        assert_eq!(types.outside["A"], "A.x: f64");
-        assert_eq!(types.outside["B"], "B.a: A.x: f64");
+        let types = types_of("struct A { b: Vec<B>, x: UnsafeCell<u8> } struct B { a: Option<A> }");
+        assert_eq!(types.outside["A"], "A.x: UnsafeCell<u8>");
+        assert_eq!(types.outside["B"], "B.a: A.x: UnsafeCell<u8>");
         // Each of two types outside on its own account names the other
         // first, as declared, and then what keeps that one out.
-        let types = types_of("struct T { u: Vec<U>, x: f64 } struct U { t: Box<T>, y: f32 }");
-        assert_eq!(types.outside["T"], "T.u: U.y: f32");
-        assert_eq!(types.outside["U"], "U.t: T.x: f64");
+        let types = types_of(
+            "struct T { u: Vec<U>, x: UnsafeCell<u8> } struct U { t: Box<T>, y: UnsafeCell<u16> }",
+        );
+        assert_eq!(types.outside["T"], "T.u: U.y: UnsafeCell<u16>");
+        assert_eq!(types.outside["U"], "U.t: T.x: UnsafeCell<u8>");
     }
 
     #[test]
     fn an_enum_names_the_variant_and_the_field_of_its_leaf() {
         let types = types_of(
-            "enum Reading { Count(u32), Pair(u8, f64), Level { level: f64 } } \
+            "enum Reading { Count(u32), Pair(u8, Cell<u8>), Level { level: Cell<u8> } } \
              enum Tree { Leaf, Node(BTreeMap<String, Tree>) } \
              struct Parent { kids: BTreeSet<Child> } struct Child { parent: Vec<Parent> }",
         );
-        assert_eq!(types.outside["Reading"], "Reading::Pair.1: f64");
+        assert_eq!(types.outside["Reading"], "Reading::Pair.1: Cell<u8>");
         assert_eq!(
             types.outside["Tree"],
             format!("Tree::Node.0: BTreeMap<String, Tree>: {NOT_NESTED}")
@@ -12251,20 +15508,19 @@ mod tests {
     #[test]
     fn a_receiver_the_lift_does_not_thread_is_named_with_its_type() {
         let types = with_square();
-        for receiver in ["&mut self", "mut self"] {
-            let owner = Owner::Type {
-                name: "Square",
-                receiver: Some(receiver),
-            };
-            let src = format!("fn grow({receiver}, by: bool) {{}}");
-            assert_eq!(
-                method_signature(&src, Some(&owner), &types).err(),
-                Some(Residue::Signature(format!(
-                    "takes {receiver} of Square: the lift reads self and &self as the value, \
-                     and threads no other receiver"
-                )))
-            );
-        }
+        let receiver = "self: Box<Self>";
+        let owner = Owner::Type {
+            name: "Square",
+            receiver: Some(receiver),
+        };
+        let src = format!("fn grow({receiver}, by: bool) {{}}");
+        assert_eq!(
+            method_signature(&src, Some(&owner), &types).err(),
+            Some(Residue::Signature(format!(
+                "takes {receiver} of Square: the lift reads self, mut self, &self and &mut \
+                 self, and no other receiver"
+            )))
+        );
         // A type the scope does not name, and a receiver outside any type.
         let owner = Owner::Type {
             name: "Circle",
@@ -12297,11 +15553,20 @@ mod tests {
                 field("deep", Ty::List(Box::new(Ty::Nat(Some(8))))),
             ]
         );
-        // A cell that changes behind a shared borrow is the leaf, whatever
-        // shares it and whatever it holds.
-        assert_eq!(types.outside["Cellular"], "Cellular.inner: RefCell<u32>");
-        assert_eq!(types.outside["Counted"], "Counted.hits: Cell<u32>");
-        assert_eq!(types.outside["Locked"], "Locked.state: Mutex<Vec<u8>>");
+        // Shared cells carry the allocation reference, not a snapshot.
+        assert_eq!(
+            fields(&types, "Cellular"),
+            [field("inner", Ty::Named("Prelude::RcCellRef".into()))]
+        );
+        assert_eq!(
+            fields(&types, "Counted"),
+            [field("hits", Ty::Nat(Some(32)))]
+        );
+        assert_eq!(
+            types.outside["Locked"],
+            "Locked.state: Arc<Mutex<Vec<u8>>>: a Mutex that another owner shares, which sees \
+             every change"
+        );
         // Another owner, and a new one, are the content.
         let out = lift(
             "fn again(s: &Shared) -> Arc<u32> { Arc::clone(&s.inner) }",
@@ -12398,7 +15663,7 @@ mod tests {
     #[test]
     fn every_struct_shape_is_a_type_or_names_its_leaf() {
         let types = types_of(
-            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, f64); \
+            "struct Marker; struct Empty {} struct Meters(u32); struct Pair(u32, UnsafeCell<u8>); \
              struct Wrapper<T> { value: T } struct Holder { m: Marker, w: Wrapper<u32> }",
         );
         // A struct of no fields has one value: one constructor.
@@ -12415,7 +15680,7 @@ mod tests {
         assert!(out.contains("body: (project m item0)"), "{out}");
         let out = lift("fn make(n: u32) -> Meters { Meters(n) }", &types).expect("lifts");
         assert!(out.contains("body: (record Meters {item0 := n})"), "{out}");
-        assert_eq!(types.outside["Pair"], "Pair.1: f64");
+        assert_eq!(types.outside["Pair"], "Pair.1: UnsafeCell<u8>");
         // A struct with a type parameter is the leaf.
         assert_eq!(
             types.outside["Wrapper"],
@@ -12458,7 +15723,7 @@ mod tests {
             "struct Window { bounds: Range<u32>, queue: VecDeque<u8>, \
              index: std::collections::BTreeMap<String, u32>, text: std::string::String, \
              shared: alloc::sync::Arc<core::option::Option<u8>>, at: std::path::PathBuf } \
-             struct Borrowed { cell: std::cell::RefCell<u8> } struct Misplaced { rc: std::fmt::Rc<u8> }",
+             struct Borrowed { cell: std::cell::OnceCell<u8> } struct Misplaced { rc: std::fmt::Rc<u8> }",
         );
         let nat = |bits: u32| Box::new(Ty::Nat(Some(bits)));
         assert_eq!(
@@ -12475,7 +15740,7 @@ mod tests {
         // A full path the lift does not read is the leaf, as written.
         assert_eq!(
             types.outside["Borrowed"],
-            "Borrowed.cell: std::cell::RefCell<u8>"
+            "Borrowed.cell: std::cell::OnceCell<u8>"
         );
         assert_eq!(types.outside["Misplaced"], "Misplaced.rc: std::fmt::Rc<u8>");
     }
@@ -12510,7 +15775,7 @@ mod tests {
             )
             .err(),
             Some(Residue::Signature(
-                "generic, async, unsafe or variadic".to_string()
+                "generic over type parameters T".to_string()
             ))
         );
     }
@@ -12626,11 +15891,11 @@ mod tests {
         assert_eq!(types.fields_read(&[]), Some(Vec::new()));
         // One field outside, first or last, keeps the whole out.
         assert_eq!(
-            types.fields_read(&raw(&[("a", "std::cell::RefCell<u8>"), ("b", "u8")])),
+            types.fields_read(&raw(&[("a", "std::cell::UnsafeCell<u8>"), ("b", "u8")])),
             None
         );
         assert_eq!(
-            types.fields_read(&raw(&[("a", "u8"), ("b", "std::cell::RefCell<u8>")])),
+            types.fields_read(&raw(&[("a", "u8"), ("b", "std::cell::UnsafeCell<u8>")])),
             None
         );
         let variant = |v: &str, fields: &[(Option<&str>, &str)]| -> RawVariant {
@@ -12665,9 +15930,63 @@ mod tests {
         assert_eq!(own.variants_read("Tree", &[]), Some(Vec::new()));
         // A field outside the lift, or the enum inside a map where Lean
         // nests no inductive, keeps the whole out.
-        for bad in ["std::cell::RefCell<u8>", "BTreeMap<u8, Tree>"] {
+        for bad in ["std::cell::UnsafeCell<u8>", "BTreeMap<u8, Tree>"] {
             let raw = [variant("Leaf", &[]), variant("Node", &[(None, bad)])];
             assert_eq!(own.variants_read("Tree", &raw), None, "{bad}");
+        }
+    }
+
+    // Registry number types.
+
+    /// A scope where the package's lock admits the big integer reading and
+    /// the file's `use` binds `BigInt` to it.
+    fn registry_number_scope() -> Types {
+        let path = "num_bigint::BigInt".to_string();
+        Types {
+            aliases: BTreeMap::from([("BigInt".to_string(), path.clone()), (path.clone(), path)]),
+            ..Types::default()
+        }
+    }
+
+    fn registry_number_lift(src: &str, imports: &[(&str, &str)]) -> Result<String, Residue> {
+        let types = registry_number_scope();
+        let f: syn::ItemFn = syn::parse_str(src).expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        let block = crate::convert::block(&f.block);
+        let (params, result) = types.signature(&sig, None)?;
+        let c = Candidate {
+            threads: threads(&sig, None),
+            generic: None,
+            rust: sig.ident.clone(),
+            name: camel(&[&sig.ident]),
+            params,
+            result,
+            block: &block,
+            imports: imports
+                .iter()
+                .map(|(n, p)| (n.to_string(), p.to_string()))
+                .collect(),
+            aliases: BTreeMap::new(),
+            homonyms: BTreeMap::new(),
+            called: sig.ident.clone(),
+            formatter: None,
+            seen: Seen {
+                uses: imports
+                    .iter()
+                    .map(|(n, p)| (n.to_string(), p.to_string()))
+                    .collect(),
+                ..Seen::default()
+            },
+        };
+        let out = lift_all(&[c], &types, &pointer_widths(&[]), &BTreeSet::new());
+        match out.failed.into_values().next() {
+            Some(r) => Err(r),
+            None => Ok(out
+                .decls
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect::<Vec<_>>()
+                .join("\n")),
         }
     }
 
@@ -12684,5 +16003,715 @@ mod tests {
         family.families.push(BTreeSet::from(["P".to_string()]));
         assert_eq!(struct_value("P", &parts, &family), "(ctor P.mk 1 2)");
         assert_eq!(struct_value("P", &[], &family), "(ctor P.mk)");
+    }
+
+    #[test]
+    fn a_registered_big_integer_is_an_int_where_the_lock_admits_it() {
+        let types = registry_number_scope();
+        let named = |text: &str| {
+            let f: syn::ItemFn = syn::parse_str(&format!("fn f(x: {text}) {{}}")).expect("parses");
+            let sig = crate::convert::signature(&f.sig);
+            types
+                .signature(&sig, None)
+                .map(|(params, _)| params[0].2.clone())
+        };
+        assert_eq!(named("BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(named("num_bigint::BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(named("&::num_bigint::BigInt"), Ok(Ty::Unbounded));
+        assert_eq!(
+            named("Vec<BigInt>").map(|t| t.render()),
+            Ok("(List Int)".to_string())
+        );
+        // Without the lock's admission the name is the leaf, as written.
+        let f: syn::ItemFn = syn::parse_str("fn f(x: BigInt) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert_eq!(
+            Types::default().signature(&sig, None).err(),
+            Some(Residue::Type("BigInt".to_string()))
+        );
+        let f: syn::ItemFn = syn::parse_str("fn f(x: num_bigint::BigUint) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert_eq!(
+            types.signature(&sig, None).err(),
+            Some(Residue::Type("num_bigint::BigUint".to_string()))
+        );
+    }
+
+    // Mutation as state passing: an update is a new binding of the local
+    // for the statements after it, so it is read only where those
+    // statements are part of the expression that makes it.
+
+    fn mutation_refused_as_lost(src: &str, local: &str) {
+        assert_eq!(
+            lift(src, &plain()),
+            Err(Residue::Form(format!(
+                "an update of {local} inside an operand, which the statements after it do not see"
+            ))),
+            "{src}"
+        );
+    }
+
+    #[test]
+    fn a_registered_big_integer_computes_exactly() {
+        let lifted = registry_number_lift(
+            "fn mix(a: BigInt, b: &BigInt) -> BigInt { -(a.clone() * b + 2) / 3 % 5 }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(
+            lifted.contains(
+                "(prim remainder (prim quotient (prim negate (prim subtract \
+                 (prim multiply a b : Int) (prim negate (2 : Int) : Int) : Int) : Int) \
+                 (3 : Int) (0 : Int) : Int) (5 : Int) (0 : Int) : Int)"
+            ),
+            "{lifted}"
+        );
+        let lifted =
+            registry_number_lift("fn below(a: &BigInt, b: &BigInt) -> bool { a < b }", &[])
+                .expect("lifts");
+        assert!(lifted.contains("(prim less_than a b : Bool)"), "{lifted}");
+    }
+
+    #[test]
+    fn a_registered_big_integer_is_built_from_what_the_crate_defines() {
+        let lifted = registry_number_lift("fn of(n: i64) -> BigInt { BigInt::from(n) }", &[])
+            .expect("lifts");
+        assert!(lifted.contains("(prim to_int n : Int)"), "{lifted}");
+        let lifted =
+            registry_number_lift("fn none() -> BigInt { BigInt::default() }", &[]).expect("lifts");
+        assert!(lifted.contains("(0 : Int)"), "{lifted}");
+        // `zero` and `one` are the trait's where the file brings it into
+        // scope, and no function of the lift otherwise.
+        let zero = "fn none() -> BigInt { BigInt::zero() }";
+        let lifted = registry_number_lift(zero, &[("Zero", "num_traits::Zero")]).expect("lifts");
+        assert!(lifted.contains("(0 : Int)"), "{lifted}");
+        assert!(registry_number_lift(zero, &[]).is_err());
+        let one = "fn unit() -> BigInt { BigInt::one() }";
+        let lifted =
+            registry_number_lift(one, &[("One", "num_traits::identities::One")]).expect("lifts");
+        assert!(lifted.contains("(1 : Int)"), "{lifted}");
+        // The width-driven binary reading supplies the unsigned conversion.
+        assert!(registry_number_lift("fn of(n: u32) -> BigInt { BigInt::from(n) }", &[]).is_ok());
+    }
+
+    #[test]
+    fn mutation_an_update_inside_an_operand_is_not_lost() {
+        // A `let`'s value, an argument and a closure's body are operands:
+        // the statements after them would read the local as it was.
+        mutation_refused_as_lost(
+            "fn f(c: bool) -> u32 { let mut a = 0u32; \
+             let r = if c { a = 1; 5 } else { 6 }; a.saturating_add(r) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f(c: Option<u32>) -> u32 { let mut a = 0u32; \
+             let r = match c { Some(v) => { a = v; 1 } None => 2 }; a.saturating_add(r) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f() -> u32 { let mut a = 0u32; let b = a.saturating_add({ a = 3; 1 }); \
+             a.saturating_add(b) }",
+            "a",
+        );
+        mutation_refused_as_lost(
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             let ys: Vec<u32> = xs.iter().map(|x| { n = 7; *x }).collect(); n }",
+            "n",
+        );
+        mutation_refused_as_lost(
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             let m = { for x in xs { n = x; } 1u32 }; n.saturating_add(m) }",
+            "n",
+        );
+    }
+
+    #[test]
+    fn a_registered_ratio_is_the_pair_it_stores() {
+        let mut types = registry_number_scope();
+        let ratio = "num_rational::BigRational".to_string();
+        types.aliases.insert("BigRational".into(), ratio.clone());
+        types.aliases.insert(ratio.clone(), ratio);
+        let lift = |src: &str, imports: &[(&str, &str)]| {
+            let f: syn::ItemFn = syn::parse_str(src).expect("parses");
+            let sig = crate::convert::signature(&f.sig);
+            let block = crate::convert::block(&f.block);
+            let (params, result) = types.signature(&sig, None)?;
+            let c = Candidate {
+                threads: threads(&sig, None),
+                generic: None,
+                rust: sig.ident.clone(),
+                name: camel(&[&sig.ident]),
+                params,
+                result,
+                block: &block,
+                imports: imports
+                    .iter()
+                    .map(|(n, p)| (n.to_string(), p.to_string()))
+                    .collect(),
+                aliases: BTreeMap::new(),
+                homonyms: BTreeMap::new(),
+                called: sig.ident.clone(),
+                formatter: None,
+                seen: Seen {
+                    uses: imports
+                        .iter()
+                        .map(|(n, p)| (n.to_string(), p.to_string()))
+                        .collect(),
+                    ..Seen::default()
+                },
+            };
+            let out = lift_all(&[c], &types, &pointer_widths(&[]), &BTreeSet::new());
+            match out.failed.into_values().next() {
+                Some(r) => Err(r),
+                None => Ok(out
+                    .decls
+                    .iter()
+                    .map(crate::lex::render_decl)
+                    .collect::<Vec<_>>()
+                    .join("\n")),
+            }
+        };
+        let lifted = lift(
+            "fn raw(n: BigInt, d: BigInt) -> BigRational { BigRational::new_raw(n, d) }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("result: (Int * Int)"), "{lifted}");
+        assert!(lifted.contains("(n, d)"), "{lifted}");
+        let lifted = lift(
+            "fn whole(n: BigInt) -> BigRational { BigRational::from(n) }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(n, (1 : Int))"), "{lifted}");
+        let lifted = lift(
+            "fn unit() -> BigRational { BigRational::one() }",
+            &[("One", "num_traits::One")],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("((1 : Int), (1 : Int))"), "{lifted}");
+        let lifted = lift(
+            "fn top(r: &BigRational) -> BigInt { r.numer().clone() }",
+            &[],
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(first r)"), "{lifted}");
+        // The reciprocal panics on a zero numerator: it is not read.
+        assert!(lift("fn flip(r: &BigRational) -> BigRational { r.recip() }", &[]).is_err());
+        // Two stored pairs may be one value: no comparison is read, and
+        // what reduces stays outside.
+        assert!(matches!(
+            lift(
+                "fn same(a: &BigRational, b: &BigRational) -> bool { a == b }",
+                &[]
+            ),
+            Err(Residue::Form(_))
+        ));
+        assert!(matches!(
+            lift(
+                "fn reduced(n: BigInt, d: BigInt) -> BigRational { BigRational::new(n, d) }",
+                &[]
+            ),
+            Err(Residue::Form(_))
+        ));
+    }
+
+    #[test]
+    fn a_float_is_ieee_754s_binary_format_core_states() {
+        let f64_format = Types::default().float("f64").expect("binary64");
+        assert_eq!((f64_format.exp, f64_format.frac), (11, 52));
+        let f32_format = Types::default().float("f32").expect("binary32");
+        assert_eq!((f32_format.exp, f32_format.frac), (8, 23));
+        let lifted = lift(
+            "fn mix(a: f64, b: f64) -> f64 { -(a * b + 0.5) / a % b }",
+            &plain(),
+        )
+        .expect("lifts");
+        let add = format!(
+            "(Prelude::floatAdd 11 52 (Prelude::floatMul 11 52 a b) {})",
+            crate::mir::float::literal(f64_format, "0.5").expect("a literal")
+        );
+        assert!(lifted.contains(&add), "{lifted}");
+        assert!(
+            lifted.contains("(Prelude::floatRem 11 52 (Prelude::floatDiv"),
+            "{lifted}"
+        );
+        assert!(lifted.contains("(Prelude::floatNeg 11 52 "), "{lifted}");
+        let lifted = lift(
+            "fn below(a: f32, b: f32) -> bool { a < b && !b.is_nan() }",
+            &plain(),
+        )
+        .expect("lifts");
+        assert!(lifted.contains("(Prelude::floatLt 8 23 a b)"), "{lifted}");
+        assert!(lifted.contains("(Prelude::floatIsNan 8 23 b)"), "{lifted}");
+        let lifted = lift("fn mag(a: f64) -> f64 { a.abs() }", &plain()).expect("lifts");
+        assert!(lifted.contains("(Prelude::floatAbs 11 52 a)"), "{lifted}");
+        // Two formats do not mix, and a method the model has not is no
+        // definition.
+        assert!(lift("fn sin(a: f64) -> f64 { a.sin() }", &plain()).is_err());
+    }
+
+    // Class: calls the language resolves by type (kai, round 3): a
+    // signature the lift does not read says which part.
+
+    #[test]
+    fn an_unread_signature_names_each_part_that_stops_it() {
+        let types = Types::default();
+        let reason = |text: &str| method_signature(text, None, &types).err();
+        let row = |s: &str| Some(Residue::Signature(s.to_string()));
+        assert_eq!(
+            reason("fn pick<T, U, const N: usize>(t: T) -> u8 { 1 }"),
+            row("generic over type parameters T, U, generic over const parameters N")
+        );
+        assert_eq!(reason("async fn wait() -> u8 { 1 }"), row("async"));
+        assert_eq!(reason("unsafe fn raw() -> u8 { 1 }"), row("unsafe"));
+        assert_eq!(
+            reason("async unsafe fn both() -> u8 { 1 }"),
+            row("async, unsafe")
+        );
+        // A lifetime parameter is erased.
+        assert!(!matches!(
+            reason("fn first<'a>(x: &'a u8) -> u8 { *x }"),
+            Some(Residue::Signature(_))
+        ));
+    }
+
+    // Class: refuted readings (repair of round 4's confirmed counterexamples).
+
+    /// A lift of `src` in `types` where the function's scope is `seen`.
+    fn refuted_lift(src: &str, types: &Types, seen: Seen) -> Result<String, Residue> {
+        let f: syn::ItemFn = syn::parse_str(src).expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        let block = crate::convert::block(&f.block);
+        let (params, result) = types.signature(&sig, None)?;
+        let c = Candidate {
+            threads: threads(&sig, None),
+            generic: None,
+            rust: sig.ident.clone(),
+            name: camel(&[&sig.ident]),
+            params,
+            result,
+            block: &block,
+            imports: seen.uses.clone(),
+            aliases: BTreeMap::new(),
+            homonyms: BTreeMap::new(),
+            called: sig.ident.clone(),
+            formatter: None,
+            seen,
+        };
+        let out = lift_all(&[c], types, &pointer_widths(&[]), &BTreeSet::new());
+        match out.failed.into_values().next() {
+            Some(r) => Err(r),
+            None => Ok(out
+                .decls
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect::<Vec<_>>()
+                .join("\n")),
+        }
+    }
+
+    /// The scope of the registry number tests, with the ratio read too.
+    fn refuted_scope() -> Types {
+        let ratio = "num_rational::BigRational".to_string();
+        let mut types = registry_number_scope();
+        types.aliases.insert("BigRational".into(), ratio.clone());
+        types.aliases.insert(ratio.clone(), ratio);
+        types
+    }
+
+    /// A scope where traits of the workspace declaring `methods` may be in
+    /// scope.
+    fn refuted_traits(methods: &[&str]) -> Seen {
+        Seen {
+            trait_methods: methods.iter().map(|m| m.to_string()).collect(),
+            ..Seen::default()
+        }
+    }
+
+    #[test]
+    fn a_big_integer_divides_only_by_a_divisor_that_is_not_zero() {
+        let types = refuted_scope();
+        let by = |src: &str| refuted_lift(src, &types, Seen::default());
+        assert!(by("fn q(a: BigInt) -> BigInt { a / BigInt::from(2i64) }").is_err());
+        assert!(by("fn q(a: BigInt, b: BigInt) -> BigInt { a / b }").is_err());
+        assert!(by("fn r(a: BigInt, b: BigInt) -> BigInt { a % b }").is_err());
+        assert!(by("fn r(a: BigInt) -> BigInt { a % 0 }").is_err());
+        let lifted = by("fn h(a: BigInt) -> BigInt { a / 2 }").expect("lifts");
+        assert!(
+            lifted.contains("(prim quotient a (2 : Int) (0 : Int) : Int)"),
+            "{lifted}"
+        );
+    }
+
+    #[test]
+    fn a_ratio_reciprocal_and_a_trait_named_accessor_are_not_read() {
+        let flip = "fn flip(r: BigRational) -> BigRational { r.recip() }";
+        assert!(refuted_lift(flip, &refuted_scope(), Seen::default()).is_err());
+        let top = "fn top(r: BigRational) -> BigInt { r.numer().clone() }";
+        assert!(refuted_lift(top, &refuted_scope(), Seen::default()).is_ok());
+        // A trait of the workspace declaring `numer`, or one from outside
+        // it the scope may import, may be what the call reaches.
+        assert!(refuted_lift(top, &refuted_scope(), refuted_traits(&["numer"])).is_err());
+        let outside = Seen {
+            outside_traits: true,
+            ..Seen::default()
+        };
+        assert!(refuted_lift(top, &refuted_scope(), outside).is_err());
+    }
+
+    #[test]
+    fn a_float_method_a_trait_may_take_is_not_read() {
+        let abs = "fn mag(x: &f64) -> f64 { x.abs() }";
+        assert!(refuted_lift(abs, &plain(), Seen::default()).is_ok());
+        assert!(refuted_lift(abs, &plain(), refuted_traits(&["abs"])).is_err());
+        let outside = Seen {
+            outside_traits: true,
+            ..Seen::default()
+        };
+        assert!(refuted_lift(abs, &plain(), outside).is_err());
+    }
+
+    #[test]
+    fn an_identity_is_read_only_through_its_own_scopes_import_of_the_crate() {
+        let zero = "fn z() -> BigInt { BigInt::zero() }";
+        let uses = |local: &[&str]| Seen {
+            uses: BTreeMap::from([("Zero".to_string(), "num_traits::Zero".to_string())]),
+            local: local.iter().map(|n| n.to_string()).collect(),
+            ..Seen::default()
+        };
+        let lifted = refuted_lift(zero, &refuted_scope(), uses(&[])).expect("lifts");
+        assert!(lifted.contains("(0 : Int)"), "{lifted}");
+        // A module `num_traits` of the scope is what the path names.
+        assert!(refuted_lift(zero, &refuted_scope(), uses(&["num_traits"])).is_err());
+        // A trait of the workspace declaring `zero` may be in scope.
+        let traits = Seen {
+            trait_methods: BTreeSet::from(["zero".to_string()]),
+            ..uses(&[])
+        };
+        assert!(refuted_lift(zero, &refuted_scope(), traits).is_err());
+        // Another module's import does not reach this scope.
+        assert!(refuted_lift(zero, &refuted_scope(), Seen::default()).is_err());
+        // Nor where a macro of the package makes items.
+        let made = Seen {
+            macro_items: true,
+            ..uses(&[])
+        };
+        assert!(refuted_lift(zero, &refuted_scope(), made).is_err());
+    }
+
+    #[test]
+    fn a_float_literal_takes_its_format_from_its_use() {
+        let lifted = lift("fn s() -> f32 { 0.1 + 0.2 }", &plain()).expect("lifts");
+        assert!(lifted.contains("(Prelude::floatAdd 8 23 "), "{lifted}");
+        assert!(!lifted.contains("11 52"), "{lifted}");
+        let lifted = lift("fn t() -> f32 { let y: f32 = 0.1 + 0.2; y }", &plain()).expect("lifts");
+        assert!(lifted.contains("(Prelude::floatAdd 8 23 "), "{lifted}");
+        // A literal no use types, and a binary64 value where a binary32 is
+        // returned or bound.
+        assert!(lift("fn u() -> f32 { let v = 0.1; v }", &plain()).is_err());
+        assert!(lift("fn w() -> f32 { 0.5f64 }", &plain()).is_err());
+        assert!(lift("fn x(a: f64) -> f32 { let y: f32 = a; y }", &plain()).is_err());
+        assert!(lift("fn n(a: f64) -> u64 { a }", &plain()).is_err());
+    }
+
+    #[test]
+    fn what_reads_a_nans_sign_or_a_zeros_sign_of_min_and_max_is_not_read() {
+        for src in [
+            "fn b(a: f64, c: f64) -> u64 { (a / c).to_bits() }",
+            "fn s(a: f64, c: f64) -> bool { (a / c).is_sign_negative() }",
+            "fn p(a: f64) -> bool { a.is_sign_positive() }",
+            "fn c(a: f64, c: f64) -> f64 { a.copysign(c) }",
+            "fn m(a: f64, c: f64) -> f64 { a.min(c) }",
+            "fn x(a: f64, c: f64) -> f64 { a.max(c) }",
+            "fn z(a: f64) -> f64 { a.max(0.0) }",
+        ] {
+            assert!(lift(src, &plain()).is_err(), "{src}");
+        }
+        // One operand a literal that is not zero: the two are not both zeros.
+        let lifted = lift("fn k(a: f64) -> f64 { a.max(1.0) }", &plain()).expect("lifts");
+        assert!(
+            lifted.contains("(Prelude::floatMaxNum 11 52 a "),
+            "{lifted}"
+        );
+    }
+
+    #[test]
+    fn a_primitive_name_a_type_of_the_crate_takes_is_not_read() {
+        let types = types_of("pub struct f32(pub u8);");
+        assert!(lift("fn w(x: f32) -> bool { true }", &types).is_err());
+        assert!(lift("fn v(x: f64) -> bool { true }", &types).is_ok());
+    }
+
+    #[test]
+    fn mutation_an_update_the_statements_after_it_read_lifts() {
+        for src in [
+            "fn f(c: bool) -> u32 { let mut a = 0u32; if c { a = 1; } a }",
+            "fn f(xs: Vec<u32>) -> u32 { let mut n = 0u32; \
+             for x in xs { n = n.saturating_add(x); } n }",
+            // A local the operand binds is its own to update.
+            "fn f() -> u32 { let r = { let mut b = 2u32; b = 3; b }; r }",
+            "fn f() -> u32 { let a = 1u32; let r = { let mut a = 2u32; a = 3; a }; \
+             a.saturating_add(r) }",
+        ] {
+            assert!(
+                lift(src, &plain()).is_ok(),
+                "{src}: {:?}",
+                lift(src, &plain())
+            );
+        }
+    }
+
+    #[test]
+    fn mutation_a_receiver_is_threaded_where_rust_makes_it_the_only_way_in() {
+        assert_eq!(Receiver::of("mut self"), Receiver::Owned);
+        assert_eq!(Receiver::of("&mut self"), Receiver::Unique);
+        assert_eq!(Receiver::of("&'a mut self"), Receiver::Unique);
+        assert_eq!(Receiver::of("self: Box<Self>"), Receiver::Other);
+        let types = with_square();
+        let f: syn::ImplItemFn = syn::parse_str(
+            "fn grow(&mut self, by: &mut u32, n: u32, s: &mut Vec<u8>) -> bool { true }",
+        )
+        .expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        let unique = Owner::Type {
+            name: "Square",
+            receiver: Some("&mut self"),
+        };
+        assert_eq!(threads(&sig, Some(&unique)), vec![0, 1, 3]);
+        let (params, result) = types.signature(&sig, Some(&unique)).expect("lifts");
+        assert_eq!(params[1].2, Ty::Nat(Some(32)));
+        assert_eq!(
+            result,
+            Ty::Tuple(vec![
+                Ty::Bool,
+                Ty::Named("Square".to_string()),
+                Ty::Nat(Some(32)),
+                Ty::List(Box::new(Ty::Nat(Some(8)))),
+            ])
+        );
+        // An owned receiver is a local of the method: nothing is given back.
+        let owned = Owner::Type {
+            name: "Square",
+            receiver: Some("mut self"),
+        };
+        let f: syn::ImplItemFn =
+            syn::parse_str("fn grown(mut self) -> Self { self }").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert!(threads(&sig, Some(&owned)).is_empty());
+        assert_eq!(
+            types.signature(&sig, Some(&owned)).expect("lifts").1,
+            Ty::Named("Square".to_string())
+        );
+        // A borrowed slice is changed in place, item by item: not threaded.
+        let f: syn::ItemFn = syn::parse_str("fn zero(xs: &mut [u8]) {}").expect("parses");
+        let sig = crate::convert::signature(&f.sig);
+        assert!(threads(&sig, None).is_empty());
+        assert_eq!(
+            types.signature(&sig, None).err(),
+            Some(Residue::Type("&mut [u8]".to_string()))
+        );
+    }
+
+    #[test]
+    fn mutation_a_mut_parameter_is_given_back_after_the_result() {
+        let out = lift(
+            "fn fill(out: &mut Vec<u32>, x: u32) { out.push(x); }",
+            &plain(),
+        )
+        .expect("lifts");
+        assert!(out.contains("result: TupleUnitListNat"), "{out}");
+        assert!(
+            out.contains("(record TupleUnitListNat {item0 := (), item1 := out1})"),
+            "{out}"
+        );
+        let out = lift(
+            "fn both(a: &mut u32, b: &mut u32, c: bool) -> bool { if c { *a = 1; return false; } \
+             *b = 2; true }",
+            &plain(),
+        )
+        .expect("lifts");
+        // Each way out gives the values the places hold there.
+        assert!(
+            out.contains("item0 := threaded, item1 := a1, item2 := b"),
+            "{out}"
+        );
+        assert!(
+            out.contains("item0 := threaded, item1 := a, item2 := b1"),
+            "{out}"
+        );
+    }
+
+    #[test]
+    fn mutation_a_borrow_the_lift_would_copy_is_refused() {
+        let escapes = |state: &str| {
+            Err(Residue::Form(format!(
+                "{state} used as itself, a second borrow of the place it lends, which the lift \
+                 would read as a copy"
+            )))
+        };
+        for src in [
+            "fn f(a: &mut u32) -> u32 { let b = a; *b }",
+            "fn f(a: &mut Option<u32>) { match a { Some(v) => *v = 1, None => {} } }",
+            "fn f(a: &mut u32) -> Option<u32> { let o = Some(a); None }",
+            "fn f(a: &mut Vec<u32>) -> usize { let v = vec![a]; v.len() }",
+        ] {
+            assert_eq!(lift(src, &plain()), escapes("a"), "{src}");
+        }
+        // A `ref` binder borrows the place it matched.
+        assert_eq!(
+            lift(
+                "fn f(o: Option<Vec<u32>>) -> Option<Vec<u32>> { let mut o = o; \
+                 match o { Some(ref mut v) => v.push(1), None => {} } o }",
+                &plain()
+            ),
+            Err(Residue::Form(
+                "an update of v, which a ref pattern binds to the place it borrows".to_string()
+            ))
+        );
+        // Propagation returns the current place on both exits.
+        let out = lift(
+            "fn f(a: &mut u32, s: Option<u32>) -> Option<u32> { let x = s?; *a = x; Some(x) }",
+            &plain(),
+        )
+        .expect("threaded propagation");
+        assert!(
+            out.contains("item1 := a") && out.contains("Option.none"),
+            "{out}"
+        );
+    }
+
+    #[test]
+    fn mutation_an_operator_update_of_a_field_is_the_fields_new_value() {
+        let types = types_of("struct Log { text: String, time: u64 }");
+        let out = lift(
+            "fn note(log: &mut Log, piece: &str) { log.text += piece; }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(
+            out.contains(
+                "text := (prim join (cons (project log text) (cons piece (nil String))) \"\" : String)"
+            ) && out.contains("time := (project log time)"),
+            "{out}"
+        );
+        // A field's arithmetic is the arithmetic, whatever holds it.
+        assert_eq!(
+            lift("fn tick(log: &mut Log, t: u64) { log.time += t; }", &types),
+            Err(Residue::Arithmetic("+=".to_string()))
+        );
+    }
+
+    fn mutation_cells() -> Types {
+        types_of(
+            "struct Shelf { books: RefCell<Vec<u32>>, loans: Cell<u32>, \
+             latch: std::sync::Mutex<u32>, label: String } \
+             struct Shared { inner: Rc<RefCell<u32>> }",
+        )
+    }
+
+    #[test]
+    fn mutation_a_cell_field_holds_its_content() {
+        let types = mutation_cells();
+        assert_eq!(
+            fields(&types, "Shelf"),
+            [
+                field("books", Ty::List(Box::new(Ty::Nat(Some(32))))),
+                field("loans", Ty::Nat(Some(32))),
+                field("latch", Ty::Nat(Some(32))),
+                field("label", Ty::Str),
+            ]
+        );
+        // Another owner may change the cell: only the reference is held.
+        assert_eq!(
+            fields(&types, "Shared"),
+            [field("inner", Ty::Named("Prelude::RcCellRef".into()))]
+        );
+        assert!(lift("fn read(m: &Shared) -> u32 { *m.inner.borrow() }", &types).is_err());
+        assert!(lift(
+            "fn write(m: &Shared) { *m.inner.borrow_mut() = 1; }",
+            &types
+        )
+        .is_err());
+        let out = lift(
+            "fn size(m: &Shelf) -> usize { m.books.borrow().len() }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(
+            out.contains("(prim length (project m books) : Nat)"),
+            "{out}"
+        );
+        assert!(lift("fn loans(m: &Shelf) -> u32 { m.loans.get() }", &types).is_ok());
+        let out = lift(
+            "fn make(label: String) -> Shelf { Shelf { books: RefCell::new(Vec::new()), \
+             loans: Cell::new(3), latch: std::sync::Mutex::new(1), label } }",
+            &types,
+        )
+        .expect("lifts");
+        assert!(out.contains("loans := 3, latch := 1"), "{out}");
+    }
+
+    #[test]
+    fn mutation_a_cell_is_changed_or_read_apart_only_with_a_row() {
+        let types = mutation_cells();
+        let changes = |method: &str, kind: &str, field: &str, read: &str| {
+            Err(Residue::Form(format!(
+                "{kind}::{method} on Shelf.{field}: the lift reads a {kind} only by {read}, and \
+                 changes none, since another borrow of the value would see the change"
+            )))
+        };
+        assert_eq!(
+            lift("fn touch(m: &Shelf) { m.loans.set(1); }", &types),
+            changes("set", "Cell", "loans", "get")
+        );
+        assert_eq!(
+            lift(
+                "fn push(m: &Shelf) { m.books.borrow_mut().push(1); }",
+                &types
+            ),
+            changes("borrow_mut", "RefCell", "books", "borrow")
+        );
+        // `take` is the cell's own, whatever the content's methods are.
+        assert_eq!(
+            lift(
+                "fn grab(m: &mut Shelf) -> Vec<u32> { m.books.take() }",
+                &types
+            ),
+            changes("take", "RefCell", "books", "borrow")
+        );
+        assert_eq!(
+            lift(
+                "fn locked(m: &Shelf) -> u32 { *m.latch.lock().unwrap() }",
+                &types
+            ),
+            Err(Residue::Form(
+                "Mutex::lock on Shelf.latch: a Mutex is shared across threads, and another may \
+                 change it between two reads"
+                    .to_string()
+            ))
+        );
+        assert_eq!(
+            lift(
+                "fn itself(m: &Shelf) -> usize { let r = &m.books; r.borrow().len() }",
+                &types
+            ),
+            Err(Residue::Form(
+                "the RefCell field Shelf.books as itself: the lift reads a RefCell only by \
+                 borrow, and changes none, since another borrow of the value would see the change"
+                    .to_string()
+            ))
+        );
+        assert!(lift(
+            "fn bound(m: &Shelf) -> usize { let Shelf { books, .. } = m; books.borrow().len() }",
+            &types
+        )
+        .is_err());
+        assert!(lift(
+            "fn other(m: &Shelf) -> Shelf { Shelf { books: m.books.clone(), loans: Cell::new(0), \
+             latch: std::sync::Mutex::new(0), label: String::new() } }",
+            &types
+        )
+        .is_err());
     }
 }

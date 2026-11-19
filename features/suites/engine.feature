@@ -101,7 +101,7 @@ Feature: engine
   Scenario: A lifted function never turns unlifted
     Given this workspace, the thermostat fixture and their committed lift registers
     When the suite exercises UE-16
-    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, and a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check
+    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check, and a planted unchanged function counted under another construct while its signature still states its own is refused by uorust admit against its parent's register whether or not another function still states it, while moving functions on whose signatures no longer state it, or whose callee lifted, is admitted, an inline module's homonym of a function is a row of its own, and the frontier's type construct row names the file and line of the declaration each name of its chain means where it is written
 
   @UE-17 @build
   Scenario: The lift translates MIR mechanically
@@ -120,3 +120,447 @@ Feature: engine
     Given core's MIR dumps, rust-src at the pinned toolchain and the MIR semantics module
     When the suite exercises UE-19
     Then every body is a value of the MIR datatype whose kinds are rustc's, a long list nests no deeper than its root, the constructs the evaluator does not define are read from its source, each register row records its embedding and what blocks it, and each sampled case is a theorem that the evaluator returns what rustc's build returned
+
+  @UE-21 @build
+  Scenario: Every numeric literal of a workspace gets a home by extraction and rewrite
+    Given small synthetic workspaces and figure registers written for them
+    When the suite exercises UE-21
+    Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, and the gate holds the workspace to its register
+
+  @UE-22 @build
+  Scenario: Unconditional exported numeric parameter macros of workspace libraries preserve the surface lift: an absolute invocation through a declared Cargo dependency alias with no arguments and one empty matcher expanding to one numeric literal is read as that literal, with the source facts and function identities unchanged; conditional, ambiguous, argument-taking and unknown macros remain residue
+    Given a workspace library and its renamed parameter dependency
+    When the suite exercises UE-22
+    Then the direct and constant-mediated literal macros lift and other macro forms stay residue
+
+  @UE-23 @build
+  Scenario: A library embedding resolves crate-relative implementation spans against the defining crate
+    Given two libraries with different implementation headers at the same relative source path and a conflicting root file
+    When the suite exercises UE-23
+    Then each inherent method resolves only through its own library's source and a missing own source stays unresolved
+
+  @UE-24 @build
+  Scenario: An invalid recursive-descent parameter is refused without a panic
+    Given a caller with two parameters and descent evidence naming parameter index two
+    When the suite exercises UE-24
+    Then the result is typed form residue and valid single-parameter evidence still names its own parameter
+
+  @UE-25 @build
+  Scenario: A cross-file constant is emitted before its caller
+    Given a caller preceding its constant and a mutual group whose member needs a later definition
+    When the suite exercises UE-25
+    Then dependencies precede their callers and the mutual group remains together without treating string contents as calls
+
+  @UE-26 @build
+  Scenario: Inert dependency string data does not taint figure rewrites
+    Given a dependency resource that is one string literal and mentions a tracked callee
+    When the suite exercises UE-26
+    Then inert data introduces no location reader while malformed source remains unknown and real readers remain detected
+
+  @UE-27 @build
+  Scenario: Qualified associated functions retain their acceptance roots
+    Given two owners with an associated function of the same short name
+    When the suite exercises UE-27
+    Then each qualified assertion binds its own lifted function and an unknown owner is refused
+
+  @UE-28 @build
+  Scenario: MIR method homonyms keep stable qualified names
+    Given three modules with equally named conversion methods and their actual compiler MIR
+    When every body or only the last module's method is translated on trial
+    Then every method has its own candidate and the last method keeps the same declaration name in both views
+
+  @UE-29 @build
+  Scenario: Native MIR proof work is bounded by dependency components
+    Given dependent translations, mutually recursive translations and a positive batch budget
+    When the prover plans and executes its trials
+    Then every eligible translation is scheduled once after its dependencies, recursive components remain together, and unchanged proved verdicts need no verifier rerun
+    And a verifier diagnostic on a theorem opening names that theorem, never the preceding function
+    But zero budgets, dangling dependencies and a recursive component larger than the budget are refused before verification
+
+  @UE-30 @build
+  Scenario: An admitted registered alias keeps its model through registry expansion
+    Given a package using the locked BigRational alias and its registered BigInt dependency
+    When its source is projected with registry aliases available
+    Then its identity function lifts as the stored integer pair
+    And a mismatched rational archive checksum leaves that function unlifted
+
+  @UE-31 @build
+  Scenario: Qualified field types retain their declaring scope
+    Given two modules declaring different types with the same short name
+    And a holder that uses a qualified type and a conflicting bare imported type
+    When the workspace is projected
+    Then both field getters lift with the types their written paths identify
+    And unresolved or ambiguous paths remain refused
+
+  @UE-32 @build
+  Scenario: MIR collection avoids native object generation without losing bodies
+    Given private, generic, closure and impl functions compiled by the pinned Rust compiler
+    When native emission and forced metadata MIR emission collect the same lowering pass
+    Then their body inventories and bytes are identical and nonempty
+    But metadata emission without forced MIR encoding is rejected for missing bodies
+
+  @UE-33 @build
+  Scenario: Locked JSON data can pass through a formal function without losing its representation
+    Given serde_json 1.0.114 pinned to its registered archive checksum
+    When identity, tuple and enclosing-field functions are projected
+    Then their JSON values retain the six source variants and numeric storage alternatives
+    And comparisons without a faithful equality model remain unlifted
+    And the actual SDK verifies the carrier definitions and their function bodies
+    And recursive JSON native exports are refused individually under the pinned library profile
+    And replacing the archive checksum refuses the carrier reading
+
+  @UE-34 @build
+  Scenario: Shared mutable owners retain references instead of frozen contents
+    Given Rc and Arc owners of RefCell and Cell, including two fields that may alias
+    When identity, owner cloning, tuple and enclosing-field functions are projected
+    Then their models transport the same allocation references
+    And the actual SDK verifies their carrier definitions and function bodies
+    But heap allocation, reads, writes, owner counts and value equality stay unlifted
+    And native roots requiring these reference carriers are refused individually
+
+  @UE-35 @build
+  Scenario: Long type names generate canonical declarations
+    Given a structure field and recursive tree with long qualified type names
+    When their functions are projected
+    Then the pinned SDK accepts the generated modules without rewriting their layout
+
+  @UE-36 @build
+  Scenario: Owned slices retain their ordered elements
+    Given Box, Rc and Arc slices, including an Rc slice field in a structure
+    When identity, length and owner-clone functions are projected
+    Then the actual SDK verifies their sequence models
+    But reference counts and slices of mutable cells remain unlifted
+
+  @UE-37 @build
+  Scenario: A locked bit vector retains logical bits rather than storage words
+    Given default bitvec 1.0.1 BitVec pinned to its registered checksum
+    When identity and length functions are projected
+    Then the actual SDK verifies their Boolean sequence model
+    But raw storage and allocation capacity remain unlifted
+    And a wrong archive checksum refuses the model
+
+  @UE-38 @build
+  Scenario: Native proof refresh reuses observations without trusting stale proofs
+    Given SDK-proved translations whose prior records contain observed axiom policies
+    When one translation digest is made stale
+    Then the actual SDK verifies its refreshed proof in one run using the prior policies as hints
+    And unchanged replay uses zero verifier calls
+    But incorrect policy hints require corrective SDK diagnostics and another verification
+
+  @UE-39 @build
+  Scenario: An alias expands in its defining scope
+    Given an alias of nested tuples whose element type has homonyms in other modules
+    When the alias is used from a module importing another homonym
+    Then its fields retain the original element type and the SDK verifies the model
+    And alias type parameters retain their own binding
+    But an alias of an unread interior-mutable type stays unlifted
+
+  @UE-40 @build
+  Scenario: A renamed import retains its declared type
+    Given a unique workspace type imported under another name
+    When fields and function signatures use the renamed import
+    Then their functions retain the original data type and the actual SDK verifies them
+    And a generic type parameter shadowing an import remains generic
+
+  @UE-41 @build
+  Scenario: Native aggregates retain their field representations
+    Given source structures and native tuples with different signed integer representations
+    When their compiler bodies are translated together with an unsigned tuple function
+    Then the incompatible aggregates remain typed MIR residue
+    And the compatible tuple is translated and its generated fields pass SDK type checking
+
+  @UE-42 @build
+  Scenario: Native bodies reuse admitted registry carriers
+    Given locked numeric, JSON and default bit-vector dependencies
+    When compiler bodies transport their values through loops
+    Then their native translations retain the registered representations and the SDK verifies them
+    But JSON equality without an operation model is refused
+    And a wrong archive checksum prevents the native carrier reading
+
+  @UE-43 @build
+  Scenario: Native verification produces scoped reusable feedback
+    Given native candidates including an overflowing function
+    When the prover submits their trials to the actual SDK
+    Then compatible candidates are proved and the overflowing candidate is refused
+    And the structured SDK result names only Behavior and its dependency closure
+    And unchanged replay performs no new verification and retains the same verdicts
+
+  @UE-44 @build
+  Scenario: Loop evidence omits unused invariant arguments
+    Given a native countdown loop transporting an invariant Boolean
+    When the prover generates its decrease evidence
+    Then its live values share one changing loop-state parameter
+    And the actual SDK proves the loop without an unbound invariant argument
+
+  @UE-45 @build
+  Scenario: Native hash collections reuse unordered carriers
+    Given standard maps and sets with default and explicit hasher types
+    When compiler-derived countdown loops transport their values
+    Then the SDK proves their unordered collection models and a workspace homonym retains its own type
+    But hasher inspection, iteration order and unsupported element types stay unlifted
+
+  @UE-46 @build
+  Scenario: Compiler-input selection preserves proof history
+    Given an SDK-decided register with proved and refused translations
+    When the prover replays one compiler body and then all compiler bodies
+    Then it retains the other selection's actual verdicts and performs zero verifier runs
+    But a live translation with a stale digest still needs actual verification
+
+  @UE-47 @build
+  Scenario: Workspace native bodies share primitive IEEE models
+    Given ordinary f32 and f64 functions without a core-library scope
+    When compiler-derived loops transport floats, compute supported operations and convert their bits
+    Then the actual SDK proves their existing IEEE models including negative zero
+    And a workspace declaration under a primitive name retains its own type
+    But an operation outside the IEEE model stays unlifted
+
+  @UE-48 @build
+  Scenario: Early failure preserves mutable state
+    Given functions that update mutable parameters before Result or Option propagation
+    When propagation succeeds or exits early, including after a state-changing callee
+    Then the SDK proves the returned values and every resulting state against executable Rust vectors
+    But a mutable alias still refuses the lift
+
+  @UE-49 @build
+  Scenario: Native numeric observations use locked stored values
+    Given checksum-admitted BigInt and BigRational values
+    When compiler-derived bodies observe their signs, identities and stored ratio components
+    Then the actual SDK verifies the translations and closed numeric acceptance vectors
+    And raw negative or zero denominators retain the locked implementation's behavior
+    But a wrong archive checksum and an unsupported operation stay unlifted
+
+  @UE-50 @build
+  Scenario: Proof campaigns publish their own measured completion position
+    Given compiler inputs and an existing actual SDK verdict register
+    When prove writes a requested machine report
+    Then it writes the final projection and reports its census, remaining functions and blockers with exact byte bindings
+    And unchanged proofs require zero verifier calls without claiming full-project SDK acceptance
+    But a foreign projection directory is a typed refusal and its files are preserved
+
+  @UE-51 @build
+  Scenario: Numeric constructors derive their reading from word widths
+    Given locked numeric crates and compiler-derived primitive integer types
+    When constructors convert unsigned values and signed two's-complement words
+    Then the SDK verifies every primitive width and sign boundary using bounded binary conversion
+    And rational construction preserves the integer as numerator and one as denominator
+
+  @UE-52 @build
+  Scenario: Proof decisions follow their semantic dependency context
+    Given an actual SDK proof of a native function calling a source-lifted helper
+    When that helper changes without changing the caller's own tokens
+    Then UORust verifies the changed proof context and reuses its unchanged replay with zero verifier calls
+    But a broken shared semantic context is a typed campaign failure rather than per-function refusal
+
+  @UE-53 @build
+  Scenario: Bounded native proof closures retain their complete obligations
+    Given valid and overflowing native functions beside an unrelated false source acceptance root
+    When UORust verifies each native declaration closure
+    Then the valid function proves and the actual native overflow remains refused
+    And full-project SDK verification still rejects its false source acceptance root
+    But an unattributed verifier failure is not cached as an individual counterexample
+
+  @UE-54 @build
+  Scenario: Native feedback uses the exact root trial module
+    Given a root proof obligation and a lexicographically earlier library Behavior module
+    When the SDK points to the root obligation's opening line
+    Then UORust attributes the feedback to the root declaration and not the library declaration
+
+  @UE-55 @build
+  Scenario: Compiler-generated enum reference aliases retain match evidence
+    Given enum and option references copied through tuple patterns and an enum replaced after a match
+    When UORust translates the compiler's distinct temporary references
+    Then matching aliases reuse the fields of the same typed immutable value
+    And executable Rust vectors and SDK theorems agree after replacement
+    But a native overflow is still refused
+
+  @UE-56 @build
+  Scenario: Signed source fields and native words share explicit integer codecs
+    Given source records with mathematical signed integer fields and native word operations
+    When the native translator reads, constructs and passes those mathematical signed scalars
+    Then actual SDK proofs and Rust boundary vectors agree on negative values and extrema
+    But an unrelated Boolean field cannot be interpreted as a signed integer
+
+  @UE-57 @build
+  Scenario: Native readonly shared owners use the existing content representation
+    Given immutable records owned by standard Rc and Arc pointers
+    When native functions construct, clone and read those records
+    Then executable Rust and actual SDK boundary vectors agree on their contents
+    But reference counts, pointer identity, shared mutable cells and unrelated owners retain typed refusals
+
+  @UE-58 @build
+  Scenario: Native unary numeric operations reuse width rules and admitted numeric carriers
+    Given primitive signed extrema and checksum-admitted exact integers and raw rational pairs
+    When native functions negate, extract magnitude and compute signum
+    Then actual SDK vectors agree with Rust including minimum-value wrapping and checked refusal
+    And exact rational negation preserves its stored denominator
+    But unwrapping a checked negation at the signed minimum cannot be proved
+
+  @UE-59 @build
+  Scenario: A blocked partial caller preserves its complete-context proof history
+    Given actual SDK proofs of a native caller and its transitive callees
+    When a partial compiler selection retains the caller but omits a transitive callee
+    Then the caller remains unadmitted without erasing either cached decision
+    And restoring complete compiler inputs requires zero verifier calls
+
+  @UE-60 @build
+  Scenario: Readonly hash-map operations reuse model-owned lookup semantics
+    Given unordered maps with primitive keys and keys with admitted derived equality
+    When native code searches shuffled entries or queries their size
+    Then actual SDK results agree with Rust for present and absent keys in either entry order
+    But custom key equality, hasher observations and unordered iteration remain unadmitted
+
+  @UE-61 @build
+  Scenario: Function items reuse their admitted value semantics
+    Given admitted immutable workspace functions and standard Rc or Arc content borrows
+    When native Option mapping passes those functions as values
+    Then SDK-verified results agree with executable Rust for Some and None
+    But mutable signatures, custom owners and incompatible targets remain unadmitted
+
+  @UE-62 @build
+  Scenario: Structural delivery safeguards reject inefficient or unsupported campaigns
+    Given a complete registry and a pinned model runtime authority
+    When a delivery campaign is preflighted against its exact inputs and prior receipts
+    Then leaf plans, partial scopes and unchanged failures are rejected before work
+    And verified identical work reuses its intact receipt
+    But a changed artifact or unsupported completion claim is rejected
+
+  @UE-63 @build
+  Scenario: Compiler control-flow regions compose without cyclic continuations
+    Given nested compiler loops with immutable frames and changing value state
+    When UORust derives region boundaries and composes their exit continuations
+    Then actual SDK results agree with executable Rust across nested and triple loops, early returns and distinct exits
+    And overflow obligations still refuse an unsafe candidate
+    But irreducible regions or untransportable borrows remain typed refusals
+
+  @UE-64 @build
+  Scenario: Compiler calls import shared source semantic models
+    Given compiler-owned standard calls with exact immutable source and native type bindings
+    When native lowering imports the source translator's existing semantic declarations
+    Then actual SDK results agree with executable Rust across unrelated standard receiver families
+    But partial panic models, divergent readings, mutable inputs and custom owners remain refused
+
+  @UE-62 @build
+  Scenario: Unchanged SDK dependency closures retain their verified receipt
+    Given an intact prior actual SDK verification and a newly SDK-built projection
+    When producer bytes change but the SDK build, source, semantic, module and SDK-lock identities agree
+    Then the proof stage reuses the original verification with explicit provenance
+    But build-only output, changed SDK inputs, modified artifacts or missing proof bundles require actual verification
+
+  @UE-64 @build
+  Scenario: Immutable compiler closure environments share the semantic callable interface
+    Given compiler closure bodies with exact signatures and immutable captured schemas
+    When source and native standard models consume the callback values
+    Then actual SDK results agree with executable Rust for captured predicates, mapped values, lazy defaults and function items
+    But mutable captured state and a callback overflow cannot acquire a proved verdict
+
+  @UE-65 @build
+  Scenario: Native transport reuses admitted source type models
+    Given source-admitted semantic types nested in compiler parameters and containers
+    When native lowering imports their closed readings after its primitive ABI rules
+    Then actual SDK transport properties agree with Rust even while a shared cell is mutably borrowed
+    But contents, synchronization, owner counts and pointer comparisons require their own admitted semantics
+
+  @UE-66 @build
+  Scenario: Compiler dependencies reuse generic source definitions and dictionaries
+    Given source-lifted generic definitions and coherent trait implementation signatures
+    When compiler callers pass values through those definitions after native control flow
+    Then actual SDK results agree with Rust across parametric transport, containers and trait dictionary calls
+    But an incompatible ABI or an unavailable implementation cannot acquire a proved verdict
+
+  @UE-67 @build
+  Scenario: Parametric compiler bodies preserve generic product state
+    Given declared Rust type parameters and compiler bodies with natural loops and product returns
+    When the shared lowering binds the generated definitions and their dependencies
+    Then actual SDK results agree with Rust at multiple instantiations and nested control-flow regions
+    But generic drop effects and unresolved trait dictionary bodies remain typed residue
+
+  @UE-68 @build
+  Scenario: Native proof identities follow their actual model dependency closure
+    Given compiler candidates with reached source definitions and schemas
+    When an unrelated source definition changes without changing those dependencies
+    Then their rooted model identities and intact original decisions are reused
+    But changing a reached definition or schema requires a new actual SDK decision
+
+  @UE-69 @build
+  Scenario: Compiler products preserve opaque fields without inventing their operations
+    Given complete declared structs containing known fields and unavailable service values
+    When native lowering composes their dependency views through SDK products
+    Then known field access and update agree with executable Rust while retaining opaque payloads
+    But opaque methods, incomplete shapes and unmodeled drop effects remain typed refusals
+
+  @UE-70 @build
+  Scenario: Compiler writes preserve declared storage carriers
+    Given compiler field and container writes with distinct source and native carriers
+    When lowering transports the incoming type through nested place updates
+    Then admitted representation codecs preserve executable Rust results and stored values
+    But an incompatible opaque slot is refused before an ill-typed model reaches the SDK
+
+  @UE-71 @build
+  Scenario: Parametric container dependencies share canonical product entries
+    Given generic maps transported and read by source and compiler bodies
+    When lowering binds their entry representation and dependency declarations
+    Then actual SDK models elaborate and agree with executable Rust at distinct instantiations
+    But unavailable key comparison evidence remains a typed refusal
+
+  @UE-72 @build
+  Scenario: Compiler constant operands reuse admitted source meanings
+    Given source constant models with distinct target and module identities
+    When native bodies read the constants through the shared dependency interface
+    Then actual SDK results agree with executable Rust and bind the reached initializers
+    But unavailable initializers and incompatible carriers remain typed refusals
+
+  @UE-73 @build
+  Scenario: Source signed fields share the width-derived native word codec
+    Given source models of signed integer fields at every supported fixed width
+    When compiler reads cross the shared representation boundary
+    Then actual SDK results agree with executable Rust at sign and range boundaries
+    But incompatible widths and unavailable reverse codecs remain typed refusals
+
+  @UE-74 @build
+  Scenario: Alternating dependency contexts retain their own native receipts
+    Given actual SDK decisions for the same Rust question in distinct bound contexts
+    When the full campaign and a dependency view alternate
+    Then each view reuses its intact prior decision without a new verifier run
+    But a changed dependency or a corrupted context cannot acquire either decision
+
+  @UE-75 @build
+  Scenario: Native words reuse signed source carriers across all fixed widths
+    Given compiler calls, constructors and mutations crossing signed integer model boundaries
+    When the common codec composes the SDK bit operations through balanced shared kernels
+    Then actual SDK results and final state agree with executable Rust at every fixed width
+    But incompatible widths and unrelated stored types remain typed refusals
+
+  @UE-76 @build
+  Scenario: Integer carriers compose through nested structures
+    Given compiler calls and state crossing nested source and native collection carriers
+    When UORust composes admitted element codecs through the complete structural type
+    Then the SDK agrees with Rust while preserving nested values and entry order
+    But incompatible element models and collection identities remain refused
+
+  @UE-77 @build
+  Scenario: Parameterless source models remain applications at every compiler boundary
+    Given compiler calls returning values from admitted parameterless source definitions
+    When UORust materializes their calls through the common application boundary
+    Then the SDK agrees with Rust for returned values, constructed fields and mutable final state
+    But changed source meanings cannot reuse the previous native decisions
+
+  @UE-78 @build
+  Scenario: Overlapping method names retain distinct compiler definition identities
+    Given trait implementations and an inherent method sharing an owner and method name
+    When their compiler bodies are joined to registered source definitions
+    Then each unique implementation source site receives its own SDK-verified behavior
+    But duplicate compiler identities cannot be resolved by choosing the first body
+
+  @UE-79 @build
+  Scenario: Compiler calls retain coherent trait definition identities
+    Given registered overloaded trait and inherent definitions
+    When compiler callers use resolved qualified trait paths
+    Then every caller selects its own registered semantic definition
+    And unrelated same-named traits cannot substitute for that definition
+
+  @UE-80 @build
+  Scenario: Shared kernels preserve their original SDK observations across owners
+    Given identical generated kernels owned by multiple native functions
+    When one owner carries an exact matched SDK axiom observation
+    Then the observation survives either owner emission order
+    But a different kernel body cannot inherit that observation

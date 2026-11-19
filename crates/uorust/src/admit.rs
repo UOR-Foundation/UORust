@@ -53,6 +53,18 @@ pub(crate) enum Refusal {
         slot: &'static str,
         reason: String,
     },
+    /// A root proposed for a library package's profile that the native
+    /// library build or verification would refuse the whole library for:
+    /// refused alone, so that the library's other roots are built.
+    LibraryRoot {
+        package: String,
+        root: String,
+        cause: String,
+    },
+    /// A Cargo configuration file replaces a registry source or overrides a
+    /// package's path, so the locked checksum does not identify the source
+    /// Cargo builds: no registered crate's reading holds.
+    SourceReplaced { config: String },
 }
 
 impl Refusal {
@@ -70,6 +82,8 @@ impl Refusal {
             Self::AdvisoriesUnconsulted => "advisories-unconsulted",
             Self::UnansweredAdvisory { .. } => "unanswered-advisory",
             Self::UndefinedSlot { .. } => "undefined-slot",
+            Self::LibraryRoot { .. } => "library-root",
+            Self::SourceReplaced { .. } => "source-replaced",
         }
     }
 
@@ -82,8 +96,10 @@ impl Refusal {
             Self::Collision { .. } | Self::CfgVariant { .. } => "UR-R13",
             Self::NoInitialState { .. } | Self::AmbiguousFact { .. } => "UR-R26",
             Self::NoMsrv { .. } => "UR-R24",
-            Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => "UR-R21",
-            Self::UndefinedSlot { .. } => "UR-R29",
+            Self::AdvisoriesUnconsulted
+            | Self::UnansweredAdvisory { .. }
+            | Self::SourceReplaced { .. } => "UR-R21",
+            Self::UndefinedSlot { .. } | Self::LibraryRoot { .. } => "UR-R29",
         }
     }
 
@@ -98,12 +114,14 @@ impl Refusal {
             | Self::AmbiguousFact { span, .. } => span.render(),
             Self::ExternalPath { package, .. }
             | Self::NoMsrv { package }
-            | Self::UndefinedSlot { package, .. } => {
+            | Self::UndefinedSlot { package, .. }
+            | Self::LibraryRoot { package, .. } => {
                 format!("{package}/Cargo.toml")
             }
             Self::AdvisoriesUnconsulted | Self::UnansweredAdvisory { .. } => {
                 "Cargo.lock".to_string()
             }
+            Self::SourceReplaced { config } => config.clone(),
         }
     }
 
@@ -156,6 +174,13 @@ impl Refusal {
             Self::UndefinedSlot { slot, reason, .. } => {
                 format!("the library profile's {slot} is undefined: {reason}")
             }
+            Self::LibraryRoot { root, cause, .. } => {
+                format!("the library profile does not take the root {root}: {cause}")
+            }
+            Self::SourceReplaced { .. } => "the Cargo configuration replaces a registry source \
+                 or overrides a package's path, so Cargo builds a source the locked checksum \
+                 does not identify; no registered crate's type is read from its archive"
+                .to_string(),
         }
     }
 }

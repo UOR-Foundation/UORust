@@ -8,7 +8,7 @@
 //! [`TypeKind::Other`], still holding its subexpressions where a scan of
 //! the body looks through it.
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// A path `a::b::C<T>`, and its text as written.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -87,15 +87,60 @@ pub(crate) struct RustType {
 }
 
 impl RustType {
+    /// Written type paths, including paths nested in generic arguments.
+    pub(crate) fn paths(&self) -> BTreeSet<String> {
+        let mut out = BTreeSet::new();
+        match &self.kind {
+            TypeKind::Reference { elem, .. }
+            | TypeKind::Slice(elem)
+            | TypeKind::Array(elem, _)
+            | TypeKind::Paren(elem) => out.extend(elem.paths()),
+            TypeKind::Tuple(types) => {
+                for ty in types {
+                    out.extend(ty.paths());
+                }
+            }
+            TypeKind::Fn(inputs, result) => {
+                for ty in inputs {
+                    out.extend(ty.paths());
+                }
+                out.extend(result.paths());
+            }
+            TypeKind::Path { qself: false, path } => {
+                out.insert(
+                    path.segments
+                        .iter()
+                        .map(|s| s.ident.as_str())
+                        .collect::<Vec<_>>()
+                        .join("::"),
+                );
+                for segment in &path.segments {
+                    if let PathArguments::AngleBracketed(arguments) = &segment.arguments {
+                        for argument in arguments {
+                            if let GenericArgument::Type(ty) = argument {
+                                out.extend(ty.paths());
+                            }
+                        }
+                    }
+                }
+            }
+            _ => {}
+        }
+        out
+    }
+
     /// The type with every alias of `aliases` it names replaced by what the
     /// alias stands for. An alias may name another; each expansion counts
     /// against `depth`, the aliases left to expand along one path, so a
-    /// cycle of aliases ends.
+    /// cycle of aliases ends. An alias of the workspace is named by its
+    /// name; one a crate outside it declares, by its path (`krate::Alias`).
     pub(crate) fn expanded(&self, aliases: &BTreeMap<String, Alias>, depth: usize) -> RustType {
         if let TypeKind::Path { qself: false, path } = &self.kind {
-            if let [one] = path.segments.as_slice() {
-                if depth > 0 {
-                    if let Some(alias) = aliases.get(&one.ident) {
+            if let Some((one, prefix)) = path.segments.split_last() {
+                let plain = prefix.iter().all(|s| s.arguments == PathArguments::None);
+                let key: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
+                if depth > 0 && plain {
+                    if let Some(alias) = aliases.get(&key.join("::")) {
                         let args: Vec<RustType> = match &one.arguments {
                             PathArguments::AngleBracketed(args) => args
                                 .iter()
@@ -281,6 +326,9 @@ impl RustType {
     /// as the name it maps to, in its arguments too: a localized type of
     /// this crate read by the name its declaration lifts to, where the file
     /// that writes it says which of the crate's types of that name it is.
+    /// A name mapped to a path (`big::BigX`, the item a `use` of a crate
+    /// outside the workspace binds) is written as that path, its arguments
+    /// on the last segment, as Rust reads the bare name.
     pub(crate) fn renamed(&self, names: &BTreeMap<String, String>) -> RustType {
         let inner = |t: &RustType| Box::new(t.renamed(names));
         let kind = match &self.kind {
@@ -296,16 +344,30 @@ impl RustType {
             TypeKind::Paren(t) => TypeKind::Paren(inner(t)),
             TypeKind::Tuple(ts) => TypeKind::Tuple(ts.iter().map(|t| t.renamed(names)).collect()),
             TypeKind::Path { qself: false, path } => {
-                let one = path.segments.len() == 1;
-                let segments = path
+                let full = path
                     .segments
                     .iter()
-                    .map(|s| PathSegment {
-                        ident: match names.get(&s.ident) {
-                            Some(n) if one => n.clone(),
-                            _ => s.ident.clone(),
-                        },
-                        arguments: match &s.arguments {
+                    .map(|s| s.ident.as_str())
+                    .collect::<Vec<_>>()
+                    .join("::");
+                let resolved = names.get(&full).filter(|_| {
+                    path.segments
+                        .iter()
+                        .take(path.segments.len().saturating_sub(1))
+                        .all(|s| s.arguments == PathArguments::None)
+                });
+                let input = match (resolved, path.segments.last()) {
+                    (Some(name), Some(last)) => vec![PathSegment {
+                        ident: name.clone(),
+                        arguments: last.arguments.clone(),
+                    }],
+                    _ => path.segments.clone(),
+                };
+                let one = input.len() == 1;
+                let segments: Vec<PathSegment> = input
+                    .iter()
+                    .flat_map(|s| {
+                        let arguments = match &s.arguments {
                             PathArguments::AngleBracketed(args) => PathArguments::AngleBracketed(
                                 args.iter()
                                     .map(|a| match a {
@@ -317,7 +379,22 @@ impl RustType {
                                     .collect(),
                             ),
                             other => other.clone(),
-                        },
+                        };
+                        let to = match names.get(&s.ident) {
+                            Some(n) if one => n.as_str(),
+                            _ => s.ident.as_str(),
+                        };
+                        let mut written: Vec<PathSegment> = to
+                            .split("::")
+                            .map(|ident| PathSegment {
+                                ident: ident.to_string(),
+                                arguments: PathArguments::None,
+                            })
+                            .collect();
+                        if let Some(last) = written.last_mut() {
+                            last.arguments = arguments;
+                        }
+                        written
                     })
                     .collect();
                 TypeKind::Path {
@@ -481,6 +558,12 @@ pub(crate) enum Lit {
     Char(char),
     Byte(u8),
     ByteStr(Vec<u8>),
+    /// A float: its decimal digits as written, without `_`, and its
+    /// suffix.
+    Float {
+        digits: String,
+        suffix: String,
+    },
     Other,
 }
 
@@ -1015,12 +1098,31 @@ pub(crate) struct PatGuard {
 pub(crate) struct Signature {
     pub(crate) ident: String,
     pub(crate) generics: Vec<GenericParam>,
+    /// The trait bounds of its type parameters, `where` clause included.
+    pub(crate) bounds: Vec<Bound>,
+    /// Each `where` predicate that bounds no type parameter of its own
+    /// (`Vec<T>: Clone`, `for<'a> F: ..`), as written.
+    pub(crate) unread_where: Vec<String>,
     pub(crate) asyncness: bool,
     pub(crate) unsafety: bool,
     pub(crate) variadic: bool,
     pub(crate) inputs: Vec<FnArg>,
     /// The result type; `None` for `()` left unwritten.
     pub(crate) output: Option<RustType>,
+}
+
+/// A trait bound on a type parameter: `T: Shape`, `F: Fn(u8) -> u8`.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct Bound {
+    /// The type parameter it bounds.
+    pub(crate) param: String,
+    /// The bound as written.
+    pub(crate) text: String,
+    pub(crate) path: Path,
+    /// `?Sized`: a relaxed bound, which asks nothing of the type.
+    pub(crate) maybe: bool,
+    /// For `Fn(A, ..) -> R`: the function type it names.
+    pub(crate) function: Option<RustType>,
 }
 
 /// A generic parameter, by name.
