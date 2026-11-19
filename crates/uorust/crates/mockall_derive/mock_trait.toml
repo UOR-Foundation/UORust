@@ -1,0 +1,43 @@
+[[fn]]
+path = "mockall_derive::hash_path_arguments"
+kappa = "db30d4a3a780315af8912dd99bfd24582a98c606a89163ef55c80d68fd1f9082"
+embedded = "fff14fc1cb4197ddd80b33f2dab4382135ec76b2a57580f6be8a433ac403a118"
+status = "residue"
+cause = "mir::Ty: syn::Path"
+
+[[fn]]
+path = "mockall_derive::join_path_segments"
+kappa = "559948700fcf72ba82dcdc6dbb71d125f7ad950c2d4899cedda797c23e50462d"
+embedded = "79f6cbeb0a778967c689d0ff59874539eb0547ee6ed7f2fde1863bfe4f9a16c0"
+status = "residue"
+cause = "mir::Ty: syn::Path"
+
+[[fn]]
+path = "mockall_derive::mock_trait::MockTrait::new"
+kappa = "0de4d79e3ad70cca7482be05ac1adac6f7103997c7bdefa4de8c63277cd31749"
+embedded = "ebc303af051b58d7e2358289f14ed9b0c897485d3b87db468b8bb70e883198e0"
+blocked = ["CastKind::Transmute"]
+status = "residue"
+cause = "mir::Ty: mock_trait::MockTrait"
+
+[[fn]]
+path = "mockall_derive::mock_trait::MockTrait::ss_name"
+kappa = "2625d2b0605360fd352b8a31447da606501fdd58fece0898ba2f6974e3790005"
+embedded = "0c7ef03d83eb5b2db50041dd609a6c344c2c866bea3d5632f323bec51e5ca1de"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Ident"
+
+[[fn]]
+path = "mockall_derive::mock_trait::MockTrait::ss_name_priv"
+kappa = "a58c96b8cac17bc5c5528abde712bc22000f5beb32dd821e233624aafd967eaf"
+embedded = "85b9537292332e1458e5ac6b1ed30388be219e7f12ad9ce7480d7dde6f3987b4"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Ident"
+
+[[fn]]
+path = "mockall_derive::mock_trait::MockTrait::trait_impl"
+kappa = "c53dc1957ff2c3bc639a8b8622c2999b6a2e14262e810b46bc8be2489bab4129"
+embedded = "c8f20a48b688e65e0934245139a8ae2084ac54a05d916885982976cb2c1b08e7"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+

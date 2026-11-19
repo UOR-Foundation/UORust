@@ -1,0 +1,84 @@
+[[fn]]
+path = "bzip2::<impl at src/lib.rs:80:16: 80:21>::clone"
+kappa = "c58aecef9f3a87582393ba6ce50f051aae8573b4a3e5a498c32ef9949e31b325"
+at = "Compression=u32"
+embedded = "cb2384f7556e0c10034091e9a679773557551df7a2cb819b8ea8bf5f8a792044"
+status = "translated"
+digest = "b6720acb3f6fe5a562850022c3c0383d4660ce14f5bf062e9aaeeefa24169f1b"
+
+[[fn]]
+path = "bzip2::<impl at src/lib.rs:80:23: 80:28>::fmt"
+kappa = "fdb79528bd9b0650307a35c38122218d7abdbe00ddd6a56025e041a3f4f1881a"
+embedded = "004df304f1a8185f4204041742dae3a46e44645bef8d35a2f4fdf5d86d4d2215"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bzip2::<impl at src/lib.rs:80:30: 80:39>::eq"
+kappa = "b40a2d83f6860dbe4c5f23b74cb5f9c3bc742b5882c286644c17b5474df307ed"
+embedded = "010d97d0df5e8e43508cf17dd32dea92694ed759dc44364b182c4b45809b0e32"
+status = "residue"
+cause = "mir::Ty: Compression"
+
+[[fn]]
+path = "bzip2::<impl at src/lib.rs:80:41: 80:43>::assert_fields_are_eq"
+kappa = "027fe2606986e8e9078171843af2a8cc6cbcb49f5237618f094259adcd1449cb"
+embedded = "5e845a7a72ef5c412adb31ce2d885a97372cc9fe49763b1c1ae351e69e299c11"
+status = "residue"
+cause = "mir::Ty: Compression"
+
+[[fn]]
+path = "bzip2::Compression::best"
+kappa = "965b4151108c4267cf062ca85f4241aba75768031d3b8400a86e317a8047dd43"
+at = "Compression=u32"
+embedded = "6ec6340dac5684157568fa134b9e3a1a39ba2f78c981e3ffa85caa451bd6f47c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bzip2::Compression::default"
+kappa = "965d56f55a760a6497162578288c6aa3e5a0fc16abbfa4c7b21a138968f477b4"
+at = "Compression=u32"
+embedded = "1263253788829ff1d46fbbb20e776c019a75933d0b35c00579077649ced5718d"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bzip2::Compression::fast"
+kappa = "9df6205b2e77d823eadb177d20f208bfbeb3712a8205f9890d617f4153463ddd"
+at = "Compression=u32"
+embedded = "a7f3927a3d038e69d5aeed39af2181c0fb00296eaaeb5def66b385ab848c41c9"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bzip2::Compression::level"
+kappa = "27cddca9dbf0ee1e4e3efb821c82af0152586cd645b873e9a01af6c0f18c0516"
+embedded = "7b538c1d69838d6e3c36ccd64bda094d2120e6489198923900a7c3bbf1c02d51"
+status = "residue"
+cause = "mir::Ty: Compression"
+
+[[fn]]
+path = "bzip2::Compression::new"
+kappa = "75e43450351a00fd64703b205fcf3a9d91a118a8fa9c8e2c534667370dcaaf2d"
+at = "Compression=u32"
+embedded = "88f79c8e9e367f472c63435680e97fdebb7f1aaf9e5bda488e4c685fd4b1cfa2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Compression::try_new: bzip2's MIR stops at mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bzip2::Compression::none"
+kappa = "f999ee380c8cef48ae8f959e7340c7564b099c205a52a4a67fd46bdeef031e7b"
+at = "Compression=u32"
+embedded = "b3420d49ea647b18aaf2d0e2798a5a9570a6adf10f88beb26baff853366d34bf"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "bzip2::Compression::try_new"
+kappa = "4914db251125200c6d58a060c4fba2e1025088a55615177656c1c8c70b6f2e7e"
+at = "Compression=u32"
+embedded = "c273c830506c27b23a6371cbfcda84d0aadbf3b3d40cf088db6fad28c53cc92c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+

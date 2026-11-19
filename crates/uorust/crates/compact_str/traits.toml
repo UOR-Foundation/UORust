@@ -1,0 +1,48 @@
+[[fn]]
+path = "compact_str::ToCompactString::to_compact_string"
+kappa = "b625921726a520890f8282fc5ffe0b7e042079b328e2b0e1fb96b3dc2d704537"
+at = "CompactString=u32, Self=u32, ToCompactStringError=u32"
+embedded = "606881f7aa167f0ec6436c77d8dd3886dda2c80f8d513941173ce802f46c40a3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: traits::<impl at src/traits.rs:88:1: 88:44>::try_to_compact_string: compact_str's MIR stops at type outside the lift: castaway::internal::CastToken<&u32>"
+
+[[fn]]
+path = "compact_str::traits::C::concat_compact"
+kappa = "51d0d3dab4e45b017911573337c0352a2f87ae8a5077fda6d5ed0a9a9076f64f"
+at = "C=u32, CompactString=u32"
+embedded = "8186e9d792d389cc37e37b21cd2c8598931e16c05bba7a0f8fe96165567d49b0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CompactString::const_new: compact_str's MIR stops at type outside the lift: repr::Repr"
+
+[[fn]]
+path = "compact_str::traits::C::join_compact"
+kappa = "9fb781b7fa8f411a958eb405f14b2d1196c75db647dee545e670fd2c2efd064a"
+at = "C=u32, CompactString=u32, I=u32, S=u32"
+embedded = "62feb9ab80a6271586b3f3e438997a5039ea604e35cfb0a38efb6490c76ace2a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CompactString::const_new: compact_str's MIR stops at type outside the lift: repr::Repr"
+
+[[fn]]
+path = "compact_str::traits::T::try_to_compact_string"
+kappa = "b022a7f461558b4bc7cb83b085326f5a558cc47bd7402f4ed3a0ca5e94df142b"
+at = "CompactString=u32, ReserveError=u32, T=u32, ToCompactStringError=u32"
+embedded = "fbc14bc4178afdeac17986ced7cbc60db0ed856ce1053c2c38c9c9ab95eeb8aa"
+status = "residue"
+cause = "mir::Ty: castaway::internal::CastToken<&u32>"
+
+[[fn]]
+path = "compact_str::traits::str::to_compact_string"
+kappa = "aa65f4115cb5eca56219cfefb79edb3a9b22664b3aac7aeda1f12ca759ce589a"
+at = "CompactString=u32"
+embedded = "5b67382cd54df110594bebfdbe73278c1994a08d0901b96148d9b096583ab79d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: CompactString::new: compact_str's MIR stops at type outside the lift: castaway::internal::CastToken<&str>"
+
+[[fn]]
+path = "compact_str::traits::str::try_to_compact_string"
+kappa = "8cab5678dfac95ae14af5cfd58e1ed0cf9d460343df086c50160ef94170a28c0"
+at = "CompactString=u32, ReserveError=u32, ToCompactStringError=u32"
+embedded = "c66e2ace8839807649192d13ff36d22dcfe4631aae94706d5fafe619530dfab8"
+status = "residue"
+cause = "mir::Ty: repr::Repr"
+

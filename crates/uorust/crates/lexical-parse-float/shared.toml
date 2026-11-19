@@ -1,0 +1,61 @@
+[[fn]]
+path = "lexical-parse-float::INVALID_FP"
+kappa = "be29a16d15a6b81ccbd439825c17dda4c61a62544b5661d9daa7ce677ce108ee"
+embedded = "67b523c8338db0aa9e1132b48357ad8ebd160b6ff49fe5b41b89fc9d8289b6ba"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MIN"
+
+[[fn]]
+path = "lexical-parse-float::calculate_shift"
+kappa = "91e2626a8f392fb1c43ec545de396bc3b0feb3950ed9a51bedd4e9637f0af816"
+embedded = "a5b80e574f3cf13e155c56086a706d64dbec1f400e73e233c1316876c9d1685e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <F as lexical_util::num::Float>::MANTISSA_SIZE"
+
+[[fn]]
+path = "lexical-parse-float::round_down"
+kappa = "bdc89b8ee61f71337b7a8946f0703297f0a26804574beac06d6e26cf5f981c13"
+embedded = "491502af4bb481e614fb21235fefb06988f70276936cee17ecda6e1a7538cc7f"
+status = "residue"
+cause = "mir::Ty: ExtendedFloat<u64>"
+
+[[fn]]
+path = "lexical-parse-float::round_nearest_tie_even"
+kappa = "5b3db5b260166922c3cef8734604c9cec4dbe16ffeaa8278f730c08e9b39fa1a"
+at = "Cb=u32"
+embedded = "96610be93c1b325bd40b8da084fd3b58c3c816050644655062555379b319c7b0"
+status = "residue"
+cause = "mir::Ty: ExtendedFloat<u64>"
+
+[[fn]]
+path = "lexical-parse-float::shared::log2"
+kappa = "7e72e41366549462fb1db83339210a5afa34c3066c6a3c2f283976fab1132ebd"
+differential = 7
+embedded = "fb89ee4af85ffcd8f0097d98840b5c0a22b2814ae2428b3739e14fa987947571"
+status = "translated"
+digest = "007411fed269264ccf301fe055672037406add595e4b59986cac08f26ae47e15"
+
+[[fn]]
+path = "lexical-parse-float::shared::round"
+kappa = "a5b0b712be4432ebe4975aa69055d2f47f045ad46d30a9707116236cf1c5a217"
+at = "Cb=u32"
+embedded = "f6ae61fc3fc2bf6e7303876271728f65c7d77598b48bf53951407b2fd1cfb8ec"
+status = "residue"
+cause = "mir::Ty: ExtendedFloat<u64>"
+
+[[fn]]
+path = "lexical-parse-float::starts_with"
+kappa = "cade009b3c90aafbaaa0a3e4f923e22a317d8eadf47592773ff08a647d2e84e9"
+at = "Iter1=u32, Iter2=u32"
+embedded = "071a522d05ef33ee6dd31b76d0489c72e9d63eba9fa5367e871b1b6cc5199a98"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "lexical-parse-float::starts_with_uncased"
+kappa = "b63df547060273d65ef7aa0c8cbda50ae16889035bcfe09bccc7a0e36bed734c"
+at = "Iter1=u32, Iter2=u32"
+embedded = "1dc7d34439d5d1f550a196990e754113661961301b010bb15209c70fe0245dd0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+

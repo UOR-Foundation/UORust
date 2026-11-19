@@ -1,0 +1,58 @@
+[[fn]]
+path = "fiat-crypto::curve25519_solinas_64::IndexConst::index"
+kappa = "f40bb15b429882362c60ff5e31b3a468600a5b743bc67fed42e52ad0de02db1f"
+at = "N=#usize_N, T=u32"
+embedded = "389e02168d2684def1895072f0d17a445c231aa4919459c139d5d0fff59b3e76"
+status = "residue"
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&[u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::curve25519_solinas_64::IndexConst::index_mut"
+kappa = "415837c0bce98ba345616dbc70f4d46ccd32b63131937d625adde414656499ef"
+at = "N=#usize_N, T=u32"
+embedded = "4db51588e2823384f53542bf2c5e5986b47adaadf6df07bb215e9628981a7492"
+status = "residue"
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&mut &mut [u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_addcarryx_u64"
+kappa = "92723c7342dfba7988f71ff103234f760f048e71e5333367a571035cffe52cff"
+embedded = "390617326082dfdbd8cc31a14f0728e920834c96f269fc3458a13a6caf16bf78"
+status = "translated"
+digest = "a84f5033468e6b4d6ff325d7db75b4b77babce60db072c11a9a9eeb3cd55e2f2"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_cmovznz_u64"
+kappa = "f1e6e647fdf3e9bddb5c21004ae82813b5cfd804becb0c5a067c623a0ea10b1d"
+embedded = "78c7259905f83d8c7c04b1528125768537b33eb865fa65ea64fe55d52dcbc626"
+status = "translated"
+digest = "a99da699f5b7c7d8ce9936475941d9fe1e405fb7ca29ae573d5e9de334e12edd"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_mul"
+kappa = "96c6c95fc5d38cd64cf89eb7c22baa6de818cee3b65d6caedbd1552ec5fce3ba"
+embedded = "260693acf7a9cad40474774c8e8e02ee95ad042f6b7834a4167eccab955f0c25"
+status = "residue"
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&[u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_mulx_u64"
+kappa = "05a415df9f29ccc656406b30fc9a44a3879181e37b411d0126ba509d90207624"
+embedded = "83c0a503841676e3d9683d45777f0cfcb1ddf84112cc9e9db1689fc59c828297"
+status = "translated"
+digest = "9b15e993c94e165ea250d1c5cf5b8bf3fc6ff96476851e3a4b4114c22167883a"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_square"
+kappa = "c5a4766c0950118c6e87edee842e6686a72a78540b1bc6780fd4e442f4667447"
+embedded = "b7eb9bb6a8a04828e769368579f03de12e2529559c17b286b636588c1d441983"
+status = "residue"
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&[u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::fiat_curve25519_solinas_subborrowx_u64"
+kappa = "23ead9fd4884ea58a3d7fafb75fb85f146d05d471700e18f82659ae310c4aa3e"
+embedded = "7ae7836d90670242c91d99925e4e203f1c54b70cc60fde0a171040e52e50bdd3"
+status = "translated"
+digest = "c17f7bd8f7374b513708211a1b851e5a410fe2d492e5eb87d6fd444726efb88d"
+

@@ -1,0 +1,117 @@
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:10: 147:15>::clone"
+kappa = "e3f2e84109effef6b0f9ed6668d0b558e5547e258fba4397b31793ae97227464"
+at = "Null=u32"
+embedded = "28a6f2cfb54654c424b51f8c9728b692e7b3c85ddc70de47559ac3703501add4"
+status = "translated"
+digest = "aeb945025728e91fc79a72b5e30510e7dd560fa036bf9d21eedab37f82ac1694"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:23: 147:28>::fmt"
+kappa = "226546dae38282d50ba19e1a42d95d524d19472ff453b3f5519d4bb4eb601363"
+embedded = "2e704fc400ef7b147301c2be20fa9c8f47376725054a9029de21eb0c5cc07a01"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:30: 147:37>::default"
+kappa = "f7be07fd25a64f633a8741e40bfdf401bdcab20471211618628069efd0846c8f"
+at = "Null=u32"
+embedded = "149c8d86aa45866874d2461c183a7576b83879baf7a3ffec2ae349ba8657db4c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <usize as Default>::default"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:39: 147:43>::hash"
+kappa = "e8a5906a2a44a2a76d056bd31498a548ce386a0bf614fd9428a8a5164c54e750"
+embedded = "fd2ec3376c97b50dd88a6610ee0865579f0d05245b63421dd42b003f725479f4"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:45: 147:47>::assert_fields_are_eq"
+kappa = "3b814e801765991a98455ef43607f0c1afed0cb5e9476444922da826428cbdfc"
+embedded = "4835b8b848c8a8897e59f2f2fd12dcd43758e5d63ad62bdb9d3128ef80033bc4"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:49: 147:52>::cmp"
+kappa = "2b725e33785de3ee0d770c7391e6bcc5f3b362613a90716df0bc2277df0f8e49"
+embedded = "dbe3e49aba45de4cfd9637219df50150eb6448f8679be43e969f2bb44514fcbd"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:54: 147:63>::eq"
+kappa = "03c46e3ce33f5082a2ddb7152b877d33994b586783137075fc7476f66fe29300"
+embedded = "d1a9c49a073145144a13b29971d5a3bf4037a12229d153992fecd43d74eb2c1c"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::<impl at src/lib.rs:147:65: 147:75>::partial_cmp"
+kappa = "67f25d9a6945a4545841fd9bae146ac455b9bdffe634ed96c6b31a96a1593a59"
+embedded = "de86340ef837a46e02ebafb1acfc22173417a0ee06751b1aa99f3380157f8eb6"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::Null::tag"
+kappa = "b0fd85f40c0f7468f7c6111f0bb408a5cd73fb613b7c2f5b71c2c92f6bd4bb11"
+embedded = "08cfdb07c28ca283439f325a85fcc568069c526c9e4af3067f428b7f5ec8cac1"
+status = "residue"
+cause = "mir::Ty: Null"
+
+[[fn]]
+path = "tagptr::assert_alignment"
+kappa = "30606dc12510c83cd35359abda5c184544070ed6cc50eda8ced5b947921ecea1"
+embedded = "c06e9882246533abbf53ebeb817f5be48093289d7d8793f9b3a236a1015a61ed"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item N"
+
+[[fn]]
+path = "tagptr::compose"
+kappa = "051bced14927ea74cefd16aec7666c76d38de211628f0fa5d0a2ba4cf239f99c"
+at = "T=u32"
+embedded = "6d39e3c6fbb486e7698f33a68d7d26b2321f9080d65c8e76abcdb4e845dd37ce"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item N"
+
+[[fn]]
+path = "tagptr::decompose_ptr"
+kappa = "e65fdb56966551baade8942d15d469208a2b02652bb201e2c956be3fdd00aa33"
+at = "T=u32"
+embedded = "c91b1e6c5b6cbb7fcef8135514af5a895630c9b3eac50e9a294f952a81df8c09"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mark_mask: tagptr's MIR stops at mir::BinOp::Shl: on Nat and Nat"
+
+[[fn]]
+path = "tagptr::decompose_tag"
+kappa = "60dcd5280ae8d3b07f6daec999fee866ab9885016265bab32f34b520e33731e5"
+embedded = "233b12d4ec8cedf2c8ae3a42ff345427fee779f5f0db56c3ebea028bcd486a38"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mark_mask: tagptr's MIR stops at mir::BinOp::Shl: on Nat and Nat"
+
+[[fn]]
+path = "tagptr::has_sufficient_alignment"
+kappa = "da4fb1e80c0dc660a42ac2f534869bf6e2218879d81706cc26a7963814a8c5d9"
+embedded = "490859b40bee6e94b1fe5ec63dd43a4d1cf016599cf73b2fe91980b55eff82a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: lower_bits: tagptr's MIR stops at mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "tagptr::lower_bits"
+kappa = "f10ba28a980b28a55168e6fae7b07f5503feba44206aaf9d719642f5964b9837"
+embedded = "62fa9ab3ede10cac4337845f5f1692f834209b73c505ab771ed63c21f1cd32ab"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "tagptr::mark_mask"
+kappa = "ada937f192c7776cf04f8e4c4ffc43645c21a3b1d74de5cf13ebaac9f8e0ff13"
+differential = 4
+embedded = "2ce48da6430432c5ffb7dc690e0534e6107b8b180b1c5cca82e7099618371797"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and Nat"
+

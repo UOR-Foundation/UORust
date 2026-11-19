@@ -1,0 +1,196 @@
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:34:14: 34:19>::fmt"
+kappa = "6e038d50e41834852b3364cc4fe615afba1017d98f1f6a3ff0834df90275804f"
+embedded = "c7f817fcf3e61a6a10d5c8a26f731646de2647a3faf5c69e829facda62b6d189"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:34:21: 34:26>::clone"
+kappa = "136d830e911d95b5ce06f2bb6ef95edb8b0ae10423b67504300564e9c5c0586d"
+embedded = "48b705b21a1407c85026729349628d3c9f1ee7e79dc4704d58529ce4a43fd56c"
+status = "residue"
+cause = "mir::Ty: vector::V64"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:38:14: 38:19>::fmt"
+kappa = "6810b0917d1a917aab7c1be88f989540e4fbffcde58c44be2d858e24bd8f6826"
+embedded = "765578d1b7453ed6199edfa9309a2ee2908480d6ee3ef7a31614fe101a301f1e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:38:21: 38:26>::clone"
+kappa = "2ae95c3290c04213e352fb3212a5d421d6ad5e936467008c6543c46fef1d78a5"
+embedded = "5798b2b16858262748e9704e5d519979555f3bde8a73b9c096909ecc79da4535"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:42:14: 42:19>::fmt"
+kappa = "585624f60b0176e75c4b2f8bce3f77315306752d92f980ecf6a745fb7657b235"
+embedded = "9ca0397095aa0d70315c8de034c0c014d88c5ba0e6b0d779618126578a24c93b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:42:21: 42:26>::clone"
+kappa = "bf71d307636e2ce83eb84be350ada3c4a2deaad32e11d8d9d22c52dca02481aa"
+embedded = "69614139067229f7bd2bee4f4d8198a0b6145dfd54bf81ab6001d0a741ccfea0"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:46:14: 46:19>::fmt"
+kappa = "150f2c6427957031094bfa107ded941d230dd1eeb62fa938df9b022e0d59b583"
+embedded = "bde58e6da4210c98bb73c0effe7a30553eb9c1cc9829365635a6a4868eeaed13"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::vector::<impl at src/vector.rs:46:21: 46:26>::clone"
+kappa = "90daa6be9c699e27ad49c17c2798d428bd0f6c588c8eed1a1f127b65fb019647"
+embedded = "661be21030ba4a2f36ea7fba09a0fa3ba1ea169727da4c2ff3191d5496fb5d29"
+status = "residue"
+cause = "mir::Ty: vector::V512"
+
+[[fn]]
+path = "vsimd::vector::V128::as_bytes"
+kappa = "4bc139e484f6f3b62198beae5659d8a92c58af465889c70b9ca8529d0e68e622"
+embedded = "19dad062261f6bf5e65c9c412880d53bb8a14e03ec362f10b72c6efcdc18a402"
+status = "residue"
+cause = "mir::Ty: V128"
+
+[[fn]]
+path = "vsimd::vector::V128::from_bytes"
+kappa = "053e889ca4fd6344bf329d9ad8b50f95e13d2f257508e1b186246c4461367741"
+embedded = "2db4b61dd9104973fca6051d01a49250607d095ae2a05fd63203b7d6524eca5b"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::vector::V128::to_v64x2"
+kappa = "fa9ea7631a68a51570b440fb9a3a583bdbad20203dfb2950868cf012e98a8b5f"
+embedded = "ed184819a57ee0b39993f227cbabbc18605fc170367efcbc73b12f5111e7a867"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V64"
+
+[[fn]]
+path = "vsimd::vector::V128::x2"
+kappa = "58c6a4bc53aca19fd5d05a08b79726e8ef14dfdda54503e6e239eac048651266"
+embedded = "c7be367955b2f3f60e331c26f2b6c0fc9e962450760799e1d6e79fca0e3e9a34"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::V256::as_bytes"
+kappa = "150e99242974c3831bbc3770b326d00fd4d91c7ccf5afa8e1ea84db66971c444"
+embedded = "e4a4c6e5107f3d5f973fb4e5e0def3e03609c70bbb7f3e25a7b0535e6f601168"
+status = "residue"
+cause = "mir::Ty: V256"
+
+[[fn]]
+path = "vsimd::vector::V256::double_bytes"
+kappa = "414329708f1dae2f08a897e2ff71be67aedd6660f256d93157941584f78e7486"
+embedded = "37d63764bd46a3ae0ceb861798e720c41d2ab37b16f359555f5199b121e6f01e"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::V256::from_bytes"
+kappa = "90c8442ab02533a54daca4912d4c9cf5563a828243d936c2c84d6fcda5ad8d9e"
+embedded = "b810c87957bb022a965308a242aaeaea8edfa7c587888023fa54cb45369e59a4"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::V256::from_v128x2"
+kappa = "4998d1909cf8c0b546f0ab8af3b725bc13d2916a38c37fe92195657cab3fb8a5"
+embedded = "2e1d6cd23707f8cdaab7cd6174c2d3aa7d8e0461fb1a36b89d4c38df5f038ac8"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::V256::to_v128x2"
+kappa = "9fe5b927358754640babb925c1b1bf09ac61f2be6ac61e8237ab0ea93d385595"
+embedded = "d4e8fc894aa50c8ff2bc555ccfe39b6412d81664bc815a213db691f1aa528842"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::vector::V256::x2"
+kappa = "29cb29f931940eff81c49518254d81f833df2eb2190ad8271f75d202b6ea0c12"
+embedded = "fbcc8e4fe6a24551c3d4f6c233a0d344d8f6e3e177257fd0085cb31b2cd94733"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V512"
+
+[[fn]]
+path = "vsimd::vector::V512::as_bytes"
+kappa = "0d52c5a4aff62c5b8856b773b77ff6433f03b47f4b13e76e55db68c38a3eccdb"
+embedded = "6679e1f11cb1d87cd72fb8f1be982abf8b639dc1bb811b7afb1385ea5f34d69f"
+status = "residue"
+cause = "mir::Ty: V512"
+
+[[fn]]
+path = "vsimd::vector::V512::double_bytes"
+kappa = "40f6976d07919b64bcc906d664c7fb10bfa4844eaff58a21b2c34a68d51c492f"
+embedded = "023d42f304fd923cbaa0d2ec3e488264ce27223c1319f0123662f1d22fcb7185"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V512"
+
+[[fn]]
+path = "vsimd::vector::V512::from_bytes"
+kappa = "0776f625e4a49ec23a3461e41c347300641cd562a2c919714a593fa17e054dcf"
+embedded = "3d334090f28e1cc0a8f610843368ce46aa1dd06086e599820c733f6848d2df08"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V512"
+
+[[fn]]
+path = "vsimd::vector::V512::from_v256x2"
+kappa = "b95877629e2d827b1a046a4ef0f62ae6b6f1bd7f5aeb9f518841be2d9f3edec4"
+embedded = "9f9bc48d2faf8146cd75379e48a0d9d8931e28cee64cd3e0901ebf4256ab0c23"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V512"
+
+[[fn]]
+path = "vsimd::vector::V512::to_v256x2"
+kappa = "0888fe30370bd4b46de05f6cf1fce03443c24e074165dc16dc081541a0a98a94"
+embedded = "73a70dffb03055b07f21742cc4672ffb18a18f83acc988defb4e353386dcc393"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::vector::V64::as_bytes"
+kappa = "928f65d721e635ffa73f26745c068f478388c02ac9087fdacd9e38b070e1db9f"
+embedded = "9dde6ca571ad1526c511aeca6de84278606a5845fe0fa87fa090ab8a8e40b1b9"
+status = "residue"
+cause = "mir::Ty: V64"
+
+[[fn]]
+path = "vsimd::vector::V64::from_bytes"
+kappa = "8ef34428e0f1b9a513b32e704aee1399ce3ddb6419fd68ba9286ef6ebafa4b72"
+embedded = "15f2e0c8bab9b71ffac861a4f2acaeb1e89fc24788c731dfcc720a83daaac8c2"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V64"
+
+[[fn]]
+path = "vsimd::vector::V64::to_u64"
+kappa = "7ea582ca36cfd7153ca578d445c4d4ed1ef785758c43ce95812c82368f015826"
+embedded = "b87c07b5841b5d773106785d0a970c533e0be5c4fdf130989aacc9a94a8569cd"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: V64"
+

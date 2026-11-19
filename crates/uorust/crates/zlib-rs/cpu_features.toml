@@ -1,0 +1,63 @@
+[[fn]]
+path = "zlib-rs::is_enabled_avx2_and_bmi2"
+kappa = "e04123bb9413683db0e496945c9dc26aa80f5f112904b31c55953adc1da77a7f"
+embedded = "a4f2855ce833174a35a7691f46a6415de8adfddb36cb4e9c28e013edafc79f92"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+
+[[fn]]
+path = "zlib-rs::is_enabled_avx512"
+kappa = "414cd030c72958f5217f82ef1263cf22c1cb63216a48246de5624a6742ea138e"
+embedded = "61467910f0ef8b9bd022381fcb51d196df47219b236d8d1d498c5a680ee80d27"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx512f"
+
+[[fn]]
+path = "zlib-rs::is_enabled_crc"
+kappa = "e58695b4131b922b2e1e062e2b7a0a93501f2a917196523d70e6b99b90796634"
+embedded = "00b1645066c95d87d9f5532c79f03450e73593359a98719f126fdf17ee535751"
+status = "translated"
+digest = "256cc480ed1826162f0ceee70e8615a1addbb89163bc1f3d62ba332e7b21d7c3"
+
+[[fn]]
+path = "zlib-rs::is_enabled_lsx"
+kappa = "1bf8619374d5446ff00382c3fddf5e632a5b902b198edaa914bfc575e3dca718"
+embedded = "ad8d14cc560b4b1139b81e0489a9b3bebabbdd475bab7938e5bde724410a2cd6"
+status = "translated"
+digest = "ae5e238b4d7966be004dc89f25f010172b76d8c83711083ededa5872830fdcf1"
+
+[[fn]]
+path = "zlib-rs::is_enabled_neon"
+kappa = "02563e2cdcc572d59cd7de137fbee34e3402d157712bc36ad628f36be9532228"
+embedded = "15327184f815a8abdfc9aae20253ca206f39d348ac645ae682f12ea00c7e7aeb"
+status = "translated"
+digest = "b34b4e2768c48b3746ba7b847578dc1c04f90ba1cfc907738664413f1ece8996"
+
+[[fn]]
+path = "zlib-rs::is_enabled_pclmulqdq"
+kappa = "a2d5918e6ac3b75e1547f21c4fced83e5267bc3f9dcb9411b383c8e7ffef69e9"
+embedded = "2d4f6ac97ae39fdc9e621c4ccfcae30fc5771b6f2b1fda1009b532ac1106f166"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::pclmulqdq"
+
+[[fn]]
+path = "zlib-rs::is_enabled_simd128"
+kappa = "e7ae1709f869246d4b58f468c07182540c26580caa9940d6693cdfb0bd24964c"
+embedded = "1422dac9b40bc6731e12c34c39333cf95e59c895729fabb132e4b83c5eaaa33f"
+status = "translated"
+digest = "21505d10fa39fa9b6775ade283f4fcb90a773b154861d7337706b946891b3aca"
+
+[[fn]]
+path = "zlib-rs::is_enabled_sse"
+kappa = "13b4ac72216cf13974686ba130c81e71003b7db1c6cf12a5bfc164c1ff0741f1"
+embedded = "598b7ba691ddc6e5ff548a0cd6a0b3bb858fa8525210ffcf30661a050ecd6edc"
+status = "translated"
+digest = "ec399bb42ab9a050760019877ed25c43e707e8e27c8d2cc14a3ed49ddbc7f0f7"
+
+[[fn]]
+path = "zlib-rs::is_enabled_sse42"
+kappa = "9aa589aba97859e638ff243781f87cf2aef83cb2294f03dd41319d93458df96a"
+embedded = "d417010ffa6b78086b6bc48a7f04d9b19186a428cf9cf52077ca12e0c0c859e2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::sse4_2"
+

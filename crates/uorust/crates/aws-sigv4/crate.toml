@@ -1,0 +1,76 @@
+[[fn]]
+path = "aws-sigv4::<impl at src/lib.rs:34:10: 34:15>::fmt"
+kappa = "f8055bf8b898f56cd2cb01504364dd1b9a7eea4cd1ab3651d5e7a4ac4a997cc2"
+embedded = "c9413ef3d8a24955d62fbc6c3b668dcc94191000394493a6e05138c20b6bc007"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::<impl at src/lib.rs:34:17: 34:19>::assert_fields_are_eq"
+kappa = "c4d02d9fb28bbee01d063095ea1773dbc5470d74fc6f1ab1e405b287813cd3e4"
+embedded = "3064f3d33ac4b8a5b7a8474bcaed891f7837c3af484f6ba2cbc0d6640e451ffa"
+status = "residue"
+cause = "mir::Ty: SignatureVersion"
+
+[[fn]]
+path = "aws-sigv4::<impl at src/lib.rs:34:21: 34:30>::eq"
+kappa = "38289506997c6eca72f5f5e4f820b2e5d63b9b195ddc9334fbad17d6cafb2adb"
+at = "SignatureVersion=u32"
+embedded = "b47bdd3a97b3341e0f01acc496a93833795e39122dea43956da4880a9a9e59e4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "aws-sigv4::<impl at src/lib.rs:34:38: 34:43>::clone"
+kappa = "10d07705d001ee8bf5427b0bf58604a8e64f677ea5a297a1ff629350c404fc1e"
+at = "SignatureVersion=u32"
+embedded = "70eefeace5b0554a3506cc2b49c2ded8834338805d59e672de997891b114972b"
+status = "translated"
+digest = "0cdf5b2c77c310a11dccc5363bae9e16de4968ab1bb3b396d3e502206898cede"
+
+[[fn]]
+path = "aws-sigv4::<impl at src/lib.rs:57:10: 57:15>::fmt"
+kappa = "9f9443eac2efc0c398559288e911c04cac40e1103285aa4e3e4c515d05fb7f79"
+at = "T=u32"
+embedded = "f7db1570ab63bb91a3613ccd66945fb7c7cc9433acefd2d2a51caadd83454797"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::SignatureVersion::fmt"
+kappa = "bee756c5c65ca3344a925d6a2f99a4ec8ef54e47dc9b4d96688f5365615d3a86"
+embedded = "7fc67e8dc79edebc4bd07f471199fdc26845064d47ea8e50f67e573aaed6c7fb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::SigningOutput::into_parts"
+kappa = "2bd02016e31101912c2f9983b2f0d74c0ed8937514bce693786b76cc5e00d0db"
+at = "T=u32"
+embedded = "8ec9ac9974751b4265864ca0a6c96174fae2da01e7e3b1866c593be47fff5ac3"
+status = "residue"
+cause = "mir::Ty: SigningOutput<u32>"
+
+[[fn]]
+path = "aws-sigv4::SigningOutput::new"
+kappa = "02499ef4ee0ef0b333de7c8b0ca8988365142ed481048d3901f4d4ef5d71ae94"
+at = "T=u32"
+embedded = "86dd5a277a408c564655a3212cb78159244333cf1950f9fc171131786adc6ed6"
+status = "residue"
+cause = "mir::Ty: SigningOutput<u32>"
+
+[[fn]]
+path = "aws-sigv4::SigningOutput::output"
+kappa = "34975df9c1cc1073cb5c91b1ef085a521c724f1daaf4619607210f1f4f14fe62"
+at = "T=u32"
+embedded = "7d0fa7f65255b7bcf59d4dfd93aa43cc2b0a8a4414014c74b15ef1b416c10d71"
+status = "residue"
+cause = "mir::Ty: SigningOutput<u32>"
+
+[[fn]]
+path = "aws-sigv4::SigningOutput::signature"
+kappa = "6907f9bfaf371a7b8d1187d4f8e5f7777f1a24a7fd35bc0bd5af074a258e42fb"
+embedded = "0c6db4678e37888be760f52c2f435979e22167a3161e02af82390759b66397a3"
+status = "residue"
+cause = "mir::Ty: T"
+

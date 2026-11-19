@@ -1,0 +1,81 @@
+# The seahash register (written by `uorust crate seahash@4.1.0`; do not edit): every body of
+# seahash's MIR at seahash 4.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 36
+translated = 0
+residue = 36
+
+[module.buffer]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.helper]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.reference]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.stream]
+bodies = 18
+translated = 0
+residue = 18
+
+[embedding]
+bodies = 36
+embedded = 36
+evaluable = 36
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: SeaHasher"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: buffer::State"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: reference::State"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::SeaHasher"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: buffer::hash_seeded: seahash's MIR stops at type outside the lift: buffer::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::read_unaligned"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: reference::hash_seeded: seahash's MIR stops at type outside the lift: reference::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Rev<core::slice::Iter<'_"
+bodies = 1

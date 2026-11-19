@@ -1,0 +1,617 @@
+# The pulldown-cmark register (written by `uorust crate pulldown-cmark@0.13.6`; do not edit): every body of
+# pulldown-cmark's MIR at pulldown-cmark 0.13.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 614
+translated = 20
+residue = 594
+
+[module._]
+bodies = 90
+translated = 0
+residue = 90
+
+[module.crate]
+bodies = 89
+translated = 9
+residue = 80
+
+[module.entities]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.firstpass]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.html]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.linklabel]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.parse]
+bodies = 232
+translated = 0
+residue = 232
+
+[module.puncttable]
+bodies = 5
+translated = 4
+residue = 1
+
+[module.scanners]
+bodies = 66
+translated = 7
+residue = 59
+
+[module.strings]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.tree]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.utils]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 614
+embedded = 614
+evaluable = 614
+blocked = 0
+
+[differential]
+bodies = 7
+theorems = 49
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 67
+
+[[cause]]
+cause = "mir::Ty: _::InternalBitFlags"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: parse::_::InternalBitFlags"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: parse::ListFlags"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: strings::CowStr<'_>"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: FirstPass<'_"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: ListFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: tree::TreeIndex"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: scanners::LineStart<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::from_bits_retain"
+bodies = 16
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Options"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Event<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Item"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: CowStr<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: InlineStack"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CodeBlockKind<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InlineStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InvalidHeadingLevel"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Tag<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> Fn"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parse::Item"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: HtmlWriter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ItemBody"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TableParseMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TreeIndex"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::Iter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::HeadingAttributes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::LinkDef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parse::RefDefs<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CodeDelims"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LinkStack"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MathDelims"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tree<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: strings::InlineStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tree::Node<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::bits"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlignmentIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Allocations<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CowIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HeadingIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HtmlScanGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LinkIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Parser<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::IterNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::AlignmentIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::Allocations<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::CowIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::FootnoteDef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::FootnoteDefs<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::HeadingIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::HtmlScanGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::InlineEl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::InlineStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::ItemBody"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::LinkIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::LinkStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::LinkStackEl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::Parser<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::RefScan<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tree::Tree<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_html_tag::{closure#0}: mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a string LexLean source cannot write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: entities::get_entity::promoted[0]: mir::Operand::Constant: entities::ENTITIES: mir::Operand::Constant: a string LexLean source cannot write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: scanners::is_ascii_whitespace::promoted[0]: type outside the lift: std::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Flags>::all_named::ALL_NAMED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u8 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Options::ENABLE_FOOTNOTES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Options::ENABLE_TABLES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item is_valid_unquoted_attr_value_char"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item scanners::is_ascii_whitespace_no_nl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc5774: &&[&[u8]; 4]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::complement"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::difference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::empty"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::insert"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::intersection"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::remove"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::symmetric_difference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::toggle"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::union"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::binary_search"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: firstpass::scalar_iterate_special_bytes: pulldown-cmark's MIR stops at type outside the lift: firstpass::LoopInstruction<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: firstpass::special_bytes: pulldown-cmark's MIR stops at mir::Operand::Constant: the constant item Options::ENABLE_TABLES"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: memchr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scanners::calc_indent: pulldown-cmark's MIR stops at type outside the lift: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scanners::parse_decimal: pulldown-cmark's MIR stops at type outside the lift: std::iter::Take<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scanners::scan_ch_repeat: pulldown-cmark's MIR stops at mir::TerminatorKind::Call: scanners::scan_while: pulldown-cmark's MIR stops at mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scanners::scan_while: pulldown-cmark's MIR stops at mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scanners::scan_whitespace_no_nl: pulldown-cmark's MIR stops at mir::Operand::Constant: the constant item scanners::is_ascii_whitespace_no_nl"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BlockQuoteKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FootnoteDefs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeadingLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LinkStackTy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MetadataBlockKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TagEnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bitflags::Flag<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: firstpass::LoopInstruction<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: firstpass::TableParseMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: html::HtmlWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linklabel::ReferenceLabel<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::BrokenLink<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::CodeDelims"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::LinkStackTy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::MathDelims"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::OffsetIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::Parser<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Rev<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::TextMergeStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::TextMergeWithOffset<'_"
+bodies = 1

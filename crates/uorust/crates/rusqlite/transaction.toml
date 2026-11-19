@@ -1,0 +1,361 @@
+[[fn]]
+path = "rusqlite::cmd"
+kappa = "889f21f185d001638ccefb3ee8cdd4dbcf03718202a39b4b53c5a2356d6d74eb"
+embedded = "f69084d39b2825e6b38dc85a825812b62b46acf8cf4f82e2c32916051bdd2a0a"
+status = "residue"
+cause = "mir::Ty: pragma::Sql"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:22:16: 22:21>::clone"
+kappa = "1417afe6b6e975361b2fbca407c823cd86093bf77d1d3c01dc514aed12a44521"
+embedded = "c31cca22d98b43624a064347087a3e68aed961103f6994c622c78b4c658f2e3f"
+status = "residue"
+cause = "mir::Ty: transaction::DropBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:22:23: 22:28>::fmt"
+kappa = "09f5e059b07561bc040b97fe086d5e07c2944df49ac9a65f246e50433ed9e39c"
+embedded = "fd2aa21eb900ddd89ce90a93d91f8862e01dc60e88c36055e5ebd1cfa6fdb83f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:22:30: 22:39>::eq"
+kappa = "1a15dd9251f142559b817c2e022d466bb691b446aefc67f3caa892553bc3685c"
+embedded = "acd7ce820cc09e1a255a5b5ed73614c73508fb63894cc07ad1f00d9ff6f440c1"
+status = "residue"
+cause = "mir::Ty: DropBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:22:41: 22:43>::assert_fields_are_eq"
+kappa = "cbfc76faa2e94e7e2569500c0b2c23c06d558f12498931a49eedc2ed0db37a95"
+embedded = "e5f23c59665c08dcccb82a7ebe449294915c1cb3b11562e337d2e39753a186a1"
+status = "residue"
+cause = "mir::Ty: DropBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:389:10: 389:15>::clone"
+kappa = "e20fbcf44ded89134da06615b2545af944a9c3e96db80827f930123cbdf96804"
+embedded = "b5f875c8edd0d325088a60fc8f14bcfbd8c918b07be62f9fb98e294192a76ee5"
+status = "residue"
+cause = "mir::Ty: transaction::TransactionState"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:389:23: 389:28>::fmt"
+kappa = "0cfd534c1f42c35c1e861ce5ae45c8aac19366d865e9c0435e4be3c5ba2b154b"
+embedded = "0049fb8eef6f6ed79b68aaa526a368043d7a57a937bb5070c7658a25df86ea52"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:389:30: 389:39>::eq"
+kappa = "96871d77d0abcaa53b02860f3c05b618a1054d8ed30718c72d888abe6fd6d8f7"
+embedded = "b0d53091458aaed01faf30e01b53fd813324da99dcea254865e4bc5dc0c2b206"
+status = "residue"
+cause = "mir::Ty: TransactionState"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:389:41: 389:43>::assert_fields_are_eq"
+kappa = "05e272c65d74fbd714dc882178f0860dd3efdfd77c494888d5fccfdd75af6a17"
+embedded = "651dd83b66618b5eb6252457ef3c96f0a5e40eef4c3812dd1e0c032f46601f95"
+status = "residue"
+cause = "mir::Ty: TransactionState"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:62:10: 62:15>::fmt"
+kappa = "fd0a2b268359f2662dd0ccb474515cc98daeea38858a15391520d7d9177d06cb"
+at = "Connection=u32"
+embedded = "23b8ce1d15b8147512b23b5eafcc8443cbfe3fb302fb02fe5a0bde4fd25d1c87"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:7:16: 7:21>::clone"
+kappa = "7772b375ec4614afff4f2f29fe7861a23a3b3a4720cb44d77c4334d0a864acce"
+embedded = "e52ab74e97e03f6176e7351aa13e9a86937d0408e3d666267390458ac5f282d9"
+status = "residue"
+cause = "mir::Ty: transaction::TransactionBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::<impl at src/transaction.rs:91:10: 91:15>::fmt"
+kappa = "e21aa5708e23bf38a106bdc8afdd5db99ffef903803dc50a416d14c50fd43edf"
+at = "Connection=u32"
+embedded = "a3185d8f4430a8fb614c4f7e783fb0037b666b83e7782ef4e7633efb316daad3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::savepoint"
+kappa = "ada2020ee6b1fd50444e578a287a23ed10863de25ebe1bb1c9b8e752fcfde003"
+at = "Connection=u32"
+embedded = "5bf7678576253b057374726568ff74fa6a675665a453518c4a2c4df0f53373b2"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::savepoint_with_name"
+kappa = "8a78b0d01a1668560b02f3d2e3568a7a5557bd074a2f2dbe714da46454d282aa"
+at = "Connection=u32, T=u32"
+embedded = "561bcce306e917117622cf044367821b37f04759e144f556fe9e7f3a7fd52a6d"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::set_transaction_behavior"
+kappa = "9eda0e2999dff786b960f5d9b0510dfd9c0f47e0e1afc946b57d1f5b27857795"
+embedded = "0ac7de4437fdbe459824cf1fbc2732d8896025c6b853374d1d7d6fdf84bb1094"
+status = "residue"
+cause = "mir::Ty: Connection"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::transaction"
+kappa = "b064bb243de2049b904f297602b36f1d2ad210e5a0d92430855d6194280e3503"
+at = "Connection=u32"
+embedded = "c5d09c33a68ff8fbe9a8898426924dff44fa6724f7c401c9788eb95cef236ab4"
+status = "residue"
+cause = "mir::Ty: transaction::Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::transaction_state"
+kappa = "0d8ea35d150b5fbe05a390df35296a14aa60014adf430caa8bcff7825e48e68d"
+at = "N=u32"
+embedded = "a6856eedff64482d28d4dc9642b6f996e0a723ada0e541cd598454b071c6f893"
+status = "residue"
+cause = "mir::Ty: transaction::TransactionState"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::transaction_with_behavior"
+kappa = "05d5b97d6e469a528aa650ea4dd0e0413a921c5904709b58fcbeb0ca78fc89df"
+at = "Connection=u32"
+embedded = "2ac999bddcb47e1d2d0b9031e8f3a276860b7dd60632187f0a7d7f1354f3496a"
+status = "residue"
+cause = "mir::Ty: transaction::Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Connection::unchecked_transaction"
+kappa = "8d06641f7e5609bc18b1f6a5a3b80d9d7ff0c506e05be74b6f43edd052439ddb"
+at = "Connection=u32"
+embedded = "c5783dbc3f72ddc3e4b6f90b63baa15209de12da9767b06514ca840f50cd5a03"
+status = "residue"
+cause = "mir::Ty: transaction::Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::commit"
+kappa = "f514798663694b04be4dde445af01a82bea2c51a038f694342bed67765ee9887"
+embedded = "12c0784bbdb43e56c9eef18069602930878b5e6cf1b5752524ad9f7bb6f8208d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::commit_"
+kappa = "b29312a75af9194bc80667980eb5989e0e0d3a27631b0756eea531b23eb9c0f5"
+at = "Connection=u32"
+embedded = "1cdd94e3436732eeec8a8a135a133c0b5b275a0664ad3950cc118392b07f74e6"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::deref"
+kappa = "eff24366a54e01c6d08819238d7236611bf124fe370d44eaf2798ac668322519"
+at = "Connection=u32"
+embedded = "f4d8be41c856c9cf9ea32df80512f8f10541c0419268de0bc56cff87c2a11cc4"
+status = "residue"
+cause = "mir::Ty: Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::drop"
+kappa = "0c995ede1f3d06b654b698b7276eef6315a248133fdac67f9764f121a74f8610"
+embedded = "99aa94abe62b6dee9d96e5c85d39bbab11664d834687e99e59df7465c1db24b4"
+status = "residue"
+cause = "mir::Ty: Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::drop_behavior"
+kappa = "287966247e2dd8aba33ccc25409b10e0eb4f82c8bcfa99cb2e89f4f0a348b70e"
+embedded = "9fbd9b9f7dd2cf534ca928439f80639fbb633dd13bf2077044804e4c02276d36"
+status = "residue"
+cause = "mir::Ty: transaction::DropBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::finish"
+kappa = "62525bb4161e81801578bf516debafd3c241c874749cf2baf5a83643b57d871d"
+embedded = "5626daf69dfe103f7a9d15fe7396aa004bb1f3c391d95be34305dffed6592db4"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::finish_"
+kappa = "f668cc507d08e4caf3d7465493baf3e76ec9f00f4f3943920575ca701c315411"
+embedded = "b674c3d8848c0c9017b8374ffa93f45281f631d01efb5778b92b9507a05ab674"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::new"
+kappa = "4bbfe208b57beb2842c668a492ccec5a790647a6638a14ba692607c2d25bacb9"
+at = "Connection=u32"
+embedded = "0e5b3446b25ae8fda6ddca3894db1d32a8b6625d72ed05f48a76262aed8bf48e"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::new_"
+kappa = "e8019cf1b3010e0b0c2dab3d99a387778986d9e46321d1c355022d4fca33ca9c"
+at = "Connection=u32"
+embedded = "19c29b786a05d5f80c4e9a034b29ed1b722bf5ef8fbbb3d3e24b054231268b85"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::rollback"
+kappa = "162ab6568c322f5c0b850e40f8f1fcd6357c287aece340e3519c1b750cddc955"
+at = "Connection=u32"
+embedded = "86e6bbc967969abacfd73caf24aafd3e6fd1f8c84f7eea366990767b3c6d6f20"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::savepoint"
+kappa = "feafa0bedfeeb078486d059d277f9fba2f5a1ca9be9fbefe723470d705da3cbd"
+at = "Connection=u32"
+embedded = "93cda7855f62d36ada8bc49e9f5fe8ae467101021f064ce8f53951f495b2bcc9"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::savepoint_with_name"
+kappa = "e25f62d20abaa7840754d96d0219341c93efdc1055c5ebc787d4227f36cce001"
+at = "Connection=u32, T=u32"
+embedded = "d408fa8b26fd1d4c9237f228e464d7a544a544ca74dac56cc10022fee2fcd7f8"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::set_drop_behavior"
+kappa = "a751180e6612b4033a242463c5ec6c7685b299debd6cb135d5e18b5e2ad482d3"
+embedded = "15ab30b37fa9dc9f4bf55a1c31f1be8567c2ac761db13b251f4af6d8cee0eceb"
+status = "residue"
+cause = "mir::Ty: Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::with_name"
+kappa = "98e8c7429676f3732b89bb068a3998a8bad86af2f2d5c30221b0061f0215a656"
+at = "Connection=u32, T=u32"
+embedded = "8ccc2a807e5e3fd8b9470074a79b06a6963b86a2e4eb3a392dbb21ea39ff1ef5"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Savepoint::with_name_"
+kappa = "9d100efa9d6f40ce719de64aafdb9f5730ce5c56a7b4732b80505e3fc8b2ae39"
+at = "Connection=u32, T=u32"
+embedded = "7c395bd75e72ad525cee962270ed0c840550512b0e7fa8b465562e62bfe4bfaf"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::commit"
+kappa = "d2e5090ab2a548b90dce0122fb5d6b1d00939e7850b2098836bc490ecd4291a4"
+embedded = "869ff06178da744bdcf0a7b9481d7a937269b1e2bd936cada0a366f7e17535a8"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::commit_"
+kappa = "5c57fe38ac446116abbc19d391416559341535dd500c2499d4429f39506e2c87"
+at = "Connection=u32"
+embedded = "7d756b1c6a3267af0170ea3b3c29fd3722f660f05f1609456f5fece8db10f600"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::deref"
+kappa = "d1a67ffc71dee78943b3b79fefc54259a3ed888a8da879f72878b0ba97d06810"
+at = "Connection=u32"
+embedded = "eb9013321bacc720f8d055b5c21e9f1f67cc910c7373ff322933ba4373a15c54"
+status = "residue"
+cause = "mir::Ty: Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::drop"
+kappa = "64c5f1bb85d0f08d9e5153a65f3e6aeb9603ff8e089f7483e03e6373737e71f0"
+embedded = "b9774a6d5130376b043dafbffd4faff3cb8c85de9d27dfd5519afab79c022091"
+status = "residue"
+cause = "mir::Ty: Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::drop_behavior"
+kappa = "ae7a4259771ff28c469d36de2f69d4b2aa33b8993068ed6475c42d042924a9fa"
+embedded = "dd6ac0c02125973c4849ff6370874f9b9fd816f778cfb51e3fad2f1bc8c124ae"
+status = "residue"
+cause = "mir::Ty: transaction::DropBehavior"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::finish"
+kappa = "ce7ac7c3131deb4d386f75628b9081c30f992230ccaef4186464e4ef4eefd8ff"
+embedded = "273a8f543cd31b208d0bd9de468c65fa8032859d74bee673e85eb43995dc9d8d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::finish_"
+kappa = "e20a8a12fe5de87bc09bd24e4ef8668a74a3ca95acc730b9fd9765d29f1b1c04"
+at = "Connection=u32"
+embedded = "e0f9da9d1e38e86422c262608bfca8a2b7ede98c1df9ea41cd8c706782ec7295"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::new"
+kappa = "90fcb4698f4925cbc93e62063a0e0a6778e9aa38fba3614d39db629829edf551"
+at = "Connection=u32"
+embedded = "ed092d1e5f9aa1fcc37322fed746864b1ca52935479d4ae3a94db87909e00d9e"
+status = "residue"
+cause = "mir::Ty: transaction::Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::new_unchecked"
+kappa = "0bb878236c7b44220ee5c70aed15d31456db4fccc21f493ad36f5aaa8bc47a07"
+at = "Connection=u32"
+embedded = "bd4330f0157200d4e4009afe64f09fdc1636ccd645023d8e1409f9cc0ff90379"
+status = "residue"
+cause = "mir::Ty: transaction::Transaction<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::rollback"
+kappa = "cd2efc93f9577b850bee3e1eb1afa305eea8dbd09adfd3f636d6dbd8c9777e24"
+embedded = "1143f28da2bd87dd438e74678dac4c84f3928fe183acb0cfc4e84832d25c8e0c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::rollback_"
+kappa = "6c1d52a298ea8a574f016a247c425eda23df89eafd3b2b063b6ac830fc8472c9"
+at = "Connection=u32"
+embedded = "2141b167cd0adc5fee58581f39f95610c1fe87cafb4b4e86de462d3f09be4b0e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::savepoint"
+kappa = "be30d91c9cfc83ba11554cc9e6bc246fe87c482493236933916a31e3369fa59e"
+at = "Connection=u32"
+embedded = "30b5be90b5da7b2facbe1247e58809500ca319f1157084ba60a2f42a1792fe9c"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::savepoint_with_name"
+kappa = "99e04e5c6cb0ab52ce4a63513037e0585946ae78f26f5912189196ec894eca12"
+at = "Connection=u32, T=u32"
+embedded = "19808b058243b3f07c29659b21b44090786acef3dcf941fb0819044c7fc4db89"
+status = "residue"
+cause = "mir::Ty: transaction::Savepoint<'_>"
+
+[[fn]]
+path = "rusqlite::transaction::Transaction::set_drop_behavior"
+kappa = "a0e440d2d9d67d2e60d99b715fcb9b64eba2251a14153c3cbff4ccb248578548"
+embedded = "f3bb79d1ec24e5b90968490901e96726d51969f217cb943af387b0e58088c39c"
+status = "residue"
+cause = "mir::Ty: Transaction<'_>"
+

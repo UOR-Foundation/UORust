@@ -1,0 +1,42 @@
+[[fn]]
+path = "sqlx-mysql::buf_mut::Vec::put_bytes_lenenc"
+kappa = "1d587621130f6dd58a5c1fc8fbc6eb166ab52c42070fea913ae5f4a7233bd19c"
+embedded = "92290f3aa7a990a5eb25196079372ada2305fdd31c4512d1a3cc8a172572cf2b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: io::buf_mut::<impl at src/io/buf_mut.rs:11:1: 11:32>::put_uint_lenenc: sqlx-mysql's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::to_le_bytes"
+
+[[fn]]
+path = "sqlx-mysql::buf_mut::Vec::put_str_lenenc"
+kappa = "b867a5c29c58a273edacfd750ad0acdd2290578c25c9b2c4fe954c2897b5b9ca"
+embedded = "c7058b0cd39cc36e4ef9576125bf1f60212af3e72592f19021b1a164eeed1130"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "sqlx-mysql::buf_mut::Vec::put_uint_lenenc"
+kappa = "6dde29c14072ff1ee67e494867109690cfb0cb08e78ab726fdec7f99c3f3f236"
+embedded = "80171dfcabf96063425962d5cdc9433da38685f80f4a1c80711ccf43d6414e63"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::to_le_bytes"
+
+[[fn]]
+path = "sqlx-mysql::io::buf::Bytes::get_bytes_lenenc"
+kappa = "9bcdae4d97ace186ba9fea4e47e250ec77f547ed92e6168c3751d5e82c498d01"
+embedded = "1ede0ca77dc8ad36953d21cf6c7c9d7f0de57ecdcaa4a85fd3b3cd6c40e7cfa3"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "sqlx-mysql::io::buf::Bytes::get_str_lenenc"
+kappa = "f743f2ce5a84b9ecd2fe8e10ccc9256e728c916a169310d052cdc7b7aa899383"
+embedded = "799bab1b9b599cc70e975b1e22929d2c1fcb09dd299273b3e8980c4c17ebc2f8"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-mysql::io::buf::Bytes::get_uint_lenenc"
+kappa = "2f46441b41c5732a88af4f27ae9bb6c04c795a52b907bbdd45d1e1d7f7255ea4"
+embedded = "aa0cd04b002658c2e59f9a213554842317945d5473a6c2c9222115a2ed0cc610"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+

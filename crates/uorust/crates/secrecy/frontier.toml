@@ -1,0 +1,38 @@
+# The secrecy register (written by `uorust crate secrecy@0.10.3`; do not edit): every body of
+# secrecy's MIR at secrecy 0.10.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 19
+translated = 0
+residue = 19
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[embedding]
+bodies = 19
+embedded = 19
+evaluable = 19
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: SecretBox<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: SecretBox<str>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SecretBox<[u32]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

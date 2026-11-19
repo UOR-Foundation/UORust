@@ -1,0 +1,100 @@
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:149:10: 149:15>::fmt"
+kappa = "bd52a6ec23d7fe0e2f7322552408123257f88b7386fe79524022c91ad6afb616"
+at = "BigIntErrorKind=u32"
+embedded = "8416b224c7438b3852424e549204a6033310be9d27125301845c85cbf60e01d5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:149:17: 149:22>::clone"
+kappa = "a5e9756d83ff60e4434d1305af0f180c0f93ef6a08e70c0139ed21e3e96e06f7"
+at = "BigIntErrorKind=u32, ParseBigIntError=u32"
+embedded = "510f7f37e40be7b8fff78fe61587437c4d4efac233504e2d0f1acdc202ba4e94"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:149:24: 149:33>::eq"
+kappa = "8b1f6823f9576ed0ffeb6d44feec1744c7ef301bb154e7102eb023e34d63c990"
+at = "BigIntErrorKind=u32"
+embedded = "77e03c7f609568b02d210a7743cd32471485a386c773dec5ab89e22c73c660e2"
+status = "residue"
+cause = "mir::Ty: ParseBigIntError"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:149:35: 149:37>::assert_fields_are_eq"
+kappa = "2dec265f7b245adcddd42231f37cc6ae8d3b042bf1e4a0fca6f3611c77d43aee"
+embedded = "e2e62096aa74e83122f2dcf9e501eaca2fa734ffefe265610b1564ccc3911121"
+status = "residue"
+cause = "mir::Ty: ParseBigIntError"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:154:10: 154:15>::fmt"
+kappa = "6380d29150fcbe400f6806ccfc7f472a57b63c3a25dd3f353f700dd363d6409b"
+embedded = "4aaa35a02135c159cf8427f65ad81b22a4abe671cfd199b9a2f5e0b468bfea29"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:154:17: 154:22>::clone"
+kappa = "c263253c92e8feacf9f2b1da20a0dcd06ee1b1ad402604256426b0f4b3e48b09"
+at = "BigIntErrorKind=u32"
+embedded = "13562f102a32a6fe4c65638a3fed44b8733246b99a7e6b1cb2e11e9796d5b219"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:154:24: 154:33>::eq"
+kappa = "2b6365a886cdf916b17993c4d5ecbc23211b7bc90f8bc557febb2992bffe2da0"
+at = "BigIntErrorKind=u32"
+embedded = "e54db7d95bd1d1e5ba40d39c722ecbde3b83e9566ba42ccb9d4a792c593463dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "num-bigint-dig::<impl at src/lib.rs:154:35: 154:37>::assert_fields_are_eq"
+kappa = "0a228ae8bbc47c8261a0b5c331deb965132a9310867e18d6f81d5569f86d87ce"
+embedded = "475a4bbfec5c62358b1f80fd1a5cbbf4e9c92f82231023cf6c93d738c769e52e"
+status = "residue"
+cause = "mir::Ty: BigIntErrorKind"
+
+[[fn]]
+path = "num-bigint-dig::ParseBigIntError::__description"
+kappa = "000dd55cb91418fc8244d80ea0fe0c6888cce9fad49cbd0f119024e0fa9ec5fd"
+embedded = "cba867ab88543988b14c4240889b9c8eea6ff7bc0b31ec51db6141dc0f1efa7f"
+status = "residue"
+cause = "mir::Ty: ParseBigIntError"
+
+[[fn]]
+path = "num-bigint-dig::ParseBigIntError::description"
+kappa = "40557d4fad6d1fc487e7cebf310e343cf199f6b4145d8c58e1ffc01fda9d6f6a"
+at = "ParseBigIntError=u32"
+embedded = "853bbe4b9643756336d343c78a6c6a0514fb2831e8fb8a6f19ce9a60eda7a50c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ParseBigIntError::__description: num-bigint-dig's MIR stops at type outside the lift: BigIntErrorKind"
+
+[[fn]]
+path = "num-bigint-dig::ParseBigIntError::empty"
+kappa = "469f6aeab9b51eb4ec11be25358868faf07ac1afedb040ce977e8522d80d643e"
+at = "BigIntErrorKind=u32, ParseBigIntError=u32"
+embedded = "0632b5df4126d8f025e05771efdd78ccb49104481e9c5589510ba0713fe8ec38"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "num-bigint-dig::ParseBigIntError::fmt"
+kappa = "0e53ed3c391a2496c37a93a4c85d3a82420f196725d38493bcccd2ce0c33b09f"
+at = "ParseBigIntError=u32"
+embedded = "c4bcd3df58f26ca87c1719dc6e8051b33d4b213ca27ab5a0fb7ba22a85854295"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "num-bigint-dig::ParseBigIntError::invalid"
+kappa = "f173026c64e2f759cf60a7f8465b50cc7ef14f25f12c8fed764db174a191f8e4"
+at = "BigIntErrorKind=u32, ParseBigIntError=u32"
+embedded = "cae7f02a233b782e438ba13ab4c81d062d5f8ef610aa3f2dcf24f0653a13e317"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+

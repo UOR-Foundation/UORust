@@ -1,0 +1,15 @@
+[[fn]]
+path = "fdeflate::build_table"
+kappa = "440359c65be87bbf41a6e4343ad3c70a1086b4d74a43d61d0b873812bd078abe"
+embedded = "790666c872a78b1dd79332f57f84c6c0503533f2d07dba8b567f214983ac5da8"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "fdeflate::next_codeword"
+kappa = "6876a54fa9ee30fb83e3c5cc62325489a62acbee7002c8b76769c8b7e7279a57"
+differential = 6
+embedded = "b4e0c28ab42266e672c4e355ba0cfd8c36ba64f675bce6c55850ba5b818909a4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::BITS"
+

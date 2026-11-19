@@ -1,0 +1,219 @@
+[[fn]]
+path = "fiat-crypto::fiat_p384_scalar_addcarryx_u32"
+kappa = "13a49dd2c1192480975d8d97bcefd6e5b53d94abcc7c750259c31463271451c0"
+embedded = "ab2f5e3c81e12958ceb818f041bbd11ebfeef0fcd5bc11095235f53c032520f8"
+status = "translated"
+digest = "f447d5732509d04fda38191ae96dd9d4692eeebc58cfddbca784ff27c622ce6e"
+
+[[fn]]
+path = "fiat-crypto::fiat_p384_scalar_cmovznz_u32"
+kappa = "f5d71637d15acf252cc8a8221e1b840790dd283427cbdc7ae4b76dc520e84301"
+embedded = "58862aee3c2eeefe0fa8de767569be6392a32d987147c90678b660456b61c157"
+status = "translated"
+digest = "dc4efae5e16fabc29d8f8ef384aa5dc0c1b3ec17070ce9052d52db16e719fd0c"
+
+[[fn]]
+path = "fiat-crypto::fiat_p384_scalar_mulx_u32"
+kappa = "795c463b2b122b6d4f388acdc751ae5fc8a0f44686fe5acd8129c8d7ca437b60"
+embedded = "4743a6e15cf5c052456695775a870ab12dd5ff81075afedc66a1f2860b63e922"
+status = "translated"
+digest = "7a0e76d8300de1a786a14769a46d57ef180093c938d31419d1ae6e9d009357e6"
+
+[[fn]]
+path = "fiat-crypto::fiat_p384_scalar_subborrowx_u32"
+kappa = "56c7c243f00fa128936f384ae6f8ac04c060306455938bf6849c254a72cafca7"
+embedded = "660f8a1634c294e218b8adb5dab7b1576c25c39e7262097c6358818fc9b79135"
+status = "translated"
+digest = "801b3bad9d45227e964a9ea54b58c7ca246c1c645ac4e291e5c56bf8abb2f355"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::<impl at src/p384_scalar_32.rs:54:10: 54:15>::clone"
+kappa = "58bcceb0cf2b4a6a9d5d195dcba4be4a2d3bcd4e58877a9f43116e25b68c2691"
+embedded = "dd7f11afc872ac6e981157200198e6727643248453bd38af5267ac10fa4be638"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::<impl at src/p384_scalar_32.rs:90:10: 90:15>::clone"
+kappa = "7bbd929b2a9cf72e3d8a22706e93f5814d2892504dec3acecdf4e6da31fd8e07"
+embedded = "b0c4331a8a35e57d9b046e2c040305ec0093839b817700de51f07c8c8586223d"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index"
+kappa = "9327944534f948eaaed4f2c0547a0ee20003a1b885eb271f93c8a1477baa927e"
+at = "N=#usize_N, T=u32"
+embedded = "e68768a75aa260148167a3b7a262f8be4cb6721b1b29ab2095266883253b3d61"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index#2"
+kappa = "c08886b7cd5efc1cb9a5a4e280a740e3faa83123ab9d7e4aa2417b45ba41de39"
+embedded = "ea770654d7f4c3dc401988b0777006ec4d4c1984b58165eb23c97a1beb38ced6"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index#3"
+kappa = "802b79a0d53618c3e162649d23db89ea2de9d9d39d5b36d954a4293f46f136a8"
+embedded = "417995f318126e7e7986bb9416bc0c2a4f47fa792f203fc8b4c8d6aa8f53b4e6"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index_mut"
+kappa = "f90f2404c63ee3b5534acd02880f0e30a543e2d38f39216a90c83b5c469b4e0f"
+at = "N=#usize_N, T=u32"
+embedded = "a25d224409efb6b94ca8c2e70e67078af19b3d1069f1f715b0f61ed4d0a613d9"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index_mut#2"
+kappa = "645a683609ca14a529c3d8145a913849697332b078a4d772a4727a9b2d25741c"
+embedded = "103093932e70d2e25687a25d215160b98d984cd3298bb23eb7b420645147322c"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::IndexConst::index_mut#3"
+kappa = "deccc7457267a3fb230f55082a0497b9525a0a6485bb7a359aed3d0f56239bfa"
+embedded = "d5b77a2a94f6cb5d496c3761139dba4c1a1552060771fd24787d3d847183a8de"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_add"
+kappa = "4d8bb2865f65bab281fc6fa90a589e9dec07614968da5e897adbfb52d3aa134a"
+embedded = "029ff9852dd2fb7c331a7e0d8e7792b4c0c9c1118650c3b5323ecfea2603869c"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_divstep"
+kappa = "a6cb067a6952a6d954b443317846b4793aeaed5f85ed658cb32e04c866300cfb"
+embedded = "4764fadbb1840997eb4dc446a1c81755762508dc45a93c38fbe9fd1ae67e8838"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 13]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_divstep_precomp"
+kappa = "0214507b83a7c8b62f4e025a1c1d814b457a2ae8a009ad7417a6a79b6d89ed36"
+embedded = "0903cdf5d0d16026a0e0dca2810f434ee2438a64895b03c08612046ce3f6280c"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; 12]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_from_bytes"
+kappa = "fd4fbd0f0826d07642780a1bfc4cf4289e9fecc7cc59d635db04ad2c944bf19c"
+embedded = "02ddbe843fa9a9af33a1fd5118cf5558303ad207d4f16482d89062386daf4687"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u8; 48]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_from_montgomery"
+kappa = "9530b80b744de59786f246f6bb3c6b3a1a48cde7ed53b066f96769359c0773fa"
+embedded = "dfb2a38e1432c42100607b06f06bac6ea780f532c395e9922a9e9cb69710bef4"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element::index"
+kappa = "82dbbd3d317c2a635ba01b959705c099d8629c41002b0a15ba9afbf63da5a54e"
+embedded = "db231594f43b9a74a84839cfd0264b60d5a5abc77a48053289ee868f003dc2b9"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element::index_mut"
+kappa = "2e6312736e6705f2c1a4d75ca798920f7d5464ebd0ed6c7bd378a954b71b7e1d"
+embedded = "45e0634e88ee2c4b2ecc0a0394d9212f0b3481956cde40e598dd9ae5f272add5"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_msat"
+kappa = "53e666bb8ce5bd345e21f6a84fbc0718e35358ac073dd96dd433a6467400257b"
+embedded = "24640407dcfff3543b12078d48881d7013fa54e196d80f16ccd677ed86b81181"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; 13]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_mul"
+kappa = "e642076bd01d129fde7a7c18b19ebc7556e972a15c07d268e800382e078f8e48"
+embedded = "b6331a990ff8e7e67a85a82ff9fe53e3b8739d75fbe3fe44aceef40bcc3b2145"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element::index"
+kappa = "9201c7fc1845a1f91647414056c39383e7eca04795dfc24c12242659ec548861"
+embedded = "b716518a778825bed5d4356aaffa2bc7daa229dccefa1980720003e493c4e6fe"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element::index_mut"
+kappa = "600e42c73e538a296f0033328b4ddc2e04ec7f2f682716cc8bf7906af9ccb998"
+embedded = "15122a07f94bfc04ccc9018219d0ab434d46653fd3c5fa92503c7f541ac76e63"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_nonzero"
+kappa = "c421bacb6f2d8e48c67c77c94e5ca293df7bdba21ab8051037b2eeff1c0ee617"
+embedded = "cf4481872f421ade25e9eb0870b57d09490470df490b970d440b9a551bfdc39a"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 12]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_opp"
+kappa = "bbcffeb0790f83fa89941ca30c6df0bc2a67cd40d6fdceb6b7005f4b9a47970a"
+embedded = "ac60044c554a36ea95f63160847a461d3052181b425fddb71e22b66713f82500"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_selectznz"
+kappa = "fcbec8ff2da27e59429975756de1431f5be80ffd26ccebc21ce1471db21cc448"
+embedded = "c90ab18144a459e1d1fe5d8b188fae019eee68489dc6e3584209c8bc3068132d"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 12]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_set_one"
+kappa = "fea0456f1e72da4948100b451529dabcf1a17698ab4434b16b27761d73c33eed"
+embedded = "0a93d931110b9ea2989e814e263b972484a15c8de52adcd4589f076586bfb8c9"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_square"
+kappa = "0bfddc13e347e2ebccb0322daeefd4bd5be6cff40aff161b304a0ad9b6c503e8"
+embedded = "7ab242bb2b695aa34786fc84f46eafbf33a7fbd8fe3fa4bf03e2860cea9544cd"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_sub"
+kappa = "b6ff29c99b43dae52c0c0b64cea27cb780ad22200a8530af71b1074a19aec127"
+embedded = "6bfdd59b5f1beee05b44b9fd9af93b8b4296aed2eda013e7c4e5f1b3e1f4e4dc"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_to_bytes"
+kappa = "c8cebc164ecb7ac1012e4c31565503173125e2eb5989a7c86081b59f8c6f4bc6"
+embedded = "96b95ea6410b99349224a53f7f4b5437028ec471c9093527b2d003dfc2766716"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 12]>"
+
+[[fn]]
+path = "fiat-crypto::p384_scalar_32::fiat_p384_scalar_to_montgomery"
+kappa = "5717b637cd5cede2a1a3bfa4a555576e481955060bd3c6abb0e01303f9c63ec8"
+embedded = "1f68ef3a0a87afee92f1c5f843542212feb038223ea36cd9287557c24820d438"
+status = "residue"
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+

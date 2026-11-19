@@ -1,0 +1,32 @@
+[[fn]]
+path = "similar::iter::ChangesIter::new"
+kappa = "ff2359e76e934bb7e282781b2cd60ad1560b29aee8bfd453091e12c9fd47d62b"
+at = "New=u32, Old=u32, T=u32"
+embedded = "ae491ba21fdcf7d2b8e44bce1dddd0f625b91fb11403ca1f6a3c99ea40cfbdc2"
+status = "residue"
+cause = "mir::Ty: iter::ChangesIter<'_, u32, u32, u32>"
+
+[[fn]]
+path = "similar::iter::ChangesIter::next"
+kappa = "4f4e10fdb1a3990646182b22795e551e72d80a05931f1274be46ad2ad118b20d"
+at = "New=u32, Old=u32, T=u32"
+embedded = "9aba0da596073b3c501d06f5dd84d8a03d12e9d8875fb2fdda3687e669080e32"
+status = "residue"
+cause = "mir::Ty: types::Change<u32>"
+
+[[fn]]
+path = "similar::iter::text::AllChangesIter::new"
+kappa = "fcf97e2bd8881a37cd75d58303a51c9bbb4a85a3e15c03a16adf197b012505cf"
+at = "T=u32"
+embedded = "4097dc20829972c6ffcb15e3f89f3088bf49f294a913eb1b4c3b90a7f6ade945"
+status = "residue"
+cause = "mir::Ty: iter::text::AllChangesIter<'_, '_, u32>"
+
+[[fn]]
+path = "similar::iter::text::AllChangesIter::next"
+kappa = "8ec9b89250d814c3699a21fdcd127c9e32e4750b0f32583894eca5044a24190e"
+at = "T=u32"
+embedded = "584d052a03ce16b4c2579bed4d20733f5e171f5ef9649f440addc9d44dbb19c8"
+status = "residue"
+cause = "mir::Ty: types::Change<&u32>"
+

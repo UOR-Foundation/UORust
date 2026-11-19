@@ -1,0 +1,135 @@
+[[fn]]
+path = "matrixmultiply::GemmKernel::MR"
+kappa = "f6846495f6aeaddf81d451747f92940c072cbe01f3ad8e1ceb6cc4f1a432396c"
+embedded = "ef08cfb221f12f042fb5bfbf5f5f5270c63dd378dfd4c4471ded60cf136dccda"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as kernel::GemmKernel>::MRTy as kernel::ConstNum>::VALUE"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::NR"
+kappa = "f7b383a36a9b80fa005a9833e7058258dd853b16a01eb8f403542866e3845756"
+embedded = "b0fbfdc775770f35ec781a532f284f2ef2b10cbc41bec6a77b5057d5ada4e735"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as kernel::GemmKernel>::NRTy as kernel::ConstNum>::VALUE"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::kc"
+kappa = "56d34f53b4a0e7fe810e92200cffc116c1ffd06563496dc610b8ec1866651f67"
+embedded = "a5d0e729e01c5f19167505b3f84df0b0507fb3f4c08aadec31035eec4ac36b9c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item archparam_defaults::S_KC"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::mc"
+kappa = "a120840180a8caa85c9a118f2e7073df1cfd18e1d1f42ac0857c9450a201962a"
+embedded = "22a8404d870e7191b1460ca50554c17407c7c338ed9745f9342d5d2fb98d0e1e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item archparam_defaults::S_MC"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::nc"
+kappa = "82f5df999a8431a0e60ffc0c9d74bb3bdda1bb40259368060fca615943b6d2e8"
+embedded = "3810370290f1af05e111975592dded2e94cf392d4bc8e53edcdec89e47f5df34"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item archparam_defaults::S_NC"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::pack_mr"
+kappa = "1f81fc351744aaa550c5439d3d99247a0cc020e19f9dd8afe02369747b0c6df4"
+at = "Self=u32"
+embedded = "777537bcaaf7e7b3b4c54fcca9dd5b657b0116efcee04dc2581dd8f5d31d22be"
+status = "residue"
+cause = "mir::Ty: PackSlice<'_, u32>"
+
+[[fn]]
+path = "matrixmultiply::GemmKernel::pack_nr"
+kappa = "0a043227f336620f73afad7deeb4100fd1ecd199e03af5d3b73bb175ab7d2ea5"
+at = "Self=u32"
+embedded = "6ad218ce011773f0525f9b09e3197b73b648196d1e1fd11ab3d9c41bbf0221bb"
+status = "residue"
+cause = "mir::Ty: PackSlice<'_, u32>"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::add_assign"
+kappa = "2635fa27d1d6ff05d7be4551b8b52cf9f50161918aca922f2bd6371f79b3d340"
+embedded = "32a62ae1ba4f1523ec10c681351d77e9643b285884c8f48f6da8f6052443e89c"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::is_zero"
+kappa = "ace252b8a3342dcafef726c53d637f28923fab2e73c9dccbecfc39be20537992"
+embedded = "8c0ec32a7a96705bd306d60ad231cb024c4d23d2cfcd38356c4d51a8e4a8f7d2"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::mul_assign"
+kappa = "368ea7fa47ac1895ade39ce73ab0f08377db41bfbaf695d9e9dae0f22a1732cc"
+embedded = "ef4386b76b912bc3cba02f29859c3706a218b4739fea05a0ca30adbea4d72c50"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::one"
+kappa = "f09660b80c180272e51a539d5573cc958caf95771c08b4412332a9813f9a37a6"
+embedded = "caf8bdb0a06f6b717d4d4d4da839bd0b158cb452947aa0b7d8e595fc672c494e"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::test_value"
+kappa = "cb64d630fda5605538f4f0fab2a31fbb8e4d4a7c3344e1a85e486f79ab4ddcf3"
+embedded = "ddc0ce5ab547bd3581c635852dbf2b7db9238f3f2668de3e700ee2bc417b4583"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f32::zero"
+kappa = "ad34437566d5d8d74442e6bcd014933bdbbb2c0b1b214fd433b61faeffef71cf"
+embedded = "1762ecbf6d79ffd55b3f97df4538e6ced6d701f5878c1aae446a39b566caf223"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::add_assign"
+kappa = "d3870465de48a96c409584899ae915857e2cf9002a2e447eaf1b1566451b8fdc"
+embedded = "6c54bbb91a49f189447c49f09605602e60a392e3081c0b731af8c1b158da2089"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::is_zero"
+kappa = "c9e4f2c41963c2185274ced8d67536573b986d7a25529d775bc164accc327f35"
+embedded = "4e6a54088bb0689beb1bc72b9882b39035f677e9cf77f4590a6eb0561d61e01c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::mul_assign"
+kappa = "5dd65b186e9b00238b3936746929e0af059f6fdd3069c8c27d794844a8386253"
+embedded = "0984ffa63d6bf1c470f83a77a514020e89450d3c087d71afc20a223c5d0594ce"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::one"
+kappa = "eb2f9cf5dca1d399a44907d08bdf9027e6a28316d44c8ac9b583c8653ed87d45"
+embedded = "cc52604e4dd0d180c6eba7b08a299d5446b945ae29351d6499ce1a2d85224170"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::test_value"
+kappa = "ef31e99a77a1d39c2e7f58432a8f58a65bc49195b4bfd28f321255f4683144ca"
+embedded = "cd09ee6709a63cf10ee241db2e21608a7629576423606252e5b194040ecd86a2"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::kernel::f64::zero"
+kappa = "67a59d56237c441ab9bb1128bd9560ec060d71db5c1165cd91b52315aa38252c"
+embedded = "a9f9aa1fc60b4e6e05b62db813f4941ad4be0bfa3db4cfd246532f3eaf9dba65"
+status = "residue"
+cause = "mir::Ty: f64"
+

@@ -1,0 +1,215 @@
+# The base64-simd register (written by `uorust crate base64-simd@0.8.0`; do not edit): every body of
+# base64-simd's MIR at base64-simd 0.8.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 143
+translated = 14
+residue = 129
+
+[module.alsw]
+bodies = 22
+translated = 10
+residue = 12
+
+[module.ascii]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.check]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 29
+translated = 3
+residue = 26
+
+[module.decode]
+bodies = 14
+translated = 1
+residue = 13
+
+[module.encode]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.error]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.forgiving]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.heap]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.multiversion]
+bodies = 24
+translated = 0
+residue = 24
+
+[embedding]
+bodies = 143
+embedded = 143
+evaluable = 143
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: vsimd::vector::V256"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: vsimd::vector::V128"
+bodies = 10
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Base64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unsafe fn"
+bodies = 6
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: heap::encode_to_boxed_str: base64-simd's MIR stops at type outside the lift: Config"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<[u8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Scalable"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::add"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vsimd::tools::read"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Extra"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vsimd::isa::AVX2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: ascii::lookup_ascii_whitespace::TABLE: mir::TerminatorKind::Call: core::num::is_ascii_whitespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decode::STANDARD_DECODE_TABLE::promoted[0]: mir::Operand::Constant: the constant item STANDARD_CHARSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decode::URL_SAFE_DECODE_TABLE::promoted[0]: mir::Operand::Constant: the constant item URL_SAFE_CHARSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ascii::find_non_ascii_whitespace_simd::MatchesISA::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc223: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc235: &Atomic<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::as_mut_vec"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ascii::find_non_ascii_whitespace: base64-simd's MIR stops at mir::TerminatorKind::Call: slice_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ascii::find_non_ascii_whitespace_short: base64-simd's MIR stops at mir::TerminatorKind::Call: std::ptr::const_ptr::add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ascii::find_non_ascii_whitespace_simd: base64-simd's MIR stops at mir::Operand::Constant: the constant item ascii::find_non_ascii_whitespace_simd::MatchesISA::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_whitespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode::encode_simd: base64-simd's MIR stops at type outside the lift: Kind"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: heap::encode_append_vec: base64-simd's MIR stops at type outside the lift: Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Out<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vsimd::isa::SSE2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vsimd::isa::SSSE3"
+bodies = 1

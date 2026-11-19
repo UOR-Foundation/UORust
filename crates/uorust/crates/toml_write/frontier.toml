@@ -1,0 +1,85 @@
+# The toml_write register (written by `uorust crate toml_write@0.1.2`; do not edit): every body of
+# toml_write's MIR at toml_write 0.1.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 96
+translated = 0
+residue = 96
+
+[module.key]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.string]
+bodies = 50
+translated = 0
+residue = 50
+
+[module.value]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.write]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 96
+embedded = 96
+evaluable = 96
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: string::TomlString<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: string::TomlKey<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Encoding"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TomlKey<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TomlString<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: string::KeyMetrics"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: string::ValueMetrics"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::TomlKeyBuilder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::TomlStringBuilder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::Encoding"
+bodies = 1

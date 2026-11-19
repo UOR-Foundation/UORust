@@ -1,0 +1,210 @@
+[[fn]]
+path = "dtoa::Buffer::clone"
+kappa = "53184efbc05a82a8271c129353c4693e0276fcf5879fca8c61901ef19a5daa14"
+at = "Buffer=u32"
+embedded = "6ed40644db92359166440a9a499f332f21be585a06ef4ef07648c0029cd4ea8a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Buffer::new: dtoa's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "dtoa::Buffer::default"
+kappa = "6bcd5fd355ffeba741f3b4be9eec6187fffe0e92d62f61e6fea7f438354809d0"
+at = "Buffer=u32"
+embedded = "fa46d7dc56c9e8c1779026f7842dfdaa913394b4f387fbe5da407b2b722767a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Buffer::new: dtoa's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "dtoa::Buffer::format"
+kappa = "d4af6fcb75ab7d0fa738b702d73b7103afb6f6fe2a9e4c7b8b4b27dc76c7e70a"
+at = "Buffer=u32, F=u32"
+embedded = "d8c0413de375158a852ccce7d0838e74c86e854d0168d882b868978dee063239"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Sealed, which u32 does not implement in core"
+
+[[fn]]
+path = "dtoa::Buffer::format_finite"
+kappa = "0b6706fce71bb2246352cd01f54bf007b1a184ba8d0931e73e9ab4c1c6a9d1f9"
+at = "Buffer=u32, F=u32"
+embedded = "049ace5f82b5edd572f0361f8e99bfe86a8a32bce600628cde6f53caa411b5c4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Sealed, which u32 does not implement in core"
+
+[[fn]]
+path = "dtoa::Buffer::new"
+kappa = "2fb1b3235c27d0989591db7918c90d430fbf6e33f79735c2ca8f037fd948d83e"
+at = "Buffer=u32"
+embedded = "a51258a818ccbdc033823865f06900d6c0993816bd64066d73c9eae5d3a6c211"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "dtoa::f32::format_nonfinite"
+kappa = "bdac001fc04a2d62bdeb2a90f83b4e85d2b32abfa360aaa482eb585c2acec818"
+embedded = "25502dc98832203cd3d77a5dd0a769c146368c5d4bcc95eabd421f45de8e1c19"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "dtoa::f32::is_nonfinite"
+kappa = "4c31c6e833d6955287ff34dcc095a87c75059cda98839a816ed138c474a9d846"
+embedded = "5c9003199b72347733ccd1c9399b0308d036d31da931e33bec153f925b8851fc"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "dtoa::f32::write"
+kappa = "1d5b3fd769a85d0f33dff8374fb75f8ed5c125174d9b54d14328fd41b7122690"
+at = "Buffer=u32"
+embedded = "5aef07a20ab0cbbdfbe9e5a6310a4a8d18ee211346c8be51483fe9c6f22f8ec4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "dtoa::f32::write::DiyFp::from"
+kappa = "8ebcbb3fa7615e75d19d596c44de9f01557c623cb6e4ed02bc498afcfaac8db7"
+embedded = "105b0392a624e55294214c5241c4994e1c38ae56d5bcf80207f5961fb24d095d"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::DiyFp::normalize"
+kappa = "42c4dbd9187023e840c55016abba474eea56c39bc3f8c340192132f8a403598d"
+embedded = "1580477f8850900d800a82373a8bfed9fdeb21747f3ac46f37f6be759d9db032"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::DiyFp::normalize_boundary"
+kappa = "96b91b0ea5aa9e73c5bd273d42265a45b2f23330cf43392901350f9f470817ed"
+embedded = "9fd1198be0aaa2978c4bf3d13b6c0a9a70c3dbbc1bfa9586a7e0c6ca437e4f4d"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::DiyFp::normalized_boundaries"
+kappa = "df563c4c34e989172f9c130c622b04b0c8e62d20d7dcc4ad898936554ee58abe"
+embedded = "2dfaf90060c4f47f2e90c7a3bf9f27ac2f84ed7bce696e1873b66fce663e3dba"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::digit_gen"
+kappa = "3653801b49f02820124819a969430abfe6b257575aeecc35122ee48278c7fd47"
+embedded = "84ca5f2b461c8bcc3193481d8886352aeb98cfb07772a7063db17859dc2cb69b"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::dtoa"
+kappa = "40e4bbdf3b9fabdbf2e7a135f1d7af41c884d27d25e9f2690656e7ed86763195"
+embedded = "45076a17fdde49ec0422d1301b687908ed50b721c256d2e3002a7ccdd3da835c"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "dtoa::f32::write::get_cached_power"
+kappa = "141f512731038104e6141d1c9d0b864476ffffb57ca7e1d8e01bef4d86285d59"
+embedded = "cb5f31dc243ab3fac9a1cf4b6df57e98099764579886ef7ce4937676083cfad4"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u32, i32>"
+
+[[fn]]
+path = "dtoa::f32::write::grisu2"
+kappa = "56608a4fd678b14d062f2ae2e13d56958d1594e2a1b908acac76267a84c9b4c4"
+embedded = "70bd2e05d290fc2426ef38d45413011e8cb0a232b3d7f58f99fc9f3ef52a52ab"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "dtoa::f32::write::grisu_round"
+kappa = "b5a0ed19eca398182790ecf64c026347ffe39d2859eff69d8a0ca6f10b2f194c"
+embedded = "1163216a004c8051c21e457b95a6666a54f0a453c52e28f32ceb480f86ef45c2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::offset"
+
+[[fn]]
+path = "dtoa::f64::format_nonfinite"
+kappa = "cfdeec48daf6a4dd167db5b02eb15263eb76818507cc3c51b7496f628fe3143c"
+embedded = "4ba01a371da64e87f9e165b6715f53f0296f6f30fb9cd64ac0a7c4d8f48a5019"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "dtoa::f64::is_nonfinite"
+kappa = "83402b655c139d09ebf3bf44251fe3401667eb3d623898ef4a66ea489c711fc8"
+embedded = "096b089966885a2e288ae8da402c8d061576cbb361e228599380090a25806b6a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "dtoa::f64::write"
+kappa = "af0dfc16d22873ac939e2d507e3c9d4ea2dd4b961ec2ef9f78d117d87f52f089"
+at = "Buffer=u32"
+embedded = "4d5b8985c6bf1ec4b734312ef1e2d1d7e3e24b02a37466bc2e48aed6d54f2b71"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "dtoa::f64::write::DiyFp::from"
+kappa = "c1c48d3ae4fba9e99aba456d227178a5a114cbde3e1b5e83c8f9a87c76c604b2"
+embedded = "fc508f4f2c5abb89c358a259556f5708b8961cab95476daaf8e73e134ac5a074"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::DiyFp::normalize"
+kappa = "84dd5610465a31a2d3557693012bc8ec1b2f7c0d1160bde9b902ec8149c23000"
+embedded = "dd5496562c2b72e50ce1b804e15cda4867562d4faf92b97dcbaa1d699ad1f829"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::DiyFp::normalize_boundary"
+kappa = "45d1c09b551bdeed53c607b9d41351e23e9cad22c188bb323c3787503bc277d1"
+embedded = "f5c4d552e1eb55c5c93a95c7017cf644b7f3a75742b053cef787d4fd2eef4d4f"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::DiyFp::normalized_boundaries"
+kappa = "7558d5fdd19b33d537ae4c3458060f09cc9fd8e08929301edafdade57208662f"
+embedded = "46c43a44ba3d3f49193bb2d9200d4042991ee8bdc0cf29b575d3ed1d4d0971bd"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::digit_gen"
+kappa = "d365af81ecf18c9ff61a2a1ddd9eb8262af1aa63bf0c67e5ac1b494569bd12dc"
+embedded = "f5ae1af1c039b2527f71db5e97abd8417289b609e75afe083c7c36cde121de9e"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::dtoa"
+kappa = "6d41169cd0c6c92f0f96201879526d849ca7515dc675ed22203df73c9c97047b"
+embedded = "cbb957ee143b9a7548afd96990b51645d709ffb3d20149fde3ae221db3f61e67"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "dtoa::f64::write::get_cached_power"
+kappa = "7e4575e9edb353379452966c99c1348c1e211b416996dd8bc56a66d6902cbed9"
+embedded = "cf98c2380acbdd93c4aed0a81d5b920cd3fedf89efb81c67ec1df64e8eb46b1d"
+status = "residue"
+cause = "mir::Ty: diyfp::DiyFp<u64, isize>"
+
+[[fn]]
+path = "dtoa::f64::write::grisu2"
+kappa = "7253725d0865e40a2adb683e98bc223fb3ffb4a308977237f0b620cb31361713"
+embedded = "0ef12d6e5cf878cd0282575c569302bab9366edc21f899d76c709a53c45b69ff"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "dtoa::f64::write::grisu_round"
+kappa = "eed7c2623d4160e1dbd004fd3baef80c032d5e09d607dedf246aed4c2cc92b7a"
+embedded = "5a29fbae6aada40f374a68b33a00c93d4d310e373914d477ffca2dc351aefed9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::offset"
+

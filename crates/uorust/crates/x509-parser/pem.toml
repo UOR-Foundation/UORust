@@ -1,0 +1,80 @@
+[[fn]]
+path = "x509-parser::parse_x509_pem"
+kappa = "d720c2ba228789ddad13787911017d463f651fbb34364e5eb2ff17ed52633915"
+embedded = "186a3d38b86216f8736136496ea57e60e829bdf8d0d7c4c986c0cdbf5f5093f7"
+status = "residue"
+cause = "mir::Ty: pem::Pem"
+
+[[fn]]
+path = "x509-parser::pem::<impl at src/pem.rs:67:10: 67:15>::clone"
+kappa = "67b947a5e10c7cc16b43e8f8b788a5cd4e86a185b8b77b959f411633f7d5d8e0"
+embedded = "4238477d99d0d2de07bf33aef5d42f576bd77be9609f6bf12b8424638a35a29d"
+status = "residue"
+cause = "mir::Ty: pem::Pem"
+
+[[fn]]
+path = "x509-parser::pem::<impl at src/pem.rs:67:17: 67:26>::eq"
+kappa = "565ebab44d9d31ed6dc1b17b2f423a4cb1358c4558e4a7b19f0341442bc10703"
+embedded = "42dcbb7a36c5f4f8f52a617567baab955987f88925787991c693841b6065c2a7"
+status = "residue"
+cause = "mir::Ty: Pem"
+
+[[fn]]
+path = "x509-parser::pem::<impl at src/pem.rs:67:28: 67:30>::assert_fields_are_eq"
+kappa = "06a0e07648e5f218ffaff4db9ba946476556ee3077048bb94ca3b836592e7226"
+embedded = "d0d29422dc926d826fb43eed6106a9bd2161b49af13cfb0757d5393fba66d2cf"
+status = "residue"
+cause = "mir::Ty: Pem"
+
+[[fn]]
+path = "x509-parser::pem::<impl at src/pem.rs:67:32: 67:37>::fmt"
+kappa = "5f9c84118c5419f3d6f034e1e6b033219edb6bf5b00a97436c3b79faa8e5489d"
+embedded = "42f20a29050c5a503d7b852c42edd711c4283168517466aa35a5ee6d935f2773"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "x509-parser::pem::Pem::iter_from_buffer"
+kappa = "d1ec2a59418b55e59c218f3f4d22b68f4d67fc2551f84f26da0574299c6519a2"
+embedded = "741a6aa3a9c3d2fc8fea5ec244ae155ed7b868c8680f61009a7dc5548eb0c48b"
+status = "residue"
+cause = "mir::Ty: std::io::Cursor<&[u8]>"
+
+[[fn]]
+path = "x509-parser::pem::Pem::iter_from_reader"
+kappa = "6f27b0ed48d9a00f35fc5af03bb09172d078d3a97d57e28a28a253ccceac5477"
+at = "R=u32"
+embedded = "9db0b5146cc45281a33372d29ab466d3b933f8622e011f3b58ddd068937189fc"
+status = "residue"
+cause = "mir::Ty: pem::PemIterator<u32>"
+
+[[fn]]
+path = "x509-parser::pem::Pem::parse_x509"
+kappa = "e79eb0e9c98aa5cd6acf502235a04dcd55e43294f7e48ad6dea2f8694035c3f9"
+embedded = "f13307f12639c6b8b453012ff3c1bd1258b74402e068bc3addc1e42ca3d55803"
+status = "residue"
+cause = "mir::Ty: certificate::X509Certificate<'_>"
+
+[[fn]]
+path = "x509-parser::pem::Pem::read"
+kappa = "892f99ee76abc3df336f0ff3131f82a9155f303bb2e51548c8b239d141f8de5d"
+at = "Seek=u32"
+embedded = "94523f62364f4092b5e3fb7a90066be902d88734eb5c760ec033fad2137e6d98"
+status = "residue"
+cause = "mir::Ty: pem::Pem"
+
+[[fn]]
+path = "x509-parser::pem::PemIterator::next"
+kappa = "c69abd4e89b58c180107efbb3c9c44ccd493fdee81be793cc12602c54e51a4d5"
+at = "R=u32"
+embedded = "f17c6ad181139ff0d7aa5054d4f2bfbc8fb60c9504f87a9f7f5cb4a5945b9d7a"
+status = "residue"
+cause = "mir::Ty: pem::Pem"
+
+[[fn]]
+path = "x509-parser::pem_to_der"
+kappa = "6f5f29e5ab15b86d2e7ffe3624138a4ffb7dbbbbd93642114a58292542203aba"
+embedded = "076bce5c44d1eda3c18b94bc656664353fc2d6bdbdbbb3a7c623da59c1718c77"
+status = "residue"
+cause = "mir::Ty: pem::Pem"
+

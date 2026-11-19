@@ -1,0 +1,674 @@
+[[fn]]
+path = "jni::char_from_java"
+kappa = "2b156b8e922ff31729cf8d886f1c4a3802f1ed6172590a194be2d68247e13d72"
+embedded = "1cfe9e20b136abb1668b5d81c8d63a35dadc5a63bf24805e9a94d26aaf3fcbab"
+status = "residue"
+cause = "mir::Ty: std::char::DecodeUtf16Error"
+
+[[fn]]
+path = "jni::char_from_java_int"
+kappa = "40ba06ed06d93630709df09a3aacf81b6b90f937eae4d71579ac23ba3495aadd"
+embedded = "7ee37db05327f5425694088a3a6181ee7f72534c41ed9ba53222003a52dcd1e7"
+status = "residue"
+cause = "mir::Ty: std::char::CharTryFromError"
+
+[[fn]]
+path = "jni::char_to_java"
+kappa = "0a43d687db790a2458b0f1ad557c1aa17c6b9e90d20a09cf7d180a4f322a1741"
+embedded = "f10ff1072ea6e505e8a0365038a066605807e1bd5e7422a5d35d69e4cb86de47"
+status = "residue"
+cause = "mir::Ty: errors::CharToJavaError"
+
+[[fn]]
+path = "jni::char_to_java_int"
+kappa = "517267289e51ca58c2b4623dde3d86583704ab126b0acefa3b3ab7935f477dee"
+embedded = "4b602641a6f6292a649b9b9325f315bdf7830853ede5980ea22b41e1145f5685"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "jni::jvalue::<impl at src/jvalue.rs:23:10: 23:15>::fmt"
+kappa = "e324b02248e9d552330c186c55fddd2653f3d5ff7a5b2dbbf44b3f0e5a115040"
+embedded = "77afd85ac4356526c136dd4e36393b0a58effe8e016a32abd957c7fd39a768a7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::jvalue::<impl at src/jvalue.rs:47:10: 47:15>::clone"
+kappa = "8e5e2d3aab35c269898521ab135acc716d57a2a431ebc5c36efae3ae4e8f57d3"
+embedded = "4419bc8da085129f51a6be0ada3b11f4e0ba7f472a11717995ca96715b9efeeb"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::<impl at src/jvalue.rs:47:23: 47:28>::fmt"
+kappa = "fb869f7823aa83f702d8f08430e8eb79a22702c49b3eb9e580fa3aaa30eb032c"
+embedded = "c3495290a14135bfcc7fc1c51a98e662873266cace3a905fbe01f63695199da3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::jvalue::<impl at src/jvalue.rs:914:1: 914:37>::try_from"
+kappa = "c69c4f520ed7de3375e0473542362499954c3aaa85e305a845949f9e92e55de2"
+embedded = "7afc1836ef86db8be87f6caa4720405498553a564734ad0f0801d89e820eb21d"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::<impl at src/jvalue.rs:928:1: 928:32>::try_from"
+kappa = "708eca2d01114d113ac809772e39512da1b3f0f2afdc0459140b10c74f7815bd"
+embedded = "9e1a6e48b13788a533adcffe2e2b70ca599358642257e50dd99992733ac8756a"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JObject::try_from"
+kappa = "ee422aecf66947485a6d0d07c7a5b3e6aab58d5560e352e07725c03c33bdc9b0"
+embedded = "742a7cac12703c41a5b9dd2a23e575637fb231dca5391db9682a74ebd3f2e8a9"
+status = "residue"
+cause = "mir::Ty: objects::jobject::JObject<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::as_jni"
+kappa = "7fa54c707b7034b9e7bebc16abf757f5adc6441c6f44583ad3118f1f5d99815e"
+embedded = "19c9fc83034747e5ba715313de99dca95142690e5b676097fda30d20fab13b46"
+status = "residue"
+cause = "mir::Ty: jni_sys::jvalue"
+
+[[fn]]
+path = "jni::jvalue::JValue::b"
+kappa = "a4e83b0a463c3a2072c2fd4d3595c4213735c15cc09925ee7be4437d2aaaec74"
+embedded = "50b4c63009db2ae86f87c8b28fde23dad0f5019af5ed9a352344d3479a36ddc9"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::c"
+kappa = "36e20648d0cd04959adec603993885a9dfd530eb9f05aad0e7de3b1ff3cecbcc"
+embedded = "5064044ff57cb1562babbb7966a3d4c863d710ea15e2070c7ad4b03be63f7615"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::c_char"
+kappa = "e126ea0cafc04af89e1a858334f6a67de4284e8f192b330233991365fbf0e984"
+embedded = "255b46a28edb09e441cd077bb39353f87f5419b6f9cc9fe691e28d6c50a69d83"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::d"
+kappa = "c8059cf04dfe492a52478ef648cb38a79ddcba802e27ae83772fe59201a7776c"
+embedded = "90906859a5fbc96dafd80821a4007fba80200d197f6fa03c133a2835196a1e4b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "jni::jvalue::JValue::f"
+kappa = "7f87e0d34f296d2b5a618d8b795ece026d29b54eb81a27d861936de46b0ce745"
+embedded = "3784601f0c91f3599973459884266bdfa1dff53576c2b156e5d0d800fb0deaa4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "jni::jvalue::JValue::from"
+kappa = "6b848bcfecfacbde7c4c84c2d2fcd385fd501bd2d2758f05360eb60f1650b011"
+embedded = "523b846e150009318a93be7bc86adcddbe83080939a57a69a1565b67c7329d3f"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#10"
+kappa = "fce4e13563aff0f7b266d1b804b41581b5c36127852eb92203c06c97de3cbd2e"
+at = "T=u32"
+embedded = "d3edaa37317c9f4f15375899bdaf2509b4aeecdab1a0065bfee1155b2507822d"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#11"
+kappa = "ed895a4166340dd0939adced4389de591d370e70f86a332127a09a39891700f8"
+embedded = "2f57fb5b77ce1510a0eeea07d3d37aa5a1686b56549229c9eb7139220bf5e1e7"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#2"
+kappa = "b8fcfce0a85461b89015d78a1da6b443647d8ca7290e027a7597e48cf468f97c"
+embedded = "8cbcbd4dca763882fd675e73549d2166e1060d89d3715a0aa257fbe79c94c2fe"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#3"
+kappa = "38746d4c1cbb0f964db53039018d64ab48c22234c64272411f69e39e92d000ec"
+embedded = "a5e311c8b8d4a2ac88939730ba3d207c564aa16b490da34c98c7004f19917004"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#4"
+kappa = "14095e7e636573b5465a0ca6a5502c206ac7317d9e65f0ff465a0ae3b1414f6b"
+embedded = "b2e48bc265e1f53f8fb511d8ff1d4344dd3c5cb179e4312e5626ab024509ea87"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#5"
+kappa = "2af9a0fe6f1b2ab042e19917f0c5eabc12f5c7fff82a4cf32265e91c5e7f9354"
+embedded = "964a8df3ea1eeaa5a4a203b54835c7f60f49c9d1c364f2ea8951be13399c0ac2"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#6"
+kappa = "f601924f326453b0027f5657b49a8c5b2f00906e43f198e533a0c602cf316a0c"
+embedded = "59c8da445df25733efaaf3e005615c5172c68591ae839961035f17cd318a73c0"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#7"
+kappa = "803964c6cb90b797d352db716e580928cf12b849cc44f76dc96eb76a39716a60"
+embedded = "859e1542706cecca4e4d11805055bdd44eeddd553ab9cfeda841d6b4c62d963d"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#8"
+kappa = "5ef169d25e7dc822b87b520a86ce1ea32b962914bfe71eef833e0c044d0dea29"
+embedded = "e39ba629f5f15b60ed68dabb16924236e46d40c733089842c6dcc6f37b367d1d"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::from#9"
+kappa = "d1db26f5fc44af5185d6a327894421a8411d2aabb601793c7eddf44050b0c781"
+embedded = "3fe5dae7e75a456386b2ae81514330fb8432fee3845c92ea04a651fc4cb781ce"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::i"
+kappa = "704ba2e5f8abaf492e8cfee33b200b298a95fad67ff02f50c3ead763d275d126"
+embedded = "d12ca7c23e567a3d814619230de0c4e203107972a4ad7f9c42c3f61479846c06"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::i_char"
+kappa = "0e7db400b6e50468433832bd65256116f0261a4ded664557c65d1f5d779919ee"
+embedded = "e17a2e76f7b44859b35de9dd12ae5c015c01ea4c5f2ff2bc064ea9a838e60d31"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::int_from_char"
+kappa = "bf5e3a281b86f1d142c6f53d75cf30163260ed69a88757c1a55f58d2bbd4e788"
+embedded = "e849e43ba3b9c05d549d330413e5068be1e05d43829428d13a38dee9f5e0d347"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::j"
+kappa = "1798062c1874b42fe28560ec282562cede7c65c5d05029fee9f5a270262bb042"
+embedded = "c47dea591894c6eb14f279f75034badd325d86f8a78bac458afa4d0b5426d2dc"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::java_type"
+kappa = "257f4b48291d57f16beae0741dfc385cda3a8a058563e81a72466a37f61478d9"
+embedded = "304825ca500e10e967afe236f4e6406bb5368bbb65ac69ad47e0e3792faed8b8"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::jvalue::JValue::l"
+kappa = "7fdf1e867abc23800782b93b5b64ddb62381378dacf81909c8189ee9f0a67a58"
+embedded = "d4a6713b93e4b832e7df46af88d9c23e7a1057261f738f5e3ebd18e7a2f4f8a2"
+status = "residue"
+cause = "mir::Ty: objects::jobject::JObject<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::primitive_type"
+kappa = "9fba7b404a483cefe4faa9b9f232a94a90818b36db9d40ef63bba4740da8f02d"
+embedded = "58a7cc38933c2420522e5860c1c321c8e1e4d6018c1a82b96032761fa8b85dc5"
+status = "residue"
+cause = "mir::Ty: signature::Primitive"
+
+[[fn]]
+path = "jni::jvalue::JValue::s"
+kappa = "79de5071968fdba44dcfd6d3acfe5dca3093818c36c53df3276ee53bcd48cf4d"
+embedded = "fbdb96eaca8e85bf8175f77e5894761f7180db0c85e8d3fb23137117dad238c6"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::to_jni"
+kappa = "115e3c5841d85da2dc90b89ab4b1e9fc3944354caa085153a0bec4d243303892"
+embedded = "557415364acce913b7baa2f0bba723e159cfaa4a6b0d62d6b3e383b484c78eae"
+status = "residue"
+cause = "mir::Ty: jni_sys::jvalue"
+
+[[fn]]
+path = "jni::jvalue::JValue::try_from"
+kappa = "b375add870fc82aac30c12f65de6c3367d5155ae720f4d14e1f44d980b1b24c0"
+embedded = "224257d697bc7117dd17994866c17a8b1409c5d9328e9047f9b29fa4774288d1"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::type_name"
+kappa = "7e5fa55ce2a94f89f9d664dc25d0480e6d48e3fafd4258c6356546d12194e594"
+embedded = "6de688384b4a88ba0d549b2beacf3a4dac1a85239a76a59d3bd3bd87af34fcaf"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValue::v"
+kappa = "261965a3f6f96db1ea6b3f7d02ad20c69fcb77835f8dbd804022dffcc951f4bf"
+embedded = "7f143f29b40ef4c8edc5fb52153aec688aff8f926276d09d39fb548c615a16df"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValue::z"
+kappa = "3ee6d334ea20792f307775370f959f0deb685c5549c7478cf0bdab0d208e2700"
+embedded = "01f1cfec69db47523760b589e31a00bc274fd0b80b656c208f5a76ce7418f240"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::as_jni"
+kappa = "11af13378248e8e8d3ffa76aacb0ab6c42a15affc1c8d9bfd23629c30fa66e46"
+embedded = "f516e9bbd3400c6771c6f26e183cd1aa33b1b54e0866b3597fd9db61edf8fd72"
+status = "residue"
+cause = "mir::Ty: jni_sys::jvalue"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::b"
+kappa = "e951ae52a46567b527beb15ee5103e0a5454be23ae14d60995ce2420aa0ec5f4"
+embedded = "2e60e20296e9a183d567297975221ab38cec1f0296693527ae2704b1221413a0"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::borrow"
+kappa = "ebd631d0179af4f1f2940b6c2e5c5bfdd36137bef74362e034d6440fa74cce29"
+embedded = "38e6bdba6466c00d74c7ab769660ba01226527268e73e67389daf24c932a657c"
+status = "residue"
+cause = "mir::Ty: jvalue::JValue<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::c"
+kappa = "4c4f2d98b54f681ae6e06d2c425226e51fbaae236529ee57aab4c56df114ff69"
+embedded = "75ee239c52ca005c0a748efcb56c8c45f0fbd496385055714adac41104a6cf67"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::c_char"
+kappa = "0652b14ac8ba7f3db943dbc57fec16533cb41864aedc23f3305471c855f6a680"
+embedded = "5bcec6c6951a5dad1d1487f03fbfe8d9899919701dc584e3d7243465d029e0ec"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::check_null"
+kappa = "b0d899d5df6094aa998209ce906ecabfedbbb0a8c133166b997f5daa37b149c9"
+embedded = "55a0d1a3f02a689b1ad55cb2f83dd747ff8c678c51b290a3c927677b82750150"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::d"
+kappa = "65f03bc18656eaed2387d6cd3c6ad224b594542c29a27a2da3f156c2811d9cbd"
+embedded = "7e741ae4b907904227fe7141ea29bef0f01e430922b272f246562d1108e68b95"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::f"
+kappa = "eb54fdaf30c4c103e66a90687f2c76ace6d9884710ef9d1a80a99ee65ce86a43"
+embedded = "45be4f59c2708f807aa42711a3f918838d6b95d3de36fae72fe707e1c4998789"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from"
+kappa = "8e1ced95296d6dd85dd9d257032bb26583f3fb471c03a83877bc915c3012e517"
+embedded = "9fcdfd4ca89811c85b8ec2dae99f74086485719782df0ba30c5c99cb31f65a62"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#10"
+kappa = "ac7d82ae76a1104edf917dad00c2618a1002f243ca75a747c97a928befae0f8b"
+embedded = "54150414046f855a126e0013943171088f4da02e9ff4758f4bc9f208a9166e6c"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#2"
+kappa = "6050e58b12b679bcf37934149f44b1c2b806067c6a8c4961d34f438e8a5c516f"
+embedded = "00c2f8a60691441e7bd4b787e4033c91c1208072926bf491a839861565c41d18"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#3"
+kappa = "eedd2903d559beb19765cd8116748ed3110a4e84aaf4b1683bc87b1d66772fc1"
+embedded = "e979a30409bcf05723102658c81feeedee47c9db305ec368bd7e6e7756d65091"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#4"
+kappa = "988dc45570e75de929367e0901f53a38eb04cbf53370e6f7db9a21b1d7de5ef5"
+embedded = "8b2b12f347face7c73788b13cdae2c9f259b9b0b80d92f26d9724ea33f4fd23d"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#5"
+kappa = "26ca82f9713a32326e43cdc2fd5cfad832b58c8808d21a4ba6512930a2a533a1"
+embedded = "9a75121002e8930aff5cbdc0a972d9b1efd461094cf5f672e2ae08160530ee1c"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#6"
+kappa = "4d751dc38a225bb7f86a5561c4aec7904fa11eb275da81807250c85aecafcafc"
+embedded = "17573b4cce675c8e6904c0c73e10203c880c1a54effbaef372556b881dff7f42"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#7"
+kappa = "4608319255eaf5d086d390376d2f160d7ff33c79a12d0f11f2eb8c6f7e449d58"
+embedded = "a017214171af408ec73efbee56c963809b15c6fc19aed9f3beb8c152618acef3"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#8"
+kappa = "5f4c310a001f982503df8d34d3f994c8bde06b95a73e3131b216ee944a8c57b2"
+at = "T=u32"
+embedded = "9eefe1c0da13be11c3d2606d54a8cd9cc8942c57a4c8010ad2d16d8351f39642"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::from#9"
+kappa = "4dd1797474a09567e577c6b6ad1899aea89dfdbf0a46736dfe3b1fcc3be8b380"
+embedded = "0f8d9e4ebc70ee432ec25694d87330e637f1aab10a7a481784b5586d3ca5650e"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::i"
+kappa = "00828a39c6e62765db9c120e8288af076c6451cf85d2ae171f293af88a65e94b"
+embedded = "280324b55e257e44c73c9d08790b5a9be9ea566d7a0cc929b527245d5df9b2fc"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::i_char"
+kappa = "e1cb22424da910e3fd6fe609c934cd97f80eb1331a30f8dc9f38ad0ed6976e92"
+embedded = "66fe5ff76e130ad3f5e2b94af4bf408a9513e2da27416b866d6db9edac1c61aa"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::i_into_char"
+kappa = "dfc607f22db8b99085706a0fa8e5fd50d373d0c9c99994d2f9e3d4ec13cd4da5"
+embedded = "757af0f5ab6ae188d51be3679705f4591087138ef2f94add6d1241524b32a244"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_bool"
+kappa = "4a8ec2d30e0d09986370af8e7e26595f98ba0b62f596663dfa8818b20409af80"
+embedded = "2beb2590fd308021579555325387022e4c15c8625effa61769d298496c32699c"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_byte"
+kappa = "ff03450ba0d097cc3924f4d5a0e81ecdda1f0615b97150232d49ecbab44a0db1"
+embedded = "8526e69a3838f0de275858eaa55a10d3b7200b2b4435cd1c337ce1d6b7e8fa17"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_char"
+kappa = "1bf17b7630194aebfe1aafb1215537499f96ee692b75506a94939fad21705bf0"
+embedded = "e60498014acd0df68b3e56e3309c651286f77d667bd210b73d257cc4f90d7bbb"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_double"
+kappa = "0f727741dc1303af9bdc46c408ea3b0525f28066053b20bbc56ba115e681435b"
+embedded = "4d0d5acf6a203716a1c4a31355b10101cfdd61cdda2595fc02ed512161db86c9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_float"
+kappa = "7bc4d42df84491f04e507b0c99cb6ce618b4f14cebe484b03abcc073e3c96ead"
+embedded = "7bbe08616bcacb027648077dd9453637f2511147cb0327bd1e97ef505ca709fe"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_int"
+kappa = "84f740b095fa1c536feb39298b03ebb7f4793d0eedab39795594e54537a1ae37"
+embedded = "98e029c4af5cd269dae36f65a2ded8436c1395809b21e268c2e64c71664c3cdd"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_long"
+kappa = "303635264601e6e7effcf292209c89b3a5b40d5d1e591419e1cc9a30949d4361"
+embedded = "0d61cbb2f2fe11b4e7d89be14881951669233c57c34c8c32d5017810e5aabf93"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_object"
+kappa = "fd1dec4eeea7a7abeef4d550df7adaf5fdb44bc6e3f17b120a517461956dc128"
+embedded = "dd2bfde91b3da8c78ded034cd7f03b0c329dbad6d21c27bab185b515340ac898"
+status = "residue"
+cause = "mir::Ty: objects::jobject::JObject<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_short"
+kappa = "33a88b648fc9202d2bddfbb888548eba9f9f1b9854ee9ff3b18b9f5c47761df1"
+embedded = "de62439257cc943037fd0c69d41f7ebfcee7f34eb21e675ab00239760aa712c8"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::into_void"
+kappa = "c5af58548e5f9afd8701bf9692d16a30ba1dc6f43ef2a35316ccd0e5bc41e907"
+embedded = "94e628cb6109a3c3fd19a40a43e142b5ab2d466a13eaa4515ed0f4a1a65f9d36"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::is_null"
+kappa = "3288d548984e4c3fcd646fc38b9ce63ca6024f5c83170b19372512814ba3eb76"
+embedded = "d84a9267d33c151079a6355660c2c8bed79072c34cc52ae80ab3aceee9d02249"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::j"
+kappa = "0b5844d97162fec97e9ed0b47c1048456dd24542e677376addae8f9a24940862"
+embedded = "a8d208b8dd59f2d82302048a1550c2e520132da08f1c62846d4cf271bca8d4b4"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::l"
+kappa = "b136de64ba5e2ae338be7c0b5d497d96596505d887eee1eb9f8002aba94a9ab2"
+embedded = "5db089b92e628796fb40d9ae0dd1873698656625921032ca11d9c21e69a18291"
+status = "residue"
+cause = "mir::Ty: objects::jobject::JObject<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::primitive_type"
+kappa = "af7180409cf86ba556be500617b10a09f53c495e4743eb481e86292a0a029019"
+embedded = "5c1a3c97fc99f67ee0a490fce38404a24a6dfb351537db2b8e08c8c07ec2ef7e"
+status = "residue"
+cause = "mir::Ty: signature::Primitive"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::s"
+kappa = "81d32c88e971d72efe80bc067fcd925b4364984a3eae883ababd5eee313b4da2"
+embedded = "886995f673b6f34c63b3cf9727c0edf1e155e4064c616431536b2ac1764f0a44"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::try_from"
+kappa = "0f79aa236d89bc86814c47da95fbce4a0cb96d867e1f053bb0dd431a6f271c70"
+embedded = "02a7756ee82c489b02fda269c2318761c7c0ee56301158a552828c9a4ada91d1"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::type_name"
+kappa = "17bd76b8e9c52c370e0172cef54301da80735d23ce2326246df0558a5300ef3c"
+embedded = "07d9985baa170b161e80788f6b7d6cc427c9ff8d246188a6865ee4611b6ce9cb"
+status = "residue"
+cause = "mir::Ty: jvalue::JValueOwned<'_>"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::v"
+kappa = "b69e5fd6c855b7dd8ca98b8f438a701a9df4ae0b6ff27eac7f587f3d3f4dc4ff"
+embedded = "132c02f7fe2ad678ba8b7d2e355c997cc491528e567295621a370e170ac013a4"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::JValueOwned::z"
+kappa = "7e972928f97cae6a8509b3608c8a969c0572123a5d1451ec3e8be8b00d8c9869"
+embedded = "3b817f0e761a1584cb7bb64ec7a560bd3361d6e0ea0fd1b94064ef5bb6c23812"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jboolean::try_from"
+kappa = "b837cb36ab97f9af63e13479ef38d52eeb0affac7509350707bb964ba2f6608d"
+embedded = "599b083b26281045ccc42d1a0c30f8393c7e8e7970394308178343fb832d7224"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jboolean::try_from#2"
+kappa = "dec556e226442325ad55625b29acd5ba111d32f265e983a1bf957166be9ef08e"
+embedded = "fee12a6633c32cc490fe3d876c6936581c9b581d831629fdd719c9b528be66e1"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jbyte::try_from"
+kappa = "f89af952e6ce4632151799d27d5c912f2e08997c77b970f4d947e0bb1a399e65"
+embedded = "6cdf08a3eb8bd2fd2626593e930db642160e5c5f1f7b251ca41170ba3026f175"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jbyte::try_from#2"
+kappa = "a27035cf89c93aa784816a5067bf0ba9f81944247d6d46baab1173960560e661"
+embedded = "44433c6afe3824c4500d691e4b3f950987a63d82e8e2f7c74dbee9adca6d0e3b"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jchar::try_from"
+kappa = "ed17d464e3fd2774f2063879206ea839d25776bfa191dc62a114f82ed46075b8"
+embedded = "c1305973d44393f3aa63fdf53628b7d784c0a7e7c22223a212489ee5fca8008d"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jchar::try_from#2"
+kappa = "f095e8f6d3cac6f34b7045f761cf0e45d4637db6cd6db427d64f1792ee5963d6"
+embedded = "d3bb9cc52f37b8112bb6e8091e8faca8d0025db36331401f11484d8c24c18a44"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jdouble::try_from"
+kappa = "fb46d363787078e49563bb19f06284ab795bf562183cb377c9b54bdca996598b"
+embedded = "cfdc46531d51e2e39383b5cc839d6898c09ad90b7aba72031ed840268bd70d5c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "jni::jvalue::jdouble::try_from#2"
+kappa = "8b0f889b7a8c3dcd3a47d3f75a6d8748486bbfc004fa3f74d3b4f76438394e97"
+embedded = "9314be7b20168c3c17b5c63d4708ce2d89ff6e22bf03427a38dd65aabee8400f"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "jni::jvalue::jfloat::try_from"
+kappa = "6bb5375cc1a787bd8ba216cfdf128b1378d2acdf5ebf5dc4870a667ac8fe0f00"
+embedded = "b07f44a159cd4ae688fd58c3243aae4d2c135af9f35d04863c1b849bb3784525"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "jni::jvalue::jfloat::try_from#2"
+kappa = "3d35be097285bc49c0f35b5eae84152e940ae8ddcdcae7d2a0ad6d9fbe51850f"
+embedded = "d033460a2e9bec77ed99099dfa2a52772cfea22f504849e9c7f5374244edf8bc"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "jni::jvalue::jint::try_from"
+kappa = "0b7fd38092e4fdf85f2c76e34178c1ae185d720c7d2e48ee3d03a2b57fdacfab"
+embedded = "d1b42198f582a91587671f1e5c36cc05fbf91569380f9fbcade237c23fcd0d41"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jint::try_from#2"
+kappa = "86f99b8449108a5cd195ae409334d068a8e1782265e5c4ba6bb8a07cb4b37f3d"
+embedded = "a611d2299eeec46308716097de2c1470f1b9422aa790eff130228df75cf2d053"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jlong::try_from"
+kappa = "ce14a509aa31b24743eee7f3b194c68442e7fbb6a8e101b6649c6b19136bbf0b"
+embedded = "4196c6aa79f77bd7441b93d62157e19d422711c808fcc33bf6c85baff60a27ed"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jlong::try_from#2"
+kappa = "94de5ce5c4f56043479c2b43be132c7dce8b8634159bae04cace611b33f0b54e"
+embedded = "0b6d8d52585b5dca98b1049ce5e4131375cf9fc3a2f076c0089b6091d29ebce4"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jshort::try_from"
+kappa = "c4c97c8fbd2f383d07ab722615294b41fd37d4ce53fb3efede656e5530506d33"
+embedded = "6b173338680f496258614153ac38c5cc35a21970113cd9661817dbcf84f398ec"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jni::jvalue::jshort::try_from#2"
+kappa = "d3499ae6e648e81e971e9f183dbfd2d95e4dfd89fb49ebabf65e3b8d02afad04"
+embedded = "268966988d0652c1eb386d2eef29095299573d15e6d6b3f168312af95410f1da"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+

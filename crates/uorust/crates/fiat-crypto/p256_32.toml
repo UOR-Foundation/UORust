@@ -1,0 +1,219 @@
+[[fn]]
+path = "fiat-crypto::fiat_p256_addcarryx_u32"
+kappa = "d74c1c302479bf414dfc8e608d721c5cc3cbcf1d7753d930dc43cda00bdc2433"
+embedded = "31f27088739aada6622de6bf50c7941f6426abb9a54d0b7801db00f811b9d0e1"
+status = "translated"
+digest = "07d4d278149a74023fd7a00db8fc25cdb137ca43977fd2c04ca0d07ffe1a9bed"
+
+[[fn]]
+path = "fiat-crypto::fiat_p256_cmovznz_u32"
+kappa = "581e90bb7e49f8db7704240f75a17e0ba9841e79abfb04a49ff047677c099077"
+embedded = "5a014c62a9a205ea009ea6027a715fb9ae61d42580ba653e88957483574ef7f4"
+status = "translated"
+digest = "5612bd42eb264781d632e5b1ab76343f51f5311c2270af846613da6edc4d8e21"
+
+[[fn]]
+path = "fiat-crypto::fiat_p256_mulx_u32"
+kappa = "69f6833f47d5799f2146e5b952635ed351c18fb0d056dbfcbd0c245387558f39"
+embedded = "39f254c20b53fdf979729bf3f01b731dd84f93be5d4259ff493823901715dc8d"
+status = "translated"
+digest = "190873db75b5902bc805eb873f5239b8cc9d665918aac8f727a6c81e2e2c04c2"
+
+[[fn]]
+path = "fiat-crypto::fiat_p256_subborrowx_u32"
+kappa = "e8ac2aadfc24275a586250899281419bbb5ae77d296db710e1c7396c45a063e6"
+embedded = "df4db6a0b7d74e6869f30e753e1c9e02bd5d0186e52f35e657045ff3bb68944e"
+status = "translated"
+digest = "497db6d0d868bcc78d1925d3395d8d51f9f0416ee23d3413052e8fe369413010"
+
+[[fn]]
+path = "fiat-crypto::p256_32::<impl at src/p256_32.rs:54:10: 54:15>::clone"
+kappa = "9fb50994424c26ee20941f9056c7073ab03981391eb6313475e62d73ab179ffa"
+embedded = "5b5f531e1a1c533984da9e5c49704b2e5acde9ea4828643f95b2d6b476db6195"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::<impl at src/p256_32.rs:90:10: 90:15>::clone"
+kappa = "89e6c2cfa61c7377400429e75e49c03f7037652036cf5206a1eedab37f592cbe"
+embedded = "4715d0c9d0b5fd789d313a56f15acab4ffd89ce9d774ac7a8001298ed612aaa8"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index"
+kappa = "a52fceeb332cce77d72cc1f0138a187026e58ecfa2b8f577dff4ec81d8735af4"
+at = "N=#usize_N, T=u32"
+embedded = "c35f98359881a9e50ffbd0a85eadcd0c3ea796f024f439c2c2cc6bbb84e1ef3b"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index#2"
+kappa = "2d1ea2777a29551bf3986175c9efb1cc2ba13fd19ecc02693e41b5681ca729c7"
+embedded = "ab80cfb4a4e3d6b06d19c5d1dbfe8d142c28f1017c0e3eff281fe6a9a55d18ae"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index#3"
+kappa = "ec8c73b885817a9946e9e44d7176fdd40f72f572c18cd86efb773bf84bcd434b"
+embedded = "62646606d7f48ef5ff1ce98948ff01095e2a45b730c7f56de9c23da21c98e42a"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index_mut"
+kappa = "0d2193c06f14c2d123e92f1f7449e26f1b390e124cb4c24a2eb42ebdbb4931e0"
+at = "N=#usize_N, T=u32"
+embedded = "1c1d0d084b0fb574c5e71cdc2bc729a730b8064544a810fa3ee76f898e17f381"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index_mut#2"
+kappa = "e3a985b304acc06a5fab7a308e86dc43d7161d6404a1b99a56172feca0bb9869"
+embedded = "aa38bcdac7f90fb8a8c8bb16f9a87364bdf795d6baeb8ead38387341da7b9f76"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::IndexConst::index_mut#3"
+kappa = "47bc08492e73f667dd193c3250b092fb1d2b5cfac814b260fd9fed756d5d84aa"
+embedded = "a43070ee90c8e85e23e0bb7f75cd8ef02d24bdc5fdd5de58f87d9b7836850afe"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_add"
+kappa = "c6033d9845a47814289c8e4eb1cec60692caf4b27a533bab9e732f2faaae3453"
+embedded = "8f0ff70246fb40f0017fd580fcd2b1e08b9c136a61b7efdf71998089cce74dec"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_divstep"
+kappa = "812bd81124dea0adffc1b9db7f2255089bb7b2266d463593836d0e923153f5bc"
+embedded = "dd3c825671a2702fb5867d920d09e491b3be5a354f50978dd08bf9e6f50834a2"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 9]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_divstep_precomp"
+kappa = "988f80093b6df726626a31f103ab2d07118840f9bb3d1dffecde286f623d7b9e"
+embedded = "6a99da6cf9c2ed59d5c47800126d3a2786df0542f346c4291eba3dfd9ac51b7f"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_from_bytes"
+kappa = "5529f2c030fe8e29c66db8a687c1bd1d48e967779efb3fb55753c3dcd9b4dfc2"
+embedded = "7f53bd505800db4124efef9d54759c912d660549f0b9528f2f86a37742b84a0b"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u8; 32]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_from_montgomery"
+kappa = "4686f4cf7f2aad4852a230a3da0031de0f5d9f5058dbd0148d93918fea464f74"
+embedded = "c0efc5df317f1ff6f63e41a3233dda0bc7aaa404e29eda8af94dcf284669b300"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_montgomery_domain_field_element::index"
+kappa = "84765fcb49771ebdd8e930dd63d7d725c2cbb74abef46b10f8fdc8e1eff41943"
+embedded = "d8f0622bfcb5fb52dd967188d62e19e34b93acd5153935c64bf0ff599e062a21"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_montgomery_domain_field_element::index_mut"
+kappa = "d09de8784426871bd0030f3c548fb2babd497f2399d4deaf8fe49fe185685792"
+embedded = "a3de5cc9672fadb361bbce55316f27a0602b75c092403696944da88557816689"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_msat"
+kappa = "72bb82b23158f0d17b4e92b3361f04be1c4cc3d645a504ac0384eb8c3bd78c9b"
+embedded = "5d834716afa9d7850070cd81362e14297c64a810bbc527474efaf6b90b5327e5"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; 9]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_mul"
+kappa = "7b4143419540d617172170ce11178398c0d5ae56e1c90a631968594b92000c39"
+embedded = "cd5255b30b5c2b0506dd4c6263b3497a776700f8bfb06dac465687e0520073d6"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_non_montgomery_domain_field_element::index"
+kappa = "f8a852c890320a232c6b4dc123742734cfdb14d5b76a71fda954b1d139f87a94"
+embedded = "c78bad84c38c94d23b7b31bb5b5efb893fc8b0858a6b69ae9a4ccf1794f2545a"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_non_montgomery_domain_field_element::index_mut"
+kappa = "ba436702226688d846b381fd36d87ca904c289cda97d38311b28e847fe4002c5"
+embedded = "2c55d3cb651dc1c62d2b52e3b15d20d26567bfa501049877a05a70c5fc63fa57"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_nonzero"
+kappa = "e45ffa58e643bada2dd0080956554931313be4724bb4274af0a114723f11e8a1"
+embedded = "cfe43b6aa9700d56bb173c23097e8d6e2ade24a1db0959296d080bc33fdafdae"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_opp"
+kappa = "c52e2d3acab28439d63376a3dcde27864f7aa11b61afba7f522f007d217913a1"
+embedded = "b1742a1afe84185ed8efcf6595e435638b83a90301f9a967003eb394058e4bb0"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_selectznz"
+kappa = "8876498e773ef31edc54015e47d758220cc33a3fd70fd361951061123384fef5"
+embedded = "dd21f9b3d47e0c965042e40ce1d004a0c3c0ae824839e71994a315bf54ef3fba"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_set_one"
+kappa = "11f273b2f5c82e500ef9eed8b18dae0999ad32ba9d0324949c4bcc9278b4bb29"
+embedded = "784ef5892ad50deb4c87e5c3c48d1dbeffa55d758e65369d208603dd17af9219"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_square"
+kappa = "e4baa4bbb291917fcebb5b70e68b60cd2c49bdcb231dc48755bb2222a348f6e8"
+embedded = "0d128c6bc52b5b083ba2d52f89be82ef56bdafda5b4ce21c04bd795993eebdaa"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_sub"
+kappa = "8b3e9223e8a0e10675c027e66a42db67e2a59eab83605b34f996eb814f3671fd"
+embedded = "8ff7b3002d8762265bfecac78633cf2c4bf1cfb2aafb0268d16fcca5ca864738"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_to_bytes"
+kappa = "3e0e8e07be38658c70b4b8a664098e26e7accd59ff8f1168373db9828e47dfec"
+embedded = "d046a9b3264ad72a6d2a41b1cb48c6c63b97ef64e72492617377dee947b04ace"
+status = "residue"
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::p256_32::fiat_p256_to_montgomery"
+kappa = "e9aa5bcefe43b0f74f4cc2613979e9fee81746f48dce21143169e168d2db787e"
+embedded = "6354bcb4506dcd92e455ef590790b0d9e9d56fb58dc45a69ba9be40fab7a6c61"
+status = "residue"
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+

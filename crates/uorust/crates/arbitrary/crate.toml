@@ -1,0 +1,45 @@
+[[fn]]
+path = "arbitrary::<impl at src/lib.rs:42:10: 42:15>::fmt"
+kappa = "61a3151f763e532e42a274721a225ecb83fab08e23067660d0a193cd11a9642e"
+embedded = "b84e7a6883434cb0922914ae25181df37e6d0e32d1fe53a8c45d819fdecc6d2e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "arbitrary::<impl at src/lib.rs:42:17: 42:22>::clone"
+kappa = "04744d1368de07a9c4f2f1b906f988afe43ace4a3e619f5e5e4981b2a1c119fa"
+at = "MaxRecursionReached=u32"
+embedded = "3ce5e52bce21b49f8cf5c86297cce29c905050dcb39d47559fb22014c1083266"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "arbitrary::Arbitrary::arbitrary_take_rest"
+kappa = "828ab655c4d078bc83c022a3d7b70cbd49f237c05496c6381cc6e5cce1d13645"
+at = "Self=u32"
+embedded = "304eb9c39e22a0d3be2a667e34c0d46d8af370a10a20b8b6a89b95ffe3dec5ca"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "arbitrary::Arbitrary::size_hint"
+kappa = "389a0fd00d43c4ccbc49d85b2635951159e6a09c855b6b60499dc2cd423c0eb9"
+embedded = "ce5d2d0a56e75efebb89920942471ddf58f261f964a033624c11ae4e8b293c79"
+status = "translated"
+digest = "dc4b880f1e889a776e51c9e56059857c362a909378abd809c301c288be238594"
+
+[[fn]]
+path = "arbitrary::Arbitrary::try_size_hint"
+kappa = "1ea141c1566798212ab523d0f82601f608803fd6ed50911677765fddb2ee0cbd"
+at = "MaxRecursionReached=u32"
+embedded = "8e58f4dd858fcb6c431a6bd0bd4c03686bf40e9887250e6d0f7b460c62b60db1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as Arbitrary>::size_hint"
+
+[[fn]]
+path = "arbitrary::MaxRecursionReached::fmt"
+kappa = "6779e888d181962847d5924ced0397085874aebc60ba63d6d8b7bfb3d8b0ffb1"
+embedded = "728110c5c9bbeb066b0883a52fb4d3ce67112e1aedf66144ff978e862558a904"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+

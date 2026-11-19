@@ -1,0 +1,45 @@
+[[fn]]
+path = "aws-types::apply_request_id"
+kappa = "d386c36977628773c44d98d2d9ea070589a16ce695d32bede2dda56a4a9da4f3"
+embedded = "120de18b74cedef49e13ba9fe0711f204862305c7b2c5efda4ea059ce4657e3d"
+status = "residue"
+cause = "mir::Ty: aws_smithy_types::error::metadata::Builder"
+
+[[fn]]
+path = "aws-types::request_id::ErrorMetadata::request_id"
+kappa = "bc3d663e3ae856b37f7706e79ce322eab014b46a06a909322fc1ed9b63573ee6"
+embedded = "17e4dddf7e65ae2c30aa099c5796bf605ce75cfbb3ec8bbdea918c402d65fd5a"
+status = "residue"
+cause = "mir::Ty: ErrorMetadata"
+
+[[fn]]
+path = "aws-types::request_id::Headers::request_id"
+kappa = "43899a869e08a73bb33f85fd0c8c7fe49cb01330fcd1cd196c90a5aa3062f4ae"
+embedded = "a9398f4cc690e30e54f93dddbf72e21c76de13872073a86b70d30e458f987b0a"
+status = "residue"
+cause = "mir::Ty: Headers"
+
+[[fn]]
+path = "aws-types::request_id::Response::request_id"
+kappa = "b376778929ea4de1d4bd5abb56b2d32354f1877833430396d14d6d5fc4922c9c"
+at = "B=u32"
+embedded = "b2ae8b988e9235497f6c80872256985410fbe8283670a6cc63db2b9dac8e99cb"
+status = "residue"
+cause = "mir::Ty: Response<u32>"
+
+[[fn]]
+path = "aws-types::request_id::Result::request_id"
+kappa = "3d0a18185d16881c0f544afee494863f5c9cdb9621c3e791bf5e74efc2d3299b"
+at = "E=u32, O=u32"
+embedded = "6f2c0cf2f9b3aa6bbe007e759ef053b4eba2157e6e726f973e12ed760c3a5a24"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by RequestId, which u32 does not implement in core"
+
+[[fn]]
+path = "aws-types::request_id::SdkError::request_id"
+kappa = "1e6c06ea9458868a831124f91416ff0f50e65a3ab2f66a5749e79c0611e0529b"
+at = "E=u32"
+embedded = "c89fcecf55f04734a153fed322564da860fa2d087b44e3df8d09d9d156f54689"
+status = "residue"
+cause = "mir::Ty: Response"
+

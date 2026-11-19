@@ -1,0 +1,195 @@
+[[fn]]
+path = "rusqlite::is_identifier"
+kappa = "119c3e9f59e3be35b4bfc92055421f09c32bf28c494a17154282d42b3f31d84e"
+embedded = "b4c2aa51ed19ae9100d8595758a759f314a2f5ba0a83e14081718a89039aa4e2"
+status = "residue"
+cause = "mir::Ty: std::str::CharIndices<'_>"
+
+[[fn]]
+path = "rusqlite::is_identifier_continue"
+kappa = "2e80d21c0e5ff16e8833433248d3873b41314780a51f2f4efc14fa877a95bd0b"
+embedded = "d5980ef45aff5c3a472f911771984923ec489b5f1f7facbdbd8d010221cd4fe9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_digit"
+
+[[fn]]
+path = "rusqlite::is_identifier_start"
+kappa = "a8a1e90956ce7f0e7fdac987e5ec5a3fae2d2b150fb1f46a127b863aa13e049f"
+embedded = "813c6edffdae757e573bad9c22e7d9a2f352e7396d617c8cec5dbfce763b4b54"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_uppercase"
+
+[[fn]]
+path = "rusqlite::is_keyword"
+kappa = "90aa31c433f61f204ad3e5b2fd8bc1b891aad8633686d881340c241ea7eeba13"
+embedded = "5355d084fc221112786bbdd9b950f41a0ac04163f96d742ead3dbd99e1df160b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::str::<impl str>::as_ptr"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma"
+kappa = "d3120d1896618ca45d5375424f2f76a5a4b9e5080800c1ce25f08fb99493623c"
+at = "Connection=u32, F=u32, V=u32"
+embedded = "d9a46829c9f419a2bbe3808abb538ff60e82730a19a90a42a13c230ed95b68f0"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma_query"
+kappa = "956cd2dccd13778cbfb5535a3acb410d4a0d01589cdb2bf4978e1e7d7733d54b"
+at = "Connection=u32, F=u32"
+embedded = "dd2135522bb13efa983975be5e5692a53cf6dfcbdcfa1fdffad64f6e64067b1e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma_query_one"
+kappa = "44c21a2f327c5b7b594f489dca031297003d458aad594406f85878986a178ff7"
+at = "Connection=u32, T=u32"
+embedded = "c8718f4b0454c410b4fd0c1382341536692abdaa66678f50ecb293ed7368ff30"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma_query_value"
+kappa = "4d0069217dbc0f1ffb7a42d53c0647ce54db11f434922e831b9668147d71ea3b"
+at = "Connection=u32, F=u32, T=u32"
+embedded = "cd157297bcf3edafc850300a42742c6d4c3d0cf7f355ea7b7bc79c225fd59e2a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma_update"
+kappa = "f9ff8cd2cd8aa2996f7a532264cf3156947ae3a29ad47cc1ac8f687061c156ce"
+at = "Connection=u32, V=u32"
+embedded = "d46e868a05df5e3a765160be0259c3ed94904f86c92e05d80ef13bc164bc3588"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Connection::pragma_update_and_check"
+kappa = "f740079e830f1a27974028964d5908bbee57ba8a30f8152af237558f932ec4c8"
+at = "Connection=u32, F=u32, T=u32, V=u32"
+embedded = "ed4735019c7336c9a7a60c15e618725493b1b3cd345db600135ee6cac79e64cd"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::as_str"
+kappa = "cd4461cb894b415544e526d93a48445f5c4b7d8b75a65d31be39151d597197e3"
+embedded = "f74927d6f6a138db2effa8c37528ab38c5df12838a724d9e2513fbd03329df0f"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::close_brace"
+kappa = "dfea8f37eff1bfa7ad2e820e7f290ec441240ce9c682efe852cad25a24551447"
+embedded = "ec0bf50dd439fe6a15830d37878abac69527d127792764b2074c83f2812d57e8"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::deref"
+kappa = "625ef7e4b3f44676112407ffd83517fa0ca217115781e8d9ed6dcc5cdc70da72"
+embedded = "fc3204fc0858bf8c0f6c9f14983db84a961689c0687fefb2d51643a45e80ac44"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::new"
+kappa = "a71dde77fa7eb079cd4376ad6d73b8bb7086768f3f57f29fcda11e10545190d4"
+embedded = "f9d8aa4ae3589a3fd3002d87d097f7f2e0a6faf6b41a39905c7aef9386276c0f"
+status = "residue"
+cause = "mir::Ty: pragma::Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::open_brace"
+kappa = "327e7aefcea135d98d68eef0bc3e205cb5ea2d9311123150cf46b04fd0ca1214"
+embedded = "efa7e895d75ef0d54073af1c7a5b74c8dd2dbcea238ff007032941b577441aaa"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_dot"
+kappa = "7cd1703d510d4288bf6ede77f2a06076f513ede48eac2090a3e45c75c088a7a1"
+embedded = "0e8091536b274e283d42513f9956867bdf0266c355006e3920080ffe3ca6fc65"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_equal_sign"
+kappa = "27e77ffd558367c8b98304ec7a93697da65f639793f91fb1d9baae9e79a83a56"
+embedded = "5d4e8728d6c4aa94a215f3517f7ac6ba6f2e7cff5905df5073171018a378ecfc"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_identifier"
+kappa = "a877fabb68ff77e53e26b4329d1bee1c1c194faa4b6bb4e2c48986564ec63e9f"
+embedded = "700207a8411f4ca4cfb437eea35dddefb623a9c1e243039c1351c60ccd1a5dea"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_int"
+kappa = "31a84edbed12b482c3a147adec192b732accb7716914122415079d0ed9fdd2aa"
+embedded = "0d699b3027ba64351eee98a66f07a178d11faae28cc5c1aab82c87f7d16f5655"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_keyword"
+kappa = "479d2a88fdc529d1a7272c0ba92ed12f66884603b8dec4e346e5d82cb3c27c89"
+embedded = "58fb2d08fa37b1afa8861b7d6f681581b8830f96dab7208e76c6a4c389a9e1af"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_pragma"
+kappa = "8d05b5e8cb868febfe1125b4ccbb7f4acfbf54a59f9e5c920ed21773cbc8a87e"
+embedded = "bc1e2f15818e4021bfe52565c3a8e518d331af66618a8468de3e473323d62d1b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_real"
+kappa = "050bfa1147719839b3855eeced1e6cbd77b686878ceea7d295633a825402ad14"
+embedded = "a25de6fcae537bbf0de621993c630eed43f02fbfcb1550a8fdac3e45f6952785"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_schema_name"
+kappa = "ef664d4f5d702f090bf23f95c2bb537b90f3d5b1e884819b0bacaea9e2e6e319"
+embedded = "0b97ca406247b2053f54cf8ecdb762c972774cd49637e6efdc711ad07b3226a3"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_space"
+kappa = "7e80db8d3e86f06e573eb65a350722a2e529af091f23fbe1ff06b47da3f4430f"
+embedded = "6d6408877a25d7526785ebee32032eaba9e7a62b88e47630264a347929f3baa9"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_string_literal"
+kappa = "88eebbcd37f8f5797c1fad11bbf349a3e57e7d31bcc7059d4e4a0de5c81132e1"
+embedded = "cca24ee39bc62a74615f8b5cbbd5d7b29fe90b2f02c93c841fc7e9dda0e58fbb"
+status = "residue"
+cause = "mir::Ty: Sql"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::push_value"
+kappa = "e7d80a1bdc794f97b65e417492dfce560e19df98b501c4001d0f27b6bfc9e50e"
+embedded = "7e8b1d5db77bd373b6d8368f4a8927bc485a8990a750c281509273b20d8d902f"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::pragma::Sql::wrap_and_escape"
+kappa = "a115c01b26726eaf941eef8c7adc923f4a5519ae4fdc79a6574653ae35253bf2"
+embedded = "990f0692f803d2313f0885becc4db84e91d25244aa0f4410f6c1c690015996df"
+status = "residue"
+cause = "mir::Ty: Sql"
+

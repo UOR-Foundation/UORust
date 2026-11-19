@@ -1,0 +1,151 @@
+# The colored register (written by `uorust crate colored@3.1.1`; do not edit): every body of
+# colored's MIR at colored 3.1.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 211
+translated = 0
+residue = 211
+
+[module.color]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.control]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.crate]
+bodies = 89
+translated = 0
+residue = 89
+
+[module.customcolors]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.error]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.style]
+bodies = 91
+translated = 0
+residue = 91
+
+[embedding]
+bodies = 211
+embedded = 211
+evaluable = 211
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: style::Style"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: color::Color"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: Style"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: style::Styles"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ColoredString"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: customcolors::CustomColor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Styles"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &LazyLock<ShouldColorize>}"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ShouldColorize"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Colorize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Into"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CustomColor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VarError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: control::ShouldColorize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc36: &Style}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <String as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:548:1: 548:23>::clear: colored's MIR stops at mir::Operand::Constant: {alloc36: &Style}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:548:1: 548:23>::reversed: colored's MIR stops at mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ColoredString::has_colors: colored's MIR stops at mir::Operand::Constant: {alloc1: &LazyLock<ShouldColorize>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1

@@ -1,0 +1,42 @@
+# The inotify-sys register (written by `uorust crate inotify-sys@0.1.8`; do not edit): every body of
+# inotify-sys's MIR at inotify-sys 0.1.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 5
+translated = 0
+residue = 5
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 5
+embedded = 5
+evaluable = 5
+blocked = 0
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item IN_ACCESS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item IN_CLOSE_WRITE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item IN_MOVED_FROM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inotify_event"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1

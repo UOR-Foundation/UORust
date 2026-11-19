@@ -1,0 +1,187 @@
+# The async-task register (written by `uorust crate async-task@4.7.1`; do not edit): every body of
+# async-task's MIR at async-task 4.7.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 95
+translated = 1
+residue = 94
+
+[module.header]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.raw]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.runnable]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.state]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.task]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.utils]
+bodies = 14
+translated = 1
+residue = 13
+
+[embedding]
+bodies = 95
+embedded = 95
+evaluable = 95
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: runnable::Runnable<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: raw::RawTask<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: utils::Layout"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: raw::TaskLayout"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Task<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: runnable::Builder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: runnable::Runnable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: runnable::ScheduleInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::thread::ThreadId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FallibleTask<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Header<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::Waker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::Header<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: runnable::WithInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::abort::Panic"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Bomb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Checked<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Gen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Guard<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::RawWaker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::RawWakerVTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runnable::Builder<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: task::FallibleTask<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::abort_on_panic::Bomb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of task::FallibleTask<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of task::Task<u32"
+bodies = 1

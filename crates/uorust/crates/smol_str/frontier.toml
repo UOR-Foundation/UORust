@@ -1,0 +1,194 @@
+# The smol_str register (written by `uorust crate smol_str@0.3.7`; do not edit): every body of
+# smol_str's MIR at smol_str 0.3.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 100
+translated = 1
+residue = 99
+
+[module.crate]
+bodies = 100
+translated = 1
+residue = 99
+
+[embedding]
+bodies = 100
+embedded = 100
+evaluable = 100
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+bodies = 16
+
+[[cause]]
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SmolStrBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SmolStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Repr"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: build_from_str_iter: smol_str's MIR stops at type outside the lift: impl Iterator<Item = T>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = char>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item WS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&str as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:36:1: 36:13>::from_utf8_unchecked: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:36:1: 36:13>::from_utf8_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Repr::new_on_stack: smol_str's MIR stops at mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::as_str: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::finish: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::new: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::len_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_char_iter: smol_str's MIR stops at type outside the lift: impl Iterator<Item = char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::intrinsics::transmute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 1

@@ -1,0 +1,114 @@
+# The primeorder register (written by `uorust crate primeorder@0.14.0`; do not edit): every body of
+# primeorder's MIR at primeorder 0.14.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 166
+translated = 3
+residue = 163
+
+[module.affine]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.mul_backend]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.point_arithmetic]
+bodies = 17
+translated = 2
+residue = 15
+
+[module.projective]
+bodies = 85
+translated = 1
+residue = 84
+
+[module.tables]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 166
+embedded = 166
+evaluable = 166
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: projective::ProjectivePoint<u32>"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: affine::AffinePoint<u32>"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: ProjectivePoint<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: elliptic_curve::subtle::Choice"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: elliptic_curve::PublicKey<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: elliptic_curve::hybrid_array::Array<u8"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: sec1::point::EncodedPoint<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tables::lookup::LookupTable<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tables::radix16::Radix16Decomposition<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LookupTable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: elliptic_curve::crypto_bigint::Choice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AffinePoint<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Radix16Decomposition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mul_backend::VariableOnly"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: point_arithmetic::EquationAIsGeneric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: point_arithmetic::EquationAIsMinusThree"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: point_arithmetic::EquationAIsZero"
+bodies = 1

@@ -1,0 +1,94 @@
+# The piper register (written by `uorust crate piper@0.2.5`; do not edit): every body of
+# piper's MIR at piper 0.2.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 47
+translated = 1
+residue = 46
+
+[module.crate]
+bodies = 47
+translated = 1
+residue = 46
+
+[embedding]
+bodies = 47
+embedded = 47
+evaluable = 47
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: futures_io::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Reader"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Writer"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<bool>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Pipe"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Context<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<usize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Reader::available_data: piper's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Writer::available_space: piper's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadBytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteBytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fastrand::Rng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 1

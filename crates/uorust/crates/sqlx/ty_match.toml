@@ -1,0 +1,55 @@
+[[fn]]
+path = "sqlx::MatchBorrowExt::match_borrow"
+kappa = "2eb56e8681a8d55ee0c9e4733dff2f0bbd5da4672282e38af2f975b98a9abcaf"
+at = "Self=u32"
+embedded = "7fa998558a37e5e0b0c3f91e974e87cfa9cabf10b479d405c6e74ed8de85f23a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+
+[[fn]]
+path = "sqlx::WrapSameExt::wrap_same"
+kappa = "e53ce81ab7d55e64ee6154e0c844caafc98546c203b6a73d238b35796aab956a"
+at = "Self=u32"
+embedded = "56a2c2d14e53034f56fb9dd4f91484e30a7a9d0e9a9a500090fb098c5cc7cbc1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+
+[[fn]]
+path = "sqlx::conjure_value"
+kappa = "0d7774a1f35b8f5706a140886310ea6455e5038088f0458e869cfd500b92394b"
+at = "T=u32"
+embedded = "0eebceafce4fa676052d07e7bb0b3aa698bb0fa69b805b513b0c8c4732e56c27"
+status = "translated"
+digest = "41fe20c913600cd05bdda4894eccff2f4720284be621698636a4fde588bd6c0e"
+
+[[fn]]
+path = "sqlx::dupe_value"
+kappa = "aa0c5f1d6deaca3459f40222cc601f244138b33e9182991ee1084a4a27a895f1"
+at = "T=u32"
+embedded = "93cd722c343a7febe8a395eb5021ef24e82857e2b0ae1ce3486e5c98e446943a"
+status = "translated"
+digest = "414c23487fb66a977428eb77070c5f3ad81629b8cf33a6e40c228150f411452e"
+
+[[fn]]
+path = "sqlx::same_type"
+kappa = "1392901856541532e8ce23b31646dced0271ab1a239cf1d5d912426788b2d58e"
+embedded = "6ce072b71968d5d3c497f01b521eda0590c0418bc695ce0d07133704cb609d99"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sqlx::ty_match::MatchBorrow::new"
+kappa = "2294dcbe908a003d99c8c8a3f23eb5ab3e5f66c7069e903f722c07c9f8d57ccb"
+at = "T=u32, U=u32"
+embedded = "183ec64b2c04a952ba3ef0a66769236d36d1a233aa4958071210379490b8e11d"
+status = "residue"
+cause = "mir::Ty: ty_match::MatchBorrow<u32, u32>"
+
+[[fn]]
+path = "sqlx::ty_match::WrapSame::new"
+kappa = "8fe04021828367fbf6cc90a2332c613494d86effd7db95c07da5a465f40e31c0"
+at = "T=u32, U=u32"
+embedded = "24e8790b18a73571ee8144ac82361477cb02f75a767a3b1a30ff85fa07afb156"
+status = "residue"
+cause = "mir::Ty: ty_match::WrapSame<u32, u32>"
+

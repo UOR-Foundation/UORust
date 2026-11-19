@@ -1,0 +1,98 @@
+[[fn]]
+path = "fdeflate::BITMASKS"
+kappa = "efa1d1db63319bd26e649c9de864840f98eb32a820e7b2cb942b7fcffdf0fb30"
+embedded = "27be520313a1ce20b1d134af775168155d9985b1230e97f19470c9973280a97c"
+status = "translated"
+digest = "e1266ce7c424151a5210b612b3df1d93ca2a9a6ecafddf854587fbcf3f1dcf8c"
+
+[[fn]]
+path = "fdeflate::CLCL_ORDER"
+kappa = "a5a17569bc50991cec022889af824773b453a19906808cec74c84b78939d7712"
+embedded = "533470145e29c0f2038cab77140534d3d2ad92f2f38891db01c206e14e9b98ef"
+status = "translated"
+digest = "5dbb7eaf689c944a080c5e546a54b24bada1bdd24e0662ab97849fc22628c749"
+
+[[fn]]
+path = "fdeflate::DISTANCE_TABLE_ENTRIES"
+kappa = "16fa741f442957637a334dde96be914388e6d8890953d1b4267657d2f30d2d40"
+embedded = "6dd6c009f48a47fdd52e0ab06ffd39dd837223f9b2d566922af7a1a5db6af370"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decompress::LITERAL_ENTRY"
+
+[[fn]]
+path = "fdeflate::DIST_SYM_TO_DIST_BASE"
+kappa = "a02c2ac6f9352bff57d8c6167a622d97ad26b85ce6894d47fd9ffa0ae0068aa1"
+embedded = "c507e1170e93bd91bfc97024a32b1731de5e179b9f23e99bd843ad95e5242693"
+status = "translated"
+digest = "4b27da95fba3dace67fd5fc0b4923dfbbde2a32141b61262061419d6455d6e58"
+
+[[fn]]
+path = "fdeflate::DIST_SYM_TO_DIST_EXTRA"
+kappa = "b15627f39f8b163efba4eeef8c8e24be73411564f1c5ce2ac181a4ec0dbd3098"
+embedded = "2fa60d4b867142fe3d0a080db6718d731be5d81bb949d2500bff553acae88d7b"
+status = "translated"
+digest = "cd520c00480ffbd03246907c695a7f7fcc7ab8cb9cad458862ef55f2c4de7fef"
+
+[[fn]]
+path = "fdeflate::FIXED_DIST_TABLE"
+kappa = "7b036a681d20579c96d527f8ab1b39632db9a5dcb25dfd8108165d3ac6b5c5e2"
+embedded = "70e4dcc0cf932e664cbea0b3fa44fdd1f7a41875a5b8736d33e50e1134106a39"
+status = "translated"
+digest = "80a57fa2337ad0c793d0354640cd37fe6283d3c1c2e8b11f457aec484b13d642"
+
+[[fn]]
+path = "fdeflate::FIXED_LITLEN_TABLE"
+kappa = "2bbfc5ef2a8ab5a3c79a74cce67259a673a7cc0f6e77faa82fa497935182a794"
+embedded = "8e93c01a2e223f4b380dd8e72672e42af01dedb9942b1e1ce44eafdeacbcfda5"
+status = "translated"
+digest = "607d8f567bfa663fba3739de4fb90645e2668f0d072f885748cad746e923a74d"
+
+[[fn]]
+path = "fdeflate::HUFFMAN_CODES"
+kappa = "89c08afa2a81e5581d1d4fada770489335b789c98153a6052649da54be5fb97d"
+embedded = "f822ea97e476a63c566cbd62734684dce6866709bc2070dd90dbd16732a019fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: compute_codes: fdeflate's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "fdeflate::HUFFMAN_LENGTHS"
+kappa = "d006c8416f3a34ab325b14b09aeea2c191479dded5958bae8e3cd69ece937246"
+embedded = "2785b859b30140ec43dde10b1b0493de49caf00d4c4c4aae1aa565e3f9392db0"
+status = "translated"
+digest = "211bb01ceedeafc1d5b05861b0e37dc82c5da84d9fa8003c8729c09f24b8806b"
+
+[[fn]]
+path = "fdeflate::LENGTH_TO_LEN_EXTRA"
+kappa = "b287861b8bb1a9d649c8c029909d69e7f6c632670d369a7406f24c8011ed25fb"
+embedded = "c46dd26294aea33876c24a2f3657a73da62f94d858dd425a61169246f6686794"
+status = "translated"
+digest = "14f8b135ebce3edb4079e87e8878160045bcc90682db12c8062305e7ab630d7c"
+
+[[fn]]
+path = "fdeflate::LENGTH_TO_SYMBOL"
+kappa = "3e3b839d057be4574956c1db30fdede9ed87195e7ae06d5ac7036d028738a802"
+embedded = "e2efc1511ff69fc343969476d6bbca931f04e5f198d8b9f2f785525c11b5ef58"
+status = "translated"
+digest = "07ec3df85f04031f6e2b28e1696960d8de3bc067e9def3beafcd5d93d15fd413"
+
+[[fn]]
+path = "fdeflate::LEN_SYM_TO_LEN_BASE"
+kappa = "a9e1711b4f38c5fdccb8665031735ffd50c29e5aab8236dbe5f2b96e0c64b4d9"
+embedded = "a5dc52e78b5f964a1c881575691eb31ede313751fc7223c70e91a557a2400d00"
+status = "translated"
+digest = "55b4b7feb614491efae277cd15e48eaf0f218c7be02096d655aa479c7c236fbc"
+
+[[fn]]
+path = "fdeflate::LEN_SYM_TO_LEN_EXTRA"
+kappa = "af8d82939b126e818a86e6691e3c013632d4601ba2170486907e08f4500916f4"
+embedded = "d73dcec05b72566fae9cff074fa8f5f2f6960c450fe6f93c05939a3a0b5540e4"
+status = "translated"
+digest = "f8755a854fc1ff5a2081a403866a96b1a0eb67eadc7c436254e2bffb97f950d4"
+
+[[fn]]
+path = "fdeflate::LITLEN_TABLE_ENTRIES"
+kappa = "e5e8cd317736b9ed4bc20a7b66a80cd64c52c18977ed368702800a19b1df0cf1"
+embedded = "eaf389bbe99355aa5be9bd9b5f9b83320d0abb203e7bea25d824adb296b9e200"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item decompress::EXCEPTIONAL_ENTRY"
+

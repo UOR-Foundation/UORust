@@ -1,0 +1,16 @@
+[[fn]]
+path = "proc-macro-hack::compile_error"
+kappa = "302b9545584cde1a70e958d5460a6674e1ea3187167b9fd71954d08efc5b0c30"
+embedded = "83a971742f9ab772e546c71a372856d08bc160e18f3403d40689c4c82c464d30"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::error::Error::new"
+kappa = "9f6a7789af8c00eaf0a2d48e9f39d614202c83027a4d08d6e556d8687d773d45"
+at = "String=u32"
+embedded = "7a77d0d3e6dd9764428bc7cefb3e5da7897e55ec787e8645602035366f9f0e80"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

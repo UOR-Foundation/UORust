@@ -1,0 +1,83 @@
+[[fn]]
+path = "embedded-io::slice_mut::<impl at src/impls/slice_mut.rs:32:1: 32:25>::flush"
+kappa = "12334e19ddca5fdfe5c08cdf133a7e79e2c81b64f6a4bb01453a744d56f94bef"
+at = "SliceWriteError=u32"
+embedded = "e7526f645a9ea304e2c50a55e76a05e1876421ed2be10fb6c0d9896386bcd9d0"
+status = "translated"
+digest = "5cd201c26ad173e922b701d9c1736714e070cbafd64356d4eb6b80ff75615cb8"
+
+[[fn]]
+path = "embedded-io::slice_mut::<impl at src/impls/slice_mut.rs:32:1: 32:25>::write"
+kappa = "dff34e3fd2c5592649fe57d85c52a5ab6e4485a595162c3e337793b6bd607781"
+at = "SliceWriteError=u32"
+embedded = "a22155849f9456c3b38ad388f0f95367c50ed489f7847947ad85335e76a2e6a2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::take"
+
+[[fn]]
+path = "embedded-io::slice_mut::<impl at src/impls/slice_mut.rs:32:1: 32:25>::write_all"
+kappa = "171a57be8c6e0fb0e9dcc112aa85158967f562fe77265c25c8d7882887d7cc98"
+at = "SliceWriteError=u32"
+embedded = "7fcdc08df0698cc94c0afbd720157f0d9fabc2deb963df5b8513bc159cd0656b"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "embedded-io::slice_mut::<impl at src/impls/slice_mut.rs:60:1: 60:30>::write_ready"
+kappa = "28777afb2a10471c48c01df897b3c2ede01f39e498249255892e1abbeb543aa2"
+at = "SliceWriteError=u32"
+embedded = "8f6293c3b3f3ca823e69c595a1f907dadf7fb77e8a02deae70267e4a66a5ffbb"
+status = "translated"
+digest = "8013e947c885082cc80387a7c43f8de8e6194d2c5b84070891be82afccbbb9a2"
+
+[[fn]]
+path = "embedded-io::slice_mut::SliceWriteError::fmt"
+kappa = "6a1f2ad67ae7cfdb18e876d22e1cd259402c269441e2256943bee68c924a8739"
+at = "SliceWriteError=u32"
+embedded = "566d8cc1c106f508f558499ab80b4ce5d0c1f0e188f25880515cba6352358933"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "embedded-io::slice_mut::SliceWriteError::kind"
+kappa = "59c978272707481b27d4507746d006c2a0855973274aa46c15eec4692504cc9d"
+at = "ErrorKind=u32"
+embedded = "14c53a44c245e6d44e105485f936671cd083a2bb600ce9b017c7fa4dcd2719a6"
+status = "residue"
+cause = "mir::Ty: SliceWriteError"
+
+[[fn]]
+path = "embedded-io::slice_ref::<impl at src/impls/slice_ref.rs:11:1: 11:20>::read"
+kappa = "a6e895b2e1cd6a5ad6ab4ba6e3175543b051cc46564c9b5d9ac03d8507589654"
+embedded = "2a754922f672cd30add7a17d74b8781e7ea70fe2b497380beebc838da6ec6640"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::split_at"
+
+[[fn]]
+path = "embedded-io::slice_ref::<impl at src/impls/slice_ref.rs:11:1: 11:20>::read_exact"
+kappa = "3a5b55b79d9f95b503a1a3a69907497d60c2e05bf0e8ac4f5bbf884d15b03d29"
+embedded = "cbc6370942c4096de40f35aba4971b845c3b654e980c93e39fd3a866d82f043d"
+status = "residue"
+cause = "mir::Ty: core::convert::Infallible"
+
+[[fn]]
+path = "embedded-io::slice_ref::<impl at src/impls/slice_ref.rs:40:1: 40:23>::consume"
+kappa = "7d1a236d9cc1bd27eb554d54d231bd3cc58b53a39bafbecd6e5bc4a2312aef04"
+embedded = "89fb4f282dd777db23c8c59f8b6dcf126a164c35a6626aaa7f471b7a7278aeea"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "embedded-io::slice_ref::<impl at src/impls/slice_ref.rs:40:1: 40:23>::fill_buf"
+kappa = "98a09f7998cabf7583ac8d0265581d2bcbf015f4ee0e8d3e4a811c70b109d839"
+embedded = "f745d1318917d7fe9fab684d5618c3d6dcebdf8cd2f0412299e70db1b14b3e17"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of (List Nat)"
+
+[[fn]]
+path = "embedded-io::slice_ref::<impl at src/impls/slice_ref.rs:52:1: 52:25>::read_ready"
+kappa = "dcb1ed5217067eb388a1788731a452d361b17ee50ab8d2553dbaee6ab3972e17"
+embedded = "35836fc03ea9a596848c8c50bae0f8a06f9524d1587ebf4f59d3f3dcc1c94591"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Bool"
+

@@ -1,0 +1,30 @@
+# The pathdiff register (written by `uorust crate pathdiff@0.2.3`; do not edit): every body of
+# pathdiff's MIR at pathdiff 0.2.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 1
+embedded = 1
+evaluable = 0
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1

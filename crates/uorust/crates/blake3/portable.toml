@@ -1,0 +1,51 @@
+[[fn]]
+path = "blake3::compress_pre"
+kappa = "1c7cc04bb8f6a6c59177958ebaa8ae15ee9d1b60f3620cd219a0dc16293cfb7b"
+embedded = "29df89160258aea0ab90416964cf9bb3d95a2087f9c7e1305a25add5542591f0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::words_from_le_bytes_64: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "blake3::g"
+kappa = "a81fcde2582e6a33f01382adc8f886bb999b819ba1a230192b285763f0d8f107"
+embedded = "eeefdbb600830c4a7148cf5d6701bb48a0acf2d7fbe53c8cbd90b9871499674a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_right"
+
+[[fn]]
+path = "blake3::hash1"
+kappa = "0753d61c0f91451bbf3a239d65ae6bce06448c4031f6285bce9e0dce9f03999b"
+at = "N=#_N"
+embedded = "24e2b784fc282ed4e591b7a7d8a1490f144c6fa1d617c4d0c117c7920d7d548e"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFull"
+
+[[fn]]
+path = "blake3::portable::compress_in_place"
+kappa = "866312565cc97d8315e7f565e061dae0caada9fb16e463965294b58c46820c31"
+embedded = "56069d6ef7cd73a8781c123556d334f4e90ca09d1406f1e87779ece68cd6759b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: portable::compress_pre: blake3's MIR stops at mir::TerminatorKind::Call: platform::words_from_le_bytes_64: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "blake3::portable::compress_xof"
+kappa = "fe2fcaf0ba2f6815188db274621e2a2053e8b023eb64bd6edbf13a37e2d196ad"
+embedded = "074cf629a3791dd60c87cb80132fed2f781c62ae80deaa30dc33f4755e0b7f9e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: portable::compress_pre: blake3's MIR stops at mir::TerminatorKind::Call: platform::words_from_le_bytes_64: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "blake3::portable::hash_many"
+kappa = "4becf73fc837620849cb6867951f1c5999cd55a8d259bfc0658e98b4a853eb28"
+at = "IncrementCounter=u32, N=#_N"
+embedded = "be5b574d878f3a937f5780f17bd29fd11c0b5510f4b7856084fa7607c0e4fa0a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item OUT_LEN"
+
+[[fn]]
+path = "blake3::portable::round"
+kappa = "a442fd6a1970ee7f1e97276bbc3c681ce4c8c0a74fd051726141e29b6e17530f"
+embedded = "1e267f1a09fe657fd5ad0d1a078fe7aa04495436af1aab7d71ad352074722444"
+status = "residue"
+cause = "mir::TerminatorKind::Call: portable::g: blake3's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::rotate_right"
+

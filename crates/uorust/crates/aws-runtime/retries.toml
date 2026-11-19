@@ -1,0 +1,107 @@
+[[fn]]
+path = "aws-runtime::THROTTLING_ERRORS"
+kappa = "17a27f5f9933710560b3c0b81ac1a5f0ffe231da46845b7bbf3d6059c8457909"
+embedded = "b087c9f703a022244175463f429deb037e79a1b415aec8277f5ac4405547287d"
+status = "translated"
+digest = "e4ee12eb417ab0c669765aff3debf3b3248f49ee65aab84e71468e7b0e649e8d"
+
+[[fn]]
+path = "aws-runtime::TRANSIENT_ERRORS"
+kappa = "845f3e9787131858e548fa9fe1dfa74b43a18e1900cef5bb71d5e1a7441c7167"
+embedded = "bf3e76cad657d4897c2fa7e1dd1d9f476801fa679ddabf5536c0a2c6d8ef3cea"
+status = "translated"
+digest = "c934f39eba21ad6ac43ff5b5a118fef928a4f369fa9543b12e324e3c1652af63"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::<impl at src/retries/classifiers.rs:50:10: 50:15>::fmt"
+kappa = "6224b29c5009a3cef6d0baf46c224c368297fe7d18f9b16c079c52d6847e3532"
+at = "E=u32"
+embedded = "3750cd0d02a983069bc3cd5c46daba8cc1e140543054d5f818276950b5005bbf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::<impl at src/retries/classifiers.rs:68:10: 68:15>::fmt"
+kappa = "5373d8a2c1b266303af5fc0c75d863cd170369d6f3844d29922c529486d7fd3b"
+at = "E=u32"
+embedded = "fb4aef89e0970caf41ee176ef6b44b0632379001848d3bec58f07a8676b497c4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::builder"
+kappa = "06b00e63ca68cd5f0ad536bc00c55864db8aa208f96f3a2c16370fb5dad148f2"
+at = "E=u32"
+embedded = "5c3d9ddf885a30df75b54632508343a2804aa3a222a17e76a2a79315cfac2b28"
+status = "residue"
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifierBuilder<u32>"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::classify_retry"
+kappa = "8e2569bf540e1a49534cd57a087bc50979b86d288f5e5087b453c7c31348a927"
+at = "E=u32"
+embedded = "fd474500adfd7099d60b07e8be2ffbdc4b83e2abe0fe86dc3825d3cbd4f955cd"
+status = "residue"
+cause = "mir::Ty: aws_smithy_runtime_api::client::retries::classifiers::RetryAction"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::classify_retry_v2"
+kappa = "fb60eae3cb4e992d794efac9411c5cfbc31f9264d2b50e847853e6f53ab73388"
+at = "E=u32"
+embedded = "c6c64b7252e60bce90a31e6633846dd34d58cce784e34e0ee9352776d521c0e8"
+status = "residue"
+cause = "mir::Ty: aws_smithy_runtime_api::client::retries::classifiers::RetryAction"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::default"
+kappa = "e8c7442c3b1f35303d2f0981eb184658d57d1863ca4edf7c1c99728bf21319c4"
+at = "E=u32"
+embedded = "2cac0bbae2cde5b1e824db0bb8e479c94b3a52adc6322201254cceb1d3399f69"
+status = "residue"
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifier<u32>"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::name"
+kappa = "e478fcbb0d4ad8417d0e020b452d1c04bd5d930e4d7361d3af7cea8403503a15"
+embedded = "d5d21de921f9b89c99f9851f3b3a48af6ad5e3fef0b8240fd69e6445bbddd41a"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::new"
+kappa = "db6ce79e85dc0c3580c6bd82d8ffdbda7884945fa5a3cd1f92235de14dbd4296"
+at = "E=u32"
+embedded = "bf28a0c50efc040ad68ff6fe33fd6e43eb453258349a6bb68e999d9aec1dcf20"
+status = "residue"
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifier<u32>"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifier::priority"
+kappa = "ef901e6fffcfd2ad3e2d4ace7fe621dd41ba73c51218b76a45210627db58cd1c"
+embedded = "173e3cfd49ab3444a47a736ed120b27ef6492cb108aba70e1b20c83d6c93d282"
+status = "residue"
+cause = "mir::Ty: aws_smithy_runtime_api::client::retries::classifiers::RetryClassifierPriority"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifierBuilder::build"
+kappa = "4600adaa6b00484870c3984025df88a0404cc22ccf978fda502feab0fb6acc77"
+at = "E=u32"
+embedded = "6628756cf81e5e3a4204c7281f60602680b1b02ca8ce5d415d45082529e4e378"
+status = "residue"
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifier<u32>"
+
+[[fn]]
+path = "aws-runtime::retries::classifiers::AwsErrorCodeClassifierBuilder::transient_errors"
+kappa = "dc5480188e5bf42bf033ee39f9c29391fa7f3c443953ccea1ac9601147e3e87f"
+at = "E=u32"
+embedded = "b84f4fb622f38decac2f9a8d896dd2fe9c0232e808d62cf480cc05aa4f714dd3"
+status = "residue"
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifierBuilder<u32>"
+
+[[fn]]
+path = "aws-runtime::retry_after_from_ctx"
+kappa = "81491f90a83a447eb32f686b289884db95c29f2129aadd8bd9eae0d6d3cdfb2b"
+embedded = "8a50fdfdfa9fd99a3348aaaa5b30926eeb8c1777f5584e317cec3ced48557033"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+

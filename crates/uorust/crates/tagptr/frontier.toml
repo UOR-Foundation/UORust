@@ -1,0 +1,103 @@
+# The tagptr register (written by `uorust crate tagptr@0.2.0`; do not edit): every body of
+# tagptr's MIR at tagptr 0.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 119
+translated = 1
+residue = 118
+
+[module.crate]
+bodies = 16
+translated = 1
+residue = 15
+
+[module.imp]
+bodies = 103
+translated = 0
+residue = 103
+
+[embedding]
+bodies = 119
+embedded = 119
+evaluable = 119
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 4
+
+[[cause]]
+cause = "mir::Ty: TagPtr<u32"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: TagNonNull<u32"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AtomicTagPtr<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Null"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item N"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: mark_mask: tagptr's MIR stops at mir::BinOp::Shl: on Nat and Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::atomic::TAG_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::atomic::TAG_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::non_null::TAG_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::non_null::TAG_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::ptr::TAG_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::ptr::TAG_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lower_bits: tagptr's MIR stops at mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 1

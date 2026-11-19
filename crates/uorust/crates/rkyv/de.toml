@@ -1,0 +1,160 @@
+[[fn]]
+path = "rkyv::drop_shared"
+kappa = "4150f8e41c7e78afd17cd03af1423ce0fec7523ba25b6c9ad3fa9bff517edb95"
+at = "T=u32"
+embedded = "595e3d528bb8e9ea048aab5767220a83190755c6a9b01b3647087cb0d371ba8c"
+status = "residue"
+cause = "mir::Ty: erased::ErasedPtr"
+
+[[fn]]
+path = "rkyv::pooling::<impl at src/de/pooling/mod.rs:100:10: 100:15>::fmt"
+kappa = "2a8496ec5965a352cb6bda5ac9fc9c84ed1d8056327195764e4703bea49a9a27"
+embedded = "2c6806e5dd3a1ff56493c63b7621ac75ba99cbe39d277ae68f127389e5904e0c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::CyclicSharedPointerError::fmt"
+kappa = "aa2fea2feceac681a852379d8516f3ddf9273b49a7377502a231fa0293d86179"
+embedded = "7709b9fd6b86c2f3bf5ce3bd3219d89c0c48c57480f936ef5365532f1f73a413"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::PoolingExt::deserialize_shared"
+kappa = "e23bfb96035454183b63d5c816e3b8283baf722920cf219fcf60d46633caa0c5"
+at = "E=u32, Self=u32, T=u32"
+embedded = "396f6b4c5dcebd3a188530ce34f0130ce47780937d3aea4c149184b5c414adfb"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "rkyv::pooling::Strategy::finish_pooling"
+kappa = "d1328adc5e51e7a204cc23e99aa68ddc19aa4b7cecd60e64600e049de65b3e64"
+at = "E=u32, T=u32"
+embedded = "4899a5ecca619b819d3d8e6e4f7f0cf5bbea150c9237f09689238d3e09e3defc"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::pooling::Strategy::start_pooling"
+kappa = "2d0e9864065f044274b280a3acce01c45cf6f08de868b04c26b8c642bb42e0b9"
+at = "E=u32, T=u32"
+embedded = "1d85525b5629249a76319883a93fa8d253c364de880afa62bbb00e4d835d5db9"
+status = "residue"
+cause = "mir::Ty: de::pooling::PoolingState"
+
+[[fn]]
+path = "rkyv::pooling::alloc::<impl at src/de/pooling/alloc.rs:11:10: 11:15>::fmt"
+kappa = "ffd8badb37263b19aeb7d6a95d1f98b06a0b5803a3539d2b46829b989ae1071e"
+embedded = "013a8d47f1721dff124d8e6750a8a7b91751aba83620b85b888116baa7199160"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::<impl at src/de/pooling/alloc.rs:27:10: 27:17>::default"
+kappa = "ff6661999c839e49b627badf2b7a84899647265372b0b87970c4838b390b6c8d"
+embedded = "4eb495f7e5dc3dfedbbc587059c5478ad756c245739621303c1f99f8059388cb"
+status = "residue"
+cause = "mir::Ty: de::pooling::alloc::Pool"
+
+[[fn]]
+path = "rkyv::pooling::alloc::<impl at src/de/pooling/alloc.rs:58:10: 58:15>::fmt"
+kappa = "9e02d04158ab963dd1de0d14b182979c3bdf0865e5404f676bf923fbca0c8538"
+embedded = "206c82eaa6ccdb2319f53649b96497eba00f75472df885f18be1c7310baa386a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::<impl at src/de/pooling/alloc.rs:69:10: 69:15>::fmt"
+kappa = "e33f2cbbcc00f88c452a9ffb005899e462aaaf25a20a6cdc189aa28d9e089bad"
+embedded = "b1f1fb7e6aa41e54d88f90888573f90de057b9491a9096e618bb1ddf3a2069f8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::AlreadyFinished::fmt"
+kappa = "ebe8561f2ead343edb8dc09a39c6044df1c1f670ae34dcb978b0f840fa847409"
+embedded = "8e335f312e6141dd67b00ebe27b6b3bf071625fd7efdbb5832c79482cf6487b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::NotStarted::fmt"
+kappa = "8e4e43794647192e29ea5a2eb4c7d39b56028de8169904dc88f37d66f69c01ec"
+embedded = "4065cad67698bef452a9a1562ff8485e6a7448347c8c22c3fd3a87cfd6076e9e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::Pool::finish_pooling"
+kappa = "d911f5ca3e288c1e110e442484ded26a3773cb4e5e03fc8c1068d51e0b9cfd4a"
+at = "E=u32"
+embedded = "d6d8fb5486e0b6c7089c76a3777fb6057cdffc57351f83a49c796cfdbc38928f"
+status = "residue"
+cause = "mir::Ty: pooling::alloc::Pool"
+
+[[fn]]
+path = "rkyv::pooling::alloc::Pool::fmt"
+kappa = "08122b4616b8e13c3d75a71677863d5eb10768d74600660b22c93b791d666cb8"
+embedded = "0ea93cbdd6e484b5c0f46e4dec932dff875a75711ec364d014fbd10bd613c8e8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::alloc::Pool::new"
+kappa = "98e49d82d0eb85cc643e6ce9a5fca12a8a2fe02963561641801aae5b91465fdb"
+embedded = "c6a8fbb8eea93920d6389bfa61e303259644f9c8e29a68c64a7b87aa55f5c055"
+status = "residue"
+cause = "mir::Ty: de::pooling::alloc::Pool"
+
+[[fn]]
+path = "rkyv::pooling::alloc::Pool::start_pooling"
+kappa = "ffe72493ea7a93e3c579969ceb1759511635681a770508fc7c95e0be817edf4d"
+embedded = "105a05b8e15ea1c493bb098ffb294b43e272385cfa106fc0c0c4cc809665782c"
+status = "residue"
+cause = "mir::Ty: de::pooling::PoolingState"
+
+[[fn]]
+path = "rkyv::pooling::alloc::Pool::with_capacity"
+kappa = "9bb22de2040931e99fd171ed85f6974ba11684e69286b1f2ecd5d2ed2335f7f0"
+embedded = "0e166afa3cfd525679c1346824ba3ce67815ec757bbc3bb5640104528083eee7"
+status = "residue"
+cause = "mir::Ty: de::pooling::alloc::Pool"
+
+[[fn]]
+path = "rkyv::pooling::alloc::SharedPointer::drop"
+kappa = "4ce62d4e5cc0b0b4e270cc2149d63d30ce1310af85e508f3033dbafe4674cd48"
+embedded = "d6c89ee73d1f55e28b26b59b146a8becdbbb74fa479a8ad240f1e66d93aad873"
+status = "residue"
+cause = "mir::Ty: pooling::alloc::SharedPointer"
+
+[[fn]]
+path = "rkyv::pooling::core::<impl at src/de/pooling/core.rs:5:10: 5:15>::fmt"
+kappa = "9c641511c45b1f86a01815e2dcdb8902c70ffce43edf0c33d935f641621a3a88"
+embedded = "29bf811c5f2ad4ace2ee8e513e9f268931a60a36acfe02a9794a00c9d8687f3c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::pooling::core::<impl at src/de/pooling/core.rs:5:17: 5:24>::default"
+kappa = "6928c7af676583109638579dcb27e67bf187956a54968a22ee58bd38c41cacbe"
+embedded = "7da62a8bdc77b848f492f6c5d9718cd9961fd86c7f950030b73a823ecfd201ac"
+status = "residue"
+cause = "mir::Ty: de::pooling::core::Unpool"
+
+[[fn]]
+path = "rkyv::pooling::core::Unpool::finish_pooling"
+kappa = "26593c3bfb1d3a843940a9e372dcf494f3e5de4cc0a80359552411338abfc81c"
+at = "E=u32"
+embedded = "6756f1fc38db0b57f46278e90da9e529cc21c3667af7081a4ae880d8351b2b43"
+status = "residue"
+cause = "mir::Ty: pooling::core::Unpool"
+
+[[fn]]
+path = "rkyv::pooling::core::Unpool::start_pooling"
+kappa = "35036c73d90fef2943f5595b33961e04038b836db9bec73d915aa366dd8f7d09"
+embedded = "70361f8cadffcb6025edc71a2c927bc2274d40bc4502440170332c74bd7770a6"
+status = "residue"
+cause = "mir::Ty: de::pooling::PoolingState"
+

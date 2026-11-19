@@ -1,0 +1,348 @@
+[[fn]]
+path = "rkyv::PTR_WIDTH"
+kappa = "8de1ec353b0ce25e0bf3a1a077da9d57e2b30bc488fb8b75461ea53341beded3"
+embedded = "076cefe438f10f2cffeb19d59ede32bc67e60b612575a418875ac635ec6b3e71"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
+
+[[fn]]
+path = "rkyv::archive::<impl at src/validation/archive/mod.rs:58:1: 60:35>::check_subtree_ptr"
+kappa = "58db52a529afe1d1c3c4f1fd2a4c460374b0f1288d949525760878c34f11ccf0"
+at = "E=u32, T=u32"
+embedded = "a46889298798ff0ac3e19581147295d853c78a7eccf61bb11d2e317d25880396"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::archive::<impl at src/validation/archive/mod.rs:58:1: 60:35>::pop_subtree_range"
+kappa = "7eb30703c78c64a9d599a4cfbba576c83de9ca0013a8ae9108013d1c239b240e"
+at = "E=u32, T=u32"
+embedded = "ab841552defc561be72a55bc007e8630c07561e281197eb89f27bb6dad80f9ce"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::archive::<impl at src/validation/archive/mod.rs:58:1: 60:35>::push_subtree_range"
+kappa = "fca293487b90b9f5d8ae47520c1404bb995eef0c0d0737f40745e8abb7f0494c"
+at = "E=u32, T=u32"
+embedded = "6a72772bea0596d75ca6f8129bdfa430573aafc5b99cf9a7ae0cf355931cdad9"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "rkyv::archive::C::in_subtree"
+kappa = "3a3a35eb5847b7834478fabc52d8b4b66bef85e59b6dedec16b7a1ccb13e8839"
+at = "C=u32, E=u32, R=u32, Self=u32, T=u32"
+embedded = "f31c47ad2de89f50ca703c8977f07925f7653743c526b2b73e2db2f93eabafb2"
+status = "residue"
+cause = "mir::Ty: <u32 as ptr_meta::Pointee>::Metadata"
+
+[[fn]]
+path = "rkyv::archive::C::in_subtree_raw"
+kappa = "55ae0706ed8c84bab71004bf6b0b1fe1dad502734da12b1d0a975b2f32af88e7"
+at = "C=u32, E=u32, R=u32, Self=u32"
+embedded = "78daf650a983ff4128136b828181cd638274b8378fd270e555b1517368cadd01"
+status = "residue"
+cause = "mir::Ty: Layout"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:131:1: 131:66>::check_subtree_ptr"
+kappa = "cbaa2088fb835bc39b9d218206eb928567fb1a5888dc9f184181757d2ee08c9b"
+at = "E=u32"
+embedded = "40eba290381282111b46e340f6ec61b3531a4bacf7848fbeda88c65a7f5d8212"
+status = "residue"
+cause = "mir::Ty: archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:131:1: 131:66>::pop_subtree_range"
+kappa = "f91bb0fb573e8a85941ba25659fabeb2c63829d4d535f3541725f446d911216f"
+at = "E=u32"
+embedded = "9a18cd7220e5d09f8e9ae6ae552a363d6aa3a8f9a588a0f154104cf05a23ed81"
+status = "residue"
+cause = "mir::Ty: archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:131:1: 131:66>::push_subtree_range"
+kappa = "f4432691b9b6764d73b9f0eec266d66a52bbe5a1b543b033d3d420310586091f"
+at = "E=u32"
+embedded = "3429150c94fcba7216b74096445b9e5daa2b13c5036b6610204bd162ffb80c8f"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:20:10: 20:15>::fmt"
+kappa = "ff728838373bcbe58a5626d49849c3bd4c0805cce80b6ef4ad2691981caba74a"
+embedded = "ec27163502918cf0637a4a3cf5c2d67bbfddb3f77e29a7755875d02f1e953a2a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:39:10: 39:15>::fmt"
+kappa = "f5f6fa2470088131d35d70d2096a5317fa4cd6b3fd18aa2d7aade8d97f5030d5"
+embedded = "06510e316437efb8a68465aeb3a167986befe39728e5e9676de14fc220d11fa7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:61:10: 61:15>::fmt"
+kappa = "3045a50d8ba354d22d2f915f92455f3f464fab25c0199bd01c20a5268e6ce17e"
+embedded = "e8d5336a667aed2c2c04cd073156581d328f96aeb5e911f18e1621409794e877"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:75:10: 75:15>::fmt"
+kappa = "a07f161d6c5424183d09415b6ae4475fe9a18354e56c5254bc2dafcc9bb5369b"
+embedded = "8f1fce35c31dc138c38fe14d1b912f2a58a817c83e3673a378a3035a21c13c0b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:86:10: 86:15>::fmt"
+kappa = "7bec4411ac954841fdfb6066ddfddf7bea7f18646f060da1abd34f65200bd55b"
+embedded = "043e162ff675aeea4b9a422fa3f2ef6378e8d229425d4f26fd31b65096989638"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::<impl at src/validation/archive/validator.rs:98:10: 98:15>::fmt"
+kappa = "c60d0c0097a1f700aaf462bcbbb3810d78b09927546523c25bd450703c6e9e79"
+embedded = "86e9a6d7cc868120ea9b2630accf9478e850da4a933f26b265485de8d3f7a849"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::ArchiveValidator::new"
+kappa = "c618ac0f77f58cec8e894bb3856bf0d60119f99a11c6e3ee17699b9caec8c690"
+embedded = "870371dd45ed1d2124a52a63d577d6a749ab33266cbf2a9f67d3d9267c4faa42"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::archive::validator::ArchiveValidator::with_max_depth"
+kappa = "953d1c2d80ec6f24bbd1328b037511b989a74096b6a4d06e301e3475231da567"
+embedded = "a7c71fbbb04adb13b7606d8e89af1acb365152286bca8d6fe7b09165e6f230c1"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::archive::validator::ExceededMaximumSubtreeDepth::fmt"
+kappa = "6b8e834779e510395be536de30445ab0c2e1d78cc265522d2d4688604af6ed12"
+embedded = "ec6e7ad5c0c5e994699e251683cc916c44366c69c68b3a63dff9b0babd3a3451"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::InvalidSubtreePointer::fmt"
+kappa = "e0c13a89f3cc9cae95c9232b33459c20fc8694f2ae6ac925056edbaf74850683"
+embedded = "de88d9ed4e0e2c2ef95e95b13eaa2a26afa36e693030e487b2f64d021fbf1f49"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::Pointer::fmt"
+kappa = "10041a160fbd47d1fa731f9bc0b4badaf64bd05f87378b119f1c29fb744b34c5"
+embedded = "6b3f0ca12e6128eb20fd019d4d9ad99f5845cf3730a852dd12c9053d9b410618"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::RangePoppedOutOfOrder::fmt"
+kappa = "84957abc97849245ae436465f5e64d267c93a7dff7ed864864385a478df9414a"
+embedded = "af704c8d80b40c2becfdf180b07ef07301a6b28f3548bb93f891d39462e0c3d3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::RangePoppedTooManyTimes::fmt"
+kappa = "e508b78e080ccc97149016208ddc367ae6315c751ba0beedc051186ce8edf74f"
+embedded = "7f3f245521fc5c858045ee851575098d924e9ce53e5c258db86dce3126bc065a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::archive::validator::UnalignedPointer::fmt"
+kappa = "3fa90f332e5cdc8100f76e695e7c8693c2ea6d10fb94e4909667eda4af37d038"
+embedded = "ddd65e18431c428d67f47af2c66a706cd06c885c2c81ee0fb493af48d68ad421"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::Strategy::finish_shared"
+kappa = "1ff37907936331f06a47cf74a1c6996667fec703d31298f7df6e8086c735fe3a"
+at = "E=u32, T=u32"
+embedded = "1a5bb309ef41d98e1ca8bee9a307f44888eb8a478a0d8264ceb9ad70d95e0700"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::shared::Strategy::start_shared"
+kappa = "46b321df44572ee0d2aafc4f640af13f2d4ebc250b6558b4535457316e42359c"
+at = "E=u32, T=u32"
+embedded = "7be5a2ae9a128077cca5d80ba43bba644519b55a10646b39844a451733a9df6a"
+status = "residue"
+cause = "mir::Ty: validation::shared::ValidationState"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:18:10: 18:15>::fmt"
+kappa = "66639e36fc88c048dd9cb9dd4eff6c160cf73995a1648f1bcab8143763fca9b8"
+embedded = "61a96b35f2ff75aa862d6affbbf9570deb589ad4101cbf3efdd557e902573369"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:26:10: 26:15>::fmt"
+kappa = "3fa9a256591c93e945f66f3ff029bb7d904fbe8cb393ac3e40ba64810bc335ae"
+embedded = "64ee54310aa6423731cba7461a99369283c95e2e916172e6ac00350b579aa02d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:26:17: 26:24>::default"
+kappa = "f0a23ca28e70188ae2e41902d683feba8daaabf2d5e53b9b1c443b600af16884"
+embedded = "d655b0933caaa05f88309cbf6b6710cd1d7b457ade806238171b423f57272937"
+status = "residue"
+cause = "mir::Ty: validation::shared::validator::SharedValidator"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:54:10: 54:15>::fmt"
+kappa = "f64f7135ea38a8cb1f44e7ecaddbaa2c5dfec0306d5b82c955a6713e89558247"
+embedded = "bc7f2852966012ec88b92b97e137d254adda9e5864ea50b808d928e44281bb8b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:73:10: 73:15>::fmt"
+kappa = "6c2e0556d883a0cb558bc570dc8c84d1e9bbfb4daa50937ef3d1ad5a5c8d3886"
+embedded = "d87fef093f4183fb892cb43a412509df26a5c852e82f49792e85715cf56ff929"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:88:10: 88:15>::fmt"
+kappa = "805fad41579bea10f05165773880836f21c47a267da38f96019ee94653be6c2f"
+embedded = "797d0a2f31f31fec7e60ce90ba0a39b51d8d04f15b4ff0c7f97dff655d72cb7c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::<impl at src/validation/shared/validator.rs:99:10: 99:15>::fmt"
+kappa = "a41789bc2767b2b58d49ce16feda8e040e4bab6be8be3b33013fec67388c7d5b"
+embedded = "8e92681240d0cdf2d344f38b1bc937d7e759633f30d80d4f7b1573c4c05c9fc2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::AlreadyFinished::fmt"
+kappa = "27da5aadaa21d35f86a7b021ff73a5c31a26cffae784d4985d32541ed12fb1af"
+embedded = "dd7663434269b12bae3f0f6c25ece1a01713d03dd303ffc63e6e600a97d414d9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::MetadataMismatch::fmt"
+kappa = "f0e068afd791e27ab44840ccc167df962e585b10b616c41c6459df0d832b1eb7"
+embedded = "a19d65e447df369e603b1e385681252bcd1ce51c02d9e94edc03d3f2b8bd0620"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::NotStarted::fmt"
+kappa = "935980710626a369027904989aa8cbb294dcb10e992bd972fb8b919478049a72"
+embedded = "f75f123cdd62e7d308339212d62fa29036d50b6bc6e0aee9f93715e1af4d7a0d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::shared::validator::SharedValidator::finish_shared"
+kappa = "c0a9c26c8aee5c4a66d6fb8279d29195556bcd859aab4ce25ce465475d20d423"
+at = "E=u32"
+embedded = "4be2a2c3a8b6362c9ec0faa329692bc64e3dc1c8af1d3d347b96bc48e60e46ad"
+status = "residue"
+cause = "mir::Ty: shared::validator::SharedValidator"
+
+[[fn]]
+path = "rkyv::shared::validator::SharedValidator::new"
+kappa = "c694d6bc8cca831dc7c1ab5bc4d10f78483340cf5a2f1d962a5c51251561ddc9"
+embedded = "43843fefdaaeab614e174d662331701baf61efc899e2b491d6a8dd3d8af3b47c"
+status = "residue"
+cause = "mir::Ty: validation::shared::validator::SharedValidator"
+
+[[fn]]
+path = "rkyv::shared::validator::SharedValidator::start_shared"
+kappa = "de8bd906f249044d1d5c75d8e21c1bc9486dbd569f346c3fa58d8ac67de4b7c9"
+at = "E=u32"
+embedded = "5b15066e4bd4a445d30e67edb7e6d6ee36d3bcc6505dc1cbd883ca3fba472350"
+status = "residue"
+cause = "mir::Ty: validation::shared::ValidationState"
+
+[[fn]]
+path = "rkyv::shared::validator::SharedValidator::with_capacity"
+kappa = "bf76612df89b58ff21e2874d16de622806fbaef9d01c4185a6d0dd6d2b74fd5b"
+embedded = "6f4549048f3f8cbc99fdf58fab6dd7279b22bfdf5609a86a51de3f44a2e497ac"
+status = "residue"
+cause = "mir::Ty: validation::shared::validator::SharedValidator"
+
+[[fn]]
+path = "rkyv::shared::validator::TypeMismatch::fmt"
+kappa = "01dba1f3bf609071c4f54d66fa439c07787f49e60acf64576e62fe270dbbd44f"
+embedded = "c9e6be11133a00437a2acc0ee8bbbde9faa8941eebc46bafe4cb749fc81bf193"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::validation::<impl at src/validation/mod.rs:15:10: 15:15>::fmt"
+kappa = "9d1437555b3df263a6102aa13c2e3b02afba866d89e38715da5da215315b6c26"
+at = "A=u32, S=u32"
+embedded = "dac5e5370b3790660b675092ffdadda1e879a31d15254679f63ff057048db251"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::validation::<impl at src/validation/mod.rs:29:1: 31:26>::check_subtree_ptr"
+kappa = "840ccd8c2da3942ca7353832d79396f27ba3d041c0a6c724b5bf8eccf45b5906"
+at = "A=u32, E=u32"
+embedded = "28953785e4240e839c7b2b4b20fadaacdb88f239f9cc58119ff3bfa69d46b660"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rkyv::validation::<impl at src/validation/mod.rs:29:1: 31:26>::pop_subtree_range"
+kappa = "e9ae71115a2be6623542325ca74215d87304d0f946ec452125904d651984c81a"
+at = "A=u32, E=u32"
+embedded = "2b0a9f7fac4a453f1379a71e453f727d6fb51d01eb8950f7378482c870a82ff5"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rkyv::validation::<impl at src/validation/mod.rs:29:1: 31:26>::push_subtree_range"
+kappa = "e783dde073e7078aae9fc43896955594888dd1bd0b9fbf1420457817b040b1ae"
+at = "A=u32, E=u32"
+embedded = "cc34d55ffa001aff5e056981959ead398ade224927b89b00600d82d1ac7c4a0c"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "rkyv::validation::Validator::finish_shared"
+kappa = "f975d4b15f04a0b21611a86668051d1fe01b534d7c27ffe7efca179bee78b7c8"
+at = "E=u32, S=u32"
+embedded = "fede722e38221b40e8000a059711b75f350d67bf4528d1fe8ec60be16f1a8aaa"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "rkyv::validation::Validator::new"
+kappa = "e86bbab6dd0cfaf98f85e5e7db85df743fa09b507637bd864067afc192920bb8"
+at = "A=u32, S=u32"
+embedded = "ecc236ab1e875ef4f7cefcf1c0dc7318ea0aaf2127b3219f4b32955b59a2c336"
+status = "residue"
+cause = "mir::Ty: validation::Validator<u32, u32>"
+
+[[fn]]
+path = "rkyv::validation::Validator::start_shared"
+kappa = "5241e0b194cffddf5f01d6b637fbdc231348b32221e7c3a1a22d18949f1b1ac2"
+at = "E=u32, S=u32"
+embedded = "0c221380a7eb85b0bbb01b48f8efb90ca5448889e67be27db8c9f12aca80292f"
+status = "residue"
+cause = "mir::Ty: validation::shared::ValidationState"
+

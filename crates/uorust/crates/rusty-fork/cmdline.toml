@@ -1,0 +1,72 @@
+[[fn]]
+path = "rusty-fork::cmdline::<impl at src/cmdline.rs:18:10: 18:15>::clone"
+kappa = "1ba2b9fbce834ea7c4f10bb8fe332c94c891f12dfadda752a3194f4d08fdc4a2"
+embedded = "f05703281f3b679f7ed36fb3b05ae0f365053bc9cc78423a6aa7062b23d394a6"
+status = "residue"
+cause = "mir::Ty: cmdline::FlagType"
+
+[[fn]]
+path = "rusty-fork::cmdline::<impl at src/cmdline.rs:18:23: 18:28>::fmt"
+kappa = "ef00ebb184e680e44997912275a92f8271b8f703fc999eb1a6daacb0d1e7b9ce"
+embedded = "f748070b9456d4022f188c50322941e5651ff37794bf95005d1727343f67986b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusty-fork::cmdline::<impl at src/cmdline.rs:18:30: 18:39>::eq"
+kappa = "18f16d4247ba5005bebbd703b936ff0af1595c33e40611185930b3b76069738e"
+embedded = "1383ccd23a182a976dac0d0afc2d53d6a72f2f29216fa6760e78dcb4b6398532"
+status = "residue"
+cause = "mir::Ty: FlagType"
+
+[[fn]]
+path = "rusty-fork::env_var_for_flag"
+kappa = "230391b67112f6c5ae3bf85c1a8a5f323b9d7061fea6aaa4405a3aa1bdf66dd7"
+embedded = "98d9457231b53b9c063d411e86953570c234a137edc5a51f71a7d608424e50d5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: str::<impl str>::to_uppercase"
+
+[[fn]]
+path = "rusty-fork::look_up_flag"
+kappa = "207cdbaa54776fb0694d3f862084a7c3e7f6b5ec268ca73ce3d49dee5b0a1c04"
+embedded = "a796f95f3b4909f11120a0fcf95d78912af625ef421a13dae7c6c15674888934"
+status = "residue"
+cause = "mir::Ty: cmdline::FlagType"
+
+[[fn]]
+path = "rusty-fork::look_up_flag_from_env"
+kappa = "26ef3f57cba43176853e9c72408ed4406231fb34243fbbc30888a9104e9add65"
+embedded = "bca1a279b3827ce94754253e68756ffa68bd1007166001f8f0590edbcaa39156"
+status = "residue"
+cause = "mir::Ty: cmdline::FlagType"
+
+[[fn]]
+path = "rusty-fork::look_up_flag_from_table"
+kappa = "6e1e79137094f2f7529badbec94f9a14d2369a2c7b0650034617a2552327d1b4"
+embedded = "c0c96660502c3800d14797f521b5fdaf9c4694c8e01143611f5a850b04cf9b6c"
+status = "residue"
+cause = "mir::Ty: cmdline::FlagType"
+
+[[fn]]
+path = "rusty-fork::look_up_flag_or_err"
+kappa = "dd7ebd1f8f29cafcda62e65aa8ded0c66dd407192861b1a1d7c8a7927c4b8ea7"
+embedded = "d143d388e88081df031a1ff4597a95939bb8aa480318b21eb9075e4784fc6ba1"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusty-fork::strip_cmdline"
+kappa = "126e21f2332376527e633246a6a604a8207e08b9389faaff8d52226caa1d3038"
+at = "A=u32"
+embedded = "444bdc384da394bf08a0c554b0c31942486f118e06992f7dd3bcb60eb0b0eabd"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusty-fork::strip_cmdline::<impl at src/cmdline.rs:112:14: 112:19>::clone"
+kappa = "78f2ed7b4b52f65bc12af6434a1be1bcb3ef7f88c73c504992c9c668695216fe"
+embedded = "9b22eef011ee868e3389ebf5dca6254467ba831aa60998391078873cb270ba39"
+status = "residue"
+cause = "mir::Ty: cmdline::strip_cmdline::State"
+

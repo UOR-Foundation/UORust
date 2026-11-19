@@ -1,0 +1,557 @@
+# The futures-intrusive register (written by `uorust crate futures-intrusive@0.5.0`; do not edit): every body of
+# futures-intrusive's MIR at futures-intrusive 0.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 377
+translated = 0
+residue = 377
+
+[module.buffer]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.channel]
+bodies = 194
+translated = 0
+residue = 194
+
+[module.intrusive_double_linked_list]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.intrusive_pairing_heap]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.noop_lock]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.sync]
+bodies = 80
+translated = 0
+residue = 80
+
+[module.timer]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.utils]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 377
+embedded = 377
+evaluable = 377
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: MutexType"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::CloseStatus"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: channel::error::ChannelSendError<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::StateId"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::task::Waker"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: intrusive_double_linked_list::ListNode<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: channel::error::TryReceiveError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: intrusive_double_linked_list::LinkedList<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: intrusive_pairing_heap::HeapNode<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: semaphore::SemaphoreState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: channel_future::CloseStatus"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parking_lot::RawMutex"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ring_buffer::ArrayBuf<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: timer::timer::GenericTimerService<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EventState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: channel::error::TrySendError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::GenericChannel<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: manual_reset_event::GenericManualResetEvent<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ring_buffer::if_alloc::FixedHeapBuf<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ring_buffer::if_alloc::GrowingHeapBuf<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::StateId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HeapNode<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MutexState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NoopLock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PairingHeap<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TimerQueueEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TimerState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::ChannelReceiveFuture<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::if_alloc::shared::ChannelReceiveFuture<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::if_alloc::shared::GenericSender<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: channel_future::RecvWaitQueueEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mutex::GenericMutexGuard<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GenericChannelSharedState<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocalTimerFuture<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MockClock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::ring_buffer::ArrayBuf<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::ring_buffer::if_alloc::FixedHeapBuf<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::ring_buffer::if_alloc::GrowingHeapBuf<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::ChannelState<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::if_alloc::shared::GenericReceiver<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot::GenericOneshotChannel<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot::if_alloc::shared::GenericOneshotSender<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::if_alloc::shared::GenericStateSender<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: manual_reset_event::GenericWaitForEventFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mutex::GenericMutexLockFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::GenericSemaphore<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::GenericSemaphoreAcquireFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::if_alloc::GenericSharedSemaphore<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::if_alloc::GenericSharedSemaphoreAcquireFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::mutex::GenericMutexGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::GenericSemaphoreReleaser<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::if_alloc::GenericSharedSemaphore<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::if_alloc::GenericSharedSemaphoreReleaser<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timer::timer::LocalTimerFuture<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timer::timer::TimerFuture<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RingBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: intrusive_pairing_heap::meld: futures-intrusive's MIR stops at type outside the lift: intrusive_pairing_heap::HeapNode<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChannelStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DropBomb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericStateBroadcastChannelSharedState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SendPollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimerFuture<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Waker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::ChannelSendFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::RecvWaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::SendWaitQueueEntry<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::channel_future::if_alloc::shared::ChannelSendFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::ChannelStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::mpmc::if_alloc::shared::SharedStream<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot::ChannelState<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot::if_alloc::shared::GenericOneshotChannelSharedState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot::if_alloc::shared::GenericOneshotReceiver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot_broadcast::ChannelState<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot_broadcast::GenericOneshotBroadcastChannel<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot_broadcast::if_alloc::shared::GenericOneshotBroadcastReceiver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::oneshot_broadcast::if_alloc::shared::GenericOneshotBroadcastSender<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::ChannelState<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::GenericStateBroadcastChannel<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::RecvWaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::StateReceiveFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::if_alloc::shared::GenericStateReceiver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel::state_broadcast::if_alloc::shared::StateReceiveFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel_future::RecvPollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: channel_future::SendWaitQueueEntry<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: clock::if_std::StdClock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: intrusive_pairing_heap::PairingHeap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: intrusive_pairing_heap::safe_lesser::DropBomb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: manual_reset_event::PollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::PollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: noop_lock::NoopLock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot_broadcast::GenericOneshotBroadcastChannel<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot_broadcast::if_alloc::shared::GenericOneshotBroadcastReceiver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot_broadcast::if_alloc::shared::GenericOneshotBroadcastSender<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot_broadcast::if_alloc::shared::GenericOneshotChannelSharedState<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: semaphore::GenericSemaphoreReleaser<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: semaphore::PollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: semaphore::if_alloc::GenericSharedSemaphoreReleaser<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::GenericStateBroadcastChannel<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::RecvPollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::RecvWaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::if_alloc::shared::GenericStateReceiver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state_broadcast::if_alloc::shared::GenericStateSender<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::manual_reset_event::EventState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::manual_reset_event::GenericManualResetEvent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::manual_reset_event::GenericWaitForEventFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::manual_reset_event::WaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::mutex::GenericMutex<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::mutex::GenericMutexLockFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::mutex::MutexState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::mutex::WaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::GenericSemaphore<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::GenericSemaphoreAcquireFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::SemaphoreState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::WaitQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::semaphore::if_alloc::GenericSharedSemaphoreAcquireFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timer::clock::MockClock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timer::clock::if_std::StdClock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timer::timer::PollState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timer::timer::TimerQueueEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timer::timer::TimerState"
+bodies = 1

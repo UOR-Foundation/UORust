@@ -1,0 +1,269 @@
+[[fn]]
+path = "rusqlite::free_boxed_value"
+kappa = "c9aaf0256c63f2f0f6ce1662688691f8123a3597406a9e48bfaa9f52fbecde2c"
+at = "T=u32"
+embedded = "ffe973c137be40872cadfa5b3cc560070dd79c677e966ceafc7527961144f1ff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "rusqlite::make_nonnull"
+kappa = "be27c936451a46c8d5d7cda1c7c060f86d0fae6021c1a50e934f12b1c66d1ba9"
+embedded = "864ef710cbdb729c0a03a4bc0dbd933d59500aadb0df671bec9fb11d52f5da9a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item util::sqlite_string::NUL_REPLACE"
+
+[[fn]]
+path = "rusqlite::param_cache::<impl at src/util/param_cache.rs:6:10: 6:17>::default"
+kappa = "d8610762e3a617ec0c22b0ac5001db62532a500aae598f23cb0bcfd7a471c468"
+embedded = "e7b6fa599443ae059d33cac752d678db25e8740ea41395c7a809e0e5bbe0fbf7"
+status = "residue"
+cause = "mir::Ty: util::param_cache::ParamIndexCache"
+
+[[fn]]
+path = "rusqlite::param_cache::<impl at src/util/param_cache.rs:6:19: 6:24>::clone"
+kappa = "fd5987f3f24283762ac558a1b2b7e8ceb632003466e5b80d2497408e3a8fce5b"
+embedded = "abd2ad534bc74d6d7168c09c08564e50215133b6d1cd21b897a0afc2ffdc8090"
+status = "residue"
+cause = "mir::Ty: util::param_cache::ParamIndexCache"
+
+[[fn]]
+path = "rusqlite::param_cache::<impl at src/util/param_cache.rs:6:26: 6:31>::fmt"
+kappa = "a45729257c11844e91df2992e1d20abd76f6b833f71a194f15217ab7d960f605"
+embedded = "8dc784bb40d38789b0eee6d16b658a874434c8df031eb81a0eb5581a81c9b0e5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::param_cache::ParamIndexCache::get_or_insert_with"
+kappa = "88c9ecc40d74936b34a91b4db3c6c3e05d5fa4e8e53a7ebaa496755d54709363"
+at = "F=u32"
+embedded = "c3ca0d38a81fabe1fdd5dcbb2f4d55a7794142fcf3a0b6fa85b02693e1dec548"
+status = "residue"
+cause = "mir::Ty: ParamIndexCache"
+
+[[fn]]
+path = "rusqlite::small_cstr::<impl at src/util/small_cstr.rs:7:10: 7:15>::clone"
+kappa = "e0bb57cabb41c3179985d8a249ad1ef396b8c45dc0b5a8cd6c90ea4aaa5edfa4"
+embedded = "c9c746cc96b8d62c15602bc68b87d6eb0dd0e04bcf54f30e75eee3e4d878e31a"
+status = "residue"
+cause = "mir::Ty: util::small_cstr::SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::<impl at src/util/small_cstr.rs:7:17: 7:26>::eq"
+kappa = "97787916aa4bccb1549b81b9b42a5daafba7516d3f16e800f70ad65c151fe5af"
+embedded = "ce07b363b341009f17bfad9f33cecd25b85217470b86f6d1af099fc8e7c7b2cd"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::<impl at src/util/small_cstr.rs:7:28: 7:30>::assert_fields_are_eq"
+kappa = "cb7e7887c1b3fdb806be991dfedc634b90c6d977e8a771705e7ec2cddfa67b2a"
+embedded = "b6436f3a019765d436818ccb4b1b575d801169eab60f03f29b9a3a8e9e65b66f"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::<impl at src/util/small_cstr.rs:7:32: 7:42>::partial_cmp"
+kappa = "22c977d125b7544645d10817fe6131d099bf30a9644cf96c848f5b0a3954aa32"
+embedded = "1f4a1b41d790b5a92836cc1afa8dbb71e7f30c3a81a78be9ec7ec011e7638152"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::<impl at src/util/small_cstr.rs:7:44: 7:47>::cmp"
+kappa = "99993b295c6ed3a6340a39ead2e97445bec3a44426f70e353aaa423c75d6d0ea"
+embedded = "c8a30717c0b3c5e15c5c485a9b33bbe1c1558b9106f375de66bd88e2dde5d9a5"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::as_bytes_with_nul"
+kappa = "4eda9ae372cbb28e4b86428f71e05d66bf16f57ad379bdbcc4fa0d6900412851"
+embedded = "f0c994de9f22305f10d2d5f0a766a7687910943c852fb10a613ce02dfcf34af3"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::as_bytes_without_nul"
+kappa = "b8961333101df76b0eef2dfeb45c2c4c0e8033f0a8f517ae6c67f3a9ef4a72d0"
+embedded = "daa01577fc560e0c9db4eb927a2487a0f5df315c03288a4ce8c03f9ddaf3c856"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::as_cstr"
+kappa = "0163d8c6e0f850300d8401a5f6e8353ececd672fe7a2a2d19fe4e9ed982d708d"
+embedded = "8795989cf0e4332af6b41a8566da33e4925b8e1591bea7108d5775f31f90fc70"
+status = "residue"
+cause = "mir::Ty: std::ffi::CStr"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::as_str"
+kappa = "9ba989c0d34ed24428573073c9a5ad89924b3b20d85e46f18fa3ffb9d6810743"
+embedded = "ff834c235c80c2c776bb65690ba03fc0fbc867315c9aa7411fb6c7f8eccca48c"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::borrow"
+kappa = "76a4c27fb1d0dc7294355c1c70590ad4790b56dbd30454a33125e5048bd1dca6"
+embedded = "1b1b58641f3c7fd5a99f3ed15684f81214109250e15c4ecd5f9009e3e048f2c1"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::debug_checks"
+kappa = "868eba5396276f660d543318302b951e4568ebb2ce337660d871fa1d35b3338f"
+embedded = "21222b035eeb2398f06824cb356418acb3767b7e3413896fa43fc0915c7d63b1"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::default"
+kappa = "e4a1dc1127e58b34d961bfc36082a3f56b2790bdbc312814be85c417537084c3"
+embedded = "fcdf43b1771ed71a50114870af2f3d51b7aa7704b9980d140b8f29bbfb922dd2"
+status = "residue"
+cause = "mir::Ty: util::small_cstr::SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::deref"
+kappa = "aaac24802ad0fcc71f0558b1209c2f8eb6d1c6af5639279b2116d6bb8361a529"
+embedded = "c6712de85a6bd8f9056f64e0e097537b8662b6fc59b759a36f4d82e56c398093"
+status = "residue"
+cause = "mir::Ty: std::ffi::CStr"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::fabricate_nul_error"
+kappa = "b060b6a557152ed14d9d194ecefa7f75a2b5b1a08ec06513d6fb063b857b8c35"
+embedded = "25feeb871a245f78a3422a6e311bc245d32bee289261fb46b5788ec8e7a96def"
+status = "residue"
+cause = "mir::Ty: std::ffi::NulError"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::fmt"
+kappa = "348a58dced8b016cbee8b82f4f675ae631f77d3bbefaf049b75416df4bfb693a"
+embedded = "da5ab49e81cb9d6ae7fa9f218af93c142e3efce3610879fca81168222807bb97"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::is_empty"
+kappa = "738a17ea7c0d408ed7243178eb55ff684c82953a18c13cfcce015351a35ba7de"
+embedded = "b38035fcb48fb39743da4501b874611fa5a1f2ba4a23d428b3d92a4240e4eb36"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::len"
+kappa = "63fe0436819f9c2df150fee5c0a134db9ea350fd8ac7c3772f1f3f734a87aac5"
+embedded = "324c7b320cbba82cfc96255fde89f46e2a732daef9fc2c1544f1cd06d704d61a"
+status = "residue"
+cause = "mir::Ty: SmallCString"
+
+[[fn]]
+path = "rusqlite::small_cstr::SmallCString::new"
+kappa = "2821144d7e4ada9dcbe71b28b06f33615e2078bb7448ca56373e009b1887f3f2"
+embedded = "d89a836283af7953fcc2cd0347268b7870458de0b220737f644cdd485c4186ba"
+status = "residue"
+cause = "mir::Ty: util::small_cstr::SmallCString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::as_cstr"
+kappa = "2c77ab9eac915822318489482beb853df4a03de8129b8b4f17c28675c1d277bb"
+embedded = "c269034821f1142c0849dc48202ab40efb22b184349ea55d227a9dd35076821f"
+status = "residue"
+cause = "mir::Ty: std::ffi::CStr"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::as_ptr"
+kappa = "4c084a57e52a241cffc22f7890b829e7af6b2b9a7fb620aa8937d39a042ba383"
+embedded = "84b5476477da462b053b8a5985b8a61e91403e43f1b11cc974376b412e1bcabf"
+status = "residue"
+cause = "mir::Ty: SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::drop"
+kappa = "53b044f3416481fc2591854fe304070c652cf4c8881d4dbd05aa78074c82cc08"
+embedded = "aab90a9305b004c9170e61a1f63e93d6bc2872d1fb4330c973ef61480ec74c81"
+status = "residue"
+cause = "mir::Ty: SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::from_raw"
+kappa = "edfe6cf80a3e3690b085b96d6e283cb500ab07bad1e33d84c877423c46273427"
+embedded = "c571baf2c20c23e54bd14a79a3200f0b118b9f1e237fb8756559bb3b0b73a406"
+status = "residue"
+cause = "mir::Ty: util::sqlite_string::SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::from_raw_nonnull"
+kappa = "9b62157ba921935bdae881e6d74ad90c44e47eca794e62437673acceadb44d82"
+embedded = "42af696f984f405cd15876cd26143934c0910413ab60ac0f30000da3ca965657"
+status = "residue"
+cause = "mir::Ty: util::sqlite_string::SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::from_str"
+kappa = "8127f2df17b4614f4cb1b8ca02f50a72bf8dfa80faf1ce2a2c4dcf3731b7d18d"
+embedded = "cd88e7106ec4a189f4d01328ec30a7f0b0e59e9bc718d29015419b2216f4e7a3"
+status = "residue"
+cause = "mir::Ty: util::sqlite_string::SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::into_inner"
+kappa = "415d0bf7ad915ff97ea8edd768ce1d204cfe537437a4288f3ac15e21db8db915"
+embedded = "f814db78f58ebdb610f1b4f682a99a252501637851199e65f32345dfabe35156"
+status = "residue"
+cause = "mir::Ty: SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::into_raw"
+kappa = "aeaa78a5f14eea55cc0f586562039c8192dbc5371105dc238bf878df6ee28e6b"
+embedded = "8b5c05bdd307ee7194a9c045f6b42cf1c72c983304b1a6a06e693861be8a5a17"
+status = "residue"
+cause = "mir::Ty: SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::sqlite_string::SqliteMallocString::to_string_lossy"
+kappa = "ecf1a0011612e0a48630d5030054c8602cac1c88f774c255818a7a4ee9b00fea"
+embedded = "4f5e486ad114ae52924677f120ca631f866cd7bb60df40a14a2461694c36dda6"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "rusqlite::sqlite_string::alloc"
+kappa = "29b2d6bf66c2f21772a661afff0bb84ec47b392c3863dd560bfe99adf0b8b2c7"
+embedded = "145615be935a2ead5bf03a5f11cc164bd49da83351eaef35b3ddeb702b1fb0c0"
+status = "residue"
+cause = "mir::Ty: util::sqlite_string::SqliteMallocString"
+
+[[fn]]
+path = "rusqlite::util::<impl at src/util/mod.rs:53:1: 53:19>::as_cstr"
+kappa = "bfd0c04314dfb0dd998febcffd075db076bdd2e74382755c08abc363de8df1a8"
+embedded = "523038ea791fbc71db42f8ead9c2e677a8b436e52462ab8d01424c910c11f480"
+status = "residue"
+cause = "mir::Ty: util::Named<'_>"
+
+[[fn]]
+path = "rusqlite::util::<impl at src/util/mod.rs:59:1: 59:20>::as_cstr"
+kappa = "3f649bb572c5843dcf37ab3bb4fb8206d0701c42b13f617af3092c1e16980257"
+embedded = "788f96625869c1c252aac4d97d22674ba08236466ff0c496cc40170c0a5c34e7"
+status = "residue"
+cause = "mir::Ty: util::Named<'_>"
+
+[[fn]]
+path = "rusqlite::util::Named::deref"
+kappa = "2e33ae71c2a5084f00180470b1594ccb0c9abf1d210cdbcd96be56f66ca14063"
+embedded = "06c69f771f6e28fc8f09f774bd589caa206e84ffba7baeba73bc0e3c690101c2"
+status = "residue"
+cause = "mir::Ty: std::ffi::CStr"
+
+[[fn]]
+path = "rusqlite::util::from_raw_parts"
+kappa = "bc6296c8da3a463ce29b9348ea25ca0dd7badb16860b0afb885bff6d8e8430a1"
+at = "T=u32"
+embedded = "09c7465f8e63975cb9ffead5a2cfcb94259861454e5a0e7ce6846fc4011c3bee"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::slice::from_raw_parts"
+

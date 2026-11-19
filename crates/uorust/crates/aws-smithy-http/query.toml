@@ -1,0 +1,36 @@
+[[fn]]
+path = "aws-smithy-http::query::Writer::new"
+kappa = "476242ab3293dcb5cb80d8b699eebbe4ce21154b98731dac79694a8a75c49452"
+embedded = "af0afaef6ceb17c155bde8afd060dea6a8f2cd948fcdf5050e8ec200fe760554"
+status = "residue"
+cause = "mir::Ty: query::Writer<'_>"
+
+[[fn]]
+path = "aws-smithy-http::query::Writer::push_kv"
+kappa = "fc8e99789ff1966aa38ba66c49f4a40f2617214e4c987f6c4c3527126901ef21"
+embedded = "94c0f7a700be7c0d3bddca986c995220ba28b64091aad75be43fae42e9215450"
+status = "residue"
+cause = "mir::Ty: query::Writer<'_>"
+
+[[fn]]
+path = "aws-smithy-http::query::Writer::push_v"
+kappa = "04b0b47f2fd4039118e902b3b67147f3eee6019446b14cacc71aa23d46fe48f0"
+embedded = "fbd5f84edc66fc250fb96b86fccb08efd632c2a6aeca09424f4214763df3eab6"
+status = "residue"
+cause = "mir::Ty: query::Writer<'_>"
+
+[[fn]]
+path = "aws-smithy-http::query::fmt_string"
+kappa = "5b41d02b2727697f4f597292f550e3b350e35fd03995d080377ea5c98be386db"
+at = "T=u32"
+embedded = "ad55b835e446469eccca0a8dd106eb5aa56240031139ac0267be7e07f08a763a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "aws-smithy-http::query::fmt_timestamp"
+kappa = "69a857e141d3d4347c2f1439029d1f314d0e728d96db054eabf76a0774a36dcc"
+embedded = "9531ecc857782de19bef8bef1d5e225e1ed06de8eaff163022f27f9c301b365e"
+status = "residue"
+cause = "mir::Ty: aws_smithy_types::date_time::DateTimeFormatError"
+

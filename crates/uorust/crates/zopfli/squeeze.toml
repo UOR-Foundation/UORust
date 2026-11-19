@@ -1,0 +1,152 @@
+[[fn]]
+path = "zopfli::DSYMBOLS"
+kappa = "9c0f0e74a553c34b2eb8183bfa4c8a552dd70d7ffe9b4863c09b9d1bf58c578f"
+embedded = "6058b6e523ca16298a4b4c073a068376246387d3496abb7264b04e72f4845573"
+status = "translated"
+digest = "698ee09b8f54cc09e57734ec860d285756968e6eb10c718329267f5344960913"
+
+[[fn]]
+path = "zopfli::add_weighed_stat_freqs"
+kappa = "8fca54c4c44be21ba7141402306e34e396c3b916f37ae23b41d4548ada80d7ab"
+embedded = "cb1fc9bf9d323f0925a0a7826d9a6121a3944b10eecee97b6b98af5d08cc4247"
+status = "residue"
+cause = "mir::Ty: squeeze::SymbolStats"
+
+[[fn]]
+path = "zopfli::calculate_and_store_entropy"
+kappa = "3c2efefbe690912d29610ac7481d341c75ea5ef6a8fbcd0b8f9a73a692722a67"
+embedded = "635390255adcccc4d0e35fd33f07618bec7f39e8901f43597bab6d5294076081"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zopfli::get_best_lengths"
+kappa = "4c658b6b457cdf0ea9016634eefdd92f26648b7e31e41431f3bf2569693716db"
+at = "C=u32, F=u32"
+embedded = "33822356ebb4ce14a13737e4c7d894d0456d626f0e350e93fce14b54dde8ec0c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zopfli::get_cost_fixed"
+kappa = "670153002495371620f405d3bc673adc114bbadf567e8d1c1e716099984e0acb"
+embedded = "6e53618179a369f5555e222bc38b6343d16655c54157e6190e3166291a1ce1d5"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zopfli::get_cost_model_min_cost"
+kappa = "6d262aae013a4929d026ca90d9dfd7a4d38d39e88451cd8f40ebf4cb010d50ac"
+at = "F=u32"
+embedded = "c23d1bc3aba33ac7eede1fcc8911c78ec377acd2d466d07121539faf89687f7f"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zopfli::get_cost_stat"
+kappa = "13e034a507986b838992de6bef872965b34a967daeb9c73784c3f623dacc014d"
+embedded = "09cfc4bf5682c1c6275785c54bbfe8a735441901be09646abd5b1d9fbb27df3f"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "zopfli::lz77_optimal"
+kappa = "a86d66b675649a3b3003d5d32cc319f7c5bc0ed8f119beb4e9e866c836c014b4"
+at = "C=u32"
+embedded = "567da7b5713ebb62b45dd92fe86f40138738d6487ebe4b9e459f689109f4e0e6"
+status = "residue"
+cause = "mir::Ty: lz77::Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77_optimal_fixed"
+kappa = "a6d45de81410aa427fcb625748a2b7149c07fdd3b397cb3c2bc5d30d71585d08"
+at = "C=u32"
+embedded = "6c9ba959277bb3759e9dae4b4a05fece2c75efb04647d49322407bc4c41d4215"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77_optimal_run"
+kappa = "9105f4f9265416e8845471504509208063fc6be5bc38346b60ed7d7736564ff5"
+at = "C=u32, F=u32"
+embedded = "218350d6b816544416efa14f5c18ee1e04ee98c758a53de354f239a95392adde"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::randomize_freqs"
+kappa = "eb6f459c2a3d3a7a1c6cd26976b1d44633f27b72f5388d44a1eb83635dbd46da"
+embedded = "c12942ddfc8e08ff0f4b20e9dd4b5f9e6651bee44a8e510729df79862867b40c"
+status = "residue"
+cause = "mir::Ty: RanState"
+
+[[fn]]
+path = "zopfli::squeeze::<impl at src/squeeze.rs:61:10: 61:17>::default"
+kappa = "f3d6c18b8f5a70e7033ea530ff0b5a867fa585901b41936c7b446a0934eb4d22"
+embedded = "67be065037e4aff7ef671b0f579db76eecc394c834e7321cc465cce01189884e"
+status = "residue"
+cause = "mir::Ty: squeeze::RanState"
+
+[[fn]]
+path = "zopfli::squeeze::<impl at src/squeeze.rs:80:16: 80:21>::clone"
+kappa = "f6d87d499e02379d7d6a25dba4cdf05d782703e8203004c05f4a0867b5b58796"
+embedded = "d102b0ad1aa938e0a766848cf06a0c4f8fcec016910ccaeb1e29cf4f32f1938c"
+status = "residue"
+cause = "mir::Ty: squeeze::SymbolStats"
+
+[[fn]]
+path = "zopfli::squeeze::RanState::new"
+kappa = "c0fa88d9527917aeac3458f5f1c3a394d022eed69e6e66eb00b36ead7b0b287c"
+embedded = "89c04d410d19374d7e452e8db97941609a6d66d87affa0a4cf3b161755d36c6a"
+status = "residue"
+cause = "mir::Ty: squeeze::RanState"
+
+[[fn]]
+path = "zopfli::squeeze::RanState::random_marsaglia"
+kappa = "e0c53ddf97871d449a3fb75cd43d4c5ff6b9774bbf59a8d7b6add705ee175279"
+embedded = "7588e45f6530325a2e2e07b6b7d6024be3fc6009b12bd616dd7a3cca34080428"
+status = "residue"
+cause = "mir::Ty: RanState"
+
+[[fn]]
+path = "zopfli::squeeze::SymbolStats::calculate_entropy"
+kappa = "f736516de193c1bee5e97bab8753f7b1eecc5c4a6c1a3a1700cd5a82847066df"
+embedded = "b2c7beb4fd58d0cb8ff7acb85377d20450a2d999bb2175b16a1ace616bba766e"
+status = "residue"
+cause = "mir::Ty: SymbolStats"
+
+[[fn]]
+path = "zopfli::squeeze::SymbolStats::clear_freqs"
+kappa = "0a83324281ef39315bc96b19a1828c6d7bdbd492a519e7edd281e551be2ba31d"
+embedded = "d13a882bf501b190d1e63331f3bc1869a66726b2ba7f014ce60118f5e300f2f7"
+status = "residue"
+cause = "mir::Ty: SymbolStats"
+
+[[fn]]
+path = "zopfli::squeeze::SymbolStats::default"
+kappa = "43f2ceda8c3df83f6ac4a7194a212d0532fa181aa2a64d9aeb2473156813ce43"
+embedded = "fcbbe182bb2fdba955bd271572700d9735685f8bde869ed0871a8ae514c57d0d"
+status = "residue"
+cause = "mir::Ty: squeeze::SymbolStats"
+
+[[fn]]
+path = "zopfli::squeeze::SymbolStats::get_statistics"
+kappa = "464364b2164bbf1b6122cd98ef6fa1d0bebed64fe383a812018e206b0c1ee594"
+embedded = "33781f86bda404aaab81698becd7f71c947121883b3f9986f4e0e6f4346825ed"
+status = "residue"
+cause = "mir::Ty: SymbolStats"
+
+[[fn]]
+path = "zopfli::squeeze::SymbolStats::randomize_stat_freqs"
+kappa = "c2bb4d4d6b69ad8315f33f8e880d377b41d2d58848c3a3faa5bf0fc8b0696756"
+embedded = "60eecea0763ffe2a4db94732328cb742239434f96fd3c3a46a64c629c760d6be"
+status = "residue"
+cause = "mir::Ty: SymbolStats"
+
+[[fn]]
+path = "zopfli::trace"
+kappa = "b2e90ed6510753782a59475f4f8acea2819ce6934408c889bf2ad00f22f52937"
+embedded = "8bc211801d59105e4849c7f608ff7c469f1f515ab0ac258c2ff44dd8ab4b119b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+

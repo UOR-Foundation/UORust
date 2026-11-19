@@ -1,0 +1,567 @@
+[[fn]]
+path = "sqlx-postgres::authenticate"
+kappa = "5657926f5f686415cc6d8b5a32f0384181b7711cb03b0614a0e0d7864c1036c2"
+embedded = "f2f160d0882968c6736431861222a8722b04e11016ee8d357e3d1d95ac416422"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::sasl::authenticate()}"
+
+[[fn]]
+path = "sqlx-postgres::check_stale_plan"
+kappa = "9c3bbb4b98763245cbf9a6ac5d62f15de479659754e46826652fcad6f768e605"
+embedded = "0d3c7745f6a64550f4b0a0eeba8a0527dab907cbf2ea52234ecd475abb5affa0"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::as_mut"
+kappa = "111270c51fb30de9235dbeb9b947b92a4fd812d52b3bb18023135c008fcf4069"
+embedded = "ad63488edd8dafdb4fe9138c23a49ff31aa4b0ef9767d75b36a3b64441ebbc4f"
+status = "residue"
+cause = "mir::Ty: connection::PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::begin"
+kappa = "03a4aa006593e58b17c2d30e73832c876fd898a516d1ce30bd48c9096a24d212"
+embedded = "562c294fb5c1afa32afcad4c26bfa6e16840d569bc2ce78593ef62f65f3a7fbd"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Postgres>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::begin_with"
+kappa = "56b351f6283c17d0b1dd1ab02904448449e086ee0c58a52a93a0194462d2d18f"
+embedded = "860f156a978247c890c61c2d1a074fd0592d5ad99536ae6735bdbdb52731c6f0"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Postgres>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::cached_statements_size"
+kappa = "8e6e9503b526493ab2fedaa52ea43790e9cbeb4ba77de62f5bb3813026e538da"
+embedded = "76b74a304e22223858eea1486bf89e5b8782f943ba032dcc767173e5974ebe86"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::clear_cached_statements"
+kappa = "a4f5b659365d60ab7b8b79e49ae026624fb184a2dc14f4c259fbdd278b0069ca"
+embedded = "7f0bb984e249f2206b8627258afdb047e31eab924e4c34d0f96d4bb5f6592557"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::clear_cached_statements()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::close"
+kappa = "a1cbddb32baff79a958c77552de7e39b008c0caf7d941c53769d27393520a22c"
+embedded = "54dbc24581f90afac2531a924e7b117d4154d6c35c51be58b7fb5d1c6056c423"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::close()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::close_hard"
+kappa = "66c34b2d4ef592b71efacd26fbef285c2d45621b08ff7ec53c7766d1be494721"
+embedded = "93d4c2c88d2b4966daaf4faf255ed0fb00a4b5f28d0863c0dc85a15e57fc1111"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::close_hard()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::flush"
+kappa = "4c56f87e5e2d4f0c94c5197a3c1c698e3fa347ecc0375b12105eb545e7d2762a"
+embedded = "a37d20d4d641b18bc82de752b2b0be44e4dbc482c47ab7ebdac2a1d3ceda69df"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::PgConnection::wait_until_ready()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::fmt"
+kappa = "d8b4d17a93fb974f3552d8840cb5e5e81cc57d9475e6cea4dd804cb6f5eed52f"
+embedded = "9d1c7993c38f9a5ee9345c75fdee22f11217f05ead4b647c128f22b72612d026"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::handle_ready_for_query"
+kappa = "333496fbbbf5d14dd95e21f5e760060236f11fe26b27aaeb898068f9abda1e3d"
+embedded = "f4abd9668efa75fc629e2a3cfb8ee9eecd8a567af35ee9fcc68cff47a45a0a25"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::in_transaction"
+kappa = "5495a3c10bbcf58f6172d5a1d09e3be1cd7cb4c6224fa8bf827fff12034bef2a"
+embedded = "7e0a0ec9d0e47085c0e3046da478548fcd93b35ec18510fbb80901e6fb3dda29"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::invalidate_cached_statement"
+kappa = "0882bf5760c626b9d6e9ca10419969f9e73f13cad6221bfb3991fff64ebb85fc"
+embedded = "dc3bda7822f84c8da5efc402a5472fa4d822195e4bb7a6d0de494899d25051b4"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::PgConnection::invalidate_cached_statement()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::ping"
+kappa = "e5ea183ba8aa892d36a720f9a73c670ae3cf50baa8f976afee1681f2d88ab991"
+embedded = "46893cb845be7213e0f238fe21620d69ccab57bcc73a9e585996e2ed2241c17d"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::ping()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::queue_simple_query"
+kappa = "a1645a94edbda76d067a9c5e7b88d296d937493fc0a6c7029cc017b9ec8be63f"
+embedded = "596b47904e36a7989cb010abd8f7b01ac2e7a0ed94822b102c8c5c3ca3b1757c"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::recv_ready_for_query"
+kappa = "e4863c80a020670a2511fc3708c85d6aa05783e5d4aaa5441ba09626ad237f6f"
+embedded = "849d9a3d3ead08c2a594b60c9267c701ce4614142c52585fe9ecdee1dd784a6b"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::PgConnection::recv_ready_for_query()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::server_version_num"
+kappa = "b170192e10552f42e8d5a1d96b3ad0b8a4a92ace418ea90cc8b2c4df0da7c869"
+embedded = "563a474b99e8b54f4b3eef89634d349724f97215c162c98c2ca47c7e1c14bb55"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::should_flush"
+kappa = "8f15d5f38e1f62d8066c6f1b804174894cdee56f385fc9fce4e21657639d13eb"
+embedded = "640b8ad2772e93c3509143e753890d4c1c56f7d3cd9e7ddf75f1f8cdc9fe6776"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::shrink_buffers"
+kappa = "60c8306100c701a653c7bf3f89912269e5f6a2ece88535e46c13c6b750176744"
+embedded = "9d66fb181667d5b79849893648c474413bc81d52ce95ac1b90e092d362b42686"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::PgConnection::wait_until_ready"
+kappa = "c0827bdca667ceedcd0274e6f459e72ddbd9bea9de58f66c37d6549bf4583c8d"
+embedded = "990da7d5287750f2de0b006682e4ebf3d1d970742a5cdd93ebcf27f7a6c3441b"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::PgConnection::wait_until_ready()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::<impl at src/connection/executor.rs:444:1: 444:47>::fetch_many"
+kappa = "415454224d13f48e5e8df54cd62a3d6ab905f53d0fa42afe6c9ad378907573cc"
+at = "E=u32"
+embedded = "8be9e25913f7e97de2a8a9b0f6f6519f91749302791e8ab950b9ac00b2d54a58"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::PgQueryResult, row::PgRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::<impl at src/connection/executor.rs:444:1: 444:47>::fetch_optional"
+kappa = "ebf3a5455b7cc865503587266bef5be8e21f6243c5532efbf2bda51382d13c6a"
+at = "E=u32"
+embedded = "a8de4b278d1f009b28223b4b41fd7da5382c3ca785fc531093d8c7176a7a06bc"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::PgRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::<impl at src/connection/executor.rs:444:1: 444:47>::prepare_with"
+kappa = "508a3a1b06fb7534713d03def2e746cab6210ed6b453d80583c1869fd1ff96aa"
+embedded = "341b84a07b9355c1c8c4820cbe1dfdcbc32a55ee479a959555e2253b20e57074"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::PgStatement, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::PgConnection::get_or_prepare"
+kappa = "5f71557b29ecb2a286cf3c950e6513649d74ab8bc36dfd312186023039930bfd"
+embedded = "88b827de03fc63e631d3091edbdf80b610df565a62912d1e5566ece3173dad32"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::PgConnection>::get_or_prepare()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::PgConnection::run"
+kappa = "99304ad6aab9ce762f117a312f9a63fc93c10ab1380e9e9f80a4876e1dfdad54"
+embedded = "14cf3917d76dda6bc008030f81457ad76c9216ff9635c8f516fa055fedbf5191"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::PgConnection>::run<'_, '_, '_>()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::PgConnection::try_get_or_prepare"
+kappa = "03826033e7e6b059e9257214b28b085770cf4456328faddaf79310c5ac964c39"
+embedded = "d6f834715a1066e461a35268088099485ff3d8d864973e4d47353872d695f4c3"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::PgConnection>::try_get_or_prepare<'_, '_, '_>()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::PgConnection::wait_for_close_complete"
+kappa = "e99b68de775f9e47def26cfe3db9ddb56e935db74119a8ffdff374939c4957b8"
+embedded = "c6504f206d42f92ddf646195ddbe481d0c906ead45c08a05e566a4dc0f872c1c"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::PgConnection>::wait_for_close_complete()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::PgConnection::write_sync"
+kappa = "96c2c2d5f01d723c9f12866905c18472f539d00d6354c91a867c3067db0334e5"
+embedded = "abf8ee7be381891f687a3d5f29342169214012b7f8e4dc0d142c7eafcd232e4b"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::connection::executor::prepare"
+kappa = "3d57e6024ef67a74a67f3edb7de6572c0ad8f8b25b5cf80610c3c163e047bd6c"
+embedded = "18b874faa375f9d0b32e12287c71dfc9c13049f6dc2eb3c97dca7dcf80a1307d"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::prepare()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::connect"
+kappa = "b84c4e81db5e75bf78a0de2c866ce3c6e5b3bf0b32463e518ff0d71832140600"
+embedded = "ecfb554f552abcd3af98a751728935e195b852b2f397d46358221674e715dc40"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::connect()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::deref"
+kappa = "3a03daa66c64e3bbf049795eb2d784cf06b033c4f08e5f38fcc553f9578ccdc0"
+embedded = "de9c0c76039779352c2e42c6245013a6e11bb092c007fceaabe2ba75a227e02f"
+status = "residue"
+cause = "mir::Ty: dyn sqlx_core::net::Socket"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::deref_mut"
+kappa = "e5e938381490ae6e9268dc1501b3df747eecdf24557fb37013ba33e7ef71543d"
+embedded = "c198dd647b18bcbd8874a39032c6a8611bda8eb107fc85b5ce219e357723f540"
+status = "residue"
+cause = "mir::Ty: dyn sqlx_core::net::Socket"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::recv"
+kappa = "9b14566587cd979f790b985307ebff01b23721970e3b9922b53d17d3d7c656c4"
+embedded = "c0b30e7226b0406e3c0b66fbc3f85559ca975fb9ed74dde5c617407dc788d6b3"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::recv_expect"
+kappa = "b92d606e360df9f4347ef33007bd2782335bea1fe7da30f9ce2eb3d130c21d0b"
+at = "B=u32"
+embedded = "ab2f0e4cee03f061294560a954bd125b7ba366294b6d82b853733da93fef9f70"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv_expect<u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::recv_unchecked"
+kappa = "0207887f359500813b4db747652e520b03996e0836c53dbeabc013099d941967"
+embedded = "890c69047765a14a84a4a78226ed9f3b8107b466ac4344bfc837dd654c1d0798"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv_unchecked()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::send"
+kappa = "0d07af46e840761ff051db420da41edcdc70fb9bdeea4f38c5fe9a39f77b7e57"
+at = "T=u32"
+embedded = "709a752317118200966e02be576c6f8905241bd46722cc9b9ff8f480568e85e8"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::send<u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::connection::stream::PgStream::write_msg"
+kappa = "cdaae4689c0885be39a4ff99d60bc0e030c61ab8d71a650b658852c59a5de32b"
+embedded = "1cf2ade85fde793bef34f8d5fc2890481177b75aef1045ea6d296f6a0984da8b"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::connection::tls::MaybeUpgradeTls::with_socket"
+kappa = "48921e57b0c551cf0120b948a67023516d5fdd2728d8aa2a374cfd7c24b028b9"
+at = "S=u32"
+embedded = "a3392426574a72e88e62d225a230c2f14ba8d8af6ac37b110b0ef61526ac7b26"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::tls::MaybeUpgradeTls<'_> as sqlx_core::net::WithSocket>::with_socket<u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::establish::PgConnection::establish"
+kappa = "19081c59ef94b9f83c19bc0fd7eb839f8074337d4d2f8b9054efea4aef73a2ea"
+embedded = "ed478ac48baee489bfa13306a0aa21bd8f2d9a13a290d74177a3256e456a46a7"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::establish::<impl connection::PgConnection>::establish()}"
+
+[[fn]]
+path = "sqlx-postgres::gen_nonce"
+kappa = "ce561eb42580f52d0c175bf2edebb3e741b4c6f65f31ba8e7caeeba60e499ae2"
+embedded = "7df62437481db052df3e20dd89e9c908dba7e27f68ac07f3af73b2b24ed8976d"
+status = "residue"
+cause = "mir::Ty: rand::prelude::ThreadRng"
+
+[[fn]]
+path = "sqlx-postgres::hi"
+kappa = "1f85e31fb517932ad6324acb0b0b1bfa1a157ed8c7b7c80fd2849aa73e58ce09"
+embedded = "32b999deadc99c20d096c46493cd9dc95bcafe744f3907c1ac56a887cd22c6cf"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::sasl::hi()}"
+
+[[fn]]
+path = "sqlx-postgres::maybe_upgrade"
+kappa = "439c1ee79657e2e7c8c6ce885370204e4962c4e43cac3b6589bd2f416180cdda"
+at = "S=u32"
+embedded = "d5fd4db75d3b0b20b9ad52aec6ebe25cab9f2c3268d88c19afdbf7efd4ac28ac"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::tls::maybe_upgrade<u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::parse_server_version"
+kappa = "9b0db00ae4ea500600fcc069db224953363c0e5f8097f255f48a4ea16d592285"
+embedded = "23b14387225c0fcdb94bc931b7e6b6d9e098965ca698d21eae39d63002f0c8a3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "sqlx-postgres::recv_desc_params"
+kappa = "9424ad90c61b678d341b8cc1a5f41f528a9dcd7f05670e1010b6fe62350bebc6"
+embedded = "84b9cbfdd3cc9a574dd10d9171cfef8a183e64cefdf7739c0db8eafadb436cc9"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::recv_desc_params()}"
+
+[[fn]]
+path = "sqlx-postgres::recv_desc_rows"
+kappa = "9f9ff2d790ad86a545ede87170f6e2037223862a4287ebe256b7b9fd5e6803c2"
+embedded = "0dd534217857594342b8a2f5a8df32897f46aaf3f3a80fed5e9a121bfc2398b5"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::recv_desc_rows()}"
+
+[[fn]]
+path = "sqlx-postgres::request_upgrade"
+kappa = "938297d6e337bd2899fb1e323ba57603153e3852b9c71f31804d2e81cad085e8"
+embedded = "dee3a98e739d4147ab8d2c6ca7c77ab6427b8111fc3270ae3c826b9f85574c4c"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::tls::request_upgrade<impl Socket>()}"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:356:10: 356:17>::default"
+kappa = "6ae3567db89d5273a5f48847832e23fdfed30cfba559069b5cbe8c5f73b1cd1e"
+embedded = "9c97744f3e6126b95aa175ded86da2df3fc0150d5c0fb5807c4a90baca9d166d"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypeResolver"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:500:10: 500:15>::fmt"
+kappa = "a1c98c3b582b771aa157d3e01730543042d5832ca04571b5bc4ecaf7624c1530"
+embedded = "8d574e5cf0db69566c2f0e70e758089ff6dc93241ad3bc536fe09c280f340dda"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:535:10: 535:17>::default"
+kappa = "5d6aa34a7c09392a3f7087dae24237f80688133472446c3a915cc877754ae91b"
+embedded = "c125e29a6e01a46c9bce373dafa3cd1159243a4f47c357428bba0855d700adf5"
+status = "residue"
+cause = "mir::Ty: connection::resolve::ColumnResolver"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:595:10: 595:15>::fmt"
+kappa = "01387528d4837c166e4c6485fd7b41d2823fba53978ac0e179ea4a9fbac2b9bc"
+embedded = "b8bba14e495a67fc92e55b8e668b2f75af902bb4e3806887e2b7fcdd3bbc0c5a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:615:16: 615:21>::clone"
+kappa = "9dca572694ae5bf9b993065342eac74dc88fa8bfb651243072bb14158c2993e8"
+embedded = "f0e57437f5ea030a24d209cbb5e95de170fba0003422a7664a8ae582a9d48351"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypType"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:615:23: 615:28>::fmt"
+kappa = "d86b18736d53e9f97406c8a1b2b0a791945232f2b5117b77fdb1ffb2d79a5269"
+embedded = "9c2ccfbce0cbeaf03335ad166a4865118bbb2bd18e7f07053e64d8dadb68fd79"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:615:30: 615:32>::assert_fields_are_eq"
+kappa = "34a9596e5d54c953bf206d4f06ab32ac3331e6a591ee78c1bce2df6932ae3ed0"
+embedded = "d688e66cdcb1b6dab30bd9eec5b4559821b63ad887dfc7cd548e417a7665ce4c"
+status = "residue"
+cause = "mir::Ty: TypType"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:615:34: 615:43>::eq"
+kappa = "849ce06f4721b22c6b79a13f18c6b36c234647c13400be3eb8c4464378e0094e"
+embedded = "0634ccb56533eb9493f272d0bb89f4691b57b3604965b738241db0efea8d3d04"
+status = "residue"
+cause = "mir::Ty: TypType"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:659:16: 659:21>::clone"
+kappa = "5f399beb77b258150b325871b98b2e6a84a0fd8e57fae6eec485b452dccf00c7"
+embedded = "a6896c83e4cff303723358d9337a2e5ebf9d8c607e8a5672507815ee3b0f0603"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypCategory"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:659:23: 659:28>::fmt"
+kappa = "c51dc1dffa2b0a36acef35694d9c5ca47bff49db1ae5bb26858184977c83ad18"
+embedded = "474cde1116ae5c8369d4445cc97d69fd2ba21ac71019dd00ffcc7dbde04e7e22"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:659:30: 659:32>::assert_fields_are_eq"
+kappa = "948af4ea343cf435cda73114e9fe284fb0c92d927048b213cec42481bb42e538"
+embedded = "8746cca97fb532e5227a1bf7a112e497e8ec02ac2496310edfdec595e075bac6"
+status = "residue"
+cause = "mir::Ty: TypCategory"
+
+[[fn]]
+path = "sqlx-postgres::resolve::<impl at src/connection/resolve.rs:659:34: 659:43>::eq"
+kappa = "a394cf05a9cb675b29be3ae4407227e15149847f5518f779a3647895fb067a00"
+embedded = "eb72d2994f1cfeac32734991f872ee8828aac85d9d6bf5fc4eed5ac4c2f08f05"
+status = "residue"
+cause = "mir::Ty: TypCategory"
+
+[[fn]]
+path = "sqlx-postgres::resolve::ColumnResolver::fill_cache"
+kappa = "8f8f62e15e41217ee25747184a6c2e6f2a7ad1e995b439503ab50312bdb447cb"
+embedded = "8833dadd9af87b11a41da700116d3d7222e42c7972aadc684c66e82f207aabcc"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::resolve::ColumnResolver::fill_cache()}"
+
+[[fn]]
+path = "sqlx-postgres::resolve::ColumnResolver::push_column"
+kappa = "92034c2366135c9bb64841bc3ddcd24b43c377a0d0223dc2ff41059d2697759d"
+embedded = "342c9b556b97059f76ac6b42b3acb3a0dde237088dd0bb5edb0653d608a0f8ca"
+status = "residue"
+cause = "mir::Ty: ColumnResolver"
+
+[[fn]]
+path = "sqlx-postgres::resolve::ColumnResolverRow::from_row"
+kappa = "034071f4f889b14bab0bb0ae170783a88f984fef4f10762a87e799ce4a186028"
+embedded = "468a08807d7a98235d6c888f367c7dbded038ebe5133d52e140d020f789d11bf"
+status = "residue"
+cause = "mir::Ty: connection::resolve::ColumnResolverRow"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::has_table_column"
+kappa = "785273b4d7ad8a5bccf6235727242447cdc35f8433fec574d45b71b8344c2dc6"
+embedded = "4eac3eba353577090340ddffb24256897f682370569c8155b89712a777374f76"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::resolve_statement_metadata"
+kappa = "9fe210a3c110de680b6185400d7ac6d97ed31575b97a542d36a8efa9654b3608"
+at = "QUERIES_ALLOWED=u32"
+embedded = "63a3cdbc640b57c0a015e5d67a22105ade397744030642b3fac58df78ad59646"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::resolve::<impl connection::PgConnection>::resolve_statement_metadata<u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::resolve_types"
+kappa = "88670e3a47309b39b7be52b92eaf2e4718d4dd7b53e818787a6fd6d2ae88bf9f"
+embedded = "566b8ac108a909559a4647c1fde10b36f647516d9b22739df7d49c84bf55322a"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::resolve::<impl connection::PgConnection>::resolve_types()}"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::try_cache_type"
+kappa = "0f318a27769f9b4aad7fdde8c57823bca1c7fcf39347b851c84da27d0973d639"
+embedded = "564e8b9a35a3a0f9560b17bd51aeaed97c7ad759da85385e95001568726612c8"
+status = "residue"
+cause = "mir::Ty: types::oid::Oid"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::try_oid_to_type"
+kappa = "3b223443e367fcb82b71ced4967f8e956b84060a1ed20d24358596853eb9dd8e"
+embedded = "60f5b7e3816d79cfe79b95ad27476366a2f5480f46e69a53a8b6c910fc1ec424"
+status = "residue"
+cause = "mir::Ty: type_info::PgTypeInfo"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::try_table_column"
+kappa = "7337efc98b82ea5f05dcd7d46b7b6cff94b5bc62219859773c0e9e137f1442f9"
+embedded = "8bf25c6fd86eb813f36fd074747b18fb04ddaa9115509455c700b49c2c879570"
+status = "residue"
+cause = "mir::Ty: sqlx_core::column::TableColumn"
+
+[[fn]]
+path = "sqlx-postgres::resolve::PgConnection::try_type_to_oid"
+kappa = "8e58c27da3dce223841699defad3232b31ed87eb33d7984d2ca052f67846e35c"
+embedded = "47103f674641530ffe5570007e0d2cf927906a442fd63c5858fc558322b9ef63"
+status = "residue"
+cause = "mir::Ty: types::oid::Oid"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypCategory::decode"
+kappa = "7730ac9156b5f4b56b9f0e9e48522af870b55a5d43bf7902a2b18a611dc2addf"
+embedded = "3640428683ef4bc43303f2319c8157b2d3499161c676305f48fc34541636dee6"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypCategory"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypCategory::try_from"
+kappa = "daedb4cf4e5f47173b877ecbc93b63f188c8a7dd7b069d1fec7aafc09cd9263d"
+embedded = "9c34ee687cfc87f512b1671190a7ee354e9fa1f420e3fe16387e315a91caf8ff"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypCategory"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypCategory::type_info"
+kappa = "e0d99d6dd46722fad42148f93f5f23e57bbd5e888f33408716b794dc2540475b"
+embedded = "00ecb838205a199db83e2a7c622520515f8d9353b21f2c9ed7c98f4ae5c2f763"
+status = "residue"
+cause = "mir::Ty: type_info::PgTypeInfo"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypType::decode"
+kappa = "fa0068b612fab8c3d62a04e3708019645923969ccbaa0e0c0b14cdef4975e1b9"
+embedded = "10997d722ed92847f1bea83e7f07a277e5b590cc37aaf9ed3dec276c1b50c3b1"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypType"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypType::try_from"
+kappa = "e6d273220f06f68d91f42e5595378e7d67942c14be6baba9c0cb7e92a57a8e22"
+embedded = "b348aa75817dbbea681eb15b0e04192ef842388f3d7276bbd84ca0804bc9c259"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypType"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypType::type_info"
+kappa = "8940099106e1f665e899df72d24a3ac00ab505fc06646354db296541a3ad364a"
+embedded = "c617a613c9315ad14864c892dd6d38c3ce37e55658f768a81073fca6b73f8170"
+status = "residue"
+cause = "mir::Ty: type_info::PgTypeInfo"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypeResolver::fill_cache"
+kappa = "5d48d864992d18f1bb581a4e7868b93da34b57ca2e8ed74064b3c15182159f10"
+embedded = "a397284e5543e161aaf977f05611e3068e24747114847aea3b667382273e6fab"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::resolve::TypeResolver::fill_cache()}"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypeResolver::push_type"
+kappa = "4a369f6aa8e982bd3995f743a57b0159c73332d04e698b9a0aa962dafa1ac2a9"
+embedded = "d157e3e9304af38ee61ad870e273ba16f8deaa87a76327f210ed4122ca616430"
+status = "residue"
+cause = "mir::Ty: TypeResolver"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypeResolver::push_type::__CALLSITE::META::NAME"
+kappa = "cfe2d023fe2bf367e8f36baeceac6769bc4b5e6b9b286fa190d26b9cc5f4693e"
+embedded = "32105e0e0410b01d53de184fa6f9c23222c5a8ea5a75111c15b6e2a8c4cda4f4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypeResolver::push_type::__CALLSITE::META::NAME#2"
+kappa = "ab8513901d8213b39180dca6b7b72740d07e7dc10c039372ce3ec4707548538e"
+embedded = "48ec4273f74b2c2aed37bd3c8255c354a718481110c14a5a5d26f1b2500a0221"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+
+[[fn]]
+path = "sqlx-postgres::resolve::TypeResolverRow::from_row"
+kappa = "9c4af247906dad8e31e28335e3b808b4f75839424acf0ef12ea16698bb45d234"
+embedded = "a88785b3857a7afdf9548052a142876f3254519e83267d5c3c2746dd64791810"
+status = "residue"
+cause = "mir::Ty: connection::resolve::TypeResolverRow"
+

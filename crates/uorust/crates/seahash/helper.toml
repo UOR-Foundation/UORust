@@ -1,0 +1,30 @@
+[[fn]]
+path = "seahash::diffuse"
+kappa = "a7e7ae48948a201bd77abfa95081afef65da89527d611a3ca1fefdb3c05d8da1"
+differential = 7
+embedded = "b7205449a28336765ab2dc0c898f8e835b3e4b51f7f972444f629048d615d82c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_mul"
+
+[[fn]]
+path = "seahash::helper::read_int"
+kappa = "f0742d44f651f996825182ddd95dbfd92262710ecd62419d992b039feeb527a9"
+embedded = "aa652450d09b1a8a557161b4e9532f578d5985d1f36ef9891f6455df8d2e069c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "seahash::read_u64"
+kappa = "adc4d81466f9ac3a0e2c3c6d884167944701e9a61b2e74b884ec9d1ec17120ae"
+embedded = "cc04bdcad5fe40bf20da9e9f849981645e00902571c21cd1508867b0b2a0d2a4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u64>::read_unaligned"
+
+[[fn]]
+path = "seahash::undiffuse"
+kappa = "9bd4b558317cfc758f7761ecd2f6f9132a97bf8f4297c7b58b855e44d9b2432a"
+differential = 7
+embedded = "f3c4c28f3ce5a04e3a7152ff7752d5d7b13c4bbb686ca728879b785ee31d1698"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_mul"
+

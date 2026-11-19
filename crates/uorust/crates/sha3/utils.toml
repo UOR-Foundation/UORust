@@ -1,0 +1,31 @@
+[[fn]]
+path = "sha3::pad"
+kappa = "8775190890ba38735f1bf799356af50102c676c480098e619d49b4ee889b0c49"
+at = "RATE=#_RATE"
+embedded = "0826b7c29cc8ca59b323c499d9860d8461ee18babf01122dd4fbdcbc7660f119"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "sha3::read_state"
+kappa = "d8470c4ec2993d37cf8365b524e52a0ab847d2e3f5f84ada0f9cd59344445317"
+embedded = "d128cb834df3ebd76bb5ca241a2d64b9b8d4ea4f939ceb12ab36c6a1359a0970"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+
+[[fn]]
+path = "sha3::utils::deserialize"
+kappa = "4339d0e8dc51c639562a5b7d7ddc25c596f69caf5ab792f55654c24fa0b80434"
+at = "RATE=u32"
+embedded = "6d807dfb505dda8fba02bac8192e2272eb2be9f85dcb7d82c347909fe142d336"
+status = "residue"
+cause = "mir::Ty: sponge_cursor::SpongeCursor<u32>"
+
+[[fn]]
+path = "sha3::utils::serialize"
+kappa = "065135649164cbef9d0edaaccddf6fb2fa870708e9522ba13ffdfab5a97dd5ba"
+at = "RATE=u32"
+embedded = "bb10de5ef345ce793c3b64e1c07520d80e53b73213c575b1ef6e70fc3b11d9f4"
+status = "residue"
+cause = "mir::Ty: SpongeCursor<u32>"
+

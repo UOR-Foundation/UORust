@@ -1,0 +1,188 @@
+[[fn]]
+path = "blocking::DEFAULT_MAX_THREADS"
+kappa = "87a26fbae04addd3bf1bf6a2b8128bbae70d3d587468b98402496b91ce493b47"
+embedded = "190e99d281ffc31a1cb874bdb2dd684aa68f46dbd9676db48e5a26a7c854385d"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "blocking::Executor::get"
+kappa = "5259286af5865558b761cfd0598ecbd183d3e9e5064ee9bb470235236409fa4e"
+at = "Executor=u32"
+embedded = "b75eaeda0eeceb477a9b03b3de42048abc53d84c07531204a79ee2e994d6b9fb"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc13: &u32}"
+
+[[fn]]
+path = "blocking::Executor::grow_pool"
+kappa = "3e614e99f97039730571a5d195fd36b3e25c008e0076a5f346091e0dd5f2841c"
+at = "Inner=u32"
+embedded = "068583d0506978670df19520e579c5b49c9615c8a474493b3defb2efd95bbcea"
+status = "residue"
+cause = "mir::Ty: Executor"
+
+[[fn]]
+path = "blocking::Executor::main_loop"
+kappa = "cd53d96a1d5f6701458488fffa247454430aea3e4c47c33ae67c2798e0f02bc9"
+at = "Executor=u32, Inner=u32"
+embedded = "a17735e160d594044668104654bce90dbf24f51359259810f5121f018330f0e3"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "blocking::Executor::max_threads"
+kappa = "9cc08ae42a47e8f161b3b383120302c7ba42cf3d25450938b4db2178514633bd"
+embedded = "d323edeb1552df1f9d61baaed81057afa7c8f1d36c868a395b354a48b1249280"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "blocking::Executor::schedule"
+kappa = "3e380afc8ecf8d5b042eda2141cfd70e04282af0781d225d1ef6c401e531fbe8"
+at = "Executor=u32, Inner=u32"
+embedded = "79056682b171fa18cb6e872bb65852717fd614a0a42d136402a8d6e307d105e7"
+status = "residue"
+cause = "mir::Ty: Runnable"
+
+[[fn]]
+path = "blocking::Executor::spawn"
+kappa = "46deb5f887e141ad3607901111c318d153b9b57a32cc208b8b5bf9fa34f9a512"
+at = "T=u32"
+embedded = "de7bab0cea75c6554d1bd8666ea2c6ca932e5d48c3d5c4808b35c335df2c450e"
+status = "residue"
+cause = "mir::Ty: async_task::Task<u32>"
+
+[[fn]]
+path = "blocking::Unblock::fmt"
+kappa = "b7f9eddff720503af0f0e5552302063386661d7de4c76b63db482c829053299b"
+at = "T=u32"
+embedded = "05176774fef91ae048d09b879bb61adf7cde4b036d8f0e5a0f21c1d0679a1c0a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blocking::Unblock::fmt::Blocked::fmt"
+kappa = "aab5b3fcabc1c1c23f5e0d696296c02f846c17d9fe8ae67637232ac33537696e"
+embedded = "629c8534640baadf2efb34a4565e77ba18210bfcf2af43b41be8959c5c1621fd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blocking::Unblock::fmt::Closed::fmt"
+kappa = "d2b32a466e5bcc86ab92b918957c27137944dc2f2f7c689ce00aeee348c70069"
+embedded = "49c747dd636641ca294cd19eeaa08a2b0d33e5071a2713d8b50aeb2dd7e22821"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blocking::Unblock::get_mut"
+kappa = "17b2986824b9a7f3e1680e927db3cd1b350ca28072e65548a0bdfa204031f931"
+at = "T=u32"
+embedded = "70ea2d18fb6d43a8d9363ffdcdcf95c3b8c89bdf4f5e01136c2c3ad8b9621305"
+status = "residue"
+cause = "mir::Ty: {async fn body of Unblock<u32>::get_mut()}"
+
+[[fn]]
+path = "blocking::Unblock::into_inner"
+kappa = "18888ad95c9bbcb6d2fdd927e1f1517e2be5e50ceec65783a0bb22f2c9cac089"
+at = "T=u32"
+embedded = "4039c5a8043700ba3efd53917f4fdb617f6f5b41ffcf283470711ca13c3c7ff9"
+status = "residue"
+cause = "mir::Ty: {async fn body of Unblock<u32>::into_inner()}"
+
+[[fn]]
+path = "blocking::Unblock::new"
+kappa = "eb973770de76db413fef8c054ddd2096b5bf083617f44b4a25db882a8ad61adf"
+at = "T=u32"
+embedded = "faf43b104bc75f83be26cf270d581ac2d51c6c37e922d13e694a94b498d0da69"
+status = "residue"
+cause = "mir::Ty: Unblock<u32>"
+
+[[fn]]
+path = "blocking::Unblock::poll_close"
+kappa = "bca55fd3dc8736de30a61423113446684b199046dd4db838311e741366709d6e"
+at = "T=u32"
+embedded = "29a73edfc053a03d460ccdbe120b9eedf4b4051197bbd70d2d303a17e37c0d56"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::poll_flush"
+kappa = "4aff2b2fe1cd62638d55c3cc0dc3c72e3e24f06ae896f9bb6def6ae837641428"
+at = "T=u32"
+embedded = "3bf21ea99a9b2b741b9dcba13d4b78e94d8d0d43154634d2e32c2d7937684e48"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::poll_next"
+kappa = "765b507d8bc5e056e2e5409ff35a4dade948a2adf45a72b5b668385085cbd1e7"
+at = "T=u32"
+embedded = "919f8762d06fc1762b90efbda175b23cb0a9ee7817d3b96b8b993bbed40e924b"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "blocking::Unblock::poll_read"
+kappa = "4de9d1aa1979576fb7803ad4714fecb72553f5643eac54658c3b6bdbd094de98"
+at = "T=u32"
+embedded = "eae31551c0659bb658febc89615053935cb14793c6abe8e8890dd4f870964fac"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::poll_seek"
+kappa = "bca7492a29f9a6e431477cd509a91d13b8442c74b3b282e30e1be33fdccc019f"
+at = "T=u32"
+embedded = "2adc2a5076a07e04750ae6eaf0c146e102142c5e7f4f055cecac20947b241b93"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::poll_stop"
+kappa = "a1dd79e6f021be894b659a0e2b85ca7092f7294452a7a9793a60bea5588195c1"
+at = "T=u32"
+embedded = "84a37be8a17f5f0379910642eabe18c038bb27a3e7d0fe5164c0f7d1f9e92a87"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::poll_write"
+kappa = "23be4f11eeaba9ece1ad70613338dc10a5f94338e6b74bb37e01af001fdffd36"
+at = "T=u32"
+embedded = "a3d992afcde12c978b07b898040174a809da2b15e27df20fe565fd1cbbbec6a8"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "blocking::Unblock::with_capacity"
+kappa = "d66872f414fbddf64060d2c2bfcb3d8f65d34464de0d677367bfb18fe99a85e8"
+at = "T=u32"
+embedded = "bad2b930749b82ad50f6a49cc9650b7c11db25bb81d92687b007528877d85255"
+status = "residue"
+cause = "mir::Ty: Unblock<u32>"
+
+[[fn]]
+path = "blocking::Unblock::with_mut"
+kappa = "04e81406b59074fd51794a4155414108518758b2ef85f63c5ca13231fed3ed40"
+at = "F=u32, R=u32, T=u32"
+embedded = "494e619b2b34f9fab508bbe9cd1f18a828a6cddba06af5e8fa3803ec3bf61fd8"
+status = "residue"
+cause = "mir::Ty: {async fn body of Unblock<u32>::with_mut<u32, u32>()}"
+
+[[fn]]
+path = "blocking::set_max_blocking_threads"
+kappa = "f63e9ddba1fa865558176d7ddd4798318ec94075d5ec475ccc2071026c4da32e"
+at = "Executor=u32, Inner=u32"
+embedded = "5175d5dcac4bf92f7caae616055a246a22160bb41d9e228950b85d9900474876"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "blocking::unblock"
+kappa = "b7dda1d48bfd616688a62f54d95e0098586c6e47d6148d403d202a10062f1609"
+at = "T=u32"
+embedded = "becad5faebda071dc4017ac9c835338d74608f716b55e21eeeeb8525fa65a0f1"
+status = "residue"
+cause = "mir::Ty: async_task::Task<u32>"
+

@@ -1,0 +1,136 @@
+[[fn]]
+path = "prometheus::auto_flush::<impl at src/auto_flush.rs:117:10: 117:15>::fmt"
+kappa = "2f6ae16dc3bdec236f3e6a86409632c1653ffb2571b456f4ae088903a95d5c04"
+at = "D=u32, T=u32"
+embedded = "123d114e02f07bb805766b5d202575654f4fea0f3625422fa66b9aa3c2ca345d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::auto_flush::<impl at src/auto_flush.rs:28:10: 28:15>::fmt"
+kappa = "6600f858e6705f5f286b071d593e5102eeadd1798abc9f41c37ec302f8f5bb5c"
+at = "D=u32, T=u32, V=u32"
+embedded = "3208333f1679ca4b5441247594a44cb2df163761a3307d548af82713d4f4deab"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::flush"
+kappa = "b845c6145dc59e8cf032ae821f4c1fcfb85b8e69366d18b9e4c5dbadc64ae604"
+at = "D=u32, T=u32, V=u32"
+embedded = "9ba285e4784e939ae6dd8d7d5b8fd4e679def1a9fbb8dc170a78026740e06500"
+status = "residue"
+cause = "mir::Ty: AFLocalCounter<u32, u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::get"
+kappa = "99c3e16390dc75f314eb22a700568ac96101e0b166ce87c172a3a33c083d5097"
+at = "D=u32, T=u32, V=u32"
+embedded = "07844712a996a072b5b0ec88c747aba5f8b50c7e5e4e35efc695d7a6507173a4"
+status = "residue"
+cause = "mir::Ty: <u32 as atomic64::Atomic>::T"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::get_counter"
+kappa = "dd799c35145cd3a137763dfdc54c1f789a37ba243e46a3db5b6ee4b191b19b72"
+at = "D=u32, T=u32, V=u32"
+embedded = "5b64f995c8ec84456f20bc6ae13c082e730278c9d727cc89c1583ba610d84d74"
+status = "residue"
+cause = "mir::Ty: counter::GenericLocalCounter<u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::get_root_metric"
+kappa = "1d3242133e53e90430e65caeaaab28476dea8d352c4cac6ce5761d497ec16b38"
+at = "D=u32, T=u32"
+embedded = "47028e4ede18797ff3205d5129adb8cccb3db718391a69377c87968ca980baf6"
+status = "residue"
+cause = "mir::Ty: std::thread::LocalKey<u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::inc"
+kappa = "cbfb2a1a573565966571bbb881a031ae0eaddb1df2b0e9dcc8b9d2ef9ee1eb15"
+at = "D=u32, T=u32, V=u32"
+embedded = "8e67b7f6006b29f315ff73dcb3427e7ccf8b42dbd5448e88b53b1f879e7c2a72"
+status = "residue"
+cause = "mir::Ty: AFLocalCounter<u32, u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::inc_by"
+kappa = "5f1880c32ca8e6dc81a524dc410cbe5b9be9ee214c39b7e81d8f67cffa6220ad"
+at = "D=u32, T=u32, V=u32"
+embedded = "ace30e1e95f65ba34a82771642c842c92b8214589a5c40bfceaac47509381ae8"
+status = "residue"
+cause = "mir::Ty: AFLocalCounter<u32, u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::new"
+kappa = "be4733fa3ed610429fb71cd988c9540b97678d708a7e6b7da5d6827136639f86"
+at = "D=u32, T=u32, V=u32"
+embedded = "efa69e06ee9db7de9f90a9b3838a7102c0bcda86f48b71daf4e077646e2955a5"
+status = "residue"
+cause = "mir::Ty: auto_flush::AFLocalCounter<u32, u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalCounter::reset"
+kappa = "228cbfbf6ab85c133cfab57b2104d776c2fb5c2ec7e9e267c6f3736bb78dd1b4"
+at = "D=u32, T=u32, V=u32"
+embedded = "19045574051359dfd8104952b34ffca0b98cfeddcf7248a5294d7554e4c18720"
+status = "residue"
+cause = "mir::Ty: AFLocalCounter<u32, u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::clear"
+kappa = "8320dc1f855364024c61adce53034712af289c4f3e9040a2eeed9540c9802438"
+at = "D=u32, M=u32"
+embedded = "e140144a6708b00b15441463e0f07fe25ddcb2972bc630c38dcae170cc5a4ada"
+status = "residue"
+cause = "mir::Ty: AFLocalHistogram<u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::flush"
+kappa = "70b3534474510168e7042f5493a7295931b8bdb94a2fd9054ac26f6885bffcbe"
+at = "D=u32, M=u32"
+embedded = "1f4e326c4389ae4c213a645d5a73ede10940852c51373699257fc9a4fbec1048"
+status = "residue"
+cause = "mir::Ty: AFLocalHistogram<u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::get_sample_count"
+kappa = "75791666a9cebd61a1c3c53ccb93beaca39c63a7cbaf5f20a1e576316f8a901f"
+at = "D=u32, M=u32"
+embedded = "c24077b6e9e10f19eea5dc029f7ad6078625d45a9e98c64cf99c0ab75d15bcfa"
+status = "residue"
+cause = "mir::Ty: AFLocalHistogram<u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::get_sample_sum"
+kappa = "01e817ea2691a5af1c858d5a44325b1efe02daea8bce245dbef13a90f5559f88"
+at = "D=u32, M=u32"
+embedded = "44504ad10c99af2b3c4784e7db715afa256d354112a3e5d055792192f09dd52e"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::new"
+kappa = "407287ba4f022d674e262b0f4a211fc3b412598b4a2466d65904704f64f3a698"
+at = "D=u32, T=u32"
+embedded = "bffb80b143dde84583f8306c5284654c444e7328bb731b8a8d47c2f734457d8c"
+status = "residue"
+cause = "mir::Ty: auto_flush::AFLocalHistogram<u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::observe"
+kappa = "2452a4801c538ce0d9bcffec9bfac2374c348dc4892b9dbdd181fb419b8327ec"
+at = "D=u32, M=u32"
+embedded = "85fbaa5f1afb1e07d43431e90568542a1365ea980ad5d6ea8c1acbf55a1a80f4"
+status = "residue"
+cause = "mir::Ty: AFLocalHistogram<u32, u32>"
+
+[[fn]]
+path = "prometheus::auto_flush::AFLocalHistogram::observe_closure_duration"
+kappa = "f2659f2267b64cf6a339e4da43409c5d9c06ea568ad383a698b0e635db3b669d"
+at = "D=u32, F=u32, M=u32, T=u32"
+embedded = "db67c89f8e0e11f5a22b51961bcff3bf90b95ab4f91ab73d448444d89d786f2c"
+status = "residue"
+cause = "mir::Ty: AFLocalHistogram<u32, u32>"
+

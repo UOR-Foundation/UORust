@@ -1,0 +1,349 @@
+[[fn]]
+path = "protobuf::bytes_size"
+kappa = "a28499438bec58d360183a95ea57f20f1b82c026432dcc8a63ff6fd865f29340"
+embedded = "00adf9d1502d806e5d03b086d3354c1140ed7230cca56b169cd50f89f507212f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::bytes_size_no_tag"
+kappa = "79c45c1dd22321a6d13690fdb43984f99193336ca8b1e501cef3d310593b306d"
+embedded = "a2504707d05aefc4a182bc8251c7f6386aa7a958a418eac12d7d7ed51172d851"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::compute_raw_varint32_size"
+kappa = "9eed24404251072d5412883d1dbd11afe9dcefb9a7fd1aa1ea3f5f5049b8aabd"
+differential = 7
+embedded = "518755692df87457e50274537aa59bd3974be220e7a52410d08ac19278541e2c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::compute_raw_varint64_size"
+kappa = "b7d75bc95eaa6ee779c07f4ece031145e7ee828fa5ab63969bcac959ab227665"
+differential = 7
+embedded = "cd0687592dfc40818875af034c92aba8fcf7b2439ff9d83c1fb89c5c6a7b84fc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::int32_size"
+kappa = "db0ea4953bce930a42b99266303bd07c5305ad9574dba78e5f202ad27dea9023"
+embedded = "a933a09449fbbf9b12053d85d98c49e06faa9cea04e9e5acadf49978999f7b11"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::int64_size"
+kappa = "2d303106aaaedf2fd9c87d0977835f374bf6dfb45fd3a5dc9154ac068e4b97e2"
+embedded = "2093ba3112eb32355868902c2e9bf161be5f17f96051c147cc30bb4ceacd4b20"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::read_map_template"
+kappa = "8089c79927c23f981321d8c89d920230c701d86dc68ed967ef5fbd40c3148fae"
+at = "CodedInputStream=u32, WireType=u32"
+embedded = "ce4ab40e99b1fd62728eca79e092be31c215005630d183b554d4c5526bed3230"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::read_map_template_new"
+kappa = "9fafa93b32f2085265d40cb31e6c82af9ad30f9b31c417ad4bea322fd1cd99cb"
+at = "CodedInputStream=u32, WireType=u32"
+embedded = "ab87fbb7daf4f7bb87bb66e4a0fa8c8e2f86a57ce422f081437d3a0d1974e703"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::read_repeated_packed_enum_or_unknown_into"
+kappa = "dd61631d2d7d449edb47ac62c01768e14af27f470e4ca2a1b8acb09e8ec3f69e"
+at = "E=u32"
+embedded = "2dbfa8443e8b2509701476e2adb1dd9efafc6c460022d81a48a29632d9713ef7"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::read_singular_message_into_field"
+kappa = "5b0ae7b893daeed4977c2706dfa4682b682009c2206255018a997876e12d5dfc"
+at = "M=u32"
+embedded = "5bede59641cad58e2868bab5c2d9b12643cfef7dbd2326982adac721740399d3"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::read_unknown_or_skip_group"
+kappa = "2fca511ae8a76003255c1ff7011db81d2b66a58952a61d3245ed9ec56fdb1636"
+embedded = "2f78ed6f00dc0e130820fc07c3f1b757bb83e7dcc7671aa67dc47ef9fceec317"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::read_unknown_or_skip_group_with_tag_unpacked"
+kappa = "e0d5eb4db77fabd7729c2cc8ded3dea2f70d53a5b690df206e2f668b4bc65018"
+embedded = "411d0dcdcb48e5580a6d09f957c8e2cbf6e26de32a6514fbb3ff5f0a655818dc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::sint32_size"
+kappa = "847773d828d72515513049fe91de0b371ad4c94f3d0889dd832f196a2e09bfbd"
+embedded = "6fd7d5cc5d4fe700218c5da9fa5f171d0637a4d9a1726136bb5571c3ef76808c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::value_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::sint64_size"
+kappa = "37419d2423ec1cc1f77632808e7c3b185e7f86a2d77ddf3827f20530439b3cf0"
+embedded = "4f9a3e94e904692bfd19427c81f7a05d19ebad3ff6daac40b70fc4df1dde3f96"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::value_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::skip_field_for_tag"
+kappa = "e6242cf12ca1d56208d1c9690f55e060b422172ec73d51119b4a6ec05999de61"
+embedded = "8654c7d25362522e96e0a3ac1f6bdbbbb277c567d33f738b7d2598dae3805db5"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::skip_group"
+kappa = "c8d9f7840eac2d2a74b729a2e06517213710378904d09580405e08ca424bcbaf"
+embedded = "41061775892a21b60cb2c4e84700beb9c5a24749f7dc1531704501304ffae784"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "protobuf::string_size"
+kappa = "f6a0ea1a6a89f82cf1d4a77d7306ab4965d326f9c149369a43ce767f82d87585"
+embedded = "4b3bb1fc5e8848c902f86cd48b1ceffc0204bf354a4742e9718f43607f02179a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::string_size_no_tag"
+kappa = "51adf3ea9f90f8459194d4389dc2f08ee0afbda75282aafbeb7345196758e87c"
+embedded = "43852cde8b507c6573f6f1f84af6f31bc2aa4962e6ac62ab5c19030834b66809"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "protobuf::tag_size"
+kappa = "5575bb6bc45ca189732a2305036fbcbd3829124c7b676d580cf5aa7411570975"
+differential = 7
+embedded = "a810460298c8795c03682230a135a4364998ab10b6d1bc3189d51182d71eeaa5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::uint32_size"
+kappa = "08ca9e571e74c45d49e4ff92954d40c1df222d1f26854a71cb99d6091e73d5b8"
+embedded = "87016db449e544caad08d2b77e07f066a4743db849a138bfa4cd43a9b9c833c2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::uint64_size"
+kappa = "df7178c79755283c93755e4317d7e1ead5e87b487f9a29fb825bf4e0755b895d"
+embedded = "68c9c605caa658c87a83818144f5b9a993b276e559c4eddf3884ed16731f46fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::singular::varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::unknown_fields_size"
+kappa = "32fad2b7ff5d2cd82ad403449544edc9c756f078f06037e3578493279507d1ed"
+embedded = "7b616fc3147952115d391e94396bec18084d78cf4e4430c15e1b60d8cae45855"
+status = "residue"
+cause = "mir::Ty: UnknownFields"
+
+[[fn]]
+path = "protobuf::value_varint_zigzag_size"
+kappa = "b4a5d1cb022294a38efc2054f7bd822fba68c82f4fbc7dcb708e87361fdd8c44"
+at = "T=u32"
+embedded = "4e4eee0643b83210940d90df2791f4c294ef860bef464608733a6af8137df820"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::value_varint_zigzag_size_no_tag"
+kappa = "e682ca11306d18f30defe5efa7d9460465cdd5412b3d4092e9d655d23b96a5ac"
+at = "T=u32"
+embedded = "9a3334e5ac90a16e8d52a39d1b8cf01bba54ca73b734711ca46bc4fa166a22b3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag, which u32 does not implement in core"
+
+[[fn]]
+path = "protobuf::varint_size"
+kappa = "10ffdf6928307d47a485092f70d2afe0d35b9f226b9895dea342b7cacff35848"
+at = "T=u32"
+embedded = "49358a19356cd49f12715583ca68c5eb1aaf496d8dfd67f9b25d9e89bdfd5188"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_bool_size"
+kappa = "992fbdafeee322ec9645282f2a650529d634ba4331c9e8dc11a8de50060da89e"
+embedded = "abe1ffa6cdfb549bd3a9a3097c6aca32bccc36c91dc694a08bd43c7e29915153"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <bool as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_double_size"
+kappa = "707a025c0169a33b120d728e8a6da5e60a9509d22340e87cf816a3f40d26e15c"
+embedded = "4ce6ab6f3be9a51681c1fc76fa65ac2b237bcf9edcf15527c7403bf5753b5146"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "protobuf::vec_packed_enum_or_unknown_data_size"
+kappa = "34928e99484d1bb4c3028e71440a81c282c4b4b3df0e1ec133a45a2ea4ac418b"
+at = "E=u32"
+embedded = "f35aab46606e1b944d79cb50ec471ce473b119f57b7524ff4b5307110067a6c2"
+status = "residue"
+cause = "mir::Ty: EnumOrUnknown<u32>"
+
+[[fn]]
+path = "protobuf::vec_packed_enum_or_unknown_size"
+kappa = "7d671cd800d111dbeb60e22a94c3871b42103140c9e21f9668d4a4ed4467d9f2"
+at = "E=u32"
+embedded = "05399864d14d47fc9073745568b4d8ed8bd6343f222aa81d958de7fb58118e24"
+status = "residue"
+cause = "mir::Ty: EnumOrUnknown<u32>"
+
+[[fn]]
+path = "protobuf::vec_packed_fixed32_size"
+kappa = "7a349b8a0e0a01e71c7b0552e80262e5f19964cc0aee494c033893ed620baba6"
+embedded = "e994f18154145dc2c1ff76b72a6c3f8808e389534555e3109d784c63255f3748"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_fixed64_size"
+kappa = "123e22e109164f835465eaa32e66ae3af3404bd1037b20abae1b6566418188ec"
+embedded = "4edbefa5993147844acf74850529d95633962dc56cad82ae3dc2c140f3b1c735"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u64 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_fixed_data_size"
+kappa = "cad3132bb456bf0f0c606e3ab4a1414d410ad66a666aedb1640bee9622dced2f"
+at = "V=u32"
+embedded = "53e0fa8a07721c1557cf929837b32ffac446755c6a2d62d1d400d84627d4d58f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_fixed_size"
+kappa = "a3d6d598c0ebb0c93185bf69bd770e35277c6f23f7fa49fb5f70bc3a07e90d00"
+at = "V=u32"
+embedded = "c389ae2c9b5090f8345317f3302163b07a66c1f4ee34c8025f8e060ddd852cb5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_float_size"
+kappa = "b34bc6d19d0a00153cb34984a3d07dfc97375fb8adadc883dc3d5f351fe50647"
+embedded = "90f3b164a7048ee7f5786acea0bec3cc4ef16d3bd44de1228b6ce6f928f3f9a6"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "protobuf::vec_packed_int32_size"
+kappa = "b0fb580d6217790fd016b836d448411d13726b417434832ef83a71f6acb9eae6"
+embedded = "32f248a89be3db99350a14fd10f9ded22ca2557fafef40630511bf5dd212ea75"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_int64_size"
+kappa = "67070edd56bdaa414b59a20a3729fa76576c3d299122fa9913f92d15da71511b"
+embedded = "2efc6179547ef67a0480be998e4559a4418ad95859b7075431d32a2e0922c284"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_sfixed32_size"
+kappa = "44afb913cfb6bbb44d38197422f6d5b77b3232c7601613afebe4c86e047f6e72"
+embedded = "fa54dbec38897cdc58b4b362d1389ca254a159a43f5a30d294f261ae60612dbd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <i32 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_sfixed64_size"
+kappa = "355724108d24c91e87594288d9ce9157c3ae7663d298a9a1459d9264815020a9"
+embedded = "0f02986311e87d086bd850aaf69e5244d10c3eb29ea161356b62fae527199326"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <i64 as fixed::ProtobufFixed>::LEN"
+
+[[fn]]
+path = "protobuf::vec_packed_sint32_size"
+kappa = "21dd487990ed519424f21fea959275f2d5c5fb60d0a58dc874e3fdd80605f805"
+embedded = "a18a15b3376a1322d259889481c93ac0c1d141f97d85517cbdfeab4b0bbbd972"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag, which u32 does not implement in core"
+
+[[fn]]
+path = "protobuf::vec_packed_sint64_size"
+kappa = "ff6293562d4390770e23c47e1f8cff357b863b6412dbdfe2e82f75a452cc5831"
+embedded = "1e28f69651a6cd7db9572298a836adaabd3390c35e10776f61215f96db725db1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag, which u32 does not implement in core"
+
+[[fn]]
+path = "protobuf::vec_packed_uint32_size"
+kappa = "e2ebc2da17c182491102eb1d2921fc6a8b85f352e87cea8d9b02cead81ac5c56"
+embedded = "9d8e4b7ea35c0b2885dc36c65440349f9c08c9c422fd4a2523731380f4f8fa23"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_uint64_size"
+kappa = "c2a3943826e5ddaabb0d580273e79599493682ac2c058d8ee6848ff2fdced50e"
+embedded = "c36716e2caabf56e90684c9d284bf5f350e8b0ab07ee71cffedf6f3eefaf95f5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_varint_data_size"
+kappa = "a17ba107af54a95fb79a2edf9477c5b5bda13f91d0e06f6bd2017255bd2ac595"
+at = "T=u32"
+embedded = "99ce871e26f8ad85586d41f733f0f3b6d1ee9fbf243ead9a2d63d71d5b34e828"
+status = "residue"
+cause = "mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_varint_size"
+kappa = "2fb1b62470cf0b437399421bd24f903f433c8c582821b67ac85be207502dc329"
+at = "T=u32"
+embedded = "a612f57fbf673f264fefbae929ef28817451d603dc422202a68982bafb8e9ca5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:15:1: 15:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::<impl at src/varint/generic.rs:9:1: 9:28>::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::vec_packed_varint_zigzag_data_size"
+kappa = "c8bb9b4cb081666d884cf6f2ba71b4fe5bc8487c935be36cb7a185b6b31bdfcb"
+at = "T=u32"
+embedded = "5d1dbb2e19de6c8b983ee4e67a6c24844fbd4ab854ecf7dd3b9d1bc5e1aba7ec"
+status = "residue"
+cause = "mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag, which u32 does not implement in core"
+
+[[fn]]
+path = "protobuf::vec_packed_varint_zigzag_size"
+kappa = "737581fa963f6ea5a30c1d00e456a7f0ead028ccbf1a5174fa1f0fb3f74e51f8"
+at = "T=u32"
+embedded = "dbe8c4b2c38e6b4507ca5175c517ab25f2bf951c81f78475f1196847af1a5e3e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag, which u32 does not implement in core"
+
+[[fn]]
+path = "protobuf::write_message_field_with_cached_size"
+kappa = "682ecaac3c3c29ad244ae3716e26075aaae8f5114b8ce55fab319308103600bc"
+at = "M=u32"
+embedded = "bd53f9d99020356a77dd68d4fe8d27693eb1337c374d090534b7d766113dbb57"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

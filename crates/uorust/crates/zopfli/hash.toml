@@ -1,0 +1,119 @@
+[[fn]]
+path = "zopfli::LAYOUT"
+kappa = "088000250d032315cc49d3490965a5000e94d965660025ed8391cd6df2b7e14d"
+embedded = "ac1972840489caa23e73f38e4e1a0fd624740cf5c026922b670929acf22d222c"
+status = "residue"
+cause = "mir::Ty: std::alloc::Layout"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:12:16: 12:21>::clone"
+kappa = "61022ff92fca42df8948951314930d0051b45b4d1b619dc9b184c5a94aa19bc0"
+embedded = "2ced96d4eac1fc019c10b9bbc7909f198abf34ee73d2395d24bd8a0ae3ab4472"
+status = "residue"
+cause = "mir::Ty: hash::Which"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:12:23: 12:32>::eq"
+kappa = "2707e8a8874d450b6f36309f945f86fcdf24e80ca0bf3ef4d049a8b3ee198d45"
+embedded = "603dc45c5b4c5ad49592036a939a332a242d1f9247c23bc50078c6ca30457532"
+status = "residue"
+cause = "mir::Ty: Which"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:12:34: 12:36>::assert_fields_are_eq"
+kappa = "7c57836f6d2c80d95e49bac2f751063e415dbbb97557fcdbc31413f28b3f191a"
+embedded = "e8108350613c8616cf35450eb61fe73e7f71a4b892338d146333654c5cb1deaf"
+status = "residue"
+cause = "mir::Ty: Which"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:18:10: 18:15>::clone"
+kappa = "acee6df40dae67c37c05982e27a95b827ac8d20ee3ac9fcb8f84b9289901e34e"
+embedded = "44f14951e66410996a1bc365d41931a648d86a85a8d6641a59fe894ca3cbe8e6"
+status = "residue"
+cause = "mir::Ty: hash::SmallerHashThing"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:24:10: 24:15>::clone"
+kappa = "8a17045977ce5e2a257e3add82af828c7db2d5b7d58e02d99e447df24c909068"
+embedded = "673b36d9aa19fdde601b0fd4be114685a62e7c9ad2cefd2f3e072675b9dfaab0"
+status = "residue"
+cause = "mir::Ty: hash::HashThing"
+
+[[fn]]
+path = "zopfli::hash::<impl at src/hash.rs:52:10: 52:15>::clone"
+kappa = "0735e37741f03a23def42b0fadf25697722ae11039468ead11cf8faf9d82d1c3"
+embedded = "13b27f7f28d45ccdca702625fb70b2883ee219af32d76362443efda154d87a03"
+status = "residue"
+cause = "mir::Ty: hash::ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::HashThing::update"
+kappa = "4bb3b7bd204a7c2a0c62a38e1d6b69da1d31029b2db84d61e75ad45c04c56ed6"
+embedded = "6bf4d744da9b295fc9877ca3ac9cc876dce17e084a65bd25b7bf622465e73e42"
+status = "residue"
+cause = "mir::Ty: HashThing"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::hash_val_at"
+kappa = "555400d19d4ba47043cf1b9ff4c808081f035e5ed9981f90c49c8a666dbf0d19"
+embedded = "bad8bdd8c06747722d684bcdfc6e8992c78161229f8ea73aa02412e25e70287c"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::init"
+kappa = "dc32dc9054a9a53928b6766325cd2d849d9f269c474f7f0ea91f0dc42bee38e4"
+embedded = "1dd7c2fdda2d1dd82aed5df0c41a35996f5f778bb2398e03e4cb6141e6217e89"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::new"
+kappa = "e90e5fd389c79360b7925e372f805cbcd8319712ccd056776fb80295efcb44ca"
+embedded = "72c65eea1cbcd2d950634adfcd17b412dd32c0acbd01e68ab1dd334cdcf60358"
+status = "residue"
+cause = "mir::Ty: hash::ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::prev_at"
+kappa = "b4992978fb9e2ac2c8c9d0b171d988b3b54a1a31fe2a7d02375220c2c5f5a502"
+embedded = "0a4af7a13d6e4dbb47161c8f8e2251ec9f26f6e1efcccf93db1826285305baa7"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::reset"
+kappa = "25242686f3401ff2754fb7fee702dd34f7f13cd53c0c1bc5fe102b8fdf85fa21"
+embedded = "8eb3e82fae94d341d725a43f0d208f45ee86d10db76bdcff07fd9562806fc639"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::update"
+kappa = "3da32e3024ab253af48f1ec7a9272a0400392bef9f84713bd984a5d43fd83f51"
+embedded = "7f7470e7aed89483fc764900cce6cde0c7dbb9cc5739ee4edd7f28b27395693f"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::update_val"
+kappa = "744bc57382a079d78c0e58a74e9731face1867ce60307a41cfb838083d95de3c"
+embedded = "4c1fa4cfde04718cf3613a3c840cb5a57c4444981fcd957709e8400d03b5253b"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::val"
+kappa = "16095caa12f9d4419fc4de50b3122cc5d49339fe302e698ab84e8952e912754d"
+embedded = "a9ce4df0d3b2262e0666d9426f8ea904ceace9b58b0317bdd4c531012c5a9d82"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::hash::ZopfliHash::warmup"
+kappa = "1364a355cbee97f5a9d4f15c2a9175cb7ab10a77fbe31fbc53f792185ba4988b"
+embedded = "0b1e2f898486899a28f0801102b6d3ab24bdfe3d4dffc59fe7f09cef74b69b92"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+

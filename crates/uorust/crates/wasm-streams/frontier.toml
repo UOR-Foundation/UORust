@@ -1,0 +1,558 @@
+# The wasm-streams register (written by `uorust crate wasm-streams@0.7.1`; do not edit): every body of
+# wasm-streams's MIR at wasm-streams 0.7.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 436
+translated = 14
+residue = 422
+
+[module.queuing_strategy]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.readable]
+bodies = 258
+translated = 6
+residue = 252
+
+[module.transform]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.util]
+bodies = 7
+translated = 2
+residue = 5
+
+[module.writable]
+bodies = 162
+translated = 6
+residue = 156
+
+[embedding]
+bodies = 417
+embedded = 417
+evaluable = 417
+blocked = 0
+
+[differential]
+bodies = 4
+theorems = 28
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::JsValue"
+bodies = 26
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: wasm_bindgen::__rt::link_mem_intrinsics"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: readable::into_underlying_byte_source::IntoUnderlyingByteSource"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: readable::into_underlying_source::IntoUnderlyingSource"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: writable::into_underlying_sink::IntoUnderlyingSink"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: readable::sys::ReadableStreamExt"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: readable::ReadableStream"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: writable::sys::WritableStreamExt"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: js_sys::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: readable::pipe_options::PipeOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: readable::sys::ReadableStreamReaderExt"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: writable::sys::WritableStreamDefaultWriterExt"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: IntoUnderlyingByteSource"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmSlice"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IntoUnderlyingSource"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: js_sys::Promise"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: writable::WritableStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_source::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_source::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::sys::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::sys::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_source::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::sys::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item writable::into_underlying_sink::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item writable::sys::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: writable::into_underlying_sink::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item writable::into_underlying_sink::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: writable::sys::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item writable::sys::_::_CHUNK_1_STR"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&wasm_bindgen::JsValue as NullableIntoWasmAbi>::null"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as NullableFromWasmAbi>::is_null"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as NullableIntoWasmAbi>::null"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readable::into_async_read::IntoAsyncRead<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readable::into_stream::IntoStream<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writable::into_async_write::IntoAsyncWrite<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writable::into_sink::IntoSink<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::RUST_STRUCT"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::VECTOR"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IntoUnderlyingSink"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readable::byob_reader::ReadableStreamBYOBReader<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readable::default_reader::ReadableStreamDefaultReader<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: wasm_bindgen::convert::WasmRet<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: writable::default_writer::WritableStreamDefaultWriter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::IntoUnderlyingByteSource::auto_allocate_chunk_size::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::auto_allocate_chunk_size::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::IntoUnderlyingByteSource::cancel::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::cancel::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::IntoUnderlyingByteSource::pull::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::pull::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::IntoUnderlyingByteSource::start::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::start::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_byte_source::IntoUnderlyingByteSource::type_::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::type_::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_source::IntoUnderlyingSource::cancel::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_source::IntoUnderlyingSource::cancel::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: readable::into_underlying_source::IntoUnderlyingSource::pull::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item readable::into_underlying_source::IntoUnderlyingSource::pull::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::auto_allocate_chunk_size::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::cancel::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::pull::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::start::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_byte_source::IntoUnderlyingByteSource::type_::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_source::IntoUnderlyingSource::cancel::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item readable::into_underlying_source::IntoUnderlyingSource::pull::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wasm_bindgen::describe::NAMED_EXTERNREF"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::abort::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::close::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::write::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: writable::into_underlying_sink::IntoUnderlyingSink::abort::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::abort::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: writable::into_underlying_sink::IntoUnderlyingSink::close::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::close::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: writable::into_underlying_sink::IntoUnderlyingSink::write::_::_CHUNK_1_LEN: mir::Operand::Constant: the constant item writable::into_underlying_sink::IntoUnderlyingSink::write::_::_CHUNK_1_STR"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <wasm_bindgen::JsValue as wasm_bindgen::describe::WasmDescribe>::describe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadableStreamBYOBReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadableStreamExt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadableStreamReaderExt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WritableStreamDefaultWriterExt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WritableStreamExt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: default_reader::ReadableStreamDefaultReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: default_writer::WritableStreamDefaultWriter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: into_async_read::IntoAsyncRead<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: into_stream::IntoStream<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: js_sys::Object"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: web_sys::ReadableStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: web_sys::TransformStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: web_sys::WritableStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: js_sys::Array"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: queuing_strategy::QueuingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readable::into_underlying_byte_source::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readable::into_underlying_source::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transform::TransformStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::QueuingStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::ReadableStreamByobReader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::ReadableStreamDefaultReader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::ReadableStreamType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::StreamPipeOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_sys::WritableStreamDefaultWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writable::into_underlying_sink::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::ReadableStream::cancel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::ReadableStream::cancel_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::ReadableStream::pipe_to"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::ReadableStream::pipe_to_with_options"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::byob_reader::ReadableStreamBYOBReader<'_>::cancel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::byob_reader::ReadableStreamBYOBReader<'_>::cancel_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::byob_reader::ReadableStreamBYOBReader<'_>::closed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::byob_reader::ReadableStreamBYOBReader<'_>::read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::byob_reader::ReadableStreamBYOBReader<'_>::read_with_buffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::default_reader::ReadableStreamDefaultReader<'_>::cancel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::default_reader::ReadableStreamDefaultReader<'_>::cancel_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::default_reader::ReadableStreamDefaultReader<'_>::closed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::default_reader::ReadableStreamDefaultReader<'_>::read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_async_read::IntoAsyncRead<'_>::cancel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_async_read::IntoAsyncRead<'_>::cancel_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_stream::IntoStream<'_>::cancel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_stream::IntoStream<'_>::cancel_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_underlying_byte_source::Inner::pull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of readable::into_underlying_source::Inner::pull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of util::promise_to_void_future"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::WritableStream::abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::WritableStream::abort_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::abort_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::closed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::ready"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::default_writer::WritableStreamDefaultWriter<'_>::write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_async_write::IntoAsyncWrite<'_>::abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_async_write::IntoAsyncWrite<'_>::abort_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_sink::IntoSink<'_>::abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_sink::IntoSink<'_>::abort_with_reason"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_underlying_sink::Inner::abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_underlying_sink::Inner::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of writable::into_underlying_sink::Inner::write"
+bodies = 1

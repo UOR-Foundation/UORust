@@ -1,0 +1,105 @@
+[[fn]]
+path = "psm::<impl at src/lib.rs:276:10: 276:15>::clone"
+kappa = "6e236d4c613f2932b8b63eb61150a20319de3cb8584a46fad057be7b6e32dbef"
+at = "StackDirection=u32"
+embedded = "2417033f8653bfb99052e53262fa8aae134410511945fd39b94b66eb02789e13"
+status = "translated"
+digest = "142d6051388673d05f13fbf6dd8d26cc689286867beefaca20766c30df3473c9"
+
+[[fn]]
+path = "psm::<impl at src/lib.rs:276:23: 276:32>::eq"
+kappa = "0f032bd0c7d098cb7e2ef7e7c2ead41f8395595ff127ec8790b87795e2b50b46"
+at = "StackDirection=u32"
+embedded = "c584b22a3681ec175e6a9fddb1a51e328de27ea1689b778b1dbfc233371a3b02"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "psm::<impl at src/lib.rs:276:34: 276:36>::assert_fields_are_eq"
+kappa = "64e3f5312b526bd890d5228f4235aaa672d84715ad88d9fac799c5e6475e74d7"
+embedded = "03760236134a6b04131d571bdc0e08881d8ae86fd1cb66c0700100122841cefc"
+status = "residue"
+cause = "mir::Ty: StackDirection"
+
+[[fn]]
+path = "psm::<impl at src/lib.rs:276:38: 276:43>::fmt"
+kappa = "863bc6f169c45249511cf8cfd011a1d686b558855fe83b09cb1a3b281e1ec6fd"
+embedded = "f4d34ee0518a98e67be1eeb0709520e4148bf3c1e867d4c468944f362902d35d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "psm::ASC"
+kappa = "3103da7b70b379c7e44d750254684ae89641970146da4e825b91a92f442c6ec2"
+embedded = "486ceb142b202a145d2883688d900b3f655ee479821755f71e92dc2a40c370cf"
+status = "residue"
+cause = "mir::Operand::Constant: StackDirection::Ascending::{constant#0}"
+
+[[fn]]
+path = "psm::DSC"
+kappa = "a606f3bac7074fc8a9c2616bfd40fe8588f61a39b7e571710379185fb3d337cb"
+embedded = "947a352b7feb3b1528ef7e04d0a7aac681355b434b33236272cc27ae5490242c"
+status = "residue"
+cause = "mir::Operand::Constant: StackDirection::Descending::{constant#0}"
+
+[[fn]]
+path = "psm::StackDirection::new"
+kappa = "9c197ef02c93c7a9d0c9821d788f866b47ffcb1bc9e28fa9c0c0829caeba96b4"
+at = "StackDirection=u32"
+embedded = "6a1a733a8640eb1a7b3eba3d755a102f974445c10c50d5b6f30b221861e37d8f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rust_psm_stack_direction"
+
+[[fn]]
+path = "psm::on_stack"
+kappa = "e2bc4dd3f0b36c7c2bc57890f122725ebccc2176198c4e4ed6071f61f1a757e9"
+at = "F=u32, R=u32, StackDirection=u32"
+embedded = "9b5018372145894850699317da6340427814afb8c1ca8605dcef8b23dd82a1b5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: StackDirection::new: psm's MIR stops at mir::TerminatorKind::Call: rust_psm_stack_direction"
+
+[[fn]]
+path = "psm::replace_stack"
+kappa = "4d59b4f2f29a1c0621cb425ce4c1ed1b6cd5655979c439745acbc83dcae1bd53"
+at = "F=u32, StackDirection=u32"
+embedded = "d3a5b07da057243fe1983c043be547bb3cd3c431e0d08166a4bca2c7134c3de2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: StackDirection::new: psm's MIR stops at mir::TerminatorKind::Call: rust_psm_stack_direction"
+
+[[fn]]
+path = "psm::rust_psm_on_stack"
+kappa = "bb7313a226773dd4fc1028517204fc72d348743dd2bdf7110af3fc14fd09de9f"
+embedded = "680452752a23aa8f9119a784fe9e14dcf1e87fa4d95eef210a6ce86b0ccf791a"
+status = "residue"
+cause = 'mir::Ty: unsafe extern "sysv64" fn(usize, usize)'
+
+[[fn]]
+path = "psm::rust_psm_replace_stack"
+kappa = "9e6bb41c125babe467c4305f6ea1006ab8b722b3634763a60b4948683a9f7501"
+embedded = "a271dfbc784066b44a46bfbe7aaf45e201b22143a201fafd6df8cefc6b0c1fcf"
+status = "residue"
+cause = 'mir::Ty: unsafe extern "sysv64" fn(usize) -> !'
+
+[[fn]]
+path = "psm::stack_pointer"
+kappa = "0b5e527d153d8e35f964486c628476fa2d270d2347db7939d4f11ecd3d6d25ac"
+embedded = "0192338e5dd51eabc18555c59b1787eaf50c3887326221a3b3e553f0b660d370"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rust_psm_stack_pointer"
+
+[[fn]]
+path = "psm::with_on_stack"
+kappa = "c8c0fe34014a0a5bee9d4bd0c15526a600b0d5b3a70f498d6947cafd4d1608b0"
+at = "F=u32, R=u32"
+embedded = "5371e7f16f72529020b10dabd9e9b1009034e66ce5a186fefcb1c1a047711149"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "psm::with_replaced_stack"
+kappa = "668eb6f01215b5853f044fcec2f3aa6f085fbc4822e476c128644b82ece82020"
+at = "F=u32"
+embedded = "097170df9c93b872ea5f4a834e24eed459862a894bfbeef092a1c962a31c3f39"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+

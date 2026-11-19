@@ -1,0 +1,64 @@
+[[fn]]
+path = "aws-smithy-query::protocol::<impl at src/protocol.rs:19:10: 19:15>::fmt"
+kappa = "468e906a442d830d36b8a5adaae3679ab3ea0ded95b849546b224f66ba2e1983"
+embedded = "5b5a4f6cfa734c54aab681e5d05c7e8549266939605f7c4abc82cb434fbc14ad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::default"
+kappa = "65ea5e848621f0fea40480ddf719dc6b6aa5770754940e227f40438bb5ffa965"
+embedded = "c6cff0d4131f222803d9b43387bc8df2369b60389551a17ef2f1004f5c80ff2d"
+status = "residue"
+cause = "mir::Ty: protocol::AwsQueryProtocol"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::deserialize_response"
+kappa = "ec98547449c95d0e05d7420bd278fd96e86c131c31f874309e1994cd0da25cc6"
+embedded = "d99ba85146ba13d291f6b68b205731f3a5881091868b57cd2203abfad214a319"
+status = "residue"
+cause = "mir::Ty: dyn aws_smithy_schema::serde::ShapeDeserializer"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::new"
+kappa = "2aa95347d980f190be5e8035476a80848d2203e3de4b439ad6e8662a496e92cb"
+embedded = "d25fd31dc95a08ba8d3c28a37a36b7ba7d53be4bb4a0e6bebe63c6f73c57a1c8"
+status = "residue"
+cause = "mir::Ty: protocol::AwsQueryProtocol"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::protocol_id"
+kappa = "588330502ff2a8728f42169648812592ff149a01f62ac1e5f97873da8462f0e3"
+embedded = "064f31168d949109c819c8bbad9de411b513622dd4091fded8e6dc54d3c2f0c2"
+status = "residue"
+cause = "mir::Ty: aws_smithy_schema::ShapeId<'_>"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::serialize_request"
+kappa = "c75d7c8adb13c57262c105c68883318f887a5dbe72d97ac4fc347c9f49ad9a07"
+embedded = "8215c7dbde9392b6f31e09b3cacc84e1b2492c59ee754b569d219ef423484306"
+status = "residue"
+cause = "mir::Ty: aws_smithy_runtime_api::http::Request"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::update_endpoint"
+kappa = "cc618ca7f68d1bf70d3389c1b4f7239aa8d5837691fffedd695d54ced9ac41bb"
+embedded = "d9726e0bcd86f978755bda6324385a879a819e936b804c599290720c0f1aaa60"
+status = "residue"
+cause = "mir::Ty: aws_smithy_schema::serde::SerdeError"
+
+[[fn]]
+path = "aws-smithy-query::protocol::AwsQueryProtocol::with_service_version"
+kappa = "8aba963a0d18a066b6792bfb36d79be033278d80845db43e0e51b1f93d83c063"
+at = "String=u32"
+embedded = "38a26d43163eeb780e9db3fd55ed425e596d032fc673a4dae15cb8be54c52569"
+status = "residue"
+cause = "mir::Ty: protocol::AwsQueryProtocol"
+
+[[fn]]
+path = "aws-smithy-query::strip_aws_query_envelope"
+kappa = "03e12f861f151e3d6473f19832d4529f047041c1d6d12407abd02476542c9393"
+embedded = "aa3e12810f59486a91d6a951f2b7300ddace180f83ec6c50b1becc061b695d18"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+

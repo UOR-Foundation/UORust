@@ -1,0 +1,1194 @@
+# The sqlx-core register (written by `uorust crate sqlx-core@0.9.1`; do not edit): every body of
+# sqlx-core's MIR at sqlx-core 0.9.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 768
+translated = 4
+residue = 764
+
+[module.acquire]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.arguments]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.column]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.common]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.config]
+bodies = 64
+translated = 0
+residue = 64
+
+[module.connection]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.decode]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.describe]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.encode]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.error]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.executor]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.ext]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.from_row]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.fs]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.io]
+bodies = 12
+translated = 1
+residue = 11
+
+[module.logger]
+bodies = 74
+translated = 0
+residue = 74
+
+[module.net]
+bodies = 84
+translated = 1
+residue = 83
+
+[module.pool]
+bodies = 125
+translated = 0
+residue = 125
+
+[module.query]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.query_as]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.query_builder]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.query_scalar]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.raw_sql]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.row]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.rt]
+bodies = 11
+translated = 1
+residue = 10
+
+[module.sql_str]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.statement]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.sync]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.transaction]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.type_checking]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.type_info]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.types]
+bodies = 71
+translated = 0
+residue = 71
+
+[module.value]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 706
+embedded = 706
+evaluable = 702
+blocked = 4
+
+[[construct]]
+construct = "StatementKind::Assign"
+bodies = 3
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: encode::IsNull"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: sql_str::SqlStr"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: DB"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: futures_io::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: WriteBuffer"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: StatementCache<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: query::Query<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: query_as::QueryAs<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: query_builder::QueryBuilder<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: query_scalar::QueryScalar<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: PoolConnection<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as types::Type>::type_info"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Text<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: UrlHost"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ext::ustr::UStr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: pool::Pool<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: pool::connection::Live<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as types::Type>::compatible"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SqlStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UStr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: config::Config"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pool::connection::Idle<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: query_builder::Separated<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<14>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: {async fn body of query::Query<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DateTimeCrate"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NumericCrate"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Pool<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: QueryLogger"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Transaction<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: net::UrlHost"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: query::Map<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Live<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PoolInner<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReadBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: column::ColumnOrigin"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn DatabaseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn error::DatabaseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: net::SocketHost<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pool::inner::DecrementSizeGuard<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: {async fn body of query::Map<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: {async fn body of query_as::QueryAs<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: {async fn body of query_scalar::QueryScalar<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Row"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Type"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Encode>::produces"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode::Encode::size_hint: sqlx-core's MIR stops at mir::TerminatorKind::Call: std::mem::size_of_val"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AsyncSemaphore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Brackets"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecrementSizeGuard<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DefaultMigrationType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DefaultVersioning"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Describe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LogSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybePoolConnection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParamChecking"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: QueryScalar<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawSql"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnrecognizedSqlFiles"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: column::TableColumn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::ConfigError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::common::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::migrate::UnrecognizedSqlFiles"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::LogSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::vec::Vec<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ext::async_stream::Yielder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: macros::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: net::socket::buffered::WriteBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: net::tls::CertificateInput"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pool::CloseEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pool::connection::PoolConnection<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pool::maybe::MaybePoolConnection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pool::options::PoolConnectionMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::JoinHandle<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::Level"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: type_checking::FmtValue<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::text::Text<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async block@src/pool/inner.rs:99:9: 99:19}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transaction::Transaction<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TransactionManager"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TypeInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as types::Type>::compatible"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as types::Type>::type_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of_val"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AsyncSemaphoreReleaser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BufferedSocket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BytesMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CloseEvent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Idle<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImmutableArguments<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IsNull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QueryBuilder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SqliteExtension"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Yielder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::statement_cache::StatementCache<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::drivers::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::drivers::ExternalDriverConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::drivers::MySqlConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::drivers::PgConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::drivers::SqliteConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::macros::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::macros::DateTimeCrate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::macros::NumericCrate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::macros::PreferredCrates"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::migrate::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::migrate::DefaultMigrationType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::migrate::DefaultVersioning"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::migrate::MigrationDefaults"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<pool::connection::PoolConnection<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn net::socket::Socket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: either::Either<&[u32]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ext::async_stream::TryAsyncStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl futures_core::Future<Output = std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::LevelFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logger::QueryLogger"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::Brackets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::socket::Flush<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::socket::Read<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::socket::Shutdown<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::socket::Write<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::socket::buffered::BufferedSocket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::tls::TlsConnector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::tls::util::StdSocket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pool::inner::PoolInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: raw_sql::RawSql"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::SplitWhitespace<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::AsyncSemaphore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::AsyncSemaphoreReleaser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: url::Url"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/connection.rs:112:9: 112:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/connection.rs:145:9: 145:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/connection.rs:179:9: 179:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/pool/connection.rs:144:9: 144:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/pool/connection.rs:166:9: 166:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/pool/mod.rs:359:9: 359:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <net::socket::SocketIntoBox as net::socket::WithSocket>::with_socket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ext::async_stream::Yielder<u32>::r#yield"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::ReadDir::next"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::create_dir_all<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::read<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::read_dir"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::read_to_string<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::remove_dir<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::remove_dir_all<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of fs::remove_file<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::flush"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read_buffered"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::read_with<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::shutdown"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::BufferedSocket<u32>::try_read<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::ReadBuffer::read<impl Socket>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::buffered::WriteBuffer::read_from<impl AsyncRead + u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::connect_tcp<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::socket::connect_uds<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::tls::CertificateInput::data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::tls::connector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::tls::handshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of net::tls::util::StdSocket<u32>::ready"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::CloseEvent::do_until<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::begin_with<impl SqlSafeStr>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::connect_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::try_begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::try_begin_with<impl SqlSafeStr>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::connection::PoolConnection<u32>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::acquire"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::acquire_permit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::min_connections_maintenance"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::try_min_connections"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::inner::check_idle_conn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::options::PoolOptions<u32>::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of pool::options::PoolOptions<u32>::connect_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of raw_sql::RawSql::execute<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of raw_sql::RawSql::fetch_optional<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::sleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::timeout<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::yield_now"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sync::AsyncSemaphore::acquire"
+bodies = 1

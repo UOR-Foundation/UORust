@@ -1,0 +1,79 @@
+[[fn]]
+path = "matrixmultiply::REGISTRY"
+kappa = "5c1cb8eceab5646a9e9f83f6b94bf336c3fdca785071db58bda99bb901329ef1"
+embedded = "98be1bb1000df6876fdc3de458622f43f48173d000467ffd906a8eed2f30a91e"
+status = "residue"
+cause = "mir::Ty: threading::Registry"
+
+[[fn]]
+path = "matrixmultiply::get_thread_pool"
+kappa = "5432bcf9491ddf84bb2f4d22bc3409b8c3edc44f2a86e26511673a13f711f72d"
+embedded = "39ffbdacdde51d591411752fae82002c40f8f4a950ddfe1e6810c0d9111dd7ee"
+status = "residue"
+cause = "mir::Operand::Constant: threading::REGISTRY: type outside the lift: threading::Registry"
+
+[[fn]]
+path = "matrixmultiply::nop"
+kappa = "231dc8548fccf69fa3ffd3b1ac778b4a7194d8e4c78d9caca0613d213f3fe2da"
+embedded = "5ad5db61cc06862851c31a0e591b356bd0eb96084f5eb5edb83e7d69eaf24894"
+status = "translated"
+digest = "adbef55d86b0d4702b350a8ba97a632ea988dbfb1b81fbec1bff509c1ff478b4"
+
+[[fn]]
+path = "matrixmultiply::threading::<impl at src/threading.rs:92:16: 92:21>::clone"
+kappa = "e508acca7ca52739a713e2144b70f7d66b0f6ca1a7118931ef31b65c180a1242"
+embedded = "b6e9a0d70bb4352c6bdef33d4dd29df30ec207877fd5862734b6404fc5bd242d"
+status = "residue"
+cause = "mir::Ty: threading::LoopThreadConfig"
+
+[[fn]]
+path = "matrixmultiply::threading::LoopThreadConfig::new"
+kappa = "754d45fe1139590a1709be8922029a8b39ffd54bae5371adf6c0bec5590c969a"
+embedded = "ebf8b8c3c35894c4374c4143c4fe0bf38a772995280db4d43d1f454859a434da"
+status = "residue"
+cause = "mir::Ty: threading::LoopThreadConfig"
+
+[[fn]]
+path = "matrixmultiply::threading::LoopThreadConfig::num_pack_a"
+kappa = "781a0455cffebe2801beb6f5831a41e9ea15651777e597d725e50b8d1b0bd3f3"
+embedded = "50838782d1a22b0c50411a32abf28015ffac76e83a7ac7182704b96e2f20302a"
+status = "residue"
+cause = "mir::Ty: LoopThreadConfig"
+
+[[fn]]
+path = "matrixmultiply::threading::RangeChunk::parallel"
+kappa = "afdeee7dc669cf1b60d7c7dd3e60982879e0ae93cfc0dd48353e18c20e015608"
+embedded = "3c3251831a7858d24ee637f3fcb7e463d7fdf63ec086b96a21cfacb0f0093c66"
+status = "residue"
+cause = "mir::Ty: fn()"
+
+[[fn]]
+path = "matrixmultiply::threading::RangeChunkParallel::for_each"
+kappa = "4d87a1351740941d6a7e8348529647a119cbf6181859aac04e449dfb9901b2f0"
+at = "F=u32, G=u32, R=u32"
+embedded = "1ea1f9b1345b90a5ad80053804285f03d687247dc0c0a462e1b4e22addce4f3c"
+status = "residue"
+cause = "mir::Ty: RangeChunkParallel<'_, u32>"
+
+[[fn]]
+path = "matrixmultiply::threading::RangeChunkParallel::thread_local"
+kappa = "53c86d358eed36c71cbdc990ac5f7e92d4f311b9ff82ba1723cf7df2aefa3098"
+at = "G2=u32"
+embedded = "b11ad97f7d180de888dab7b7d7855a85fef2b302bb39c2d73563caadc67732ec"
+status = "residue"
+cause = "mir::Ty: threading::RangeChunkParallel<'_, u32>"
+
+[[fn]]
+path = "matrixmultiply::threading::Registry::thread_pool"
+kappa = "5dd97044a76b9dee221c73f41e92f055633fa26986cd4e84255a31793b918c73"
+embedded = "bee19680df44c1a8e783883cbb7ca326766156be3ae01c7534c2db908081d66c"
+status = "residue"
+cause = "mir::Ty: threading::ThreadPool"
+
+[[fn]]
+path = "matrixmultiply::threading::ThreadPool::top"
+kappa = "bd56885cf794efc7d488300c03fcb8668dd27daa5a8dba23a8832b6fcdcc333d"
+embedded = "6c8257d0b8b9dd34a73e5d004632dbe6c90abaa198847e321734d415ae338088"
+status = "residue"
+cause = "mir::Ty: ThreadPool"
+

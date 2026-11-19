@@ -1,0 +1,100 @@
+[[fn]]
+path = "async-task::abort_on_panic"
+kappa = "f0efa486b955beedecc8383d78987ffbdbe77afc03e900710490e2afec3dfe3c"
+at = "T=u32"
+embedded = "569b8f0904bcdd7914a4ba185daed1b105494001602fcbd149328ee26a9d07b0"
+status = "residue"
+cause = "mir::Ty: utils::abort_on_panic::Bomb"
+
+[[fn]]
+path = "async-task::abort_on_panic::Bomb::drop"
+kappa = "f33816362119dcc3d6705726f5c9b36675a195af155cf17d3ca99d26ac9f9982"
+embedded = "6d31dd3536c23b7b90b9adfea23d844ef043a09b1a2b06544f7390828ceec8f0"
+status = "residue"
+cause = "mir::Ty: Bomb"
+
+[[fn]]
+path = "async-task::utils::<impl at src/utils.rs:41:10: 41:15>::clone"
+kappa = "c7714bbfe4fdc95ac3fa7f838f9772c8e5e5a195046ee7141c50ca3c5de45b2f"
+embedded = "c480f537a53d5b871ca4f18f744d318d993f94ea6a4ae1b513b4d72c14e306c4"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::<impl at src/utils.rs:41:23: 41:28>::fmt"
+kappa = "f97c14d654b4aa066b20a7fb3cb8acd9de64aef25a9f68986abf19eb69192fd7"
+embedded = "aeb635a0e7582ef27fa09bc7087939d329e18b10418d0e5c73165f6c21be152c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "async-task::utils::Layout::align"
+kappa = "51dbcbb43d70736a430b941e6d9c238e7a010bd650ce7b0caa0c1c9b236cff7c"
+embedded = "8e5c96f3495f013b393e8c3d5ba16182b6f6d8b474509d307dca202dd035ebd2"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::extend"
+kappa = "d67c67de033b51a285b6322121851b45a4d9d8691f1f8ce843aecad03b37666b"
+embedded = "bd2a86bad746f7f7ea8a83245a0358281889db71d6c562f266b633678a7f310e"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::from_size_align"
+kappa = "3ae534702ba6814e20ce6c69bf3ea342bce3c4dc74b5820977a14b189bca67e1"
+embedded = "25bce0a8e177bbeaf960109c7edb95d93998873b969908a1b6e94f2f0d081ba5"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::into_std"
+kappa = "0ae56d6461c7e937bbb8fd2da7e29ed4cff19772a0a6d33120aaeb56a62e491a"
+embedded = "ec7ad702def12bf2440be32369c51494fbdb16cd8255e45b87853a57c9bef2ed"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::new"
+kappa = "a8bf79d265fdbbe75011087ca48f32ebff9a2b25982993323fb2d9dccb0e8371"
+embedded = "0d25e3c6108102f93dd0e4e0f50a624c9489c0dbef0b11163320c0105e9623ad"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::padding_needed_for"
+kappa = "13486cdd327f4811885d878b55bbdc7c37728e87bc5810eaa49fcca378f911fb"
+embedded = "c77cb1a7a300149696e1db82e136355b554de1444c25256190427e450e89d27d"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::Layout::size"
+kappa = "2bb40fb1c55679c8096c433e7941032b6b1e0fff0085153b19585bab5c878588"
+embedded = "4f0d32929b4ebef4db844eed6f80959f9a8d792783b72ee7f31db766a3c0900f"
+status = "residue"
+cause = "mir::Ty: utils::Layout"
+
+[[fn]]
+path = "async-task::utils::abort"
+kappa = "ca8a7eed3da620834511ef86549736565262433a0a004c1f691a225f542a3713"
+embedded = "10f361ebaf5206a68bd66db90f0e6c935caf0c1bdf19ee6239b897e07dc74018"
+status = "residue"
+cause = "mir::Ty: utils::abort::Panic"
+
+[[fn]]
+path = "async-task::utils::abort::Panic::drop"
+kappa = "85bfe7774c565bc138bbed273fcdfe840310c2c883b87b3bb5cc47d0d8b67b9c"
+embedded = "3d4c265d06c7f9cd5813ea9ec5ab89f4231e0cbfef2fd0c9d13941c7475f61c1"
+status = "residue"
+cause = "mir::Ty: utils::abort::Panic"
+
+[[fn]]
+path = "async-task::utils::max"
+kappa = "bc085820802ae9038ac213574127cc080d1346f5952f07a397776bc476e7e333"
+differential = 7
+embedded = "6c1b269253e345d7dfbcda4998df110a093d8bfa2b59a978bacdf09136474c74"
+status = "translated"
+digest = "bc19a3eab436ae7530e3130ef43ba0d2d574bfb66824a2ddd1504a3a22207071"
+
