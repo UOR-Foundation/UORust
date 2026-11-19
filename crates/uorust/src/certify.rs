@@ -2748,12 +2748,14 @@ pub(crate) fn sync(
     for k in &outputs {
         let kappas = k.join(KAPPAS);
         if let Ok(text) = std::fs::read_to_string(&kappas) {
-            let table: toml::Table = toml::from_str(&text).map_err(|e| bad(&kappas, format!("{e}")))?;
+            let table: toml::Table =
+                toml::from_str(&text).map_err(|e| bad(&kappas, format!("{e}")))?;
             measured.get_or_insert_with(toml::Table::new).extend(table);
         }
         let ids = k.join(CLOSURES);
         if let Ok(text) = std::fs::read_to_string(&ids) {
-            let table: toml::Table = toml::from_str(&text).map_err(|e| bad(&ids, format!("{e}")))?;
+            let table: toml::Table =
+                toml::from_str(&text).map_err(|e| bad(&ids, format!("{e}")))?;
             identified.extend(table);
         }
         all.extend(bundles(k)?);
@@ -4203,7 +4205,10 @@ mod tests {
             .collect(),
         };
         let document = m.to_text();
-        assert!(document.starts_with('#'), "the manifest includes a comment header");
+        assert!(
+            document.starts_with('#'),
+            "the manifest includes a comment header"
+        );
         assert_eq!(Manifest::parse(Path::new("m"), &document), Ok(m));
         // A text that is not a TOML document must still be rejected.
         assert!(Manifest::parse(Path::new("m"), "not a valid = [").is_err());
