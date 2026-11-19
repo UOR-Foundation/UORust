@@ -2778,10 +2778,9 @@ mod tests {
 
     #[test]
     fn default_features_follow_cargos_rules() {
-        let manifest: toml::Value = toml::from_str("[features]\ndefault = [\"a\", \"opt/x\", \"weak?/y\"]\n\
-             a = [\"b\", \"dep:hidden\"]\nb = []\nc = []\n"
-            )
-            .expect("a manifest");
+        let manifest_doc = "[features]\ndefault = [\"a\", \"opt/x\", \"weak?/y\"]\n\
+             a = [\"b\", \"dep:hidden\"]\nb = []\nc = []\n";
+        let manifest: toml::Value = toml::from_str(manifest_doc).expect("a manifest");
         let on: Vec<String> = enabled_by_default(&manifest).into_iter().collect();
         assert_eq!(on, ["a", "b", "default", "opt"]);
         let none: toml::Value = toml::from_str("[features]\nc = []\n").expect("a manifest");
