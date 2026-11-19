@@ -522,3 +522,10 @@ Feature: engine
     When the full campaign and a dependency view alternate
     Then each view reuses its intact prior decision without a new verifier run
     But a changed dependency or a corrupted context cannot acquire either decision
+
+  @UE-75 @build
+  Scenario: Native words reuse signed source carriers across all fixed widths
+    Given compiler calls, constructors and mutations crossing signed integer model boundaries
+    When the common codec composes the SDK bit operations through balanced shared kernels
+    Then actual SDK results and final state agree with executable Rust at every fixed width
+    But incompatible widths and unrelated stored types remain typed refusals

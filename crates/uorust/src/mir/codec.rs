@@ -1,4 +1,5 @@
 //! Width-derived boundaries between mathematical source integers and native words.
+use crate::lex::{Decl, Expr};
 use crate::lift::Ty;
 
 pub(super) struct Converted {
@@ -6,6 +7,61 @@ pub(super) struct Converted {
     /// Ordered range obligations. Later checks use the bounds established
     /// by earlier ones; every check belongs to the same native candidate.
     pub(super) valid: Vec<String>,
+    pub(super) declarations: Vec<Decl>,
+}
+
+/// Decode a native bit pattern into SDK Int64 using only total fixed-width
+/// bit operations. Balanced composition keeps the semantic JSON depth bounded.
+fn signed_source(value: &str, bits: u32) -> Converted {
+    let modulus = super::int::pow2(bits);
+    let half = super::int::pow2(bits - 1);
+    let mut parts = vec![if bits < 64 {
+        format!("(if (codecWord <? {half}) then (0 : Int64) else (-{modulus} : Int64))")
+    } else {
+        "(0 : Int64)".into()
+    }];
+    for bit in 0..bits {
+        let divisor = super::int::pow2(bit);
+        let mask = if bit == 63 {
+            i64::MIN.to_string()
+        } else {
+            (1u64 << bit).to_string()
+        };
+        parts.push(format!("(if ((prim remainder (prim quotient codecWord {divisor} 0 : Nat) 2 0 : Nat) =? 0) then (0 : Int64) else ({mask} : Int64))"));
+    }
+    while parts.len() > 1 {
+        parts = parts
+            .chunks(2)
+            .map(|pair| match pair {
+                [a, b] => format!("(prim bit_or {a} {b} : Int64)"),
+                [a] => a.clone(),
+                _ => unreachable!(),
+            })
+            .collect();
+    }
+    let body = format!(
+        "(let codecWord : Nat := (prim remainder raw {modulus} 0 : Nat); {})",
+        parts[0]
+    );
+    let name = format!(
+        "mirSignedSource{}",
+        crate::project::sha(format!("{bits}\0{body}").as_bytes())
+    );
+    Converted {
+        value: format!("({name} {value})"),
+        valid: Vec::new(),
+        declarations: vec![Decl::Definition {
+            name,
+            type_parameters: Vec::new(),
+            parameters: vec![("raw".into(), "Nat".into())],
+            result: "Int64".into(),
+            body: Expr::Flat(body),
+            axioms: vec!["Quot.sound".into(), "propext".into()],
+            recursive: None,
+            termination: None,
+            mutual: None,
+        }],
+    }
 }
 
 fn source_width(ty: &Ty, widths: &[(u32, Vec<String>)]) -> Option<u32> {
@@ -41,7 +97,12 @@ pub(super) fn scalar(
         return Some(Converted {
             value: value.into(),
             valid: Vec::new(),
+            declarations: Vec::new(),
         });
+    }
+    if let (Ty::Signed(Some(bits)), Ty::Int(target)) = (from, to) {
+        return (bits == target && [8, 16, 32, 64].contains(bits))
+            .then(|| signed_source(value, *bits));
     }
     // Source fixed-width signed values share Int64 storage. Normalize
     // through the SDK's exact conversion, then reuse the same word codec
@@ -63,6 +124,7 @@ pub(super) fn scalar(
         return Some(Converted {
             value: crate::registered::word_integer(value, word.held, true),
             valid: Vec::new(),
+            declarations: Vec::new(),
         });
     }
     let Ty::Signed(_) = to else {
@@ -101,7 +163,7 @@ pub(super) fn scalar(
     };
     let positive = branch(value.into(), nonnegative(value));
     let magnitude = branch(format!("(prim negate {value} : Int)"), negative);
-    Some(Converted {value:format!("(if (prim less_than {value} (0 : Int) : Bool) then (prim remainder (prim subtract {modulus} {magnitude} : Nat) {modulus} 0 : Nat) else {positive})"),valid})
+    Some(Converted {value:format!("(if (prim less_than {value} (0 : Int) : Bool) then (prim remainder (prim subtract {modulus} {magnitude} : Nat) {modulus} 0 : Nat) else {positive})"),valid,declarations: Vec::new()})
 }
 
 #[cfg(test)]
@@ -114,7 +176,7 @@ mod tests {
         for (from, to) in [
             (Ty::Bool, Ty::Signed(Some(128))),
             (Ty::Int(32), Ty::Signed(Some(64))),
-            (Ty::Signed(Some(64)), Ty::Int(64)),
+            (Ty::Signed(Some(32)), Ty::Int(64)),
             (Ty::Signed(Some(64)), Ty::Integer(Some(128))),
             (Ty::Integer(Some(128)), Ty::Signed(Some(64))),
         ] {

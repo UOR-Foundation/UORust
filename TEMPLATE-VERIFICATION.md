@@ -1105,3 +1105,24 @@ intact. Three focused verdict tests, CLI and conformance checks, strict Clippy,
 model/template/SDK-lock checks passed. The normal self-model writer refreshed
 the CLI source anchors and release binding, and its check passed. Full release
 acceptance, translator certification and consumer adoption remain open.
+
+## UE-75: balanced signed source carrier kernels
+
+The registered failing constructor scenario refused a native word stored in an
+SDK signed source field. A single width-driven boundary now composes the pinned
+SDK's Int64 bit operations into shared, content-bound decoding definitions. The
+same conversion serves construction, source-call arguments and mutable field
+updates at i8, i16, i32 and i64. Balanced expressions preserve the SDK's semantic
+nesting limits; no SDK limit, compiler semantics or operation registry changed.
+
+The SDK regression passed 12 native decisions and 120 executable Rust boundary
+comparisons in 145.52 seconds, including returned results and stored state.
+The SDK rejected a planted wrong result with LLV7002. Replacing an authoritative
+signed source field with bool leaves the original compiler input refused.
+The prior aggregate regression now accepts the complete compatible boundary and
+retains its incompatible-field negative test. The fixed-field regression passed
+with the newly admitted constructors and its previous read/call comparisons.
+Focused codec, all 16 CLI, conformance, strict Clippy, model/template/SDK-lock and
+self-model checks passed. These fixture decisions do not establish additional
+consumer coverage; the guarded consumer campaign measures that separately.
+Full release acceptance, translator certification and consumer adoption are open.

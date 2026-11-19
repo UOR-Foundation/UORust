@@ -5490,18 +5490,8 @@ fn native_aggregates_check_field_representations_ue_41() {
         uorust::mir::Trial::All,
     ));
     let files = uorust::project_workspace(&dir, &opts).expect("native aggregate projection");
-    for name in ["pack", "variant"] {
-        let detail = residue_detail(&files, &format!("aggregate_representations::{name}"))
-            .unwrap_or_else(|| {
-                panic!(
-                    "incompatible aggregate was admitted: {name}: {}",
-                    text(&files, "frontier.toml")
-                )
-            });
-        assert!(detail.contains("field representation"), "{detail}");
-    }
     let listing = text(&files, uorust::mir::CANDIDATES);
-    for name in ["unpack", "array", "optional"] {
+    for name in ["unpack", "array", "optional", "pack", "variant"] {
         assert!(
             listing.contains(&format!("aggregate_representations::{name}\"")),
             "source signed read did not use its admitted codec: {name}"
@@ -5529,6 +5519,21 @@ fn native_aggregates_check_field_representations_ue_41() {
         String::from_utf8_lossy(&checked.stdout),
         String::from_utf8_lossy(&checked.stderr)
     );
+    let source_path = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source_path).unwrap();
+    let drifted = original
+        .replace("pub x: i32", "pub x: bool")
+        .replace("Number(i32)", "Number(bool)");
+    assert_ne!(original, drifted);
+    std::fs::write(&source_path, drifted).unwrap();
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    for name in ["unpack", "pack", "variant", "array", "optional"] {
+        assert!(
+            residue_detail(&mismatched, &format!("aggregate_representations::{name}"))
+                .is_some_and(|s| s.contains("field representation")),
+            "an incompatible stored schema acquired a signed codec: {name}"
+        );
+    }
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
@@ -6414,6 +6419,169 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-75: constructors, source arguments and state share signed word kernels.
+#[test]
+fn native_words_reuse_signed_source_carriers_ue_75() {
+    let mut code = String::new();
+    let mut oracle = String::from("use signed_boundaries::*;fn main(){\n");
+    for bits in [8, 16, 32, 64] {
+        code.push_str(&format!("pub struct Signed{bits}{{pub value:i{bits}}}\npub fn identity{bits}(value:i{bits})->i{bits}{{value}}\npub fn make{bits}(mut n:u8,value:i{bits})->Signed{bits}{{while n>0{{n-=1;}}Signed{bits}{{value}}}}\npub fn pass{bits}(mut n:u8,value:i{bits})->i{bits}{{while n>0{{n-=1;}}identity{bits}(value)}}\npub fn update{bits}(mut n:u8,x:&mut Signed{bits},value:i{bits})->i{bits}{{while n>0{{n-=1;}}x.value=value;x.value}}\n"));
+        oracle.push_str(&format!("for value in [i{bits}::MIN,-1,0,1,i{bits}::MAX]{{for n in [0,2]{{let raw=value as u{bits};println!(\"make|{bits}|{{n}}|{{raw}}|{{}}\",make{bits}(n,value).value);println!(\"pass|{bits}|{{n}}|{{raw}}|{{}}\",pass{bits}(n,value) as u{bits});let mut x=Signed{bits}{{value:-1}};let out=update{bits}(n,&mut x,value);println!(\"update|{bits}|{{n}}|{{raw}}|{{}}|{{}}\",out as u{bits},x.value);}}}}\n"));
+    }
+    oracle.push_str("}\n");
+    let dir=scratch("signed-source-boundaries",&[
+        ("Cargo.toml","[package]\nname=\"signed_boundaries\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",&code),("src/bin/vectors.rs",&oracle),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "signed-source-boundaries");
+    let mut opts = options("signed_boundaries");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for bits in [8, 16, 32, 64] {
+        for mode in ["make", "pass", "update"] {
+            let path = format!("signed_boundaries::{mode}{bits}");
+            assert!(
+                residue_detail(&proposed, &path).is_none(),
+                "{path}: {:?}",
+                residue_detail(&proposed, &path)
+            );
+        }
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("signed-source-boundary-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("signed_boundaries"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        12,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("signed_boundaries::{}{}", p[0], p[1]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let statement = match p[0] {
+            "make" => format!(
+                "((project ({name} {} {}) value) = ({} : Int64))",
+                p[2], p[3], p[4]
+            ),
+            "pass" => format!("(({name} {} {}) = {})", p[2], p[3], p[4]),
+            _ => {
+                let call = format!(
+                    "({name} {} (record Signed{} {{value := (-1 : Int64)}}) {})",
+                    p[2], p[1], p[3]
+                );
+                format!("(((project {call} item0) =? {}) && (prim equal (project (project {call} item1) value) ({} : Int64) : Bool)) = true",p[4],p[5])
+            }
+        };
+        let statement = if p[0] == "update" {
+            format!("({statement})")
+        } else {
+            statement
+        };
+        let theorem=format!("theorem{{name: signedBoundaryVector{i}, parameters: [], statement: {statement}, proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if p[0] == "pass" && p[4] == "0" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 0)", "= 1)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 120);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("value:i8", "value:bool", 1),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&mismatched, "signed_boundaries::make8")
+        .is_some_and(|s| s.contains("field representation")));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-74: each dependency context retains its original SDK decision.
 #[test]
 fn native_receipts_survive_context_alternation_ue_74() {
@@ -6571,8 +6739,8 @@ fn fixed_signed_source_fields_share_integer_codec_ue_73() {
             "source result codec not shared"
         );
         assert!(
-            residue_detail(&proposed, &format!("fixed_fields::make{bits}")).is_some(),
-            "unavailable reverse codec admitted"
+            residue_detail(&proposed, &format!("fixed_fields::make{bits}")).is_none(),
+            "the admitted reverse codec was not reused"
         );
     }
     let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("fixed-source-field-verdicts.toml");

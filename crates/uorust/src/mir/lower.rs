@@ -5490,6 +5490,10 @@ impl Fun<'_, '_> {
             return Some(format!("({name} (prim to_int {value} : Int))"));
         }
         let converted = super::codec::scalar(value, from, to, self.cx.widths)?;
+        for declaration in converted.declarations {
+            self.calls.insert(declaration.name().to_string());
+            self.aux.insert(declaration.name().to_string(), declaration);
+        }
         for valid in converted.valid {
             self.obligation(st, &valid, "an exact integer representation conversion");
         }
