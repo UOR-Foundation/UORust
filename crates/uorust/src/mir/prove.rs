@@ -399,7 +399,7 @@ pub fn prove_bounded(
         .filter(|row| row.trial)
         .map(|row| (row.kappa.as_str(), row))
         .collect();
-    register.rows.retain(|key, value| {
+    register.retain(|key, value| {
         live.get(key.as_str())
             .is_none_or(|c| value.matches(&c.digest, c.model_context_sha256.as_deref()))
     });
@@ -429,7 +429,7 @@ pub fn prove_bounded(
             .filter(|c| c.trial)
             .map(|c| (c.kappa.as_str(), c))
             .collect();
-        register.rows.retain(|key, value| {
+        register.retain(|key, value| {
             live.get(key.as_str())
                 .is_none_or(|c| value.matches(&c.digest, c.model_context_sha256.as_deref()))
         });

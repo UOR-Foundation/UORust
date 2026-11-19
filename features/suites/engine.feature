@@ -515,3 +515,10 @@ Feature: engine
     When compiler reads cross the shared representation boundary
     Then actual SDK results agree with executable Rust at sign and range boundaries
     But incompatible widths and unavailable reverse codecs remain typed refusals
+
+  @UE-74 @build
+  Scenario: Alternating dependency contexts retain their own native receipts
+    Given actual SDK decisions for the same Rust question in distinct bound contexts
+    When the full campaign and a dependency view alternate
+    Then each view reuses its intact prior decision without a new verifier run
+    But a changed dependency or a corrupted context cannot acquire either decision

@@ -5638,11 +5638,10 @@ fn mir_lift(
             admitted.insert(t.name.clone(), false);
             continue;
         }
-        let verdict = options
-            .verdicts
-            .rows
-            .get(&t.kappa)
-            .filter(|v| v.matches(&t.digest, t.model_context_sha256.as_deref()));
+        let verdict =
+            options
+                .verdicts
+                .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref());
         let ok = match verdict.map(|v| &v.status) {
             Some(Decision::Proved) => true,
             Some(Decision::Refused(cause)) => {
@@ -5709,9 +5708,7 @@ fn mir_lift(
         let t = &done[n];
         let learned = options
             .verdicts
-            .rows
-            .get(&t.kappa)
-            .filter(|v| v.matches(&t.digest, t.model_context_sha256.as_deref()))
+            .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref())
             .map(|v| v.axioms.clone())
             .or_else(|| options.learned.get(&t.kappa).cloned())
             .unwrap_or_default();

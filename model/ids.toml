@@ -495,3 +495,9 @@ id = "UE-73"
 level = "build"
 suite = "engine"
 statement = "Compiler representation boundaries normalize fixed-width signed source values through the pinned SDK integer conversion and the shared width-derived word codec, preserving Rust values for every supported width; incompatible widths and reverse conversions without an admitted codec remain typed residue"
+
+[[id]]
+id = "UE-74"
+level = "build"
+suite = "engine"
+statement = "Native verification retains intact prior decisions when dependency contexts alternate, admitting a stored decision only at its exact original digest or rooted model binding and retaining its original status and observed axiom policy; changed dependencies and unverified contexts still require actual SDK decisions"

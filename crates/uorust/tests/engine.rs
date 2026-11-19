@@ -70,6 +70,18 @@ fn project_fresh(root: &Path, name: &str) -> BTreeMap<String, Vec<u8>> {
 
 /// The MIR of the workspace at `root`, dumped once per test run.
 fn dumped(root: &Path, name: &str) -> PathBuf {
+    if !root.join("Cargo.lock").is_file() {
+        let locked = std::process::Command::new("cargo")
+            .args(["generate-lockfile", "--offline"])
+            .current_dir(root)
+            .output()
+            .expect("lock the compiler fixture");
+        assert!(
+            locked.status.success(),
+            "{}",
+            String::from_utf8_lossy(&locked.stderr)
+        );
+    }
     static DUMPS: std::sync::Mutex<BTreeMap<String, PathBuf>> =
         std::sync::Mutex::new(BTreeMap::new());
     let mut dumps = DUMPS
@@ -6398,6 +6410,119 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
             && diagnostic.contains("LLV7002")
             && diagnostic.contains("is false"),
         "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-74: each dependency context retains its original SDK decision.
+#[test]
+fn native_receipts_survive_context_alternation_ue_74() {
+    let original="pub fn source(value:bool)->bool {value}\npub fn query(mut n:u8)->bool {while n>0 {n-=1;}source(true)}\n";
+    let dir=scratch("native-context-alternation",&[
+        ("Cargo.toml","[package]\nname=\"context_receipts\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",original),
+    ]);
+    let dumps = dumped(&dir, "native-context-alternation");
+    let a = options("context_receipts");
+    let scaffolding = uorust::project_workspace(&dir, &a).unwrap();
+    let ll: toml::Value = text(&scaffolding, "lexlean.toml").parse().unwrap();
+    let pm: toml::Value = text(&scaffolding, "prismpm.toml").parse().unwrap();
+    let limits = toml::Value::Table(
+        [
+            ("lexlean".to_string(), ll["limits"].clone()),
+            ("prismpm".to_string(), pm["limits"].clone()),
+        ]
+        .into_iter()
+        .collect(),
+    );
+    let limit_path = dir.join("limits.toml");
+    std::fs::write(&limit_path, toml::to_string(&limits).unwrap()).unwrap();
+    let mut b = a.clone();
+    b.limits = Some(limit_path);
+    let cache = dir.join("decisions.toml");
+    let scratch = dir.join("trial");
+    let first = uorust::mir::prove_bounded(&dir, &a, &dumps, &cache, &scratch, 1).unwrap();
+    assert_eq!(first.refused, 0);
+    let first_register = verdicts(&cache);
+    let (key, first_row) = first_register
+        .rows
+        .iter()
+        .find(|(_, r)| r.function == "context_receipts::query")
+        .unwrap();
+    let first_context = first_row.model_context_sha256.as_ref().unwrap();
+    assert!(matches!(
+        first_row.status,
+        uorust::mir::verdict::Decision::Proved
+    ));
+    let first_snapshot = dir.join("first-verdicts.toml");
+    std::fs::write(&first_snapshot, first_register.to_text()).unwrap();
+    let second = uorust::mir::prove_bounded(&dir, &b, &dumps, &cache, &scratch, 1).unwrap();
+    assert_eq!(second.refused, 0);
+    let second_register = verdicts(&cache);
+    assert_ne!(
+        first_context,
+        second_register.rows[key]
+            .model_context_sha256
+            .as_ref()
+            .unwrap()
+    );
+    let saved = std::fs::read(&cache).unwrap();
+    assert!(
+        String::from_utf8_lossy(&saved).contains(first_context),
+        "the original SDK context was discarded"
+    );
+    assert!(
+        second_register.historical[key].contains(first_row),
+        "the original decision fields changed"
+    );
+    let imported = dir.join("imported-decisions.toml");
+    let mut only_latest = second_register.clone();
+    only_latest.historical.clear();
+    std::fs::write(&imported, only_latest.to_text()).unwrap();
+    uorust::mir::verdict::Verdicts::import_files(&imported, &[first_snapshot]).unwrap();
+    let imported_bytes = std::fs::read(&imported).unwrap();
+    for context in [&a, &b] {
+        let replay =
+            uorust::mir::prove_bounded(&dir, context, &dumps, &imported, &scratch, 1).unwrap();
+        assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+        assert_eq!(std::fs::read(&imported).unwrap(), imported_bytes);
+    }
+    let mut corrupted = second_register.clone();
+    corrupted.historical.get_mut(key).unwrap()[0].model_context_sha256 = Some("0".repeat(64));
+    let mut rejected = a.clone();
+    rejected.mir = Some(mir_options(
+        dumps.clone(),
+        corrupted,
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &rejected).unwrap();
+    assert!(
+        residue_detail(&files, "context_receipts::query").is_some(),
+        "a corrupted historic context acquired a current proof"
+    );
+    for context in [&a, &b, &a, &b] {
+        let replay =
+            uorust::mir::prove_bounded(&dir, context, &dumps, &cache, &scratch, 1).unwrap();
+        assert_eq!(
+            (replay.proved, replay.refused, replay.runs),
+            (0, 0, 0),
+            "an intact context was verified again"
+        );
+        assert_eq!(
+            std::fs::read(&cache).unwrap(),
+            saved,
+            "replay rewrote original decision records"
+        );
+    }
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        original.replace("{value}", "{!value}"),
+    )
+    .unwrap();
+    let changed = uorust::mir::prove_bounded(&dir, &a, &dumps, &cache, &scratch, 1).unwrap();
+    assert!(
+        changed.runs > 0 && changed.proved > 0,
+        "a changed source dependency reused an old decision"
     );
     std::fs::remove_dir_all(dir).unwrap();
 }

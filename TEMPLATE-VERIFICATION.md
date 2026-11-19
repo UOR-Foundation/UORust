@@ -1071,3 +1071,37 @@ and retains its existing wide/pointer-width comparisons. Both regressions,
 Clippy, model/template/SDK-lock and generated self-model checks passed.
 This is a review checkpoint; full release acceptance, translator certification,
 consumer adoption and complete consumer coverage remain open.
+
+## UE-74: intact native receipts across dependency contexts
+
+Measured full-campaign and Factory registers held 34 common decisions. Eight
+differed only in their rooted context observation; their original digest,
+decision, cause and observed axiom fields were unchanged. Replacing the active
+context discarded a previously verified observation and caused verification
+to repeat when switching views.
+
+The actual SDK regression reproduced that loss using identical Rust code in two
+explicitly bound resource-provenance contexts. It now retains complete prior
+records when a current decision is displaced. Admission and policy selection
+search both stores using the unchanged exact-digest/rooted-context rule. No
+context is synthesized, no proof status is altered, and a wrong rooted binding
+does not fall back to an equal legacy digest.
+
+The regression passed in 108.97 seconds: both contexts were actually decided,
+four subsequent alternations performed zero verifier runs and preserved all
+register bytes, and imports of the original snapshots gave two further zero-run
+replays. A corrupted historical context was refused; changing a reached source
+definition required a new SDK decision. Parser/import tests reject malformed
+contexts, records and axiom policies, and missing or malformed imports leave
+the original target intact. Empty-history registers retain their existing
+serialization, covered by the 16 CLI tests and committed byte comparisons.
+
+The `prove --prior-verdicts` option imports verifier-written registers without
+replacing current observations; imports are parsed before an atomic target
+replacement. The delivery driver binds each imported file's path and digest
+before invoking this interface. Compiler fixture setup uses Cargo's offline
+lock writer when a fixture has no lock; production locked-input checks remain
+intact. Three focused verdict tests, CLI and conformance checks, strict Clippy,
+model/template/SDK-lock checks passed. The normal self-model writer refreshed
+the CLI source anchors and release binding, and its check passed. Full release
+acceptance, translator certification and consumer adoption remain open.

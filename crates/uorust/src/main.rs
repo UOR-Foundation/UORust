@@ -684,6 +684,10 @@ struct ProveArgs {
     /// remain together and exceeding this positive budget is a typed refusal.
     #[arg(long, default_value_t = uorust::mir::DEFAULT_PROOF_BATCH_SIZE)]
     proof_batch_size: usize,
+    /// Import intact earlier verifier registers before deciding new inputs
+    /// (repeatable). Every decision still needs its original exact binding.
+    #[arg(long)]
+    prior_verdicts: Vec<PathBuf>,
     /// Write the final verdict-backed projection to --out and print its
     /// measured frontier and exact artifact bindings as one JSON report.
     /// Full-project SDK acceptance remains a separate gate.
@@ -889,6 +893,7 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                     "prove needs --mir and --verdicts".to_string(),
                 ));
             };
+            uorust::mir::verdict::Verdicts::import_files(verdicts, &prove.prior_verdicts)?;
             let summary = uorust::mir::prove_bounded(
                 &args.workspace,
                 &options(args)?,
