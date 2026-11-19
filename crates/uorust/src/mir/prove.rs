@@ -159,6 +159,14 @@ fn verify(dir: &Path) -> Result<Option<Vec<Diagnostic>>, UorustError> {
             diagnostic.code, diagnostic.path, diagnostic.line, diagnostic.message
         );
     }
+    if let Some(diagnostic) = out.iter().find(|d| {
+        !d.path.is_empty() && !d.path.ends_with("Behavior.lex.tex") && named(d, "").is_empty()
+    }) {
+        return Err(UorustError::Tool(format!(
+            "shared proof context {}:{}: {}: {}",
+            diagnostic.path, diagnostic.line, diagnostic.code, diagnostic.message
+        )));
+    }
     Ok(Some(out))
 }
 
@@ -527,6 +535,54 @@ fn write_scratch(scratch: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<()
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_shared_model_failure_is_not_a_function_verdict_ue_52() {
+        let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        let opts = Options {
+            name: "shared_failure".into(),
+            last_modified: "2026-11-11T00:00:00Z".into(),
+            advisories: None,
+            mir: None,
+            limits: None,
+            embedding: None,
+        };
+        let mut files = crate::project_workspace(&root.join("tests/fixtures/thermostat"), &opts)
+            .expect("valid generated project");
+        let bad = crate::lex::Decl::Definition {
+            name: "brokenSharedType".into(),
+            type_parameters: Vec::new(),
+            parameters: Vec::new(),
+            result: "Nat".into(),
+            body: crate::lex::Expr::Flat("false".into()),
+            axioms: Vec::new(),
+            recursive: None,
+            termination: None,
+            mutual: None,
+        };
+        let prelude = String::from_utf8(files["src/Prelude.lex.tex"].clone()).expect("UTF-8");
+        files.insert(
+            "src/Prelude.lex.tex".into(),
+            prelude
+                .replace(
+                    "\\end{semanticmodule}",
+                    &format!("{}\\end{{semanticmodule}}", crate::lex::render_decl(&bad)),
+                )
+                .into_bytes(),
+        );
+        let dir =
+            std::env::temp_dir().join(format!("uorust-shared-failure-{}", std::process::id()));
+        write_scratch(&dir, &files).expect("planted owned-model defect");
+        assert!(
+            matches!(verify(&dir),Err(UorustError::Tool(message)) if message.contains("shared proof context") && message.contains("Prelude.lex.tex"))
+        );
+        let actual: serde_json::Value = serde_json::from_slice(
+            &std::fs::read(dir.join("uorust-proof-result.json")).expect("raw SDK result"),
+        )
+        .expect("SDK JSON");
+        assert_eq!(actual["success"], false);
+        std::fs::remove_dir_all(dir).expect("cleanup");
+    }
 
     #[test]
     fn diagnostics_name_their_declarations() {

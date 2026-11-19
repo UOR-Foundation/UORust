@@ -32,7 +32,7 @@ pub(crate) mod trips;
 
 #[cfg(test)]
 mod generate;
-mod int;
+pub(crate) mod int;
 mod intrinsic;
 pub(crate) mod ir;
 mod prove;

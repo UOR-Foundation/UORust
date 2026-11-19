@@ -4957,6 +4957,19 @@ fn behavior(
     let mut listing = None;
     let mut translated = Vec::new();
     if let Some((dumps, options)) = mir {
+        // A native body may call a source definition without embedding
+        // that definition in its own text. Bind these shared meanings,
+        // type schemas and imported assets before consulting old verdicts.
+        let proof_context = sha(serde_json::json!({
+            "spec":"uorust/native-proof-context/2",
+            "sdk":include_str!("../../../prismpm.lock"),
+            "assets":crate::assets::FIXED,
+            "source":lifted.iter().map(crate::lex::render_decl).collect::<Vec<_>>(),
+            "types":format!("{mir_scopes:?}"),
+            "limits":format!("{:?}",ctx.limits),
+        })
+        .to_string()
+        .as_bytes());
         let mut taken = every_name.clone();
         taken.extend(lifted.iter().map(|d| d.name().to_string()));
         taken.extend(types.enums.keys().cloned());
@@ -4971,6 +4984,7 @@ fn behavior(
             &callees,
             &taken,
             &homonyms,
+            &proof_context,
         );
         mentioned.extend(out.types);
         translated = out.decls;
@@ -5146,6 +5160,7 @@ fn mir_lift(
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
     taken: &BTreeSet<String>,
     homonyms: &BTreeMap<FnSite, (String, String)>,
+    proof_context: &str,
 ) -> MirOut {
     use crate::mir::lower;
     use crate::mir::verdict::Decision;
@@ -5366,6 +5381,40 @@ fn mir_lift(
                 notes.residue.insert(path, (span, mir_residue(reason)));
             }
         }
+    }
+    // Bind transitive native dependencies as well. A lowering change can
+    // alter a callee while its stable Rust name and its caller's text stay
+    // the same. Sorted closures also cover recursive components.
+    let digests: BTreeMap<String, String> = done
+        .keys()
+        .map(|name| {
+            let mut pending = vec![name.clone()];
+            let mut closure = BTreeSet::new();
+            while let Some(next) = pending.pop() {
+                if let Some(body) = done.get(&next) {
+                    if closure.insert(next) {
+                        pending.extend(
+                            body.lowered
+                                .calls
+                                .iter()
+                                .filter(|n| done.contains_key(*n))
+                                .cloned(),
+                        );
+                    }
+                }
+            }
+            let dependencies: BTreeMap<_, _> =
+                closure.iter().map(|n| (n, &done[n].digest)).collect();
+            let digest = sha(
+                serde_json::json!({"context":proof_context,"dependencies":dependencies})
+                    .to_string()
+                    .as_bytes(),
+            );
+            (name.clone(), digest)
+        })
+        .collect();
+    for (name, digest) in digests {
+        done.get_mut(&name).expect("translation key").digest = digest;
     }
     // Admission: a verdict of the digest, or the trial; then every
     // translation a translation calls must be admitted too.

@@ -336,3 +336,17 @@ Feature: engine
     Then it writes the final projection and reports its census, remaining functions and blockers with exact byte bindings
     And unchanged proofs require zero verifier calls without claiming full-project SDK acceptance
     But a foreign projection directory is a typed refusal and its files are preserved
+
+  @UE-51 @build
+  Scenario: Numeric constructors derive their reading from word widths
+    Given locked numeric crates and compiler-derived primitive integer types
+    When constructors convert unsigned values and signed two's-complement words
+    Then the SDK verifies every primitive width and sign boundary using bounded binary conversion
+    And rational construction preserves the integer as numerator and one as denominator
+
+  @UE-52 @build
+  Scenario: Proof decisions follow their semantic dependency context
+    Given an actual SDK proof of a native function calling a source-lifted helper
+    When that helper changes without changing the caller's own tokens
+    Then UORust verifies the changed proof context and reuses its unchanged replay with zero verifier calls
+    But a broken shared semantic context is a typed campaign failure rather than per-function refusal

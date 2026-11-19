@@ -17,6 +17,21 @@ use crate::lift::Ty;
 /// The registry index whose packages a reading's checksums are of.
 const CRATES_IO: &str = "registry+https://github.com/rust-lang/crates.io-index";
 
+/// Decode a primitive word through one binary fold per bit, then apply
+/// its two's-complement sign. The fold truncates only bits outside the ABI
+/// width, and takes bounded work even for the largest u128 value.
+pub(crate) fn word_integer(value: &str, bits: u32, signed: bool) -> String {
+    let modulus = crate::mir::int::pow2(bits);
+    let word = format!("(prim remainder {value} {modulus} 0 : Nat)");
+    let positive = format!("(Prelude::wordToInteger {bits} {word})");
+    if signed {
+        let half = crate::mir::int::pow2(bits - 1);
+        format!("(if ({word} <? {half}) then {positive} else (prim subtract {positive} ({modulus} : Int) : Int))")
+    } else {
+        positive
+    }
+}
+
 /// Unary observations of the stored values in the admitted numeric readings.
 /// BigInt's identities and sign methods are in bigint.rs; Ratio's Zero,
 /// One and Signed impls and inherent accessors are in lib.rs. In particular
@@ -90,6 +105,7 @@ pub(crate) fn numeric_observation(ty: &Ty, method: &str, value: &str) -> Option<
         "numer" if *ty == Ty::Ratio => (numer, Ty::Unbounded),
         "denom" if *ty == Ty::Ratio => (denom, Ty::Unbounded),
         "is_integer" if *ty == Ty::Ratio => (equal(&denom, one), Ty::Bool),
+        "from_integer" if *ty == Ty::Ratio => (format!("({value}, {one})"), Ty::Ratio),
         _ => return None,
     })
 }

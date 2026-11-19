@@ -494,3 +494,29 @@ translation closure, and full-project SDK acceptance. A cached fixture campaign
 uses zero verifier calls; an unowned output directory is refused and its planted
 file is preserved. The caller need not parse prose, reconstruct the function
 counts, or rerun a separate projection to obtain the final work queue.
+
+
+## Width-derived constructors and semantic proof-cache context (UE-51, UE-52)
+
+UE-51 first refused unsigned BigInt construction. The project-owned Prelude now
+provides a structural binary fold over a declared bit count. Work is bounded by
+the primitive word width, including u128::MAX; it does not count up to the value.
+Unsigned source constructors and signed/unsigned native constructors share this
+reading, with a width-derived two's-complement adjustment. Native rational
+integer construction shares the existing stored-pair reading.
+
+Thirteen native functions and 32 closed SDK boundary vectors pass, covering every
+primitive integer width, pointer-sized integers, signed minima and all-one bit
+patterns. Reference Rust vectors confirm the same boundary values. The SDK
+preflight also checks the shared model directly before expensive proof runs.
+
+UE-52 reproduced a stale-cache defect: changing a source helper from identity to
+negation left its native caller's own tokens unchanged, and the old tool reused
+the caller's decision without SDK work. Native digests now bind the source/type
+context, bundled semantics, the pinned SDK lock and the transitive native
+translation closure. The actual regression verifies the changed context, then
+replays it with zero verifier calls. A planted Bool-as-Nat definition in the
+owned shared module is rejected by the SDK as a typed campaign failure. It is
+not misrecorded as a refusal of each unrelated native function. Existing legacy
+fixture decisions are refreshed through the actual prover under the new binding;
+no cached status or SDK object is edited to make it pass.

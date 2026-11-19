@@ -5505,6 +5505,49 @@ impl Fun<'_, '_> {
                 ..Called::value(term)
             });
         }
+        let constructor = erased
+            .strip_prefix('<')
+            .and_then(|s| s.rsplit_once(">::"))
+            .and_then(|(owner, method)| {
+                let (on, tr) = owner.split_once(" as ")?;
+                (method == "from" && matches!(tr, "std::convert::From" | "core::convert::From"))
+                    .then_some((on, method))
+            })
+            .or_else(|| {
+                erased
+                    .strip_prefix("num_rational::Ratio::")
+                    .filter(|m| *m == "from_integer")
+                    .map(|m| ("num_rational::Ratio", m))
+            });
+        if let (Some((owner, _)), [(value, input)]) = (constructor, args.as_slice()) {
+            let target = match owner {
+                "num_bigint::BigInt" => self.cx.types.registered(owner),
+                "num_rational::Ratio" => self.cx.types.registered("num_rational::BigRational"),
+                _ => None,
+            };
+            match target {
+                Some(Ty::Unbounded) if dt.same(&Ty::Unbounded) => {
+                    if *input == Ty::Unbounded {
+                        return Ok(Called::value(value.clone()));
+                    }
+                    if let Some(word) = Int::of(input, self.cx.widths) {
+                        return Ok(Called::value(crate::registered::word_integer(
+                            value,
+                            word.held,
+                            word.signed,
+                        )));
+                    }
+                }
+                Some(Ty::Ratio) if *input == Ty::Unbounded && dt.same(&Ty::Ratio) => {
+                    if let Some((term, _)) =
+                        crate::registered::numeric_observation(&Ty::Ratio, "from_integer", value)
+                    {
+                        return Ok(Called::value(term));
+                    }
+                }
+                _ => {}
+            }
+        }
         // The compiler has resolved the trait, so an unrelated method of
         // the same spelling cannot select these locked numeric readings.
         let numeric = erased

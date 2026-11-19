@@ -4514,6 +4514,16 @@ fn unbounded_call(
             let ((v, vt), acc) = flat_of(a, env, ctx, acc, None)?;
             match vt {
                 Ty::Unbounded | Ty::Integer(_) => flat_some(v, want, acc),
+                Ty::Nat(_) => {
+                    let word = crate::mir::int::Int::of(&vt, &env.widths).ok_or_else(|| {
+                        Residue::Form("unsigned constructor without a word width".into())
+                    })?;
+                    flat_some(
+                        crate::registered::word_integer(&v, word.held, false),
+                        want,
+                        acc,
+                    )
+                }
                 // The conversion of a fixed width to `Int` elaborates
                 // through these two.
                 Ty::Int(_) => {
@@ -15586,13 +15596,8 @@ mod tests {
         let lifted =
             registry_number_lift(one, &[("One", "num_traits::identities::One")]).expect("lifts");
         assert!(lifted.contains("(1 : Int)"), "{lifted}");
-        // LexLean converts no `Nat` to `Int`.
-        assert_eq!(
-            registry_number_lift("fn of(n: u32) -> BigInt { BigInt::from(n) }", &[]).err(),
-            Some(Residue::Form(
-                "BigInt::from of Nat, where LexLean binds no conversion to Int".to_string()
-            ))
-        );
+        // The width-driven binary reading supplies the unsigned conversion.
+        assert!(registry_number_lift("fn of(n: u32) -> BigInt { BigInt::from(n) }", &[]).is_ok());
     }
 
     #[test]

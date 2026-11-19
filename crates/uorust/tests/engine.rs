@@ -2708,6 +2708,218 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-52: native callers cannot reuse a proof of a different source callee.
+#[test]
+fn native_proof_cache_binds_source_dependencies_ue_52() {
+    let first="pub fn flag(x:bool)->bool { x }\npub fn caller(mut n:u8,x:bool)->bool {while n>0 {n-=1;} flag(x)}\n";
+    let dir=scratch("native-context-cache",&[("Cargo.toml","[package]\nname=\"context_cache\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",first)]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-context-cache");
+    let register = dir.join("verdicts.toml");
+    let prove = || {
+        uorust::mir::prove_bounded(
+            &dir,
+            &options("context_cache"),
+            &dumps,
+            &register,
+            &dir.join("trial"),
+            1,
+        )
+        .expect("actual context proof")
+    };
+    let before = prove();
+    assert_eq!((before.proved, before.refused), (1, 0));
+    let original = verdicts(&register);
+    std::fs::write(dir.join("src/lib.rs"), first.replace("{ x }", "{ !x }"))
+        .expect("changed callee only");
+    let after = prove();
+    assert!(
+        after.runs > 0,
+        "changed source dependency reused an old SDK decision"
+    );
+    assert_eq!((after.proved, after.refused), (1, 0));
+    assert_ne!(
+        original.rows.values().next().expect("old").digest,
+        verdicts(&register)
+            .rows
+            .values()
+            .next()
+            .expect("fresh")
+            .digest
+    );
+    let replay = prove();
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
+/// UE-51: one binary conversion rule covers all primitive word widths.
+#[test]
+fn numeric_word_constructors_follow_widths_ue_51() {
+    let types = [
+        ("u8", u8::BITS, false),
+        ("u16", u16::BITS, false),
+        ("u32", u32::BITS, false),
+        ("u64", u64::BITS, false),
+        ("u128", u128::BITS, false),
+        ("usize", usize::BITS, false),
+        ("i8", i8::BITS, true),
+        ("i16", i16::BITS, true),
+        ("i32", i32::BITS, true),
+        ("i64", i64::BITS, true),
+        ("i128", i128::BITS, true),
+        ("isize", isize::BITS, true),
+    ];
+    let mut code="use num_bigint::BigInt;\nuse num_rational::BigRational;\npub fn source_unsigned(x:u64)->BigInt {BigInt::from(x)}\n".to_string();
+    for (ty, _, _) in types {
+        code.push_str(&format!(
+            "pub fn from_{ty}(mut n:u8,x:{ty})->BigInt {{while n>0 {{n-=1;}} BigInt::from(x)}}\n"
+        ));
+    }
+    code.push_str("pub fn ratio(mut n:u8,x:BigInt)->BigRational {while n>0 {n-=1;} BigRational::from_integer(x)}\n");
+    code.push_str("#[test] fn reference_boundaries() {\n");
+    for (ty, _, _) in types {
+        code.push_str(&format!("assert_eq!(from_{ty}(0,{ty}::MIN).to_string(),{ty}::MIN.to_string()); assert_eq!(from_{ty}(0,{ty}::MAX).to_string(),{ty}::MAX.to_string());\n"));
+    }
+    code.push_str("}\n");
+    let dir=scratch("word-constructors",&[("Cargo.toml","[package]\nname=\"word_constructors\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n[dependencies]\nnum-bigint=\"=0.4.8\"\nnum-rational=\"=0.4.2\"\n"),("src/lib.rs",&code)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust word boundary vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let files = uorust::project_workspace(&dir, &options("word_constructors"))
+        .expect("source word construction");
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("word_constructors::source_unsigned")),
+        "source unsigned construction is not lifted"
+    );
+    let dumps = dumped(&dir, "word-constructors");
+    let mut opts = options("word_constructors");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("native constructors");
+    let listing = text(&files, uorust::mir::CANDIDATES);
+    for (ty, _, _) in types {
+        assert!(
+            listing.contains(&format!("word_constructors::from_{ty}\"")),
+            "missing width {ty}: {listing}"
+        );
+    }
+    assert!(listing.contains("word_constructors::ratio\""));
+    let register =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("word-constructor-verdicts.toml");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("word_constructors"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual word proofs");
+    assert_eq!(summary.refused, 0);
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved word constructors");
+    let rows = frontier_rows(&files, "lifted");
+    let name = |f: &str| {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(&format!("word_constructors::{f}")))
+            .and_then(|r| r["definition"].as_str())
+            .expect("proved constructor")
+            .to_string()
+    };
+    let mut vectors = Vec::new();
+    for (ty, width, signed) in types {
+        let mask = u128::MAX >> (u128::BITS - width);
+        let half = 1u128 << (width - 1);
+        let f = format!("from_{ty}");
+        if signed {
+            vectors.push((
+                f.clone(),
+                format!("0 {half}"),
+                format!("(prim negate ({half} : Int) : Int)"),
+            ));
+            vectors.push((
+                f.clone(),
+                format!("0 {mask}"),
+                "(prim negate (1 : Int) : Int)".to_string(),
+            ));
+            vectors.push((
+                f,
+                format!("0 {}", half - 1),
+                format!("({} : Int)", half - 1),
+            ));
+        } else {
+            vectors.push((f.clone(), "0 0".to_string(), "(0 : Int)".to_string()));
+            vectors.push((f, format!("0 {mask}"), format!("({mask} : Int)")));
+        }
+    }
+    vectors.push((
+        "source_unsigned".into(),
+        u64::MAX.to_string(),
+        format!("({} : Int)", u64::MAX),
+    ));
+    vectors.push((
+        "ratio".into(),
+        "0 (prim negate (2 : Int) : Int)".into(),
+        "((prim negate (2 : Int) : Int), (1 : Int))".into(),
+    ));
+    let mut model="\\begin{lexlean}{WordVectors}\n\\useglossary{uorust.titles@1.0.0}\n\\importmodule{Behavior}\n\\title{Lifted Rust behavior}\n\\begin{semanticmodule}\n".to_string();
+    for (i, (f, args, expected)) in vectors.iter().enumerate() {
+        let def = name(f);
+        let decl = def.strip_prefix("Behavior::").expect("namespace");
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == format!("word_constructors::{f}"))
+            .and_then(|r| r.axioms.get(decl))
+            .cloned()
+            .unwrap_or_default();
+        model.push_str(&format!("theorem{{name: word{i}, parameters: [], statement: (({def} {args}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    model.push_str("\\end{semanticmodule}\n\\end{lexlean}\n");
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write constructors");
+    std::fs::write(out.join("src/WordVectors.lex.tex"), model).expect("word vectors");
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/WordVectors.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK word boundary proof");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-49: numeric predicates and accessors retain the locked crates' stored-value semantics.
 #[test]
 fn native_numeric_observations_follow_locked_values_ue_49() {
