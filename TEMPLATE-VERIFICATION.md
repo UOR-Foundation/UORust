@@ -1036,3 +1036,38 @@ release acceptance, translator certification or final adoption.
 The focused dependency checks passed: 440 library tests, all 16 CLI tests,
 conformance meta-tests, strict all-target Clippy, model/template/SDK-lock and
 generated self-model checks. The manual standard semantic registry is unchanged.
+
+## UE-73: shared fixed-width source/native conversion kernels
+
+The registered regression first stopped on an i8 field: its source model stored
+Int64 while the compiler model required the width-bound bit pattern. All four
+fixed-width signed source types now normalize through the SDK's existing to_int
+conversion and the existing mathematical integer/word codec. The same binding
+serves native fields and results of source function calls. Mismatched widths and
+reverse conversions without an admitted codec remain typed residue.
+
+The first implementation repeated the normalized expression in each range
+obligation. Four small read models produced 32 theorems and 1,862,239 bytes of
+generated Lean; compilation was interrupted after observing 191 seconds. This
+attempt is not recorded as a passed or failed proof. Content-bound mathematical
+kernels now carry the universal conversion obligations once per width, while
+native sites call those kernels. The equivalent four-read native proof module
+generated 371,159 Lean bytes, about 80 percent less. These are generated-size
+measurements, not a controlled whole-run speedup claim.
+
+Eight native decisions and 80 executable Rust comparisons passed across direct
+field reads and source calls at i8/i16/i32/i64 extrema, negative values, zero and
+positive values. The shared helper policies are learned from actual SDK reports,
+including Classical.choice on the modular arithmetic proofs; no unsupported
+axiom or proof status is fabricated. The SDK rejected a planted wrong result
+with LLV7002. Changing the declared source width leaves the old MIR read refused.
+The completed corpus took 137.33 seconds with intact native decisions reused.
+
+The existing aggregate regression now admits array, option and tuple reads,
+while incompatible reverse stores remain refused. The signed-slot regression
+adds its formerly refused fixed-width read to the seven actual native decisions
+and retains its existing wide/pointer-width comparisons. Both regressions,
+440 library tests, all 16 CLI tests, conformance meta-tests, strict all-target
+Clippy, model/template/SDK-lock and generated self-model checks passed.
+This is a review checkpoint; full release acceptance, translator certification,
+consumer adoption and complete consumer coverage remain open.

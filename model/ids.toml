@@ -489,3 +489,9 @@ id = "UE-72"
 level = "build"
 suite = "engine"
 statement = "Compiler constant operands reuse exact admitted source constant definitions through target and module identities, retaining their semantic dependency closure; ambiguous declarations, function items, unavailable initializers and incompatible or mutable carriers remain typed residue"
+
+[[id]]
+id = "UE-73"
+level = "build"
+suite = "engine"
+statement = "Compiler representation boundaries normalize fixed-width signed source values through the pinned SDK integer conversion and the shared width-derived word codec, preserving Rust values for every supported width; incompatible widths and reverse conversions without an admitted codec remain typed residue"

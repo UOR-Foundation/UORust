@@ -508,3 +508,10 @@ Feature: engine
     When native bodies read the constants through the shared dependency interface
     Then actual SDK results agree with executable Rust and bind the reached initializers
     But unavailable initializers and incompatible carriers remain typed refusals
+
+  @UE-73 @build
+  Scenario: Source signed fields share the width-derived native word codec
+    Given source models of signed integer fields at every supported fixed width
+    When compiler reads cross the shared representation boundary
+    Then actual SDK results agree with executable Rust at sign and range boundaries
+    But incompatible widths and unavailable reverse codecs remain typed refusals

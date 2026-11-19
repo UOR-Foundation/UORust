@@ -2747,6 +2747,7 @@ pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
         "read_size",
         "make_size",
         "call_size",
+        "fixed",
     ];
     for f in functions {
         assert!(
@@ -2755,8 +2756,6 @@ pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
             residue_detail(&proposed, &format!("signed_codecs::{f}"))
         );
     }
-    assert!(residue_detail(&proposed, "signed_codecs::fixed")
-        .is_some_and(|s| s.contains("field representation")));
     let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("signed-slot-verdicts.toml");
     let proof = uorust::mir::prove_bounded(
         &dir,
@@ -2764,7 +2763,7 @@ pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
         &dumps,
         &register,
         &dir.join("trial"),
-        6,
+        7,
     )
     .expect("SDK proofs");
     assert_eq!(proof.refused, 0, "{proof:?}");
@@ -5479,7 +5478,7 @@ fn native_aggregates_check_field_representations_ue_41() {
         uorust::mir::Trial::All,
     ));
     let files = uorust::project_workspace(&dir, &opts).expect("native aggregate projection");
-    for name in ["unpack", "pack", "variant", "array", "optional"] {
+    for name in ["pack", "variant"] {
         let detail = residue_detail(&files, &format!("aggregate_representations::{name}"))
             .unwrap_or_else(|| {
                 panic!(
@@ -5490,6 +5489,12 @@ fn native_aggregates_check_field_representations_ue_41() {
         assert!(detail.contains("field representation"), "{detail}");
     }
     let listing = text(&files, uorust::mir::CANDIDATES);
+    for name in ["unpack", "array", "optional"] {
+        assert!(
+            listing.contains(&format!("aggregate_representations::{name}\"")),
+            "source signed read did not use its admitted codec: {name}"
+        );
+    }
     assert!(
         listing.contains("aggregate_representations::good"),
         "{listing}"
@@ -6394,6 +6399,157 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
             && diagnostic.contains("is false"),
         "{diagnostic}"
     );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-73: source fixed-width signed fields reuse the common word codec.
+#[test]
+fn fixed_signed_source_fields_share_integer_codec_ue_73() {
+    let mut code = String::new();
+    let mut oracle = String::from("use fixed_fields::*;fn main(){\n");
+    for bits in [8, 16, 32, 64] {
+        code.push_str(&format!("pub struct Signed{bits} {{pub value:i{bits}}}\npub fn read{bits}(mut n:u8,x:&Signed{bits})->i{bits} {{while n>0 {{n-=1;}}x.value}}\npub fn make{bits}(mut n:u8,value:i{bits})->Signed{bits} {{while n>0 {{n-=1;}}Signed{bits}{{value}}}}\npub fn source{bits}(x:&Signed{bits})->i{bits} {{x.value}}\npub fn call{bits}(mut n:u8,x:&Signed{bits})->i{bits} {{while n>0 {{n-=1;}}source{bits}(x)}}\n"));
+        oracle.push_str(&format!("for value in [i{bits}::MIN,-1,0,1,i{bits}::MAX] {{for n in [0,2] {{for (mode,got) in [(\"read\",read{bits}(n,&Signed{bits}{{value}})),(\"call\",call{bits}(n,&Signed{bits}{{value}}))] {{println!(\"{bits}|{{mode}}|{{n}}|{{value}}|{{}}\",got as u{bits});}}}}}}\n"));
+    }
+    oracle.push_str("}\n");
+    let dir=scratch("fixed-source-fields",&[
+        ("Cargo.toml","[package]\nname=\"fixed_fields\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",&code),("src/bin/vectors.rs",&oracle),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "fixed-source-fields");
+    let mut opts = options("fixed_fields");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for bits in [8, 16, 32, 64] {
+        let path = format!("fixed_fields::read{bits}");
+        assert!(
+            residue_detail(&proposed, &path).is_none(),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+        assert!(
+            residue_detail(&proposed, &format!("fixed_fields::call{bits}")).is_none(),
+            "source result codec not shared"
+        );
+        assert!(
+            residue_detail(&proposed, &format!("fixed_fields::make{bits}")).is_some(),
+            "unavailable reverse codec admitted"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("fixed-source-field-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("fixed_fields"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let bits = p[0];
+        let path = format!("fixed_fields::{}{bits}", p[1]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: fixedFieldVector{i}, parameters: [], statement: (({name} {} (record Signed{bits} {{value := ({} : Int64)}})) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[2],p[3],p[4],policy.join(", "));
+        if p[4] == "0" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 0)", "= 1)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 80);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        code.replacen("value:i8", "value:i16", 1),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let mismatched = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&mismatched, "fixed_fields::read8")
+        .is_some_and(|s| s.contains("field representation")));
     std::fs::remove_dir_all(dir).unwrap();
 }
 

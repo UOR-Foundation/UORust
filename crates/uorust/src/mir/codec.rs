@@ -43,6 +43,18 @@ pub(super) fn scalar(
             valid: Vec::new(),
         });
     }
+    // Source fixed-width signed values share Int64 storage. Normalize
+    // through the SDK's exact conversion, then reuse the same word codec
+    // as mathematical source integers. The declared Rust width still binds
+    // the conversion; this does not admit the reverse Int64 boundary.
+    if let Ty::Int(bits) = from {
+        return scalar(
+            &format!("(prim to_int {value} : Int)"),
+            &Ty::Integer(Some(*bits)),
+            to,
+            widths,
+        );
+    }
     if let Ty::Signed(_) = from {
         let word = super::int::Int::of(from, widths)?;
         if source_width(to, widths)? != word.held {
@@ -101,7 +113,8 @@ mod tests {
         let widths = [(64, Vec::new())];
         for (from, to) in [
             (Ty::Bool, Ty::Signed(Some(128))),
-            (Ty::Int(64), Ty::Signed(Some(64))),
+            (Ty::Int(32), Ty::Signed(Some(64))),
+            (Ty::Signed(Some(64)), Ty::Int(64)),
             (Ty::Signed(Some(64)), Ty::Integer(Some(128))),
             (Ty::Integer(Some(128)), Ty::Signed(Some(64))),
         ] {

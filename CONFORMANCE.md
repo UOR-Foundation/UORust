@@ -93,6 +93,7 @@ model does not sanction.
 | `UE-70` | `build` | Compiler mutations retain the incoming value carrier throughout place-update recursion and reuse the existing representation codec at storage boundaries; nested fields and containers preserve their declared schemas, and an incompatible opaque field is refused before SDK proof scheduling |
 | `UE-71` | `build` | Parametric map entries use the canonical SDK product carrier across type rendering, schema dependencies, source collection operations and existing standard semantic templates, preserving the closed-type ABI and refusing key operations without admitted comparison evidence |
 | `UE-72` | `build` | Compiler constant operands reuse exact admitted source constant definitions through target and module identities, retaining their semantic dependency closure; ambiguous declarations, function items, unavailable initializers and incompatible or mutable carriers remain typed residue |
+| `UE-73` | `build` | Compiler representation boundaries normalize fixed-width signed source values through the pinned SDK integer conversion and the shared width-derived word codec, preserving Rust values for every supported width; incompatible widths and reverse conversions without an admitted codec remain typed residue |
 
 ## factory
 

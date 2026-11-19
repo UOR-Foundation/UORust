@@ -5437,6 +5437,58 @@ impl Fun<'_, '_> {
         to: &Ty,
         st: &State,
     ) -> Option<String> {
+        if let (Ty::Int(bits), Ty::Signed(_)) = (from, to) {
+            // Keep the SDK's Int64 conversion out of generic arithmetic
+            // obligations. One mathematical kernel is certified per width;
+            // every native read merely supplies its converted value.
+            let source = Ty::Integer(Some(*bits));
+            let parameter = "codecInteger";
+            let converted = super::codec::scalar(parameter, &source, to, self.cx.widths)?;
+            let identity = crate::project::sha(
+                format!(
+                    "{source:?}\0{to:?}\0{}\0{:?}",
+                    converted.value, converted.valid
+                )
+                .as_bytes(),
+            );
+            let name = format!("mirIntegerCodec{identity}");
+            if !self.aux.contains_key(&name) {
+                let parameters = vec![(parameter.to_string(), source.render())];
+                let axioms = vec!["Quot.sound".into(), "propext".into()];
+                for (i, statement) in converted.valid.into_iter().enumerate() {
+                    let proof = format!("{name}Valid{i}");
+                    self.aux.insert(
+                        proof.clone(),
+                        Decl::Theorem {
+                            name: proof,
+                            type_parameters: Vec::new(),
+                            parameters: parameters.clone(),
+                            statement,
+                            proof: "linear_arithmetic{}".into(),
+                            axioms: axioms.clone(),
+                        },
+                    );
+                }
+                self.aux.insert(
+                    name.clone(),
+                    Decl::Definition {
+                        name: name.clone(),
+                        type_parameters: Vec::new(),
+                        parameters,
+                        result: to.render(),
+                        body: Expr::Flat(converted.value),
+                        axioms,
+                        recursive: None,
+                        termination: None,
+                        mutual: None,
+                    },
+                );
+            }
+            self.mention(&source);
+            self.mention(to);
+            self.calls.insert(name.clone());
+            return Some(format!("({name} (prim to_int {value} : Int))"));
+        }
         let converted = super::codec::scalar(value, from, to, self.cx.widths)?;
         for valid in converted.valid {
             self.obligation(st, &valid, "an exact integer representation conversion");
