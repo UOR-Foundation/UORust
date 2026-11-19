@@ -34,6 +34,8 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Reject invalid browser acceptance results
+        run: node --test bootstrap/acceptance-result.test.mjs
       - name: Reject failed refreshed census attempts
         shell: bash
         run: bash scripts/ci/test-land-register.sh
