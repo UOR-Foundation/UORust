@@ -32,6 +32,8 @@ jobs:
         run: npm install
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Reject invalid browser acceptance results
+        run: node --test bootstrap/acceptance-result.test.mjs
       - name: Verify, answer add 20 22 and replay 22/22
         run: npm run test:try
       - name: Prism accounts - every signature check refuses, and the passkey flow signs in
