@@ -41,6 +41,8 @@ jobs:
         run: bash scripts/ci/test-land-register.sh
       - name: Check bounded model source citations and planted overdepth
         run: python3 -I -m unittest discover -s scripts/self-model -p "test_bounded_sources.py"
+      - name: Verify exact tag acceptance refusals
+        run: python3 -I -m unittest discover -s scripts/release -p 'test_qualify_tag.py'
       - name: Verify, answer add 20 22 and replay 22/22
         run: npm run test:try
       - name: Prism accounts - every signature check refuses, and the passkey flow signs in
