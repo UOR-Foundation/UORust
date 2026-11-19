@@ -69,9 +69,12 @@ class InstallUpstreamGateTest(unittest.TestCase):
 
     def test_planted_false_green_is_rejected(self):
         source = WORKFLOW.read_text()
-        self.assertIn("          exit 1", source)
+        prefix, found, refusal = source.partition("  upstream-refusal:\n")
+        self.assertTrue(found)
+        self.assertIn("          exit 1", refusal)
+        planted = prefix + found + refusal.replace("          exit 1", "          exit 0", 1)
         with self.assertRaisesRegex(ValueError, "passing installation"):
-            verify(source.replace("          exit 1", "          exit 0", 1))
+            verify(planted)
 
 
 if __name__ == "__main__":
