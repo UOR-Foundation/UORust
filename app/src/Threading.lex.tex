@@ -1,0 +1,341 @@
+\begin{lexlean}{Threading}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\title{Boolean}
+\begin{semanticmodule}
+structure{
+  name: Entry,
+  type_parameters: [],
+  parameters: [],
+  fields: [{name: name, type: String}, {name: value, type: String}]
+}
+
+definition{
+  name: choose,
+  parameters: [test : Bool, yes : String, no : String],
+  result: String,
+  body: (match test | Bool.true => yes | Bool.false => no),
+  executable: true
+}
+
+definition{
+  name: either,
+  parameters: [left : Bool, right : Bool],
+  result: Bool,
+  body: (match left | Bool.true => true | Bool.false => right),
+  executable: true
+}
+
+definition{
+  name: write,
+  parameters: [entries : (List Entry), field : String, value : String],
+  result: (List Entry),
+  body: (match entries
+    | List.nil => (nil Entry)
+    | List.cons head rest => (cons (record Entry {name := (project head name), value := (choose (prim equal (project head name) field : Bool) value (project head value))}) (write rest field value))),
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: read,
+  parameters: [entries : (List Entry), field : String],
+  result: String,
+  body: (match entries
+    | List.nil => ""
+    | List.cons head rest => (choose (prim equal (project head name) field : Bool) (project head value) (read rest field))),
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: hasField,
+  parameters: [entries : (List Entry), field : String],
+  result: Bool,
+  body: (match entries
+    | List.nil => false
+    | List.cons head rest => (either (prim equal (project head name) field : Bool) (hasField rest field))),
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: names,
+  parameters: [entries : (List Entry)],
+  result: (List String),
+  body: (match entries
+    | List.nil => (nil String)
+    | List.cons head rest => (cons (project head name) (names rest))),
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: unchanged,
+  parameters: [whole : String, fields : (List String)],
+  result: (List Entry),
+  body: (match fields
+    | List.nil => (nil Entry)
+    | List.cons head rest => (cons (record Entry {name := head, value := (prim join (cons "(project " (cons whole (cons " " (cons head (cons ")" (nil String)))))) "" : String)}) (unchanged whole rest))),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: fields
+}
+
+definition{
+  name: render,
+  parameters: [entries : (List Entry)],
+  result: String,
+  body: (match entries
+    | List.nil => ""
+    | List.cons head rest => (match rest
+      | List.nil => (prim join (cons (project head name) (cons " := " (cons (project head value) (nil String)))) "" : String)
+      | List.cons next more => (prim join (cons (project head name) (cons " := " (cons (project head value) (cons ", " (cons (render rest) (nil String)))))) "" : String))),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: threadedRecord,
+  parameters: [ty : String, whole : String, fields : (List String), field : String, value : String],
+  result: String,
+  body: (match (hasField (unchanged whole fields) field)
+    | Bool.true => (prim join (cons "(record " (cons ty (cons " {" (cons (render (write (unchanged whole fields) field value)) (cons "})" (nil String)))))) "" : String)
+    | Bool.false => ""),
+  axioms: [propext],
+  executable: true
+}
+
+structure{
+  name: Step,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: ty, type: String},
+    {name: fields, type: (List String)},
+    {name: field, type: String}
+  ]
+}
+
+definition{
+  name: mark,
+  parameters: [position : Nat],
+  result: String,
+  body: (match position
+    | Nat.zero => ""
+    | Nat.succ before => (prim join (cons "i" (cons (mark before) (nil String))) "" : String)),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: position
+}
+
+definition{
+  name: headAt,
+  parameters: [binder : String, position : Nat],
+  result: String,
+  body: (prim join (cons binder (cons "Head" (cons (mark position) (nil String)))) "" : String),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: tailAt,
+  parameters: [whole : String, binder : String, position : Nat],
+  result: String,
+  body: (match position
+    | Nat.zero => whole
+    | Nat.succ before => (prim join (cons binder (cons "Tail" (cons (mark position) (nil String)))) "" : String)),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: positions,
+  parameters: [binder : String, count : Nat],
+  result: (List Entry),
+  body: (match count
+    | Nat.zero => (nil Entry)
+    | Nat.succ before => (prim append (positions binder before) (cons (record Entry {name := (mark before), value := (headAt binder before)}) (nil Entry)) : (List Entry))),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: count
+}
+
+definition{
+  name: consed,
+  parameters: [entries : (List Entry), tail : String],
+  result: String,
+  body: (match entries
+    | List.nil => tail
+    | List.cons head rest => (prim join (cons "(cons " (cons (project head value) (cons " " (cons (consed rest tail) (cons ")" (nil String)))))) "" : String)),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: entries
+}
+
+definition{
+  name: opening,
+  parameters: [whole : String, binder : String, position : Nat, remaining : Nat, inner : String],
+  result: String,
+  body: (match remaining
+    | Nat.zero => inner
+    | Nat.succ rest => (prim join (cons "(match " (cons (tailAt whole binder position) (cons " | List.nil => " (cons whole (cons " | List.cons " (cons (headAt binder position) (cons " " (cons (tailAt whole binder (position + 1)) (cons " => " (cons (opening whole binder (position + 1) rest inner) (cons ")" (nil String)))))))))))) "" : String)),
+  axioms: [propext],
+  executable: true,
+  recursive_argument: remaining
+}
+
+definition{
+  name: listWrite,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  result: String,
+  body: (opening whole binder 0 (index + 1) (consed (write (positions binder (index + 1)) (mark index) value) (tailAt whole binder (index + 1)))),
+  axioms: [propext],
+  executable: true
+}
+
+definition{
+  name: placeWrite,
+  parameters: [
+    steps : (List Step),
+    whole : String,
+    binder : String,
+    index : Nat,
+    indexed : Bool,
+    value : String
+  ],
+  result: String,
+  body: (match steps
+    | List.nil => (match indexed
+      | Bool.true => (listWrite whole binder index value)
+      | Bool.false => value)
+    | List.cons step rest => (threadedRecord (project step ty) whole (project step fields) (project step field) (placeWrite rest (prim join (cons "(project " (cons whole (cons " " (cons (project step field) (cons ")" (nil String)))))) "" : String) binder index indexed value))),
+  axioms: [propext],
+  executable: true,
+  production: {effects: [allocation, overflow, recursion], targets: [rust-std]},
+  recursive_argument: steps
+}
+
+theorem{
+  name: aRepeatedTestKeepsItsAnswer,
+  parameters: [test : Bool, yes : String, other : String, no : String],
+  statement: ((choose test (choose test yes other) no) = (choose test yes no)),
+  proof: cases{
+    branches: [
+      {proof: simplify{definitions: [choose]}, binders: [], constructor: "false"},
+      {proof: simplify{definitions: [choose]}, binders: [], constructor: "true"}
+    ],
+    scrutinee: test
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: aLaterChoiceOverridesAnEarlier,
+  parameters: [test : Bool, later : String, earlier : String, no : String],
+  statement: ((choose test later (choose test earlier no)) = (choose test later no)),
+  proof: cases{
+    branches: [
+      {proof: simplify{definitions: [choose]}, binders: [], constructor: "false"},
+      {proof: simplify{definitions: [choose]}, binders: [], constructor: "true"}
+    ],
+    scrutinee: test
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: nestedChoicesOfOneValueJoin,
+  parameters: [left : Bool, right : Bool, yes : String, no : String],
+  statement: ((choose left yes (choose right yes no)) = (choose (either left right) yes no)),
+  proof: cases{
+    branches: [
+      {proof: simplify{definitions: [choose, either]}, binders: [], constructor: "false"},
+      {proof: simplify{definitions: [choose, either]}, binders: [], constructor: "true"}
+    ],
+    scrutinee: left
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: aWriteKeepsTheFields,
+  parameters: [entries : (List Entry), field : String, value : String],
+  statement: ((names (write entries field value)) = (names entries)),
+  proof: induction{
+    branches: [
+      {proof: simplify{definitions: [names, write]}, binders: [], constructor: nil},
+      {proof: simplify{definitions: [ih, names, write]}, binders: [x, xs, ih], constructor: cons}
+    ],
+    scrutinee: entries
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: theWrittenFieldReadsTheValue,
+  parameters: [entries : (List Entry), field : String, value : String],
+  statement: ((read (write entries field value) field) = (choose (hasField entries field) value "")),
+  proof: induction{
+    branches: [
+      {
+        proof: simplify{definitions: [choose, hasField, read, write]},
+        binders: [],
+        constructor: nil
+      },
+      {
+        proof: simplify{
+          definitions: [
+            aRepeatedTestKeepsItsAnswer,
+            hasField,
+            ih,
+            nestedChoicesOfOneValueJoin,
+            read,
+            write
+          ]
+        },
+        binders: [x, xs, ih],
+        constructor: cons
+      }
+    ],
+    scrutinee: entries
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: theLastWriteWins,
+  parameters: [entries : (List Entry), field : String, earlier : String, later : String],
+  statement: ((write (write entries field earlier) field later) = (write entries field later)),
+  proof: induction{
+    branches: [
+      {proof: simplify{definitions: [write]}, binders: [], constructor: nil},
+      {
+        proof: simplify{definitions: [aLaterChoiceOverridesAnEarlier, ih, write]},
+        binders: [x, xs, ih],
+        constructor: cons
+      }
+    ],
+    scrutinee: entries
+  },
+  axioms: [propext]
+}
+
+theorem{
+  name: aWriteThroughNoPlaceIsTheValue,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  statement: ((placeWrite (nil Step) whole binder index false value) = value),
+  proof: simplify{definitions: [placeWrite]},
+  axioms: [propext]
+}
+
+theorem{
+  name: aListWriteIsAWriteOfItsPositions,
+  parameters: [whole : String, binder : String, index : Nat, value : String],
+  statement: ((listWrite whole binder index value) = (opening whole binder 0 (index + 1) (consed (write (positions binder (index + 1)) (mark index) value) (tailAt whole binder (index + 1))))),
+  proof: simplify{definitions: [listWrite]},
+  axioms: [propext]
+}
+\end{semanticmodule}
+\end{lexlean}

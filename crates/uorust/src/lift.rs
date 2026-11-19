@@ -290,6 +290,52 @@ fn named_in(types: &BTreeSet<Ty>) -> BTreeSet<String> {
         .collect()
 }
 
+/// `Threading::placeWrite` of the model (`app/src/Threading.lex.tex`), as
+/// `lexlean production` exported it.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../spec/place_write.rs"]
+mod place_write_model;
+
+/// The value `whole` with the place `steps` (each a record type, its fields
+/// in declaration order and the one written) and, last, the literal `index`
+/// written to `value`: `Threading::placeWrite` of the model, its list
+/// binders named from `binder`.
+fn place_write(
+    steps: &[(String, Vec<String>, String)],
+    whole: &str,
+    binder: &str,
+    index: Option<u64>,
+    value: &str,
+) -> Lift<String> {
+    use place_write_model::{run, Adt0, List, Str};
+    let list = |items: &[String]| {
+        items
+            .iter()
+            .rev()
+            .fold(List::nil(), |tail, s| List::cons(Str::lit(s), tail))
+    };
+    let path = steps
+        .iter()
+        .rev()
+        .fold(List::nil(), |tail, (ty, fields, field)| {
+            List::cons(Adt0::C0(Str::lit(ty), list(fields), Str::lit(field)), tail)
+        });
+    let outside = || Residue::Form("a write to a place outside the lift".to_string());
+    let written = run(
+        path,
+        Str::lit(whole),
+        Str::lit(binder),
+        index.unwrap_or(0),
+        index.is_some(),
+        Str::lit(value),
+    )
+    .map_err(|_| outside())?;
+    Some(written.text().to_string())
+        .filter(|w| !w.is_empty())
+        .ok_or_else(outside)
+}
+
 /// A struct value from its fields in declaration order: a record, or the
 /// constructor `mk` of a struct of a recursive family.
 pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Types) -> String {
@@ -367,6 +413,9 @@ pub(crate) struct Types {
     /// by LexLean name, where they are not the variants' indices alone.
     /// Held as `i64`, the width the lift lifts, and widened where read.
     pub(crate) discriminants: BTreeMap<String, Vec<i64>>,
+    /// The enums whose source sets a discriminant (`A = 5`), by LexLean
+    /// name: a cast of one is not its variant's index.
+    pub(crate) explicit: BTreeSet<String>,
     /// The workspace's structs and enums outside the lift, by LexLean name:
     /// the chain from each down to the leaf that keeps it out
     /// (`Mid.leaf: Leaf.x: f64`), so that a residue row states its cause
@@ -451,6 +500,28 @@ const LIBRARY: [(&str, &[&str]); 10] = [
 
 /// Whether a path is the standard library's own full path of a type the
 /// lift reads: `std::collections::BTreeMap`, `std::rc::Rc`.
+/// A path as written, its segments joined by `::`, where no segment but the
+/// last carries arguments; empty otherwise.
+fn written_path(path: &rs::Path) -> String {
+    let (last, prefix) = match path.segments.split_last() {
+        Some(split) => split,
+        None => return String::new(),
+    };
+    if prefix.is_empty()
+        || prefix
+            .iter()
+            .any(|s| !matches!(s.arguments, rs::PathArguments::None))
+    {
+        return String::new();
+    }
+    prefix
+        .iter()
+        .chain([last])
+        .map(|s| s.ident.as_str())
+        .collect::<Vec<_>>()
+        .join("::")
+}
+
 fn std_path(path: &rs::Path) -> bool {
     let [root, module, last] = path.segments.as_slice() else {
         return false;
@@ -1197,6 +1268,22 @@ impl Types {
             rs::TypeKind::Path { qself: false, path } if path.segments.len() == 1 => {
                 self.named(t, &path.segments[0], false)
             }
+            // A type of a workspace crate written by its full path
+            // (`iface::error::TokenError`), which the scope names (UE-24).
+            rs::TypeKind::Path { qself: false, path }
+                if self.aliases.contains_key(&written_path(path)) =>
+            {
+                match path.segments.last() {
+                    Some(last) => {
+                        let seg = rs::PathSegment {
+                            ident: written_path(path),
+                            ..last.clone()
+                        };
+                        self.named(t, &seg, false)
+                    }
+                    None => bad(),
+                }
+            }
             _ => bad(),
         }
     }
@@ -1324,6 +1411,7 @@ impl Types {
             Some(Owner::Implementor) | None => None,
         };
         let mut params = Vec::new();
+        let mut threaded = false;
         for input in &sig.inputs {
             match input {
                 rs::FnArg::Receiver { plain } => match owner {
@@ -1336,7 +1424,12 @@ impl Types {
                             || self.structs.contains_key(*name)
                             || self.datas.contains_key(*name) =>
                     {
-                        if !*plain {
+                        // `&mut self` of a method that returns nothing
+                        // threads the value (`Threading` of the model): it
+                        // lifts as the function to the value's new state.
+                        let threads = *receiver == Some("&mut self") && sig.output.is_none();
+                        threaded |= threads;
+                        if !*plain && !threads {
                             return Err(Residue::Signature(format!(
                                 "takes {} of {name}: the lift reads self and &self as the \
                                  value, and threads no other receiver",
@@ -1367,9 +1460,10 @@ impl Types {
                 }
             }
         }
-        let result = match &sig.output {
-            None => Ty::Unit,
-            Some(t) => self.ty_in(t, named)?,
+        let result = match (&sig.output, named) {
+            (None, Some(name)) if threaded => Ty::Named(name.to_string()),
+            (None, _) => Ty::Unit,
+            (Some(t), _) => self.ty_in(t, named)?,
         };
         Ok((params, result))
     }
@@ -2859,7 +2953,61 @@ fn cast_value(c: &rs::ExprCast, env: &Env, ctx: &Ctx, acc: Acc) -> Lift<((Expr, 
              conversion from Nat to Int64"
                 .to_string(),
         )),
+        // `b as uN`: the flag's bit, `Prelude::bitOf`.
+        (Ty::Bool, Ty::Nat(_)) => {
+            let (bit, acc) = acc.prelude("bitOf", &[&v]);
+            flat_lift(bit, target, acc)
+        }
+        // `e as uN` of an enum whose source sets no discriminant: the
+        // variant's index, modulo 2^N.
+        (Ty::Named(name), Ty::Nat(width)) if env.types.enums.contains_key(name) => {
+            if env.types.explicit.contains(name) {
+                return Err(Residue::Form(format!(
+                    "a cast of {name}, whose source sets its discriminants"
+                )));
+            }
+            let arms: String = env.types.enums[name]
+                .iter()
+                .enumerate()
+                .map(|(i, variant)| {
+                    let index = u128::try_from(i).unwrap_or(u128::MAX);
+                    let value = match width {
+                        Some(b) if *b < 128 => index % (1u128 << b),
+                        _ => index,
+                    };
+                    format!(" | {name}.{variant} => {value}")
+                })
+                .collect();
+            flat_lift(format!("(match {v}{arms})"), target, acc)
+        }
         _ => Err(Residue::Form("narrowing or sign-changing cast".to_string())),
+    }
+}
+
+/// The lifted conversion of `impl From<T> for U` from `from` to `to`: the
+/// key of the `from` whose one parameter is `from` and whose result is `to`,
+/// and its LexLean name.
+fn conversion(env: &Env, from: &Ty, to: &Ty) -> Option<(String, String)> {
+    env.fns
+        .iter()
+        .find(|(key, sig)| {
+            key.rsplit("::").next() == Some("from")
+                && sig.params.len() == 1
+                && sig.params[0].same(from)
+                && sig.result.same(to)
+        })
+        .map(|(key, sig)| (key.clone(), sig.name.clone()))
+}
+
+/// The width of an unsigned integer type of a fixed width, by its name.
+fn unsigned_bits(name: &str) -> Option<u32> {
+    match name {
+        "u8" => Some(8),
+        "u16" => Some(16),
+        "u32" => Some(32),
+        "u64" => Some(64),
+        "u128" => Some(128),
+        _ => None,
     }
 }
 
@@ -3716,6 +3864,19 @@ fn std_call(
             let list = Ty::List(Box::new(vt.clone()));
             flat_some(format!("(cons {v} (nil {}))", vt.render()), list, acc)
         }
+        // `u64::from_le_bytes(bytes)`: the value of little-endian bytes,
+        // `Prelude::fromLeBytes`.
+        ([s, n], [a], _) if n == "from_le_bytes" && unsigned_bits(s).is_some() => {
+            let bytes = Ty::List(Box::new(Ty::Nat(Some(8))));
+            let ((v, vt), acc) = flat_of(a, env, ctx, acc, Some(&bytes))?;
+            if vt != bytes {
+                return Err(Residue::Form(
+                    "from_le_bytes of something other than bytes".into(),
+                ));
+            }
+            let (value, acc) = acc.prelude("fromLeBytes", &[&v]);
+            flat_some(value, Ty::Nat(unsigned_bits(s)), acc)
+        }
         // A capacity is a hint to the allocator: the value is the empty list.
         ([s, n], [_], Some(t @ Ty::List(inner))) if s == "Vec" && n == "with_capacity" => {
             flat_some(format!("(nil {})", inner.render()), t.clone(), acc)
@@ -4528,6 +4689,18 @@ fn method_typed(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     match (rt, name) {
+        // `v.into()` where a type is wanted: `v` itself, or the lifted `from`
+        // of `impl From<T> for U` (UE-25).
+        (_, "into") if args.is_empty() && want.is_some_and(|w| w.same(rt)) => {
+            flat_lift(r.to_string(), rt.clone(), acc)
+        }
+        (_, "into") if args.is_empty() && want.is_some_and(|w| conversion(env, rt, w).is_some()) => {
+            let Some((key, from)) = want.and_then(|w| conversion(env, rt, w)) else {
+                return Err(Residue::Form("method call .into".to_string()));
+            };
+            let result = env.fns[&key].result.clone();
+            flat_lift(format!("({from} {r})"), result, acc.called(key))
+        }
         // `a.checked_div(b)`, `a.checked_rem(b)`: none for a zero divisor.
         (Ty::Nat(_), "checked_div" | "checked_rem") if args.len() == 1 => {
             method_nat_checked_div(name, r, rt, args, env, ctx, acc)
@@ -4543,6 +4716,12 @@ fn method_typed(
         }
         (Ty::Nat(w), "wrapping_add" | "wrapping_mul" | "wrapping_sub") => {
             method_nat_wrapping_add(w, name, r, rt, args, env, ctx, acc)
+        }
+        // `n.to_le_bytes()`: its little-endian bytes, `Prelude::leBytes`.
+        (Ty::Nat(Some(bits)), "to_le_bytes") if args.is_empty() && bits % 8 == 0 => {
+            let count = (bits / 8).to_string();
+            let (bytes, acc) = acc.prelude("leBytes", &[&count, r]);
+            flat_lift(bytes, Ty::List(Box::new(Ty::Nat(Some(8)))), acc)
         }
         (Ty::Nat(w), "saturating_add" | "saturating_mul") => {
             method_nat_saturating_add(w, name, r, rt, args, env, ctx, acc)
@@ -7957,6 +8136,45 @@ fn returned(b: &rs::Block) -> Option<&rs::RustExpr> {
 
 /// The local a statement updates in place, and how: `x = e`, `x += e` on a
 /// string, `x.push(e)` on a list or string, `x.push_str(e)`.
+/// A step of a place a write goes through.
+enum Place {
+    /// A named field of a struct.
+    Field(String),
+    /// An item of a tuple.
+    Item(usize),
+    /// An index written as an integer literal.
+    Index(u64),
+    /// An index the lift does not read as a literal.
+    Computed,
+}
+
+/// The local a write's place starts from and its steps, outermost first:
+/// `x.f.0[2]` is `x` and field `f`, item 0, index 2; `None` for any other
+/// expression.
+fn place(e: &rs::RustExpr) -> Option<(String, Vec<Place>)> {
+    let (base, step) = match e {
+        rs::RustExpr::Path(p) => return Some((p.get_ident()?.clone(), Vec::new())),
+        rs::RustExpr::Paren(inner) => return place(inner),
+        rs::RustExpr::Field(f) => (
+            &f.base,
+            match &f.member {
+                rs::Member::Named(n) => Place::Field(n.clone()),
+                rs::Member::Unnamed(i) => Place::Item(usize::try_from(*i).ok()?),
+            },
+        ),
+        rs::RustExpr::Index(ix) => match &*ix.index {
+            rs::RustExpr::Lit(rs::Lit::Int { value: Some(k), .. }) => {
+                (&ix.expr, Place::Index(u64::try_from(*k).ok()?))
+            }
+            _ => (&ix.expr, Place::Computed),
+        },
+        _ => return None,
+    };
+    let (root, mut steps) = place(base)?;
+    steps.push(step);
+    Some((root, steps))
+}
+
 fn update_target(e: &rs::RustExpr) -> Option<String> {
     let ident = |e: &rs::RustExpr| match e {
         rs::RustExpr::Path(p) => p.get_ident().cloned(),
@@ -7964,10 +8182,7 @@ fn update_target(e: &rs::RustExpr) -> Option<String> {
     };
     match e {
         // `x.f = v`: the structure `x` with its field `f` replaced.
-        rs::RustExpr::Assign(a) => match &*a.left {
-            rs::RustExpr::Field(f) if matches!(f.member, rs::Member::Named(_)) => ident(&f.base),
-            left => ident(left),
-        },
+        rs::RustExpr::Assign(a) => place(&a.left).map(|(root, _)| root),
         // `*m.entry(k).or_default() += v` and `m.entry(k).or_default().push(v)`
         // update the map.
         rs::RustExpr::Binary(b) if b.op == rs::BinOp::AddAssign => match &*b.left {
@@ -8075,8 +8290,9 @@ fn updated(
                 .collect();
             Ok((struct_value(name, &parts, &env.types), acc))
         }
+        // `x.f = v` of a boxed struct: its constructor with the field replaced.
         (rs::RustExpr::Assign(a), Ty::Named(name))
-            if matches!(&*a.left, rs::RustExpr::Field(_)) =>
+            if env.types.boxed(name) && matches!(&*a.left, rs::RustExpr::Field(_)) =>
         {
             let rs::RustExpr::Field(f) = &*a.left else {
                 return Err(Residue::Form("an update outside the lift".to_string()));
@@ -8088,24 +8304,59 @@ fn updated(
                 return Err(Residue::Form(format!("a field update of {name}")));
             };
             let target = local_name(member);
-            let mut acc = acc;
-            let mut parts = Vec::new();
-            for (field, fty) in fields {
-                let v = if *field == target {
-                    let (v, after) = value_of(&a.right, fty, acc)?;
-                    acc = after;
-                    v
-                } else if env.types.boxed(name) {
-                    format!("({} {current})", Types::accessor(name, field))
-                } else {
-                    format!("(project {current} {field})")
-                };
-                parts.push((field, v));
-            }
-            if !fields.iter().any(|(f, _)| *f == target) {
+            let Some((_, fty)) = fields.iter().find(|(f, _)| *f == target) else {
                 return Err(Residue::Form(format!("a field update of {name}")));
-            }
+            };
+            let (v, acc) = value_of(&a.right, fty, acc)?;
+            let parts: Vec<(&String, String)> = fields
+                .iter()
+                .map(|(field, _)| match *field == target {
+                    true => (field, v.clone()),
+                    false => (
+                        field,
+                        format!("({} {current})", Types::accessor(name, field)),
+                    ),
+                })
+                .collect();
             Ok((struct_value(name, &parts, &env.types), acc))
+        }
+        // `x.f.0[k] = v`: a write through fields, tuple items and a last
+        // literal index, by `Threading::placeWrite` of the model.
+        (rs::RustExpr::Assign(a), _) if place(&a.left).is_some_and(|(_, s)| !s.is_empty()) => {
+            let Some((_, path)) = place(&a.left) else {
+                return Err(Residue::Form("an update outside the lift".to_string()));
+            };
+            let outside = || Residue::Form("a write to a place outside the lift".to_string());
+            let mut steps: Vec<(String, Vec<String>, String)> = Vec::new();
+            let (mut at, mut index) = (ty.clone(), None);
+            for (n, step) in path.iter().enumerate() {
+                at = match (step, &at) {
+                    (Place::Field(member), Ty::Named(name)) if !env.types.boxed(name) => {
+                        let fields = env.types.structs.get(name).ok_or_else(outside)?;
+                        let target = local_name(member);
+                        let (_, fty) = fields
+                            .iter()
+                            .find(|(f, _)| *f == target)
+                            .ok_or_else(outside)?;
+                        let names = fields.iter().map(|(f, _)| f.clone()).collect();
+                        steps.push((name.clone(), names, target));
+                        fty.clone()
+                    }
+                    (Place::Item(i), Ty::Tuple(items)) if *i < items.len() => {
+                        let names = (0..items.len()).map(|k| format!("item{k}")).collect();
+                        steps.push((at.render(), names, format!("item{i}")));
+                        items[*i].clone()
+                    }
+                    (Place::Index(k), Ty::List(elem)) if n + 1 == path.len() => {
+                        index = Some(*k);
+                        (**elem).clone()
+                    }
+                    _ => return Err(outside()),
+                };
+            }
+            let (v, acc) = value_of(&a.right, &at, acc)?;
+            let (binder, acc) = ctx.fresh(env, acc, "written");
+            Ok((place_write(&steps, current, &binder, index, &v)?, acc))
         }
         (rs::RustExpr::Assign(a), _) => value_of(&a.right, ty, acc),
         // `xs.extend(o)` of an option: the one value it holds, if any.
@@ -10542,6 +10793,28 @@ fn question(
                 ),
             )
         }
+        // `?` of another error type: Rust returns `Err(From::from(e))`, the
+        // lifted `from` of `impl From<E1> for E2` (UE-25).
+        (Ty::Outcome(inner, err), Ty::Outcome(ok, rerr))
+            if conversion(env, err, rerr).is_some() =>
+        {
+            let Some((key, from)) = conversion(env, err, rerr) else {
+                return Err(Residue::Form("? of another type".to_string()));
+            };
+            let (e, after) = ctx.fresh(env, acc, "error");
+            acc = after.called(key);
+            (
+                (**inner).clone(),
+                (
+                    format!("Result.error {e}"),
+                    format!(
+                        "(ctor Result.error [{}, {}] ({from} {e}))",
+                        ok.render(),
+                        rerr.render()
+                    ),
+                ),
+            )
+        }
         _ => return Err(Residue::Form("? of another type".to_string())),
     };
     if declared.as_ref().is_some_and(|d| !d.same(&inner)) {
@@ -10588,6 +10861,9 @@ pub(crate) struct Candidate<'a> {
     pub(crate) params: Vec<Param>,
     pub(crate) result: Ty,
     pub(crate) block: &'a rs::Block,
+    /// Whether it takes `&mut self` and returns nothing: its body ends in
+    /// the value it threads.
+    pub(crate) threads: bool,
     /// The `use` imports of its file: name -> the path it names.
     pub(crate) imports: BTreeMap<String, String>,
     /// How its file reads the names two of its crate's types share: each
@@ -10716,7 +10992,15 @@ pub(crate) fn lift_all(
                     None => env.fns.remove(key),
                 };
             }
-            let lifted = block(&c.block.stmts, &env, &ctx, Acc::default(), Some(&c.result));
+            let threaded: Vec<rs::Stmt>;
+            let stmts = if c.threads {
+                let tail = rs::Stmt::Expr(rs::RustExpr::Path(rs::Path::ident("self")), false);
+                threaded = c.block.stmts.iter().cloned().chain([tail]).collect();
+                &threaded[..]
+            } else {
+                &c.block.stmts[..]
+            };
+            let lifted = block(stmts, &env, &ctx, Acc::default(), Some(&c.result));
             let outcome = match lifted {
                 Ok(((body, ty), acc)) if ty.same(&c.result) => {
                     let descends = acc.descends.clone();
@@ -11660,6 +11944,7 @@ mod tests {
             params,
             result,
             block: &block,
+            threads: false,
             imports: BTreeMap::from([("Sha256".to_string(), "sha2::Sha256".to_string())]),
             aliases: BTreeMap::new(),
             homonyms: BTreeMap::new(),
@@ -12256,7 +12541,9 @@ mod tests {
                 name: "Square",
                 receiver: Some(receiver),
             };
-            let src = format!("fn grow({receiver}, by: bool) {{}}");
+            // `&mut self` of a method that returns nothing threads the
+            // value (UE-21); one that returns a value does not.
+            let src = format!("fn grow({receiver}, by: bool) -> bool {{ by }}");
             assert_eq!(
                 method_signature(&src, Some(&owner), &types).err(),
                 Some(Residue::Signature(format!(

@@ -358,7 +358,10 @@ pub(crate) fn project(
     let kappas: BTreeMap<String, String> = ctx
         .all_fns()
         .into_iter()
-        .filter(|&r| ctx.product(r))
+        // A dependency's model (`Foreign::foreignModel`) is read, not product code.
+        .filter(|&r| {
+            ctx.product(r) && !crate::ingest::is_model(&ctx.ws.packages[r.pkg].files[r.file].rel)
+        })
         .map(|r| {
             let path = ctx.path(r);
             let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
@@ -3551,7 +3554,8 @@ fn behavior(
             overlays.insert((pkg, fi), names);
         }
     }
-    let scopes: Vec<Types> = declared
+    // Each crate's own types, aliases, derives and explicit discriminants.
+    let parts: Vec<Scope> = declared
         .into_iter()
         .enumerate()
         .map(|(pkg, d)| {
@@ -3641,9 +3645,90 @@ fn behavior(
                     structs.insert(name.clone(), vec![lift::unread_shape(why)]);
                 }
             }
-            Types {
+            // The enums whose source sets a discriminant.
+            let explicit = package
+                .files
+                .iter()
+                .flat_map(|file| {
+                    file.enums
+                        .iter()
+                        .filter(|e| e.explicit)
+                        .filter_map(|e| {
+                            named.get(&(file.target, file.module.clone(), e.name.clone()))
+                        })
+                        .cloned()
+                        .collect::<Vec<_>>()
+                })
+                .collect();
+            Scope {
+                enums,
+                datas,
+                structs,
+                aliases,
                 derives,
-                ..Types::with_data(enums, &datas, &structs, aliases)
+                explicit,
+            }
+        })
+        .collect();
+    // A crate reads its own types and those of the workspace crates it
+    // depends on by path, its own first where a name meets (UE-24).
+    let deps = workspace_deps(ws);
+    let scopes: Vec<Types> = parts
+        .iter()
+        .enumerate()
+        .map(|(pkg, own)| {
+            let mut scope = own.clone();
+            for &dep in &deps[pkg] {
+                let theirs: BTreeSet<&String> = lexes[dep].values().collect();
+                let other = &parts[dep];
+                let lifted = |n: &String| theirs.contains(n);
+                for (n, v) in other.enums.iter().filter(|(n, _)| lifted(n)) {
+                    scope.enums.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.datas.iter().filter(|(n, _)| lifted(n)) {
+                    scope.datas.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.structs.iter().filter(|(n, _)| lifted(n)) {
+                    scope.structs.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, v) in other.derives.iter().filter(|(n, _)| lifted(n)) {
+                    scope.derives.entry(n.clone()).or_insert_with(|| v.clone());
+                }
+                for (n, lex) in other.aliases.iter().filter(|(_, lex)| lifted(lex)) {
+                    scope
+                        .aliases
+                        .entry(n.clone())
+                        .or_insert_with(|| lex.clone());
+                }
+                scope
+                    .explicit
+                    .extend(other.explicit.iter().filter(|n| lifted(n)).cloned());
+                // A type of the library written by its full path:
+                // `iface::error::TokenError`.
+                let package = &ws.packages[dep];
+                let lib = package
+                    .targets
+                    .iter()
+                    .position(|t| t.kind == TargetKind::Lib);
+                if let Some(lib) = lib {
+                    let ident = package.targets[lib].name.replace('-', "_");
+                    for ((target, module, name), lex) in &lexes[dep] {
+                        if *target == lib {
+                            let path = [ident.as_str(), module.as_str(), name.as_str()]
+                                .iter()
+                                .filter(|s| !s.is_empty())
+                                .copied()
+                                .collect::<Vec<_>>()
+                                .join("::");
+                            scope.aliases.entry(path).or_insert_with(|| lex.clone());
+                        }
+                    }
+                }
+            }
+            Types {
+                derives: scope.derives,
+                explicit: scope.explicit,
+                ..Types::with_data(scope.enums, &scope.datas, &scope.structs, scope.aliases)
             }
         })
         .collect();
@@ -4037,6 +4122,11 @@ fn behavior(
                     params,
                     result,
                     block,
+                    // A type's own method threads its value; a trait's default
+                    // method has none to thread.
+                    threads: method.is_some()
+                        && f.receiver.as_deref() == Some("&mut self")
+                        && sig.output.is_none(),
                     imports: ctx.file(r).imports.clone(),
                     aliases: overlays[&(r.pkg, r.file)].clone(),
                     homonyms: call_reading(ctx, &homonyms, r),
@@ -4083,6 +4173,7 @@ fn behavior(
                     params: Vec::new(),
                     result,
                     block,
+                    threads: false,
                     imports: file.imports.clone(),
                     aliases: overlays[&(pkg, fi)].clone(),
                     homonyms: homonym_reading(ctx, &homonyms, pkg, fi),
@@ -5769,6 +5860,35 @@ const REFUSALS: &str = "refusals";
 /// The projection's `frontier.toml`: the counts and the ranked queues, then
 /// every refusal and every function row. `lift` is the register of `rows`,
 /// the function rows ([`function_rows`]).
+/// A crate's own types before its scope is read: its enums, data-carrying
+/// enums and structs by LexLean name, its aliases, the traits each derives,
+/// and the enums whose source sets a discriminant.
+#[derive(Clone)]
+struct Scope {
+    enums: Variants,
+    datas: Datas,
+    structs: Fields,
+    aliases: BTreeMap<String, String>,
+    derives: BTreeMap<String, BTreeSet<String>>,
+    explicit: BTreeSet<String>,
+}
+
+/// Each package's normal dependencies on other packages of the workspace,
+/// by path, as indices of `ws.packages`.
+fn workspace_deps(ws: &Workspace) -> Vec<Vec<usize>> {
+    ws.packages
+        .iter()
+        .map(|package| {
+            package
+                .deps
+                .iter()
+                .filter(|d| d.path.is_some() && d.kind == "normal")
+                .filter_map(|d| ws.packages.iter().position(|q| q.name == d.name))
+                .collect()
+        })
+        .collect()
+}
+
 fn frontier(notes: &Notes, lift: &Register, rows: &str) -> String {
     let mut out = String::from(
         "# frontier.toml: what uorust did not admit or lift, each with a typed reason.\n\
@@ -5836,8 +5956,11 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             .map(|k| format!("kappa = \"{k}\"\n"))
             .unwrap_or_default()
     };
+    // A dependency's model (`Foreign::foreignModel`) is read, not product
+    // code: its functions have no row.
+    let model = |span: &Span| crate::ingest::is_model(&span.render());
     let mut out = String::new();
-    for (path, (span, reason)) in &notes.residue {
+    for (path, (span, reason)) in notes.residue.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[residue]]\nstatus = \"open\"\n{}function = {}\nspan = {}\nreason = \"{}\"\ndetail = {}\n",
             kappa(path),
@@ -5847,7 +5970,7 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(&reason.detail())
         ));
     }
-    for (path, (span, detail)) in &notes.foreign {
+    for (path, (span, detail)) in notes.foreign.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[foreign]]\n{}function = {}\nspan = {}\ndetail = {}\n",
             kappa(path),
@@ -5856,7 +5979,7 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(detail)
         ));
     }
-    for (path, (span, effect)) in &notes.effects {
+    for (path, (span, effect)) in notes.effects.iter().filter(|(_, (span, _))| !model(span)) {
         out.push_str(&format!(
             "\n[[effect]]\n{}function = {}\nspan = {}\neffect = {}\n",
             kappa(path),
@@ -5865,7 +5988,9 @@ fn function_rows(notes: &Notes, kappas: &BTreeMap<String, String>) -> String {
             toml_string(effect)
         ));
     }
-    for (path, (span, definition, divergence)) in &notes.lifted {
+    for (path, (span, definition, divergence)) in
+        notes.lifted.iter().filter(|(_, (span, _, _))| !model(span))
+    {
         out.push_str(&format!(
             "\n[[lifted]]\n{}function = {}\nspan = {}\ndefinition = {}\n",
             kappa(path),
@@ -6788,8 +6913,8 @@ mod tests {
                  pub fn radius(&self) -> u32 {\n        self.0\n    }\n}\n\
                  impl Bag {\n    /// How many blobs.\n    \
                  pub fn count(&self) -> u32 {\n        1\n    }\n}\n\
-                 impl Square {\n    /// Grow.\n    pub fn grow(&mut self, by: u32) {\n        \
-                 self.side = self.side.saturating_add(by);\n    }\n}\n\
+                 impl Square {\n    /// Grow, and say the new side.\n    pub fn grow(&mut self, by: u32) -> u32 {\n        \
+                 self.side = self.side.saturating_add(by);\n        self.side\n    }\n}\n\
                  /// Something that scales by a factor of some type.\n\
                  pub trait Scale<T> {\n    /// The side scaled.\n    \
                  fn scale(&self, by: T) -> u32;\n}\n\
