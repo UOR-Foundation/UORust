@@ -1244,3 +1244,30 @@ tests, repo-conformance and strict workspace/all-target Clippy passed. Generated
 model, immutable template/SDK-lock and self-model checks passed; the self-model
 writer regenerated the moved source citation. Generic-parameter, nominal-alias,
 value/type namespace and unknown-type controls are included in that boundary.
+
+## UE-80: shared kernel policy ownership
+
+The consumer's native campaign completed 12 successful decisions with no new
+refusals, but full-project verification rejected shared integer codec theorem
+policies with LLV7005. The original SDK observation already existed in the
+native register. The projection selected the first auxiliary owner and dropped
+a later owner's observation; an owner can also move to source lifting while
+its kernel remains needed by native callers.
+
+A registered unit regression reproduced the owner-order failure before the
+fix. Shared auxiliary assembly now preserves current exact-input observations
+for identical declaration text independently of emission order. Retained
+observations also remain available as policy hints when their former owner no
+longer emits a native body. Hints do not admit a function or changed model:
+original digest/context matching and actual SDK exact-policy checks remain
+mandatory. The kernel statements and proofs are not edited to satisfy a policy.
+
+The controls cover both owner orders, retained hints, an explicit empty observed
+policy overriding a hint, and refusal to transfer a current observation between
+different declaration bodies. These controls use synthetic policy metadata;
+the consumer's original SDK receipts supply actual verification evidence.
+
+The ownership controls, all 16 CLI tests, repo-conformance, strict Clippy,
+generated model, template/SDK-lock and self-model checks passed. The next
+consumer checkpoint retains the completed native decisions and rechecks the
+assembled project through the unchanged SDK acceptance boundary.

@@ -531,3 +531,9 @@ id = "UE-79"
 level = "build"
 suite = "engine"
 statement = "Compiler-qualified trait calls bind registered source definitions by resolved owner, trait identity and closed type arguments through a common identity index; overloaded traits, aliases, inherent methods and same-named unrelated traits remain distinct, and ambiguous identities are refused"
+
+[[id]]
+id = "UE-80"
+level = "build"
+suite = "engine"
+statement = "Shared auxiliary proof kernels retain exact-input SDK axiom observations independently of their owners’ emission order; current observations transfer only between identical declaration contents; retained observations are policy hints requiring SDK revalidation and never change the kernel’s statement or proof"

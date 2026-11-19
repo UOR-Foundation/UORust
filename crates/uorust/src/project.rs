@@ -5782,6 +5782,22 @@ fn mir_lift(
         types: BTreeSet::new(),
         listing: None,
     };
+    // An owner may now lift through source code while its generated kernel
+    // remains shared by native callers. Retain its observations as policy
+    // hints, never as evidence admitting another function or changed model.
+    let mut kernel_hints = BTreeMap::new();
+    for row in options
+        .verdicts
+        .rows
+        .values()
+        .filter(|row| matches!(row.status, Decision::Proved))
+    {
+        for (name, policy) in &row.axioms {
+            kernel_hints
+                .entry(name.clone())
+                .or_insert_with(|| policy.clone());
+        }
+    }
     let mut aux: BTreeMap<String, Decl> = BTreeMap::new();
     let mut body_decls = Vec::new();
     let mut listing = String::from("spec = \"uorust/mir-candidates/1\"\n");
@@ -5794,8 +5810,7 @@ fn mir_lift(
             .or_else(|| options.learned.get(&t.kappa).cloned())
             .unwrap_or_default();
         for (k, d) in &t.lowered.aux {
-            aux.entry(k.clone())
-                .or_insert_with(|| with_axioms(d.clone(), &learned));
+            insert_observed_aux(&mut aux, k, d, &learned, &kernel_hints);
         }
         for d in &t.lowered.decls {
             body_decls.push(with_axioms(d.clone(), &learned));
@@ -6055,6 +6070,34 @@ pub(crate) fn mir_residue(reason: Residue) -> Residue {
         Residue::Mir(_) => reason,
         Residue::Type(t) => Residue::Mir(format!("Ty: {t}")),
         other => Residue::Mir(format!("Body: {}", other.detail())),
+    }
+}
+
+/// A shared kernel has one declaration, while any matching owner may carry
+/// its original SDK policy observation. Default metadata is not an observation.
+fn insert_observed_aux(
+    aux: &mut BTreeMap<String, Decl>,
+    key: &str,
+    decl: &Decl,
+    learned: &BTreeMap<String, Vec<String>>,
+    hints: &BTreeMap<String, Vec<String>>,
+) {
+    use std::collections::btree_map::Entry;
+    match aux.entry(key.to_string()) {
+        Entry::Vacant(entry) => {
+            entry.insert(with_axioms(with_axioms(decl.clone(), hints), learned));
+        }
+        Entry::Occupied(mut entry) => {
+            if !learned.contains_key(decl.name()) {
+                return;
+            }
+            let empty = BTreeMap::from([(decl.name().to_string(), Vec::new())]);
+            let original = crate::lex::render_decl(&with_axioms(entry.get().clone(), &empty));
+            let incoming = crate::lex::render_decl(&with_axioms(decl.clone(), &empty));
+            if original == incoming {
+                entry.insert(with_axioms(decl.clone(), learned));
+            }
+        }
     }
 }
 
@@ -8486,6 +8529,66 @@ fn spdx(ws: &Workspace, options: &Options) -> String {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn shared_kernel_observations_survive_owner_order_ue_80() {
+        let kernel = Decl::Theorem {
+            name: "sharedKernel".into(),
+            type_parameters: Vec::new(),
+            parameters: Vec::new(),
+            statement: "true = true".into(),
+            proof: "decide{}".into(),
+            axioms: vec!["propext".into()],
+        };
+        let observed = BTreeMap::from([(
+            "sharedKernel".into(),
+            vec![
+                "Classical.choice".into(),
+                "Quot.sound".into(),
+                "propext".into(),
+            ],
+        )]);
+        let empty = BTreeMap::new();
+        for order in [[&empty, &observed], [&observed, &empty]] {
+            let mut aux = BTreeMap::new();
+            for hints in order {
+                super::insert_observed_aux(&mut aux, "sharedKernel", &kernel, hints, &empty);
+            }
+            assert_eq!(
+                crate::lex::render_decl(&aux["sharedKernel"]),
+                crate::lex::render_decl(&super::with_axioms(kernel.clone(), &observed))
+            );
+        }
+        let mut hinted = BTreeMap::new();
+        super::insert_observed_aux(&mut hinted, "sharedKernel", &kernel, &empty, &observed);
+        assert_eq!(
+            crate::lex::render_decl(&hinted["sharedKernel"]),
+            crate::lex::render_decl(&super::with_axioms(kernel.clone(), &observed))
+        );
+        let exact_empty = BTreeMap::from([("sharedKernel".into(), Vec::new())]);
+        super::insert_observed_aux(
+            &mut hinted,
+            "sharedKernel",
+            &kernel,
+            &exact_empty,
+            &observed,
+        );
+        assert_eq!(
+            crate::lex::render_decl(&hinted["sharedKernel"]),
+            crate::lex::render_decl(&super::with_axioms(kernel.clone(), &exact_empty))
+        );
+        let mut different = kernel.clone();
+        if let Decl::Theorem { statement, .. } = &mut different {
+            *statement = "false = false".into();
+        }
+        let mut aux = BTreeMap::new();
+        super::insert_observed_aux(&mut aux, "sharedKernel", &different, &empty, &empty);
+        super::insert_observed_aux(&mut aux, "sharedKernel", &kernel, &observed, &empty);
+        assert_eq!(
+            crate::lex::render_decl(&aux["sharedKernel"]),
+            crate::lex::render_decl(&different)
+        );
+    }
+
     #[test]
     fn surface_dependencies_cross_files_without_splitting_mutual_groups_ue_25() {
         let def = |name: &str, body: &str, mutual: Option<&str>| crate::lex::Decl::Definition {

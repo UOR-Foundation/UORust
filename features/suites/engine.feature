@@ -557,3 +557,10 @@ Feature: engine
     When compiler callers use resolved qualified trait paths
     Then every caller selects its own registered semantic definition
     And unrelated same-named traits cannot substitute for that definition
+
+  @UE-80 @build
+  Scenario: Shared kernels preserve their original SDK observations across owners
+    Given identical generated kernels owned by multiple native functions
+    When one owner carries an exact matched SDK axiom observation
+    Then the observation survives either owner emission order
+    But a different kernel body cannot inherit that observation
