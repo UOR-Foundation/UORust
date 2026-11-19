@@ -393,3 +393,9 @@ id = "UE-56"
 level = "build"
 suite = "engine"
 statement = "Matching-width mathematical source integers (i128 and isize) cross native fields, aggregates and nonthreaded calls through width-derived integer codecs; limb conversions carry actual SDK range obligations, signed boundaries agree with Rust, and fixed Int64 or unrelated field types remain refused"
+
+[[id]]
+id = "UE-57"
+level = "build"
+suite = "engine"
+statement = "Native standard Rc and Arc transport, construction, cloning and readonly access reuse the source content representation, while reference counts, pointer identity, shared mutable cells and unrelated same-named types remain outside that content model"

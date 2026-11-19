@@ -379,3 +379,10 @@ Feature: engine
     When the native translator reads, constructs and passes those mathematical signed scalars
     Then actual SDK proofs and Rust boundary vectors agree on negative values and extrema
     But an unrelated Boolean field cannot be interpreted as a signed integer
+
+  @UE-57 @build
+  Scenario: Native readonly shared owners use the existing content representation
+    Given immutable records owned by standard Rc and Arc pointers
+    When native functions construct, clone and read those records
+    Then executable Rust and actual SDK boundary vectors agree on their contents
+    But reference counts, pointer identity, shared mutable cells and unrelated owners retain typed refusals

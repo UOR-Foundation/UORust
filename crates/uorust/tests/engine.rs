@@ -2876,6 +2876,129 @@ pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-57: readonly owners share the source's content semantics, not identity semantics.
+#[test]
+fn native_readonly_owners_use_content_models_ue_57() {
+    let dir=scratch("native-content-owners",&[("Cargo.toml","[package]\nname=\"content_owners\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::rc::Rc;
+use std::sync::{Arc,Mutex};
+pub struct Wide {pub value:u32}
+pub fn arc_read(mut n:u8,value:&Arc<Wide>)->u32 {while n>0 {n-=1;} value.value}
+pub fn rc_read(mut n:u8,value:&Rc<Wide>)->u32 {while n>0 {n-=1;} value.value}
+pub fn arc_make(mut n:u8,value:u32)->Arc<Wide> {while n>0 {n-=1;} Arc::new(Wide {value})}
+pub fn rc_make(mut n:u8,value:u32)->Rc<Wide> {while n>0 {n-=1;} Rc::new(Wide {value})}
+pub fn arc_copy(mut n:u8,value:&Arc<Wide>)->Arc<Wide> {while n>0 {n-=1;} value.clone()}
+pub fn rc_copy(mut n:u8,value:&Rc<Wide>)->Rc<Wide> {while n>0 {n-=1;} value.clone()}
+pub fn count(mut n:u8,value:&Arc<Wide>)->usize {while n>0 {n-=1;} Arc::strong_count(value)}
+pub fn identity(mut n:u8,left:&Arc<Wide>,right:&Arc<Wide>)->bool {while n>0 {n-=1;} Arc::ptr_eq(left,right)}
+pub fn cell(mut n:u8,value:&Arc<Mutex<u32>>)->u32 {while n>0 {n-=1;} *value.lock().unwrap()}
+#[test] fn reference() {for value in [0,1,127,u32::MAX] {let a=arc_make(2,value);let r=rc_make(2,value);assert_eq!(arc_read(2,&arc_copy(2,&a)),value);assert_eq!(rc_read(2,&rc_copy(2,&r)),value);assert!(identity(2,&a,&a));assert_eq!(count(2,&a),1);}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust owner vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-content-owners");
+    let mut opts = options("content_owners");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("owner candidates");
+    for owner in ["arc", "rc"] {
+        for mode in ["read", "make", "copy"] {
+            let function = format!("content_owners::{owner}_{mode}");
+            assert!(
+                text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{function}\"")),
+                "{function}: {:?}",
+                residue_detail(&proposed, &function)
+            );
+        }
+    }
+    for function in ["count", "identity", "cell"] {
+        assert!(residue_detail(&proposed, &format!("content_owners::{function}")).is_some());
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("content-owner-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("content_owners"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        6,
+    )
+    .expect("SDK owner proofs");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved owner projection");
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for owner in ["arc", "rc"] {
+        for mode in ["read", "make", "copy"] {
+            let function = format!("content_owners::{owner}_{mode}");
+            let definition = rows
+                .iter()
+                .find(|r| r["function"].as_str() == Some(function.as_str()))
+                .and_then(|r| r["definition"].as_str())
+                .unwrap()
+                .strip_prefix("Behavior::")
+                .unwrap();
+            let policy = decisions
+                .rows
+                .values()
+                .find(|r| r.function == function)
+                .and_then(|r| r.axioms.get(definition))
+                .cloned()
+                .unwrap_or_default();
+            for (j, value) in [0u32, 1, 127, u32::MAX].iter().enumerate() {
+                let record = format!("(record Wide {{value := {value}}})");
+                let term = match mode {
+                    "read" => format!("({definition} 2 {record})"),
+                    "make" => format!("(project ({definition} 2 {value}) value)"),
+                    _ => format!("(project ({definition} 2 {record}) value)"),
+                };
+                vectors.push_str(&format!("theorem{{ name: vector{owner}{mode}{j}, parameters: [], statement: ({term} = {value}), proof: decide{{}}, axioms: [{}] }}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write owners");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK owner vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-55: compiler temporaries preserve matched enum values across reference copies.
 #[test]
 fn native_tuple_reference_matches_preserve_value_identity_ue_55() {

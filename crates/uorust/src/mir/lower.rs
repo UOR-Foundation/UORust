@@ -7007,7 +7007,9 @@ fn std_call(
         ("clone" | "deref" | "as_str" | "to_string" | "to_owned" | "into" | "from" | "as_ref" | "borrow" | "new"
             | "as_slice" | "to_vec" | "as_deref", [(v, t)])
             if same(t, dt)
-                && (last != "new" || path.starts_with("std::boxed::Box"))
+                && (last != "new"
+                    || path.starts_with("std::boxed::Box")
+                    || matches!(path.as_str(), "std::rc::Rc::new" | "alloc::rc::Rc::new" | "std::sync::Arc::new" | "alloc::sync::Arc::new"))
                 && (last != "to_string" || matches!(t, Ty::Str))
                 && (last != "from" && last != "into" || matches!(t, Ty::Str)) =>
         {
@@ -7794,6 +7796,11 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
         ("Result", [a, e]) => Ty::Outcome(Box::new(a.clone()), Box::new(e.clone())),
         ("Vec", [a]) => Ty::List(Box::new(a.clone())),
         ("Box", [a]) => a.clone(),
+        // The source reads readonly shared owners by their contents. An
+        // interior cell still fails while translating `a`; counts and
+        // pointer identity have no content operation in `std_call`.
+        ("Rc", [a]) if matches!(segs.as_slice(), ["std" | "alloc", "rc", _]) => a.clone(),
+        ("Arc", [a]) if matches!(segs.as_slice(), ["std" | "alloc", "sync", _]) => a.clone(),
         // A std type whose representation bottoms out in raw pointers: the
         // table's model of it.
         // A std type the scope lifts as its own: `cmp::Ordering`.
@@ -8952,6 +8959,39 @@ mod tests {
         let types = Types::default();
         assert_eq!(threaded(&locals, 3, false, &types), vec![1, 3]);
         assert_eq!(threaded(&locals, 3, true, &types), vec![3]);
+    }
+
+    #[test]
+    fn readonly_owner_paths_and_registered_contents_stay_scoped_ue_57() {
+        let mut types = Types::default();
+        for path in [
+            "std::sync::Arc<u32>",
+            "alloc::sync::Arc<u32>",
+            "std::rc::Rc<u32>",
+            "alloc::rc::Rc<u32>",
+        ] {
+            assert_eq!(ty(path, &types), Ok(Ty::Nat(Some(32))));
+        }
+        for path in [
+            "other::Arc<u32>",
+            "other::Rc<u32>",
+            "std::other::Arc<u32>",
+            "std::sync::Arc<std::sync::Mutex<u32>>",
+            "std::rc::Rc<std::cell::RefCell<u32>>",
+            "std::sync::Arc<num_rational::Ratio<num_bigint::BigInt>>",
+        ] {
+            assert!(ty(path, &types).is_err(), "{path}");
+        }
+        for path in ["num_rational::BigRational", "num_bigint::BigInt"] {
+            types.aliases.insert(path.into(), path.into());
+        }
+        assert_eq!(
+            ty(
+                "std::sync::Arc<num_rational::Ratio<num_bigint::BigInt>>",
+                &types
+            ),
+            Ok(Ty::Ratio)
+        );
     }
 
     #[test]

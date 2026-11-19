@@ -571,6 +571,18 @@ candidate eligibility, so historical cached proofs cannot hide a translation
 regression. These are focused development checks; complete `just vv` remains
 the release gate.
 
+## Native readonly shared owners (UE-57)
+
+The compiler-derived regression initially fails with `mir::Ty: std::sync::Arc<Wide>`.
+Native lowering now uses the source's existing content representation for the
+standard Rc and Arc paths. Six native functions covering construction, cloning
+and readonly field access pass actual SDK proof trials. Twenty-four closed SDK
+vectors agree with executable Rust cases at zero, one, an intermediate value
+and u32::MAX. Reference counts, pointer identity and shared Mutex contents
+remain typed residue. Type tests reject unrelated same-named owners and RefCell
+contents, and require both lock-admitted numeric readings before accepting an
+expanded Arc<Ratio<BigInt>>. Complete `just vv` remains the release gate.
+
 ## Mathematical integer ABI codecs (UE-56)
 
 The previous frozen producer refuses all six compiler-derived i128 and isize
