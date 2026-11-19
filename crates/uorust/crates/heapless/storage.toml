@@ -1,0 +1,95 @@
+[[fn]]
+path = "heapless::storage::OwnedStorage::as_mpmc_mut_view"
+kappa = "991d9deac122f750a9a19f532a1a59fd241a5cce570209f812d12fdf4acabf6d"
+at = "N=u32, T=u32"
+embedded = "6b62f351bd4d1a8b29201b3ee955ebc2d337106bb2ac7e2b1191bff939537357"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::OwnedStorage::as_mpmc_view"
+kappa = "ca747c60eaaf030656e4fe3767bacd6ecd2e06e93924a4b1b7b7858192f464ca"
+at = "N=u32, T=u32"
+embedded = "0552bd296ae8094226048af1ac83247d4bf152cf87e5e05d9b785a9998484920"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::OwnedStorage::as_mut_queue_view"
+kappa = "f667c586c963c724ea5dbb89ab7948ddd2b527d266031896845afd0c72a2eed4"
+at = "N=u32, T=u32"
+embedded = "d562bde2deaa348668dde75eb4680e38aa797cdd5e68976112f0303d368c5739"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::OwnedStorage::as_ptr"
+kappa = "597522d355be0c2515a3d9eb780d4ee28f2b0c355ce58fee9f6a5ea719221ef2"
+at = "N=#usize_N, T=u32"
+embedded = "1ea903319ee3b353312aae99fde661f71a1c9ea52ff99b952cdbefe9991a3756"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut [u32; #usize_N]>::cast"
+
+[[fn]]
+path = "heapless::storage::OwnedStorage::as_queue_view"
+kappa = "c9f8c9521857d80833474b96a5936383600e3c317f082c96328bc14958c3b188"
+at = "N=u32, T=u32"
+embedded = "30b4cdb9f0beb48779578e07578812e07d16d6373d48ad42fc3f238bfce1e1d0"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::OwnedStorage::len"
+kappa = "3d9502a9d81b28ab112c2a93a770a7296f51ca6c7dfe0bd5371f4281e4639564"
+embedded = "0edf506014963e9ad1f6ffe48c5d68e8bee2cc11a40d7b7ee5d1b413c1a875d3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item N"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::as_mpmc_mut_view"
+kappa = "86d5da7fb5ba269b0dab7c7b51e62e1191f53a817a844fdf8b924076fe0f607f"
+at = "T=u32"
+embedded = "411023ce097cc494c934c69c16ad012769220e056af0d7d9f38c2e184b21a59d"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::as_mpmc_view"
+kappa = "7200d6a6674bf44d4c09e9e5e1119f5c40340edb8ddff58b6da627aba8e2b54e"
+at = "T=u32"
+embedded = "c115f706dc21eb3377391bce86cce5917252319be86ad82787e7b16e725d41bb"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::as_mut_queue_view"
+kappa = "01b9d813a6794db4b54f7a418c3f7b22ad1b970020a7cb7bf6e73d15a774a575"
+at = "T=u32"
+embedded = "86ec593bd4e18d652dec58ae3d5d4bee43a01f96f490c39610edccb80be2701b"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::as_ptr"
+kappa = "e38791d27b02da534695405dccecb9dc691134ab01e31f68ae3777d3209602a2"
+at = "T=u32"
+embedded = "1df831fece097a97168ebc9ef87093d2fabf65754af1f93003d59eda2f7d2e73"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut [u32]>::cast"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::as_queue_view"
+kappa = "f2e1b66d7ca017277da84db6f8e4c51763e3507f520b8695afe155177a11de3f"
+at = "T=u32"
+embedded = "6c6a4fce1e9dac18d3c31bc7af7d30b62abdd50b0de69a93cad15c3914ce560a"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::storage::ViewStorage::len"
+kappa = "e840968c5739f3b897c15d6eb6d49ec002528c0d21a4fc2017c8e9f10b497705"
+at = "T=u32"
+embedded = "583cad9b9894ed46e5428bd9fd5811dde80835ba75cb0cf51f3948f1563ce0cb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const [u32]>::len"
+

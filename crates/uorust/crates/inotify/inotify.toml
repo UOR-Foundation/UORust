@@ -1,0 +1,122 @@
+[[fn]]
+path = "inotify::inotify::<impl at src/inotify.rs:29:10: 29:15>::fmt"
+kappa = "c0c785b5bf9c98cc2fe2575c22d05e588a3ddde3fe456b129b2367fabfdf48a9"
+embedded = "11e496358a43dbc552593384bb4785625374f346ebf8de1080c7a1a7def8e9af"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "inotify::inotify::Inotify::add_watch"
+kappa = "8b3be7dbc72861c62f72832a216954fe40aad666d1936758c8044074f007d42e"
+at = "P=u32"
+embedded = "962a083f1cce452092b3b7bd7fcac28fac093c7c610c2d1dacc0041d0aac1ec1"
+status = "residue"
+cause = "mir::Ty: watches::WatchDescriptor"
+
+[[fn]]
+path = "inotify::inotify::Inotify::as_fd"
+kappa = "5ee141ff1ec1c21d4823b0eba9754eb490c2dcfe9fb2e5d83e855884b0df1389"
+embedded = "ce9122d75466ec0eb0b41acdd75206fd5a32381dd86c8bfba795b3d75f9217e0"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "inotify::inotify::Inotify::as_raw_fd"
+kappa = "023a2bd39481fdbb5cb879c1c818b0b72351e1f8e6bc342b03fd1b4b054c8238"
+embedded = "3216414a208e619342046c293f6573d985412f75de1dcfed4d79658a9951b7db"
+status = "residue"
+cause = "mir::Ty: Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::close"
+kappa = "7fe577309b53e969333b441587a1aec5ac420518801c14e9b37fa3e62384491c"
+embedded = "bbde4a9447c0b2b14053c6476e9f6a8c09ed99babba836d9269e7e5a55ef663b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "inotify::inotify::Inotify::event_stream"
+kappa = "13b984936f02509a28546a86a61b6f20b770f335663d45e5040a5eec538f7525"
+at = "T=u32"
+embedded = "908d44dd90cee320cf36b223751bf8a1b46cb20de6fa6cfe4e5f9eb3197bcbcd"
+status = "residue"
+cause = "mir::Ty: stream::EventStream<u32>"
+
+[[fn]]
+path = "inotify::inotify::Inotify::from"
+kappa = "5cb5f7e81b986b9ebcfa7331d511aee94e6bbcf82c28cd1040ff1f5dc7f2a5be"
+embedded = "99c9251bc4ae3842583baac038628d0bb3385a3330bd8a654df5b20793964bab"
+status = "residue"
+cause = "mir::Ty: inotify::Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::from_file_descriptor"
+kappa = "0f78a2a1edbcb105889df9fb89aea86f363f77647f9b83cdde4c95a83696f144"
+embedded = "cea2ca968a27118dd08436946772a00f67aa8233ed3d8d9b58a82339c5e92d49"
+status = "residue"
+cause = "mir::Ty: inotify::Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::from_raw_fd"
+kappa = "5f5b9ad3735abf0dd3171f2cd94528ade46306dc08561a7fdf521ce0f018ddc4"
+embedded = "cfd0764942d078f6ea191bcfc3ea985e5c891823969ca0cdbe47a4cfe4fcdb0c"
+status = "residue"
+cause = "mir::Ty: inotify::Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::init"
+kappa = "77d93ca77ee64edad892b8a769db5e2edb3601288e1cac16531fe010c570c3d5"
+embedded = "07207fac9b90085ac03159b01212ada57ee52a0048ba9676a13dcfca2d5854c0"
+status = "residue"
+cause = "mir::Ty: inotify::Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::into_event_stream"
+kappa = "922b350643a1e4e6b0db81a55508d02d149e9eca8a1b33547de0bae0622392f3"
+at = "T=u32"
+embedded = "c46df726e74272ad82612d38faea9e1235ec4556dda6814497861680147b06f6"
+status = "residue"
+cause = "mir::Ty: stream::EventStream<u32>"
+
+[[fn]]
+path = "inotify::inotify::Inotify::into_raw_fd"
+kappa = "8c092220289cd554ebf468e54b726d98c774dd626c6a807508ad175614b873dd"
+embedded = "ae627d56caf8f60629571dc94b5e10ac28cbfdb3c3512e17bce6c852c4156ff5"
+status = "residue"
+cause = "mir::Ty: Inotify"
+
+[[fn]]
+path = "inotify::inotify::Inotify::read_events"
+kappa = "ffcfd58b8997a0d33efbd92695c2701cfa515483a9d50c5a2369f5b635d44b4d"
+embedded = "33de48b8fb10d6c234a00dcc7f773f978da751dde1eae413afb12d1341de7e1d"
+status = "residue"
+cause = "mir::Ty: events::Events<'_>"
+
+[[fn]]
+path = "inotify::inotify::Inotify::read_events_blocking"
+kappa = "697bbe269b3e123310d1c1e2c4c74fdae8a019ac2634019ff08eabb7b7861539"
+embedded = "b6b9990da19b2f54e21c80e5773bb52a92393a7c4d701d8bfb6d3b17fcaea0df"
+status = "residue"
+cause = "mir::Ty: events::Events<'_>"
+
+[[fn]]
+path = "inotify::inotify::Inotify::rm_watch"
+kappa = "3748565b1805fd3840f87ea9229878f1d31f4521308bcff67c0624c52cdf5c11"
+embedded = "f751b5ad1283ee2c48f64cad14c97a6fc938ad1f6d5d9f15cd2ec2af6d21e5de"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "inotify::inotify::Inotify::watches"
+kappa = "e9796e40518d21225f8ad9d62d026158af0d4a40afa357e9c15cbb68a2667eba"
+embedded = "cca2cb40ba66d9ec6293e0269bfbcd9a53947b44be0f9c35ab8a3d3a2e2f83ff"
+status = "residue"
+cause = "mir::Ty: watches::Watches"
+
+[[fn]]
+path = "inotify::inotify::OwnedFd::from"
+kappa = "d9e01def3bfcaac04ff87eff1baf99e7a51f380c60e91735618ee51c49a93744"
+embedded = "a60c7c4f8ddd3e11da7988f657fcd1d1f23179b5fe5d55061d717fc4f03ccb9e"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+

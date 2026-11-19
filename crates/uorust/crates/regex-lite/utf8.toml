@@ -1,0 +1,59 @@
+[[fn]]
+path = "regex-lite::CLASSES"
+kappa = "d1a9ed139f7e7690d99e3c27b2b8fc6c4fc15ade861ef5de9273f3854a11d0b5"
+embedded = "d61b820026bc5141b89709c53d1effe936caad56ecd90cf15d49b6e0499d7e1b"
+status = "translated"
+digest = "b1edc3b941a6a9bf66c4ac0ddc97cb31900b71707f65ca2c38c10d4a9d801aed"
+
+[[fn]]
+path = "regex-lite::STATES_FORWARD"
+kappa = "551865434dec123b5a4396d6e506581e191891046ee7f13a55c4635469216ec1"
+embedded = "5b3bea5650b67f5c7e52abe45c6495f2cd3899c8c49fda0c2043b8abf05f4771"
+status = "translated"
+digest = "09aca3e03092a14c5cc1b068723a3e962547931204a619ce3a4099123f37a047"
+
+[[fn]]
+path = "regex-lite::WORD"
+kappa = "f9d817698acb9291e41aa6e3e814d730be5484ed5e9ad759f06eecd7a515b41d"
+embedded = "068a53f891a8efc70f6ad77f0b0f02d35e873b28dbee1687075f13f4f2934078"
+status = "translated"
+digest = "3bb606cd90aef6578e2c75527a8e1100cb8d1121115fcbcbeae10c780156c3da"
+
+[[fn]]
+path = "regex-lite::decode"
+kappa = "57ce7d8d2d39cd7e972c05fb02fc0f31864d9c493a3a30d5df172476d2246509"
+at = "B=u32"
+embedded = "4c7860c21c32f5d05867b8e1138c6749e9c83349812257c28ad475ae6abcf602"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "regex-lite::decode_lossy"
+kappa = "bad45ddd86d41a3c0ed47d6d7321b4ba90a51f1de312ac38a35161ce67c565f4"
+at = "B=u32"
+embedded = "965b7c655adc2e5ef3521a6ec8810b53ced4c7a1516a3a85ec022059f444fb58"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utf8::decode: regex-lite's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "regex-lite::decode_step"
+kappa = "3131563db7e83705fe98ae012711c6a3655cdf23edc43ec37fab2d50b493a9dd"
+embedded = "bcbb4350a1d98be5c50e93f109b2b196468b85880bcf57972eb695ff2aa44c3c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item utf8::ACCEPT"
+
+[[fn]]
+path = "regex-lite::is_word_byte"
+kappa = "5e86e1dff332cf1bd0927a967708028cee567a48e8ac77889762a182d8531731"
+differential = 7
+embedded = "e9bc471d3518229d7e92127575808694175c84bc8ac3dde1d322056ed85eada5"
+status = "translated"
+digest = "3254692f7588ddd2c2244321c6fe311cf0a232af74271a22d22c2778b749b7e4"
+
+[[fn]]
+path = "regex-lite::mkwordset"
+kappa = "a8608bea680058e607bbe9b028e8eff772f8c7951ef958815f969067f8ac7e8d"
+embedded = "0ebf9da149ea6f427dfba57decb111d01a71d127dd7b4fa39007bfc21e70b609"
+status = "translated"
+digest = "ff67e933ca1199a7f624860f520dd58fecbb89f75894af1fa85c372e9125bf29"
+

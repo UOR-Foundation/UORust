@@ -1,0 +1,67 @@
+[[fn]]
+path = "vsimd::avx2"
+kappa = "36463f0d15a85c7687a6d5e681e8599ae9ac81bf111ef87a0f41ccbf3d04a055"
+at = "F=u32, O=u32"
+embedded = "acaf8b9ce1c10f1931baf2368f0112fba0e571cafadb72bf7beb22f68277f810"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+
+[[fn]]
+path = "vsimd::native::<impl at src/native.rs:1:10: 1:15>::fmt"
+kappa = "d5ff806d0931d4c05252e4bc5bf63d167c6272aedc33b2aeb4a99c5b5464f554"
+embedded = "19c9d6311ca67d092692078694ef833e9c346c0665b2fa55068d1b9165df5b33"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::native::<impl at src/native.rs:1:17: 1:22>::clone"
+kappa = "4ae35ece1416bff62bc26a5c28477a578b22980ea7079d1387eb3884b28dda42"
+embedded = "f1cc63c63a110795a7deda98184fcae4c4772011c032c126e48b03bf4d6ecf61"
+status = "residue"
+cause = "mir::Ty: native::Native"
+
+[[fn]]
+path = "vsimd::native::<impl at src/native.rs:4:10: 4:15>::fmt"
+kappa = "3029d973b17a74f17243d6314cdc06fb4e01c980cd6cde3ba93411199c7f4a01"
+embedded = "528c564bf152292d2a6b90b8b35e4f757ccf1282380d5b60e0858a171c9ce84b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::native::<impl at src/native.rs:4:17: 4:22>::clone"
+kappa = "6ac993b2e2b84ad6235252d749b8c3b8606cfc01dcb7fdb935417c30c3402377"
+embedded = "de617e99973c7da4c19e46025cda62495c04032ff8b5b8cab4d087a988a8ce58"
+status = "residue"
+cause = "mir::Ty: native::Arch"
+
+[[fn]]
+path = "vsimd::native::Native::detect"
+kappa = "7b163a384ff3fb238d3c5ff69d654ef433ad2172365be72d7e1aa1356faa6205"
+embedded = "5ed8c6d77eb7ccebc251586a2c7e34af42a105ab6915f295ed773e36d1918b6f"
+status = "residue"
+cause = "mir::Ty: native::Native"
+
+[[fn]]
+path = "vsimd::native::Native::exec"
+kappa = "2b88a6845013fd85eff1bc4cea767c06327791ed9510d84687edfa074302900c"
+at = "F=u32, O=u32"
+embedded = "562e5b20162de782d10d7a915172fba61300bcb8f921d786a407dfe4e7fd1820"
+status = "residue"
+cause = "mir::Ty: Native"
+
+[[fn]]
+path = "vsimd::sse2"
+kappa = "1fd7ce5271792a7140c6ee3a6c8ea6b3eee44f33eb756069eeed94588f4fda0d"
+at = "F=u32, O=u32"
+embedded = "58ffc68dc570d8a1fae7ff2f913344aeb82f0ce484b17435823ee7588d2740cb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+
+[[fn]]
+path = "vsimd::sse41"
+kappa = "e9c9c8d0aaf2520829ab5f367c68790414d618a23ced22f090db309bfb9d05de"
+at = "F=u32, O=u32"
+embedded = "f53aa2e004a44c67f6cd9f6bb26a12a8fc664dfda09f97feccb1fc8c10527390"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+

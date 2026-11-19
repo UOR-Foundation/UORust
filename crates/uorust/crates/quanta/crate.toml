@@ -1,0 +1,225 @@
+[[fn]]
+path = "quanta::<impl at src/lib.rs:200:10: 200:15>::fmt"
+kappa = "caee9a070d1b7a8e5cf649f20b60b4d269ee74c947df72bc35a6c2e65bcdf627"
+at = "Calibration=u32"
+embedded = "8b658d755659fe36cad8be9b9ba460adc7d889b563a7b1095395e135e9342c82"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quanta::<impl at src/lib.rs:208:10: 208:15>::fmt"
+kappa = "859c47e8facc258339fb281f25a4681ffe1d8714fbf93e27f0595c3dd6429a0c"
+embedded = "eb31ba988830715db5b3deeb08745fd5f8a457c0e690175b34d0f13c58d704e7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quanta::<impl at src/lib.rs:208:23: 208:28>::clone"
+kappa = "94b0bb9d4cecf5d176b0bf4b0d8856a0737b53d8f340690bca68d5801c54a0ba"
+at = "Calibration=u32"
+embedded = "c5248e0414d6a6fb1ec1f53d2d8d67a602fae5cc4c8076fe573e699919248e4a"
+status = "translated"
+digest = "1b031023887bc3b9715da6c0ae104b9caaf0664eb5ca48f24a17ac02e4ee19be"
+
+[[fn]]
+path = "quanta::<impl at src/lib.rs:324:10: 324:15>::fmt"
+kappa = "84e8b67e39804f1150245b1e6eb6535b86c47f450425c769f931b08829697cd6"
+at = "ClockType=u32"
+embedded = "2d3ebc2dc7445becbcdc7b3b82f27b7d79888e06057f08cbdc97f1cd6264dd82"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quanta::<impl at src/lib.rs:324:17: 324:22>::clone"
+kappa = "003abf224af8678d804db54a0517e4cbc1c4b05a4f1b4e0c48284263216e8f6e"
+at = "Clock=u32, ClockType=u32"
+embedded = "3ccaa06e8e60b3b0c6b113e41824b99afb6d8b5f225bf0f194fd936b878e0404"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "quanta::CLOCK_OVERRIDE"
+kappa = "636467b76e8d6293aa65cf79294c18527d12f8dfc4b969096068cd315796b74c"
+at = "Clock=u32"
+embedded = "da6448dcb1d249f4a84cbed75d1c0573bf9a3c3f9bd6ce8c0ab6a4fafe039c3b"
+status = "residue"
+cause = "mir::Ty: std::cell::RefCell<std::option::Option<u32>>"
+
+[[fn]]
+path = "quanta::Calibration::adjust_cal_ratio"
+kappa = "fb8f23a9c05e90064076daf58c8cf62d054b73727f97343b6bb2d3899c6e368f"
+embedded = "13cfcf1d7619aae8899661355061ecd7384267d177370940749eac4951670d55"
+status = "residue"
+cause = "mir::Ty: Calibration"
+
+[[fn]]
+path = "quanta::Calibration::calibrate"
+kappa = "1bd6a77ab96a4c2b12c4bca59a24417f251350c0b5edd8b304c1cd5037cb8788"
+at = "Calibration=u32"
+embedded = "0b82b619bcd14dc8fb70934c1996804f4c0f788c5999ba53c79ec6e31df1e3fa"
+blocked = ["CastKind::IntToFloat"]
+status = "residue"
+cause = "mir::Ty: Monotonic"
+
+[[fn]]
+path = "quanta::Calibration::default"
+kappa = "bc688932e58b2b42deea4b5c5e1082fef6ff6a34c9e427d5b758b0e13ce3c817"
+at = "Calibration=u32"
+embedded = "7267cccdb24caf0d754d0ab23f95cf138b3106257f9bdfed9a54693a2c4228e7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Calibration::new: quanta's MIR stops at mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "quanta::Calibration::new"
+kappa = "78a97e467018fe7a52ded9f0ee15dd08bb25c8759f75d1430f3273c78e26a49a"
+at = "Calibration=u32"
+embedded = "fc164986063c179fb65a345070ae154be71bdd8f477ede6763782a70faea0eae"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "quanta::Calibration::reset_timebases"
+kappa = "4c67f1d2868528256192dad778d9377304bd250132c1519f0e14314fa67b072d"
+embedded = "17d38b77f95ce1725b06214c8f28faba1fef3c3cdccf93f58a7d4566c6a27f45"
+status = "residue"
+cause = "mir::Ty: Calibration"
+
+[[fn]]
+path = "quanta::Calibration::scale_src_to_ref"
+kappa = "dcbba507c2118a394d5ca5cc46196f9a7cf86b5681fde0f4b60359362439fe00"
+embedded = "3e1e97230a351f9ef7f467f00a6903a933b6e90436c2ef57eba016d875c128cc"
+status = "residue"
+cause = "mir::Ty: Calibration"
+
+[[fn]]
+path = "quanta::Clock::default"
+kappa = "cf70acadd1c757e8eb42871543e6179dd0a8fb740185e3c96aeb8f7cd4df6456"
+at = "Clock=u32"
+embedded = "c3cc7a758f97baef6090c341c5b9ea09a2cb02fd4a35bb0e11a26424852cf517"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Clock::new: quanta's MIR stops at type outside the lift: clocks::monotonic::unix::Monotonic"
+
+[[fn]]
+path = "quanta::Clock::delta"
+kappa = "ef28a0b8c700fb4bef7c35d1fbbe6894c14ce4a12633f5f200c601a754dbf079"
+at = "Clock=u32"
+embedded = "f248760c3dcb0f4461327bac817c3e5189c3c7d164852b176a442e08a99f04eb"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quanta::Clock::delta_as_nanos"
+kappa = "81c05e65365552994cea9a1686d299761fda5494570704f605ab2208e201e074"
+at = "Calibration=u32, ClockType=u32"
+embedded = "ebcee4618b50c206ea6815a4894531f67bc784b908654d80045f4c78c751416e"
+status = "residue"
+cause = "mir::Ty: Clock"
+
+[[fn]]
+path = "quanta::Clock::mock"
+kappa = "92dfa2b1293eb47706097f3bda80931f91d8163e496eda82ab5a81853cc6a402"
+at = "Clock=u32, ClockType=u32"
+embedded = "d25da84046615b30154ff91c09dd61be1eb7c8b69ecbf83a0fa39c18326eaa21"
+status = "residue"
+cause = "mir::Ty: mock::Mock"
+
+[[fn]]
+path = "quanta::Clock::new"
+kappa = "28b4d0ee796bae744d2997b09afb234071a487e5efa5c631070a6a276edbfadf"
+at = "Calibration=u32, Clock=u32, ClockType=u32"
+embedded = "01e5f0c00bdf2d7b66e81979a1ab4fe496ff822338f43141d560f14152478820"
+status = "residue"
+cause = "mir::Ty: clocks::monotonic::unix::Monotonic"
+
+[[fn]]
+path = "quanta::Clock::now"
+kappa = "f168c3827585e3f4450642a668a5b8e6681b08eef5430066db1d185aa54030fe"
+at = "Clock=u32, ClockType=u32"
+embedded = "14467ca16db4b99b5cd0642ec2848c59b1dc7ac7685314964fc3d216091e0943"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::Clock::raw"
+kappa = "40d2042a731a28b9bdf24bae77ad779c5580da5c503cc6b047d8f0fe11dc4dfb"
+at = "ClockType=u32"
+embedded = "3361e6f8c1895cc311e866c6462983176a01a3a8e9ed08975b1a659ff31b95e5"
+status = "residue"
+cause = "mir::Ty: Clock"
+
+[[fn]]
+path = "quanta::Clock::recent"
+kappa = "1f0eee47aa657340ff50fbb3b58cbbcdf872a2cd4094b49873fafd5b2b2471b0"
+at = "ClockType=u32"
+embedded = "7e07816b0f74577d079d1db1173f3022d06c23b0cf1167d9efe700682d353ff3"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::Clock::scaled"
+kappa = "77571659eb0d2bd5536131cf30d9540155bbb5ca0d9e60750e2e9f1e323e780c"
+at = "Calibration=u32, ClockType=u32"
+embedded = "f01a4a9160bb1a70d60e14b1e9a18764e3a139cdb31d7db31a82adeed218ff20"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::ClockType::clone"
+kappa = "6b91cabc1f3c1f83f8174d1f00f26e909bf3176ebaabc2a44f8c0fddf017d63a"
+at = "Calibration=u32, ClockType=u32"
+embedded = "9c8322b25836dd6ced86cd747b9efaf2f8b182713200dc35ecf0c6931a602230"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "quanta::MAXIMUM_CAL_TIME_NS"
+kappa = "5dcd8122bf1e7f4f41f4abbd2b6c0510b5a4444499b3dc65b89d809e463388ae"
+embedded = "d298e2ab830fca990ddf854cf05d1f6f4e6b52b722ab24e26b29524d98032394"
+status = "translated"
+digest = "25359db0347c6f2c6527bb91031ad2010008cb9f42666f99535a459796de4272"
+
+[[fn]]
+path = "quanta::__RUST_STD_INTERNAL_INIT"
+kappa = "f75d681c2b3a2fd906a89c2db4edda3f308c16fe5477d42841447c3387fa34b0"
+at = "Clock=u32"
+embedded = "b0f053f03849de8b6c10fe1c894f31a2e5ba1991ebe8f6516f999a6a54f8b3a2"
+status = "residue"
+cause = "mir::Ty: std::cell::RefCell<std::option::Option<u32>>"
+
+[[fn]]
+path = "quanta::get_now"
+kappa = "8d8a4e37e6ab0535cf4467656dee338a01910b33a17b5206c1b7eaf393e4da7e"
+at = "Clock=u32"
+embedded = "c3f88c6d2ded2747ce128e103b7cd9d47df526657e08fdde1c0d46913f6778ac"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::get_recent"
+kappa = "b15e93ab45f47e27881bddc1ac6a7ae3dd2850050a03fe17a846389726177b2e"
+embedded = "fa036de99b6b5a361242f1b87049714d8a09e90ac7d61fba5dff6e53ea294e73"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::mul_div_po2_u64"
+kappa = "a010df8e2033cd9226e7128c250d316900ce74cf277e259824086aeebe8b6536"
+embedded = "10485976cbb921e3664d59d8a514f45e7379145f8c3bcc3c58b461f3089caadf"
+status = "translated"
+digest = "fda99996fb16511b3012123c7521b4665ae36e768c5751c0208ce22ef4b1d9c7"
+
+[[fn]]
+path = "quanta::set_recent"
+kappa = "30ac7ed6ea0b3eb0957ec1448cfac780fe5a62e28fc0456bed094f39384ce4ab"
+embedded = "2b0340dea57673eaa4fa8e2f1d44dfe092d4cda654a4debc58a2268d632f0cfd"
+status = "residue"
+cause = "mir::Ty: instant::Instant"
+
+[[fn]]
+path = "quanta::with_clock"
+kappa = "021802b3cd11a2f8928d0c1de71007e32036057d0607a4369134d25609a13c1a"
+at = "Clock=u32, T=u32"
+embedded = "d66d1de7cae3a5b1837648e0d385470a3ef751e54fc5c8dfa80078f7114456e7"
+status = "residue"
+cause = "mir::Operand::Constant: with_clock::<u32, impl FnOnce() -> u32>::promoted[0]"
+

@@ -1,0 +1,118 @@
+# The blake2 register (written by `uorust crate blake2@0.11.0`; do not edit): every body of
+# blake2's MIR at blake2 0.11.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 114
+translated = 0
+residue = 114
+
+[module."_#1"]
+bodies = 1
+translated = 0
+residue = 1
+
+[module._]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.consts]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 74
+translated = 0
+residue = 74
+
+[module.simd]
+bodies = 38
+translated = 0
+residue = 38
+
+[embedding]
+bodies = 113
+embedded = 113
+evaluable = 113
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: simd::u32x4"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: simd::u64x4"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Blake2b<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Blake2s<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Blake2bMac<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Blake2sMac<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: u32x4"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: u64x4"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OutSize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: <u32 as digest::block_api::VariableOutputCoreCustomized>::new_customized::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <UInt as Unsigned>::to_usize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Blake2bVarCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Blake2sVarCore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::InvalidOutputSize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::block_api::CtOutWrapper<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::block_api::TruncSide"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn digest::HashMarker"
+bodies = 2

@@ -1,0 +1,265 @@
+# The async-io register (written by `uorust crate async-io@2.6.0`; do not edit): every body of
+# async-io's MIR at async-io 2.6.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 138
+translated = 1
+residue = 137
+
+[module.crate]
+bodies = 84
+translated = 1
+residue = 83
+
+[module.driver]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.os]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.reactor]
+bodies = 40
+translated = 0
+residue = 40
+
+[embedding]
+bodies = 138
+embedded = 138
+evaluable = 138
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: futures_io::Error"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Async<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Reactor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Instant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::os::unix::net::UnixDatagram"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Timer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parking::Parker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reactor::Direction"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpListener"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::os::unix::net::UnixListener"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BlockOnWaker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parking::Unparker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::ReactorLock<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::Readable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::ReadableOwned<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::Ready<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::Writable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reactor::WritableOwned<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::OwnedFd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::UdpSocket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::os::unix::net::UnixStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CallOnDrop<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Parker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reactor::Reactor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reactor::Source"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reactor::unix::Registration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::net::SocketAddrUnix"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Waker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::TcpListener>::accept"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::TcpStream>::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::TcpStream>::peek"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::peek"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::peek_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::recv_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::net::UdpSocket>::send_to<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixDatagram>::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixDatagram>::recv_from"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixDatagram>::send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixDatagram>::send_to<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixListener>::accept"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<std::os::unix::net::UnixStream>::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<u32>::read_with<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<u32>::read_with_mut<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<u32>::write_with<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of Async<u32>::write_with_mut<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of optimistic<impl Future<Output = io::Result<"
+bodies = 1

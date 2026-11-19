@@ -1,0 +1,35 @@
+[[fn]]
+path = "sqlx-sqlite::transaction::SqliteTransactionManager::begin"
+kappa = "ba675511e2756f029031286c73e6eb4626f7b83a9a33be29cb1b4267840ddf34"
+embedded = "4faadf170e2e614212cca3942c92de39a99869119963ee9aeb801a363b1081d1"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::SqliteTransactionManager as sqlx_core::transaction::TransactionManager>::begin()}"
+
+[[fn]]
+path = "sqlx-sqlite::transaction::SqliteTransactionManager::commit"
+kappa = "052dbad9fdc582a5e3d33ac25ba1406e780d2a13dee778a9ed18e6dbce549eb1"
+embedded = "de529ea2f867bba7a48526b38f5302d2040ce4b22f71d8afdde27fad4af63323"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::commit()}"
+
+[[fn]]
+path = "sqlx-sqlite::transaction::SqliteTransactionManager::get_transaction_depth"
+kappa = "47f7384e76aec5eee7782a4ea0d38f0fd2e630728bd5eb616910df703a5eb994"
+embedded = "9ea74fe79787b3c2e415061b5bd689d1ff40f71e7d8c97e8adf96064757aa1a2"
+status = "residue"
+cause = "mir::Ty: SqliteConnection"
+
+[[fn]]
+path = "sqlx-sqlite::transaction::SqliteTransactionManager::rollback"
+kappa = "494eac52e172f400a9dc4e6b383d11c114611df2e16cfbcdd0282b2863ad525b"
+embedded = "d5987a9eb32238d87de15c7952b67f3225821642c41a477603f5556d9dea7af8"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::rollback()}"
+
+[[fn]]
+path = "sqlx-sqlite::transaction::SqliteTransactionManager::start_rollback"
+kappa = "33b1c525af51ad5ed20a9c2047c5e22a176f5c17c88d4d6109edf48ba69abb8b"
+embedded = "e25d8ad1364274f10b0b7664e58459f60ffd983310b2ae0241d01e870a572fb6"
+status = "residue"
+cause = "mir::Ty: SqliteConnection"
+

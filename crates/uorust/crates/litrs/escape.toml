@@ -1,0 +1,86 @@
+[[fn]]
+path = "litrs::escape::String::new"
+kappa = "69d733510fe885b86ed151f519bd2cd68331bd876513924714aa709f616271fb"
+embedded = "bdb5fdb4bdbc9da0f8bc903d29239f65931471d0813e6c46b041928f209f7fc7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::new"
+
+[[fn]]
+path = "litrs::escape::String::push"
+kappa = "4f14823e2e28ad2e2a22643827c56451712d13143e07ba3b5b136533cd062313"
+embedded = "406d0e97a20055b913545e79813f667c8630ed38776c17daab0f7ef96d8c71e8"
+status = "residue"
+cause = "mir::Ty: Unescape"
+
+[[fn]]
+path = "litrs::escape::String::push_str"
+kappa = "69aa9b1b4ade7264a9d215ebc0d5fe1cfa6cd5cb99aff54fad31e6f70a1b2a73"
+embedded = "5668956ef04912ea1897224d296106dd34e47f1d2d8120e8303ef98bd7244028"
+status = "translated"
+digest = "a6173b6fef9e2209a3b8cfbbf7905351d7e925ce78f78edaa54936fc8c33b977"
+
+[[fn]]
+path = "litrs::escape::Unescape::unwrap_byte"
+kappa = "ef21ba07b3644d60f0066555da8df70093b6b3510f521994356a2d89bbc0680f"
+embedded = "32c9813243dfc7dae3ea2d9683e323a2fc790f2c39c7638d230b607a739a86f8"
+status = "residue"
+cause = "mir::Ty: Unescape"
+
+[[fn]]
+path = "litrs::escape::Unescape::unwrap_char"
+kappa = "3d7352b420941b53e9d9149842f857ceab001a8629267968008a1ccc8c5c66ca"
+embedded = "67a6b067614fce1a5c36d38373d69e64f4bda380d30f9bdb9e2cd4d79fe28d0f"
+status = "residue"
+cause = "mir::Ty: Unescape"
+
+[[fn]]
+path = "litrs::escape::Vec::new"
+kappa = "0ec12f1b489e1ef42b5c9c24cbacb07235db1836d72173e875484b211d014af4"
+embedded = "8349be32ff63869cac01b30efd38b44512e530b7265682e6eee95793f2a2b4c5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "litrs::escape::Vec::push"
+kappa = "4065165f184ab6df00a1dafd95c2d39c1e9fe6cf2b5c2d57b206b619c15b7483"
+embedded = "4995e664ed02640dd21729b7ed99965d257b74bb7dea9009454b3850ab798564"
+status = "residue"
+cause = "mir::Ty: Unescape"
+
+[[fn]]
+path = "litrs::escape::Vec::push_str"
+kappa = "05207c83de558c0fcfa747a0f96f87f50b9d9f995fc6f8dbf73b01456acd9839"
+embedded = "c5fcba53f278b4e92538c3d982cabc0b0d1210de4095504e41dc21fda650fa8b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "litrs::is_string_continue_skipable_whitespace"
+kappa = "9e67c6169b51738da0c25e8f961dd9c158535a7eaecdbd0bff8ee1a77ec1e7b0"
+differential = 7
+embedded = "0c8e399180884f263a01000208250608ed8485231639725130ea35838ffcacaf"
+status = "translated"
+digest = "0745121439f97ca0ac21f8edde849a468552c3ca1997dbcda1584b23f72d230d"
+
+[[fn]]
+path = "litrs::scan_raw_string"
+kappa = "d398c2ec1ae7478c990f144c65e43872295255a70b55caaf6990fb740d541618"
+embedded = "5a28224ecc132f7a8136bc4cbd5f577e9d36ac45137edb3731f69027e8bddbb8"
+status = "residue"
+cause = "mir::Ty: err::ParseError"
+
+[[fn]]
+path = "litrs::unescape"
+kappa = "e43a57862c50e829df8d4178a9ecc2a3c581182f8c840a723ed988f0ea64fb43"
+embedded = "b914cf8b194d4411412c3b7e206ef8183d7ae8cea43395fcd079b535eef799ee"
+status = "residue"
+cause = "mir::Ty: escape::Unescape"
+
+[[fn]]
+path = "litrs::unescape_string"
+kappa = "f50d86e141827368d1175a0631a4cadb15fec99c1851b5b48bc035c886ff3404"
+at = "C=u32"
+embedded = "5f543ebb397a1f3d689e0717ac287372640b6dce7e3821e422eec173bbdc0501"
+status = "residue"
+cause = "mir::Ty: err::ParseError"
+

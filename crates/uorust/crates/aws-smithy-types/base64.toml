@@ -1,0 +1,42 @@
+[[fn]]
+path = "aws-smithy-types::base64::<impl at src/base64.rs:12:10: 12:15>::fmt"
+kappa = "42f8b55330d1baae9309ad54b60a889fcf7548961f8ca4d9529f89937f02f694"
+embedded = "ac04ceb9d3d380031464c0856222d119f35c50286010dc4377c3eaf58638e718"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-types::base64::DecodeError::fmt"
+kappa = "16031f9d1f924e96fb78527837f8d25549631109c8d31d1fc3c080d42b67e7a1"
+embedded = "1c9f898c5a962ce13a94c0f296b96d267aac40f81ee622cc05dd1c885df5f843"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-types::base64::DecodeError::source"
+kappa = "148fde824495ae099a2248486cc09c42c87f7c2b7d0ecd3b91e39dcb9e078356"
+embedded = "b197f7dd91c33af4082fab051f8fedb0fc4d4a6357a67c99c7c1db29aa0a22f0"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "aws-smithy-types::decode"
+kappa = "b0bdaeb1638f6f309c13766a387d6aa94db8b12e0941dcb67c2075eed2e306c5"
+embedded = "8969692dfec187ca2fb829b8d3c28e14ddc3d3ef0217383ab2ce0c7bf31b8b0e"
+status = "residue"
+cause = "mir::Ty: base64::DecodeError"
+
+[[fn]]
+path = "aws-smithy-types::encode"
+kappa = "00ae30b80ea66e5774a3c28a38e8b9c2bd6bb45af42f2c88051bcbdca703f9f1"
+embedded = "896368e05de8c012f620935982b77f1568a2e4eab33203b9627f9fcb24b8b2f3"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "aws-smithy-types::encoded_length"
+kappa = "2351ee7d15e7eb351b82fdda740938581f777cea18489df538b164f001038a36"
+embedded = "ee056db550383ccd7c45f5c3811402bf9519ed3387aa3543f8388badcea6bebd"
+status = "residue"
+cause = "mir::Operand::Constant: base64::encoded_length::promoted[0]: type outside the lift: base64_simd::Base64"
+

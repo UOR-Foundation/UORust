@@ -1,0 +1,215 @@
+# The notify register (written by `uorust crate notify@8.2.2`; do not edit): every body of
+# notify's MIR at notify 8.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 127
+translated = 1
+residue = 126
+
+[module.config]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.crate]
+bodies = 15
+translated = 1
+residue = 14
+
+[module.error]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.inotify]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.null]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.poll]
+bodies = 41
+translated = 0
+residue = 41
+
+[embedding]
+bodies = 127
+embedded = 127
+evaluable = 127
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: EventLoop"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RecursiveMode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: config::Config"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: poll::PollWatcher"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EventEmitter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PollWatcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: inotify::INotifyWatcher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: notify_types::event::Event"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: poll::data::PathData"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mio::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poll::data::WatchData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DataBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: INotifyWatcher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WatchData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WatcherKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Watches"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::RecursiveMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn PathsMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inotify::EventLoop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: null::NullWatcher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poll::data::DataBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poll::data::EventEmitter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poll::data::MetaPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::Metadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::mpsc::Sender<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::mpsc::SyncSender<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: walkdir::DirEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: walkdir::IntoIter"
+bodies = 1

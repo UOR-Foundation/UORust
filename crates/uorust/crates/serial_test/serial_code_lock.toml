@@ -1,0 +1,30 @@
+[[fn]]
+path = "serial_test::local_async_serial_core"
+kappa = "74b1c839efb0a56fa72f8fc05dca792110cd104efc7fdb982c79b39130f6485c"
+embedded = "324202eb4701d4d17d045f7fcadfbb7d17f63fc415c47e8b4faadfc6b31d3f2a"
+status = "residue"
+cause = "mir::Ty: {async fn body of serial_code_lock::local_async_serial_core<impl std::future::Future<Output = ()>>()}"
+
+[[fn]]
+path = "serial_test::local_async_serial_core_with_return"
+kappa = "de43ebacb77a986fdbdb12bd5f53332b47c1e6a425abd3be0698124c6eb48d93"
+at = "E=u32, R=u32"
+embedded = "66b1e6ed422ee28e60f1fa400ac2d9219d70ba735c2acb42126a7fed06347e72"
+status = "residue"
+cause = "mir::Ty: {async fn body of serial_code_lock::local_async_serial_core_with_return<u32, u32, impl std::future::Future<Output = Result<u32, u32>> + std::marker::Send>()}"
+
+[[fn]]
+path = "serial_test::local_serial_core"
+kappa = "1677b54b4843061a62406fdb1cc36e1cc05e20a01730cc4d17cc9911ca4d6e7f"
+embedded = "81bd0d9c7b3e0335ae318cef1355b4af427c65163ac51cbee0fa8ae97a2e1b89"
+status = "residue"
+cause = "mir::Ty: fn()"
+
+[[fn]]
+path = "serial_test::local_serial_core_with_return"
+kappa = "668aa84183ec3f0c9b41ccc9fe6a42100774f5c10ccb527831375dcb6f737cd9"
+at = "E=u32, R=u32"
+embedded = "e69ccd48aee6f91b2e67e1ed2d1ebd9720ba1bb6a5e1713819629909a9413a8f"
+status = "residue"
+cause = "mir::Ty: fn() -> Result<u32, u32>"
+

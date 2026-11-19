@@ -1,0 +1,337 @@
+# The indicatif register (written by `uorust crate indicatif@0.18.6`; do not edit): every body of
+# indicatif's MIR at indicatif 0.18.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 338
+translated = 0
+residue = 338
+
+[module.draw_target]
+bodies = 62
+translated = 0
+residue = 62
+
+[module.format]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.iter]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.multi]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.progress_bar]
+bodies = 71
+translated = 0
+residue = 71
+
+[module.state]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.style]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.term_like]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 338
+embedded = 338
+evaluable = 338
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: ProgressBar"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: progress_bar::ProgressBar"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: BarState"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: iter::ProgressBarIter<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: style::ProgressStyle"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: draw_target::VisualLines"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: draw_target::ProgressDrawTarget"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ProgressDrawTarget"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ProgressStyle"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: MultiProgress"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ProgressState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: VisualLines"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AtomicPosition"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MultiState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ProgressBarIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TabExpandedString"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: draw_target::DrawState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: draw_target::DrawStateWrapper<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: multi::MultiProgress"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: progress_bar::WeakProgressBar"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: style::Alignment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Drawable<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Estimator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LineType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaxRingBuf<#usize_HISTORY>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RESET"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TemplatePart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Term"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ticker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn style::ProgressTracker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: multi::MultiProgressAlignment"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: multi::MultiState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: state::BarState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: state::ProgressFinish"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: state::TabExpandedString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: style::Template"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: style::width::{closure#0}: mir::TerminatorKind::Call: style::measure: indicatif's MIR stops at mir::TerminatorKind::Call: <str as UnicodeWidthStr>::width"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <str as UnicodeWidthStr>::width"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DrawState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DrawStateWrapper<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RateLimiter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TargetKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Template"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TickerControl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WideElement<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: draw_target::Drawable<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: draw_target::LineType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: draw_target::Metrics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: draw_target::RateLimiter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::MaxRingBuf<#usize_HISTORY>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::SeekMax<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::MultiStateMember"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: progress_bar::Ticker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::AtomicPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::Estimator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::ProgressState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::Status"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::BarDisplay<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::TemplatePart"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: style::WideElement<'_>"
+bodies = 1

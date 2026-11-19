@@ -1,0 +1,61 @@
+# The dirs-sys-next register (written by `uorust crate dirs-sys-next@0.1.2`; do not edit): every body of
+# dirs-sys-next's MIR at dirs-sys-next 0.1.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 14
+translated = 1
+residue = 13
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.target_unix_not_mac]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.target_unix_not_redox]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.xdg_user_dirs]
+bodies = 8
+translated = 1
+residue = 7
+
+[embedding]
+bodies = 14
+embedded = 14
+evaluable = 14
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 1

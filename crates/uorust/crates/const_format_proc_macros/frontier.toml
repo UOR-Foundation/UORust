@@ -1,0 +1,289 @@
+# The const_format_proc_macros register (written by `uorust crate const_format_proc_macros@0.2.37`; do not edit): every body of
+# const_format_proc_macros's MIR at const_format_proc_macros 0.2.37, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 145
+translated = 0
+residue = 145
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.error]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.format_args]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.format_macro]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.format_str]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.formatting]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.parse_utils]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.respan_to_macro]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.shared_arg_parsing]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.spanned]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.utils]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 145
+embedded = 145
+evaluable = 144
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Peekable2<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: formatting::FormattingFlags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utils::LinearResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LinearResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NumberFormatting"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format_str::FormatStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format_str::WhichArg"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: format_str::errors::ParseErrorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FmtStrComponent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FormattingFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format_args::FormatArgs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format_str::FmtArg"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Punct"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::Peekable2<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DisplayParseError<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FmtArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FormatStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Formatting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IsAlternate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LitStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StrRawness"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhichArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::CompileError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format_args::FormatIfArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format_args::UncheckedFormatArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format_args::UncheckedFormatArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format_args::WriteArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format_str::errors::ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::Formatting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::IsAlternate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::NumberFormatting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_utils::LitStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_utils::Parentheses"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_utils::ParseBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_utils::StrRawness"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_arg_parsing::ExprArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_arg_parsing::ExprArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: spanned::Spans"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1

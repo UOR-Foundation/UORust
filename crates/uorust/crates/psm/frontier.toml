@@ -1,0 +1,62 @@
+# The psm register (written by `uorust crate psm@0.1.32`; do not edit): every body of
+# psm's MIR at psm 0.1.32, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 14
+translated = 1
+residue = 13
+
+[module.crate]
+bodies = 14
+translated = 1
+residue = 13
+
+[embedding]
+bodies = 14
+embedded = 14
+evaluable = 14
+blocked = 0
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: StackDirection::new: psm's MIR stops at mir::TerminatorKind::Call: rust_psm_stack_direction"
+bodies = 2
+
+[[cause]]
+cause = 'mir::Ty: unsafe extern "sysv64" fn'
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: StackDirection::Ascending::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: StackDirection::Descending::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rust_psm_stack_direction"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rust_psm_stack_pointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StackDirection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

@@ -1,0 +1,648 @@
+[[fn]]
+path = "crossterm::QUERY"
+kappa = "e85610cde54050165e76cf979a35dd092aac01817f7316dd34889e349dc64320"
+embedded = "5f02ff45ee2b4f5a5a4089b2efb87fb6c8b202be61d7af25919518f8536df788"
+status = "translated"
+digest = "b66c882a3353bf52f1cb9e5134f404a616029a7464cbf481cba2c52f2ebddfcd"
+
+[[fn]]
+path = "crossterm::file_descriptor::FileDesc::as_fd"
+kappa = "9823150309874b3bc5ea596a11418047b43a4088e32ba34694cd0de97855c5e8"
+embedded = "dde2744195e6ecccf37bb1fd707e3a25539095fb0aeb8f4b87f67222b7c4393a"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "crossterm::file_descriptor::FileDesc::as_raw_fd"
+kappa = "2ffec5c2d2d5585df36fee29d003f7b92e62d7744d8aff6dca4be0bf13933460"
+embedded = "7f0fe759b5343c4f52d1ba49b38d2ff403aa5133913841d008fcda755925c84b"
+status = "residue"
+cause = "mir::Ty: FileDesc<'_>"
+
+[[fn]]
+path = "crossterm::file_descriptor::FileDesc::raw_fd"
+kappa = "8b129ba1425793709add4f230e575b9b2870d427b3c5305877ffb54c007c2282"
+embedded = "e1480a5c9c950e62abf4207e7f9283825fd074df4c42f022f5201c53e56cf271"
+status = "residue"
+cause = "mir::Ty: FileDesc<'_>"
+
+[[fn]]
+path = "crossterm::file_descriptor::FileDesc::read"
+kappa = "52348b7d7d33ee178acbce1ffba760d6b95d16695e4d5d74d662c6749642bd26"
+embedded = "56ba88d1120c2ec0d5856ba7cafec7d3b1e1e029de9504e64d7be3acad61e9bc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::get_terminal_attr"
+kappa = "d3fc5f63f8b902c036ce9f648f26a230ed691825a108fee662674bab0760539d"
+embedded = "9a626f129ea14f2f9f2cc14c4d38191fe0c1a871b5cd90e6af8c0b224ef97ab0"
+status = "residue"
+cause = "mir::Ty: rustix::termios::Termios"
+
+[[fn]]
+path = "crossterm::query_keyboard_enhancement_flags"
+kappa = "1d0b924a426049dfc027581b939bf5040c9a6990a99f9ffeaa8123928f20aa3d"
+embedded = "43cf85cc9808cc0fc51231c06611c00805b17d26f970e3a8423f2b63ad5c6f0c"
+status = "residue"
+cause = "mir::Ty: event::KeyboardEnhancementFlags"
+
+[[fn]]
+path = "crossterm::query_keyboard_enhancement_flags_nonraw"
+kappa = "fe961c63b16027b99ad92af450d32a7622535baab98b929d9fef11451a3b1a08"
+embedded = "b47e674368d3de73f0c6a74867705bb17fcfa7f238a3227177b89c0a77a31608"
+status = "residue"
+cause = "mir::Ty: event::KeyboardEnhancementFlags"
+
+[[fn]]
+path = "crossterm::query_keyboard_enhancement_flags_raw"
+kappa = "9f05231e104e9f58377deac6fa96244095ac0f4a8a24310575fefa904335dcff"
+embedded = "fa79a28e374a28cf9d3ed82de413803a3017cce6fbfa937b9e5fc2f9aa859192"
+status = "residue"
+cause = "mir::Ty: event::KeyboardEnhancementFlags"
+
+[[fn]]
+path = "crossterm::set_terminal_attr"
+kappa = "f58180344e51ae0b3bff9be2bcee112f6b9ca5e01944becf6353ac16ed4b299b"
+embedded = "dcb97255cd28d784d8921e0f150afefe45a291c6e4b0f9d9e0caf3b3f351913a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::supports_keyboard_enhancement"
+kappa = "9d79a7f764c58971ee7ae945e6a24541b353ee8aca3e8ccd6945850717612fe9"
+embedded = "5ce43f747e0068373d8624e47d50924bfc804a215a44170c14ad49be38cffa47"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/macros.rs:133:11: 133:42>::fmt"
+kappa = "eecf5229637a6fbaaccd5b36b633a7b1d81015dbe8bbbb02b5849caef1b49033"
+embedded = "2230ac9e350d7777116bc169e4c70c7c0f29ea1744c8862dde3b689ae99bb3e5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/macros.rs:133:11: 133:42>::fmt#2"
+kappa = "db110252fa135720b8926b1566c5029ca726d24cb57785bc69a59b6888ed7345"
+embedded = "9f5959a8f53e5c0bfc3a812075de728419264ae60dfbac408f3ad6479874695c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/macros.rs:133:11: 133:42>::fmt#3"
+kappa = "1a8f885fb145e1f8cbf3f2130d23454a05ccb627eefece7aff77fbdd82504b26"
+embedded = "ed3d64d550cd24a013b765f172eb2255ef7425d8a83662df8389d5d96a8a24a1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/macros.rs:133:11: 133:42>::fmt#4"
+kappa = "6cae022a718bd9213c13fc051afae89ec2a8340636e870c90cdc20eec66a81c4"
+embedded = "5d82f1203ccaebf212faf1a05853336dd3c311e30fa41c860bac83d690608ffc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:140:10: 140:15>::fmt"
+kappa = "ddbf0b6f46e1b0fed3d80ca7564f7c5ef501e61dbf41296c688b2edb17237156"
+embedded = "19af472790d7cff10e7e13952f4303a3e2a7026d18f296c0cbd9392d05ebf0d0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:158:10: 158:15>::fmt"
+kappa = "5c3f7af457b0d9e55fdeff9dcf4e1b2934273b927ba0a2a78f887fafa2bcb90b"
+embedded = "153b3f11509954a62809b4ff734f833a7bd50314118a375ccf5b264ea22aff06"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:158:17: 158:22>::clone"
+kappa = "ca76d9832b727639ffd8f683772abd4b2ffea6f2d535c7bbb5b5457d51107686"
+embedded = "78a87763796472c616f69289bafc7275c8926a3552532542463f6f3af71443f6"
+status = "residue"
+cause = "mir::Ty: terminal::DisableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:158:30: 158:39>::eq"
+kappa = "acee40c95f3f80a4a88e8f020c9747a2f730054de2830c786ce711ba5e6bd54c"
+embedded = "df94ca3006c52a3908c2b4105298321148d0888797e242f7817ef3ce0fc41b21"
+status = "residue"
+cause = "mir::Ty: DisableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:158:41: 158:43>::assert_fields_are_eq"
+kappa = "c3c00cc1ffbcbbb75d4acada7b4ad268ca217e88f52ef8777cc9d072c4b98539"
+embedded = "fd7a094953d02b3283969186608430a6c1651ba5b2ec135e1c2c144cbec044c6"
+status = "residue"
+cause = "mir::Ty: DisableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:177:10: 177:15>::fmt"
+kappa = "949a65b8a209b6da8f4814343e3893173bdeb6a73c2529470e34c5c18f13086d"
+embedded = "827e9b700c24929a63fdb9f222ffe7d9ef0d95986276de3be1aff776039d4eaf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:177:17: 177:22>::clone"
+kappa = "9cae4cc9466ba1fc6b9304ed6dc48e42b6599e65c62f0e713f9a05cafb26ee26"
+embedded = "44e43eb89d9e8e255a2f9875939d7598a634d5c0247cd946d94e6529c7c48572"
+status = "residue"
+cause = "mir::Ty: terminal::EnableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:177:30: 177:39>::eq"
+kappa = "990606010454f06c41e2976686a1127e74bb33013e75505f0a07c1952b7dd8f5"
+embedded = "3542e62b6ec35e62f8699ce56997d60ece388e7e6b23518604c8bd752e084dcc"
+status = "residue"
+cause = "mir::Ty: EnableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:177:41: 177:43>::assert_fields_are_eq"
+kappa = "f16d3c3cbe7f0d2c57fc283dacee75a3a830f4e6454fa2d6590b2678ffe84a77"
+embedded = "58de4930fb5124868ded556ffc4bbf540e9bcba1498d7adce4cf7d6e74024358"
+status = "residue"
+cause = "mir::Ty: EnableLineWrap"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:217:10: 217:15>::fmt"
+kappa = "53ca64c1bb737fd56272bcce6c578eb26fba90d232d9a1c4aa7795ab75ea7b9e"
+embedded = "d09369f653d7430781621a5fe27b8af1e88b9ea0b0ad49a0855b521765362215"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:217:17: 217:22>::clone"
+kappa = "b740af65886402265531c4c59756216811aea649d7eb82bc0ad782f93806599f"
+embedded = "2199b73efc6a58230af34b4cff0a9ad3ace1f8d7930732b39f62027c70702302"
+status = "residue"
+cause = "mir::Ty: terminal::EnterAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:217:30: 217:39>::eq"
+kappa = "ded394349968bcd0353218690953f491f6c83ba1fea768c9919a64abcb4e1ec0"
+embedded = "c4924306a57927a52f15cbc75e66cf48316b09ea0fdc7e5eec67c948a5730090"
+status = "residue"
+cause = "mir::Ty: EnterAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:217:41: 217:43>::assert_fields_are_eq"
+kappa = "cb51536c79c58a53de7e93b2f9871142e23392cb61a1feac928af39fd641ed2e"
+embedded = "1179ad9aac64dd92d1d431873fc19969ffa695016da4775fbde95aa1d4b3c8cf"
+status = "residue"
+cause = "mir::Ty: EnterAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:255:10: 255:15>::fmt"
+kappa = "f51716b213638cfc419bfe6b9a224f3886aae6e19c1146fb2f26a52897cd3e8a"
+embedded = "6e972cc38db51636458c4b60cef4c1a8a6e3a47743cd717032f8969cf0c9064b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:255:17: 255:22>::clone"
+kappa = "0359038cc7521eea5f41970cc2adbe50805f112d67c31e27fbefc13e22b18907"
+embedded = "4ae7eee5128203e5536d15b24842fbc3824bbba141c73189d99474d9ef94bdbf"
+status = "residue"
+cause = "mir::Ty: terminal::LeaveAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:255:30: 255:39>::eq"
+kappa = "0c707ce2a6898ee499236504947231ac9802574c87bc2ed94a6397ffc87e1b07"
+embedded = "2b290ce8990c0bc8fb4fd9a9ec71a163abc802832c228adb4d9d101347ef9ee0"
+status = "residue"
+cause = "mir::Ty: LeaveAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:255:41: 255:43>::assert_fields_are_eq"
+kappa = "6eb02807caedc06b1f32e8ae0f21a0f7849179d26343d1779f7464c31127c0cd"
+embedded = "921b28d169c7826fa3fb4c2033d72576ffe03ea69eb7c75fe427c69e361ef93c"
+status = "residue"
+cause = "mir::Ty: LeaveAlternateScreen"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:16: 273:21>::clone"
+kappa = "ec3185f5db42431d339404bf463c3cc83cfe3d344aeb7192bf42d15c012256f1"
+embedded = "92180b6e3d34bac2441582181869ac0439d572617426f8bca1b8e03ad83cd7e0"
+status = "residue"
+cause = "mir::Ty: terminal::ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:23: 273:28>::fmt"
+kappa = "2adfbd6fdb182fb84f197b542ec204c9c4b05425bb8e2d4cc447222b1c2c1d4f"
+embedded = "b0185349c3b26186ec9e09540a8620aa61db10e40adf3edfbb71097e6a114335"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:30: 273:39>::eq"
+kappa = "0f26e29f6ef162465ac5672a98d46cecdb86ef7fc1b09731de6450580cd7a559"
+embedded = "6735399f1c032277aa3de805cb34c06243fb329abc4f6dd2e7d2af8bfbb01742"
+status = "residue"
+cause = "mir::Ty: ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:41: 273:43>::assert_fields_are_eq"
+kappa = "3afc73c622fd779605498437d56ebcce02d9d85603b9640d8ea3077cef7acaa8"
+embedded = "cc986f41599206f523efc7f874a9d885c179ceb82eb9e99d316169b7c8dff001"
+status = "residue"
+cause = "mir::Ty: ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:45: 273:48>::cmp"
+kappa = "27e92cfad02aca0dabdab433603b8c278a47016e719f891262126b1dd3269fa4"
+embedded = "536d34e7e684a6c281acca7a6ed0253a020188e4b70ddde48715c403a33a42b0"
+status = "residue"
+cause = "mir::Ty: ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:50: 273:60>::partial_cmp"
+kappa = "571f3e74bfdb5cc89fe0d078cfc9d7f323db92f2702127a25539ae7adb11909b"
+embedded = "3aedbb05883a2f5fc7cee8bedeb7c481e4a56c695485e2d71d1e3bfc9096badd"
+status = "residue"
+cause = "mir::Ty: ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:273:62: 273:66>::hash"
+kappa = "dd97f6ad8f37fbaf143f079dc360700c40486010077e43cc662294ac6352791b"
+embedded = "8f8337a759118aefcd837a20e0312ad7721f16661a25546e3940ccf2a85c983b"
+status = "residue"
+cause = "mir::Ty: ClearType"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:294:10: 294:15>::fmt"
+kappa = "9717403ee1e63cc172b04cb1cbf3cf5552f5ac867c94c810adf20b2185fabc79"
+embedded = "961ba29d70cc206d04f252ca6a209943ff21be3aca912e7e930f98f9ec3bc6f1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:294:17: 294:22>::clone"
+kappa = "c49218a3721742453befd64e7fc1dfc50bdbe69c158ba74d6547f8fb2db74789"
+embedded = "14a91d78bf9408f350cca0982450ccf1a9001299abf4ad57240667dea5631f33"
+status = "residue"
+cause = "mir::Ty: terminal::ScrollUp"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:294:30: 294:39>::eq"
+kappa = "7f6e24b4695dff00e044fe615a09ce60575b360e3f201bdf4f800c48f54e49dd"
+embedded = "679acab6aaef2efbad362c3353361a64a56c0af6a197ac5d1b1457bde3c27215"
+status = "residue"
+cause = "mir::Ty: ScrollUp"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:294:41: 294:43>::assert_fields_are_eq"
+kappa = "a9ede3cc62b6567a2b4f981c1f519a7701f0c1125d25f98640ca55d5047446e5"
+embedded = "cdba186354f6a89798a88a0aae3a31f941e64638f33818b727aae9f6dc9535aa"
+status = "residue"
+cause = "mir::Ty: ScrollUp"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:316:10: 316:15>::fmt"
+kappa = "2d6489e3b4a34eb04987ae05761e5afa83ac24deff657f6553a2b80f828a8257"
+embedded = "eaedcf4c139c6886738ddb1be2c11fdb86aec755d2a409ca800a19022ff9f78d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:316:17: 316:22>::clone"
+kappa = "22bb486bbd7733aa3606ae9bb27d64f3320b662f2209308fa85258d586399950"
+embedded = "802dff5881552f48d51efef834b26d0dc1faddf5eb5ebfa398efa54ff86eb825"
+status = "residue"
+cause = "mir::Ty: terminal::ScrollDown"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:316:30: 316:39>::eq"
+kappa = "ff139b63230c107693fd35ac359eb1ba7197b084149fa09a109c7124ae90e740"
+embedded = "e1de12fca6ce93d87a6ec6126852e90bab38215858c0d76f0bc385195cfc7e9a"
+status = "residue"
+cause = "mir::Ty: ScrollDown"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:316:41: 316:43>::assert_fields_are_eq"
+kappa = "0e4c7b21862effaee038f5b8df7b395352449dd6c45814f5bf3a6c162582351a"
+embedded = "94ae46e8b4d1477677b6f025b167b43930dcc3c91abfd952453703339360829e"
+status = "residue"
+cause = "mir::Ty: ScrollDown"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:340:10: 340:15>::fmt"
+kappa = "907eb0bb0893566dba16283ee0bcacbb85c5320b5ccfb7a6d81055a0025d5ca1"
+embedded = "544caf389494f220d47f5bbcc3686780e2b55eafd06b1a96fd9f306151977e00"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:340:17: 340:22>::clone"
+kappa = "0b1d38d7d4509de456017fc23c86f9104280af0d76580e118372fd7c234436b5"
+embedded = "5b6e7801ad1f55a7c53e595c94c8f1ebd3f5ed8913db0e36639531ab5ce0bb9b"
+status = "residue"
+cause = "mir::Ty: terminal::Clear"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:340:30: 340:39>::eq"
+kappa = "43a44877dc50e4863ac9f56ba5e64966a4d30b0bc31ba46049b60e1bbe6fcb70"
+embedded = "b891da70b9d14a3cccdad4bfaae03617de455180dc4912c0ffaa2bbbc6d6abf5"
+status = "residue"
+cause = "mir::Ty: Clear"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:340:41: 340:43>::assert_fields_are_eq"
+kappa = "6557f5a65693dcbc92f78274a8a6b2c53045aa7e5ae475f5252e898b4546ff19"
+embedded = "d39892f3c01692a8603135b81a55ffd3463b11928638e3f7957de23b0004ce5b"
+status = "residue"
+cause = "mir::Ty: Clear"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:366:10: 366:15>::fmt"
+kappa = "de4ff681b7e9e21482e2ade11f873f8015d4a19a248686ebda828d2cc0716025"
+embedded = "e6d96638e4b0f71f8d7ae53d81d4e68ef5c1078d9131c5d75e4daaf4ede48a37"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:366:17: 366:22>::clone"
+kappa = "9941128437e53d1b4b453328e2db1bc35ec24af0ec554962e6c2f6c5e666bca4"
+embedded = "7a3a8c634beab5ba318eeff684af00b4e6530afc4a4d59734096b6d94dc27e98"
+status = "residue"
+cause = "mir::Ty: terminal::SetSize"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:366:30: 366:39>::eq"
+kappa = "c3f6f781711375582806551c76c3e524ec9882b947cfdb73c4d1cf6dbc601861"
+embedded = "9d9cd52826c39f77b5f04c866cbfe205f10a6404cb75d3c4302075e13bbedb35"
+status = "residue"
+cause = "mir::Ty: SetSize"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:366:41: 366:43>::assert_fields_are_eq"
+kappa = "aff7a6055358ea39d59d19229e1589828c094cb904109ddf71f78aa705e51ec2"
+embedded = "2ceb7b877f0e2acf2cc6ef6bc96e5be9350beabf1f6cb89f6660ceb54a00e667"
+status = "residue"
+cause = "mir::Ty: SetSize"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:385:10: 385:15>::fmt"
+kappa = "2ae34b3c3c2a2604fd8af611b49f70ca234b714611e6040cc273566c9e15341d"
+at = "T=u32"
+embedded = "53de84b62f91ff9f30aa7d16f0a2cc1b46fe1701f0fe6f19c0d9e3c43edb8d74"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:385:17: 385:22>::clone"
+kappa = "5849852fe15875900bd108b19253b8164810e5ff32a3342fc35727501204083a"
+at = "T=u32"
+embedded = "50c6904f18d0d0f5db41cecdcddd865a67306d17ea5c8416f5c70a00a7d47391"
+status = "residue"
+cause = "mir::Ty: terminal::SetTitle<u32>"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:385:30: 385:39>::eq"
+kappa = "f78f79964243c18d47a95abbdd8a872b418aeed301749c8cc92129dd97b98b2c"
+at = "T=u32"
+embedded = "5fa116213a3a68bac98a335c5a0ff1bd739734830a451c52f3bf21dbb504daa9"
+status = "residue"
+cause = "mir::Ty: SetTitle<u32>"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:385:41: 385:43>::assert_fields_are_eq"
+kappa = "6b4e30461432851b2d0f87a2ebb9008e4b2c43d310f39baea6012c777afd9faa"
+embedded = "ceaf1cf09358325e106aa7f2b859147a1ff2da966860e97fecbd5c3556262909"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:432:10: 432:15>::fmt"
+kappa = "efc42b2f78a803f15047d56cc76088545ca1a3a878d1798f54f9229a32341336"
+embedded = "7e43a4c8e1dd39b992cd80e7eb674b6292ec5543c634b3d4d6d5f416eb9748a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:432:17: 432:22>::clone"
+kappa = "76bd125ca64426dfc98852713ae8ad40519e49f98b908d44ac0ada25a9877608"
+embedded = "02efb9231617226079c0802516c38c0702709f99d73949b764e224722e6f57ec"
+status = "residue"
+cause = "mir::Ty: terminal::BeginSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:432:30: 432:39>::eq"
+kappa = "f28f8bfd22588186531c9c6a6f25b520e8a17ab713d9fe38b933b1f9bdb4f405"
+embedded = "69072a4d53bf6518a61c1b0d20d9940650830bc29d139ed3bfeb9fcd7daeb6c7"
+status = "residue"
+cause = "mir::Ty: BeginSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:432:41: 432:43>::assert_fields_are_eq"
+kappa = "e04bc9cddd01c72971141d06152b82e37c2aa122a84adfc76be77fdea64cc9d7"
+embedded = "d6bf22ad7ed93493fdadfb2dba4efa4fa3287d68beac0de1770113956f75e989"
+status = "residue"
+cause = "mir::Ty: BeginSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:485:10: 485:15>::fmt"
+kappa = "b4e5ea67c8dd735327d64581690f86e7c54ab569cd55ef7af946d7c06513d0bd"
+embedded = "505e9ca8e24f9ab42db16950059ac602528ce2ffc5166e2154668940d986e7b5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:485:17: 485:22>::clone"
+kappa = "d82f011b824a419a0436fac07ac2d430c8ac3045ab620e0db306de0dcdb37e43"
+embedded = "5e8741349f5b440a301c594f9c6d8d81a12e708aab83686b601becdb2c118bba"
+status = "residue"
+cause = "mir::Ty: terminal::EndSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:485:30: 485:39>::eq"
+kappa = "09e8bf505e9a27f04452e9ce9f5e33355e8f5d72d2a1e2d746d6e6c692daac6d"
+embedded = "b8d5be9c743c5b9c56a47b1daa7c321e7e73169e58acaa8d8f866aba46cfecde"
+status = "residue"
+cause = "mir::Ty: EndSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::<impl at src/terminal.rs:485:41: 485:43>::assert_fields_are_eq"
+kappa = "29a9af0bbd4213bc56d30e16f003e764cec480b46cfb5016a6836208609f400e"
+embedded = "0377a89920fe7423ffdac7748b777e43cd519c7f24886e78a547c658644a139e"
+status = "residue"
+cause = "mir::Ty: EndSynchronizedUpdate"
+
+[[fn]]
+path = "crossterm::terminal::BeginSynchronizedUpdate::write_ansi"
+kappa = "e789e4da23197b3c18304372df6cc8d32cc92f4778baa2a0aef450dc9261ae42"
+embedded = "5629b01cb75f982378d4485cde45d2a3a6967f9a9798cc2ba5fe8cd11c242ae4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::Clear::write_ansi"
+kappa = "9d7dddcf7c80acc794635e6117051c912f20c5f2a71da2ca36ae027eef4d5d1d"
+embedded = "ffe369b7d1612f440206bcbb4f591615d482c18e3cec9c2259040883d72dad80"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::DisableLineWrap::write_ansi"
+kappa = "d55c190095447655f09818194a109be5e5c4424f97670a989e6a6d12681b4392"
+embedded = "dae3f1197ab8d064232088d184e78f610b36f83563a88fdc5dceb81a9161789d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::EnableLineWrap::write_ansi"
+kappa = "ba41dc515f542c7df1e715723108ce607eea9da5e0b84e15c17052da529dad9b"
+embedded = "b4f88129ac2e3808d88d6dccb67b3984eb3099a80b27f434c5bd36ac8eecd68c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::EndSynchronizedUpdate::write_ansi"
+kappa = "e027fad21edd079d206d2d054b5258e108df3e7185dd8bcbb314847b5ccb5613"
+embedded = "66c7cebcb17dbf4625a5deb5f484ef3416620ee57a7f558d4e6915b9369364ff"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::EnterAlternateScreen::write_ansi"
+kappa = "d54a2b0601ac9f6bb2a88c494ead8f8e8ef80dd915b5c0ba1063cb7fcd2e3229"
+embedded = "9568469d08b38641690040fec2fb7d386c6691a91b86297348e4a4de6804daf8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::LeaveAlternateScreen::write_ansi"
+kappa = "4b64df38fa16fa18991b7e56133679278d365a3861791a8884b827c92edb7bb5"
+embedded = "9c0718cd3e205a159f52241a22cc66772bf9bc84f2dda90c1da222bab910d5cc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::ScrollDown::write_ansi"
+kappa = "8f78177b70059618798241f83be2b3a46be245b544bb0203ebbd5d2a82d70680"
+embedded = "3a4f46e262d4fa2f7a66abfa5f4b8060bd41abb3993502073f31ed3ef8f98984"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::ScrollUp::write_ansi"
+kappa = "ea8dbc8c2a46f460937210d236ce8b25135fcd33950c7b7beea3e271824129db"
+embedded = "bb55624eabbbaead2302a488e2c3847b1ff6762b941d24d05914d4201eb250c4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::SetSize::write_ansi"
+kappa = "23c89609eaecbbd863e82fe9c11a93191ebdd37d14e8bacdcf054cf6df0cc181"
+embedded = "6db21d9e6c89f944e70394842429bb371ae9777e8f7b7d31556c784b22d932fb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::SetTitle::write_ansi"
+kappa = "188b2f159ccf348598dbc93c387699df08cc2f48645454df690066e93188ae25"
+at = "T=u32"
+embedded = "aca0e35cfbe552c1fd234595069f953218ab03f9861162d42a0f210940c389cf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crossterm::terminal::disable_raw_mode"
+kappa = "26dec4e63ac5b0f14eb78e4f6849097de72a90e7389b4e3d60d0cc074115c57a"
+embedded = "642aa54294d53ffee03d66391a07d900eee1aba6c1f8634a5782fa0eb1b991a5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::enable_raw_mode"
+kappa = "e8b602dd13d5dd36fc36d4e3c6b607cbeba0ad0c2c35134a6b470d131d886547"
+embedded = "ca8cce5ca64e3943eed0b923931f13e469269eb1acf592f39e5e7567251661e8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::is_raw_mode_enabled"
+kappa = "65a3db311d10eb0d2ab91ac8ec1d5a456b48ed803d8c19dd81ec9a0c5e467b80"
+embedded = "511df3d6ac8f8c8958abb0bf20afc97df585f85038f52341e8114663e008d5a4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::size"
+kappa = "f3c198e3eb1dd6833d1bb35b0b5a150cc0dff8f10b0ce29384f005278ce39cfb"
+embedded = "cbc11743442476badffa7e472308ca71c35e44fadd9345d234de65549e28244b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::WindowSize::from"
+kappa = "e544de8eb73573280617a2ef6c467a59f7f3e23159c44aa98c437d9b501849e8"
+embedded = "dafac10e296dd497b8c388da9b180d5c7986db9ccb739f4b00a28fdc9310614b"
+status = "residue"
+cause = "mir::Ty: terminal::WindowSize"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::disable_raw_mode"
+kappa = "c408134158e0d7927ab906f9e15b3e427455a82722b7974b4304e5bdce824198"
+embedded = "eba1d81b91832761ee3f2a21c00d4132cfcd57d33559fbe68c197bb44979c467"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::enable_raw_mode"
+kappa = "722ae723e65bd078bf0ff43f789cd62ce5ede9231d2f71ab3b751ce88ddbf78f"
+embedded = "572b6742913f4eac4155cac26255efe968386ef33c442b9eb03c5bdfc3d76790"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::is_raw_mode_enabled"
+kappa = "25ce307b360d0c641ab9918d2784cde1fe2f9d430b79a1700a9867047526ce2d"
+embedded = "ce082dca4c3378afc7cf9cd8e1cc7abe421832b018991573819da92f62e0b3be"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc60: &parking_lot::lock_api::Mutex<parking_lot::RawMutex, Option<Termios>>}"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::size"
+kappa = "569b618e51e4c8d52535fb42fefa59f990666cc7d484772cc74884920408023f"
+embedded = "e743e5ed2652c68b4fd49b80e9b24770fd548ccf7a0361ae3e2478b6fd5f1c17"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "crossterm::terminal::sys::unix::window_size"
+kappa = "797e88ebe470db549e1cad184d113f6cf3221adf5d87d5b2b1d8c0d1951e34a7"
+embedded = "ad556c96ec2c1c0615ffae68d1186dd9dd6c6371e58ab3640a1628bcafe8b03c"
+status = "residue"
+cause = "mir::Ty: terminal::WindowSize"
+
+[[fn]]
+path = "crossterm::terminal::window_size"
+kappa = "f362dde13329c3eafcd7c6cb4910e19999cf7cdf402bc0175c9746809642d585"
+embedded = "1dccfe511b8233e41b78a5f57a6e0b3aec37a8c66fe67f4b19b6ce1e781033c0"
+status = "residue"
+cause = "mir::Ty: terminal::WindowSize"
+
+[[fn]]
+path = "crossterm::tput_size"
+kappa = "05f0e3cc81dc8b90b365a6f5154bd1e70ab5e4a27f265cb973622395fc3299c5"
+embedded = "b59b233ff27edfa31b51bb9dd88fd012674077a231e67e42af9fd38453cee582"
+status = "residue"
+cause = "mir::TerminatorKind::Call: terminal::sys::unix::tput_value: crossterm's MIR stops at type outside the lift: std::process::Command"
+
+[[fn]]
+path = "crossterm::tput_value"
+kappa = "476b06d8d01c72ede84594f8265878256fd150924bdb7a195df39b228967107a"
+embedded = "2f1bcd3187e4955edf526b83b72e7097de88c19c0ca7ca7708166fe0c5791aa9"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "crossterm::tty_fd"
+kappa = "37bef423b9e1befdd6c0b6fcbc9581486014833be968fca3ccddb36ec883848a"
+embedded = "3b684a51ea8cb179f0dd73041091839bb7ba4ac74e2614f2b28baeaddf4d44b4"
+status = "residue"
+cause = "mir::Ty: terminal::sys::file_descriptor::FileDesc<'_>"
+

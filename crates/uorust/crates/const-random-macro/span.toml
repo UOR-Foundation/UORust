@@ -1,0 +1,99 @@
+[[fn]]
+path = "const-random-macro::gen_random"
+kappa = "549c5db318f22afaac5e34490f0394e9714b33c2549604cf62109f24a6239273"
+at = "T=u32"
+embedded = "6a6fbe5cad6ec694420e5cfa82996a657f49be109977a9fd327ba0d30e7924f8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:70:1: 70:20>::random: const-random-macro's MIR stops at mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::gen_random_bytes"
+kappa = "16cbab16fff3a9b3a9c5a1e85e79164596bf20f8fdbfbebf491576b9e27440f6"
+embedded = "7ddc680507a882e1041d962d87b21b0640a77eb65e19a6bf0dcc2454042974ef"
+status = "residue"
+cause = "mir::Ty: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::get_seed"
+kappa = "5e5a0592f4569388a658cfbebe383b89814cfe61bb9b3833bdde445e94effbf8"
+embedded = "48e44e96c83f4ee6dfbcfbb320ae32ecf7ac8b4070be9d8147bf43a0fec386c1"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc6: &OnceBox<Vec<u8>>}"
+
+[[fn]]
+path = "const-random-macro::hash_stuff"
+kappa = "990c42a23edb691f81604183230ecd890cda197557f0980dd2bb574dbc52dda9"
+embedded = "56618c33ebc0858846a0fe00ed89423b268bb9b8b0add188c4555422789a27c8"
+status = "residue"
+cause = "mir::Ty: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::i128::random"
+kappa = "1e4e5b8ab96eba4ed87e41112256ce86d89cc7e12d056df5573eac1552625021"
+embedded = "179d3d5bc349824b1569af9aadd4e6bdbd2d714062e30168a887dc69751e26cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:50:1: 50:21>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::i16::random"
+kappa = "a7c34f25e16eb656bafa5aba8ba8e8d475f447a14d1f0a5c41896a8761ebccf5"
+embedded = "f637af07eea273884c21653189cbf6bf83c724605fdcb618bfa96ca95fe42809"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:94:1: 94:20>::random: const-random-macro's MIR stops at mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::i32::random"
+kappa = "aee689841410e9765c53e5bf03bf2cd23539931db3ce196d56d62dfaea36ecf1"
+embedded = "153a0ced3e46ea95a9dff8b289c710a8634e1f5696b8c3e6adc5d6361307026c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:94:1: 94:20>::random: const-random-macro's MIR stops at mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::i64::random"
+kappa = "7df75611162da5314288da57e67343d9cd031af3f17a353d22ffa96ffefef414"
+embedded = "706d9c72393fd4f40e2ed8541ac6085be1cf71958b4241bd5db5586c07aa5a86"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::i8::random"
+kappa = "e045d54268fbf7ab76305568f53e603c0e83e9abdf17bc0d332aafcee16b5bda"
+embedded = "7b6e94ee203daf436a0356530842e8564e696ed6a37604a7d14aeb36f4eedae1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:94:1: 94:20>::random: const-random-macro's MIR stops at mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::u128::random"
+kappa = "2920df3f73df19256c28a53d4778f0baa4ee1ecc9e7b19b8f98baead0434bd5b"
+embedded = "4ff7fdc28c746dbf7087f8c5c195ea73e72faeea2183d0d3b31d1f64359f30b2"
+status = "residue"
+cause = "mir::Ty: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::u16::random"
+kappa = "701ffacf4047358fafb4b6565262975cca349b9f319c7616310381aa177ae215"
+embedded = "b4e6cf37dc7e64f64560dcf851de10ffa1dae749dea5ad6d215a0d7773a2e3c9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::u32::random"
+kappa = "61e8b1509c7b06f359b4eb8a175f8d9aeb356fbb3b8d36a61e716769aca756a8"
+embedded = "4ffbf996b42cb7237af025abdd2ef641f40a1859e933363dc6482f9d1e0c33df"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::u64::random"
+kappa = "9ed21c18ab9ad26b24ad59596b1f42a7180f4ac5d35cb8f0310ea873d5bfbded"
+embedded = "313e3c8e3736ed7b3dde9b433d5b082f0ca7a95a6635b8f4bd8752e61bb6b546"
+status = "residue"
+cause = "mir::Ty: tiny_keccak::Shake"
+
+[[fn]]
+path = "const-random-macro::span::u8::random"
+kappa = "6f7fe0fca6d0d95aa9cd83d1da79f2b4e96df9bf7122b348ac7b59fcbe6dcdeb"
+embedded = "567bbfe704e280f6f4535dcea6e330dfbf40d1cf777cd007baed33bae66915c3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: span::<impl at src/span.rs:42:1: 42:20>::random: const-random-macro's MIR stops at type outside the lift: tiny_keccak::Shake"
+

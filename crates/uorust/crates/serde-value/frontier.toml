@@ -1,0 +1,132 @@
+# The serde-value register (written by `uorust crate serde-value@0.7.0`; do not edit): every body of
+# serde-value's MIR at serde-value 0.7.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 166
+translated = 1
+residue = 165
+
+[module.crate]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.de]
+bodies = 108
+translated = 1
+residue = 107
+
+[module.ser]
+bodies = 49
+translated = 0
+residue = 49
+
+[embedding]
+bodies = 166
+embedded = 166
+evaluable = 164
+blocked = 2
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::DeserializerError"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: ser::SerializerError"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: ValueDeserializer<u32>"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: ValueVisitor"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VariantDeserializer<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::ValueDeserializer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serde::de::Unexpected<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Value::discriminant: serde-value's MIR stops at mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SerializerError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::Unexpected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::ValueVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::VariantDeserializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeSeq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeStructVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeTuple"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeTupleStruct"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeTupleVariant"
+bodies = 1

@@ -1,0 +1,426 @@
+[[fn]]
+path = "jni::is_unqualified"
+kappa = "8cb0962a9e6536c324f1e6ecf11c38335fd7ec79c1f500ce25f864979e062560"
+embedded = "9ebdf505b71a0bcba501736055400e33fa099b5fd4297f633b0e443ebffe2439"
+status = "translated"
+digest = "5e72be6a716bdd5e1b6c1f091edf0167610c4646b8745d5941da54726d8f6bfb"
+
+[[fn]]
+path = "jni::parse_args"
+kappa = "4c456c8801fe112afd82253cfeb2355c4f0728047830ced099d89d4591c8a141"
+at = "S=u32"
+embedded = "8648293eba723e3d887c89d18e3bfded0958ba3ab2649d6710cf7b633ebe0fea"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::parse_array"
+kappa = "33fa98a9bbec666add67824195530415af89d6350102814d6788758450d2d160"
+at = "S=u32"
+embedded = "84e286f72daeba575ae01d9ee067be30ac7b9de7198377a27440c52d835bcabc"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::parse_field_sig"
+kappa = "1e09d568333bc4960f0a5e607f33bcadb3e22f94e64de08369346187c6ecfe2f"
+at = "S=u32"
+embedded = "d8f72c0131f78464564fb15be87d8593fba8983f71bc9b3753e4db09088bbba2"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::parse_method_sig"
+kappa = "9f36ad1a65a9222657835d755a5ac4b6c888106ab7c0c43005bc87c621977408"
+at = "S=u32"
+embedded = "f75de318fe3141f5ef096c4737f8d1ef8b02032f8087f52e66fce9a0db0a4cf7"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::parse_non_void_primitive"
+kappa = "ddad1d5128ca51df797466613049f2017388f5ede195080df62557f63202f92b"
+at = "S=u32"
+embedded = "f6b8e7d2c53f320fe633ba122fee85a13af58aff110a5e60dc1c76a42b168914"
+status = "residue"
+cause = "mir::Ty: signature::Primitive"
+
+[[fn]]
+path = "jni::parse_non_void_type"
+kappa = "7d5e303c894f1ae4e896b2d66a2bd133b47ffed66d645657358c20c5fe4ae328"
+at = "S=u32"
+embedded = "1c1606acbb005e603f00c8f31d0ddd3fdd39059f9c70d201c220fba42ff7d4b4"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::parse_object"
+kappa = "0258738255b9598447a88a93900d1b36a358cfbf248042187831530cede8e6b0"
+at = "S=u32"
+embedded = "1e99dc1bcdcc50a0b7b90a981b3d84129d8daafeb0a9ef0fc2bc2d14eaf1109a"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::parse_primitive"
+kappa = "f906c01bfa7037ccca5d82827f3d78620eb22cf486d01ba64aa837313fad72c9"
+at = "S=u32"
+embedded = "a531d3e925eb2c9cce632fd2385553b03e48102ffeed1fa574144f3d8507a67a"
+status = "residue"
+cause = "mir::Ty: signature::Primitive"
+
+[[fn]]
+path = "jni::parse_type"
+kappa = "e7e7f136fb6e78cd2ff644d09a5ebbc325afde07e5b7c45858feedcb37e9f198"
+at = "S=u32"
+embedded = "315922feb4494471bd8bbec214e9a645a0877b206123b4a6ef743f5b8a01ac89"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:112:10: 112:12>::assert_fields_are_eq"
+kappa = "5b697094b20c620c9d6d5db45f794683f9c1e68a0d7a53ccdddceb5a56c2533a"
+embedded = "0aa30ca48919c77e0a9aaa025b37ecf141202eb6a3d28f99cd8446e21b7771bd"
+status = "residue"
+cause = "mir::Ty: MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:112:14: 112:23>::eq"
+kappa = "5d9d168430d3490ed6b046725928be2ced8bb359ef1769999528fd741d8218ef"
+embedded = "81f19200cb9e5c4eb2d6355ae24e63f3b0f2b29eb42a3ddbbad09dc339bf3661"
+status = "residue"
+cause = "mir::Ty: MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:112:25: 112:30>::fmt"
+kappa = "b4c245b19b3ca97c6b9c6c1eb011a2d1f2ed1c91fcdac09531a7d53e1cab2b4e"
+embedded = "c9b2b9fb624a885edb141df9b578287c111dd9cf63524127817d23b6fc8e5f9f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:112:32: 112:37>::clone"
+kappa = "500caba5e471bb1888ef76b3508df811ce5117111a951edf6f7ad3316c318ece"
+embedded = "3263c07601e42377d5915644c4ed7b0041929908ca108491337043af0f487988"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:172:10: 172:12>::assert_fields_are_eq"
+kappa = "e8852dc39ee16cd49805592301002da4b613cdcd255db95729a16d1f0ccc08b7"
+embedded = "5bd91ca9baedde7d8fdb0e02698d5d7da4a7ca3ab13c179d58a81d954d5fad9c"
+status = "residue"
+cause = "mir::Ty: FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:172:14: 172:23>::eq"
+kappa = "6c96c7b6cd4dd87536184ca2861782f80d50ff8c33383add57b34fdfa113720c"
+embedded = "c44a9abe567a33a46b425255791de4381865c05b7f65c6a80fe61f5f0456438d"
+status = "residue"
+cause = "mir::Ty: FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:172:25: 172:30>::fmt"
+kappa = "e8aba5b29d88a250e9ccca34b3daf35e5359a9b1d24789c641a805067e8bc08c"
+embedded = "df0c76f5f07c8a28b6f56373fe479cffd3b19dc2d654f954fcd4e1945ab026bb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:172:32: 172:37>::clone"
+kappa = "e7058ac17c65e6377f8e04066eb4fbb10cb2ccc576a4210e29721b6c4166f6ac"
+embedded = "0d31f4830819da308a50a3e8bb3114dc22601aafd61fd14ff52819d5d4a0cdf3"
+status = "residue"
+cause = "mir::Ty: signature::FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:19:10: 19:12>::assert_fields_are_eq"
+kappa = "d518fd537b236b25796e7ec5b63385edc68c918b23a527b5147e8b714b03e484"
+embedded = "245dec534fb5803c28503c7027ac012f0d171f7a5f116988120414611b3c54be"
+status = "residue"
+cause = "mir::Ty: Primitive"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:19:14: 19:23>::eq"
+kappa = "34915fa136ad8cbb208bebb90f8b0105b66d63a3a5826531baac5b6786e27e09"
+embedded = "b4aad0a7c8b5f2b40e0cabc60d4066cbc5f2dfe146b4f04bcb1f99f0abb2f7af"
+status = "residue"
+cause = "mir::Ty: Primitive"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:19:25: 19:30>::fmt"
+kappa = "2e5b1ec90968e718a3e60f6255b546f6c8a6840a6a933884436bbc6e20d7ea5d"
+embedded = "2c335ef4c8f1e694a3a14d8592089ac61969d6ec0c4e2f86172894955a3c32fe"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:19:32: 19:37>::clone"
+kappa = "332a32cd0a301405bbd49da51e9f4123a7a12dcb84ac81daaa051c701a52c26d"
+embedded = "d68be9b8b121d1c0573d1969595827f39ca9510f6af078a8c7069bed1e9e3a06"
+status = "residue"
+cause = "mir::Ty: signature::Primitive"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:212:10: 212:12>::assert_fields_are_eq"
+kappa = "7f14e803228ec7d9c16f3c4dbf8545e259e815dc5353fd71465613f44e6b1853"
+embedded = "2fce888d354e611a4f52cd33d90db4650a1e78ee48f8032f6bbe0a6af1cef4d9"
+status = "residue"
+cause = "mir::Ty: RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:212:14: 212:23>::eq"
+kappa = "6d836beb6b8c7f14c68b7bcbc9a41288f2279288721188d4cde030a2d787884a"
+embedded = "f617d0bf172818578a5618d8638d43102a444bba631ef6d2ebdf9e550de7a6ce"
+status = "residue"
+cause = "mir::Ty: RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:212:25: 212:30>::fmt"
+kappa = "d8e5501624b179a84649c61ef4363c67e92a45d7f2eddf4cfe894fec51325de0"
+embedded = "bc5f438741b32faa56fa00cfd04a5085e994f90f45517fc6397999d1d63f33ff"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:212:32: 212:37>::clone"
+kappa = "ef18ad5a70aa47ac38707549f8c8cbedde55a947ede9fa2ac68ae3f88f3e5b96"
+embedded = "9d07ea02b28dad363126485b90b68e81adc06828a6e5a4a0a030b5fad681661a"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:313:10: 313:12>::assert_fields_are_eq"
+kappa = "b646a08475012d9927dc6f9c90a62e8b985466e8c995c1f7b4b2af2f6cdd6970"
+embedded = "cda5a2594343629a89516292562833fb74d52363404edb73adba5d365b1f2cb5"
+status = "residue"
+cause = "mir::Ty: RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:313:14: 313:23>::eq"
+kappa = "9bccfab5a2fe2fdcc72cee0fc037e8984469d71d2df34775251e34d0feed4858"
+embedded = "a5ec8cfc6fd8d520aaf16a63843b0673ec16bb91ea1093fc6803d402049439b6"
+status = "residue"
+cause = "mir::Ty: RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:313:25: 313:30>::fmt"
+kappa = "86f0c7beae9df0182470176b56ea2de3b9347222de46298654c2ec67ddf781a1"
+embedded = "72b47aa3acf52e664549a459e7c6e0902f0d5b779dc86051a24a62af078715d1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:313:32: 313:37>::clone"
+kappa = "9ff6ec4b7df5aa44a7926695187a98008165cd87d6298651ba2812f7b6540664"
+embedded = "dd93f5e623acf39619687c19dd6065d769c4d3ec81acecfd6777422ca3d6499b"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:58:10: 58:12>::assert_fields_are_eq"
+kappa = "c57cb66922f53935d95a73932e39efddcb599485e2be90b717d19d8b83e93d3e"
+embedded = "7df1aa678d0cd4d153f8935444c193597802f8f01c5599c3ff2f447e4f65e357"
+status = "residue"
+cause = "mir::Ty: JavaType"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:58:14: 58:23>::eq"
+kappa = "78e7783b64fac5fc476f2d13d3f734feb555de26b476b29fb2d9103ff8d63803"
+embedded = "6a17f89742f779683b587c2c8e074d95c05ad41cc18b15b245b2daa796a8ba5c"
+status = "residue"
+cause = "mir::Ty: JavaType"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:58:25: 58:30>::fmt"
+kappa = "5f4bed03a5330baad09ec829a99acb57d4641571ac84c74e32b3a64d023731c8"
+embedded = "62680f1db63ea1c0ca8107230f33a626a1d2861e1974f916fc6d4d4b91a5f59f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::<impl at src/signature.rs:58:32: 58:37>::clone"
+kappa = "91f5b4a1707904e84a58f3a7e8421d58222bed33ff4f72652a923e499524eb78"
+embedded = "cab210f9e5ddad31641bf6c648fe59042f97c4984380e4b8f2c760ed36ec6626"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::FieldSignature::as_ref"
+kappa = "62193978bc1f6c77ad32b25fc150e5e38327262eb3d3c02986d9269af25bb341"
+embedded = "0db8786776854dd75023b027cc64342f78c347f2a23ca4d5b6f9a777544c4025"
+status = "residue"
+cause = "mir::Ty: signature::FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::FieldSignature::from"
+kappa = "64225d3dcb7b8b0bb9967aa78ed63aad6731e72c7788771bb99eda8ce536acec"
+embedded = "fdcedecd4ef71326c1d89cb0edcbc2ed567713772c63ed98eaf460cc2e792ce9"
+status = "residue"
+cause = "mir::Ty: signature::FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::FieldSignature::from_raw_parts"
+kappa = "505bf4303c36c5783442960ba30fb14b6ffa474fa553d00b91a539ff2bdcb7ea"
+embedded = "b968f2e2e392267127e758b066b02c5fd84c74dd3e636d1dff9f7d70f2c9f112"
+status = "residue"
+cause = "mir::Ty: signature::FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::FieldSignature::sig"
+kappa = "5373a751a5f1e9d20dcd3c1344bb4cf8f91a2ba418f401b04bc1f1254a1d8919"
+embedded = "55de596d68cb331c8d9ac85e4fab445a4b403e943ace46660bdd8001dc424789"
+status = "residue"
+cause = "mir::Ty: strings::ffi_str::JNIStr"
+
+[[fn]]
+path = "jni::signature::FieldSignature::ty"
+kappa = "b9bb2d4dea6bfcee2c1cf5cc383a71e83515a2e52acbb10a453e07e23cd69ab2"
+embedded = "dc4353d053e323578e2d444dbebea15e28524fa97ae88fec5e5ee40d4e564a52"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::JavaType::fmt"
+kappa = "d6f25dc29190068dfd3d8de1e7aa991d0048bf79062bf1fd9dc2343bf6b0da23"
+embedded = "8671823d9e42fc639f7629f6522d09ad5912ef8c2b3e29687b11b62f99a48a97"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::JavaType::from_str"
+kappa = "272264d7239a322c317fa0ad1cf94eb645fd812a50fcca909bbb9fc525df10a1"
+embedded = "b8eb6dccfbbc6436aa9beffed16d7d0e5f70f37b690c9820d7dbe88333dd37a5"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::MethodSignature::args"
+kappa = "544a21af31745940b7e9e72177daa90025e3d95de3c5a929174b81ce7ffa6726"
+embedded = "4fe2728a3f6fd875d7bebb778d5b09105f3958e6e2124ddbd9ef623594bdd47e"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::MethodSignature::as_ref"
+kappa = "de11e838b0f4e8cb23a2a6f1fac124c2e550d07f56f047a36057fd901bad9ccc"
+embedded = "59fcc15109c8cde5e29f8c07be55be2957e982757ec13322016a0ee70f4e65f2"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::MethodSignature::from"
+kappa = "a4c3dc826cf5f328b6f4c2836a1525c20355c83c17fa1ff4038f9184e4600db9"
+embedded = "a21a7a3d07fae24c57ad3a1b4cff32d3481bc5fa97c0287674138267e816a5bf"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::MethodSignature::from#2"
+kappa = "13bd9d32de7e1f81ec4e48bc4d111e6c9e4032ee12df748df9aefb3c777b25e8"
+embedded = "546553b75d4d12bbeaaec65af5ad076c0ed3637e4af93abeee76266ba4f1ea57"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::MethodSignature::from_raw_parts"
+kappa = "7db78b09adca51681ab87bff450a02d42b178bb124da33e29b3c85ae80cc2550"
+embedded = "bcb0ccae393145af7cbbcb73309e6ef2b5eed495d677d6fab3c927acde765a5b"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+
+[[fn]]
+path = "jni::signature::MethodSignature::ret"
+kappa = "d7d5c73a9c901e03bd3359d5979e4160c4d4837e38e506c579ef04915e3f9ecb"
+embedded = "421c5eb42238d2554ee365ced36b481c33875371443d58226497521799870d4d"
+status = "residue"
+cause = "mir::Ty: signature::JavaType"
+
+[[fn]]
+path = "jni::signature::MethodSignature::sig"
+kappa = "c4b98980adc79aefeac6b93809c85c54860d7457fdab2faeff3ad6bfb6569994"
+embedded = "4b40de1ade4e5106cb8436928277ddc60d92201bf00ca6cd748ccda19a50adc2"
+status = "residue"
+cause = "mir::Ty: strings::ffi_str::JNIStr"
+
+[[fn]]
+path = "jni::signature::Primitive::fmt"
+kappa = "1010dd1173e0167998f84b0911f45166b71dfa7776c85bc34929bb327c4b0d68"
+embedded = "f8d9f91406e864a301893e540e00214c7afa5493d4135177bb1650b163ed1537"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::RuntimeFieldSignature::field_signature"
+kappa = "2b9d991d2f310976d484f1e975cf513b1368b31d41c51b903c11465693be1478"
+embedded = "da52167e177fb734ea1f76b4f853971556cfa9e46655c59e81698418cda7ef22"
+status = "residue"
+cause = "mir::Ty: signature::FieldSignature<'_>"
+
+[[fn]]
+path = "jni::signature::RuntimeFieldSignature::fmt"
+kappa = "8cef99ac357915102846cd291b6f9090758d6694078b8146852422f6cdea9418"
+embedded = "bbf1c5ba7675b9c4253203d36a4c2ba9fb5f4b0571c4fe628bc92be6506eae2f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::RuntimeFieldSignature::from"
+kappa = "aa36e87a746337430179a5b8f93f8be7c51e840c85ecbd2539ce4cb96f4c8ab9"
+at = "F=u32"
+embedded = "db0217ce7dcf6231dfa7b62c1b560261663198a161fcbfcf0b90e75e4951e2f8"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeFieldSignature::from_str"
+kappa = "6b62e21011dce9147c68f503aa25e0854072cb5ba1deb61fdae69ecb711a2974"
+at = "S=u32"
+embedded = "34a4a7a7de937527f134adaf612a8ae48ba2448926c7adad066e92ac37eaa57f"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeFieldSignature::from_str#2"
+kappa = "4474e60973a24513d4fe984697fc1496a8f2de779c2f9425a383f58f431a701b"
+embedded = "ed32bf096deaf5c0cdcb1600e0be46fe54b94f5a4666fe193748e4c9c89dbf84"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeFieldSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeMethodSignature::fmt"
+kappa = "7e869c094ae79070e7cb10052f8d760249288afed04b293f93eb7c15521197bc"
+embedded = "0a51b60d4105a57a6646c787a7a4dc80b9914f5d52e4bf8aff2c7d26c448f62d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jni::signature::RuntimeMethodSignature::from"
+kappa = "d78319f1106e53fa61e695206810a355dbcb72de018de054a975ec290dcdf955"
+at = "M=u32"
+embedded = "da57dff30c850c20c2c4de1dda2f6aa08aec2fa14c283ca8bd0a832711cb83f3"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeMethodSignature::from_str"
+kappa = "3d86a78c8be22a24e6155e50fc7fe0dd7e55cc69f18e355a05d7e6fdf56a9a0d"
+embedded = "c5050e812dea1738a3bc740a4b75f97adf0913c51ba7ae0111f98e394eff9649"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeMethodSignature::from_str#2"
+kappa = "07bbcf2a700ce0fac40150d3b5de065e7274384696d7fc990145341cd6aee5f5"
+at = "S=u32"
+embedded = "79324c31f42517c761ae09abb712a6e6d2652ef290fa02b8e33865cb478bcaa7"
+status = "residue"
+cause = "mir::Ty: signature::RuntimeMethodSignature"
+
+[[fn]]
+path = "jni::signature::RuntimeMethodSignature::method_signature"
+kappa = "c2064cfdc5b0abd0808dd12e9c212b1b9f5eff8a419436c89a7217455db5351b"
+embedded = "edbf1c7917903bc8b98a3922d7b54bc8c804c603ada29f3dd21d1ea976ee2d50"
+status = "residue"
+cause = "mir::Ty: signature::MethodSignature<'_, '_>"
+

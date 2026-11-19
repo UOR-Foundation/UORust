@@ -1,0 +1,56 @@
+[[fn]]
+path = "sqlx-postgres::transaction::PgTransactionManager::begin"
+kappa = "a808197bd5ed3473b3ec1e1be5a738798f86d49c16f360037c605d6b58970b4d"
+embedded = "09a5411988bf5b3e5e88ced0bbe1ed4bf8de6154971cd70c32044e5fd625e22d"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::begin()}"
+
+[[fn]]
+path = "sqlx-postgres::transaction::PgTransactionManager::commit"
+kappa = "206f2fcceff9b2420204cb3703222f4853cb3690e6eee6ef212075732dd65272"
+embedded = "cb0df545f61b3181c77f7556a4638d789db8f3f066dd41b18b3c46b08b845bff"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::commit()}"
+
+[[fn]]
+path = "sqlx-postgres::transaction::PgTransactionManager::get_transaction_depth"
+kappa = "a46b0dd2906af7fadc18991d13630bdd21bb487428d48aecd74f7bd25a809cfe"
+embedded = "57863c35e738733be3e6c4be1833a9a9321cabc4be6e3eddf3b4cc1b13468e2f"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::transaction::PgTransactionManager::rollback"
+kappa = "f914c49820ba61051b4b099e91cd8ab8513538fb2814b6e523ee461662cbee14"
+embedded = "9a272e6c1abb3d0d3e7a4cd0b0c8c689efac08b000449e93c864e7fad07fe3bc"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::rollback()}"
+
+[[fn]]
+path = "sqlx-postgres::transaction::PgTransactionManager::start_rollback"
+kappa = "3ef9c99ab330ee8ee3ea32a2986d918e21f89937c7109319ff3f6be962c82b26"
+embedded = "9576d709235131343cefa738fadb315b0b23d419732e63b6bcbf507199fbb563"
+status = "residue"
+cause = "mir::Ty: PgConnection"
+
+[[fn]]
+path = "sqlx-postgres::transaction::Rollback::defuse"
+kappa = "8946abc82a3ab494ee0cb660a9afccaaa4560d3e5a7d740a7e64849847543cce"
+embedded = "98fa4cc071e7813080cf4117669e3e055976c89b819664f1ba9e4af64a9f1425"
+status = "residue"
+cause = "mir::Ty: Rollback<'_>"
+
+[[fn]]
+path = "sqlx-postgres::transaction::Rollback::drop"
+kappa = "378d00e8681c822bae4ff42f36756c569029124a51ed6c3e422f62fb2bccab2c"
+embedded = "5e68d8967fec4891273b16c885f7b6bed9990887333829f701bc724a5da8304e"
+status = "residue"
+cause = "mir::Ty: Rollback<'_>"
+
+[[fn]]
+path = "sqlx-postgres::transaction::Rollback::new"
+kappa = "c41a8bb07634e5e0fdad20b7faee92628a3beb204afaffc86920bbc6a0cb1ce2"
+embedded = "612c530859dc85d2f13e1f6e557326b76204459dd223eb87ce2081414438180c"
+status = "residue"
+cause = "mir::Ty: transaction::Rollback<'_>"
+

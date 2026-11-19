@@ -1,0 +1,448 @@
+[[fn]]
+path = "async-process::<impl at src/lib.rs:445:10: 445:15>::fmt"
+kappa = "f4ecdc0ca98421c60df9f656ad66e1b01594011b0c4c612a548722d1e56b3cf6"
+embedded = "0015455422c0dfd8f519c307b0c45f71f77f388d75ff8b2da9daf465e6d1e6a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-process::<impl at src/lib.rs:534:10: 534:15>::fmt"
+kappa = "faaa5f94bf055711dbdb4e52aa1ea981138c26b91af456be8ccb8dbf4b8b78ce"
+embedded = "37da81d27b5a6940c2556cfb0e3c735c5277bd8b4d3577895128da68f07c4b89"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-process::<impl at src/lib.rs:611:10: 611:15>::fmt"
+kappa = "349b0cfcee156718a786d1af0e22a6531769aae082e7bbdd0e2a3202e7f3432f"
+embedded = "c29bb4df232254fc6a4489c7fc468e225a95ee3d3b3288e035a80e1f603534c1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-process::CallOnDrop::drop"
+kappa = "0b804eba25b04e48f717875d7866c6062fb29cb2c575d88097add9e4975478de"
+at = "F=u32"
+embedded = "10e9aa7f82673c0ebd55ad38988dc909be74534a4036e3e1043c15667e1388f7"
+status = "residue"
+cause = "mir::Ty: CallOnDrop<u32>"
+
+[[fn]]
+path = "async-process::Child::fmt"
+kappa = "bf1c6a7ddedc59beff041753b443ab4e6f10e9731fbbe87a404f466fc15930dc"
+at = "ChildStderr=u32, ChildStdin=u32, ChildStdout=u32"
+embedded = "1db28b6c6dbdbaac1aaed5809cd22a3cf4fe97e48b8237882a687351c100d1b9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-process::Child::id"
+kappa = "9296057920575046bcdfaf31ce62fae978f402cc40e84f2ef70ab7d3102ed6dc"
+at = "ChildGuard=u32"
+embedded = "c92b5412b09a2a06023ae123f9f1aa7470aba6b0f3a60538b2f0490a0a368f6a"
+status = "residue"
+cause = "mir::Ty: Child"
+
+[[fn]]
+path = "async-process::Child::kill"
+kappa = "3775f4462fa68f2426f0303d42ce0c5abda7c4577a0ea7f2e30088ded2109f75"
+at = "ChildGuard=u32"
+embedded = "9842bee6a7d7a36246e803d1eb6d65b083d9fadf2d7b48e259b54f7f68c4b146"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::Child::new"
+kappa = "5b73d2cdd74a7b6c6f348f5720ce88948c57ffbce6a4eadacb061fb41b9a5624"
+at = "Child=u32, ChildGuard=u32, ChildStderr=u32, ChildStdin=u32, ChildStdout=u32, Reaper=u32"
+embedded = "ae9dd19fe23f26f6037683a03db41bea7b8a2fb0724cce4aace3c5704cfcac3d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::Child::output"
+kappa = "0fbf1d0c7d78d947b60a5c5be324f1b56147a576837bd0e4b825390d67678578"
+at = "Child=u32, ChildStderr=u32, ChildStdout=u32"
+embedded = "c6cf5521c625492e18c7b6f4c500f0ec811ca5bd3d47a0ab13b29326e831bbc5"
+status = "residue"
+cause = "mir::Ty: {async block@src/lib.rs:419:9: 419:19}"
+
+[[fn]]
+path = "async-process::Child::status"
+kappa = "8dc577cd3870c2615aec9efe97cd44a1d1a3bd699185ccdb64a739e3cea7bdef"
+at = "ChildGuard=u32, ChildStdin=u32"
+embedded = "d96e6278424ebc230dba9e3e77e68805614378e9ac72bd23bfbed18a0997ef11"
+status = "residue"
+cause = "mir::Ty: {async block@src/lib.rs:369:9: 369:19}"
+
+[[fn]]
+path = "async-process::Child::try_status"
+kappa = "31eb5e7b8f8a91303b492e8cbf8ee77cbcc02e14932da794412e5ebeca77fd37"
+at = "ChildGuard=u32"
+embedded = "60f595279f2c79a9be58c15f5489b1c427a17bde196ec20ccd49f017c2b7ccbb"
+status = "residue"
+cause = "mir::Ty: std::process::ExitStatus"
+
+[[fn]]
+path = "async-process::ChildGuard::drop"
+kappa = "6cf6c02ff91b4698fd543610925c689b41959ef3035971e392c7902c61382d8f"
+at = "ChildGuard=u32, Reaper=u32"
+embedded = "f816e8bec34d764bbd491ee1f6660db5d9f445dae54d696fe8507b6f58aba015"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::ChildGuard::get_mut"
+kappa = "22dc1a0c3ff49a65dc0ab59fadd3d9ece06cd132e0bee1c881a4cc222c3b4cd6"
+embedded = "980ea6a288707bd189ed9bc1f46d2f8b0a203b4b2b7205ef6300e88bc45824ed"
+status = "residue"
+cause = "mir::Ty: std::process::Child"
+
+[[fn]]
+path = "async-process::ChildStderr::as_fd"
+kappa = "7405f447f2733774f1c4106486094a794cb2b4547c053f1374bdf72f948e4903"
+embedded = "5853b72ba7578ad498d0dc63374362f09495e530ec747553950c2a851072774a"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "async-process::ChildStderr::as_raw_fd"
+kappa = "1841b5bfb567b986d845eb05818fba9c633dd11dcb88eaf44b7eeb62c7f110e2"
+embedded = "05df49263a86bb494ab801c61ccdcd4df8b82c88290f8923f622234ca744117b"
+status = "residue"
+cause = "mir::Ty: ChildStderr"
+
+[[fn]]
+path = "async-process::ChildStderr::into_stdio"
+kappa = "54634b41eb03623092191f282b449148981f354e2d7d7fa8ff99959c0feb3c6e"
+embedded = "117d9a1fda55334c38eb8b6f89b503f2911c5aedd8b3b02ab3cef8806d835177"
+status = "residue"
+cause = "mir::Ty: {async fn body of ChildStderr::into_stdio()}"
+
+[[fn]]
+path = "async-process::ChildStderr::poll_read"
+kappa = "efeb6b7a07395cbb1b25e08004027d6e8b127183ac98e7dedff1797073e426d1"
+at = "ChildStderr=u32"
+embedded = "016a9743e00dabe29c880c0bc05e735dca55a18e91c53da4089da26c1a4d8361"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::ChildStdin::as_fd"
+kappa = "79097e33c63f5ebc69668f436c81545a0210e4a2bd7b5ba47ad47c1e261a9d94"
+embedded = "7cc0b769b2c757db61fc9688f412f16a7fd3db5d7507b2a373a9b9192df43e90"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "async-process::ChildStdin::as_raw_fd"
+kappa = "8694bb2b1b4d6f2ff1fe8089e7e32e19585dc175adb0b70b37959530898d96f4"
+embedded = "091391a20c7c55e53e51e58d55516fe3d8dea6d49da867f6b2a99a9fe86c70ba"
+status = "residue"
+cause = "mir::Ty: ChildStdin"
+
+[[fn]]
+path = "async-process::ChildStdin::into_stdio"
+kappa = "7885d5d4ce6bf893c416773b0ac7f070cbf3c2d799125c13c5ff4e2532159010"
+embedded = "0287288b2657e17f5e800ca5dc10566e32c519c53edbde19b35dcf22a9b4c544"
+status = "residue"
+cause = "mir::Ty: {async fn body of ChildStdin::into_stdio()}"
+
+[[fn]]
+path = "async-process::ChildStdin::poll_close"
+kappa = "56ee01f1b8c515870b4a064c0f91c31c9849e6a0e4f4e55373ce31ebff8dd8f3"
+at = "ChildStdin=u32"
+embedded = "1b6c32b347b39003c74d079cf0703be7658aca0c888fd2f5be0a991dfc9d0095"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::ChildStdin::poll_flush"
+kappa = "fd9fe0a3a7c7b1eb34df14e3cdf9d425635aeb7838fe37c62a7f5012bc411735"
+at = "ChildStdin=u32"
+embedded = "85f06189bef52b77132e588ec9c572f20c8dd6785d10a8e6d2aefd6ab56a0284"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::ChildStdin::poll_write"
+kappa = "13c77f751ff19881cd5642afe3352411732e969974ea6aa0404dd71e11569cf2"
+at = "ChildStdin=u32"
+embedded = "ef7566089da11e1eddedeb7b8ac09edaf12e1c00b8a81fc6ddd03fac167e7467"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::ChildStdout::as_fd"
+kappa = "722165cb8aac65c4d52d9f9951606582601fb546161678c8ede4cb91fd45d243"
+embedded = "a2a50cf798c30c4a0ac923fd876c0515bcd012ba664ab3b5e2f503bd144bd3b5"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "async-process::ChildStdout::as_raw_fd"
+kappa = "ef51e0f18d7af0cb0554abfda45cf698c9fb661ff7f7a6f1473d44e64bb5a738"
+embedded = "aba9787d84bb13172b8a9f59d0479bdbe53016996d9daff6f618d5d265664f19"
+status = "residue"
+cause = "mir::Ty: ChildStdout"
+
+[[fn]]
+path = "async-process::ChildStdout::into_stdio"
+kappa = "af2606f229542bcf3a698d2485fbf2268bbb07cdd03ea4516ddc30e6a1506341"
+embedded = "763802a2604dc476f9175e13d813c67bef2c1f60a03c1ac45c2646656f7645b7"
+status = "residue"
+cause = "mir::Ty: {async fn body of ChildStdout::into_stdio()}"
+
+[[fn]]
+path = "async-process::ChildStdout::poll_read"
+kappa = "1e30aac56447f47e1fae0cba1b5523310aadeb3a20b8b14dabd41d5c374254d8"
+at = "ChildStdout=u32"
+embedded = "15182ba8bdf207ffab847d18a65422da22c1453f577ec13e4844a69ba58275a9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::Command::arg"
+kappa = "6cc48edf202a27ffa0a4c3598cea63608645c1f7a01ada9ae2220165640b15a4"
+at = "Command=u32, S=u32"
+embedded = "a07253096be62a64965e689239618f0e9f2de5f78cf24da253d947e1ce5229fb"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::args"
+kappa = "294e0d96c5eb368112276ad3cc252a1dcbfb1cb16de1c4188fb2e9824b07180b"
+at = "Command=u32, I=u32"
+embedded = "1402f523e79ffd07d1e6b63e323f633db34882f53f0ea6f5dcc9f1c005cc6565"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::current_dir"
+kappa = "771056bdb36c7afb0f0e4d96a8c1f034465cb256f76d8512913a06e80bf6efd4"
+at = "Command=u32, P=u32"
+embedded = "b6cd77691dabb131a607b7ed191135c642fcdf2f05e2fa3ce6a6a91117f50b06"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::env"
+kappa = "2ac978eae71dbef009337c1e5d55f9919112a996f3e1daf9576f51319b84022c"
+at = "Command=u32, K=u32, V=u32"
+embedded = "dfbafbe53ec0b878523757189c9b600d9197198ca561844ab9530c7e6adcb9be"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::env_clear"
+kappa = "a4ab3a267497384f462b047d17d041a2d4c08dbb42a631348222f3ec486dcb50"
+at = "Command=u32"
+embedded = "ff4c7b7522bc55a320faf6adcf9c8acfa4b8a0d6751c2a9459ac53d1901aa655"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::env_remove"
+kappa = "7ad819eb92a769996ee4c32715d5ed193b4a75a1739cc2cb1ec7123175a8881f"
+at = "Command=u32, K=u32"
+embedded = "7b6f2a35bdffff5108419c4a9de137e2891029e2c157b96af7a1cddaadae87ed"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::envs"
+kappa = "3bcd735863de13e789474d57a7d2354a93744d40033ac9b68a0f8a37064bebbd"
+at = "Command=u32, I=u32"
+embedded = "a0f939b6735ded582b1eddbb9a4959daa8e52d856530d7dd7bc86ad831bdfdc4"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::fmt"
+kappa = "71277c19c2ce90612366f5f5f7544ddec95da640bdf4d3d1d09f09ac4f20bfba"
+embedded = "7bf76dd54788942cc97a96321a387ce0326b9771d3aef51fab9a102832a34ce8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-process::Command::from"
+kappa = "c53f99a5ff646e4b933557871d612bfd3727e0e543a022b5a03dcfd525787ab5"
+at = "Command=u32"
+embedded = "2a24cee6283a855737ceb84e2ea897e933da47cafc1caecbe25be9c9bfe9c88c"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::get_args"
+kappa = "8135bf19c4ccd4f15dac9d4b2b5a8de166b70bff1c192a039faa6f378496018e"
+embedded = "d676be89be95ca4c4fa1fb274daf8d1d86a9127971d71e09e5b007a788d34834"
+status = "residue"
+cause = "mir::Ty: std::process::CommandArgs<'_>"
+
+[[fn]]
+path = "async-process::Command::get_current_dir"
+kappa = "ae2415919f8f531a77d9433d0fcaff474fe7744c65bd578125ca24cc778117bd"
+embedded = "66d733135dcbc7667f609e1e54b754780de0e740ef065ba5fcfba31b9aa507e8"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "async-process::Command::get_envs"
+kappa = "3c5e48b05fd1f359cf5cbd02a78e7dbe20f7fbddca368d67b8d1a7b90782f3f8"
+embedded = "de4291dd9267f9bbf58846d636b9774a48dd81cbd57ddaf70abb805aaed2ac4c"
+status = "residue"
+cause = "mir::Ty: std::process::CommandEnvs<'_>"
+
+[[fn]]
+path = "async-process::Command::get_program"
+kappa = "f0a18f9d0085f531375ca931415b5ebf962fe62ce0ae41e593a0a42837d8e111"
+embedded = "183796d010fbe2ca0ee47c0f2fd35a5a3899ddc14f997bc24264cb86d67d8e0f"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "async-process::Command::kill_on_drop"
+kappa = "0b1626cd5e2f11fe1b45341d9683fae1e9b91bf8a55398072f611061c71581fe"
+at = "Command=u32"
+embedded = "73aab76d24f1bb2d523807c20988f2dc8d5fbf9b39711491a94b8ce698b7bc4e"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::Command::new"
+kappa = "e348f71f2a8845ab821989dc4ad4664c3df4e6b4f7bf161c57d5e076225d6beb"
+at = "Command=u32, S=u32"
+embedded = "bf65138db665ac9b05f85878ddd500102ec5c342a60103c83410b92942e919e2"
+status = "residue"
+cause = "mir::Ty: std::process::Command"
+
+[[fn]]
+path = "async-process::Command::output"
+kappa = "3496f3ac008ddc6116086c659c1cedfeb2eef77d8db822fb5545e5e5a513e4ff"
+at = "Child=u32, Command=u32"
+embedded = "e33fee54670bf9594866c361782be8be477be24a4c675acc2ac3ec5c5cac6ae3"
+status = "residue"
+cause = "mir::Ty: {async block@src/lib.rs:1147:9: 1147:14}"
+
+[[fn]]
+path = "async-process::Command::reap_on_drop"
+kappa = "342545ad702d4a8347da835ba8fc54a3c8acc4e6008adb201615361c52dae067"
+at = "Command=u32"
+embedded = "dbfd23f1e1b6751fb29a63ecd1258e88467984eb9591f152ddc75eb5dd06f8a1"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::Command::spawn"
+kappa = "83737747695f79027fd2fdc32968dc75f9d94fc417f38ca19501291f8bf1f4e8"
+at = "Child=u32, Command=u32"
+embedded = "52ed5b5d6e74a98c3c6a81d5fe53376607180d1f63c0800a6669c9a5e437dc75"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::Command::status"
+kappa = "c438d821b1e7e7fc05484fd688b3bafee0e74e3da48f9b9a88e8c96a1c737f18"
+at = "Child=u32, Command=u32"
+embedded = "21de6af629ad511b56541aa7b7cd33049d320224f0de5f700956a5ce98f033e6"
+status = "residue"
+cause = "mir::Ty: {async block@src/lib.rs:1115:9: 1115:14}"
+
+[[fn]]
+path = "async-process::Command::stderr"
+kappa = "a59c4e6ef7d18491126907f070d44e7642e6c6ffad63088720d122eb6256fffa"
+at = "Command=u32, T=u32"
+embedded = "17106c1814148e0bfb3e6da8805993db50d82a4dabad591004ad6c04c5643345"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::Command::stdin"
+kappa = "ef38a08e379fd1cd9fb343fe4856bbea17c9bce42b8812102840cf61fa9d4727"
+at = "Command=u32, T=u32"
+embedded = "86d80fed6bf58ed669c6beb64af399ff9f21b2169b755873b57d4a11e0a544d9"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::Command::stdout"
+kappa = "2e0f11eeaa35b78c99679d6ef58f082892e5641ac8c83f82e784b23c23779a3c"
+at = "Command=u32, T=u32"
+embedded = "639fc52a1b12f92bb20b2c7d1f130d72058512657b0d433897604d66ad62721e"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "async-process::OwnedFd::try_from"
+kappa = "a2c2647d60b553338989e7bdc3e186ac654a4c51b26c3219113e663ce6e7ed01"
+embedded = "a887ec5a3ef692e407688a90eead190dda37f67797b0b2e0af9f693ba0cf45f5"
+status = "residue"
+cause = "mir::Ty: rustix::fd::OwnedFd"
+
+[[fn]]
+path = "async-process::OwnedFd::try_from#2"
+kappa = "de8d82c6d10602f79199d4dcb64f4ec197e73789843feec54f2f09d20223689a"
+embedded = "3d4a47b5a80eea0bb22d934b898533dde02a8934ba99b1b561ad7d1c70f425f2"
+status = "residue"
+cause = "mir::Ty: rustix::fd::OwnedFd"
+
+[[fn]]
+path = "async-process::OwnedFd::try_from#3"
+kappa = "02cc012d631169f3378d7c0a89695b9cf3736a2a98f67bb3f385f52e01721603"
+embedded = "7d561b2c837ad9461b29e3f7f729973a674833fe7d808e425ba5334f8ddaed80"
+status = "residue"
+cause = "mir::Ty: rustix::fd::OwnedFd"
+
+[[fn]]
+path = "async-process::Reaper::ensure_driven"
+kappa = "780be0a7b2b4b8dfbfe6689381e82bf087effc096bdf3ddc15fce6e8d36096cc"
+at = "Reaper=u32"
+embedded = "429ee9504a09928e82aa23f9629db2e67ecaa100f045fe89c59e9e108e2f8bfc"
+status = "residue"
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+
+[[fn]]
+path = "async-process::Reaper::get"
+kappa = "99feac892e8d55753f94268908fafbac4895c53fa2ef7ff7253ad101cc89c4a2"
+at = "Reaper=u32"
+embedded = "25fa5b92051e7ce37c13631f9fbd9e2d8275853d1d2e0c073c3a1889a2d1df75"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc19: &OnceLock<u32>}"
+
+[[fn]]
+path = "async-process::Reaper::register"
+kappa = "e6541faf42a6ab0580e9dda6e55a25d3a94813694250ec97a1e5aae39cb949c3"
+at = "Reaper=u32"
+embedded = "0092f6b5280dad6bef24bce9c440375e69df6b70ee4a9e075b83fab6176f1d0a"
+status = "residue"
+cause = "mir::Ty: reaper::ChildGuard"
+
+[[fn]]
+path = "async-process::Reaper::start_driver_thread"
+kappa = "fd684cec4fa35060b2f9975a464bdff44dfb10a2cd78b0d985b1fa9b5b17f182"
+embedded = "a4f4f86906fbeb8d8c6fd17d7767acd37d0478e55d84b8d22da4c70c5b704768"
+status = "residue"
+cause = "mir::Ty: Reaper"
+
+[[fn]]
+path = "async-process::blocking_fd"
+kappa = "49ac5b6f1922c8fe2ba7da7550e6b9513fae699806114f977b97d34a741e635d"
+embedded = "c980ea07aad8b66684507cc919031f30099d1c1c59610a2e4099219a812dc485"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::driver"
+kappa = "86a34e01bc1d373140c333eaa0d0d296bcb35a4d0f58ebe87f113f9a302a61f5"
+embedded = "ee7d413cc539786f4338813b18b02652ca0e578ab149d8c75d2cb08917ca39ec"
+status = "residue"
+cause = "mir::Ty: {async block@src/lib.rs:717:5: 717:10}"
+
+[[fn]]
+path = "async-process::wrap"
+kappa = "4383eed9d12422f534cbbabdcb01cbca481ea2ecb39c53331834961e47895d2d"
+at = "T=u32"
+embedded = "a7714a6562265d9ef34affc92f5acd2c5ef32ff892e5128720f16cfbbcc5711d"
+status = "residue"
+cause = "mir::Ty: async_io::Async<u32>"
+

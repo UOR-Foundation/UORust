@@ -1,0 +1,31 @@
+[[fn]]
+path = "tracing-futures::_::<impl at src/lib.rs:246:36: 246:47>::drop"
+kappa = "04db42f810a310f325ec902910bdbc894d3ec3738e873e8995a2c34f0415a1e5"
+embedded = "0547809d6397682963060ec861e5facdbc6a7f7b5e4fdd9f8a06be2bf4c8912d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "tracing-futures::_::<impl at src/lib.rs:246:36: 246:47>::project"
+kappa = "8023884be2b8c754170709d4a09eb38be97d8d870810e47ce17d5f62fbd93e6b"
+at = "T=u32"
+embedded = "68ad950bc5820e3291be257e039d5ba633d85faae2f7d4279f4b75b85a7d7e31"
+status = "residue"
+cause = "mir::Ty: _::__InstrumentedProjection<'_, u32>"
+
+[[fn]]
+path = "tracing-futures::_::<impl at src/lib.rs:246:36: 246:47>::project_ref"
+kappa = "50d1bfe0bb06123af0fead70f26504412b1dff3c61ff38c6bed71eff855c6122"
+at = "T=u32"
+embedded = "d45b8b900ea38ad10b9775e5f61cd8f40bd9799036e8a390aa23d064922b4d5b"
+status = "residue"
+cause = "mir::Ty: _::__InstrumentedProjectionRef<'_, u32>"
+
+[[fn]]
+path = "tracing-futures::_::__assert_not_repr_packed"
+kappa = "bb5a7b5b05d1e1c0d276d37f290e89a72f4c234d5f1d0a95a7d1d25aff1b54aa"
+at = "T=u32"
+embedded = "f5d08e17bc96d123d667726b26951039a3e1dfe9dfba286f3d2bc687da1e353b"
+status = "residue"
+cause = "mir::Ty: Instrumented<u32>"
+

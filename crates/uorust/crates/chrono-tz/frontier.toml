@@ -1,0 +1,100 @@
+# The chrono-tz register (written by `uorust crate chrono-tz@0.10.4`; do not edit): every body of
+# chrono-tz's MIR at chrono-tz 0.10.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1241
+translated = 0
+residue = 1241
+
+[module.binary_search]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.prebuilt]
+bodies = 1208
+translated = 0
+residue = 1208
+
+[module.timezone_impl]
+bodies = 32
+translated = 0
+residue = 32
+
+[embedding]
+bodies = 838
+embedded = 838
+evaluable = 838
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: prebuilt::timezones::Tz"
+bodies = 601
+
+[[cause]]
+cause = "mir::Ty: timezone_impl::FixedTimespan"
+bodies = 599
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: timezone_impl::TzOffset"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Tz"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TzOffset"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FixedTimespan"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Span"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chrono::FixedOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chrono::TimeDelta"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timezone_impl::FixedTimespanSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timezone_impl::Span"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timezones::ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FixedTimespanSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prebuilt::timezones::ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timezone_impl::GapInfo"
+bodies = 1

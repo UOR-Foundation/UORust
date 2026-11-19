@@ -1,0 +1,95 @@
+[[fn]]
+path = "zopfli::DIST_SYMBOL_EXTRA_BITS_TABLE"
+kappa = "f7b34c0be99c00d6e659ebab32cf5e0dddf7f07635940b89120739496b49e5ad"
+embedded = "4cb1cde91ad523cbd132ee8fcf7add1361ed9a6a86d87d677b3d4f9154baa77f"
+status = "translated"
+digest = "b12644dc19f9ca31cec8999fc2dc3029721a3a958900cccc18d83decef33b2fa"
+
+[[fn]]
+path = "zopfli::LENGTH_EXTRA_BITS"
+kappa = "3d10718df694c3b92aefe11724c60973f27ee44959751bac2fdc6bfa9a577f90"
+embedded = "6d267063bff1ec968b63daede167da487ddb90252aeb9e83bb958a7e3aafdb3d"
+status = "translated"
+digest = "954b5e433079077c70eeb23312a7b746d324a577bcf7b03c1a3331b428e02bb4"
+
+[[fn]]
+path = "zopfli::LENGTH_EXTRA_BITS_VALUE"
+kappa = "0b1e42307dfb6feeee1f83d43a3d9ef94b475d056c403504641dc78ca5405213"
+embedded = "0d02bd40aaa06548a43d2d281b6f437733cc1654662f2dd23aa2bafeee1ee25b"
+status = "translated"
+digest = "09374691341a774c7853b62710c350f7532416e93fe162364024f156d3d749c0"
+
+[[fn]]
+path = "zopfli::LENGTH_SYMBOL_EXTRA_BITS_TABLE"
+kappa = "e856de6206437eff48d8aa9ee4c8c08cb76452fd3f223b52e254f53478be5d96"
+embedded = "6d2226b2edb5f5f26142a04d5c4546846789d6fb3f4e361a88ee01daf7e94a6b"
+status = "translated"
+digest = "71bdfb8603bac9ab7b370a51691619be73bfe40fd3af2f162f13cec861dcd609"
+
+[[fn]]
+path = "zopfli::LENGTH_SYMBOL_TABLE"
+kappa = "db754edaf2a998b1c2f1edfacf86e7cc20f694db7a7cfa39a1ea24994a7b25ec"
+embedded = "d4c480452032c7ec86b3ece41e06636d8ea7cdf755d8b9dde6750cc7b1a9f7ad"
+status = "translated"
+digest = "bd44897ae8e22e00b8a0e74becfef86934434020293227b2b61aab625dee4294"
+
+[[fn]]
+path = "zopfli::get_dist_extra_bits"
+kappa = "d9e75be1ae572df32c9f84a15097a65d377390368a356228c4b86507c211179c"
+embedded = "83467297e9b9682427c8408ffd85928aff1a7172f08ecdaf51f4eb7b48afddd3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::ilog2"
+
+[[fn]]
+path = "zopfli::get_dist_extra_bits_value"
+kappa = "eee687d01251ca2ce5da3e8875e45ca2fd44c5501c10561344bbfae20ff7eba4"
+embedded = "b46cc2c148e4a60e94319e40335feef0c2e0b75297f0d91d66cf6b3c629359c3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::ilog2"
+
+[[fn]]
+path = "zopfli::get_dist_symbol"
+kappa = "04f0797f81310504bad1172541bf1f5dd601869ab30f22702881d550713f5bff"
+embedded = "3e9db66975aadca1813876a4b0a83edb636cb74f334b2f24ba07afc0f9095cd1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::wrapping_sub"
+
+[[fn]]
+path = "zopfli::get_dist_symbol_extra_bits"
+kappa = "54d21d3ebd149b82b311825c792e03d207200706aa78bc3627f39513a7f0d860"
+differential = 3
+embedded = "839eac269ee8168c7b972fada3e640ceece0c2103c7aae2606b740962b1f39a3"
+status = "translated"
+digest = "101bdf280effac4bb8cf6cc9599f66f12f103c8a36daf9cb58981f37acec6ae8"
+
+[[fn]]
+path = "zopfli::get_length_extra_bits"
+kappa = "045a60133ca8c29168767593bb61f8818835eaacb87b67069c835d1677a45b84"
+differential = 4
+embedded = "8b3f790f87c38a04486f9715aefc94c7d06518c94cf637dd3f4501f2e1d5778c"
+status = "translated"
+digest = "1c77b1064617047a2462e5feda2f4c92e0421c320d0a639b90322d945d28b331"
+
+[[fn]]
+path = "zopfli::get_length_extra_bits_value"
+kappa = "18a1f0131d0de02097d3e9f975248eb524db2f0104dd897bbf7872cfec7255cd"
+differential = 4
+embedded = "b28749bf4911ba1025551b7a82879bef99a0b817da5c1f6e7ec6302e67c6c193"
+status = "translated"
+digest = "e19ee4ea3cfcf1b76df238a272a19679ac88a5a5269a16f50cf1ba154d70fa94"
+
+[[fn]]
+path = "zopfli::get_length_symbol"
+kappa = "cf89f9074772e93c4610bb18e47359d7e7d0b7ddbd89a59b49a6dcb852d1b6bd"
+differential = 4
+embedded = "d9fa4b57f0bd9abd88706ac698845a21e0556e5a91e66f11347293b214a1c985"
+status = "translated"
+digest = "9d068df60615f0ade50aeda5426c43865fd022a32a53474e424ca865597335f0"
+
+[[fn]]
+path = "zopfli::get_length_symbol_extra_bits"
+kappa = "f6b56dbce86ccc9ea882dafb59caf75cf229344e4ec9641e3f61a0c59e7d8b9b"
+embedded = "85339d4f50cf9c91ce6c960e24d3ed31851d21010eb0307900ff6c864067ef52"
+status = "translated"
+digest = "309feaf4df6d65fa000b19608c604eadf51654ee70b75782504494fc59e907ea"
+

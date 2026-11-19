@@ -1,0 +1,50 @@
+[[fn]]
+path = "opentelemetry-otlp::MAX_THROTTLE_DURATION"
+kappa = "8bf9a25d2d1e7a4744c8c45c65311ccf2b5f5d44c606e77f6a07b20b652fd4cb"
+embedded = "91944e19fedf2b652fe1f1023143884cd3d57c170ca79bd5b2007cdbe2f49488"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "opentelemetry-otlp::generate_jitter"
+kappa = "29e1857e2d63649910359f7e221d3c72ce95281a3b5e38fbbdf009e09934ca00"
+embedded = "d7d1b89ee53e4ab9689fd9893e17930c9c4e0f4c4baa020c60e3aee2de687d0d"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "opentelemetry-otlp::retry::<impl at src/retry.rs:31:10: 31:15>::fmt"
+kappa = "d4308defda3fc7d73a0fe9e16ba82ad7ba4ce94d01334cfea2018026ea32f3af"
+embedded = "db9d13904364fbd604b1cf00cc03c0be6f256457ca3949e55b8cd58837872121"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-otlp::retry::<impl at src/retry.rs:31:17: 31:22>::clone"
+kappa = "9359ef28a608fbc88fe4dc772ece90059313c984a3e6f5f4ab39cd64768d5354"
+embedded = "1af8e21d268a55e48b98081605573fb8e13ef3fb32ed151068d10599cb96b8c6"
+status = "residue"
+cause = "mir::Ty: retry::RetryErrorType"
+
+[[fn]]
+path = "opentelemetry-otlp::retry::<impl at src/retry.rs:31:24: 31:33>::eq"
+kappa = "6f5f5c9eda69267f184d9d446f9c86b4a54ab6f0f0c5c137483907e8e03f219b"
+embedded = "f4cae1e428e383298e669f29627a726f042fdd23b4f90e1d3d08222a9cc9b49a"
+status = "residue"
+cause = "mir::Ty: retry::RetryErrorType"
+
+[[fn]]
+path = "opentelemetry-otlp::retry_with_backoff"
+kappa = "324a083f422ce63a95ea50f3bbd744c9534e8936599cc5fc031e6b0847ffb82c"
+at = "C=u32, E=u32, F=u32, Fut=u32, T=u32"
+embedded = "2233583cbc4c17272c75b7b4fb44967552dead8b686f02987625006b0f8525ea"
+status = "residue"
+cause = "mir::Ty: {async fn body of retry::retry_with_backoff<u32, u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "opentelemetry-otlp::sleep_for"
+kappa = "a4567698132e48f7d01eff153b9e56ad1ac3380166758639827a58c9cb78e1bf"
+embedded = "0951aafd04cc5863d75a47edca21ae91710fcc4211dfe51f073d90e15d58cc59"
+status = "residue"
+cause = "mir::Ty: {async fn body of retry::sleep_for()}"
+

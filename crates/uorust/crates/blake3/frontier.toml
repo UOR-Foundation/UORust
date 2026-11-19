@@ -1,0 +1,320 @@
+# The blake3 register (written by `uorust crate blake3@1.8.7`; do not edit): every body of
+# blake3's MIR at blake3 1.8.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 193
+translated = 13
+residue = 180
+
+[module.avx2]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.avx512]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.crate]
+bodies = 86
+translated = 13
+residue = 73
+
+[module.guts]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.hazmat]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.io]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.join]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.platform]
+bodies = 66
+translated = 0
+residue = 66
+
+[module.portable]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.sse2]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.sse41]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 193
+embedded = 193
+evaluable = 193
+blocked = 0
+
+[differential]
+bodies = 4
+theorems = 27
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Platform"
+bodies = 11
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: platform::Platform"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Hash"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Mode<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: guts::ChunkState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_mut_ptr"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::words_from_le_bytes_32: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChunkState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Hasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Output"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OutputReader"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::count: blake3's MIR stops at type outside the lift: ChunkState"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::next_power_of_two"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hazmat::hash_derive_key_context: blake3's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: portable::compress_pre: blake3's MIR stops at mir::TerminatorKind::Call: platform::words_from_le_bytes_64: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item CHUNK_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item OUT_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hash::as_bytes: blake3's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hash::from_bytes: blake3's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hash::from_hex: blake3's MIR stops at type outside the lift: impl AsRef<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::merge_cv_stack: blake3's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::new: blake3's MIR stops at mir::TerminatorKind::Call: Hasher::new_internal: blake3's MIR stops at type outside the lift: platform::Platform"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::new_internal: blake3's MIR stops at type outside the lift: platform::Platform"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Hasher::update_with_join: blake3's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hash_all_at_once: blake3's MIR stops at type outside the lift: platform::Platform"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::avx2_detected::has_avx2::get: blake3's MIR stops at type outside the lift: platform::avx2_detected::has_avx2::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::avx512_detected::has_avx512::get: blake3's MIR stops at type outside the lift: platform::avx512_detected::has_avx512::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::sse2_detected::has_sse2::get: blake3's MIR stops at type outside the lift: platform::sse2_detected::has_sse2::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::sse41_detected::has_sse41::get: blake3's MIR stops at type outside the lift: platform::sse41_detected::has_sse41::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: platform::words_from_le_bytes_64: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: portable::g: blake3's MIR stops at mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IncrementCounter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayString<64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: has_avx2::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: has_avx512::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: has_sse2::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: has_sse41::InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hazmat::Mode<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::array::TryFromSliceError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 1

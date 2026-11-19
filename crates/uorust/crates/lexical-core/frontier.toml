@@ -1,0 +1,46 @@
+# The lexical-core register (written by `uorust crate lexical-core@1.0.6`; do not edit): every body of
+# lexical-core's MIR at lexical-core 1.0.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 90
+translated = 0
+residue = 90
+
+[module.crate]
+bodies = 90
+translated = 0
+residue = 90
+
+[embedding]
+bodies = 90
+embedded = 90
+evaluable = 90
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: lexical_util::Error"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: mut [u8]"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: lexical_write_integer::Options"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ToLexicalWithOptions>::to_lexical_with_options"
+bodies = 1

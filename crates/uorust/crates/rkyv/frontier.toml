@@ -1,0 +1,2209 @@
+# The rkyv register (written by `uorust crate rkyv@0.8.18`; do not edit): every body of
+# rkyv's MIR at rkyv 0.8.18, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2217
+translated = 40
+residue = 2177
+
+[module.api]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.boxed]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.collections]
+bodies = 229
+translated = 5
+residue = 224
+
+[module.de]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.erased]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.ffi]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.hash]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.impls]
+bodies = 768
+translated = 20
+residue = 748
+
+[module.net]
+bodies = 97
+translated = 4
+residue = 93
+
+[module.niche]
+bodies = 228
+translated = 0
+residue = 228
+
+[module.ops]
+bodies = 71
+translated = 3
+residue = 68
+
+[module.option]
+bodies = 34
+translated = 2
+residue = 32
+
+[module.place]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.polyfill]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.rc]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.rel_ptr]
+bodies = 65
+translated = 2
+residue = 63
+
+[module.result]
+bodies = 22
+translated = 2
+residue = 20
+
+[module.seal]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.ser]
+bodies = 98
+translated = 2
+residue = 96
+
+[module.simd]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.string]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.time]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.traits]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.tuple]
+bodies = 117
+translated = 0
+residue = 117
+
+[module.util]
+bodies = 133
+translated = 0
+residue = 133
+
+[module.validation]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.vec]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.with]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 2217
+embedded = 2217
+evaluable = 2217
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 164
+
+[[cause]]
+cause = "mir::Ty: <__C as rancor::Fallible>::Error"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: seal::Seal<'_"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: aligned_vec::AlignedVec<u32>"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: ArchivedString"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: ArchivedVec<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: ArchivedOption<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: InlineVec<u32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: SerVec<u32>"
+bodies = 19
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Serialize>::serialize"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ArchivedIpv4Addr"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: rend::u32_le"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ArchivedBox<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ArchivedDuration"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: NichedOption<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI128_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI16_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI32_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI64_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU128_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU16_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU32_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU64_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::cast"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ArchivedBTreeMap<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: vec::VecResolver"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ArchivedIpv6Addr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ArchivedStringRepr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: H"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: T0"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: rel_ptr::RawRelPtr<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: impls::core::with::niching::is_niched: rkyv's MIR stops at mir::TerminatorKind::Call: std::ptr::const_ptr::cast"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ArchivedIndexMap<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ArchivedIpAddr"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ArchivedResult<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: rel_ptr::RelPtr<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<&u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ArchivedSocketAddr"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ArchivedSocketAddrV6"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: rend::i32_le"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ArchivedCString"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionBox<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: FxHasher64"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Strategy<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ALIGNMENT"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ArchivedIndexSet<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ArchivedSocketAddrV4"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: place::Place<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: rend::i16_le"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: rend::i64_le"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: rend::u16_le"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: rend::u64_le"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple10<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple11<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple12<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple13<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple1<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple2<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple3<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple4<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple5<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple6<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple7<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple8<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tuple::ArchivedTuple9<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ArchivedHashMap<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ArchivedRc<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Place<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Seal<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: collections::util::Entry<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: erased::Metadata"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::alloc::Layout"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroI128"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroI16"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroI32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroI64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroI8"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroU128"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroU16"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroU32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroU64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedOptionNonZeroU8"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CStr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: boxed::ArchivedBox<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rend::char_le"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rend::f32_le"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rend::f64_le"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rend::i128_le"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rend::u128_le"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::alloc::Arena"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: simd::sse2::Bitmask"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: string::StringResolver"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ArchivedBTreeSet<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ArchivedHashSet<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ArchivedRange<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ArchivedRangeInclusive<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BoxResolver"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SocketAddrV4"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SocketAddrV6"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: VecResolver"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: boxed::BoxResolver"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: erased::ErasedPtr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ser::sharing::SharingState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ser_vec::Drain<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::alloc::aligned_vec::AlignedVec<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AllocationStats"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArchivedHashTable<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArchivedRangeFrom<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArchivedRangeFull"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArchivedRangeTo<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ArchivedRangeToInclusive<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Buffer<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IpAddr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Ipv4Addr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Ipv6Addr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: allocator::alloc::Arena"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::pooling::alloc::Pool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: option::Iter<&mut u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: option::Iter<&u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rc::RcResolver"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI128_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI16_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI32_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroI64_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU128_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU16_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU32_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::NonZeroU64_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::char_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::f32_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::f64_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::i128_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::i16_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::i32_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::i64_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::u128_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::u16_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::u32_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rend::u64_be"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ser::writer::core::Buffer<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Positional"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Deserialize>::deserialize"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ser::writer::pos: rkyv's MIR stops at mir::Instantiation: u32 for a parameter bounded by Positional"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ArchivedBound<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ManuallyDrop<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Place<bool>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StringResolver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::BTreeMapResolver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::HashMapResolver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::table::RawIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: de::pooling::PoolingState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ffi::CStringResolver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: impl Deserialize<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedIpv4Addr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedIpv6Addr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: option::Iter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rc::RcWeakResolver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ser::sharing::alloc::Share"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sse2::Bitmask"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i128>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<isize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u128>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeToInclusive<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::RwLock<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::inline_vec::InlineVec<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validation::shared::ValidationState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validation::shared::validator::SharedValidator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item simd::MAX_GROUP_WIDTH"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::from_raw"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: api::access_unchecked: rkyv's MIR stops at mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rel_ptr::RawRelPtr::offset_raw: rkyv's MIR stops at type outside the lift: rel_ptr::RawRelPtr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Align<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AllocationTracker<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArchivedBTreeSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<isize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI16_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI16_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI32_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI32_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI64_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicI64_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU16_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU16_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU32_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU32_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU64_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicU64_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BTreeSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bound<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ControlIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DefaultNiche"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IoWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IsizeOverflow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OptionBoxResolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PhantomPinned"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Place<[u32; #usize_N]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeFull"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Repr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubAllocator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnsafeCell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: With<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: allocator::alloc::ArenaHandle<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: archive::validator::ArchiveValidator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: btree::map::iter::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: btree::map::iter::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: btree::map::iter::Values<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::Range<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::RangeSeal<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::btree::set::BTreeSetResolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_map::RawIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::set::HashSetResolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::table::ControlIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impls::alloc::with::serialize_with::RefWrapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impls::core::with::RefWrapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_map::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_map::Values<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedSocketAddrV4"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedSocketAddrV6"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: niche::option_box::OptionBoxResolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRange<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRangeFrom<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRangeFull"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRangeTo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedRangeToInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: option::ArchivedOption<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rc::ArchivedRc<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::AllocationTracker<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::core::SubAllocator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::writer::std::IoWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sharing::alloc::Share"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: simd::sse2::Group"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::alloc::LayoutError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomPinned"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV4"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV6"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::rc::Weak<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Weak<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: time::ArchivedDuration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::alloc::aligned_vec::AlignedVec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::inline_vec::InlineVec<"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: check_inner_node::{closure#0}: mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: check_leaf_node::{closure#0}: mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: impls::core::option::serialize::{closure#0}: mir::TerminatorKind::Call: <u32 as Serialize>::serialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: impls::core::with::serialize_with::{closure#0}: mir::TerminatorKind::Call: <u32 as SerializeWith>::serialize_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Sharing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Writer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: a value of String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u32 as ser::writer::WriterExt<u32>>::pad::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: impls::core::serialize_unsized::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ALIGNMENT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item hash::hash_word::ROTATE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: util::alloc::arena::detail::clear_arena::promoted[0]: type outside the lift: ser::allocator::alloc::Arena"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Acquire"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as SerializeWith>::serialize_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: api::checked::check_pos_with_context: rkyv's MIR stops at type outside the lift: rancor::Strategy<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: api::low::checked::access: rkyv's MIR stops at type outside the lift: validation::archive::validator::ArchiveValidator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: collections::btree::map::entries_in_full_tree: rkyv's MIR stops at mir::TerminatorKind::Call: collections::btree::map::nodes_in_level: rkyv's MIR stops at mir::Operand::Constant: the constant item E"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: collections::btree::map::nodes_in_level: rkyv's MIR stops at mir::Operand::Constant: the constant item E"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_next_power_of_two"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: impls::core::with::serialize_with: rkyv's MIR stops at type outside the lift: <u32 as traits::Archive>::Resolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: niche::niched_option::NichedOption::serialize_from_option: rkyv's MIR stops at type outside the lift: <u32 as traits::Archive>::Resolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rel_ptr::RawRelPtr::base_raw: rkyv's MIR stops at mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::alloc::arena::detail::clear_arena: rkyv's MIR stops at mir::Operand::Constant: util::alloc::arena::detail::clear_arena::promoted[0]: type outside the lift: ser::allocator::alloc::Arena"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::alloc::arena::detail::with_arena: rkyv's MIR stops at type outside the lift: Arena"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <T as Archive>::Archived"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as ptr_meta::Pointee>::Metadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArcFlavor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArchivedHashSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArchivedRcWeak<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arena"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMapResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeSetResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Bound<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EntryAdapter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMapResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashSetResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashTableResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IndexMapResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IndexSetResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterSeal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Node<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Place<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Place<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Place<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProbeSeq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawRangeIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RcFlavor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RcResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RcWeakResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Serializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ValuesSeal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecDeque<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: btree::map::iter::Range<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: btree::map::iter::RawIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: btree::set::iter::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::NodeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::IterSeal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::Keys<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::RawIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::RawRangeIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::map::iter::ValuesSeal<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::btree::set::iter::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_map::IndexMapResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_map::Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::index_set::IndexSetResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::map::ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::table::HashTableResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::swiss_table::table::ProbeSeq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::util::EntryAdapter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::util::EntryResolver<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::pooling::core::Unpool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hash::FxHasher64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Serialize<HighSerializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Serialize<LowSerializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl SerializeUnsized<Strategy<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl for<'a> Serialize<HighSerializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::RawIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inline_vec::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedIpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: net::ArchivedSocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroI128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroI16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroI32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroI8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroU128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroU16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: niche::option_nonzero::ArchivedOptionNonZeroU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ops::ArchivedBound<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pooling::alloc::Pool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pooling::alloc::SharedPointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pooling::core::Unpool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr_meta::DynMetadata<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rancor::Strategy<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rel_ptr::IsizeOverflow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI16_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI16_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI32_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI32_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI64_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicI64_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU16_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU16_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU32_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU32_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU64_be"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rend::AtomicU64_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::AllocationStats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::alloc::ArenaHandle<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::allocator::alloc::Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ser::sharing::core::Unshare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared::validator::SharedValidator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sharing::core::Unshare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::UnsafeCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Zip<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::repr::InlineRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::repr::OutOfLineRepr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: table::RawIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<std::mem::ManuallyDrop<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::CopyOptimization<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::Align<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::alloc::aligned_vec::AlignedVec<#usize_ALIGNMENT>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::inline_vec::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::ser_vec::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::ser_vec::SerVec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validation::Validator<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::MapNiche<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::NicheInto<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::With<u32"
+bodies = 1

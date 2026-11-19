@@ -1,0 +1,83 @@
+# The proc-macro-hack register (written by `uorust crate proc-macro-hack@0.5.20+deprecated`; do not edit): every body of
+# proc-macro-hack's MIR at proc-macro-hack 0.5.20+deprecated, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 39
+translated = 0
+residue = 39
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.error]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.iter]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.parse]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.quote]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 39
+embedded = 39
+evaluable = 32
+blocked = 7
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Ident"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iter::IterImpl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenTree"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Export"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Span"
+bodies = 1

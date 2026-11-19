@@ -1,0 +1,854 @@
+[[fn]]
+path = "deadpool::Manager::detach"
+kappa = "79f305f8d1be9f44c7d72ffe5212e2b2d58480cd8bb0788d0dc552802fce16b5"
+embedded = "cb84ff1d3d7accc1eef46ffb5bdf4fcbcf0d7f725905db8c02c87ec2309a74a8"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "deadpool::apply_timeout"
+kappa = "b4e3babccbc96aec40d3858da66278b6074a23b9323931cebad0cad3ac474839"
+at = "E=u32, O=u32"
+embedded = "5f4efac9a6261ba6c79a5a2a0c91433954256f76fc43fa32975460501fd82033"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::pool::apply_timeout<u32, u32, impl Into<PoolError<u32>>, impl Future<Output = Result<u32, impl Into<PoolError<u32>>>>>()}"
+
+[[fn]]
+path = "deadpool::builder::<impl at src/managed/builder.rs:12:16: 12:21>::clone"
+kappa = "53687422a42c3e186e8666a02a94a462657de36df6a66e5cee91625ade4b8349"
+embedded = "17cfa1eaf08f381d2b0f62981c7f54e0e9231ab931f8cef235b537b0cde20fa4"
+status = "residue"
+cause = "mir::Ty: managed::builder::BuildError"
+
+[[fn]]
+path = "deadpool::builder::<impl at src/managed/builder.rs:12:23: 12:28>::fmt"
+kappa = "f11d82978d8e2757750eee712fa73793dae98cba78ed1f861be0361d3b2c7149"
+embedded = "29e0ee2d8571b1ff91d5f2aa59a9340f1750c459a0425649789aa80e76e33838"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::builder::BuildError::fmt"
+kappa = "b419d0c06bddd8895c163a83159bf0975bbf7e2348fa3901ab63b50e8243a11b"
+embedded = "055dfb48ecaa2fe9f1445f8c827609c6ee32137d3bf686a855f47a0d37d1a0a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::builder::BuildError::source"
+kappa = "3b8a9f4ecf09af2f87ff8fa7928243734cbe6000e63f20df1a7689e63d4a369e"
+embedded = "589dc3e7d14a7cbe770f946dd3620149952816017f64226203b6853ddcbf4ec0"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::build"
+kappa = "0b229c42d82e207bd6e152edc306aac09ddf8326332dbd938163b9e4e82b619b"
+at = "M=u32, W=u32"
+embedded = "a84087c6c782b048e5180faedd8a1046af055aa08913c045da725b0a5f7200cf"
+status = "residue"
+cause = "mir::Ty: managed::pool::Pool<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::config"
+kappa = "6c52a7e1c2628295eb6b02d160b5443c0bcfcc2c28f68879684aff819fec98cf"
+at = "M=u32, W=u32"
+embedded = "26f5cc6cff4a086217f0b5f59095859781e62934191f4f6b954760c5bca25333"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::create_timeout"
+kappa = "91cd46599ac489baa065ec70ebdfb8f3c1bc75b02f050ff346c82188fb4b2f3b"
+at = "M=u32, W=u32"
+embedded = "29e13c852a142b326e56ebbea686d3c6d74fbf3375e90d138632f1579908e58d"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::fmt"
+kappa = "74cc1df0540f81d525fd8b49ff2b2c80f15f5e62a163c944dcadcbbba8d5fb72"
+at = "M=u32, W=u32"
+embedded = "56d02026f7bcb004c7637b9bd108aadef0d4c5dbe11a366a03110637efa5d3df"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::max_size"
+kappa = "db12ae0532cbb2b7525d46fda408e492ac341e18e9a9c8a5e72f4e4e93f97a54"
+at = "M=u32, W=u32"
+embedded = "f98095aa793f2f6eb7cdc4bf82ad8c1934d5795c5f09523d57831ebfc44ef162"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::new"
+kappa = "608bd55f7bebe05c102c15ec287dd98072781200d7ce4d26904a4f90b9a5f691"
+at = "M=u32, W=u32"
+embedded = "09e25c8518036ab72da75b9d26ceb7984de1cb57de3b695c5f2173be0943977b"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::post_create"
+kappa = "ae9624bca7551a259a966871c9d5e791b5d45669f63d1196e7b83fdaf3c929ee"
+at = "M=u32, W=u32"
+embedded = "a2e42a0aaba634ca17e11a74fd32777b678099258b4e2fd4c4eea8c217ac4005"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::post_recycle"
+kappa = "2cd40c724d8d2a8ddb6b8e6ad8977d894c4566f8acb6e1b37d95c426d7ce6703"
+at = "M=u32, W=u32"
+embedded = "b4af85c1c392c4fda3ad796efaebb26a0d5d3c14036129ad5105fba30f001cbd"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::pre_recycle"
+kappa = "133d60d7f18ebc64c56134c84699797476dd19614c3e79923112ae26135f9f97"
+at = "M=u32, W=u32"
+embedded = "cd7c09c5d3ee419fd34f6cb9de3df2f8f1434f7912770bae5193c11abcf35ddc"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::queue_mode"
+kappa = "ef808f1e6a709fec43f07ecc371c5d0d73d02c3c88cdd291fb300948746e9f36"
+at = "M=u32, W=u32"
+embedded = "cb507e32209b59b12c02ca5324d2485bc3c620fe0cd83ba4a453643e76864673"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::recycle_timeout"
+kappa = "1aa2a67c8f14a323c10fd0840ed1ee93fb3438b5251f50a7e7691975a295f78e"
+at = "M=u32, W=u32"
+embedded = "b643c0961bc7d50d96c87208cdece327da7f620e7e72562c7543748f7415342b"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::runtime"
+kappa = "0e1e3f503bed68748b4048989f33bd6fb0898fe138b15bb69769009cc6e17d86"
+at = "M=u32, W=u32"
+embedded = "baed2d85931c71dc3d9cb95b519e37156d7457a4198fd5637ecb4e20fe6a6309"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::timeouts"
+kappa = "992cbfadef58ece51cd5ebf6af2eeb198526481b95e0071b4bc21d6b8518a9e9"
+at = "M=u32, W=u32"
+embedded = "3659936bf733887dadf0f678c44699d5d614472ec63a481a1ef32782649f4a0b"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::builder::PoolBuilder::wait_timeout"
+kappa = "251103152c52ec36e7fdd68d3ac23317a51b7be282f36f5ceec2b377efceded9"
+at = "M=u32, W=u32"
+embedded = "cd8f8ae759e90b3640f5894ad0b450228610bd96083b1af516802ebf6aa6a678"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::dropguard::DropGuard::disarm"
+kappa = "1de650f7338a279f1187259a414de6a4fc32807d7f57bdaae323b606be7a81d6"
+at = "F=u32"
+embedded = "d3d939da414f7330379a0e23254124b270660739f3e40db78ccb0f1075c6cd1d"
+status = "residue"
+cause = "mir::Ty: dropguard::DropGuard<u32>"
+
+[[fn]]
+path = "deadpool::dropguard::DropGuard::drop"
+kappa = "3611135c963501dd61046c04cfc50e7d8758509c1fd7d70297a9bcf23027951d"
+at = "F=u32"
+embedded = "57e12bb0fbdedfdfabf2c40eee29624a7e0a705b0128645b27f32990d6920ad7"
+status = "residue"
+cause = "mir::Ty: dropguard::DropGuard<u32>"
+
+[[fn]]
+path = "deadpool::hooks::<impl at src/managed/hooks.rs:67:10: 67:15>::fmt"
+kappa = "19441a5ec2389236d521e7bdb65665952e3605efbbe71a828749f2186501f64c"
+at = "E=u32"
+embedded = "58e02839ca72dffae5f5f63eb73bfaaacd73ff3f617a7586483435806b0050e8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::hooks::Hook::async_fn"
+kappa = "eada9b6bff8845b517fff03270b82d56b765d54d3ae27f38fb3cc0685f12d311"
+at = "M=u32, Metrics=u32, Send=u32, Sync=u32"
+embedded = "2fc372a7385dbd57a5fadeef79fef11b34abb00b13905d79d103509a89993786"
+status = "residue"
+cause = "mir::Ty: managed::hooks::Hook<u32>"
+
+[[fn]]
+path = "deadpool::hooks::Hook::fmt"
+kappa = "36eb1c6ea3a4859d2e07b6827154821ad086901a4b36cdc6d199d31fed456f5d"
+embedded = "d50ed87029399da960711fdb1575ce4858808244f9c5c0e817cdd4a2df3098ea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::hooks::Hook::sync_fn"
+kappa = "65f9d16c7a76b5b416e9ac70d96c1a4285069f61452fae50617a5fb92f84817a"
+at = "M=u32, Metrics=u32, Send=u32, Sync=u32"
+embedded = "55704b69b67ef32cd09573fa638f3724a6ae61abdad2b4711d785aa06ba802f3"
+status = "residue"
+cause = "mir::Ty: managed::hooks::Hook<u32>"
+
+[[fn]]
+path = "deadpool::hooks::HookError::fmt"
+kappa = "838b87f7ce5aa1563c022d0e6e8d13e1aa8d6e6a8d924b1b783fb4f51634a6cc"
+at = "E=u32"
+embedded = "7eb0aaa68222b56f550b9411d780b548f95fee64f9e4179656083d15a4c7bcb2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::hooks::HookError::message"
+kappa = "e3df5de37817d8f83de78c7ec690270b8cb1f9f95b70dfa0028b0738072a43fd"
+at = "E=u32"
+embedded = "bcbbf0ab2969857fa92a3faed82374a8d2e1d5532406ce95bef9398eefe6de45"
+status = "residue"
+cause = "mir::Ty: managed::hooks::HookError<u32>"
+
+[[fn]]
+path = "deadpool::hooks::HookError::source"
+kappa = "d37942d0c47b894f318e7fc01f12de3581c486ebd5f21eebeacc1f51882e675c"
+at = "E=u32"
+embedded = "680796243d2bdb14503b6b879552e8dd2a5816ad3546716e3fe92dddcc9b4fc3"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "deadpool::hooks::HookVec::apply"
+kappa = "e133240927246fde50b681fb0f66c3f28b42e633e730d2ca2d63e5b8d69a88f5"
+at = "M=u32"
+embedded = "b818c75bc1d6d954bc2b53140075ae9bfc719b0f87f67ef8ed986af8ccfb1e96"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::hooks::HookVec<u32>::apply()}"
+
+[[fn]]
+path = "deadpool::hooks::HookVec::default"
+kappa = "69cf2b0ded8a02c514bb5a7d0269253042c883cbd187da9c7eafbcc37c443d9d"
+at = "M=u32"
+embedded = "1b3c7cff5f8d451f6a7854a9f0524f17a8952574bffee43ed26f622e7d3ccf14"
+status = "residue"
+cause = "mir::Ty: managed::hooks::HookVec<u32>"
+
+[[fn]]
+path = "deadpool::hooks::HookVec::fmt"
+kappa = "f0990369ffd6c493976f4b842ebe658b59192188c86fdd6d00b15bea09b44b2f"
+embedded = "295ef8a8b1435e95c81d1c1c477d8977545317994cf5ab1931abe314f9274dea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::hooks::HookVec::push"
+kappa = "a182555134a2f4b76c3bccba587db5390f920e0c7ba87d670929039800e4de1c"
+at = "M=u32"
+embedded = "e4ec9e68c0b55236ec84740433cba1b3b7c3f37e8a936f344750a68b752925da"
+status = "residue"
+cause = "mir::Ty: HookVec<u32>"
+
+[[fn]]
+path = "deadpool::hooks::Hooks::default"
+kappa = "976bce7ac42f2e1d32ea2a2e284529ee8ad4da082425de26a79359b6621d1a04"
+at = "M=u32"
+embedded = "74fd06db42fd4c8500016396a7112aef20afb287de93ed8003d0053c7ef51c75"
+status = "residue"
+cause = "mir::Ty: managed::hooks::Hooks<u32>"
+
+[[fn]]
+path = "deadpool::hooks::Hooks::fmt"
+kappa = "df27f44e3ced89dec4d700d1c60ffc68835aedbcd44cc080aebbde078573a18c"
+at = "M=u32"
+embedded = "11b7278d59020a0c95a628110e8619cb59119c298508e73d1e9034ca4bbcf197"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:110:10: 110:15>::clone"
+kappa = "7f84401bf3fd02ae0afe7b1e4fbfd8e77b3fc794baf9237e08bb5a68801f8088"
+embedded = "1565981e52cd87bbe709a826f37e627e4edd418bae7dcc622b774aba18d389cf"
+status = "residue"
+cause = "mir::Ty: managed::config::QueueMode"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:110:23: 110:28>::fmt"
+kappa = "3744a5443adda49c1367e6545fbbbae685ede6c58b28c8f26eaae1db28fe6258"
+embedded = "12f914fb4167142897c5efe2805b9c8b2bf3bf4949458e5457fdf56506ecd313"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:110:30: 110:37>::default"
+kappa = "85ff34c7def91b51a021583f3f218000a1a1fb612d9d9b2ed78e41d1903217ec"
+embedded = "a9bb6c2b02503eb81dcad4cd7eb55e0b9aa39fa0b34b9330e05b69240ad00c21"
+status = "residue"
+cause = "mir::Ty: managed::config::QueueMode"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:122:10: 122:15>::fmt"
+kappa = "009b383d482828386d02f15dd46cbde52de3b5508b63ff17b5d8fca4cfcb4a0c"
+at = "C=u32"
+embedded = "e2702f608466f86e48dc89bf2fcc4a06469da686285e58e3454fd856850e8aa2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:62:10: 62:15>::clone"
+kappa = "31195e024fcf528de2d06c49b7f4b7d639eee5de327f9ba4f6587a6c2e847da6"
+embedded = "1e8dc7a2abb950a48e498be3640a9bd19d2185f4ca5b0d7e8b3c15a7cdc8f419"
+status = "residue"
+cause = "mir::Ty: managed::config::Timeouts"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:62:23: 62:28>::fmt"
+kappa = "8806dbe586c8a48e27771232630ac08c15fe175adbfab3a7d397d78af4a1c122"
+embedded = "308663da4b4f6cc2861dfaba3ad71ac41cb5e28ec075d596bb22ae17bd1bc108"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:8:10: 8:15>::clone"
+kappa = "356aeb08fb37c11c5d30223a170541deae7f90930cb4d63fd4bc947a518a48af"
+embedded = "9a95d34c7943a4441062660558fd9603c2d7257286b9f4424f16aa3b067fadab"
+status = "residue"
+cause = "mir::Ty: managed::config::PoolConfig"
+
+[[fn]]
+path = "deadpool::managed::config::<impl at src/managed/config.rs:8:23: 8:28>::fmt"
+kappa = "1cb6e49487b6e6ae10d24a82f03ae9a998cea1b2d42aca42528966a833d4230b"
+embedded = "565e56b942b0309d7903e346b50f8e30c6c5c0604c1e3655dc4e5dc034e429d5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::CreatePoolError::fmt"
+kappa = "6ee3c26f7c50fa32df0eb49be3f57b8b02e6f4be198a9281b8121d892aeb0c40"
+at = "C=u32"
+embedded = "1957880361c4f93a2b60a8853ef709bbf79cab05c799bfaf323a0863c949082d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::config::PoolConfig::default"
+kappa = "af94bd1cf8e17867ead1d53da9a8e4ff25307422b82572dfeb93a29eaca14f46"
+embedded = "5c6e96e37f7f18f091e7e87778df76b5e97e4c9fc064c270626c8dd314d710c0"
+status = "residue"
+cause = "mir::Ty: managed::config::PoolConfig"
+
+[[fn]]
+path = "deadpool::managed::config::PoolConfig::new"
+kappa = "2e4b2fac7ec55a82113e8818799224c9202d4efd9d5d16ebd048f7d77beb23be"
+embedded = "412f644f7d310f0311fbb83cf86fb5fbf605e4f508dde9a2acadd7a2d2956916"
+status = "residue"
+cause = "mir::Ty: managed::config::PoolConfig"
+
+[[fn]]
+path = "deadpool::managed::config::Timeouts::default"
+kappa = "613b11726b1bc1a0acb29ff44df75f85e8376d33125a3a28a3908cb4ff9fe68f"
+embedded = "da8d7e4e40368b2b2db9f398c9b13315ae5e3c992a5df6e5c6cfe76da1e153b9"
+status = "residue"
+cause = "mir::Ty: managed::config::Timeouts"
+
+[[fn]]
+path = "deadpool::managed::config::Timeouts::new"
+kappa = "bb3a0b96f2c5f7eae4fc61f24ccb09266ff1a7291b98a1e542f22ea2cce046ef"
+embedded = "7d5443e336ce0d52491d9687dca19503fb162289b3a07b843b39a83b5e2357fd"
+status = "residue"
+cause = "mir::Ty: managed::config::Timeouts"
+
+[[fn]]
+path = "deadpool::managed::config::Timeouts::wait_millis"
+kappa = "38fcae5aca63a7597d50ed42aa42f5b2aba460ec51c5bc6db39278169ea4bc8f"
+embedded = "dc8cba1b34fb1792af3590367ede12bd0c44fc0fa7fd1ccb58251e48cb36b586"
+status = "residue"
+cause = "mir::Ty: managed::config::Timeouts"
+
+[[fn]]
+path = "deadpool::managed::errors::<impl at src/managed/errors.rs:53:10: 53:15>::clone"
+kappa = "2d0af8013ade96b0dfab07817d9947a74a9b33907eb1bee6393742ce7c95e519"
+embedded = "8bc131420e5002a269bb87c1b0c51716c8901b3f3845cac6ab5df194ca280783"
+status = "residue"
+cause = "mir::Ty: managed::errors::TimeoutType"
+
+[[fn]]
+path = "deadpool::managed::errors::<impl at src/managed/errors.rs:53:23: 53:28>::fmt"
+kappa = "6f07f13c6638ff38140c530d56472fbb2b364cda6203aae01a688ac96cac2d7c"
+embedded = "4429971fec866d7fb619953c2259614d07d7010237e8146e6c2145ac0a914c46"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::<impl at src/managed/errors.rs:68:10: 68:15>::fmt"
+kappa = "5088e34f889a76e2623f58d267bbb8abc411409c3ef036846ce49969245c7c16"
+at = "E=u32"
+embedded = "a5367c50be510246f45d3f69ca5c1c9d6a7043a04a74f0dc4c4790b9d80b11e3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::<impl at src/managed/errors.rs:8:10: 8:15>::fmt"
+kappa = "5772c2b32cbd083de21c2243098e517032b2c9c30273fa247abe58ac536afafd"
+at = "E=u32"
+embedded = "13bd5982720b52a472f4bf172033258fedc7a573ce8f863907bf0aa863643cf0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::PoolError::fmt"
+kappa = "a5caabce6b3b2386d8b25a708b94b8350ad10ccdc7cbbaa37ade50f3864a84f6"
+at = "E=u32"
+embedded = "f83b122347b799b91b4d0ce848751efc80da3f98cd03385c6c9c233bc539a74f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::PoolError::from"
+kappa = "575b36937e57fa5a905e134bac5ee5088f99661df3c7b679e7788d36d66ca6ff"
+at = "E=u32"
+embedded = "b3ca88d3ba240b94821a2b75b1ec61093e9dd0cb939d4861706a9531265c5d7d"
+status = "residue"
+cause = "mir::Ty: managed::errors::PoolError<u32>"
+
+[[fn]]
+path = "deadpool::managed::errors::PoolError::source"
+kappa = "f8c069635c4c75c0811b547566de5480db5ea42c4d719bd831de87a94656bcf1"
+at = "E=u32"
+embedded = "95780b190979d2567262b7ebe48ff1c10eba9ad056d2fc02373b3a29773c6315"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::RecycleError::fmt"
+kappa = "9981ad40f13dcf7ca6f68b6487525d683513186298653bf420075d29ce5f8cc0"
+at = "E=u32"
+embedded = "48c58aad5560a0720eddc4cd848dbe55a304b8b168187becf15ca8b698a505a0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::managed::errors::RecycleError::from"
+kappa = "9f219715b53916be795b3aca09209062fb69e905ceed795261056434ea04cea0"
+at = "E=u32"
+embedded = "fadfb9eea615905452b231fd49624b7a850e1a9406b2bab7c35280763f253e5c"
+status = "residue"
+cause = "mir::Ty: managed::errors::RecycleError<u32>"
+
+[[fn]]
+path = "deadpool::managed::errors::RecycleError::message"
+kappa = "faf0e2b4802651db90a4a3e1cea697e98598b3cf0eff2e2fc673bdd7d6814f86"
+at = "E=u32"
+embedded = "0226f6d81a3a492379a621dfcff4baa3637b273715cf8469769d0bfeaf5f15a6"
+status = "residue"
+cause = "mir::Ty: managed::errors::RecycleError<u32>"
+
+[[fn]]
+path = "deadpool::managed::errors::RecycleError::source"
+kappa = "7848c633a6acabd0a5aa46ee0b068bc533606cefe720e8fe5418f0c93347523b"
+at = "E=u32"
+embedded = "efbf09f123b9b18f18ae440897fd33276f4f5bdb4d2c5d7677958d6b84b03356"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "deadpool::metrics::<impl at src/managed/metrics.rs:5:10: 5:15>::clone"
+kappa = "e4261385d5fe75a5077cad9d8e4424f5735ecdcc3d8385952feb1d2b353b2895"
+embedded = "3f3a4e3dcf4072cdf90f4235a217d7fde72727a991e021bd724772dc81e46263"
+status = "residue"
+cause = "mir::Ty: managed::metrics::Metrics"
+
+[[fn]]
+path = "deadpool::metrics::<impl at src/managed/metrics.rs:5:23: 5:28>::fmt"
+kappa = "59b108d7db15a0e9c7ac4834778c1ac2fe579ace816b265872ef18cf558af0a3"
+embedded = "2029313f1e8cedf31d90fc0cb85b31637368624b7c59a838649e708abe023f8b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::metrics::Metrics::age"
+kappa = "f1133a931dffb6165ef1526475b5bb5b9d94edd7c303859596a34dd2c0335fc2"
+embedded = "a7c7bbe6da27b1e763630d00ac1e872368d4b6f65569654616e1f880b5619706"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "deadpool::metrics::Metrics::default"
+kappa = "e653e9376d835e3012bf4228a3e18d44185fd2240cf7369f7ffb86768e7199c6"
+embedded = "0c108ca92a77e8535609304e1def94cedd5750d94c048dd2fc45795d94714d57"
+status = "residue"
+cause = "mir::Ty: managed::metrics::Metrics"
+
+[[fn]]
+path = "deadpool::metrics::Metrics::last_used"
+kappa = "fdb29502291b86cd35100d177435ff1992611311a693db08722d6be6c01ff69a"
+embedded = "a1d1c2da3b78bedbf1fee70026967c38a0fb3a78200b0d4319f3463258a8e862"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:16: 133:21>::clone"
+kappa = "884948443e45c18a388d7b842dc368a0faad636ef2b8d4488ce85eeaef9f761c"
+embedded = "b843e558b2dfe622f7bdd4280d9ca4137bcd8e3cec4114e7e8d0ac8141926b4d"
+status = "residue"
+cause = "mir::Ty: managed::object::ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:23: 133:28>::fmt"
+kappa = "f1f5e135cb10bf30e766575b04df24b5d14232e9d831508843fea4e1f642a9b5"
+embedded = "01befeff1f8cf710e4b642580aa5acfcb59c1c8f9da598b8a4c78e5405216170"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:30: 133:34>::hash"
+kappa = "cdb532dfd409154b841c3a1103e44bf05606d96ee4759cea94347a591d2f7cc2"
+embedded = "ec563b3d7835ae21af6186b34b3f41cce10e13c98f97dc71def610ca0910b879"
+status = "residue"
+cause = "mir::Ty: ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:36: 133:38>::assert_fields_are_eq"
+kappa = "1b101d322531b95f18e6b5f721d914808c076f394bbd8f733b0090b74027bf19"
+embedded = "7fecdd175607ddff23685ba594976e19b7033b2fdd5a5c854e14c86f800994a0"
+status = "residue"
+cause = "mir::Ty: ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:40: 133:49>::eq"
+kappa = "6fb4fa68a11d9c9562a1e2b8447a08786e8d940fced8373cd45972bf1e905142"
+embedded = "2f615d6ccf864c537275487eb6155c0a569428520e29a5d70b0b72c1646bca87"
+status = "residue"
+cause = "mir::Ty: ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:51: 133:54>::cmp"
+kappa = "1b616b26802ffada4e86aa5e5d0dfc8fa71fd441594bb56a0627a7f47c9c55d4"
+embedded = "3d775d18774d6e97b69556f4c34854371f753c56e3981de8b27c3786cdf13ff4"
+status = "residue"
+cause = "mir::Ty: ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:133:56: 133:66>::partial_cmp"
+kappa = "f2ea8a6c8bd3c685006e8c5c163de3134176b7f4a4ed7a1fe336af3441040c5a"
+embedded = "88524d9cf908dcbc9a8268665d9d2e41a3e37b44fb47b13de72dff3bd86022da"
+status = "residue"
+cause = "mir::Ty: ObjectId"
+
+[[fn]]
+path = "deadpool::object::<impl at src/managed/object.rs:34:10: 34:15>::fmt"
+kappa = "9e3f70001c9fcb3fc41819fec61f8a11dc17f7682fbfca8ca769a2cef533514e"
+at = "M=u32"
+embedded = "894afa761502c1a68d2a62b78d32cf3e29f2a2a3fe5d4856ef439fc2caae6984"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::object::Object::as_mut"
+kappa = "9787f685bde7d22a579e0a28096202447b3656fe5b865124fc834736b2768d10"
+at = "M=u32"
+embedded = "8a4ba1f47444cbb064c7d44b55c990ddb7b83cb50cef83265c9f13338d6930a9"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::as_ref"
+kappa = "1bd9ddb847d794184cee71795a3f054dd86073c09816cd26e333bd12b59e42d8"
+at = "M=u32"
+embedded = "d94fc73f478a5456c35d481f7ab6412752495f42a7e4703eb312f08eb094f469"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::deref"
+kappa = "098886852fe2bcfa3a1e178b300f2499a4fbe3b335405c94e75176d14d033a06"
+at = "M=u32"
+embedded = "6d182fee9475ddebf678c60d0622aac48895f5d1fa78825c15070f22642994d2"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::deref_mut"
+kappa = "7245d273309b2d8dcb01acab76450301224cd993e968abced95bc146c554868d"
+at = "M=u32"
+embedded = "fa7b0e5b10be5370ea12b445955ba4d2af5a79108bc589f91268a2a410bf9020"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::drop"
+kappa = "1188a60f7b8a8be40af9f09388921bd3c4b29b9975f25c9be31f13f890765c19"
+at = "M=u32"
+embedded = "7ac3fa9cceb2ff49a37738dd7233705d50aed8cb64bc581e5732dca8f7ee3aa7"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::fmt"
+kappa = "c6c7e132d3158f569425240d5407be9311cadf31047c40e6f88bc98491c85739"
+at = "M=u32"
+embedded = "d0d75edb7fecad683eee8d3c45499544e8b5fd11d67ffeb4d2f2f2459a036942"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::object::Object::id"
+kappa = "5ead46b589d905cd56e0706b436c66a68251cd93cdb09ec8e2ef7506248ed88a"
+at = "M=u32"
+embedded = "164e1d2ad745a2a4b9a2193d3e398dca4eaa8f427f47ddb5e27558f844a44716"
+status = "residue"
+cause = "mir::Ty: managed::object::ObjectId"
+
+[[fn]]
+path = "deadpool::object::Object::metrics"
+kappa = "6819fb521defa9ba8a81652a3594b57c68a52c98109c34106bc204fd131fa40a"
+at = "M=u32"
+embedded = "938190eeb9220f9ebdc212509d980cc3cfead0a0833fe8e507febcdcaa67ea07"
+status = "residue"
+cause = "mir::Ty: managed::metrics::Metrics"
+
+[[fn]]
+path = "deadpool::object::Object::pool"
+kappa = "b1c4352ef1ea8dccf9f0b14bc7e4523a85e306edac9d9203e7cb6b832f25ad0d"
+at = "M=u32"
+embedded = "5c237bf4aa14157baafd4771d87a90d8bcdfc62f4a5cb7f43bb10ae271578030"
+status = "residue"
+cause = "mir::Ty: managed::pool::Pool<u32>"
+
+[[fn]]
+path = "deadpool::object::Object::take"
+kappa = "484bd5b83772b401cb0571b1f7957b8eae18bd9b1f383a5b27cc3e1082ed88a0"
+at = "M=u32"
+embedded = "a81ed38841d39084491ddc78721d581b70948d9dd615fb9ff833d6f132fecf62"
+status = "residue"
+cause = "mir::Ty: object::Object<u32>"
+
+[[fn]]
+path = "deadpool::object::ObjectId::fmt"
+kappa = "ae3cb48cecfcc284adffe532662a4e536e9f1eae67ed5204fc93252f16d64689"
+embedded = "0d277c89e2b47e7589d9b5fe96e09f3ec41ab914807ceb1e6525f982a79714d4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::<impl at src/managed/pool.rs:396:10: 396:15>::fmt"
+kappa = "934c2a31d3e746476e81a4a8d4e4dc7c425a5478db8d720df0108867e331294b"
+at = "M=u32, W=u32"
+embedded = "d83830f837b1d60c3cc98e9f68fc818eb0302340449772cfad4c106528b1292a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::<impl at src/managed/pool.rs:428:10: 428:15>::fmt"
+kappa = "5ed14db74c1c9ca5d353ed8b54141e9eb4a340f4cbce7dd1482479a9d4fb2ab2"
+at = "T=u32"
+embedded = "6b66ff68f0ea0a162595109b9d1eda0bc9fd2ec0a3519a05b03bb16234e90ef9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::<impl at src/managed/pool.rs:520:10: 520:15>::fmt"
+kappa = "6f9672e57d664926df8c2202c1195e0d7cb1e8d795a29bf81074646a939cd261"
+at = "T=u32"
+embedded = "30a66725d8b65a8bcd6eedfdd10be35315978ff851577fe184fd6a5886102053"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::Pool::builder"
+kappa = "5c4394abcee8f3efb7d45ae082d38332a20b7100addfb8224e06731b2b0fe8b6"
+at = "M=u32, W=u32"
+embedded = "c453003c72f03586eaabf20f9c522d8469bc95d8eb82aba26cb67f3b8b606224"
+status = "residue"
+cause = "mir::Ty: managed::builder::PoolBuilder<u32, u32>"
+
+[[fn]]
+path = "deadpool::pool::Pool::clone"
+kappa = "c5cb401806896c45d621c069c2a2289897382f94746b12b83ba3d91a54e639ee"
+at = "M=u32, W=u32"
+embedded = "716ce6643117afad7cb05f65a9c6e155b1a8141328e6f64d044d9afbb422449f"
+status = "residue"
+cause = "mir::Ty: managed::pool::Pool<u32, u32>"
+
+[[fn]]
+path = "deadpool::pool::Pool::close"
+kappa = "94a4111affa2d3a6b6a187809d31989b141e33c527324fb1a07dc8b3621bea60"
+at = "M=u32, W=u32"
+embedded = "b677bf23919f755e8c52a88993962a39c0d9a2c18b0dc88a84cfd590d809734f"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32, u32>"
+
+[[fn]]
+path = "deadpool::pool::Pool::fmt"
+kappa = "3e46dda06cad3fcde88b747e9ae426c55992e85fda57b274aa00c687c38315f8"
+at = "M=u32, W=u32"
+embedded = "ea2d7b4dfcee24bbebbc9235686ed86f1b61c7ce62e97e919651e78887ee9cef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::Pool::from_builder"
+kappa = "9847e20aaa61c8e6893861314349eb5e16064ad793c4191c4ace639bfe2c2be2"
+at = "M=u32, W=u32"
+embedded = "1f64024e0182f6580aa21529af7ea4c4e1ee69be8addc5eab502aaa559973f3c"
+status = "residue"
+cause = "mir::Ty: managed::pool::Pool<u32, u32>"
+
+[[fn]]
+path = "deadpool::pool::Pool::get"
+kappa = "54eee9093fb335ea227972b182438900153ff57646b944fcfec754fc49e3569a"
+at = "M=u32, W=u32"
+embedded = "a2f1785a81427bfa1c55e3644fce8996ee0ad00e9f6dca2d1919fa41190820d4"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::pool::Pool<u32, u32>::get()}"
+
+[[fn]]
+path = "deadpool::pool::Pool::is_closed"
+kappa = "5c127f7c7f5fc89aa025195ea7514189c89e33641e72a0d57e317755867bbd4a"
+at = "M=u32"
+embedded = "b33e4eabb7c8f6a4d03e51d9c0714010badeceb0b02c4e1ca429e5cca0fddde0"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "deadpool::pool::Pool::manager"
+kappa = "c6e48930107c1e170930bd2c14cca5576ceefa2a5d6f4a83fd3360849ea330c2"
+at = "M=u32"
+embedded = "157b5f78bcddbd0dcaaf621a6295453dcc7c597a777970b27f9245d36278e1fb"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "deadpool::pool::Pool::resize"
+kappa = "dc8f505f49a1e622a582de46b08ade2ccb4335c1771d59abd1ad05d9e586cb8c"
+at = "M=u32"
+embedded = "53a74216ca9979831ce3708487b78ef793e88853717abe20db50cc227544ee22"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "deadpool::pool::Pool::retain"
+kappa = "7db169a2f371c1d2d5460644feab927ef05be41ad52913ec711c66fe3d216dbc"
+at = "M=u32, Metrics=u32, Status=u32, W=u32"
+embedded = "60fb1bbe1dbabc1b81a687e778b903a5849cfd1cf525de88a9d87af5b7cf8adb"
+status = "residue"
+cause = "mir::Ty: managed::pool::RetainResult<u32>"
+
+[[fn]]
+path = "deadpool::pool::Pool::status"
+kappa = "fccda04b9bb324c2ba75a237f99263f2f9be032e503679bd6a41fa27dfc07def"
+at = "M=u32, Status=u32"
+embedded = "fca2c73f9422757420e5b6f391ad5640cea1050a78365c12268e86ef639a015b"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "deadpool::pool::Pool::timeout_get"
+kappa = "f83ce0c6face51b0d06a6a2d719a72e1a2d39203277b1bf7289f0bd0ee06c98a"
+at = "M=u32, W=u32"
+embedded = "8f1073713cddf0277c91f01261bd3ed0d382a55d8ec0a5fe12fa2e3bf03d3c94"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::pool::Pool<u32, u32>::timeout_get()}"
+
+[[fn]]
+path = "deadpool::pool::Pool::timeouts"
+kappa = "089469ca7b2d33700782278a6883d9c67e93a50621899ee15f59903af1f44c4d"
+at = "M=u32"
+embedded = "848ec08697a65ffe3c54824865f0858c7a92ac5803eaf420734a83e1a84ee7bb"
+status = "residue"
+cause = "mir::Ty: managed::config::Timeouts"
+
+[[fn]]
+path = "deadpool::pool::Pool::try_create"
+kappa = "c5213a57f26179e8ca6acae5121a851c0a4e69b9142cbba85b5605806beabdac"
+at = "M=u32, W=u32"
+embedded = "0de800a7e8f07621f5ef5d32dbed9da3025c31835cba0b7cd12e93604029afcf"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::pool::Pool<u32, u32>::try_create()}"
+
+[[fn]]
+path = "deadpool::pool::Pool::try_recycle"
+kappa = "60afdbc59e214f3fac434c042812eefe2e552f5d4b53b0d91d8ea67d0cec833b"
+at = "M=u32, W=u32"
+embedded = "489cb150d7888d3cfa8185cf18b6bea55a3827037d55a283b87da5a4a74082ba"
+status = "residue"
+cause = "mir::Ty: {async fn body of managed::pool::Pool<u32, u32>::try_recycle()}"
+
+[[fn]]
+path = "deadpool::pool::Pool::weak"
+kappa = "3dd363dd2bc8992eedc0afa19dff2850316219bcba7c7b6e49b58c7b817b3e04"
+at = "M=u32"
+embedded = "fd6cf7cde07d17b6e3d9cb9cd39a729a37c2f25ff424076c69c3561f6724520d"
+status = "residue"
+cause = "mir::Ty: managed::pool::WeakPool<u32>"
+
+[[fn]]
+path = "deadpool::pool::PoolInner::detach_object"
+kappa = "b734aa5a622cfc88fc30cc0537d6d0e0dd49994d71bababce64adb3aedcd1ec8"
+at = "M=u32"
+embedded = "af6d2f8088f2bcfca971531da5b2b63b8f2305d3d0c92a9a7293010aaf84f049"
+status = "residue"
+cause = "mir::Ty: pool::PoolInner<u32>"
+
+[[fn]]
+path = "deadpool::pool::PoolInner::fmt"
+kappa = "080fa3fb509a8acca43594b348d3291d071217b82e4d794ac63b0afbc89626df"
+at = "M=u32"
+embedded = "1e51e76a057813a330a6aa35d49e78f7cc65c3337606de9d7cf031000caacbee"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool::pool::PoolInner::return_object"
+kappa = "16651ed45f560f5744967517d03935f5df7739229a60a6cc281a3df8dde1ad24"
+at = "M=u32"
+embedded = "19ea6f829105d407b164d4373f1cde4f28647dca7c7f69cf0dc0026ff8dbb880"
+status = "residue"
+cause = "mir::Ty: pool::PoolInner<u32>"
+
+[[fn]]
+path = "deadpool::pool::RetainResult::default"
+kappa = "a3d065b8cc4ea1d2215056ce5d2794e485adeac9e21fd34070517209b1c60996"
+at = "T=u32"
+embedded = "2b313bce1da260da2c449e430ba3dccc3303ee99e9b4b5dafe98de80ba0e9445"
+status = "residue"
+cause = "mir::Ty: managed::pool::RetainResult<u32>"
+
+[[fn]]
+path = "deadpool::pool::UnreadyObject::drop"
+kappa = "66b03a532d4f664a6e607606de8a6fdf8e4d35d3b8e0280c85d3b1b774c57d36"
+at = "M=u32"
+embedded = "c9c5b734038a232190b6ef94788569f5464d37f702598d2e57e63543839b9ab3"
+status = "residue"
+cause = "mir::Ty: UnreadyObject<'_, u32>"
+
+[[fn]]
+path = "deadpool::pool::UnreadyObject::inner"
+kappa = "35d6a21bdba114f95ff994d1282527c411cce2e3dffdd5d137d6ed994a989912"
+at = "M=u32"
+embedded = "e4ee2947bc87d37ec4a054407e838949837e508f4b030bd12ea1f4044f7c48bf"
+status = "residue"
+cause = "mir::Ty: managed::object::ObjectInner<u32>"
+
+[[fn]]
+path = "deadpool::pool::UnreadyObject::ready"
+kappa = "12c4136c7cc64ce5a3bc17dda82843ef324e1dce8be675b587282a39d61a220c"
+at = "M=u32"
+embedded = "5872bafa383328ac22dbfc93884b2b1403da28de94a0ff1b9458b8a5359c477d"
+status = "residue"
+cause = "mir::Ty: managed::object::ObjectInner<u32>"
+
+[[fn]]
+path = "deadpool::pool::WeakPool::upgrade"
+kappa = "431ca29ba4b7ae08fc4d8ddbf67ebc68fdb07f2b95d76b31de71712466a79603"
+at = "M=u32, W=u32"
+embedded = "324b97ac45e5c001d148c3431f8dbf4af838e9acc0a8a6a89daca81fe67708bd"
+status = "residue"
+cause = "mir::Ty: managed::pool::Pool<u32, u32>"
+

@@ -1,0 +1,67 @@
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::acquire"
+kappa = "2c89868bfb781c4a9fab5093ee7883cb41b455e5f355541ba7d90ed08179300d"
+embedded = "331d0ff7aa088352f9856ffcfa9b4c446719404bb5fade3c227c6bf4e9d5b3b2"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::MySqlConnection, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::begin"
+kappa = "6ccc91d7a46fb8e16b39d957b46115507c81c2729dbcda4f1822d15f2bb58996"
+embedded = "16b15947122503925147ca5aa264802708f9cea95144d77189a24dc6359c289e"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::MySql>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/arguments.rs:40:9: 42:27>::into_arguments"
+kappa = "d690ba62417eb15abbb6ee085bc038f4a8d6aa37c1ea4c5bf3838ecdf90aaa3d"
+embedded = "fabf352f381bcd6d9f4b346b82cc4139d60f72a5e679dce0827955edefc5aa86"
+status = "residue"
+cause = "mir::Ty: arguments::MySqlArguments"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:116:9: 116:55>::index"
+kappa = "dd2014096772b37f60ab75ce521f5bbf0caa41cfbdcf869d819ca204d69730f6"
+embedded = "6160a53d1172e5257fe80fef85a2fa3b36e10358ce1c7507f9b39051e2cc3a70"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:133:9: 133:55>::index"
+kappa = "17d3f0404af9aeda033edc2781981c58a79b155fbf2347c2e83599f8f1d08cff"
+embedded = "ff9ab9411b4e2afed6e797822172499045e301486cf2511d7ba925f215c356da"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode"
+kappa = "0ee71945bb130779b69706b98c0151dc1e1e43d85bfc42a2d84a83018de1723d"
+at = "T=u32"
+embedded = "cee70956ba502a0e09c451eae282766593c7cafed766162d9d57ea1d90c74a86"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode_by_ref"
+kappa = "25b01698b5bf27278815e96e538216349d708cecd8d84d9341d64a10e10d8507"
+at = "T=u32"
+embedded = "dd3caddba7c88eb4363b481e6b4b3eb7cb510173625ac358cd7eae3dcf9e4fdd"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::produces"
+kappa = "3a25d5f11525d45367619711645ff6e09550d8b5bb0a3a0c7b0eac6e2de9fac4"
+at = "T=u32"
+embedded = "dad0b7633fbdef97709d59a00d89fdc93020029ebe93bac7b8649a4aa217575a"
+status = "residue"
+cause = "mir::Ty: type_info::MySqlTypeInfo"
+
+[[fn]]
+path = "sqlx-mysql::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::size_hint"
+kappa = "f0639801123c3f6fd06669124eea4aa3485787317f7bbb67988ae453f5b6ba5d"
+at = "T=u32"
+embedded = "545023ae054563bbb9ba96d660a58029c014286cd38ef6acf4a576d54b032ae2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_, MySql>>::size_hint"
+

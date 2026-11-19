@@ -1,0 +1,951 @@
+# The aws-config register (written by `uorust crate aws-config@1.13.3`; do not edit): every body of
+# aws-config's MIR at aws-config 1.13.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 600
+translated = 0
+residue = 600
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.credential_process]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.default_provider]
+bodies = 77
+translated = 0
+residue = 77
+
+[module.ecs]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.env_service_config]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.environment]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.http_credential_provider]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.imds]
+bodies = 129
+translated = 0
+residue = 129
+
+[module.json_credentials]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.loader]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.meta]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.profile]
+bodies = 74
+translated = 0
+residue = 74
+
+[module.provider_config]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.retry]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.sensitive_command]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.sso]
+bodies = 62
+translated = 0
+residue = 62
+
+[module.sts]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.web_identity_token]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 600
+embedded = 600
+evaluable = 600
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 126
+
+[[cause]]
+cause = "mir::Ty: loader::ConfigLoader"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: provider_config::ProviderConfig"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: sso::credentials::Builder"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: imds::client::Builder"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: meta::region::future::ProvideRegion<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::provider::future::ProvideCredentials<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: sso::token::Builder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::Credentials"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: default_provider::credentials::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ecs::Builder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: default_provider::token::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: web_identity_token::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: credential_process::Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: imds::credentials::Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: profile::region::Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: profile::token::Builder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::provider::future::ProvideToken<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: default_provider::app_name::Builder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: default_provider::region::Builder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: default_provider::retry_config::Builder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: environment::credentials::EnvironmentVariableCredentialsProvider"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http_credential_provider::Builder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: imds::client::error::ImdsError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: imds::region::Builder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: meta::region::RegionProviderChain"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: sso::cache::CachedSsoTokenError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aws_types::region::Region"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: default_provider::timeout_config::Builder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: environment::region::EnvironmentVariableRegionProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imds::client::ImdsResponseRetryClassifier"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: json_credentials::InvalidJsonCredentials"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: profile::region::ProfileFileRegionProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: JsonCredentials<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProviderConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RefreshableCredentials<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SensitiveString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_sdk_sts::config::RuntimeComponentsBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_sdk_sts::config::retry::RetryAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::auth::AuthSchemeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::IdentityFuture<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: credential_process::CredentialProcessProvider"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: default_provider::region::DefaultRegionChain"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn aws_credential_types::provider::ProvideCredentials"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::Uri"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::Client"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::EndpointMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::SensitiveString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::error::BuildError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::error::TokenError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imds::client::token::TokenResolver"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: meta::ProviderAttempt<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: meta::credentials::chain::CredentialsProviderChain"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: meta::token::TokenProviderChain"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::repr::RoleArn<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: retry::error::RetryConfigError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sensitive_command::CommandWithSensitiveArgs<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sso::cache::CachedSsoToken"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sso::credentials::SsoCredentialsProvider"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sso::token::SsoTokenProvider"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: web_identity_token::StaticConfiguration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CachedSsoToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CommandWithSensitiveArgs<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnvServiceConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FailedToLoadToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HttpCredentialRetryClassifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImdsCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImdsRegionProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImdsResponseRetryClassifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProviderAttempt<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::attributes::AccountId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::provider::error::CredentialsError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_runtime::user_agent::AwsUserAgent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_sdk_sts::config::BehaviorVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_async::time::SharedTimeSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::auth::AuthSchemePreference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::dns::SharedDnsResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::endpoint::EndpointFuture<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::SharedIdentityResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::http::Response"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::config_bag::FrozenLayer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::retry::RetryConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::SdkConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::os_shim_internal::Env"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::os_shim_internal::Fs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::region::SigningRegionSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::sdk_config::SharedAsyncSleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::sdk_config::SharedHttpClient"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn aws_smithy_runtime_api::client::auth::Sign"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ecs::EcsCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ecs::InvalidFullUriError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: environment::InvalidBooleanValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: environment::InvalidUintValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: environment::InvalidUrlValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_credential_provider::HttpCredentialProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_credential_provider::HttpCredentialRetryClassifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::EndpointSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::ImdsCommonRuntimePlugin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::ImdsEndpointResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::error::InvalidEndpointMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::token::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::token::TokenAuthScheme"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::token::TokenRuntimePlugin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::client::token::TtlToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::credentials::ImdsCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imds::region::ImdsRegionProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: json_credentials::JsonCredentials<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loader::TriStateOption<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: meta::ProviderChainError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::cell::ErrorTakingOnceCell<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::ProfileFileCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::ProfileFileError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::exec::AssumeRoleProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::exec::ProviderChain"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::exec::named::NamedProviderFactory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::repr::NextProfile<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::credentials::repr::ProfileChain<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: profile::token::ProfileFileTokenProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sensitive_command::CommandWithSensitiveArgs<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sso::token::SsoTokenProviderError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: web_identity_token::WebIdentityTokenCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/sso/token.rs:159:9: 159:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of credential_process::CredentialProcessProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::account_id_endpoint_mode::account_id_endpoint_mode_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::app_name::Builder::app_name"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::app_name::Builder::fallback_app_name"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::auth_scheme_preference::auth_scheme_preference_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::checksums::request_checksum_calculation_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::checksums::response_checksum_validation_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::credentials::Builder::build"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::credentials::DefaultCredentialsChain::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::credentials::default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::disable_clock_skew_correction::disable_clock_skew_correction_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::disable_request_compression::disable_request_compression_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::endpoint_url::endpoint_url_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::endpoint_url::endpoint_url_provider_with_origin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::ignore_configured_endpoint_urls::ignore_configured_endpoint_urls_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::region::DefaultRegionChain::region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::request_min_compression_size_bytes::request_min_compression_size_bytes_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::retry_config::Builder::retry_config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::retry_config::Builder::retry_config_with_origin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::retry_config::Builder::try_retry_config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::sigv4a_signing_region_set::sigv4a_signing_region_set_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::timeout_config::Builder::timeout_config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::token::Builder::build"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::token::default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::use_dual_stack::use_dual_stack_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of default_provider::use_fips::use_fips_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ecs::EcsCredentialsProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ecs::EcsCredentialsProvider::provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ecs::Provider::make"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ecs::Provider::uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of ecs::validate_full_uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of http_credential_provider::HttpCredentialProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::client::Client::get<impl Into<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::client::EndpointSource::endpoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::client::token::TokenResolver::get_token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::credentials::ImdsCredentialsProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::credentials::ImdsCredentialsProvider::get_profile_uncached"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::credentials::ImdsCredentialsProvider::retrieve_credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of imds::region::ImdsRegionProvider::region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of load_defaults"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of load_from_env"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of loader::ConfigLoader::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::credentials::chain::CredentialsProviderChain::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::credentials::chain::CredentialsProviderChain::default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::credentials::chain::CredentialsProviderChain::or_default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::region::RegionProviderChain::region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::token::TokenProviderChain::default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::token::TokenProviderChain::or_default_provider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of meta::token::TokenProviderChain::token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::cell::ErrorTakingOnceCell<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::credentials::ChainProvider::provide_credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::credentials::ProfileFileCredentialsProvider::load_credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::credentials::build_provider_chain"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::credentials::exec::AssumeRoleProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::parser::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::region::ProfileFileRegionProvider::region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::token::ProfileFileTokenProvider::load_token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of profile::token::load_profile_set"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of provider_config::ProviderConfig::load_default_region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of provider_config::ProviderConfig::profile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of provider_config::ProviderConfig::try_profile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of provider_config::ProviderConfig::with_default_region"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::cache::load_cached_token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::cache::save_cached_token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::credentials::SsoCredentialsProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::credentials::load_sso_credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::token::Builder::build"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sso::token::SsoTokenProvider::refresh_cached_token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sts::assume_role::AssumeRoleProviderBuilder::build"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sts::assume_role::AssumeRoleProviderBuilder::build_from_provider<impl ProvideCredentials + 'static>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sts::assume_role::Inner::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of web_identity_token::WebIdentityTokenCredentialsProvider::credentials"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of web_identity_token::load_credentials<impl AsRef<u32>>"
+bodies = 1

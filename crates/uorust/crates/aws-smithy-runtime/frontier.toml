@@ -1,0 +1,63 @@
+# The aws-smithy-runtime register (written by `uorust crate aws-smithy-runtime@1.16.4`; do not edit): every body of
+# aws-smithy-runtime's MIR at aws-smithy-runtime 1.16.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 15
+translated = 0
+residue = 15
+
+[module.expiring_cache]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.static_partition_map]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 15
+embedded = 15
+evaluable = 15
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: StaticPartitionMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: expiring_cache::ExpiringCache<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: static_partition_map::StaticPartitionMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of expiring_cache::ExpiringCache<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 1

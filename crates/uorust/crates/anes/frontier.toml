@@ -1,0 +1,266 @@
+# The anes register (written by `uorust crate anes@0.2.1`; do not edit): every body of
+# anes's MIR at anes 0.2.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 180
+translated = 0
+residue = 180
+
+[module.sequences]
+bodies = 180
+translated = 0
+residue = 180
+
+[embedding]
+bodies = 180
+embedded = 180
+evaluable = 180
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClearBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ClearLine"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Color"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DisableCursorBlinking"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DisableMouseEvents"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnableCursorBlinking"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnableMouseEvents"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HideCursor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorDown"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorLeft"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorRight"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorTo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorToColumn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorToNextLine"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorToPreviousLine"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MoveCursorUp"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReportCursorPosition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResetAttributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResizeTextArea"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RestoreCursorPosition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SaveCursorPosition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ScrollBufferDown"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ScrollBufferUp"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SetAttribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SetBackgroundColor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SetForegroundColor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ShowCursor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SwitchBufferToAlternate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SwitchBufferToNormal"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sequences::attribute::Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::attribute::ResetAttributes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::attribute::SetAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::ClearBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::ClearLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::ScrollBufferDown"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::ScrollBufferUp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::SwitchBufferToAlternate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::buffer::SwitchBufferToNormal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::color::Color"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::color::SetBackgroundColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::color::SetForegroundColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::DisableCursorBlinking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::EnableCursorBlinking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::HideCursor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorDown"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorLeft"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorRight"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorTo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorToColumn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorToNextLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorToPreviousLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::MoveCursorUp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::ReportCursorPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::RestoreCursorPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::SaveCursorPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::cursor::ShowCursor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::terminal::DisableMouseEvents"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::terminal::EnableMouseEvents"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequences::terminal::ResizeTextArea"
+bodies = 1

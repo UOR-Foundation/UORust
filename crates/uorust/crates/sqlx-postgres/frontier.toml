@@ -1,0 +1,1230 @@
+# The sqlx-postgres register (written by `uorust crate sqlx-postgres@0.9.1`; do not edit): every body of
+# sqlx-postgres's MIR at sqlx-postgres 0.9.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1294
+translated = 2
+residue = 1292
+
+[module.advisory_lock]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.arguments]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.bind_iter]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.column]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.connection]
+bodies = 80
+translated = 0
+residue = 80
+
+[module.copy]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.crate]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.database]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.io]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.listener]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.message]
+bodies = 141
+translated = 1
+residue = 140
+
+[module.options]
+bodies = 70
+translated = 0
+residue = 70
+
+[module.query_result]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.row]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.statement]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.transaction]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.type_checking]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.type_info]
+bodies = 132
+translated = 0
+residue = 132
+
+[module.types]
+bodies = 638
+translated = 1
+residue = 637
+
+[module.value]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 1278
+embedded = 1278
+evaluable = 1277
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: type_info::PgTypeInfo"
+bodies = 206
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 128
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: types::range::_::InternalBitFlags"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: types::range::RangeFlags"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Error"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: PgTypeInfo"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: types::lquery::PgLQueryVariantFlag"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: options::PgConnectOptions"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: types::lquery::_::InternalBitFlags"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: lquery::_::InternalBitFlags"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: PgLQueryVariantFlag"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: RangeFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: std::num::Saturating<usize>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: PgDatabaseError"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: message::BackendMessageFormat"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: message::FrontendMessageFormat"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: types::ltree::PgLTree"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: types::oid::Oid"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: PgConnection"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: types::lquery::PgLQuery"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: types::range::PgRange<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: types::cube::PgCube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: PgConnectOptions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PgInterval"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: database::Postgres"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: types::ltree::PgLTreeLabel"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: types::interval::PgInterval"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: types::money::PgMoney"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Notice"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PgArgumentBuffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PgType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connection::PgConnection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: cube::Header"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: message::response::PgSeverity"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: types::citext::PgCiText"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: types::hstore::PgHstore"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: types::lquery::PgLQueryLevel"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PgHstore"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PgMoney"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PortalId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StatementId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: geometry::path::Header"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: io::IdInner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: io::PortalId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: io::StatementId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: options::ssl_mode::PgSslMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: polygon::Header"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::circle::PgCircle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::line::PgLine"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::line_segment::PgLSeg"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::path::PgPath"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::point::PgPoint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::polygon::PgPolygon"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::geometry::r#box::PgBox"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: value::PgValueRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Oid"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgAdvisoryLockKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgCiText"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgColumn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgCube"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgListener"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgNotification"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PgSeverity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: advisory_lock::PgAdvisoryLock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arguments::PgArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: column::PgColumn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::TypCategory"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::TypType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: listener::PgNotification"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::pgpass::PGPassLineParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: type_info::PgType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: type_info::PgTypeKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::cube::Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::geometry::path::Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::geometry::polygon::Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BackendMessageFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FrontendMessageFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PGPassLineParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgAdvisoryLockGuard<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgArguments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgBox"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgErrorPosition<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgLQuery"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgLTree"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgLTreeLabel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgQueryResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PgValueFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rollback<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TypCategory"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TypType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: advisory_lock::PgAdvisoryLockKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arguments::PgArgumentBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::PgConnection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::PgStatement"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::PgRow>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::PgQueryResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn sqlx_core::net::Socket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::DisplayId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: message::notification::Notification"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: message::response::Notice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::SslOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Url"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::sql_str::SqlStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::lquery::PgLQueryParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::lquery::PgLQueryVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::record::PgRecordEncoder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::PgValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::PgValueFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::PgConnection::wait_until_ready"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::establish::establish"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <database::Postgres as sqlx_core::database::Database>::URL_SCHEMES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a usize literal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u16 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u8 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as sqlx_core::io::BufMutExt>::put_str_nul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::pop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::trim_matches"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::str::replace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: types::hstore::read_length: sqlx-postgres's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ColumnResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CommandComplete"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DataRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IdentifierChar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgAdvisoryLock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgCircle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgCopyIn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgCustomType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgLQueryLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgLQueryVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgLSeg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgPath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgPoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgPolygon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgRange<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgRecordEncoder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PgValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SaslInitialResponse<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SaslMechanisms<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: advisory_lock::PgAdvisoryLockGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arguments::Patch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arguments::PgArgumentBufferSnapshot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bind_iter::PgBindIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::ColumnResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::ColumnResolverRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::TypeResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::resolve::TypeResolverRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::PgDatabaseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::PgErrorPosition<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl BufRead"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl IntoIterator<Item = impl AsRef<str>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::authentication::Authentication"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::authentication::AuthenticationSaslContinue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::authentication::AuthenticationSaslFinal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::authentication::SaslMechanisms<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::backend_key_data::BackendKeyData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::command_complete::CommandComplete"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::copy::CopyDone"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::copy::CopyFail"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::copy::CopyInResponse"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::copy::CopyOutResponse"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::copy::CopyResponseData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::data_row::DataRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::parameter_description::ParameterDescription"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::parameter_status::ParameterStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::parse_complete::ParseComplete"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::ready_for_query::ReadyForQuery"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::response::Fields<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: message::row_description::RowDescription"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: query_result::PgQueryResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rand::prelude::ThreadRng"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::bytes::Bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::column::ColumnOrigin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::column::TableColumn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::ParamChecking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::types::Text<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: statement::PgStatement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: statement::PgStatementMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::btree_map::IntoIter<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<11>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transaction::Rollback<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: type_info::PgArrayOf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: type_info::PgCustomType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: types::cube::DecodeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: types::record::PgRecordDecoder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::clear_cached_statements"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::close_hard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::PgConnection as sqlx_core::connection::Connection>::ping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::tls::MaybeUpgradeTls<'_> as sqlx_core::net::WithSocket>::with_socket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <sqlx_core::pool::Pool<database::Postgres> as copy::PgPoolCopyExt>::copy_in_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <sqlx_core::pool::Pool<database::Postgres> as copy::PgPoolCopyExt>::copy_out_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::commit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::PgTransactionManager as sqlx_core::transaction::TransactionManager>::rollback"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of advisory_lock::PgAdvisoryLock::acquire<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of advisory_lock::PgAdvisoryLock::force_release<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of advisory_lock::PgAdvisoryLock::try_acquire<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of advisory_lock::PgAdvisoryLockGuard<u32>::release_now"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of arguments::PgArguments::apply_patches"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::PgConnection::invalidate_cached_statement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::PgConnection::recv_ready_for_query"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::get_or_prepare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::prepare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::recv_desc_params"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::recv_desc_rows"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::run<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::try_get_or_prepare<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::wait_for_close_complete"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::resolve::ColumnResolver::fill_cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::resolve::TypeResolver::fill_cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::resolve::resolve_statement_metadata<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::resolve::resolve_types"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::sasl::authenticate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::sasl::hi"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv_expect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::recv_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::PgStream::send<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::tls::maybe_upgrade<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::tls::request_upgrade<impl Socket>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::abort<impl Into<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::finish"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::read_from<impl AsyncRead + u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::send<impl Deref<Target = [u8]>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::copy_in_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::copy_out_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of copy::pg_begin_copy_out<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::connect_if_needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::connect_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::connection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::listen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::listen_all<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::recv_without_recovery"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::try_recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::unlisten"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of listener::PgListener::unlisten_all"
+bodies = 1

@@ -1,0 +1,383 @@
+[[fn]]
+path = "sqlx-mysql::INITIAL_CHARSET"
+kappa = "3cfd964a4ad71b4d6b20da4ceeb06e3b97dc05ca169ef1ed9eb7fc66a0017f72"
+embedded = "b55c7c5ab5fab2fc8829a74c29d3547888ba436435c125f732302a109f669035"
+status = "residue"
+cause = "mir::Operand::Constant: collation::Collation::UTF8MB4_GENERAL_CI: type outside the lift: collation::Collation"
+
+[[fn]]
+path = "sqlx-mysql::MAX_PACKET_PAYLOAD_LEN"
+kappa = "87f70c8fb420c6fdfa548a1223a58a0e2d9bf0afa190cfef8b95cf5598bb7c2d"
+embedded = "b173e1ee295ae6c1312189e879f8de54a4f04bc669062e7e1d05b38a393db8a8"
+status = "translated"
+digest = "4802f4c985367a710cd57341566d095f24e9303e29b4fd098e771175ed05e2c3"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::begin"
+kappa = "db320b18d6ca4730e611a8e23c45caf542bc13f3f616056c55cdb0f695a48933"
+embedded = "d2ac5e1c3c124bfea5ec57d06b9cf796188682efcc289f00a2425d44d27e6ee6"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::MySql>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::begin_with"
+kappa = "a3e3350b7b0a8fc9305930cde421cbd1a6b952a1ff27f7142ca49f080f35a0be"
+embedded = "d1917cc24cc46c9a29eb180b910044857c0e2854d63415db4c80379bb9609f81"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::MySql>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::cached_statements_size"
+kappa = "e952f84f27585f15f0a4830aa40321b546f5ebd5b1c4f757d1e9cd90dfef99c3"
+embedded = "a06ef74c134288649f73b8bc564d5ea621382c40fe5d26fb16bca88091da52e3"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::clear_cached_statements"
+kappa = "f411e6f4a5fc3b8d16ccbffa6baa66f464890291c8cc32603bb608303c591165"
+embedded = "490891fe6865f66edb288f6321b46b30128a44f1f43e93007655dffd3f5ddb91"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::clear_cached_statements()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::close"
+kappa = "44f65173842537b093f597d7a0a55dd02e2a5bf5fd98ddfda7e4eb2673f02101"
+embedded = "f8da1c5c2177ce1fccbc87ea9cf2af91f2455a5930b16db0c1b279716dc415d8"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::close()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::close_hard"
+kappa = "62f7220511c985a528a00d3ea07b5d596cc2e8b7c7a72bf942b6eb2504a6c60e"
+embedded = "77f0a317fce71e73f10a2c8c68e7cf5602e8d811592ef6b4a71f23c25e5af14d"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::close_hard()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::flush"
+kappa = "abfcd5358738c1340817f222a8b5a75f6487ede3fd75b6139cc97f4611a934a3"
+embedded = "2c6ca420aa07b23cd2bf2c022fd86e9a3a55bf5b3881a30c6a0b13080301afb7"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<std::boxed::Box<dyn sqlx_core::net::Socket>>::wait_until_ready()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::fmt"
+kappa = "da209f7f845de681c23931c129cde49db773517064fdf0c06db5e8e9f7620c09"
+embedded = "e75a465773d59f303e45398efa5dc7ee61c0fccc3c8facf6431b02a1be2ba201"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::in_transaction"
+kappa = "0e41397854a18af7e9345fa3920b70502ef83a889c1cb3d935650e014ac5c8c2"
+embedded = "c60d126c343d0f03bbc2035c1a3f8b15847369f1ec3620687c7be792674fb540"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::ping"
+kappa = "b2fe6570ebf778dbc77aad0ea6c6308f587220c9565e8bb7943138f249a577bc"
+embedded = "981197ae2d484c5bc12091ae7a3c7db6e0d092d4052ec747eef657782b1c5048"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::ping()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::should_flush"
+kappa = "74296a01fec82550743b0991907d06cd1b1141bb90fb0f03feafcfb6f072665a"
+embedded = "8ead8bec2171bf258acd12e94db2cd7022e97d4235a3ddfdcee5f2c37a50004b"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+
+[[fn]]
+path = "sqlx-mysql::connection::MySqlConnection::shrink_buffers"
+kappa = "f37db89a986f7643edc34a479c390aa94305df28442d65665831eab587dfd98f"
+embedded = "c55e28b067c9f3ff298827d818b31bc9e41f85d955505fb4a839d049368f773a"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+
+[[fn]]
+path = "sqlx-mysql::connection::auth::AuthPlugin::handle"
+kappa = "a9a4586f75ed7f562568abc0d2ae77ea4f6202beb29c78b6ab4f995e46007d32"
+embedded = "58db977c371cf1172548d0e80d5ca6d699681965b05ba6db4c4a8db4cd654278"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::auth::<impl protocol::auth::AuthPlugin>::handle()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::auth::AuthPlugin::scramble"
+kappa = "dd669c1085f7e3d14c99c587f50c57349e68dac2ebd50e9032baa9c4e1de372b"
+embedded = "f2b04632a3719a175e9fb380e2d7bd7afe5777bed03daa8542dc9652ce934f87"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::auth::<impl protocol::auth::AuthPlugin>::scramble()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::<impl at src/connection/executor.rs:273:1: 273:50>::fetch_many"
+kappa = "3a42458256ef1e1220d046066653a57b864881f8c21e609a1c833803a51fcb57"
+at = "E=u32"
+embedded = "59d7320dcaf75707acfcde98d11c8a82aa22f9f089d66f5e6b791b6db56cf21c"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::MySqlQueryResult, row::MySqlRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::<impl at src/connection/executor.rs:273:1: 273:50>::fetch_optional"
+kappa = "2448d97706229f692e6abb259c1616b5ef1f8e890626b9b89d747ebf339e51d9"
+at = "E=u32"
+embedded = "a149590ffad7ed2b04010ac16a96055c3be244dc8f198162b1a31f2e58f75a5a"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::MySqlRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::<impl at src/connection/executor.rs:273:1: 273:50>::prepare_with"
+kappa = "50a065e7420160e236ff5fe40979b25904da8c678401501e974a9fbe72ecf030"
+embedded = "7a1c601c3262beb8590f4dc7b85c5610264e971635b4f9195aa24b05b3181d50"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::MySqlStatement, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::MySqlConnection::get_or_prepare_statement"
+kappa = "039c95c4e2b6381b0d8a892fd75731071cf1bc76e576a2ca783c63787ac416d6"
+embedded = "4123d5bec531ca609024d4f1d3016b36ea34959c908f1b545b0ac9ba781d4d6f"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::MySqlConnection>::get_or_prepare_statement()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::MySqlConnection::prepare_statement"
+kappa = "d51a278edf81a46ef20b1f69e3b336342bb25c90ad6ff388ef439eeb2cba7403"
+embedded = "31373ca1ee8b6f56928c28009ca2565175af67e430334e51ed3984c6888a5463"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::MySqlConnection>::prepare_statement()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::executor::MySqlConnection::run"
+kappa = "f9d5c3aae38827756bf1632cf06effb852aedd8ca89cb6f1657a9852d0fe6b11"
+embedded = "ed9f95335f86aaccaf6212958c09a9a1877155515ac5c03cd4988f3f5de02578"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::<impl connection::MySqlConnection>::run<'_, '_, '_>()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::<impl at src/connection/stream.rs:31:10: 31:15>::fmt"
+kappa = "95c25af5696129df6f5e8b1a97b879d63bc66dce591201a320870fc1c59b0deb"
+embedded = "9b84c62923c35223e0adbd52d2d9ead5902b6064244966bd7af1d79effa8d1b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::<impl at src/connection/stream.rs:31:17: 31:26>::eq"
+kappa = "bed465c68f49e1170d45ed700aee0081f90d237285e52376301b8880c3d6e9e8"
+embedded = "9480955162bc0ea432d99daa4318e7b645a382a171355c80453466c0e5656eb9"
+status = "residue"
+cause = "mir::Ty: Waiting"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::<impl at src/connection/stream.rs:31:28: 31:30>::assert_fields_are_eq"
+kappa = "4fe3b36faf438fc53d3ef1f8b1221940dca75711de51338ab47f27fdbcdd3190"
+embedded = "b89b5e1647dfcfbe2d670c3831087edae4e74d01a2c3eb8f63675c99eea6bcc8"
+status = "residue"
+cause = "mir::Ty: Waiting"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::boxed_socket"
+kappa = "a81de41e6f46cb2a6cbe716fa64485f2f121e02f6b3cd72501d9238a99b1efbc"
+at = "S=u32"
+embedded = "44b85b430f983a1b8d6fd1b715d3a40660c9a45025e21a89ce5485a795a8698e"
+status = "residue"
+cause = "mir::Ty: dyn sqlx_core::net::Socket"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::deref"
+kappa = "fed6b9645bcd3437e8a01c934759b710b082078a52cd4adf4a71cb567833bac6"
+at = "S=u32"
+embedded = "ad04f48899db3aa5c101c7d9408a56199274009ddb973890f15aaa6433fd3492"
+status = "residue"
+cause = "mir::Ty: sqlx_core::net::BufferedSocket<u32>"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::deref_mut"
+kappa = "b9d1c8fa39f8b2ba0ebd73f5052abefa764690f09f81846b3a51143bc94b70e9"
+at = "S=u32"
+embedded = "a0296dc1024ef44903e2c25d0db04aa61b44bde18dff4ab166d68593b0e8f50a"
+status = "residue"
+cause = "mir::Ty: sqlx_core::net::BufferedSocket<u32>"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::maybe_recv_eof"
+kappa = "c5f819d52792d37d61d7d385040a82dcdccddc88fe3bf188ba01bd3b6a36029a"
+at = "S=u32"
+embedded = "c92e82c03ade82969897583f4f80136a36b66ffad587b146eb4f8536198fadf2"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::maybe_recv_eof()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::recv"
+kappa = "b97e9e2925076755de6512aa00c7b91195fa73078f0d7e36b1be4004eeb4bfc7"
+at = "S=u32, T=u32"
+embedded = "61ddcea30e0037b31d863bd6e3224060d889ff965ca09069265f81cbf1881aba"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv<'_, u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::recv_ok"
+kappa = "47eb19ec73f27778523fcebab04cf9fd6830ce6fc77d9d4c7653ff40956d4cfc"
+at = "S=u32"
+embedded = "658b2568af7174d0e4f8fe4dc57ad1aa9ec2a048a3d7cce081ffbbb5e66da590"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_ok()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::recv_packet"
+kappa = "8d679407b37a5ae39e51f48d28a41035114f0f3c165b6b8d289d38be7fb0fa14"
+at = "S=u32"
+embedded = "e66f45a415d9f33a634b71d81cd1c786b22e76fa00b3c08a00c906085f678284"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_packet()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::recv_packet_part"
+kappa = "c3e4c9501a53700258657e10cbd345ea0b946bcd9a9efa4d955add3e7a7ab491"
+at = "S=u32"
+embedded = "1634c6edcb7c8d8df16b5f88b2f776196483bfc6c69d2074fbec092b0e028534"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_packet_part()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::send_packet"
+kappa = "6a8ecd4532ce8f1561a278b165f9827a099df34e44148500f7276ee0f8e9a10d"
+at = "S=u32, T=u32"
+embedded = "b613a79433dcc3dedb6b77f4a804291667445084e4ce44d69daea962f4ff4bff"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::send_packet<'_, u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::skip_result_metadata"
+kappa = "0f4e82fc5326833b916ec24ed541db4dca487ad10fd67d8dce5e25670ab3ad08"
+at = "S=u32"
+embedded = "32c68e111c6ac3920f3263f8cfadd3a89edb8c76f06126170814f11c3b6a819d"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::skip_result_metadata()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::wait_until_ready"
+kappa = "488c86b97c9f1fed03a30bfaf837e1993c397234174a2ffd131534bd8f8036b0"
+at = "S=u32"
+embedded = "7a7cf3075b13ddae4f0bf0cc92ae2cd34f999432c2ce6b51ae8a30b7abbbdaba"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::wait_until_ready()}"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::with_socket"
+kappa = "7c94799efeaf7caa67d22951dd734d71d8c40bf6387b01cbe3e860d028f13795"
+at = "S=u32"
+embedded = "be03e87238fffe03b8ce5c862dc3d87bcb28a273a5e43381b3e4f7c78834803b"
+status = "residue"
+cause = "mir::Ty: connection::stream::MySqlStream<u32>"
+
+[[fn]]
+path = "sqlx-mysql::connection::stream::MySqlStream::write_packet"
+kappa = "c801cedee560d6b5e633387123183e9556b2f1565770767aaf969c0c66608989"
+at = "S=u32, T=u32"
+embedded = "090affbfef51aa8bfef7853c73baa92773412a35e294941475df72a760259957"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-mysql::connection::tls::MapStream::with_socket"
+kappa = "1a3d2e3028523bfe0e7f0ffd96add5b6d9339497cc2d0f610b0f58b62a534cfa"
+at = "S=u32"
+embedded = "22116beb3769b7074e5ead98f5c56720e6fcc3c50fd366285d970de0757b091f"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::tls::MapStream as sqlx_core::net::WithSocket>::with_socket<u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::encrypt"
+kappa = "3dd855a6ec3b608b3781930fcd291bdd56142986b7876ccf56d641c0b7e16dba"
+embedded = "38dd0154991bb09aef3b3564bf7748cef296ce4066881df613c49d9ca742db7e"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-mysql::encrypt_rsa"
+kappa = "40361155a80513efaae463bdb57d5dea28212d8066bb56c7dea9f99c1761a409"
+embedded = "610229a4f98ca755a01a867b2205ea9de10bb0890b3a96947d820e45071a597a"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::auth::encrypt_rsa()}"
+
+[[fn]]
+path = "sqlx-mysql::establish::DoHandshake::do_handshake"
+kappa = "d0aef7cf7a3386fb86a9abb77e6c782a55f498332a38904be133fd1c341d1e32"
+at = "S=u32"
+embedded = "cde340f3a7a5f07d115e798ea7f496c55e36301ca49308c746205e696d902c90"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::establish::DoHandshake<'_>::do_handshake<u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::establish::DoHandshake::new"
+kappa = "3dca736f978ecce536711881cf7af6a3f094cade52d62d584963252f1c7f015b"
+embedded = "5eb969e5bf738a2a9cc73425a00e71896d2c01f6961dc289d173e4be990153cb"
+status = "residue"
+cause = "mir::Ty: connection::establish::DoHandshake<'_>"
+
+[[fn]]
+path = "sqlx-mysql::establish::DoHandshake::with_socket"
+kappa = "fa19ea7554cffe72f05aa31b8194edb1653a18fa0fa90e3e8218c95215dca7a3"
+at = "S=u32"
+embedded = "7b364688d092e2b62bf828a499695ab594d4a677b1de5940b9ce9df2ea9bcc18"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::establish::DoHandshake<'_> as sqlx_core::net::WithSocket>::with_socket<u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::establish::MySqlConnection::establish"
+kappa = "4327acadf3235eb73a8a0215473c9b09b647f1ef91db90ee3baae100aac29ce2"
+embedded = "d49d43a1935788d99b31eb426986d4b476d90f344f55c6ba5cffa8c6785bda81"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::establish::<impl connection::MySqlConnection>::establish()}"
+
+[[fn]]
+path = "sqlx-mysql::maybe_upgrade"
+kappa = "0b91bd2f38f6a5da47e94fd9892f6542017d3ab2ca90332d8a58c2ab43e0b1ea"
+at = "S=u32"
+embedded = "e6d6b92148e368d1b5d5182148d5ceb65a6bc8509bbce7126a25432821bcbd81"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::tls::maybe_upgrade<u32>()}"
+
+[[fn]]
+path = "sqlx-mysql::recv_next_result_column"
+kappa = "a6ea4730673b3120e27a49fa886322f4bd7302bcd6b03c57a289a57339b61cc4"
+embedded = "9677e6e780f1321f41c84aa18e2eae344851cb5e3e0a89da4896ab0b260035bf"
+status = "residue"
+cause = "mir::Ty: column::MySqlColumn"
+
+[[fn]]
+path = "sqlx-mysql::recv_result_metadata"
+kappa = "bbbe4ba83e5fc8b1993e2a4c950c89323c512900bf123ed591a64d323e34fab8"
+embedded = "209e739700b5cfaaee801366c6419313c2b63088a6129963275dbc5e12dce4dc"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::executor::recv_result_metadata()}"
+
+[[fn]]
+path = "sqlx-mysql::scramble_sha1"
+kappa = "6964a183cdf627281f70f22c2c57fbe66736a1c09af2b10260dd833c711a9011"
+embedded = "a9d966944d113b6e90d04fceee3d1fe4f3059e7cec9dfcb1592f1c619ce450e8"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "sqlx-mysql::scramble_sha256"
+kappa = "c2722fa89f7955d8232517c0c6c29940bc670337de1c749e15a80db00524e0db"
+embedded = "27b22473474ce498458030aa7cd5e5779d054b564d713eb92eade918565fbb70"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "sqlx-mysql::to_asciz"
+kappa = "337e6a1b0a2b72badf7a7f1a571b60258ea1484fa6ec0cc4209c9ef594f81fe3"
+embedded = "a946252e1b91d619b216b2ae98c43a8a6bacb94e7a84106ac4ea0b0a6920643a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+
+[[fn]]
+path = "sqlx-mysql::xor_eq"
+kappa = "d8ec1107fd0bd4e73107e2ba944a14dcff385ba4a1a50a4cab947fa5ab87cae4"
+embedded = "082ff433e53f70771f9912824ebdce190f237e8f2d41aeabf748f816220de172"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+

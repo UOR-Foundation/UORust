@@ -1,0 +1,49 @@
+[[fn]]
+path = "serial_test::rwlock::<impl at src/rwlock.rs:16:10: 16:15>::clone"
+kappa = "0e9fd8846a8cfc40b4de6caedfc5c3ffb363624866ebda75df9b6b3a3c806384"
+embedded = "b9b97e267f2b4695a50a2016b980b065c16199e71ac24c6eabf3dda6158a1094"
+status = "residue"
+cause = "mir::Ty: rwlock::Locks"
+
+[[fn]]
+path = "serial_test::rwlock::Locks::end_parallel"
+kappa = "88c444712ef04c360f208d1f1a7bba84bfe033c9f7dd54acbb3e98aebed23566"
+embedded = "7a5d162833e732b4f6e293ad8fcea921b07dcb8b9279a87f1e039e1ace65ecd9"
+status = "residue"
+cause = "mir::Ty: Locks"
+
+[[fn]]
+path = "serial_test::rwlock::Locks::is_locked_by_current_thread"
+kappa = "887265d34e206311eb77fb4e5358cf7f705d09f92071902eaf37219b8ffd4d0f"
+embedded = "84b83366923efed7e655944c597a3fbe4f64d0731269b21346ae92341058612b"
+status = "residue"
+cause = "mir::Ty: Locks"
+
+[[fn]]
+path = "serial_test::rwlock::Locks::new"
+kappa = "c9a963933be32cfbe54d82ba146e934ed333f508ac5e262df96bf71369757e26"
+embedded = "8f35d1376a5972dba527782d5b5f054b1a1cf83bc8ce734e93b13bc3ad657256"
+status = "residue"
+cause = "mir::Ty: rwlock::Locks"
+
+[[fn]]
+path = "serial_test::rwlock::Locks::serial"
+kappa = "19c98d4287796fb38675435e4eaa716ad4530be766258f5fe43b0ff53215c3f0"
+embedded = "8500354813cc905c6205f35e4cef9a3c3635f18799f1d3ef4deba341fbbd5599"
+status = "residue"
+cause = "mir::Ty: rwlock::MutexGuardWrapper<'_>"
+
+[[fn]]
+path = "serial_test::rwlock::Locks::start_parallel"
+kappa = "e5fc4158e2a358fefd555d8a60b2a8e70a5e21e8f3706c2c8dd3956122a6d488"
+embedded = "377b782afb2d113f267243656052b6b7fb80002099508fa74d0f35dd7b989929"
+status = "residue"
+cause = "mir::Ty: Locks"
+
+[[fn]]
+path = "serial_test::rwlock::MutexGuardWrapper::drop"
+kappa = "1baa3ec9126c4b349f1291905396ca95e3d96f6dcac501db279bf5a5aed621ae"
+embedded = "f559e9bcae68f5725767da074eb57dcda71e919aeedf5b1f5f57920e2742d327"
+status = "residue"
+cause = "mir::Ty: MutexGuardWrapper<'_>"
+

@@ -1,0 +1,463 @@
+[[fn]]
+path = "blake3::avx2_detected"
+kappa = "56d827636bb03d618104fc3657ee6a6065b4683bc900466c98167b5832c33390"
+embedded = "79161d7f318a72547bf0392b8bb8876b1f2176de1cb81d465e41459e807825de"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::avx2_detected::has_avx2::get: blake3's MIR stops at type outside the lift: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::avx512_detected"
+kappa = "9369a7e1552cf000a7628f5c7d2f33a669355e98aa89d36d742ed9b1fc0ee6ca"
+embedded = "15359e882e33616bd10bdb89043f12bc1af9235ef1b930cb623340b778ea0657"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::avx512_detected::has_avx512::get: blake3's MIR stops at type outside the lift: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:28: 44:33>::clone"
+kappa = "ddc7a4d0b7bc6cc5b5cb67c69e3b0c4574eaa3c7dfc2cc4da6fce653f0c89dd1"
+embedded = "a9b1737b2b1fd046fd16d8c7c55a1f1a3b31450fc63576fd77dc4d3b043dd171"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:35: 44:40>::fmt"
+kappa = "10fea3d5e88b1f36daf3f29f3e46471f298d787c1c32b120789659fc215b95e2"
+embedded = "e647d9662ce106876b4871ca17a3f843a1ef74634adabee8554ac3b566fa2fc3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::has_avx2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::get"
+kappa = "55e36690a971724d82b1d1d5fca4e5589fad299cbc3e13e24fa6d8ce726ea499"
+embedded = "f32b051c313611bb9e31310aebf107a8bf9ed7657705d6191a30603cb0f6e5b9"
+status = "residue"
+cause = "mir::Ty: has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init"
+kappa = "f1b277874b212938d328a4555d740e748a03af4d098106868324a40bd8c9f2e8"
+embedded = "cdad34e974e268fd24aed88c18494200117c2c3b61ce9679d5d7cb19404937fd"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init_get"
+kappa = "63887c27cff470f9e23e83503d2edd01c5fe7a9a5b17d0cbfcd6bf6e4c542b28"
+embedded = "6f34a68af24878deef2a5285288e31201f041541654aed015fb66c11e68690a4"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::UNINIT"
+kappa = "00626cf739341ac8d614dbca62ab8784ffe756c362622724526c2a2069427a6d"
+embedded = "1af71cd9e6ce14ba1cf60981a9a13de758a01d99f37341c01192acef5e5cfe7f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::max_value"
+
+[[fn]]
+path = "blake3::has_avx2::get"
+kappa = "07388d8835038afc23afc59c4ab8e01944cc1c86b00d526593dff0d818ed65cf"
+embedded = "d77faf1c96f1e215c90517fef9a02382c94ab78f80eb102011102970994657a0"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::init"
+kappa = "f3f3a0427aa2d2f6e912e2b674fc205cd8c5faa549c654f284e1a27ce9e79541"
+embedded = "ba41ec7e9bf6fb8f4f95781e97d943c09b21c7c79546affb4bfdbb748a5b98e3"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::init_get"
+kappa = "3db1bb0db9d5f41b54b9d37392db35a35737f918fefdfe31d208216a886b27b7"
+embedded = "1dfc82ca94d69f7a27ceb15a34b373af8ef6c64d0fa32f2e5f22c6858381281d"
+status = "residue"
+cause = "mir::Ty: platform::avx2_detected::has_avx2::InitToken"
+
+[[fn]]
+path = "blake3::has_avx2::init_get::init_inner"
+kappa = "a57dfd7c9abed0ed4c6d2fa4a2def77e9f9001dff7ebf5c621dd1fe4ee8be9f2"
+embedded = "fe76fd805f70dc29e557a02012ff5ba2cc9ddd8e304f34a44c73467b7351ec28"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_avx2::init_get::init_inner::cpuid"
+kappa = "a8cd68ea27b7e82458915da61d3831be5995d5c80438e9b602b5550cbfe20126"
+embedded = "9af47f456a808baed807373abd472618ef0e267bc9aa6cb6781bc2bcc8089fc0"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_avx2::init_get::init_inner::cpuid_count"
+kappa = "104586572c35e7bdfe142f155529bf9c3bf95c08d8b9bfef19d6cfc739ef668b"
+embedded = "f6cb41c0f7b112b1ff8d6b373c361ceba4683f030b1a00d9ba3b184da97efd0f"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_avx512::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:28: 44:33>::clone"
+kappa = "2165118895e56789669d27d3e929ad3aed8a6b1ddbf3f10c5e66d7c392453c59"
+embedded = "fdf26969e7a0c8d7d6632a4a4037cf1207f4948a5b5b989d490705ac3b26b09f"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:35: 44:40>::fmt"
+kappa = "d00e48ed200bb0d7124ab3ae975281ec13e16edad731e07220680fd8aa342301"
+embedded = "103c888f76747d5f8d55ed0d95a3b27033e47f87ed07596b8397893b50c9c227"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::has_avx512::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::get"
+kappa = "d5224666299a19a56055aaea23411010574361eb752211b182c229dd62ebab6e"
+embedded = "e3d58e88761c6ae929dd4fd5a6d0167256c4ddc4c3d770eb44c02e98bdaca927"
+status = "residue"
+cause = "mir::Ty: has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init"
+kappa = "fdd2c54098b329da389c215c1043220fd49352cc8e1e0595aa98b6ff56d41381"
+embedded = "d650cc1de60cdac43f0a248e8bd241529b0c2198a2b6066ac3e85f2dba943a10"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init_get"
+kappa = "2e1d104b144b00953f3041a7dc234e8308c31c6ab80140df3b31444a0e026a18"
+embedded = "23404f66d2f165ad672521856c5ef719bad1e72d94b51a02eaa2470b3cc21212"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::UNINIT"
+kappa = "5f529abc0f4a42897f18c8c5142625087c06373f04b63b24be0487268c8950f0"
+embedded = "641ad89e50540efcbea028c9221a918e6db6f3dadcce95bb3a4ebb40766858a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::max_value"
+
+[[fn]]
+path = "blake3::has_avx512::get"
+kappa = "36af9f46c7e7672b0863fa7200bd2a8e310713cad22291c7e81599b357455723"
+embedded = "2f32e7c7367322b1f4322a6b49db4322402e17968657e8bade23a06ac3bfcd84"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::init"
+kappa = "2dae90a238b8c8a8b6b3132e2d0853ccc78cefb7bc9b788ba6396d922939f861"
+embedded = "bc961c5f61eade3deb70493e9db5df96ef1e91e40c9073778a953a22b9085df5"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::init_get"
+kappa = "c5e70889d813ba9b29b902dcb1b34d01cc41082b8c3f1b55400ee5d5d48852f7"
+embedded = "1c199f9a64676e44d0615966fe791ae6d689e4102c87178c61f7d08ddd793069"
+status = "residue"
+cause = "mir::Ty: platform::avx512_detected::has_avx512::InitToken"
+
+[[fn]]
+path = "blake3::has_avx512::init_get::init_inner"
+kappa = "a7ad0435e51cf0a63fbf159bd04f28957c2f1daa037aa83cec2bbbd1a5d9faf5"
+embedded = "aba9b37670e54154ed84ad025b498096e6a983cc3e75234cf951d78174c48ce8"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_avx512::init_get::init_inner::cpuid"
+kappa = "28c8ac31f2f357d44346619498881af13417497d08eb4f29847d89eb43879712"
+embedded = "51da2608d481679e2ef18d24a258897762071cc3d0b5ef761b62e12dd210441e"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_avx512::init_get::init_inner::cpuid_count"
+kappa = "13fab26de11e7e9274de91c95e93472fba02a4fd454f6d036d089120096fd042"
+embedded = "6a0fbcc5866fd9313d95fb205d576386fb8f7ddf61e32dd6a8f1ad4e6079a0f6"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_sse2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:28: 44:33>::clone"
+kappa = "db73511facd8ac6e35563f6bbd0e2e164562ba7d2aa076e900d04f2531687596"
+embedded = "aa7cf30b9582c99ea15475055bf43db1108bd47751c2e03842237f153430ec7c"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:35: 44:40>::fmt"
+kappa = "572d586038676bc5f9e09cf2ae14e85fb93e4af8d0466c61eabaf27f2284be63"
+embedded = "5c38b37a94685075c6e0c8fb087a7deca5057e1e2a7e3be64dcc3302a687762f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::has_sse2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::get"
+kappa = "16667c48d2892f98a4c2f012e284daa1e47afd12258817be69973c0bcc523c24"
+embedded = "21869b0107043929dda2bdd857994a97d5bd4489b938e32b1502499939aa88fd"
+status = "residue"
+cause = "mir::Ty: has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init"
+kappa = "1356e8e1ea780f65eb3f81f0bc6019f4c4de0c827c594c7b4490eda530d65af6"
+embedded = "4c3e7d34daec3088c0be13658eed6d3e62ac5aa496454821e87f3bdf7b5b96f3"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init_get"
+kappa = "05d077bc8e701885c416329fb00eb68660dbc1367cec1c62682f462f700fc703"
+embedded = "a2cb07eb221b798273d488d9bd476576ab5f0021cbb9551d2bff1e19700037d0"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::UNINIT"
+kappa = "60de5ec2423b95f0189dc129a287f1c32aa590605a99c239970e856fe9d6ec70"
+embedded = "bbf1e89cc52d4c1e61bcaa332521c0395a2d18cc27e8de718c355fdd5ffc2ad1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::max_value"
+
+[[fn]]
+path = "blake3::has_sse2::get"
+kappa = "6ef154e3578ad7eb4f492789ca69750829a5619f7ab586300d27175241b73dc0"
+embedded = "3643c5754224184d0de3c37c8ce20b9e7c2a2e0d3774770cb04ca9d08bcbe432"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::init"
+kappa = "69455e15a15e9c92904db9a3f8ccc350ffde9b2ad0426bc9b6d356be05a34dde"
+embedded = "06cf70587b654897918f67a5fc88a547e15209603543a034ba9d37773c91ad60"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse2::init_get"
+kappa = "ba6cca947efba5ea349c17e008151968a3618b5971352b2b3aed75417cf5b325"
+embedded = "3da1340e0fb05d33e84b5478e486c6d397476f341ccdbdc9c824584489aa349b"
+status = "residue"
+cause = "mir::Ty: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:28: 44:33>::clone"
+kappa = "51d97b19b13e6ef4dd65b070b2f611004af9c3df784e71701c6822c48bbc8b9c"
+embedded = "ce1f72a7ebc8c8e8596433dc40587b45c28a19bfc313d89f124615bc174fb9c6"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:44:35: 44:40>::fmt"
+kappa = "4fbb34a2fb6cb16d36e38453ab63c68e922677b5ceb3b4e62be5d395df82c057"
+embedded = "09692bbcf512258be67402e9d340efafef3b109a252e7e65e97981c99a966186"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::has_sse41::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::get"
+kappa = "c430ced741c747ab62fcb93408553372302f84e0caae57f69aee36d3c7e84c28"
+embedded = "ef59914343056c21c97c9b3f486e4d527bec92aa78475b8472b3fd13ffd395d0"
+status = "residue"
+cause = "mir::Ty: has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init"
+kappa = "1859699a1381d0df6a3eacd4ee617c3e15da3b5061ee3e88f62c08c879c36de1"
+embedded = "b80214ee278a4f70ce9058de1f9f167b2f4827fbc1424ddc1be07f0f7d4c457b"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.3.0/src/lib.rs:47:13: 47:27>::init_get"
+kappa = "0b73d12af5b4e6b75bdddb654db13f12e8d6ca54959d6a15aeb87c4d98233423"
+embedded = "fec6b554f756e8c5599a64ee941c1c603fc33a8125841b539730dd0370bb25f8"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::UNINIT"
+kappa = "6dfe6d30f70a1931dec12baa70a61ebf9cf4d38a9131bae11d694e233c890c16"
+embedded = "84d5fc716d7be11b2db05a08b9353394ac4885428a759731cb27acf7210dbd87"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::max_value"
+
+[[fn]]
+path = "blake3::has_sse41::get"
+kappa = "9d9c15384168147bbd0730f4bb17fd9aaa1af07d272cfe3850275002e1332f6e"
+embedded = "70211f082ccf1991bc260f673d15e2e7d172d1254b6da119917a8735cc778762"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::init"
+kappa = "e92f7c73161fc66f4adad56c2b4d3dce9a31c0a0820b128a09dddaf1d4a1401f"
+embedded = "968f317d8bacbfbaf5fc5fed7e4b776c3005358a02f92626e3a7c11c50c5a37a"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::init_get"
+kappa = "6d86056e4025ef74f3189409b5a62946fa11d527ac8f4f301b3fff705eb1060c"
+embedded = "4446fda56696af5914d51cee444234d50ae3cdc6f825c39a3ee183f5d0437ffa"
+status = "residue"
+cause = "mir::Ty: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::has_sse41::init_get::init_inner"
+kappa = "16c8ae77a9519fb95c335ac357c3b573f20acda8773b8cbad68fc1568fc86f4f"
+embedded = "b97fb507455d9163880326985a241a520f9d753ca5a2a3f91222de843ec49c4a"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_sse41::init_get::init_inner::cpuid"
+kappa = "d89880b80b79936150ae80864320a2d09b28760f85a02d71f14b4958228b465d"
+embedded = "4b99a845a772e006662e826b8a8d2461112508b9fd629963771018a5f014825d"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::has_sse41::init_get::init_inner::cpuid_count"
+kappa = "dfcfe4b1814a5bad12e12382d98bb5527e5a54a2f8c25886cbc8a21b24a2c4de"
+embedded = "3bef6445a0e1d390d28557b0aec46fab85080076780675b92b0f8dc19c85f360"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::CpuidResult"
+
+[[fn]]
+path = "blake3::le_bytes_from_words_32"
+kappa = "e54e3457cb8d900103719e60852bb53be0dd228b4ee242005e531d3f0069a6c3"
+embedded = "164dec8e3e07aa046f86d52b33fe862c4938dee3d99ed9a98db078a6f35935fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_le_bytes"
+
+[[fn]]
+path = "blake3::le_bytes_from_words_64"
+kappa = "fa005afecb59260a7eeb39c076b2c953732f6c62d138bc828310a1eaebad7eaf"
+embedded = "5a5401c8fbdc75e1f1d96da9b3248b2f8291fadc2fa61fe07c9358c544d8736a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_le_bytes"
+
+[[fn]]
+path = "blake3::platform::<impl at src/platform.rs:43:10: 43:15>::clone"
+kappa = "f1ab256841e1bd67f5b84d0c023a7b4c2029832809b6817ed0c7ea4753c62d84"
+embedded = "7476534359cbded1de7587d131f3f86c63a71f048adc1b770e8c0c312445a741"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::<impl at src/platform.rs:43:23: 43:28>::fmt"
+kappa = "d1efd43dbbe226ae4040b40031b50e6c5c196b7a6c02497a440af0f44895eaf4"
+embedded = "dfc75c379a537db372fed7c7fb4434caed2bc71a8b3bd7227a126f6c4648d4f5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::platform::Platform::avx2"
+kappa = "ddbc3e12f7a1d54fcdb9df6a1b78dcf2293bd056517a2c6229850cd4c90f729a"
+embedded = "b20ae3b85d093fa7a30e366ef2834200a5bdf78c1150f84b979897a5b096fdce"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::avx512"
+kappa = "65ed65d39ec0e8885502bc773813575d82682d8a600222fe29e3ec3c96c8d0a6"
+embedded = "2c29fc4b908d59aec15a693eaed6250927cf9ac6a4a96b12d5eb69cb0543d299"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::compress_in_place"
+kappa = "8aa8e12318fe0ba1eaaf67f3c36b07622d0a3790985e3419a4a535f383adef1c"
+embedded = "34f586cacf679ca8691d3e52668cb61e5d764cd480584d8bc0471dd299775080"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::compress_xof"
+kappa = "38f9f6719e4445e60f07a34210eddc87468c002d29ec96e59f0973c07c121c64"
+embedded = "69f43ddeb9e1c8baa384d1b7d6de907cba0d864194c88a45f48d60950c18b223"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::detect"
+kappa = "75db18f262c8d8a7f0232ea04de55a44fcb24ab58747289eda12aa6ea8fbcf96"
+embedded = "a2fefb9e0b88f1787dbaa2ba4dbf7bf2437795af60c67673b953d463038df081"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::hash_many"
+kappa = "fba74b83445735569158acec4070801dadf92213d1136b72a66e889a274d1874"
+at = "IncrementCounter=u32, N=#_N"
+embedded = "8f6eead3ca0c19d065782b9cc38fba3003e91186b5c52397ee61710a30c938b7"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::portable"
+kappa = "03d8012434710a53db57dbae3cefd5021aae6cd29b6d88bfc327d2f8d7b3098e"
+embedded = "5437e6cd470c929dcb0a93c38acd405cd7564c718877eaa7cdfbf1f9be8293b3"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::simd_degree"
+kappa = "7c5f97e4b8c2af077d64d6a00c75c2fac407ed6995c78b0b140f1602c8f6de13"
+embedded = "36cb91041a959b2f81db927327930c8d070f4ef47aa03555cbf01330736b557a"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::sse2"
+kappa = "a213857ff9a11d9c85999c5034be635b5b31970d7bf3d7190da7bbcb5c7df200"
+embedded = "f7db62b5b77b4b1d70fa17d8ce24543517a6a21a89ce7e24bc86fed48ca18b91"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::sse41"
+kappa = "3f4f1dbd2154b5d327339955accdbc85e5bd28ea8aa9432150cbf4cca8537e6f"
+embedded = "56ea31d8c0a355ce2a0cb3720e50ed155432b49be912b195e973d554755d420b"
+status = "residue"
+cause = "mir::Ty: platform::Platform"
+
+[[fn]]
+path = "blake3::platform::Platform::xof_many"
+kappa = "7f9e4fa926c3178c32a7a0adcd8a198a47fd85a556120b8182e7fa2b3f8a31ae"
+embedded = "4727a49af344e330cc415f633829003f94a9953fc5911e3cd7b9888b97836e3d"
+status = "residue"
+cause = "mir::Ty: Platform"
+
+[[fn]]
+path = "blake3::sse2_detected"
+kappa = "631168aedbc2ad4faf64ab4e2da6344ddf994b16b0914995d44f9f1173ce4b51"
+embedded = "ce25755185d446b923d75ac6620b1a8f61f42cfb6f2c6ad594dabfde18ab4164"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::sse2_detected::has_sse2::get: blake3's MIR stops at type outside the lift: platform::sse2_detected::has_sse2::InitToken"
+
+[[fn]]
+path = "blake3::sse41_detected"
+kappa = "4b54b7284ec4396712eaf659c51f0d01df9d301828b37a95eb0c55338c3d2fca"
+embedded = "5daa284398a55905b892bdb1bd92990a984a7d7a774209bf46f5a0e5ba3c3cc0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::sse41_detected::has_sse41::get: blake3's MIR stops at type outside the lift: platform::sse41_detected::has_sse41::InitToken"
+
+[[fn]]
+path = "blake3::words_from_le_bytes_32"
+kappa = "473212b6f26c216b589bee758d557f2c58e5c994b54fc31b4ac9b560cafa0dc3"
+embedded = "ef4b92c741648061fc6e49f6931fee7d622927e8ba311366e4a2774bccbb7740"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "blake3::words_from_le_bytes_64"
+kappa = "ca9724a59061f19912ef037925fe5dcdef40c45cee306ec7ee1c8d09281bb7cc"
+embedded = "626f44a766b87d76f73e1b29fa8097bea9c9d08d39a71b5155c2d9535a5ec4b6"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+

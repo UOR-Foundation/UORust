@@ -1,0 +1,1137 @@
+# The fiat-crypto register (written by `uorust crate fiat-crypto@0.3.0`; do not edit): every body of
+# fiat-crypto's MIR at fiat-crypto 0.3.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 877
+translated = 120
+residue = 757
+
+[module.curve25519_32]
+bodies = 28
+translated = 5
+residue = 23
+
+[module.curve25519_64]
+bodies = 26
+translated = 3
+residue = 23
+
+[module.curve25519_scalar_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.curve25519_scalar_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.curve25519_solinas_64]
+bodies = 8
+translated = 4
+residue = 4
+
+[module.p224_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p224_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p256_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p256_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p256_scalar_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p256_scalar_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p384_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p384_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p384_scalar_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p384_scalar_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p434_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.p448_solinas_32]
+bodies = 25
+translated = 3
+residue = 22
+
+[module.p448_solinas_64]
+bodies = 25
+translated = 3
+residue = 22
+
+[module.p521_32]
+bodies = 27
+translated = 5
+residue = 22
+
+[module.p521_64]
+bodies = 27
+translated = 5
+residue = 22
+
+[module.poly1305_32]
+bodies = 25
+translated = 3
+residue = 22
+
+[module.poly1305_64]
+bodies = 27
+translated = 5
+residue = 22
+
+[module.secp256k1_dettman_32]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.secp256k1_dettman_64]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.secp256k1_montgomery_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.secp256k1_montgomery_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.secp256k1_montgomery_scalar_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.secp256k1_montgomery_scalar_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.sm2_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.sm2_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.sm2_scalar_32]
+bodies = 31
+translated = 4
+residue = 27
+
+[module.sm2_scalar_64]
+bodies = 31
+translated = 4
+residue = 27
+
+[embedding]
+bodies = 877
+embedded = 877
+evaluable = 877
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::fiat_25519_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::fiat_25519_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p224_32::fiat_p224_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p224_64::fiat_p224_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p256_32::fiat_p256_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p256_64::fiat_p256_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::fiat_p256_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::fiat_p256_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p384_32::fiat_p384_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p384_64::fiat_p384_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::fiat_p384_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::fiat_secp256k1_montgomery_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::fiat_secp256k1_montgomery_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sm2_32::fiat_sm2_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sm2_64::fiat_sm2_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::fiat_sm2_scalar_montgomery_domain_field_element"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: curve25519_32::fiat_25519_tight_field_element"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: curve25519_64::fiat_25519_tight_field_element"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: fiat_p434_montgomery_domain_field_element"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_32::fiat_p448_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_64::fiat_p448_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: p521_32::fiat_p521_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: p521_64::fiat_p521_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: poly1305_32::fiat_poly1305_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: poly1305_64::fiat_poly1305_tight_field_element"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: curve25519_32::fiat_25519_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: curve25519_64::fiat_25519_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_32::fiat_p448_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_64::fiat_p448_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: p521_32::fiat_p521_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: p521_64::fiat_p521_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: poly1305_32::fiat_poly1305_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: poly1305_64::fiat_poly1305_loose_field_element"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::fiat_25519_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::fiat_25519_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p224_32::fiat_p224_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p224_64::fiat_p224_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p256_32::fiat_p256_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p256_64::fiat_p256_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::fiat_p256_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::fiat_p256_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p384_32::fiat_p384_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p384_64::fiat_p384_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::fiat_p384_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::fiat_p384_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::fiat_secp256k1_montgomery_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::fiat_secp256k1_montgomery_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sm2_32::fiat_sm2_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sm2_64::fiat_sm2_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::fiat_sm2_scalar_non_montgomery_domain_field_element"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fiat_p434_non_montgomery_domain_field_element"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&[u32; 7]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&[u32; 12]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&[u64; 6]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 12]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&[u64; 6]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&[u64; 7]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 8]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&[u64; 4]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&[u64; 4]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_32::IndexConst<&[u32; 10]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_64::IndexConst<&[u64; 5]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: curve25519_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_32::IndexConst<&[u32; 10]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_scalar_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519_solinas_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&[u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&[u8; 28]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&mut &mut [u32; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&[u8; 28]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p224_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p256_scalar_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&[u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&[u8; 48]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&mut &mut [u32; 12]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_32::IndexConst<&mut &mut [u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&[u64; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&[u8; 48]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&mut &mut [u64; 6]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_64::IndexConst<&mut &mut [u64; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&[u8; 48]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; 12]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_32::IndexConst<&mut &mut [u32; 13]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&[u64; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&[u8; 48]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&mut &mut [u64; 6]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p384_scalar_64::IndexConst<&mut &mut [u64; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&[u64; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&[u8; 55]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&mut &mut [u64; 7]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::IndexConst<&mut &mut [u64; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::fiat_p434_montgomery_domain_field_element"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p434_64::fiat_p434_non_montgomery_domain_field_element"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_32::IndexConst<&[u32; 16]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_64::IndexConst<&[u64; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p448_solinas_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_32::IndexConst<&[u32; 19]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_64::IndexConst<&[u64; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: p521_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_32::IndexConst<&[u32; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_64::IndexConst<&[u64; 3]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: poly1305_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_dettman_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; 9]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&[u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&[u64; 5]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&[u8; 32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&mut &mut [u64; 4]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sm2_scalar_64::IndexConst<&mut &mut [u64; 5]>"
+bodies = 1

@@ -1,0 +1,122 @@
+[[fn]]
+path = "proc-macro-error2::<impl at src/lib.rs:305:10: 305:15>::fmt"
+kappa = "ed944d8049e2cd89c3efb8891ba92814153fe7a529e156a8ba7989f26b82159c"
+embedded = "6198a4db9a9ee89a27a78dee5ee7d3482aa046c28323bfbc3e666413fdc78235"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "proc-macro-error2::<impl at src/lib.rs:305:17: 305:22>::clone"
+kappa = "e1e1216e0571c89ea650992d95936e331c21f6716bb0b5c921417176aef35440"
+at = "SpanRange=u32"
+embedded = "3a8b261e42488af24b80a4779a41753aeab6f0e2aba872e863134a07a7acee50"
+status = "translated"
+digest = "71a396c660d66435a7ac30ca69ab920998ca4e6bdda1a886a45df821c7d8c89c"
+
+[[fn]]
+path = "proc-macro-error2::ENTERED_ENTRY_POINT"
+kappa = "955699af523820ea25a75372ff9c97f836b1d51a28f2122bda30a6dd31a88847"
+embedded = "41b9aa42f3fd38eb15c34583ee7c366ff0d262785edc687e966a4650d9473bac"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<usize>"
+
+[[fn]]
+path = "proc-macro-error2::ENTERED_ENTRY_POINT::__RUST_STD_INTERNAL_INIT"
+kappa = "d772a208c0c1a8a0b125826c79318178f6a9f99fc4ca7ae63ae96252f722a584"
+embedded = "ae6b846a279e4b4e45a68740050c8e3a521d4dd1742fff8b180e68d56aa32610"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<usize>"
+
+[[fn]]
+path = "proc-macro-error2::Option::expect_or_abort"
+kappa = "febe2a7fcc754326a57223a7a2e846fbab060a34e5578df26580fddf0ce101cc"
+at = "SpanRange=u32, T=u32"
+embedded = "e86e945d8b4c7e5d73cee0e3a1a8b3070e9012bf9b36997618e356f512aa0373"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "proc-macro-error2::Result::expect_or_abort"
+kappa = "04baa55f16c60cfb390fb6cf30538807ee4405fe2d8569493a90d2e14a3868c5"
+at = "E=u32, T=u32"
+embedded = "cd08ed8e97403938fdae687d1096e4234ac5971d90f08687edfa8e55cdb0c8fd"
+status = "residue"
+cause = "mir::Ty: diagnostic::Diagnostic"
+
+[[fn]]
+path = "proc-macro-error2::Result::unwrap_or_abort"
+kappa = "773ce88efe88d733035904ab6d026e6547314721fea7300b45f353a9013fdc3c"
+at = "E=u32, T=u32"
+embedded = "556b3c0f131189c65b48f53997ef65f2b52616be7a900e5733201cc9d58144d8"
+status = "residue"
+cause = "mir::Ty: diagnostic::Diagnostic"
+
+[[fn]]
+path = "proc-macro-error2::SpanRange::call_site"
+kappa = "e400052aad5b0fd830cde4fcdcf3db18c7fde3e25791f83c1c617fb935cc05c5"
+at = "SpanRange=u32"
+embedded = "95397237247e3aec0a3dcb226250df326eac7e88015f6989cab3324765320cf0"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "proc-macro-error2::SpanRange::collapse"
+kappa = "7e73c97bcd534b11837022285702ca854296af271318896c8b9c91c6e2906167"
+embedded = "1c6fdddbe41a2784c4206779f21143d6d21d4d94dec908fd036550003c330a83"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "proc-macro-error2::SpanRange::from_tokens"
+kappa = "d4fa6fe6143dfb36545e504f30a3f40e44ac31f44be7ea01e7ae9c93de7a2aa1"
+at = "SpanRange=u32"
+embedded = "7418a19061ebe6b8e367bd120e917ad6d5bbd8f2e0bdabc4ccef6e0b25e523ea"
+status = "residue"
+cause = "mir::Ty: dyn quote::ToTokens"
+
+[[fn]]
+path = "proc-macro-error2::SpanRange::join_range"
+kappa = "dcd196a958b5bae1eb8dd6b65c1fe652a7d500748138cef0d65376b677b838e9"
+at = "SpanRange=u32"
+embedded = "aa15feafd9bc761662bb97da935b85dc163281fbe1563bf4d1f11bc167d95fc3"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "proc-macro-error2::SpanRange::single_span"
+kappa = "576c99b5226479e5938b2e8b48f993deeb60cd07c73728c77438065d68fb7003"
+at = "SpanRange=u32"
+embedded = "91fa34cec2903d47d3bb99afdd692c0b45fa30134b8fe37f2fc0cbbd0c888f50"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "proc-macro-error2::abort_if_dirty"
+kappa = "73c11da5409721aa4247303d607cbee8816a4756ec193558e3669ca5afe44c09"
+embedded = "4d2fedce08a06231d7b92ecc60e0ca528a1c79144f30f20b621d9d205bc24f40"
+status = "residue"
+cause = "mir::TerminatorKind::Call: imp::abort_if_dirty: proc-macro-error2's MIR stops at mir::TerminatorKind::Call: check_correctness: proc-macro-error2's MIR stops at mir::Operand::Constant: check_correctness::promoted[0]: type outside the lift: std::cell::Cell<usize>"
+
+[[fn]]
+path = "proc-macro-error2::abort_now"
+kappa = "3f733020b44ab5a508a45ee86624f9ea6d50ea2f55cfd779f038360aec80963c"
+at = "AbortNow=u32"
+embedded = "2c8bfe591da7c40f64eb7e218e11d22217f631af2b0de5959bf6b1fc282a75b2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: check_correctness: proc-macro-error2's MIR stops at mir::Operand::Constant: check_correctness::promoted[0]: type outside the lift: std::cell::Cell<usize>"
+
+[[fn]]
+path = "proc-macro-error2::check_correctness"
+kappa = "cf1c11079146f29997f44da52bbfb07b016906819793a4e8f9e7ed129c7bc0d8"
+embedded = "5a5ff9963fd1242e9b1319464178cc9306a5e633d13e3c02bd5dfd8c67dea9dd"
+status = "residue"
+cause = "mir::Operand::Constant: check_correctness::promoted[0]: type outside the lift: std::cell::Cell<usize>"
+
+[[fn]]
+path = "proc-macro-error2::entry_point"
+kappa = "4f7536a09cff73d15ce8825d19a98a48835fd1b8525ed3dddcd05c8f0118f5f8"
+at = "AbortNow=u32, F=u32"
+embedded = "b289e0a9b1db86354cd9722265dbd817ef94dc10ef1cd0cd4b139d64cd4db474"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+

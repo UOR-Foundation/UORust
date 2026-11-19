@@ -1,0 +1,1717 @@
+# The protobuf register (written by `uorust crate protobuf@3.7.2`; do not edit): every body of
+# protobuf's MIR at protobuf 3.7.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 3154
+translated = 27
+residue = 3127
+
+[module.cached_size]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.coded_input_stream]
+bodies = 124
+translated = 0
+residue = 124
+
+[module.coded_output_stream]
+bodies = 109
+translated = 1
+residue = 108
+
+[module.crate]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.descriptor]
+bodies = 948
+translated = 0
+residue = 948
+
+[module.enum_or_unknown]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.enums]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.error]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.ext]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.lazy]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.message]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.message_dyn]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.message_field]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.message_full]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.misc]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.owning_ref]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.plugin]
+bodies = 139
+translated = 0
+residue = 139
+
+[module.reflect]
+bodies = 882
+translated = 17
+residue = 865
+
+[module.rt]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.rustproto]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.special]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.text_format]
+bodies = 40
+translated = 1
+residue = 39
+
+[module.unknown]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.varint]
+bodies = 16
+translated = 3
+residue = 13
+
+[module.well_known_types]
+bodies = 575
+translated = 0
+residue = 575
+
+[module.well_known_types_util]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.wire_format]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.zigzag]
+bodies = 6
+translated = 4
+residue = 2
+
+[embedding]
+bodies = 3154
+embedded = 3154
+evaluable = 3153
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[differential]
+bodies = 8
+theorems = 54
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 362
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 229
+
+[[cause]]
+cause = "mir::Ty: special::SpecialFields"
+bodies = 122
+
+[[cause]]
+cause = "mir::Ty: FileOptions"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: reflect::message::MessageDescriptor"
+bodies = 77
+
+[[cause]]
+cause = "mir::Ty: reflect::value::value_ref::ReflectValueRef<'_>"
+bodies = 70
+
+[[cause]]
+cause = "mir::Ty: reflect::message::generated::GeneratedMessageDescriptorData"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: FieldDescriptorProto"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_type_box::RuntimeType"
+bodies = 47
+
+[[cause]]
+cause = "mir::Ty: reflect::value::value_box::ReflectValueBox"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: UninterpretedOption"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: MethodDescriptorProto"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: FieldOptions"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: wire_format::WireType"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: reflect::file::FileDescriptor"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: UnknownValueRef<'_>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: FileDescriptorProto"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: code_generator_response::File"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: descriptor::FileDescriptorProto"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: MessageOptions"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: reflect::enums::EnumValueDescriptor"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Annotation"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: reflect::enums::EnumDescriptor"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: dyn message_dyn::MessageDyn"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: MessageField<u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ReflectValueRef<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: reflect::value::value_ref::ReflectValueMut<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: source_code_info::Location"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: well_known_types::any::Any"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: CodeGeneratorResponse"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: EnumValueDescriptorProto"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: FieldDescriptor"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: NamePart"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: text_format::parse::ParseErrorWithoutLoc"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: EnumOrUnknown<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: UnknownFields"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: descriptor::FileOptions"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: EnumOptions"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: EnumReservedRange"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ExtensionRange"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: MessageDescriptor"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ReflectRepeatedMut<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ReflectRepeatedRef<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ReservedRange"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: descriptor::FieldOptions"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: descriptor::MessageOptions"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: reflect::enums::generated::GeneratedEnumDescriptorData"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: well_known_types::duration::Duration"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: well_known_types::empty::Empty"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: DynamicRepeated"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: MethodOptions"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: OutputBuffer"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: reflect::acc::FieldAccessor"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: CodeGeneratorRequest"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: DescriptorProto"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: EnumDescriptorProto"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: OneofDescriptorProto"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ServiceDescriptorProto"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: enum_or_unknown::EnumOrUnknown<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: BufReadIter<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ReflectValueBox"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: descriptor::EnumDescriptorProto"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: dyn MessageDyn"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownFields"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownValue"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: well_known_types::struct_::ListValue"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: well_known_types::struct_::Struct"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: well_known_types::timestamp::Timestamp"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: EnumValueOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ServiceOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: descriptor::DescriptorProto"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: descriptor::ServiceDescriptorProto"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: reflect::acc::v2::singular::SingularFieldAccessorHolder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: reflect::optional::ReflectOptionalRef<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: EnumDescriptor"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: EnumValueDescriptor"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: InputBuf<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: descriptor::EnumValueDescriptorProto"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: descriptor::FieldDescriptorProto"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: descriptor::MethodDescriptorProto"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: descriptor::OneofDescriptorProto"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: descriptor::field_descriptor_proto::Type"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: message_field::MessageField<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: reflect::map::ReflectMapRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: reflect::message::message_ref::MessageRef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: reflect::protobuf_type_box::ProtobufType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::BoolValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::BytesValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::DoubleValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::FloatValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::Int32Value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::Int64Value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::UInt32Value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::UInt64Value"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CodedInputStream<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DynamicMessage"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::EnumOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::EnumValueOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::ExtensionRangeOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::FileDescriptorSet"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::GeneratedCodeInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::MethodOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::OneofOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::ServiceOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::SourceCodeInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::UninterpretedOption"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::descriptor_proto::ExtensionRange"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::descriptor_proto::ReservedRange"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::enum_descriptor_proto::EnumReservedRange"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::field_descriptor_proto::Label"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::field_options::CType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::field_options::JSType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::file_options::OptimizeMode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::generated_code_info::Annotation"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::method_options::IdempotencyLevel"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::source_code_info::Location"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: descriptor::uninterpreted_option::NamePart"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: field_descriptor_proto::Type"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: plugin::CodeGeneratorRequest"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: plugin::CodeGeneratorResponse"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: plugin::Version"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: plugin::code_generator_response::File"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reflect::field::ReflectFieldRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reflect::field::index::FieldIndex"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reflect::map::ReflectMapIter<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reflect::map::ReflectMapMut<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::ReflectRepeatedRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownValueRef<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::api::Api"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::api::Method"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::api::Mixin"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::field_mask::FieldMask"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::source_context::SourceContext"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::struct_::NullValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::struct_::Value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::Enum"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::EnumValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::Field"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::Option"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::Type"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: well_known_types::wrappers::StringValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Message"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: reflect::repeated::data_impl: protobuf's MIR stops at mir::TerminatorKind::Call: reflect::repeated::transmute::transmute_ref_if_eq: protobuf's MIR stops at mir::Memory: a value of"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BoolValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BytesValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FileDescriptor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Int32Value"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Int64Value"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OneofDescriptor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UInt32Value"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UInt64Value"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: owning_ref::OwningRef<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: plugin::code_generator_response::Feature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflect::field::FieldDescriptor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflect::field::index::ForwardProtobufTypeBox"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflect::oneof::OneofDescriptor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::ReflectRepeatedMut<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::iter::ReflectRepeatedIter<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::Syntax"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::field::Cardinality"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: well_known_types::type_::field::Kind"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::singular::varint_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Api"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CachedSize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Cardinality"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DoubleValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DynamicMap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EnumValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExtensionRangeOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Feature"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FieldMask"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FileDescriptorSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FloatValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: GeneratedCodeInfo"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IdempotencyLevel"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: JSType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Label"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ListValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Method"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Mixin"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NullValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OneofOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OptimizeMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ReflectMapMut<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ReflectMapRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SourceCodeInfo"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SourceContext"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpecialFields"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StringValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Timestamp"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UnknownValues"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cached_size::CachedSize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: coded_input_stream::CodedInputStream<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::ProtobufError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::DynamicMessage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reflect::file::syntax::Syntax"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::drain_iter::ReflectRepeatedDrainIter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: struct_::Struct"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::Enum"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::Option"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::Syntax"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::Type"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: type_::field::Kind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: wire_format::Tag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ProtobufTypeTrait"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint32_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CodedOutputStream<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Maps"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: coded_input_stream::buf_read_iter::BufReadIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: coded_input_stream::input_buf::InputBuf<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: coded_output_stream::CodedOutputStream<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reflect::file::index::EnumIndices"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reflect::file::index::FileDescriptorCommon"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reflect::file::index::MessageIndices"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reflect::reflect_eq::ReflectEqMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::ReflectRepeatedRefIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: text_format::parse::ParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownValues"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::singular::value_varint_zigzag_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::tag_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DynamicEmptyMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DynamicFieldDescriptorRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DynamicOptional"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileDescriptorImpl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: G"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MessageIndices"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MessageRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReflectFieldRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReflectOptionalRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RuntimeType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ServiceDescriptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WireType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn reflect::repeated::ReflectRepeated"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: lazy::Lazy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::DynamicFieldValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::map::DynamicMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::optional::DynamicOptional"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::repeated::DynamicRepeated"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::field::index::FieldDefaultValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::field::index::ForwardProtobufFieldType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::field::protobuf_field_type::ProtobufFieldType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::field::runtime_field_type::RuntimeFieldType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::file::index::MessageFieldIndices"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::find_message_or_enum::MessageOrEnum<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::map::empty::DynamicEmptyMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::message::generated::GeneratedMessageDescriptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::oneof::generated::GeneratedOneofDescriptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::oneof::generated::GeneratedOneofDescriptorData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::service::ServiceDescriptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::service::index::MethodIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reflect::service::index::ServiceIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<std::string::String"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::option::IntoIter<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syntax::Syntax"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownFieldsIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unknown::UnknownValuesIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RuntimeTypeTrait"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <u32 as enums::Enum>::VALUES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <reflect::types::ProtobufTypeFixed32 as reflect::types::ProtobufTypeFixed>::ENCODED_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <reflect::types::ProtobufTypeFixed64 as reflect::types::ProtobufTypeFixed>::ENCODED_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <reflect::types::ProtobufTypeSfixed32 as reflect::types::ProtobufTypeFixed>::ENCODED_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item wire_format::TAG_TYPE_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: reflect::repeated::transmute::transmute_ref_if_eq: protobuf's MIR stops at mir::Memory: a value of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <bool as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <i32 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <i64 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u32 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::packed::vec_packed_fixed_data_size: protobuf's MIR stops at mir::Operand::Constant: the constant item <u64 as fixed::ProtobufFixed>::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_data_size::{closure#0}: mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::packed::vec_packed_varint_zigzag_data_size: protobuf's MIR stops at mir::AggregateKind::Closure: vec_packed_varint_zigzag_data_size::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ProtobufVarintZigzag"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::singular::value_varint_zigzag_size_no_tag: protobuf's MIR stops at mir::TerminatorKind::Call: zigzag::len_varint_zigzag: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint32_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::singular::value_varint_zigzag_size_no_tag: protobuf's MIR stops at mir::TerminatorKind::Call: zigzag::len_varint_zigzag: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::string::String::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: text_format::print::do_indent: protobuf's MIR stops at type outside the lift: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: varint::generic::len_varint: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <Self as RuntimeTypeTrait>::Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<bool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<i64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BufReadOrReader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DynamicFieldValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtFieldOptional<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FileDescriptorBuilding<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<bool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<i64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MessageFactoryImpl<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Owner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OwningRef<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReflectEqMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: coded_output_stream::buffer::OutputBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn reflect::type_dynamic::_ProtobufTypeDynamic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ext::ExtFieldOptional<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ext::ExtFieldRepeated<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: owning_ref::Owner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::dynamic::map::Maps"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::enums::EnumDescriptorImplRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::enums::generated::GeneratedEnumDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::field::FieldDescriptorImplRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::field::MapFieldAccessorRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::field::RepeatedFieldAccessorRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::field::SingularFieldAccessorRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::file::FileDescriptorImpl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::file::dynamic::DynamicFileDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::file::generated::GeneratedFileDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::file::index::OneofIndices"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::map::ReflectMapRefImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::map::ReflectMapRefIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::message::MessageDescriptorImplRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::message::generated::NonMapMessageDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::message::message_ref::MessageRefImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::oneof::OneofDescriptorImplRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::ReflectRepeatedRefImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::repeated::vec_downcast::VecMutVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeBool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeEnumOrUnknown<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeF32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeF64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeI32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeI64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeMessage<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::runtime_types::RuntimeTypeVecU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeBool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeDouble"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeEnumOrUnknown<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeFixed32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeFixed64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeFloat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeInt32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeInt64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeMessage<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeSfixed32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeSfixed64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeSint32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeSint64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeUint32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reflect::types::ProtobufTypeUint64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::option::IntoIter<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: struct_::value::Kind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: text_format::parse::Parser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: well_known_types::struct_::value::Kind"
+bodies = 1

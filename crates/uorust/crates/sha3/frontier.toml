@@ -1,0 +1,112 @@
+# The sha3 register (written by `uorust crate sha3@0.12.0`; do not edit): every body of
+# sha3's MIR at sha3 0.12.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 107
+translated = 0
+residue = 107
+
+[module.crate]
+bodies = 99
+translated = 0
+residue = 99
+
+[module.oids]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.utils]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 107
+embedded = 107
+evaluable = 107
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <[u64; 25] as Default>::default"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: digest::crypto_common::hazmat::DeserializeStateError"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: digest::typenum::UTerm"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Keccak224"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Keccak256"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Keccak256Full"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Keccak384"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Keccak512"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Sha3_224"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Sha3_256"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Sha3_384"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Sha3_512"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: digest::const_oid::ObjectIdentifier<39>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of_val"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SpongeCursor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sponge_cursor::SpongeCursor<u32>"
+bodies = 1

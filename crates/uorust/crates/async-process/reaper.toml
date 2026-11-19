@@ -1,0 +1,210 @@
+[[fn]]
+path = "async-process::available"
+kappa = "271d7bb0887fba31f6b27eb64eb0a6e2bfe0f95dadfe34bee9f1d788da96577b"
+embedded = "a7b91e6e7319d2717f618dca860b7991d951091c97d3b9121de56c69356692ce"
+status = "residue"
+cause = "mir::Ty: rustix::process::Pid"
+
+[[fn]]
+path = "async-process::reaper::ChildGuard::get_mut"
+kappa = "8fafb42c7b00d20d20dfd50583dd5f5d4e0162f5ceea4afb67d687eada93d8ee"
+embedded = "341e6e3acf8be0f6d47d9e077847260bed545c211a1edd6da6d26fcd9d1da3d4"
+status = "residue"
+cause = "mir::Ty: std::process::Child"
+
+[[fn]]
+path = "async-process::reaper::ChildGuard::reap"
+kappa = "cb83f9793be366cca2a7ad139b308c99f59a6f55e69911cd24e7d4038842c9a2"
+embedded = "58846ac576b0cd54018d06aa451572bf9406393b5dfdce94793198bb537db540"
+status = "residue"
+cause = "mir::Ty: reaper::ChildGuard"
+
+[[fn]]
+path = "async-process::reaper::Reaper::has_zombies"
+kappa = "47c6138607b8eed6d943bed78ea63872e2b17fd986de121ca41a22c553af5e08"
+embedded = "524c2a4d16649f89484844676d0da7b1856327d70b80a373056a48a3f91c4a4d"
+status = "residue"
+cause = "mir::Ty: reaper::Reaper"
+
+[[fn]]
+path = "async-process::reaper::Reaper::lock"
+kappa = "1a8e536214850aa84652a0e88f59cc832dfe76c2e7ff609ac6507685a9629451"
+embedded = "4abe44a1c4217edd48362cdf5f3c192c12f6020133a83775b198090dfbf63f1e"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::Reaper::lock()}"
+
+[[fn]]
+path = "async-process::reaper::Reaper::new"
+kappa = "37cd7661a265d88ed195b253a1c91104b870eeb30f74a37080b46a6373eafdb4"
+embedded = "13fd3f78a11251b2c9cfb7da9098686a5e042c2d2b99f70ba5e5ad9bb55ad19b"
+status = "residue"
+cause = "mir::Ty: reaper::Reaper"
+
+[[fn]]
+path = "async-process::reaper::Reaper::reap"
+kappa = "08124a7e288151bc284954035b1a0825a13d3aa281f8fb405db4ad41d82dfbb5"
+embedded = "c39337468c9510458ae7749e740883f222d23b51321a698d7beeb66bdda9aa6a"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::Reaper::reap()}"
+
+[[fn]]
+path = "async-process::reaper::Reaper::register"
+kappa = "79e231651e185bbbf030ffbaf895c32b889d3df0fdea14fa408e0acdf3ac2917"
+embedded = "37d62c3621bd40389536c0de9cda74f82a5337128aa63d0d6ea5bd0ca6fe0b62"
+status = "residue"
+cause = "mir::Ty: reaper::ChildGuard"
+
+[[fn]]
+path = "async-process::reaper::Reaper::status"
+kappa = "51b9e40ff1d48a9a72f8d82c301a1271f8b4bb89a525980797afa372c3d265e0"
+embedded = "d3c71ce5da41cdb44703de1325d11826fa2d3030cf222569cad95e740e354a4e"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::Reaper::status()}"
+
+[[fn]]
+path = "async-process::signal::ChildGuard::get_mut"
+kappa = "61b03bc1dc600524369c2c8dae37456fc39db155dd43322909d849e8dca61de8"
+embedded = "4ae333727b4ee4ec30d5a43a4e1bdaeb4fbf6cb9bb4fc7cdb8f844e007aa2a64"
+status = "residue"
+cause = "mir::Ty: std::process::Child"
+
+[[fn]]
+path = "async-process::signal::ChildGuard::reap"
+kappa = "7a6ee8d3736359ca832cca507e570a2fbd370b2f1aa7667efb9dce751eed3e99"
+embedded = "954a0b34cb49fd3954e97e4d58158eaf5a37e160792e9eed0a6a8b66c00a5e0d"
+status = "residue"
+cause = "mir::Ty: signal::ChildGuard"
+
+[[fn]]
+path = "async-process::signal::Pipe::new"
+kappa = "97956e25dc444dd6499a0b894e7a1d3dda10bab2b5a70d069e462843b08c27b6"
+embedded = "612852501ecc8287a1978aee853f8425212e7b808f42c6ece9f161bcdf061ebe"
+status = "residue"
+cause = "mir::Ty: reaper::signal::Pipe"
+
+[[fn]]
+path = "async-process::signal::Pipe::register"
+kappa = "abcb5c27c08f6f708d8f13e3074ff1f361e2d3a609c58b2fd8eb8e2ce7f38ecf"
+embedded = "3e39b3479867ec2b089a2f262cde0cf25517cf407228a89b2dc44b55da0a8109"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "async-process::signal::Pipe::wait"
+kappa = "74e4269fa416dd39aa480ce75367218bd178c492be5f7150b4adae10d4b8d7f5"
+embedded = "315bf62cbf88832a1db799cdf0fbc1974c6acd193e1e101b00dd0d5b6ff6fbb7"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::signal::Pipe::wait()}"
+
+[[fn]]
+path = "async-process::signal::Reaper::has_zombies"
+kappa = "536d13c45d3a5191d626f70fe2ca870a65bc519bcb75074a199e4c85abaf7dad"
+embedded = "70d5a2e747f0274cbabd073c11b4aa03162dfc57fcfeaf74595b958e3c31d894"
+status = "residue"
+cause = "mir::Ty: signal::Reaper"
+
+[[fn]]
+path = "async-process::signal::Reaper::lock"
+kappa = "e29d1dc4905d79b1ba6b3c589c0638249c46fb696d08c0451986a127860473dc"
+embedded = "7ae8eb1348b412153dd5b585b414e1c94106532a5f0526da191f5803823b23b7"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::lock()}"
+
+[[fn]]
+path = "async-process::signal::Reaper::new"
+kappa = "3ddd79f60f82aa623300a00721a05f2376766eb78add3343b549b40196982a02"
+embedded = "0a216b91f49ca392f4b8a6524f8dd97679747254779fd4b9cda399aee5eb49de"
+status = "residue"
+cause = "mir::Ty: reaper::signal::Reaper"
+
+[[fn]]
+path = "async-process::signal::Reaper::reap"
+kappa = "c373514ec68da95fe7c22584d836fa3148487ca49cef957fca0abe3f48e4a300"
+embedded = "d413a7c20585a54fbd31e10f3da4c60d8c1458848f027948e14af612e89c43e7"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::reap()}"
+
+[[fn]]
+path = "async-process::signal::Reaper::register"
+kappa = "ff731f8d9ed7c75e3727a5273d5d5a9258b3f138c3de873cc3097ba76179a2c1"
+embedded = "acd6c8069891ff1ba8a0fe1d7b04ce68c35c8ef44a8d4470cc28875f4da9cbe7"
+status = "residue"
+cause = "mir::Ty: reaper::signal::ChildGuard"
+
+[[fn]]
+path = "async-process::signal::Reaper::status"
+kappa = "67debf8ed6ddcdcaee44bfc03673e338fdd643d50227b0f7d6fdbb16cac78065"
+embedded = "d5da7f3f9c3f78d1599f74589b8f5741203092e204c18b1872b83e3c87dbc683"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::signal::Reaper::status()}"
+
+[[fn]]
+path = "async-process::wait::ChildGuard::get_mut"
+kappa = "66acbba2eb15416ddeaa64fd1b7b02b7701589c7c74b9669d4ae8453b50b4777"
+embedded = "2af8bb94f2ba2622f683b8e875e78100225ce813e56d53682ac9c755a19fc4a3"
+status = "residue"
+cause = "mir::Ty: std::process::Child"
+
+[[fn]]
+path = "async-process::wait::ChildGuard::reap"
+kappa = "d461dde1e5995c877eca2458c826b71a20284a5bb61acde45257c8084db8826b"
+embedded = "b2e87e94a87e86bcecfd03b63e68f6c8c6794a94a1c579e0094ae688454c9441"
+status = "residue"
+cause = "mir::Ty: wait::ChildGuard"
+
+[[fn]]
+path = "async-process::wait::Reaper::has_zombies"
+kappa = "6317f5faa2b5726007796bf644fec5bb584473bad70cbf980542820a5b18f635"
+embedded = "e0054465477ab1fe6ecfa958f388fd03ccaee754f6b708e18359478ebd25ad83"
+status = "residue"
+cause = "mir::Ty: wait::Reaper"
+
+[[fn]]
+path = "async-process::wait::Reaper::new"
+kappa = "f0ea62ea38e8e84393c5f213d917bcaee54206e7473b5720443afb697cc6135f"
+embedded = "528d2e0062af800fde0cbbd520558f2656e1d34c2ae3b3030a9404f1ca25b1da"
+status = "residue"
+cause = "mir::Ty: reaper::wait::Reaper"
+
+[[fn]]
+path = "async-process::wait::Reaper::reap"
+kappa = "9cf26812ecdb9cbf5efa09fe62c3b3e4c21852a94ab49464d5d4884cd1f00085"
+embedded = "847e41273175ce56eb75bd33eeed768a5eb4873b831d383572ec651a0e485654"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::wait::Reaper::reap()}"
+
+[[fn]]
+path = "async-process::wait::Reaper::register"
+kappa = "50ec133f8007c40018bb6863d951b923c3c836b3a5ed1dba06561f2a30f96d84"
+embedded = "e7d8134ebfd132bc5fad25bc54020559db16d31dba745907062c4ac264acf6d3"
+status = "residue"
+cause = "mir::Ty: reaper::wait::ChildGuard"
+
+[[fn]]
+path = "async-process::wait::Reaper::status"
+kappa = "4ebe7a250b7b8f00215fdc9b02e7abc96f133738b528ebc0a9b76fe840c7f84e"
+embedded = "e5ff69ea6fa634b512780e5ebf179907f27f3a960a4eec7efb4458218a8dd50b"
+status = "residue"
+cause = "mir::Ty: {async fn body of reaper::wait::Reaper::status()}"
+
+[[fn]]
+path = "async-process::wait::WaitableChild::get_mut"
+kappa = "d193e88edf8a96a9a886613c51a4e2f1efa30e3441a77c63aaa831d67b4124de"
+embedded = "e9718b7272a596c78afd3607f726eeadf18f1b319cf038663136c93458fdfca6"
+status = "residue"
+cause = "mir::Ty: std::process::Child"
+
+[[fn]]
+path = "async-process::wait::WaitableChild::new"
+kappa = "14b7f6aa5b36b3d2f885272629c00f1e0f44d9d1834ed97cad77a49cf5b91e3e"
+embedded = "1420419a065a895c0bd25d8d5fa7595df3ae71fe4b326bf01c5f20979566f953"
+status = "residue"
+cause = "mir::Ty: reaper::wait::WaitableChild"
+
+[[fn]]
+path = "async-process::wait::WaitableChild::poll_wait"
+kappa = "6f7e1426309de5cc0dbee10db4bd8b7dfdfa2206cb639dbadab710c7ea928bfb"
+embedded = "3640455769c1126f122349cd1f37bad801e7029e34c97ff902894881a74b2c1b"
+status = "residue"
+cause = "mir::Ty: std::process::ExitStatus"
+

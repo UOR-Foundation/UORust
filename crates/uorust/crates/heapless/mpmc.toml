@@ -1,0 +1,112 @@
+[[fn]]
+path = "heapless::dequeue"
+kappa = "a55567977412b4072c6a0871fd3dc3529bbfe5824355ac8f836b1d857bdf8f10"
+at = "T=u32"
+embedded = "62722078977626422a8858627f88f834a94f6ecc0f5bfbc8bc70c9b74bef418c"
+status = "residue"
+cause = "mir::Ty: Atomic<u8>"
+
+[[fn]]
+path = "heapless::enqueue"
+kappa = "dfc563fd4c941baf4b638bb0820b44e5966984a2aace3af3aba5fce487234c38"
+at = "T=u32"
+embedded = "5a11138faa124b38c53a9d36aeeae5d32258f07dce277df2884d6eda5b39a854"
+status = "residue"
+cause = "mir::Ty: Atomic<u8>"
+
+[[fn]]
+path = "heapless::mpmc::Cell::new"
+kappa = "e0fe86910e43e4488d1fb180c8c1252a59f527ad17307e141c1857ab4e328bcf"
+at = "T=u32"
+embedded = "2fdd25597feb3edc8b24c69889a6a10799a8c71288e0094fd80a00e84b8be76e"
+status = "residue"
+cause = "mir::Ty: mpmc::Cell<u32>"
+
+[[fn]]
+path = "heapless::mpmc::Queue::as_view_mut_private"
+kappa = "3d73df7b7b29c3ba68c25eeedee4de699b6dc2f4b0cbd2aa081a1dec58a67525"
+at = "N=u32, T=u32"
+embedded = "52ab6d922da621aa18939410d67a8b851242acc3366e5d170cc607296b8df8b4"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::mpmc::Queue::as_view_private"
+kappa = "9ddf882ead3b3baa62e299b21ce9beb25f0b1d36461612b684512331ecc7a325"
+at = "N=u32, T=u32"
+embedded = "c384694f3669b9c7afe2116a1466a54622373091f34055c902ff034fb160d60a"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::mpmc::Queue::default"
+kappa = "ca642e8761afa67cbd246e440f8f6bbd70d4949f17b1a9a2304eba0d081a96c5"
+at = "N=u32, T=u32"
+embedded = "ab05a43d7912a339f2f8cba1651e44090ce4f1a6717c27b25dfe2676a1ce8752"
+status = "residue"
+cause = "mir::Ty: storage::OwnedStorage<u32>"
+
+[[fn]]
+path = "heapless::mpmc::Queue::new"
+kappa = "55882339faee1dc322fc038350a935a13b2005fc1a52ffb700b1178886414c7c"
+at = "N=#usize_N, T=u32"
+embedded = "c6ac82bdba60d5f9057c4de317a3d7f1d048d5cae86ddbec17a70c8f2d39d0e5"
+status = "residue"
+cause = "mir::Ty: storage::OwnedStorage<#usize_N>"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::as_mut_view"
+kappa = "ce8c35505fc410ff2fd159f51a0a0eb9e359579a6b189d2cb32676443cd2d578"
+at = "S=u32, T=u32"
+embedded = "434319c27b674eb2b9320f113981da67f8b9c27446e8903ac619cc75684e0f71"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::as_view"
+kappa = "af6e7f14c9cf8a63f8fb570124392d3673d7701e06e3e0d7cf79666a63b541f5"
+at = "S=u32, T=u32"
+embedded = "435ce0441b9a2645d90600d2a809311db3d0e7e63bcdbee36f7da52d721f8d5e"
+status = "residue"
+cause = "mir::Ty: storage::ViewStorage"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::capacity"
+kappa = "c2d6a0523d79746e92973c5abee634ff1f9f351d2f1572b2fa56567944df88c1"
+at = "S=u32, T=u32"
+embedded = "c383b81c643722ce37909c44aff3445e3281639a3c0371848ef86c6a7a810a5d"
+status = "residue"
+cause = "mir::Ty: mpmc::QueueInner<u32, u32>"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::dequeue"
+kappa = "f01f90dff184a52d225d49386fa5fb6c76dac5e1e1a2dc34dcb7344b7171364f"
+at = "S=u32, T=u32"
+embedded = "a46ce36273c222c2a4fd4b00971a4f05ae9113373845bea0893c560abb0b83f8"
+status = "residue"
+cause = "mir::Ty: mpmc::QueueInner<u32, u32>"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::drop"
+kappa = "043921a6bea229bf19d021fbb6af75e94011f80acebeb5fbe53195b1b8944d50"
+at = "S=u32, T=u32"
+embedded = "72c1e08bc0b4a4f3630d5fb367a42d673531a134d1ab13fbfc6ff48b900c3a8c"
+status = "residue"
+cause = "mir::Ty: mpmc::QueueInner<u32, u32>"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::enqueue"
+kappa = "c38248f1cbd095fa4163823b00a700b39eaaaa9ba0cb213e0a1bf70095383313"
+at = "S=u32, T=u32"
+embedded = "211ff85ee73caddc0754e08da999eb5e19c69518a87afd3872a0ab4f9a4b6195"
+status = "residue"
+cause = "mir::Ty: mpmc::QueueInner<u32, u32>"
+
+[[fn]]
+path = "heapless::mpmc::QueueInner::mask"
+kappa = "60889bfd7cb5d069271ca59609a247c4acc57526e67a516ea8c73f880a5dd12f"
+at = "S=u32, T=u32"
+embedded = "7278f83cf979bad2053efde99ccb5412d8c623307a40952204d46dd257dd2c84"
+status = "residue"
+cause = "mir::Ty: mpmc::QueueInner<u32, u32>"
+

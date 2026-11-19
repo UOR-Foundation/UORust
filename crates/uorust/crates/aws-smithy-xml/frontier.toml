@@ -1,0 +1,251 @@
+# The aws-smithy-xml register (written by `uorust crate aws-smithy-xml@0.64.1`; do not edit): every body of
+# aws-smithy-xml's MIR at aws-smithy-xml 0.64.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 185
+translated = 1
+residue = 184
+
+[module.codec]
+bodies = 107
+translated = 0
+residue = 107
+
+[module.decode]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.encode]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.escape]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.protocol]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.unescape]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 185
+embedded = 185
+evaluable = 185
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::serde::SerdeError"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: XmlSerializer"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: codec::XmlCodecSettingsBuilder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: StartEl<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: decode::XmlDecodeError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: decode::Document<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: XmlDeserializer<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encode::ElWriter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Schema<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: decode::ScopedDecoder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: decode::StartEl<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: protocol::aws_rest_xml::AwsRestXmlProtocol"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AwsRestXmlProtocol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ScopeWriter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::date_time::Format"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::error::metadata::Builder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codec::XmlCodec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codec::XmlCodecSettings"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codec::deserializer::XmlDeserializer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ElWriter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MemberFilter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Name<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ScopedDecoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: XmlCodecSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::Blob"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::XmlSerializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decode::XmlToken<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn aws_smithy_schema::serde::ShapeDeserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: codec::deserializer::find_depth2_element_slice_by: aws-smithy-xml's MIR stops at type outside the lift: decode::Document<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Attr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::http::Request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::Schema<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::ShapeId<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::BigDecimal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::BigInteger"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::DateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::Document"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::MemberFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn aws_smithy_schema::codec::DynCodec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::ScopeWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::XmlWriter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<"
+bodies = 1

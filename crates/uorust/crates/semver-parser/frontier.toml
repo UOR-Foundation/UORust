@@ -1,0 +1,127 @@
+# The semver-parser register (written by `uorust crate semver-parser@0.10.3`; do not edit): every body of
+# semver-parser's MIR at semver-parser 0.10.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 168
+translated = 1
+residue = 167
+
+[module.generated]
+bodies = 31
+translated = 1
+residue = 30
+
+[module.lexer]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.parser]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.range]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.range_set]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.version]
+bodies = 18
+translated = 0
+residue = 18
+
+[embedding]
+bodies = 168
+embedded = 168
+evaluable = 168
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: generated::Rule"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: range::Partial"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: lexer::Token<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: version::Identifier"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: parser::Error<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: range::Comparator"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: range::Range"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: range::Identifier"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: range::Op"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: range::PartialKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Compat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RangeSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: lexer::Lexer<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: range_set::RangeSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: lexer::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: version::Version"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::Parser<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: range_set::Compat"
+bodies = 1

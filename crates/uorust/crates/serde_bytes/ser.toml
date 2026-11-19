@@ -1,0 +1,96 @@
+[[fn]]
+path = "serde_bytes::ser::<impl at src/ser.rs:102:1: 104:27>::serialize"
+kappa = "b9380238465d2fcdd38b6980b3dd08f2538d86cb4ec2ad0887683ad0992af5c2"
+at = "S=u32, T=u32"
+embedded = "12cbac1d23b4f8cc1e96ea18757522aba0d43a5c9f7d9b37a77ae82a7218b07d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::ser::<impl at src/ser.rs:26:1: 26:24>::serialize"
+kappa = "638792d17f04d98f513cb9c8783df9883d6cb9e2fa29983ebd8a547de0e5785b"
+at = "S=u32"
+embedded = "f620e66774859130150a96b112964e969ab0b3574a57941d41f4408afc42b9d9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::ser::<impl at src/ser.rs:54:1: 54:43>::serialize"
+kappa = "d739db88ed89044d42cc1494c383af22fb2e4180821557681f9a0896523d4e5c"
+at = "N=#usize_N, S=u32"
+embedded = "0e4c7df35e6fdbf4807cb35598f39f2270cb6df1005d41a3f11e7f0ab1bbf915"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::ser::Box::serialize"
+kappa = "b8a3193a77aac53ddb33d557c734f9ded6fe069c2bed956f797be06d71734da8"
+at = "S=u32, T=u32"
+embedded = "817394b8576cde21aed1655a18da06742c78b2a1c388ed55ff33dace6c1cb41c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::ser::ByteArray::serialize"
+kappa = "e717fb2aac6433b165a079cadfd111cf29d3751b4cd558470d59b6f458bf19e9"
+at = "N=#usize_N, S=u32"
+embedded = "6390c706aa640b3bd9841fa28753d825413981dc4eaaa4c30046b12861f98c31"
+status = "residue"
+cause = "mir::Ty: ByteArray<#usize_N>"
+
+[[fn]]
+path = "serde_bytes::ser::ByteBuf::serialize"
+kappa = "dea41e8c49a51c11db14198f91040a49bedffc083961bee150f88c0f4436810b"
+at = "S=u32"
+embedded = "42e1d4354d969a2aeb4c6b1d59d2744998354c0721bdf46c383a17f676c009d7"
+status = "residue"
+cause = "mir::Ty: ByteBuf"
+
+[[fn]]
+path = "serde_bytes::ser::Bytes::serialize"
+kappa = "ee0e7755c9ce341daedcb982344ebc9d8c95ab2e4ab5d493c1f64e0c312dac4b"
+at = "S=u32"
+embedded = "5fcc0c4d6873a6bf573463cbae5bc9f2c271ae7e25231ccfd0682215e5b179d2"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "serde_bytes::ser::Cow::serialize"
+kappa = "21f4379f9cf48a7a8c3d3f3367a53936e699dd58567995038399d7f52b1b0312"
+at = "S=u32"
+embedded = "db6ea612e0616133a44bf889caeefee9b635d7b194f4cea3e4f6a18a7b13cadc"
+status = "residue"
+cause = "mir::Ty: Cow<'_, [u8]>"
+
+[[fn]]
+path = "serde_bytes::ser::Cow::serialize#2"
+kappa = "757f8ce81250eb2b6ea5b6d6f15951788665f8b42123f43dcdefce77da8d4de9"
+at = "S=u32"
+embedded = "3414c935b6179e0c36f625fcc07d12578c326b539b19474c09dbc7f84ca1f8e6"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "serde_bytes::ser::Option::serialize"
+kappa = "d25c702fa6672e7352ff515b77413e76a68a75406d0e2c5a9d74a1166c1fc165"
+at = "S=u32, T=u32"
+embedded = "b66b1be56fd9754bed3ba0d78fa4a2d53f979eeab290071cfc4702fe9834c092"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::ser::Option::serialize::AsBytes::serialize"
+kappa = "d659444af13f3702593638066277b058522cb8a91ca673f2eda8d2f745147d9b"
+at = "S=u32, T=u32"
+embedded = "baccfec9a46f5f84c28454a45521655acdb335c0f38691468c94c24851047dc5"
+status = "residue"
+cause = "mir::Ty: AsBytes<u32>"
+
+[[fn]]
+path = "serde_bytes::ser::Vec::serialize"
+kappa = "9804b107f3f4d058cf8085747494257b9d959fb276b5c1af0d0014bf3a17247d"
+at = "S=u32"
+embedded = "97f7a8e74b586a7b495e0e086ca6a1a26a1ba1bbfc328391dc7c70534fabd11e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
