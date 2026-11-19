@@ -600,6 +600,23 @@ and type checks reject mismatched owners, result types, unrelated paths and
 pointer widths that differ across declared targets. Complete `just vv`
 remains the release gate.
 
+## Blocked-context proof history (UE-59)
+
+An actual Factory refresh erased a complete-context proof for a caller whose
+partial compiler view could not translate a transitive callee. The next full
+campaign reproduced the identical proof in two redundant verifier runs.
+The regression obtains SDK proofs for a three-function chain, omits the leaf
+MIR and demonstrates that the still-listed, blocked caller has a different
+partial-context digest. Before repair, that digest erased the caller's proof.
+
+Only a translation currently eligible for verification can invalidate a cached
+decision. The blocked caller remains unadmitted; all original decisions survive,
+and restoring the complete view replays with zero verifier calls. The existing
+selection-history regression also passes, and the source-dependency regression
+confirms that changed eligible meanings still require actual SDK verification.
+No verdict status or digest is rewritten. Complete `just vv` remains the release
+gate.
+
 ## Mathematical integer ABI codecs (UE-56)
 
 The previous frozen producer refuses all six compiler-derived i128 and isize

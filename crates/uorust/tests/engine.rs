@@ -4039,6 +4039,119 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-59: a missing dependency is not a newly verifiable translation.
+#[test]
+fn blocked_partial_callers_preserve_complete_context_verdicts_ue_59() {
+    let dir=scratch("blocked-history",&[("Cargo.toml","[package]\nname=\"blocked_history\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs","pub fn leaf(mut n:u8)->u8 {while n>0 {n-=1;} n}\npub fn middle(mut n:u8,value:u8)->u8 {while n>0 {n-=1;} leaf(value)}\npub fn caller(mut n:u8,value:u8)->u8 {while n>0 {n-=1;} middle(n,value)}\n")]);
+    assert!(std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .status()
+        .unwrap()
+        .success());
+    let all = dumped(&dir, "blocked-history-three");
+    let work = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("blocked-history-three");
+    std::fs::create_dir_all(&work).unwrap();
+    let register = work.join("verdicts.toml");
+    let complete = work.join("complete-verdicts.toml");
+    if complete.exists() {
+        std::fs::copy(&complete, &register).unwrap();
+    }
+    let full = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &all,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("actual full-context SDK proofs");
+    assert_eq!(full.refused, 0);
+    let before = verdicts(&register);
+    assert_eq!(before.rows.len(), 3);
+    assert!(before
+        .rows
+        .values()
+        .all(|r| matches!(r.status, uorust::mir::verdict::Decision::Proved)));
+    std::fs::copy(&register, &complete).unwrap();
+    let selected = work.join("selected");
+    if selected.exists() {
+        std::fs::remove_dir_all(&selected).unwrap();
+    }
+    std::fs::create_dir_all(selected.join("lib-blocked_history")).unwrap();
+    for name in ["configuration.toml", "layouts.toml"] {
+        std::fs::copy(all.join(name), selected.join(name)).unwrap();
+    }
+    let mut copied = 0;
+    for entry in std::fs::read_dir(all.join("lib-blocked_history")).unwrap() {
+        let p = entry.unwrap().path();
+        if std::fs::read_to_string(&p)
+            .is_ok_and(|s| s.contains("fn caller(") || s.contains("fn middle("))
+        {
+            std::fs::copy(
+                &p,
+                selected
+                    .join("lib-blocked_history")
+                    .join(p.file_name().unwrap()),
+            )
+            .unwrap();
+            copied += 1;
+        }
+    }
+    assert_eq!(copied, 2);
+    let mut opts = options("blocked_history");
+    opts.mir = Some(mir_options(
+        selected.clone(),
+        before.clone(),
+        uorust::mir::Trial::All,
+    ));
+    let partial = uorust::project_workspace(&dir, &opts).expect("blocked partial projection");
+    let candidates: toml::Value = text(&partial, uorust::mir::CANDIDATES).parse().unwrap();
+    let caller = candidates["candidate"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|r| r["function"].as_str() == Some("blocked_history::caller"))
+        .unwrap();
+    assert_eq!(caller["trial"].as_bool(), Some(false));
+    let kappa = caller["kappa"].as_str().unwrap();
+    assert_ne!(
+        caller["digest"].as_str().unwrap(),
+        before.rows[kappa].digest
+    );
+    assert!(residue_detail(&partial, "blocked_history::caller").is_some());
+    let narrowed = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &selected,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("partial cache replay");
+    assert_eq!(
+        (narrowed.proved, narrowed.refused, narrowed.runs),
+        (0, 0, 0)
+    );
+    assert_eq!(
+        verdicts(&register).rows,
+        before.rows,
+        "blocked context erased a reusable complete-context proof"
+    );
+    let replay = uorust::mir::prove_bounded(
+        &dir,
+        &options("blocked_history"),
+        &all,
+        &register,
+        &work.join("trial"),
+        3,
+    )
+    .expect("restored complete replay");
+    assert_eq!((replay.proved, replay.refused, replay.runs), (0, 0, 0));
+    assert_eq!(verdicts(&register).rows, before.rows);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-46: narrowing the compiler view must not destroy reusable SDK decisions.
 #[test]
 fn native_verdicts_survive_compiler_input_selections_ue_46() {

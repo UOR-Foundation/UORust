@@ -382,6 +382,7 @@ pub fn prove_bounded(
     let all = candidates(&catalogue)?;
     let live: BTreeMap<&str, &str> = all
         .iter()
+        .filter(|row| row.trial)
         .map(|row| (row.kappa.as_str(), row.digest.as_str()))
         .collect();
     register.rows.retain(|key, value| {
@@ -406,10 +407,12 @@ pub fn prove_bounded(
         };
         let mut files = crate::project_workspace(root, &opts)?;
         let all = candidates(&files)?;
-        // Keep decisions outside this input selection; only a different
-        // digest of a live translation invalidates its previous decision.
+        // Only a currently verifiable translation can replace a decision.
+        // A blocked caller has an incomplete dependency closure; its digest
+        // cannot invalidate a proof obtained from the complete inputs.
         let live: BTreeMap<&str, &str> = all
             .iter()
+            .filter(|c| c.trial)
             .map(|c| (c.kappa.as_str(), c.digest.as_str()))
             .collect();
         register.rows.retain(|key, value| {

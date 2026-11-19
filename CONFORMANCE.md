@@ -79,6 +79,7 @@ model does not sanction.
 | `UE-56` | `build` | Matching-width mathematical source integers (i128 and isize) cross native fields, aggregates and nonthreaded calls through width-derived integer codecs; limb conversions carry actual SDK range obligations, signed boundaries agree with Rust, and fixed Int64 or unrelated field types remain refused |
 | `UE-57` | `build` | Native standard Rc and Arc transport, construction, cloning and readonly access reuse the source content representation, while reference counts, pointer identity, shared mutable cells and unrelated same-named types remain outside that content model |
 | `UE-58` | `build` | Native primitive checked negation, wrapping negation, unsigned magnitude and signum derive from width and signedness, and lock-admitted exact integer and rational negation reuse their source carriers; Rust extrema and stored rational denominators are preserved while an unchecked unwrap at the signed minimum is refused |
+| `UE-59` | `build` | A partial compiler selection whose caller is blocked by a missing transitive callee cannot invalidate the caller's reusable SDK verdict; cached history never admits the blocked caller, restoring complete inputs replays without verifier calls, and changed eligible translations still require current SDK decisions |
 
 ## factory
 

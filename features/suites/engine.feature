@@ -394,3 +394,10 @@ Feature: engine
     Then actual SDK vectors agree with Rust including minimum-value wrapping and checked refusal
     And exact rational negation preserves its stored denominator
     But unwrapping a checked negation at the signed minimum cannot be proved
+
+  @UE-59 @build
+  Scenario: A blocked partial caller preserves its complete-context proof history
+    Given actual SDK proofs of a native caller and its transitive callees
+    When a partial compiler selection retains the caller but omits a transitive callee
+    Then the caller remains unadmitted without erasing either cached decision
+    And restoring complete compiler inputs requires zero verifier calls

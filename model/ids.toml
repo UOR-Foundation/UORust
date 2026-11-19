@@ -405,3 +405,9 @@ id = "UE-58"
 level = "build"
 suite = "engine"
 statement = "Native primitive checked negation, wrapping negation, unsigned magnitude and signum derive from width and signedness, and lock-admitted exact integer and rational negation reuse their source carriers; Rust extrema and stored rational denominators are preserved while an unchecked unwrap at the signed minimum is refused"
+
+[[id]]
+id = "UE-59"
+level = "build"
+suite = "engine"
+statement = "A partial compiler selection whose caller is blocked by a missing transitive callee cannot invalidate the caller's reusable SDK verdict; cached history never admits the blocked caller, restoring complete inputs replays without verifier calls, and changed eligible translations still require current SDK decisions"
