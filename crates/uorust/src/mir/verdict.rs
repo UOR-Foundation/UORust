@@ -35,6 +35,9 @@ pub struct Verdict {
     pub function: String,
     /// The SHA-256 of the translation's text.
     pub digest: String,
+    /// Optional rooted model binding, learned only from an exact legacy
+    /// binding or a new actual SDK decision. It is not an SDK semantic ID.
+    pub model_context_sha256: Option<String>,
     /// The decision.
     pub status: Decision,
     /// The axioms each declaration elaborated with, where the verifier
@@ -49,6 +52,17 @@ pub struct Verdicts {
     /// Admission always matches the translation digest; the frontier, not
     /// this historical cache's row count, states current lifting eligibility.
     pub rows: BTreeMap<String, Verdict>,
+}
+
+impl Verdict {
+    /// Reuse an intact decision at the same rooted model; legacy records
+    /// without that observation still require their original full binding.
+    pub(crate) fn matches(&self, digest: &str, model_context: Option<&str>) -> bool {
+        match (self.model_context_sha256.as_deref(), model_context) {
+            (Some(original), Some(current)) => original == current,
+            _ => self.digest == digest,
+        }
+    }
 }
 
 impl Verdicts {
@@ -86,6 +100,22 @@ impl Verdicts {
                 "refused" => Decision::Refused(field("cause")?),
                 other => return Err(bad(format!("a verdict of status {other}"))),
             };
+            let model_context_sha256 = row
+                .get("model_context_sha256")
+                .map(|v| {
+                    let value = v
+                        .as_str()
+                        .ok_or_else(|| bad("a model context binding is not a string".into()))?;
+                    if value.len() != 64
+                        || !value
+                            .bytes()
+                            .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+                    {
+                        return Err(bad("a model context binding is not a SHA-256".into()));
+                    }
+                    Ok(value.to_string())
+                })
+                .transpose()?;
             let mut axioms = BTreeMap::new();
             if let Some(table) = row.get("axioms").and_then(toml::Value::as_table) {
                 for (decl, list) in table {
@@ -106,6 +136,7 @@ impl Verdicts {
                 Verdict {
                     function: field("function")?,
                     digest: field("digest")?,
+                    model_context_sha256,
                     status,
                     axioms,
                 },
@@ -131,6 +162,12 @@ impl Verdicts {
                 verdict_quoted(&v.function),
                 verdict_quoted(&v.digest)
             ));
+            if let Some(model) = &v.model_context_sha256 {
+                out.push_str(&format!(
+                    "model_context_sha256 = {}\n",
+                    verdict_quoted(model)
+                ));
+            }
             match &v.status {
                 Decision::Proved => out.push_str("status = \"proved\"\n"),
                 Decision::Refused(cause) => {
@@ -176,11 +213,30 @@ mod tests {
     use super::*;
 
     #[test]
+    fn rooted_bindings_reject_wrong_or_malformed_observations_ue_68() {
+        let prefix="spec = \"uorust/verdicts/1\"\n[[verdict]]\nkappa=\"key\"\nfunction=\"f\"\ndigest=\"legacy\"\nstatus=\"proved\"\n";
+        let path = Path::new("verdicts.toml");
+        let legacy = Verdicts::parse(path, prefix).unwrap();
+        assert!(legacy.rows["key"].matches("legacy", Some(&"a".repeat(64))));
+        assert!(!legacy.rows["key"].matches("changed", Some(&"a".repeat(64))));
+        let good = Verdicts::parse(
+            path,
+            &format!("{prefix}model_context_sha256=\"{}\"\n", "a".repeat(64)),
+        )
+        .unwrap();
+        assert!(good.rows["key"].matches("changed", Some(&"a".repeat(64))));
+        assert!(!good.rows["key"].matches("legacy", Some(&"b".repeat(64))));
+        assert!(Verdicts::parse(path, &format!("{prefix}model_context_sha256=\"bad\"\n")).is_err());
+        assert!(Verdicts::parse(path, &format!("{prefix}model_context_sha256=7\n")).is_err());
+    }
+
+    #[test]
     fn verdicts_round_trip() {
         let mut v = Verdicts::default();
         v.rows.insert(
             "k1".into(),
             Verdict {
+                model_context_sha256: None,
                 function: "c::f".into(),
                 digest: "d".into(),
                 status: Decision::Proved,
@@ -192,6 +248,7 @@ mod tests {
         v.rows.insert(
             "k2".into(),
             Verdict {
+                model_context_sha256: None,
                 function: "c::g".into(),
                 digest: "e".into(),
                 status: Decision::Refused("LLV7001: \"omega\" failed".into()),

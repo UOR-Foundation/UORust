@@ -27,6 +27,7 @@ struct Trialled {
     kappa: String,
     function: String,
     digest: String,
+    model_context_sha256: Option<String>,
     trial: bool,
     decls: Vec<String>,
     dependencies: BTreeSet<String>,
@@ -67,6 +68,10 @@ fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, Uorust
             kappa: field("kappa")?,
             function: field("function")?,
             digest: field("digest")?,
+            model_context_sha256: row
+                .get("model_context_sha256")
+                .and_then(toml::Value::as_str)
+                .map(str::to_string),
             trial: row
                 .get("trial")
                 .and_then(toml::Value::as_bool)
@@ -380,14 +385,23 @@ pub fn prove_bounded(
         },
     )?;
     let all = candidates(&catalogue)?;
-    let live: BTreeMap<&str, &str> = all
+    // A legacy exact match already binds this emitted closure. Observe its
+    // rooted identity without changing the original digest, status or axioms.
+    for c in &all {
+        if let Some(row) = register.rows.get_mut(&c.kappa) {
+            if row.digest == c.digest && row.model_context_sha256.is_none() {
+                row.model_context_sha256 = c.model_context_sha256.clone();
+            }
+        }
+    }
+    let live: BTreeMap<&str, &Trialled> = all
         .iter()
         .filter(|row| row.trial)
-        .map(|row| (row.kappa.as_str(), row.digest.as_str()))
+        .map(|row| (row.kappa.as_str(), row))
         .collect();
     register.rows.retain(|key, value| {
         live.get(key.as_str())
-            .is_none_or(|digest| *digest == value.digest.as_str())
+            .is_none_or(|c| value.matches(&c.digest, c.model_context_sha256.as_deref()))
     });
     let mut groups: VecDeque<Trial> = proof_batches(&trial_graph(&all), maximum)?
         .into_iter()
@@ -410,14 +424,14 @@ pub fn prove_bounded(
         // Only a currently verifiable translation can replace a decision.
         // A blocked caller has an incomplete dependency closure; its digest
         // cannot invalidate a proof obtained from the complete inputs.
-        let live: BTreeMap<&str, &str> = all
+        let live: BTreeMap<&str, &Trialled> = all
             .iter()
             .filter(|c| c.trial)
-            .map(|c| (c.kappa.as_str(), c.digest.as_str()))
+            .map(|c| (c.kappa.as_str(), c))
             .collect();
         register.rows.retain(|key, value| {
             live.get(key.as_str())
-                .is_none_or(|digest| *digest == value.digest.as_str())
+                .is_none_or(|c| value.matches(&c.digest, c.model_context_sha256.as_deref()))
         });
         let on_trial: Vec<&Trialled> = all.iter().filter(|c| c.trial).collect();
         if on_trial.is_empty() {
@@ -440,6 +454,7 @@ pub fn prove_bounded(
                     Verdict {
                         function: c.function.clone(),
                         digest: c.digest.clone(),
+                        model_context_sha256: c.model_context_sha256.clone(),
                         status: Decision::Proved,
                         axioms: learned.get(&c.kappa).cloned().unwrap_or_default(),
                     },
@@ -473,6 +488,7 @@ pub fn prove_bounded(
                             Verdict {
                                 function: c.function.clone(),
                                 digest: c.digest.clone(),
+                                model_context_sha256: c.model_context_sha256.clone(),
                                 status: Decision::Refused(format!("{}: {first}", d.code)),
                                 axioms: BTreeMap::new(),
                             },

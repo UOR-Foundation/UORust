@@ -5048,6 +5048,8 @@ fn behavior(
             &mir_scopes,
             &model_sigs,
             &native_generics,
+            &lifted,
+            &types,
             &callees,
             &taken,
             &homonyms,
@@ -5221,6 +5223,7 @@ struct Translation {
     name: String,
     lowered: crate::mir::lower::Lowered,
     digest: String,
+    model_context_sha256: Option<String>,
 }
 
 /// The MIR path: every function the surface lift left as residue, whose
@@ -5238,6 +5241,8 @@ fn mir_lift(
     scopes: &BTreeMap<(usize, usize), Types>,
     source_sigs: &[Sigs],
     generics: &BTreeMap<FnRef, lift::Generic>,
+    source_models: &[Decl],
+    source_types: &Types,
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
     taken: &BTreeSet<String>,
     homonyms: &BTreeMap<FnSite, (String, String)>,
@@ -5476,6 +5481,7 @@ fn mir_lift(
                         name,
                         lowered,
                         digest,
+                        model_context_sha256: None,
                     },
                 );
             }
@@ -5519,6 +5525,12 @@ fn mir_lift(
     for (name, digest) in digests {
         done.get_mut(&name).expect("translation key").digest = digest;
     }
+    let rooted = native_model_contexts(&done, source_models, source_types, lifted, &ctx.limits);
+    for (name, model) in rooted {
+        done.get_mut(&name)
+            .expect("translation key")
+            .model_context_sha256 = model;
+    }
     // Admission: a verdict of the digest, or the trial; then every
     // translation a translation calls must be admitted too.
     let mut admitted: BTreeMap<String, bool> = BTreeMap::new();
@@ -5560,7 +5572,7 @@ fn mir_lift(
             .verdicts
             .rows
             .get(&t.kappa)
-            .filter(|v| v.digest == t.digest);
+            .filter(|v| v.matches(&t.digest, t.model_context_sha256.as_deref()));
         let ok = match verdict.map(|v| &v.status) {
             Some(Decision::Proved) => true,
             Some(Decision::Refused(cause)) => {
@@ -5629,7 +5641,7 @@ fn mir_lift(
             .verdicts
             .rows
             .get(&t.kappa)
-            .filter(|v| v.digest == t.digest)
+            .filter(|v| v.matches(&t.digest, t.model_context_sha256.as_deref()))
             .map(|v| v.axioms.clone())
             .or_else(|| options.learned.get(&t.kappa).cloned())
             .unwrap_or_default();
@@ -5676,6 +5688,9 @@ fn mir_lift(
             decls.join(", "),
             dependencies.join(", ")
         ));
+        if let Some(model) = &t.model_context_sha256 {
+            listing.push_str(&format!("model_context_sha256 = {}\n", toml_string(model)));
+        }
         if let Some(cause) = causes.get(&t.name) {
             let span = ctx.func(t.r).span.clone();
             notes
@@ -5689,6 +5704,68 @@ fn mir_lift(
         out.listing = Some(listing);
     }
     out
+}
+
+/// The same declaration closure used for actual native verification, with
+/// reached ABI/schema readings and immutable SDK assets bound alongside it.
+/// This is a producer input identity, never a fabricated SDK identifier.
+fn native_model_contexts(
+    done: &BTreeMap<String, Translation>,
+    source: &[Decl],
+    types: &Types,
+    callees: &BTreeMap<String, crate::mir::lower::Callee>,
+    limits: &crate::limits::Limits,
+) -> BTreeMap<String, Option<String>> {
+    let mut schemas = Vec::new();
+    let mut emitted = BTreeSet::new();
+    let compared = types.enums.keys().cloned().collect();
+    for ty in done.values().flat_map(|t| t.lowered.types.iter()) {
+        type_decls(ty, types, &compared, &mut emitted, &mut schemas);
+    }
+    let mut declarations = BTreeMap::new();
+    let mut conflicts = BTreeSet::new();
+    for decl in schemas.iter().chain(source).chain(
+        done.values()
+            .flat_map(|t| t.lowered.aux.values().chain(&t.lowered.decls)),
+    ) {
+        let name = decl.name().to_string();
+        let text = crate::lex::render_decl(decl);
+        if declarations.get(&name).is_some_and(|old| old != &text) {
+            conflicts.insert(name.clone());
+        }
+        declarations.entry(name).or_insert(text);
+    }
+    let model = format!(
+        "\\begin{{semanticmodule}}\n{}\n\\end{{semanticmodule}}",
+        declarations
+            .values()
+            .cloned()
+            .collect::<Vec<_>>()
+            .join("\n\n")
+    );
+    let static_context = serde_json::json!({"spec":"uorust/rooted-native-model/1",
+        "sdk":include_str!("../../../prismpm.lock"),"assets":crate::assets::FIXED,"limits":format!("{limits:?}")});
+    done.iter().map(|(name,t)| {
+        let roots=t.lowered.aux.keys().cloned().chain(t.lowered.decls.iter().map(|d|d.name().to_string())).collect::<Vec<_>>();
+        let identity=crate::lex::proof_closure(&model,&roots).ok().and_then(|closure| {
+            let named=|n:&str|closure.contains(&format!("name: {n},"));
+            if conflicts.iter().any(|n|named(n)) {return None;}
+            let mut pending=vec![name.clone()];let mut native=BTreeSet::new();let mut readings=BTreeSet::new();
+            while let Some(next)=pending.pop() {
+                if native.insert(next.clone()) {
+                    let body=&done[&next];readings.extend(body.lowered.types.iter().cloned());
+                    pending.extend(body.lowered.calls.iter().filter(|n|done.contains_key(*n)).cloned());
+                }
+            }
+            let schemas: BTreeMap<_,_>=types.structs.keys().chain(types.enums.keys()).chain(types.datas.keys()).filter(|n|named(n)).map(|n| {
+                (n,format!("{:?}",(types.structs.get(n),types.enums.get(n),types.datas.get(n),types.cells.get(n),types.derives.get(n),types.discriminants.get(n),types.valid.get(n))))
+            }).collect();
+            let signatures:BTreeMap<_,_>=callees.values().filter(|c|named(&c.name)).map(|c|(&c.name,format!("{c:?}"))).collect();
+            Some(sha(serde_json::json!({"context":static_context,"model":closure,
+                "native_readings":format!("{readings:?}"),"schemas":schemas,"source_signatures":signatures}).to_string().as_bytes()))
+        });
+        (name.clone(),identity)
+    }).collect()
 }
 
 /// Expression application heads, excluding strings and their escaped quotes.

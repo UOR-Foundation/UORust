@@ -5918,3 +5918,156 @@ fn main(){for n in [0,2] {for x in [false,true] {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-68: source context outside the model dependency closure is not new work.
+#[test]
+fn native_proof_identity_tracks_reached_models_ue_68() {
+    let source = r#"
+pub struct Payload {pub flag:bool,pub padding:bool}
+pub fn helper(x:bool)->bool {x}
+pub fn kept(mut n:u8,x:&Payload)->bool {while n>0 {n-=1;}helper(x.flag)}
+pub fn refused(a:u8)->u8 {a+1}
+"#;
+    let dir=scratch("rooted-native-models",&[("Cargo.toml","[package]\nname=\"rooted_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",source)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["check", "--offline", "--quiet"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(rust.status.success());
+    let dumps = dumped(&dir, "rooted-native-models");
+    let mut opts = options("rooted_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let identity = || {
+        let files = uorust::project_workspace(&dir, &opts).unwrap();
+        let doc: toml::Value = toml::from_str(&text(&files, uorust::mir::CANDIDATES)).unwrap();
+        let row = doc["candidate"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|r| r["function"].as_str() == Some("rooted_models::kept"))
+            .unwrap();
+        row.get("model_context_sha256")
+            .unwrap_or(&row["digest"])
+            .as_str()
+            .unwrap()
+            .to_string()
+    };
+    let before = identity();
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        format!("{source}\npub fn unrelated(x:bool)->bool {{!x}}\n"),
+    )
+    .unwrap();
+    assert_eq!(
+        before,
+        identity(),
+        "unrelated source context rescheduled an unchanged model"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        source.replace(
+            "fn helper(x:bool)->bool {x}",
+            "fn helper(x:bool)->bool {!x}",
+        ),
+    )
+    .unwrap();
+    assert_ne!(before, identity(), "reached source meaning changed");
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        source.replace("pub padding:bool", "pub padding:u8"),
+    )
+    .unwrap();
+    assert_ne!(before, identity(), "reached schema changed");
+
+    std::fs::write(dir.join("src/lib.rs"), source).unwrap();
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("rooted-model-verdicts.toml");
+    let prove = || {
+        uorust::mir::prove_bounded(
+            &dir,
+            &options("rooted_models"),
+            &dumps,
+            &cache,
+            &dir.join("trial"),
+            8,
+        )
+        .unwrap()
+    };
+    let first = prove();
+    assert_eq!(first.refused, 1, "{first:?}");
+    let original = verdicts(&cache);
+    assert_eq!(
+        original
+            .rows
+            .values()
+            .filter(|v| v.status == uorust::mir::verdict::Decision::Proved)
+            .count(),
+        1
+    );
+    // Reproduce a legacy cache by removing only the new optional observation.
+    let legacy = std::fs::read_to_string(&cache)
+        .unwrap()
+        .lines()
+        .filter(|l| !l.starts_with("model_context_sha256 = "))
+        .collect::<Vec<_>>()
+        .join("\n");
+    std::fs::write(&cache, legacy).unwrap();
+    let legacy_run = prove();
+    assert_eq!(
+        (legacy_run.proved, legacy_run.refused, legacy_run.runs),
+        (0, 0, 0)
+    );
+    let learned = verdicts(&cache);
+    for (key, old) in &original.rows {
+        let new = &learned.rows[key];
+        assert_eq!(
+            (&new.digest, &new.status, &new.axioms),
+            (&old.digest, &old.status, &old.axioms)
+        );
+        assert!(new.model_context_sha256.is_some());
+    }
+    let unrelated = format!("{source}\npub fn unrelated(x:bool)->bool {{!x}}\n");
+    std::fs::write(dir.join("src/lib.rs"), &unrelated).unwrap();
+    let reused = prove();
+    assert_eq!((reused.proved, reused.refused, reused.runs), (0, 0, 0));
+    assert_eq!(
+        verdicts(&cache),
+        learned,
+        "original decision provenance changed on reuse"
+    );
+    std::fs::write(
+        dir.join("src/lib.rs"),
+        unrelated.replace(
+            "fn helper(x:bool)->bool {x}",
+            "fn helper(x:bool)->bool {!x}",
+        ),
+    )
+    .unwrap();
+    let changed = prove();
+    assert_eq!((changed.proved, changed.refused), (1, 0));
+    assert!(
+        changed.runs > 0,
+        "changed reached meaning skipped the actual SDK"
+    );
+    let good = verdicts(&cache);
+    let mut planted = good.clone();
+    for row in planted
+        .rows
+        .values_mut()
+        .filter(|v| v.status == uorust::mir::verdict::Decision::Proved)
+    {
+        row.model_context_sha256 = Some("0".repeat(64));
+    }
+    let mut bound = options("rooted_models");
+    bound.mir = Some(mir_options(dumps, planted, uorust::mir::Trial::Off));
+    let rejected = uorust::project_workspace(&dir, &bound).unwrap();
+    assert!(
+        residue_detail(&rejected, "rooted_models::kept").is_some(),
+        "a planted wrong model binding was admitted"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

@@ -280,8 +280,9 @@ fn the_cli_projects_a_fresh_package_without_an_empty_module_ue_01() {
 }
 
 /// `mir` dumps the fixture's MIR, and `prove` on its committed verdict
-/// register, which decides every translation, runs no verifier and leaves the
-/// register as it was.
+/// register, which decides every translation without another verifier call.
+/// Original decisions stay intact; rooted observations are learned once and
+/// the following replay is byte-identical.
 #[test]
 fn the_cli_dumps_mir_and_proves_on_the_verdicts_ue_17() {
     let tmp = std::env::temp_dir().join(format!("uorust-cli-mir-{}", std::process::id()));
@@ -314,31 +315,51 @@ fn the_cli_dumps_mir_and_proves_on_the_verdicts_ue_17() {
     let verdicts = tmp.join("lift-verdicts.toml");
     std::fs::write(&verdicts, &committed).expect("verdicts");
     let (out, scratch) = (tmp.join("out"), tmp.join("prove"));
-    let proved = uorust(&[
-        "prove",
-        "tests/fixtures/mir-path",
-        "--name",
-        "walk",
-        "--last-modified",
-        "2026-11-11T00:00:00Z",
-        "--out",
-        &out.to_string_lossy(),
-        "--scratch",
-        &scratch.to_string_lossy(),
-        "--mir",
-        dumps_arg.as_str(),
-        "--verdicts",
-        &verdicts.to_string_lossy(),
-    ]);
+    let prove = || {
+        uorust(&[
+            "prove",
+            "tests/fixtures/mir-path",
+            "--name",
+            "walk",
+            "--last-modified",
+            "2026-11-11T00:00:00Z",
+            "--out",
+            &out.to_string_lossy(),
+            "--scratch",
+            &scratch.to_string_lossy(),
+            "--mir",
+            dumps_arg.as_str(),
+            "--verdicts",
+            &verdicts.to_string_lossy(),
+        ])
+    };
+    let proved = prove();
     assert!(
         proved.status.success(),
         "{}",
         String::from_utf8_lossy(&proved.stderr)
     );
     assert!(String::from_utf8_lossy(&proved.stdout).contains("in 0 verifier runs"));
+    let migrated = std::fs::read_to_string(&verdicts).expect("verdicts");
+    assert!(migrated.contains("model_context_sha256 = "));
+    let original: String = migrated
+        .split_inclusive('\n')
+        .filter(|line| !line.starts_with("model_context_sha256 = "))
+        .collect();
     assert_eq!(
-        std::fs::read_to_string(&verdicts).expect("verdicts"),
-        committed
+        original, committed,
+        "migration changed original decision evidence"
+    );
+    let replayed = prove();
+    assert!(
+        replayed.status.success(),
+        "{}",
+        String::from_utf8_lossy(&replayed.stderr)
+    );
+    assert!(String::from_utf8_lossy(&replayed.stdout).contains("in 0 verifier runs"));
+    assert_eq!(
+        std::fs::read_to_string(&verdicts).expect("replayed verdicts"),
+        migrated
     );
     let _ = std::fs::remove_dir_all(tmp);
 }

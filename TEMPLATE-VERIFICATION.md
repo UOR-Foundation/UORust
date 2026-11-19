@@ -885,3 +885,34 @@ not add generic dependencies to literal or unrelated declarations.
 strict all-target Clippy, model, template, SDK lock and generated self-model
 checks. This remains focused review evidence; complete release acceptance and
 translator certification are separate open gates.
+
+## UE-68: rooted native model identities and original decision retention
+
+A native proof previously bound every source definition and type scope. Adding
+an unrelated source definition changed an unchanged candidate's digest. The
+initial regression failed with two different digests for that one model.
+
+The additional `model_context_sha256` observation now binds the existing emitted
+proof-declaration closure, reached native/type/schema/signature readings, and the
+pinned SDK/assets. It is an internal producer binding, not an SDK semantic ID.
+Legacy records still require their original exact digest before the prover may
+learn this optional observation. Learning it retains the original digest,
+proved/refused status, diagnostic and axiom evidence. Later equal rooted models
+reuse that original record; changed reached meanings still require the SDK.
+
+The actual SDK regression established one proved and one refused decision, then
+removed only the optional observation to reproduce a legacy register. Legacy
+metadata learning and an unrelated source change each took zero verifier calls;
+all original decision fields stayed intact. Changing a reached helper triggered
+a new actual SDK proof. A reached schema change altered the model identity, and
+a planted wrong rooted binding prevented admission even at the original legacy
+digest. Malformed and non-string observations are also refused. The regression
+passed in 116.31 seconds.
+
+The CLI fixture now checks the same transition: only optional observations may
+appear during migration, original evidence remains byte-identical after removing
+those lines, and the following replay is byte-identical with zero verifier calls.
+437 library tests, all 16 CLI tests, conformance meta-tests, strict all-target
+Clippy, model/template/SDK-lock and generated self-model checks passed. No cached
+proof status, diagnostic or legacy digest was fabricated or manually reassigned.
+Complete `just vv` and translator certification remain separate open gates.

@@ -473,3 +473,10 @@ Feature: engine
     When the shared lowering binds the generated definitions and their dependencies
     Then actual SDK results agree with Rust at multiple instantiations and nested control-flow regions
     But generic drop effects and unresolved trait dictionary bodies remain typed residue
+
+  @UE-68 @build
+  Scenario: Native proof identities follow their actual model dependency closure
+    Given compiler candidates with reached source definitions and schemas
+    When an unrelated source definition changes without changing those dependencies
+    Then their rooted model identities and intact original decisions are reused
+    But changing a reached definition or schema requires a new actual SDK decision

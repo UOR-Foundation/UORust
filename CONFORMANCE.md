@@ -88,6 +88,7 @@ model does not sanction.
 | `UE-65` | `build` | Native type lowering imports closed source semantic type readings when its own reading is absent, preserving native primitive ABI priority and admitted SDK identities without inventing shared-cell contents, locks, reference counts or pointer equality; incompatible scalar, callable, generic and unregistered nominal readings remain typed refusals |
 | `UE-66` | `build` | Compiler calls compose source-lifted generic dependencies through the existing source generic-call binder, retaining exact type-parameter identities, coherent trait dictionary methods and dependency evidence; missing implementations, incompatible dictionary signatures, mutable interfaces and native ABI mismatches remain typed refusals |
 | `UE-67` | `build` | Compiler bodies reuse declared source type-parameter readings and preserve them through SDK-owned products and generated control-flow declarations with explicit generic dependency bindings; generic drop effects, unresolved dictionary dispatch and unsupported state remain typed residue rather than receiving invented meanings |
+| `UE-68` | `build` | Native proof reuse binds the emitted dependency closure and pinned SDK assets, preserving intact original decisions across unrelated source-context changes while invalidating reached body or schema changes; legacy decision metadata is learned only under its exact original binding, and no proof status is fabricated |
 
 ## factory
 
