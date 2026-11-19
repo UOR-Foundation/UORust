@@ -92,6 +92,7 @@ model does not sanction.
 | `UE-69` | `build` | Compiler struct views preserve every declared field through SDK products, retaining unavailable field meanings as parametric values while compiling known field access and update; incomplete shapes, recursive unfolding, opaque operations, unresolved dispatch and unmodeled drop effects remain typed residue |
 | `UE-70` | `build` | Compiler mutations retain the incoming value carrier throughout place-update recursion and reuse the existing representation codec at storage boundaries; nested fields and containers preserve their declared schemas, and an incompatible opaque field is refused before SDK proof scheduling |
 | `UE-71` | `build` | Parametric map entries use the canonical SDK product carrier across type rendering, schema dependencies, source collection operations and existing standard semantic templates, preserving the closed-type ABI and refusing key operations without admitted comparison evidence |
+| `UE-72` | `build` | Compiler constant operands reuse exact admitted source constant definitions through target and module identities, retaining their semantic dependency closure; ambiguous declarations, function items, unavailable initializers and incompatible or mutable carriers remain typed residue |
 
 ## factory
 

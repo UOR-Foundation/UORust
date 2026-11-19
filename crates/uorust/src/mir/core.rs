@@ -490,6 +490,7 @@ pub(crate) fn shard(
             source_sigs: &BTreeMap::new(),
             widths,
             callees: &callees,
+            constants: &BTreeMap::new(),
             krate: krate.to_string(),
             taken: &none,
             explicit: &explicit,

@@ -1010,3 +1010,29 @@ pure declarations. All 440 library tests, 16 CLI tests, conformance meta-tests,
 strict all-target Clippy, model/template/SDK-lock and generated self-model checks
 passed. Full release acceptance, translator certification and adoption remain
 open; these are supporting checks rather than a completed consumer contract.
+
+## UE-72: shared admitted source constant dependencies
+
+The registered regression first failed on `left::VALUE`: its source definition
+was already admitted, but native constant operands had no binding to that
+meaning. The compiler context now distinguishes actual constant declarations
+from function items and imports exact, nondivergent source definitions through
+their target and module paths. Ambiguous printed identities stay unbound, even
+when only one competing declaration has an admitted model. The existing source
+and native type readers and immutable-value interface must agree; incompatible
+signed carriers and unavailable initializers remain typed operand residue.
+No second initializer evaluator or standard-operation semantics were added.
+
+Three actual native SDK decisions and twelve executable Rust comparisons cover
+Boolean values, unsigned values and equal constant names in distinct modules.
+Changing one initializer rejects its previous native decision while retaining
+the unrelated module's rooted decision. A planted incorrect result is refused
+by the actual SDK with LLV7002. The initial comparison notation omitted the
+outer equality parentheses; the SDK rejected that malformed test, and the
+restored fixture passed in 55.13 seconds using intact native proof receipts.
+This focused evidence does not establish additional consumer lifts, full
+release acceptance, translator certification or final adoption.
+
+The focused dependency checks passed: 440 library tests, all 16 CLI tests,
+conformance meta-tests, strict all-target Clippy, model/template/SDK-lock and
+generated self-model checks. The manual standard semantic registry is unchanged.

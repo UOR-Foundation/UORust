@@ -501,3 +501,10 @@ Feature: engine
     When lowering binds their entry representation and dependency declarations
     Then actual SDK models elaborate and agree with executable Rust at distinct instantiations
     But unavailable key comparison evidence remains a typed refusal
+
+  @UE-72 @build
+  Scenario: Compiler constant operands reuse admitted source meanings
+    Given source constant models with distinct target and module identities
+    When native bodies read the constants through the shared dependency interface
+    Then actual SDK results agree with executable Rust and bind the reached initializers
+    But unavailable initializers and incompatible carriers remain typed refusals

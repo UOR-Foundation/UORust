@@ -5014,6 +5014,55 @@ fn behavior(
             },
         );
     }
+    // Reuse actual, unambiguous source constants only after source lifting
+    // established their exact definitions. The native path imports these
+    // meanings; it neither evaluates a second initializer nor mistakes a
+    // zero-parameter function for a value. Conflicting target identities
+    // cannot acquire one meaning merely because rustc prints the same path.
+    let mut constant_bindings: BTreeMap<String, Option<crate::mir::lower::Constant>> =
+        BTreeMap::new();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        for (fi, file) in package.files.iter().enumerate() {
+            for (rust, written, _, scope, _, _) in &syntax.files[&file.rel].consts {
+                let module = file.item_module(*scope);
+                let site = (pkg, file.target, module.clone(), rust.clone());
+                let krate = package.targets[file.target].name.replace('-', "_");
+                let path = if module.is_empty() {
+                    format!("{krate}::{rust}")
+                } else {
+                    format!("{krate}::{module}::{rust}")
+                };
+                let binding = (|| {
+                    if declared.get(&site) != Some(&1) {
+                        return None;
+                    }
+                    let key = homonyms.get(&site).map_or(rust, |(key, _)| key);
+                    let sig = model_sigs[pkg].get(key).filter(|sig| {
+                        sig.params.is_empty() && sig.generic.is_none() && sig.threads.is_empty()
+                    })?;
+                    if !crate::mir::lower::constant_interface(
+                        &written.text,
+                        &sig.result,
+                        &file_scopes[&(pkg, fi, *scope)],
+                    ) {
+                        return None;
+                    }
+                    Some(crate::mir::lower::Constant {
+                        name: sig.name.clone(),
+                        result: sig.result.clone(),
+                    })
+                })();
+                constant_bindings
+                    .entry(path)
+                    .and_modify(|value| *value = None)
+                    .or_insert(binding);
+            }
+        }
+    }
+    let constants = constant_bindings
+        .into_iter()
+        .filter_map(|(path, value)| Some((path, value?)))
+        .collect();
     // The MIR path, for every function the surface lift left as residue.
     let mut listing = None;
     let mut translated = Vec::new();
@@ -5054,6 +5103,7 @@ fn behavior(
             &lifted,
             &types,
             &callees,
+            &constants,
             &taken,
             &homonyms,
             &proof_context,
@@ -5247,6 +5297,7 @@ fn mir_lift(
     source_models: &[Decl],
     source_types: &Types,
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
+    constants: &BTreeMap<String, crate::mir::lower::Constant>,
     taken: &BTreeSet<String>,
     homonyms: &BTreeMap<FnSite, (String, String)>,
     proof_context: &str,
@@ -5461,6 +5512,7 @@ fn mir_lift(
             source_sigs: &source_sigs[r.pkg],
             widths: &widths,
             callees: &callees,
+            constants,
             krate: ctx.crate_ident(r),
             taken: &names,
             explicit: &explicit,

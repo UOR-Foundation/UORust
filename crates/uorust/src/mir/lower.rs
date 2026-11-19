@@ -50,6 +50,20 @@ pub(crate) struct Callee {
     pub(crate) threads: Option<(Ty, Vec<usize>)>,
 }
 
+/// A source constant's exact admitted value model, distinct from a function item.
+#[derive(Clone, Debug)]
+pub(crate) struct Constant {
+    pub(crate) name: String,
+    pub(crate) result: Ty,
+}
+
+/// Both translators must read this immutable value through the same ABI.
+pub(crate) fn constant_interface(written: &str, result: &Ty, types: &Types) -> bool {
+    super::source::type_model(written, types).as_ref() == Some(result)
+        && ty(written, types).as_ref() == Ok(result)
+        && super::source::callable_environment(result, types)
+}
+
 /// What every function of a crate is translated against.
 pub(crate) struct Cx<'a> {
     pub(crate) types: &'a Types,
@@ -59,6 +73,8 @@ pub(crate) struct Cx<'a> {
     pub(crate) widths: &'a [(u32, Vec<String>)],
     /// Functions by the path MIR prints for them, with the crate prefixed.
     pub(crate) callees: &'a BTreeMap<String, Callee>,
+    /// Actual source constant declarations, never inferred from zero-arity functions.
+    pub(crate) constants: &'a BTreeMap<String, Constant>,
     /// The crate's identifier, which MIR leaves off its own paths.
     pub(crate) krate: String,
     /// Names a parameter or helper may not take.
@@ -97,6 +113,7 @@ impl<'a> Cx<'a> {
             source_sigs: self.source_sigs,
             widths: self.widths,
             callees: self.callees,
+            constants: self.constants,
             krate: self.krate.clone(),
             taken: self.taken,
             explicit: self.explicit,
@@ -3672,6 +3689,22 @@ impl Fun<'_, '_> {
                     ))
                 }
                 Some(body) => self.const_body(p, body),
+                None if self
+                    .cx
+                    .constants
+                    .contains_key(&format!("{}::{p}", self.cx.krate))
+                    || self.cx.constants.contains_key(p) =>
+                {
+                    let key = format!("{}::{p}", self.cx.krate);
+                    let constant = self
+                        .cx
+                        .constants
+                        .get(&key)
+                        .or_else(|| self.cx.constants.get(p))
+                        .expect("checked");
+                    self.calls.insert(constant.name.clone());
+                    Ok((format!("({})", constant.name), constant.result.clone()))
+                }
                 // In core's scope, a constant a trait of core provides.
                 None if self.cx.core.and_then(|l| l.constant(p)).is_some() => {
                     let inst = self.cx.core.and_then(|l| l.constant(p)).expect("checked");
@@ -9466,6 +9499,7 @@ mod tests {
             source_sigs: &BTreeMap::new(),
             widths: &[(64, vec!["test".into()])],
             callees: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
             krate: "test".into(),
             taken: &BTreeSet::new(),
             explicit: &BTreeSet::new(),

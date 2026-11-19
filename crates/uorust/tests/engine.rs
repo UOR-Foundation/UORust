@@ -6397,6 +6397,168 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-72: native constants import admitted source definitions, never guessed values.
+#[test]
+fn compiler_constants_reuse_source_dependencies_ue_72() {
+    let dir = scratch("source-constant-dependencies", &[
+        ("Cargo.toml", "[package]\nname=\"constant_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub mod left { pub const VALUE:u32=7; }
+pub mod right { pub const VALUE:u32=19; }
+pub const FLAG:bool=true;
+pub const SIGNED:i64=-3;
+pub const UNAVAILABLE:usize=std::mem::size_of::<usize>();
+pub fn left_value(mut n:u8)->u32 {while n>0 {n-=1;}left::VALUE}
+pub fn right_value(mut n:u8)->u32 {while n>0 {n-=1;}right::VALUE}
+pub fn flag(mut n:u8)->bool {while n>0 {n-=1;}FLAG}
+pub fn signed(mut n:u8)->i64 {while n>0 {n-=1;}SIGNED}
+pub fn unavailable(mut n:u8)->usize {while n>0 {n-=1;}UNAVAILABLE}
+"#),
+        ("src/bin/vectors.rs", r#"
+use constant_models::*;
+fn main(){for n in [0,1,3,255] {
+println!("left_value|{n}|{}",left_value(n));
+println!("right_value|{n}|{}",right_value(n));
+println!("flag|{n}|{}",flag(n));
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "source-constant-dependencies");
+    let mut opts = options("constant_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["left_value", "right_value", "flag"] {
+        let path = format!("constant_models::{f}");
+        assert!(
+            residue_detail(&proposed, &path).is_none(),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["signed", "unavailable"] {
+        assert!(
+            residue_detail(&proposed, &format!("constant_models::{f}")).is_some(),
+            "{f} acquired an unavailable constant meaning"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-constant-dependency-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("constant_models"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        3,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("constant_models::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: constantVector{i}, parameters: [], statement: (({name} {}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[2],policy.join(", "));
+        if p[0] == "left_value" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 7)", "= 8)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 12);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    let source_path = dir.join("src/lib.rs");
+    let original = std::fs::read_to_string(&source_path).unwrap();
+    let changed = original.replacen("VALUE:u32=7", "VALUE:u32=8", 1);
+    assert_ne!(original, changed);
+    std::fs::write(&source_path, changed).unwrap();
+    let stale = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&stale, "constant_models::left_value").is_some(),
+        "a changed initializer reused its previous native decision"
+    );
+    assert!(
+        residue_detail(&stale, "constant_models::right_value").is_none(),
+        "an unrelated constant invalidated an intact rooted decision"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-71: generic entries cannot create unbound global tuple schemas.
 #[test]
 fn parametric_map_carriers_share_sdk_products_ue_71() {
